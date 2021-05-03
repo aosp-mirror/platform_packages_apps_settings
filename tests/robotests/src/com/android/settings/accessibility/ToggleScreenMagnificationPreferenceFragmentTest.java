@@ -23,9 +23,13 @@ import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
@@ -34,6 +38,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,21 +46,28 @@ import android.view.ViewGroup;
 import androidx.annotation.XmlRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowSettingsPreferenceFragment.class})
 public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.mock.example";
@@ -79,9 +91,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     private Context mContext;
     private Resources mResources;
 
-    @Mock
-    private PreferenceManager mPreferenceManager;
-    @Mock
     private FragmentActivity mActivity;
 
     @Before
@@ -89,14 +98,11 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
-        mFragment = spy(new TestToggleScreenMagnificationPreferenceFragment());
-        when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
-        when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
-        when(mFragment.getContext()).thenReturn(mContext);
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mFragment = spy(new TestToggleScreenMagnificationPreferenceFragment(mContext));
         mResources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(mResources);
         when(mFragment.getContext().getResources()).thenReturn(mResources);
-        doReturn(null).when(mFragment).getPreferenceScreen();
         doReturn(mActivity).when(mFragment).getActivity();
     }
 
@@ -257,13 +263,36 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     }
 
     @Test
-    public void initSettingsPreference_notSupportsMagnificationArea_settingsPreferenceIsNull() {
+    public void onCreateView_notSupportsMagnificationArea_settingsPreferenceIsNull() {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_magnification_area))
                 .thenReturn(false);
-        mFragment.initSettingsPreference();
+
+        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
 
         assertThat(mFragment.mSettingsPreference).isNull();
+    }
+
+    @Test
+    public void onCreateView_setDialogDelegateAndAddTheControllerToLifeCycleObserver() {
+        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
+
+        verify(mFragment).setDialogDelegate(any(MagnificationModePreferenceController.class));
+        verify(mFragment.mSpyLifeyCycle).addObserver(
+                any(MagnificationModePreferenceController.class));
+    }
+
+    @Test
+    public void onCreateDialog_setDialogDelegate_invokeDialogDelegate() {
+        final DialogCreatable dialogDelegate = mock(DialogCreatable.class, RETURNS_DEEP_STUBS);
+        when(dialogDelegate.getDialogMetricsCategory(anyInt())).thenReturn(1);
+        mFragment.setDialogDelegate(dialogDelegate);
+
+        mFragment.onCreateDialog(1);
+        mFragment.getDialogMetricsCategory(1);
+
+        verify(dialogDelegate).onCreateDialog(1);
+        verify(dialogDelegate).getDialogMetricsCategory(1);
     }
 
     private void putStringIntoSettings(String key, String componentName) {
@@ -291,8 +320,25 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     private void callEmptyOnClicked(DialogInterface dialog, int which) {}
 
-    public static class TestToggleScreenMagnificationPreferenceFragment
+    /**
+     * a test fragment that initializes PreferenceScreen for testing.
+     */
+    static class TestToggleScreenMagnificationPreferenceFragment
             extends ToggleScreenMagnificationPreferenceFragment {
+
+        private final Lifecycle mSpyLifeyCycle = Mockito.mock(Lifecycle.class);
+
+        private final Context mContext;
+        private final PreferenceManager mPreferenceManager;
+
+        TestToggleScreenMagnificationPreferenceFragment(Context context) {
+            super();
+            mContext = context;
+            mPreferenceManager = new PreferenceManager(context);
+            mPreferenceManager.setPreferences(mPreferenceManager.createPreferenceScreen(context));
+            setArguments(new Bundle());
+        }
+
         @Override
         protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
         }
@@ -313,9 +359,21 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            return mock(View.class);
+        public PreferenceScreen getPreferenceScreen() {
+            return mPreferenceManager.getPreferenceScreen();
+        }
+
+        @Override
+        public <T extends Preference> T findPreference(CharSequence key) {
+            if (TextUtils.isEmpty(key)) {
+                return null;
+            }
+            return getPreferenceScreen().findPreference(key);
+        }
+
+        @Override
+        public PreferenceManager getPreferenceManager() {
+            return mPreferenceManager;
         }
 
         @Override
@@ -336,6 +394,16 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         @Override
         protected void updateShortcutPreference() {
             // UI related function, do nothing in tests
+        }
+
+        @Override
+        public Lifecycle getSettingsLifecycle() {
+            return mSpyLifeyCycle;
+        }
+
+        @Override
+        public Context getContext() {
+            return mContext;
         }
     }
 }
