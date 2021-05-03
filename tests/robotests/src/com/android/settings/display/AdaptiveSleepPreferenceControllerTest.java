@@ -84,7 +84,6 @@ public class AdaptiveSleepPreferenceControllerTest {
                 eq(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT))).thenReturn(null);
 
         mController = new AdaptiveSleepPreferenceController(mContext, mRestrictionUtils);
-        mController.initializePreference();
         when(mController.isCameraLocked()).thenReturn(false);
     }
 
