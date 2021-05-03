@@ -75,6 +75,7 @@ public final class BatteryHistEntryTest {
                 /*batteryLevel=*/ 12,
                 /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
                 /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
+                /*bootTimestamp=*/ 101L,
                 /*timestamp=*/ 10001L);
 
         assertBatteryHistEntry(
@@ -98,6 +99,7 @@ public final class BatteryHistEntryTest {
                 BatteryHistEntry.KEY_APP_LABEL,
                 BatteryHistEntry.KEY_PACKAGE_NAME,
                 BatteryHistEntry.KEY_IS_HIDDEN,
+                BatteryHistEntry.KEY_BOOT_TIMESTAMP,
                 BatteryHistEntry.KEY_TIMESTAMP,
                 BatteryHistEntry.KEY_ZONE_ID,
                 BatteryHistEntry.KEY_TOTAL_POWER,
@@ -117,6 +119,7 @@ public final class BatteryHistEntryTest {
                 "Settings",
                 "com.google.android.settings.battery",
                 Integer.valueOf(1),
+                Long.valueOf(101l),
                 Long.valueOf(10001L),
                 TimeZone.getDefault().getID(),
                 Double.valueOf(5.1),
@@ -141,7 +144,7 @@ public final class BatteryHistEntryTest {
     public void testGetKey_consumerUidType_returnExpectedString() {
         final ContentValues values = getContentValuesWithType(
             ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
-        values.put("uid", 3);
+        values.put(BatteryHistEntry.KEY_UID, 3);
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         assertThat(batteryHistEntry.getKey()).isEqualTo("3");
@@ -151,7 +154,7 @@ public final class BatteryHistEntryTest {
     public void testGetKey_consumerUserType_returnExpectedString() {
         final ContentValues values = getContentValuesWithType(
             ConvertUtils.CONSUMER_TYPE_USER_BATTERY);
-        values.put("userId", 2);
+        values.put(BatteryHistEntry.KEY_USER_ID, 2);
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         assertThat(batteryHistEntry.getKey()).isEqualTo("U|2");
@@ -161,7 +164,7 @@ public final class BatteryHistEntryTest {
     public void testGetKey_consumerSystemType_returnExpectedString() {
         final ContentValues values = getContentValuesWithType(
             ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
-        values.put("drainType", 1);
+        values.put(BatteryHistEntry.KEY_DRAIN_TYPE, 1);
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         assertThat(batteryHistEntry.getKey()).isEqualTo("S|1");
@@ -203,7 +206,8 @@ public final class BatteryHistEntryTest {
 
     private static ContentValues getContentValuesWithType(int consumerType) {
         final ContentValues values = new ContentValues();
-        values.put("consumerType", Integer.valueOf(consumerType));
+        values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
+            Integer.valueOf(consumerType));
         return values;
     }
 
@@ -216,6 +220,7 @@ public final class BatteryHistEntryTest {
         assertThat(entry.mPackageName)
             .isEqualTo("com.google.android.settings.battery");
         assertThat(entry.mIsHidden).isTrue();
+        assertThat(entry.mBootTimestamp).isEqualTo(101L);
         assertThat(entry.mTimestamp).isEqualTo(10001L);
         assertThat(entry.mZoneId).isEqualTo(TimeZone.getDefault().getID());
         assertThat(entry.mTotalPower).isEqualTo(5.1);
