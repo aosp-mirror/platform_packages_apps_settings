@@ -47,10 +47,12 @@
         android:persistent="false"
         android:title="@string/captioning_more_options_title" />
 
-    <com.android.settingslib.widget.FooterPreference
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="captioning_settings_footer"
+        android:title="@string/accessibility_caption_preference_summary"
         android:persistent="false"
         android:selectable="false"
-        android:title="@string/accessibility_caption_preference_summary"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.CaptionFooterPreferenceController"/>
 
 </PreferenceScreen>
