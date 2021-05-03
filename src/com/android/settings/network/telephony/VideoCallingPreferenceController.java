@@ -19,7 +19,6 @@ package com.android.settings.network.telephony;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
-import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
@@ -141,6 +140,16 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     boolean isVideoCallEnabled(int subId) {
         if (!SubscriptionManager.isValidSubscriptionId(subId)) {
             return false;
+        }
+
+        // When called within Settings Search, this variable may still be null.
+        if (mCarrierConfigManager == null) {
+            Log.e(TAG, "CarrierConfigManager set to null.");
+            mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
+            if (mCarrierConfigManager == null) {
+                Log.e(TAG, "Unable to reinitialize CarrierConfigManager.");
+                return false;
+            }
         }
 
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
