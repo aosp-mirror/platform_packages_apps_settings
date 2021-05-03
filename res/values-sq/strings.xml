@@ -425,10 +425,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Përdorimi i gjurmës sate të gishtit për të shkyçur telefonin mund të jetë më pak i sigurt se një motiv apo PIN i fortë."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Si funksionon"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"\"Shkyçja me gjurmë gishti\" krijon një model unik të gjurmës sate të gishtit për të të njohur gjatë vërtetimit. Për ta krijuar këtë model të gjurmës së gishtit gjatë konfigurimit, do t\'i marrësh imazhet e gjurmës sate të gishtit nga pozicione të ndryshme."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"Telefoni do të përdorë gjithashtu imazhe nga ndërveprimet e tua me \"Shkyçjen me gjurmë gishti\" për të përditësuar modelin e gjurmës sate të gishtit. Imazhet e përdorura për të krijuar modelin e gjurmës sate të gishtit nuk ruhen asnjëherë, por modeli i gjurmës sate të gishtit ruhet në mënyrë të sigurt në telefonin tënd dhe nuk largohet kurrë nga telefoni. I gjithë përpunimi ndodh në mënyrë të sigurt në telefonin tënd."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Mund ta fshish modelin e gjurmës sate të gishtit ose ta çaktivizosh \"Shkyçjen me gjurmën e gishtit\" në çdo kohë te \"Cilësimet\". Modelet e gjurmëve të gishtave ruhen në telefon derisa t\'i fshish."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Ndrysho pak pozicionin e gishtit çdo herë"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Mbuloje ikonën me qendrën e gjurmës sate të gishtit"</string>
@@ -795,19 +793,15 @@
     <string name="device_details_title" msgid="1155622417516195481">"Detajet e pajisjes"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresa e Bluetooth-it e pajisjes: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Të harrohet pajisja?"</string>
-    <!-- no translation found for remove_association_button (5004208145998061135) -->
-    <skip />
-    <!-- no translation found for bluetooth_companion_app_remove_association_dialog_title (1344518601377991897) -->
-    <skip />
+    <string name="remove_association_button" msgid="5004208145998061135">"Hiq lidhjen"</string>
+    <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Të shkëputet aplikacioni?"</string>
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Telefoni yt nuk do të jetë më i çiftuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Tableti yt nuk do të jetë më i çiftuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Pajisja jote nuk do të jetë më e çiftuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_companion_app_body (8442643629075687761) -->
-    <skip />
+    <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Aplikacioni <xliff:g id="APP_NAME">%1$s</xliff:g> nuk do të lidhet më me pajisjen tënde <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"Pajisja <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nuk do të jetë më e çiftuar me asnjë pajisje të lidhur me këtë llogari"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Harroje pajisjen"</string>
-    <!-- no translation found for bluetooth_companion_app_remove_association_confirm_button (76323555527926915) -->
-    <skip />
+    <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Shkëput aplikacionin"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Lidhu me…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> do të shkëputet nga audioja e medias."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="7857706184371154920">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> do të shkëputet nga audioja \"pa duar\"."</string>
@@ -1631,6 +1625,8 @@
     <string name="apn_settings" msgid="4295467389400441299">"APN-të"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Redakto pikën e qasjes"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Nuk është caktuar"</string>
+    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
+    <skip />
     <string name="apn_name" msgid="6677695784108157953">"Emri"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN-ja"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Proxy"</string>
@@ -2735,18 +2731,26 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Përdorimi i baterisë"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Që nga karikimi i plotë"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Menaxho përdorimin e baterisë"</string>
-    <string name="battery_total_and_background_usage" msgid="6418204620302474483">"<xliff:g id="TIME_0">^1</xliff:g> në total • <xliff:g id="TIME_1">^2</xliff:g> në sfond për 24 orët e fundit"</string>
-    <string name="battery_total_and_background_usage_with_period" msgid="4915437530577714730">"<xliff:g id="TIME_0">^1</xliff:g> në total • <xliff:g id="TIME_1">^2</xliff:g> në sfond për periudhën <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
+    <skip />
+    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
+    <skip />
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Përdorimi në total: më pak se një minutë në 24 orët e fundit"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Përdorimi në total: më pak se një minutë për periudhën <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_background_usage_less_minute" msgid="6754590481242415879">"Në sfond për më pak se një minutë për 24 orët e fundit"</string>
-    <string name="battery_background_usage_less_minute_with_period" msgid="7195943376468806365">"Në sfond për më pak se një minutë për periudhën <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
+    <skip />
     <string name="battery_total_usage" msgid="2662725472478185867">"<xliff:g id="TIME">^1</xliff:g> në total për 24 orët e fundit"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> në total për periudhën <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_background_usage" msgid="8375606680462132248">"<xliff:g id="TIME">^1</xliff:g> në sfond për 24 orët e fundit"</string>
-    <string name="battery_background_usage_with_period" msgid="7504840136463610964">"<xliff:g id="TIME_0">^1</xliff:g> në sfond për periudhën <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage" msgid="2541220342132484726">"<xliff:g id="TIME">^1</xliff:g> në total • në sfond për më pak se një minutë për 24 orët e fundit"</string>
-    <string name="battery_total_usage_and_background_less_minute_usage_with_period" msgid="6223114110266577574">"<xliff:g id="TIME_0">^1</xliff:g> në total • në sfond për më pak se një minutë për periudhën <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
+    <skip />
+    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
+    <skip />
+    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
+    <skip />
     <string name="battery_not_usage" msgid="8417901856028909227">"Nuk është përdorur për 24 orët e fundit"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Përllogaritja për baterinë e mbetur bazohet në përdorimin e pajisjes tënde"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Koha e vlerësuar e mbetur"</string>
@@ -2784,18 +2788,15 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Niveli i baterisë për 24 orët e fundit"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Përdorimi i aplikacionit për 24 orët e fundit"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Përdorimi i sistemit për 24 orët e fundit"</string>
-    <!-- no translation found for battery_system_usage_for (3248552137819897140) -->
-    <skip />
-    <!-- no translation found for battery_app_usage_for (7309909074935858949) -->
-    <skip />
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Përdorimi i sistemit për: <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"Përdorimi i aplikacionit për: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"paradite"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"pasdite"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Në total: më pak se një minutë"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Në sfond: më pak se një minutë"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Në total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Në sfond: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <!-- no translation found for battery_usage_screen_footer (7899907241146636817) -->
-    <skip />
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Të dhënat e përdorimit të baterisë janë të përafërta dhe nuk masin përdorimin gjatë karikimit të telefonit"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistikat e procesit"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistikat teknike për proceset në ekzekutim"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Përdorimi i memories"</string>
@@ -5054,8 +5055,7 @@
     <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="506057560516483258">"Modaliteti i preferuar i rrjetit: NR/LTE/TDSCDMA/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4337061745216872524">"Modaliteti i preferuar i rrjetit: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3396717432149544381">"Modaliteti i preferuar i rrjetit: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
-    <!-- no translation found for network_5G_recommended (4769018972369031538) -->
-    <skip />
+    <string name="network_5G_recommended" msgid="4769018972369031538">"5G (rekomandohet)"</string>
     <string name="network_lte" msgid="2449425437381668780">"LTE (rekomandohet)"</string>
     <string name="network_4G" msgid="9018841362928321047">"4G (rekomandohet)"</string>
     <string name="label_available" msgid="5305726869955838606">"Rrjete të arritshme"</string>
@@ -5409,9 +5409,7 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Shfaq një mesazh kur aplikacionet qasen te tekstet, imazhet ose përmbajtje të tjera që ke kopjuar"</string>
     <string name="all_apps" msgid="3054120149509114789">"Të gjitha aplikacionet"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Mos lejo"</string>
-    <!-- no translation found for uwb_settings_title (8578498712312002231) -->
-    <skip />
+    <string name="uwb_settings_title" msgid="8578498712312002231">"Brezi ultra i gjerë (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Ndihmon për të identifikuar pozicionin e përafërt të pajisjeve në afërsi që kanë UWB"</string>
-    <!-- no translation found for uwb_settings_summary_airplane_mode (1328864888135086484) -->
-    <skip />
+    <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Çaktivizo \"Modalitetin e aeroplanit\" për të përdorur UWB."</string>
 </resources>
