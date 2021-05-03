@@ -30,6 +30,8 @@ public class BatteryHistEntry {
     public static final String KEY_APP_LABEL = "appLabel";
     public static final String KEY_PACKAGE_NAME = "packageName";
     public static final String KEY_IS_HIDDEN = "isHidden";
+    // Device booting elapsed time from SystemClock.elapsedRealtime().
+    public static final String KEY_BOOT_TIMESTAMP = "bootTimestamp";
     public static final String KEY_TIMESTAMP = "timestamp";
     public static final String KEY_ZONE_ID = "zoneId";
     public static final String KEY_TOTAL_POWER = "totalPower";
@@ -50,6 +52,7 @@ public class BatteryHistEntry {
     // Whether the data is represented as system component or not?
     public final boolean mIsHidden;
     // Records the timestamp relative information.
+    public final long mBootTimestamp;
     public final long mTimestamp;
     public final String mZoneId;
     // Records the battery usage relative information.
@@ -74,6 +77,7 @@ public class BatteryHistEntry {
         mAppLabel = getString(values, KEY_APP_LABEL);
         mPackageName = getString(values, KEY_PACKAGE_NAME);
         mIsHidden = getBoolean(values, KEY_IS_HIDDEN);
+        mBootTimestamp = getLong(values, KEY_BOOT_TIMESTAMP);
         mTimestamp = getLong(values, KEY_TIMESTAMP);
         mZoneId = getString(values, KEY_ZONE_ID);
         mTotalPower = getDouble(values, KEY_TOTAL_POWER);
@@ -94,6 +98,7 @@ public class BatteryHistEntry {
         mAppLabel = getString(cursor, KEY_APP_LABEL);
         mPackageName = getString(cursor, KEY_PACKAGE_NAME);
         mIsHidden = getBoolean(cursor, KEY_IS_HIDDEN);
+        mBootTimestamp = getLong(cursor, KEY_BOOT_TIMESTAMP);
         mTimestamp = getLong(cursor, KEY_TIMESTAMP);
         mZoneId = getString(cursor, KEY_ZONE_ID);
         mTotalPower = getDouble(cursor, KEY_TOTAL_POWER);
@@ -153,7 +158,8 @@ public class BatteryHistEntry {
             .append("\nBatteryHistEntry{")
             .append(String.format("\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
                   mPackageName, mAppLabel, mUid, mUserId, mIsHidden))
-            .append(String.format("\n\ttimestamp=%s|zoneId=%s", recordAtDateTime, mZoneId))
+            .append(String.format("\n\ttimestamp=%s|zoneId=%s|bootTimestamp=%d",
+                  recordAtDateTime, mZoneId, Duration.ofMillis(mBootTimestamp).getSeconds()))
             .append(String.format("\n\tusage=%f|total=%f|consume=%f|elapsedTime=%d|%d",
                   mPercentOfTotal, mTotalPower, mConsumePower,
                   Duration.ofMillis(mForegroundUsageTimeInMs).getSeconds(),
@@ -249,5 +255,4 @@ public class BatteryHistEntry {
         mIsValidEntry = false;
         return false;
     }
-
 }
