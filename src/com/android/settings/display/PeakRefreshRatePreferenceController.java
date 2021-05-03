@@ -107,7 +107,7 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
                         mContext.getContentResolver(),
                         Settings.System.PEAK_REFRESH_RATE,
                         getDefaultPeakRefreshRate());
-        return peakRefreshRate == mPeakRefreshRate;
+        return Math.round(peakRefreshRate) == Math.round(mPeakRefreshRate);
     }
 
     @Override
@@ -190,6 +190,7 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
                     com.android.internal.R.integer.config_defaultPeakRefreshRate);
         }
 
+        Log.d(TAG, "DeviceConfig getDefaultPeakRefreshRate : " + defaultPeakRefreshRate);
         return defaultPeakRefreshRate;
     }
 }
