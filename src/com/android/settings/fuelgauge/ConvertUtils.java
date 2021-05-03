@@ -15,14 +15,9 @@ package com.android.settings.fuelgauge;
 
 import android.annotation.IntDef;
 import android.content.ContentValues;
-import android.os.BatteryConsumer;
-import android.os.BatteryUsageStats;
 import android.content.Context;
-import android.os.SystemBatteryConsumer;
-import android.os.UidBatteryConsumer;
-import android.os.UserBatteryConsumer;
+import android.os.BatteryUsageStats;
 import android.os.UserHandle;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -79,28 +74,6 @@ public final class ConvertUtils {
 
     private ConvertUtils() {}
 
-    /** Gets consumer type from {@link BatteryConsumer}. */
-    @ConsumerType
-    public static int getConsumerType(BatteryConsumer consumer) {
-        if (consumer instanceof UidBatteryConsumer) {
-            return CONSUMER_TYPE_UID_BATTERY;
-        } else if (consumer instanceof UserBatteryConsumer) {
-            return CONSUMER_TYPE_USER_BATTERY;
-        } else if (consumer instanceof SystemBatteryConsumer) {
-            return CONSUMER_TYPE_SYSTEM_BATTERY;
-        } else {
-          return CONSUMER_TYPE_UNKNOWN;
-        }
-    }
-
-    /** Gets battery drain type for {@link SystemBatteryConsumer}. */
-    public static int getDrainType(BatteryConsumer consumer) {
-        if (consumer instanceof SystemBatteryConsumer) {
-            return ((SystemBatteryConsumer) consumer).getDrainType();
-        }
-        return INVALID_DRAIN_TYPE;
-    }
-
     public static ContentValues convert(
             BatteryEntry entry,
             BatteryUsageStats batteryUsageStats,
@@ -129,9 +102,9 @@ public final class ConvertUtils {
             values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
                 Long.valueOf(entry.getTimeInBackgroundMs()));
             values.put(BatteryHistEntry.KEY_DRAIN_TYPE,
-                getDrainType(entry.getBatteryConsumer()));
+                entry.getPowerComponentId());
             values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
-                getConsumerType(entry.getBatteryConsumer()));
+                entry.getConsumerType());
         } else {
             values.put(BatteryHistEntry.KEY_PACKAGE_NAME, FAKE_PACKAGE_NAME);
         }
