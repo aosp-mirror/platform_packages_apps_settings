@@ -21,13 +21,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.AggregateBatteryConsumer;
 import android.os.BatteryConsumer;
 import android.os.BatteryUsageStats;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
-import android.os.SystemBatteryConsumer;
 import android.os.UidBatteryConsumer;
 import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
@@ -344,16 +344,38 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             }
         }
 
-        final List<SystemBatteryConsumer> systemBatteryConsumers =
-                mBatteryUsageStats.getSystemBatteryConsumers();
-        for (int i = 0, size = systemBatteryConsumers.size(); i < size; i++) {
-            final SystemBatteryConsumer consumer = systemBatteryConsumers.get(i);
-            if (!showAllApps && mBatteryUtils.shouldHideSystemBatteryConsumer(consumer)) {
+        final BatteryConsumer deviceConsumer = mBatteryUsageStats.getAggregateBatteryConsumer(
+                BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_DEVICE);
+        final BatteryConsumer appsConsumer = mBatteryUsageStats.getAggregateBatteryConsumer(
+                BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_ALL_APPS);
+
+        for (int componentId = 0; componentId < BatteryConsumer.POWER_COMPONENT_COUNT;
+                componentId++) {
+            if (!showAllApps
+                    && mBatteryUtils.shouldHideDevicePowerComponent(deviceConsumer, componentId)) {
                 continue;
             }
 
-            results.add(new BatteryEntry(mContext, mHandler, mUserManager,
-                    consumer, /* isHidden */ true, null, null, loadDataInBackground));
+            results.add(new BatteryEntry(mContext, componentId,
+                    deviceConsumer.getConsumedPower(componentId),
+                    appsConsumer.getConsumedPower(componentId),
+                    deviceConsumer.getUsageDurationMillis(componentId)));
+        }
+
+        for (int componentId = BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID;
+                componentId < BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID
+                        + deviceConsumer.getCustomPowerComponentCount();
+                componentId++) {
+            if (!showAllApps
+                    && mBatteryUtils.shouldHideCustomDevicePowerComponent(deviceConsumer,
+                    componentId)) {
+                continue;
+            }
+
+            results.add(new BatteryEntry(mContext, componentId,
+                    deviceConsumer.getCustomPowerComponentName(componentId),
+                    deviceConsumer.getConsumedPowerForCustomComponent(componentId),
+                    appsConsumer.getConsumedPowerForCustomComponent(componentId)));
         }
 
         if (showAllApps) {
@@ -431,20 +453,26 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                 .setDischargePercentage(100);
 
         float use = 500;
-        for (@SystemBatteryConsumer.DrainType int drainType : new int[]{
-                SystemBatteryConsumer.DRAIN_TYPE_AMBIENT_DISPLAY,
-                SystemBatteryConsumer.DRAIN_TYPE_BLUETOOTH,
-                SystemBatteryConsumer.DRAIN_TYPE_CAMERA,
-                SystemBatteryConsumer.DRAIN_TYPE_FLASHLIGHT,
-                SystemBatteryConsumer.DRAIN_TYPE_IDLE,
-                SystemBatteryConsumer.DRAIN_TYPE_MEMORY,
-                SystemBatteryConsumer.DRAIN_TYPE_MOBILE_RADIO,
-                SystemBatteryConsumer.DRAIN_TYPE_PHONE,
-                SystemBatteryConsumer.DRAIN_TYPE_SCREEN,
-                SystemBatteryConsumer.DRAIN_TYPE_WIFI,
+        final AggregateBatteryConsumer.Builder appsBatteryConsumerBuilder =
+                builder.getAggregateBatteryConsumerBuilder(
+                        BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_ALL_APPS);
+        final AggregateBatteryConsumer.Builder deviceBatteryConsumerBuilder =
+                builder.getAggregateBatteryConsumerBuilder(
+                        BatteryUsageStats.AGGREGATE_BATTERY_CONSUMER_SCOPE_DEVICE);
+        for (@BatteryConsumer.PowerComponent int componentId : new int[]{
+                BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY,
+                BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
+                BatteryConsumer.POWER_COMPONENT_CAMERA,
+                BatteryConsumer.POWER_COMPONENT_FLASHLIGHT,
+                BatteryConsumer.POWER_COMPONENT_IDLE,
+                BatteryConsumer.POWER_COMPONENT_MEMORY,
+                BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO,
+                BatteryConsumer.POWER_COMPONENT_PHONE,
+                BatteryConsumer.POWER_COMPONENT_SCREEN,
+                BatteryConsumer.POWER_COMPONENT_WIFI,
         }) {
-            builder.getOrCreateSystemBatteryConsumerBuilder(drainType)
-                    .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, use);
+            appsBatteryConsumerBuilder.setConsumedPower(componentId, use);
+            deviceBatteryConsumerBuilder.setConsumedPower(componentId, use * 2);
             use += 5;
         }
 
