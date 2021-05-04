@@ -441,7 +441,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"استخدام بصمة الإصبع لفتح قفل الهاتف قد يكون أقل أمانًا من استخدام نقش أو رقم تعريف شخصي قوي."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"آلية العمل"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"تنشئ ميزة \"فتح القفل ببصمة الإصبع\" نموذجًا فريدًا من بصمة الإصبع للتعرّف عليك أثناء عمليات المصادقة. لإنشاء نموذج بصمة الإصبع هذا أثناء عملية الإعداد، ستلتقط صورًا لبصمة إصبعك من مواضع مختلفة."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"سيستخدم الهاتف أيضًا صورًا من تفاعلاتك لفتح القفل ببصمة الإصبع من أجل تعديل نموذج بصمة الإصبع. لا يتم مطلقًا تخزين الصور المستخدمة لإنشاء نموذج بصمة الإصبع، ولكن يتم تخزين النموذج بأمان على هاتفك ولا يتم نقله خارج هاتفك مطلقًا. تتم كل عمليات المعالجة بأمان على هاتفك."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"سيستخدم الهاتف أيضًا الصور التي يتم التقاطها أثناء استخداماتك لميزة \"فتح القفل ببصمة الإصبع\" لتحسين نموذج بصمة الإصبع. لا يتم مطلقًا تخزين الصور المستخدمة لإنشاء نموذج بصمة الإصبع، ولكن يتم تخزين النموذج بأمان على هاتفك ولا يتم نقله خارج هاتفك مطلقًا. تتم كل عمليات المعالجة بأمان على هاتفك."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"يمكنك حذف نموذج بصمة الإصبع أو إيقاف ميزة \"فتح القفل ببصمة الإصبع\" في أي وقت من \"الإعدادات\". يتم تخزين نماذج بصمات الأصابع على هاتفك حتى تحذفها."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"غيِّر موضع إصبعك قليلاً في كل مرة."</string>
@@ -1709,8 +1709,7 @@
     <string name="apn_settings" msgid="4295467389400441299">"أسماء نقاط الوصول"</string>
     <string name="apn_edit" msgid="2003683641840248741">"تعديل نقطة الوصول"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"لم يتم الضبط"</string>
-    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
-    <skip />
+    <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"لم يتم ضبط أي قيمة."</string>
     <string name="apn_name" msgid="6677695784108157953">"الاسم"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"الخادم الوكيل"</string>
@@ -2883,26 +2882,18 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"استخدام البطارية"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"منذ اكتمال الشحن"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"إدارة استخدام البطارية"</string>
-    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
-    <skip />
-    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
-    <skip />
+    <string name="battery_total_and_bg_usage" msgid="7808189707718974808">"إجمالي مدة الاستخدام: <xliff:g id="TIME_0">^1</xliff:g> • تم استخدام البطارية في الخلفية لمدة <xliff:g id="TIME_1">^2</xliff:g> في آخر 24 ساعة"</string>
+    <string name="battery_total_and_bg_usage_with_period" msgid="7938034545486503036">"إجمالي مدة الاستخدام: <xliff:g id="TIME_0">^1</xliff:g> • تم استخدام البطارية في الخلفية لمدة <xliff:g id="TIME_1">^2</xliff:g> في الفترة <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"الاستخدام الإجمالي للبطارية أقل من دقيقة في آخر 24 ساعة."</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"الاستخدام الإجمالي للبطارية أقل من دقيقة في الفترة <xliff:g id="TIME_PERIOD">^1</xliff:g>."</string>
-    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
-    <skip />
-    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
-    <skip />
+    <string name="battery_bg_usage_less_minute" msgid="90932588167097641">"تم استخدام البطارية في الخلفية أقل من دقيقة في آخر 24 ساعة."</string>
+    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"تم استخدام البطارية في الخلفية أقل من دقيقة في الفترة <xliff:g id="TIME_PERIOD">^1</xliff:g>."</string>
     <string name="battery_total_usage" msgid="2662725472478185867">"الاستخدام الإجمالي للبطارية في آخر 24 ساعة: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"الاستخدام الإجمالي للبطارية <xliff:g id="TIME_0">^1</xliff:g> في الفترة <xliff:g id="TIME_PERIOD">^2</xliff:g>."</string>
-    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
-    <skip />
-    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
-    <skip />
+    <string name="battery_bg_usage" msgid="2983050956970659511">"تم استخدام البطارية في الخلفية لمدة <xliff:g id="TIME">^1</xliff:g> في آخر 24 ساعة."</string>
+    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"تم استخدام البطارية في الخلفية لمدة <xliff:g id="TIME_0">^1</xliff:g> في الفترة <xliff:g id="TIME_PERIOD">^2</xliff:g>."</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="4158686147238415647">"إجمالي مدة الاستخدام: <xliff:g id="TIME">^1</xliff:g> • تم استخدام البطارية في الخلفية أقل من دقيقة في آخر 24 ساعة"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="8677646584258593395">"إجمالي مدة الاستخدام: <xliff:g id="TIME_0">^1</xliff:g> • تم استخدام البطارية في الخلفية أقل من دقيقة في الفترة <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="8417901856028909227">"لم يتم استخدام البطارية في الخلفية في آخر 24 ساعة."</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"يستند تقدير شحن البطارية المتبقي على استخدام الجهاز"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"الوقت التقديري المتبقي"</string>
