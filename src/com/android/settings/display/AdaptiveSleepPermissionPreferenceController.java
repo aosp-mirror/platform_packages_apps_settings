@@ -37,26 +37,18 @@ public class AdaptiveSleepPermissionPreferenceController {
     @VisibleForTesting
     BannerMessagePreference mPreference;
     private final PackageManager mPackageManager;
+    private final Context mContext;
 
     public AdaptiveSleepPermissionPreferenceController(Context context) {
-        final String packageName = context.getPackageManager().getAttentionServicePackageName();
         mPackageManager = context.getPackageManager();
-        final Intent intent = new Intent(
-                android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        intent.setData(Uri.parse("package:" + packageName));
-        mPreference = new BannerMessagePreference(context);
-        mPreference.setTitle(R.string.adaptive_sleep_title_no_permission);
-        mPreference.setSummary(R.string.adaptive_sleep_summary_no_permission);
-        mPreference.setPositiveButtonText(R.string.adaptive_sleep_manage_permission_button);
-        mPreference.setPositiveButtonOnClickListener(p -> {
-            context.startActivity(intent);
-        });
+        mContext = context;
     }
 
     /**
      * Adds the controlled preference to the provided preference screen.
      */
     public void addToScreen(PreferenceScreen screen) {
+        initializePreference();
         if (!hasSufficientPermission(mPackageManager)) {
             screen.addPreference(mPreference);
         }
@@ -66,6 +58,25 @@ public class AdaptiveSleepPermissionPreferenceController {
      * Refreshes the visibility of the preference.
      */
     public void updateVisibility() {
+        initializePreference();
         mPreference.setVisible(!hasSufficientPermission(mPackageManager));
     }
+
+    private void initializePreference() {
+        if (mPreference == null) {
+            final String packageName =
+                    mContext.getPackageManager().getAttentionServicePackageName();
+            final Intent intent = new Intent(
+                    android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(Uri.parse("package:" + packageName));
+            mPreference = new BannerMessagePreference(mContext);
+            mPreference.setTitle(R.string.adaptive_sleep_title_no_permission);
+            mPreference.setSummary(R.string.adaptive_sleep_summary_no_permission);
+            mPreference.setPositiveButtonText(R.string.adaptive_sleep_manage_permission_button);
+            mPreference.setPositiveButtonOnClickListener(p -> {
+                mContext.startActivity(intent);
+            });
+        }
+    }
+
 }
