@@ -59,11 +59,11 @@
         android:persistent="false"
         settings:controller="com.android.settings.accessibility.FloatingMenuOpacityPreferenceController"/>
 
-    <com.android.settingslib.widget.FooterPreference
+    <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="accessibility_button_footer"
         android:title="@string/accessibility_button_description"
+        android:persistent="false"
         android:selectable="false"
         settings:searchable="false"
-        android:persistent="false"/>
-
+        settings:controller="com.android.settings.accessibility.AccessibilityButtonFooterPreferenceController"/>
 </PreferenceScreen>

@@ -28,7 +28,7 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
@@ -41,8 +41,10 @@ import java.util.List;
 
 /** Settings fragment containing captioning properties. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CaptionPropertiesFragment extends SettingsPreferenceFragment
+public class CaptionPropertiesFragment extends DashboardFragment
         implements OnPreferenceChangeListener, OnMainSwitchChangeListener {
+
+    private static final String TAG = "CaptionPropertiesFragment";
     private static final String PREF_SWITCH = "captioning_preference_switch";
     private static final String PREF_TEXT = "captioning_caption_appearance";
     private static final String PREF_MORE = "captioning_more_options";
@@ -62,12 +64,11 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
 
         mCaptioningManager = (CaptioningManager) getSystemService(Context.CAPTIONING_SERVICE);
 
-        addPreferencesFromResource(R.xml.captioning_settings);
         initializeAllPreferences();
         installUpdateListeners();
         initFontSizeValuesArray();
@@ -77,6 +78,16 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         updateAllPreferences();
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.captioning_settings;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     private void initializeAllPreferences() {

@@ -29,11 +29,11 @@ import android.os.BatteryConsumer;
 import android.os.Handler;
 import android.os.Process;
 import android.os.RemoteException;
-import android.os.SystemBatteryConsumer;
 import android.os.UidBatteryConsumer;
 import android.os.UserBatteryConsumer;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.DebugUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -160,6 +160,11 @@ public class BatteryEntry {
     private final Context mContext;
     private final BatteryConsumer mBatteryConsumer;
     private final boolean mIsHidden;
+    @ConvertUtils.ConsumerType
+    private final int mConsumerType;
+    @BatteryConsumer.PowerComponent
+    private final int mPowerComponentId;
+    private long mUsageDurationMs;
 
     public String name;
     public Drawable icon;
@@ -188,8 +193,10 @@ public class BatteryEntry {
         mBatteryConsumer = batteryConsumer;
         mIsHidden = isHidden;
         mDefaultPackageName = packageName;
+        mPowerComponentId = -1;
 
         if (batteryConsumer instanceof UidBatteryConsumer) {
+            mConsumerType = ConvertUtils.CONSUMER_TYPE_UID_BATTERY;
             mConsumedPower = batteryConsumer.getConsumedPower();
 
             UidBatteryConsumer uidBatteryConsumer = (UidBatteryConsumer) batteryConsumer;
@@ -215,26 +222,53 @@ public class BatteryEntry {
                 }
             }
             getQuickNameIconForUid(uid, packages, loadDataInBackground);
-            return;
-        } else if (batteryConsumer instanceof SystemBatteryConsumer) {
-            mConsumedPower = batteryConsumer.getConsumedPower()
-                    - ((SystemBatteryConsumer) batteryConsumer).getPowerConsumedByApps();
-            final NameAndIcon nameAndIcon = getNameAndIconFromDrainType(
-                    context, ((SystemBatteryConsumer) batteryConsumer).getDrainType());
-            iconId = nameAndIcon.iconId;
-            name = nameAndIcon.name;
         } else if (batteryConsumer instanceof UserBatteryConsumer) {
+            mConsumerType = ConvertUtils.CONSUMER_TYPE_USER_BATTERY;
             mConsumedPower = batteryConsumer.getConsumedPower();
             final NameAndIcon nameAndIcon = getNameAndIconFromUserId(
                     context, ((UserBatteryConsumer) batteryConsumer).getUserId());
             icon = nameAndIcon.icon;
             name = nameAndIcon.name;
+        } else {
+            throw new IllegalArgumentException("Unsupported battery consumer: " + batteryConsumer);
         }
+    }
 
+    /** Battery entry for a power component of AggregateBatteryConsumer */
+    public BatteryEntry(Context context, int powerComponentId, double devicePowerMah,
+            double appsPowerMah, long usageDurationMs) {
+        mContext = context;
+        mBatteryConsumer = null;
+        mIsHidden = false;
+        mPowerComponentId = powerComponentId;
+        mConsumedPower = devicePowerMah - appsPowerMah;
+        mUsageDurationMs = usageDurationMs;
+        mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
+
+        final NameAndIcon nameAndIcon = getNameAndIconFromPowerComponent(context, powerComponentId);
+        iconId = nameAndIcon.iconId;
+        name = nameAndIcon.name;
         if (iconId != 0) {
             icon = context.getDrawable(iconId);
         }
     }
+
+    /** Battery entry for a custom power component of AggregateBatteryConsumer */
+    public BatteryEntry(Context context, int powerComponentId, String powerComponentName,
+            double devicePowerMah, double appsPowerMah) {
+        mContext = context;
+        mBatteryConsumer = null;
+        mIsHidden = false;
+        mPowerComponentId = powerComponentId;
+
+        iconId = R.drawable.ic_power_system;
+        icon = context.getDrawable(iconId);
+        name = powerComponentName;
+
+        mConsumedPower = devicePowerMah - appsPowerMah;
+        mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
+    }
+
 
     public Drawable getIcon() {
         return icon;
@@ -245,6 +279,16 @@ public class BatteryEntry {
      */
     public String getLabel() {
         return name;
+    }
+
+    @ConvertUtils.ConsumerType
+    public int getConsumerType() {
+        return mConsumerType;
+    }
+
+    @BatteryConsumer.PowerComponent
+    public int getPowerComponentId() {
+        return mPowerComponentId;
     }
 
     void getQuickNameIconForUid(
@@ -395,13 +439,10 @@ public class BatteryEntry {
     public String getKey() {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
             return Integer.toString(((UidBatteryConsumer) mBatteryConsumer).getUid());
-        } else if (mBatteryConsumer instanceof SystemBatteryConsumer) {
-            return "S|" + ((SystemBatteryConsumer) mBatteryConsumer).getDrainType();
         } else if (mBatteryConsumer instanceof UserBatteryConsumer) {
             return "U|" + ((UserBatteryConsumer) mBatteryConsumer).getUserId();
         } else {
-            Log.w(TAG, "Unsupported BatteryConsumer: " + mBatteryConsumer);
-            return "";
+            return "S|" + mPowerComponentId;
         }
     }
 
@@ -449,23 +490,14 @@ public class BatteryEntry {
     }
 
     /**
-     * Returns the BatteryConsumer of the app described by this entry.
-     */
-    public BatteryConsumer getBatteryConsumer() {
-        return mBatteryConsumer;
-    }
-
-    /**
      * Returns foreground foreground time (in milliseconds) that is attributed to this entry.
      */
     public long getTimeInForegroundMs() {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
             return ((UidBatteryConsumer) mBatteryConsumer).getTimeInStateMs(
                     UidBatteryConsumer.STATE_FOREGROUND);
-        } else if (mBatteryConsumer instanceof SystemBatteryConsumer) {
-            return ((SystemBatteryConsumer) mBatteryConsumer).getUsageDurationMillis();
         } else {
-            return 0;
+            return mUsageDurationMs;
         }
     }
 
@@ -537,52 +569,53 @@ public class BatteryEntry {
     }
 
     /**
-     * Gets name annd icon resource from SystemBatteryConsumer drain type.
+     * Gets name and icon resource from BatteryConsumer power component ID.
      */
-    public static NameAndIcon getNameAndIconFromDrainType(
-            Context context, final int drainType) {
-        String name = null;
-        int iconId = 0;
-        switch (drainType) {
-            case SystemBatteryConsumer.DRAIN_TYPE_AMBIENT_DISPLAY:
+    public static NameAndIcon getNameAndIconFromPowerComponent(
+            Context context, @BatteryConsumer.PowerComponent int powerComponentId) {
+        String name;
+        int iconId;
+        switch (powerComponentId) {
+            case BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY:
                 name = context.getResources().getString(R.string.ambient_display_screen_title);
                 iconId = R.drawable.ic_settings_aod;
                 break;
-            case SystemBatteryConsumer.DRAIN_TYPE_BLUETOOTH:
+            case BatteryConsumer.POWER_COMPONENT_BLUETOOTH:
                 name = context.getResources().getString(R.string.power_bluetooth);
                 iconId = com.android.internal.R.drawable.ic_settings_bluetooth;
                 break;
-            case SystemBatteryConsumer.DRAIN_TYPE_CAMERA:
+            case BatteryConsumer.POWER_COMPONENT_CAMERA:
                 name = context.getResources().getString(R.string.power_camera);
                 iconId = R.drawable.ic_settings_camera;
                 break;
-            case SystemBatteryConsumer.DRAIN_TYPE_MOBILE_RADIO:
+            case BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO:
                 name = context.getResources().getString(R.string.power_cell);
                 iconId = R.drawable.ic_cellular_1_bar;
                 break;
-            case SystemBatteryConsumer.DRAIN_TYPE_FLASHLIGHT:
+            case BatteryConsumer.POWER_COMPONENT_FLASHLIGHT:
                 name = context.getResources().getString(R.string.power_flashlight);
                 iconId = R.drawable.ic_settings_display;
                 break;
-            case SystemBatteryConsumer.DRAIN_TYPE_PHONE:
+            case BatteryConsumer.POWER_COMPONENT_PHONE:
                 name = context.getResources().getString(R.string.power_phone);
                 iconId = R.drawable.ic_settings_voice_calls;
                 break;
-            case SystemBatteryConsumer.DRAIN_TYPE_SCREEN:
+            case BatteryConsumer.POWER_COMPONENT_SCREEN:
                 name = context.getResources().getString(R.string.power_screen);
                 iconId = R.drawable.ic_settings_display;
                 break;
-            case SystemBatteryConsumer.DRAIN_TYPE_WIFI:
+            case BatteryConsumer.POWER_COMPONENT_WIFI:
                 name = context.getResources().getString(R.string.power_wifi);
                 iconId = R.drawable.ic_settings_wireless;
                 break;
-            case SystemBatteryConsumer.DRAIN_TYPE_IDLE:
-            case SystemBatteryConsumer.DRAIN_TYPE_MEMORY:
+            case BatteryConsumer.POWER_COMPONENT_IDLE:
+            case BatteryConsumer.POWER_COMPONENT_MEMORY:
                 name = context.getResources().getString(R.string.power_idle);
                 iconId = R.drawable.ic_settings_phone_idle;
                 break;
-            case SystemBatteryConsumer.DRAIN_TYPE_CUSTOM:
-                name = null;
+            default:
+                name = DebugUtils.constantToString(BatteryConsumer.class, "POWER_COMPONENT_",
+                        powerComponentId);
                 iconId = R.drawable.ic_power_system;
                 break;
         }
