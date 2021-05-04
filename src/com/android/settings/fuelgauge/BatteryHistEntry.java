@@ -15,6 +15,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.BatteryConsumer;
 
 import java.time.Duration;
 
@@ -59,7 +60,9 @@ public class BatteryHistEntry {
     public final double mPercentOfTotal;
     public final long mForegroundUsageTimeInMs;
     public final long mBackgroundUsageTimeInMs;
-    public final int mPowerComponentId;
+    @BatteryConsumer.PowerComponent
+    public final int mDrainType;
+    @ConvertUtils.ConsumerType
     public final int mConsumerType;
     // Records the battery intent relative information.
     public final int mBatteryLevel;
@@ -83,7 +86,7 @@ public class BatteryHistEntry {
         mPercentOfTotal = getDouble(values, KEY_PERCENT_OF_TOTAL);
         mForegroundUsageTimeInMs = getLong(values, KEY_FOREGROUND_USAGE_TIME);
         mBackgroundUsageTimeInMs = getLong(values, KEY_BACKGROUND_USAGE_TIME);
-        mPowerComponentId = getInteger(values, KEY_DRAIN_TYPE);
+        mDrainType = getInteger(values, KEY_DRAIN_TYPE);
         mConsumerType = getInteger(values, KEY_CONSUMER_TYPE);
         mBatteryLevel = getInteger(values, KEY_BATTERY_LEVEL);
         mBatteryStatus = getInteger(values, KEY_BATTERY_STATUS);
@@ -104,7 +107,7 @@ public class BatteryHistEntry {
         mPercentOfTotal = getDouble(cursor, KEY_PERCENT_OF_TOTAL);
         mForegroundUsageTimeInMs = getLong(cursor, KEY_FOREGROUND_USAGE_TIME);
         mBackgroundUsageTimeInMs = getLong(cursor, KEY_BACKGROUND_USAGE_TIME);
-        mPowerComponentId = getInteger(cursor, KEY_DRAIN_TYPE);
+        mDrainType = getInteger(cursor, KEY_DRAIN_TYPE);
         mConsumerType = getInteger(cursor, KEY_CONSUMER_TYPE);
         mBatteryLevel = getInteger(cursor, KEY_BATTERY_LEVEL);
         mBatteryStatus = getInteger(cursor, KEY_BATTERY_STATUS);
@@ -139,7 +142,7 @@ public class BatteryHistEntry {
                     mKey = Long.toString(mUid);
                     break;
                 case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
-                    mKey = "S|" + mPowerComponentId;
+                    mKey = "S|" + mDrainType;
                     break;
                 case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
                     mKey = "U|" + mUserId;
@@ -162,7 +165,8 @@ public class BatteryHistEntry {
                   mPercentOfTotal, mTotalPower, mConsumePower,
                   Duration.ofMillis(mForegroundUsageTimeInMs).getSeconds(),
                   Duration.ofMillis(mBackgroundUsageTimeInMs).getSeconds()))
-            .append(String.format("\n\tdrain=%d|consumer=%d", mPowerComponentId, mConsumerType))
+            .append(String.format("\n\tdrainType=%d|consumerType=%d",
+                  mDrainType, mConsumerType))
             .append(String.format("\n\tbattery=%d|status=%d|health=%d\n}",
                   mBatteryLevel, mBatteryStatus, mBatteryHealth));
         return builder.toString();
