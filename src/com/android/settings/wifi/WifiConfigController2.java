@@ -923,7 +923,6 @@ public class WifiConfigController2 implements TextWatcher,
                     return R.string.wifi_ip_settings_invalid_dns;
                 }
                 dnsServers.add(dnsAddr);
-                staticIpConfiguration.getDnsServers().add(dnsAddr);
             }
 
             if (mDns2View.length() > 0) {
@@ -933,14 +932,13 @@ public class WifiConfigController2 implements TextWatcher,
                     return R.string.wifi_ip_settings_invalid_dns;
                 }
                 dnsServers.add(dnsAddr);
-                staticIpConfiguration.getDnsServers().add(dnsAddr);
             }
             staticIPBuilder.setDnsServers(dnsServers);
             return 0;
         } finally {
             // Caller of this method may rely on staticIpConfiguration, so build the final result
             // at the end of the method.
-            staticIpConfiguration = staticIPBuilder.build();
+            mStaticIpConfiguration = staticIPBuilder.build();
         }
     }
 
