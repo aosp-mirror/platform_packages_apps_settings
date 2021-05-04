@@ -236,7 +236,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             final String pkgName = app.getPackage();
             final ApplicationsState.AppEntry appEntry =
                     mApplicationsState.getEntry(app.getPackage(), app.getUserId());
-            if (appEntry == null) {
+            if (appEntry == null || appEntry.label == null) {
                 continue;
             }
 
