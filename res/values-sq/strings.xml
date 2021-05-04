@@ -329,7 +329,7 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Përdor fytyrën për të vërtetuar"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Nis"</string>
-    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Nëse shkyçja e fytyrës me qasshmëri është e çaktivizuar, disa hapa konfigurimi mund të mos funksionojnë mirë me TalkBack."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Nëse shkyçja me fytyrë për qasshmëri është e çaktivizuar, disa hapa konfigurimi mund të mos funksionojnë mirë me TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Kthehu pas"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Vazhdo konfigurimin"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Përdor konfigurimin e qasshmërisë"</string>
@@ -714,8 +714,8 @@
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Lidh"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Shkëput"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Ҫifto dhe lidh"</string>
-    <string name="bluetooth_device_context_unpair" msgid="7525735305244087162">"Hiq nga çiftimi"</string>
-    <string name="bluetooth_device_context_disconnect_unpair" msgid="2001359431289794561">"Shkëput dhe hiq nga çiftimi"</string>
+    <string name="bluetooth_device_context_unpair" msgid="7525735305244087162">"Anulo çiftimin"</string>
+    <string name="bluetooth_device_context_disconnect_unpair" msgid="2001359431289794561">"Shkëput dhe anulo çiftimin"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="934657460643490773">"Opsionet..."</string>
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Të përparuara"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Cilësimet e përparuara të Bluetooth-it"</string>
@@ -1200,7 +1200,7 @@
     <string name="adaptive_sleep_summary_no_permission" msgid="5107880175176848307">"Trokit për të menaxhuar autorizimet për \"Shërbimet e personalizimit të pajisjes\""</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Parandalon fikjen e ekranit nëse shikon tek ai"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Vëmendja ndaj ekranit përdor kamerën e përparme për të parë nëse dikush po shikon tek ekrani. Funksionon në pajisje dhe imazhet nuk dërgohen apo ruhen asnjëherë te Google."</string>
-    <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Aktivizo vëmendjen e ekranit"</string>
+    <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Aktivizo vëmendjen ndaj ekranit"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Mbaje ekranin aktiv kur e shikon"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Drita e natës"</string>
     <string name="night_display_text" msgid="4789324042428095383">"Drita e natës e ngjyros ekranin në ngjyrë qelibari. Kjo e bën më të lehtë shikimin e ekranit ose leximin në dritë të zbehtë dhe mund të të ndihmojë të flesh gjumë më lehtë."</string>
@@ -2121,7 +2121,7 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Një lexues i ekranit kryesisht për personat e verbër dhe me shikim të dobët"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Trokit artikujt në ekran për t\'i dëgjuar të lexuar me zë të lartë"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferencat e titrave"</string>
-    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Zmadhimi"</string>
+    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"zmadhimit"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Zona e zmadhimit"</string>
     <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Aktivizimi i zmadhimit"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Zgjidh zonën(at) e zmadhimit që dëshiron të përdorësh kur zmadhon ekranin"</string>
@@ -2241,7 +2241,7 @@
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> aparat dëgjimi i ruajtur</item>
     </plurals>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Shkurtorja aktive"</string>
-    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Joaktive"</string>
+    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Joaktiv"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Aktiv"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Joaktiv"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Nuk funksionon. Trokit për informacione."</string>
@@ -3617,11 +3617,11 @@
     <string name="no_notification_assistant" msgid="2533323397091834096">"Asnjë"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Asnjë apl. i instaluar nuk ka kërkuar qasje te njoftimet."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Lejo qasjen te njoftimet"</string>
-    <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Të lejohet qasja e njoftimeve për <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Të lejohet qasja te njoftimet për <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> do të jetë në gjendje të lexojë të gjitha njoftimet, duke përfshirë informacione personale të tilla si emrat e kontakteve dhe tekstin e mesazheve që merr. Ky aplikacion do të jetë gjithashtu në gjendje të largojë njoftimet ose të veprojë mbi butonat te njoftimet, duke përfshirë përgjigjen ndaj telefonatave. \n\nKjo do t\'i japë aplikacionit aftësinë për të aktivizuar ose çaktivizuar \"Mos shqetëso\" dhe për të ndryshuar cilësimet përkatëse."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Të lejohet qasja te njoftimet për <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> do të jetë në gjendje të lexojë të gjitha njoftimet, duke përfshirë informacione personale të tilla si emrat e kontakteve dhe tekstin e mesazheve që merr. Ky aplikacion do të jetë gjithashtu në gjendje të largojë njoftimet ose të veprojë mbi butonat te njoftimet, duke përfshirë përgjigjen ndaj telefonatave. \n\nKjo do t\'i japë aplikacionit aftësinë për të aktivizuar ose çaktivizuar \"Mos shqetëso\" dhe për të ndryshuar cilësimet përkatëse."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Nëse çaktivizon qasjen e njoftimeve për <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, mund të çaktivizohet edhe qasja e \"Mos shqetëso\"."</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Nëse çaktivizon qasjen te njoftimet për <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, mund të çaktivizohet edhe qasja te \"Mos shqetëso\"."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Çaktivizo"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Anulo"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Shërbimet e ndihmësit VR"</string>
@@ -4128,7 +4128,7 @@
     <string name="no_data_usage" msgid="4665617440434654132">"Nuk janë përdorur të dhëna"</string>
     <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Të lejohet qasja te \"Mos shqetëso\" për \"<xliff:g id="APP">%1$s</xliff:g>\"?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Aplikacioni do të jetë në gjendje të aktivizojë/çaktivizojë opsionin \"Mos shqetëso\", si dhe të bëjë ndryshimet në cilësimet përkatëse."</string>
-    <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Duhet të qëndrojë e aktivizuar sepse qasja e njoftimeve është e aktivizuar"</string>
+    <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Duhet të qëndrojë e aktivizuar sepse qasja te njoftimet është e aktivizuar"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Të anulohet qasja te \"Mos shqetëso\" për <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Të gjitha rregullat e \"Mos shqetëso\" të krijuara nga ky aplikacion, do të hiqen."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Mos optimizo"</string>
@@ -4965,4 +4965,10 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth-i do të aktivizohet"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nuk ofrohet sepse modaliteti i orarit të gjumit është aktiv"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Një pajisje jo e besuar kërkon të ketë qasje te mesazhet e tua. Trokit për detaje."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Të lejohet qasja te mesazhet?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Një pajisje jo e besuar me Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, kërkon të ketë qasje te mesazhet e tua.\n\nNuk je lidhur me <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> më parë."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Një pajisje jo e besuar kërkon të ketë qasje te kontaktet dhe evidenca e telefonatave. Trokit për detaje."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Të lejohet qasja te kontaktet dhe evidenca e telefonatave?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Një pajisje jo e besuar me Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, kërkon të ketë qasje te kontaktet dhe evidenca e telefonatave. Kjo përfshin të dhënat në lidhje me telefonatat hyrëse dhe dalëse.\n\nNuk je lidhur me <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> më parë."</string>
 </resources>

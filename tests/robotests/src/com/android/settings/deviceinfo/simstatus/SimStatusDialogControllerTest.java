@@ -162,6 +162,8 @@ public class SimStatusDialogControllerTest {
         doReturn(null).when(mSignalStrength).getCellSignalStrengths();
         doReturn(mPhoneStateListener).when(mController).getPhoneStateListener();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(anyInt());
+        when(mSubscriptionInfo.getSubscriptionId())
+            .thenReturn(SubscriptionManager.DEFAULT_SUBSCRIPTION_ID);
 
         ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
         ReflectionHelpers.setField(mController, "mCarrierConfigManager", mCarrierConfigManager);
