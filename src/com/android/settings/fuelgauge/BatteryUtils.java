@@ -23,13 +23,13 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.BatteryConsumer;
 import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.BatteryUsageStatsQuery;
 import android.os.Build;
 import android.os.Process;
-import android.os.SystemBatteryConsumer;
 import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
@@ -195,20 +195,32 @@ public class BatteryUtils {
     }
 
     /**
-     * Returns true if the specified battery consumer should be excluded from the summary
+     * Returns true if the specified device power component should be excluded from the summary
      * battery consumption list.
      */
-    public boolean shouldHideSystemBatteryConsumer(SystemBatteryConsumer consumer) {
-        switch (consumer.getDrainType()) {
-            case SystemBatteryConsumer.DRAIN_TYPE_IDLE:
-            case SystemBatteryConsumer.DRAIN_TYPE_MOBILE_RADIO:
-            case SystemBatteryConsumer.DRAIN_TYPE_SCREEN:
-            case SystemBatteryConsumer.DRAIN_TYPE_BLUETOOTH:
-            case SystemBatteryConsumer.DRAIN_TYPE_WIFI:
+    public boolean shouldHideDevicePowerComponent(BatteryConsumer consumer,
+            @BatteryConsumer.PowerComponent int powerComponentId) {
+        switch (powerComponentId) {
+            case BatteryConsumer.POWER_COMPONENT_IDLE:
+            case BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO:
+            case BatteryConsumer.POWER_COMPONENT_SCREEN:
+            case BatteryConsumer.POWER_COMPONENT_BLUETOOTH:
+            case BatteryConsumer.POWER_COMPONENT_WIFI:
                 return true;
             default:
-                return consumer.getConsumedPower() < MIN_POWER_THRESHOLD_MILLI_AMP_HOURS;
+                return consumer.getConsumedPower(powerComponentId)
+                        < MIN_POWER_THRESHOLD_MILLI_AMP_HOURS;
         }
+    }
+
+    /**
+     * Returns true if the specified device custom power component should be excluded from the
+     * summary battery consumption list.
+     */
+    public boolean shouldHideCustomDevicePowerComponent(BatteryConsumer consumer,
+            int customPowerComponentId) {
+        return consumer.getConsumedPowerForCustomComponent(customPowerComponentId)
+                < MIN_POWER_THRESHOLD_MILLI_AMP_HOURS;
     }
 
     /**
