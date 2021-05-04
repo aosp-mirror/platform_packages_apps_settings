@@ -887,8 +887,8 @@
     <string name="fingerprint_enable_keyguard_toggle_title">screen lock</string>
     <!-- Message showing the current number of fingerprints set up. Shown for a menu item that launches fingerprint settings or enrollment. -->
     <plurals name="security_settings_fingerprint_preference_summary">
-        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> fingerprint set up</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> fingerprints set up</item>
+        <item quantity="one">Fingerprint added</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> fingerprints added</item>
     </plurals>
     <!-- message shown in summary field when no fingerprints are registered -->
     <string name="security_settings_fingerprint_preference_summary_none"></string>
@@ -969,9 +969,13 @@
 
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
-    <string name="security_settings_biometric_preference_title">Face &amp; fingerprint unlock</string>
+    <string name="security_settings_biometric_preference_title">Face &amp; Fingerprint Unlock</string>
     <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
-    <string name="security_settings_biometric_preference_summary">Face and fingerprint</string>
+    <string name="security_settings_biometric_preference_summary_none_enrolled">Tap to set up</string>
+    <!-- Message shown in summary field of biometric settings when face is enrolled, and multiple fingerprints are enrolled. [CHAR LIMIT=66]-->
+    <string name="security_settings_biometric_preference_summary_both_fp_multiple">Face and fingerprints added</string>
+    <!-- Message shown in summary field of biometric settings when face is enrolled, and a single fingerprintis enrolled. [CHAR LIMIT=66]-->
+    <string name="security_settings_biometric_preference_summary_both_fp_single">Face and fingerprint added</string>
     <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_intro">When you set up face unlock and fingerprint, your phone will ask for your fingerprint when you wear a mask or are in a dark area.</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
