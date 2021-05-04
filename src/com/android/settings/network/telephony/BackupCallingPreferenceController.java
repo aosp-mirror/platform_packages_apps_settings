@@ -42,7 +42,6 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
 
     private static final String LOG_TAG = "BackupCallingPrefCtrl";
 
-    private int mSubId;
     private Preference mPreference;
 
     /**
