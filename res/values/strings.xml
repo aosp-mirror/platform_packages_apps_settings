@@ -853,8 +853,6 @@
     <string name="security_settings_face_settings_require_confirmation">Always require confirmation</string>
     <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=70] -->
     <string name="security_settings_face_settings_require_confirmation_details">When using face unlock in apps, always require confirmation step</string>
-    <!-- Button text in face settings which removes the user's faces from the device [CHAR LIMIT=20] -->
-    <string name="security_settings_face_settings_remove_face_data">Delete face data</string>
     <!-- Button text in face settings which removes the user's face model from the device [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_remove_face_model">Delete face model</string>
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
@@ -866,9 +864,9 @@
     <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer_attention_not_supported">Keep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
-    <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
+    <string name="security_settings_face_settings_remove_dialog_title">Delete face model?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_remove_dialog_details">The face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
+    <string name="security_settings_face_settings_remove_dialog_details">Your face model will be permanently and securely deleted. After deletion, you will need your PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
     <!-- Dialog title shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_model_dialog_title">Delete face model?</string>
     <!-- Dialog contents shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=NONE] -->
@@ -889,8 +887,8 @@
     <string name="fingerprint_enable_keyguard_toggle_title">screen lock</string>
     <!-- Message showing the current number of fingerprints set up. Shown for a menu item that launches fingerprint settings or enrollment. -->
     <plurals name="security_settings_fingerprint_preference_summary">
-        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> fingerprint set up</item>
-        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> fingerprints set up</item>
+        <item quantity="one">Fingerprint added</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> fingerprints added</item>
     </plurals>
     <!-- message shown in summary field when no fingerprints are registered -->
     <string name="security_settings_fingerprint_preference_summary_none"></string>
@@ -971,9 +969,13 @@
 
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
-    <string name="security_settings_biometric_preference_title">Face &amp; fingerprint unlock</string>
+    <string name="security_settings_biometric_preference_title">Face &amp; Fingerprint Unlock</string>
     <!-- Message shown in summary field of biometric settings. [CHAR LIMIT=66] -->
-    <string name="security_settings_biometric_preference_summary">Face and fingerprint</string>
+    <string name="security_settings_biometric_preference_summary_none_enrolled">Tap to set up</string>
+    <!-- Message shown in summary field of biometric settings when face is enrolled, and multiple fingerprints are enrolled. [CHAR LIMIT=66]-->
+    <string name="security_settings_biometric_preference_summary_both_fp_multiple">Face and fingerprints added</string>
+    <!-- Message shown in summary field of biometric settings when face is enrolled, and a single fingerprintis enrolled. [CHAR LIMIT=66]-->
+    <string name="security_settings_biometric_preference_summary_both_fp_single">Face and fingerprint added</string>
     <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_intro">When you set up face unlock and fingerprint, your phone will ask for your fingerprint when you wear a mask or are in a dark area.</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
@@ -1464,43 +1466,42 @@
     <string name="unlock_disable_lock_title">Turn off screen lock</string>
 
     <!-- Title of the dialog shown when the user removes the device lock [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_title">Remove device protection?</string>
+    <string name="unlock_disable_frp_warning_title">Delete screen lock?</string>
     <!-- Title of the dialog shown when the user removes the profile lock [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_title_profile">Remove profile protection?</string>
 
     <!-- Content of the dialog shown when the user removes the device lock pattern [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pattern">"Device protection features will not work without your pattern."</string>
+    <string name="unlock_disable_frp_warning_content_pattern">"A pattern protects your phone if it\u2019s lost or stolen"</string>
     <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Device protection features will not work without your pattern.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won\'t be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"A pattern protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This also deletes the fingerprint model stored on your device. You won\u2019t be able to use your fingerprint for authentication in apps."</string>
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face">"A pattern protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face for authentication in apps."</string>
+    <!-- Content of the dialog shown when the user removes the device lock pattern and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint">"A pattern protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin">"Device protection features will not work without your PIN."</string>
+    <string name="unlock_disable_frp_warning_content_pin">"A PIN protects your phone if it\u2019s lost or stolen"</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Device protection features will not work without your PIN.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won\'t be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"A PIN protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This also deletes the fingerprint model stored on your device. You won\u2019t be able to use your fingerprint for authentication in apps."</string>
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face">"A PIN protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face for authentication in apps."</string>
+    <!-- Content of the dialog shown when the user removes the device lock PIN and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint">"A PIN protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
     <!-- Content of the dialog shown when the user removes the device lock password [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_password">"Device protection features will not work without your password."</string>
+    <string name="unlock_disable_frp_warning_content_password">"A password protects your phone if it\u2019s lost or stolen"</string>
     <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Device protection features will not work without your password.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won\'t be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"A password protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This also deletes the fingerprint model stored on your device. You won\u2019t be able to use your fingerprint for authentication in apps."</string>
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face">"A password protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face for authentication in apps."</string>
+    <!-- Content of the dialog shown when the user removes the device lock password and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint">"A password protects your phone if it\u2019s lost or stolen.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
     <!-- Content of the dialog shown when the user removes the device lock of unknown type [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_unknown">"Device protection features will not work without your screen lock."</string>
     <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won\'t be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
-
-    <!-- Content of the dialog shown when the user removes the profile lock pattern [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pattern_profile">"Profile protection features will not work without your pattern."</string>
-    <!-- Content of the dialog shown when the user removes the profile lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pattern_fingerprint_profile">"Profile protection features will not work without your pattern.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won\'t be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
-    <!-- Content of the dialog shown when the user removes the profile lock PIN [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_profile">"Profile protection features will not work without your PIN."</string>
-    <!-- Content of the dialog shown when the user removes the profile lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_profile">"Profile protection features will not work without your PIN.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won\'t be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
-    <!-- Content of the dialog shown when the user removes the profile lock password [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_password_profile">"Profile protection features will not work without your password."</string>
-    <!-- Content of the dialog shown when the user removes the profile lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_password_fingerprint_profile">"Profile protection features will not work without your password.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won\'t be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
-    <!-- Content of the dialog shown when the user removes the profile lock of unknown type [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_unknown_profile">"Profile protection features will not work without your screen lock."</string>
-    <!-- Content of the dialog shown when the user removes the profile lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_unknown_fingerprint_profile">"Profile protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won\'t be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>This also deletes the fingerprint model stored on your device. You won\u2019t be able to use your fingerprint for authentication in apps."</string>
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face for authentication in apps."</string>
+    <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has face authentication and fingerprint enrolled [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
 
     <!-- Affirmative action of the dialog shown when the user removes the device lock [CHAR LIMIT=25] -->
     <string name="unlock_disable_frp_warning_ok">Yes, remove</string>
