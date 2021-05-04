@@ -71,7 +71,7 @@ public final class ConvertUtilsTest {
         when(mockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
         when(mockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
         when(mockBatteryEntry.getConsumerType())
-                .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+            .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
 
         final ContentValues values =
             ConvertUtils.convert(

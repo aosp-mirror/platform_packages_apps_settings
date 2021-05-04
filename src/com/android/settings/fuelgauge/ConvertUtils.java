@@ -102,9 +102,9 @@ public final class ConvertUtils {
             values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
                 Long.valueOf(entry.getTimeInBackgroundMs()));
             values.put(BatteryHistEntry.KEY_DRAIN_TYPE,
-                entry.getPowerComponentId());
+                Integer.valueOf(entry.getPowerComponentId()));
             values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
-                entry.getConsumerType());
+                Integer.valueOf(entry.getConsumerType()));
         } else {
             values.put(BatteryHistEntry.KEY_PACKAGE_NAME, FAKE_PACKAGE_NAME);
         }
