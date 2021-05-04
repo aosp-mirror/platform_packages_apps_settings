@@ -37,4 +37,9 @@ public class ExtraAppInfoFeatureProviderImpl implements
     public void setPackageName(String packageName) {
         return;
     }
+
+    @Override
+    public String getSummary(Context context) {
+        return "";
+    }
 }
