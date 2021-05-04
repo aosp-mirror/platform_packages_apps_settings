@@ -22,7 +22,7 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -69,11 +69,11 @@ public class AccessibilityButtonLocationPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_navigationGestureEnabled_returnDisabledDependentSetting() {
+    public void getAvailabilityStatus_navigationGestureEnabled_returnConditionallyUnavailable() {
         when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
                 .thenReturn(NAV_BAR_MODE_GESTURAL);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

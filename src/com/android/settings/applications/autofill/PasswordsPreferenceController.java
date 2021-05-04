@@ -44,7 +44,6 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
@@ -53,6 +52,7 @@ import com.android.internal.os.IResultReceiver;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.widget.AppPreference;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -116,7 +116,7 @@ public class PasswordsPreferenceController extends BasePreferenceController
             Context prefContext, @UserIdInt int user, PreferenceGroup group) {
         for (int i = 0; i < mServices.size(); i++) {
             final AutofillServiceInfo service = mServices.get(i);
-            final Preference pref = new Preference(prefContext);
+            final AppPreference pref = new AppPreference(prefContext);
             final ServiceInfo serviceInfo = service.getServiceInfo();
             pref.setTitle(serviceInfo.loadLabel(mPm));
             final Drawable icon =

@@ -29,9 +29,9 @@ import android.util.Log;
 
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.widget.AppSwitchPreference;
 
 import java.util.Collections;
 import java.util.List;
@@ -100,7 +100,7 @@ public class ResumableMediaAppsController extends BasePreferenceController {
         }
     }
 
-    class MediaSwitchPreference extends SwitchPreference {
+    class MediaSwitchPreference extends AppSwitchPreference {
         private String mPackageName;
 
         MediaSwitchPreference(Context context, String packageName) {

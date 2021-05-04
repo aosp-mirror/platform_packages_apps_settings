@@ -81,10 +81,10 @@ public class BatterySaverSettings extends DashboardFragment {
     // Updates the footer for this page.
     @VisibleForTesting
     void setupFooter() {
-        mFooterText =  new SpannableStringBuilder(getText(
-                com.android.internal.R.string.battery_saver_description_with_learn_more));
         mHelpUri = getString(R.string.help_url_battery_saver_settings);
         if (!TextUtils.isEmpty(mHelpUri)) {
+            mFooterText = new SpannableStringBuilder(getText(
+                    com.android.internal.R.string.battery_saver_description_with_learn_more));
             addHelpLink();
         }
     }
@@ -96,6 +96,7 @@ public class BatterySaverSettings extends DashboardFragment {
         if (pref != null) {
             SupportPageLearnMoreSpan.linkify(mFooterText, this, mHelpUri);
             pref.setTitle(mFooterText);
+            pref.setSelectable(false);
         }
     }
 
@@ -129,8 +130,6 @@ public class BatterySaverSettings extends DashboardFragment {
         @Override
         public void updateDrawState(TextPaint ds) {
             super.updateDrawState(ds);
-            // remove underline
-            ds.setUnderlineText(false);
         }
 
         /**

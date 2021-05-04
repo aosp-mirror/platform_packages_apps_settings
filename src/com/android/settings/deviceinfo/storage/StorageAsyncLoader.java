@@ -120,7 +120,9 @@ public class StorageAsyncLoader
 
             // This isn't quite right because it slams the first user by user id with the whole code
             // size, but this ensures that we count all apps seen once.
+            boolean isAddCodeBytesForFirstUserId = false;
             if (!mSeenPackages.contains(app.packageName)) {
+                isAddCodeBytesForFirstUserId = true;
                 blamedSize += stats.getCodeBytes();
                 mSeenPackages.add(app.packageName);
             }
@@ -130,13 +132,34 @@ public class StorageAsyncLoader
                     result.gamesSize += blamedSize;
                     break;
                 case CATEGORY_AUDIO:
+                    // TODO(b/170918505): Should revamp audio size calculation with the data
+                    // from media provider.
                     result.musicAppsSize += blamedSize;
+                    if (isAddCodeBytesForFirstUserId) {
+                        result.musicAppsSize -= stats.getCodeBytes();
+                    }
+
+                    result.otherAppsSize += blamedSize;
                     break;
                 case CATEGORY_VIDEO:
+                    // TODO(b/170918505): Should revamp video size calculation with the data
+                    // from media provider.
                     result.videoAppsSize += blamedSize;
+                    if (isAddCodeBytesForFirstUserId) {
+                        result.videoAppsSize -= stats.getCodeBytes();
+                    }
+
+                    result.otherAppsSize += blamedSize;
                     break;
                 case CATEGORY_IMAGE:
+                    // TODO(b/170918505): Should revamp image size calculation with the data
+                    // from media provider.
                     result.photosAppsSize += blamedSize;
+                    if (isAddCodeBytesForFirstUserId) {
+                        result.photosAppsSize -= stats.getCodeBytes();
+                    }
+
+                    result.otherAppsSize += blamedSize;
                     break;
                 default:
                     // The deprecated game flag does not set the category.

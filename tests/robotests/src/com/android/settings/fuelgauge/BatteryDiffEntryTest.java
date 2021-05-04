@@ -17,18 +17,17 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
-import android.content.Context;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.os.SystemBatteryConsumer;
-import android.os.UserManager;
+import android.os.BatteryConsumer;
 import android.os.UserHandle;
+import android.os.UserManager;
 
 import com.android.settings.R;
 
@@ -112,9 +111,9 @@ public final class BatteryDiffEntryTest {
     public void testLoadLabelAndIcon_forSystemBattery_returnExpectedResult() {
         // Generates fake testing data.
         final ContentValues values = getContentValuesWithType(
-            ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         values.put("drainType",
-            Integer.valueOf(SystemBatteryConsumer.DRAIN_TYPE_AMBIENT_DISPLAY));
+                Integer.valueOf(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);

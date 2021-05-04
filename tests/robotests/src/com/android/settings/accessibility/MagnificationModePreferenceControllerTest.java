@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
-
 import static com.android.settings.accessibility.AccessibilityEditDialogUtils.CustomButton;
 import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import static com.android.settings.accessibility.MagnificationModePreferenceController.MagnificationModeInfo;
@@ -25,41 +23,35 @@ import static com.android.settings.accessibility.MagnificationPreferenceFragment
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.DialogCreatable;
 import com.android.settings.R;
-import com.android.settings.testutils.shadow.ShadowDashboardFragment;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-
+/** Tests for {@link MagnificationModePreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowDashboardFragment.class)
 public class MagnificationModePreferenceControllerTest {
     private static final String PREF_KEY = "screen_magnification_mode";
     private static final int MAGNIFICATION_MODE_DEFAULT = MagnificationMode.ALL;
@@ -67,39 +59,38 @@ public class MagnificationModePreferenceControllerTest {
     @Rule
     public MockitoRule mocks = MockitoJUnit.rule();
 
-    @Mock
     private PreferenceScreen mScreen;
     private Context mContext;
-    private TestMagnificationSettingsFragment mFragment;
     private MagnificationModePreferenceController mController;
     private Preference mModePreference;
+    @Spy
+    private TestDialogHelper mDialogHelper = new TestDialogHelper();
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new MagnificationModePreferenceController(mContext, PREF_KEY);
-        mScreen = spy(new PreferenceScreen(mContext, null));
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        mScreen = preferenceManager.createPreferenceScreen(mContext);
         mModePreference = new Preference(mContext);
-        mFragment = spy(new TestMagnificationSettingsFragment(mController));
-
-        doReturn(mScreen).when(mFragment).getPreferenceScreen();
-        doReturn(mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS)).when(
-                mFragment).getChildFragmentManager();
-        mContext.setTheme(R.style.Theme_AppCompat);
-        doReturn(mModePreference).when(mScreen).findPreference(PREF_KEY);
+        mModePreference.setKey(PREF_KEY);
+        mScreen.addPreference(mModePreference);
         MagnificationCapabilities.setCapabilities(mContext, MAGNIFICATION_MODE_DEFAULT);
+        mController = new MagnificationModePreferenceController(mContext, PREF_KEY);
         showPreferenceOnTheScreen(null);
-        mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
     }
 
     @Test
-    public void settingsModeIsDefault_checkedModeInDialogIsDefault() {
+    public void clickPreference_settingsModeIsDefault_checkedModeInDialogIsDefault() {
+        mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
+
         assertThat(getCheckedModeFromDialog()).isEqualTo(
                 MAGNIFICATION_MODE_DEFAULT);
     }
 
     @Test
     public void choseModeIsDifferentFromInSettings_checkedModeInDialogIsExpected() {
+        mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
+
         performItemClickWith(MagnificationMode.WINDOW);
 
         assertThat(getCheckedModeFromDialog()).isEqualTo(MagnificationMode.WINDOW);
@@ -107,11 +98,11 @@ public class MagnificationModePreferenceControllerTest {
 
     @Test
     public void dialogIsReCreated_settingsModeIsAllAndChoseWindowMode_checkedModeIsWindow() {
-        showPreferenceOnTheScreen(null);
+        mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
         performItemClickWith(MagnificationMode.WINDOW);
 
         reshowPreferenceOnTheScreen();
-        mFragment.showDialog(MagnificationModePreferenceController.DIALOG_MAGNIFICATION_MODE);
+        mDialogHelper.showDialog(MagnificationModePreferenceController.DIALOG_MAGNIFICATION_MODE);
 
         assertThat(getCheckedModeFromDialog()).isEqualTo(
                 MagnificationMode.WINDOW);
@@ -120,24 +111,22 @@ public class MagnificationModePreferenceControllerTest {
     @Test
     public void chooseWindowMode_tripleTapEnabled_showSwitchShortcutDialog() {
         enableTripleTap();
+        mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
 
         performItemClickWith(MagnificationMode.WINDOW);
 
-        verify(mFragment).showDialog(
+        verify(mDialogHelper).showDialog(
                 MagnificationModePreferenceController.DIALOG_MAGNIFICATION_SWITCH_SHORTCUT);
     }
 
     @Test
     public void chooseModeAll_modeAllInSettingsAndTripleTapEnabled_notShowShortcutDialog() {
         enableTripleTap();
-        MagnificationCapabilities.setCapabilities(mContext,
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_ALL);
-        mFragment.onCreate(Bundle.EMPTY);
-        mFragment.onCreateDialog(MagnificationModePreferenceController.DIALOG_MAGNIFICATION_MODE);
+        mModePreference.getOnPreferenceClickListener().onPreferenceClick(mModePreference);
 
         performItemClickWith(MagnificationMode.ALL);
 
-        verify(mFragment, never()).showDialog(
+        verify(mDialogHelper, never()).showDialog(
                 MagnificationModePreferenceController.DIALOG_MAGNIFICATION_SWITCH_SHORTCUT);
     }
 
@@ -206,48 +195,38 @@ public class MagnificationModePreferenceControllerTest {
 
     private void reshowPreferenceOnTheScreen() {
         final Bundle bundle = new Bundle();
-        mFragment.onSaveInstanceState(bundle);
-        mFragment.onDetach();
+        mController.onSaveInstanceState(bundle);
         showPreferenceOnTheScreen(bundle);
-
     }
 
     private void showPreferenceOnTheScreen(Bundle savedInstanceState) {
-        mFragment.onAttach(mContext);
-        mFragment.onCreate(savedInstanceState);
+        mController.setDialogHelper(mDialogHelper);
+        mController.onCreate(savedInstanceState);
         mController.displayPreference(mScreen);
     }
 
-    private static class TestMagnificationSettingsFragment extends MagnificationSettingsFragment {
-
-        TestMagnificationSettingsFragment(AbstractPreferenceController... controllers) {
-            // Add given controllers for injection. Although controllers will be added in
-            // onAttach(). use(AbstractPreferenceController.class) returns the first added one.
-            for (int i = 0; i < controllers.length; i++) {
-                addPreferenceController(controllers[i]);
-            }
-        }
+    private static class TestDialogHelper implements DialogCreatable,
+            MagnificationModePreferenceController.DialogHelper {
+        private DialogCreatable mDialogDelegate;
 
         @Override
-        public void onCreate(Bundle icicle) {
-            super.onCreate(icicle);
-            // Simulate the observable behaviour because ShadowDashFragment doesn't call
-            // super.create.
-
-            getSettingsLifecycle().onCreate(icicle);
-            getSettingsLifecycle().handleLifecycleEvent(ON_CREATE);
-        }
-
-        @Override
-        protected void showDialog(int dialogId) {
-            super.showDialog(dialogId);
-            // In current fragment architecture, we could assume onCreateDialog is called directly.
+        public void showDialog(int dialogId) {
             onCreateDialog(dialogId);
         }
 
         @Override
-        protected void addPreferenceController(AbstractPreferenceController controller) {
-            super.addPreferenceController(controller);
+        public void setDialogDelegate(DialogCreatable delegate) {
+            mDialogDelegate = delegate;
+        }
+
+        @Override
+        public Dialog onCreateDialog(int dialogId) {
+            return mDialogDelegate.onCreateDialog(dialogId);
+        }
+
+        @Override
+        public int getDialogMetricsCategory(int dialogId) {
+            return mDialogDelegate.getDialogMetricsCategory(dialogId);
         }
     }
 }

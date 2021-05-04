@@ -280,8 +280,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     METHOD_GET_DYNAMIC_SUMMARY);
             refreshSummary(uri, preference);
             return createDynamicDataObserver(METHOD_GET_DYNAMIC_SUMMARY, uri, preference);
-        } else {
-            preference.setSummary(R.string.summary_placeholder);
         }
         return null;
     }
