@@ -15,14 +15,9 @@ package com.android.settings.fuelgauge;
 
 import android.annotation.IntDef;
 import android.content.ContentValues;
-import android.os.BatteryConsumer;
-import android.os.BatteryUsageStats;
 import android.content.Context;
-import android.os.SystemBatteryConsumer;
-import android.os.UidBatteryConsumer;
-import android.os.UserBatteryConsumer;
+import android.os.BatteryUsageStats;
 import android.os.UserHandle;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -79,61 +74,46 @@ public final class ConvertUtils {
 
     private ConvertUtils() {}
 
-    /** Gets consumer type from {@link BatteryConsumer}. */
-    @ConsumerType
-    public static int getConsumerType(BatteryConsumer consumer) {
-        if (consumer instanceof UidBatteryConsumer) {
-            return CONSUMER_TYPE_UID_BATTERY;
-        } else if (consumer instanceof UserBatteryConsumer) {
-            return CONSUMER_TYPE_USER_BATTERY;
-        } else if (consumer instanceof SystemBatteryConsumer) {
-            return CONSUMER_TYPE_SYSTEM_BATTERY;
-        } else {
-          return CONSUMER_TYPE_UNKNOWN;
-        }
-    }
-
-    /** Gets battery drain type for {@link SystemBatteryConsumer}. */
-    public static int getDrainType(BatteryConsumer consumer) {
-        if (consumer instanceof SystemBatteryConsumer) {
-            return ((SystemBatteryConsumer) consumer).getDrainType();
-        }
-        return INVALID_DRAIN_TYPE;
-    }
-
     public static ContentValues convert(
             BatteryEntry entry,
             BatteryUsageStats batteryUsageStats,
             int batteryLevel,
             int batteryStatus,
             int batteryHealth,
+            long bootTimestamp,
             long timestamp) {
         final ContentValues values = new ContentValues();
         if (entry != null && batteryUsageStats != null) {
-            values.put("uid", Long.valueOf(entry.getUid()));
-            values.put("userId",
+            values.put(BatteryHistEntry.KEY_UID, Long.valueOf(entry.getUid()));
+            values.put(BatteryHistEntry.KEY_USER_ID,
                 Long.valueOf(UserHandle.getUserId(entry.getUid())));
-            values.put("appLabel", entry.getLabel());
-            values.put("packageName", entry.getDefaultPackageName());
-            values.put("isHidden", Boolean.valueOf(entry.isHidden()));
-            values.put("totalPower",
+            values.put(BatteryHistEntry.KEY_APP_LABEL, entry.getLabel());
+            values.put(BatteryHistEntry.KEY_PACKAGE_NAME,
+                entry.getDefaultPackageName());
+            values.put(BatteryHistEntry.KEY_IS_HIDDEN, Boolean.valueOf(entry.isHidden()));
+            values.put(BatteryHistEntry.KEY_TOTAL_POWER,
                 Double.valueOf(batteryUsageStats.getConsumedPower()));
-            values.put("consumePower", Double.valueOf(entry.getConsumedPower()));
-            values.put("percentOfTotal", Double.valueOf(entry.percent));
-            values.put("foregroundUsageTimeInMs",
+            values.put(BatteryHistEntry.KEY_CONSUME_POWER,
+                Double.valueOf(entry.getConsumedPower()));
+            values.put(BatteryHistEntry.KEY_PERCENT_OF_TOTAL,
+                Double.valueOf(entry.percent));
+            values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
                 Long.valueOf(entry.getTimeInForegroundMs()));
-            values.put("backgroundUsageTimeInMs",
+            values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
                 Long.valueOf(entry.getTimeInBackgroundMs()));
-            values.put("drainType", getDrainType(entry.getBatteryConsumer()));
-            values.put("consumerType", getConsumerType(entry.getBatteryConsumer()));
+            values.put(BatteryHistEntry.KEY_DRAIN_TYPE,
+                entry.getPowerComponentId());
+            values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
+                entry.getConsumerType());
         } else {
-            values.put("packageName", FAKE_PACKAGE_NAME);
+            values.put(BatteryHistEntry.KEY_PACKAGE_NAME, FAKE_PACKAGE_NAME);
         }
-        values.put("timestamp", Long.valueOf(timestamp));
-        values.put("zoneId", TimeZone.getDefault().getID());
-        values.put("batteryLevel", Integer.valueOf(batteryLevel));
-        values.put("batteryStatus", Integer.valueOf(batteryStatus));
-        values.put("batteryHealth", Integer.valueOf(batteryHealth));
+        values.put(BatteryHistEntry.KEY_BOOT_TIMESTAMP, Long.valueOf(bootTimestamp));
+        values.put(BatteryHistEntry.KEY_TIMESTAMP, Long.valueOf(timestamp));
+        values.put(BatteryHistEntry.KEY_ZONE_ID, TimeZone.getDefault().getID());
+        values.put(BatteryHistEntry.KEY_BATTERY_LEVEL, Integer.valueOf(batteryLevel));
+        values.put(BatteryHistEntry.KEY_BATTERY_STATUS, Integer.valueOf(batteryStatus));
+        values.put(BatteryHistEntry.KEY_BATTERY_HEALTH, Integer.valueOf(batteryHealth));
         return values;
     }
 

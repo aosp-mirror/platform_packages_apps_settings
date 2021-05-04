@@ -44,12 +44,12 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.BatteryConsumer;
 import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.Build;
 import android.os.Process;
-import android.os.SystemBatteryConsumer;
 import android.os.SystemClock;
 
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
@@ -113,7 +113,7 @@ public class BatteryUtilsTest {
     @Mock
     private BatteryUsageStats mBatteryUsageStats;
     @Mock
-    private SystemBatteryConsumer mSystemBatteryConsumer;
+    private BatteryConsumer mAggregateBatteryConsumer;
     @Mock
     private BatteryInfo mBatteryInfo;
     @Mock
@@ -218,53 +218,47 @@ public class BatteryUtilsTest {
 
     @Test
     public void testShouldHideSystemConsumer_TypeIdle_ReturnTrue() {
-        when(mSystemBatteryConsumer.getDrainType())
-                .thenReturn(SystemBatteryConsumer.DRAIN_TYPE_IDLE);
-        assertThat(mBatteryUtils.shouldHideSystemBatteryConsumer(mSystemBatteryConsumer)).isTrue();
+        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
+                BatteryConsumer.POWER_COMPONENT_IDLE)).isTrue();
     }
 
     @Test
     public void testShouldHideSystemConsumer_TypeMobileRadio_ReturnTrue() {
-        when(mSystemBatteryConsumer.getDrainType())
-                .thenReturn(SystemBatteryConsumer.DRAIN_TYPE_MOBILE_RADIO);
-        assertThat(mBatteryUtils.shouldHideSystemBatteryConsumer(mSystemBatteryConsumer)).isTrue();
+        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
+                BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO)).isTrue();
     }
 
     @Test
     public void testShouldHideSystemConsumer_TypeScreen_ReturnTrue() {
-        when(mSystemBatteryConsumer.getDrainType())
-                .thenReturn(SystemBatteryConsumer.DRAIN_TYPE_SCREEN);
-        assertThat(mBatteryUtils.shouldHideSystemBatteryConsumer(mSystemBatteryConsumer)).isTrue();
+        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
+                BatteryConsumer.POWER_COMPONENT_SCREEN)).isTrue();
     }
 
     @Test
     public void testShouldHideSystemConsumer_TypeBluetooth_ReturnTrue() {
-        when(mSystemBatteryConsumer.getDrainType())
-                .thenReturn(SystemBatteryConsumer.DRAIN_TYPE_BLUETOOTH);
-        assertThat(mBatteryUtils.shouldHideSystemBatteryConsumer(mSystemBatteryConsumer)).isTrue();
-    }
+        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
+                BatteryConsumer.POWER_COMPONENT_BLUETOOTH)).isTrue();    }
 
     @Test
     public void testShouldHideSystemConsumer_TypeWifi_ReturnTrue() {
-        when(mSystemBatteryConsumer.getDrainType())
-                .thenReturn(SystemBatteryConsumer.DRAIN_TYPE_WIFI);
-        assertThat(mBatteryUtils.shouldHideSystemBatteryConsumer(mSystemBatteryConsumer)).isTrue();
+        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
+                BatteryConsumer.POWER_COMPONENT_WIFI)).isTrue();
     }
 
     @Test
     public void testShouldHideSystemConsumer_LowPower_ReturnTrue() {
-        when(mSystemBatteryConsumer.getDrainType())
-                .thenReturn(SystemBatteryConsumer.DRAIN_TYPE_FLASHLIGHT);
-        when(mSystemBatteryConsumer.getConsumedPower()).thenReturn(0.0005);
-        assertThat(mBatteryUtils.shouldHideSystemBatteryConsumer(mSystemBatteryConsumer)).isTrue();
+        when(mAggregateBatteryConsumer.getConsumedPower(
+                BatteryConsumer.POWER_COMPONENT_FLASHLIGHT)).thenReturn(0.0005);
+        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
+                BatteryConsumer.POWER_COMPONENT_FLASHLIGHT)).isTrue();
     }
 
     @Test
     public void testShouldHideSystemConsumer_HighPower_ReturnFalse() {
-        when(mSystemBatteryConsumer.getDrainType())
-                .thenReturn(SystemBatteryConsumer.DRAIN_TYPE_FLASHLIGHT);
-        when(mSystemBatteryConsumer.getConsumedPower()).thenReturn(0.5);
-        assertThat(mBatteryUtils.shouldHideSystemBatteryConsumer(mSystemBatteryConsumer)).isFalse();
+        when(mAggregateBatteryConsumer.getConsumedPower(
+                BatteryConsumer.POWER_COMPONENT_FLASHLIGHT)).thenReturn(0.5);
+        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
+                BatteryConsumer.POWER_COMPONENT_FLASHLIGHT)).isFalse();
     }
 
     @Test

@@ -15,10 +15,8 @@ package com.android.settings.fuelgauge;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
 
 import java.time.Duration;
-import java.util.TimeZone;
 
 /** A container class to carry data from {@link ContentValues}. */
 public class BatteryHistEntry {
@@ -30,6 +28,8 @@ public class BatteryHistEntry {
     public static final String KEY_APP_LABEL = "appLabel";
     public static final String KEY_PACKAGE_NAME = "packageName";
     public static final String KEY_IS_HIDDEN = "isHidden";
+    // Device booting elapsed time from SystemClock.elapsedRealtime().
+    public static final String KEY_BOOT_TIMESTAMP = "bootTimestamp";
     public static final String KEY_TIMESTAMP = "timestamp";
     public static final String KEY_ZONE_ID = "zoneId";
     public static final String KEY_TOTAL_POWER = "totalPower";
@@ -50,6 +50,7 @@ public class BatteryHistEntry {
     // Whether the data is represented as system component or not?
     public final boolean mIsHidden;
     // Records the timestamp relative information.
+    public final long mBootTimestamp;
     public final long mTimestamp;
     public final String mZoneId;
     // Records the battery usage relative information.
@@ -58,7 +59,7 @@ public class BatteryHistEntry {
     public final double mPercentOfTotal;
     public final long mForegroundUsageTimeInMs;
     public final long mBackgroundUsageTimeInMs;
-    public final int mDrainType;
+    public final int mPowerComponentId;
     public final int mConsumerType;
     // Records the battery intent relative information.
     public final int mBatteryLevel;
@@ -74,6 +75,7 @@ public class BatteryHistEntry {
         mAppLabel = getString(values, KEY_APP_LABEL);
         mPackageName = getString(values, KEY_PACKAGE_NAME);
         mIsHidden = getBoolean(values, KEY_IS_HIDDEN);
+        mBootTimestamp = getLong(values, KEY_BOOT_TIMESTAMP);
         mTimestamp = getLong(values, KEY_TIMESTAMP);
         mZoneId = getString(values, KEY_ZONE_ID);
         mTotalPower = getDouble(values, KEY_TOTAL_POWER);
@@ -81,7 +83,7 @@ public class BatteryHistEntry {
         mPercentOfTotal = getDouble(values, KEY_PERCENT_OF_TOTAL);
         mForegroundUsageTimeInMs = getLong(values, KEY_FOREGROUND_USAGE_TIME);
         mBackgroundUsageTimeInMs = getLong(values, KEY_BACKGROUND_USAGE_TIME);
-        mDrainType = getInteger(values, KEY_DRAIN_TYPE);
+        mPowerComponentId = getInteger(values, KEY_DRAIN_TYPE);
         mConsumerType = getInteger(values, KEY_CONSUMER_TYPE);
         mBatteryLevel = getInteger(values, KEY_BATTERY_LEVEL);
         mBatteryStatus = getInteger(values, KEY_BATTERY_STATUS);
@@ -94,6 +96,7 @@ public class BatteryHistEntry {
         mAppLabel = getString(cursor, KEY_APP_LABEL);
         mPackageName = getString(cursor, KEY_PACKAGE_NAME);
         mIsHidden = getBoolean(cursor, KEY_IS_HIDDEN);
+        mBootTimestamp = getLong(cursor, KEY_BOOT_TIMESTAMP);
         mTimestamp = getLong(cursor, KEY_TIMESTAMP);
         mZoneId = getString(cursor, KEY_ZONE_ID);
         mTotalPower = getDouble(cursor, KEY_TOTAL_POWER);
@@ -101,7 +104,7 @@ public class BatteryHistEntry {
         mPercentOfTotal = getDouble(cursor, KEY_PERCENT_OF_TOTAL);
         mForegroundUsageTimeInMs = getLong(cursor, KEY_FOREGROUND_USAGE_TIME);
         mBackgroundUsageTimeInMs = getLong(cursor, KEY_BACKGROUND_USAGE_TIME);
-        mDrainType = getInteger(cursor, KEY_DRAIN_TYPE);
+        mPowerComponentId = getInteger(cursor, KEY_DRAIN_TYPE);
         mConsumerType = getInteger(cursor, KEY_CONSUMER_TYPE);
         mBatteryLevel = getInteger(cursor, KEY_BATTERY_LEVEL);
         mBatteryStatus = getInteger(cursor, KEY_BATTERY_STATUS);
@@ -136,7 +139,7 @@ public class BatteryHistEntry {
                     mKey = Long.toString(mUid);
                     break;
                 case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
-                    mKey = "S|" + mDrainType;
+                    mKey = "S|" + mPowerComponentId;
                     break;
                 case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
                     mKey = "U|" + mUserId;
@@ -153,12 +156,13 @@ public class BatteryHistEntry {
             .append("\nBatteryHistEntry{")
             .append(String.format("\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
                   mPackageName, mAppLabel, mUid, mUserId, mIsHidden))
-            .append(String.format("\n\ttimestamp=%s|zoneId=%s", recordAtDateTime, mZoneId))
+            .append(String.format("\n\ttimestamp=%s|zoneId=%s|bootTimestamp=%d",
+                  recordAtDateTime, mZoneId, Duration.ofMillis(mBootTimestamp).getSeconds()))
             .append(String.format("\n\tusage=%f|total=%f|consume=%f|elapsedTime=%d|%d",
                   mPercentOfTotal, mTotalPower, mConsumePower,
                   Duration.ofMillis(mForegroundUsageTimeInMs).getSeconds(),
                   Duration.ofMillis(mBackgroundUsageTimeInMs).getSeconds()))
-            .append(String.format("\n\tdrain=%d|consumer=%d", mDrainType, mConsumerType))
+            .append(String.format("\n\tdrain=%d|consumer=%d", mPowerComponentId, mConsumerType))
             .append(String.format("\n\tbattery=%d|status=%d|health=%d\n}",
                   mBatteryLevel, mBatteryStatus, mBatteryHealth));
         return builder.toString();
@@ -249,5 +253,4 @@ public class BatteryHistEntry {
         mIsValidEntry = false;
         return false;
     }
-
 }
