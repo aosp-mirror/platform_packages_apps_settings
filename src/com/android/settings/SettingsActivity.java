@@ -219,7 +219,7 @@ public class SettingsActivity extends SettingsBaseActivity
     private String getMetricsTag() {
         String tag = null;
         if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_FRAGMENT)) {
-            tag = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+            tag = getInitialFragmentName(getIntent());
         }
         if (TextUtils.isEmpty(tag)) {
             Log.w(LOG_TAG, "MetricsTag is invalid " + tag);
@@ -262,7 +262,7 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         // Getting Intent properties can only be done after the super.onCreate(...)
-        final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
+        final String initialFragmentName = getInitialFragmentName(intent);
 
         // This is a "Sub Settings" when:
         // - this is a real SubSettings
@@ -361,6 +361,12 @@ public class SettingsActivity extends SettingsBaseActivity
         if (DEBUG_TIMING) {
             Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
+    }
+
+    /** Returns the initial fragment name that the activity will launch. */
+    @VisibleForTesting
+    public String getInitialFragmentName(Intent intent) {
+        return intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
     }
 
     @Override
