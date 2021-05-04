@@ -425,10 +425,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"用指纹解锁手机的安全性可能不及高安全系数的图案或 PIN 码"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"运作方式"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"指纹解锁功能会为您创建一个具有唯一性的指纹模型，用于在身份验证期间识别您的身份。为了在设置过程中创建指纹模型，您需要拍摄指纹不同位置的图片。"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (9170127808407017743) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_4 (4579083553690400908) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"手机还会在您与指纹解锁功能互动时获取图片，并用获取的图片来更新您的指纹模型。系统绝不会存储创建指纹模型时所用的图片，但会将指纹模型安全地存储在您的手机上，并且绝不会将其传送到该手机以外的其他位置。所有处理都是在您的手机上安全进行。"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"您可以随时在“设置”部分删除您的指纹模型或关闭指纹解锁功能。指纹模型会存储在手机上，直到您将其删除为止。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"请在每次放手指时略微更改手指的位置"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"请将指纹中间部位放在图标上"</string>
@@ -1627,8 +1625,7 @@
     <string name="apn_settings" msgid="4295467389400441299">"APN"</string>
     <string name="apn_edit" msgid="2003683641840248741">"修改接入点"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"未设置"</string>
-    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
-    <skip />
+    <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"未设置"</string>
     <string name="apn_name" msgid="6677695784108157953">"名称"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"代理"</string>
@@ -2733,26 +2730,18 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"电池用量"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"自充满电后"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"管理电池用量"</string>
-    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
-    <skip />
-    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
-    <skip />
+    <string name="battery_total_and_bg_usage" msgid="7808189707718974808">"共 <xliff:g id="TIME_0">^1</xliff:g> • 过去 24 小时内在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>"</string>
+    <string name="battery_total_and_bg_usage_with_period" msgid="7938034545486503036">"共 <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^3</xliff:g>之间在后台使用了 <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"过去 24 小时内共使用了不到 1 分钟"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g>之间共使用了不到 1 分钟"</string>
-    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
-    <skip />
-    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
-    <skip />
+    <string name="battery_bg_usage_less_minute" msgid="90932588167097641">"过去 24 小时内在后台使用了不到 1 分钟"</string>
+    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"<xliff:g id="TIME_PERIOD">^1</xliff:g>之间在后台使用了不到 1 分钟"</string>
     <string name="battery_total_usage" msgid="2662725472478185867">"过去 24 小时内共使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g>之间共使用了 <xliff:g id="TIME_0">^1</xliff:g>"</string>
-    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
-    <skip />
-    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
-    <skip />
+    <string name="battery_bg_usage" msgid="2983050956970659511">"过去 24 小时内在后台使用了 <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g>之间在后台使用了 <xliff:g id="TIME_0">^1</xliff:g>"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="4158686147238415647">"共 <xliff:g id="TIME">^1</xliff:g> • 过去 24 小时内在后台使用了不到 1 分钟"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="8677646584258593395">"共 <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^2</xliff:g>之间在后台使用了不到 1 分钟"</string>
     <string name="battery_not_usage" msgid="8417901856028909227">"过去 24 小时内未使用过"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"系统会根据设备使用情况估算电池的剩余续航时间"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"预计剩余时间"</string>
