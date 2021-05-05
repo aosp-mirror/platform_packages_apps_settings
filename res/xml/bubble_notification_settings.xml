@@ -18,20 +18,16 @@
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:title="@string/bubbles_app_toggle_title">
 
+        <com.android.settingslib.widget.MainSwitchPreference
+            android:key="global_notification_bubbles"
+            android:title="@string/bubbles_main_switch_title"
+            settings:controller="com.android.settings.notification.BubbleNotificationPreferenceController"/>
+
         <com.android.settings.widget.VideoPreference
             android:key="bubbles_illustration"
             android:title="@string/summary_placeholder"
             settings:animation="@raw/bubble_notification_animation"
             settings:controller="com.android.settings.widget.VideoPreferenceController"
             android:persistent="false" />
-
-        <!-- Notification bubbles -->
-        <SwitchPreference
-            android:key="global_notification_bubbles"
-            android:icon="@drawable/ic_create_bubble"
-            settings:allowDividerAbove="true"
-            android:title="@string/notifications_bubble_setting_title"
-            android:summary="@string/notifications_bubble_setting_description"
-            settings:controller="com.android.settings.notification.BubbleNotificationPreferenceController"/>
 
 </PreferenceScreen>
