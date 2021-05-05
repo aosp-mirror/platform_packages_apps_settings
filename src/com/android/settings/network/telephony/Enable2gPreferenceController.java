@@ -71,6 +71,10 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     @Override
     public int getAvailabilityStatus(int subId) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        if (mTelephonyManager == null) {
+            Log.w(LOG_TAG, "Telephony manager not yet initialized");
+            mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        }
         boolean visible =
                 SubscriptionManager.isUsableSubscriptionId(subId)
                 && carrierConfig != null
