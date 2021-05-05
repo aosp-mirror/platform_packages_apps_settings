@@ -28,6 +28,8 @@ import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 
+import com.google.android.setupdesign.util.ThemeHelper;
+
 /**
  * Top-level Settings activity
  */
@@ -164,6 +166,7 @@ public class Settings extends SettingsActivity {
         @Override
         protected void onCreate(Bundle savedState) {
             setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            ThemeHelper.trySetDynamicColor(this);
             super.onCreate(savedState);
         }
 
@@ -176,6 +179,7 @@ public class Settings extends SettingsActivity {
         @Override
         protected void onCreate(Bundle savedState) {
             setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            ThemeHelper.trySetDynamicColor(this);
             super.onCreate(savedState);
         }
 
