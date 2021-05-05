@@ -261,12 +261,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private DynamicDataObserver bindSummaryAndGetObserver(Preference preference, Tile tile) {
-        // Skip binding homepage tile summaries for silky home.
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)
-                && TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
-            return null;
-        }
-
         final CharSequence summary = tile.getSummary(mContext);
         if (summary != null) {
             preference.setSummary(summary);
