@@ -121,6 +121,7 @@ public abstract class ManageablePreference extends GearPreference {
             final String alwaysOnString = res.getString(R.string.vpn_always_on_summary_active);
             summary = TextUtils.isEmpty(summary) ? alwaysOnString : summary + " / "
                     + alwaysOnString;
+            setSummary(summary);
         } else {
             setSummary(summary);
         }
