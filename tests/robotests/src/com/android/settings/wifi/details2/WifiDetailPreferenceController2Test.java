@@ -1274,6 +1274,18 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
+    public void forgetNetwork_activityGone_ignoreFinish() {
+        setUpForConnectedNetwork();
+        setUpSpyController();
+        displayAndResume();
+        when(mMockFragment.getActivity()).thenReturn(null);
+
+        mForgetClickListener.getValue().onClick(null);
+
+        verify(mMockActivity, never()).finish();
+    }
+
+    @Test
     public void forgetNetwork_standardWifiNetwork_forget() {
         setUpForConnectedNetwork();
         setUpSpyController();
