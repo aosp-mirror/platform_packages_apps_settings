@@ -39,9 +39,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.accounts.AvatarViewMixin;
 import com.android.settings.core.FeatureFlags;
-import com.android.settings.core.HideNonSystemOverlayMixin;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
 public class SettingsHomepageActivity extends FragmentActivity {
