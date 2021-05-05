@@ -34,4 +34,9 @@ public interface ExtraAppInfoFeatureProvider {
      * Sets the package name
      */
     void setPackageName(String packageName);
+
+    /**
+     * gets the summary name
+     */
+    String getSummary(Context context);
 }

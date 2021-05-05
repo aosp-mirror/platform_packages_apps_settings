@@ -425,7 +425,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Хурууныхаа хээг ашиглан утасныхаа түгжээг тайлах нь хүчтэй хээ эсвэл ПИН-ээс хамгаалалт багатай байж болзошгүй"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Энэ хэрхэн ажилладаг вэ?"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"Хурууны хээгээр тайлах онцлог нь таныг баталгаажуулалтын үеэр танихын тулд таны хурууны хээний давтагдашгүй загварыг үүсгэнэ. Тохируулгын үеэр энэ хурууны хээний загварыг үүсгэхийн тулд та хурууныхаа хээний зургийг өөр өөр байрлалаас авна."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"Таны хурууны хээний загварыг шинэчлэхийн тулд тухайн утас таны Хурууны хээгээр тайлах онцлогтой хийсэн саяхны харилцан үйлдлийн зургуудыг мөн ашиглана. Таны хурууны хээний загварыг үүсгэхэд ашигласан зургийг хэзээ ч хадгалдаггүй хэдий ч хурууны хээний загварыг утсанд тань аюулгүйгээр хадгалдаг бөгөөд утсанд үлддэг. Бүх боловсруулалтыг таны утсан дээр аюулгүйгээр хийнэ."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"Таны хурууны хээний загварыг шинэчлэхийн тулд тухайн утас таны Хурууны хээгээр түгжээ тайлах онцлогтой хийсэн саяхны харилцан үйлдлийн зургуудыг мөн ашиглана. Таны хурууны хээний загварыг үүсгэхэд ашигласан зургийг хэзээ ч хадгалдаггүй хэдий ч хурууны хээний загварыг утсанд тань аюулгүйгээр хадгалдаг бөгөөд утсанд үлддэг. Бүх боловсруулалтыг таны утсан дээр аюулгүйгээр хийнэ."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Та хүссэн үедээ Тохиргоо хэсэгт хурууны хээний загварыг устгах эсвэл хурууны хээгээр түгжээ тайлах онцлогийг унтраах боломжтой. Таныг хурууны хээний загварыг устгах хүртэл үүнийг утсан дээр хадгална."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Хурууныхаа байрлалыг тухай бүрд бага зэрэг өөрчилнө үү"</string>
@@ -1625,8 +1625,7 @@
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Хандалтын цэгийг засах"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Тохируулаагүй"</string>
-    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
-    <skip />
+    <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"Тохируулаагүй"</string>
     <string name="apn_name" msgid="6677695784108157953">"Нэр"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Прокси"</string>
@@ -2731,26 +2730,18 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Батарей ашиглалт"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Бүрэн цэнэглэснээс хойш"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Батарей ашиглалтыг удирдах"</string>
-    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
-    <skip />
-    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
-    <skip />
+    <string name="battery_total_and_bg_usage" msgid="7808189707718974808">"Нийт <xliff:g id="TIME_0">^1</xliff:g> • өнгөрсөн 24 цагийн турш дэвсгэрт <xliff:g id="TIME_1">^2</xliff:g> ашигласан"</string>
+    <string name="battery_total_and_bg_usage_with_period" msgid="7938034545486503036">"Нийт <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^3</xliff:g>-н турш дэвсгэрт <xliff:g id="TIME_1">^2</xliff:g> ашигласан"</string>
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Өнгөрсөн 24 цагийн турш нийт нэг минутаас бага хугацаанд ашигласан"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"<xliff:g id="TIME_PERIOD">^1</xliff:g>-н турш нийт нэг минутаас бага хугацаанд ашигласан"</string>
-    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
-    <skip />
-    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
-    <skip />
+    <string name="battery_bg_usage_less_minute" msgid="90932588167097641">"Өнгөрсөн 24 цагийн турш дэвсгэрт нэг минутаас бага хугацаанд ашигласан"</string>
+    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"<xliff:g id="TIME_PERIOD">^1</xliff:g>-н турш дэвсгэрт нэг минутаас бага хугацаанд ашигласан"</string>
     <string name="battery_total_usage" msgid="2662725472478185867">"Өнгөрсөн 24 цагийн турш нийт <xliff:g id="TIME">^1</xliff:g> ашигласан"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g>-н турш нийт <xliff:g id="TIME_0">^1</xliff:g> ашигласан"</string>
-    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
-    <skip />
-    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
-    <skip />
+    <string name="battery_bg_usage" msgid="2983050956970659511">"Өнгөрсөн 24 цагийн турш дэвсгэрт <xliff:g id="TIME">^1</xliff:g> ашигласан"</string>
+    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g>-н турш дэвсгэрт <xliff:g id="TIME_0">^1</xliff:g> ашигласан"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="4158686147238415647">"Нийт <xliff:g id="TIME">^1</xliff:g> • өнгөрсөн 24 цагийн турш дэвсгэрт нэг минутаас бага хугацаанд ашигласан"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="8677646584258593395">"Нийт <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_PERIOD">^2</xliff:g>-н турш дэвсгэрт нэг минутаас бага хугацаанд ашигласан"</string>
     <string name="battery_not_usage" msgid="8417901856028909227">"Өнгөрсөн 24 цагийн турш ашиглаагүй"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Таны төхөөрөмжийн ашиглалтад үндэслэн батарейны үлдсэн түвшнийг тооцдог"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Барагцаалсан үлдсэн хугацаа"</string>
