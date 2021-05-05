@@ -16,6 +16,10 @@
 package com.android.settings.biometrics.combination;
 
 import android.content.Context;
+import android.hardware.face.FaceManager;
+import android.hardware.fingerprint.FingerprintManager;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -30,6 +34,10 @@ public class CombinedBiometricStatusPreferenceController extends
         BiometricStatusPreferenceController {
     private static final String KEY_BIOMETRIC_SETTINGS = "biometric_settings";
 
+    @Nullable
+    FingerprintManager mFingerprintManager;
+    @Nullable
+    FaceManager mFaceManager;
 
     public CombinedBiometricStatusPreferenceController(Context context) {
         this(context, KEY_BIOMETRIC_SETTINGS);
@@ -37,6 +45,8 @@ public class CombinedBiometricStatusPreferenceController extends
 
     public CombinedBiometricStatusPreferenceController(Context context, String key) {
         super(context, key);
+        mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
+        mFaceManager = Utils.getFaceManagerOrNull(context);
     }
 
     @Override
@@ -51,12 +61,34 @@ public class CombinedBiometricStatusPreferenceController extends
 
     @Override
     protected String getSummaryTextEnrolled() {
-        return mContext.getString(R.string.security_settings_biometric_preference_summary);
+        // Note that this is currently never called (see the super class)
+        return mContext.getString(
+                R.string.security_settings_biometric_preference_summary_none_enrolled);
     }
 
     @Override
     protected String getSummaryTextNoneEnrolled() {
-        return mContext.getString(R.string.security_settings_biometric_preference_summary);
+        final int numFingerprintsEnrolled = mFingerprintManager != null ?
+                mFingerprintManager.getEnrolledFingerprints(getUserId()).size() : 0;
+        final boolean faceEnrolled = mFaceManager != null
+                && mFaceManager.hasEnrolledTemplates(getUserId());
+
+        if (faceEnrolled && numFingerprintsEnrolled > 1) {
+            return mContext.getString(
+                    R.string.security_settings_biometric_preference_summary_both_fp_multiple);
+        } else if (faceEnrolled && numFingerprintsEnrolled == 1) {
+            return mContext.getString(
+                    R.string.security_settings_biometric_preference_summary_both_fp_single);
+        } else if (faceEnrolled) {
+            return mContext.getString(R.string.security_settings_face_preference_summary);
+        } else if (numFingerprintsEnrolled > 0) {
+            return mContext.getResources().getQuantityString(
+                    R.plurals.security_settings_fingerprint_preference_summary,
+                    numFingerprintsEnrolled, numFingerprintsEnrolled);
+        } else {
+            return mContext.getString(
+                    R.string.security_settings_biometric_preference_summary_none_enrolled);
+        }
     }
 
     @Override

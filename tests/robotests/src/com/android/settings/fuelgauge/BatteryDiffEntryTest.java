@@ -111,9 +111,9 @@ public final class BatteryDiffEntryTest {
     public void testLoadLabelAndIcon_forSystemBattery_returnExpectedResult() {
         // Generates fake testing data.
         final ContentValues values = getContentValuesWithType(
-                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+            ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         values.put("drainType",
-                Integer.valueOf(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY));
+            Integer.valueOf(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY));
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);

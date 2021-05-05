@@ -1625,8 +1625,7 @@
     <string name="apn_settings" msgid="4295467389400441299">"APNak"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Editatu sarbide-puntua"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Ezarri gabe"</string>
-    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
-    <skip />
+    <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"Ez da ezarri"</string>
     <string name="apn_name" msgid="6677695784108157953">"Izena"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Proxya"</string>
@@ -2731,26 +2730,18 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Bateria-erabilera"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Guztiz kargatu zenetik"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Kudeatu bateria-erabilera"</string>
-    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
-    <skip />
-    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
-    <skip />
+    <string name="battery_total_and_bg_usage" msgid="7808189707718974808">"Guztira: <xliff:g id="TIME_0">^1</xliff:g> • Atzeko planoko erabilera azken 24 orduetan: <xliff:g id="TIME_1">^2</xliff:g>"</string>
+    <string name="battery_total_and_bg_usage_with_period" msgid="7938034545486503036">"<xliff:g id="TIME_0">^1</xliff:g> guztira • <xliff:g id="TIME_1">^2</xliff:g> atzeko planoan <xliff:g id="TIME_PERIOD">^3</xliff:g> bitartean"</string>
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Minutu bat baino gutxiago guztira azken 24 orduetan"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Minutu bat baino gutxiago guztira <xliff:g id="TIME_PERIOD">^1</xliff:g> bitartean"</string>
-    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
-    <skip />
-    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
-    <skip />
+    <string name="battery_bg_usage_less_minute" msgid="90932588167097641">"Minutu bat baino gutxiago atzeko planoan azken 24 orduetan"</string>
+    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Minutu bat baino gutxiago atzeko planoan <xliff:g id="TIME_PERIOD">^1</xliff:g> bitartean"</string>
     <string name="battery_total_usage" msgid="2662725472478185867">"<xliff:g id="TIME">^1</xliff:g> guztira azken 24 orduetan"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> guztira <xliff:g id="TIME_PERIOD">^2</xliff:g> bitartean"</string>
-    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
-    <skip />
-    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
-    <skip />
+    <string name="battery_bg_usage" msgid="2983050956970659511">"<xliff:g id="TIME">^1</xliff:g> atzeko planoan azken 24 orduetan"</string>
+    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> atzeko planoan <xliff:g id="TIME_PERIOD">^2</xliff:g> bitartean"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="4158686147238415647">"<xliff:g id="TIME">^1</xliff:g> guztira • Minutu bat baino gutxiago atzeko planoan azken 24 orduetan"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="8677646584258593395">"<xliff:g id="TIME_0">^1</xliff:g> guztira • Minutu bat baino gutxiago atzeko planoan <xliff:g id="TIME_PERIOD">^2</xliff:g> bitartean"</string>
     <string name="battery_not_usage" msgid="8417901856028909227">"Erabilerarik ez azken 24 orduetan"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Gailuaren erabileran oinarritzen da gelditzen den bateriaren aurreikuspena"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geratzen den denbora, gutxi gorabehera"</string>
@@ -4760,7 +4751,7 @@
     <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Deitu laguntza behar izanez gero"</string>
     <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Laguntza behar izanez gero erabili beharreko zenbakia"</string>
     <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>. Sakatu aldatzeko."</string>
-    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Larrialdi-zerbitzuetakoa ez den zenbaki bat idazten baduzu:\n • Gailuak desblokeatuta egon beharko du SOS larrialdia erabiltzeko.\n • Baliteke deiari inork ez erantzutea."</string>
+    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Larrialdi-zerbitzuetakoa ez den zenbaki bat markatzen baduzu:\n • Gailuak desblokeatuta egon beharko du SOS larrialdia erabiltzeko.\n • Baliteke deiari inork ez erantzutea."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Pasatu hatza sentsoretik jakinarazpenak ikusteko"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Pasatu hatza sentsoretik"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Jakinarazpenei begiratu bat emateko, pasatu hatza behera telefonoaren atzealdeko hatz-marken sentsorean."</string>
