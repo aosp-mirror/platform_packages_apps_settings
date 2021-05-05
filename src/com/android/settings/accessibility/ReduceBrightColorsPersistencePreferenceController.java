@@ -20,6 +20,8 @@ import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.TogglePreferenceController;
 
 /** PreferenceController for persisting feature activation state after a restart. */
@@ -53,5 +55,11 @@ public class ReduceBrightColorsPersistencePreferenceController extends TogglePre
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.REDUCE_BRIGHT_COLORS_PERSIST_ACROSS_REBOOTS, (isChecked ? 1 : 0));
+    }
+
+    @Override
+    public final void updateState(Preference preference) {
+        super.updateState(preference);
+        preference.setEnabled(mColorDisplayManager.isReduceBrightColorsActivated());
     }
 }

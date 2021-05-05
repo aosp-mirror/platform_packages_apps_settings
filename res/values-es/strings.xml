@@ -425,8 +425,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Es posible que usar la huella digital para desbloquear el teléfono sea menos seguro que un buen patrón o PIN"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Cómo funciona"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"El desbloqueo con huella digital crea un modelo único de tu huella digital para reconocerte cuando te autenticas. Para crear este modelo de huella digital durante la configuración, tendrás que capturar imágenes de tu huella digital desde diferentes posiciones."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"El teléfono también usará imágenes de cuando utilizas el desbloqueo mediante huella digital para actualizar el modelo de tu huella digital. Las imágenes usadas para crear el modelo de tu huella digital nunca se guardan, pero el modelo en sí se almacena de manera segura en tu teléfono y nunca sale de él. Todos los procesos se realizan de forma segura en el teléfono."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Puedes eliminar tu modelo de huella digital, o desactivar el desbloqueo mediante huella digital en cualquier momento desde Ajustes. Los modelos de huella digital se almacenan en el teléfono hasta que los eliminas."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"El teléfono también usará imágenes de cuando utilizas el desbloqueo mediante huella digital para actualizar el modelo de tu huella digital. Las imágenes usadas para crear el modelo nunca se guardan, pero el modelo en sí se almacena de manera segura en tu teléfono y nunca sale de él. Todos los procesos se llevan a cabo de forma segura en el teléfono."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Puedes eliminar el modelo de tu huella digital o desactivar el desbloqueo mediante huella digital cuando quieras desde Ajustes. Los modelos de huella digital se almacenan en el teléfono hasta que los eliminas."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Cambia ligeramente el dedo de posición cada vez"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Tapa el icono con el centro de la yema del dedo"</string>
@@ -1625,8 +1625,7 @@
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Editar punto de acceso"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Sin establecer"</string>
-    <!-- no translation found for apn_not_set_for_mvno (1141490067313964640) -->
-    <skip />
+    <string name="apn_not_set_for_mvno" msgid="1141490067313964640">"Sin configurar"</string>
     <string name="apn_name" msgid="6677695784108157953">"Nombre"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Proxy"</string>
@@ -2123,9 +2122,9 @@
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Ajustes"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Teclados"</string>
-    <string name="virtual_keyboard_category" msgid="2339505603075527212">"Teclado del teléfono"</string>
+    <string name="virtual_keyboard_category" msgid="2339505603075527212">"Teclado en pantalla"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
-    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclado del teléfono disponible"</string>
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclado en pantalla disponible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gestionar teclados en pantalla"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Ayuda del teclado"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
@@ -2134,7 +2133,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Combinaciones de teclas"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Muestra combinaciones de teclas disponibles"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Perfiles de trabajo y herramientas"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclado del teléfono para el trabajo"</string>
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclado en pantalla para el trabajo"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminado"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Velocidad del puntero del ratón"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Mandos de videojuegos"</string>
@@ -2731,26 +2730,18 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Uso de batería"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Desde la carga completa"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gestionar uso de la batería"</string>
-    <!-- no translation found for battery_total_and_bg_usage (7808189707718974808) -->
-    <skip />
-    <!-- no translation found for battery_total_and_bg_usage_with_period (7938034545486503036) -->
-    <skip />
+    <string name="battery_total_and_bg_usage" msgid="7808189707718974808">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segundo plano durante las últimas 24 h"</string>
+    <string name="battery_total_and_bg_usage_with_period" msgid="7938034545486503036">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segundo plano entre <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
     <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Menos de un minuto en total durante las últimas 24 horas"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Menos de un minuto en total entre <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <!-- no translation found for battery_bg_usage_less_minute (90932588167097641) -->
-    <skip />
-    <!-- no translation found for battery_bg_usage_less_minute_with_period (7624741677867017430) -->
-    <skip />
+    <string name="battery_bg_usage_less_minute" msgid="90932588167097641">"Menos de 1 minuto en segundo plano durante las últimas 24 horas"</string>
+    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Menos de 1 minuto en segundo plano entre <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
     <string name="battery_total_usage" msgid="2662725472478185867">"<xliff:g id="TIME">^1</xliff:g> en total durante las últimas 24 horas"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> en total entre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <!-- no translation found for battery_bg_usage (2983050956970659511) -->
-    <skip />
-    <!-- no translation found for battery_bg_usage_with_period (992952174445045711) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (4158686147238415647) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (8677646584258593395) -->
-    <skip />
+    <string name="battery_bg_usage" msgid="2983050956970659511">"<xliff:g id="TIME">^1</xliff:g> en segundo plano durante las últimas 24 horas"</string>
+    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> en segundo plano entre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="4158686147238415647">"<xliff:g id="TIME">^1</xliff:g> en total • menos de 1 minuto en segundo plano durante las últimas 24 horas"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="8677646584258593395">"<xliff:g id="TIME_0">^1</xliff:g> en total • menos de 1 minuto en segundo plano entre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="8417901856028909227">"Sin uso durante las últimas 24 horas"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"La estimación de la batería restante se basa en el uso de tu dispositivo"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tiempo restante estimado"</string>

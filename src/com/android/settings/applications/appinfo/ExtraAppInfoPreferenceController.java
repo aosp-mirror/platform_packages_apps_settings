@@ -50,6 +50,11 @@ public class ExtraAppInfoPreferenceController extends BasePreferenceController {
         return super.handlePreferenceTreeClick(preference);
     }
 
+    @Override
+    public CharSequence getSummary() {
+        return mExtraAppInfoFeatureProvider.getSummary(mContext);
+    }
+
     /**
      * Set the local package name
      */

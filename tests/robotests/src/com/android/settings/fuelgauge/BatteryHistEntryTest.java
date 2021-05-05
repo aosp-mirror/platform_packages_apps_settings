@@ -62,7 +62,7 @@ public final class BatteryHistEntryTest {
         when(mockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
         when(mockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
         when(mockBatteryEntry.getConsumerType())
-                .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+            .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         final ContentValues values =
             ConvertUtils.convert(
                 mockBatteryEntry,
@@ -223,7 +223,7 @@ public final class BatteryHistEntryTest {
         assertThat(entry.mPercentOfTotal).isEqualTo(percentOfTotal);
         assertThat(entry.mForegroundUsageTimeInMs).isEqualTo(1234L);
         assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(5689L);
-        assertThat(entry.mPowerComponentId).isEqualTo(drainType);
+        assertThat(entry.mDrainType).isEqualTo(drainType);
         assertThat(entry.mConsumerType)
             .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         assertThat(entry.mBatteryLevel).isEqualTo(12);

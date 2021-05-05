@@ -155,8 +155,8 @@ public class BatteryDiffEntry {
                 break;
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
                 final BatteryEntry.NameAndIcon nameAndIconForSystem =
-                        BatteryEntry.getNameAndIconFromPowerComponent(
-                                mContext, mBatteryHistEntry.mPowerComponentId);
+                    BatteryEntry.getNameAndIconFromPowerComponent(
+                        mContext, mBatteryHistEntry.mDrainType);
                 if (nameAndIconForSystem != null) {
                     mAppLabel = nameAndIconForSystem.name;
                     if (nameAndIconForSystem.iconId != 0) {

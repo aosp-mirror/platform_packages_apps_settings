@@ -297,7 +297,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
             final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
             final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
-            //TODO(b/178197718) Update layout to support multiple lines
             controller.setSummary(getAppActiveTime(foregroundTimeMs, backgroundTimeMs, slotTime));
         }
 
@@ -329,15 +328,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     void initPreferenceForTriState(Context context) {
         final String stateString;
         final String footerString;
-        //TODO(b/178197718) Update strings
+
         if (!mBatteryOptimizeUtils.isValidPackageName()) {
             //Present optimized only string when the package name is invalid.
-            stateString = context.getString(R.string.manager_battery_usage_optimized_title);
+            stateString = context.getString(R.string.manager_battery_usage_optimized_only);
             footerString = context.getString(
                     R.string.manager_battery_usage_footer_limited, stateString);
         } else if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
             //Present unrestricted only string when the package is system or default active app.
-            stateString = context.getString(R.string.manager_battery_usage_unrestricted_title);
+            stateString = context.getString(R.string.manager_battery_usage_unrestricted_only);
             footerString = context.getString(
                     R.string.manager_battery_usage_footer_limited, stateString);
         } else {

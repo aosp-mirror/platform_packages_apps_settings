@@ -89,6 +89,17 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
 
     @Override
     public void onBackPressed() {
+        cancelEnrollment();
+        super.onBackPressed();
+    }
+
+    protected void onSkipButtonClick(View view) {
+        cancelEnrollment();
+        setResult(RESULT_SKIP);
+        finish();
+    }
+
+    public void cancelEnrollment() {
         if (mSidecar != null) {
             mSidecar.setListener(null);
             mSidecar.cancelEnrollment();
@@ -96,12 +107,6 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
                     .beginTransaction().remove(mSidecar).commitAllowingStateLoss();
             mSidecar = null;
         }
-        super.onBackPressed();
-    }
-
-    protected void onSkipButtonClick(View view) {
-        setResult(RESULT_SKIP);
-        finish();
     }
 
     public void startEnrollment() {
