@@ -61,9 +61,10 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
     long mCurrentFunctions;
     @VisibleForTesting
     boolean mIsStartTethering = false;
+    @VisibleForTesting
+    Handler mHandler;
 
     private UsbConnectionBroadcastReceiver mUsbReceiver;
-    private Handler mHandler;
     private boolean mIsConnected = false;
 
     @VisibleForTesting
