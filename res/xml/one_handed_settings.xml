@@ -21,6 +21,12 @@
     android:persistent="false"
     android:title="@string/one_handed_title">
 
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="gesture_one_handed_mode_enabled"
+        android:title="@string/one_handed_mode_enabled"
+        settings:keywords="@string/keywords_one_handed"
+        settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController"/>
+
     <com.android.settingslib.widget.LayoutPreference
         android:key="one_handed_header"
         android:layout="@layout/one_handed_header"
@@ -28,12 +34,6 @@
         android:selectable="false"
         settings:allowDividerBelow="false"
         settings:searchable="false"/>
-
-    <SwitchPreference
-        android:key="gesture_one_handed_mode_enabled"
-        android:title="@string/one_handed_mode_enabled"
-        settings:keywords="@string/keywords_one_handed"
-        settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController"/>
 
     <SwitchPreference
         android:key="gesture_app_taps_to_exit"
