@@ -114,9 +114,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
                 mSensorId = sensorId;
                 mChallenge = challenge;
-                if (BiometricUtils.isMultiBiometricEnrollmentFlow(this)) {
-                    BiometricUtils.removeGatekeeperPasswordHandle(this, getIntent());
-                }
                 mFooterBarMixin.getPrimaryButton().setEnabled(true);
             });
         }

@@ -211,8 +211,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 case REQUEST_CHOOSE_LOCK:
                     mConfirmingCredentials = false;
                     if (resultCode == ChooseLockPattern.RESULT_FINISHED) {
-                        mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
-                        startMultiBiometricEnroll();
+                        startMultiBiometricEnroll(data);
                     } else {
                         Log.d(TAG, "Unknown result for chooseLock: " + resultCode);
                         setResult(resultCode);
@@ -222,8 +221,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 case REQUEST_CONFIRM_LOCK:
                     mConfirmingCredentials = false;
                     if (resultCode == RESULT_OK) {
-                        mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
-                        startMultiBiometricEnroll();
+                        startMultiBiometricEnroll(data);
                     } else {
                         Log.d(TAG, "Unknown result for confirmLock: " + resultCode);
                         finish();
@@ -283,7 +281,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         }
     }
 
-    private void startMultiBiometricEnroll() {
+    private void startMultiBiometricEnroll(Intent data) {
+        mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
         mMultiBiometricEnrollHelper = new MultiBiometricEnrollHelper(this, mUserId,
                 mIsFaceEnrollable, mIsFingerprintEnrollable, mGkPwHandle);
         mMultiBiometricEnrollHelper.startNextStep();

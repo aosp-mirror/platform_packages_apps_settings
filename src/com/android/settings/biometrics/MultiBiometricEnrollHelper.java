@@ -77,12 +77,14 @@ public class MultiBiometricEnrollHelper {
 
             if (mRequestEnrollFingerprint) {
                 // Give FaceEnroll a pendingIntent pointing to fingerprint enrollment, so that it
-                // can be started when user skips or finishes face enrollment.
+                // can be started when user skips or finishes face enrollment. FLAG_UPDATE_CURRENT
+                // ensures it is launched with the most recent values.
                 final Intent fpIntent = BiometricUtils.getFingerprintIntroIntent(mActivity,
                         mActivity.getIntent());
                 fpIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, mGkPwHandle);
                 final PendingIntent fpAfterFaceIntent = PendingIntent.getActivity(mActivity,
-                        0 /* requestCode */, fpIntent, PendingIntent.FLAG_IMMUTABLE);
+                        0 /* requestCode */, fpIntent,
+                        PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
                 faceIntent.putExtra(EXTRA_ENROLL_AFTER_FACE, fpAfterFaceIntent);
             }
 
