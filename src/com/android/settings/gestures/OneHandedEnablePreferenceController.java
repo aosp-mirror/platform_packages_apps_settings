@@ -20,12 +20,12 @@ import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 
 /**
  * The controller to handle one-handed mode enable or disable state.
  **/
-public class OneHandedEnablePreferenceController extends TogglePreferenceController {
+public class OneHandedEnablePreferenceController extends SettingsMainSwitchPreferenceController {
 
     public OneHandedEnablePreferenceController(Context context, String key) {
         super(context, key);
