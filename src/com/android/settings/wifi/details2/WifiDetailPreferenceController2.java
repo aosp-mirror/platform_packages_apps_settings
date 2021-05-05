@@ -958,9 +958,11 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mWifiEntry.forget(this);
         }
 
-        mMetricsFeatureProvider.action(
-                mFragment.getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
-        mFragment.getActivity().finish();
+        final Activity activity = mFragment.getActivity();
+        if (activity != null) {
+            mMetricsFeatureProvider.action(activity, SettingsEnums.ACTION_WIFI_FORGET);
+            activity.finish();
+        }
     }
 
     @VisibleForTesting
@@ -1135,8 +1137,11 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             Log.e(TAG, "Forget Wi-Fi network failed");
         }
 
-        mMetricsFeatureProvider.action(mFragment.getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
-        mFragment.getActivity().finish();
+        final Activity activity = mFragment.getActivity();
+        if (activity != null) {
+            mMetricsFeatureProvider.action(activity, SettingsEnums.ACTION_WIFI_FORGET);
+            activity.finish();
+        }
     }
 
     /**
