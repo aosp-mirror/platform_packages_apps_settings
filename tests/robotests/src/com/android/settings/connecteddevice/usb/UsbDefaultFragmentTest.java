@@ -33,6 +33,7 @@ import static org.mockito.Mockito.when;
 
 import android.hardware.usb.UsbManager;
 import android.net.TetheringManager;
+import android.os.Handler;
 
 import androidx.preference.PreferenceScreen;
 
@@ -53,6 +54,8 @@ public class UsbDefaultFragmentTest {
     private UsbBackend mUsbBackend;
     @Mock
     private TetheringManager mTetheringManager;
+    @Mock
+    private Handler mHandler;
 
     private UsbDefaultFragment mFragment;
 
@@ -62,6 +65,7 @@ public class UsbDefaultFragmentTest {
         mFragment = new TestFragment();
         mFragment.mUsbBackend = mUsbBackend;
         mFragment.mTetheringManager = mTetheringManager;
+        mFragment.mHandler = mHandler;
     }
 
     @Test
