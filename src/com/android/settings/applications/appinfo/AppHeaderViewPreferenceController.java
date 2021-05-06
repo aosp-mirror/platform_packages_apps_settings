@@ -29,11 +29,10 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.widget.LayoutPreference;
 
 public class AppHeaderViewPreferenceController extends BasePreferenceController
-        implements AppInfoDashboardFragment.Callback, LifecycleObserver, OnStart {
+        implements AppInfoDashboardFragment.Callback, LifecycleObserver {
 
     private static final String KEY_HEADER = "header_view";
 
@@ -67,17 +66,11 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
         final Activity activity = mParent.getActivity();
         mEntityHeaderController = EntityHeaderController
                 .newInstance(activity, mParent, mHeader.findViewById(R.id.entity_header))
+                .setRecyclerView(mParent.getListView(), mLifecycle)
                 .setPackageName(mPackageName)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE)
                 .bindHeaderButtons();
-    }
-
-    @Override
-    public void onStart() {
-        mEntityHeaderController
-                .setRecyclerView(mParent.getListView(), mLifecycle)
-                .styleActionBar(mParent.getActivity());
     }
 
     @Override
