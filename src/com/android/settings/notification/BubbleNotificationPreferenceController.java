@@ -30,8 +30,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -40,9 +39,8 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
  * Feature level screen for bubbles, available through notification menu.
  * Allows user to turn bubbles on or off for the device.
  */
-public class BubbleNotificationPreferenceController extends TogglePreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnResume, OnPause {
+public class BubbleNotificationPreferenceController extends
+        SettingsMainSwitchPreferenceController implements LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG = "BubbleNotifPrefContr";
 
@@ -60,9 +58,8 @@ public class BubbleNotificationPreferenceController extends TogglePreferenceCont
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        Preference preference = screen.findPreference(getPreferenceKey());
-        if (preference != null) {
-            mSettingObserver = new SettingObserver(preference);
+        if (mSwitchPreference != null) {
+            mSettingObserver = new SettingObserver(mSwitchPreference);
         }
     }
 
@@ -87,20 +84,21 @@ public class BubbleNotificationPreferenceController extends TogglePreferenceCont
     }
 
     @Override
+    public boolean isSliceable() {
+        return false;
+    }
+
+    @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
+        return Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
-                isChecked ? ON : OFF);
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return false;
+        Settings.Global.putInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, isChecked ? ON : OFF);
+        return true;
     }
 
     class SettingObserver extends ContentObserver {

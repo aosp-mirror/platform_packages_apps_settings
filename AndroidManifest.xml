@@ -1136,6 +1136,7 @@
         <activity
             android:name="Settings$ManageDomainUrlsActivity"
             android:exported="true"
+            android:theme="@style/Theme.SubSettings"
             android:label="@string/domain_urls_title">
             <intent-filter>
                 <action android:name="android.settings.MANAGE_DOMAIN_URLS" />
