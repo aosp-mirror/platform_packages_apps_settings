@@ -33,7 +33,8 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * Controller to maintain the {@link androidx.preference.Preference} for add
- * device. It monitor Bluetooth's status(on/off) and decide if need to show summary or not.
+ * device without summary at beginning. It monitor Bluetooth's status(on/off) and decide if need
+ * to show summary or not.
  */
 public class AddDevicePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
@@ -46,7 +47,8 @@ public class AddDevicePreferenceController extends BasePreferenceController
         }
     };
     private IntentFilter mIntentFilter;
-    private BluetoothAdapter mBluetoothAdapter;
+
+    protected BluetoothAdapter mBluetoothAdapter;
 
     public AddDevicePreferenceController(Context context, String key) {
         super(context, key);
@@ -57,6 +59,7 @@ public class AddDevicePreferenceController extends BasePreferenceController
     @Override
     public void onStart() {
         mContext.registerReceiver(mReceiver, mIntentFilter);
+        updateState(mPreference);
     }
 
     @Override
@@ -75,15 +78,20 @@ public class AddDevicePreferenceController extends BasePreferenceController
     @Override
     public int getAvailabilityStatus() {
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
+                && isBluetoothEnabled()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public CharSequence getSummary() {
-        return mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()
+        return isBluetoothEnabled()
                 ? ""
                 : mContext.getString(R.string.connected_device_add_device_summary);
+    }
+
+    protected boolean isBluetoothEnabled() {
+        return mBluetoothAdapter != null && mBluetoothAdapter.isEnabled();
     }
 
     void updateState() {
