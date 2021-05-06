@@ -6088,7 +6088,7 @@
     <string name="restricted_app_time_summary">Restricted <xliff:g id="time" example="5 days ago">%1$s</xliff:g></string>
 
     <!-- Footer message for restrict app details page -->
-    <string name="restricted_app_detail_footer">These apps have been using battery in the background. Restricted apps may not work properly and notifications may be delayed.</string>
+    <string name="restricted_app_detail_footer">These apps are restricted from background battery usage. They may not work as expected, and notifications may be delayed.</string>
 
     <!-- Title for auto restriction toggle -->
     <string name="battery_auto_restriction_title">Use Battery Manager</string>
@@ -6312,7 +6312,7 @@
     <!-- Title for usage time that full charge lasts. [CHAR LIMIT=60] -->
     <string name="battery_full_charge_last">Full charge lasts about</string>
     <!-- Description for text in battery footer. [CHAR LIMIT=NONE] -->
-    <string name="battery_footer_summary">Battery usage data is approximate and can change based on usage</string>
+    <string name="battery_footer_summary">Battery usage data is approximate and can change based on usage.</string>
     <!-- Title for text that shows the amount of time an app has been running while in the foreground. [CHAR LIMIT=80] -->
     <string name="battery_detail_foreground">While in active use</string>
     <!-- Title for text that shows the amount of time an app has been running while in the background. [CHAR LIMIT=80] -->
@@ -6417,11 +6417,11 @@
     <string name="battery_saver_sticky_title_new">Turn off when charged</string>
 
     <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
-    <string name="battery_saver_sticky_description_new" product="default">Battery Saver turns off when your phone charges above <xliff:g id="percent" example="90%">%1$s</xliff:g></string>
+    <string name="battery_saver_sticky_description_new" product="default">Battery Saver turns off when your phone charges above <xliff:g id="number" example="88">^1</xliff:g><xliff:g id="unit" example="%">%</xliff:g></string>
     <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
-    <string name="battery_saver_sticky_description_new" product="tablet">Battery Saver turns off when your tablet charges above <xliff:g id="percent" example="90%">%1$s</xliff:g></string>
+    <string name="battery_saver_sticky_description_new" product="tablet">Battery Saver turns off when your tablet charges above <xliff:g id="number" example="88">^1</xliff:g><xliff:g id="unit" example="%">%</xliff:g></string>
     <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
-    <string name="battery_saver_sticky_description_new" product="device">Battery Saver turns off when your device charges above <xliff:g id="percent" example="90%">%1$s</xliff:g></string>
+    <string name="battery_saver_sticky_description_new" product="device">Battery Saver turns off when your device charges above <xliff:g id="number" example="88">^1</xliff:g><xliff:g id="unit" example="%">%</xliff:g></string>
 
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title"><xliff:g id="percent">%1$s</xliff:g></string>
