@@ -260,9 +260,7 @@ public class Settings extends SettingsActivity {
     public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
     public static class MobileNetworkListActivity extends SettingsActivity {}
-    public static class GlobalActionsPanelSettingsActivity extends SettingsActivity {}
     public static class PowerMenuSettingsActivity extends SettingsActivity {}
-    public static class DeviceControlsSettingsActivity extends SettingsActivity {}
     /**
      * Activity for BugReportHandlerPicker.
      */
