@@ -33,6 +33,7 @@ public class BiometricFingerprintStatusPreferenceController extends
 
     @Override
     protected boolean isDeviceSupported() {
-        return Utils.hasFingerprintHardware(mContext);
+        return Utils.isMultipleBiometricsSupported(mContext)
+                && Utils.hasFingerprintHardware(mContext);
     }
 }
