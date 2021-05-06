@@ -144,30 +144,9 @@ public final class ConvertUtils {
             final Context context,
             final int timeSlotSize,
             final long[] batteryHistoryKeys,
-            final Map<Long, List<BatteryHistEntry>> batteryHistoryMap,
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap,
             final boolean purgeLowPercentageData) {
         final Map<Integer, List<BatteryDiffEntry>> resultMap = new HashMap<>();
-        // Generates a temporary map to calculate diff usage data, which converts the inputted
-        // List<BatteryDiffEntry> into Map<String, BatteryHistEntry> with the key comes from
-        // the BatteryHistEntry.getKey() method.
-        final Map<Long, Map<String, BatteryHistEntry>> newBatteryHistoryMap = new HashMap<>();
-        for (int index = 0; index < batteryHistoryKeys.length; index++) {
-            final Long timestamp = Long.valueOf(batteryHistoryKeys[index]);
-            final List<BatteryHistEntry> entries = batteryHistoryMap.get(timestamp);
-            if (entries == null || entries.isEmpty()) {
-                continue;
-            }
-            final Map<String, BatteryHistEntry> slotBatteryHistDataMap = new HashMap<>();
-            for (BatteryHistEntry entry : entries) {
-                // Excludes auto-generated fake BatteryHistEntry data,
-                // which is used to record battery level and status purpose only.
-                if (!FAKE_PACKAGE_NAME.equals(entry.mPackageName)) {
-                    slotBatteryHistDataMap.put(entry.getKey(), entry);
-                }
-            }
-            newBatteryHistoryMap.put(timestamp, slotBatteryHistDataMap);
-        }
-
         // Each time slot usage diff data =
         //     Math.abs(timestamp[i+2] data - timestamp[i+1] data) +
         //     Math.abs(timestamp[i+1] data - timestamp[i] data);
@@ -188,11 +167,11 @@ public final class ConvertUtils {
 
             // Fetches BatteryHistEntry data from corresponding time slot.
             final Map<String, BatteryHistEntry> currentBatteryHistMap =
-                newBatteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
+                batteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
             final Map<String, BatteryHistEntry> nextBatteryHistMap =
-                newBatteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
+                batteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
             final Map<String, BatteryHistEntry> nextTwoBatteryHistMap =
-                newBatteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
+                batteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
 
             // Collects all keys in these three time slot records as population.
             final Set<String> allBatteryHistEntryKeys = new HashSet<>();
