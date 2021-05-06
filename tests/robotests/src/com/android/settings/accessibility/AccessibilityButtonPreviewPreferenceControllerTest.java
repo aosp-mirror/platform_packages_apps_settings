@@ -33,6 +33,7 @@ import android.widget.ImageView;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.ImageTestUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -73,8 +74,8 @@ public class AccessibilityButtonPreviewPreferenceControllerTest {
 
         final Drawable navigationBarDrawable = mContext.getDrawable(
                 R.drawable.accessibility_button_navigation);
-        assertThat(mController.mPreview.getDrawable().getConstantState()).isEqualTo(
-                navigationBarDrawable.getConstantState());
+        assertThat(ImageTestUtils.drawableToBitmap(mController.mPreview.getDrawable()).sameAs(
+                ImageTestUtils.drawableToBitmap(navigationBarDrawable))).isTrue();
     }
 
     @Test

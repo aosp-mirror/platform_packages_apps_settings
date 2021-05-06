@@ -31,10 +31,8 @@ import static com.android.settings.applications.manageapplications.ManageApplica
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MAIN;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MANAGE_SOURCES;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MEDIA_MANAGEMENT_APPS;
-import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MOVIES;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_OVERLAY;
-import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_PHOTOGRAPHY;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_STORAGE;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_USAGE_ACCESS;
 import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_WRITE_SETTINGS;
@@ -75,7 +73,5 @@ public class AppFilterRegistryTest {
         assertThat(registry.getDefaultFilterType(LIST_TYPE_STORAGE)).isEqualTo(FILTER_APPS_ALL);
 
         assertThat(registry.getDefaultFilterType(LIST_TYPE_GAMES)).isEqualTo(FILTER_APPS_ALL);
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_MOVIES)).isEqualTo(FILTER_APPS_ALL);
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_PHOTOGRAPHY)).isEqualTo(FILTER_APPS_ALL);
     }
 }

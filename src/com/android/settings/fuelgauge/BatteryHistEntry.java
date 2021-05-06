@@ -114,6 +114,35 @@ public class BatteryHistEntry {
         mBatteryHealth = getInteger(cursor, KEY_BATTERY_HEALTH);
     }
 
+    private BatteryHistEntry(
+          BatteryHistEntry fromEntry,
+          long bootTimestamp,
+          long timestamp,
+          double totalPower,
+          double consumePower,
+          long foregroundUsageTimeInMs,
+          long backgroundUsageTimeInMs,
+          int batteryLevel) {
+        mUid = fromEntry.mUid;
+        mUserId = fromEntry.mUserId;
+        mAppLabel = fromEntry.mAppLabel;
+        mPackageName = fromEntry.mPackageName;
+        mIsHidden = fromEntry.mIsHidden;
+        mBootTimestamp = bootTimestamp;
+        mTimestamp = timestamp;
+        mZoneId = fromEntry.mZoneId;
+        mTotalPower = totalPower;
+        mConsumePower = consumePower;
+        mPercentOfTotal = fromEntry.mPercentOfTotal;
+        mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
+        mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
+        mDrainType = fromEntry.mDrainType;
+        mConsumerType = fromEntry.mConsumerType;
+        mBatteryLevel = batteryLevel;
+        mBatteryStatus = fromEntry.mBatteryStatus;
+        mBatteryHealth = fromEntry.mBatteryHealth;
+    }
+
     /** Whether this {@link BatteryHistEntry} is valid or not? */
     public boolean isValidEntry() {
         return mIsValidEntry;
@@ -256,5 +285,51 @@ public class BatteryHistEntry {
         }
         mIsValidEntry = false;
         return false;
+    }
+
+    /** Creates new {@link BatteryHistEntry} from interpolation. */
+    public static BatteryHistEntry interpolate(
+            long slotTimestamp,
+            long upperTimestamp,
+            double ratio,
+            BatteryHistEntry lowerHistEntry,
+            BatteryHistEntry upperHistEntry) {
+        final double totalPower = interpolate(
+            lowerHistEntry == null ? 0 : lowerHistEntry.mTotalPower,
+            upperHistEntry.mTotalPower,
+            ratio);
+        final double consumePower = interpolate(
+            lowerHistEntry == null ? 0 : lowerHistEntry.mConsumePower,
+            upperHistEntry.mConsumePower,
+            ratio);
+        final double foregroundUsageTimeInMs = interpolate(
+            lowerHistEntry == null ? 0 : lowerHistEntry.mForegroundUsageTimeInMs,
+            upperHistEntry.mForegroundUsageTimeInMs,
+            ratio);
+        final double backgroundUsageTimeInMs = interpolate(
+            lowerHistEntry == null ? 0 : lowerHistEntry.mBackgroundUsageTimeInMs,
+            upperHistEntry.mBackgroundUsageTimeInMs,
+            ratio);
+        final double batteryLevel =
+            lowerHistEntry == null
+                ? upperHistEntry.mBatteryLevel
+                : interpolate(
+                    lowerHistEntry.mBatteryLevel,
+                    upperHistEntry.mBatteryLevel,
+                    ratio);
+        return new BatteryHistEntry(
+            upperHistEntry,
+            /*bootTimestamp=*/ upperHistEntry.mBootTimestamp
+                - (upperTimestamp - slotTimestamp),
+            /*timestamp=*/ slotTimestamp,
+            totalPower,
+            consumePower,
+            Math.round(foregroundUsageTimeInMs),
+            Math.round(backgroundUsageTimeInMs),
+            (int) Math.round(batteryLevel));
+    }
+
+    private static double interpolate(double v1, double v2, double ratio) {
+        return v1 + ratio * (v2 - v1);
     }
 }
