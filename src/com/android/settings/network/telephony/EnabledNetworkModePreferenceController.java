@@ -63,6 +63,7 @@ public class EnabledNetworkModePreferenceController extends
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
+        mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
     }
 
     @Override
@@ -145,7 +146,6 @@ public class EnabledNetworkModePreferenceController extends
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
-        mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
         mBuilder = new PreferenceEntriesBuilder(mContext, mSubId);
 
         if (mAllowedNetworkTypesListener == null) {
