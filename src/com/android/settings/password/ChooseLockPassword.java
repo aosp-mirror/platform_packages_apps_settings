@@ -416,19 +416,6 @@ public class ChooseLockPassword extends SettingsActivity {
             mMinComplexity = intent.getIntExtra(EXTRA_KEY_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
             mMinMetrics = intent.getParcelableExtra(EXTRA_KEY_MIN_METRICS);
             if (mMinMetrics == null) mMinMetrics = new PasswordMetrics(CREDENTIAL_TYPE_NONE);
-            // If we are to unify a work challenge at the end of the credential enrollment, manually
-            // merge any password policy from that profile here, so we are enrolling a compliant
-            // password. This is because once unified, the profile's password policy will
-            // be enforced on the new credential.
-            //TODO: Move this logic to ChooseLockGeneric; let ChooseLockGeneric be the only place
-            //where password requirement mixing happens. ChooseLockPassword simply enforces what's
-            //set via IntentBuilder.setPasswordRequirement()
-            if (mUnificationProfileId != UserHandle.USER_NULL) {
-                mMinMetrics.maxWith(
-                        mLockPatternUtils.getRequestedPasswordMetrics(mUnificationProfileId));
-                mMinComplexity = Math.max(mMinComplexity,
-                        mLockPatternUtils.getRequestedPasswordComplexity(mUnificationProfileId));
-            }
 
             if (intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
