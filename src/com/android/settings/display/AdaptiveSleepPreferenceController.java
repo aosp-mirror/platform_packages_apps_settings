@@ -73,7 +73,6 @@ public class AdaptiveSleepPreferenceController {
      * Adds the controlled preference to the provided preference screen.
      */
     public void addToScreen(PreferenceScreen screen) {
-        initializePreference();
         updatePreference();
         screen.addPreference(mPreference);
     }
@@ -82,6 +81,7 @@ public class AdaptiveSleepPreferenceController {
      * Updates the appearance of the preference.
      */
     public void updatePreference() {
+        initializePreference();
         final EnforcedAdmin enforcedAdmin = mRestrictionUtils.checkIfRestrictionEnforced(mContext,
                 UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT);
         if (enforcedAdmin != null) {
@@ -93,19 +93,22 @@ public class AdaptiveSleepPreferenceController {
 
     @VisibleForTesting
     void initializePreference() {
-        mPreference = new RestrictedSwitchPreference(mContext);
-        mPreference.setTitle(R.string.adaptive_sleep_title);
-        mPreference.setSummary(R.string.adaptive_sleep_description);
-        mPreference.setChecked(isChecked());
-        mPreference.setKey(PREFERENCE_KEY);
-        mPreference.setOnPreferenceChangeListener((preference, value) -> {
-            final boolean isChecked = (Boolean) value;
-            mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_SCREEN_ATTENTION_CHANGED,
-                    isChecked);
-            Settings.Secure.putInt(mContext.getContentResolver(),
-                    Settings.Secure.ADAPTIVE_SLEEP, isChecked ? 1 : DEFAULT_VALUE);
-            return true;
-        });
+        if (mPreference == null) {
+            mPreference = new RestrictedSwitchPreference(mContext);
+            mPreference.setTitle(R.string.adaptive_sleep_title);
+            mPreference.setSummary(R.string.adaptive_sleep_description);
+            mPreference.setChecked(isChecked());
+            mPreference.setKey(PREFERENCE_KEY);
+            mPreference.setOnPreferenceChangeListener((preference, value) -> {
+                final boolean isChecked = (Boolean) value;
+                mMetricsFeatureProvider.action(mContext,
+                        SettingsEnums.ACTION_SCREEN_ATTENTION_CHANGED,
+                        isChecked);
+                Settings.Secure.putInt(mContext.getContentResolver(),
+                        Settings.Secure.ADAPTIVE_SLEEP, isChecked ? 1 : DEFAULT_VALUE);
+                return true;
+            });
+        }
     }
 
     @VisibleForTesting
