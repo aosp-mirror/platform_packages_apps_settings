@@ -16,6 +16,7 @@ package com.android.settings.fuelgauge;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.BatteryConsumer;
+import android.util.Log;
 
 import java.time.Duration;
 
@@ -310,6 +311,14 @@ public class BatteryHistEntry {
             lowerHistEntry == null ? 0 : lowerHistEntry.mBackgroundUsageTimeInMs,
             upperHistEntry.mBackgroundUsageTimeInMs,
             ratio);
+        // Checks whether there is any abnoaml cases!
+        if (upperHistEntry.mConsumePower < consumePower
+                || upperHistEntry.mForegroundUsageTimeInMs < foregroundUsageTimeInMs
+                || upperHistEntry.mBackgroundUsageTimeInMs < backgroundUsageTimeInMs) {
+            Log.w(TAG, String.format(
+                "abnormal interpolation:\nupper:%s\nlower:%s",
+                upperHistEntry, lowerHistEntry));
+        }
         final double batteryLevel =
             lowerHistEntry == null
                 ? upperHistEntry.mBatteryLevel
