@@ -225,7 +225,8 @@ public class DataUsageSummaryPreference extends Preference {
     static void launchWifiDataUsage(Context context) {
         final Bundle args = new Bundle(1);
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE,
-                NetworkTemplate.buildTemplateWifiWildcard());
+                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
+                null /* subscriberId */));
         args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, ConnectivityManager.TYPE_WIFI);
         final SubSettingLauncher launcher = new SubSettingLauncher(context)
                 .setArguments(args)
@@ -367,7 +368,9 @@ public class DataUsageSummaryPreference extends Preference {
     @VisibleForTesting
     protected long getHistoricalUsageLevel() {
         final DataUsageController controller = new DataUsageController(getContext());
-        return controller.getHistoricalUsageLevel(NetworkTemplate.buildTemplateWifiWildcard());
+        return controller.getHistoricalUsageLevel(
+                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
+                null /* subscriberId */));
     }
 
     @VisibleForTesting

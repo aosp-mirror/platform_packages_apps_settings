@@ -183,7 +183,9 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     void addWifiSection() {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_wifi);
-        category.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(), 0, services);
+        category.setTemplate(
+                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
+                null /* subscriberId */), 0, services);
     }
 
     private void addEthernetSection() {
