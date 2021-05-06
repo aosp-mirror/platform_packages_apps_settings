@@ -27,6 +27,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.util.Pair;
 
 import androidx.preference.Preference;
 
@@ -78,6 +80,8 @@ public class BluetoothDeviceUpdaterTest {
     private LocalBluetoothManager mLocalManager;
     @Mock
     private CachedBluetoothDeviceManager mCachedDeviceManager;
+    @Mock
+    private Drawable mDrawable;
 
     private Context mContext;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -89,6 +93,7 @@ public class BluetoothDeviceUpdaterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        Pair<Drawable, String> pairs = new Pair<>(mDrawable, "fake_device");
         mContext = RuntimeEnvironment.application;
         mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         mCachedDevices.add(mCachedBluetoothDevice);
@@ -99,6 +104,7 @@ public class BluetoothDeviceUpdaterTest {
         when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
         when(mSubBluetoothDevice.getAddress()).thenReturn(SUB_MAC_ADDRESS);
+        when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pairs);
 
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                 false, BluetoothDevicePreference.SortType.TYPE_DEFAULT);

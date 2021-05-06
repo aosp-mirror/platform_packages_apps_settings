@@ -33,6 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
@@ -72,8 +73,12 @@ public class BiometricUtils {
     public static byte[] requestGatekeeperHat(@NonNull Context context, long gkPwHandle, int userId,
             long challenge) {
         final LockPatternUtils utils = new LockPatternUtils(context);
-        return utils.verifyGatekeeperPasswordHandle(gkPwHandle, challenge, userId)
-                .getGatekeeperHAT();
+        final VerifyCredentialResponse response = utils.verifyGatekeeperPasswordHandle(gkPwHandle,
+                challenge, userId);
+        if (!response.isMatched()) {
+            throw new IllegalStateException("Unable to request Gatekeeper HAT");
+        }
+        return response.getGatekeeperHAT();
     }
 
     public static boolean containsGatekeeperPasswordHandle(@Nullable Intent data) {
@@ -190,7 +195,7 @@ public class BiometricUtils {
                     hardwareAuthToken);
         }
         if (gkPwHandle != null) {
-            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, gkPwHandle);
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, (long) gkPwHandle);
         }
 
         if (activity instanceof BiometricEnrollActivity.InternalActivity) {
