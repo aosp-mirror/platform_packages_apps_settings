@@ -29,7 +29,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -386,7 +385,6 @@ public class DataUsageSummaryPreferenceControllerTest {
 
         verify(mHeaderController)
                 .setRecyclerView(any(RecyclerView.class), any(Lifecycle.class));
-        verify(mHeaderController).styleActionBar(any(Activity.class));
     }
 
     private DataUsageController.DataUsageInfo createTestDataUsageInfo(long now) {

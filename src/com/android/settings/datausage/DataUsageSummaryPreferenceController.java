@@ -179,7 +179,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         }
         RecyclerView view = mFragment.getListView();
         mEntityHeaderController.setRecyclerView(view, mLifecycle);
-        mEntityHeaderController.styleActionBar((Activity) mContext);
     }
 
     @VisibleForTesting
