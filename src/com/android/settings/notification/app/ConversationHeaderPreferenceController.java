@@ -122,9 +122,6 @@ public class ConversationHeaderPreferenceController extends NotificationPreferen
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
         mStarted = true;
-        if (mHeaderController != null) {
-            mHeaderController.styleActionBar(mFragment.getActivity());
-        }
     }
 
     @VisibleForTesting
