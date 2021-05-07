@@ -145,35 +145,45 @@ public final class ConvertUtilsTest {
         // Creates the fake testing data.
         final int timeSlotSize = 2;
         final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L, 104L, 105L};
-        final Map<Long, List<BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
+            new HashMap<>();
+        // Adds the index = 0 data.
+        Map<String, BatteryHistEntry> entryMap = new HashMap<>();
+        BatteryHistEntry entry = createBatteryHistEntry(
+            "package1", "label1", 5.0, 1L, 10L, 20L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[0]), entryMap);
+        // Adds the index = 1 data.
         batteryHistoryMap.put(
-            Long.valueOf(batteryHistoryKeys[0]),
-            Arrays.asList(
-                createBatteryHistEntry(
-                    "package1", "label1", 5.0, 1L, 10L, 20L)));
-        batteryHistoryMap.put(
-            Long.valueOf(batteryHistoryKeys[1]), new ArrayList<BatteryHistEntry>());
-        batteryHistoryMap.put(
-            Long.valueOf(batteryHistoryKeys[2]),
-            Arrays.asList(
-                createBatteryHistEntry(
-                    "package2", "label2", 10.0, 2L, 15L, 25L)));
-        batteryHistoryMap.put(
-            Long.valueOf(batteryHistoryKeys[3]),
-            Arrays.asList(
-                createBatteryHistEntry(
-                    "package2", "label2", 15.0, 2L, 25L, 35L),
-                createBatteryHistEntry(
-                    "package3", "label3", 5.0, 3L, 5L, 5L)));
-        batteryHistoryMap.put(
-            Long.valueOf(batteryHistoryKeys[4]),
-            Arrays.asList(
-                createBatteryHistEntry(
-                    "package2", "label2", 30.0, 2L, 30L, 40L),
-                createBatteryHistEntry(
-                    "package2", "label2", 75.0, 4L, 40L, 50L),
-                createBatteryHistEntry(
-                    "package3", "label3", 5.0, 3L, 5L, 5L)));
+            Long.valueOf(batteryHistoryKeys[1]),
+            new HashMap<String, BatteryHistEntry>());
+        // Adds the index = 2 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+            "package2", "label2", 10.0, 2L, 15L, 25L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[2]), entryMap);
+        // Adds the index = 3 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+            "package2", "label2", 15.0, 2L, 25L, 35L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+            "package3", "label3", 5.0, 3L, 5L, 5L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[3]), entryMap);
+        // Adds the index = 4 data.
+        entryMap = new HashMap<>();
+        entry = createBatteryHistEntry(
+            "package2", "label2", 30.0, 2L, 30L, 40L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+            "package2", "label2", 75.0, 4L, 40L, 50L);
+        entryMap.put(entry.getKey(), entry);
+        entry = createBatteryHistEntry(
+            "package3", "label3", 5.0, 3L, 5L, 5L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[4]), entryMap);
 
         final Map<Integer, List<BatteryDiffEntry>> resultMap =
             ConvertUtils.getIndexedUsageMap(
