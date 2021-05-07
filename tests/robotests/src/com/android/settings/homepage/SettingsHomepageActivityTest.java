@@ -35,11 +35,11 @@ import android.widget.FrameLayout;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
-import com.android.settings.core.HideNonSystemOverlayMixin;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import org.junit.Before;
 import org.junit.Test;
