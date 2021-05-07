@@ -17,11 +17,9 @@
 package com.android.settings.accounts;
 
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 
 public class TopLevelAccountEntryPreferenceController extends BasePreferenceController {
     public TopLevelAccountEntryPreferenceController(Context context, String preferenceKey) {
@@ -35,10 +33,6 @@ public class TopLevelAccountEntryPreferenceController extends BasePreferenceCont
 
     @Override
     public CharSequence getSummary() {
-        // Remove homepage summaries for silky home.
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            return null;
-        }
         return mContext.getString(R.string.account_dashboard_default_summary);
     }
 }
