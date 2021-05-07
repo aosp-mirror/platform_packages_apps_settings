@@ -31,10 +31,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.core.HideNonSystemOverlayMixin;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 /**
  * Dialog Activity to host channel settings
