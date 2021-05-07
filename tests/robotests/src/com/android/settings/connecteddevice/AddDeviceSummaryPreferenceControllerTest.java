@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowApplicationPackageManager.class)
-public class AddDevicePreferenceControllerTest {
+public class AddDeviceSummaryPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
@@ -57,7 +57,7 @@ public class AddDevicePreferenceControllerTest {
     private BluetoothAdapter mBluetoothAdapter;
 
     private Context mContext;
-    private AddDevicePreferenceController mAddDevicePreferenceController;
+    private AddDeviceSummaryPreferenceController mAddDeviceSummaryPreferenceController;
     private RestrictedPreference mAddDevicePreference;
     private ShadowApplicationPackageManager mPackageManager;
 
@@ -71,71 +71,81 @@ public class AddDevicePreferenceControllerTest {
                 mContext.getPackageManager());
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
 
-        mAddDevicePreferenceController = new AddDevicePreferenceController(mContext,
+        mAddDeviceSummaryPreferenceController = new AddDeviceSummaryPreferenceController(mContext,
                 "add_bt_devices");
-        ReflectionHelpers.setField(mAddDevicePreferenceController,
+        ReflectionHelpers.setField(mAddDeviceSummaryPreferenceController,
                 "mBluetoothAdapter", mBluetoothAdapter);
 
-        String key = mAddDevicePreferenceController.getPreferenceKey();
+        String key = mAddDeviceSummaryPreferenceController.getPreferenceKey();
         mAddDevicePreference = new RestrictedPreference(mContext);
         mAddDevicePreference.setKey(key);
-        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
         when(mScreen.findPreference(key)).thenReturn(mAddDevicePreference);
-        mAddDevicePreferenceController.displayPreference(mScreen);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(false);
+        mAddDeviceSummaryPreferenceController.displayPreference(mScreen);
     }
 
     @Test
-    public void addDevice_bt_resume_on_then_off() {
+    public void getSummary_btOnThenOff_summaryShouldBeShown() {
         when(mBluetoothAdapter.isEnabled()).thenReturn(true);
-        mAddDevicePreferenceController.updateState();
+
+        mAddDeviceSummaryPreferenceController.updateState();
+
         assertTrue(TextUtils.isEmpty(mAddDevicePreference.getSummary()));
 
         Intent intent = new Intent(BluetoothAdapter.ACTION_STATE_CHANGED);
         intent.putExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.STATE_OFF);
         BroadcastReceiver receiver = ReflectionHelpers.getField(
-                mAddDevicePreferenceController, "mReceiver");
+                mAddDeviceSummaryPreferenceController, "mReceiver");
         when(mBluetoothAdapter.isEnabled()).thenReturn(false);
+
         receiver.onReceive(mContext, intent);
+
         assertThat(mAddDevicePreference.getSummary()).isEqualTo(
                 mContext.getString(R.string.connected_device_add_device_summary));
     }
 
     @Test
-    public void addDevice_bt_resume_off_then_on() {
+    public void getSummary_btOffThenOn_summaryShouldNotBeShown() {
         when(mBluetoothAdapter.isEnabled()).thenReturn(false);
-        mAddDevicePreferenceController.updateState();
+
+        mAddDeviceSummaryPreferenceController.updateState();
+
         assertThat(mAddDevicePreference.getSummary()).isEqualTo(
                 mContext.getString(R.string.connected_device_add_device_summary));
 
         Intent intent = new Intent(BluetoothAdapter.ACTION_STATE_CHANGED);
         intent.putExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.STATE_ON);
         BroadcastReceiver receiver = ReflectionHelpers.getField(
-                mAddDevicePreferenceController, "mReceiver");
+                mAddDeviceSummaryPreferenceController, "mReceiver");
         when(mBluetoothAdapter.isEnabled()).thenReturn(true);
+
         receiver.onReceive(mContext, intent);
+
         assertTrue(TextUtils.isEmpty(mAddDevicePreference.getSummary()));
     }
 
     @Test
-    public void addDevice_Availability_UnSupported() {
+    public void getAvailabilityStatus_notHaveBluetoothFeature_unSupported() {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
-        assertThat(mAddDevicePreferenceController.getAvailabilityStatus())
+
+        assertThat(mAddDeviceSummaryPreferenceController.getAvailabilityStatus())
                 .isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void addDevice_Availability_Supported() {
+    public void getAvailabilityStatus_haveBluetoothFeature_supported() {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
-        assertThat(mAddDevicePreferenceController.getAvailabilityStatus())
+
+        assertThat(mAddDeviceSummaryPreferenceController.getAvailabilityStatus())
                 .isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_bluetoothIsDisabled_unSupported() {
+    public void getAvailabilityStatus_bluetoothIsEnabled_unSupported() {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
-        when(mBluetoothAdapter.isEnabled()).thenReturn(false);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
 
-        assertThat(mAddDevicePreferenceController.getAvailabilityStatus())
+        assertThat(mAddDeviceSummaryPreferenceController.getAvailabilityStatus())
                 .isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }
