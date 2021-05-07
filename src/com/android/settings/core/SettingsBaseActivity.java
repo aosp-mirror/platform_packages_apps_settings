@@ -47,6 +47,7 @@ import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.CategoryManager;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
