@@ -17,13 +17,9 @@
 
 package com.android.settings.fuelgauge;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_START;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -41,7 +37,6 @@ import android.text.TextUtils;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -281,17 +276,6 @@ public class BatteryHeaderPreferenceControllerTest {
         mController.updateHeaderPreference(mBatteryInfo);
 
         verify(mBatteryUsageProgressBarPref).setBottomSummary(null);
-    }
-
-    @Test
-    public void onStart_shouldStyleActionBar() {
-        when(mEntityHeaderController.setRecyclerView(nullable(RecyclerView.class), eq(mLifecycle)))
-                .thenReturn(mEntityHeaderController);
-
-        mController.displayPreference(mPreferenceScreen);
-        mLifecycle.handleLifecycleEvent(ON_START);
-
-        verify(mEntityHeaderController).styleActionBar(mActivity);
     }
 
     @Test

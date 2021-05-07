@@ -21,6 +21,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -62,6 +63,9 @@ public class BiometricSettingsKeyguardPreferenceController extends TogglePrefere
 
     @Override
     public int getAvailabilityStatus() {
+        if (!Utils.isMultipleBiometricsSupported(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         return getRestrictingAdmin() != null ? DISABLED_FOR_USER : AVAILABLE;
     }
 }
