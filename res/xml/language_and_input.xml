@@ -64,6 +64,7 @@
         <Preference
             android:key="key_user_dictionary_settings"
             android:title="@string/user_dict_settings_title"
+            android:summary="@string/user_dict_settings_summary"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
             settings:controller="com.android.settings.language.UserDictionaryPreferenceController" />
     </PreferenceCategory>
