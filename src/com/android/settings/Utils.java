@@ -1205,7 +1205,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static boolean isPageTransitionEnabled(Context context) {
         final boolean isSilkyHome = FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME);
         final boolean isTransitionEnabled = Settings.Global.getInt(context.getContentResolver(),
-                SETTINGS_SHARED_AXIS_ENABLED, 0) == 1;
+                SETTINGS_SHARED_AXIS_ENABLED, 1) == 1;
 
         return isSilkyHome && isTransitionEnabled;
     }
