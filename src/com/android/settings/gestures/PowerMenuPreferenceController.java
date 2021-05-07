@@ -17,18 +17,11 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
-import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class PowerMenuPreferenceController extends BasePreferenceController {
-
-    private static final String KEY = "gesture_power_menu_summary";
-    private static final String CARDS_ENABLED_SETTING =
-            Settings.Secure.GLOBAL_ACTIONS_PANEL_ENABLED;
-    private static final String CARDS_AVAILABLE_SETTING =
-            Settings.Secure.GLOBAL_ACTIONS_PANEL_AVAILABLE;
 
     public PowerMenuPreferenceController(Context context, String key) {
         super(context, key);
@@ -36,25 +29,12 @@ public class PowerMenuPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        boolean cardsVisible = isCardsAvailable()
-                && Settings.Secure.getInt(mContext.getContentResolver(),
-                        CARDS_ENABLED_SETTING, 0) == 1;
-        if (cardsVisible) {
-            return mContext.getText(R.string.power_menu_cards_passes);
-        } else {
-            return mContext.getText(R.string.power_menu_none);
-        }
+        return mContext.getText(R.string.power_menu_long_press_for_assist);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return isCardsAvailable() || isAssistInvocationAvailable()
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
-    }
-
-    private boolean isCardsAvailable() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                CARDS_AVAILABLE_SETTING, 0) == 1;
+        return isAssistInvocationAvailable() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     private boolean isAssistInvocationAvailable() {
