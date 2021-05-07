@@ -20,6 +20,7 @@ import static android.net.NetworkCapabilities.TRANSPORT_CELLULAR;
 import static android.net.NetworkCapabilities.TRANSPORT_ETHERNET;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_DESTROY;
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
@@ -189,6 +190,12 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
         mAirplaneModeEnabler.stop();
         mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
         mContext.unregisterReceiver(mWifiStateReceiver);
+    }
+
+    /** @OnLifecycleEvent(ON_DESTROY) */
+    @OnLifecycleEvent(ON_DESTROY)
+    public void onDestroy() {
+        mAirplaneModeEnabler.close();
     }
 
     @Override
