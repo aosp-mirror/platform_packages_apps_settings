@@ -19,10 +19,8 @@ package com.android.settings.accounts;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,19 +38,11 @@ public class TopLevelAccountEntryPreferenceControllerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mController = new TopLevelAccountEntryPreferenceController(mContext, "test_key");
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test
     public void updateSummary_noAccount_shouldDisplayDefaultSummary() {
         assertThat(mController.getSummary()).isEqualTo(
                 mContext.getText(R.string.account_dashboard_default_summary));
-    }
-
-    @Test
-    public void getSummary_silkyHomeEnabled_shouldBeNull() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-
-        assertThat(mController.getSummary()).isNull();
     }
 }
