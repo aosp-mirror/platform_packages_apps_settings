@@ -16,24 +16,32 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.Utils.getAdaptiveIcon;
 import static com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE;
+import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settingslib.RestrictedPreference;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
@@ -61,8 +69,8 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
 
     // Preference controls.
     private Preference mDisplayMagnificationPreference;
-    private Preference mScreenReaderPreference;
-    private Preference mSelectToSpeakPreference;
+    private RestrictedPreference mScreenReaderPreference;
+    private RestrictedPreference mSelectToSpeakPreference;
 
     @Override
     public int getMetricsCategory() {
@@ -73,16 +81,24 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
+        final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
         layout.setDividerInsets(Integer.MAX_VALUE, 0);
-
+        layout.setDescriptionText(R.string.vision_settings_description);
         layout.setHeaderText(R.string.vision_settings_title);
+        layout.setIcon(getResources().getDrawable(R.drawable.ic_accessibility_visibility));
+
+        final ImageView iconView = layout.findManagedViewById(R.id.sud_layout_icon);
+        final FrameLayout.LayoutParams params =
+                (FrameLayout.LayoutParams) iconView.getLayoutParams();
+        params.gravity = Gravity.START;
+        layout.getHeaderTextView().setGravity(Gravity.START);
+        layout.getDescriptionTextView().setGravity(Gravity.START);
     }
 
     @Override
     public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
         Bundle savedInstanceState) {
-        GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
+        final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
         return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }
 
@@ -145,7 +161,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         return null;
     }
 
-    private void updateAccessibilityServicePreference(Preference preference,
+    private void updateAccessibilityServicePreference(RestrictedPreference preference,
             String packageName, String serviceName, String targetFragment) {
         final AccessibilityServiceInfo info = findService(packageName, serviceName);
         if (info == null) {
@@ -153,24 +169,28 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
             return;
         }
 
-        ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
-        String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
+        final ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
+        final Drawable icon = info.getResolveInfo().loadIcon(getPackageManager());
+        preference.setIcon(getAdaptiveIcon(getContext(), icon, Color.WHITE));
+        preference.setIconSize(ICON_SIZE_MEDIUM);
+        final String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
         preference.setTitle(title);
-        ComponentName componentName = new ComponentName(serviceInfo.packageName, serviceInfo.name);
+        final ComponentName componentName =
+                new ComponentName(serviceInfo.packageName, serviceInfo.name);
         preference.setKey(componentName.flattenToString());
         if (AccessibilityUtil.getAccessibilityServiceFragmentType(info) == VOLUME_SHORTCUT_TOGGLE) {
             preference.setFragment(targetFragment);
         }
 
         // Update the extras.
-        Bundle extras = preference.getExtras();
+        final Bundle extras = preference.getExtras();
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
 
         extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
             preference.getKey());
         extras.putString(AccessibilitySettings.EXTRA_TITLE, title);
 
-        String description = info.loadDescription(getPackageManager());
+        final String description = info.loadDescription(getPackageManager());
         extras.putString(AccessibilitySettings.EXTRA_SUMMARY, description);
 
         extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());

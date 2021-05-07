@@ -211,8 +211,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 case REQUEST_CHOOSE_LOCK:
                     mConfirmingCredentials = false;
                     if (resultCode == ChooseLockPattern.RESULT_FINISHED) {
-                        mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
-                        startMultiBiometricEnroll();
+                        startMultiBiometricEnroll(data);
                     } else {
                         Log.d(TAG, "Unknown result for chooseLock: " + resultCode);
                         setResult(resultCode);
@@ -222,8 +221,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 case REQUEST_CONFIRM_LOCK:
                     mConfirmingCredentials = false;
                     if (resultCode == RESULT_OK) {
-                        mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
-                        startMultiBiometricEnroll();
+                        startMultiBiometricEnroll(data);
                     } else {
                         Log.d(TAG, "Unknown result for confirmLock: " + resultCode);
                         finish();
@@ -283,7 +281,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         }
     }
 
-    private void startMultiBiometricEnroll() {
+    private void startMultiBiometricEnroll(Intent data) {
+        mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
         mMultiBiometricEnrollHelper = new MultiBiometricEnrollHelper(this, mUserId,
                 mIsFaceEnrollable, mIsFingerprintEnrollable, mGkPwHandle);
         mMultiBiometricEnrollHelper.startNextStep();
@@ -299,9 +298,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     private void launchChooseLock() {
         Log.d(TAG, "launchChooseLock");
         Intent intent = BiometricUtils.getChooseLockIntent(this, getIntent());
-        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
+        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, true);
 
@@ -351,8 +348,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         final Intent intent;
         // If only device credential was specified, ask the user to only set that up.
         intent = new Intent(this, ChooseLockGeneric.class);
-        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
         launchEnrollActivity(intent);
     }
 

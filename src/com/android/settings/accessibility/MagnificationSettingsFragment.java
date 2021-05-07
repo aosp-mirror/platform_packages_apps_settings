@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
+import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -27,11 +28,13 @@ import com.android.settingslib.search.SearchIndexable;
 
 /** Settings page for magnification. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class MagnificationSettingsFragment extends DashboardFragment {
+public class MagnificationSettingsFragment extends DashboardFragment implements
+        MagnificationModePreferenceController.DialogHelper {
 
     private static final String TAG = "MagnificationSettingsFragment";
 
-    private MagnificationModePreferenceController mMagnificationModePreferenceController;
+    private DialogCreatable mDialogDelegate;
+
 
     @Override
     public int getMetricsCategory() {
@@ -41,19 +44,23 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mMagnificationModePreferenceController = use(MagnificationModePreferenceController.class);
-        mMagnificationModePreferenceController.setParentFragment(this);
+        use(MagnificationModePreferenceController.class).setDialogHelper(this);
     }
 
     @Override
-    protected void showDialog(int dialogId) {
+    public void showDialog(int dialogId) {
         super.showDialog(dialogId);
     }
 
     @Override
+    public void setDialogDelegate(DialogCreatable delegate) {
+        mDialogDelegate = delegate;
+    }
+
+    @Override
     public int getDialogMetricsCategory(int dialogId) {
-        if (mMagnificationModePreferenceController != null) {
-            return mMagnificationModePreferenceController.getDialogMetricsCategory(dialogId);
+        if (mDialogDelegate != null) {
+            return mDialogDelegate.getDialogMetricsCategory(dialogId);
         }
         return 0;
     }
@@ -70,8 +77,8 @@ public class MagnificationSettingsFragment extends DashboardFragment {
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
-        if (mMagnificationModePreferenceController != null) {
-            final Dialog dialog = mMagnificationModePreferenceController.onCreateDialog(dialogId);
+        if (mDialogDelegate != null) {
+            final Dialog dialog = mDialogDelegate.onCreateDialog(dialogId);
             if (dialog != null) {
                 return dialog;
             }

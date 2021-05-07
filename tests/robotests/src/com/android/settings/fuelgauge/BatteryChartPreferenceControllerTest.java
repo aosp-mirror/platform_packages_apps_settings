@@ -33,6 +33,7 @@ import android.graphics.drawable.Drawable;
 import android.text.format.DateUtils;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
@@ -81,10 +82,7 @@ public final class BatteryChartPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mBatteryChartPreferenceController =
-            new BatteryChartPreferenceController(
-                mContext, "app_list", /*lifecycle=*/ null,
-                mSettingsActivity, mFragment);
+        mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
         mBatteryChartPreferenceController.mBatteryChartView = mBatteryChartView;
@@ -485,52 +483,13 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
-    public void testRefreshCategoryTitle_appComponent_setHourIntoPreferenceTitle() {
+    public void testRefreshCategoryTitle_setHourIntoBothTitleTextView() {
+        mBatteryChartPreferenceController = createController();
         setUpBatteryHistoryKeys();
-        mBatteryChartPreferenceController.mCategoryTitleType =
-            BatteryChartPreferenceController.CategoryTitleType.TYPE_APP_COMPONENT;
+        mBatteryChartPreferenceController.mAppListPrefGroup =
+            spy(new PreferenceCategory(mContext));
         mBatteryChartPreferenceController.mExpandDividerPreference =
-            mExpandDividerPreference;
-        // Simulates select the first slot.
-        mBatteryChartPreferenceController.mTrapezoidIndex = 0;
-
-        mBatteryChartPreferenceController.refreshCategoryTitle();
-
-        final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        // Verifies the title in the preference group.
-        verify(mAppListGroup).setTitle(captor.capture());
-        assertThat(captor.getValue())
-            .isEqualTo("App usage for 4 pm-7 am");
-        verify(mExpandDividerPreference).setTitle(null);
-    }
-
-    @Test
-    public void testRefreshCategoryTitle_systemComponent_setHourIntoPreferenceTitle() {
-        setUpBatteryHistoryKeys();
-        mBatteryChartPreferenceController.mCategoryTitleType =
-            BatteryChartPreferenceController.CategoryTitleType.TYPE_SYSTEM_COMPONENT;
-        mBatteryChartPreferenceController.mExpandDividerPreference =
-            mExpandDividerPreference;
-        // Simulates select the first slot.
-        mBatteryChartPreferenceController.mTrapezoidIndex = 0;
-
-        mBatteryChartPreferenceController.refreshCategoryTitle();
-
-        final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        // Verifies the title in the preference group.
-        verify(mAppListGroup).setTitle(captor.capture());
-        assertThat(captor.getValue())
-            .isEqualTo("System usage for 4 pm-7 am");
-        verify(mExpandDividerPreference).setTitle(null);
-    }
-
-    @Test
-    public void testRefreshCategoryTitle_allComponents_setHourIntoBothTitleTextView() {
-        setUpBatteryHistoryKeys();
-        mBatteryChartPreferenceController.mCategoryTitleType =
-            BatteryChartPreferenceController.CategoryTitleType.TYPE_ALL_COMPONENTS;
-        mBatteryChartPreferenceController.mExpandDividerPreference =
-            mExpandDividerPreference;
+            spy(new ExpandDividerPreference(mContext));
         // Simulates select the first slot.
         mBatteryChartPreferenceController.mTrapezoidIndex = 0;
 
@@ -538,22 +497,25 @@ public final class BatteryChartPreferenceControllerTest {
 
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         // Verifies the title in the preference group.
-        verify(mAppListGroup).setTitle(captor.capture());
+        verify(mBatteryChartPreferenceController.mAppListPrefGroup)
+            .setTitle(captor.capture());
         assertThat(captor.getValue())
             .isEqualTo("App usage for 4 pm-7 am");
         // Verifies the title in the expandable divider.
         captor = ArgumentCaptor.forClass(String.class);
-        verify(mExpandDividerPreference).setTitle(captor.capture());
+        verify(mBatteryChartPreferenceController.mExpandDividerPreference)
+            .setTitle(captor.capture());
         assertThat(captor.getValue())
             .isEqualTo("System usage for 4 pm-7 am");
     }
 
     @Test
-    public void testRefreshCategoryTitle_allComponents_setLast24HrIntoBothTitleTextView() {
-        mBatteryChartPreferenceController.mCategoryTitleType =
-            BatteryChartPreferenceController.CategoryTitleType.TYPE_ALL_COMPONENTS;
+    public void testRefreshCategoryTitle_setLast24HrIntoBothTitleTextView() {
+        mBatteryChartPreferenceController = createController();
+        mBatteryChartPreferenceController.mAppListPrefGroup =
+            spy(new PreferenceCategory(mContext));
         mBatteryChartPreferenceController.mExpandDividerPreference =
-            mExpandDividerPreference;
+            spy(new ExpandDividerPreference(mContext));
         // Simulates select all condition.
         mBatteryChartPreferenceController.mTrapezoidIndex =
             BatteryChartView.SELECTED_INDEX_ALL;
@@ -562,14 +524,62 @@ public final class BatteryChartPreferenceControllerTest {
 
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         // Verifies the title in the preference group.
-        verify(mAppListGroup).setTitle(captor.capture());
+        verify(mBatteryChartPreferenceController.mAppListPrefGroup)
+            .setTitle(captor.capture());
         assertThat(captor.getValue())
             .isEqualTo("App usage for past 24 hr");
         // Verifies the title in the expandable divider.
         captor = ArgumentCaptor.forClass(String.class);
-        verify(mExpandDividerPreference).setTitle(captor.capture());
+        verify(mBatteryChartPreferenceController.mExpandDividerPreference)
+            .setTitle(captor.capture());
         assertThat(captor.getValue())
             .isEqualTo("System usage for past 24 hr");
+    }
+
+    @Test
+    public void testSetTimestampLabel_nullBatteryHistoryKeys_ignore() {
+        mBatteryChartPreferenceController = createController();
+        mBatteryChartPreferenceController.mBatteryHistoryKeys = null;
+        mBatteryChartPreferenceController.mBatteryChartView =
+            spy(new BatteryChartView(mContext));
+        mBatteryChartPreferenceController.setTimestampLabel();
+
+        verify(mBatteryChartPreferenceController.mBatteryChartView, never())
+            .setTimestamps(any());
+    }
+
+    @Test
+    public void testSetTimestampLabel_setExpectedTimestampData() {
+        mBatteryChartPreferenceController = createController();
+        mBatteryChartPreferenceController.mBatteryChartView =
+            spy(new BatteryChartView(mContext));
+        setUpBatteryHistoryKeys();
+        // Generates the expected result.
+        final String[] expectedResults = new String[4];
+        final long timeSlotOffset = DateUtils.HOUR_IN_MILLIS * 8;
+        for (int index = 0; index < expectedResults.length; index++) {
+            expectedResults[index] =
+                ConvertUtils.utcToLocalTimeHour(
+                    1619247636826L - (3 - index) * timeSlotOffset);
+        }
+
+        mBatteryChartPreferenceController.setTimestampLabel();
+
+        verify(mBatteryChartPreferenceController.mBatteryChartView)
+            .setTimestamps(expectedResults);
+    }
+
+    @Test
+    public void testSetTimestampLabel_withoutValidTimestamp_setExpectedTimestampData() {
+        mBatteryChartPreferenceController = createController();
+        mBatteryChartPreferenceController.mBatteryChartView =
+            spy(new BatteryChartView(mContext));
+        mBatteryChartPreferenceController.mBatteryHistoryKeys = new long[] {0L};
+
+        mBatteryChartPreferenceController.setTimestampLabel();
+
+        verify(mBatteryChartPreferenceController.mBatteryChartView)
+            .setTimestamps(any());
     }
 
     private static Map<Long, List<BatteryHistEntry>> createBatteryHistoryMap(int size) {
@@ -597,5 +607,14 @@ public final class BatteryChartPreferenceControllerTest {
         // Simulates the locale in GMT.
         ConvertUtils.sSimpleDateFormatForHour
              .setTimeZone(TimeZone.getTimeZone("GMT"));
+    }
+
+    private BatteryChartPreferenceController createController() {
+        final BatteryChartPreferenceController controller =
+            new BatteryChartPreferenceController(
+                mContext, "app_list", /*lifecycle=*/ null,
+                mSettingsActivity, mFragment);
+        controller.mPrefContext = mContext;
+        return controller;
     }
 }

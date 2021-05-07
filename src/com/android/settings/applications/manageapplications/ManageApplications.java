@@ -83,7 +83,6 @@ import com.android.settings.Settings;
 import com.android.settings.Settings.GamesStorageActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.Settings.ManageExternalSourcesActivity;
-import com.android.settings.Settings.MoviesStorageActivity;
 import com.android.settings.Settings.OverlaySettingsActivity;
 import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.Settings.UsageAccessSettingsActivity;
@@ -130,7 +129,6 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
 import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
-import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
@@ -182,9 +180,7 @@ public class ManageApplications extends InstrumentedFragment
 
     // Storage types. Used to determine what the extra item in the list of preferences is.
     public static final int STORAGE_TYPE_DEFAULT = 0; // Show all apps that are not categorized.
-    public static final int STORAGE_TYPE_MUSIC = 1;
-    public static final int STORAGE_TYPE_LEGACY = 2; // Show apps even if they can be categorized.
-    public static final int STORAGE_TYPE_PHOTOS_VIDEOS = 3;
+    public static final int STORAGE_TYPE_LEGACY = 1;  // Show apps even if they can be categorized.
 
     /**
      * Intents with action {@code android.settings.MANAGE_APP_OVERLAY_PERMISSION}
@@ -230,12 +226,10 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_WRITE_SETTINGS = 7;
     public static final int LIST_TYPE_MANAGE_SOURCES = 8;
     public static final int LIST_TYPE_GAMES = 9;
-    public static final int LIST_TYPE_MOVIES = 10;
-    public static final int LIST_TYPE_PHOTOGRAPHY = 11;
-    public static final int LIST_TYPE_WIFI_ACCESS = 13;
-    public static final int LIST_MANAGE_EXTERNAL_STORAGE = 14;
-    public static final int LIST_TYPE_ALARMS_AND_REMINDERS = 15;
-    public static final int LIST_TYPE_MEDIA_MANAGEMENT_APPS = 16;
+    public static final int LIST_TYPE_WIFI_ACCESS = 10;
+    public static final int LIST_MANAGE_EXTERNAL_STORAGE = 11;
+    public static final int LIST_TYPE_ALARMS_AND_REMINDERS = 12;
+    public static final int LIST_TYPE_MEDIA_MANAGEMENT_APPS = 13;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -314,13 +308,6 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(GamesStorageActivity.class.getName())) {
             mListType = LIST_TYPE_GAMES;
             mSortOrder = R.id.sort_order_size;
-        } else if (className.equals(MoviesStorageActivity.class.getName())) {
-            mListType = LIST_TYPE_MOVIES;
-            mSortOrder = R.id.sort_order_size;
-        } else if (className.equals(Settings.PhotosStorageActivity.class.getName())) {
-            mListType = LIST_TYPE_PHOTOGRAPHY;
-            mSortOrder = R.id.sort_order_size;
-            mStorageType = args.getInt(EXTRA_STORAGE_TYPE, STORAGE_TYPE_DEFAULT);
         } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
             mListType = LIST_TYPE_WIFI_ACCESS;
             screenTitle = R.string.change_wifi_state_title;
@@ -429,24 +416,6 @@ public class ManageApplications extends InstrumentedFragment
                 mApplications.mHasReceivedBridgeCallback =
                         savedInstanceState.getBoolean(EXTRA_HAS_BRIDGE, false);
             }
-            int userId = mIsWorkOnly ? mWorkUserId : UserHandle.myUserId();
-            if (mStorageType == STORAGE_TYPE_MUSIC) {
-                Context context = getContext();
-                mApplications.setExtraViewController(
-                        new MusicViewHolderController(
-                                context,
-                                new StorageStatsSource(context),
-                                mVolumeUuid,
-                                UserHandle.of(userId)));
-            } else if (mStorageType == STORAGE_TYPE_PHOTOS_VIDEOS) {
-                Context context = getContext();
-                mApplications.setExtraViewController(
-                        new PhotosViewHolderController(
-                                context,
-                                new StorageStatsSource(context),
-                                mVolumeUuid,
-                                UserHandle.of(userId)));
-            }
             mRecyclerView = mListContainer.findViewById(R.id.apps_list);
             mRecyclerView.setItemAnimator(null);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(
@@ -508,19 +477,13 @@ public class ManageApplications extends InstrumentedFragment
     static AppFilter getCompositeFilter(int listType, int storageType, String volumeUuid) {
         AppFilter filter = new VolumeFilter(volumeUuid);
         if (listType == LIST_TYPE_STORAGE) {
-            if (storageType == STORAGE_TYPE_MUSIC) {
-                filter = new CompoundFilter(ApplicationsState.FILTER_AUDIO, filter);
-            } else if (storageType == STORAGE_TYPE_DEFAULT) {
-                filter = new CompoundFilter(ApplicationsState.FILTER_OTHER_APPS, filter);
+            if (storageType == STORAGE_TYPE_DEFAULT) {
+                filter = new CompoundFilter(ApplicationsState.FILTER_APPS_EXCEPT_GAMES, filter);
             }
             return filter;
         }
         if (listType == LIST_TYPE_GAMES) {
             return new CompoundFilter(ApplicationsState.FILTER_GAMES, filter);
-        } else if (listType == LIST_TYPE_MOVIES) {
-            return new CompoundFilter(ApplicationsState.FILTER_MOVIES, filter);
-        } else if (listType == LIST_TYPE_PHOTOGRAPHY) {
-            return new CompoundFilter(ApplicationsState.FILTER_PHOTOS, filter);
         }
         return null;
     }
@@ -533,16 +496,9 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_NOTIFICATION:
                 return SettingsEnums.MANAGE_APPLICATIONS_NOTIFICATIONS;
             case LIST_TYPE_STORAGE:
-                if (mStorageType == STORAGE_TYPE_MUSIC) {
-                    return SettingsEnums.APPLICATIONS_STORAGE_MUSIC;
-                }
                 return SettingsEnums.APPLICATIONS_STORAGE_APPS;
             case LIST_TYPE_GAMES:
                 return SettingsEnums.APPLICATIONS_STORAGE_GAMES;
-            case LIST_TYPE_MOVIES:
-                return SettingsEnums.APPLICATIONS_STORAGE_MOVIES;
-            case LIST_TYPE_PHOTOGRAPHY:
-                return SettingsEnums.APPLICATIONS_STORAGE_PHOTOS;
             case LIST_TYPE_USAGE_ACCESS:
                 return SettingsEnums.USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
@@ -668,12 +624,6 @@ public class ManageApplications extends InstrumentedFragment
             case LIST_TYPE_GAMES:
                 startAppInfoFragment(AppStorageSettings.class, R.string.game_storage_settings);
                 break;
-            case LIST_TYPE_MOVIES:
-                startAppInfoFragment(AppStorageSettings.class, R.string.storage_movies_tv);
-                break;
-            case LIST_TYPE_PHOTOGRAPHY:
-                startAppInfoFragment(AppStorageSettings.class, R.string.storage_photos_videos);
-                break;
             case LIST_TYPE_WIFI_ACCESS:
                 startAppInfoFragment(ChangeWifiStateDetails.class,
                         R.string.change_wifi_state_title);
@@ -760,10 +710,6 @@ public class ManageApplications extends InstrumentedFragment
                 return R.string.help_uri_apps_manage_sources;
             case LIST_TYPE_GAMES:
                 return R.string.help_uri_apps_overlay;
-            case LIST_TYPE_MOVIES:
-                return R.string.help_uri_apps_movies;
-            case LIST_TYPE_PHOTOGRAPHY:
-                return R.string.help_uri_apps_photography;
             case LIST_TYPE_WIFI_ACCESS:
                 return R.string.help_uri_apps_wifi_access;
             case LIST_MANAGE_EXTERNAL_STORAGE:
@@ -856,8 +802,6 @@ public class ManageApplications extends InstrumentedFragment
             mCurrentPkgName = entry.info.packageName;
             mCurrentUid = entry.info.uid;
             startApplicationDetailsActivity();
-        } else {
-            mApplications.mExtraViewController.onClick(this);
         }
     }
 
@@ -1046,7 +990,6 @@ public class ManageApplications extends InstrumentedFragment
         private AppFilter mCompositeFilter;
         private boolean mHasReceivedLoadEntries;
         private boolean mHasReceivedBridgeCallback;
-        private FileViewHolderController mExtraViewController;
         private SearchFilter mSearchFilter;
         private PowerAllowlistBackend mBackend;
 
@@ -1146,18 +1089,6 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
 
-        public void setExtraViewController(FileViewHolderController extraViewController) {
-            mExtraViewController = extraViewController;
-            // Start to query extra view's stats on background, and once done post result to main
-            // thread.
-            ThreadUtils.postOnBackgroundThread(() -> {
-                mExtraViewController.queryStats();
-                ThreadUtils.postOnMainThread(() -> {
-                    onExtraViewCompleted();
-                });
-            });
-        }
-
         public void resume(int sort) {
             if (DEBUG) Log.i(TAG, "Resume!  mResumed=" + mResumed);
             if (!mResumed) {
@@ -1219,10 +1150,7 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public int getItemViewType(int position) {
-            boolean isLastItem = (getItemCount() - 1) == position;
-            return hasExtraView() && isLastItem
-                    ? VIEW_TYPE_EXTRA_VIEW
-                    : VIEW_TYPE_APP;
+            return VIEW_TYPE_APP;
         }
 
         public void rebuild() {
@@ -1454,20 +1382,12 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
 
-        public void onExtraViewCompleted() {
-            if (!hasExtraView()) {
-                return;
-            }
-            // Update last item - this is assumed to be the extra view.
-            notifyItemChanged(getItemCount() - 1);
-        }
-
         @Override
         public int getItemCount() {
             if (mEntries == null) {
                 return 0;
             }
-            return mEntries.size() + (hasExtraView() ? 1 : 0);
+            return mEntries.size();
         }
 
         public int getApplicationCount() {
@@ -1499,24 +1419,20 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onBindViewHolder(ApplicationViewHolder holder, int position) {
-            if (mEntries != null && mExtraViewController != null && position == mEntries.size()) {
-                // set up view for extra view controller
-                mExtraViewController.setupView(holder);
-            } else {
-                // Bind the data efficiently with the holder
-                ApplicationsState.AppEntry entry = mEntries.get(position);
-                synchronized (entry) {
-                    holder.setTitle(entry.label);
-                    mState.ensureLabelDescription(entry);
-                    holder.itemView.setContentDescription(entry.labelDescription);
-                    mState.ensureIcon(entry);
-                    holder.setIcon(entry.icon);
-                    updateSummary(holder, entry);
-                    updateSwitch(holder, entry);
-                    holder.updateDisableView(entry.info);
-                }
-                holder.setEnabled(isEnabled(position));
+            // Bind the data efficiently with the holder
+            final ApplicationsState.AppEntry entry = mEntries.get(position);
+            synchronized (entry) {
+                holder.setTitle(entry.label);
+                mState.ensureLabelDescription(entry);
+                holder.itemView.setContentDescription(entry.labelDescription);
+                mState.ensureIcon(entry);
+                holder.setIcon(entry.icon);
+                updateSummary(holder, entry);
+                updateSwitch(holder, entry);
+                holder.updateDisableView(entry.info);
             }
+            holder.setEnabled(isEnabled(position));
+
             holder.itemView.setOnClickListener(mManageApplications);
         }
 
@@ -1587,11 +1503,6 @@ public class ManageApplications extends InstrumentedFragment
                     }
                     break;
             }
-        }
-
-        private boolean hasExtraView() {
-            return mExtraViewController != null
-                    && mExtraViewController.shouldShow();
         }
 
         public static class OnScrollListener extends RecyclerView.OnScrollListener {

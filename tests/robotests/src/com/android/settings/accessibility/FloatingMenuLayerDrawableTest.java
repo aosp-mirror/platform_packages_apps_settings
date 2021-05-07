@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.ImageTestUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,11 +52,10 @@ public class FloatingMenuLayerDrawableTest {
 
         final Drawable actual1stDrawable = actualDrawable.getDrawable(0);
         final Drawable actual2ndDrawable = actualDrawable.getDrawable(1);
-        // These are VectorDrawables, so it can use getConstantState() to compare.
-        assertThat(actual1stDrawable.getConstantState()).isEqualTo(
-                expected1stDrawable.getConstantState());
-        assertThat(actual2ndDrawable.getConstantState()).isEqualTo(
-                expected2ndDrawable.getConstantState());
+        assertThat(ImageTestUtils.drawableToBitmap(actual1stDrawable).sameAs(
+                ImageTestUtils.drawableToBitmap(expected1stDrawable))).isTrue();
+        assertThat(ImageTestUtils.drawableToBitmap(actual2ndDrawable).sameAs(
+                ImageTestUtils.drawableToBitmap(expected2ndDrawable))).isTrue();
     }
 
     @Test

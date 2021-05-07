@@ -61,9 +61,10 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
     long mCurrentFunctions;
     @VisibleForTesting
     boolean mIsStartTethering = false;
+    @VisibleForTesting
+    Handler mHandler;
 
     private UsbConnectionBroadcastReceiver mUsbReceiver;
-    private Handler mHandler = new Handler();
     private boolean mIsConnected = false;
 
     @VisibleForTesting
@@ -71,14 +72,17 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
             (connected, functions, powerRole, dataRole) -> {
                 final long defaultFunctions = mUsbBackend.getDefaultUsbFunctions();
                 Log.d(TAG, "UsbConnectionListener() connected : " + connected + ", functions : "
-                        + functions + ", defaultFunctions : " + defaultFunctions);
-                if (connected && !mIsConnected && defaultFunctions == UsbManager.FUNCTION_RNDIS) {
+                        + functions + ", defaultFunctions : " + defaultFunctions
+                        + ", mIsStartTethering : " + mIsStartTethering);
+                if (connected && !mIsConnected && defaultFunctions == UsbManager.FUNCTION_RNDIS
+                        && !mIsStartTethering) {
                     startTethering();
                 }
 
-                if (mIsStartTethering) {
+                if (mIsStartTethering && connected) {
                     mCurrentFunctions = functions;
                     refresh(functions);
+                    mUsbBackend.setDefaultUsbFunctions(functions);
                     mIsStartTethering = false;
                 }
                 mIsConnected = connected;
@@ -91,6 +95,7 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
         mTetheringManager = context.getSystemService(TetheringManager.class);
         mUsbReceiver = new UsbConnectionBroadcastReceiver(context, mUsbConnectionListener,
                 mUsbBackend);
+        mHandler = new Handler(context.getMainLooper());
         getSettingsLifecycle().addObserver(mUsbReceiver);
         mCurrentFunctions = mUsbBackend.getDefaultUsbFunctions();
     }

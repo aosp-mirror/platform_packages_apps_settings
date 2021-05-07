@@ -94,55 +94,15 @@ public class UwbPreferenceControllerTest {
     }
 
     @Test
-    public void onStateChanged_stateNotRegistered_shouldUpdate() {
-        mController.mRegisteredAdapterStateCallback = false;
-        mController.onStateChanged(UwbManager.AdapterStateCallback.STATE_DISABLED,
-                UwbManager.AdapterStateCallback.STATE_CHANGED_REASON_SYSTEM_POLICY);
-
-        assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
-    public void onStateChanged_stateRegistered_shouldNotUpdate() {
-        mController.mRegisteredAdapterStateCallback = true;
-        mController.onStateChanged(UwbManager.AdapterStateCallback.STATE_ENABLED_INACTIVE,
-                UwbManager.AdapterStateCallback.STATE_CHANGED_REASON_SYSTEM_POLICY);
-
-        assertThat(mController.isChecked()).isTrue();
-    }
-
-    @Test
-    public void isChecked_uwbEnabledInactive_shouldReturnTrue() {
-        doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(true).when(mPackageManager)
-                .hasSystemFeature(PackageManager.FEATURE_UWB);
-        mController.mRegisteredAdapterStateCallback = false;
-        mController.onStateChanged(UwbManager.AdapterStateCallback.STATE_ENABLED_INACTIVE,
-                UwbManager.AdapterStateCallback.STATE_CHANGED_REASON_SYSTEM_POLICY);
-
-        assertThat(mController.isChecked()).isTrue();
-    }
-
-    @Test
-    public void isChecked_uwbEnabledActive_shouldReturnTrue() {
-        doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(true).when(mPackageManager)
-                .hasSystemFeature(PackageManager.FEATURE_UWB);
-        mController.mRegisteredAdapterStateCallback = false;
-        mController.onStateChanged(UwbManager.AdapterStateCallback.STATE_ENABLED_ACTIVE,
-                UwbManager.AdapterStateCallback.STATE_CHANGED_REASON_SYSTEM_POLICY);
+    public void isChecked_uwbEnabled_shouldReturnTrue() {
+        doReturn(mController.STATE_ENABLED_ACTIVE).when(mUwbManager).getAdapterState();
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void isChecked_uwbDisabled_shouldReturnFalse() {
-        doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(true).when(mPackageManager)
-                .hasSystemFeature(PackageManager.FEATURE_UWB);
-        mController.mRegisteredAdapterStateCallback = false;
-        mController.onStateChanged(UwbManager.AdapterStateCallback.STATE_DISABLED,
-                UwbManager.AdapterStateCallback.STATE_CHANGED_REASON_SYSTEM_POLICY);
+        doReturn(mController.STATE_DISABLED).when(mUwbManager).getAdapterState();
 
         assertThat(mController.isChecked()).isFalse();
     }

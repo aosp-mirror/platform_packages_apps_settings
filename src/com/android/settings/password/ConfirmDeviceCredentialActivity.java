@@ -192,14 +192,13 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             }
         }
         final int effectiveUserId = mUserManager.getCredentialOwnerProfile(mUserId);
-        final boolean isManagedProfile = UserManager.get(this).isManagedProfile(mUserId);
+        final boolean isEffectiveUserManagedProfile =
+                UserManager.get(this).isManagedProfile(effectiveUserId);
         // if the client app did not hand in a title and we are about to show the work challenge,
         // check whether there is a policy setting the organization name and use that as title
-        if ((mTitle == null) && isManagedProfile) {
+        if ((mTitle == null) && isEffectiveUserManagedProfile) {
             mTitle = getTitleFromOrganizationName(mUserId);
         }
-
-        final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
 
         final PromptInfo promptInfo = new PromptInfo();
         promptInfo.setTitle(mTitle);
@@ -210,11 +209,11 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 mContext, effectiveUserId);
         if (mTitle == null) {
             promptInfo.setDeviceCredentialTitle(
-                    getTitleFromCredentialType(credentialType, isManagedProfile));
+                    getTitleFromCredentialType(credentialType, isEffectiveUserManagedProfile));
         }
         if (mDetails == null) {
             promptInfo.setSubtitle(
-                    getDetailsFromCredentialType(credentialType, isManagedProfile));
+                    getDetailsFromCredentialType(credentialType, isEffectiveUserManagedProfile));
         }
 
         boolean launchedBiometric = false;
@@ -231,8 +230,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setExternal(true)
                     .setUserId(LockPatternUtils.USER_FRP)
                     .show();
-        } else if (isManagedProfile && isInternalActivity()
-                && !lockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
+        } else if (isEffectiveUserManagedProfile && isInternalActivity()) {
             mCredentialMode = CREDENTIAL_MANAGED;
             if (isBiometricAllowed(effectiveUserId, mUserId)) {
                 showBiometricPrompt(promptInfo);
@@ -267,18 +265,18 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     }
 
     private String getTitleFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
-            boolean isManagedProfile) {
+            boolean isEffectiveUserManagedProfile) {
         switch (credentialType) {
             case LockPatternUtils.CREDENTIAL_TYPE_PIN:
-                return isManagedProfile
+                return isEffectiveUserManagedProfile
                         ? getString(R.string.lockpassword_confirm_your_work_pin_header)
                         : getString(R.string.lockpassword_confirm_your_pin_header);
             case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
-                return isManagedProfile
+                return isEffectiveUserManagedProfile
                         ? getString(R.string.lockpassword_confirm_your_work_pattern_header)
                         : getString(R.string.lockpassword_confirm_your_pattern_header);
             case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
-                return isManagedProfile
+                return isEffectiveUserManagedProfile
                         ? getString(R.string.lockpassword_confirm_your_work_password_header)
                         : getString(R.string.lockpassword_confirm_your_password_header);
         }
@@ -286,18 +284,18 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     }
 
     private String getDetailsFromCredentialType(@LockPatternUtils.CredentialType int credentialType,
-            boolean isManagedProfile) {
+            boolean isEffectiveUserManagedProfile) {
         switch (credentialType) {
             case LockPatternUtils.CREDENTIAL_TYPE_PIN:
-                return isManagedProfile
+                return isEffectiveUserManagedProfile
                         ? getString(R.string.lockpassword_confirm_your_pin_generic_profile)
                         : getString(R.string.lockpassword_confirm_your_pin_generic);
             case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
-                return isManagedProfile
+                return isEffectiveUserManagedProfile
                         ? getString(R.string.lockpassword_confirm_your_pattern_generic_profile)
                         : getString(R.string.lockpassword_confirm_your_pattern_generic);
             case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
-                return isManagedProfile
+                return isEffectiveUserManagedProfile
                         ? getString(R.string.lockpassword_confirm_your_password_generic_profile)
                         : getString(R.string.lockpassword_confirm_your_password_generic);
         }

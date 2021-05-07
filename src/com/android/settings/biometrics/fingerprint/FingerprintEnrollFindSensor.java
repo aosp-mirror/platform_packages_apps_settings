@@ -85,7 +85,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 mChallenge = challenge;
                 mSensorId = sensorId;
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
-                BiometricUtils.removeGatekeeperPasswordHandle(this, getIntent());
 
                 // Put this into the intent. This is really just to work around the fact that the
                 // enrollment sidecar gets the HAT from the activity's intent, rather than having
@@ -111,6 +110,12 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        stopLookingForFingerprint();
+        super.onBackPressed();
+    }
+
     protected int getContentView() {
         if (mCanAssumeUdfps) {
             if (BiometricUtils.isReverseLandscape(getApplicationContext())) {
@@ -127,6 +132,16 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         super.onStart();
         if (mAnimation != null) {
             mAnimation.startAnimation();
+        }
+    }
+
+    private void stopLookingForFingerprint() {
+        if (mSidecar != null) {
+            mSidecar.setListener(null);
+            mSidecar.cancelEnrollment();
+            getSupportFragmentManager()
+                    .beginTransaction().remove(mSidecar).commitAllowingStateLoss();
+            mSidecar = null;
         }
     }
 
@@ -185,6 +200,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     protected void onSkipButtonClick(View view) {
+        stopLookingForFingerprint();
         setResult(RESULT_SKIP);
         finish();
     }

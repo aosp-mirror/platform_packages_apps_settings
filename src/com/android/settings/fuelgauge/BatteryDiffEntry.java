@@ -15,8 +15,6 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.IPackageManager;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
@@ -29,7 +27,6 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.utils.StringUtil;
 
-import java.time.Duration;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Locale;
@@ -158,7 +155,7 @@ public class BatteryDiffEntry {
                 break;
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
                 final BatteryEntry.NameAndIcon nameAndIconForSystem =
-                    BatteryEntry.getNameAndIconFromDrainType(
+                    BatteryEntry.getNameAndIconFromPowerComponent(
                         mContext, mBatteryHistEntry.mDrainType);
                 if (nameAndIconForSystem != null) {
                     mAppLabel = nameAndIconForSystem.name;

@@ -27,6 +27,14 @@
         settings:controller=
             "com.android.settings.location.RecentLocationAccessPreferenceController"/>
 
+    <Preference
+        android:key="recent_location_access_see_all_button"
+        android:title="@string/location_recent_location_access_see_all"
+        android:icon="@drawable/ic_chevron_right_24dp"
+        android:fragment="com.android.settings.location.RecentLocationAccessSeeAllFragment"
+        settings:controller="com.android.settings.location.RecentLocationAccessSeeAllButtonPreferenceController"
+        settings:searchable="false"/>
+
     <PreferenceCategory
         android:key="location_advanced_settings"
         android:layout="@layout/preference_category_no_label"
@@ -46,7 +54,6 @@
         <Preference
             android:key="app_level_permissions"
             android:title="@string/location_app_level_permissions"
-            android:icon="@drawable/ic_chevron_right_24dp"
             settings:controller="com.android.settings.location.AppLocationPermissionPreferenceController">
             <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
                 <extra android:name="android.intent.extra.PERMISSION_NAME"
@@ -57,7 +64,6 @@
         <Preference
             android:fragment="com.android.settings.location.LocationServices"
             android:key="location_services"
-            android:icon="@drawable/ic_chevron_right_24dp"
             android:title="@string/location_services_preference_title"
             settings:controller="com.android.settings.location.LocationServicesPreferenceController"/>
 

@@ -19,11 +19,16 @@ package com.android.settings;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.security.SecuritySettingsFeatureProvider;
+
+import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Top-level Settings activity
@@ -118,7 +123,39 @@ public class Settings extends SettingsActivity {
      * Activity for Reduce Bright Colors.
      */
     public static class ReduceBrightColorsSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class SecurityDashboardActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the security dashboard. */
+    public static class SecurityDashboardActivity extends SettingsActivity {
+
+        /** Whether the given fragment is allowed. */
+        @VisibleForTesting
+        @Override
+        public boolean isValidFragment(String fragmentName) {
+            return super.isValidFragment(fragmentName)
+                    || (fragmentName != null
+                            && TextUtils.equals(fragmentName, getAlternativeFragmentName()));
+        }
+
+        @Override
+        public String getInitialFragmentName(Intent intent) {
+            final String alternativeFragmentName = getAlternativeFragmentName();
+            if (alternativeFragmentName != null) {
+                return alternativeFragmentName;
+            }
+
+            return super.getInitialFragmentName(intent);
+        }
+
+        private String getAlternativeFragmentName() {
+            String alternativeFragmentClassname = null;
+            final SecuritySettingsFeatureProvider securitySettingsFeatureProvider =
+                    FeatureFactory.getFactory(this).getSecuritySettingsFeatureProvider();
+            if (securitySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
+                alternativeFragmentClassname = securitySettingsFeatureProvider
+                        .getAlternativeSecuritySettingsFragmentClassname();
+            }
+            return alternativeFragmentClassname;
+        }
+    }
     public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -129,6 +166,7 @@ public class Settings extends SettingsActivity {
         @Override
         protected void onCreate(Bundle savedState) {
             setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            ThemeHelper.trySetDynamicColor(this);
             super.onCreate(savedState);
         }
 
@@ -141,6 +179,7 @@ public class Settings extends SettingsActivity {
         @Override
         protected void onCreate(Bundle savedState) {
             setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            ThemeHelper.trySetDynamicColor(this);
             super.onCreate(savedState);
         }
 
@@ -199,10 +238,6 @@ public class Settings extends SettingsActivity {
     public static class ManageDomainUrlsActivity extends SettingsActivity { /* empty */ }
     public static class AutomaticStorageManagerSettingsActivity extends SettingsActivity { /* empty */ }
     public static class GamesStorageActivity extends SettingsActivity { /* empty */ }
-    public static class MoviesStorageActivity extends SettingsActivity { /* empty */ }
-    public static class PhotosStorageActivity extends SettingsActivity {
-        /* empty */
-    }
     public static class GestureNavigationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class InteractAcrossProfilesSettingsActivity extends SettingsActivity {
         /* empty */

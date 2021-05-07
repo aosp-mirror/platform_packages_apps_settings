@@ -39,6 +39,7 @@ import androidx.annotation.XmlRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
@@ -48,6 +49,7 @@ import com.android.settings.testutils.shadow.ShadowFragment;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -63,6 +65,8 @@ public class ToggleFeaturePreferenceFragmentTest {
     private static final ComponentName PLACEHOLDER_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
+    private static final String DEFAULT_SUMMARY = "default summary";
+    private static final String DEFAULT_DESCRIPTION = "default description";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
@@ -70,9 +74,10 @@ public class ToggleFeaturePreferenceFragmentTest {
             Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
 
     private TestToggleFeaturePreferenceFragment mFragment;
+    private PreferenceScreen mScreen;
     private Context mContext = ApplicationProvider.getApplicationContext();
 
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
 
     @Before
@@ -83,7 +88,9 @@ public class ToggleFeaturePreferenceFragmentTest {
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mContext);
-        doReturn(null).when(mFragment).getPreferenceScreen();
+        mScreen = spy(new PreferenceScreen(mContext, null));
+        when(mScreen.getPreferenceManager()).thenReturn(mPreferenceManager);
+        doReturn(mScreen).when(mFragment).getPreferenceScreen();
     }
 
     @Test
@@ -193,6 +200,21 @@ public class ToggleFeaturePreferenceFragmentTest {
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+    }
+
+    @Test
+    public void createFooterPreference_shouldSetAsExpectedValue() {
+        mFragment.createFooterPreference(mFragment.getPreferenceScreen(),
+                DEFAULT_SUMMARY, DEFAULT_DESCRIPTION);
+
+        AccessibilityFooterPreference accessibilityFooterPreference =
+                (AccessibilityFooterPreference) mFragment.getPreferenceScreen().getPreference(
+                        mFragment.getPreferenceScreen().getPreferenceCount() - 1);
+        assertThat(accessibilityFooterPreference.getSummary()).isEqualTo(DEFAULT_SUMMARY);
+        assertThat(accessibilityFooterPreference.getIconContentDescription()).isEqualTo(
+                DEFAULT_DESCRIPTION);
+        assertThat(accessibilityFooterPreference.isSelectable()).isEqualTo(true);
+        assertThat(accessibilityFooterPreference.getOrder()).isEqualTo(Integer.MAX_VALUE - 1);
     }
 
     private void putStringIntoSettings(String key, String componentName) {

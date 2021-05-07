@@ -285,7 +285,7 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    public void bindPreference_noSummary_shouldSetSummaryToPlaceholder() {
+    public void bindPreference_noSummary_shouldSetNullSummary() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         mActivityInfo.metaData.remove(META_DATA_PREFERENCE_SUMMARY);
 
@@ -295,8 +295,7 @@ public class DashboardFeatureProviderImplTest {
                 MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
                 Preference.DEFAULT_ORDER);
 
-        assertThat(preference.getSummary())
-                .isEqualTo(RuntimeEnvironment.application.getString(R.string.summary_placeholder));
+        assertThat(preference.getSummary()).isNull();
     }
 
     @Test

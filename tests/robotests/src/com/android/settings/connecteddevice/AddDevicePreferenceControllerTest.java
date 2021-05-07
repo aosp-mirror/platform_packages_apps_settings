@@ -79,6 +79,7 @@ public class AddDevicePreferenceControllerTest {
         String key = mAddDevicePreferenceController.getPreferenceKey();
         mAddDevicePreference = new RestrictedPreference(mContext);
         mAddDevicePreference.setKey(key);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
         when(mScreen.findPreference(key)).thenReturn(mAddDevicePreference);
         mAddDevicePreferenceController.displayPreference(mScreen);
     }
@@ -127,5 +128,14 @@ public class AddDevicePreferenceControllerTest {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
         assertThat(mAddDevicePreferenceController.getAvailabilityStatus())
                 .isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_bluetoothIsDisabled_unSupported() {
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(false);
+
+        assertThat(mAddDevicePreferenceController.getAvailabilityStatus())
+                .isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }

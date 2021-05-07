@@ -15,10 +15,10 @@ package com.android.settings.fuelgauge;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.BatteryConsumer;
 import android.util.Log;
 
 import java.time.Duration;
-import java.util.TimeZone;
 
 /** A container class to carry data from {@link ContentValues}. */
 public class BatteryHistEntry {
@@ -30,6 +30,8 @@ public class BatteryHistEntry {
     public static final String KEY_APP_LABEL = "appLabel";
     public static final String KEY_PACKAGE_NAME = "packageName";
     public static final String KEY_IS_HIDDEN = "isHidden";
+    // Device booting elapsed time from SystemClock.elapsedRealtime().
+    public static final String KEY_BOOT_TIMESTAMP = "bootTimestamp";
     public static final String KEY_TIMESTAMP = "timestamp";
     public static final String KEY_ZONE_ID = "zoneId";
     public static final String KEY_TOTAL_POWER = "totalPower";
@@ -50,6 +52,7 @@ public class BatteryHistEntry {
     // Whether the data is represented as system component or not?
     public final boolean mIsHidden;
     // Records the timestamp relative information.
+    public final long mBootTimestamp;
     public final long mTimestamp;
     public final String mZoneId;
     // Records the battery usage relative information.
@@ -58,7 +61,9 @@ public class BatteryHistEntry {
     public final double mPercentOfTotal;
     public final long mForegroundUsageTimeInMs;
     public final long mBackgroundUsageTimeInMs;
+    @BatteryConsumer.PowerComponent
     public final int mDrainType;
+    @ConvertUtils.ConsumerType
     public final int mConsumerType;
     // Records the battery intent relative information.
     public final int mBatteryLevel;
@@ -74,6 +79,7 @@ public class BatteryHistEntry {
         mAppLabel = getString(values, KEY_APP_LABEL);
         mPackageName = getString(values, KEY_PACKAGE_NAME);
         mIsHidden = getBoolean(values, KEY_IS_HIDDEN);
+        mBootTimestamp = getLong(values, KEY_BOOT_TIMESTAMP);
         mTimestamp = getLong(values, KEY_TIMESTAMP);
         mZoneId = getString(values, KEY_ZONE_ID);
         mTotalPower = getDouble(values, KEY_TOTAL_POWER);
@@ -94,6 +100,7 @@ public class BatteryHistEntry {
         mAppLabel = getString(cursor, KEY_APP_LABEL);
         mPackageName = getString(cursor, KEY_PACKAGE_NAME);
         mIsHidden = getBoolean(cursor, KEY_IS_HIDDEN);
+        mBootTimestamp = getLong(cursor, KEY_BOOT_TIMESTAMP);
         mTimestamp = getLong(cursor, KEY_TIMESTAMP);
         mZoneId = getString(cursor, KEY_ZONE_ID);
         mTotalPower = getDouble(cursor, KEY_TOTAL_POWER);
@@ -106,6 +113,35 @@ public class BatteryHistEntry {
         mBatteryLevel = getInteger(cursor, KEY_BATTERY_LEVEL);
         mBatteryStatus = getInteger(cursor, KEY_BATTERY_STATUS);
         mBatteryHealth = getInteger(cursor, KEY_BATTERY_HEALTH);
+    }
+
+    private BatteryHistEntry(
+          BatteryHistEntry fromEntry,
+          long bootTimestamp,
+          long timestamp,
+          double totalPower,
+          double consumePower,
+          long foregroundUsageTimeInMs,
+          long backgroundUsageTimeInMs,
+          int batteryLevel) {
+        mUid = fromEntry.mUid;
+        mUserId = fromEntry.mUserId;
+        mAppLabel = fromEntry.mAppLabel;
+        mPackageName = fromEntry.mPackageName;
+        mIsHidden = fromEntry.mIsHidden;
+        mBootTimestamp = bootTimestamp;
+        mTimestamp = timestamp;
+        mZoneId = fromEntry.mZoneId;
+        mTotalPower = totalPower;
+        mConsumePower = consumePower;
+        mPercentOfTotal = fromEntry.mPercentOfTotal;
+        mForegroundUsageTimeInMs = foregroundUsageTimeInMs;
+        mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
+        mDrainType = fromEntry.mDrainType;
+        mConsumerType = fromEntry.mConsumerType;
+        mBatteryLevel = batteryLevel;
+        mBatteryStatus = fromEntry.mBatteryStatus;
+        mBatteryHealth = fromEntry.mBatteryHealth;
     }
 
     /** Whether this {@link BatteryHistEntry} is valid or not? */
@@ -153,12 +189,14 @@ public class BatteryHistEntry {
             .append("\nBatteryHistEntry{")
             .append(String.format("\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
                   mPackageName, mAppLabel, mUid, mUserId, mIsHidden))
-            .append(String.format("\n\ttimestamp=%s|zoneId=%s", recordAtDateTime, mZoneId))
+            .append(String.format("\n\ttimestamp=%s|zoneId=%s|bootTimestamp=%d",
+                  recordAtDateTime, mZoneId, Duration.ofMillis(mBootTimestamp).getSeconds()))
             .append(String.format("\n\tusage=%f|total=%f|consume=%f|elapsedTime=%d|%d",
                   mPercentOfTotal, mTotalPower, mConsumePower,
                   Duration.ofMillis(mForegroundUsageTimeInMs).getSeconds(),
                   Duration.ofMillis(mBackgroundUsageTimeInMs).getSeconds()))
-            .append(String.format("\n\tdrain=%d|consumer=%d", mDrainType, mConsumerType))
+            .append(String.format("\n\tdrainType=%d|consumerType=%d",
+                  mDrainType, mConsumerType))
             .append(String.format("\n\tbattery=%d|status=%d|health=%d\n}",
                   mBatteryLevel, mBatteryStatus, mBatteryHealth));
         return builder.toString();
@@ -250,4 +288,57 @@ public class BatteryHistEntry {
         return false;
     }
 
+    /** Creates new {@link BatteryHistEntry} from interpolation. */
+    public static BatteryHistEntry interpolate(
+            long slotTimestamp,
+            long upperTimestamp,
+            double ratio,
+            BatteryHistEntry lowerHistEntry,
+            BatteryHistEntry upperHistEntry) {
+        final double totalPower = interpolate(
+            lowerHistEntry == null ? 0 : lowerHistEntry.mTotalPower,
+            upperHistEntry.mTotalPower,
+            ratio);
+        final double consumePower = interpolate(
+            lowerHistEntry == null ? 0 : lowerHistEntry.mConsumePower,
+            upperHistEntry.mConsumePower,
+            ratio);
+        final double foregroundUsageTimeInMs = interpolate(
+            lowerHistEntry == null ? 0 : lowerHistEntry.mForegroundUsageTimeInMs,
+            upperHistEntry.mForegroundUsageTimeInMs,
+            ratio);
+        final double backgroundUsageTimeInMs = interpolate(
+            lowerHistEntry == null ? 0 : lowerHistEntry.mBackgroundUsageTimeInMs,
+            upperHistEntry.mBackgroundUsageTimeInMs,
+            ratio);
+        // Checks whether there is any abnoaml cases!
+        if (upperHistEntry.mConsumePower < consumePower
+                || upperHistEntry.mForegroundUsageTimeInMs < foregroundUsageTimeInMs
+                || upperHistEntry.mBackgroundUsageTimeInMs < backgroundUsageTimeInMs) {
+            Log.w(TAG, String.format(
+                "abnormal interpolation:\nupper:%s\nlower:%s",
+                upperHistEntry, lowerHistEntry));
+        }
+        final double batteryLevel =
+            lowerHistEntry == null
+                ? upperHistEntry.mBatteryLevel
+                : interpolate(
+                    lowerHistEntry.mBatteryLevel,
+                    upperHistEntry.mBatteryLevel,
+                    ratio);
+        return new BatteryHistEntry(
+            upperHistEntry,
+            /*bootTimestamp=*/ upperHistEntry.mBootTimestamp
+                - (upperTimestamp - slotTimestamp),
+            /*timestamp=*/ slotTimestamp,
+            totalPower,
+            consumePower,
+            Math.round(foregroundUsageTimeInMs),
+            Math.round(backgroundUsageTimeInMs),
+            (int) Math.round(batteryLevel));
+    }
+
+    private static double interpolate(double v1, double v2, double ratio) {
+        return v1 + ratio * (v2 - v1);
+    }
 }

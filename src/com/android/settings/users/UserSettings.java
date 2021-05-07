@@ -16,6 +16,7 @@
 
 package com.android.settings.users;
 
+import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -431,8 +432,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void launchChooseLockscreen() {
         Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
-        chooseLockIntent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        chooseLockIntent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS,
+                true);
         startActivityForResult(chooseLockIntent, REQUEST_CHOOSE_LOCK);
     }
 
@@ -505,10 +506,12 @@ public class UserSettings extends SettingsPreferenceFragment
         Bundle extras = new Bundle();
         extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
         extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
-        new SubSettingLauncher(getContext())
+
+        final Context context = getContext();
+        new SubSettingLauncher(context)
                 .setDestination(UserDetailsSettings.class.getName())
                 .setArguments(extras)
-                .setTitleText(userInfo.name)
+                .setTitleText(getUserName(context, userInfo))
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
@@ -859,32 +862,30 @@ public class UserSettings extends SettingsPreferenceFragment
             UserPreference pref;
             if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
-            } else if (user.isGuest()) {
-                pref = new UserPreference(getPrefContext(), null, user.id);
-                pref.setTitle(R.string.user_guest);
-                pref.setIcon(getEncircledDefaultIcon());
-                pref.setKey(KEY_USER_GUEST);
+            } else {
+                final Context prefContext = getPrefContext();
+                pref = new UserPreference(prefContext, null, user.id);
+                pref.setTitle(getUserName(prefContext, user));
                 userPreferences.add(pref);
+                pref.setOnPreferenceClickListener(this);
                 pref.setEnabled(canOpenUserDetails);
                 pref.setSelectable(true);
 
-                if (mUserCaps.mDisallowSwitchUser) {
-                    pref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
+                if (user.isGuest()) {
+                    pref.setIcon(getEncircledDefaultIcon());
+                    pref.setKey(KEY_USER_GUEST);
+                    if (mUserCaps.mDisallowSwitchUser) {
+                        pref.setDisabledByAdmin(
+                                RestrictedLockUtilsInternal.getDeviceOwner(context));
+                    } else {
+                        pref.setDisabledByAdmin(null);
+                    }
                 } else {
-                    pref.setDisabledByAdmin(null);
+                    pref.setKey("id=" + user.id);
+                    if (user.isAdmin()) {
+                        pref.setSummary(R.string.user_admin);
+                    }
                 }
-                pref.setOnPreferenceClickListener(this);
-            } else {
-                pref = new UserPreference(getPrefContext(), null, user.id);
-                pref.setKey("id=" + user.id);
-                userPreferences.add(pref);
-                if (user.isAdmin()) {
-                    pref.setSummary(R.string.user_admin);
-                }
-                pref.setTitle(user.name);
-                pref.setOnPreferenceClickListener(this);
-                pref.setEnabled(canOpenUserDetails);
-                pref.setSelectable(true);
             }
             if (pref == null) {
                 continue;
@@ -1061,6 +1062,14 @@ public class UserSettings extends SettingsPreferenceFragment
         if (bitmap != null) {
             pref.setIcon(encircle(bitmap));
         }
+    }
+
+    /** Returns the user's name, or the appropriate string in the case of a Guest. */
+    public static String getUserName(Context context, @NonNull UserInfo userInfo) {
+        if (userInfo.isGuest()) {
+            return context.getString(R.string.user_guest);
+        }
+        return userInfo.name;
     }
 
     @Override
