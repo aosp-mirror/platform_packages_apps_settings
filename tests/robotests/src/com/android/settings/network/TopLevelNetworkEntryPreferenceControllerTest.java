@@ -24,9 +24,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.wifi.WifiPrimarySwitchPreferenceController;
@@ -74,7 +72,6 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
                 mMobileNetworkPreferenceController);
         ReflectionHelpers.setField(mController, "mTetherPreferenceController",
                 mTetherPreferenceController);
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @After
@@ -105,12 +102,5 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
         when(mTetherPreferenceController.isAvailable()).thenReturn(false);
 
         assertThat(mController.getSummary()).isEqualTo("Wi\u2011Fi and data usage");
-    }
-
-    @Test
-    public void getSummary_silkyHomeEnabled_shouldBeNull() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-
-        assertThat(mController.getSummary()).isNull();
     }
 }
