@@ -23,7 +23,6 @@ import android.content.Context;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -51,7 +50,7 @@ public final class BatteryHistoryLoaderTest {
 
     @Test
     public void testLoadIBackground_returnsMapFromPowerFeatureProvider() {
-        final Map<Long, List<BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         doReturn(batteryHistoryMap).when(mFeatureFactory.powerUsageFeatureProvider)
                 .getBatteryHistory(mContext);
 
