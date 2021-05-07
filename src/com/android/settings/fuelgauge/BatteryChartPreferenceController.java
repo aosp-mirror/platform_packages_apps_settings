@@ -185,7 +185,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private void setBatteryHistoryMapInner(
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         // Resets all battery history data relative variables.
-        if (batteryHistoryMap == null) {
+        if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
             mBatteryIndexedMap = null;
             mBatteryHistoryKeys = null;
             mBatteryHistoryLevels = null;
