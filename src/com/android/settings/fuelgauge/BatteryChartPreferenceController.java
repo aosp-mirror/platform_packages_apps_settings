@@ -53,8 +53,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnDestroy,
                 BatteryChartView.OnSelectListener, ExpandDividerPreference.OnExpandListener {
     private static final String TAG = "BatteryChartPreferenceController";
-    private static final int CHART_KEY_ARRAY_SIZE = 25;
+    /** Desired battery history size for timestamp slots. */
+    public static final int DESIRED_HISTORY_SIZE = 25;
     private static final int CHART_LEVEL_ARRAY_SIZE = 13;
+    private static final int CHART_KEY_ARRAY_SIZE = DESIRED_HISTORY_SIZE;
     private static final long VALID_USAGE_TIME_DURATION = DateUtils.HOUR_IN_MILLIS * 2;
     private static final long VALID_DIFF_DURATION = DateUtils.MINUTE_IN_MILLIS * 3;
 
@@ -176,12 +178,12 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     }
 
     void setBatteryHistoryMap(
-            final Map<Long, List<BatteryHistEntry>> batteryHistoryMap) {
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         mHandler.post(() -> setBatteryHistoryMapInner(batteryHistoryMap));
     }
 
     private void setBatteryHistoryMapInner(
-            final Map<Long, List<BatteryHistEntry>> batteryHistoryMap) {
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         // Resets all battery history data relative variables.
         if (batteryHistoryMap == null) {
             mBatteryIndexedMap = null;
@@ -189,31 +191,32 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mBatteryHistoryLevels = null;
             return;
         }
-        // Generates battery history keys.
+        // Generates battery history timestamp slots.
         final List<Long> batteryHistoryKeyList =
-            new ArrayList<Long>(batteryHistoryMap.keySet());
+            new ArrayList<>(batteryHistoryMap.keySet());
         Collections.sort(batteryHistoryKeyList);
-        validateSlotTimestamp(batteryHistoryKeyList);
         mBatteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
-        final int listSize = batteryHistoryKeyList.size();
-        final int elementSize = Math.min(listSize, CHART_KEY_ARRAY_SIZE);
-        for (int index = 0; index < elementSize; index++) {
-            mBatteryHistoryKeys[CHART_KEY_ARRAY_SIZE - index - 1] =
-                batteryHistoryKeyList.get(listSize - index - 1);
+        for (int index = 0; index < CHART_KEY_ARRAY_SIZE; index++) {
+            mBatteryHistoryKeys[index] = batteryHistoryKeyList.get(index);
         }
 
-        // Generates the battery history levels.
+        // Generates the battery history levels for chart graph.
         mBatteryHistoryLevels = new int[CHART_LEVEL_ARRAY_SIZE];
         for (int index = 0; index < CHART_LEVEL_ARRAY_SIZE; index++) {
-            final Long timestamp = Long.valueOf(mBatteryHistoryKeys[index * 2]);
-            final List<BatteryHistEntry> entryList = batteryHistoryMap.get(timestamp);
-            if (entryList != null && !entryList.isEmpty()) {
-                // All battery levels are the same in the same timestamp snapshot.
-                mBatteryHistoryLevels[index] = entryList.get(0).mBatteryLevel;
-            } else if (entryList != null && entryList.isEmpty()) {
-                Log.e(TAG, "abnormal entry list in the timestamp:" +
-                    ConvertUtils.utcToLocalTime(timestamp));
+            final long timestamp = mBatteryHistoryKeys[index * 2];
+            final Map<String, BatteryHistEntry> entryMap = batteryHistoryMap.get(timestamp);
+            if (entryMap == null || entryMap.isEmpty()) {
+                Log.e(TAG, "abnormal entry list in the timestamp:"
+                    + ConvertUtils.utcToLocalTime(timestamp));
+                continue;
             }
+            // Averages the battery level in each time slot to avoid corner conditions.
+            float batteryLevelCounter = 0;
+            for (BatteryHistEntry entry : entryMap.values()) {
+                batteryLevelCounter += entry.mBatteryLevel;
+            }
+            mBatteryHistoryLevels[index] =
+                Math.round(batteryLevelCounter / entryMap.size());
         }
         // Generates indexed usage map for chart.
         mBatteryIndexedMap =
@@ -529,27 +532,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 || totalUsageTimeInMs > VALID_USAGE_TIME_DURATION) {
             Log.e(TAG, "validateUsageTime() fail for\n" + entry);
             return false;
-        }
-        return true;
-    }
-
-    @VisibleForTesting
-    static boolean validateSlotTimestamp(List<Long> batteryHistoryKeys) {
-        // Whether the nearest two slot time diff is valid or not?
-        final int size = batteryHistoryKeys.size();
-        for (int index = 0; index < size - 1; index++) {
-            final long currentTime = batteryHistoryKeys.get(index);
-            final long nextTime = batteryHistoryKeys.get(index + 1);
-            final long diffTime = Math.abs(
-                DateUtils.HOUR_IN_MILLIS - Math.abs(currentTime - nextTime));
-            if (currentTime == 0) {
-                continue;
-            } else if (diffTime > VALID_DIFF_DURATION) {
-                Log.e(TAG, String.format("validateSlotTimestamp() %s > %s",
-                    ConvertUtils.utcToLocalTime(currentTime),
-                    ConvertUtils.utcToLocalTime(nextTime)));
-                return false;
-            }
         }
         return true;
     }
