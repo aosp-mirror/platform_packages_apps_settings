@@ -223,7 +223,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             ConvertUtils.getIndexedUsageMap(
                 mPrefContext, /*timeSlotSize=*/ CHART_LEVEL_ARRAY_SIZE - 1,
                 mBatteryHistoryKeys, batteryHistoryMap,
-                /*purgeLowPercentageData=*/ true);
+                /*purgeLowPercentageAndFakeData=*/ true);
         forceRefreshUi();
 
         Log.d(TAG, String.format(
