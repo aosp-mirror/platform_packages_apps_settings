@@ -271,7 +271,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         mIsFingerprintEnrollable = fingerprintManager.getEnrolledFingerprints(mUserId).size()
                 < fpProperties.get(0).maxEnrollmentsPerUser;
 
-        if (!mConfirmingCredentials && mGkPwHandle == null) {
+        if (!mConfirmingCredentials) {
             mConfirmingCredentials = true;
             if (!userHasPassword(mUserId)) {
                 launchChooseLock();
