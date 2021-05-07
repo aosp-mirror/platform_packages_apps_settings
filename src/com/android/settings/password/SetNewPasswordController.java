@@ -19,7 +19,6 @@ package com.android.settings.password;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FACE;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT;
-import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 
 import static com.android.internal.util.Preconditions.checkNotNull;
 
@@ -145,10 +144,8 @@ final class SetNewPasswordController {
 
     private Bundle getBiometricChooseLockExtras() {
         Bundle chooseLockExtras = new Bundle();
-        chooseLockExtras.putInt(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
-                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
+                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, true);
         return chooseLockExtras;
@@ -156,10 +153,8 @@ final class SetNewPasswordController {
 
     private Bundle getFingerprintChooseLockExtras() {
         Bundle chooseLockExtras = new Bundle();
-        chooseLockExtras.putInt(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
-                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
+                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
         return chooseLockExtras;
@@ -167,10 +162,8 @@ final class SetNewPasswordController {
 
     private Bundle getFaceChooseLockExtras() {
         Bundle chooseLockExtras = new Bundle();
-        chooseLockExtras.putInt(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
-                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
+                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, true);
         return chooseLockExtras;
