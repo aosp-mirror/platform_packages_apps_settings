@@ -261,9 +261,9 @@ public class WifiSettings extends RestrictedSettingsFragment
         mStatusMessagePreference = findPreference(PREF_KEY_STATUS_MESSAGE);
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
-        mDataUsagePreference.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(),
-                0 /*subId*/,
-                null /*service*/);
+        mDataUsagePreference.setTemplate(
+                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
+                null /* subscriberId */), 0 /*subId*/, null /*service*/);
     }
 
     @Override

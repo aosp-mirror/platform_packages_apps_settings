@@ -69,6 +69,9 @@ public class BiometricSettingsAppPreferenceController extends TogglePreferenceCo
 
     @Override
     public int getAvailabilityStatus() {
+        if (!Utils.isMultipleBiometricsSupported(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         if (mFaceManager == null || mFingerprintManager == null) {
             return AVAILABLE_UNSEARCHABLE;
         }

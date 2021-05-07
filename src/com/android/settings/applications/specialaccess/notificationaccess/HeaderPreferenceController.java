@@ -25,7 +25,6 @@ import android.util.IconDrawableFactory;
 import android.view.View;
 
 import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -36,7 +35,6 @@ import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
 
 public class HeaderPreferenceController extends BasePreferenceController
@@ -126,12 +124,5 @@ public class HeaderPreferenceController extends BasePreferenceController
                         EntityHeaderController.ActionType.ACTION_NONE)
                 .done(mFragment.getActivity(), mContext);
         pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    public void onStart() {
-        if (mHeaderController != null) {
-            mHeaderController.styleActionBar(mFragment.getActivity());
-        }
     }
 }
