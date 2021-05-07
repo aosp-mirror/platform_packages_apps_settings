@@ -16,23 +16,16 @@
 
 package com.android.settings.applications.appinfo;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_START;
-
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -115,19 +108,5 @@ public class AppHeaderViewPreferenceControllerTest {
 
         assertThat(title).isNotNull();
         assertThat(title.getText()).isEqualTo(appLabel);
-    }
-
-    @Test
-    public void onStart_shouldStyleActionBar() {
-        final ActionBar actionBar = mock(ActionBar.class);
-        when(mActivity.getActionBar()).thenReturn(actionBar);
-
-        mController.displayPreference(mScreen);
-
-        verifyZeroInteractions(actionBar);
-
-        mLifecycle.handleLifecycleEvent(ON_START);
-
-        verify(actionBar).setBackgroundDrawable(any(Drawable.class));
     }
 }

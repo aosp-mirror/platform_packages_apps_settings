@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.biometrics.combination;
+package com.android.settings.connecteddevice;
 
 import android.content.Context;
-
-import com.android.settings.Utils;
-import com.android.settings.biometrics.face.FaceStatusPreferenceController;
+import android.content.pm.PackageManager;
 
 /**
- * Preference controller for face settings within the biometrics settings page, that controls the
- * ability to unlock the phone with face authentication.
+ * Controller to maintain the {@link androidx.preference.Preference} for add
+ * device with summary at beginning. It monitor Bluetooth's status(on/off) and decide if need
+ * to show summary or not.
  */
-public class BiometricFaceStatusPreferenceController extends FaceStatusPreferenceController {
+public class AddDeviceSummaryPreferenceController extends AddDevicePreferenceController {
 
-    public BiometricFaceStatusPreferenceController(Context context, String key) {
+    public AddDeviceSummaryPreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
-    protected boolean isDeviceSupported() {
-        return Utils.isMultipleBiometricsSupported(mContext) && Utils.hasFaceHardware(mContext);
+    public int getAvailabilityStatus() {
+        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
+                && !isBluetoothEnabled()
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 }
