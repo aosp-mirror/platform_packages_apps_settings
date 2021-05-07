@@ -108,6 +108,13 @@ public class InternetUpdaterTest {
     }
 
     @Test
+    public void onDestroy_shouldCloseCallback() {
+        mInternetUpdater.onDestroy();
+
+        verify(mAirplaneModeEnabler).close();
+    }
+
+    @Test
     public void updateInternetAvailable_wifiConnectedAndNoValidated_internetUnavailable() {
         final NetworkCapabilities networkCapabilities = new NetworkCapabilities.Builder()
                 .addTransportType(TRANSPORT_WIFI)
