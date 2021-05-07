@@ -20,12 +20,11 @@ import android.content.Context;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
-import java.util.List;
 import java.util.Map;
 
 /** Loader that can be used to load battery history information. */
 public class BatteryHistoryLoader
-        extends AsyncLoaderCompat<Map<Long, List<BatteryHistEntry>>> {
+        extends AsyncLoaderCompat<Map<Long, Map<String, BatteryHistEntry>>> {
     private static final String TAG = "BatteryHistoryLoader";
 
     private final Context mContext;
@@ -36,11 +35,11 @@ public class BatteryHistoryLoader
     }
 
     @Override
-    protected void onDiscardResult(Map<Long, List<BatteryHistEntry>> result) {
+    protected void onDiscardResult(Map<Long, Map<String, BatteryHistEntry>> result) {
     }
 
     @Override
-    public Map<Long, List<BatteryHistEntry>> loadInBackground() {
+    public Map<Long, Map<String, BatteryHistEntry>> loadInBackground() {
         final PowerUsageFeatureProvider powerUsageFeatureProvider =
             FeatureFactory.getFactory(mContext).getPowerUsageFeatureProvider(mContext);
         return powerUsageFeatureProvider.getBatteryHistory(mContext);
