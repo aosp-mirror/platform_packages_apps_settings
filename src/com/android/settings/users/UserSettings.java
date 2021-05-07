@@ -432,8 +432,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void launchChooseLockscreen() {
         Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
-        chooseLockIntent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        chooseLockIntent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS,
+                true);
         startActivityForResult(chooseLockIntent, REQUEST_CHOOSE_LOCK);
     }
 

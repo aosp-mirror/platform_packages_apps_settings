@@ -198,8 +198,7 @@ public class SetupChooseLockPasswordTest {
     @Implements(ChooseLockGenericController.class)
     public static class ShadowChooseLockGenericController {
         @Implementation
-        protected List<ScreenLockType> getVisibleScreenLockTypes(int quality,
-                boolean includeDisabled) {
+        protected List<ScreenLockType> getVisibleScreenLockTypes() {
             return Collections.emptyList();
         }
     }
