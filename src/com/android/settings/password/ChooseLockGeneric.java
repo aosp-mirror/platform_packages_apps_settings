@@ -75,8 +75,6 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.SearchFeatureProvider;
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -112,8 +110,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private static final String KEY_SKIP_BIOMETRICS = "unlock_skip_biometrics";
         private static final String PASSWORD_CONFIRMED = "password_confirmed";
         private static final String WAITING_FOR_CONFIRMATION = "waiting_for_confirmation";
-        public static final String MINIMUM_QUALITY_KEY = "minimum_quality";
-        public static final String HIDE_DISABLED_PREFS = "hide_disabled_prefs";
+        public static final String HIDE_INSECURE_OPTIONS = "hide_insecure_options";
         public static final String TAG_FRP_WARNING_DIALOG = "frp_warning_dialog";
         public static final String KEY_LOCK_SETTINGS_FOOTER ="lock_settings_footer";
 
@@ -277,21 +274,20 @@ public class ChooseLockGeneric extends SettingsActivity {
                     arguments,
                     intent.getExtras()).getIdentifier();
             mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mUserId);
-            mController = new ChooseLockGenericController(
-                    getContext(), mUserId, mRequestedMinComplexity,
-                    mOnlyEnforceDevicePasswordRequirement,
-                    mLockPatternUtils);
-
-            final int aggregatedComplexity = mController.getAggregatedPasswordComplexity();
-            final boolean isComplexityProvidedByAdmin =
-                    aggregatedComplexity > mRequestedMinComplexity
-                    && aggregatedComplexity > PASSWORD_COMPLEXITY_NONE;
+            mController = new ChooseLockGenericController.Builder(
+                    getContext(), mUserId, mLockPatternUtils)
+                    .setAppRequestedMinComplexity(mRequestedMinComplexity)
+                    .setEnforceDevicePasswordRequirementOnly(mOnlyEnforceDevicePasswordRequirement)
+                    .setProfileToUnify(mUnificationProfileId)
+                    .setHideInsecureScreenLockTypes(alwaysHideInsecureScreenLockTypes()
+                            || intent.getBooleanExtra(HIDE_INSECURE_OPTIONS, false))
+                    .build();
 
             // If the complexity is provided by the admin, do not get the caller app's name.
             // If the app requires, for example, low complexity, and the admin requires high
             // complexity, it does not make sense to show a footer telling the user it's the app
             // requesting a particular complexity because the admin-set complexity will override it.
-            mCallerAppName = isComplexityProvidedByAdmin ? null :
+            mCallerAppName = mController.isComplexityProvidedByAdmin() ? null :
                     intent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME);
 
             mManagedPasswordProvider = ManagedLockPasswordProvider.get(activity, mUserId);
@@ -328,6 +324,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 Bundle savedInstanceState) {
             updateActivityTitle();
             return super.onCreateView(inflater, container, savedInstanceState);
+        }
+
+        protected boolean alwaysHideInsecureScreenLockTypes() {
+            return false;
         }
 
         private void updateActivityTitle() {
@@ -606,16 +606,12 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
             if (quality == -1) {
                 // If caller didn't specify password quality, show UI and allow the user to choose.
-                quality = intent.getIntExtra(MINIMUM_QUALITY_KEY, -1);
-                quality = mController.upgradeQuality(quality);
-                final boolean hideDisabledPrefs = intent.getBooleanExtra(
-                        HIDE_DISABLED_PREFS, false);
                 final PreferenceScreen prefScreen = getPreferenceScreen();
                 if (prefScreen != null) {
                     prefScreen.removeAll();
                 }
                 addPreferences();
-                disableUnusablePreferences(quality, hideDisabledPrefs);
+                disableUnusablePreferences();
                 updatePreferenceText();
                 updateCurrentPreference();
                 updatePreferenceSummaryIfNeeded();
@@ -747,70 +743,22 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         /***
-         * Disables preferences that are less secure than required quality. The actual
-         * implementation is in disableUnusablePreferenceImpl.
-         *
-         * @param quality the requested quality.
-         * @param hideDisabledPrefs if false preferences show why they were disabled; otherwise
-         * they're not shown at all.
-         */
-        protected void disableUnusablePreferences(final int quality, boolean hideDisabledPrefs) {
-            disableUnusablePreferencesImpl(quality, hideDisabledPrefs);
-        }
-
-        /***
          * Disables preferences that are less secure than required quality.
          *
-         * @param quality the requested quality.
-         * @param hideDisabled whether to hide disable screen lock options.
          */
-        protected void disableUnusablePreferencesImpl(final int quality,
-                boolean hideDisabled) {
+        private void disableUnusablePreferences() {
             final PreferenceScreen entries = getPreferenceScreen();
-
-            int adminEnforcedQuality = LockPatternUtils.credentialTypeToPasswordQuality(
-                    mLockPatternUtils.getRequestedPasswordMetrics(
-                            mUserId, mOnlyEnforceDevicePasswordRequirement).credType);
-            EnforcedAdmin enforcedAdmin =
-                    RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(getActivity(),
-                            mUserId);
-            // If we are to unify a work challenge at the end of the credential enrollment, manually
-            // merge any password policy from that profile here, so we are enrolling a compliant
-            // password. This is because once unified, the profile's password policy will
-            // be enforced on the new credential.
-            if (mUnificationProfileId != UserHandle.USER_NULL) {
-                int profileEnforceQuality = mDpm.getPasswordQuality(null, mUnificationProfileId);
-                if (profileEnforceQuality > adminEnforcedQuality) {
-                    adminEnforcedQuality = profileEnforceQuality;
-                    enforcedAdmin = EnforcedAdmin.combine(enforcedAdmin,
-                            RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(
-                                    getActivity(), mUnificationProfileId));
-                }
-            }
 
             for (ScreenLockType lock : ScreenLockType.values()) {
                 String key = lock.preferenceKey;
                 Preference pref = findPreference(key);
                 if (pref instanceof RestrictedPreference) {
                     boolean visible = mController.isScreenLockVisible(lock);
-                    boolean enabled = mController.isScreenLockEnabled(lock, quality);
-                    boolean disabledByAdmin =
-                            mController.isScreenLockDisabledByAdmin(lock, adminEnforcedQuality);
-                    if (hideDisabled) {
-                        visible = visible && enabled;
-                    }
+                    boolean enabled = mController.isScreenLockEnabled(lock);
                     if (!visible) {
                         entries.removePreference(pref);
-                    } else if (disabledByAdmin && enforcedAdmin != null) {
-                        ((RestrictedPreference) pref).setDisabledByAdmin(enforcedAdmin);
                     } else if (!enabled) {
-                        // we need to setDisabledByAdmin to null first to disable the padlock
-                        // in case it was set earlier.
-                        ((RestrictedPreference) pref).setDisabledByAdmin(null);
-                        pref.setSummary(R.string.unlock_set_unlock_disabled_summary);
                         pref.setEnabled(false);
-                    } else {
-                        ((RestrictedPreference) pref).setDisabledByAdmin(null);
                     }
                 }
             }
