@@ -65,7 +65,7 @@ public class SettingsHomepageActivityTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowUtils.setIsPageTransitionEnabled(true);
+        ShadowUtils.setIsPageTransitionEnabled(false);
     }
 
     @Test
