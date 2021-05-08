@@ -55,12 +55,8 @@ public class WalletPrivacyPreferenceController extends TogglePreferenceControlle
 
     @Override
     public CharSequence getSummary() {
-        final int res;
-        if (!isSecure()) {
-            res = R.string.lockscreen_privacy_not_secure;
-        } else {
-            res = R.string.lockscreen_privacy_wallet_summary;
-        }
+        final int res = isSecure() ? R.string.lockscreen_privacy_wallet_summary :
+                R.string.lockscreen_privacy_not_secure;
         return mContext.getText(res);
     }
 

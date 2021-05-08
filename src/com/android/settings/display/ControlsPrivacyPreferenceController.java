@@ -52,13 +52,8 @@ public class ControlsPrivacyPreferenceController extends TogglePreferenceControl
 
     @Override
     public CharSequence getSummary() {
-        boolean controlsAvailable = isControlsAvailable();
-        final int res;
-        if (!isSecure()) {
-            res = R.string.lockscreen_privacy_not_secure;
-        } else {
-            res = R.string.lockscreen_privacy_controls_summary;
-        }
+        final int res = isSecure() ? R.string.lockscreen_privacy_controls_summary :
+                R.string.lockscreen_privacy_not_secure;
         return mContext.getText(res);
     }
 
@@ -83,7 +78,7 @@ public class ControlsPrivacyPreferenceController extends TogglePreferenceControl
         final LockPatternUtils utils = FeatureFactory.getFactory(mContext)
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(mContext);
-        int userId = UserHandle.myUserId();
+        final int userId = UserHandle.myUserId();
         return utils.isSecure(userId);
     }
 
