@@ -52,7 +52,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @VisibleForTesting
     BatteryHistoryPreference mHistPref;
     @VisibleForTesting
-    Map<Long, List<BatteryHistEntry>> mBatteryHistoryMap;
+    Map<Long, Map<String, BatteryHistEntry>> mBatteryHistoryMap;
     @VisibleForTesting
     final BatteryHistoryLoaderCallbacks mBatteryHistoryLoaderCallbacks =
             new BatteryHistoryLoaderCallbacks();
@@ -210,25 +210,26 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             };
 
     private class BatteryHistoryLoaderCallbacks
-            implements LoaderManager.LoaderCallbacks<Map<Long, List<BatteryHistEntry>>> {
+            implements LoaderManager.LoaderCallbacks<Map<Long, Map<String, BatteryHistEntry>>> {
         private int mRefreshType;
 
         @Override
         @NonNull
-        public Loader<Map<Long, List<BatteryHistEntry>>> onCreateLoader(int id, Bundle bundle) {
+        public Loader<Map<Long, Map<String, BatteryHistEntry>>> onCreateLoader(
+                int id, Bundle bundle) {
             mRefreshType = bundle.getInt(KEY_REFRESH_TYPE);
             return new BatteryHistoryLoader(getContext());
         }
 
         @Override
-        public void onLoadFinished(Loader<Map<Long, List<BatteryHistEntry>>> loader,
-                Map<Long, List<BatteryHistEntry>> batteryHistoryMap) {
+        public void onLoadFinished(Loader<Map<Long, Map<String, BatteryHistEntry>>> loader,
+                Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
             mBatteryHistoryMap = batteryHistoryMap;
             PowerUsageAdvanced.this.onLoadFinished(mRefreshType);
         }
 
         @Override
-        public void onLoaderReset(Loader<Map<Long, List<BatteryHistEntry>>> loader) {
+        public void onLoaderReset(Loader<Map<Long, Map<String, BatteryHistEntry>>> loader) {
         }
     }
 

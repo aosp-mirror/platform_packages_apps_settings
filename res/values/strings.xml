@@ -1311,16 +1311,16 @@
     <!--  Title for security picker to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="lock_settings_picker_title">Choose screen lock</string>
 
-    <!--  Screen title. This title is asking the user to choose a type of screen lock for their device, such as a pattern, PIN, or password. [CHAR LIMIT=27] -->
+    <!--  Screen title. This title is asking the user to choose a type of screen lock for their device, such as a pattern, PIN, or password. [CHAR LIMIT=55] -->
     <string name="lock_settings_picker_new_lock_title">Choose a screen lock</string>
 
-    <!--  Screen title. This title is asking the user to choose a new screen lock for their device, such as a pattern, PIN, or password. [CHAR LIMIT=27] -->
+    <!--  Screen title. This title is asking the user to choose a new screen lock for their device, such as a pattern, PIN, or password. [CHAR LIMIT=55] -->
     <string name="lock_settings_picker_update_lock_title">Choose a new screen lock</string>
 
-    <!--  Screen title. This title is asking the user to choose a type of screen lock (such as a pattern, PIN, or password) that they need to enter to use their work apps. [CHAR LIMIT=27] -->
+    <!--  Screen title. This title is asking the user to choose a type of screen lock (such as a pattern, PIN, or password) that they need to enter to use their work apps. [CHAR LIMIT=56] -->
     <string name="lock_settings_picker_new_profile_lock_title">Choose a lock for work apps</string>
 
-    <!--  Screen title. This title is asking the user to choose a new screen lock (such as a pattern, PIN, or password) that they need to enter to use their work apps. [CHAR LIMIT=27] -->
+    <!--  Screen title. This title is asking the user to choose a new screen lock (such as a pattern, PIN, or password) that they need to enter to use their work apps. [CHAR LIMIT=55] -->
     <string name="lock_settings_picker_update_profile_lock_title">Choose a new work lock</string>
 
     <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (tablet) [CHAR LIMIT=22] -->
@@ -2426,7 +2426,7 @@
     <!-- Wifi details preference title to display router IP subnet mask -->
     <string name="wifi_details_subnet_mask">Subnet mask</string>
     <!-- Wifi details preference title to display wifi type info [CHAR LIMIT=50]-->
-    <string name="wifi_type_title">TYPE</string>
+    <string name="wifi_type_title">Type</string>
     <!-- Wifi details preference title to display router DNS info -->
     <string name="wifi_details_dns">DNS</string>
     <!-- Wifi details preference category title for IPv6 information -->
@@ -4980,7 +4980,7 @@
     <!-- Title for the 'Spell checker for work' preference. [CHAR LIMIT=45] -->
     <string name="user_dict_settings_for_work_title">Personal dictionary for work</string>
     <!-- User dictionary settings.  The summary of the list item to go into the Personal dictionary settings screen. -->
-    <string name="user_dict_settings_summary">""</string>
+    <string name="user_dict_settings_summary">Add words to be used in apps such as Spell checker</string>
     <!-- User dictionary settings. The title of the menu item to add a new word to the user dictionary. -->
     <string name="user_dict_settings_add_menu_title">Add</string>
     <!-- User dictionary settings. The title of the dialog to add a new word to the user dictionary. [CHAR LIMIT=25] -->
@@ -8079,8 +8079,7 @@
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
     <string name="keywords_gesture">gestures</string>
-    <string name="keywords_cards_passes">cards, passes</string>
-    <string name="keywords_device_controls">device controls, controls</string>
+    <string name="keywords_wallet">wallet</string>
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
@@ -12969,32 +12968,11 @@
     <!-- Power menu setting title [CHAR LIMIT=NONE] -->
     <string name="power_menu_setting_title">Power button menu</string>
 
-    <!-- Power menu setting option cards and passes [CHAR LIMIT=NONE] -->
-    <string name="power_menu_cards_passes">Show cards &amp; passes</string>
-
-    <!-- Power menu setting lock screen category name [CHAR LIMIT=40] -->
-    <string name="power_menu_lock_screen_category">Lock screen</string>
-
     <!-- Power menu setting option none [CHAR LIMIT=NONE] -->
     <string name="power_menu_none">Don\u2019t show any content</string>
 
-    <!-- Power menu setting Privacy [CHAR LIMIT=40] -->
-    <string name="power_menu_privacy">Sensitive content</string>
-
-    <!-- Power menu setting privacy show all [CHAR LIMIT=NONE] -->
-    <string name="power_menu_privacy_show">Show cards and controls when locked</string>
-
-    <!-- Power menu setting privacy show controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_privacy_show_controls">Show controls when locked</string>
-
-    <!-- Power menu setting privacy show cards [CHAR LIMIT=NONE] -->
-    <string name="power_menu_privacy_show_cards">Show cards when locked</string>
-
-    <!-- Power menu setting privacy hide all [CHAR LIMIT=NONE] -->
-    <string name="power_menu_privacy_hide">Hide cards and controls when locked</string>
-
     <!-- Power menu setting privacy no secure screen lock set [CHAR_LIMIT=NONE] -->
-    <string name="power_menu_privacy_not_secure">To use, first set a screen lock</string>
+    <string name="lockscreen_privacy_not_secure">To use, first set a screen lock</string>
 
     <!-- Power menu setting use long press power to invoke assistant. [CHAR_LIMIT=NONE] -->
     <string name="power_menu_long_press_for_assist">Hold for Assistant</string>
@@ -13002,17 +12980,15 @@
     <!-- Power menu setting use log press power to invoke assistant summary. [CHAR_LIMIT=NONE] -->
     <string name="power_menu_long_press_for_assist_summary">Trigger the Assistant by holding the power button</string>
 
+    <!-- Wallet (formerly Cards and passes) toggle name [CHAR LIMIT=60] -->
+    <string name="lockscreen_privacy_wallet_setting_toggle">Show wallet</string>
+    <!-- Wallet (formerly Cards and passes) summary [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_privacy_wallet_summary">Allow access to wallet from lock screen and quick settings</string>
+
     <!-- Device controls toggle name [CHAR LIMIT=60] -->
-    <string name="device_controls_setting_toggle">Show device controls</string>
-
-    <!-- Cards and passes toggle name [CHAR LIMIT=60] -->
-    <string name="cards_passes_setting_toggle">Show cards &amp; passes</string>
-
-    <!-- Device controls toggle subtitle [CHAR LIMIT=NONE] -->
-    <string name="device_controls_setting_subtitle">To access controls for connected devices, hold the Power button</string>
-
-    <!-- Cards and passes toggle subtitle [CHAR LIMIT=NONE] -->
-    <string name="cards_passes_setting_subtitle">To access things like your payment methods and boarding passes, press and hold the Power button.</string>
+    <string name="lockscreen_privacy_controls_setting_toggle">Show device controls</string>
+    <!-- Device controls summary [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_privacy_controls_summary">Access controls when locked</string>
 
     <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
     <string name="rtt_settings_title"></string>

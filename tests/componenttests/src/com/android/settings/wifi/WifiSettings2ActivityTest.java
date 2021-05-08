@@ -43,6 +43,7 @@ import com.android.settings.testutils.CommonUtils;
 import com.android.settings.testutils.Constants;
 import com.android.settings.testutils.UiUtils;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -61,7 +62,7 @@ public class WifiSettings2ActivityTest {
             BatterySaverButtonPreferenceControllerComponentTest.class.getSimpleName();
     private final Instrumentation mInstrumentation = InstrumentationRegistry.getInstrumentation();
 
-    @Test
+    @Test @Ignore
     public void test_connect_to_wifi() throws Exception {
         //For some reason the ActivityScenario gets null activity here
         mInstrumentation.getTargetContext().startActivity(

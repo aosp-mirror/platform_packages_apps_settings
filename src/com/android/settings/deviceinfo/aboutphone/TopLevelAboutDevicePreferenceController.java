@@ -17,10 +17,8 @@
 package com.android.settings.deviceinfo.aboutphone;
 
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.deviceinfo.DeviceNamePreferenceController;
 
 public class TopLevelAboutDevicePreferenceController extends BasePreferenceController {
@@ -36,11 +34,6 @@ public class TopLevelAboutDevicePreferenceController extends BasePreferenceContr
 
     @Override
     public CharSequence getSummary() {
-        // Remove homepage summaries for silky home.
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            return null;
-        }
-
         final DeviceNamePreferenceController deviceNamePreferenceController =
                 new DeviceNamePreferenceController(mContext, "unused_key");
         return deviceNamePreferenceController.getSummary();
