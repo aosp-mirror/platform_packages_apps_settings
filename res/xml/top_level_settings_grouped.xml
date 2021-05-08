@@ -26,6 +26,7 @@
         android:key="top_level_network"
         android:order="-150"
         android:title="@string/network_dashboard_title"
+        android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
@@ -34,6 +35,7 @@
         android:key="top_level_connected_devices"
         android:order="-140"
         android:title="@string/connected_devices_dashboard_title"
+        android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.connecteddevice.TopLevelConnectedDevicesPreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
@@ -41,14 +43,16 @@
         android:icon="@drawable/ic_homepage_apps_v2"
         android:key="top_level_apps"
         android:order="-130"
-        android:title="@string/apps_dashboard_title"/>
+        android:title="@string/apps_dashboard_title"
+        android:summary="@string/app_and_notification_dashboard_summary"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
         android:icon="@drawable/ic_homepage_notification_v2"
         android:key="top_level_notification"
         android:order="-120"
-        android:title="@string/configure_notification_settings"/>
+        android:title="@string/configure_notification_settings"
+        android:summary="@string/notification_dashboard_summary"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"
@@ -56,6 +60,7 @@
         android:key="top_level_battery"
         android:order="-110"
         android:title="@string/power_usage_summary_title"
+        android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
@@ -64,6 +69,7 @@
         android:key="top_level_storage"
         android:order="-100"
         android:title="@string/storage_settings"
+        android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
@@ -71,7 +77,8 @@
         android:icon="@drawable/ic_homepage_sound_v2"
         android:key="top_level_sound"
         android:order="-90"
-        android:title="@string/sound_settings"/>
+        android:title="@string/sound_settings"
+        android:summary="@string/sound_dashboard_summary"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.DisplaySettings"
@@ -79,6 +86,7 @@
         android:key="top_level_display"
         android:order="-80"
         android:title="@string/display_settings"
+        android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
     <com.android.settings.homepage.RestrictedHomepagePreference
@@ -86,6 +94,7 @@
         android:key="top_level_wallpaper"
         android:order="-70"
         android:title="@string/wallpaper_settings_title"
+        android:summary="@string/wallpaper_dashboard_summary"
         settings:controller="com.android.settings.display.TopLevelWallpaperPreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
@@ -94,6 +103,7 @@
         android:key="top_level_accessibility"
         android:order="-60"
         android:title="@string/accessibility_settings"
+        android:summary="@string/accessibility_settings_summary"
         settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
@@ -102,6 +112,7 @@
         android:key="top_level_security"
         android:order="-50"
         android:title="@string/security_settings_title"
+        android:summary="@string/security_dashboard_summary_biometric"
         settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
@@ -109,7 +120,8 @@
         android:icon="@drawable/ic_homepage_privacy_v2"
         android:key="top_level_privacy"
         android:order="-40"
-        android:title="@string/privacy_dashboard_title"/>
+        android:title="@string/privacy_dashboard_title"
+        android:summary="@string/privacy_dashboard_summary"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.location.LocationSettings"
@@ -117,11 +129,13 @@
         android:key="top_level_location"
         android:order="-30"
         android:title="@string/location_settings_title"
+        android:summary="@string/location_settings_loading_app_permission_stats"
         settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:key="top_level_emergency"
         android:title="@string/emergency_settings_preference_title"
+        android:summary="@string/emergency_dashboard_summary"
         android:icon="@drawable/ic_homepage_emergency_v2"
         android:order="-20"
         android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"/>
@@ -132,6 +146,7 @@
         android:key="top_level_accounts"
         android:order="-10"
         android:title="@string/account_dashboard_title"
+        android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.accounts.TopLevelAccountEntryPreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
@@ -139,7 +154,8 @@
         android:icon="@drawable/ic_homepage_system_dashboard_v2"
         android:key="top_level_system"
         android:order="10"
-        android:title="@string/header_category_system"/>
+        android:title="@string/header_category_system"
+        android:summary="@string/system_dashboard_summary"/>
 
     <com.android.settings.homepage.HomepagePreference
         android:fragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment"
@@ -147,6 +163,7 @@
         android:key="top_level_about_device"
         android:order="20"
         android:title="@string/about_settings"
+        android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.aboutphone.TopLevelAboutDevicePreferenceController"/>
 
     <com.android.settings.homepage.HomepagePreference
@@ -154,6 +171,7 @@
         android:key="top_level_support"
         android:order="100"
         android:title="@string/page_tab_title_support"
+        android:summary="@string/support_summary"
         settings:controller="com.android.settings.support.SupportPreferenceController"/>
 
 </PreferenceScreen>

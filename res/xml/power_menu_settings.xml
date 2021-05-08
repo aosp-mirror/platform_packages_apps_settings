@@ -26,19 +26,4 @@
         android:summary="@string/power_menu_long_press_for_assist_summary"
         settings:controller="com.android.settings.gestures.LongPressPowerButtonPreferenceController"
         />
-
-    <Preference
-        android:key="gesture_global_actions_panel_summary"
-        android:title="@string/cards_passes_sentence"
-        android:fragment="com.android.settings.gestures.GlobalActionsPanelSettings"
-        settings:controller="com.android.settings.gestures.GlobalActionsPanelPreferenceController" />
-
-    <PreferenceCategory
-        android:title="@string/power_menu_lock_screen_category" >
-
-        <SwitchPreference
-            android:key="gesture_power_menu_privacy"
-            android:title="@string/power_menu_privacy"
-            settings:controller="com.android.settings.gestures.PowerMenuPrivacyPreferenceController" />
-    </PreferenceCategory>
 </PreferenceScreen>

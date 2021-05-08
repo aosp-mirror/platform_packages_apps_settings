@@ -19,8 +19,7 @@ package com.android.settings.password;
 import static android.content.pm.PackageManager.FEATURE_FACE;
 import static android.content.pm.PackageManager.FEATURE_FINGERPRINT;
 
-import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS;
-import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY;
+import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE;
@@ -262,12 +261,9 @@ public final class SetNewPasswordControllerTest {
 
     private void compareFingerprintExtras(Bundle actualBundle) {
         assertEquals(
-                "Password quality must be something in order to config fingerprint.",
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING,
-                actualBundle.getInt(MINIMUM_QUALITY_KEY));
-        assertTrue(
-                "All disabled preference should be removed.",
-                actualBundle.getBoolean(HIDE_DISABLED_PREFS));
+                "Insecure options must be disabled in order to config fingerprint.",
+                true,
+                actualBundle.getBoolean(HIDE_INSECURE_OPTIONS));
         assertTrue(
                 "Fingerprint enroll must request Gatekeeper Password.",
                 actualBundle.getBoolean(EXTRA_KEY_REQUEST_GK_PW_HANDLE));
@@ -282,12 +278,9 @@ public final class SetNewPasswordControllerTest {
 
     private void compareFaceExtras(Bundle actualBundle) {
         assertEquals(
-                "Password quality must be something in order to config face.",
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING,
-                actualBundle.getInt(MINIMUM_QUALITY_KEY));
-        assertTrue(
-                "All disabled preference should be removed.",
-                actualBundle.getBoolean(HIDE_DISABLED_PREFS));
+                "Insecure options must be disabled in order to config face.",
+                true,
+                actualBundle.getBoolean(HIDE_INSECURE_OPTIONS));
         assertTrue(
                 "Face enroll must request Gatekeeper Password",
                 actualBundle.getBoolean(EXTRA_KEY_REQUEST_GK_PW_HANDLE));

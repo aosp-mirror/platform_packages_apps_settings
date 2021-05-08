@@ -20,12 +20,10 @@ import android.content.Context;
 import android.icu.text.ListFormatter;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.wifi.WifiPrimarySwitchPreferenceController;
 
 import java.util.ArrayList;
@@ -53,11 +51,6 @@ public class TopLevelNetworkEntryPreferenceController extends BasePreferenceCont
 
     @Override
     public CharSequence getSummary() {
-        // Remove homepage summaries for silky home.
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            return null;
-        }
-
         final String wifiSummary = BidiFormatter.getInstance()
                 .unicodeWrap(mContext.getString(R.string.wifi_settings_title));
         final String mobileSummary = mContext.getString(

@@ -23,9 +23,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings.Global;
-import android.util.FeatureFlagUtils;
-
-import com.android.settings.core.FeatureFlags;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +40,6 @@ public class TopLevelAboutDevicePreferenceControllerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mController = new TopLevelAboutDevicePreferenceController(mContext, "test_key");
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test
@@ -60,13 +56,5 @@ public class TopLevelAboutDevicePreferenceControllerTest {
     public void getSummary_deviceNameSet_shouldReturnDeviceName() {
         Global.putString(mContext.getContentResolver(), Global.DEVICE_NAME, "Test");
         assertThat(mController.getSummary().toString()).isEqualTo("Test");
-    }
-
-    @Test
-    public void getSummary_silkyHomeEnabled_shouldBeNull() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-        Global.putString(mContext.getContentResolver(), Global.DEVICE_NAME, "Test");
-
-        assertThat(mController.getSummary()).isNull();
     }
 }

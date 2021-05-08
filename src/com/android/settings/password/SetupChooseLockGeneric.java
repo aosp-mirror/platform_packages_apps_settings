@@ -21,7 +21,6 @@ import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -160,22 +159,12 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             return SetupChooseLockGeneric.InternalActivity.class;
         }
 
-        /***
-         * Disables preferences that are less secure than required quality and shows only secure
-         * screen lock options here.
-         *
-         * @param quality the requested quality.
-         */
         @Override
-        protected void disableUnusablePreferences(final int quality, boolean hideDisabled) {
+        protected boolean alwaysHideInsecureScreenLockTypes() {
             // At this part of the flow, the user has already indicated they want to add a pin,
-            // pattern or password, so don't show "None" or "Slide". We disable them here and set
-            // the HIDE_DISABLED flag to true to hide them. This only happens for setup wizard.
-            // We do the following max check here since the device may already have a Device Admin
-            // installed with a policy we need to honor.
-            final int newQuality = Math.max(quality,
-                    DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-            super.disableUnusablePreferencesImpl(newQuality, true /* hideDisabled */);
+            // pattern or password, so don't show "None" or "Slide". We disable them here.
+            // This only happens for setup wizard.
+            return true;
         }
 
         @Override
