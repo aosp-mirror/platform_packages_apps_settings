@@ -22,10 +22,8 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +41,6 @@ public class TopLevelBatteryPreferenceControllerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mController = new TopLevelBatteryPreferenceController(mContext, "test_key");
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test
@@ -74,15 +71,7 @@ public class TopLevelBatteryPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_silkyHomeEnabled_shouldBeNull() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-
-        assertThat(mController.getSummary()).isNull();
-    }
-
-    @Test
     public void getSummary_batteryNotPresent_shouldShowWarningMessage() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
         mController.mIsBatteryPresent = false;
 
         assertThat(mController.getSummary())
