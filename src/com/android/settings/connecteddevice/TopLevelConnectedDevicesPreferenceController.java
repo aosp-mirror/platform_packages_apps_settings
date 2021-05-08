@@ -17,11 +17,9 @@
 package com.android.settings.connecteddevice;
 
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 
 public class TopLevelConnectedDevicesPreferenceController extends BasePreferenceController {
 
@@ -38,11 +36,6 @@ public class TopLevelConnectedDevicesPreferenceController extends BasePreference
 
     @Override
     public CharSequence getSummary() {
-        // Remove homepage summaries for silky home.
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            return null;
-        }
-
         return mContext.getText(
                 AdvancedConnectedDeviceController.getConnectedDevicesSummaryResourceId(mContext));
     }
