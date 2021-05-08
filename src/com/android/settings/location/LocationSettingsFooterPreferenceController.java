@@ -17,21 +17,42 @@
 package com.android.settings.location;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.location.LocationManager;
 import android.text.Html;
+import android.util.Log;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.widget.FooterPreference;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Preference controller for Location Settings footer.
  */
 public class LocationSettingsFooterPreferenceController extends LocationBasePreferenceController {
-    FooterPreference mFooterPreference;
+    private static final String TAG = "LocationFooter";
+    private static final Intent INJECT_INTENT =
+            new Intent(LocationManager.SETTINGS_FOOTER_DISPLAYED_ACTION);
+
+    private final PackageManager mPackageManager;
+    private FooterPreference mFooterPreference;
+    private boolean mLocationEnabled;
+    private String mInjectedFooterString;
 
     public LocationSettingsFooterPreferenceController(Context context, String key) {
         super(context, key);
+        mPackageManager = context.getPackageManager();
     }
 
     @Override
@@ -42,9 +63,118 @@ public class LocationSettingsFooterPreferenceController extends LocationBasePref
 
     @Override
     public void onLocationModeChanged(int mode, boolean restricted) {
-        boolean enabled = mLocationEnabler.isEnabled(mode);
-        mFooterPreference.setTitle(Html.fromHtml(mContext.getString(
-                enabled ? R.string.location_settings_footer_location_on
-                        : R.string.location_settings_footer_location_off)));
+        mLocationEnabled = mLocationEnabler.isEnabled(mode);
+        updateFooterPreference();
+    }
+
+    /**
+     * Insert footer preferences.
+     */
+    @Override
+    public void updateState(Preference preference) {
+        Collection<FooterData> footerData = getFooterData();
+        for (FooterData data : footerData) {
+            try {
+                mInjectedFooterString =
+                        mPackageManager
+                                .getResourcesForApplication(data.applicationInfo)
+                                .getString(data.footerStringRes);
+                updateFooterPreference();
+            } catch (PackageManager.NameNotFoundException exception) {
+                Log.w(
+                        TAG,
+                        "Resources not found for application "
+                                + data.applicationInfo.packageName);
+            }
+        }
+    }
+
+    private void updateFooterPreference() {
+        String footerString = mContext.getString(
+                mLocationEnabled ? R.string.location_settings_footer_location_on
+                        : R.string.location_settings_footer_location_off);
+        if (mLocationEnabled) {
+            footerString = mInjectedFooterString + footerString;
+        }
+        if (mFooterPreference != null) {
+            mFooterPreference.setTitle(Html.fromHtml(footerString));
+        }
+    }
+
+    /**
+     * Location footer preference group should be displayed if there is at least one footer to
+     * inject.
+     */
+    @Override
+    public int getAvailabilityStatus() {
+        return !getFooterData().isEmpty() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    /**
+     * Return a list of strings with text provided by ACTION_INJECT_FOOTER broadcast receivers.
+     */
+    private List<FooterData> getFooterData() {
+        // Fetch footer text from system apps
+        List<ResolveInfo> resolveInfos =
+                mPackageManager.queryBroadcastReceivers(
+                        INJECT_INTENT, PackageManager.GET_META_DATA);
+        if (resolveInfos == null) {
+            Log.e(TAG, "Unable to resolve intent " + INJECT_INTENT);
+            return Collections.emptyList();
+        }
+
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, "Found broadcast receivers: " + resolveInfos);
+        }
+
+        List<FooterData> footerDataList = new ArrayList<>(resolveInfos.size());
+        for (ResolveInfo resolveInfo : resolveInfos) {
+            ActivityInfo activityInfo = resolveInfo.activityInfo;
+            ApplicationInfo appInfo = activityInfo.applicationInfo;
+
+            // If a non-system app tries to inject footer, ignore it
+            if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                Log.w(TAG, "Ignoring attempt to inject footer from app not in system image: "
+                        + resolveInfo);
+                continue;
+            }
+
+            // Get the footer text resource id from broadcast receiver's metadata
+            if (activityInfo.metaData == null) {
+                if (Log.isLoggable(TAG, Log.DEBUG)) {
+                    Log.d(TAG, "No METADATA in broadcast receiver " + activityInfo.name);
+                }
+                continue;
+            }
+
+            final int footerTextRes =
+                    activityInfo.metaData.getInt(LocationManager.METADATA_SETTINGS_FOOTER_STRING);
+            if (footerTextRes == 0) {
+                Log.w(
+                        TAG,
+                        "No mapping of integer exists for "
+                                + LocationManager.METADATA_SETTINGS_FOOTER_STRING);
+                continue;
+            }
+            footerDataList.add(new FooterData(footerTextRes, appInfo));
+        }
+        return footerDataList;
+    }
+
+    /**
+     * Contains information related to a footer.
+     */
+    private static class FooterData {
+
+        // The string resource of the footer
+        public final int footerStringRes;
+
+        // Application info of receiver injecting this footer
+        public final ApplicationInfo applicationInfo;
+
+        FooterData(int footerRes, ApplicationInfo appInfo) {
+            this.footerStringRes = footerRes;
+            this.applicationInfo = appInfo;
+        }
     }
 }
