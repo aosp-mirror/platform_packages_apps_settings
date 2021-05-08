@@ -30,7 +30,6 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED
 
 import static com.android.internal.widget.LockPatternUtils.PASSWORD_TYPE_KEY;
 import static com.android.settings.password.ChooseLockGeneric.CONFIRM_CREDENTIALS;
-import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
@@ -426,18 +425,6 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_HIGH,
                 /* passwordType= */ PASSWORD_QUALITY_NUMERIC,
                 /* userEnteredPassword= */ LockscreenCredential.createNone(),
-                "PIN must be at least 8 digits");
-    }
-
-    @Test
-    public void validateComplexityMergedFromUnificationUserOnCreate() {
-        ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_LOW);
-        ShadowLockPatternUtils.setRequiredPasswordComplexity(123, PASSWORD_COMPLEXITY_HIGH);
-
-        Intent intent = createIntentForPasswordValidation(null, PASSWORD_COMPLEXITY_NONE,
-                PASSWORD_QUALITY_NUMERIC);
-        intent.putExtra(EXTRA_KEY_UNIFICATION_PROFILE_ID, 123);
-        assertPasswordValidationResultForIntent(LockscreenCredential.createNone(), intent,
                 "PIN must be at least 8 digits");
     }
 

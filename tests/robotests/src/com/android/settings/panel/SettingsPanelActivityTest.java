@@ -36,8 +36,8 @@ import android.view.WindowManager;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
-import com.android.settings.core.HideNonSystemOverlayMixin;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import org.junit.Before;
 import org.junit.Test;

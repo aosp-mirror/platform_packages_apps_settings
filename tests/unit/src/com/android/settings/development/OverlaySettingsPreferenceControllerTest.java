@@ -16,10 +16,12 @@
 
 package com.android.settings.development;
 
+import static com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin.SECURE_OVERLAY_SETTINGS;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.provider.Settings;
 
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
@@ -83,20 +85,16 @@ public class OverlaySettingsPreferenceControllerTest {
 
     @Test
     public void isOverlaySettingsEnabled_sharePreferenceSetTrue_shouldReturnTrue() {
-        final SharedPreferences editor = mContext.getSharedPreferences(
-                OverlaySettingsPreferenceController.SHARE_PERFS,
-                Context.MODE_PRIVATE);
-        editor.edit().putBoolean(OverlaySettingsPreferenceController.SHARE_PERFS, true).apply();
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                SECURE_OVERLAY_SETTINGS, 1);
 
         assertThat(OverlaySettingsPreferenceController.isOverlaySettingsEnabled(mContext)).isTrue();
     }
 
     @Test
     public void isOverlaySettingsEnabled_sharePreferenceSetFalse_shouldReturnFalse() {
-        final SharedPreferences editor = mContext.getSharedPreferences(
-                OverlaySettingsPreferenceController.SHARE_PERFS,
-                Context.MODE_PRIVATE);
-        editor.edit().putBoolean(OverlaySettingsPreferenceController.SHARE_PERFS, false).apply();
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                SECURE_OVERLAY_SETTINGS, 0);
 
         assertThat(
                 OverlaySettingsPreferenceController.isOverlaySettingsEnabled(mContext)).isFalse();

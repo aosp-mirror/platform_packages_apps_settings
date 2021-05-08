@@ -222,9 +222,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
     private void launchChooseLock() {
         Intent intent = BiometricUtils.getChooseLockIntent(this, getIntent());
-        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
+        intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         intent.putExtra(getExtraKeyForBiometric(), true);
         if (mUserId != UserHandle.USER_NULL) {
