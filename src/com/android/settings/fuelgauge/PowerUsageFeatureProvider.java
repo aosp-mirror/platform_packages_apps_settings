@@ -133,6 +133,11 @@ public interface PowerUsageFeatureProvider {
     boolean isChartGraphEnabled(Context context);
 
     /**
+     * Checks whether we should show usage information by slots or not.
+     */
+    boolean isChartGraphSlotsEnabled(Context context);
+
+    /**
      * Returns battery history data with corresponding timestamp key.
      */
     Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
