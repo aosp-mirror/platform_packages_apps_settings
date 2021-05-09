@@ -286,9 +286,14 @@ public final class ConvertUtilsTest {
         final List<BatteryDiffEntry> entryList = purgedResultMap.get(0);
         assertThat(entryList).hasSize(1);
         // Verifies the clipped usage time.
+        final float ratio = (float) (7200) / (float) (3600 + 7200);
         final BatteryDiffEntry resultEntry = entryList.get(0);
-        assertThat(resultEntry.mForegroundUsageTimeInMs).isEqualTo(2400000);
-        assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(4800000);
+        assertThat(resultEntry.mForegroundUsageTimeInMs)
+            .isEqualTo(Math.round(entry.mForegroundUsageTimeInMs * ratio));
+        assertThat(resultEntry.mBackgroundUsageTimeInMs)
+            .isEqualTo(Math.round(entry.mBackgroundUsageTimeInMs * ratio));
+        assertThat(resultEntry.mConsumePower)
+            .isEqualTo(entry.mConsumePower * ratio);
     }
 
     @Test

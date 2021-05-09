@@ -214,13 +214,11 @@ public final class ConvertUtils {
                         currentEntry.mBackgroundUsageTimeInMs,
                         nextEntry.mBackgroundUsageTimeInMs,
                         nextTwoEntry.mBackgroundUsageTimeInMs);
-                final double consumePower =
+                double consumePower =
                     getDiffValue(
                         currentEntry.mConsumePower,
                         nextEntry.mConsumePower,
                         nextTwoEntry.mConsumePower);
-                totalConsumePower += consumePower;
-
                 // Excludes entry since we don't have enough data to calculate.
                 if (foregroundUsageTimeInMs == 0
                         && backgroundUsageTimeInMs == 0
@@ -246,7 +244,9 @@ public final class ConvertUtils {
                         Math.round(foregroundUsageTimeInMs * ratio);
                     backgroundUsageTimeInMs =
                         Math.round(backgroundUsageTimeInMs * ratio);
+                    consumePower = consumePower * ratio;
                 }
+                totalConsumePower += consumePower;
                 batteryDiffEntryList.add(
                     new BatteryDiffEntry(
                         context,
