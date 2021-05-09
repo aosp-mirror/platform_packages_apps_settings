@@ -246,11 +246,9 @@ public final class ConvertUtilsTest {
         assertBatteryDiffEntry(entryList.get(0), 75, 40L, 50L);
         // Verifies the last 24 hours aggregate result.
         entryList = purgedResultMap.get(Integer.valueOf(-1));
-        assertThat(entryList).hasSize(2);
+        assertThat(entryList).hasSize(1);
         // Verifies the fake data is cleared out.
         assertThat(entryList.get(0).getPackageName())
-            .isNotEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
-        assertThat(entryList.get(1).getPackageName())
             .isNotEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
     }
 
@@ -286,9 +284,14 @@ public final class ConvertUtilsTest {
         final List<BatteryDiffEntry> entryList = purgedResultMap.get(0);
         assertThat(entryList).hasSize(1);
         // Verifies the clipped usage time.
+        final float ratio = (float) (7200) / (float) (3600 + 7200);
         final BatteryDiffEntry resultEntry = entryList.get(0);
-        assertThat(resultEntry.mForegroundUsageTimeInMs).isEqualTo(2400000);
-        assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(4800000);
+        assertThat(resultEntry.mForegroundUsageTimeInMs)
+            .isEqualTo(Math.round(entry.mForegroundUsageTimeInMs * ratio));
+        assertThat(resultEntry.mBackgroundUsageTimeInMs)
+            .isEqualTo(Math.round(entry.mBackgroundUsageTimeInMs * ratio));
+        assertThat(resultEntry.mConsumePower)
+            .isEqualTo(entry.mConsumePower * ratio);
     }
 
     @Test
