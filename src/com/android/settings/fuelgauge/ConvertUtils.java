@@ -260,10 +260,10 @@ public final class ConvertUtils {
                 diffEntry.setTotalConsumePower(totalConsumePower);
             }
         }
+        insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
         if (purgeLowPercentageAndFakeData) {
             purgeLowPercentageAndFakeData(resultMap);
         }
-        insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
         return resultMap;
     }
 
