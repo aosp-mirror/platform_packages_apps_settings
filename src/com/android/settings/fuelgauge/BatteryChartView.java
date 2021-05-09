@@ -33,6 +33,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 
 import java.util.Locale;
@@ -59,6 +60,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private int mSelectedIndex;
     private float mTrapezoidVOffset;
     private float mTrapezoidHOffset;
+    private boolean mIsSlotsClickable;
+
     // Colors for drawing the trapezoid shape and dividers.
     private int mTrapezoidColor;
     private int mTrapezoidSolidColor;
@@ -72,7 +75,6 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private String[] mTimestamps;
     private final Rect[] mTimestampsBounds =
         new Rect[] {new Rect(), new Rect(), new Rect(), new Rect()};
-
 
     private int[] mLevels;
     private Paint mTextPaint;
@@ -92,9 +94,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         initializeColors(context);
         // Registers the click event listener.
         setOnClickListener(this);
-        setClickable(false);
         setSelectedIndex(SELECTED_INDEX_ALL);
         setTrapezoidCount(DEFAULT_TRAPEZOID_COUNT);
+        setClickable(false);
     }
 
     /** Sets the total trapezoid count for drawing. */
@@ -239,6 +241,23 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             setSelectedIndex(trapezoidIndex);
         }
         view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK);
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        final Context context = mContext;
+        mIsSlotsClickable =
+            FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context)
+                .isChartGraphSlotsEnabled(context);
+        Log.d(TAG, "isChartGraphSlotsEnabled:" + mIsSlotsClickable);
+        setClickable(isClickable());
+    }
+
+    @Override
+    public void setClickable(boolean clickable) {
+        super.setClickable(mIsSlotsClickable && clickable);
     }
 
     private void initializeColors(Context context) {
