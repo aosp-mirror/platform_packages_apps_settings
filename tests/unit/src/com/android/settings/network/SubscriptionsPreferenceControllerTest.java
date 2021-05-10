@@ -428,7 +428,30 @@ public class SubscriptionsPreferenceControllerTest {
                 TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
+
+        mController.onResume();
+        mController.displayPreference(mPreferenceScreen);
+
+        assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
+    }
+
+    @Test
+    @UiThreadTest
+    public void displayPreference_providerAndHasMultiSimAndActiveCarrierWifi_connectedAndWPlus() {
+        final CharSequence expectedSummary =
+                Html.fromHtml("Connected / W+", Html.FROM_HTML_MODE_LEGACY);
+        final String networkType = "W+";
+        final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
+        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
+        doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
+                TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
+        doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
+        doReturn(networkType)
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(true));
+        doReturn(true).when(mWifiPickerTrackerHelper).isActiveCarrierNetwork();
+        mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -450,7 +473,7 @@ public class SubscriptionsPreferenceControllerTest {
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, false,
                 TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -470,7 +493,7 @@ public class SubscriptionsPreferenceControllerTest {
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
                 TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         mController.onResume();
@@ -507,7 +530,7 @@ public class SubscriptionsPreferenceControllerTest {
                 TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         mController.onResume();
@@ -533,7 +556,7 @@ public class SubscriptionsPreferenceControllerTest {
                 TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -560,7 +583,7 @@ public class SubscriptionsPreferenceControllerTest {
                 TelephonyManager.DATA_DISCONNECTED, ServiceState.STATE_OUT_OF_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
-                .when(sInjector).getNetworkType(any(), any(), any(), anyInt());
+                .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -595,7 +618,7 @@ public class SubscriptionsPreferenceControllerTest {
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
-        mController.mDataSubscriptionChangedReceiver.onReceive(mContext, intent);
+        mController.mConnectionChangeReceiver.onReceive(mContext, intent);
 
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
@@ -621,7 +644,7 @@ public class SubscriptionsPreferenceControllerTest {
 
         doReturn(sub.get(1)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
 
-        mController.mDataSubscriptionChangedReceiver.onReceive(mContext, intent);
+        mController.mConnectionChangeReceiver.onReceive(mContext, intent);
 
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
