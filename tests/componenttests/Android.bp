@@ -27,6 +27,8 @@ android_test {
     ],
 
     test_suites: ["device-tests"],
-
+    optimize: {
+        enabled: false,
+    },
     instrumentation_for: "Settings",
 }
