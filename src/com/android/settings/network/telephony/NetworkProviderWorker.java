@@ -39,8 +39,10 @@ import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.wifi.slice.WifiScanWorker;
+import com.android.settingslib.SignalIcon.MobileIconGroup;
 import com.android.settingslib.mobile.MobileMappings;
 import com.android.settingslib.mobile.MobileMappings.Config;
+import com.android.settingslib.mobile.TelephonyIcons;
 
 import java.util.Collections;
 
@@ -247,14 +249,21 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         return SubscriptionManager.getDefaultDataSubscriptionId();
     }
 
-
     private String updateNetworkTypeName(Context context, Config config,
             TelephonyDisplayInfo telephonyDisplayInfo, int subId) {
         String iconKey = getIconKey(telephonyDisplayInfo);
         int resId = mapIconSets(config).get(iconKey).dataContentDescription;
+        if (mWifiPickerTrackerHelper != null
+                && mWifiPickerTrackerHelper.isActiveCarrierNetwork()) {
+            MobileIconGroup carrierMergedWifiIconGroup = TelephonyIcons.CARRIER_MERGED_WIFI;
+            resId = carrierMergedWifiIconGroup.dataContentDescription;
+            return resId != 0
+                    ? SubscriptionManager.getResourcesForSubId(context, subId)
+                    .getString(resId) : "";
+        }
+
         return resId != 0
                 ? SubscriptionManager.getResourcesForSubId(context, subId).getString(resId) : "";
-
     }
 
     @VisibleForTesting
