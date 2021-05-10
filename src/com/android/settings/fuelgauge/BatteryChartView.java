@@ -80,6 +80,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private Paint mTextPaint;
     private Paint mDividerPaint;
     private Paint mTrapezoidPaint;
+    private Paint mTrapezoidCurvePaint = null;
     private TrapezoidSlot[] mTrapezoidSlots;
     // Records the location to calculate selected index.
     private MotionEvent mTouchUpEvent;
@@ -231,7 +232,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         final int trapezoidIndex = getTrapezoidIndex(mTouchUpEvent.getX());
         // Ignores the click event if the level is zero.
         if (trapezoidIndex == SELECTED_INDEX_INVALID
-                || (trapezoidIndex >= 0 && mLevels[trapezoidIndex] == 0)) {
+                || !isValidToDraw(trapezoidIndex)) {
             return;
         }
         // Selects all if users click the same trapezoid item two times.
@@ -253,6 +254,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                 .isChartGraphSlotsEnabled(context);
         Log.d(TAG, "isChartGraphSlotsEnabled:" + mIsSlotsClickable);
         setClickable(isClickable());
+        // Initializes the trapezoid curve paint for non-clickable case.
+        if (!mIsSlotsClickable && mTrapezoidCurvePaint == null) {
+            mTrapezoidCurvePaint = new Paint();
+            mTrapezoidCurvePaint.setAntiAlias(true);
+            mTrapezoidCurvePaint.setColor(mTrapezoidSolidColor);
+            mTrapezoidCurvePaint.setStyle(Paint.Style.STROKE);
+            mTrapezoidCurvePaint.setStrokeWidth(mDividerWidth * 2);
+        }
     }
 
     @Override
@@ -391,16 +400,24 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         final float unitHeight = availableSpace / 100f;
         // Draws all trapezoid shapes into the canvas.
         final Path trapezoidPath = new Path();
+        Path trapezoidCurvePath = null;
         for (int index = 0; index < mTrapezoidCount; index++) {
             // Not draws the trapezoid for corner or not initialization cases.
-            if (mLevels[index] == 0 || mLevels[index + 1] == 0) {
+            if (!isValidToDraw(index)) {
+                if (mTrapezoidCurvePaint != null && trapezoidCurvePath != null) {
+                    canvas.drawPath(trapezoidCurvePath, mTrapezoidCurvePaint);
+                    trapezoidCurvePath = null;
+                }
                 continue;
             }
             // Configures the trapezoid paint color.
-            mTrapezoidPaint.setColor(
-                mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
-                    ? mTrapezoidSolidColor
-                    : mTrapezoidColor);
+            final int trapezoidColor =
+                !mIsSlotsClickable
+                    ? mTrapezoidColor
+                    : mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
+                        ? mTrapezoidSolidColor : mTrapezoidColor;
+            mTrapezoidPaint.setColor(trapezoidColor);
+
             final float leftTop = round(trapezoidBottom - mLevels[index] * unitHeight);
             final float rightTop = round(trapezoidBottom - mLevels[index + 1] * unitHeight);
             trapezoidPath.reset();
@@ -413,6 +430,22 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             trapezoidPath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
             // Draws the trapezoid shape into canvas.
             canvas.drawPath(trapezoidPath, mTrapezoidPaint);
+
+            // Generates path for non-clickable trapezoid curve.
+            if (mTrapezoidCurvePaint != null) {
+                if (trapezoidCurvePath == null) {
+                    trapezoidCurvePath= new Path();
+                    trapezoidCurvePath.moveTo(mTrapezoidSlots[index].mLeft, leftTop);
+                } else {
+                    trapezoidCurvePath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
+                }
+                trapezoidCurvePath.lineTo(mTrapezoidSlots[index].mRight, rightTop);
+            }
+        }
+        // Draws the trapezoid curve for non-clickable case.
+        if (mTrapezoidCurvePaint != null && trapezoidCurvePath != null) {
+            canvas.drawPath(trapezoidCurvePath, mTrapezoidCurvePaint);
+            trapezoidCurvePath = null;
         }
     }
 
@@ -426,6 +459,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             }
         }
         return SELECTED_INDEX_INVALID;
+    }
+
+    private boolean isValidToDraw(int trapezoidIndex) {
+        return mLevels != null
+                && trapezoidIndex >= 0
+                && trapezoidIndex < mLevels.length - 1
+                && mLevels[trapezoidIndex] != 0
+                && mLevels[trapezoidIndex + 1] != 0;
     }
 
     // A container class for each trapezoid left and right location.
