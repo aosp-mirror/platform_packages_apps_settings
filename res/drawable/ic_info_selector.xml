@@ -14,14 +14,7 @@
      limitations under the License.
 -->
 
-<ImageView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/info_button"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:background="?android:attr/selectableItemBackground"
-    android:scaleType="center"
-    android:src="@drawable/ic_info_selector" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="true" android:drawable="@drawable/ic_info"/>
+    <item android:state_enabled="false" android:drawable="@drawable/ic_info_outline_24"/>
+</selector>
