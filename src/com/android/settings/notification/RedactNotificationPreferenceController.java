@@ -116,7 +116,7 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
     public int getAvailabilityStatus() {
         // hide work profile setting if no work profile
         if (KEY_LOCKSCREEN_WORK_PROFILE_REDACT.equals(getPreferenceKey())
-                && mProfileUserId == UserHandle.USER_NULL) {
+                && mProfileUserId == UserHandle.myUserId()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
 
