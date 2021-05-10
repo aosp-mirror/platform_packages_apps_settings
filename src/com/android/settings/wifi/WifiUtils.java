@@ -35,7 +35,8 @@ import com.android.wifitrackerlib.WifiEntry;
 
 import java.nio.charset.StandardCharsets;
 
-public class WifiUtils {
+/** A utility class for Wi-Fi functions. */
+public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
 
     private static final int SSID_ASCII_MIN_LENGTH = 1;
     private static final int SSID_ASCII_MAX_LENGTH = 32;
