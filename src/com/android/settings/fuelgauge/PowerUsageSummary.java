@@ -52,9 +52,12 @@ import java.util.List;
 public class PowerUsageSummary extends PowerUsageBase implements
         BatteryTipPreferenceController.BatteryTipListener {
 
-    private static final String KEY_BATTERY_ERROR = "battery_help_message";
-
     static final String TAG = "PowerUsageSummary";
+
+    @VisibleForTesting
+    static final String KEY_BATTERY_ERROR = "battery_help_message";
+    @VisibleForTesting
+    static final String KEY_BATTERY_USAGE = "battery_usage_summary";
 
     @VisibleForTesting
     static final int BATTERY_INFO_LOADER = 1;
@@ -78,6 +81,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     boolean mNeedUpdateBatteryTip;
     @VisibleForTesting
     Preference mHelpPreference;
+    @VisibleForTesting
+    Preference mBatteryUsagePreference;
 
     @VisibleForTesting
     final ContentObserver mSettingsObserver = new ContentObserver(new Handler()) {
@@ -154,11 +159,9 @@ public class PowerUsageSummary extends PowerUsageBase implements
         setAnimationAllowed(true);
 
         initFeatureProvider();
+        initPreference();
 
         mBatteryUtils = BatteryUtils.getInstance(getContext());
-
-        mHelpPreference = findPreference(KEY_BATTERY_ERROR);
-        mHelpPreference.setVisible(false);
 
         if (Utils.isBatteryPresent(getContext())) {
             restartBatteryInfoLoader();
@@ -246,6 +249,18 @@ public class PowerUsageSummary extends PowerUsageBase implements
         final Context context = getContext();
         mPowerFeatureProvider = FeatureFactory.getFactory(context)
                 .getPowerUsageFeatureProvider(context);
+    }
+
+    @VisibleForTesting
+    void initPreference() {
+        mBatteryUsagePreference = findPreference(KEY_BATTERY_USAGE);
+        mBatteryUsagePreference.setSummary(
+                mPowerFeatureProvider.isChartGraphEnabled(getContext()) ?
+                        getString(R.string.advanced_battery_preference_summary_with_hours) :
+                        getString(R.string.advanced_battery_preference_summary));
+
+        mHelpPreference = findPreference(KEY_BATTERY_ERROR);
+        mHelpPreference.setVisible(false);
     }
 
     @VisibleForTesting
