@@ -575,7 +575,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.initPreferenceForTriState(mContext);
 
         assertThat(mFooterPreference.getTitle().toString())
-                .isEqualTo("This app requires Optimized battery usage.");
+                .isEqualTo("This app requires optimized battery usage.");
     }
 
     @Test
@@ -586,7 +586,7 @@ public class AdvancedPowerUsageDetailTest {
         mFragment.initPreferenceForTriState(mContext);
 
         assertThat(mFooterPreference.getTitle()
-                .toString()).isEqualTo("This app requires Unrestricted battery usage.");
+                .toString()).isEqualTo("This app requires unrestricted battery usage.");
     }
 
     @Test
