@@ -103,8 +103,8 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     /** Customizes the order by preference key. */
     protected List<String> getPreferenceOrderList() {
         final List<String> lists = new ArrayList<>();
-        lists.add(KEY_USE_SERVICE_PREFERENCE);
         lists.add(KEY_PREVIEW);
+        lists.add(KEY_USE_SERVICE_PREFERENCE);
         lists.add(KEY_CATEGORY_MODE);
         lists.add(KEY_GENERAL_CATEGORY);
         lists.add(KEY_HTML_DESCRIPTION_PREFERENCE);
