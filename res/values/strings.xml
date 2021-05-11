@@ -2118,7 +2118,7 @@
     <!-- Wi-Fi settings. text displayed when Wi-Fi is off and network list is empty [CHAR LIMIT=50]-->
     <string name="wifi_empty_list_wifi_off">To see available networks, turn Wi\u2011Fi on.</string>
     <!-- Wi-Fi settings. text displayed when Wi-Fi is on and network list is empty [CHAR LIMIT=50]-->
-    <string name="wifi_empty_list_wifi_on">Searching for Wi\u2011Fi networks\u2026</string>
+    <string name="wifi_empty_list_wifi_on">Searching for networks\u2026</string>
     <!-- Wifi Settings. text displayed when user has restriction DISALLOW_CONFIG_WIFI [CHAR LIMIT=NONE]-->
     <string name="wifi_empty_list_user_restricted">You don\u2019t have permission to change the Wi\u2011Fi network.</string>
     <!-- Wi-Fi settings. content description for more button [CHAR LIMIT=50]-->
@@ -5254,13 +5254,13 @@
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_hardware_keyword">hold volume keys</string>
     <!-- Summary for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys.</string>
     <!-- Title for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap">Triple-tap screen</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_triple_tap_keyword">triple-tap screen</string>
     <!-- Summary for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen 3 times. This shortcut may slow down your device.</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen 3 times. This shortcut may slow down your device</string>
     <!-- Title for the accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=20] -->
     <string name="accessibility_shortcut_edit_dialog_title_advance">Advanced</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
@@ -5963,8 +5963,10 @@
     <string name="history_details_title">History details</string>
     <!-- Preference title for advanced battery usage [CHAR LIMIT=40] -->
     <string name="advanced_battery_preference_title">View battery usage</string>
-    <!-- Preference summary for advanced battery usage [CHAR LIMIT=40] -->
-    <string name="advanced_battery_preference_summary">View usage for past 24 hours</string>
+    <!-- Preference summary for advanced battery usage, for past 24 hours [CHAR LIMIT=40] -->
+    <string name="advanced_battery_preference_summary_with_hours">View usage for past 24 hours</string>
+    <!-- Preference summary for advanced battery usage, from last full charge [CHAR LIMIT=40] -->
+    <string name="advanced_battery_preference_summary">View usage from last full charge</string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">Battery usage</string>
