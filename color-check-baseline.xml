@@ -4221,4 +4221,36 @@
             column="5"/>
     </issue>
 
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        android:fillColor=&quot;@color/battery_good_color_light&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_battery_status_good_24dp.xml"
+            line="22"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        android:fillColor=&quot;@color/battery_good_color_light&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_battery_status_good_24dp.xml"
+            line="25"
+            column="9"/>
+    </issue>
+
 </issues>
