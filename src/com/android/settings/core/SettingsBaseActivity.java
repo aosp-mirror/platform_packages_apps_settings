@@ -148,8 +148,12 @@ public class SettingsBaseActivity extends FragmentActivity {
 
     @Override
     public void startActivity(Intent intent, @androidx.annotation.Nullable Bundle options) {
-        if (!Utils.isPageTransitionEnabled(this) || options != null) {
+        if (!Utils.isPageTransitionEnabled(this)) {
             super.startActivity(intent, options);
+            return;
+        }
+        if (options != null) {
+            super.startActivity(intent, getMergedBundleForTransition(options));
             return;
         }
         super.startActivity(intent, getActivityOptionsBundle());
@@ -169,9 +173,13 @@ public class SettingsBaseActivity extends FragmentActivity {
     @Override
     public void startActivityForResult(Intent intent, int requestCode,
             @androidx.annotation.Nullable Bundle options) {
-        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST
-                || options != null) {
+        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST) {
             super.startActivityForResult(intent, requestCode, options);
+            return;
+        }
+        if (options != null) {
+            super.startActivityForResult(intent, requestCode,
+                    getMergedBundleForTransition(options));
             return;
         }
         super.startActivityForResult(intent, requestCode, getActivityOptionsBundle());
@@ -337,6 +345,16 @@ public class SettingsBaseActivity extends FragmentActivity {
         final Toolbar toolbar = findViewById(R.id.action_bar);
         return ActivityOptions.makeSceneTransitionAnimation(this, toolbar,
                 "shared_element_view").toBundle();
+    }
+
+    private Bundle getMergedBundleForTransition(@NonNull Bundle options) {
+        final Bundle mergedBundle = new Bundle();
+        mergedBundle.putAll(options);
+        final Bundle activityOptionsBundle = getActivityOptionsBundle();
+        if (activityOptionsBundle != null) {
+            mergedBundle.putAll(activityOptionsBundle);
+        }
+        return mergedBundle;
     }
 
     public interface CategoryListener {
