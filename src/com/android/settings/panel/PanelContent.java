@@ -110,4 +110,11 @@ public interface PanelContent extends Instrumentable {
     default int getViewType() {
         return 0;
     }
+
+    /**
+     * @return {@code true} to enable progress bar visibility, {@code false} otherwise.
+     */
+    default boolean isProgressBarVisible() {
+        return false;
+    }
 }
