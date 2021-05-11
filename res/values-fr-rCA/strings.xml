@@ -386,10 +386,8 @@
     <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"Utilisez le déverrouillage par reconnaissance faciale pour déverrouiller votre appareil, vous connecter aux applications et confirmer les paiements."</string>
     <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"Remarque importante : \nVous pouvez déverrouiller votre téléphone sans le vouloir, simplement en le regardant.\n\nUne autre personne pourrait déverrouiller votre téléphone en le tenant devant votre visage.\n\nVotre téléphone pourrait être déverrouillé par une personne qui vous ressemble beaucoup, par exemple un jumeau identique."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"Remarque importante : \nVous pouvez déverrouiller votre téléphone sans le vouloir, simplement en le regardant.\n\nUne autre personne pourrait déverrouiller votre téléphone en le tenant devant votre visage, même si vous avez les yeux fermés.\n\nVotre téléphone pourrait être déverrouillé par une personne qui vous ressemble beaucoup, par exemple un jumeau identique."</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_title (2899669764446232715) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (3268144215619385299) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Supprimer le modèle facial?"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Votre modèle facial sera supprimé définitivement de façon sécurisée. Vous devrez ensuite utiliser votre NIP, votre schéma ou votre mot de passe pour déverrouiller votre téléphone ou pour vous authentifier dans les applications."</string>
     <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Supprimer le modèle facial?"</string>
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Votre modèle facial sera supprimé définitivement de façon sécurisée.\n\nVous devrez ensuite utiliser votre empreinte digitale, votre NIP, votre schéma ou votre mot de passe pour déverrouiller votre téléphone ou pour vous authentifier dans les applications."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Utilisez le déverrouillage par reconnaissance faciale pour déverrouiller votre téléphone"</string>
@@ -398,7 +396,10 @@
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Util. empr. dig. pour"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Ajouter une empreinte digitale"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5451094461919440992">"verrouillage de l\'écran"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary (6897454766137108776) -->
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> empreinte digitale ajoutée</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> empreintes digitales ajoutées</item>
+    </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configurer empreinte digitale"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Utilisez votre empreinte digitale"</string>
@@ -435,14 +436,10 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Allez dans un endroit moins éclairé et réessayez"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Vous avez atteint le nombre maximal d\'essais"</string>
     <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou vous authentifier (comme vous le faites pour vous connecter à des applications ou pour approuver un achat)\n\n"<annotation id="url">"En savoir plus"</annotation></string>
-    <!-- no translation found for security_settings_biometric_preference_title (298146483579539448) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (6941188982863819389) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_both_fp_multiple (4821859306609955966) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_both_fp_single (684409535278676426) -->
-    <skip />
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Déverrouillage avec visage et empreinte digitale"</string>
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Touchez pour configurer"</string>
+    <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Empreintes digitales et visage ajoutés"</string>
+    <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Empreinte digitale et visage ajoutés"</string>
     <string name="biometric_settings_intro" msgid="769040512190641961">"Lorsque vous configurerez le déverrouillage par reconnaissance faciale et par empreinte digitale, votre téléphone vous demandera votre empreinte digitale quand vous porterez un masque ou serez dans un endroit sombre."</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Méthodes de déverrouillage"</string>
     <string name="biometric_settings_category_ways_to_use" msgid="7182562470382953854">"Utilisez votre visage et votre empr. digitale pour"</string>
@@ -621,40 +618,48 @@
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"Mot de passe"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="5974580769186206478">"Une fois que vous avez défini un verrouillage de l\'écran, vous pouvez également configurer une empreinte digitale dans le menu Paramètres &gt; Sécurité."</string>
     <string name="unlock_disable_lock_title" msgid="2564279819907932759">"Désactiver le verrouillage de l\'écran"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (3606280046362811229) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="3606280046362811229">"Supprimer le verrouillage de l\'écran?"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Supprimer la protection du profil?"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (6246242612158828147) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (2259825377085781801) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_face (4699508435412336378) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_face_fingerprint (7049706229344804972) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (122154942944422284) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (983373874470746066) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_face (5607150515413131761) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_face_fingerprint (1821792325159866312) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (6422723907917376210) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (8899452884016354856) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_face (1811067332335964495) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_face_fingerprint (7063649456205159491) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Un schéma protège votre téléphone en cas de perte ou de vol"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Un schéma protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Cette fonctionnalité supprime également le modèle d\'empreinte digitale stocké sur votre appareil. Vous ne pourrez pas utiliser votre empreinte digitale pour vous authentifier dans les applications."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Un schéma protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Votre modèle facial sera également supprimé définitivement de façon sécurisée. Vous ne pourrez pas utiliser votre visage pour vous authentifier dans les applications."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Un schéma protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Cette fonctionnalité supprime le modèle d\'empreinte digitale stocké sur votre appareil. Votre modèle facial sera également supprimé définitivement de façon sécurisée. Vous ne pourrez pas utiliser votre visage ni votre empreinte digitale pour vous authentifier dans les applications."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"Un NIP protège votre téléphone en cas de perte ou de vol"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"Un NIP protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Cette fonctionnalité supprime également le modèle d\'empreinte digitale stocké sur votre appareil. Vous ne pourrez pas utiliser votre empreinte digitale pour vous authentifier dans les applications."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"Un NIP protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Votre modèle facial sera également supprimé définitivement de façon sécurisée. Vous ne pourrez pas utiliser votre visage pour vous authentifier dans les applications."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"Un NIP protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Cette fonctionnalité supprime le modèle d\'empreinte digitale stocké sur votre appareil. Votre modèle facial sera également supprimé définitivement de façon sécurisée. Vous ne pourrez pas utiliser votre visage ni votre empreinte digitale pour vous authentifier dans les applications."</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Un mot de passe protège votre téléphone en cas de perte ou de vol"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Un mot de passe protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Cette fonctionnalité supprime également le modèle d\'empreinte digitale stocké sur votre appareil. Vous ne pourrez pas utiliser votre empreinte digitale pour vous authentifier dans les applications."</string>
+    <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Un mot de passe protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Votre modèle facial sera également supprimé définitivement de façon sécurisée. Vous ne pourrez pas utiliser votre visage pour vous authentifier dans les applications."</string>
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Un mot de passe protège votre téléphone en cas de perte ou de vol.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Cette fonctionnalité supprime le modèle d\'empreinte digitale stocké sur votre appareil. Votre modèle facial sera également supprimé définitivement de façon sécurisée. Vous ne pourrez pas utiliser votre visage ni votre empreinte digitale pour vous authentifier dans les applications."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"Les fonctionnalités de protection de l\'appareil ne fonctionneront pas sans votre verrouillage d\'écran."</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6542744110902941189) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_face (4559917661432267841) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_face_fingerprint (3779582301453677644) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Les fonctionnalités de protection de l\'appareil ne fonctionneront pas sans votre verrouillage d\'écran.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Cette fonctionnalité supprime également le modèle d\'empreinte digitale stocké sur votre appareil. Vous ne pourrez pas utiliser votre empreinte digitale pour vous authentifier dans les applications."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Les fonctionnalités de protection de l\'appareil ne fonctionneront pas sans votre verrouillage d\'écran.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Votre modèle facial sera également supprimé définitivement de façon sécurisée. Vous ne pourrez pas utiliser votre visage pour vous authentifier dans les applications."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Les fonctionnalités de protection de l\'appareil ne fonctionneront pas sans votre verrouillage d\'écran.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Cette fonctionnalité supprime le modèle d\'empreinte digitale stocké sur votre appareil. Votre modèle facial sera également supprimé définitivement de façon sécurisée. Vous ne pourrez pas utiliser votre visage ni votre empreinte digitale pour vous authentifier dans les applications."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="621607297961726537">"Oui, supprimer"</string>
     <string name="unlock_change_lock_pattern_title" msgid="8234523589333929193">"Modifier le schéma"</string>
     <string name="unlock_change_lock_pin_title" msgid="2324077520816477479">"Modifier le NIP de déverrouillage"</string>
@@ -927,7 +932,8 @@
     <string name="wifi_menu_forget" msgid="6557142984528657361">"Retirer le réseau"</string>
     <string name="wifi_menu_modify" msgid="7246143391161038875">"Modifier le réseau"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Activez le Wi-Fi pour voir les réseaux disponibles."</string>
-    <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"Recherche de réseaux Wi-Fi en cours…"</string>
+    <!-- no translation found for wifi_empty_list_wifi_on (2448010040478321376) -->
+    <skip />
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Vous n\'avez pas l\'autorisation de modifier le réseau Wi‑Fi."</string>
     <string name="wifi_more" msgid="8742256421693351035">"More"</string>
     <string name="wifi_setup_wps" msgid="4303694722593999931">"Configuration auto (WPS)"</string>
@@ -1078,8 +1084,7 @@
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"Adresse IP"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Infos sur le réseau"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Masque de sous-réseau"</string>
-    <!-- no translation found for wifi_type_title (2174893488722015838) -->
-    <skip />
+    <string name="wifi_type_title" msgid="2174893488722015838">"Type"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Adresses IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Réseaux enregistrés"</string>
@@ -2150,8 +2155,7 @@
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Dispositions du clavier"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Dictionnaire personnel"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Dictionnaire personnel pour le travail"</string>
-    <!-- no translation found for user_dict_settings_summary (4939694372338975081) -->
-    <skip />
+    <string name="user_dict_settings_summary" msgid="4939694372338975081">"Ajoutez des mots à utiliser dans des applications comme un correcteur orthographique"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"Add"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"Ajouter au dictionnaire"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"Expression"</string>
@@ -2212,8 +2216,7 @@
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Texte et affichage"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Assombrir l\'écran"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Commandes d\'interaction"</string>
-    <!-- no translation found for accessibility_tap_assistance_title (1058913033421048284) -->
-    <skip />
+    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Contrôles du minutage"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Commandes système"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Applications téléchargées"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Fonctions expérimentales"</string>
@@ -2274,10 +2277,12 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Personnaliser le bouton d\'accessibilité"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Maintenir enfoncées les touches de volume"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"maintenir enfoncées les touches de volume"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Maintenez enfoncées les deux touches de volume"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_hardware (7866393664299375632) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Toucher l\'écran trois fois"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"toucher l\'écran trois fois"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Touchez rapidement l\'écran trois fois. Ce raccourci peut ralentir votre appareil."</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_triple_tap (7490111169801144991) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Paramètres avancés"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Le bouton d\'accessibilité est défini à <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser cette fonction, maintenez enfoncé le bouton d\'accessibilité, puis sélectionnez l\'agrandissement."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Le geste d\'accessibilité est défini pour <xliff:g id="SERVICE">%1$s</xliff:g>. Pour utiliser le zoom, balayez l\'écran de bas en haut deux avec doigts, puis maintenez-les-y. Sélectionnez ensuite Zoom."</string>
@@ -2633,8 +2638,7 @@
       <item quantity="other">Limitation de l\'utilisation de la pile pour %1$d applications</item>
     </plurals>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Application restreinte : <xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <!-- no translation found for restricted_app_detail_footer (3495725286882138803) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Ces applications sont limitées à l\'utilisation de la pile en arrière-plan. Il se peut qu\'elles ne fonctionnent pas comme prévu et que les notifications soient retardées."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utiliser le gestionnaire de pile"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Détecter quand les applications drainent la pile"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Détecter quand les applications sollicitent beaucoup la pile"</string>
@@ -2733,8 +2737,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Répartition depuis la dernière charge complète"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Dernière charge complète"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"La charge complète dure environ"</string>
-    <!-- no translation found for battery_footer_summary (8221691063048377342) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="8221691063048377342">"Les données d\'utilisation de la pile sont approximatives et peuvent changer en fonction de l\'utilisation."</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"En utilisation active"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"En arrière-plan"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilisation de la pile"</string>
@@ -2774,12 +2777,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Configurer un horaire"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolonger l\'autonomie de la pile"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Désactiver lorsque l\'appareil est chargé"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (492221102651829607) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (4566426833434375284) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (4128841327359445726) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Le mode Économiseur de pile se désactive lorsque le niveau de charge de la pile atteint <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> sur votre téléphone"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Le mode Économiseur de pile se désactive lorsque le niveau de charge de la pile atteint <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> sur votre tablette"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"Le mode Économiseur de pile se désactive lorsque le niveau de charge de la pile atteint <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> sur votre appareil"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activer"</string>
@@ -3462,8 +3462,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"défi professionnel, travail, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"profil professionnel, profil géré, unifier, unification, travail, profil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestes"</string>
-    <!-- no translation found for keywords_wallet (3757421969956996972) -->
-    <skip />
+    <string name="keywords_wallet" msgid="3757421969956996972">"portefeuille"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"payer, toucher, paiements"</string>
     <string name="keywords_backup" msgid="707735920706667685">"sauvegarde, sauvegarder"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"geste"</string>
@@ -5282,18 +5281,13 @@
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Menu d\'alimentation"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Menu de l\'interrupteur"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Afficher aucun contenu"</string>
-    <!-- no translation found for lockscreen_privacy_not_secure (3251276389681975912) -->
-    <skip />
+    <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Pour l\'utiliser, définissez d\'abord un écran de verrouillage"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Maintenez enfoncé pour activer l\'Assistant"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Activez l\'Assistant en maintenant l\'interrupteur enfoncé"</string>
-    <!-- no translation found for lockscreen_privacy_wallet_setting_toggle (4188327143734192000) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_wallet_summary (5388868513484652431) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_controls_setting_toggle (7445725343949588613) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_controls_summary (6952176547084269909) -->
-    <skip />
+    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Afficher le portefeuille"</string>
+    <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Autorisez l\'accès au portefeuille à partir de l\'écran de verrouillage et du menu Paramètres rapides"</string>
+    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Afficher les commandes des appareils"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Accéder aux commandes lorsque l\'écran est verrouillé"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5389,10 +5383,8 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Utiliser le gestionnaire de pile adaptatif"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Utiliser la luminosité adaptative"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Utiliser les appels Wi-Fi"</string>
-    <!-- no translation found for bubbles_main_switch_title (9121381349223270417) -->
-    <skip />
-    <!-- no translation found for screen_saver_main_switch_title (256530705774121595) -->
-    <skip />
+    <string name="bubbles_main_switch_title" msgid="9121381349223270417">"Utiliser les bulles"</string>
+    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Utiliser l\'écran de veille"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Afficher toutes les applications"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Transfert d\'appels intelligent"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Le transfert d\'appels intelligent est activé"</string>
