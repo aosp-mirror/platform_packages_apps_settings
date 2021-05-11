@@ -16,6 +16,8 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.fuelgauge.PowerUsageSummary.BATTERY_INFO_LOADER;
+import static com.android.settings.fuelgauge.PowerUsageSummary.KEY_BATTERY_ERROR;
+import static com.android.settings.fuelgauge.PowerUsageSummary.KEY_BATTERY_USAGE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -37,6 +39,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 import androidx.loader.app.LoaderManager;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -83,6 +86,10 @@ public class PowerUsageSummaryTest {
     private VisibilityLoggerMixin mVisibilityLoggerMixin;
     @Mock
     private PreferenceScreen mPreferenceScreen;
+    @Mock
+    private Preference mBatteryUsagePreference;
+    @Mock
+    private Preference mHelpPreference;
 
     private Context mRealContext;
     private TestFragment mFragment;
@@ -102,12 +109,16 @@ public class PowerUsageSummaryTest {
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(sAdditionalBatteryInfoIntent);
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mRealContext))
+                .thenReturn(true);
         mFragment.mBatteryUtils = spy(new BatteryUtils(mRealContext));
         ReflectionHelpers.setField(mFragment, "mVisibilityLoggerMixin", mVisibilityLoggerMixin);
         ReflectionHelpers.setField(mFragment, "mBatteryBroadcastReceiver",
                 mBatteryBroadcastReceiver);
         doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
         when(mFragment.getContentResolver()).thenReturn(mContentResolver);
+        when(mFragment.findPreference(KEY_BATTERY_USAGE)).thenReturn(mBatteryUsagePreference);
+        when(mFragment.findPreference(KEY_BATTERY_ERROR)).thenReturn(mHelpPreference);
     }
 
     @Test
@@ -121,6 +132,30 @@ public class PowerUsageSummaryTest {
                 XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.power_usage_summary);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
+    }
+
+    @Test
+    public void initPreference_chartGraphEnabled_hasCorrectSummary() {
+        mFragment.initPreference();
+
+        verify(mBatteryUsagePreference).setSummary("View usage for past 24 hours");
+    }
+
+    @Test
+    public void initPreference_chartGraphDisabled_hasCorrectSummary() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mRealContext))
+                .thenReturn(false);
+
+        mFragment.initPreference();
+
+        verify(mBatteryUsagePreference).setSummary("View usage from last full charge");
+    }
+
+    @Test
+    public void initPreference_helpPreferenceInvisible() {
+        mFragment.initPreference();
+
+        verify(mHelpPreference).setVisible(false);
     }
 
     @Test

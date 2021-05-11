@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.app.Instrumentation;
 import android.content.Intent;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -62,6 +63,14 @@ public class AppNotificationComponentTest {
         ac.onActivity(
                 activity -> {
                     View rv = activity.findViewById(R.id.recycler_view);
+
+                    if (rv == null) {
+                        Log.d("UI_UTILS",
+                                "Target not found: R.id.recycler_view #" + Integer.toHexString(
+                                        R.id.recycler_view));
+                        UiUtils.dumpView(UiUtils.getFirstViewFromActivity(activity));
+                        assertThat(Boolean.TRUE).isFalse();
+                    }
 
                     UiUtils.waitUntilCondition(5000,
                             () -> rv.findViewById(R.id.main_switch_bar) != null);

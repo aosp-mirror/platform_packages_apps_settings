@@ -16,6 +16,11 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
+import static android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_ALERTING;
+import static android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_CONVERSATIONS;
+import static android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_ONGOING;
+import static android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_SILENT;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
@@ -129,13 +134,24 @@ public abstract class TypeFilterPreferenceController extends BasePreferenceContr
                     int types = 0;
                     String[] typeStrings = typeList.split(XML_SEPARATOR);
                     for (int i = 0; i < typeStrings.length; i++) {
-                        if (TextUtils.isEmpty(typeStrings[i])) {
+                        final String typeString = typeStrings[i];
+                        if (TextUtils.isEmpty(typeString)) {
                             continue;
                         }
-                        try {
-                            types |= Integer.parseInt(typeStrings[i]);
-                        } catch (NumberFormatException e) {
-                            // skip
+                        if (typeString.equalsIgnoreCase("ONGOING")) {
+                            types |= FLAG_FILTER_TYPE_ONGOING;
+                        } else if (typeString.equalsIgnoreCase("CONVERSATIONS")) {
+                            types |= FLAG_FILTER_TYPE_CONVERSATIONS;
+                        } else if (typeString.equalsIgnoreCase("SILENT")) {
+                            types |= FLAG_FILTER_TYPE_SILENT;
+                        } else if (typeString.equalsIgnoreCase("ALERTING")) {
+                            types |= FLAG_FILTER_TYPE_ALERTING;
+                        } else {
+                            try {
+                                types |= Integer.parseInt(typeString);
+                            } catch (NumberFormatException e) {
+                                // skip
+                            }
                         }
                     }
                     if (hasFlag(types, getType())) {
