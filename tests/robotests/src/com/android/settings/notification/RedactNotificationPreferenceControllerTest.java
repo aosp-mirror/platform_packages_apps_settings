@@ -137,7 +137,7 @@ public class RedactNotificationPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_noWorkProfile() {
         // reset controllers with no work profile
-        when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {UserHandle.USER_NULL});
+        when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {UserHandle.myUserId()});
         mWorkController = new RedactNotificationPreferenceController(mMockContext,
                 RedactNotificationPreferenceController.KEY_LOCKSCREEN_WORK_PROFILE_REDACT);
         mController = new RedactNotificationPreferenceController(mMockContext,
