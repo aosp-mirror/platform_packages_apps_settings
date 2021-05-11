@@ -83,7 +83,19 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="20sp"/>
 
-        <include layout="@layout/horizontal_divider"/>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:indeterminate="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="1dp"
+            android:maxHeight="1dp"
+            android:visibility="gone"
+            style="@style/TrimmedHorizontalProgressBar"/>
+
+        <include
+            android:id="@+id/header_divider"
+            layout="@layout/horizontal_divider"/>
 
         <!-- Note: There is a landscape version of panel_slice_list which supports scrolling. -->
         <include layout="@layout/panel_slice_list"/>
