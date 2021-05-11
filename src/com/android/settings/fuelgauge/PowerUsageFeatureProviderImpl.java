@@ -159,6 +159,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isChartGraphSlotsEnabled(Context context) {
+        return false;
+    }
+
+    @Override
     public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context) {
         return null;
     }
