@@ -386,10 +386,8 @@
     <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"بااستفاده از «بازگشایی با چهره»، قفل دستگاهتان را باز کنید، به سیستم برنامه‌ها وارد شوید، و پرداخت‌ها را تأیید کنید."</string>
     <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"به‌خاطر بسپارید:\nنگاه کردن به تلفن می‌تواند قفل آن را باز کند، حتی اگر قصد این کار را نداشته باشید.\n\nهر کسی می‌تواند با نگه داشتن تلفن در جلوی صورت شما قفل آن را باز کند.\n\nفردی که شباهت زیادی به شما دارد، مثلاً خواهر یا برادر دوقلو، می‌تواند قفل تلفنتان را باز کند."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"به‌خاطر بسپارید:\nنگاه کردن به تلفن می‌تواند قفل آن را باز کند، حتی اگر قصد این کار را نداشته باشید.\n\nهر کسی می‌تواند با نگه داشتن تلفن در جلوی صورت شما قفل آن را باز کند، حتی اگر چشمانتان بسته باشد.\n\nفردی که شباهت زیادی به شما دارد، مثلاً خواهر یا برادر دوقلو، می‌تواند قفل تلفنتان را باز کند."</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_title (2899669764446232715) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (3268144215619385299) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"مدل چهره حذف شود؟"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. پس‌از حذف، برای باز کردن قفل تلفن یا اصالت‌سنجی در برنامه‌ها به پین، الگو، یا گذرواژه نیاز خواهید داشت."</string>
     <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"مدل چهره حذف شود؟"</string>
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"مدل چهره به‌صورت دائم و ایمن حذف خواهد شد.\n\nپس‌از حذف، برای باز کردن قفل تلفن یا اصالت‌سنجی در برنامه‌ها به اثر انگشت، پین، الگو، یا گذرواژه نیاز خواهید داشت."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"‏با Face Unlock، قفل تلفنتان را باز کنید"</string>
@@ -398,7 +396,10 @@
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"استفاده از اثر انگشت برای"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"افزودن اثر انگشت"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5451094461919440992">"قفل صفحه"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary (6897454766137108776) -->
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> اثر انگشت اضافه شده است</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> اثر انگشت اضافه شده است</item>
+    </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"راه‌اندازی اثرانگشت"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"استفاده از اثر انگشت"</string>
@@ -435,14 +436,10 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"به جایی با روشنایی ملایم‌تر بروید و دوباره امتحان کنید"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"به حداکثر تعداد تلاش مجاز رسیده‌اید"</string>
     <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"از اثر انگشتتان برای باز کردن قفل تلفن یا برای اصالت‌سنجی (مثلاً وقتی به سیستم برنامه‌ها وارد می‌شوید یا خریدی را تأیید می‌کنید) استفاده کنید\n\n"<annotation id="url">"بیشتر بدانید"</annotation></string>
-    <!-- no translation found for security_settings_biometric_preference_title (298146483579539448) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (6941188982863819389) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_both_fp_multiple (4821859306609955966) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_both_fp_single (684409535278676426) -->
-    <skip />
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"باز کردن قفل با چهره و اثر انگشت"</string>
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"برای راه‌اندازی ضربه بزنید"</string>
+    <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"چهره و چند اثر انگشت اضافه شده است"</string>
+    <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"چهره و اثر انگشت اضافه شده است"</string>
     <string name="biometric_settings_intro" msgid="769040512190641961">"وقتی «بازگشایی با چهره» و اثر انگشت را راه‌اندازی می‌کنید، اگر ماسک به صورت داشته باشید یا در محیط تاریکی باشید، تلفن از شما می‌خواهد از اثر انگشتتان استفاده کنید."</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"روش‌های باز کردن قفل"</string>
     <string name="biometric_settings_category_ways_to_use" msgid="7182562470382953854">"از چهره و اثر انگشت برای این کارها استفاده کنید"</string>
@@ -621,40 +618,48 @@
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"گذرواژه"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="5974580769186206478">"‏پس از تنظیم قفل صفحه، همچنین می‌توانید اثر انگشتتان را در «تنظیمات» &gt; «امنیت» تنظیم کنید."</string>
     <string name="unlock_disable_lock_title" msgid="2564279819907932759">"خاموش کردن قفل صفحه"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (3606280046362811229) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="3606280046362811229">"قفل صفحه حذف شود؟"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"محافظت از نمایه غیرفعال شود؟"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (6246242612158828147) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (2259825377085781801) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_face (4699508435412336378) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_face_fingerprint (7049706229344804972) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (122154942944422284) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (983373874470746066) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_face (5607150515413131761) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_face_fingerprint (1821792325159866312) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (6422723907917376210) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (8899452884016354856) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_face (1811067332335964495) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_face_fingerprint (7063649456205159491) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"درصورت گم شدن یا سرقت شدن تلفن، الگو از آن محافظت می‌کند"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"درصورت گم شدن یا سرقت شدن تلفن، الگو از آن محافظت می‌کند.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>با این کار، مدل اثر انگشت ذخیره‌شده در دستگاهتان هم حذف می‌شود. نمی‌توانید از اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"درصورت گم شدن یا سرقت شدن تلفن، الگو از آن محافظت می‌کند.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره‌تان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"درصورت گم شدن یا سرقت شدن تلفن، الگو از آن محافظت می‌کند.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>با این کار، مدل اثر انگشت ذخیره‌شده در دستگاهتان حذف می‌شود. مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره یا اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"درصورت گم شدن یا سرقت شدن تلفن، پین از آن محافظت می‌کند"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"درصورت گم شدن یا سرقت شدن تلفن، پین از آن محافظت می‌کند.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>با این کار، مدل اثر انگشت ذخیره‌شده در دستگاهتان هم حذف می‌شود. نمی‌توانید از اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"درصورت گم شدن یا سرقت شدن تلفن، پین از آن محافظت می‌کند.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>مدل چهره‌تان هم به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره‌تان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"درصورت گم شدن یا سرقت شدن تلفن، پین از آن محافظت می‌کند.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>با این کار، مدل اثر انگشت ذخیره‌شده در دستگاهتان حذف می‌شود. مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره یا اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"درصورت گم شدن یا سرقت شدن تلفن، گذرواژه از آن محافظت می‌کند"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"درصورت گم شدن یا سرقت شدن تلفن، گذرواژه از آن محافظت می‌کند.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>با این کار، مدل اثر انگشت ذخیره‌شده در دستگاهتان هم حذف می‌شود. نمی‌توانید از اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+    <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"درصورت گم شدن یا سرقت شدن تلفن، گذرواژه از آن محافظت می‌کند.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره‌تان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"درصورت گم شدن یا سرقت شدن تلفن، گذرواژه از آن محافظت می‌کند.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>با این کار، مدل اثر انگشت ذخیره‌شده در دستگاهتان حذف می‌شود. مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره یا اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"ویژگی‌های محافظت از دستگاه بدون قفل صفحه کار نخواهد کرد."</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6542744110902941189) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_face (4559917661432267841) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_face_fingerprint (3779582301453677644) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"ویژگی‌های محافظت از دستگاه بدون قفل صفحه کار نمی‌کند.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>با این کار، مدل اثر انگشت ذخیره‌شده در دستگاهتان هم حذف می‌شود. نمی‌توانید از اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"ویژگی‌های محافظت از دستگاه بدون قفل صفحه کار نخواهد کرد.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>مدل چهره‌تان هم به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره‌تان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"ویژگی‌های محافظت از دستگاه بدون قفل صفحه کار نخواهد کرد.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>با این کار، مدل اثر انگشت ذخیره‌شده در دستگاهتان حذف می‌شود. مدل چهره‌تان به‌صورت دائم و ایمن حذف خواهد شد. نمی‌توانید از چهره یا اثر انگشتتان برای اصالت‌سنجی در برنامه‌ها استفاده کنید."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="621607297961726537">"بله، برداشته شود"</string>
     <string name="unlock_change_lock_pattern_title" msgid="8234523589333929193">"تغییر الگوی بازگشایی قفل"</string>
     <string name="unlock_change_lock_pin_title" msgid="2324077520816477479">"تغییر پین بازگشایی قفل"</string>
@@ -927,7 +932,8 @@
     <string name="wifi_menu_forget" msgid="6557142984528657361">"فراموش کردن شبکه"</string>
     <string name="wifi_menu_modify" msgid="7246143391161038875">"تغییر شبکه"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"‏برای مشاهده شبکه‌های در دسترس، Wi-Fi را روشن کنید."</string>
-    <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"‏درحال جستجوی شبکه‌های Wi-Fi…"</string>
+    <!-- no translation found for wifi_empty_list_wifi_on (2448010040478321376) -->
+    <skip />
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"‏‫اجازه ندارید شبکه Wi‑Fi را تغییر دهید."</string>
     <string name="wifi_more" msgid="8742256421693351035">"بیشتر"</string>
     <string name="wifi_setup_wps" msgid="4303694722593999931">"‏تنظیم خودکار (WPS)"</string>
@@ -1078,8 +1084,7 @@
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"‏نشانی IP"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"جزئیات شبکه"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"پوشش زیرشبکه"</string>
-    <!-- no translation found for wifi_type_title (2174893488722015838) -->
-    <skip />
+    <string name="wifi_type_title" msgid="2174893488722015838">"نوع"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"‏نشانی‌های IPv6"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"شبکه‌های ذخیره‌شده"</string>
@@ -2150,8 +2155,7 @@
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"طرح‌بندی‌های صفحه‌کلید"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"واژه‌نامه شخصی"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"واژه‌نامه شخصی برای کار"</string>
-    <!-- no translation found for user_dict_settings_summary (4939694372338975081) -->
-    <skip />
+    <string name="user_dict_settings_summary" msgid="4939694372338975081">"افزودن واژه برای استفاده در برنامه‌هایی نظیر «غلط‌گیر املا»"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"افزودن"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"افزودن به واژه‌نامه"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"عبارت"</string>
@@ -2212,8 +2216,7 @@
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"نوشتار و نمایشگر"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"تیره‌تر کردن صفحه"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"کنترل‌های تعامل"</string>
-    <!-- no translation found for accessibility_tap_assistance_title (1058913033421048284) -->
-    <skip />
+    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"کنترل‌های زمان‌بندی"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"کنترل‌های سیستم"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"برنامه‌های بارگیری‌شده"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"آزمایشی"</string>
@@ -2274,10 +2277,12 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"سفارشی کردن دکمه دسترس‌پذیری"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"نگه‌داشتن کلیدهای میزان صدا"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"نگه داشتن کلیدهای میزان صدا"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"هردو کلید میزان صدا را فشار دهید و نگه دارید"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_hardware (7866393664299375632) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"روی صفحه‌نمایش سه ضربه سریع بزنید"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"سه ضربه سریع روی صفحه"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"به‌سرعت ۳ بار روی صفحه‌نمایش ضربه بزنید. ممکن است این میان‌بر سرعت دستگاه را کاهش دهد."</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_triple_tap (7490111169801144991) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"پیشرفته"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"دکمه دسترس‌پذیری روی <xliff:g id="SERVICE">%1$s</xliff:g> تنظیم شده است. برای استفاده از درشت‌نمایی، دکمه دسترس‌پذیری را لمس کنید و نگه‌دارید، سپس درشت‌نمایی را انتخاب کنید."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"اشاره دسترس‌پذیری روی <xliff:g id="SERVICE">%1$s</xliff:g> تنظیم شده است. برای استفاده از بزرگ‌نمایی، با دو انگشت از پایین صفحه به بالا بکشید و نگه‌دارید. سپس بزرگ‌نمایی را انتخاب کنید."</string>
@@ -2633,8 +2638,7 @@
       <item quantity="other">‏محدود کردن مصرف باتری برای %1$d برنامه</item>
     </plurals>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"محدودشده در: <xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <!-- no translation found for restricted_app_detail_footer (3495725286882138803) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="3495725286882138803">"این برنامه‌ها محدود شده‌اند تا از باتری در پس‌زمینه استفاده نکنند. ممکن است آن‌طور که انتظار می‌رود کار نکنند و اعلان‌ها با تأخیر همراه باشد."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"استفاده از مدیر باتری"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"تخلیه شدن شارژ باتری توسط برنامه‌ها شناسایی شود"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"تخلیه شدن شارژ باتری توسط برنامه‌ها را شناسایی می‌کند"</string>
@@ -2733,8 +2737,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"تفکیک مصرف شارژ از زمان آخرین شارژ کامل"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"آخرین شارژ کامل"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"دوام تقریبی شارژ کامل"</string>
-    <!-- no translation found for battery_footer_summary (8221691063048377342) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="8221691063048377342">"داده‌های مصرف باتری تقریبی است و می‌تواند براساس استفاده تغییر کند."</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"هنگام استفاده فعال"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"درحالت پس‌زمینه"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"مصرف باتری"</string>
@@ -2774,12 +2777,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"تنظیم زمان‌بندی"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"افزایش عمر باتری"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"وقتی شارژ شد خاموش شود"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (492221102651829607) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (4566426833434375284) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (4128841327359445726) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"وقتی شارژ تلفن بیشتر از <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> شد، «بهینه‌سازی باتری» خاموش می‌شود"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"وقتی شارژ رایانه لوحی بیشتر از <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> شد، «بهینه‌سازی باتری» خاموش می‌شود"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"وقتی شارژ دستگاه بیشتر از <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> شد، «بهینه‌سازی باتری» خاموش می‌شود"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"روشن کردن"</string>
@@ -3462,8 +3462,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"چالش کار، کار، نمایه"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"نمایه کاری، نمایه مدیریت‌شده، یکی شدن، یکپارچگی، کار، نمایه"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"اشاره‌ها"</string>
-    <!-- no translation found for keywords_wallet (3757421969956996972) -->
-    <skip />
+    <string name="keywords_wallet" msgid="3757421969956996972">"کیف پول"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"پرداخت کردن، ضربه زدن، پرداخت‌ها"</string>
     <string name="keywords_backup" msgid="707735920706667685">"پشتیبان‌گیری، پشتیبان"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"اشاره"</string>
@@ -4548,7 +4547,7 @@
     <string name="data_warning_footnote" msgid="5991901765915710592">"دستگاهتان هشدار داده و محدویت داده را محاسبه می‌کند که ممکن است با داده‌های شرکت مخابراتی تفاوت داشته باشد."</string>
     <string name="set_data_limit" msgid="9010326815874642680">"تنظیم حدمجاز داده"</string>
     <string name="data_limit" msgid="8731731657513652363">"حدمجاز داده"</string>
-    <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> در <xliff:g id="ID_2">%2$s</xliff:g> مصرف شد"</string>
+    <string name="data_usage_template" msgid="3822452362629968010">"در تاریخ <xliff:g id="ID_2">%2$s</xliff:g>‏ <xliff:g id="ID_1">%1$s</xliff:g> مصرف شده"</string>
     <string name="configure" msgid="1499586749829665889">"پیکربندی"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"برنامه‌های دیگری که در استفاده گنجانده شده"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
@@ -5056,7 +5055,7 @@
     <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="506057560516483258">"‏حالت شبکه ترجیحی: NR/LTE/TDSCDMA/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="4337061745216872524">"‏حالت شبکه ترجیحی: NR/LTE/TDSCDMA/GSM/WCDMA"</string>
     <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="3396717432149544381">"‏حالت شبکه ترجیحی: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
-    <string name="network_5G_recommended" msgid="4769018972369031538">"‏5G (توصیه‌شده)"</string>
+    <string name="network_5G_recommended" msgid="4769018972369031538">"‏‫5G (توصیه‌شده)"</string>
     <string name="network_lte" msgid="2449425437381668780">"‏LTE (توصیه می‌شود)"</string>
     <string name="network_4G" msgid="9018841362928321047">"‏4G (توصیه شده)"</string>
     <string name="label_available" msgid="5305726869955838606">"شبکه‌های موجود"</string>
@@ -5282,18 +5281,13 @@
     <string name="power_menu_setting_name" msgid="7843519296976254765">"منوی روشن/خاموش"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"منوی دکمه روشن/خاموش"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"محتوایی نمایش داده نشود"</string>
-    <!-- no translation found for lockscreen_privacy_not_secure (3251276389681975912) -->
-    <skip />
+    <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"برای استفاده، نخست قفل صفحه را تنظیم کنید"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"نگه داشتن دکمه برای فراخوانی «دستیار»"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"راه‌اندازی «دستیار»‌با نگه داشتن دکمه روشن/خاموش"</string>
-    <!-- no translation found for lockscreen_privacy_wallet_setting_toggle (4188327143734192000) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_wallet_summary (5388868513484652431) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_controls_setting_toggle (7445725343949588613) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_controls_summary (6952176547084269909) -->
-    <skip />
+    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"نمایش کیف پول"</string>
+    <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"مجاز کردن دسترسی به کیف پول از صفحه قفل و تنظیمات فوری"</string>
+    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"نمایش کنترل‌های دستگاه"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"کنترل‌های دسترسی هنگام قفل بودن صفحه‌نمایش"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5389,10 +5383,8 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"استفاده از باتری تطبیقی"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"استفاده از روشنایی تطبیقی"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"‏استفاده از تماس ازطریق Wi-Fi"</string>
-    <!-- no translation found for bubbles_main_switch_title (9121381349223270417) -->
-    <skip />
-    <!-- no translation found for screen_saver_main_switch_title (256530705774121595) -->
-    <skip />
+    <string name="bubbles_main_switch_title" msgid="9121381349223270417">"استفاده از حبابک"</string>
+    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"استفاده از محافظ صفحه‌نمایش"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"مشاهده همه برنامه‌ها"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"بازارسال هوشمند"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"«بازارسال هوشمند» فعال شد"</string>
