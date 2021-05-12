@@ -86,6 +86,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private final InstrumentedPreferenceFragment mFragment;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final CharSequence[] mNotAllowShowSummaryPackages;
+    private final CharSequence[] mNotAllowShowEntryPackages;
 
     // Preference cache to avoid create new instance each time.
     @VisibleForTesting
@@ -103,6 +104,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mPreferenceKey = preferenceKey;
         mNotAllowShowSummaryPackages = context.getResources()
             .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
+        mNotAllowShowEntryPackages = context.getResources()
+            .getTextArray(R.array.allowlist_hide_entry_in_battery_usage);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -180,8 +183,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             isValidPackage = mBatteryUtils.getPackageUid(packageName)
                 != BatteryUtils.UID_NULL;
         }
-        Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b %s",
-            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage, packageName));
+        Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b\n%s",
+            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage, histEntry));
         if (isValidPackage) {
             AdvancedPowerUsageDetail.startBatteryDetailPage(
                 mActivity, mFragment, diffEntry, powerPref.getPercent(),
@@ -315,6 +318,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         mSystemEntries.clear();
         entries.forEach(entry -> {
+            final String packageName = entry.getPackageName();
+            if (!isValidToShowEntry(packageName)) {
+                Log.w(TAG, "ignore showing item:" + packageName);
+                return;
+            }
             if (entry.isSystemEntry()) {
                 mSystemEntries.add(entry);
             } else {
@@ -510,15 +518,14 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return mPrefContext.getString(resourceId, timeSequence);
     }
 
-    private boolean isValidToShowSummary(String packageName) {
-        if (mNotAllowShowSummaryPackages != null) {
-            for (CharSequence notAllowPackageName : mNotAllowShowSummaryPackages) {
-                if (TextUtils.equals(packageName, notAllowPackageName)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+    @VisibleForTesting
+    boolean isValidToShowSummary(String packageName) {
+        return !contains(packageName, mNotAllowShowSummaryPackages);
+    }
+
+    @VisibleForTesting
+    boolean isValidToShowEntry(String packageName) {
+        return !contains(packageName, mNotAllowShowEntryPackages);
     }
 
     @VisibleForTesting
@@ -550,6 +557,17 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                   ConvertUtils.utcToLocalTime(timestamps[index])));
         }
         return builder.toString();
+    }
+
+    private static boolean contains(String target, CharSequence[] packageNames) {
+        if (target != null && packageNames != null) {
+            for (CharSequence packageName : packageNames) {
+                if (TextUtils.equals(target, packageName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @VisibleForTesting
