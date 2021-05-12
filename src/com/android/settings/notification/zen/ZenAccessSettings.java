@@ -24,8 +24,11 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.ArraySet;
 import android.view.View;
+import android.util.Log;
 
 import androidx.preference.PreferenceScreen;
 
@@ -92,6 +95,11 @@ public class ZenAccessSettings extends EmptyTextSettings implements
     }
 
     private void reloadList() {
+        if (mContext.getSystemService(UserManager.class)
+                .isManagedProfile(UserHandle.myUserId())) {
+            Log.w(TAG, "DND access cannot be enabled in a work profile");
+            return;
+        }
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
         final ArrayList<ApplicationInfo> apps = new ArrayList<>();
