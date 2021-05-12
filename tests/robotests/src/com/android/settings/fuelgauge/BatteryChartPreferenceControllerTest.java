@@ -30,6 +30,7 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.text.format.DateUtils;
 
 import androidx.preference.Preference;
@@ -557,6 +558,27 @@ public final class BatteryChartPreferenceControllerTest {
 
         verify(mBatteryChartPreferenceController.mBatteryChartView)
             .setTimestamps(any());
+    }
+
+    @Test
+    public void testOnSaveInstanceState_restoreSelectedIndexAndExpandState() {
+        final int expectedIndex = 1;
+        final boolean isExpanded = true;
+        final Bundle bundle = new Bundle();
+        mBatteryChartPreferenceController.mTrapezoidIndex = expectedIndex;
+        mBatteryChartPreferenceController.mIsExpanded = isExpanded;
+        mBatteryChartPreferenceController.onSaveInstanceState(bundle);
+        // Replaces the original controller with other values.
+        mBatteryChartPreferenceController.mTrapezoidIndex = -1;
+        mBatteryChartPreferenceController.mIsExpanded = false;
+
+        mBatteryChartPreferenceController.onCreate(bundle);
+        mBatteryChartPreferenceController.setBatteryHistoryMap(
+             createBatteryHistoryMap());
+
+        assertThat(mBatteryChartPreferenceController.mTrapezoidIndex)
+            .isEqualTo(expectedIndex);
+        assertThat(mBatteryChartPreferenceController.mIsExpanded).isTrue();
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> createBatteryHistoryMap() {
