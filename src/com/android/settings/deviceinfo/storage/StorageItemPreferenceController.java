@@ -101,6 +101,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private static final int LAST_STORAGE_CATEGORY_PREFERENCE_ORDER = 200;
 
     private PackageManager mPackageManager;
+    private UserManager mUserManager;
     private final Fragment mFragment;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final StorageVolumeProvider mSvp;
@@ -134,15 +135,17 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
 
-    public StorageItemPreferenceController(
-            Context context, Fragment hostFragment, VolumeInfo volume, StorageVolumeProvider svp) {
+    public StorageItemPreferenceController(Context context, Fragment hostFragment,
+            VolumeInfo volume, StorageVolumeProvider svp, boolean isWorkProfile) {
         super(context);
         mPackageManager = context.getPackageManager();
+        mUserManager = context.getSystemService(UserManager.class);
         mFragment = hostFragment;
         mVolume = volume;
         mSvp = svp;
+        mIsWorkProfile = isWorkProfile;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        mUserId = UserHandle.myUserId();
+        mUserId = getCurrentUserId();
 
         mImagesUri = Uri.parse(context.getResources()
                 .getString(R.string.config_images_storage_category_uri));
@@ -154,14 +157,9 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .getString(R.string.config_documents_and_other_storage_category_uri));
     }
 
-    public StorageItemPreferenceController(
-            Context context,
-            Fragment hostFragment,
-            VolumeInfo volume,
-            StorageVolumeProvider svp,
-            boolean isWorkProfile) {
-        this(context, hostFragment, volume, svp);
-        mIsWorkProfile = isWorkProfile;
+    @VisibleForTesting
+    int getCurrentUserId() {
+        return Utils.getCurrentUserId(mUserManager, mIsWorkProfile);
     }
 
     @Override
@@ -311,6 +309,9 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
      * Sets the user id for which this preference controller is handling.
      */
     public void setUserId(UserHandle userHandle) {
+        if (mIsWorkProfile && !mUserManager.isManagedProfile(userHandle.getIdentifier())) {
+            throw new IllegalArgumentException("Only accept work profile userHandle");
+        }
         mUserId = userHandle.getIdentifier();
 
         tintPreference(mPublicStoragePreference);
@@ -359,21 +360,21 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     public void onLoadFinished(SparseArray<StorageAsyncLoader.AppsStorageResult> result,
             int userId) {
         final StorageAsyncLoader.AppsStorageResult data = result.get(userId);
-        final StorageAsyncLoader.AppsStorageResult profileData = result.get(
-                Utils.getManagedProfileId(mContext.getSystemService(UserManager.class), userId));
 
-        mImagesPreference.setStorageSize(getImagesSize(data, profileData), mTotalSize);
-        mVideosPreference.setStorageSize(getVideosSize(data, profileData), mTotalSize);
-        mAudiosPreference.setStorageSize(getAudiosSize(data, profileData), mTotalSize);
-        mAppsPreference.setStorageSize(getAppsSize(data, profileData), mTotalSize);
-        mGamesPreference.setStorageSize(getGamesSize(data, profileData), mTotalSize);
-        mDocumentsAndOtherPreference.setStorageSize(getDocumentsAndOtherSize(data, profileData),
+        mImagesPreference.setStorageSize(getImagesSize(data), mTotalSize);
+        mVideosPreference.setStorageSize(getVideosSize(data), mTotalSize);
+        mAudiosPreference.setStorageSize(getAudiosSize(data), mTotalSize);
+        mAppsPreference.setStorageSize(getAppsSize(data), mTotalSize);
+        mGamesPreference.setStorageSize(getGamesSize(data), mTotalSize);
+        mDocumentsAndOtherPreference.setStorageSize(getDocumentsAndOtherSize(data),
                 mTotalSize);
-        mTrashPreference.setStorageSize(getTrashSize(data, profileData), mTotalSize);
+        mTrashPreference.setStorageSize(getTrashSize(data), mTotalSize);
 
         if (mSystemPreference != null) {
             // Everything else that hasn't already been attributed is tracked as
             // belonging to system.
+            // TODO(b/170918505): Should revamp system size calculation with the data
+            // from media provider.
             long attributedSize = 0;
             for (int i = 0; i < result.size(); i++) {
                 final StorageAsyncLoader.AppsStorageResult otherData = result.valueAt(i);
@@ -385,6 +386,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                                 + otherData.otherAppsSize;
                 attributedSize += otherData.externalStats.totalBytes
                         - otherData.externalStats.appBytes;
+                attributedSize -= otherData.duplicateCodeSize;
             }
 
             final long systemSize = Math.max(TrafficStats.GB_IN_BYTES, mUsedBytes - attributedSize);
@@ -404,47 +406,28 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private void launchPublicStorageIntent() {
         final Intent intent = mVolume.buildBrowseIntent();
-        if (intent != null) {
-            mContext.startActivity(intent);
+        if (intent == null) {
+            return;
         }
+        mContext.startActivityAsUser(intent, new UserHandle(mUserId));
     }
 
     private void launchActivityWithUri(Uri dataUri) {
         final Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(dataUri);
-        mContext.startActivity(intent);
+        mContext.startActivityAsUser(intent, new UserHandle(mUserId));
     }
 
-    private long getImagesSize(StorageAsyncLoader.AppsStorageResult data,
-            StorageAsyncLoader.AppsStorageResult profileData) {
-        if (profileData != null) {
-            return data.photosAppsSize + data.externalStats.imageBytes
-                    + data.externalStats.videoBytes
-                    + profileData.photosAppsSize + profileData.externalStats.imageBytes
-                    + profileData.externalStats.videoBytes;
-        } else {
-            return data.photosAppsSize + data.externalStats.imageBytes
-                    + data.externalStats.videoBytes;
-        }
+    private long getImagesSize(StorageAsyncLoader.AppsStorageResult data) {
+        return data.photosAppsSize + data.externalStats.imageBytes + data.externalStats.videoBytes;
     }
 
-    private long getVideosSize(StorageAsyncLoader.AppsStorageResult data,
-            StorageAsyncLoader.AppsStorageResult profileData) {
-        if (profileData != null) {
-            return data.videoAppsSize + profileData.videoAppsSize;
-        } else {
-            return data.videoAppsSize;
-        }
+    private long getVideosSize(StorageAsyncLoader.AppsStorageResult data) {
+        return data.videoAppsSize;
     }
 
-    private long getAudiosSize(StorageAsyncLoader.AppsStorageResult data,
-            StorageAsyncLoader.AppsStorageResult profileData) {
-        if (profileData != null) {
-            return data.musicAppsSize + data.externalStats.audioBytes
-                    + profileData.musicAppsSize + profileData.externalStats.audioBytes;
-        } else {
-            return data.musicAppsSize + data.externalStats.audioBytes;
-        }
+    private long getAudiosSize(StorageAsyncLoader.AppsStorageResult data) {
+        return data.musicAppsSize + data.externalStats.audioBytes;
     }
 
     private void launchAppsIntent() {
@@ -463,13 +446,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         Utils.launchIntent(mFragment, intent);
     }
 
-    private long getAppsSize(StorageAsyncLoader.AppsStorageResult data,
-            StorageAsyncLoader.AppsStorageResult profileData) {
-        if (profileData != null) {
-            return data.otherAppsSize + profileData.otherAppsSize;
-        } else {
-            return data.otherAppsSize;
-        }
+    private long getAppsSize(StorageAsyncLoader.AppsStorageResult data) {
+        return data.otherAppsSize;
     }
 
     private void launchGamesIntent() {
@@ -486,13 +464,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         Utils.launchIntent(mFragment, intent);
     }
 
-    private long getGamesSize(StorageAsyncLoader.AppsStorageResult data,
-            StorageAsyncLoader.AppsStorageResult profileData) {
-        if (profileData != null) {
-            return data.gamesSize + profileData.gamesSize;
-        } else {
-            return data.gamesSize;
-        }
+    private long getGamesSize(StorageAsyncLoader.AppsStorageResult data) {
+        return data.gamesSize;
     }
 
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
@@ -502,26 +475,12 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         return args;
     }
 
-    private long getDocumentsAndOtherSize(StorageAsyncLoader.AppsStorageResult data,
-            StorageAsyncLoader.AppsStorageResult profileData) {
-        if (profileData != null) {
-            return data.externalStats.totalBytes
-                    - data.externalStats.audioBytes
-                    - data.externalStats.videoBytes
-                    - data.externalStats.imageBytes
-                    - data.externalStats.appBytes
-                    + profileData.externalStats.totalBytes
-                    - profileData.externalStats.audioBytes
-                    - profileData.externalStats.videoBytes
-                    - profileData.externalStats.imageBytes
-                    - profileData.externalStats.appBytes;
-        } else {
-            return data.externalStats.totalBytes
-                    - data.externalStats.audioBytes
-                    - data.externalStats.videoBytes
-                    - data.externalStats.imageBytes
-                    - data.externalStats.appBytes;
-        }
+    private long getDocumentsAndOtherSize(StorageAsyncLoader.AppsStorageResult data) {
+        return data.externalStats.totalBytes
+                - data.externalStats.audioBytes
+                - data.externalStats.videoBytes
+                - data.externalStats.imageBytes
+                - data.externalStats.appBytes;
     }
 
     private void launchTrashIntent() {
@@ -530,12 +489,11 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         if (intent.resolveActivity(mPackageManager) == null) {
             EmptyTrashFragment.show(mFragment);
         } else {
-            mContext.startActivity(intent);
+            mContext.startActivityAsUser(intent, new UserHandle(mUserId));
         }
     }
 
-    private long getTrashSize(StorageAsyncLoader.AppsStorageResult data,
-            StorageAsyncLoader.AppsStorageResult profileData) {
+    private long getTrashSize(StorageAsyncLoader.AppsStorageResult data) {
         // TODO(170918505): Implement it.
         return 0L;
     }
