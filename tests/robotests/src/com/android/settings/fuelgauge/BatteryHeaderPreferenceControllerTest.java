@@ -184,7 +184,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        final String expectedResult = "Battery Saver is on • " + TIME_LEFT;
+        final String expectedResult = "Battery Saver on • " + TIME_LEFT;
         verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedResult);
     }
 
