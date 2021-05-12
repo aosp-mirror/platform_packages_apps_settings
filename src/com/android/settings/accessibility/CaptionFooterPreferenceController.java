@@ -33,4 +33,9 @@ public class CaptionFooterPreferenceController extends AccessibilityFooterPrefer
     protected String getLabelName() {
         return mContext.getString(R.string.accessibility_captioning_title);
     }
+
+    @Override
+    protected int getHelpResource()  {
+        return R.string.help_url_caption;
+    }
 }
