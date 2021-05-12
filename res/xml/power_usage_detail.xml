@@ -22,15 +22,13 @@
     <com.android.settingslib.widget.LayoutPreference
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
-        android:selectable="false"
-        settings:allowDividerBelow="true"/>
+        android:selectable="false"/>
 
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"/>
 
     <PreferenceCategory
-        android:title="@string/battery_detail_manage_title"
-        settings:allowDividerAbove="true">
+        android:title="@string/battery_detail_manage_title">
 
         <com.android.settingslib.widget.RadioButtonPreference
             android:key="unrestricted_pref"

@@ -46,6 +46,7 @@ public class BatteryInfo {
     public CharSequence chargeLabel;
     public CharSequence remainingLabel;
     public int batteryLevel;
+    public int batteryStatus;
     public boolean discharging = true;
     public boolean isOverheated;
     public long remainingTimeUs = 0;
@@ -238,6 +239,8 @@ public class BatteryInfo {
                 == BatteryManager.BATTERY_HEALTH_OVERHEAT;
 
         info.statusLabel = Utils.getBatteryStatus(context, batteryBroadcast);
+        info.batteryStatus = batteryBroadcast.getIntExtra(
+                BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
         if (!info.mCharging) {
             updateBatteryInfoDischarging(context, shortString, estimate, info);
         } else {
