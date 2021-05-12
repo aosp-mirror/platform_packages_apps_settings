@@ -400,7 +400,7 @@ public class BatteryUtils {
         // couldn't get estimate from cache or provider, use fallback
         if (estimate == null) {
             estimate = new Estimate(
-                    PowerUtil.convertUsToMs(batteryUsageStats.getBatteryTimeRemainingMs()),
+                    batteryUsageStats.getBatteryTimeRemainingMs(),
                     false /* isBasedOnUsage */,
                     EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         }
