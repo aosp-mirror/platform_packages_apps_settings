@@ -34,4 +34,9 @@ public class AccessibilityControlTimeoutFooterPreferenceController extends
     protected String getLabelName() {
         return mContext.getString(R.string.accessibility_setting_item_control_timeout_title);
     }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_timeout;
+    }
 }
