@@ -297,6 +297,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
+    public int getHelpResource() {
+        return R.string.help_url_magnification;
+    }
+
+    @Override
     public int getMetricsCategory() {
         // TODO: Distinguish between magnification modes
         return SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
