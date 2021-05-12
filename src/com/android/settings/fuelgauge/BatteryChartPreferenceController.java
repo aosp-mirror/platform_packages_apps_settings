@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +40,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.utils.StringUtil;
 
@@ -53,7 +55,7 @@ import java.util.Map;
 /** Controls the update for chart graph and the list items. */
 public class BatteryChartPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnCreate, OnDestroy,
-                OnSaveInstanceState, BatteryChartView.OnSelectListener,
+                OnSaveInstanceState, BatteryChartView.OnSelectListener, OnResume,
                 ExpandDividerPreference.OnExpandListener {
     private static final String TAG = "BatteryChartPreferenceController";
     /** Desired battery history size for timestamp slots. */
@@ -66,6 +68,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     // Keys for bundle instance to restore configurations.
     private static final String KEY_EXPAND_SYSTEM_INFO = "expand_system_info";
     private static final String KEY_CURRENT_TIME_SLOT = "current_time_slot";
+
+    private static int sUiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
 
     @VisibleForTesting
     Map<Integer, List<BatteryDiffEntry>> mBatteryIndexedMap;
@@ -122,6 +126,18 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             savedInstanceState.getBoolean(KEY_EXPAND_SYSTEM_INFO, mIsExpanded);
         Log.d(TAG, String.format("onCreate() slotIndex=%d isExpanded=%b",
             mTrapezoidIndex, mIsExpanded));
+    }
+
+    @Override
+    public void onResume() {
+        final int currentUiMode =
+            mContext.getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK;
+        if (sUiMode != currentUiMode) {
+            sUiMode = currentUiMode;
+            BatteryDiffEntry.clearCache();
+            Log.d(TAG, "clear icon and label cache since uiMode is changed");
+        }
     }
 
     @Override
