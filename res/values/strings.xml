@@ -7730,6 +7730,8 @@
     <string name="help_url_battery_missing" translatable="false"></string>
     <!-- url for vpn page if connected vpn is not a secure type -->
     <string name="help_url_insecure_vpn" translatable="false"></string>
+    <!-- url for learning more about IT admin policy disabling -->
+    <string name="help_url_action_disabled_by_it_admin" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -10803,22 +10805,24 @@
     <!-- Summary of Android version info (when there is a pending upgrade available) [CHAR LIMIT=NONE] -->
     <string name="android_version_pending_update_summary">Update available</string>
 
-    <!-- Title for dialog displayed when user selects on a setting locked by an admin [CHAR LIMIT=30 BACKUP_MESSAGE_ID:4867639270211833535] -->
-    <string name="disabled_by_policy_title">Action not allowed</string>
-    <!-- Title for dialog displayed to tell user that changing volume was disallowed by an admin [CHAR LIMIT=50] -->
+    <!-- Title for dialog displayed when user taps a setting on their phone that's blocked by their IT admin [CHAR LIMIT=30 BACKUP_MESSAGE_ID:4867639270211833535] -->
+    <string name="disabled_by_policy_title">Blocked by your IT admin</string>
+    <!-- Title for dialog displayed to tell user that changing volume on their phone is blocked by their IT admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_adjust_volume">Can’t change volume</string>
-    <!-- Title for dialog displayed to tell user that outgoing calls were disabled by an admin [CHAR LIMIT=50] -->
-    <string name="disabled_by_policy_title_outgoing_calls">Calling not allowed</string>
-    <!-- Title for dialog displayed to tell user that sending SMS were disabled by an admin [CHAR LIMIT=50] -->
-    <string name="disabled_by_policy_title_sms">SMS not allowed</string>
-    <!-- Title for dialog displayed to tell user that the camera was disabled by an admin [CHAR LIMIT=50] -->
-    <string name="disabled_by_policy_title_camera">Camera not allowed</string>
-    <!-- Title for dialog displayed to tell user that screenshots are disabled by an admin [CHAR LIMIT=50] -->
-    <string name="disabled_by_policy_title_screen_capture">Screenshot not allowed</string>
+    <!-- Title for dialog displayed to tell user that outgoing calls are blocked by their IT admin [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_outgoing_calls">Can’t make calls</string>
+    <!-- Title for dialog displayed to tell user that sending SMS messages is blocked by their IT admin [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_sms">Can’t send SMS messages</string>
+    <!-- Title for dialog displayed to tell user that the camera on their phone is blocked by their IT admin [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_camera">Can’t use camera</string>
+    <!-- Title for dialog displayed to tell user that taking screenshots on their phone is blocked by their IT admin [CHAR LIMIT=50] -->
+    <string name="disabled_by_policy_title_screen_capture">Can’t take screenshots</string>
     <!-- Title for dialog displayed to tell user that the app was suspended by an admin [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_suspend_packages">Can’t open this app</string>
     <!-- Dialog title. This dialog lets a user know that a specific setting is blocked by their credit provider. Since the user purchased the device from the credit provider, the credit provider controls what they can access. [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_financed_device">Blocked by your credit provider</string>
+    <!-- Shown when the user tries to change phone settings that are blocked by their IT admin [CHAR LIMIT=200] -->
+    <string name="default_admin_support_msg">If you have questions, contact your IT admin</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
     <string name="admin_support_more_info">More details</string>
     <!-- Shown in admin details page to warn user about policies the admin can set in a work profile. [CHAR LIMIT=NONE] -->
