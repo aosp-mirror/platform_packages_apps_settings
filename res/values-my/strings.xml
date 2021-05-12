@@ -386,10 +386,8 @@
     <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"သင့်စက်ကို ဖွင့်ရန်၊ အက်ပ်များသို့ လက်မှတ်ထိုးဝင်ရန်နှင့် ငွေပေးချေမှုများကို အတည်ပြုရန် မျက်နှာမှတ် သော့ဖွင့်ခြင်းကို အသုံးပြုပါ။"</string>
     <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"သတိပြုရန်-\nမတော်တဆ သင့်ဖုန်းကို ကြည့်မိရုံမျှဖြင့် ဖုန်းပွင့်သွားနိုင်ပါသည်။\n\nတစ်စုံတစ်ယောက်က သင့်မျက်နှာအနီး သင့်ဖုန်းကိုကိုင်၍လည်း ဖွင့်နိုင်သည်။\n\nသင့်အမြွှာကဲ့သို့ သင်နှင့် အလွန်တူသူများသည်လည်း သင့်ဖုန်းကို ဖွင့်နိုင်သည်။"</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"သတိပြုရန်-\nမတော်တဆ သင့်ဖုန်းကို ကြည့်မိရုံမျှဖြင့် ဖုန်းပွင့်သွားနိုင်ပါသည်။\n\nမျက်လုံးများပိတ်ထားသော်လည်း တစ်စုံတစ်ယောက်က သင့်မျက်နှာအနီးတွင် သင့်ဖုန်းကိုကိုင်၍လည်း ဖွင့်နိုင်သည်။\n\nသင့်အမြွှာကဲ့သို့ သင်နှင့် အလွန်တူသူများသည်လည်း သင့်ဖုန်းကို ဖွင့်နိုင်သည်။"</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_title (2899669764446232715) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (3268144215619385299) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"မျက်နှာနမူနာကို ဖျက်မလား။"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"သင်၏မျက်နှာနမူနာကို လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ ဖျက်ပြီးသည့်အခါ သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန် (သို့) အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် ပင်နံပါတ်၊ ပုံစံ (သို့) စကားဝှက် လိုအပ်ပါမည်။"</string>
     <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"မျက်နှာနမူနာကို ဖျက်မလား။"</string>
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"သင်၏မျက်နှာနမူနာကို လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။\n\nဖျက်ပြီးသည့်အခါ သင့်ဖုန်းလော့ခ်ဖွင့်ရန် (သို့) အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် လက်ဗွေ၊ ပင်နံပါတ်၊ ပုံစံ၊ (သို့) စကားဝှက်ကို လိုအပ်ပါမည်။"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန် မျက်နှာမှတ် သော့ဖွင့်ခြင်းကို အသုံးပြုပါ"</string>
@@ -398,7 +396,10 @@
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"လက်ဗွေ သုံးရန်"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"လက်ဗွေထည့်သွင်းမည်"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5451094461919440992">"ဖုန်းမျက်နှာပြင်အား သော့ချရန်"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary (6897454766137108776) -->
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
+      <item quantity="other">လက်ဗွေ <xliff:g id="COUNT">%1$d</xliff:g> ခု ထည့်ပြီးပါပြီ</item>
+      <item quantity="one">လက်ဗွေ ထည့်ပြီးပါပြီ</item>
+    </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"သင်၏လက်ဗွေကို စနစ်ထည့်သွင်းခြင်း"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"သင့်လက်ဗွေကို သုံးပါ"</string>
@@ -435,14 +436,10 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"အလင်းပိုဖျော့သောနေရာသို့ ရွှေ့ပြီး ထပ်စမ်းကြည့်ပါ"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"သင် ကြိုးစားနိုင်သည့်အကြိမ်ရေ ပြည့်သွားပါပြီ"</string>
     <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"အက်ပ်များသို့ လက်မှတ်ထိုးဝင်သောအခါ (သို့) ဝယ်ယူမှုကို အတည်ပြုသောအခါကဲ့သို့ အထောက်အထားစိစစ်ခြင်းအတွက် (သို့) သင်၏ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သင့်လက်ဗွေကို သုံးပါ\n\n"<annotation id="url">"ပိုမိုလေ့လာရန်"</annotation></string>
-    <!-- no translation found for security_settings_biometric_preference_title (298146483579539448) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (6941188982863819389) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_both_fp_multiple (4821859306609955966) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_both_fp_single (684409535278676426) -->
-    <skip />
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"မျက်နှာနှင့် လက်ဗွေသုံး သော့ဖွင့်ခြင်း"</string>
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"စနစ်ထည့်သွင်းရန် တို့ပါ"</string>
+    <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"မျက်နှာနှင့် လက်ဗွေများ ထည့်ပြီးပါပြီ"</string>
+    <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"မျက်နှာနှင့် လက်ဗွေ ထည့်ပြီးပါပြီ"</string>
     <string name="biometric_settings_intro" msgid="769040512190641961">"မျက်နှာမှတ် သော့ဖွင့်ခြင်းနှင့် လက်ဗွေကို စနစ်ထည့်သွင်းသည့်အခါ သင် နှာခေါင်းစည်း တပ်ဆင်ထားလျှင် (သို့) မှောင်သောနေရာသို့ ရောက်နေလျှင် သင်၏ဖုန်းက သင့်လက်ဗွေကို တောင်းပါမည်။"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"သော့ဖွင့်ရန် နည်းလမ်းများ"</string>
     <string name="biometric_settings_category_ways_to_use" msgid="7182562470382953854">"မျက်နှာနှင့် လက်ဗွေကို သုံးခြင်း"</string>
@@ -621,40 +618,48 @@
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"စကားဝှက်"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="5974580769186206478">"ဖုန်းမျက်နှာပြင်လော့ခ်ကို သတ်မှတ်ပြီးသည့်အခါ ဆက်တင်များနှင့် လုံခြုံရေးအတွက်လည်း သင့်လက်ဗွေကို သတ်မှတ်နိုင်သည်။"</string>
     <string name="unlock_disable_lock_title" msgid="2564279819907932759">"မျက်နှာပြင်သော့ပိတ်မည်"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (3606280046362811229) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="3606280046362811229">"ဖန်သားပြင် လော့ခ်ကို ဖျက်မလား။"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"ပရိုဖိုင်ကာကွယ်ခြင်းကို ဖယ်ရှားမလား။"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (6246242612158828147) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (2259825377085781801) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_face (4699508435412336378) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_face_fingerprint (7049706229344804972) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (122154942944422284) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (983373874470746066) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_face (5607150515413131761) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_face_fingerprint (1821792325159866312) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (6422723907917376210) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (8899452884016354856) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_face (1811067332335964495) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_face_fingerprint (7063649456205159491) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပုံစံက ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို ပင်နံပါတ်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"သင့်ဖုန်းပျောက်သွားလျှင် (သို့) ခိုးခံရလျှင် ၎င်းကို စကားဝှက်က ကာကွယ်ပေးသည်။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"ကိရိယာအား ကာကွယ်ရေး အင်္ဂါရပ်များမှာ သင်၏ မျက်မှာပြင် သော့ခတ်မှု မရှိဘဲ အလုပ်မလုပ်နိုင်ပါ။"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6542744110902941189) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_face (4559917661432267841) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_face_fingerprint (3779582301453677644) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"စက်ကို အကာအကွယ်ပေးသော ဝန်ဆောင်မှုများသည် ဖန်သားပြင် လော့ခ်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကိုလည်း ဖျက်ပါသည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"စက်ကို အကာအကွယ်ပေးသော ဝန်ဆောင်မှုများသည် ဖန်သားပြင် လော့ခ်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"စက်ကို အကာအကွယ်ပေးသော ဝန်ဆောင်မှုများသည် ဖန်သားပြင် လော့ခ်မပါဘဲ အလုပ်မလုပ်နိုင်ပါ။<xliff:g id="EMPTY_LINE">
+
+</xliff:g>၎င်းက သင့်စက်တွင်သိမ်းထားသော လက်ဗွေနမူနာကို ဖျက်ပါသည်။ သင်၏မျက်နှာနမူနာကိုလည်း လုံခြုံစွာ အပြီးဖျက်လိုက်ပါမည်။ အက်ပ်များတွင် အထောက်အထားစိစစ်ခြင်းအတွက် သင့်မျက်နှာ (သို့) လက်ဗွေကို အသုံးပြုနိုင်မည်မဟုတ်ပါ။"</string>
     <string name="unlock_disable_frp_warning_ok" msgid="621607297961726537">"ဖယ်ရှားပါ"</string>
     <string name="unlock_change_lock_pattern_title" msgid="8234523589333929193">"သော့ဖွင့်ရန်ပုံဖော်မှုအား ပြောင်းမည်"</string>
     <string name="unlock_change_lock_pin_title" msgid="2324077520816477479">"ပင်နံပါတ်ပြောင်းမည်"</string>
@@ -927,7 +932,8 @@
     <string name="wifi_menu_forget" msgid="6557142984528657361">"ကွန်ရက်အား မေ့ရန်"</string>
     <string name="wifi_menu_modify" msgid="7246143391161038875">"ကွန်ယက်အား ပြင်ရန်"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"ရနိုင်သည့်ကွန်ရက်များကို မြင်ရန် Wi-Fi ဖွင့်ပါ"</string>
-    <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"Wi-Fi ကွန်ရက်များ ရှာဖွေနေသည်…"</string>
+    <!-- no translation found for wifi_empty_list_wifi_on (2448010040478321376) -->
+    <skip />
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"သင့်မှာ Wi-Fi  ကွန်ရက်ကို ပြောင်းလဲရန် ခွင့်ပြုချက် မရှိပါ။"</string>
     <string name="wifi_more" msgid="8742256421693351035">"နောက်ထပ်"</string>
     <string name="wifi_setup_wps" msgid="4303694722593999931">"အလိုအလျောက် အစီအမံ (WPS)"</string>
@@ -1078,8 +1084,7 @@
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"အိုင်ပီလိပ်စာ"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"ကွန်ရက် အသေးစိတ်များ"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Subnet ကွင်းဆက်နံပါတ်"</string>
-    <!-- no translation found for wifi_type_title (2174893488722015838) -->
-    <skip />
+    <string name="wifi_type_title" msgid="2174893488722015838">"အမျိုးအစား"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6 လိပ်စာများ"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"သိမ်းထား ကွန်ရက်များ"</string>
@@ -2150,8 +2155,7 @@
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"လက်ကွက်အပြင်အဆင်များ"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"ကိုယ်ပိုင် အဘိဓာန်"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"အလုပ်အတွက် ကိုယ်ပိုင်အဘိဓာန်"</string>
-    <!-- no translation found for user_dict_settings_summary (4939694372338975081) -->
-    <skip />
+    <string name="user_dict_settings_summary" msgid="4939694372338975081">"‘စာလုံးပေါင်းစစ်စနစ်’ ကဲ့သို့ အက်ပ်များတွင် သုံးရန် စကားလုံးများ ထည့်ပါ"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"ထပ်ထည့်ရန်"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"အဘိဓာန်ထဲ ထည့်ပါ"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"စကားစု"</string>
@@ -2212,8 +2216,7 @@
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"စာသားနှင့် ပြကွက်"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"ဖန်သားပြင်ကို ပိုမှောင်အောင်လုပ်ခြင်း"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"အပြန်အလှန်ဆက်သွယ်ချက် ထိန်းချုပ်မှုများ"</string>
-    <!-- no translation found for accessibility_tap_assistance_title (1058913033421048284) -->
-    <skip />
+    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"အချိန်ကိုက်ခြင်း ထိန်းချုပ်မှုများ"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"စနစ် ထိန်းချုပ်မှုများ"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ဒေါင်းလုဒ်လုပ်ထားသော အက်ပ်များ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"စမ်းသပ်ဆဲ"</string>
@@ -2274,10 +2277,12 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"အများသုံးစွဲနိုင်မှုခလုတ်ကို စိတ်ကြိုက်လုပ်သည်"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"အသံအတိုးအလျှော့ခလုတ်များကို ဖိထားပါ"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"အသံခလုတ်များကို ဖိထားရန်"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"အသံခလုတ်နှစ်ခုလုံးကို နှိပ်ထားပါ"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_hardware (7866393664299375632) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"မျက်နှာပြင်ကို သုံးချက်တို့ပါ"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"ဖန်သားပြင်ကို သုံးချက်တို့ရန်"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"မျက်နှာပြင်ကို ၃ ကြိမ် အမြန်တို့ပါ။ ဤဖြတ်လမ်းလင့်ခ်သည် သင့်စက်ကို နှေးသွားစေနိုင်သည်။"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_triple_tap (7490111169801144991) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"အဆင့်မြင့်"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"အများသုံးစွဲနိုင်မှု ခလုတ်ကို <xliff:g id="SERVICE">%1$s</xliff:g> အဖြစ် သတ်မှတ်ထားသည်။ ပုံကြီးချဲ့ခြင်းကို အသုံးပြုရန် အများသုံးစွဲနိုင်မှု ခလုတ်ကို ထိထားပြီးနောက် ပုံကြီးချဲ့ခြင်းကို ရွေးပါ။"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"အများသုံးစွဲနိုင်မှု လက်ဟန်ကို <xliff:g id="SERVICE">%1$s</xliff:g> အဖြစ် သတ်မှတ်ထားသည်။ ပုံကြီးချဲ့ခြင်းကို အသုံးပြုရန် မျက်နှာပြင်၏ အောက်ခြေမှနေ၍ အပေါ်သို့ လက်နှစ်ချောင်းဖြင့် ပွတ်ဆွဲပြီး ဖိထားပါ။ ထို့နောက် ပုံကြီးချဲ့ခြင်းကို ရွေးပါ။"</string>
@@ -2633,8 +2638,7 @@
       <item quantity="one">အက်ပ် %1$d ခု အတွက် ဘက်ထရီအသုံးပြုမှုကို ကန့်သတ်ထားသည်</item>
     </plurals>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"<xliff:g id="TIME">%1$s</xliff:g> ကန့်သတ်ထားသည်"</string>
-    <!-- no translation found for restricted_app_detail_footer (3495725286882138803) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="3495725286882138803">"ဤအက်ပ်များကို နောက်ခံ ဘက်ထရီ အသုံးပြုမှုမှ ကန့်သတ်ထားသည်။ ၎င်းတို့သည် မျှော်မှန်းထားသည့်အတိုင်း မလုပ်ဆောင်တော့ဘဲ အကြောင်းကြားချက်များ ကြန့်ကြာနိုင်ပါသည်။"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"\'ဘက်ထရီ မန်နေဂျာ\' အသုံးပြုပါ"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"ဓာတ်ခဲအားကုန်စေသည့် အက်ပ်များကို ဖော်ထုတ်ပေးသည်"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"ဘက်ထရီအားကုန်စေသည့် အက်ပ်များကို ဖော်ထုတ်ပေးသည်"</string>
@@ -2733,8 +2737,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"နောက်ဆုံးအကြိမ် အားဖြည့်ပြီးချိန်မှစ၍ ခွဲခြမ်းစိတ်ဖြာချက်"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"နောက်ဆုံးအကြိမ် အားအပြည့် သွင်းခဲ့ချိန်"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"အားအပြည့်သွင်းထားပြီး သုံးနိုင်ချိန်"</string>
-    <!-- no translation found for battery_footer_summary (8221691063048377342) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="8221691063048377342">"ဘက်ထရီ အသုံးပြုမှုဒေတာသည် ခန့်မှန်းခြေဖြစ်ပြီး အသုံးပြုမှုအလိုက် ပြောင်းလဲနိုင်သည်။"</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"အသုံးပြုနေစဉ်"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"နောက်ခံတွင် ဖွင့်ထားစဉ်"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"ဘက်ထရီ အသုံးပြုမှု"</string>
@@ -2774,12 +2777,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"အချိန်ဇယား သတ်မှတ်ပါ"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ဘက်ထရီသက်တမ်းကို တိုးပေးသည်"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"အားသွင်းနေသည့်အခါ ပိတ်ရန်"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (492221102651829607) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (4566426833434375284) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (4128841327359445726) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"သင့်ဖုန်းကို <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> အထက် အားသွင်းပြီးသည့်အခါ ‘ဘက်ထရီ အားထိန်း’ ပိတ်ပါမည်"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"သင့်တက်ဘလက်ကို <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> အထက် အားသွင်းပြီးသည့်အခါ ‘ဘက်ထရီ အားထိန်း’ ပိတ်ပါမည်"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"သင့်စက်ကို <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> အထက် အားသွင်းပြီးသည့်အခါ ‘ဘက်ထရီ အားထိန်း’ ပိတ်ပါမည်"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ဖွင့်ရန်"</string>
@@ -3462,8 +3462,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"အလုပ်၏ စိန်ခေါ်မှု၊ အလုပ်၊ ပရိုဖိုင်"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"အလုပ်ပရိုဖိုင်၊ စီမံခန့်ခွဲထားသည့် ပရိုဖိုင်၊ စည်းလုံးစေခြင်း၊ စည်းလုံးအောင်ပြုလုပ်ခြင်း၊ အလုပ်၊ ပရိုဖိုင်"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"ဟန်များ"</string>
-    <!-- no translation found for keywords_wallet (3757421969956996972) -->
-    <skip />
+    <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"ပေးချေမှု၊ တို့ခြင်း၊ ငွေပေးချေခြင်းများ"</string>
     <string name="keywords_backup" msgid="707735920706667685">"မိတ္တူ၊ မိတ္တူကူးပါ"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"ဟန်"</string>
@@ -5282,18 +5281,13 @@
     <string name="power_menu_setting_name" msgid="7843519296976254765">"ဖွင့်ပိတ်မီနူး"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"ဖွင့်ပိတ်ခလုတ် မီနူး"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"မည်သည့်အကြောင်းအရာမျှ မပြပါနှင့်"</string>
-    <!-- no translation found for lockscreen_privacy_not_secure (3251276389681975912) -->
-    <skip />
+    <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"အသုံးပြုရန် ဖန်သားပြင် လော့ခ်ကို ဦးစွာသတ်မှတ်ပါ"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Assistant ဖွင့်ရန် ဖိထားပါ"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"ဖွင့်ပိတ်ခလုတ်ကို ဖိထားခြင်းဖြင့် Assistant ကိုဖွင့်ပါ"</string>
-    <!-- no translation found for lockscreen_privacy_wallet_setting_toggle (4188327143734192000) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_wallet_summary (5388868513484652431) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_controls_setting_toggle (7445725343949588613) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_controls_summary (6952176547084269909) -->
-    <skip />
+    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Wallet ပြရန်"</string>
+    <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"လော့ခ်မျက်နှာပြင်နှင့် အမြန် ဆက်တင်များမှ Wallet သို့ ဝင်သုံးခွင့်ပြုသည်"</string>
+    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"စက်ထိန်းစနစ် ပြရန်"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"လော့ခ်ချထားသည့်အခါ ထိန်းချုပ်မှုများကို ဝင်သုံးသည်"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5389,10 +5383,8 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"အလိုက်အထိုက် ဘက်ထရီအားထိန်းကို သုံးခြင်း"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"အလိုက်သင့်တောက်ပမှုကို သုံးခြင်း"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Wi-Fi ခေါ်ဆိုမှုကို သုံးခြင်း"</string>
-    <!-- no translation found for bubbles_main_switch_title (9121381349223270417) -->
-    <skip />
-    <!-- no translation found for screen_saver_main_switch_title (256530705774121595) -->
-    <skip />
+    <string name="bubbles_main_switch_title" msgid="9121381349223270417">"ပူဖောင်းကွက်များ သုံးခြင်း"</string>
+    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"ဖန်သားပြင်ချွေတာစနစ် သုံးခြင်း"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"အက်ပ်အားလုံးကို ပြခြင်း"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"စမတ် ထပ်ဆင့်ပို့ခြင်း"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"စမတ် ထပ်ဆင့်ပို့ခြင်း ဖွင့်ထားသည်"</string>
