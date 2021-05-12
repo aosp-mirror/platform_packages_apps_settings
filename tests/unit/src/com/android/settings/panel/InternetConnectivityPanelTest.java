@@ -360,7 +360,6 @@ public class InternetConnectivityPanelTest {
 
         assertThat(mPanel.isProgressBarVisible()).isTrue();
         verify(mPanelContentCallback).onProgressBarVisibleChanged();
-        verify(mPanelContentCallback).onHeaderChanged();
         verify(mMainThreadHandler).postDelayed(any() /* mHideProgressBarRunnable */, anyLong());
     }
 
