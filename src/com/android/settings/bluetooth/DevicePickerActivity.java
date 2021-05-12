@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -30,6 +32,7 @@ public final class DevicePickerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addPrivateFlags(PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         setContentView(R.layout.bluetooth_device_picker);
     }
 }
