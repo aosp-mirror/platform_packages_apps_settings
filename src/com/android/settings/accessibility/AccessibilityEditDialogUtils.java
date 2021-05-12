@@ -70,45 +70,32 @@ public class AccessibilityEditDialogUtils {
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
          DialogType.EDIT_SHORTCUT_GENERIC,
+         DialogType.EDIT_SHORTCUT_GENERIC_SUW,
          DialogType.EDIT_SHORTCUT_MAGNIFICATION,
+         DialogType.EDIT_SHORTCUT_MAGNIFICATION_SUW,
          DialogType.EDIT_MAGNIFICATION_SWITCH_SHORTCUT,
     })
 
-    private @interface DialogType {
+    public  @interface DialogType {
         int EDIT_SHORTCUT_GENERIC = 0;
-        int EDIT_SHORTCUT_MAGNIFICATION = 1;
-        int EDIT_MAGNIFICATION_SWITCH_SHORTCUT = 2;
+        int EDIT_SHORTCUT_GENERIC_SUW = 1;
+        int EDIT_SHORTCUT_MAGNIFICATION = 2;
+        int EDIT_SHORTCUT_MAGNIFICATION_SUW = 3;
+        int EDIT_MAGNIFICATION_SWITCH_SHORTCUT = 4;
     }
 
     /**
      * Method to show the edit shortcut dialog.
      *
      * @param context A valid context
+     * @param dialogType The type of edit shortcut dialog
      * @param dialogTitle The title of edit shortcut dialog
      * @param listener The listener to determine the action of edit shortcut dialog
      * @return A edit shortcut dialog for showing
      */
-    public static AlertDialog showEditShortcutDialog(Context context, CharSequence dialogTitle,
-            DialogInterface.OnClickListener listener) {
-        final AlertDialog alertDialog = createDialog(context, DialogType.EDIT_SHORTCUT_GENERIC,
-                dialogTitle, listener);
-        alertDialog.show();
-        setScrollIndicators(alertDialog);
-        return alertDialog;
-    }
-
-    /**
-     * Method to show the edit shortcut dialog in Magnification.
-     *
-     * @param context A valid context
-     * @param dialogTitle The title of edit shortcut dialog
-     * @param listener The listener to determine the action of edit shortcut dialog
-     * @return A edit shortcut dialog for showing in Magnification
-     */
-    public static AlertDialog showMagnificationEditShortcutDialog(Context context,
+    public static AlertDialog showEditShortcutDialog(Context context, int dialogType,
             CharSequence dialogTitle, DialogInterface.OnClickListener listener) {
-        final AlertDialog alertDialog = createDialog(context,
-                DialogType.EDIT_SHORTCUT_MAGNIFICATION, dialogTitle, listener);
+        final AlertDialog alertDialog = createDialog(context, dialogType, dialogTitle, listener);
         alertDialog.show();
         setScrollIndicators(alertDialog);
         return alertDialog;
@@ -241,10 +228,24 @@ public class AccessibilityEditDialogUtils {
                 initSoftwareShortcut(context, contentView);
                 initHardwareShortcut(context, contentView);
                 break;
+            case DialogType.EDIT_SHORTCUT_GENERIC_SUW:
+                contentView = inflater.inflate(
+                        R.layout.accessibility_edit_shortcut, null);
+                initSoftwareShortcutForSUW(context, contentView);
+                initHardwareShortcut(context, contentView);
+                break;
             case DialogType.EDIT_SHORTCUT_MAGNIFICATION:
                 contentView = inflater.inflate(
                         R.layout.accessibility_edit_shortcut_magnification, null);
                 initSoftwareShortcut(context, contentView);
+                initHardwareShortcut(context, contentView);
+                initMagnifyShortcut(context, contentView);
+                initAdvancedWidget(contentView);
+                break;
+            case DialogType.EDIT_SHORTCUT_MAGNIFICATION_SUW:
+                contentView = inflater.inflate(
+                        R.layout.accessibility_edit_shortcut_magnification, null);
+                initSoftwareShortcutForSUW(context, contentView);
                 initHardwareShortcut(context, contentView);
                 initMagnifyShortcut(context, contentView);
                 initAdvancedWidget(contentView);
@@ -278,6 +279,18 @@ public class AccessibilityEditDialogUtils {
         image.setImageResource(imageResId);
     }
 
+    private static void initSoftwareShortcutForSUW(Context context, View view) {
+        final View dialogView = view.findViewById(R.id.software_shortcut);
+        final CharSequence title = context.getText(
+                R.string.accessibility_shortcut_edit_dialog_title_software);
+        final TextView summary = dialogView.findViewById(R.id.summary);
+        final int lineHeight = summary.getLineHeight();
+
+        setupShortcutWidget(dialogView, title,
+                retrieveSoftwareShortcutSummaryForSUW(context, lineHeight),
+                retrieveSoftwareShortcutImageResId(context));
+    }
+
     private static void initSoftwareShortcut(Context context, View view) {
         final View dialogView = view.findViewById(R.id.software_shortcut);
         final CharSequence title = context.getText(
@@ -285,7 +298,8 @@ public class AccessibilityEditDialogUtils {
         final TextView summary = dialogView.findViewById(R.id.summary);
         final int lineHeight = summary.getLineHeight();
 
-        setupShortcutWidget(dialogView, title, retrieveSummary(context, lineHeight),
+        setupShortcutWidget(dialogView, title,
+                retrieveSoftwareShortcutSummary(context, lineHeight),
                 retrieveSoftwareShortcutImageResId(context));
     }
 
@@ -320,7 +334,16 @@ public class AccessibilityEditDialogUtils {
         });
     }
 
-    private static CharSequence retrieveSummary(Context context, int lineHeight) {
+    private static CharSequence retrieveSoftwareShortcutSummaryForSUW(Context context,
+            int lineHeight) {
+        final SpannableStringBuilder sb = new SpannableStringBuilder();
+        if (!AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            sb.append(getSummaryStringWithIcon(context, lineHeight));
+        }
+        return sb;
+    }
+
+    private static CharSequence retrieveSoftwareShortcutSummary(Context context, int lineHeight) {
         final SpannableStringBuilder sb = new SpannableStringBuilder();
         if (!AccessibilityUtil.isFloatingMenuEnabled(context)) {
             sb.append(getSummaryStringWithIcon(context, lineHeight));
