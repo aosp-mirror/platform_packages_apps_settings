@@ -634,9 +634,6 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController
                 .isValidToShowEntry("com.google.android.gms.persistent"))
             .isFalse();
-        assertThat(mBatteryChartPreferenceController
-                .isValidToShowEntry("dex2oat64"))
-            .isFalse();
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> createBatteryHistoryMap() {
