@@ -221,6 +221,42 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     }
 
     @Test
+    public void display_noCrashIfLessThan3() throws Exception {
+        List<Event> events = new ArrayList<>();
+        Event app = new Event();
+        app.mEventType = Event.NOTIFICATION_INTERRUPTION;
+        app.mPackage = "a";
+        app.mTimeStamp = System.currentTimeMillis();
+        events.add(app);
+        ApplicationsState.AppEntry app1Entry = mock(ApplicationsState.AppEntry.class);
+        app1Entry.info = mApplicationInfo;
+        app1Entry.label = "app 1";
+
+        when(mAppState.getEntry(app.getPackageName(), UserHandle.myUserId()))
+                .thenReturn(app1Entry);
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
+                new ResolveInfo());
+
+        UsageEvents usageEvents = getUsageEvents(
+                new String[] {app.getPackageName()},
+                events);
+        when(mIUsageStatsManager.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
+                .thenReturn(usageEvents);
+
+        mAppEntry.info = mApplicationInfo;
+
+        mController.displayPreference(mScreen);
+
+        verify(mCategory).setTitle(R.string.recent_notifications);
+        // Only add app1 & app2. app3 skipped because it's invalid app.
+        assertThat(mApp1.getTitle()).isEqualTo(app1Entry.label);
+
+        verify(mCategory).removePreferenceRecursively("app2");
+
+        mController.refreshUi(mContext);
+    }
+
+    @Test
     public void display_showRecentsWithInstantApp() throws Exception {
         List<Event> events = new ArrayList<>();
         Event app = new Event();
@@ -267,33 +303,10 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         assertThat(mApp1.getTitle()).isEqualTo(appEntry.label);
+        assertThat(mApp1.getSummary()).isEqualTo("Just now");
         assertThat(mApp2.getTitle()).isEqualTo(app1Entry.label);
 
         verify(mCategory).removePreferenceRecursively(mApp3.getKey());
-    }
-
-    @Test
-    public void display_showRecents_formatSummary() throws Exception {
-        List<Event> events = new ArrayList<>();
-        Event app = new Event();
-        app.mEventType = Event.NOTIFICATION_INTERRUPTION;
-        app.mPackage = "pkg.class";
-        app.mTimeStamp = System.currentTimeMillis();
-        events.add(app);
-        UsageEvents usageEvents = getUsageEvents(new String[] {"pkg.class"}, events);
-        when(mIUsageStatsManager.queryEventsForUser(anyLong(), anyLong(), anyInt(), anyString()))
-                .thenReturn(usageEvents);
-
-        when(mAppState.getEntry(app.getPackageName(), UserHandle.myUserId()))
-                .thenReturn(mAppEntry);
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
-                new ResolveInfo());
-
-        mAppEntry.info = mApplicationInfo;
-
-        mController.displayPreference(mScreen);
-
-        assertThat(mApp1.getSummary()).isEqualTo("Just now");
     }
 
     @Test
