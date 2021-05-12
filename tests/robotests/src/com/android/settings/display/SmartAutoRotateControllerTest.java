@@ -74,8 +74,9 @@ public class SmartAutoRotateControllerTest {
         doReturn(PACKAGE_NAME).when(mPackageManager).getRotationResolverPackageName();
         doReturn(PackageManager.PERMISSION_GRANTED).when(mPackageManager).checkPermission(
                 Manifest.permission.CAMERA, PACKAGE_NAME);
-        mController = new SmartAutoRotateController(context, "test_key");
+        mController = Mockito.spy(new SmartAutoRotateController(context, "test_key"));
         when(mController.isCameraLocked()).thenReturn(false);
+        when(mController.isPowerSaveMode()).thenReturn(false);
         doReturn(mController.getPreferenceKey()).when(mPreference).getKey();
 
         final ResolveInfo resolveInfo = new ResolveInfoBuilder(PACKAGE_NAME).build();
@@ -112,6 +113,12 @@ public class SmartAutoRotateControllerTest {
     @Test
     public void getAvailabilityStatus_cameraDisabled_returnDisableDependentSetting() {
         when(mController.isCameraLocked()).thenReturn(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void getAvailabilityStatus_powerSaveEnabled_returnDisableDependentSetting() {
+        when(mController.isPowerSaveMode()).thenReturn(true);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
     }
 
