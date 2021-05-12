@@ -29,6 +29,8 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -76,6 +78,8 @@ public final class BatteryChartPreferenceControllerTest {
     @Mock private PowerGaugePreference mPowerGaugePreference;
     @Mock private ExpandDividerPreference mExpandDividerPreference;
     @Mock private BatteryUtils mBatteryUtils;
+    @Mock private Configuration mConfiguration;
+    @Mock private Resources mResources;
 
     private Context mContext;
     private BatteryDiffEntry mBatteryDiffEntry;
@@ -102,6 +106,33 @@ public final class BatteryChartPreferenceControllerTest {
             new BatteryEntry.NameAndIcon("fakeName", /*icon=*/ null, /*iconId=*/ 1));
         mBatteryChartPreferenceController.setBatteryHistoryMap(
             createBatteryHistoryMap());
+    }
+
+    @Test
+    public void testOnResume_uiModeIsChanged_clearBatteryDiffEntryCache() {
+        doReturn(mResources).when(mContext).getResources();
+        doReturn(mConfiguration).when(mResources).getConfiguration();
+        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
+        // Ensures the testing environment is correct.
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+        mBatteryChartPreferenceController.onResume();
+        // Changes the uiMode in the configuration.
+        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_YES;
+
+        mBatteryChartPreferenceController.onResume();
+        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
+    }
+
+    @Test
+    public void testOnResume_uiModeIsNotChanged_notClearBatteryDiffEntryCache() {
+        doReturn(mResources).when(mContext).getResources();
+        doReturn(mConfiguration).when(mResources).getConfiguration();
+        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
+        // Ensures the testing environment is correct.
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+
+        mBatteryChartPreferenceController.onResume();
+        assertThat(BatteryDiffEntry.sResourceCache).isNotEmpty();
     }
 
     @Test
