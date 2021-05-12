@@ -111,8 +111,9 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     private CharSequence generateLabel(BatteryInfo info) {
         if (BatteryUtils.isBatteryDefenderOn(info)) {
             return null;
-        } else if (info.remainingLabel == null) {
-            // Present status independently if no remaining time
+        } else if (info.remainingLabel == null
+                || info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
+            // Present status only if no remaining time or status anomalous
             return info.statusLabel;
         } else if (info.statusLabel != null && !info.discharging) {
             // Charging state

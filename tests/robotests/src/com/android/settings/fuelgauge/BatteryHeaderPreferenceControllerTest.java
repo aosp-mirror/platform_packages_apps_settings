@@ -168,6 +168,17 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
+    public void updatePreference_statusAnomalous_showStatusLabel() {
+        mBatteryInfo.remainingLabel = TIME_LEFT;
+        mBatteryInfo.statusLabel = BATTERY_STATUS;
+        mBatteryInfo.batteryStatus = BatteryManager.BATTERY_STATUS_NOT_CHARGING;
+
+        mController.updateHeaderPreference(mBatteryInfo);
+
+        verify(mBatteryUsageProgressBarPref).setBottomSummary(BATTERY_STATUS);
+    }
+
+    @Test
     public void updatePreference_charging_showFullText() {
         setChargingState(/* isDischarging */ false, /* updatedByStatusFeature */ false);
 
