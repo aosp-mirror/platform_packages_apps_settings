@@ -20,15 +20,19 @@ import static android.provider.Settings.Secure.CAMERA_AUTOROTATE;
 
 import android.Manifest;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.hardware.SensorPrivacyManager;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.service.rotationresolver.RotationResolverService;
 import android.text.TextUtils;
 
+import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -37,15 +41,24 @@ import com.android.internal.view.RotationPolicy;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * SmartAutoRotateController controls whether auto rotation is enabled
  */
 public class SmartAutoRotateController extends TogglePreferenceController implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, LifecycleObserver, OnStart, OnStop {
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final SensorPrivacyManager mPrivacyManager;
+    private final PowerManager mPowerManager;
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateState(mPreference);
+        }
+    };
     private Preference mPreference;
 
     public SmartAutoRotateController(Context context, String preferenceKey) {
@@ -54,6 +67,7 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPrivacyManager
                 .addSensorPrivacyListener(CAMERA, (sensor, enabled) -> updateState(mPreference));
+        mPowerManager = context.getSystemService(PowerManager.class);
     }
 
     @Override
@@ -62,7 +76,7 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
             return UNSUPPORTED_ON_DEVICE;
         }
         return !RotationPolicy.isRotationLocked(mContext) && hasSufficientPermission(mContext)
-                && !isCameraLocked() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+                && !isCameraLocked() && !isPowerSaveMode() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
 
     @Override
@@ -82,11 +96,27 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         return mPrivacyManager.isSensorPrivacyEnabled(SensorPrivacyManager.Sensors.CAMERA);
     }
 
+    @VisibleForTesting
+    boolean isPowerSaveMode() {
+        return mPowerManager.isPowerSaveMode();
+    }
+
+    @Override
+    public void onStart() {
+        mContext.registerReceiver(mReceiver,
+                new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+    }
+
+    @Override
+    public void onStop() {
+        mContext.unregisterReceiver(mReceiver);
+    }
+
     @Override
     public boolean isChecked() {
-        return hasSufficientPermission(mContext) && !isCameraLocked() && Settings.Secure.getInt(
-                mContext.getContentResolver(),
-                CAMERA_AUTOROTATE, 0) == 1;
+        return hasSufficientPermission(mContext) && !isCameraLocked() && !isPowerSaveMode()
+                && Settings.Secure.getInt(mContext.getContentResolver(),
+                        CAMERA_AUTOROTATE, 0) == 1;
     }
 
     @Override
