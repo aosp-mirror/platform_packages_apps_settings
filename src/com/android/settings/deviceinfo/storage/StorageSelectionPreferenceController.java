@@ -100,7 +100,8 @@ public class StorageSelectionPreferenceController extends BasePreferenceControll
         if (mOnItemSelectedListener == null) {
             return;
         }
-        mOnItemSelectedListener.onItemSelected(mStorageAdapter.getItem(position));
+        mOnItemSelectedListener.onItemSelected(
+                (StorageEntry) mSpinnerPreference.getSelectedItem());
     }
 
     @Override
