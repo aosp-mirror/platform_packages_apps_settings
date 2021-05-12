@@ -322,11 +322,13 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
 
         final List<ScanResult> wifiList = mWifiManager.getScanResults();
         if (wifiList != null && wifiList.size() != 0) {
-            if (mIsProgressBarVisible) {
-                // When the Wi-Fi scan result callback is received
-                //   Sub-Title: Searching for networks...
-                mSubtitle = SUBTITLE_TEXT_SEARCHING_FOR_NETWORKS;
-            }
+            return;
+        }
+
+        if (mIsProgressBarVisible) {
+            // When the Wi-Fi scan result callback is received
+            //   Sub-Title: Searching for networks...
+            mSubtitle = SUBTITLE_TEXT_SEARCHING_FOR_NETWORKS;
             return;
         }
 
