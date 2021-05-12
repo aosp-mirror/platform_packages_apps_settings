@@ -581,6 +581,33 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.mIsExpanded).isTrue();
     }
 
+    @Test
+    public void testIsValidToShowSummary_returnExpectedResult() {
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowSummary("com.google.android.apps.scone"))
+            .isTrue();
+
+        // Verifies the item which is defined in the array list.
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowSummary("com.google.android.googlequicksearchbox"))
+            .isFalse();
+    }
+
+    @Test
+    public void testIsValidToShowEntry_returnExpectedResult() {
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowEntry("com.google.android.apps.scone"))
+            .isTrue();
+
+        // Verifies the items which are defined in the array list.
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowEntry("com.google.android.gms.persistent"))
+            .isFalse();
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowEntry("dex2oat64"))
+            .isFalse();
+    }
+
     private static Map<Long, Map<String, BatteryHistEntry>> createBatteryHistoryMap() {
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         for (int index = 0; index < DESIRED_HISTORY_SIZE; index++) {
