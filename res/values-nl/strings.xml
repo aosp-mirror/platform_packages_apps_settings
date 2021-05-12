@@ -386,10 +386,8 @@
     <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"Gebruik ontgrendelen via gezichtsherkenning om je apparaat te ontgrendelen, in te loggen bij apps en betalingen te bevestigen."</string>
     <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"Let op:\nAls je naar de telefoon kijkt, kun je deze onbedoeld ontgrendelen.\n\nJe telefoon kan door iemand anders worden ontgrendeld als de telefoon voor je gezicht wordt gehouden.\n\nJe telefoon kan worden ontgrendeld door iemand die veel op je lijkt, zoals een identieke tweelingbroer of -zus."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"Let op:\nAls je naar de telefoon kijkt, kun je deze onbedoeld ontgrendelen.\n\nJe telefoon kan door iemand anders worden ontgrendeld als de telefoon voor je gezicht wordt gehouden, zelfs als je je ogen dicht hebt.\n\nJe telefoon kan worden ontgrendeld door iemand die veel op je lijkt, zoals een identieke tweelingbroer of -zus."</string>
-    <!-- no translation found for security_settings_face_settings_remove_dialog_title (2899669764446232715) -->
-    <skip />
-    <!-- no translation found for security_settings_face_settings_remove_dialog_details (3268144215619385299) -->
-    <skip />
+    <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Gezichtsmodel verwijderen?"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Je gezichtsmodel wordt definitief en op een beveiligde manier verwijderd. Daarna heb je je pincode, patroon of wachtwoord nodig om je telefoon te ontgrendelen of voor verificatie in apps."</string>
     <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Gezichtsmodel verwijderen?"</string>
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Je gezichtsmodel wordt definitief en veilig verwijderd.\n\nDaarna heb je je vingerafdruk, pincode, patroon of wachtwoord nodig om je telefoon te ontgrendelen of voor verificatie in apps."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Ontgrendel je telefoon via gezichtsherkenning"</string>
@@ -398,7 +396,10 @@
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Vingerafdruk voor"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Vingerafdruk toevoegen"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5451094461919440992">"schermvergrendeling"</string>
-    <!-- no translation found for security_settings_fingerprint_preference_summary (6897454766137108776) -->
+    <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> vingerafdrukken toegevoegd</item>
+      <item quantity="one">Vingerafdruk toegevoegd</item>
+    </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Je vingerafdruk instellen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Je vingerafdruk gebruiken"</string>
@@ -435,14 +436,10 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Ga naar een plek met zachter licht en probeer het opnieuw"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Je hebt het maximale aantal pogingen bereikt"</string>
     <string name="security_settings_fingerprint_v2_home_screen" msgid="6677856383184441160">"Gebruik je vingerafdruk om je telefoon te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt\n\n"<annotation id="url">"Meer informatie"</annotation></string>
-    <!-- no translation found for security_settings_biometric_preference_title (298146483579539448) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_none_enrolled (6941188982863819389) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_both_fp_multiple (4821859306609955966) -->
-    <skip />
-    <!-- no translation found for security_settings_biometric_preference_summary_both_fp_single (684409535278676426) -->
-    <skip />
+    <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ontgrendelen via gezicht en vingerafdruk"</string>
+    <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tik om in te stellen"</string>
+    <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gezicht en vingerafdrukken toegevoegd"</string>
+    <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Gezicht en vingerafdruk toegevoegd"</string>
     <string name="biometric_settings_intro" msgid="769040512190641961">"Als je ontgrendelen via gezichtsherkenning en vingerafdruk instelt, vraagt je telefoon naar je vingerafdruk als je een mondkapje draagt of in een donkere omgeving bent"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Manieren om te ontgrendelen"</string>
     <string name="biometric_settings_category_ways_to_use" msgid="7182562470382953854">"Gezicht en vingerafdruk gebruiken voor"</string>
@@ -621,40 +618,48 @@
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"Wachtwoord"</string>
     <string name="unlock_setup_wizard_fingerprint_details" msgid="5974580769186206478">"Zodra je een schermvergrendeling hebt ingesteld, kun je ook je vingerafdruk instellen in \'Instellingen\' &gt; \'Beveiliging\'."</string>
     <string name="unlock_disable_lock_title" msgid="2564279819907932759">"Schermvergrendeling uitzetten"</string>
-    <!-- no translation found for unlock_disable_frp_warning_title (3606280046362811229) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_title" msgid="3606280046362811229">"Schermvergrendeling verwijderen?"</string>
     <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"Profielbeveiliging verwijderen?"</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern (6246242612158828147) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_fingerprint (2259825377085781801) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_face (4699508435412336378) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pattern_face_fingerprint (7049706229344804972) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin (122154942944422284) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_fingerprint (983373874470746066) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_face (5607150515413131761) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_pin_face_fingerprint (1821792325159866312) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password (6422723907917376210) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_fingerprint (8899452884016354856) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_face (1811067332335964495) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_password_face_fingerprint (7063649456205159491) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_pattern" msgid="6246242612158828147">"Een patroon beschermt je telefoon bij verlies of diefstal"</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="2259825377085781801">"Een patroon beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Hierdoor wordt ook het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je kunt je vingerafdruk niet gebruiken voor verificatie in apps."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face" msgid="4699508435412336378">"Een patroon beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht niet gebruiken voor verificatie in apps."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_face_fingerprint" msgid="7049706229344804972">"Een patroon beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Hierdoor wordt het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="122154942944422284">"Een pincode beschermt je telefoon bij verlies of diefstal"</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="983373874470746066">"Een pincode beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Hierdoor wordt ook het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je kunt je vingerafdruk niet gebruiken voor verificatie in apps."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face" msgid="5607150515413131761">"Een pincode beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht niet gebruiken voor verificatie in apps."</string>
+    <string name="unlock_disable_frp_warning_content_pin_face_fingerprint" msgid="1821792325159866312">"Een pincode beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Hierdoor wordt het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
+    <string name="unlock_disable_frp_warning_content_password" msgid="6422723907917376210">"Een wachtwoord beschermt je telefoon bij verlies of diefstal"</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint" msgid="8899452884016354856">"Een wachtwoord beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Hierdoor wordt ook het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je kunt je vingerafdruk niet gebruiken voor verificatie in apps."</string>
+    <string name="unlock_disable_frp_warning_content_password_face" msgid="1811067332335964495">"Een wachtwoord beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Je gezichtsmodel wordt ook permanent en op een beveiligde manier verwijderd. Je kunt je gezicht niet gebruiken voor verificatie in apps."</string>
+    <string name="unlock_disable_frp_warning_content_password_face_fingerprint" msgid="7063649456205159491">"Een wachtwoord beschermt je telefoon bij verlies of diefstal.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Hierdoor wordt het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_content_unknown" msgid="8903568674104115231">"De apparaatbeveiliging werkt niet zonder je schermvergendeling."</string>
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_fingerprint (6542744110902941189) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_face (4559917661432267841) -->
-    <skip />
-    <!-- no translation found for unlock_disable_frp_warning_content_unknown_face_fingerprint (3779582301453677644) -->
-    <skip />
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint" msgid="6542744110902941189">"Functies voor apparaatbeveiliging werken niet zonder je schermvergrendeling.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Hierdoor wordt ook het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je kunt je vingerafdruk niet gebruiken voor verificatie in apps."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_face" msgid="4559917661432267841">"Functies voor apparaatbeveiliging werken niet zonder je schermvergrendeling.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht niet gebruiken voor verificatie in apps."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"Functies voor apparaatbeveiliging werken niet zonder je schermvergrendeling.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Hierdoor wordt het vingerafdrukmodel verwijderd dat op je apparaat is opgeslagen. Je gezichtsmodel wordt ook definitief en op een beveiligde manier verwijderd. Je kunt je gezicht of vingerafdruk niet gebruiken voor verificatie in apps."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="621607297961726537">"Ja, verwijderen"</string>
     <string name="unlock_change_lock_pattern_title" msgid="8234523589333929193">"Ontgrendelingspatroon wijzigen"</string>
     <string name="unlock_change_lock_pin_title" msgid="2324077520816477479">"Pincode voor ontgrendelen wijzigen"</string>
@@ -927,7 +932,8 @@
     <string name="wifi_menu_forget" msgid="6557142984528657361">"Netwerk vergeten"</string>
     <string name="wifi_menu_modify" msgid="7246143391161038875">"Netwerk aanpassen"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Zet wifi aan om beschikbare netwerken te zien."</string>
-    <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"Wifi-netwerken zoeken…"</string>
+    <!-- no translation found for wifi_empty_list_wifi_on (2448010040478321376) -->
+    <skip />
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Je hebt geen rechten om het wifi-netwerk te wijzigen."</string>
     <string name="wifi_more" msgid="8742256421693351035">"Meer"</string>
     <string name="wifi_setup_wps" msgid="4303694722593999931">"Autom. config. (WPS)"</string>
@@ -1078,8 +1084,7 @@
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"IP-adres"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"Netwerkgegevens"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Subnetmasker"</string>
-    <!-- no translation found for wifi_type_title (2174893488722015838) -->
-    <skip />
+    <string name="wifi_type_title" msgid="2174893488722015838">"Type"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"IPv6-adressen"</string>
     <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Opgeslagen netwerken"</string>
@@ -2150,8 +2155,7 @@
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Toetsenbordindelingen"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Persoonlijk woordenboek"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Persoonlijk woordenboek voor je werk"</string>
-    <!-- no translation found for user_dict_settings_summary (4939694372338975081) -->
-    <skip />
+    <string name="user_dict_settings_summary" msgid="4939694372338975081">"Voeg woorden toe om te gebruiken in apps zoals Spellingcontrole"</string>
     <string name="user_dict_settings_add_menu_title" msgid="8046882347281382968">"Toevoegen"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="3485845465134083084">"Toevoegen aan woordenboek"</string>
     <string name="user_dict_settings_add_screen_title" msgid="1866408024073475379">"Woordgroep"</string>
@@ -2212,8 +2216,7 @@
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Tekst en weergave"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Scherm donkerder maken"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interactieopties"</string>
-    <!-- no translation found for accessibility_tap_assistance_title (1058913033421048284) -->
-    <skip />
+    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Bedieningselementen voor timing"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Systeemopties"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Gedownloade apps"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Experimenteel"</string>
@@ -2274,10 +2277,12 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Pas de knop Toegankelijkheid aan"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Volumetoetsen ingedrukt houden"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"volumetoetsen ingedrukt houden"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Houd beide volumetoetsen ingedrukt"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_hardware (7866393664299375632) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Drie keer op het scherm tikken"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"drie keer op het scherm tikken"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Tik snel drie keer op het scherm. Deze snelkoppeling kan je apparaat vertragen."</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_triple_tap (7490111169801144991) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Geavanceerd"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Toegankelijkheid is ingesteld op <xliff:g id="SERVICE">%1$s</xliff:g>. Als je vergroting wilt gebruiken, tik je op de knop Toegankelijkheid, houd je deze vast en selecteer je Vergroting."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Het toegankelijkheidsgebaar is ingesteld op <xliff:g id="SERVICE">%1$s</xliff:g>. Als je vergroting wilt gebruiken, swipe je met twee vingers omhoog vanaf het onderkant van het scherm en houd je vast. Selecteer vervolgens Vergroting."</string>
@@ -2633,8 +2638,7 @@
       <item quantity="one">Batterijgebruik voor %1$d app wordt beperkt</item>
     </plurals>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"<xliff:g id="TIME">%1$s</xliff:g> beperkt"</string>
-    <!-- no translation found for restricted_app_detail_footer (3495725286882138803) -->
-    <skip />
+    <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Deze apps mogen de batterij niet op de achtergrond gebruiken. Ze werken misschien niet zoals verwacht en meldingen kunnen vertraagd binnenkomen."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Batterijbeheer gebruiken"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detecteren wanneer apps de batterij snel leegmaken"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Waarnemen wanneer apps veel batterijlading verbruiken"</string>
@@ -2733,8 +2737,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Uitsplitsing sinds laatste volledige lading"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Laatste volledige lading"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Geschatte gebruikstijd na volledige lading"</string>
-    <!-- no translation found for battery_footer_summary (8221691063048377342) -->
-    <skip />
+    <string name="battery_footer_summary" msgid="8221691063048377342">"De gegevens over het batterijgebruik zijn bij benadering en kunnen veranderen op basis van het gebruik."</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"Tijdens actief gebruik"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"Wanneer op de achtergrond"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Batterijgebruik"</string>
@@ -2774,12 +2777,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Een planning instellen"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Gebruiksduur van de batterij verlengen"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Uitzetten na opladen"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (492221102651829607) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (4566426833434375284) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (4128841327359445726) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Batterijbesparing wordt uitgezet als je telefoon meer dan <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> batterij heeft"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Batterijbesparing wordt uitgezet als je tablet meer dan <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> batterij heeft"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"Batterijbesparing wordt uitgezet als je apparaat meer dan <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> batterij heeft"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aanzetten"</string>
@@ -3462,8 +3462,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"werkuitdaging, werk, profiel"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"werkprofiel, beheerd profiel, gelijkschakelen, unificatie, werk, profiel"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gebaren"</string>
-    <!-- no translation found for keywords_wallet (3757421969956996972) -->
-    <skip />
+    <string name="keywords_wallet" msgid="3757421969956996972">"portemonnee"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"betalen, tikken, betalingen"</string>
     <string name="keywords_backup" msgid="707735920706667685">"back-up, back-up maken, back-uppen"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"gebaar"</string>
@@ -5282,18 +5281,13 @@
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Menu voor aan/uit-knop"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Menu voor aan/uit-knop"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Geen content tonen"</string>
-    <!-- no translation found for lockscreen_privacy_not_secure (3251276389681975912) -->
-    <skip />
+    <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Stel voor gebruik eerst een schermvergrendeling in"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Vasthouden voor de Assistent"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Houd de aan/uit-knop ingedrukt om de Assistent te activeren"</string>
-    <!-- no translation found for lockscreen_privacy_wallet_setting_toggle (4188327143734192000) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_wallet_summary (5388868513484652431) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_controls_setting_toggle (7445725343949588613) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_controls_summary (6952176547084269909) -->
-    <skip />
+    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Portemonnee tonen"</string>
+    <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Toegang tot portemonnee toestaan via vergrendelscherm en snelle instellingen"</string>
+    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Apparaatbediening tonen"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Toegangsbeheer indien vergrendeld"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5389,10 +5383,8 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Aangepast batterijgebruik gebruiken"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Aanpasbare helderheid gebruiken"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Bellen via wifi gebruiken"</string>
-    <!-- no translation found for bubbles_main_switch_title (9121381349223270417) -->
-    <skip />
-    <!-- no translation found for screen_saver_main_switch_title (256530705774121595) -->
-    <skip />
+    <string name="bubbles_main_switch_title" msgid="9121381349223270417">"Bubbels gebruiken"</string>
+    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Screensaver gebruiken"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Alle apps bekijken"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Slim doorschakelen"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Slim doorschakelen staat aan"</string>
