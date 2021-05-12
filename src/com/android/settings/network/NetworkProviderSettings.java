@@ -370,7 +370,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 }
             }
         };
-        registerForContextMenu(getListView());
         setHasOptionsMenu(true);
 
         if (savedInstanceState != null) {
