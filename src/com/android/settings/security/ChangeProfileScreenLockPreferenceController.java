@@ -26,6 +26,7 @@ import android.text.TextUtils;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockGeneric;
@@ -36,7 +37,7 @@ public class ChangeProfileScreenLockPreferenceController extends
     private static final String KEY_UNLOCK_SET_OR_CHANGE_PROFILE = "unlock_set_or_change_profile";
 
     public ChangeProfileScreenLockPreferenceController(Context context,
-            SecuritySettings host) {
+            SettingsPreferenceFragment host) {
         super(context, host);
     }
 
