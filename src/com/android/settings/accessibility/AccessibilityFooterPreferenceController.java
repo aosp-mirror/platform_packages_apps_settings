@@ -46,6 +46,14 @@ public abstract class AccessibilityFooterPreferenceController extends BasePrefer
         updateFooterPreferences(footerPreference);
     }
 
+    /**
+     * Override this if showing a help item in the footer bar, by returning the resource id.
+     *
+     * @return the resource id for the help url
+     */
+    protected int getHelpResource() {
+        return 0;
+    }
 
     /** Returns the accessibility feature name. */
     protected abstract String getLabelName();
@@ -54,5 +62,10 @@ public abstract class AccessibilityFooterPreferenceController extends BasePrefer
         final String iconContentDescription = mContext.getString(
                 R.string.accessibility_introduction_title, getLabelName());
         footerPreference.setIconContentDescription(iconContentDescription);
+
+        if (getHelpResource() != 0) {
+            footerPreference.appendHelpLink(getHelpResource());
+            footerPreference.setLinkEnabled(true);
+        }
     }
 }
