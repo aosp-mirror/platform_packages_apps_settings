@@ -21,6 +21,7 @@ import static com.android.settings.display.SmartAutoRotateController.isRotationR
 import android.app.settings.SettingsEnums;
 import android.hardware.SensorPrivacyManager;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,7 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
     private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
     private SensorPrivacyManager mPrivacyManager;
     private AutoRotateSwitchBarController mSwitchBarController;
+    private PowerManager mPowerManager;
     private static final String FACE_SWITCH_PREFERENCE_ID = "face_based_rotate";
 
     @Override
@@ -69,6 +71,7 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
         mSwitchBarController = new AutoRotateSwitchBarController(activity, switchBar,
                 getSettingsLifecycle());
         mPrivacyManager = SensorPrivacyManager.getInstance(activity);
+        mPowerManager = getSystemService(PowerManager.class);
         final Preference footerPreference = findPreference(FooterPreference.KEY_FOOTER);
         if (footerPreference != null) {
             footerPreference.setTitle(Html.fromHtml(getString(R.string.smart_rotate_text_headline),
@@ -89,9 +92,10 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
                     final boolean isLocked = RotationPolicy.isRotationLocked(getContext());
                     final boolean isCameraLocked = mPrivacyManager.isSensorPrivacyEnabled(
                             SensorPrivacyManager.Sensors.CAMERA);
+                    final boolean isBatterySaver = mPowerManager.isPowerSaveMode();
                     final Preference preference = findPreference(FACE_SWITCH_PREFERENCE_ID);
                     if (preference != null && hasSufficientPermission(getContext())) {
-                        preference.setEnabled(!isLocked && !isCameraLocked);
+                        preference.setEnabled(!isLocked && !isCameraLocked && !isBatterySaver);
                     }
                 }
             };
