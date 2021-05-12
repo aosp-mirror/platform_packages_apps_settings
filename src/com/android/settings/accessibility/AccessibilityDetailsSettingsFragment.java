@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_BUTTON_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -101,6 +102,12 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                     arguments, getContext());
             return new LaunchFragmentArguments(destination, arguments);
         }
+
+        if (ACCESSIBILITY_BUTTON_COMPONENT_NAME.equals(componentName)) {
+            final String destination = AccessibilityButtonFragment.class.getName();
+            return new LaunchFragmentArguments(destination, /* arguments= */ null);
+        }
+
         return null;
     }
 
