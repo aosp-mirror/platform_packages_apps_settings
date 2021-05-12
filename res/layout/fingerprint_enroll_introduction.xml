@@ -155,6 +155,55 @@
 
         </LinearLayout>
 
+        <!-- Keep in mind -->
+        <com.google.android.setupdesign.view.RichTextView
+            style="@style/SudDescription.Glif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:paddingTop="12dp"
+            android:text="@string/security_settings_fingerprint_enroll_introduction_footer_title_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="12dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_info_outline_24dp"/>
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/security_settings_fingerprint_v2_enroll_introduction_footer_message_5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="12dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_link_24dp"/>
+            <Space
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/security_settings_fingerprint_v2_enroll_introduction_message_learn_more" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </com.google.android.setupdesign.GlifLayout>
