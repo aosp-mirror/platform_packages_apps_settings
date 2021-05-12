@@ -21,10 +21,14 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.hardware.SensorPrivacyManager;
+import android.os.PowerManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.SpannableString;
@@ -73,6 +77,12 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     private FooterPreference mPrivacyPreference;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private SensorPrivacyManager mPrivacyManager;
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mAdaptiveSleepBatterySaverPreferenceController.updateVisibility();
+        }
+    };
 
     @VisibleForTesting
     Context mContext;
@@ -92,6 +102,9 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     @VisibleForTesting
     AdaptiveSleepPreferenceController mAdaptiveSleepController;
 
+    @VisibleForTesting
+    AdaptiveSleepBatterySaverPreferenceController mAdaptiveSleepBatterySaverPreferenceController;
+
     public ScreenTimeoutSettings() {
         super();
         mMetricsFeatureProvider = FeatureFactory.getFactory(getContext())
@@ -109,6 +122,13 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
                 context);
         mAdaptiveSleepCameraStatePreferenceController =
                 new AdaptiveSleepCameraStatePreferenceController(context);
+        mAdaptiveSleepBatterySaverPreferenceController =
+                new AdaptiveSleepBatterySaverPreferenceController(context);
+        mPrivacyPreference = new FooterPreference(context);
+        mPrivacyPreference.setIcon(R.drawable.ic_privacy_shield_24dp);
+        mPrivacyPreference.setTitle(R.string.adaptive_sleep_privacy);
+        mPrivacyPreference.setSelectable(false);
+        mPrivacyPreference.setLayoutResource(R.layout.preference_footer);
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPrivacyManager.addSensorPrivacyListener(CAMERA,
                 (sensor, enabled) -> mAdaptiveSleepController.updatePreference());
@@ -136,7 +156,16 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         super.onStart();
         mAdaptiveSleepPermissionController.updateVisibility();
         mAdaptiveSleepCameraStatePreferenceController.updateVisibility();
+        mAdaptiveSleepBatterySaverPreferenceController.updateVisibility();
         mAdaptiveSleepController.updatePreference();
+        mContext.registerReceiver(mReceiver,
+                new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mContext.unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -176,6 +205,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         if (isScreenAttentionAvailable(getContext())) {
             mAdaptiveSleepPermissionController.addToScreen(screen);
             mAdaptiveSleepCameraStatePreferenceController.addToScreen(screen);
+            mAdaptiveSleepBatterySaverPreferenceController.addToScreen(screen);
             mAdaptiveSleepController.addToScreen(screen);
             screen.addPreference(mPrivacyPreference);
         }
