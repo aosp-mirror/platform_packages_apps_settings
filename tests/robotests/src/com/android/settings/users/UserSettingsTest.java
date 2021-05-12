@@ -177,6 +177,22 @@ public class UserSettingsTest {
     }
 
     @Test
+    public void testExitGuest_ShouldLogAction() {
+        mUserCapabilities.mIsGuest = true;
+        mFragment.exitGuest();
+        verify(mMetricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED));
+    }
+
+    @Test
+    public void testExitGuestWhenNotGuest_ShouldNotLogAction() {
+        mUserCapabilities.mIsGuest = false;
+        mFragment.exitGuest();
+        verify(mMetricsFeatureProvider, never()).action(any(),
+                eq(SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED));
+    }
+
+    @Test
     public void withDisallowRemoveUser_ShouldDisableRemoveUser() {
         // TODO(b/115781615): Tidy robolectric tests
         // Arrange
