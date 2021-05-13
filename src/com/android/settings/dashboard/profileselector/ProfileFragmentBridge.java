@@ -20,6 +20,7 @@ import android.util.ArrayMap;
 
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.location.LocationServices;
 import com.android.settings.location.RecentLocationAccessSeeAllFragment;
 
@@ -46,5 +47,7 @@ public class ProfileFragmentBridge {
                 ProfileSelectRecentLocationAccessFragment.class.getName());
         FRAGMENT_MAP.put(LocationServices.class.getName(),
                 ProfileSelectLocationServicesFragment.class.getName());
+        FRAGMENT_MAP.put(StorageDashboardFragment.class.getName(),
+                ProfileSelectStorageFragment.class.getName());
     }
 }
