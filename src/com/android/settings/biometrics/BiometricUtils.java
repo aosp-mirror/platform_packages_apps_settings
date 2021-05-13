@@ -16,8 +16,6 @@
 
 package com.android.settings.biometrics;
 
-import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
@@ -34,8 +32,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.VerifyCredentialResponse;
-import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.biometrics.face.FaceEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction;
@@ -173,9 +171,7 @@ public class BiometricUtils {
      */
     public static Intent getFaceIntroIntent(@NonNull Context context,
             @NonNull Intent activityIntent) {
-        final String className = context.getString(R.string.config_face_enroll_introduction);
-        Intent intent = new Intent();
-        intent.setClassName(SETTINGS_PACKAGE_NAME, className);
+        final Intent intent = new Intent(context, FaceEnrollIntroduction.class);
         WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
         return intent;
     }
