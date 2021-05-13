@@ -40,7 +40,7 @@ public abstract class TypeFilterPreferenceController extends BasePreferenceContr
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "TypeFilterPrefCntlr";
-    private static final String XML_SEPARATOR = ",";
+    private static final String FLAG_SEPARATOR = "\\|";
 
     private ComponentName mCn;
     private int mUserId;
@@ -132,7 +132,7 @@ public abstract class TypeFilterPreferenceController extends BasePreferenceContr
                         NotificationListenerService.META_DATA_DISABLED_FILTER_TYPES).toString();
                 if (typeList != null) {
                     int types = 0;
-                    String[] typeStrings = typeList.split(XML_SEPARATOR);
+                    String[] typeStrings = typeList.split(FLAG_SEPARATOR);
                     for (int i = 0; i < typeStrings.length; i++) {
                         final String typeString = typeStrings[i];
                         if (TextUtils.isEmpty(typeString)) {
