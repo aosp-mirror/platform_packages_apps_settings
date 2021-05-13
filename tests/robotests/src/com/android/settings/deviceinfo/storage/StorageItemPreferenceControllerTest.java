@@ -94,7 +94,8 @@ public class StorageItemPreferenceControllerTest {
         mVolume = spy(new VolumeInfo("id", 0, null, "id"));
         // Note: null is passed as the Lifecycle because we are handling it outside of the normal
         //       Settings fragment lifecycle for test purposes.
-        mController = new StorageItemPreferenceController(mContext, mFragment, mVolume, mSvp);
+        mController = new StorageItemPreferenceController(mContext, mFragment, mVolume, mSvp,
+                false /* isWorkProfile */);
         mPreference = new StorageItemPreference(mContext);
 
         // Inflate the preference and the widget.
@@ -165,7 +166,7 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).startActivity(argumentCaptor.capture());
+        verify(mContext).startActivityAsUser(argumentCaptor.capture(), nullable(UserHandle.class));
 
         final Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(fakeBrowseAction);
@@ -176,11 +177,12 @@ public class StorageItemPreferenceControllerTest {
         mPreference.setKey(StorageItemPreferenceController.IMAGES_KEY);
         final Context mockContext = getMockContext();
         mController = new StorageItemPreferenceController(mockContext, mFragment, mVolume,
-                mSvp);
+                mSvp, false /* isWorkProfile */);
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mockContext).startActivity(argumentCaptor.capture());
+        verify(mockContext).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         final Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
@@ -192,11 +194,12 @@ public class StorageItemPreferenceControllerTest {
         mPreference.setKey(StorageItemPreferenceController.AUDIOS_KEY);
         final Context mockContext = getMockContext();
         mController = new StorageItemPreferenceController(mockContext, mFragment, mVolume,
-                mSvp);
+                mSvp, false /* isWorkProfile */);
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mockContext).startActivity(argumentCaptor.capture());
+        verify(mockContext).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
         final Intent intent = argumentCaptor.getValue();
 
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
@@ -240,7 +243,8 @@ public class StorageItemPreferenceControllerTest {
 
     @Test
     public void launchAppsIntent_forWork_settingsIntent() {
-        mController = new StorageItemPreferenceController(mContext, mFragment, mVolume, mSvp, true);
+        mController = new FakeStorageItemPreferenceController(mContext, mFragment, mVolume, mSvp,
+                true /* isWorkProfile */);
         mPreference.setKey(StorageItemPreferenceController.APPS_KEY);
         mController.handlePreferenceTreeClick(mPreference);
 
@@ -270,11 +274,12 @@ public class StorageItemPreferenceControllerTest {
         mPreference.setKey(StorageItemPreferenceController.DOCUMENTS_AND_OTHER_KEY);
         final Context mockContext = getMockContext();
         mController = new StorageItemPreferenceController(mockContext, mFragment, mVolume,
-                mSvp);
+                mSvp, false /* isWorkProfile */);
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mockContext).startActivity(argumentCaptor.capture());
+        verify(mockContext).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
@@ -304,11 +309,12 @@ public class StorageItemPreferenceControllerTest {
         mPreference.setKey(StorageItemPreferenceController.VIDEOS_KEY);
         final Context mockContext = getMockContext();
         mController = new StorageItemPreferenceController(mockContext, mFragment, mVolume,
-                mSvp);
+                mSvp, false /* isWorkProfile */);
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mockContext).startActivity(argumentCaptor.capture());
+        verify(mockContext).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
@@ -467,5 +473,21 @@ public class StorageItemPreferenceControllerTest {
         when(context.getResources()).thenReturn(resources);
         when(resources.getString(anyInt())).thenReturn("");
         return context;
+    }
+
+    private static class FakeStorageItemPreferenceController
+            extends StorageItemPreferenceController {
+
+        private static final int CURRENT_USER_ID = 10;
+
+        FakeStorageItemPreferenceController(Context context, Fragment hostFragment,
+                VolumeInfo volume, StorageVolumeProvider svp, boolean isWorkProfile) {
+            super(context, hostFragment, volume, svp, isWorkProfile);
+        }
+
+        @Override
+        int getCurrentUserId() {
+            return CURRENT_USER_ID;
+        }
     }
 }

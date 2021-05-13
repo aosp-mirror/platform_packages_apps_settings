@@ -29,7 +29,10 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.text.format.DateUtils;
 
 import androidx.preference.Preference;
@@ -75,6 +78,8 @@ public final class BatteryChartPreferenceControllerTest {
     @Mock private PowerGaugePreference mPowerGaugePreference;
     @Mock private ExpandDividerPreference mExpandDividerPreference;
     @Mock private BatteryUtils mBatteryUtils;
+    @Mock private Configuration mConfiguration;
+    @Mock private Resources mResources;
 
     private Context mContext;
     private BatteryDiffEntry mBatteryDiffEntry;
@@ -101,6 +106,33 @@ public final class BatteryChartPreferenceControllerTest {
             new BatteryEntry.NameAndIcon("fakeName", /*icon=*/ null, /*iconId=*/ 1));
         mBatteryChartPreferenceController.setBatteryHistoryMap(
             createBatteryHistoryMap());
+    }
+
+    @Test
+    public void testOnResume_uiModeIsChanged_clearBatteryDiffEntryCache() {
+        doReturn(mResources).when(mContext).getResources();
+        doReturn(mConfiguration).when(mResources).getConfiguration();
+        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
+        // Ensures the testing environment is correct.
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+        mBatteryChartPreferenceController.onResume();
+        // Changes the uiMode in the configuration.
+        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_YES;
+
+        mBatteryChartPreferenceController.onResume();
+        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
+    }
+
+    @Test
+    public void testOnResume_uiModeIsNotChanged_notClearBatteryDiffEntryCache() {
+        doReturn(mResources).when(mContext).getResources();
+        doReturn(mConfiguration).when(mResources).getConfiguration();
+        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
+        // Ensures the testing environment is correct.
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+
+        mBatteryChartPreferenceController.onResume();
+        assertThat(BatteryDiffEntry.sResourceCache).isNotEmpty();
     }
 
     @Test
@@ -557,6 +589,51 @@ public final class BatteryChartPreferenceControllerTest {
 
         verify(mBatteryChartPreferenceController.mBatteryChartView)
             .setTimestamps(any());
+    }
+
+    @Test
+    public void testOnSaveInstanceState_restoreSelectedIndexAndExpandState() {
+        final int expectedIndex = 1;
+        final boolean isExpanded = true;
+        final Bundle bundle = new Bundle();
+        mBatteryChartPreferenceController.mTrapezoidIndex = expectedIndex;
+        mBatteryChartPreferenceController.mIsExpanded = isExpanded;
+        mBatteryChartPreferenceController.onSaveInstanceState(bundle);
+        // Replaces the original controller with other values.
+        mBatteryChartPreferenceController.mTrapezoidIndex = -1;
+        mBatteryChartPreferenceController.mIsExpanded = false;
+
+        mBatteryChartPreferenceController.onCreate(bundle);
+        mBatteryChartPreferenceController.setBatteryHistoryMap(
+             createBatteryHistoryMap());
+
+        assertThat(mBatteryChartPreferenceController.mTrapezoidIndex)
+            .isEqualTo(expectedIndex);
+        assertThat(mBatteryChartPreferenceController.mIsExpanded).isTrue();
+    }
+
+    @Test
+    public void testIsValidToShowSummary_returnExpectedResult() {
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowSummary("com.google.android.apps.scone"))
+            .isTrue();
+
+        // Verifies the item which is defined in the array list.
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowSummary("com.google.android.googlequicksearchbox"))
+            .isFalse();
+    }
+
+    @Test
+    public void testIsValidToShowEntry_returnExpectedResult() {
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowEntry("com.google.android.apps.scone"))
+            .isTrue();
+
+        // Verifies the items which are defined in the array list.
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowEntry("com.google.android.gms.persistent"))
+            .isFalse();
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> createBatteryHistoryMap() {

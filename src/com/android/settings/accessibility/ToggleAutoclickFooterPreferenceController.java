@@ -34,4 +34,9 @@ public class ToggleAutoclickFooterPreferenceController extends
     protected String getLabelName() {
         return mContext.getString(R.string.accessibility_autoclick_preference_title);
     }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_autoclick;
+    }
 }

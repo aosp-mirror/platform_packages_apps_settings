@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.hardware.SensorPrivacyManager;
+import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.service.attention.AttentionService;
@@ -53,6 +54,7 @@ public class AdaptiveSleepPreferenceController {
     private final PackageManager mPackageManager;
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final PowerManager mPowerManager;
 
     @VisibleForTesting
     RestrictedSwitchPreference mPreference;
@@ -62,6 +64,20 @@ public class AdaptiveSleepPreferenceController {
         mRestrictionUtils = restrictionUtils;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
+        mPowerManager = context.getSystemService(PowerManager.class);
+        mPreference = new RestrictedSwitchPreference(context);
+        mPreference.setTitle(R.string.adaptive_sleep_title);
+        mPreference.setSummary(R.string.adaptive_sleep_description);
+        mPreference.setChecked(isChecked());
+        mPreference.setKey(PREFERENCE_KEY);
+        mPreference.setOnPreferenceClickListener(preference -> {
+            final boolean isChecked = ((RestrictedSwitchPreference) preference).isChecked();
+            mMetricsFeatureProvider.action(context, SettingsEnums.ACTION_SCREEN_ATTENTION_CHANGED,
+                    isChecked);
+            Settings.Secure.putInt(context.getContentResolver(),
+                    Settings.Secure.ADAPTIVE_SLEEP, isChecked ? 1 : DEFAULT_VALUE);
+            return true;
+        });
         mPackageManager = context.getPackageManager();
     }
 
@@ -87,7 +103,8 @@ public class AdaptiveSleepPreferenceController {
         if (enforcedAdmin != null) {
             mPreference.setDisabledByAdmin(enforcedAdmin);
         } else {
-            mPreference.setEnabled(hasSufficientPermission(mPackageManager) && !isCameraLocked());
+            mPreference.setEnabled(hasSufficientPermission(mPackageManager) && !isCameraLocked()
+                    && !isPowerSaveMode());
         }
     }
 
@@ -114,7 +131,7 @@ public class AdaptiveSleepPreferenceController {
     @VisibleForTesting
     boolean isChecked() {
         return hasSufficientPermission(mContext.getPackageManager()) && !isCameraLocked()
-                && Settings.Secure.getInt(mContext.getContentResolver(),
+                && !isPowerSaveMode() && Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ADAPTIVE_SLEEP, DEFAULT_VALUE)
                 != DEFAULT_VALUE;
     }
@@ -126,6 +143,11 @@ public class AdaptiveSleepPreferenceController {
     @VisibleForTesting
     boolean isCameraLocked() {
         return mPrivacyManager.isSensorPrivacyEnabled(CAMERA);
+    }
+
+    @VisibleForTesting
+    boolean isPowerSaveMode() {
+        return mPowerManager.isPowerSaveMode();
     }
 
     public static int isControllerAvailable(Context context) {
