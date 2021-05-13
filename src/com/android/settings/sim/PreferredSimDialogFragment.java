@@ -23,6 +23,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -81,7 +82,12 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
     }
 
     private void updateDialog(AlertDialog dialog) {
+        Log.d(TAG, "Dialog updated, dismiss status: " + mWasDismissed);
+
         final SubscriptionInfo info = getPreferredSubscription();
+        if (mWasDismissed) {
+            return;
+        }
         if (info == null) {
             dismiss();
             return;
