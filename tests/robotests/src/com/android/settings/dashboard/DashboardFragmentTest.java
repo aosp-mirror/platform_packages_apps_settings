@@ -48,7 +48,6 @@ import androidx.preference.SwitchPreference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.homepage.HomepagePreference;
 import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.PrimarySwitchPreference;
@@ -56,7 +55,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.ActivityTile;
-import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProviderTile;
 
@@ -338,16 +336,6 @@ public class DashboardFragmentTest {
     }
 
     @Test
-    public void createPreference_isHomepageTile_returnHomepagePreference() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-        mActivityTile.setCategory(CategoryKey.CATEGORY_HOMEPAGE);
-
-        final Preference pref = mTestFragment.createPreference(mActivityTile);
-
-        assertThat(pref).isInstanceOf(HomepagePreference.class);
-    }
-
-    @Test
     public void isFeatureFlagAndIsParalleled_runParalleledUpdatePreferenceStates() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTROLLER_ENHANCEMENT, true);
         final TestFragment testFragment = spy(new TestFragment(RuntimeEnvironment.application));
@@ -472,7 +460,7 @@ public class DashboardFragmentTest {
             return mIsParalleled;
         }
 
-        public void setUsingControllerEnhancement(boolean isParalleled) {
+        void setUsingControllerEnhancement(boolean isParalleled) {
             mIsParalleled = isParalleled;
         }
     }

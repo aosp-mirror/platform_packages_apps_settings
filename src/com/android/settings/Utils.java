@@ -1211,6 +1211,14 @@ public final class Utils extends com.android.settingslib.Utils {
         return roundedBitmap;
     }
 
+    /**
+     * Returns the color of homepage preference icons.
+     */
+    @ColorInt
+    public static int getHomepageIconColor(Context context) {
+        return getColorAttrDefaultColor(context, android.R.attr.textColorPrimary);
+    }
+
     public static boolean isProviderModelEnabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
     }
