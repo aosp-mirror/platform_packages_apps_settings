@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceListItemSecondary"
         android:layout_marginTop="8dp"
-        android:layout_alignLeft="@id/title"
+        android:layout_alignStart="@id/title"
         android:layout_below="@id/title" />
 
     <ImageView
@@ -59,6 +59,6 @@
         android:layout_height="@dimen/accessibility_imageview_size"
         android:layout_marginTop="16dp"
         android:scaleType="fitStart"
-        android:layout_alignLeft="@id/title"
+        android:layout_alignStart="@id/title"
         android:layout_below="@id/summary"/>
 </com.android.settings.widget.CheckableRelativeLayout>
