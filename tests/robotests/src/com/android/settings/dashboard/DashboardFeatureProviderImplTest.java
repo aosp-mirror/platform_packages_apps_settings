@@ -672,18 +672,4 @@ public class DashboardFeatureProviderImplTest {
         assertThat(argument.getValue().getIdentifier()).isEqualTo(0);
         verify(mActivity, never()).getSupportFragmentManager();
     }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void bindPreference_specificHomepageTile_shouldOverridePosition() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, true);
-        final Preference preference = new Preference(RuntimeEnvironment.application);
-        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
-
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
-                MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
-                Preference.DEFAULT_ORDER);
-
-        assertThat(preference.getOrder()).isEqualTo(100);
-    }
 }
