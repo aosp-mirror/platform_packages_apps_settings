@@ -31,11 +31,11 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.security.SecuritySettings;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -61,7 +61,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
 
     private final LockPatternUtils mLockPatternUtils;
     private final TrustAgentManager mTrustAgentManager;
-    private final SecuritySettings mHost;
+    private final SettingsPreferenceFragment mHost;
 
     private Intent mTrustAgentClickIntent;
     private PreferenceCategory mSecurityCategory;
@@ -69,7 +69,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
     @VisibleForTesting
     final List<String> mTrustAgentsKeyList;
 
-    public TrustAgentListPreferenceController(Context context, SecuritySettings host,
+    public TrustAgentListPreferenceController(Context context, SettingsPreferenceFragment host,
             Lifecycle lifecycle) {
         super(context);
         final SecurityFeatureProvider provider = FeatureFactory.getFactory(context)

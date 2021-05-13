@@ -2887,6 +2887,7 @@
 
         <!-- Confirmation dialog for enabling notification access from CompanionDeviceManager -->
         <activity android:name=".notification.NotificationAccessConfirmationActivity"
+                  android:taskAffinity=".notification.NotificationAccessConfirmationActivity"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
 
         <receiver android:name="com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver"
