@@ -829,13 +829,14 @@ public class UserSettings extends SettingsPreferenceFragment
     /**
      * Erase the current user (guest) and switch to another user.
      */
-    private void exitGuest() {
+    @VisibleForTesting
+    void exitGuest() {
         // Just to be safe
-        mMetricsFeatureProvider.action(getActivity(),
-                SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED);
         if (!isCurrentUserGuest()) {
             return;
         }
+        mMetricsFeatureProvider.action(getActivity(),
+                SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED);
         removeThisUser();
     }
 

@@ -469,6 +469,19 @@ public final class Utils extends com.android.settingslib.Utils {
         return UserHandle.USER_NULL;
     }
 
+    /** Returns user ID of current user, throws IllegalStateException if it's not available. */
+    public static int getCurrentUserId(UserManager userManager, boolean isWorkProfile)
+            throws IllegalStateException {
+        if (isWorkProfile) {
+            final UserHandle managedUserHandle = getManagedProfile(userManager);
+            if (managedUserHandle == null) {
+                throw new IllegalStateException("Work profile user ID is not available.");
+            }
+            return managedUserHandle.getIdentifier();
+        }
+        return UserHandle.myUserId();
+    }
+
     /**
      * Returns the target user for a Settings activity.
      * <p>
