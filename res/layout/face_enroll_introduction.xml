@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2019 The Android Open Source Project
+  ~ Copyright (C) 2021 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
   ~ distributed under the License is distributed on an "AS IS" BASIS,
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
+  ~ limitations under the License.
   -->
 
 <com.google.android.setupdesign.GlifLayout
@@ -32,13 +32,6 @@
         android:orientation="vertical">
 
         <com.google.android.setupdesign.view.RichTextView
-            android:id="@+id/sud_layout_description"
-            style="@style/SudDescription.Glif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/security_settings_face_enroll_introduction_message"/>
-
-        <com.google.android.setupdesign.view.RichTextView
             android:id="@+id/error_text"
             style="@style/SudDescription.Glif"
             android:layout_width="match_parent"
@@ -48,7 +41,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="12dp">
+            android:layout_marginBottom="12dp">
 
             <com.google.android.setupdesign.view.IllustrationVideoView
                 android:id="@+id/illustration_normal"
@@ -67,23 +60,35 @@
             android:layout_gravity="center_horizontal|bottom"
             android:paddingTop="12dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/security_settings_face_enroll_introduction_info_title"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="20sp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="24dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_info_outline_24dp">
-                </ImageView>
+                    android:background="@drawable/ic_face_enroll_introduction_glasses"/>
+
                 <Space
-                    android:layout_width="24dp"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/security_settings_face_enroll_introduction_footer_part_0"/>
+                    android:text="@string/security_settings_face_enroll_introduction_info_glasses"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4sp"/>
 
             </LinearLayout>
 
@@ -96,15 +101,19 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_face_enroll_introduction_shield">
-                </ImageView>
+                    android:background="@drawable/ic_face_enroll_introduction_visibility"/>
+
                 <Space
-                    android:layout_width="24dp"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/security_settings_face_enroll_introduction_footer_part_1"/>
+                    android:text="@string/security_settings_face_enroll_introduction_info_looking"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4sp"/>
 
             </LinearLayout>
 
@@ -117,37 +126,67 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_face_enroll_introduction_visibility">
-                </ImageView>
+                    android:background="@drawable/ic_face_enroll_introduction_shield"/>
+
                 <Space
-                    android:layout_width="24dp"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"/>
+
                 <TextView
-                    android:id="@+id/face_enroll_introduction_footer_part_2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="@string/security_settings_face_enroll_introduction_info_security"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4sp"/>
 
             </LinearLayout>
 
-            <LinearLayout
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="24dp">
+                android:text="@string/security_settings_face_enroll_introduction_how_title"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="20sp"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_face_enroll_introduction_people">
-                </ImageView>
-                <Space
-                    android:layout_width="24dp"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/security_settings_face_enroll_introduction_footer_part_3"/>
-            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/security_settings_face_enroll_introduction_how_message"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp"
+                android:lineSpacingExtra="2sp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/security_settings_face_enroll_introduction_control_title"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="20sp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/security_settings_face_enroll_introduction_control_message"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp"
+                android:lineSpacingExtra="2sp"/>
 
         </LinearLayout>
 
