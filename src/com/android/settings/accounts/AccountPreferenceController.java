@@ -325,10 +325,10 @@ public class AccountPreferenceController extends AbstractPreferenceController
                         mFragment.getPreferenceManager().getContext());
         preferenceGroup.setOrder(mAccountProfileOrder++);
         if (isSingleProfile()) {
-            preferenceGroup.setTitle(context.getString(R.string.account_for_section_header,
-                    BidiFormatter.getInstance().unicodeWrap(userInfo.name)));
-            preferenceGroup.setContentDescription(
-                    mContext.getString(R.string.account_settings));
+            final String title = context.getString(R.string.account_for_section_header,
+                    BidiFormatter.getInstance().unicodeWrap(userInfo.name));
+            preferenceGroup.setTitle(title);
+            preferenceGroup.setContentDescription(title);
         } else if (userInfo.isManagedProfile()) {
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 preferenceGroup.setTitle(R.string.category_work);
