@@ -63,9 +63,11 @@ public class SecondaryUserController extends AbstractPreferenceController implem
      *
      * @param context     Context for initializing the preference controllers.
      * @param userManager UserManagerWrapper for figuring out which controllers to add.
+     * @param isWorkProfileOnly only shows secondary users of work profile.
+     *                          (e.g., it should be true in work profile tab)
      */
     public static List<AbstractPreferenceController> getSecondaryUserControllers(
-            Context context, UserManager userManager) {
+            Context context, UserManager userManager, boolean isWorkProfileOnly) {
 
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         UserInfo primaryUser = userManager.getPrimaryUser();
@@ -77,7 +79,11 @@ public class SecondaryUserController extends AbstractPreferenceController implem
                 continue;
             }
 
-            if (info == null || Utils.isProfileOf(primaryUser, info)) {
+            if (Utils.isProfileOf(primaryUser, info)) {
+                continue;
+            }
+
+            if (isWorkProfileOnly && !info.isManagedProfile()) {
                 continue;
             }
 

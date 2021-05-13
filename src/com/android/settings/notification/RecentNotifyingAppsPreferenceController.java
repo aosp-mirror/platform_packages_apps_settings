@@ -29,7 +29,6 @@ import android.os.UserManager;
 import android.service.notification.NotifyingApp;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Slog;
 
@@ -56,8 +55,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * This controller displays a list of recently used apps and a "See all" button. If there is
@@ -149,9 +146,12 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
     @VisibleForTesting
     void refreshUi(Context prefContext) {
-        ((PrimarySwitchPreference) mCategory.findPreference(KEY_PLACEHOLDER + 1)).setChecked(true);
-        ((PrimarySwitchPreference) mCategory.findPreference(KEY_PLACEHOLDER + 2)).setChecked(true);
-        ((PrimarySwitchPreference) mCategory.findPreference(KEY_PLACEHOLDER + 3)).setChecked(true);
+        for (int i = 1; i <= SHOW_RECENT_APP_COUNT; i++) {
+            PrimarySwitchPreference app = mCategory.findPreference(KEY_PLACEHOLDER + i);
+            if (app != null) {
+                app.setChecked(true);
+            }
+        }
         ThreadUtils.postOnBackgroundThread(() -> {
             reloadData();
             final List<NotifyingApp> recentApps = getDisplayableRecentAppList();
