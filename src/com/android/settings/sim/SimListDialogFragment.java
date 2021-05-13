@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ import java.util.List;
  */
 public class SimListDialogFragment extends SimDialogFragment implements
         DialogInterface.OnClickListener {
+    private static final String TAG = "SimListDialogFragment";
     protected static final String KEY_INCLUDE_ASK_EVERY_TIME = "include_ask_every_time";
 
     protected SelectSubscriptionAdapter mAdapter;
@@ -101,9 +103,13 @@ public class SimListDialogFragment extends SimDialogFragment implements
 
     @Override
     public void updateDialog() {
+        Log.d(TAG, "Dialog updated, dismiss status: " + mWasDismissed);
+
         List<SubscriptionInfo> currentSubscriptions = getCurrentSubscriptions();
         if (currentSubscriptions == null) {
-            dismiss();
+            if (!mWasDismissed) {
+                dismiss();
+            }
             return;
         }
         if (getArguments().getBoolean(KEY_INCLUDE_ASK_EVERY_TIME)) {
