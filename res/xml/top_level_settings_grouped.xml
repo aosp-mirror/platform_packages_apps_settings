@@ -86,7 +86,7 @@
         android:key="top_level_display"
         android:order="-80"
         android:title="@string/display_settings"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/display_dashboard_summary"
         settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
     <com.android.settingslib.RestrictedTopLevelPreference
@@ -112,7 +112,7 @@
         android:key="top_level_security"
         android:order="-50"
         android:title="@string/security_settings_title"
-        android:summary="@string/security_dashboard_summary_biometric"
+        android:summary="@string/security_dashboard_summary"
         settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
 
     <Preference
