@@ -76,6 +76,8 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
      * frameworks/base/core/res/res/values/config.xml
      */
     @VisibleForTesting
+    static final int KEY_CHORD_POWER_VOLUME_UP_NO_ACTION = 0;
+    @VisibleForTesting
     static final int KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE = 1;
     @VisibleForTesting
     static final int KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS = 2;
@@ -88,6 +90,9 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
      */
     private static final int POWER_BUTTON_LONG_PRESS_DEFAULT_VALUE_RESOURCE =
             R.integer.config_longPressOnPowerBehavior;
+
+    private static final int KEY_CHORD_POWER_VOLUME_UP_DEFAULT_VALUE_RESOURCE =
+            R.integer.config_keyChordPowerVolumeUp;
 
     @Nullable
     private SettingObserver mSettingsObserver;
@@ -177,10 +182,20 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
      * should show the power menu.
      */
     private boolean setPowerVolumeChordValue(boolean isPowerButtonLongPressChecked) {
+        if (isPowerButtonLongPressChecked) {
+            return Settings.Global.putInt(mContext.getContentResolver(),
+                    KEY_CHORD_POWER_VOLUME_UP_SETTING, KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS);
+        }
+
+        // If the key chord defaults to mute toggle, we restore that setting if LPP option is
+        // disabled. Otherwise we default to no action.
+        boolean isMuteToggleKeyChordDefault = mContext.getResources().getInteger(
+                KEY_CHORD_POWER_VOLUME_UP_DEFAULT_VALUE_RESOURCE)
+                == KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE;
         return Settings.Global.putInt(mContext.getContentResolver(),
-                KEY_CHORD_POWER_VOLUME_UP_SETTING, isPowerButtonLongPressChecked
-                        ? KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS
-                        : KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE);
+                KEY_CHORD_POWER_VOLUME_UP_SETTING, isMuteToggleKeyChordDefault
+                        ? KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE
+                        : KEY_CHORD_POWER_VOLUME_UP_NO_ACTION);
     }
 
     /**
