@@ -72,6 +72,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         if (mCanAssumeUdfps) {
             setHeaderText(R.string.security_settings_udfps_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_udfps_enroll_find_sensor_message);
+            final CharSequence description = getString(R.string.security_settings_udfps_enroll_find_sensor_a11y);
+            getLayout().getDescriptionTextView().setContentDescription(description);
         } else {
             setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
