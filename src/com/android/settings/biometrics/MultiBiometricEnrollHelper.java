@@ -67,7 +67,7 @@ public class MultiBiometricEnrollHelper {
 
     private void launchFaceEnroll() {
         final FaceManager faceManager = mActivity.getSystemService(FaceManager.class);
-        faceManager.generateChallenge((sensorId, challenge) -> {
+        faceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
             final byte[] hardwareAuthToken = BiometricUtils.requestGatekeeperHat(mActivity,
                     mGkPwHandle, mUserId, challenge);
             final Intent faceIntent = BiometricUtils.getFaceIntroIntent(mActivity,
@@ -96,7 +96,7 @@ public class MultiBiometricEnrollHelper {
     private void launchFingerprintEnroll() {
         final FingerprintManager fingerprintManager = mActivity
                 .getSystemService(FingerprintManager.class);
-        fingerprintManager.generateChallenge(mUserId, ((sensorId, challenge) -> {
+        fingerprintManager.generateChallenge(mUserId, ((sensorId, userId, challenge) -> {
             final byte[] hardwareAuthToken = BiometricUtils.requestGatekeeperHat(mActivity,
                     mGkPwHandle, mUserId, challenge);
             final Intent intent = BiometricUtils.getFingerprintIntroIntent(mActivity,

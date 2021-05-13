@@ -50,11 +50,14 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.accessibility.AccessibilityEditDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -221,8 +224,11 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             case DialogEnums.EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getPrefContext().getString(
                         R.string.accessibility_shortcut_title, mPackageName);
+                final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
+                        ? DialogType.EDIT_SHORTCUT_GENERIC_SUW : DialogType.EDIT_SHORTCUT_GENERIC;
                 dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
-                        getPrefContext(), dialogTitle, this::callOnAlertDialogCheckboxClicked);
+                        getPrefContext(), dialogType, dialogTitle,
+                        this::callOnAlertDialogCheckboxClicked);
                 setupEditShortcutDialog(dialog);
                 return dialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
@@ -304,6 +310,11 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     }
 
     @Override
+    public int getHelpResource() {
+        return 0;
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         removeActionBarToggleSwitch();
@@ -379,8 +390,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     /** Customizes the order by preference key. */
     protected List<String> getPreferenceOrderList() {
         final List<String> lists = new ArrayList<>();
-        lists.add(KEY_USE_SERVICE_PREFERENCE);
         lists.add(KEY_ANIMATED_IMAGE);
+        lists.add(KEY_USE_SERVICE_PREFERENCE);
         lists.add(KEY_GENERAL_CATEGORY);
         lists.add(KEY_HTML_DESCRIPTION_PREFERENCE);
         return lists;
@@ -508,7 +519,13 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 new AccessibilityFooterPreference(screen.getContext());
         htmlFooterPreference.setKey(KEY_HTML_DESCRIPTION_PREFERENCE);
         htmlFooterPreference.setSummary(htmlDescription);
-        htmlFooterPreference.setLinkEnabled(false);
+        // Only framework tools support help link
+        if (getHelpResource() != 0) {
+            htmlFooterPreference.appendHelpLink(getHelpResource());
+            htmlFooterPreference.setLinkEnabled(true);
+        } else {
+            htmlFooterPreference.setLinkEnabled(false);
+        }
         htmlFooterPreference.setIconContentDescription(iconContentDescription);
         screen.addPreference(htmlFooterPreference);
     }
@@ -542,6 +559,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 new AccessibilityFooterPreference(screen.getContext());
         footerPreference.setSummary(summary);
         footerPreference.setIconContentDescription(iconContentDescription);
+        if (getHelpResource() != 0) {
+            footerPreference.appendHelpLink(getHelpResource());
+            footerPreference.setLinkEnabled(true);
+        }
         screen.addPreference(footerPreference);
     }
 

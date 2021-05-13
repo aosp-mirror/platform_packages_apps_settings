@@ -49,6 +49,7 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settings.wifi.WifiDialogActivity;
 import com.android.settings.wifi.WifiSettings;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -176,7 +177,8 @@ public class WifiSlice implements CustomSliceable {
         }
 
         final Drawable drawable = mContext.getDrawable(
-                com.android.settingslib.Utils.getWifiIconResource(wifiSliceItem.getLevel()));
+                WifiUtils.getInternetIconResource(wifiSliceItem.getLevel(),
+                        wifiSliceItem.shouldShowXLevelIcon()));
         drawable.setTint(tint);
         return Utils.createIconWithDrawable(drawable);
     }

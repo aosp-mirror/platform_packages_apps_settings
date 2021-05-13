@@ -23,16 +23,14 @@
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
-        android:order="-10000"
-        settings:allowDividerBelow="true"/>
+        android:order="-10000"/>
 
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         android:order="-9999"/>
 
     <PreferenceCategory
-        android:title="@string/battery_detail_manage_title"
-        settings:allowDividerAbove="true">
+        android:title="@string/battery_detail_manage_title">
 
         <com.android.settingslib.RestrictedPreference
             android:key="background_activity"

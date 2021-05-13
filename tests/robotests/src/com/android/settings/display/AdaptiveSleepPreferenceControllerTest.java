@@ -83,9 +83,10 @@ public class AdaptiveSleepPreferenceControllerTest {
         when(mRestrictionUtils.checkIfRestrictionEnforced(any(),
                 eq(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT))).thenReturn(null);
 
-        mController = new AdaptiveSleepPreferenceController(mContext, mRestrictionUtils);
+        mController = spy(new AdaptiveSleepPreferenceController(mContext, mRestrictionUtils));
         mController.initializePreference();
         when(mController.isCameraLocked()).thenReturn(false);
+        when(mController.isPowerSaveMode()).thenReturn(false);
     }
 
     @Test
@@ -174,4 +175,14 @@ public class AdaptiveSleepPreferenceControllerTest {
 
         assertThat(mController.mPreference.isEnabled()).isFalse();
     }
+
+    @Test
+    public void addToScreen_powerSaveEnabled_disablePreference() {
+        when(mController.isPowerSaveMode()).thenReturn(true);
+
+        mController.addToScreen(mScreen);
+
+        assertThat(mController.mPreference.isEnabled()).isFalse();
+    }
+
 }
