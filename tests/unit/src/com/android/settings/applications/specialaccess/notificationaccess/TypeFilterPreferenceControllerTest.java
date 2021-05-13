@@ -152,7 +152,7 @@ public class TypeFilterPreferenceControllerTest {
     public void updateState_enabled_metaData_disableFilter_notThisField() {
         mSi.metaData = new Bundle();
         mSi.metaData.putCharSequence(NotificationListenerService.META_DATA_DISABLED_FILTER_TYPES, 
-                "1,alerting");
+                "1|alerting");
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(new NotificationListenerFilter());
         CheckBoxPreference pref = new CheckBoxPreference(mContext);
@@ -165,7 +165,7 @@ public class TypeFilterPreferenceControllerTest {
     public void updateState_enabled_metaData_disableFilter_thisField_stateIsChecked() {
         mSi.metaData = new Bundle();
         mSi.metaData.putCharSequence(NotificationListenerService.META_DATA_DISABLED_FILTER_TYPES,
-                "conversations,2,32");
+                "conversations|2|32");
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(
                 new NotificationListenerFilter(32, new ArraySet<>()));
@@ -189,7 +189,7 @@ public class TypeFilterPreferenceControllerTest {
     public void updateState_disabled_metaData_disableFilter_thisField_stateIsNotChecked() {
         mSi.metaData = new Bundle();
         mSi.metaData.putCharSequence(NotificationListenerService.META_DATA_DISABLED_FILTER_TYPES,
-                "1,2,32");
+                "1|2|32");
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
         NotificationListenerFilter before = new NotificationListenerFilter(4, new ArraySet<>());
         when(mNm.getListenerFilter(mCn, 0)).thenReturn(before);
