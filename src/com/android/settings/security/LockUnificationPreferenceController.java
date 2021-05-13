@@ -33,6 +33,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
@@ -67,7 +68,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
     private final DevicePolicyManager mDpm;
     private final LockPatternUtils mLockPatternUtils;
     private final int mProfileUserId;
-    private final SecuritySettings mHost;
+    private final SettingsPreferenceFragment mHost;
 
     private RestrictedSwitchPreference mUnifyProfile;
 
@@ -82,7 +83,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         mUnifyProfile = screen.findPreference(KEY_UNIFICATION);
     }
 
-    public LockUnificationPreferenceController(Context context, SecuritySettings host) {
+    public LockUnificationPreferenceController(Context context, SettingsPreferenceFragment host) {
         super(context);
         mHost = host;
         mUm = context.getSystemService(UserManager.class);
@@ -175,7 +176,10 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
                 .launch();
     }
 
-    void startUnification() {
+    /**
+     * Unify primary and profile locks.
+     */
+    public void startUnification() {
         // Confirm profile lock
         final String title = mContext.getString(
                 R.string.unlock_set_unlock_launch_picker_title_profile);

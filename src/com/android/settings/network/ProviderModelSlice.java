@@ -43,6 +43,7 @@ import com.android.settings.network.telephony.NetworkProviderWorker;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.slice.WifiSlice;
 import com.android.settings.wifi.slice.WifiSliceItem;
 import com.android.wifitrackerlib.WifiEntry;
@@ -255,7 +256,8 @@ public class ProviderModelSlice extends WifiSlice {
             final @ColorInt int tint = Utils.getColorAttrDefaultColor(mContext,
                     android.R.attr.colorControlNormal);
             final Drawable drawable = mContext.getDrawable(
-                    Utils.getWifiIconResource(wifiSliceItem.getLevel()));
+                    WifiUtils.getInternetIconResource(
+                            wifiSliceItem.getLevel(), wifiSliceItem.shouldShowXLevelIcon()));
             drawable.setTint(tint);
             return Utils.createIconWithDrawable(drawable);
         }

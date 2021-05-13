@@ -73,6 +73,10 @@ public class StorageSelectionPreferenceController extends BasePreferenceControll
         Collections.sort(mStorageEntries);
         mStorageEntries.addAll(storageEntries);
         mStorageAdapter.addAll(storageEntries);
+
+        if (mSpinnerPreference != null) {
+            mSpinnerPreference.setClickable(mStorageAdapter.getCount() > 1);
+        }
     }
 
     /** set selected storage in the spinner. */
@@ -93,6 +97,7 @@ public class StorageSelectionPreferenceController extends BasePreferenceControll
         mSpinnerPreference = screen.findPreference(getPreferenceKey());
         mSpinnerPreference.setAdapter(mStorageAdapter);
         mSpinnerPreference.setOnItemSelectedListener(this);
+        mSpinnerPreference.setClickable(mStorageAdapter.getCount() > 1);
     }
 
     @Override
@@ -100,7 +105,8 @@ public class StorageSelectionPreferenceController extends BasePreferenceControll
         if (mOnItemSelectedListener == null) {
             return;
         }
-        mOnItemSelectedListener.onItemSelected(mStorageAdapter.getItem(position));
+        mOnItemSelectedListener.onItemSelected(
+                (StorageEntry) mSpinnerPreference.getSelectedItem());
     }
 
     @Override
