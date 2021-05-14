@@ -236,16 +236,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mBatteryHistoryLevels = null;
             return;
         }
-        // Generates battery history timestamp slots.
-        final List<Long> batteryHistoryKeyList =
-            new ArrayList<>(batteryHistoryMap.keySet());
-        Collections.sort(batteryHistoryKeyList);
-        mBatteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
-        for (int index = 0; index < CHART_KEY_ARRAY_SIZE; index++) {
-            mBatteryHistoryKeys[index] = batteryHistoryKeyList.get(index);
-        }
-
-        // Generates the battery history levels for chart graph.
+        mBatteryHistoryKeys = getBatteryHistoryKeys(batteryHistoryMap);
         mBatteryHistoryLevels = new int[CHART_LEVEL_ARRAY_SIZE];
         for (int index = 0; index < CHART_LEVEL_ARRAY_SIZE; index++) {
             final long timestamp = mBatteryHistoryKeys[index * 2];
@@ -273,7 +264,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
         Log.d(TAG, String.format(
             "setBatteryHistoryMap() size=%d\nkeys=%s\nlevels=%s",
-            batteryHistoryKeyList.size(),
+            batteryHistoryMap.size(),
             utcToLocalTime(mBatteryHistoryKeys),
             Arrays.toString(mBatteryHistoryLevels)));
     }
@@ -598,5 +589,17 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return false;
         }
         return true;
+    }
+
+    private static long[] getBatteryHistoryKeys(
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+        final List<Long> batteryHistoryKeyList =
+            new ArrayList<>(batteryHistoryMap.keySet());
+        Collections.sort(batteryHistoryKeyList);
+        final long[] batteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
+        for (int index = 0; index < CHART_KEY_ARRAY_SIZE; index++) {
+            batteryHistoryKeys[index] = batteryHistoryKeyList.get(index);
+        }
+        return batteryHistoryKeys;
     }
 }
