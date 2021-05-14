@@ -68,7 +68,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
 
     @Override
     protected String getEnrollClassName() {
-        return mContext.getResources().getString(R.string.config_face_enroll_introduction);
+        return FaceEnrollIntroduction.class.getName();
     }
 
 }
