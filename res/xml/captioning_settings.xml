@@ -21,12 +21,6 @@
     android:persistent="false"
     android:title="@string/accessibility_captioning_title">
 
-    <com.android.settings.widget.SettingsMainSwitchPreference
-        android:key="captioning_preference_switch"
-        android:persistent="false"
-        android:summary="@string/accessibility_caption_primary_switch_summary"
-        android:title="@string/accessibility_caption_primary_switch_title" />
-
     <com.android.settingslib.widget.LayoutPreference
         android:key="captions_preview"
         android:layout="@layout/accessibility_captions_preview"
@@ -34,6 +28,12 @@
         android:selectable="false"
         android:title="@string/summary_placeholder"
         settings:searchable="false" />
+
+    <com.android.settings.widget.SettingsMainSwitchPreference
+        android:key="captioning_preference_switch"
+        android:persistent="false"
+        android:summary="@string/accessibility_caption_primary_switch_summary"
+        android:title="@string/accessibility_caption_primary_switch_title" />
 
     <Preference
         android:fragment="com.android.settings.accessibility.CaptionAppearanceFragment"

@@ -29,7 +29,10 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.text.format.DateUtils;
 
 import androidx.preference.Preference;
@@ -62,6 +65,8 @@ import java.util.TimeZone;
 public final class BatteryChartPreferenceControllerTest {
     private static final String PREF_KEY = "pref_key";
     private static final String PREF_SUMMARY = "fake preference summary";
+    private static final int DESIRED_HISTORY_SIZE =
+        BatteryChartPreferenceController.DESIRED_HISTORY_SIZE;
 
     @Mock private InstrumentedPreferenceFragment mFragment;
     @Mock private SettingsActivity mSettingsActivity;
@@ -73,6 +78,8 @@ public final class BatteryChartPreferenceControllerTest {
     @Mock private PowerGaugePreference mPowerGaugePreference;
     @Mock private ExpandDividerPreference mExpandDividerPreference;
     @Mock private BatteryUtils mBatteryUtils;
+    @Mock private Configuration mConfiguration;
+    @Mock private Resources mResources;
 
     private Context mContext;
     private BatteryDiffEntry mBatteryDiffEntry;
@@ -98,7 +105,34 @@ public final class BatteryChartPreferenceControllerTest {
             "fakeBatteryDiffEntryKey",
             new BatteryEntry.NameAndIcon("fakeName", /*icon=*/ null, /*iconId=*/ 1));
         mBatteryChartPreferenceController.setBatteryHistoryMap(
-            createBatteryHistoryMap(/*size=*/ 5));
+            createBatteryHistoryMap());
+    }
+
+    @Test
+    public void testOnResume_uiModeIsChanged_clearBatteryDiffEntryCache() {
+        doReturn(mResources).when(mContext).getResources();
+        doReturn(mConfiguration).when(mResources).getConfiguration();
+        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
+        // Ensures the testing environment is correct.
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+        mBatteryChartPreferenceController.onResume();
+        // Changes the uiMode in the configuration.
+        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_YES;
+
+        mBatteryChartPreferenceController.onResume();
+        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
+    }
+
+    @Test
+    public void testOnResume_uiModeIsNotChanged_notClearBatteryDiffEntryCache() {
+        doReturn(mResources).when(mContext).getResources();
+        doReturn(mConfiguration).when(mResources).getConfiguration();
+        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
+        // Ensures the testing environment is correct.
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+
+        mBatteryChartPreferenceController.onResume();
+        assertThat(BatteryDiffEntry.sResourceCache).isNotEmpty();
     }
 
     @Test
@@ -142,19 +176,19 @@ public final class BatteryChartPreferenceControllerTest {
     @Test
     public void testSetBatteryHistoryMap_createExpectedKeysAndLevels() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(
-            createBatteryHistoryMap(/*size=*/ 5));
+            createBatteryHistoryMap());
 
         // Verifies the created battery keys array.
-        for (int index = 0; index < 25; index++) {
+        for (int index = 0; index < DESIRED_HISTORY_SIZE; index++) {
             assertThat(mBatteryChartPreferenceController.mBatteryHistoryKeys[index])
                 // These values is are calculated by hand from createBatteryHistoryMap().
-                .isEqualTo(index < 20 ? 0 : (index - 20 + 1));
+                .isEqualTo(index + 1);
         }
         // Verifies the created battery levels array.
         for (int index = 0; index < 13; index++) {
             assertThat(mBatteryChartPreferenceController.mBatteryHistoryLevels[index])
                 // These values is are calculated by hand from createBatteryHistoryMap().
-                .isEqualTo(index < 10 ? 0 : (100 - (index - 10) * 2));
+                .isEqualTo(100 - index * 2);
         }
         assertThat(mBatteryChartPreferenceController.mBatteryIndexedMap).hasSize(13);
     }
@@ -162,10 +196,10 @@ public final class BatteryChartPreferenceControllerTest {
     @Test
     public void testSetBatteryHistoryMap_largeSize_createExpectedKeysAndLevels() {
         mBatteryChartPreferenceController.setBatteryHistoryMap(
-            createBatteryHistoryMap(/*size=*/ 25));
+            createBatteryHistoryMap());
 
         // Verifies the created battery keys array.
-        for (int index = 0; index < 25; index++) {
+        for (int index = 0; index < DESIRED_HISTORY_SIZE; index++) {
           assertThat(mBatteryChartPreferenceController.mBatteryHistoryKeys[index])
               // These values is are calculated by hand from createBatteryHistoryMap().
               .isEqualTo(index + 1);
@@ -214,7 +248,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mTrapezoidIndex =
             BatteryChartView.SELECTED_INDEX_INVALID;
         mBatteryChartPreferenceController.setBatteryHistoryMap(
-            createBatteryHistoryMap(/*size=*/ 25));
+            createBatteryHistoryMap());
 
         assertThat(mBatteryChartPreferenceController.mTrapezoidIndex)
             .isEqualTo(BatteryChartView.SELECTED_INDEX_ALL);
@@ -427,31 +461,6 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
-    public void testValidateSlotTimestamp_emptyContent_returnTrue() {
-        assertThat(BatteryChartPreferenceController.validateSlotTimestamp(
-            new ArrayList<Long>())).isTrue();
-    }
-
-    @Test
-    public void testValidateSlotTimestamp_returnExpectedResult() {
-        final ArrayList<Long> slotTimestampList = new ArrayList<Long>(
-            Arrays.asList(
-                Long.valueOf(0),
-                Long.valueOf(DateUtils.HOUR_IN_MILLIS),
-                Long.valueOf(DateUtils.HOUR_IN_MILLIS * 2 + DateUtils.MINUTE_IN_MILLIS),
-                Long.valueOf(DateUtils.HOUR_IN_MILLIS * 3 + DateUtils.MINUTE_IN_MILLIS * 2)));
-        // Verifies the testing data is correct before we added invalid data into it.
-        assertThat(BatteryChartPreferenceController.validateSlotTimestamp(slotTimestampList))
-            .isTrue();
-
-        // Insert invalid timestamp into the list.
-        slotTimestampList.add(
-            Long.valueOf(DateUtils.HOUR_IN_MILLIS * 4 + DateUtils.MINUTE_IN_MILLIS * 6));
-        assertThat(BatteryChartPreferenceController.validateSlotTimestamp(slotTimestampList))
-            .isFalse();
-    }
-
-    @Test
     public void testOnExpand_expandedIsTrue_addSystemEntriesToPreferenceGroup() {
         doReturn(1).when(mAppListGroup).getPreferenceCount();
         mBatteryChartPreferenceController.mSystemEntries.add(mBatteryDiffEntry);
@@ -582,13 +591,60 @@ public final class BatteryChartPreferenceControllerTest {
             .setTimestamps(any());
     }
 
-    private static Map<Long, List<BatteryHistEntry>> createBatteryHistoryMap(int size) {
-        final Map<Long, List<BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
-        for (int index = 0; index < size; index++) {
+    @Test
+    public void testOnSaveInstanceState_restoreSelectedIndexAndExpandState() {
+        final int expectedIndex = 1;
+        final boolean isExpanded = true;
+        final Bundle bundle = new Bundle();
+        mBatteryChartPreferenceController.mTrapezoidIndex = expectedIndex;
+        mBatteryChartPreferenceController.mIsExpanded = isExpanded;
+        mBatteryChartPreferenceController.onSaveInstanceState(bundle);
+        // Replaces the original controller with other values.
+        mBatteryChartPreferenceController.mTrapezoidIndex = -1;
+        mBatteryChartPreferenceController.mIsExpanded = false;
+
+        mBatteryChartPreferenceController.onCreate(bundle);
+        mBatteryChartPreferenceController.setBatteryHistoryMap(
+             createBatteryHistoryMap());
+
+        assertThat(mBatteryChartPreferenceController.mTrapezoidIndex)
+            .isEqualTo(expectedIndex);
+        assertThat(mBatteryChartPreferenceController.mIsExpanded).isTrue();
+    }
+
+    @Test
+    public void testIsValidToShowSummary_returnExpectedResult() {
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowSummary("com.google.android.apps.scone"))
+            .isTrue();
+
+        // Verifies the item which is defined in the array list.
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowSummary("com.google.android.googlequicksearchbox"))
+            .isFalse();
+    }
+
+    @Test
+    public void testIsValidToShowEntry_returnExpectedResult() {
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowEntry("com.google.android.apps.scone"))
+            .isTrue();
+
+        // Verifies the items which are defined in the array list.
+        assertThat(mBatteryChartPreferenceController
+                .isValidToShowEntry("com.google.android.gms.persistent"))
+            .isFalse();
+    }
+
+    private static Map<Long, Map<String, BatteryHistEntry>> createBatteryHistoryMap() {
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
+        for (int index = 0; index < DESIRED_HISTORY_SIZE; index++) {
             final ContentValues values = new ContentValues();
             values.put("batteryLevel", Integer.valueOf(100 - index));
             final BatteryHistEntry entry = new BatteryHistEntry(values);
-            batteryHistoryMap.put(Long.valueOf(index + 1), Arrays.asList(entry));
+            final Map<String, BatteryHistEntry> entryMap = new HashMap<>();
+            entryMap.put("fake_entry_key" + index, entry);
+            batteryHistoryMap.put(Long.valueOf(index + 1), entryMap);
         }
         return batteryHistoryMap;
     }

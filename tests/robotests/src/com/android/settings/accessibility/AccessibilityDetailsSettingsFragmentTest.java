@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_BUTTON_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -85,7 +86,18 @@ public class AccessibilityDetailsSettingsFragmentTest {
     }
 
     @Test
-    public void onCreate_hasValidExtraComponentName_launchExpectedFragmentAndFinish() {
+    public void onCreate_afterSuccessfullyLaunch_shouldBeFinished() {
+        final Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME);
+        doReturn(intent).when(mActivity).getIntent();
+
+        mFragment.onCreate(Bundle.EMPTY);
+
+        verify(mActivity).finish();
+    }
+
+    @Test
+    public void onCreate_hasValidExtraComponentName_launchExpectedFragment() {
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME);
         doReturn(intent).when(mActivity).getIntent();
@@ -94,11 +106,10 @@ public class AccessibilityDetailsSettingsFragmentTest {
 
         assertStartActivityWithExpectedFragment(mActivity,
                 ToggleAccessibilityServicePreferenceFragment.class.getName());
-        verify(mActivity).finish();
     }
 
     @Test
-    public void onCreate_hasInvalidExtraComponentName_launchAccessibilitySettingsAndFinish() {
+    public void onCreate_hasInvalidExtraComponentName_launchAccessibilitySettings() {
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME, PACKAGE_NAME + "/.service");
         doReturn(intent).when(mActivity).getIntent();
@@ -106,22 +117,20 @@ public class AccessibilityDetailsSettingsFragmentTest {
         mFragment.onCreate(Bundle.EMPTY);
 
         assertStartActivityWithExpectedFragment(mActivity, AccessibilitySettings.class.getName());
-        verify(mActivity).finish();
     }
 
     @Test
-    public void onCreate_hasNoExtraComponentName_launchAccessibilitySettingsAndFinish() {
+    public void onCreate_hasNoExtraComponentName_launchAccessibilitySettings() {
         final Intent intent = new Intent();
         doReturn(intent).when(mActivity).getIntent();
 
         mFragment.onCreate(Bundle.EMPTY);
 
         assertStartActivityWithExpectedFragment(mActivity, AccessibilitySettings.class.getName());
-        verify(mActivity).finish();
     }
 
     @Test
-    public void onCreate_extraComponentNameIsDisallowed_launchAccessibilitySettingsAndFinish() {
+    public void onCreate_extraComponentNameIsDisallowed_launchAccessibilitySettings() {
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME);
         doReturn(intent).when(mActivity).getIntent();
@@ -130,11 +139,10 @@ public class AccessibilityDetailsSettingsFragmentTest {
         mFragment.onCreate(Bundle.EMPTY);
 
         assertStartActivityWithExpectedFragment(mActivity, AccessibilitySettings.class.getName());
-        verify(mActivity).finish();
     }
 
     @Test
-    public void onCreate_magnificationComponentName_launchMagnificationFragmentAndFinish() {
+    public void onCreate_magnificationComponentName_launchMagnificationFragment() {
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME,
                 MAGNIFICATION_COMPONENT_NAME.flattenToString());
@@ -145,7 +153,19 @@ public class AccessibilityDetailsSettingsFragmentTest {
 
         assertStartActivityWithExpectedFragment(mActivity,
                 ToggleScreenMagnificationPreferenceFragment.class.getName());
-        verify(mActivity).finish();
+    }
+
+    @Test
+    public void onCreate_accessibilityButton_launchAccessibilityButtonFragment() {
+        final Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_COMPONENT_NAME,
+                ACCESSIBILITY_BUTTON_COMPONENT_NAME.flattenToString());
+        doReturn(intent).when(mActivity).getIntent();
+
+        mFragment.onCreate(Bundle.EMPTY);
+
+        assertStartActivityWithExpectedFragment(mActivity,
+                AccessibilityButtonFragment.class.getName());
     }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo() {

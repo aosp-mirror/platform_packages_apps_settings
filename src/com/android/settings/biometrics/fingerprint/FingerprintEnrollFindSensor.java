@@ -72,6 +72,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         if (mCanAssumeUdfps) {
             setHeaderText(R.string.security_settings_udfps_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_udfps_enroll_find_sensor_message);
+            final CharSequence description = getString(R.string.security_settings_udfps_enroll_find_sensor_a11y);
+            getLayout().getDescriptionTextView().setContentDescription(description);
         } else {
             setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
@@ -81,7 +83,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
             final FingerprintManager fpm = getSystemService(FingerprintManager.class);
-            fpm.generateChallenge(mUserId, (sensorId, challenge) -> {
+            fpm.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
                 mChallenge = challenge;
                 mSensorId = sensorId;
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);

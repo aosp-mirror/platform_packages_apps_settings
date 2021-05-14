@@ -269,11 +269,6 @@
     <!-- ComponentName to launch a vendor-specific enrollment activity if available -->
     <string name="config_face_enroll" translatable="false"></string>
 
-    <!-- Fully qualified name of the introductory activity for face enrollment. -->
-    <string name="config_face_enroll_introduction" translatable="false">
-        com.android.settings.biometrics.face.FaceEnrollIntroduction
-    </string>
-
     <!-- App intent -->
     <string name="config_account_intent_uri" translatable="false"></string>
 
@@ -499,12 +494,6 @@
 
     <!-- Authority of advanced device battery prediction -->
     <string name="config_battery_prediction_authority" translatable="false"></string>
-
-    <!-- Packages for overriding tile positions on the homepage -->
-    <string-array name="config_homepage_tile_packages" translatable="false"/>
-
-    <!-- Orders for overriding tile positions on the homepage -->
-    <integer-array name="config_homepage_tile_orders"/>
 
     <!-- Whether to handle slot change events -->
     <bool name="config_handle_sim_slot_change">false</bool>

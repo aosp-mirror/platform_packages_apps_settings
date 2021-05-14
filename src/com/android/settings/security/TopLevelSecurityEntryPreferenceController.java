@@ -17,17 +17,11 @@
 package com.android.settings.security;
 
 import android.content.Context;
-import android.hardware.face.FaceManager;
-import android.hardware.fingerprint.FingerprintManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 
-import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -40,26 +34,6 @@ public class TopLevelSecurityEntryPreferenceController extends BasePreferenceCon
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        // Remove homepage summaries for silky home.
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            return null;
-        }
-
-        final FingerprintManager fpm =
-                Utils.getFingerprintManagerOrNull(mContext);
-        final FaceManager faceManager =
-                Utils.getFaceManagerOrNull(mContext);
-        if (faceManager != null && faceManager.isHardwareDetected()) {
-            return mContext.getText(R.string.security_dashboard_summary_face);
-        } else if (fpm != null && fpm.isHardwareDetected()) {
-            return mContext.getText(R.string.security_dashboard_summary);
-        } else {
-            return mContext.getText(R.string.security_dashboard_summary_no_fingerprint);
-        }
     }
 
     @Override

@@ -35,6 +35,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -101,6 +102,8 @@ public class PanelFragment extends Fragment {
     private int mMaxHeight;
     private View mFooterDivider;
     private boolean mPanelCreating;
+    private ProgressBar mProgressBar;
+    private View mHeaderDivider;
 
     private final Map<Uri, LiveData<Slice>> mSliceLiveData = new LinkedHashMap<>();
 
@@ -208,6 +211,8 @@ public class PanelFragment extends Fragment {
         mHeaderTitle = mLayoutView.findViewById(R.id.header_title);
         mHeaderSubtitle = mLayoutView.findViewById(R.id.header_subtitle);
         mFooterDivider = mLayoutView.findViewById(R.id.footer_divider);
+        mProgressBar = mLayoutView.findViewById(R.id.progress_bar);
+        mHeaderDivider = mLayoutView.findViewById(R.id.header_divider);
 
         // Make the panel layout gone here, to avoid janky animation when updating from old panel.
         // We will make it visible once the panel is ready to load.
@@ -232,6 +237,8 @@ public class PanelFragment extends Fragment {
         }
 
         mMetricsProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
+
+        updateProgressBar();
 
         mPanelSlices.setLayoutManager(new LinearLayoutManager((activity)));
         // Add predraw listener to remove the animation and while we wait for Slices to load.
@@ -311,6 +318,16 @@ public class PanelFragment extends Fragment {
         } else {
             mSeeMoreButton.setVisibility(View.VISIBLE);
             mSeeMoreButton.setText(customTitle);
+        }
+    }
+
+    private void updateProgressBar() {
+        if (mPanel.isProgressBarVisible()) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mHeaderDivider.setVisibility(View.GONE);
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+            mHeaderDivider.setVisibility(View.VISIBLE);
         }
     }
 
@@ -528,6 +545,13 @@ public class PanelFragment extends Fragment {
         public void onTitleChanged() {
             ThreadUtils.postOnMainThread(() -> {
                 enableTitle(mPanel.getTitle());
+            });
+        }
+
+        @Override
+        public void onProgressBarVisibleChanged() {
+            ThreadUtils.postOnMainThread(() -> {
+                updateProgressBar();
             });
         }
 

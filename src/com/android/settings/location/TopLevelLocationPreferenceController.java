@@ -11,7 +11,6 @@ import android.location.LocationManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.permission.PermissionControllerManager;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -19,7 +18,6 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -52,11 +50,6 @@ public class TopLevelLocationPreferenceController extends BasePreferenceControll
 
     @Override
     public CharSequence getSummary() {
-        // Remove homepage summaries for silky home.
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            return null;
-        }
-
         if (mLocationManager.isLocationEnabled()) {
             if (mNumTotal == -1) {
                 return mContext.getString(R.string.location_settings_loading_app_permission_stats);

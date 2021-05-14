@@ -37,6 +37,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.span.LinkSpan;
+import com.google.android.setupdesign.template.RequireScrollMixin;
 
 import java.util.List;
 
@@ -69,14 +70,18 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                         .build()
         );
 
-        mFooterBarMixin.setPrimaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
-                        .setListener(this::onNextButtonClick)
-                        .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SudGlifButton_Primary)
-                        .build()
-        );
+        final FooterButton nextButton = new FooterButton.Builder(this)
+                .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
+                .setListener(this::onNextButtonClick)
+                .setButtonType(FooterButton.ButtonType.NEXT)
+                .setTheme(R.style.SudGlifButton_Primary)
+                .build();
+
+        mFooterBarMixin.setPrimaryButton(nextButton);
+        final RequireScrollMixin requireScrollMixin =
+                getLayout().getMixin(RequireScrollMixin.class);
+        requireScrollMixin.requireScrollWithButton(this, nextButton,
+                R.string.security_settings_face_enroll_introduction_more, this::onNextButtonClick);
     }
 
     int getNegativeButtonTextId() {
@@ -152,7 +157,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     protected void getChallenge(GenerateChallengeCallback callback) {
         mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
         if (mFingerprintManager == null) {
-            callback.onChallengeGenerated(0, 0L);
+            callback.onChallengeGenerated(0, 0, 0L);
             return;
         }
         mFingerprintManager.generateChallenge(mUserId, callback::onChallengeGenerated);

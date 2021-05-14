@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.settings.gestures;
+package com.android.settings.display;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.service.quickaccesswallet.QuickAccessWalletClient;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -29,17 +29,17 @@ import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
-public class PowerMenuPrivacyPreferenceController extends TogglePreferenceController {
+/**
+ * Preference for showing/hiding sensitive wallet content while the device is locked.
+ */
+public class WalletPrivacyPreferenceController extends TogglePreferenceController {
 
-    private static final String SETTING_KEY = Settings.Secure.POWER_MENU_LOCKED_SHOW_CONTENT;
-    private static final String CARDS_AVAILABLE_KEY =
-            Settings.Secure.GLOBAL_ACTIONS_PANEL_AVAILABLE;
-    private static final String CARDS_ENABLED_KEY = Settings.Secure.GLOBAL_ACTIONS_PANEL_ENABLED;
+    private static final String SETTING_KEY = "lockscreen_show_wallet";
+    private final QuickAccessWalletClient mClient;
 
-
-    public PowerMenuPrivacyPreferenceController(Context context,
-            String preferenceKey) {
+    public WalletPrivacyPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mClient = initWalletClient();
     }
 
     @Override
@@ -55,30 +55,13 @@ public class PowerMenuPrivacyPreferenceController extends TogglePreferenceContro
 
     @Override
     public CharSequence getSummary() {
-        boolean cardsAvailable = Settings.Secure.getInt(mContext.getContentResolver(),
-                CARDS_AVAILABLE_KEY, 0) != 0;
-        boolean controlsAvailable = isControlsAvailable();
-        final int res;
-        if (!isSecure()) {
-            res = R.string.power_menu_privacy_not_secure;
-        } else if (cardsAvailable && controlsAvailable) {
-            res = R.string.power_menu_privacy_show;
-        } else if (!cardsAvailable && controlsAvailable) {
-            res = R.string.power_menu_privacy_show_controls;
-        } else if (cardsAvailable) {
-            res = R.string.power_menu_privacy_show_cards;
-        } else {
-            // In this case, neither cards nor controls are available. This preference should not
-            // be accessible as the power menu setting is not accessible
-            return "";
-        }
+        final int res = isSecure() ? R.string.lockscreen_privacy_wallet_summary :
+                R.string.lockscreen_privacy_not_secure;
         return mContext.getText(res);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        // hide if lockscreen isn't secure for this user
-
         return isEnabled() && isSecure() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
 
@@ -90,10 +73,7 @@ public class PowerMenuPrivacyPreferenceController extends TogglePreferenceContro
     }
 
     private boolean isEnabled() {
-        final ContentResolver resolver = mContext.getContentResolver();
-        boolean cardsAvailable = Settings.Secure.getInt(resolver, CARDS_AVAILABLE_KEY, 0) != 0;
-        boolean cardsEnabled = Settings.Secure.getInt(resolver, CARDS_ENABLED_KEY, 0) != 0;
-        return (cardsAvailable && cardsEnabled) || isControlsAvailable();
+        return mClient.isWalletServiceAvailable();
     }
 
     private boolean isSecure() {
@@ -104,7 +84,8 @@ public class PowerMenuPrivacyPreferenceController extends TogglePreferenceContro
         return utils.isSecure(userId);
     }
 
-    private boolean isControlsAvailable() {
-        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CONTROLS);
+    @VisibleForTesting
+    QuickAccessWalletClient initWalletClient() {
+        return QuickAccessWalletClient.create(mContext);
     }
 }

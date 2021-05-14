@@ -65,6 +65,8 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
     private static final String TAG = "InternetConnectivityPanel";
     private static final int SUBTITLE_TEXT_NONE = -1;
     private static final int SUBTITLE_TEXT_WIFI_IS_TURNED_ON = R.string.wifi_is_turned_on_subtitle;
+    private static final int SUBTITLE_TEXT_SEARCHING_FOR_NETWORKS =
+            R.string.wifi_empty_list_wifi_on;
     private static final int SUBTITLE_TEXT_NON_CARRIER_NETWORK_UNAVAILABLE =
             R.string.non_carrier_network_unavailable;
     private static final int SUBTITLE_TEXT_ALL_CARRIER_NETWORK_UNAVAILABLE =
@@ -80,9 +82,14 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
             if (intent == null) {
                 return;
             }
-            if (TextUtils.equals(intent.getAction(), WifiManager.NETWORK_STATE_CHANGED_ACTION)
-                    || TextUtils.equals(intent.getAction(),
-                    WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
+
+            if (TextUtils.equals(intent.getAction(), WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
+                showProgressBar();
+                updatePanelTitle();
+                return;
+            }
+
+            if (TextUtils.equals(intent.getAction(), WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
                 updatePanelTitle();
             }
         }
@@ -101,6 +108,12 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
     private SubscriptionsChangeListener mSubscriptionsListener;
     private DataConnectivityListener mConnectivityListener;
     private int mDefaultDataSubid = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+
+    // Wi-Fi scanning progress bar
+    protected boolean mIsProgressBarVisible;
+    protected final Runnable mHideProgressBarRunnable = () -> {
+        setProgressBarVisible(false);
+    };
 
     private InternetConnectivityPanel(Context context) {
         mContext = context.getApplicationContext();
@@ -137,6 +150,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         mTelephonyManager.registerTelephonyCallback(
                 new HandlerExecutor(new Handler(Looper.getMainLooper())), mTelephonyCallback);
         mContext.registerReceiver(mWifiStateReceiver, mWifiStateFilter);
+        showProgressBar();
         updatePanelTitle();
     }
 
@@ -151,6 +165,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         mConnectivityListener.stop();
         mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
         mContext.unregisterReceiver(mWifiStateReceiver);
+        mContext.getMainThreadHandler().removeCallbacks(mHideProgressBarRunnable);
     }
 
     /**
@@ -213,6 +228,11 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
     @Override
     public void onClickCustomizedButton() {
         mContext.startActivity(getSeeMoreIntent());
+    }
+
+    @Override
+    public boolean isProgressBarVisible() {
+        return mIsProgressBarVisible;
     }
 
     @Override
@@ -305,6 +325,13 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
             return;
         }
 
+        if (mIsProgressBarVisible) {
+            // When the Wi-Fi scan result callback is received
+            //   Sub-Title: Searching for networks...
+            mSubtitle = SUBTITLE_TEXT_SEARCHING_FOR_NETWORKS;
+            return;
+        }
+
         // Sub-Title:
         // show non_carrier_network_unavailable
         //   - while Wi-Fi on + no Wi-Fi item
@@ -332,6 +359,33 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
             return;
         }
         mSubtitle = SUBTITLE_TEXT_NON_CARRIER_NETWORK_UNAVAILABLE;
+    }
+
+    protected void showProgressBar() {
+        if (mWifiManager == null || !mInternetUpdater.isWifiEnabled()) {
+            setProgressBarVisible(false);
+            return;
+        }
+
+        setProgressBarVisible(true);
+        List<ScanResult> wifiScanResults = mWifiManager.getScanResults();
+        if (wifiScanResults != null && wifiScanResults.size() > 0) {
+            mContext.getMainThreadHandler().postDelayed(mHideProgressBarRunnable,
+                    2000 /* delay millis */);
+        }
+    }
+
+    protected void setProgressBarVisible(boolean visible) {
+        if (mIsProgressBarVisible == visible) {
+            return;
+        }
+        mIsProgressBarVisible = visible;
+
+        if (mCallback == null) {
+            return;
+        }
+        mCallback.onProgressBarVisibleChanged();
+        updatePanelTitle();
     }
 
     private class NetworkProviderTelephonyCallback extends TelephonyCallback implements

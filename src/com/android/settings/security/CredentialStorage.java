@@ -44,9 +44,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.core.HideNonSystemOverlayMixin;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.vpn2.VpnUtils;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 /**
  * CredentialStorage handles resetting and installing keys into KeyStore.

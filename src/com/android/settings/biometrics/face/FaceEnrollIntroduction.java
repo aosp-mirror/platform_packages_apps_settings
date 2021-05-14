@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings.biometrics.face;
@@ -41,8 +41,11 @@ import com.google.android.setupdesign.template.RequireScrollMixin;
 
 import java.util.List;
 
+/**
+ * Provides introductory info about face unlock and prompts the user to agree before starting face
+ * enrollment.
+ */
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
-
     private static final String TAG = "FaceEnrollIntroduction";
 
     private FaceManager mFaceManager;
@@ -66,6 +69,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getLayout().setDescriptionText(getString(
+                R.string.security_settings_face_enroll_introduction_message));
+
         mFaceManager = Utils.getFaceManagerOrNull(this);
         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
                 .getFaceFeatureProvider();
@@ -82,7 +88,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
         FooterButton.Builder nextButtonBuilder = new FooterButton.Builder(this)
                 .setText(R.string.security_settings_face_enroll_introduction_agree)
-                .setButtonType(FooterButton.ButtonType.NEXT)
+                .setButtonType(FooterButton.ButtonType.OPT_IN)
                 .setTheme(R.style.SudGlifButton_Primary);
         if (maxFacesEnrolled()) {
             nextButtonBuilder.setListener(this::onNextButtonClick);
@@ -97,20 +103,13 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                     this::onNextButtonClick);
         }
 
-        final TextView footer2 = findViewById(R.id.face_enroll_introduction_footer_part_2);
-        final int footer2TextResource =
-                mFaceFeatureProvider.isAttentionSupported(getApplicationContext())
-                        ? R.string.security_settings_face_enroll_introduction_footer_part_2
-                        : R.string.security_settings_face_settings_footer_attention_not_supported;
-        footer2.setText(footer2TextResource);
-
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
             mFooterBarMixin.getPrimaryButton().setEnabled(false);
             // We either block on generateChallenge, or need to gray out the "next" button until
             // the challenge is ready. Let's just do this for now.
-            mFaceManager.generateChallenge((sensorId, challenge) -> {
+            mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
                 mSensorId = sensorId;
                 mChallenge = challenge;
@@ -196,10 +195,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected void getChallenge(GenerateChallengeCallback callback) {
         mFaceManager = Utils.getFaceManagerOrNull(this);
         if (mFaceManager == null) {
-            callback.onChallengeGenerated(0, 0L);
+            callback.onChallengeGenerated(0, 0, 0L);
             return;
         }
-        mFaceManager.generateChallenge(callback::onChallengeGenerated);
+        mFaceManager.generateChallenge(mUserId, callback::onChallengeGenerated);
     }
 
     @Override

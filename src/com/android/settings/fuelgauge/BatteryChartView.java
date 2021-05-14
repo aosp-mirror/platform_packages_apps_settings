@@ -15,6 +15,7 @@ package com.android.settings.fuelgauge;
 
 import static java.lang.Math.round;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -23,27 +24,39 @@ import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 /** A widget component to draw chart graph. */
-public class BatteryChartView extends AppCompatImageView implements View.OnClickListener {
+public class BatteryChartView extends AppCompatImageView implements View.OnClickListener,
+        AccessibilityManager.AccessibilityStateChangeListener {
     private static final String TAG = "BatteryChartView";
+    private static final List<String> ACCESSIBILITY_SERVICE_NAMES =
+        Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
     // For drawing the percentage information.
     private static final String[] PERCENTAGES = new String[] {"100%", "50%", "0%"};
     private static final int DEFAULT_TRAPEZOID_COUNT = 12;
     private static final int DEFAULT_TIMESTAMP_COUNT = 4;
+    private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
+    private static final long UPDATE_STATE_DELAYED_TIME = 500L;
+
     /** Selects all trapezoid shapes. */
     public static final int SELECTED_INDEX_ALL = -1;
     public static final int SELECTED_INDEX_INVALID = -2;
@@ -56,13 +69,15 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private int mDividerWidth;
     private int mDividerHeight;
     private int mTrapezoidCount;
-    private int mSelectedIndex;
     private float mTrapezoidVOffset;
     private float mTrapezoidHOffset;
+    private boolean mIsSlotsClickabled;
+
+    @VisibleForTesting int mSelectedIndex;
+
     // Colors for drawing the trapezoid shape and dividers.
     private int mTrapezoidColor;
     private int mTrapezoidSolidColor;
-    private final int mDividerColor = Color.parseColor("#CDCCC5");
     // For drawing the percentage information.
     private int mTextPadding;
     private final Rect mIndent = new Rect();
@@ -73,11 +88,17 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private final Rect[] mTimestampsBounds =
         new Rect[] {new Rect(), new Rect(), new Rect(), new Rect()};
 
+    @VisibleForTesting
+    Handler mHandler = new Handler();
+    @VisibleForTesting
+    final Runnable mUpdateClickableStateRun = () -> updateClickableState();
 
     private int[] mLevels;
     private Paint mTextPaint;
     private Paint mDividerPaint;
     private Paint mTrapezoidPaint;
+    @VisibleForTesting
+    Paint mTrapezoidCurvePaint = null;
     private TrapezoidSlot[] mTrapezoidSlots;
     // Records the location to calculate selected index.
     private MotionEvent mTouchUpEvent;
@@ -92,9 +113,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         initializeColors(context);
         // Registers the click event listener.
         setOnClickListener(this);
-        setClickable(false);
         setSelectedIndex(SELECTED_INDEX_ALL);
         setTrapezoidCount(DEFAULT_TRAPEZOID_COUNT);
+        setClickable(false);
     }
 
     /** Sets the total trapezoid count for drawing. */
@@ -157,6 +178,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         } else {
             mTextPaint = null;
         }
+        setVisibility(View.VISIBLE);
         requestLayout();
     }
 
@@ -228,7 +250,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         final int trapezoidIndex = getTrapezoidIndex(mTouchUpEvent.getX());
         // Ignores the click event if the level is zero.
         if (trapezoidIndex == SELECTED_INDEX_INVALID
-                || (trapezoidIndex >= 0 && mLevels[trapezoidIndex] == 0)) {
+                || !isValidToDraw(trapezoidIndex)) {
             return;
         }
         // Selects all if users click the same trapezoid item two times.
@@ -238,6 +260,66 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             setSelectedIndex(trapezoidIndex);
         }
         view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK);
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        updateClickableState();
+        mContext.getSystemService(AccessibilityManager.class)
+            .addAccessibilityStateChangeListener(/*listener=*/ this);
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mContext.getSystemService(AccessibilityManager.class)
+            .removeAccessibilityStateChangeListener(/*listener=*/ this);
+        mHandler.removeCallbacks(mUpdateClickableStateRun);
+    }
+
+    @Override
+    public void onAccessibilityStateChanged(boolean enabled) {
+        Log.d(TAG, "onAccessibilityStateChanged:" + enabled);
+        mHandler.removeCallbacks(mUpdateClickableStateRun);
+        // We should delay it a while since accessibility manager will spend
+        // some times to bind with new enabled accessibility services.
+        mHandler.postDelayed(
+            mUpdateClickableStateRun, UPDATE_STATE_DELAYED_TIME);
+    }
+
+    private void updateClickableState() {
+        final Context context = mContext;
+        mIsSlotsClickabled =
+            FeatureFactory.getFactory(context)
+                    .getPowerUsageFeatureProvider(context)
+                    .isChartGraphSlotsEnabled(context)
+            && !isAccessibilityEnabled(context);
+        Log.d(TAG, "isChartGraphSlotsEnabled:" + mIsSlotsClickabled);
+        setClickable(isClickable());
+        // Initializes the trapezoid curve paint for non-clickable case.
+        if (!mIsSlotsClickabled && mTrapezoidCurvePaint == null) {
+            mTrapezoidCurvePaint = new Paint();
+            mTrapezoidCurvePaint.setAntiAlias(true);
+            mTrapezoidCurvePaint.setColor(mTrapezoidSolidColor);
+            mTrapezoidCurvePaint.setStyle(Paint.Style.STROKE);
+            mTrapezoidCurvePaint.setStrokeWidth(mDividerWidth * 2);
+        } else if (mIsSlotsClickabled) {
+            mTrapezoidCurvePaint = null;
+            // Sets levels again to force update the click state.
+            setLevels(mLevels);
+        }
+        invalidate();
+    }
+
+    @Override
+    public void setClickable(boolean clickable) {
+        super.setClickable(mIsSlotsClickabled && clickable);
+    }
+
+    @VisibleForTesting
+    void setClickableForce(boolean clickable) {
+        super.setClickable(clickable);
     }
 
     private void initializeColors(Context context) {
@@ -250,7 +332,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         mDividerHeight = resources.getDimensionPixelSize(R.dimen.chartview_divider_height);
         mDividerPaint = new Paint();
         mDividerPaint.setAntiAlias(true);
-        mDividerPaint.setColor(mDividerColor);
+        mDividerPaint.setColor(DIVIDER_COLOR);
         mDividerPaint.setStyle(Paint.Style.STROKE);
         mDividerPaint.setStrokeWidth(mDividerWidth);
         Log.i(TAG, "mDividerWidth:" + mDividerWidth);
@@ -371,16 +453,24 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         final float unitHeight = availableSpace / 100f;
         // Draws all trapezoid shapes into the canvas.
         final Path trapezoidPath = new Path();
+        Path trapezoidCurvePath = null;
         for (int index = 0; index < mTrapezoidCount; index++) {
             // Not draws the trapezoid for corner or not initialization cases.
-            if (mLevels[index] == 0 || mLevels[index + 1] == 0) {
+            if (!isValidToDraw(index)) {
+                if (mTrapezoidCurvePaint != null && trapezoidCurvePath != null) {
+                    canvas.drawPath(trapezoidCurvePath, mTrapezoidCurvePaint);
+                    trapezoidCurvePath = null;
+                }
                 continue;
             }
             // Configures the trapezoid paint color.
-            mTrapezoidPaint.setColor(
-                mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
-                    ? mTrapezoidSolidColor
-                    : mTrapezoidColor);
+            final int trapezoidColor =
+                !mIsSlotsClickabled
+                    ? mTrapezoidColor
+                    : mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
+                        ? mTrapezoidSolidColor : mTrapezoidColor;
+            mTrapezoidPaint.setColor(trapezoidColor);
+
             final float leftTop = round(trapezoidBottom - mLevels[index] * unitHeight);
             final float rightTop = round(trapezoidBottom - mLevels[index + 1] * unitHeight);
             trapezoidPath.reset();
@@ -393,6 +483,22 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             trapezoidPath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
             // Draws the trapezoid shape into canvas.
             canvas.drawPath(trapezoidPath, mTrapezoidPaint);
+
+            // Generates path for non-clickable trapezoid curve.
+            if (mTrapezoidCurvePaint != null) {
+                if (trapezoidCurvePath == null) {
+                    trapezoidCurvePath= new Path();
+                    trapezoidCurvePath.moveTo(mTrapezoidSlots[index].mLeft, leftTop);
+                } else {
+                    trapezoidCurvePath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
+                }
+                trapezoidCurvePath.lineTo(mTrapezoidSlots[index].mRight, rightTop);
+            }
+        }
+        // Draws the trapezoid curve for non-clickable case.
+        if (mTrapezoidCurvePaint != null && trapezoidCurvePath != null) {
+            canvas.drawPath(trapezoidCurvePath, mTrapezoidCurvePaint);
+            trapezoidCurvePath = null;
         }
     }
 
@@ -406,6 +512,37 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             }
         }
         return SELECTED_INDEX_INVALID;
+    }
+
+    private boolean isValidToDraw(int trapezoidIndex) {
+        return mLevels != null
+                && trapezoidIndex >= 0
+                && trapezoidIndex < mLevels.length - 1
+                && mLevels[trapezoidIndex] != 0
+                && mLevels[trapezoidIndex + 1] != 0;
+    }
+
+    @VisibleForTesting
+    static boolean isAccessibilityEnabled(Context context) {
+        final AccessibilityManager accessibilityManager =
+            context.getSystemService(AccessibilityManager.class);
+        if (!accessibilityManager.isEnabled()) {
+            return false;
+        }
+        final List<AccessibilityServiceInfo> serviceInfoList =
+            accessibilityManager.getEnabledAccessibilityServiceList(
+                AccessibilityServiceInfo.FEEDBACK_SPOKEN
+                    | AccessibilityServiceInfo.FEEDBACK_GENERIC);
+        for (AccessibilityServiceInfo info : serviceInfoList) {
+            for (String serviceName : ACCESSIBILITY_SERVICE_NAMES) {
+                final String serviceId = info.getId();
+                if (serviceId != null && serviceId.contains(serviceName)) {
+                    Log.d(TAG, "acccessibilityEnabled:" + serviceId);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     // A container class for each trapezoid left and right location.

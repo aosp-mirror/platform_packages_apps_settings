@@ -59,6 +59,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
@@ -184,9 +185,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 pref.setOrder(order + baseOrder);
             }
         }
-
-        overrideTilePosition(tile, pref);
-
         return outObservers.isEmpty() ? null : outObservers;
     }
 
@@ -261,12 +259,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private DynamicDataObserver bindSummaryAndGetObserver(Preference preference, Tile tile) {
-        // Skip binding homepage tile summaries for silky home.
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)
-                && TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
-            return null;
-        }
-
         final CharSequence summary = tile.getSummary(mContext);
         if (summary != null) {
             preference.setSummary(summary);
@@ -407,12 +399,12 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private void setPreferenceIcon(Preference preference, Tile tile, boolean forceRoundedIcon,
             String iconPackage, Icon icon) {
         Drawable iconDrawable = icon.loadDrawable(preference.getContext());
-        if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)
+                && TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
+            iconDrawable.setTint(Utils.getHomepageIconColor(preference.getContext()));
+        } else if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
             iconDrawable = new AdaptiveIcon(mContext, iconDrawable,
-                    FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)
-                            && TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)
-                            ? R.dimen.homepage_foreground_image_inset
-                            : R.dimen.dashboard_tile_foreground_image_inset);
+                    R.dimen.dashboard_tile_foreground_image_inset);
             ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);
         }
         preference.setIcon(iconDrawable);
@@ -461,26 +453,5 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             }
         }
         return eligibleUsers;
-    }
-
-    private void overrideTilePosition(Tile tile, Preference pref) {
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)
-                && TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
-            final String[] homepageTilePackages = mContext.getResources().getStringArray(
-                    R.array.config_homepage_tile_packages);
-            final int[] homepageTileOrders = mContext.getResources().getIntArray(
-                    R.array.config_homepage_tile_orders);
-            if (homepageTilePackages.length == 0
-                    || homepageTilePackages.length != homepageTileOrders.length) {
-                return;
-            }
-
-            for (int i = 0; i < homepageTilePackages.length; i++) {
-                if (TextUtils.equals(tile.getPackageName(), homepageTilePackages[i])) {
-                    pref.setOrder(homepageTileOrders[i]);
-                    return;
-                }
-            }
-        }
     }
 }

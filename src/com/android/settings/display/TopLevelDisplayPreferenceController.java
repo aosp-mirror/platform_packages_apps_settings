@@ -17,11 +17,9 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 
 public class TopLevelDisplayPreferenceController extends BasePreferenceController {
 
@@ -34,24 +32,5 @@ public class TopLevelDisplayPreferenceController extends BasePreferenceControlle
         return mContext.getResources().getBoolean(R.bool.config_show_top_level_display)
         ? AVAILABLE
         : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        // Remove homepage summaries for silky home.
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            return null;
-        }
-
-        final WallpaperPreferenceController controller =
-                new WallpaperPreferenceController(mContext, "unused_key");
-        if (controller.isAvailable()) {
-            return mContext.getText(
-                    controller.areStylesAvailable()
-                    ? R.string.display_dashboard_summary_with_style
-                    : R.string.display_dashboard_summary);
-        } else {
-            return mContext.getText(R.string.display_dashboard_nowallpaper_summary);
-        }
     }
 }

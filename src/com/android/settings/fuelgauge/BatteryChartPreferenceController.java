@@ -17,7 +17,9 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -33,11 +35,14 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
-import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.utils.StringUtil;
 
 import java.time.Clock;
@@ -50,13 +55,22 @@ import java.util.Map;
 
 /** Controls the update for chart graph and the list items. */
 public class BatteryChartPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnDestroy,
-                BatteryChartView.OnSelectListener, ExpandDividerPreference.OnExpandListener {
+        implements PreferenceControllerMixin, LifecycleObserver, OnCreate, OnDestroy,
+                OnSaveInstanceState, BatteryChartView.OnSelectListener, OnResume,
+                ExpandDividerPreference.OnExpandListener {
     private static final String TAG = "BatteryChartPreferenceController";
-    private static final int CHART_KEY_ARRAY_SIZE = 25;
+    /** Desired battery history size for timestamp slots. */
+    public static final int DESIRED_HISTORY_SIZE = 25;
     private static final int CHART_LEVEL_ARRAY_SIZE = 13;
+    private static final int CHART_KEY_ARRAY_SIZE = DESIRED_HISTORY_SIZE;
     private static final long VALID_USAGE_TIME_DURATION = DateUtils.HOUR_IN_MILLIS * 2;
     private static final long VALID_DIFF_DURATION = DateUtils.MINUTE_IN_MILLIS * 3;
+
+    // Keys for bundle instance to restore configurations.
+    private static final String KEY_EXPAND_SYSTEM_INFO = "expand_system_info";
+    private static final String KEY_CURRENT_TIME_SLOT = "current_time_slot";
+
+    private static int sUiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
 
     @VisibleForTesting
     Map<Integer, List<BatteryDiffEntry>> mBatteryIndexedMap;
@@ -67,6 +81,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @VisibleForTesting BatteryChartView mBatteryChartView;
     @VisibleForTesting ExpandDividerPreference mExpandDividerPreference;
 
+    @VisibleForTesting boolean mIsExpanded = false;
     @VisibleForTesting int[] mBatteryHistoryLevels;
     @VisibleForTesting long[] mBatteryHistoryKeys;
     @VisibleForTesting int mTrapezoidIndex = BatteryChartView.SELECTED_INDEX_INVALID;
@@ -76,8 +91,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private final InstrumentedPreferenceFragment mFragment;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final CharSequence[] mNotAllowShowSummaryPackages;
-
-    private boolean mIsExpanded = false;
+    private final CharSequence[] mNotAllowShowEntryPackages;
 
     // Preference cache to avoid create new instance each time.
     @VisibleForTesting
@@ -95,13 +109,47 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mPreferenceKey = preferenceKey;
         mNotAllowShowSummaryPackages = context.getResources()
             .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
+        mNotAllowShowEntryPackages = context.getResources()
+            .getTextArray(R.array.allowlist_hide_entry_in_battery_usage);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
     }
 
     @Override
-    public void onPause() {
+    public void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            return;
+        }
+        mTrapezoidIndex =
+            savedInstanceState.getInt(KEY_CURRENT_TIME_SLOT, mTrapezoidIndex);
+        mIsExpanded =
+            savedInstanceState.getBoolean(KEY_EXPAND_SYSTEM_INFO, mIsExpanded);
+        Log.d(TAG, String.format("onCreate() slotIndex=%d isExpanded=%b",
+            mTrapezoidIndex, mIsExpanded));
+    }
+
+    @Override
+    public void onResume() {
+        final int currentUiMode =
+            mContext.getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK;
+        if (sUiMode != currentUiMode) {
+            sUiMode = currentUiMode;
+            BatteryDiffEntry.clearCache();
+            Log.d(TAG, "clear icon and label cache since uiMode is changed");
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstance) {
+        if (savedInstance == null) {
+            return;
+        }
+        savedInstance.putInt(KEY_CURRENT_TIME_SLOT, mTrapezoidIndex);
+        savedInstance.putBoolean(KEY_EXPAND_SYSTEM_INFO, mIsExpanded);
+        Log.d(TAG, String.format("onSaveInstanceState() slotIndex=%d isExpanded=%b",
+            mTrapezoidIndex, mIsExpanded));
     }
 
     @Override
@@ -152,8 +200,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             isValidPackage = mBatteryUtils.getPackageUid(packageName)
                 != BatteryUtils.UID_NULL;
         }
-        Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b %s",
-            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage, packageName));
+        Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b\n%s",
+            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage, histEntry));
         if (isValidPackage) {
             AdvancedPowerUsageDetail.startBatteryDetailPage(
                 mActivity, mFragment, diffEntry, powerPref.getPercent(),
@@ -176,62 +224,56 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     }
 
     void setBatteryHistoryMap(
-            final Map<Long, List<BatteryHistEntry>> batteryHistoryMap) {
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         mHandler.post(() -> setBatteryHistoryMapInner(batteryHistoryMap));
     }
 
     private void setBatteryHistoryMapInner(
-            final Map<Long, List<BatteryHistEntry>> batteryHistoryMap) {
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         // Resets all battery history data relative variables.
-        if (batteryHistoryMap == null) {
+        if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
             mBatteryIndexedMap = null;
             mBatteryHistoryKeys = null;
             mBatteryHistoryLevels = null;
             return;
         }
-        // Generates battery history keys.
-        final List<Long> batteryHistoryKeyList =
-            new ArrayList<Long>(batteryHistoryMap.keySet());
-        Collections.sort(batteryHistoryKeyList);
-        validateSlotTimestamp(batteryHistoryKeyList);
-        mBatteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
-        final int listSize = batteryHistoryKeyList.size();
-        final int elementSize = Math.min(listSize, CHART_KEY_ARRAY_SIZE);
-        for (int index = 0; index < elementSize; index++) {
-            mBatteryHistoryKeys[CHART_KEY_ARRAY_SIZE - index - 1] =
-                batteryHistoryKeyList.get(listSize - index - 1);
-        }
-
-        // Generates the battery history levels.
+        mBatteryHistoryKeys = getBatteryHistoryKeys(batteryHistoryMap);
         mBatteryHistoryLevels = new int[CHART_LEVEL_ARRAY_SIZE];
         for (int index = 0; index < CHART_LEVEL_ARRAY_SIZE; index++) {
-            final Long timestamp = Long.valueOf(mBatteryHistoryKeys[index * 2]);
-            final List<BatteryHistEntry> entryList = batteryHistoryMap.get(timestamp);
-            if (entryList != null && !entryList.isEmpty()) {
-                // All battery levels are the same in the same timestamp snapshot.
-                mBatteryHistoryLevels[index] = entryList.get(0).mBatteryLevel;
-            } else if (entryList != null && entryList.isEmpty()) {
-                Log.e(TAG, "abnormal entry list in the timestamp:" +
-                    ConvertUtils.utcToLocalTime(timestamp));
+            final long timestamp = mBatteryHistoryKeys[index * 2];
+            final Map<String, BatteryHistEntry> entryMap = batteryHistoryMap.get(timestamp);
+            if (entryMap == null || entryMap.isEmpty()) {
+                Log.e(TAG, "abnormal entry list in the timestamp:"
+                    + ConvertUtils.utcToLocalTime(timestamp));
+                continue;
             }
+            // Averages the battery level in each time slot to avoid corner conditions.
+            float batteryLevelCounter = 0;
+            for (BatteryHistEntry entry : entryMap.values()) {
+                batteryLevelCounter += entry.mBatteryLevel;
+            }
+            mBatteryHistoryLevels[index] =
+                Math.round(batteryLevelCounter / entryMap.size());
         }
         // Generates indexed usage map for chart.
         mBatteryIndexedMap =
             ConvertUtils.getIndexedUsageMap(
                 mPrefContext, /*timeSlotSize=*/ CHART_LEVEL_ARRAY_SIZE - 1,
                 mBatteryHistoryKeys, batteryHistoryMap,
-                /*purgeLowPercentageData=*/ true);
+                /*purgeLowPercentageAndFakeData=*/ true);
         forceRefreshUi();
 
         Log.d(TAG, String.format(
             "setBatteryHistoryMap() size=%d\nkeys=%s\nlevels=%s",
-            batteryHistoryKeyList.size(),
+            batteryHistoryMap.size(),
             utcToLocalTime(mBatteryHistoryKeys),
             Arrays.toString(mBatteryHistoryLevels)));
     }
 
     void setBatteryChartView(final BatteryChartView batteryChartView) {
-        mHandler.post(() -> setBatteryChartViewInner(batteryChartView));
+        if (mBatteryChartView != batteryChartView) {
+            mHandler.post(() -> setBatteryChartViewInner(batteryChartView));
+        }
     }
 
     private void setBatteryChartViewInner(final BatteryChartView batteryChartView) {
@@ -247,6 +289,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 : mTrapezoidIndex;
         if (mBatteryChartView != null) {
             mBatteryChartView.setLevels(mBatteryHistoryLevels);
+            mBatteryChartView.setSelectedIndex(refreshIndex);
             setTimestampLabel();
         }
         refreshUi(refreshIndex, /*isForce=*/ true);
@@ -283,6 +326,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final List<BatteryDiffEntry> appEntries = new ArrayList<>();
         mSystemEntries.clear();
         entries.forEach(entry -> {
+            final String packageName = entry.getPackageName();
+            if (!isValidToShowEntry(packageName)) {
+                Log.w(TAG, "ignore showing item:" + packageName);
+                return;
+            }
             if (entry.isSystemEntry()) {
                 mSystemEntries.add(entry);
             } else {
@@ -307,6 +355,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             if (mExpandDividerPreference == null) {
                 mExpandDividerPreference = new ExpandDividerPreference(mPrefContext);
                 mExpandDividerPreference.setOnExpandListener(this);
+                mExpandDividerPreference.setIsExpanded(mIsExpanded);
             }
             mExpandDividerPreference.setOrder(
                 mAppListPrefGroup.getPreferenceCount());
@@ -477,15 +526,14 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return mPrefContext.getString(resourceId, timeSequence);
     }
 
-    private boolean isValidToShowSummary(String packageName) {
-        if (mNotAllowShowSummaryPackages != null) {
-            for (CharSequence notAllowPackageName : mNotAllowShowSummaryPackages) {
-                if (TextUtils.equals(packageName, notAllowPackageName)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+    @VisibleForTesting
+    boolean isValidToShowSummary(String packageName) {
+        return !contains(packageName, mNotAllowShowSummaryPackages);
+    }
+
+    @VisibleForTesting
+    boolean isValidToShowEntry(String packageName) {
+        return !contains(packageName, mNotAllowShowEntryPackages);
     }
 
     @VisibleForTesting
@@ -519,6 +567,17 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return builder.toString();
     }
 
+    private static boolean contains(String target, CharSequence[] packageNames) {
+        if (target != null && packageNames != null) {
+            for (CharSequence packageName : packageNames) {
+                if (TextUtils.equals(target, packageName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @VisibleForTesting
     static boolean validateUsageTime(BatteryDiffEntry entry) {
         final long foregroundUsageTimeInMs = entry.mForegroundUsageTimeInMs;
@@ -533,24 +592,36 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return true;
     }
 
-    @VisibleForTesting
-    static boolean validateSlotTimestamp(List<Long> batteryHistoryKeys) {
-        // Whether the nearest two slot time diff is valid or not?
-        final int size = batteryHistoryKeys.size();
-        for (int index = 0; index < size - 1; index++) {
-            final long currentTime = batteryHistoryKeys.get(index);
-            final long nextTime = batteryHistoryKeys.get(index + 1);
-            final long diffTime = Math.abs(
-                DateUtils.HOUR_IN_MILLIS - Math.abs(currentTime - nextTime));
-            if (currentTime == 0) {
-                continue;
-            } else if (diffTime > VALID_DIFF_DURATION) {
-                Log.e(TAG, String.format("validateSlotTimestamp() %s > %s",
-                    ConvertUtils.utcToLocalTime(currentTime),
-                    ConvertUtils.utcToLocalTime(nextTime)));
-                return false;
-            }
+    static List<BatteryDiffEntry> getBatteryLast24HrUsageData(Context context) {
+        final long start = System.currentTimeMillis();
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
+            FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context)
+                .getBatteryHistory(context);
+        if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
+            return null;
         }
-        return true;
+        Log.d(TAG, String.format("getBatteryLast24HrData() size=%d time=&d/ms",
+            batteryHistoryMap.size(), (System.currentTimeMillis() - start)));
+        final Map<Integer, List<BatteryDiffEntry>> batteryIndexedMap =
+            ConvertUtils.getIndexedUsageMap(
+                context,
+                /*timeSlotSize=*/ CHART_LEVEL_ARRAY_SIZE - 1,
+                getBatteryHistoryKeys(batteryHistoryMap),
+                batteryHistoryMap,
+                /*purgeLowPercentageAndFakeData=*/ true);
+        return batteryIndexedMap.get(BatteryChartView.SELECTED_INDEX_ALL);
+    }
+
+    private static long[] getBatteryHistoryKeys(
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+        final List<Long> batteryHistoryKeyList =
+            new ArrayList<>(batteryHistoryMap.keySet());
+        Collections.sort(batteryHistoryKeyList);
+        final long[] batteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
+        for (int index = 0; index < CHART_KEY_ARRAY_SIZE; index++) {
+            batteryHistoryKeys[index] = batteryHistoryKeyList.get(index);
+        }
+        return batteryHistoryKeys;
     }
 }

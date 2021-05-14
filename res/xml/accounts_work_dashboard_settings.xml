@@ -33,7 +33,7 @@
     <com.android.settings.widget.WorkOnlyCategory
         android:key="autofill_work_app_defaults"
         android:order="30"
-        android:title="@string/default_for_work">
+        android:title="@string/autofill_app">
 
         <com.android.settings.widget.GearPreference
             android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
@@ -47,26 +47,20 @@
     </com.android.settings.widget.WorkOnlyCategory>
 
     <PreferenceCategory
-        android:key="accounts_category"
-        android:order="100"
-        android:title="@string/account_settings">
+        android:key="dashboard_tile_placeholder"
+        android:order="130"/>
 
-        <PreferenceCategory
-            android:key="dashboard_tile_placeholder"
-            android:order="130"/>
+    <SwitchPreference
+        android:key="auto_sync_account_data"
+        android:title="@string/auto_sync_account_title"
+        android:summary="@string/auto_sync_account_summary"
+        android:order="200"
+        settings:allowDividerAbove="true"/>
 
-        <SwitchPreference
-            android:key="auto_sync_account_data"
-            android:title="@string/auto_sync_account_title"
-            android:summary="@string/auto_sync_account_summary"
-            android:order="200"
-            settings:allowDividerAbove="true"/>
-
-        <SwitchPreference
-            android:key="auto_sync_work_account_data"
-            android:title="@string/account_settings_menu_auto_sync_work"
-            android:summary="@string/auto_sync_account_summary"
-            android:order="210"/>
-    </PreferenceCategory>
+    <SwitchPreference
+        android:key="auto_sync_work_account_data"
+        android:title="@string/account_settings_menu_auto_sync_work"
+        android:summary="@string/auto_sync_account_summary"
+        android:order="210"/>
 
 </PreferenceScreen>
