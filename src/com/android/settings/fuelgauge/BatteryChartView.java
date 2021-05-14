@@ -24,6 +24,7 @@ import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
@@ -44,7 +45,8 @@ import java.util.List;
 import java.util.Locale;
 
 /** A widget component to draw chart graph. */
-public class BatteryChartView extends AppCompatImageView implements View.OnClickListener {
+public class BatteryChartView extends AppCompatImageView implements View.OnClickListener,
+        AccessibilityManager.AccessibilityStateChangeListener {
     private static final String TAG = "BatteryChartView";
     private static final List<String> ACCESSIBILITY_SERVICE_NAMES =
         Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
@@ -52,6 +54,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private static final String[] PERCENTAGES = new String[] {"100%", "50%", "0%"};
     private static final int DEFAULT_TRAPEZOID_COUNT = 12;
     private static final int DEFAULT_TIMESTAMP_COUNT = 4;
+    private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
+    private static final long UPDATE_STATE_DELAYED_TIME = 500L;
 
     /** Selects all trapezoid shapes. */
     public static final int SELECTED_INDEX_ALL = -1;
@@ -74,7 +78,6 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     // Colors for drawing the trapezoid shape and dividers.
     private int mTrapezoidColor;
     private int mTrapezoidSolidColor;
-    private final int mDividerColor = Color.parseColor("#CDCCC5");
     // For drawing the percentage information.
     private int mTextPadding;
     private final Rect mIndent = new Rect();
@@ -85,11 +88,17 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private final Rect[] mTimestampsBounds =
         new Rect[] {new Rect(), new Rect(), new Rect(), new Rect()};
 
+    @VisibleForTesting
+    Handler mHandler = new Handler();
+    @VisibleForTesting
+    final Runnable mUpdateClickableStateRun = () -> updateClickableState();
+
     private int[] mLevels;
     private Paint mTextPaint;
     private Paint mDividerPaint;
     private Paint mTrapezoidPaint;
-    private Paint mTrapezoidCurvePaint = null;
+    @VisibleForTesting
+    Paint mTrapezoidCurvePaint = null;
     private TrapezoidSlot[] mTrapezoidSlots;
     // Records the location to calculate selected index.
     private MotionEvent mTouchUpEvent;
@@ -257,6 +266,26 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         updateClickableState();
+        mContext.getSystemService(AccessibilityManager.class)
+            .addAccessibilityStateChangeListener(/*listener=*/ this);
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mContext.getSystemService(AccessibilityManager.class)
+            .removeAccessibilityStateChangeListener(/*listener=*/ this);
+        mHandler.removeCallbacks(mUpdateClickableStateRun);
+    }
+
+    @Override
+    public void onAccessibilityStateChanged(boolean enabled) {
+        Log.d(TAG, "onAccessibilityStateChanged:" + enabled);
+        mHandler.removeCallbacks(mUpdateClickableStateRun);
+        // We should delay it a while since accessibility manager will spend
+        // some times to bind with new enabled accessibility services.
+        mHandler.postDelayed(
+            mUpdateClickableStateRun, UPDATE_STATE_DELAYED_TIME);
     }
 
     private void updateClickableState() {
@@ -275,6 +304,10 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             mTrapezoidCurvePaint.setColor(mTrapezoidSolidColor);
             mTrapezoidCurvePaint.setStyle(Paint.Style.STROKE);
             mTrapezoidCurvePaint.setStrokeWidth(mDividerWidth * 2);
+        } else if (mIsSlotsClickabled) {
+            mTrapezoidCurvePaint = null;
+            // Sets levels again to force update the click state.
+            setLevels(mLevels);
         }
         invalidate();
     }
@@ -299,7 +332,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         mDividerHeight = resources.getDimensionPixelSize(R.dimen.chartview_divider_height);
         mDividerPaint = new Paint();
         mDividerPaint.setAntiAlias(true);
-        mDividerPaint.setColor(mDividerColor);
+        mDividerPaint.setColor(DIVIDER_COLOR);
         mDividerPaint.setStyle(Paint.Style.STROKE);
         mDividerPaint.setStrokeWidth(mDividerWidth);
         Log.i(TAG, "mDividerWidth:" + mDividerWidth);
