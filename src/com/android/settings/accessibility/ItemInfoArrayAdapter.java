@@ -61,6 +61,12 @@ public class ItemInfoArrayAdapter<T extends ItemInfoArrayAdapter.ItemInfo> exten
         }
         final ImageView image = root.findViewById(R.id.image);
         image.setImageResource(item.mDrawableId);
+        if (getContext().getResources().getConfiguration().getLayoutDirection()
+                == View.LAYOUT_DIRECTION_LTR) {
+            image.setScaleType(ImageView.ScaleType.FIT_START);
+        } else {
+            image.setScaleType(ImageView.ScaleType.FIT_END);
+        }
         return root;
     }
 

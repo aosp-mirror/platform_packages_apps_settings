@@ -39,13 +39,11 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SettingsBaseActivity;
-import com.android.settings.homepage.HomepagePreference;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
@@ -538,10 +536,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @VisibleForTesting
     Preference createPreference(Tile tile) {
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)
-                && TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
-            return new HomepagePreference(getPrefContext());
-        }
         return tile instanceof ProviderTile
                 ? new SwitchPreference(getPrefContext())
                 : tile.hasSwitch()
