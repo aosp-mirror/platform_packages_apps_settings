@@ -652,7 +652,7 @@
     <!-- Text shown for the title of the lockdown option -->
     <string name="lockdown_settings_title">Show lockdown option</string>
     <!-- Text shown for the description of the lockdown option -->
-    <string name="lockdown_settings_summary">Display power button option that turns off Smart Lock, biometric unlocking, and notifications on the lock screen</string>
+    <string name="lockdown_settings_summary">Display Power button option that turns off Smart Lock, Face Unlock, Fingerprint Unlock, and notifications on the lock screen</string>
 
     <!-- Text shown for the title of the lock when trust lost option [CHAR LIMIT=40] -->
     <string name="trust_lost_locks_screen_title">Lock screen when trust is lost</string>
@@ -736,24 +736,26 @@
     <!-- Face enrollment and settings --><skip />
     <!-- Message shown in summary field when face unlock is set up. [CHAR LIMIT=40] -->
     <string name="security_settings_face_preference_summary">Face added</string>
-    <!-- Message shown in summary field when face unlock is not set up. [CHAR LIMIT=54] -->
-    <string name="security_settings_face_preference_summary_none">Set up face unlock</string>
+    <!-- Message shown in summary field when Face Unlock is not set up. [CHAR LIMIT=54] -->
+    <string name="security_settings_face_preference_summary_none">Tap to set up face</string>
     <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
-    <string name="security_settings_face_preference_title">Face unlock</string>
+    <string name="security_settings_face_preference_title">Face Unlock</string>
     <!-- Title shown for menu item that launches face settings or enrollment, for work profile [CHAR LIMIT=50] -->
-    <string name="security_settings_face_profile_preference_title">Face unlock for work</string>
-    <!-- Introduction title shown in face enrollment education screen [CHAR LIMIT=40] -->
-    <string name="security_settings_face_enroll_education_title">How to set up face unlock</string>
-    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMI=40]-->
-    <string name="security_settings_face_enroll_education_title_accessibility">Set up face unlock</string>
+    <string name="security_settings_face_profile_preference_title">Face Unlock for work</string>
+    <!-- Introduction title shown in face enrollment education screen [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_education_title">How to set up Face Unlock</string>
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility">Set up Face Unlock</string>
     <!-- Introduction title shown in face enrollment education screen to show the face unlock feature, when face unlock is disabled by device admin [CHAR LIMIT=60] -->
     <string name="security_settings_face_enroll_education_title_unlock_disabled">Use your face to authenticate</string>
     <!-- Introduction detail message shown in face education [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_education_message"></string>
+    <!-- Introduction detail message shown in face education for accessibility [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_education_message_accessibility"></string>
     <!-- Button that takes the user to the enrollment activity [CHAR LIMIT=20] -->
     <string name="security_settings_face_enroll_education_start">Start</string>
     <!-- Confirmation dialog message shown when users with system accessibility features enabled try to start the non-accessibility version of enrollment [CHAR LIMIT=150] -->
-    <string name="security_settings_face_enroll_education_accessibility_dialog_message">If accessibility face unlock is turned off, some setup steps may not work properly with TalkBack.</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message">If accessibility Face Unlock is turned off, some setup steps may not work properly with TalkBack.</string>
     <!-- Negative button text for users who were shown the accessibility dialog [CHAR LIMIT=10] -->
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative">Go back</string>
     <!-- Positive button text for users who were shown the accessibility dialog [CHAR LIMIT=20] -->
@@ -823,27 +825,25 @@
     <!-- Button text to exit face wizard after everything is done [CHAR LIMIT=15] -->
     <string name="security_settings_face_enroll_done">Done</string>
     <!-- Settings suggestion title text for re-enrolling a face. [CHAR LIMIT=50] -->
-    <string name="security_settings_face_enroll_should_re_enroll_title">Improve face unlock performance</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title">Improve Face Unlock performance</string>
     <!-- Settings suggestion subtitle text for re-enrolling a face. [CHAR LIMIT=40] -->
-    <string name="security_settings_face_enroll_should_re_enroll_subtitle">Set up face unlock again</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle">Set up Face Unlock again</string>
     <!-- Settings suggestion title text for mandatory re-enrolling of a face. [CHAR LIMIT=50] -->
-    <string name="security_settings_face_enroll_must_re_enroll_title">Set up face unlock again</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title">Set up Face Unlock again</string>
     <!-- Settings suggestion subtitle text for mandatory re-enrolling of a face. [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_must_re_enroll_subtitle">Improve security and performance</string>
     <!-- Settings suggestion alert body title for re-enrolling a face. [CHAR LIMIT=60] -->
-    <string name="security_settings_face_enroll_improve_face_alert_title">Set up face unlock</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title">Set up Face Unlock</string>
     <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
-    <string name="security_settings_face_enroll_improve_face_alert_body">Delete your current face data to set up face unlock again.\n\nThe face data used by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone, sign in to apps, and confirm payments.</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body">Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
+    <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
     <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
-    <string name="security_settings_face_settings_use_face_category">Use face unlock for</string>
-    <!-- Text shown on a toggle which allows or disallows the device to use face for unlocking the device. [CHAR LIMIT=20] -->
-    <string name="security_settings_face_settings_use_face_unlock_phone">Unlocking your phone</string>
-    <!-- Text shown on a toggle which allows or disallows the device to use face unlock for apps. This will be presented to the user together with the context of security_settings_face_settings_use_face_category. [CHAR LIMIT=30] -->
-    <string name="security_settings_face_settings_use_face_for_apps">App sign-in \u0026 payments</string>
+    <string name="security_settings_face_settings_use_face_category">Use Face Unlock for</string>
     <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. -->
-    <string name="security_settings_face_settings_require_category">Requirements for face unlock</string>
+    <string name="security_settings_face_settings_require_category">Requirements for Face Unlock</string>
     <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
-    <string name="security_settings_face_settings_preferences_category">When using face unlock</string>
+    <string name="security_settings_face_settings_preferences_category">When using Face Unlock</string>
     <!-- Text shown on a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=30] -->
     <string name="security_settings_face_settings_require_attention">Require eyes to be open</string>
     <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
@@ -851,17 +851,17 @@
     <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=50] -->
     <string name="security_settings_face_settings_require_confirmation">Always require confirmation</string>
     <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=70] -->
-    <string name="security_settings_face_settings_require_confirmation_details">When using face unlock in apps, always require confirmation step</string>
+    <string name="security_settings_face_settings_require_confirmation_details">When using Face Unlock in apps, always require confirmation step</string>
     <!-- Button text in face settings which removes the user's face model from the device [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_remove_face_model">Delete face model</string>
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
-    <string name="security_settings_face_settings_enroll">Set up face unlock</string>
+    <string name="security_settings_face_settings_enroll">Set up Face Unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_top_intro">Use face unlock to unlock your device, sign in to apps, and confirm payments.</string>
+    <string name="security_settings_face_settings_top_intro">Use Face Unlock to unlock your device, sign in to apps, and confirm payments.</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer">Keep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <string name="security_settings_face_settings_footer">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
     <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer_attention_not_supported">Keep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face model?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
@@ -871,7 +871,7 @@
     <!-- Dialog contents shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_remove_model_dialog_details">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
     <!-- Subtitle shown for contextual setting face enrollment [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_context_subtitle">Use face unlock to unlock your phone</string>
+    <string name="security_settings_face_settings_context_subtitle">Use Face Unlock to unlock your phone</string>
 
     <!-- Fingerprint enrollment and settings --><skip />
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
@@ -978,11 +978,11 @@
     <!-- Message shown in summary field of biometric settings when face is enrolled, and a single fingerprintis enrolled. [CHAR LIMIT=66]-->
     <string name="security_settings_biometric_preference_summary_both_fp_single">Face and fingerprint added</string>
     <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
-    <string name="biometric_settings_intro">When you set up face unlock and fingerprint, your phone will ask for your fingerprint when you wear a mask or are in a dark area.</string>
+    <string name="biometric_settings_intro">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
     <string name="biometric_settings_category_ways_to_unlock">Ways to unlock</string>
     <!-- Biometric category title - configuration options for using biometric to unlock the device or authenticate in apps. [CHAR LIMIT=50] -->
-    <string name="biometric_settings_category_ways_to_use">Use face and fingerprint to</string>
+    <string name="biometric_settings_category_ways_to_use">Use face and fingerprint for</string>
     <!-- Text shown on a toggle which allows or disallows the device to use biometric for unlocking the device. [CHAR LIMIT=50] -->
     <string name="biometric_settings_use_biometric_unlock_phone">Unlocking your phone</string>
     <!-- Text shown on a toggle which allows or disallows the device to use biometric for authentication. [CHAR LIMIT=50] -->
@@ -1054,30 +1054,102 @@
     <string name="setup_fingerprint_enroll_enrolling_skip_title">Skip fingerprint setup?</string>
     <!-- Content of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=NONE] -->
     <string name="setup_fingerprint_enroll_enrolling_skip_message">You\u2019ve chosen to use your fingerprint as one way to unlock your phone. If you skip now, you\u2019ll need to set this up later. Setup takes only a minute or so.</string>
-    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet">Protect your tablet with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN, pattern, or password.</string>
-    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device">Protect your device with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN, pattern, or password.</string>
-    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default">Protect your phone with a screen lock option so no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up fingerprint. Tap Cancel, then set a PIN, pattern, or password.</string>
-    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face unlock. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet">By protecting your tablet with a screen lock option, no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face unlock. To go back, tap Cancel. </string>
-    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face unlock. (device) [CHAR LIMIT=NONE] -->
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device">By protecting your device with a screen lock option, no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face unlock. To go back, tap Cancel. </string>
-    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set face unlock. (default) [CHAR LIMIT=NONE] -->
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default">By protecting your phone with a screen lock option, no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up face unlock. To go back, tap Cancel.</string>
-    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set biometric unlock. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="biometrics_lock_screen_setup_skip_dialog_text" product="tablet">By protecting your tablet with a screen lock option, no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up biometrics. To go back, tap Cancel. </string>
-    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set biometric unlock. (device) [CHAR LIMIT=NONE] -->
-    <string name="biometrics_lock_screen_setup_skip_dialog_text" product="device">By protecting your device with a screen lock option, no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up biometrics. To go back, tap Cancel. </string>
-    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set biometric unlock. (default) [CHAR LIMIT=NONE] -->
-    <string name="biometrics_lock_screen_setup_skip_dialog_text" product="default">By protecting your phone with a screen lock option, no one will be able to use it if it is lost or stolen. You also need a screen lock option to set up biometrics. To go back, tap Cancel.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_message" product="tablet">A PIN protects your tablet if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_message" product="tablet">A pattern protects your tablet if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_message" product="tablet">A password protects your tablet if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_message" product="device">A PIN protects your device if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_message" product="device">A pattern protects your device if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_message" product="device">A password protects your device if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_message" product="default">A PIN protects your phone if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_message" product="default">A pattern protects your phone if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_message" product="default">A password protects your phone if it\u2019s lost or stolen</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects your tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects your tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet">A password is required to set up Fingerprint Unlock.\n\nA password protects your tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects your device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects your device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_fingerprint_message" product="device">A password is required to set up Fingerprint Unlock.\n\nA password protects your device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects your phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects your phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_fingerprint_message" product="default">A password is required to set up Fingerprint Unlock.\n\nA password protects your phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_face_message" product="tablet">A PIN is required to set up Face Unlock.\n\nA PIN protects your tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_face_message" product="tablet">A pattern is required to set up Face Unlock.\n\nA pattern protects your tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_face_message" product="tablet">A password is required to set up Face Unlock.\n\nA password protects your tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_face_message" product="device">A PIN is required to set up Face Unlock.\n\nA PIN protects your device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_face_message" product="device">A pattern is required to set up Face Unlock.\n\nA pattern protects your device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_face_message" product="device">A password is required to set up Face Unlock.\n\nA password protects your device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_face_message" product="default">A PIN is required to set up Face Unlock.\n\nA PIN protects your phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_face_message" product="default">A pattern is required to set up Face Unlock.\n\nA pattern protects your phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_face_message" product="default">A password is required to set up Face Unlock.\n\nA password protects your phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects your tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects your tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects your tablet if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_biometrics_message" product="device">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects your device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects your device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_biometrics_message" product="device">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects your device if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pin_skip_biometrics_message" product="default">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects your phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects your phone if it\u2019s lost or stolen.</string>
+    <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
+    <string name="lock_screen_password_skip_biometrics_message" product="default">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects your phone if it\u2019s lost or stolen.</string>
     <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
     <string name="lock_screen_pin_skip_title">Skip PIN setup?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=90]-->
+    <string name="lock_screen_pin_skip_face_title">Skip setup for PIN and face?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=90]-->
+    <string name="lock_screen_pin_skip_fingerprint_title">Skip setup for PIN and fingerprint?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=90]-->
+    <string name="lock_screen_pin_skip_biometrics_title">Skip setup for PIN, face, and fingerprint?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a password, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
     <string name="lock_screen_password_skip_title">Skip password setup?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a password, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_password_skip_face_title">Skip setup for password and face?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a password, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_password_skip_fingerprint_title">Skip setup for password and fingerprint?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a password, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_password_skip_biometrics_title">Skip setup for password, face, and fingerprint?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a pattern, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
     <string name="lock_screen_pattern_skip_title">Skip pattern setup?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a pattern, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_pattern_skip_face_title">Skip setup for pattern and face?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a pattern, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_pattern_skip_fingerprint_title">Skip setup for pattern and fingerprint?</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a pattern, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
+    <string name="lock_screen_pattern_skip_biometrics_title">Skip setup for pattern, face, and fingerprint?</string>
 
     <!-- Button text to setup screen lock in onboard dialog [CHAR LIMIT=34] -->
     <string name="security_settings_fingerprint_enroll_setup_screen_lock">Set up screen lock</string>
@@ -1423,14 +1495,14 @@
     <!-- Message shown in screen lock picker while setting up the new screen lock with fingerprint option. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_unlock_title">You can unlock your phone using your fingerprint. For security, this option requires a backup screen lock.</string>
 
-    <!-- Title for preference that guides the user through creating a backup unlock pattern for face unlock [CHAR LIMIT=45]-->
-    <string name="face_unlock_set_unlock_pattern">Face unlock + Pattern</string>
-    <!-- Title for preference that guides the user through creating a backup unlock PIN for face unlock [CHAR LIMIT=45]-->
-    <string name="face_unlock_set_unlock_pin">Face unlock + PIN</string>
-    <!-- Title for preference that guides the user through creating a backup unlock password for face unlock [CHAR LIMIT=45]-->
-    <string name="face_unlock_set_unlock_password">Face unlock + Password</string>
-    <!-- Title for preference that guides the user to skip face unlock setup [CHAR LIMIT=60]-->
-    <string name="face_unlock_skip_face">Continue without face unlock</string>
+    <!-- Title for preference that guides the user through creating a backup unlock pattern for Face Unlock [CHAR LIMIT=45]-->
+    <string name="face_unlock_set_unlock_pattern">Face Unlock + Pattern</string>
+    <!-- Title for preference that guides the user through creating a backup unlock PIN for Face Unlock [CHAR LIMIT=45]-->
+    <string name="face_unlock_set_unlock_pin">Face Unlock + PIN</string>
+    <!-- Title for preference that guides the user through creating a backup unlock password for Face Unlock [CHAR LIMIT=45]-->
+    <string name="face_unlock_set_unlock_password">Face Unlock + Password</string>
+    <!-- Title for preference that guides the user to skip Face Unlock setup [CHAR LIMIT=60]-->
+    <string name="face_unlock_skip_face">Continue without Face Unlock</string>
     <!-- Message shown in screen lock picker while setting up the new screen lock with face unlock option. [CHAR LIMIT=NONE] -->
     <string name="face_unlock_title">You can unlock your phone using your face. For security, this option requires a backup screen lock.</string>
 
@@ -4327,12 +4399,12 @@
     <string name="lockpassword_pin_set_toast">PIN has been set</string>
     <!-- Toast shown if setting pattern was successful -->
     <string name="lockpassword_pattern_set_toast">Pattern has been set</string>
-    <!-- Header on first screen of choose password/PIN as backup for face unlock flow. If this string cannot be translated in under 40 characters, please translate "Set face unlock backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_password_header_for_face">To use face unlock, set password</string>
-    <!-- Header on first screen of choose pattern as backup for face unlock flow. If this string cannot be translated in under 40 characters, please translate "Set face unlock backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_pattern_header_for_face">To use face unlock, set pattern</string>
-    <!-- Header on first screen of choose password/PIN as backup for face unlock flow. If this string cannot be translated in under 40 characters, please translate "Set face unlock backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_pin_header_for_face">To use face unlock, set PIN</string>
+    <!-- Header on first screen of choose password/PIN as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_password_header_for_face">To use Face Unlock, set password</string>
+    <!-- Header on first screen of choose pattern as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pattern_header_for_face">To use Face Unlock, set pattern</string>
+    <!-- Header on first screen of choose password/PIN as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pin_header_for_face">To use Face Unlock, set PIN</string>
 
     <!-- Header on first screen of choose password/PIN as backup for biometric unlock flow. If this string cannot be translated in under 40 characters, please translate "Set biometric unlock backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_password_header_for_biometrics">To use biometrics, set password</string>
@@ -8836,7 +8908,7 @@
     <string name="lockscreen_bypass_title">Skip lock screen</string>
 
     <!-- Configure lock screen: Summary for the option of unlocking directly to home. [CHAR LIMIT=100] -->
-    <string name="lockscreen_bypass_summary">After face unlock, go directly to last used screen</string>
+    <string name="lockscreen_bypass_summary">After unlocking, go directly to last used screen</string>
 
     <!-- Configure lock screen: Search keywords for the option of unlocking directly to home. [CHAR LIMIT=100] -->
     <string name="keywords_lockscreen_bypass">Lock screen, Lockscreen, Skip, Bypass</string>

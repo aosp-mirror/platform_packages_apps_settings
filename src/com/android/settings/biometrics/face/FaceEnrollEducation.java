@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.face;
 
+import android.annotation.StringRes;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -39,6 +40,7 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.view.IllustrationVideoView;
 
 public class FaceEnrollEducation extends BiometricEnrollBase {
@@ -62,22 +64,27 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    int titleRes = isChecked ?
-                            R.string.security_settings_face_enroll_education_title_accessibility
-                            : R.string.security_settings_face_enroll_education_title;
-                    getLayout().setHeaderText(titleRes);
-                    setTitle(titleRes);
+                    final int headerRes;
+                    final int descriptionRes;
+                    if (isChecked) {
+                        headerRes = R.string
+                                .security_settings_face_enroll_education_title_accessibility;
+                        descriptionRes = R.string
+                                .security_settings_face_enroll_education_message_accessibility;
+                    } else {
+                        headerRes = R.string.security_settings_face_enroll_education_title;
+                        descriptionRes = R.string.security_settings_face_enroll_education_message;
+                    }
+                    updateHeaders(headerRes, descriptionRes);
 
                     if (isChecked) {
                         mIllustrationNormal.stop();
                         mIllustrationNormal.setVisibility(View.INVISIBLE);
                         mIllustrationAccessibility.setVisibility(View.VISIBLE);
-                        mDescriptionText.setVisibility(View.INVISIBLE);
                     } else {
                         mIllustrationNormal.setVisibility(View.VISIBLE);
                         mIllustrationNormal.start();
                         mIllustrationAccessibility.setVisibility(View.INVISIBLE);
-                        mDescriptionText.setVisibility(View.VISIBLE);
                     }
                 }
             };
@@ -86,8 +93,11 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.face_enroll_education);
-        getLayout().setHeaderText(R.string.security_settings_face_enroll_education_title);
-        setTitle(R.string.security_settings_face_enroll_education_title);
+
+        final int headerRes = R.string.security_settings_face_enroll_education_title;
+        final int descriptionRes = R.string.security_settings_face_enroll_education_message;
+        updateHeaders(headerRes, descriptionRes);
+
         mHandler = new Handler();
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
@@ -236,5 +246,14 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.FACE_ENROLL_INTRO;
+    }
+
+    private void updateHeaders(@StringRes int headerRes, @StringRes int descriptionRes) {
+        final CharSequence headerText = getText(headerRes);
+        setTitle(headerText);
+
+        final GlifLayout layout = getLayout();
+        layout.setHeaderText(headerText);
+        layout.setDescriptionText(descriptionRes);
     }
 }
