@@ -191,12 +191,13 @@ public class AppLaunchSettings extends AppInfoBase implements
             return;
         }
         final Activity activity = getActivity();
+        final String summary = activity.getString(R.string.app_launch_top_intro_message);
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
                 .setRecyclerView(getListView(), getSettingsLifecycle())
                 .setIcon(Utils.getBadgedIcon(mContext, mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
-                .setSummary("" /* summary */)  // no version number
+                .setSummary(summary)  // add intro text
                 .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
                 .setPackageName(mPackageName)
                 .setUid(mPackageInfo.applicationInfo.uid)
