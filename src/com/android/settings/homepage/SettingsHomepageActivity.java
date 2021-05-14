@@ -96,12 +96,7 @@ public class SettingsHomepageActivity extends FragmentActivity {
                 getLifecycle().addObserver(new AvatarViewMixin(this, avatarView));
             }
 
-            if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)) {
-                showSuggestionFragment();
-            } else {
-                findViewById(R.id.homepage_title).setVisibility(View.GONE);
-                avatarView.setVisibility(View.GONE);
-            }
+            showSuggestionFragment();
 
             if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)) {
                 showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
