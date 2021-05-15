@@ -39,7 +39,6 @@ import android.os.UserManager;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -73,12 +72,8 @@ import java.util.List;
         ShadowSettingsLibUtils.class})
 public class AccountPreferenceControllerTest {
 
-    private static final String PREF_KEY_ACCOUNTS = "accounts_category";
-
     @Mock(answer = RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
-    @Mock(answer = RETURNS_DEEP_STUBS)
-    private PreferenceCategory mAccountsCategory;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
     @Mock(answer = RETURNS_DEEP_STUBS)
@@ -100,9 +95,6 @@ public class AccountPreferenceControllerTest {
         shadowApp.setSystemService(Context.ACCOUNT_SERVICE, mAccountManager);
 
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
-        // This is a bit ugly, but hard to avoid because of how the mocks are used in these tests.
-        // TODO: Refactor these tests to not use RETURNS_DEEP_STUBS.
-        when(mScreen.findPreference(PREF_KEY_ACCOUNTS)).thenReturn(mScreen);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt()))
                 .thenReturn(new AuthenticatorDescription[0]);
@@ -174,7 +166,6 @@ public class AccountPreferenceControllerTest {
         // First time resume will build the UI
         mController.onResume();
         reset(mScreen);
-        when(mScreen.findPreference(PREF_KEY_ACCOUNTS)).thenReturn(mScreen);
 
         mController.onResume();
         verify(mScreen, never()).addPreference(any(PreferenceGroup.class));
@@ -193,7 +184,6 @@ public class AccountPreferenceControllerTest {
         // add a new profile
         infos.add(new UserInfo(2, "user 2", UserInfo.FLAG_MANAGED_PROFILE));
         reset(mScreen);
-        when(mScreen.findPreference(PREF_KEY_ACCOUNTS)).thenReturn(mScreen);
 
         mController.onResume();
         verify(mScreen, times(1)).addPreference(any(PreferenceGroup.class));
