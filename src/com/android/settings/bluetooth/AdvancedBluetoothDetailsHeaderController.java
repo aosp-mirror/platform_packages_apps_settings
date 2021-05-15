@@ -274,37 +274,43 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             showBatteryPredictionIfNecessary(linearLayout, deviceId, batteryLevel);
         }
         final TextView batterySummaryView = linearLayout.findViewById(R.id.bt_battery_summary);
-        if (batteryLevel != BluetoothUtils.META_INT_ERROR) {
-            linearLayout.setVisibility(View.VISIBLE);
-            batterySummaryView.setText(com.android.settings.Utils.formatPercentage(batteryLevel));
-            batterySummaryView.setVisibility(View.VISIBLE);
-            int lowBatteryLevel = BluetoothUtils.getIntMetaData(bluetoothDevice, lowBatteryMetaKey);
-            if (lowBatteryLevel == BluetoothUtils.META_INT_ERROR) {
-                if (batteryMetaKey == BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY) {
-                    lowBatteryLevel = CASE_LOW_BATTERY_LEVEL;
-                } else {
-                    lowBatteryLevel = LOW_BATTERY_LEVEL;
-                }
-            }
-            showBatteryIcon(linearLayout, batteryLevel, lowBatteryLevel, charging);
-        } else {
-            if (deviceId == MAIN_DEVICE_ID) {
+        if (isUntetheredHeadset(bluetoothDevice)) {
+            if (batteryLevel != BluetoothUtils.META_INT_ERROR) {
                 linearLayout.setVisibility(View.VISIBLE);
-                linearLayout.findViewById(R.id.bt_battery_icon).setVisibility(View.GONE);
-                int level = bluetoothDevice.getBatteryLevel();
-                if (level != BluetoothDevice.BATTERY_LEVEL_UNKNOWN
-                        && level != BluetoothDevice.BATTERY_LEVEL_BLUETOOTH_OFF) {
-                    batterySummaryView.setText(com.android.settings.Utils.formatPercentage(level));
-                    batterySummaryView.setVisibility(View.VISIBLE);
-                } else {
-                    batterySummaryView.setVisibility(View.GONE);
+                batterySummaryView.setText(
+                        com.android.settings.Utils.formatPercentage(batteryLevel));
+                batterySummaryView.setVisibility(View.VISIBLE);
+                int lowBatteryLevel = BluetoothUtils.getIntMetaData(bluetoothDevice,
+                        lowBatteryMetaKey);
+                if (lowBatteryLevel == BluetoothUtils.META_INT_ERROR) {
+                    if (batteryMetaKey == BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY) {
+                        lowBatteryLevel = CASE_LOW_BATTERY_LEVEL;
+                    } else {
+                        lowBatteryLevel = LOW_BATTERY_LEVEL;
+                    }
                 }
+                showBatteryIcon(linearLayout, batteryLevel, lowBatteryLevel, charging);
             } else {
-                // Hide it if it doesn't have battery information
-                linearLayout.setVisibility(View.GONE);
+                if (deviceId == MAIN_DEVICE_ID) {
+                    linearLayout.setVisibility(View.VISIBLE);
+                    linearLayout.findViewById(R.id.bt_battery_icon).setVisibility(View.GONE);
+                    int level = bluetoothDevice.getBatteryLevel();
+                    if (level != BluetoothDevice.BATTERY_LEVEL_UNKNOWN
+                            && level != BluetoothDevice.BATTERY_LEVEL_BLUETOOTH_OFF) {
+                        batterySummaryView.setText(
+                                com.android.settings.Utils.formatPercentage(level));
+                        batterySummaryView.setVisibility(View.VISIBLE);
+                    } else {
+                        batterySummaryView.setVisibility(View.GONE);
+                    }
+                } else {
+                    // Hide it if it doesn't have battery information
+                    linearLayout.setVisibility(View.GONE);
+                }
             }
+        } else {
+            batterySummaryView.setVisibility(View.GONE);
         }
-
         final TextView textView = linearLayout.findViewById(R.id.header_title);
         if (deviceId == MAIN_DEVICE_ID) {
             textView.setVisibility(View.GONE);
@@ -312,6 +318,14 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             textView.setText(titleResId);
             textView.setVisibility(View.VISIBLE);
         }
+    }
+
+    private boolean isUntetheredHeadset(BluetoothDevice bluetoothDevice) {
+        return BluetoothUtils.getBooleanMetaData(bluetoothDevice,
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)
+                || TextUtils.equals(BluetoothUtils.getStringMetaData(bluetoothDevice,
+                BluetoothDevice.METADATA_DEVICE_TYPE),
+                BluetoothDevice.DEVICE_TYPE_UNTETHERED_HEADSET);
     }
 
     private void showBatteryPredictionIfNecessary(LinearLayout linearLayout, int batteryId,

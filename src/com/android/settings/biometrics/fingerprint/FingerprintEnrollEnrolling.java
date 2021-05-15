@@ -52,6 +52,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.List;
 
@@ -109,6 +110,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Nullable private AnimatedVectorDrawable mIconBackgroundBlinksDrawable;
     private boolean mRestoring;
     private Vibrator mVibrator;
+    private boolean mIsSetupWizard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +133,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             setDescriptionText(R.string.security_settings_fingerprint_enroll_start_message);
         }
 
-        setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
+        mIsSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        if (mCanAssumeUdfps && !mIsSetupWizard) {
+            setHeaderText(R.string.security_settings_udfps_enroll_find_sensor_title);
+        } else {
+            setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
+        }
 
         mErrorText = findViewById(R.id.error_text);
         mProgressBar = findViewById(R.id.fingerprint_progress_bar);
@@ -280,7 +287,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 setDescriptionText(R.string.security_settings_fingerprint_enroll_start_message);
             }
         } else if (mCanAssumeUdfps && !isCenterEnrollmentComplete()) {
-            setHeaderText(R.string.security_settings_udfps_enroll_title_one_more_time);
+            if (mIsSetupWizard) {
+                setHeaderText(R.string.security_settings_udfps_enroll_title_one_more_time);
+            } else {
+                setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
+            }
             setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
         } else {
             if (mCanAssumeUdfps) {

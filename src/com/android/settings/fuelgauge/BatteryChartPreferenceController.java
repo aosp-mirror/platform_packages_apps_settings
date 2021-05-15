@@ -35,6 +35,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -236,16 +237,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mBatteryHistoryLevels = null;
             return;
         }
-        // Generates battery history timestamp slots.
-        final List<Long> batteryHistoryKeyList =
-            new ArrayList<>(batteryHistoryMap.keySet());
-        Collections.sort(batteryHistoryKeyList);
-        mBatteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
-        for (int index = 0; index < CHART_KEY_ARRAY_SIZE; index++) {
-            mBatteryHistoryKeys[index] = batteryHistoryKeyList.get(index);
-        }
-
-        // Generates the battery history levels for chart graph.
+        mBatteryHistoryKeys = getBatteryHistoryKeys(batteryHistoryMap);
         mBatteryHistoryLevels = new int[CHART_LEVEL_ARRAY_SIZE];
         for (int index = 0; index < CHART_LEVEL_ARRAY_SIZE; index++) {
             final long timestamp = mBatteryHistoryKeys[index * 2];
@@ -273,7 +265,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
         Log.d(TAG, String.format(
             "setBatteryHistoryMap() size=%d\nkeys=%s\nlevels=%s",
-            batteryHistoryKeyList.size(),
+            batteryHistoryMap.size(),
             utcToLocalTime(mBatteryHistoryKeys),
             Arrays.toString(mBatteryHistoryLevels)));
     }
@@ -598,5 +590,38 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return false;
         }
         return true;
+    }
+
+    static List<BatteryDiffEntry> getBatteryLast24HrUsageData(Context context) {
+        final long start = System.currentTimeMillis();
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
+            FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context)
+                .getBatteryHistory(context);
+        if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
+            return null;
+        }
+        Log.d(TAG, String.format("getBatteryLast24HrData() size=%d time=&d/ms",
+            batteryHistoryMap.size(), (System.currentTimeMillis() - start)));
+        final Map<Integer, List<BatteryDiffEntry>> batteryIndexedMap =
+            ConvertUtils.getIndexedUsageMap(
+                context,
+                /*timeSlotSize=*/ CHART_LEVEL_ARRAY_SIZE - 1,
+                getBatteryHistoryKeys(batteryHistoryMap),
+                batteryHistoryMap,
+                /*purgeLowPercentageAndFakeData=*/ true);
+        return batteryIndexedMap.get(BatteryChartView.SELECTED_INDEX_ALL);
+    }
+
+    private static long[] getBatteryHistoryKeys(
+            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+        final List<Long> batteryHistoryKeyList =
+            new ArrayList<>(batteryHistoryMap.keySet());
+        Collections.sort(batteryHistoryKeyList);
+        final long[] batteryHistoryKeys = new long[CHART_KEY_ARRAY_SIZE];
+        for (int index = 0; index < CHART_KEY_ARRAY_SIZE; index++) {
+            batteryHistoryKeys[index] = batteryHistoryKeyList.get(index);
+        }
+        return batteryHistoryKeys;
     }
 }
