@@ -26,6 +26,8 @@ import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
 import android.os.UserHandle;
 
+import com.android.settings.testutils.FakeFeatureFactory;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,15 +47,18 @@ import java.util.TimeZone;
 public final class ConvertUtilsTest {
 
     private Context mContext;
-    @Mock
-    private BatteryUsageStats mBatteryUsageStats;
-    @Mock
-    private BatteryEntry mockBatteryEntry;
+    @Mock private BatteryUsageStats mBatteryUsageStats;
+    @Mock private BatteryEntry mockBatteryEntry;
+
+    private FakeFeatureFactory mFeatureFactory;
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
     }
 
     @Test
@@ -250,6 +255,21 @@ public final class ConvertUtilsTest {
         // Verifies the fake data is cleared out.
         assertThat(entryList.get(0).getPackageName())
             .isNotEqualTo(ConvertUtils.FAKE_PACKAGE_NAME);
+
+        // Adds lacked data into the battery history map.
+        final int remainingSize = 25 - batteryHistoryKeys.length;
+        for (int index = 0; index < remainingSize; index++) {
+            batteryHistoryMap.put(105L + index + 1, new HashMap<>());
+        }
+        when(mPowerUsageFeatureProvider.getBatteryHistory(mContext))
+            .thenReturn(batteryHistoryMap);
+
+        final List<BatteryDiffEntry> batteryDiffEntryList =
+            BatteryChartPreferenceController.getBatteryLast24HrUsageData(mContext);
+
+        assertThat(batteryDiffEntryList).isNotEmpty();
+        final BatteryDiffEntry resultEntry = batteryDiffEntryList.get(0);
+        assertThat(resultEntry.getPackageName()).isEqualTo("package2");
     }
 
     @Test

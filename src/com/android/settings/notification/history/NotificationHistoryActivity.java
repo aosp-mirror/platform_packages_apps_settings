@@ -306,12 +306,6 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         super.onDestroy();
     }
 
-    @Override
-    public boolean onNavigateUp() {
-        finish();
-        return true;
-    }
-
     private @ColorInt int obtainThemeColor(@AttrRes int attrRes) {
         Resources.Theme theme = new ContextThemeWrapper(this,
                 android.R.style.Theme_DeviceDefault_DayNight).getTheme();

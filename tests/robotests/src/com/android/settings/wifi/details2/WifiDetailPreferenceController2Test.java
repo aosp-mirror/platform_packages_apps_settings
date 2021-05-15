@@ -1048,8 +1048,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     private NetworkCapabilities makeNetworkCapabilities() {
-        final NetworkCapabilities nc = new NetworkCapabilities.Builder()
-                .clearAll()
+        final NetworkCapabilities nc = NetworkCapabilities.Builder.withoutDefaultCapabilities()
                 .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
                 .build();
         return nc;
