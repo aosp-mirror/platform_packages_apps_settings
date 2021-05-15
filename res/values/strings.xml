@@ -916,11 +916,11 @@
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks">No thanks</string>
     <!-- Button text to skip enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_fingerprint_enroll_introduction_skip">Skip</string>
+    <string name="security_settings_fingerprint_enroll_introduction_skip">No thanks</string>
     <!-- Button text to continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_continue">Continue</string>
     <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
-    <string name="security_settings_fingerprint_enroll_introduction_agree">Agree</string>
+    <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
     <!-- Button text to cancel enrollment from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup">Skip</string>
     <!-- Button text to continue to the next screen from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
@@ -1017,7 +1017,9 @@
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor -->
     <string name="security_settings_fingerprint_enroll_find_sensor_message">It\u2019s on the back of your phone. Use your index finger.</string>
     <!-- Message shown in fingerprint enrollment dialog to locate the sensor [CHAR LIMIT=NONE]-->
-    <string name="security_settings_udfps_enroll_find_sensor_message">The fingerprint sensor is on your screen. Move your finger across the screen to find it.</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message">The fingerprint sensor is on your screen</string>
+    <!-- Message announced to a11y users during fingerprint enrollment to help them locate the sensor. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_udfps_enroll_find_sensor_a11y">The fingerprint sensor is on your screen. Move your finger across the screen to find the sensor.</string>
     <!-- Content description of graphic that shows where the fingerprint of the device is [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description">Illustration with device and fingerprint sensor location</string>
     <!-- Label text shown in fingerprint dialog for renaming a fingerprint template [CHAR LIMIT=22] -->
@@ -1031,21 +1033,21 @@
     <!-- Message shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_start_message">Put your finger on the sensor and lift after you feel a vibration</string>
     <!-- Message shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
-    <string name="security_settings_udfps_enroll_start_message">Each time you touch, keep your finger on the icon until you feel a vibration</string>
+    <string name="security_settings_udfps_enroll_start_message">Keep your finger on the icon until you feel a vibration</string>
     <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_repeat_title">Lift, then touch again</string>
     <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=40] -->
     <string name="security_settings_udfps_enroll_title_one_more_time">One more time</string>
     <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=60] -->
-    <string name="security_settings_udfps_enroll_repeat_title_touch_icon">Touch the fingerprint icon as it moves</string>
+    <string name="security_settings_udfps_enroll_repeat_title_touch_icon">Follow the fingerprint icon</string>
     <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_repeat_message">Keep lifting your finger to add the different parts of your fingerprint</string>
     <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
-    <string name="security_settings_udfps_enroll_repeat_message">This helps capture your full fingerprint</string>
+    <string name="security_settings_udfps_enroll_repeat_message">Touch &amp; hold each time the icon moves. This helps capture your full fingerprint.</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed -->
-    <string name="security_settings_fingerprint_enroll_finish_message">When you see this icon, use your fingerprint for identification or to approve purchases</string>
+    <string name="security_settings_fingerprint_enroll_finish_message">Now you can use your fingerprint to unlock your phone or for authentication, like when you sign in to apps</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_enrolling_skip">Do it later</string>
     <!-- Title of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=40] -->
@@ -1505,7 +1507,7 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>This deletes the fingerprint model stored on your device. Your face model will also be permanently and securely deleted. You won\u2019t be able to use your face or fingerprint for authentication in apps."</string>
 
     <!-- Affirmative action of the dialog shown when the user removes the device lock [CHAR LIMIT=25] -->
-    <string name="unlock_disable_frp_warning_ok">Yes, remove</string>
+    <string name="unlock_disable_frp_warning_ok">Delete</string>
 
     <!-- Title shown on security settings to allow the user to change their lockscreen pattern [CHAR LIMIT=22] -->
     <string name="unlock_change_lock_pattern_title">Change unlock pattern</string>

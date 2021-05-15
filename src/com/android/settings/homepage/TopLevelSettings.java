@@ -23,8 +23,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
-import android.util.FeatureFlagUtils;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -33,16 +31,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.support.SupportPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.Arrays;
-import java.util.List;
 
 @SearchIndexable(forTarget = MOBILE)
 public class TopLevelSettings extends DashboardFragment implements
@@ -59,9 +53,6 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            return R.xml.top_level_settings_grouped;
-        }
         return R.xml.top_level_settings;
     }
 
@@ -108,9 +99,6 @@ public class TopLevelSettings extends DashboardFragment implements
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            return;
-        }
         final PreferenceScreen screen = getPreferenceScreen();
         if (screen == null) {
             return;
@@ -137,16 +125,7 @@ public class TopLevelSettings extends DashboardFragment implements
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)
-                            ? R.xml.top_level_settings_grouped : R.xml.top_level_settings;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.top_level_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
