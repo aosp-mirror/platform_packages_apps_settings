@@ -53,6 +53,7 @@ public class ConnectedDeviceDashboardFragmentTest {
     private static final String KEY_NEARBY_DEVICES = "bt_nearby_slice";
     private static final String KEY_DISCOVERABLE_FOOTER = "discoverable_footer";
     private static final String KEY_SEE_ALL = "previously_connected_devices_see_all";
+    private static final String KEY_ADD_BT_DEVICES = "add_bt_devices";
 
     @Mock
     private PackageManager mPackageManager;
@@ -83,7 +84,7 @@ public class ConnectedDeviceDashboardFragmentTest {
                 .getNonIndexableKeys(mContext);
 
         assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_AVAILABLE_DEVICES,
-                KEY_NEARBY_DEVICES, KEY_DISCOVERABLE_FOOTER, KEY_SEE_ALL);
+                KEY_NEARBY_DEVICES, KEY_DISCOVERABLE_FOOTER, KEY_SEE_ALL, KEY_ADD_BT_DEVICES);
     }
 
     @Test
