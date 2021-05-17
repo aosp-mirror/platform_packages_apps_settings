@@ -16,6 +16,8 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ID;
+import static com.android.settings.utils.FileSizeFormatter.GIGABYTE_IN_BYTES;
+import static com.android.settings.utils.FileSizeFormatter.KILOBYTE_IN_BYTES;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -336,12 +338,14 @@ public class StorageItemPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
 
         mController.setUsedSize(MEGABYTE_IN_BYTES * 970); // There should 870MB attributed.
-        final StorageAsyncLoader.AppsStorageResult result =
-            new StorageAsyncLoader.AppsStorageResult();
+        final StorageAsyncLoader.StorageResult result = new StorageAsyncLoader.StorageResult();
         result.gamesSize = MEGABYTE_IN_BYTES * 80;
-        result.videoAppsSize = MEGABYTE_IN_BYTES * 160;
-        result.musicAppsSize = MEGABYTE_IN_BYTES * 40;
-        result.otherAppsSize = MEGABYTE_IN_BYTES * 90;
+        result.imagesSize = MEGABYTE_IN_BYTES * 350;
+        result.videosSize = GIGABYTE_IN_BYTES * 30;
+        result.audioSize = MEGABYTE_IN_BYTES * 40;
+        result.documentsAndOtherSize = MEGABYTE_IN_BYTES * 50;
+        result.trashSize = KILOBYTE_IN_BYTES * 100;
+        result.allAppsExceptGamesSize = MEGABYTE_IN_BYTES * 90;
         result.externalStats =
                 new StorageStatsSource.ExternalStorageStats(
                         MEGABYTE_IN_BYTES * 500, // total
@@ -349,17 +353,18 @@ public class StorageItemPreferenceControllerTest {
                         MEGABYTE_IN_BYTES * 150, // video
                         MEGABYTE_IN_BYTES * 200, 0); // image
 
-        final SparseArray<StorageAsyncLoader.AppsStorageResult> results = new SparseArray<>();
+        final SparseArray<StorageAsyncLoader.StorageResult> results = new SparseArray<>();
         results.put(0, result);
         mController.onLoadFinished(results, 0);
 
-        assertThat(mController.mImagesPreference.getSummary().toString()).isEqualTo("0.35 GB");
-        assertThat(mController.mVideosPreference.getSummary().toString()).isEqualTo("0.16 GB");
-        assertThat(mController.mAudioPreference.getSummary().toString()).isEqualTo("0.14 GB");
-        assertThat(mController.mAppsPreference.getSummary().toString()).isEqualTo("0.09 GB");
-        assertThat(mController.mGamesPreference.getSummary().toString()).isEqualTo("0.08 GB");
+        assertThat(mController.mImagesPreference.getSummary().toString()).isEqualTo("350 MB");
+        assertThat(mController.mVideosPreference.getSummary().toString()).isEqualTo("30 GB");
+        assertThat(mController.mAudioPreference.getSummary().toString()).isEqualTo("40 MB");
+        assertThat(mController.mAppsPreference.getSummary().toString()).isEqualTo("90 MB");
+        assertThat(mController.mGamesPreference.getSummary().toString()).isEqualTo("80 MB");
         assertThat(mController.mDocumentsAndOtherPreference.getSummary().toString())
-                .isEqualTo("0.05 GB");
+                .isEqualTo("50 MB");
+        assertThat(mController.mTrashPreference.getSummary().toString()).isEqualTo("100 kB");
     }
 
     @Test
