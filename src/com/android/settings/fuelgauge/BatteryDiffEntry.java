@@ -73,6 +73,11 @@ public class BatteryDiffEntry {
         mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
         mBatteryHistEntry = batteryHistEntry;
         mUserManager = context.getSystemService(UserManager.class);
+        if (foregroundUsageTimeInMs == 0
+                && backgroundUsageTimeInMs == 0
+                && consumePower != 0) {
+            Log.w(TAG, "abnornal BatteryDiffEntry:\n" + this);
+        }
     }
 
     /** Sets the total consumed power in a specific time slot. */

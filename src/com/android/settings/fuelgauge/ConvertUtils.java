@@ -230,7 +230,7 @@ public final class ConvertUtils {
                 if (selectedBatteryEntry == null) {
                     continue;
                 }
-                // Force refine the cumulative value since it may introduce deviation
+                // Forces refine the cumulative value since it may introduce deviation
                 // error since we will apply the interpolation arithmetic.
                 final float totalUsageTimeInMs =
                     foregroundUsageTimeInMs + backgroundUsageTimeInMs;
