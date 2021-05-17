@@ -78,6 +78,6 @@ public class BatteryInfoLoaderTest {
         BatteryInfo info = loader.loadInBackground();
 
         assertThat(info.remainingLabel).isNotNull();
-        assertThat(info.remainingTimeUs).isEqualTo(TEST_TIME_REMAINING);
+        assertThat(info.remainingTimeUs).isEqualTo(TEST_TIME_REMAINING * 1000);
     }
 }
