@@ -162,7 +162,7 @@
             android:title="@string/call_category"
             settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController">
 
-            <PreferenceScreen
+            <Preference
                 android:key="wifi_calling"
                 android:title="@string/wifi_calling_settings_title"
                 android:summary="@string/wifi_calling_summary"
@@ -172,7 +172,7 @@
                         android:targetClass="com.android.settings.Settings$WifiCallingSettingsActivity">
                     <extra android:name="show_drawer_menu" android:value="true"/>
                 </intent>
-            </PreferenceScreen>
+            </Preference>
 
             <SwitchPreference
                 android:key="video_calling_key"
