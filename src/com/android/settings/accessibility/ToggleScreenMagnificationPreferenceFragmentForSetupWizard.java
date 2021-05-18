@@ -45,6 +45,12 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
     }
 
     @Override
+    public int getHelpResource() {
+        // Hides help center in action bar and footer bar in SuW
+        return 0;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
