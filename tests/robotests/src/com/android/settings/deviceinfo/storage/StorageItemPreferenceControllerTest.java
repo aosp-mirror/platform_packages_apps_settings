@@ -112,8 +112,8 @@ public class StorageItemPreferenceControllerTest {
         images.setIcon(R.drawable.ic_photo_library);
         final StorageItemPreference videos = spy(new StorageItemPreference(mContext));
         videos.setIcon(R.drawable.ic_local_movies);
-        final StorageItemPreference audios = spy(new StorageItemPreference(mContext));
-        audios.setIcon(R.drawable.ic_media_stream);
+        final StorageItemPreference audio = spy(new StorageItemPreference(mContext));
+        audio.setIcon(R.drawable.ic_media_stream);
         final StorageItemPreference apps = spy(new StorageItemPreference(mContext));
         apps.setIcon(R.drawable.ic_storage_apps);
         final StorageItemPreference games = spy(new StorageItemPreference(mContext));
@@ -132,8 +132,8 @@ public class StorageItemPreferenceControllerTest {
                 .thenReturn(images);
         when(screen.findPreference(eq(StorageItemPreferenceController.VIDEOS_KEY)))
                 .thenReturn(videos);
-        when(screen.findPreference(eq(StorageItemPreferenceController.AUDIOS_KEY)))
-                .thenReturn(audios);
+        when(screen.findPreference(eq(StorageItemPreferenceController.AUDIO_KEY)))
+                .thenReturn(audio);
         when(screen.findPreference(eq(StorageItemPreferenceController.APPS_KEY)))
                 .thenReturn(apps);
         when(screen.findPreference(eq(StorageItemPreferenceController.GAMES_KEY)))
@@ -190,8 +190,8 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
-    public void launchAudiosIntent_resolveActionViewNull_settingsIntent() {
-        mPreference.setKey(StorageItemPreferenceController.AUDIOS_KEY);
+    public void launchAudioIntent_resolveActionViewNull_settingsIntent() {
+        mPreference.setKey(StorageItemPreferenceController.AUDIO_KEY);
         final Context mockContext = getMockContext();
         mController = new StorageItemPreferenceController(mockContext, mFragment, mVolume,
                 mSvp, false /* isWorkProfile */);
@@ -203,7 +203,7 @@ public class StorageItemPreferenceControllerTest {
         final Intent intent = argumentCaptor.getValue();
 
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);
-        assertThat(intent.getData()).isEqualTo(mController.mAudiosUri);
+        assertThat(intent.getData()).isEqualTo(mController.mAudioUri);
     }
 
     @Test
@@ -215,7 +215,7 @@ public class StorageItemPreferenceControllerTest {
         assertThat(mController.mPublicStoragePreference.isVisible()).isFalse();
         assertThat(mController.mImagesPreference.isVisible()).isFalse();
         assertThat(mController.mVideosPreference.isVisible()).isFalse();
-        assertThat(mController.mAudiosPreference.isVisible()).isFalse();
+        assertThat(mController.mAudioPreference.isVisible()).isFalse();
         assertThat(mController.mAppsPreference.isVisible()).isFalse();
         assertThat(mController.mGamesPreference.isVisible()).isFalse();
         assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
@@ -355,7 +355,7 @@ public class StorageItemPreferenceControllerTest {
 
         assertThat(mController.mImagesPreference.getSummary().toString()).isEqualTo("0.35 GB");
         assertThat(mController.mVideosPreference.getSummary().toString()).isEqualTo("0.16 GB");
-        assertThat(mController.mAudiosPreference.getSummary().toString()).isEqualTo("0.14 GB");
+        assertThat(mController.mAudioPreference.getSummary().toString()).isEqualTo("0.14 GB");
         assertThat(mController.mAppsPreference.getSummary().toString()).isEqualTo("0.09 GB");
         assertThat(mController.mGamesPreference.getSummary().toString()).isEqualTo("0.08 GB");
         assertThat(mController.mDocumentsAndOtherPreference.getSummary().toString())
@@ -371,7 +371,7 @@ public class StorageItemPreferenceControllerTest {
         verify(mController.mPublicStoragePreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mImagesPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mVideosPreference, times(2)).setIcon(nullable(Drawable.class));
-        verify(mController.mAudiosPreference, times(2)).setIcon(nullable(Drawable.class));
+        verify(mController.mAudioPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mAppsPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mGamesPreference, times(2)).setIcon(nullable(Drawable.class));
         verify(mController.mDocumentsAndOtherPreference, times(2))
@@ -455,7 +455,7 @@ public class StorageItemPreferenceControllerTest {
         assertThat(mController.mPublicStoragePreference.isVisible()).isTrue();
         assertThat(mController.mImagesPreference.isVisible()).isFalse();
         assertThat(mController.mVideosPreference.isVisible()).isFalse();
-        assertThat(mController.mAudiosPreference.isVisible()).isFalse();
+        assertThat(mController.mAudioPreference.isVisible()).isFalse();
         assertThat(mController.mAppsPreference.isVisible()).isFalse();
         assertThat(mController.mGamesPreference.isVisible()).isFalse();
         assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
