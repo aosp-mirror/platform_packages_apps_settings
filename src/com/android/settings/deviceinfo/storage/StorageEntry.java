@@ -26,6 +26,8 @@ import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
 import android.text.TextUtils;
 
+import com.android.settings.R;
+
 import java.io.File;
 
 /**
@@ -44,8 +46,15 @@ public class StorageEntry implements Comparable<StorageEntry>, Parcelable {
         mVolumeInfo = volumeInfo;
         mUnsupportedDiskInfo = null;
         mMissingVolumeRecord = null;
-        mVolumeInfoDescription = context.getSystemService(StorageManager.class)
-                .getBestVolumeDescription(mVolumeInfo);
+
+        if (isDefaultInternalStorage()) {
+            // Shows "This device" for default internal storage.
+            mVolumeInfoDescription = context.getResources()
+                    .getString(R.string.storage_default_internal_storage);
+        } else {
+            mVolumeInfoDescription = context.getSystemService(StorageManager.class)
+                    .getBestVolumeDescription(mVolumeInfo);
+        }
     }
 
     public StorageEntry(@NonNull DiskInfo diskInfo) {
