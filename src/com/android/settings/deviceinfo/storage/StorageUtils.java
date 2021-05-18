@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
@@ -36,10 +37,66 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /** Storage utilities */
 public class StorageUtils {
 
     private static final String TAG = "StorageUtils";
+
+    /**
+     * Collects and returns all kinds of StorageEntry which will show in Storage Settings.
+     */
+    public static List<StorageEntry> getAllStorageEntries(Context context,
+            StorageManager storageManager) {
+        final List<StorageEntry> storageEntries = new ArrayList<>();
+        storageEntries.addAll(storageManager.getVolumes().stream()
+                .filter(volumeInfo -> isStorageSettingsInterestedVolume(volumeInfo))
+                .map(volumeInfo -> new StorageEntry(context, volumeInfo))
+                .collect(Collectors.toList()));
+        storageEntries.addAll(storageManager.getDisks().stream()
+                .filter(disk -> isDiskUnsupported(disk))
+                .map(disk -> new StorageEntry(disk))
+                .collect(Collectors.toList()));
+        storageEntries.addAll(storageManager.getVolumeRecords().stream()
+                .filter(volumeRecord -> isVolumeRecordMissed(storageManager, volumeRecord))
+                .map(volumeRecord -> new StorageEntry(volumeRecord))
+                .collect(Collectors.toList()));
+        return storageEntries;
+    }
+
+    /**
+     * Returns true if the volumeInfo may be displayed in Storage Settings.
+     */
+    public static boolean isStorageSettingsInterestedVolume(VolumeInfo volumeInfo) {
+        switch (volumeInfo.getType()) {
+            case VolumeInfo.TYPE_PRIVATE:
+            case VolumeInfo.TYPE_PUBLIC:
+            case VolumeInfo.TYPE_STUB:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * VolumeRecord is a metadata of VolumeInfo, this is the case where a VolumeInfo is missing.
+     * (e.g., internal SD card is removed.)
+     */
+    public static boolean isVolumeRecordMissed(StorageManager storageManager,
+            VolumeRecord volumeRecord) {
+        return volumeRecord.getType() == VolumeInfo.TYPE_PRIVATE
+                && storageManager.findVolumeByUuid(volumeRecord.getFsUuid()) == null;
+    }
+
+    /**
+     * A unsupported disk is the disk of problem format, android is not able to mount automatically.
+     */
+    public static boolean isDiskUnsupported(DiskInfo disk) {
+        return disk.volumeCount == 0 && disk.size > 0;
+    }
 
     /** Launches the fragment to forget a specified missing volume record. */
     public static void launchForgetMissingVolumeRecordFragment(Context context,
