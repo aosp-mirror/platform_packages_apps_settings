@@ -54,7 +54,7 @@ public class BatterySaverSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.FUELGAUGE_BATTERY_SAVER;
+        return SettingsEnums.OPEN_BATTERY_SAVER;
     }
 
     @Override
