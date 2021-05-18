@@ -132,7 +132,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             savedInstanceState.getBoolean(KEY_EXPAND_SYSTEM_INFO, mIsExpanded);
         Log.d(TAG, String.format("onCreate() slotIndex=%d isExpanded=%b",
             mTrapezoidIndex, mIsExpanded));
-        mMetricsFeatureProvider.action(mPrefContext, SettingsEnums.OPEN_BATTERY_USAGE);
     }
 
     @Override
@@ -145,6 +144,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             BatteryDiffEntry.clearCache();
             Log.d(TAG, "clear icon and label cache since uiMode is changed");
         }
+        mMetricsFeatureProvider.action(mPrefContext, SettingsEnums.OPEN_BATTERY_USAGE);
     }
 
     @Override
