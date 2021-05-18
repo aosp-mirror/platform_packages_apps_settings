@@ -321,8 +321,7 @@
     <string name="security_passwords_title" msgid="4154420930973818581">"Privacidade"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Não disponível."</string>
     <string name="security_status_title" msgid="6958004275337618656">"Estado de segurança"</string>
-    <!-- no translation found for security_dashboard_summary (7571035662779425918) -->
-    <skip />
+    <string name="security_dashboard_summary" msgid="7571035662779425918">"Bloqueio de ecrã, Localizar o meu dispositivo, segurança das apps"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Rosto adicionado."</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"Configure o Desbloqueio facial"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"Desbloqueio facial"</string>
@@ -341,8 +340,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Cancelar"</string>
     <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Não, obrigado"</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_agree (6319476573697497750) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Concordo"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Mais"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Desbloquear com o rosto"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Utilizar o rosto para autenticação"</string>
@@ -415,9 +413,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Utilize a sua impressão digital para desbloquear o telemóvel ou para autorizar compras.\n\nNota: a impressão digital pode ser menos segura do que um padrão ou um PIN fortes."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Não, obrigado"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_skip" msgid="5872407576778683426">"Ignorar"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_skip" msgid="2284740299244691418">"Não"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Continuar"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="8794474744336329962">"Aceitar"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Aceito"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Ignorar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Seguinte"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Ignorar impressão digital?"</string>
@@ -429,8 +427,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="4350767334790735812">"O Desbloqueio por impressão digital cria um modelo único da sua impressão digital para reconhecer a sua identidade durante a autenticação. Para criar este modelo de impressão digital durante a configuração, é necessário tirar fotos da sua impressão digital de posições diferentes."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="9170127808407017743">"O telemóvel também irá utilizar imagens das suas interações com o desbloqueio por impressão digital para atualizar o seu modelo de impressão digital. As imagens utilizadas para criar o seu modelo de impressão digital nunca são armazenadas, mas o modelo de impressão digital é guardado em segurança no seu telemóvel e nunca sai do mesmo. Todo o processamento ocorre de forma segura no seu telemóvel."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="4579083553690400908">"Pode eliminar o modelo da impressão digital ou desativar o desbloqueio por impressão digital em qualquer altura nas Definições. Os modelos de impressões digitais são armazenados no telemóvel até os eliminar."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (2018885671994058605) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"O telemóvel pode ser desbloqueado involuntariamente, como se alguém o encostar ao seu dedo."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Altere a posição do seu dedo ligeiramente de cada vez"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Cubra o ícone com a parte central da sua impressão digital"</string>
@@ -463,21 +460,22 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Toque no sensor"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="3006622174004843183">"Toque sem soltar no ícone de impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Está na parte traseira do telemóvel. Utilize o dedo indicador."</string>
-    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="4465918668053824340">"O sensor de impressões digitais encontra-se no seu ecrã. Mova o dedo pelo ecrã para o encontrar."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="4368947995750079558">"O sensor de impressões digitais encontra-se no seu ecrã"</string>
+    <string name="security_settings_udfps_enroll_find_sensor_a11y" msgid="2518818922889238997">"O sensor de impressões digitais encontra-se no seu ecrã. Mova o dedo pelo ecrã para o encontrar."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustração com o dispositivo e a localização do sensor de impressões digitais"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nome"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Eliminar"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toque no sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Coloque o dedo sobre o sensor e levante-o depois de sentir uma vibração"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="8857415507387969667">"Sempre que tocar, mantenha o dedo no ícone até sentir uma vibração"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="1295278317609257417">"Mantenha o dedo no ícone até sentir uma vibração"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Levante e toque novamente"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Mais uma vez"</string>
-    <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="3927493571554716278">"Toque no ícone de impressão digital à medida que se move"</string>
+    <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Siga o ícone da impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Vá levantando o dedo para adicionar as diferentes partes da sua impressão digital"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="5871443926818416176">"Isto ajuda a capturar a sua impressão digital completa"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="6947378111984759956">"Toque sem soltar de cada vez que o ícone se mover. Isto ajuda a capturar a sua impressão digital completa."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impressão digital adicionada"</string>
-    <string name="security_settings_fingerprint_enroll_finish_message" msgid="8220458039597261933">"Quando vir este ícone, pode utilizar a sua impressão digital para identificação ou para autorizar compras"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="4261399912979931798">"Já pode utilizar a sua impressão digital para desbloquear o telemóvel ou para a autenticação, como quando inicia sessão em apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fazer isto mais tarde"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Ignorar configur. de impressão digital?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Optou por utilizar a sua impressão digital como uma forma de desbloquear o telemóvel. Se ignorar agora, terá de configurar esta opção mais tarde. A configuração demora apenas alguns minutos."</string>
@@ -664,7 +662,7 @@
     <string name="unlock_disable_frp_warning_content_unknown_face_fingerprint" msgid="3779582301453677644">"As funcionalidades de proteção do dispositivo não funcionam sem o bloqueio de ecrã.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>Isto elimina o modelo de impressão digital armazenado no seu dispositivo. O seu modelo de rosto também será eliminado de forma permanente e segura. Não poderá utilizar o seu rosto ou impressão digital para autenticação em apps."</string>
-    <string name="unlock_disable_frp_warning_ok" msgid="621607297961726537">"Sim, remover"</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Eliminar"</string>
     <string name="unlock_change_lock_pattern_title" msgid="8234523589333929193">"Mudar padrão de desbloqueio"</string>
     <string name="unlock_change_lock_pin_title" msgid="2324077520816477479">"Alterar PIN de desbloqueio"</string>
     <string name="unlock_change_lock_password_title" msgid="873517913969091074">"Alterar palavra-passe de desbloqueio"</string>
@@ -2278,8 +2276,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Deslize rapidamente com dois dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre funcionalidades, deslize rapidamente com dois dedos para cima sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Deslize rapidamente com três dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre funcionalidades, deslize rapidamente com três dedos para cima sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Personalize o botão Acessibilidade"</annotation></string>
-    <!-- no translation found for footer_learn_more (4912771050593810437) -->
-    <skip />
+    <string name="footer_learn_more" msgid="4912771050593810437"><annotation id="link">"Saiba mais"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Manter premidas as teclas de volume"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"mantenha premidas as teclas de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="7866393664299375632">"Prima sem soltar ambas as teclas de volume."</string>
@@ -2591,8 +2588,7 @@
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Ative o Battery Manager."</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Ativar a Poupança de bateria"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Pode ficar sem bateria mais cedo do que o habitual."</string>
-    <!-- no translation found for battery_tip_early_heads_up_done_title (7705597228709143337) -->
-    <skip />
+    <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Poupança de bateria ativada"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Algumas funcionalidades podem estar limitadas"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Maior utilização da bateria"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Veja as apps com maior utilização"</string>
@@ -2748,23 +2744,26 @@
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilização da bateria"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Desde o carregamento completo"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gerir a utilização da bateria"</string>
-    <!-- no translation found for battery_total_and_bg_usage (3132848192013639029) -->
-    <skip />
-    <!-- no translation found for battery_total_and_bg_usage_with_period (2809037516933951047) -->
-    <skip />
-    <string name="battery_total_usage_less_minute" msgid="6665817695616836396">"Menos de um minuto no total nas últimas 24 h"</string>
+    <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> no total • <xliff:g id="TIME_1">^2</xliff:g> em segundo plano\ndesde o último carregamento completo"</string>
+    <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> no total • <xliff:g id="TIME_1">^2</xliff:g> em segundo plano\ndurante as últimas 24 h"</string>
+    <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> no total • <xliff:g id="TIME_1">^2</xliff:g> em segundo plano\nno período seguinte: <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Menos de um minuto no total desde o último carregamento completo"</string>
+    <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Menos de um minuto no total nas últimas 24 h"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Menos de um minuto no total no período seguinte: <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="90932588167097641">"Menos de um minuto em segundo plano nas últimas 24 h"</string>
+    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Menos de um minuto em segundo plano desde o último carregamento completo"</string>
+    <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Menos de um minuto em segundo plano nas últimas 24 h"</string>
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Menos de um minuto em segundo plano no período seguinte: <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_total_usage" msgid="2662725472478185867">"<xliff:g id="TIME">^1</xliff:g> no total nas últimas 24 h"</string>
+    <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> no total desde o último carregamento completo"</string>
+    <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> no total nas últimas 24 h"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Total de <xliff:g id="TIME_0">^1</xliff:g> para <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_bg_usage" msgid="2983050956970659511">"<xliff:g id="TIME">^1</xliff:g> em segundo plano nas últimas 24 h"</string>
+    <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> em segundo plano desde o último carregamento completo"</string>
+    <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> em segundo plano nas últimas 24 h"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> em segundo plano no período seguinte: <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage (1782798464032428840) -->
-    <skip />
-    <!-- no translation found for battery_total_usage_and_bg_less_minute_usage_with_period (5943281928474598517) -->
-    <skip />
-    <string name="battery_not_usage" msgid="8417901856028909227">"Nenhuma utilização nas últimas 24 h"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> no total • Menos de um minuto em segundo plano\ndesde o último carregamento completo"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> no total • Menos de um minuto em segundo plano\nnas últimas 24 h"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> no total • Menos de um minuto em segundo plano\nno período seguinte: <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_not_usage" msgid="1472275761547230196">"Nenhuma utilização desde o último carregamento"</string>
+    <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nenhuma utilização nas últimas 24 h"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"A estimativa de bateria restante baseia-se na utilização do dispositivo"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tempo restante estimado"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Até ficar totalmente carregada"</string>
@@ -2810,8 +2809,7 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Em segundo plano: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Os dados de utilização da bateria são aproximados e não medem a utilização quando o telemóvel está a carregar"</string>
-    <!-- no translation found for battery_usage_chart (4114747521432440017) -->
-    <skip />
+    <string name="battery_usage_chart" msgid="4114747521432440017">"Gráfico de utilização da bateria"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estatísticas do Processo"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estatísticas de peritos acerca dos processos em execução"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Utilização da memória"</string>
@@ -3779,7 +3777,7 @@
     <string name="other_conversations" msgid="551178916855139870">"Conversas não prioritárias"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversas às quais efetuou alterações."</string>
     <string name="recent_conversations" msgid="471678228756995274">"Conversas recentes"</string>
-    <string name="conversation_settings_clear_recents" msgid="4246342656145488662">"Limpar recentes"</string>
+    <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Limpar conversas recentes"</string>
     <string name="clear" msgid="5092178335409471100">"Limpar"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Apresentar conversas com prioridade como balão"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"As conversas com prioridade são apresentadas na parte superior do painel pendente. Também pode defini-las como balões e para interromperem o modo Não incomodar."</string>
@@ -3841,17 +3839,17 @@
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"Tipos de notificações permitidos"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Tempo real"</string>
-    <string name="notif_type_ongoing_summary" msgid="3412379452346027089">"Comunicação em tempo real de apps em utilização, navegação, chamadas telefónicas e muito mais"</string>
+    <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"Comunicação em curso de apps em utilização, navegação, chamadas telefónicas e muito mais"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"Conversas"</string>
-    <string name="notif_type_conversation_summary" msgid="897491668422411641">"SMS e outras comunicações"</string>
-    <string name="notif_type_alerting" msgid="4225291983925409612">"Predefinição"</string>
-    <string name="notif_type_alerting_summary" msgid="6823969073567000728">"Notificações que podem tocar ou vibrar consoante as definições"</string>
+    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, mensagens de texto e outras comunicações"</string>
+    <string name="notif_type_alerting" msgid="4713073696855718576">"Notificações"</string>
+    <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Pode tocar ou vibrar com base nas definições"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Silencioso"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Notificações que nunca tocam nem vibram"</string>
     <string name="notification_listener_allowed" msgid="5536962633536318551">"Autorizadas"</string>
     <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Não autorizadas"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Ver todas as apps"</string>
-    <string name="notif_listener_excluded_app_summary" msgid="8552707617269767363">"Altere as definições de notificação de cada app que pode enviar notificações"</string>
+    <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"Altere as definições para cada app que envia notificações"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Apps apresentadas no dispositivo"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"Esta app não suporta definições avançadas"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Serviços de assistente de RV"</string>
@@ -4458,8 +4456,7 @@
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> utilizado – <xliff:g id="FREE_SPACE">%2$s</xliff:g> livre(s)"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Memória de armazenamento interno: <xliff:g id="PERCENTAGE">%1$s</xliff:g> utilizado – <xliff:g id="FREE_SPACE">%2$s</xliff:g> livre(s)"</string>
     <string name="display_summary" msgid="5526061030874717172">"Suspender após <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inatividade"</string>
-    <!-- no translation found for display_dashboard_summary (7495227473582968326) -->
-    <skip />
+    <string name="display_dashboard_summary" msgid="7495227473582968326">"Limite de tempo do ecrã, tamanho do tipo de letra"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"Suspender após 10 minutos de inatividade"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Média de <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> de memória utilizado(s)"</string>
     <string name="users_summary" msgid="8473589474976307510">"Sessão iniciada como <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4670,8 +4667,7 @@
     <string name="demo_mode" msgid="6566167465451386728">"Modo de demonstração da IU do sistema"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Tema escuro"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Temporariamente desativado devido à Poupança de bateria."</string>
-    <!-- no translation found for ambient_camera_summary_battery_saver_on (1787784892047029560) -->
-    <skip />
+    <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Temporariamente desativado devido à Poupança de bateria"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Temporariamente ativado devido à Poupança de bateria"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"As aplicações suportadas também mudam para o tema escuro"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
@@ -4891,7 +4887,8 @@
     <string name="storage_files" msgid="7968460921272772299">"Ficheiros"</string>
     <string name="storage_images" msgid="2055893015567979387">"Imagens"</string>
     <string name="storage_videos" msgid="6117698226447251033">"Vídeos"</string>
-    <string name="storage_audios" msgid="1479470150875500595">"Áudio"</string>
+    <!-- no translation found for storage_audio (5994664984472140386) -->
+    <skip />
     <string name="storage_apps" msgid="3564291603258795216">"Apps"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"Documentos e outros"</string>
     <string name="storage_system" msgid="8472410119822911844">"Sistema"</string>
