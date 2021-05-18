@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -604,7 +605,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.setTimestampLabel();
 
         verify(mBatteryChartPreferenceController.mBatteryChartView, never())
-            .setTimestamps(any());
+            .setLatestTimestamp(anyLong());
     }
 
     @Test
@@ -613,19 +614,11 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mBatteryChartView =
             spy(new BatteryChartView(mContext));
         setUpBatteryHistoryKeys();
-        // Generates the expected result.
-        final String[] expectedResults = new String[4];
-        final long timeSlotOffset = DateUtils.HOUR_IN_MILLIS * 8;
-        for (int index = 0; index < expectedResults.length; index++) {
-            expectedResults[index] =
-                ConvertUtils.utcToLocalTimeHour(
-                    1619247636826L - (3 - index) * timeSlotOffset);
-        }
 
         mBatteryChartPreferenceController.setTimestampLabel();
 
         verify(mBatteryChartPreferenceController.mBatteryChartView)
-            .setTimestamps(expectedResults);
+            .setLatestTimestamp(1619247636826L);
     }
 
     @Test
@@ -638,7 +631,7 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.setTimestampLabel();
 
         verify(mBatteryChartPreferenceController.mBatteryChartView)
-            .setTimestamps(any());
+            .setLatestTimestamp(anyLong());
     }
 
     @Test
@@ -709,7 +702,7 @@ public final class BatteryChartPreferenceControllerTest {
     private void setUpBatteryHistoryKeys() {
         mBatteryChartPreferenceController.mBatteryHistoryKeys =
             new long[] {1619196786769L, 0L, 1619247636826L};
-        ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0);
+        ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0, /*is24HourFormat=*/ false);
         // Simulates the locale in GMT.
         ConvertUtils.sSimpleDateFormatForHour
              .setTimeZone(TimeZone.getTimeZone("GMT"));
