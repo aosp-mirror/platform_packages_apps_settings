@@ -36,6 +36,7 @@ import org.robolectric.RobolectricTestRunner;
 public class CaptionFooterPreferenceControllerTest {
 
     private static final String TEST_KEY = "test_key";
+    private static final String TEST_TITLE = "test_title";
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private PreferenceScreen mScreen;
     private CaptionFooterPreferenceController mController;
@@ -47,6 +48,7 @@ public class CaptionFooterPreferenceControllerTest {
         final AccessibilityFooterPreference footerPreference =
                 new AccessibilityFooterPreference(mContext);
         footerPreference.setKey(TEST_KEY);
+        footerPreference.setTitle(TEST_TITLE);
         mScreen.addPreference(footerPreference);
         mController = new CaptionFooterPreferenceController(mContext, TEST_KEY);
     }
