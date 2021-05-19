@@ -18,7 +18,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/storage_settings"
-    android:orderingFromXml="false"
     settings:keywords="@string/keywords_storage">
     <com.android.settingslib.widget.SettingsSpinnerPreference
         android:key="storage_spinner"
@@ -45,8 +44,8 @@
         android:order="4"
         android:title="@string/storage_free_up_space_title"
         android:summary="@string/storage_free_up_space_summary"
-        settings:allowDividerAbove="true"
-        android:icon="@drawable/ic_files_go_round"/>
+        android:icon="@drawable/ic_files_go_round"
+        settings:allowDividerAbove="true"/>
     <!-- Preference order 100~200 are 'ONLY' for storage category preferences below. -->
     <Preference
         android:key="pref_public_storage"
@@ -64,8 +63,8 @@
         android:icon="@drawable/ic_local_movies"
         android:order="102"/>
     <com.android.settings.deviceinfo.StorageItemPreference
-        android:key="pref_audios"
-        android:title="@string/storage_audios"
+        android:key="pref_audio"
+        android:title="@string/storage_audio"
         android:icon="@drawable/ic_media_stream"
         android:order="103"/>
     <com.android.settings.deviceinfo.StorageItemPreference

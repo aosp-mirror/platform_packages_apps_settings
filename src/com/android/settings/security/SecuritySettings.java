@@ -31,6 +31,7 @@ import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceCo
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
 import com.android.settings.enterprise.FinancedPrivacyPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
@@ -151,6 +152,12 @@ public class SecuritySettings extends DashboardFragment {
                         context) {
                     return buildPreferenceControllers(context, null /* lifecycle */,
                             null /* host*/);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !FeatureFactory.getFactory(context).getSecuritySettingsFeatureProvider()
+                            .hasAlternativeSecuritySettingsFragment();
                 }
             };
 }

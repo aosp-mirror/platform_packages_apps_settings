@@ -41,6 +41,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryChartViewTest {
@@ -130,6 +131,7 @@ public final class BatteryChartViewTest {
 
         mBatteryChartView.onAttachedToWindow();
         assertThat(mBatteryChartView.isClickable()).isFalse();
+        assertThat(mBatteryChartView.mTrapezoidCurvePaint).isNotNull();
     }
 
     @Test
@@ -141,6 +143,7 @@ public final class BatteryChartViewTest {
 
         mBatteryChartView.onAttachedToWindow();
         assertThat(mBatteryChartView.isClickable()).isTrue();
+        assertThat(mBatteryChartView.mTrapezoidCurvePaint).isNull();
     }
 
     @Test
@@ -155,6 +158,7 @@ public final class BatteryChartViewTest {
 
         mBatteryChartView.onAttachedToWindow();
         assertThat(mBatteryChartView.isClickable()).isTrue();
+        assertThat(mBatteryChartView.mTrapezoidCurvePaint).isNull();
     }
 
     @Test
@@ -166,5 +170,78 @@ public final class BatteryChartViewTest {
 
         mBatteryChartView.onAttachedToWindow();
         assertThat(mBatteryChartView.isClickable()).isFalse();
+        assertThat(mBatteryChartView.mTrapezoidCurvePaint).isNotNull();
+    }
+
+    @Test
+    public void testClickable_restoreFromNonClickableState() {
+        final int[] levels = new int[13];
+        for (int index = 0; index < levels.length; index++) {
+            levels[index] = index + 1;
+        }
+        mBatteryChartView.setTrapezoidCount(12);
+        mBatteryChartView.setLevels(levels);
+        mBatteryChartView.setClickableForce(true);
+        when(mPowerUsageFeatureProvider.isChartGraphSlotsEnabled(mContext))
+            .thenReturn(true);
+        doReturn(true).when(mockAccessibilityManager).isEnabled();
+        mBatteryChartView.onAttachedToWindow();
+        // Ensures the testing environment is correct.
+        assertThat(mBatteryChartView.isClickable()).isFalse();
+        // Turns off accessibility service.
+        doReturn(false).when(mockAccessibilityManager).isEnabled();
+
+        mBatteryChartView.onAttachedToWindow();
+
+        assertThat(mBatteryChartView.isClickable()).isTrue();
+    }
+
+    @Test
+    public void testOnAttachedToWindow_addAccessibilityStateChangeListener() {
+        mBatteryChartView.onAttachedToWindow();
+        verify(mockAccessibilityManager)
+            .addAccessibilityStateChangeListener(mBatteryChartView);
+    }
+
+    @Test
+    public void testOnDetachedFromWindow_removeAccessibilityStateChangeListener() {
+        mBatteryChartView.onAttachedToWindow();
+        mBatteryChartView.mHandler.postDelayed(
+            mBatteryChartView.mUpdateClickableStateRun, 1000);
+
+        mBatteryChartView.onDetachedFromWindow();
+
+        verify(mockAccessibilityManager)
+            .removeAccessibilityStateChangeListener(mBatteryChartView);
+        assertThat(mBatteryChartView.mHandler.hasCallbacks(
+                mBatteryChartView.mUpdateClickableStateRun))
+            .isFalse();
+    }
+
+    @Test
+    public void testOnAccessibilityStateChanged_postUpdateStateRunnable() {
+        mBatteryChartView.mHandler = spy(mBatteryChartView.mHandler);
+        mBatteryChartView.onAccessibilityStateChanged(/*enabled=*/ true);
+
+        verify(mBatteryChartView.mHandler)
+            .removeCallbacks(mBatteryChartView.mUpdateClickableStateRun);
+        verify(mBatteryChartView.mHandler)
+            .postDelayed(mBatteryChartView.mUpdateClickableStateRun, 500L);
+    }
+
+    @Test
+    public void testSetLatestTimestamp_generateExpectedTimestamps() {
+        final long timestamp = 1619196786769L;
+        ConvertUtils.sSimpleDateFormatForHour = null;
+        // Invokes the method first to create the SimpleDateFormat.
+        ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0, /*is24HourFormat=*/ false);
+        ConvertUtils.sSimpleDateFormatForHour
+            .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+        final String[] expectedTimestamps =
+            new String[] {"9 am", "5 pm", "1 am", "9 am"};
+
+        mBatteryChartView.setLatestTimestamp(timestamp);
+
+        assertThat(mBatteryChartView.mTimestamps).isEqualTo(expectedTimestamps);
     }
 }
