@@ -37,6 +37,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
@@ -112,6 +113,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mRestoring;
     private Vibrator mVibrator;
     private boolean mIsSetupWizard;
+    private AccessibilityManager mAccessibilityManager;
     private boolean mIsAccessibilityEnabled;
 
     @Override
@@ -123,8 +125,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 fingerprintManager.getSensorPropertiesInternal();
         mCanAssumeUdfps = props.size() == 1 && props.get(0).isAnyUdfpsType();
 
-        final AccessibilityManager am = getSystemService(AccessibilityManager.class);
-        mIsAccessibilityEnabled = am.isEnabled();
+        mAccessibilityManager = getSystemService(AccessibilityManager.class);
+        mIsAccessibilityEnabled = mAccessibilityManager.isEnabled();
 
         if (mCanAssumeUdfps) {
             if (BiometricUtils.isReverseLandscape(getApplicationContext())) {
@@ -359,6 +361,18 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         if (!mCanAssumeUdfps) {
             mErrorText.removeCallbacks(mTouchAgainRunnable);
             mErrorText.postDelayed(mTouchAgainRunnable, HINT_TIMEOUT_DURATION);
+        } else {
+            if (mIsAccessibilityEnabled) {
+                final int percent = (int) (((float)(steps - remaining) / (float) steps) * 100);
+                CharSequence cs = getString(
+                        R.string.security_settings_udfps_enroll_progress_a11y_message, percent);
+                AccessibilityEvent e = AccessibilityEvent.obtain();
+                e.setEventType(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+                e.setClassName(getClass().getName());
+                e.setPackageName(getPackageName());
+                e.getText().add(cs);
+                mAccessibilityManager.sendAccessibilityEvent(e);
+            }
         }
     }
 
