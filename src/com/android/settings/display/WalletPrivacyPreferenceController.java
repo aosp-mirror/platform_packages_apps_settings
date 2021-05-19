@@ -34,7 +34,7 @@ import com.android.settings.overlay.FeatureFactory;
  */
 public class WalletPrivacyPreferenceController extends TogglePreferenceController {
 
-    private static final String SETTING_KEY = "lockscreen_show_wallet";
+    private static final String SETTING_KEY = Settings.Secure.LOCKSCREEN_SHOW_WALLET;
     private final QuickAccessWalletClient mClient;
 
     public WalletPrivacyPreferenceController(Context context, String preferenceKey) {
