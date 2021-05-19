@@ -25,6 +25,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.os.Handler;
+import android.text.format.DateFormat;
+import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
@@ -40,6 +42,7 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 
+import java.time.Clock;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -74,6 +77,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private boolean mIsSlotsClickabled;
 
     @VisibleForTesting int mSelectedIndex;
+    @VisibleForTesting String[] mTimestamps;
 
     // Colors for drawing the trapezoid shape and dividers.
     private int mTrapezoidColor;
@@ -84,7 +88,6 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private final Rect[] mPercentageBounds =
         new Rect[] {new Rect(), new Rect(), new Rect()};
     // For drawing the timestamp information.
-    private String[] mTimestamps;
     private final Rect[] mTimestampsBounds =
         new Rect[] {new Rect(), new Rect(), new Rect(), new Rect()};
 
@@ -116,6 +119,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         setSelectedIndex(SELECTED_INDEX_ALL);
         setTrapezoidCount(DEFAULT_TRAPEZOID_COUNT);
         setClickable(false);
+        setLatestTimestamp(0);
     }
 
     /** Sets the total trapezoid count for drawing. */
@@ -182,12 +186,21 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         requestLayout();
     }
 
-    /** Sets timestamps for drawing into x-axis information. */
-    public void setTimestamps(String[] timestamps) {
-        mTimestamps = timestamps;
-        if (timestamps != null
-                && timestamps.length != DEFAULT_TIMESTAMP_COUNT) {
-            mTimestamps = null;
+    /** Sets the latest timestamp for drawing into x-axis information. */
+    public void setLatestTimestamp(long latestTimestamp) {
+        if (latestTimestamp == 0) {
+            latestTimestamp = Clock.systemUTC().millis();
+        }
+        if (mTimestamps == null) {
+            mTimestamps = new String[DEFAULT_TIMESTAMP_COUNT];
+        }
+        final long timeSlotOffset = DateUtils.HOUR_IN_MILLIS * 8;
+        final boolean is24HourFormat = DateFormat.is24HourFormat(getContext());
+        for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
+            mTimestamps[index] =
+                ConvertUtils.utcToLocalTimeHour(
+                    latestTimestamp - (3 - index) * timeSlotOffset,
+                    is24HourFormat);
         }
         requestLayout();
     }

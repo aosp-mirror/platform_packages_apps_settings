@@ -316,28 +316,41 @@ public final class ConvertUtilsTest {
 
     @Test
     public void testUtcToLocalTime_returnExpectedResult() {
-          final long timestamp = 1619196786769L;
-          ConvertUtils.sSimpleDateFormat = null;
-          // Invokes the method first to create the SimpleDateFormat.
-          ConvertUtils.utcToLocalTime(/*timestamp=*/ 0);
-          ConvertUtils.sSimpleDateFormat
-              .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+        final long timestamp = 1619196786769L;
+        ConvertUtils.sSimpleDateFormat = null;
+        // Invokes the method first to create the SimpleDateFormat.
+        ConvertUtils.utcToLocalTime(/*timestamp=*/ 0);
+        ConvertUtils.sSimpleDateFormat
+            .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 
-          assertThat(ConvertUtils.utcToLocalTime(timestamp))
-              .isEqualTo("Apr 23,2021 09:53:06");
+        assertThat(ConvertUtils.utcToLocalTime(timestamp))
+            .isEqualTo("Apr 23,2021 09:53:06");
     }
 
     @Test
-    public void testUtcToLocalTmeHour_returnExpectedResult() {
-          final long timestamp = 1619196786769L;
-          ConvertUtils.sSimpleDateFormatForHour = null;
-          // Invokes the method first to create the SimpleDateFormat.
-          ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0);
-          ConvertUtils.sSimpleDateFormatForHour
-              .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+    public void testUtcToLocalTimeHour_12HourFormat_returnExpectedResult() {
+        final long timestamp = 1619196786769L;
+        ConvertUtils.sSimpleDateFormatForHour = null;
+        // Invokes the method first to create the SimpleDateFormat.
+        ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0, /*is24HourFormat=*/ false);
+        ConvertUtils.sSimpleDateFormatForHour
+            .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
 
-          assertThat(ConvertUtils.utcToLocalTimeHour(timestamp))
-              .isEqualTo("9 am");
+        assertThat(ConvertUtils.utcToLocalTimeHour(
+            timestamp, /*is24HourFormat=*/ false)).isEqualTo("9 am");
+    }
+
+    @Test
+    public void testUtcToLocalTimeHour_24HourFormat_returnExpectedResult() {
+        final long timestamp = 1619196786769L;
+        ConvertUtils.sSimpleDateFormatForHour = null;
+        // Invokes the method first to create the SimpleDateFormat.
+        ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0, /*is24HourFormat=*/ true);
+        ConvertUtils.sSimpleDateFormatForHour
+            .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+
+        assertThat(ConvertUtils.utcToLocalTimeHour(
+            timestamp, /*is24HourFormat=*/ true)).isEqualTo("09");
     }
 
     private static BatteryHistEntry createBatteryHistEntry(

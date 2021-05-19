@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batterytip.actions;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 
 import com.android.settings.R;
@@ -38,6 +39,8 @@ public class BatteryDefenderAction extends BatteryTipAction {
      */
     @Override
     public void handlePositiveAction(int metricsKey) {
+        mMetricsFeatureProvider.action(mContext,
+                SettingsEnums.ACTION_TIP_BATTERY_DEFENDER, metricsKey);
         final Intent intent = HelpUtils.getHelpIntent(
                 mContext,
                 mContext.getString(R.string.help_url_battery_defender),
@@ -45,6 +48,5 @@ public class BatteryDefenderAction extends BatteryTipAction {
         if (intent != null) {
             mSettingsActivity.startActivityForResult(intent, 0);
         }
-        // TODO(b/173985153): Add logging enums for Battery Defender.
     }
 }
