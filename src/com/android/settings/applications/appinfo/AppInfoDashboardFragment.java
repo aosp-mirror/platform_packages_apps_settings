@@ -111,6 +111,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private PackageInfo mPackageInfo;
     private int mUserId;
     private String mPackageName;
+    private int mUid;
 
     private DevicePolicyManager mDpm;
     private UserManager mUserManager;
@@ -297,7 +298,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 (SettingsActivity) getActivity(), this, lifecycle, packageName, mState,
                 REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
-        controllers.add(new AppBatteryPreferenceController(context, this, packageName, lifecycle));
+        controllers.add(new AppBatteryPreferenceController(
+                context, this, packageName, getUid(), lifecycle));
         controllers.add(new AppMemoryPreferenceController(context, this, lifecycle));
         controllers.add(new DefaultHomeShortcutPreferenceController(context, packageName));
         controllers.add(new DefaultBrowserShortcutPreferenceController(context, packageName));
@@ -568,13 +570,29 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final Bundle args = getArguments();
         mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
         if (mPackageName == null) {
-            final Intent intent = (args == null) ?
+            final Intent intent = args == null ?
                     getActivity().getIntent() : (Intent) args.getParcelable("intent");
             if (intent != null) {
                 mPackageName = intent.getData().getSchemeSpecificPart();
             }
         }
         return mPackageName;
+    }
+
+    private int getUid() {
+        if (mUid > 0) {
+            return mUid;
+        }
+        final Bundle args = getArguments();
+        mUid = (args != null) ? args.getInt(ARG_PACKAGE_UID) : -1;
+        if (mUid <= 0) {
+            final Intent intent = args == null
+                    ? getActivity().getIntent() : (Intent) args.getParcelable("intent");
+            if (intent != null && intent.getExtras() != null) {
+                mUid = intent.getIntExtra("uId", -1);
+            }
+        }
+        return mUid;
     }
 
     @VisibleForTesting

@@ -50,8 +50,8 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -638,7 +638,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return true;
     }
 
-    static List<BatteryDiffEntry> getBatteryLast24HrUsageData(Context context) {
+    public static List<BatteryDiffEntry> getBatteryLast24HrUsageData(Context context) {
         final long start = System.currentTimeMillis();
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
             FeatureFactory.getFactory(context)
