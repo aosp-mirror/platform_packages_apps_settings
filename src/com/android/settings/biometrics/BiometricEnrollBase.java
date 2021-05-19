@@ -175,20 +175,28 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
                 layoutTitle.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
             }
             getLayout().setHeaderText(title);
+            getLayout().getHeaderTextView().setContentDescription(title);
             setTitle(title);
         }
     }
 
     protected void setHeaderText(int resId) {
         setHeaderText(resId, false /* force */);
+        getLayout().getHeaderTextView().setContentDescription(getText(resId));
     }
 
     protected void setHeaderText(CharSequence title) {
         getLayout().setHeaderText(title);
+        getLayout().getHeaderTextView().setContentDescription(title);
     }
 
     protected void setDescriptionText(int resId) {
-        getLayout().setDescriptionText(resId);
+        CharSequence previousDescription = getLayout().getDescriptionText();
+        CharSequence description = getString(resId);
+        // Prevent a11y for re-reading the same string
+        if (!TextUtils.equals(previousDescription, description)) {
+            getLayout().setDescriptionText(resId);
+        }
     }
 
     protected void setDescriptionText(CharSequence descriptionText) {

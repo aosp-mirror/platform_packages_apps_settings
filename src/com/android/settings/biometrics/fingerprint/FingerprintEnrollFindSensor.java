@@ -62,7 +62,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
-                        .setText(R.string.skip_label)
+                        .setText(R.string.security_settings_fingerprint_enroll_enrolling_skip)
                         .setListener(this::onSkipButtonClick)
                         .setButtonType(FooterButton.ButtonType.SKIP)
                         .setTheme(R.style.SudGlifButton_Secondary)
@@ -72,8 +72,14 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         if (mCanAssumeUdfps) {
             setHeaderText(R.string.security_settings_udfps_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_udfps_enroll_find_sensor_message);
-            final CharSequence description = getString(R.string.security_settings_udfps_enroll_find_sensor_a11y);
-            getLayout().getDescriptionTextView().setContentDescription(description);
+            mFooterBarMixin.setPrimaryButton(
+                    new FooterButton.Builder(this)
+                    .setText(R.string.security_settings_udfps_enroll_find_sensor_start_button)
+                    .setListener(this::onStartButtonClick)
+                    .setButtonType(FooterButton.ButtonType.NEXT)
+                    .setTheme(R.style.SudGlifButton_Primary)
+                    .build()
+            );
         } else {
             setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
             setDescriptionText(R.string.security_settings_fingerprint_enroll_find_sensor_message);
@@ -148,6 +154,11 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
     }
 
     private void startLookingForFingerprint() {
+        if (mCanAssumeUdfps) {
+            // UDFPS devices use this screen as an educational screen. Users should tap the
+            // "Start" button to move to the next screen to begin enrollment.
+            return;
+        }
         mSidecar = (FingerprintEnrollSidecar) getSupportFragmentManager().findFragmentByTag(
                 FingerprintEnrollEnrolling.TAG_SIDECAR);
         if (mSidecar == null) {
@@ -199,6 +210,10 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         if (mAnimation != null) {
             mAnimation.stopAnimation();
         }
+    }
+
+    private void onStartButtonClick(View view) {
+        startActivityForResult(getFingerprintEnrollingIntent(), ENROLL_REQUEST);
     }
 
     protected void onSkipButtonClick(View view) {
