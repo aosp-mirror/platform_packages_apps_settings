@@ -27,6 +27,7 @@ import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 /** A utility class for application usage operation. */
 public class BatteryOptimizeUtils {
     private static final String TAG = "BatteryOptimizeUtils";
+    private static final String UNKNOWN_PACKAGE = "unknown";
 
     @VisibleForTesting AppOpsManager mAppOpsManager;
     @VisibleForTesting BatteryUtils mBatteryUtils;
@@ -106,6 +107,10 @@ public class BatteryOptimizeUtils {
 
         return mPowerAllowListBackend.isSysAllowlisted(mPackageName)
                 || mPowerAllowListBackend.isDefaultActiveApp(mPackageName);
+    }
+
+    String getPackageName() {
+        return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
     }
 
     private void refreshState() {

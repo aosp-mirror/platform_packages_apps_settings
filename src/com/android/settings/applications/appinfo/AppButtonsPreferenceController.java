@@ -269,6 +269,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
 
         @Override
         public void onClick(View v) {
+             mMetricsFeatureProvider.action(
+                     mActivity, SettingsEnums.ACTION_APP_INFO_FORCE_STOP);
             // force stop
             if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
@@ -724,6 +726,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                         mPackageName, AUTO_REVOKED_APP_INTERACTION__ACTION__OPEN_IN_SETTINGS);
             }
             mContext.startActivityAsUser(mAppLaunchIntent, new UserHandle(mUserId));
+            mMetricsFeatureProvider.action(mActivity,
+                    SettingsEnums.ACTION_APP_INFO_OPEN, mPackageName);
         }
     }
 
