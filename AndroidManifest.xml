@@ -678,7 +678,8 @@
         <activity android:name=".localepicker.LocalePickerWithRegionActivity"
                   android:excludeFromRecents="true"
                   android:configChanges="orientation|keyboardHidden|screenSize"
-                  android:exported="false">
+                  android:exported="false"
+                  android:theme="@style/Theme.LocalePickerWithRegionActivity">
         </activity>
 
         <activity
