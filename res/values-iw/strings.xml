@@ -100,7 +100,7 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"בקשת התאמה"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"אפשר להקיש כדי ליצור התאמה עם <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"קבצים שהתקבלו"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"‏הקבצים התקבלו באמצעות Bluetooth"</string>
+    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"‏קבצים שהתקבלו באמצעות Bluetooth"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"‏Bluetooth כבוי"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"יש להקיש כדי להפעיל אותו"</string>
     <string name="device_picker" msgid="2427027896389445414">"‏יש לבחור מכשיר Bluetooth"</string>
@@ -305,10 +305,10 @@
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"שימוש במיקום"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"כבוי"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="two">פועלת - ל-<xliff:g id="COUNT_1">%1$d</xliff:g> אפליקציות יש גישה למיקום</item>
-      <item quantity="many">פועלת - ל-<xliff:g id="COUNT_1">%1$d</xliff:g> אפליקציות יש גישה למיקום</item>
-      <item quantity="other">פועלת - ל-<xliff:g id="COUNT_1">%1$d</xliff:g> אפליקציות יש גישה למיקום</item>
-      <item quantity="one">פועלת - לאפליקציה אחת (<xliff:g id="COUNT_0">%1$d</xliff:g>) יש גישה למיקום</item>
+      <item quantity="two">פועל – ל-<xliff:g id="COUNT_1">%1$d</xliff:g> אפליקציות יש גישה למיקום</item>
+      <item quantity="many">פועל – ל-<xliff:g id="COUNT_1">%1$d</xliff:g> אפליקציות יש גישה למיקום</item>
+      <item quantity="other">פועל – ל-<xliff:g id="COUNT_1">%1$d</xliff:g> אפליקציות יש גישה למיקום</item>
+      <item quantity="one">פועל – לאפליקציה אחת (<xliff:g id="COUNT_0">%1$d</xliff:g>) יש גישה למיקום</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"בטעינה…"</string>
     <string name="location_settings_footer_location_on" msgid="610897900893933852">"‏&lt;br&gt;&lt;br&gt;אפליקציות שההרשאה \"מכשירים קרובים\" פועלת בהן יכולות להעריך את המיקום היחסי של המכשירים המחוברים. &lt;br&gt;&lt;br&gt;&lt;a href=<xliff:g id="URL"> https://support.google.com/android/answer/3467281</xliff:g>&gt;מידע נוסף&lt;/a&gt;"</string>
@@ -832,7 +832,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="934657460643490773">"אפשרויות..."</string>
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"אפשרויות מתקדמות"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"‏Bluetooth מתקדם"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"‏כש-Bluetooth פועל, יש קשר למכשירי Bluetooth אחרים."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"‏כשה-Bluetooth מופעל, המכשיר יכול לתקשר עם מכשירי Bluetooth אחרים שנמצאים בקרבת מקום."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="7628457523484942552">"‏כשה-Bluetooth מופעל, המכשיר יכול לתקשר עם מכשירי Bluetooth אחרים שנמצאים בקרבת מקום.\n\nלשיפור חוויית השימוש במכשיר, אפליקציות ושירותים עדיין יכולים לסרוק מכשירים בקרבת מקום בכל עת, גם כאשר ה-Bluetooth כבוי. ניתן להשתמש בכך, למשל כדי לשפר תכונות ושירותים מבוססי-מיקום. אפשר לשנות זאת ב"<annotation id="link">"הגדרות הסריקה של ה-Bluetooth"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"‏כדי לשפר את דיוק המיקום, אפליקציות ושירותים של המערכת יכולים עדיין לזהות התקני Bluetooth. ניתן לשנות זאת ב<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>הגדרות הסריקה<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"לא ניתן להתחבר. יש לנסות שוב."</string>
@@ -841,12 +841,12 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"לשכוח את המכשיר?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"הסרת השיוך"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"האם לנתק את האפליקציה?"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"ההתאמה בין הטלפון שלך להתקן <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"ההתאמה בין הטלפון שלך למכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"ההתאמה בין הטאבלט שלך להתקן <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"ההתאמה בין המכשיר שלך להתקן <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> לא תהיה מחוברת יותר אל <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"תבוטל ההתאמה בין <xliff:g id="DEVICE_NAME">%1$s</xliff:g> לבין כל מכשיר שמקושר לחשבון זה"</string>
-    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"שכחה מההתקן"</string>
+    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"אני רוצה לשכוח את המכשיר"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ניתוק האפליקציה"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"התחברות אל…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="339103864166293612">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק מהאודיו של המדיה."</string>
@@ -1828,7 +1828,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"שירותי מיקום"</string>
     <string name="location_title" msgid="5819154746934945021">"המיקום שלי"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"מיקום עבור פרופיל עבודה"</string>
-    <string name="location_app_level_permissions" msgid="907206607664629759">"הרשאות המיקום של האפליקציה"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"הרשאות מיקום של אפליקציות"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"תכונת המיקום כבויה"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="two"> ל-<xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> מתוך <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> אפליקציות יש גישה למיקום</item>
@@ -2855,7 +2855,7 @@
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"הפעלה אוטומטית"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"אין לוח זמנים"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"מבוסס על השגרה שלך"</string>
-    <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"יופעל על סמך התרחיש שלך"</string>
+    <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"יופעל על סמך השגרה שלך"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"מבוסס על אחוזים"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"מצב \'חיסכון בסוללה\' יופעל אם סביר שהסוללה תתרוקן לפני הזמן שבו בדרך כלל מתבצעת הטעינה הבאה"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"יופעל ב-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2947,7 +2947,7 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> לא מאובטח"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptive Connectivity"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ההעדפה הזו מאריכה את חיי הסוללה ומשפרת את ביצועי המכשיר על ידי ניהול אוטומטי של חיבורי הרשת שלך"</string>
-    <string name="credentials_title" msgid="7535942196886123656">"אחסון אישורים"</string>
+    <string name="credentials_title" msgid="7535942196886123656">"אחסון פרטי כניסה"</string>
     <string name="credentials_install" msgid="3933218407598415827">"התקנת אישור"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"התקנת אישורים מאמצעי אחסון"</string>
     <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"‏התקנת אישורים מכרטיס SD"</string>
@@ -3228,7 +3228,7 @@
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"‏האם לנתק את ה-VPN הזה?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"ניתוק"</string>
     <string name="vpn_version" msgid="41856553718304367">"גרסה <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <string name="vpn_forget_long" msgid="729132269203870205">"‏שכחה מ-VPN"</string>
+    <string name="vpn_forget_long" msgid="729132269203870205">"‏אני רוצה לשכוח את ה-VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"‏האם להחליף רשת VPN קיימת?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"‏האם להגדיר את רשת ה-VPN בחיבור תמידי?"</string>
     <string name="vpn_first_always_on_vpn_message" msgid="2769478310633047870">"‏לאחר שהגדרה זו תופעל, לא יהיה לך חיבור אינטרנט עד שה-VPN יחובר בהצלחה"</string>
@@ -3343,7 +3343,7 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"מחיקת משתמש"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"מחיקה"</string>
     <string name="user_guest" msgid="4545590092001460388">"אורח/ת"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"הסרת אורח"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"הסרת אורח/ת"</string>
     <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"להסיר אורח?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"כל האפליקציות והנתונים בפעילות זו באתר יימחקו."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"הסרה"</string>
@@ -3621,7 +3621,7 @@
     <string name="notification_ringtone_title" msgid="6924501621312095512">"צליל ברירת המחדל להתראות"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"צליל שסיפקה האפליקציה"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"צליל ברירת המחדל להתראות"</string>
-    <string name="alarm_ringtone_title" msgid="6680761007731764726">"צליל לשעון מעורר"</string>
+    <string name="alarm_ringtone_title" msgid="6680761007731764726">"צליל ברירת המחדל לשעון מעורר"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"רטט לשיחות"</string>
     <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"רטט"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"אף פעם לא להפעיל רטט"</string>
@@ -5551,7 +5551,7 @@
     <string name="category_name_lock_display" msgid="8310402558217129670">"מסך נעילה"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"מראה"</string>
     <string name="category_name_color" msgid="937514550918977151">"צבע"</string>
-    <string name="category_name_display_controls" msgid="7046581691184725216">"פקדים נוספים במסך"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"פקדי תצוגה נוספים"</string>
     <string name="category_name_others" msgid="2366006298768550310">"אחרות"</string>
     <string name="category_name_general" msgid="7737273712848115886">"כללי"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"שימוש בעיצוב כהה"</string>
