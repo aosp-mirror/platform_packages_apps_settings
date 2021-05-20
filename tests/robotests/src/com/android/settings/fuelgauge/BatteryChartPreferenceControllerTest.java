@@ -36,6 +36,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Pair;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -92,6 +93,7 @@ public final class BatteryChartPreferenceControllerTest {
 
     @Before
     public void setUp() {
+        org.robolectric.shadows.ShadowSettings.set24HourTimeFormat(false);
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
@@ -361,7 +363,11 @@ public final class BatteryChartPreferenceControllerTest {
             .action(
                 mContext,
                 SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
-                mBatteryHistEntry.mPackageName);
+                (Pair<Integer, Object>[]) new Pair[] {
+                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
+                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, 0),
+                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, null)
+                });
     }
 
     @Test
@@ -378,7 +384,11 @@ public final class BatteryChartPreferenceControllerTest {
             .action(
                 mContext,
                 SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
-                mBatteryHistEntry.mPackageName);
+                (Pair<Integer, Object>[]) new Pair[] {
+                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
+                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, 0),
+                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, null)
+                });
     }
 
     @Test
@@ -560,13 +570,13 @@ public final class BatteryChartPreferenceControllerTest {
         verify(mBatteryChartPreferenceController.mAppListPrefGroup)
             .setTitle(captor.capture());
         assertThat(captor.getValue())
-            .isEqualTo("App usage for 4 pm-7 am");
+            .isEqualTo("App usage for 4 pm - 7 am");
         // Verifies the title in the expandable divider.
         captor = ArgumentCaptor.forClass(String.class);
         verify(mBatteryChartPreferenceController.mExpandDividerPreference)
             .setTitle(captor.capture());
         assertThat(captor.getValue())
-            .isEqualTo("System usage for 4 pm-7 am");
+            .isEqualTo("System usage for 4 pm - 7 am");
     }
 
     @Test

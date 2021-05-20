@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -216,7 +217,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             isAppEntry
                 ? SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM
                 : SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
-            packageName);
+            new Pair(ConvertUtils.METRIC_KEY_PACKAGE, packageName),
+            new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, histEntry.mBatteryLevel),
+            new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, powerPref.getPercent()));
         Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b\n%s",
             diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage, histEntry));
         if (isValidPackage) {
