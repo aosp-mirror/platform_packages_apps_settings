@@ -25,6 +25,7 @@ import androidx.annotation.Nullable;
 import com.android.settings.R;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.applications.GameSettingsFeatureProvider;
 import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
@@ -167,6 +168,11 @@ public abstract class FeatureFactory {
      * Retrieve implementation for SecuritySettings feature.
      */
     public abstract SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider();
+
+    /**
+     * Retrieve implementation for Game Settings feature.
+     */
+    public abstract GameSettingsFeatureProvider getGameSettingsFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
