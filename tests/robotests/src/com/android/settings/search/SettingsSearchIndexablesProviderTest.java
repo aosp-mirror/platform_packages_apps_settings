@@ -1,21 +1,31 @@
 package com.android.settings.search;
 
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ProviderInfo;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.SearchIndexablesContract;
 
 import com.android.settings.R;
+import com.android.settings.accounts.ManagedProfileSettings;
+import com.android.settings.dashboard.CategoryManager;
+import com.android.settings.homepage.TopLevelSettings;
+import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.search.SearchIndexableData;
 
 import org.junit.After;
@@ -25,21 +35,28 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = SettingsSearchIndexablesProviderTest.ShadowCategoryManager.class)
 public class SettingsSearchIndexablesProviderTest {
 
     private static final String PACKAGE_NAME = "com.android.settings";
     private static final String BASE_AUTHORITY = "content://" + PACKAGE_NAME + "/";
 
+    private Context mContext;
     private SettingsSearchIndexablesProvider mProvider;
     private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
+        mContext = RuntimeEnvironment.application;
         mProvider = spy(new SettingsSearchIndexablesProvider());
         ProviderInfo info = new ProviderInfo();
         info.exported = true;
@@ -55,10 +72,22 @@ public class SettingsSearchIndexablesProviderTest {
                         FakeSettingsFragment.SEARCH_INDEX_DATA_PROVIDER));
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = featureProvider;
+
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "pkg";
+        activityInfo.name = "class";
+        activityInfo.metaData = new Bundle();
+        activityInfo.metaData.putString(META_DATA_PREFERENCE_TITLE, "title");
+        final DashboardCategory category = new DashboardCategory("key");
+        when(mFakeFeatureFactory.dashboardFeatureProvider.getAllCategories())
+                .thenReturn(Arrays.asList(category));
+        category.addTile(new ActivityTile(activityInfo, category.key));
+        ShadowCategoryManager.setDashboardCategory(category);
     }
 
     @After
     public void cleanUp() {
+        ShadowCategoryManager.reset();
         mFakeFeatureFactory.searchFeatureProvider = mock(SearchFeatureProvider.class);
     }
 
@@ -121,7 +150,41 @@ public class SettingsSearchIndexablesProviderTest {
     }
 
     @Test
-    public void testIsEligibleForIndexing_isSettingsInjectedItem_ShouldBeFalse() {
+    public void refreshSearchEnabledState_classNotFoundInCategoryMap_hasInjectionRawData() {
+        mProvider.refreshSearchEnabledState(mContext,
+                ManagedProfileSettings.SEARCH_INDEX_DATA_PROVIDER);
+
+        assertThat(mProvider.getInjectionIndexableRawData(mContext)).isNotEmpty();
+    }
+
+    @Test
+    public void refreshSearchEnabledState_noDashboardCategory_hasInjectionRawData() {
+        ShadowCategoryManager.setDashboardCategory(null);
+
+        mProvider.refreshSearchEnabledState(mContext,
+                TopLevelSettings.SEARCH_INDEX_DATA_PROVIDER);
+
+        assertThat(mProvider.getInjectionIndexableRawData(mContext)).isNotEmpty();
+    }
+
+    @Test
+    public void refreshSearchEnabledState_pageSearchEnabled_hasInjectionRawData() {
+        mProvider.refreshSearchEnabledState(mContext,
+                NetworkDashboardFragment.SEARCH_INDEX_DATA_PROVIDER);
+
+        assertThat(mProvider.getInjectionIndexableRawData(mContext)).isNotEmpty();
+    }
+
+    @Test
+    public void refreshSearchEnabledState_pageSearchDisable_noInjectionRawData() {
+        mProvider.refreshSearchEnabledState(mContext,
+                TopLevelSettings.SEARCH_INDEX_DATA_PROVIDER);
+
+        assertThat(mProvider.getInjectionIndexableRawData(mContext)).isEmpty();
+    }
+
+    @Test
+    public void isEligibleForIndexing_isSettingsInjectedItem_shouldReturnFalse() {
         final ActivityInfo activityInfo = new ActivityInfo();
         activityInfo.packageName = PACKAGE_NAME;
         activityInfo.name = "class";
@@ -132,18 +195,7 @@ public class SettingsSearchIndexablesProviderTest {
     }
 
     @Test
-    public void testIsEligibleForIndexing_isHomepageInjectedItem_ShouldBeFalse() {
-        final ActivityInfo activityInfo = new ActivityInfo();
-        activityInfo.packageName = "pkg";
-        activityInfo.name = "class";
-        final ActivityTile activityTile = new ActivityTile(activityInfo,
-                CategoryKey.CATEGORY_HOMEPAGE);
-
-        assertThat(mProvider.isEligibleForIndexing(PACKAGE_NAME, activityTile)).isFalse();
-    }
-
-    @Test
-    public void testIsEligibleForIndexing_normalInjectedItem_ShouldBeTrue() {
+    public void isEligibleForIndexing_normalInjectedItem_shouldReturnTrue() {
         final ActivityInfo activityInfo = new ActivityInfo();
         activityInfo.packageName = "pkg";
         activityInfo.name = "class";
@@ -151,5 +203,25 @@ public class SettingsSearchIndexablesProviderTest {
                 CategoryKey.CATEGORY_CONNECT);
 
         assertThat(mProvider.isEligibleForIndexing(PACKAGE_NAME, activityTile)).isTrue();
+    }
+
+    @Implements(CategoryManager.class)
+    public static class ShadowCategoryManager {
+
+        private static DashboardCategory sCategory;
+
+        @Resetter
+        static void reset() {
+            sCategory = null;
+        }
+
+        @Implementation
+        public DashboardCategory getTilesByCategory(Context context, String categoryKey) {
+            return sCategory;
+        }
+
+        static void setDashboardCategory(DashboardCategory category) {
+            sCategory = category;
+        }
     }
 }
