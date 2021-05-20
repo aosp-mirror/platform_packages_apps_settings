@@ -50,7 +50,7 @@ import org.robolectric.shadows.ShadowPackageManager;
 public class ControlsPrivacyPreferenceControllerTest {
 
     private static final String TEST_KEY = "test_key";
-    private static final String SETTING_KEY = "lockscreen_show_controls";
+    private static final String SETTING_KEY = Settings.Secure.LOCKSCREEN_SHOW_CONTROLS;
 
     private Context mContext;
     private ContentResolver mContentResolver;
