@@ -32,7 +32,6 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:datePickerDialogTheme">@style/PickerDialogTheme.Settings</item>
         <item name="android:progressBarStyleHorizontal">@style/HorizontalProgressBarStyle</item>
-        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
 
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="face_layout_theme">@style/FaceLayoutTheme</item>
@@ -91,6 +90,10 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="Theme.LocalePickerWithRegionActivity" parent="Theme.Settings">
+        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="ThemeOverlay.SwitchBar.Settings.Base" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar">
