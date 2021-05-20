@@ -139,6 +139,8 @@ public final class BatteryChartPreferenceControllerTest {
 
         mBatteryChartPreferenceController.onResume();
         assertThat(BatteryDiffEntry.sResourceCache).isNotEmpty();
+        verify(mMetricsFeatureProvider)
+                .action(mContext, SettingsEnums.OPEN_BATTERY_USAGE);
     }
 
     @Test
@@ -658,8 +660,6 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.mTrapezoidIndex)
             .isEqualTo(expectedIndex);
         assertThat(mBatteryChartPreferenceController.mIsExpanded).isTrue();
-        verify(mMetricsFeatureProvider)
-            .action(mContext, SettingsEnums.OPEN_BATTERY_USAGE);
     }
 
     @Test
