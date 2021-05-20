@@ -17,13 +17,19 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.verify;
+
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -32,12 +38,18 @@ import org.robolectric.RuntimeEnvironment;
 public class BatteryDefenderTipTest {
 
     private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
     private BatteryDefenderTip mBatteryDefenderTip;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+
+    @Mock private BatteryTip mBatteryTip;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mContext = RuntimeEnvironment.application;
         mBatteryDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW);
     }
@@ -58,5 +70,14 @@ public class BatteryDefenderTipTest {
     public void getIcon_showIcon() {
         assertThat(mBatteryDefenderTip.getIconId())
                 .isEqualTo(R.drawable.ic_battery_status_good_24dp);
+    }
+
+    @Test
+    public void testLog_logMetric() {
+        mBatteryDefenderTip.updateState(mBatteryTip);
+        mBatteryDefenderTip.log(mContext, mMetricsFeatureProvider);
+
+        verify(mMetricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_BATTERY_DEFENDER_TIP, mBatteryTip.mState);
     }
 }

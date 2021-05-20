@@ -71,6 +71,7 @@ public final class ConvertUtils {
 
     private static String sZoneId;
     private static String sZoneIdForHour;
+    private static boolean sIs24HourFormat;
 
     @VisibleForTesting
     static SimpleDateFormat sSimpleDateFormat;
@@ -134,11 +135,15 @@ public final class ConvertUtils {
     }
 
     /** Converts UTC timestamp to local time hour data. */
-    public static String utcToLocalTimeHour(long timestamp) {
+    public static String utcToLocalTimeHour(long timestamp, boolean is24HourFormat) {
         final String currentZoneId = TimeZone.getDefault().getID();
-        if (!currentZoneId.equals(sZoneIdForHour) || sSimpleDateFormatForHour == null) {
+        if (!currentZoneId.equals(sZoneIdForHour)
+                || sIs24HourFormat != is24HourFormat
+                || sSimpleDateFormatForHour == null) {
             sZoneIdForHour = currentZoneId;
-            sSimpleDateFormatForHour = new SimpleDateFormat("h aa", Locale.ENGLISH);
+            sIs24HourFormat = is24HourFormat;
+            sSimpleDateFormatForHour = new SimpleDateFormat(
+                    sIs24HourFormat ? "HH" : "h aa", Locale.ENGLISH);
         }
         return sSimpleDateFormatForHour.format(new Date(timestamp))
             .toLowerCase(Locale.getDefault());
@@ -230,7 +235,7 @@ public final class ConvertUtils {
                 if (selectedBatteryEntry == null) {
                     continue;
                 }
-                // Force refine the cumulative value since it may introduce deviation
+                // Forces refine the cumulative value since it may introduce deviation
                 // error since we will apply the interpolation arithmetic.
                 final float totalUsageTimeInMs =
                     foregroundUsageTimeInMs + backgroundUsageTimeInMs;

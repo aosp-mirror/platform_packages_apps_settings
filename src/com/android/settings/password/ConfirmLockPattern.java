@@ -28,7 +28,6 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -120,12 +119,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                     container,
                     false);
             mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
-            switch(getContext().getDisplay().getRotation()) {
-                case Surface.ROTATION_90:
-                case Surface.ROTATION_270:
-                    mGlifLayout.setLandscapeHeaderAreaVisible(false /* visible */);
-                    break;
-            }
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
 

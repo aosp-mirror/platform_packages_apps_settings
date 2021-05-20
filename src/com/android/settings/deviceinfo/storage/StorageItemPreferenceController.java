@@ -76,7 +76,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @VisibleForTesting
     static final String VIDEOS_KEY = "pref_videos";
     @VisibleForTesting
-    static final String AUDIOS_KEY = "pref_audios";
+    static final String AUDIO_KEY = "pref_audio";
     @VisibleForTesting
     static final String APPS_KEY = "pref_apps";
     @VisibleForTesting
@@ -93,7 +93,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @VisibleForTesting
     final Uri mVideosUri;
     @VisibleForTesting
-    final Uri mAudiosUri;
+    final Uri mAudioUri;
     @VisibleForTesting
     final Uri mDocumentsAndOtherUri;
 
@@ -119,7 +119,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @VisibleForTesting
     StorageItemPreference mVideosPreference;
     @VisibleForTesting
-    StorageItemPreference mAudiosPreference;
+    StorageItemPreference mAudioPreference;
     @VisibleForTesting
     StorageItemPreference mAppsPreference;
     @VisibleForTesting
@@ -151,8 +151,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .getString(R.string.config_images_storage_category_uri));
         mVideosUri = Uri.parse(context.getResources()
                 .getString(R.string.config_videos_storage_category_uri));
-        mAudiosUri = Uri.parse(context.getResources()
-                .getString(R.string.config_audios_storage_category_uri));
+        mAudioUri = Uri.parse(context.getResources()
+                .getString(R.string.config_audio_storage_category_uri));
         mDocumentsAndOtherUri = Uri.parse(context.getResources()
                 .getString(R.string.config_documents_and_other_storage_category_uri));
     }
@@ -182,8 +182,8 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             case VIDEOS_KEY:
                 launchActivityWithUri(mVideosUri);
                 return true;
-            case AUDIOS_KEY:
-                launchActivityWithUri(mAudiosUri);
+            case AUDIO_KEY:
+                launchActivityWithUri(mAudioUri);
                 return true;
             case APPS_KEY:
                 launchAppsIntent();
@@ -251,7 +251,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         final boolean privateStoragePreferencesVisible = isValidPrivateVolume();
         mImagesPreference.setVisible(privateStoragePreferencesVisible);
         mVideosPreference.setVisible(privateStoragePreferencesVisible);
-        mAudiosPreference.setVisible(privateStoragePreferencesVisible);
+        mAudioPreference.setVisible(privateStoragePreferencesVisible);
         mAppsPreference.setVisible(privateStoragePreferencesVisible);
         mGamesPreference.setVisible(privateStoragePreferencesVisible);
         mDocumentsAndOtherPreference.setVisible(privateStoragePreferencesVisible);
@@ -279,7 +279,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
             mPrivateStorageItemPreferences.add(mImagesPreference);
             mPrivateStorageItemPreferences.add(mVideosPreference);
-            mPrivateStorageItemPreferences.add(mAudiosPreference);
+            mPrivateStorageItemPreferences.add(mAudioPreference);
             mPrivateStorageItemPreferences.add(mAppsPreference);
             mPrivateStorageItemPreferences.add(mGamesPreference);
             mPrivateStorageItemPreferences.add(mDocumentsAndOtherPreference);
@@ -288,7 +288,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         }
         mScreen.removePreference(mImagesPreference);
         mScreen.removePreference(mVideosPreference);
-        mScreen.removePreference(mAudiosPreference);
+        mScreen.removePreference(mAudioPreference);
         mScreen.removePreference(mAppsPreference);
         mScreen.removePreference(mGamesPreference);
         mScreen.removePreference(mDocumentsAndOtherPreference);
@@ -317,7 +317,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         tintPreference(mPublicStoragePreference);
         tintPreference(mImagesPreference);
         tintPreference(mVideosPreference);
-        tintPreference(mAudiosPreference);
+        tintPreference(mAudioPreference);
         tintPreference(mAppsPreference);
         tintPreference(mGamesPreference);
         tintPreference(mDocumentsAndOtherPreference);
@@ -346,7 +346,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mPublicStoragePreference = screen.findPreference(PUBLIC_STORAGE_KEY);
         mImagesPreference = screen.findPreference(IMAGES_KEY);
         mVideosPreference = screen.findPreference(VIDEOS_KEY);
-        mAudiosPreference = screen.findPreference(AUDIOS_KEY);
+        mAudioPreference = screen.findPreference(AUDIO_KEY);
         mAppsPreference = screen.findPreference(APPS_KEY);
         mGamesPreference = screen.findPreference(GAMES_KEY);
         mDocumentsAndOtherPreference = screen.findPreference(DOCUMENTS_AND_OTHER_KEY);
@@ -363,7 +363,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
         mImagesPreference.setStorageSize(getImagesSize(data), mTotalSize);
         mVideosPreference.setStorageSize(getVideosSize(data), mTotalSize);
-        mAudiosPreference.setStorageSize(getAudiosSize(data), mTotalSize);
+        mAudioPreference.setStorageSize(getAudioSize(data), mTotalSize);
         mAppsPreference.setStorageSize(getAppsSize(data), mTotalSize);
         mGamesPreference.setStorageSize(getGamesSize(data), mTotalSize);
         mDocumentsAndOtherPreference.setStorageSize(getDocumentsAndOtherSize(data),
@@ -426,7 +426,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         return data.videoAppsSize;
     }
 
-    private long getAudiosSize(StorageAsyncLoader.AppsStorageResult data) {
+    private long getAudioSize(StorageAsyncLoader.AppsStorageResult data) {
         return data.musicAppsSize + data.externalStats.audioBytes;
     }
 
