@@ -49,6 +49,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.RadioButtonPreference;
@@ -113,6 +114,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     boolean enableTriState = true;
 
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
     private BackgroundActivityPreferenceController mBackgroundActivityPreferenceController;
 
@@ -240,6 +242,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(getContext())
+                .getMetricsFeatureProvider();
 
         final String packageName = getArguments().getString(EXTRA_PACKAGE_NAME);
         if (enableTriState) {
@@ -262,6 +266,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         initHeader();
         if (enableTriState) {
             initPreferenceForTriState(getContext());
+            final String packageName = mBatteryOptimizeUtils.getPackageName();
+            mMetricsFeatureProvider.action(getContext(),
+                    SettingsEnums.OPEN_APP_BATTERY_USAGE, packageName);
         } else {
             initPreference(getContext());
         }
@@ -411,9 +418,24 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference selected) {
-        updatePreferenceState(mUnrestrictedPreference, selected.getKey());
-        updatePreferenceState(mOptimizePreference, selected.getKey());
-        updatePreferenceState(mRestrictedPreference, selected.getKey());
+        final String selectedKey = selected.getKey();
+        updatePreferenceState(mUnrestrictedPreference, selectedKey);
+        updatePreferenceState(mOptimizePreference, selectedKey);
+        updatePreferenceState(mRestrictedPreference, selectedKey);
+
+        // Logs metric.
+        int metricCategory = 0;
+        if (selectedKey.equals(mUnrestrictedPreference.getKey())) {
+            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_UNRESTRICTED;
+        } else if (selectedKey.equals(mOptimizePreference.getKey())) {
+            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED;
+        } else if (selectedKey.equals(mRestrictedPreference.getKey())) {
+            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_RESTRICTED;
+        }
+        if (metricCategory != 0) {
+            mMetricsFeatureProvider.action(getContext(),
+                    metricCategory, mBatteryOptimizeUtils.getPackageName());
+        }
     }
 
     private void updatePreferenceState(RadioButtonPreference preference, String selectedKey) {
