@@ -92,6 +92,7 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
                         }
                     }
                 }
+                button.announceForAccessibility(mContext.getString(R.string.recent_convos_removed));
             } catch (RemoteException e) {
                 Slog.w(TAG, "Could not clear recents", e);
             }
