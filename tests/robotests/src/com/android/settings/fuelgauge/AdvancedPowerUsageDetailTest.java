@@ -33,6 +33,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -41,6 +42,7 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.Pair;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
@@ -56,6 +58,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.RadioButtonPreference;
@@ -129,6 +132,7 @@ public class AdvancedPowerUsageDetailTest {
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
     private FakeFeatureFactory mFeatureFactory;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() {
@@ -137,6 +141,7 @@ public class AdvancedPowerUsageDetailTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageName()).thenReturn("foo");
         mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
 
         mFragment = spy(new AdvancedPowerUsageDetail());
         doReturn(mContext).when(mFragment).getContext();
@@ -751,5 +756,13 @@ public class AdvancedPowerUsageDetailTest {
         assertThat(mOptimizePreference.isChecked()).isTrue();
         assertThat(mRestrictedPreference.isChecked()).isFalse();
         assertThat(mUnrestrictedPreference.isChecked()).isFalse();
+        verify(mMetricsFeatureProvider)
+            .action(
+                mContext,
+                SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
+                (Pair<Integer, Object>[]) new Pair[] {
+                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
+                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, "app label")
+                });
     }
 }

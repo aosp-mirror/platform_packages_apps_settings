@@ -55,6 +55,7 @@ public final class BatteryDiffEntryTest {
     @Mock private Drawable mockDrawable;
     @Mock private Drawable mockDrawable2;
     @Mock private Drawable mockBadgedDrawable;
+    @Mock private BatteryHistEntry mBatteryHistEntry;
 
     @Before
     public void setUp() {
@@ -97,9 +98,9 @@ public final class BatteryDiffEntryTest {
     public void testComparator_sortCollectionsInDescOrder() {
         final List<BatteryDiffEntry> entryList = new ArrayList<>();
         // Generates fake testing data.
-        entryList.add(createBatteryDiffEntry(30, /*batteryHistEntry=*/ null));
-        entryList.add(createBatteryDiffEntry(20, /*batteryHistEntry=*/ null));
-        entryList.add(createBatteryDiffEntry(10, /*batteryHistEntry=*/ null));
+        entryList.add(createBatteryDiffEntry(30, mBatteryHistEntry));
+        entryList.add(createBatteryDiffEntry(20, mBatteryHistEntry));
+        entryList.add(createBatteryDiffEntry(10, mBatteryHistEntry));
         Collections.sort(entryList, BatteryDiffEntry.COMPARATOR);
 
         assertThat(entryList.get(0).getPercentOfTotal()).isEqualTo(30);
