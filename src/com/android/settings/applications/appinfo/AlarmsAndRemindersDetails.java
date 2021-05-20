@@ -81,6 +81,9 @@ public class AlarmsAndRemindersDetails extends AppInfoWithHeader
 
         if (savedInstanceState != null) {
             mUncommittedState = (Boolean) savedInstanceState.get(UNCOMMITTED_STATE_KEY);
+            if (mUncommittedState != null && isAppSpecific()) {
+                setResult(mUncommittedState ? RESULT_OK : RESULT_CANCELED);
+            }
         }
         addPreferencesFromResource(R.xml.alarms_and_reminders);
         mSwitchPref = findPreference(KEY_SWITCH);
@@ -97,9 +100,11 @@ public class AlarmsAndRemindersDetails extends AppInfoWithHeader
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean checked = (Boolean) newValue;
         if (preference == mSwitchPref) {
-            mUncommittedState = checked;
+            mUncommittedState = (Boolean) newValue;
+            if (isAppSpecific()) {
+                setResult(mUncommittedState ? RESULT_OK : RESULT_CANCELED);
+            }
             refreshUi();
             return true;
         }
@@ -125,6 +130,11 @@ public class AlarmsAndRemindersDetails extends AppInfoWithHeader
                 newState ? 1 : 0);
     }
 
+    private boolean isAppSpecific() {
+        return Settings.AlarmsAndRemindersAppActivity.class.getName().equals(
+                getIntent().getComponent().getClassName());
+    }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -133,10 +143,6 @@ public class AlarmsAndRemindersDetails extends AppInfoWithHeader
         }
         if (mPermissionState != null && mUncommittedState != null
                 && mUncommittedState != mPermissionState.isAllowed()) {
-            if (Settings.AlarmsAndRemindersAppActivity.class.getName().equals(
-                    getIntent().getComponent().getClassName())) {
-                setResult(mUncommittedState ? RESULT_OK : RESULT_CANCELED);
-            }
             setCanScheduleAlarms(mUncommittedState);
             logPermissionChange(mUncommittedState, mPackageName);
             mUncommittedState = null;
