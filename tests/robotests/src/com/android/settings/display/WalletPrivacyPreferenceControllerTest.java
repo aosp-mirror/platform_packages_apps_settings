@@ -48,7 +48,7 @@ import org.robolectric.RuntimeEnvironment;
 public class WalletPrivacyPreferenceControllerTest {
 
     private static final String TEST_KEY = "test_key";
-    private static final String SETTING_KEY = "lockscreen_show_wallet";
+    private static final String SETTING_KEY = Settings.Secure.LOCKSCREEN_SHOW_WALLET;
 
     private Context mContext;
     private ContentResolver mContentResolver;
@@ -110,7 +110,7 @@ public class WalletPrivacyPreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_false_POWER_MENU_LOCKED_SHOW_CONTENTIs0() {
+    public void setChecked_false_SettingIs0() {
         mController.setChecked(false);
 
         assertThat(Settings.Secure.getInt(mContentResolver, SETTING_KEY, 0)).isEqualTo(0);

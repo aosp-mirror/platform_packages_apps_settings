@@ -33,7 +33,7 @@ import com.android.settings.overlay.FeatureFactory;
  */
 public class ControlsPrivacyPreferenceController extends TogglePreferenceController {
 
-    private static final String SETTING_KEY = "lockscreen_show_controls";
+    private static final String SETTING_KEY = Settings.Secure.LOCKSCREEN_SHOW_CONTROLS;
 
     public ControlsPrivacyPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
