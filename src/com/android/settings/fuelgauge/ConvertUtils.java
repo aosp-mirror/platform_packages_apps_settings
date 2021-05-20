@@ -47,6 +47,11 @@ public final class ConvertUtils {
     // Maximum total time value for each slot cumulative data at most 2 hours.
     private static final float TOTAL_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
 
+    // Keys for metric metadata.
+    static final int METRIC_KEY_PACKAGE = 1;
+    static final int METRIC_KEY_BATTERY_LEVEL = 2;
+    static final int METRIC_KEY_BATTERY_USAGE = 3;
+
     @VisibleForTesting
     static double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
 
@@ -71,6 +76,7 @@ public final class ConvertUtils {
 
     private static String sZoneId;
     private static String sZoneIdForHour;
+    private static boolean sIs24HourFormat;
 
     @VisibleForTesting
     static SimpleDateFormat sSimpleDateFormat;
@@ -134,11 +140,15 @@ public final class ConvertUtils {
     }
 
     /** Converts UTC timestamp to local time hour data. */
-    public static String utcToLocalTimeHour(long timestamp) {
+    public static String utcToLocalTimeHour(long timestamp, boolean is24HourFormat) {
         final String currentZoneId = TimeZone.getDefault().getID();
-        if (!currentZoneId.equals(sZoneIdForHour) || sSimpleDateFormatForHour == null) {
+        if (!currentZoneId.equals(sZoneIdForHour)
+                || sIs24HourFormat != is24HourFormat
+                || sSimpleDateFormatForHour == null) {
             sZoneIdForHour = currentZoneId;
-            sSimpleDateFormatForHour = new SimpleDateFormat("h aa", Locale.ENGLISH);
+            sIs24HourFormat = is24HourFormat;
+            sSimpleDateFormatForHour = new SimpleDateFormat(
+                    sIs24HourFormat ? "HH" : "h aa", Locale.ENGLISH);
         }
         return sSimpleDateFormatForHour.format(new Date(timestamp))
             .toLowerCase(Locale.getDefault());

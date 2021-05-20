@@ -17,6 +17,7 @@ package com.android.settings.display;
 
 import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -28,6 +29,7 @@ import com.android.internal.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * A controller to manage the switch for showing battery percentage in the status bar.
@@ -75,6 +77,8 @@ public class BatteryPercentagePreferenceController extends BasePreferenceControl
         boolean showPercentage = (Boolean) newValue;
         Settings.System.putInt(mContext.getContentResolver(), SHOW_BATTERY_PERCENT,
                 showPercentage ? 1 : 0);
+        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+                .action(mContext, SettingsEnums.OPEN_BATTERY_PERCENTAGE, showPercentage);
         return true;
     }
 }

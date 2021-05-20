@@ -42,7 +42,6 @@ import android.app.admin.PasswordMetrics;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources.Theme;
 import android.graphics.Insets;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -89,6 +88,7 @@ import com.android.settings.notification.RedactionInterstitial;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -105,12 +105,6 @@ public class ChooseLockPassword extends SettingsActivity {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
         return modIntent;
-    }
-
-    @Override
-    protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
-        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
-        super.onApplyThemeResource(theme, new_resid, first);
     }
 
     public static class IntentBuilder {
@@ -207,6 +201,8 @@ public class ChooseLockPassword extends SettingsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }

@@ -63,6 +63,10 @@ public class InternetConnectivityPanelTest {
             ApplicationProvider.getApplicationContext(), "airplane_mode");
     public static final String SUBTITLE_WIFI_IS_TURNED_ON = ResourcesUtils.getResourcesString(
             ApplicationProvider.getApplicationContext(), "wifi_is_turned_on_subtitle");
+    public static final String SUBTITLE_TEXT_SELECT_NETWORK_TO_CONNECT_INTERNET =
+            ResourcesUtils.getResourcesString(
+                    ApplicationProvider.getApplicationContext(),
+                    "select_network_to_connect_internet");
     public static final String BUTTON_SETTINGS = ResourcesUtils.getResourcesString(
             ApplicationProvider.getApplicationContext(), "settings_button");
     public static final String SUBTITLE_NON_CARRIER_NETWORK_UNAVAILABLE =
@@ -175,7 +179,7 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void getSubTitle_apmOffWifiOnTwoWifiItemsNoCarrierData_shouldBeNull() {
+    public void getSubTitle_apmOffWifiOnTwoWifiItemsNoCarrierData_selectNetworkToConnectInternet() {
         List wifiList = new ArrayList<ScanResult>();
         wifiList.add(new ScanResult());
         wifiList.add(new ScanResult());
@@ -183,7 +187,8 @@ public class InternetConnectivityPanelTest {
 
         mPanel.updatePanelTitle();
 
-        assertThat(mPanel.getSubTitle()).isNull();
+        assertThat(mPanel.getSubTitle())
+                .isEqualTo(SUBTITLE_TEXT_SELECT_NETWORK_TO_CONNECT_INTERNET);
     }
 
     @Test
