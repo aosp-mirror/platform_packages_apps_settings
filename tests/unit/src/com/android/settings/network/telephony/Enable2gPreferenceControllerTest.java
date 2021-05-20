@@ -96,7 +96,7 @@ public final class Enable2gPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_nullCarrierConfig_returnUnavailable() {
         doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
-                mTelephonyManager.CAPABILITY_ALLOWED_NETWORK_TYPES_USED);
+                mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
                 false);
         doReturn(null).when(mCarrierConfigManager);
@@ -107,7 +107,7 @@ public final class Enable2gPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_capabilityNotSupported_returnUnavailable() {
         doReturn(false).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
-                mTelephonyManager.CAPABILITY_ALLOWED_NETWORK_TYPES_USED);
+                mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
                 false);
 
@@ -117,7 +117,7 @@ public final class Enable2gPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_returnAvailable() {
         doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
-                mTelephonyManager.CAPABILITY_ALLOWED_NETWORK_TYPES_USED);
+                mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
                 false);
 
@@ -146,7 +146,7 @@ public final class Enable2gPreferenceControllerTest {
 
         // Setup state to allow disabling
         doReturn(true).when(mTelephonyManager).isRadioInterfaceCapabilitySupported(
-                mTelephonyManager.CAPABILITY_ALLOWED_NETWORK_TYPES_USED);
+                mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
                 false);
 
