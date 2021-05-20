@@ -80,6 +80,10 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     @CallSuper
     public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context, boolean enabled) {
         final List<SearchIndexableRaw> dynamicRaws = new ArrayList<>();
+        if (!isPageSearchEnabled(context)) {
+            // Entire page should be suppressed, do not add dynamic raw data.
+            return dynamicRaws;
+        }
         final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
         if (controllers == null || controllers.isEmpty()) {
             return dynamicRaws;
