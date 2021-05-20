@@ -204,6 +204,16 @@ public class BaseSearchIndexProviderTest {
     }
 
     @Test
+    public void getDynamicRawDataToIndex_disablePageSearch_shouldReturnEmptyList() {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new AvailablePreferenceController(mContext));
+        doReturn(controllers).when(mIndexProvider).createPreferenceControllers(mContext);
+        doReturn(false).when(mIndexProvider).isPageSearchEnabled(mContext);
+
+        assertThat(mIndexProvider.getDynamicRawDataToIndex(mContext, true)).isEmpty();
+    }
+
+    @Test
     public void getDynamicRawDataToIndex_hasDynamicRaw_shouldNotEmpty() {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new AvailablePreferenceController(mContext));
