@@ -22,6 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 import com.android.settings.R;
@@ -69,6 +70,7 @@ public class SwipeBottomToNotificationPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_oneHandedUnsupported_returnsUnsupport() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "false");
+        setNavigationBarMode(mContext, "2" /* fully gestural */);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.UNSUPPORTED_ON_DEVICE);
@@ -77,8 +79,18 @@ public class SwipeBottomToNotificationPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_oneHandedSupported_returnsAvailable() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        setNavigationBarMode(mContext, "2" /* fully gestural */);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_set3ButtonModeProperty_returnsUnsupport() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        setNavigationBarMode(mContext, "0" /* 3-button */);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -104,5 +116,19 @@ public class SwipeBottomToNotificationPreferenceControllerTest {
                 Settings.Secure.ONE_HANDED_MODE_ENABLED);
 
         assertThat(mController.isChecked()).isFalse();
+    }
+
+    /**
+     * Set NavigationBar mode flag to Settings provider.
+     * @param context App context
+     * @param value Navigation bar mode:
+     *  0 = 3 button
+     *  1 = 2 button
+     *  2 = fully gestural
+     * @return true if the value was set, false on database errors.
+     */
+    private boolean setNavigationBarMode(Context context, String value) {
+        return Settings.Secure.putStringForUser(context.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, value, UserHandle.myUserId());
     }
 }
