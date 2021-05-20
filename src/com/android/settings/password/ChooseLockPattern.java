@@ -33,10 +33,8 @@ import android.util.Pair;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -61,6 +59,8 @@ import com.google.android.collect.Lists;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.template.IconMixin;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.Collections;
 import java.util.List;
@@ -92,12 +92,6 @@ public class ChooseLockPattern extends SettingsActivity {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, getFragmentClass().getName());
         return modIntent;
-    }
-
-    @Override
-    protected void onApplyThemeResource(Theme theme, int resid, boolean first) {
-        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
-        super.onApplyThemeResource(theme, new_resid, first);
     }
 
     public static class IntentBuilder {
@@ -171,7 +165,8 @@ public class ChooseLockPattern extends SettingsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstanceState);
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
@@ -205,18 +200,13 @@ public class ChooseLockPattern extends SettingsActivity {
 
         private LockscreenCredential mCurrentCredential;
         private boolean mRequestGatekeeperPassword;
-        protected TextView mTitleText;
         protected TextView mHeaderText;
-        protected TextView mMessageText;
         protected LockPatternView mLockPatternView;
         protected TextView mFooterText;
         protected FooterButton mSkipOrClearButton;
         private FooterButton mNextButton;
         @VisibleForTesting protected LockscreenCredential mChosenPattern;
         private ColorStateList mDefaultHeaderColorList;
-
-        // ScrollView that contains title and header, only exist in land mode
-        private ScrollView mTitleHeaderScrollView;
 
         /**
          * The patten used during the help screen to show how to draw a pattern.
@@ -308,15 +298,6 @@ public class ChooseLockPattern extends SettingsActivity {
                     }
                     mFooterText.setText("");
                     mNextButton.setEnabled(false);
-
-                    if (mTitleHeaderScrollView != null) {
-                        mTitleHeaderScrollView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                mTitleHeaderScrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                            }
-                        });
-                    }
                 }
          };
 
@@ -513,17 +494,12 @@ public class ChooseLockPattern extends SettingsActivity {
                 Bundle savedInstanceState) {
             final GlifLayout layout = (GlifLayout) inflater.inflate(
                     R.layout.choose_lock_pattern, container, false);
-            switch(getContext().getDisplay().getRotation()) {
-                case Surface.ROTATION_90:
-                case Surface.ROTATION_270:
-                    layout.setLandscapeHeaderAreaVisible(false /* visible */);
-                    break;
-            }
             updateActivityTitle();
+            layout.setHeaderText(getActivity().getTitle());
             if (getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
                 View iconView = layout.findViewById(R.id.sud_layout_icon);
                 if (iconView != null) {
-                    iconView.setVisibility(View.GONE);
+                    layout.getMixin(IconMixin.class).setVisibility(View.GONE);
                 }
             } else {
                 if (mForFingerprint) {
@@ -561,10 +537,8 @@ public class ChooseLockPattern extends SettingsActivity {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            mTitleText = view.findViewById(R.id.suc_layout_title);
             mHeaderText = (TextView) view.findViewById(R.id.headerText);
             mDefaultHeaderColorList = mHeaderText.getTextColors();
-            mMessageText = view.findViewById(R.id.sud_layout_description);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
             mLockPatternView.setTactileFeedbackEnabled(
@@ -572,9 +546,6 @@ public class ChooseLockPattern extends SettingsActivity {
             mLockPatternView.setFadePattern(false);
 
             mFooterText = (TextView) view.findViewById(R.id.footerText);
-
-            mTitleHeaderScrollView = (ScrollView) view.findViewById(R.id
-                    .scroll_layout_title_header);
 
             // make it so unhandled touch events within the unlock screen go to the
             // lock pattern view.
@@ -756,12 +727,13 @@ public class ChooseLockPattern extends SettingsActivity {
             } else {
                 mHeaderText.setText(stage.headerMessage);
             }
+            final GlifLayout layout = getActivity().findViewById(R.id.setup_wizard_layout);
             final boolean forAnyBiometric = mForFingerprint || mForFace || mForBiometrics;
             int message = forAnyBiometric ? stage.messageForBiometrics : stage.message;
             if (message == ID_EMPTY_MESSAGE) {
-                mMessageText.setText("");
+                layout.setDescriptionText("");
             } else {
-                mMessageText.setText(message);
+                layout.setDescriptionText(message);
             }
             if (stage.footerMessage == ID_EMPTY_MESSAGE) {
                 mFooterText.setText("");
@@ -782,7 +754,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
                 if (stage == Stage.NeedToConfirm && forAnyBiometric) {
                     mHeaderText.setText("");
-                    mTitleText.setText(R.string.lockpassword_draw_your_pattern_again_header);
+                    layout.setHeaderText(R.string.lockpassword_draw_your_pattern_again_header);
                 }
             }
 
