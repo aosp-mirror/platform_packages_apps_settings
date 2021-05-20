@@ -30,6 +30,8 @@ import androidx.fragment.app.Fragment;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 
+import com.google.android.setupdesign.GlifLayout;
+
 /**
  * Setup Wizard's version of ChooseLockPattern screen. It inherits the logic and basic structure
  * from ChooseLockPattern class, and should remain similar to that behaviorally. This class should
@@ -142,10 +144,11 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
 
             // Show generic pattern message when pattern lock screen launch in Setup wizard flow
             // before fingerprint and face setup.
+            final GlifLayout layout = getActivity().findViewById(R.id.setup_wizard_layout);
             if (stage.message == ID_EMPTY_MESSAGE) {
-                mMessageText.setText("");
+                layout.setDescriptionText("");
             } else {
-                mMessageText.setText(stage.message);
+                layout.setDescriptionText(stage.message);
             }
         }
 

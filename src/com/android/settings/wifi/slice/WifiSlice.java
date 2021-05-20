@@ -183,7 +183,7 @@ public class WifiSlice implements CustomSliceable {
         return Utils.createIconWithDrawable(drawable);
     }
 
-    private IconCompat getEndIcon(WifiSliceItem wifiSliceItem) {
+    protected IconCompat getEndIcon(WifiSliceItem wifiSliceItem) {
         if (wifiSliceItem.getConnectedState() != WifiEntry.CONNECTED_STATE_DISCONNECTED) {
             return IconCompat.createWithResource(mContext, R.drawable.ic_settings_24dp);
         }
@@ -194,7 +194,7 @@ public class WifiSlice implements CustomSliceable {
         return null;
     }
 
-    private SliceAction getWifiEntryAction(WifiSliceItem wifiSliceItem, IconCompat icon,
+    protected SliceAction getWifiEntryAction(WifiSliceItem wifiSliceItem, IconCompat icon,
             CharSequence title) {
         final int requestCode = wifiSliceItem.getKey().hashCode();
 
