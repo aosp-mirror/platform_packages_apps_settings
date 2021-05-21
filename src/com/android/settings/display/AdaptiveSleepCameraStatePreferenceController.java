@@ -33,26 +33,22 @@ import com.android.settingslib.widget.BannerMessagePreference;
  */
 public class AdaptiveSleepCameraStatePreferenceController {
     @VisibleForTesting
-    final BannerMessagePreference mPreference;
+    BannerMessagePreference mPreference;
     private final SensorPrivacyManager mPrivacyManager;
+    private final Context mContext;
 
     public AdaptiveSleepCameraStatePreferenceController(Context context) {
-        mPreference = new BannerMessagePreference(context);
-        mPreference.setTitle(R.string.auto_rotate_camera_lock_title);
-        mPreference.setSummary(R.string.adaptive_sleep_camera_lock_summary);
-        mPreference.setPositiveButtonText(R.string.allow);
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPrivacyManager.addSensorPrivacyListener(CAMERA,
                 (sensor, enabled) -> updateVisibility());
-        mPreference.setPositiveButtonOnClickListener(p -> {
-            mPrivacyManager.setSensorPrivacy(CAMERA, false);
-        });
+        mContext = context;
     }
 
     /**
      * Adds the controlled preference to the provided preference screen.
      */
     public void addToScreen(PreferenceScreen screen) {
+        initializePreference();
         screen.addPreference(mPreference);
         updateVisibility();
     }
@@ -70,6 +66,18 @@ public class AdaptiveSleepCameraStatePreferenceController {
      * Refreshes the visibility of the preference.
      */
     public void updateVisibility() {
+        initializePreference();
         mPreference.setVisible(isCameraLocked());
+    }
+
+    private void initializePreference() {
+        if (mPreference == null) {
+            mPreference = new BannerMessagePreference(mContext);
+            mPreference.setTitle(R.string.auto_rotate_camera_lock_title);
+            mPreference.setSummary(R.string.adaptive_sleep_camera_lock_summary);
+            mPreference.setPositiveButtonText(R.string.allow);
+            mPreference.setPositiveButtonOnClickListener(
+                    p -> mPrivacyManager.setSensorPrivacy(CAMERA, false));
+        }
     }
 }
