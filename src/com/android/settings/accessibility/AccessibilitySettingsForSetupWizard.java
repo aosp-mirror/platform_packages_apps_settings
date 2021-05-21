@@ -28,13 +28,11 @@ import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +42,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.RestrictedPreference;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.List;
 
@@ -85,14 +84,13 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         layout.setDividerInsets(Integer.MAX_VALUE, 0);
         layout.setDescriptionText(R.string.vision_settings_description);
         layout.setHeaderText(R.string.vision_settings_title);
-        layout.setIcon(getResources().getDrawable(R.drawable.ic_accessibility_visibility));
+        layout.setIcon(getPrefContext().getDrawable(R.drawable.ic_accessibility_visibility));
 
-        final ImageView iconView = layout.findManagedViewById(R.id.sud_layout_icon);
-        final FrameLayout.LayoutParams params =
-                (FrameLayout.LayoutParams) iconView.getLayoutParams();
-        params.gravity = Gravity.START;
-        layout.getHeaderTextView().setGravity(Gravity.START);
-        layout.getDescriptionTextView().setGravity(Gravity.START);
+        if (ThemeHelper.shouldApplyExtendedPartnerConfig(getActivity())) {
+            final LinearLayout headerLayout = layout.findManagedViewById(R.id.sud_layout_header);
+            headerLayout.setPadding(0, headerLayout.getPaddingTop(), 0,
+                    headerLayout.getPaddingBottom());
+        }
     }
 
     @Override
