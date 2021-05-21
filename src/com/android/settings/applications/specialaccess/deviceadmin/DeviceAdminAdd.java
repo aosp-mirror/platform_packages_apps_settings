@@ -38,6 +38,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,11 +53,11 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.EventLog;
 import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.widget.AppSecurityPermissions;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -134,6 +135,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
 
     boolean mIsCalledFromSupportDialog = false;
 
+    private LayoutInflater mLayoutInflaternflater;
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -142,6 +145,7 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
 
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
         mAppOps = (AppOpsManager)getSystemService(Context.APP_OPS_SERVICE);
+        mLayoutInflaternflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         PackageManager packageManager = getPackageManager();
 
         if ((getIntent().getFlags()&Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
@@ -735,12 +739,34 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             for (DeviceAdminInfo.PolicyInfo pi : mDeviceAdmin.getUsedPolicies()) {
                 int descriptionId = isAdminUser ? pi.description : pi.descriptionForSecondaryUsers;
                 int labelId = isAdminUser ? pi.label : pi.labelForSecondaryUsers;
-                View view = AppSecurityPermissions.getPermissionItemView(this, getText(labelId),
-                        showDescription ? getText(descriptionId) : "", true);
+                View view = getPermissionItemView(getText(labelId),
+                        showDescription ? getText(descriptionId) : "");
                 mAdminPolicies.addView(view);
             }
             mAdminPoliciesInitialized = true;
         }
+    }
+
+    /**
+     * Utility to retrieve a view displaying a single permission.  This provides
+     * the UI layout for permissions.
+     */
+    private View getPermissionItemView(CharSequence grpName, CharSequence description) {
+        Drawable icon = this.getDrawable(com.android.internal.R.drawable.ic_text_dot);
+        View permView = mLayoutInflaternflater.inflate(R.layout.app_permission_item, null);
+        TextView permGrpView = permView.findViewById(R.id.permission_group);
+        TextView permDescView = permView.findViewById(R.id.permission_list);
+        ImageView imgView = (ImageView) permView.findViewById(R.id.perm_icon);
+
+        imgView.setImageDrawable(icon);
+        if (grpName != null) {
+            permGrpView.setText(grpName);
+            permDescView.setText(description);
+        } else {
+            permGrpView.setText(description);
+            permDescView.setVisibility(View.GONE);
+        }
+        return permView;
     }
 
     void toggleMessageEllipsis(View v) {
