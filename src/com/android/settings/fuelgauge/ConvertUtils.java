@@ -47,6 +47,11 @@ public final class ConvertUtils {
     // Maximum total time value for each slot cumulative data at most 2 hours.
     private static final float TOTAL_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
 
+    // Keys for metric metadata.
+    static final int METRIC_KEY_PACKAGE = 1;
+    static final int METRIC_KEY_BATTERY_LEVEL = 2;
+    static final int METRIC_KEY_BATTERY_USAGE = 3;
+
     @VisibleForTesting
     static double PERCENTAGE_OF_TOTAL_THRESHOLD = 1f;
 
