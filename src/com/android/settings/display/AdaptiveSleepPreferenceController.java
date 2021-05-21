@@ -65,19 +65,6 @@ public class AdaptiveSleepPreferenceController {
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPowerManager = context.getSystemService(PowerManager.class);
-        mPreference = new RestrictedSwitchPreference(context);
-        mPreference.setTitle(R.string.adaptive_sleep_title);
-        mPreference.setSummary(R.string.adaptive_sleep_description);
-        mPreference.setChecked(isChecked());
-        mPreference.setKey(PREFERENCE_KEY);
-        mPreference.setOnPreferenceClickListener(preference -> {
-            final boolean isChecked = ((RestrictedSwitchPreference) preference).isChecked();
-            mMetricsFeatureProvider.action(context, SettingsEnums.ACTION_SCREEN_ATTENTION_CHANGED,
-                    isChecked);
-            Settings.Secure.putInt(context.getContentResolver(),
-                    Settings.Secure.ADAPTIVE_SLEEP, isChecked ? 1 : DEFAULT_VALUE);
-            return true;
-        });
         mPackageManager = context.getPackageManager();
     }
 
@@ -116,8 +103,8 @@ public class AdaptiveSleepPreferenceController {
             mPreference.setSummary(R.string.adaptive_sleep_description);
             mPreference.setChecked(isChecked());
             mPreference.setKey(PREFERENCE_KEY);
-            mPreference.setOnPreferenceChangeListener((preference, value) -> {
-                final boolean isChecked = (Boolean) value;
+            mPreference.setOnPreferenceClickListener(preference -> {
+                final boolean isChecked = ((RestrictedSwitchPreference) preference).isChecked();
                 mMetricsFeatureProvider.action(mContext,
                         SettingsEnums.ACTION_SCREEN_ATTENTION_CHANGED,
                         isChecked);
