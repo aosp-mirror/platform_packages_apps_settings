@@ -22,12 +22,8 @@ import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Process;
 import android.os.UserHandle;
-import android.util.IconDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +34,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -143,21 +138,8 @@ public class ActionDisabledByAdminDialogHelper {
     @VisibleForTesting
     void setAdminSupportIcon(View root, ComponentName admin, int userId) {
         ImageView supportIconView = root.requireViewById(R.id.admin_support_icon);
-        if (isNotCurrentUserOrProfile(admin, userId)) {
-            supportIconView.setImageDrawable(
-                    mActivity.getDrawable(com.android.internal.R.drawable.ic_info));
-
-            TypedArray ta = mActivity.obtainStyledAttributes(new int[]{android.R.attr.colorAccent});
-            supportIconView.setImageTintList(ColorStateList.valueOf(ta.getColor(0, 0)));
-            ta.recycle();
-        } else {
-            final Drawable badgedIcon = Utils.getBadgedIcon(
-                    IconDrawableFactory.newInstance(mActivity),
-                    mActivity.getPackageManager(),
-                    admin.getPackageName(),
-                    userId);
-            supportIconView.setImageDrawable(badgedIcon);
-        }
+        supportIconView.setImageDrawable(
+                mActivity.getDrawable(com.android.internal.R.drawable.ic_corp_badge));
     }
 
     @VisibleForTesting
