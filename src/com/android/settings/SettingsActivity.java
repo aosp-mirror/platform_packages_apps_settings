@@ -233,18 +233,6 @@ public class SettingsActivity extends SettingsBaseActivity
 
     @Override
     protected void onCreate(Bundle savedState) {
-        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)) {
-            // Enable Activity transitions
-            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
-            final MaterialSharedAxis enterTransition = new MaterialSharedAxis(
-                    MaterialSharedAxis.X, /* forward */true);
-            getWindow().setEnterTransition(enterTransition);
-
-            final MaterialSharedAxis returnTransition = new MaterialSharedAxis(
-                    MaterialSharedAxis.X, /* forward */false);
-            getWindow().setReturnTransition(returnTransition);
-        }
-
         super.onCreate(savedState);
         Log.d(LOG_TAG, "Starting onCreate");
         long startTime = System.currentTimeMillis();
