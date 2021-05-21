@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -43,8 +44,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowInteractionJankMonitor.class)
 public class SavedAccessPointsWifiSettings2Test {
 
     @Mock
