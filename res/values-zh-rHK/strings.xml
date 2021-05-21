@@ -1955,7 +1955,7 @@
     <string name="applications_settings_header" msgid="3154670675856048015">"應用程式設定"</string>
     <string name="install_applications" msgid="3921609656584369901">"不明來源"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"允許安裝所有來源的應用程式"</string>
-    <string name="recent_app_category_title" msgid="189758417804427533">"最近開啟的應用程式"</string>
+    <string name="recent_app_category_title" msgid="189758417804427533">"最近用過的應用程式"</string>
     <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
       <item quantity="other">查看全部 %1$d 個應用程式</item>
       <item quantity="one">查看所有應用程式</item>
@@ -3650,8 +3650,8 @@
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"您不會看到或聽到通知，但允許顯示已加星號的聯絡人和重複來電者的來電。"</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(目前設定)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"要變更「請勿騷擾」通知設定嗎？"</string>
-    <string name="sound_work_settings" msgid="752627453846309092">"工作設定檔聲音"</string>
-    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"使用個人設定檔聲音"</string>
+    <string name="sound_work_settings" msgid="752627453846309092">"工作設定檔音效"</string>
+    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"使用個人設定檔音效"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"使用與個人設定檔相同的音效"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"工作手機鈴聲"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"預設工作通知音效"</string>
@@ -3729,7 +3729,7 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"在下拉式面板、狀態列和上鎖畫面中顯示"</string>
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"隱藏狀態列的靜音通知"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"閃燈"</string>
-    <string name="lock_screen_notifications_title" msgid="2876323153692406203">"私隱"</string>
+    <string name="lock_screen_notifications_title" msgid="2876323153692406203">"私隱設定"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"略過上鎖畫面"</string>
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"完成臉孔解鎖後，直接前往上次使用的畫面"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"上鎖畫面, 鎖定螢幕, 略過, 繞過"</string>
@@ -3832,7 +3832,8 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"沒有已安裝的應用程式要求通知存取權。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"允許存取通知"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="1178404462834047009">"在 Android 12 中，我們將 Android 自動調整通知取代成強化通知。此功能可顯示建議操作和回覆，以及整理通知。\n\n化通知功能可存取所有通知內容 (包括聯絡人姓名和訊息等個人資料)，以及關閉或回應通知，例如接聽來電和控制「請勿騷擾」功能。"</string>
+    <!-- no translation found for notification_assistant_security_warning_summary (4846559755787348129) -->
+    <skip />
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可讀取所有通知 (包括聯絡人姓名和您收到的訊息內容等個人資料)，以及關閉通知或針對通知中的按鈕採取行動，包括接聽來電。\n\n此外，該應用程式還能開啟或關閉「請勿騷擾」模式及變更相關設定。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您關閉「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」的通知存取權，「請勿騷擾」的存取權亦可能會關閉。"</string>
@@ -4465,14 +4466,20 @@
     <string name="backup_disabled" msgid="4503062265560959320">"已停用備份功能"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"已更新至 Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"有可用的更新"</string>
-    <string name="disabled_by_policy_title" msgid="8296938784202750494">"不允許執行此操作"</string>
+    <!-- no translation found for disabled_by_policy_title (3635622338687810583) -->
+    <skip />
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"無法變更音量"</string>
-    <string name="disabled_by_policy_title_outgoing_calls" msgid="2776004460663768982">"不允許撥打電話"</string>
-    <string name="disabled_by_policy_title_sms" msgid="6309460145439706922">"不允許傳送短訊"</string>
-    <string name="disabled_by_policy_title_camera" msgid="8567781468959299078">"不允許使用相機"</string>
-    <string name="disabled_by_policy_title_screen_capture" msgid="6137746705692573992">"不允許擷取螢幕畫面"</string>
+    <!-- no translation found for disabled_by_policy_title_outgoing_calls (400089720689494562) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_title_sms (8951840850778406831) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_title_camera (6616508876399613773) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_title_screen_capture (6085100101044105811) -->
+    <skip />
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"無法開啟此應用程式"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"已被您的信貸提供者封鎖"</string>
+    <string name="default_admin_support_msg" msgid="8338570262037182531">"如有任何問題，請與 IT 管理員聯絡"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"更多詳細資料"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"您的管理員可以監控及管理與工作設定檔相關的應用程式和資料，包括設定、權限、公司存取權、網絡活動，以及裝置的位置資料。"</string>
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"您的管理員可以監控及管理與此使用者相關的應用程式和資料，包括設定、權限、公司存取權、網絡活動，以及裝置的位置資料。"</string>
@@ -4881,6 +4888,8 @@
     </plurals>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>、<xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>、<xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>、<xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
+    <!-- no translation found for storage_default_internal_storage (4055660218818688131) -->
+    <skip />
     <string name="storage_photos_videos" msgid="6926197783745481869">"相片和影片"</string>
     <string name="storage_music_audio" msgid="1185624135490182822">"音樂和音訊"</string>
     <string name="storage_games" msgid="1176568610086802469">"遊戲"</string>
@@ -5352,6 +5361,8 @@
     <string name="networks_available" msgid="3299512933684383474">"有可用的網絡"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"如要切換網絡，請中斷以太網連線"</string>
     <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"Wi-Fi 已開啟"</string>
+    <!-- no translation found for select_network_to_connect_internet (9209492728618372579) -->
+    <skip />
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"W+ 連線"</string>
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"允許 Google Fi 使用 W+ 網絡來改善速度和覆蓋率"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ 網絡"</string>
@@ -5371,7 +5382,7 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"要允許存取聯絡人和通話記錄嗎？"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"藍牙裝置「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想存取您的聯絡人資料和通話記錄，包括來電和撥出電話的資料。\n\n您從未連接「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」。"</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"光暗度"</string>
-    <string name="category_name_lock_display" msgid="8310402558217129670">"鎖定顯示屏"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"鎖定螢幕"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"外觀"</string>
     <string name="category_name_color" msgid="937514550918977151">"顏色"</string>
     <string name="category_name_display_controls" msgid="7046581691184725216">"其他顯示控制項"</string>
@@ -5419,4 +5430,14 @@
     <string name="uwb_settings_title" msgid="8578498712312002231">"超寬頻 (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"協助判斷附近採用超寬頻的裝置的相對位置"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"請關閉飛行模式，以便使用 UWB"</string>
+    <!-- no translation found for camera_toggle_title (8952668677727244992) -->
+    <skip />
+    <!-- no translation found for mic_toggle_title (265145278323852547) -->
+    <skip />
+    <!-- no translation found for sensor_toggle_description (8248823248606795411) -->
+    <skip />
+    <!-- no translation found for game_settings_title (1028178627743422090) -->
+    <skip />
+    <!-- no translation found for game_settings_summary (2548056479103747555) -->
+    <skip />
 </resources>
