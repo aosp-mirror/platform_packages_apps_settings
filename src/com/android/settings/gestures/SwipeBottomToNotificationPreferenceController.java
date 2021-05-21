@@ -33,7 +33,8 @@ public class SwipeBottomToNotificationPreferenceController extends TogglePrefere
 
     @Override
     public int getAvailabilityStatus() {
-        return OneHandedSettingsUtils.isSupportOneHandedMode() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return OneHandedSettingsUtils.isFeatureAvailable(mContext)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
