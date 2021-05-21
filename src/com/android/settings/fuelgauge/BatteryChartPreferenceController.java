@@ -24,8 +24,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -47,7 +49,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.utils.StringUtil;
 
-import java.time.Clock;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,6 +89,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @VisibleForTesting long[] mBatteryHistoryKeys;
     @VisibleForTesting int mTrapezoidIndex = BatteryChartView.SELECTED_INDEX_INVALID;
 
+    private boolean mIs24HourFormat = false;
+
     private final String mPreferenceKey;
     private final SettingsActivity mActivity;
     private final InstrumentedPreferenceFragment mFragment;
@@ -110,6 +113,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mActivity = activity;
         mFragment = fragment;
         mPreferenceKey = preferenceKey;
+        mIs24HourFormat = DateFormat.is24HourFormat(context);
         mNotAllowShowSummaryPackages = context.getResources()
             .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
         mNotAllowShowEntryPackages = context.getResources()
@@ -132,7 +136,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             savedInstanceState.getBoolean(KEY_EXPAND_SYSTEM_INFO, mIsExpanded);
         Log.d(TAG, String.format("onCreate() slotIndex=%d isExpanded=%b",
             mTrapezoidIndex, mIsExpanded));
-        mMetricsFeatureProvider.action(mPrefContext, SettingsEnums.OPEN_BATTERY_USAGE);
     }
 
     @Override
@@ -145,6 +148,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             BatteryDiffEntry.clearCache();
             Log.d(TAG, "clear icon and label cache since uiMode is changed");
         }
+        mIs24HourFormat = DateFormat.is24HourFormat(mContext);
+        mMetricsFeatureProvider.action(mPrefContext, SettingsEnums.OPEN_BATTERY_USAGE);
     }
 
     @Override
@@ -212,7 +217,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             isAppEntry
                 ? SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM
                 : SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
-            packageName);
+            new Pair(ConvertUtils.METRIC_KEY_PACKAGE, packageName),
+            new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, histEntry.mBatteryLevel),
+            new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, powerPref.getPercent()));
         Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b\n%s",
             diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage, histEntry));
         if (isValidPackage) {
@@ -493,10 +500,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             return null;
         }
         final String fromHour = ConvertUtils.utcToLocalTimeHour(
-            mBatteryHistoryKeys[mTrapezoidIndex * 2]);
+            mBatteryHistoryKeys[mTrapezoidIndex * 2], mIs24HourFormat);
         final String toHour = ConvertUtils.utcToLocalTimeHour(
-            mBatteryHistoryKeys[(mTrapezoidIndex + 1) * 2]);
-        return String.format("%s-%s", fromHour, toHour);
+            mBatteryHistoryKeys[(mTrapezoidIndex + 1) * 2], mIs24HourFormat);
+        return String.format("%s - %s", fromHour, toHour);
     }
 
     @VisibleForTesting
@@ -563,21 +570,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         if (mBatteryChartView == null || mBatteryHistoryKeys == null) {
             return;
         }
-        long latestTimestamp =
+        final long latestTimestamp =
             mBatteryHistoryKeys[mBatteryHistoryKeys.length - 1];
-        // Uses the current time if we don't have history data.
-        if (latestTimestamp == 0) {
-            latestTimestamp = Clock.systemUTC().millis();
-        }
-        // Generates timestamp label for chart graph (every 8 hours).
-        final long timeSlotOffset = DateUtils.HOUR_IN_MILLIS * 8;
-        final String[] timestampLabels = new String[4];
-        for (int index = 0; index < timestampLabels.length; index++) {
-            timestampLabels[index] =
-                ConvertUtils.utcToLocalTimeHour(
-                    latestTimestamp - (3 - index) * timeSlotOffset);
-        }
-        mBatteryChartView.setTimestamps(timestampLabels);
+        mBatteryChartView.setLatestTimestamp(latestTimestamp);
     }
 
     private static String utcToLocalTime(long[] timestamps) {

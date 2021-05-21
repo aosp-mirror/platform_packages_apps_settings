@@ -145,6 +145,7 @@
         <item name="android:layout_marginStart">4dip</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Medium</item>
+        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
     </style>
 
@@ -391,7 +392,6 @@
 
     <style name="BiometricHeaderStyle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:paddingTop">16dp</item>
-        <item name="android:textColor">@color/primary_dark_material_light</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 

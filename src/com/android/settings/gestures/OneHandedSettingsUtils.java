@@ -177,6 +177,28 @@ public class OneHandedSettingsUtils {
     }
 
     /**
+     * Get NavigationBar mode flag from Settings provider.
+     * @param context App context
+     * @return Navigation bar mode:
+     *  0 = 3 button
+     *  1 = 2 button
+     *  2 = fully gestural
+     */
+    public static int getNavigationBarMode(Context context) {
+        return Settings.Secure.getIntForUser(context.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, 2 /* fully gestural */, sCurrentUserId);
+    }
+
+    /**
+     *
+     * @param context App context
+     * @return Support One-Handed mode feature or not.
+     */
+    public static boolean isFeatureAvailable(Context context) {
+        return isSupportOneHandedMode() && getNavigationBarMode(context) != 0;
+    }
+
+    /**
      * Registers callback for observing Settings.Secure.ONE_HANDED_MODE_ENABLED state.
      * @param callback for state changes
      */

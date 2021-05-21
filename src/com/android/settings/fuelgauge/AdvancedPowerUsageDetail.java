@@ -29,6 +29,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -262,6 +263,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         initHeader();
         if (enableTriState) {
             initPreferenceForTriState(getContext());
+            final String packageName = mBatteryOptimizeUtils.getPackageName();
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                .action(
+                    getContext(),
+                    SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                    packageName);
         } else {
             initPreference(getContext());
         }
@@ -411,9 +418,30 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference selected) {
-        updatePreferenceState(mUnrestrictedPreference, selected.getKey());
-        updatePreferenceState(mOptimizePreference, selected.getKey());
-        updatePreferenceState(mRestrictedPreference, selected.getKey());
+        final String selectedKey = selected.getKey();
+        updatePreferenceState(mUnrestrictedPreference, selectedKey);
+        updatePreferenceState(mOptimizePreference, selectedKey);
+        updatePreferenceState(mRestrictedPreference, selectedKey);
+
+        // Logs metric.
+        int metricCategory = 0;
+        if (selectedKey.equals(mUnrestrictedPreference.getKey())) {
+            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_UNRESTRICTED;
+        } else if (selectedKey.equals(mOptimizePreference.getKey())) {
+            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED;
+        } else if (selectedKey.equals(mRestrictedPreference.getKey())) {
+            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_RESTRICTED;
+        }
+        if (metricCategory != 0) {
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                .action(
+                    getContext(),
+                    metricCategory,
+                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE,
+                            mBatteryOptimizeUtils.getPackageName()),
+                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE,
+                            getArguments().getString(EXTRA_POWER_USAGE_PERCENT)));
+        }
     }
 
     private void updatePreferenceState(RadioButtonPreference preference, String selectedKey) {

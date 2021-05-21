@@ -36,6 +36,7 @@ public class WifiSliceItem {
     private final int mLevel;
     private final boolean mShouldShowXLevelIcon;
     private final boolean mShouldEditBeforeConnect;
+    private final boolean mHasInternetAccess;
     private final String mSummary;
 
     // These values must be kept within [WifiEntry.WIFI_LEVEL_MIN, WifiEntry.WIFI_LEVEL_MAX]
@@ -56,6 +57,7 @@ public class WifiSliceItem {
         mLevel = wifiEntry.getLevel();
         mShouldShowXLevelIcon = wifiEntry.shouldShowXLevelIcon();
         mShouldEditBeforeConnect = wifiEntry.shouldEditBeforeConnect();
+        mHasInternetAccess = wifiEntry.hasInternetAccess();
         mSummary = wifiEntry.getSummary(false /* concise */);
     }
 
@@ -109,6 +111,13 @@ public class WifiSliceItem {
      */
     public boolean shouldShowXLevelIcon() {
         return mShouldShowXLevelIcon;
+    }
+
+    /**
+     * Returns true when the Wi-Fi network has Internet access.
+     */
+    public boolean hasInternetAccess() {
+        return mHasInternetAccess;
     }
 
     /**

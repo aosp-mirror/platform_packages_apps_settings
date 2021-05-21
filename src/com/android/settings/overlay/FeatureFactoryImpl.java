@@ -29,6 +29,8 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.applications.GameSettingsFeatureProvider;
+import com.android.settings.applications.GameSettingsFeatureProviderImpl;
 import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
 import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProviderImpl;
 import com.android.settings.aware.AwareFeatureProvider;
@@ -103,6 +105,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private WifiTrackerLibProvider mWifiTrackerLibProvider;
     private ExtraAppInfoFeatureProvider mExtraAppInfoFeatureProvider;
     private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
+    private GameSettingsFeatureProvider mGameSettingsFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -323,5 +326,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mSecuritySettingsFeatureProvider = new SecuritySettingsFeatureProviderImpl();
         }
         return mSecuritySettingsFeatureProvider;
+    }
+
+    @Override
+    public GameSettingsFeatureProvider getGameSettingsFeatureProvider() {
+        if (mGameSettingsFeatureProvider == null) {
+            mGameSettingsFeatureProvider = new GameSettingsFeatureProviderImpl();
+        }
+        return mGameSettingsFeatureProvider;
     }
 }

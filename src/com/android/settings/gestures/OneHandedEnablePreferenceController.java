@@ -19,7 +19,6 @@ package com.android.settings.gestures;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 
 /**
@@ -33,9 +32,8 @@ public class OneHandedEnablePreferenceController extends SettingsMainSwitchPrefe
 
     @Override
     public int getAvailabilityStatus() {
-        return OneHandedSettingsUtils.isSupportOneHandedMode()
-                ? BasePreferenceController.AVAILABLE
-                : BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+        return OneHandedSettingsUtils.isFeatureAvailable(mContext)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

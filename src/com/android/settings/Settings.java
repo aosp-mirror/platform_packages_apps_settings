@@ -120,6 +120,10 @@ public class Settings extends SettingsActivity {
     public static class AccessibilityContrastSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityDaltonizerSettingsActivity extends SettingsActivity { /* empty */ }
     /**
+     * Activity for lockscreen settings.
+     */
+    public static class LockScreenSettingsActivity extends SettingsActivity { /* empty */ }
+    /**
      * Activity for Reduce Bright Colors.
      */
     public static class ReduceBrightColorsSettingsActivity extends SettingsActivity { /* empty */ }

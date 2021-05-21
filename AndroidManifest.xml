@@ -474,6 +474,7 @@
 
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
+            android:theme="@style/Theme.SubSettings"
             android:exported="true"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
@@ -678,7 +679,8 @@
         <activity android:name=".localepicker.LocalePickerWithRegionActivity"
                   android:excludeFromRecents="true"
                   android:configChanges="orientation|keyboardHidden|screenSize"
-                  android:exported="false">
+                  android:exported="false"
+                  android:theme="@style/Theme.LocalePickerWithRegionActivity">
         </activity>
 
         <activity
@@ -1075,6 +1077,20 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
+            android:name=".Settings$LockScreenSettingsActivity"
+            android:label="@string/lockscreen_settings_title"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.LOCK_SCREEN_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.security.LockscreenDashboardFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
