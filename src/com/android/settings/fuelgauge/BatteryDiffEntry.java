@@ -258,7 +258,7 @@ public class BatteryDiffEntry {
     public String toString() {
         final StringBuilder builder = new StringBuilder()
             .append("BatteryDiffEntry{")
-            .append("\n\tname=" + getAppLabel())
+            .append("\n\tname=" + mAppLabel)
             .append(String.format("\n\tconsume=%.2f%% %f/%f",
                   mPercentOfTotal, mConsumePower, mTotalConsumePower))
             .append(String.format("\n\tforeground:%s background:%s",
@@ -266,9 +266,9 @@ public class BatteryDiffEntry {
                       /*withSeconds=*/ true, /*collapseTimeUnit=*/ false),
                   StringUtil.formatElapsedTime(mContext, mBackgroundUsageTimeInMs,
                       /*withSeconds=*/ true, /*collapseTimeUnit=*/ false)))
-            .append(String.format("\n\tpackage:%s|%s uid:%d userId:%d",
-                  mBatteryHistEntry.mPackageName, getPackageName(),
-                  mBatteryHistEntry.mUid, mBatteryHistEntry.mUserId));
+            .append(String.format("\n\tpackage:%s uid:%d userId:%d",
+                  mBatteryHistEntry.mPackageName, mBatteryHistEntry.mUid,
+                  mBatteryHistEntry.mUserId));
         return builder.toString();
     }
 
