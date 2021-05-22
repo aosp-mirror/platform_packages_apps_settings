@@ -23,6 +23,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
@@ -77,22 +78,20 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
         final boolean forBiometrics =
                 args.getBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS);
         if (forFace || forFingerprint || forBiometrics) {
+            final boolean hasFace = forFace || forBiometrics;
+            final boolean hasFingerprint = forFingerprint || forBiometrics;
+
             final int titleId;
-
-            if (args.getBoolean(ARG_LOCK_TYPE_PATTERN)) {
-                titleId = R.string.lock_screen_pattern_skip_title;
-            } else {
-                titleId = args.getBoolean(ARG_LOCK_TYPE_ALPHANUMERIC) ?
-                    R.string.lock_screen_password_skip_title : R.string.lock_screen_pin_skip_title;
-            }
-
             final int msgResId;
-            if (forBiometrics) {
-                msgResId = R.string.biometrics_lock_screen_setup_skip_dialog_text;
-            } else if (forFace) {
-                msgResId = R.string.face_lock_screen_setup_skip_dialog_text;
+            if (args.getBoolean(ARG_LOCK_TYPE_PATTERN)) {
+                titleId = getPatternSkipTitleRes(hasFace, hasFingerprint);
+                msgResId = getPatternSkipMessageRes(hasFace, hasFingerprint);
+            } else if (args.getBoolean(ARG_LOCK_TYPE_ALPHANUMERIC)) {
+                titleId = getPasswordSkipTitleRes(hasFace, hasFingerprint);
+                msgResId = getPasswordSkipMessageRes(hasFace, hasFingerprint);
             } else {
-                msgResId = R.string.fingerprint_lock_screen_setup_skip_dialog_text;
+                titleId = getPinSkipTitleRes(hasFace, hasFingerprint);
+                msgResId = getPinSkipMessageRes(hasFace, hasFingerprint);
             }
 
             return new AlertDialog.Builder(getContext())
@@ -108,6 +107,84 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
                     .setMessage(args.getBoolean(ARG_FRP_SUPPORTED) ?
                             R.string.lock_screen_intro_skip_dialog_text_frp :
                             R.string.lock_screen_intro_skip_dialog_text);
+        }
+    }
+
+    @StringRes
+    private int getPatternSkipTitleRes(boolean hasFace, boolean hasFingerprint) {
+        if (hasFace && hasFingerprint) {
+            return R.string.lock_screen_pattern_skip_biometrics_title;
+        } else if (hasFace) {
+            return R.string.lock_screen_pattern_skip_face_title;
+        } else if (hasFingerprint) {
+            return R.string.lock_screen_pattern_skip_fingerprint_title;
+        } else {
+            return R.string.lock_screen_pattern_skip_title;
+        }
+    }
+
+    @StringRes
+    private int getPatternSkipMessageRes(boolean hasFace, boolean hasFingerprint) {
+        if (hasFace && hasFingerprint) {
+            return R.string.lock_screen_pattern_skip_biometrics_message;
+        } else if (hasFace) {
+            return R.string.lock_screen_pattern_skip_face_message;
+        } else if (hasFingerprint) {
+            return R.string.lock_screen_pattern_skip_fingerprint_message;
+        } else {
+            return R.string.lock_screen_pattern_skip_message;
+        }
+    }
+
+    @StringRes
+    private int getPasswordSkipTitleRes(boolean hasFace, boolean hasFingerprint) {
+        if (hasFace && hasFingerprint) {
+            return R.string.lock_screen_password_skip_biometrics_title;
+        } else if (hasFace) {
+            return R.string.lock_screen_password_skip_face_title;
+        } else if (hasFingerprint) {
+            return R.string.lock_screen_password_skip_fingerprint_title;
+        } else {
+            return R.string.lock_screen_password_skip_title;
+        }
+    }
+
+    @StringRes
+    private int getPasswordSkipMessageRes(boolean hasFace, boolean hasFingerprint) {
+        if (hasFace && hasFingerprint) {
+            return R.string.lock_screen_password_skip_biometrics_message;
+        } else if (hasFace) {
+            return R.string.lock_screen_password_skip_face_message;
+        } else if (hasFingerprint) {
+            return R.string.lock_screen_password_skip_fingerprint_message;
+        } else {
+            return R.string.lock_screen_password_skip_message;
+        }
+    }
+
+    @StringRes
+    private int getPinSkipTitleRes(boolean hasFace, boolean hasFingerprint) {
+        if (hasFace && hasFingerprint) {
+            return R.string.lock_screen_pin_skip_biometrics_title;
+        } else if (hasFace) {
+            return R.string.lock_screen_pin_skip_face_title;
+        } else if (hasFingerprint) {
+            return R.string.lock_screen_pin_skip_fingerprint_title;
+        } else {
+            return R.string.lock_screen_pin_skip_title;
+        }
+    }
+
+    @StringRes
+    private int getPinSkipMessageRes(boolean hasFace, boolean hasFingerprint) {
+        if (hasFace && hasFingerprint) {
+            return R.string.lock_screen_pin_skip_biometrics_message;
+        } else if (hasFace) {
+            return R.string.lock_screen_pin_skip_face_message;
+        } else if (hasFingerprint) {
+            return R.string.lock_screen_pin_skip_fingerprint_message;
+        } else {
+            return R.string.lock_screen_pin_skip_message;
         }
     }
 

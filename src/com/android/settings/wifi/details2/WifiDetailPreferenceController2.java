@@ -87,14 +87,10 @@ import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
-import com.android.wifitrackerlib.WifiEntry.ConnectCallback.ConnectStatus;
 import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 import com.android.wifitrackerlib.WifiEntry.DisconnectCallback;
-import com.android.wifitrackerlib.WifiEntry.DisconnectCallback.DisconnectStatus;
 import com.android.wifitrackerlib.WifiEntry.ForgetCallback;
-import com.android.wifitrackerlib.WifiEntry.ForgetCallback.ForgetStatus;
 import com.android.wifitrackerlib.WifiEntry.SignInCallback;
-import com.android.wifitrackerlib.WifiEntry.SignInCallback.SignInStatus;
 import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback;
 
 import java.net.Inet4Address;
@@ -390,8 +386,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
         mIpv6Category = screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
-
-        mSecurityPref.setSummary(mWifiEntry.getSecurityString(false /* concise */));
     }
 
     /**
@@ -545,6 +539,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         refreshRssiViews();
         // Frequency Pref
         refreshFrequency();
+        // Security Pref
+        refreshSecurity();
         // Transmit Link Speed Pref
         refreshTxSpeed();
         // Receive Link Speed Pref
@@ -644,6 +640,10 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         }
         mFrequencyPref.setSummary(band);
         mFrequencyPref.setVisible(true);
+    }
+
+    private void refreshSecurity() {
+        mSecurityPref.setSummary(mWifiEntry.getSecurityString(false /* concise */));
     }
 
     private void refreshTxSpeed() {
