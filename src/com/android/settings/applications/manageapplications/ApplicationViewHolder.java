@@ -19,6 +19,7 @@ package com.android.settings.applications.manageapplications;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,9 +38,8 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 public class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
-    private final TextView mAppName;
-    private final ImageView mAppIcon;
-
+    @VisibleForTesting
+    final TextView mAppName;
     @VisibleForTesting
     final TextView mSummary;
     @VisibleForTesting
@@ -48,6 +48,8 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     final ViewGroup mWidgetContainer;
     @VisibleForTesting
     final Switch mSwitch;
+
+    private final ImageView mAppIcon;
 
     ApplicationViewHolder(View itemView) {
         super(itemView);
@@ -95,11 +97,16 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         itemView.setEnabled(isEnabled);
     }
 
-    void setTitle(CharSequence title) {
+    void setTitle(CharSequence title, CharSequence contentDescription) {
         if (title == null) {
             return;
         }
         mAppName.setText(title);
+
+        if (TextUtils.isEmpty(contentDescription)) {
+            return;
+        }
+        mAppName.setContentDescription(contentDescription);
     }
 
     void setIcon(int drawableRes) {
