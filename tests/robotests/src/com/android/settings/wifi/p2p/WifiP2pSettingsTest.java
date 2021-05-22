@@ -45,6 +45,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -55,11 +56,13 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowInteractionJankMonitor.class)
 public class WifiP2pSettingsTest {
 
     private Context mContext;
