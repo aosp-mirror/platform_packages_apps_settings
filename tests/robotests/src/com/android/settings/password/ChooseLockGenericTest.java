@@ -57,6 +57,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -81,7 +82,8 @@ import org.robolectric.shadows.ShadowPersistentDataBlockManager;
                 ShadowPersistentDataBlockManager.class,
                 ShadowStorageManager.class,
                 ShadowUserManager.class,
-                ShadowUtils.class
+                ShadowUtils.class,
+                ShadowInteractionJankMonitor.class
         })
 public class ChooseLockGenericTest {
 
