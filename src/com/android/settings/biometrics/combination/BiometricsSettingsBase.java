@@ -122,7 +122,10 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                 extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
                 extras.putInt(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, sensorId);
                 extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
+                super.onPreferenceTreeClick(preference);
             });
+
+            return true;
         } else if (getFingerprintPreferenceKey().equals(key)) {
             mDoNotFinishActivity = true;
             mFingerprintManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
@@ -131,8 +134,12 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                 final Bundle extras = preference.getExtras();
                 extras.putByteArray(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
                 extras.putLong(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, challenge);
+                super.onPreferenceTreeClick(preference);
             });
+
+            return true;
         }
+
         return super.onPreferenceTreeClick(preference);
     }
 
