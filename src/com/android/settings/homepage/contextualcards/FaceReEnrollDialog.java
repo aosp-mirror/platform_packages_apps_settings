@@ -20,10 +20,10 @@ package com.android.settings.homepage.contextualcards;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 
 import com.android.internal.app.AlertActivity;
@@ -53,11 +53,15 @@ public class FaceReEnrollDialog extends AlertActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final PackageManager pm = getApplicationContext().getPackageManager();
+        final int dialogMessageRes = pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
+                ? R.string.security_settings_face_enroll_improve_face_alert_body_fingerprint
+                : R.string.security_settings_face_enroll_improve_face_alert_body;
+
         final AlertController.AlertParams alertParams = mAlertParams;
         alertParams.mTitle = getText(
                 R.string.security_settings_face_enroll_improve_face_alert_title);
-        alertParams.mMessage = getText(
-                R.string.security_settings_face_enroll_improve_face_alert_body);
+        alertParams.mMessage = getText(dialogMessageRes);
         alertParams.mPositiveButtonText = getText(R.string.storage_menu_set_up);
         alertParams.mNegativeButtonText = getText(R.string.cancel);
         alertParams.mPositiveButtonListener = this;
