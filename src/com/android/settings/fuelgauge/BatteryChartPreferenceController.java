@@ -48,6 +48,7 @@ import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -62,6 +63,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 OnSaveInstanceState, BatteryChartView.OnSelectListener, OnResume,
                 ExpandDividerPreference.OnExpandListener {
     private static final String TAG = "BatteryChartPreferenceController";
+    private static final String KEY_FOOTER_PREF = "battery_graph_footer";
+    private static final int ADD_FOOTER_DELAYED_MS = 250;
+
     /** Desired battery history size for timestamp slots. */
     public static final int DESIRED_HISTORY_SIZE = 25;
     private static final int CHART_LEVEL_ARRAY_SIZE = 13;
@@ -90,6 +94,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @VisibleForTesting int mTrapezoidIndex = BatteryChartView.SELECTED_INDEX_INVALID;
 
     private boolean mIs24HourFormat = false;
+    private boolean mIsFooterPrefAdded = false;
+    private PreferenceScreen mPreferenceScreen;
+    private FooterPreference mFooterPreference;
 
     private final String mPreferenceKey;
     private final SettingsActivity mActivity;
@@ -178,9 +185,15 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreferenceScreen = screen;
         mPrefContext = screen.getContext();
         mAppListPrefGroup = screen.findPreference(mPreferenceKey);
         mAppListPrefGroup.setOrderingAsAdded(false);
+        mFooterPreference = screen.findPreference(KEY_FOOTER_PREF);
+        // Removes footer first until usage data is loaded to avoid flashing.
+        if (mFooterPreference != null) {
+            screen.removePreference(mFooterPreference);
+        }
     }
 
     @Override
@@ -264,6 +277,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mBatteryIndexedMap = null;
             mBatteryHistoryKeys = null;
             mBatteryHistoryLevels = null;
+            addFooterPreferenceIfNeeded(false);
             return;
         }
         mBatteryHistoryKeys = getBatteryHistoryKeys(batteryHistoryMap);
@@ -347,6 +361,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private void addAllPreferences() {
         final List<BatteryDiffEntry> entries =
             mBatteryIndexedMap.get(Integer.valueOf(mTrapezoidIndex));
+        addFooterPreferenceIfNeeded(!entries.isEmpty());
         if (entries == null) {
             Log.w(TAG, "cannot find BatteryDiffEntry for:" + mTrapezoidIndex);
             return;
@@ -573,6 +588,20 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final long latestTimestamp =
             mBatteryHistoryKeys[mBatteryHistoryKeys.length - 1];
         mBatteryChartView.setLatestTimestamp(latestTimestamp);
+    }
+
+    private void addFooterPreferenceIfNeeded(boolean containAppItems) {
+        if (mIsFooterPrefAdded || mFooterPreference == null) {
+            return;
+        }
+        mIsFooterPrefAdded = true;
+        mFooterPreference.setTitle(mPrefContext.getString(
+            containAppItems
+                ? R.string.battery_usage_screen_footer
+                : R.string.battery_usage_screen_footer_empty));
+        mHandler.postDelayed(
+            () -> mPreferenceScreen.addPreference(mFooterPreference),
+            ADD_FOOTER_DELAYED_MS);
     }
 
     private static String utcToLocalTime(long[] timestamps) {
