@@ -46,6 +46,7 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityEditDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import com.android.settings.utils.LocaleUtils;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -282,10 +283,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (list.isEmpty()) {
             list.add(softwareTitle);
         }
-        final String joinStrings = TextUtils.join(/* delimiter= */", ", list);
 
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
-                null, joinStrings);
+                null, LocaleUtils.getConcatenatedString(list));
     }
 
     @Override
