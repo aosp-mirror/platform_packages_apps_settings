@@ -50,6 +50,7 @@ import com.android.settings.dashboard.CategoryManager;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.transition.SettingsTransitionHelper;
+import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.resources.TextAppearanceConfig;
@@ -62,6 +63,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class SettingsBaseActivity extends FragmentActivity {
+
+    /**
+     * What type of page transition should be apply.
+     */
+    public static final String EXTRA_PAGE_TRANSITION_TYPE = "extra_page_transition_type";
 
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
@@ -162,13 +168,31 @@ public class SettingsBaseActivity extends FragmentActivity {
             super.startActivity(intent);
             return;
         }
+
+        final int transitionType = getTransitionType(intent);
+        if (transitionType == TransitionType.TRANSITION_SLIDE) {
+            super.startActivity(intent, null);
+            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+            return;
+        } else if (transitionType == TransitionType.TRANSITION_NONE) {
+            super.startActivity(intent, null);
+            return;
+        }
         super.startActivity(intent, createActivityOptionsBundleForTransition(null));
     }
 
     @Override
     public void startActivity(Intent intent, @androidx.annotation.Nullable Bundle options) {
-        if (!Utils.isPageTransitionEnabled(this)) {
+        final int transitionType = getTransitionType(intent);
+        if (!Utils.isPageTransitionEnabled(this) ||
+                transitionType == TransitionType.TRANSITION_NONE) {
             super.startActivity(intent, options);
+            return;
+        }
+
+        if (transitionType == TransitionType.TRANSITION_SLIDE) {
+            super.startActivity(intent, options);
+            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
             return;
         }
         super.startActivity(intent, createActivityOptionsBundleForTransition(options));
@@ -176,12 +200,21 @@ public class SettingsBaseActivity extends FragmentActivity {
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
+        final int transitionType = getTransitionType(intent);
         // startActivity() will eventually calls startActivityForResult() with requestCode -1.
         // Adding this condition to avoid multiple calls.
-        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST) {
+        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST
+                || transitionType == TransitionType.TRANSITION_NONE) {
             super.startActivityForResult(intent, requestCode);
             return;
         }
+
+        if (transitionType == TransitionType.TRANSITION_SLIDE) {
+            super.startActivityForResult(intent, requestCode, null);
+            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+            return;
+        }
+
         super.startActivityForResult(intent, requestCode,
                 createActivityOptionsBundleForTransition(null));
     }
@@ -189,10 +222,19 @@ public class SettingsBaseActivity extends FragmentActivity {
     @Override
     public void startActivityForResult(Intent intent, int requestCode,
             @androidx.annotation.Nullable Bundle options) {
-        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST) {
+        final int transitionType = getTransitionType(intent);
+        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST
+                || transitionType == TransitionType.TRANSITION_NONE) {
             super.startActivityForResult(intent, requestCode, options);
             return;
         }
+
+        if (transitionType == TransitionType.TRANSITION_SLIDE) {
+            super.startActivityForResult(intent, requestCode, options);
+            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+            return;
+        }
+
         super.startActivityForResult(intent, requestCode,
                 createActivityOptionsBundleForTransition(options));
     }
@@ -341,6 +383,11 @@ public class SettingsBaseActivity extends FragmentActivity {
         if (mCategoriesUpdateTaskCount < 2) {
             new CategoriesUpdateTask().execute(fromBroadcast);
         }
+    }
+
+    private int getTransitionType(Intent intent) {
+        return intent.getIntExtra(EXTRA_PAGE_TRANSITION_TYPE,
+                SettingsTransitionHelper.TransitionType.TRANSITION_SHARED_AXIS);
     }
 
     @androidx.annotation.Nullable
