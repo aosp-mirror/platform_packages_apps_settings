@@ -107,6 +107,7 @@ public class SettingsBaseActivity extends FragmentActivity {
             final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
                     ? R.style.SubSettings_SetupWizard : R.style.SudThemeGlifV3_Light;
             setTheme(appliedTheme);
+            ThemeHelper.trySetDynamicColor(this);
         }
 
         if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)
