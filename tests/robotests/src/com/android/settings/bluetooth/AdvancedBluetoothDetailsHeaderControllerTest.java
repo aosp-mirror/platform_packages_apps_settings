@@ -68,6 +68,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     private static final int BATTERY_LEVEL_50 = 50;
     private static final String ICON_URI = "content://test.provider/icon.png";
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
+    private static final String DEVICE_SUMMARY = "test summary";
 
     private Context mContext;
 
@@ -133,7 +134,6 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
                 View.GONE);
         assertThat(mLayoutPreference.findViewById(R.id.layout_middle).getVisibility()).isEqualTo(
                 View.VISIBLE);
-        assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_middle), BATTERY_LEVEL_MAIN);
     }
 
     @Test
@@ -232,67 +232,18 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
-    public void refresh_underLowBatteryThreshold_showAlertIcon() {
+    public void refresh_connectedWatch_checkSummary() {
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
                 BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_MAIN_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_5).getBytes());
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_MAIN_LOW_BATTERY_THRESHOLD)).thenReturn(
-                String.valueOf(LOW_BATTERY_LEVEL_THRESHOLD).getBytes());
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_MAIN_CHARGING)).thenReturn(
-                String.valueOf(false).getBytes());
         when(mCachedDevice.isConnected()).thenReturn(true);
+        when(mCachedDevice.getConnectionSummary(/* shortSummary= */ true))
+                .thenReturn(DEVICE_SUMMARY);
 
         mController.refresh();
 
-        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_middle),
-                R.drawable.ic_battery_alert_24dp);
-    }
-
-    @Test
-    public void refresh_underLowBatteryThresholdInCharging_showAlertIcon() {
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
-                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_MAIN_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_5).getBytes());
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_MAIN_LOW_BATTERY_THRESHOLD)).thenReturn(
-                String.valueOf(LOW_BATTERY_LEVEL_THRESHOLD).getBytes());
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_MAIN_CHARGING)).thenReturn(
-                String.valueOf(true).getBytes());
-        when(mCachedDevice.isConnected()).thenReturn(true);
-
-        mController.refresh();
-
-        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_middle), /* resId= */-1);
-    }
-
-    @Test
-    public void refresh_aboveLowBatteryThreshold_noAlertIcon() {
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
-                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_MAIN_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_50).getBytes());
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_MAIN_LOW_BATTERY_THRESHOLD)).thenReturn(
-                String.valueOf(LOW_BATTERY_LEVEL_THRESHOLD).getBytes());
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_MAIN_CHARGING)).thenReturn(
-                String.valueOf(false).getBytes());
-        when(mCachedDevice.isConnected()).thenReturn(true);
-
-        mController.refresh();
-
-        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_middle), /* resId= */-1);
+        assertThat(((TextView) (mLayoutPreference.findViewById(R.id.entity_header_summary)))
+                .getText()).isEqualTo(DEVICE_SUMMARY);
     }
 
     @Test
