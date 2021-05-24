@@ -19,8 +19,9 @@ package com.android.settings.accessibility;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR;
 
-import static com.android.settings.accessibility.FloatingMenuOpacityPreferenceController.DEFAULT_OPACITY;
-import static com.android.settings.accessibility.FloatingMenuOpacityPreferenceController.PRECISION;
+import static com.android.settings.accessibility.FloatingMenuTransparencyPreferenceController.DEFAULT_TRANSPARENCY;
+import static com.android.settings.accessibility.FloatingMenuTransparencyPreferenceController.MAXIMUM_TRANSPARENCY;
+import static com.android.settings.accessibility.FloatingMenuTransparencyPreferenceController.PRECISION;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 
@@ -47,9 +48,9 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
-/** Tests for {@link FloatingMenuOpacityPreferenceController}. */
+/** Tests for {@link FloatingMenuTransparencyPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
-public class FloatingMenuOpacityPreferenceControllerTest {
+public class FloatingMenuTransparencyPreferenceControllerTest {
 
     @Rule
     public MockitoRule mocks = MockitoJUnit.rule();
@@ -58,12 +59,12 @@ public class FloatingMenuOpacityPreferenceControllerTest {
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private ContentResolver mContentResolver;
-    private FloatingMenuOpacityPreferenceController mController;
+    private FloatingMenuTransparencyPreferenceController mController;
 
     @Before
     public void setUp() {
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
-        mController = new FloatingMenuOpacityPreferenceController(mContext, "test_key");
+        mController = new FloatingMenuTransparencyPreferenceController(mContext, "test_key");
     }
 
     @Test
@@ -95,10 +96,12 @@ public class FloatingMenuOpacityPreferenceControllerTest {
 
     @Test
     public void getSliderPosition_putNormalOpacityValue_expectedValue() {
+        final float transparencyValue = 0.65f;
         Settings.Secure.putFloat(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, 0.35f);
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY,
+                (MAXIMUM_TRANSPARENCY - transparencyValue));
 
-        assertThat(mController.getSliderPosition()).isEqualTo(35);
+        assertThat(mController.getSliderPosition()).isEqualTo((int) (transparencyValue * 100));
     }
 
     @Test
@@ -106,17 +109,18 @@ public class FloatingMenuOpacityPreferenceControllerTest {
         Settings.Secure.putFloat(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, 0.01f);
 
-        final int defaultValue = Math.round(DEFAULT_OPACITY * PRECISION);
+        final int defaultValue = Math.round(DEFAULT_TRANSPARENCY * PRECISION);
         assertThat(mController.getSliderPosition()).isEqualTo(defaultValue);
     }
 
     @Test
     public void setSliderPosition_expectedValue() {
-        mController.setSliderPosition(27);
+        final float transparencyValue = 0.27f;
+        mController.setSliderPosition((int) (transparencyValue * 100));
 
         final float value = Settings.Secure.getFloat(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, -1);
-        assertThat(value).isEqualTo(0.27f);
+        assertThat(value).isEqualTo((MAXIMUM_TRANSPARENCY - transparencyValue));
     }
 
     @Test
