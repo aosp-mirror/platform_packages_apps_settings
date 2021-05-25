@@ -63,7 +63,7 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
 
     protected void populateList(List<ConversationChannelWrapper> conversations,
             PreferenceGroup containerGroup) {
-        // TODO: if preference has children, compare with newly loaded list
+        containerGroup.setVisible(false);
         containerGroup.removeAll();
         if (conversations != null) {
             populateConversations(conversations, containerGroup);
@@ -72,11 +72,11 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
         if (containerGroup.getPreferenceCount() == 0) {
             containerGroup.setVisible(false);
         } else {
-            containerGroup.setVisible(true);
             Preference summaryPref = getSummaryPreference();
             if (summaryPref != null) {
                 containerGroup.addPreference(summaryPref);
             }
+            containerGroup.setVisible(true);
         }
     }
 

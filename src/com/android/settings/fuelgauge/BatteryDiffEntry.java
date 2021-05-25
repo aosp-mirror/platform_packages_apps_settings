@@ -142,7 +142,7 @@ public class BatteryDiffEntry {
         return false;
     }
 
-    private void loadLabelAndIcon() {
+    void loadLabelAndIcon() {
         if (mIsLoaded) {
             return;
         }

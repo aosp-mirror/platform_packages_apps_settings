@@ -29,7 +29,7 @@
     <PreferenceCategory
         android:key="important_conversations"
         android:title="@string/important_conversations"
-        android:visibility="gone"
+        settings:isPreferenceVisible="false"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="true" >
         <Preference
@@ -48,6 +48,7 @@
     <PreferenceCategory
         android:title="@string/other_conversations"
         android:key="other_conversations"
+        settings:isPreferenceVisible="false"
         settings:allowDividerAbove="true"
         settings:allowDividerBelow="false" />
 
@@ -55,6 +56,7 @@
     <PreferenceCategory
         android:title="@string/recent_conversations"
         android:key="recent_conversations"
+        settings:isPreferenceVisible="false"
         settings:allowDividerAbove="true"
         settings:allowDividerBelow="false" />
 
