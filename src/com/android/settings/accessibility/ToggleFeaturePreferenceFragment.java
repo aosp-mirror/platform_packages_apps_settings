@@ -52,6 +52,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityEditDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import com.android.settings.utils.LocaleUtils;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
@@ -659,10 +660,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (list.isEmpty()) {
             list.add(softwareTitle);
         }
-        final String joinStrings = TextUtils.join(/* delimiter= */", ", list);
 
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
-                null, joinStrings);
+                null, LocaleUtils.getConcatenatedString(list));
     }
 
     /**

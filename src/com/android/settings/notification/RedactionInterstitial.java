@@ -153,7 +153,7 @@ public class RedactionInterstitial extends SettingsActivity {
             }
             final RedactionInterstitial activity = (RedactionInterstitial) getActivity();
             if (activity != null) {
-                activity.setResult(RESULT_OK, null);
+                activity.setResult(RESULT_CANCELED, null);
                 finish();
             }
         }
