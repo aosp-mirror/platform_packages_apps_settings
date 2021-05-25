@@ -34,7 +34,9 @@ import androidx.fragment.app.Fragment;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
+import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -359,6 +361,8 @@ public final class ChooseLockSettingsHelper {
                 requestGatekeeperPasswordHandle);
 
         intent.setClassName(SETTINGS_PACKAGE_NAME, activityClass.getName());
+        intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
+                SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
 
         Intent inIntent = mFragment != null ? mFragment.getActivity().getIntent() :
                 mActivity.getIntent();
