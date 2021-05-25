@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -64,7 +65,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 ExpandDividerPreference.OnExpandListener {
     private static final String TAG = "BatteryChartPreferenceController";
     private static final String KEY_FOOTER_PREF = "battery_graph_footer";
-    private static final int ADD_FOOTER_DELAYED_MS = 250;
 
     /** Desired battery history size for timestamp slots. */
     public static final int DESIRED_HISTORY_SIZE = 25;
@@ -267,11 +267,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     void setBatteryHistoryMap(
             final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
-        mHandler.post(() -> setBatteryHistoryMapInner(batteryHistoryMap));
-    }
-
-    private void setBatteryHistoryMapInner(
-            final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         // Resets all battery history data relative variables.
         if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
             mBatteryIndexedMap = null;
@@ -298,19 +293,15 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mBatteryHistoryLevels[index] =
                 Math.round(batteryLevelCounter / entryMap.size());
         }
-        // Generates indexed usage map for chart.
-        mBatteryIndexedMap =
-            ConvertUtils.getIndexedUsageMap(
-                mPrefContext, /*timeSlotSize=*/ CHART_LEVEL_ARRAY_SIZE - 1,
-                mBatteryHistoryKeys, batteryHistoryMap,
-                /*purgeLowPercentageAndFakeData=*/ true);
         forceRefreshUi();
-
         Log.d(TAG, String.format(
             "setBatteryHistoryMap() size=%d\nkeys=%s\nlevels=%s",
             batteryHistoryMap.size(),
             utcToLocalTime(mBatteryHistoryKeys),
             Arrays.toString(mBatteryHistoryLevels)));
+
+        // Loads item icon and label in the background.
+        new LoadAllItemsInfoTask(batteryHistoryMap).execute();
     }
 
     void setBatteryChartView(final BatteryChartView batteryChartView) {
@@ -599,9 +590,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             containAppItems
                 ? R.string.battery_usage_screen_footer
                 : R.string.battery_usage_screen_footer_empty));
-        mHandler.postDelayed(
-            () -> mPreferenceScreen.addPreference(mFooterPreference),
-            ADD_FOOTER_DELAYED_MS);
+        mHandler.post(() -> mPreferenceScreen.addPreference(mFooterPreference));
     }
 
     private static String utcToLocalTime(long[] timestamps) {
@@ -669,5 +658,54 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             batteryHistoryKeys[index] = batteryHistoryKeyList.get(index);
         }
         return batteryHistoryKeys;
+    }
+
+    // Loads all items icon and label in the background.
+    private final class LoadAllItemsInfoTask
+            extends AsyncTask<Void, Void, Map<Integer, List<BatteryDiffEntry>>> {
+
+        private long[] mBatteryHistoryKeysCache;
+        private Map<Long, Map<String, BatteryHistEntry>> mBatteryHistoryMap;
+
+        private LoadAllItemsInfoTask(
+                Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
+            this.mBatteryHistoryMap = batteryHistoryMap;
+            this.mBatteryHistoryKeysCache = mBatteryHistoryKeys;
+        }
+
+        @Override
+        protected Map<Integer, List<BatteryDiffEntry>> doInBackground(Void... voids) {
+            if (mPrefContext == null || mBatteryHistoryKeysCache == null) {
+                return null;
+            }
+            final long startTime = System.currentTimeMillis();
+            final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap =
+                ConvertUtils.getIndexedUsageMap(
+                    mPrefContext, /*timeSlotSize=*/ CHART_LEVEL_ARRAY_SIZE - 1,
+                    mBatteryHistoryKeysCache, mBatteryHistoryMap,
+                    /*purgeLowPercentageAndFakeData=*/ true);
+            // Pre-loads each BatteryDiffEntry relative icon and label for all slots.
+            for (List<BatteryDiffEntry> entries : indexedUsageMap.values()) {
+                entries.forEach(entry -> entry.loadLabelAndIcon());
+            }
+            Log.d(TAG, String.format("execute LoadAllItemsInfoTask in %d/ms",
+                (System.currentTimeMillis() - startTime)));
+            return indexedUsageMap;
+        }
+
+        @Override
+        protected void onPostExecute(
+                Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
+            mBatteryHistoryMap = null;
+            mBatteryHistoryKeysCache = null;
+            if (indexedUsageMap == null) {
+                return;
+            }
+            // Posts results back to main thread to refresh UI.
+            mHandler.post(() -> {
+                mBatteryIndexedMap = indexedUsageMap;
+                forceRefreshUi();
+            });
+        }
     }
 }

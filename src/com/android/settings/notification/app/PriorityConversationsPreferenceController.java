@@ -67,22 +67,9 @@ public class PriorityConversationsPreferenceController extends
     public void updateState(Preference preference) {
         PreferenceCategory pref = (PreferenceCategory) preference;
         // Load conversations
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... unused) {
-                mConversations = mBackend.getConversations(true).getList();
-                Collections.sort(mConversations, mConversationComparator);
-                return null;
-            }
+        mConversations = mBackend.getConversations(true).getList();
+        Collections.sort(mConversations, mConversationComparator);
 
-            @Override
-            protected void onPostExecute(Void unused) {
-                if (mContext == null) {
-                    return;
-                }
-                populateList(mConversations, pref);
-            }
-        }.execute();
-
+        populateList(mConversations, pref);
     }
 }
