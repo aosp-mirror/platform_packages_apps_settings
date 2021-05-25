@@ -18,12 +18,17 @@ package com.android.settings.biometrics;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -34,6 +39,7 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
+import com.google.android.setupdesign.util.DynamicColorPalette;
 
 /**
  * Abstract base class for the intro onboarding activity for biometric enrollment.
@@ -51,6 +57,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     private TextView mErrorText;
     protected boolean mConfirmingCredentials;
     protected boolean mNextClicked;
+
+    @Nullable private PorterDuffColorFilter mIconColorFilter;
 
     /**
      * @return true if the biometric is disabled by a device administrator
@@ -316,5 +324,15 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         if (mBiometricUnlockDisabledByAdmin) {
             setDescriptionText(getDescriptionResDisabledByAdmin());
         }
+    }
+
+    @NonNull
+    protected PorterDuffColorFilter getIconColorFilter() {
+        if (mIconColorFilter == null) {
+            mIconColorFilter = new PorterDuffColorFilter(
+                    DynamicColorPalette.getColor(this, DynamicColorPalette.ColorType.ACCENT),
+                    PorterDuff.Mode.SRC_IN);
+        }
+        return mIconColorFilter;
     }
 }

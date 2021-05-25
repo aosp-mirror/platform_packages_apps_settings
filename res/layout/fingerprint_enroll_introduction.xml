@@ -17,10 +17,12 @@
 
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="?attr/fingerprint_layout_theme"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:sudDescriptionText="@string/security_settings_fingerprint_enroll_introduction_message">
 
     <LinearLayout
         style="@style/SudContentFrame"
@@ -71,6 +73,7 @@
                 android:paddingTop="12dp">
 
                 <ImageView
+                    android:id="@+id/icon_fingerprint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@null"
@@ -91,6 +94,7 @@
                 android:paddingTop="12dp">
 
                 <ImageView
+                    android:id="@+id/icon_locked"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@null"
@@ -120,6 +124,7 @@
                 android:paddingTop="12dp">
 
                 <ImageView
+                    android:id="@+id/icon_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@null"
@@ -151,6 +156,7 @@
             android:paddingTop="12dp">
 
             <ImageView
+                android:id="@+id/icon_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
@@ -171,6 +177,7 @@
             android:paddingTop="12dp">
 
             <ImageView
+                android:id="@+id/icon_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
