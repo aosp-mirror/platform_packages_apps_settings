@@ -17,29 +17,19 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.content.Intent;
-import android.text.SpannableStringBuilder;
-import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.settings.R;
-import com.android.settings.utils.AnnotationSpan;
-import com.android.settingslib.HelpUtils;
 import com.android.settingslib.widget.FooterPreference;
 
 /**
- * A custom preference acting as footer of a page. It has a field for icon and text. It is added
- * to screen as the last preference and groups of icon and text content in accessibility-focusable
- * {@link android.view.accessibility.AccessibilityNodeInfo} for TalkBack to use.
+ * A custom preference acting as footer of a page. Disables the movement method by default.
  */
 public final class AccessibilityFooterPreference extends FooterPreference {
 
-    private CharSequence mIconContentDescription;
     private boolean mLinkEnabled;
 
     public AccessibilityFooterPreference(Context context, AttributeSet attrs) {
@@ -65,33 +55,6 @@ public final class AccessibilityFooterPreference extends FooterPreference {
         } else {
             title.setMovementMethod(/* movement= */ null);
         }
-
-        final LinearLayout infoFrame = holder.itemView.findViewById(R.id.icon_frame);
-        if (!TextUtils.isEmpty(mIconContentDescription)) {
-            // Groups related content.
-            infoFrame.setContentDescription(mIconContentDescription);
-            title.setFocusable(false);
-        } else {
-            infoFrame.setContentDescription(null);
-            title.setFocusable(true);
-        }
-    }
-
-    /**
-     * Sets the content description of the icon.
-     */
-    public void setIconContentDescription(CharSequence iconContentDescription) {
-        if (!TextUtils.equals(iconContentDescription, mIconContentDescription)) {
-            mIconContentDescription = iconContentDescription;
-            notifyChanged();
-        }
-    }
-
-    /**
-     * Gets the content description of the icon.
-     */
-    public CharSequence getIconContentDescription() {
-        return mIconContentDescription;
     }
 
     /**
@@ -109,24 +72,5 @@ public final class AccessibilityFooterPreference extends FooterPreference {
      */
     public boolean isLinkEnabled() {
         return mLinkEnabled;
-    }
-
-    /**
-     * Appends {@link AnnotationSpan} with learn more link apart from the other text.
-     *
-     * @param helpLinkRes The Help Uri Resource key
-     */
-    public void appendHelpLink(int helpLinkRes) {
-        final SpannableStringBuilder sb = new SpannableStringBuilder();
-        sb.append(getTitle()).append("\n\n").append(getLearnMoreLink(getContext(), helpLinkRes));
-        setTitle(sb);
-    }
-
-    private CharSequence getLearnMoreLink(Context context, int helpLinkRes) {
-        final Intent helpIntent = HelpUtils.getHelpIntent(
-                context, context.getString(helpLinkRes), context.getClass().getName());
-        final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
-                context, AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, helpIntent);
-        return AnnotationSpan.linkify(context.getText(R.string.footer_learn_more), linkInfo);
     }
 }
