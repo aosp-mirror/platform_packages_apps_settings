@@ -23,6 +23,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 
+import androidx.annotation.FloatRange;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
@@ -32,15 +33,18 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-/** Preference controller that controls the opacity seekbar in accessibility button page. */
-public class FloatingMenuOpacityPreferenceController extends SliderPreferenceController
+/** Preference controller that controls the transparency seekbar in accessibility button page. */
+public class FloatingMenuTransparencyPreferenceController extends SliderPreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
     @VisibleForTesting
-    static final float DEFAULT_OPACITY = 0.55f;
+    @FloatRange(from = 0.0, to = 1.0)
+    static final float DEFAULT_TRANSPARENCY = 0.45f;
+    @VisibleForTesting
+    static final float MAXIMUM_TRANSPARENCY = 1.0f;
     private static final int FADE_ENABLED = 1;
-    private static final float MIN_PROGRESS = 10f;
-    private static final float MAX_PROGRESS = 100f;
+    private static final float MIN_PROGRESS = 0f;
+    private static final float MAX_PROGRESS = 90f;
     @VisibleForTesting
     static final float PRECISION = 100f;
 
@@ -51,7 +55,7 @@ public class FloatingMenuOpacityPreferenceController extends SliderPreferenceCon
     @VisibleForTesting
     SeekBarPreference mPreference;
 
-    public FloatingMenuOpacityPreferenceController(Context context,
+    public FloatingMenuTransparencyPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
@@ -101,15 +105,14 @@ public class FloatingMenuOpacityPreferenceController extends SliderPreferenceCon
 
     @Override
     public int getSliderPosition() {
-        return convertOpacityFloatToInt(getOpacity());
+        return convertTransparencyFloatToInt(getTransparency());
     }
 
     @Override
     public boolean setSliderPosition(int position) {
-        final float value = convertOpacityIntToFloat(position);
-
+        final float opacityValue = MAXIMUM_TRANSPARENCY - convertTransparencyIntToFloat(position);
         return Settings.Secure.putFloat(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, value);
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, opacityValue);
     }
 
     @Override
@@ -130,21 +133,21 @@ public class FloatingMenuOpacityPreferenceController extends SliderPreferenceCon
         mPreference.setEnabled(AccessibilityUtil.isFloatingMenuEnabled(mContext) && fadeEnabled);
     }
 
-    private int convertOpacityFloatToInt(float value) {
+    private int convertTransparencyFloatToInt(float value) {
         return Math.round(value * PRECISION);
     }
 
-    private float convertOpacityIntToFloat(int value) {
+    private float convertTransparencyIntToFloat(int value) {
         return (float) value / PRECISION;
     }
 
-    private float getOpacity() {
-        float value = Settings.Secure.getFloat(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, DEFAULT_OPACITY);
+    private float getTransparency() {
+        float transparencyValue = MAXIMUM_TRANSPARENCY - (Settings.Secure.getFloat(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_OPACITY, DEFAULT_TRANSPARENCY));
         final float minValue = MIN_PROGRESS / PRECISION;
         final float maxValue = MAX_PROGRESS / PRECISION;
 
-        return (value < minValue || value > maxValue) ? DEFAULT_OPACITY : value;
+        return (transparencyValue < minValue || transparencyValue > maxValue)
+                ? DEFAULT_TRANSPARENCY : transparencyValue;
     }
 }
-
