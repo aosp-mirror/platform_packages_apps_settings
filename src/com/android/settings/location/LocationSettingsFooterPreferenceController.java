@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.location.LocationManager;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -42,6 +43,7 @@ import java.util.List;
  */
 public class LocationSettingsFooterPreferenceController extends LocationBasePreferenceController {
     private static final String TAG = "LocationFooter";
+    private static final String PARAGRAPH_SEPARATOR = "<br><br>";
     private static final Intent INJECT_INTENT =
             new Intent(LocationManager.SETTINGS_FOOTER_DISPLAYED_ACTION);
 
@@ -90,24 +92,33 @@ public class LocationSettingsFooterPreferenceController extends LocationBasePref
     }
 
     private void updateFooterPreference() {
-        String footerString = mContext.getString(
-                mLocationEnabled ? R.string.location_settings_footer_location_on
-                        : R.string.location_settings_footer_location_off);
+        String footerString = mContext.getString(R.string.location_settings_footer_general);
         if (mLocationEnabled) {
-            footerString = mInjectedFooterString + footerString;
+            if (!TextUtils.isEmpty(mInjectedFooterString)) {
+                footerString = Html.escapeHtml(mInjectedFooterString) + PARAGRAPH_SEPARATOR
+                        + footerString;
+            }
+        } else {
+            footerString = mContext.getString(R.string.location_settings_footer_location_off)
+                    + PARAGRAPH_SEPARATOR
+                    + footerString;
         }
         if (mFooterPreference != null) {
-            mFooterPreference.setTitle(Html.fromHtml(footerString));
+            mFooterPreference.setTitle(Html.fromHtml(footerString
+                    + PARAGRAPH_SEPARATOR
+                    + mContext.getString(
+                    R.string.location_settings_footer_learn_more)));
+            mFooterPreference.setContentDescription(Html.fromHtml(footerString + mContext.getString(
+                    R.string.location_settings_footer_learn_more_content_description)));
         }
     }
 
     /**
-     * Location footer preference group should be displayed if there is at least one footer to
-     * inject.
+     * Location footer preference group should always be displayed.
      */
     @Override
     public int getAvailabilityStatus() {
-        return !getFooterData().isEmpty() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE;
     }
 
     /**
