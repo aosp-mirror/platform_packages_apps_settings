@@ -17,7 +17,6 @@
 package com.android.settings.network;
 
 import android.content.Context;
-import android.icu.text.ListFormatter;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
 
@@ -75,6 +74,20 @@ public class TopLevelNetworkEntryPreferenceController extends BasePreferenceCont
                 && !TextUtils.isEmpty(hotspotSummary)) {
             summaries.add(hotspotSummary);
         }
-        return ListFormatter.getInstance().format(summaries);
+        return concatSummaries(summaries);
+    }
+
+    private CharSequence concatSummaries(List<String> summaries) {
+        if (summaries.isEmpty()) {
+            return mContext.getText(R.string.summary_placeholder);
+        }
+
+        String summary = summaries.get(0);
+        final int summary_size = summaries.size();
+        for (int i = 1; i < summary_size; i++) {
+            summary = mContext.getString(R.string.join_two_unrelated_items, summary,
+                    summaries.get(i));
+        }
+        return summary;
     }
 }
