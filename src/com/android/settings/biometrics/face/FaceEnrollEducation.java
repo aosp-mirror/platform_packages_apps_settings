@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.face;
 
+import android.annotation.StringRes;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -36,9 +37,11 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.view.IllustrationVideoView;
 
 public class FaceEnrollEducation extends BiometricEnrollBase {
@@ -50,7 +53,9 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private FaceManager mFaceManager;
     private FaceEnrollAccessibilityToggle mSwitchDiversity;
 
-    private IllustrationVideoView mIllustrationNormal;
+    private boolean mIsUsingLottie;
+    private IllustrationVideoView mIllustrationDefault;
+    private LottieAnimationView mIllustrationLottie;
     private View mIllustrationAccessibility;
     private Handler mHandler;
     private Intent mResultIntent;
@@ -62,22 +67,25 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    int titleRes = isChecked ?
-                            R.string.security_settings_face_enroll_education_title_accessibility
-                            : R.string.security_settings_face_enroll_education_title;
-                    getLayout().setHeaderText(titleRes);
-                    setTitle(titleRes);
+                    final int headerRes;
+                    final int descriptionRes;
+                    if (isChecked) {
+                        headerRes = R.string
+                                .security_settings_face_enroll_education_title_accessibility;
+                        descriptionRes = R.string
+                                .security_settings_face_enroll_education_message_accessibility;
+                    } else {
+                        headerRes = R.string.security_settings_face_enroll_education_title;
+                        descriptionRes = R.string.security_settings_face_enroll_education_message;
+                    }
+                    updateHeaders(headerRes, descriptionRes);
 
                     if (isChecked) {
-                        mIllustrationNormal.stop();
-                        mIllustrationNormal.setVisibility(View.INVISIBLE);
+                        hideDefaultIllustration();
                         mIllustrationAccessibility.setVisibility(View.VISIBLE);
-                        mDescriptionText.setVisibility(View.INVISIBLE);
                     } else {
-                        mIllustrationNormal.setVisibility(View.VISIBLE);
-                        mIllustrationNormal.start();
+                        showDefaultIllustration();
                         mIllustrationAccessibility.setVisibility(View.INVISIBLE);
-                        mDescriptionText.setVisibility(View.VISIBLE);
                     }
                 }
             };
@@ -86,15 +94,27 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.face_enroll_education);
-        getLayout().setHeaderText(R.string.security_settings_face_enroll_education_title);
-        setTitle(R.string.security_settings_face_enroll_education_title);
+
+        final int headerRes = R.string.security_settings_face_enroll_education_title;
+        final int descriptionRes = R.string.security_settings_face_enroll_education_message;
+        updateHeaders(headerRes, descriptionRes);
+
         mHandler = new Handler();
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
 
-        mIllustrationNormal = findViewById(R.id.illustration_normal);
+        mIllustrationDefault = findViewById(R.id.illustration_default);
+        mIllustrationLottie = findViewById(R.id.illustration_lottie);
         mIllustrationAccessibility = findViewById(R.id.illustration_accessibility);
         mDescriptionText = findViewById(R.id.sud_layout_description);
+
+        mIsUsingLottie = getResources().getBoolean(R.bool.config_face_education_use_lottie);
+        if (mIsUsingLottie) {
+            mIllustrationDefault.stop();
+            mIllustrationDefault.setVisibility(View.INVISIBLE);
+            mIllustrationLottie.setVisibility(View.VISIBLE);
+            mIllustrationLottie.playAnimation();
+        }
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
 
@@ -236,5 +256,34 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.FACE_ENROLL_INTRO;
+    }
+
+    private void updateHeaders(@StringRes int headerRes, @StringRes int descriptionRes) {
+        final CharSequence headerText = getText(headerRes);
+        setTitle(headerText);
+
+        final GlifLayout layout = getLayout();
+        layout.setHeaderText(headerText);
+        layout.setDescriptionText(descriptionRes);
+    }
+
+    private void hideDefaultIllustration() {
+        if (mIsUsingLottie) {
+            mIllustrationLottie.cancelAnimation();
+            mIllustrationLottie.setVisibility(View.INVISIBLE);
+        } else {
+            mIllustrationDefault.stop();
+            mIllustrationDefault.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void showDefaultIllustration() {
+        if (mIsUsingLottie) {
+            mIllustrationLottie.setVisibility(View.VISIBLE);
+            mIllustrationLottie.playAnimation();
+        } else {
+            mIllustrationDefault.setVisibility(View.VISIBLE);
+            mIllustrationDefault.start();
+        }
     }
 }

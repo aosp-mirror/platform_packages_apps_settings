@@ -24,26 +24,17 @@
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
-        android:order="-10000"
-        settings:allowDividerBelow="true"/>
+        android:order="-10000" />
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="instant_app_buttons"
         android:layout="@layout/instant_app_buttons"
         android:selectable="false"
-        android:order="-9999"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="true"/>
+        android:order="-9999" />
 
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         android:order="-9998" />
-
-    <!-- Add SpacePreference to draw divider -->
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="0dp"
-        android:order="-9997"
-        settings:allowDividerAbove="true" />
 
     <Preference
         android:key="app_settings_link"

@@ -92,6 +92,7 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
                         }
                     }
                 }
+                button.announceForAccessibility(mContext.getString(R.string.recent_convos_removed));
             } catch (RemoteException e) {
                 Slog.w(TAG, "Could not clear recents", e);
             }
@@ -103,26 +104,14 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
     public void updateState(Preference preference) {
         PreferenceCategory pref = (PreferenceCategory) preference;
         // Load conversations
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... unused) {
-                try {
-                    mConversations = mPs.getRecentConversations().getList();
-                } catch (RemoteException e) {
-                    Slog.w(TAG, "Could get recents", e);
-                }
-                Collections.sort(mConversations, mConversationComparator);
-                return null;
-            }
+        try {
+            mConversations = mPs.getRecentConversations().getList();
+        } catch (RemoteException e) {
+            Slog.w(TAG, "Could get recents", e);
+        }
+        Collections.sort(mConversations, mConversationComparator);
 
-            @Override
-            protected void onPostExecute(Void unused) {
-                if (mContext == null) {
-                    return;
-                }
-                populateList(mConversations, pref);
-            }
-        }.execute();
+        populateList(mConversations, pref);
 
     }
 

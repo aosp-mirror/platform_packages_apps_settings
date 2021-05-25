@@ -1422,9 +1422,8 @@ public class ManageApplications extends InstrumentedFragment
             // Bind the data efficiently with the holder
             final ApplicationsState.AppEntry entry = mEntries.get(position);
             synchronized (entry) {
-                holder.setTitle(entry.label);
                 mState.ensureLabelDescription(entry);
-                holder.itemView.setContentDescription(entry.labelDescription);
+                holder.setTitle(entry.label, entry.labelDescription);
                 mState.ensureIcon(entry);
                 holder.setIcon(entry.icon);
                 updateSummary(holder, entry);

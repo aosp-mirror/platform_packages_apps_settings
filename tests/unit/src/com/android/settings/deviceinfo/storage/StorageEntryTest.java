@@ -31,6 +31,8 @@ import android.os.storage.VolumeRecord;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.android.settings.testutils.ResourcesUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -244,6 +246,17 @@ public class StorageEntryTest {
         assertThat(volumeStorage.getDescription()).isEqualTo(description);
         assertThat(diskStorage.getDescription()).isEqualTo(description);
         assertThat(recordStorage.getDescription()).isEqualTo(description);
+    }
+
+    @Test
+    public void getDescription_defaultInternalStorage_returnThisDevice() {
+        final VolumeInfo volumeInfo = mock(VolumeInfo.class);
+        when(volumeInfo.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
+        when(volumeInfo.getId()).thenReturn(VolumeInfo.ID_PRIVATE_INTERNAL);
+        final StorageEntry volumeStorage = new StorageEntry(mContext, volumeInfo);
+
+        assertThat(volumeStorage.getDescription()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "storage_default_internal_storage"));
     }
 
     @Test

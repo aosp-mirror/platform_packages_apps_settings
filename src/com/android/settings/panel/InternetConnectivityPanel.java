@@ -65,8 +65,8 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
     private static final String TAG = "InternetConnectivityPanel";
     private static final int SUBTITLE_TEXT_NONE = -1;
     private static final int SUBTITLE_TEXT_WIFI_IS_TURNED_ON = R.string.wifi_is_turned_on_subtitle;
-    private static final int SUBTITLE_TEXT_SELECT_NETWORK_TO_CONNECT_INTERNET =
-            R.string.select_network_to_connect_internet;
+    private static final int SUBTITLE_TEXT_TAP_A_NETWORK_TO_CONNECT =
+            R.string.tap_a_network_to_connect;
     private static final int SUBTITLE_TEXT_SEARCHING_FOR_NETWORKS =
             R.string.wifi_empty_list_wifi_on;
     private static final int SUBTITLE_TEXT_NON_CARRIER_NETWORK_UNAVAILABLE =
@@ -326,7 +326,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         if (wifiList != null && wifiList.size() != 0) {
             // When the Wi-Fi scan result is not empty
             //   Sub-Title: Select the network you want to use for data
-            mSubtitle = SUBTITLE_TEXT_SELECT_NETWORK_TO_CONNECT_INTERNET;
+            mSubtitle = SUBTITLE_TEXT_TAP_A_NETWORK_TO_CONNECT;
             return;
         }
 
