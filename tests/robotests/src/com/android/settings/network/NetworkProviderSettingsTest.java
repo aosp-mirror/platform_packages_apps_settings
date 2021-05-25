@@ -46,6 +46,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -414,6 +415,27 @@ public class NetworkProviderSettingsTest {
                 wifiEntry, mode));
         when(wifiDialog2.getController()).thenReturn(controller);
         return wifiDialog2;
+    }
+
+    @Test
+    public void onCreateOptionsMenu_airplanModeOn_fixConnectivityMenuInvisible() {
+        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
+        final Menu menu = mock(Menu.class);
+        mNetworkProviderSettings.onCreateOptionsMenu(menu, null /* inflater */);
+
+        verify(menu, never()).add(anyInt(), eq(NetworkProviderSettings.MENU_FIX_CONNECTIVITY),
+            anyInt(), eq(R.string.fix_connectivity));
+    }
+
+    @Test
+    public void onCreateOptionsMenu_airplanModeOff_fixConnectivityMenuVisible() {
+        doReturn(false).when(mAirplaneModeEnabler).isAirplaneModeOn();
+        final Menu menu = mock(Menu.class);
+        when(menu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mock(MenuItem.class));
+        mNetworkProviderSettings.onCreateOptionsMenu(menu, null /* inflater */);
+
+        verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_FIX_CONNECTIVITY),
+            anyInt(), eq(R.string.fix_connectivity));
     }
 
     @Test
