@@ -19,14 +19,11 @@ package com.android.settings.applications;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -79,16 +76,6 @@ public class AppDashboardFragment extends DashboardFragment {
         return buildPreferenceControllers(context);
     }
 
-    @Override
-    public String getCategoryKey() {
-        // TODO(b/174964405): Remove this function when the silky flag was deprecated.
-        // To include injection tiles, map this app fragment to the app category in the short term.
-        // When we deprecate the silky flag, we have to:
-        // 1. Remove this method.
-        // 2. Update the mapping in DashboardFragmentRegistry.PARENT_TO_CATEGORY_KEY_MAP.
-        return CategoryKey.CATEGORY_APPS;
-    }
-
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
@@ -103,13 +90,6 @@ public class AppDashboardFragment extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context);
-                }
-
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    // TODO(b/174964405): This method should be removed when silky home launched.
-                    // Only allow this page can be searchable when silky home enabled.
-                    return FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME);
                 }
             };
 }
