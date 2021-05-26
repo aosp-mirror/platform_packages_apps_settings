@@ -178,6 +178,10 @@ public class SettingsBaseActivity extends FragmentActivity {
         } else if (transitionType == TransitionType.TRANSITION_NONE) {
             super.startActivity(intent, null);
             return;
+        } else if (transitionType == TransitionType.TRANSITION_FADE) {
+            super.startActivity(intent, null);
+            overridePendingTransition(android.R.anim.fade_in, R.anim.sud_stay);
+            return;
         }
         super.startActivity(intent, createActivityOptionsBundleForTransition(null));
     }
@@ -267,6 +271,10 @@ public class SettingsBaseActivity extends FragmentActivity {
 
     @Override
     protected void onPause() {
+        // For accessibility activities launched from setup wizard.
+        if (getTransitionType(getIntent()) == TransitionType.TRANSITION_FADE) {
+            overridePendingTransition(R.anim.sud_stay, android.R.anim.fade_out);
+        }
         unregisterReceiver(mPackageReceiver);
         super.onPause();
     }
