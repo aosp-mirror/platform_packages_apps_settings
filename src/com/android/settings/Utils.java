@@ -161,6 +161,10 @@ public final class Utils extends com.android.settingslib.Utils {
     /** Whether or not app hibernation is enabled on the device **/
     public static final String PROPERTY_APP_HIBERNATION_ENABLED = "app_hibernation_enabled";
 
+    /** Whether or not app hibernation targets apps that target a pre-S SDK **/
+    public static final String PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS =
+            "app_hibernation_targets_pre_s_apps";
+
     /** Whether or not Settings Shared Axis transition is enabled */
     public static final String SETTINGS_SHARED_AXIS_ENABLED = "settings_shared_axis_enabled";
 
