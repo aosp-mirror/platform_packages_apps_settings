@@ -18,7 +18,6 @@ package com.android.settings.search;
 
 import android.util.ArrayMap;
 
-import com.android.settings.DisplaySettings;
 import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
@@ -34,7 +33,6 @@ import com.android.settings.notification.zen.ZenModeRestrictNotificationsSetting
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.system.SystemDashboardFragment;
-import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.WifiSettings;
 
 import java.util.Map;
@@ -52,8 +50,6 @@ public class CustomSiteMapRegistry {
     static {
         CUSTOM_SITE_MAP = new ArrayMap<>();
         CUSTOM_SITE_MAP.put(ScreenLockSettings.class.getName(), SecuritySettings.class.getName());
-        CUSTOM_SITE_MAP.put(
-                WallpaperSuggestionActivity.class.getName(), DisplaySettings.class.getName());
         CUSTOM_SITE_MAP.put(
                 WifiSettings.class.getName(), NetworkDashboardFragment.class.getName());
         CUSTOM_SITE_MAP.put(PowerUsageAdvanced.class.getName(), PowerUsageSummary.class.getName());
