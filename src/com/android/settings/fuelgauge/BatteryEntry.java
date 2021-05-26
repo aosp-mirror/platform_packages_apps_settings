@@ -241,7 +241,7 @@ public class BatteryEntry {
         mBatteryConsumer = null;
         mIsHidden = false;
         mPowerComponentId = powerComponentId;
-        mConsumedPower = devicePowerMah - appsPowerMah;
+        mConsumedPower = devicePowerMah;
         mUsageDurationMs = usageDurationMs;
         mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
 
@@ -265,10 +265,9 @@ public class BatteryEntry {
         icon = context.getDrawable(iconId);
         name = powerComponentName;
 
-        mConsumedPower = devicePowerMah - appsPowerMah;
+        mConsumedPower = devicePowerMah;
         mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
     }
-
 
     public Drawable getIcon() {
         return icon;
