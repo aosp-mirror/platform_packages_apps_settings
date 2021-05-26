@@ -539,9 +539,9 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Otisk prstu a heslo"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Pokračovat bez otisku prstu"</string>
     <string name="fingerprint_unlock_title" msgid="4978686534505944042">"Zařízení můžete odemknout otiskem prstu. Z bezpečnostních důvodů tato možnost vyžaduje záložní zámek obrazovky."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="5991691559532427891">"Odemknutí obličejem + gesto"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="8990569318587034610">"Odemknutí obličejem + PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="8612535943511761549">"Odemknutí obličejem + heslo"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="5991691559532427891">"Odemknutí obličejem a gesto"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="8990569318587034610">"Odemknutí obličejem a PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="8612535943511761549">"Odemknutí obličejem a heslo"</string>
     <string name="face_unlock_skip_face" msgid="7117201898540606846">"Pokračovat bez odemknutí obličejem"</string>
     <string name="face_unlock_title" msgid="7344830351598247267">"Zařízení můžete odemknout pomocí obličeje. Z bezpečnostních důvodů tato možnost vyžaduje záložní zámek obrazovky."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Zakázáno administrátorem, zásadami šifrování nebo úložištěm pověření"</string>
@@ -750,7 +750,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="934657460643490773">"Možnosti"</string>
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Rozšířené nastavení"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Rozšířené nastavení Bluetooth"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Když je zapnuté připojení Bluetooth, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Když je připojení Bluetooth zapnuté, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="4069064120315578780">"Když je zapnuté připojení Bluetooth, zařízení může komunikovat s ostatními zařízeními Bluetooth v okolí.\n\nZa účelem vylepšení funkcí mohou aplikace a služby nadále vyhledávat zařízení v okolí, i když je Bluetooth vypnuté. Lze tak například vylepšit funkce založené na poloze. Toto chování můžete změnit v "<annotation id="link">"nastavení vyhledávání"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Za účelem zvýšení přesnosti určování polohy mohou systémové aplikace a služby neustále vyhledávat zařízení Bluetooth. Toto chování můžete změnit v <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>nastavení vyhledávání<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Nelze se připojit. Zkuste to znovu."</string>
@@ -888,7 +888,7 @@
     <string name="wifi_setup_wps" msgid="4303694722593999931">"Automat. nastavení (WPS)"</string>
     <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Zapnout vyhledávání Wi-Fi?"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Chcete-li zapínat Wi-Fi automaticky, nejprve zapněte vyhledávání Wi-Fi."</string>
-    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Vyhledávání Wi‑Fi umožňuje aplikacím a službám vyhledávat sítě Wi-Fi kdykoli, i když je připojení Wi‑Fi vypnuté. Lze tak například zlepšit funkce a služby závislé na poloze."</string>
+    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Tato funkce umožňuje aplikacím a službám vyhledávat sítě Wi-Fi kdykoli, i když je připojení Wi‑Fi vypnuté. Lze tak například zlepšit funkce a služby závislé na poloze."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Zapnout"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Vyhledávání Wi‑Fi je zapnuto"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Rozšířené možnosti"</string>
@@ -898,7 +898,7 @@
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Zadejte SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Zabezpečení"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Skrytá síť"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Pokud směrovač nevysílá ID sítě, ale v budoucnu jej chcete k síti připojit, můžete síť nastavit jako skrytou.\n\nToto opatření může představovat bezpečnostní riziko, protože telefon bude pravidelně vysílat signál za účelem nalezení sítě.\n\nPokud tuto síť nastavíte jako skrytou, nastavení směrovače tím nezměníte."</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Pokud router nevysílá ID sítě, ale vy se k němu budete chtít v budoucnu připojit, můžete síť nastavit jako skrytou.\n\nToto opatření může představovat bezpečnostní riziko, protože telefon bude pravidelně vysílat signál za účelem nalezení sítě.\n\nPokud tuto síť nastavíte jako skrytou, nastavení routeru tím nezměníte."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Síla signálu"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Stav"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Rychlost odkazu pro přenos"</string>
@@ -1086,7 +1086,7 @@
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Pásmo přístupového bodu"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"Pomocí hotspotu můžete vytvořit síť Wi‑Fi pro další zařízení. Hotspot poskytuje připojení k internetu pomocí vašeho mobilního datového připojení. Mohou být účtovány dodatečné poplatky za mobilní data."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"Aplikace mohou vytvořit hotspot ke sdílení obsahu s okolními zařízeními."</string>
-    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Automatické vypnutí hotspotu"</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Hotspot automaticky vypínat"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Když nejsou připojena žádná zařízení"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Zapínání hotspotu…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Vypínání hotspotu…"</string>
@@ -1717,10 +1717,10 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Internetové připojení tohoto zařízení <xliff:g id="DEVICE_NAME">%1$d</xliff:g> je sdíleno přes Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Připojení lze sdílet s nejvýše <xliff:g id="MAXCONNECTION">%1$d</xliff:g> zařízeními."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"U zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bude ukončeno sdílené připojení."</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering ethernetu"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Připojení přes ethernet"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Sdílet připojení telefonu k internetu přes USB ethernet"</string>
-    <string name="tethering_footer_info" msgid="6782375845587483281">"Hotspot a tethering umožňují poskytovat připojení k internetu přes mobilní datové připojení dalším zařízením. Také aplikace mohou vytvořit hotspot ke sdílení obsahu s okolními zařízeními."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Hotspot a tethering umožňují poskytovat připojení k internetu přes připojení Wi-Fi nebo mobilní datové připojení dalším zařízením. Také aplikace mohou vytvořit hotspot ke sdílení obsahu s okolními zařízeními."</string>
+    <string name="tethering_footer_info" msgid="6782375845587483281">"Hotspot a tethering umožňují poskytovat připojení k internetu přes mobilní datové připojení dalším zařízením. Hotspot ke sdílení obsahu s okolními zařízeními mohou vytvářet i aplikace."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Hotspot a tethering umožňují poskytovat připojení k internetu přes připojení Wi-Fi nebo mobilní datové připojení dalším zařízením. Hotspot ke sdílení obsahu s okolními zařízeními mohou vytvářet i aplikace."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Nápověda"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Mobilní síť"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Mobilní tarif"</string>
@@ -2736,12 +2736,12 @@
     <string name="vpn_settings_title" msgid="9131315656202257272">"Síť VPN"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Úložiště pověření"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Instalace certifikátu"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Instalace certifikátů z úložiště"</string>
+    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Nainstalovat certifikáty z úložiště"</string>
     <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Nainstalovat certifikáty z karty SD"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Vymazat pověření"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Odstranit všechny certifikáty"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"Důvěryhodná pověření"</string>
-    <string name="trusted_credentials_summary" msgid="345822338358409468">"Zobrazení důvěryhodných certifikátů CA"</string>
+    <string name="trusted_credentials_summary" msgid="345822338358409468">"Zobrazit důvěryhodné certifikáty CA"</string>
     <string name="user_credentials" msgid="4044405430790970775">"Identifikační údaje uživatele"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Zobrazit a změnit uložené identifikační údaje"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Rozšířené nastavení"</string>
@@ -3141,10 +3141,10 @@
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Použít výchozí"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Vždy"</string>
-    <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Kromě případů, kdy je spuštěna jiná platební aplikace"</string>
+    <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Jen pokud není spuštěna jiná platební aplikace"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"Na bezkontaktním terminálu zaplaťte pomocí aplikace:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Platba na terminálu"</string>
-    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Nastavte platební aplikaci. Poté jen přidržte telefon zadní stranou u terminálu se symbolem bezkontaktních plateb."</string>
+    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Nejprve si nastavte platební aplikaci. Pak už jen stačí přidržet telefon zadní stranou u terminálu se symbolem bezkontaktních plateb."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Rozumím"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Další..."</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Nastavení výchozí platební aplikace"</string>
@@ -3616,7 +3616,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Citlivá oznámení v pracovním profilu"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Při uzamknutí zobrazovat citlivý obsah pracovního profilu"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Zobrazovat veškerý obsah oznámení"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Zobrazovat citlivý obsah jen během odemknutí"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Citlivý obsah zobrazovat jen po odemknutí"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Oznámení vůbec nezobrazovat"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Jak chcete zobrazovat obrazovku uzamčení?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Obrazovka uzamčení"</string>
@@ -3998,8 +3998,8 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Zapnuto"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Vypnuto"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Připnutí aplikace"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"Připnutí aplikace vám umožňuje nechat aktuální obrazovku zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru. \n\nKdyž je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Připnutí aplikace vám umožňuje nechat aktuální obrazovku zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru. \n\nKdyž je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nChcete-li s někým bezpečně sdílet zařízení, zkuste namísto toho použít režim hosta. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Připnutí aplikace vám umožňuje nechat aktuální aplikaci zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru. \n\nKdyž je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Připnutí aplikace vám umožňuje nechat aktuální aplikaci zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru. \n\nKdyž je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nChcete-li s někým bezpečně sdílet zařízení, zkuste namísto toho použít režim hosta. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Když je aplikace připnutá: \n\n• Může mít přístup k soukromým datům \n (například kontaktům a obsahu e-mailů) \n• Připnutá aplikace může otevírat další aplikace \n\nPřipnutí aplikace používejte pouze s lidmi, kterým důvěřujete."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Před uvolněním požádat o bezpečnostní gesto"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Před uvolněním požádat o PIN"</string>
@@ -4196,7 +4196,7 @@
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"Odmítnout"</string>
     <string name="usb_use_charging_only" msgid="1743303747327057947">"Žádný přenos dat"</string>
     <string name="usb_use_charging_only_desc" msgid="1234421230461847336">"Nabít jen toto zařízení"</string>
-    <string name="usb_use_power_only" msgid="3408055485802114621">"Nabíjení připojeného zařízení"</string>
+    <string name="usb_use_power_only" msgid="3408055485802114621">"Nabíjet připojené zařízení"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Přenos souborů"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Přenos souborů do jiného zařízení"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
@@ -4474,8 +4474,8 @@
     <string name="data_saver_title" msgid="2593804270788863815">"Spořič dat"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Neomezená data"</string>
     <string name="restrict_background_blacklisted" msgid="7953049316098373715">"Data na pozadí jsou vypnuta"</string>
-    <string name="data_saver_on" msgid="7848893946018448793">"Zapnuto"</string>
-    <string name="data_saver_off" msgid="5891210864117269045">"Vypnuto"</string>
+    <string name="data_saver_on" msgid="7848893946018448793">"Zapnutý"</string>
+    <string name="data_saver_off" msgid="5891210864117269045">"Vypnutý"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Použít spořič dat"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Neomezené využití dat"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Povolit neomezený přístup k datům, když je zapnutý Spořič dat"</string>
