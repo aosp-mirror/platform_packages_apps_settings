@@ -279,9 +279,9 @@
     <string name="date_picker_title" msgid="646573308567782578">"Күн-айы"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Уақыт"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"Экран өшкеннен кейін құлыптау"</string>
-    <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> күту уақытынан кейін"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Күту уақытынан кейін бірден (<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ашық күйінде ұстап тұрмаса)"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"Күту уақытынан кейін <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> өткен соң (<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> ашық күйінде ұстап тұрмаса)"</string>
+    <string name="lock_after_timeout_summary" msgid="4869265514658147304">"Экран өшкен соң <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Экран өшкен соң бірден (<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ашық күйінде ұстап тұрмаса)"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"Экран өшкеннен кейін <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> өткен соң (<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> ашық күйінде ұстап тұрмаса)"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Құлыпталған экранда пайдаланушы ақпаратын көрсету"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Құлыптаулы экрандағы мәтін"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Виджеттерді қосу"</string>
@@ -507,7 +507,7 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Құрылғыны қорғау мүмкіндіктерін белсендіру арқылы басқалардың осы құрылғыны рұқсатыңызсыз пайдалануын болдырмаңыз. Пайдаланғыңыз келетін экран бекітпесін таңдаңыз."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Құрылғыны қорғау мүмкіндіктерін белсендіру арқылы басқалардың осы телефонды рұқсатыңызсыз пайдалануын болдырмаңыз. Пайдаланғыңыз келетін экран бекітпесін таңдаңыз."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="6414674538453498900">"Сақтық көшірме экранын құлыптау әдісін таңдаңыз"</string>
-    <string name="lock_settings_picker_face_message" msgid="2044129433641084149">"Қосымша экран құлпы әдісін таңдаңыз"</string>
+    <string name="lock_settings_picker_face_message" msgid="2044129433641084149">"Экранды құлыптаудың қосымша әдісін таңдаңыз."</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Экран құлпы опциялары"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Экран құлпы опциялары"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Экран құлпы"</string>
@@ -867,7 +867,7 @@
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID енгізіңіз"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Қауіпсіздік"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Жасырын желі"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Маршрутизатор желі идентификаторын таратып жатпаса, бірақ оған алдағы уақытта қосылғыңыз келсе, желіні жасырып қоюыңызға болады.\n\nБұл – қауіпсіздік мәселесін тудыруы мүмкін, себебі телефон осы желіні іздеп, сигнал таратады.\n\nЖеліні жасырын күйге қою маршрутизатордың параметрлерін өзгертпейді."</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Маршрутизатор желі идентификаторын таратпаса, оған алдағы уақытта қосылғыңыз келген жағдайда, желіні жасырып қоюға болады.\n\nБұл қауіпсіздікке кері әсерін тигізуі мүмкін, себебі телефон осы желіні іздеп, сигнал таратады.\n\nЖеліні жасырын күйге қою маршрутизатордың параметрлерін өзгертпейді."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Сигнал күші"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Күйі"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Тарату жылдамдығы"</string>
@@ -2670,9 +2670,9 @@
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Байланысты бейімдеу"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Желі байланыстарын автоматты басқару арқылы батарея зарядын ұзаққа жеткізеді және құрылғы жұмысын жақсартады."</string>
-    <string name="credentials_title" msgid="7535942196886123656">"Тіркелу деректерінің жады"</string>
+    <string name="credentials_title" msgid="7535942196886123656">"Тіркелу деректерінің қоймасы"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Сертификат орнату"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Сертификаттарды жадтан орнату"</string>
+    <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Сертификаттарды қоймадан орнату"</string>
     <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Сертификаттарды SD картадан орнату"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Тіркелу деректерін өшіру"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Барлық сертификаттарды жою"</string>
@@ -3892,7 +3892,7 @@
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Босату алдында құлыпты ашу өрнегін сұрау"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Босату алдында PIN кодын сұрау"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Босату алдында құпия сөзді сұрау"</string>
-    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Босатқанда құрылғыны бекіту"</string>
+    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Босатқанда құрылғыны құлыптау"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM картасының жойылуын растау"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Жүктеп алынған SIM картасын тазаламас бұрын, бұл өзіңіз екеніңізді растаңыз."</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Бұл жұмыс профилін басқаратын:"</string>
