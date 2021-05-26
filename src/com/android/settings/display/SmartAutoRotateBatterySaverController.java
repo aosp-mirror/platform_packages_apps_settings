@@ -70,7 +70,7 @@ public class SmartAutoRotateBatterySaverController extends BasePreferenceControl
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
         ((BannerMessagePreference) mPreference)
-                .setPositiveButtonText(R.string.disable_text)
+                .setPositiveButtonText(R.string.ambient_camera_battery_saver_off)
                 .setPositiveButtonOnClickListener(v -> {
                     mPowerManager.setPowerSaveModeEnabled(false);
                 });
