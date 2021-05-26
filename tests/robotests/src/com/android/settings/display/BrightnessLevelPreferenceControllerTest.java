@@ -25,9 +25,12 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.display.BrightnessInfo;
 import android.os.PowerManager;
 import android.provider.Settings.System;
@@ -36,14 +39,19 @@ import android.view.Display;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.core.SettingsBaseActivity;
+import com.android.settingslib.transition.SettingsTransitionHelper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowContentResolver;
 
@@ -177,5 +185,21 @@ public class BrightnessLevelPreferenceControllerTest {
         System.putFloat(mContentResolver, System.SCREEN_BRIGHTNESS_FOR_VR_FLOAT, -20f);
         mController.updateState(mPreference);
         verify(mPreference).setSummary("0%");
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_transitionTypeNone_shouldPassToNextActivity() {
+        final Activity activity = Robolectric.setupActivity(Activity.class);
+        final BrightnessLevelPreferenceController controller =
+                new BrightnessLevelPreferenceController(activity, null);
+        final ShadowActivity shadowActivity = shadowOf(activity);
+        when(mPreference.getKey()).thenReturn("brightness");
+
+        controller.handlePreferenceTreeClick(mPreference);
+
+        final Intent intent = shadowActivity.getNextStartedActivity();
+        assertThat(intent.getIntExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE, 0))
+                .isEqualTo(SettingsTransitionHelper.TransitionType.TRANSITION_NONE);
+
     }
 }

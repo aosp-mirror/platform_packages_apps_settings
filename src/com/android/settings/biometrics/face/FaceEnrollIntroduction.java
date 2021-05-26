@@ -23,6 +23,7 @@ import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -69,8 +70,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getLayout().setDescriptionText(getString(
-                R.string.security_settings_face_enroll_introduction_message));
+        final ImageView iconGlasses = findViewById(R.id.icon_glasses);
+        final ImageView iconLooking = findViewById(R.id.icon_looking);
+        final ImageView iconSecurity = findViewById(R.id.icon_security);
+        iconGlasses.getBackground().setColorFilter(getIconColorFilter());
+        iconLooking.getBackground().setColorFilter(getIconColorFilter());
+        iconSecurity.getBackground().setColorFilter(getIconColorFilter());
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
@@ -81,10 +86,10 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 new FooterButton.Builder(this)
                         .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
                         .setListener(this::onSkipButtonClick)
-                        .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build()
-        );
+                        .setButtonType(FooterButton.ButtonType.NEXT)
+                        .setTheme(R.style.SudGlifButton_Primary)
+                        .build(),
+                true /* usePrimaryStyle */);
 
         FooterButton.Builder nextButtonBuilder = new FooterButton.Builder(this)
                 .setText(R.string.security_settings_face_enroll_introduction_agree)

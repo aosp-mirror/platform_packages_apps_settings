@@ -37,8 +37,7 @@
 
     <PreferenceCategory
         android:key="location_advanced_settings"
-        android:layout="@layout/preference_category_no_label"
-        settings:initialExpandedChildrenCount="3">
+        android:layout="@layout/preference_category_no_label">
 
         <!-- This preference gets removed if there is no managed profile -->
         <com.android.settingslib.RestrictedSwitchPreference
