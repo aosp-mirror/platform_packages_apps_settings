@@ -357,18 +357,18 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         updatePrivateStorageCategoryPreferencesOrder();
     }
 
-    public void onLoadFinished(SparseArray<StorageAsyncLoader.AppsStorageResult> result,
+    /** Fragments use it to set storage result and update UI of this controller. */
+    public void onLoadFinished(SparseArray<StorageAsyncLoader.StorageResult> result,
             int userId) {
-        final StorageAsyncLoader.AppsStorageResult data = result.get(userId);
+        final StorageAsyncLoader.StorageResult data = result.get(userId);
 
-        mImagesPreference.setStorageSize(getImagesSize(data), mTotalSize);
-        mVideosPreference.setStorageSize(getVideosSize(data), mTotalSize);
-        mAudioPreference.setStorageSize(getAudioSize(data), mTotalSize);
-        mAppsPreference.setStorageSize(getAppsSize(data), mTotalSize);
-        mGamesPreference.setStorageSize(getGamesSize(data), mTotalSize);
-        mDocumentsAndOtherPreference.setStorageSize(getDocumentsAndOtherSize(data),
-                mTotalSize);
-        mTrashPreference.setStorageSize(getTrashSize(data), mTotalSize);
+        mImagesPreference.setStorageSize(data.imagesSize, mTotalSize);
+        mVideosPreference.setStorageSize(data.videosSize, mTotalSize);
+        mAudioPreference.setStorageSize(data.audioSize, mTotalSize);
+        mAppsPreference.setStorageSize(data.allAppsExceptGamesSize, mTotalSize);
+        mGamesPreference.setStorageSize(data.gamesSize, mTotalSize);
+        mDocumentsAndOtherPreference.setStorageSize(data.documentsAndOtherSize, mTotalSize);
+        mTrashPreference.setStorageSize(data.trashSize, mTotalSize);
 
         if (mSystemPreference != null) {
             // Everything else that hasn't already been attributed is tracked as
@@ -377,13 +377,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             // from media provider.
             long attributedSize = 0;
             for (int i = 0; i < result.size(); i++) {
-                final StorageAsyncLoader.AppsStorageResult otherData = result.valueAt(i);
+                final StorageAsyncLoader.StorageResult otherData = result.valueAt(i);
                 attributedSize +=
                         otherData.gamesSize
-                                + otherData.musicAppsSize
-                                + otherData.videoAppsSize
-                                + otherData.photosAppsSize
-                                + otherData.otherAppsSize;
+                                + otherData.audioSize
+                                + otherData.videosSize
+                                + otherData.imagesSize
+                                + otherData.documentsAndOtherSize
+                                + otherData.trashSize
+                                + otherData.allAppsExceptGamesSize;
                 attributedSize += otherData.externalStats.totalBytes
                         - otherData.externalStats.appBytes;
                 attributedSize -= otherData.duplicateCodeSize;
@@ -418,18 +420,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mContext.startActivityAsUser(intent, new UserHandle(mUserId));
     }
 
-    private long getImagesSize(StorageAsyncLoader.AppsStorageResult data) {
-        return data.photosAppsSize + data.externalStats.imageBytes + data.externalStats.videoBytes;
-    }
-
-    private long getVideosSize(StorageAsyncLoader.AppsStorageResult data) {
-        return data.videoAppsSize;
-    }
-
-    private long getAudioSize(StorageAsyncLoader.AppsStorageResult data) {
-        return data.musicAppsSize + data.externalStats.audioBytes;
-    }
-
     private void launchAppsIntent() {
         final Bundle args = getWorkAnnotatedBundle(3);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
@@ -446,10 +436,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         Utils.launchIntent(mFragment, intent);
     }
 
-    private long getAppsSize(StorageAsyncLoader.AppsStorageResult data) {
-        return data.otherAppsSize;
-    }
-
     private void launchGamesIntent() {
         final Bundle args = getWorkAnnotatedBundle(1);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
@@ -464,23 +450,11 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         Utils.launchIntent(mFragment, intent);
     }
 
-    private long getGamesSize(StorageAsyncLoader.AppsStorageResult data) {
-        return data.gamesSize;
-    }
-
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
         final Bundle args = new Bundle(1 + additionalCapacity);
         args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB,
                 mIsWorkProfile ? WORK_TAB : PERSONAL_TAB);
         return args;
-    }
-
-    private long getDocumentsAndOtherSize(StorageAsyncLoader.AppsStorageResult data) {
-        return data.externalStats.totalBytes
-                - data.externalStats.audioBytes
-                - data.externalStats.videoBytes
-                - data.externalStats.imageBytes
-                - data.externalStats.appBytes;
     }
 
     private void launchTrashIntent() {
@@ -491,11 +465,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         } else {
             mContext.startActivityAsUser(intent, new UserHandle(mUserId));
         }
-    }
-
-    private long getTrashSize(StorageAsyncLoader.AppsStorageResult data) {
-        // TODO(170918505): Implement it.
-        return 0L;
     }
 
     private static long totalValues(StorageMeasurement.MeasurementDetails details, int userId,
