@@ -17,12 +17,15 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryConsumer;
@@ -56,11 +59,13 @@ public final class BatteryDiffEntryTest {
     @Mock private Drawable mockDrawable2;
     @Mock private Drawable mockBadgedDrawable;
     @Mock private BatteryHistEntry mBatteryHistEntry;
+    @Mock private PackageInfo mockPackageInfo;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mockUserManager).when(mContext).getSystemService(UserManager.class);
         doReturn(mockPackageManager).when(mContext).getPackageManager();
         BatteryDiffEntry.clearCache();
@@ -110,6 +115,7 @@ public final class BatteryDiffEntryTest {
 
     @Test
     public void testLoadLabelAndIcon_forSystemBattery_returnExpectedResult() {
+        final String expectedName = "Ambient display";
         // Generates fake testing data.
         final ContentValues values = getContentValuesWithType(
             ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
@@ -119,13 +125,22 @@ public final class BatteryDiffEntryTest {
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
 
-        assertThat(entry.getAppLabel()).isEqualTo("Ambient display");
+        assertThat(entry.getAppLabel()).isEqualTo(expectedName);
         assertThat(entry.getAppIconId()).isEqualTo(R.drawable.ic_settings_aod);
-        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+        // Verifies the app label in the cache.
+        final BatteryEntry.NameAndIcon nameAndIcon =
+            BatteryDiffEntry.sResourceCache.get(entry.getKey());
+        assertThat(nameAndIcon.name).isEqualTo(expectedName);
+        assertThat(nameAndIcon.iconId).isEqualTo(R.drawable.ic_settings_aod);
+        // Verifies the restrictable flag in the cache.
+        assertThat(entry.mValidForRestriction).isTrue();
+        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isTrue();
     }
 
     @Test
     public void testLoadLabelAndIcon_forUserBattery_returnExpectedResult() {
+        final String expectedName = "Removed user";
         doReturn(null).when(mockUserManager).getUserInfo(1001);
         // Generates fake testing data.
         final ContentValues values = getContentValuesWithType(
@@ -135,10 +150,18 @@ public final class BatteryDiffEntryTest {
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
 
-        assertThat(entry.getAppLabel()).isEqualTo("Removed user");
+        assertThat(entry.getAppLabel()).isEqualTo(expectedName);
         assertThat(entry.getAppIcon()).isNull();
         assertThat(entry.getAppIconId()).isEqualTo(0);
-        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+        // Verifies the app label in the cache.
+        final BatteryEntry.NameAndIcon nameAndIcon =
+            BatteryDiffEntry.sResourceCache.get(entry.getKey());
+        assertThat(nameAndIcon.name).isEqualTo(expectedName);
+        assertThat(nameAndIcon.iconId).isEqualTo(0);
+        // Verifies the restrictable flag in the cache.
+        assertThat(entry.mValidForRestriction).isTrue();
+        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isTrue();
     }
 
     @Test
@@ -162,8 +185,11 @@ public final class BatteryDiffEntryTest {
         assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
-            BatteryDiffEntry.sResourceCache.get(batteryHistEntry.getKey());
+            BatteryDiffEntry.sResourceCache.get(entry.getKey());
         assertThat(nameAndIcon.name).isEqualTo(expectedAppLabel);
+        // Verifies the restrictable flag in the cache.
+        assertThat(entry.mValidForRestriction).isFalse();
+        assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isFalse();
     }
 
     @Test
@@ -179,7 +205,7 @@ public final class BatteryDiffEntryTest {
         assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
-            BatteryDiffEntry.sResourceCache.get(batteryHistEntry.getKey());
+            BatteryDiffEntry.sResourceCache.get(entry.getKey());
         assertThat(nameAndIcon.name).isEqualTo(expectedAppLabel);
     }
 
@@ -225,8 +251,22 @@ public final class BatteryDiffEntryTest {
         assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
-            BatteryDiffEntry.sResourceCache.get(entry.mBatteryHistEntry.getKey());
+            BatteryDiffEntry.sResourceCache.get(entry.getKey());
         assertThat(nameAndIcon.icon).isEqualTo(mockBadgedDrawable);
+    }
+
+    @Test
+    public void testClearCache_clearDataForResourcesAndFlags() {
+        BatteryDiffEntry.sResourceCache.put(
+            "fake application key",
+            new BatteryEntry.NameAndIcon("app label", null, /*iconId=*/ 0));
+        BatteryDiffEntry.sValidForRestriction.put(
+            "fake application key", Boolean.valueOf(false));
+
+        BatteryDiffEntry.clearCache();
+
+        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
+        assertThat(BatteryDiffEntry.sValidForRestriction).isEmpty();
     }
 
     @Test
@@ -248,7 +288,7 @@ public final class BatteryDiffEntryTest {
         assertThat(entry2.getAppIcon()).isEqualTo(mockDrawable2);
         // Verifies the cache is updated into the new drawable.
         final BatteryEntry.NameAndIcon nameAndIcon =
-            BatteryDiffEntry.sResourceCache.get(entry2.mBatteryHistEntry.getKey());
+            BatteryDiffEntry.sResourceCache.get(entry2.getKey());
         assertThat(nameAndIcon.icon).isEqualTo(mockDrawable2);
     }
 
@@ -295,6 +335,40 @@ public final class BatteryDiffEntryTest {
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                 /*uid=*/ 1230, /*isHidden=*/ false);
         assertThat(entry.isSystemEntry()).isTrue();
+    }
+
+    @Test
+    public void testUpdateRestrictionFlagState_updateFlagAsExpected() throws Exception {
+        final String expectedAppLabel = "fake app label";
+        final String fakePackageName = "com.fake.google.com";
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put("uid", /*invalid uid*/ 10001);
+        values.put("packageName", fakePackageName);
+        final BatteryDiffEntry entry =
+            createBatteryDiffEntry(10, new BatteryHistEntry(values));
+
+        entry.updateRestrictionFlagState();
+        // Sets false if the app entry cannot be found.
+        assertThat(entry.mValidForRestriction).isFalse();
+
+        doReturn(BatteryUtils.UID_NULL).when(mockPackageManager).getPackageUid(
+            entry.getPackageName(), PackageManager.GET_META_DATA);
+        entry.updateRestrictionFlagState();
+        // Sets false if the app is invalid package name.
+        assertThat(entry.mValidForRestriction).isFalse();
+
+        doReturn(1000).when(mockPackageManager).getPackageUid(
+            entry.getPackageName(), PackageManager.GET_META_DATA);
+        entry.updateRestrictionFlagState();
+        // Sets false if the app PackageInfo cannot be found.
+        assertThat(entry.mValidForRestriction).isFalse();
+
+        doReturn(mockPackageInfo).when(mockPackageManager).getPackageInfo(
+            eq(entry.getPackageName()), anyInt());
+        entry.updateRestrictionFlagState();
+        // Sets true if package is valid and PackageInfo can be found.
+        assertThat(entry.mValidForRestriction).isTrue();
     }
 
     private BatteryDiffEntry createBatteryDiffEntry(
