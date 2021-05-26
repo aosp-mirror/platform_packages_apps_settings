@@ -34,6 +34,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 
 public class SubSettingLauncher {
 
@@ -47,6 +48,7 @@ public class SubSettingLauncher {
         }
         mContext = context;
         mLaunchRequest = new LaunchRequest();
+        mLaunchRequest.transitionType = TransitionType.TRANSITION_SHARED_AXIS;
     }
 
     public SubSettingLauncher setDestination(String fragmentName) {
@@ -120,6 +122,11 @@ public class SubSettingLauncher {
         return this;
     }
 
+    public SubSettingLauncher setTransitionType(int transitionType) {
+        mLaunchRequest.transitionType = transitionType;
+        return this;
+    }
+
     public void launch() {
         if (mLaunched) {
             throw new IllegalStateException(
@@ -166,6 +173,9 @@ public class SubSettingLauncher {
                 mLaunchRequest.titleResId);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, mLaunchRequest.title);
         intent.addFlags(mLaunchRequest.flags);
+        intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
+                mLaunchRequest.transitionType);
+
         return intent;
     }
 
@@ -219,6 +229,7 @@ public class SubSettingLauncher {
         Fragment mResultListener;
         int mRequestCode;
         UserHandle userHandle;
+        int transitionType;
         Bundle arguments;
         Bundle extras;
     }
