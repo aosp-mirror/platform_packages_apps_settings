@@ -326,7 +326,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 DIALOG_TAG_ENABLE_DSDS_CONFIRMATION,
                 getString(R.string.sim_action_enable_dsds_title),
                 getString(R.string.sim_action_enable_dsds_text),
-                getString(R.string.sim_action_continue),
+                getString(R.string.sim_action_yes),
                 getString(R.string.sim_action_no_thanks));
     }
 
