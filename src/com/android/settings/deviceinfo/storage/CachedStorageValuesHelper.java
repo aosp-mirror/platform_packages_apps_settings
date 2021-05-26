@@ -35,9 +35,11 @@ public class CachedStorageValuesHelper {
     public static final String FREE_BYTES_KEY = "free_bytes";
     public static final String TOTAL_BYTES_KEY = "total_bytes";
     public static final String GAME_APPS_SIZE_KEY = "game_apps_size";
-    public static final String MUSIC_APPS_SIZE_KEY = "music_apps_size";
-    public static final String VIDEO_APPS_SIZE_KEY = "video_apps_size";
-    public static final String PHOTO_APPS_SIZE_KEY = "photo_apps_size";
+    public static final String AUDIO_SIZE_KEY = "audio_size";
+    public static final String VIDEOS_SIZE_KEY = "videos_size";
+    public static final String IMAGES_SIZE_KEY = "images_size";
+    public static final String DOCUMENTS_AND_OTHER_SIZE_KEY = "documents_and_other_size";
+    public static final String TRASH_SIZE_KEY = "trash_size";
     public static final String OTHER_APPS_SIZE_KEY = "other_apps_size";
     public static final String CACHE_APPS_SIZE_KEY = "cache_apps_size";
     public static final String EXTERNAL_TOTAL_BYTES = "external_total_bytes";
@@ -78,21 +80,27 @@ public class CachedStorageValuesHelper {
         return new PrivateStorageInfo(freeBytes, totalBytes);
     }
 
-    public SparseArray<StorageAsyncLoader.AppsStorageResult> getCachedAppsStorageResult() {
+    /** Returns cached storage result or null if it's not available. */
+    public SparseArray<StorageAsyncLoader.StorageResult> getCachedStorageResult() {
         if (!isDataValid()) {
             return null;
         }
         final long gamesSize = mSharedPreferences.getLong(GAME_APPS_SIZE_KEY, -1);
-        final long musicAppsSize = mSharedPreferences.getLong(MUSIC_APPS_SIZE_KEY, -1);
-        final long videoAppsSize = mSharedPreferences.getLong(VIDEO_APPS_SIZE_KEY, -1);
-        final long photoAppSize = mSharedPreferences.getLong(PHOTO_APPS_SIZE_KEY, -1);
-        final long otherAppsSize = mSharedPreferences.getLong(OTHER_APPS_SIZE_KEY, -1);
+        final long audioSize = mSharedPreferences.getLong(AUDIO_SIZE_KEY, -1);
+        final long videosSize = mSharedPreferences.getLong(VIDEOS_SIZE_KEY, -1);
+        final long imagesSize = mSharedPreferences.getLong(IMAGES_SIZE_KEY, -1);
+        final long documentsAndOtherSize =
+                mSharedPreferences.getLong(DOCUMENTS_AND_OTHER_SIZE_KEY, -1);
+        final long trashSize = mSharedPreferences.getLong(TRASH_SIZE_KEY, -1);
+        final long allAppsExceptGamesSize = mSharedPreferences.getLong(OTHER_APPS_SIZE_KEY, -1);
         final long cacheSize = mSharedPreferences.getLong(CACHE_APPS_SIZE_KEY, -1);
         if (gamesSize < 0
-                || musicAppsSize < 0
-                || videoAppsSize < 0
-                || photoAppSize < 0
-                || otherAppsSize < 0
+                || audioSize < 0
+                || videosSize < 0
+                || imagesSize < 0
+                || documentsAndOtherSize < 0
+                || trashSize < 0
+                || allAppsExceptGamesSize < 0
                 || cacheSize < 0) {
             return null;
         }
@@ -117,31 +125,34 @@ public class CachedStorageValuesHelper {
                         externalVideoBytes,
                         externalImageBytes,
                         externalAppBytes);
-        final StorageAsyncLoader.AppsStorageResult result =
-                new StorageAsyncLoader.AppsStorageResult();
+        final StorageAsyncLoader.StorageResult result = new StorageAsyncLoader.StorageResult();
         result.gamesSize = gamesSize;
-        result.musicAppsSize = musicAppsSize;
-        result.videoAppsSize = videoAppsSize;
-        result.photosAppsSize = photoAppSize;
-        result.otherAppsSize = otherAppsSize;
+        result.audioSize = audioSize;
+        result.videosSize = videosSize;
+        result.imagesSize = imagesSize;
+        result.documentsAndOtherSize = documentsAndOtherSize;
+        result.trashSize = trashSize;
+        result.allAppsExceptGamesSize = allAppsExceptGamesSize;
         result.cacheSize = cacheSize;
         result.externalStats = externalStats;
-        final SparseArray<StorageAsyncLoader.AppsStorageResult> resultArray = new SparseArray<>();
+        final SparseArray<StorageAsyncLoader.StorageResult> resultArray = new SparseArray<>();
         resultArray.append(mUserId, result);
         return resultArray;
     }
 
     public void cacheResult(
-            PrivateStorageInfo storageInfo, StorageAsyncLoader.AppsStorageResult result) {
+            PrivateStorageInfo storageInfo, StorageAsyncLoader.StorageResult result) {
         mSharedPreferences
                 .edit()
                 .putLong(FREE_BYTES_KEY, storageInfo.freeBytes)
                 .putLong(TOTAL_BYTES_KEY, storageInfo.totalBytes)
                 .putLong(GAME_APPS_SIZE_KEY, result.gamesSize)
-                .putLong(MUSIC_APPS_SIZE_KEY, result.musicAppsSize)
-                .putLong(VIDEO_APPS_SIZE_KEY, result.videoAppsSize)
-                .putLong(PHOTO_APPS_SIZE_KEY, result.photosAppsSize)
-                .putLong(OTHER_APPS_SIZE_KEY, result.otherAppsSize)
+                .putLong(AUDIO_SIZE_KEY, result.audioSize)
+                .putLong(VIDEOS_SIZE_KEY, result.videosSize)
+                .putLong(IMAGES_SIZE_KEY, result.imagesSize)
+                .putLong(DOCUMENTS_AND_OTHER_SIZE_KEY, result.documentsAndOtherSize)
+                .putLong(TRASH_SIZE_KEY, result.trashSize)
+                .putLong(OTHER_APPS_SIZE_KEY, result.allAppsExceptGamesSize)
                 .putLong(CACHE_APPS_SIZE_KEY, result.cacheSize)
                 .putLong(EXTERNAL_TOTAL_BYTES, result.externalStats.totalBytes)
                 .putLong(EXTERNAL_AUDIO_BYTES, result.externalStats.audioBytes)

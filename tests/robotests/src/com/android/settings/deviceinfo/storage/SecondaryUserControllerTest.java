@@ -103,7 +103,7 @@ public class SecondaryUserControllerTest {
         verify(mGroup).addPreference(argumentCaptor.capture());
 
         final Preference preference = argumentCaptor.getValue();
-        assertThat(preference.getSummary()).isEqualTo("0.01 GB");
+        assertThat(preference.getSummary()).isEqualTo("10 MB");
     }
 
     @Test
@@ -201,9 +201,9 @@ public class SecondaryUserControllerTest {
         mPrimaryUser.name = TEST_NAME;
         mPrimaryUser.id = 10;
         mController.displayPreference(mScreen);
-        final StorageAsyncLoader.AppsStorageResult userResult =
-                new StorageAsyncLoader.AppsStorageResult();
-        final SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
+        final StorageAsyncLoader.StorageResult userResult =
+                new StorageAsyncLoader.StorageResult();
+        final SparseArray<StorageAsyncLoader.StorageResult> result = new SparseArray<>();
         userResult.externalStats =
                 new StorageStatsSource.ExternalStorageStats(
                         MEGABYTE_IN_BYTES * 30,
@@ -217,7 +217,7 @@ public class SecondaryUserControllerTest {
         verify(mGroup).addPreference(argumentCaptor.capture());
         final Preference preference = argumentCaptor.getValue();
 
-        assertThat(preference.getSummary()).isEqualTo("0.03 GB");
+        assertThat(preference.getSummary()).isEqualTo("30 MB");
     }
 
     @Test
