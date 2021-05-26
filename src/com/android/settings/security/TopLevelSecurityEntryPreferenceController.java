@@ -27,8 +27,12 @@ import com.android.settings.overlay.FeatureFactory;
 
 public class TopLevelSecurityEntryPreferenceController extends BasePreferenceController {
 
+    private final SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
+
     public TopLevelSecurityEntryPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mSecuritySettingsFeatureProvider = FeatureFactory.getFactory(mContext)
+                .getSecuritySettingsFeatureProvider();
     }
 
     @Override
@@ -42,11 +46,9 @@ public class TopLevelSecurityEntryPreferenceController extends BasePreferenceCon
             return super.handlePreferenceTreeClick(preference);
         }
 
-        SecuritySettingsFeatureProvider securitySettingsFeatureProvider =
-                FeatureFactory.getFactory(mContext).getSecuritySettingsFeatureProvider();
-        if (securitySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
+        if (mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
             String alternativeFragmentClassname =
-                    securitySettingsFeatureProvider
+                    mSecuritySettingsFeatureProvider
                             .getAlternativeSecuritySettingsFragmentClassname();
             if (alternativeFragmentClassname != null) {
                 new SubSettingLauncher(mContext)
