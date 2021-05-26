@@ -96,10 +96,6 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Application app, Fragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new RecentNotifyingAppsPreferenceController(
-                context, new NotificationBackend(), IUsageStatsManager.Stub.asInterface(
-                        ServiceManager.getService(Context.USAGE_STATS_SERVICE)),
-                context.getSystemService(UserManager.class), app, host));
         controllers.add(new ShowOnLockScreenNotificationPreferenceController(
                 context, KEY_LOCKSCREEN));
         controllers.add(new NotificationRingtonePreferenceController(context) {
