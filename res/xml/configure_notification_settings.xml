@@ -19,6 +19,39 @@
                   android:title="@string/configure_notification_settings">
 
     <PreferenceCategory
+        android:key="general_notifications_category"
+        android:title="@string/general_notification_header">
+        <!-- See all apps button -->
+        <Preference
+            android:key="all_notifications"
+            android:order="10"
+            android:title="@string/app_notification_field"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            settings:searchable="false">
+            <extra
+                android:name="classname"
+                android:value="com.android.settings.Settings$NotificationAppListActivity"/>
+        </Preference>
+        <Preference
+            android:key="notification_history"
+            android:order="11"
+            android:title="@string/notification_history"
+            android:summary="@string/notification_history_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.notification.history.NotificationHistoryActivity" />
+        </Preference>
+        <Preference
+            android:key="notification_access"
+            android:order="12"
+            android:title="@string/manage_notification_access_title"
+            android:summary="@string/manage_notification_access_summary"
+            android:fragment="com.android.settings.notification.NotificationAccessSettings"
+            settings:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessController" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="conversation_category"
         android:title="@string/conversation_notifs_category">
         <Preference
@@ -40,58 +73,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="recent_notifications_category"
-        android:title="@string/recent_notifications">
-        <!-- Placeholder for a list of recent apps -->
-        <com.android.settings.widget.PrimarySwitchPreference
-            android:key="app1"
-            android:title=" "
-            android:summary=" "
-            android:order="5"/>
-        <com.android.settings.widget.PrimarySwitchPreference
-            android:key="app2"
-            android:title=" "
-            android:summary=" "
-            android:order="6"/>
-        <com.android.settings.widget.PrimarySwitchPreference
-            android:key="app3"
-            android:title=" "
-            android:summary=" "
-            android:order="7"/>
-
-        <!-- See all apps button -->
-        <Preference
-            android:key="all_notifications"
-            android:order="10"
-            android:title="@string/notifications_title"
-            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            settings:searchable="false">
-            <extra
-                android:name="classname"
-                android:value="com.android.settings.Settings$NotificationAppListActivity"/>
-        </Preference>
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:key="configure_notifications_lock"
         android:title="@string/lock_screen_notifications_title">
-        <Preference
-            android:key="notification_history"
-            android:order="11"
-            android:title="@string/notification_history"
-            android:summary="@string/notification_history_summary">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.notification.history.NotificationHistoryActivity" />
-        </Preference>
-        <Preference
-            android:key="notification_access"
-            android:order="12"
-            android:title="@string/manage_notification_access_title"
-            android:summary="@string/manage_notification_access_summary"
-            android:fragment="com.android.settings.notification.NotificationAccessSettings"
-            settings:controller="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessController" />
         <!-- When device is locked -->
         <com.android.settings.RestrictedListPreference
             android:key="lock_screen_notifications"
