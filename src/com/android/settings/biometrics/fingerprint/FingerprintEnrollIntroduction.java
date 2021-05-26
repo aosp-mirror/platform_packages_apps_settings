@@ -24,6 +24,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -58,22 +59,31 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
         super.onCreate(savedInstanceState);
 
-        setDescriptionText(R.string.security_settings_fingerprint_enroll_introduction_message);
+        final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
+        final ImageView iconLocked = findViewById(R.id.icon_locked);
+        final ImageView iconDelete = findViewById(R.id.icon_delete);
+        final ImageView iconInfo = findViewById(R.id.icon_info);
+        final ImageView iconLink = findViewById(R.id.icon_link);
+        iconFingerprint.getDrawable().setColorFilter(getIconColorFilter());
+        iconLocked.getDrawable().setColorFilter(getIconColorFilter());
+        iconDelete.getDrawable().setColorFilter(getIconColorFilter());
+        iconInfo.getDrawable().setColorFilter(getIconColorFilter());
+        iconLink.getDrawable().setColorFilter(getIconColorFilter());
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
                 new FooterButton.Builder(this)
                         .setText(getNegativeButtonTextId())
                         .setListener(this::onSkipButtonClick)
-                        .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build()
-        );
+                        .setButtonType(FooterButton.ButtonType.NEXT)
+                        .setTheme(R.style.SudGlifButton_Primary)
+                        .build(),
+                true /* usePrimaryStyle */);
 
         final FooterButton nextButton = new FooterButton.Builder(this)
                 .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
                 .setListener(this::onNextButtonClick)
-                .setButtonType(FooterButton.ButtonType.NEXT)
+                .setButtonType(FooterButton.ButtonType.OPT_IN)
                 .setTheme(R.style.SudGlifButton_Primary)
                 .build();
 

@@ -92,7 +92,7 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
         when(mTetherPreferenceController.isAvailable()).thenReturn(true);
 
         assertThat(mController.getSummary())
-                .isEqualTo("Wi\u2011Fi, mobile, data usage, and hotspot");
+                .isEqualTo("Wi\u2011Fi, mobile, data usage, hotspot");
     }
 
     @Test
@@ -101,6 +101,6 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
         when(mMobileNetworkPreferenceController.isAvailable()).thenReturn(false);
         when(mTetherPreferenceController.isAvailable()).thenReturn(false);
 
-        assertThat(mController.getSummary()).isEqualTo("Wi\u2011Fi and data usage");
+        assertThat(mController.getSummary()).isEqualTo("Wi\u2011Fi, data usage");
     }
 }
