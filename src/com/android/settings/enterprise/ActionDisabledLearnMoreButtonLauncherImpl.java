@@ -20,6 +20,7 @@ import static java.util.Objects.requireNonNull;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.UserHandle;
@@ -54,32 +55,33 @@ public class ActionDisabledLearnMoreButtonLauncherImpl
 
     @Override
     public void setupLearnMoreButtonToShowAdminPolicies(
-            Activity activity,
-            AlertDialog.Builder builder,
+            Context context,
+            Object alertDialogBuilder,
             int enforcementAdminUserId,
             EnforcedAdmin enforcedAdmin) {
-        requireNonNull(activity);
-        requireNonNull(builder);
+        requireNonNull(context);
+        requireNonNull(alertDialogBuilder);
         requireNonNull(enforcedAdmin);
         // The "Learn more" button appears only if the restriction is enforced by an admin in the
         // same profile group. Otherwise the admin package and its policies are not accessible to
         // the current user.
-        final UserManager um = UserManager.get(activity);
+        final UserManager um = UserManager.get(context);
         if (um.isSameProfileGroup(enforcementAdminUserId, um.getUserHandle())) {
-            setupLearnMoreButton(builder, () ->
-                    SHOW_ADMIN_POLICIES.accept(activity, enforcedAdmin));
+            setupLearnMoreButton((AlertDialog.Builder) alertDialogBuilder, () ->
+                    SHOW_ADMIN_POLICIES.accept((Activity) context, enforcedAdmin));
         }
     }
 
     @Override
     public void setupLearnMoreButtonToLaunchHelpPage(
-            Activity activity,
-            AlertDialog.Builder builder,
+            Context context,
+            Object alertDialogBuilder,
             String url) {
-        requireNonNull(activity);
-        requireNonNull(builder);
+        requireNonNull(context);
+        requireNonNull(alertDialogBuilder);
         requireNonNull(url);
-        setupLearnMoreButton(builder, () -> LAUNCH_HELP_PAGE.accept(activity, url));
+        setupLearnMoreButton((AlertDialog.Builder) alertDialogBuilder,
+                () -> LAUNCH_HELP_PAGE.accept((Activity) context, url));
     }
 
     private void setupLearnMoreButton(AlertDialog.Builder builder, Runnable runnable) {

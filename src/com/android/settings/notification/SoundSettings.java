@@ -25,9 +25,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
 import android.preference.SeekBarVolumizer;
-import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
@@ -35,7 +33,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -155,9 +152,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            return R.xml.sound_settings_v2;
-        }
         return R.xml.sound_settings;
     }
 
@@ -251,12 +245,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         controllers.add(new AlarmRingtonePreferenceController(context));
         controllers.add(new NotificationRingtonePreferenceController(context));
 
-        if (!FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)) {
-            // TODO(b/174964721): This should be removed when the flag is deprecated.
-            // === Work Sound Settings ===
-            controllers.add(new WorkSoundPreferenceController(context, fragment, lifecycle));
-        }
-
         // === Other Sound Settings ===
         final DialPadTonePreferenceController dialPadTonePreferenceController =
                 new DialPadTonePreferenceController(context, fragment, lifecycle);
@@ -312,29 +300,7 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
                     return buildPreferenceControllers(context, null /* fragment */,
                             null /* lifecycle */);
                 }
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)
-                            ? R.xml.sound_settings_v2 : R.xml.sound_settings;
-                    return Arrays.asList(sir);
-                }
             };
-
-    // === Work Sound Settings ===
-
-    void enableWorkSync() {
-        // TODO(b/174964721): This should be refined when the flag is deprecated.
-        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            final WorkSoundPreferenceController workSoundController =
-                    use(WorkSoundPreferenceController.class);
-            if (workSoundController != null) {
-                workSoundController.enableWorkSync();
-            }
-        }
-    }
 
     private void onPreferenceDataChanged(ListPreference preference) {
         if (mDialogFragment != null) {

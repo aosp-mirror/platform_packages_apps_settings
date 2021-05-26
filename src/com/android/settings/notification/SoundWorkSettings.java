@@ -23,13 +23,11 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -123,16 +121,12 @@ public class SoundWorkSettings extends DashboardFragment implements OnActivityRe
     }
 
     static final boolean isSupportWorkProfileSound(Context context) {
-        // TODO(b/174964721): Feature flag should be removed when silky home launched.
-        final boolean isSilkyEnabled = FeatureFlagUtils.isEnabled(context,
-                FeatureFlags.SILKY_HOME);
-
         final AudioHelper audioHelper = new AudioHelper(context);
         final boolean hasWorkProfile = audioHelper.getManagedProfileId(
                 UserManager.get(context)) != UserHandle.USER_NULL;
         final boolean shouldShowRingtoneSettings = !audioHelper.isSingleVolume();
 
-        return isSilkyEnabled && hasWorkProfile && shouldShowRingtoneSettings;
+        return hasWorkProfile && shouldShowRingtoneSettings;
     }
 
     void enableWorkSync() {

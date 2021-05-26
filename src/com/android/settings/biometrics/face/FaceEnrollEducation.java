@@ -37,6 +37,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -52,7 +53,9 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private FaceManager mFaceManager;
     private FaceEnrollAccessibilityToggle mSwitchDiversity;
 
-    private IllustrationVideoView mIllustrationNormal;
+    private boolean mIsUsingLottie;
+    private IllustrationVideoView mIllustrationDefault;
+    private LottieAnimationView mIllustrationLottie;
     private View mIllustrationAccessibility;
     private Handler mHandler;
     private Intent mResultIntent;
@@ -78,12 +81,10 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
                     updateHeaders(headerRes, descriptionRes);
 
                     if (isChecked) {
-                        mIllustrationNormal.stop();
-                        mIllustrationNormal.setVisibility(View.INVISIBLE);
+                        hideDefaultIllustration();
                         mIllustrationAccessibility.setVisibility(View.VISIBLE);
                     } else {
-                        mIllustrationNormal.setVisibility(View.VISIBLE);
-                        mIllustrationNormal.start();
+                        showDefaultIllustration();
                         mIllustrationAccessibility.setVisibility(View.INVISIBLE);
                     }
                 }
@@ -102,9 +103,18 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
 
-        mIllustrationNormal = findViewById(R.id.illustration_normal);
+        mIllustrationDefault = findViewById(R.id.illustration_default);
+        mIllustrationLottie = findViewById(R.id.illustration_lottie);
         mIllustrationAccessibility = findViewById(R.id.illustration_accessibility);
         mDescriptionText = findViewById(R.id.sud_layout_description);
+
+        mIsUsingLottie = getResources().getBoolean(R.bool.config_face_education_use_lottie);
+        if (mIsUsingLottie) {
+            mIllustrationDefault.stop();
+            mIllustrationDefault.setVisibility(View.INVISIBLE);
+            mIllustrationLottie.setVisibility(View.VISIBLE);
+            mIllustrationLottie.playAnimation();
+        }
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
 
@@ -255,5 +265,25 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         final GlifLayout layout = getLayout();
         layout.setHeaderText(headerText);
         layout.setDescriptionText(descriptionRes);
+    }
+
+    private void hideDefaultIllustration() {
+        if (mIsUsingLottie) {
+            mIllustrationLottie.cancelAnimation();
+            mIllustrationLottie.setVisibility(View.INVISIBLE);
+        } else {
+            mIllustrationDefault.stop();
+            mIllustrationDefault.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void showDefaultIllustration() {
+        if (mIsUsingLottie) {
+            mIllustrationLottie.setVisibility(View.VISIBLE);
+            mIllustrationLottie.playAnimation();
+        } else {
+            mIllustrationDefault.setVisibility(View.VISIBLE);
+            mIllustrationDefault.start();
+        }
     }
 }
