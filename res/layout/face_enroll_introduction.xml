@@ -21,7 +21,8 @@
     style="?attr/face_layout_theme"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:sudDescriptionText="@string/security_settings_face_enroll_introduction_message">
 
     <LinearLayout
         style="@style/SudContentFrame"
@@ -74,6 +75,7 @@
                 android:paddingTop="24dp">
 
                 <ImageView
+                    android:id="@+id/icon_glasses"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_face_enroll_introduction_glasses"/>
@@ -99,6 +101,7 @@
                 android:paddingTop="24dp">
 
                 <ImageView
+                    android:id="@+id/icon_looking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_face_enroll_introduction_visibility"/>
@@ -124,6 +127,7 @@
                 android:paddingTop="24dp">
 
                 <ImageView
+                    android:id="@+id/icon_security"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_face_enroll_introduction_shield"/>
