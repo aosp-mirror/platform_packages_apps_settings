@@ -25,16 +25,14 @@
         android:key="resetting_your_internet"
         android:title="@string/resetting_internet_text"
         android:selectable="false"
-        android:layout="@layout/resetting_internet"
-        settings:allowDividerBelow="true"/>
+        android:layout="@layout/resetting_internet"/>
 
     <!-- Airplane mode message -->
     <com.android.settingslib.widget.LayoutPreference
         android:key="airplane_mode_message"
         android:title="@string/condition_airplane_title"
         android:selectable="false"
-        android:layout="@layout/airplane_mode_message_preference"
-        settings:allowDividerBelow="true"/>
+        android:layout="@layout/airplane_mode_message_preference"/>
 
     <Preference
         android:key="connected_ethernet_network"
@@ -64,14 +62,12 @@
         android:key="wifi_switch"
         android:title="@string/wifi"
         android:summary="@string/wifi_switch_summary"
-        settings:allowDividerAbove="true"
         settings:keywords="@string/keywords_wifi"/>
 
     <Preference
         android:key="configure_wifi_settings"
         android:title="@string/network_and_internet_preferences_title"
         android:summary="@string/network_and_internet_preferences_summary"
-        settings:allowDividerAbove="true"
         android:fragment="com.android.settings.wifi.ConfigureWifiSettings"/>
 
     <Preference
