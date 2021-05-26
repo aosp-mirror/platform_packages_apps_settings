@@ -35,7 +35,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,7 +48,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetailsPreferenceController;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetailPreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -166,9 +164,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         use(AppStoragePreferenceController.class).setParentFragment(this);
         use(AppVersionPreferenceController.class).setParentFragment(this);
         use(InstantAppDomainsPreferenceController.class).setParentFragment(this);
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)) {
-            use(ExtraAppInfoPreferenceController.class).setPackageName(packageName);
-        }
+        use(ExtraAppInfoPreferenceController.class).setPackageName(packageName);
 
         final HibernationSwitchPreferenceController appHibernationSettings =
                 use(HibernationSwitchPreferenceController.class);
@@ -258,9 +254,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            return R.xml.app_info_settings_v2;
-        }
         return R.xml.app_info_settings;
     }
 
