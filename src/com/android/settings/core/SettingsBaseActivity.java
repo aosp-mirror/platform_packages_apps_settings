@@ -164,84 +164,22 @@ public class SettingsBaseActivity extends FragmentActivity {
     }
 
     @Override
-    public void startActivity(Intent intent) {
-        if (!Utils.isPageTransitionEnabled(this)) {
-            super.startActivity(intent);
-            return;
-        }
-
-        final int transitionType = getTransitionType(intent);
-        if (transitionType == TransitionType.TRANSITION_SLIDE) {
-            super.startActivity(intent, null);
-            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
-            return;
-        } else if (transitionType == TransitionType.TRANSITION_NONE) {
-            super.startActivity(intent, null);
-            return;
-        } else if (transitionType == TransitionType.TRANSITION_FADE) {
-            super.startActivity(intent, null);
-            overridePendingTransition(android.R.anim.fade_in, R.anim.sud_stay);
-            return;
-        }
-        super.startActivity(intent, createActivityOptionsBundleForTransition(null));
-    }
-
-    @Override
-    public void startActivity(Intent intent, @androidx.annotation.Nullable Bundle options) {
-        final int transitionType = getTransitionType(intent);
-        if (!Utils.isPageTransitionEnabled(this) ||
-                transitionType == TransitionType.TRANSITION_NONE) {
-            super.startActivity(intent, options);
-            return;
-        }
-
-        if (transitionType == TransitionType.TRANSITION_SLIDE) {
-            super.startActivity(intent, options);
-            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
-            return;
-        }
-        super.startActivity(intent, createActivityOptionsBundleForTransition(options));
-    }
-
-    @Override
-    public void startActivityForResult(Intent intent, int requestCode) {
-        final int transitionType = getTransitionType(intent);
-        // startActivity() will eventually calls startActivityForResult() with requestCode -1.
-        // Adding this condition to avoid multiple calls.
-        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST
-                || transitionType == TransitionType.TRANSITION_NONE) {
-            super.startActivityForResult(intent, requestCode);
-            return;
-        }
-
-        if (transitionType == TransitionType.TRANSITION_SLIDE) {
-            super.startActivityForResult(intent, requestCode, null);
-            overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
-            return;
-        }
-
-        super.startActivityForResult(intent, requestCode,
-                createActivityOptionsBundleForTransition(null));
-    }
-
-    @Override
     public void startActivityForResult(Intent intent, int requestCode,
             @androidx.annotation.Nullable Bundle options) {
         final int transitionType = getTransitionType(intent);
-        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST
-                || transitionType == TransitionType.TRANSITION_NONE) {
-            super.startActivityForResult(intent, requestCode, options);
+        if (Utils.isPageTransitionEnabled(this) &&
+                transitionType == TransitionType.TRANSITION_SHARED_AXIS) {
+            super.startActivityForResult(intent, requestCode,
+                    createActivityOptionsBundleForTransition(options));
             return;
         }
 
+        super.startActivityForResult(intent, requestCode, options);
         if (transitionType == TransitionType.TRANSITION_SLIDE) {
-            super.startActivityForResult(intent, requestCode, options);
             overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
-            return;
+        } else if (transitionType == TransitionType.TRANSITION_FADE) {
+            overridePendingTransition(android.R.anim.fade_in, R.anim.sud_stay);
         }
-
-        super.startActivityForResult(intent, requestCode,
-                createActivityOptionsBundleForTransition(options));
     }
 
     @Override
