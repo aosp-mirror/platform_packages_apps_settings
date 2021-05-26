@@ -60,6 +60,7 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.RadioButtonPreference;
 
@@ -125,7 +126,7 @@ public class AdvancedPowerUsageDetailTest {
     private Context mContext;
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
-    private Preference mFooterPreference;
+    private FooterPreference mFooterPreference;
     private RadioButtonPreference mRestrictedPreference;
     private RadioButtonPreference mOptimizePreference;
     private RadioButtonPreference mUnrestrictedPreference;
@@ -206,7 +207,7 @@ public class AdvancedPowerUsageDetailTest {
 
         mForegroundPreference = new Preference(mContext);
         mBackgroundPreference = new Preference(mContext);
-        mFooterPreference = new Preference(mContext);
+        mFooterPreference = new FooterPreference(mContext);
         mRestrictedPreference = new RadioButtonPreference(mContext);
         mOptimizePreference = new RadioButtonPreference(mContext);
         mUnrestrictedPreference = new RadioButtonPreference(mContext);
