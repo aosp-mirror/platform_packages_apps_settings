@@ -491,11 +491,11 @@ public class PanelFragment extends Fragment {
             mPanelClosedKey = PanelClosedKeys.KEY_SEE_MORE;
             final FragmentActivity activity = getActivity();
             if (mPanel.isCustomizedButtonUsed()) {
-                mPanel.onClickCustomizedButton();
+                mPanel.onClickCustomizedButton(activity);
             } else {
                 activity.startActivityForResult(mPanel.getSeeMoreIntent(), 0);
+                activity.finish();
             }
-            activity.finish();
         };
     }
 

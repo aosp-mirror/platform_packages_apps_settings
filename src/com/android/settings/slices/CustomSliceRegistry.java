@@ -40,7 +40,6 @@ import com.android.settings.location.LocationSlice;
 import com.android.settings.media.MediaOutputIndicatorSlice;
 import com.android.settings.media.RemoteMediaSlice;
 import com.android.settings.network.ProviderModelSlice;
-import com.android.settings.network.TurnOnWifiSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
 import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
@@ -337,7 +336,6 @@ public class CustomSliceRegistry {
         sUriToSlice.put(DARK_THEME_SLICE_URI, DarkThemeSlice.class);
         sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
         sUriToSlice.put(ALWAYS_ON_SLICE_URI, AlwaysOnDisplaySlice.class);
-        sUriToSlice.put(TURN_ON_WIFI_SLICE_URI, TurnOnWifiSlice.class);
     }
 
     public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {
