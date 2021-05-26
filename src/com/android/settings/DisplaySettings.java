@@ -19,10 +19,7 @@ package com.android.settings;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
-import android.util.FeatureFlagUtils;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.BrightnessLevelPreferenceController;
 import com.android.settings.display.CameraGesturePreferenceController;
@@ -38,7 +35,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -57,9 +53,6 @@ public class DisplaySettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            return R.xml.display_settings_v2;
-        }
         return R.xml.display_settings;
     }
 
@@ -93,16 +86,7 @@ public class DisplaySettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)
-                            ? R.xml.display_settings_v2 : R.xml.display_settings;
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.display_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
