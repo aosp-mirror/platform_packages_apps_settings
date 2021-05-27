@@ -49,7 +49,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.text.TextUtils.TruncateAt;
-import android.text.method.ScrollingMovementMethod;
 import android.util.EventLog;
 import android.util.Log;
 import android.view.Display;
@@ -338,7 +337,6 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             mActionButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
             mActionButton.setFilterTouchesWhenObscured(true);
             mAddMsg = dialog.findViewById(R.id.add_msg_simplified);
-            mAddMsg.setMovementMethod(new ScrollingMovementMethod());
             mAddMsg.setText(mAddMsgText);
             mAdminWarning = dialog.findViewById(R.id.admin_warning_simplified);
             mAdminWarning.setText(getString(R.string.device_admin_warning_simplified,

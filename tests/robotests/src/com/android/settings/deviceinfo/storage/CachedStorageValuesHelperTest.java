@@ -16,7 +16,9 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.AUDIO_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.CACHE_APPS_SIZE_KEY;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.DOCUMENTS_AND_OTHER_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.EXTERNAL_APP_BYTES;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
         .EXTERNAL_AUDIO_BYTES;
@@ -28,15 +30,15 @@ import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
         .EXTERNAL_VIDEO_BYTES;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.FREE_BYTES_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.GAME_APPS_SIZE_KEY;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.MUSIC_APPS_SIZE_KEY;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.IMAGES_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.OTHER_APPS_SIZE_KEY;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.PHOTO_APPS_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper
         .SHARED_PREFERENCES_NAME;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.TIMESTAMP_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.TOTAL_BYTES_KEY;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.TRASH_SIZE_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.USER_ID_KEY;
-import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.VIDEO_APPS_SIZE_KEY;
+import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.VIDEOS_SIZE_KEY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -81,9 +83,9 @@ public class CachedStorageValuesHelperTest {
         mSharedPreferences
                 .edit()
                 .putLong(GAME_APPS_SIZE_KEY, 0)
-                .putLong(MUSIC_APPS_SIZE_KEY, 10)
-                .putLong(VIDEO_APPS_SIZE_KEY, 100)
-                .putLong(PHOTO_APPS_SIZE_KEY, 1000)
+                .putLong(AUDIO_SIZE_KEY, 10)
+                .putLong(VIDEOS_SIZE_KEY, 100)
+                .putLong(IMAGES_SIZE_KEY, 1000)
                 .putLong(OTHER_APPS_SIZE_KEY, 10000)
                 .putLong(CACHE_APPS_SIZE_KEY, 100000)
                 .putLong(EXTERNAL_TOTAL_BYTES, 2)
@@ -104,14 +106,16 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedAppsStorageResult_cachedValuesAreLoaded() {
+    public void getCachedStorageResult_cachedValuesAreLoaded() {
         when(mMockClock.getCurrentTime()).thenReturn(10001L);
         mSharedPreferences
                 .edit()
                 .putLong(GAME_APPS_SIZE_KEY, 1)
-                .putLong(MUSIC_APPS_SIZE_KEY, 10)
-                .putLong(VIDEO_APPS_SIZE_KEY, 100)
-                .putLong(PHOTO_APPS_SIZE_KEY, 1000)
+                .putLong(AUDIO_SIZE_KEY, 10)
+                .putLong(VIDEOS_SIZE_KEY, 100)
+                .putLong(IMAGES_SIZE_KEY, 1000)
+                .putLong(DOCUMENTS_AND_OTHER_SIZE_KEY, 1001)
+                .putLong(TRASH_SIZE_KEY, 1002)
                 .putLong(OTHER_APPS_SIZE_KEY, 10000)
                 .putLong(CACHE_APPS_SIZE_KEY, 100000)
                 .putLong(EXTERNAL_TOTAL_BYTES, 222222)
@@ -125,15 +129,17 @@ public class CachedStorageValuesHelperTest {
                 .putLong(TIMESTAMP_KEY, 10000L)
                 .apply();
 
-        final SparseArray<StorageAsyncLoader.AppsStorageResult> result =
-                mCachedValuesHelper.getCachedAppsStorageResult();
+        final SparseArray<StorageAsyncLoader.StorageResult> result =
+                mCachedValuesHelper.getCachedStorageResult();
 
-        StorageAsyncLoader.AppsStorageResult primaryResult = result.get(0);
+        StorageAsyncLoader.StorageResult primaryResult = result.get(0);
         assertThat(primaryResult.gamesSize).isEqualTo(1L);
-        assertThat(primaryResult.musicAppsSize).isEqualTo(10L);
-        assertThat(primaryResult.videoAppsSize).isEqualTo(100L);
-        assertThat(primaryResult.photosAppsSize).isEqualTo(1000L);
-        assertThat(primaryResult.otherAppsSize).isEqualTo(10000L);
+        assertThat(primaryResult.audioSize).isEqualTo(10L);
+        assertThat(primaryResult.videosSize).isEqualTo(100L);
+        assertThat(primaryResult.imagesSize).isEqualTo(1000L);
+        assertThat(primaryResult.documentsAndOtherSize).isEqualTo(1001L);
+        assertThat(primaryResult.trashSize).isEqualTo(1002L);
+        assertThat(primaryResult.allAppsExceptGamesSize).isEqualTo(10000L);
         assertThat(primaryResult.cacheSize).isEqualTo(100000L);
         assertThat(primaryResult.externalStats.totalBytes).isEqualTo(222222L);
         assertThat(primaryResult.externalStats.audioBytes).isEqualTo(22L);
@@ -148,9 +154,9 @@ public class CachedStorageValuesHelperTest {
         mSharedPreferences
                 .edit()
                 .putLong(GAME_APPS_SIZE_KEY, 0)
-                .putLong(MUSIC_APPS_SIZE_KEY, 10)
-                .putLong(VIDEO_APPS_SIZE_KEY, 100)
-                .putLong(PHOTO_APPS_SIZE_KEY, 1000)
+                .putLong(AUDIO_SIZE_KEY, 10)
+                .putLong(VIDEOS_SIZE_KEY, 100)
+                .putLong(IMAGES_SIZE_KEY, 1000)
                 .putLong(OTHER_APPS_SIZE_KEY, 10000)
                 .putLong(CACHE_APPS_SIZE_KEY, 100000)
                 .putLong(EXTERNAL_TOTAL_BYTES, 2)
@@ -169,14 +175,14 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedAppsStorageResult_nullIfDataIsStale() {
+    public void getCachedStorageResult_nullIfDataIsStale() {
         when(mMockClock.getCurrentTime()).thenReturn(10000000L);
         mSharedPreferences
                 .edit()
                 .putLong(GAME_APPS_SIZE_KEY, 0)
-                .putLong(MUSIC_APPS_SIZE_KEY, 10)
-                .putLong(VIDEO_APPS_SIZE_KEY, 100)
-                .putLong(PHOTO_APPS_SIZE_KEY, 1000)
+                .putLong(AUDIO_SIZE_KEY, 10)
+                .putLong(VIDEOS_SIZE_KEY, 100)
+                .putLong(IMAGES_SIZE_KEY, 1000)
                 .putLong(OTHER_APPS_SIZE_KEY, 10000)
                 .putLong(CACHE_APPS_SIZE_KEY, 100000)
                 .putLong(EXTERNAL_TOTAL_BYTES, 2)
@@ -190,8 +196,8 @@ public class CachedStorageValuesHelperTest {
                 .putLong(TIMESTAMP_KEY, 10000L)
                 .apply();
 
-        final SparseArray<StorageAsyncLoader.AppsStorageResult> result =
-                mCachedValuesHelper.getCachedAppsStorageResult();
+        final SparseArray<StorageAsyncLoader.StorageResult> result =
+                mCachedValuesHelper.getCachedStorageResult();
         assertThat(result).isNull();
     }
 
@@ -201,9 +207,9 @@ public class CachedStorageValuesHelperTest {
         mSharedPreferences
                 .edit()
                 .putLong(GAME_APPS_SIZE_KEY, 0)
-                .putLong(MUSIC_APPS_SIZE_KEY, 10)
-                .putLong(VIDEO_APPS_SIZE_KEY, 100)
-                .putLong(PHOTO_APPS_SIZE_KEY, 1000)
+                .putLong(AUDIO_SIZE_KEY, 10)
+                .putLong(VIDEOS_SIZE_KEY, 100)
+                .putLong(IMAGES_SIZE_KEY, 1000)
                 .putLong(OTHER_APPS_SIZE_KEY, 10000)
                 .putLong(CACHE_APPS_SIZE_KEY, 100000)
                 .putLong(EXTERNAL_TOTAL_BYTES, 2)
@@ -222,14 +228,14 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedAppsStorageResult_nullIfWrongUser() {
+    public void getCachedStorageResult_nullIfWrongUser() {
         when(mMockClock.getCurrentTime()).thenReturn(10001L);
         mSharedPreferences
                 .edit()
                 .putLong(GAME_APPS_SIZE_KEY, 0)
-                .putLong(MUSIC_APPS_SIZE_KEY, 10)
-                .putLong(VIDEO_APPS_SIZE_KEY, 100)
-                .putLong(PHOTO_APPS_SIZE_KEY, 1000)
+                .putLong(AUDIO_SIZE_KEY, 10)
+                .putLong(VIDEOS_SIZE_KEY, 100)
+                .putLong(IMAGES_SIZE_KEY, 1000)
                 .putLong(OTHER_APPS_SIZE_KEY, 10000)
                 .putLong(CACHE_APPS_SIZE_KEY, 100000)
                 .putLong(EXTERNAL_TOTAL_BYTES, 2)
@@ -243,8 +249,8 @@ public class CachedStorageValuesHelperTest {
                 .putLong(TIMESTAMP_KEY, 10000L)
                 .apply();
 
-        final SparseArray<StorageAsyncLoader.AppsStorageResult> result =
-                mCachedValuesHelper.getCachedAppsStorageResult();
+        final SparseArray<StorageAsyncLoader.StorageResult> result =
+                mCachedValuesHelper.getCachedStorageResult();
         assertThat(result).isNull();
     }
 
@@ -255,9 +261,9 @@ public class CachedStorageValuesHelperTest {
     }
 
     @Test
-    public void getCachedAppsStorageResult_nullIfEmpty() {
-        final SparseArray<StorageAsyncLoader.AppsStorageResult> result =
-                mCachedValuesHelper.getCachedAppsStorageResult();
+    public void getCachedStorageResult_nullIfEmpty() {
+        final SparseArray<StorageAsyncLoader.StorageResult> result =
+                mCachedValuesHelper.getCachedStorageResult();
         assertThat(result).isNull();
     }
 
@@ -266,13 +272,13 @@ public class CachedStorageValuesHelperTest {
         when(mMockClock.getCurrentTime()).thenReturn(10000L);
         final StorageStatsSource.ExternalStorageStats externalStats =
                 new StorageStatsSource.ExternalStorageStats(22222L, 2L, 20L, 200L, 2000L);
-        final StorageAsyncLoader.AppsStorageResult result =
-                new StorageAsyncLoader.AppsStorageResult();
+        final StorageAsyncLoader.StorageResult result =
+                new StorageAsyncLoader.StorageResult();
         result.gamesSize = 1L;
-        result.musicAppsSize = 10L;
-        result.videoAppsSize = 100L;
-        result.photosAppsSize = 1000L;
-        result.otherAppsSize = 10000L;
+        result.audioSize = 10L;
+        result.videosSize = 100L;
+        result.imagesSize = 1000L;
+        result.allAppsExceptGamesSize = 10000L;
         result.cacheSize = 100000L;
         result.externalStats = externalStats;
         final PrivateStorageInfo info = new PrivateStorageInfo(1000L, 6000L);
@@ -280,9 +286,9 @@ public class CachedStorageValuesHelperTest {
         mCachedValuesHelper.cacheResult(info, result);
 
         assertThat(mSharedPreferences.getLong(GAME_APPS_SIZE_KEY, -1)).isEqualTo(1L);
-        assertThat(mSharedPreferences.getLong(MUSIC_APPS_SIZE_KEY, -1)).isEqualTo(10L);
-        assertThat(mSharedPreferences.getLong(VIDEO_APPS_SIZE_KEY, -1)).isEqualTo(100L);
-        assertThat(mSharedPreferences.getLong(PHOTO_APPS_SIZE_KEY, -1)).isEqualTo(1000L);
+        assertThat(mSharedPreferences.getLong(AUDIO_SIZE_KEY, -1)).isEqualTo(10L);
+        assertThat(mSharedPreferences.getLong(VIDEOS_SIZE_KEY, -1)).isEqualTo(100L);
+        assertThat(mSharedPreferences.getLong(IMAGES_SIZE_KEY, -1)).isEqualTo(1000L);
         assertThat(mSharedPreferences.getLong(OTHER_APPS_SIZE_KEY, -1)).isEqualTo(10000L);
         assertThat(mSharedPreferences.getLong(CACHE_APPS_SIZE_KEY, -1)).isEqualTo(100000L);
         assertThat(mSharedPreferences.getLong(EXTERNAL_TOTAL_BYTES, -1)).isEqualTo(22222L);

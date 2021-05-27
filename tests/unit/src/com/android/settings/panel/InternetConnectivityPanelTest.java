@@ -34,6 +34,7 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -61,19 +62,22 @@ public class InternetConnectivityPanelTest {
             ApplicationProvider.getApplicationContext(), "provider_internet_settings");
     public static final String TITLE_APM = ResourcesUtils.getResourcesString(
             ApplicationProvider.getApplicationContext(), "airplane_mode");
-    public static final String SUBTITLE_WIFI_IS_TURNED_ON = ResourcesUtils.getResourcesString(
-            ApplicationProvider.getApplicationContext(), "wifi_is_turned_on_subtitle");
+    public static final String SUBTITLE_TEXT_WIFI_IS_OFF =
+            ResourcesUtils.getResourcesString(ApplicationProvider.getApplicationContext(),
+                    "wifi_is_off");
     public static final String SUBTITLE_TEXT_TAP_A_NETWORK_TO_CONNECT =
             ResourcesUtils.getResourcesString(ApplicationProvider.getApplicationContext(),
                     "tap_a_network_to_connect");
-    public static final String BUTTON_SETTINGS = ResourcesUtils.getResourcesString(
-            ApplicationProvider.getApplicationContext(), "settings_button");
     public static final String SUBTITLE_NON_CARRIER_NETWORK_UNAVAILABLE =
             ResourcesUtils.getResourcesString(ApplicationProvider.getApplicationContext(),
                     "non_carrier_network_unavailable");
     public static final String SUBTITLE_ALL_NETWORK_UNAVAILABLE =
             ResourcesUtils.getResourcesString(ApplicationProvider.getApplicationContext(),
                     "all_network_unavailable");
+    public static final String BUTTON_TURN_ON_WIFI = ResourcesUtils.getResourcesString(
+            ApplicationProvider.getApplicationContext(), "turn_on_wifi");
+    public static final String BUTTON_TURN_OFF_WIFI = ResourcesUtils.getResourcesString(
+            ApplicationProvider.getApplicationContext(), "turn_off_wifi");
 
     @Rule
     public final MockitoRule mMocks = MockitoJUnit.rule();
@@ -87,6 +91,8 @@ public class InternetConnectivityPanelTest {
     private WifiManager mWifiManager;
     @Mock
     private ProviderModelSliceHelper mProviderModelSliceHelper;
+    @Mock
+    private FragmentActivity mPanelActivity;
 
     private Context mContext;
     private InternetConnectivityPanel mPanel;
@@ -128,13 +134,21 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void getSubTitle_apmOnWifiOn_shouldWifiIsTurnedOn() {
+    public void getSubTitle_apmOnWifiOn_shouldBeNull() {
         doReturn(true).when(mInternetUpdater).isAirplaneModeOn();
         doReturn(true).when(mInternetUpdater).isWifiEnabled();
 
+        assertThat(mPanel.getSubTitle()).isNull();
+    }
+
+    @Test
+    public void getSubTitle_apmOffWifiOff_wifiIsOn() {
+        doReturn(false).when(mInternetUpdater).isAirplaneModeOn();
+        doReturn(false).when(mInternetUpdater).isWifiEnabled();
+
         mPanel.updatePanelTitle();
 
-        assertThat(mPanel.getSubTitle()).isEqualTo(SUBTITLE_WIFI_IS_TURNED_ON);
+        assertThat(mPanel.getSubTitle()).isEqualTo(SUBTITLE_TEXT_WIFI_IS_OFF);
     }
 
     @Test
@@ -190,26 +204,17 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void getCustomizedButtonTitle_apmOff_shouldBeSettings() {
-        doReturn(false).when(mInternetUpdater).isAirplaneModeOn();
-
-        assertThat(mPanel.getCustomizedButtonTitle()).isEqualTo(BUTTON_SETTINGS);
-    }
-
-    @Test
-    public void getCustomizedButtonTitle_apmOnWifiOff_shouldBeNull() {
-        doReturn(true).when(mInternetUpdater).isAirplaneModeOn();
+    public void getCustomizedButtonTitle_wifiOff_turnOnWifi() {
         doReturn(false).when(mInternetUpdater).isWifiEnabled();
 
-        assertThat(mPanel.getCustomizedButtonTitle()).isNull();
+        assertThat(mPanel.getCustomizedButtonTitle()).isEqualTo(BUTTON_TURN_ON_WIFI);
     }
 
     @Test
-    public void getCustomizedButtonTitle_apmOnWifiOn_shouldBeSettings() {
-        doReturn(true).when(mInternetUpdater).isAirplaneModeOn();
+    public void getCustomizedButtonTitle_wifiOn_turnOffWifi() {
         doReturn(true).when(mInternetUpdater).isWifiEnabled();
 
-        assertThat(mPanel.getCustomizedButtonTitle()).isEqualTo(BUTTON_SETTINGS);
+        assertThat(mPanel.getCustomizedButtonTitle()).isEqualTo(BUTTON_TURN_OFF_WIFI);
     }
 
     @Test
@@ -227,92 +232,60 @@ public class InternetConnectivityPanelTest {
     public void getSlices_providerModelEnabled_containsNecessarySlices() {
         List<Uri> uris = mPanel.getSlices();
 
-        assertThat(uris).containsExactly(
-                CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI,
-                CustomSliceRegistry.TURN_ON_WIFI_SLICE_URI);
+        assertThat(uris).containsExactly(CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI);
     }
 
     @Test
-    public void getSeeMoreIntent_notNull() {
-        assertThat(mPanel.getSeeMoreIntent()).isNotNull();
+    public void getSeeMoreIntent_shouldBeNull() {
+        assertThat(mPanel.getSeeMoreIntent()).isNull();
     }
 
     @Test
-    public void onAirplaneModeOn_apmOff_onTitleChanged() {
-        doReturn(false).when(mInternetUpdater).isAirplaneModeOn();
-        clearInvocations(mPanelContentCallback);
-
-        mPanel.onAirplaneModeChanged(false);
-
-        verify(mPanelContentCallback).onTitleChanged();
-    }
-
-    @Test
-    public void onAirplaneModeOn_apmOnWifiOff_onTitleChanged() {
-        doReturn(true).when(mInternetUpdater).isAirplaneModeOn();
-        doReturn(false).when(mInternetUpdater).isWifiEnabled();
-        clearInvocations(mPanelContentCallback);
-
-        mPanel.onAirplaneModeChanged(true);
-
-        verify(mPanelContentCallback).onTitleChanged();
-    }
-
-    @Test
-    public void onAirplaneModeOn_apmOnWifiOn_onHeaderChanged() {
-        doReturn(true).when(mInternetUpdater).isAirplaneModeOn();
+    public void onClickCustomizedButton_wifiOn_setWifiOff() {
         doReturn(true).when(mInternetUpdater).isWifiEnabled();
+
+        mPanel.onClickCustomizedButton(mPanelActivity);
+
+        verify(mWifiManager).setWifiEnabled(false);
+    }
+
+    @Test
+    public void onClickCustomizedButton_wifiOff_setWifiOn() {
+        doReturn(false).when(mInternetUpdater).isWifiEnabled();
+
+        mPanel.onClickCustomizedButton(mPanelActivity);
+
+        verify(mWifiManager).setWifiEnabled(true);
+    }
+
+    @Test
+    public void onClickCustomizedButton_shouldNotFinishActivity() {
+        mPanel.onClickCustomizedButton(mPanelActivity);
+
+        verify(mPanelActivity, never()).finish();
+    }
+
+    @Test
+    public void updatePanelTitle_onHeaderChanged() {
         clearInvocations(mPanelContentCallback);
 
-        mPanel.onAirplaneModeChanged(true);
+        mPanel.updatePanelTitle();
 
         verify(mPanelContentCallback).onHeaderChanged();
     }
 
     @Test
-    public void onAirplaneModeOn_onCustomizedButtonStateChanged() {
-        doReturn(true).when(mInternetUpdater).isAirplaneModeOn();
+    public void onWifiEnabledChanged_wifiOff_onCustomizedButtonStateChanged() {
+        doReturn(false).when(mInternetUpdater).isWifiEnabled();
         clearInvocations(mPanelContentCallback);
 
-        mPanel.onAirplaneModeChanged(true);
+        mPanel.onWifiEnabledChanged(false);
 
         verify(mPanelContentCallback).onCustomizedButtonStateChanged();
     }
 
     @Test
-    public void onWifiEnabledChanged_apmOff_onTitleChanged() {
-        doReturn(false).when(mInternetUpdater).isAirplaneModeOn();
-        clearInvocations(mPanelContentCallback);
-
-        mPanel.onWifiEnabledChanged(false);
-
-        verify(mPanelContentCallback).onTitleChanged();
-    }
-
-    @Test
-    public void onWifiEnabledChanged_apmOnWifiOff_onTitleChanged() {
-        doReturn(true).when(mInternetUpdater).isAirplaneModeOn();
-        doReturn(false).when(mInternetUpdater).isWifiEnabled();
-        clearInvocations(mPanelContentCallback);
-
-        mPanel.onWifiEnabledChanged(true);
-
-        verify(mPanelContentCallback).onTitleChanged();
-    }
-
-    @Test
-    public void onWifiEnabledChanged_apmOnWifiOn_onHeaderChanged() {
-        doReturn(true).when(mInternetUpdater).isAirplaneModeOn();
-        doReturn(true).when(mInternetUpdater).isWifiEnabled();
-        clearInvocations(mPanelContentCallback);
-
-        mPanel.onWifiEnabledChanged(true);
-
-        verify(mPanelContentCallback).onHeaderChanged();
-    }
-
-    @Test
-    public void onWifiEnabledChanged_onCustomizedButtonStateChanged() {
+    public void onWifiEnabledChanged_wifiOn_onCustomizedButtonStateChanged() {
         doReturn(true).when(mInternetUpdater).isWifiEnabled();
         clearInvocations(mPanelContentCallback);
 
