@@ -22,6 +22,7 @@ import static android.app.AppOpsManager.OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED;
 import static android.provider.DeviceConfig.NAMESPACE_APP_HIBERNATION;
 
 import static com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED;
+import static com.android.settings.Utils.PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -142,5 +143,19 @@ public class HibernationSwitchPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
+    }
+
+    @Test
+    public void updateState_exemptedByDefaultPackageOverriddenByPreSFlag_shouldCheck() {
+        DeviceConfig.setProperty(NAMESPACE_APP_HIBERNATION, PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS,
+                "true", true /* makeDefault */);
+        when(mAppOpsManager.unsafeCheckOpNoThrow(
+                eq(OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED), anyInt(), eq(EXEMPTED_PACKAGE_NAME)))
+                .thenReturn(MODE_DEFAULT);
+        mController.setPackage(EXEMPTED_PACKAGE_NAME);
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setChecked(true);
     }
 }

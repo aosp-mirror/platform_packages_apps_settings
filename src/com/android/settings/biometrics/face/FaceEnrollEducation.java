@@ -112,7 +112,6 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         if (mIsUsingLottie) {
             mIllustrationDefault.stop();
             mIllustrationDefault.setVisibility(View.INVISIBLE);
-            mIllustrationLottie.setAnimation(R.raw.face_education_lottie);
             mIllustrationLottie.setVisibility(View.VISIBLE);
             mIllustrationLottie.playAnimation();
         }

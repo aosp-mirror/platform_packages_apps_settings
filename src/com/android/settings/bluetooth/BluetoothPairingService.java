@@ -177,6 +177,15 @@ public final class BluetoothPairingService extends Service {
         pairingDialogIntent.setClass(this, BluetoothPairingService.class);
         pairingDialogIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
         pairingDialogIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, type);
+
+        if (type == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION
+                || type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY
+                || type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {
+            int pairingKey = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY,
+                    BluetoothDevice.ERROR);
+            pairingDialogIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_KEY, pairingKey);
+        }
+
         PendingIntent pairIntent = PendingIntent.getService(this, 0, pairingDialogIntent,
                 PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
 

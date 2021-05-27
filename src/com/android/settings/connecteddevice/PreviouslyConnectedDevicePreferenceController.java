@@ -103,6 +103,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
             final Context context = screen.getContext();
             mBluetoothDeviceUpdater.setPrefContext(context);
             mSavedDockUpdater.setPreferenceContext(context);
+            mBluetoothDeviceUpdater.forceUpdate();
         }
     }
 

@@ -51,8 +51,8 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -189,6 +189,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mPrefContext = screen.getContext();
         mAppListPrefGroup = screen.findPreference(mPreferenceKey);
         mAppListPrefGroup.setOrderingAsAdded(false);
+        mAppListPrefGroup.setTitle(
+            mPrefContext.getString(R.string.battery_app_usage_for_past_24));
         mFooterPreference = screen.findPreference(KEY_FOOTER_PREF);
         // Removes footer first until usage data is loaded to avoid flashing.
         if (mFooterPreference != null) {
@@ -216,15 +218,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final BatteryHistEntry histEntry = diffEntry.mBatteryHistEntry;
         final String packageName = histEntry.mPackageName;
         final boolean isAppEntry = histEntry.isAppEntry();
-        // Checks whether the package is installed or not.
-        boolean isValidPackage = true;
-        if (isAppEntry) {
-            if (mBatteryUtils == null) {
-                mBatteryUtils = BatteryUtils.getInstance(mPrefContext);
-            }
-            isValidPackage = mBatteryUtils.getPackageUid(packageName)
-                != BatteryUtils.UID_NULL;
-        }
         mMetricsFeatureProvider.action(
             mPrefContext,
             isAppEntry
@@ -233,15 +226,12 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             new Pair(ConvertUtils.METRIC_KEY_PACKAGE, packageName),
             new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, histEntry.mBatteryLevel),
             new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, powerPref.getPercent()));
-        Log.d(TAG, String.format("handleClick() label=%s key=%s isValid:%b\n%s",
-            diffEntry.getAppLabel(), histEntry.getKey(), isValidPackage, histEntry));
-        if (isValidPackage) {
-            AdvancedPowerUsageDetail.startBatteryDetailPage(
+        Log.d(TAG, String.format("handleClick() label=%s key=%s enntry=\n%s",
+                diffEntry.getAppLabel(), histEntry.getKey(), histEntry));
+        AdvancedPowerUsageDetail.startBatteryDetailPage(
                 mActivity, mFragment, diffEntry, powerPref.getPercent(),
                 isValidToShowSummary(packageName), getSlotInformation());
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @Override
@@ -434,6 +424,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             pref.setSingleLineTitle(true);
             // Sets the BatteryDiffEntry to preference for launching detailed page.
             pref.setBatteryDiffEntry(entry);
+            pref.setEnabled(entry.validForRestriction());
             setPreferenceSummary(pref, entry);
             if (!isAdded) {
                 mAppListPrefGroup.addPreference(pref);
@@ -627,7 +618,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return true;
     }
 
-    static List<BatteryDiffEntry> getBatteryLast24HrUsageData(Context context) {
+    public static List<BatteryDiffEntry> getBatteryLast24HrUsageData(Context context) {
         final long start = System.currentTimeMillis();
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
             FeatureFactory.getFactory(context)
