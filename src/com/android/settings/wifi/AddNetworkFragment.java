@@ -86,6 +86,13 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mUIController.showSecurityFields(
+            /* refreshEapMethods */ false, /* refreshCertificates */ true);
+    }
+
+    @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         mUIController.updatePassword();
@@ -110,7 +117,6 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER) {
             if (resultCode != Activity.RESULT_OK) {
                 return;
