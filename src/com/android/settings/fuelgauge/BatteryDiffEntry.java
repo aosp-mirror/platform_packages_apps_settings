@@ -76,11 +76,6 @@ public class BatteryDiffEntry {
         mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
         mBatteryHistEntry = batteryHistEntry;
         mUserManager = context.getSystemService(UserManager.class);
-        if (foregroundUsageTimeInMs == 0
-                && backgroundUsageTimeInMs == 0
-                && consumePower != 0) {
-            Log.w(TAG, "abnornal BatteryDiffEntry:\n" + this);
-        }
     }
 
     /** Sets the total consumed power in a specific time slot. */
@@ -128,8 +123,16 @@ public class BatteryDiffEntry {
 
     /** Gets the searching package name for UID battery type. */
     public String getPackageName() {
-        return mDefaultPackageName != null
+        final String packageName = mDefaultPackageName != null
             ? mDefaultPackageName : mBatteryHistEntry.mPackageName;
+        if (packageName == null) {
+            return packageName;
+        }
+        // Removes potential appended process name in the PackageName.
+        // From "com.opera.browser:privileged_process0" to "com.opera.browser"
+        final String[] splittedPackageNames = packageName.split(":");
+        return splittedPackageNames != null && splittedPackageNames.length > 0
+            ? splittedPackageNames[0] : packageName;
     }
 
     /** Whether this item is valid for users to launch restriction page? */
@@ -168,8 +171,6 @@ public class BatteryDiffEntry {
         }
         // Both nameAndIcon and restriction configuration have cached data.
         if (nameAndIcon != null && validForRestriction != null) {
-            Log.w(TAG, String.format("cannot find cache data nameAndIcon:%s "
-                + "validForRestriction:%s", nameAndIcon, validForRestriction));
             return;
         }
         mIsLoaded = true;
@@ -270,7 +271,7 @@ public class BatteryDiffEntry {
     }
 
     private void loadNameAndIconForUid() {
-        final String packageName = mBatteryHistEntry.mPackageName;
+        final String packageName = getPackageName();
         final PackageManager packageManager = mContext.getPackageManager();
         // Gets the application label from PackageManager.
         if (packageName != null && packageName.length() != 0) {
@@ -332,9 +333,9 @@ public class BatteryDiffEntry {
                       /*withSeconds=*/ true, /*collapseTimeUnit=*/ false),
                   StringUtil.formatElapsedTime(mContext, mBackgroundUsageTimeInMs,
                       /*withSeconds=*/ true, /*collapseTimeUnit=*/ false)))
-            .append(String.format("\n\tpackage:%s uid:%d userId:%d",
-                  mBatteryHistEntry.mPackageName, mBatteryHistEntry.mUid,
-                  mBatteryHistEntry.mUserId));
+            .append(String.format("\n\tpackage:%s|%s uid:%d userId:%d",
+                  mBatteryHistEntry.mPackageName, getPackageName(),
+                  mBatteryHistEntry.mUid, mBatteryHistEntry.mUserId));
         return builder.toString();
     }
 
