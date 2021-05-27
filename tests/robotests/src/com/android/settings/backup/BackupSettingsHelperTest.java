@@ -35,10 +35,8 @@ import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -83,7 +81,6 @@ public class BackupSettingsHelperTest {
         when(mBackupManager.getCurrentTransport()).thenReturn("test_transport");
         mBackupSettingsHelper = new BackupSettingsHelper(mContext);
         mUserManager = Shadow.extract(mContext.getSystemService(Context.USER_SERVICE));
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test

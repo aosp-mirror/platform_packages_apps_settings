@@ -32,12 +32,10 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.After;
@@ -64,7 +62,6 @@ public class TopLevelBatteryPreferenceControllerTest {
         mController = new TopLevelBatteryPreferenceController(mContext, "test_key");
         mBatterySettingsFeatureProvider =
                 mFeatureFactory.batterySettingsFeatureProvider;
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @After
