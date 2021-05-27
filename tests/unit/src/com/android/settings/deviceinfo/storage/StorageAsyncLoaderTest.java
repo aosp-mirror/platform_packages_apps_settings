@@ -101,22 +101,22 @@ public class StorageAsyncLoaderTest {
         addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
         addPackage(PACKAGE_NAME_2, 0, 100, 1000, ApplicationInfo.CATEGORY_UNDEFINED);
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.StorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(PRIMARY_USER_ID).gamesSize).isEqualTo(0L);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(1111L);
+        assertThat(result.get(PRIMARY_USER_ID).allAppsExceptGamesSize).isEqualTo(1111L);
     }
 
     @Test
     public void testGamesAreFiltered() throws Exception {
         addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_GAME);
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.StorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(PRIMARY_USER_ID).gamesSize).isEqualTo(11L);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(0);
+        assertThat(result.get(PRIMARY_USER_ID).allAppsExceptGamesSize).isEqualTo(0);
     }
 
     @Test
@@ -125,21 +125,21 @@ public class StorageAsyncLoaderTest {
                 addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
         info.flags = ApplicationInfo.FLAG_IS_GAME;
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.StorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(PRIMARY_USER_ID).gamesSize).isEqualTo(11L);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(0);
+        assertThat(result.get(PRIMARY_USER_ID).allAppsExceptGamesSize).isEqualTo(0);
     }
 
     @Test
     public void testCacheIsNotIgnored() throws Exception {
         addPackage(PACKAGE_NAME_1, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.StorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(111L);
+        assertThat(result.get(PRIMARY_USER_ID).allAppsExceptGamesSize).isEqualTo(111L);
     }
 
     @Test
@@ -152,7 +152,7 @@ public class StorageAsyncLoaderTest {
         when(mSource.getExternalStorageStats(anyString(), eq(new UserHandle(SECONDARY_USER_ID))))
                 .thenReturn(new StorageStatsSource.ExternalStorageStats(10, 3, 3, 4, 0));
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.StorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(2);
         assertThat(result.get(PRIMARY_USER_ID).externalStats.totalBytes).isEqualTo(9L);
@@ -165,21 +165,10 @@ public class StorageAsyncLoaderTest {
                 addPackage(PACKAGE_NAME_1, 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
         systemApp.flags = ApplicationInfo.FLAG_SYSTEM & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.StorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(111L);
-    }
-
-    @Test
-    public void testVideoAppsAreFiltered() throws Exception {
-        addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_VIDEO);
-
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
-
-        assertThat(result.size()).isEqualTo(1);
-        // Code size is not included for file based video category.
-        assertThat(result.get(PRIMARY_USER_ID).videoAppsSize).isEqualTo(10L);
+        assertThat(result.get(PRIMARY_USER_ID).allAppsExceptGamesSize).isEqualTo(111L);
     }
 
     @Test
@@ -191,44 +180,20 @@ public class StorageAsyncLoaderTest {
         when(mSource.getStatsForPackage(anyString(), anyString(), any(UserHandle.class)))
                 .thenThrow(new NameNotFoundException());
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.StorageResult> result = mLoader.loadInBackground();
 
         // Should not crash.
-    }
-
-    @Test
-    public void testPackageIsNotDoubleCounted() throws Exception {
-        UserInfo info = new UserInfo();
-        info.id = SECONDARY_USER_ID;
-        mUsers.add(info);
-        when(mSource.getExternalStorageStats(anyString(), eq(UserHandle.SYSTEM)))
-                .thenReturn(new StorageStatsSource.ExternalStorageStats(9, 2, 3, 4, 0));
-        when(mSource.getExternalStorageStats(anyString(), eq(new UserHandle(SECONDARY_USER_ID))))
-                .thenReturn(new StorageStatsSource.ExternalStorageStats(10, 3, 3, 4, 0));
-        addPackage(PACKAGE_NAME_1, 0, 1, 10, ApplicationInfo.CATEGORY_VIDEO);
-        ArrayList<ApplicationInfo> secondaryUserApps = new ArrayList<>();
-        ApplicationInfo appInfo = new ApplicationInfo();
-        appInfo.packageName = PACKAGE_NAME_1;
-        appInfo.category = ApplicationInfo.CATEGORY_VIDEO;
-        secondaryUserApps.add(appInfo);
-
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
-
-        assertThat(result.size()).isEqualTo(2);
-        // Code size is not included for file based video category.
-        assertThat(result.get(PRIMARY_USER_ID).videoAppsSize).isEqualTo(10L);
-        // No code size for the second user.
-        assertThat(result.get(SECONDARY_USER_ID).videoAppsSize).isEqualTo(10L);
     }
 
     @Test
     public void testCacheOveragesAreCountedAsFree() throws Exception {
         addPackage(PACKAGE_NAME_1, DEFAULT_QUOTA + 100, 1, 10, ApplicationInfo.CATEGORY_UNDEFINED);
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.StorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(DEFAULT_QUOTA + 11);
+        assertThat(result.get(PRIMARY_USER_ID).allAppsExceptGamesSize)
+                .isEqualTo(DEFAULT_QUOTA + 11);
     }
 
     @Test
@@ -237,10 +202,10 @@ public class StorageAsyncLoaderTest {
         addPackage(PACKAGE_NAME_2, 0, 1, 10, ApplicationInfo.CATEGORY_VIDEO);
         addPackage(PACKAGE_NAME_3, 0, 1, 10, ApplicationInfo.CATEGORY_AUDIO);
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = mLoader.loadInBackground();
+        SparseArray<StorageAsyncLoader.StorageResult> result = mLoader.loadInBackground();
 
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(PRIMARY_USER_ID).otherAppsSize).isEqualTo(33L);
+        assertThat(result.get(PRIMARY_USER_ID).allAppsExceptGamesSize).isEqualTo(33L);
     }
 
     private ApplicationInfo addPackage(String packageName, long cacheSize, long codeSize,

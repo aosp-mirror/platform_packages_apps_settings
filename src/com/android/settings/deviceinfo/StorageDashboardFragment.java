@@ -85,7 +85,7 @@ import java.util.List;
 @SearchIndexable
 public class StorageDashboardFragment extends DashboardFragment
         implements
-        LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>>,
+        LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.StorageResult>>,
         Preference.OnPreferenceClickListener {
     private static final String TAG = "StorageDashboardFrag";
     private static final String SUMMARY_PREF_KEY = "storage_summary";
@@ -100,7 +100,7 @@ public class StorageDashboardFragment extends DashboardFragment
     private final List<StorageEntry> mStorageEntries = new ArrayList<>();
     private StorageEntry mSelectedStorageEntry;
     private PrivateStorageInfo mStorageInfo;
-    private SparseArray<StorageAsyncLoader.AppsStorageResult> mAppsResult;
+    private SparseArray<StorageAsyncLoader.StorageResult> mAppsResult;
     private CachedStorageValuesHelper mCachedStorageValuesHelper;
 
     private StorageItemPreferenceController mPreferenceController;
@@ -414,7 +414,7 @@ public class StorageDashboardFragment extends DashboardFragment
      * Updates the secondary user controller sizes.
      */
     private void updateSecondaryUserControllers(List<AbstractPreferenceController> controllers,
-            SparseArray<StorageAsyncLoader.AppsStorageResult> stats) {
+            SparseArray<StorageAsyncLoader.StorageResult> stats) {
         for (int i = 0, size = controllers.size(); i < size; i++) {
             final AbstractPreferenceController controller = controllers.get(i);
             if (controller instanceof StorageAsyncLoader.ResultHandler) {
@@ -455,7 +455,7 @@ public class StorageDashboardFragment extends DashboardFragment
             };
 
     @Override
-    public Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> onCreateLoader(int id,
+    public Loader<SparseArray<StorageAsyncLoader.StorageResult>> onCreateLoader(int id,
             Bundle args) {
         final Context context = getContext();
         return new StorageAsyncLoader(context, mUserManager,
@@ -465,15 +465,15 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @Override
-    public void onLoadFinished(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader,
-            SparseArray<StorageAsyncLoader.AppsStorageResult> data) {
+    public void onLoadFinished(Loader<SparseArray<StorageAsyncLoader.StorageResult>> loader,
+            SparseArray<StorageAsyncLoader.StorageResult> data) {
         mAppsResult = data;
         maybeCacheFreshValues();
         onReceivedSizes();
     }
 
     @Override
-    public void onLoaderReset(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader) {
+    public void onLoaderReset(Loader<SparseArray<StorageAsyncLoader.StorageResult>> loader) {
     }
 
     @Override
@@ -507,20 +507,20 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @VisibleForTesting
-    public SparseArray<StorageAsyncLoader.AppsStorageResult> getAppsStorageResult() {
+    public SparseArray<StorageAsyncLoader.StorageResult> getStorageResult() {
         return mAppsResult;
     }
 
     @VisibleForTesting
-    public void setAppsStorageResult(SparseArray<StorageAsyncLoader.AppsStorageResult> info) {
+    public void setStorageResult(SparseArray<StorageAsyncLoader.StorageResult> info) {
         mAppsResult = info;
     }
 
     @VisibleForTesting
     void initializeCachedValues() {
         final PrivateStorageInfo info = mCachedStorageValuesHelper.getCachedPrivateStorageInfo();
-        final SparseArray<StorageAsyncLoader.AppsStorageResult> loaderResult =
-                mCachedStorageValuesHelper.getCachedAppsStorageResult();
+        final SparseArray<StorageAsyncLoader.StorageResult> loaderResult =
+                mCachedStorageValuesHelper.getCachedStorageResult();
         if (info == null || loaderResult == null) {
             return;
         }

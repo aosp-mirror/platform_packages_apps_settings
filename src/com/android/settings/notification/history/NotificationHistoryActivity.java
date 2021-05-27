@@ -156,6 +156,7 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         View recyclerView = mTodayView.findViewById(R.id.apps);
         recyclerView.setClipToOutline(true);
         mTodayView.setOutlineProvider(mOutlineProvider);
+        mSnoozeView.setOutlineProvider(mOutlineProvider);
         // for each package, new header and recycler view
         for (int i = 0, notificationsSize = notifications.size(); i < notificationsSize; i++) {
             NotificationHistoryPackage nhp = notifications.get(i);
@@ -219,6 +220,11 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         }
     };
 
+    private void configureNotificationList(View recyclerView) {
+        recyclerView.setClipToOutline(true);
+        recyclerView.setOutlineProvider(mOutlineProvider);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -227,9 +233,8 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
         mTodayView = findViewById(R.id.apps);
         mSnoozeView = findViewById(R.id.snoozed_list);
         mDismissView = findViewById(R.id.recently_dismissed_list);
-        View recyclerView = mDismissView.findViewById(R.id.notification_list);
-        recyclerView.setClipToOutline(true);
-        recyclerView.setOutlineProvider(mOutlineProvider);
+        configureNotificationList(mDismissView.findViewById(R.id.notification_list));
+        configureNotificationList(mSnoozeView.findViewById(R.id.notification_list));
         mHistoryOff = findViewById(R.id.history_off);
         mHistoryOn = findViewById(R.id.history_on);
         mHistoryEmpty = findViewById(R.id.history_on_empty);
