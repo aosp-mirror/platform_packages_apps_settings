@@ -307,6 +307,7 @@ public final class BatteryChartPreferenceControllerTest {
         doReturn(appLabel).when(mBatteryDiffEntry).getAppLabel();
         doReturn(PREF_KEY).when(mBatteryHistEntry).getKey();
         doReturn(null).when(mAppListGroup).findPreference(PREF_KEY);
+        doReturn(false).when(mBatteryDiffEntry).validForRestriction();
 
         mBatteryChartPreferenceController.addPreferenceToScreen(
             Arrays.asList(mBatteryDiffEntry));
@@ -324,6 +325,7 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(pref.getOrder()).isEqualTo(1);
         assertThat(pref.getBatteryDiffEntry()).isSameInstanceAs(mBatteryDiffEntry);
         assertThat(pref.isSingleLineTitle()).isTrue();
+        assertThat(pref.isEnabled()).isFalse();
     }
 
     @Test
@@ -353,7 +355,7 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
-    public void testHandlePreferenceTreeClick_validPackageName_returnTrue() {
+    public void testHandlePreferenceTreeClick_forAppEntry_returnTrue() {
         doReturn(false).when(mBatteryHistEntry).isAppEntry();
         doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
 
@@ -371,15 +373,13 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
-    public void testHandlePreferenceTreeClick_appEntryWithInvalidPackage_returnFalse() {
+    public void testHandlePreferenceTreeClick_forSystemEntry_returnTrue() {
         mBatteryChartPreferenceController.mBatteryUtils = mBatteryUtils;
         doReturn(true).when(mBatteryHistEntry).isAppEntry();
-        doReturn(BatteryUtils.UID_NULL).when(mBatteryUtils)
-            .getPackageUid(mBatteryHistEntry.mPackageName);
         doReturn(mBatteryDiffEntry).when(mPowerGaugePreference).getBatteryDiffEntry();
 
         assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(
-            mPowerGaugePreference)).isFalse();
+            mPowerGaugePreference)).isTrue();
         verify(mMetricsFeatureProvider)
             .action(
                 mContext,

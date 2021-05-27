@@ -77,14 +77,14 @@ public class StorageDashboardFragmentTest {
         CachedStorageValuesHelper helper = mock(CachedStorageValuesHelper.class);
         PrivateStorageInfo info = new PrivateStorageInfo(0, 0);
         when(helper.getCachedPrivateStorageInfo()).thenReturn(info);
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
-        when(helper.getCachedAppsStorageResult()).thenReturn(result);
+        SparseArray<StorageAsyncLoader.StorageResult> result = new SparseArray<>();
+        when(helper.getCachedStorageResult()).thenReturn(result);
 
         mFragment.setCachedStorageValuesHelper(helper);
         mFragment.initializeCachedValues();
 
         assertThat(mFragment.getPrivateStorageInfo()).isEqualTo(info);
-        assertThat(mFragment.getAppsStorageResult()).isEqualTo(result);
+        assertThat(mFragment.getStorageResult()).isEqualTo(result);
     }
 
     @Test
@@ -97,20 +97,20 @@ public class StorageDashboardFragmentTest {
         mFragment.initializeCachedValues();
 
         assertThat(mFragment.getPrivateStorageInfo()).isNull();
-        assertThat(mFragment.getAppsStorageResult()).isNull();
+        assertThat(mFragment.getStorageResult()).isNull();
     }
 
     @Test
     public void test_cacheProviderDoesntProvideValuesIfVolumeInfoMissing() {
         CachedStorageValuesHelper helper = mock(CachedStorageValuesHelper.class);
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
-        when(helper.getCachedAppsStorageResult()).thenReturn(result);
+        SparseArray<StorageAsyncLoader.StorageResult> result = new SparseArray<>();
+        when(helper.getCachedStorageResult()).thenReturn(result);
 
         mFragment.setCachedStorageValuesHelper(helper);
         mFragment.initializeCachedValues();
 
         assertThat(mFragment.getPrivateStorageInfo()).isNull();
-        assertThat(mFragment.getAppsStorageResult()).isNull();
+        assertThat(mFragment.getStorageResult()).isNull();
     }
 
     @Test
@@ -169,7 +169,7 @@ public class StorageDashboardFragmentTest {
         mFragment = spy(mFragment);
         when(mFragment.getView()).thenReturn(fakeView);
         when(mFragment.getListView()).thenReturn(fakeRecyclerView);
-        mFragment.setAppsStorageResult(new SparseArray<>());
+        mFragment.setStorageResult(new SparseArray<>());
 
         mFragment.maybeSetLoading(true);
 
@@ -185,7 +185,7 @@ public class StorageDashboardFragmentTest {
         when(mFragment.getView()).thenReturn(fakeView);
         when(mFragment.getListView()).thenReturn(fakeRecyclerView);
 
-        mFragment.setAppsStorageResult(new SparseArray<>());
+        mFragment.setStorageResult(new SparseArray<>());
         PrivateStorageInfo storageInfo = new PrivateStorageInfo(0, 0);
         mFragment.setPrivateStorageInfo(storageInfo);
 
