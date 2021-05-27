@@ -22,9 +22,12 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static com.android.settings.slices.CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI;
 
 import android.annotation.ColorInt;
+import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.telephony.SubscriptionManager;
@@ -150,11 +153,12 @@ public class ProviderModelSlice extends WifiSlice {
             final List<WifiSliceItem> disconnectedWifiList = wifiList.stream()
                     .filter(wifiSliceItem -> wifiSliceItem.getConnectedState()
                             != WifiEntry.CONNECTED_STATE_CONNECTED)
-                    .limit(maxListSize)
+                    .limit(maxListSize - 1)
                     .collect(Collectors.toList());
             for (WifiSliceItem item : disconnectedWifiList) {
                 listBuilder.addRow(getWifiSliceItemRow(item));
             }
+            listBuilder.addRow(getSeeAllRow());
         }
         return listBuilder.build();
     }
@@ -250,6 +254,31 @@ public class ProviderModelSlice extends WifiSlice {
         return rowBuilder
                 .setTitle(mContext.getText(R.string.ethernet))
                 .setSubtitle(mContext.getText(R.string.to_switch_networks_disconnect_ethernet));
+    }
+
+    protected ListBuilder.RowBuilder getSeeAllRow() {
+        final CharSequence title = mContext.getText(R.string.previous_connected_see_all);
+        final IconCompat icon = getSeeAllIcon();
+        return new ListBuilder.RowBuilder()
+                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                .setTitle(title)
+                .setPrimaryAction(getPrimaryAction(icon, title));
+    }
+
+    protected IconCompat getSeeAllIcon() {
+        final Drawable drawable = mContext.getDrawable(R.drawable.ic_arrow_forward);
+        if (drawable != null) {
+            drawable.setTint(
+                    Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal));
+            return Utils.createIconWithDrawable(drawable);
+        }
+        return Utils.createIconWithDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    protected SliceAction getPrimaryAction(IconCompat icon, CharSequence title) {
+        final PendingIntent intent = PendingIntent.getActivity(mContext, 0 /* requestCode */,
+                getIntent(), PendingIntent.FLAG_IMMUTABLE /* flags */);
+        return SliceAction.createDeeplink(intent, icon, ListBuilder.ICON_IMAGE, title);
     }
 
     @Override

@@ -34,6 +34,7 @@ import com.android.settings.display.FontSizePreferenceFragmentForSetupWizard;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
@@ -92,6 +93,7 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
                         : Instrumentable.METRICS_CATEGORY_UNKNOWN)
                 .setExtras(SetupWizardUtils.copyLifecycleExtra(getIntent().getExtras(),
                         new Bundle()))
+                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_FADE)
                 .launch();
         return true;
     }
@@ -119,7 +121,8 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
                     .setArguments(args)
                     .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                     .setExtras(SetupWizardUtils.copyLifecycleExtra(getIntent().getExtras(),
-                            new Bundle()));
+                            new Bundle()))
+                    .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_FADE);
 
             Log.d(LOG_TAG, "Launch font size settings");
             subSettingLauncher.launch();

@@ -96,7 +96,11 @@ public class AppBatteryPreferenceControllerTest {
         when(mOtherUidBatteryConsumer.getUid()).thenReturn(OTHER_UID);
 
         mController = spy(new AppBatteryPreferenceController(
-            RuntimeEnvironment.application, mFragment, "package1", null /* lifecycle */));
+                RuntimeEnvironment.application,
+                mFragment,
+                "package1" /* packageName */,
+                0 /* uId */,
+                null /* lifecycle */));
         mController.mBatteryUtils = mBatteryUtils;
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mBatteryPreference);
     }

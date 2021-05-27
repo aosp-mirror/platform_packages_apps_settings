@@ -21,13 +21,20 @@ import static android.content.pm.ApplicationInfo.CATEGORY_GAME;
 import static android.content.pm.ApplicationInfo.CATEGORY_IMAGE;
 import static android.content.pm.ApplicationInfo.CATEGORY_VIDEO;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.MediaStore;
+import android.provider.MediaStore.Files.FileColumns;
+import android.provider.MediaStore.MediaColumns;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -37,7 +44,6 @@ import com.android.settingslib.utils.AsyncLoaderCompat;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -45,7 +51,7 @@ import java.util.List;
  * users
  */
 public class StorageAsyncLoader
-        extends AsyncLoaderCompat<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
+        extends AsyncLoaderCompat<SparseArray<StorageAsyncLoader.StorageResult>> {
     private UserManager mUserManager;
     private static final String TAG = "StorageAsyncLoader";
 
@@ -64,38 +70,81 @@ public class StorageAsyncLoader
     }
 
     @Override
-    public SparseArray<AppsStorageResult> loadInBackground() {
-        return loadApps();
+    public SparseArray<StorageResult> loadInBackground() {
+        return getStorageResultsForUsers();
     }
 
-    private SparseArray<AppsStorageResult> loadApps() {
+    private SparseArray<StorageResult> getStorageResultsForUsers() {
         mSeenPackages = new ArraySet<>();
-        SparseArray<AppsStorageResult> result = new SparseArray<>();
-        List<UserInfo> infos = mUserManager.getUsers();
+        final SparseArray<StorageResult> results = new SparseArray<>();
+        final List<UserInfo> infos = mUserManager.getUsers();
+
         // Sort the users by user id ascending.
-        Collections.sort(
-                infos,
-                new Comparator<UserInfo>() {
-                    @Override
-                    public int compare(UserInfo userInfo, UserInfo otherUser) {
-                        return Integer.compare(userInfo.id, otherUser.id);
-                    }
-                });
-        for (int i = 0, userCount = infos.size(); i < userCount; i++) {
-            final UserInfo info = infos.get(i);
-            result.put(info.id, getStorageResultForUser(info.id));
+        Collections.sort(infos,
+                (userInfo, otherUser) -> Integer.compare(userInfo.id, otherUser.id));
+
+        for (UserInfo info : infos) {
+            final StorageResult result = getAppsAndGamesSize(info.id);
+
+            result.imagesSize = getFilesSize(info.id, MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    null /* queryArgs */);
+            result.videosSize = getFilesSize(info.id, MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+                    null /* queryArgs */);
+            result.audioSize = getFilesSize(info.id, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                    null /* queryArgs */);
+
+            final Bundle documentsAndOtherQueryArgs = new Bundle();
+            documentsAndOtherQueryArgs.putString(ContentResolver.QUERY_ARG_SQL_SELECTION,
+                    FileColumns.MEDIA_TYPE + "!=" + FileColumns.MEDIA_TYPE_IMAGE
+                    + " AND " + FileColumns.MEDIA_TYPE + "!=" + FileColumns.MEDIA_TYPE_VIDEO
+                    + " AND " + FileColumns.MEDIA_TYPE + "!=" + FileColumns.MEDIA_TYPE_AUDIO
+                    + " AND " + FileColumns.MIME_TYPE + " IS NOT NULL");
+            result.documentsAndOtherSize = getFilesSize(info.id,
+                    MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL),
+                    documentsAndOtherQueryArgs);
+
+            final Bundle trashQueryArgs = new Bundle();
+            trashQueryArgs.putInt(MediaStore.QUERY_ARG_MATCH_TRASHED, MediaStore.MATCH_ONLY);
+            result.trashSize = getFilesSize(info.id,
+                    MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL), trashQueryArgs);
+
+            results.put(info.id, result);
         }
-        return result;
+        return results;
     }
 
-    private AppsStorageResult getStorageResultForUser(int userId) {
+    private long getFilesSize(int userId, Uri uri, Bundle queryArgs) {
+        final Context perUserContext;
+        try {
+            perUserContext = getContext().createPackageContextAsUser(
+                getContext().getApplicationContext().getPackageName(),
+                0 /* flags= */,
+                UserHandle.of(userId));
+        } catch (NameNotFoundException e) {
+            Log.e(TAG, "Not able to get Context for user ID " + userId);
+            return 0;
+        }
+
+        try (Cursor cursor = perUserContext.getContentResolver().query(
+                uri,
+                new String[] {"sum(" + MediaColumns.SIZE + ")"},
+                queryArgs,
+                null /* cancellationSignal */)) {
+            if (cursor == null) {
+                return 0;
+            }
+            return cursor.moveToFirst() ? cursor.getInt(0) : 0;
+        }
+    }
+
+    private StorageResult getAppsAndGamesSize(int userId) {
         Log.d(TAG, "Loading apps");
-        List<ApplicationInfo> applicationInfos =
+        final List<ApplicationInfo> applicationInfos =
                 mPackageManager.getInstalledApplicationsAsUser(0, userId);
-        AppsStorageResult result = new AppsStorageResult();
-        UserHandle myUser = UserHandle.of(userId);
+        final StorageResult result = new StorageResult();
+        final UserHandle myUser = UserHandle.of(userId);
         for (int i = 0, size = applicationInfos.size(); i < size; i++) {
-            ApplicationInfo app = applicationInfos.get(i);
+            final ApplicationInfo app = applicationInfos.get(i);
 
             StorageStatsSource.AppStorageStats stats;
             try {
@@ -131,28 +180,9 @@ public class StorageAsyncLoader
                     result.gamesSize += blamedSize;
                     break;
                 case CATEGORY_AUDIO:
-                    // TODO(b/170918505): Should revamp audio size calculation with the data
-                    // from media provider.
-                    result.musicAppsSize += blamedSize;
-                    result.musicAppsSize -= stats.getCodeBytes();
-
-                    result.otherAppsSize += blamedSize;
-                    break;
                 case CATEGORY_VIDEO:
-                    // TODO(b/170918505): Should revamp video size calculation with the data
-                    // from media provider.
-                    result.videoAppsSize += blamedSize;
-                    result.videoAppsSize -= stats.getCodeBytes();
-
-                    result.otherAppsSize += blamedSize;
-                    break;
                 case CATEGORY_IMAGE:
-                    // TODO(b/170918505): Should revamp image size calculation with the data
-                    // from media provider.
-                    result.photosAppsSize += blamedSize;
-                    result.photosAppsSize -= stats.getCodeBytes();
-
-                    result.otherAppsSize += blamedSize;
+                    result.allAppsExceptGamesSize += blamedSize;
                     break;
                 default:
                     // The deprecated game flag does not set the category.
@@ -160,7 +190,7 @@ public class StorageAsyncLoader
                         result.gamesSize += blamedSize;
                         break;
                     }
-                    result.otherAppsSize += blamedSize;
+                    result.allAppsExceptGamesSize += blamedSize;
                     break;
             }
         }
@@ -177,15 +207,22 @@ public class StorageAsyncLoader
     }
 
     @Override
-    protected void onDiscardResult(SparseArray<AppsStorageResult> result) {
+    protected void onDiscardResult(SparseArray<StorageResult> result) {
     }
 
-    public static class AppsStorageResult {
+    /** Storage result for displaying file categories size in Storage Settings. */
+    public static class StorageResult {
+        // APP based sizes.
         public long gamesSize;
-        public long musicAppsSize;
-        public long photosAppsSize;
-        public long videoAppsSize;
-        public long otherAppsSize;
+        public long allAppsExceptGamesSize;
+
+        // File based sizes.
+        public long audioSize;
+        public long imagesSize;
+        public long videosSize;
+        public long documentsAndOtherSize;
+        public long trashSize;
+
         public long cacheSize;
         public long duplicateCodeSize;
         public StorageStatsSource.ExternalStorageStats externalStats;
@@ -196,6 +233,7 @@ public class StorageAsyncLoader
      * {@link StorageAsyncLoader}.
      */
     public interface ResultHandler {
-        void handleResult(SparseArray<AppsStorageResult> result);
+        /** Overrides this method to get storage result once it's available. */
+        void handleResult(SparseArray<StorageResult> result);
     }
 }
