@@ -33,7 +33,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * Controller to maintain the {@link androidx.preference.Preference} for add
- * device without summary at beginning. It monitor Bluetooth's status(on/off) and decide if need
+ * device. It monitor Bluetooth's status(on/off) and decide if need
  * to show summary or not.
  */
 public class AddDevicePreferenceController extends BasePreferenceController
@@ -43,12 +43,11 @@ public class AddDevicePreferenceController extends BasePreferenceController
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateState();
+            updateState(mPreference);
         }
     };
     private IntentFilter mIntentFilter;
-
-    protected BluetoothAdapter mBluetoothAdapter;
+    private BluetoothAdapter mBluetoothAdapter;
 
     public AddDevicePreferenceController(Context context, String key) {
         super(context, key);
@@ -59,7 +58,6 @@ public class AddDevicePreferenceController extends BasePreferenceController
     @Override
     public void onStart() {
         mContext.registerReceiver(mReceiver, mIntentFilter);
-        updateState(mPreference);
     }
 
     @Override
@@ -72,13 +70,13 @@ public class AddDevicePreferenceController extends BasePreferenceController
         super.displayPreference(screen);
         if (isAvailable()) {
             mPreference = screen.findPreference(getPreferenceKey());
+            updateState(mPreference);
         }
     }
 
     @Override
     public int getAvailabilityStatus() {
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
-                && isBluetoothEnabled()
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
@@ -92,9 +90,5 @@ public class AddDevicePreferenceController extends BasePreferenceController
 
     protected boolean isBluetoothEnabled() {
         return mBluetoothAdapter != null && mBluetoothAdapter.isEnabled();
-    }
-
-    void updateState() {
-        updateState(mPreference);
     }
 }
