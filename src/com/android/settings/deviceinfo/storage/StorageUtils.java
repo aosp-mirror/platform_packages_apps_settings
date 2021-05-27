@@ -26,6 +26,8 @@ import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
+import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -113,6 +115,14 @@ public class StorageUtils {
                 .setSourceMetricsCategory(SettingsEnums.SETTINGS_STORAGE_CATEGORY)
                 .setArguments(args)
                 .launch();
+    }
+
+    /** Returns size label of changing units. (e.g., 1kB, 2MB, 3GB) */
+    public static String getStorageSizeLabel(Context context, long bytes) {
+        final Formatter.BytesResult result = Formatter.formatBytes(context.getResources(),
+                bytes, Formatter.FLAG_SHORTER);
+        return TextUtils.expandTemplate(context.getText(R.string.storage_size_large),
+                result.value, result.units).toString();
     }
 
     /** An AsyncTask to unmount a specified volume. */
