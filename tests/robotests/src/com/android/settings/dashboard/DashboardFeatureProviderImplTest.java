@@ -55,7 +55,6 @@ import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 import android.util.Pair;
 
 import androidx.fragment.app.FragmentActivity;
@@ -66,7 +65,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowTileUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -146,7 +144,6 @@ public class DashboardFeatureProviderImplTest {
                 .thenReturn(new ResolveInfo());
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mImpl = new DashboardFeatureProviderImpl(mContext);
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.SILKY_HOME, false);
     }
 
     @Test
