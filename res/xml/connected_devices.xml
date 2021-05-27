@@ -40,24 +40,13 @@
         android:key="add_bt_devices"
         android:title="@string/bluetooth_pairing_pref_title"
         android:icon="@drawable/ic_add_24dp"
-        android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
-        settings:allowDividerAbove="true"
-        settings:keywords="@string/keywords_add_bt_device"
-        settings:userRestriction="no_config_bluetooth"
-        settings:useAdminDisabledSummary="true"
-        settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
-
-    <com.android.settingslib.RestrictedPreference
-        android:key="add_bt_devices_summary"
-        android:title="@string/bluetooth_pairing_pref_title"
-        android:icon="@drawable/ic_add_24dp"
         android:summary="@string/connected_device_add_device_summary"
         android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
         settings:allowDividerAbove="true"
         settings:keywords="@string/keywords_add_bt_device"
         settings:userRestriction="no_config_bluetooth"
         settings:useAdminDisabledSummary="true"
-        settings:controller="com.android.settings.connecteddevice.AddDeviceSummaryPreferenceController"/>
+        settings:controller="com.android.settings.connecteddevice.AddDevicePreferenceController"/>
 
     <PreferenceCategory
         android:key="previously_connected_devices"
