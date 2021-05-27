@@ -87,6 +87,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             pref = new RadioButtonPreference(mProfilesContainer.getContext());
             pref.setKey(key);
             pref.setTitle(titleId);
+            pref.setSingleLineTitle(false);
             pref.setOnClickListener(this);
             mProfilesContainer.addPreference(pref);
         }
