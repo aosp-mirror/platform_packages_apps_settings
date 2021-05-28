@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,34 +16,34 @@
 
 package com.android.settings.sound;
 
-import static android.provider.Settings.Secure.MEDIA_CONTROLS_RESUME;
+import static android.provider.Settings.Secure.MEDIA_CONTROLS_RECOMMENDATION;
 
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.android.settings.core.TogglePreferenceController;
 
 /**
- * Toggle for media controls resumption setting
+ * Toggle for media controls recommendation setting
  */
-public class MediaControlsPreferenceController extends TogglePreferenceController {
+public class MediaControlsRecommendationController extends TogglePreferenceController {
 
-    public MediaControlsPreferenceController(Context context, String key) {
+    public MediaControlsRecommendationController(Context context, String key) {
         super(context, key);
     }
 
-    @VisibleForTesting
+    @Override
     public boolean isChecked() {
-        int val = Settings.Secure.getInt(mContext.getContentResolver(), MEDIA_CONTROLS_RESUME, 1);
+        int val = Settings.Secure.getInt(mContext.getContentResolver(),
+                MEDIA_CONTROLS_RECOMMENDATION, 1);
         return val == 1;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         int val = isChecked ? 1 : 0;
-        return Settings.Secure.putInt(mContext.getContentResolver(), MEDIA_CONTROLS_RESUME, val);
+        return Settings.Secure.putInt(mContext.getContentResolver(),
+                MEDIA_CONTROLS_RECOMMENDATION, val);
     }
 
     @Override
