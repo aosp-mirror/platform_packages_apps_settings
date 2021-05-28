@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:importantForAccessibility="yes"
         style="@style/ContextualCardStyle">
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,16 +47,16 @@
                       android:layout_marginTop="12dp"
                       android:layout_marginBottom="16dp"
                       android:text="@string/battery_missing_message"
-                      android:textAppearance="?android:attr/textAppearanceSmall"
-                      android:textColor="?android:attr/textColorSecondary" />
+                      android:textAppearance="?android:attr/textAppearanceListItem" />
 
             <TextView android:id="@+id/link_text"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_gravity="end"
                       android:text="@string/battery_missing_link_message"
-                      android:textAppearance="?android:attr/textAppearanceSmall"
-                      android:textColor="@*android:color/material_red_A700" />
+                      android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                      android:textColor="@*android:color/material_red_A700"
+                      android:contentDescription="@string/battery_missing_link_a11y_message" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>
