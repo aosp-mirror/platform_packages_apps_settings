@@ -35,28 +35,28 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-public class MediaControlsPreferenceControllerTest {
+public class MediaControlsRecommendationControllerTest {
 
-    private static final String KEY = "media_controls_resume_switch";
+    private static final String KEY = "media_controls_recommendations";
 
     private Context mContext;
-    private int mOriginalResume;
+    private int mOriginalRecommendation;
     private ContentResolver mContentResolver;
-    private MediaControlsPreferenceController mController;
+    private MediaControlsRecommendationController mController;
 
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mContentResolver = mContext.getContentResolver();
-        mOriginalResume = Settings.Secure.getInt(mContentResolver,
-                Settings.Secure.MEDIA_CONTROLS_RESUME, 1);
-        mController = new MediaControlsPreferenceController(mContext, KEY);
+        mOriginalRecommendation = Settings.Secure.getInt(mContentResolver,
+                Settings.Secure.MEDIA_CONTROLS_RECOMMENDATION, 1);
+        mController = new MediaControlsRecommendationController(mContext, KEY);
     }
 
     @After
     public void tearDown() {
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RESUME,
-                mOriginalResume);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RECOMMENDATION,
+                mOriginalRecommendation);
     }
 
     @Test
@@ -66,25 +66,25 @@ public class MediaControlsPreferenceControllerTest {
 
     @Test
     public void setChecked_enable_shouldTurnOn() {
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RESUME, 1);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RECOMMENDATION, 1);
 
         assertThat(mController.isChecked()).isTrue();
 
         mController.setChecked(false);
 
         assertThat(Settings.Secure.getInt(mContentResolver,
-                Settings.Secure.MEDIA_CONTROLS_RESUME, -1)).isEqualTo(0);
+                Settings.Secure.MEDIA_CONTROLS_RECOMMENDATION, -1)).isEqualTo(0);
     }
 
     @Test
     public void setChecked_disable_shouldTurnOff() {
-        Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RESUME, 0);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RECOMMENDATION, 0);
 
         assertThat(mController.isChecked()).isFalse();
 
         mController.setChecked(true);
 
         assertThat(Settings.Secure.getInt(mContentResolver,
-                Settings.Secure.MEDIA_CONTROLS_RESUME, -1)).isEqualTo(1);
+                Settings.Secure.MEDIA_CONTROLS_RECOMMENDATION, -1)).isEqualTo(1);
     }
 }
