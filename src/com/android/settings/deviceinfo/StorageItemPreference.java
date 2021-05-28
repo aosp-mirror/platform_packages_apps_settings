@@ -17,8 +17,6 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.text.TextUtils;
-import android.text.format.Formatter;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
@@ -26,6 +24,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.deviceinfo.storage.StorageUtils;
 
 public class StorageItemPreference extends Preference {
     public int userHandle;
@@ -49,7 +48,7 @@ public class StorageItemPreference extends Preference {
 
     public void setStorageSize(long size, long total) {
         mStorageSize = size;
-        setSummary(getStorageSummary(size));
+        setSummary(StorageUtils.getStorageSizeLabel(getContext(), size));
 
         if (total == 0) {
             mProgressPercent = 0;
@@ -76,12 +75,5 @@ public class StorageItemPreference extends Preference {
         mProgressBar = (ProgressBar) view.findViewById(android.R.id.progress);
         updateProgressBar();
         super.onBindViewHolder(view);
-    }
-
-    private String getStorageSummary(long bytes) {
-        final Formatter.BytesResult result = Formatter.formatBytes(getContext().getResources(),
-                bytes, Formatter.FLAG_SHORTER);
-        return TextUtils.expandTemplate(getContext().getText(R.string.storage_size_large),
-                result.value, result.units).toString();
     }
 }
