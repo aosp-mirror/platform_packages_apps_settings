@@ -258,7 +258,7 @@ public class BatteryInfoTest {
                 false /* shortString */);
 
         assertThat(info.isOverheated).isTrue();
-        assertThat(info.chargeLabel).isEqualTo("50% - Optimizing for battery health");
+        assertThat(info.chargeLabel).isEqualTo("50% - Charging temporarily limited");
     }
 
     // Make our battery stats return a sequence of battery events.
