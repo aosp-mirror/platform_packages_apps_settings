@@ -32,6 +32,7 @@ import android.os.UserManager;
 import android.os.storage.VolumeInfo;
 import android.util.Log;
 import android.util.SparseArray;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -64,7 +65,8 @@ import java.util.Map;
  * categorization breakdown.
  */
 public class StorageItemPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+        PreferenceControllerMixin,
+        EmptyTrashFragment.OnEmptyTrashCompleteListener {
     private static final String TAG = "StorageItemPreference";
 
     private static final String SYSTEM_FRAGMENT_TAG = "SystemInfo";
@@ -256,8 +258,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mGamesPreference.setVisible(privateStoragePreferencesVisible);
         mDocumentsAndOtherPreference.setVisible(privateStoragePreferencesVisible);
         mSystemPreference.setVisible(privateStoragePreferencesVisible);
-        // TODO(b/170918505): Shows trash category after trash category feature complete.
-        mTrashPreference.setVisible(false);
+        mTrashPreference.setVisible(privateStoragePreferencesVisible);
 
         if (privateStoragePreferencesVisible) {
             final VolumeInfo sharedVolume = mSvp.findEmulatedForPrivate(mVolume);
@@ -460,11 +461,27 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private void launchTrashIntent() {
         final Intent intent = new Intent("android.settings.VIEW_TRASH");
 
-        if (intent.resolveActivity(mPackageManager) == null) {
-            EmptyTrashFragment.show(mFragment);
+        if (mPackageManager.resolveActivityAsUser(intent, 0 /* flags */, mUserId) == null) {
+            final long trashSize = mTrashPreference.getStorageSize();
+            if (trashSize > 0) {
+                new EmptyTrashFragment(mFragment, mUserId, trashSize,
+                        this /* onEmptyTrashCompleteListener */).show();
+            } else {
+                Toast.makeText(mContext, R.string.storage_trash_dialog_empty_message,
+                        Toast.LENGTH_SHORT).show();
+            }
         } else {
             mContext.startActivityAsUser(intent, new UserHandle(mUserId));
         }
+    }
+
+    @Override
+    public void onEmptyTrashComplete() {
+        if (mTrashPreference == null) {
+            return;
+        }
+        mTrashPreference.setStorageSize(0, mTotalSize);
+        updatePrivateStorageCategoryPreferencesOrder();
     }
 
     private static long totalValues(StorageMeasurement.MeasurementDetails details, int userId,
