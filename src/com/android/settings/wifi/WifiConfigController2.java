@@ -16,7 +16,10 @@
 
 package com.android.settings.wifi;
 
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.InetAddresses;
 import android.net.IpConfiguration;
@@ -32,6 +35,7 @@ import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
+import android.os.UserHandle;
 import android.security.keystore.KeyProperties;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -144,6 +148,15 @@ public class WifiConfigController2 implements TextWatcher,
         UNDESIRED_CERTIFICATE_MACRANDSAPSECRET
     };
 
+    /* These values are for install certificate */
+    private static final String ACTION_INSTALL_CERTS = "android.credentials.INSTALL";
+    private static final String PACKAGE_INSTALL_CERTS = "com.android.certinstaller";
+    private static final String CLASS_INSTALL_CERTS = "com.android.certinstaller.CertInstallerMain";
+    private static final String KEY_INSTALL_CERTIFICATE = "certificate_install_usage";
+    private static final String INSTALL_CERTIFICATE_VALUE = "wifi";
+
+    protected int REQUEST_INSTALL_CERTS = 1;
+
     /* Phase2 methods supported by PEAP are limited */
     private ArrayAdapter<CharSequence> mPhase2PeapAdapter;
     /* Phase2 methods supported by TTLS are limited */
@@ -159,12 +172,13 @@ public class WifiConfigController2 implements TextWatcher,
     private String mMultipleCertSetString;
     private String mUseSystemCertsString;
     private String mDoNotProvideEapUserCertString;
+    @VisibleForTesting String mInstallCertsString;
 
     private Spinner mSecuritySpinner;
     @VisibleForTesting Spinner mEapMethodSpinner;
     private int mLastShownEapMethod;
     @VisibleForTesting Spinner mEapSimSpinner;    // For EAP-SIM, EAP-AKA and EAP-AKA-PRIME.
-    private Spinner mEapCaCertSpinner;
+    @VisibleForTesting Spinner mEapCaCertSpinner;
     private Spinner mEapOcspSpinner;
     private TextView mEapDomainView;
     private Spinner mPhase2Spinner;
@@ -258,6 +272,7 @@ public class WifiConfigController2 implements TextWatcher,
         mUseSystemCertsString = mContext.getString(R.string.wifi_use_system_certs);
         mDoNotProvideEapUserCertString =
             mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
+        mInstallCertsString = mContext.getString(R.string.wifi_install_credentials);
 
         mSsidScanButton = (ImageButton) mView.findViewById(R.id.ssid_scanner_button);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
@@ -942,7 +957,7 @@ public class WifiConfigController2 implements TextWatcher,
         }
     }
 
-    private void showSecurityFields(boolean refreshEapMethods, boolean refreshCertificates) {
+    protected void showSecurityFields(boolean refreshEapMethods, boolean refreshCertificates) {
         if (mWifiEntrySecurity == WifiEntry.SECURITY_NONE
                 || mWifiEntrySecurity == WifiEntry.SECURITY_OWE) {
             mView.findViewById(R.id.security_fields).setVisibility(View.GONE);
@@ -1031,11 +1046,8 @@ public class WifiConfigController2 implements TextWatcher,
                     mDoNotProvideEapUserCertString,
                     false /* showMultipleCerts */,
                     false /* showUsePreinstalledCertOption */);
-            // To avoid the user connects to a non-secure network unexpectedly,
-            // request using system trusted certificates by default
-            // unless the user explicitly chooses "Do not validate" or other
-            // CA certificates.
-            setSelection(mEapCaCertSpinner, mUseSystemCertsString);
+
+            setSelection(mEapCaCertSpinner, mUnspecifiedCertString);
         }
 
         // Modifying an existing network
@@ -1494,6 +1506,7 @@ public class WifiConfigController2 implements TextWatcher,
         }
         if (showUsePreinstalledCertOption) {
             certs.add(mUseSystemCertsString);
+            certs.add(mInstallCertsString);
         }
 
         if (choices != null && choices.size() != 0) {
@@ -1658,9 +1671,13 @@ public class WifiConfigController2 implements TextWatcher,
             final int selectedItemPosition = mEapMethodSpinner.getSelectedItemPosition();
             if (mLastShownEapMethod != selectedItemPosition) {
                 mLastShownEapMethod = selectedItemPosition;
-                showSecurityFields(/* refreshEapMethods */ false, /* refreshCertificates */ true);
+                showSecurityFields(/* refreshEapMethods */false, /* refreshCertificates */ true);
             }
         } else if (parent == mEapCaCertSpinner) {
+            String selectedItem = parent.getItemAtPosition(position).toString();
+            if (selectedItem.equals(mInstallCertsString)) {
+                startActivityForInstallCerts();
+            }
             showSecurityFields(/* refreshEapMethods */ false, /* refreshCertificates */ false);
         } else if (parent == mPhase2Spinner
                 && mEapMethodSpinner.getSelectedItemPosition() == WIFI_EAP_METHOD_PEAP) {
@@ -1680,6 +1697,18 @@ public class WifiConfigController2 implements TextWatcher,
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         //
+    }
+
+    /**
+     * Start the install page for user to install the existing certificate.
+     */
+    private void startActivityForInstallCerts() {
+        Intent intent = new Intent(ACTION_INSTALL_CERTS);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setComponent(new ComponentName(PACKAGE_INSTALL_CERTS, CLASS_INSTALL_CERTS));
+        intent.putExtra(KEY_INSTALL_CERTIFICATE, INSTALL_CERTIFICATE_VALUE);
+
+        mContext.startActivity(intent);
     }
 
     /**
