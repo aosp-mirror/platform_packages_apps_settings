@@ -55,11 +55,14 @@ import java.util.List;
  * implementation.
  */
 @SearchIndexable
-public class LocationSettings extends DashboardFragment {
+public class LocationSettings extends DashboardFragment implements
+        LocationEnabler.LocationModeChangeListener {
 
     private static final String TAG = "LocationSettings";
+    private static final String RECENT_LOCATION_ACCESS_PREF_KEY = "recent_location_access";
 
     private LocationSwitchBarController mSwitchBarController;
+    private LocationEnabler mLocationEnabler;
 
     @Override
     public int getMetricsCategory() {
@@ -75,6 +78,7 @@ public class LocationSettings extends DashboardFragment {
         switchBar.show();
         mSwitchBarController = new LocationSwitchBarController(activity, switchBar,
                 getSettingsLifecycle());
+        mLocationEnabler = new LocationEnabler(getContext(), this, getSettingsLifecycle());
     }
 
     @Override
@@ -96,6 +100,13 @@ public class LocationSettings extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    public void onLocationModeChanged(int mode, boolean restricted) {
+        if (mLocationEnabler.isEnabled(mode)) {
+            scrollToPreference(RECENT_LOCATION_ACCESS_PREF_KEY);
+        }
     }
 
     static void addPreferencesSorted(List<Preference> prefs, PreferenceGroup container) {
