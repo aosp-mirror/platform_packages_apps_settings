@@ -98,11 +98,11 @@
     <string name="font_size_make_larger_desc">Make larger</string>
 
     <!-- Auto rotate switchbar title. [CHAR_LIMIT=NONE] -->
-    <string name="auto_rotate_settings_primary_switch_title">Use Auto-Rotate</string>
+    <string name="auto_rotate_settings_primary_switch_title">Use Auto-rotate</string>
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
     <string name="smart_rotate_text_headline">
-        Face Detection uses the front-facing camera to improve Auto-Rotate accuracy. Images are never stored or sent to Google.&lt;br>&lt;br>
+        Face Detection uses the front-facing camera to improve Auto-rotate accuracy. Images are never stored or sent to Google.&lt;br>&lt;br>
        &lt;a href="<xliff:g example="http://www.google.com" id="url">http://support.google.com/mobile?p=telephony_rtt</xliff:g>">Learn more&lt;/a>
     </string>
     <string name="font_size_preview_text_headline">Sample text</string>
@@ -6094,7 +6094,7 @@
     <!-- Summary for the battery high usage tip, which presents apps with highest usage [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_summary">See apps with highest usage</string>
     <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_title">Optimizing for battery health</string>
+    <string name="battery_tip_limited_temporarily_title">Charging temporarily limited</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_summary">Battery limited temporarily. Learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
@@ -11471,6 +11471,9 @@
     <!-- [CHAR LIMIT=60] Summary string for screen attention explaining why the toggle is disabled by battery saver-->
     <string name="ambient_camera_summary_battery_saver_on">Temporarily disabled due to Battery Saver</string>
 
+    <!-- [CHAR LIMIT=60] Button text for screen attention to turn off battery saver-->
+    <string name="ambient_camera_battery_saver_off">Turn off battery saver</string>
+
     <!-- [CHAR LIMIT=60] Summary string on dark theme explaining why the toggle is disabled while the setting is off-->
     <string name="dark_ui_mode_disabled_summary_dark_theme_off">Temporarily turned on due to Battery Saver</string>
 
@@ -13150,18 +13153,18 @@
 
     <!-- Title for media control settings [CHAR LIMIT=50]-->
     <string name="media_controls_title">Media</string>
-    <!-- Summary for media control settings [CHAR LIMIT=NONE]-->
-    <string name="media_controls_summary">Media player in Quick Settings</string>
+    <!-- Title of toggle to enable or disable the media resumption feature in quick settings [CHAR LIMIT=50]-->
+    <string name="media_controls_resume_title">Pin media player</string>
     <!-- Description of toggle to enable or disable the media resumption feature in quick settings [CHAR LIMIT=NONE]-->
-    <string name="media_controls_resume_description">Show media player for an extended period to easily resume playback</string>
+    <string name="media_controls_resume_description">To quickly resume playback, media player stays open in Quick Settings</string>
+    <!-- Title of toggle to enable or disable media recommendations in quick settings [CHAR LIMIT=NONE] -->
+    <string name="media_controls_recommendations_title">Show media recommendations</string>
+    <!-- Description of toggle to enable or disable media recommendations based on user's activity [CHAR LIMIT=NONE] -->
+    <string name="media_controls_recommendations_description">Based on your activity</string>
     <!-- Subtext for media settings when the player will be hidden [CHAR LIMIT=50] -->
     <string name="media_controls_hide_player">Hide player</string>
     <!-- Subtext for media settings when the player will be shown [CHAR LIMIT=50] -->
     <string name="media_controls_show_player">Show player</string>
-    <!-- Subtext for media settings when no players can be shown [CHAR LIMIT=50] -->
-    <string name="media_controls_no_players">No players available</string>
-    <!-- Subtitle for section of media control settings that shows which apps are allowed [CHAR LIMIT=50] -->
-    <string name="media_controls_apps_title">Allowed apps</string>
     <!-- Keywords for the media controls setting [CHAR LIMIT=NONE]-->
     <string name="keywords_media_controls">media</string>
 
