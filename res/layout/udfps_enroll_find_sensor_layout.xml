@@ -16,8 +16,20 @@
 
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     style="?attr/fingerprint_layout_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/illustration_lottie"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:scaleType="centerInside"
+        app:lottie_imageAssetsFolder="images"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/udfps_edu_lottie" />
+
 </com.google.android.setupdesign.GlifLayout>
