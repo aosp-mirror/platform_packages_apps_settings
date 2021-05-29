@@ -152,7 +152,7 @@
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth жупташтыруу үчүн күйгүзүлөт"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Байланыш параметрлери"</string>
     <string name="connected_device_previously_connected_title" msgid="605808252622814415">"Буга чейин туташкан түзмөктөр"</string>
-    <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Мурда туташкан"</string>
+    <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Буга чейин туташкан түзмөктөр"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth күйгүзүлдү"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Баарын көрүү"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Күн жана убакыт"</string>
@@ -278,10 +278,10 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC убакыт алкагын тандоо"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Күн"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Убакыт"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Экран өчкөн соң, канча убакыттан кийин кулпуланат"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Экран өчкөн соң, качан кулпуланат"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"Экран өчкөндөн кийин <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> тарабынан кулпусу ачык калтырылгандан башка убакта, дароо экран өчкөндөн кийин"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"Кулпуланбаган экран <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> кызматында колдоого алынбаса, экран өчкөндөн <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> кийин"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> кийин (<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> функциясы колдонулбаса)"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Кулпуланган экрандан ээсинин маалыматы көрүнсүн"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Кулпуланган экрандагы текст"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Виджеттерди жандыруу"</string>
@@ -723,7 +723,7 @@
     <string name="device_details_title" msgid="1155622417516195481">"Түзмөктүн чоо-жайы"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Түзмөктүн Bluetooth дареги: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Түзмөк унутулсунбу?"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Мындан ары телефонуңуз <xliff:g id="DEVICE_NAME">%1$s</xliff:g> түзмөгүнөн ажыратылат"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Телефонуңуз <xliff:g id="DEVICE_NAME">%1$s</xliff:g> түзмөгүнөн ажыратылат"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Мындан ары планшетиңиз <xliff:g id="DEVICE_NAME">%1$s</xliff:g> түзмөгүнөн ажыратылат"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Мындан ары түзмөгүңүз <xliff:g id="DEVICE_NAME">%1$s</xliff:g> түзмөгүнөн ажыратылат"</string>
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"Мындан ары <xliff:g id="DEVICE_NAME">%1$s</xliff:g> бул аккаунт менен байланыштырылган түзмөктөр менен жупташтырылбайт"</string>
@@ -1826,7 +1826,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Профилдин графикалык ачкычы көрүнсүн"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Таптаганда дирилдесин"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Кубат баскычы дароо кулпулайт"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Кулпуланбаган экран <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> кызматында колдоого алынбаса"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> функциясы колдонулбаса"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Графикалык ачкычты коюу"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Графикалык ачкычты өзгөртүү"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Графикалык ачкычты кантип тартыш керек"</string>
@@ -2447,9 +2447,9 @@
       <item quantity="other">%1$d колдонмо чектелсинби?</item>
       <item quantity="one">Колдонмо чектелсинби?</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Батареяны үнөмдөө максатында, <xliff:g id="APP">%1$s</xliff:g> колдонмосунун фондо иштөөсүн токтотуп койсоңуз болот. Колдонмо талаптагыдай иштебей, билдирмелери кечигүү менен көрсөтүлүшү мүмкүн."</string>
-    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Батареяны үнөмдөө максатында, бул колдонмолордун фондо иштөөсүн токтотуп койсоңуз болот. Чектелген колдонмолор талаптагыдай иштебей, билдирмелери кечигүү менен көрсөтүлүшү мүмкүн.\n\nКолдонмолор:"</string>
-    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Батареяны үнөмдөө максатында, бул колдонмолордун фондо иштөөсүн токтотуп койсоңуз болот. Чектелген колдонмолор талаптагыдай иштебей, билдирмелери кечигүү менен көрсөтүлүшү мүмкүн.\n\nКолдонмолор:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
+    <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Батареяны үнөмдөө максатында, <xliff:g id="APP">%1$s</xliff:g> колдонмосунун фондо иштөөсүн токтотуп койсоңуз болот. Колдонмо талаптагыдай иштебей, билдирмелери кечигүү менен көрүнүшү мүмкүн."</string>
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Батареяны үнөмдөө максатында, бул колдонмолордун фондо иштөөсүн токтотуп койсоңуз болот. Чектелген колдонмолор талаптагыдай иштебей, билдирмелери кечигүү менен көрүнүшү мүмкүн.\n\nКолдонмолор:"</string>
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Батареяны үнөмдөө максатында, бул колдонмолордун фондо иштөөсүн токтотуп койсоңуз болот. Чектелген колдонмолор талаптагыдай иштебей, билдирмелери кечигүү менен көрүнүшү мүмкүн.\n\nКолдонмолор:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
     <string name="battery_tip_restrict_app_dialog_ok" msgid="7025027696689301916">"Чектөө"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="5501997201160532301">"Чектөөлөр өчүрүлсүнбү?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Бул колдонмо батареяны фондо керектей берет. Батареяңыз күтүлгөндөн эртерээк отуруп калышы мүмкүн."</string>
@@ -2468,7 +2468,7 @@
       <item quantity="one">%1$d колдонмо батареяны чектелген режимде колдонуп жатат</item>
     </plurals>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"<xliff:g id="TIME">%1$s</xliff:g> чектелди"</string>
-    <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Бул колдонмолор батареяны фондо колдонуп жатат. Чектелген колдонмолор талаптагыдай иштебей, билдирмелери кечигүү менен көрсөтүлүшү мүмкүн."</string>
+    <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Бул колдонмолор батареяны фондо колдонуп жатат. Чектелген колдонмолор талаптагыдай иштебей, билдирмелери кечигүү менен көрүнүшү мүмкүн."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Battery Manager\'ди колдонуу"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Колдонмолордун батареяны тез сарптаганы аныкталсын"</string>
     <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Күйүк / Колдонмолордун батареяны тез сарптаганы аныкталууда"</string>
@@ -3954,7 +3954,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Эч уруксат берилген жок"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Колдонмо уруксат сурай элек"</string>
-    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Колдонмолордун дайын-даректериңизди көрүү мүмкүнчүлүгүн көзөмөлдөйсүз"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Колдонмолордун сизге таандык нерселерди көрүү мүмкүнчүлүгүн көзөмөлдөйсүз"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Бардык колдонмолор"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Орнотулган колдонмолор"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Ыкчам ачылуучу колдонмолор"</string>
