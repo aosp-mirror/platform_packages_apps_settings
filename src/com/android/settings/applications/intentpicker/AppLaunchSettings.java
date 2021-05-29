@@ -312,6 +312,7 @@ public class AppLaunchSettings extends AppInfoBase implements
     /** Initialize add link preference */
     private void initAddLinkPreference() {
         mAddLinkPreference = findPreference(ADD_LINK_PREF_KEY);
+        mAddLinkPreference.setVisible(isAddLinksShown());
         mAddLinkPreference.setEnabled(isAddLinksNotEmpty());
         mAddLinkPreference.setOnPreferenceClickListener(preference -> {
             final int stateNoneLinksNo = getLinksNumber(DOMAIN_STATE_NONE);
@@ -325,6 +326,10 @@ public class AppLaunchSettings extends AppInfoBase implements
 
     private boolean isAddLinksNotEmpty() {
         return getLinksNumber(DOMAIN_STATE_NONE) > 0;
+    }
+
+    private boolean isAddLinksShown() {
+        return (isAddLinksNotEmpty() || getLinksNumber(DOMAIN_STATE_SELECTED) > 0);
     }
 
     private void showProgressDialogFragment() {
