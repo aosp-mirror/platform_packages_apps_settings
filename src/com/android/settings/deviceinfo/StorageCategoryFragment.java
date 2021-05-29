@@ -73,6 +73,7 @@ public class StorageCategoryFragment extends DashboardFragment
         LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.StorageResult>>,
         Preference.OnPreferenceClickListener {
     private static final String TAG = "StorageCategoryFrag";
+    private static final String SELECTED_STORAGE_ENTRY_KEY = "selected_storage_entry_key";
     private static final String SUMMARY_PREF_KEY = "storage_summary";
     private static final String FREE_UP_SPACE_PREF_KEY = "free_up_space";
     private static final int STORAGE_JOB_ID = 0;
@@ -127,6 +128,10 @@ public class StorageCategoryFragment extends DashboardFragment
 
         mStorageManager = getActivity().getSystemService(StorageManager.class);
 
+        if (icicle != null) {
+            mSelectedStorageEntry = icicle.getParcelable(SELECTED_STORAGE_ENTRY_KEY);
+        }
+
         initializePreference();
     }
 
@@ -165,6 +170,12 @@ public class StorageCategoryFragment extends DashboardFragment
         if (mSelectedStorageEntry != null) {
             refreshUi(mSelectedStorageEntry);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(SELECTED_STORAGE_ENTRY_KEY, mSelectedStorageEntry);
+        super.onSaveInstanceState(outState);
     }
 
     private void onReceivedSizes() {
