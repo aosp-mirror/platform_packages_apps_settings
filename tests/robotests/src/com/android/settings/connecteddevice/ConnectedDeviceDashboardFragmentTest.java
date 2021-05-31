@@ -84,7 +84,7 @@ public class ConnectedDeviceDashboardFragmentTest {
                 .getNonIndexableKeys(mContext);
 
         assertThat(niks).containsExactly(KEY_CONNECTED_DEVICES, KEY_AVAILABLE_DEVICES,
-                KEY_NEARBY_DEVICES, KEY_DISCOVERABLE_FOOTER, KEY_SEE_ALL, KEY_ADD_BT_DEVICES);
+                KEY_NEARBY_DEVICES, KEY_DISCOVERABLE_FOOTER, KEY_SEE_ALL);
     }
 
     @Test
