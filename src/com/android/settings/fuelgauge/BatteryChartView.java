@@ -15,6 +15,8 @@ package com.android.settings.fuelgauge;
 
 import static java.lang.Math.round;
 
+import static com.android.settings.Utils.formatPercentage;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.content.res.Resources;
@@ -53,8 +55,13 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private static final String TAG = "BatteryChartView";
     private static final List<String> ACCESSIBILITY_SERVICE_NAMES =
         Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
+
     // For drawing the percentage information.
-    private static final String[] PERCENTAGES = new String[] {"100%", "50%", "0%"};
+    private static final String[] PERCENTAGES = new String[] {
+            formatPercentage(/*percentage=*/ 100, /*round=*/ true),
+            formatPercentage(/*percentage=*/ 50, /*round=*/ true),
+            formatPercentage(/*percentage=*/ 0, /*round=*/ true)};
+
     private static final int DEFAULT_TRAPEZOID_COUNT = 12;
     private static final int DEFAULT_TIMESTAMP_COUNT = 4;
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
@@ -220,13 +227,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             mIndent.right = mPercentageBounds[0].width() + mTextPadding;
 
             if (mTimestamps != null) {
+                int maxHeight = 0;
                 for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
                     mTextPaint.getTextBounds(
                         mTimestamps[index], 0, mTimestamps[index].length(),
                         mTimestampsBounds[index]);
+                    maxHeight = Math.max(maxHeight, mTimestampsBounds[index].height());
                 }
-                mIndent.bottom = mTimestampsBounds[0].height()
-                    + round(mTextPadding * 1.5f);
+                mIndent.bottom = maxHeight + round(mTextPadding * 1.5f);
             }
             Log.d(TAG, "setIndent:" + mPercentageBounds[0]);
         } else {
@@ -451,7 +459,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     private int getTimestampY(int index) {
         return getHeight() - mTimestampsBounds[index].height()
-                -  mTimestampsBounds[index].top;
+            + (mTimestampsBounds[index].height() + mTimestampsBounds[index].top)
+            + round(mTextPadding * 1.5f);
     }
 
     private void drawTrapezoids(Canvas canvas) {
