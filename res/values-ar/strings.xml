@@ -137,7 +137,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"‏يريد %1$s الدخول إلى رسائلك. هل تريد منح %2$s حق الدخول؟"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"‏طلب حق الوصول إلى شريحة SIM"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"‏يريد <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> الوصول إلى شريحة SIM. ويؤدي منح حق الوصول إلى شريحة SIM إلى إيقاف اتصال البيانات على جهازك طوال مدة الاتصال. منح حق الوصول إلى <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
-    <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"يظهر باسم \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" للأجهزة الأخرى"</string>
+    <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"يظهر باسم \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" للأجهزة الأخرى."</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"يجب تفعيل بلوتوث للاتصال بالأجهزة الأخرى."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"أجهزتك"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"إقران جهاز جديد"</string>
@@ -289,7 +289,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"قفل الشاشة بعد انتهاء مهلة غلقها"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"بعد <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> من انتهاء المهلة"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"بعد انتهاء المهلة مباشرة، إلا عندما يظلّ الجهاز مفتوحًا بسبب <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> بعد انتهاء المهلة، إلا عندما يظلّ الجهاز مفتوحًا بسبب <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> بعد انتهاء المهلة، باستثناء عندما تبقي ميزة <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> الجهاز مفتوحًا"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"إظهار معلومات المالك في شاشة القفل"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"إضافة نص على شاشة القفل"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"تفعيل الأدوات"</string>
@@ -682,7 +682,7 @@
     </plurals>
     <plurals name="lockpassword_password_requires_numeric" formatted="false" msgid="70617964591376248">
       <item quantity="zero">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> رقم عددي على الأقل</item>
-      <item quantity="two">يجب أن تحتوي كلمة المرور على رقمين عددين (<xliff:g id="COUNT">%d</xliff:g>) على الأقل</item>
+      <item quantity="two">يجب أن تحتوي كلمة المرور على رقمين عدديين (<xliff:g id="COUNT">%d</xliff:g>) على الأقل</item>
       <item quantity="few">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> أرقام عددية على الأقل</item>
       <item quantity="many">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> رقمًا عدديًا على الأقل</item>
       <item quantity="other">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT">%d</xliff:g> رقم عددي على الأقل</item>
@@ -791,7 +791,7 @@
     <string name="device_details_title" msgid="1155622417516195481">"تفاصيل الجهاز"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"عنوان البلوتوث للجهاز: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"هل تريد إلغاء إقران الجهاز؟"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"لن يتم إقران هاتفك بعد الآن بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"لن يتم إقران هاتفك بعد الآن بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"لن يتم إقران جهازك اللوحي بعد الآن بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"لن يتم إقران جهازك بعد الآن بجهاز <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"لن يتم إقران <xliff:g id="DEVICE_NAME">%1$s</xliff:g> بعد الآن بأي جهاز متصل بهذا الحساب"</string>
@@ -1114,7 +1114,7 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"هل تريد إلغاء الدعوة للاتصال بـ <xliff:g id="PEER_NAME">%1$s</xliff:g>؟"</string>
     <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"حذف هذه المجموعة؟"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"‏نقطة اتصال Wi‑Fi"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"لا تتم مشاركة اتصال الإنترنت أو المحتوى مع الأجهزة الأخرى"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"لا تتم مشاركة اتصال الإنترنت أو المحتوى مع الأجهزة الأخرى."</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5832429443898690152">"تتم مشاركة اتصال الإنترنت على هذا الجهاز اللوحي عبر نقطة الاتصال"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5451921191609178326">"تتم مشاركة اتصال الإنترنت على هذا الهاتف عبر نقطة الاتصال"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"يشارك التطبيق المحتوى. لمشاركة اتصال الإنترنت، يجب إيقاف نقطة الاتصال، ثم تفعيلها."</string>
@@ -1632,7 +1632,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"مستوى البطارية"</string>
     <string name="apn_settings" msgid="4295467389400441299">"أسماء نقاط الوصول"</string>
     <string name="apn_edit" msgid="2003683641840248741">"تعديل نقطة الوصول"</string>
-    <string name="apn_not_set" msgid="8246646433109750293">"لم يتم الضبط"</string>
+    <string name="apn_not_set" msgid="8246646433109750293">"لم يتم الضبط."</string>
     <string name="apn_name" msgid="6677695784108157953">"الاسم"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"الخادم الوكيل"</string>
@@ -1914,7 +1914,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"إظهار نقش الملف الشخصي"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"اهتزاز عند النقر"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"القفل فورًا باستخدام زر التشغيل"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"باستثناء عندما ميزة <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> تبقي الجهاز مفتوحًا"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"باستثناء عندما تبقي ميزة <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> الجهاز مفتوحًا"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"تعيين نقش فتح القفل"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"تغيير نقش فتح القفل"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"كيفية رسم نقش لفتح القفل"</string>
@@ -3014,7 +3014,7 @@
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"هل تريد إيقاف مزامنة البيانات تلقائيًا؟"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"لن يغيّر هذا الإجراء عملية الحفاظ على استخدامات البيانات والبطارية، ولكن ستحتاج إلى مزامنة كل حساب يدويًا لجمع المعلومات الحديثة ولن تتلقّى إشعارات عند إتمام التحديثات."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"تاريخ إعادة ضبط دورة الاستخدام"</string>
-    <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"تاريخ كل شهر:"</string>
+    <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"اليوم من كل شهر:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"ضبط"</string>
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"ضبط تحذيرات استخدام البيانات"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"ضبط الحد الأقصى لاستخدام البيانات"</string>
@@ -3069,7 +3069,7 @@
     <string name="vpn_always_on_invalid_reason_server" msgid="2635347740046212693">"‏لا تتوافق الشبكة الافتراضية الخاصة (VPN) التي يتم تشغيلها دائمًا إلا مع عناوين الخادم الرقمية"</string>
     <string name="vpn_always_on_invalid_reason_no_dns" msgid="3980357762395272467">"‏يجب تحديد خادم نظام أسماء نطاقات (DNS) للشبكة الافتراضية الخاصة (VPN) التي يتم تشغيلها دائمًا"</string>
     <string name="vpn_always_on_invalid_reason_dns" msgid="3934369594591801587">"‏يجب أن تكون عناوين خادم نظام أسماء النطاقات (DNS) رقمية للشبكة الافتراضية الخاصة التي يتم تشغيلها دائمًا"</string>
-    <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"‏المعلومات التي تم إدخالها لا تتوافق مع الشبكة الافتراضية الخاصة (VPN) التي يتم تشغيلها دائمًا"</string>
+    <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"‏المعلومات التي تم إدخالها لا تتوافق مع الشبكة الافتراضية الخاصة (VPN) التي يتم تشغيلها دائمًا."</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"إلغاء"</string>
     <string name="vpn_done" msgid="5137858784289564985">"تجاهل"</string>
     <string name="vpn_save" msgid="683868204634860888">"حفظ"</string>
@@ -3223,7 +3223,7 @@
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"آلية العمل"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"استخدِم هاتفك للدفع في المتاجر"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"التطبيق التلقائي للدفع"</string>
-    <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"لم يتم الضبط"</string>
+    <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"لم يتم الضبط."</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="nfc_payment_use_default" msgid="788899906312142803">"استخدام التطبيق التلقائي"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"دائمًا"</string>
@@ -3534,10 +3534,10 @@
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"خيارات العرض للإشعارات المخفية"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"عندما تكون ميزة \"عدم الإزعاج\" مفعّلة"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"بدون تنبيهات صوتية من الإشعارات"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"سترى الإشعارات على شاشتك"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"سترى الإشعارات على شاشتك."</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"عند ظهور إشعارات، لن يُصدر هاتفك صوتًا أو يهتزّ."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"بدون تنبيهات مرئيّة أو صوتية من الإشعارات"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"لن ترى أو تسمع الإشعارات"</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"لن ترى أو تسمع الإشعارات."</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"عند تلقّي إشعارات جديدة أو حالية، لن يهتز هاتفك ولن يعرضها ولن يُصدِر تنبيهات صوتية لها. ستستمر الإشعارات المهمّة عن نشاط الهاتف وحالته في الظهور.\n\nبعد إيقاف ميزة \"عدم الإزعاج\"، يمكنك العثور على الإشعارات الفائتة من خلال التمرير سريعًا للأسفل من أعلى الشاشة."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"الإعدادات المخصّصة"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"تفعيل الإعداد المخصّص"</string>
@@ -3714,7 +3714,7 @@
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"عدم عرض الإشعارات على الإطلاق"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"كيف تريد عرض شاشة القفل؟"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"شاشة القفل"</string>
-    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"عرض محتوى إشعارات العمل كاملًا"</string>
+    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"عرض محتوى إشعارات العمل كاملاً"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"إخفاء محتوى العمل الحساس"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"كيف تريد أن يتم عرض إشعارات الملف الشخصي عندما يكون الجهاز مقفلاً؟"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"إشعارات الملف الشخصي"</string>
@@ -3964,7 +3964,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"المحادثات التي يمكنها مقاطعة عمل الميزة"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"كل المحادثات"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"المحادثات ذات الأولوية"</string>
-    <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"غير مسموح لأي محادثات"</string>
+    <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"غير مسموح بأي محادثات"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="zero"><xliff:g id="CONVERSATIONS">%d</xliff:g> محادثة</item>
       <item quantity="two">محادثتان (<xliff:g id="CONVERSATIONS">%d</xliff:g>)</item>
@@ -3973,7 +3973,7 @@
       <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> محادثة</item>
       <item quantity="one">محادثة واحدة</item>
     </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"غير مسموح لأي محادثات"</string>
+    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"غير مسموح بأي محادثات"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"مَن يمكنه مقاطعة عمل الميزة"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"المكالمات"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"المكالمات"</string>
@@ -4015,7 +4015,7 @@
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"من جهات الاتصال والمتّصلين المتكرّرين"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"من المتّصلين المتكرّرين فقط"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"غير مسموح بأي مكالمات"</string>
-    <string name="zen_mode_none_messages" msgid="1386626352943268342">"غير مسموح لأي رسائل"</string>
+    <string name="zen_mode_none_messages" msgid="1386626352943268342">"غير مسموح بأي رسائل"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"المنبّهات"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"من الموقتات والإنذارات وأنظمة الأمان والتطبيقات الأخرى"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"المنبِّهات"</string>
@@ -4039,7 +4039,7 @@
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"السماح للتطبيقات بإلغاء وضع \"عدم الإزعاج\""</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"التطبيقات التي يمكنها مقاطعة عمل الميزة"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"اختيار مزيد من التطبيقات"</string>
-    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"لم يتم اختيار أي تطبيقات"</string>
+    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"لم يتم اختيار أي تطبيقات."</string>
     <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"عدم السماح لأي تطبيقات بمقاطعة عمل الميزة"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"إضافة تطبيقات"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"جميع الإشعارات"</string>
@@ -4506,7 +4506,7 @@
     <string name="condition_expand_show" msgid="1501084007540953213">"إظهار"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"إخفاء"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"نقطة الاتصال مفعّلة"</string>
-    <string name="condition_airplane_title" msgid="5847967403687381705">"وضع الطيران قيد التفعيل"</string>
+    <string name="condition_airplane_title" msgid="5847967403687381705">"وضع الطيران مفعّل"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"الشبكات غير متوفرة"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"ميزة \"عدم الإزعاج\" مفعَّلة"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"تم كتم صوت الهاتف."</string>
@@ -5302,7 +5302,7 @@
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"‏عندما تستخدم شريحتَي SIM، سيقتصر عمل هذا الجهاز على الجيل الرابع. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"تعليق التنفيذ للتطبيقات المخزَّنة مؤقتًا"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"السماح بالظهور فوق المحتوى على الشاشة في \"الإعدادات\""</string>
-    <string name="overlay_settings_summary" msgid="2745336273786148166">"السماح للتطبيقات التي يمكن عرضها على التطبيقات الأخرى بالظهور فوق المحتوى على شاشات \"الإعدادات\"."</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"السماح للتطبيقات التي يمكن عرضها على التطبيقات الأخرى بالظهور فوق المحتوى على شاشات \"الإعدادات\""</string>
     <string name="media_controls_title" msgid="403271085636252597">"الوسائط"</string>
     <string name="media_controls_summary" msgid="5032071475867165587">"إخفاء المشغِّل عندما تنتهي جلسة الوسائط"</string>
     <string name="media_controls_resume_description" msgid="2333689676163363582">"يسمح لك المشغِّل باستئناف جلسة من اللوحة الموسَّعة \"الإعدادات السريعة\"."</string>
