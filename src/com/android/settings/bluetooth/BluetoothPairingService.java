@@ -134,7 +134,8 @@ public final class BluetoothPairingService extends Service {
         mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
         if (mDevice != null && mDevice.getBondState() != BluetoothDevice.BOND_BONDING) {
-            Log.w(TAG, "Device " + mDevice + " not bonding: " + mDevice.getBondState());
+            Log.w(TAG, "Device " + mDevice.getName() + " not bonding: " + mDevice.getBondState());
+            mNm.cancel(NOTIFICATION_ID);
             stopSelf();
             return START_NOT_STICKY;
         }
