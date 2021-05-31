@@ -20,6 +20,11 @@
     android:title="@string/night_display_title"
     settings:keywords="@string/keywords_display_night_display">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="night_display_top_intro"
+        android:title="@string/night_display_text"
+        settings:controller="com.android.settings.display.NightDisplayTopIntroPreferenceController"/>
+
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="night_display_activated"
         android:title="@string/night_light_main_switch_title"
@@ -29,11 +34,6 @@
         android:key="dark_ui_location_off"
         android:title="@string/twilight_mode_location_off_dialog_message"
         settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
-
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="night_display_top_intro"
-        android:title="@string/night_display_text"
-        settings:controller="com.android.settings.display.NightDisplayTopIntroPreferenceController"/>
 
     <DropDownPreference
         android:key="night_display_auto_mode"
