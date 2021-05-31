@@ -44,7 +44,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
-import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
 import com.android.settings.deviceinfo.storage.DiskInitFragment;
 import com.android.settings.deviceinfo.storage.SecondaryUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
@@ -68,6 +67,7 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Storage Settings main UI is composed by 3 fragments:
@@ -101,7 +101,6 @@ public class StorageDashboardFragment extends DashboardFragment
     private StorageEntry mSelectedStorageEntry;
     private PrivateStorageInfo mStorageInfo;
     private SparseArray<StorageAsyncLoader.StorageResult> mAppsResult;
-    private CachedStorageValuesHelper mCachedStorageValuesHelper;
 
     private StorageItemPreferenceController mPreferenceController;
     private VolumeOptionMenuController mOptionMenuController;
@@ -232,6 +231,10 @@ public class StorageDashboardFragment extends DashboardFragment
         mOptionMenuController.setSelectedStorageEntry(mSelectedStorageEntry);
         getActivity().invalidateOptionsMenu();
 
+        // To prevent flicker, hides secondary users preference.
+        // onReceivedSizes will set it visible for private storage.
+        setSecondaryUsersVisible(false);
+
         if (!mSelectedStorageEntry.isMounted()) {
             // Set null volume to hide category stats.
             mPreferenceController.setVolume(null);
@@ -241,6 +244,10 @@ public class StorageDashboardFragment extends DashboardFragment
             mStorageInfo = null;
             mAppsResult = null;
             maybeSetLoading(isQuotaSupported());
+
+            // To prevent flicker, sets null volume to hide category preferences.
+            // onReceivedSizes will setVolume with the volume of selected storage.
+            mPreferenceController.setVolume(null);
 
             // Stats data is only available on private volumes.
             getLoaderManager().restartLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
@@ -316,7 +323,6 @@ public class StorageDashboardFragment extends DashboardFragment
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        initializeCacheProvider();
 
         EntityHeaderController.newInstance(getActivity(), this /*fragment*/,
                 null /* header view */)
@@ -355,6 +361,10 @@ public class StorageDashboardFragment extends DashboardFragment
             return;
         }
 
+        if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
+            setLoading(false /* loading */, true /* animate */);
+        }
+
         final long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
         mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
         mPreferenceController.setUsedSize(privateUsedBytes);
@@ -369,10 +379,7 @@ public class StorageDashboardFragment extends DashboardFragment
 
         mPreferenceController.onLoadFinished(mAppsResult, mUserId);
         updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
-
-        if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
-            setLoading(false, true);
-        }
+        setSecondaryUsersVisible(true);
     }
 
     @Override
@@ -463,7 +470,6 @@ public class StorageDashboardFragment extends DashboardFragment
     public void onLoadFinished(Loader<SparseArray<StorageAsyncLoader.StorageResult>> loader,
             SparseArray<StorageAsyncLoader.StorageResult> data) {
         mAppsResult = data;
-        maybeCacheFreshValues();
         onReceivedSizes();
     }
 
@@ -487,11 +493,6 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @VisibleForTesting
-    public void setCachedStorageValuesHelper(CachedStorageValuesHelper helper) {
-        mCachedStorageValuesHelper = helper;
-    }
-
-    @VisibleForTesting
     public PrivateStorageInfo getPrivateStorageInfo() {
         return mStorageInfo;
     }
@@ -511,19 +512,6 @@ public class StorageDashboardFragment extends DashboardFragment
         mAppsResult = info;
     }
 
-    @VisibleForTesting
-    void initializeCachedValues() {
-        final PrivateStorageInfo info = mCachedStorageValuesHelper.getCachedPrivateStorageInfo();
-        final SparseArray<StorageAsyncLoader.StorageResult> loaderResult =
-                mCachedStorageValuesHelper.getCachedStorageResult();
-        if (info == null || loaderResult == null) {
-            return;
-        }
-
-        mStorageInfo = info;
-        mAppsResult = loaderResult;
-    }
-
     /**
      * Activate loading UI and animation if it's necessary.
      */
@@ -537,22 +525,20 @@ public class StorageDashboardFragment extends DashboardFragment
         }
     }
 
-    private void initializeCacheProvider() {
-        mCachedStorageValuesHelper = new CachedStorageValuesHelper(getContext(), mUserId);
-        initializeCachedValues();
-        onReceivedSizes();
-    }
-
-    private void maybeCacheFreshValues() {
-        if (mStorageInfo != null && mAppsResult != null) {
-            mCachedStorageValuesHelper.cacheResult(mStorageInfo, mAppsResult.get(mUserId));
-        }
-    }
-
     private boolean isQuotaSupported() {
         return mSelectedStorageEntry.isMounted()
                 && getActivity().getSystemService(StorageStatsManager.class)
                         .isQuotaSupported(mSelectedStorageEntry.getFsUuid());
+    }
+
+    private void setSecondaryUsersVisible(boolean visible) {
+        final Optional<SecondaryUserController> secondaryUserController = mSecondaryUsers.stream()
+                .filter(controller -> controller instanceof SecondaryUserController)
+                .map(controller -> (SecondaryUserController) controller)
+                .findAny();
+        if (secondaryUserController.isPresent()) {
+            secondaryUserController.get().setPreferenceGroupVisible(visible);
+        }
     }
 
     /**
@@ -614,7 +600,6 @@ public class StorageDashboardFragment extends DashboardFragment
             }
 
             mStorageInfo = privateStorageInfo;
-            maybeCacheFreshValues();
             onReceivedSizes();
         }
     }
