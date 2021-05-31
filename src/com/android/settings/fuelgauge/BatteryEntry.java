@@ -417,10 +417,6 @@ public class BatteryEntry {
         }
 
         final String uidString = Integer.toString(uid);
-        if (name == null) {
-            name = uidString;
-        }
-
         if (icon == null) {
             icon = pm.getDefaultActivityIcon();
         }
