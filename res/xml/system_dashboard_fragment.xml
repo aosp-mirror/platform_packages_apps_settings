@@ -18,16 +18,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="system_dashboard_screen"
-    android:title="@string/header_category_system"
-    settings:initialExpandedChildrenCount="4">
+    android:title="@string/header_category_system">
 
     <Preference
         android:key="language_input_settings"
         android:title="@string/language_settings"
         android:icon="@drawable/ic_settings_language"
         android:order="-260"
-        android:fragment="com.android.settings.language.LanguageAndInputSettings"
-        settings:controller="com.android.settings.language.LanguageAndInputPreferenceController"/>
+        android:fragment="com.android.settings.language.LanguageAndInputSettings"/>
 
     <Preference
         android:key="gesture_settings"
@@ -45,35 +43,33 @@
         android:fragment="com.android.settings.datetime.DateTimeSettings"
         settings:controller="com.android.settings.datetime.DateTimePreferenceController"/>
 
-    <Preference
-        android:key="reset_dashboard"
-        android:title="@string/reset_dashboard_title"
-        android:summary="@string/reset_dashboard_summary"
-        android:icon="@drawable/ic_restore"
-        android:order="-50"
-        android:fragment="com.android.settings.system.ResetDashboardFragment"
-        settings:controller="com.android.settings.system.ResetPreferenceController"/>
-
     <!-- System updates -->
-    <Preference
-        android:key="system_update_settings"
-        android:title="@string/system_update_settings_list_item_title"
-        android:summary="@string/summary_placeholder"
-        android:icon="@drawable/ic_system_update"
-        android:order="-30"
-        settings:keywords="@string/keywords_system_update_settings"
-        settings:controller="com.android.settings.system.SystemUpdatePreferenceController">
-        <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS"/>
-    </Preference>
-
     <Preference
         android:key="additional_system_update_settings"
         android:title="@string/additional_system_update_settings_list_item_title"
-        android:order="-31"
+        android:order="-59"
         settings:controller="com.android.settings.system.AdditionalSystemUpdatePreferenceController">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="@string/additional_system_update"
                 android:targetClass="@string/additional_system_update_menu"/>
     </Preference>
 
+    <Preference
+        android:key="system_update_settings"
+        android:title="@string/system_update_settings_list_item_title"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_system_update"
+        android:order="-58"
+        settings:keywords="@string/keywords_system_update_settings"
+        settings:controller="com.android.settings.system.SystemUpdatePreferenceController">
+        <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS"/>
+    </Preference>
+
+    <Preference
+        android:key="reset_dashboard"
+        android:title="@string/reset_dashboard_title"
+        android:icon="@drawable/ic_restore"
+        android:order="-30"
+        android:fragment="com.android.settings.system.ResetDashboardFragment"
+        settings:controller="com.android.settings.system.ResetPreferenceController"/>
 </PreferenceScreen>
