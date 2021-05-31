@@ -37,6 +37,7 @@ import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.Utils;
 import com.android.settingslib.enterprise.ActionDisabledByAdminController;
 import com.android.settingslib.enterprise.ActionDisabledByAdminControllerFactory;
 
@@ -139,7 +140,9 @@ public class ActionDisabledByAdminDialogHelper {
     void setAdminSupportIcon(View root, ComponentName admin, int userId) {
         ImageView supportIconView = root.requireViewById(R.id.admin_support_icon);
         supportIconView.setImageDrawable(
-                mActivity.getDrawable(com.android.internal.R.drawable.ic_corp_badge));
+                mActivity.getDrawable(R.drawable.ic_lock_closed));
+
+        supportIconView.setImageTintList(Utils.getColorAccent(mActivity));
     }
 
     @VisibleForTesting
