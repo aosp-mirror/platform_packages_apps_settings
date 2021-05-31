@@ -207,7 +207,7 @@
     <string name="locale_remove_menu" msgid="3521546263421387474">"Հեռացնել"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Ավելացնել լեզու"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
-      <item quantity="one">Հեռացնե՞լ ընտրված լեզուները</item>
+      <item quantity="one">Հեռացնե՞լ ընտրված լեզուն</item>
       <item quantity="other">Հեռացնե՞լ ընտրված լեզուները</item>
     </plurals>
     <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Տեքստը կցուցադրվի մեկ այլ լեզվով:"</string>
@@ -708,7 +708,7 @@
     <string name="bluetooth_pairing_dialog_title" msgid="6106058683134173178">"Զուգավորե՞լ այս սարքի հետ:"</string>
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="5472835166206721325">"Համօգտագործե՞լ հեռախոսագիրքը:"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="7516277926581535299">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ը ուզում է մուտք գործել ձեր կոնտակտներ ու զանգերի պատմություն:"</string>
-    <string name="bluetooth_pairing_dialog_paring_request" msgid="1545098121090892788">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքը ցանկանում է զուգավորվել Bluetooth-ով: Միանալու դեպքում այն մուտք կունենա դեպի ձեր կոնտակտները և զանգերի պատմությունը:"</string>
+    <string name="bluetooth_pairing_dialog_paring_request" msgid="1545098121090892788">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> սարքը ցանկանում է զուգակցվել Bluetooth-ով: Միանալու դեպքում այն մուտք կունենա դեպի ձեր կոնտակտները և զանգերի պատմությունը:"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Հասանելի սարքեր"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="1331122763066030155">"Հասանելի սարքեր չկան"</string>
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Միանալ"</string>
@@ -1291,9 +1291,9 @@
     <string name="sim_lock_settings_title" msgid="1401619059761012696">"SIM քարտի կողպում"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"SIM քարտի կողպում"</string>
     <string name="sim_lock_on" product="tablet" msgid="5857965768682972363">"Գրասալիկը օգտագործելու համար PIN է պահանջվում"</string>
-    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Հեռախոսն օգտագործելու համար PIN է անհրաժեշտ"</string>
+    <string name="sim_lock_on" product="default" msgid="3303147192981388923">"Հեռախոսն օգտագործելու համար պահանջել PIN կոդ"</string>
     <string name="sim_lock_off" product="tablet" msgid="7188936582548721225">"Գրասալիկն օգտագործելու համար PIN է պահանջվում"</string>
-    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Հեռախոսն օգտագործելու համար PIN է անհրաժեշտ"</string>
+    <string name="sim_lock_off" product="default" msgid="4634118006847137785">"Հեռախոսն օգտագործելու համար պահանջել PIN կոդ"</string>
     <string name="sim_pin_change" msgid="5978881209990507379">"Փոխել SIM քարտի PIN կոդը"</string>
     <string name="sim_enter_pin" msgid="8235202785516053253">"SIM քարտի PIN կոդը"</string>
     <string name="sim_enable_sim_lock" msgid="8993991669975548653">"SIM քարտի կողպում"</string>
@@ -2596,7 +2596,7 @@
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Ավտոմատ միացնել"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Ժամանակացույց չկա"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Լիցքավորման պատմության հիման վրա"</string>
-    <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Լիցքի մակարդակի հիման վրա"</string>
+    <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Տոկոսի հիման վրա"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Միացնել, եթե հավանականությունը մեծ է, որ լիցքի մակարդակը չի բավականացնի մինչև հաջորդ լիցքավորումը"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Կմիանա <xliff:g id="PERCENT">%1$s</xliff:g> լիցքի դեպքում"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Ստեղծել ժամանակացույց"</string>
@@ -2728,10 +2728,10 @@
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Սարքի ադմինիստրատորի հավելվածներ"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Սարքի ադմինիստրատորի հավելվածներ չկան"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Չկան Trust Agents"</string>
-    <string name="add_device_admin_msg" msgid="7730006568970042119">"Ակտիվացնե՞լ սարքի ադմինիստրատորի հավելվածը:"</string>
+    <string name="add_device_admin_msg" msgid="7730006568970042119">"Ակտիվացնե՞լ սարքի ադմինիստրատորի հավելվածը"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Ակտիվացնել այս սարքի ադմինիստրատորի հավելվածը"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Սարքի ադմինիստրատոր"</string>
-    <string name="device_admin_warning" msgid="1889160106787280321">"Ադմինիստրատորի այս հավելվածի ակտիվացումը <xliff:g id="APP_NAME">%1$s</xliff:g> հավելվածին թույլ կտա կատարել հետևյալ գործողությունները`"</string>
+    <string name="device_admin_warning" msgid="1889160106787280321">"Ադմինիստրատորի այս հավելվածի ակտիվացումը թույլ կտա «<xliff:g id="APP_NAME">%1$s</xliff:g>» հավելվածին կատարել հետևյալ գործողությունները՝"</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"<xliff:g id="APP_NAME">%1$s</xliff:g> հավելվածը կկառավարի և կվերահսկի այս սարքը։"</string>
     <string name="device_admin_status" msgid="6332571781623084064">"Ադմինիստրատորի այս հավելվածը ակտիվ է և թույլ է տալիս <xliff:g id="APP_NAME">%1$s</xliff:g>-ին կատարել հետևյալ գործողությունները`"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Ակտիվացնե՞լ պրոֆիլների կառավարիչը:"</string>
@@ -3644,7 +3644,7 @@
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Կապված հավելվածներ չկան"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"խաչ պրոֆիլ կապված հավելված հավելվածներ աշխատանքային և անձնական"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Կապված աշխատանքային և անձնական հավելվածներ"</string>
-    <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Կապվեցին"</string>
+    <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Կապված են"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Կապել այս հավելվածները"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Կապված հավելվածներին հասանելի են միմյանց թույլտվությունները և տվյալները։"</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Հավելվածները կապեք միայն այն դեպքում, եթե վստահ եք, որ դրանք ձեր անձնական տվյալները չեն փոխանցի ՏՏ ադմինիստրատորին։"</string>
@@ -3746,7 +3746,7 @@
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Ամեն օր"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Զարթուցիչը կարող է հնչել ավելի շուտ, քան կսպառվի ժամանակը"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Ժամանակացույցն անջատվում է, երբ միանում է զարթուցիչը"</string>
-    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"«Չանհանգստացնել» ռեժիմի անհատականացված կարգավորումները"</string>
+    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"«Չանհանգստացնել» ռեժիմի կարգավորումներ"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Օգտագործել կանխադրված կարգավորումները"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Սահմանել հատուկ կարգավորումներ այս ժամանակացույցի համար"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"«<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>» կանոնի համար"</string>
@@ -3889,7 +3889,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Հավելվածների ամրացում"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Հավելվածների ամրացման օգնությամբ դուք կարող եք տեսադաշտում պահել ընթացիկ հավելվածն այնքան ժամանակ, մինչև չապամրացնեք այն։ Այս գործառույթը կարող է օգտագործվել, օրինակ, երբ ուզում եք թույլ տալ ձեր վստահելի ընկերոջը որոշակի խաղ խաղալ։ \n\nԵրբ որևէ հավելված ամրացված է, այն կարող է բացել այլ հավելվածներ։ Դրան կարող են նաև հասանելի լինել ձեր անձնական տվյալները։ \n\nՀավելվածների ամրացման գործառույթն օգտագործելու համար՝ 	\n1.	Միացրեք հավելվածների ամրացումը։ 	\n2.	Բացեք Համատեսքը։ 	\n3.	Էկրանի վերևում հպեք հավելվածի պատկերակին, այնուհետև հպեք «Ամրացնել»։"</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Հավելվածների ամրացման օգնությամբ դուք կարող եք տեսադաշտում պահել ընթացիկ հավելվածն այնքան ժամանակ, մինչև չապամրացնեք այն։ Այս գործառույթը կարող է օգտագործվել, օրինակ, երբ ուզում եք թույլ տալ ձեր վստահելի ընկերոջը որոշակի խաղ խաղալ։ \n\nԵրբ որևէ հավելված ամրացված է, այն կարող է այլ հավելվածներ բացել։ Դրան կարող են նաև հասանելի լինել ձեր անձնական տվյալները։ \n\nԵթե ձեր սարքից պետք է այլ մարդիկ օգտվեն, և դուք ուզում եք ձեզ ապահով զգալ, կարող եք միացնել հյուրի ռեժիմը։ \n\nՀավելվածների ամրացման գործառույթն օգտագործելու համար՝ 	\n1.	Միացրեք հավելվածների ամրացումը։ 	\n2.	Բացեք Համատեսքը։ 	\n3.	Էկրանի վերևում հպեք հավելվածի պատկերակին, այնուհետև հպեք «Ամրացնել»։"</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Երբ հավելվածն ամրացված է՝ \n\n•	 Դրան կարող են հասանելի լինել ձեր անձնական տվյալները \n		(օր․՝ կոնտակտները և նամակների բովանդակությունը)։ \n•	 Այն կարող է բացել այլ հավելվածներ։ \n\nԱմրացված հավելվածներից թույլ տվեք օգտվել միայն մարդկանց, ում վստահում եք։"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Երբ հավելվածն ամրացված է՝ \n\n•	 Դրան կարող են հասանելի լինել ձեր անձնական տվյալները \n		(օր․՝ կոնտակտները և նամակների բովանդակությունը)։ \n•	 Այն կարող է բացել այլ հավելվածներ։ \n\nԱմրացված հավելվածներից թույլ տվեք օգտվել միայն մարդկանց, որոնց վստահում եք։"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Հարցնել ապակողպող նախշը"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Հարցնել PIN կոդը"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Հարցնել գաղտնաբառը"</string>
@@ -4958,7 +4958,7 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Թույլատրել Կարգավորումների էկրանների վրադրումները"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Թույլատրել հավելվածներին, որոնք կարող են ցուցադրվել այլ հավելվածների վրա, վրադրել Կարգավորումների էկրանները"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Մեդիա"</string>
-    <string name="media_controls_summary" msgid="3573121049460596520">"Մեդիա նվագարկիչը՝ արագ կարգավորումներում"</string>
+    <string name="media_controls_summary" msgid="3573121049460596520">"Մեդիա նվագարկիչը արագ կարգավորումներում"</string>
     <string name="media_controls_resume_description" msgid="7702723104730495227">"Ցուցադրել մեդիա նվագարկիչը երկար ժամանակով՝ նվագարկումը հեշտությամբ վերսկսելու համար"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Թաքցնել նվագարկիչը"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Ցուցադրել նվագարկիչը"</string>

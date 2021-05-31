@@ -178,7 +178,7 @@
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"ポートフィールドを入力してください。"</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"[ホスト]フィールドが空の場合は、[ポート]フィールドも空にしてください。"</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"入力したポートは無効です。"</string>
-    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"HTTPプロキシはブラウザで使用されていますが、他のアプリでは使用できません。"</string>
+    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"HTTP プロキシはブラウザで使用されますが、他のアプリでの対応は限定的です。"</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"PAC URL: "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"ホスト名（www.google.com）の ping（IPv4）:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"ホスト名（www.google.com）の ping（IPv6）:"</string>
@@ -720,13 +720,13 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"詳細設定"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Bluetooth詳細設定"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Bluetooth を ON にすると、お使いのデバイスは近くにある他の Bluetooth デバイスと通信できます。"</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="4069064120315578780">"Bluetooth を ON にすると、デバイスが付近の Bluetooth デバイスと通信できます。\n\nデバイスの利便性向上のため、アプリやサービスは、Bluetooth が OFF の場合でも、いつでも付近のデバイスをスキャンできます。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。この設定は"<annotation id="link">"スキャンの設定"</annotation>"で変更できます。"</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="4069064120315578780">"Bluetooth を ON にすると、付近の他の Bluetooth デバイスと通信できます。\n\nBluetooth が OFF の場合でもアプリやサービスは付近のデバイスをいつでもスキャンできます。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。この設定は"<annotation id="link">"スキャンの設定"</annotation>"で変更できます。"</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"位置情報の精度を向上させるため、Bluetooth が OFF の場合でもシステムのアプリやサービスは Bluetooth デバイスを検出できます。この設定は、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"接続できませんでした。もう一度お試しください。"</string>
     <string name="device_details_title" msgid="1155622417516195481">"デバイスの詳細"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"デバイスの Bluetooth アドレス: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"このデバイスとのペア設定を解除しますか？"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"このスマートフォンと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定を解除します"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"このスマートフォンと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定が解除されます"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"このタブレットと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定を解除します"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"このデバイスと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定を解除します"</string>
     <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> と、このアカウントにリンクしているすべてのデバイスとのペア設定を解除します"</string>
@@ -808,7 +808,7 @@
     <string name="wifi_error" msgid="4903954145386086899">"エラー"</string>
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"この国では5GHz帯域は利用できません"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"機内モード"</string>
-    <string name="wifi_notify_open_networks" msgid="2610323626246818961">"パブリック ネットワークを通知する"</string>
+    <string name="wifi_notify_open_networks" msgid="2610323626246818961">"利用可能なパブリック ネットワークを通知する"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"高品質の公共ネットワークが利用可能なときに通知する"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Wi‑Fi を自動的に ON にする"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"ホーム ネットワークなどの高品質の保存済みネットワークの検出時に Wi‑Fi を ON にする"</string>
@@ -823,7 +823,7 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"この機能を使用するには、ネットワーク評価プロバイダを選択してください"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"この機能を使用するには、対応するネットワーク評価プロバイダを選択してください"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"証明書のインストール"</string>
-    <string name="wifi_scan_notify_text" msgid="2518097467707535013">"位置情報の精度を向上させるため、Wi‑Fi が OFF の場合でも、アプリやサービスはいつでも Wi‑Fi ネットワークをスキャンできます。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。この設定は<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
+    <string name="wifi_scan_notify_text" msgid="2518097467707535013">"位置情報の精度を向上させるため、Wi‑Fi が OFF の場合でも、アプリやサービスはいつでも Wi‑Fi ネットワークをスキャンできます。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。この設定は<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="6189528915806353667">"位置情報の精度を上げるには、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で Wi-Fi スキャンを ON にしてください。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"次回から表示しない"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="6285374200292675649">"スリープ時にWi-Fi接続を維持"</string>
@@ -857,17 +857,17 @@
     <string name="wifi_setup_wps" msgid="4303694722593999931">"自動設定（WPS）"</string>
     <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Wi‑Fi スキャンを ON にしますか？"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Wi‑Fi を自動的に ON にするには、まず Wi‑Fi スキャンを ON にしてください。"</string>
-    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wi-Fi スキャンでは、アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。"</string>
+    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Wi-Fi スキャンを ON にすると、Wi‑Fi が OFF の場合でも、アプリやサービスが常に Wi-Fi ネットワークをスキャンできます。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。"</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"ON にする"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi‑Fi スキャンを ON にしました"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"詳細設定"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"プルダウン リスト、詳細設定"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"展開"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"ネットワーク名"</string>
-    <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSIDを入力します"</string>
+    <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID を入力"</string>
     <string name="wifi_security" msgid="9095934643631406913">"セキュリティ"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"非公開ネットワーク"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"ルーターによってネットワーク ID がブロードキャストされていないネットワークに今後接続する可能性がある場合は、そのネットワークを非表示に設定できます。\n\nこの設定では、スマートフォンが定期的に信号をブロードキャストしてネットワークを探すため、セキュリティ上のリスクが生じる可能性があります。\n\nネットワークを非表示に設定しても、ルーターの設定は変わりません。"</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"ネットワーク ID がルーター側からブロードキャストされていないネットワークに接続する場合は、非公開ネットワークとして設定できます。\n\n非公開ネットワークに設定すると、スマートフォンが定期的に信号をブロードキャストしてネットワークを探すため、セキュリティ上のリスクが伴います。\n\nここでネットワークを非公開に設定しても、ルーターの設定は変わりません。"</string>
     <string name="wifi_signal" msgid="4442182285304271424">"電波強度"</string>
     <string name="wifi_status" msgid="5349199188871002778">"接続状況"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"送信リンク速度"</string>
@@ -878,9 +878,9 @@
     <string name="passpoint_label" msgid="6513669696739302866">"保存"</string>
     <string name="passpoint_content" msgid="5219226173518418335">"<xliff:g id="NAME">%1$s</xliff:g>の認証情報"</string>
     <string name="wifi_eap_method" msgid="3776009521349381742">"EAP方式"</string>
-    <string name="please_select_phase2" msgid="577633852089847142">"フェーズ2認証"</string>
-    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA証明書"</string>
-    <string name="wifi_eap_ocsp" msgid="8713933962516871238">"オンライン認証ステータス"</string>
+    <string name="please_select_phase2" msgid="577633852089847142">"フェーズ 2 認証"</string>
+    <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA 証明書"</string>
+    <string name="wifi_eap_ocsp" msgid="8713933962516871238">"証明書のオンライン検証"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"ドメイン"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"ユーザー証明書"</string>
     <string name="wifi_eap_identity" msgid="3629406902174137028">"ID"</string>
@@ -904,7 +904,7 @@
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"「<xliff:g id="SSID">%1$s</xliff:g>」にデバイスを追加するには、下の枠に QR コードを合わせてください"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"QR コードのスキャン"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、下記の中心に QR コードを合わせてください"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi‑Fi に接続するには、QR コードをスキャンしてください"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"QR コードをスキャンして Wi‑Fi に接続します"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Wi‑Fi の共有"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"この QR コードをスキャンすると、パスワードが共有されて「<xliff:g id="SSID">%1$s</xliff:g>」に接続できます"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンしてください"</string>
@@ -1035,7 +1035,7 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"<xliff:g id="PEER_NAME">%1$s</xliff:g>との接続への招待をキャンセルしますか？"</string>
     <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"このグループを削除しますか？"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Wi-Fi アクセス ポイント"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"インターネット接続やコンテンツを他のデバイスと共有しない"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"他のデバイスとインターネット接続 / コンテンツを共有"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5832429443898690152">"このタブレットのインターネット接続をアクセス ポイント経由で共有"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5451921191609178326">"このスマートフォンのインターネット接続をアクセス ポイント経由で共有"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"アプリがコンテンツを共有しています。インターネット接続を共有するには、アクセス ポイントを OFF にしてから再度 ON にします"</string>
@@ -1048,7 +1048,7 @@
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"アクセス ポイントを使って他のデバイスとの Wi‑Fi ネットワークを作成します。アクセス ポイントはモバイルデータ通信によるインターネット接続を提供します。モバイルデータ通信料が追加で発生する可能性があります。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"アプリを使ってアクセス ポイントを作成し、コンテンツを近くのデバイスと共有できます。"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"アクセス ポイントを自動的に OFF にする"</string>
-    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"デバイスが接続されていない場合"</string>
+    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"デバイスが接続されていない場合、自動的に OFF にします。"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"アクセスポイントをONにしています…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"アクセスポイントをOFFにしています…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> はアクティブです"</string>
@@ -1303,7 +1303,7 @@
     <string name="sim_reenter_new" msgid="6131418271490374263">"新しいPINを再入力"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"SIM PIN"</string>
     <string name="sim_bad_pin" msgid="5416328363761048221">"PINが正しくありません"</string>
-    <string name="sim_pins_dont_match" msgid="1540348773896609260">"PINが一致しません"</string>
+    <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN が一致しません"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"PINを変更できません。\nPINが正しくない可能性があります。"</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"SIM PINが変更されました"</string>
     <string name="sim_lock_failed" msgid="16360418201678317">"SIMカードのロック状態を変更できません。\nPINが正しくない可能性があります。"</string>
@@ -1677,8 +1677,8 @@
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>のテザリングを解除します。"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"イーサネット テザリング"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"スマートフォンのインターネット接続をイーサネット経由で共有"</string>
-    <string name="tethering_footer_info" msgid="6782375845587483281">"アクセス ポイントとテザリングを使用して、モバイルデータ通信により他のデバイスにインターネット接続を提供します。アプリを使ってアクセス ポイントを作成し、コンテンツを近くのデバイスと共有することもできます。"</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"アクセス ポイントとテザリングを使用して、Wi-Fi やモバイルデータ通信により他のデバイスにインターネット接続を提供します。アプリを使ってアクセス ポイントを作成し、コンテンツを近くのデバイスと共有することもできます。"</string>
+    <string name="tethering_footer_info" msgid="6782375845587483281">"このデバイスをアクセス ポイントとして機能させること（テザリング）で、モバイルデータ通信のインターネット接続を他のデバイスと共有できます。アプリがアクセス ポイントを作成し、近くのデバイスに接続する場合もあります。"</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"このデバイスをアクセス ポイントとして機能させること（テザリング）で、Wi-Fi またはモバイルデータ通信のインターネット接続を他のデバイスと共有できます。アプリがアクセス ポイントを作成し、近くのデバイスに接続する場合もあります。"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ヘルプ"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"モバイル ネットワーク"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"モバイルプラン"</string>
@@ -1714,9 +1714,9 @@
     <string name="location_low_battery_use" msgid="5218950289737996431">"電池使用量: 低"</string>
     <string name="location_scanning_screen_title" msgid="2346125609614249968">"Wi‑Fi のスキャンと Bluetooth のスキャン"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi‑Fi スキャン"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。"</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"アプリやサービスに対し、Wi‑Fi が OFF の場合でも、常に Wi-Fi ネットワークをスキャンすることを許可します。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。"</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth のスキャン"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"アプリやサービスに対し、Bluetooth が OFF の場合でも、常に付近のデバイスをスキャンすることを許可します。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。"</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"アプリやサービスに対し、Bluetooth が OFF の場合でも、常に付近のデバイスをスキャンすることを許可します。位置情報を使用する機能やサービスで利便性が向上するなどの効果があります。"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"仕事用プロファイル向けの位置情報サービス"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Wi-Fi/モバイル接続時の位置情報"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Googleの位置情報サービスで現在地をすばやく推定することをアプリに許可します。匿名の現在地データが収集され、Googleに送信されます。"</string>
@@ -1772,7 +1772,7 @@
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"PIN の再入力"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"仕事用の PIN を入力"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"パスワードが一致しません"</string>
-    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PINが一致しません"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN が一致しません"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"パターンを再入力"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"ロック解除方法の選択"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"パスワードが設定されました"</string>
@@ -1808,12 +1808,12 @@
     <string name="lock_settings_title" msgid="665707559508132349">"デバイスのセキュリティ"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5853706275279878879">"パターンの変更"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"ロック解除PINを変更"</string>
-    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"ロック解除パターンを入力"</string>
+    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"ロック解除パターンを入力してください"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"MENUキーでヘルプ表示"</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"描き終わりの点で指を離します"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"少なくとも<xliff:g id="NUMBER">%d</xliff:g>つの点を結んでください。"</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"パターンが記録されました"</string>
-    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"確認のためパターンを再入力"</string>
+    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"確認のためパターンを再入力してください"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"新しいロック解除パターン"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"確認"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"再入力"</string>
@@ -2470,7 +2470,7 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"アプリを自動的に管理"</string>
     <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"使用頻度の低いアプリによる電池の使用を制限します"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"電池使用量が多いと判断されたアプリは、バッテリー マネージャによって制限されます。制限されたアプリは正常に動作しない場合や、通知が遅れる可能性があります。"</string>
-    <string name="restricted_app_title" msgid="6585080822121007436">"制限されたアプリ"</string>
+    <string name="restricted_app_title" msgid="6585080822121007436">"アプリの制限"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">%1$d 個のアプリの電池使用を制限しています</item>
       <item quantity="one">%1$d 個のアプリの電池使用を制限しています</item>
@@ -2895,7 +2895,7 @@
     <string name="data_usage_metered_wifi" msgid="4807465959110473407">"従量制の Wi‑Fi ネットワーク"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="4664158157415362613">"従量制のネットワークを選択するには Wi‑Fi を ON にします。"</string>
     <string name="data_usage_metered_auto" msgid="1560514082131687116">"自動"</string>
-    <string name="wifi_metered_title" msgid="6623732965268033931">"ネットワーク使用状況"</string>
+    <string name="wifi_metered_title" msgid="6623732965268033931">"ネットワークの課金方法"</string>
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"従量制"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"定額制"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"デバイスで記録されるデータ使用量と携帯通信会社のデータ使用量は異なる場合があります。"</string>
@@ -2909,7 +2909,7 @@
     <string name="vpn_ipsec_identifier" msgid="8511842694369254801">"IPSec ID"</string>
     <string name="vpn_ipsec_secret" msgid="532007567355505963">"IPSec事前共有鍵"</string>
     <string name="vpn_ipsec_user_cert" msgid="2714372103705048405">"IPSecユーザー証明書"</string>
-    <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"IPSec CA証明書"</string>
+    <string name="vpn_ipsec_ca_cert" msgid="5558498943577474987">"IPSec CA 証明書"</string>
     <string name="vpn_ipsec_server_cert" msgid="1411390470454731396">"IPSecサーバー証明書"</string>
     <string name="vpn_show_options" msgid="6105437733943318667">"詳細オプションを表示する"</string>
     <string name="vpn_search_domains" msgid="1973799969613962440">"DNS 検索ドメイン"</string>
@@ -2971,13 +2971,13 @@
     <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"有効にする"</string>
     <string name="trusted_credentials_remove_label" msgid="8975881053042174913">"削除"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"信頼する"</string>
-    <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"システムのCA証明書を有効にしますか？"</string>
-    <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"システムのCA証明書を無効にしますか？"</string>
-    <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"ユーザーのCA証明書を完全に削除しますか？"</string>
+    <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"システムの CA 証明書を有効にしますか？"</string>
+    <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"システムの CA 証明書を無効にしますか？"</string>
+    <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"ユーザーの CA 証明書を完全に削除しますか？"</string>
     <string name="credential_contains" msgid="407972262032275476">"この認証情報には以下が含まれています。"</string>
     <string name="one_userkey" msgid="4417212932385103517">"ユーザーキー 1 個"</string>
     <string name="one_usercrt" msgid="1865069301105101370">"ユーザー証明書 1 件"</string>
-    <string name="one_cacrt" msgid="7467796501404158399">"CA証明書1件"</string>
+    <string name="one_cacrt" msgid="7467796501404158399">"CA 証明書 1 件"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"CA証明書%d件"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"認証情報の詳細"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"認証情報（<xliff:g id="CREDENTIAL_NAME">%s</xliff:g>）を削除しました"</string>
@@ -3062,15 +3062,15 @@
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"非接触型決済"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"仕組み"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"店舗でスマートフォンを使用して決済"</string>
-    <string name="nfc_payment_default" msgid="3769788268378614608">"お支払いのデフォルトのアプリ"</string>
+    <string name="nfc_payment_default" msgid="3769788268378614608">"デフォルトのお支払いアプリ"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"未設定"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="nfc_payment_use_default" msgid="788899906312142803">"デフォルトのアプリを使用"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"常時"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"別の決済アプリが起動されている場合を除く"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"非接触型決済端末で使用するアプリ:"</string>
-    <string name="nfc_how_it_works_title" msgid="1363791241625771084">"デバイス機器でのお支払い"</string>
-    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"決済アプリを設定してから、スマートフォンの背面を非接触型決済マークのあるデバイスにかざしてください。"</string>
+    <string name="nfc_how_it_works_title" msgid="1363791241625771084">"決済端末でのお支払い"</string>
+    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"決済アプリを設定してから、スマートフォンの背面を非接触型決済マークのある決済端末にかざします。"</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"OK"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"その他..."</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"デフォルトのお支払いアプリの設定"</string>
@@ -3534,7 +3534,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"機密性の高い仕事用プロファイルの通知"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"ロック中に機密性の高い仕事用プロファイルのコンテンツを表示する"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"すべての通知内容を表示する"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"ロック解除時のみプライベートな内容を表示する"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"通知は表示するがプライベートな内容はロック解除後にのみ表示する"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"通知を一切表示しない"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"ロック画面に通知をどのように表示しますか？"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"ロック画面"</string>
@@ -3888,11 +3888,11 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"アプリ固定"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちが特定のゲームをプレイすることを許可できます。\n\nアプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスされたりする可能性があります。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちが特定のゲームをプレイすることを許可できます。\n\nアプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスされたりする可能性があります。\n\nデバイスを他のユーザーと安全に共有するには、代わりにゲスト アカウントを使用してみてください。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	「最近のアプリ」の画面を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"アプリが固定されている場合: \n\n•	 個人データにアクセスされる可能性があります（連絡先、メールの内容など） \n•	 固定されたアプリが他のアプリを開く可能性があります \n\nアプリ固定機能は、信頼できる人とのみ使用してください。\n"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"アプリが固定されている場合: \n\n•	 個人データにアクセスされる可能性があります（連絡先、メールの内容など） \n•	 固定されたアプリが他のアプリを開く可能性があります \n\nアプリ固定機能は、相手を信頼できる場合にのみ使用してください。\n"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"画面固定の解除前にロック解除パターンを要求"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"画面固定の解除前にPINを要求"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"画面固定の解除前にパスワードを要求"</string>
-    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"画面固定を解除するときにデバイスをロックする"</string>
+    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"アプリ固定の解除時にデバイスをロック"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM の削除の確認"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"ダウンロード型 SIM を消去する前に本人確認を行う"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"この仕事用プロファイルを管理するアプリ:"</string>
@@ -4076,12 +4076,12 @@
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB テザリング"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="6464135515868405143">"このデバイスを MIDI として利用する際に使用します"</string>
-    <string name="usb_use" msgid="6783183432648438528">"USB の使用"</string>
+    <string name="usb_use" msgid="6783183432648438528">"USB の接続用途"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"デフォルトの USB 設定"</string>
     <string name="usb_default_info" msgid="167172599497085266">"別のデバイスが接続されてスマートフォンのロックが解除されると、この設定が適用されます。信頼できるデバイスにのみ接続してください。"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB の設定"</string>
-    <string name="usb_control_title" msgid="1946791559052157693">"USB の管理"</string>
+    <string name="usb_control_title" msgid="1946791559052157693">"USB の制御元"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"接続済みのデバイス"</string>
     <string name="usb_control_device" msgid="527916783743021577">"このデバイス"</string>
     <string name="usb_switching" msgid="3713602881103295766">"切り替えています..."</string>
@@ -4780,8 +4780,8 @@
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"毎回確認"</string>
     <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"ネットワークを追加"</string>
     <plurals name="mobile_network_summary_count" formatted="false" msgid="5173633860800230925">
-      <item quantity="other">SIM: <xliff:g id="COUNT_1">%1$d</xliff:g> 枚</item>
-      <item quantity="one">SIM: <xliff:g id="COUNT_0">%1$d</xliff:g> 枚</item>
+      <item quantity="other">SIM: <xliff:g id="COUNT_1">%1$d</xliff:g> つ</item>
+      <item quantity="one">SIM: <xliff:g id="COUNT_0">%1$d</xliff:g> つ</item>
     </plurals>
     <string name="default_for_calls" msgid="2788950217176988034">"デフォルトの通話"</string>
     <string name="default_for_sms" msgid="1316988329407434771">"デフォルトの SMS"</string>
