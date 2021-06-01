@@ -24,12 +24,10 @@ import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutT
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.TextureView;
@@ -49,11 +47,11 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Preconditions;
+import androidx.core.widget.TextViewCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -310,25 +308,17 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     private static View makeTitleView(Context context) {
-        final String familyName =
-                context.getString(
-                        com.android.internal.R.string.config_headlineFontFamilyMedium);
         final TextView textView = new TextView(context);
-
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, /* size= */ 20);
-        textView.setTextColor(Utils.getColorAttr(context, android.R.attr.textColorPrimary));
+        // Sets the text color, size, style, hint color, and highlight color from the specified
+        // TextAppearance resource.
+        TextViewCompat.setTextAppearance(textView, R.style.AccessibilityDialogTitle);
         textView.setGravity(Gravity.CENTER);
-        textView.setTypeface(Typeface.create(familyName, Typeface.NORMAL));
-
         return textView;
     }
 
     private static View makeInstructionView(Context context) {
         final TextView textView = new TextView(context);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, /* size= */ 16);
-        textView.setTextColor(Utils.getColorAttr(context, android.R.attr.textColorPrimary));
-        textView.setTypeface(
-                Typeface.create(/* familyName= */ "sans-serif", Typeface.NORMAL));
+        TextViewCompat.setTextAppearance(textView, R.style.AccessibilityDialogDescription);
         return textView;
     }
 
