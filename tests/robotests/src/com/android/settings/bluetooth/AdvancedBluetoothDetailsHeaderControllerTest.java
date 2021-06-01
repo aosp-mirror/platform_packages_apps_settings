@@ -121,9 +121,6 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
                 String.valueOf(false).getBytes());
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_MAIN_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
         when(mCachedDevice.isConnected()).thenReturn(true);
 
         mController.refresh();
@@ -134,6 +131,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
                 View.GONE);
         assertThat(mLayoutPreference.findViewById(R.id.layout_middle).getVisibility()).isEqualTo(
                 View.VISIBLE);
+        // TODO (b/188954766) : clarify settings design
     }
 
     @Test
