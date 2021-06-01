@@ -2920,7 +2920,7 @@
     <string name="vpn_save_login" msgid="5986762519977472618">"Enregistrer les informations de compte"</string>
     <string name="vpn_not_used" msgid="7229312881336083354">"(non utilisé)"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"(ne pas valider le serveur)"</string>
-    <string name="vpn_no_server_cert" msgid="8106540968643125407">"(certificat reçu du serveur)"</string>
+    <string name="vpn_no_server_cert" msgid="8106540968643125407">"(reçu du serveur)"</string>
     <string name="vpn_always_on_invalid_reason_type" msgid="4699113710248872972">"Ce type de VPN ne peut pas rester connecté en permanence"</string>
     <string name="vpn_always_on_invalid_reason_server" msgid="2635347740046212693">"Le VPN permanent n\'accepte que les adresses de serveur composées de chiffres"</string>
     <string name="vpn_always_on_invalid_reason_no_dns" msgid="3980357762395272467">"Vous devez spécifier un serveur DNS pour le VPN permanent"</string>
@@ -3370,7 +3370,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"À la réception de notifications, votre téléphone n\'émet aucun son et ne vibre pas."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Aucune notification visuelle ni sonore"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Vous ne recevrez aucune notification visuelle ni sonore"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Votre téléphone n\'affichera rien à l\'écran, ne vibrera pas et n\'émettra aucun son pour les notifications nouvelles ou déjà reçues. Les notifications importantes concernant l\'activité et l\'état du téléphone continueront d\'apparaître.\n\nLorsque vous désactiverez le Mode Ne pas déranger, vous pourrez retrouver les notifications manquées en balayant l\'écran de haut en bas."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Votre téléphone n\'affichera rien à l\'écran, ne vibrera pas et n\'émettra aucun son pour les notifications nouvelles ou déjà reçues. Les notifications importantes concernant l\'activité et l\'état du téléphone continueront d\'apparaître.\n\nLorsque vous désactiverez le mode Ne pas déranger, vous pourrez retrouver les notifications manquées en balayant l\'écran de haut en bas."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personnalisé"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Activer le paramètre personnalisé"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Supprimer le paramètre personnalisé"</string>
@@ -3449,9 +3449,9 @@
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Utiliser les sons du profil perso"</string>
     <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"Les sons des profils professionnel et personnel sont identiques"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"Sonnerie du téléphone pro"</string>
-    <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Son des notifications pro"</string>
+    <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Son par défaut des notifications pro"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"Sonnerie par défaut du réveil pro"</string>
-    <string name="work_sound_same_as_personal" msgid="1836913235401642334">"Mêmes sons que pour le profil professionnel"</string>
+    <string name="work_sound_same_as_personal" msgid="1836913235401642334">"Pareil que pour le profil perso"</string>
     <string name="work_sync_dialog_title" msgid="2359563902332046231">"Remplacer des sons ?"</string>
     <string name="work_sync_dialog_yes" msgid="9161415252411868574">"Remplacer"</string>
     <string name="work_sync_dialog_message" msgid="1328692374812258546">"Les sons de votre profil personnel seront utilisés pour votre profil professionnel"</string>
@@ -3470,7 +3470,7 @@
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Classement intelligent des notifications"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Classer automatiquement les notifications par pertinence"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Actions et réponses suggérées"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Afficher automatiquement les actions et réponses suggérées"</string>
+    <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Afficher automatiquement les suggestions d\'actions et de réponses"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Afficher les notifications récentes et répétées"</string>
     <string name="notification_history" msgid="8663811361243456201">"Historique des notifications"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"Utiliser l\'historique des notifications"</string>
@@ -4306,8 +4306,8 @@
     <string name="configure" msgid="1499586749829665889">"Configurer"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Autres applications incluses dans la consommation"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
-      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> application autorisée à utiliser des données sans restrictions lorsque l\'économiseur de données est activé</item>
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> applications autorisées à utiliser des données sans restrictions lorsque l\'économiseur de données est activé</item>
+      <item quantity="one"><xliff:g id="COUNT">%1$d</xliff:g> appli autorisée à utiliser des données sans restrictions lorsque l\'Économiseur de données est activé</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> applis autorisées à utiliser des données sans restrictions lorsque l\'Économiseur de données est activé</item>
     </plurals>
     <string name="data_usage_title" msgid="4039024073687469094">"Données principales"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Données Wi-Fi"</string>
@@ -4334,7 +4334,7 @@
     <string name="restrict_background_blacklisted" msgid="7953049316098373715">"Les données en arrière-plan sont désactivées."</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Activé"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Désactivé"</string>
-    <string name="data_saver_switch_title" msgid="7111538580123722959">"Utiliser l\'économiseur de données"</string>
+    <string name="data_saver_switch_title" msgid="7111538580123722959">"Utiliser l\'Économiseur de données"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Conso données non restreinte"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Autoriser l\'accès non restreint aux données lorsque l\'économiseur de données est activé"</string>
     <string name="home_app" msgid="6056850504746902747">"Application sur la page d\'accueil"</string>
@@ -4797,7 +4797,7 @@
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Inactif/Carte SIM"</string>
     <string name="mobile_network_active_esim" msgid="4673190244386572318">"Actif - Profil SIM téléchargé"</string>
     <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Inactif - Profil SIM téléchargé"</string>
-    <string name="mobile_network_sim_name" msgid="3187192894150386537">"Nom et couleur SIM"</string>
+    <string name="mobile_network_sim_name" msgid="3187192894150386537">"Nom et couleur de la SIM"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Nom"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Couleur (utilisée par applis compatibles)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Enregistrer"</string>
