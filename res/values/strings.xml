@@ -5273,16 +5273,16 @@
     <string name="accessibility_screen_magnification_summary">
         <![CDATA[Quickly zoom in on the screen to make content larger.<br/><br/>
         <b>To zoom in:</b><br/>
-        1. Use shortcut to start magnification<br/>
-        2. Tap the screen<br/>
-        3. Drag 2 fingers to move around screen<br/>
-        4. Pinch with 2 fingers to adjust zoom<br/>
-        5. Use shortcut to stop magnification<br/><br/>
+        {0,number,integer}. Use shortcut to start magnification<br/>
+        {1,number,integer}. Tap the screen<br/>
+        {2,number,integer}. Drag 2 fingers to move around screen<br/>
+        {3,number,integer}. Pinch with 2 fingers to adjust zoom<br/>
+        {4,number,integer}. Use shortcut to stop magnification<br/><br/>
         <b>To zoom in temporarily:</b><br/>
-        1. Use shortcut to start magnification<br/>
-        2. Touch & hold anywhere on the screen<br/>
-        3. Drag finger to move around screen<br/>
-        4. Lift finger to stop magnification
+        {0,number,integer}. Use shortcut to start magnification<br/>
+        {1,number,integer}. Touch & hold anywhere on the screen<br/>
+        {2,number,integer}. Drag finger to move around screen<br/>
+        {3,number,integer}. Lift finger to stop magnification
         ]]>
     </string>
     <!-- Summary for the accessibility preference screen to enable screen magnification via the nav bar. [CHAR LIMIT=none] -->
@@ -5348,7 +5348,7 @@
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_triple_tap_keyword">triple-tap screen</string>
     <!-- Summary for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen 3 times. This shortcut may slow down your device</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen {0,number,integer} times. This shortcut may slow down your device</string>
     <!-- Title for the accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=20] -->
     <string name="accessibility_shortcut_edit_dialog_title_advance">Advanced</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
