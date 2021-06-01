@@ -60,6 +60,8 @@ public final class ConvertUtilsTest {
         mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
+        Locale.setDefault(new Locale("en_US"));
+        org.robolectric.shadows.ShadowSettings.set24HourTimeFormat(false);
     }
 
     @Test

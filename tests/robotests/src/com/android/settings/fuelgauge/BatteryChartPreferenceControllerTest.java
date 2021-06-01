@@ -93,8 +93,9 @@ public final class BatteryChartPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        org.robolectric.shadows.ShadowSettings.set24HourTimeFormat(false);
         MockitoAnnotations.initMocks(this);
+        Locale.setDefault(new Locale("en_US"));
+        org.robolectric.shadows.ShadowSettings.set24HourTimeFormat(false);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mContext = spy(RuntimeEnvironment.application);
