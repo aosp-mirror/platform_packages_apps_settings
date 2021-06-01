@@ -5188,7 +5188,7 @@
     <!-- Label for suggested action which will allow the user to change the font size and other accessibility settings. [CHAR LIMIT=40] -->
     <string name="vision_settings_suggestion_title">Change font size</string>
     <!-- Title for the accessibility preference category of screen reader services and settings. [CHAR LIMIT=50] -->
-    <string name="screen_reader_category_title">Screen readers</string>
+    <string name="screen_reader_category_title">Screen reader</string>
     <!-- Title for the accessibility preference category of caption services and settings. [CHAR LIMIT=50] -->
     <string name="captions_category_title">Captions</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
@@ -5999,6 +5999,8 @@
     <string name="manager_battery_usage_unrestricted_only">unrestricted</string>
     <!-- The state when app is limited to optimized option only (e.g This app requires optimized battery usage) [CHAR_LIMIT=40] -->
     <string name="manager_battery_usage_optimized_only">optimized</string>
+    <!-- Accessibility description for battery usage learn more link [CHAR LIMIT=NONE] -->
+    <string name="manager_battery_usage_link_a11y">Learn more about battery usage options</string>
 
     <!-- Title for the screen usage in power use UI [CHAR_LIMIT=60] -->
     <string name="device_screen_usage">Screen usage since full charge</string>
@@ -6087,6 +6089,8 @@
     <string name="battery_tip_early_heads_up_summary">Battery may run out earlier than usual</string>
     <!-- Title when early heads up is solved [CHAR LIMIT=NONE] -->
     <string name="battery_tip_early_heads_up_done_title">Battery Saver on</string>
+    <!-- Accessibility description for battery saver learn more link [CHAR LIMIT=NONE] -->
+    <string name="battery_saver_link_a11y">Learn more about Battery saver</string>
     <!-- Summary when early heads up is solved [CHAR LIMIT=NONE] -->
     <string name="battery_tip_early_heads_up_done_summary">Some features may be limited</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
@@ -12152,6 +12156,9 @@
     <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
     <string name="help_url_battery_saver_settings" translatable="false"></string>
 
+    <!-- Help URI, app usage page [DO NOT TRANSLATE] -->
+    <string name="help_url_app_usage_settings" translatable="false"></string>
+
     <!-- Help URI, smart battery page [DO NOT TRANSLATE] -->
     <string name="help_uri_smart_battery_settings" translatable="false"></string>
 
@@ -12905,9 +12912,7 @@
     <string name="hwui_force_dark_summary">Overrides the force-dark feature to be always-on</string>
 
     <!-- If blurs are supported on SurfaceFlinger. [CHAR LIMIT=60] -->
-    <string name="enable_blurs_on_windows_title">Enable blurs</string>
-    <!-- If blurs are supported on SurfaceFlinger, summary. [CHAR LIMIT=NONE] -->
-    <string name="enable_blurs_on_windows_summary">Enables window blurs at compositor level. Requires device reboot.</string>
+    <string name="enable_blurs_on_windows_title">Window-level blurs</string>
 
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
     <string name="privacy_dashboard_title">Privacy</string>
