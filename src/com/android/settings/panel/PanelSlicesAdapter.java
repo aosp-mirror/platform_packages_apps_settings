@@ -125,6 +125,7 @@ public class PanelSlicesAdapter
             sliceView = view.findViewById(R.id.slice_view);
             sliceView.setMode(SliceView.MODE_LARGE);
             sliceView.setShowTitleItems(true);
+            sliceView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
             mSliceSliderLayout = view.findViewById(R.id.slice_slider_layout);
         }
 

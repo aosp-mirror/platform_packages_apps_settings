@@ -20,6 +20,11 @@
     android:title="@string/dark_ui_mode"
     settings:keywords="@string/keywords_dark_ui_mode">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="dark_ui_top_intro"
+        android:title="@string/dark_ui_text"
+        settings:searchable="false"/>
+
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="dark_ui_activated"
         android:title="@string/dark_theme_main_switch_title"
@@ -29,11 +34,6 @@
         android:key="dark_ui_location_off"
         android:title="@string/twilight_mode_location_off_dialog_message"
         settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
-
-    <com.android.settingslib.widget.TopIntroPreference
-        android:key="dark_ui_top_intro"
-        android:title="@string/dark_ui_text"
-        settings:searchable="false"/>
 
     <DropDownPreference
         android:key="dark_ui_auto_mode"

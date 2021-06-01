@@ -19,7 +19,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -27,7 +26,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -77,9 +75,6 @@ public class SystemDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            return R.xml.system_dashboard_fragment_v2;
-        }
         return R.xml.system_dashboard_fragment;
     }
 
@@ -110,8 +105,7 @@ public class SystemDashboardFragment extends DashboardFragment {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)
-                            ? R.xml.system_dashboard_fragment_v2 : R.xml.system_dashboard_fragment;
+                    sir.xmlResId = R.xml.system_dashboard_fragment;
                     return Arrays.asList(sir);
                 }
             };

@@ -371,6 +371,32 @@ public final class BatteryDiffEntryTest {
         assertThat(entry.mValidForRestriction).isTrue();
     }
 
+    @Test
+    public void testGetPackageName_returnExpectedResult() {
+        final String expectedPackageName = "com.fake.google.com";
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put("packageName", expectedPackageName);
+        final BatteryDiffEntry entry =
+            createBatteryDiffEntry(10, new BatteryHistEntry(values));
+
+        assertThat(entry.getPackageName()).isEqualTo(expectedPackageName);
+    }
+
+    @Test
+    public void testGetPackageName_withProcessName_returnExpectedResult() {
+        final String expectedPackageName = "com.fake.google.com";
+        final ContentValues values = getContentValuesWithType(
+            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put(
+            "packageName",
+            expectedPackageName + ":privileged_process0");
+        final BatteryDiffEntry entry =
+            createBatteryDiffEntry(10, new BatteryHistEntry(values));
+
+        assertThat(entry.getPackageName()).isEqualTo(expectedPackageName);
+    }
+
     private BatteryDiffEntry createBatteryDiffEntry(
             int consumerType, long uid, boolean isHidden) {
         final ContentValues values = getContentValuesWithType(consumerType);
