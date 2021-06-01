@@ -25,7 +25,6 @@
 
         <Preference
             android:key="memory"
-            android:icon="@drawable/ic_settings_memory"
             android:title="@string/memory_settings_title"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.applications.ProcessStatsSummary" />
@@ -297,7 +296,6 @@
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="default_usb_configuration"
             android:fragment="com.android.settings.connecteddevice.usb.UsbDefaultFragment"
-            android:icon="@drawable/ic_usb"
             android:title="@string/usb_default_label"/>
 
         <SwitchPreference
@@ -492,8 +490,7 @@
 
         <SwitchPreference
             android:key="enable_blurs_on_windows"
-            android:title="@string/enable_blurs_on_windows_title"
-            android:summary="@string/enable_blurs_on_windows_summary" />
+            android:title="@string/enable_blurs_on_windows_title"/>
 
         <SwitchPreference
             android:key="force_msaa"

@@ -398,25 +398,6 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_hideFilePreferenceWhenEmulatedStorageUnreadable() {
-        when(mSvp.findEmulatedForPrivate(nullable(VolumeInfo.class))).thenReturn(mVolume);
-        when(mVolume.isMountedReadable()).thenReturn(false);
-
-        mController.displayPreference(mPreferenceScreen);
-
-        assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
-    }
-
-    @Test
-    public void displayPreference_noEmulatedInternalStorage_hidePreference() {
-        when(mSvp.findEmulatedForPrivate(nullable(VolumeInfo.class))).thenReturn(null);
-
-        mController.displayPreference(mPreferenceScreen);
-
-        assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
-    }
-
-    @Test
     public void setVolume_updateFilePreferenceToHideAfterSettingVolume_hidePreference() {
         when(mSvp.findEmulatedForPrivate(nullable(VolumeInfo.class))).thenReturn(mVolume);
         when(mVolume.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
@@ -429,7 +410,6 @@ public class StorageItemPreferenceControllerTest {
 
         assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
     }
-
 
     @Test
     public void setVolume_updateFilePreferenceToShowAfterSettingVolume_showPreference() {
