@@ -145,6 +145,8 @@ public final class CellInfoUtil {
         final CellIdentity cid = getCellIdentity(cellInfo);
         String mcc = null;
         String mnc = null;
+        CharSequence alphaLong = null;
+        CharSequence alphaShort = null;
         if (cid != null) {
             if (cid instanceof CellIdentityGsm) {
                 mcc = ((CellIdentityGsm) cid).getMccString();
@@ -162,10 +164,13 @@ public final class CellInfoUtil {
                 mcc = ((CellIdentityNr) cid).getMccString();
                 mnc = ((CellIdentityNr) cid).getMncString();
             }
+
+            alphaLong = cid.getOperatorAlphaLong();
+            alphaShort = cid.getOperatorAlphaShort();
         }
         return String.format(
                 "{CellType = %s, isRegistered = %b, mcc = %s, mnc = %s, alphaL = %s, alphaS = %s}",
                 cellType, cellInfo.isRegistered(), mcc, mnc,
-                cid.getOperatorAlphaLong(), cid.getOperatorAlphaShort());
+                alphaLong, alphaShort);
     }
 }

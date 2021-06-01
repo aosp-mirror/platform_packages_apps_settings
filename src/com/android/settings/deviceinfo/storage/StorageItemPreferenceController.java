@@ -222,7 +222,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mVolume = volume;
 
         updateCategoryPreferencesVisibility();
-        updatePrivateStorageCategoryPreferencesOrder();
     }
 
     // Stats data is only available on private volumes.
@@ -353,14 +352,10 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mDocumentsAndOtherPreference = screen.findPreference(DOCUMENTS_AND_OTHER_KEY);
         mSystemPreference = screen.findPreference(SYSTEM_KEY);
         mTrashPreference = screen.findPreference(TRASH_KEY);
-
-        updateCategoryPreferencesVisibility();
-        updatePrivateStorageCategoryPreferencesOrder();
     }
 
     /** Fragments use it to set storage result and update UI of this controller. */
-    public void onLoadFinished(SparseArray<StorageAsyncLoader.StorageResult> result,
-            int userId) {
+    public void onLoadFinished(SparseArray<StorageAsyncLoader.StorageResult> result, int userId) {
         final StorageAsyncLoader.StorageResult data = result.get(userId);
 
         mImagesPreference.setStorageSize(data.imagesSize, mTotalSize);
@@ -374,8 +369,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         if (mSystemPreference != null) {
             // Everything else that hasn't already been attributed is tracked as
             // belonging to system.
-            // TODO(b/170918505): Should revamp system size calculation with the data
-            // from media provider.
             long attributedSize = 0;
             for (int i = 0; i < result.size(); i++) {
                 final StorageAsyncLoader.StorageResult otherData = result.valueAt(i);
