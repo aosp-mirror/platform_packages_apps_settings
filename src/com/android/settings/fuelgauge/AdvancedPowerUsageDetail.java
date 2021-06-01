@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.Html;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -47,10 +46,12 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.RadioButtonPreference;
 
@@ -104,7 +105,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     Preference mBackgroundPreference;
     @VisibleForTesting
-    Preference mFooterPreference;
+    FooterPreference mFooterPreference;
     @VisibleForTesting
     RadioButtonPreference mRestrictedPreference;
     @VisibleForTesting
@@ -351,7 +352,13 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             //Present default string to normal app.
             footerString = context.getString(R.string.manager_battery_usage_footer);
         }
-        mFooterPreference.setTitle(Html.fromHtml(footerString, Html.FROM_HTML_MODE_COMPACT));
+        mFooterPreference.setTitle(footerString);
+        mFooterPreference.setLearnMoreAction(v ->
+                startActivityForResult(HelpUtils.getHelpIntent(context,
+                        context.getString(R.string.help_url_app_usage_settings),
+                        /*backupContext=*/ ""), /*requestCode=*/ 0));
+        mFooterPreference.setLearnMoreContentDescription(
+                context.getString(R.string.manager_battery_usage_link_a11y));
     }
 
     @Override

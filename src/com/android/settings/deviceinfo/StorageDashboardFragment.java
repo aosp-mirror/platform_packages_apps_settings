@@ -232,14 +232,16 @@ public class StorageDashboardFragment extends DashboardFragment
         mOptionMenuController.setSelectedStorageEntry(mSelectedStorageEntry);
         getActivity().invalidateOptionsMenu();
 
-        mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
-
         if (!mSelectedStorageEntry.isMounted()) {
             // Set null volume to hide category stats.
             mPreferenceController.setVolume(null);
             return;
         }
         if (mSelectedStorageEntry.isPrivate()) {
+            mStorageInfo = null;
+            mAppsResult = null;
+            maybeSetLoading(isQuotaSupported());
+
             // Stats data is only available on private volumes.
             getLoaderManager().restartLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
             getLoaderManager()
@@ -315,7 +317,6 @@ public class StorageDashboardFragment extends DashboardFragment
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         initializeCacheProvider();
-        maybeSetLoading(isQuotaSupported());
 
         EntityHeaderController.newInstance(getActivity(), this /*fragment*/,
                 null /* header view */)
@@ -350,33 +351,27 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     private void onReceivedSizes() {
-        boolean stopLoading = false;
-        if (mStorageInfo != null) {
-            final long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
-            mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
-            mPreferenceController.setUsedSize(privateUsedBytes);
-            mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
-            for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
-                final AbstractPreferenceController controller = mSecondaryUsers.get(i);
-                if (controller instanceof SecondaryUserController) {
-                    SecondaryUserController userController = (SecondaryUserController) controller;
-                    userController.setTotalSize(mStorageInfo.totalBytes);
-                }
-            }
-            stopLoading = true;
+        if (mStorageInfo == null || mAppsResult == null) {
+            return;
         }
 
-        if (mAppsResult != null) {
-            mPreferenceController.onLoadFinished(mAppsResult, mUserId);
-            updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
-            stopLoading = true;
+        final long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
+        mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
+        mPreferenceController.setUsedSize(privateUsedBytes);
+        mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
+        for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
+            final AbstractPreferenceController controller = mSecondaryUsers.get(i);
+            if (controller instanceof SecondaryUserController) {
+                SecondaryUserController userController = (SecondaryUserController) controller;
+                userController.setTotalSize(mStorageInfo.totalBytes);
+            }
         }
 
-        // setLoading always causes a flicker, so let's avoid doing it.
-        if (stopLoading) {
-            if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
-                setLoading(false, true);
-            }
+        mPreferenceController.onLoadFinished(mAppsResult, mUserId);
+        updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
+
+        if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
+            setLoading(false, true);
         }
     }
 

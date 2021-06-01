@@ -17,11 +17,9 @@ package com.android.settings.system;
 
 import android.content.Context;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.network.NetworkResetPreferenceController;
 
 public class ResetPreferenceController extends BasePreferenceController {
@@ -41,18 +39,5 @@ public class ResetPreferenceController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_reset_dashboard)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SILKY_HOME)) {
-            return null;
-        }
-
-        if (!mNetworkReset.isAvailable() && !mFactpruReset.isAvailable()) {
-            return mContext.getText(R.string.reset_dashboard_summary_onlyApps);
-        }
-
-        return mContext.getText(R.string.reset_dashboard_summary);
     }
 }
