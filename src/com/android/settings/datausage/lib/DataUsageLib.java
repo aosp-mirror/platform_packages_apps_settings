@@ -73,7 +73,7 @@ public class DataUsageLib {
 
     private static NetworkTemplate getMobileTemplateForSubId(
             TelephonyManager telephonyManager, int subId) {
-        return NetworkTemplate.buildTemplateMobileAll(
+        return NetworkTemplate.buildTemplateCarrierMetered(
                 telephonyManager.getSubscriberId(subId));
     }
 }
