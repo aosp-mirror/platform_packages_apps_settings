@@ -76,6 +76,8 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mProfilesContainer = screen.findPreference(getPreferenceKey());
+        refresh(/* connected */ false, /* functions */ mUsbBackend.getDefaultUsbFunctions(),
+                /* powerRole */ 0, /* dataRole */ 0);
     }
 
     /**
