@@ -26,7 +26,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,7 +44,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -106,10 +104,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO(b/176883483): Remove the title after material component updated
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            getActivity().setTitle(R.string.user_dict_settings_title);
-        }
+        getActivity().setTitle(R.string.user_dict_settings_title);
         // Show the language as a subtitle of the action bar
         final ActionBar actionBar = getActivity().getActionBar();
         if (actionBar != null) {
