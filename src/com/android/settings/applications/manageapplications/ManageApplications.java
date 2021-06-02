@@ -123,7 +123,6 @@ import com.android.settings.notification.app.AppNotificationSettings;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
-import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -660,10 +659,6 @@ public class ManageApplications extends InstrumentedFragment
         final Activity activity = getActivity();
         if (activity == null) {
             return;
-        }
-        // TODO(b/176883483): Remove the help menu if this feature rolled out
-        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            HelpUtils.prepareHelpMenuItem(activity, menu, getHelpResource(), getClass().getName());
         }
         mOptionsMenu = menu;
         inflater.inflate(R.menu.manage_apps, menu);
