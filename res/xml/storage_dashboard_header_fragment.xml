@@ -29,14 +29,12 @@ Copyright (C) 2021 The Android Open Source Project
         android:order="2"
         android:selectable="false"
         settings:searchable="false"
-        settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"
-        settings:allowDividerBelow="true"/>
+        settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"/>
     <com.android.settings.widget.PrimarySwitchPreference
         android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
         android:key="toggle_asm"
         android:title="@string/automatic_storage_manager_preference_title"
         android:icon="@drawable/ic_storage"
         android:order="3"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController"/>
 </PreferenceScreen>
