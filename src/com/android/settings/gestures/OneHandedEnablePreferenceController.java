@@ -19,37 +19,25 @@ package com.android.settings.gestures;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.widget.SettingsMainSwitchPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 /**
  * The controller to handle one-handed mode enable or disable state.
  **/
-public class OneHandedEnablePreferenceController extends SettingsMainSwitchPreferenceController {
+public class OneHandedEnablePreferenceController extends BasePreferenceController {
 
-    public OneHandedEnablePreferenceController(Context context, String key) {
-        super(context, key);
+    public OneHandedEnablePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
-    @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, isChecked);
-        OneHandedSettingsUtils.setSwipeDownNotificationEnabled(mContext, !isChecked);
-        return true;
-    }
-
-    @Override
-    public boolean isChecked() {
-        return OneHandedSettingsUtils.isOneHandedModeEnabled(mContext);
+        return OneHandedSettingsUtils.isSupportOneHandedMode() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public CharSequence getSummary() {
         return mContext.getText(
-                isChecked() ? R.string.gesture_setting_on : R.string.gesture_setting_off);
+                OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)
+                        ? R.string.gesture_setting_on : R.string.gesture_setting_off);
     }
 }
