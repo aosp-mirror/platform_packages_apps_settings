@@ -31,6 +31,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settingslib.HelpUtils;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
@@ -104,13 +105,20 @@ public class LocationSettingsFooterPreferenceController extends LocationBasePref
                     + footerString;
         }
         if (mFooterPreference != null) {
-            mFooterPreference.setTitle(Html.fromHtml(footerString
-                    + PARAGRAPH_SEPARATOR
-                    + mContext.getString(
-                    R.string.location_settings_footer_learn_more)));
-            mFooterPreference.setContentDescription(Html.fromHtml(footerString + mContext.getString(
-                    R.string.location_settings_footer_learn_more_content_description)));
+            mFooterPreference.setTitle(Html.fromHtml(footerString));
+            mFooterPreference.setLearnMoreAction(v -> openLocationLearnMoreLink());
+            mFooterPreference.setLearnMoreContentDescription(mContext.getString(
+                    R.string.location_settings_footer_learn_more_content_description));
         }
+    }
+
+    private void openLocationLearnMoreLink() {
+        mFragment.startActivityForResult(
+                HelpUtils.getHelpIntent(
+                        mContext,
+                        mContext.getString(R.string.location_settings_footer_learn_more_link),
+                        /*backupContext=*/""),
+                /*requestCode=*/ 0);
     }
 
     /**
