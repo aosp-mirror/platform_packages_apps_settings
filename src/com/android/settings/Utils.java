@@ -110,7 +110,6 @@ import androidx.preference.PreferenceGroup;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -1228,10 +1227,7 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     public static boolean isPageTransitionEnabled(Context context) {
-        final boolean isSilkyHome = FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME);
-        final boolean isTransitionEnabled = Settings.Global.getInt(context.getContentResolver(),
+        return Settings.Global.getInt(context.getContentResolver(),
                 SETTINGS_SHARED_AXIS_ENABLED, 0) == 1;
-
-        return isSilkyHome && isTransitionEnabled;
     }
 }
