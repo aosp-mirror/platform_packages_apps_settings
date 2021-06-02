@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.icu.text.MessageFormat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -318,8 +319,12 @@ public class AccessibilityEditDialogUtils {
         final View dialogView = view.findViewById(R.id.triple_tap_shortcut);
         final CharSequence title = context.getText(
                 R.string.accessibility_shortcut_edit_dialog_title_triple_tap);
-        final CharSequence summary = context.getText(
+        String summary = context.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_triple_tap);
+        // Format the number '3' in the summary.
+        final Object[] arguments = {3};
+        summary = MessageFormat.format(summary, arguments);
+
         setupShortcutWidget(dialogView, title, summary,
                 R.drawable.accessibility_shortcut_type_triple_tap);
         // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
