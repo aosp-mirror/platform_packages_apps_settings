@@ -50,7 +50,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
 public class SubSettingLauncherTest {
 
     @Mock
@@ -117,7 +116,6 @@ public class SubSettingLauncherTest {
 
     @Test
     public void launch_hasRequestListener_shouldStartActivityForResult() {
-        ShadowUtils.setIsPageTransitionEnabled(true);
         final int requestCode = 123123;
         when(mFragment.getActivity()).thenReturn(mActivity);
 
