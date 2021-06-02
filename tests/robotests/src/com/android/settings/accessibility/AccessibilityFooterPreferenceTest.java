@@ -19,13 +19,12 @@ package com.android.settings.accessibility;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.text.method.MovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
-import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 
@@ -39,10 +38,6 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public final class AccessibilityFooterPreferenceTest {
 
-    private static final String DEFAULT_SUMMARY = "default summary";
-    private static final String DEFAULT_DESCRIPTION = "default description";
-
-    private Context mContext = ApplicationProvider.getApplicationContext();
     private AccessibilityFooterPreference mAccessibilityFooterPreference;
     private PreferenceViewHolder mPreferenceViewHolder;
 
@@ -58,41 +53,22 @@ public final class AccessibilityFooterPreferenceTest {
     }
 
     @Test
-    public void onBindViewHolder_initTextConfig_parseTextAndFocusable() {
-        mAccessibilityFooterPreference.setSummary(DEFAULT_SUMMARY);
+    public void onBindViewHolder_LinkDisabledByDefault_notReturnLinkMovement() {
+        mAccessibilityFooterPreference.onBindViewHolder(mPreferenceViewHolder);
+
+        final TextView summaryView = (TextView) mPreferenceViewHolder.findViewById(
+                android.R.id.title);
+        assertThat(summaryView.getMovementMethod()).isNull();
+    }
+
+    @Test
+    public void onBindViewHolder_setLinkEnabled_returnLinkMovement() {
+        mAccessibilityFooterPreference.setLinkEnabled(true);
 
         mAccessibilityFooterPreference.onBindViewHolder(mPreferenceViewHolder);
 
         final TextView summaryView = (TextView) mPreferenceViewHolder.findViewById(
                 android.R.id.title);
-        assertThat(summaryView.getText().toString()).isEqualTo(DEFAULT_SUMMARY);
-        assertThat(summaryView.isFocusable()).isEqualTo(true);
-    }
-
-    @Test
-    public void onBindViewHolder_initTextConfigAndAccessibleIcon_groupContentForAccessible() {
-        mAccessibilityFooterPreference.setSummary(DEFAULT_SUMMARY);
-        mAccessibilityFooterPreference.setIconContentDescription(DEFAULT_DESCRIPTION);
-
-        mAccessibilityFooterPreference.onBindViewHolder(mPreferenceViewHolder);
-
-        final TextView summaryView = (TextView) mPreferenceViewHolder.findViewById(
-                android.R.id.title);
-        assertThat(summaryView.getText().toString()).isEqualTo(DEFAULT_SUMMARY);
-        assertThat(summaryView.isFocusable()).isEqualTo(false);
-        final LinearLayout infoFrame = (LinearLayout) mPreferenceViewHolder.findViewById(
-                R.id.icon_frame);
-        assertThat(infoFrame.getContentDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(infoFrame.isFocusable()).isEqualTo(false);
-    }
-
-    @Test
-    public void appendHelpLink_timeoutHelpUri_updateSummary() {
-        mAccessibilityFooterPreference.setSummary(DEFAULT_SUMMARY);
-
-        mAccessibilityFooterPreference.appendHelpLink(R.string.help_url_timeout);
-
-        final String title = mAccessibilityFooterPreference.getTitle().toString();
-        assertThat(title.contains(mContext.getString(R.string.footer_learn_more))).isTrue();
+        assertThat(summaryView.getMovementMethod()).isInstanceOf(MovementMethod.class);
     }
 }
