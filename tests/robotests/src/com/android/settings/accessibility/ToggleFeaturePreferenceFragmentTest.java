@@ -215,8 +215,6 @@ public class ToggleFeaturePreferenceFragmentTest {
                 (AccessibilityFooterPreference) mFragment.getPreferenceScreen().getPreference(
                         mFragment.getPreferenceScreen().getPreferenceCount() - 1);
         assertThat(accessibilityFooterPreference.getSummary()).isEqualTo(DEFAULT_SUMMARY);
-        assertThat(accessibilityFooterPreference.getIconContentDescription()).isEqualTo(
-                DEFAULT_DESCRIPTION);
         assertThat(accessibilityFooterPreference.isSelectable()).isEqualTo(true);
         assertThat(accessibilityFooterPreference.getOrder()).isEqualTo(Integer.MAX_VALUE - 1);
     }
