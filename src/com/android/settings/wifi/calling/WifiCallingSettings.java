@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,12 +34,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.search.actionbar.SearchMenuController;
-import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.RtlCompatibleViewPager;
 import com.android.settings.widget.SlidingTabLayout;
@@ -121,12 +118,6 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        // TODO(b/176883483): Remove the option menu if collapsing toolbar feature rolled out
-        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            setHasOptionsMenu(true);
-            SearchMenuController.init(this /* host */);
-            HelpMenuController.init(this /* host */);
-        }
 
         // TODO: besides in onCreate, we should also update subList when SIM / Sub status
         // changes.
