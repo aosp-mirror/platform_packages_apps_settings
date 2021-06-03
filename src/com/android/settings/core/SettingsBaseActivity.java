@@ -31,7 +31,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -116,8 +115,7 @@ public class SettingsBaseActivity extends FragmentActivity {
             ThemeHelper.trySetDynamicColor(this);
         }
 
-        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SILKY_HOME)
-                && isToolbarEnabled() && !isAnySetupWizard) {
+        if (isToolbarEnabled() && !isAnySetupWizard) {
             super.setContentView(R.layout.collapsing_toolbar_base_layout);
             mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         } else {
