@@ -33,6 +33,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.security.SecurityFeatureProvider;
@@ -44,6 +45,7 @@ import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.search.SearchIndexableRaw;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,6 +130,8 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
                 .show();
 
         mTrustAgentClickIntent = preference.getIntent();
+        mTrustAgentClickIntent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
+                SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
 
         if (!confirmationLaunched && mTrustAgentClickIntent != null) {
             // If this returns false, it means no password confirmation is required.
