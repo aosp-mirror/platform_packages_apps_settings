@@ -200,24 +200,21 @@ public class ActionDisabledByAdminDialogHelperTest {
 
     @Test
     public void testMaybeSetLearnMoreButton() {
-        final UserManager userManager = RuntimeEnvironment.application.getSystemService(
-                UserManager.class);
-        final ShadowUserManager userManagerShadow = Shadow.extract(userManager);
-        mHelper.prepareDialogBuilder(
-                /* restriction= */ null, ENFORCED_ADMIN);
-
+        UserManager userManager = RuntimeEnvironment.application
+                .getSystemService(UserManager.class);
+        ShadowUserManager userManagerShadow = Shadow.extract(userManager);
         // Set up for shadow call.
         userManagerShadow.getSameProfileGroupIds().put(USER_ID, 0);
 
         // Test that the button is shown when user IDs are in the same profile group
         AlertDialog.Builder builder = mock(AlertDialog.Builder.class);
-        mHelper.maybeSetLearnMoreButton(builder);
+        mHelper.prepareDialogBuilder(builder, /* restriction= */ null, ENFORCED_ADMIN);
         verify(builder).setNeutralButton(anyInt(), any());
 
         // Test that the button is not shown when user IDs are not in the same profile group
         userManagerShadow.getSameProfileGroupIds().clear();
         builder = mock(AlertDialog.Builder.class);
-        mHelper.maybeSetLearnMoreButton(builder);
+        mHelper.prepareDialogBuilder(builder, /* restriction= */ null, ENFORCED_ADMIN);
         verify(builder, never()).setNeutralButton(anyInt(), any());
     }
 

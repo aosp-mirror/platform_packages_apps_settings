@@ -24,84 +24,102 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.UserHandle;
+import android.os.UserManager;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAdd;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 @RunWith(AndroidJUnit4.class)
 public class ActionDisabledLearnMoreButtonLauncherImplTest {
 
     private static final int ENFORCED_ADMIN_USER_ID = 123;
+    private static final UserHandle ENFORCED_ADMIN_USER = UserHandle.of(ENFORCED_ADMIN_USER_ID);
+
+    private static final int CONTEXT_USER_ID = -ENFORCED_ADMIN_USER_ID;
+    private static final UserHandle CONTEXT_USER = UserHandle.of(CONTEXT_USER_ID);
+
     private static final ComponentName ADMIN_COMPONENT =
             new ComponentName("some.package.name", "some.package.name.SomeClass");
     private static final String URL = "https://testexample.com";
     private static final Uri URI = Uri.parse(URL);
 
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     @Mock
     private Activity mActivity;
 
+    @Captor
+    private ArgumentCaptor<Intent> mIntentCaptor;
+
+    @Mock
+    private AlertDialog.Builder mBuilder;
+
+    private ActionDisabledLearnMoreButtonLauncherImpl mImpl;
+
+    @Mock
+    private UserManager mUserManager;
+
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        // Can't mock getSystemService(Class) directly because it's final
+        when(mActivity.getSystemServiceName(UserManager.class)).thenReturn(Context.USER_SERVICE);
+        when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+
+        when(mActivity.getUserId()).thenReturn(CONTEXT_USER_ID);
+        when(mUserManager.getUserHandle()).thenReturn(CONTEXT_USER_ID);
+
+        mImpl = new ActionDisabledLearnMoreButtonLauncherImpl(mActivity, mBuilder);
     }
 
     @Test
-    public void showAdminPolicies_noComponent_works() {
-        final EnforcedAdmin enforcedAdmin = createEnforcedAdmin(/* component= */ null);
+    public void launchShowAdminSettings_works() {
+        mImpl.launchShowAdminSettings(mActivity);
 
-        ActionDisabledLearnMoreButtonLauncherImpl.SHOW_ADMIN_POLICIES
-                .accept(mActivity, enforcedAdmin);
+        verify(mActivity).startActivity(mIntentCaptor.capture());
+        assertDeviceAdminSettingsActivity(mIntentCaptor.getValue());
+    }
 
-        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        verify(mActivity).startActivity(captor.capture());
-        assertThat(captor.getValue().getComponent().getClassName())
+    @Test
+    public void launchShowAdminPolicies_works() {
+        mImpl.launchShowAdminPolicies(mActivity, ENFORCED_ADMIN_USER, ADMIN_COMPONENT);
+
+        verify(mActivity).startActivityAsUser(mIntentCaptor.capture(), eq(ENFORCED_ADMIN_USER));
+        assertDeviceAdminAddIntent(mIntentCaptor.getValue());
+    }
+
+    @Test
+    public void showHelpPage_works() {
+        mImpl.showHelpPage(mActivity, URL);
+
+        verify(mActivity).startActivityAsUser(mIntentCaptor.capture(), eq(CONTEXT_USER));
+        assertActionViewIntent(mIntentCaptor.getValue());
+    }
+
+    private void assertDeviceAdminSettingsActivity(Intent intent) {
+        assertThat(intent.getComponent().getClassName())
                 .isEqualTo(Settings.DeviceAdminSettingsActivity.class.getName());
-    }
-
-    @Test
-    public void showAdminPolicies_withComponent_works() {
-        final EnforcedAdmin enforcedAdmin = createEnforcedAdmin(ADMIN_COMPONENT);
-
-        ActionDisabledLearnMoreButtonLauncherImpl.SHOW_ADMIN_POLICIES
-                .accept(mActivity, enforcedAdmin);
-
-        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        verify(mActivity).startActivityAsUser(
-                captor.capture(),
-                eq(UserHandle.of(ENFORCED_ADMIN_USER_ID)));
-        assertDeviceAdminAddIntent(captor.getValue());
-    }
-
-    @Test
-    public void launchHelpPage_works() {
-        ActionDisabledLearnMoreButtonLauncherImpl.LAUNCH_HELP_PAGE.accept(mActivity, URL);
-
-        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        verify(mActivity).startActivityAsUser(captor.capture(), eq(UserHandle.SYSTEM));
-        assertActionViewIntent(captor.getValue());
-    }
-
-    private EnforcedAdmin createEnforcedAdmin(ComponentName component) {
-        return new RestrictedLockUtils.EnforcedAdmin(
-                component, UserHandle.of(ENFORCED_ADMIN_USER_ID));
     }
 
     private void assertDeviceAdminAddIntent(Intent intent) {
