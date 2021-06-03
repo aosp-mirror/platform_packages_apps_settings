@@ -17,7 +17,9 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.graphics.drawable.AnimatedImageDrawable;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Animatable2;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.ImageView;
@@ -36,6 +38,14 @@ public class AnimatedImagePreference extends Preference {
     private Uri mImageUri;
     private int mMaxHeight = -1;
 
+    private final Animatable2.AnimationCallback mAnimationCallback =
+            new Animatable2.AnimationCallback() {
+        @Override
+        public void onAnimationEnd(Drawable drawable) {
+            ((Animatable2) drawable).start();
+        }
+    };
+
     AnimatedImagePreference(Context context) {
         super(context);
         setLayoutResource(R.layout.preference_animated_image);
@@ -51,12 +61,10 @@ public class AnimatedImagePreference extends Preference {
         }
 
         if (mImageUri != null) {
-            imageView.setImageURI(mImageUri);
+            resetAnimation(imageView.getDrawable());
 
-            final Drawable drawable = imageView.getDrawable();
-            if (drawable instanceof AnimatedImageDrawable) {
-                ((AnimatedImageDrawable) drawable).start();
-            }
+            imageView.setImageURI(mImageUri);
+            startAnimation(imageView.getDrawable());
         }
 
         if (mMaxHeight > -1) {
@@ -86,5 +94,31 @@ public class AnimatedImagePreference extends Preference {
             mMaxHeight = maxHeight;
             notifyChanged();
         }
+    }
+
+    private void startAnimation(Drawable drawable) {
+        if (!(drawable instanceof Animatable)) {
+            return;
+        }
+
+        if (drawable instanceof Animatable2) {
+            ((Animatable2) drawable).registerAnimationCallback(mAnimationCallback);
+        } else if (drawable instanceof AnimationDrawable) {
+            ((AnimationDrawable) drawable).setOneShot(false);
+        }
+
+        ((Animatable) drawable).start();
+    }
+
+    private void resetAnimation(Drawable drawable) {
+        if (!(drawable instanceof Animatable)) {
+            return;
+        }
+
+        if (drawable instanceof Animatable2) {
+            ((Animatable2) drawable).clearAnimationCallbacks();
+        }
+
+        ((Animatable) drawable).stop();
     }
 }

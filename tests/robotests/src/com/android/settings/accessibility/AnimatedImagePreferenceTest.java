@@ -19,12 +19,15 @@ package com.android.settings.accessibility;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.graphics.drawable.AnimatedImageDrawable;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +40,6 @@ import com.android.settings.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
@@ -54,9 +56,6 @@ public class AnimatedImagePreferenceTest {
     @Spy
     private ImageView mImageView;
 
-    @Mock
-    private AnimatedImageDrawable mAnimatedImageDrawable;
-
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
@@ -72,14 +71,39 @@ public class AnimatedImagePreferenceTest {
     }
 
     @Test
-    public void readImageUri_animatedImage_startAnimation() {
+    public void playAnimation_animatedImageDrawable_success() {
+        final AnimatedImageDrawable drawable = mock(AnimatedImageDrawable.class);
         doReturn(mImageView).when(mRootView).findViewById(R.id.animated_img);
-        doReturn(mAnimatedImageDrawable).when(mImageView).getDrawable();
+        doReturn(drawable).when(mImageView).getDrawable();
 
         mAnimatedImagePreference.setImageUri(mImageUri);
         mAnimatedImagePreference.onBindViewHolder(mViewHolder);
 
-        verify(mAnimatedImageDrawable).start();
+        verify(drawable).start();
+    }
+
+    @Test
+    public void playAnimation_animatedVectorDrawable_success() {
+        final AnimatedVectorDrawable drawable = mock(AnimatedVectorDrawable.class);
+        doReturn(mImageView).when(mRootView).findViewById(R.id.animated_img);
+        doReturn(drawable).when(mImageView).getDrawable();
+
+        mAnimatedImagePreference.setImageUri(mImageUri);
+        mAnimatedImagePreference.onBindViewHolder(mViewHolder);
+
+        verify(drawable).start();
+    }
+
+    @Test
+    public void playAnimation_animationDrawable_success() {
+        final AnimationDrawable drawable = mock(AnimationDrawable.class);
+        doReturn(mImageView).when(mRootView).findViewById(R.id.animated_img);
+        doReturn(drawable).when(mImageView).getDrawable();
+
+        mAnimatedImagePreference.setImageUri(mImageUri);
+        mAnimatedImagePreference.onBindViewHolder(mViewHolder);
+
+        verify(drawable).start();
     }
 
     @Test
