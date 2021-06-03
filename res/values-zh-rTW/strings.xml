@@ -1197,7 +1197,7 @@
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"關閉"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"需要相機存取權"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5107880175176848307">"輕觸即可管理「裝置個人化服務」權限"</string>
-    <string name="adaptive_sleep_description" msgid="1835321775327187860">"避免螢幕在你注視時關閉"</string>
+    <string name="adaptive_sleep_description" msgid="1835321775327187860">"當你注視著手機時，螢幕不會關閉"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"螢幕感知功能會使用前置鏡頭判斷是否有人正在看著螢幕。這項功能只會在裝置上執行，系統不會儲存相關圖片或將其傳送給 Google。"</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"開啟螢幕感知功能"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"看著螢幕時讓螢幕保持開啟"</string>
@@ -3382,7 +3382,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"音效和震動"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"通知的音效、震動和部分視覺符號"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"通知的音效、震動和視覺符號"</string>
-    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"系統將一律不隱藏基本手機活動和狀態的必要通知。"</string>
+    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"基本手機活動和狀態的必要通知一律不會隱藏。"</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"無"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"其他選項"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"新增"</string>
@@ -4294,8 +4294,8 @@
     <string name="configure" msgid="1499586749829665889">"設定"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"計入數據用量的其他應用程式"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
-      <item quantity="other">已允許 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式在數據節省模式開啟時無限量使用數據</item>
-      <item quantity="one">已允許 1 個應用程式在數據節省模式開啟時無限量使用數據</item>
+      <item quantity="other">已允許 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式在數據節省模式開啟時不受任何數據用量限制</item>
+      <item quantity="one">已允許 1 個應用程式在數據節省模式開啟時不受任何數據用量限制</item>
     </plurals>
     <string name="data_usage_title" msgid="4039024073687469094">"主要數據"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi 數據"</string>
@@ -4443,7 +4443,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"快速開啟相機"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"只要在任何畫面中按兩下電源按鈕，即可快速開啟相機。"</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"快速開啟相機"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"將相機切換到自拍模式"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"翻轉相機切換自拍模式"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"自拍更快速"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"系統操作機制"</string>
@@ -4453,7 +4453,7 @@
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"啟用新手勢即可切換應用程式"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"手勢操作"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"從螢幕底部向上滑動即可前往主畫面。從螢幕底部向上滑動並按住，然後再放開可切換應用程式。從左側或右側邊緣向另一側滑動可返回上一個畫面。"</string>
-    <string name="legacy_navigation_title" msgid="7877402855994423727">"透過 3 個按鈕操作系統"</string>
+    <string name="legacy_navigation_title" msgid="7877402855994423727">"使用 3 個虛擬導航鍵"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"使用螢幕底部的按鈕返回上一個畫面、前往主畫面及切換應用程式。"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"系統操作機制, 雙按鈕操作, 三按鈕操作, 手勢操作, 滑動"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"預設的主畫面應用程式「<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>」不支援透過手勢操作系統"</string>
