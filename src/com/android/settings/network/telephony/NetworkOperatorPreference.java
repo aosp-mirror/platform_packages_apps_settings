@@ -106,12 +106,19 @@ public class NetworkOperatorPreference extends Preference {
     }
 
     /**
+     * Return true when this preference is for forbidden network
+     */
+    public boolean isForbiddenNetwork() {
+        return ((mForbiddenPlmns != null) && mForbiddenPlmns.contains(getOperatorNumeric()));
+    }
+
+    /**
      * Refresh the NetworkOperatorPreference by updating the title and the icon.
      */
     public void refresh() {
         String networkTitle = getOperatorName();
 
-        if ((mForbiddenPlmns != null) && mForbiddenPlmns.contains(getOperatorNumeric())) {
+        if (isForbiddenNetwork()) {
             if (DBG) Log.d(TAG, "refresh forbidden network: " + networkTitle);
             networkTitle += " "
                     + getContext().getResources().getString(R.string.forbidden_network);
