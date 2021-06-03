@@ -20,6 +20,11 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/accelerometer_title" >
 
+    <SwitchPreference
+        android:key="auto_rotate_switch"
+        android:title="@string/auto_rotate_settings_primary_switch_title"
+        settings:controller="com.android.settings.display.AutoRotatePreferenceController"/>
+
     <com.android.settingslib.widget.BannerMessagePreference
         android:key="face_rotate_permission"
         android:title="@string/adaptive_sleep_title_no_permission"
