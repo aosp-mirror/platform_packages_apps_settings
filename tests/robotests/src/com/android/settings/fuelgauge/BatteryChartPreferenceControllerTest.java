@@ -49,6 +49,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -118,6 +119,7 @@ public final class BatteryChartPreferenceControllerTest {
             createBatteryHistoryMap());
     }
 
+    @Ignore
     @Test
     public void testOnResume_uiModeIsChanged_clearBatteryDiffEntryCache() {
         doReturn(mResources).when(mContext).getResources();
@@ -133,6 +135,7 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
     }
 
+    @Ignore
     @Test
     public void testOnResume_uiModeIsNotChanged_notClearBatteryDiffEntryCache() {
         doReturn(mResources).when(mContext).getResources();
