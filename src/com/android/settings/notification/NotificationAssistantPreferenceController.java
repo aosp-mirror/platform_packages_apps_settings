@@ -30,6 +30,8 @@ import com.google.common.annotations.VisibleForTesting;
 
 public class NotificationAssistantPreferenceController extends TogglePreferenceController {
     private static final String TAG = "NASPreferenceController";
+    private static final String KEY_NAS = "notification_assistant";
+
     private static final int AVAILABLE = 1;
     private final UserManager mUserManager;
     private Fragment mFragment;
@@ -38,11 +40,8 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
     @VisibleForTesting
     protected NotificationBackend mNotificationBackend;
 
-    public NotificationAssistantPreferenceController(Context context, NotificationBackend backend,
-            Fragment fragment, String preferenceKey) {
-        super(context, preferenceKey);
-        mNotificationBackend = backend;
-        mFragment = fragment;
+    public NotificationAssistantPreferenceController(Context context) {
+        super(context, KEY_NAS);
         mUserManager = UserManager.get(context);
     }
 
@@ -86,5 +85,14 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
         NotificationAssistantDialogFragment dialogFragment =
                 NotificationAssistantDialogFragment.newInstance(mFragment, cn);
         dialogFragment.show(mFragment.getFragmentManager(), TAG);
+    }
+
+    public void setFragment(Fragment fragment) {
+        mFragment = fragment;
+    }
+
+    @VisibleForTesting
+    void setBackend(NotificationBackend backend) {
+        mNotificationBackend = backend;
     }
 }
