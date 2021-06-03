@@ -322,6 +322,18 @@ public class WifiP2pSettingsTest {
         mFragment.onPause();
 
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
+        assertThat(mFragment.mChannel).isNull();
+    }
+
+    @Test
+    public void peerDiscovery_whenOnResume_shouldInitChannelAgain() {
+        mFragment.onPause();
+
+        verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
+        assertThat(mFragment.mChannel).isNull();
+
+        mFragment.onResume();
+        assertThat(mFragment.mChannel).isNotNull();
     }
 
     @Test
@@ -492,6 +504,7 @@ public class WifiP2pSettingsTest {
 
     @Test
     public void onActivityCreate_withNullP2pManager_shouldGetP2pManagerAgain() {
+        mFragment.mChannel = null; // Reset channel to re-test onActivityCreated flow
         mFragment.mWifiP2pManager = null;
 
         mFragment.onActivityCreated(new Bundle());
@@ -502,7 +515,7 @@ public class WifiP2pSettingsTest {
     @Test
     public void onActivityCreate_withNullChannel_shouldSetP2pManagerNull() {
         doReturn(null).when(mWifiP2pManager).initialize(any(), any(), any());
-
+        mFragment.mChannel = null; // Reset channel to re-test onActivityCreated flow
         mFragment.onActivityCreated(new Bundle());
 
         assertThat(mFragment.mWifiP2pManager).isNull();
