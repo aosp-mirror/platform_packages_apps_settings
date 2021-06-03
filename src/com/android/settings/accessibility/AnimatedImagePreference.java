@@ -22,6 +22,9 @@ import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.preference.Preference;
@@ -29,12 +32,20 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Objects;
+
 /**
  * A custom {@link ImageView} preference for showing animated or static image, such as <a
  * href="https://developers.google.com/speed/webp/">animated webp</a> and static png.
  */
 public class AnimatedImagePreference extends Preference {
 
+    private static final String TAG = "AnimatedImagePreference";
     private Uri mImageUri;
     private int mMaxHeight = -1;
 
@@ -56,19 +67,27 @@ public class AnimatedImagePreference extends Preference {
         super.onBindViewHolder(holder);
 
         final ImageView imageView = holder.itemView.findViewById(R.id.animated_img);
-        if (imageView == null) {
+        final LottieAnimationView lottieView = holder.itemView.findViewById(R.id.lottie_view);
+        if (imageView == null || lottieView == null) {
             return;
         }
 
         if (mImageUri != null) {
-            resetAnimation(imageView.getDrawable());
+            resetAnimations(imageView, lottieView);
+            hideAllChildViews(holder.itemView);
 
             imageView.setImageURI(mImageUri);
-            startAnimation(imageView.getDrawable());
+            if (imageView.getDrawable() != null) {
+                startAnimationWith(imageView);
+            } else {
+                // The lottie image from the raw folder also returns null.
+                startLottieAnimationWith(lottieView);
+            }
         }
 
         if (mMaxHeight > -1) {
             imageView.setMaxHeight(mMaxHeight);
+            lottieView.setMaxHeight(mMaxHeight);
         }
     }
 
@@ -96,6 +115,22 @@ public class AnimatedImagePreference extends Preference {
         }
     }
 
+    private void startAnimationWith(ImageView imageView) {
+        startAnimation(imageView.getDrawable());
+
+        imageView.setVisibility(View.VISIBLE);
+    }
+
+    private void startLottieAnimationWith(LottieAnimationView lottieView) {
+        final InputStream inputStream = getInputStreamFromUri(mImageUri);
+        Objects.requireNonNull(inputStream, "Invalid resource.");
+        lottieView.setAnimation(inputStream, /* cacheKey= */ null);
+        lottieView.setRepeatCount(LottieDrawable.INFINITE);
+        lottieView.playAnimation();
+
+        lottieView.setVisibility(View.VISIBLE);
+    }
+
     private void startAnimation(Drawable drawable) {
         if (!(drawable instanceof Animatable)) {
             return;
@@ -110,6 +145,12 @@ public class AnimatedImagePreference extends Preference {
         ((Animatable) drawable).start();
     }
 
+    private void resetAnimations(ImageView imageView, LottieAnimationView lottieView) {
+        resetAnimation(imageView.getDrawable());
+
+        lottieView.cancelAnimation();
+    }
+
     private void resetAnimation(Drawable drawable) {
         if (!(drawable instanceof Animatable)) {
             return;
@@ -120,5 +161,21 @@ public class AnimatedImagePreference extends Preference {
         }
 
         ((Animatable) drawable).stop();
+    }
+
+    private InputStream getInputStreamFromUri(Uri uri) {
+        try {
+            return getContext().getContentResolver().openInputStream(uri);
+        } catch (FileNotFoundException e) {
+            Log.w(TAG, "Cannot find content uri: " + uri, e);
+            return null;
+        }
+    }
+
+    private void hideAllChildViews(View itemView) {
+        final ViewGroup viewGroup = (ViewGroup) itemView;
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            viewGroup.getChildAt(i).setVisibility(View.GONE);
+        }
     }
 }
