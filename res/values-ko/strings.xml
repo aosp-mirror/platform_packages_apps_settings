@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"축소"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"확대"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"자동 회전 사용"</string>
-    <string name="smart_rotate_text_headline" msgid="2805825602934705299">"얼굴 인식 기능은 전면 카메라를 사용하여 자동 회전 정확도를 높입니다. 이미지는 저장되거나 Google로 전송되지 않습니다.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;자세히 알아보기&lt;/a&gt;"</string>
+    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"얼굴 인식 기능은 전면 카메라를 사용하여 자동 회전 정확도를 높입니다. 이미지는 저장되거나 Google로 전송되지 않습니다.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;화면 자동 회전 자세히 알아보기&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"샘플 텍스트"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"오즈의 마법사"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11장: 오즈의 멋진 에메랄드 도시"</string>
@@ -307,7 +307,6 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"로드 중…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"근처 기기 권한이 있는 앱이 연결된 기기의 상대적인 위치를 파악할 수 있습니다."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"앱 및 서비스에 대한 위치 정보 액세스가 사용 중지되어 있습니다. 그래도 긴급 전화번호로 전화를 걸거나 문자 메시지를 보내면 기기의 위치 정보가 구조 서비스에 전달될 수 있습니다."</string>
-    <string name="location_settings_footer_learn_more" msgid="3646344316226670342">"&lt;a href=<xliff:g id="URL"> https://support.google.com/android/answer/3467281</xliff:g>&gt;자세히 알아보기&lt;/a&gt;"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"위치 설정 자세히 알아보기"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"계정"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"보안"</string>
@@ -443,7 +442,7 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"탭하여 설정"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"얼굴 및 지문 추가됨"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"얼굴 및 지문 추가됨"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"얼굴 인식 및 지문 잠금 해제를 설정하면 마스크를 쓰고 있거나 어두운 곳에 있을 때 휴대전화에서 지문을 요청합니다."</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하면 마스크를 쓰고 있거나 어두운 곳에 있을 때 휴대전화에서 지문을 요청합니다."</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"잠금 해제 방법"</string>
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"다음에 얼굴 인식 및 지문 인식 사용"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"휴대전화 잠금 해제"</string>
@@ -487,42 +486,42 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"나중에"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"지문 설정을 건너뛰시겠습니까?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"지문으로 휴대전화를 잠금 해제하도록 설정했습니다. 지금 건너뛰면 나중에 설정해야 하며 설정에는 약 1분 정도 소요됩니다."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"분실하거나 도난당한 경우 PIN으로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"분실하거나 도난당한 경우 패턴으로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"분실하거나 도난당한 경우 비밀번호로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"분실하거나 도난당한 경우 PIN으로 기기를 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"분실하거나 도난당한 경우 패턴으로 기기를 보호합니다."</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"분실하거나 도난당한 경우 비밀번호로 기기를 보호합니다."</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n분실하거나 도난당한 경우 PIN으로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n분실하거나 도난당한 경우 패턴으로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n분실하거나 도난당한 경우 비밀번호로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n분실하거나 도난당한 경우 PIN으로 기기를 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n분실하거나 도난당한 경우 패턴으로 기기를 보호합니다."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n분실하거나 도난당한 경우 비밀번호로 기기를 보호합니다."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"얼굴 인식 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n분실하거나 도난당한 경우 PIN으로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"얼굴 인식 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n분실하거나 도난당한 경우 패턴으로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"얼굴 인식 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n분실하거나 도난당한 경우 비밀번호로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"얼굴 인식 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n분실하거나 도난당한 경우 PIN으로 기기를 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"얼굴 인식 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n분실하거나 도난당한 경우 패턴으로 기기를 보호합니다."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"얼굴 인식 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n분실하거나 도난당한 경우 비밀번호로 기기를 보호합니다."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"얼굴 인식 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"얼굴 인식 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"얼굴 인식 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n분실하거나 도난당한 경우 PIN으로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n분실하거나 도난당한 경우 패턴으로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n분실하거나 도난당한 경우 비밀번호로 태블릿을 보호합니다."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n분실하거나 도난당한 경우 PIN으로 기기를 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n분실하거나 도난당한 경우 패턴으로 기기를 보호합니다."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n분실하거나 도난당한 경우 비밀번호로 기기를 보호합니다."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"태블릿을 분실하거나 도난당한 경우 PIN으로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"태블릿을 분실하거나 도난당한 경우 패턴으로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"태블릿을 분실하거나 도난당한 경우 비밀번호로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"기기를 분실하거나 도난당한 경우 PIN으로 기기를 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"기기를 분실하거나 도난당한 경우 패턴으로 기기를 보호합니다."</string>
+    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"기기를 분실하거나 도난당한 경우 비밀번호로 기기를 보호합니다."</string>
+    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"휴대전화를 분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"휴대전화를 분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"휴대전화를 분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n태블릿을 분실하거나 도난당한 경우 PIN으로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n태블릿을 분실하거나 도난당한 경우 패턴으로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n태블릿을 분실하거나 도난당한 경우 비밀번호로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n기기를 분실하거나 도난당한 경우 PIN으로 기기를 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n기기를 분실하거나 도난당한 경우 패턴으로 기기를 보호합니다."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n기기를 분실하거나 도난당한 경우 비밀번호로 기기를 보호합니다."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n휴대전화를 분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n휴대전화를 분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n휴대전화를 분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"얼굴 인식 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n태블릿을 분실하거나 도난당한 경우 PIN으로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"얼굴 인식 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n태블릿을 분실하거나 도난당한 경우 패턴으로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"얼굴 인식 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n태블릿을 분실하거나 도난당한 경우 비밀번호로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"얼굴 인식 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n기기를 분실하거나 도난당한 경우 PIN으로 기기를 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"얼굴 인식 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n기기를 분실하거나 도난당한 경우 패턴으로 기기를 보호합니다."</string>
+    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"얼굴 인식 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n기기를 분실하거나 도난당한 경우 비밀번호로 기기를 보호합니다."</string>
+    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"얼굴 인식 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n휴대전화를 분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"얼굴 인식 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n휴대전화를 분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"얼굴 인식 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n휴대전화를 분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n태블릿을 분실하거나 도난당한 경우 PIN으로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n태블릿을 분실하거나 도난당한 경우 패턴으로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n태블릿을 분실하거나 도난당한 경우 비밀번호로 태블릿을 보호합니다."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n기기를 분실하거나 도난당한 경우 PIN으로 기기를 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n기기를 분실하거나 도난당한 경우 패턴으로 기기를 보호합니다."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n기기를 분실하거나 도난당한 경우 비밀번호로 기기를 보호합니다."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 PIN이 필요합니다.\n\n휴대전화를 분실하거나 도난당한 경우 PIN으로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 패턴이 필요합니다.\n\n휴대전화를 분실하거나 도난당한 경우 패턴으로 휴대전화를 보호합니다."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"얼굴 인식 잠금 해제 및 지문 잠금 해제를 설정하려면 비밀번호가 필요합니다.\n\n휴대전화를 분실하거나 도난당한 경우 비밀번호로 휴대전화를 보호합니다."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"PIN 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"PIN 및 얼굴 인식 설정을 건너뛰시겠습니까?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"PIN 및 지문 설정을 건너뛰시겠습니까?"</string>
@@ -2253,7 +2252,7 @@
     <string name="vision_settings_title" msgid="8919983801864103069">"보기 설정"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"필요에 따라 기기를 맞춤설정할 수 있습니다. 다음 접근성 기능은 언제든지 설정에서 변경할 수 있습니다."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"글꼴 크기 변경"</string>
-    <string name="screen_reader_category_title" msgid="6195867428854871553">"스크린 리더"</string>
+    <string name="screen_reader_category_title" msgid="5825700839731107803">"스크린 리더"</string>
     <string name="captions_category_title" msgid="574490148949400274">"자막"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"오디오"</string>
     <string name="general_category_title" msgid="6298579528716834157">"일반"</string>
@@ -2294,7 +2293,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"화면 확대"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"3번 탭하여 확대"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"버튼을 탭하여 확대/축소"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8008175520087009922">"화면을 빠르게 확대하여 콘텐츠를 더 크게 표시합니다.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;확대하는 방법:&lt;/b&gt;&lt;br/&gt; 1. 단축키를 사용하여 확대를 시작합니다.&lt;br/&gt; 2. 화면을 탭합니다.&lt;br/&gt; 3. 두 손가락을 드래그하여 화면에서 이동합니다.&lt;br/&gt; 4. 두 손가락을 모아서 배율을 조정합니다.&lt;br/&gt; 5. 단축키로 확대를 멈춥니다.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;일시적으로 확대하는 방법:&lt;/b&gt;&lt;br/&gt; 1. 단축키를 사용하여 확대를 시작합니다.&lt;br/&gt; 2. 화면의 한 부분을 길게 터치합니다.&lt;br/&gt; 3. 손가락을 드래그하여 화면에서 이동합니다.&lt;br/&gt; 4. 손가락을 떼어 확대를 멈춥니다."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2527664482392097865">"화면을 빠르게 확대하여 콘텐츠를 더 크게 표시합니다.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;확대하는 방법:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 단축키를 사용하여 확대를 시작합니다.&lt;br/&gt; {1,number,integer}. 화면을 탭합니다.&lt;br/&gt; {2,number,integer}. 두 손가락으로 드래그하여 화면을 움직입니다.&lt;br/&gt; {3,number,integer}. 두 손가락을 모아서 배율을 조정합니다.&lt;br/&gt; {4,number,integer}. 단축키로 확대를 멈춥니다.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;일시적으로 확대하는 방법:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 단축키를 사용하여 확대를 시작합니다.&lt;br/&gt; {1,number,integer}. 화면 아무 곳이나 길게 터치합니다.&lt;br/&gt; {2,number,integer}. 손가락으로 드래그하여 화면을 움직입니다.&lt;br/&gt; {3,number,integer}. 손가락을 떼어 확대를 멈춥니다."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"확대 기능을 사용 설정하면 화면을 확대할 수 있습니다.\n\n"<b>"화면을 확대하려면"</b>" 확대 기능을 시작한 다음 화면에서 아무 곳이나 탭합니다.\n"<ul><li>"스크롤하려면 2개 이상의 손가락으로 드래그합니다."</li>\n<li>"확대/축소 수준을 조정하려면 2개 이상의 손가락을 모읍니다."</li></ul>\n\n<b>"화면을 일시적으로 확대하려면"</b>" 확대를 시작한 다음 화면에서 아무 곳이나 길게 터치합니다.\n"<ul><li>"화면에서 이동하려면 드래그합니다."</li>\n<li>"축소하려면 손가락을 뗍니다."</li></ul>\n\n"키보드 또는 탐색 메뉴는 확대할 수 없습니다."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g>페이지 중 <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>페이지"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"접근성 버튼을 사용하여 열기"</string>
@@ -2320,13 +2319,14 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"두 손가락을 사용하여 화면 하단에서 위로 스와이프하세요.\n\n기능 간에 전환하려면 두 손가락을 사용하여 위로 스와이프한 후 잠시 기다립니다."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"세 손가락을 사용하여 화면 하단에서 위로 스와이프하세요.\n\n기능 간에 전환하려면 세 손가락을 사용하여 위로 스와이프한 후 잠시 기다립니다."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"접근성 버튼 맞춤설정"</annotation></string>
-    <string name="footer_learn_more" msgid="4912771050593810437"><annotation id="link">"자세히 알아보기"</annotation></string>
+    <!-- no translation found for footer_learn_more_content_description (8843798273152131341) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"볼륨 키 길게 누르기"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"볼륨 키 길게 누르기"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"볼륨 키 2개를 길게 누르세요."</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"세 번 탭하기"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"화면 세 번 탭하기"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="7490111169801144991">"화면을 빠르게 3회 탭하세요. 이 단축키를 사용하면 기기가 느려질 수 있습니다"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"화면을 {0,number,integer}번 빠르게 탭합니다. 이 단축키를 사용하면 기기가 느려질 수 있습니다."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"고급"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"접근성 버튼이 <xliff:g id="SERVICE">%1$s</xliff:g>(으)로 설정되어 있습니다. 확대를 사용하려면 접근성 버튼을 길게 터치한 다음 확대를 선택하세요."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"접근성 동작이 <xliff:g id="SERVICE">%1$s</xliff:g>(으)로 설정되어 있습니다. 확대 기능을 사용하려면 두 손가락을 사용하여 화면 하단에서 위로 스와이프한 다음 잠시 기다리세요. 그런 다음 확대를 선택합니다."</string>
@@ -2592,6 +2592,7 @@
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"<xliff:g id="STATE">%1$s</xliff:g> 배터리 사용이 필요한 앱입니다."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"제한 없음"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"최적화됨"</string>
+    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"배터리 사용량 옵션 자세히 알아보기"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"충전 완료 후 화면 사용 시간"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"충전 완료 후 배터리 사용량"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"충전 완료 후 화면이 켜진 시간"</string>
@@ -2615,7 +2616,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi 사용 시간"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"배터리 사용량"</string>
     <string name="history_details_title" msgid="8628584613889559355">"기록 세부정보"</string>
-    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"배터리 사용량 보기"</string>
+    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"배터리 사용량"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"지난 24시간 동안의 사용량 보기"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"마지막으로 충전을 완료한 이후의 사용량 보기"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"배터리 사용량"</string>
@@ -2633,12 +2634,13 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"절전 모드 사용 설정"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"배터리가 평소보다 빨리 소진될 수 있습니다."</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"절전 기능 사용 중"</string>
+    <string name="battery_saver_link_a11y" msgid="740558184830458845">"절전 기능 자세히 알아보기"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"일부 기능이 제한될 수 있습니다."</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"배터리 사용량이 증가함"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"배터리 사용량이 가장 높은 앱을 확인하세요"</string>
-    <!-- no translation found for battery_tip_limited_temporarily_title (5231061779363606924) -->
+    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"충전이 일시적으로 제한됨"</string>
+    <!-- no translation found for battery_tip_limited_temporarily_summary (8504402301403419444) -->
     <skip />
-    <string name="battery_tip_limited_temporarily_summary" msgid="4779491239398261377">"일시적으로 배터리 사용이 제한됩니다. 자세히 알아보세요."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"휴대전화를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"태블릿을 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"기기를 평소보다 더 많이 사용했습니다. 배터리가 예상보다 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
@@ -2694,8 +2696,9 @@
       <item quantity="one">앱 %1$d개가 제한됨</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
-    <string name="battery_missing_message" msgid="3513793247821256009">"배터리 정보를 업데이트할 수 없습니다."</string>
+    <string name="battery_missing_message" msgid="400958471814422770">"배터리 수준을 읽는 중에 문제가 발생했습니다."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
+    <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"탭하여 이 오류에 관해 자세히 알아보기"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"앱을 종료하시겠습니까?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"<xliff:g id="APP">%1$s</xliff:g>에서 휴대전화를 작동 상태로 유지하고 있어 휴대전화에서 배터리를 정상적으로 관리할 수 없습니다.\n\n문제를 해결하려면 앱을 종료하세요.\n\n문제가 계속되는 경우 앱을 제거하고 배터리 성능을 개선해야 할 수도 있습니다."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"<xliff:g id="APP">%1$s</xliff:g>에서 태블릿을 작동 상태로 유지하고 있어 태블릿에서 배터리를 정상적으로 관리할 수 없습니다.\n\n문제를 해결하려면 앱을 종료하세요.\n\n문제가 계속되는 경우 앱을 제거하고 배터리 성능을 개선해야 할 수도 있습니다."</string>
@@ -4348,9 +4351,9 @@
     <string name="high_power_desc" msgid="2753076899835765338">"배터리 최적화를 적용하지 마세요. 배터리가 더 빨리 방전될 수 있습니다."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"앱이 항상 백그라운드에서 실행되도록 허용하시겠습니까?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g>이(가) 항상 백그라운드에서 실행되도록 허용하면 배터리 수명이 단축될 수도 있습니다. \n\n이 설정은 나중에 설정 &gt; 앱 및 알림에서 변경할 수 있습니다."</string>
-    <string name="battery_summary" msgid="2491764359695671207">"마지막으로 완전히 충전한 이후 <xliff:g id="PERCENTAGE">%1$s</xliff:g> 사용"</string>
+    <string name="battery_summary" msgid="4338334523643155767">"지난 24시간 동안 <xliff:g id="PERCENTAGE">%1$s</xliff:g> 사용"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"전원 관리"</string>
-    <string name="no_battery_summary" msgid="5769159953384122003">"마지막으로 완전히 충전한 이후 배터리를 사용하지 않음"</string>
+    <string name="no_battery_summary" msgid="5664437398071394961">"지난 24시간 동안 배터리 사용 없음"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"앱 설정"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"SystemUI 튜너 표시"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"추가 권한"</string>
@@ -5273,8 +5276,7 @@
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"멀티 윈도우에서 크기 조정 불가 앱 허용"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"강제로 어둡게 재정의"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"강제로 어둡게 기능을 항상 사용하도록 재정의"</string>
-    <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"흐리게 처리 사용"</string>
-    <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"컴포지터 수준에서 화면 흐리게 처리를 사용합니다. 기기를 재부팅해야 합니다."</string>
+    <string name="enable_blurs_on_windows_title" msgid="1717476384039018830">"창 수준 블러"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"개인 정보 보호"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"권한, 계정 활동, 개인 정보"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"삭제"</string>
@@ -5367,14 +5369,10 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"설정에서 화면 오버레이 허용"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"다른 앱 위에 표시할 수 있는 앱이 설정 화면을 오버레이하도록 허용합니다."</string>
     <string name="media_controls_title" msgid="403271085636252597">"미디어"</string>
-    <!-- no translation found for media_controls_resume_title (855076860336652370) -->
-    <skip />
-    <!-- no translation found for media_controls_resume_description (3163482266454802097) -->
-    <skip />
-    <!-- no translation found for media_controls_recommendations_title (184225835236807677) -->
-    <skip />
-    <!-- no translation found for media_controls_recommendations_description (7596498733126824030) -->
-    <skip />
+    <string name="media_controls_resume_title" msgid="855076860336652370">"미디어 플레이어 고정"</string>
+    <string name="media_controls_resume_description" msgid="3163482266454802097">"재생을 빠르게 재개할 수 있도록 빠른 설정에서 미디어 플레이어를 계속 열어 둡니다."</string>
+    <string name="media_controls_recommendations_title" msgid="184225835236807677">"미디어 추천 표시"</string>
+    <string name="media_controls_recommendations_description" msgid="7596498733126824030">"활동을 바탕으로 추천을 받습니다."</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"플레이어를 숨깁니다."</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"플레이어를 표시합니다."</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"미디어"</string>
@@ -5414,6 +5412,14 @@
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"W+ 연결"</string>
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"속도와 범위를 개선하기 위해 Google Fi에서 W+ 네트워크를 사용하도록 허용합니다."</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ 네트워크"</string>
+    <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
+    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM 다운로드"</string>
+    <string name="sim_category_active_sim" msgid="1503823567818544012">"활성"</string>
+    <string name="sim_category_inactive_sim" msgid="4068899490133820881">"비활성"</string>
+    <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /<xliff:g id="ID_1">%1$s</xliff:g> 기본값"</string>
+    <string name="default_active_sim_calls" msgid="2390973682556353558">"통화"</string>
+    <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
+    <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"모바일 데이터"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"연결됨"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"연결되지 않음"</string>
@@ -5442,7 +5448,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi‑Fi 핫스팟 사용"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"앱 고정 사용"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"개발자 옵션 사용"</string>
-    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"기본인쇄 서비스 사용"</string>
+    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"기본 인쇄 서비스 사용"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"멀티 사용자 사용"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"무선 디버깅 사용"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"그래픽 드라이버 환경설정 사용"</string>
