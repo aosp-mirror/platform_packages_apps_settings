@@ -1186,7 +1186,7 @@
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"Ikke juster etter omgivelsene"</string>
     <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"Økt batteribruk"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"Optimaliser lysstyrken etter omgivelsene. Når denne funksjonen er på, kan du fremdeles justere lysstyrken midlertidig."</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"Lysstyrken på skjermen justeres automatisk etter omgivelser og aktiviteter. Du kan flytte glidebryteren manuelt for få tilpasset lysstyrke til å registrere preferansene dine."</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"Lysstyrken på skjermen justeres automatisk etter omgivelser og aktiviteter. Du kan flytte glidebryteren manuelt for lære tilpasset lysstyrke om preferansene dine."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Vis hvitbalanse"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
@@ -2028,7 +2028,7 @@
     <string name="hardkeyboard_category" msgid="8729780593378161071">"Innstillinger for fysisk tastatur"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Trykk mellomromstasten to ganger for å skrive punktum"</string>
     <string name="show_password" msgid="7101900779571040117">"Vis passord"</string>
-    <string name="show_password_summary" msgid="9025960283785111619">"Vis tegnene mens du skriver"</string>
+    <string name="show_password_summary" msgid="9025960283785111619">"Vis tegnene et øyeblikk mens du skriver"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Denne stavekontrollen kan være i stand til å samle all tekst du skriver, herunder personlige opplysninger som passord og kredittkortnumre. Den kommer fra appen <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vil du bruke denne stavekontrollen?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Innstillinger"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Språk"</string>
@@ -2762,7 +2762,7 @@
     <string name="work_mode_label" msgid="1001415270126064436">"Jobbprofil"</string>
     <string name="work_mode_on_summary" msgid="2042885311126239961">"Administreres av organisasjonen din"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"Apper og varsler er slått av"</string>
-    <string name="remove_managed_profile_label" msgid="1294933737673830431">"Fjern jobbprofilen"</string>
+    <string name="remove_managed_profile_label" msgid="1294933737673830431">"Slett jobbprofilen"</string>
     <string name="background_data" msgid="321903213000101158">"Bakgrunnsdata"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Apper kan når som helst synkronisere, sende og motta data"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"Vil du deaktivere bakgrunnsdata?"</string>
@@ -2831,8 +2831,8 @@
     <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"SIM-kort"</string>
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Satt på pause ved grensen"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Synkroniser data automatisk"</string>
-    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Auto-synkr. av personlige data"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Auto-synkr. av arbeidsdata"</string>
+    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Autosynkroniser persondata"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Autosynkroniser jobbdata"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Endre syklus …"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dag i måneden for å tilbakestille databruksyklusen:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Ingen apper brukte data i denne perioden."</string>
@@ -3033,7 +3033,7 @@
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vil du slette deg selv?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Vil du slette brukeren?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Fjerne denne profilen?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Fjern jobbprofilen?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Vil du slette jobbprofilen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Lagringsplassen og dataene dine blir fjernet fra dette nettbrettet. Denne handlingen kan ikke angres."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"Lagringsplassen og dataene dine blir fjernet fra telefonen. Denne handlingen kan ikke angres."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Alle apper og data slettes."</string>
@@ -3594,8 +3594,8 @@
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Ingen lyd eller vibrering, og vises lavere i samtaledelen"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Kan ringe eller vibrere basert på telefoninnstillingene"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Når enheten låses opp, vises varsler som et banner over toppen av skjermen"</string>
-    <string name="notification_switch_label" msgid="8029371325967501557">"Varsler fra «<xliff:g id="APP_NAME">%1$s</xliff:g>»"</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"Varsler fra <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="notification_switch_label" msgid="8029371325967501557">"«<xliff:g id="APP_NAME">%1$s</xliff:g>»: alle varsler"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>: alle varsler"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Varsler som kan tilpasses"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> varsler per dag</item>
@@ -3659,8 +3659,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apper er tilknyttet</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app er tilknyttet</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"For å knytte til disse appene, installer <xliff:g id="NAME">%1$s</xliff:g> i jobbprofilen din"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"For å knytte til disse appene, installer <xliff:g id="NAME">%1$s</xliff:g> i den personlige profilen din"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"For å tilknytte disse appene, installer <xliff:g id="NAME">%1$s</xliff:g> i jobbprofilen din"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"For å tilknytte disse appene, installer <xliff:g id="NAME">%1$s</xliff:g> i den personlige profilen din"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Trykk for å installere appen"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"«Ikke forstyrr»-tilgang"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Kan bruke «Ikke forstyrr»"</string>
@@ -3895,7 +3895,7 @@
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lås enheten når apper løsnes"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekreft sletting av SIM-kort"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Bekreft at det er deg, før du sletter et nedlastet SIM-kort"</string>
-    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Denne arbeidsprofilen administreres av:"</string>
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Denne jobbprofilen administreres av:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Administrert av <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Eksperimentell)"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Trygg oppstart"</string>
@@ -4147,7 +4147,7 @@
     <string name="allow_overlay_description" msgid="1607235723669496298">"Tillat at denne appen vises over andre apper du bruker. Denne appen kan se hvor du trykker, eller endre det som vises på skjermen."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Tilgang til alle filer"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Kan administrere alle filer"</string>
-    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Gi denne appen tillatelse til å lese, endre og slette alle filer på denne enheten eller tilkoblede lagringsvolum. Hvis du gir appen tillatelsen, kan den få tilgang til filer uten at du er klar over det."</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Gi denne appen tillatelse til å lese, endre og slette alle filer på denne enheten eller tilkoblede lagringsvolum. Hvis du gir appen denne tillatelsen, kan den få tilgang til filer uten at du er klar over det."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Har tilgang til alle filer"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr, lyttetjeneste for virtuell virkelighet, stereo, hjelpetjenester"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Vis over andre apper"</string>
@@ -4466,7 +4466,7 @@
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigasjon med bevegelser"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"For å gå til startsiden, sveip opp fra bunnen av skjermen. For å bytte app, sveip opp fra bunnen, hold, og slipp. For å gå tilbake, sveip fra enten venstre eller høyre kant."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigasjon med tre knapper"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Gå tilbake, gå til startsiden og bytt apper med knapper nederst på skjermen."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Gå tilbake, gå til startsiden og bytt app med knapper nederst på skjermen."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"systemnavigasjon, navigasjon med to knapper, navigasjon med tre knapper, navigasjon med bevegelser, sveip"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Støttes ikke av standard startsideapp, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Bytt standard startsideapp"</string>
