@@ -23,11 +23,11 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.PermissionChecker;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.CrossProfileApps;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PermissionInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -40,6 +40,7 @@ import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadows.ShadowPermissionChecker;
 import org.robolectric.shadows.ShadowProcess;
 
 import java.util.List;
@@ -153,11 +154,14 @@ public class InteractAcrossProfilesSettingsTest {
         installCrossProfilePackage(WORK_PROFILE_ID, WORK_CROSS_PROFILE_PACKAGE);
         shadowOf(mCrossProfileApps).addCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
         String appOp = AppOpsManager.permissionToOp(INTERACT_ACROSS_PROFILES_PERMISSION);
-        shadowOf(mAppOpsManager).setMode(
-                appOp, PACKAGE_UID, PERSONAL_CROSS_PROFILE_PACKAGE, AppOpsManager.MODE_ALLOWED);
-        shadowOf(mAppOpsManager).setMode(
-                appOp, PACKAGE_UID, PERSONAL_NON_CROSS_PROFILE_PACKAGE, AppOpsManager.MODE_IGNORED);
-        shadowOf(mPackageManager).addPermissionInfo(createCrossProfilesPermissionInfo());
+        ShadowPermissionChecker.setResult(
+                PERSONAL_CROSS_PROFILE_PACKAGE,
+                INTERACT_ACROSS_PROFILES_PERMISSION,
+                PermissionChecker.PERMISSION_GRANTED);
+        ShadowPermissionChecker.setResult(
+                PERSONAL_NON_CROSS_PROFILE_PACKAGE,
+                INTERACT_ACROSS_PROFILES_PERMISSION,
+                PermissionChecker.PERMISSION_SOFT_DENIED);
 
         int numOfApps = InteractAcrossProfilesSettings.getNumberOfEnabledApps(
                 mContext, mPackageManager, mUserManager, mCrossProfileApps);
@@ -170,12 +174,5 @@ public class InteractAcrossProfilesSettingsTest {
                 packageName);
         personalPackageInfo.requestedPermissions = new String[]{
                 INTERACT_ACROSS_PROFILES_PERMISSION};
-    }
-
-    private PermissionInfo createCrossProfilesPermissionInfo() {
-        PermissionInfo permissionInfo = new PermissionInfo();
-        permissionInfo.name = INTERACT_ACROSS_PROFILES_PERMISSION;
-        permissionInfo.protectionLevel = PermissionInfo.PROTECTION_FLAG_APPOP;
-        return permissionInfo;
     }
 }
