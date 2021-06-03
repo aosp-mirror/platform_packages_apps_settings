@@ -16,18 +16,20 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
                   android:title="@string/bubbles_app_toggle_title">
+
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="notification_bubbles_desc"
+            android:title="@string/notifications_bubble_setting_description"/>
+
+        <com.android.settingslib.widget.IllustrationPreference
+            android:key="bubbles_illustration"
+            app:lottie_rawRes="@raw/lottie_bubbles"/>
 
         <com.android.settingslib.widget.MainSwitchPreference
             android:key="global_notification_bubbles"
-            android:title="@string/bubbles_main_switch_title"
+            android:title="@string/notifications_bubble_setting_title"
             settings:controller="com.android.settings.notification.BubbleNotificationPreferenceController"/>
-
-        <com.android.settings.widget.VideoPreference
-            android:key="bubbles_illustration"
-            android:title="@string/summary_placeholder"
-            settings:animation="@raw/bubble_notification_animation"
-            settings:controller="com.android.settings.widget.VideoPreferenceController"
-            android:persistent="false" />
 
 </PreferenceScreen>
