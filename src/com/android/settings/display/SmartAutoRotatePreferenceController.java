@@ -16,15 +16,25 @@
 
 package com.android.settings.display;
 
+import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
 import static android.provider.Settings.Secure.CAMERA_AUTOROTATE;
 
+import static com.android.settings.display.SmartAutoRotateController.hasSufficientPermission;
+import static com.android.settings.display.SmartAutoRotateController.isRotationResolverServiceAvailable;
+
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.hardware.SensorPrivacyManager;
+import android.os.PowerManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -41,8 +51,21 @@ public class SmartAutoRotatePreferenceController extends BasePreferenceControlle
     private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
     private Preference mPreference;
 
+    private final SensorPrivacyManager mPrivacyManager;
+    private final PowerManager mPowerManager;
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            refreshSummary(mPreference);
+        }
+    };
+
     public SmartAutoRotatePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mPrivacyManager = SensorPrivacyManager.getInstance(context);
+        mPrivacyManager
+                .addSensorPrivacyListener(CAMERA, (sensor, enabled) -> refreshSummary(mPreference));
+        mPowerManager = context.getSystemService(PowerManager.class);
     }
 
     @Override
@@ -59,6 +82,8 @@ public class SmartAutoRotatePreferenceController extends BasePreferenceControlle
 
     @Override
     public void onStart() {
+        mContext.registerReceiver(mReceiver,
+                new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
         if (mRotationPolicyListener == null) {
             mRotationPolicyListener = new RotationPolicy.RotationPolicyListener() {
                 @Override
@@ -75,10 +100,25 @@ public class SmartAutoRotatePreferenceController extends BasePreferenceControlle
 
     @Override
     public void onStop() {
+        mContext.unregisterReceiver(mReceiver);
         if (mRotationPolicyListener != null) {
             RotationPolicy.unregisterRotationPolicyListener(mContext,
                     mRotationPolicyListener);
         }
+    }
+
+    /**
+     * Need this because all controller tests use Roboelectric. No easy way to mock this service,
+     * so we mock the call we need
+     */
+    @VisibleForTesting
+    boolean isCameraLocked() {
+        return mPrivacyManager.isSensorPrivacyEnabled(SensorPrivacyManager.Sensors.CAMERA);
+    }
+
+    @VisibleForTesting
+    boolean isPowerSaveMode() {
+        return mPowerManager.isPowerSaveMode();
     }
 
     @Override
@@ -89,7 +129,11 @@ public class SmartAutoRotatePreferenceController extends BasePreferenceControlle
                     mContext.getContentResolver(),
                     CAMERA_AUTOROTATE,
                     0, UserHandle.USER_CURRENT);
-            activeStringId = cameraRotate == 1 ? R.string.auto_rotate_option_face_based
+            activeStringId = cameraRotate == 1 && isRotationResolverServiceAvailable(mContext)
+                    && hasSufficientPermission(mContext)
+                    && !isCameraLocked()
+                    && !isPowerSaveMode()
+                    ? R.string.auto_rotate_option_face_based
                     : R.string.auto_rotate_option_on;
         }
         return mContext.getString(activeStringId);
