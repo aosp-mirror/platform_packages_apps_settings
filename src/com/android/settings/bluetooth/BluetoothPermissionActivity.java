@@ -135,7 +135,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         }
         p.mPositiveButtonText = getString(R.string.allow);
         p.mPositiveButtonListener = this;
-        p.mNegativeButtonText = getString(R.string.deny);
+        p.mNegativeButtonText = getString(R.string.request_manage_bluetooth_permission_dont_allow);
         p.mNegativeButtonListener = this;
         mOkButton = mAlert.getButton(DialogInterface.BUTTON_POSITIVE);
         setupAlert();
