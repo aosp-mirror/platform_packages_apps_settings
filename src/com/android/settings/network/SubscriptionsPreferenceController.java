@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiManager;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
@@ -55,7 +56,7 @@ import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.SignalStrengthListener;
 import com.android.settings.network.telephony.TelephonyDisplayInfoListener;
-import com.android.settings.widget.GearPreference;
+import com.android.settings.widget.MutableGearPreference;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.SignalIcon.MobileIconGroup;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -115,7 +116,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     // Map of subscription id to Preference
     private Map<Integer, Preference> mSubscriptionPreferences;
     private int mStartOrder;
-    private GearPreference mSubsGearPref;
+    private MutableGearPreference mSubsGearPref;
     private Config mConfig = null;
     private SubsPrefCtrlInjector mSubsPrefCtrlInjector;
     private TelephonyDisplayInfo mTelephonyDisplayInfo =
@@ -238,13 +239,18 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         }
         if (mSubsGearPref == null) {
             mPreferenceGroup.removeAll();
-            mSubsGearPref = new GearPreference(mContext, null);
+            mSubsGearPref = new MutableGearPreference(mContext, null);
             mSubsGearPref.setOnPreferenceClickListener(preference -> {
                 connectCarrierNetwork();
                 return true;
             });
+
             mSubsGearPref.setOnGearClickListener(p ->
                     startMobileNetworkActivity(mContext, subInfo.getSubscriptionId()));
+        }
+
+        if (!(mContext.getSystemService(UserManager.class)).isAdminUser()) {
+            mSubsGearPref.setGearEnabled(false);
         }
 
         mSubsGearPref.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(
