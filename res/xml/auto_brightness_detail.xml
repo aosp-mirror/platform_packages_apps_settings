@@ -27,10 +27,11 @@
         settings:preview="@drawable/aab_brightness"
         settings:controller="com.android.settings.widget.VideoPreferenceController"/>
 
-    <com.android.settingslib.widget.MainSwitchPreference
+    <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="auto_brightness"
         android:title="@string/adaptive_brightness_main_switch_title"
         settings:keywords="@string/keywords_display_auto_brightness"
+        settings:userRestriction="no_config_brightness"
         settings:controller="com.android.settings.display.AutoBrightnessDetailPreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference

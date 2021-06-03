@@ -111,9 +111,9 @@ public class SettingsDumpService extends Service {
             for (SubscriptionInfo info : manager.getAvailableSubscriptionInfoList()) {
                 telephonyManager = telephonyManager
                         .createForSubscriptionId(info.getSubscriptionId());
-                NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
+                NetworkTemplate carrier = NetworkTemplate.buildTemplateCarrierMetered(
                         telephonyManager.getSubscriberId());
-                final JSONObject usage = dumpDataUsage(mobileAll, controller);
+                final JSONObject usage = dumpDataUsage(carrier, controller);
                 usage.put("subId", info.getSubscriptionId());
                 array.put(usage);
             }
