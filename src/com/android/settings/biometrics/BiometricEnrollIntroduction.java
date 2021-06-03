@@ -18,6 +18,8 @@ package com.android.settings.biometrics;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
@@ -25,14 +27,17 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.Utils;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
@@ -183,6 +188,15 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        final LinearLayout buttonContainer = mFooterBarMixin.getButtonContainer();
+        if (buttonContainer != null) {
+            buttonContainer.setBackgroundColor(getBackgroundColor());
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -197,6 +211,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             getNextButton().setText(getResources().getString(R.string.done));
             getNextButton().setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        getWindow().setStatusBarColor(getBackgroundColor());
     }
 
     @Override
@@ -334,5 +354,11 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                     PorterDuff.Mode.SRC_IN);
         }
         return mIconColorFilter;
+    }
+
+    @ColorInt
+    private int getBackgroundColor() {
+        final ColorStateList stateList = Utils.getColorAttr(this, android.R.attr.windowBackground);
+        return stateList != null ? stateList.getDefaultColor() : Color.TRANSPARENT;
     }
 }

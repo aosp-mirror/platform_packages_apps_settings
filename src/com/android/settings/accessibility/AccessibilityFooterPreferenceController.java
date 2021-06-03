@@ -17,11 +17,13 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.HelpUtils;
 
 /**
  * Base class for accessibility preference footer.
@@ -59,13 +61,24 @@ public abstract class AccessibilityFooterPreferenceController extends BasePrefer
     protected abstract String getLabelName();
 
     private void updateFooterPreferences(AccessibilityFooterPreference footerPreference) {
-        final String iconContentDescription = mContext.getString(
-                R.string.accessibility_introduction_title, getLabelName());
-        footerPreference.setIconContentDescription(iconContentDescription);
+        final StringBuffer sb = new StringBuffer();
+        sb.append(mContext.getString(
+                R.string.accessibility_introduction_title, getLabelName()))
+                .append("\n\n")
+                .append(footerPreference.getTitle());
+        footerPreference.setContentDescription(sb);
 
         if (getHelpResource() != 0) {
-            footerPreference.appendHelpLink(getHelpResource());
-            footerPreference.setLinkEnabled(true);
+            footerPreference.setLearnMoreAction(view -> {
+                final Intent helpIntent = HelpUtils.getHelpIntent(
+                        mContext, mContext.getString(getHelpResource()),
+                        mContext.getClass().getName());
+                view.startActivityForResult(helpIntent, 0);
+            });
+
+            final String learnMoreContentDescription = mContext.getString(
+                    R.string.footer_learn_more_content_description, getLabelName());
+            footerPreference.setLearnMoreContentDescription(learnMoreContentDescription);
         }
     }
 }

@@ -21,7 +21,7 @@ import android.widget.Switch;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
@@ -51,7 +51,7 @@ public class AutoBrightnessDetailPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        MainSwitchPreference pref = (MainSwitchPreference) screen.findPreference(
+        SettingsMainSwitchPreference pref = (SettingsMainSwitchPreference) screen.findPreference(
                 getPreferenceKey());
         pref.addOnSwitchChangeListener(this);
         pref.updateStatus(isChecked());

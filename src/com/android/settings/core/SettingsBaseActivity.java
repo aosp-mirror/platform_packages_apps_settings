@@ -67,7 +67,7 @@ public class SettingsBaseActivity extends FragmentActivity {
     /**
      * What type of page transition should be apply.
      */
-    public static final String EXTRA_PAGE_TRANSITION_TYPE = "extra_page_transition_type";
+    public static final String EXTRA_PAGE_TRANSITION_TYPE = "page_transition_type";
 
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
