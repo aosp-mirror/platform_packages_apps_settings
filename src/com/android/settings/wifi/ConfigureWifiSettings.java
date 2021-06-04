@@ -42,7 +42,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
     public static final int WIFI_WAKEUP_REQUEST_CODE = 600;
 
     private WifiWakeupPreferenceController mWifiWakeupPreferenceController;
-    private UseOpenWifiPreferenceController mUseOpenWifiPreferenceController;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -83,19 +82,12 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
         mWifiWakeupPreferenceController = use(WifiWakeupPreferenceController.class);
         mWifiWakeupPreferenceController.setFragment(this);
-
-        mUseOpenWifiPreferenceController = use(UseOpenWifiPreferenceController.class);
-        mUseOpenWifiPreferenceController.setFragment(this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == WIFI_WAKEUP_REQUEST_CODE) {
             mWifiWakeupPreferenceController.onActivityResult(requestCode, resultCode);
-            return;
-        }
-        if (requestCode == UseOpenWifiPreferenceController.REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY) {
-            mUseOpenWifiPreferenceController.onActivityResult(requestCode, resultCode);
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
