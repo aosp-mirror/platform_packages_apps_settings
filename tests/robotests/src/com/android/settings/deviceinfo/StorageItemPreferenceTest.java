@@ -46,12 +46,6 @@ public class StorageItemPreferenceTest {
     }
 
     @Test
-    public void testBeforeLoad() {
-        assertThat(mPreference.getSummary())
-            .isEqualTo(mContext.getString(R.string.memory_calculating_size));
-    }
-
-    @Test
     public void testAfterLoad() {
         mPreference.setStorageSize(MEGABYTE_IN_BYTES * 10, MEGABYTE_IN_BYTES * 100);
         assertThat(mPreference.getSummary()).isEqualTo("10 MB");
