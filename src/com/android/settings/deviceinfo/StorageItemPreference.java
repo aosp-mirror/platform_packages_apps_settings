@@ -43,7 +43,6 @@ public class StorageItemPreference extends Preference {
     public StorageItemPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.storage_item);
-        setSummary(R.string.memory_calculating_size);
     }
 
     public void setStorageSize(long size, long total) {
