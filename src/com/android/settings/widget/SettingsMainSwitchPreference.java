@@ -84,7 +84,9 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
 
         mMainSwitchBar = (SettingsMainSwitchBar) holder.findViewById(R.id.main_switch_bar);
         mMainSwitchBar.show();
-        mEnforcedAdmin = mRestrictedHelper.checkRestrictionEnforced();
+        if (mRestrictedHelper != null) {
+            mEnforcedAdmin = mRestrictedHelper.checkRestrictionEnforced();
+        }
         updateStatus(isChecked());
         registerListenerToSwitchBar();
 
