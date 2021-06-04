@@ -19,14 +19,11 @@ package com.android.settings.notification;
 import android.app.Activity;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
-import android.app.usage.IUsageStatsManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.os.UserManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -57,9 +54,10 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     private static final int REQUEST_CODE = 200;
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
     private static final String KEY_ADVANCED_CATEGORY = "configure_notifications_advanced";
-    private static final String KEY_NAS = "notification_assistant";
 
     private RingtonePreference mRequestPreference;
+
+    private NotificationAssistantPreferenceController mNotificationAssistantPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -89,6 +87,16 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mNotificationAssistantPreferenceController =
+                use(NotificationAssistantPreferenceController.class);
+        mNotificationAssistantPreferenceController.setFragment(this);
+        mNotificationAssistantPreferenceController.setBackend(new NotificationBackend());
+    }
+
+    @Override
     protected boolean isParalleledControllers() {
         return true;
     }
@@ -105,9 +113,6 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
             }
 
         });
-        controllers.add(new NotificationAssistantPreferenceController(context,
-                new NotificationBackend(), host, KEY_NAS));
-
         controllers.add(new EmergencyBroadcastPreferenceController(context,
                 "app_and_notif_cell_broadcast_settings"));
 
