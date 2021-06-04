@@ -103,7 +103,7 @@
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
     <string name="smart_rotate_text_headline">
         Face Detection uses the front-facing camera to improve Auto-rotate accuracy. Images are never stored or sent to Google.&lt;br>&lt;br>
-       &lt;a href="<xliff:g example="http://www.google.com" id="url">http://support.google.com/mobile?p=telephony_rtt</xliff:g>">Learn more&lt;/a>
+       &lt;a href="<xliff:g example="http://www.google.com" id="url">http://support.google.com/mobile?p=telephony_rtt</xliff:g>">Learn more about Auto-rotate screen&lt;/a>
     </string>
     <string name="font_size_preview_text_headline">Sample text</string>
     <string name="font_size_preview_text_title"
@@ -695,9 +695,8 @@
         emergency responders when you call or text an emergency number.
     </string>
     <!-- Location settings footer link to support page [CHAR LIMIT=NONE] -->
-    <string name="location_settings_footer_learn_more">
-        &lt;a href="<xliff:g example="http://www.google.com"
-        id="url"> https://support.google.com/android/answer/3467281</xliff:g>">Learn more&lt;/a>
+    <string name="location_settings_footer_learn_more_link" translatable="false">
+        https://support.google.com/android/answer/3467281
     </string>
     <!-- Location settings footer link content description [CHAR LIMIT=NONE] -->
     <string name="location_settings_footer_learn_more_content_description">
@@ -5335,8 +5334,8 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
     <!-- Summary for software shortcut in accessibility edit shortcut dialog when user had enabled the accessibility floating button mode (Floating over other apps). [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating"><annotation id="link">Customize accessibility button</annotation></string>
-    <!-- Summary for footer to show help link. [CHAR LIMIT=NONE] -->
-    <string name="footer_learn_more"><annotation id="link">Learn more</annotation></string>
+    <!-- Footer to show help link content description. [CHAR LIMIT=NONE] -->
+    <string name="footer_learn_more_content_description">Learn more about <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
     <!-- Title for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
@@ -6052,7 +6051,7 @@
     <!-- Activity title for battery usage history details [CHAR LIMIT=60] -->
     <string name="history_details_title">History details</string>
     <!-- Preference title for advanced battery usage [CHAR LIMIT=40] -->
-    <string name="advanced_battery_preference_title">View battery usage</string>
+    <string name="advanced_battery_preference_title">Battery Usage</string>
     <!-- Preference summary for advanced battery usage, for past 24 hours [CHAR LIMIT=40] -->
     <string name="advanced_battery_preference_summary_with_hours">View usage for past 24 hours</string>
     <!-- Preference summary for advanced battery usage, from last full charge [CHAR LIMIT=40] -->
@@ -6100,7 +6099,7 @@
     <!-- Title for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_title">Charging temporarily limited</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_limited_temporarily_summary">Battery limited temporarily. Learn more.</string>
+    <string name="battery_tip_limited_temporarily_summary">To preserve your battery. Learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
@@ -6201,9 +6200,11 @@
     <string name="battery_header_title_alternate"><xliff:g id="number" example="88">^1</xliff:g><small> <font size="20"><xliff:g id="unit" example="%">%</xliff:g></font></small></string>
 
     <!-- Summary for top level battery tile if battery is not present. [CHAR LIMIT=NONE] -->
-    <string name="battery_missing_message">Can’t update battery info</string>
+    <string name="battery_missing_message">Problem reading the battery meter.</string>
     <!-- Help text if battery is not present. [CHAR LIMIT=NONE] -->
     <string name="battery_missing_link_message"></string>
+    <!-- Accessibility description for battery missing link. [CHAR LIMIT=NONE] -->
+    <string name="battery_missing_link_a11y_message">Tap to learn more about this error</string>
 
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
@@ -8252,10 +8253,10 @@
     <string name="keywords_bluetooth_settings">connected, device, headphones, headset, speaker, wireless, pair, earbuds, music, media </string>
 
     <!-- List of synonyms for the Wallpaper picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_wallpaper">background, screen, lockscreen, theme</string>
+    <string name="keywords_wallpaper">background, theme, grid, customize, personalize</string>
 
     <!-- List of synonyms for the Styles picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_styles">icon shape, accent color, font</string>
+    <string name="keywords_styles">icon, accent, color</string>
 
     <!-- List of synonyms for the Default Assist and Voice input setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_assist_input">default, assistant</string>
@@ -10473,13 +10474,13 @@
         Allowing <xliff:g id="app_name" example="Settings">%1$s</xliff:g> to always run in the background may reduce battery life.
         \n\nYou can change this later from Settings > Apps &amp; notifications.</string>
     <!-- Summary of power usage for an app [CHAR LIMIT=NONE] -->
-    <string name="battery_summary"><xliff:g id="percentage" example="2">%1$s</xliff:g> use since last full charge</string>
+    <string name="battery_summary"><xliff:g id="percentage" example="2">%1$s</xliff:g> use for past 24 hours</string>
 
     <!-- Title of a group of settings that let you manage settings that affect battery life [CHAR LIMIT=60] -->
     <string name="battery_power_management">Power management</string>
 
     <!-- Summary for app with no battery usage [CHAR LIMIT=NONE] -->
-    <string name="no_battery_summary">No battery use since last full charge</string>
+    <string name="no_battery_summary">No battery use for past 24 hours</string>
 
     <!-- Link to an apps notification settings [CHAR LIMIT=50] -->
     <string name="app_notification_preferences">App settings</string>
@@ -12910,9 +12911,6 @@
     <string name="hwui_force_dark_title">Override force-dark</string>
     <!-- UI debug setting: Force enable "smart dark" UI rendering feature summary [CHAR LIMIT=NONE] -->
     <string name="hwui_force_dark_summary">Overrides the force-dark feature to be always-on</string>
-
-    <!-- If blurs are supported on SurfaceFlinger. [CHAR LIMIT=60] -->
-    <string name="enable_blurs_on_windows_title">Window-level blurs</string>
 
     <!-- Title for the top level Privacy Settings [CHAR LIMIT=30]-->
     <string name="privacy_dashboard_title">Privacy</string>

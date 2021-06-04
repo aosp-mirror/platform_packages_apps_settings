@@ -266,10 +266,12 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 faceManager.getSensorPropertiesInternal();
 
         // This would need to be updated for devices with multiple sensors of the same modality
-        mIsFaceEnrollable = faceManager.getEnrolledFaces(mUserId).size()
-                < faceProperties.get(0).maxEnrollmentsPerUser;
-        mIsFingerprintEnrollable = fingerprintManager.getEnrolledFingerprints(mUserId).size()
-                < fpProperties.get(0).maxEnrollmentsPerUser;
+        mIsFaceEnrollable = !faceProperties.isEmpty() &&
+                faceManager.getEnrolledFaces(mUserId).size()
+                        < faceProperties.get(0).maxEnrollmentsPerUser;
+        mIsFingerprintEnrollable = !fpProperties.isEmpty() &&
+                fingerprintManager.getEnrolledFingerprints(mUserId).size()
+                        < fpProperties.get(0).maxEnrollmentsPerUser;
 
         if (!mConfirmingCredentials) {
             mConfirmingCredentials = true;
