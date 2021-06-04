@@ -30,18 +30,14 @@ import android.content.om.OverlayInfo;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.actionbar.SearchMenuController;
-import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.utils.CandidateInfoExtra;
 import com.android.settings.widget.RadioButtonPickerFragment;
@@ -76,11 +72,6 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // TODO(b/176883483): Remove both search and help menu if this feature rolled out
-        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            SearchMenuController.init(this /* host */);
-            HelpMenuController.init(this /* host */);
-        }
 
         SuggestionFeatureProvider suggestionFeatureProvider = FeatureFactory.getFactory(context)
                 .getSuggestionFeatureProvider(context);
