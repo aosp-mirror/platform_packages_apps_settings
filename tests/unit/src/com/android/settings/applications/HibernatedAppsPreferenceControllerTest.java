@@ -41,9 +41,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.content.res.Resources;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.provider.DeviceConfig;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -67,12 +71,16 @@ public class HibernatedAppsPreferenceControllerTest {
     AppHibernationManager mAppHibernationManager;
     @Mock
     IUsageStatsManager mIUsageStatsManager;
+    PreferenceScreen mPreferenceScreen;
     private static final String KEY = "key";
     private Context mContext;
     private HibernatedAppsPreferenceController mController;
 
     @Before
     public void setUp() {
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
         MockitoAnnotations.initMocks(this);
         DeviceConfig.setProperty(NAMESPACE_APP_HIBERNATION, PROPERTY_APP_HIBERNATION_ENABLED,
                 "true", false);
@@ -82,7 +90,15 @@ public class HibernatedAppsPreferenceControllerTest {
                 .thenReturn(mAppHibernationManager);
         when(mContext.getSystemService(UsageStatsManager.class)).thenReturn(
                 new UsageStatsManager(mContext, mIUsageStatsManager));
-        mController = new HibernatedAppsPreferenceController(mContext, KEY);
+
+        PreferenceManager manager = new PreferenceManager(mContext);
+        mPreferenceScreen = manager.createPreferenceScreen(mContext);
+        Preference preference = mock(Preference.class);
+        when(preference.getKey()).thenReturn(KEY);
+        mPreferenceScreen.addPreference(preference);
+
+        mController = new HibernatedAppsPreferenceController(mContext, KEY,
+                command -> command.run(), command -> command.run());
     }
 
     @Test
@@ -100,7 +116,9 @@ public class HibernatedAppsPreferenceControllerTest {
                 Arrays.asList(hibernatedPkg, new PackageInfo()));
         when(mContext.getResources()).thenReturn(mock(Resources.class));
 
-        mController.getSummary();
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+
         verify(mContext.getResources()).getQuantityString(anyInt(), eq(1), eq(1));
     }
 
@@ -111,7 +129,9 @@ public class HibernatedAppsPreferenceControllerTest {
                 Arrays.asList(autoRevokedPkg, new PackageInfo()));
         when(mContext.getResources()).thenReturn(mock(Resources.class));
 
-        mController.getSummary();
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+
         verify(mContext.getResources()).getQuantityString(anyInt(), eq(1), eq(1));
     }
 
@@ -123,7 +143,9 @@ public class HibernatedAppsPreferenceControllerTest {
                 Arrays.asList(usedAutoRevokedPkg, new PackageInfo()));
         when(mContext.getResources()).thenReturn(mock(Resources.class));
 
-        mController.getSummary();
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+
         verify(mContext.getResources()).getQuantityString(anyInt(), eq(0), eq(0));
     }
 
