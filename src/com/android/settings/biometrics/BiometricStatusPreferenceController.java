@@ -30,7 +30,9 @@ import androidx.preference.Preference;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 public abstract class BiometricStatusPreferenceController extends BasePreferenceController {
 
@@ -127,6 +129,8 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
         }
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
+        intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
+                SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
         context.startActivity(intent);
         return true;
     }
