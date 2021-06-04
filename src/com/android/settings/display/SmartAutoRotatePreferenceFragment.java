@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.internal.view.RotationPolicy;
@@ -48,6 +49,7 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
 
     private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
     private AutoRotateSwitchBarController mSwitchBarController;
+    @VisibleForTesting static final String AUTO_ROTATE_SWITCH_PREFERENCE_ID = "auto_rotate_switch";
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -65,12 +67,7 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
             Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
-        switchBar.setTitle(
-                getContext().getString(R.string.auto_rotate_settings_primary_switch_title));
-        switchBar.show();
-        mSwitchBarController = new AutoRotateSwitchBarController(activity, switchBar,
-                getSettingsLifecycle());
+        createHeader(activity);
         final Preference footerPreference = findPreference(FooterPreference.KEY_FOOTER);
         if (footerPreference != null) {
             footerPreference.setTitle(Html.fromHtml(getString(R.string.smart_rotate_text_headline),
@@ -80,6 +77,19 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
         return view;
     }
 
+    @VisibleForTesting
+    void createHeader(SettingsActivity activity) {
+        if (isRotationResolverServiceAvailable(activity)) {
+            final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+            switchBar.setTitle(
+                    getContext().getString(R.string.auto_rotate_settings_primary_switch_title));
+            switchBar.show();
+            mSwitchBarController = new AutoRotateSwitchBarController(activity, switchBar,
+                    getSettingsLifecycle());
+            findPreference(AUTO_ROTATE_SWITCH_PREFERENCE_ID).setVisible(false);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -87,7 +97,9 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
             mRotationPolicyListener = new RotationPolicy.RotationPolicyListener() {
                 @Override
                 public void onChange() {
-                    mSwitchBarController.onChange();
+                    if (mSwitchBarController != null) {
+                        mSwitchBarController.onChange();
+                    }
                 }
             };
         }
