@@ -73,7 +73,7 @@ public class ApplicationViewHolderTest {
     public void setTitle_titleIsNotEmptyAndContentIsNotEmpty_shouldSetTitleAndContentDescription() {
         mHolder.setTitle("title", "content");
 
-        assertThat(mHolder.mAppName).isEqualTo("title");
+        assertThat(mHolder.mAppName.getText()).isEqualTo("title");
         assertThat(mHolder.mAppName.getContentDescription()).isEqualTo("content");
     }
 
@@ -81,8 +81,8 @@ public class ApplicationViewHolderTest {
     public void setTitle_titleIsNotEmptyButContentIsEmpty_shouldSetTitle() {
         mHolder.setTitle("title", "");
 
-        assertThat(mHolder.mAppName).isEqualTo("title");
-        assertThat(mHolder.mAppName.getContentDescription()).isEqualTo("title");
+        assertThat(mHolder.mAppName.getText()).isEqualTo("title");
+        assertThat(mHolder.mAppName.getContentDescription()).isNull();
     }
 
     @Test
