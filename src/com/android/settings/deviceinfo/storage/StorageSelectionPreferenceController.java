@@ -75,7 +75,7 @@ public class StorageSelectionPreferenceController extends BasePreferenceControll
         mStorageAdapter.addAll(storageEntries);
 
         if (mSpinnerPreference != null) {
-            mSpinnerPreference.setClickable(mStorageAdapter.getCount() > 1);
+            mSpinnerPreference.setVisible(mStorageAdapter.getCount() > 1);
         }
     }
 
@@ -97,7 +97,7 @@ public class StorageSelectionPreferenceController extends BasePreferenceControll
         mSpinnerPreference = screen.findPreference(getPreferenceKey());
         mSpinnerPreference.setAdapter(mStorageAdapter);
         mSpinnerPreference.setOnItemSelectedListener(this);
-        mSpinnerPreference.setClickable(mStorageAdapter.getCount() > 1);
+        mSpinnerPreference.setVisible(mStorageAdapter.getCount() > 1);
     }
 
     @Override
