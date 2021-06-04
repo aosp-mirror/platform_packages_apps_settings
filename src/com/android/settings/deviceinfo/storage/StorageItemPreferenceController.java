@@ -221,7 +221,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     public void setVolume(VolumeInfo volume) {
         mVolume = volume;
 
-        updateCategoryPreferencesVisibility();
+        if (mPublicStoragePreference != null) {
+            mPublicStoragePreference.setVisible(isValidPublicVolume());
+        }
+
+        // If isValidPrivateVolume() is true, these preferences will become visible at
+        // onLoadFinished.
+        if (!isValidPrivateVolume()) {
+            setPrivateStorageCategoryPreferencesVisibility(false);
+        }
     }
 
     // Stats data is only available on private volumes.
@@ -242,30 +250,28 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 || mVolume.getState() == VolumeInfo.STATE_MOUNTED_READ_ONLY);
     }
 
-    private void updateCategoryPreferencesVisibility() {
+    @VisibleForTesting
+    void setPrivateStorageCategoryPreferencesVisibility(boolean visible) {
         if (mScreen == null) {
             return;
         }
 
-        mPublicStoragePreference.setVisible(isValidPublicVolume());
+        mImagesPreference.setVisible(visible);
+        mVideosPreference.setVisible(visible);
+        mAudioPreference.setVisible(visible);
+        mAppsPreference.setVisible(visible);
+        mGamesPreference.setVisible(visible);
+        mSystemPreference.setVisible(visible);
+        mTrashPreference.setVisible(visible);
 
-        final boolean privateStoragePreferencesVisible = isValidPrivateVolume();
-        mImagesPreference.setVisible(privateStoragePreferencesVisible);
-        mVideosPreference.setVisible(privateStoragePreferencesVisible);
-        mAudioPreference.setVisible(privateStoragePreferencesVisible);
-        mAppsPreference.setVisible(privateStoragePreferencesVisible);
-        mGamesPreference.setVisible(privateStoragePreferencesVisible);
-        mDocumentsAndOtherPreference.setVisible(privateStoragePreferencesVisible);
-        mSystemPreference.setVisible(privateStoragePreferencesVisible);
-        mTrashPreference.setVisible(privateStoragePreferencesVisible);
-
-        if (privateStoragePreferencesVisible) {
+        // If we don't have a shared volume for our internal storage (or the shared volume isn't
+        // mounted as readable for whatever reason), we should hide the File preference.
+        if (visible) {
             final VolumeInfo sharedVolume = mSvp.findEmulatedForPrivate(mVolume);
-            // If we don't have a shared volume for our internal storage (or the shared volume isn't
-            // mounted as readable for whatever reason), we should hide the File preference.
-            if (sharedVolume == null || !sharedVolume.isMountedReadable()) {
-                mDocumentsAndOtherPreference.setVisible(false);
-            }
+            mDocumentsAndOtherPreference.setVisible(sharedVolume != null
+                    && sharedVolume.isMountedReadable());
+        } else {
+            mDocumentsAndOtherPreference.setVisible(false);
         }
     }
 
@@ -390,6 +396,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         }
 
         updatePrivateStorageCategoryPreferencesOrder();
+        setPrivateStorageCategoryPreferencesVisibility(true);
     }
 
     public void setUsedSize(long usedSizeBytes) {
