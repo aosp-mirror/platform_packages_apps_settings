@@ -151,12 +151,6 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateStateWithInitialState() {
-        assertThat(mPreference.getSummary().toString())
-            .isEqualTo(mContext.getString(R.string.memory_calculating_size));
-    }
-
-    @Test
     public void launchPublicStorageIntent_nonNullBrowseIntent_settingsIntent() {
         final String fakeBrowseAction = "FAKE_BROWSE_ACTION";
         final Intent fakeBrowseIntent = new Intent(fakeBrowseAction);
@@ -398,15 +392,16 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
-    public void setVolume_updateFilePreferenceToHideAfterSettingVolume_hidePreference() {
+    public void setPrivateStorageCategoryPreferencesVisibility_updateFilePreferenceToHideAfterSettingVolume_hidePreference() {
         when(mSvp.findEmulatedForPrivate(nullable(VolumeInfo.class))).thenReturn(mVolume);
         when(mVolume.getType()).thenReturn(VolumeInfo.TYPE_PRIVATE);
         when(mVolume.getState()).thenReturn(VolumeInfo.STATE_MOUNTED);
         when(mVolume.isMountedReadable()).thenReturn(true);
-
         mController.displayPreference(mPreferenceScreen);
         when(mSvp.findEmulatedForPrivate(nullable(VolumeInfo.class))).thenReturn(null);
         mController.setVolume(mVolume);
+
+        mController.setPrivateStorageCategoryPreferencesVisibility(true);
 
         assertThat(mController.mDocumentsAndOtherPreference.isVisible()).isFalse();
     }

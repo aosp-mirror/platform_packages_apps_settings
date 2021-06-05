@@ -159,6 +159,7 @@
             android:key="notification_assistant"
             android:order="23"
             android:title="@string/notification_assistant_title"
-            android:summary="@string/notification_assistant_summary"/>
+            android:summary="@string/notification_assistant_summary"
+            settings:controller="com.android.settings.notification.NotificationAssistantPreferenceController"/>
     </PreferenceCategory>
 </PreferenceScreen>
