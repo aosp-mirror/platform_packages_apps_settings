@@ -30,6 +30,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockGeneric;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 public class ChangeProfileScreenLockPreferenceController extends
         ChangeScreenLockPreferenceController {
@@ -81,6 +82,7 @@ public class ChangeProfileScreenLockPreferenceController extends
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .setArguments(extras)
+                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
                 .launch();
 
         return true;
