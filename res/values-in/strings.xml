@@ -2071,7 +2071,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Penyimpanan internal"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Menghitung ulang ukuran..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Hapus data aplikasi?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Semua data aplikasi ini akan dihapus secara permanen, termasuk semua file, setelan, akun, basis data, dll."</string>
+    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Semua data aplikasi ini akan dihapus secara permanen, termasuk semua file, setelan, akun, database, dll."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"Oke"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Batal"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2251,7 +2251,7 @@
     <string name="vision_settings_title" msgid="8919983801864103069">"Setelan Pandangan"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"Anda dapat menyesuaikan perangkat ini sesuai kebutuhan. Fitur aksesibilitas ini dapat diubah nanti di Setelan."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Ubah ukuran font"</string>
-    <string name="screen_reader_category_title" msgid="6195867428854871553">"Pembaca layar"</string>
+    <string name="screen_reader_category_title" msgid="5825700839731107803">"Pembaca layar"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Teks"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Umum"</string>
@@ -2292,7 +2292,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoom in di layar"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Ketuk 3 kali untuk memperbesar"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ketuk tombol untuk zoom"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8008175520087009922">"Perbesar layar dengan cepat untuk membuat konten lebih besar.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk memperbesar:&lt;/b&gt;&lt;br/&gt; 1. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; 2. Ketuk layar&lt;br/&gt; 3. Tarik menggunakan 2 jari untuk berpindah pada layar&lt;br/&gt; 4. Cubit menggunakan 2 jari untuk menyesuaikan zoom&lt;br/&gt; 5. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk memperbesar sementara:&lt;/b&gt;&lt;br/&gt; 1. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; 2. Sentuh lama di bagian mana saja pada layar&lt;br/&gt; 3. Tarik jari untuk berpindah pada layar&lt;br/&gt; 4. Angkat jari untuk menghentikan pembesaran"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2527664482392097865">"Perbesar layar dengan cepat untuk membuat konten lebih besar.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk memperbesar:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; {1,number,integer}. Ketuk layar&lt;br/&gt; {2,number,integer}. Tarik 2 jari untuk berpindah pada layar&lt;br/&gt; {3,number,integer}. Cubit dengan 2 jari untuk menyesuaikan zoom&lt;br/&gt; {4,number,integer}. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk memperbesar sementara:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; {1,number,integer}. Sentuh lama di mana pun pada layar&lt;br/&gt; {2,number,integer}. Tarik jari untuk berpindah pada layar&lt;br/&gt; {3,number,integer}. Angkat jari untuk menghentikan pembesaran"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Jika pembesaran diaktifkan, Anda dapat memperbesar tampilan layar.\n\n"<b>"Untuk memperbesar tampilan"</b>", mulai pembesaran, lalu ketuk di bagian mana saja pada layar.\n"<ul><li>"Tarik 2 jari atau lebih untuk melakukan scroll"</li>\n<li>"Cubit dengan 2 jari atau lebih untuk menyesuaikan pembesaran"</li></ul>\n\n<b>"Untuk memperbesar tampilan sementara"</b>", mulai pembesaran, lalu sentuh lama di bagian mana saja pada layar.\n"<ul><li>"• Tarik untuk menggeser layar"</li>\n<li>"• Angkat jari untuk memperkecil tampilan"</li></ul>\n\n"Anda tidak dapat memperbesar keyboard atau menu navigasi."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Halaman <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> dari <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Gunakan tombol aksesibilitas untuk membuka"</string>
@@ -2324,7 +2324,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Tekan dan tahan kedua tombol volume"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Ketuk layar tiga kali"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"ketuk layar tiga kali"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="7490111169801144991">"Ketuk cepat layar 3 kali. Pintasan ini mungkin memperlambat perangkat Anda"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Ketuk layar dengan cepat {0,number,integer} kali. Pintasan ini mungkin memperlambat perangkat Anda"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Lanjutan"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Tombol Aksesibilitas disetel ke <xliff:g id="SERVICE">%1$s</xliff:g>. Untuk menggunakan fitur pembesaran, sentuh lama tombol Aksesibilitas, kemudian pilih pembesaran."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Gestur aksesibilitas disetel ke <xliff:g id="SERVICE">%1$s</xliff:g>. Untuk menggunakan pembesaran, geser ke atas dengan dua jari dari bagian bawah layar dan tahan. Lalu, pilih pembesaran."</string>
@@ -2590,6 +2590,7 @@
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Aplikasi ini memerlukan penggunaan baterai <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"tak terbatas"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"dioptimalkan"</string>
+    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"Pelajari lebih lanjut opsi penggunaan baterai"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Penggunaan layar sejak pengisian baterai penuh terakhir"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Penggunaan baterai sejak terakhir kali diisi penuh"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Jumlah waktu layar diaktifkan sejak pengisian daya terakhir hingga penuh"</string>
@@ -2631,6 +2632,7 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Aktifkan Penghemat Baterai"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Baterai mungkin lebih cepat habis dari biasanya"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Penghemat Baterai aktif"</string>
+    <string name="battery_saver_link_a11y" msgid="740558184830458845">"Pelajari lebih lanjut Penghemat Baterai"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Beberapa fitur mungkin dibatasi"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Penggunaan baterai yang lebih tinggi"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Lihat aplikasi dengan penggunaan tertinggi"</string>
@@ -3112,7 +3114,7 @@
     <string name="data_usage_background_label" msgid="5363718469293175279">"Latar belakang:"</string>
     <string name="data_usage_app_settings" msgid="5693524672522122485">"Setelan aplikasi"</string>
     <string name="data_usage_app_restrict_background" msgid="5728840276368097276">"Data latar belakang"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"Aktifkan penggunaan kuota seluler di latar belakang"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"Aktifkan penggunaan data seluler di latar belakang"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="8213268097024597864">"Untuk membatasi data latar belakang pada apl ini, setel batas data seluler terlebih dulu."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="5383874438677899255">"Batasi data latar belakang?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Fitur ini dapat menghentikan aplikasi yang bergantung pada data latar saat hanya ada jaringan seluler.\n\nAnda dapat menemukan kontrol penggunaan data yang lebih sesuai dalam setelan yang tersedia dalam aplikasi."</string>
@@ -3333,7 +3335,7 @@
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Update aplikasi pembayaran default"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"Di terminal nirsentuh, bayar dengan <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Di terminal tanpa kontak kartu fisik, bayar dengan <xliff:g id="APP_0">%1$s</xliff:g>.\n\nIni menggantikan <xliff:g id="APP_1">%2$s</xliff:g> sebagai aplikasi pembayaran default."</string>
-    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Setel sebagai default"</string>
+    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Jadikan default"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Update"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Batasan"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Hapus batasan"</string>
@@ -3722,7 +3724,7 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Otomatis mengurutkan notifikasi menurut relevansi"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Masukan notifikasi adaptif"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Menunjukkan penyesuaian yang dilakukan pada notifikasi dan menampilkan opsi untuk memberikan masukan ke sistem"</string>
-    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Mereset tingkat kepentingan notifikasi"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Reset tingkat kepentingan notifikasi"</string>
     <string name="asst_importance_reset_summary" msgid="684794589254282667">"Reset setelan penting yang diubah pengguna dan izinkan asisten notifikasi diprioritaskan"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Saran tindakan dan balasan"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Otomatis tampilkan saran tindakan &amp; balasan"</string>
@@ -5270,8 +5272,7 @@
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Mengizinkan aplikasi yang ukurannya tidak dapat diubah di multi-aplikasi"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Aktifkan paksa SmartDark"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Memaksa fitur SmartDark agar selalu aktif"</string>
-    <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Aktifkan blur"</string>
-    <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Mengaktifkan blur jendela pada tingkat compositor. Memerlukan reboot perangkat."</string>
+    <string name="enable_blurs_on_windows_title" msgid="1717476384039018830">"Buram tingkat jendela"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privasi"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Izin, aktivitas akun, data pribadi"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Hapus"</string>
@@ -5407,6 +5408,14 @@
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"Koneksi W+"</string>
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Izinkan Google Fi menggunakan jaringan W+ untuk meningkatkan kecepatan dan cakupan"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Jaringan W+"</string>
+    <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
+    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM YANG DIDOWNLOAD"</string>
+    <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktif"</string>
+    <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Tidak aktif"</string>
+    <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Default untuk <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="default_active_sim_calls" msgid="2390973682556353558">"panggilan telepon"</string>
+    <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
+    <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"data seluler"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Terhubung"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Tidak ada koneksi"</string>
@@ -5434,7 +5443,7 @@
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Gunakan cegah berdering"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Gunakan hotspot Wi-Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Gunakan penyematan aplikasi"</string>
-    <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Menggunakan opsi developer"</string>
+    <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Gunakan opsi developer"</string>
     <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"Gunakan layanan cetak default"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Menggunakan beberapa pengguna"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Menggunakan proses debug nirkabel"</string>
