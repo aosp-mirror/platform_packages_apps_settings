@@ -79,8 +79,9 @@ public class NotificationAssistantPreferenceControllerTest {
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
         when(mBackend.getDefaultNotificationAssistant()).thenReturn(mNASComponent);
-        mPreferenceController = new NotificationAssistantPreferenceController(mContext,
-                mBackend, mFragment, KEY);
+        mPreferenceController = new NotificationAssistantPreferenceController(mContext);
+        mPreferenceController.setBackend(mBackend);
+        mPreferenceController.setFragment(mFragment);
         when(mUserManager.getProfileIds(eq(0), anyBoolean())).thenReturn(new int[] {0, 10});
         when(mUserManager.getProfileIds(eq(20), anyBoolean())).thenReturn(new int[] {20});
     }
