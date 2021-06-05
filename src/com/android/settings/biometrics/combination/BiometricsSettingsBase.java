@@ -34,9 +34,11 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 /**
  * Base fragment with the confirming credential functionality for combined biometrics settings.
@@ -203,6 +205,8 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                     true);
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, true);
+            intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
+                    SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
 
             if (mUserId != UserHandle.USER_NULL) {
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
