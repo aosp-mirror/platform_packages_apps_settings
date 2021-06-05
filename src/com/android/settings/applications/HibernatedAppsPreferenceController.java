@@ -30,40 +30,111 @@ import android.content.pm.PackageManager;
 import android.provider.DeviceConfig;
 import android.util.ArrayMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
  * A preference controller handling the logic for updating summary of hibernated apps.
  */
-public final class HibernatedAppsPreferenceController extends BasePreferenceController {
+public final class HibernatedAppsPreferenceController extends BasePreferenceController
+        implements LifecycleObserver {
     private static final String TAG = "HibernatedAppsPrefController";
     private static final String PROPERTY_HIBERNATION_UNUSED_THRESHOLD_MILLIS =
             "auto_revoke_unused_threshold_millis2";
     private static final long DEFAULT_UNUSED_THRESHOLD_MS = TimeUnit.DAYS.toMillis(90);
+    private PreferenceScreen mScreen;
+    private int mUnusedCount = 0;
+    private boolean mLoadingUnusedApps;
+    private final Executor mBackgroundExecutor;
+    private final Executor mMainExecutor;
 
     public HibernatedAppsPreferenceController(Context context, String preferenceKey) {
+        this(context, preferenceKey, Executors.newSingleThreadExecutor(),
+                context.getMainExecutor());
+    }
+
+    @VisibleForTesting
+    HibernatedAppsPreferenceController(Context context, String preferenceKey,
+            Executor bgExecutor, Executor mainExecutor) {
         super(context, preferenceKey);
+        mBackgroundExecutor = bgExecutor;
+        mMainExecutor = mainExecutor;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return isHibernationEnabled() && getNumHibernated() > 0
+        return isHibernationEnabled() && mUnusedCount > 0
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public CharSequence getSummary() {
-        final int numHibernated = getNumHibernated();
         return mContext.getResources().getQuantityString(
-                R.plurals.unused_apps_summary, numHibernated, numHibernated);
+                R.plurals.unused_apps_summary, mUnusedCount, mUnusedCount);
     }
 
-    private int getNumHibernated() {
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mScreen = screen;
+    }
+
+    /**
+     * On lifecycle resume event.
+     */
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume() {
+        updatePreference();
+    }
+
+    private void updatePreference() {
+        if (mScreen == null) {
+            return;
+        }
+        if (!mLoadingUnusedApps) {
+            loadUnusedCount(unusedCount -> {
+                mUnusedCount = unusedCount;
+                mLoadingUnusedApps = false;
+                mMainExecutor.execute(() -> {
+                    super.displayPreference(mScreen);
+                    Preference pref = mScreen.findPreference(mPreferenceKey);
+                    refreshSummary(pref);
+                });
+            });
+            mLoadingUnusedApps = true;
+        }
+    }
+
+    /**
+     * Asynchronously load the count of unused apps.
+     *
+     * @param callback callback to call when the number of unused apps is calculated
+     */
+    private void loadUnusedCount(@NonNull UnusedCountLoadedCallback callback) {
+        mBackgroundExecutor.execute(() -> {
+            final int unusedCount = getUnusedCount();
+            callback.onUnusedCountLoaded(unusedCount);
+        });
+    }
+
+    @WorkerThread
+    private int getUnusedCount() {
         // TODO(b/187465752): Find a way to export this logic from PermissionController module
         final PackageManager pm = mContext.getPackageManager();
         final AppHibernationManager ahm = mContext.getSystemService(AppHibernationManager.class);
@@ -71,6 +142,7 @@ public final class HibernatedAppsPreferenceController extends BasePreferenceCont
         int numHibernated = hibernatedPackages.size();
 
         // Also need to count packages that are auto revoked but not hibernated.
+        int numAutoRevoked = 0;
         final UsageStatsManager usm = mContext.getSystemService(UsageStatsManager.class);
         final long now = System.currentTimeMillis();
         final long unusedThreshold = DeviceConfig.getLong(DeviceConfig.NAMESPACE_PERMISSIONS,
@@ -97,17 +169,24 @@ public final class HibernatedAppsPreferenceController extends BasePreferenceCont
                 for (String perm : pi.requestedPermissions) {
                     if ((pm.getPermissionFlags(perm, packageName, mContext.getUser())
                             & PackageManager.FLAG_PERMISSION_AUTO_REVOKED) != 0) {
-                        numHibernated++;
+                        numAutoRevoked++;
                         break;
                     }
                 }
             }
         }
-        return numHibernated;
+        return numHibernated + numAutoRevoked;
     }
 
     private static boolean isHibernationEnabled() {
         return DeviceConfig.getBoolean(
                 NAMESPACE_APP_HIBERNATION, PROPERTY_APP_HIBERNATION_ENABLED, false);
+    }
+
+    /**
+     * Callback for when we've determined the number of unused apps.
+     */
+    private interface UnusedCountLoadedCallback {
+        void onUnusedCountLoaded(int unusedCount);
     }
 }
