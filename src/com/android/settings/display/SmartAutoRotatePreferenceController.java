@@ -23,15 +23,23 @@ import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * SmartAutoRotatePreferenceController provides auto rotate summary in display settings
  */
-public class SmartAutoRotatePreferenceController extends BasePreferenceController {
+public class SmartAutoRotatePreferenceController extends BasePreferenceController
+        implements LifecycleObserver, OnStart, OnStop {
+
+    private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
+    private Preference mPreference;
 
     public SmartAutoRotatePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -43,8 +51,34 @@ public class SmartAutoRotatePreferenceController extends BasePreferenceControlle
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
-    protected void update(Preference preference) {
-        refreshSummary(preference);
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public void onStart() {
+        if (mRotationPolicyListener == null) {
+            mRotationPolicyListener = new RotationPolicy.RotationPolicyListener() {
+                @Override
+                public void onChange() {
+                    if (mPreference != null) {
+                        refreshSummary(mPreference);
+                    }
+                }
+            };
+        }
+        RotationPolicy.registerRotationPolicyListener(mContext,
+                mRotationPolicyListener);
+    }
+
+    @Override
+    public void onStop() {
+        if (mRotationPolicyListener != null) {
+            RotationPolicy.unregisterRotationPolicyListener(mContext,
+                    mRotationPolicyListener);
+        }
     }
 
     @Override
