@@ -796,10 +796,19 @@
         <item name="android:background">?android:colorBackground</item>
     </style>
 
+    <style name="RoundedCornerButtonTheme">
+        <item name="android:buttonCornerRadius">50dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingBottom">18dp</item>
+    </style>
+
     <style name="RequestManageCredentialsAllowButton" parent="@style/ActionPrimaryButton">
         <item name="android:fontFamily">google-sans-medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="RequestManageCredentialsDontAllowButton"
@@ -807,13 +816,13 @@
         <item name="android:fontFamily">google-sans-medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="RequestManageCredentialsFab">
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:layout_marginBottom">12dp</item>
     </style>
 
