@@ -16,31 +16,22 @@
 
 package com.android.settings.notification;
 
-import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
-
 import android.app.Activity;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
-import android.app.usage.IUsageStatsManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.os.UserManager;
-import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -63,9 +54,10 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     private static final int REQUEST_CODE = 200;
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
     private static final String KEY_ADVANCED_CATEGORY = "configure_notifications_advanced";
-    private static final String KEY_NAS = "notification_assistant";
 
     private RingtonePreference mRequestPreference;
+
+    private NotificationAssistantPreferenceController mNotificationAssistantPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -79,9 +71,6 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            return R.xml.configure_notification_settings_v2;
-        }
         return R.xml.configure_notification_settings;
     }
 
@@ -98,6 +87,16 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mNotificationAssistantPreferenceController =
+                use(NotificationAssistantPreferenceController.class);
+        mNotificationAssistantPreferenceController.setFragment(this);
+        mNotificationAssistantPreferenceController.setBackend(new NotificationBackend());
+    }
+
+    @Override
     protected boolean isParalleledControllers() {
         return true;
     }
@@ -105,10 +104,6 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Application app, Fragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new RecentNotifyingAppsPreferenceController(
-                context, new NotificationBackend(), IUsageStatsManager.Stub.asInterface(
-                        ServiceManager.getService(Context.USAGE_STATS_SERVICE)),
-                context.getSystemService(UserManager.class), app, host));
         controllers.add(new ShowOnLockScreenNotificationPreferenceController(
                 context, KEY_LOCKSCREEN));
         controllers.add(new NotificationRingtonePreferenceController(context) {
@@ -118,38 +113,10 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
             }
 
         });
-        controllers.add(new NotificationAssistantPreferenceController(context,
-                new NotificationBackend(), host, KEY_NAS));
+        controllers.add(new EmergencyBroadcastPreferenceController(context,
+                "app_and_notif_cell_broadcast_settings"));
 
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME)) {
-            controllers.add(new EmergencyBroadcastPreferenceController(context,
-                    "app_and_notif_cell_broadcast_settings"));
-        }
         return controllers;
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        // TODO(b/182237530): This method should be removed when this flag is deprecated.
-        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.SILKY_HOME)) {
-            final PreferenceScreen screen = getPreferenceScreen();
-            final Bundle arguments = getArguments();
-
-            if (screen == null) {
-                return;
-            }
-            if (arguments != null) {
-                final String highlightKey = arguments.getString(EXTRA_FRAGMENT_ARG_KEY);
-                if (!TextUtils.isEmpty(highlightKey)) {
-                    final PreferenceCategory advancedCategory =
-                            screen.findPreference(KEY_ADVANCED_CATEGORY);
-                    // Has highlight row - expand everything
-                    advancedCategory.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
-                    scrollToPreference(advancedCategory);
-                }
-            }
-        }
     }
 
     @Override

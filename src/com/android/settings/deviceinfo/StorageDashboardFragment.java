@@ -44,7 +44,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
-import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
 import com.android.settings.deviceinfo.storage.DiskInitFragment;
 import com.android.settings.deviceinfo.storage.SecondaryUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
@@ -68,6 +67,7 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Storage Settings main UI is composed by 3 fragments:
@@ -85,7 +85,7 @@ import java.util.List;
 @SearchIndexable
 public class StorageDashboardFragment extends DashboardFragment
         implements
-        LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>>,
+        LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.StorageResult>>,
         Preference.OnPreferenceClickListener {
     private static final String TAG = "StorageDashboardFrag";
     private static final String SUMMARY_PREF_KEY = "storage_summary";
@@ -100,8 +100,7 @@ public class StorageDashboardFragment extends DashboardFragment
     private final List<StorageEntry> mStorageEntries = new ArrayList<>();
     private StorageEntry mSelectedStorageEntry;
     private PrivateStorageInfo mStorageInfo;
-    private SparseArray<StorageAsyncLoader.AppsStorageResult> mAppsResult;
-    private CachedStorageValuesHelper mCachedStorageValuesHelper;
+    private SparseArray<StorageAsyncLoader.StorageResult> mAppsResult;
 
     private StorageItemPreferenceController mPreferenceController;
     private VolumeOptionMenuController mOptionMenuController;
@@ -232,7 +231,9 @@ public class StorageDashboardFragment extends DashboardFragment
         mOptionMenuController.setSelectedStorageEntry(mSelectedStorageEntry);
         getActivity().invalidateOptionsMenu();
 
-        mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
+        // To prevent flicker, hides secondary users preference.
+        // onReceivedSizes will set it visible for private storage.
+        setSecondaryUsersVisible(false);
 
         if (!mSelectedStorageEntry.isMounted()) {
             // Set null volume to hide category stats.
@@ -240,6 +241,14 @@ public class StorageDashboardFragment extends DashboardFragment
             return;
         }
         if (mSelectedStorageEntry.isPrivate()) {
+            mStorageInfo = null;
+            mAppsResult = null;
+            maybeSetLoading(isQuotaSupported());
+
+            // To prevent flicker, sets null volume to hide category preferences.
+            // onReceivedSizes will setVolume with the volume of selected storage.
+            mPreferenceController.setVolume(null);
+
             // Stats data is only available on private volumes.
             getLoaderManager().restartLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
             getLoaderManager()
@@ -314,8 +323,6 @@ public class StorageDashboardFragment extends DashboardFragment
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        initializeCacheProvider();
-        maybeSetLoading(isQuotaSupported());
 
         EntityHeaderController.newInstance(getActivity(), this /*fragment*/,
                 null /* header view */)
@@ -350,34 +357,29 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     private void onReceivedSizes() {
-        boolean stopLoading = false;
-        if (mStorageInfo != null) {
-            final long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
-            mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
-            mPreferenceController.setUsedSize(privateUsedBytes);
-            mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
-            for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
-                final AbstractPreferenceController controller = mSecondaryUsers.get(i);
-                if (controller instanceof SecondaryUserController) {
-                    SecondaryUserController userController = (SecondaryUserController) controller;
-                    userController.setTotalSize(mStorageInfo.totalBytes);
-                }
-            }
-            stopLoading = true;
+        if (mStorageInfo == null || mAppsResult == null) {
+            return;
         }
 
-        if (mAppsResult != null) {
-            mPreferenceController.onLoadFinished(mAppsResult, mUserId);
-            updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
-            stopLoading = true;
+        if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
+            setLoading(false /* loading */, true /* animate */);
         }
 
-        // setLoading always causes a flicker, so let's avoid doing it.
-        if (stopLoading) {
-            if (getView().findViewById(R.id.loading_container).getVisibility() == View.VISIBLE) {
-                setLoading(false, true);
+        final long privateUsedBytes = mStorageInfo.totalBytes - mStorageInfo.freeBytes;
+        mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
+        mPreferenceController.setUsedSize(privateUsedBytes);
+        mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
+        for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
+            final AbstractPreferenceController controller = mSecondaryUsers.get(i);
+            if (controller instanceof SecondaryUserController) {
+                SecondaryUserController userController = (SecondaryUserController) controller;
+                userController.setTotalSize(mStorageInfo.totalBytes);
             }
         }
+
+        mPreferenceController.onLoadFinished(mAppsResult, mUserId);
+        updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
+        setSecondaryUsersVisible(true);
     }
 
     @Override
@@ -414,7 +416,7 @@ public class StorageDashboardFragment extends DashboardFragment
      * Updates the secondary user controller sizes.
      */
     private void updateSecondaryUserControllers(List<AbstractPreferenceController> controllers,
-            SparseArray<StorageAsyncLoader.AppsStorageResult> stats) {
+            SparseArray<StorageAsyncLoader.StorageResult> stats) {
         for (int i = 0, size = controllers.size(); i < size; i++) {
             final AbstractPreferenceController controller = controllers.get(i);
             if (controller instanceof StorageAsyncLoader.ResultHandler) {
@@ -455,7 +457,7 @@ public class StorageDashboardFragment extends DashboardFragment
             };
 
     @Override
-    public Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> onCreateLoader(int id,
+    public Loader<SparseArray<StorageAsyncLoader.StorageResult>> onCreateLoader(int id,
             Bundle args) {
         final Context context = getContext();
         return new StorageAsyncLoader(context, mUserManager,
@@ -465,15 +467,14 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @Override
-    public void onLoadFinished(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader,
-            SparseArray<StorageAsyncLoader.AppsStorageResult> data) {
+    public void onLoadFinished(Loader<SparseArray<StorageAsyncLoader.StorageResult>> loader,
+            SparseArray<StorageAsyncLoader.StorageResult> data) {
         mAppsResult = data;
-        maybeCacheFreshValues();
         onReceivedSizes();
     }
 
     @Override
-    public void onLoaderReset(Loader<SparseArray<StorageAsyncLoader.AppsStorageResult>> loader) {
+    public void onLoaderReset(Loader<SparseArray<StorageAsyncLoader.StorageResult>> loader) {
     }
 
     @Override
@@ -492,11 +493,6 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @VisibleForTesting
-    public void setCachedStorageValuesHelper(CachedStorageValuesHelper helper) {
-        mCachedStorageValuesHelper = helper;
-    }
-
-    @VisibleForTesting
     public PrivateStorageInfo getPrivateStorageInfo() {
         return mStorageInfo;
     }
@@ -507,26 +503,13 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @VisibleForTesting
-    public SparseArray<StorageAsyncLoader.AppsStorageResult> getAppsStorageResult() {
+    public SparseArray<StorageAsyncLoader.StorageResult> getStorageResult() {
         return mAppsResult;
     }
 
     @VisibleForTesting
-    public void setAppsStorageResult(SparseArray<StorageAsyncLoader.AppsStorageResult> info) {
+    public void setStorageResult(SparseArray<StorageAsyncLoader.StorageResult> info) {
         mAppsResult = info;
-    }
-
-    @VisibleForTesting
-    void initializeCachedValues() {
-        final PrivateStorageInfo info = mCachedStorageValuesHelper.getCachedPrivateStorageInfo();
-        final SparseArray<StorageAsyncLoader.AppsStorageResult> loaderResult =
-                mCachedStorageValuesHelper.getCachedAppsStorageResult();
-        if (info == null || loaderResult == null) {
-            return;
-        }
-
-        mStorageInfo = info;
-        mAppsResult = loaderResult;
     }
 
     /**
@@ -542,22 +525,20 @@ public class StorageDashboardFragment extends DashboardFragment
         }
     }
 
-    private void initializeCacheProvider() {
-        mCachedStorageValuesHelper = new CachedStorageValuesHelper(getContext(), mUserId);
-        initializeCachedValues();
-        onReceivedSizes();
-    }
-
-    private void maybeCacheFreshValues() {
-        if (mStorageInfo != null && mAppsResult != null) {
-            mCachedStorageValuesHelper.cacheResult(mStorageInfo, mAppsResult.get(mUserId));
-        }
-    }
-
     private boolean isQuotaSupported() {
         return mSelectedStorageEntry.isMounted()
                 && getActivity().getSystemService(StorageStatsManager.class)
                         .isQuotaSupported(mSelectedStorageEntry.getFsUuid());
+    }
+
+    private void setSecondaryUsersVisible(boolean visible) {
+        final Optional<SecondaryUserController> secondaryUserController = mSecondaryUsers.stream()
+                .filter(controller -> controller instanceof SecondaryUserController)
+                .map(controller -> (SecondaryUserController) controller)
+                .findAny();
+        if (secondaryUserController.isPresent()) {
+            secondaryUserController.get().setPreferenceGroupVisible(visible);
+        }
     }
 
     /**
@@ -619,7 +600,6 @@ public class StorageDashboardFragment extends DashboardFragment
             }
 
             mStorageInfo = privateStorageInfo;
-            maybeCacheFreshValues();
             onReceivedSizes();
         }
     }

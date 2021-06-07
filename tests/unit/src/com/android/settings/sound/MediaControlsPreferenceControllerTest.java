@@ -40,7 +40,6 @@ public class MediaControlsPreferenceControllerTest {
     private static final String KEY = "media_controls_resume_switch";
 
     private Context mContext;
-    private int mOriginalQs;
     private int mOriginalResume;
     private ContentResolver mContentResolver;
     private MediaControlsPreferenceController mController;
@@ -49,8 +48,6 @@ public class MediaControlsPreferenceControllerTest {
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mContentResolver = mContext.getContentResolver();
-        mOriginalQs = Settings.Global.getInt(mContentResolver,
-                Settings.Global.SHOW_MEDIA_ON_QUICK_SETTINGS, 1);
         mOriginalResume = Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.MEDIA_CONTROLS_RESUME, 1);
         mController = new MediaControlsPreferenceController(mContext, KEY);
@@ -58,8 +55,6 @@ public class MediaControlsPreferenceControllerTest {
 
     @After
     public void tearDown() {
-        Settings.Global.putInt(mContentResolver, Settings.Global.SHOW_MEDIA_ON_QUICK_SETTINGS,
-                mOriginalQs);
         Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RESUME,
                 mOriginalResume);
     }
@@ -71,12 +66,11 @@ public class MediaControlsPreferenceControllerTest {
 
     @Test
     public void setChecked_enable_shouldTurnOn() {
-        Settings.Global.putInt(mContentResolver, Settings.Global.SHOW_MEDIA_ON_QUICK_SETTINGS, 1);
         Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RESUME, 1);
 
         assertThat(mController.isChecked()).isTrue();
 
-        mController.onSwitchChanged(null /* switchView */, false);
+        mController.setChecked(false);
 
         assertThat(Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.MEDIA_CONTROLS_RESUME, -1)).isEqualTo(0);
@@ -84,12 +78,11 @@ public class MediaControlsPreferenceControllerTest {
 
     @Test
     public void setChecked_disable_shouldTurnOff() {
-        Settings.Global.putInt(mContentResolver, Settings.Global.SHOW_MEDIA_ON_QUICK_SETTINGS, 1);
         Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RESUME, 0);
 
         assertThat(mController.isChecked()).isFalse();
 
-        mController.onSwitchChanged(null /* switchView */, true);
+        mController.setChecked(true);
 
         assertThat(Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.MEDIA_CONTROLS_RESUME, -1)).isEqualTo(1);

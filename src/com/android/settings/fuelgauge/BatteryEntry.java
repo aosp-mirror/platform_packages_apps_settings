@@ -241,7 +241,10 @@ public class BatteryEntry {
         mBatteryConsumer = null;
         mIsHidden = false;
         mPowerComponentId = powerComponentId;
-        mConsumedPower = devicePowerMah - appsPowerMah;
+        mConsumedPower =
+            powerComponentId == BatteryConsumer.POWER_COMPONENT_SCREEN
+                ? devicePowerMah
+                : devicePowerMah - appsPowerMah;
         mUsageDurationMs = usageDurationMs;
         mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
 
@@ -264,11 +267,12 @@ public class BatteryEntry {
         iconId = R.drawable.ic_power_system;
         icon = context.getDrawable(iconId);
         name = powerComponentName;
-
-        mConsumedPower = devicePowerMah - appsPowerMah;
+        mConsumedPower =
+            powerComponentId == BatteryConsumer.POWER_COMPONENT_SCREEN
+                ? devicePowerMah
+                : devicePowerMah - appsPowerMah;
         mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
     }
-
 
     public Drawable getIcon() {
         return icon;
@@ -413,10 +417,6 @@ public class BatteryEntry {
         }
 
         final String uidString = Integer.toString(uid);
-        if (name == null) {
-            name = uidString;
-        }
-
         if (icon == null) {
             icon = pm.getDefaultActivityIcon();
         }

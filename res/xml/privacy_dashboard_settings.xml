@@ -19,16 +19,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="privacy_dashboard_page"
-    android:title="@string/privacy_dashboard_title"
-    settings:initialExpandedChildrenCount="4">
-
+    android:title="@string/privacy_dashboard_title">
 
     <!-- Work Policy info -->
     <Preference
         android:key="work_policy_info"
         android:title="@string/work_policy_privacy_settings"
         android:summary="@string/work_policy_privacy_settings_summary"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.privacy.WorkPolicyInfoPreferenceController"/>
 
     <!-- Connected work and personal apps -->
@@ -43,7 +40,6 @@
     <Preference
         android:key="privacy_accessibility_usage"
         android:title="@string/accessibility_usage_title"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.privacy.AccessibilityUsagePreferenceController">
         <intent android:action="android.intent.action.REVIEW_ACCESSIBILITY_SERVICES"/>
     </Preference>
@@ -53,7 +49,6 @@
         android:key="privacy_permissions_usage"
         android:title="@string/permissions_usage_title"
         android:summary="@string/permissions_usage_summary"
-        settings:allowDividerAbove="true"
         settings:searchable="false"
         settings:controller="com.android.settings.privacy.PrivacyHubPreferenceController">
         <intent android:action="android.intent.action.REVIEW_PERMISSION_USAGE"/>

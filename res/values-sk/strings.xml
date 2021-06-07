@@ -54,8 +54,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Zväčšite alebo zmenšite text na obrazovke."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Zmenšiť"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Zväčšiť"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="1150797732067921015">"Používať automatické otáčanie"</string>
-    <string name="smart_rotate_text_headline" msgid="4775952278533715352">"Rozpoznávanie tváre zlepšuje presnosť automatického otáčania pomocou predného fotoaparátu. Obrázky sa nikdy neukladajú ani neodosielajú Googlu.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Ďalšie informácie&lt;/a&gt;"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Používať automatické otáčanie"</string>
+    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"Rozpoznávanie tváre zlepšuje presnosť automatického otáčania pomocou predného fotoaparátu. Snímky sa nikdy neukladajú ani neodosielajú Googlu.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Ďalšie informácie o automatickom otáčaní obrazovky&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Ukážkový text"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Čarodejník z krajiny Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11. kapitola: Nádherné smaragdové mesto"</string>
@@ -293,7 +293,7 @@
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Aktiv. miniaplikácie"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Zakázané správcom"</string>
     <string name="lockdown_settings_title" msgid="8988970335658365075">"Zobraziť možnosti uzamknutia"</string>
-    <string name="lockdown_settings_summary" msgid="7422522013953398806">"Zobrazenie vypínača, ktorý vypína Smart Lock, biometrické odomykanie a upozornenia na uzamknutej obrazovke"</string>
+    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Zobrazovať v ponuke vypínača možnosť vypnúť Smart Lock, odomknutie tvárou, odomknutie odtlačkom prsta a upozornenia na uzamknutej obrazovke"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Uzamknutie obrazovky v prípade straty dôveryhodnosti"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Po aktivácii umožňuje zariadeniu uzamknúť sa, keď posledný agent dôvery stratí dôveryhodnosť"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Žiadne"</string>
@@ -311,8 +311,9 @@
       <item quantity="one">Zapnuté – <xliff:g id="COUNT_0">%1$d</xliff:g> aplikácia má prístup k polohe</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Načítava sa…"</string>
-    <string name="location_settings_footer_location_on" msgid="610897900893933852">"&lt;br&gt;&lt;br&gt;Aplikácie s povolením pre zariadenia v okolí môžu rozpoznať relatívnu pozíciu pripojených zariadení. &lt;br&gt;&lt;br&gt;&lt;a href=<xliff:g id="URL"> https://support.google.com/android/answer/3467281</xliff:g>&gt;Ďalšie informácie&lt;/a&gt;"</string>
-    <string name="location_settings_footer_location_off" msgid="2036323699022434870">"Prístup aplikácií a služieb k polohe je vypnutý. Poloha zariadenia však stále môže byť odoslaná pracovníkom záchranného systému, keď zavoláte na tiesňovú linku alebo na ňu pošlete správu. &lt;br&gt;&lt;br&gt;Aplikácie s povolením pre zariadenia v okolí môžu rozpoznať relatívnu pozíciu pripojených zariadení. &lt;br&gt;&lt;br&gt;&lt;a href=<xliff:g id="URL"> https://support.google.com/android/answer/3467281</xliff:g>&gt;Ďalšie informácie&lt;/a&gt;"</string>
+    <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikácie s povolením pre zariadenia v okolí môžu rozpoznať relatívnu pozíciu pripojených zariadení."</string>
+    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Prístup aplikácií a služieb k polohe je vypnutý. Poloha zariadenia však stále môže byť odoslaná pracovníkom záchranného systému, keď zavoláte na tiesňovú linku alebo na ňu pošlete textovú správu."</string>
+    <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Ďalšie informácie o nastaveniach polohy"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Účty"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Zabezpečenie"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifrovanie a poverenia"</string>
@@ -329,15 +330,16 @@
     <string name="security_status_title" msgid="6958004275337618656">"Stav zabezpečenia"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Zámka obrazovky, Nájdi moje zariadenie, zabezpečenie aplikácie"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Pridaná tvár"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"Nastaviť odomknutie tvárou"</string>
-    <string name="security_settings_face_preference_title" msgid="821557938243856757">"Odomknutie tvárou"</string>
-    <string name="security_settings_face_profile_preference_title" msgid="4618796080378248740">"Odomknutie tvárou pre prácu"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"Ako nastaviť odomknutie tvárou"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"Nastavenie odomknutia tvárou"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Klepnite a nastavte tvár"</string>
+    <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Odomknutie tvárou"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Odomknutie tvárou pre prácu"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Ako nastaviť odomknutie tvárou"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="3701874093226957891">"Nastavenie odomknutia tvárou"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Overenie totožnosti pomocou tváre"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
+    <string name="security_settings_face_enroll_education_message_accessibility" msgid="1986648712195281391"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Začať"</string>
-    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Ak je zjednodušené odomknutie tvárou vypnuté, niektoré kroky nastavenia nemusia v čítačke TalkBack fungovať správne."</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="2965952386172202665">"Ak je zjednodušené odomknutie tvárou vypnuté, niektoré kroky nastavenia nemusia v aplikácii TalkBack fungovať správne."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Späť"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Pokračovať v nastavení"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Použiť nastavenie dostupnosti"</string>
@@ -372,31 +374,30 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Registrácia tváre nefungovala."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="5882322568359775393">"Všetko sa podarilo nastaviť."</string>
     <string name="security_settings_face_enroll_done" msgid="3048687969498187442">"Hotovo"</string>
-    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="9080635904939148410">"Zlepšite výkonnosť odomknutia tvárou"</string>
-    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="2318506792574194633">"Znova nastavte odomknutie tvárou"</string>
-    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="8907917317111783249">"Znova nastavte odomknutie tvárou"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="6835778900387289683">"Zlepšite výkonnosť odomknutia tvárou"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7055780282999744813">"Znova nastavte odomknutie tvárou"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4421818770682557621">"Znova nastavte odomknutie tvárou"</string>
     <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="3584740139535177961">"Zlepšite zabezpečenie a výkonnosť"</string>
-    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="7124713074067550039">"Nastavte odomknutie tvárou"</string>
-    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="950213874209080175">"Odstráňte aktuálne údaje o tvári a znova nastavte odomknutie tvárou.\n\nÚdaje o tvári využívané odomknutím tvárou budú natrvalo a bezpečne odstránené. Po ich odstránení budete na odomykanie telefónu, prihlasovanie do aplikácií a potvrdzovanie platieb potrebovať PIN, vzor alebo heslo."</string>
-    <string name="security_settings_face_settings_use_face_category" msgid="2374998717426341095">"Používať odomknutie tvárou na:"</string>
-    <string name="security_settings_face_settings_use_face_unlock_phone" msgid="5209963876503148501">"Odomykanie telefónu"</string>
-    <string name="security_settings_face_settings_use_face_for_apps" msgid="8813038341122613020">"Prihlasovanie do aplikácií a platby"</string>
-    <string name="security_settings_face_settings_require_category" msgid="3906382658164073665">"Požiadavky na odomknutie tvárou"</string>
-    <string name="security_settings_face_settings_preferences_category" msgid="1928185678544277926">"Pri používaní odomknutia tvárou"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Nastavte odomknutie tvárou"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Ak chcete odomknutie tvárou nastaviť znova, odstráňte aktuálny model tváre.\n\nModel tváre sa bezpečným spôsobom natrvalo odstráni.\n\nPo jeho odstránení budete na odomknutie telefónu alebo overovanie v aplikáciách potrebovať PIN, vzor alebo heslo."</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Ak chcete odomknutie tvárou nastaviť znova, odstráňte aktuálny model tváre.\n\nModel tváre sa bezpečným spôsobom natrvalo odstráni.\n\nPo jeho odstránení budete na odomknutie telefónu alebo overovanie v aplikáciách potrebovať odtlačok prsta, PIN, vzor alebo heslo."</string>
+    <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Odomknutím tvárou:"</string>
+    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Požiadavky na odomknutie tvárou"</string>
+    <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Pri používaní odomknutia tvárou"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Vyžadovať otvorené oči"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Ak chcete odomknúť telefón, musíte mať otvorené oči"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Vždy vyžadovať potvrdenie"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Pri používaní odomknutia tvárou v aplikáciách požadovať potvrdenie"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Pri používaní odomknutia tvárou v aplikáciách vždy vyžad. potvrdenie"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Odstrániť model tváre"</string>
-    <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Nastaviť odomknutie tvárou"</string>
-    <string name="security_settings_face_settings_top_intro" msgid="4199311264578653665">"Odomykajte svoje zariadenie, prihlasujte sa do aplikácií a potvrdzujte platby pomocou odomknutia tvárou."</string>
-    <string name="security_settings_face_settings_footer" msgid="4378074697208244539">"Dôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše jednovaječné dvojča."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="5051230351151761265">"Dôležité upozornenie:\nTelefón môžete náhodne odomknúť pohľadom, aj keď ste to nechceli urobiť.\n\nMôže ho odomknúť aj niekto iný, keď telefón namieri na vašu tvár, a to dokonca aj vtedy, keď budete mať zatvorené oči.\n\nMôže ho odomknúť aj osoba, ktorá sa na vás veľmi podobá, napríklad vaše jednovaječné dvojča."</string>
+    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Nastaviť odomknutie tvárou"</string>
+    <string name="security_settings_face_settings_top_intro" msgid="7063074518555032871">"Odomykajte svoje zariadenie, prihlasujte sa do aplikácií a potvrdzujte platby pomocou odomknutia tvárou."</string>
+    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Pomocou tváre odomykajte telefón alebo overujte svoju totožnosť v aplikáciách, napríklad pri prihlasovaní alebo schvaľovaní nákupu.\n\nUpozorňujeme:\nNaraz môžete mať nastavenú iba jednu tvár. Ak chcete pridať ďalšiu tvár, odstráňte aktuálnu.\n\nTelefón môžete neúmyselne odomknúť pohľadom.\n\nMôže ho odomknúť iná osoba, ak vám ho pridrží pred tvárou.\n\nMôže ho odomknúť aj niekto, kto sa na vás veľmi podobá, napríklad dvojča."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Pomocou tváre odomykajte telefón alebo overujte svoju totožnosť v aplikáciách, napríklad pri prihlasovaní alebo schvaľovaní nákupu.\n\nUpozorňujeme:\nNaraz môžete mať nastavenú iba jednu tvár. Ak chcete pridať ďalšiu tvár, odstráňte aktuálnu.\n\nTelefón môžete neúmyselne odomknúť pohľadom.\n\nMôže ho odomknúť iná osoba, ak vám ho pridrží pred tvárou, a to aj v prípade, že máte zatvorené oči.\n\nMôže ho odomknúť aj niekto, kto sa na vás veľmi podobá, napríklad dvojča."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Chcete model tváre odstrániť?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Model tváre bude natrvalo a bezpečne odstránený. Po odstránení budete pri odomykaní telefónu alebo overovaní v aplikáciách potrebovať PIN, vzor alebo heslo."</string>
     <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Chcete model tváre odstrániť?"</string>
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Model tváre bude natrvalo a bezpečne odstránený.\n\nPo odstránení budete pri odomykaní telefónu alebo overovaní v aplikáciách potrebovať odtlačok prsta, PIN, vzor alebo heslo."</string>
-    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Odomykajte telefón tvárou"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Odomykajte telefón tvárou"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Odtlačok prsta"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Správa odtlačkov"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Použiť odtlačok na"</string>
@@ -418,7 +419,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_2" msgid="3507618608004123384">"Odtlačok prsta môže byť menej bezpečný ako silný vzor alebo PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_3" product="default" msgid="4757472591076060066">"Telefón bude pomocou vašich nedávnych obrázkov odtlačkov prstov príležitostne vytvárať zlepšené modely odtlačkov prstov."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Odomykajte svoj telefón a schvaľujte nákupy pomocou odtlačku prsta.\n\nUpozornenie: Toto zariadenie nemôžete odomykať pomocou odtlačku prsta. Ďalšie informácie vám poskytne správca organizácie."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Odomykajte svoj telefón a schvaľujte nákupy pomocou odtlačku prsta.\n\nUpozornenie: Odtlačok prsta môže byť menej bezpečný ako silný vzor alebo kód PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Zrušiť"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Nie, vďaka"</string>
     <string name="security_settings_fingerprint_enroll_introduction_skip" msgid="2284740299244691418">"Nie, vďaka"</string>
@@ -449,9 +449,9 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Nastavte klepnutím"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Bola pridaná tvár a odtlačky prsta"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Bola pridaná tvár a odtlačok prsta"</string>
-    <string name="biometric_settings_intro" msgid="769040512190641961">"Keď nastavíte odomknutie tvárou aj odtlačkom prsta a budete sa nachádzať v tmavom prostredí alebo mať rúško, telefón vás požiada o odtlačok prsta"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"Keď si nastavíte odomknutie tvárou aj odtlačkom prsta a budete sa nachádzať v tmavom prostredí alebo mať rúško, telefón vás požiada o odtlačok prsta"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Spôsoby odomknutia"</string>
-    <string name="biometric_settings_category_ways_to_use" msgid="7182562470382953854">"Tvárou a odtlačkom prsta"</string>
+    <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Používajte tvár a odtlačok prsta na"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Odomykanie telefónu"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Overenie v aplikáciách"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Preskočiť zámku obrazovky?"</string>
@@ -466,39 +466,81 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Preskočiť"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Zrušiť"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Dotknite sa senzora"</string>
-    <string name="security_settings_udfps_enroll_find_sensor_title" msgid="3006622174004843183">"Pridržte ikonu odtlačku prsta"</string>
+    <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Ako nastaviť odtlačok prsta"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Nachádza sa na zadnej strane telefónu. Použite ukazovák."</string>
-    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="4368947995750079558">"Senzor odtlačkov prstov je na obrazovke"</string>
-    <string name="security_settings_udfps_enroll_find_sensor_a11y" msgid="2518818922889238997">"Senzor odtlačkov prstov je na obrazovke. Nájdite ho posúvaním prsta po obrazovke."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Senzor odtlačkov prstov je na obrazovke. Odtlačok prsta nasnímate na ďalšej obrazovke."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Začať"</string>
+    <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Senzor nájdete posúvaním prsta po obrazovke. Pridržte senzor odtlačkov prstov."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustrácia zariadenia a umiestnenia senzora odtlačku prsta"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Názov"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Odstrániť"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dotknite sa senzora"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Priložte prst k senzoru a zdvihnite ho, keď zacítite vibráciu"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="1295278317609257417">"Držte prst na ikone, dokým nezacítite vibrovanie"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Držte prst na senzore, kým nezacítite vibrovanie"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Pridržte senzor odtlačkov prstov"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Zdvihnite a opäť priložte"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Ešte raz"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Sledujte ikonu odtlačku prsta"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Zdvíhajte prst, aby ste pridali všetky odlišné časti odtlačku prsta"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="6947378111984759956">"Pridržte pri každom presune ikony. Pomôže vám to nasnímať celý odtlačok prsta."</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Pridržte pri každom presune ikony odtlačktu prsta. Pomôže vám to nasnímať celý odtlačok prsta."</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Pomôže vám to nasnímať celý odtlačok prsta"</string>
+    <!-- String.format failed for translation -->
+    <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Odtlačok prsta bol pridaný"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4261399912979931798">"Teraz môžete odomykať telefón alebo overovať svoju totožnosť odtlačkom prsta, napríklad pri prihlasovaní do aplikácií"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Neskôr"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Preskočiť nastavenie odtlačkov prstov?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Vybrali ste, že chcete používať odtlačok prsta ako jeden zo spôsobov odomknutia telefónu. Ak tento krok preskočíte, budete musieť odtlačok prsta nastaviť neskôr. Trvá to približne minútu."</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="6901147203720764421">"Ochráňte svoj tablet pomocou možnosti zámky obrazovky, aby ho v prípade krádeže alebo straty nemohol nikto použiť. Možnosť zámky obrazovky potrebujete aj na nastavenie odtlačku prsta. Klepnite na Zrušiť, potom nastavte PIN, vzor alebo heslo."</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="1286244133923093528">"Ochráňte svoje zariadenie pomocou možnosti zámky obrazovky, aby ho v prípade krádeže alebo straty nemohol nikto použiť. Možnosť zámky obrazovky potrebujete aj na nastavenie odtlačku prsta. Klepnite na Zrušiť, potom nastavte PIN, vzor alebo heslo."</string>
-    <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="4810191157587317521">"Ochráňte svoj telefón pomocou možnosti zámky obrazovky, aby ho v prípade krádeže alebo straty nemohol nikto použiť. Možnosť zámky obrazovky potrebujete aj na nastavenie odtlačku prsta. Klepnite na Zrušiť, potom nastavte PIN, vzor alebo heslo."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7387535629289108475">"Keď zabezpečíte svoj tablet pomocou možnosti zámky obrazovky, v prípade krádeže alebo straty ho nebude môcť nikto použiť. Možnosť zámky obrazovky potrebujete aj na nastavenie odomknutia tvárou. Ak chcete prejsť späť, klepnite na Zrušiť."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="4995287019957131123">"Keď zabezpečíte svoje zariadenie pomocou možnosti zámky obrazovky, v prípade krádeže alebo straty ho nebude môcť nikto použiť. Možnosť zámky obrazovky potrebujete aj na nastavenie odomknutia tvárou. Ak chcete prejsť späť, klepnite na Zrušiť."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"Keď zabezpečíte svoj telefón pomocou možnosti zámky obrazovky, v prípade krádeže alebo straty ho nebude môcť nikto použiť. Možnosť zámky obrazovky potrebujete aj na nastavenie odomknutia tvárou. Ak chcete prejsť späť, klepnite na Zrušiť."</string>
-    <string name="biometrics_lock_screen_setup_skip_dialog_text" product="tablet" msgid="3943278149639587227">"Keď zabezpečíte svoj tablet pomocou zámky obrazovky, v prípade krádeže alebo straty ho nebude môcť nikto použiť. Zámka obrazovky sa vyžaduje aj pri nastavení biometrie. Ak chcete prejsť späť, klepnite na Zrušiť."</string>
-    <string name="biometrics_lock_screen_setup_skip_dialog_text" product="device" msgid="5424064454068220988">"Keď zabezpečíte svoje zariadenie pomocou zámky obrazovky, v prípade krádeže alebo straty ho nebude môcť nikto použiť. Zámka obrazovky sa vyžaduje aj pri nastavení biometrie. Ak chcete prejsť späť, klepnite na Zrušiť."</string>
-    <string name="biometrics_lock_screen_setup_skip_dialog_text" product="default" msgid="5668256546179188638">"Keď zabezpečíte svoj telefón pomocou zámky obrazovky, v prípade krádeže alebo straty ho nebude môcť nikto použiť. Zámka obrazovky sa vyžaduje aj pri nastavení biometrie. Ak chcete prejsť späť, klepnite na Zrušiť."</string>
+    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"PIN chráni tablet v prípade jeho straty alebo odcudzenia"</string>
+    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Vzor chráni tablet v prípade jeho straty alebo odcudzenia"</string>
+    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Heslo chráni tablet v prípade jeho straty alebo odcudzenia"</string>
+    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"PIN chráni zariadenie v prípade jeho straty alebo odcudzenia"</string>
+    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Vzor chráni zariadenie v prípade jeho straty alebo odcudzenia"</string>
+    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Heslo chráni zariadenie v prípade jeho straty alebo odcudzenia"</string>
+    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"PIN chráni telefón v prípade jeho straty alebo odcudzenia"</string>
+    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Vzor chráni telefón v prípade jeho straty alebo odcudzenia"</string>
+    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Heslo chráni telefón v prípade jeho straty alebo odcudzenia"</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Na nastavenie odomknutia odtlačkom prsta sa vyžaduje PIN.\n\nPIN chráni tablet v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Na nastavenie odomknutia odtlačkom prsta sa vyžaduje vzor.\n\nVzor chráni tablet v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Na nastavenie odomknutia odtlačkom prsta sa vyžaduje heslo.\n\nHeslo chráni tablet v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Na nastavenie odomknutia odtlačkom prsta sa vyžaduje PIN.\n\nPIN chráni zariadenie v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Na nastavenie odomknutia odtlačkom prsta sa vyžaduje vzor.\n\nVzor chráni zariadenie v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Na nastavenie odomknutia odtlačkom prsta sa vyžaduje heslo.\n\nHeslo chráni zariadenie v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Na nastavenie odomknutia odtlačkom prsta sa vyžaduje PIN.\n\nPIN chráni telefón v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Na nastavenie odomknutia odtlačkom prsta sa vyžaduje vzor.\n\nVzor chráni telefón v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Na nastavenie odomknutia odtlačkom prsta sa vyžaduje heslo.\n\nHeslo chráni telefón v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Na nastavenie odomknutia tvárou sa vyžaduje PIN.\n\nPIN chráni tablet v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Na nastavenie odomknutia tvárou sa vyžaduje vzor.\n\nVzor chráni tablet v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Na nastavenie odomknutia tvárou sa vyžaduje heslo.\n\nHeslo chráni tablet v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Na nastavenie odomknutia tvárou sa vyžaduje PIN.\n\nPIN chráni zariadenie v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Na nastavenie odomknutia tvárou sa vyžaduje vzor.\n\nVzor chráni zariadenie v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Na nastavenie odomknutia tvárou sa vyžaduje heslo.\n\nHeslo chráni zariadenie v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Na nastavenie odomknutia tvárou sa vyžaduje PIN.\n\nPIN chráni telefón v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Na nastavenie odomknutia tvárou sa vyžaduje vzor.\n\nVzor chráni telefón v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Na nastavenie odomknutia tvárou sa vyžaduje heslo.\n\nHeslo chráni telefón v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Na nastavenie odomknutia tvárou a odtlačkom prsta sa vyžaduje PIN.\n\nPIN chráni tablet v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Na nastavenie odomknutia tvárou a odtlačkom prsta sa vyžaduje vzor.\n\nVzor chráni tablet v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Na nastavenie odomknutia tvárou a odtlačkom prsta sa vyžaduje heslo.\n\nHeslo chráni tablet v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Na nastavenie odomknutia tvárou a odtlačkom prsta sa vyžaduje PIN.\n\nPIN chráni zariadenie v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Na nastavenie odomknutia tvárou a odtlačkom prsta sa vyžaduje vzor.\n\nVzor chráni zariadenie v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Na nastavenie odomknutia tvárou a odtlačkom prsta sa vyžaduje heslo.\n\nHeslo chráni zariadenie v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Na nastavenie odomknutia tvárou a odtlačkom prsta sa vyžaduje PIN.\n\nPIN chráni telefón v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Na nastavenie odomknutia tvárou a odtlačkom prsta sa vyžaduje vzor.\n\nVzor chráni telefón v prípade jeho straty alebo odcudzenia."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Na nastavenie odomknutia tvárou a odtlačkom prsta sa vyžaduje heslo.\n\nHeslo chráni telefón v prípade jeho straty alebo odcudzenia."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Chcete preskočiť nastavenie kódu PIN?"</string>
+    <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Chcete preskočiť nastavenie kódu PIN a tváre?"</string>
+    <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Chcete preskočiť nastavenie kódu PIN a odtlačku prsta?"</string>
+    <string name="lock_screen_pin_skip_biometrics_title" msgid="1082066572914073311">"Chcete preskočiť nastavenie kódu PIN, tváre a odtlačku prsta?"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"Chcete preskočiť nastavenie hesla?"</string>
+    <string name="lock_screen_password_skip_face_title" msgid="8166210519462164998">"Chcete preskočiť nastavenie hesla a tváre?"</string>
+    <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"Preskočiť nastavenie hesla a odtlačku prsta?"</string>
+    <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"Preskočiť nastav. hesla, tváre a odtlačku prsta?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"Chcete preskočiť nastavenie vzoru?"</string>
+    <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Chcete preskočiť nastavenie vzoru a tváre?"</string>
+    <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Preskočiť nastavenie vzoru a odtlačku prsta?"</string>
+    <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"Preskočiť nastav. vzoru, tváre a odtlačku prsta?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Nastaviť zámku obrazovky"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Hotovo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ojoj, to nie je senzor"</string>
@@ -570,7 +612,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Zámka obrazovky"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Vyberte zámku obrazovky"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Výber zámky obrazovky"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Vyberte novú zámku obraz."</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vyberte zámku pre pracovné aplikácie"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Vyberte novú pracovnú zámku"</string>
@@ -610,10 +652,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"Odtlačok prsta + heslo"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"Pokračovať bez odtlačku prsta"</string>
     <string name="fingerprint_unlock_title" msgid="4978686534505944042">"Telefón môžete odomknúť odtlačkom prsta. Táto možnosť vyžaduje z bezpečnostných dôvodov dodatočnú zámku obrazovky."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="5991691559532427891">"Odomknutie tvárou a vzor"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="8990569318587034610">"Odomknutie tvárou a PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="8612535943511761549">"Odomknutie tvárou a heslo"</string>
-    <string name="face_unlock_skip_face" msgid="7117201898540606846">"Pokračovať bez odomknutia tvárou"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="3117316407679805330">"Odomknutie tvárou a vzor"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="5300188327595503657">"Odomknutie tvárou a PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="8395722611524617956">"Odomknutie tvárou a heslo"</string>
+    <string name="face_unlock_skip_face" msgid="189695556498300008">"Pokračovať bez odomknutia tvárou"</string>
     <string name="face_unlock_title" msgid="7344830351598247267">"Telefón môžete odomknúť pomocou tváre. Táto možnosť vyžaduje z bezpečnostných dôvodov dodatočnú zámku obrazovky."</string>
     <string name="biometrics_unlock_set_unlock_pattern" msgid="8084495264354847044">"Vzor • Tvár • Odtlačok prsta"</string>
     <string name="biometrics_unlock_set_unlock_pin" msgid="5912980580857825894">"PIN • Tvár • Odtlačok prsta"</string>
@@ -833,7 +875,7 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Rozšírené"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Rozšírené nastavenia Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Keď je zapnuté pripojenie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s funkciou Bluetooth v okolí."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="7628457523484942552">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s rozhraním Bluetooth v okolí.\n\nNa zlepšenie prostredia zariadenia môžu aplikácie a služby kedykoľvek vyhľadávať zariadenia v okolí, a to aj vtedy, keď je rozhranie Bluetooth vypnuté. Vďaka tomu je napríklad možné zlepšiť funkcie a služby podmienené polohou. Môžete to zmeniť v "<annotation id="link">"nastaveniach vyhľadávania rozhraním Bluetooth"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s rozhraním Bluetooth v okolí.\n\nNa zlepšenie prostredia zariadenia môžu aplikácie a služby kedykoľvek vyhľadávať zariadenia v okolí, a to aj vtedy, keď je rozhranie Bluetooth vypnuté. Vďaka tomu je napríklad možné zlepšiť funkcie a služby podmienené polohou. Môžete to zmeniť v "<annotation id="link">"nastaveniach vyhľadávania rozhraním Bluetooth"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Systémové aplikácie a služby môžu i tak rozpoznávať zariadenia Bluetooth, aby zlepšili presnosť určovania polohy. Toto správanie môžete zmeniť v <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>nastaveniach vyhľadávania<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Nepodarilo sa pripojiť. Skúste to znova."</string>
     <string name="device_details_title" msgid="1155622417516195481">"O zariadení"</string>
@@ -1482,7 +1524,7 @@
     <string name="device_status" msgid="7988547478034984649">"Stav"</string>
     <string name="device_status_summary" product="tablet" msgid="8826216824111648900">"Stav batérie, siete a ďalšie informácie"</string>
     <string name="device_status_summary" product="default" msgid="8132661857066128832">"Telefónne číslo, signál atď."</string>
-    <string name="storage_settings" msgid="7472188817781592677">"Úložisko"</string>
+    <string name="storage_settings" msgid="7472188817781592677">"Priestor"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Ukladací priestor a vyrovnávacia pamäť"</string>
     <string name="storage_usb_settings" msgid="7058142934214211583">"Úložisko"</string>
     <string name="storage_settings_title" msgid="486118156723194815">"Nastavenia úložiska"</string>
@@ -1803,7 +1845,7 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Internetové pripojenie zariadenia <xliff:g id="DEVICE_NAME">%1$d</xliff:g> sa zdieľa cez Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Maximálny počet zariadení na zdieľanie dátového pripojenia: <xliff:g id="MAXCONNECTION">%1$d</xliff:g>."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Ukončí sa zdieľané dát. pripojenie zariad. <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Pripojenie cez ethernet"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering cez ethernet"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Zdieľať internetové pripojenie telefónu cez ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Hotspot a tethering umožňujú poskytovať internet iným zariadeniam prostredníctvom vášho mobilného dátového pripojenia. Aplikácie tiež môžu vytvárať hostpot na zdieľanie obsahu so zariadeniami v okolí."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Hotspot a tethering umožňujú poskytovať internet iným zariadeniam prostredníctvom vášho pripojenia Wi‑Fi alebo mobilného dátového pripojenia. Aplikácie tiež môžu vytvárať hostpot na zdieľanie obsahu so zariadeniami v okolí."</string>
@@ -1924,9 +1966,9 @@
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"Heslo bolo nastavené"</string>
     <string name="lockpassword_pin_set_toast" msgid="5415783847198570890">"Bol nastavený kód PIN"</string>
     <string name="lockpassword_pattern_set_toast" msgid="3090582314362416762">"Vzor bol nastavený"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Ak chcete použiť odomknutie tvárou, nastavte heslo"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Ak chcete použiť odomknutie tvárou, nastavte vzor"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Ak chcete použiť odomknutie tvárou, nastavte PIN"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Odomkn. tvárou vyžaduje nastavenie hesla"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Odomkn. tvárou vyžaduje nastavenie vzoru"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Odomkn. tvárou vyžaduje nastavenie PIN"</string>
     <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"Biometria vyžaduje nastavenie hesla"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"Biometria vyžaduje nastavenie vzoru"</string>
     <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"Biometria vyžaduje nastavenie kódu PIN"</string>
@@ -2013,7 +2055,7 @@
     <string name="advanced_settings" msgid="2368905204839169094">"Rozšírené nastavenia"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Povoliť ďalšie možnosti nastavení"</string>
     <string name="application_info_label" msgid="1015706497694165866">"O aplikáciách"</string>
-    <string name="storage_label" msgid="2522307545547515733">"Úložisko"</string>
+    <string name="storage_label" msgid="2522307545547515733">"Priestor"</string>
     <string name="auto_launch_label" msgid="4069860409309364872">"Predvolené otváranie"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"Predvolené"</string>
     <string name="screen_compatibility_label" msgid="7549658546078613431">"Kompatibilita obrazovky"</string>
@@ -2175,7 +2217,7 @@
     <string name="hardkeyboard_category" msgid="8729780593378161071">"Nastavenia fyzickej klávesnice"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Znak „.“ môžete vložiť dvojitým stlačením klávesu Medzerník."</string>
     <string name="show_password" msgid="7101900779571040117">"Zobrazovať heslá"</string>
-    <string name="show_password_summary" msgid="9025960283785111619">"Pri písaní krátko zobrazovať zadávané znaky"</string>
+    <string name="show_password_summary" msgid="9025960283785111619">"Pri písaní sa budú krátko zobrazovať zadávané znaky"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Táto kontrola pravopisu môže zhromažďovať zadávaný text vrátane osobných údajov, ako sú napríklad heslá alebo čísla kreditných kariet. Je používaná aplikáciou <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Chcete povoliť túto kontrolu pravopisu?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Nastavenia"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Jazyk"</string>
@@ -2257,7 +2299,7 @@
     <string name="vision_settings_title" msgid="8919983801864103069">"Pre slabozrakých"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"Zariadenie môžete prispôsobiť, aby zodpovedalo vašim potrebám. Tieto funkcie dostupnosti môžete neskôr zmeniť v Nastaveniach."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Zmeniť veľkosť písma"</string>
-    <string name="screen_reader_category_title" msgid="6195867428854871553">"Čítačky obrazovky"</string>
+    <string name="screen_reader_category_title" msgid="5825700839731107803">"Čítačka obrazovky"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Titulky"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Zvuk"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Všeobecné"</string>
@@ -2286,7 +2328,7 @@
     <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Prepínanie medzi celou obrazovkou a jej časťou"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"Klepnutím na prepínač môžete prechádzať medzi oboma možnosťami"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"Chcete prepnúť na tlačidlo dostupnosti?"</string>
-    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Zväčšovanie častí obrazovky trojitým klepnutím môže spôsobiť rôzne oneskorenia, napríklad pri zadávaní textu.\n\nTlačidlo dostupnosti pláva na obrazovke nad ostatnými aplikáciami. Klepnite naň a obrazovka sa zväčší"</string>
+    <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Zväčšovanie častí obrazovky trojitým klepnutím môže spôsobiť rôzne oneskorenia, napríklad pri zadávaní textu.\n\nTlačidlo dostupnosti pláva na obrazovke nad ostatnými aplikáciami. Klepnite naň a obrazovka sa zväčší."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Prepnúť na tlačidlo dostupnosti"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Použiť trojité klepnutie"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Nastavenia priblíženia"</string>
@@ -2298,7 +2340,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Priblížte si obrazovku"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Na priblíženie trikrát klepnite"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Na priblíženie klepnite na tlačidlo"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8008175520087009922">"Ak chcete obsah obrazovky zväčšiť, použite rýchle priblíženie.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Postup priblíženia:&lt;/b&gt;&lt;br/&gt; 1. Skratkou spustite zväčšenie.&lt;br/&gt; 2. Klepnite na obrazovku.&lt;br/&gt; 3. Posúvajte sa po obrazovke presúvaním dvoch prstov.&lt;br/&gt; 4. Priblíženie upravíte stiahnutím dvoch prstov.&lt;br/&gt; 5. Skratkou zastavte zväčšenie.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Postup dočasného priblíženia:&lt;/b&gt;&lt;br/&gt; 1. Skratkou spustite zväčšenie.&lt;br/&gt; 2. Pridržte ľuboľovné miesto na obrazovke.&lt;br/&gt; 3. Posúvajte sa po obrazovke presúvaním prsta.&lt;br/&gt; 4. Zväčšenie zastavíte zdvihnutím prsta"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2527664482392097865">"Ak chcete obsah obrazovky zväčšiť, použite rýchle priblíženie.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Postup priblíženia:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Skratkou spustite zväčšenie.&lt;br/&gt; {1,number,integer}. Klepnite na obrazovku.&lt;br/&gt; {2,number,integer}. Posúvajte sa po obrazovke dvoma prstami.&lt;br/&gt; {3,number,integer}. Priblíženie upravte stiahnutím dvoch prstov.&lt;br/&gt; {4,number,integer}. Skratkou zastavte zväčšenie.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Postup dočasného priblíženia:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Skratkou spustite zväčšenie.&lt;br/&gt; {1,number,integer}. Pridržte ľubovoľné miesto na obrazovke.&lt;br/&gt; {2,number,integer}. Presúvaním prsta sa posúvajte po obrazovke.&lt;br/&gt; {3,number,integer}. Zväčšenie zastavte zdvihnutím prsta."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Keď je priblíženie zapnuté, môžete si zväčšiť obsah obrazovky.\n\n"<b>"Urobíte to tak"</b>", že spustíte priblíženie a klepnete kamkoľvek na obrazovku.\n"<ul><li>"Zobrazenie posuniete presunutím dvoch alebo viacerých prstov."</li>\n<li>"Priblíženie upravíte stiahnutím dvoch alebo viacerých prstov."</li></ul>\n\n<b>"Ak chcete obsah priblížiť krátkodobo"</b>", spustite priblíženie a pridržte ľubovoľné miesto na obrazovke.\n"<ul><li>"Po obrazovke prechádzate presunutím."</li>\n<li>"Oddialite zdvihnutím prsta."</li></ul>\n\n"Nemôžete priblížiť klávesnicu ani navigačný panel."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>. stránka z <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Otváranie tlačidlom dostupnosti"</string>
@@ -2324,13 +2366,13 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Potiahnite dvoma prstami z dolnej časti obrazovky nahor.\n\nFunkcie prepnete potiahnutím dvoma prstami smerom nahor a pridržaním."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Potiahnite troma prstami z dolnej časti obrazovky nahor.\n\nFunkcie prepnete potiahnutím troma prstami smerom nahor a pridržaním."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Prispôsobenie tlačidla dostupnosti"</annotation></string>
-    <string name="footer_learn_more" msgid="4912771050593810437"><annotation id="link">"Ďalšie informácie"</annotation></string>
+    <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Ďalšie informácie o funkcii <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Podržanie tlačidiel hlasitosti"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"podržanie tlačidiel hlasitosti"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="7866393664299375632">"Pridržte obe tlačidlá hlasitosti."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Pridržte obe tlačidlá hlasitosti"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Tri klepnutia na obrazovku"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"tri klepnutia na obrazovku"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="7490111169801144991">"Rýchlo trikrát klepnite na obrazovku. Táto skratka môže zariadenie spomaliť."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"{0,number,integer}‑krát rýchlo klepnite na obrazovku. Táto skratka môže zariadenie spomaliť."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Rozšírené"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Tlačidlo dostupnosti je nastavené na službu <xliff:g id="SERVICE">%1$s</xliff:g>. Ak chcete použiť priblíženie, klepnite na tlačidlo dostupnosti, podržte ho a potom vyberte priblíženie."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Gesto dostupnosti je nastavené na službu <xliff:g id="SERVICE">%1$s</xliff:g>. Ak chcete použiť priblíženie, potiahnite dvoma prstami nahor zo spodnej časti obrazovky a pridržte ich. Potom vyberte priblíženie."</string>
@@ -2610,6 +2652,7 @@
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Táto aplikácia vyžaduje spotrebu batérie v režime <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"bez obmedzení"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"optimalizované"</string>
+    <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"Ďalšie informácie o možnostiach spotreby batérie"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Využitie obrazovky od úplného nabitia"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Spotreba batérie od úplného nabitia"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Ako dlho bola zapnutá obrazovka od úplného dobitia"</string>
@@ -2633,7 +2676,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Čas prevádzky siete Wi‑Fi"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Spotreba batérie"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Podrobnosti histórie"</string>
-    <string name="advanced_battery_preference_title" msgid="6518802648205311326">"Zobraziť spotrebu batérie"</string>
+    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"Spotreba batérie"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Zobrazenie spotreby za posledných 24 h"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Využitie od posledného úplného dobitia"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Spotreba batérie"</string>
@@ -2651,11 +2694,12 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Zapnúť šetrič batérie"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Batéria sa môže minúť skôr ako obvykle"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Šetrič batérie je zapnutý"</string>
+    <string name="battery_saver_link_a11y" msgid="740558184830458845">"Ďalšie informácie o šetriči batérie"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Niektoré funkcie môžu byť obmedzené"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Vysoká spotreba batérie"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Prezrite si aplikácie s najvyššou spotrebou"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"Optimalizácia na zaistenie dobrého stavu batérie"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="4779491239398261377">"Batéria je dočasne obmedzená. Ďalšie informácie"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Nabíjanie je dočasne obmedzené"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Na šetrenie batérie. Ďalšie informácie"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefón sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Zariadenie sa používa viac ako obvykle. Batéria sa možno vybije skôr, ako sa očakávalo.\n\nAplikácie s najväčšou spotrebou batérie:"</string>
@@ -2725,8 +2769,9 @@
       <item quantity="one">%1$d obmedzená aplikácia</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
-    <string name="battery_missing_message" msgid="3513793247821256009">"Údaje o batérii sa nepodarilo aktualizovať"</string>
+    <string name="battery_missing_message" msgid="400958471814422770">"Pri čítaní merača batérie sa vyskytol problém."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
+    <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Klepnutím získate ďalšie informácie o tejto chybe"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Zastaviť aplikáciu?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Telefón nemôže normálne spravovať batériu, pretože aplikácia <xliff:g id="APP">%1$s</xliff:g> ho udržuje prebudený.\n\nTento problém môžete skúsiť vyriešiť tak, že aplikáciu zastavíte.\n\nAk sa to zopakuje, zrejme budete musieť aplikáciu odinštalovať, aby ste zlepšili výkonnosť batérie."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Tablet nemôže normálne spravovať batériu, pretože aplikácia <xliff:g id="APP">%1$s</xliff:g> ho udržuje prebudený.\n\nTento problém môžete skúsiť vyriešiť tak, že aplikáciu zastavíte.\n\nAk sa to zopakuje, zrejme budete musieť aplikáciu odinštalovať, aby ste zlepšili výkonnosť batérie."</string>
@@ -2854,13 +2899,13 @@
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Zapnúť automaticky"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Žiadny plán"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Podľa vášho bežného správania"</string>
-    <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"Zapne sa podľa vášho postupu"</string>
+    <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"Zapne sa podľa vášho správania"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Podľa percent"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Ak je pravdepodobné, že sa batéria pred opätovným pripojením do siete vybije, zapne sa šetrič batérie."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Zapne sa na úrovni <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Nastavenie plánu"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Predĺženie výdrže batérie"</string>
-    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Vypnúť pri nabití"</string>
+    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Vypnúť po nabití"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Šetrič batérie sa vypne, keď sa telefón nabije nad <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Šetrič batérie sa vypne, keď sa tablet nabije nad <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"Šetrič batérie sa vypne, keď sa zariadenie nabije nad <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
@@ -2874,7 +2919,7 @@
     <string name="battery_percentage" msgid="1779934245963043490">"Percentá batérie"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Zobrazovať percentá v stavovom riadku"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Úroveň batérie za posledných 24 hodín"</string>
-    <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Spotreba batérie aplikáciou za posledných 24 h"</string>
+    <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Spotreba batérie aplikáciami za posledných 24 h"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Spotreba batérie systémom za posledných 24 h"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Spotreba batérie systémom: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Spotreba batérie aplikáciou: <xliff:g id="SLOT">%s</xliff:g>"</string>
@@ -2884,7 +2929,8 @@
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Na pozadí: menej ako minúta"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Celkove: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Na pozadí: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Údaje o spotrebe batérie sú približné a počas nabíjania telefónu sa nezobrazujú"</string>
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Údaje o spotrebe batérie sú približné a počas nabíjania telefónu sa nemerajú"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Údaje o spotrebe batérie budú k dispozícii, keď budete telefón používať niekoľko hodín."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Graf spotreby batérie"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Štatistiky procesov"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Podrobné štatistiky spustených procesov"</string>
@@ -3121,7 +3167,7 @@
     <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"SIM karty"</string>
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Pozastavené na limite"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Autom. synchronizovať dáta"</string>
-    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Autom. synchr. osobných údajov"</string>
+    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Autom. synchr. osobné údaje"</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Autom. synchr. pracov. údajov"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Zmeniť cyklus..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Deň v mesiaci, kedy sa má resetovať cyklus spotreby:"</string>
@@ -3368,7 +3414,7 @@
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Použiť predvolenú aplikáciu"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Vždy"</string>
-    <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Okrem prípadov, keď je spustená iná platobná aplikácia"</string>
+    <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Iba keď nie je spustená iná platobná aplikácia"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"Pri bezkontaktnom termináli zaplatiť pomocou aplikácie:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Platenie pri termináli"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Nastavte si platobnú aplikáciu. Potom iba priložte zadnú časť svojho telefónu k akémukoľvek terminálu so symbolom pre bezkontaktné platby."</string>
@@ -3590,8 +3636,10 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"obrazovka, čas uzamknutia, časový limit, uzamknutá obrazovka"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"pamäť, vyrovnávacia pamäť, údaje, odstrániť, vymazať, voľné, miesto"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"pripojené, zariadenie, slúchadlá, slúchadlá s mikrofónom, reproduktor, bezdrôtové, párovať, slúchadlá do uší, hudba, médiá"</string>
-    <string name="keywords_wallpaper" msgid="6712776876474488023">"pozadie, obrazovka, uzamknutá obrazovka, motív"</string>
-    <string name="keywords_styles" msgid="6312134005271042434">"tvar ikony, zvýrazňujúca farba, písmo"</string>
+    <!-- no translation found for keywords_wallpaper (7332890404629446192) -->
+    <skip />
+    <!-- no translation found for keywords_styles (5291614313348476068) -->
+    <skip />
     <string name="keywords_assist_input" msgid="3086289530227075593">"predvolené, asistent"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"platby, predvolené"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"prichádzajúce upozornenie"</string>
@@ -3758,6 +3806,8 @@
     <string name="conversation_notifs_category" msgid="2549844862379963273">"Konverzácia"</string>
     <string name="recent_notifications" msgid="1105631022180160436">"Nedávno odoslané"</string>
     <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"Zobraziť všetko za posledných 7 dní"</string>
+    <string name="general_notification_header" msgid="8753065680483788531">"Všeobecné"</string>
+    <string name="app_notification_field" msgid="3858667320444612716">"Nastavenia aplikácie"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Všeobecné"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Pracovné upozornenia"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Prispôsobivé upozornenia"</string>
@@ -3820,7 +3870,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Blikať"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Ochrana súkromia"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Preskakovať uzamknutú obrazovku"</string>
-    <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Po odomknutí tvárou priamo prejsť na poslednú použitú obrazovku"</string>
+    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Po odomknutí prejdite priamo na naposledy použitú obrazovku"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Uzamknutá obrazovka, preskočiť, obísť"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Keď je prac. profil zamknutý"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Upozornenia na uzamknutej obrazovke"</string>
@@ -3870,6 +3920,7 @@
     <string name="other_conversations_summary" msgid="3487426787901236273">"Konverzácie, ktoré ste zmenili"</string>
     <string name="recent_conversations" msgid="471678228756995274">"Nedávne konverzácie"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Vymazať nedávne konverzácie"</string>
+    <string name="recent_convos_removed" msgid="2122932798895714203">"Nedávne konverzácie boli odstránené"</string>
     <string name="clear" msgid="5092178335409471100">"Vymazať"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Zobrazovať prioritné konverzácie v bublinách"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioritné konverzácie sa zobrazujú v hornej časti panela upozornení. Môžete tiež nastaviť, aby sa zobrazovali v bubline a prerušili režim bez vyrušení."</string>
@@ -3924,13 +3975,12 @@
       <item quantity="one">%d aplikácia dokáže čítať upozornenia</item>
     </plurals>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Zlepšené upozornenia"</string>
-    <string name="notification_assistant_summary" msgid="1957783114840908887">"Získavajte navrhované akcie, odpovede a ďalší obsah"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"Získavať navrhované akcie, odpovede a ďalší obsah"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Žiadne"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Prístup k upozorneniam si nevyžiadali žiadne nainštalované aplikácie"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Povoliť prístup k upozorneniam"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Povoliť službe <xliff:g id="SERVICE">%1$s</xliff:g> prístup k upozorneniam?"</string>
-    <!-- no translation found for notification_assistant_security_warning_summary (4846559755787348129) -->
-    <skip />
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Adaptívne upozornenia Androidu boli v Androide 12 nahradené zlepšenými upozorneniami. Táto funkcia zobrazuje navrhované akcie aj odpovede a organizuje vaše upozornenia. \n\nZlepšené upozornenia majú prístup k obsahu upozornení vrátane osobných údajov, ako sú mená kontaktov a správy. Táto funkcia tiež môže zavrieť upozornenia alebo na ne reagovať, napríklad prijať telefonáty a ovládať režim bez vyrušení."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Povoliť prístup k upozorneniam pre službu <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"Aplikácia <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude môcť čítať všetky upozornenia vrátane osobných údajov, ako sú mená kontaktov a texty prijatých správ. Bude môcť tiež zrušiť upozornenia alebo spustiť v nich obsiahnuté tlačidlá spúšťajúce akcie vrátane prijatia telefonického hovoru. \n\nAplikácia tým získa aj možnosť vypnúť alebo zapnúť režim bez vyrušení a meniť súvisiace nastavenia."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ak vypnete prístup k upozorneniam pre aplikáciu <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, môžete tým vypnúť aj prístup k režimu bez vyrušení."</string>
@@ -3973,10 +4023,10 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Prepojené"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Prepojiť tieto aplikácie"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Prepojené aplikácie zdieľajú povolenia a majú vzájomný prístup k svojim údajom."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Pripojte iba tie aplikácie, ktorým dôverujete, že nebudú zdieľať osobné údaje s vaším správcom IT."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Prepojte iba tie aplikácie, ktorým dôverujete, že nebudú zdieľať osobné údaje s vaším správcom IT."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Aplikácie môžete kedykoľvek odpojiť v nastaveniach ochrany súkromia zariadenia."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Povolíte pracovnej aplikácii <xliff:g id="NAME">%1$s</xliff:g> prístup k svojim osobným údajom?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Pripojte iba tie aplikácie, ktorým dôverujete, že nebudú zdieľať osobné údaje s vaším správcom IT."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Prepojte iba tie aplikácie, ktorým dôverujete, že nebudú zdieľať osobné údaje s vaším správcom IT."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Dáta aplikácií"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Táto aplikácia má prístup k dátam osobnej aplikácie <xliff:g id="NAME">%1$s</xliff:g>."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Povolenia"</string>
@@ -3988,14 +4038,14 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> prepojených aplikácií</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> prepojená aplikácia</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Ak chcete tieto aplikácie pripojiť, nainštalujte aplikáciu <xliff:g id="NAME">%1$s</xliff:g> vo svojom pracovnom profile"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Ak chcete tieto aplikácie pripojiť, nainštalujte aplikáciu <xliff:g id="NAME">%1$s</xliff:g> vo svojom osobnom profile"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Ak chcete tieto aplikácie prepojiť, nainštalujte aplikáciu <xliff:g id="NAME">%1$s</xliff:g> vo svojom pracovnom profile"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Ak chcete tieto aplikácie prepojiť, nainštalujte aplikáciu <xliff:g id="NAME">%1$s</xliff:g> vo svojom osobnom profile"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Klepnutím získate aplikáciu"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Prístup k režimu bez vyrušení"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Povoliť režim bez vyrušení"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Prístup k režimu bez vyrušení si nevyžiadali žiadne nainštalované aplikácie"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Načítavajú sa aplikácie…"</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Upozornenia z tejto aplikácie sú v zariadení na vašu žiadosť blokované Androidom"</string>
+    <string name="app_notifications_off_desc" msgid="6691342160980435901">"Upozornenia z tejto aplikácie na vašu žiadosť v tomto zariadení blokuje Android"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Táto kategória upozornení je v zariadení na vašu žiadosť blokovaná Androidom"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Táto skupina upozornení je v zariadení na vašu žiadosť blokovaná Androidom"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Kategórie"</string>
@@ -4202,7 +4252,7 @@
     <string name="warning_button_text" msgid="1274234338874005639">"Upozornenie"</string>
     <string name="suggestion_button_text" msgid="4370673818678692873">"OK"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Zavrieť"</string>
-    <string name="device_feedback" msgid="5351614458411688608">"Spätná väzba o zariadení"</string>
+    <string name="device_feedback" msgid="5351614458411688608">"Odoslať spätnú väzbu o zariadení"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Zadajte PIN správcu"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Zapnuté"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Vypnuté"</string>
@@ -4258,7 +4308,7 @@
     <string name="app_launch_open_domain_urls_summary" msgid="3609156836041234957">"Otvárať bez opýtania"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Podporované odkazy"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Ďalšie predvolené predvoľby"</string>
-    <string name="app_launch_add_link" msgid="8622558044530305811">"Pridanie odkazu"</string>
+    <string name="app_launch_add_link" msgid="8622558044530305811">"Pridať odkaz"</string>
     <string name="app_launch_footer" msgid="2294418640866849774">"Aplikácia môže overiť odkazy, aby sa v nej automaticky otvárali. "<annotation id="url">"Ďalšie informácie"</annotation></string>
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> overené odkazy</item>
@@ -4329,9 +4379,9 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Neboli udelené žiadne povolenia"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Neboli požadované žiadne povolenia"</string>
-    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Ovládať prístup aplikácií k údajom"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Ovládajte prístup aplikácií k údajom"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Panel na ochranu súkromia"</string>
-    <string name="permissions_usage_summary" msgid="6784310472062516454">"Pozrite sa, ktoré aplikácie nedávno použili povolenia"</string>
+    <string name="permissions_usage_summary" msgid="6784310472062516454">"Zobraziť, ktoré aplikácie nedávno použili povolenia"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Nepoužívané aplikácie"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> nepoužívané aplikácie</item>
@@ -4434,9 +4484,9 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Nepoužívajte optimalizáciu batérie. Môže rýchlejšie vybiť vašu batériu."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Povoliť aplikácii neustále spustenie na pozadí?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Ak povolíte aplikácii <xliff:g id="APP_NAME">%1$s</xliff:g> neustále bežať na pozadí, môže to skrátiť výdrž batérie. \n\nMôžete to zmeniť neskôr v časti Nastavenia &gt; Aplikácie a upozornenia."</string>
-    <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> využitie od posledného úplného dobitia"</string>
+    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> použitie v posledných 24 hodinách"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Správa napájania"</string>
-    <string name="no_battery_summary" msgid="5769159953384122003">"Žiadne využitie batérie od posledného úplného dobitia"</string>
+    <string name="no_battery_summary" msgid="5664437398071394961">"V posledných 24 hodinách nebola batéria používaná"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Nastavenia aplikácie"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Zobraziť tuner SystemUI"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Ďalšie povolenia"</string>
@@ -4532,7 +4582,7 @@
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Povoliť zobrazenie cez iné aplikácie"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Umožní tejto aplikácii zobrazovať sa nad inými aplikáciami, ktoré používate. Táto aplikácia bude vidieť, kde klepnete, a môcť zmeniť obsah na obrazovke."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Prístup k všetkým súborom"</string>
-    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Povoľte prístup na správu všetkých súborov"</string>
+    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Povoliť prístup na správu všetkých súborov"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Povoľte tejto aplikácii čítať, upravovať a odstraňovať všetky súbory v tomto zariadení alebo akýchkoľvek pripojených úložiskách. Po udelení tohto povolenia bude môcť aplikácia používať súbory bez vášho vedomia."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Má prístup k všetkým súborom"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikácie na správu médií"</string>
@@ -4603,17 +4653,12 @@
     <string name="backup_disabled" msgid="4503062265560959320">"Zálohovanie je zakázané"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Aktualizované na Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"K dispozícii je aktualizácia"</string>
-    <!-- no translation found for disabled_by_policy_title (3635622338687810583) -->
-    <skip />
+    <string name="disabled_by_policy_title" msgid="3635622338687810583">"Blokované vaším správcom IT"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Hlasitosť sa nedá zmeniť"</string>
-    <!-- no translation found for disabled_by_policy_title_outgoing_calls (400089720689494562) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_sms (8951840850778406831) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_camera (6616508876399613773) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_title_screen_capture (6085100101044105811) -->
-    <skip />
+    <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"Nedá sa volať"</string>
+    <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"Nedajú sa posielať správy SMS"</string>
+    <string name="disabled_by_policy_title_camera" msgid="6616508876399613773">"Fotoaparát nie je možné použiť"</string>
+    <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Nedajú sa vytvárať snímky obrazovky"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Táto aplikácia sa nedá otvoriť"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blokované vaším poskytovateľom úveru"</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Ak máte nejaké otázky, obráťte sa na svojho správcu IT"</string>
@@ -4825,6 +4870,7 @@
     <string name="dark_ui_mode" msgid="898146394425795281">"Tmavý motív"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Dočasne vypnuté šetričom batérie"</string>
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Dočasne vypnuté šetričom batérie"</string>
+    <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Vypnúť šetrič batérie"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Dočasne zapnuté šetričom batérie"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Na tmavý motív sa prepnú aj podporované aplikácie"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Dobre"</string>
@@ -4890,6 +4936,9 @@
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigácia v systéme, navigácia dvoma tlačidlami, navigácia troma tlačidlami, navigácia gestami, potiahnutie"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Predvolená vstupná aplikácia <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> túto funkciu nepodporuje"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Prepnúť predvolenú vstupnú aplikáciu"</string>
+    <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitálny asistent"</string>
+    <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Aktivujte asistenta potiahnutím"</string>
+    <string name="assistant_corner_gesture_summary" msgid="557878830400236167">"Aktivujte aplikáciu digitálneho asistenta potiahnutím nahor z dolného rohu"</string>
     <string name="information_label" msgid="6939310810756569298">"Informácie"</string>
     <string name="low_label" msgid="6525629096999711220">"Nízka"</string>
     <string name="high_label" msgid="357503396626018487">"Vysoká"</string>
@@ -4902,7 +4951,7 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Kontrola telefónu dvojitým klepnutím"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tablet skontrolujete dvojitým klepnutím"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Zariadenie skontrolujete dvojitým klepnutím"</string>
-    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Zobraziť upozornenia prejdením prstom"</string>
+    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Zobraziť upozornenia potiahnutím prstom"</string>
     <string name="swipe_bottom_to_notifications_summary" msgid="5222014960019273801">"Upozornenia zobrazíte potiahnutím pri dolnom okraji obrazovky smerom nadol.\nKeď je táto funkcia zapnutá, nemôžete používať režim jednej ruky."</string>
     <string name="one_handed_title" msgid="1741600445540072513">"Režim jednej ruky"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Použiť režim jednej ruky"</string>
@@ -4920,10 +4969,10 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Ak chcete zistiť čas, skontrolovať upozornenia a získať ďalšie informácie, zdvihnite telefón."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Ak chcete zistiť čas, skontrolovať upozornenia a získať ďalšie informácie, zdvihnite tablet."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Ak chcete zistiť čas, skontrolovať upozornenia a získať ďalšie informácie, zdvihnite zariadenie."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Kontrola telefónu klepnutím"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Kontrolovať telefón klepnutím"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Klepnutím skontrolujete tablet"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Klepnutím skontrolujete zariadenie"</string>
-    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Ak chcete zistiť čas, skontrolovať upozornenia a získať ďalšie informácie, klepnite na obrazovku."</string>
+    <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Zobraziť čas, kontrolovať upozornenia a získať ďalšie informácie klepnutím na obrazovku"</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Pomoc v tiesni"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Používať pomoc v tiesni"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Spravované aplikáciou <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5057,8 +5106,7 @@
     </plurals>
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
-    <!-- no translation found for storage_default_internal_storage (4055660218818688131) -->
-    <skip />
+    <string name="storage_default_internal_storage" msgid="4055660218818688131">"Toto zariadenie"</string>
     <string name="storage_photos_videos" msgid="6926197783745481869">"Fotky a videá"</string>
     <string name="storage_music_audio" msgid="1185624135490182822">"Hudba a zvuk"</string>
     <string name="storage_games" msgid="1176568610086802469">"Hry"</string>
@@ -5066,8 +5114,7 @@
     <string name="storage_files" msgid="7968460921272772299">"Súbory"</string>
     <string name="storage_images" msgid="2055893015567979387">"Obrázky"</string>
     <string name="storage_videos" msgid="6117698226447251033">"Videá"</string>
-    <!-- no translation found for storage_audio (5994664984472140386) -->
-    <skip />
+    <string name="storage_audio" msgid="5994664984472140386">"Zvuk"</string>
     <string name="storage_apps" msgid="3564291603258795216">"Aplikácie"</string>
     <string name="storage_documents_and_other" msgid="3293689243732236480">"Dokumenty a iné"</string>
     <string name="storage_system" msgid="8472410119822911844">"Systém"</string>
@@ -5101,7 +5148,7 @@
     <string name="debug_autofill_category" msgid="5998163555428196185">"Automatické dopĺňanie"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Úroveň zaznamenávania"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"Maximum žiadostí na reláciu"</string>
-    <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Maximum viditeľných množín dát"</string>
+    <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Maximum viditeľných množín údajov"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Resetovať na predvolené hodnoty"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Možnosti automatického dopĺňania pre vývojárov boli obnovené"</string>
     <string name="location_category" msgid="3496759112306219062">"Miesto"</string>
@@ -5182,7 +5229,7 @@
     <string name="battery_suggestion_title" product="device" msgid="2280773774080720377">"Predĺženie výdrže batérie zariadenia"</string>
     <string name="battery_suggestion_title" product="default" msgid="4811554469047272537">"Predĺženie výdrže batérie telefónu"</string>
     <string name="battery_suggestion_summary" msgid="8186720080540016197"></string>
-    <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"Vypnutie zvonenia"</string>
+    <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"Vypnúť zvonenie"</string>
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"Súčasné stlačenie vypínača a tlačidla zvýšenia hlasitosti umožní:"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"Skratka na vypnutie zvonenia"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrovať"</string>
@@ -5401,9 +5448,7 @@
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Povoliť v režime viac. okien aplik. bez možn. zmeny veľkosti"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Povoliť v režime viacerých okien aplikácie bez možnosti zmeny veľkosti"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Presadiť tmavý režim"</string>
-    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Presadí, aby bol tmavý režim vždy zapnutý"</string>
-    <string name="enable_blurs_on_windows_title" msgid="4218144213800778872">"Aktivovať rozmazania"</string>
-    <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Aktivuje rozmazanie okna na úrovni skladania. Vyžaduje sa reštartovanie zariadenia."</string>
+    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Presadiť, aby bol tmavý režim vždy zapnutý"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Ochrana súkromia"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Povolenia, aktivita účtu, osobné údaje"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Odstrániť"</string>
@@ -5496,16 +5541,16 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Keď použijete dve SIM karty, tento telefón bude obmedzený na 4G. "<annotation id="url">"Ďalšie informácie"</annotation></string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Keď použijete dve SIM karty, tento tablet bude obmedzený na 4G. "<annotation id="url">"Ďalšie informácie"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Keď použijete dve SIM karty, toto zariadenie bude obmedzené na 4G. "<annotation id="url">"Ďalšie informácie"</annotation></string>
-    <string name="cached_apps_freezer" msgid="1057519579761550350">"Pozastavenie spúšťania aplikácií z vyrovnávacej pamäte"</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"Pozastaviť spúšťanie aplikácií z vyrovnávacej pamäte"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Povoliť prekrývajúce prvky v Nastaveniach"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Povoliť aplikáciám, ktoré sa môžu zobraziť cez iné aplikácie, prekrývanie obrazoviek Nastavení"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Médiá"</string>
-    <string name="media_controls_summary" msgid="3573121049460596520">"Prehrávač médií v rýchlych nastaveniach"</string>
-    <string name="media_controls_resume_description" msgid="7702723104730495227">"Zobrazovať prehrávač médií dlhšie, aby bolo možné ľahko obnoviť prehrávanie"</string>
+    <string name="media_controls_resume_title" msgid="855076860336652370">"Pripnúť prehrávač médií"</string>
+    <string name="media_controls_resume_description" msgid="3163482266454802097">"Prehrávač médií zostane otvorený v rýchlych nastaveniach, aby bolo možné rýchlo obnoviť prehrávanie"</string>
+    <string name="media_controls_recommendations_title" msgid="184225835236807677">"Zobrazovať odporúčania médií"</string>
+    <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Na základe vašej aktivity"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skryť prehrávač"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Zobraziť prehrávač"</string>
-    <string name="media_controls_no_players" msgid="3493023121892175946">"K dispozícii nie sú žiadne prehrávače"</string>
-    <string name="media_controls_apps_title" msgid="9129092193224838008">"Povolené aplikácie"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"médiá"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Zapne sa Bluetooth"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Zapnuté"</string>
@@ -5530,6 +5575,7 @@
     <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Pripájať k verejným sieťam"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"pripojenie k sieti, internet, bezdrôtové, dátové, wifi, wi-fi, wi fi, mobilné, mobilný operátor, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"Zapnúť Wi‑Fi"</string>
+    <string name="turn_off_wifi" msgid="8861028501067400694">"Vypnúť Wi-Fi"</string>
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Chcete internet resetovať?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Týmto ukončíte telefonický hovor"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Týmto ukončíte telefonický hovor"</string>
@@ -5537,12 +5583,19 @@
     <string name="fix_connectivity" msgid="2781433603228089501">"Odstrániť problém s pripojením"</string>
     <string name="networks_available" msgid="3299512933684383474">"Siete sú k dispozícii"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Ak chcete prepnúť siete, odpojte ethernet"</string>
-    <string name="wifi_is_turned_on_subtitle" msgid="4222869018808845600">"Sieť Wi‑Fi je zapnutá"</string>
-    <!-- no translation found for select_network_to_connect_internet (9209492728618372579) -->
-    <skip />
+    <string name="wifi_is_off" msgid="8308136482502734453">"Pripojenie Wi‑Fi je vypnuté"</string>
+    <string name="tap_a_network_to_connect" msgid="8044777400224037875">"Ak sa chcete pripojiť, klepnite na sieť"</string>
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"Pripojenia W+"</string>
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Umožnite službe Google Fi zlepšovať rýchlosť a silu signálu pomocou sietí W+"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Sieť W+"</string>
+    <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
+    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"STIAHNUTÁ SIM KARTA"</string>
+    <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktívna"</string>
+    <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Neaktívna"</string>
+    <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Predvolené pre <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="default_active_sim_calls" msgid="2390973682556353558">"hovory"</string>
+    <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
+    <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobilné dáta"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Pripojené"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Bez pripojenia"</string>
@@ -5567,9 +5620,9 @@
     <string name="category_name_general" msgid="7737273712848115886">"Všeobecné"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Použiť tmavý motív"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Použiť Bluetooth"</string>
-    <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Blokovať zvonenie"</string>
+    <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"vypnúť zvonenie"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Používať hotspot Wi‑Fi"</string>
-    <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Používanie pripínania aplikácií"</string>
+    <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Používať pripnutie aplikácie"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Používať nastavenia pre vývojárov"</string>
     <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"Používať predvolenú tlačovú službu"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Používať viacerých používateľov"</string>
@@ -5601,20 +5654,35 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Povoliť 2G"</string>
     <string name="enable_2g_summary" msgid="906487478332145407">"Použite mobilné pripojenie 2G. Pre tiesňové volania je 2G stále zapnuté."</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Zobraziť prístup k schránke"</string>
-    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Zobraziť správu, keď aplikácie použijú text, obrázky alebo iný obsah, ktorý ste skopírovali"</string>
+    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Zobraziť správu, keď aplikácie pristúpia k textu, obrázkom alebo inému obsahu, ktorý ste skopírovali"</string>
     <string name="all_apps" msgid="3054120149509114789">"Všetky aplikácie"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Nepovoliť"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"Ultra-Wideband (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Pomáha zistiť relatívnu pozíciu zariadení v okolí, ktoré majú UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Ak chcete používať UWB, vypnite režim v lietadle"</string>
-    <!-- no translation found for camera_toggle_title (8952668677727244992) -->
+    <string name="camera_toggle_title" msgid="8952668677727244992">"Prístup k fotoaparátu"</string>
+    <string name="mic_toggle_title" msgid="265145278323852547">"Prístup k mikrofónu"</string>
+    <string name="sensor_toggle_description" msgid="8248823248606795411">"Pre všetky aplikácie a služby"</string>
+    <string name="game_settings_title" msgid="1028178627743422090">"Nastavenia hier"</string>
+    <string name="game_settings_summary" msgid="2548056479103747555">"Zapnutie odkazu na hernom paneli a podobne"</string>
+    <!-- no translation found for bluetooth_sim_card_access_notification_title (5217037846900908318) -->
     <skip />
-    <!-- no translation found for mic_toggle_title (265145278323852547) -->
+    <!-- no translation found for bluetooth_sim_card_access_notification_content (6759306429895300286) -->
     <skip />
-    <!-- no translation found for sensor_toggle_description (8248823248606795411) -->
+    <!-- no translation found for bluetooth_sim_card_access_dialog_title (4486768729352090174) -->
     <skip />
-    <!-- no translation found for game_settings_title (1028178627743422090) -->
+    <!-- no translation found for bluetooth_sim_card_access_dialog_content (4153857191661567190) -->
     <skip />
-    <!-- no translation found for game_settings_summary (2548056479103747555) -->
+    <!-- no translation found for bluetooth_connect_access_notification_title (2573547043170883947) -->
+    <skip />
+    <!-- no translation found for bluetooth_connect_access_notification_content (1328465545685433304) -->
+    <skip />
+    <!-- no translation found for bluetooth_connect_access_dialog_title (1948056782712451381) -->
+    <skip />
+    <!-- no translation found for bluetooth_connect_access_dialog_content (4336436466468405850) -->
+    <skip />
+    <!-- no translation found for bluetooth_connect_access_dialog_negative (4944672755226375059) -->
+    <skip />
+    <!-- no translation found for bluetooth_connect_access_dialog_positive (3630561675207269710) -->
     <skip />
 </resources>

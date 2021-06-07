@@ -62,14 +62,18 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="20sp"/>
+                    android:textSize="24sp"
+                    android:fontFamily="sans-serif-reqular"/>
 
                 <TextView
                     android:id="@+id/header_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1"/>
+                    android:maxLines="1"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-reqular" />
             </LinearLayout>
         </LinearLayout>
 

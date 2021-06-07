@@ -39,6 +39,8 @@ public class BatteryDiffEntry {
     static Locale sCurrentLocale = null;
     // Caches app label and icon to improve loading performance.
     static final Map<String, BatteryEntry.NameAndIcon> sResourceCache = new HashMap<>();
+    // Whether a specific item is valid to launch restriction page?
+    static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
 
     /** A comparator for {@link BatteryDiffEntry} based on consumed percentage. */
     public static final Comparator<BatteryDiffEntry> COMPARATOR =
@@ -60,6 +62,7 @@ public class BatteryDiffEntry {
     @VisibleForTesting String mAppLabel = null;
     @VisibleForTesting Drawable mAppIcon = null;
     @VisibleForTesting boolean mIsLoaded = false;
+    @VisibleForTesting boolean mValidForRestriction = true;
 
     public BatteryDiffEntry(
             Context context,
@@ -73,11 +76,6 @@ public class BatteryDiffEntry {
         mBackgroundUsageTimeInMs = backgroundUsageTimeInMs;
         mBatteryHistEntry = batteryHistEntry;
         mUserManager = context.getSystemService(UserManager.class);
-        if (foregroundUsageTimeInMs == 0
-                && backgroundUsageTimeInMs == 0
-                && consumePower != 0) {
-            Log.w(TAG, "abnornal BatteryDiffEntry:\n" + this);
-        }
     }
 
     /** Sets the total consumed power in a specific time slot. */
@@ -125,8 +123,22 @@ public class BatteryDiffEntry {
 
     /** Gets the searching package name for UID battery type. */
     public String getPackageName() {
-        return mDefaultPackageName != null
+        final String packageName = mDefaultPackageName != null
             ? mDefaultPackageName : mBatteryHistEntry.mPackageName;
+        if (packageName == null) {
+            return packageName;
+        }
+        // Removes potential appended process name in the PackageName.
+        // From "com.opera.browser:privileged_process0" to "com.opera.browser"
+        final String[] splittedPackageNames = packageName.split(":");
+        return splittedPackageNames != null && splittedPackageNames.length > 0
+            ? splittedPackageNames[0] : packageName;
+    }
+
+    /** Whether this item is valid for users to launch restriction page? */
+    public boolean validForRestriction() {
+        loadLabelAndIcon();
+        return mValidForRestriction;
     }
 
     /** Whether the current BatteryDiffEntry is system component or not. */
@@ -146,7 +158,27 @@ public class BatteryDiffEntry {
         if (mIsLoaded) {
             return;
         }
+        // Checks whether we have cached data or not first before fetching.
+        final BatteryEntry.NameAndIcon nameAndIcon = getCache();
+        if (nameAndIcon != null) {
+            mAppLabel = nameAndIcon.name;
+            mAppIcon = nameAndIcon.icon;
+            mAppIconId = nameAndIcon.iconId;
+        }
+        final Boolean validForRestriction = sValidForRestriction.get(getKey());
+        if (validForRestriction != null) {
+            mValidForRestriction = validForRestriction;
+        }
+        // Both nameAndIcon and restriction configuration have cached data.
+        if (nameAndIcon != null && validForRestriction != null) {
+            return;
+        }
         mIsLoaded = true;
+
+        // Configures whether we can launch restriction page or not.
+        updateRestrictionFlagState();
+        sValidForRestriction.put(getKey(), Boolean.valueOf(mValidForRestriction));
+
         // Loads application icon and label based on consumer type.
         switch (mBatteryHistEntry.mConsumerType) {
             case ConvertUtils.CONSUMER_TYPE_USER_BATTERY:
@@ -156,6 +188,9 @@ public class BatteryDiffEntry {
                 if (nameAndIconForUser != null) {
                     mAppIcon = nameAndIconForUser.icon;
                     mAppLabel = nameAndIconForUser.name;
+                    sResourceCache.put(
+                        getKey(),
+                        new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, /*iconId=*/ 0));
                 }
                 break;
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
@@ -168,15 +203,12 @@ public class BatteryDiffEntry {
                         mAppIconId = nameAndIconForSystem.iconId;
                         mAppIcon = mContext.getDrawable(nameAndIconForSystem.iconId);
                     }
+                    sResourceCache.put(
+                        getKey(),
+                        new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, mAppIconId));
                 }
                 break;
             case ConvertUtils.CONSUMER_TYPE_UID_BATTERY:
-                final BatteryEntry.NameAndIcon nameAndIcon = getCache();
-                if (nameAndIcon != null) {
-                    mAppLabel = nameAndIcon.name;
-                    mAppIcon = nameAndIcon.icon;
-                    break;
-                }
                 loadNameAndIconForUid();
                 // Uses application default icon if we cannot find it from package.
                 if (mAppIcon == null) {
@@ -186,10 +218,44 @@ public class BatteryDiffEntry {
                 mAppIcon = getBadgeIconForUser(mAppIcon);
                 if (mAppLabel != null || mAppIcon != null) {
                     sResourceCache.put(
-                        mBatteryHistEntry.getKey(),
+                        getKey(),
                         new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, /*iconId=*/ 0));
                 }
                 break;
+        }
+    }
+
+    @VisibleForTesting
+    String getKey() {
+        return mBatteryHistEntry.getKey();
+    }
+
+    @VisibleForTesting
+    void updateRestrictionFlagState() {
+        mValidForRestriction = true;
+        if (!mBatteryHistEntry.isAppEntry()) {
+            return;
+        }
+        final boolean isValidPackage =
+                BatteryUtils.getInstance(mContext).getPackageUid(getPackageName())
+            != BatteryUtils.UID_NULL;
+        if (!isValidPackage) {
+            mValidForRestriction = false;
+            return;
+        }
+        try {
+            mValidForRestriction =
+                mContext.getPackageManager().getPackageInfo(
+                    getPackageName(),
+                    PackageManager.MATCH_DISABLED_COMPONENTS
+                        | PackageManager.MATCH_ANY_USER
+                        | PackageManager.GET_SIGNATURES
+                        | PackageManager.GET_PERMISSIONS)
+                != null;
+        } catch (Exception e) {
+            Log.e(TAG, String.format("getPackageInfo() error %s for package=%s",
+                e.getCause(), getPackageName()));
+            mValidForRestriction = false;
         }
     }
 
@@ -201,11 +267,11 @@ public class BatteryDiffEntry {
             sCurrentLocale = locale;
             clearCache();
         }
-        return sResourceCache.get(mBatteryHistEntry.getKey());
+        return sResourceCache.get(getKey());
     }
 
     private void loadNameAndIconForUid() {
-        final String packageName = mBatteryHistEntry.mPackageName;
+        final String packageName = getPackageName();
         final PackageManager packageManager = mContext.getPackageManager();
         // Gets the application label from PackageManager.
         if (packageName != null && packageName.length() != 0) {
@@ -258,7 +324,8 @@ public class BatteryDiffEntry {
     public String toString() {
         final StringBuilder builder = new StringBuilder()
             .append("BatteryDiffEntry{")
-            .append("\n\tname=" + mAppLabel)
+            .append(String.format("\n\tname=%s restrictable=%b",
+                  mAppLabel, mValidForRestriction))
             .append(String.format("\n\tconsume=%.2f%% %f/%f",
                   mPercentOfTotal, mConsumePower, mTotalConsumePower))
             .append(String.format("\n\tforeground:%s background:%s",
@@ -266,14 +333,15 @@ public class BatteryDiffEntry {
                       /*withSeconds=*/ true, /*collapseTimeUnit=*/ false),
                   StringUtil.formatElapsedTime(mContext, mBackgroundUsageTimeInMs,
                       /*withSeconds=*/ true, /*collapseTimeUnit=*/ false)))
-            .append(String.format("\n\tpackage:%s uid:%d userId:%d",
-                  mBatteryHistEntry.mPackageName, mBatteryHistEntry.mUid,
-                  mBatteryHistEntry.mUserId));
+            .append(String.format("\n\tpackage:%s|%s uid:%d userId:%d",
+                  mBatteryHistEntry.mPackageName, getPackageName(),
+                  mBatteryHistEntry.mUid, mBatteryHistEntry.mUserId));
         return builder.toString();
     }
 
     static void clearCache() {
         sResourceCache.clear();
+        sValidForRestriction.clear();
     }
 
     private Drawable getBadgeIconForUser(Drawable icon) {

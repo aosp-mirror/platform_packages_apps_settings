@@ -416,8 +416,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onResume() {
-        final Activity activity = getActivity();
         super.onResume();
+
+        // Disable the animation of the preference list
+        final RecyclerView prefListView = getListView();
+        if (prefListView != null) {
+            prefListView.setItemAnimator(null);
+        }
 
         // Because RestrictedSettingsFragment's onResume potentially requests authorization,
         // which changes the restriction state, recalculate it.

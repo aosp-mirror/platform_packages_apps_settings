@@ -110,7 +110,6 @@ import androidx.preference.PreferenceGroup;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -160,6 +159,10 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /** Whether or not app hibernation is enabled on the device **/
     public static final String PROPERTY_APP_HIBERNATION_ENABLED = "app_hibernation_enabled";
+
+    /** Whether or not app hibernation targets apps that target a pre-S SDK **/
+    public static final String PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS =
+            "app_hibernation_targets_pre_s_apps";
 
     /** Whether or not Settings Shared Axis transition is enabled */
     public static final String SETTINGS_SHARED_AXIS_ENABLED = "settings_shared_axis_enabled";
@@ -1216,7 +1219,7 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     @ColorInt
     public static int getHomepageIconColor(Context context) {
-        return getColorAttrDefaultColor(context, android.R.attr.textColorPrimary);
+        return getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
     }
 
     public static boolean isProviderModelEnabled(Context context) {
@@ -1224,10 +1227,7 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     public static boolean isPageTransitionEnabled(Context context) {
-        final boolean isSilkyHome = FeatureFlagUtils.isEnabled(context, FeatureFlags.SILKY_HOME);
-        final boolean isTransitionEnabled = Settings.Global.getInt(context.getContentResolver(),
+        return Settings.Global.getInt(context.getContentResolver(),
                 SETTINGS_SHARED_AXIS_ENABLED, 0) == 1;
-
-        return isSilkyHome && isTransitionEnabled;
     }
 }

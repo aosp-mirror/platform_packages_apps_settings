@@ -37,6 +37,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +50,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
 public class SubSettingLauncherTest {
 
     @Mock
@@ -97,6 +97,7 @@ public class SubSettingLauncherTest {
                 .setDestination(SubSettingLauncherTest.class.getName())
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .setSourceMetricsCategory(123)
+                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
                 .launch();
         doNothing().when(launcher).launch(any(Intent.class));
         verify(launcher).launch(intentArgumentCaptor.capture());
@@ -109,11 +110,12 @@ public class SubSettingLauncherTest {
         assertThat(intent.getFlags()).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK);
         assertThat(intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, -1))
                 .isEqualTo(123);
+        assertThat(intent.getIntExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE, -1))
+                .isEqualTo(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
     }
 
     @Test
     public void launch_hasRequestListener_shouldStartActivityForResult() {
-        ShadowUtils.setIsPageTransitionEnabled(true);
         final int requestCode = 123123;
         when(mFragment.getActivity()).thenReturn(mActivity);
 

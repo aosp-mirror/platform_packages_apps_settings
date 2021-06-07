@@ -17,23 +17,19 @@
 package com.android.settings.core;
 
 import android.annotation.StringRes;
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
-import android.widget.Toolbar;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
-import com.android.settings.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 
 public class SubSettingLauncher {
 
@@ -47,6 +43,7 @@ public class SubSettingLauncher {
         }
         mContext = context;
         mLaunchRequest = new LaunchRequest();
+        mLaunchRequest.transitionType = TransitionType.TRANSITION_SHARED_AXIS;
     }
 
     public SubSettingLauncher setDestination(String fragmentName) {
@@ -120,6 +117,11 @@ public class SubSettingLauncher {
         return this;
     }
 
+    public SubSettingLauncher setTransitionType(int transitionType) {
+        mLaunchRequest.transitionType = transitionType;
+        return this;
+    }
+
     public void launch() {
         if (mLaunched) {
             throw new IllegalStateException(
@@ -166,6 +168,9 @@ public class SubSettingLauncher {
                 mLaunchRequest.titleResId);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, mLaunchRequest.title);
         intent.addFlags(mLaunchRequest.flags);
+        intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
+                mLaunchRequest.transitionType);
+
         return intent;
     }
 
@@ -189,14 +194,6 @@ public class SubSettingLauncher {
 
     @VisibleForTesting
     void launchForResult(Fragment listener, Intent intent, int requestCode) {
-        if (Utils.isPageTransitionEnabled(mContext)) {
-            final Activity activity = listener.getActivity();
-            final Toolbar toolbar = activity.findViewById(R.id.action_bar);
-            final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity, toolbar,
-                    "shared_element_view").toBundle();
-            listener.startActivityForResult(intent, requestCode, bundle);
-            return;
-        }
         listener.startActivityForResult(intent, requestCode);
     }
 
@@ -219,6 +216,7 @@ public class SubSettingLauncher {
         Fragment mResultListener;
         int mRequestCode;
         UserHandle userHandle;
+        int transitionType;
         Bundle arguments;
         Bundle extras;
     }

@@ -17,7 +17,6 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
@@ -25,7 +24,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.utils.FileSizeFormatter;
+import com.android.settings.deviceinfo.storage.StorageUtils;
 
 public class StorageItemPreference extends Preference {
     public int userHandle;
@@ -44,17 +43,12 @@ public class StorageItemPreference extends Preference {
     public StorageItemPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.storage_item);
-        setSummary(R.string.memory_calculating_size);
     }
 
     public void setStorageSize(long size, long total) {
         mStorageSize = size;
-        setSummary(
-                FileSizeFormatter.formatFileSize(
-                        getContext(),
-                        size,
-                        getGigabyteSuffix(getContext().getResources()),
-                        FileSizeFormatter.GIGABYTE_IN_BYTES));
+        setSummary(StorageUtils.getStorageSizeLabel(getContext(), size));
+
         if (total == 0) {
             mProgressPercent = 0;
         } else {
@@ -80,9 +74,5 @@ public class StorageItemPreference extends Preference {
         mProgressBar = (ProgressBar) view.findViewById(android.R.id.progress);
         updateProgressBar();
         super.onBindViewHolder(view);
-    }
-
-    private static int getGigabyteSuffix(Resources res) {
-        return res.getIdentifier("gigabyteShort", "string", "android");
     }
 }

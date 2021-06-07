@@ -14,15 +14,15 @@
      limitations under the License.
 -->
 
-<resources>
+<resources
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <color name="switchbar_switch_track_tint">#82000000</color>
     <color name="switchbar_switch_thumb_tint">@android:color/black</color>
     <color name="homepage_accessibility_background">#783BE5</color>
     <color name="homepage_support_background">#3F5FBD</color>
     <color name="homepage_card_dismissal_background">@*android:color/material_grey_900</color>
     <color name="contextual_card_background">@*android:color/material_grey_900</color>
-    <!-- Dialog background color. -->
-    <color name="dialog_background">@*android:color/material_grey_800</color>
+    <color name="search_bar_background">?androidprv:attr/colorSurfaceVariant</color>
     <color name="notification_importance_selection_bg">@*android:color/material_grey_800</color>
     <color name="notification_importance_button_selected">#AECBFA</color> <!-- material blue 200 -->
     <color name="notification_importance_button_unselected">#5F6368</color>
@@ -41,5 +41,12 @@
     <color name="gestures_setting_background_color">@android:color/black</color>
 
     <color name="color_surface_header">@*android:color/surface_header_dark</color>
+    <!-- Dialog error color. -->
+    <color name="settings_dialog_colorError">#f28b82</color> <!-- Red 300 -->
+
+    <!-- Face and fingerprint enrollment -->
+    <color name="biometric_enroll_intro_color_bar">#5bb974</color>
+    <color name="biometric_enroll_intro_color_icon">#669df6</color>
+    <color name="biometric_enroll_intro_color_outline">#5e5e5e</color>
 </resources>
 

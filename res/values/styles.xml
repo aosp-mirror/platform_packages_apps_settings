@@ -308,10 +308,11 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="TextAppearance.SearchBar"
-           parent="@*android:style/TextAppearance.DeviceDefault.Widget.Toolbar.Subtitle">
+    <style name="TextAppearance.SearchBar">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
         <item name="android:textSize">@dimen/search_bar_text_size</item>
-        <item name="android:textColor">?android:attr/textColorTertiary</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
         <item name="android:singleLine">true</item>
     </style>
 
@@ -368,11 +369,11 @@
     </style>
 
     <style name="FingerprintLayoutTheme">
-        <item name="android:icon">@drawable/ic_fingerprint_header</item>
+        <item name="android:icon">@drawable/ic_lock</item>
     </style>
 
     <style name="FaceLayoutTheme">
-        <item name="android:icon">@drawable/ic_face_header</item>
+        <item name="android:icon">@drawable/ic_lock</item>
     </style>
 
     <style name="PreviewPagerPageIndicator">
@@ -409,7 +410,9 @@
         <item name="android:scaleY">0.5</item>
     </style>
 
-    <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
+    <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored">
+        <item name="android:theme">@style/RoundedCornerThemeOverlay</item>
+    </style>
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button"/>
 
     <style name="RoundedCornerThemeOverlay">
@@ -648,7 +651,7 @@
     <style name="AccessibilityDialogIcon">
         <item name="android:layout_width">18dp</item>
         <item name="android:layout_height">18dp</item>
-        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
 

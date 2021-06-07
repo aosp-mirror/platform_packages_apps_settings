@@ -23,6 +23,7 @@ import static android.app.AppOpsManager.OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED;
 import static android.provider.DeviceConfig.NAMESPACE_APP_HIBERNATION;
 
 import static com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED;
+import static com.android.settings.Utils.PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS;
 
 import android.app.AppOpsManager;
 import android.content.Context;
@@ -95,8 +96,11 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
                         : android.os.Build.VERSION_CODES.Q;
         try {
             mPackageUid = packageManager.getPackageUid(packageName, /* flags */ 0);
-            mIsPackageExemptByDefault = packageManager.getTargetSdkVersion(packageName)
-                    <= maxTargetSdkVersionForExemptApps;
+            mIsPackageExemptByDefault =
+                    hibernationTargetsPreSApps()
+                            ? false
+                            : packageManager.getTargetSdkVersion(packageName)
+                                    <= maxTargetSdkVersionForExemptApps;
             mIsPackageSet = true;
         } catch (PackageManager.NameNotFoundException e) {
             Slog.w(TAG, "Package [" + mPackageName + "] is not found!");
@@ -141,5 +145,10 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
     private static boolean isHibernationEnabled() {
         return DeviceConfig.getBoolean(
                 NAMESPACE_APP_HIBERNATION, PROPERTY_APP_HIBERNATION_ENABLED, false);
+    }
+
+    private static boolean hibernationTargetsPreSApps() {
+        return DeviceConfig.getBoolean(
+                NAMESPACE_APP_HIBERNATION, PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS, false);
     }
 }
