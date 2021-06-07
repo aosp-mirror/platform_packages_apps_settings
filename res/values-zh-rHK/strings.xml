@@ -266,7 +266,7 @@
     <string name="date_time_set_date_title" msgid="7624166157167528407">"日期"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"搜尋區域"</string>
     <string name="date_time_select_region" msgid="5449345333305056072">"地區"</string>
-    <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"選取世界協調時間 (UTC) 偏移量"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"選取世界協調時間 (UTC) 時差值"</string>
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g>於 <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>開始"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -275,7 +275,7 @@
     <string name="zone_time_type_dst" msgid="9189689342265305808">"夏令時間"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"標準時間"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"按地區選取"</string>
-    <string name="zone_menu_by_offset" msgid="1257702747474426745">"按世界協調時間 (UTC) 偏移量選取"</string>
+    <string name="zone_menu_by_offset" msgid="1257702747474426745">"按世界協調時間 (UTC) 時差值選取"</string>
     <string name="date_picker_title" msgid="646573308567782578">"日期"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"時間"</string>
     <string name="lock_after_timeout" msgid="8682769000437403444">"在螢幕逾時後上鎖"</string>
@@ -3478,7 +3478,7 @@
     <string name="bubbles_feature_education" msgid="4088275802688887634">"部分通知和其他內容可在螢幕中以小視窗形式顯示。輕按小視窗即可開啟。如要關閉小視窗，只需將之拖至螢幕下方。"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"對話氣泡"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"所有對話氣泡設定"</string>
-    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"以「對話泡」顯示此對話"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"以對話氣泡顯示此對話"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"在應用程式上顯示浮動圖示"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」以小視窗形式顯示部分通知"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"要開啟裝置的小視窗功能嗎？"</string>
@@ -3493,8 +3493,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"全部均不可以小視窗顯示"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"對話"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"所有對話均可以小視窗顯示，以下除外："</string>
-    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"關閉此對話的對話泡泡功能"</string>
-    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"開啟此對話的對話泡泡功能"</string>
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"關閉此對話的對話氣泡功能"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"開啟此對話的對話氣泡功能"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"滑動操作"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"向右滑動關閉選單，向左滑動顯示選單"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"向左滑動關閉選單，向右滑動顯示選單"</string>
@@ -3553,7 +3553,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個優先對話</item>
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"優先對話"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以浮動對話泡泡顯示在對話部分的頂部"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以浮動對話氣泡顯示在對話部分的頂部"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"在對話部分的頂部顯示"</string>
     <string name="other_conversations" msgid="7218658664423361043">"其他對話"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"已變更的對話"</string>
@@ -3666,7 +3666,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"此應用程式未發佈任何通知"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"應用程式中的其他設定"</string>
-    <string name="notification_screen_summary" msgid="5984915275134654822">"通知記錄、對話泡泡、最近傳送通知的應用程式"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"通知記錄、對話氣泡、最近傳送通知的應用程式"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"已開啟所有應用程式的通知功能"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">已停用 <xliff:g id="COUNT_1">%d</xliff:g> 個應用程式的通知功能</item>
