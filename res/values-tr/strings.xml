@@ -2194,12 +2194,12 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 dakika"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 dakika"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"İşlem yapma süresi (Erişilebilirlik zaman aşımı)"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Hareket zamanı"</string>
-    <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Harekete geçmenizi isteyen, ancak geçici olarak görüntülenen mesajların ne kadar süre gösterileceğini seçin.\n\nBu ayar tüm uygulamalar tarafından desteklenmez."</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"İşlem yapma süresi"</string>
+    <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"İşlem yapmanızı isteyen, ancak geçici olarak görüntülenen mesajların ne kadar süre gösterileceğini seçin.\n\nBu ayar tüm uygulamalar tarafından desteklenmez."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Dokunma ve basılı tutma süresi"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Rengi ters çevirme"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Rengi ters çevirme işlevini kullan"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Rengi ters çevirme özelliği açık renkli ekranları koyulaştırır.&lt;br/&gt;&lt;br/&gt; Not: &lt;ol&gt; &lt;li&gt; Rengi ters çevirme özelliği ayrıca koyu ekranları açar.&lt;/li&gt; &lt;li&gt; Renkler medyada ve resimlerde değişir.&lt;/li&gt; &lt;li&gt; Koyu arka plan görüntülemek için Koyu tema kullanılabilir. Koyu tema, desteklenen uygulamalarda çalışır. Rengi ters çevirme özelliği tüm uygulamalarda çalışır.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Rengi ters çevirme özelliği açık renkli ekranları koyulaştırır.&lt;br/&gt;&lt;br/&gt; Not: &lt;ol&gt; &lt;li&gt; Rengi ters çevirme özelliği ayrıca koyu renkli ekranları açık renk yapar.&lt;/li&gt; &lt;li&gt; Renkler medyada ve resimlerde değişir.&lt;/li&gt; &lt;li&gt; Koyu arka plan görüntülemek için Koyu tema kullanılabilir. Koyu tema, desteklenen uygulamalarda çalışır. Rengi ters çevirme özelliği tüm uygulamalarda çalışır.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Otomatik tıklama (bekleme süresi)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Otomatik tıklama, bağlı bir fare ile çalışır. Fare imlecini, imleç belirli bir süre hareket etmediğinde otomatik olarak tıklayacak şekilde ayarlayabilirsiniz."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Kapalı"</string>
@@ -3477,7 +3477,7 @@
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Bildirim geçmişi kapalı"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Son bildirimleri ve ertelenen bildirimleri görmek için bildirim geçmişini açın"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"Yakın zamanda alınmış bildirim yok"</string>
-    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Yakın zamanda alınmış olan ertelenmiş bildirimleriniz burada gösterilir"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Yakın zamanda alınmış olan ve ertelenmiş bildirimleriniz burada gösterilir"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"bildirim ayarları görüntülenir"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"bildirimi aç"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Bildirimin ertelenmesine izin ver"</string>
@@ -3618,14 +3618,14 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Yüklü hiçbir uygulama, bildirim erişimi isteğinde bulunmadı."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Bildirimlere erişime izin ver"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> için bildirim erişimine izin verilsin mi?"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>, kişi adları ve gelen iletilerin metni gibi kişisel bilgiler de dahil olmak üzere tüm bildirimleri okuyabilir. Bu uygulama ayrıca bildirimleri kapatabilir veya telefon çağrılarını yanıtlamak da dahil olmak üzere bildirimlerdeki düğmeler üzerinde işlem yapabilir. \n\nBu izin, uygulamaya, Rahatsız Etmeyin ayarını açma veya kapatma ve ilgili ayarları değiştirme olanağı da verir."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>, kişi adları ve gelen iletilerin metni gibi kişisel bilgiler de dahil olmak üzere tüm bildirimleri okuyabilir. Bu uygulama ayrıca bildirimleri kapatabilir veya telefon aramalarını yanıtlamak da dahil olmak üzere bildirimlerdeki düğmeler üzerinde işlem yapabilir. \n\nBu izin, uygulamaya, Rahatsız Etmeyin ayarını açma veya kapatma ve ilgili ayarları değiştirme olanağı da verir."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> için bildirim erişimine izin verilsin mi?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kişi adları ve gelen iletilerin metni gibi kişisel bilgiler de dahil olmak üzere tüm bildirimleri okuyabilir. Bu uygulama ayrıca bildirimleri kapatabilir veya telefon çağrılarını yanıtlamak da dahil olmak üzere bildirimlerdeki düğmeler üzerinde işlem yapabilir. \n\nBu izin, uygulamaya, Rahatsız Etmeyin ayarını açma veya kapatma ve ilgili ayarları değiştirme olanağı da verir."</string>
+    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kişi adları ve gelen iletilerin metni gibi kişisel bilgiler de dahil olmak üzere tüm bildirimleri okuyabilir. Bu uygulama ayrıca bildirimleri kapatabilir veya telefon aramalarını yanıtlamak da dahil olmak üzere bildirimlerdeki düğmeler üzerinde işlem yapabilir. \n\nBu izin, uygulamaya, Rahatsız Etmeyin ayarını açma veya kapatma ve ilgili ayarları değiştirme olanağı da verir."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> için bildirim erişimini kapatırsanız Rahatsız Etmeyin erişimi de kapanabilir."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Kapat"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"İptal"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR yardımcı hizmetleri"</string>
-    <string name="no_vr_listeners" msgid="8442646085375949755">"Yüklü hiçbir uygulamanın VR yardımcı hizmetleri olarak çalışması istenmedi."</string>
+    <string name="no_vr_listeners" msgid="8442646085375949755">"Yüklü hiçbir uygulama VR yardımcı hizmetleri olarak çalışma isteğinde bulunmadı."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> için VR hizmetine erişim izni verilsin mi?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"Uygulamaları sanal gerçeklik modunda kullandığınızda <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> çalışabilir."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Cihaz VR modundayken"</string>
@@ -4519,7 +4519,7 @@
     <string name="auto_sync_account_title" msgid="1070908045600374254">"Uygulama verilerini otomatik olarak senkronize et"</string>
     <string name="auto_sync_personal_account_title" msgid="3544275021920818595">"Kişisel verileri otomatik olarak senkronize et"</string>
     <string name="auto_sync_work_account_title" msgid="6060310415978781885">"İş verilerini otomatik olarak senkronize et"</string>
-    <string name="auto_sync_account_summary" msgid="7580352130028957346">"Uygulamaların verileri otomatik olarak yenilemesine izin ver"</string>
+    <string name="auto_sync_account_summary" msgid="7580352130028957346">"Uygulamaların verileri otomatik olarak yenilemesine izin verin"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"Hesap senkronizasyonu"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"Senkronizasyon <xliff:g id="ID_2">%2$d</xliff:g> öğeden <xliff:g id="ID_1">%1$d</xliff:g> tanesi için açık"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Senkronizasyon tüm öğeler için açık"</string>

@@ -274,8 +274,8 @@
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> zaczyna się: <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="7004693956837388129">"Używa czasu: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>; <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> zaczyna się <xliff:g id="TRANSITION_DATE">%3$s</xliff:g> r."</string>
-    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Używa czasu <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nie ma czasu letniego."</string>
+    <string name="zone_info_footer" msgid="7004693956837388129">"Ustawiony jest <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>; <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> zaczyna się <xliff:g id="TRANSITION_DATE">%3$s</xliff:g> r."</string>
+    <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Ustawiony jest <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nie ma czasu letniego."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Zmiana czasu na letni"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Czas standardowy"</string>
     <string name="zone_menu_by_region" msgid="2963565278710225652">"Wybierz według regionu"</string>
@@ -1310,7 +1310,7 @@
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nigdy"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Wył."</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Włącz wygaszacz ekranu, by kontrolować to, co dzieje się, gdy telefon jest w stacji dokującej i/lub w trybie uśpienia."</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kiedy zacząć"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kiedy włączać"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Bieżący wygaszacz ekranu"</string>
     <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Zacznij teraz"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Ustawienia"</string>
@@ -1326,7 +1326,7 @@
     <string name="short_summary_font_size" msgid="184712645848458143">"Powiększ lub pomniejsz tekst"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"Ustawienia blokady karty SIM"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"Blokada karty SIM"</string>
-    <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Wył."</string>
+    <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Wyłączony"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"Zablokowana"</string>
     <string name="sim_lock_settings_title" msgid="1401619059761012696">"Blokada karty SIM"</string>
     <string name="sim_pin_toggle" msgid="98754920202404425">"Zablokuj kartę SIM"</string>
@@ -2196,7 +2196,7 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Otwieranie gestem"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Użyj nowego gestu ułatwień dostępu"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Aby użyć tej funkcji, kliknij przycisk ułatwień dostępu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> u dołu ekranu.\n\nAby przełączać się między funkcjami, naciśnij i przytrzymaj przycisk ułatwień dostępu."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Aby użyć tej funkcji, naciśnij i przytrzymaj oba klawisze głośności."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Aby użyć tej funkcji, naciśnij i przytrzymaj oba przyciski głośności."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Aby włączyć lub wyłączyć powiększenie, kliknij trzykrotnie w dowolnym miejscu na ekranie."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Aby użyć tej funkcji, przesuń 2 palcami z dołu ekranu w górę.\n\nAby przełączać się między funkcjami, przesuń 2 palcami w górę i przytrzymaj."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Aby użyć tej funkcji, przesuń 3 palcami z dołu ekranu w górę.\n\nAby przełączać się między funkcjami, przesuń 3 palcami w górę i przytrzymaj."</string>
@@ -2224,7 +2224,7 @@
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"Usługa skrótu"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Ustawienia skrótów"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Skróty z ekranu blokady"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Zezwól na włączanie skrótów aplikacji z ekranu blokady. Przytrzymaj oba klawisze głośności przez kilka sekund."</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Zezwalaj na włączanie skrótów aplikacji z ekranu blokady. Przytrzymaj oba przyciski głośności przez kilka sekund."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Tekst o dużym kontraście"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Automatyczna aktualizacja powiększenia ekranu"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Aktualizuj powiększenie ekranu przy zmianie aplikacji"</string>
@@ -2246,7 +2246,7 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Określ, jak długo mają być wyświetlane wiadomości wymagające wykonania jakiejś czynności, które są widoczne tylko tymczasowo.\n\nNie wszystkie aplikacje obsługują to ustawienie."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Czas dotknięcia i przytrzymania"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Odwrócenie kolorów"</string>
-    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Odwróć kolory"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Odwracaj kolory"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Odwrócenie kolorów zmienia jasne ekrany w ciemne.&lt;br/&gt;&lt;br/&gt; Uwaga: &lt;ol&gt; &lt;li&gt; Odwrócenie kolorów zmienia także ciemne ekrany w jasne.&lt;/li&gt; &lt;li&gt; Zmienią się kolory w multimediach i na obrazach.&lt;/li&gt; &lt;li&gt; Ciemne tło można też wyświetlać w ciemnym motywie. Ciemny motyw działa w obsługiwanych aplikacjach. Odwrócenie kolorów działa we wszystkich aplikacjach.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automatyczne kliknięcie (czas oczekiwania)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Automatyczne kliknięcie działa po podłączeniu myszy. Możesz ustawić jego wyzwalanie po zatrzymaniu przesuwającego się kursora na określony czas."</string>
@@ -2267,7 +2267,7 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Reakcja na dotyk"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Używanie aplikacji <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Otwórz aplikację <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Użyj korekcji kolorów"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Używaj korekcji kolorów"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Pokaż napisy"</string>
     <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Tylko w obsługiwanych aplikacjach"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Rozmiar i styl napisów"</string>
@@ -3567,7 +3567,7 @@
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Automatycznie pokazuj sugerowane działania i odpowiedzi"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Pokaż ostatnie i odłożone powiadomienia"</string>
     <string name="notification_history" msgid="8663811361243456201">"Historia powiadomień"</string>
-    <string name="notification_history_toggle" msgid="9093762294928569030">"Użyj historii powiadomień"</string>
+    <string name="notification_history_toggle" msgid="9093762294928569030">"Używaj historii powiadomień"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Historia powiadomień wyłączona"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Włącz historię powiadomień, aby sprawdzić ostatnie i odłożone powiadomienia"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"Brak ostatnich powiadomień"</string>
@@ -3646,7 +3646,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Rozmowy"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Rozmowa"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Sekcja rozmów"</string>
-    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Zezwól aplikacji na korzystanie z sekcji rozmów"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Zezwalaj aplikacji na korzystanie z sekcji rozmów"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"To nie jest rozmowa"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Usuń z sekcji rozmów"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Oznacz jako rozmowę"</string>
@@ -3666,23 +3666,23 @@
     <string name="other_conversations_summary" msgid="3487426787901236273">"Rozmowy z Twoimi zmianami"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Wyświetlaj rozmowy priorytetowe w dymkach"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Rozmowy priorytetowe są wyświetlane u góry obszaru powiadomień. Możesz też skonfigurować je tak, by wyświetlały się jako dymki i przerywały działanie trybu Nie przeszkadzać."</string>
-    <string name="conversation_onboarding_title" msgid="5194559958353468484">"W tym miejscu pojawią się rozmowy priorytetowe i zmodyfikowane"</string>
-    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Tutaj pojawią się rozmowy, które oznaczysz jako priorytetowe lub zmienisz w dowolny inny sposób. \n\nAby zmienić ustawienia rozmowy: \nprzesuń palcem w dół od góry ekranu, by otworzyć obszar powiadomień, a potem naciśnij i przytrzymaj rozmowę."</string>
+    <string name="conversation_onboarding_title" msgid="5194559958353468484">"Tu będą pojawiały się rozmowy priorytetowe i zmodyfikowane"</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Tutaj będą pojawiać się rozmowy, które oznaczysz jako priorytetowe lub zmienisz w dowolny inny sposób. \n\nAby zmienić ustawienia rozmowy: \nprzesuń palcem w dół od góry ekranu, by otworzyć obszar powiadomień, a potem naciśnij i przytrzymaj rozmowę."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Pokazuj dyskretnie i minimalizuj"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Pokazuj dyskretnie"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Sygnalizacja dźwiękiem"</string>
     <string name="notification_importance_high" msgid="8453789143477210550">"Sygnalizacja dźwiękiem i wyświetlenie komunikatu"</string>
-    <string name="notification_importance_high_silent" msgid="8977232884004607985">"Pokaż na ekranie"</string>
+    <string name="notification_importance_high_silent" msgid="8977232884004607985">"Pokazuj na ekranie"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Minimalizuj"</string>
     <string name="notification_importance_low_title" msgid="658158049378796947">"Średnia"</string>
     <string name="notification_importance_default_title" msgid="8875198696330289686">"Wysoka"</string>
-    <string name="notification_importance_high_title" msgid="394129291760607808">"Pokaż na ekranie"</string>
+    <string name="notification_importance_high_title" msgid="394129291760607808">"Pokazuj na ekranie"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Blokuj"</string>
-    <string name="notification_silence_title" msgid="4085829874452944989">"Bez dźwięku"</string>
+    <string name="notification_silence_title" msgid="4085829874452944989">"Ciche"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"Domyślne"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Zezwól na przerywanie"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Zezwól tej aplikacji na dźwięki, wibracje­i/lub wyświetlanie powiadomień na ekranie"</string>
-    <string name="notification_priority_title" msgid="5554834239080425229">"Priorytet"</string>
+    <string name="notification_priority_title" msgid="5554834239080425229">"Priorytetowe"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Wyświetla się jako pływający dymek u góry sekcji rozmów, pokazuje zdjęcie profilowe na ekranie blokady"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"Aplikacja <xliff:g id="APP_NAME">%1$s</xliff:g> nie obsługuje większości funkcji rozmów. Nie możesz ustawić rozmowy jako priorytetowej, a rozmowy nie wyświetlają się jako pływające dymki."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Na liście powiadomień zwiń powiadomienia do jednego wiersza"</string>
@@ -3748,10 +3748,10 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Połączono"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Połącz te aplikacje"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Połączone aplikacje udostępniają sobie nawzajem uprawnienia i dane."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Połącz aplikacje, tylko jeśli masz pewność, że nie udostępnią danych osobowych administratorowi IT."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Połącz aplikacje, tylko jeśli masz pewność, że nie udostępnią Twoich osobistych danych administratorowi IT."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Możesz odłączyć aplikacje w dowolnym momencie w ustawieniach prywatności na urządzeniu."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Przyznać aplikacji służbowej <xliff:g id="NAME">%1$s</xliff:g> dostęp do Twoich danych osobistych?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Połącz aplikacje, tylko jeśli masz pewność, że nie udostępnią danych osobowych administratorowi IT."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Połącz aplikacje, tylko jeśli masz pewność, że nie udostępnią Twoich osobistych danych administratorowi IT."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Dane aplikacji"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Ta aplikacja ma dostęp do danych w aplikacji osobistej <xliff:g id="NAME">%1$s</xliff:g>."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Uprawnienia"</string>
@@ -3804,19 +3804,19 @@
     <string name="notification_content_block_title" msgid="6689085826061361351">"Pokazuj powiadomienia"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Nigdy nie pokazuj powiadomień w obszarze powiadomień ani na urządzeniach peryferyjnych"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Zezwalaj na plakietkę z powiadomieniem"</string>
-    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Pokaż plakietkę z powiadomieniem"</string>
+    <string name="notification_channel_badge_title" msgid="6505542437385640049">"Pokazuj plakietkę z powiadomieniem"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Ignoruj Nie przeszkadzać"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Zezwól na działanie tych powiadomień, gdy tryb Nie przeszkadzać jest włączony"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Ekran blokady"</string>
     <string name="app_notification_row_banned" msgid="4513523107019706924">"Zablokowane"</string>
-    <string name="app_notification_row_priority" msgid="8100777138078316446">"Priorytet"</string>
+    <string name="app_notification_row_priority" msgid="8100777138078316446">"Priorytetowe"</string>
     <string name="app_notification_row_sensitive" msgid="7374688948587174964">"Poufne"</string>
     <string name="app_notifications_dialog_done" msgid="573716608705273004">"Gotowe"</string>
     <string name="app_notification_importance_title" msgid="8293193440040799998">"Ważność"</string>
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Migająca dioda"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Wibracje"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Dźwięk"</string>
-    <string name="notification_conversation_important" msgid="4365437037763608045">"Priorytet"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Priorytetowe"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Dodaj do ekranu głównego"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Usuń"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Zmień nazwę"</string>
@@ -4289,14 +4289,14 @@
     <string name="allow_overlay_description" msgid="1607235723669496298">"Pozwól tej aplikacji wyświetlać się nad innymi aplikacjami, których używasz. Ta aplikacja będzie widzieć, gdzie klikasz, lub przełączać to, co widzisz na ekranie."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Dostęp do wszystkich plików"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Zezwól na zarządzanie wszystkimi plikami"</string>
-    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Zezwól tej aplikacji na odczytywanie, modyfikowanie i usuwanie plików na tym urządzeniu oraz wszelkich połączonych woluminach przechowywania. Aplikacje z tymi uprawnieniami mogą korzystać z dostępu do plików bez konieczności wyraźnego informowania Cię o tym."</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Zezwól tej aplikacji na odczytywanie, modyfikowanie i usuwanie plików na tym urządzeniu oraz wszelkich połączonych woluminach pamięci. Aplikacje z tymi uprawnieniami mogą korzystać z dostępu do plików bez konieczności wyraźnego informowania Cię o tym."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Ma dostęp do wszystkich plików"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr rzeczywistość wirtualna odbiornik stereo usługa pomocnicza"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Wyświetlanie nad innymi"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"Aplikacje, które mogą wyświetlać się nad innymi: <xliff:g id="COUNT_0">%1$d</xliff:g> z <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Aplikacje z uprawnieniami"</string>
-    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Dozwolone"</string>
-    <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Niedozwolone"</string>
+    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Ma dostęp"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Nie ma dostępu"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"instalowanie aplikacji nieznane źródła"</string>
     <string name="write_settings" msgid="6864794401614425894">"Modyfikowanie ustawień systemu"</string>
     <string name="keywords_write_settings" msgid="6908708078855507813">"zapisywać modyfikować ustawienia systemu"</string>
@@ -4581,7 +4581,7 @@
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Wyłącz czujniki"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Ustawienia profilu służbowego"</string>
     <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"Wyszukiwanie kontaktów"</string>
-    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Zezwalaj swojej organizacji na wyszukiwanie kontaktów do identyfikacji rozmówców i kontaktów"</string>
+    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Zezwalaj swojej organizacji na wyszukiwanie kontaktów do identyfikacji rozmówców i kontaktów"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Wszystkie profile w kalendarzu"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Pokazuj zdarzenia w profilu służbowym w kalendarzu osobistym"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
