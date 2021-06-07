@@ -38,6 +38,7 @@ import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.util.ArraySet;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.collection.ArrayMap;
@@ -196,6 +197,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSignalStrengthListener.pause();
         mTelephonyDisplayInfoListener.pause();
         unRegisterReceiver();
+        resetProviderPreferenceSummary();
     }
 
     @Override
@@ -275,6 +277,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         String result = mSubsPrefCtrlInjector.getNetworkType(
                 mContext, mConfig, mTelephonyDisplayInfo, subId, isActiveCarrierNetwork);
         if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isActiveCarrierNetwork) {
+            Log.i(TAG, "Active cellular network or active carrier network.");
             result = mContext.getString(R.string.preference_summary_default_combination,
                     mContext.getString(R.string.mobile_data_connection_active), result);
         } else if (!isDataInService) {
@@ -314,6 +317,13 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
         icon = mContext.getDrawable(R.drawable.ic_signal_strength_zero_bar_no_internet);
         return icon;
+    }
+
+    private void resetProviderPreferenceSummary() {
+        if (mSubsGearPref == null) {
+            return;
+        }
+        mSubsGearPref.setSummary("");
     }
 
     private void updateForBase() {
