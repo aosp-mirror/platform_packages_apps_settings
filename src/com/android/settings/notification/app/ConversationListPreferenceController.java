@@ -69,9 +69,7 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
             populateConversations(conversations, containerGroup);
         }
 
-        if (containerGroup.getPreferenceCount() == 0) {
-            containerGroup.setVisible(false);
-        } else {
+        if (containerGroup.getPreferenceCount() != 0) {
             Preference summaryPref = getSummaryPreference();
             if (summaryPref != null) {
                 containerGroup.addPreference(summaryPref);
