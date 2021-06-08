@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +34,6 @@ import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
-import android.os.UserHandle;
 import android.security.keystore.KeyProperties;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -402,6 +400,9 @@ public class WifiConfigController2 implements TextWatcher,
                         } else if (frequency >= WifiEntry.MIN_FREQ_5GHZ
                                 && frequency < WifiEntry.MAX_FREQ_5GHZ) {
                             band = res.getString(R.string.wifi_band_5ghz);
+                        } else if (frequency >= WifiEntry.MIN_FREQ_6GHZ
+                                && frequency < WifiEntry.MAX_FREQ_6GHZ) {
+                            band = res.getString(R.string.wifi_band_6ghz);
                         } else {
                             Log.e(TAG, "Unexpected frequency " + frequency);
                         }
