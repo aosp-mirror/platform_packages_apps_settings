@@ -56,6 +56,7 @@ import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.CardPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -109,7 +110,7 @@ public class StorageDashboardFragment extends DashboardFragment
     private List<AbstractPreferenceController> mSecondaryUsers;
     private boolean mIsWorkProfile;
     private int mUserId;
-    private Preference mFreeUpSpacePreference;
+    private CardPreference mFreeUpSpacePreference;
 
     private final StorageEventListener mStorageEventListener = new StorageEventListener() {
         @Override
@@ -281,8 +282,11 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     private void initializePreference() {
-        mFreeUpSpacePreference = getPreferenceScreen().findPreference(FREE_UP_SPACE_PREF_KEY);
+        mFreeUpSpacePreference = (CardPreference) getPreferenceScreen()
+                .findPreference(FREE_UP_SPACE_PREF_KEY);
         mFreeUpSpacePreference.setOnPreferenceClickListener(this);
+        mFreeUpSpacePreference.setCardBackgroundColor(Utils.getColorAttrDefaultColor(getContext(),
+                com.android.internal.R.attr.colorSurface));
     }
 
     @Override
