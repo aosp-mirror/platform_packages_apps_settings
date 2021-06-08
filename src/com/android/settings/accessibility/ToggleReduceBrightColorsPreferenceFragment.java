@@ -34,9 +34,9 @@ import androidx.preference.SwitchPreference;
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.SeekBarPreference;
 
 import java.util.ArrayList;
 import java.util.List;
