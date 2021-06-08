@@ -29,7 +29,6 @@ import android.os.UserHandle;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -316,8 +315,6 @@ public final class ConvertUtilsTest {
             .isEqualTo(entry.mConsumePower * ratio);
     }
 
-    @Ignore
-    @Test
     public void testUtcToLocalTime_returnExpectedResult() {
         ConvertUtils.sZoneId = null;
         ConvertUtils.sLocale = null;
@@ -335,8 +332,6 @@ public final class ConvertUtilsTest {
         assertThat(ConvertUtils.sLocale).isEqualTo(Locale.getDefault());
     }
 
-    @Ignore
-    @Test
     public void testUtcToLocalTimeHour_12HourFormat_returnExpectedResult() {
         ConvertUtils.sZoneIdForHour = null;
         ConvertUtils.sLocaleForHour = null;
@@ -354,8 +349,6 @@ public final class ConvertUtilsTest {
         assertThat(ConvertUtils.sLocaleForHour).isEqualTo(Locale.getDefault());
     }
 
-    @Ignore
-    @Test
     public void testUtcToLocalTimeHour_24HourFormat_returnExpectedResult() {
         ConvertUtils.sZoneIdForHour = null;
         ConvertUtils.sLocaleForHour = null;
