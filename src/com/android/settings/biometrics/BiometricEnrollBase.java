@@ -19,16 +19,22 @@ package com.android.settings.biometrics;
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.annotation.Nullable;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.Utils;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -138,6 +144,20 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         initViews();
+
+        @SuppressLint("VisibleForTests")
+        final LinearLayout buttonContainer = mFooterBarMixin != null
+                ? mFooterBarMixin.getButtonContainer()
+                : null;
+        if (buttonContainer != null) {
+            buttonContainer.setBackgroundColor(getBackgroundColor());
+        }
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        getWindow().setStatusBarColor(getBackgroundColor());
     }
 
     @Override
@@ -241,5 +261,11 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         } else {
             mLaunchedConfirmLock = true;
         }
+    }
+
+    @ColorInt
+    private int getBackgroundColor() {
+        final ColorStateList stateList = Utils.getColorAttr(this, android.R.attr.windowBackground);
+        return stateList != null ? stateList.getDefaultColor() : Color.TRANSPARENT;
     }
 }
