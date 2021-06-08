@@ -20,20 +20,19 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.UserHandle;
 import android.os.UserManager;
 
 import androidx.preference.Preference;
 
 import com.android.settings.accounts.AccountRestrictionHelper;
-import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.RestrictedSeekBarPreference;
+import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,10 +46,8 @@ import org.robolectric.RuntimeEnvironment;
 public class AdjustVolumeRestrictedPreferenceControllerTest {
 
     private static final String KEY = "key";
-    private AccountRestrictionHelper mAccountHelper;
-
     @Mock
-    UserManager mUserManager;
+    private AccountRestrictionHelper mAccountHelper;
 
     private Context mContext;
     private AdjustVolumeRestrictedPreferenceControllerTestable mController;
@@ -59,17 +56,15 @@ public class AdjustVolumeRestrictedPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mAccountHelper = new AccountRestrictionHelper(mContext);
         mController =
             new AdjustVolumeRestrictedPreferenceControllerTestable(mContext, mAccountHelper, KEY);
     }
 
     @Test
     public void updateState_hasBaseRestriction_shouldDisable() {
-        RestrictedSeekBarPreference preference = mock(RestrictedSeekBarPreference.class);
-        when(RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
-                UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId())).thenReturn(true);
+        RestrictedPreference preference = mock(RestrictedPreference.class);
+        when(mAccountHelper.hasBaseUserRestriction(
+            eq(UserManager.DISALLOW_ADJUST_VOLUME), anyInt())).thenReturn(true);
 
         mController.updateState(preference);
 
@@ -78,11 +73,13 @@ public class AdjustVolumeRestrictedPreferenceControllerTest {
 
     @Test
     public void updateState_NoBaseRestriction_shouldCheckRestriction() {
-        RestrictedSeekBarPreference preference = spy(new RestrictedSeekBarPreference(mContext));
+        RestrictedPreference preference = spy(new RestrictedPreference(mContext));
 
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(null);
-        when(RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
-                UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId())).thenReturn(false);
+        when(mAccountHelper.hasBaseUserRestriction(
+            eq(UserManager.DISALLOW_ADJUST_VOLUME), anyInt())).thenReturn(false);
+        doCallRealMethod().when(mAccountHelper).enforceRestrictionOnPreference(
+            eq(preference), eq(UserManager.DISALLOW_ADJUST_VOLUME), anyInt());
 
         mController.updateState(preference);
 

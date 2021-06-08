@@ -20,7 +20,7 @@
     android:persistent="false"
     android:title="@string/reduce_bright_colors_preference_title">
 
-    <com.android.settingslib.RestrictedSeekBarPreference
+    <com.android.settings.widget.SeekBarPreference
         android:key="rbc_intensity"
         android:persistent="false"
         android:title="@string/reduce_bright_colors_intensity_preference_title"/>
