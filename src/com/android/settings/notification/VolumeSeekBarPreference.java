@@ -32,12 +32,12 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.RestrictedSeekBarPreference;
 
 import java.util.Objects;
 
 /** A slider preference that directly controls an audio stream volume (no dialog) **/
-public class VolumeSeekBarPreference extends SeekBarPreference {
+public class VolumeSeekBarPreference extends RestrictedSeekBarPreference {
     private static final String TAG = "VolumeSeekBarPreference";
 
     protected SeekBar mSeekBar;
