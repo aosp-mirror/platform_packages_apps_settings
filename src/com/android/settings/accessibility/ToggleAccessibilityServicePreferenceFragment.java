@@ -49,7 +49,6 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
 import androidx.annotation.Nullable;
-import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -232,12 +231,16 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     protected void updateSwitchBarToggleSwitch() {
-        final boolean checked = AccessibilityUtils.getEnabledServicesFromSettings(getPrefContext())
-                .contains(mComponentName);
+        final boolean checked = isAccessibilityServiceEnabled();
         if (mToggleServiceSwitchPreference.isChecked() == checked) {
             return;
         }
         mToggleServiceSwitchPreference.setChecked(checked);
+    }
+
+    private boolean isAccessibilityServiceEnabled() {
+        return AccessibilityUtils.getEnabledServicesFromSettings(getPrefContext())
+                .contains(mComponentName);
     }
 
     /**
@@ -314,7 +317,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private void handleConfirmServiceEnabled(boolean confirmed) {
-        mToggleServiceSwitchPreference.setChecked(confirmed);
         getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, confirmed);
         onPreferenceToggled(mPreferenceKey, confirmed);
     }
@@ -338,8 +340,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        if (isChecked != mToggleServiceSwitchPreference.isChecked()) {
-            onPreferenceClick(mToggleServiceSwitchPreference);
+        if (isChecked != isAccessibilityServiceEnabled()) {
+            onPreferenceClick(isChecked);
         }
     }
 
@@ -533,14 +535,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mDialog.dismiss();
     }
 
-    private boolean onPreferenceClick(Preference preference) {
-        boolean checked = ((SettingsMainSwitchPreference) preference).isChecked();
-        if (checked) {
-            mToggleServiceSwitchPreference.setChecked(true);
-            getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
-                    /* enableService */ true);
-            showDialog(DialogEnums.DISABLE_WARNING_FROM_TOGGLE);
-        } else {
+    private boolean onPreferenceClick(boolean isChecked) {
+        if (isChecked) {
             mToggleServiceSwitchPreference.setChecked(false);
             getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
                     /* disableService */ false);
@@ -552,6 +548,11 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                     showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
                 }
             }
+        } else {
+            mToggleServiceSwitchPreference.setChecked(true);
+            getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
+                    /* enableService */ true);
+            showDialog(DialogEnums.DISABLE_WARNING_FROM_TOGGLE);
         }
         return true;
     }
