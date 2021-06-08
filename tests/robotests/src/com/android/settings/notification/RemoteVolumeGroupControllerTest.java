@@ -43,8 +43,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.media.LocalMediaManager;
-import com.android.settingslib.widget.SeekBarPreference;
 
 import org.junit.Before;
 import org.junit.Test;

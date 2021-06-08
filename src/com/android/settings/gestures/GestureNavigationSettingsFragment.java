@@ -27,9 +27,9 @@ import android.view.WindowManager;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.LabeledSeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.LabeledSeekBarPreference;
-import com.android.settingslib.widget.SeekBarPreference;
 
 /**
  * A fragment to include all the settings related to Gesture Navigation mode.
