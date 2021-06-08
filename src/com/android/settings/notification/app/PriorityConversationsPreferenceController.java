@@ -55,6 +55,7 @@ public class PriorityConversationsPreferenceController extends
         Preference pref = new Preference(mContext);
         pref.setOrder(1);
         pref.setSummary(R.string.important_conversations_summary_bubbles);
+        pref.setSelectable(false);
         return pref;
     }
 
