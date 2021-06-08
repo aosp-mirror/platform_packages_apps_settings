@@ -36,7 +36,7 @@ import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settingslib.widget.SeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 
 import org.junit.Before;
 import org.junit.Rule;

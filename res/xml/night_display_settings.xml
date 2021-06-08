@@ -52,7 +52,7 @@
         android:title="@string/night_display_end_time_title"
         settings:controller="com.android.settings.display.NightDisplayCustomEndTimePreferenceController"/>
 
-    <com.android.settingslib.RestrictedSeekBarPreference
+    <com.android.settings.widget.SeekBarPreference
         android:key="night_display_temperature"
         android:title="@string/night_display_temperature_title"
         settings:keywords="@string/keywords_display_night_display"

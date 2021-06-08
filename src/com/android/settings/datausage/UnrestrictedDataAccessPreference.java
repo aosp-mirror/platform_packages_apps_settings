@@ -24,14 +24,14 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.Restrictable;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.widget.AppSwitchPreference;
 
 public class UnrestrictedDataAccessPreference extends AppSwitchPreference implements
-        DataSaverBackend.Listener, Restrictable {
+        DataSaverBackend.Listener {
 
     private final ApplicationsState mApplicationsState;
     private final AppEntry mEntry;
@@ -159,14 +159,12 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         return mEntry;
     }
 
-    @Override
-    public RestrictedPreferenceHelper getHelper() {
-        return mHelper;
+    public boolean isDisabledByAdmin() {
+        return mHelper.isDisabledByAdmin();
     }
 
-    @Override
-    public void notifyPreferenceChanged() {
-        notifyChanged();
+    public void setDisabledByAdmin(EnforcedAdmin admin) {
+        mHelper.setDisabledByAdmin(admin);
     }
 
     // Sets UI state based on allowlist/denylist status.

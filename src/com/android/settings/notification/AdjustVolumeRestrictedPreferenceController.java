@@ -27,7 +27,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.accounts.AccountRestrictionHelper;
 import com.android.settings.core.SliderPreferenceController;
-import com.android.settingslib.Restrictable;
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * Base class for preference controller that handles preference that enforce adjust volume
@@ -51,10 +51,10 @@ public abstract class AdjustVolumeRestrictedPreferenceController extends
 
     @Override
     public void updateState(Preference preference) {
-        if (!(preference instanceof Restrictable)) {
+        if (!(preference instanceof RestrictedPreference)) {
             return;
         }
-        mHelper.enforceRestrictionOnPreference(preference,
+        mHelper.enforceRestrictionOnPreference((RestrictedPreference) preference,
                 UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId());
     }
 
