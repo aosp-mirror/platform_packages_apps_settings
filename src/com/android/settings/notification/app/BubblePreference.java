@@ -22,7 +22,6 @@ import static android.app.NotificationManager.BUBBLE_PREFERENCE_SELECTED;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,13 +32,13 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.Utils;
 import com.android.settingslib.R;
-import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.Restrictable;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
 /**
  * A tri-state preference allowing a user to specify what gets to bubble.
  */
-public class BubblePreference extends Preference implements View.OnClickListener {
+public class BubblePreference extends Preference implements View.OnClickListener, Restrictable {
     RestrictedPreferenceHelper mHelper;
 
     private int mSelectedPreference;
@@ -79,12 +78,6 @@ public class BubblePreference extends Preference implements View.OnClickListener
 
     public int getSelectedPreference() {
         return mSelectedPreference;
-    }
-
-    public void setDisabledByAdmin(RestrictedLockUtils.EnforcedAdmin admin) {
-        if (mHelper.setDisabledByAdmin(admin)) {
-            notifyChanged();
-        }
     }
 
     public void setSelectedVisibility(boolean visible) {
@@ -147,6 +140,16 @@ public class BubblePreference extends Preference implements View.OnClickListener
         mBubbleAllButton.setSelected(mContext, selected == BUBBLE_PREFERENCE_ALL);
         mBubbleSelectedButton.setSelected(mContext, selected == BUBBLE_PREFERENCE_SELECTED);
         mBubbleNoneButton.setSelected(mContext, selected == BUBBLE_PREFERENCE_NONE);
+    }
+
+    @Override
+    public RestrictedPreferenceHelper getHelper() {
+        return mHelper;
+    }
+
+    @Override
+    public void notifyPreferenceChanged() {
+        notifyChanged();
     }
 
     private class ButtonViewHolder {

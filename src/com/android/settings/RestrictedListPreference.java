@@ -39,13 +39,17 @@ import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.ListPreferenceDialogFragmentCompat;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.settingslib.Restrictable;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestrictedListPreference extends CustomListPreference {
+/**
+ * List preference that can be disabled by a device admin using a user restriction.
+ */
+public class RestrictedListPreference extends CustomListPreference implements Restrictable {
     private final RestrictedPreferenceHelper mHelper;
     private final List<RestrictedItem> mRestrictedItems = new ArrayList<>();
     private boolean mRequiresActiveUnlockedProfile = false;
@@ -61,6 +65,10 @@ public class RestrictedListPreference extends CustomListPreference {
             int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         mHelper = new RestrictedPreferenceHelper(context, this, attrs);
+    }
+
+    public RestrictedListPreference(Context context) {
+        this(context, /* attrs= */ null);
     }
 
     @Override
@@ -107,14 +115,14 @@ public class RestrictedListPreference extends CustomListPreference {
         super.setEnabled(enabled);
     }
 
-    public void setDisabledByAdmin(EnforcedAdmin admin) {
-        if (mHelper.setDisabledByAdmin(admin)) {
-            notifyChanged();
-        }
+    @Override
+    public RestrictedPreferenceHelper getHelper() {
+        return mHelper;
     }
 
-    public boolean isDisabledByAdmin() {
-        return mHelper.isDisabledByAdmin();
+    @Override
+    public void notifyPreferenceChanged() {
+        notifyChanged();
     }
 
     public void setRequiresActiveUnlockedProfile(boolean reqState) {

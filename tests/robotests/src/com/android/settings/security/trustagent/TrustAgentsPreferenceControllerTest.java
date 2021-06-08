@@ -28,7 +28,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.service.trust.TrustAgentService;
 
-import android.text.TextUtils;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
