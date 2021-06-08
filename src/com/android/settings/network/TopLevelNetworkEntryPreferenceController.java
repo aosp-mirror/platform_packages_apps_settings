@@ -18,29 +18,18 @@ package com.android.settings.network;
 
 import android.content.Context;
 import android.text.BidiFormatter;
-import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.wifi.WifiPrimarySwitchPreferenceController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TopLevelNetworkEntryPreferenceController extends BasePreferenceController {
 
-    private final WifiPrimarySwitchPreferenceController mWifiPreferenceController;
     private final MobileNetworkPreferenceController mMobileNetworkPreferenceController;
-    private final TetherPreferenceController mTetherPreferenceController;
 
     public TopLevelNetworkEntryPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mMobileNetworkPreferenceController = new MobileNetworkPreferenceController(mContext);
-        mTetherPreferenceController = new TetherPreferenceController(
-                mContext, null /* lifecycle */);
-        mWifiPreferenceController = new WifiPrimarySwitchPreferenceController(
-                mContext, null /* metrics */);
     }
 
     @Override
@@ -50,44 +39,12 @@ public class TopLevelNetworkEntryPreferenceController extends BasePreferenceCont
 
     @Override
     public CharSequence getSummary() {
-        final String wifiSummary = BidiFormatter.getInstance()
-                .unicodeWrap(mContext.getString(R.string.wifi_settings_title));
-        final String mobileSummary = mContext.getString(
-                R.string.network_dashboard_summary_mobile);
-        final String dataUsageSummary = mContext.getString(
-                R.string.network_dashboard_summary_data_usage);
-        final String hotspotSummary = mContext.getString(
-                R.string.network_dashboard_summary_hotspot);
-
-        final List<String> summaries = new ArrayList<>();
-        if (mWifiPreferenceController.isAvailable()
-                && !TextUtils.isEmpty(wifiSummary)) {
-            summaries.add(wifiSummary);
+        if (mMobileNetworkPreferenceController.isAvailable()) {
+            return BidiFormatter.getInstance()
+                    .unicodeWrap(mContext.getString(R.string.network_dashboard_summary_mobile));
+        } else {
+            return BidiFormatter.getInstance()
+                    .unicodeWrap(mContext.getString(R.string.network_dashboard_summary_no_mobile));
         }
-        if (mMobileNetworkPreferenceController.isAvailable() && !TextUtils.isEmpty(mobileSummary)) {
-            summaries.add(mobileSummary);
-        }
-        if (!TextUtils.isEmpty(dataUsageSummary)) {
-            summaries.add(dataUsageSummary);
-        }
-        if (mTetherPreferenceController.isAvailable()
-                && !TextUtils.isEmpty(hotspotSummary)) {
-            summaries.add(hotspotSummary);
-        }
-        return concatSummaries(summaries);
-    }
-
-    private CharSequence concatSummaries(List<String> summaries) {
-        if (summaries.isEmpty()) {
-            return mContext.getText(R.string.summary_placeholder);
-        }
-
-        String summary = summaries.get(0);
-        final int summary_size = summaries.size();
-        for (int i = 1; i < summary_size; i++) {
-            summary = mContext.getString(R.string.join_two_unrelated_items, summary,
-                    summaries.get(i));
-        }
-        return summary;
     }
 }
