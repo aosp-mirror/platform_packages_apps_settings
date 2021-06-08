@@ -169,6 +169,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         return WifiPickerTracker.isVerboseLoggingEnabled();
     }
 
+    private boolean mIsWifiEntryListStale = true;
     private final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
         updateWifiEntryPreferences();
     };
@@ -437,6 +438,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onStop() {
+        mIsWifiEntryListStale = true;
         getView().removeCallbacks(mUpdateWifiEntryPreferencesRunnable);
         getView().removeCallbacks(mHideProgressBarRunnable);
         mAirplaneModeEnabler.stop();
@@ -698,7 +700,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onWifiEntriesChanged() {
-        updateWifiEntryPreferencesDelayed();
+        if (mIsWifiEntryListStale) {
+            mIsWifiEntryListStale = false;
+            updateWifiEntryPreferences();
+        } else {
+            updateWifiEntryPreferencesDelayed();
+        }
         changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
 
         // Edit the Wi-Fi network of specified SSID.
