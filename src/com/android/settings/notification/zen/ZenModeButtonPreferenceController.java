@@ -16,34 +16,37 @@
 
 package com.android.settings.notification.zen;
 
+import static android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
-import android.widget.Switch;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.SettingsEnableZenModeDialog;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class ZenModeButtonPreferenceController extends AbstractZenModePreferenceController
-        implements PreferenceControllerMixin, OnMainSwitchChangeListener {
-
-    private static final String TAG = "EnableZenModeButton";
+        implements PreferenceControllerMixin {
 
     public static final String KEY = "zen_mode_toggle";
 
+    private static final String TAG = "EnableZenModeButton";
     private final FragmentManager mFragment;
 
-    // DND can also be toggled from QS.
-    private MainSwitchPreference mPreference;
+    // DND can also be toggled from QS. If DND wasn't toggled by this preference, don't
+    // reroute focus.
+    private boolean mRefocusButton = false;
+    private Button mZenButtonOn;
+    private Button mZenButtonOff;
 
     public ZenModeButtonPreferenceController(Context context, Lifecycle lifecycle, FragmentManager
             fragment) {
@@ -62,25 +65,24 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = (MainSwitchPreference) screen.findPreference(getPreferenceKey());
-        mPreference.addOnSwitchChangeListener(this);
-    }
-
-    @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        if (isChecked) {
-            updateZenModeState(mPreference);
-        } else {
-            writeMetrics(mPreference, false);
-            mBackend.setZenMode(Settings.Global.ZEN_MODE_OFF);
-        }
-    }
-
-    @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+
+        if (null == mZenButtonOn) {
+            mZenButtonOn = ((LayoutPreference) preference)
+                    .findViewById(R.id.zen_mode_settings_turn_on_button);
+            updateZenButtonOnClickListener(preference);
+        }
+
+        if (null == mZenButtonOff) {
+            mZenButtonOff = ((LayoutPreference) preference)
+                    .findViewById(R.id.zen_mode_settings_turn_off_button);
+            mZenButtonOff.setOnClickListener(v -> {
+                mRefocusButton = true;
+                writeMetrics(preference, false);
+                mBackend.setZenMode(Settings.Global.ZEN_MODE_OFF);
+            });
+        }
 
         updatePreference(preference);
     }
@@ -90,29 +92,41 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             case Settings.Global.ZEN_MODE_ALARMS:
             case Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
             case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
-                mPreference.updateStatus(true);
-                mPreference.setTitle(R.string.do_not_disturb_main_switch_title_on);
+                mZenButtonOff.setVisibility(View.VISIBLE);
+                mZenButtonOn.setVisibility(View.GONE);
+                if (mRefocusButton) {
+                    mRefocusButton = false;
+                    mZenButtonOff.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
+                }
                 break;
             case Settings.Global.ZEN_MODE_OFF:
             default:
-                mPreference.setTitle(R.string.do_not_disturb_main_switch_title_off);
-                mPreference.updateStatus(false);
+                mZenButtonOff.setVisibility(View.GONE);
+                updateZenButtonOnClickListener(preference);
+                mZenButtonOn.setVisibility(View.VISIBLE);
+                if (mRefocusButton) {
+                    mRefocusButton = false;
+                    mZenButtonOn.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
+                }
         }
     }
 
-    private void updateZenModeState(Preference preference) {
-        writeMetrics(preference, true);
-        int zenDuration = getZenDuration();
-        switch (zenDuration) {
-            case Settings.Secure.ZEN_DURATION_PROMPT:
-                new SettingsEnableZenModeDialog().show(mFragment, TAG);
-                break;
-            case Settings.Secure.ZEN_DURATION_FOREVER:
-                mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-                break;
-            default:
-                mBackend.setZenModeForDuration(zenDuration);
-        }
+    private void updateZenButtonOnClickListener(Preference preference) {
+        mZenButtonOn.setOnClickListener(v -> {
+            mRefocusButton = true;
+            writeMetrics(preference, true);
+            int zenDuration = getZenDuration();
+            switch (zenDuration) {
+                case Settings.Secure.ZEN_DURATION_PROMPT:
+                    new SettingsEnableZenModeDialog().show(mFragment, TAG);
+                    break;
+                case Settings.Secure.ZEN_DURATION_FOREVER:
+                    mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+                    break;
+                default:
+                    mBackend.setZenModeForDuration(zenDuration);
+            }
+        });
     }
 
     private void writeMetrics(Preference preference, boolean buttonOn) {

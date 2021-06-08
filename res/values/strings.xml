@@ -3167,7 +3167,7 @@
     <!-- Styles & Wallpapers settings title [CHAR LIMIT=30] -->
     <string name="style_and_wallpaper_settings_title">Wallpaper &amp; style</string>
     <!-- Summary for the top level Styles & wallpapers Settings [CHAR LIMIT=NONE]-->
-    <string name="wallpaper_dashboard_summary">Colors, app grid</string>
+    <string name="wallpaper_dashboard_summary">Colors, themed icons, app grid</string>
     <!-- Wallpaper settings summary when default wallpaper is used [CHAR LIMIT=NONE] -->
     <string name="wallpaper_settings_summary_default">Default</string>
     <!-- Wallpaper settings summary when wallpaper has been updated [CHAR LIMIT=NONE] -->
@@ -5177,7 +5177,7 @@
     <!-- Settings title for accessibility settings screen -->
     <string name="accessibility_settings_title">Accessibility settings</string>
     <!-- Summary for Accessibility settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="accessibility_settings_summary">Screen readers, display, interaction controls</string>
+    <string name="accessibility_settings_summary">Screen readers, interaction controls</string>
     <!-- Settings title for a brief version of Vision-Related Accessibility Settings. Displayed in Setup Wizard only. [CHAR LIMIT=35] -->
     <string name="vision_settings_title">Vision Settings</string>
     <!-- Settings description for a brief version of Vision-Related Accessibility Settings. Tells the user that they can adjust these settings now to help them through the remainder of the Setup Wizard and that they can later be changed in Settings. Displayed in Setup Wizard only. [CHAR LIMIT=none] -->
@@ -7678,7 +7678,7 @@
     <string name="help_label">Help &amp; feedback</string>
 
     <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
-    <string name="support_summary">Help articles, phone &amp; chat, getting started</string>
+    <string name="support_summary">Help articles, phone &amp; chat</string>
 
     <!-- Help URI, Default [DO NOT TRANSLATE] -->
     <string name="help_uri_default" translatable="false"></string>
@@ -8074,15 +8074,15 @@
 
     <!-- Title for setting tile leading to network and Internet settings [CHAR LIMIT=40]-->
     <string name="network_dashboard_title">Network &amp; internet</string>
-    <!-- Summary for Network and Internet settings, explaining it contains mobile network setting [CHAR LIMIT=NONE]-->
-    <string name="network_dashboard_summary_mobile">mobile</string>
-    <!-- Summary for Network and Internet settings, explaining it contains network data usage setting [CHAR LIMIT=NONE]-->
-    <string name="network_dashboard_summary_data_usage">data usage</string>
-    <!-- Summary for Network and Internet settings, explaining it contains hotspot (tethering) setting [CHAR LIMIT=NONE]-->
-    <string name="network_dashboard_summary_hotspot">hotspot</string>
+    <!-- Summary for Network and Internet settings, explaining it contains mobile, wifi setting and data usage settings [CHAR LIMIT=NONE]-->
+    <string name="network_dashboard_summary_mobile">Mobile, Wi\u2011Fi, hotspot</string>
+    <!-- Summary for Network and Internet settings, explaining it contains wifi and data usage setting [CHAR LIMIT=NONE]-->
+    <string name="network_dashboard_summary_no_mobile">Wi\u2011Fi, hotspot</string>
 
     <!-- Title for setting tile leading to Connected devices settings [CHAR LIMIT=40]-->
     <string name="connected_devices_dashboard_title">Connected devices</string>
+    <!-- Summary for Connected devices settings, explaining default settings under it [CHAR LIMIT=NONE]-->
+    <string name="connected_devices_dashboard_default_summary">Bluetooth, pairing</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="connected_devices_dashboard_summary">Bluetooth, driving mode, NFC</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
@@ -8862,7 +8862,10 @@
 
     <!-- Bubble feature settings: Description for toggle when bubbles are turned on in notification settings [CHAR LIMIT=100] -->
     <string name="notifications_bubble_setting_on_summary">On / Conversations can appear as floating icons</string>
-
+    <!-- Bubble feature settings: Title of the toggle to turn bubbles on and off [CHAR LIMIT=100] -->
+    <string name="notifications_bubble_setting_title">Allow apps to show bubbles</string>
+    <!-- Bubble feature settings: Description shown with the toggle to turn bubbles on and off [CHAR LIMIT=NONE]-->
+    <string name="notifications_bubble_setting_description">Some conversations will appear as floating icons on top of other apps</string>
     <!-- Bubble app settings: option allowing all conversations from an app to bubble if the app sends bubbles [CHAR LIMIT=60]-->
     <string name="bubble_app_setting_all">All conversations can bubble</string>
     <!-- Bubble app settings: option allowing only user selected conversations from an app to bubble if the app sends bubbles [CHAR LIMIT=60] -->
@@ -10897,7 +10900,7 @@
     <!-- Summary of display with screen sleep timeout [CHAR LIMIT=NONE] -->
     <string name="display_summary">Sleep after <xliff:g id="timeout_description" example="10 minutes">%1$s</xliff:g> of inactivity</string>
     <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="display_dashboard_summary">Screen timeout, font size</string>
+    <string name="display_dashboard_summary">Dark theme, font size, brightness</string>
 
     <!-- Example summary of display used in Setup Wizard preview screen [CHAR LIMIT=NONE] -->
     <string name="display_summary_example">Sleep after 10 minutes of inactivity</string>
@@ -11629,7 +11632,7 @@
     <!-- Title text for swiping from bottom corners to invoke the digital assistant app. [CHAR LIMIT=60] -->
     <string name="assistant_corner_gesture_title">Swipe to invoke assistant</string>
     <!-- Summary text for swiping from bottom corners to invoke the digital assistant app. [CHAR LIMIT=NONE] -->
-    <string name="assistant_corner_gesture_summary">Swipe up from a bottom corner corner to invoke digital assistant app.</string>
+    <string name="assistant_corner_gesture_summary">Swipe up from a bottom corner to invoke digital assistant app.</string>
 
     <!-- Content description for the Information icon [CHAR LIMIT=30] -->
     <string name="information_label">Information</string>
@@ -13351,8 +13354,6 @@
     <string name="adaptive_brightness_main_switch_title">Use adaptive brightness</string>
     <!-- Title for wifi calling main switch preferences. [CHAR LIMIT=50] -->
     <string name="wifi_calling_main_switch_title">Use Wi‑Fi calling</string>
-    <!-- Title for Bubbles main switch preferences. [CHAR LIMIT=50] -->
-    <string name="bubbles_main_switch_title">Use Bubbles</string>
     <!-- Title for Screen saver main switch preferences. [CHAR LIMIT=50] -->
     <string name="screen_saver_main_switch_title">Use screen saver</string>
 
