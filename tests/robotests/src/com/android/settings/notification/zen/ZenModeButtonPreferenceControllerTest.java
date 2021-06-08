@@ -22,19 +22,23 @@ import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_OFF;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.notification.zen.ZenModeBackend;
+import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.MainSwitchPreference;
 
@@ -58,9 +62,13 @@ public class ZenModeButtonPreferenceControllerTest {
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private MainSwitchPreference mMockPref;
+    private Preference mMockPref;
     @Mock
     private NotificationManager.Policy mPolicy;
+    @Mock
+    private Button mZenButtonOn;
+    @Mock
+    private Button mZenButtonOff;
     @Mock
     private PreferenceScreen mPreferenceScreen;
     private ContentResolver mContentResolver;
@@ -78,6 +86,8 @@ public class ZenModeButtonPreferenceControllerTest {
                 mock(FragmentManager.class));
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
+        ReflectionHelpers.setField(mController, "mZenButtonOn", mZenButtonOn);
+        ReflectionHelpers.setField(mController, "mZenButtonOff", mZenButtonOff);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mMockPref);
@@ -87,56 +97,52 @@ public class ZenModeButtonPreferenceControllerTest {
     @Test
     public void updateState_TotalSilence() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_NO_INTERRUPTIONS);
-        final MainSwitchPreference pref = new MainSwitchPreference(mContext);
+        mController.updateState(mMockPref);
 
-        mController.updateState(pref);
-
-        assertThat(pref.isChecked()).isFalse();
+        verify(mZenButtonOn).setVisibility(View.GONE);
+        verify(mZenButtonOff).setVisibility(View.VISIBLE);
     }
 
     @Test
     public void updateState_AlarmsOnly() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_ALARMS);
-        final MainSwitchPreference pref = new MainSwitchPreference(mContext);
+        mController.updateState(mMockPref);
 
-        mController.updateState(pref);
-
-        assertThat(pref.isChecked()).isFalse();
+        verify(mZenButtonOn).setVisibility(View.GONE);
+        verify(mZenButtonOff).setVisibility(View.VISIBLE);
     }
 
     @Test
     public void updateState_Priority() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        final MainSwitchPreference pref = new MainSwitchPreference(mContext);
+        mController.updateState(mMockPref);
 
-        mController.updateState(pref);
-
-        assertThat(pref.isChecked()).isFalse();
+        verify(mZenButtonOn).setVisibility(View.GONE);
+        verify(mZenButtonOff).setVisibility(View.VISIBLE);
     }
 
     @Test
     public void updateState_ZenOff() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_OFF);
-        final MainSwitchPreference pref = new MainSwitchPreference(mContext);
+        mController.updateState(mMockPref);
 
-        mController.updateState(pref);
-
-        assertThat(pref.isChecked()).isFalse();
+        verify(mZenButtonOn).setVisibility(View.VISIBLE);
+        verify(mZenButtonOff).setVisibility(View.GONE);
     }
 
     @Test
     public void updateState_otherUserChangedZen() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_OFF);
-        final MainSwitchPreference pref = new MainSwitchPreference(mContext);
-        mController.updateState(pref);
-
-        assertThat(pref.isChecked()).isFalse();
+        mController.updateState(mMockPref);
+        verify(mZenButtonOn).setVisibility(View.VISIBLE);
+        verify(mZenButtonOff).setVisibility(View.GONE);
 
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         final int GUEST_USER_ID = 10;
         mController.mSettingObserver.onChange(false,
                 Settings.Global.getUriFor(Settings.Global.ZEN_MODE), GUEST_USER_ID);
 
-        assertThat(pref.isChecked()).isFalse();
+        verify(mZenButtonOn).setVisibility(View.GONE);
+        verify(mZenButtonOff).setVisibility(View.VISIBLE);
     }
 }
