@@ -49,9 +49,9 @@ import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.GearPreference;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ActionButtonsPreference;
+import com.android.settingslib.widget.SeekBarPreference;
 
 import java.text.Collator;
 import java.util.ArrayList;
