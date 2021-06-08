@@ -19,7 +19,6 @@ import android.content.Context;
 import androidx.preference.Preference;
 
 import com.android.settings.slices.SliceData;
-import com.android.settingslib.widget.SeekBarPreference;
 
 public abstract class SliderPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener {
@@ -35,10 +34,12 @@ public abstract class SliderPreferenceController extends BasePreferenceControlle
 
     @Override
     public void updateState(Preference preference) {
-        if (preference instanceof SeekBarPreference) {
-            ((SeekBarPreference) preference).setProgress(getSliderPosition());
+        if (preference instanceof com.android.settings.widget.SeekBarPreference) {
+            ((com.android.settings.widget.SeekBarPreference) preference)
+                .setProgress(getSliderPosition());
         } else if (preference instanceof androidx.preference.SeekBarPreference) {
-            ((androidx.preference.SeekBarPreference) preference).setValue(getSliderPosition());
+            ((androidx.preference.SeekBarPreference) preference)
+                .setValue(getSliderPosition());
         }
     }
 

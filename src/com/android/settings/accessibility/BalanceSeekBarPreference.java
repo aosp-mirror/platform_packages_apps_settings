@@ -17,19 +17,23 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.media.AudioSystem;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 
 import androidx.core.content.res.TypedArrayUtils;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settingslib.RestrictedSeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 
 /** A slider preference that directly controls audio balance **/
-public class BalanceSeekBarPreference extends RestrictedSeekBarPreference {
+public class BalanceSeekBarPreference extends SeekBarPreference {
     private static final int BALANCE_CENTER_VALUE = 100;
     private static final int BALANCE_MAX_VALUE = 200;
 
