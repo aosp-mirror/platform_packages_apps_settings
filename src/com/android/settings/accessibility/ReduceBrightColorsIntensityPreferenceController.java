@@ -23,7 +23,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.SliderPreferenceController;
-import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.widget.SeekBarPreference;
 
 /** PreferenceController for feature intensity. */
 public class ReduceBrightColorsIntensityPreferenceController extends SliderPreferenceController {
