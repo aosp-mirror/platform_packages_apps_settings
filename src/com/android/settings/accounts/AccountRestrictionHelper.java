@@ -27,9 +27,11 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.preference.Preference;
+
 import com.android.settings.AccessiblePreferenceCategory;
+import com.android.settingslib.Restrictable;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
 
@@ -42,34 +44,74 @@ public class AccountRestrictionHelper {
     }
 
     /**
-     * Configure the UI of the preference by checking user restriction.
-     * @param preference The preference we are configuring.
-     * @param userRestriction The user restriction related to the preference.
-     * @param userId The user that we retrieve user restriction of.
+     * Checks if the account should be shown based on the required authorities for the account type
+     *
+     * @param authorities given authority that is passed as activity extra
+     * @param auths       list of authorities for particular account type
+     * @return true if the activity has the required authority to show the account
      */
-    public void enforceRestrictionOnPreference(RestrictedPreference preference,
-        String userRestriction, @UserIdInt int userId) {
+    public static boolean showAccount(String[] authorities, ArrayList<String> auths) {
+        boolean showAccount = true;
+        if (authorities != null && auths != null) {
+            showAccount = false;
+            for (String requestedAuthority : authorities) {
+                if (auths.contains(requestedAuthority)) {
+                    return true;
+                }
+            }
+        }
+        return showAccount;
+    }
+
+    /**
+     * Configure the UI of the preference by checking user restriction.
+     *
+     * @param preference      The preference we are configuring.
+     * @param userRestriction The user restriction related to the preference.
+     * @param userId          The user that we retrieve user restriction of.
+     */
+    public void enforceRestrictionOnPreference(Preference preference,
+            String userRestriction, @UserIdInt int userId) {
         if (preference == null) {
             return;
         }
+        if (!(preference instanceof Restrictable)) {
+            return;
+        }
+
+        final Restrictable restrictedPreference = (Restrictable) preference;
+
         if (hasBaseUserRestriction(userRestriction, userId)) {
             if (userRestriction.equals(DISALLOW_REMOVE_MANAGED_PROFILE)
                     && isOrganizationOwnedDevice()) {
-                preference.setDisabledByAdmin(getEnforcedAdmin(userRestriction, userId));
+                restrictedPreference.setDisabledByAdmin(getEnforcedAdmin(userRestriction, userId));
             } else {
                 preference.setEnabled(false);
             }
         } else {
-            preference.checkRestrictionAndSetDisabled(userRestriction, userId);
+            restrictedPreference.checkRestrictionAndSetDisabled(userRestriction, userId);
         }
     }
 
+    /**
+     * Check if the system has set the user restriction.
+     * @param userRestriction The user restriction.
+     * @param userId The user that we retrieve user restriction of.
+     * @return {@code true} if set restriction.
+     */
     public boolean hasBaseUserRestriction(String userRestriction, @UserIdInt int userId) {
         return RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext, userRestriction,
                 userId);
     }
 
-    private boolean isOrganizationOwnedDevice() {
+    /**
+     * Apps can use this method to find out if the device was provisioned as
+     * organization-owend device.
+     *
+     * @return {@code true} if the device was provisioned as organization-owned device,
+     * {@code false} otherwise.
+     */
+    public boolean isOrganizationOwnedDevice() {
         final DevicePolicyManager dpm = (DevicePolicyManager) mContext.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
         if (dpm == null) {
@@ -78,7 +120,13 @@ public class AccountRestrictionHelper {
         return dpm.isOrganizationOwnedDeviceWithManagedProfile();
     }
 
-    private EnforcedAdmin getEnforcedAdmin(String userRestriction, int userId) {
+    /**
+     * Get the restriction enforced by admin
+     * @param userRestriction The user restriction.
+     * @param userId The user that we retrieve user restriction of.
+     * @return {EnforcedAdmin}
+     */
+    public EnforcedAdmin getEnforcedAdmin(String userRestriction, int userId) {
         final DevicePolicyManager dpm = (DevicePolicyManager) mContext.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
         if (dpm == null) {
@@ -106,24 +154,5 @@ public class AccountRestrictionHelper {
 
     public AccessiblePreferenceCategory createAccessiblePreferenceCategory(Context context) {
         return new AccessiblePreferenceCategory(context);
-    }
-
-    /**
-     * Checks if the account should be shown based on the required authorities for the account type
-     * @param authorities given authority that is passed as activity extra
-     * @param auths list of authorities for particular account type
-     * @return true if the activity has the required authority to show the account
-     */
-    public static boolean showAccount(String[] authorities, ArrayList<String> auths) {
-        boolean showAccount = true;
-        if (authorities != null && auths != null) {
-            showAccount = false;
-            for (String requestedAuthority : authorities) {
-                if (auths.contains(requestedAuthority)) {
-                    return true;
-                }
-            }
-        }
-        return showAccount;
     }
 }

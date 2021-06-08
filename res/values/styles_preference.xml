@@ -23,7 +23,6 @@
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
         <item name="cardPreferenceStyle">@style/CardPreference</item>
         <item name="slicePreferenceStyle">@style/SlicePreference</item>
-        <item name="seekBarPreferenceStyle">@style/SettingsSeekBarPreference</item>
         <item name="twoStateButtonPreferenceStyle">@style/TwoStateButtonPreference</item>
         <item name="preferenceFragmentCompatStyle">@style/SettingsPreferenceFragmentStyle</item>
     </style>
@@ -42,10 +41,6 @@
 
     <style name="SlicePreference" parent="@style/Preference.Material">
         <item name="android:layout">@layout/slice_preference_layout</item>
-    </style>
-
-    <style name="SettingsSeekBarPreference" parent="@style/Preference.Material">
-        <item name="android:layout">@layout/preference_widget_seekbar_settings</item>
     </style>
 
     <style name="SyncSwitchPreference" parent="@style/SettingsSwitchPreference.SettingsLib">
