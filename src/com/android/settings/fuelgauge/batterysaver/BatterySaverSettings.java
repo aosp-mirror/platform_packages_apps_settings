@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterysaver;
 
 import android.app.settings.SettingsEnums;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -36,7 +35,6 @@ import com.android.settingslib.widget.FooterPreference;
 public class BatterySaverSettings extends DashboardFragment {
     private static final String TAG = "BatterySaverSettings";
     private static final String KEY_FOOTER_PREFERENCE = "battery_saver_footer_preference";
-    private SpannableStringBuilder mFooterText;
     private String mHelpUri;
 
     @Override
@@ -76,8 +74,6 @@ public class BatterySaverSettings extends DashboardFragment {
     void setupFooter() {
         mHelpUri = getString(R.string.help_url_battery_saver_settings);
         if (!TextUtils.isEmpty(mHelpUri)) {
-            mFooterText = new SpannableStringBuilder(getText(
-                    com.android.internal.R.string.battery_saver_description_with_learn_more));
             addHelpLink();
         }
     }
@@ -87,7 +83,6 @@ public class BatterySaverSettings extends DashboardFragment {
     void addHelpLink() {
         FooterPreference pref = getPreferenceScreen().findPreference(KEY_FOOTER_PREFERENCE);
         if (pref != null) {
-            pref.setTitle(mFooterText);
             pref.setSelectable(false);
             pref.setLearnMoreAction(v -> {
                 mMetricsFeatureProvider.action(getContext(),
