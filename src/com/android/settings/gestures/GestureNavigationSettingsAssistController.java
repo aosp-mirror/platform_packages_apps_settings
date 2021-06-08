@@ -26,18 +26,16 @@ import com.android.settings.core.TogglePreferenceController;
  */
 public class GestureNavigationSettingsAssistController extends TogglePreferenceController {
 
-    // This value is based on SystemUI/src/com/android/systemui/navigationbar/NavigationBar.java
-    // behaviour. We assume that the gestures are enabled by default.
-    private static final int ASSIST_TOUCH_GESTURE_DEFAULT_VALUE = 1;
-
     public GestureNavigationSettingsAssistController(Context context, String key) {
         super(context, key);
     }
 
     @Override
     public boolean isChecked() {
+        boolean onByDefault = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_assistTouchGestureEnabledDefault);
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ASSIST_TOUCH_GESTURE_ENABLED, ASSIST_TOUCH_GESTURE_DEFAULT_VALUE)
+                Settings.Secure.ASSIST_TOUCH_GESTURE_ENABLED, onByDefault ? 1 : 0)
                 == 1;
     }
 
