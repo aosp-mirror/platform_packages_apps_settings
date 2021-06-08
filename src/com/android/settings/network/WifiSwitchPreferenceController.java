@@ -35,7 +35,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 public class WifiSwitchPreferenceController extends AbstractPreferenceController implements
         LifecycleObserver {
 
-    public static final String KEY = "wifi_switch";
+    public static final String KEY = "main_toggle_wifi";
 
     private RestrictedSwitchPreference mPreference;
 
