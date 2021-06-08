@@ -28,10 +28,10 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.SliderPreferenceController;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.widget.SeekBarPreference;
 
 /** Preference controller that controls the transparency seekbar in accessibility button page. */
 public class FloatingMenuTransparencyPreferenceController extends SliderPreferenceController
