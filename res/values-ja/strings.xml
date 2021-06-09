@@ -24,11 +24,11 @@
     <string name="confirmation_turn_on" msgid="2979094011928347665">"ON にする"</string>
     <string name="device_info_default" msgid="1406619232867343310">"不明"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="other">デベロッパーになるまであと<xliff:g id="STEP_COUNT_1">%1$d</xliff:g>ステップです。</item>
-      <item quantity="one">デベロッパーになるまであと<xliff:g id="STEP_COUNT_0">%1$d</xliff:g>ステップです。</item>
+      <item quantity="other">開発者向けオプションが有効になるまであと <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> 回です</item>
+      <item quantity="one">開発者向けオプションが有効になるまであと <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> 回です</item>
     </plurals>
     <string name="show_dev_on" msgid="2840850085134853754">"開発者向けオプションが有効になりました"</string>
-    <string name="show_dev_already" msgid="7041756429707644630">"開発者向けオプションが既に有効です。"</string>
+    <string name="show_dev_already" msgid="7041756429707644630">"開発者向けオプションはすでに有効です"</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"まず開発者向けオプションを有効にしてください。"</string>
     <string name="header_category_wireless_networks" msgid="303445626075235229">"無線とネットワーク"</string>
     <string name="header_category_system" msgid="1665516346845259058">"システム"</string>
@@ -1593,7 +1593,7 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"アプリをリセットできます"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Wi-Fi、モバイル、Bluetooth をリセット"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"以下を含む、すべてのネットワーク設定がリセットされます。\n\n"<li>"Wi‑Fi"</li>\n<li>"モバイルデータ"</li>\n<li>"Bluetooth"</li></string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"ダウンロードされた eSIM の消去"</string>
+    <string name="reset_esim_title" msgid="6152167073280852849">"ダウンロードされた eSIM を消去"</string>
     <string name="reset_esim_desc" msgid="4256518544336245086">"別の eSIM をダウンロードするには、携帯通信会社にお問い合わせください。この操作でモバイルのサービスプランが解約されることはありません。"</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"設定をリセット"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"すべてのネットワーク設定をリセットしますか？この操作を取り消すことはできません。"</string>
@@ -2293,7 +2293,7 @@
     <string name="captioning_window_color" msgid="1406167274530183119">"字幕ウィンドウの色"</string>
     <string name="captioning_window_opacity" msgid="4031752812991199525">"字幕ウィンドウの透明度"</string>
     <string name="captioning_foreground_color" msgid="9057327228286129232">"テキストの色"</string>
-    <string name="captioning_foreground_opacity" msgid="1395843080697567189">"テキストの透明度"</string>
+    <string name="captioning_foreground_opacity" msgid="1395843080697567189">"テキストの不透明度"</string>
     <string name="captioning_edge_color" msgid="6035818279902597518">"エッジの色"</string>
     <string name="captioning_edge_type" msgid="5281259280060811506">"エッジの種類"</string>
     <string name="captioning_typeface" msgid="285325623518361407">"フォントファミリー"</string>
@@ -3618,9 +3618,9 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"通知へのアクセスをリクエストしたインストール済みアプリはありません。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"通知へのアクセスを許可"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"通知へのアクセスを<xliff:g id="SERVICE">%1$s</xliff:g>に許可しますか？"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> はすべての通知を読み取ることができます。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を非表示にしたり、電話に出るなどの通知内のボタン操作を実行したりすることもできます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
-    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g>での通知へのアクセスを許可しますか？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> はすべての通知を読み取ることができます。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を非表示にしたり、電話に出るなどの通知内のボタン操作を実行したりすることもできます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> がすべての通知を読み取れるようになります。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を非表示にしたり、電話に出るなど、通知内の操作ボタンをタップしたりすることも許可されます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
+    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> による通知へのアクセスを許可しますか？"</string>
+    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> がすべての通知を読み取れるようになります。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を非表示にしたり、電話に出るなど、通知内の操作ボタンをタップしたりすることも許可されます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> の通知アクセスを OFF にすると、サイレント モードのアクセスも OFF になります。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"OFF にする"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"キャンセル"</string>
@@ -4965,4 +4965,10 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth が ON になります"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"おやすみ時間モードが ON のため利用できません"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"信頼できないデバイスがメッセージにアクセスしようとしています。タップして詳細をご確認ください。"</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"メッセージへのアクセスを許可しますか？"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"信頼できない Bluetooth デバイス <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> がメッセージにアクセスしようとしています。\n\nこれまでに <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> に接続したことはありません。"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"信頼できないデバイスが連絡先と通話履歴にアクセスしようとしています。タップして詳細をご確認ください。"</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"連絡先と通話履歴へのアクセスを許可しますか？"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"信頼できない Bluetooth デバイス <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> が連絡先と通話履歴にアクセスしようとしています。これには着信や発信に関するデータも含まれます。\n\nこれまでに <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> に接続したことはありません。"</string>
 </resources>

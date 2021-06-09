@@ -2429,7 +2429,7 @@
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"平板電腦使用率比平常高"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"裝置使用率比平常高"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池電量可能會比平常更快耗盡"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"針對電池狀態進行最佳化調整"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="7152799456221596915">"最佳化調整電池狀態"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="6837061824463128857">"系統已暫時限制電池用量。輕觸即可瞭解詳情。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"你的手機使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"你的平板電腦使用率比平常高，電池電量可能比預期更快耗盡。\n\n你常用的應用程式如下 (按照電池用量由高到低排序)："</string>
@@ -2591,7 +2591,7 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"重新整理"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"媒體伺服器"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"應用程式最佳化"</string>
-    <string name="battery_saver" msgid="7737147344510595864">"省電模式"</string>
+    <string name="battery_saver" msgid="7737147344510595864">"節約耗電量"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"自動開啟"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"未設定時間表"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"根據你平常充電的時間"</string>
@@ -3554,7 +3554,7 @@
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"對話部分"</string>
     <string name="conversation_section_switch_summary" msgid="6123587625929439674">"允許應用程式使用對話部分"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"不是對話"</string>
-    <string name="demote_conversation_summary" msgid="4319929331165604112">"從對話部分中移除"</string>
+    <string name="demote_conversation_summary" msgid="4319929331165604112">"從對話區塊中移除"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"這是對話"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"新增至對話部分"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"管理對話"</string>
@@ -4284,7 +4284,7 @@
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> 行動數據"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi 數據"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> 乙太網路數據"</string>
-    <string name="billing_cycle" msgid="6618424022653876279">"數據警告與限制"</string>
+    <string name="billing_cycle" msgid="6618424022653876279">"數據用量警告與限制"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"行動數據用量週期"</string>
     <string name="cell_data_warning" msgid="5664921950473359634">"<xliff:g id="ID_1">^1</xliff:g> 數據用量警告"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"<xliff:g id="ID_1">^1</xliff:g> 數據用量上限"</string>
@@ -4965,4 +4965,10 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒體"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"系統將開啟藍牙"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"就寢時間模式開啟時無法使用"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"不受信任的裝置想要存取你的訊息。輕觸即可瞭解詳情。"</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"要允許存取訊息嗎？"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"不受信任的藍牙裝置「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要存取你的訊息。\n\n請注意，你從未連線到「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」。"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"不受信任的裝置想要存取你的聯絡人和通話記錄。輕觸即可瞭解詳情。"</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"要允許存取聯絡人和通話記錄嗎？"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"不受信任的藍牙裝置「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要存取你的聯絡人和通話記錄，包括你接聽及撥打的電話。\n\n請注意，你從未連線到「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」。"</string>
 </resources>
