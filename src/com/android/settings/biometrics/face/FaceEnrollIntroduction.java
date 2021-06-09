@@ -38,7 +38,6 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
-import com.google.android.setupdesign.template.RequireScrollMixin;
 
 import java.util.List;
 
@@ -81,32 +80,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
                 .getFaceFeatureProvider();
 
-        mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
-        mFooterBarMixin.setSecondaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
-                        .setListener(this::onSkipButtonClick)
-                        .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SudGlifButton_Primary)
-                        .build(),
-                true /* usePrimaryStyle */);
-
-        FooterButton.Builder nextButtonBuilder = new FooterButton.Builder(this)
-                .setText(R.string.security_settings_face_enroll_introduction_agree)
-                .setButtonType(FooterButton.ButtonType.OPT_IN)
-                .setTheme(R.style.SudGlifButton_Primary);
-        if (maxFacesEnrolled()) {
-            nextButtonBuilder.setListener(this::onNextButtonClick);
-            mFooterBarMixin.setPrimaryButton(nextButtonBuilder.build());
-        } else {
-            final FooterButton agreeButton = nextButtonBuilder.build();
-            mFooterBarMixin.setPrimaryButton(agreeButton);
-            final RequireScrollMixin requireScrollMixin = getLayout().getMixin(
-                    RequireScrollMixin.class);
-            requireScrollMixin.requireScrollWithButton(this, agreeButton,
-                    R.string.security_settings_face_enroll_introduction_more,
-                    this::onNextButtonClick);
-        }
 
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
@@ -231,5 +204,41 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     public void onClick(LinkSpan span) {
         // TODO(b/110906762)
+    }
+
+    @Override
+    protected FooterButton getPrimaryFooterButton() {
+        if (mFooterBarMixin == null) {
+            mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
+        }
+
+        if (mFooterBarMixin.getPrimaryButton() == null) {
+            final FooterButton nextButtonBuilder = new FooterButton.Builder(this)
+                    .setText(R.string.security_settings_face_enroll_introduction_agree)
+                    .setButtonType(FooterButton.ButtonType.OPT_IN)
+                    .setListener(this::onNextButtonClick)
+                    .setTheme(R.style.SudGlifButton_Primary)
+                    .build();
+            mFooterBarMixin.setPrimaryButton(nextButtonBuilder);
+        }
+        return mFooterBarMixin.getPrimaryButton();
+    }
+
+    @Override
+    protected FooterButton getSecondaryFooterButton() {
+        if (mFooterBarMixin == null) {
+            mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
+        }
+
+        if (mFooterBarMixin.getSecondaryButton() == null) {
+            final FooterButton noThanksButton = new FooterButton.Builder(this)
+                    .setText(R.string.security_settings_face_enroll_introduction_no_thanks)
+                    .setListener(this::onSkipButtonClick)
+                    .setButtonType(FooterButton.ButtonType.NEXT)
+                    .setTheme(R.style.SudGlifButton_Primary)
+                    .build();
+            mFooterBarMixin.setSecondaryButton(noThanksButton, true /* usePrimaryStyle */);
+        }
+        return mFooterBarMixin.getSecondaryButton();
     }
 }
