@@ -3683,7 +3683,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Povolit vyrušení"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Umožněte aplikacím vydávat zvuky, vibrovat nebo zobrazovat oznámení na obrazovce"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Priorita"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Zobrazuje se v horní části sekce konverzací a má podobu plovoucí bubliny, zobrazuje profilovou fotku na obrazovce uzamčení"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Zobrazuje se v horní části sekce konverzací, má podobu plovoucí bubliny, zobrazuje profilovou fotku na obrazovce uzamčení"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> většinu funkcí konverzace nepodporuje. Konverzace nelze nastavit jako prioritní a nebudou se zobrazovat jako plovoucí bubliny."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"V rozbalovacím panelu sbalit oznámení na jeden řádek"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Žádný zvuk ani vibrace"</string>
@@ -4522,9 +4522,9 @@
     <string name="notification_log_details_importance" msgid="8516198274667183446">"důležitost"</string>
     <string name="notification_log_details_explanation" msgid="6966274549873070059">"vysvětlení"</string>
     <string name="notification_log_details_badge" msgid="648647240928645446">"může zobrazovat odznak"</string>
-    <string name="notification_log_details_content_intent" msgid="2768423554375629089">"objekt Intent"</string>
-    <string name="notification_log_details_delete_intent" msgid="8296434571041573503">"smazání objektu Intent"</string>
-    <string name="notification_log_details_full_screen_intent" msgid="4151243693072002296">"objekt Intent pro celou obrazovku"</string>
+    <string name="notification_log_details_content_intent" msgid="2768423554375629089">"intent"</string>
+    <string name="notification_log_details_delete_intent" msgid="8296434571041573503">"smazání intentu"</string>
+    <string name="notification_log_details_full_screen_intent" msgid="4151243693072002296">"intent pro celou obrazovku"</string>
     <string name="notification_log_details_actions" msgid="2269605330470905236">"akce"</string>
     <string name="notification_log_details_title" msgid="8365761340979164197">"nadpis"</string>
     <string name="notification_log_details_remoteinput" msgid="264204203044885921">"vzdálené vstupy"</string>
@@ -4949,7 +4949,7 @@
     <string name="carrier_settings_title" msgid="6959295328730560529">"Nastavení operátora"</string>
     <string name="cdma_lte_data_service" msgid="6937443423651347345">"Nastavit datovou službu"</string>
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Mobilní data"</string>
-    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Přistupovat k datům přes mobilní síť"</string>
+    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Používat datové připojení přes mobilní síť"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefon se v dosahu automaticky přepne na tohoto operátora"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Předvolby hovorů"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Předvolby SMS"</string>
@@ -4973,8 +4973,8 @@
     <string name="mobile_network_list_add_more" msgid="4478586073355236604">"Přidat další"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"Aktivní / SIM karta"</string>
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Neaktivní / SIM karta"</string>
-    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Aktivní / stažená SIM karta"</string>
-    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Neaktivní / stažená SIM karta"</string>
+    <string name="mobile_network_active_esim" msgid="4673190244386572318">"Aktivní stažená SIM karta"</string>
+    <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Neaktivní stažená SIM karta"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"Název a barva SIM karty"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Název"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Barva (používají kompatibilní aplikace)"</string>
@@ -5147,4 +5147,10 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"média"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Zapne se Bluetooth"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nedostupné, protože je zapnutý režim večerky"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Nedůvěryhodné zařízení žádá o přístup k vašim zprávám. Podrobnosti zobrazíte klepnutím."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Chcete povolit přístup ke zprávám?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Nedůvěryhodné zařízení Bluetooth <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> žádá o přístup k vašim zprávám.\n\nK zařízení <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> jste se ještě nikdy nepřipojili."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Nedůvěryhodné zařízení žádá o přístup k vašim kontaktům a seznamu hovorů. Podrobnosti zobrazíte klepnutím."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Chcete povolit přístup ke kontaktům a seznamu hovorů?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Nedůvěryhodné zařízení Bluetooth <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> žádá o přístup k vašim kontaktům a seznamu hovorů. To zahrnuje data o příchozích a odchozích hovorech.\n\nK zařízení <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> jste se ještě nikdy nepřipojili."</string>
 </resources>

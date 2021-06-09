@@ -3593,7 +3593,7 @@
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"소리 또는 진동 없음"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"소리나 진동이 울리지 않으며 대화 섹션 하단에 표시됨"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"휴대전화 설정에 따라 벨소리나 진동이 울릴 수 있음"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"기기가 잠금 해제되었을 때 화면 상단에 알림 배너 표시"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"기기가 잠금 해제되어 있을 때 화면 상단에 알림 배너 표시"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"모든 ‘<xliff:g id="APP_NAME">%1$s</xliff:g>’ 알림"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"모든 <xliff:g id="APP_NAME">%1$s</xliff:g> 알림"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"적응형 알림"</string>
@@ -3696,7 +3696,7 @@
     <string name="notification_badge_title" msgid="6854537463548411313">"알림 표시 점 허용"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"알림 표시 점 보기"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"방해 금지 모드 무시"</string>
-    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"방해 금지 모드가 사용 설정되어 있어도 알림을 계속 받도록 허용합니다."</string>
+    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"방해 금지 모드가 사용 설정되어 있어도 알림을 계속 받도록 허용"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"잠금 화면"</string>
     <string name="app_notification_row_banned" msgid="4513523107019706924">"차단됨"</string>
     <string name="app_notification_row_priority" msgid="8100777138078316446">"최우선만 수신"</string>
@@ -3814,7 +3814,7 @@
     <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"리마인더"</string>
     <string name="zen_mode_events" msgid="7425795679353531794">"캘린더 일정"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"예정된 캘린더 일정"</string>
-    <string name="zen_mode_events_list" msgid="7191316245742097229">"이벤트"</string>
+    <string name="zen_mode_events_list" msgid="7191316245742097229">"일정"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"일정"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"앱에서 무시하도록 허용"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"예외 앱"</string>
@@ -4965,4 +4965,10 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"미디어"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"블루투스를 사용 설정함"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"취침 모드가 켜져 있으므로 사용할 수 없습니다."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"신뢰할 수 없는 기기에서 메시지에 액세스하려고 합니다. 세부정보를 확인하려면 탭하세요."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"메시지 액세스를 허용하시겠습니까?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"신뢰할 수 없는 블루투스 기기 <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>에서 메시지에 액세스하려고 합니다.\n\n전에는 <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>에 연결한 적이 없습니다."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"신뢰할 수 없는 기기에서 연락처와 통화 기록에 액세스하려고 합니다. 세부정보를 확인하려면 탭하세요."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"연락처와 통화 기록 액세스를 허용하시겠습니까?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"신뢰할 수 없는 블루투스 기기 <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>에서 연락처와 통화 기록에 액세스하려고 합니다. 여기에는 수신 전화와 발신 전화에 관한 데이터도 포함됩니다.\n\n전에는 <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>에 연결한 적이 없습니다."</string>
 </resources>

@@ -151,7 +151,7 @@
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Tallennetut laitteet"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth käynnistetään parinmuodostusta varten."</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Yhteysasetukset"</string>
-    <string name="connected_device_previously_connected_title" msgid="605808252622814415">"Aiemmin liitetyt laitteet"</string>
+    <string name="connected_device_previously_connected_title" msgid="605808252622814415">"Aiemmin yhdistetyt laitteet"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Aiemmin liitetyt"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth käytössä"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Näytä kaikki"</string>
@@ -178,7 +178,7 @@
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"Täytä porttikenttä."</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"Portti-kentän täytyy olla tyhjä, jos isäntä-kenttä on tyhjä."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"Antamasi portti on virheellinen."</string>
-    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Selain saa käyttää HTTP-välityspalvelinta mutta muut sovellukset eivät."</string>
+    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Selain käyttää HTTP-välityspalvelinta, mutta muut sovellukset mahdollisesti eivät."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"Välitysp. aut. määr. URL: "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Ping-kutsu isäntänimelle (www.google.com), IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"Ping-kutsu isäntänimelle (www.google.com), IPv6:"</string>
@@ -3544,7 +3544,7 @@
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Profiilin ilmoitukset"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Ilmoitukset"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Sovellusilmoitukset"</string>
-    <string name="notification_channel_title" msgid="8859880871692797611">"Ilmoituksen luokka"</string>
+    <string name="notification_channel_title" msgid="8859880871692797611">"Ilmoituskategoria"</string>
     <string name="notification_group_title" msgid="7525666535695631538">"Ilmoitusluokka"</string>
     <string name="notification_importance_title" msgid="1545158655988342703">"Käyttäytyminen"</string>
     <string name="notification_importance_unspecified" msgid="1543165530748339700">"Salli ääni"</string>
@@ -4965,4 +4965,10 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth käynnistyy."</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ei käytettävissä, koska Nukkuma-aikamoodi on päällä"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Epäluotettava laite pyytää pääsyä viesteihisi. Katso lisätietoja napauttamalla."</string>
+    <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Sallitaanko pääsy viesteihin?"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Epäluotettava Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pyytää pääsyä viesteihisi.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen ollut yhteydessä laitteeseesi."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Epäluotettava laite pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Katso lisätietoja napauttamalla."</string>
+    <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Sallitaanko pääsy yhteystietoihin ja puhelulokiin?"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Epäluotettava Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Tämä sisältää datan saapuvista ja lähtevistä puheluista.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen ollut yhteydessä laitteeseesi."</string>
 </resources>
