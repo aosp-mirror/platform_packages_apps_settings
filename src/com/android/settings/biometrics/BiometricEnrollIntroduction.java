@@ -39,6 +39,8 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
+import com.google.android.setupdesign.template.RequireScrollMixin;
+import com.google.android.setupdesign.template.RequireScrollMixin.OnRequireScrollStateChangedListener;
 import com.google.android.setupdesign.util.DynamicColorPalette;
 
 /**
@@ -180,6 +182,35 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 launchConfirmLock(getConfirmLockTitleResId());
             }
         }
+
+        FooterButton primaryButton = getPrimaryFooterButton();
+        FooterButton secondaryButton = getSecondaryFooterButton();
+        if (primaryButton == null) {
+            Log.d(TAG, "getPrimaryFooterButton() was null");
+            return;
+        }
+
+        if (secondaryButton == null) {
+            Log.d(TAG, "getSecondaryFooterButton() was null");
+            return;
+        }
+
+        // Setup scroll mixin
+        final RequireScrollMixin requireScrollMixin = getLayout().getMixin(
+                RequireScrollMixin.class);
+        requireScrollMixin.requireScrollWithButton(this, primaryButton, getScrollCompletedText(),
+                this::onNextButtonClick);
+
+        secondaryButton.setVisibility(View.INVISIBLE);
+        requireScrollMixin.setOnRequireScrollStateChangedListener(
+                new OnRequireScrollStateChangedListener() {
+                    @Override
+                    public void onRequireScrollStateChanged(boolean scrollNeeded) {
+                        if (!scrollNeeded && secondaryButton.getVisibility() == View.INVISIBLE) {
+                            secondaryButton.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
     }
 
     @Override
@@ -334,5 +365,19 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                     PorterDuff.Mode.SRC_IN);
         }
         return mIconColorFilter;
+    }
+
+    @Nullable
+    protected FooterButton getPrimaryFooterButton() {
+        return null;
+    }
+
+    @Nullable
+    protected FooterButton getSecondaryFooterButton() {
+        return null;
+    }
+
+    protected int getScrollCompletedText() {
+        return R.string.security_settings_face_enroll_introduction_more;
     }
 }
