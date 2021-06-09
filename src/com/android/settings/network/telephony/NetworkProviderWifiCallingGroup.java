@@ -31,7 +31,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
-import android.util.ArraySet;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
@@ -50,7 +50,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Copied the logic of WiFi calling from {@link WifiCallingPreferenceController}.
@@ -72,8 +71,7 @@ public class NetworkProviderWifiCallingGroup extends
     private Map<Integer, TelephonyManager> mTelephonyManagerList = new HashMap<>();
     private Map<Integer, PhoneAccountHandle> mSimCallManagerList = new HashMap<>();
     private Map<Integer, Preference> mWifiCallingForSubPreferences;
-    private Set<Integer> mSubIdList = new ArraySet<>();
-
+    private List<SubscriptionInfo> mSubInfoListForWfc;
 
     public NetworkProviderWifiCallingGroup(Context context, Lifecycle lifecycle,
             String preferenceGroupKey) {
@@ -83,18 +81,26 @@ public class NetworkProviderWifiCallingGroup extends
 
         mPreferenceGroupKey = preferenceGroupKey;
         mWifiCallingForSubPreferences = new ArrayMap<>();
-        lifecycle.addObserver(this);
         setSubscriptionInfoList(context);
+        lifecycle.addObserver(this);
     }
 
-    private void setSubscriptionInfoList(Context context){
-        final List<SubscriptionInfo> subscriptions = SubscriptionUtil.getActiveSubscriptions(
-                mSubscriptionManager);
-        for (SubscriptionInfo info : subscriptions) {
-            final int subId = info.getSubscriptionId();
-            mSubIdList.add(subId);
-            setTelephonyManagerForSubscriptionId(context, subId);
-            setPhoneAccountHandleForSubscriptionId(context, subId);
+    private void setSubscriptionInfoList(Context context) {
+        mSubInfoListForWfc = SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
+        if (mSubInfoListForWfc != null) {
+            mSubInfoListForWfc.removeIf(info -> {
+                final int subId = info.getSubscriptionId();
+                setTelephonyManagerForSubscriptionId(context, subId);
+                setPhoneAccountHandleForSubscriptionId(context, subId);
+                boolean isExisted = mSubInfoListForWfc.contains(info);
+                boolean shouldShowWfcForSub = shouldShowWifiCallingForSub(subId);
+                if (!shouldShowWfcForSub && isExisted) {
+                    return true;
+                }
+                return false;
+            });
+        } else {
+            Log.d(TAG, "No active subscriptions");
         }
     }
 
@@ -110,12 +116,12 @@ public class NetworkProviderWifiCallingGroup extends
         mSimCallManagerList.put(subId, phoneAccountHandle);
     }
 
-    private TelephonyManager getTelephonyManagerForSubscriptionId(int subId){
-       return mTelephonyManagerList.get(subId);
+    private TelephonyManager getTelephonyManagerForSubscriptionId(int subId) {
+        return mTelephonyManagerList.get(subId);
     }
 
     @VisibleForTesting
-    protected PhoneAccountHandle getPhoneAccountHandleForSubscriptionId(int subId){
+    protected PhoneAccountHandle getPhoneAccountHandleForSubscriptionId(int subId) {
         return mSimCallManagerList.get(subId);
     }
 
@@ -131,7 +137,12 @@ public class NetworkProviderWifiCallingGroup extends
 
     @Override
     public boolean isAvailable() {
-        return mSubIdList.size() >= 1;
+        if (mSubInfoListForWfc == null) {
+            Log.d(TAG, "No active subscriptions, hide the controller");
+            return false;
+        } else {
+            return mSubInfoListForWfc.size() >= 1;
+        }
     }
 
     @Override
@@ -167,19 +178,15 @@ public class NetworkProviderWifiCallingGroup extends
 
         final Map<Integer, Preference> toRemovePreferences = mWifiCallingForSubPreferences;
         mWifiCallingForSubPreferences = new ArrayMap<>();
-        final List<SubscriptionInfo> subscriptions = SubscriptionUtil.getActiveSubscriptions(
-                mSubscriptionManager);
-        setSubscriptionInfoForPreference(subscriptions, toRemovePreferences);
-
+        setSubscriptionInfoForPreference(toRemovePreferences);
         for (Preference pref : toRemovePreferences.values()) {
             mPreferenceGroup.removePreference(pref);
         }
     }
 
-    private void setSubscriptionInfoForPreference(List<SubscriptionInfo> subscriptions,
-                                                  Map<Integer, Preference> toRemovePreferences) {
+    private void setSubscriptionInfoForPreference(Map<Integer, Preference> toRemovePreferences) {
         int order = PREF_START_ORDER;
-        for (SubscriptionInfo info : subscriptions) {
+        for (SubscriptionInfo info : mSubInfoListForWfc) {
             final int subId = info.getSubscriptionId();
 
             if (!shouldShowWifiCallingForSub(subId)) {
@@ -192,9 +199,11 @@ public class NetworkProviderWifiCallingGroup extends
                 mPreferenceGroup.addPreference(pref);
             }
 
-            CharSequence title = SubscriptionUtil.getUniqueSubscriptionDisplayName(info, mContext);
+            CharSequence title = SubscriptionUtil.getUniqueSubscriptionDisplayName(info,
+                    mContext);
             if (getPhoneAccountHandleForSubscriptionId(subId) != null) {
-                final Intent intent = MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
+                final Intent intent = MobileNetworkUtils.buildPhoneAccountConfigureIntent(
+                        mContext,
                         getPhoneAccountHandleForSubscriptionId(subId));
                 if (intent != null) {
                     final PackageManager pm = mContext.getPackageManager();
@@ -245,7 +254,7 @@ public class NetworkProviderWifiCallingGroup extends
      * 1. Check the subscription is valid or not.
      * 2. Check whether Wi-Fi Calling can be perform or not on this subscription.
      * 3. Check the carrier's config (carrier_wfc_ims_available_bool). If true, the carrier
-     *    supports the Wi-Fi calling, otherwise false.
+     * supports the Wi-Fi calling, otherwise false.
      */
     @VisibleForTesting
     protected boolean shouldShowWifiCallingForSub(int subId) {
