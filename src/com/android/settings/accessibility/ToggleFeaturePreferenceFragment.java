@@ -136,7 +136,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         setupDefaultShortcutIfNecessary(getPrefContext());
         final int resId = getPreferenceScreenResId();
         if (resId <= 0) {
-            PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
+            final PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
                     getPrefContext());
             setPreferenceScreen(preferenceScreen);
         }
