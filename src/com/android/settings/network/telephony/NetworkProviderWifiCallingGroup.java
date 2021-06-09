@@ -47,6 +47,7 @@ import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,7 +87,8 @@ public class NetworkProviderWifiCallingGroup extends
     }
 
     private void setSubscriptionInfoList(Context context) {
-        mSubInfoListForWfc = SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
+        mSubInfoListForWfc = new ArrayList<>(
+                SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager));
         if (mSubInfoListForWfc != null) {
             mSubInfoListForWfc.removeIf(info -> {
                 final int subId = info.getSubscriptionId();
