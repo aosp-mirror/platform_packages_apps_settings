@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
+import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_GENERAL_CATEGORY;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -34,11 +35,13 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.CheckBox;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.utils.LocaleUtils;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -50,7 +53,7 @@ import java.util.Locale;
 /**
  * Base class for accessibility fragments shortcut functions and dialog management.
  */
-public abstract class AccessibilityShortcutPreferenceFragment extends SettingsPreferenceFragment
+public abstract class AccessibilityShortcutPreferenceFragment extends DashboardFragment
         implements ShortcutPreference.OnClickCallback {
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     protected static final String KEY_SAVED_USER_SHORTCUT_TYPE = "shortcut_type";
@@ -86,6 +89,10 @@ public abstract class AccessibilityShortcutPreferenceFragment extends SettingsPr
             final PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
                     getPrefContext());
             setPreferenceScreen(preferenceScreen);
+        }
+
+        if (showGeneralCategory()) {
+            initGeneralCategory();
         }
 
         final List<String> shortcutFeatureKeys = new ArrayList<>();
@@ -151,6 +158,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends SettingsPr
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
+        final Dialog dialog;
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getPrefContext().getString(
@@ -158,10 +166,16 @@ public abstract class AccessibilityShortcutPreferenceFragment extends SettingsPr
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC_SUW :
                         AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC;
-                final Dialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
+                dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                         getPrefContext(), dialogType, dialogTitle,
                         this::callOnAlertDialogCheckboxClicked);
                 setupEditShortcutDialog(dialog);
+                return dialog;
+            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
+                dialog = AccessibilityGestureNavigationTutorial
+                        .createAccessibilityTutorialDialog(getPrefContext(),
+                                getUserShortcutTypes());
+                dialog.setCanceledOnTouchOutside(false);
                 return dialog;
             default:
                 throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
@@ -173,6 +187,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends SettingsPr
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_EDIT_SHORTCUT;
+            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
+                return SettingsEnums.DIALOG_ACCESSIBILITY_TUTORIAL;
             default:
                 return SettingsEnums.ACTION_UNKNOWN;
         }
@@ -202,6 +218,11 @@ public abstract class AccessibilityShortcutPreferenceFragment extends SettingsPr
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 
+    /**
+     * Overrides to return specific shortcut preference key
+     *
+     * @return String The specific shortcut preference key
+     */
     protected String getShortcutPreferenceKey() {
         return KEY_SHORTCUT_PREFERENCE;
     }
@@ -238,6 +259,13 @@ public abstract class AccessibilityShortcutPreferenceFragment extends SettingsPr
         return value;
     }
 
+    /**
+     * Returns the shortcut type list which has been checked by user.
+     */
+    protected int getUserShortcutTypes() {
+        return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
+                getComponentName());
+    };
 
     /**
      * This method will be invoked when a button in the edit shortcut dialog is clicked.
@@ -260,6 +288,15 @@ public abstract class AccessibilityShortcutPreferenceFragment extends SettingsPr
     }
 
     @VisibleForTesting
+    void initGeneralCategory() {
+        final PreferenceCategory generalCategory = new PreferenceCategory(getPrefContext());
+        generalCategory.setKey(KEY_GENERAL_CATEGORY);
+        generalCategory.setTitle(getGeneralCategoryDescription(null));
+
+        getPreferenceScreen().addPreference(generalCategory);
+    }
+
+    @VisibleForTesting
     void saveNonEmptyUserShortcutType(int type) {
         if (type == AccessibilityUtil.UserShortcutType.EMPTY) {
             return;
@@ -268,6 +305,28 @@ public abstract class AccessibilityShortcutPreferenceFragment extends SettingsPr
         final PreferredShortcut shortcut = new PreferredShortcut(
                 getComponentName().flattenToString(), type);
         PreferredShortcuts.saveUserShortcutType(getPrefContext(), shortcut);
+    }
+
+    /**
+     * Overrides to return customized description for general category above shortcut
+     *
+     * @return CharSequence The customized description for general category
+     */
+    protected CharSequence getGeneralCategoryDescription(@Nullable CharSequence title) {
+        if (title == null || title.toString().isEmpty()) {
+            // Return default 'Options' string for category
+            return getContext().getString(R.string.accessibility_screen_option);
+        }
+        return title;
+    }
+
+    /**
+     * Overrides to determinate if showing additional category description above shortcut
+     *
+     * @return boolean true to show category, false otherwise.
+     */
+    protected boolean showGeneralCategory() {
+        return false;
     }
 
     private void setDialogTextAreaClickListener(View dialogView, CheckBox checkBox) {
