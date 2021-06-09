@@ -144,6 +144,16 @@ public class ProviderModelSliceTest {
 
     @Test
     @UiThreadTest
+    public void getBroadcastIntent_shouldHaveFlagReceiverForeground() {
+        final PendingIntent pendingIntent = mMockProviderModelSlice.getBroadcastIntent(mContext);
+
+        final int flags = pendingIntent.getIntent().getFlags();
+        assertThat(flags & Intent.FLAG_RECEIVER_FOREGROUND)
+                .isEqualTo(Intent.FLAG_RECEIVER_FOREGROUND);
+    }
+
+    @Test
+    @UiThreadTest
     public void getSlice_noWifiAndHasCarrierNoData_oneCarrier() {
         mWifiList.clear();
         mMockNetworkProviderWorker.updateSelfResults(null);
