@@ -17,6 +17,7 @@
 package com.android.settings.core;
 
 import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_PAGE_SCROLL;
+import static com.android.internal.jank.InteractionJankMonitor.Configuration;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -156,8 +157,11 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             switch (newState) {
                 case RecyclerView.SCROLL_STATE_DRAGGING:
-                    // TODO: Update API with tag parameter (class name).
-                    mMonitor.begin(recyclerView, CUJ_SETTINGS_PAGE_SCROLL);
+                    final Configuration.Builder builder =
+                            new Configuration.Builder(CUJ_SETTINGS_PAGE_SCROLL)
+                                    .setView(recyclerView)
+                                    .setTag(mClassName);
+                    mMonitor.begin(builder);
                     break;
                 case RecyclerView.SCROLL_STATE_IDLE:
                     mMonitor.end(CUJ_SETTINGS_PAGE_SCROLL);
