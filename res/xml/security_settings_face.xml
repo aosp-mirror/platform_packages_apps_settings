@@ -19,10 +19,6 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/security_settings_face_preference_title">
 
-    <com.android.settingslib.widget.TopIntroPreference
-        android:title="@string/security_settings_face_settings_top_intro"
-        settings:searchable="false"/>
-
     <PreferenceCategory
         android:key="security_settings_face_unlock_category"
         android:title="@string/security_settings_face_settings_use_face_category"
