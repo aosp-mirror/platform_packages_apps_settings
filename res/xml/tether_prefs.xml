@@ -29,7 +29,7 @@
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.wifi.tether.WifiTetherSettings"
         settings:allowDividerAbove="true"
-        settings:summaryLineCount="2"/>
+        settings:maxLines="2"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="usb_tether_settings"
