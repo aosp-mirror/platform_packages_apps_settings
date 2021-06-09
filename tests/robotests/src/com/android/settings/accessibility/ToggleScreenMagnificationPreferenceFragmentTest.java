@@ -186,6 +186,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     public void updateShortcutPreferenceData_hasValueInSettings_assignToVariable() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, MAGNIFICATION_CONTROLLER_NAME);
         setMagnificationTripleTapEnabled(/* enabled= */ true);
+
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,

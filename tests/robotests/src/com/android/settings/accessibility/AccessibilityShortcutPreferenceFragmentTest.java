@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,12 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
+import static com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
@@ -31,20 +29,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.XmlRes;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
-import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
@@ -55,26 +46,23 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.androidx.fragment.FragmentController;
 
-/** Tests for {@link ToggleFeaturePreferenceFragment} */
+/** Tests for {@link AccessibilityShortcutPreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
-public class ToggleFeaturePreferenceFragmentTest {
+public class AccessibilityShortcutPreferenceFragmentTest {
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";
     private static final String PLACEHOLDER_CLASS_NAME = PLACEHOLDER_PACKAGE_NAME + ".placeholder";
     private static final ComponentName PLACEHOLDER_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
-    private static final String DEFAULT_SUMMARY = "default summary";
-    private static final String DEFAULT_DESCRIPTION = "default description";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
     private static final String HARDWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
 
-    private TestToggleFeaturePreferenceFragment mFragment;
+    private TestAccessibilityShortcutPreferenceFragment mFragment;
     private PreferenceScreen mScreen;
     private Context mContext = ApplicationProvider.getApplicationContext();
 
@@ -85,7 +73,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     public void setUpTestFragment() {
         MockitoAnnotations.initMocks(this);
 
-        mFragment = spy(new TestToggleFeaturePreferenceFragment());
+        mFragment = spy(new TestAccessibilityShortcutPreferenceFragment());
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mContext);
@@ -95,82 +83,75 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    public void createFragment_shouldOnlyAddPreferencesOnce() {
-        FragmentController.setupFragment(mFragment, FragmentActivity.class,
-                /* containerViewId= */ 0, /* bundle= */ null);
-
-        // execute exactly once
-        verify(mFragment).addPreferencesFromResource(R.xml.placeholder_prefs);
-    }
-
-    @Test
     public void updateShortcutPreferenceData_assignDefaultValueToVariable() {
-        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
-
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
+                mFragment.getComponentName().flattenToString(),
+                AccessibilityUtil.UserShortcutType.SOFTWARE);
         // Compare to default UserShortcutType
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(AccessibilityUtil.UserShortcutType.SOFTWARE);
     }
 
     @Test
     public void updateShortcutPreferenceData_hasValueInSettings_assignToVariable() {
-        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, PLACEHOLDER_COMPONENT_NAME.flattenToString());
         putStringIntoSettings(HARDWARE_SHORTCUT_KEY, PLACEHOLDER_COMPONENT_NAME.flattenToString());
 
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+                mFragment.getComponentName().flattenToString(),
+                AccessibilityUtil.UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(AccessibilityUtil.UserShortcutType.SOFTWARE
+                | AccessibilityUtil.UserShortcutType.HARDWARE);
     }
 
     @Test
     public void updateShortcutPreferenceData_hasValueInSharedPreference_assignToVariable() {
-        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
         final PreferredShortcut hardwareShortcut = new PreferredShortcut(
-                PLACEHOLDER_COMPONENT_NAME.flattenToString(), UserShortcutType.HARDWARE);
+                PLACEHOLDER_COMPONENT_NAME.flattenToString(),
+                AccessibilityUtil.UserShortcutType.HARDWARE);
 
         putUserShortcutTypeIntoSharedPreference(mContext, hardwareShortcut);
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
-        assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE);
+                mFragment.getComponentName().flattenToString(),
+                AccessibilityUtil.UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(AccessibilityUtil.UserShortcutType.HARDWARE);
     }
 
     @Test
     public void setupEditShortcutDialog_shortcutPreferenceOff_checkboxIsEmptyValue() {
         mContext.setTheme(R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
+                mContext, AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC,
+                PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
                 null);
-        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
         mFragment.mShortcutPreference = shortcutPreference;
 
         mFragment.mShortcutPreference.setChecked(false);
         mFragment.setupEditShortcutDialog(dialog);
 
         final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.EMPTY);
+        assertThat(checkboxValue).isEqualTo(AccessibilityUtil.UserShortcutType.EMPTY);
     }
 
     @Test
     public void setupEditShortcutDialog_shortcutPreferenceOn_checkboxIsSavedValue() {
         mContext.setTheme(R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
+                mContext, AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC,
+                PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
                 null);
         final PreferredShortcut hardwareShortcut = new PreferredShortcut(
-                PLACEHOLDER_COMPONENT_NAME.flattenToString(), UserShortcutType.HARDWARE);
-        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+                PLACEHOLDER_COMPONENT_NAME.flattenToString(),
+                AccessibilityUtil.UserShortcutType.HARDWARE);
         mFragment.mShortcutPreference = shortcutPreference;
 
         PreferredShortcuts.saveUserShortcutType(mContext, hardwareShortcut);
@@ -178,7 +159,7 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.setupEditShortcutDialog(dialog);
 
         final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.HARDWARE);
+        assertThat(checkboxValue).isEqualTo(AccessibilityUtil.UserShortcutType.HARDWARE);
     }
 
     @Test
@@ -186,38 +167,31 @@ public class ToggleFeaturePreferenceFragmentTest {
     public void restoreValueFromSavedInstanceState_assignToVariable() {
         mContext.setTheme(R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
+                mContext, AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC,
+                PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
         final Bundle savedInstanceState = new Bundle();
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
                 null);
-        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
         mFragment.mShortcutPreference = shortcutPreference;
 
         savedInstanceState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE,
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+                AccessibilityUtil.UserShortcutType.SOFTWARE
+                        | AccessibilityUtil.UserShortcutType.HARDWARE);
         mFragment.onCreate(savedInstanceState);
         mFragment.setupEditShortcutDialog(dialog);
         final int value = mFragment.getShortcutTypeCheckBoxValue();
         mFragment.saveNonEmptyUserShortcutType(value);
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+                mFragment.getComponentName().flattenToString(),
+                AccessibilityUtil.UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(
+                AccessibilityUtil.UserShortcutType.SOFTWARE
+                        | AccessibilityUtil.UserShortcutType.HARDWARE);
     }
 
-    @Test
-    public void createFooterPreference_shouldSetAsExpectedValue() {
-        mFragment.createFooterPreference(mFragment.getPreferenceScreen(),
-                DEFAULT_SUMMARY, DEFAULT_DESCRIPTION);
-
-        AccessibilityFooterPreference accessibilityFooterPreference =
-                (AccessibilityFooterPreference) mFragment.getPreferenceScreen().getPreference(
-                        mFragment.getPreferenceScreen().getPreferenceCount() - 1);
-        assertThat(accessibilityFooterPreference.getSummary()).isEqualTo(DEFAULT_SUMMARY);
-        assertThat(accessibilityFooterPreference.isSelectable()).isEqualTo(true);
-        assertThat(accessibilityFooterPreference.getOrder()).isEqualTo(Integer.MAX_VALUE - 1);
-    }
+    private void callEmptyOnClicked(DialogInterface dialog, int which) {}
 
     private void putStringIntoSettings(String key, String componentName) {
         Settings.Secure.putString(mContext.getContentResolver(), key, componentName);
@@ -228,55 +202,21 @@ public class ToggleFeaturePreferenceFragmentTest {
         PreferredShortcuts.saveUserShortcutType(context, shortcut);
     }
 
-    private void callEmptyOnClicked(DialogInterface dialog, int which) {}
-
-    public static class TestToggleFeaturePreferenceFragment
-            extends ToggleFeaturePreferenceFragment {
+    public static class TestAccessibilityShortcutPreferenceFragment
+            extends AccessibilityShortcutPreferenceFragment {
+        @Override
+        protected ComponentName getComponentName() {
+            return PLACEHOLDER_COMPONENT_NAME;
+        }
 
         @Override
-        protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        protected CharSequence getLabelName() {
+            return PLACEHOLDER_PACKAGE_NAME;
         }
 
         @Override
         public int getMetricsCategory() {
             return 0;
         }
-
-        @Override
-        int getUserShortcutTypes() {
-            return 0;
-        }
-
-        @Override
-        public int getPreferenceScreenResId() {
-            return R.xml.placeholder_prefs;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            return mock(View.class);
-        }
-
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            // do nothing
-        }
-
-        @Override
-        public void onDestroyView() {
-            // do nothing
-        }
-
-        @Override
-        public void addPreferencesFromResource(@XmlRes int preferencesResId) {
-            // do nothing
-        }
-
-        @Override
-        protected void updateShortcutPreference() {
-            // UI related function, do nothing in tests
-        }
-
-    }
+    };
 }
