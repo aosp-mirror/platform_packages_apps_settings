@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
 import static com.android.settings.accessibility.PreferredShortcuts.retrieveUserShortcutType;
 

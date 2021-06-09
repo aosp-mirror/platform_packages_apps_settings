@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
+import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
@@ -44,7 +45,7 @@ import androidx.preference.PreferenceCategory;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityEditDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.utils.LocaleUtils;
 
@@ -134,7 +135,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? DialogType.EDIT_SHORTCUT_MAGNIFICATION_SUW
                         : DialogType.EDIT_SHORTCUT_MAGNIFICATION;
-                dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(getPrefContext(),
+                dialog = AccessibilityDialogUtils.showEditShortcutDialog(getPrefContext(),
                         dialogType, dialogTitle, this::callOnAlertDialogCheckboxClicked);
                 setupMagnificationEditShortcutDialog(dialog);
                 return dialog;
