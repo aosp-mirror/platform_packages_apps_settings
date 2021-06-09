@@ -38,7 +38,6 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.span.LinkSpan;
-import com.google.android.setupdesign.template.RequireScrollMixin;
 
 import java.util.List;
 
@@ -69,29 +68,6 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         iconDelete.getDrawable().setColorFilter(getIconColorFilter());
         iconInfo.getDrawable().setColorFilter(getIconColorFilter());
         iconLink.getDrawable().setColorFilter(getIconColorFilter());
-
-        mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
-        mFooterBarMixin.setSecondaryButton(
-                new FooterButton.Builder(this)
-                        .setText(getNegativeButtonTextId())
-                        .setListener(this::onSkipButtonClick)
-                        .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SudGlifButton_Primary)
-                        .build(),
-                true /* usePrimaryStyle */);
-
-        final FooterButton nextButton = new FooterButton.Builder(this)
-                .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
-                .setListener(this::onNextButtonClick)
-                .setButtonType(FooterButton.ButtonType.OPT_IN)
-                .setTheme(R.style.SudGlifButton_Primary)
-                .build();
-
-        mFooterBarMixin.setPrimaryButton(nextButton);
-        final RequireScrollMixin requireScrollMixin =
-                getLayout().getMixin(RequireScrollMixin.class);
-        requireScrollMixin.requireScrollWithButton(this, nextButton,
-                R.string.security_settings_face_enroll_introduction_more, this::onNextButtonClick);
     }
 
     int getNegativeButtonTextId() {
@@ -215,5 +191,46 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                 Log.w(TAG, "Activity was not found for intent, " + e);
             }
         }
+    }
+
+    @Override
+    protected FooterButton getPrimaryFooterButton() {
+        if (mFooterBarMixin == null) {
+            mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
+        }
+
+        if (mFooterBarMixin.getPrimaryButton() == null) {
+            final FooterButton nextButtonBuilder = new FooterButton.Builder(this)
+                    .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
+                    .setListener(this::onNextButtonClick)
+                    .setButtonType(FooterButton.ButtonType.OPT_IN)
+                    .setTheme(R.style.SudGlifButton_Primary)
+                    .build();
+            mFooterBarMixin.setPrimaryButton(nextButtonBuilder);
+        }
+        return mFooterBarMixin.getPrimaryButton();
+    }
+
+    @Override
+    protected FooterButton getSecondaryFooterButton() {
+        if (mFooterBarMixin == null) {
+            mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
+        }
+
+        if (mFooterBarMixin.getSecondaryButton() == null) {
+            final FooterButton noThanksButton = new FooterButton.Builder(this)
+                    .setText(getNegativeButtonTextId())
+                    .setListener(this::onSkipButtonClick)
+                    .setButtonType(FooterButton.ButtonType.NEXT)
+                    .setTheme(R.style.SudGlifButton_Primary)
+                    .build();
+            mFooterBarMixin.setSecondaryButton(noThanksButton, true /* usePrimaryStyle */);
+        }
+        return mFooterBarMixin.getSecondaryButton();
+    }
+
+    @Override
+    protected int getScrollCompletedText() {
+        return R.string.security_settings_face_enroll_introduction_more;
     }
 }
