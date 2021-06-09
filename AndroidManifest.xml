@@ -183,6 +183,7 @@
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
+                  android:theme="@style/Theme.SubSettings"
                   android:label="@string/settings_shortcut">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -3714,6 +3715,7 @@
             android:name="Settings$GestureNavigationSettingsActivity"
             android:label="@string/gesture_settings_activity_title"
             android:exported="true"
+            android:theme="@style/Theme.SubSettings"
             android:enabled="true">
             <intent-filter android:priority="32">
                 <action android:name="android.intent.action.MAIN" />
