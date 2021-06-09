@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.face;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -29,6 +31,9 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.LayoutPreference;
 
+import com.google.android.setupdesign.util.ButtonStyler;
+import com.google.android.setupdesign.util.PartnerStyleHelper;
+
 /**
  * Preference controller that allows a user to enroll their face.
  */
@@ -37,6 +42,8 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
 
     private static final String TAG = "FaceSettings/Remove";
     static final String KEY = "security_settings_face_enroll_faces_container";
+
+    private final Context mContext;
 
     private int mUserId;
     private byte[] mToken;
@@ -49,17 +56,22 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
         this(context, KEY);
     }
 
-    public FaceSettingsEnrollButtonPreferenceController(Context context,
-            String preferenceKey) {
+    public FaceSettingsEnrollButtonPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mContext = context;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        mButton = ((LayoutPreference) preference)
-                .findViewById(R.id.security_settings_face_settings_enroll_button);
+        mButton = ((LayoutPreference) preference).findViewById(
+                R.id.security_settings_face_settings_enroll_button);
+
+        if (PartnerStyleHelper.shouldApplyPartnerResource(mButton)) {
+            ButtonStyler.applyPartnerCustomizationPrimaryButtonStyle(mContext, mButton);
+        }
+
         mButton.setOnClickListener(this);
     }
 
@@ -67,7 +79,7 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
     public void onClick(View v) {
         mIsClicked = true;
         final Intent intent = new Intent();
-        intent.setClassName("com.android.settings", FaceEnrollIntroduction.class.getName());
+        intent.setClassName(SETTINGS_PACKAGE_NAME, FaceEnrollIntroduction.class.getName());
         intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
         if (mListener != null) {

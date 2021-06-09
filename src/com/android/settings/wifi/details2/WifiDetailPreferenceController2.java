@@ -623,12 +623,16 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return;
         }
 
+        // TODO(b/190390803): We should get the band string directly from WifiEntry.ConnectedInfo
+        //                    instead of doing the frequency -> band conversion here.
         final int frequency = connectedInfo.frequencyMhz;
         String band = null;
         if (frequency >= WifiEntry.MIN_FREQ_24GHZ && frequency < WifiEntry.MAX_FREQ_24GHZ) {
             band = mContext.getResources().getString(R.string.wifi_band_24ghz);
         } else if (frequency >= WifiEntry.MIN_FREQ_5GHZ && frequency < WifiEntry.MAX_FREQ_5GHZ) {
             band = mContext.getResources().getString(R.string.wifi_band_5ghz);
+        } else if (frequency >= WifiEntry.MIN_FREQ_6GHZ && frequency < WifiEntry.MAX_FREQ_6GHZ) {
+            band = mContext.getResources().getString(R.string.wifi_band_6ghz);
         } else {
             // Connecting state is unstable, make it disappeared if unexpected
             if (mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTING) {
