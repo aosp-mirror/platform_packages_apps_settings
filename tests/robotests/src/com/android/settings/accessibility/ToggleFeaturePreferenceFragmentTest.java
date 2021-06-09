@@ -43,7 +43,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityEditDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
@@ -145,7 +145,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     public void setupEditShortcutDialog_shortcutPreferenceOff_checkboxIsEmptyValue() {
         mContext.setTheme(R.style.Theme_AppCompat);
-        final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
@@ -163,7 +163,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     public void setupEditShortcutDialog_shortcutPreferenceOn_checkboxIsSavedValue() {
         mContext.setTheme(R.style.Theme_AppCompat);
-        final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
@@ -185,7 +185,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_assignToVariable() {
         mContext.setTheme(R.style.Theme_AppCompat);
-        final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
         final Bundle savedInstanceState = new Bundle();
