@@ -81,6 +81,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         @Override
         public void onReceive(Context context, Intent intent) {
             mAdaptiveSleepBatterySaverPreferenceController.updateVisibility();
+            mAdaptiveSleepController.updatePreference();
         }
     };
 
