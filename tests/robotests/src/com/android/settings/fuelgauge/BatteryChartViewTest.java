@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
+import android.os.LocaleList;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -41,6 +42,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
@@ -60,6 +62,8 @@ public final class BatteryChartViewTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
         mContext = spy(RuntimeEnvironment.application);
+        mContext.getResources().getConfiguration().setLocales(
+            new LocaleList(new Locale("en_US")));
         mBatteryChartView = new BatteryChartView(mContext);
         doReturn(mockAccessibilityManager).when(mContext)
             .getSystemService(AccessibilityManager.class);
@@ -234,11 +238,11 @@ public final class BatteryChartViewTest {
         final long timestamp = 1619196786769L;
         ConvertUtils.sSimpleDateFormatForHour = null;
         // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0, /*is24HourFormat=*/ false);
+        ConvertUtils.utcToLocalTimeHour(
+            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
         ConvertUtils.sSimpleDateFormatForHour
             .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
-        final String[] expectedTimestamps =
-            new String[] {"9 am", "5 pm", "1 am", "9 am"};
+        final String[] expectedTimestamps = new String[] {"00", "06", "12", "18", "00"};
 
         mBatteryChartView.setLatestTimestamp(timestamp);
 
