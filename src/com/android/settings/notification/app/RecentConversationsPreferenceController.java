@@ -141,9 +141,9 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         int order = 100;
         boolean hasClearable = false;
         for (ConversationChannel conversation : conversations) {
-            if (conversation.getParentNotificationChannel().getImportance() == IMPORTANCE_NONE
-                    || (conversation.getParentNotificationChannelGroup() != null
-                    && conversation.getParentNotificationChannelGroup().isBlocked())) {
+            if (conversation.getNotificationChannel().getImportance() == IMPORTANCE_NONE
+                    || (conversation.getNotificationChannelGroup() != null
+                    && conversation.getNotificationChannelGroup().isBlocked())) {
                 continue;
             }
             RecentConversationPreference pref =
@@ -179,12 +179,12 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         pref.setSummary(getSummary(conversation));
         pref.setIcon(mBackend.getConversationDrawable(mContext, conversation.getShortcutInfo(),
                 pkg, uid, false));
-        pref.setKey(conversation.getParentNotificationChannel().getId()
+        pref.setKey(conversation.getNotificationChannel().getId()
                 + ":" + conversationId);
         pref.setOnPreferenceClickListener(preference -> {
             mBackend.createConversationNotificationChannel(
                     pkg, uid,
-                    conversation.getParentNotificationChannel(),
+                    conversation.getNotificationChannel(),
                     conversationId);
             getSubSettingLauncher(conversation, pref.getTitle()).launch();
             return true;
@@ -194,11 +194,11 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
     }
 
     CharSequence getSummary(ConversationChannel conversation) {
-        return conversation.getParentNotificationChannelGroup() == null
-                ? conversation.getParentNotificationChannel().getName()
+        return conversation.getNotificationChannelGroup() == null
+                ? conversation.getNotificationChannel().getName()
                 : mContext.getString(R.string.notification_conversation_summary,
-                        conversation.getParentNotificationChannel().getName(),
-                        conversation.getParentNotificationChannelGroup().getName());
+                        conversation.getNotificationChannel().getName(),
+                        conversation.getNotificationChannelGroup().getName());
     }
 
     CharSequence getTitle(ConversationChannel conversation) {
@@ -213,7 +213,7 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME,
                 conversation.getShortcutInfo().getPackage());
         channelArgs.putString(Settings.EXTRA_CHANNEL_ID,
-                conversation.getParentNotificationChannel().getId());
+                conversation.getNotificationChannel().getId());
         channelArgs.putString(Settings.EXTRA_CONVERSATION_ID,
                 conversation.getShortcutInfo().getId());
 
@@ -235,8 +235,8 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
                             o2.getShortcutInfo().getLabel());
 
                     if (labelComparison == 0) {
-                        return o1.getParentNotificationChannel().getId().compareTo(
-                                o2.getParentNotificationChannel().getId());
+                        return o1.getNotificationChannel().getId().compareTo(
+                                o2.getNotificationChannel().getId());
                     }
 
                     return labelComparison;
