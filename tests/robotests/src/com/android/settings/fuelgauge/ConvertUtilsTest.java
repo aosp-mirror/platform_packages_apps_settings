@@ -24,6 +24,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.os.BatteryManager;
 import android.os.BatteryUsageStats;
+import android.os.LocaleList;
 import android.os.UserHandle;
 
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -315,6 +316,7 @@ public final class ConvertUtilsTest {
             .isEqualTo(entry.mConsumePower * ratio);
     }
 
+    @Test
     public void testUtcToLocalTime_returnExpectedResult() {
         ConvertUtils.sZoneId = null;
         ConvertUtils.sLocale = null;
@@ -322,48 +324,76 @@ public final class ConvertUtilsTest {
         final String expectedZoneId = "America/Los_Angeles";
         ConvertUtils.sSimpleDateFormat = null;
         // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTime(/*timestamp=*/ 0);
+        ConvertUtils.utcToLocalTime(mContext, /*timestamp=*/ 0);
         ConvertUtils.sSimpleDateFormat
             .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
+        mContext.getResources().getConfiguration().setLocales(
+            new LocaleList(new Locale("en_US")));
 
-        assertThat(ConvertUtils.utcToLocalTime(timestamp))
-            .isEqualTo("Apr 23,2021 09:53:06");
+        assertThat(ConvertUtils.utcToLocalTime(mContext, timestamp))
+            .isEqualTo("Apr 24,2021 00:53:06");
         assertThat(ConvertUtils.sZoneId).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocale).isEqualTo(Locale.getDefault());
+        assertThat(ConvertUtils.sLocale).isEqualTo(new Locale("en_US"));
     }
 
+    @Test
     public void testUtcToLocalTimeHour_12HourFormat_returnExpectedResult() {
         ConvertUtils.sZoneIdForHour = null;
         ConvertUtils.sLocaleForHour = null;
-        final long timestamp = 1619196786769L;
+        final long timestamp = 1619000086769L;
         final String expectedZoneId = "America/Los_Angeles";
         ConvertUtils.sSimpleDateFormatForHour = null;
         // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0, /*is24HourFormat=*/ false);
+        ConvertUtils.utcToLocalTimeHour(
+            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
         ConvertUtils.sSimpleDateFormatForHour
             .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
+        mContext.getResources().getConfiguration().setLocales(
+            new LocaleList(new Locale("en_US")));
 
         assertThat(ConvertUtils.utcToLocalTimeHour(
-            timestamp, /*is24HourFormat=*/ false)).isEqualTo("9 am");
+            mContext, timestamp, /*is24HourFormat=*/ false)).isEqualTo("6");
         assertThat(ConvertUtils.sZoneIdForHour).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocaleForHour).isEqualTo(Locale.getDefault());
+        assertThat(ConvertUtils.sLocaleForHour).isEqualTo(new Locale("en_US"));
     }
 
+    @Test
     public void testUtcToLocalTimeHour_24HourFormat_returnExpectedResult() {
         ConvertUtils.sZoneIdForHour = null;
         ConvertUtils.sLocaleForHour = null;
-        final long timestamp = 1619196786769L;
+        final long timestamp = 1619000086769L;
         final String expectedZoneId = "America/Los_Angeles";
         ConvertUtils.sSimpleDateFormatForHour = null;
         // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0, /*is24HourFormat=*/ true);
+        ConvertUtils.utcToLocalTimeHour(
+            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
         ConvertUtils.sSimpleDateFormatForHour
             .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
+        mContext.getResources().getConfiguration().setLocales(
+            new LocaleList(new Locale("en_US")));
 
         assertThat(ConvertUtils.utcToLocalTimeHour(
-            timestamp, /*is24HourFormat=*/ true)).isEqualTo("09");
+            mContext, timestamp, /*is24HourFormat=*/ true)).isEqualTo("18");
         assertThat(ConvertUtils.sZoneIdForHour).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocaleForHour).isEqualTo(Locale.getDefault());
+        assertThat(ConvertUtils.sLocaleForHour).isEqualTo(new Locale("en_US"));
+    }
+
+    @Test
+    public void getLocale_nullContext_returnDefaultLocale() {
+        assertThat(ConvertUtils.getLocale(/*context=*/ null))
+            .isEqualTo(Locale.getDefault());
+    }
+
+    @Test
+    public void getLocale_nullLocaleList_returnDefaultLocale() {
+        mContext.getResources().getConfiguration().setLocales(null);
+        assertThat(ConvertUtils.getLocale(mContext)).isEqualTo(Locale.getDefault());
+    }
+
+    @Test
+    public void getLocale_emptyLocaleList_returnDefaultLocale() {
+        mContext.getResources().getConfiguration().setLocales(new LocaleList());
+        assertThat(ConvertUtils.getLocale(mContext)).isEqualTo(Locale.getDefault());
     }
 
     private static BatteryHistEntry createBatteryHistEntry(
