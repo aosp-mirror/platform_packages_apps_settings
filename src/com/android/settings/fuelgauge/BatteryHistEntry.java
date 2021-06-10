@@ -184,7 +184,8 @@ public class BatteryHistEntry {
 
     @Override
     public String toString() {
-        final String recordAtDateTime = ConvertUtils.utcToLocalTime(mTimestamp);
+        final String recordAtDateTime =
+            ConvertUtils.utcToLocalTime(/*context=*/ null, mTimestamp);
         final StringBuilder builder = new StringBuilder()
             .append("\nBatteryHistEntry{")
             .append(String.format("\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",

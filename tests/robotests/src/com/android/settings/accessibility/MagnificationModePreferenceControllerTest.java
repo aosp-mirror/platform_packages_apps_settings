@@ -16,7 +16,7 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityEditDialogUtils.CustomButton;
+import static com.android.settings.accessibility.AccessibilityDialogUtils.CustomButton;
 import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import static com.android.settings.accessibility.MagnificationModePreferenceController.MagnificationModeInfo;
 import static com.android.settings.accessibility.MagnificationPreferenceFragment.ON;
