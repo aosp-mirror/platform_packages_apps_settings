@@ -62,7 +62,57 @@ import java.util.List;
 /**
  * Utility class for creating the edit dialog.
  */
-public class AccessibilityEditDialogUtils {
+public class AccessibilityDialogUtils {
+
+    /** Denotes the dialog emuns for show dialog. */
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface DialogEnums {
+
+        /** OPEN: Settings > Accessibility > Any toggle service > Shortcut > Settings. */
+        int EDIT_SHORTCUT = 1;
+
+        /** OPEN: Settings > Accessibility > Magnification > Shortcut > Settings. */
+        int MAGNIFICATION_EDIT_SHORTCUT = 1001;
+
+        /**
+         * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle use service to
+         * enable service.
+         */
+        int ENABLE_WARNING_FROM_TOGGLE = 1002;
+
+        /** OPEN: Settings > Accessibility > Downloaded toggle service > Shortcut checkbox. */
+        int ENABLE_WARNING_FROM_SHORTCUT = 1003;
+
+        /**
+         * OPEN: Settings > Accessibility > Downloaded toggle service > Shortcut checkbox
+         * toggle.
+         */
+        int ENABLE_WARNING_FROM_SHORTCUT_TOGGLE = 1004;
+
+        /**
+         * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle use service to
+         * disable service.
+         */
+        int DISABLE_WARNING_FROM_TOGGLE = 1005;
+
+        /**
+         * OPEN: Settings > Accessibility > Magnification > Toggle user service in button
+         * navigation.
+         */
+        int ACCESSIBILITY_BUTTON_TUTORIAL = 1006;
+
+        /**
+         * OPEN: Settings > Accessibility > Magnification > Toggle user service in gesture
+         * navigation.
+         */
+        int GESTURE_NAVIGATION_TUTORIAL = 1007;
+
+        /**
+         * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle user service > Show
+         * launch tutorial.
+         */
+        int LAUNCH_ACCESSIBILITY_TUTORIAL = 1008;
+    }
 
     /**
      * IntDef enum for dialog type that indicates different dialog for user to choose the shortcut
@@ -77,7 +127,7 @@ public class AccessibilityEditDialogUtils {
          DialogType.EDIT_MAGNIFICATION_SWITCH_SHORTCUT,
     })
 
-    public  @interface DialogType {
+    public @interface DialogType {
         int EDIT_SHORTCUT_GENERIC = 0;
         int EDIT_SHORTCUT_GENERIC_SUW = 1;
         int EDIT_SHORTCUT_MAGNIFICATION = 2;

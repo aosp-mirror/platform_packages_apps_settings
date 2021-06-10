@@ -17,7 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
-import static com.android.settings.accessibility.AccessibilityEditDialogUtils.CustomButton;
+import static com.android.settings.accessibility.AccessibilityDialogUtils.CustomButton;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
@@ -166,7 +166,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     }
 
     private Dialog createMagnificationModeDialog() {
-        mMagnificationModesListView = AccessibilityEditDialogUtils.createSingleChoiceListView(
+        mMagnificationModesListView = AccessibilityDialogUtils.createSingleChoiceListView(
                 mContext, mModeInfos, this::onMagnificationModeSelected);
 
         final View headerView = LayoutInflater.from(mContext).inflate(
@@ -179,7 +179,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
         final CharSequence title = mContext.getString(
                 R.string.accessibility_magnification_mode_dialog_title);
 
-        return AccessibilityEditDialogUtils.createCustomDialog(mContext, title,
+        return AccessibilityDialogUtils.createCustomDialog(mContext, title,
                 mMagnificationModesListView, this::onMagnificationModeDialogPositiveButtonClicked);
     }
 
@@ -235,7 +235,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     }
 
     private Dialog createMagnificationShortCutConfirmDialog() {
-        return AccessibilityEditDialogUtils.createMagnificationSwitchShortcutDialog(mContext,
+        return AccessibilityDialogUtils.createMagnificationSwitchShortcutDialog(mContext,
                 this::onSwitchShortcutDialogButtonClicked);
     }
 

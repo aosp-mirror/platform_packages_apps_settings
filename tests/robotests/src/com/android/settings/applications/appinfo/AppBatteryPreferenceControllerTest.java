@@ -134,7 +134,7 @@ public class AppBatteryPreferenceControllerTest {
         mController.updateBattery();
 
         assertThat(mBatteryPreference.getSummary())
-            .isEqualTo("No battery use since last full charge");
+            .isEqualTo("No battery use for past 24 hours");
     }
 
     @Test
@@ -147,7 +147,7 @@ public class AppBatteryPreferenceControllerTest {
 
         mController.updateBattery();
 
-        assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use since last full charge");
+        assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use for past 24 hours");
     }
 
     @Test
