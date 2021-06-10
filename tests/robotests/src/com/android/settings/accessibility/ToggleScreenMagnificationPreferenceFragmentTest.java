@@ -53,7 +53,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityEditDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -186,6 +186,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     public void updateShortcutPreferenceData_hasValueInSettings_assignToVariable() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, MAGNIFICATION_CONTROLLER_NAME);
         setMagnificationTripleTapEnabled(/* enabled= */ true);
+
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
@@ -209,7 +210,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     @Test
     public void setupMagnificationEditShortcutDialog_shortcutPreferenceOff_checkboxIsEmptyValue() {
         mContext.setTheme(R.style.Theme_AppCompat);
-        final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, DialogType.EDIT_SHORTCUT_MAGNIFICATION, PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
@@ -226,7 +227,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     @Test
     public void setupMagnificationEditShortcutDialog_shortcutPreferenceOn_checkboxIsSavedValue() {
         mContext.setTheme(R.style.Theme_AppCompat);
-        final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, DialogType.EDIT_SHORTCUT_MAGNIFICATION, PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
@@ -247,7 +248,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_assignToVariable() {
         mContext.setTheme(R.style.Theme_AppCompat);
-        final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, DialogType.EDIT_SHORTCUT_MAGNIFICATION, PLACEHOLDER_DIALOG_TITLE,
                 this::callEmptyOnClicked);
         final Bundle savedInstanceState = new Bundle();
