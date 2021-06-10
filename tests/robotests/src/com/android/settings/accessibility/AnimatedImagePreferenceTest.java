@@ -18,13 +18,19 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.drawable.AnimatedImageDrawable;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,18 +40,22 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.io.InputStream;
+
 /** Tests for {@link AnimatedImagePreference}. */
 @RunWith(RobolectricTestRunner.class)
 public class AnimatedImagePreferenceTest {
+    private final Context mContext = RuntimeEnvironment.application;
     private Uri mImageUri;
     private View mRootView;
     private PreferenceViewHolder mViewHolder;
@@ -54,32 +64,53 @@ public class AnimatedImagePreferenceTest {
     @Spy
     private ImageView mImageView;
 
-    @Mock
-    private AnimatedImageDrawable mAnimatedImageDrawable;
-
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
 
-        final Context context = RuntimeEnvironment.application;
-        final LayoutInflater inflater = LayoutInflater.from(context);
+        final LayoutInflater inflater = LayoutInflater.from(mContext);
         mRootView = spy(inflater.inflate(R.layout.preference_animated_image, /* root= */ null));
         mViewHolder = spy(PreferenceViewHolder.createInstanceForTests(mRootView));
-        mImageView = spy(new ImageView(context));
+        mImageView = spy(new ImageView(mContext));
 
-        mAnimatedImagePreference = new AnimatedImagePreference(context);
+        mAnimatedImagePreference = new AnimatedImagePreference(mContext);
         mImageUri = new Uri.Builder().build();
     }
 
     @Test
-    public void readImageUri_animatedImage_startAnimation() {
+    public void playAnimation_animatedImageDrawable_success() {
+        final AnimatedImageDrawable drawable = mock(AnimatedImageDrawable.class);
         doReturn(mImageView).when(mRootView).findViewById(R.id.animated_img);
-        doReturn(mAnimatedImageDrawable).when(mImageView).getDrawable();
+        doReturn(drawable).when(mImageView).getDrawable();
 
         mAnimatedImagePreference.setImageUri(mImageUri);
         mAnimatedImagePreference.onBindViewHolder(mViewHolder);
 
-        verify(mAnimatedImageDrawable).start();
+        verify(drawable).start();
+    }
+
+    @Test
+    public void playAnimation_animatedVectorDrawable_success() {
+        final AnimatedVectorDrawable drawable = mock(AnimatedVectorDrawable.class);
+        doReturn(mImageView).when(mRootView).findViewById(R.id.animated_img);
+        doReturn(drawable).when(mImageView).getDrawable();
+
+        mAnimatedImagePreference.setImageUri(mImageUri);
+        mAnimatedImagePreference.onBindViewHolder(mViewHolder);
+
+        verify(drawable).start();
+    }
+
+    @Test
+    public void playAnimation_animationDrawable_success() {
+        final AnimationDrawable drawable = mock(AnimationDrawable.class);
+        doReturn(mImageView).when(mRootView).findViewById(R.id.animated_img);
+        doReturn(drawable).when(mImageView).getDrawable();
+
+        mAnimatedImagePreference.setImageUri(mImageUri);
+        mAnimatedImagePreference.onBindViewHolder(mViewHolder);
+
+        verify(drawable).start();
     }
 
     @Test
@@ -101,5 +132,23 @@ public class AnimatedImagePreferenceTest {
         mAnimatedImagePreference.onBindViewHolder(mViewHolder);
 
         assertThat(mImageView.getMaxHeight()).isEqualTo(maxHeight);
+    }
+
+    @Test
+    public void setImageUriAndRebindViewHolder_lottieImageFromRawFolder_setAnimation() {
+        final int fakeLottieResId = 111111;
+        final Uri lottieImageUri =
+                new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(mContext.getPackageName())
+                .appendPath(String.valueOf(fakeLottieResId))
+                .build();
+        final LottieAnimationView lottieView = spy(new LottieAnimationView(mContext));
+        doReturn(mImageView).when(mRootView).findViewById(R.id.animated_img);
+        doReturn(lottieView).when(mRootView).findViewById(R.id.lottie_view);
+
+        mAnimatedImagePreference.setImageUri(lottieImageUri);
+        mAnimatedImagePreference.onBindViewHolder(mViewHolder);
+
+        verify(lottieView).setAnimation(any(InputStream.class), eq(null));
     }
 }

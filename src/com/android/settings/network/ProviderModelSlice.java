@@ -46,6 +46,7 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkProviderWorker;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.slice.WifiSlice;
@@ -161,6 +162,18 @@ public class ProviderModelSlice extends WifiSlice {
             listBuilder.addRow(getSeeAllRow());
         }
         return listBuilder.build();
+    }
+
+    @Override
+    public PendingIntent getBroadcastIntent(Context context) {
+        final Intent intent = new Intent(getUri().toString())
+                // The FLAG_RECEIVER_FOREGROUND flag is necessary to avoid the intent delay of
+                // the first sending after the device restarts
+                .addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
+                .setData(getUri())
+                .setClass(context, SliceBroadcastReceiver.class);
+        return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
     }
 
     /**
