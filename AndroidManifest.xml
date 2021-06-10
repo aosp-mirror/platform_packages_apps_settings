@@ -1803,6 +1803,10 @@
             android:theme="@style/GlifV3Theme.Light"
             android:exported="false"/>
 
+        <activity android:name=".biometrics.face.FaceEnrollParentalConsent"
+                  android:exported="false"
+                  android:screenOrientation="portrait"/>
+
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
             android:exported="false"
             android:screenOrientation="portrait"/>
@@ -1837,6 +1841,7 @@
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFinish" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.FingerprintEnrollParentalConsent" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroduction"
             android:exported="true"
             android:theme="@style/GlifTheme.Light">
