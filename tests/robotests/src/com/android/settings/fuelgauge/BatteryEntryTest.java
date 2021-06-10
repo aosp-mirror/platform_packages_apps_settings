@@ -93,7 +93,7 @@ public class BatteryEntryTest {
         when(consumer.getUid()).thenReturn(APP_UID);
         when(consumer.getPackageWithHighestDrain()).thenReturn(highDrainPackage);
         return new BatteryEntry(mMockContext, mockHandler, mockUserManager,
-                consumer, false, packages, packageName);
+                consumer, false, APP_UID, packages, packageName);
     }
 
     private BatteryEntry createAggregateBatteryEntry(int powerComponentId) {
@@ -108,7 +108,7 @@ public class BatteryEntryTest {
         UserBatteryConsumer consumer = mock(UserBatteryConsumer.class);
         when(consumer.getUserId()).thenReturn(userId);
         return new BatteryEntry(mMockContext, mockHandler, mockUserManager,
-                consumer, false, null, null);
+                consumer, false, 0, null, null);
     }
 
     @Test
@@ -169,11 +169,11 @@ public class BatteryEntryTest {
 
     @Test
     public void getTimeInForegroundMs_app() {
-        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
-                mockUserManager, mUidBatteryConsumer, false, null, null);
-
         when(mUidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND))
                 .thenReturn(100L);
+
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
+                mockUserManager, mUidBatteryConsumer, false, 0, null, null);
 
         assertThat(entry.getTimeInForegroundMs()).isEqualTo(100L);
     }
@@ -188,11 +188,11 @@ public class BatteryEntryTest {
 
     @Test
     public void getTimeInBackgroundMs_app() {
-        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
-                mockUserManager, mUidBatteryConsumer, false, null, null);
-
         when(mUidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND))
                 .thenReturn(100L);
+
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
+                mockUserManager, mUidBatteryConsumer, false, 0, null, null);
 
         assertThat(entry.getTimeInBackgroundMs()).isEqualTo(100L);
     }
