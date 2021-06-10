@@ -45,5 +45,4 @@ public class CardPreferenceTest {
     public void getLayoutResource() {
         assertThat(mCardPreference.getLayoutResource()).isEqualTo(R.layout.card_preference_layout);
     }
-
 }

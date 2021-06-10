@@ -31,4 +31,14 @@
         android:focusable="false"
         android:clickable="false"
         android:adjustViewBounds="true"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_view"
+        android:layout_width="412dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:background="@drawable/protection_background"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:clipToOutline="true"/>
 </FrameLayout>

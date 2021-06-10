@@ -1125,22 +1125,6 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;color name=&quot;contextual_card_stroke_color&quot;>#1f000000&lt;/color>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/values/colors.xml"
-            line="106"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="    &lt;color name=&quot;switchbar_switch_track_tint&quot;>#BFFFFFFF&lt;/color>"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -2424,7 +2408,7 @@
         errorLine1="        android:fillColor=&quot;@color/face_intro_outline&quot;"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="res/drawable/face_enroll_introduction.xml"
+            file="res/drawable/face_enroll_icon_large.xml"
             line="25"
             column="9"/>
     </issue>
@@ -4283,22 +4267,6 @@
             file="res/values/styles.xml"
             line="439"
             column="44"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;strokeColor&quot;>@color/contextual_card_stroke_color&lt;/item>"
-        errorLine2="                                 ^">
-        <location
-            file="res/values/styles.xml"
-            line="475"
-            column="34"/>
     </issue>
 
     <issue
