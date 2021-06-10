@@ -67,8 +67,6 @@ public class LocationInjectedServicesPreferenceControllerTest {
     @Mock
     private PreferenceCategory mCategoryPrimary;
     @Mock
-    private PreferenceCategory mCategoryManaged;
-    @Mock
     private PreferenceScreen mScreen;
     @Mock
     private AppSettingsInjector mSettingsInjector;
@@ -115,31 +113,6 @@ public class LocationInjectedServicesPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_shouldRemoveAllAndAddInjectedSettings() {
-        final List<Preference> preferences = new ArrayList<>();
-        final Map<Integer, List<Preference>> map = new ArrayMap<>();
-        final Preference pref1 = new Preference(mContext);
-        pref1.setTitle("Title1");
-        final Preference pref2 = new Preference(mContext);
-        pref2.setTitle("Title2");
-        preferences.add(pref1);
-        preferences.add(pref2);
-        map.put(UserHandle.myUserId(), preferences);
-        doReturn(map)
-                .when(mSettingsInjector).getInjectedSettings(any(Context.class), anyInt());
-        when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
-        ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
-
-        mController.displayPreference(mScreen);
-
-        mController.updateState(mCategoryPrimary);
-
-        verify(mCategoryPrimary).removeAll();
-        verify(mCategoryPrimary).addPreference(pref1);
-        verify(mCategoryPrimary).addPreference(pref2);
-    }
-
-    @Test
     public void workProfileDisallowShareLocationOn_getParentUserLocationServicesOnly() {
         final int fakeWorkProfileId = 123;
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(
@@ -158,7 +131,6 @@ public class LocationInjectedServicesPreferenceControllerTest {
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
 
         mController.displayPreference(mScreen);
-        mController.updateState(mCategoryPrimary);
         verify(mSettingsInjector).getInjectedSettings(
                 any(Context.class), eq(UserHandle.myUserId()));
     }
@@ -178,7 +150,6 @@ public class LocationInjectedServicesPreferenceControllerTest {
                 enforcingUsers);
 
         mController.displayPreference(mScreen);
-        mController.updateState(mCategoryPrimary);
         verify(mSettingsInjector).getInjectedSettings(
                 any(Context.class), eq(UserHandle.USER_CURRENT));
     }
@@ -216,7 +187,6 @@ public class LocationInjectedServicesPreferenceControllerTest {
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
 
         mController.displayPreference(mScreen);
-        mController.updateState(mCategoryPrimary);
 
         assertThat(pref.isEnabled()).isFalse();
         assertThat(pref.isDisabledByAdmin()).isTrue();
