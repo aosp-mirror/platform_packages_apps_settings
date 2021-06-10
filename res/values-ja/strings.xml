@@ -49,7 +49,7 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"SDカード内データを消去"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"プレビュー"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"プレビュー、<xliff:g id="CURRENT_PAGE">%1$d</xliff:g> ページ（<xliff:g id="NUM_PAGES">%2$d</xliff:g> ページ中）"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"画面上のテキストのサイズを変更します。"</string>
+    <string name="font_size_summary" msgid="1296835853522566260">"文字の表示サイズを変更します。"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"拡大"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"サンプル テキスト"</string>
@@ -981,8 +981,8 @@
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"ネットワークを削除"</string>
     <string name="wifi_forget_dialog_message" msgid="8419499588321940243">"このネットワークのすべてのパスワードを削除します"</string>
     <plurals name="wifi_saved_access_points_summary" formatted="false" msgid="2802436466732147888">
-      <item quantity="other">ネットワーク: %d 件</item>
-      <item quantity="one">ネットワーク: 1 件</item>
+      <item quantity="other">%d 件</item>
+      <item quantity="one">1 件</item>
     </plurals>
     <plurals name="wifi_saved_passpoint_access_points_summary" formatted="false" msgid="5802057518058840450">
       <item quantity="other">%d 件の登録</item>
@@ -2149,7 +2149,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"ユーザー補助機能を使用するには、2 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、2 本の指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"ユーザー補助機能を使用するには、3 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、3 本の指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g>のショートカット"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g>ショートカット"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"ユーザー補助機能ボタン"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"2 本の指で上にスワイプ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"3 本の指で上にスワイプ"</string>
@@ -3328,8 +3328,8 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"メディアの自動字幕起こし"</string>
     <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"なし"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> 個のスケジュールを設定</item>
-      <item quantity="one">1 個のスケジュールを設定</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> 件のスケジュールが有効</item>
+      <item quantity="one">1 件のスケジュールが有効</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"サイレント モード"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"大切な人やアプリからの通知のみ受け取ります"</string>
@@ -3346,7 +3346,7 @@
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"一時的にスマートフォンを消音"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"サイレント モード ルールの設定"</string>
     <string name="zen_mode_schedule_title" msgid="7064866561892906613">"スケジュール"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"スケジュールを使用"</string>
+    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"このスケジュールを使用"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"音が出る割り込みの許可"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"視覚的な通知のブロック"</string>
@@ -3355,17 +3355,17 @@
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"サイレント モードが ON のとき"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"通知音なし"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"画面に通知が表示されます"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"スマートフォンに通知が届いても、通知音やバイブレーションは作動しません。"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"通知の非表示、通知音なし"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"スマートフォンに通知が届いても、通知音が鳴らずバイブレーションもしません。"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"通知を非表示＆通知音なし"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"通知は表示されず、通知音も鳴りません"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"スマートフォンに新しい通知や既存の通知は表示されず、通知音やバイブレーションも作動しません。なお、スマートフォンのアクティビティやステータスに関する重要な通知は引き続き表示されます。\n\nサイレント モードを OFF にしたときは、画面を上から下にスワイプすれば見逃していた通知が表示されます。"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"スマートフォンに新しい通知や既存の通知は表示されず、通知音やバイブレーションも作動しません。なお、スマートフォンのアクティビティやステータスに関する重要な通知は引き続き表示されます。\n\nサイレント モードを OFF にした後、画面を上から下にスワイプすれば見逃していた通知を確認できます。"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"カスタム"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"カスタム設定の有効化"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"カスタム設定の削除"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"通知音なし"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"一部非表示"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"通知の非表示、通知音なし"</string>
-    <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"カスタムの制限"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"通知を非表示＆通知音なし"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"表示オプションをカスタマイズ"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"画面が ON のとき"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"画面が OFF のとき"</string>
     <string name="zen_mode_block_effect_sound" msgid="7929909410442858327">"音とバイブレーションをミュートする"</string>
@@ -3375,7 +3375,7 @@
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"ステータスバー アイコンを非表示"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"アプリアイコンの通知ドットを非表示"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"通知で復帰しない"</string>
-    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"プルダウン シェードに表示しない"</string>
+    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"プルダウン シェードに通知を表示しない"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"設定しない"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"画面が OFF のとき"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"画面が ON のとき"</string>
@@ -3409,15 +3409,15 @@
     </plurals>
     <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g>分"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> 件のスケジュールを自動的に ON にできます</item>
-      <item quantity="one">1 件のスケジュールを自動的に ON にできます</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> 件のスケジュールにより自動で ON になります</item>
+      <item quantity="one">1 件のスケジュールにより自動で ON になります</item>
     </plurals>
     <string name="zen_category_behavior" msgid="3214056473947178507">"サイレント モードに割り込み可能なもの"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"人物"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"アプリ"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"アラームとその他の割り込み"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"スケジュール"</string>
-    <string name="zen_category_duration" msgid="7515850842082631460">"クイック設定の期間"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"クイック設定の持続時間"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"サイレント モードが ON の場合、上で許可した項目以外の音とバイブレーションはミュートされます。"</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"カスタム設定"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"スケジュールを確認"</string>
@@ -3425,16 +3425,16 @@
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"通知"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"期間"</string>
     <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"メッセージ、予定、リマインダー"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"サイレント モードが ON の場合、上記の許可した項目を除き、メッセージ、リマインダー、予定はミュートされます。メッセージの設定を調整することで、友だち、家族などの連絡先からの着信のブロックを解除できます。"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"サイレント モードが ON の場合、上記の許可した項目を除き、メッセージ、リマインダー、予定の通知はミュートされます。ただしメッセージの設定を調整することで、友だち、家族などの連絡先からの着信をブロックせず通知できます。"</string>
     <string name="zen_onboarding_ok" msgid="8764248406533833392">"完了"</string>
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"設定"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"通知の非表示、通知音なし"</string>
+    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"通知を非表示＆通知音なし"</string>
     <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"通知音なし"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"通知は表示されず、通知音も鳴りません。スター付きの連絡先からの発信や同一発信者による再発信は許可されます。"</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"（現在の設定）"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"サイレント モードの通知設定を変更しますか？"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"仕事用プロファイルの音"</string>
-    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"個人用プロファイルの音の使用"</string>
+    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"個人用プロファイルの音を使用"</string>
     <string name="work_use_personal_sounds_summary" msgid="4482832555278975008">"仕事用プロファイルと個人用プロファイルの音は同じです"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"仕事用電話の着信音"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"デフォルトの仕事用通知音"</string>
@@ -3514,7 +3514,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ロック 画面, ロック画面, スキップ, バイパス"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"仕事用プロファイルのロック時"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ロック画面上の通知"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"会話、デフォルト、サイレントを表示する"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"デフォルトとサイレントの会話と通知を表示する"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"サイレントの会話と通知を非表示にする"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"通知を表示しない"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"機密性の高い通知"</string>
@@ -3637,7 +3637,7 @@
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"個人データを IT 管理者と共有しないと考えられる、信頼できるアプリのみを接続してください。"</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"アプリの接続はデバイスのプライバシー設定からいつでも解除できます。"</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"仕事用の<xliff:g id="NAME">%1$s</xliff:g>に個人データの使用を許可しますか？"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"個人データが IT 管理者と共有されないことが信頼できるアプリのみを接続してください。"</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"個人データを IT 管理者と共有しないと考えられる、信頼できるアプリのみを接続してください。"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"アプリデータ"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"このアプリは、個人用アプリである<xliff:g id="NAME">%1$s</xliff:g>内のデータにアクセスできます。"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"権限"</string>
@@ -3699,11 +3699,11 @@
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"削除"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"名前を変更"</string>
     <string name="zen_mode_rule_name" msgid="7303080427006917702">"スケジュール名"</string>
-    <string name="zen_mode_rule_name_hint" msgid="7029432803855827697">"スケジュール名を入力してください"</string>
+    <string name="zen_mode_rule_name_hint" msgid="7029432803855827697">"スケジュール名を入力"</string>
     <string name="zen_mode_rule_name_warning" msgid="1244435780807634954">"スケジュール名はすでに使用されています"</string>
     <string name="zen_mode_add_rule" msgid="4217731747959400770">"追加"</string>
-    <string name="zen_mode_add_event_rule" msgid="9179404395950854471">"予定のスケジュールの追加"</string>
-    <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"時間のスケジュールの追加"</string>
+    <string name="zen_mode_add_event_rule" msgid="9179404395950854471">"予定タイプのスケジュールの追加"</string>
+    <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"時間タイプのスケジュールの追加"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"スケジュールを削除"</string>
     <string name="zen_mode_choose_rule_type" msgid="7656308563653982975">"スケジュールの種類の選択"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"「<xliff:g id="RULE">%1$s</xliff:g>」ルールを削除しますか？"</string>
@@ -3732,7 +3732,7 @@
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"指定しない"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"毎日"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"終了時間よりアラームを優先"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"アラームが鳴ったらスケジュールを OFF にする"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"アラームが鳴ったらスケジュールを OFF にします"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"サイレントモードの動作"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"デフォルト設定を使用"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"設定をカスタマイズ"</string>
@@ -3756,7 +3756,7 @@
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"通話"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"割り込み可能な通話"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"許可した通話で必ず音が鳴るようにするには、デバイスの設定が着信音になっていることをご確認ください"</string>
-    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」の間、着信がブロックされます。設定を調整することで、友だち、家族などの連絡先からの着信のブロックを解除できます。"</string>
+    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」の間、着信がブロックされます。ただし設定を調整することで、友だち、家族などの連絡先からの着信をブロックせず通知できます。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"スター付きの連絡先"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
       <item quantity="other">他 <xliff:g id="NUM_PEOPLE">%d</xliff:g> 人</item>
@@ -3767,10 +3767,10 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"メッセージ"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"メッセージ"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"割り込み可能なメッセージ"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"許可したメッセージで必ず音が鳴るようにするには、デバイスの設定が着信音になっていることをご確認ください"</string>
-    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」の間、受信メッセージはブロックされます。設定を調整することで、友だち、家族などの連絡先からの受信メッセージのブロックを解除できます。"</string>
-    <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"すべてのメッセージが届く"</string>
-    <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"すべての通話が着信"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"許可したメッセージの受信時に必ず音を鳴らすには、「着信音と通知の音量」設定がバイブレーションまたはミュートになっていないことをご確認ください"</string>
+    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」の間、メッセージの通知はブロックされます。ただし設定を調整することで、友だち、家族などの連絡先からの受信をブロックせず通知できます。"</string>
+    <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"すべてのメッセージを通知"</string>
+    <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"すべての通話を通知"</string>
     <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"なし"</string>
     <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
       <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> 件の連絡先</item>
@@ -3806,9 +3806,9 @@
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"イベント"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"アプリのオーバーライドを許可"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"割り込み可能なアプリ"</string>
-    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"他のアプリの選択"</string>
-    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"アプリを選択していません"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"アプリは割り込み不可"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"他のアプリを選択"</string>
+    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"アプリが選択されていません"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"すべて割り込み不可"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"アプリの追加"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"すべての通知"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"一部の通知"</string>
@@ -3829,7 +3829,7 @@
     </plurals>
     <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"すべて割り込み不可"</string>
     <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"他 <xliff:g id="NUMBER">%d</xliff:g> 個"</string>
-    <string name="zen_mode_people_none" msgid="4613147461974255046">"すべてのユーザーが割り込み不可"</string>
+    <string name="zen_mode_people_none" msgid="4613147461974255046">"すべて割り込み不可"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"一部のユーザーが割り込み可能"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"すべてのユーザーが割り込み可能"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"同一発信者による再着信"</string>
@@ -4005,7 +4005,7 @@
     <string name="default_app" msgid="445053777504688596">"（既定）"</string>
     <string name="system_app" msgid="1863291702508355041">"（システム）"</string>
     <string name="system_default_app" msgid="2647834628622214931">"（システムのデフォルト）"</string>
-    <string name="apps_storage" msgid="643866814746927111">"アプリのストレージ"</string>
+    <string name="apps_storage" msgid="643866814746927111">"アプリの使用容量"</string>
     <string name="usage_access" msgid="5487993885373893282">"使用状況へのアクセス"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"使用状況へのアクセスを許可"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"アプリの使用状況の設定"</string>
@@ -4135,7 +4135,7 @@
     <string name="allow_overlay_description" msgid="1607235723669496298">"使用中の他のアプリの上にこのアプリを重ねて表示できます。このアプリ側から、タップする場所を把握したり、画面に表示する内容を変更したりできます。"</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"すべてのファイルへのアクセス"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"全ファイルの管理権を付与"</string>
-    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"このアプリに対し、このデバイスまたは接続されているストレージ ボリューム内のすべてのファイルの読み取り、変更、削除を許可します。許可されている場合、アプリがユーザーの事前の承認なしにファイルにアクセスすることもあります。"</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"このアプリに対して、デバイス内または接続されているストレージ ボリューム内のファイルすべての参照、変更、削除を許可します。許可されている場合、アプリがユーザーの事前の承認なしにファイルにアクセスすることもあります。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"すべてのファイルにアクセス可能"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr バーチャル リアリティ リスナー ステレオ ヘルパー サービス"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"他のアプリの上に重ねて表示"</string>
@@ -4163,7 +4163,7 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"表示サイズ"</string>
     <string name="screen_zoom_short_summary" msgid="2458636490408833800">"画面上のアイテムのサイズを変更します"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"表示間隔、画面のズーム、スケール、拡大縮小"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"画面上のアイテムのサイズを変更します。画面上のアプリの位置が変わることがあります。"</string>
+    <string name="screen_zoom_summary" msgid="1362984939045594989">"アイテムの表示サイズを変更します。画面上のアプリの位置が変わることがあります。"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"プレビュー"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"縮小"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"拡大"</string>
@@ -4323,7 +4323,7 @@
     <string name="data_saver_on" msgid="7848893946018448793">"ON"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"OFF"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"データセーバーを使用"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"無制限のデータ使用"</string>
+    <string name="unrestricted_app_title" msgid="7117585996574329284">"モバイルデータの無制限利用"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"データセーバーが ON のときでもモバイルデータの使用を無制限にする"</string>
     <string name="home_app" msgid="6056850504746902747">"ホームアプリ"</string>
     <string name="no_default_home" msgid="3588073707316139318">"デフォルトのホームがありません"</string>
@@ -4682,7 +4682,7 @@
     <string name="battery_suggestion_title" product="device" msgid="2280773774080720377">"デバイスの電池寿命の改善"</string>
     <string name="battery_suggestion_title" product="default" msgid="4811554469047272537">"スマートフォンの電池寿命の改善"</string>
     <string name="battery_suggestion_summary" msgid="8186720080540016197"></string>
-    <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"着信音を停止"</string>
+    <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"着信音のミュート"</string>
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"電源ボタンと音量大ボタンを同時に押す"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"着信音ミュート用のショートカット"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"バイブレーション"</string>
@@ -4943,7 +4943,7 @@
     <string name="media_controls_summary" msgid="5032071475867165587">"メディア セッションの終了にプレーヤーを非表示にする"</string>
     <string name="media_controls_resume_description" msgid="2333689676163363582">"プレーヤーを使用すると、クイック設定の展開パネルからセッションを再開できます。"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"プレーヤーを非表示"</string>
-    <string name="media_controls_show_player" msgid="8504571042365814021">"プレーヤーを表示"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"クイック設定に表示させるプレーヤーを選択"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"プレーヤーなし"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
     <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"信頼できないデバイスがメッセージにアクセスしようとしています。タップして詳細をご確認ください。"</string>
