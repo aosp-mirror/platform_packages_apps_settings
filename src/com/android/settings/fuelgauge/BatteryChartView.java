@@ -56,14 +56,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private static final List<String> ACCESSIBILITY_SERVICE_NAMES =
         Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
 
-    // For drawing the percentage information.
-    private static final String[] PERCENTAGES = new String[] {
-            formatPercentage(/*percentage=*/ 100, /*round=*/ true),
-            formatPercentage(/*percentage=*/ 50, /*round=*/ true),
-            formatPercentage(/*percentage=*/ 0, /*round=*/ true)};
-
     private static final int DEFAULT_TRAPEZOID_COUNT = 12;
-    private static final int DEFAULT_TIMESTAMP_COUNT = 4;
+    private static final int DEFAULT_TIMESTAMP_COUNT = 5;
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
     private static final long UPDATE_STATE_DELAYED_TIME = 500L;
 
@@ -82,6 +76,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private float mTrapezoidVOffset;
     private float mTrapezoidHOffset;
     private boolean mIsSlotsClickabled;
+    private String[] mPercentages = getPercentages();
 
     @VisibleForTesting int mSelectedIndex;
     @VisibleForTesting String[] mTimestamps;
@@ -96,7 +91,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         new Rect[] {new Rect(), new Rect(), new Rect()};
     // For drawing the timestamp information.
     private final Rect[] mTimestampsBounds =
-        new Rect[] {new Rect(), new Rect(), new Rect(), new Rect()};
+        new Rect[] {new Rect(), new Rect(), new Rect(), new Rect(), new Rect()};
 
     @VisibleForTesting
     Handler mHandler = new Handler();
@@ -107,6 +102,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private Paint mTextPaint;
     private Paint mDividerPaint;
     private Paint mTrapezoidPaint;
+
     @VisibleForTesting
     Paint mTrapezoidCurvePaint = null;
     private TrapezoidSlot[] mTrapezoidSlots;
@@ -201,12 +197,13 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         if (mTimestamps == null) {
             mTimestamps = new String[DEFAULT_TIMESTAMP_COUNT];
         }
-        final long timeSlotOffset = DateUtils.HOUR_IN_MILLIS * 8;
+        final long timeSlotOffset = DateUtils.HOUR_IN_MILLIS * 6;
         final boolean is24HourFormat = DateFormat.is24HourFormat(getContext());
         for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
             mTimestamps[index] =
                 ConvertUtils.utcToLocalTimeHour(
-                    latestTimestamp - (3 - index) * timeSlotOffset,
+                    getContext(),
+                    latestTimestamp - (4 - index) * timeSlotOffset,
                     is24HourFormat);
         }
         requestLayout();
@@ -217,9 +214,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         // Measures text bounds and updates indent configuration.
         if (mTextPaint != null) {
-            for (int index = 0; index < PERCENTAGES.length; index++) {
+            for (int index = 0; index < mPercentages.length; index++) {
                 mTextPaint.getTextBounds(
-                    PERCENTAGES[index], 0, PERCENTAGES[index].length(),
+                    mPercentages[index], 0, mPercentages[index].length(),
                     mPercentageBounds[index]);
             }
             // Updates the indent configurations.
@@ -396,7 +393,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private void drawPercentage(Canvas canvas, int index, float offsetY) {
         if (mTextPaint != null) {
             canvas.drawText(
-                PERCENTAGES[index],
+                mPercentages[index],
                 getWidth() - mPercentageBounds[index].width() - mPercentageBounds[index].left,
                 offsetY + mPercentageBounds[index].height() *.5f,
                 mTextPaint);
@@ -429,7 +426,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             final float baselineX = mDividerWidth * .5f;
             final float offsetX = mDividerWidth + unitWidth;
             for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
-                xOffsets[index] = baselineX + index * offsetX * 4;
+                xOffsets[index] = baselineX + index * offsetX * 3;
             }
             drawTimestamp(canvas, xOffsets);
         }
@@ -443,11 +440,11 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             getTimestampY(0), mTextPaint);
         // Draws the last timestamp info.
         canvas.drawText(
-            mTimestamps[3],
-            xOffsets[3] - mTimestampsBounds[3].width() - mTimestampsBounds[3].left,
-            getTimestampY(3), mTextPaint);
+            mTimestamps[4],
+            xOffsets[4] - mTimestampsBounds[4].width() - mTimestampsBounds[4].left,
+            getTimestampY(4), mTextPaint);
         // Draws the rest of timestamp info since it is located in the center.
-        for (int index = 1; index <= 2; index++) {
+        for (int index = 1; index <= 3; index++) {
             canvas.drawText(
                 mTimestamps[index],
                 xOffsets[index] -
@@ -542,6 +539,13 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                 && trapezoidIndex < mLevels.length - 1
                 && mLevels[trapezoidIndex] != 0
                 && mLevels[trapezoidIndex + 1] != 0;
+    }
+
+    private static String[] getPercentages() {
+        return new String[] {
+            formatPercentage(/*percentage=*/ 100, /*round=*/ true),
+            formatPercentage(/*percentage=*/ 50, /*round=*/ true),
+            formatPercentage(/*percentage=*/ 0, /*round=*/ true)};
     }
 
     @VisibleForTesting

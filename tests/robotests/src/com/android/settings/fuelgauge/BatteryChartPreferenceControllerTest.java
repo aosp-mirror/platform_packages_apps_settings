@@ -35,6 +35,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.text.format.DateUtils;
 import android.util.Pair;
 
@@ -100,6 +101,8 @@ public final class BatteryChartPreferenceControllerTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mContext = spy(RuntimeEnvironment.application);
+        mContext.getResources().getConfiguration().setLocales(
+            new LocaleList(new Locale("en_US")));
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
@@ -573,14 +576,12 @@ public final class BatteryChartPreferenceControllerTest {
         // Verifies the title in the preference group.
         verify(mBatteryChartPreferenceController.mAppListPrefGroup)
             .setTitle(captor.capture());
-        assertThat(captor.getValue())
-            .isEqualTo("App usage for 4 pm - 7 am");
+        assertThat(captor.getValue()).isEqualTo("App usage for 4 - 7");
         // Verifies the title in the expandable divider.
         captor = ArgumentCaptor.forClass(String.class);
         verify(mBatteryChartPreferenceController.mExpandDividerPreference)
             .setTitle(captor.capture());
-        assertThat(captor.getValue())
-            .isEqualTo("System usage for 4 pm - 7 am");
+        assertThat(captor.getValue()).isEqualTo("System usage for 4 - 7");
     }
 
     @Test
@@ -716,7 +717,8 @@ public final class BatteryChartPreferenceControllerTest {
     private void setUpBatteryHistoryKeys() {
         mBatteryChartPreferenceController.mBatteryHistoryKeys =
             new long[] {1619196786769L, 0L, 1619247636826L};
-        ConvertUtils.utcToLocalTimeHour(/*timestamp=*/ 0, /*is24HourFormat=*/ false);
+        ConvertUtils.utcToLocalTimeHour(
+            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
         // Simulates the locale in GMT.
         ConvertUtils.sSimpleDateFormatForHour
              .setTimeZone(TimeZone.getTimeZone("GMT"));
