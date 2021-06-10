@@ -272,7 +272,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             final Map<String, BatteryHistEntry> entryMap = batteryHistoryMap.get(timestamp);
             if (entryMap == null || entryMap.isEmpty()) {
                 Log.e(TAG, "abnormal entry list in the timestamp:"
-                    + ConvertUtils.utcToLocalTime(timestamp));
+                    + ConvertUtils.utcToLocalTime(mPrefContext, timestamp));
                 continue;
             }
             // Averages the battery level in each time slot to avoid corner conditions.
@@ -287,7 +287,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         Log.d(TAG, String.format(
             "setBatteryHistoryMap() size=%d\nkeys=%s\nlevels=%s",
             batteryHistoryMap.size(),
-            utcToLocalTime(mBatteryHistoryKeys),
+            utcToLocalTime(mPrefContext, mBatteryHistoryKeys),
             Arrays.toString(mBatteryHistoryLevels)));
 
         // Loads item icon and label in the background.
@@ -496,9 +496,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         if (mTrapezoidIndex < 0) {
             return null;
         }
-        final String fromHour = ConvertUtils.utcToLocalTimeHour(
+        final String fromHour = ConvertUtils.utcToLocalTimeHour(mPrefContext,
             mBatteryHistoryKeys[mTrapezoidIndex * 2], mIs24HourFormat);
-        final String toHour = ConvertUtils.utcToLocalTimeHour(
+        final String toHour = ConvertUtils.utcToLocalTimeHour(mPrefContext,
             mBatteryHistoryKeys[(mTrapezoidIndex + 1) * 2], mIs24HourFormat);
         return String.format("%s - %s", fromHour, toHour);
     }
@@ -584,11 +584,11 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mHandler.post(() -> mPreferenceScreen.addPreference(mFooterPreference));
     }
 
-    private static String utcToLocalTime(long[] timestamps) {
+    private static String utcToLocalTime(Context context, long[] timestamps) {
         final StringBuilder builder = new StringBuilder();
         for (int index = 0; index < timestamps.length; index++) {
             builder.append(String.format("%s| ",
-                  ConvertUtils.utcToLocalTime(timestamps[index])));
+                  ConvertUtils.utcToLocalTime(context, timestamps[index])));
         }
         return builder.toString();
     }
