@@ -40,6 +40,7 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Looper;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
@@ -82,6 +83,8 @@ public class SubscriptionsPreferenceControllerTest {
     private static final String KEY = "preference_group";
 
     @Mock
+    private UserManager mUserManager;
+    @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
     private ConnectivityManager mConnectivityManager;
@@ -121,10 +124,12 @@ public class SubscriptionsPreferenceControllerTest {
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         when(mConnectivityManager.getActiveNetwork()).thenReturn(mActiveNetwork);
         when(mConnectivityManager.getNetworkCapabilities(mActiveNetwork))
                 .thenReturn(mNetworkCapabilities);
+        when(mUserManager.isAdminUser()).thenReturn(true);
         when(mLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
 
         mPreferenceManager = new PreferenceManager(mContext);
