@@ -80,10 +80,27 @@ public class CredentialManagementAppButtonsController extends BasePreferenceCont
     private void displayButtons(PreferenceScreen screen) {
         if (mHasCredentialManagerPackage) {
             ((ActionButtonsPreference) screen.findPreference(getPreferenceKey()))
-                    .setButton1Text(R.string.remove_credential_management_app)
-                    .setButton1Icon(R.drawable.ic_undo_24)
-                    .setButton1OnClickListener(view -> removeCredentialManagementApp());
+                    .setButton1Text(R.string.uninstall_certs_credential_management_app)
+                    .setButton1Icon(R.drawable.ic_upload)
+                    .setButton1OnClickListener(view -> uninstallCertificates())
+                    .setButton2Text(R.string.remove_credential_management_app)
+                    .setButton2Icon(R.drawable.ic_delete)
+                    .setButton2OnClickListener(view -> removeCredentialManagementApp());
         }
+    }
+
+    private void uninstallCertificates() {
+        mExecutor.execute(() -> {
+            try {
+                IKeyChainService service = KeyChain.bind(mContext).getService();
+                for (String existingAlias :
+                        service.getCredentialManagementAppPolicy().getAliases()) {
+                    service.removeKeyPair(existingAlias);
+                }
+            } catch (InterruptedException | RemoteException e) {
+                Log.e(TAG, "Unable to uninstall certificates");
+            }
+        });
     }
 
     private void removeCredentialManagementApp() {
