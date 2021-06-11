@@ -18,16 +18,14 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:persistent="false"
     android:title="@string/one_handed_title">
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="one_handed_header"
-        android:layout="@layout/one_handed_header"
-        android:persistent="false"
-        android:selectable="false"
-        settings:allowDividerBelow="false"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/lottie_one_hand_mode"/>
 
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="gesture_one_handed_mode_enabled_main_switch"
