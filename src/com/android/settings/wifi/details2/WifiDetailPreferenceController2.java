@@ -63,6 +63,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.net.module.util.Inet4AddressUtils;
 import com.android.settings.R;
@@ -513,6 +514,12 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     @Override
     public void onResume() {
+        // Disable the animation of the EntityHeaderController
+        final RecyclerView recyclerView = mFragment.getListView();
+        if (recyclerView != null) {
+            recyclerView.setItemAnimator(null);
+        }
+
         // Ensure mNetwork is set before any callbacks above are delivered, since our
         // NetworkCallback only looks at changes to mNetwork.
         updateNetworkInfo();
