@@ -14,11 +14,12 @@
      limitations under the License.
 -->
 
-<com.google.android.setupdesign.GlifLayout
+<com.google.android.setupdesign.GlifRecyclerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/glif_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:entries="@xml/items_multiple_carrier"
     android:icon="@drawable/ic_network_signal_blue">
 
     <LinearLayout
@@ -45,4 +46,4 @@
             android:entries="@xml/items_multiple_carrier" />
 
     </LinearLayout>
-</com.google.android.setupdesign.GlifLayout>
+</com.google.android.setupdesign.GlifRecyclerLayout>
