@@ -15,25 +15,14 @@
  */
 package com.android.settings.location;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.location.SettingInjectorService;
 import android.os.UserHandle;
-import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.Utils;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.RestrictedAppPreference;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
 import java.util.Map;
@@ -41,42 +30,20 @@ import java.util.Map;
 /**
  * Preference controller for the injected Location Services.
  */
-public class LocationInjectedServicesPreferenceController extends LocationBasePreferenceController
-        implements LifecycleObserver, OnResume, OnPause {
+public class LocationInjectedServicesPreferenceController
+        extends LocationInjectedServiceBasePreferenceController {
 
     private static final String TAG = "LocationPrefCtrl";
-    @VisibleForTesting
-    static final IntentFilter INTENT_FILTER_INJECTED_SETTING_CHANGED =
-            new IntentFilter(SettingInjectorService.ACTION_INJECTED_SETTING_CHANGED);
-
-    protected PreferenceCategory mCategoryLocationServices;
-    @VisibleForTesting
-    AppSettingsInjector mInjector;
-    /** Receives UPDATE_INTENT */
-    @VisibleForTesting
-    BroadcastReceiver mInjectedSettingsReceiver;
 
     public LocationInjectedServicesPreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
-    public void init(DashboardFragment fragment) {
-        super.init(fragment);
-        mInjector = new AppSettingsInjector(mContext, getMetricsCategory());
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mCategoryLocationServices = screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        mCategoryLocationServices.removeAll();
+    protected void injectLocationServices(PreferenceScreen screen) {
+        final PreferenceCategory categoryLocationServices =
+                screen.findPreference(getPreferenceKey());
         final Map<Integer, List<Preference>> prefs = getLocationServices();
-        boolean show = false;
         for (Map.Entry<Integer, List<Preference>> entry : prefs.entrySet()) {
             for (Preference pref : entry.getValue()) {
                 if (pref instanceof RestrictedAppPreference) {
@@ -84,53 +51,11 @@ public class LocationInjectedServicesPreferenceController extends LocationBasePr
                 }
             }
             if (entry.getKey() == UserHandle.myUserId()) {
-                if (mCategoryLocationServices != null) {
+                if (categoryLocationServices != null) {
                     LocationSettings.addPreferencesSorted(entry.getValue(),
-                            mCategoryLocationServices);
+                            categoryLocationServices);
                 }
-                show = true;
             }
         }
-        mCategoryLocationServices.setVisible(show);
-    }
-
-    @Override
-    public void onLocationModeChanged(int mode, boolean restricted) {
-        // As a safety measure, also reloads on location mode change to ensure the settings are
-        // up-to-date even if an affected app doesn't send the setting changed broadcast.
-        mInjector.reloadStatusMessages();
-    }
-
-    @Override
-    public void onResume() {
-        if (mInjectedSettingsReceiver == null) {
-            mInjectedSettingsReceiver = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    if (Log.isLoggable(TAG, Log.DEBUG)) {
-                        Log.d(TAG, "Received settings change intent: " + intent);
-                    }
-                    mInjector.reloadStatusMessages();
-                }
-            };
-        }
-        mContext.registerReceiver(
-                mInjectedSettingsReceiver, INTENT_FILTER_INJECTED_SETTING_CHANGED);
-    }
-
-    @Override
-    public void onPause() {
-        mContext.unregisterReceiver(mInjectedSettingsReceiver);
-    }
-
-    protected Map<Integer, List<Preference>> getLocationServices() {
-        // If location access is locked down by device policy then we only show injected settings
-        // for the primary profile.
-        final int profileUserId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
-
-        return mInjector.getInjectedSettings(mFragment.getPreferenceManager().getContext(),
-                (profileUserId != UserHandle.USER_NULL
-                        && mLocationEnabler.getShareLocationEnforcedAdmin(profileUserId) != null)
-                        ? UserHandle.myUserId() : UserHandle.USER_CURRENT);
     }
 }

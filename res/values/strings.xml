@@ -856,8 +856,6 @@
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up Face Unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_top_intro">Use Face Unlock to unlock your device, sign in to apps, and confirm payments.</string>
-    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
     <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer_attention_not_supported">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
@@ -6791,9 +6789,9 @@
     <string name="cert_not_installed">Certificate not installed</string>
 
     <!-- Title of screen shown to the user when an app requests to manage the user's KeyChain credentials [CHAR LIMIT=NONE] -->
-    <string name="request_manage_credentials_title">Allow <xliff:g id="app_name" example="Ping">%s</xliff:g> to install certificates on this device?</string>
+    <string name="request_manage_credentials_title">Allow <b><xliff:g id="app_name" example="Ping">^1</xliff:g></b> to install certificates on this device?</string>
     <!-- Description of screen shown to the user when an app requests to manage the user's KeyChain credentials [CHAR LIMIT=NONE] -->
-    <string name="request_manage_credentials_description">These certificates will identify you to the apps and URLs below</string>
+    <string name="request_manage_credentials_description">These certificates will verify you by sharing your device\u2019s unique ID with the apps and URLs below</string>
     <!-- Label for button to not allow an app to manage the user's KeyChain credentials [CHAR_LIMIT=50] -->
     <string name="request_manage_credentials_dont_allow">Don\u2019t allow</string>
     <!-- Label for button to allow an app to manage the user's KeyChain credentials [CHAR_LIMIT=50] -->
@@ -6805,7 +6803,9 @@
     <!-- Summary if there is no certificate management app [CHAR_LIMIT=NONE] -->
     <string name="no_certificate_management_app">None</string>
     <!-- Summary of preference if there is a certificate management app [CHAR LIMIT=NONE] -->
-    <string name="certificate_management_app_description">Certificates installed by this app identify you to the apps and URLs below</string>
+    <string name="certificate_management_app_description">Certificates will verify you when you use the apps and URLs below</string>
+    <!-- Label for button to uninstall all certificates installed by the credential management app [CHAR LIMIT=30] -->
+    <string name="uninstall_certs_credential_management_app">Uninstall certificates</string>
     <!-- Label for button to remove the credential management app [CHAR LIMIT=30] -->
     <string name="remove_credential_management_app">Remove</string>
     <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
