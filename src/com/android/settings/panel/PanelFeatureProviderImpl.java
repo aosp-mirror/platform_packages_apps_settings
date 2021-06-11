@@ -20,8 +20,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 
-import com.android.settings.Utils;
-
 public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override
@@ -41,9 +39,6 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
             case Settings.Panel.ACTION_NFC:
                 return NfcPanel.create(context);
             case Settings.Panel.ACTION_WIFI:
-                if (Utils.isProviderModelEnabled(context)) {
-                    return InternetConnectivityPanel.create(context);
-                }
                 return WifiPanel.create(context);
             case Settings.Panel.ACTION_VOLUME:
                 return VolumePanel.create(context);
