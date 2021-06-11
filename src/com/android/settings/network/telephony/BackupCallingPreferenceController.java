@@ -31,6 +31,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.ims.WifiCallingQueryImsState;
 
 import java.util.List;
 import java.util.Objects;
@@ -147,16 +148,20 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
     }
 
     private boolean hasBackupCallingFeature(int subscriptionId) {
-        PersistableBundle carrierConfig = getCarrierConfigForSubId(subscriptionId);
-        Boolean featureEnableStatus = null;
-        if (carrierConfig != null) {
-            featureEnableStatus = carrierConfig.getBoolean(
-                    CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL, false);
+        return isCrossSimEnabledByPlatform(mContext, subscriptionId);
+    }
+
+    protected boolean isCrossSimEnabledByPlatform(Context context, int subscriptionId) {
+        // TODO : Change into API which created for accessing
+        //        com.android.ims.ImsManager#isCrossSimEnabledByPlatform()
+        if ((new WifiCallingQueryImsState(context, subscriptionId)).isWifiCallingSupported()) {
+            PersistableBundle bundle = getCarrierConfigForSubId(subscriptionId);
+            return (bundle != null) && bundle.getBoolean(
+                    CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL,
+                    false /*default*/);
         }
-        // TODO: remove log after fixing b/182326102
-        Log.d(LOG_TAG, "config " + CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL
-                + "=" + featureEnableStatus + " for subId=" + subscriptionId);
-        return (featureEnableStatus != null) && featureEnableStatus.booleanValue();
+        Log.d(LOG_TAG, "Not supported by framework. subId = " + subscriptionId);
+        return false;
     }
 
     private ImsMmTelManager getImsMmTelManager(int subId) {
