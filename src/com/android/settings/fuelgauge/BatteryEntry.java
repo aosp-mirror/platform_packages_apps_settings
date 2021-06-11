@@ -159,12 +159,15 @@ public class BatteryEntry {
 
     private final Context mContext;
     private final BatteryConsumer mBatteryConsumer;
+    private final int mUid;
     private final boolean mIsHidden;
     @ConvertUtils.ConsumerType
     private final int mConsumerType;
     @BatteryConsumer.PowerComponent
     private final int mPowerComponentId;
     private long mUsageDurationMs;
+    private long mTimeInForegroundMs;
+    private long mTimeInBackgroundMs;
 
     public String name;
     public Drawable icon;
@@ -180,13 +183,13 @@ public class BatteryEntry {
     }
 
     public BatteryEntry(Context context, Handler handler, UserManager um,
-            @NonNull BatteryConsumer batteryConsumer, boolean isHidden, String[] packages,
+            @NonNull BatteryConsumer batteryConsumer, boolean isHidden, int uid, String[] packages,
             String packageName) {
-        this(context, handler, um, batteryConsumer, isHidden, packages, packageName, true);
+        this(context, handler, um, batteryConsumer, isHidden, uid, packages, packageName, true);
     }
 
     public BatteryEntry(Context context, Handler handler, UserManager um,
-            @NonNull BatteryConsumer batteryConsumer, boolean isHidden, String[] packages,
+            @NonNull BatteryConsumer batteryConsumer, boolean isHidden, int uid, String[] packages,
             String packageName, boolean loadDataInBackground) {
         sHandler = handler;
         mContext = context;
@@ -196,11 +199,11 @@ public class BatteryEntry {
         mPowerComponentId = -1;
 
         if (batteryConsumer instanceof UidBatteryConsumer) {
+            mUid = uid;
             mConsumerType = ConvertUtils.CONSUMER_TYPE_UID_BATTERY;
             mConsumedPower = batteryConsumer.getConsumedPower();
 
             UidBatteryConsumer uidBatteryConsumer = (UidBatteryConsumer) batteryConsumer;
-            int uid = uidBatteryConsumer.getUid();
             if (mDefaultPackageName == null) {
                 // Apps should only have one package
                 if (packages != null && packages.length == 1) {
@@ -222,7 +225,12 @@ public class BatteryEntry {
                 }
             }
             getQuickNameIconForUid(uid, packages, loadDataInBackground);
+            mTimeInForegroundMs =
+                    uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND);
+            mTimeInBackgroundMs =
+                    uidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND);
         } else if (batteryConsumer instanceof UserBatteryConsumer) {
+            mUid = Process.INVALID_UID;
             mConsumerType = ConvertUtils.CONSUMER_TYPE_USER_BATTERY;
             mConsumedPower = batteryConsumer.getConsumedPower();
             final NameAndIcon nameAndIcon = getNameAndIconFromUserId(
@@ -239,6 +247,7 @@ public class BatteryEntry {
             double appsPowerMah, long usageDurationMs) {
         mContext = context;
         mBatteryConsumer = null;
+        mUid = Process.INVALID_UID;
         mIsHidden = false;
         mPowerComponentId = powerComponentId;
         mConsumedPower =
@@ -261,6 +270,7 @@ public class BatteryEntry {
             double devicePowerMah, double appsPowerMah) {
         mContext = context;
         mBatteryConsumer = null;
+        mUid = Process.INVALID_UID;
         mIsHidden = false;
         mPowerComponentId = powerComponentId;
 
@@ -438,7 +448,7 @@ public class BatteryEntry {
      */
     public String getKey() {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
-            return Integer.toString(((UidBatteryConsumer) mBatteryConsumer).getUid());
+            return Integer.toString(mUid);
         } else if (mBatteryConsumer instanceof UserBatteryConsumer) {
             return "U|" + ((UserBatteryConsumer) mBatteryConsumer).getUserId();
         } else {
@@ -482,11 +492,7 @@ public class BatteryEntry {
      * Returns the UID of the app described by this entry.
      */
     public int getUid() {
-        if (mBatteryConsumer instanceof UidBatteryConsumer) {
-            return ((UidBatteryConsumer) mBatteryConsumer).getUid();
-        } else {
-            return Process.INVALID_UID;
-        }
+        return mUid;
     }
 
     /**
@@ -494,8 +500,7 @@ public class BatteryEntry {
      */
     public long getTimeInForegroundMs() {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
-            return ((UidBatteryConsumer) mBatteryConsumer).getTimeInStateMs(
-                    UidBatteryConsumer.STATE_FOREGROUND);
+            return mTimeInForegroundMs;
         } else {
             return mUsageDurationMs;
         }
@@ -506,8 +511,7 @@ public class BatteryEntry {
      */
     public long getTimeInBackgroundMs() {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
-            return ((UidBatteryConsumer) mBatteryConsumer).getTimeInStateMs(
-                    UidBatteryConsumer.STATE_BACKGROUND);
+            return mTimeInBackgroundMs;
         } else {
             return 0;
         }
@@ -526,9 +530,15 @@ public class BatteryEntry {
      */
     public void add(BatteryConsumer batteryConsumer) {
         mConsumedPower += batteryConsumer.getConsumedPower();
-        if (mDefaultPackageName == null && batteryConsumer instanceof UidBatteryConsumer) {
-            mDefaultPackageName =
-                    ((UidBatteryConsumer) batteryConsumer).getPackageWithHighestDrain();
+        if (batteryConsumer instanceof UidBatteryConsumer) {
+            UidBatteryConsumer uidBatteryConsumer = (UidBatteryConsumer) batteryConsumer;
+            mTimeInForegroundMs += uidBatteryConsumer.getTimeInStateMs(
+                    UidBatteryConsumer.STATE_FOREGROUND);
+            mTimeInBackgroundMs += uidBatteryConsumer.getTimeInStateMs(
+                    UidBatteryConsumer.STATE_BACKGROUND);
+            if (mDefaultPackageName == null) {
+                mDefaultPackageName = uidBatteryConsumer.getPackageWithHighestDrain();
+            }
         }
     }
 
