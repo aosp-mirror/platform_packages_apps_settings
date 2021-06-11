@@ -83,7 +83,6 @@ public class CredentialManagementAppHeaderController extends BasePreferenceContr
         TextView titleView = headerPref.findViewById(R.id.entity_header_title);
         TextView summary1 = headerPref.findViewById(R.id.entity_header_summary);
         TextView summary2 = headerPref.findViewById(R.id.entity_header_second_summary);
-        summary1.setVisibility(View.GONE);
         summary2.setVisibility(View.GONE);
 
         try {
@@ -91,6 +90,7 @@ public class CredentialManagementAppHeaderController extends BasePreferenceContr
                     mPackageManager.getApplicationInfo(mCredentialManagerPackageName, 0);
             appIconView.setImageDrawable(mPackageManager.getApplicationIcon(applicationInfo));
             titleView.setText(applicationInfo.loadLabel(mPackageManager));
+            summary1.setText(R.string.certificate_management_app_description);
         } catch (PackageManager.NameNotFoundException e) {
             appIconView.setImageDrawable(null);
             titleView.setText(mCredentialManagerPackageName);
