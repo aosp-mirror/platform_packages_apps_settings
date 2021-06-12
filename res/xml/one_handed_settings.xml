@@ -21,12 +21,6 @@
     android:persistent="false"
     android:title="@string/one_handed_title">
 
-    <com.android.settingslib.widget.MainSwitchPreference
-        android:key="gesture_one_handed_mode_enabled"
-        android:title="@string/one_handed_mode_enabled"
-        settings:keywords="@string/keywords_one_handed"
-        settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController"/>
-
     <com.android.settingslib.widget.LayoutPreference
         android:key="one_handed_header"
         android:layout="@layout/one_handed_header"
@@ -35,16 +29,31 @@
         settings:allowDividerBelow="false"
         settings:searchable="false"/>
 
-    <SwitchPreference
-        android:key="gesture_app_taps_to_exit"
-        android:title="@string/one_handed_app_taps_to_exit"
-        settings:controller="com.android.settings.gestures.OneHandedAppTapsExitPreferenceController"/>
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="gesture_one_handed_mode_enabled_main_switch"
+        android:title="@string/one_handed_mode_enabled"
+        settings:keywords="@string/keywords_one_handed"
+        settings:controller="com.android.settings.gestures.OneHandedMainSwitchPreferenceController"/>
 
-    <ListPreference
-        android:key="gesture_one_handed_timeout"
-        android:entries="@array/one_handed_timeout_title"
-        android:entryValues="@array/one_handed_timeout_values"
-        android:persistent="false"
-        android:title="@string/one_handed_timeout_title"
-        settings:controller="com.android.settings.gestures.OneHandedTimeoutPreferenceController"/>
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="gesture_one_handed_mode_intro_text"
+        android:title="@string/one_handed_mode_intro_text"/>
+
+    <PreferenceCategory
+        android:key="gesture_one_handed_mode_swipe_down"
+        android:title="@string/one_handed_mode_swipe_down_category">
+
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="gesture_one_handed_action_pull_screen_down"
+            android:title="@string/one_handed_action_pull_down_screen_title"
+            android:summary="@string/one_handed_action_pull_down_screen_summary"
+            settings:controller="com.android.settings.gestures.OneHandedActionPullDownPrefController"/>
+
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="gesture_one_handed_action_show_notification"
+            android:title="@string/one_handed_action_show_notification_title"
+            android:summary="@string/one_handed_action_show_notification_summary"
+            settings:controller="com.android.settings.gestures.OneHandedActionShowNotificationPrefController"/>
+
+    </PreferenceCategory>
 </PreferenceScreen>
