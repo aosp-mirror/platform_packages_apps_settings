@@ -54,7 +54,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         DataConnectivityListener.Client, InternetUpdater.InternetChangeListener,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
     private static final String TAG = "NetworkProviderWorker";
-    private static final int PROVIDER_MODEL_DEFAULT_EXPANDED_ROW_COUNT = 5;
+    private static final int PROVIDER_MODEL_DEFAULT_EXPANDED_ROW_COUNT = 6;
     private DataContentObserver mMobileDataObserver;
     private SignalStrengthListener mSignalStrengthListener;
     private SubscriptionsChangeListener mSubscriptionsListener;
