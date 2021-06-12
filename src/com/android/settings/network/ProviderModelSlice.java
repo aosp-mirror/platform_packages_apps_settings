@@ -20,6 +20,7 @@ package com.android.settings.network;
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
 import static com.android.settings.slices.CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI;
+import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
@@ -64,7 +65,6 @@ import java.util.stream.Collectors;
 public class ProviderModelSlice extends WifiSlice {
 
     private static final String TAG = "ProviderModelSlice";
-    protected static final String ACTION_TITLE_CONNECT_TO_CARRIER = "Connect_To_Carrier";
 
     private final ProviderModelSliceHelper mHelper;
 
@@ -89,78 +89,77 @@ public class ProviderModelSlice extends WifiSlice {
     @Override
     public Slice getSlice() {
         // The provider model slice step:
-        // First section:  Add a Wi-Fi item which state is connected.
-        // Second section:  Add a carrier item.
-        // Third section:  Add the Wi-Fi items which are not connected.
-        // Fourth section:  If device has connection problem, this row show the message for user.
-        @InternetUpdater.InternetType int internetType = getInternetType();
+        //  First section: Add the Ethernet item.
+        // Second section: Add the carrier item.
+        //  Third section: Add the Wi-Fi toggle item.
+        // Fourth section: Add the connected Wi-Fi item.
+        //  Fifth section: Add the Wi-Fi items which are not connected.
+        //  Sixth section: Add the See All item.
         final ListBuilder listBuilder = mHelper.createListBuilder(getUri());
-        if (mHelper.isAirplaneModeEnabled() && !mWifiManager.isWifiEnabled()
-                && internetType != InternetUpdater.INTERNET_ETHERNET) {
-            log("Airplane mode is enabled.");
-            return listBuilder.build();
-        }
-
         int maxListSize = 0;
-        List<WifiSliceItem> wifiList = null;
         final NetworkProviderWorker worker = getWorker();
         if (worker != null) {
-            // get Wi-Fi list.
-            wifiList = worker.getResults();
             maxListSize = worker.getApRowCount();
         } else {
             log("network provider worker is null.");
         }
 
-        final boolean hasCarrier = mHelper.hasCarrier();
-        log("hasCarrier: " + hasCarrier);
-
-        // First section:  Add a Ethernet or Wi-Fi item which state is connected.
-        boolean isConnectedWifiAddedTop = false;
-        final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
-        if (internetType == InternetUpdater.INTERNET_ETHERNET) {
+        // First section: Add the Ethernet item.
+        if (getInternetType() == InternetUpdater.INTERNET_ETHERNET) {
             log("get Ethernet item which is connected");
             listBuilder.addRow(createEthernetRow());
             maxListSize--;
-        } else {
-            if (connectedWifiItem != null && internetType == InternetUpdater.INTERNET_WIFI) {
-                log("get Wi-Fi item which is connected to internet");
-                listBuilder.addRow(getWifiSliceItemRow(connectedWifiItem));
-                isConnectedWifiAddedTop = true;
+        }
+
+        // Second section: Add the carrier item.
+        if (!mHelper.isAirplaneModeEnabled()) {
+            final boolean hasCarrier = mHelper.hasCarrier();
+            log("hasCarrier: " + hasCarrier);
+            if (hasCarrier) {
+                mHelper.updateTelephony();
+                listBuilder.addRow(
+                        mHelper.createCarrierRow(
+                                worker != null ? worker.getNetworkTypeDescription() : ""));
                 maxListSize--;
             }
         }
 
-        // Second section:  Add a carrier item.
-        if (hasCarrier) {
-            mHelper.updateTelephony();
-            listBuilder.addRow(
-                    mHelper.createCarrierRow(
-                            worker != null ? worker.getNetworkTypeDescription() : ""));
-            maxListSize--;
+        // Third section: Add the Wi-Fi toggle item.
+        final boolean isWifiEnabled = mWifiManager.isWifiEnabled();
+        listBuilder.addRow(createWifiToggleRow(mContext, isWifiEnabled));
+        maxListSize--;
+        if (!isWifiEnabled) {
+            log("Wi-Fi is disabled");
+            return listBuilder.build();
+        }
+        List<WifiSliceItem> wifiList = (worker != null) ? worker.getResults() : null;
+        if (wifiList == null || wifiList.size() <= 0) {
+            log("Wi-Fi list is empty");
+            return listBuilder.build();
         }
 
-        // Third section:  Add the connected Wi-Fi item to Wi-Fi list if the Ethernet is connected.
-        if (connectedWifiItem != null && !isConnectedWifiAddedTop) {
+        // Fourth section: Add the connected Wi-Fi item.
+        final WifiSliceItem connectedWifiItem = mHelper.getConnectedWifiItem(wifiList);
+        if (connectedWifiItem != null) {
             log("get Wi-Fi item which is connected");
             listBuilder.addRow(getWifiSliceItemRow(connectedWifiItem));
             maxListSize--;
         }
 
-        // Fourth section:  Add the Wi-Fi items which are not connected.
-        if (wifiList != null && wifiList.size() > 0) {
-            log("get Wi-Fi items which are not connected. Wi-Fi items : " + wifiList.size());
-
-            final List<WifiSliceItem> disconnectedWifiList = wifiList.stream()
-                    .filter(wifiSliceItem -> wifiSliceItem.getConnectedState()
-                            != WifiEntry.CONNECTED_STATE_CONNECTED)
-                    .limit(maxListSize - 1)
-                    .collect(Collectors.toList());
-            for (WifiSliceItem item : disconnectedWifiList) {
-                listBuilder.addRow(getWifiSliceItemRow(item));
-            }
-            listBuilder.addRow(getSeeAllRow());
+        // Fifth section: Add the Wi-Fi items which are not connected.
+        log("get Wi-Fi items which are not connected. Wi-Fi items : " + wifiList.size());
+        final List<WifiSliceItem> disconnectedWifiList = wifiList.stream()
+                .filter(item -> item.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED)
+                .limit(maxListSize - 1)
+                .collect(Collectors.toList());
+        for (WifiSliceItem item : disconnectedWifiList) {
+            listBuilder.addRow(getWifiSliceItemRow(item));
         }
+
+        // Sixth section: Add the See All item.
+        log("add See-All");
+        listBuilder.addRow(getSeeAllRow());
+
         return listBuilder.build();
     }
 
@@ -269,6 +268,26 @@ public class ProviderModelSlice extends WifiSlice {
                 .setSubtitle(mContext.getText(R.string.to_switch_networks_disconnect_ethernet));
     }
 
+    /**
+     * @return a {@link ListBuilder.RowBuilder} of the Wi-Fi toggle.
+     */
+    protected ListBuilder.RowBuilder createWifiToggleRow(Context context, boolean isWifiEnabled) {
+        final Intent intent = new Intent(WIFI_SLICE_URI.toString())
+                .setData(WIFI_SLICE_URI)
+                .setClass(context, SliceBroadcastReceiver.class)
+                .putExtra(EXTRA_TOGGLE_STATE, !isWifiEnabled)
+                // The FLAG_RECEIVER_FOREGROUND flag is necessary to avoid the intent delay of
+                // the first sending after the device restarts
+                .addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        final SliceAction toggleSliceAction = SliceAction.createToggle(pendingIntent,
+                null /* actionTitle */, isWifiEnabled);
+        return new ListBuilder.RowBuilder()
+                .setTitle(context.getString(R.string.wifi_settings))
+                .setPrimaryAction(toggleSliceAction);
+    }
+
     protected ListBuilder.RowBuilder getSeeAllRow() {
         final CharSequence title = mContext.getText(R.string.previous_connected_see_all);
         final IconCompat icon = getSeeAllIcon();
@@ -292,31 +311,6 @@ public class ProviderModelSlice extends WifiSlice {
         final PendingIntent intent = PendingIntent.getActivity(mContext, 0 /* requestCode */,
                 getIntent(), PendingIntent.FLAG_IMMUTABLE /* flags */);
         return SliceAction.createDeeplink(intent, icon, ListBuilder.ICON_IMAGE, title);
-    }
-
-    @Override
-    protected ListBuilder.RowBuilder getWifiSliceItemRow(WifiSliceItem wifiSliceItem) {
-        final CharSequence title = wifiSliceItem.getTitle();
-        final IconCompat levelIcon = getWifiSliceItemLevelIcon(wifiSliceItem);
-        final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
-                .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
-                .setTitle(title)
-                .setSubtitle(wifiSliceItem.getSummary())
-                .setContentDescription(wifiSliceItem.getContentDescription());
-
-        final IconCompat endIcon;
-        if (wifiSliceItem.hasInternetAccess()) {
-            rowBuilder.setPrimaryAction(SliceAction.create(getBroadcastIntent(mContext),
-                    levelIcon, ListBuilder.ICON_IMAGE, ACTION_TITLE_CONNECT_TO_CARRIER));
-            endIcon = IconCompat.createWithResource(mContext, R.drawable.ic_settings_close);
-        } else {
-            rowBuilder.setPrimaryAction(getWifiEntryAction(wifiSliceItem, levelIcon, title));
-            endIcon = getEndIcon(wifiSliceItem);
-        }
-        if (endIcon != null) {
-            rowBuilder.addEndItem(endIcon, ListBuilder.ICON_IMAGE);
-        }
-        return rowBuilder;
     }
 
     @Override
