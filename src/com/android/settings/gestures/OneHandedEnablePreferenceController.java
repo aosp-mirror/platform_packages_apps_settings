@@ -32,8 +32,7 @@ public class OneHandedEnablePreferenceController extends SettingsMainSwitchPrefe
 
     @Override
     public int getAvailabilityStatus() {
-        return OneHandedSettingsUtils.isFeatureAvailable(mContext)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE;
     }
 
     @Override
