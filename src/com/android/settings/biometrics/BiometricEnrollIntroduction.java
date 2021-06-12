@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -36,11 +37,12 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
+import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.span.LinkSpan;
 import com.google.android.setupdesign.template.RequireScrollMixin;
-import com.google.android.setupdesign.template.RequireScrollMixin.OnRequireScrollStateChangedListener;
 import com.google.android.setupdesign.util.DynamicColorPalette;
 
 /**
@@ -183,32 +185,26 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             }
         }
 
-        FooterButton primaryButton = getPrimaryFooterButton();
-        FooterButton secondaryButton = getSecondaryFooterButton();
-        if (primaryButton == null) {
-            Log.d(TAG, "getPrimaryFooterButton() was null");
-            return;
-        }
+        final GlifLayout layout = getLayout();
+        mFooterBarMixin = layout.getMixin(FooterBarMixin.class);
+        mFooterBarMixin.setPrimaryButton(getPrimaryFooterButton());
+        mFooterBarMixin.setSecondaryButton(getSecondaryFooterButton(), true /* usePrimaryStyle */);
+        mFooterBarMixin.getSecondaryButton().setVisibility(View.INVISIBLE);
 
-        if (secondaryButton == null) {
-            Log.d(TAG, "getSecondaryFooterButton() was null");
-            return;
-        }
-
-        // Setup scroll mixin
-        final RequireScrollMixin requireScrollMixin = getLayout().getMixin(
-                RequireScrollMixin.class);
-        requireScrollMixin.requireScrollWithButton(this, primaryButton, getScrollCompletedText(),
-                this::onNextButtonClick);
-
-        secondaryButton.setVisibility(View.INVISIBLE);
+        final RequireScrollMixin requireScrollMixin = layout.getMixin(RequireScrollMixin.class);
+        requireScrollMixin.requireScrollWithButton(this, getPrimaryFooterButton(),
+                getMoreButtonTextRes(), this::onNextButtonClick);
         requireScrollMixin.setOnRequireScrollStateChangedListener(
-                new OnRequireScrollStateChangedListener() {
-                    @Override
-                    public void onRequireScrollStateChanged(boolean scrollNeeded) {
-                        if (!scrollNeeded && secondaryButton.getVisibility() == View.INVISIBLE) {
-                            secondaryButton.setVisibility(View.VISIBLE);
-                        }
+                scrollNeeded -> {
+                    // Update text of primary button from "More" to "Agree".
+                    final int primaryButtonTextRes = scrollNeeded
+                            ? getMoreButtonTextRes()
+                            : getAgreeButtonTextRes();
+                    getPrimaryFooterButton().setText(this, primaryButtonTextRes);
+
+                    // Show secondary button once scroll is completed.
+                    if (!scrollNeeded) {
+                        getSecondaryFooterButton().setVisibility(View.VISIBLE);
                     }
                 });
     }
@@ -367,17 +363,15 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         return mIconColorFilter;
     }
 
-    @Nullable
-    protected FooterButton getPrimaryFooterButton() {
-        return null;
-    }
+    @NonNull
+    protected abstract FooterButton getPrimaryFooterButton();
 
-    @Nullable
-    protected FooterButton getSecondaryFooterButton() {
-        return null;
-    }
+    @NonNull
+    protected abstract FooterButton getSecondaryFooterButton();
 
-    protected int getScrollCompletedText() {
-        return R.string.security_settings_face_enroll_introduction_more;
-    }
+    @StringRes
+    protected abstract int getAgreeButtonTextRes();
+
+    @StringRes
+    protected abstract int getMoreButtonTextRes();
 }
