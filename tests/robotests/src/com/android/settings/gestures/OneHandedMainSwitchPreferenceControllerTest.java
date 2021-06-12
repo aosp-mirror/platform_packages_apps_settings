@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import android.content.Context;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
@@ -32,49 +31,55 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class OneHandedEnablePreferenceControllerTest {
+public class OneHandedMainSwitchPreferenceControllerTest {
 
-    private static final String KEY = "gesture_one_handed_mode_enabled";
+    private static final String KEY = "gesture_one_handed_mode_enabled_main_switch";
 
     private Context mContext;
-    private OneHandedEnablePreferenceController mController;
+    private OneHandedSettingsUtils mUtils;
+    private OneHandedMainSwitchPreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new OneHandedEnablePreferenceController(mContext, KEY);
+        mUtils = new OneHandedSettingsUtils(mContext);
+        mController = new OneHandedMainSwitchPreferenceController(mContext, KEY);
         OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
+    }
+
+    @Test
+    public void setChecked_setBoolean_checkIsTrueOrFalse() {
+        mController.setChecked(false);
+        assertThat(OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)).isFalse();
+
+        mController.setChecked(true);
+        assertThat(OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)).isTrue();
     }
 
     @Test
     public void getAvailabilityStatus_setSupportOneHandedModeProperty_shouldAvailable() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        mUtils.setNavigationBarMode(mContext, "2" /* fully gestural */);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_unsetSupportOneHandedModeProperty_shouldUnsupported() {
+    public void getAvailabilityStatus_unsetSupportOneHandedModeProperty_shouldDisabled() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "false");
+        mUtils.setNavigationBarMode(mContext, "2" /* fully gestural */);
 
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+                .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
     }
 
     @Test
-    public void getSummary_enabledOneHanded_shouldDisplayOnSummary() {
-        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
+    public void getAvailabilityStatus_set3ButtonMode_shouldDisabled() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        mUtils.setNavigationBarMode(mContext, "0" /* 3-button mode */);
 
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.switch_on_text));
-    }
-
-    @Test
-    public void getSummary_disabledOneHanded_shouldDisplayOffSummary() {
-        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
-
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.switch_off_text));
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
     }
 }
