@@ -434,7 +434,7 @@ public class ManageApplications extends InstrumentedFragment
         final Activity activity = getActivity();
         final FrameLayout pinnedHeader = mRootView.findViewById(R.id.pinned_header);
         mSpinnerHeader = activity.getLayoutInflater()
-                .inflate(R.layout.apps_filter_spinner, pinnedHeader, false);
+                .inflate(R.layout.manage_apps_filter_spinner, pinnedHeader, false);
         mFilterSpinner = mSpinnerHeader.findViewById(R.id.filter_spinner);
         mFilterAdapter = new FilterSpinnerAdapter(this);
         mFilterSpinner.setAdapter(mFilterAdapter);
