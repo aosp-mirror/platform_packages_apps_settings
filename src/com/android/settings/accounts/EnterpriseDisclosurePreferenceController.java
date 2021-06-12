@@ -17,16 +17,19 @@
 package com.android.settings.accounts;
 
 import android.content.Context;
+import android.content.Intent;
+import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.widget.FooterPreference;
 
 public class EnterpriseDisclosurePreferenceController extends BasePreferenceController {
-
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
     public EnterpriseDisclosurePreferenceController(Context context, String key) {
@@ -34,6 +37,16 @@ public class EnterpriseDisclosurePreferenceController extends BasePreferenceCont
         super(context, key);
         mFeatureProvider = FeatureFactory.getFactory(mContext)
                 .getEnterprisePrivacyFeatureProvider(mContext);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final CharSequence disclosure = getDisclosure();
+        if (disclosure == null) {
+            return;
+        }
+        updateFooterPreference(screen, disclosure);
     }
 
     @Override
@@ -49,12 +62,18 @@ public class EnterpriseDisclosurePreferenceController extends BasePreferenceCont
         return mFeatureProvider.getDeviceOwnerDisclosure();
     }
 
-    @Override
-    public void updateState(Preference preference) {
-        final CharSequence disclosure = getDisclosure();
-        if (disclosure == null) {
-            return;
-        }
-        preference.setTitle(disclosure);
+    void updateFooterPreference(PreferenceScreen screen, CharSequence disclosure) {
+        final FooterPreference footerPreference = screen.findPreference(getPreferenceKey());
+        footerPreference.setTitle(disclosure);
+        footerPreference.setLearnMoreAction(view -> {
+            mContext.startActivity(new Intent(Settings.ACTION_ENTERPRISE_PRIVACY_SETTINGS));
+        });
+        final String learnMoreContentDescription = mContext.getString(
+                R.string.footer_learn_more_content_description, getLabelName());
+        footerPreference.setLearnMoreContentDescription(learnMoreContentDescription);
+    }
+
+    private String getLabelName() {
+        return mContext.getString(R.string.header_add_an_account);
     }
 }

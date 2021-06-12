@@ -65,7 +65,7 @@ public class InternetPreferenceController extends AbstractPreferenceController i
     @VisibleForTesting
     static Map<Integer, Integer> sIconMap = new HashMap<>();
     static {
-        sIconMap.put(INTERNET_OFF, R.drawable.ic_no_internet_airplane);
+        sIconMap.put(INTERNET_OFF, R.drawable.ic_no_internet_unavailable);
         sIconMap.put(INTERNET_NETWORKS_AVAILABLE, R.drawable.ic_no_internet_available);
         sIconMap.put(INTERNET_WIFI, R.drawable.ic_wifi_signal_4);
         sIconMap.put(INTERNET_CELLULAR, R.drawable.ic_network_cell);

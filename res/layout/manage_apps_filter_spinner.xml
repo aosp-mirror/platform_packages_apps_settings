@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2021 The Android Open Source Project
+<!--
+     Copyright (C) 2021 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,25 +15,18 @@
      limitations under the License.
 -->
 
-<layer-list
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
 
-    <item
-        android:id="@android:id/background">
-        <shape>
-            <corners android:radius="8dp" />
-            <solid android:color="?androidprv:attr/colorSurfaceVariant" />
-        </shape>
-    </item>
-
-    <item
-        android:id="@android:id/progress">
-        <clip>
-            <shape>
-                <corners android:radius="8dp" />
-                <solid android:color="?android:attr/textColorPrimary" />
-            </shape>
-        </clip>
-    </item>
-</layer-list>
+    <com.android.settingslib.widget.settingsspinner.SettingsSpinner
+        android:id="@+id/filter_spinner"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:theme="@style/Widget.PopupWindow.Settings"/>
+</FrameLayout>
