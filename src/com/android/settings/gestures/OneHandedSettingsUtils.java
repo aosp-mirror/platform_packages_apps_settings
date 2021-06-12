@@ -190,15 +190,6 @@ public class OneHandedSettingsUtils {
     }
 
     /**
-     *
-     * @param context App context
-     * @return Support One-Handed mode feature or not.
-     */
-    public static boolean isFeatureAvailable(Context context) {
-        return isSupportOneHandedMode() && getNavigationBarMode(context) != 0;
-    }
-
-    /**
      * Registers callback for observing Settings.Secure.ONE_HANDED_MODE_ENABLED state.
      * @param callback for state changes
      */
