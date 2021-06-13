@@ -27,6 +27,10 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
@@ -35,7 +39,6 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
-import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.span.LinkSpan;
 
@@ -46,6 +49,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     private static final String TAG = "FingerprintIntro";
 
     private FingerprintManager mFingerprintManager;
+    @Nullable private FooterButton mPrimaryFooterButton;
+    @Nullable private FooterButton mSecondaryFooterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,43 +199,42 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
+    @NonNull
     protected FooterButton getPrimaryFooterButton() {
-        if (mFooterBarMixin == null) {
-            mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
-        }
-
-        if (mFooterBarMixin.getPrimaryButton() == null) {
-            final FooterButton nextButtonBuilder = new FooterButton.Builder(this)
+        if (mPrimaryFooterButton == null) {
+            mPrimaryFooterButton = new FooterButton.Builder(this)
                     .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
                     .setListener(this::onNextButtonClick)
                     .setButtonType(FooterButton.ButtonType.OPT_IN)
                     .setTheme(R.style.SudGlifButton_Primary)
                     .build();
-            mFooterBarMixin.setPrimaryButton(nextButtonBuilder);
         }
-        return mFooterBarMixin.getPrimaryButton();
+        return mPrimaryFooterButton;
     }
 
     @Override
+    @NonNull
     protected FooterButton getSecondaryFooterButton() {
-        if (mFooterBarMixin == null) {
-            mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
-        }
-
-        if (mFooterBarMixin.getSecondaryButton() == null) {
-            final FooterButton noThanksButton = new FooterButton.Builder(this)
+        if (mSecondaryFooterButton == null) {
+            mSecondaryFooterButton = new FooterButton.Builder(this)
                     .setText(getNegativeButtonTextId())
                     .setListener(this::onSkipButtonClick)
                     .setButtonType(FooterButton.ButtonType.NEXT)
                     .setTheme(R.style.SudGlifButton_Primary)
                     .build();
-            mFooterBarMixin.setSecondaryButton(noThanksButton, true /* usePrimaryStyle */);
         }
-        return mFooterBarMixin.getSecondaryButton();
+        return mSecondaryFooterButton;
     }
 
     @Override
-    protected int getScrollCompletedText() {
+    @StringRes
+    protected int getAgreeButtonTextRes() {
+        return R.string.security_settings_fingerprint_enroll_introduction_agree;
+    }
+
+    @Override
+    @StringRes
+    protected int getMoreButtonTextRes() {
         return R.string.security_settings_face_enroll_introduction_more;
     }
 }
