@@ -150,17 +150,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         }
     };
 
-    private String getStringForError(int errorCode) {
-        switch (errorCode) {
-            case BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED:
-                return getString(com.android.internal.R.string.biometric_error_user_canceled);
-            case BiometricConstants.BIOMETRIC_ERROR_CANCELED:
-                return getString(com.android.internal.R.string.biometric_error_canceled);
-            default:
-                return null;
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
