@@ -543,12 +543,12 @@
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog" />
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog" />
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -3787,14 +3787,14 @@
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog" />
+            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity
             android:name=".sim.DsdsDialogActivity"
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog" />
+            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
