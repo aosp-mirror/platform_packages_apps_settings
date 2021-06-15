@@ -38,6 +38,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
@@ -83,13 +84,12 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
             }
 
             if (TextUtils.equals(intent.getAction(), WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
-                updateProgressBar();
+                showProgressBar();
                 updatePanelTitle();
                 return;
             }
 
             if (TextUtils.equals(intent.getAction(), WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
-                updateProgressBar();
                 updatePanelTitle();
             }
         }
@@ -110,40 +110,13 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
     private int mDefaultDataSubid = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
     // Wi-Fi scanning progress bar
-    protected HandlerInjector mHandlerInjector;
     protected boolean mIsProgressBarVisible;
-    protected boolean mIsScanningSubTitleShownOnce;
-    protected Runnable mHideProgressBarRunnable = () -> {
+    protected final Runnable mHideProgressBarRunnable = () -> {
         setProgressBarVisible(false);
     };
-    protected Runnable mHideScanningSubTitleRunnable = () -> {
-        mIsScanningSubTitleShownOnce = true;
-        updatePanelTitle();
-    };
-
-    /**
-     * Wrapper for testing compatibility.
-     */
-    @VisibleForTesting
-    static class HandlerInjector {
-        protected final Handler mHandler;
-
-        HandlerInjector(Context context) {
-            mHandler = context.getMainThreadHandler();
-        }
-
-        public void postDelay(Runnable runnable) {
-            mHandler.postDelayed(runnable, 2000 /* delay millis */);
-        }
-
-        public void removeCallbacks(Runnable runnable) {
-            mHandler.removeCallbacks(runnable);
-        }
-    }
 
     private InternetConnectivityPanel(Context context) {
         mContext = context.getApplicationContext();
-        mHandlerInjector = new HandlerInjector(context);
         mIsProviderModelEnabled = Utils.isProviderModelEnabled(mContext);
         mInternetUpdater = new InternetUpdater(context, null /* Lifecycle */, this);
 
@@ -177,7 +150,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         mTelephonyManager.registerTelephonyCallback(
                 new HandlerExecutor(new Handler(Looper.getMainLooper())), mTelephonyCallback);
         mContext.registerReceiver(mWifiStateReceiver, mWifiStateFilter);
-        updateProgressBar();
+        showProgressBar();
         updatePanelTitle();
     }
 
@@ -192,8 +165,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         mConnectivityListener.stop();
         mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
         mContext.unregisterReceiver(mWifiStateReceiver);
-        mHandlerInjector.removeCallbacks(mHideProgressBarRunnable);
-        mHandlerInjector.removeCallbacks(mHideScanningSubTitleRunnable);
+        mContext.getMainThreadHandler().removeCallbacks(mHideProgressBarRunnable);
     }
 
     /**
@@ -238,6 +210,23 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
     }
 
     @Override
+    public boolean isCustomizedButtonUsed() {
+        return mIsProviderModelEnabled;
+    }
+
+    @Override
+    public CharSequence getCustomizedButtonTitle() {
+        return mContext.getText(
+                mInternetUpdater.isWifiEnabled() ? R.string.turn_off_wifi : R.string.turn_on_wifi);
+    }
+
+    @Override
+    public void onClickCustomizedButton(FragmentActivity panelActivity) {
+        // Don't finish the panel activity
+        mWifiManager.setWifiEnabled(!mInternetUpdater.isWifiEnabled());
+    }
+
+    @Override
     public boolean isProgressBarVisible() {
         return mIsProgressBarVisible;
     }
@@ -257,7 +246,6 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
      */
     @Override
     public void onAirplaneModeChanged(boolean isAirplaneModeOn) {
-        log("onAirplaneModeChanged: isAirplaneModeOn:" + isAirplaneModeOn);
         updatePanelTitle();
     }
 
@@ -266,7 +254,6 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
      */
     @Override
     public void onWifiEnabledChanged(boolean enabled) {
-        log("onWifiEnabledChanged: enabled:" + enabled);
         updatePanelTitle();
     }
 
@@ -318,6 +305,13 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
             return;
         }
 
+        if (mIsProgressBarVisible) {
+            // When the Wi-Fi scan result callback is received
+            //   Sub-Title: Searching for networks...
+            mSubtitle = SUBTITLE_TEXT_SEARCHING_FOR_NETWORKS;
+            return;
+        }
+
         if (mInternetUpdater.isAirplaneModeOn()) {
             return;
         }
@@ -325,15 +319,8 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         final List<ScanResult> wifiList = mWifiManager.getScanResults();
         if (wifiList != null && wifiList.size() != 0) {
             // When the Wi-Fi scan result is not empty
-            //   Sub-Title: Tap a network to connect
+            //   Sub-Title: Select the network you want to use for data
             mSubtitle = SUBTITLE_TEXT_TAP_A_NETWORK_TO_CONNECT;
-            return;
-        }
-
-        if (!mIsScanningSubTitleShownOnce && mIsProgressBarVisible) {
-            // When the Wi-Fi scan result callback is received
-            //   Sub-Title: Searching for networks...
-            mSubtitle = SUBTITLE_TEXT_SEARCHING_FOR_NETWORKS;
             return;
         }
 
@@ -366,7 +353,7 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         mSubtitle = SUBTITLE_TEXT_NON_CARRIER_NETWORK_UNAVAILABLE;
     }
 
-    protected void updateProgressBar() {
+    protected void showProgressBar() {
         if (mWifiManager == null || !mInternetUpdater.isWifiEnabled()) {
             setProgressBarVisible(false);
             return;
@@ -375,9 +362,8 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         setProgressBarVisible(true);
         List<ScanResult> wifiScanResults = mWifiManager.getScanResults();
         if (wifiScanResults != null && wifiScanResults.size() > 0) {
-            mHandlerInjector.postDelay(mHideProgressBarRunnable);
-        } else if (!mIsScanningSubTitleShownOnce) {
-            mHandlerInjector.postDelay(mHideScanningSubTitleRunnable);
+            mContext.getMainThreadHandler().postDelayed(mHideProgressBarRunnable,
+                    2000 /* delay millis */);
         }
     }
 
