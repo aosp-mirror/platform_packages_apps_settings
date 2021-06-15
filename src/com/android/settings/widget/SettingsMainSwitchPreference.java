@@ -82,15 +82,15 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
         holder.setDividerAllowedAbove(false);
         holder.setDividerAllowedBelow(false);
 
-        mMainSwitchBar = (SettingsMainSwitchBar) holder.findViewById(R.id.main_switch_bar);
-        mMainSwitchBar.show();
         if (mRestrictedHelper != null) {
             mEnforcedAdmin = mRestrictedHelper.checkRestrictionEnforced();
         }
-        updateStatus(isChecked());
-        registerListenerToSwitchBar();
-
-        if (!mIsVisible) {
+        mMainSwitchBar = (SettingsMainSwitchBar) holder.findViewById(R.id.main_switch_bar);
+        if (mIsVisible) {
+            mMainSwitchBar.show();
+            updateStatus(isChecked());
+            registerListenerToSwitchBar();
+        } else {
             mMainSwitchBar.hide();
         }
     }
