@@ -384,7 +384,6 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Kapag gumagamit ng Pag-unlock Gamit ang Mukha sa app, laging humiling ng kumpirmasyon"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"I-delete ang face model"</string>
     <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"I-set up ang Pag-unlock Gamit ang Mukha"</string>
-    <string name="security_settings_face_settings_top_intro" msgid="7063074518555032871">"Gamitin ang Pag-unlock Gamit ang Mukha para i-unlock ang iyong device, mag-sign in sa mga app, at magkumpirma ng mga pagbabayad."</string>
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Gamitin ang iyong mukha para i-unlock ang telepono mo o para sa pag-authenticate sa mga app, tulad ng kapag nagsa-sign in ka o nag-aapruba ka ng pagbili.\n\nTandaan:\nIsang mukha lang ang puwedeng naka-set up sa iyo sa bawat pagkakataon. Para magdagdag pa ng mukha, i-delete ang kasalukuyang mukha.\n\nKapag tumingin ka sa telepono, puwede mong hindi sinasadyang ma-unlock ito.\n\nPuwedeng ma-unlock ng ibang tao ang telepono mo kung itatapat ito sa iyong mukha.\n\nPuwedeng ma-unlock ng isang taong may malaking pagkakahawig sa iyo ang telepono mo, gaya ng kapatid na kamukha mo."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Gamitin ang iyong mukha para i-unlock ang telepono mo o para sa pag-authenticate sa mga app, tulad ng kapag nagsa-sign in ka o nag-aapruba ka ng pagbili.\n\nTandaan:\nIsang mukha lang ang puwedeng naka-set up sa iyo sa bawat pagkakataon. Para magdagdag pa ng mukha, i-delete ang kasalukuyang mukha.\n\nKapag tumingin ka sa telepono, puwede mong hindi sinasadyang ma-unlock ito.\n\nPuwedeng ma-unlock ng ibang tao ang telepono mo kung itatapat ito sa iyong mukha, kahit na nakapikit ka.\n\nPuwedeng ma-unlock ng isang taong may malaking pagkakahawig sa iyo ang telepono mo, gaya ng kapatid na kamukha mo."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"I-delete ang face model?"</string>
@@ -891,6 +890,7 @@
     <string name="wifi_display_options_name" msgid="8181334945680312228">"Pangalan"</string>
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="7995204987245404797">"5 GHz"</string>
+    <string name="wifi_band_6ghz" msgid="8166833829829455339">"6 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8483892122845654850">"Mag-sign in"</string>
     <string name="wifi_venue_website_button_text" msgid="7749360432667175030">"Buksan ang site"</string>
     <string name="wifi_time_remaining" msgid="8503606272869846170">"<xliff:g id="REMAINING_TIME">%1$s</xliff:g> na lang"</string>
@@ -1392,7 +1392,7 @@
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Pagkatapos ng <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ng kawalan ng aktibidad"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Wallpaper"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Wallpaper &amp; istilo"</string>
-    <string name="wallpaper_dashboard_summary" msgid="772304840285426509">"Mga kulay, grid ng app"</string>
+    <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Home, lock screen"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"Default"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"Custom"</string>
     <string name="wallpaper_suggestion_title" msgid="3812842717939877330">"Baguhin ang wallpaper"</string>
@@ -2245,7 +2245,7 @@
     <string name="usage_time_label" msgid="9105343335151559883">"Oras ng paggamit"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"Accessibility"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Mga setting ng pagiging maa-access"</string>
-    <string name="accessibility_settings_summary" msgid="2195085206729325737">"Mga screen reader, display, kontrol sa pakikipag-ugnayan"</string>
+    <string name="accessibility_settings_summary" msgid="2366627644570558503">"Display, pakikipag-ugnayan, audio"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Mga Setting ng Paningin"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"Maaari mong i-customize ang device na ito upang maging angkop sa iyong mga pangangailangan. Maaaring baguhin ang mga feature sa accessibility na ito sa ibang pagkakataon sa Mga Setting."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Baguhin ang laki ng font"</string>
@@ -2581,6 +2581,7 @@
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Hindi nakatakda ang app na mag-optimize ng baterya kaya hindi ito malilimitahan.\n\nPara malimitahan, i-on ang battery optimization."</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Hindi pinaghihigpitan"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Naka-optimize"</string>
+    <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Limitado"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Payagan ang paggamit ng baterya sa background nang walang paghihigpit. Puwedeng gumamit ng higit pang baterya."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Naka-optimize batay sa iyong paggamit. Inirerekomenda para sa karamihan ng mga app."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Paghigpitan ang paggamit ng baterya habang nasa background. Posibleng hindi gumana ang app gaya ng inaasahan. Posibleng maantala ang mga notification."</string>
@@ -2940,14 +2941,15 @@
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Huwag i-install"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"I-install pa rin"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Hindi na-install ang certificate"</string>
-    <string name="request_manage_credentials_title" msgid="4524504926699928916">"Payagan ang <xliff:g id="APP_NAME">%s</xliff:g> na mag-install ng mga certificate sa device na ito?"</string>
-    <string name="request_manage_credentials_description" msgid="4969609158022551952">"Tutukuyin ka ng mga certificate na ito sa mga app at URL sa ibaba"</string>
+    <string name="request_manage_credentials_title" msgid="596805634568013413">"Payagan ang "<b>"<xliff:g id="APP_NAME">^1</xliff:g>"</b>" na mag-install ng mga certificate sa device na ito?"</string>
+    <string name="request_manage_credentials_description" msgid="8044839857171509619">"Ive-verify ka ng mga certificate na ito sa pamamagitan ng pagbabahagi ng natatanging ID ng iyong device sa mga app at URL sa ibaba"</string>
     <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Huwag payagan"</string>
     <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Payagan"</string>
     <string name="request_manage_credentials_more" msgid="6101210283534101582">"Magpakita pa"</string>
     <string name="certificate_management_app" msgid="8086699498358080826">"App ng certificate management"</string>
     <string name="no_certificate_management_app" msgid="3025739370424406717">"Wala"</string>
-    <string name="certificate_management_app_description" msgid="7257420502179110164">"Makikilala ka ng mga app at URL na nasa ibaba dahil sa mga certificate na ii-install ng app na ito"</string>
+    <string name="certificate_management_app_description" msgid="8507306554200869005">"Ive-verify ka ng mga certificate kapag ginamit mo ang mga app at URL sa ibaba"</string>
+    <string name="uninstall_certs_credential_management_app" msgid="4945883254446077354">"I-uninstall ang certificate"</string>
     <string name="remove_credential_management_app" msgid="6879631067380232928">"Alisin"</string>
     <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
       <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> URL</item>
@@ -3340,7 +3342,7 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Alisin ang paghihigpit"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Palitan ang PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Tulong at feedback"</string>
-    <string name="support_summary" msgid="1034146931237148885">"Mga artikulo ng tulong, telepono at pakikipag-chat, pagsisimula"</string>
+    <string name="support_summary" msgid="6137136608018134563">"Mga artikulo ng tulong, telepono at pakikipag-chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Account para sa nilalaman"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Photo ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Pinakamatitinding banta"</string>
@@ -3445,10 +3447,10 @@
       <item quantity="other">Ipakita ang %d na nakatagong item</item>
     </plurals>
     <string name="network_dashboard_title" msgid="788543070557731240">"Network at internet"</string>
-    <string name="network_dashboard_summary_mobile" msgid="4020746665765996480">"mobile"</string>
-    <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"paggamit ng data"</string>
-    <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"hotspot"</string>
+    <string name="network_dashboard_summary_mobile" msgid="7750924671970583670">"Mobile, Wi‑Fi, hotspot"</string>
+    <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi‑Fi, hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Mga nakakonektang device"</string>
+    <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"Bluetooth, pagpapares"</string>
     <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, driving mode, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, driving mode"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
@@ -3544,10 +3546,8 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"screen, oras ng pag-lock, timeout, lockscreen"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"memory, cache, data, i-delete, i-clear, bakante, espasyo"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"nakakonekta, device, headphones, headset, speaker, wireless, ipares, earbuds, musika, media"</string>
-    <!-- no translation found for keywords_wallpaper (7332890404629446192) -->
-    <skip />
-    <!-- no translation found for keywords_styles (5291614313348476068) -->
-    <skip />
+    <string name="keywords_wallpaper" msgid="7332890404629446192">"background, tema, grid, i-customize, i-personalize"</string>
+    <string name="keywords_styles" msgid="5291614313348476068">"icon, accent, kulay"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"default, assistant"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"pagbabayad, default"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"papasok na notification"</string>
@@ -3755,6 +3755,8 @@
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"I-on"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Kanselahin"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Naka-on / Puwedeng lumabas ang mga pag-uusap bilang mga nakalutang na icon"</string>
+    <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Payagan ang mga app na magpakita ng mga bubble"</string>
+    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Lalabas ang ilang pag-uusap bilang mga nakalutang na icon sa ibabaw ng iba pang app"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Puwedeng lumabas bilang bubble ang lahat ng pag-uusap"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Puwedeng lumabas bilang bubble ang mga napiling pag-uusap"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Walang puwedeng lumabas bilang bubble"</string>
@@ -4505,7 +4507,7 @@
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> ang nagamit - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ang bakante"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Internal storage: <xliff:g id="PERCENTAGE">%1$s</xliff:g> ang ginagamit - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ang bakante"</string>
     <string name="display_summary" msgid="5526061030874717172">"Mag-sleep pagkalipas ng <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> na walang aktibidad"</string>
-    <string name="display_dashboard_summary" msgid="7495227473582968326">"Timeout ng screen, laki ng font"</string>
+    <string name="display_dashboard_summary" msgid="1599453894989339454">"Madilim na tema, laki ng font, liwanag"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"Mag-sleep pagkalipas ng 10 minuto na walang aktibidad"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Avg <xliff:g id="USED_MEMORY">%1$s</xliff:g> ng <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> ng ginamit na memory"</string>
     <string name="users_summary" msgid="8473589474976307510">"Naka-sign in bilang <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4780,7 +4782,7 @@
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Lumipat sa default na home app"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital na assistant"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"I-swipe para i-invoke ang assistant"</string>
-    <string name="assistant_corner_gesture_summary" msgid="557878830400236167">"Mag-swipe pataas mula sa isang sulok sa ibaba para i-invoke ang app ng digital na assistant."</string>
+    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Mag-swipe pataas mula sa isang sulok sa ibaba para i-invoke ang app ng digital na assistant."</string>
     <string name="information_label" msgid="6939310810756569298">"Impormasyon"</string>
     <string name="low_label" msgid="6525629096999711220">"Mababa"</string>
     <string name="high_label" msgid="357503396626018487">"Mataas"</string>
@@ -4795,7 +4797,7 @@
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Mag-double tap upang suriin ang device"</string>
     <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Mag-swipe para sa notification"</string>
     <string name="swipe_bottom_to_notifications_summary" msgid="5222014960019273801">"Mag-swipe pababa sa pinakaibaba ng screen para ipakita ang iyong mga notification.\nHindi mo magagamit ang one-handed mode kapag naka-on ang feature na ito."</string>
-    <string name="one_handed_title" msgid="1741600445540072513">"One-Handed mode"</string>
+    <string name="one_handed_title" msgid="2584414010282746195">"One-hand mode"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Gumamit ng one-handed mode"</string>
     <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Lumabas kapag nagpapalit ng mga app"</string>
     <string name="one_handed_timeout_title" msgid="8851767822595789976">"Timeout"</string>
@@ -4803,6 +4805,12 @@
     <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 segundo"</string>
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 segundo"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"reachability"</string>
+    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Mag-swipe pababa para"</string>
+    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Para magamit ang one handed mode, mag-swipe pababa mula sa ibabang dulo ng screen. Para magamit ang feature na ito, tiyaking naka-on ang navigation gamit ang galaw sa mga setting ng navigation sa system."</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Hilahin ang screen papunta sa abot"</string>
+    <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Mapupunta ang itaas ng screen sa abot ng iyong hinlalaki."</string>
+    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Ipakita ang mga notification"</string>
+    <string name="one_handed_action_show_notification_summary" msgid="114988229079950849">"Lalabas ang notification at mga setting."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Para tingnan ang oras, mga notification, at iba pang impormasyon, i-double tap ang iyong screen."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Kunin para tingnan ang telepono"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Kunin upang suriin ang tablet"</string>
@@ -5380,7 +5388,7 @@
     <string name="wifi_switch_summary" msgid="3577154777754849024">"Maghanap ng at kumonekta sa mga Wi‑Fi network"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"eroplano, ligtas gamitin sa eroplano"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Mga Tawag at SMS"</string>
-    <string name="calls_and_sms_category" msgid="2021321997884906046">"Pagtawag sa Wi‑Fi"</string>
+    <string name="calls_and_sms_category" msgid="3788238090898237767">"Pagtawag gamit ang Wi‑Fi"</string>
     <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"Tumawag at makatanggap ng mga tawag sa Wi‑Fi"</string>
     <string name="calls_sms_footnote" msgid="1003530944232362815">"Sa pagtawag gamit ang Wi‑Fi, sa pamamagitan ng mga hindi carrier na Wi‑Fi network ang mga pagtawag at pagtanggap ng tawag. "<annotation id="url">"Matuto pa"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"Mga Tawag"</string>
@@ -5456,7 +5464,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Gamitin ang adaptive battery"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Gamitin ang adaptive brightness"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Gamitin ang pagtawag gamit ang Wi-Fi"</string>
-    <string name="bubbles_main_switch_title" msgid="9121381349223270417">"Gumamit ng Mga Bubble"</string>
     <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Gumamit ng screen saver"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Tingnan ang lahat ng app"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Smart na Pag-forward"</string>
@@ -5485,24 +5492,14 @@
     <string name="sensor_toggle_description" msgid="8248823248606795411">"Para sa lahat ng app at serbisyo"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Mga setting ng laro"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"I-on ang shortcut ng Game Dashboard, atbp."</string>
-    <!-- no translation found for bluetooth_sim_card_access_notification_title (5217037846900908318) -->
-    <skip />
-    <!-- no translation found for bluetooth_sim_card_access_notification_content (6759306429895300286) -->
-    <skip />
-    <!-- no translation found for bluetooth_sim_card_access_dialog_title (4486768729352090174) -->
-    <skip />
-    <!-- no translation found for bluetooth_sim_card_access_dialog_content (4153857191661567190) -->
-    <skip />
-    <!-- no translation found for bluetooth_connect_access_notification_title (2573547043170883947) -->
-    <skip />
-    <!-- no translation found for bluetooth_connect_access_notification_content (1328465545685433304) -->
-    <skip />
-    <!-- no translation found for bluetooth_connect_access_dialog_title (1948056782712451381) -->
-    <skip />
-    <!-- no translation found for bluetooth_connect_access_dialog_content (4336436466468405850) -->
-    <skip />
-    <!-- no translation found for bluetooth_connect_access_dialog_negative (4944672755226375059) -->
-    <skip />
-    <!-- no translation found for bluetooth_connect_access_dialog_positive (3630561675207269710) -->
-    <skip />
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Kahilingan sa pag-access sa SIM card"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Gustong i-access ng isang device ang iyong SIM card. I-tap para sa mga detalye."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Payagan ang access sa SIM card?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Gustong i-access ng Bluetooth device na <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ang data sa iyong SIM card. Kasama rito ang iyong mga contact.\n\nHabang nakakonekta, matatanggap ng <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ang lahat ng tawag sa <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Available ang Bluetooth device"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Gustong kumonekta ng device. I-tap para sa mga detalye."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Kumonekta sa Bluetooth device?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"Gustong kumonekta ng <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> sa teleponong ito.\n\nHindi ka pa nakakakonekta sa <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> dati."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Huwag kumonekta"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Kumonekta"</string>
 </resources>
