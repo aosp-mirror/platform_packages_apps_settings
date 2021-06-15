@@ -22,6 +22,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -93,4 +95,15 @@ public class CommonUtils {
         return false;
     }
 
+    /**
+     * Return a resource identifier for the given resource name in Settings app.
+     *
+     * @param name The name of the desired resource.
+     * @return int The associated resource identifier.  Returns 0 if no such resource was found.  (0
+     * is not a valid resource ID.)
+     */
+    public static int getResId(String name) {
+        return InstrumentationRegistry.getInstrumentation().getTargetContext().getResources()
+                .getIdentifier(name, "id", Constants.SETTINGS_PACKAGE_NAME);
+    }
 }
