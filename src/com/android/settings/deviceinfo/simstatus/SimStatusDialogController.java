@@ -229,7 +229,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         if (mSubscriptionInfo == null) {
             return;
         }
-
+        mTelephonyManager =
+            mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
         mPhoneStateListener = getPhoneStateListener();
         updateLatestAreaInfo();
         updateSubscriptionStatus();
