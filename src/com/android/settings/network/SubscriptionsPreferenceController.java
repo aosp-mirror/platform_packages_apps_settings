@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiManager;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
@@ -38,6 +39,7 @@ import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.util.ArraySet;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.collection.ArrayMap;
@@ -55,7 +57,7 @@ import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.SignalStrengthListener;
 import com.android.settings.network.telephony.TelephonyDisplayInfoListener;
-import com.android.settings.widget.GearPreference;
+import com.android.settings.widget.MutableGearPreference;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.SignalIcon.MobileIconGroup;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -115,7 +117,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     // Map of subscription id to Preference
     private Map<Integer, Preference> mSubscriptionPreferences;
     private int mStartOrder;
-    private GearPreference mSubsGearPref;
+    private MutableGearPreference mSubsGearPref;
     private Config mConfig = null;
     private SubsPrefCtrlInjector mSubsPrefCtrlInjector;
     private TelephonyDisplayInfo mTelephonyDisplayInfo =
@@ -196,6 +198,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSignalStrengthListener.pause();
         mTelephonyDisplayInfoListener.pause();
         unRegisterReceiver();
+        resetProviderPreferenceSummary();
     }
 
     @Override
@@ -238,13 +241,18 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         }
         if (mSubsGearPref == null) {
             mPreferenceGroup.removeAll();
-            mSubsGearPref = new GearPreference(mContext, null);
+            mSubsGearPref = new MutableGearPreference(mContext, null);
             mSubsGearPref.setOnPreferenceClickListener(preference -> {
                 connectCarrierNetwork();
                 return true;
             });
+
             mSubsGearPref.setOnGearClickListener(p ->
                     startMobileNetworkActivity(mContext, subInfo.getSubscriptionId()));
+        }
+
+        if (!(mContext.getSystemService(UserManager.class)).isAdminUser()) {
+            mSubsGearPref.setGearEnabled(false);
         }
 
         mSubsGearPref.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(
@@ -269,12 +277,13 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
         final boolean isDataInService = tmForSubId.getDataState()
                 == TelephonyManager.DATA_CONNECTED;
-        final boolean isActiveCarrierNetwork =
+        final boolean isCarrierNetworkActive =
                 (mWifiPickerTrackerHelper != null)
-                        && mWifiPickerTrackerHelper.isActiveCarrierNetwork();
+                        && mWifiPickerTrackerHelper.isCarrierNetworkActive();
         String result = mSubsPrefCtrlInjector.getNetworkType(
-                mContext, mConfig, mTelephonyDisplayInfo, subId, isActiveCarrierNetwork);
-        if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isActiveCarrierNetwork) {
+                mContext, mConfig, mTelephonyDisplayInfo, subId, isCarrierNetworkActive);
+        if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isCarrierNetworkActive) {
+            Log.i(TAG, "Active cellular network or active carrier network.");
             result = mContext.getString(R.string.preference_summary_default_combination,
                     mContext.getString(R.string.mobile_data_connection_active), result);
         } else if (!isDataInService) {
@@ -297,7 +306,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         final boolean isActiveCellularNetwork =
                 mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext);
         if (isActiveCellularNetwork || (mWifiPickerTrackerHelper != null)
-                        && mWifiPickerTrackerHelper.isActiveCarrierNetwork()) {
+                        && mWifiPickerTrackerHelper.isCarrierNetworkActive()) {
             icon.setTint(Utils.getColorAccentDefaultColor(mContext));
             return icon;
         }
@@ -314,6 +323,13 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
         icon = mContext.getDrawable(R.drawable.ic_signal_strength_zero_bar_no_internet);
         return icon;
+    }
+
+    private void resetProviderPreferenceSummary() {
+        if (mSubsGearPref == null) {
+            return;
+        }
+        mSubsGearPref.setSummary("");
     }
 
     private void updateForBase() {

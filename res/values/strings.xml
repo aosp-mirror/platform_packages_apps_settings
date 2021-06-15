@@ -856,8 +856,6 @@
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up Face Unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_top_intro">Use Face Unlock to unlock your device, sign in to apps, and confirm payments.</string>
-    <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
     <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer_attention_not_supported">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
@@ -3031,7 +3029,7 @@
     <!-- Display settings screen, peak refresh rate settings summary [CHAR LIMIT=NONE] -->
     <string name="peak_refresh_rate_summary">Automatically raises the refresh rate from 60 to 90 Hz for some content. Increases battery usage.</string>
     <!-- Display developer settings: Force to the highest refresh rate [CHAR LIMIT=NONE] -->
-    <string name="force_high_refresh_rate_toggle">Force 90 Hz refresh rate</string>
+    <string name="force_high_refresh_rate_toggle">Force peak refresh rate</string>
     <!-- Display developer settings: Force to the highest refresh rate description [CHAR LIMIT=NONE]-->
     <string name="force_high_refresh_rate_desc">Highest refresh rate for improved touch responsiveness &amp; animation quality. Increases battery usage.</string>
     <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
@@ -3168,8 +3166,8 @@
     <string name="wallpaper_settings_title">Wallpaper</string>
     <!-- Styles & Wallpapers settings title [CHAR LIMIT=30] -->
     <string name="style_and_wallpaper_settings_title">Wallpaper &amp; style</string>
-    <!-- Summary for the top level Styles & wallpapers Settings [CHAR LIMIT=NONE]-->
-    <string name="wallpaper_dashboard_summary">Colors, themed icons, app grid</string>
+    <!-- Summary for the top level wallpapers settings [CHAR LIMIT=NONE]-->
+    <string name="wallpaper_dashboard_summary">Home, lock screen</string>
     <!-- Wallpaper settings summary when default wallpaper is used [CHAR LIMIT=NONE] -->
     <string name="wallpaper_settings_summary_default">Default</string>
     <!-- Wallpaper settings summary when wallpaper has been updated [CHAR LIMIT=NONE] -->
@@ -5179,7 +5177,7 @@
     <!-- Settings title for accessibility settings screen -->
     <string name="accessibility_settings_title">Accessibility settings</string>
     <!-- Summary for Accessibility settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="accessibility_settings_summary">Screen readers, interaction controls</string>
+    <string name="accessibility_settings_summary">Display, interaction, audio</string>
     <!-- Settings title for a brief version of Vision-Related Accessibility Settings. Displayed in Setup Wizard only. [CHAR LIMIT=35] -->
     <string name="vision_settings_title">Vision Settings</string>
     <!-- Settings description for a brief version of Vision-Related Accessibility Settings. Tells the user that they can adjust these settings now to help them through the remainder of the Setup Wizard and that they can later be changed in Settings. Displayed in Setup Wizard only. [CHAR LIMIT=none] -->
@@ -6791,9 +6789,9 @@
     <string name="cert_not_installed">Certificate not installed</string>
 
     <!-- Title of screen shown to the user when an app requests to manage the user's KeyChain credentials [CHAR LIMIT=NONE] -->
-    <string name="request_manage_credentials_title">Allow <xliff:g id="app_name" example="Ping">%s</xliff:g> to install certificates on this device?</string>
+    <string name="request_manage_credentials_title">Allow <b><xliff:g id="app_name" example="Ping">^1</xliff:g></b> to install certificates on this device?</string>
     <!-- Description of screen shown to the user when an app requests to manage the user's KeyChain credentials [CHAR LIMIT=NONE] -->
-    <string name="request_manage_credentials_description">These certificates will identify you to the apps and URLs below</string>
+    <string name="request_manage_credentials_description">These certificates will verify you by sharing your device\u2019s unique ID with the apps and URLs below</string>
     <!-- Label for button to not allow an app to manage the user's KeyChain credentials [CHAR_LIMIT=50] -->
     <string name="request_manage_credentials_dont_allow">Don\u2019t allow</string>
     <!-- Label for button to allow an app to manage the user's KeyChain credentials [CHAR_LIMIT=50] -->
@@ -6805,7 +6803,9 @@
     <!-- Summary if there is no certificate management app [CHAR_LIMIT=NONE] -->
     <string name="no_certificate_management_app">None</string>
     <!-- Summary of preference if there is a certificate management app [CHAR LIMIT=NONE] -->
-    <string name="certificate_management_app_description">Certificates installed by this app identify you to the apps and URLs below</string>
+    <string name="certificate_management_app_description">Certificates will verify you when you use the apps and URLs below</string>
+    <!-- Label for button to uninstall all certificates installed by the credential management app [CHAR LIMIT=30] -->
+    <string name="uninstall_certs_credential_management_app">Uninstall certificates</string>
     <!-- Label for button to remove the credential management app [CHAR LIMIT=30] -->
     <string name="remove_credential_management_app">Remove</string>
     <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
@@ -10479,13 +10479,15 @@
         Allowing <xliff:g id="app_name" example="Settings">%1$s</xliff:g> to always run in the background may reduce battery life.
         \n\nYou can change this later from Settings > Apps &amp; notifications.</string>
     <!-- Summary of power usage for an app [CHAR LIMIT=NONE] -->
-    <string name="battery_summary"><xliff:g id="percentage" example="2">%1$s</xliff:g> use for past 24 hours</string>
-
-    <!-- Title of a group of settings that let you manage settings that affect battery life [CHAR LIMIT=60] -->
-    <string name="battery_power_management">Power management</string>
+    <string name="battery_summary"><xliff:g id="percentage" example="2">%1$s</xliff:g> use since last full charge</string>
+    <!-- Summary of power usage for an app within past 24 hr[CHAR LIMIT=NONE] -->
+    <string name="battery_summary_24hr"><xliff:g id="percentage" example="2">%1$s</xliff:g> use for past 24 hours</string>
 
     <!-- Summary for app with no battery usage [CHAR LIMIT=NONE] -->
-    <string name="no_battery_summary">No battery use for past 24 hours</string>
+    <string name="no_battery_summary">No battery use since last full charge</string>
+
+    <!-- Summary for app with no battery usage for past 24 hours [CHAR LIMIT=NONE] -->
+    <string name="no_battery_summary_24hr">No battery use for past 24 hours</string>
 
     <!-- Link to an apps notification settings [CHAR LIMIT=50] -->
     <string name="app_notification_preferences">App settings</string>
@@ -11676,7 +11678,7 @@
     <string name="swipe_bottom_to_notifications_summary">Swipe down on the bottom edge of the screen to show your notifications.\nYou can\'t use one-handed mode when this feature is turned on.</string>
 
     <!-- Preference and settings suggestion title text for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_title">One-Handed mode</string>
+    <string name="one_handed_title">One-handed mode</string>
     <!-- Preference Switch for enabling one handed [CHAR LIMIT=60] -->
     <string name="one_handed_mode_enabled">Use one-handed mode</string>
     <!-- Preference Switch for app taps to exit one handed [CHAR LIMIT=60] -->
@@ -11691,6 +11693,19 @@
     <string name="one_handed_timeout_long">12 seconds</string>
     <!-- Search keywords for "One-Handed" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_one_handed">reachability</string>
+    <!-- Category title for one handed swipe down [CHAR_LIMIT=60] -->
+    <string name="one_handed_mode_swipe_down_category">Swipe down to</string>
+    <!-- One-handed mode Intro Text [CHAR_LIMIT=NONE] -->
+    <string name="one_handed_mode_intro_text">To use one handed mode, swipe down from the bottom edge of the screen. To use this feature, make sure gesture navigation is turned on in system navigation settings.</string>
+    <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=60] -->
+    <string name="one_handed_action_pull_down_screen_title">Pull screen into reach</string>
+    <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=NONE] -->
+    <string name="one_handed_action_pull_down_screen_summary">The top of the screen will move into reach of your thumb.</string>
+    <!-- One-handed mode show notification action [CHAR_LIMIT=60] -->
+    <string name="one_handed_action_show_notification_title">Show notifications</string>
+    <!-- One-handed mode show notification action [CHAR_LIMIT=NONE] -->
+    <string name="one_handed_action_show_notification_summary">Notification and settings will appear.</string>
+    <!-- One-handed mode Intro text for gesture navigation [CHAR_LIMIT=NONE] -->
 
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
     <string name="ambient_display_summary">To check time, notifications, and other info, double-tap your screen.</string>

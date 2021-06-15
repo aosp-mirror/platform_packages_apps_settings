@@ -17,6 +17,7 @@ import android.annotation.IntDef;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.BatteryUsageStats;
+import android.os.LocaleList;
 import android.os.UserHandle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -133,8 +134,8 @@ public final class ConvertUtils {
     }
 
     /** Converts UTC timestamp to human readable local time string. */
-    public static String utcToLocalTime(long timestamp) {
-        final Locale currentLocale = Locale.getDefault();
+    public static String utcToLocalTime(Context context, long timestamp) {
+        final Locale currentLocale = getLocale(context);
         final String currentZoneId = TimeZone.getDefault().getID();
         if (!currentZoneId.equals(sZoneId)
                 || !currentLocale.equals(sLocale)
@@ -148,8 +149,9 @@ public final class ConvertUtils {
     }
 
     /** Converts UTC timestamp to local time hour data. */
-    public static String utcToLocalTimeHour(long timestamp, boolean is24HourFormat) {
-        final Locale currentLocale = Locale.getDefault();
+    public static String utcToLocalTimeHour(
+            Context context, long timestamp, boolean is24HourFormat) {
+        final Locale currentLocale = getLocale(context);
         final String currentZoneId = TimeZone.getDefault().getID();
         if (!currentZoneId.equals(sZoneIdForHour)
                 || !currentLocale.equals(sLocaleForHour)
@@ -159,7 +161,7 @@ public final class ConvertUtils {
             sZoneIdForHour = currentZoneId;
             sIs24HourFormat = is24HourFormat;
             sSimpleDateFormatForHour = new SimpleDateFormat(
-                    sIs24HourFormat ? "HH" : "h aa", currentLocale);
+                    sIs24HourFormat ? "HH" : "h", currentLocale);
         }
         return sSimpleDateFormatForHour.format(new Date(timestamp))
             .toLowerCase(currentLocale);
@@ -355,5 +357,16 @@ public final class ConvertUtils {
             return entry3 != null && entry3 != EMPTY_BATTERY_HIST_ENTRY
                 ? entry3 : null;
         }
+    }
+
+    @VisibleForTesting
+    static Locale getLocale(Context context) {
+        if (context == null) {
+            return Locale.getDefault();
+        }
+        final LocaleList locales =
+            context.getResources().getConfiguration().getLocales();
+        return locales != null && !locales.isEmpty() ? locales.get(0)
+            : Locale.getDefault();
     }
 }

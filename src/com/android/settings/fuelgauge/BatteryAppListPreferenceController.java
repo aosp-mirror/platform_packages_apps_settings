@@ -55,6 +55,7 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -66,6 +67,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     static final boolean USE_FAKE_DATA = false;
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 20;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
+    private static final String MEDIASERVER_PACKAGE_NAME = "mediaserver";
 
     private final String mPreferenceKey;
     @VisibleForTesting
@@ -186,7 +188,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             PowerGaugePreference pgp = (PowerGaugePreference) preference;
             BatteryEntry entry = pgp.getInfo();
             AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity,
-                    mFragment, entry, pgp.getPercent());
+                    mFragment, entry, pgp.getPercent(), /*isValidToShowSummary=*/ true);
             return true;
         }
         return false;
@@ -303,27 +305,17 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         final ArrayList<BatteryEntry> results = new ArrayList<>();
         final List<UidBatteryConsumer> uidBatteryConsumers =
                 mBatteryUsageStats.getUidBatteryConsumers();
+
+        // Sort to have all apps with "real" UIDs first, followed by apps that are supposed
+        // to be combined with the real ones.
+        uidBatteryConsumers.sort(Comparator.comparingInt(
+                consumer -> consumer.getUid() == getRealUid(consumer) ? 0 : 1));
+
         for (int i = 0, size = uidBatteryConsumers.size(); i < size; i++) {
             final UidBatteryConsumer consumer = uidBatteryConsumers.get(i);
-            int realUid = consumer.getUid();
+            final int uid = getRealUid(consumer);
 
-            // Check if this UID is a shared GID. If so, we combine it with the OWNER's
-            // actual app UID.
-            if (isSharedGid(consumer.getUid())) {
-                realUid = UserHandle.getUid(UserHandle.USER_SYSTEM,
-                        UserHandle.getAppIdFromSharedAppGid(consumer.getUid()));
-            }
-
-            // Check if this UID is a system UID (mediaserver, logd, nfc, drm, etc).
-            if (isSystemUid(realUid)
-                    && !"mediaserver".equals(consumer.getPackageWithHighestDrain())) {
-                // Use the system UID for all UIDs running in their own sandbox that
-                // are not apps. We exclude mediaserver because we already are expected to
-                // report that as a separate item.
-                realUid = Process.SYSTEM_UID;
-            }
-
-            final String[] packages = mPackageManager.getPackagesForUid(consumer.getUid());
+            final String[] packages = mPackageManager.getPackagesForUid(uid);
             if (mBatteryUtils.shouldHideUidBatteryConsumerUnconditionally(consumer, packages)) {
                 continue;
             }
@@ -333,11 +325,11 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                 continue;
             }
 
-            final int index = batteryEntryList.indexOfKey(realUid);
+            final int index = batteryEntryList.indexOfKey(uid);
             if (index < 0) {
                 // New entry.
-                batteryEntryList.put(realUid, new BatteryEntry(mContext, mHandler, mUserManager,
-                        consumer, isHidden, packages, null, loadDataInBackground));
+                batteryEntryList.put(uid, new BatteryEntry(mContext, mHandler, mUserManager,
+                        consumer, isHidden, uid, packages, null, loadDataInBackground));
             } else {
                 // Combine BatterySippers if we already have one with this UID.
                 final BatteryEntry existingSipper = batteryEntryList.valueAt(index);
@@ -385,7 +377,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             for (int i = 0, size = userBatteryConsumers.size(); i < size; i++) {
                 final UserBatteryConsumer consumer = userBatteryConsumers.get(i);
                 results.add(new BatteryEntry(mContext, mHandler, mUserManager,
-                        consumer, /* isHidden */ true, null, null, loadDataInBackground));
+                        consumer, /* isHidden */ true, Process.INVALID_UID, null, null,
+                        loadDataInBackground));
             }
         }
 
@@ -398,6 +391,27 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         // The sort order must have changed, so re-sort based on total power use.
         results.sort(BatteryEntry.COMPARATOR);
         return results;
+    }
+
+    private int getRealUid(UidBatteryConsumer consumer) {
+        int realUid = consumer.getUid();
+
+        // Check if this UID is a shared GID. If so, we combine it with the OWNER's
+        // actual app UID.
+        if (isSharedGid(consumer.getUid())) {
+            realUid = UserHandle.getUid(UserHandle.USER_SYSTEM,
+                    UserHandle.getAppIdFromSharedAppGid(consumer.getUid()));
+        }
+
+        // Check if this UID is a system UID (mediaserver, logd, nfc, drm, etc).
+        if (isSystemUid(realUid)
+                && !MEDIASERVER_PACKAGE_NAME.equals(consumer.getPackageWithHighestDrain())) {
+            // Use the system UID for all UIDs running in their own sandbox that
+            // are not apps. We exclude mediaserver because we already are expected to
+            // report that as a separate item.
+            realUid = Process.SYSTEM_UID;
+        }
+        return realUid;
     }
 
     @VisibleForTesting

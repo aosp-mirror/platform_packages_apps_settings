@@ -38,7 +38,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="12dp">
+            android:layout_marginTop="-32dp">
 
             <com.google.android.setupdesign.view.IllustrationVideoView
                 android:id="@+id/illustration_default"
@@ -51,11 +51,13 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/illustration_lottie"
                 android:layout_width="match_parent"
-                android:layout_height="340dp"
-                android:scaleType="fitCenter"
-                android:visibility="invisible"
+                android:layout_height="400dp"
+                android:layout_marginTop="-48dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
                 app:lottie_autoPlay="true"
-                app:lottie_loop="true" />
+                app:lottie_loop="true"
+                app:lottie_speed="1.5" />
 
             <ImageView
                 android:id="@+id/illustration_accessibility"
@@ -63,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:visibility="invisible"
-                android:background="@drawable/face_enroll_introduction"/>
+                android:background="@drawable/face_enroll_icon_large"/>
 
         </FrameLayout>
 

@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -48,20 +47,8 @@ public class OneHandedEnablePreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_setBoolean_checkIsTrueOrFalse() {
-        mController.setChecked(false);
-        assertThat(OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)).isFalse();
-        assertThat(OneHandedSettingsUtils.isSwipeDownNotificationEnabled(mContext)).isTrue();
-
-        mController.setChecked(true);
-        assertThat(OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)).isTrue();
-        assertThat(OneHandedSettingsUtils.isSwipeDownNotificationEnabled(mContext)).isFalse();
-    }
-
-    @Test
     public void getAvailabilityStatus_setSupportOneHandedModeProperty_shouldAvailable() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
-        setNavigationBarMode(mContext, "2" /* fully gestural */);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
@@ -70,16 +57,6 @@ public class OneHandedEnablePreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_unsetSupportOneHandedModeProperty_shouldUnsupported() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "false");
-        setNavigationBarMode(mContext, "2" /* fully gestural */);
-
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_set3ButtonModeProperty_shouldUnsupported() {
-        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
-        setNavigationBarMode(mContext, "0" /* 3-button */);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
@@ -99,19 +76,5 @@ public class OneHandedEnablePreferenceControllerTest {
 
         assertThat(mController.getSummary())
                 .isEqualTo(mContext.getText(R.string.switch_off_text));
-    }
-
-    /**
-     * Set NavigationBar mode flag to Settings provider.
-     * @param context App context
-     * @param value Navigation bar mode:
-     *  0 = 3 button
-     *  1 = 2 button
-     *  2 = fully gestural
-     * @return true if the value was set, false on database errors.
-     */
-    private boolean setNavigationBarMode(Context context, String value) {
-        return Settings.Secure.putStringForUser(context.getContentResolver(),
-                Settings.Secure.NAVIGATION_MODE, value, UserHandle.myUserId());
     }
 }

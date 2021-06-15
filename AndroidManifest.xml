@@ -182,6 +182,7 @@
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
+                  android:theme="@style/Theme.SubSettings"
                   android:label="@string/settings_shortcut">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -541,12 +542,12 @@
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog" />
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog" />
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -712,7 +713,8 @@
         <activity
             android:name="Settings$ManageAssistActivity"
             android:exported="true"
-            android:label="@string/assist_and_voice_input_title">
+            android:label="@string/assist_and_voice_input_title"
+            android:theme="@style/Theme.SubSettings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3713,6 +3715,7 @@
             android:name="Settings$GestureNavigationSettingsActivity"
             android:label="@string/gesture_settings_activity_title"
             android:exported="true"
+            android:theme="@style/Theme.SubSettings"
             android:enabled="true">
             <intent-filter android:priority="32">
                 <action android:name="android.intent.action.MAIN" />
@@ -3783,14 +3786,14 @@
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog" />
+            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity
             android:name=".sim.DsdsDialogActivity"
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog" />
+            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
