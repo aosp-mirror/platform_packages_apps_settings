@@ -17,8 +17,12 @@
 package com.android.settings.testutils;
 
 import android.app.Activity;
+import android.app.Instrumentation;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 
@@ -36,6 +40,11 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class CommonUtils {
     private static final String TAG = CommonUtils.class.getSimpleName();
+    private static Instrumentation sInstrumentation =
+            InstrumentationRegistry.getInstrumentation();
+    private static PowerManager sPowerManager =
+            (PowerManager) sInstrumentation.getTargetContext().getSystemService(
+                    Context.POWER_SERVICE);
 
     public static void takeScreenshot(Activity activity) {
         long now = System.currentTimeMillis();
@@ -105,5 +114,22 @@ public class CommonUtils {
     public static int getResId(String name) {
         return InstrumentationRegistry.getInstrumentation().getTargetContext().getResources()
                 .getIdentifier(name, "id", Constants.SETTINGS_PACKAGE_NAME);
+    }
+
+    public static void reopenScreen() {
+        sPowerManager.goToSleep(SystemClock.uptimeMillis());
+        // According to local test, we need to sleep to wait it fully processed.
+        // 1000 ms is a good value to sleep, otherwise it might cause keyDispatchingTimedOut.
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        UiUtils.waitUntilCondition(1000, () -> !sPowerManager.isInteractive());
+        sPowerManager.wakeUp(SystemClock.uptimeMillis());
+        UiUtils.waitUntilCondition(1000, () -> sPowerManager.isInteractive());
+
+        // After power on screen, need to unlock and goto home page.
+        AdbUtils.shell("input keyevent KEYCODE_MENU");
     }
 }
