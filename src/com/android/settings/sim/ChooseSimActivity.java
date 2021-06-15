@@ -41,7 +41,6 @@ import com.google.android.setupdesign.items.IItem;
 import com.google.android.setupdesign.items.Item;
 import com.google.android.setupdesign.items.ItemGroup;
 import com.google.android.setupdesign.items.RecyclerItemAdapter;
-import com.google.android.setupdesign.view.HeaderRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,13 +103,12 @@ public class ChooseSimActivity extends Activity
         }
 
         GlifLayout layout = findViewById(R.id.glif_layout);
-        TextView textView = findViewById(R.id.subtitle);
         int subscriptionCount = mEmbeddedSubscriptions.size();
         if (mHasPsim) { // Choose a number to use
             subscriptionCount++;
         }
         layout.setHeaderText(getString(R.string.choose_sim_title));
-        textView.setText(getString(R.string.choose_sim_text, subscriptionCount));
+        layout.setDescriptionText(getString(R.string.choose_sim_text, subscriptionCount));
 
         displaySubscriptions();
 
@@ -217,7 +215,7 @@ public class ChooseSimActivity extends Activity
 
     private void displaySubscriptions() {
         View rootView = findViewById(android.R.id.content);
-        GlifRecyclerLayout layout = rootView.findViewById(R.id.recycler_list);
+        GlifRecyclerLayout layout = rootView.findViewById(R.id.glif_layout);
         RecyclerItemAdapter adapter = (RecyclerItemAdapter) layout.getAdapter();
         adapter.setOnItemSelectedListener(this);
         mItemGroup = (ItemGroup) adapter.getRootItemHierarchy();
@@ -265,10 +263,6 @@ public class ChooseSimActivity extends Activity
             item.setId(index++);
             mItemGroup.addChild(item);
         }
-
-        // This removes the unused header artifact from GlifRecyclerLayout.
-        HeaderRecyclerView rv = (HeaderRecyclerView) layout.getRecyclerView();
-        rv.getHeader().setVisibility(View.GONE);
     }
 
     private void updateSubscriptions() {
