@@ -455,7 +455,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(true));
-        doReturn(true).when(mWifiPickerTrackerHelper).isActiveCarrierNetwork();
+        doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
         mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
 
         mController.onResume();

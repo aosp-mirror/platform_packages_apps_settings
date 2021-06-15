@@ -261,7 +261,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         String iconKey = getIconKey(telephonyDisplayInfo);
         int resId = mapIconSets(config).get(iconKey).dataContentDescription;
         if (mWifiPickerTrackerHelper != null
-                && mWifiPickerTrackerHelper.isActiveCarrierNetwork()) {
+                && mWifiPickerTrackerHelper.isCarrierNetworkActive()) {
             MobileIconGroup carrierMergedWifiIconGroup = TelephonyIcons.CARRIER_MERGED_WIFI;
             resId = carrierMergedWifiIconGroup.dataContentDescription;
             return resId != 0
