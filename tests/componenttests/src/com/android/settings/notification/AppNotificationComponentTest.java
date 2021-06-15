@@ -25,7 +25,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -34,21 +34,22 @@ import androidx.test.filters.SmallTest;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.runner.lifecycle.Stage;
 
-import com.android.settings.R;
+import com.android.settings.testutils.CommonUtils;
 import com.android.settings.testutils.UiUtils;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class AppNotificationComponentTest {
-    private static final String TAG =
-            AppNotificationComponentTest.class.getSimpleName();
     private final Instrumentation mInstrumentation = InstrumentationRegistry.getInstrumentation();
     private final String mNoSlientAppName = "com.google.android.dialer";
-
+    public final String TAG = this.getClass().getName();
 
     @Rule
     public ActivityScenarioRule<com.android.settings.Settings.AppNotificationSettingsActivity>
@@ -57,35 +58,65 @@ public class AppNotificationComponentTest {
                     .putExtra(Settings.EXTRA_APP_PACKAGE, mNoSlientAppName)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
+    /**
+     * Tests user should not able to modify notification settings for some system apps.
+     * In this case, test `phone` app that will disabled notification configuration.
+     * Steps:
+     * 1. Open notification page of phone app.
+     * 2. Checks system privilege notification should not able to be changed.
+     */
     @Test
     public void test_special_app_could_not_disable_notification() {
+        List<String> disabledList = Arrays.asList("Default", "Incoming calls",
+                "Background Processing", "Missed calls",
+                "Ongoing calls", "Voicemails");
+
         ActivityScenario ac = rule.getScenario();
         ac.onActivity(
                 activity -> {
-                    View rv = activity.findViewById(R.id.recycler_view);
+                    View recyclerView = activity.findViewById(
+                            CommonUtils.getResId("recycler_view"));
 
-                    if (rv == null) {
+                    if (recyclerView == null) {
                         Log.d("UI_UTILS",
                                 "Target not found: R.id.recycler_view #" + Integer.toHexString(
-                                        R.id.recycler_view));
+                                        CommonUtils.getResId("recycler_view")));
                         UiUtils.dumpView(UiUtils.getFirstViewFromActivity(activity));
                         assertThat(Boolean.TRUE).isFalse();
                     }
 
                     UiUtils.waitUntilCondition(5000,
-                            () -> rv.findViewById(R.id.main_switch_bar) != null);
+                            () -> recyclerView.findViewById(CommonUtils.getResId("recycler_view"))
+                                    != null);
 
-                    View mainSwitchBar = rv.findViewById(R.id.main_switch_bar);
+                    View mainSwitchBar = recyclerView.findViewById(
+                            CommonUtils.getResId("main_switch_bar"));
 
                     assertThat(mainSwitchBar.isEnabled()).isEqualTo(false);
+                    Log.d(TAG, "main switch bar = " + mainSwitchBar.isEnabled());
 
-                    UiUtils.waitForActivitiesInStage(1000, Stage.RESUMED);
+                    UiUtils.waitForActivitiesInStage(10000, Stage.RESUMED);
+                    Log.d(TAG, "In stage!.");
 
-                    for (int i = 0; i < ((ViewGroup) rv).getChildCount(); i++) {
-                        if (((ViewGroup) rv).getChildAt(i) instanceof LinearLayout) {
-                            Switch sWidget = rv.findViewById(R.id.switchWidget);
-                            if (sWidget != null) {
-                                assertThat(sWidget.isEnabled()).isEqualTo(false);
+                    UiUtils.dumpView(UiUtils.getFirstViewFromActivity(activity));
+
+                    // The privileges are under the recycle view. Fetch all of them and check.
+                    ViewGroup viewGroup = (ViewGroup) recyclerView;
+
+                    for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                        if (viewGroup.getChildAt(i) instanceof LinearLayout) {
+                            // A notification in Settings should have both switch_widget and text.
+                            // There has another circle pin is no belongs to Settings package.
+                            // But belongs to Switch in Android.
+                            View sWidget = viewGroup.getChildAt(i).findViewById(
+                                    CommonUtils.getResId("switchWidget"));
+                            TextView sText = viewGroup.getChildAt(i).findViewById(
+                                    android.R.id.title);
+                            if (sText != null && sWidget != null
+                                    && disabledList.stream().anyMatch(
+                                            str -> str.equals(sText.getText().toString().trim()))) {
+
+                                assertThat(sWidget.isEnabled()).isFalse();
                             }
                         }
                     }
