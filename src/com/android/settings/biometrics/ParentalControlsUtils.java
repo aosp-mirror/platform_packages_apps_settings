@@ -21,9 +21,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.biometrics.ParentalControlsUtilsInternal;
-import android.os.Build;
 import android.os.UserHandle;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -39,24 +37,19 @@ import com.android.settingslib.RestrictedLockUtils;
 public class ParentalControlsUtils {
 
     private static final String TAG = "ParentalControlsUtils";
-    private static final String TEST_ALWAYS_REQUIRE_CONSENT =
-            "com.android.settings.biometrics.ParentalControlsUtils.always_require_consent";
 
     /**
-     * Public version that enables test paths based on {@link #TEST_ALWAYS_REQUIRE_CONSENT}
+     * Public version that enables test paths, see
+     * {@link android.hardware.biometrics.ParentalControlsUtilsInternal#isTestModeEnabled(Context)}
      * @return non-null EnforcedAdmin if parental consent is required
      */
     public static RestrictedLockUtils.EnforcedAdmin parentConsentRequired(@NonNull Context context,
             @BiometricAuthenticator.Modality int modality) {
 
         final UserHandle userHandle = new UserHandle(UserHandle.myUserId());
-        if (Build.IS_USERDEBUG || Build.IS_ENG) {
-            final boolean testAlwaysRequireConsent = Settings.Secure.getInt(
-                    context.getContentResolver(), TEST_ALWAYS_REQUIRE_CONSENT, 0) != 0;
-            if (testAlwaysRequireConsent) {
-                Log.d(TAG, "Requiring consent for test flow");
-                return new RestrictedLockUtils.EnforcedAdmin(null /* ComponentName */, userHandle);
-            }
+        if (ParentalControlsUtilsInternal.isTestModeEnabled(context)) {
+            Log.d(TAG, "Requiring consent for test flow");
+            return new RestrictedLockUtils.EnforcedAdmin(null /* ComponentName */, userHandle);
         }
 
         final DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
@@ -72,7 +65,8 @@ public class ParentalControlsUtils {
     static RestrictedLockUtils.EnforcedAdmin parentConsentRequiredInternal(
             @NonNull DevicePolicyManager dpm, @BiometricAuthenticator.Modality int modality,
             @NonNull UserHandle userHandle) {
-        if (ParentalControlsUtilsInternal.parentConsentRequired(dpm, modality, userHandle)) {
+        if (ParentalControlsUtilsInternal.parentConsentRequired(dpm, modality,
+                userHandle)) {
             final ComponentName cn =
                     ParentalControlsUtilsInternal.getSupervisionComponentName(dpm, userHandle);
             return new RestrictedLockUtils.EnforcedAdmin(cn, userHandle);
