@@ -33,6 +33,7 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -233,6 +234,7 @@ public final class BatteryChartViewTest {
             .postDelayed(mBatteryChartView.mUpdateClickableStateRun, 500L);
     }
 
+    @Ignore
     @Test
     public void testSetLatestTimestamp_generateExpectedTimestamps() {
         final long timestamp = 1619196786769L;
