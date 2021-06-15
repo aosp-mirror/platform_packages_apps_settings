@@ -55,7 +55,8 @@ public class BatterySaverScheduleSeekBarController implements
     public BatterySaverScheduleSeekBarController(Context context) {
         mContext = context;
         mSeekBarPreference = new SeekBarPreference(context);
-        mSeekBarPreference.setLayoutResource(R.layout.battery_saver_schedule_percentage_seekbar);
+        mSeekBarPreference.setLayoutResource(R.layout.preference_widget_seekbar_settings);
+        mSeekBarPreference.setIconSpaceReserved(false);
         mSeekBarPreference.setOnPreferenceChangeListener(this);
         mSeekBarPreference.setContinuousUpdates(true);
         mSeekBarPreference.setMax(MAX_SEEKBAR_VALUE);
