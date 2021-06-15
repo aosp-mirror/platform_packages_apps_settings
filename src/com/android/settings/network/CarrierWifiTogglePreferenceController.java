@@ -78,7 +78,6 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
             return false;
         }
         mWifiPickerTrackerHelper.setCarrierNetworkEnabled(isChecked);
-        updateCarrierNetworkPreference(isChecked);
         return true;
     }
 
@@ -86,21 +85,17 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCarrierNetworkPreference = screen.findPreference(CARRIER_WIFI_NETWORK_PREF_KEY);
-        updateCarrierNetworkPreference(isChecked());
+        updateCarrierNetworkPreference();
     }
 
     @Override
     public void onWifiStateChanged() {
-        if (mCarrierNetworkPreference != null && mCarrierNetworkPreference.isVisible()) {
-            mCarrierNetworkPreference.setSummary(getCarrierNetworkSsid());
-        }
+        updateCarrierNetworkPreference();
     }
 
     @Override
     public void onWifiEntriesChanged() {
-        if (mCarrierNetworkPreference != null && mCarrierNetworkPreference.isVisible()) {
-            mCarrierNetworkPreference.setSummary(getCarrierNetworkSsid());
-        }
+        updateCarrierNetworkPreference();
     }
 
     @Override
@@ -113,16 +108,23 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
         // Do nothing
     }
 
-    protected void updateCarrierNetworkPreference(boolean isCarrierNetworkEnabled) {
+    protected void updateCarrierNetworkPreference() {
         if (mCarrierNetworkPreference == null) {
             return;
         }
-        if (!isCarrierNetworkEnabled || getAvailabilityStatus() != AVAILABLE) {
+        if (getAvailabilityStatus() != AVAILABLE || !isCarrierNetworkActive()) {
             mCarrierNetworkPreference.setVisible(false);
             return;
         }
         mCarrierNetworkPreference.setVisible(true);
         mCarrierNetworkPreference.setSummary(getCarrierNetworkSsid());
+    }
+
+    protected boolean isCarrierNetworkActive() {
+        if (mWifiPickerTrackerHelper == null) {
+            return false;
+        }
+        return mWifiPickerTrackerHelper.isCarrierNetworkActive();
     }
 
     protected String getCarrierNetworkSsid() {
