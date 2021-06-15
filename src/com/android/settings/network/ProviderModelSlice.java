@@ -64,7 +64,6 @@ import java.util.stream.Collectors;
 public class ProviderModelSlice extends WifiSlice {
 
     private static final String TAG = "ProviderModelSlice";
-    protected static final String ACTION_TITLE_CONNECT_TO_CARRIER = "Connect_To_Carrier";
 
     private final ProviderModelSliceHelper mHelper;
 
@@ -292,31 +291,6 @@ public class ProviderModelSlice extends WifiSlice {
         final PendingIntent intent = PendingIntent.getActivity(mContext, 0 /* requestCode */,
                 getIntent(), PendingIntent.FLAG_IMMUTABLE /* flags */);
         return SliceAction.createDeeplink(intent, icon, ListBuilder.ICON_IMAGE, title);
-    }
-
-    @Override
-    protected ListBuilder.RowBuilder getWifiSliceItemRow(WifiSliceItem wifiSliceItem) {
-        final CharSequence title = wifiSliceItem.getTitle();
-        final IconCompat levelIcon = getWifiSliceItemLevelIcon(wifiSliceItem);
-        final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
-                .setTitleItem(levelIcon, ListBuilder.ICON_IMAGE)
-                .setTitle(title)
-                .setSubtitle(wifiSliceItem.getSummary())
-                .setContentDescription(wifiSliceItem.getContentDescription());
-
-        final IconCompat endIcon;
-        if (wifiSliceItem.hasInternetAccess()) {
-            rowBuilder.setPrimaryAction(SliceAction.create(getBroadcastIntent(mContext),
-                    levelIcon, ListBuilder.ICON_IMAGE, ACTION_TITLE_CONNECT_TO_CARRIER));
-            endIcon = IconCompat.createWithResource(mContext, R.drawable.ic_settings_close);
-        } else {
-            rowBuilder.setPrimaryAction(getWifiEntryAction(wifiSliceItem, levelIcon, title));
-            endIcon = getEndIcon(wifiSliceItem);
-        }
-        if (endIcon != null) {
-            rowBuilder.addEndItem(endIcon, ListBuilder.ICON_IMAGE);
-        }
-        return rowBuilder;
     }
 
     @Override
