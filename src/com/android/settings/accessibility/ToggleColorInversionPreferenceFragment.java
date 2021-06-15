@@ -80,7 +80,7 @@ public class ToggleColorInversionPreferenceFragment extends
         mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.drawable.accessibility_color_inversion_banner))
+                .appendPath(String.valueOf(R.raw.accessibility_color_inversion_banner))
                 .build();
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
         enableServiceFeatureKeys.add(ENABLED);
