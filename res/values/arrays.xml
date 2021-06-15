@@ -980,6 +980,21 @@
         <item>0</item>
     </string-array>
 
+    <!-- Titles for the accessibility button or gesture. [CHAR LIMIT=35] -->
+    <string-array name="accessibility_button_gesture_selector_titles">
+        <item>Button</item>
+        <item>Gesture</item>
+    </string-array>
+
+    <!-- Values for the accessibility button or gesture. -->
+    <!-- Should Keep in sync with Settings.Secure.ACCESSIBILITY_BUTTON_MODE_* -->
+    <string-array name="accessibility_button_gesture_selector_values" translatable="false">
+        <!-- Button -->
+        <item>1</item>
+        <!-- Gesture -->
+        <item>2</item>
+    </string-array>
+
     <!-- Titles for the accessibility button size. [CHAR LIMIT=35] -->
     <string-array name="accessibility_button_size_selector_titles">
         <item>Small</item>
