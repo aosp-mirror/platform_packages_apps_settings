@@ -197,8 +197,14 @@ public class AppInfoDashboardFragment extends DashboardFragment
         acrossProfiles.setPackageName(packageName);
         acrossProfiles.setParentFragment(this);
 
+        final AlarmsAndRemindersDetailPreferenceController alarmsAndReminders =
+                use(AlarmsAndRemindersDetailPreferenceController.class);
+        alarmsAndReminders.setPackageName(packageName);
+        alarmsAndReminders.setParentFragment(this);
+
         use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
-                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles));
+                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles,
+                alarmsAndReminders));
     }
 
     @Override
