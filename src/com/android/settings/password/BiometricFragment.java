@@ -47,7 +47,6 @@ public class BiometricFragment extends InstrumentedFragment {
     private int mUserId;
 
     // Created/Initialized once and retained
-    private PromptInfo mPromptInfo;
     private BiometricPrompt mBiometricPrompt;
     private CancellationSignal mCancellationSignal;
 
@@ -127,7 +126,7 @@ public class BiometricFragment extends InstrumentedFragment {
         final Bundle bundle = getArguments();
         final PromptInfo promptInfo = bundle.getParcelable(KEY_PROMPT_INFO);
 
-        final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(getContext())
+        mBiometricPrompt = new BiometricPrompt.Builder(getContext())
                 .setTitle(promptInfo.getTitle())
                 .setUseDefaultTitle() // use default title if title is null/empty
                 .setDeviceCredentialAllowed(true)
@@ -140,13 +139,19 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setConfirmationRequired(promptInfo.isConfirmationRequested())
                 .setDisallowBiometricsIfPolicyExists(
                         promptInfo.isDisallowBiometricsIfPolicyExists())
-                .setReceiveSystemEvents(true);
+                .setReceiveSystemEvents(true)
+                .build();
+    }
 
-        mBiometricPrompt = builder.build();
-        mCancellationSignal = new CancellationSignal();
+    @Override
+    public void onResume() {
+        super.onResume();
 
-        mBiometricPrompt.authenticateUser(mCancellationSignal, mClientExecutor,
-                mAuthenticationCallback, mUserId);
+        if (mCancellationSignal == null) {
+            mCancellationSignal = new CancellationSignal();
+            mBiometricPrompt.authenticateUser(mCancellationSignal, mClientExecutor,
+                    mAuthenticationCallback, mUserId);
+        }
     }
 
     @Override
@@ -154,4 +159,3 @@ public class BiometricFragment extends InstrumentedFragment {
         return SettingsEnums.BIOMETRIC_FRAGMENT;
     }
 }
-
