@@ -27,6 +27,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -323,8 +324,7 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     private static TutorialPage createSoftwareTutorialPage(@NonNull Context context) {
-        final CharSequence title = context.getText(
-                R.string.accessibility_tutorial_dialog_title_button);
+        final CharSequence title = getSoftwareTitle(context);
         final ImageView image = createSoftwareImage(context);
         final CharSequence instruction = getSoftwareInstruction(context);
         final ImageView indicatorIcon =
@@ -382,18 +382,46 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     private static ImageView createSoftwareImage(Context context) {
-        final int resId = AccessibilityUtil.isFloatingMenuEnabled(context)
-                ? R.drawable.accessibility_shortcut_type_software_floating
-                : R.drawable.accessibility_shortcut_type_software;
-
+        int resId;
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            resId = R.drawable.accessibility_shortcut_type_software_floating;
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
+                    : R.drawable.accessibility_shortcut_type_software_gesture;
+        } else {
+            resId = R.drawable.accessibility_shortcut_type_software;
+        }
         return createImageView(context, resId);
     }
 
+    private static CharSequence getSoftwareTitle(Context context) {
+        int resId;
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            resId = R.string.accessibility_tutorial_dialog_title_button;
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = R.string.accessibility_tutorial_dialog_title_gesture;
+        } else {
+            resId = R.string.accessibility_tutorial_dialog_title_button;
+        }
+        return context.getText(resId);
+    }
+
     private static CharSequence getSoftwareInstruction(Context context) {
-        return AccessibilityUtil.isFloatingMenuEnabled(context)
-                ? context.getText(R.string.accessibility_tutorial_dialog_message_floating_button)
-                : getSoftwareInstructionWithIcon(context,
-                        context.getText(R.string.accessibility_tutorial_dialog_message_button));
+        final SpannableStringBuilder sb = new SpannableStringBuilder();
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            final int resId = R.string.accessibility_tutorial_dialog_message_floating_button;
+            sb.append(context.getText(resId));
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            final int resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.string.accessibility_tutorial_dialog_message_gesture_talkback
+                    : R.string.accessibility_tutorial_dialog_message_gesture;
+            sb.append(context.getText(resId));
+        } else {
+            final int resId = R.string.accessibility_tutorial_dialog_message_button;
+            sb.append(getSoftwareInstructionWithIcon(context, context.getText(resId)));
+        }
+        return sb;
     }
 
     private static CharSequence getSoftwareInstructionWithIcon(Context context, CharSequence text) {
