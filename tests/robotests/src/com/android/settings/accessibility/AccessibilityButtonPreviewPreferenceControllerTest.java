@@ -90,7 +90,7 @@ public class AccessibilityButtonPreviewPreferenceControllerTest {
         mController.mContentObserver.onChange(false);
 
         final Drawable smallFloatingMenuWithTenOpacityDrawable =
-                FloatingMenuLayerDrawable.createLayerDrawable(mContext,
+                AccessibilityLayerDrawable.createLayerDrawable(mContext,
                         R.drawable.accessibility_button_preview_small_floating_menu, 10);
         assertThat(mController.mPreview.getDrawable().getConstantState()).isEqualTo(
                 smallFloatingMenuWithTenOpacityDrawable.getConstantState());

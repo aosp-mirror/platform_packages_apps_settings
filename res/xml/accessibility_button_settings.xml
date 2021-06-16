@@ -16,8 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/accessibility_button_title">
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="caption_preview"
@@ -36,6 +35,15 @@
         android:summary="%s"
         android:persistent="false"
         settings:controller="com.android.settings.accessibility.AccessibilityButtonLocationPreferenceController"/>
+
+    <ListPreference
+        android:entries="@array/accessibility_button_gesture_selector_titles"
+        android:entryValues="@array/accessibility_button_gesture_selector_values"
+        android:key="accessibility_button_or_gesture"
+        android:title="@string/accessibility_button_or_gesture_title"
+        android:summary="%s"
+        android:persistent="false"
+        settings:controller="com.android.settings.accessibility.AccessibilityButtonGesturePreferenceController"/>
 
     <ListPreference
         android:entries="@array/accessibility_button_size_selector_titles"
@@ -61,7 +69,6 @@
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="accessibility_button_footer"
-        android:title="@string/accessibility_button_description"
         android:persistent="false"
         android:selectable="false"
         settings:searchable="false"
