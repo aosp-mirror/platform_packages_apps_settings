@@ -95,11 +95,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 this /* fragment */, this /* mobilePlanHost */);
     }
 
-    @Override
-    protected boolean isParalleledControllers() {
-        return true;
-    }
-
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, MetricsFeatureProvider metricsFeatureProvider, Fragment fragment,
             MobilePlanPreferenceHost mobilePlanHost) {

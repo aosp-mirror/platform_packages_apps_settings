@@ -309,11 +309,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         return controllers;
     }
 
-    @Override
-    protected boolean isParalleledControllers() {
-        return true;
-    }
-
     void addToCallbackList(Callback callback) {
         if (callback != null) {
             mCallbacks.add(callback);
