@@ -145,9 +145,6 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
         SpannableStringBuilder disclosure = new SpannableStringBuilder();
         disclosure.append(mResources.getString(R.string.do_disclosure_generic));
-        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
-        disclosure.append(mResources.getString(R.string.learn_more),
-                new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(mContext), 0);
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(mOwner);
         when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(null);
         assertThat(mProvider.getDeviceOwnerDisclosure()).isEqualTo(disclosure);
@@ -155,9 +152,6 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         disclosure = new SpannableStringBuilder();
         disclosure.append(mResources.getString(R.string.do_disclosure_with_name,
                 OWNER_ORGANIZATION));
-        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
-        disclosure.append(mResources.getString(R.string.learn_more),
-                new EnterprisePrivacyFeatureProviderImpl.EnterprisePrivacySpan(mContext), 0);
         when(mDevicePolicyManager.getDeviceOwnerOrganizationName()).thenReturn(OWNER_ORGANIZATION);
         assertThat(mProvider.getDeviceOwnerDisclosure()).isEqualTo(disclosure);
     }

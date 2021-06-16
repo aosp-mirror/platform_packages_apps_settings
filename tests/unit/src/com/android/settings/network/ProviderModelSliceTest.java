@@ -16,8 +16,6 @@
 
 package com.android.settings.network;
 
-import static com.android.settings.network.ProviderModelSlice.ACTION_TITLE_CONNECT_TO_CARRIER;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -419,30 +417,5 @@ public class ProviderModelSliceTest {
                 false /* isDataEnabled */, SUB_ID);
 
         verify(mMockNetworkProviderWorker, never()).connectCarrierNetwork();
-    }
-
-    @Test
-    public void getWifiSliceItemRow_wifiNoInternetAccess_actionConnectToWifiSsid() {
-        when(mWifiSliceItem.getKey()).thenReturn("wifi_key");
-        when(mWifiSliceItem.getTitle()).thenReturn("wifi_ssid");
-        when(mWifiSliceItem.hasInternetAccess()).thenReturn(false);
-
-        ListBuilder.RowBuilder rowBuilder =
-                mMockProviderModelSlice.getWifiSliceItemRow(mWifiSliceItem);
-
-        assertThat(rowBuilder.getPrimaryAction().getTitle())
-                .isEqualTo("wifi_ssid");
-    }
-
-    @Test
-    public void getWifiSliceItemRow_wifiHasInternetAccess_actionConnectToCarrier() {
-        when(mWifiSliceItem.getTitle()).thenReturn("wifi_ssid");
-        when(mWifiSliceItem.hasInternetAccess()).thenReturn(true);
-
-        ListBuilder.RowBuilder rowBuilder =
-                mMockProviderModelSlice.getWifiSliceItemRow(mWifiSliceItem);
-
-        assertThat(rowBuilder.getPrimaryAction().getTitle())
-                .isEqualTo(ACTION_TITLE_CONNECT_TO_CARRIER);
     }
 }
