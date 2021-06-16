@@ -19,6 +19,7 @@ package com.android.settings.applications;
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.AppGlobals;
+import android.app.compat.CompatChanges;
 import android.content.Context;
 import android.content.pm.IPackageManager;
 import android.os.RemoteException;
@@ -63,14 +64,21 @@ public class AppStateAlarmsAndRemindersBridge extends AppStateBaseBridge {
         }
     }
 
+    private boolean isChangeEnabled(String packageName, int userId) {
+        return CompatChanges.isChangeEnabled(AlarmManager.REQUIRE_EXACT_ALARM_PERMISSION,
+                packageName, UserHandle.of(userId));
+    }
+
     /**
      * Returns information regarding {@link Manifest.permission#SCHEDULE_EXACT_ALARM} for the given
      * package and uid.
      */
     public AlarmsAndRemindersState createPermissionState(String packageName, int uid) {
-        final boolean permissionRequested = ArrayUtils.contains(mRequesterPackages, packageName);
-        final boolean permissionGranted = mAlarmManager.hasScheduleExactAlarm(packageName,
-                UserHandle.getUserId(uid));
+        final int userId = UserHandle.getUserId(uid);
+
+        final boolean permissionRequested = ArrayUtils.contains(mRequesterPackages, packageName)
+                && isChangeEnabled(packageName, userId);
+        final boolean permissionGranted = mAlarmManager.hasScheduleExactAlarm(packageName, userId);
         return new AlarmsAndRemindersState(permissionRequested, permissionGranted);
     }
 
