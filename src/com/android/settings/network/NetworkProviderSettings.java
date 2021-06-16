@@ -169,9 +169,14 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         return WifiPickerTracker.isVerboseLoggingEnabled();
     }
 
+    private boolean mIsWifiEntriesLoading;
     private boolean mIsWifiEntryListStale = true;
     private final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
         updateWifiEntryPreferences();
+        if (mIsWifiEntriesLoading) {
+            setLoading(false, false);
+            mIsWifiEntriesLoading = false;
+        }
     };
     private final Runnable mHideProgressBarRunnable = () -> {
         setProgressBarVisible(false);
@@ -251,6 +256,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                     .findViewById(R.id.progress_bar_animation);
             setProgressBarVisible(false);
         }
+        setLoading(true, false);
+        mIsWifiEntriesLoading = true;
     }
 
     @Override

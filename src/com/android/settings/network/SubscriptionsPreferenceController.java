@@ -277,12 +277,12 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
         final boolean isDataInService = tmForSubId.getDataState()
                 == TelephonyManager.DATA_CONNECTED;
-        final boolean isActiveCarrierNetwork =
+        final boolean isCarrierNetworkActive =
                 (mWifiPickerTrackerHelper != null)
-                        && mWifiPickerTrackerHelper.isActiveCarrierNetwork();
+                        && mWifiPickerTrackerHelper.isCarrierNetworkActive();
         String result = mSubsPrefCtrlInjector.getNetworkType(
-                mContext, mConfig, mTelephonyDisplayInfo, subId, isActiveCarrierNetwork);
-        if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isActiveCarrierNetwork) {
+                mContext, mConfig, mTelephonyDisplayInfo, subId, isCarrierNetworkActive);
+        if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isCarrierNetworkActive) {
             Log.i(TAG, "Active cellular network or active carrier network.");
             result = mContext.getString(R.string.preference_summary_default_combination,
                     mContext.getString(R.string.mobile_data_connection_active), result);
@@ -306,7 +306,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         final boolean isActiveCellularNetwork =
                 mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext);
         if (isActiveCellularNetwork || (mWifiPickerTrackerHelper != null)
-                        && mWifiPickerTrackerHelper.isActiveCarrierNetwork()) {
+                        && mWifiPickerTrackerHelper.isCarrierNetworkActive()) {
             icon.setTint(Utils.getColorAccentDefaultColor(mContext));
             return icon;
         }

@@ -37,7 +37,7 @@ public class TranscodeNotificationPreferenceController extends TogglePreferenceC
 
     @Override
     public boolean isChecked() {
-        return SystemProperties.getBoolean(TRANSCODE_NOTIFICATION_SYS_PROP_KEY, true);
+        return SystemProperties.getBoolean(TRANSCODE_NOTIFICATION_SYS_PROP_KEY, false);
     }
 
     @Override
