@@ -18,8 +18,6 @@ package com.android.settings.panel;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -95,11 +93,31 @@ public class InternetConnectivityPanelTest {
     private FragmentActivity mPanelActivity;
 
     private Context mContext;
+    private FakeHandlerInjector mFakeHandlerInjector;
     private InternetConnectivityPanel mPanel;
+
+    private class FakeHandlerInjector extends InternetConnectivityPanel.HandlerInjector {
+
+        private Runnable mRunnable;
+
+        FakeHandlerInjector(Context context) {
+            super(context);
+        }
+
+        @Override
+        public void postDelay(Runnable runnable) {
+            mRunnable = runnable;
+        }
+
+        public Runnable getRunnable() {
+            return mRunnable;
+        }
+    }
 
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
+        mFakeHandlerInjector = new FakeHandlerInjector(mContext);
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getMainThreadHandler()).thenReturn(mMainThreadHandler);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
@@ -109,6 +127,7 @@ public class InternetConnectivityPanelTest {
         mPanel.mIsProviderModelEnabled = true;
         mPanel.mInternetUpdater = mInternetUpdater;
         mPanel.mProviderModelSliceHelper = mProviderModelSliceHelper;
+        mPanel.mHandlerInjector = mFakeHandlerInjector;
     }
 
     @Test
@@ -295,36 +314,41 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void showProgressBar_wifiDisabled_hideProgress() {
+    public void updateProgressBar_wifiDisabled_hideProgress() {
         mPanel.mIsProgressBarVisible = true;
         doReturn(false).when(mInternetUpdater).isWifiEnabled();
         clearInvocations(mPanelContentCallback);
 
-        mPanel.showProgressBar();
+        mPanel.updateProgressBar();
 
         assertThat(mPanel.isProgressBarVisible()).isFalse();
         verify(mPanelContentCallback).onProgressBarVisibleChanged();
     }
 
     @Test
-    public void showProgressBar_noWifiScanResults_showProgressForever() {
+    public void updateProgressBar_noWifiScanResults_showProgressForever() {
+        mPanel.mIsScanningSubTitleShownOnce = false;
         mPanel.mIsProgressBarVisible = false;
         doReturn(true).when(mInternetUpdater).isWifiEnabled();
         List<ScanResult> noWifiScanResults = new ArrayList<>();
         doReturn(noWifiScanResults).when(mWifiManager).getScanResults();
         clearInvocations(mPanelContentCallback);
 
-        mPanel.showProgressBar();
+        mPanel.updateProgressBar();
 
-        assertThat(mPanel.isProgressBarVisible()).isTrue();
+        assertThat(mPanel.mIsProgressBarVisible).isTrue();
         verify(mPanelContentCallback).onProgressBarVisibleChanged();
         verify(mPanelContentCallback).onHeaderChanged();
-        verify(mMainThreadHandler, never())
-                .postDelayed(any() /* mHideProgressBarRunnable */, anyLong());
+
+        assertThat(mFakeHandlerInjector.getRunnable())
+                .isEqualTo(mPanel.mHideScanningSubTitleRunnable);
+        mFakeHandlerInjector.getRunnable().run();
+        assertThat(mPanel.mIsScanningSubTitleShownOnce).isTrue();
+        assertThat(mPanel.mIsProgressBarVisible).isTrue();
     }
 
     @Test
-    public void showProgressBar_hasWifiScanResults_showProgressDelayedHide() {
+    public void updateProgressBar_hasWifiScanResults_showProgressDelayedHide() {
         mPanel.mIsProgressBarVisible = false;
         doReturn(true).when(mInternetUpdater).isWifiEnabled();
         List<ScanResult> hasWifiScanResults = mock(ArrayList.class);
@@ -332,11 +356,15 @@ public class InternetConnectivityPanelTest {
         doReturn(hasWifiScanResults).when(mWifiManager).getScanResults();
         clearInvocations(mPanelContentCallback);
 
-        mPanel.showProgressBar();
+        mPanel.updateProgressBar();
 
         assertThat(mPanel.isProgressBarVisible()).isTrue();
         verify(mPanelContentCallback).onProgressBarVisibleChanged();
-        verify(mMainThreadHandler).postDelayed(any() /* mHideProgressBarRunnable */, anyLong());
+
+        assertThat(mFakeHandlerInjector.getRunnable())
+                .isEqualTo(mPanel.mHideProgressBarRunnable);
+        mFakeHandlerInjector.getRunnable().run();
+        assertThat(mPanel.mIsProgressBarVisible).isFalse();
     }
 
     @Test
