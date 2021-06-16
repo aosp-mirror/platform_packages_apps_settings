@@ -17,6 +17,7 @@
 package com.android.settings.gestures;
 
 import static android.os.UserHandle.USER_CURRENT;
+import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON_OVERLAY;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY;
@@ -30,11 +31,14 @@ import android.content.om.OverlayInfo;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
+import android.text.TextUtils;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.SettingsTutorialDialogWrapperActivity;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -176,7 +180,14 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     protected boolean setDefaultKey(String key) {
         setCurrentSystemNavigationMode(mOverlayManager, key);
         setIllustrationVideo(mVideoPreference, key);
-
+        if (TextUtils.equals(KEY_SYSTEM_NAV_GESTURAL, key)
+                && !isAccessibilityFloatingMenuEnabled()
+                && (isAnyServiceSupportAccessibilityButton() || isNavBarMagnificationEnabled())) {
+            final Intent intent = new Intent(getActivity(),
+                    SettingsTutorialDialogWrapperActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
         return true;
     }
 
@@ -248,6 +259,24 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                 videoPref.setVideo(R.raw.system_nav_3_button, R.drawable.system_nav_3_button);
                 break;
         }
+    }
+
+    private boolean isAnyServiceSupportAccessibilityButton() {
+        final AccessibilityManager ams = getContext().getSystemService(AccessibilityManager.class);
+        final List<String> targets = ams.getAccessibilityShortcutTargets(
+                AccessibilityManager.ACCESSIBILITY_BUTTON);
+        return !targets.isEmpty();
+    }
+
+    private boolean isNavBarMagnificationEnabled() {
+        return Settings.Secure.getInt(getContext().getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, 0) == 1;
+    }
+
+    private boolean isAccessibilityFloatingMenuEnabled() {
+        return Settings.Secure.getInt(getContext().getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, /* def= */ -1)
+                == ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
