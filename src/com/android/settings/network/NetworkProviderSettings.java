@@ -169,14 +169,18 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         return WifiPickerTracker.isVerboseLoggingEnabled();
     }
 
-    private boolean mIsWifiEntriesLoading;
+    private boolean mIsViewLoading;
+    private final Runnable mRemoveLoadingRunnable = () -> {
+        if (mIsViewLoading) {
+            setLoading(false, false);
+            mIsViewLoading = false;
+        }
+    };
+
     private boolean mIsWifiEntryListStale = true;
     private final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
         updateWifiEntryPreferences();
-        if (mIsWifiEntriesLoading) {
-            setLoading(false, false);
-            mIsWifiEntriesLoading = false;
-        }
+        getView().postDelayed(mRemoveLoadingRunnable, 10);
     };
     private final Runnable mHideProgressBarRunnable = () -> {
         setProgressBarVisible(false);
@@ -250,14 +254,23 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final Activity activity = getActivity();
-        if (activity != null) {
-            mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
-                    .findViewById(R.id.progress_bar_animation);
-            setProgressBarVisible(false);
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
         }
-        setLoading(true, false);
-        mIsWifiEntriesLoading = true;
+
+        mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
+                .findViewById(R.id.progress_bar_animation);
+        setProgressBarVisible(false);
+
+        mWifiManager = activity.getSystemService(WifiManager.class);
+        if (mWifiManager != null) {
+            setLoading(true, false);
+            mIsViewLoading = true;
+            if (!mWifiManager.isWifiEnabled()) {
+                getView().postDelayed(mRemoveLoadingRunnable, 100);
+            }
+        }
     }
 
     @Override
@@ -338,12 +351,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 new WifiPickerTrackerHelper(getSettingsLifecycle(), getContext(), this);
         mWifiPickerTracker = mWifiPickerTrackerHelper.getWifiPickerTracker();
         mInternetUpdater = new InternetUpdater(getContext(), getSettingsLifecycle(), this);
-
-        final Activity activity = getActivity();
-
-        if (activity != null) {
-            mWifiManager = getActivity().getSystemService(WifiManager.class);
-        }
 
         mConnectListener = new WifiConnectListener(getActivity());
 
