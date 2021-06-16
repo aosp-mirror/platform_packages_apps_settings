@@ -18,7 +18,6 @@ package com.android.settings.applications.appinfo;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
-import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -49,25 +48,20 @@ public class AlarmsAndRemindersDetails extends AppInfoWithHeader
     private AppOpsManager mAppOpsManager;
     private RestrictedSwitchPreference mSwitchPref;
     private AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState mPermissionState;
-    private ActivityManager mActivityManager;
     private volatile Boolean mUncommittedState;
 
     /**
      * Returns the string that states whether the app has access to
      * {@link android.Manifest.permission#SCHEDULE_EXACT_ALARM}.
      */
-    public static int getSummary(Context context, AppEntry entry) {
-        final AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState state;
-        if (entry.extraInfo instanceof AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState) {
-            state = (AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState) entry.extraInfo;
-        } else {
-            state = new AppStateAlarmsAndRemindersBridge(context, /*appState=*/null,
-                    /*callback=*/null).createPermissionState(entry.info.packageName,
-                    entry.info.uid);
-        }
+    public static CharSequence getSummary(Context context, AppEntry entry) {
+        final AppStateAlarmsAndRemindersBridge.AlarmsAndRemindersState state =
+                new AppStateAlarmsAndRemindersBridge(context, /*appState=*/null,
+                        /*callback=*/null).createPermissionState(entry.info.packageName,
+                        entry.info.uid);
 
-        return state.isAllowed() ? R.string.app_permission_summary_allowed
-                : R.string.app_permission_summary_not_allowed;
+        return context.getString(state.isAllowed() ? R.string.app_permission_summary_allowed
+                : R.string.app_permission_summary_not_allowed);
     }
 
     @Override
@@ -77,7 +71,6 @@ public class AlarmsAndRemindersDetails extends AppInfoWithHeader
         final Context context = getActivity();
         mAppBridge = new AppStateAlarmsAndRemindersBridge(context, mState, /*callback=*/null);
         mAppOpsManager = context.getSystemService(AppOpsManager.class);
-        mActivityManager = context.getSystemService(ActivityManager.class);
 
         if (savedInstanceState != null) {
             mUncommittedState = (Boolean) savedInstanceState.get(UNCOMMITTED_STATE_KEY);
@@ -115,10 +108,6 @@ public class AlarmsAndRemindersDetails extends AppInfoWithHeader
         final int uid = mPackageInfo.applicationInfo.uid;
         mAppOpsManager.setUidMode(AppOpsManager.OPSTR_SCHEDULE_EXACT_ALARM, uid,
                 newState ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
-        if (!newState) {
-            mActivityManager.killUid(uid,
-                    AppOpsManager.OPSTR_SCHEDULE_EXACT_ALARM + " no longer allowed.");
-        }
     }
 
     private void logPermissionChange(boolean newState, String packageName) {
