@@ -258,21 +258,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     }
 
     private void setupForMultiBiometricEnroll() {
-        final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
-        final FaceManager faceManager = getSystemService(FaceManager.class);
-        final List<FingerprintSensorPropertiesInternal> fpProperties =
-                fingerprintManager.getSensorPropertiesInternal();
-        final List<FaceSensorPropertiesInternal> faceProperties =
-                faceManager.getSensorPropertiesInternal();
-
-        // This would need to be updated for devices with multiple sensors of the same modality
-        mIsFaceEnrollable = !faceProperties.isEmpty() &&
-                faceManager.getEnrolledFaces(mUserId).size()
-                        < faceProperties.get(0).maxEnrollmentsPerUser;
-        mIsFingerprintEnrollable = !fpProperties.isEmpty() &&
-                fingerprintManager.getEnrolledFingerprints(mUserId).size()
-                        < fpProperties.get(0).maxEnrollmentsPerUser;
-
         if (!mConfirmingCredentials) {
             mConfirmingCredentials = true;
             if (!userHasPassword(mUserId)) {
@@ -284,7 +269,33 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     }
 
     private void startMultiBiometricEnroll(Intent data) {
+        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        final FingerprintManager fingerprintManager = getSystemService(FingerprintManager.class);
+        final FaceManager faceManager = getSystemService(FaceManager.class);
+        final List<FingerprintSensorPropertiesInternal> fpProperties =
+                fingerprintManager.getSensorPropertiesInternal();
+        final List<FaceSensorPropertiesInternal> faceProperties =
+                faceManager.getSensorPropertiesInternal();
+
         mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(data);
+
+        if (isSetupWizard) {
+            // This would need to be updated for devices with multiple sensors of the same modality
+            mIsFaceEnrollable = !faceProperties.isEmpty()
+                    && faceManager.getEnrolledFaces(mUserId).size() == 0;
+            mIsFingerprintEnrollable = !fpProperties.isEmpty()
+                    && fingerprintManager.getEnrolledFingerprints(mUserId).size() == 0;
+        } else {
+            // This would need to be updated for devices with multiple sensors of the same modality
+            mIsFaceEnrollable = !faceProperties.isEmpty()
+                    && faceManager.getEnrolledFaces(mUserId).size()
+                    < faceProperties.get(0).maxEnrollmentsPerUser;
+            mIsFingerprintEnrollable = !fpProperties.isEmpty()
+                    && fingerprintManager.getEnrolledFingerprints(mUserId).size()
+                    < fpProperties.get(0).maxEnrollmentsPerUser;
+
+        }
+
         mMultiBiometricEnrollHelper = new MultiBiometricEnrollHelper(this, mUserId,
                 mIsFaceEnrollable, mIsFingerprintEnrollable, mGkPwHandle);
         mMultiBiometricEnrollHelper.startNextStep();
