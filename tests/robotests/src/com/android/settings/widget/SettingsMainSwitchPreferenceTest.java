@@ -24,6 +24,10 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.preference.PreferenceViewHolder;
+
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +43,7 @@ public class SettingsMainSwitchPreferenceTest {
     @Mock
     private EnforcedAdmin mEnforcedAdmin;
     private SettingsMainSwitchPreference mPreference;
+    private PreferenceViewHolder mHolder;
 
     @Before
     public void setUp() {
@@ -48,6 +53,9 @@ public class SettingsMainSwitchPreferenceTest {
         mPreference = new SettingsMainSwitchPreference(context);
         ReflectionHelpers.setField(mPreference, "mEnforcedAdmin", mEnforcedAdmin);
         ReflectionHelpers.setField(mPreference, "mMainSwitchBar", switchBar);
+        final View rootView = View.inflate(context, R.layout.preference_widget_main_switch,
+                null /* parent */);
+        mHolder = PreferenceViewHolder.createInstanceForTests(rootView);
     }
 
     @Test
@@ -59,5 +67,23 @@ public class SettingsMainSwitchPreferenceTest {
                 com.android.settingslib.widget.R.id.restricted_icon);
 
         assertThat(restrictedIcon.getVisibility() == View.VISIBLE).isTrue();
+    }
+
+    @Test
+    public void show_preferenceShouldDisplay() {
+        mPreference.show();
+
+        mPreference.onBindViewHolder(mHolder);
+
+        assertThat(mPreference.isShowing()).isTrue();
+    }
+
+    @Test
+    public void hide_preferenceShouldNotDisplay() {
+        mPreference.hide();
+
+        mPreference.onBindViewHolder(mHolder);
+
+        assertThat(mPreference.isShowing()).isFalse();
     }
 }
