@@ -177,6 +177,19 @@ public class BiometricUtils {
     }
 
     /**
+     * Start an activity that prompts the user to hand the device to their parent or guardian.
+     * @param context caller's context
+     * @param activityIntent The intent that started the caller's activity
+     * @return Intent for starting BiometricHandoffActivity
+     */
+    public static Intent getHandoffToParentIntent(@NonNull Context context,
+            @NonNull Intent activityIntent) {
+        final Intent intent = new Intent(context, BiometricHandoffActivity.class);
+        WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
+        return intent;
+    }
+
+    /**
      * @param activity Reference to the calling activity, used to startActivity
      * @param intent Intent pointing to the enrollment activity
      * @param requestCode If non-zero, will invoke startActivityForResult instead of startActivity
