@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
+import android.hardware.biometrics.ParentalControlsUtilsInternal;
 import android.os.Build;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -71,38 +72,12 @@ public class ParentalControlsUtils {
     static RestrictedLockUtils.EnforcedAdmin parentConsentRequiredInternal(
             @NonNull DevicePolicyManager dpm, @BiometricAuthenticator.Modality int modality,
             @NonNull UserHandle userHandle) {
-        final ComponentName cn = dpm.getProfileOwnerOrDeviceOwnerSupervisionComponent(userHandle);
-        if (cn == null) {
-            return null;
-        }
-
-        final int keyguardDisabledFeatures = dpm.getKeyguardDisabledFeatures(cn);
-        final boolean dpmFpDisabled = containsFlag(keyguardDisabledFeatures,
-                DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
-        final boolean dpmFaceDisabled = containsFlag(keyguardDisabledFeatures,
-                DevicePolicyManager.KEYGUARD_DISABLE_FACE);
-        final boolean dpmIrisDisabled = containsFlag(keyguardDisabledFeatures,
-                DevicePolicyManager.KEYGUARD_DISABLE_IRIS);
-
-        final boolean consentRequired;
-        if (containsFlag(modality, BiometricAuthenticator.TYPE_FINGERPRINT) && dpmFpDisabled) {
-            consentRequired = true;
-        } else if (containsFlag(modality, BiometricAuthenticator.TYPE_FACE) && dpmFaceDisabled) {
-            consentRequired = true;
-        } else if (containsFlag(modality, BiometricAuthenticator.TYPE_IRIS) && dpmIrisDisabled) {
-            consentRequired = true;
-        } else {
-            consentRequired = false;
-        }
-
-        if (consentRequired) {
+        if (ParentalControlsUtilsInternal.parentConsentRequired(dpm, modality, userHandle)) {
+            final ComponentName cn =
+                    ParentalControlsUtilsInternal.getSupervisionComponentName(dpm, userHandle);
             return new RestrictedLockUtils.EnforcedAdmin(cn, userHandle);
         } else {
             return null;
         }
-    }
-
-    private static boolean containsFlag(int haystack, int needle) {
-        return (haystack & needle) != 0;
     }
 }
