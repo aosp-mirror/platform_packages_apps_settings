@@ -278,7 +278,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Välj efter UTC-förskjutning"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Datum"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Tid"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Lås när skärmens tidsgräns har passerats"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Lås när skärmens tidsgräns har nåtts"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter tidsgränsen"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Omedelbart efter tidsgränsen, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> efter tidsgränsen, utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -441,7 +441,7 @@
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registreringen slutfördes inte"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Tidsgränsen för registreringen av fingeravtryck har uppnåtts. Försök igen."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Det gick inte att registrera fingeravtrycket. Försök igen eller använd ett annat finger."</string>
-    <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Lägg till ett till"</string>
+    <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Lägg till ännu ett"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Nästa"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Förutom att låsa upp mobilen kan du använda fingeravtrycket för att godkänna köp och åtkomst för appar. "<annotation id="url">"Läs mer"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Alternativet för skärmlås har inaktiverats. Kontakta organisationens administratör om du vill veta mer. "<annotation id="admin_details">"Mer information"</annotation>\n\n"Du kan fortfarande auktorisera köp och appåtkomst med fingeravtrycket. "<annotation id="url">"Läs mer"</annotation></string>
@@ -807,8 +807,8 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"I flygplansläge"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Avisering för offentliga nätverk"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Meddela om tillgängliga offentliga nätverk av hög kvalitet"</string>
-    <string name="wifi_wakeup" msgid="3834327315861781611">"Aktivera Wi‑Fi automatiskt"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi aktiveras i närheten av sparade nätverk av hög kvalitet, till exempel ditt hemnätverk"</string>
+    <string name="wifi_wakeup" msgid="3834327315861781611">"Aktivera wifi automatiskt"</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wifi aktiveras i närheten av sparade nätverk av hög kvalitet, till exempel ditt hemnätverk"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Ej tillgängligt eftersom platsåtkomst har inaktiverats. Aktivera "<annotation id="link">"plats"</annotation>"."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"Detta är inte tillgängligt eftersom Wi‑Fi-sökning har inaktiverats"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"Du måste välja en leverantör av nätverksbetyg om du vill använda nätverket"</string>
@@ -854,7 +854,7 @@
     <string name="wifi_setup_wps" msgid="4303694722593999931">"Automatisk installation (WPS)"</string>
     <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"Vill du aktivera wifi-sökning?"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Du måste aktivera wifi-sökning för att kunna aktivera wifi automatiskt."</string>
-    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Med hjälp av wifi-sökning kan appar och tjänster söka efter Wi‑Fi-nätverk när som helst, även när Wi‑Fi är inaktiverat. Funktionen kan till exempel användas till att förbättra platsbaserade funktioner och tjänster."</string>
+    <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"Med hjälp av wifi-sökning kan appar och tjänster söka efter wifi-nätverk när som helst, även när wifi är inaktiverat. Funktionen kan till exempel användas till att förbättra platsbaserade funktioner och tjänster."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Aktivera"</string>
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi‑Fi-sökning har aktiverats"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Avancerade alternativ"</string>
@@ -902,7 +902,7 @@
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Skanna QR-kod"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Anslut till <xliff:g id="SSID">%1$s</xliff:g> genom att centrera QR-koden i fönstret nedan"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Anslut till wifi genom att skanna QR-koden"</string>
-    <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Dela Wi‑Fi"</string>
+    <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Dela wifi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Anslut till <xliff:g id="SSID">%1$s</xliff:g> och dela lösenordet genom att skanna QR-koden"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Anslut till <xliff:g id="SSID">%1$s</xliff:g> genom att skanna QR-koden"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Försök igen. Om problemet kvarstår kontaktar du enhetens tillverkare"</string>
@@ -1017,7 +1017,7 @@
     <string name="wifi_dns2" msgid="8494337355389723965">"DNS 2"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gateway"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Nätverksprefixets längd"</string>
-    <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
+    <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wifi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Enhetsinformation"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Kom ihåg anslutningen"</string>
     <string name="wifi_p2p_menu_search" msgid="8383306178784876840">"Sök efter enheter"</string>
@@ -1588,7 +1588,7 @@
     <string name="restore_default_apn" msgid="6596048535642130689">"Återställer standardinställningar för APN."</string>
     <string name="menu_restore" msgid="4310539620115151551">"Återställ standardinst."</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Återställning av standardinställningar för APN har slutförts."</string>
-    <string name="reset_dashboard_title" msgid="7423200250697886918">"Återställningsalternativ"</string>
+    <string name="reset_dashboard_title" msgid="7423200250697886918">"Återställningsalt."</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Nätverk, appar och enheter kan återställas"</string>
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Appar kan återställas"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Återställ wifi, mobildata och Bluetooth"</string>
@@ -1695,7 +1695,7 @@
     <string name="mobile_no_provisioning_url" msgid="609462719893503773">"<xliff:g id="OPERATOR">%1$s</xliff:g> har ingen känd administrationswebbplats"</string>
     <string name="mobile_insert_sim_card" msgid="3639245241283948038">"För in SIM-kortet och starta om"</string>
     <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Anslut till internet"</string>
-    <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nya platsbegäranden"</string>
+    <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nya platsförfrågningar"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Visa alla"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Platstjänster"</string>
     <string name="location_title" msgid="5819154746934945021">"Min plats"</string>
@@ -1713,7 +1713,7 @@
     <string name="location_high_battery_use" msgid="4277318891200626524">"Hög batterianvändning"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Låg batterianvändning"</string>
     <string name="location_scanning_screen_title" msgid="2346125609614249968">"Platssökning med Wi‑Fi och Bluetooth"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi‑Fi-sökning"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wifi-sökning"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Tillåt att appar och tjänster söker efter Wi‑Fi-nätverk när som helst, även när Wi‑Fi är inaktiverat. Funktionen kan till exempel användas till att förbättra platsbaserade funktioner och tjänster."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth-sökning"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Tillåt att appar och tjänster söker efter enheter i närheten när som helst, även när Bluetooth är inaktiverat. Funktionen kan till exempel användas till att förbättra platsbaserade funktioner och tjänster."</string>
@@ -1825,7 +1825,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Gör grafiskt lösenord synligt"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Gör det grafiska lösenordet för profilen synligt"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrera vid tryck"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Strömbrytaren låser direkt"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Strömbrytaren låses direkt"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Ange grafiskt lösenord"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Byt grafiskt lösenord"</string>
@@ -2798,7 +2798,7 @@
     <string name="misc_files_selected_count_bytes" msgid="7622766714974500289">"<xliff:g id="NUMBER">%1$s</xliff:g> av <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="7898929601615536401">"Markera alla"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"Dataanvändning"</string>
-    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobildata och Wi‑Fi"</string>
+    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Mobildata och wifi"</string>
     <string name="data_usage_accounting" msgid="6832015632699116754">"Operatörens dataredovisning kan skilja sig från din enhets dataredovisning."</string>
     <string name="data_usage_app" msgid="6367974637783240699">"Appanvändning"</string>
     <string name="data_usage_app_info_label" msgid="3542220416056122841">"APPINFO"</string>
@@ -3428,7 +3428,7 @@
     <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Meddelanden, påminnelser och händelser döljs när Stör ej har aktiverats, utom det som du har tillåtit ovan. Du kan anpassa inställningarna så att dina vänner, familj eller andra kontakter kan nå dig."</string>
     <string name="zen_onboarding_ok" msgid="8764248406533833392">"Klar"</string>
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"Inställningar"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Inga synliga eller hörbara aviseringar"</string>
+    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Inga synliga/hörbara aviseringar"</string>
     <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Aviseringar hörs inte"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Aviseringar varken syns eller hörs. Samtal från stjärnmärkta kontakter och personer som ringer upp flera gånger släpps fram."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Aktuell inställning)"</string>
@@ -4454,7 +4454,7 @@
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigering med rörelser"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Du öppnar startskärmen genom att svepa uppåt från skärmens nederkant. Byt app genom att svepa uppåt från nederkanten, hålla stilla och sedan släppa. Gå tillbaka genom att svepa från skärmens höger- eller vänsterkant."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigering med tre knappar"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Öppna startskärmen, gå tillbaka och byt app med knappar längst ned på skärmen."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Gå tillbaka, öppna startskärmen och byt app med knappar längst ned på skärmen."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"systemnavigering, navigering med två knappar, navigering med tre knappar, navigering med rörelser, svepa"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Stöds inte av din standardapp för startskärm, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Byt standardapp för startskärm"</string>
