@@ -188,7 +188,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             PowerGaugePreference pgp = (PowerGaugePreference) preference;
             BatteryEntry entry = pgp.getInfo();
             AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity,
-                    mFragment, entry, pgp.getPercent());
+                    mFragment, entry, pgp.getPercent(), /*isValidToShowSummary=*/ true);
             return true;
         }
         return false;

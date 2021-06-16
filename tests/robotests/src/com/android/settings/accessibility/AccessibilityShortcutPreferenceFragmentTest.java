@@ -22,6 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
@@ -30,6 +31,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -179,6 +181,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
                 AccessibilityUtil.UserShortcutType.SOFTWARE
                         | AccessibilityUtil.UserShortcutType.HARDWARE);
         mFragment.onCreate(savedInstanceState);
+        mFragment.onAttach(mContext);
         mFragment.setupEditShortcutDialog(dialog);
         final int value = mFragment.getShortcutTypeCheckBoxValue();
         mFragment.saveNonEmptyUserShortcutType(value);
@@ -189,6 +192,20 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         assertThat(expectedType).isEqualTo(
                 AccessibilityUtil.UserShortcutType.SOFTWARE
                         | AccessibilityUtil.UserShortcutType.HARDWARE);
+    }
+
+    @Test
+    public void showGeneralCategory_shouldInitCategory() {
+        final Bundle savedInstanceState = new Bundle();
+        when(mFragment.showGeneralCategory()).thenReturn(true);
+        mFragment.onCreate(savedInstanceState);
+
+        verify(mFragment).initGeneralCategory();
+    }
+
+    @Test
+    public void showGeneralCategory_shouldSetDefaultDescription() {
+        assertThat(mFragment.getGeneralCategoryDescription(null)).isNotNull();
     }
 
     private void callEmptyOnClicked(DialogInterface dialog, int which) {}
@@ -215,8 +232,34 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         }
 
         @Override
+        public int getUserShortcutTypes() {
+            return 0;
+        }
+
+        @Override
+        protected CharSequence getGeneralCategoryDescription(@Nullable CharSequence title) {
+            return super.getGeneralCategoryDescription(null);
+        }
+
+        @Override
+        protected boolean showGeneralCategory() {
+            // For showGeneralCategory_shouldInitCategory()
+            return true;
+        }
+
+        @Override
         public int getMetricsCategory() {
             return 0;
+        }
+
+        @Override
+        protected int getPreferenceScreenResId() {
+            return 0;
+        }
+
+        @Override
+        protected String getLogTag() {
+            return null;
         }
     };
 }
