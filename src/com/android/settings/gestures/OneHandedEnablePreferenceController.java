@@ -17,19 +17,23 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /**
- * The controller to handle one-handed mode enable or disable state.
- **/
+ * Preference controller for One-handed mode shortcut settings
+ */
 public class OneHandedEnablePreferenceController extends BasePreferenceController {
+
+    private static final String ONE_HANDED_ENABLED = Settings.Secure.ONE_HANDED_MODE_ENABLED;
 
     public OneHandedEnablePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
+    @Override
     public int getAvailabilityStatus() {
         return OneHandedSettingsUtils.isSupportOneHandedMode() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
@@ -40,4 +44,5 @@ public class OneHandedEnablePreferenceController extends BasePreferenceControlle
                 OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)
                         ? R.string.gesture_setting_on : R.string.gesture_setting_off);
     }
+
 }

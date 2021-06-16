@@ -77,7 +77,7 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
                 Process.THREAD_PRIORITY_BACKGROUND);
         mWorkerThread.start();
 
-        mWifiPickerTracker =  FeatureFactory.getFactory(context)
+        mWifiPickerTracker = FeatureFactory.getFactory(context)
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(lifecycle, context,
                 new Handler(Looper.getMainLooper()),
@@ -139,8 +139,8 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
         return true;
     }
 
-    /** Confirms connection of the carrier network */
-    public boolean isActiveCarrierNetwork() {
+    /** Confirms connection of the carrier network connected with the internet access */
+    public boolean isCarrierNetworkActive() {
         final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
         if (mergedCarrierEntry != null) {
             return mergedCarrierEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED
