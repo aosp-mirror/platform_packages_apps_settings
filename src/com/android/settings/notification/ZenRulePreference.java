@@ -168,7 +168,7 @@ public class ZenRulePreference extends TwoTargetPreference {
                 : isEvent ? ZenModeEventRuleSettings.ACTION : "";
         ComponentInfo si = mServiceListing.findService(rule.getOwner());
         ComponentName settingsActivity = AbstractZenModeAutomaticRulePreferenceController.
-                getSettingsActivity(rule, si);
+                getSettingsActivity(mPm, rule, si);
         mIntent = AbstractZenModeAutomaticRulePreferenceController.getRuleIntent(action,
                 settingsActivity, mId);
         if (mIntent.resolveActivity(mPm) == null) {
