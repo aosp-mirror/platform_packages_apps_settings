@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * A listener for active subscription change
  */
-public abstract class ActiveSubsciptionsListener
+public abstract class ActiveSubscriptionsListener
         extends SubscriptionManager.OnSubscriptionsChangedListener
         implements AutoCloseable {
 
@@ -73,7 +73,7 @@ public abstract class ActiveSubsciptionsListener
      * @param looper {@code Looper} of this listener
      * @param context {@code Context} of this listener
      */
-    public ActiveSubsciptionsListener(Looper looper, Context context) {
+    public ActiveSubscriptionsListener(Looper looper, Context context) {
         this(looper, context, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
     }
 
@@ -84,7 +84,7 @@ public abstract class ActiveSubsciptionsListener
      * @param context {@code Context} of this listener
      * @param subscriptionId for subscription on this listener
      */
-    public ActiveSubsciptionsListener(Looper looper, Context context, int subscriptionId) {
+    public ActiveSubscriptionsListener(Looper looper, Context context, int subscriptionId) {
         super(looper);
         mLooper = looper;
         mContext = context;
