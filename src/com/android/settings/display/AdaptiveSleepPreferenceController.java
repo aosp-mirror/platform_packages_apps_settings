@@ -90,6 +90,7 @@ public class AdaptiveSleepPreferenceController {
         if (enforcedAdmin != null) {
             mPreference.setDisabledByAdmin(enforcedAdmin);
         } else {
+            mPreference.setChecked(isChecked());
             mPreference.setEnabled(hasSufficientPermission(mPackageManager) && !isCameraLocked()
                     && !isPowerSaveMode());
         }

@@ -96,11 +96,6 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
         mNotificationAssistantPreferenceController.setBackend(new NotificationBackend());
     }
 
-    @Override
-    protected boolean isParalleledControllers() {
-        return true;
-    }
-
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Application app, Fragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();

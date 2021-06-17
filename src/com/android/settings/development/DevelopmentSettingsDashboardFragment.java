@@ -402,11 +402,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         return mPreferenceControllers;
     }
 
-    @Override
-    protected boolean isParalleledControllers() {
-        return true;
-    }
-
     private void registerReceivers() {
         LocalBroadcastManager.getInstance(getContext())
                 .registerReceiver(mEnableAdbReceiver, new IntentFilter(
