@@ -38,7 +38,6 @@ import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSliceTest;
 import com.android.settings.testutils.shadow.ShadowUserManager;
-import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import org.junit.Before;
@@ -59,13 +58,12 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class,
-        SettingsHomepageActivityTest.ShadowSuggestionFeatureProviderImpl.class, ShadowUtils.class})
+        SettingsHomepageActivityTest.ShadowSuggestionFeatureProviderImpl.class})
 public class SettingsHomepageActivityTest {
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowUtils.setIsPageTransitionEnabled(false);
     }
 
     @Test
