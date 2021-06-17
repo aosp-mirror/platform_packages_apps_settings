@@ -38,13 +38,16 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.accounts.AvatarViewMixin;
+import com.android.settings.core.CategoryMixin;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
-public class SettingsHomepageActivity extends FragmentActivity {
+/** Settings homepage activity */
+public class SettingsHomepageActivity extends FragmentActivity implements
+        CategoryMixin.CategoryHandler {
 
     private static final String TAG = "SettingsHomepageActivity";
 
@@ -52,6 +55,12 @@ public class SettingsHomepageActivity extends FragmentActivity {
 
     private View mHomepageView;
     private View mSuggestionView;
+    private CategoryMixin mCategoryMixin;
+
+    @Override
+    public CategoryMixin getCategoryMixin() {
+        return mCategoryMixin;
+    }
 
     /**
      * Shows the homepage and shows/hides the suggestion together. Only allows to be executed once
@@ -87,6 +96,8 @@ public class SettingsHomepageActivity extends FragmentActivity {
                 .initSearchToolbar(this /* activity */, toolbar, SettingsEnums.SETTINGS_HOMEPAGE);
 
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
+        mCategoryMixin = new CategoryMixin(this);
+        getLifecycle().addObserver(mCategoryMixin);
 
         if (!getSystemService(ActivityManager.class).isLowRamDevice()) {
             // Only allow features on high ram devices.
