@@ -17,13 +17,18 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:persistent="false"
     android:title="@string/reduce_bright_colors_preference_title">
 
-    <com.android.settings.widget.SeekBarPreference
+    <com.android.settings.widget.LabeledSeekBarPreference
         android:key="rbc_intensity"
         android:persistent="false"
-        android:title="@string/reduce_bright_colors_intensity_preference_title"/>
+        android:title="@string/reduce_bright_colors_intensity_preference_title"
+        settings:textStart="@string/reduce_bright_colors_intensity_start_label"
+        settings:textEnd="@string/reduce_bright_colors_intensity_end_label"
+        settings:tickMark="@android:color/transparent"
+    />
 
     <SwitchPreference
         android:key="rbc_persist"
