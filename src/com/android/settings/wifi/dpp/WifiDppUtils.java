@@ -65,7 +65,7 @@ public class WifiDppUtils {
      */
     static final String TAG_FRAGMENT_ADD_DEVICE = "add_device_fragment";
 
-    /** The data is from {@code com.android.settingslib.wifi.AccessPoint.securityToString} */
+    /** The data is one of the static String SECURITY_* in {@link WifiQrCode} */
     static final String EXTRA_WIFI_SECURITY = "security";
 
     /** The data corresponding to {@code WifiConfiguration} SSID */
@@ -82,10 +82,6 @@ public class WifiDppUtils {
 
     /** The data to recognize if it's a Wi-Fi hotspot for configuration */
     static final String EXTRA_IS_HOTSPOT = "isHotspot";
-
-    /** Used by {@link android.provider.Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_URI} to
-     * indicate test mode UI should be shown. Test UI does not make API calls. Value is a boolean.*/
-    static final String EXTRA_TEST = "test";
 
     /**
      * Default status code for Easy Connect
@@ -149,7 +145,7 @@ public class WifiDppUtils {
         return wifiConfiguration.preSharedKey;
     }
 
-    private static String removeFirstAndLastDoubleQuotes(String str) {
+    static String removeFirstAndLastDoubleQuotes(String str) {
         if (TextUtils.isEmpty(str)) {
             return str;
         }
@@ -261,36 +257,6 @@ public class WifiDppUtils {
      *
      * @param context     The context to use for the content resolver
      * @param wifiManager An instance of {@link WifiManager}
-     * @param accessPoint An instance of {@link AccessPoint}
-     * @return Intent for launching QR code scanner
-     */
-    public static Intent getConfiguratorQrCodeScannerIntentOrNull(Context context,
-            WifiManager wifiManager, AccessPoint accessPoint) {
-        final Intent intent = new Intent(context, WifiDppConfiguratorActivity.class);
-        if (isSupportConfiguratorQrCodeScanner(context, accessPoint)) {
-            intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
-        } else {
-            return null;
-        }
-
-        final WifiConfiguration wifiConfiguration = accessPoint.getConfig();
-        setConfiguratorIntentExtra(intent, wifiManager, wifiConfiguration);
-
-        if (wifiConfiguration.networkId == WifiConfiguration.INVALID_NETWORK_ID) {
-            throw new IllegalArgumentException("Invalid network ID");
-        } else {
-            intent.putExtra(EXTRA_WIFI_NETWORK_ID, wifiConfiguration.networkId);
-        }
-
-        return intent;
-    }
-
-    /**
-     * Returns an intent to launch QR code scanner. It may return null if the security is not
-     * supported by QR code scanner.
-     *
-     * @param context     The context to use for the content resolver
-     * @param wifiManager An instance of {@link WifiManager}
      * @param wifiEntry An instance of {@link WifiEntry}
      * @return Intent for launching QR code scanner
      */
@@ -335,7 +301,11 @@ public class WifiDppUtils {
 
         final String ssid = removeFirstAndLastDoubleQuotes(softApConfiguration.getSsid());
         String security;
-        if (softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
+        final int securityType = softApConfiguration.getSecurityType();
+        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE) {
+            security = WifiQrCode.SECURITY_SAE;
+        } else if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
+                || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION) {
             security = WifiQrCode.SECURITY_WPA_PSK;
         } else {
             security = WifiQrCode.SECURITY_NO_PASSWORD;
@@ -439,20 +409,6 @@ public class WifiDppUtils {
     }
 
     /**
-     * Checks if QR code scanner supports to config other devices with the Wi-Fi network
-     *
-     * @param context The context to use for {@link WifiManager#isEasyConnectSupported()}
-     * @param accessPoint The {@link AccessPoint} of the Wi-Fi network
-     */
-    public static boolean isSupportConfiguratorQrCodeScanner(Context context,
-            AccessPoint accessPoint) {
-        if (accessPoint.isPasspoint()) {
-            return false;
-        }
-        return isSupportWifiDpp(context, accessPoint.getSecurity());
-    }
-
-    /**
      * Checks if QR code generator supports to config other devices with the Wi-Fi network
      *
      * @param context The context to use for {@code WifiManager}
@@ -470,56 +426,55 @@ public class WifiDppUtils {
      * Checks if this device supports to be configured by the Wi-Fi network of the security
      *
      * @param context The context to use for {@code WifiManager}
-     * @param accesspointSecurity The security constants defined in {@link AccessPoint}
+     * @param wifiEntrySecurity The security constants defined in {@link WifiEntry}
      */
-    public static boolean isSupportEnrolleeQrCodeScanner(Context context,
-            int accesspointSecurity) {
-        return isSupportWifiDpp(context, accesspointSecurity) ||
-                isSupportZxing(context, accesspointSecurity);
+    public static boolean isSupportEnrolleeQrCodeScanner(Context context, int wifiEntrySecurity) {
+        return isSupportWifiDpp(context, wifiEntrySecurity)
+                || isSupportZxing(context, wifiEntrySecurity);
     }
 
     private static boolean isSupportHotspotConfiguratorQrCodeGenerator(
             SoftApConfiguration softApConfiguration) {
-        // QR code generator produces QR code with ZXing's Wi-Fi network config format,
-        // it supports PSK and WEP and non security
-        // KeyMgmt.NONE is for WEP or non security
-        return softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
-                || softApConfiguration.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_OPEN;
+        final int securityType = softApConfiguration.getSecurityType();
+        return securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE
+                || securityType == SoftApConfiguration.SECURITY_TYPE_WPA3_SAE_TRANSITION
+                || securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
+                || securityType == SoftApConfiguration.SECURITY_TYPE_OPEN;
     }
 
-    private static boolean isSupportWifiDpp(Context context, int accesspointSecurity) {
+    private static boolean isSupportWifiDpp(Context context, int wifiEntrySecurity) {
         if (!isWifiDppEnabled(context)) {
             return false;
         }
 
         // DPP 1.0 only supports SAE and PSK.
         final WifiManager wifiManager = context.getSystemService(WifiManager.class);
-        switch (accesspointSecurity) {
-            case AccessPoint.SECURITY_SAE:
+        switch (wifiEntrySecurity) {
+            case WifiEntry.SECURITY_SAE:
                 if (wifiManager.isWpa3SaeSupported()) {
                     return true;
                 }
                 break;
-            case AccessPoint.SECURITY_PSK:
+            case WifiEntry.SECURITY_PSK:
                 return true;
             default:
         }
         return false;
     }
 
-    private static boolean isSupportZxing(Context context, int accesspointSecurity) {
+    private static boolean isSupportZxing(Context context, int wifiEntrySecurity) {
         final WifiManager wifiManager = context.getSystemService(WifiManager.class);
-        switch (accesspointSecurity) {
-            case AccessPoint.SECURITY_PSK:
-            case AccessPoint.SECURITY_WEP:
-            case AccessPoint.SECURITY_NONE:
+        switch (wifiEntrySecurity) {
+            case WifiEntry.SECURITY_PSK:
+            case WifiEntry.SECURITY_WEP:
+            case WifiEntry.SECURITY_NONE:
                 return true;
-            case AccessPoint.SECURITY_SAE:
+            case WifiEntry.SECURITY_SAE:
                 if (wifiManager.isWpa3SaeSupported()) {
                     return true;
                 }
                 break;
-            case AccessPoint.SECURITY_OWE:
+            case WifiEntry.SECURITY_OWE:
                 if (wifiManager.isEnhancedOpenSupported()) {
                     return true;
                 }
@@ -537,5 +492,26 @@ public class WifiDppUtils {
         vibrator.vibrate(VibrationEffect.createOneShot(
                 VIBRATE_DURATION_QR_CODE_RECOGNITION.toMillis(),
                 VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    @WifiEntry.Security
+    static int getSecurityTypeFromWifiConfiguration(WifiConfiguration config) {
+        if (config.allowedKeyManagement.get(WifiConfiguration.KeyMgmt.SAE)) {
+            return WifiEntry.SECURITY_SAE;
+        }
+        if (config.allowedKeyManagement.get(WifiConfiguration.KeyMgmt.WPA_PSK)) {
+            return WifiEntry.SECURITY_PSK;
+        }
+        if (config.allowedKeyManagement.get(WifiConfiguration.KeyMgmt.SUITE_B_192)) {
+            return WifiEntry.SECURITY_EAP_SUITE_B;
+        }
+        if (config.allowedKeyManagement.get(WifiConfiguration.KeyMgmt.WPA_EAP)
+                || config.allowedKeyManagement.get(WifiConfiguration.KeyMgmt.IEEE8021X)) {
+            return WifiEntry.SECURITY_EAP;
+        }
+        if (config.allowedKeyManagement.get(WifiConfiguration.KeyMgmt.OWE)) {
+            return WifiEntry.SECURITY_OWE;
+        }
+        return (config.wepKeys[0] != null) ? WifiEntry.SECURITY_WEP : WifiEntry.SECURITY_NONE;
     }
 }

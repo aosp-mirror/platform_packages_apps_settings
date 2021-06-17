@@ -68,21 +68,27 @@ public class ChannelNotificationSettings extends NotificationSettings {
 
         if (mChannel != null && !TextUtils.isEmpty(mChannel.getConversationId())
             && !mChannel.isDemoted()) {
-            startActivity(new SubSettingLauncher(mContext)
+            Intent intent = new SubSettingLauncher(mContext)
                     .setDestination(ConversationNotificationSettings.class.getName())
                     .setArguments(getArguments())
                     .setExtras(getIntent() != null ? getIntent().getExtras(): null)
                     .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_TOPIC_NOTIFICATION)
-                    .toIntent());
+                    .toIntent();
+            if (mPreferenceFilter != null) {
+                intent.setClass(mContext, ChannelPanelActivity.class);
+            }
+            startActivity(intent);
             finish();
             return;
         }
 
         for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin);
+            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin,
+                    mPreferenceFilter);
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();
+        animatePanel();
     }
 
     @Override

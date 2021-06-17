@@ -21,6 +21,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -30,7 +31,9 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageStats;
+import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
+import android.media.session.MediaSessionManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -77,6 +80,8 @@ public class RemoteVolumeGroupControllerTest {
     private PreferenceManager mPreferenceManager;
     @Mock
     private SharedPreferences mSharedPreferences;
+    @Mock
+    private MediaSessionManager mMediaSessionManager;
 
     private final List<RoutingSessionInfo> mRoutingSessionInfos = new ArrayList<>();
 
@@ -91,9 +96,12 @@ public class RemoteVolumeGroupControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mMediaSessionManager).when(mContext).getSystemService(
+                Context.MEDIA_SESSION_SERVICE);
         mController = new RemoteVolumeGroupController(mContext, KEY_REMOTE_VOLUME_GROUP);
         mController.mLocalMediaManager = mLocalMediaManager;
+        mController.mRouterManager = mock(MediaRouter2Manager.class);
         mPreferenceCategory = spy(new PreferenceCategory(mContext));
         mPreferenceCategory.setKey(mController.getPreferenceKey());
 

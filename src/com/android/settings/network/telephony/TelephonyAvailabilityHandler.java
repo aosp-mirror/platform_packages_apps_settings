@@ -20,8 +20,6 @@
  */
 package com.android.settings.network.telephony;
 
-import android.content.Context;
-
 public interface TelephonyAvailabilityHandler {
 
     /**

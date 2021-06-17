@@ -22,12 +22,16 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.android.settings.R;
+import com.android.settings.biometrics.combination.CombinedBiometricProfileStatusPreferenceController;
+import com.android.settings.biometrics.combination.CombinedBiometricStatusPreferenceController;
 import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
+import com.android.settings.enterprise.FinancedPrivacyPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
@@ -103,6 +107,7 @@ public class SecuritySettings extends DashboardFragment {
             Lifecycle lifecycle, SecuritySettings host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EnterprisePrivacyPreferenceController(context));
+        controllers.add(new FinancedPrivacyPreferenceController(context));
         controllers.add(new ManageTrustAgentsPreferenceController(context));
         controllers.add(new ScreenPinningPreferenceController(context));
         controllers.add(new SimLockPreferenceController(context));
@@ -113,6 +118,7 @@ public class SecuritySettings extends DashboardFragment {
         final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
         securityPreferenceControllers.add(new FaceStatusPreferenceController(context));
         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
+        securityPreferenceControllers.add(new CombinedBiometricStatusPreferenceController(context));
         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
                 .setChildren(securityPreferenceControllers));
@@ -126,6 +132,8 @@ public class SecuritySettings extends DashboardFragment {
                 context, lifecycle));
         profileSecurityControllers.add(new FaceProfileStatusPreferenceController(context));
         profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(context));
+        profileSecurityControllers
+                .add(new CombinedBiometricProfileStatusPreferenceController(context));
         controllers.add(new PreferenceCategoryController(context, WORK_PROFILE_SECURITY_CATEGORY)
                 .setChildren(profileSecurityControllers));
         controllers.addAll(profileSecurityControllers);
@@ -144,6 +152,12 @@ public class SecuritySettings extends DashboardFragment {
                         context) {
                     return buildPreferenceControllers(context, null /* lifecycle */,
                             null /* host*/);
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !FeatureFactory.getFactory(context).getSecuritySettingsFeatureProvider()
+                            .hasAlternativeSecuritySettingsFragment();
                 }
             };
 }

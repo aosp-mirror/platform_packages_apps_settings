@@ -17,20 +17,11 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class PowerMenuPreferenceController extends BasePreferenceController {
-
-    private static final String KEY = "gesture_power_menu_summary";
-    private static final String CONTROLS_ENABLED_SETTING = Settings.Secure.CONTROLS_ENABLED;
-    private static final String CARDS_ENABLED_SETTING =
-            Settings.Secure.GLOBAL_ACTIONS_PANEL_ENABLED;
-    private static final String CARDS_AVAILABLE_SETTING =
-            Settings.Secure.GLOBAL_ACTIONS_PANEL_AVAILABLE;
 
     public PowerMenuPreferenceController(Context context, String key) {
         super(context, key);
@@ -38,34 +29,16 @@ public class PowerMenuPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        boolean controlsVisible = isControlsAvailable()
-                && Settings.Secure.getInt(mContext.getContentResolver(),
-                        CONTROLS_ENABLED_SETTING, 1) == 1;
-        boolean cardsVisible = isCardsAvailable()
-                && Settings.Secure.getInt(mContext.getContentResolver(),
-                        CARDS_ENABLED_SETTING, 0) == 1;
-        if (controlsVisible && cardsVisible) {
-            return mContext.getText(R.string.power_menu_cards_passes_device_controls);
-        } else if (controlsVisible) {
-            return mContext.getText(R.string.power_menu_device_controls);
-        } else if (cardsVisible) {
-            return mContext.getText(R.string.power_menu_cards_passes);
-        } else {
-            return mContext.getText(R.string.power_menu_none);
-        }
+        return mContext.getText(R.string.power_menu_long_press_for_assist);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return isCardsAvailable() || isControlsAvailable() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return isAssistInvocationAvailable() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
-    private boolean isControlsAvailable() {
-        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CONTROLS);
-    }
-
-    private boolean isCardsAvailable() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                CARDS_AVAILABLE_SETTING, 0) == 1;
+    private boolean isAssistInvocationAvailable() {
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable);
     }
 }

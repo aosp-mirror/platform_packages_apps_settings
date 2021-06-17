@@ -46,24 +46,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Controller of global switch to enable Game Driver for all Apps.
+ * Controller of global switch to enable updatable driver for all Apps.
  */
 public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener,
                    GraphicsDriverContentObserver.OnGraphicsDriverContentChangedListener,
                    LifecycleObserver, OnStart, OnStop {
 
-    public static final int GAME_DRIVER_DEFAULT = 0;
-    public static final int GAME_DRIVER_ALL_APPS = 1;
-    public static final int GAME_DRIVER_PRERELEASE_ALL_APPS = 2;
-    public static final int GAME_DRIVER_OFF = 3;
-    public static final String PROPERTY_GFX_DRIVER_GAME = "ro.gfx.driver.0";
+    public static final int UPDATABLE_DRIVER_DEFAULT = 0;
+    public static final int UPDATABLE_DRIVER_PRODUCTION_ALL_APPS = 1;
+    public static final int UPDATABLE_DRIVER_PRERELEASE_ALL_APPS = 2;
+    public static final int UPDATABLE_DRIVER_OFF = 3;
+    public static final String PROPERTY_GFX_DRIVER_PRODUCTION = "ro.gfx.driver.0";
     public static final String PROPERTY_GFX_DRIVER_PRERELEASE = "ro.gfx.driver.1";
 
     private final Context mContext;
     private final ContentResolver mContentResolver;
     private final String mPreferenceDefault;
-    private final String mPreferenceGameDriver;
+    private final String mPreferenceProductionDriver;
     private final String mPreferencePrereleaseDriver;
     @VisibleForTesting
     CharSequence[] mEntryList;
@@ -79,8 +79,8 @@ public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePref
 
         final Resources resources = context.getResources();
         mPreferenceDefault = resources.getString(R.string.graphics_driver_app_preference_default);
-        mPreferenceGameDriver =
-                resources.getString(R.string.graphics_driver_app_preference_game_driver);
+        mPreferenceProductionDriver =
+                resources.getString(R.string.graphics_driver_app_preference_production_driver);
         mPreferencePrereleaseDriver =
                 resources.getString(R.string.graphics_driver_app_preference_prerelease_driver);
         mEntryList = constructEntryList(mContext, false);
@@ -92,8 +92,9 @@ public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePref
     public int getAvailabilityStatus() {
         return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
                         && (Settings.Global.getInt(mContentResolver,
-                                    Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
-                                != GAME_DRIVER_OFF)
+                                    Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                                    UPDATABLE_DRIVER_DEFAULT)
+                                != UPDATABLE_DRIVER_OFF)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
@@ -122,11 +123,12 @@ public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePref
         final ListPreference listPref = (ListPreference) preference;
         listPref.setVisible(isAvailable());
         final int currentChoice = Settings.Global.getInt(
-                mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
-        if (currentChoice == GAME_DRIVER_ALL_APPS) {
-            listPref.setValue(mPreferenceGameDriver);
-            listPref.setSummary(mPreferenceGameDriver);
-        } else if (currentChoice == GAME_DRIVER_PRERELEASE_ALL_APPS) {
+                mContentResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_DEFAULT);
+        if (currentChoice == UPDATABLE_DRIVER_PRODUCTION_ALL_APPS) {
+            listPref.setValue(mPreferenceProductionDriver);
+            listPref.setSummary(mPreferenceProductionDriver);
+        } else if (currentChoice == UPDATABLE_DRIVER_PRERELEASE_ALL_APPS) {
             listPref.setValue(mPreferencePrereleaseDriver);
             listPref.setSummary(mPreferencePrereleaseDriver);
         } else {
@@ -140,21 +142,22 @@ public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePref
         final ListPreference listPref = (ListPreference) preference;
         final String value = newValue.toString();
         final int currentChoice = Settings.Global.getInt(
-                mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+                mContentResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_DEFAULT);
         final int userChoice;
-        if (value.equals(mPreferenceGameDriver)) {
-            userChoice = GAME_DRIVER_ALL_APPS;
+        if (value.equals(mPreferenceProductionDriver)) {
+            userChoice = UPDATABLE_DRIVER_PRODUCTION_ALL_APPS;
         } else if (value.equals(mPreferencePrereleaseDriver)) {
-            userChoice = GAME_DRIVER_PRERELEASE_ALL_APPS;
+            userChoice = UPDATABLE_DRIVER_PRERELEASE_ALL_APPS;
         } else {
-            userChoice = GAME_DRIVER_DEFAULT;
+            userChoice = UPDATABLE_DRIVER_DEFAULT;
         }
         listPref.setValue(value);
         listPref.setSummary(value);
 
         if (userChoice != currentChoice) {
             Settings.Global.putInt(
-                    mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, userChoice);
+                    mContentResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, userChoice);
         }
 
         return true;
@@ -172,7 +175,8 @@ public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePref
         final Resources resources = context.getResources();
         final String prereleaseDriverPackageName =
                 SystemProperties.get(PROPERTY_GFX_DRIVER_PRERELEASE);
-        final String gameDriverPackageName = SystemProperties.get(PROPERTY_GFX_DRIVER_GAME);
+        final String productionDriverPackageName =
+                SystemProperties.get(PROPERTY_GFX_DRIVER_PRODUCTION);
 
         List<CharSequence> entryList = new ArrayList<>();
         entryList.add(resources.getString(R.string.graphics_driver_app_preference_default));
@@ -182,9 +186,10 @@ public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePref
             entryList.add(resources.getString(
                     R.string.graphics_driver_app_preference_prerelease_driver));
         }
-        if (!TextUtils.isEmpty(gameDriverPackageName)
-                && hasDriverPackage(pm, gameDriverPackageName)) {
-            entryList.add(resources.getString(R.string.graphics_driver_app_preference_game_driver));
+        if (!TextUtils.isEmpty(productionDriverPackageName)
+                && hasDriverPackage(pm, productionDriverPackageName)) {
+            entryList.add(resources.getString(
+                    R.string.graphics_driver_app_preference_production_driver));
         }
         if (withSystem) {
             entryList.add(resources.getString(R.string.graphics_driver_app_preference_system));

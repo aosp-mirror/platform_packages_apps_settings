@@ -16,17 +16,17 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res-auto"
-        android:key="app_notifications">
+        android:key="app_notifications"
+        android:title="@string/notifications_title">
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="pref_app_header"
         android:layout="@layout/settings_entity_header" />
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="block"
-        android:layout="@layout/styled_switch_bar" />
+    <com.android.settings.widget.SettingsMainSwitchPreference
+        android:key="block" />
 
-    <com.android.settings.notification.app.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="block_desc" />
 
 
@@ -80,8 +80,7 @@
 
     <PreferenceCategory
         android:key="app_advanced"
-        android:order="1000"
-        settings:initialExpandedChildrenCount="0">
+        android:order="1000">
         <!-- Show badge -->
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="badge"
@@ -96,11 +95,11 @@
 
     </PreferenceCategory>
 
-    <com.android.settings.notification.app.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="desc"
         android:order="5000" />
 
-    <com.android.settings.notification.app.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="deleted"
         android:order="8000" />
 

@@ -19,13 +19,17 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="power_usage_advanced_screen"
     android:title="@string/advanced_battery_title"
-    settings:keywords="@string/keywords_battery">
+    settings:keywords="@string/keywords_battery_usage">
 
     <com.android.settings.fuelgauge.BatteryHistoryPreference
         android:key="battery_graph"/>
 
     <PreferenceCategory
-        android:key="app_list"
-        android:title="@string/power_usage_list_summary"/>
+        android:key="app_list"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="battery_graph_footer"
+        android:title="@string/battery_usage_screen_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

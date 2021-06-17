@@ -39,6 +39,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -140,6 +141,17 @@ public class DataUsageList extends DataUsageBaseFragment
         mUsageAmount = findPreference(KEY_USAGE_AMOUNT);
         mChart = findPreference(KEY_CHART_DATA);
         mApps = findPreference(KEY_APPS_GROUP);
+
+        // TODO(b/167474581): This is a temporary solution to hide unnecessary warning
+        //  preference, when the provider model is completed, the following code should be removed.
+        final Preference unnecessaryWarningPreference =
+                FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)
+                        ? findPreference("operator_warning")
+                        : findPreference("non_carrier_data_usage_warning");
+        if (unnecessaryWarningPreference != null) {
+            unnecessaryWarningPreference.setVisible(false);
+        }
+
         processArgument();
         mDataStateListener = new MobileDataEnabledListener(activity, this);
     }

@@ -60,6 +60,11 @@ public class HeaderPreferenceController extends NotificationPreferenceController
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return true;
+    }
+
+    @Override
     public void updateState(Preference preference) {
         if (mAppRow != null && mFragment != null) {
 
@@ -87,6 +92,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                     .setRecyclerView(mFragment.getListView(), mFragment.getSettingsLifecycle())
                     .done(activity, mContext);
             pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
+            pref.findViewById(R.id.entity_header).setBackground(null);
         }
     }
 
@@ -115,9 +121,6 @@ public class HeaderPreferenceController extends NotificationPreferenceController
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
         mStarted = true;
-        if (mHeaderController != null) {
-            mHeaderController.styleActionBar(mFragment.getActivity());
-        }
     }
 
     @VisibleForTesting

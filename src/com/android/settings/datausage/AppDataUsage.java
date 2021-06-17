@@ -39,8 +39,10 @@ import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
@@ -221,6 +223,14 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         }
         LoaderManager.getInstance(this).restartLoader(LOADER_APP_USAGE_DATA, null /* args */,
                 mUidDataCallbacks);
+
+        if (Utils.isPageTransitionEnabled(mContext)) {
+            final RecyclerView recyclerView = getListView();
+            if (recyclerView != null) {
+                recyclerView.setItemAnimator(null);
+            }
+        }
+
         updatePrefs();
     }
 
@@ -235,11 +245,11 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mRestrictBackground) {
-            mDataSaverBackend.setIsBlacklisted(mAppItem.key, mPackageName, !(Boolean) newValue);
+            mDataSaverBackend.setIsDenylisted(mAppItem.key, mPackageName, !(Boolean) newValue);
             updatePrefs();
             return true;
         } else if (preference == mUnrestrictedData) {
-            mDataSaverBackend.setIsWhitelisted(mAppItem.key, mPackageName, (Boolean) newValue);
+            mDataSaverBackend.setIsAllowlisted(mAppItem.key, mPackageName, (Boolean) newValue);
             return true;
         }
         return false;
@@ -330,7 +340,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
     private boolean getUnrestrictData() {
         if (mDataSaverBackend != null) {
-            return mDataSaverBackend.isWhitelisted(mAppItem.key);
+            return mDataSaverBackend.isAllowlisted(mAppItem.key);
         }
         return false;
     }
@@ -464,16 +474,16 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     @Override
-    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+    public void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {
         if (mAppItem.uids.get(uid, false)) {
-            updatePrefs(getAppRestrictBackground(), isWhitelisted);
+            updatePrefs(getAppRestrictBackground(), isAllowlisted);
         }
     }
 
     @Override
-    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+    public void onDenylistStatusChanged(int uid, boolean isDenylisted) {
         if (mAppItem.uids.get(uid, false)) {
-            updatePrefs(isBlacklisted, getUnrestrictData());
+            updatePrefs(isDenylisted, getUnrestrictData());
         }
     }
 }

@@ -26,6 +26,8 @@ import android.telephony.TelephonyManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
+import com.android.settings.network.telephony.MobileNetworkUtils;
+
 /**
  * Preference controller for "System Select"
  */
@@ -50,10 +52,10 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
                 resetCdmaRoamingModeToDefault();
             }
         }
-        final int settingsNetworkMode = Settings.Global.getInt(
-                mContext.getContentResolver(),
-                Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+
+        final int settingsNetworkMode = MobileNetworkUtils.getNetworkTypeFromRaf(
+                (int) mTelephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
         final boolean enableList = settingsNetworkMode != NETWORK_MODE_LTE_GSM_WCDMA
                 && settingsNetworkMode != NETWORK_MODE_NR_LTE_GSM_WCDMA;
         listPreference.setEnabled(enableList);
@@ -63,13 +65,14 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
     public boolean onPreferenceChange(Preference preference, Object object) {
         int newMode = Integer.parseInt((String) object);
         //TODO(b/117611981): only set it in one place
-        if (mTelephonyManager.setCdmaRoamingMode(newMode)) {
+        try {
+            mTelephonyManager.setCdmaRoamingMode(newMode);
             Settings.Global.putInt(mContext.getContentResolver(),
                     Settings.Global.CDMA_ROAMING_MODE, newMode);
             return true;
+        } catch (IllegalStateException e) {
+            return false;
         }
-
-        return false;
     }
 
     private void resetCdmaRoamingModeToDefault() {

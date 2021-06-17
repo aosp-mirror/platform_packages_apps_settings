@@ -38,7 +38,6 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.search.actionbar.SearchMenuController;
-import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.RtlCompatibleViewPager;
 import com.android.settings.widget.SlidingTabLayout;
@@ -119,9 +118,6 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setHasOptionsMenu(true);
-        SearchMenuController.init(this /* host */);
-        HelpMenuController.init(this /* host */);
 
         // TODO: besides in onCreate, we should also update subList when SIM / Sub status
         // changes.
@@ -158,7 +154,8 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return String.valueOf(mSil.get(position).getDisplayName());
+            return String.valueOf(SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    mSil.get(position), getContext()));
         }
 
         @Override

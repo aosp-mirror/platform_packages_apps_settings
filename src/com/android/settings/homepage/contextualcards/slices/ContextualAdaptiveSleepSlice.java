@@ -17,8 +17,8 @@
 package com.android.settings.homepage.contextualcards.slices;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
-import static com.android.settings.display.AdaptiveSleepPreferenceController.PREF_NAME;
 import static com.android.settings.display.AdaptiveSleepPreferenceController.isControllerAvailable;
+import static com.android.settings.display.ScreenTimeoutPreferenceController.PREF_NAME;
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_ADAPTIVE_SLEEP_URI;
 
 import android.app.PendingIntent;
@@ -35,7 +35,7 @@ import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
-import com.android.settings.display.AdaptiveSleepSettings;
+import com.android.settings.display.ScreenTimeoutSettings;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBuilderUtils;
 
@@ -43,6 +43,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 import java.util.concurrent.TimeUnit;
 
+// TODO(b/172310863): consider removing this slice.
 public class ContextualAdaptiveSleepSlice implements CustomSliceable {
     private static final String TAG = "ContextualAdaptiveSleepSlice";
     private static final long DEFAULT_SETUP_TIME = 0;
@@ -115,14 +116,15 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
         final CharSequence screenTitle = mContext.getText(R.string.adaptive_sleep_title);
         final Uri contentUri = new Uri.Builder().appendPath(PREF_NAME).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                AdaptiveSleepSettings.class.getName(), PREF_NAME, screenTitle.toString(),
+                ScreenTimeoutSettings.class.getName(), PREF_NAME, screenTitle.toString(),
                 SettingsEnums.SLICE).setClassName(mContext.getPackageName(),
                 SubSettings.class.getName()).setData(contentUri);
     }
 
     private PendingIntent getPrimaryAction() {
         final Intent intent = getIntent();
-        return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent, 0  /* flags */);
+        return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE  /* flags */);
     }
 
     /**

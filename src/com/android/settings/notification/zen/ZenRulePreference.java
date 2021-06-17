@@ -33,8 +33,8 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
-import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 import java.util.Map;
 

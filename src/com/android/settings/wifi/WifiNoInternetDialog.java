@@ -38,11 +38,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 
-public final class WifiNoInternetDialog extends AlertActivity implements
+/**
+ * To display a dialog that asks the user whether to connect to a network that is not validated.
+ */
+public class WifiNoInternetDialog extends AlertActivity implements
         DialogInterface.OnClickListener {
     private static final String TAG = "WifiNoInternetDialog";
 
@@ -50,7 +55,7 @@ public final class WifiNoInternetDialog extends AlertActivity implements
     private Network mNetwork;
     private String mNetworkName;
     private ConnectivityManager.NetworkCallback mNetworkCallback;
-    private CheckBox mAlwaysAllow;
+    @VisibleForTesting CheckBox mAlwaysAllow;
     private String mAction;
     private boolean mButtonClicked;
 
@@ -65,22 +70,17 @@ public final class WifiNoInternetDialog extends AlertActivity implements
         super.onCreate(savedInstanceState);
 
         final Intent intent = getIntent();
-        if (intent == null || !isKnownAction(intent) || !"netId".equals(intent.getScheme())) {
+        if (intent == null || !isKnownAction(intent)) {
             Log.e(TAG, "Unexpected intent " + intent + ", exiting");
             finish();
             return;
         }
 
         mAction = intent.getAction();
-
-        try {
-            mNetwork = new Network(Integer.parseInt(intent.getData().getSchemeSpecificPart()));
-        } catch (NullPointerException|NumberFormatException e) {
-            mNetwork = null;
-        }
+        mNetwork = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK);
 
         if (mNetwork == null) {
-            Log.e(TAG, "Can't determine network from '" + intent.getData() + "' , exiting");
+            Log.e(TAG, "Can't determine network from intent extra, exiting");
             finish();
             return;
         }

@@ -25,9 +25,11 @@ import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -78,8 +80,16 @@ public class AppNotificationSettings extends NotificationSettings {
             return;
         }
 
+        if (Utils.isPageTransitionEnabled(mContext)) {
+            final RecyclerView recyclerView = getListView();
+            if (recyclerView != null) {
+                recyclerView.setItemAnimator(null);
+            }
+        }
+
         for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin);
+            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin,
+                    null);
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();

@@ -420,7 +420,7 @@ public class AppButtonsPreferenceControllerTest {
         mController.forceStopPackage(PACKAGE_NAME);
 
         verify(mAm).forceStopPackage(PACKAGE_NAME);
-        assertThat(mController.mAppEntry).isSameAs(appEntry);
+        assertThat(mController.mAppEntry).isSameInstanceAs(appEntry);
         verify(mController).updateForceStopButton();
     }
 

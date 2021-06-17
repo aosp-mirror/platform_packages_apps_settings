@@ -32,7 +32,7 @@ import android.widget.Switch;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.datausage.DataSaverBackend;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -45,7 +45,7 @@ public class WifiTetherSwitchBarController implements
     private static final IntentFilter WIFI_INTENT_FILTER;
 
     private final Context mContext;
-    private final SwitchBar mSwitchBar;
+    private final SettingsMainSwitchBar mSwitchBar;
     private final Switch mSwitch;
     private final ConnectivityManager mConnectivityManager;
     private final WifiManager mWifiManager;
@@ -67,7 +67,7 @@ public class WifiTetherSwitchBarController implements
         WIFI_INTENT_FILTER = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
     }
 
-    WifiTetherSwitchBarController(Context context, SwitchBar switchBar) {
+    WifiTetherSwitchBarController(Context context, SettingsMainSwitchBar switchBar) {
         mContext = context;
         mSwitchBar = switchBar;
         mSwitch = mSwitchBar.getSwitch();
@@ -162,12 +162,12 @@ public class WifiTetherSwitchBarController implements
     }
 
     @Override
-    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+    public void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {
         // we don't care, since we just want to read the value
     }
 
     @Override
-    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+    public void onDenylistStatusChanged(int uid, boolean isDenylisted) {
         // we don't care, since we just want to read the value
     }
 }

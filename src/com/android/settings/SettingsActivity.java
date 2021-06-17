@@ -36,8 +36,10 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -53,6 +55,7 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
@@ -61,12 +64,13 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 
+import com.google.android.material.transition.platform.MaterialSharedAxis;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
@@ -172,7 +176,7 @@ public class SettingsActivity extends SettingsBaseActivity
         }
     };
 
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mMainSwitch;
 
     private Button mNextButton;
 
@@ -181,8 +185,8 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
 
-    public SwitchBar getSwitchBar() {
-        return mSwitchBar;
+    public SettingsMainSwitchBar getSwitchBar() {
+        return mMainSwitch;
     }
 
     @Override
@@ -215,7 +219,7 @@ public class SettingsActivity extends SettingsBaseActivity
     private String getMetricsTag() {
         String tag = null;
         if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_FRAGMENT)) {
-            tag = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+            tag = getInitialFragmentName(getIntent());
         }
         if (TextUtils.isEmpty(tag)) {
             Log.w(LOG_TAG, "MetricsTag is invalid " + tag);
@@ -246,7 +250,7 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         // Getting Intent properties can only be done after the super.onCreate(...)
-        final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
+        final String initialFragmentName = getInitialFragmentName(intent);
 
         // This is a "Sub Settings" when:
         // - this is a real SubSettings
@@ -290,9 +294,10 @@ public class SettingsActivity extends SettingsBaseActivity
             actionBar.setHomeButtonEnabled(!isInSetupWizard);
             actionBar.setDisplayShowTitleEnabled(true);
         }
-        mSwitchBar = findViewById(R.id.switch_bar);
-        if (mSwitchBar != null) {
-            mSwitchBar.setMetricsTag(getMetricsTag());
+        mMainSwitch = findViewById(R.id.switch_bar);
+        if (mMainSwitch != null) {
+            mMainSwitch.setMetricsTag(getMetricsTag());
+            mMainSwitch.setTranslationZ(findViewById(R.id.main_content).getTranslationZ() + 1);
         }
 
         // see if we should show Back/Next buttons
@@ -344,6 +349,12 @@ public class SettingsActivity extends SettingsBaseActivity
         if (DEBUG_TIMING) {
             Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
+    }
+
+    /** Returns the initial fragment name that the activity will launch. */
+    @VisibleForTesting
+    public String getInitialFragmentName(Intent intent) {
+        return intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
     }
 
     @Override
