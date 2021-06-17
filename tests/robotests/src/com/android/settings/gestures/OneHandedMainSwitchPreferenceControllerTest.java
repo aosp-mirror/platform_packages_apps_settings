@@ -57,6 +57,15 @@ public class OneHandedMainSwitchPreferenceControllerTest {
     }
 
     @Test
+    public void isChecked_setOneHandedModeEnabled_shouldReturnTrue() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        mUtils.setNavigationBarMode(mContext, "2" /* fully gestural */);
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
+
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
     public void getAvailabilityStatus_setSupportOneHandedModeProperty_shouldAvailable() {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
         mUtils.setNavigationBarMode(mContext, "2" /* fully gestural */);
