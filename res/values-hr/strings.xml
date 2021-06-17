@@ -1348,7 +1348,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Glatki prikaz"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Automatski povećava učestalost osvježavanja sa 60 na 90 Hz za određeni sadržaj. Povećava potrošnju baterije."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Nametni učestalost osvježavanja od 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Prisilna maksimalna učestalost osvježavanja"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Najviša učestalost osvježavanja za poboljšano reagiranje na dodir i kvalitetu animacije. Povećava potrošnju baterije."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Pozornost na zaslonu"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Uključeno/zaslon se neće isključiti ako ga gledate"</string>
@@ -2335,12 +2335,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Shvaćam"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Prečac za uslugu <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Gumb za Pristupačnost"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Pokret za pristupačnost"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Prijeđite s dva prsta prema gore"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Prijeđite s tri prsta prema gore"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Dodirnite gumb za pristupačnost"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Upotreba pokreta za pristupačnost"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Dodirnite gumb za Pristupačnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> pri dnu zaslona.\n\nDa biste prešli na neku drugu značajku, dodirnite i zadržite gumb za Pristupačnost."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Prijeđite s dva prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s dva prsta prema gore i zadržite."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Prijeđite s tri prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s tri prsta prema gore i zadržite."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Prilagodba pokreta za pristupačnost"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Prilagodba gumba za pristupačnost"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Saznajte više o usluzi <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Držite tipke za glasnoću"</string>
@@ -2358,8 +2361,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Prečac sa zaključanog zaslona"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Dopusti prečacu značajke da se uključi sa zaključanog zaslona. Pritisnite obje tipke za glasnoću na nekoliko sekundi."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Gumb za pristupačnost"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Gumb i pokret za Pristupačnost"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Upotreba gumba za Pristupačnost. Pokret nije dostupan uz navigaciju pomoću tri gumba."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Brz pristup značajkama pristupačnosti"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Brzo pristupite značajkama pristupačnosti s bilo kojeg zaslona. \n\nZa početak otvorite postavke pristupačnosti i odaberite značajku. Dodirnite prečac i odaberite gumb za pristupačnost."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Upotreba gumba ili pokreta"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokacija"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Veličina"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Blijedi kad se ne koristi"</string>
@@ -2455,6 +2461,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Zatamnite zaslon kako vam ne bi blještao u oči dok čitate.&lt;br/&gt;&lt;br/&gt; To može biti korisno u sljedećim situacijama: &lt;ol&gt; &lt;li&gt; Zadana minimalna svjetlina na telefonu i dalje je presvijetla.&lt;/li&gt; &lt;li&gt; Koristite telefon u mraku, na primjer noću ili u tamnoj sobi prije spavanja.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Zatamnite zaslon kako vam ne bi blještao u oči dok čitate.&lt;br/&gt;&lt;br/&gt; To može biti korisno u sljedećim situacijama: &lt;ol&gt; &lt;li&gt; Zadana minimalna svjetlina na tabletu i dalje je presvijetla.&lt;/li&gt; &lt;li&gt; Koristite tablet u mraku, na primjer noću ili u tamnoj sobi prije spavanja.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intenzitet"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Zadrži nakon ponovnog pokretanja uređaja"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="one">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda)</item>
@@ -3877,6 +3887,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Nedavni razgovori"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Izbriši nedavne razgovore"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Nedavni razgovori uklonjeni"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Izbriši"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Prikaži prioritetne razgovore u oblačićima"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioritetni razgovori prikazuju se pri vrhu zaslona obavijesti. Možete postaviti i da se prikazuju u oblačićima te vas ometaju dok je uključena značajka Ne uznemiravaj."</string>
@@ -4256,7 +4268,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Podržane veze"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Ostale zadane postavke"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Dodajte vezu"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Aplikacija može potvrditi veze tako da se automatski otvaraju u aplikaciji. "<annotation id="url">"Saznajte više"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> potvrđena veza</item>
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> potvrđene veze</item>
@@ -4419,9 +4432,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Ne primjenjuje se optimizacija baterije. Baterija će se možda brže isprazniti."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Želite li dopustiti da aplikacija uvijek radi u pozadini?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Ako dopustite da aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g> uvijek radi u pozadini, to može ubrzati trošenje baterije. \n\nTo možete promijeniti kasnije u izborniku Postavke &gt; Aplikacije i obavijesti."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> potrošnje u posljednja 24 h"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Upravljanje napajanjem"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Nema potrošnje baterije u posljednja 24 sata"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> potrošnje od posljednjeg potpunog punjenja"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> potrošnje u posljednja 24 h"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Nema potrošnje baterije od posljednjeg potpunog punjenja"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Nema potrošnje baterije u posljednja 24 sata"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Postavke aplikacije"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Prikaži Prijamnik kor. suč."</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Dodatna dopuštenja"</string>
@@ -4594,6 +4608,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Izrada snimki zaslona nije dopuštena"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Aplikacija se ne može otvoriti"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blokirao zajmodavac"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Ako imate pitanja, obratite se administratoru"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Više pojedinosti"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Vaš administrator može nadzirati aplikacije i postavke povezane s vašim radnim profilom, uključujući postavke, dopuštenja, korporacijski pristup, aktivnost na mreži i podatke o lokaciji uređaja, te njima upravljati."</string>

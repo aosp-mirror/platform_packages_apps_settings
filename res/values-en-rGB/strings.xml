@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Automatically raises the refresh rate from 60 to 90 Hz for some content. Increases battery usage."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Force 90 Hz refresh rate"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Force peak refresh rate"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Highest refresh rate for improved touch responsiveness and animation quality. Increases battery usage."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Screen attention"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"On/Screen won’t turn off if you’re looking at it"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> shortcut"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Accessibility button"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Accessibility gesture"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Swipe up with 2 fingers"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Swipe up with three fingers"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tap accessibility button"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Use accessibility gesture"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch and hold the accessibility button."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Swipe up from the bottom of the screen with three fingers.\n\nTo switch between features, swipe up with three fingers and hold."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Customise accessibility gesture"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Customise accessibility button"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Learn more about <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Hold volume keys"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Shortcut from lock screen"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Accessibility button"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Accessibility button &amp; gesture"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Using the accessibility button. The gesture isn’t available with 3-button navigation."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Quickly access accessibility features"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Quickly access accessibility features from any screen. \n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the Accessibility button."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Use button or gesture"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Location"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Size"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Fade when not in use"</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Make your screen dimmer so that it’s more comfortable to read.&lt;br/&gt;&lt;br/&gt; This can be helpful when: &lt;ol&gt; &lt;li&gt; Your phone’s default minimum brightness is still too bright&lt;/li&gt; &lt;li&gt; You’re using your phone in dark situations, like at night or in a dark room before bed&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Make your screen darker so that it’s more comfortable to read.&lt;br/&gt;&lt;br/&gt; This can be helpful when: &lt;ol&gt; &lt;li&gt; Your tablet’s default minimum brightness is still too bright&lt;/li&gt; &lt;li&gt; You’re using your tablet in dark situations, like at night or in a dark room before bed&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensity"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Keep on after device restarts"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Short (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> seconds)</item>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Recent conversations"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Clear recent conversations"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Recent conversations removed"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Clear"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Bubble priority conversations"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Priority conversations show at the top of the pull-down shade. You can also set them to bubble and interrupt Do Not Disturb."</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Supported links"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Other default preferences"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Add link"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"An app can verify links to automatically open in the app. "<annotation id="url">"Learn more"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> verified links</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> verified link</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Don’t apply battery optimisation. May drain your battery more quickly."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Let app always run in background?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Allowing <xliff:g id="APP_NAME">%1$s</xliff:g> to always run in the background may reduce battery life. \n\nYou can change this later from Settings &gt; Apps and notifications."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> use for past 24 hours"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Power management"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"No battery use for past 24 hours"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> use since last full charge"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> use for past 24 hours"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"No battery use since last full charge"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"No battery use for past 24 hours"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"App settings"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Show SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Additional permissions"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Can’t take screenshots"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Can’t open this app"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blocked by your credit provider"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"If you have any questions, contact your IT admin"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"More details"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Your admin can monitor and manage apps and data associated with your work profile, including settings, permissions, corporate access, network activity and the device\'s location information."</string>

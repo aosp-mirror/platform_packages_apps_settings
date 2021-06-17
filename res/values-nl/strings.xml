@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Verhoogt de vernieuwingssnelheid automatisch van 60 naar 90 Hz voor bepaalde content. Het batterijgebruik neemt toe."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Vernieuwingssnelheid van 90 Hz afdwingen"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Piekvernieuwingssnelheid afdwingen"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"De hoogste vernieuwingssnelheid voor verbeterde responsiviteit voor aanraking en animatiekwaliteit. Het batterijgebruik neemt toe."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Schermaandacht"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Aan / Scherm gaat niet uit als je ernaar kijkt"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Snelkoppeling voor <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Knop Toegankelijkheid"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Toegankelijkheidsgebaar"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Met twee vingers omhoog swipen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Met 3 vingers omhoog swipen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Op de knop Toegankelijkheid tikken"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Toegankelijkheidsgebaar gebruiken"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Tik op de knop Toegankelijkheid <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> onderaan je scherm.\n\nTik op de knop Toegankelijkheid en houd vast om tussen functies te schakelen."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Swipe met twee vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met twee vingers omhoog en houd vast om tussen functies te schakelen."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Swipe met 3 vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met 3 vingers omhoog en houd vast om tussen functies te schakelen."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Toegankelijkheidsgebaar aanpassen"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Pas de knop Toegankelijkheid aan"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Meer informatie over <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Volumetoetsen ingedrukt houden"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Snelkoppeling vanaf vergrendelscherm"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Sta toe dat de functiesnelkoppeling wordt aangezet vanaf het vergrendelscherm. Houd beide volumetoetsen een paar seconden ingedrukt."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Knop Toegankelijkheid"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Toegankelijkheidsknop en -gebaar"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"De toegankelijkheidsknop gebruiken. Het gebaar is niet beschikbaar bij navigatie met 3 knoppen."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Krijg snel toegang tot toegankelijkheidsfuncties"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Krijg vanaf elk scherm snel toegang tot toegankelijkheidsfuncties. \n\nGa naar de toegankelijkheidsinstellingen en selecteer een functie om aan de slag te gaan. Tik op de snelkoppeling en selecteer de knop Toegankelijkheid."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Knop of gebaar gebruiken"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Locatie"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Formaat"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Vervagen indien niet in gebruik"</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Dim je scherm extra zodat je het prettiger kunt lezen.&lt;br/&gt;&lt;br/&gt; Dit kan in de volgende situaties handig zijn: &lt;ol&gt; &lt;li&gt; De standaard minimumhelderheid van je telefoon is te helder voor je.&lt;/li&gt; &lt;li&gt; Je gebruikt je telefoon in een donkere omgeving, zoals \'s avonds laat of in een donkere kamer voordat je gaat slapen.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Maak je scherm donkerder zodat je het prettiger kunt lezen.&lt;br/&gt;&lt;br/&gt; Dit kan in de volgende situaties handig zijn: &lt;ol&gt; &lt;li&gt; De standaard minimumhelderheid van je tablet is te helder voor je.&lt;/li&gt; &lt;li&gt; Je gebruikt je telefoon in een donkere omgeving, zoals \'s avonds laat of in een donkere kamer voordat je gaat slapen.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensiteit"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Aanhouden nadat het apparaat opnieuw is opgestart"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Kort (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> seconden)</item>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Recente gesprekken"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Recente gesprekken wissen"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Recente gesprekken verwijderd"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Wissen"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Prioriteitsgesprekken als bubbel tonen"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioriteitsgesprekken worden bovenaan het pull-downvenster getoond. Je kunt ook instellen dat ze als bubbels worden getoond en \'Niet storen\' onderbreken."</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Ondersteunde links"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Andere standaardvoorkeuren"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Link toevoegen"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Een app kan links verifiëren om ze automatisch te openen in de app. "<annotation id="url">"Meer informatie"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> geverifieerde links</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> geverifieerde link</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Batterijoptimalisatie niet toepassen. Hierdoor kan je batterijverbruik toenemen."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"App altijd uitvoeren op de achtergrond?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Als je toestaat dat <xliff:g id="APP_NAME">%1$s</xliff:g> altijd op de achtergrond wordt uitgevoerd, kan de batterij sneller leeg raken. \n\nJe kunt dit later wijzigen via Instellingen &gt; Apps en meldingen."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> gebruik in de afgelopen 24 uur"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Energiebeheer"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Geen batterijgebruik in de afgelopen 24 uur"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> gebruik sinds laatste volledige lading"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> gebruik in de afgelopen 24 uur"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Geen accugebruik sinds laatste volledige lading"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Geen batterijgebruik in de afgelopen 24 uur"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"App-instellingen"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"SystemUI Tuner tonen"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Aanvullende rechten"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Kan geen screenshots maken"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Kan deze app niet openen"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Geblokkeerd door je kredietverstrekker"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Neem bij vragen contact op met je IT-beheerder"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Meer informatie"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Je beheerder kan apps en gegevens bijhouden en beheren die aan je werkprofiel zijn gekoppeld (waaronder instellingen, rechten, zakelijke toegang, netwerkactiviteit en locatiegegevens van het apparaat)."</string>
