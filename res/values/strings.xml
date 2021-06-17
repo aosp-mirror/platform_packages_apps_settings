@@ -12863,7 +12863,11 @@
     <!--  The title text of choose SIM activity. [CHAR LIMIT=NONE] -->
     <string name="choose_sim_title">Choose a number to use</string>
     <!--  The body text of choose SIM activity. [CHAR LIMIT=NONE] -->
-    <string name="choose_sim_text"><xliff:g id="number" example="2">%1$d</xliff:g> numbers are available on this device, but only one can be used at a time</string>
+    <string name="choose_sim_text">{count, plural,
+      =1      {1 number is available on this device, but only one can be used at a time}
+      =2      {2 numbers are available on this device, but only one can be used at a time}
+      other   {# numbers are available on this device, but only one can be used at a time}
+    }</string>
     <!-- String indicating that we are activating the profile [CHAR LIMIT=NONE] -->
     <string name="choose_sim_activating">Activating<xliff:g id="ellipsis" example="...">&#8230;</xliff:g></string>
     <!-- String indicating that we failed to activate the selected profile [CHAR LIMIT=NONE] -->
