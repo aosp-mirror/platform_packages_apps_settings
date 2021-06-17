@@ -37,7 +37,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
-import com.android.settings.network.ActiveSubsciptionsListener;
+import com.android.settings.network.ActiveSubscriptionsListener;
 import com.android.settings.network.CarrierWifiTogglePreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
@@ -74,9 +74,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     private UserManager mUserManager;
     private String mClickedPrefKey;
 
-    private ActiveSubsciptionsListener mActiveSubsciptionsListener;
+    private ActiveSubscriptionsListener mActiveSubscriptionsListener;
     private boolean mDropFirstSubscriptionChangeNotify;
-    private int mActiveSubsciptionsListenerCount;
+    private int mActiveSubscriptionsListenerCount;
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -218,8 +218,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         super.onResume();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
-        if (mActiveSubsciptionsListener == null) {
-            mActiveSubsciptionsListener = new ActiveSubsciptionsListener(
+        if (mActiveSubscriptionsListener == null) {
+            mActiveSubscriptionsListener = new ActiveSubscriptionsListener(
                     getContext().getMainLooper(), getContext(), mSubId) {
                 public void onChanged() {
                     onSubscriptionDetailChanged();
@@ -227,7 +227,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             };
             mDropFirstSubscriptionChangeNotify = true;
         }
-        mActiveSubsciptionsListener.start();
+        mActiveSubscriptionsListener.start();
     }
 
     private void onSubscriptionDetailChanged() {
@@ -236,21 +236,21 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             Log.d(LOG_TAG, "Callback during onResume()");
             return;
         }
-        mActiveSubsciptionsListenerCount++;
-        if (mActiveSubsciptionsListenerCount != 1) {
+        mActiveSubscriptionsListenerCount++;
+        if (mActiveSubscriptionsListenerCount != 1) {
             return;
         }
 
         ThreadUtils.postOnMainThread(() -> {
-            mActiveSubsciptionsListenerCount = 0;
+            mActiveSubscriptionsListenerCount = 0;
             redrawPreferenceControllers();
         });
     }
 
     @Override
     public void onDestroy() {
-        if (mActiveSubsciptionsListener != null) {
-            mActiveSubsciptionsListener.stop();
+        if (mActiveSubscriptionsListener != null) {
+            mActiveSubscriptionsListener.stop();
         }
         super.onDestroy();
     }

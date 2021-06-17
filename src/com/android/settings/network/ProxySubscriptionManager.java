@@ -77,7 +77,7 @@ public class ProxySubscriptionManager implements LifecycleObserver {
         mActiveSubscriptionsListeners =
                 new ArrayList<OnActiveSubscriptionChangedListener>();
 
-        mSubscriptionMonitor = new ActiveSubsciptionsListener(looper, context) {
+        mSubscriptionMonitor = new ActiveSubscriptionsListener(looper, context) {
             public void onChanged() {
                 notifyAllListeners();
             }
@@ -94,7 +94,7 @@ public class ProxySubscriptionManager implements LifecycleObserver {
     }
 
     private Lifecycle mLifecycle;
-    private ActiveSubsciptionsListener mSubscriptionMonitor;
+    private ActiveSubscriptionsListener mSubscriptionMonitor;
     private GlobalSettingsChangeListener mAirplaneModeMonitor;
 
     private List<OnActiveSubscriptionChangedListener> mActiveSubscriptionsListeners;
