@@ -61,6 +61,7 @@ public final class HibernatedAppsPreferenceController extends BasePreferenceCont
     private PreferenceScreen mScreen;
     private int mUnusedCount = 0;
     private boolean mLoadingUnusedApps;
+    private boolean mLoadedUnusedCount;
     private final Executor mBackgroundExecutor;
     private final Executor mMainExecutor;
 
@@ -79,14 +80,15 @@ public final class HibernatedAppsPreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return isHibernationEnabled() && mUnusedCount > 0
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return isHibernationEnabled() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public CharSequence getSummary() {
-        return mContext.getResources().getQuantityString(
-                R.plurals.unused_apps_summary, mUnusedCount, mUnusedCount);
+        return mLoadedUnusedCount
+                ? mContext.getResources().getQuantityString(
+                        R.plurals.unused_apps_summary, mUnusedCount, mUnusedCount)
+                : mContext.getResources().getString(R.string.summary_placeholder);
     }
 
     @Override
@@ -111,8 +113,8 @@ public final class HibernatedAppsPreferenceController extends BasePreferenceCont
             loadUnusedCount(unusedCount -> {
                 mUnusedCount = unusedCount;
                 mLoadingUnusedApps = false;
+                mLoadedUnusedCount = true;
                 mMainExecutor.execute(() -> {
-                    super.displayPreference(mScreen);
                     Preference pref = mScreen.findPreference(mPreferenceKey);
                     refreshSummary(pref);
                 });
