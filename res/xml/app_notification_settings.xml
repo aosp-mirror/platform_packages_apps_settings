@@ -58,7 +58,16 @@
         android:key="channels"
         android:layout="@layout/empty_view"
         settings:allowDividerAbove="true"
-        settings:allowDividerBelow="false" />
+        settings:allowDividerBelow="true" />
+
+    <!-- Show badge -->
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="badge"
+        android:title="@string/notification_badge_title"
+        settings:useAdditionalSummary="true"
+        android:order="1001"
+        settings:allowDividerAbove="true"
+        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
 
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
@@ -75,25 +84,13 @@
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="bypass_dnd"
         android:title="@string/app_notification_override_dnd_title"
-        android:summary="@string/app_notification_override_dnd_summary"
-        settings:useAdditionalSummary="true"/>
+        android:summary="@string/app_notification_override_dnd_summary"/>
 
-    <PreferenceCategory
-        android:key="app_advanced"
-        android:order="1000">
-        <!-- Show badge -->
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="badge"
-            android:title="@string/notification_badge_title"
-            settings:useAdditionalSummary="true"
-            android:order="1001"
-            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
         <Preference
             android:key="app_link"
             android:order="1003"
+            android:icon="@drawable/ic_settings_24dp"
             android:title="@string/app_settings_link" />
-
-    </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="desc"
