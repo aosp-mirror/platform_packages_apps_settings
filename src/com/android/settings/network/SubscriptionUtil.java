@@ -54,6 +54,7 @@ import java.util.stream.Stream;
 
 public class SubscriptionUtil {
     private static final String TAG = "SubscriptionUtil";
+    private static final String PROFILE_GENERIC_DISPLAY_NAME = "CARD";
     private static List<SubscriptionInfo> sAvailableResultsForTesting;
     private static List<SubscriptionInfo> sActiveResultsForTesting;
 
@@ -257,7 +258,10 @@ public class SubscriptionUtil {
                 .map(i -> {
                     DisplayInfo info = new DisplayInfo();
                     info.subscriptionInfo = i;
-                    info.originalName = i.getDisplayName().toString().trim();
+                    String displayName = i.getDisplayName().toString();
+                    info.originalName = TextUtils.equals(displayName, PROFILE_GENERIC_DISPLAY_NAME)
+                            ? context.getResources().getString(R.string.sim_card)
+                            : displayName.trim();
                     return info;
                 });
 
