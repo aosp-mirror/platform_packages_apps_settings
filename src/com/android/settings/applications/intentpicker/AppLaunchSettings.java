@@ -46,7 +46,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.ClearDefaultsPreference;
-import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.widget.FooterPreference;
@@ -73,8 +72,6 @@ public class AppLaunchSettings extends AppInfoBase implements
             "open_by_default_selected_links_category";
     private static final String OTHER_DETAILS_PREF_CATEGORY_KEY = "app_launch_other_defaults";
 
-    // Url and Uri
-    private static final String ANNOTATION_URL = "url";
     private static final String LEARN_MORE_URI =
             "https://developer.android.com/training/app-links/verify-site-associations";
 
@@ -356,16 +353,22 @@ public class AppLaunchSettings extends AppInfoBase implements
     }
 
     private void initFooter() {
-        // learn more
-        final AnnotationSpan.LinkInfo linkInfo =
-                new AnnotationSpan.LinkInfo(ANNOTATION_URL, v -> {
-                    final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(LEARN_MORE_URI));
-                    mContext.startActivity(intent);
-                });
         final CharSequence footerText = mContext.getText(R.string.app_launch_footer);
         final FooterPreference footerPreference = (FooterPreference) findPreference(
                 FOOTER_PREF_KEY);
-        footerPreference.setTitle(AnnotationSpan.linkify(footerText, linkInfo));
+        footerPreference.setTitle(footerText);
+        // learn more
+        footerPreference.setLearnMoreAction(view -> {
+            final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(LEARN_MORE_URI));
+            mContext.startActivity(intent);
+        });
+        final String learnMoreContentDescription = mContext.getString(
+                R.string.footer_learn_more_content_description, getLabelName());
+        footerPreference.setLearnMoreContentDescription(learnMoreContentDescription);
+    }
+
+    private String getLabelName() {
+        return mContext.getString(R.string.launch_by_default);
     }
 
     private boolean isClearDefaultsEnabled() {
