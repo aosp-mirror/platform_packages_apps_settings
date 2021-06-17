@@ -17,17 +17,28 @@
 package com.android.settings.biometrics.fingerprint;
 
 import android.content.Context;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
 
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
+import com.android.settings.biometrics.ParentalControlsUtils;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 
 public class FingerprintStatusPreferenceController extends BiometricStatusPreferenceController {
 
     private static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
 
     protected final FingerprintManager mFingerprintManager;
+    @VisibleForTesting
+    RestrictedPreference mPreference;
 
     public FingerprintStatusPreferenceController(Context context) {
         this(context, KEY_FINGERPRINT_SETTINGS);
@@ -39,6 +50,12 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(KEY_FINGERPRINT_SETTINGS);
+    }
+
+    @Override
     protected boolean isDeviceSupported() {
         return !Utils.isMultipleBiometricsSupported(mContext)
                 && Utils.hasFingerprintHardware(mContext);
@@ -47,6 +64,21 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     @Override
     protected boolean hasEnrolledBiometrics() {
         return mFingerprintManager.hasEnrolledFingerprints(getUserId());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        final RestrictedLockUtils.EnforcedAdmin admin = ParentalControlsUtils
+                .parentConsentRequired(mContext, BiometricAuthenticator.TYPE_FINGERPRINT);
+        updateStateInternal(admin);
+    }
+
+    @VisibleForTesting
+    void updateStateInternal(@Nullable RestrictedLockUtils.EnforcedAdmin enforcedAdmin) {
+        if (enforcedAdmin != null && mPreference != null) {
+            mPreference.setDisabledByAdmin(enforcedAdmin);
+        }
     }
 
     @Override
