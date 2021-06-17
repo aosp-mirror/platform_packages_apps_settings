@@ -88,6 +88,13 @@ public class ApnSettings extends RestrictedSettingsFragment
             Telephony.Carriers.EDITED_STATUS,
     };
 
+    /** Copied from {@code com.android.internal.telephony.TelephonyIntents} */
+    private static final String ACTION_SIM_STATE_CHANGED =
+            "android.intent.action.SIM_STATE_CHANGED";
+    /** Copied from {@code com.android.internal.telephony.IccCardConstants} */
+    public static final String INTENT_KEY_ICC_STATE = "ss";
+    public static final String INTENT_VALUE_ICC_ABSENT = "ABSENT";
+
     private static final int ID_INDEX = 0;
     private static final int NAME_INDEX = 1;
     private static final int APN_INDEX = 2;
@@ -151,7 +158,16 @@ public class ApnSettings extends RestrictedSettingsFragment
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(
+            String action = intent.getAction();
+            if (ACTION_SIM_STATE_CHANGED.equals(action)
+                    && intent.getStringExtra(INTENT_KEY_ICC_STATE)
+                    .equals(INTENT_VALUE_ICC_ABSENT)) {
+                final SubscriptionManager sm = context.getSystemService(SubscriptionManager.class);
+                if (sm != null && !sm.isActiveSubscriptionId(mSubId)) {
+                    Log.d(TAG, "Due to SIM absent, closes APN settings page");
+                    finish();
+                }
+            } else if (intent.getAction().equals(
                     TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED)) {
                 if (mRestoreDefaultApnMode) {
                     return;
@@ -201,8 +217,9 @@ public class ApnSettings extends RestrictedSettingsFragment
         mSubId = activity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mPhoneId = SubscriptionUtil.getPhoneId(activity, mSubId);
-        mIntentFilter = new IntentFilter(
-                TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED);
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED);
+        mIntentFilter.addAction(ACTION_SIM_STATE_CHANGED);
 
         setIfOnlyAvailableForAdmins(true);
 
