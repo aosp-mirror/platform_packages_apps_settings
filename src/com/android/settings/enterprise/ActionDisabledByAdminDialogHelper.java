@@ -80,7 +80,8 @@ public final class ActionDisabledByAdminDialogHelper {
             EnforcedAdmin enforcedAdmin) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity)
                 .setPositiveButton(R.string.okay,
-                        mActionDisabledByAdminController.getPositiveButtonListener())
+                        mActionDisabledByAdminController
+                                .getPositiveButtonListener(mActivity, enforcedAdmin))
                 .setView(mDialogView);
         prepareDialogBuilder(builder, restriction, enforcedAdmin);
         return builder;
