@@ -22,6 +22,7 @@ import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.biometrics.ParentalControlsUtilsInternal;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,8 @@ public class ParentalControlsUtils {
         final UserHandle userHandle = new UserHandle(UserHandle.myUserId());
         if (ParentalControlsUtilsInternal.isTestModeEnabled(context)) {
             Log.d(TAG, "Requiring consent for test flow");
-            return new RestrictedLockUtils.EnforcedAdmin(null /* ComponentName */, userHandle);
+            return new RestrictedLockUtils.EnforcedAdmin(null /* ComponentName */,
+                    UserManager.DISALLOW_BIOMETRIC, userHandle);
         }
 
         final DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
@@ -69,7 +71,8 @@ public class ParentalControlsUtils {
                 userHandle)) {
             final ComponentName cn =
                     ParentalControlsUtilsInternal.getSupervisionComponentName(dpm, userHandle);
-            return new RestrictedLockUtils.EnforcedAdmin(cn, userHandle);
+            return new RestrictedLockUtils.EnforcedAdmin(cn, UserManager.DISALLOW_BIOMETRIC,
+                    userHandle);
         } else {
             return null;
         }
