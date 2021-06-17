@@ -35,6 +35,7 @@ import static android.hardware.biometrics.BiometricAuthenticator.TYPE_IRIS;
 
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.os.UserHandle;
+import android.os.UserManager;
 
 import androidx.annotation.Nullable;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -92,6 +93,7 @@ public class ParentalControlsUtilsTest {
                     mSupervisionComponentName, tests[i][0] /* modality */,
                     tests[i][1] /* keyguardDisableFlags */);
             assertNotNull(admin);
+            assertEquals(UserManager.DISALLOW_BIOMETRIC, admin.enforcedRestriction);
             assertEquals(mSupervisionComponentName, admin.component);
         }
     }
