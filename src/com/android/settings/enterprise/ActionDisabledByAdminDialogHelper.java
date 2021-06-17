@@ -56,11 +56,16 @@ public final class ActionDisabledByAdminDialogHelper {
     private final Activity mActivity;
 
     public ActionDisabledByAdminDialogHelper(Activity activity) {
+        this(activity, null /* restriction */);
+    }
+
+    public ActionDisabledByAdminDialogHelper(Activity activity, String restriction) {
         mActivity = activity;
         mDialogView = (ViewGroup) LayoutInflater.from(mActivity).inflate(
                 R.layout.admin_support_details_dialog, null);
         mActionDisabledByAdminController = ActionDisabledByAdminControllerFactory
-                .createInstance(mActivity, new DeviceAdminStringProviderImpl(mActivity));
+                .createInstance(mActivity, restriction,
+                        new DeviceAdminStringProviderImpl(mActivity));
     }
 
     private @UserIdInt int getEnforcementAdminUserId(@NonNull EnforcedAdmin admin) {
@@ -74,7 +79,8 @@ public final class ActionDisabledByAdminDialogHelper {
     public AlertDialog.Builder prepareDialogBuilder(String restriction,
             EnforcedAdmin enforcedAdmin) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity)
-                .setPositiveButton(R.string.okay, null)
+                .setPositiveButton(R.string.okay,
+                        mActionDisabledByAdminController.getPositiveButtonListener())
                 .setView(mDialogView);
         prepareDialogBuilder(builder, restriction, enforcedAdmin);
         return builder;
