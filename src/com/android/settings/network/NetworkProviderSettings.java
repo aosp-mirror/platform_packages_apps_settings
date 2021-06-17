@@ -460,6 +460,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     }
 
     @Override
+    public void onDestroy() {
+        mAirplaneModeEnabler.close();
+        super.onDestroy();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
