@@ -603,8 +603,8 @@
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Pilih kunci layar"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Pilih kunci layar"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Pilih kunci layar baru"</string>
-    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Pilih kunci aplikasi kerja"</string>
-    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Pilih kunci apl kerja baru"</string>
+    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Pilih kunci untuk aplikasi profil kerja"</string>
+    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Pilih kunci profil kerja baru"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Lindungi tablet"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"Lindungi perangkat"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"Lindungi ponsel"</string>
@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Otomatis meningkatkan rasio pembaruan dari 60 menjadi 90 Hz untuk beberapa konten. Meningkatkan penggunaan baterai."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Paksa rasio pembaruan 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Paksa rasio pembaruan puncak"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Rasio pembaruan tertinggi untuk penyempurnaan respons sentuhan &amp; kualitas animasi. Meningkatkan penggunaan baterai."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Fokus ke layar"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Aktif / Layar tidak akan mati jika Anda sedang melihatnya"</string>
@@ -1932,9 +1932,9 @@
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Gunakan pola perangkat untuk melanjutkan"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Masukkan PIN perangkat untuk melanjutkan"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Masukkan sandi perangkat untuk melanjutkan"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Gunakan pola kerja untuk melanjutkan"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Masukkan PIN kerja untuk melanjutkan"</string>
-    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Masukkan sandi kerja untuk melanjutkan"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Gunakan pola profil kerja untuk melanjutkan"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Masukkan PIN profil kerja untuk melanjutkan"</string>
+    <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Masukkan sandi profil kerja untuk melanjutkan"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Untuk tambahan keamanan, gunakan pola perangkat"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Untuk tambahan keamanan, masukkan PIN perangkat"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Untuk tambahan keamanan, masukkan sandi perangkat"</string>
@@ -1953,7 +1953,7 @@
     <string name="lock_settings_title" msgid="665707559508132349">"Keamanan perangkat"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5853706275279878879">"Ubah pola pembuka kunci"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"Ubah PIN pembuka kunci"</string>
-    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Buat pola pembuka kunci"</string>
+    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Gambar pola pembuka kunci"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Tekan Menu untuk bantuan."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Angkat jari ketika selesai"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Sambungkan setidaknya <xliff:g id="NUMBER">%d</xliff:g> titik. Coba lagi."</string>
@@ -1974,7 +1974,7 @@
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Kecuali jika tetap tidak dikunci oleh <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Setel pola pembuka kunci"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Ubah pola pembuka kunci"</string>
-    <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Cara membuat pola pembuka kunci"</string>
+    <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"Cara menggambar pola pembuka kunci"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts" msgid="7891484005551794824">"Terlalu banyak kesalahan pola. Coba kembali dalam <xliff:g id="NUMBER">%d</xliff:g> detik."</string>
     <string name="activity_not_found" msgid="5464331414465894254">"Aplikasi tidak dipasang pada ponsel Anda."</string>
     <string name="lock_settings_profile_title" msgid="103605580492566086">"Keamanan profil kerja"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Oke"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Pintasan <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Tombol aksesibilitas"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gestur aksesibilitas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Geser layar ke atas dengan 2 jari"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Geser layar ke atas dengan 3 jari"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Ketuk tombol aksesibilitas"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Gunakan gestur aksesibilitas"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Ketuk tombol aksesibilitas <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> di bagian bawah layar.\n\nUntuk beralih ke fitur lain, sentuh lama tombol aksesibilitas."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Geser ke atas dari bawah layar dengan 2 jari.\n\nUntuk beralih ke fitur lain, geser ke atas dengan 2 jari dan tahan."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Geser ke atas dari bawah layar dengan 3 jari.\n\nUntuk beralih ke fitur lain, geser ke atas dengan 3 jari dan tahan."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Sesuaikan gestur aksesibilitas"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Sesuaikan tombol aksesibilitas"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Pelajari lebih lanjut <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Tahan tombol volume"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Pintasan dari layar kunci"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Izinkan pintasan fitur untuk diaktifkan dari layar kunci. Tahan kedua tombol volume selama beberapa detik."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Tombol aksesibilitas"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tombol &amp; gestur aksesibilitas"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Menggunakan tombol aksesibilitas. Gestur tidak tersedia dengan navigasi 3 tombol."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Akses fitur aksesibilitas dengan cepat"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Akses fitur aksesibilitas dengan cepat dari layar mana pun. \n\nUntuk memulai, buka setelan aksesibilitas dan pilih fitur. Ketuk pintasan dan pilih tombol aksesibilitas."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Gunakan tombol atau gestur"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokasi"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Ukuran"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Memudar saat tidak digunakan"</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Buat layar Anda lebih redup agar dapat membaca dengan lebih nyaman.&lt;br/&gt;&lt;br/&gt; Ini dapat berguna saat: &lt;ol&gt; &lt;li&gt; Kecerahan minimum default ponsel masih terlalu cerah&lt;/li&gt; &lt;li&gt; Anda menggunakan ponsel di lingkungan yang gelap, seperti saat malam hari atau di kamar yang gelap sebelum tidur&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Buat layar lebih gelap agar Anda lebih nyaman membaca.&lt;br/&gt;&lt;br/&gt; Ini berguna saat: &lt;ol&gt; &lt;li&gt; Kecerahan minimum default tablet masih terlalu cerah&lt;/li&gt; &lt;li&gt; Anda menggunakan tablet di lingkungan yang gelap, seperti saat malam hari atau di kamar yang gelap sebelum tidur&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitas"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Tetap aktif setelah perangkat dimulai ulang"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Singkat (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> detik)</item>
@@ -2787,7 +2797,7 @@
     <string name="battery_detail_background" msgid="3333915023706228000">"Saat di latar belakang"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Penggunaan baterai"</string>
     <string name="battery_detail_info_title" msgid="5896661833554333683">"Sejak baterai terisi penuh"</string>
-    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Mengelola penggunaan baterai"</string>
+    <string name="battery_detail_manage_title" msgid="7910805419446927887">"Kelola penggunaan baterai"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Total <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> di latar belakang\nsejak terakhir kali baterai terisi penuh"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Total <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> di latar belakang\nselama 24 jam terakhir"</string>
     <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"Total <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> di latar belakang\nselama <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Percakapan terbaru"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Hapus percakapan terbaru"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Percakapan terakhir dihapus"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Hapus"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Tampilkan balon percakapan prioritas"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Percakapan prioritas muncul di bagian atas menu notifikasi. Anda juga dapat menyetelnya untuk menampilkan balon dan mengganggu fitur Jangan Ganggu."</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Link yang didukung"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Preferensi default lainnya"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Tambahkan link"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Aplikasi dapat memverifikasi link agar otomatis terbuka di aplikasi. "<annotation id="url">"Pelajari lebih lanjut"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> link terverifikasi</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> link terverifikasi</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Jangan terapkan pengoptimalan baterai. Baterai akan lebih cepat habis."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Izinkan aplikasi selalu berjalan di latar belakang?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Mengizinkan <xliff:g id="APP_NAME">%1$s</xliff:g> untuk selalu berjalan di latar belakang dapat mengurangi masa pakai baterai. \n\nAnda dapat mengubah ini nanti dari Setelan &gt; Aplikasi &amp; notifikasi."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"Penggunaan <xliff:g id="PERCENTAGE">%1$s</xliff:g> dalam 24 jam terakhir"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Pengelolaan daya"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Tidak ada penggunaan baterai dalam 24 jam terakhir"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> digunakan sejak terakhir kali baterai diisi penuh"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"Penggunaan <xliff:g id="PERCENTAGE">%1$s</xliff:g> dalam 24 jam terakhir"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Tidak ada penggunaan baterai sejak isi daya penuh terakhir"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Tidak ada penggunaan baterai dalam 24 jam terakhir"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Setelan aplikasi"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Tampilkan Penyetel SystemUI"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Izin tambahan"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Tidak dapat mengambil screenshot"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Aplikasi ini tidak dapat dibuka"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Diblokir oleh penyedia kredit Anda"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Jika ada pertanyaan, hubungi admin IT"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Detail selengkapnya"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Admin dapat memantau serta mengelola aplikasi dan data yang terkait dengan profil kerja, termasuk setelan, izin, akses perusahaan, aktivitas jaringan, dan informasi lokasi perangkat."</string>

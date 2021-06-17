@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Onyesho Laini"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Huinua kiotomatiki kiwango cha kuonyesha upya kutoka Hz 60 hadi 90 kwa baadhi ya maudhui. Huongeza matumizi ya betri."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Lazimisha kiwango cha kuonyesha upya cha Hz 90"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Lazimisha kiwango cha juu cha kuonyesha upya"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Kiwango cha juu kabisa cha kuonyesha upya kwa utendakazi wa mguso ulioboreshwa na ubora wa uhuishaji. Huongeza matumizi ya betri."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Utashi wa skrini"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Umewashwa / Skrini haitazima ikiwa unaiangalia"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Nimeelewa"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Njia mkato ya <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Kitufe cha zana za ufikivu"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Ishara ya ufikivu"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Telezesha vidole viwili juu"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Telezesha vidole vitatu juu"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Gusa kitufe cha zana za ufikivu"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Tumia ishara ya ufikivu"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Gusa kitufe cha zana za ufikivu cha <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> kilicho sehemu ya chini ya skrini yako.\n\nIli ubadilishe kati ya vipengele, gusa na ushikilie kitufe cha zana za ufikivu."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Telezesha vidole viwili juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole viwili juu na ushikilie."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Telezesha vidole vitatu juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole vitatu juu na ushikilie."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Weka mapendeleo kwenye ishara ya ufikivu"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Weka mapendeleo kwenye kitufe cha zana za ufikivu"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Pata maelezo zaidi kuhusu <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Shikilia vitufe vya sauti"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Njia ya mkato kwenye skrini iliyofungwa"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Ruhusu kipengele cha njia ya mkato ya kufikia vipengele kiwake kwenye skrini iliyofungwa. Shikilia vitufe vyote viwili vya sauti kwa sekunde chache."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Kitufe cha zana za ufikivu"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Ishara na kitufe cha zana za ufikivu"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Kutumia kitufe cha zana za ufikivu. Ishara haipatikani kwenye usogezaji kwa kutumia vitufe 3."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Fikia vipengele vya ufikivu haraka"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Fikia vipengele vya ufikivu haraka kwenye skrini yoyote. \n\nIli uanze, nenda kwenye mipangilio ya ufikivu na uchague kipengele. Gusa njia ya mkato na uchague kitufe cha zana za ufikivu."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Tumia ishara au kitufe"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Mahali"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Ukubwa"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Fifia wakati hakitumiki"</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Punguza mwangaza wa skrini yako zaidi ili uweze kusoma bila tatizo.&lt;br/&gt;&lt;br/&gt; Hali hii inaweza kukusaidia wakati: &lt;ol&gt; &lt;li&gt; Ung\'aavu chaguomsingi wa kiwango cha chini kwenye simu yako bado una mwangaza mkubwa&lt;/li&gt; &lt;li&gt; Unatumia simu yako katika hali zenye giza, kama vile usiku au katika chumba chenye giza kabla ya kulala&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Fanya skrini yako iwe nyeusi kidogo ili uweze kusoma bila tatizo.&lt;br/&gt;&lt;br/&gt; Hali hii inaweza kuwa muhimu wakati: &lt;ol&gt; &lt;li&gt; Ung\'aavu chaguomsingi wa kiwango cha chini kwenye kompyuta yako kibao bado una mwangaza mkubwa&lt;/li&gt; &lt;li&gt; Unatumia kompyuta yako kibao katika hali zenye giza, kama vile usiku au katika chumba chenye giza kabla ya kulala&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Ukolezaji"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Iendelee kutumika baada ya kuzima na kuwasha kifaa"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Muda mfupi (sekunde <xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>)</item>
@@ -2580,7 +2590,7 @@
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Ikiwa utadhibiti shughuli za chini chini za programu, huenda isifanye kazi vizuri"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Kwa kuwa programu hii haiboreshi matumizi ya betri, huwezi kuizuia.\n\nIli uizuie, washa kuboresha matumizi ya betri."</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Isiyodhibitiwa"</string>
-    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Imeboreshwa"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Inaboreshwa"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Imedhibitiwa"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Ruhusu matumizi ya betri chinichini bila vidhibiti. Huenda ikatumia chaji nyingi ya betri."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Boresha kulingana na jinsi unavyotumia. Inapendekezwa kwa ajili ya programu nyingi."</string>
@@ -2676,12 +2686,12 @@
     <string name="smart_battery_title" msgid="9095903608520254254">"Dhibiti programu kiotomatiki"</string>
     <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Dhibiti matumizi ya chaji kwenye programu ambazo hutumii sana"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"Kidhibiti cha betri kikitambua kuwa programu zinatumia chaji sana, utakuwa na chaguo la kudhibiti programu hizi. Huenda programu zilizodhibitiwa zisifanye kazi vizuri na arifa zikachelewa."</string>
-    <string name="restricted_app_title" msgid="6585080822121007436">"Programu zilizodhibitiwa"</string>
+    <string name="restricted_app_title" msgid="6585080822121007436">"Programu zinazodhibitiwa"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Inadhibiti matumizi ya betri kwa programu %1$d</item>
       <item quantity="one">Inadhibiti matumizi ya betri kwa programu %1$d</item>
     </plurals>
-    <string name="restricted_app_time_summary" msgid="3097721884155913252">"Imedhibitiwa <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="restricted_app_time_summary" msgid="3097721884155913252">"Ilidhibitiwa <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Programu hizi haziruhusiwi kutumia betri chinichini. Huenda zisifanye kazi ipasavyo na arifa zinaweza kuchelewa."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Tumia Kidhibiti cha Betri"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Tambua wakati programu zinatumia chaji sana"</string>
@@ -2828,7 +2838,7 @@
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Kitawaka ikifika <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Weka ratiba"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Ongeza muda wa matumizi ya betri"</string>
-    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Zima kiokoa betri simu ikipata chaji"</string>
+    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Zima simu ikipata chaji"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Kiokoa Betri hujizima chaji ya simu yako inapokuwa zaidi ya <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Kiokoa Betri hujizima chaji ya kompyuta yako kibao inapokuwa zaidi ya <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"Kiokoa Betri hujizima chaji ya kifaa chako inapokuwa zaidi ya <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g>"</string>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Mazungumzo ya hivi majuzi"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Futa mazungumzo ya hivi majuzi"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Mazungumzo ya hivi majuzi yameondolewa"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Futa"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Yafanye mazungumzo yenye kipaumbele yatoe viputo"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Mazungumzo yenye kipaumbele huonekana juu ya menyu inayovutwa chini. Unaweza pia kuyafanya yatoe viputo na kukatiza kipengele cha Usinisumbue."</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Viungo vinavyoweza kutumika"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Mapendeleo mengine chaguomsingi"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Weka kiungo"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Programu inaweza kuthibitisha viungo ili vifunguke kiotomatiki katika programu. "<annotation id="url">"Pata maelezo zaidi"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other">Viungo <xliff:g id="COUNT_1">%d</xliff:g> vilivyothibitishwa</item>
       <item quantity="one">Kiungo <xliff:g id="COUNT_0">%d</xliff:g> kilichothibitishwa</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Usitumie kipengele cha kuboresha matumizi ya betri. Kinaweza kumaliza chaji ya betri yako haraka zaidi."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Ungependa kuruhusu programu itumike chinichini kila wakati?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Ukiruhusu <xliff:g id="APP_NAME">%1$s</xliff:g> kutumika chinichini, unaweza kupunguza muda wa matumizi ya betri. \n\nUnaweza kubadilisha hali hii baadaye katika Mipangilio &gt; Programu na arifa."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> imetumika katika saa 24 zilizopita"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Udhibiti wa betri"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Hakuna matumizi ya betri katika saa 24 zilizopita"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"Imetumia <xliff:g id="PERCENTAGE">%1$s</xliff:g> tangu mwisho ilipojazwa chaji"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> imetumika katika saa 24 zilizopita"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Betri haijatumika tangu mwisho ilipojazwa chaji"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Hakuna matumizi ya betri katika saa 24 zilizopita"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Mipangilio ya programu"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Onyesha Kipokea Ishara cha SystemUI"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Ruhusa za ziada"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Huwezi kupiga picha za skrini"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Haiwezi kufungua programu"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Imezuiwa na kampuni iliyokuuzia kifaa kwa mkopo"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Ikiwa una maswali, wasiliana na msimamizi wako wa TEHAMA"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Maelezo zaidi"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Msimamizi wako anaweza kufuatilia na kudhibiti programu na data zinazohusiana na wasifu wako wa kazini, ikiwa ni pamoja na mipangilio, ruhusa, ufikiaji wa shirika, shughuli za mtandao na maelezo ya mahali kilipo kifaa."</string>
@@ -4806,9 +4824,9 @@
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"Sekunde 12"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"uwezo wa kufikia"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Telezesha kidole chini ili"</string>
-    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Ili utumie hali ya kutumia kwa mkono mmoja, telezesha kidole juu kuanzia ukingo wa chini wa skrini. Ili utumie kipengele hiki, hakikisha kuwa umewasha usogezaji kwa kutumia ishara katika mipangilio ya usogezaji kwenye mfumo."</string>
+    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Ili utumie kwa mkono mmoja, telezesha kidole chini kuanzia ukingo wa chini wa skrini. Ili utumie kipengele hiki, hakikisha kuwa umewasha usogezaji kwa kutumia ishara katika mipangilio ya usogezaji kwenye mfumo."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Sogeza skrini karibu nawe"</string>
-    <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Utaweza kufikia na kugusa sehemu ya juu ya skrini ukitumia kidole gumba chako."</string>
+    <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Utaweza kufikia sehemu ya juu ya skrini ukitumia kidole gumba chako."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Onyesha arifa"</string>
     <string name="one_handed_action_show_notification_summary" msgid="114988229079950849">"Arifa na mipangilio itaonekana."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Ili uangalie saa, arifa na maelezo mengine, gusa skrini yako mara mbili."</string>
@@ -4964,7 +4982,7 @@
     <string name="storage_volume_total" msgid="7102720999351050601">"kati ya <xliff:g id="TOTAL">%1$s</xliff:g> zimetumika"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"imetumika"</string>
     <string name="storage_usage_summary" msgid="4591121727356723463">"Umetumia <xliff:g id="UNIT">%2$s</xliff:g> <xliff:g id="NUMBER">%1$s</xliff:g>"</string>
-    <string name="storage_total_summary" msgid="7163360249534964272">"<xliff:g id="NUMBER">%1$s</xliff:g><xliff:g id="UNIT">%2$s</xliff:g> jumla"</string>
+    <string name="storage_total_summary" msgid="7163360249534964272">"Jumla <xliff:g id="UNIT">%2$s</xliff:g><xliff:g id="NUMBER">%1$s</xliff:g>"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"Futa data kwenye programu"</string>
     <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Ungependa kuondoa programu hii inayofunguka papo hapo?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"Fungua"</string>

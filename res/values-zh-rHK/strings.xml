@@ -1328,7 +1328,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流暢顯示"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"自動將部分內容的重新整理頻率，從 60 Hz 提升到 90 Hz。此功能會增加耗電量。"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"提升重新整理頻率至 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"強制使用最高重新整理頻率"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"最高的重新整理頻率，帶來更靈敏的觸控反應和更高畫質的動畫。這會增加電池用量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"螢幕感知"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"啟用 / 假如正您望向螢幕，螢幕將不會關閉"</string>
@@ -2312,12 +2312,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"知道了"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"「<xliff:g id="SERVICE">%1$s</xliff:g>」快速鍵"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"無障礙功能按鈕"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"無障礙手勢"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"用 2 隻手指向上掃"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"用 3 隻手指向上掃"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"輕按無障礙功能按鈕"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"使用無障礙手勢"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"輕按畫面底部的無障礙功能按鈕 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>。\n\n要切換不同的功能，按住無障礙功能按鈕即可。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"用 2 隻手指由螢幕底部向上掃。\n\n如要切換功能，請用 2 隻手指向上掃並按住。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"用 3 隻手指由螢幕底部向上掃。\n\n用 3 隻手指向上掃然後㩒住，就可以切換唔同功能。"</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"自訂無障礙功能手勢"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"自訂無障礙功能按鈕"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"進一步瞭解「<xliff:g id="SERVICE">%1$s</xliff:g>」"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"按住音量鍵"</string>
@@ -2335,8 +2338,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"上鎖畫面快速鍵"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"允許在上鎖畫面開啟功能捷徑。同時按住兩個音量鍵幾秒。"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"無障礙功能按鈕"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"無障礙工具按鈕和手勢"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"請使用無障礙功能按鈕。手勢無法與三按鈕導覽配搭使用。"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"快速使用無障礙功能"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"在任何畫面上快速使用無障礙功能。\n\n如要開始使用，請前往無障礙功能設定頁面並選擇所需功能，然後輕按快速鍵並選取無障礙功能按鈕。"</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"使用按鈕或手勢"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"位置"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"大小"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"未使用時淡出"</string>
@@ -2431,6 +2437,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"將螢幕調暗可讓您看手機時更舒適。&lt;br/&gt;&lt;br/&gt; 此設定適用於以下情況：&lt;ol&gt; &lt;li&gt; 手機預設的最低亮度仍然太亮&lt;/li&gt; &lt;li&gt; 在夜間或睡前黑暗的房間等昏暗環境下使用手機&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"將螢幕調暗可讓您看手機時更舒適。&lt;br/&gt;&lt;br/&gt; 此設定適用於以下情況：&lt;ol&gt; &lt;li&gt; 平板電腦預設的最低亮度仍然太亮&lt;/li&gt; &lt;li&gt; 在夜間或睡前黑暗的房間等昏暗環境下使用平板電腦&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"亮度"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"裝置重新啟動後保持開啟"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">短 (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒)</item>
@@ -3832,6 +3842,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"最近的對話"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"清除近期對話"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"已移除近期對話"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"清除"</string>
     <string name="important_bubble" msgid="7911698275408390846">"優先對話用對話氣泡顯示"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"優先對話會在下拉式面板頂部顯示。您亦可設定用對話氣泡並在「請勿騷擾」模式中顯示優先對話。"</string>
@@ -4202,7 +4214,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"支援連結"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"其他預設偏好設定"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"新增連結"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"應用程式可驗證連結，通過驗證的連結就能自動在應用程式中開啟。"<annotation id="url">"瞭解詳情"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 個已驗證的連結</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個已驗證的連結</item>
@@ -4353,9 +4366,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"不使用電池優化，可能會加速耗電。"</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"允許應用程式一律在背景中執行嗎？"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」一律在背景中執行可能會縮短電池壽命。\n\n您日後可以前往「設定」&gt;「應用程式與通知」中變更這項設定。"</string>
-    <string name="battery_summary" msgid="4338334523643155767">"過去 24 小時的耗電量為 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"電量管理"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"過去 24 小時沒有耗電"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"上次充滿電後使用了 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"過去 24 小時的耗電量為 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"上次充滿電後沒有耗電"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"過去 24 小時未消耗電量"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"應用程式設定"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"顯示系統使用者介面調諧器"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"其他權限"</string>
@@ -4526,6 +4540,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"無法擷取螢幕截圖"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"無法開啟此應用程式"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"已被您的信貸提供者封鎖"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"如有任何問題，請與 IT 管理員聯絡"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"更多詳細資料"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"您的管理員可以監控及管理與工作設定檔相關的應用程式和資料，包括設定、權限、公司存取權、網絡活動，以及裝置的位置資料。"</string>

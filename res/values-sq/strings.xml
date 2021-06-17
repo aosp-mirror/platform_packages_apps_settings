@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Ekrani me butësi"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Rrit automatikisht shpejtësinë e rifreskimit nga 60 në 90 Hz për disa përmbajtje. Rrit përdorimin e baterisë."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Detyro shpejtësinë e rifreskimit 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Detyro shpejtësinë maksimale të rifreskimit"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Shpejtësia më e lartë e rifreskimit për përmirësimin e reagueshmërisë së prekjes dhe cilësisë së animacioneve. Rrit përdorimin e baterisë."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Vëmendja ndaj ekranit"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Aktiv / Ekrani nuk do të fiket nëse shikon tek ai"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"E kuptova"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Shkurtorja për \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Butoni i qasshmërisë"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gjesti i qasshmërisë"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Rrëshqit lart me 2 gishta"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Rrëshqit lart me 3 gishta"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Trokit mbi butonin e qasshmërisë"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Përdor gjestin e qasshmërisë"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Trokit mbi butonin e qasshmërisë <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> në fund të ekranit.\n\nPër të kaluar mes veçorive, prek dhe mbaj prekur butonin e qasshmërisë."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Rrëshqit shpejt lart nga fundi i ekranit me 2 gishta.\n\nPër të kaluar mes veçorive, rrëshqit shpejt lart me 2 gishta dhe mbaje të shtypur."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Rrëshqit shpejt lart nga fundi i ekranit me 3 gishta.\n\nPër të kaluar mes veçorive, rrëshqit shpejt lart me 3 gishta dhe mbaje të shtypur."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Personalizo gjestin e qasshmërisë"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Personalizo butonin e qasshmërisë"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Mëso më shumë për <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mbaj butonat e volumit"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Shkurtorja nga ekrani i kyçjes"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Lejo që shkurtorja e veçorisë të aktivizohet nga ekrani i kyçjes. Mbaji të dy çelësat e volumit për disa sekonda."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Butoni i qasshmërisë"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Butoni dhe gjesti i qasshmërisë"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Përdorimi i butonit të qasshmërisë. Gjesti nuk ofrohet me navigimin me 3 butona."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Qasu me shpejtësi te veçoritë e qasshmërisë"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Qasu me shpejtësi në veçoritë e qasshmërisë nga çdo ekran. \n\nPër të filluar, shko te cilësimet e qasshmërisë dhe zgjidh një veçori. Trokit te shkurtorja dhe zgjidh butonin e qasshmërisë."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Përdor butonin ose gjestin"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Vendndodhja"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Madhësia"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Zbehe kur nuk është në përdorim"</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Bëje ekranin më të zbehtë në mënyrë që të jetë më komod për t\'u lexuar.&lt;br/&gt;&lt;br/&gt; Kjo mund të jetë e dobishme kur: &lt;ol&gt; &lt;li&gt; Ndriçimi minimal i parazgjedhur i telefonit tënd është përsëri tepër i ndritshëm&lt;/li&gt; &lt;li&gt; Po e përdor telefonin në situata të errëta, si natën ose në një dhomë të errët përpara gjumit&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Bëje ekranin më të errët në mënyrë që të jetë më komod për t\'u lexuar.&lt;br/&gt;&lt;br/&gt; Kjo mund të jetë e dobishme kur: &lt;ol&gt; &lt;li&gt; Ndriçimi minimal i parazgjedhur i tabletit tënd është përsëri tepër i ndritshëm&lt;/li&gt; &lt;li&gt; Po e përdor tabletin në situata të errëta, si natën ose në një dhomë të errët përpara gjumit&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensiteti"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Mbaje të aktivizuar pasi pajisja të riniset"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">E shkurtër (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekonda)</item>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Bisedat e fundit"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Pastro bisedat e fundit"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Bisedat e fundit u hoqën"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Pastro"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Shfaq flluskën për bisedat me përparësi"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Bisedat me përparësi shfaqen në krye të strehës me tërheqje poshtë. Mund t\'i caktosh po ashtu që të shfaqen si flluskë dhe të ndërpresin \"Mos shqetëso\"."</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Lidhjet e mbështetura"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Preferenca të tjera të parazgjedhura"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Shto lidhje"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Një aplikacion mund t\'i verifikojë lidhjet që të hapen automatikisht në aplikacion. "<annotation id="url">"Mëso më shumë"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> lidhje të verifikuara</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> lidhje e verifikuar</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Mos zbato optimizimin e baterisë. Kjo mund ta shkarkojë baterinë më shpejt."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Të lejohet që aplikacioni të ekzekutohet gjithmonë në sfond?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Lejimi që <xliff:g id="APP_NAME">%1$s</xliff:g> të ekzekutohet gjithmonë në sfond mund të zvogëlojë kohëzgjatjen e baterisë. \n\nKëtë mund ta ndryshosh më vonë nga Cilësimet &gt; Aplikacionet dhe njoftimet."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> e përdorimit për 24 orët e fundit"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Menaxhimi i energjisë"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Nuk është përdorur bateria për 24 orët e fundit"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> përdorim që prej karikimit të fundit të plotë"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> e përdorimit për 24 orët e fundit"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Asnjë përdorim i baterisë që prej karikimit të fundit të plotë"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Nuk është përdorur bateria për 24 orët e fundit"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Cilësimet e aplikacionit"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Shfaq sintonizuesin SystemUI"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Lejet shtesë"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Pamjet e ekranit nuk mund të nxirren"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Ky aplikacion nuk mund të hapet"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Bllokuar nga ofruesi i kreditit"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Nëse ke pyetje, kontakto me administratorin e TI-së"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Më shumë detaje"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Administratori yt mund të monitorojë dhe të menaxhojë aplikacionet dhe të dhënat e lidhura me profilin tënd të punës, duke përfshirë cilësimet, lejet, qasjen e korporatës, aktivitetin e rrjetit dhe informacionet e vendndodhjes së pajisjes."</string>
