@@ -79,4 +79,14 @@ class DeviceAdminStringProviderImpl implements DeviceAdminStringProvider {
     public String getDisabledByPolicyTitleForFinancedDevice() {
         return mContext.getString(R.string.disabled_by_policy_title_financed_device);
     }
+
+    @Override
+    public String getDisabledBiometricsParentConsentTitle() {
+        return mContext.getString(R.string.disabled_by_policy_title_biometric_parental_consent);
+    }
+
+    @Override
+    public String getDisabledBiometricsParentConsentContent() {
+        return mContext.getString(R.string.disabled_by_policy_content_biometric_parental_consent);
+    }
 }
