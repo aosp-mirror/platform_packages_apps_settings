@@ -264,7 +264,7 @@ public class ProviderModelSliceHelper {
         return summary;
     }
 
-    private String getMobileTitle() {
+    protected String getMobileTitle() {
         String title = mContext.getText(R.string.mobile_data_settings_title).toString();
         if (mSubscriptionManager == null) {
             return title;
