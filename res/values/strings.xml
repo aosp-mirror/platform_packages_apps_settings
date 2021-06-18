@@ -5598,6 +5598,10 @@
     </string>
     <!-- Title for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_intensity_preference_title">Intensity</string>
+    <!-- Start label for slider that reduces the brightness intensity of the display using Extra Dim. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_intensity_start_label">Dimmer</string>
+    <!-- End label for slider that reduces the brightness intensity of the display using Extra Dim. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_intensity_end_label">Brighter</string>
     <!-- Title for setting whether the Reduce Brightness activation state persists across reboots. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
 
@@ -9100,8 +9104,11 @@
     <!-- [CHAR LIMIT=60] button title -->
     <string name="conversation_settings_clear_recents">Clear recent conversations</string>
 
-    <!-- a11y feedeback for 'clear recents' button' -->
+    <!-- a11y feedback for 'clear recents' button' -->
     <string name="recent_convos_removed">Recent conversations removed</string>
+
+    <!-- a11y feedback for 'clear recent conversation' button' -->
+    <string name="recent_convo_removed">Conversation removed</string>
 
     <!-- a11y string -->
     <string name="clear">Clear</string>
@@ -10133,7 +10140,7 @@
     <!-- Preference title for Add link [CHAR LIMIT=60] -->
     <string name="app_launch_add_link">Add link</string>
     <!-- Footer for Open by default. [CHAR LIMIT=NONE] -->
-    <string name="app_launch_footer">An app can verify links to automatically open in the app. <annotation id="url">Learn more</annotation></string>
+    <string name="app_launch_footer">An app can verify links to automatically open in the app.</string>
 
     <!-- Title, message and button for verified links dialog. -->
     <plurals name="app_launch_verified_links_title">
@@ -10956,6 +10963,10 @@
     <string name="disabled_by_policy_title_suspend_packages">Can’t open this app</string>
     <!-- Dialog title. This dialog lets a user know that a specific setting is blocked by their credit provider. Since the user purchased the device from the credit provider, the credit provider controls what they can access. [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_financed_device">Blocked by your credit provider</string>
+    <!-- Dialog title shown when parental consent is required for the child to set up biometric authentication. [CHAR LIMIT=30] -->
+    <string name="disabled_by_policy_title_biometric_parental_consent">Parent needed</string>
+    <!-- Dialog content shown when parental consent is required for the child to set up biometric authentication. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_policy_content_biometric_parental_consent">Hand the phone to your parent to start setting this up</string>
     <!-- Shown when the user tries to change phone settings that are blocked by their IT admin [CHAR LIMIT=200] -->
     <string name="default_admin_support_msg">If you have questions, contact your IT admin</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->

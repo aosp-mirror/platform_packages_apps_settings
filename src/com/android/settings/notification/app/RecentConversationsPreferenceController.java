@@ -167,6 +167,8 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
             pref.setOnClearClickListener(() -> {
                 try {
                     mPs.removeRecentConversation(pkg, UserHandle.getUserId(uid), conversationId);
+                    pref.getClearView().announceForAccessibility(
+                            mContext.getString(R.string.recent_convo_removed));
                     parent.removePreference(pref);
                 } catch (RemoteException e) {
                     Slog.w(TAG, "Could not clear recent", e);
