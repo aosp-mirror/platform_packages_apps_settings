@@ -44,7 +44,7 @@ public class AndroidKeystoreAliasLoader {
     private final Collection<String> mKeyCertAliases;
     private final Collection<String> mCaCertAliases;
     /**
-     * This Constructor loads all aliases of asymmetric key pairs and certificates in the
+     * This Constructor loads all aliases of asymmetric keys pairs and certificates in the
      * AndroidKeyStore within the given namespace.
      * Viable namespaces are {@link KeyProperties#NAMESPACE_WIFI},
      * {@link KeyProperties#NAMESPACE_APPLICATION}, or null. The latter two are equivalent in
