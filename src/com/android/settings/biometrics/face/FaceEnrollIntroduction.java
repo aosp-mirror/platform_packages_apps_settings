@@ -85,20 +85,26 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
                 .getFaceFeatureProvider();
 
-
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
-            mFooterBarMixin.getPrimaryButton().setEnabled(false);
-            // We either block on generateChallenge, or need to gray out the "next" button until
-            // the challenge is ready. Let's just do this for now.
-            mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-                mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
-                mSensorId = sensorId;
-                mChallenge = challenge;
-                mFooterBarMixin.getPrimaryButton().setEnabled(true);
-            });
+            if (generateChallengeOnCreate()) {
+                mFooterBarMixin.getPrimaryButton().setEnabled(false);
+                // We either block on generateChallenge, or need to gray out the "next" button until
+                // the challenge is ready. Let's just do this for now.
+                mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+                    mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId,
+                            challenge);
+                    mSensorId = sensorId;
+                    mChallenge = challenge;
+                    mFooterBarMixin.getPrimaryButton().setEnabled(true);
+                });
+            }
         }
+    }
+
+    protected boolean generateChallengeOnCreate() {
+        return true;
     }
 
     @Override
