@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Display fluido"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automaticamente la frequenza di aggiornamento da 60 a 90 Hz per alcuni contenuti. Aumenta l\'utilizzo della batteria."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Forza frequenza di aggiornamento a 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forza frequenza di aggiornamento massima"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Massima frequenza di aggiornamento per migliore reattività al tocco e qualità dell\'animazione. Aumenta il consumo della batteria."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Schermo vigile"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"On/Lo schermo non si spegne se lo stai guardando"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Scorciatoia <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Pulsante Accessibilità"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto di accessibilità"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Scorri verso l\'alto con due dita"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Scorri verso l\'alto con tre dita"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tocca il pulsante Accessibilità"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Usa il gesto di accessibilità"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Tocca il pulsante Accessibilità <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> nella parte inferiore dello schermo.\n\nPer spostarti tra le funzionalità, tocca e tieni premuto il pulsante Accessibilità."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Scorri verso l\'alto dalla parte inferiore dello schermo con due dita.\n\nPer spostarti tra le funzionalità, scorri verso l\'alto con due dita e tieni premuto."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Scorri verso l\'alto dalla parte inferiore dello schermo con tre dita.\n\nPer spostarti tra le funzionalità, scorri verso l\'alto con tre dita e tieni premuto."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Personalizza il gesto di accessibilità"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Personalizza il pulsante Accessibilità"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Scopri di più su <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Tieni premuti i tasti del volume"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Scorciatoia da schermata di blocco"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Consenti di attivare la scorciatoia alla funzionalità dalla schermata di blocco. Tieni premuti entrambi i tasti del volume per qualche secondo."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Pulsante Accessibilità"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Gesto e pulsante Accessibilità"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Viene usato il pulsante Accessibilità. Gesto non disponibile con la navigazione con tre pulsanti."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accedi rapidamente alle funzioni di accessibilità"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Accedi rapidamente alle funzioni di accessibilità da qualsiasi schermata. \n\nPer iniziare, vai alle impostazioni di accessibilità e seleziona una funzione. Tocca la scorciatoia e seleziona il pulsante Accessibilità."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Usa il pulsante o il gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Posizione"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Dimensioni"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Dissolvenza quando non in uso"</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Riduci la luminosità dello schermo per facilitare la lettura.&lt;br/&gt;&lt;br/&gt; Può essere utile quando: &lt;ol&gt; &lt;li&gt; La luminosità minima predefinita del telefono è ancora troppo chiara&lt;/li&gt; &lt;li&gt; Usi il telefono al buio, ad esempio di notte o in una stanza buia prima di andare a letto&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Scurisci lo schermo per facilitare la lettura.&lt;br/&gt;&lt;br/&gt; Può essere utile quando: &lt;ol&gt; &lt;li&gt; La luminosità minima predefinita del tablet è ancora troppo chiara.&lt;/li&gt; &lt;li&gt; Usi il tablet al buio, ad esempio di notte o in una stanza buia prima di andare a letto.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensità"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Mantieni l\'opzione attiva dopo il riavvio del dispositivo"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Breve (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> secondi)</item>
@@ -2583,7 +2593,7 @@
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Ottimizzato"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Con limitazioni"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Consenti l\'utilizzo della batteria in background senza limitazioni. Potrebbe aumentare il consumo di batteria."</string>
-    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Utilizzo ottimizzato in base al tuo utilizzo. Opzione consigliata per la maggior parte delle app."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Batteria ottimizzata in base al tuo utilizzo. Opzione consigliata per la maggior parte delle app."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"L\'utilizzo della batteria viene limitato in background. L\'app potrebbe non funzionare come previsto. Le notifiche potrebbero subire ritardi."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"La modifica della modalità di utilizzo della batteria da parte di un\'app può incidere sulle prestazioni dell\'app."</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Questa app richiede l\'utilizzo della batteria <xliff:g id="STATE">%1$s</xliff:g>."</string>
@@ -2824,18 +2834,18 @@
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"In base alla tua routine"</string>
     <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"Verrà attivato in base alla tua routine"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"In base alla percentuale"</string>
-    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"La funzionalità Risparmio energetico viene attivata se è probabile che la batteria si scarichi prima della successiva ricarica abituale"</string>
+    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Il risparmio energetico viene attivato se è probabile che la batteria si scarichi prima della successiva ricarica abituale"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Si attiva se il livello della batteria è <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Imposta una pianificazione"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolunga la durata della batteria"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Disattiva quando la batteria è carica"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"L\'opzione Risparmio energetico viene disattivata quando il livello di carica del telefono è superiore a <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Il risparmio energetico si disattiva quando il livello di carica del telefono è superiore a <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"L\'opzione Risparmio energetico viene disattivata quando il livello di carica del tablet è superiore a <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"L\'opzione Risparmio energetico viene disattivata quando il livello di carica del dispositivo è superiore a <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Attiva"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Usa Risparmio energetico"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Usa risparmio energetico"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"Attiva automaticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Mai"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"al seguente livello di carica: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Conversazioni recenti"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Cancella conversazioni recenti"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Conversazioni recenti rimosse"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Cancella"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Usa bolla per conversazioni prioritarie"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Le conversazioni prioritarie vengono mostrate nella parte superiore dell\'area a discesa. Puoi anche impostarle in modo che vengano visualizzate come bolle e che interrompano la modalità Non disturbare."</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Link supportati"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Altre preferenze predefinite"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Aggiungi link"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Un\'app può verificare i link da aprire automaticamente nell\'app. "<annotation id="url">"Scopri di più"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> link verificati</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> link verificato</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Non applicare l\'ottimizzazione della batteria. La batteria potrebbe scaricarsi più rapidamente."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Consentire sempre di eseguire l\'app in background?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Consentire sempre l\'esecuzione di <xliff:g id="APP_NAME">%1$s</xliff:g> in background potrebbe ridurre la durata della batteria. \n\nPuoi cambiare la tua scelta in qualsiasi momento in Impostazioni &gt; App e notifiche."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"Utilizzo nelle ultime 24 ore: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Gestione alimentazione"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Nessun utilizzo della batteria nelle ultime 24 ore"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"Utilizzo dall\'ultima ricarica completa: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"Utilizzo nelle ultime 24 ore: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Nessun utilizzo della batteria dall\'ultima ricarica completa"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Nessun utilizzo della batteria nelle ultime 24 ore"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Impostazioni app"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Mostra SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Altre autorizzazioni"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Impossibile acquisire screenshot"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Impossibile aprire questa app"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Impostazione bloccata dal fornitore di credito"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Se hai domande, contatta l\'amministratore IT"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Altri dettagli"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"L\'amministratore può monitorare e gestire le app e i dati associati al profilo di lavoro, inclusi accesso aziendale, impostazioni, autorizzazioni, attività di rete e informazioni sulla posizione del dispositivo."</string>
@@ -5456,7 +5474,7 @@
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Usa utenti multipli"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usa debug wireless"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usa Preferenze del driver di grafica"</string>
-    <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Usa Risparmio energetico"</string>
+    <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Usa risparmio energetico"</string>
     <string name="do_not_disturb_main_switch_title_on" msgid="6965566556539821313">"Disattiva ora"</string>
     <string name="do_not_disturb_main_switch_title_off" msgid="7088088515823752545">"Attiva ora"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usa Luminosità notturna"</string>

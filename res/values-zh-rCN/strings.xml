@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流畅画面"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"自动将某些内容的刷新频率从 60 Hz 调高到 90 Hz。耗电量会因此增加。"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"强制使用 90 Hz 刷新频率"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"强制使用峰值刷新频率"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"使用最高刷新频率可提升按触操作响应和动画质量，但会增加耗电量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"屏幕感知"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"开启 / 您看着屏幕时，它将不会关闭"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"知道了"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g>快捷方式"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"“无障碍”按钮"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"无障碍手势"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"用两根手指向上滑动"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"用三根手指向上滑动"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"点按“无障碍”按钮"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"使用无障碍手势"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"点按屏幕底部的“无障碍”按钮 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>。\n\n轻触并按住“无障碍”按钮，即可在多项功能之间切换。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"用两根手指从屏幕底部向上滑动。\n\n用两根手指向上滑动并按住，即可在多项功能之间切换。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"用三根手指从屏幕底部向上滑动。\n\n用三根手指向上滑动并按住，即可在多项功能之间切换。"</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"自定义无障碍手势"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"自定义“无障碍”按钮"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"详细了解<xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"按住音量键"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"在锁定屏幕上使用快捷方式"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"允许在锁定屏幕时开启功能快捷方式。同时按住两个音量键几秒钟。"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"“无障碍”按钮"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"“无障碍”按钮和手势"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"请使用“无障碍”按钮。该手势不能与“三按钮”导航搭配使用。"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"快速使用无障碍功能"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"在任意屏幕上快速使用无障碍功能。\n\n如需开始使用，请转到无障碍设置并选择相应功能。点按相应快捷方式，然后选择“无障碍”按钮。"</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"使用按钮或手势"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"位置"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"大小"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"未使用时淡化"</string>
@@ -2422,12 +2428,16 @@
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"红绿不分"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"蓝黄不分"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"极暗"</string>
-    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"可将屏幕调成超暗"</string>
+    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"可将屏幕调成极暗"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"将屏幕调得比手机最低亮度更暗"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"将屏幕调得比平板电脑最低亮度更暗"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"调暗屏幕可让您看手机时更舒适。&lt;br/&gt;&lt;br/&gt; 此设置适用于以下情况：&lt;ol&gt; &lt;li&gt; 手机的默认最低亮度依然太亮&lt;/li&gt; &lt;li&gt; 在夜间或睡前昏暗的房间等较暗环境中使用手机&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"调暗屏幕可让您看平板电脑时更舒适。&lt;br/&gt;&lt;br/&gt; 此设置适用于以下情况：&lt;ol&gt; &lt;li&gt; 平板电脑的默认最低亮度依然太亮&lt;/li&gt; &lt;li&gt; 在夜间或睡前昏暗的房间等较暗环境中使用平板电脑&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"亮度"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"设备重启后保持开启状态"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">短（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
@@ -2682,7 +2692,7 @@
       <item quantity="one">正在限制 %1$d 个应用的电池用量</item>
     </plurals>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"限制时间：<xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <string name="restricted_app_detail_footer" msgid="3495725286882138803">"这些应用的后台电池用量受到限制。这些应用可能无法正常运行，通知也可能会出现延迟。"</string>
+    <string name="restricted_app_detail_footer" msgid="3495725286882138803">"这些应用被限制在后台使用电池电量。它们可能无法正常运行，通知也可能会出现延迟。"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"使用电池管理器"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"检测应用何时使用电量"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"检测应用大量消耗电池电量的情况"</string>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"近期对话"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"清除近期对话"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"已移除近期对话"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"清除"</string>
     <string name="important_bubble" msgid="7911698275408390846">"以对话泡形式显示优先对话"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"优先对话会显示在下拉通知栏顶部。您也可将优先对话设置为以对话泡形式显示，并允许系统在“勿扰”模式下显示此类对话泡。"</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"支持的链接"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"其他默认偏好设置"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"添加链接"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"应用可以验证要自动在本应用中打开的链接。"<annotation id="url">"了解详情"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 个已通过验证的链接</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个已通过验证的链接</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"不应用电池优化设置，但电量的消耗速度可能会更快。"</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"要允许应用始终在后台运行吗？"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"允许“<xliff:g id="APP_NAME">%1$s</xliff:g>”始终在后台运行可能会缩短电池的续航时间。\n\n您以后可以在“设置”&gt;“应用和通知”中更改此设置。"</string>
-    <string name="battery_summary" msgid="4338334523643155767">"过去 24 小时内使用了 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"电源管理"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"过去 24 小时内未耗电"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"自上次充满电后已使用 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"过去 24 小时内使用了 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"自上次充满电后未消耗任何电量"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"过去 24 小时内未耗电"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"应用设置"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"显示系统界面调节工具"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"其他权限"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"无法抓取屏幕截图"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"无法打开此应用"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"已被信贷提供方屏蔽"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"如有任何问题，请与您的 IT 管理员联系"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"更多详情"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"您的管理员可以监控和管理与您的工作资料相关的应用和数据（其中包括设置、权限、企业权限、网络活动和设备的位置信息）。"</string>
