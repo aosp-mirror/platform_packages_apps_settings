@@ -43,6 +43,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.List;
@@ -57,6 +58,7 @@ public class MoreSettingsPreferenceController extends BasePreferenceController i
     private static final String TAG = "MoreSettingsPrefCtrl";
     @VisibleForTesting
     Intent mIntent;
+    private LayoutPreference mPreference;
 
     public MoreSettingsPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -82,8 +84,8 @@ public class MoreSettingsPreferenceController extends BasePreferenceController i
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference pref = screen.findPreference(getPreferenceKey());
-        final Button button = pref.findViewById(R.id.button);
+        mPreference = screen.findPreference(getPreferenceKey());
+        final Button button = mPreference.findViewById(R.id.button);
         final Drawable icon = getIcon();
         button.setText(getButtonText());
         if (icon != null) {
@@ -109,6 +111,8 @@ public class MoreSettingsPreferenceController extends BasePreferenceController i
 
     @Override
     public void onClick(View v) {
+        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+                .logClickedPreference(mPreference, getMetricsCategory());
         final Intent intent = new Intent(mIntent)
                 .addCategory(Intent.CATEGORY_LAUNCHER)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -170,5 +174,4 @@ public class MoreSettingsPreferenceController extends BasePreferenceController i
         icon.draw(canvas);
         return bitmap;
     }
-
 }
