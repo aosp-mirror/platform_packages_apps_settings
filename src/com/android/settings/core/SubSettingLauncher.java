@@ -28,7 +28,6 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
-import com.android.settings.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 
@@ -182,10 +181,6 @@ public class SubSettingLauncher {
 
     @VisibleForTesting
     void launchAsUser(Intent intent, UserHandle userHandle) {
-        if (!Utils.isPageTransitionEnabled(mContext)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        }
         mContext.startActivityAsUser(intent, userHandle);
     }
 
