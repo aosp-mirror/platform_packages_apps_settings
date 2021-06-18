@@ -122,7 +122,7 @@ public class StorageAsyncLoader
                 UserHandle.of(userId));
         } catch (NameNotFoundException e) {
             Log.e(TAG, "Not able to get Context for user ID " + userId);
-            return 0;
+            return 0L;
         }
 
         try (Cursor cursor = perUserContext.getContentResolver().query(
@@ -131,9 +131,9 @@ public class StorageAsyncLoader
                 queryArgs,
                 null /* cancellationSignal */)) {
             if (cursor == null) {
-                return 0;
+                return 0L;
             }
-            return cursor.moveToFirst() ? cursor.getInt(0) : 0;
+            return cursor.moveToFirst() ? cursor.getLong(0) : 0L;
         }
     }
 
