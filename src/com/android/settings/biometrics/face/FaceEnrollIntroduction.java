@@ -76,10 +76,19 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
         final ImageView iconGlasses = findViewById(R.id.icon_glasses);
         final ImageView iconLooking = findViewById(R.id.icon_looking);
-        final ImageView iconSecurity = findViewById(R.id.icon_security);
         iconGlasses.getBackground().setColorFilter(getIconColorFilter());
         iconLooking.getBackground().setColorFilter(getIconColorFilter());
-        iconSecurity.getBackground().setColorFilter(getIconColorFilter());
+
+        final TextView infoMessageGlasses = findViewById(R.id.info_message_glasses);
+        final TextView infoMessageLooking = findViewById(R.id.info_message_looking);
+        final TextView howMessage = findViewById(R.id.how_message);
+        final TextView inControlTitle = findViewById(R.id.title_in_control);
+        final TextView inControlMessage = findViewById(R.id.message_in_control);
+        infoMessageGlasses.setText(getInfoMessageGlasses());
+        infoMessageLooking.setText(getInfoMessageLooking());
+        howMessage.setText(getHowMessage());
+        inControlTitle.setText(getInControlTitle());
+        inControlMessage.setText(getInControlMessage());
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
@@ -105,6 +114,31 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     protected boolean generateChallengeOnCreate() {
         return true;
+    }
+
+    @StringRes
+    protected int getInfoMessageGlasses() {
+        return R.string.security_settings_face_enroll_introduction_info_glasses;
+    }
+
+    @StringRes
+    protected int getInfoMessageLooking() {
+        return R.string.security_settings_face_enroll_introduction_info_looking;
+    }
+
+    @StringRes
+    protected int getHowMessage() {
+        return R.string.security_settings_face_enroll_introduction_how_message;
+    }
+
+    @StringRes
+    protected int getInControlTitle() {
+        return R.string.security_settings_face_enroll_introduction_control_title;
+    }
+
+    @StringRes
+    protected int getInControlMessage() {
+        return R.string.security_settings_face_enroll_introduction_control_message;
     }
 
     @Override
