@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Höjer uppdateringsfrekvensen dynamiskt från 60 till 90 Hz för visst innehåll. Ökar batteriförbrukningen."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Tvinga fram 90 Hz i uppdateringsfrekvens"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Tvinga att den högsta uppdateringsfrekvensen körs"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Den högsta uppdateringsfrekvensen ger bättre tryckkänslighet och animationskvalitet. Ökar batteriförbrukningen."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Blickavkänning"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"På/Skärmen stängs inte av om du tittar på den"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Kortkommando för <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Tillgänglighetsknapp"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Tillgänglighetsrörelse"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Svep uppåt med två fingrar"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Svep uppåt med tre fingrar"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tryck på tillgänglighetsknappen"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Använda tillgänglighetsrörelser"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Tryck på tillgänglighetsknappen <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> längst ned på skärmen.\n\nByt funktion genom att trycka länge på tillgänglighetsknappen."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Svep uppåt med två fingrar från skärmens nederkant.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Svep uppåt med tre fingrar från skärmens nederkant.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Anpassa tillgänglighetsrörelsen"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Anpassa tillgänglighetsknappen"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Läs mer om <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Håll ned volymknapparna"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Kortkommando från låsskärm"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Tillåt att genvägen för funktionen aktiveras från låsskärmen. Håll båda volymknapparna nedtryckta i ett par sekunder."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Tillgänglighetsknapp"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tillgänglighetsknapp och rörelse"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Använda tillgänglighetsknappen. Rörelsen är inte tillgänglig med navigering med tre knappar."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Kom snabbt åt tillgänglighetsfunktioner"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Kom snabbt åt tillgänglighetsfunktioner från alla skärmar. \n\nKom igång genom att öppna tillgänglighetsinställningarna och välj en funktion. Tryck på genvägen och välj tillgänglighetsknappen."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Använda knapp eller rörelse"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Läge"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Storlek"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Tona ut när den inte används"</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Dimma skärmen ytterligare så att det blir behagligare att läsa.&lt;br/&gt;&lt;br/&gt; Detta kan vara användbart när &lt;ol&gt; &lt;li&gt; telefonens lägsta ljusstyrka fortfarande är för ljus&lt;/li&gt; &lt;li&gt; du använder telefonen i mörker, t.ex. på natten eller i ett mörkt rum innan du ska sova.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Gör skärmen mörkare så att det blir behagligare att läsa.&lt;br/&gt;&lt;br/&gt; Detta kan vara användbart när &lt;ol&gt; &lt;li&gt; surfplattans lägsta ljusstyrka fortfarande är för ljus&lt;/li&gt; &lt;li&gt; du använder surfplattan i mörker, t.ex. på natten eller i ett mörkt rum innan du ska sova.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitet"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Håll funktionen aktiverad när enheten startas om"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Kort (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunder)</item>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Aktuella konversationer"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Radera de senaste konversationerna"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"De senaste konversationerna har tagits bort"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Rensa"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Visa prioriterade konversationer i bubblor"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioriterade konversationer visas högst upp i aviseringspanelen. Du kan även ställa in så att de visas i bubblor och kringgår Stör ej."</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Länkar som stöds"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Andra standardinställningar"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Lägg till länk"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"En app kan verifiera länkar så att de kan öppnas automatiskt i appen. "<annotation id="url">"Läs mer"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> verifierade länkar</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> verifierad länk</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Använd inte batterioptimering. Med detta alternativ kan batteriet kan ta slut fortare."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Vill du tillåta att appen alltid körs i bakgrunden?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Om du tillåter att <xliff:g id="APP_NAME">%1$s</xliff:g> alltid körs i bakgrunden kan batteritiden minska. \n\nDu kan ändra detta senare under Inställningar &gt; Appar och aviseringar."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> användning under de senaste 24 timmarna"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Energialternativ"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Ingen batterianvändning under de senaste 24 timmarna"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> förbrukat sedan batteriet senast laddats fullt"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> användning under de senaste 24 timmarna"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Har inte förbrukat något batteri sedan batteriet senast var fulladdat"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Ingen batterianvändning under de senaste 24 timmarna"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Appinställningar"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Visa inställningar för systemgränssnitt"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Ytterligare behörigheter"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Det går inte att ta skärmbilder"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Det gick inte att öppna appen"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blockerad av långivaren"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Kontakta IT-administratören om du har frågor"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Mer information"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Administratören kan övervaka och hantera appar och data som är kopplade till den här jobbprofilen, bland annat inställningar, behörigheter, företagsåtkomst, nätverksaktivitet och enhetens platsuppgifter."</string>

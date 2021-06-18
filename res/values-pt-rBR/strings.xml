@@ -292,7 +292,7 @@
     <string name="lockdown_settings_summary" msgid="5857509790740495057">"Exibir a opção do botão liga/desliga que desativa o Smart Lock, as notificações e o desbloqueio facial ou por impressão digital na tela de bloqueio"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Bloquear tela quando a confiança for perdida"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Se essa opção for ativada, o dispositivo será bloqueado quando o último agente de confiança perder a confiança"</string>
-    <string name="owner_info_settings_summary" msgid="347238313388083297">"Nenhuma"</string>
+    <string name="owner_info_settings_summary" msgid="347238313388083297">"Nenhum"</string>
     <string name="owner_info_settings_status" msgid="7488764871758677862">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"por exemplo, Android do João."</string>
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Mostrar informações do perfil na tela de bloqueio"</string>
@@ -301,8 +301,8 @@
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usar local"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Configuração desativada"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="one">Ativado: <xliff:g id="COUNT_1">%1$d</xliff:g> app tem acesso à localização</item>
-      <item quantity="other">Ativado: <xliff:g id="COUNT_1">%1$d</xliff:g> apps têm acesso à localização</item>
+      <item quantity="one">Ativada: <xliff:g id="COUNT_1">%1$d</xliff:g> app tem acesso à localização</item>
+      <item quantity="other">Ativada: <xliff:g id="COUNT_1">%1$d</xliff:g> apps têm acesso à localização</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Carregando…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps com permissão para encontrar dispositivos por perto podem determinar a posição relativa dos dispositivos conectados."</string>
@@ -1328,7 +1328,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automaticamente a taxa de atualização de 60 para 90 Hz para alguns conteúdos. Maior uso da bateria"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Forçar a taxa de atualização de 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forçar taxa de atualização máxima"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Maior taxa de atualização para melhoria na resposta tátil e na qualidade das animações. Maior uso da bateria."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Reconhecimento de tela em uso"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Ativado / A tela não será desativada se você estiver olhando para ela"</string>
@@ -2311,12 +2311,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Ok"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Atalho para <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botão de acessibilidade"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Deslizar para cima com dois dedos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Deslizar para cima com três dedos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tocar no botão de acessibilidade"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Usar o gesto de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Toque no botão de acessibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte inferior da tela.\n\nPara alternar entre os recursos, toque no botão de acessibilidade e mantenha-o pressionado."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Deslize de baixo para cima na tela com dois dedos.\n\nPara alternar entre recursos, deslize de baixo para cima na tela com dois dedos, sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Deslize de baixo para cima na tela com três dedos.\n\nPara alternar entre recursos, deslize de baixo para cima na tela com três dedos, sem soltar."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Personalizar o gesto de acessibilidade"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Personalize o botão de acessibilidade"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Saiba mais sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Manter as teclas de volume pressionadas"</string>
@@ -2334,8 +2337,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Atalho da tela de bloqueio"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permitir que o atalho do recurso seja ativado pela tela de bloqueio. Pressione as duas teclas de volume por alguns segundos."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Botão de acessibilidade"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Botão e gesto de acessibilidade"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Como usar o botão de acessibilidade. O gesto não está disponível na navegação com três botões."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Acessar rapidamente os recursos de acessibilidade"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Acesse rapidamente os recursos de acessibilidade em qualquer tela. \n\nPara começar, abra as configurações de acessibilidade e selecione um recurso. Toque no atalho e selecione o botão de acessibilidade."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Usar botão ou gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Local"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Tamanho"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Esmaecer quando não estiver em uso"</string>
@@ -2408,7 +2414,7 @@
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Ajuste de áudio"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Atalho ativado"</string>
-    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desativada"</string>
+    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desativado"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Ativado"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Desativado"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Não está funcionando. Toque para ver informações."</string>
@@ -2430,6 +2436,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Diminua o brilho da tela para deixar a leitura mais confortável.&lt;br/&gt;&lt;br/&gt; Esse recurso pode ser útil quando: &lt;ol&gt; &lt;li&gt; o brilho mínimo padrão do smartphone ainda é claro demais;&lt;/li&gt; &lt;li&gt; você está usando o smartphone em ambientes com pouca iluminação, como à noite ou em um quarto escuro antes de dormir.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Diminua o brilho da tela para deixar a leitura mais confortável.&lt;br/&gt;&lt;br/&gt; Esse recurso pode ser útil quando: &lt;ol&gt; &lt;li&gt; o brilho mínimo padrão do tablet ainda é claro demais;&lt;/li&gt; &lt;li&gt; você está usando o tablet em ambientes com pouca iluminação, como à noite ou em um quarto escuro antes de dormir.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensidade"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Manter o recurso ativado após a reinicialização do dispositivo"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="one">Curto (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo)</item>
@@ -2684,7 +2694,7 @@
       <item quantity="other">Limitando o uso da bateria para %1$d apps</item>
     </plurals>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Restringido <xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <string name="restricted_app_detail_footer" msgid="3495725286882138803">"O uso da bateria em segundo plano desses apps é limitado. Eles podem não funcionar corretamente e é possível que haja atraso nas notificações."</string>
+    <string name="restricted_app_detail_footer" msgid="3495725286882138803">"O uso da bateria em segundo plano por esses apps é limitado. Eles podem não funcionar corretamente e é possível que haja atraso nas notificações."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Usar o Gerenciador de bateria"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detectar quando apps estiverem descarregando a bateria"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Detectar quando apps estiverem descarregando a bateria"</string>
@@ -3831,6 +3841,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Conversas recentes"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Limpar conversas recentes"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Conversas recentes removidas"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Limpar"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Mostrar conversas prioritárias em balões"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Conversas prioritárias são mostradas na parte superior da aba suspensa. Você também pode configurá-las para que sejam mostradas em balões e interrompam o modo \"Não perturbe\"."</string>
@@ -4201,7 +4213,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Links compatíveis"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Outras preferências padrão"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Adicionar link"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Um app pode verificar links para abri-los automaticamente. "<annotation id="url">"Saiba mais"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> link verificado</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> links verificados</item>
@@ -4352,9 +4365,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Não aplicar a otimização de bateria. Isso pode esgotar sua bateria mais rapidamente."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Permitir execução contínua do app em segundo plano?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"A execução contínua do app <xliff:g id="APP_NAME">%1$s</xliff:g> em segundo plano pode reduzir a duração da bateria. \n\nVocê poderá alterar essa opção mais tarde em Configurar &gt; Apps e notificações."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> de uso nas últimas 24 horas"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Gerenciamento de energia"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Não houve uso da bateria nas últimas 24 horas"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> de uso desde a última carga completa"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> de uso nas últimas 24 horas"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Sem uso da bateria desde a última carga completa"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Não houve uso da bateria nas últimas 24 horas"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Configurações do app"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Mostrar sintonizador SystemUI"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Permissões adicionais"</string>
@@ -4525,6 +4539,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Não é possível capturar a tela"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Não é possível abrir este app"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Configuração bloqueada pelo provedor de crédito"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Se você tiver perguntas, entre em contato com o administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Mais detalhes"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Seu administrador pode monitorar e gerenciar apps e dados associados ao seu perfil de trabalho, incluindo configurações, permissões, acesso corporativo, atividade de rede e informações de local do dispositivo."</string>
