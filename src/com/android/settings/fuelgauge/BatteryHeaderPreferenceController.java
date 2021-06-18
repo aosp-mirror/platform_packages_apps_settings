@@ -52,7 +52,8 @@ import com.android.settingslib.widget.LayoutPreference;
  * Controller that update the battery header view
  */
 public class BatteryHeaderPreferenceController extends BasePreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnStart {
+        implements PreferenceControllerMixin, LifecycleObserver, OnStart,
+        BatteryPreferenceController {
     @VisibleForTesting
     static final String KEY_BATTERY_HEADER = "battery_header";
     private static final String ANNOTATION_URL = "url";
@@ -121,16 +122,20 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
                 .styleActionBar(mActivity);
     }
 
+    private CharSequence generateLabel(BatteryInfo info) {
+        if (BatteryUtils.isBatteryDefenderOn(info)) {
+            return null;
+        } else if (info.remainingLabel == null) {
+            return info.statusLabel;
+        } else {
+            return info.remainingLabel;
+        }
+    }
+
     public void updateHeaderPreference(BatteryInfo info) {
         mBatteryPercentText.setText(formatBatteryPercentageText(info.batteryLevel));
         if (!mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info)) {
-            if (BatteryUtils.isBatteryDefenderOn(info)) {
-                mSummary1.setText(null);
-            } else if (info.remainingLabel == null) {
-                mSummary1.setText(info.statusLabel);
-            } else {
-                mSummary1.setText(info.remainingLabel);
-            }
+            mSummary1.setText(generateLabel(info));
         }
 
         mBatteryMeterView.setBatteryLevel(info.batteryLevel);
@@ -141,8 +146,8 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
     /**
      * Callback which receives text for the summary line.
      */
-    public void updateBatteryStatus(String statusLabel) {
-        mSummary1.setText(statusLabel);
+    public void updateBatteryStatus(String label, BatteryInfo info) {
+        mSummary1.setText(label != null ? label : generateLabel(info));
     }
 
     public void quickUpdateHeaderPreference() {

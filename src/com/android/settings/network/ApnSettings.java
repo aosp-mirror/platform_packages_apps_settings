@@ -342,7 +342,7 @@ public class ApnSettings extends RestrictedSettingsFragment
                     pref.setSummary(apn);
                 }
 
-                final boolean selectable = ((type == null) || !type.equals("mms"));
+                final boolean selectable = ((type == null) || type.contains("default"));
                 pref.setSelectable(selectable);
                 if (selectable) {
                     if ((mSelectedKey != null) && mSelectedKey.equals(key)) {
