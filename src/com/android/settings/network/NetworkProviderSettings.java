@@ -267,9 +267,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         if (mWifiManager != null) {
             setLoading(true, false);
             mIsViewLoading = true;
-            if (!mWifiManager.isWifiEnabled()) {
-                getView().postDelayed(mRemoveLoadingRunnable, 100);
-            }
+            getView().postDelayed(mRemoveLoadingRunnable,
+                    mWifiManager.isWifiEnabled() ? 1000 : 100);
         }
     }
 
