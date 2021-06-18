@@ -118,7 +118,7 @@ public class HeaderPreferenceControllerTest {
 
         NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
         mController.onResume(appRow, null, group, null, null, null, null);
-        assertEquals(group.getName(), mController.getLabel());
+        assertEquals(appRow.label, mController.getLabel());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
         mController.onResume(appRow, channel, group, null, null, null, null);
@@ -154,5 +154,25 @@ public class HeaderPreferenceControllerTest {
                 NotificationChannel.DEFAULT_CHANNEL_ID, "", IMPORTANCE_NONE);
         mController.onResume(appRow, defaultChannel, null, null, null, null, null);
         assertEquals("", mController.getSummary());
+    }
+
+    @Test
+    public void testGetSecondSummary() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.label = "bananas";
+        mController.onResume(appRow, null, null, null, null, null, null);
+        assertEquals("", mController.getSecondSummary());
+
+        NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
+        mController.onResume(appRow, null, group, null, null, null, null);
+        assertEquals("", mController.getSecondSummary());
+
+        NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
+        mController.onResume(appRow, channel, group, null, null, null, null);
+        assertEquals("", mController.getSecondSummary());
+
+        channel.setDescription("description");
+        mController.onResume(appRow, channel, group, null, null, null, null);
+        assertEquals("description", mController.getSecondSummary());
     }
 }
