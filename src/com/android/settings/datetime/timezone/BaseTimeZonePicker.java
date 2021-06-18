@@ -27,6 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -95,6 +97,7 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
                 LinearLayoutManager.VERTICAL, /* reverseLayout */ false));
         mRecyclerView.setAdapter(mAdapter);
         mAppBarLayout = getActivity().findViewById(R.id.app_bar);
+        disableToolBarScrollableBehavior();
 
         // Initialize TimeZoneDataLoader only when mRecyclerView is ready to avoid race
         // during onDateLoaderReady callback.
@@ -160,13 +163,15 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
     public boolean onMenuItemActionExpand(MenuItem item) {
         // To prevent a large space on tool bar.
         mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
-        // To prevent user can expand the collpasing tool bar view.
+        // To prevent user can expand the collapsing tool bar view.
         ViewCompat.setNestedScrollingEnabled(mRecyclerView, false);
         return true;
     }
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
+        // We keep the collapsed status after user cancel the search function.
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
         ViewCompat.setNestedScrollingEnabled(mRecyclerView, true);
         return true;
     }
@@ -188,4 +193,17 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
         void onListItemClick(T item);
     }
 
+    private void disableToolBarScrollableBehavior() {
+        CoordinatorLayout.LayoutParams params =
+                (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
+        AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
+        behavior.setDragCallback(
+                new AppBarLayout.Behavior.DragCallback() {
+                    @Override
+                    public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+                        return false;
+                    }
+                });
+        params.setBehavior(behavior);
+    }
 }
