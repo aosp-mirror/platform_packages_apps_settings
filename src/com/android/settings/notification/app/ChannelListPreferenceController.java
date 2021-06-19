@@ -322,7 +322,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         if (channel.getImportance() > IMPORTANCE_LOW) {
             channelPref.setIcon(getAlertingIcon());
         } else {
-            channelPref.setIcon(null);
+            channelPref.setIcon(R.drawable.empty_icon);
         }
         channelPref.setIconSize(PrimarySwitchPreference.ICON_SIZE_SMALL);
         channelPref.setTitle(channel.getName());
@@ -350,7 +350,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                     channel.setImportance(importance);
                     channel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
                     PrimarySwitchPreference channelPref1 = (PrimarySwitchPreference) preference;
-                    channelPref1.setIcon(null);
+                    channelPref1.setIcon(R.drawable.empty_icon);
                     if (channel.getImportance() > IMPORTANCE_LOW) {
                         channelPref1.setIcon(getAlertingIcon());
                     }
