@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Αυξάνει αυτόματα τον ρυθμό ανανέωσης από τα 60 στα 90 Hz για ορισμένο περιεχόμενο. Αυξάνει τη χρήση της μπαταρίας."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Επιβολή ρυθμού ανανέωσης 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Επιβολή μέγιστου ρυθμού ανανέωσης"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Ο υψηλότερος δυνατός ρυθμός ανανέωσης για βελτιωμένη απόκριση αφής και ποιότητα κινούμενων εικόνων. Αυξάνει τη χρήση της μπαταρίας."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Παρακολούθηση οθόνης"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Ενεργό/Η οθόνη δεν θα απενεργοποιείται εάν την κοιτάτε"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"ΟΚ"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Συντόμευση <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Κουμπί προσβασιμότητας"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Κίνηση προσβασιμότητας"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Σύρετε προς τα επάνω με 2 δάχτυλα"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Σύρετε προς τα επάνω με 3 δάχτυλα"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Πατήστε το κουμπί προσβασιμότητας"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Χρήση κίνησης προσβασιμότητας"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Πατήστε το κουμπί προσβασιμότητας <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> στο κάτω μέρος της οθόνης σας.\n\nΓια εναλλαγή μεταξύ λειτουργιών, πατήστε παρατεταμένα το κουμπί προσβασιμότητας."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Σύρετε προς τα επάνω από το κάτω μέρος της οθόνης χρησιμοποιώντας δύο δάχτυλα.\n\nΓια εναλλαγή μεταξύ λειτουργιών, σύρετε προς τα επάνω με δύο δάχτυλα και κρατήστε τα δάχτυλά σας στην οθόνη."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Σύρετε προς τα επάνω από το κάτω μέρος της οθόνης χρησιμοποιώντας τρία δάχτυλα.\n\nΓια εναλλαγή μεταξύ λειτουργιών σύρετε προς τα επάνω με τρία δάχτυλα και κρατήστε τα δάχτυλά σας στην οθόνη."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Προσαρμογή κίνησης προσβασιμότητας"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Προσαρμογή κουμπιού προσβασιμότητας"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Μάθετε περισσότερα για την υπηρεσία <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Παρατεταμένο πάτημα πλήκτρων έντασης"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Συντόμευση από οθόνη κλειδώματος"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Να επιτρέπεται η ενεργοποίηση της συντόμευσης λειτουργιών από την οθόνη κλειδώματος. Πατήστε παρατεταμένα ταυτόχρονα τα πλήκτρα έντασης ήχου για μερικά δευτερόλεπτα."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Κουμπί προσβασιμότητας"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Κουμπί και κίνηση προσβασιμότητας"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Χρήση του κουμπιού προσβασιμότητας. Η κίνηση δεν είναι διαθέσιμη με Πλοήγηση με τρία κουμπιά."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Γρήγορη πρόσβαση σε λειτουργίες προσβασιμότητας"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Αποκτήστε γρήγορα πρόσβαση σε λειτουργίες προσβασιμότητας από οποιαδήποτε οθόνη. \n\nΓια να ξεκινήσετε, μεταβείτε στις ρυθμίσεις προσβασιμότητας και επιλέξτε μια λειτουργία. Πατήστε τη συντόμευση και επιλέξτε το κουμπί προσβασιμότητας."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Χρήση κουμπιού ή κίνησης"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Τοποθεσία"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Μέγεθος"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Εξαφαν. σταδιακά όταν δεν χρησιμοπ."</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Μειώστε τη φωτεινότητα της οθόνης προκειμένου η ανάγνωση να είναι πιο άνετη.&lt;br/&gt;&lt;br/&gt; Αυτό μπορεί να βοηθήσει: &lt;ol&gt; &lt;li&gt; Όταν η προεπιλεγμένη ελάχιστη φωτεινότητα του τηλεφώνου σας δεν είναι αρκετά σκοτεινή&lt;/li&gt; &lt;li&gt; Όταν χρησιμοποιείτε το τηλέφωνό σας σε συνθήκες χαμηλού φωτισμού, όπως κατά τη διάρκεια της νύχτας ή σε ένα σκοτεινό δωμάτιο πριν κοιμηθείτε&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Κάντε την οθόνη πιο σκοτεινή προκειμένου η ανάγνωση να είναι πιο άνετη.&lt;br/&gt;&lt;br/&gt; Αυτό μπορεί να βοηθήσει: &lt;ol&gt; &lt;li&gt; Όταν η προεπιλεγμένη ελάχιστη φωτεινότητα του tablet δεν είναι αρκετά σκοτεινή&lt;/li&gt; &lt;li&gt; Όταν χρησιμοποιείτε το tablet σε σκοτεινές συνθήκες, όπως κατά τη διάρκεια της νύχτας ή σε ένα σκοτεινό δωμάτιο πριν κοιμηθείτε&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Ένταση"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Να διατηρηθεί ενεργή μετά την επανεκκίνηση της συσκευής"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Μικρή καθυστέρηση (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> δευτερόλεπτα)</item>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Πρόσφατες συνομιλίες"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Διαγραφή πρόσφατων συζητήσεων"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Οι πρόσφατες συζητήσεις καταργήθηκαν"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Διαγραφή"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Εμφάνιση των συνομιλιών προτεραιότητας σε συννεφάκι"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Οι συνομιλίες προτεραιότητας εμφανίζονται στο επάνω μέρος του αναπτυσσόμενου πλαισίου σκίασης. Μπορείτε επίσης να τις ρυθμίσετε ώστε να εμφανίζονται σε συννεφάκι και να διακόψετε τη λειτουργία Μην ενοχλείτε."</string>
@@ -4178,7 +4190,7 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"Εκτός από τη χρήση των βιομετρικών στοιχείων σας για το ξεκλείδωμα της συσκευής, μπορείτε να ενισχύσετε την προστασία της συσκευής με την υποχρεωτική εισαγωγή του κωδικού πρόσβασής σας κατά την εκκίνηση. Μέχρι να ολοκληρωθεί η εκκίνηση της συσκευής, δεν θα είναι δυνατή η λήψη κλήσεων, μηνυμάτων ή ειδοποιήσεων, συμπεριλαμβανομένων ξυπνητηριών.\n\nΑυτή η ρύθμιση συμβάλλει στην προστασία των δεδομένων στις συσκευές σε περίπτωση απώλειας ή κλοπής. Θέλετε να ζητείται ο κωδικός πρόσβασης κατά την εκκίνηση της συσκευής;"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Ναι"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Όχι"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Περιορισμ. πρόσβασης"</string>
+    <string name="restricted_true_label" msgid="612852292488747564">"Περιορισμένη"</string>
     <string name="restricted_false_label" msgid="2837053797913490628">"Χρήση μπαταρίας στο παρασκήνιο"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Αίτημα κωδικού PIN;"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Αίτημα μοτίβου;"</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Υποστηριζόμενοι σύνδεσμοι"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Άλλες προεπιλεγμένες προτιμήσεις"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Προσθήκη συνδέσμου"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Μια εφαρμογή μπορεί να επαληθεύει συνδέσμους για αυτόματο άνοιγμα στην εφαρμογή. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> επαληθευμένοι σύνδεσμοι</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> επαληθευμένος σύνδεσμος</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Να μην εφαρμόζεται βελτιστοποίηση μπαταρίας. Η μπαταρία σας ενδέχεται να εξαντλείται πιο γρήγορα."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Να επιτρέπεται στην εφαρμογή να εκτελείται πάντα στο παρασκήνιο;"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Εάν επιτρέπεται στην εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> να εκτελείται πάντα στο παρασκήνιο, η διάρκεια ζωής της μπαταρίας μπορεί να μειωθεί. \n\nΜπορείτε να αλλάξτε αυτήν τη ρύθμιση αργότερα από τις Ρυθμίσεις &gt; Εφαρμογές και ειδοποιήσεις."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> χρήση για τις τελευταίες 24 ώρες"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Διαχείριση ισχύος"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Η μπαταρία δεν χρησιμοποιήθηκε κατά τις τελευταίες 24 ώρες"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"Χρήση <xliff:g id="PERCENTAGE">%1$s</xliff:g> από την τελευταία πλήρη φόρτιση"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> χρήση για τις τελευταίες 24 ώρες"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Δεν έγινε χρήση της μπαταρίας από την τελευταία πλήρη φόρτιση"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Η μπαταρία δεν χρησιμοποιήθηκε κατά τις τελευταίες 24 ώρες"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Ρυθμίσεις εφαρμογής"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Εμφάνιση δέκτη SystemUI"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Πρόσθετα δικαιώματα"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Δεν είναι δυνατή η λήψη στιγμιότυπων οθόνης"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Δεν είναι δυνατό το άνοιγμα αυτής της εφαρμογής"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Αποκλείστηκε από τον πάροχο πίστωσης"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Εάν έχετε απορίες, επικοινωνήστε με τον διαχειριστή IT"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Περισσότερες λεπτομέρειες"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Ο διαχειριστής σας μπορεί να παρακολουθεί και να διαχειρίζεται τις εφαρμογές και τα δεδομένα που σχετίζονται με το προφίλ εργασίας σας, συμπεριλαμβανομένων των ρυθμίσεων, των δικαιωμάτων, της εταιρικής πρόσβασης, της δραστηριότητας δικτύου και των πληροφοριών τοποθεσίας της συσκευής."</string>

@@ -76,29 +76,69 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
         final ImageView iconGlasses = findViewById(R.id.icon_glasses);
         final ImageView iconLooking = findViewById(R.id.icon_looking);
-        final ImageView iconSecurity = findViewById(R.id.icon_security);
         iconGlasses.getBackground().setColorFilter(getIconColorFilter());
         iconLooking.getBackground().setColorFilter(getIconColorFilter());
-        iconSecurity.getBackground().setColorFilter(getIconColorFilter());
+
+        final TextView infoMessageGlasses = findViewById(R.id.info_message_glasses);
+        final TextView infoMessageLooking = findViewById(R.id.info_message_looking);
+        final TextView howMessage = findViewById(R.id.how_message);
+        final TextView inControlTitle = findViewById(R.id.title_in_control);
+        final TextView inControlMessage = findViewById(R.id.message_in_control);
+        infoMessageGlasses.setText(getInfoMessageGlasses());
+        infoMessageLooking.setText(getInfoMessageLooking());
+        howMessage.setText(getHowMessage());
+        inControlTitle.setText(getInControlTitle());
+        inControlMessage.setText(getInControlMessage());
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
                 .getFaceFeatureProvider();
 
-
         // This path is an entry point for SetNewPasswordController, e.g.
         // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
-            mFooterBarMixin.getPrimaryButton().setEnabled(false);
-            // We either block on generateChallenge, or need to gray out the "next" button until
-            // the challenge is ready. Let's just do this for now.
-            mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-                mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
-                mSensorId = sensorId;
-                mChallenge = challenge;
-                mFooterBarMixin.getPrimaryButton().setEnabled(true);
-            });
+            if (generateChallengeOnCreate()) {
+                mFooterBarMixin.getPrimaryButton().setEnabled(false);
+                // We either block on generateChallenge, or need to gray out the "next" button until
+                // the challenge is ready. Let's just do this for now.
+                mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+                    mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId,
+                            challenge);
+                    mSensorId = sensorId;
+                    mChallenge = challenge;
+                    mFooterBarMixin.getPrimaryButton().setEnabled(true);
+                });
+            }
         }
+    }
+
+    protected boolean generateChallengeOnCreate() {
+        return true;
+    }
+
+    @StringRes
+    protected int getInfoMessageGlasses() {
+        return R.string.security_settings_face_enroll_introduction_info_glasses;
+    }
+
+    @StringRes
+    protected int getInfoMessageLooking() {
+        return R.string.security_settings_face_enroll_introduction_info_looking;
+    }
+
+    @StringRes
+    protected int getHowMessage() {
+        return R.string.security_settings_face_enroll_introduction_how_message;
+    }
+
+    @StringRes
+    protected int getInControlTitle() {
+        return R.string.security_settings_face_enroll_introduction_control_title;
+    }
+
+    @StringRes
+    protected int getInControlMessage() {
+        return R.string.security_settings_face_enroll_introduction_control_message;
     }
 
     @Override

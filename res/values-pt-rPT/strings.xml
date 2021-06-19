@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automaticamente a taxa de atualização de 60 para 90 Hz para algum conteúdo. Aumenta a utilização da bateria."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Forçar taxa de atualização de 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forçar taxa de atualização de pico"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"A taxa de atualização mais elevada para uma capacidade de resposta tátil e uma qualidade de animação melhoradas. Aumenta a utilização da bateria."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atenção ao ecrã"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Ativada/O ecrã não se desliga se estiver a olhar para o mesmo"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Atalho de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botão Acessibilidade"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Deslize rapidamente para cima com 2 dedos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Deslize rapidamente para cima com 3 dedos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tocar no botão Acessibilidade."</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Utilize o gesto de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Toque no botão Acessibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte inferior do seu ecrã.\n\nPara alternar entre funcionalidades, toque sem soltar no botão Acessibilidade."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Deslize rapidamente com dois dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre funcionalidades, deslize rapidamente com dois dedos para cima sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Deslize rapidamente com três dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre funcionalidades, deslize rapidamente com três dedos para cima sem soltar."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Personalize o gesto de acessibilidade"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Personalize o botão Acessibilidade"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Saiba mais sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Manter premidas as teclas de volume"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Atalho a partir do ecrã de bloqueio"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permita que o atalho da funcionalidade seja ativado a partir do ecrã de bloqueio. Mantenha premidas ambas as teclas de volume durante alguns segundos."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Botão Acessibilidade"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Botão e gesto de acessibilidade"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilizar o botão Acessibilidade. O gesto não está disponível com a navegação com 3 botões."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Aceda rapidamente às funcionalidades de acessib."</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Aceda rapidamente às funcionalidades de acessibilidade a partir de qualquer ecrã. \n\nPara começar, aceda às definições de acessibilidade e selecione uma funcionalidade. Toque no atalho e selecione o botão Acessibilidade."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Utilize o botão ou o gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Localização"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Tamanho"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Desvanecer quando não está em uso"</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Escureça o ecrã para tornar a leitura mais confortável.&lt;br/&gt;&lt;br/&gt; Isto pode ser útil quando: &lt;ol&gt; &lt;li&gt; O brilho mínimo predefinido do telemóvel ainda é demasiado intenso&lt;/li&gt; &lt;li&gt; Está a utilizar o telemóvel em ambientes escuros, como à noite ou num quarto escuro antes de dormir&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Escureça o ecrã para tornar a leitura mais confortável.&lt;br/&gt;&lt;br/&gt; Isto pode ser útil quando: &lt;ol&gt; &lt;li&gt; O brilho mínimo predefinido do tablet ainda é demasiado intenso.&lt;/li&gt; &lt;li&gt; Está a utilizar o tablet em ambientes escuros, como à noite ou num quarto escuro antes de dormir.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensidade"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Manter após reiniciar o dispositivo"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Curto (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundos)</item>
@@ -2580,13 +2590,13 @@
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Se limitar a atividade em segundo plano de uma aplicação, esta pode apresentar um comportamento anormal."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"A app não está def. p/ otimizar a bateria, não a pode restringir.\n\nP/ restringir a app, ative a otimiz. da bateria."</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Sem restrições"</string>
-    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Otimizadas"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Otimizada"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Restrita"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Permita a utilização da bateria em segundo plano sem restrições. Pode consumir mais bateria."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Otimize com base na sua utilização. Recomendado para a maioria das apps."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Restrinja a utilização da bateria quando estiver em segundo plano. A app pode não funcionar conforme esperado. As notificações podem sofrer atrasos."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"A alteração da forma como a sua app utiliza a bateria pode afetar o respetivo desempenho."</string>
-    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Esta app requer <xliff:g id="STATE">%1$s</xliff:g> de utilização da bateria."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Esta app requer utilização da bateria <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"sem restrições"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"otimizada"</string>
     <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"Saiba mais acerca das opções de utilização da bateria"</string>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Conversas recentes"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Limpar conversas recentes"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Conversas recentes removidas"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Limpar"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Apresentar conversas com prioridade como balão"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"As conversas com prioridade são apresentadas na parte superior do painel pendente. Também pode defini-las como balões e para interromperem o modo Não incomodar."</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Links compatíveis"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Outras preferências predefinidas"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Adicionar link"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Uma app pode validar os links para serem abertos automaticamente na app. "<annotation id="url">"Saiba mais"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> links validados</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> link validado</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Não aplique a otimização da bateria. A bateria pode descarregar mais rapidamente."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Permitir que a app seja sempre executada em segundo plano?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Permitir que a app <xliff:g id="APP_NAME">%1$s</xliff:g> seja sempre executada em segundo plano pode reduzir a autonomia da bateria. \n\nPode alterar esta definição mais tarde em Definições &gt; Apps e notificações."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> de utilização nas últimas 24 horas"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Gestão de energia"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Não utilizou bateria nas últimas 24 horas"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"Utilizou <xliff:g id="PERCENTAGE">%1$s</xliff:g> desde o último carregamento completo"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> de utilização nas últimas 24 horas"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Não utilizou bateria desde o último carregamento completo"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Não utilizou bateria nas últimas 24 horas"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Definições da aplicação"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Mostrar SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Autorizações adicionais"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Não é possível tirar capturas de ecrã"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Impossível abrir esta aplicação"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Bloqueado pelo seu fornecedor de crédito"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Se tiver dúvidas, contacte o seu administrador de TI."</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Mais detalhes"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"O gestor pode monitorizar e gerir as aplicações e os dados associados ao seu perfil de trabalho, incluindo as definições, as autorizações, o acesso empresarial, a atividade da rede e as informações de localização do dispositivo."</string>

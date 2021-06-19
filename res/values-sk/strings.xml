@@ -1368,7 +1368,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Plynulý obraz"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Automaticky zvyšovať frekvenciu obnovenia zo 60 na 90 Hz pre určitý obsah. Zvýši sa spotreba batérie."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Vynútiť frekvenciu obnovenia 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Vynútiť vrcholovú frekvenciu obnovenia"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Najvyššia frekvencia obnovenia zlepšujúca dotykovú odozvu a kvalitu animácií. Zvýši sa spotreba batérie."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Vnímavá obrazovka"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Zapnuté, obrazovka sa nevypne, keď sa na ňu budete pozerať"</string>
@@ -2359,12 +2359,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Dobre"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> – skratka"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Tlačidlo dostupnosti"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto dostupnosti"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Potiahnutie dvoma prstami nahor"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Potiahnite troma prstami nahor"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Klepnutie na tlačidlo dostupnosti"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Použiť gesto dostupnosti"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Klepnite na tlačidlo dostupnosti <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> v dolnej časti obrazovky.\n\nFunkcie prepnete pridržaním tlačidla dostupnosti."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Potiahnite dvoma prstami z dolnej časti obrazovky nahor.\n\nFunkcie prepnete potiahnutím dvoma prstami smerom nahor a pridržaním."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Potiahnite troma prstami z dolnej časti obrazovky nahor.\n\nFunkcie prepnete potiahnutím troma prstami smerom nahor a pridržaním."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Prispôsobenie gesta dostupnosti"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Prispôsobenie tlačidla dostupnosti"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Ďalšie informácie o funkcii <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Podržanie tlačidiel hlasitosti"</string>
@@ -2382,8 +2385,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Skratka z uzamknutej obrazovky"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Môžete povoliť, aby skratka dostupnosti fungovala aj na uzamknutej obrazovke. Stačí podržať niekoľko sekúnd obidve tlačidlá hlasitosti."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Tlačidlo dostupnosti"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tlačidlo a gesto dostupnosti"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Používa sa tlačidlo dostupnosti. Pri trojtlačidlovej navigácii nie je gesto k dispozícii."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Rýchly prístup k funkciám dostupnosti"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Rýchly prístup k funkciám dostupnosti na ľubovoľnej obrazovke. \n\nZačnite prejdením do nastavení dostupnosti a vyberte funkciu. Klepnite na skratku a vyberte tlačidlo dostupnosti."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Použiť tlačidlo alebo gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Poloha"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Veľkosť"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Nechať zmiznúť, keď sa nepoužíva"</string>
@@ -2480,6 +2486,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Stmavte si obrazovku, aby sa vám lepšie čítala.&lt;br/&gt;&lt;br/&gt; Môže to byť užitočné: &lt;ol&gt; &lt;li&gt; keď je predvolený minimálny jas vášho telefónu stále príliš vysoký;&lt;/li&gt; &lt;li&gt; keď telefón používate v tmavých prostrediach, napríklad v noci alebo tmavej miestnosti pred spaním.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Stmavte si obrazovku, aby sa vám lepšie čítala.&lt;br/&gt;&lt;br/&gt; Môže to byť užitočné: &lt;ol&gt; &lt;li&gt; keď je predvolený minimálny jas vášho tabletu stále príliš vysoký;&lt;/li&gt; &lt;li&gt; keď tablet používate v tmavých prostrediach, napríklad v noci alebo tmavej miestnosti pred spaním.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intenzita"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Po reštartovaní zariadenia ponechať zapnuté"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="few">Krátke (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
@@ -3923,6 +3933,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Nedávne konverzácie"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Vymazať nedávne konverzácie"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Nedávne konverzácie boli odstránené"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Vymazať"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Zobrazovať prioritné konverzácie v bublinách"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioritné konverzácie sa zobrazujú v hornej časti panela upozornení. Môžete tiež nastaviť, aby sa zobrazovali v bubline a prerušili režim bez vyrušení."</string>
@@ -4311,7 +4323,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Podporované odkazy"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Ďalšie predvolené predvoľby"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Pridať odkaz"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Aplikácia môže overiť odkazy, aby sa v nej automaticky otvárali. "<annotation id="url">"Ďalšie informácie"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> overené odkazy</item>
       <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> verified links</item>
@@ -4486,9 +4499,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Nepoužívajte optimalizáciu batérie. Môže rýchlejšie vybiť vašu batériu."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Povoliť aplikácii neustále spustenie na pozadí?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Ak povolíte aplikácii <xliff:g id="APP_NAME">%1$s</xliff:g> neustále bežať na pozadí, môže to skrátiť výdrž batérie. \n\nMôžete to zmeniť neskôr v časti Nastavenia &gt; Aplikácie a upozornenia."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> použitie v posledných 24 hodinách"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Správa napájania"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"V posledných 24 hodinách nebola batéria používaná"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> využitie od posledného úplného dobitia"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> použitie v posledných 24 hodinách"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Žiadne využitie batérie od posledného úplného dobitia"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Za posledných 24 hodín nebola batéria používaná"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Nastavenia aplikácie"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Zobraziť tuner SystemUI"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Ďalšie povolenia"</string>
@@ -4663,6 +4677,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Nedajú sa vytvárať snímky obrazovky"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Táto aplikácia sa nedá otvoriť"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blokované vaším poskytovateľom úveru"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Ak máte nejaké otázky, obráťte sa na svojho správcu IT"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Ďalšie podrobnosti"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Správca môže sledovať a spravovať aplikácie a údaje priradené k vášmu pracovnému profilu vrátane nastavení, povolení, firemného prístupu, aktivity siete a informácií o polohe zariadenia."</string>

@@ -66,8 +66,9 @@ public class ChannelNotificationSettings extends NotificationSettings {
             return;
         }
 
-        if (mChannel != null && !TextUtils.isEmpty(mChannel.getConversationId())
-            && !mChannel.isDemoted()) {
+        getActivity().setTitle(mChannel.getName());
+
+        if (!TextUtils.isEmpty(mChannel.getConversationId()) && !mChannel.isDemoted()) {
             Intent intent = new SubSettingLauncher(mContext)
                     .setDestination(ConversationNotificationSettings.class.getName())
                     .setArguments(getArguments())
@@ -128,7 +129,6 @@ public class ChannelNotificationSettings extends NotificationSettings {
                 mDependentFieldListener, mBackend));
         mControllers.add(new VibrationPreferenceController(context, mBackend));
         mControllers.add(new AppLinkPreferenceController(context));
-        mControllers.add(new DescriptionPreferenceController(context));
         mControllers.add(new VisibilityPreferenceController(context, new LockPatternUtils(context),
                 mBackend));
         mControllers.add(new LightsPreferenceController(context, mBackend));

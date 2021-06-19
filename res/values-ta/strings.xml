@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"சீரான காட்சி"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"சில உள்ளடக்கத்திற்குப் புதுப்பிக்கும் விகிதத்தை 60லிருந்து 90 Hzக்குத் தானாகவே உயர்த்தும். இதனால் பேட்டரி உபயோகம் அதிகரிக்கும்."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"ரெஃப்ரெஷ் விகிதம்: Force 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"கட்டாயமான அதிகபட்ச ரெஃப்ரெஷ் விகிதம்"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"மேம்பட்ட தொடு இயக்கத்திறனுக்கும் அனிமேஷன் தரத்திற்குமான அதிவேக ரெஃப்ரெஷ் விகிதம். இதனால் பேட்டரி உபயோகம் அதிகரிக்கும்."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"திரை மீது கவனம்"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ஆன் / திரையைப் பார்த்துக் கொண்டிருக்கையில் அது ஆஃப் ஆகாது"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"புரிந்தது"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> ஷார்ட்கட்"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"அணுகல்தன்மை பட்டன்"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"அணுகல்தன்மை சைகை"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"இரண்டு விரல்கள் மூலம் மேல்நோக்கி ஸ்வைப் செய்தல்"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"மூன்று விரல்கள் மூலம் மேல்நோக்கி ஸ்வைப் செய்தல்"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"அணுகல்தன்மை பட்டனைத் தட்டவும்"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"அணுகல்தன்மை சைகையைப் பயன்படுத்துதல்"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"திரையின் கீழ்ப்பகுதியில் இருக்கும் அணுகல்தன்மை பட்டனை <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> தட்டவும்.\n\nஅம்சங்களுக்கு இடையே மாற, அணுகல்தன்மை பட்டனைத் தொட்டுப் பிடித்திருக்கவும்."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"திரையின் கீழிருந்து மேலாக 2 விரல்களால் ஸ்வைப் செய்யவும்.\n\nஅம்சங்களுக்கு இடையே மாற, திரையின் கீழ்ப்பகுதியில் இருந்து 2 விரல்களால் ஸ்வைப் செய்து பிடித்திருக்கவும்."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"திரையின் கீழிருந்து மேலாக 3 விரல்களால் ஸ்வைப் செய்யவும்.\n\nஅம்சங்களுக்கு இடையே மாற, 3 விரல்களால் மேல்நோக்கி ஸ்வைப் செய்து பிடித்திருக்கவும்."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"அணுகல்தன்மை சைகையைப் பிரத்தியேகமாக்கலாம்"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"அணுகல்தன்மை பட்டனைப் பிரத்தியேகப்படுத்தும்"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"<xliff:g id="SERVICE">%1$s</xliff:g> பற்றி மேலும் அறிக"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"ஒலியளவுக்கான விசைகளைப் பிடிக்கவும்"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"லாக் ஸ்கிரீனில் ஷார்ட்கட்"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"லாக் ஸ்கிரீனில் இருந்து திறப்பதற்கு அம்சத்தின் ஷார்ட்கட்டை அனுமதிக்கவும். இரண்டு ஒலியளவு விசைகளையும் சில விநாடிகள் பிடித்திருக்கவும்."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"அணுகல்தன்மை பட்டன்"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"அணுகல்தன்மை பட்டன் &amp; சைகை"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"அணுகல்தன்மை பட்டனைப் பயன்படுத்துதல். 3-பட்டன் வழிசெலுத்தலில் சைகையைப் பயன்படுத்த முடியாது."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"அணுகல்தன்மை அம்சங்களை விரைவாக அணுகலாம்"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"எந்தத் திரையிலிருந்தும் அணுகல்தன்மை அம்சங்களை விரைவாக அணுகலாம். \n\nதொடங்க, அணுகல்தன்மை அமைப்புகளுக்குச் சென்று ஓர் அம்சத்தைத் தேர்ந்தெடுங்கள். ஷார்ட்கட்டின் மீது தட்டி அணுகல்தன்மை பட்டனைத் தேர்ந்தெடுங்கள்."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"பட்டனையோ சைகையையோ பயன்படுத்துதல்"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"இடம்"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"அளவு"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"பயன்படுத்தாதபோது ஃபேடாகிவிடும்"</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"திரையில் உள்ளவற்றை எளிதாக வாசிக்க அதன் ஒளிர்வைக் குறையுங்கள்.&lt;br/&gt;&lt;br/&gt; பின்வரும் தருணங்களில் இது உதவிகரமாக இருக்கும்: &lt;ol&gt; &lt;li&gt; மொபைலின் இயல்பான குறைந்தபட்ச ஒளிர்வே மிகவும் வெளிச்சமாக இருக்கும்போது&lt;/li&gt; &lt;li&gt; இரவுநேரம், இருட்டான அறை போன்ற இருள் சூழ்ந்த தருணங்களில் மொபைலைப் பயன்படுத்தும்போது&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"திரையில் உள்ளவற்றை எளிதாக வாசிக்க அதன் ஒளிர்வைக் குறையுங்கள்.&lt;br/&gt;&lt;br/&gt; பின்வரும் தருணங்களில் இது உதவிகரமானதாக இருக்கும்: &lt;ol&gt; &lt;li&gt; டேப்லெட்டின் குறைந்தபட்ச இயல்புநிலை ஒளிர்வே மிகவும் வெளிச்சமானதாக இருக்கும்போது&lt;/li&gt; &lt;li&gt; இரவுநேரம், இருட்டான அறை போன்ற இருள் சூழ்ந்த தருணங்களில் டேப்லெட்டைப் பயன்படுத்தும்போது&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"ஒளிச்செறிவு"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"சாதனம் மீண்டும் தொடங்கிய பிறகு இதே நிலையில் வைத்திரு"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">குறைந்த தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> வினாடிகள்)</item>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"சமீபத்திய உரையாடல்கள்"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"சமீபத்திய உரையாடல்களை அழி"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"சமீபத்திய உரையாடல்கள் அகற்றப்பட்டன"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"அழி"</string>
     <string name="important_bubble" msgid="7911698275408390846">"முக்கியமான உரையாடல்களைக் குமிழாக்கு"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"அறிவிப்பு விபரத்தின் மேற்பகுதியில் முக்கியமான உரையாடல்களைக் காட்டும். அவற்றைக் குமிழாகவும் ‘தொந்தரவு செய்ய வேண்டாம்’ குறுக்கீடு செய்யும் வகையிலும் அமைக்கலாம்."</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"ஆதரிக்கப்படும் இணைப்புகள்"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"பிற இயல்பான விருப்பத்தேர்வுகள்"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"இணைப்பைச் சேர்"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"ஆப்ஸில் இணைப்புகளைத் தானாகத் திறக்க ஆப்ஸ் அவற்றைச் சரிபார்க்கலாம். "<annotation id="url">"மேலும் அறிக"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> சரிபார்க்கப்பட்ட இணைப்புகள்</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> சரிபார்க்கப்பட்ட இணைப்பு</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"பேட்டரி மேம்படுத்தலைப் பயன்படுத்தவில்லை எனில், உங்கள் பேட்டரி மிக விரைவில் தீர்ந்துவிடக்கூடும்."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"எப்போதும் பின்னணியில் இயங்க, ஆப்ஸை அனுமதிக்கவா?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"எப்போதும் பின்னணியில் இயங்க <xliff:g id="APP_NAME">%1$s</xliff:g> ஆப்ஸை அனுமதிப்பதால், பேட்டரியின் ஆயுள் குறையக்கூடும். \n\nஇதை அமைப்புகள் &gt; ஆப்ஸ் &amp; அறிவிப்புகள் என்பதற்குச் சென்று, மாற்றலாம்."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"கடந்த 24 மணிநேரத்தில் <xliff:g id="PERCENTAGE">%1$s</xliff:g> உபயோகிக்கப்பட்டன"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"பேட்டரி திறன் மேலாண்மை"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"கடந்த 24 மணிநேரத்தில் பேட்டரி உபயோகம் இல்லை"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"முழு சார்ஜ் ஆனதிலிருந்து <xliff:g id="PERCENTAGE">%1$s</xliff:g> பயன்படுத்தப்பட்டுள்ளது"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"கடந்த 24 மணிநேரத்தில் பேட்டரி உபயோகம்: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"கடைசியாக முழு சார்ஜ் செய்த நேரத்திலிருந்து, பேட்டரி பயன்படுத்தப்படவில்லை"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"கடந்த 24 மணிநேரத்தில் பேட்டரி உபயோகம் இல்லை"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"ஆப்ஸ் அமைப்புகள்"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"SystemUI ட்யூனரைக் காட்டு"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"கூடுதல் அனுமதிகள்"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"ஸ்கிரீன்ஷாட்கள் எடுக்க முடியாது"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"இந்தப் பயன்பாட்டைத் திறக்க முடியாது"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"கடன் வழங்குநரால் முடக்கப்பட்டுள்ளது"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"கேள்விகள் இருந்தால், IT நிர்வாகியைத் தொடர்புகொள்ளவும்"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"மேலும் விவரங்கள்"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"உங்கள் நிர்வாகியால் அமைப்புகள், அனுமதிகள், கார்ப்பரேட் அணுகல், நெட்வொர்க் செயல்பாடு, சாதனத்தின் இருப்பிடத் தகவல் உட்பட உங்கள் பணி விவரத்துடன் தொடர்புடைய பயன்பாடுகளையும் தரவையும் கண்காணிக்கவும் நிர்வகிக்கவும் முடியும்."</string>

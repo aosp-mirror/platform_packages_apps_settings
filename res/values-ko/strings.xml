@@ -1328,7 +1328,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"스무스 디스플레이"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"일부 콘텐츠의 새로고침 빈도를 자동으로 60Hz에서 90Hz로 늘립니다. 이렇게 하면 배터리 사용량이 증가합니다."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"90Hz 새로고침 빈도 강제 적용"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"가장 높은 새로고침 빈도 강제 적용"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"향상된 터치 반응 속도 및 애니메이션 품질에 맞는 가장 높은 새로고침 빈도입니다. 배터리 사용량이 증가합니다."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"화면 시선 감지"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"사용/화면을 보고 있으면 꺼지지 않음"</string>
@@ -2256,7 +2256,7 @@
     <string name="audio_category_title" msgid="5283853679967605826">"오디오"</string>
     <string name="general_category_title" msgid="6298579528716834157">"일반"</string>
     <string name="display_category_title" msgid="6638191682294461408">"디스플레이"</string>
-    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"텍스트 및 화면"</string>
+    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"텍스트 및 디스플레이"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"화면 어둡게"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"상호작용 관리"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"타이밍 제어"</string>
@@ -2311,12 +2311,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"확인"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> 단축키"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"접근성 버튼"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"접근성 동작"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"두 손가락으로 위로 스와이프"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"세 손가락으로 위로 스와이프"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"접근성 버튼 탭하기"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"접근성 동작 사용"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"화면 하단의 접근성 버튼 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>을 탭하세요.\n\n기능 간에 전환하려면 접근성 버튼을 길게 터치합니다."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"두 손가락을 사용하여 화면 하단에서 위로 스와이프하세요.\n\n기능 간에 전환하려면 두 손가락을 사용하여 위로 스와이프한 후 잠시 기다립니다."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"세 손가락을 사용하여 화면 하단에서 위로 스와이프하세요.\n\n기능 간에 전환하려면 세 손가락을 사용하여 위로 스와이프한 후 잠시 기다립니다."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"접근성 동작 맞춤설정"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"접근성 버튼 맞춤설정"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"<xliff:g id="SERVICE">%1$s</xliff:g> 자세히 알아보기"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"볼륨 키 길게 누르기"</string>
@@ -2334,8 +2337,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"잠금 화면에서 바로가기 사용"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"잠금 화면에서 기능 단축키 사용을 허용합니다. 볼륨 키 2개를 몇 초 동안 동시에 길게 누릅니다."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"접근성 버튼"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"접근성 버튼 및 동작"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"접근성 버튼을 사용하세요. 3버튼 탐색에서는 동작을 사용할 수 없습니다."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"접근성 기능에 빠르게 액세스"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"어느 화면에서나 접근성 기능에 빠르게 액세스하세요. \n\n시작하려면 접근성 설정으로 가서 기능을 선택합니다. 단축키를 탭하고 접근성 버튼을 선택하세요."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"버튼 또는 동작 사용"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"위치"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"크기"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"사용하지 않을 때 사라짐"</string>
@@ -2430,6 +2436,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"읽기 편하도록 화면을 어둡게 합니다.&lt;br/&gt;&lt;br/&gt; 다음의 경우 화면을 어둡게 하면 도움이 됩니다. &lt;ol&gt; &lt;li&gt; 휴대전화를 기본 최소 밝기로 설정해도 여전히 너무 밝을 때&lt;/li&gt; &lt;li&gt; 한밤중 또는 자기 전 어두운 실내 등 어두운 곳에서 휴대전화를 사용할 때&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"읽기 쉽도록 화면을 어둡게 만듭니다.&lt;br/&gt;&lt;br/&gt; 다음과 같은 경우 어두운 화면이 도움이 됩니다. &lt;ol&gt; &lt;li&gt; 태블릿을 기본 최소 밝기로 설정해도 여전히 너무 밝을 때&lt;/li&gt; &lt;li&gt; 밤에 또는 자기 전 어두운 실내에서 태블릿을 사용할 때&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"강도"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"기기 재시작 후 유지"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">짧은 지연(<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>초)</item>
@@ -2586,9 +2596,9 @@
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"배터리 사용 제한"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"백그라운드에서 배터리 사용을 제한하지 않습니다. 배터리 사용량이 증가할 수 있습니다."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"사용량을 바탕으로 최적화합니다. 대부분의 앱에 권장됩니다."</string>
-    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"백그라운드에서 사용 시 배터리 사용을 제한합니다. 앱이 정상적으로 작동하지 않을 수 있습니다. 알림이 지연될 수도 있습니다."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"백그라운드에서의 배터리 사용을 제한합니다. 앱이 정상적으로 작동하지 않을 수 있습니다. 알림이 지연될 수도 있습니다."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"앱에서 배터리를 사용하는 방식을 변경하면 성능에 영향을 줄 수 있습니다."</string>
-    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"<xliff:g id="STATE">%1$s</xliff:g> 배터리 사용이 필요한 앱입니다."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"배터리 사용 \'<xliff:g id="STATE">%1$s</xliff:g>\' 설정이 필요한 앱입니다."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"제한 없음"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"최적화됨"</string>
     <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"배터리 사용량 옵션 자세히 알아보기"</string>
@@ -3831,6 +3841,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"최근 대화"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"최근 대화 지우기"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"최근 대화 삭제됨"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"삭제"</string>
     <string name="important_bubble" msgid="7911698275408390846">"우선순위 대화를 버블로 설정"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"우선순위 대화는 풀다운 창 상단에 표시됩니다. 버블로 설정하여 방해 금지 모드를 무시하도록 할 수도 있습니다."</string>
@@ -4201,7 +4213,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"지원되는 링크"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"기타 기본 환경설정"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"링크 추가"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"앱에서 링크를 확인하여 자동으로 열 수 있습니다. "<annotation id="url">"자세히 알아보기"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other">확인된 링크 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
       <item quantity="one">확인된 링크 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
@@ -4352,9 +4365,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"배터리 최적화를 적용하지 마세요. 배터리가 더 빨리 방전될 수 있습니다."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"앱이 항상 백그라운드에서 실행되도록 허용하시겠습니까?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g>이(가) 항상 백그라운드에서 실행되도록 허용하면 배터리 수명이 단축될 수도 있습니다. \n\n이 설정은 나중에 설정 &gt; 앱 및 알림에서 변경할 수 있습니다."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"지난 24시간 동안 <xliff:g id="PERCENTAGE">%1$s</xliff:g> 사용"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"전원 관리"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"지난 24시간 동안 배터리 사용 없음"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"마지막으로 완전히 충전한 이후 <xliff:g id="PERCENTAGE">%1$s</xliff:g> 사용"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"지난 24시간 동안 <xliff:g id="PERCENTAGE">%1$s</xliff:g> 사용"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"마지막으로 완전히 충전한 이후 배터리를 사용하지 않음"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"지난 24시간 동안 배터리 사용 없음"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"앱 설정"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"SystemUI 튜너 표시"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"추가 권한"</string>
@@ -4525,6 +4539,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"스크린샷을 찍을 수 없음"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"열 수 없는 앱"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"신용 상품 제공업체에서 차단함"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"궁금한 점이 있으면 IT 관리자에게 문의하세요."</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"세부정보 더보기"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"관리자는 설정, 권한, 기업 액세스, 네트워크 활동, 기기의 위치 정보 등 직장 프로필과 연결된 데이터와 앱을 모니터링하고 관리할 수 있습니다."</string>
@@ -4829,7 +4847,7 @@
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"긴급 SOS 사용"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"관리자: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"전원 버튼을 빠르게 5번 이상 눌러서 아래 작업을 시작합니다."</string>
-    <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"카운트다운 알림 재생"</string>
+    <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"카운트다운 알람 재생"</string>
     <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"긴급 SOS 시작 시 큰 소리를 재생합니다."</string>
     <string name="emergency_gesture_category_call_for_help_title" msgid="1680040129478289510">"도움 요청"</string>
     <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"전화를 걸어 도움 요청"</string>
