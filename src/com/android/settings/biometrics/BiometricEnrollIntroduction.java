@@ -294,15 +294,19 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             mConfirmingCredentials = false;
             if (resultCode == RESULT_FINISHED) {
                 updatePasswordQuality();
-                overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
-                getNextButton().setEnabled(false);
-                getChallenge(((sensorId, userId, challenge) -> {
-                    mSensorId = sensorId;
-                    mChallenge = challenge;
-                    mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, challenge);
-                    BiometricUtils.removeGatekeeperPasswordHandle(this, data);
-                    getNextButton().setEnabled(true);
-                }));
+                final boolean handled = onSetOrConfirmCredentials(data);
+                if (!handled) {
+                    overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+                    getNextButton().setEnabled(false);
+                    getChallenge(((sensorId, userId, challenge) -> {
+                        mSensorId = sensorId;
+                        mChallenge = challenge;
+                        mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId,
+                                challenge);
+                        BiometricUtils.removeGatekeeperPasswordHandle(this, data);
+                        getNextButton().setEnabled(true);
+                    }));
+                }
             } else {
                 setResult(resultCode, data);
                 finish();
@@ -310,15 +314,19 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         } else if (requestCode == CONFIRM_REQUEST) {
             mConfirmingCredentials = false;
             if (resultCode == RESULT_OK && data != null) {
-                overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
-                getNextButton().setEnabled(false);
-                getChallenge(((sensorId, userId, challenge) -> {
-                    mSensorId = sensorId;
-                    mChallenge = challenge;
-                    mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, challenge);
-                    BiometricUtils.removeGatekeeperPasswordHandle(this, data);
-                    getNextButton().setEnabled(true);
-                }));
+                final boolean handled = onSetOrConfirmCredentials(data);
+                if (!handled) {
+                    overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
+                    getNextButton().setEnabled(false);
+                    getChallenge(((sensorId, userId, challenge) -> {
+                        mSensorId = sensorId;
+                        mChallenge = challenge;
+                        mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId,
+                                challenge);
+                        BiometricUtils.removeGatekeeperPasswordHandle(this, data);
+                        getNextButton().setEnabled(true);
+                    }));
+                }
             } else {
                 setResult(resultCode, data);
                 finish();
@@ -333,6 +341,18 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /**
+     * Called after confirming credentials. Can be used to prevent the default
+     * behavior of immediately calling #getChallenge (useful to things like intro
+     * consent screens that don't actually do enrollment and will later start an
+     * activity that does).
+     *
+     * @return True if the default behavior should be skipped and handled by this method instead.
+     */
+    protected boolean onSetOrConfirmCredentials(@Nullable Intent data) {
+        return false;
     }
 
     protected void onCancelButtonClick(View view) {

@@ -39,10 +39,8 @@ import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
@@ -223,14 +221,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         }
         LoaderManager.getInstance(this).restartLoader(LOADER_APP_USAGE_DATA, null /* args */,
                 mUidDataCallbacks);
-
-        if (Utils.isPageTransitionEnabled(mContext)) {
-            final RecyclerView recyclerView = getListView();
-            if (recyclerView != null) {
-                recyclerView.setItemAnimator(null);
-            }
-        }
-
         updatePrefs();
     }
 

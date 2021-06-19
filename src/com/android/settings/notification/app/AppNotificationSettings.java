@@ -40,35 +40,11 @@ public class AppNotificationSettings extends NotificationSettings {
     private static final String TAG = "AppNotificationSettings";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    private static String KEY_ADVANCED_CATEGORY = "app_advanced";
-    private static String KEY_BADGE = "badge";
-    private static String KEY_APP_LINK = "app_link";
-    private static String[] LEGACY_NON_ADVANCED_KEYS = {KEY_BADGE, KEY_APP_LINK};
-
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.NOTIFICATION_APP_NOTIFICATION;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        final PreferenceScreen screen = getPreferenceScreen();
-        if (mShowLegacyChannelConfig && screen != null) {
-            // if showing legacy settings, pull advanced settings out of the advanced category
-            PreferenceGroup advanced = (PreferenceGroup) findPreference(KEY_ADVANCED_CATEGORY);
-            removePreference(KEY_ADVANCED_CATEGORY);
-            if (advanced != null) {
-                for (String key : LEGACY_NON_ADVANCED_KEYS) {
-                    Preference pref = advanced.findPreference(key);
-                    advanced.removePreference(pref);
-                    if (pref != null) {
-                        screen.addPreference(pref);
-                    }
-                }
-            }
-        }
-    }
 
     @Override
     public void onResume() {
@@ -80,12 +56,7 @@ public class AppNotificationSettings extends NotificationSettings {
             return;
         }
 
-        if (Utils.isPageTransitionEnabled(mContext)) {
-            final RecyclerView recyclerView = getListView();
-            if (recyclerView != null) {
-                recyclerView.setItemAnimator(null);
-            }
-        }
+        getActivity().setTitle(mAppRow.label);
 
         for (NotificationPreferenceController controller : mControllers) {
             controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin,
