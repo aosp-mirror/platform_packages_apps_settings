@@ -16,10 +16,8 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.provider.DeviceConfig;
 import android.text.TextUtils;
 import android.util.Pair;
 
@@ -27,7 +25,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -56,11 +53,7 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
 
     @Override
     public boolean isAvailable() {
-        final boolean advancedEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, true);
-        return !advancedEnabled
-                || !BluetoothUtils.getBooleanMetaData(mCachedDevice.getDevice(),
-                        BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET);
+        return !Utils.isAdvancedDetailsHeader(mCachedDevice.getDevice());
     }
 
     @Override

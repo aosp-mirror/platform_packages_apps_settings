@@ -28,13 +28,16 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.UserHandle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +45,7 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.annotation.Config;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -93,6 +97,7 @@ public class SubSettingLauncherTest {
                 .setDestination(SubSettingLauncherTest.class.getName())
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .setSourceMetricsCategory(123)
+                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
                 .launch();
         doNothing().when(launcher).launch(any(Intent.class));
         verify(launcher).launch(intentArgumentCaptor.capture());
@@ -105,6 +110,8 @@ public class SubSettingLauncherTest {
         assertThat(intent.getFlags()).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK);
         assertThat(intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, -1))
                 .isEqualTo(123);
+        assertThat(intent.getIntExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE, -1))
+                .isEqualTo(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
     }
 
     @Test
@@ -113,6 +120,8 @@ public class SubSettingLauncherTest {
         when(mFragment.getActivity()).thenReturn(mActivity);
 
         final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext));
+        doNothing().when(launcher).launchForResult(any(Fragment.class), any(Intent.class),
+                anyInt());
         launcher.setTitleText("123")
                 .setDestination(SubSettingLauncherTest.class.getName())
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -120,7 +129,8 @@ public class SubSettingLauncherTest {
                 .setResultListener(mFragment, requestCode)
                 .launch();
 
-        verify(mFragment).startActivityForResult(any(Intent.class), eq(requestCode));
+        verify(launcher)
+                .launchForResult(eq(mFragment), any(Intent.class), eq(requestCode));
     }
 
     @Test

@@ -19,7 +19,6 @@ import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settingslib.utils.AsyncLoaderCompat;
 
 /**
@@ -28,17 +27,14 @@ import com.android.settingslib.utils.AsyncLoaderCompat;
  * when not available.
  */
 public class BatteryInfoLoader extends AsyncLoaderCompat<BatteryInfo>{
-
-    BatteryStatsHelper mStatsHelper;
     private static final String LOG_TAG = "BatteryInfoLoader";
 
     @VisibleForTesting
-    BatteryUtils batteryUtils;
+    BatteryUtils mBatteryUtils;
 
-    public BatteryInfoLoader(Context context, BatteryStatsHelper batteryStatsHelper) {
+    public BatteryInfoLoader(Context context) {
         super(context);
-        mStatsHelper = batteryStatsHelper;
-        batteryUtils = BatteryUtils.getInstance(context);
+        mBatteryUtils = BatteryUtils.getInstance(context);
     }
 
     @Override
@@ -48,6 +44,6 @@ public class BatteryInfoLoader extends AsyncLoaderCompat<BatteryInfo>{
 
     @Override
     public BatteryInfo loadInBackground() {
-        return batteryUtils.getBatteryInfo(mStatsHelper, LOG_TAG);
+        return mBatteryUtils.getBatteryInfo(LOG_TAG);
     }
 }

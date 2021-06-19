@@ -26,7 +26,9 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.util.Pair;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
@@ -62,6 +64,8 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
     private BluetoothDevice mBluetoothDevice;
+    @Mock
+    private Drawable mDrawable;
 
     private Context mContext;
     private AvailableMediaBluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -83,10 +87,12 @@ public class AvailableMediaBluetoothDeviceUpdaterTest {
                 Utils.getLocalBtManager(mContext).getCachedDeviceManager());
         mCachedDevices = new ArrayList<>();
         mShadowCachedBluetoothDeviceManager.setCachedDevicesCopy(mCachedDevices);
+        Pair<Drawable, String> pairs = new Pair<>(mDrawable, "fake_device");
 
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
+        when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pairs);
 
         mBluetoothDeviceUpdater = spy(new AvailableMediaBluetoothDeviceUpdater(mContext,
                 mDashboardFragment, mDevicePreferenceCallback));

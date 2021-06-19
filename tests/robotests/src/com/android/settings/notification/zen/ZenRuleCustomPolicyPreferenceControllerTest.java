@@ -27,6 +27,7 @@ import android.service.notification.ZenPolicy;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +48,7 @@ public class ZenRuleCustomPolicyPreferenceControllerTest extends
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private ZenCustomRadioButtonPreference mockPref;
+    private RadioButtonPreference mMockPref;
     @Mock
     private PreferenceScreen mScreen;
 
@@ -70,21 +71,21 @@ public class ZenRuleCustomPolicyPreferenceControllerTest extends
                 PREF_KEY);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         when(mBackend.getAutomaticZenRule(RULE_ID)).thenReturn(mRule);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mMockPref);
         mController.displayPreference(mScreen);
     }
 
     @Test
     public void updateState_nullZenPolicy() {
         updateControllerZenPolicy(null);
-        mController.updateState(mockPref);
-        verify(mockPref).setChecked(false);
+        mController.updateState(mMockPref);
+        verify(mMockPref).setChecked(false);
     }
 
     @Test
     public void updateState_hasZenPolicy() {
         updateControllerZenPolicy(new ZenPolicy.Builder().build());
-        mController.updateState(mockPref);
-        verify(mockPref).setChecked(true);
+        mController.updateState(mMockPref);
+        verify(mMockPref).setChecked(true);
     }
 }

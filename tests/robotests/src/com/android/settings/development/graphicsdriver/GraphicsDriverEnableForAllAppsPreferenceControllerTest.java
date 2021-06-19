@@ -18,10 +18,10 @@ package com.android.settings.development.graphicsdriver;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_PRERELEASE_ALL_APPS;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_PRERELEASE_ALL_APPS;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_PRODUCTION_ALL_APPS;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -61,7 +61,7 @@ public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
     private ContentResolver mResolver;
     private GraphicsDriverEnableForAllAppsPreferenceController mController;
     private String mPreferenceDefault;
-    private String mPreferenceGameDriver;
+    private String mPreferenceProductionDriver;
     private String mPreferencePrereleaseDriver;
 
     @Before
@@ -72,14 +72,14 @@ public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
 
         final Resources resources = mContext.getResources();
         mPreferenceDefault = resources.getString(R.string.graphics_driver_app_preference_default);
-        mPreferenceGameDriver =
-                resources.getString(R.string.graphics_driver_app_preference_game_driver);
+        mPreferenceProductionDriver =
+                resources.getString(R.string.graphics_driver_app_preference_production_driver);
         mPreferencePrereleaseDriver =
                 resources.getString(R.string.graphics_driver_app_preference_prerelease_driver);
 
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
 
         mController = new GraphicsDriverEnableForAllAppsPreferenceController(mContext, "testKey");
         mController.mEntryList = mContext.getResources().getStringArray(
@@ -89,9 +89,9 @@ public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailability_developmentSettingsEnabledAndGameDriverSettingsOn_available() {
+    public void getAvailability_developmentSettingsEnabledAndUpdatableDriverSettingsOn_available() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -104,8 +104,9 @@ public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailability_gameDriverOff_conditionallyUnavailable() {
-        Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
+    public void getAvailability_updatableDriverOff_conditionallyUnavailable() {
+        Settings.Global.putInt(mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_OFF);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
@@ -113,7 +114,7 @@ public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
     @Test
     public void displayPreference_shouldAddListPreference() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
         mController.updateState(mPreference);
 
         verify(mPreference).setValue(mPreferenceDefault);
@@ -139,7 +140,7 @@ public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
     @Test
     public void updateState_availableAndDefault_visibleAndDefault() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
         mController.updateState(mPreference);
 
         verify(mPreference, atLeastOnce()).setVisible(true);
@@ -148,20 +149,22 @@ public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_availableAndGameDriver_visibleAndGameDriver() {
+    public void updateState_availableAndProductionDriver_visibleAndProductionDriver() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_ALL_APPS);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_PRODUCTION_ALL_APPS);
         mController.updateState(mPreference);
 
         verify(mPreference, atLeastOnce()).setVisible(true);
-        verify(mPreference).setValue(mPreferenceGameDriver);
-        verify(mPreference).setSummary(mPreferenceGameDriver);
+        verify(mPreference).setValue(mPreferenceProductionDriver);
+        verify(mPreference).setSummary(mPreferenceProductionDriver);
     }
 
     @Test
     public void updateState_availableAndPrereleaseDriver_visibleAndPrereleaseDriver() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_PRERELEASE_ALL_APPS);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_PRERELEASE_ALL_APPS);
         mController.updateState(mPreference);
 
         verify(mPreference, atLeastOnce()).setVisible(true);
@@ -170,8 +173,9 @@ public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_gameDriverOff_notVisibleAndSystemDriver() {
-        Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
+    public void updateState_updatableDriverOff_notVisibleAndSystemDriver() {
+        Settings.Global.putInt(mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_OFF);
         mController.updateState(mPreference);
 
         verify(mPreference).setVisible(false);
@@ -182,33 +186,35 @@ public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
     @Test
     public void onPreferenceChange_default_shouldUpdateSettingsGlobal() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_ALL_APPS);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_PRODUCTION_ALL_APPS);
         mController.onPreferenceChange(mPreference, mPreferenceDefault);
 
         assertThat(Settings.Global.getInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
-                .isEqualTo(GAME_DRIVER_DEFAULT);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_DEFAULT))
+                .isEqualTo(UPDATABLE_DRIVER_DEFAULT);
     }
 
     @Test
-    public void onPreferenceChange_gameDriver_shouldUpdateSettingsGlobal() {
+    public void onPreferenceChange_updatableDriver_shouldUpdateSettingsGlobal() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
-        mController.onPreferenceChange(mPreference, mPreferenceGameDriver);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
+        mController.onPreferenceChange(mPreference, mPreferenceProductionDriver);
 
         assertThat(Settings.Global.getInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
-                .isEqualTo(GAME_DRIVER_ALL_APPS);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT))
+                .isEqualTo(UPDATABLE_DRIVER_PRODUCTION_ALL_APPS);
     }
 
     @Test
     public void onPreferenceChange_prereleaseDriver_shouldUpdateSettingsGlobal() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
         mController.onPreferenceChange(mPreference, mPreferencePrereleaseDriver);
 
         assertThat(Settings.Global.getInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
-                .isEqualTo(GAME_DRIVER_PRERELEASE_ALL_APPS);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT))
+                .isEqualTo(UPDATABLE_DRIVER_PRERELEASE_ALL_APPS);
     }
 }

@@ -32,7 +32,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-
 /**
  * Provide an interface for testing out the Wifi API
  */

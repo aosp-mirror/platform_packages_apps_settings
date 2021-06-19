@@ -58,7 +58,7 @@ public class ZenModeSoundVibrationPreferenceController extends
         switch (getZenMode()) {
             case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
                 preference.setEnabled(false);
-                preference.setSummary(mContext.getString(R.string.zen_mode_other_sounds_none));
+                preference.setSummary(mContext.getString(R.string.zen_mode_sounds_none));
                 break;
             case Settings.Global.ZEN_MODE_ALARMS:
                 preference.setEnabled(false);

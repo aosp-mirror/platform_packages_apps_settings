@@ -22,7 +22,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.CallSuper;
@@ -36,11 +35,11 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
+import com.android.settings.core.CategoryMixin.CategoryHandler;
+import com.android.settings.core.CategoryMixin.CategoryListener;
 import com.android.settings.core.PreferenceControllerListHelper;
-import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -56,14 +55,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
  */
 public abstract class DashboardFragment extends SettingsPreferenceFragment
-        implements SettingsBaseActivity.CategoryListener, Indexable,
-        PreferenceGroup.OnExpandButtonClickListener,
+        implements CategoryListener, Indexable, PreferenceGroup.OnExpandButtonClickListener,
         BasePreferenceController.UiBlockListener {
     public static final String CATEGORY = "category";
     private static final String TAG = "DashboardFragment";
@@ -160,13 +159,21 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCategoriesChanged() {
-        final DashboardCategory category =
-                mDashboardFeatureProvider.getTilesForCategory(getCategoryKey());
-        if (category == null) {
+    public void onCategoriesChanged(Set<String> categories) {
+        final String categoryKey = getCategoryKey();
+        final DashboardCategory dashboardCategory =
+                mDashboardFeatureProvider.getTilesForCategory(categoryKey);
+        if (dashboardCategory == null) {
             return;
         }
-        refreshDashboardTiles(getLogTag());
+
+        if (categories == null) {
+            // force refreshing
+            refreshDashboardTiles(getLogTag());
+        } else if (categories.contains(categoryKey)) {
+            Log.i(TAG, "refresh tiles for " + categoryKey);
+            refreshDashboardTiles(getLogTag());
+        }
     }
 
     @Override
@@ -191,9 +198,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             return;
         }
         final Activity activity = getActivity();
-        if (activity instanceof SettingsBaseActivity) {
+        if (activity instanceof CategoryHandler) {
             mListeningToCategoryChange = true;
-            ((SettingsBaseActivity) activity).addCategoryListener(this);
+            ((CategoryHandler) activity).getCategoryMixin().addCategoryListener(this);
         }
         final ContentResolver resolver = getContentResolver();
         mDashboardTilePrefKeys.values().stream()
@@ -236,8 +243,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         unregisterDynamicDataObservers(new ArrayList<>(mRegisteredObservers));
         if (mListeningToCategoryChange) {
             final Activity activity = getActivity();
-            if (activity instanceof SettingsBaseActivity) {
-                ((SettingsBaseActivity) activity).remCategoryListener(this);
+            if (activity instanceof CategoryHandler) {
+                ((CategoryHandler) activity).getCategoryMixin().removeCategoryListener(this);
             }
             mListeningToCategoryChange = false;
         }
@@ -351,11 +358,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
      * Update state of each preference managed by PreferenceController.
      */
     protected void updatePreferenceStates() {
-        if (isParalleledControllers() && FeatureFlagUtils.isEnabled(getContext(),
-                FeatureFlags.CONTROLLER_ENHANCEMENT)) {
-            updatePreferenceStatesInParallel();
-            return;
-        }
         final PreferenceScreen screen = getPreferenceScreen();
         Collection<List<AbstractPreferenceController>> controllerLists =
                 mPreferenceControllers.values();
@@ -387,6 +389,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
      * Use parallel method to update state of each preference managed by PreferenceController.
      */
     @VisibleForTesting
+    // To use this parallel approach will cause the side effect of the UI flicker. Such as
+    // the thumb sliding of the toggle button.
     void updatePreferenceStatesInParallel() {
         final PreferenceScreen screen = getPreferenceScreen();
         final Collection<List<AbstractPreferenceController>> controllerLists =
@@ -530,7 +534,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         return tile instanceof ProviderTile
                 ? new SwitchPreference(getPrefContext())
                 : tile.hasSwitch()
-                        ? new MasterSwitchPreference(getPrefContext())
+                        ? new PrimarySwitchPreference(getPrefContext())
                         : new Preference(getPrefContext());
     }
 

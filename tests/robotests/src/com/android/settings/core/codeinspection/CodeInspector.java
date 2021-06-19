@@ -48,13 +48,13 @@ public abstract class CodeInspector {
      */
     public abstract void run();
 
-    protected void assertNoObsoleteInGrandfatherList(String listName, List<String> list) {
-        final StringBuilder obsoleteGrandfatherItems = new StringBuilder(listName)
-            .append(" contains item that should not be grandfathered.\n");
+    protected void assertNoObsoleteInExemptList(String listName, List<String> list) {
+        final StringBuilder obsoleteExemptItems = new StringBuilder(listName).append(
+                " contains item that should not be exempted.\n");
         for (String c : list) {
-            obsoleteGrandfatherItems.append(c).append("\n");
+            obsoleteExemptItems.append(c).append("\n");
         }
-        assertWithMessage(obsoleteGrandfatherItems.toString()).that(list).isEmpty();
+        assertWithMessage(obsoleteExemptItems.toString()).that(list).isEmpty();
     }
 
     protected boolean isConcreteSettingsClass(Class clazz) {
@@ -78,16 +78,16 @@ public abstract class CodeInspector {
         return true;
     }
 
-    public static void initializeGrandfatherList(List<String> grandfather, String filename) {
+    public static void initializeExemptList(List<String> exemptList, String filename) {
         try {
             final InputStream in = RuntimeEnvironment.application.getAssets().open(filename);
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             String line;
             while ((line = reader.readLine()) != null) {
-                grandfather.add(line);
+                exemptList.add(line);
             }
         } catch (Exception e) {
-            throw new IllegalArgumentException("Error initializing grandfather " + filename, e);
+            throw new IllegalArgumentException("Error initializing exempt list " + filename, e);
         }
     }
 }

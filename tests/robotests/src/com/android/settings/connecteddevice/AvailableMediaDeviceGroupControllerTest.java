@@ -157,9 +157,11 @@ public class AvailableMediaDeviceGroupControllerTest {
     public void testRegister() {
         // register the callback in onStart()
         mAvailableMediaDeviceGroupController.onStart();
+
         verify(mAvailableMediaBluetoothDeviceUpdater).registerCallback();
         verify(mLocalBluetoothManager.getEventManager()).registerCallback(
                 any(BluetoothCallback.class));
+        verify(mAvailableMediaBluetoothDeviceUpdater).refreshPreference();
     }
 
     @Test

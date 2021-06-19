@@ -46,6 +46,8 @@ public class ShadowUtils {
     private static boolean sIsSystemAlertWindowEnabled;
     private static boolean sIsVoiceCapable;
     private static ArraySet<String> sResultLinks = new ArraySet<>();
+    private static boolean sIsBatteryPresent;
+    private static boolean sIsPageTransitionEnabled;
 
     @Implementation
     protected static int enforceSameOwner(Context context, int userId) {
@@ -67,6 +69,8 @@ public class ShadowUtils {
         sIsDemoUser = false;
         sIsVoiceCapable = false;
         sResultLinks = new ArraySet<>();
+        sIsBatteryPresent = true;
+        sIsPageTransitionEnabled = true;
     }
 
     public static void setIsDemoUser(boolean isDemoUser) {
@@ -154,5 +158,23 @@ public class ShadowUtils {
 
     public static void setHandledDomains(ArraySet<String> links) {
         sResultLinks = links;
+    }
+
+    @Implementation
+    protected static boolean isBatteryPresent(Context context) {
+        return sIsBatteryPresent;
+    }
+
+    public static void setIsBatteryPresent(boolean isBatteryPresent) {
+        sIsBatteryPresent = isBatteryPresent;
+    }
+
+    @Implementation
+    protected static boolean isPageTransitionEnabled(Context context) {
+        return sIsPageTransitionEnabled;
+    }
+
+    public static void setIsPageTransitionEnabled(boolean isPageTransitionEnabled) {
+        sIsPageTransitionEnabled = isPageTransitionEnabled;
     }
 }
