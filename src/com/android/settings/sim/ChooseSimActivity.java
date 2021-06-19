@@ -19,6 +19,7 @@ package com.android.settings.sim;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -43,7 +44,10 @@ import com.google.android.setupdesign.items.ItemGroup;
 import com.google.android.setupdesign.items.RecyclerItemAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /** Activity to show a list of profiles for user to choose. */
 public class ChooseSimActivity extends Activity
@@ -108,7 +112,12 @@ public class ChooseSimActivity extends Activity
             subscriptionCount++;
         }
         layout.setHeaderText(getString(R.string.choose_sim_title));
-        layout.setDescriptionText(getString(R.string.choose_sim_text, subscriptionCount));
+        MessageFormat msgFormat = new MessageFormat(
+            getString(R.string.choose_sim_text),
+            Locale.getDefault());
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("count", subscriptionCount);
+        layout.setDescriptionText(msgFormat.format(arguments));
 
         displaySubscriptions();
 
