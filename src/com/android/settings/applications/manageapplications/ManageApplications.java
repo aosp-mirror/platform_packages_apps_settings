@@ -73,6 +73,8 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -130,6 +132,8 @@ import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -143,7 +147,8 @@ import java.util.Set;
  * intent.
  */
 public class ManageApplications extends InstrumentedFragment
-        implements View.OnClickListener, OnItemSelectedListener, SearchView.OnQueryTextListener {
+        implements View.OnClickListener, OnItemSelectedListener, SearchView.OnQueryTextListener,
+        MenuItem.OnActionExpandListener {
 
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = Build.IS_DEBUGGABLE;
@@ -256,6 +261,7 @@ public class ManageApplications extends InstrumentedFragment
     private boolean mIsPersonalOnly;
     private View mEmptyView;
     private int mFilterType;
+    private AppBarLayout mAppBarLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -425,6 +431,9 @@ public class ManageApplications extends InstrumentedFragment
         createHeader();
 
         mResetAppsHelper.onRestoreInstanceState(savedInstanceState);
+
+        mAppBarLayout = getActivity().findViewById(R.id.app_bar);
+        disableToolBarScrollableBehavior();
 
         return mRootView;
     }
@@ -659,6 +668,7 @@ public class ManageApplications extends InstrumentedFragment
 
         final MenuItem searchMenuItem = menu.findItem(R.id.search_app_list_menu);
         if (searchMenuItem != null) {
+            searchMenuItem.setOnActionExpandListener(this);
             mSearchView = (SearchView) searchMenuItem.getActionView();
             mSearchView.setQueryHint(getText(R.string.search_settings));
             mSearchView.setOnQueryTextListener(this);
@@ -668,6 +678,23 @@ public class ManageApplications extends InstrumentedFragment
         }
 
         updateOptionsMenu();
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        // To prevent a large space on tool bar.
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        // To prevent user can expand the collapsing tool bar view.
+        ViewCompat.setNestedScrollingEnabled(mRecyclerView, false);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        // We keep the collapsed status after user cancel the search function.
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        ViewCompat.setNestedScrollingEnabled(mRecyclerView, true);
+        return true;
     }
 
     @Override
@@ -791,6 +818,9 @@ public class ManageApplications extends InstrumentedFragment
             mCurrentPkgName = entry.info.packageName;
             mCurrentUid = entry.info.uid;
             startApplicationDetailsActivity();
+            // We disable the scrolling ability in onMenuItemActionCollapse, we should recover it
+            // if user selects any app item.
+            ViewCompat.setNestedScrollingEnabled(mRecyclerView, true);
         }
     }
 
@@ -840,6 +870,20 @@ public class ManageApplications extends InstrumentedFragment
         if (LIST_TYPES_WITH_INSTANT.contains(mListType)) {
             mFilterAdapter.setFilterEnabled(FILTER_APPS_INSTANT, haveInstantApps);
         }
+    }
+
+    private void disableToolBarScrollableBehavior() {
+        final CoordinatorLayout.LayoutParams params =
+                (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
+        final AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
+        behavior.setDragCallback(
+                new AppBarLayout.Behavior.DragCallback() {
+                    @Override
+                    public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+                        return false;
+                    }
+                });
+        params.setBehavior(behavior);
     }
 
     static class FilterSpinnerAdapter extends SettingsSpinnerAdapter<CharSequence> {

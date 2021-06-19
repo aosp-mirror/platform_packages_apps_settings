@@ -1366,7 +1366,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Płynne wyświetlanie"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"W przypadku niektórych treści automatycznie podwyższa częstotliwość odświeżania z 60 na 90 Hz. Zwiększa zużycie baterii."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Wymuś częstotliwość odświeżania na poziomie 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Wymuś częstotliwość odświeżania na najwyższym poziomie"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Najszybsza częstotliwość odświeżania zapewnia szybszą reakcję na dotyk i wyższą jakość animacji. Zwiększa zużycie baterii."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Aktywność ekranu"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Włączone / Ekran nie wyłączy się, jeśli na niego patrzysz"</string>
@@ -2357,12 +2357,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> – skrót"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Przycisk ułatwień dostępu"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gest ułatwień dostępu"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Przesuń w górę dwoma palcami"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Przesuń w górę trzema palcami"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Kliknij przycisk ułatwień dostępu"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Użyj gestu ułatwień dostępu"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Kliknij przycisk ułatwień dostępu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dole ekranu.\n\nAby przełączać aplikacje, naciśnij i przytrzymaj przycisk ułatwień dostępu."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Przesuń dwoma palcami z dołu ekranu w górę.\n\nAby przełączać funkcje, przesuń 2 palcami w górę i przytrzymaj."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Przesuń 3 palcami z dołu ekranu w górę.\n\nAby przełączyć funkcje, przesuń 3 palcami w górę i przytrzymaj."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Dostosuj gest ułatwień dostępu"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Dostosuj przycisk ułatwień dostępu"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Więcej informacji: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Przytrzymaj przyciski głośności"</string>
@@ -2380,8 +2383,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Skróty z ekranu blokady"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Zezwalaj na włączanie skrótów aplikacji z ekranu blokady. Przytrzymaj oba przyciski głośności przez kilka sekund."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Przycisk ułatwień dostępu"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Przycisk i gest ułatwień dostępu"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Używam przycisku ułatwień dostępu. Ten gest nie jest dostępny w przypadku nawigacji przy użyciu 3 przycisków."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Szybki dostęp do ułatwień dostępu"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Szybko uruchamiaj ułatwienia dostępu na dowolnym ekranie. \n\nAby rozpocząć, otwórz ustawienia ułatwień dostępu i wybierz funkcję. Kliknij skrót i wybierz przycisk ułatwień dostępu."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Użyj przycisku lub gestu"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokalizacja"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Rozmiar"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Zanikanie, gdy nie w użyciu"</string>
@@ -2478,6 +2484,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Przyciemnij ekran, aby czytać wygodniej.&lt;br/&gt;&lt;br/&gt; Może to być pomocne, gdy: &lt;ol&gt; &lt;li&gt; minimalna jasność telefonu jest zbyt wysoka;&lt;/li&gt; &lt;li&gt; używasz telefonu w ciemności, np. w nocy lub w ciemnym pokoju przed zaśnięciem.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Przyciemnij ekran, aby wygodniej czytać.&lt;br/&gt;&lt;br/&gt; Może to być pomocne, gdy: &lt;ol&gt; &lt;li&gt; minimalna jasność tabletu jest zbyt jasna;&lt;/li&gt; &lt;li&gt; używasz tabletu w ciemności, np. w nocy lub w ciemnym pokoju przed zaśnięciem.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensywność"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Utrzymuj po ponownym uruchomieniu urządzenia"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="few">Krótkie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
@@ -3921,6 +3931,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Ostatnie rozmowy"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Wyczyść ostatnie wątki"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Usunięto ostatnie wątki"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Wyczyść"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Wyświetlaj rozmowy priorytetowe w dymkach"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Rozmowy priorytetowe są wyświetlane u góry obszaru powiadomień. Możesz też skonfigurować je tak, by wyświetlały się jako dymki i przerywały działanie trybu Nie przeszkadzać."</string>
@@ -4309,7 +4321,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Obsługiwane linki"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Inne ustawienia domyślne"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Dodaj link"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Aplikacja może weryfikować linki, aby otwierać je automatycznie. "<annotation id="url">"Więcej informacji"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> zweryfikowane linki</item>
       <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> zweryfikowanych linków</item>
@@ -4484,9 +4497,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Nie stosuj optymalizacji baterii. Może powodować szybsze wyczerpywanie się baterii."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Pozwolić aplikacji cały czas działać w tle?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Zezwolenie aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> na ciągłe działanie w tle może skrócić czas pracy na baterii. \n\nMożesz zmienić to ustawienie później, wybierając Ustawienia &gt; Aplikacje i powiadomienia."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"Zużycie: <xliff:g id="PERCENTAGE">%1$s</xliff:g> w ciągu ostatnich 24 godzin"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Zarządzanie zasilaniem"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"Brak wykorzystania baterii w ciągu ostatnich 24 godzin"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"Użycie od ostatniego pełnego naładowania: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"Wykorzystano <xliff:g id="PERCENTAGE">%1$s</xliff:g> w ciągu ostatnich 24 godzin"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Brak użycia baterii od ostatniego pełnego naładowania"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"Brak wykorzystania baterii w ciągu ostatnich 24 godzin"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Ustawienia aplikacji"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Pokaż kalibrator SystemUI"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Dodatkowe uprawnienia"</string>
@@ -4661,6 +4675,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Nie można robić zrzutów ekranu"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Nie można otworzyć tej aplikacji"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Funkcja zablokowana przez operatora kredytu"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Jeśli masz pytania, skontaktuj się z administratorem IT"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Więcej szczegółów"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Administrator może monitorować aplikacje i dane powiązane z Twoim profilem służbowym (w tym ustawienia, uprawnienia, firmowe uprawnienia dostępu, aktywność w sieci i informacje o lokalizacji urządzenia) oraz nimi zarządzać."</string>
@@ -4989,7 +5007,7 @@
     <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Wezwij pomoc"</string>
     <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Numer, pod którym można uzyskać pomoc"</string>
     <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>. Kliknij, by zmienić."</string>
-    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Jeśli wpiszesz numer inny niż alarmowy:\n • Aby można było wykonać połączenie alarmowe, urządzenie musi być odblokowane\n • Połączenie może nie zostać odebrane"</string>
+    <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Jeśli wpiszesz numer inny niż alarmowy:\n • aby można było wykonać połączenie alarmowe, urządzenie musi być odblokowane;\n • połączenie może nie zostać odebrane."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Sprawdzanie powiadomień odciskiem palca"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Przesuwanie po czytniku"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Aby sprawdzić powiadomienia, przesuń palcem w dół po czytniku linii papilarnych z tyłu telefonu."</string>
