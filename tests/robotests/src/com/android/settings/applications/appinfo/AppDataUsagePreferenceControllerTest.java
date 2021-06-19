@@ -19,7 +19,6 @@ package com.android.settings.applications.appinfo;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
@@ -31,8 +30,10 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
+
+import androidx.loader.app.LoaderManager;
+import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.datausage.AppDataUsage;
@@ -42,13 +43,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import androidx.loader.app.LoaderManager;
-import androidx.preference.Preference;
 
 @RunWith(RobolectricTestRunner.class)
 public class AppDataUsagePreferenceControllerTest {
@@ -98,10 +95,6 @@ public class AppDataUsagePreferenceControllerTest {
 
     @Test
     public void onResume_isAvailable_shouldRestartDataLoader() {
-        final ConnectivityManager connectivityManager = mock(ConnectivityManager.class);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(connectivityManager);
-        when(connectivityManager.isNetworkSupported(anyInt())).thenReturn(true);
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
         doReturn(BasePreferenceController.AVAILABLE).when(mController).getAvailabilityStatus();
         final AppEntry appEntry = mock(AppEntry.class);

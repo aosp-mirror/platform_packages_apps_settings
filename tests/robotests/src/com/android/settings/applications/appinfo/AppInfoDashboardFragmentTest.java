@@ -297,7 +297,7 @@ public final class AppInfoDashboardFragmentTest {
         final List<UserInfo> userInfos = new ArrayList<>();
         userInfos.add(new UserInfo(userID1, "User1", UserInfo.FLAG_PRIMARY));
         userInfos.add(new UserInfo(userID2, "yue", UserInfo.FLAG_GUEST));
-        when(mUserManager.getUsers(true)).thenReturn(userInfos);
+        when(mUserManager.getAliveUsers()).thenReturn(userInfos);
         final ApplicationInfo appInfo = new ApplicationInfo();
         appInfo.flags = ApplicationInfo.FLAG_INSTALLED;
         when(mPackageManager.getApplicationInfoAsUser(
@@ -320,7 +320,7 @@ public final class AppInfoDashboardFragmentTest {
         final List<UserInfo> userInfos = new ArrayList<>();
         userInfos.add(new UserInfo(userID1, "User1", UserInfo.FLAG_PRIMARY));
         userInfos.add(new UserInfo(userID2, "yue", UserInfo.FLAG_GUEST));
-        when(mUserManager.getUsers(true)).thenReturn(userInfos);
+        when(mUserManager.getAliveUsers()).thenReturn(userInfos);
         final ApplicationInfo appInfo = new ApplicationInfo();
         appInfo.flags = ApplicationInfo.FLAG_INSTALLED;
         when(mPackageManager.getApplicationInfoAsUser(

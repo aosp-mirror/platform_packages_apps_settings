@@ -28,29 +28,29 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  * Tip to show current battery level is low or remaining time is less than a certain period
  */
 public class LowBatteryTip extends EarlyWarningTip {
-    private CharSequence mSummary;
 
-    public LowBatteryTip(@StateType int state, boolean powerSaveModeOn, CharSequence summary) {
+    public LowBatteryTip(@StateType int state, boolean powerSaveModeOn) {
         super(state, powerSaveModeOn);
         mType = TipType.LOW_BATTERY;
-        mSummary = summary;
     }
 
     public LowBatteryTip(Parcel in) {
         super(in);
-        mSummary = in.readCharSequence();
+    }
+
+    @Override
+    public CharSequence getTitle(Context context) {
+        return context.getString(R.string.battery_tip_low_battery_title);
     }
 
     @Override
     public CharSequence getSummary(Context context) {
-        return mState == StateType.HANDLED ? context.getString(
-                R.string.battery_tip_early_heads_up_done_summary) : mSummary;
+        return context.getString(R.string.battery_tip_low_battery_summary);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeCharSequence(mSummary);
     }
 
     @Override

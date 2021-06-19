@@ -65,7 +65,7 @@ public final class EthernetTetherPreferenceController extends TetherBasePreferen
 
     @Override
     public boolean shouldEnable() {
-        String[] available = mCm.getTetherableIfaces();
+        String[] available = mTm.getTetherableIfaces();
         for (String s : available) {
             if (s.matches(mEthernetRegex)) {
                 return true;

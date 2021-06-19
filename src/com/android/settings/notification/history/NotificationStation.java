@@ -312,7 +312,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         if (n.extras != null) {
             title = n.extras.getCharSequence(Notification.EXTRA_TITLE);
         }
-        return title == null? null : String.valueOf(title);
+        return title == null? "" : String.valueOf(title);
     }
 
     /**
@@ -339,7 +339,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
                 text = n.extras.getCharSequence(Notification.EXTRA_TEXT);
             }
         }
-        return text == null ? null : String.valueOf(text);
+        return text == null ? "" : String.valueOf(text);
     }
 
     private Drawable loadIcon(HistoricalNotificationInfo info, StatusBarNotification sbn) {
@@ -461,7 +461,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
             sb.append("\n")
                     .append(bold("getShortcutInfo"))
                     .append(delim)
-                    .append(String.valueOf(rank.getShortcutInfo()));
+                    .append(String.valueOf(rank.getConversationShortcutInfo()));
             sb.append("\n")
                     .append(bold("isConversation"))
                     .append(delim)

@@ -143,8 +143,8 @@ public class FaceSetupSlice implements CustomSliceable {
     private static RowBuilder buildRowBuilder(CharSequence title, CharSequence subTitle,
             IconCompat icon, Context context, Intent intent) {
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
-                PendingIntent.getActivity(context, 0, intent, 0), icon, ListBuilder.ICON_IMAGE,
-                title);
+                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE),
+                icon, ListBuilder.ICON_IMAGE, title);
         return new RowBuilder()
                 .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                 .setTitle(title)

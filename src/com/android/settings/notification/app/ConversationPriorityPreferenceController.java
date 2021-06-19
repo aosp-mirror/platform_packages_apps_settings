@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.app;
 
+import android.app.NotificationChannel;
 import android.content.Context;
 import android.util.Pair;
 
@@ -51,6 +52,12 @@ public class ConversationPriorityPreferenceController extends NotificationPrefer
             return false;
         }
         return true;
+    }
+
+    @Override
+    boolean isIncludedInFilter() {
+        return mPreferenceFilter.contains(NotificationChannel.EDIT_IMPORTANCE)
+                || mPreferenceFilter.contains(NotificationChannel.EDIT_CONVERSATION);
     }
 
     public void updateState(Preference preference) {
