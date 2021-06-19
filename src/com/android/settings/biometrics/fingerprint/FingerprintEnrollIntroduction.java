@@ -64,19 +64,60 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         super.onCreate(savedInstanceState);
 
         final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
-        final ImageView iconLocked = findViewById(R.id.icon_locked);
-        final ImageView iconDelete = findViewById(R.id.icon_delete);
         final ImageView iconInfo = findViewById(R.id.icon_info);
         final ImageView iconLink = findViewById(R.id.icon_link);
         iconFingerprint.getDrawable().setColorFilter(getIconColorFilter());
-        iconLocked.getDrawable().setColorFilter(getIconColorFilter());
-        iconDelete.getDrawable().setColorFilter(getIconColorFilter());
         iconInfo.getDrawable().setColorFilter(getIconColorFilter());
         iconLink.getDrawable().setColorFilter(getIconColorFilter());
+
+        final TextView footerMessage2 = findViewById(R.id.footer_message_2);
+        final TextView footerMessage3 = findViewById(R.id.footer_message_3);
+        final TextView footerMessage4 = findViewById(R.id.footer_message_4);
+        final TextView footerMessage5 = findViewById(R.id.footer_message_5);
+        footerMessage2.setText(getFooterMessage2());
+        footerMessage3.setText(getFooterMessage3());
+        footerMessage4.setText(getFooterMessage4());
+        footerMessage5.setText(getFooterMessage5());
+
+        final TextView footerTitle1 = findViewById(R.id.footer_title_1);
+        final TextView footerTitle2 = findViewById(R.id.footer_title_2);
+        footerTitle1.setText(getFooterTitle1());
+        footerTitle2.setText(getFooterTitle2());
     }
 
+    @StringRes
     int getNegativeButtonTextId() {
         return R.string.security_settings_fingerprint_enroll_introduction_skip;
+    }
+
+    @StringRes
+    protected int getFooterTitle1() {
+        return R.string.security_settings_fingerprint_enroll_introduction_footer_title_1;
+    }
+
+    @StringRes
+    protected int getFooterTitle2() {
+        return R.string.security_settings_fingerprint_enroll_introduction_footer_title_2;
+    }
+
+    @StringRes
+    protected int getFooterMessage2() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_2;
+    }
+
+    @StringRes
+    protected int getFooterMessage3() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_3;
+    }
+
+    @StringRes
+    protected int getFooterMessage4() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_4;
+    }
+
+    @StringRes
+    protected int getFooterMessage5() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_5;
     }
 
     @Override

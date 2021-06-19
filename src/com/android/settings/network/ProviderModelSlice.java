@@ -22,16 +22,20 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static com.android.settings.slices.CustomSliceRegistry.PROVIDER_MODEL_SLICE_URI;
 
 import android.annotation.ColorInt;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
+import android.view.WindowManager.LayoutParams;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
@@ -64,12 +68,16 @@ import java.util.stream.Collectors;
 public class ProviderModelSlice extends WifiSlice {
 
     private static final String TAG = "ProviderModelSlice";
+    protected static final String PREF_NAME = "ProviderModelSlice";
+    protected static final String PREF_HAS_TURNED_OFF_MOBILE_DATA = "PrefHasTurnedOffMobileData";
 
     private final ProviderModelSliceHelper mHelper;
+    private final SharedPreferences mSharedPref;
 
     public ProviderModelSlice(Context context) {
         super(context);
         mHelper = getHelper();
+        mSharedPref = getSharedPreference();
     }
 
     @Override
@@ -194,15 +202,58 @@ public class ProviderModelSlice extends WifiSlice {
         boolean isToggleAction = intent.hasExtra(EXTRA_TOGGLE_STATE);
         boolean newState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
                 mHelper.isMobileDataEnabled());
+
         if (isToggleAction) {
             // The ToggleAction is used to set mobile data enabled.
-            MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
-                    false /* disableOtherSubscriptions */);
+            if (!newState && mSharedPref != null
+                    && mSharedPref.getBoolean(PREF_HAS_TURNED_OFF_MOBILE_DATA, true)) {
+                String carrierName = mHelper.getMobileTitle();
+                if (carrierName.equals(mContext.getString(R.string.mobile_data_settings_title))) {
+                    carrierName = mContext.getString(
+                            R.string.mobile_data_disable_message_default_carrier);
+                }
+                showMobileDataDisableDialog(getMobileDataDisableDialog(defaultSubId, carrierName));
+            } else {
+                MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
+                        false /* disableOtherSubscriptions */);
+            }
         }
 
         final boolean isDataEnabled =
                 isToggleAction ? newState : MobileNetworkUtils.isMobileDataEnabled(mContext);
         doCarrierNetworkAction(isToggleAction, isDataEnabled, defaultSubId);
+    }
+
+    @VisibleForTesting
+    AlertDialog getMobileDataDisableDialog(int defaultSubId, String carrierName) {
+        return new Builder(mContext)
+                .setTitle(R.string.mobile_data_disable_title)
+                .setMessage(mContext.getString(R.string.mobile_data_disable_message,
+                        carrierName))
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(
+                        com.android.internal.R.string.alert_windows_notification_turn_off_action,
+                        (dialog, which) -> {
+                            MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId,
+                                    false /* enabled */,
+                                    false /* disableOtherSubscriptions */);
+                            if (mSharedPref != null) {
+                                SharedPreferences.Editor editor = mSharedPref.edit();
+                                editor.putBoolean(PREF_HAS_TURNED_OFF_MOBILE_DATA, false);
+                                editor.apply();
+                            }
+                        })
+                .create();
+    }
+
+    private void showMobileDataDisableDialog(AlertDialog dialog) {
+        if (dialog == null) {
+            log("AlertDialog is null");
+            return;
+        }
+
+        dialog.getWindow().setType(LayoutParams.TYPE_KEYGUARD_DIALOG);
+        dialog.show();
     }
 
     @VisibleForTesting
@@ -245,6 +296,11 @@ public class ProviderModelSlice extends WifiSlice {
     @VisibleForTesting
     NetworkProviderWorker getWorker() {
         return SliceBackgroundWorker.getInstance(getUri());
+    }
+
+    @VisibleForTesting
+    SharedPreferences getSharedPreference() {
+        return mContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }
 
     private @InternetUpdater.InternetType int getInternetType() {

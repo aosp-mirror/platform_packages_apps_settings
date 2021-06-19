@@ -1326,7 +1326,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Augmenta automàticament la freqüència d\'actualització de 60 a 90 Hz en alguns continguts. Augmenta l\'ús de la bateria."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Força una freqüència d\'actualització de 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Força la freqüència d\'actualització màxima"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"La freqüència d\'actualització més alta millora la resposta al tacte i la qualitat de les animacions. Augmenta l\'ús de la bateria."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atenció a la pantalla"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activat / La pantalla no s\'apagarà si estàs mirant-la"</string>
@@ -2309,12 +2309,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entesos"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Drecera a <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botó d\'accessibilitat"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gest d\'accessibilitat"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Llisca cap amunt amb 2 dits"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Llisca cap amunt amb 3 dits"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Toca el botó d\'accessibilitat"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Utilitza el gest d\'accessibilitat"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Toca el botó d\'accessibilitat <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> a la part inferior de la pantalla.\n\nPer canviar entre funcions, mantén premut el botó d\'accessibilitat."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Llisca cap amunt amb 2 dits des de la part inferior de la pantalla.\n\nPer canviar entre funcions, llisca cap amunt amb 2 dits i mantén premut."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Llisca cap amunt amb 3 dits des de la part inferior de la pantalla.\n\nPer canviar entre funcions, llisca cap amunt amb 3 dits i mantén premut."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Personalitza el gest d\'accessibilitat"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Personalitza el botó d\'accessibilitat"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Més informació sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mantén premudes les tecles de volum"</string>
@@ -2332,8 +2335,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Drecera des de la pantalla de bloqueig"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permet que la drecera de la funció s\'activi des de la pantalla de bloqueig. Mantén premudes les dues tecles de volum durant uns segons."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Botó d\'accessibilitat"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Botó i gest d\'accessibilitat"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"S\'està utilitzant el botó d\'accessibilitat. El gest no està disponible amb la navegació amb 3 botons."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accedeix ràpidament a les funcions d\'accessibilitat"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Accedeix ràpidament a les funcions d\'accessibilitat des de qualsevol pantalla. \n\nPer començar, ves a la configuració d\'accessibilitat i selecciona una funció. Toca la drecera i selecciona el botó d\'accessibilitat."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Utilitza el botó o el gest"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ubicació"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Mida"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Atenua quan no s\'utilitzi"</string>
@@ -2428,6 +2434,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Atenua la pantalla per llegir més còmodament.&lt;br/&gt;&lt;br/&gt; Això pot ser útil quan: &lt;ol&gt; &lt;li&gt; La brillantor mínima predeterminada del telèfon encara és massa clara.&lt;/li&gt; &lt;li&gt; Utilitzes el telèfon en situacions de poca llum, com ara a la nit o en una habitació fosca abans d\'anar a dormir.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Enfosqueix la pantalla per llegir més còmodament.&lt;br/&gt;&lt;br/&gt; Això pot ser útil quan: &lt;ol&gt; &lt;li&gt; La brillantor mínima predeterminada de la tauleta encara és massa clara.&lt;/li&gt; &lt;li&gt; Utilitzes la tauleta en situacions de poca llum, com ara a la nit o en una habitació fosca abans d\'anar a dormir.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitat"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Mantén la funció activada després de reiniciar el dispositiu"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Breu (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segons)</item>
@@ -2682,7 +2692,7 @@
       <item quantity="one">S\'ha limitat l\'ús de la bateria per a %1$d aplicació</item>
     </plurals>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Restringida (<xliff:g id="TIME">%1$s</xliff:g>)"</string>
-    <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Aquestes aplicacions tenen restringit l\'ús de la bateria en segon pla. És possible que les aplicacions no funcionin correctament i que en rebis les notificacions amb retard."</string>
+    <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Aquestes aplicacions tenen restringit l\'ús de la bateria en segon pla. És possible que no funcionin correctament i que en rebis les notificacions amb retard."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utilitza el gestor de bateria"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detecta quan les aplicacions consumeixen bateria"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"S\'està detectant el consum de bateria de les aplicacions"</string>
@@ -3829,6 +3839,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Converses recents"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Esborra les converses recents"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Les converses recents s\'han suprimit"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Esborra"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Mostra les converses prioritàries com a bombolles"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Les converses prioritàries es mostren a la part superior de l\'àrea desplegable. També pots definir que es mostrin com a bombolles i interrompin el mode No molestis."</string>
@@ -3914,7 +3926,7 @@
     <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"Cap de les aplicacions instal·lades no admet pantalla en pantalla"</string>
     <string name="picture_in_picture_keywords" msgid="3605379820551656253">"pip imatge en"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Pantalla en pantalla"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Permet Pantalla en pantalla"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Permet pantalla en pantalla"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Permet que aquesta aplicació creï una finestra de pantalla en pantalla mentre l\'aplicació està oberta o després de sortir-ne (per exemple, per seguir veient un vídeo). Aquesta finestra es mostra sobre altres aplicacions que estàs utilitzant."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"Aplicacions de treball i personals connectades"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Connectada"</string>
@@ -4199,7 +4211,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Enllaços admesos"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Altres preferències predeterminades"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Afegeix un enllaç"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Una aplicació pot verificar els enllaços per obrir-los automàticament. "<annotation id="url">"Més informació"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> enllaços verificats</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> enllaç verificat</item>
@@ -4350,9 +4363,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"No s\'aplica l\'optimització de la bateria. És possible que es consumeixi més ràpidament."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Vols permetre que l\'aplicació s\'executi sempre en segon pla?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Si permets que <xliff:g id="APP_NAME">%1$s</xliff:g> s\'executi sempre en segon pla, és possible que disminueixi la durada de la bateria. \n\nPots canviar-ho més tard a Configuració &gt; Aplicacions i notificacions."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"Ús durant les 24 darreres hores: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Gestió de l\'energia"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"No s\'ha utilitzat bateria durant les 24 darreres hores"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> d\'ús des de l\'última càrrega completa"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"Ús durant les 24 darreres hores: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"No s\'ha consumit bateria des de l\'última càrrega completa"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"No s\'ha utilitzat bateria durant les 24 darreres hores"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Configuració de l\'aplicació"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Mostra SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Permisos addicionals"</string>
@@ -4523,6 +4537,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"No es poden fer captures de pantalla"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"No es pot obrir aquesta aplicació"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Bloquejat per la teva entitat de crèdit"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Si tens cap dubte, contacta amb l\'administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Més detalls"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"L\'administrador pot supervisar i gestionar les aplicacions i les dades associades al teu perfil de treball, com ara la configuració, els permisos, l\'accés corporatiu, l\'activitat de xarxa i la informació d\'ubicació del dispositiu."</string>

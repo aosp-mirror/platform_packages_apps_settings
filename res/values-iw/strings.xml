@@ -1368,7 +1368,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"תצוגה חלקה"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"‏קצב הרענון עולה באופן אוטומטי מ-Hz‏60 ל-Hz‏90 לחלק מהתוכן. הפעולה הזו מגבירה את השימוש בסוללה."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"אילוץ קצב רענון של 90 הרץ"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"אילוץ לקצב הרענון המקסימלי"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"קצב הרענון הגבוה ביותר לתגובה משופרת למגע ולאיכות אנימציה טובה יותר. פעולה זו מגבירה את השימוש בסוללה."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"המסך יישאר דלוק בזמן צפייה"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"התכונה פועלת / המסך לא נכבה כשמביטים בו"</string>
@@ -1597,7 +1597,7 @@
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"‏לבטל את טעינת אחסון ה-USB?"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8251329019960361646">"‏לבטל את הטעינה של כרטיס ה-SD?"</string>
     <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="1212025106709645023">"‏אם טעינת אחסון ה-USB תבוטל, יופסקו אפליקציות מסוימות שמשמשות אותך וייתכן שהן לא יהיו זמינות עד שאחסון ה-USB ייטען מחדש."</string>
-    <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"‏אם תבטל את טעינת כרטיס ה-SD, הפעולה של אפליקציות מסוימות שאתה משתמש בהן תופסק וייתכן שהן לא יהיו זמינות עד שתטען מחדש את כרטיס ה-SD."</string>
+    <string name="dlg_confirm_unmount_text" product="default" msgid="3887768438615563697">"‏בעקבות ביטול של טעינת כרטיס ה-SD, הפעולה של אפליקציות מסוימות שהשתמשת בהן תופסק וייתכן שהן לא יהיו זמינות עד לטעינה מחדש של כרטיס ה-SD."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="2205587942165199845"></string>
     <string name="dlg_error_unmount_title" product="default" msgid="2205587942165199845"></string>
     <string name="dlg_error_unmount_text" product="nosdcard" msgid="7876201891724279436">"‏לא ניתן לבטל את הטעינה של אחסון ה-USB. כדאי לנסות שוב מאוחר יותר."</string>
@@ -2218,7 +2218,7 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"יש ללחוץ על מקש הרווח פעמיים כדי להוסיף \'.\'"</string>
     <string name="show_password" msgid="7101900779571040117">"הצגת סיסמאות"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"התווים יופיעו לפרקי זמן קצרים בזמן ההקלדה"</string>
-    <string name="spellchecker_security_warning" msgid="2016059050608271820">"ייתכן שבודק איות זה יוכל לאסוף את כל הטקסט שאתה מקליד, כולל נתונים אישיים כגון סיסמאות ומספרי כרטיס אשראי. הוא מגיע מהאפליקציה <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. להשתמש בבודק איות זה?"</string>
+    <string name="spellchecker_security_warning" msgid="2016059050608271820">"ייתכן שבודק האיות הזה יוכל לאסוף את כל הטקסט שאת או אתה מקלידים, כולל נתונים אישיים כגון סיסמאות ומספרי כרטיס אשראי. הוא מגיע מהאפליקציה <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. להשתמש בבודק איות זה?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"הגדרות"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"שפה"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"מקלדות"</string>
@@ -2359,12 +2359,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"הבנתי"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"קיצור הדרך של \'<xliff:g id="SERVICE">%1$s</xliff:g>\'"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"לחצן הנגישות"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"תנועת נגישות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"יש להחליק למעלה בעזרת שתי אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"יש להחליק למעלה בעזרת שלוש אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"הקשה על לחצן הנגישות"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"השימוש בתנועת הנגישות"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"יש ללחוץ על לחצן הנגישות <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> שבתחתית המסך.\n\nכדי לעבור בין התכונות השונות, יש ללחוץ לחיצה ארוכה על לחצן הנגישות."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין תכונות, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין תכונות, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"התאמה אישית של תנועת הנגישות"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"התאמה אישית של לחצן הנגישות"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"מידע נוסף על <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"לחיצה ארוכה על לחצני עוצמת הקול"</string>
@@ -2382,8 +2385,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"מקש קיצור ממסך הנעילה"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"מקש הקיצור של תכונות יפעל ממסך הנעילה. יש ללחוץ על שני הלחצנים של עוצמת הקול למשך מספר שניות."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"לחצן הנגישות"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"לחצן הנגישות ותנועות"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"השימוש בלחצן הנגישות. התנועה אינה זמינה עם ניווט ב-3 לחצנים."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"גישה מהירה לתכונות נגישות"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"גישה מהירה לתכונות נגישות מכל מסך. \n\nכדי להתחיל, צריך לעבור להגדרות הנגישות ולבחור תכונה. יש להקיש על מקש הקיצור ולבחור את לחצן הנגישות."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"השימוש בלחצן או בתנועה"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"מיקום"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"גודל"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"הופך לשקוף בהדרגה כשלא בשימוש"</string>
@@ -2480,6 +2486,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"‏מסך מעומעם יותר מקל על הקריאה.&lt;br/&gt;&lt;br/&gt; ההגדרה הזו עשויה להיות שימושית במקרים הבאים: &lt;ol&gt; &lt;li&gt; כשעוצמת הבהירות המינימלית של הטלפון עדיין בהירה מדי&lt;/li&gt; &lt;li&gt; כשמשתמשים בטלפון כשאין אור בסביבה, למשל בלילה או בחדר חשוך לפני השינה&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"‏מסך כהה יותר מקל על הקריאה.&lt;br/&gt;&lt;br/&gt; הגדרה זו עשויה להיות שימושית במקרים הבאים: &lt;ol&gt; &lt;li&gt; כשעוצמת הבהירות המינימלית של הטאבלט עדיין בהירה מדי&lt;/li&gt; &lt;li&gt; כשמשתמשים בטאבלט במצבים כהים, למשל בלילה או בחדר חשוך לפני השינה&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"עוצמה"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"שמירת ההגדרה לאחר הפעלה מחדש של המכשיר"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="two">השהיה קצרה (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> שניות)</item>
@@ -3923,6 +3933,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"שיחות אחרונות"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"ניקוי השיחות האחרונות"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"השיחות האחרונות הוסרו"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"ניקוי"</string>
     <string name="important_bubble" msgid="7911698275408390846">"הצגת שיחות בעדיפות גבוהה בבועות"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"שיחות בעדיפות גבוהה יוצגו בחלק העליון של חלונית ההתראות הנפתחת. בנוסף, אפשר להגדיר שיוצגו בבועות ויפריעו לתכונה \'נא לא להפריע\'."</string>
@@ -4257,7 +4269,7 @@
     <string name="device_feedback" msgid="5351614458411688608">"שליחת משוב על המכשיר הזה"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"יש להזין את קוד הגישה של מנהל המכשיר"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"פועל"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"כבוי"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"כבויה"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"פועלת"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"מושבתת"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"הצמדת אפליקציה"</string>
@@ -4311,7 +4323,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"קישורים נתמכים"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"העדפות אחרות שמוגדרות כברירת מחדל"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"הוספת קישור"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"אפליקציות יכולות לאמת קישורים כך שייפתחו בהן באופן אוטומטי. "<annotation id="url">"מידע נוסף"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="two"><xliff:g id="COUNT_1">%d</xliff:g> קישורים מאומתים</item>
       <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> קישורים מאומתים</item>
@@ -4486,9 +4499,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"אל תפעיל אופטימיזציה של הסוללה. הסוללה עשויה להתרוקן מהר יותר."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"האם לאפשר לאפליקציה לפעול תמיד ברקע?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"מתן אישור לאפליקציה \'<xliff:g id="APP_NAME">%1$s</xliff:g>\' לפעול תמיד ברקע עשוי לקצר את חיי הסוללה. \n\nניתן לשנות זאת מאוחר יותר דרך ההגדרות של אפליקציות והתראות."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> בשימוש במהלך 24 השעות האחרונות"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"ניהול צריכת החשמל"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"לא נעשה שימוש בסוללה במשך 24 השעות האחרונות"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"נעשה שימוש ב-<xliff:g id="PERCENTAGE">%1$s</xliff:g> מאז הטעינה המלאה האחרונה"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> בשימוש במהלך 24 השעות האחרונות"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"לא נעשה שימוש בסוללה מאז הטעינה המלאה האחרונה"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"לא נעשה שימוש בסוללה במשך 24 השעות האחרונות"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"הגדרות אפליקציה"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"‏הצגת SystemUI Tuner"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"הרשאות נוספות"</string>
@@ -4663,6 +4677,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"לא ניתן ליצור צילומי מסך"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"לא ניתן לפתוח את האפליקציה הזו"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"ההגדרה חסומה על ידי ספק האשראי"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"‏אם יש לך שאלות, כדאי ליצור קשר עם מנהל ה-IT"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"פרטים נוספים"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"מנהל המכשיר יכול לפקח על אפליקציות ונתונים המשויכים לפרופיל העבודה שלך ולנהל אותם, כולל הגדרות, הרשאות, גישה ארגונית, פעילות הרשת ומידע על מיקום המכשיר."</string>

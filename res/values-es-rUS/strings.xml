@@ -615,7 +615,7 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Activa las funciones de protección del dispositivo para impedir que terceros lo usen sin tu permiso. Elige el bloqueo de pantalla que quieres usar."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Activa las funciones de protección del dispositivo para impedir que terceros usen este teléfono sin tu permiso. Elige el bloqueo de pantalla que quieres usar."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Elige el método secundario de bloqueo de pantalla"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"El administrador de IT no podrá restablecer este bloqueo. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Configura otro bloqueo de trabajo<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"El administrador de IT no podrá restablecer este bloqueo. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Alternativamente, configura un bloqueo de trabajo<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Si olvidas este bloqueo, pídele al administrador de IT que lo restablezca"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opciones de bloqueo de la pantalla"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opciones de bloqueo de la pantalla"</string>
@@ -1328,7 +1328,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumentar automáticamente la frecuencia de actualización de 60 Hz a 90 Hz para cierto contenido. Incrementa el uso de batería"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Forzar frecuencia de actualización de 90 Hz"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forzar frecuencia de actualización máxima"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"La máxima frecuencia de actualización mejora la respuesta táctil y la calidad de las animaciones. Incrementa el uso de batería."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atención a la pantalla"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activado: No se apagará la pantalla si estás mirándola"</string>
@@ -1960,7 +1960,7 @@
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Levanta el dedo cuando termines."</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Une al menos <xliff:g id="NUMBER">%d</xliff:g> puntos. Vuelve a intentarlo."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Patrón registrado"</string>
-    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Vuelve a trazar el patrón para confirmar."</string>
+    <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Vuelve a trazar el patrón para confirmar"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Patrón de desbloqueo nuevo"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Confirmar"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"Revisar"</string>
@@ -2311,12 +2311,15 @@
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entendido"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Combinación de teclas de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botón de accesibilidad"</string>
+    <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Deslizar dos dedos hacia arriba"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Deslizar tres dedos hacia arriba"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Presionar el botón de accesibilidad"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Usar gestos de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Presiona el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> en la parte inferior de la pantalla.\n\nPara cambiar de función, mantén presionado el botón de accesibilidad."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Desliza dos dedos hacia arriba desde la parte inferior de la pantalla.\n\nPara cambiar de función, desliza dos dedos hacia arriba y mantén presionada la pantalla."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Desliza tres dedos hacia arriba desde la parte inferior de la pantalla.\n\nPara cambiar de función, desliza tres dedos hacia arriba y mantén presionada la pantalla."</string>
+    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture" msgid="2775306610392889839"><annotation id="link">"Personalizar gestos de accesibilidad"</annotation></string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="6107896995284156457"><annotation id="link">"Personaliza el botón de accesibilidad"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Más información sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mantener presionadas las teclas de volumen"</string>
@@ -2334,8 +2337,11 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Acceso directo desde pantalla de bloqueo"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permite que la combinación de teclas active las funciones desde la pantalla de bloqueo. Mantén presionadas ambas teclas de volumen durante unos segundos."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Botón de accesibilidad"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Botón de accesibilidad y gestos"</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Se está usando el botón de accesibilidad. El gesto no está disponible con navegación con 3 botones."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accede rápidamente a funciones de accesibilidad"</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Accede rápidamente a las funciones de accesibilidad desde cualquier pantalla. \n\nPara comenzar, ve a la configuración de accesibilidad y selecciona una función. Presiona la combinación de teclas y selecciona el botón de accesibilidad."</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Usar botón o gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ubicación"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Tamaño"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Se atenúa cuando no está en uso"</string>
@@ -2385,7 +2391,7 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Respuesta táctil"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Usar <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Abrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usar la corrección de colores"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usar la corrección de color"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Mostrar subtítulos"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Solo para apps compatibles"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Estilo y tamaño de los subtítulos"</string>
@@ -2430,6 +2436,10 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Atenúa la pantalla para que sea más cómodo leer.&lt;br/&gt;&lt;br/&gt; Esto puede ser útil en los siguientes casos: &lt;ol&gt; &lt;li&gt; Cuando incluso el brillo mínimo predeterminado del teléfono es demasiado alto&lt;/li&gt; &lt;li&gt; Cuando usas el teléfono en la oscuridad, por ejemplo, de noche o en una habitación oscura antes de dormir&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Oscurece la pantalla para que sea más cómodo leer.&lt;br/&gt;&lt;br/&gt; Esto puede ser útil en los siguientes casos: &lt;ol&gt; &lt;li&gt; Cuando incluso el brillo mínimo predeterminado de la tablet es demasiado alto&lt;/li&gt; &lt;li&gt; Cuando usas la tablet en la oscuridad, por ejemplo, de noche o en una sala oscura antes de dormir&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensidad"</string>
+    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
+    <skip />
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Mantener activado después de reiniciar el dispositivo"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Breve (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundos)</item>
@@ -3831,6 +3841,8 @@
     <string name="recent_conversations" msgid="471678228756995274">"Conversaciones recientes"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Conversaciones claras recientes"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Se quitaron las conversaciones recientes"</string>
+    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
+    <skip />
     <string name="clear" msgid="5092178335409471100">"Borrar"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Guardar conversaciones prioritarias en burbujas"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Las conversaciones prioritarias se muestran en la parte superior del panel desplegable. También puedes configurarlas para que aparezcan como burbujas y que suspendan la función No interrumpir."</string>
@@ -4201,7 +4213,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Vínculos admitidos"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Otras preferencias predeterminadas"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Agregar vínculo"</string>
-    <string name="app_launch_footer" msgid="2294418640866849774">"Una app puede verificar vínculos para que se abran de forma automática. "<annotation id="url">"Más información"</annotation></string>
+    <!-- no translation found for app_launch_footer (4521865035105622557) -->
+    <skip />
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> vínculos verificados</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> vínculo verificado</item>
@@ -4352,9 +4365,10 @@
     <string name="high_power_desc" msgid="2753076899835765338">"No se aplica la optimización de la batería, por lo que se puede agotar más rápido."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"¿Permitir que la app se ejecute siempre en segundo plano?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Si permites que <xliff:g id="APP_NAME">%1$s</xliff:g> se ejecute siempre en segundo plano, es posible que se reduzca la duración de la batería. \n\nPuedes cambiar esta opción más tarde en Configuración &gt; Apps y notificaciones."</string>
-    <string name="battery_summary" msgid="4338334523643155767">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> de uso en las últimas 24 horas"</string>
-    <string name="battery_power_management" msgid="7507188088567087384">"Administración de energía"</string>
-    <string name="no_battery_summary" msgid="5664437398071394961">"No se usó la batería en las últimas 24 horas"</string>
+    <string name="battery_summary" msgid="2491764359695671207">"Se usó el <xliff:g id="PERCENTAGE">%1$s</xliff:g> desde la última carga completa"</string>
+    <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> de uso en las últimas 24 horas"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"No se usó la batería desde la última carga completa"</string>
+    <string name="no_battery_summary_24hr" msgid="6280079526797873842">"No se usó la batería en las últimas 24 horas"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Configuración de la aplicación"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Mostrar sintonizador de IU del sistema"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Permisos adicionales"</string>
@@ -4525,6 +4539,10 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"No se pueden tomar capturas de pantalla"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"No se puede abrir esta app"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Opción bloqueada por tu proveedor de crédito"</string>
+    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
+    <skip />
+    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
+    <skip />
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Si tienes alguna pregunta, comunícate con tu administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Más detalles"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"El administrador puede controlar y administrar las apps y los datos asociados con tu perfil de trabajo, incluida la configuración, los permisos, el acceso corporativo, la actividad de la red y la información de la ubicación del dispositivo."</string>
@@ -4825,7 +4843,7 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Presiona para revisar la tablet"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Presiona para revisar el dispositivo"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para consultar la hora, las notificaciones y otra información, presiona la pantalla."</string>
-    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Ayuda en emergencias"</string>
+    <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"Emergencia SOS"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Usar Emergencia SOS"</string>
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"Administrador: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Presiona rápidamente 5 veces o más el botón de encendido para comenzar las acciones que se describen más abajo"</string>
