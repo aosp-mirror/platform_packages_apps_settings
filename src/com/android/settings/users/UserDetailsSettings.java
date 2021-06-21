@@ -206,7 +206,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
-                        mUserInfo.name));
+                        UserSettings.getUserName(context, mUserInfo)));
 
         if (mUserCaps.mDisallowSwitchUser) {
             mSwitchUserPref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
@@ -290,6 +290,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     void switchUser() {
         try {
+            if (mUserInfo.isGuest()) {
+                mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_SWITCH_TO_GUEST);
+            }
             ActivityManager.getService().switchUser(mUserInfo.id);
         } catch (RemoteException re) {
             Log.e(TAG, "Error while switching to other user.");
@@ -309,7 +312,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             // Update the guest's restrictions, if there is a guest
             // TODO: Maybe setDefaultGuestRestrictions() can internally just set the restrictions
             // on any existing guest rather than do it here with multiple Binder calls.
-            List<UserInfo> users = mUserManager.getUsers(true);
+            List<UserInfo> users = mUserManager.getAliveUsers();
             for (UserInfo user : users) {
                 if (user.isGuest()) {
                     UserHandle userHandle = UserHandle.of(user.id);

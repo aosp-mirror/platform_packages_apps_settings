@@ -18,7 +18,6 @@ package com.android.settings.search;
 
 import android.util.ArrayMap;
 
-import com.android.settings.DisplaySettings;
 import com.android.settings.backup.UserBackupSettingsActivity;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
@@ -27,15 +26,14 @@ import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.gestures.GestureNavigationSettingsFragment;
 import com.android.settings.gestures.SystemNavigationGestureSettings;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.location.RecentLocationRequestSeeAllFragment;
+import com.android.settings.location.RecentLocationAccessSeeAllFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.zen.ZenModeBlockedEffectsSettings;
 import com.android.settings.notification.zen.ZenModeRestrictNotificationsSettings;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.system.SystemDashboardFragment;
-import com.android.settings.wallpaper.WallpaperSuggestionActivity;
-import com.android.settings.wifi.WifiSettings2;
+import com.android.settings.wifi.WifiSettings;
 
 import java.util.Map;
 
@@ -53,11 +51,9 @@ public class CustomSiteMapRegistry {
         CUSTOM_SITE_MAP = new ArrayMap<>();
         CUSTOM_SITE_MAP.put(ScreenLockSettings.class.getName(), SecuritySettings.class.getName());
         CUSTOM_SITE_MAP.put(
-                WallpaperSuggestionActivity.class.getName(), DisplaySettings.class.getName());
-        CUSTOM_SITE_MAP.put(
-                WifiSettings2.class.getName(), NetworkDashboardFragment.class.getName());
+                WifiSettings.class.getName(), NetworkDashboardFragment.class.getName());
         CUSTOM_SITE_MAP.put(PowerUsageAdvanced.class.getName(), PowerUsageSummary.class.getName());
-        CUSTOM_SITE_MAP.put(RecentLocationRequestSeeAllFragment.class.getName(),
+        CUSTOM_SITE_MAP.put(RecentLocationAccessSeeAllFragment.class.getName(),
                 LocationSettings.class.getName());
         CUSTOM_SITE_MAP.put(UsbDetailsFragment.class.getName(),
                 ConnectedDeviceDashboardFragment.class.getName());

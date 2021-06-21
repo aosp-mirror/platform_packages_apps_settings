@@ -33,12 +33,18 @@
         android:key="reset_app_prefs"
         android:title="@string/reset_app_preferences" />
 
+    <!-- Erase Euicc data -->
+    <Preference
+        android:key="erase_euicc_data"
+        android:title="@string/reset_esim_title"
+        settings:controller="com.android.settings.network.EraseEuiccDataController" />
+
     <!-- Factory reset -->
     <com.android.settingslib.RestrictedPreference
         android:key="factory_reset"
-        android:title="@string/master_clear_title"
+        android:title="@string/main_clear_title"
         settings:keywords="@string/keywords_factory_data_reset"
         settings:userRestriction="no_factory_reset"
         settings:useAdminDisabledSummary="true"
-        android:fragment="com.android.settings.MasterClear" />
+        android:fragment="com.android.settings.MainClear" />
 </PreferenceScreen>

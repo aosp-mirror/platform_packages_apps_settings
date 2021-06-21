@@ -13,46 +13,54 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/admin_details_dialog_padding"
-        android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/admin_details_dialog_padding"
+    android:paddingStart="@dimen/admin_details_dialog_padding"
+    android:paddingEnd="@dimen/admin_details_dialog_padding"
+    android:paddingBottom="@dimen/admin_details_dialog_padding_bottom"
+    android:orientation="vertical">
     <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingBottom="@dimen/admin_details_dialog_title_bottom_padding">
+        <ImageView
+            android:id="@+id/admin_support_icon"
+            android:layout_width="@dimen/admin_details_dialog_icon_size"
+            android:layout_height="@dimen/admin_details_dialog_icon_size"
+            android:scaleType="fitCenter"
+            android:contentDescription="@null"/>
+        <TextView
+            android:id="@+id/admin_support_dialog_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingBottom="@dimen/admin_details_dialog_title_bottom_padding">
-        <ImageView android:id="@+id/admin_support_icon"
-                android:layout_width="@dimen/admin_details_dialog_icon_size"
-                android:layout_height="@dimen/admin_details_dialog_icon_size"
-                android:scaleType="fitCenter"
-                android:contentDescription="@null" />
-        <TextView android:id="@+id/admin_support_dialog_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/admin_details_dialog_padding"
-                android:text="@string/disabled_by_policy_title"
-                android:textAppearance="@style/TextAppearance.HeadLineFontFamily"/>
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/disabled_by_policy_title"
+            android:textAppearance="@style/TextAppearance.AdminDialogTitle"/>
     </LinearLayout>
 
     <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="false">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fadeScrollbars="false">
-        <LinearLayout
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/admin_support_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-            <TextView android:id="@+id/admin_support_msg"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:textAppearance="@style/TextAppearance.HeadLineFontFamily.Subhead"
-                      android:text="@string/default_admin_support_msg"
-                      android:maxLength="200"
-                      android:autoLink="email|phone|web"
-                      android:textColor="?android:attr/textColorSecondary"/>
+                android:textAppearance="@style/TextAppearance.AdminDialogMessage"
+                android:maxLength="200"
+                android:gravity="center_horizontal"
+                android:autoLink="email|phone|web"
+                android:textColor="?android:attr/textColorSecondary"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

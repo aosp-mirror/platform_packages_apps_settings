@@ -41,6 +41,12 @@ public class BluetoothDeviceRenamePreferenceController extends
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
+    @Override
+    public int getAvailabilityStatus() {
+        return mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
     /**
      * Set the {@link Fragment} that used to show {@link LocalDeviceNameDialogFragment}
      * in {@code handlePreferenceTreeClick}

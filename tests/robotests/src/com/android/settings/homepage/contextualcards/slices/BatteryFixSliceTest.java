@@ -23,15 +23,15 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.BatteryUsageStats;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
+import com.android.settings.fuelgauge.BatteryUsageStatsLoader;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -57,7 +57,7 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
-        BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
+        BatteryFixSliceTest.ShadowBatteryUsageStatsLoader.class,
         BatteryFixSliceTest.ShadowBatteryTipLoader.class
 })
 public class BatteryFixSliceTest {
@@ -85,7 +85,7 @@ public class BatteryFixSliceTest {
     @Test
     public void refreshBatteryTips_hasImportantTip_shouldReturnTrue() {
         final List<BatteryTip> tips = new ArrayList<>();
-        tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false, ""));
+        tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false));
         tips.add(new EarlyWarningTip(BatteryTip.StateType.NEW, false));
         ShadowBatteryTipLoader.setBatteryTips(tips);
 
@@ -102,7 +102,7 @@ public class BatteryFixSliceTest {
                 .setPackageName("com.android.settings")
                 .setScreenOnTimeMs(10000L)
                 .build());
-        tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false, ""));
+        tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false));
         tips.add(new EarlyWarningTip(BatteryTip.StateType.HANDLED, false));
         tips.add(new HighUsageTip(1000L, appList));
         ShadowBatteryTipLoader.setBatteryTips(tips);
@@ -135,11 +135,11 @@ public class BatteryFixSliceTest {
         assertThat(ShadowEarlyWarningTip.isIconTintColorIdCalled()).isTrue();
     }
 
-    @Implements(BatteryStatsHelperLoader.class)
-    public static class ShadowBatteryStatsHelperLoader {
+    @Implements(BatteryUsageStatsLoader.class)
+    public static class ShadowBatteryUsageStatsLoader {
 
         @Implementation
-        protected BatteryStatsHelper loadInBackground() {
+        protected BatteryUsageStats loadInBackground() {
             return null;
         }
     }

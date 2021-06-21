@@ -18,18 +18,25 @@ package com.android.settings.display;
 
 import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
 
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.testutils.shadow.ShadowUtils;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowUtils.class)
 public class BatteryPercentagePreferenceControllerTest {
 
     private static final String PREF_KEY = "battery_percentage";
@@ -41,6 +48,11 @@ public class BatteryPercentagePreferenceControllerTest {
     public void setup() {
         mContext = RuntimeEnvironment.application;
         mController = new BatteryPercentagePreferenceController(mContext, PREF_KEY);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowUtils.reset();
     }
 
     private int getPercentageSetting() {
@@ -59,5 +71,12 @@ public class BatteryPercentagePreferenceControllerTest {
         mController.onPreferenceChange(null, false);
         final int isOn = getPercentageSetting();
         assertThat(isOn).isEqualTo(0);
+    }
+
+    @Test
+    public void getAvailabilityStatus_batteryNotPresent_shouldReturnConditionallyUnavailable() {
+        ShadowUtils.setIsBatteryPresent(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 }

@@ -55,6 +55,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_finish);
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
+        setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_message);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
@@ -140,10 +141,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     private void postEnroll() {
         final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
         if (fpm != null) {
-            int result = fpm.postEnroll();
-            if (result < 0) {
-                Log.w(TAG, "postEnroll failed: result = " + result);
-            }
+            fpm.revokeChallenge(mUserId, mChallenge);
         }
     }
 
@@ -153,7 +151,9 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+        intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mChallenge);
         startActivity(intent);
+        overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
     }
 
     private void onAddAnotherButtonClick(View view) {

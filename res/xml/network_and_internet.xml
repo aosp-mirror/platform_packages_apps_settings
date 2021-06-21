@@ -18,8 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="network_and_internet_screen"
-    android:title="@string/network_dashboard_title"
-    settings:initialExpandedChildrenCount="5">
+    android:title="@string/network_dashboard_title">
 
     <PreferenceCategory
         android:key="multi_network_header"
@@ -29,7 +28,7 @@
         android:order="-40"
         settings:controller="com.android.settings.network.MultiNetworkHeaderController"/>
 
-    <com.android.settings.widget.MasterSwitchPreference
+    <com.android.settings.widget.PrimarySwitchPreference
         android:fragment="com.android.settings.wifi.WifiSettings"
         android:key="main_toggle_wifi"
         android:title="@string/wifi_settings"
@@ -40,7 +39,7 @@
         <intent
             android:action="android.settings.WIFI_SETTINGS"
             android:targetClass="Settings$WifiSettingsActivity" />
-    </com.android.settings.widget.MasterSwitchPreference>
+    </com.android.settings.widget.PrimarySwitchPreference>
 
     <com.android.settings.widget.AddPreference
         android:key="mobile_network_list"
@@ -65,7 +64,7 @@
         android:key="manage_mobile_plan"
         android:title="@string/manage_mobile_plan_title"
         android:persistent="false"
-        android:order="0"
+        android:order="19"
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true" />
 
@@ -80,7 +79,7 @@
         settings:userRestriction="no_config_tethering"
         settings:useAdminDisabledSummary="true" />
 
-    <com.android.settings.widget.MasterSwitchPreference
+    <com.android.settings.widget.PrimarySwitchPreference
         android:fragment="com.android.settings.AllInOneTetherSettings"
         android:key="all_tether_settings"
         android:title="@string/tether_settings_title_all"
@@ -118,4 +117,11 @@
         android:positiveButtonText="@string/save"
         android:negativeButtonText="@android:string/cancel" />
 
+    <Preference
+        android:fragment="com.android.settings.network.AdaptiveConnectivitySettings"
+        android:key="adaptive_connectivity"
+        android:title="@string/adaptive_connectivity_title"
+        android:summary="@string/summary_placeholder"
+        android:order="25"
+        settings:controller="com.android.settings.network.AdaptiveConnectivityPreferenceController"/>
 </PreferenceScreen>

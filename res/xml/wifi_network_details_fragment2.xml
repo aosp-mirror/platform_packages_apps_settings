@@ -16,15 +16,13 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto"
-    settings:initialExpandedChildrenCount="5">
+    xmlns:settings="http://schemas.android.com/apk/res-auto">
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="connection_header"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
-        android:order="-10000"
-        settings:allowDividerBelow="true"/>
+        android:order="-10000"/>
 
     <com.android.settings.datausage.DataUsageSummaryPreference
         android:key="status_header"
@@ -35,21 +33,18 @@
     <com.android.settings.widget.LinkifySummaryPreference
         android:key="second_summary"
         android:icon="@drawable/ic_info_outline_24dp"
-        android:selectable="false"
-        settings:allowDividerAbove="false"/>
+        android:selectable="false"/>
 
     <!-- Buttons -->
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="buttons"
-        android:selectable="false"
-        settings:allowDividerAbove="true"/>
+        android:selectable="false"/>
 
     <!-- General Details Preferences -->
     <Preference
         android:key="signal_strength"
         android:title="@string/wifi_signal"
-        android:selectable="false"
-        settings:allowDividerAbove="true"/>
+        android:selectable="false"/>
 
     <Preference
         android:key="frequency"
@@ -80,29 +75,36 @@
     <Preference
         android:key="subscription_detail"
         android:title="@string/wifi_subscription"
-        android:summary="@string/wifi_subscription_summary"
-        settings:allowDividerAbove="true"/>
+        android:summary="@string/wifi_subscription_summary"/>
 
     <SwitchPreference
         android:key="auto_connect"
         android:title="@string/wifi_auto_connect_title"
-        android:summary="@string/wifi_auto_connect_summary"
-        settings:allowDividerAbove="true"/>
+        android:summary="@string/wifi_auto_connect_summary"/>
 
     <!-- Add device Preference -->
     <Preference
         android:key="add_device_to_network"
         android:title="@string/wifi_dpp_add_device"
-        android:summary="@string/wifi_dpp_connect_network_using_qr_code"
-        settings:allowDividerAbove="true"/>
+        android:summary="@string/wifi_dpp_connect_network_using_qr_code"/>
 
     <!-- Network Details -->
     <PreferenceCategory
             android:key="ip_details_category"
             android:title="@string/wifi_setup_detail">
         <Preference
+                android:key="type"
+                android:title="@string/wifi_type_title"
+                android:selectable="false"
+                settings:enableCopying="true"/>
+        <Preference
                 android:key="ssid"
                 android:title="@string/wifi_advanced_ssid_title"
+                android:selectable="false"
+                settings:enableCopying="true"/>
+        <Preference
+                android:key="eap_sim_subscription"
+                android:title="@string/sim_card"
                 android:selectable="false"
                 settings:enableCopying="true"/>
         <Preference

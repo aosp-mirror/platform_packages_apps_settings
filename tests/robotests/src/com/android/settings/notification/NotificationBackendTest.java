@@ -26,23 +26,49 @@ import static org.mockito.Mockito.when;
 
 import android.app.role.RoleManager;
 import android.app.usage.UsageEvents;
+import android.bluetooth.BluetoothAdapter;
+import android.companion.ICompanionDeviceManager;
+import android.content.ComponentName;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
 
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
+import com.google.common.collect.ImmutableList;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class NotificationBackendTest {
+
+    @Mock
+    LocalBluetoothManager mBm;
+    @Mock
+    ICompanionDeviceManager mCdm;
+    @Mock
+    CachedBluetoothDeviceManager mCbm;
+    ComponentName mCn = new ComponentName("a", "b");
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        when(mBm.getCachedDeviceManager()).thenReturn(mCbm);
+    }
 
     @Test
     public void testMarkAppRow_unblockablePackage() {
@@ -137,5 +163,70 @@ public class NotificationBackendTest {
         usageEvents.writeToParcel(parcel, 0);
         parcel.setDataPosition(0);
         return UsageEvents.CREATOR.createFromParcel(parcel);
+    }
+
+    @Test
+    public void getDeviceList_noAssociations() throws Exception {
+        when(mCdm.getAssociations(mCn.getPackageName(), 0)).thenReturn(null);
+
+        Collection<CachedBluetoothDevice> cachedDevices = new ArrayList<>();
+        CachedBluetoothDevice cbd1 = mock(CachedBluetoothDevice.class);
+        when(cbd1.getAddress()).thenReturn("00:00:00:00:00:10");
+        when(cbd1.getName()).thenReturn("Device 1");
+        cachedDevices.add(cbd1);
+        when(mCbm.getCachedDevicesCopy()).thenReturn(cachedDevices);
+
+        BluetoothAdapter.getDefaultAdapter().enable();
+
+        assertThat(new NotificationBackend().getDeviceList(
+                mCdm, mBm, mCn.getPackageName(), 0).toString()).isEmpty();
+    }
+
+    @Test
+    public void getDeviceList_associationsButNoDevice() throws Exception {
+        List<String> macs = ImmutableList.of("00:00:00:00:00:10", "00:00:00:00:00:20");
+        when(mCdm.getAssociations(mCn.getPackageName(), 0)).thenReturn(macs);
+
+        when(mCbm.getCachedDevicesCopy()).thenReturn(new ArrayList<>());
+
+        assertThat(new NotificationBackend().getDeviceList(
+                mCdm, mBm, mCn.getPackageName(), 0).toString()).isEmpty();
+    }
+
+    @Test
+    public void getDeviceList_singleDevice() throws Exception {
+        List<String> macs = ImmutableList.of("00:00:00:00:00:10", "00:00:00:00:00:20");
+        when(mCdm.getAssociations(mCn.getPackageName(), 0)).thenReturn(macs);
+
+        Collection<CachedBluetoothDevice> cachedDevices = new ArrayList<>();
+        CachedBluetoothDevice cbd1 = mock(CachedBluetoothDevice.class);
+        when(cbd1.getAddress()).thenReturn(macs.get(0));
+        when(cbd1.getName()).thenReturn("Device 1");
+        cachedDevices.add(cbd1);
+        when(mCbm.getCachedDevicesCopy()).thenReturn(cachedDevices);
+
+        assertThat(new NotificationBackend().getDeviceList(
+                mCdm, mBm, mCn.getPackageName(), 0).toString()).isEqualTo("Device 1");
+    }
+
+    @Test
+    public void getDeviceList_multipleDevices() throws Exception {
+        List<String> macs = ImmutableList.of("00:00:00:00:00:10", "00:00:00:00:00:20");
+        when(mCdm.getAssociations(mCn.getPackageName(), 0)).thenReturn(macs);
+
+        Collection<CachedBluetoothDevice> cachedDevices = new ArrayList<>();
+        CachedBluetoothDevice cbd1 = mock(CachedBluetoothDevice.class);
+        when(cbd1.getAddress()).thenReturn(macs.get(0));
+        when(cbd1.getName()).thenReturn("Device 1");
+        cachedDevices.add(cbd1);
+
+        CachedBluetoothDevice cbd2 = mock(CachedBluetoothDevice.class);
+        when(cbd2.getAddress()).thenReturn(macs.get(1));
+        when(cbd2.getName()).thenReturn("Device 2");
+        cachedDevices.add(cbd2);
+        when(mCbm.getCachedDevicesCopy()).thenReturn(cachedDevices);
+
+        assertThat(new NotificationBackend().getDeviceList(
+                mCdm, mBm, mCn.getPackageName(), 0).toString()).isEqualTo("Device 1, Device 2");
     }
 }

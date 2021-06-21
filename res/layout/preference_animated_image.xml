@@ -15,20 +15,31 @@
   limitations under the License.
   -->
 
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clipToPadding="false"
+    android:layout_height="@dimen/settingslib_illustration_height"
+    android:gravity="center"
+    android:padding="@dimen/settingslib_illustration_padding"
+    android:orientation="vertical"
     android:importantForAccessibility="noHideDescendants">
 
     <ImageView
         android:id="@+id/animated_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:maxWidth="@dimen/settingslib_illustration_width"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/protection_background"
         android:scaleType="fitCenter"
-        android:focusable="false"
-        android:clickable="false"
         android:adjustViewBounds="true"/>
-</FrameLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_view"
+        android:maxWidth="@dimen/settingslib_illustration_width"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/protection_background"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:clipToOutline="true"/>
+</LinearLayout>

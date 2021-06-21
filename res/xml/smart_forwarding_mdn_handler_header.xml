@@ -1,0 +1,18 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="network_and_internet_screen"
+    android:title="@string/smart_forwarding_input_mdn_title">
+
+    <EditTextPreference
+            android:key="slot0_phone_number"
+            android:title="SIM 1"
+            android:dialogTitle="@string/smart_forwarding_input_mdn_dialog_title"
+            android:persistent="false" />
+
+    <EditTextPreference
+            android:key="slot1_phone_number"
+            android:title="SIM 2"
+            android:dialogTitle="@string/smart_forwarding_input_mdn_dialog_title"
+            android:persistent="false" />
+
+</PreferenceScreen>

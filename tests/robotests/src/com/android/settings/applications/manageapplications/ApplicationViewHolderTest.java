@@ -70,6 +70,22 @@ public class ApplicationViewHolderTest {
     }
 
     @Test
+    public void setTitle_titleIsNotEmptyAndContentIsNotEmpty_shouldSetTitleAndContentDescription() {
+        mHolder.setTitle("title", "content");
+
+        assertThat(mHolder.mAppName.getText()).isEqualTo("title");
+        assertThat(mHolder.mAppName.getContentDescription()).isEqualTo("content");
+    }
+
+    @Test
+    public void setTitle_titleIsNotEmptyButContentIsEmpty_shouldSetTitle() {
+        mHolder.setTitle("title", "");
+
+        assertThat(mHolder.mAppName.getText()).isEqualTo("title");
+        assertThat(mHolder.mAppName.getContentDescription()).isNull();
+    }
+
+    @Test
     public void updateSize() {
         final String invalidStr = "invalid";
         final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);

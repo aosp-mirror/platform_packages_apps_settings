@@ -1,3 +1,20 @@
+package {
+    default_applicable_licenses: ["packages_apps_Settings_license"],
+}
+
+// Added automatically by a large-scale-change
+// See: http://go/android-license-faq
+license {
+    name: "packages_apps_Settings_license",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-Apache-2.0",
+    ],
+    license_text: [
+        "NOTICE",
+    ],
+}
+
 java_library {
     name: "settings-logtags",
     srcs: ["src/**/*.logtags"],
@@ -55,6 +72,7 @@ android_library {
         "zxing-core-1.7",
         "android.hardware.dumpstate-V1.0-java",
         "android.hardware.dumpstate-V1.1-java",
+        "lottie",
     ],
 
     libs: [
@@ -72,6 +90,7 @@ platform_compat_config {
 
 android_app {
     name: "Settings",
+    defaults: ["platform_app_defaults"],
     platform_apis: true,
     certificate: "platform",
     system_ext_specific: true,
@@ -81,6 +100,7 @@ android_app {
         "settings-platform-compat-config",
     ],
     static_libs: ["Settings-core"],
+    uses_libs: ["org.apache.http.legacy"],
     resource_dirs: [],
     optimize: {
         proguard_flags_files: ["proguard.flags"],
@@ -90,4 +110,22 @@ android_app {
 android_library_import {
     name: "contextualcards",
     aars: ["libs/contextualcards.aar"],
+}
+
+filegroup {
+    name: "Settings_proguard_flags",
+    srcs: ["proguard.flags"],
+}
+
+// The sources for Settings need to be exposed to SettingsGoogle, etc.
+// so they can run the com.android.settingslib.search.IndexableProcessor
+// over all the sources together.
+filegroup {
+    name: "Settings_srcs",
+    srcs: ["src/**/*.java"],
+}
+
+filegroup {
+    name: "Settings_manifest",
+    srcs: ["AndroidManifest.xml"],
 }

@@ -60,6 +60,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     private String mUserInput;
     private String mPasskeyFormatted;
     private int mPasskey;
+    private int mInitiator;
     private String mDeviceName;
     private LocalBluetoothProfile mPbapClientProfile;
     private boolean mPbapAllowed;
@@ -84,6 +85,8 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
 
         mType = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, BluetoothDevice.ERROR);
         mPasskey = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY, BluetoothDevice.ERROR);
+        mInitiator =
+                intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_INITIATOR, BluetoothDevice.ERROR);
         mDeviceName = mBluetoothManager.getCachedDeviceManager().getName(mDevice);
         mPbapClientProfile = mBluetoothManager.getProfileManager().getPbapClientProfile();
         mPasskeyFormatted = formatKey(mPasskey);
@@ -177,7 +180,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
             default:
                 if (mDevice.getBluetoothClass().getDeviceClass()
                         == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE) {
-                    return true;
+                    return BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND == mInitiator;
                 }
                 return false;
         }

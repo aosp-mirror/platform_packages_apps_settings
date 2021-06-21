@@ -40,9 +40,9 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.widget.AppSwitchPreference;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.applications.ServiceListing;
+import com.android.settingslib.widget.AppSwitchPreference;
 
 import java.util.List;
 

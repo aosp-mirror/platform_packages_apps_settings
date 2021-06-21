@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -141,6 +142,13 @@ final class AccessibilityUtil {
         return context.getResources().getInteger(
                 com.android.internal.R.integer.config_navBarInteractionMode)
                 == NAV_BAR_MODE_GESTURAL;
+    }
+
+    /** Determines if a accessibility floating menu is being used. */
+    public static boolean isFloatingMenuEnabled(Context context) {
+        return Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, /* def= */ -1)
+                == ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
     }
 
     /** Determines if a touch explore is being used. */
@@ -380,5 +388,14 @@ final class AccessibilityUtil {
 
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, screenHeightDp,
                 resources.getDisplayMetrics()));
+    }
+
+    /**
+     * Indicates if the accessibility service belongs to a system App.
+     * @param info AccessibilityServiceInfo
+     * @return {@code true} if the App is a system App.
+     */
+    public static boolean isSystemApp(@NonNull AccessibilityServiceInfo info) {
+        return info.getResolveInfo().serviceInfo.applicationInfo.isSystemApp();
     }
 }
