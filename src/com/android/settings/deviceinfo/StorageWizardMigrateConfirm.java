@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,6 +37,8 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import java.util.Objects;
 
 public class StorageWizardMigrateConfirm extends StorageWizardBase {
+    private static final String TAG = "StorageWizardMigrateConfirm";
+
     private static final int REQUEST_CREDENTIAL = 100;
 
     private MigrateEstimateTask mEstimate;
@@ -103,8 +103,14 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
                     Log.d(TAG, "User " + user.id + " is currently locked; requesting unlock");
                     final CharSequence description = TextUtils.expandTemplate(
                             getText(R.string.storage_wizard_move_unlock), user.name);
-                    new ChooseLockSettingsHelper(this).launchConfirmationActivityForAnyUser(
-                            REQUEST_CREDENTIAL, null, null, description, user.id);
+                    final ChooseLockSettingsHelper.Builder builder =
+                            new ChooseLockSettingsHelper.Builder(this);
+                    builder.setRequestCode(REQUEST_CREDENTIAL)
+                            .setDescription(description)
+                            .setUserId(user.id)
+                            .setAllowAnyUserId(true)
+                            .setForceVerifyPath(true)
+                            .show();
                     return;
                 }
             }

@@ -90,7 +90,6 @@ public class ZenModeDurationPreferenceControllerTest {
         Settings.Secure.putInt(mContentResolver, Settings.Secure.ZEN_DURATION,
                 zenDuration);
 
-        assertEquals(mContext.getString(R.string.zen_mode_duration_summary_time_minutes,
-                zenDuration), mController.getSummary());
+        assertEquals("45 minutes", mController.getSummary());
     }
 }

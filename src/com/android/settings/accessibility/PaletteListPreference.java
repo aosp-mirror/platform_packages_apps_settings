@@ -16,23 +16,58 @@
 
 package com.android.settings.accessibility;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.FrameLayout;
-import android.widget.ListView;
+import static android.graphics.drawable.GradientDrawable.Orientation;
 
+import static com.android.settings.accessibility.AccessibilityUtil.getScreenHeightPixels;
+import static com.android.settings.accessibility.AccessibilityUtil.getScreenWidthPixels;
+
+import static com.google.common.primitives.Ints.max;
+
+import android.content.Context;
+import android.graphics.Paint.FontMetrics;
+import android.graphics.drawable.GradientDrawable;
+import android.util.AttributeSet;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntDef;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 
-/** Preference that easier preview by matching name to color. */
-public class PaletteListPreference extends Preference {
+import com.google.common.primitives.Floats;
+import com.google.common.primitives.Ints;
 
-    private ListView mListView;
-    private ViewTreeObserver.OnPreDrawListener mPreDrawListener;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/** Preference that easier preview by matching name to color. */
+public final class PaletteListPreference extends Preference {
+
+    private final List<Integer> mGradientColors = new ArrayList<>();
+    private final List<Float> mGradientOffsets = new ArrayList<>();
+
+    @IntDef({
+            Position.START,
+            Position.CENTER,
+            Position.END,
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    @interface Position {
+        int START = 0;
+        int CENTER = 1;
+        int END = 2;
+    }
 
     /**
      * Constructs a new PaletteListPreference with the given context's theme and the supplied
@@ -61,47 +96,94 @@ public class PaletteListPreference extends Preference {
     public PaletteListPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setLayoutResource(R.layout.daltonizer_preview);
-        initPreDrawListener();
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        final View rootView = holder.itemView;
-        mListView = rootView.findViewById(R.id.palette_listView);
-        if (mPreDrawListener != null) {
-            mListView.getViewTreeObserver().addOnPreDrawListener(mPreDrawListener);
+        final ViewGroup paletteView = holder.itemView.findViewById(R.id.palette_view);
+        initPaletteAttributes(getContext());
+        initPaletteView(getContext(), paletteView);
+    }
+
+    private void initPaletteAttributes(Context context) {
+        final int defaultColor = context.getColor(R.color.palette_list_gradient_background);
+        mGradientColors.add(Position.START, defaultColor);
+        mGradientColors.add(Position.CENTER, defaultColor);
+        mGradientColors.add(Position.END, defaultColor);
+
+        mGradientOffsets.add(Position.START, /* element= */ 0.0f);
+        mGradientOffsets.add(Position.CENTER, /* element= */ 0.5f);
+        mGradientOffsets.add(Position.END, /* element= */ 1.0f);
+    }
+
+    private void initPaletteView(Context context, ViewGroup rootView) {
+        if (rootView.getChildCount() > 0) {
+            rootView.removeAllViews();
+        }
+
+        final List<Integer> paletteColors = getPaletteColors(context);
+        final List<String> paletteData = getPaletteData(context);
+
+        final float textPadding =
+                context.getResources().getDimension(R.dimen.accessibility_layout_margin_start_end);
+        final String maxLengthData =
+                Collections.max(paletteData, Comparator.comparing(String::length));
+        final int textWidth = getTextWidth(context, maxLengthData);
+        final float textBound = (textWidth + textPadding) / getScreenWidthPixels(context);
+        mGradientOffsets.set(Position.CENTER, textBound);
+
+        final int screenHalfHeight = getScreenHeightPixels(context) / 2;
+        final int paletteItemHeight =
+                max(screenHalfHeight / paletteData.size(), getTextLineHeight(context));
+
+        for (int i = 0; i < paletteData.size(); ++i) {
+            final TextView textView = new TextView(context);
+            textView.setText(paletteData.get(i));
+            textView.setHeight(paletteItemHeight);
+            textView.setPaddingRelative(Math.round(textPadding), 0, 0, 0);
+            textView.setGravity(Gravity.CENTER_VERTICAL);
+            textView.setBackground(createGradientDrawable(rootView, paletteColors.get(i)));
+
+            rootView.addView(textView);
         }
     }
 
-    private void initPreDrawListener() {
-        mPreDrawListener = new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                if (mListView == null) {
-                    return false;
-                }
+    private GradientDrawable createGradientDrawable(ViewGroup rootView, @ColorInt int color) {
+        mGradientColors.set(Position.END, color);
 
-                final int listViewHeight = mListView.getMeasuredHeight();
-                final int listViewWidth = mListView.getMeasuredWidth();
+        final GradientDrawable gradientDrawable = new GradientDrawable();
+        final Orientation orientation =
+                rootView.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL
+                        ? Orientation.RIGHT_LEFT
+                        : Orientation.LEFT_RIGHT;
+        gradientDrawable.setOrientation(orientation);
+        gradientDrawable.setColors(Ints.toArray(mGradientColors), Floats.toArray(mGradientOffsets));
 
-                // Removes the callback after get result of measure view.
-                final ViewTreeObserver viewTreeObserver = mListView.getViewTreeObserver();
-                if (viewTreeObserver.isAlive()) {
-                    viewTreeObserver.removeOnPreDrawListener(this);
-                }
-                mPreDrawListener = null;
+        return gradientDrawable;
+    }
 
-                // Resets layout parameters to display whole items from listView.
-                final FrameLayout.LayoutParams layoutParams =
-                        (FrameLayout.LayoutParams) mListView.getLayoutParams();
-                layoutParams.height = listViewHeight * mListView.getAdapter().getCount();
-                layoutParams.width = listViewWidth;
-                mListView.setLayoutParams(layoutParams);
+    private List<Integer> getPaletteColors(Context context) {
+        final int[] paletteResources =
+                context.getResources().getIntArray(R.array.setting_palette_colors);
+        return Arrays.stream(paletteResources).boxed().collect(Collectors.toList());
+    }
 
-                return true;
-            }
-        };
+    private List<String> getPaletteData(Context context) {
+        final String[] paletteResources =
+                context.getResources().getStringArray(R.array.setting_palette_data);
+        return Arrays.asList(paletteResources);
+    }
+
+    private int getTextWidth(Context context, String text) {
+        final TextView tempView = new TextView(context);
+        return Math.round(tempView.getPaint().measureText(text));
+    }
+
+    private int getTextLineHeight(Context context) {
+        final TextView tempView = new TextView(context);
+        final FontMetrics fontMetrics = tempView.getPaint().getFontMetrics();
+        return Math.round(fontMetrics.bottom - fontMetrics.top);
     }
 }

@@ -19,7 +19,6 @@ package com.android.settings.display;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
-import android.view.View;
 
 import androidx.preference.PreferenceScreen;
 
@@ -28,7 +27,7 @@ import com.android.settings.Settings;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.BannerMessagePreference;
 
 /**
  * Controller to take the user to location settings page
@@ -46,19 +45,25 @@ public class TwilightLocationPreferenceController extends BasePreferenceControll
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference preference = screen.findPreference(getPreferenceKey());
-        final View button = preference.findViewById(R.id.go_to_location_setting);
-        button.setOnClickListener(v -> {
-            mMetricsFeatureProvider.logClickedPreference(preference, getMetricsCategory());
-            final Intent intent = new Intent();
-            intent.setClass(mContext, Settings.LocationSettingsActivity.class);
-            mContext.startActivity(intent);
-        });
+        final BannerMessagePreference preference =
+                (BannerMessagePreference) screen.findPreference(getPreferenceKey());
+        preference
+                .setPositiveButtonText(R.string.twilight_mode_launch_location)
+                .setPositiveButtonOnClickListener(v -> {
+                    mMetricsFeatureProvider.logClickedPreference(preference, getMetricsCategory());
+                    launchLocationSettings();
+                });
     }
 
     @Override
     public int getAvailabilityStatus() {
         return mLocationManager.isLocationEnabled() ? CONDITIONALLY_UNAVAILABLE
                 : AVAILABLE_UNSEARCHABLE;
+    }
+
+    private void launchLocationSettings() {
+        final Intent intent = new Intent();
+        intent.setClass(mContext, Settings.LocationSettingsActivity.class);
+        mContext.startActivity(intent);
     }
 }

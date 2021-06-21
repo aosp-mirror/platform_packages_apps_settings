@@ -18,7 +18,7 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.role.RoleControllerManager;
+import android.app.role.RoleManager;
 import android.content.Context;
 
 import org.junit.Before;
@@ -34,15 +34,14 @@ import org.robolectric.shadows.ShadowApplication;
 public class DefaultBrowserShortcutPreferenceControllerTest {
 
     @Mock
-    private RoleControllerManager mRoleControllerManager;
+    private RoleManager mRoleManager;
 
     private DefaultBrowserShortcutPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication.getInstance().setSystemService(Context.ROLE_CONTROLLER_SERVICE,
-                mRoleControllerManager);
+        ShadowApplication.getInstance().setSystemService(Context.ROLE_SERVICE, mRoleManager);
         mController = new DefaultBrowserShortcutPreferenceController(RuntimeEnvironment.application,
                 "Package1");
     }

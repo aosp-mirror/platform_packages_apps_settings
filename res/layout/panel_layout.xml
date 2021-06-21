@@ -36,6 +36,7 @@
             android:visibility="gone">
 
             <LinearLayout
+                android:id="@+id/title_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -47,11 +48,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/header_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/header_title"
                     android:layout_width="wrap_content"
@@ -59,15 +62,18 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="20sp"/>
+                    android:textSize="24sp"
+                    android:fontFamily="sans-serif-reqular"/>
 
                 <TextView
                     android:id="@+id/header_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1" />
-
+                    android:maxLines="1"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-reqular" />
             </LinearLayout>
         </LinearLayout>
 
@@ -81,7 +87,19 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="20sp"/>
 
-        <include layout="@layout/horizontal_divider"/>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:indeterminate="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="1dp"
+            android:maxHeight="1dp"
+            android:visibility="gone"
+            style="@style/TrimmedHorizontalProgressBar"/>
+
+        <include
+            android:id="@+id/header_divider"
+            layout="@layout/horizontal_divider"/>
 
         <!-- Note: There is a landscape version of panel_slice_list which supports scrolling. -->
         <include layout="@layout/panel_slice_list"/>

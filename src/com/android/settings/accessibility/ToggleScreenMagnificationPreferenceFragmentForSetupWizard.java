@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.view.View;
 
 public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         extends ToggleScreenMagnificationPreferenceFragment {
@@ -32,14 +33,28 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         // Log the final choice in value if it's different from the previous value.
         Bundle args = getArguments();
         if ((args != null) && args.containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
-            if (mToggleServiceDividerSwitchPreference.isChecked() != args.getBoolean(
+            if (mToggleServiceSwitchPreference.isChecked() != args.getBoolean(
                     AccessibilitySettings.EXTRA_CHECKED)) {
                 // TODO: Distinguish between magnification modes
                 mMetricsFeatureProvider.action(getContext(),
                         SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION,
-                        mToggleServiceDividerSwitchPreference.isChecked());
+                        mToggleServiceSwitchPreference.isChecked());
             }
         }
         super.onStop();
+    }
+
+    @Override
+    public int getHelpResource() {
+        // Hides help center in action bar and footer bar in SuW
+        return 0;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Hide the setting from the vision settings.
+        mSettingsPreference.setVisible(false);
     }
 }

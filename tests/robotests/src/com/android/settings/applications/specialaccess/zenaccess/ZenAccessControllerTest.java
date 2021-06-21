@@ -63,12 +63,6 @@ public class ZenAccessControllerTest {
     }
 
     @Test
-    public void isAvailable_lowMemory_false() {
-        mActivityManager.setIsLowRamDevice(true);
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
     public void logSpecialPermissionChange() {
         ZenAccessController.logSpecialPermissionChange(true, "app", mContext);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),

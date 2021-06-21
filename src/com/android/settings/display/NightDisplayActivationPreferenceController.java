@@ -16,43 +16,30 @@
 
 package com.android.settings.display;
 
-import static android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED;
-
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.Switch;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
-public class NightDisplayActivationPreferenceController extends TogglePreferenceController {
+/**
+ * Controller that updates the night display.
+ */
+public class NightDisplayActivationPreferenceController extends
+        TogglePreferenceController implements OnMainSwitchChangeListener {
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private ColorDisplayManager mColorDisplayManager;
     private NightDisplayTimeFormatter mTimeFormatter;
-    private LayoutPreference mPreference;
-
-    private Button mTurnOffButton;
-    private Button mTurnOnButton;
-
-    private final OnClickListener mListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
-            mColorDisplayManager.setNightDisplayActivated(
-                    !mColorDisplayManager.isNightDisplayActivated());
-            updateStateInternal(true);
-        }
-    };
+    private MainSwitchPreference mPreference;
 
     public NightDisplayActivationPreferenceController(Context context, String key) {
         super(context, key);
@@ -64,7 +51,7 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
 
     @Override
     public int getAvailabilityStatus() {
-        return ColorDisplayManager.isNightDisplayAvailable(mContext) ? AVAILABLE
+        return ColorDisplayManager.isNightDisplayAvailable(mContext) ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
 
@@ -82,16 +69,24 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = screen.findPreference(getPreferenceKey());
-        mTurnOnButton = mPreference.findViewById(R.id.night_display_turn_on_button);
-        mTurnOnButton.setOnClickListener(mListener);
-        mTurnOffButton = mPreference.findViewById(R.id.night_display_turn_off_button);
-        mTurnOffButton.setOnClickListener(mListener);
+        mPreference = (MainSwitchPreference) screen.findPreference(getPreferenceKey());
+        mPreference.addOnSwitchChangeListener(this);
+        mPreference.updateStatus(mColorDisplayManager.isNightDisplayActivated());
+    }
+
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        final boolean activated = mColorDisplayManager.isNightDisplayActivated();
+        if (isChecked != activated) {
+            // TODO(b/179017365): Create a controller which extends TogglePreferenceController to
+            //  control the toggle preference.
+            setChecked(isChecked);
+        }
     }
 
     @Override
     public final void updateState(Preference preference) {
-        updateStateInternal(false);
+        updateStateInternal();
     }
 
     /** FOR SLICES */
@@ -111,46 +106,14 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
         return mTimeFormatter.getAutoModeSummary(mContext, mColorDisplayManager);
     }
 
-    private void updateStateInternal(boolean selfChanged) {
-        if (mTurnOnButton == null || mTurnOffButton == null) {
-            return;
-        }
-
+    private void updateStateInternal() {
         final boolean isActivated = mColorDisplayManager.isNightDisplayActivated();
         final int autoMode = mColorDisplayManager.getNightDisplayAutoMode();
 
-        String buttonText;
         if (autoMode == ColorDisplayManager.AUTO_MODE_CUSTOM_TIME) {
-            buttonText = mContext.getString(isActivated
-                            ? R.string.night_display_activation_off_custom
-                            : R.string.night_display_activation_on_custom,
-                    mTimeFormatter.getFormattedTimeString(isActivated
-                            ? mColorDisplayManager.getNightDisplayCustomStartTime()
-                            : mColorDisplayManager.getNightDisplayCustomEndTime()));
-        } else if (autoMode == ColorDisplayManager.AUTO_MODE_TWILIGHT) {
-            buttonText = mContext.getString(isActivated
-                    ? R.string.night_display_activation_off_twilight
-                    : R.string.night_display_activation_on_twilight);
-        } else {
-            buttonText = mContext.getString(isActivated
-                    ? R.string.night_display_activation_off_manual
-                    : R.string.night_display_activation_on_manual);
-        }
-
-        if (isActivated) {
-            mTurnOnButton.setVisibility(View.GONE);
-            mTurnOffButton.setVisibility(View.VISIBLE);
-            mTurnOffButton.setText(buttonText);
-            if (selfChanged) {
-                mTurnOffButton.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
-            }
-        } else {
-            mTurnOnButton.setVisibility(View.VISIBLE);
-            mTurnOffButton.setVisibility(View.GONE);
-            mTurnOnButton.setText(buttonText);
-            if (selfChanged) {
-                mTurnOnButton.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
-            }
+            mTimeFormatter.getFormattedTimeString(isActivated
+                    ? mColorDisplayManager.getNightDisplayCustomStartTime()
+                    : mColorDisplayManager.getNightDisplayCustomEndTime());
         }
     }
 }
