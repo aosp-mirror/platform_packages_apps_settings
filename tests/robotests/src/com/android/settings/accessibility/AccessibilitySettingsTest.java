@@ -56,6 +56,7 @@ import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -77,12 +78,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Test for {@link AccessibilitySettings}. */
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilitySettingsTest {
     private static final String PACKAGE_NAME = "com.android.test";
     private static final String CLASS_NAME = PACKAGE_NAME + ".test_a11y_service";
-    private static final ComponentName COMPONENT_NAME = new ComponentName(PACKAGE_NAME,
-            CLASS_NAME);
+    private static final ComponentName COMPONENT_NAME = new ComponentName(PACKAGE_NAME, CLASS_NAME);
     private static final int ON = 1;
     private static final int OFF = 0;
     private static final String EMPTY_STRING = "";
@@ -130,6 +131,14 @@ public class AccessibilitySettingsTest {
                 XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
+    }
+
+    @Test
+    public void getRawDataToIndex_isNull() {
+        final List<SearchIndexableRaw> indexableRawList =
+                AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
+
+        assertThat(indexableRawList).isNull();
     }
 
     @Test
@@ -362,7 +371,7 @@ public class AccessibilitySettingsTest {
         try {
             final AccessibilityServiceInfo info = new AccessibilityServiceInfo(resolveInfo,
                     mContext);
-            info.setComponentName(new ComponentName(PACKAGE_NAME, CLASS_NAME));
+            info.setComponentName(new ComponentName(packageName, className));
             return info;
         } catch (XmlPullParserException | IOException e) {
             // Do nothing
