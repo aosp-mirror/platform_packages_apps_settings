@@ -50,12 +50,14 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -494,7 +496,15 @@ public class AccessibilitySettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_settings);
+            new BaseSearchIndexProvider(R.xml.accessibility_settings) {
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    return FeatureFactory.getFactory(context)
+                            .getAccessibilitySearchFeatureProvider().getSearchIndexableRawData(
+                                    context);
+                }
+            };
 
     /**
      * This class helps setup RestrictedPreference.
@@ -559,7 +569,6 @@ public class AccessibilitySettings extends DashboardFragment {
 
                 setRestrictedPreferenceEnabled(preference, packageName, serviceAllowed,
                         serviceEnabled);
-
                 final String prefKey = preference.getKey();
                 final int imageRes = info.getAnimatedImageRes();
                 final CharSequence description = getServiceDescription(mContext, info,
