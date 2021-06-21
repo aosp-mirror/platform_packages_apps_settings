@@ -43,6 +43,7 @@
         android:order="2"
         android:title="@string/my_device_info_account_preference_title"
         android:summary="@string/summary_placeholder"
+        settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
 
     <!-- Phone number -->
@@ -54,13 +55,6 @@
         android:selectable="false"
         settings:controller="com.android.settings.deviceinfo.PhoneNumberPreferenceController"
         settings:enableCopying="true"/>
-
-    <Preference
-        android:key="emergency_info"
-        android:order="14"
-        android:title="@string/emergency_info_title"
-        android:summary="@string/summary_placeholder"
-        settings:controller="com.android.settings.accounts.EmergencyInfoPreferenceController"/>
 
     <!-- Legal information -->
     <Preference
@@ -100,7 +94,7 @@
     <Preference
         android:key="device_model"
         android:order="31"
-        android:title="@string/hardware_info"
+        android:title="@string/model_info"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
         settings:enableCopying="true"
@@ -142,7 +136,7 @@
         android:order="45"
         android:title="@string/status_wifi_mac_address"
         android:summary="@string/view_saved_network"
-        android:fragment="com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings"
+        android:fragment="com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2"
         settings:enableCopying="false"/>
 
     <!-- Factory Wi-Fi MAC address -->

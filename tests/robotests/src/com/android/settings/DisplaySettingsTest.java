@@ -35,6 +35,6 @@ public class DisplaySettingsTest {
         // Nightmode is currently hidden
         preferenceKeys.remove("night_mode");
 
-        assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
+        assertThat(preferenceScreenKeys).containsAtLeastElementsIn(preferenceKeys);
     }
 }

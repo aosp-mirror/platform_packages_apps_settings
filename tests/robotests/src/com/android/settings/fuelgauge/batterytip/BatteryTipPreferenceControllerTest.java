@@ -20,7 +20,6 @@ import static com.android.settings.fuelgauge.batterytip.tips.BatteryTip.TipType
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -30,10 +29,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -49,7 +44,6 @@ import com.android.settings.widget.CardPreference;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -104,10 +98,24 @@ public class BatteryTipPreferenceControllerTest {
     }
 
     @Test
-    public void testDisplayPreference_addSummaryTip() {
+    public void testDisplayPreference_isInvisible() {
         mBatteryTipPreferenceController.displayPreference(mPreferenceScreen);
 
-        assertOnlyContainsSummaryTip(mCardPreference);
+        assertThat(mCardPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void testUpdateBatteryTips_tipsStateNew_isVisible() {
+        mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
+
+        assertThat(mCardPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void testUpdateBatteryTips_tipsStateInvisible_isInvisible() {
+        mBatteryTipPreferenceController.updateBatteryTips(mNewBatteryTips);
+
+        assertThat(mCardPreference.isVisible()).isFalse();
     }
 
     @Test
@@ -117,6 +125,25 @@ public class BatteryTipPreferenceControllerTest {
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_SUMMARY_TIP,
                 BatteryTip.StateType.NEW);
+    }
+
+    @Test
+    public void testGetCurrentBatteryTip_noTips_isNull() {
+        assertThat(mBatteryTipPreferenceController.getCurrentBatteryTip()).isNull();
+    }
+
+    @Test
+    public void testGetCurrentBatteryTip_tipsInvisible_isNull() {
+        mBatteryTipPreferenceController.updateBatteryTips(mNewBatteryTips);
+        assertThat(mBatteryTipPreferenceController.getCurrentBatteryTip()).isNull();
+    }
+
+    @Test
+    public void testGetCurrentBatteryTip_tipsVisible_returnTips() {
+        mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
+
+        assertThat(mBatteryTipPreferenceController.getCurrentBatteryTip().getType()).isEqualTo(
+                BatteryTip.TipType.SUMMARY);
     }
 
     @Test

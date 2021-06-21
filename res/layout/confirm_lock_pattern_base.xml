@@ -18,8 +18,7 @@
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:icon="@drawable/ic_enterprise"
-    android:layout="@layout/sud_glif_blank_template">
+    android:icon="@drawable/ic_enterprise">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
@@ -33,35 +32,13 @@
             android:orientation="vertical"
             android:paddingBottom="24dp">
 
-            <ImageView
-                android:id="@+id/sud_layout_icon"
-                style="@style/SudGlifIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="?attr/sudGlifHeaderGravity"
-                android:src="@drawable/ic_enterprise" />
-
-            <TextView
-                android:id="@+id/headerText"
-                style="@style/SudGlifHeaderTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/sud_layout_description"
-                style="@style/SudDescription.Glif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="?attr/sudMarginSides"
-                android:layout_marginEnd="?attr/sudMarginSides" />
-
             <Button
                 android:id="@+id/cancelButton"
                 style="@style/SudGlifButton.Secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="?attr/sudMarginSides"
-                android:layout_marginEnd="?attr/sudMarginSides"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
                 android:layout_marginBottom="80dp"
                 android:text="@string/cancel" />
 
@@ -70,8 +47,8 @@
                 style="@style/SudGlifButton.Secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="?attr/sudMarginSides"
-                android:layout_marginEnd="?attr/sudMarginSides"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
                 android:layout_gravity="center"
                 android:visibility="gone" />
 
@@ -107,7 +84,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="?attr/sudMarginSides"
+                android:paddingStart="?attr/sudMarginStart"
+                android:paddingEnd="?attr/sudMarginEnd"
                 android:layout_marginTop="12dp"
                 android:gravity="center_vertical"/>
 

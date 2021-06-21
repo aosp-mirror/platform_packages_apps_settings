@@ -47,7 +47,15 @@ public class InvalidConversationPreferenceController extends NotificationPrefere
         if (mAppRow.banned) {
             return false;
         }
+        if (mPreferenceFilter != null && !isIncludedInFilter()) {
+            return false;
+        }
         return mBackend.isInInvalidMsgState(mAppRow.pkg, mAppRow.uid);
+    }
+
+    @Override
+    boolean isIncludedInFilter() {
+        return mPreferenceFilter.contains(NotificationChannel.EDIT_CONVERSATION);
     }
 
     @Override

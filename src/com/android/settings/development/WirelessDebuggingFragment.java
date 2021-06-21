@@ -15,6 +15,7 @@
  */
 
 package com.android.settings.development;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -40,7 +41,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.MainSwitchBarController;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -170,9 +172,11 @@ public class WirelessDebuggingFragment extends DashboardFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final SettingsActivity activity = (SettingsActivity) getActivity();
+        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+        switchBar.setTitle(getContext().getString(R.string.wireless_debugging_main_switch_title));
+
         mWifiDebuggingEnabler =  new WirelessDebuggingEnabler(activity,
-                new SwitchBarController(activity.getSwitchBar()), this,
-                getSettingsLifecycle());
+                new MainSwitchBarController(switchBar), this, getSettingsLifecycle());
     }
 
     @Override

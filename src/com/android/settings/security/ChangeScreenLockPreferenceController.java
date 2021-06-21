@@ -28,6 +28,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
@@ -41,6 +42,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 public class ChangeScreenLockPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, GearPreference.OnGearClickListener {
@@ -48,7 +50,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
 
     protected final DevicePolicyManager mDPM;
-    protected final SecuritySettings mHost;
+    protected final SettingsPreferenceFragment mHost;
     protected final UserManager mUm;
     protected final LockPatternUtils mLockPatternUtils;
 
@@ -58,7 +60,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
 
     protected RestrictedPreference mPreference;
 
-    public ChangeScreenLockPreferenceController(Context context, SecuritySettings host) {
+    public ChangeScreenLockPreferenceController(Context context, SettingsPreferenceFragment host) {
         super(context);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mDPM = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -136,8 +138,8 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
 
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                .setTitleRes(R.string.lock_settings_picker_title)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
+                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
                 .launch();
         return true;
     }

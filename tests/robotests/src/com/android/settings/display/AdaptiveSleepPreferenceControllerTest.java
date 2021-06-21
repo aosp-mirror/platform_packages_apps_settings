@@ -18,27 +18,33 @@ package com.android.settings.display;
 
 import static android.provider.Settings.Secure.ADAPTIVE_SLEEP;
 
+import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
+
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.UserManager;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
+import com.android.settings.bluetooth.RestrictionUtils;
+import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
+import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,13 +52,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowSensorPrivacyManager.class)
 public class AdaptiveSleepPreferenceControllerTest {
-
-    private static final String PREFERENCE_KEY = "adaptive_sleep";
-
     private Context mContext;
     private AdaptiveSleepPreferenceController mController;
     private ContentResolver mContentResolver;
@@ -62,114 +66,123 @@ public class AdaptiveSleepPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private Preference mPreference;
+    private RestrictionUtils mRestrictionUtils;
+    @Mock
+    private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(getApplicationContext());
         mContentResolver = mContext.getContentResolver();
 
         doReturn(mPackageManager).when(mContext).getPackageManager();
         when(mPackageManager.getAttentionServicePackageName()).thenReturn("some.package");
         when(mPackageManager.checkPermission(any(), any())).thenReturn(
                 PackageManager.PERMISSION_GRANTED);
+        when(mRestrictionUtils.checkIfRestrictionEnforced(any(),
+                eq(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT))).thenReturn(null);
 
-        mController = new AdaptiveSleepPreferenceController(mContext, PREFERENCE_KEY);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        mController = spy(new AdaptiveSleepPreferenceController(mContext, mRestrictionUtils));
+        mController.initializePreference();
+        when(mController.isCameraLocked()).thenReturn(false);
+        when(mController.isPowerSaveMode()).thenReturn(false);
     }
 
     @Test
-    public void isControllerAvailable_ServiceUnavailable_returnUnsupported() {
-        doReturn(null).when(mPackageManager).resolveService(isA(Intent.class), anyInt());
+    public void controlSetting_preferenceChecked_FeatureTurnOn() {
+        mController.mPreference.setChecked(false);
+
+        mController.mPreference.performClick();
+
+        int mode = Settings.Secure.getInt(mContentResolver, ADAPTIVE_SLEEP, 0);
+        assertThat(mode).isEqualTo(1);
+    }
+
+    @Test
+    public void controlSetting_preferenceNotChecked_FeatureTurnOff() {
+        mController.mPreference.setChecked(true);
+
+        mController.mPreference.performClick();
+
+        int mode = Settings.Secure.getInt(mContentResolver, ADAPTIVE_SLEEP, 1);
+        assertThat(mode).isEqualTo(0);
+    }
+
+    @Test
+    public void isControllerAvailable_serviceNotSupported_returnUnsupportedCode() {
+        when(mPackageManager.resolveService(isA(Intent.class), anyInt())).thenReturn(null);
 
         assertThat(AdaptiveSleepPreferenceController.isControllerAvailable(mContext)).isEqualTo(
                 UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void onPreferenceChange_turnOn_returnOn() {
-        mController.onPreferenceChange(null, true);
-
-        final int mode = Settings.Secure.getInt(mContentResolver, ADAPTIVE_SLEEP, 0);
-        assertThat(mode).isEqualTo(1);
+    public void hasSufficientPermission_permissionGranted_returnTrue() {
+        assertThat(AdaptiveSleepPreferenceController.hasSufficientPermission(
+                mPackageManager)).isTrue();
     }
 
     @Test
-    public void onPreferenceChange_turnOff_returnOff() {
-        mController.onPreferenceChange(null, false);
-
-        final int mode = Settings.Secure.getInt(mContentResolver, ADAPTIVE_SLEEP, 1);
-        assertThat(mode).isEqualTo(0);
-    }
-
-    @Test
-    public void setChecked_updatesCorrectly() {
-        mController.setChecked(true);
-
-        assertThat(mController.isChecked()).isTrue();
-
-        mController.setChecked(false);
-
-        assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
-    public void isChecked_no() {
-        Settings.System.putInt(mContentResolver, ADAPTIVE_SLEEP, 0);
-
-        assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
-    public void isChecked_yes() {
-        Settings.Secure.putInt(mContentResolver, ADAPTIVE_SLEEP, 1);
-
-        assertThat(mController.isChecked()).isTrue();
-    }
-
-    @Test
-    public void getSummary_settingOn_shouldReturnOnSummary() {
-        mController.setChecked(true);
-
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.adaptive_sleep_summary_on));
-    }
-
-    @Test
-    public void getSummary_settingOff_shouldReturnOffSummary() {
-        mController.setChecked(false);
-
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.adaptive_sleep_summary_off));
-    }
-
-    @Test
-    public void isSliceable_returnsTrue() {
-        final AdaptiveSleepPreferenceController controller =
-                new AdaptiveSleepPreferenceController(mContext, "any_key");
-        assertThat(controller.isSliceable()).isTrue();
-    }
-
-    @Test
-    public void isChecked_returnsFalseWhenNotSufficientPermissions() {
-        when(mPackageManager.checkPermission(any(), any())).thenReturn(
-                PackageManager.PERMISSION_DENIED);
-        final AdaptiveSleepPreferenceController controller = new AdaptiveSleepPreferenceController(
-                mContext, PREFERENCE_KEY);
-
-        controller.setChecked(true);
-        assertThat(controller.isChecked()).isFalse();
-    }
-
-    @Test
-    public void isEnabled_returnsFalseWhenNotSufficientPermissions() {
+    public void hasSufficientPermission_permissionNotGranted_returnFalse() {
         when(mPackageManager.checkPermission(any(), any())).thenReturn(
                 PackageManager.PERMISSION_DENIED);
 
-        mController.setChecked(true);
-        mController.displayPreference(mScreen);
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(AdaptiveSleepPreferenceController.hasSufficientPermission(
+                mPackageManager)).isFalse();
     }
+
+    @Test
+    public void addToScreen_normalCase_enablePreference() {
+        mController.mPreference.setEnabled(false);
+        when(mPackageManager.checkPermission(any(), any())).thenReturn(
+                PackageManager.PERMISSION_GRANTED);
+
+        mController.addToScreen(mScreen);
+
+        assertThat(mController.mPreference.isEnabled()).isTrue();
+        verify(mScreen).addPreference(mController.mPreference);
+    }
+
+    @Test
+    public void addToScreen_permissionNotGranted_disablePreference() {
+        mController.mPreference.setEnabled(true);
+        when(mPackageManager.checkPermission(any(), any())).thenReturn(
+                PackageManager.PERMISSION_DENIED);
+
+        mController.addToScreen(mScreen);
+
+        assertThat(mController.mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void addToScreen_enforcedAdmin_disablePreference() {
+        mController.mPreference.setEnabled(true);
+
+        when(mRestrictionUtils.checkIfRestrictionEnforced(any(),
+                eq(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT))).thenReturn(mEnforcedAdmin);
+
+        mController.addToScreen(mScreen);
+
+        assertThat(mController.mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void addToScreen_cameraIsLocked_disablePreference() {
+        when(mController.isCameraLocked()).thenReturn(true);
+
+        mController.addToScreen(mScreen);
+
+        assertThat(mController.mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void addToScreen_powerSaveEnabled_disablePreference() {
+        when(mController.isPowerSaveMode()).thenReturn(true);
+
+        mController.addToScreen(mScreen);
+
+        assertThat(mController.mPreference.isEnabled()).isFalse();
+    }
+
 }

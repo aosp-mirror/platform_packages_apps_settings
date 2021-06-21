@@ -18,43 +18,13 @@
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:icon="@drawable/ic_lock"
-    android:layout="@layout/sud_glif_blank_template">
+    android:icon="@drawable/ic_lock">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/sud_layout_icon"
-                style="@style/SudGlifIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="?attr/sudGlifHeaderGravity"
-                android:src="@drawable/ic_lock" />
-
-            <TextView
-                android:id="@+id/headerText"
-                style="@style/SudGlifHeaderTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                style="@style/SudDescription.Glif"
-                android:id="@+id/sud_layout_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="?attr/sudMarginSides"
-                android:layout_marginEnd="?attr/sudMarginSides" />
-
-        </LinearLayout>
 
         <LinearLayout
             style="@style/SudContentFrame"
@@ -86,7 +56,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="?attr/sudMarginSides"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
                 android:layout_marginTop="12dp"
                 android:gravity="center_vertical"/>
 
@@ -95,8 +66,8 @@
                 style="@style/SudGlifButton.Secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="?attr/sudMarginSides"
-                android:layout_marginEnd="?attr/sudMarginSides"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
                 android:layout_marginBottom="80dp"
                 android:text="@string/cancel" />
 

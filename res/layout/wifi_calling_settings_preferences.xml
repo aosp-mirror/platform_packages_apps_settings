@@ -21,11 +21,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.android.settings.widget.SwitchBar
+    <com.android.settings.widget.SettingsMainSwitchBar
         android:id="@+id/switch_bar"
-        android:layout_height="?android:attr/actionBarSize"
-        android:layout_width="match_parent"
-        android:theme="?attr/switchBarTheme" />
+        android:title="@string/wifi_calling_main_switch_title"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
 
     <FrameLayout
         android:id="@android:id/tabcontent"

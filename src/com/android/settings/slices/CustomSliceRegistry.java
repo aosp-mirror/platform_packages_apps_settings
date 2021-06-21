@@ -26,11 +26,10 @@ import android.util.ArrayMap;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.display.AdaptiveSleepPreferenceController;
 import com.android.settings.display.AlwaysOnDisplaySlice;
+import com.android.settings.display.ScreenTimeoutPreferenceController;
 import com.android.settings.flashlight.FlashlightSlice;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
-import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
 import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
 import com.android.settings.homepage.contextualcards.slices.ContextualAdaptiveSleepSlice;
@@ -38,16 +37,15 @@ import com.android.settings.homepage.contextualcards.slices.DarkThemeSlice;
 import com.android.settings.homepage.contextualcards.slices.FaceSetupSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.location.LocationSlice;
-import com.android.settings.media.MediaOutputGroupSlice;
 import com.android.settings.media.MediaOutputIndicatorSlice;
-import com.android.settings.media.MediaOutputSlice;
 import com.android.settings.media.RemoteMediaSlice;
+import com.android.settings.network.ProviderModelSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
 import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 import com.android.settings.wifi.slice.WifiSlice;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import java.util.Map;
 
@@ -63,7 +61,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
-            .appendPath(AdaptiveSleepPreferenceController.PREF_NAME)
+            .appendPath(ScreenTimeoutPreferenceController.PREF_NAME)
             .build();
 
     /**
@@ -169,15 +167,17 @@ public class CustomSliceRegistry {
             .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("mobile_data")
             .build();
+
     /**
-     * Backing Uri for the storage slice.
+     * Full {@link Uri} for the Provider Model Slice.
      */
-    public static final Uri STORAGE_SLICE_URI = new Uri.Builder()
+    public static final Uri PROVIDER_MODEL_SLICE_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
-            .appendPath("storage_card")
+            .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("provider_model")
             .build();
+
     /**
      * Full {@link Uri} for the Alarm volume Slice.
      */
@@ -187,6 +187,7 @@ public class CustomSliceRegistry {
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("alarm_volume")
             .build();
+
     /**
      * Full {@link Uri} for the Call Volume Slice.
      */
@@ -214,6 +215,16 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("ring_volume")
+            .build();
+
+    /**
+     * Full {@link Uri} for the all volume Slices.
+     */
+    public static final Uri VOLUME_SLICES_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("volume_slices")
             .build();
 
     /**
@@ -255,26 +266,6 @@ public class CustomSliceRegistry {
             .build();
 
     /**
-     * Backing Uri for the Media output Slice.
-     */
-    public static Uri MEDIA_OUTPUT_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT)
-            .build();
-
-    /**
-     * Backing Uri for the Media output group Slice.
-     */
-    public static Uri MEDIA_OUTPUT_GROUP_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(MediaOutputSliceConstants.KEY_MEDIA_OUTPUT_GROUP)
-            .build();
-
-    /**
      * Backing Uri for the Media output indicator Slice.
      */
     public static Uri MEDIA_OUTPUT_INDICATOR_SLICE_URI = new Uri.Builder()
@@ -301,7 +292,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(MediaOutputSliceConstants.KEY_REMOTE_MEDIA)
+            .appendPath(MediaOutputConstants.KEY_REMOTE_MEDIA)
             .build();
 
     /**
@@ -312,6 +303,16 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("always_on_display")
+            .build();
+
+    /**
+     * Backing Uri for the Turn on Wi-Fi Slice.
+     */
+    public static final Uri TURN_ON_WIFI_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("turn_on_wifi")
             .build();
 
     @VisibleForTesting
@@ -329,13 +330,11 @@ public class CustomSliceRegistry {
         sUriToSlice.put(LOCATION_SLICE_URI, LocationSlice.class);
         sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
         sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
-        sUriToSlice.put(MEDIA_OUTPUT_SLICE_URI, MediaOutputSlice.class);
         sUriToSlice.put(MOBILE_DATA_SLICE_URI, MobileDataSlice.class);
-        sUriToSlice.put(STORAGE_SLICE_URI, StorageSlice.class);
+        sUriToSlice.put(PROVIDER_MODEL_SLICE_URI, ProviderModelSlice.class);
         sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
         sUriToSlice.put(DARK_THEME_SLICE_URI, DarkThemeSlice.class);
         sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
-        sUriToSlice.put(MEDIA_OUTPUT_GROUP_SLICE_URI, MediaOutputGroupSlice.class);
         sUriToSlice.put(ALWAYS_ON_SLICE_URI, AlwaysOnDisplaySlice.class);
     }
 

@@ -17,16 +17,20 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.UserManager;
+import android.util.Pair;
 import android.view.ContextThemeWrapper;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -35,7 +39,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.testutils.DrawableTestHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,6 +65,7 @@ public class BluetoothDevicePreferenceTest {
     private static final String MAC_ADDRESS_4 = "07:52:C7:0B:D8:3C";
     private static final Comparator<BluetoothDevicePreference> COMPARATOR =
             Comparator.naturalOrder();
+    private static final String FAKE_DESCRIPTION = "fake_description";
 
     private Context mContext;
     @Mock
@@ -72,6 +76,8 @@ public class BluetoothDevicePreferenceTest {
     private CachedBluetoothDevice mCachedDevice2;
     @Mock
     private CachedBluetoothDevice mCachedDevice3;
+    @Mock
+    private Drawable mDrawable;
 
     private FakeFeatureFactory mFakeFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -86,9 +92,17 @@ public class BluetoothDevicePreferenceTest {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
+        when(mCachedBluetoothDevice.getDrawableWithDescription())
+                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
         when(mCachedDevice1.getAddress()).thenReturn(MAC_ADDRESS_2);
+        when(mCachedDevice1.getDrawableWithDescription())
+                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
         when(mCachedDevice2.getAddress()).thenReturn(MAC_ADDRESS_3);
+        when(mCachedDevice2.getDrawableWithDescription())
+                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
         when(mCachedDevice3.getAddress()).thenReturn(MAC_ADDRESS_4);
+        when(mCachedDevice3.getDrawableWithDescription())
+                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                 SHOW_DEVICES_WITHOUT_NAMES, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
     }
@@ -260,5 +274,20 @@ public class BluetoothDevicePreferenceTest {
                 .isEqualTo(preference2.getCachedDevice().getAddress());
         assertThat(mPreferenceList.get(2).getCachedDevice().getAddress())
                 .isEqualTo(preference3.getCachedDevice().getAddress());
+    }
+
+    @Test
+    public void onAttached_callbackNotRemoved_doNotRegisterCallback() {
+        mPreference.onAttached();
+
+        verify(mCachedBluetoothDevice, never()).unregisterCallback(any());
+    }
+
+    @Test
+    public void onAttached_callbackRemoved_registerCallback() {
+        mPreference.onPrepareForRemoval();
+        mPreference.onAttached();
+
+        verify(mCachedBluetoothDevice, times(2)).registerCallback(any());
     }
 }

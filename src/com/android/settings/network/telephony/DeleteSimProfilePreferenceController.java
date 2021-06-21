@@ -81,9 +81,8 @@ public class DeleteSimProfilePreferenceController extends BasePreferenceControll
     }
 
     private void deleteSim() {
-        final Intent intent = new Intent(EuiccManager.ACTION_DELETE_SUBSCRIPTION_PRIVILEGED);
-        intent.putExtra(EuiccManager.EXTRA_SUBSCRIPTION_ID, mSubscriptionInfo.getSubscriptionId());
-        mParentFragment.startActivityForResult(intent, mRequestCode);
+        SubscriptionUtil.startDeleteEuiccSubscriptionDialogActivity(
+                mContext, mSubscriptionInfo.getSubscriptionId());
         // result handled in MobileNetworkSettings
     }
 

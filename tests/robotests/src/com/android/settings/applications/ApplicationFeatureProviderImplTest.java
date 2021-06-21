@@ -280,7 +280,7 @@ public final class ApplicationFeatureProviderImplTest {
 
         final List<String> expectedPackages = Arrays.asList(testDialer, testSms,
                 testLocationHistory);
-        assertThat(keepEnabledPackages).containsAllIn(expectedPackages);
+        assertThat(keepEnabledPackages).containsAtLeastElementsIn(expectedPackages);
     }
 
     @Test
@@ -329,9 +329,9 @@ public final class ApplicationFeatureProviderImplTest {
 
         ReflectionHelpers.setField(mProvider, "mContext", spyContext);
 
-        final Set<String> whitelist = mProvider.getKeepEnabledPackages();
+        final Set<String> allowlist = mProvider.getKeepEnabledPackages();
 
-        assertThat(whitelist).contains("com.android.settings.intelligence");
+        assertThat(allowlist).contains("com.android.settings.intelligence");
     }
 
     @Test
@@ -351,9 +351,9 @@ public final class ApplicationFeatureProviderImplTest {
 
         ReflectionHelpers.setField(mProvider, "mContext", spyContext);
 
-        final Set<String> whitelist = mProvider.getKeepEnabledPackages();
+        final Set<String> allowlist = mProvider.getKeepEnabledPackages();
 
-        assertThat(whitelist).contains("com.android.packageinstaller");
+        assertThat(allowlist).contains("com.android.packageinstaller");
     }
 
     private void setUpUsersAndInstalledApps() {

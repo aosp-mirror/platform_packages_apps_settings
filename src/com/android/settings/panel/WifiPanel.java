@@ -20,14 +20,12 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settings.wifi.WifiSettings;
-import com.android.settings.wifi.WifiSettings2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,20 +61,11 @@ public class WifiPanel implements PanelContent {
     public Intent getSeeMoreIntent() {
         final String screenTitle =
                 mContext.getText(R.string.wifi_settings).toString();
-        Intent intent;
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-            intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                    WifiSettings2.class.getName(),
-                    null /* key */,
-                    screenTitle,
-                    SettingsEnums.WIFI);
-        } else {
-            intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
+        final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                     WifiSettings.class.getName(),
                     null /* key */,
                     screenTitle,
                     SettingsEnums.WIFI);
-        }
         intent.setClassName(mContext.getPackageName(), SubSettings.class.getName());
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;

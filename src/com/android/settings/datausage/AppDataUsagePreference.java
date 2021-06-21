@@ -24,7 +24,7 @@ import com.android.settingslib.AppItem;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 import com.android.settingslib.utils.ThreadUtils;
-import com.android.settingslib.widget.apppreference.AppPreference;
+import com.android.settingslib.widget.AppPreference;
 
 import java.text.NumberFormat;
 

@@ -55,7 +55,7 @@ public class AddNetworkFragmentTest {
 
     @Test
     public void getMode_shouldBeModeConnected() {
-        assertThat(mAddNetworkFragment.getMode()).isEqualTo(WifiConfigUiBase.MODE_CONNECT);
+        assertThat(mAddNetworkFragment.getMode()).isEqualTo(WifiConfigUiBase2.MODE_CONNECT);
     }
 
     @Test

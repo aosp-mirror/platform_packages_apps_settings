@@ -16,14 +16,21 @@
 
 package com.android.settings.widget;
 
+import static android.view.HapticFeedbackConstants.CLOCK_TICK;
+import static android.view.HapticFeedbackConstants.CONTEXT_CLICK;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.widget.SeekBar;
 
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -45,9 +52,11 @@ public class SeekBarPreferenceTest {
     private static final int MAX = 75;
     private static final int MIN = 5;
     private static final int PROGRESS = 16;
+    private static final int NEW_PROGRESS = 17;
 
     private Context mContext;
     private SeekBarPreference mSeekBarPreference;
+    private SeekBar mSeekBar;
 
     @Before
     public void setUp() {
@@ -59,6 +68,11 @@ public class SeekBarPreferenceTest {
         mSeekBarPreference.setMin(MIN);
         mSeekBarPreference.setProgress(PROGRESS);
         mSeekBarPreference.setPersistent(false);
+        mSeekBarPreference.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_NONE);
+
+        mSeekBar = new SeekBar(mContext);
+        mSeekBar.setMax(MAX);
+        mSeekBar.setMin(MIN);
     }
 
     @Test
@@ -108,6 +122,60 @@ public class SeekBarPreferenceTest {
         final SeekBarPreference seekBarPreference = fragment.findPreference("seek_bar");
 
         assertThat(seekBarPreference.isSelectable()).isTrue();
+    }
+
+    @Test
+    public void testSetSeekBarStateDescription() {
+        mSeekBarPreference.setSeekBarStateDescription("test");
+
+        verify(mSeekBarPreference).setSeekBarStateDescription("test");
+    }
+
+    @Test
+    public void onProgressChanged_hapticFeedbackModeNone_clockTickFeedbackNotPerformed() {
+        mSeekBar.setProgress(NEW_PROGRESS);
+        when(mSeekBarPreference.callChangeListener(anyInt())).thenReturn(true);
+        mSeekBar.performHapticFeedback(CONTEXT_CLICK);
+
+        mSeekBarPreference.onProgressChanged(mSeekBar, NEW_PROGRESS, true);
+
+        assertThat(shadowOf(mSeekBar).lastHapticFeedbackPerformed()).isNotEqualTo(CLOCK_TICK);
+    }
+
+    @Test
+    public void onProgressChanged_hapticFeedbackModeOnTicks_clockTickFeedbackPerformed() {
+        mSeekBarPreference.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_TICKS);
+        mSeekBar.setProgress(NEW_PROGRESS);
+        when(mSeekBarPreference.callChangeListener(anyInt())).thenReturn(true);
+        mSeekBar.performHapticFeedback(CONTEXT_CLICK);
+
+        mSeekBarPreference.onProgressChanged(mSeekBar, NEW_PROGRESS, true);
+
+        assertThat(shadowOf(mSeekBar).lastHapticFeedbackPerformed()).isEqualTo(CLOCK_TICK);
+    }
+
+    @Test
+    public void onProgressChanged_hapticFeedbackModeOnEnds_clockTickFeedbackNotPerformed() {
+        mSeekBarPreference.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
+        mSeekBar.setProgress(NEW_PROGRESS);
+        when(mSeekBarPreference.callChangeListener(anyInt())).thenReturn(true);
+        mSeekBar.performHapticFeedback(CONTEXT_CLICK);
+
+        mSeekBarPreference.onProgressChanged(mSeekBar, NEW_PROGRESS, true);
+
+        assertThat(shadowOf(mSeekBar).lastHapticFeedbackPerformed()).isNotEqualTo(CLOCK_TICK);
+    }
+
+    @Test
+    public void onProgressChanged_hapticFeedbackModeOnEndsAndMinValue_clockTickFeedbackPerformed() {
+        mSeekBarPreference.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
+        mSeekBar.setProgress(MIN);
+        when(mSeekBarPreference.callChangeListener(anyInt())).thenReturn(true);
+        mSeekBar.performHapticFeedback(CONTEXT_CLICK);
+
+        mSeekBarPreference.onProgressChanged(mSeekBar, MIN, true);
+
+        assertThat(shadowOf(mSeekBar).lastHapticFeedbackPerformed()).isEqualTo(CLOCK_TICK);
     }
 
     public static class TestFragment extends PreferenceFragmentCompat {

@@ -21,14 +21,11 @@ import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
-import android.view.View;
-
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settingslib.widget.apppreference.AppPreference;
+import com.android.settingslib.widget.AppPreference;
 
 public class DomainAppPreference extends AppPreference {
 
