@@ -35,8 +35,9 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.CategoryMixin.CategoryHandler;
+import com.android.settings.core.CategoryMixin.CategoryListener;
 import com.android.settings.core.PreferenceControllerListHelper;
-import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -61,8 +62,7 @@ import java.util.concurrent.ExecutionException;
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
  */
 public abstract class DashboardFragment extends SettingsPreferenceFragment
-        implements SettingsBaseActivity.CategoryListener, Indexable,
-        PreferenceGroup.OnExpandButtonClickListener,
+        implements CategoryListener, Indexable, PreferenceGroup.OnExpandButtonClickListener,
         BasePreferenceController.UiBlockListener {
     public static final String CATEGORY = "category";
     private static final String TAG = "DashboardFragment";
@@ -198,9 +198,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             return;
         }
         final Activity activity = getActivity();
-        if (activity instanceof SettingsBaseActivity) {
+        if (activity instanceof CategoryHandler) {
             mListeningToCategoryChange = true;
-            ((SettingsBaseActivity) activity).addCategoryListener(this);
+            ((CategoryHandler) activity).getCategoryMixin().addCategoryListener(this);
         }
         final ContentResolver resolver = getContentResolver();
         mDashboardTilePrefKeys.values().stream()
@@ -243,8 +243,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         unregisterDynamicDataObservers(new ArrayList<>(mRegisteredObservers));
         if (mListeningToCategoryChange) {
             final Activity activity = getActivity();
-            if (activity instanceof SettingsBaseActivity) {
-                ((SettingsBaseActivity) activity).remCategoryListener(this);
+            if (activity instanceof CategoryHandler) {
+                ((CategoryHandler) activity).getCategoryMixin().removeCategoryListener(this);
             }
             mListeningToCategoryChange = false;
         }

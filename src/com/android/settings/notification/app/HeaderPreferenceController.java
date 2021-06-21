@@ -84,6 +84,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
             pref = mHeaderController.setIcon(mAppRow.icon)
                     .setLabel(getLabel())
                     .setSummary(getSummary())
+                    .setSecondSummary(getSecondSummary())
                     .setPackageName(mAppRow.pkg)
                     .setUid(mAppRow.uid)
                     .setButtonActions(EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
@@ -96,25 +97,11 @@ public class HeaderPreferenceController extends NotificationPreferenceController
         }
     }
 
-    @Override
-    public CharSequence getSummary() {
+    public CharSequence getLabel() {
         if (mChannel != null && !isDefaultChannel()) {
-            if (mChannelGroup != null
-                    && !TextUtils.isEmpty(mChannelGroup.getName())) {
-                final SpannableStringBuilder summary = new SpannableStringBuilder();
-                BidiFormatter bidi = BidiFormatter.getInstance();
-                summary.append(bidi.unicodeWrap(mAppRow.label.toString()));
-                summary.append(bidi.unicodeWrap(mContext.getText(
-                        R.string.notification_header_divider_symbol_with_spaces)));
-                summary.append(bidi.unicodeWrap(mChannelGroup.getName().toString()));
-                return summary.toString();
-            } else {
-                return mAppRow.label.toString();
-            }
-        } else if (mChannelGroup != null) {
-            return mAppRow.label.toString();
+            return mChannel.getName();
         } else {
-            return "";
+            return mAppRow.label;
         }
     }
 
@@ -123,11 +110,26 @@ public class HeaderPreferenceController extends NotificationPreferenceController
         mStarted = true;
     }
 
-    @VisibleForTesting
-    CharSequence getLabel() {
-        return (mChannel != null && !isDefaultChannel()) ? mChannel.getName()
-                : mChannelGroup != null
-                        ? mChannelGroup.getName()
-                        : mAppRow.label;
+    @Override
+    public CharSequence getSummary() {
+        if (mChannel != null) {
+            if (mChannelGroup != null
+                    && !TextUtils.isEmpty(mChannelGroup.getName())) {
+                final SpannableStringBuilder summary = new SpannableStringBuilder();
+                BidiFormatter bidi = BidiFormatter.getInstance();
+                summary.append(bidi.unicodeWrap(mAppRow.label));
+                summary.append(bidi.unicodeWrap(mContext.getText(
+                        R.string.notification_header_divider_symbol_with_spaces)));
+                summary.append(bidi.unicodeWrap(mChannelGroup.getName().toString()));
+                return summary.toString();
+            } else {
+                return mAppRow.label.toString();
+            }
+        }
+        return "";
+    }
+
+    public CharSequence getSecondSummary() {
+        return mChannel == null ? null : mChannel.getDescription();
     }
 }
