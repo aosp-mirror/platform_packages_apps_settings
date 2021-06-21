@@ -40,7 +40,7 @@ public class ScreenPinningPreferenceController extends BasePreferenceController 
     public CharSequence getSummary() {
         return Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.LOCK_TO_APP_ENABLED, 0) != 0
-                ? mContext.getText(R.string.switch_on_text)
-                : mContext.getText(R.string.switch_off_text);
+                ? mContext.getText(R.string.screen_pinning_switch_on_text)
+                : mContext.getText(R.string.screen_pinning_switch_off_text);
     }
 }

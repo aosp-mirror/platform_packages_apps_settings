@@ -41,7 +41,7 @@ public class TimeFormatPreferenceController extends AbstractPreferenceController
     private static final String KEY_TIME_FORMAT = "24 hour";
 
     // Used for showing the current date format, which looks like "12/31/2010", "2010/12/13", etc.
-    // The date value is dummy (independent of actual date).
+    // The date value is stubs (independent of actual date).
     private final Calendar mDummyDate;
     private final boolean mIsFromSUW;
     private final UpdateTimeAndDateCallback mUpdateTimeAndDateCallback;

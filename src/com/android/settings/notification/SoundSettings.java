@@ -76,6 +76,7 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     private RingtonePreference mRequestPreference;
     private UpdatableListPreferenceDialogFragment mDialogFragment;
     private String mHfpOutputControllerKey;
+    private String mVibrationPreferencesKey = "vibration_preference_screen";
 
     @Override
     public int getMetricsCategory() {
@@ -127,6 +128,10 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
 
     @Override
     public void onDisplayPreferenceDialog(Preference preference) {
+        if (TextUtils.equals(mVibrationPreferencesKey, preference.getKey())) {
+            super.onDisplayPreferenceDialog(preference);
+            return;
+        }
         final int metricsCategory;
         if (mHfpOutputControllerKey.equals(preference.getKey())) {
             metricsCategory = SettingsEnums.DIALOG_SWITCH_HFP_DEVICES;
@@ -199,10 +204,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
 
         @Override
         public void onSampleStarting(SeekBarVolumizer sbv) {
-            if (mCurrent != null && mCurrent != sbv) {
-                mCurrent.stopSample();
-            }
-            mCurrent = sbv;
             if (mCurrent != null) {
                 mHandler.removeMessages(STOP_SAMPLE);
                 mHandler.sendEmptyMessageDelayed(STOP_SAMPLE, SAMPLE_CUTOFF);
@@ -215,6 +216,15 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
                 mHandler.removeMessages(STOP_SAMPLE);
                 mHandler.sendEmptyMessageDelayed(STOP_SAMPLE, SAMPLE_CUTOFF);
             }
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBarVolumizer sbv) {
+            // stop the ringtone when other seek bar is adjust
+            if (mCurrent != null && mCurrent != sbv) {
+                mCurrent.stopSample();
+            }
+            mCurrent = sbv;
         }
 
         public void stopSample() {
@@ -234,9 +244,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         controllers.add(new PhoneRingtonePreferenceController(context));
         controllers.add(new AlarmRingtonePreferenceController(context));
         controllers.add(new NotificationRingtonePreferenceController(context));
-
-        // === Work Sound Settings ===
-        controllers.add(new WorkSoundPreferenceController(context, fragment, lifecycle));
 
         // === Other Sound Settings ===
         final DialPadTonePreferenceController dialPadTonePreferenceController =
@@ -294,16 +301,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
                             null /* lifecycle */);
                 }
             };
-
-    // === Work Sound Settings ===
-
-    void enableWorkSync() {
-        final WorkSoundPreferenceController workSoundController =
-                use(WorkSoundPreferenceController.class);
-        if (workSoundController != null) {
-            workSoundController.enableWorkSync();
-        }
-    }
 
     private void onPreferenceDataChanged(ListPreference preference) {
         if (mDialogFragment != null) {

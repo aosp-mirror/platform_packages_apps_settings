@@ -20,9 +20,8 @@
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingEnd="16dp"
     android:orientation="vertical"
-    android:background="?android:attr/colorBackgroundFloating"
     android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
@@ -37,9 +36,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginStart="32dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.NotificationHistory.Title"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"
             android:layout_toStartOf="@id/alerted_icon"
             android:textAlignment="viewStart"/>
 
@@ -65,7 +65,8 @@
             android:layout_centerVertical="true"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.NotificationHistory.AppName"
+            android:textSize="12sp"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
             android:textAlignment="viewEnd"
         />
     </LinearLayout>
@@ -76,9 +77,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
         android:ellipsize="end"
-        android:maxLines="3"
-        android:paddingTop="3dp"
-        android:textAppearance="@style/TextAppearance.NotificationHistory.Text"
+        android:layout_marginStart="32dp"
+        android:maxLines="7"
+        android:paddingTop="4dp"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
         android:textAlignment="viewStart" />
 
 </LinearLayout>

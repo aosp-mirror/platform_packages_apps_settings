@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -28,11 +29,9 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.CardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.fuelgauge.EstimateKt;
 
 import java.util.HashMap;
 import java.util.List;
@@ -91,10 +90,8 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         mPrefContext = screen.getContext();
         mCardPreference = screen.findPreference(getPreferenceKey());
 
-        // Add summary tip in advance to avoid UI flakiness
-        final SummaryTip summaryTip = new SummaryTip(BatteryTip.StateType.NEW,
-                EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
-        summaryTip.updatePreference(mCardPreference);
+        // Set preference as invisible since there is no default tips.
+        mCardPreference.setVisible(false);
     }
 
     public void updateBatteryTips(List<BatteryTip> batteryTips) {
@@ -110,10 +107,12 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
             }
         }
 
+        mCardPreference.setVisible(false);
         for (int i = 0, size = batteryTips.size(); i < size; i++) {
             final BatteryTip batteryTip = mBatteryTips.get(i);
-            batteryTip.sanityCheck(mContext);
+            batteryTip.validateCheck(mContext);
             if (batteryTip.getState() != BatteryTip.StateType.INVISIBLE) {
+                mCardPreference.setVisible(true);
                 batteryTip.updatePreference(mCardPreference);
                 mBatteryTipMap.put(mCardPreference.getKey(), batteryTip);
                 batteryTip.log(mContext, mMetricsFeatureProvider);
@@ -162,6 +161,19 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
 
     public boolean needUpdate() {
         return mNeedUpdate;
+    }
+
+    /**
+     * @return current battery tips, null if unavailable.
+     */
+    @Nullable
+    public BatteryTip getCurrentBatteryTip() {
+        if (mBatteryTips == null) {
+            return null;
+        }
+
+        return mBatteryTips.stream().anyMatch(BatteryTip::isVisible)
+                ? mBatteryTips.stream().filter(BatteryTip::isVisible).findFirst().get() : null;
     }
 
     /**

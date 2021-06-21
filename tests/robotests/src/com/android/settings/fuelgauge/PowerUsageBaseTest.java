@@ -27,7 +27,6 @@ import android.os.Bundle;
 
 import androidx.loader.app.LoaderManager;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -46,8 +45,6 @@ import java.util.List;
 public class PowerUsageBaseTest {
 
     @Mock
-    private BatteryStatsHelper mBatteryStatsHelper;
-    @Mock
     private LoaderManager mLoaderManager;
     private TestFragment mFragment;
 
@@ -56,7 +53,6 @@ public class PowerUsageBaseTest {
         MockitoAnnotations.initMocks(this);
 
         mFragment = spy(new TestFragment());
-        mFragment.setBatteryStatsHelper(mBatteryStatsHelper);
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
     }
 
@@ -72,6 +68,11 @@ public class PowerUsageBaseTest {
         @Override
         public int getMetricsCategory() {
             return 0;
+        }
+
+        @Override
+        protected boolean isBatteryHistoryNeeded() {
+            return false;
         }
 
         @Override
@@ -92,10 +93,6 @@ public class PowerUsageBaseTest {
         @Override
         protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
             return null;
-        }
-
-        private void setBatteryStatsHelper(BatteryStatsHelper batteryStatsHelper) {
-            mStatsHelper = batteryStatsHelper;
         }
     }
 }

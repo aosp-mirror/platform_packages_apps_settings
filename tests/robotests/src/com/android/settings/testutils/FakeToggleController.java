@@ -12,9 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
-
 package com.android.settings.testutils;
 
 import android.content.Context;
@@ -25,8 +23,6 @@ import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.slices.SliceBackgroundWorker;
-
-import java.io.IOException;
 
 public class FakeToggleController extends TogglePreferenceController {
 

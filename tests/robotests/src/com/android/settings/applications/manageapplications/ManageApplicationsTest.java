@@ -570,12 +570,14 @@ public class ManageApplicationsTest {
 
         mFragment.createHeader();
 
-        assertThat(mFragment.mFilterAdapter.getCount()).isEqualTo(3);
+        assertThat(mFragment.mFilterAdapter.getCount()).isEqualTo(4);
         assertThat(mFragment.mFilterAdapter.getItem(0)).isEqualTo(
                 mContext.getString(R.string.sort_order_recent_notification));
         assertThat(mFragment.mFilterAdapter.getItem(1)).isEqualTo(
                 mContext.getString(R.string.sort_order_frequent_notification));
         assertThat(mFragment.mFilterAdapter.getItem(2)).isEqualTo(
+                mContext.getString(R.string.filter_all_apps));
+        assertThat(mFragment.mFilterAdapter.getItem(3)).isEqualTo(
                 mContext.getString(R.string.filter_notif_blocked_apps));
     }
 
@@ -594,8 +596,8 @@ public class ManageApplicationsTest {
         mFragment.onItemSelected(null, null, 0, 0);
 
         AppFilter filter = ReflectionHelpers.getField(adapter, "mCompositeFilter");
-        assertThat(filter.filterApp(createPowerWhiteListApp(false))).isFalse();
-        assertThat(filter.filterApp(createPowerWhiteListApp(true))).isTrue();
+        assertThat(filter.filterApp(createPowerAllowListApp(false))).isFalse();
+        assertThat(filter.filterApp(createPowerAllowListApp(true))).isTrue();
     }
 
     @Test
@@ -613,8 +615,8 @@ public class ManageApplicationsTest {
         mFragment.onItemSelected(null, null, 1, 0);
 
         AppFilter filter = ReflectionHelpers.getField(adapter, "mCompositeFilter");
-        assertThat(filter.filterApp(createPowerWhiteListApp(false))).isTrue();
-        assertThat(filter.filterApp(createPowerWhiteListApp(true))).isTrue();
+        assertThat(filter.filterApp(createPowerAllowListApp(false))).isTrue();
+        assertThat(filter.filterApp(createPowerAllowListApp(true))).isTrue();
     }
 
     private void setUpOptionMenus() {
@@ -644,11 +646,11 @@ public class ManageApplicationsTest {
         return appList;
     }
 
-    private AppEntry createPowerWhiteListApp(boolean isPowerWhiteListed) {
+    private AppEntry createPowerAllowListApp(boolean isPowerAllowListed) {
         final ApplicationInfo info = new ApplicationInfo();
         info.sourceDir = "abc";
         final AppEntry entry = new AppEntry(mContext, info, 0);
-        entry.extraInfo = isPowerWhiteListed ? Boolean.TRUE : Boolean.FALSE;
+        entry.extraInfo = isPowerAllowListed ? Boolean.TRUE : Boolean.FALSE;
         return entry;
     }
 }

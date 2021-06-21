@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
@@ -46,9 +47,13 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.DeviceInfoUtils;
 
+import com.google.common.collect.ImmutableMap;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * A dialog allowing the display name of a mobile network subscription to be changed
@@ -65,6 +70,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
     private EditText mNameView;
     private Spinner mColorSpinner;
     private Color[] mColors;
+    private Map<Integer, Integer> mLightDarkMap;
 
     public static RenameMobileNetworkDialogFragment newInstance(int subscriptionId) {
         final Bundle args = new Bundle(1);
@@ -100,6 +106,21 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         mTelephonyManager = getTelephonyManager(context);
         mSubscriptionManager = getSubscriptionManager(context);
         mSubId = getArguments().getInt(KEY_SUBSCRIPTION_ID);
+        Resources res = context.getResources();
+        mLightDarkMap = ImmutableMap.<Integer, Integer>builder()
+                .put(res.getInteger(R.color.SIM_color_teal),
+                        res.getInteger(R.color.SIM_dark_mode_color_teal))
+                .put(res.getInteger(R.color.SIM_color_blue),
+                        res.getInteger(R.color.SIM_dark_mode_color_blue))
+                .put(res.getInteger(R.color.SIM_color_indigo),
+                        res.getInteger(R.color.SIM_dark_mode_color_indigo))
+                .put(res.getInteger(R.color.SIM_color_purple),
+                        res.getInteger(R.color.SIM_dark_mode_color_purple))
+                .put(res.getInteger(R.color.SIM_color_pink),
+                        res.getInteger(R.color.SIM_dark_mode_color_pink))
+                .put(res.getInteger(R.color.SIM_color_red),
+                        res.getInteger(R.color.SIM_dark_mode_color_red))
+                .build();
     }
 
     @NonNull
@@ -143,7 +164,8 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
             Log.w(TAG, "got null SubscriptionInfo for mSubId:" + mSubId);
             return;
         }
-        final CharSequence displayName = info.getDisplayName();
+        final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                info, getContext());
         mNameView.setText(displayName);
         if (!TextUtils.isEmpty(displayName)) {
             mNameView.setSelection(displayName.length());
@@ -163,7 +185,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         final TextView operatorName = view.findViewById(R.id.operator_name_value);
         mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
         final ServiceState serviceState = mTelephonyManager.getServiceState();
-        operatorName.setText(serviceState.getOperatorAlphaLong());
+        operatorName.setText(serviceState == null ? "" : serviceState.getOperatorAlphaLong());
 
         final TextView phoneTitle = view.findViewById(R.id.number_label);
         phoneTitle.setVisibility(info.isOpportunistic() ? View.GONE : View.VISIBLE);
@@ -196,8 +218,13 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
             if (convertView == null) {
                 convertView = inflater.inflate(mItemResId, null);
             }
+            boolean isDarkMode = false;
+            if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                    == Configuration.UI_MODE_NIGHT_YES) {
+                isDarkMode = true;
+            }
             ((ImageView) convertView.findViewById(R.id.color_icon))
-                    .setImageDrawable(getItem(position).getDrawable());
+                    .setImageDrawable(getItem(position).getDrawable(isDarkMode));
             ((TextView) convertView.findViewById(R.id.color_label))
                     .setText(getItem(position).getLabel());
 
@@ -223,7 +250,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         return colors;
     }
 
-    private static class Color {
+    private class Color {
 
         private String mLabel;
         private int mColor;
@@ -248,8 +275,15 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
             return mColor;
         }
 
-        private ShapeDrawable getDrawable() {
+        private ShapeDrawable getDrawable(boolean isDarkMode) {
+            if (isDarkMode) {
+                mDrawable.getPaint().setColor(getDarkColor(mColor));
+            }
             return mDrawable;
         }
+    }
+
+    private int getDarkColor(int lightColor) {
+        return mLightDarkMap.getOrDefault(lightColor, lightColor);
     }
 }

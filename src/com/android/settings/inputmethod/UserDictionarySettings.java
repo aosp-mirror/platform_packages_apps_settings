@@ -104,6 +104,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getActivity().setTitle(R.string.user_dict_settings_title);
         // Show the language as a subtitle of the action bar
         final ActionBar actionBar = getActivity().getActionBar();
         if (actionBar != null) {

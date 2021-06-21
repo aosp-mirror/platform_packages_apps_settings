@@ -112,7 +112,7 @@ public class LockAfterTimeoutPreferenceController extends AbstractPreferenceCont
                     mDPM.getMaximumTimeToLock(null /* admin */, UserHandle.myUserId());
             final long displayTimeout = Math.max(0,
                     Settings.System.getInt(mContext.getContentResolver(), SCREEN_OFF_TIMEOUT, 0));
-            // This setting is a slave to display timeout when a device policy is enforced.
+            // This setting is a secondary to display timeout when a device policy is enforced.
             // As such, maxLockTimeout = adminTimeout - displayTimeout.
             // If there isn't enough time, shows "immediately" setting.
             final long maxTimeout = Math.max(0, adminTimeout - displayTimeout);

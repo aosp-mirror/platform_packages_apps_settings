@@ -30,7 +30,7 @@ import androidx.preference.Preference.OnPreferenceClickListener;
 
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settingslib.widget.apppreference.AppPreference;
+import com.android.settingslib.widget.AppPreference;
 
 public class AccountTypePreference extends AppPreference implements OnPreferenceClickListener {
     /**
