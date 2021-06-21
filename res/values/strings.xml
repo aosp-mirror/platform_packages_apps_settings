@@ -6869,7 +6869,11 @@
     <!-- Label for button to uninstall all certificates installed by the credential management app [CHAR LIMIT=30] -->
     <string name="uninstall_certs_credential_management_app">Uninstall certificates</string>
     <!-- Label for button to remove the credential management app [CHAR LIMIT=30] -->
-    <string name="remove_credential_management_app">Remove</string>
+    <string name="remove_credential_management_app">Remove app</string>
+    <!-- Dialog title for button to remove the credential management app [CHAR LIMIT=30] -->
+    <string name="remove_credential_management_app_dialog_title">Remove this app?</string>
+    <!-- Dialog message for button to remove the credential management app [CHAR LIMIT=NONE] -->
+    <string name="remove_credential_management_app_dialog_message">This app won\u2019t manage certificates, but it will stay on your device. Any certificates installed by the app will be uninstalled.</string>
     <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
     <plurals name="number_of_urls">
         <item quantity="one"><xliff:g id="number">%d</xliff:g> URL</item>
@@ -7491,7 +7495,7 @@
     <!-- Button label for enabling a system CA certificate. -->
     <string name="trusted_credentials_enable_label">Enable</string>
     <!-- Button label for removing a user CA certificate. -->
-    <string name="trusted_credentials_remove_label">Remove</string>
+    <string name="trusted_credentials_remove_label">Uninstall</string>
     <!-- Button label for trusting a user CA certificate. -->
     <string name="trusted_credentials_trust_label">Trust</string>
     <!-- Alert dialog confirmation when enabling a system CA certificate. -->
