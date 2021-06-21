@@ -18,6 +18,7 @@ package com.android.settings.biometrics.face;
 
 import static android.hardware.biometrics.BiometricAuthenticator.TYPE_FACE;
 
+import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,8 +30,6 @@ import com.android.settings.R;
 
 /**
  * Displays parental consent information for face authentication.
- *
- * TODO (b/188847063): add new metrics category
  */
 public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
 
@@ -102,5 +101,10 @@ public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
     @Override
     protected int getHeaderResDefault() {
         return R.string.security_settings_face_enroll_consent_introduction_title;
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return SettingsEnums.FACE_PARENTAL_CONSENT;
     }
 }

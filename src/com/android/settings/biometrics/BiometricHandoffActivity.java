@@ -70,7 +70,6 @@ public class BiometricHandoffActivity extends BiometricEnrollBase {
 
     @Override
     public int getMetricsCategory() {
-        // TODO (b/188847063): add new category
-        return SettingsEnums.BIOMETRIC_ENROLL_ACTIVITY;
+        return SettingsEnums.BIOMETRIC_CONSENT_PARENT_TO_CHILD;
     }
 }
