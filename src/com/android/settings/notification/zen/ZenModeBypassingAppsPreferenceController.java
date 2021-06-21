@@ -3,7 +3,7 @@ package com.android.settings.notification.zen;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.content.Context;
-import android.icu.text.ListFormatter;
+import android.icu.text.MessageFormat;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -21,7 +21,10 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -119,29 +122,23 @@ public class ZenModeBypassingAppsPreferenceController extends AbstractZenModePre
         }
 
         final int numAppsBypassingDnd = appsBypassingDnd.size();
-        if (numAppsBypassingDnd == 0) {
-            mSummary = mContext.getResources().getString(
-                    R.string.zen_mode_bypassing_apps_subtext_none);
-            refreshSummary(mPreference);
-            return;
+        String[] appsBypassingDndArr = appsBypassingDnd.toArray(new String[numAppsBypassingDnd]);
+        MessageFormat msgFormat = new MessageFormat(
+                mContext.getString(R.string.zen_mode_bypassing_apps_subtext),
+                Locale.getDefault());
+        Map<String, Object> args = new HashMap<>();
+        args.put("count", numAppsBypassingDnd);
+        if (numAppsBypassingDnd >= 1) {
+            args.put("app_1", appsBypassingDndArr[0]);
+            if (numAppsBypassingDnd >= 2) {
+                args.put("app_2", appsBypassingDndArr[1]);
+                if (numAppsBypassingDnd == 3) {
+                    args.put("app_3", appsBypassingDndArr[2]);
+                }
+            }
         }
 
-        List<String> displayAppsBypassing = new ArrayList<>();
-        if (numAppsBypassingDnd <= 2) {
-            displayAppsBypassing.addAll(appsBypassingDnd);
-        } else {
-            String[] appsBypassingDndArr =
-                    appsBypassingDnd.toArray(new String[numAppsBypassingDnd]);
-            displayAppsBypassing.add(appsBypassingDndArr[0]);
-            displayAppsBypassing.add(appsBypassingDndArr[1]);
-            displayAppsBypassing.add(mContext.getResources().getString(
-                    R.string.zen_mode_apps_bypassing_list_count,
-                    numAppsBypassingDnd - 2));
-        }
-        mSummary = mContext.getResources().getQuantityString(
-                R.plurals.zen_mode_bypassing_apps_subtext,
-                numAppsBypassingDnd,
-                ListFormatter.getInstance().format(displayAppsBypassing));
+        mSummary = msgFormat.format(args);
         refreshSummary(mPreference);
     }
 

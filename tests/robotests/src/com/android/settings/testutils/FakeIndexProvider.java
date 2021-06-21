@@ -29,6 +29,12 @@ public class FakeIndexProvider implements Indexable {
 
     public static final String KEY = "TestKey";
 
+    /**
+     * The fake SearchIndexProvider. Note that the use of location_settings below implies that tests
+     * using this should be using the res/xml-mcc999/location_settings.xml or
+     * res/xml-mcc998/location_settings.xml. Annotate tests with
+     * {@code @Config(qualifiers = "mcc999")}.
+     */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.location_settings) {
 

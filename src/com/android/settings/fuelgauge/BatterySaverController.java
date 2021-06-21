@@ -35,17 +35,27 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 
+/**
+ * Controller to update the battery saver entry preference.
+ */
 public class BatterySaverController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
     private static final String KEY_BATTERY_SAVER = "battery_saver_summary";
     private final BatterySaverReceiver mBatteryStateChangeReceiver;
     private final PowerManager mPowerManager;
     private Preference mBatterySaverPref;
+    private final ContentObserver mObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange) {
+            updateSummary();
+        }
+    };
 
     public BatterySaverController(Context context) {
         super(context, KEY_BATTERY_SAVER);
 
-        mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        mPowerManager = mContext.getSystemService(PowerManager.class);
         mBatteryStateChangeReceiver = new BatterySaverReceiver(context);
         mBatteryStateChangeReceiver.setBatterySaverListener(this);
         BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
@@ -70,8 +80,8 @@ public class BatterySaverController extends BasePreferenceController
     @Override
     public void onStart() {
         mContext.getContentResolver().registerContentObserver(
-                Settings.Global.getUriFor(Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL)
-                , true, mObserver);
+                Settings.Global.getUriFor(Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL),
+                true /* notifyForDescendants */, mObserver);
 
         mBatteryStateChangeReceiver.setListening(true);
         updateSummary();
@@ -85,37 +95,31 @@ public class BatterySaverController extends BasePreferenceController
 
     @Override
     public CharSequence getSummary() {
-        final ContentResolver resolver = mContext.getContentResolver();
         final boolean isPowerSaveOn = mPowerManager.isPowerSaveMode();
-        final int percent = Settings.Global.getInt(resolver,
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-        final int mode = Settings.Global.getInt(resolver,
-                Global.AUTOMATIC_POWER_SAVE_MODE, PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         if (isPowerSaveOn) {
             return mContext.getString(R.string.battery_saver_on_summary);
-        } else if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE) {
-            if (percent != 0) {
-                return mContext.getString(R.string.battery_saver_off_scheduled_summary,
-                        Utils.formatPercentage(percent));
-            } else {
-                return mContext.getString(R.string.battery_saver_off_summary);
-            }
+        }
+
+        final ContentResolver resolver = mContext.getContentResolver();
+        final int mode = Settings.Global.getInt(resolver,
+                Global.AUTOMATIC_POWER_SAVE_MODE, PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
+        if (mode == PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE) {
+            final int percent = Settings.Global.getInt(resolver,
+                    Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
+            return percent != 0 ?
+                    mContext.getString(R.string.battery_saver_off_scheduled_summary,
+                            Utils.formatPercentage(percent)) :
+                    mContext.getString(R.string.battery_saver_off_summary);
         } else {
-            return mContext.getString(R.string.battery_saver_auto_routine);
+            return mContext.getString(R.string.battery_saver_pref_auto_routine_summary);
         }
     }
 
     private void updateSummary() {
-        mBatterySaverPref.setSummary(getSummary());
-    }
-
-    private final ContentObserver mObserver = new ContentObserver(
-            new Handler(Looper.getMainLooper())) {
-        @Override
-        public void onChange(boolean selfChange) {
-            updateSummary();
+        if (mBatterySaverPref != null) {
+            mBatterySaverPref.setSummary(getSummary());
         }
-    };
+    }
 
     @Override
     public void onPowerSaveModeChanged() {

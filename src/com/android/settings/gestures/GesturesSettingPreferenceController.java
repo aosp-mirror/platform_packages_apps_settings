@@ -16,15 +16,11 @@
 
 package com.android.settings.gestures;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
-import android.provider.Settings;
-import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.android.settings.R;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -82,34 +78,5 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
                 .setConfig(ambientDisplayConfiguration));
         controllers.add(new PreventRingingParentPreferenceController(context, FAKE_PREF_KEY));
         return controllers;
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        if (!mFeatureProvider.isSensorAvailable(mContext)) {
-            return "";
-        }
-        final ContentResolver contentResolver = mContext.getContentResolver();
-        final boolean assistGestureEnabled = Settings.Secure.getInt(
-                contentResolver, Settings.Secure.ASSIST_GESTURE_ENABLED, 1) != 0;
-        final boolean assistGestureSilenceEnabled = Settings.Secure.getInt(
-                contentResolver, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 1) != 0;
-        final boolean sensorSupported = mFeatureProvider.isSupported(mContext);
-
-        final CharSequence awareSummary = mAwareFeatureProvider.getGestureSummary(mContext,
-                sensorSupported, assistGestureEnabled, assistGestureSilenceEnabled);
-        if (!TextUtils.isEmpty(awareSummary)) {
-            return awareSummary;
-        }
-
-        if (sensorSupported && assistGestureEnabled) {
-            return mContext.getText(
-                    R.string.language_input_gesture_summary_on_with_assist);
-        }
-        if (assistGestureSilenceEnabled) {
-            return mContext.getText(
-                    R.string.language_input_gesture_summary_on_non_assist);
-        }
-        return mContext.getText(R.string.language_input_gesture_summary_off);
     }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/emergency_gesture_screen_title">
+
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="gesture_emergency_button_switch_bar"
+        app:controller="com.android.settings.emergency.EmergencyGesturePreferenceController"/>
+
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/emergency_gesture_screen_summary"
+        app:allowDividerAbove="false"/>
+
+    <SwitchPreference
+        android:key="emergency_gesture_sound"
+        android:icon="@drawable/ic_hearing"
+        android:title="@string/emergency_gesture_sound_setting_title"
+        android:summary="@string/emergency_gesture_sound_setting_summary"
+        app:keywords="@string/keywords_gesture"
+        app:controller="com.android.settings.emergency.EmergencyGestureSoundPreferenceController"/>
+    <PreferenceCategory
+        android:key="emergency_gesture_notify_for_help"
+        android:title="@string/emergency_gesture_category_call_for_help_title">
+        <com.android.settings.emergency.EmergencyGestureNumberOverridePreference
+            android:key="emregency_gesture_number_override"
+            android:title="@string/emergency_gesture_call_for_help_title"
+            android:summary="@string/summary_placeholder"
+            android:icon="@drawable/ic_call_grey_24dp"
+            android:dialogTitle="@string/emergency_gesture_call_for_help_dialog_title"
+            android:dialogLayout="@layout/emergency_gesture_number_override_dialog"
+            android:positiveButtonText="@string/save"
+            app:controller="com.android.settings.emergency.EmergencyGestureNumberOverridePreferenceController"/>
+    </PreferenceCategory>
+</PreferenceScreen>

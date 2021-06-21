@@ -78,7 +78,7 @@ public class NotificationHistoryAdapter extends
         holder.setTitle(hn.getTitle());
         holder.setSummary(hn.getText());
         holder.setPostedTime(hn.getPostedTimeMs());
-        holder.itemView.setOnClickListener(v -> {
+        final View.OnClickListener onClick = v -> {
             mUiEventLogger.logWithPosition(NotificationHistoryActivity.NotificationHistoryEvent
                     .NOTIFICATION_HISTORY_OLDER_ITEM_CLICK, hn.getUid(), hn.getPackage(), position);
             Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
@@ -87,6 +87,11 @@ public class NotificationHistoryAdapter extends
                     .putExtra(EXTRA_CONVERSATION_ID, hn.getConversationId());
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             holder.itemView.getContext().startActivityAsUser(intent, UserHandle.of(hn.getUserId()));
+        };
+        holder.itemView.setOnClickListener(onClick);
+        holder.itemView.setOnLongClickListener(l -> {
+            onClick.onClick(l);
+            return true;
         });
         holder.itemView.setAccessibilityDelegate(new View.AccessibilityDelegate() {
             @Override

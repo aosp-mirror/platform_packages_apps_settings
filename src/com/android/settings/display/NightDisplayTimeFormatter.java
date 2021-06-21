@@ -17,8 +17,8 @@
 package com.android.settings.display;
 
 import android.content.Context;
-
 import android.hardware.display.ColorDisplayManager;
+
 import com.android.settings.R;
 
 import java.text.DateFormat;
@@ -43,13 +43,6 @@ public class NightDisplayTimeFormatter {
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
         return mTimeFormatter.format(c.getTime());
-    }
-
-    public String getAutoModeTimeSummary(Context context, ColorDisplayManager manager) {
-        final int summaryFormatResId =
-                manager.isNightDisplayActivated() ? R.string.night_display_summary_on
-                        : R.string.night_display_summary_off;
-        return context.getString(summaryFormatResId, getAutoModeSummary(context, manager));
     }
 
     public String getAutoModeSummary(Context context, ColorDisplayManager manager) {

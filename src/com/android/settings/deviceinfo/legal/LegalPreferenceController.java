@@ -27,7 +27,6 @@ import com.android.settings.core.BasePreferenceController;
 
 import java.util.List;
 
-
 public abstract class LegalPreferenceController extends BasePreferenceController {
     private final PackageManager mPackageManager;
     private Preference mPreference;

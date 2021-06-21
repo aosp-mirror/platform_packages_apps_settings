@@ -40,6 +40,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -185,12 +186,12 @@ public class NetworkSelectSettings extends DashboardFragment {
 
             mRequestIdManualNetworkSelect = getNewRequestId();
             mWaitingForNumberOfScanResults = MIN_NUMBER_OF_SCAN_REQUIRED;
-            final String operatorNumeric = mSelectedPreference.getOperatorNumeric();
+            final OperatorInfo operator = mSelectedPreference.getOperatorInfo();
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Message msg = mHandler.obtainMessage(
                         EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE);
                 msg.obj = mTelephonyManager.setNetworkSelectionModeManual(
-                        operatorNumeric, true /* persistSelection */);
+                        operator, true /* persistSelection */);
                 msg.sendToTarget();
             });
         }
@@ -223,9 +224,13 @@ public class NetworkSelectSettings extends DashboardFragment {
                     setProgressBarVisible(false);
                     getPreferenceScreen().setEnabled(true);
 
-                    mSelectedPreference.setSummary(isSucceed
-                            ? R.string.network_connected
-                            : R.string.network_could_not_connect);
+                    if (mSelectedPreference != null) {
+                        mSelectedPreference.setSummary(isSucceed
+                                ? R.string.network_connected
+                                : R.string.network_could_not_connect);
+                    } else {
+                        Log.e(TAG, "No preference to update!");
+                    }
                     break;
                 case EVENT_NETWORK_SCAN_RESULTS:
                     final List<CellInfo> results = (List<CellInfo>) msg.obj;
@@ -338,16 +343,6 @@ public class NetworkSelectSettings extends DashboardFragment {
                     mPreferenceCategory.getPreference(numberOfPreferences));
         }
 
-        // update selected preference instance by index
-        for (int index = 0; index < mCellInfoList.size(); index++) {
-            final CellInfo cellInfo = mCellInfoList.get(index);
-
-            if ((mSelectedPreference != null) && mSelectedPreference.isSameCell(cellInfo)) {
-                mSelectedPreference = (NetworkOperatorPreference)
-                        (mPreferenceCategory.getPreference(index));
-            }
-        }
-
         // update the content of preference
         NetworkOperatorPreference connectedPref = null;
         for (int index = 0; index < mCellInfoList.size(); index++) {
@@ -381,6 +376,16 @@ public class NetworkSelectSettings extends DashboardFragment {
             }
         }
 
+        // update selected preference instance by index
+        for (int index = 0; index < mCellInfoList.size(); index++) {
+            final CellInfo cellInfo = mCellInfoList.get(index);
+
+            if ((mSelectedPreference != null) && mSelectedPreference.isSameCell(cellInfo)) {
+                mSelectedPreference = (NetworkOperatorPreference)
+                        (mPreferenceCategory.getPreference(index));
+            }
+        }
+
         return connectedPref;
     }
 
@@ -400,25 +405,39 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (mTelephonyManager.getDataState() == mTelephonyManager.DATA_CONNECTED) {
             // Try to get the network registration states
             final ServiceState ss = mTelephonyManager.getServiceState();
+            if (ss == null) {
+                return;
+            }
             final List<NetworkRegistrationInfo> networkList =
                     ss.getNetworkRegistrationInfoListForTransportType(
                             AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
             if (networkList == null || networkList.size() == 0) {
                 return;
             }
+            // Due to the aggregation of cell between carriers, it's possible to get CellIdentity
+            // containing forbidden PLMN.
+            // Getting current network from ServiceState is no longer a good idea.
+            // Add an additional rule to avoid from showing forbidden PLMN to the user.
+            if (mForbiddenPlmns == null) {
+                updateForbiddenPlmns();
+            }
             for (NetworkRegistrationInfo regInfo : networkList) {
                 final CellIdentity cellIdentity = regInfo.getCellIdentity();
-                if (cellIdentity != null) {
-                    final NetworkOperatorPreference pref = new NetworkOperatorPreference(
-                            getPrefContext(), cellIdentity, mForbiddenPlmns, mShow4GForLTE);
-                    pref.setSummary(R.string.network_connected);
-                    // Update the signal strength icon, since the default signalStrength value
-                    // would be zero
-                    // (it would be quite confusing why the connected network has no signal)
-                    pref.setIcon(SignalStrength.NUM_SIGNAL_STRENGTH_BINS - 1);
-                    mPreferenceCategory.addPreference(pref);
-                    break;
+                if (cellIdentity == null) {
+                    continue;
                 }
+                final NetworkOperatorPreference pref = new NetworkOperatorPreference(
+                        getPrefContext(), cellIdentity, mForbiddenPlmns, mShow4GForLTE);
+                if (pref.isForbiddenNetwork()) {
+                    continue;
+                }
+                pref.setSummary(R.string.network_connected);
+                // Update the signal strength icon, since the default signalStrength value
+                // would be zero
+                // (it would be quite confusing why the connected network has no signal)
+                pref.setIcon(SignalStrength.NUM_SIGNAL_STRENGTH_BINS - 1);
+                mPreferenceCategory.addPreference(pref);
+                break;
             }
         }
     }

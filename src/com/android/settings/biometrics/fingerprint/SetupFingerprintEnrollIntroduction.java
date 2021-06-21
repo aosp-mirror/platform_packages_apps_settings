@@ -18,21 +18,19 @@ package com.android.settings.biometrics.fingerprint;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.os.storage.StorageManager;
 import android.view.View;
-import android.widget.TextView;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
-import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
 import com.android.settings.password.SetupSkipDialog;
 
@@ -59,28 +57,23 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     }
 
     @Override
+    int getNegativeButtonTextId() {
+        return R.string.security_settings_face_enroll_introduction_cancel;
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_LOCK_SCREEN_PRESENT, mAlreadyHadLockScreenSetup);
     }
 
     @Override
-    protected Intent getChooseLockIntent() {
-        Intent intent = new Intent(this, SetupChooseLockGeneric.class);
-
-        if (StorageManager.isFileEncryptedNativeOrEmulated()) {
-            intent.putExtra(
-                    LockPatternUtils.PASSWORD_TYPE_KEY,
-                    DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
-            intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, true);
-        }
-        SetupWizardUtils.copySetupExtras(getIntent(), intent);
-        return intent;
-    }
-
-    @Override
     protected Intent getEnrollingIntent() {
         final Intent intent = new Intent(this, SetupFingerprintEnrollFindSensor.class);
+        if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+                    BiometricUtils.getGatekeeperPasswordHandle(getIntent()));
+        }
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
     }
@@ -88,10 +81,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     @Override
     protected void initViews() {
         super.initViews();
-
-        TextView description = (TextView) findViewById(R.id.sud_layout_description);
-        description.setText(
-                R.string.security_settings_fingerprint_enroll_introduction_message_setup);
 
         FooterButton nextButton = getNextButton();
         nextButton.setText(
@@ -155,6 +144,11 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
             setResult(SetupSkipDialog.RESULT_SKIP);
             finish();
         }
+    }
+
+    @Override
+    protected void onSkipButtonClick(View view) {
+        onCancelButtonClick(view);
     }
 
     /**

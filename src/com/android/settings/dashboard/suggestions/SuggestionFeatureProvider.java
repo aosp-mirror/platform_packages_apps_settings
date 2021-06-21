@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 /** Interface should be implemented if you have added new suggestions */
 public interface SuggestionFeatureProvider {
@@ -42,4 +43,9 @@ public interface SuggestionFeatureProvider {
      * Returns the {@link SharedPreferences} that holds metadata for suggestions.
      */
     SharedPreferences getSharedPrefs(Context context);
+
+    /**
+     * Returns the class of {@link Fragment} that supports contextual suggestion.
+     */
+    Class<? extends Fragment> getContextualSuggestionFragment();
 }

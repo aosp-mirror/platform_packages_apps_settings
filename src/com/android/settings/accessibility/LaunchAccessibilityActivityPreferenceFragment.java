@@ -30,45 +30,41 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.Nullable;
-import androidx.preference.SwitchPreference;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** Fragment for providing open activity button. */
-public class LaunchAccessibilityActivityPreferenceFragment extends
-        ToggleFeaturePreferenceFragment {
+public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeaturePreferenceFragment {
     private static final String TAG = "LaunchA11yActivity";
     private static final String EMPTY_STRING = "";
+    protected static final String KEY_LAUNCH_PREFERENCE = "launch_preference";
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        mToggleServiceDividerSwitchPreference.setSwitchVisibility(View.GONE);
-    }
+        // Init new preference to replace the switch preference instead.
+        initLaunchPreference();
+        removePreference(KEY_USE_SERVICE_PREFERENCE);
+        return view;
+    };
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        logAccessibilityServiceEnabled(mComponentName, enabled);
-        launchShortcutTargetActivity(getPrefContext().getDisplayId(), mComponentName);
-    }
-
-    @Override
-    protected void onInstallSwitchPreferenceToggleSwitch() {
-        super.onInstallSwitchPreferenceToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
-            final boolean checked = ((DividerSwitchPreference) preference).isChecked();
-            onPreferenceToggled(mPreferenceKey, checked);
-            return false;
-        });
+        // Do nothing.
     }
 
     @Override
@@ -82,10 +78,12 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
         // Settings animated image.
         final int animatedImageRes = arguments.getInt(
                 AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES);
-        mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-                .authority(mComponentName.getPackageName())
-                .appendPath(String.valueOf(animatedImageRes))
-                .build();
+        if (animatedImageRes > 0) {
+            mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                    .authority(mComponentName.getPackageName())
+                    .appendPath(String.valueOf(animatedImageRes))
+                    .build();
+        }
 
         // Settings html description.
         mHtmlDescription = arguments.getCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION);
@@ -95,12 +93,6 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
                 AccessibilitySettings.EXTRA_SETTINGS_TITLE);
         mSettingsIntent = TextUtils.isEmpty(settingsTitle) ? null : getSettingsIntent(arguments);
         mSettingsTitle = (mSettingsIntent == null) ? null : settingsTitle;
-    }
-
-    @Override
-    public void onSettingsClicked(ShortcutPreference preference) {
-        super.onSettingsClicked(preference);
-        showDialog(DialogEnums.EDIT_SHORTCUT);
     }
 
     @Override
@@ -114,16 +106,6 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
         // Do not call super. We don't want to see the "Help & feedback" option on this page so as
         // not to confuse users who think they might be able to send feedback about a specific
         // accessibility service from this page.
-    }
-
-    @Override
-    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
-        final AccessibilityShortcutInfo info = getAccessibilityShortcutInfo();
-        final String switchBarText = (info == null) ? EMPTY_STRING : getString(
-                R.string.accessibility_service_master_open_title,
-                info.getActivityInfo().loadLabel(getPackageManager()));
-
-        switchPreference.setTitle(switchBarText);
     }
 
     // IMPORTANT: Refresh the info since there are dynamically changing capabilities.
@@ -141,6 +123,34 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
             }
         }
         return null;
+    }
+
+    /** Customizes the order by preference key. */
+    protected List<String> getPreferenceOrderList() {
+        final List<String> lists = new ArrayList<>();
+        lists.add(KEY_ANIMATED_IMAGE);
+        lists.add(KEY_LAUNCH_PREFERENCE);
+        lists.add(KEY_GENERAL_CATEGORY);
+        lists.add(KEY_HTML_DESCRIPTION_PREFERENCE);
+        return lists;
+    }
+
+    private void initLaunchPreference() {
+        final Preference launchPreference = new Preference(getPrefContext());
+        launchPreference.setKey(KEY_LAUNCH_PREFERENCE);
+
+        final AccessibilityShortcutInfo info = getAccessibilityShortcutInfo();
+        final String switchBarText = (info == null) ? EMPTY_STRING : getString(
+                R.string.accessibility_service_primary_open_title,
+                info.getActivityInfo().loadLabel(getPackageManager()));
+        launchPreference.setTitle(switchBarText);
+
+        launchPreference.setOnPreferenceClickListener(preference -> {
+            logAccessibilityServiceEnabled(mComponentName, /* enabled= */ true);
+            launchShortcutTargetActivity(getPrefContext().getDisplayId(), mComponentName);
+            return true;
+        });
+        getPreferenceScreen().addPreference(launchPreference);
     }
 
     private void launchShortcutTargetActivity(int displayId, ComponentName name) {

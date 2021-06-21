@@ -21,13 +21,16 @@ import static com.android.settingslib.search.SearchIndexable.MOBILE;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -91,6 +94,28 @@ public class TopLevelSettings extends DashboardFragment implements
                 .setTitleRes(-1)
                 .launch();
         return true;
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+        final PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
+        // Tint the homepage icons
+        final int tintColor = Utils.getHomepageIconColor(getContext());
+        final int count = screen.getPreferenceCount();
+        for (int i = 0; i < count; i++) {
+            final Preference preference = screen.getPreference(i);
+            if (preference == null) {
+                break;
+            }
+            final Drawable icon = preference.getIcon();
+            if (icon != null) {
+                icon.setTint(tintColor);
+            }
+        }
     }
 
     @Override

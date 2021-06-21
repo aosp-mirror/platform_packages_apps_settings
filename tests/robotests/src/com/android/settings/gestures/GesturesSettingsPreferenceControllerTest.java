@@ -20,20 +20,9 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.provider.Settings;
 
-import androidx.preference.Preference;
-
-import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -44,7 +33,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -55,8 +43,6 @@ public class GesturesSettingsPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
-    @Mock
-    private Preference mPreference;
 
     private GesturesSettingPreferenceController mController;
 
@@ -92,44 +78,5 @@ public class GesturesSettingsPreferenceControllerTest {
                 new ArrayList<AbstractPreferenceController>());
 
         assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    @Config(shadows = ShadowSecureSettings.class)
-    public void updateState_assistSupported_shouldSetToAssistGestureStatus() {
-        final FakeFeatureFactory featureFactory =
-                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
-        when(featureFactory.assistGestureFeatureProvider.isSupported(any(Context.class)))
-                .thenReturn(true);
-        when(featureFactory.assistGestureFeatureProvider.isSensorAvailable(any(Context.class)))
-                .thenReturn(true);
-
-        final ContentResolver cr = mActivity.getContentResolver();
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 0);
-        mController.updateState(mPreference);
-        verify(mActivity).getText(R.string.language_input_gesture_summary_off);
-
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 0);
-        mController.updateState(mPreference);
-        verify(mActivity).getText(R.string.language_input_gesture_summary_on_with_assist);
-
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
-        Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 1);
-        mController.updateState(mPreference);
-        verify(mActivity).getText(R.string.language_input_gesture_summary_on_non_assist);
-    }
-
-    @Test
-    @Config(shadows = ShadowSecureSettings.class)
-    public void updateState_sensorNotAvailable_shouldSetToEmptyStatus() {
-        final FakeFeatureFactory featureFactory =
-                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
-        when(featureFactory.assistGestureFeatureProvider.isSensorAvailable(any(Context.class)))
-                .thenReturn(false);
-
-        mController.updateState(mPreference);
-        verify(mPreference).setSummary("");
     }
 }

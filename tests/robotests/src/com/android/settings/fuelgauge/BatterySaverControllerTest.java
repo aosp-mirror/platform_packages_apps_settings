@@ -89,6 +89,27 @@ public class BatterySaverControllerTest {
     }
 
     @Test
+    public void getSummary_batterySaverOffButScheduledZeroPercent_showSummaryOff() {
+        when(mPowerManager.isPowerSaveMode()).thenReturn(false);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
+
+        assertThat(mBatterySaverController.getSummary()).isEqualTo("Off");
+    }
+
+    @Test
+    public void getSummary_batterySaverOffButScheduledBasedOnRoutine_showSummaryBasedOnRoutine() {
+        when(mPowerManager.isPowerSaveMode()).thenReturn(false);
+        Settings.Global.putInt(
+                mContext.getContentResolver(),
+                Settings.Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
+
+        assertThat(mBatterySaverController.getSummary()).
+                isEqualTo("Will turn on based on your routine");
+    }
+
+    @Test
     public void getSummary_batterySaverOff_showSummaryOff() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 

@@ -16,11 +16,14 @@
 
 package com.android.settings.wifi;
 
+import static com.android.settings.wifi.WifiConfigController.PRIVACY_SPINNER_INDEX_DEVICE_MAC;
+import static com.android.settings.wifi.WifiConfigController.PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC;
+
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -30,8 +33,9 @@ import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
-import android.os.ServiceSpecificException;
-import android.security.KeyStore;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -42,8 +46,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
 import com.android.settingslib.wifi.AccessPoint;
 
 import org.junit.Before;
@@ -56,6 +60,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowInputMethodManager;
+import org.robolectric.shadows.ShadowSubscriptionManager;
+
+import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowConnectivityManager.class)
@@ -67,10 +74,9 @@ public class WifiConfigControllerTest {
     private Context mContext;
     @Mock
     private AccessPoint mAccessPoint;
-    @Mock
-    private KeyStore mKeyStore;
     private View mView;
     private Spinner mHiddenSettingsSpinner;
+    private ShadowSubscriptionManager mShadowSubscriptionManager;
 
     public WifiConfigController mController;
     private static final String HEX_PSK = "01234567012345670123456701234567012345670123456701234567"
@@ -95,6 +101,7 @@ public class WifiConfigControllerTest {
         final Spinner ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
         mHiddenSettingsSpinner = mView.findViewById(R.id.hidden_settings);
         ipSettingsSpinner.setSelection(DHCP);
+        mShadowSubscriptionManager = shadowOf(mContext.getSystemService(SubscriptionManager.class));
 
         mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
                 WifiConfigUiBase.MODE_CONNECT);
@@ -219,6 +226,35 @@ public class WifiConfigControllerTest {
     }
 
     @Test
+    public void isSubmittable_caCertWithoutDomain_shouldReturnFalse() {
+        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+                WifiConfigUiBase.MODE_CONNECT);
+        mView.findViewById(R.id.l_ca_cert).setVisibility(View.VISIBLE);
+        final Spinner eapCaCertSpinner = mView.findViewById(R.id.ca_cert);
+        eapCaCertSpinner.setAdapter(mController.getSpinnerAdapter(new String[]{"certificate"}));
+        eapCaCertSpinner.setSelection(0);
+        mView.findViewById(R.id.l_domain).setVisibility(View.VISIBLE);
+
+        assertThat(mController.isSubmittable()).isFalse();
+    }
+
+    @Test
+    public void isSubmittable_caCertWithDomain_shouldReturnTrue() {
+        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+                WifiConfigUiBase.MODE_CONNECT);
+        mView.findViewById(R.id.l_ca_cert).setVisibility(View.VISIBLE);
+        final Spinner eapCaCertSpinner = mView.findViewById(R.id.ca_cert);
+        eapCaCertSpinner.setAdapter(mController.getSpinnerAdapter(new String[]{"certificate"}));
+        eapCaCertSpinner.setSelection(0);
+        mView.findViewById(R.id.l_domain).setVisibility(View.VISIBLE);
+        ((TextView) mView.findViewById(R.id.domain)).setText("fakeDomain");
+
+        assertThat(mController.isSubmittable()).isTrue();
+    }
+
+    @Test
     public void getSignalString_notReachable_shouldHaveNoSignalString() {
         when(mAccessPoint.isReachable()).thenReturn(false);
 
@@ -226,27 +262,11 @@ public class WifiConfigControllerTest {
     }
 
     @Test
-    public void loadCertificates_keyStoreListFail_shouldNotCrash() {
-        // Set up
-        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
-        when(mKeyStore.list(anyString()))
-            .thenThrow(new ServiceSpecificException(-1, "permission error"));
-
-        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
-              WifiConfigUiBase.MODE_CONNECT);
-
-        // Verify that the EAP method menu is visible.
-        assertThat(mView.findViewById(R.id.eap).getVisibility()).isEqualTo(View.VISIBLE);
-        // No Crash
-    }
-
-    @Test
     public void loadCertificates_undesiredCertificates_shouldNotLoadUndesiredCertificates() {
         final Spinner spinner = new Spinner(mContext);
-        when(mKeyStore.list(anyString())).thenReturn(WifiConfigController.UNDESIRED_CERTIFICATES);
 
         mController.loadCertificates(spinner,
-                "prefix",
+                Arrays.asList(WifiConfigController.UNDESIRED_CERTIFICATES),
                 "doNotProvideEapUserCertString",
                 false /* showMultipleCerts */,
                 false /* showUsePreinstalledCertOption */);
@@ -371,24 +391,15 @@ public class WifiConfigControllerTest {
             super(parent, view, accessPoint, mode, wifiManager);
         }
 
-        @Override
-        boolean isSplitSystemUser() {
-            return false;
-        }
-
-        @Override
-        KeyStore getKeyStore() { return mKeyStore; }
     }
 
     @Test
-    public void loadMacRandomizedValue_shouldPersistentAsDefault() {
+    public void loadMacRandomizedValue_shouldMandomizedMacAsDefault() {
         final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
-        final int prefPersist =
-                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
-                        WifiConfiguration.RANDOMIZATION_PERSISTENT);
 
         assertThat(privacySetting.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(privacySetting.getSelectedItemPosition()).isEqualTo(prefPersist);
+        assertThat(privacySetting.getSelectedItemPosition()).isEqualTo(
+                PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC);
     }
 
     @Test
@@ -409,14 +420,12 @@ public class WifiConfigControllerTest {
         mockWifiConfig.macRandomizationSetting = macRandomizedValue;
         mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
                 WifiConfigUiBase.MODE_CONNECT);
-
         final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
-        final int expectedPrefValue =
-                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
-                        macRandomizedValue);
 
         assertThat(privacySetting.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(privacySetting.getSelectedItemPosition()).isEqualTo(expectedPrefValue);
+        assertThat(privacySetting.getSelectedItemPosition()).isEqualTo(
+                macRandomizedValue == WifiConfiguration.RANDOMIZATION_PERSISTENT
+                ? PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC : PRIVACY_SPINNER_INDEX_DEVICE_MAC);
     }
 
     @Test
@@ -427,12 +436,9 @@ public class WifiConfigControllerTest {
     }
 
     @Test
-    public void saveMacRandomizedValue_ChangedToNone_shouldGetNone() {
+    public void saveMacRandomizedValue_ChangedToDeviceMac_shouldGetNone() {
         final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
-        final int prefMacNone =
-                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
-                        WifiConfiguration.RANDOMIZATION_NONE);
-        privacySetting.setSelection(prefMacNone);
+        privacySetting.setSelection(PRIVACY_SPINNER_INDEX_DEVICE_MAC);
 
         WifiConfiguration config = mController.getConfig();
         assertThat(config.macRandomizationSetting).isEqualTo(WifiConfiguration.RANDOMIZATION_NONE);
@@ -574,5 +580,45 @@ public class WifiConfigControllerTest {
         advButton.performClick();
 
         assertThat(advButton.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void loadSims_noSim_simSpinnerDefaultNoSim() {
+        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+                WifiConfigUiBase.MODE_CONNECT);
+        final Spinner eapMethodSpinner = mock(Spinner.class);
+        when(eapMethodSpinner.getSelectedItemPosition()).thenReturn(
+                WifiConfigController2.WIFI_EAP_METHOD_SIM);
+        mController.mEapMethodSpinner = eapMethodSpinner;
+
+        mController.loadSims();
+
+        final WifiConfiguration wifiConfiguration = mController.getConfig();
+        assertThat(wifiConfiguration.carrierId).isEqualTo(TelephonyManager.UNKNOWN_CARRIER_ID);
+    }
+
+    @Test
+    public void loadSims_oneSim_simSpinnerDefaultSubscription() {
+        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
+        final SubscriptionInfo subscriptionInfo = mock(SubscriptionInfo.class);
+        final int carrierId = 6;
+        when(subscriptionInfo.getSubscriptionId()).thenReturn(carrierId);
+        when(subscriptionInfo.getDisplayName()).thenReturn("FAKE-CARRIER");
+        when(subscriptionInfo.getCarrierId()).thenReturn(carrierId);
+        when(subscriptionInfo.getCarrierName()).thenReturn("FAKE-CARRIER");
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(subscriptionInfo));
+        mShadowSubscriptionManager.setActiveSubscriptionInfoList(Arrays.asList(subscriptionInfo));
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+                WifiConfigUiBase.MODE_CONNECT);
+        final Spinner eapMethodSpinner = mock(Spinner.class);
+        when(eapMethodSpinner.getSelectedItemPosition()).thenReturn(
+                WifiConfigController2.WIFI_EAP_METHOD_SIM);
+        mController.mEapMethodSpinner = eapMethodSpinner;
+
+        mController.loadSims();
+
+        final WifiConfiguration wifiConfiguration = mController.getConfig();
+        assertThat(wifiConfiguration.carrierId).isEqualTo(carrierId);
     }
 }

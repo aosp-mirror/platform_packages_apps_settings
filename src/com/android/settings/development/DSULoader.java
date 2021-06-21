@@ -55,8 +55,6 @@ import javax.net.ssl.HttpsURLConnection;
  * also offers the flexibility to overwrite the default setting and load OEMs owned images.
  */
 public class DSULoader extends ListActivity {
-    public static final String PROPERTY_KEY_FEATURE_FLAG =
-            "persist.sys.fflag.override.settings_dynamic_system";
     private static final int Q_VNDK_BASE = 28;
     private static final int Q_OS_BASE = 10;
 
@@ -344,7 +342,6 @@ public class DSULoader extends ListActivity {
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        SystemProperties.set(PROPERTY_KEY_FEATURE_FLAG, "1");
         String dsuList = SystemProperties.get(PROPERTY_KEY_LIST);
         Slog.e(TAG, "Try to get DSU list from: " + PROPERTY_KEY_LIST);
         if (dsuList == null || dsuList.isEmpty()) {
