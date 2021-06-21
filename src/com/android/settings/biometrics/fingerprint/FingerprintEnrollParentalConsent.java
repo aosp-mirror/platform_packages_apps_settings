@@ -30,7 +30,7 @@ import com.android.settings.R;
 /**
  * Displays parental consent information for fingerprint authentication.
  *
- * TODO(b/188847063): swap strings for consent screen
+ * TODO (b/188847063): add new metrics category
  */
 public class FingerprintEnrollParentalConsent extends FingerprintEnrollIntroduction {
 
