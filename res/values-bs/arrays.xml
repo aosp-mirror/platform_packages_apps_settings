@@ -75,7 +75,7 @@
     <item msgid="3249903732481917388">"Autentifikacija…"</item>
     <item msgid="7789156794775399931">"Dobivanje IP adrese…"</item>
     <item msgid="492518447401534767">"Povezano"</item>
-    <item msgid="4322989558568666518">"Obustavljeno"</item>
+    <item msgid="4322989558568666518">"Suspendirano"</item>
     <item msgid="286164147080824297">"Prekidanje veze…"</item>
     <item msgid="1628460745311787730">"Isključen"</item>
     <item msgid="4013828218541488949">"Neuspješno"</item>
@@ -88,8 +88,8 @@
     <item msgid="3409219643606946053">"Povezivanje na mrežu <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
     <item msgid="7891463004457278422">"Autentifikacija s mrežom <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="3193388999810487137">"Dobivanje IP adrese iz mreže <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
-    <item msgid="2227930004124157952">"Povezano s mrežom <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
-    <item msgid="7104168043537022445">"Obustavljeno"</item>
+    <item msgid="2227930004124157952">"Povezano na mrežu <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="7104168043537022445">"Suspendirano"</item>
     <item msgid="2595938203187002544">"Prekidanje veze s mrežom <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="2435175968703898648">"Isključen"</item>
     <item msgid="4804573668906374228">"Neuspješno"</item>
@@ -100,9 +100,9 @@
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
   <string-array name="eap_ocsp_type">
     <item msgid="7202884222741437608">"Ne potvrđuj valjanost"</item>
-    <item msgid="5703177653586269306">"Zatraži status certifikata"</item>
-    <item msgid="326388247868439528">"Zahtijevaj status certifikata"</item>
-    <item msgid="1090956283885790552">"Zahtijevaj statuse svih nepouzdanih certifikata"</item>
+    <item msgid="5703177653586269306">"Zatraži status potvrde"</item>
+    <item msgid="326388247868439528">"Zahtijevaj status potvrde"</item>
+    <item msgid="1090956283885790552">"Zahtijevaj statuse svih nepouzdanih potvrda"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"Pritisnite dugme"</item>
@@ -171,7 +171,7 @@
   </string-array>
   <string-array name="wifi_ip_settings">
     <item msgid="6665889765350160154">"DHCP"</item>
-    <item msgid="6215795691318745695">"Statična IP adresa"</item>
+    <item msgid="6215795691318745695">"Statički"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
     <item msgid="4669222334822978847">"Ništa"</item>
@@ -215,7 +215,7 @@
     <item msgid="3441876902463317017">"GID"</item>
   </string-array>
   <string-array name="app_install_location_entries">
-    <item msgid="3771157789865587832">"Unutrašnja pohrana uređaja"</item>
+    <item msgid="3771157789865587832">"Interna pohrana uređaja"</item>
     <item msgid="5501345333507193420">"Izmjenjiva SD kartica"</item>
     <item msgid="2362840341195111674">"Neka sistem odluči"</item>
   </string-array>
@@ -233,7 +233,7 @@
     <item msgid="50701215019227883">"vibracija"</item>
     <item msgid="2690144000353492014">"čitaj kontakte"</item>
     <item msgid="3858029424955955625">"prromijeni kontakte"</item>
-    <item msgid="3439658954936709507">"čitanje zapisnika poziva"</item>
+    <item msgid="3439658954936709507">"čitaj zapisnik poziva"</item>
     <item msgid="1908944516631132130">"promijeni zapisnik poziva"</item>
     <item msgid="9066115715905100138">"čitaj kalendar"</item>
     <item msgid="1664720478157892566">"promijeni kalendar"</item>
@@ -379,16 +379,9 @@
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="923916134548435468">"Vrlo mali"</item>
     <item msgid="5738147437573674872">"Mali"</item>
-    <item msgid="3942006483573485941">"Zadano"</item>
+    <item msgid="8111006422178051129">"Normalni"</item>
     <item msgid="824386705928670045">"Veliki"</item>
     <item msgid="2790561781512874585">"Vrlo veliki"</item>
-  </string-array>
-  <string-array name="captioning_font_size_selector_summaries">
-    <item msgid="5700290209695344464">"Veoma mala veličina teksta"</item>
-    <item msgid="4400431625665186389">"Mala veličina teksta"</item>
-    <item msgid="2340994108094808362">"Zadana veličina teksta"</item>
-    <item msgid="6446684863055375405">"Velika veličina teksta"</item>
-    <item msgid="6838252010935384975">"Veoma velika veličina teksta"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
     <item msgid="70686029249840227">"Zadano"</item>
@@ -405,7 +398,7 @@
     <item msgid="3237802033158517495">"100%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="3880932435325583041">"Postavila aplikacija"</item>
+    <item msgid="4180191497452407161">"Koristi zadane postavke aplikacija"</item>
     <item msgid="8719204526359229387">"Bijelo na crnom"</item>
     <item msgid="5410164687403735103">"Crno na bijelom"</item>
     <item msgid="1119043472912497241">"Žuto na crnom"</item>
@@ -424,7 +417,7 @@
     <item msgid="6630554779981113046">"IKEv2/IPSec VPN s potvrdama"</item>
   </string-array>
   <string-array name="vpn_proxy_settings">
-    <item msgid="7165538292837266997">"Ništa"</item>
+    <item msgid="7165538292837266997">"Nema"</item>
     <item msgid="2397017538263427575">"Ručno"</item>
   </string-array>
   <string-array name="vpn_states">
@@ -458,7 +451,7 @@
     <item msgid="5777152116210127847">"Maksimalna aktivnost"</item>
     <item msgid="1834030155560727324">"Važno (u prvom planu)"</item>
     <item msgid="8494424742994426350">"Važno (u pozadini)"</item>
-    <item msgid="5099332663422156149">"Napravi sigurnosnu kopiju"</item>
+    <item msgid="5099332663422156149">"Izradi sigurnosnu kopiju"</item>
     <item msgid="7701089238529887617">"Velika težina"</item>
     <item msgid="3006466648960525485">"Usluga (pokrenuta)"</item>
     <item msgid="2253476667031759713">"Usluga (ponovno pokretanje)"</item>
@@ -470,9 +463,9 @@
     <item msgid="8186970968968646288">"Keširano (prazno)"</item>
   </string-array>
   <string-array name="color_picker">
-    <item msgid="3230992859486877963">"Plavozelena"</item>
+    <item msgid="3230992859486877963">"Teal"</item>
     <item msgid="5661027589207588703">"Plava"</item>
-    <item msgid="3795787248113275442">"Indigoplava"</item>
+    <item msgid="3795787248113275442">"Indigo"</item>
     <item msgid="6331809026622602308">"Ljubičasta"</item>
     <item msgid="6390546163902724700">"Ružičasta"</item>
     <item msgid="6618900408138432102">"Crvena"</item>
@@ -489,7 +482,7 @@
     <item msgid="9080166583718385565">"0"</item>
   </string-array>
   <string-array name="wifi_metered_entries">
-    <item msgid="3237321077949659241">"Automatski otkrij"</item>
+    <item msgid="3237321077949659241">"Detektiraj automatski"</item>
     <item msgid="3779092145391320375">"Tretiraj kao vezu s naplatom"</item>
     <item msgid="2047166446768045816">"Tretiraj kao vezu bez naplate"</item>
   </string-array>
@@ -525,7 +518,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="1091258946200124345">"Globalno"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE/WCDMA"</item>
     <item msgid="7723670142495874534">"Samo TDSCDMA"</item>
@@ -542,7 +535,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="8908263949185004366">"Globalno"</item>
+    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>
@@ -553,6 +546,11 @@
   <string-array name="cdma_subscription_choices">
     <item msgid="6242790734457941014">"RUIM/SIM"</item>
     <item msgid="8980776035119085660">"NV"</item>
+  </string-array>
+  <string-array name="preferred_network_mode_choices_world_mode">
+    <item msgid="8219021147046131771">"Globalno"</item>
+    <item msgid="5291208617720023560">"LTE/CDMA"</item>
+    <item msgid="6742002477816975742">"LTE/GSM/UMTS"</item>
   </string-array>
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (1841976293698111057) -->
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:1 (6822859933189908133) -->

@@ -64,17 +64,17 @@
   </string-array>
   <string-array name="entries_font_size">
     <item msgid="4649244712522775149">"सानो"</item>
-    <item msgid="4350318459725129464">"डिफल्ट"</item>
-    <item msgid="722959474722634030">"ठुलो"</item>
-    <item msgid="5468692832610514379">"सबैभन्दा ठुलो"</item>
+    <item msgid="4350318459725129464">"पूर्वनिर्धारित"</item>
+    <item msgid="722959474722634030">"ठूलो"</item>
+    <item msgid="5468692832610514379">"सबैभन्दा ठूलो"</item>
   </string-array>
   <string-array name="wifi_status">
     <item msgid="1201478116293383426"></item>
     <item msgid="7388036070768806193">"स्क्यान गरिँदै..."</item>
     <item msgid="1656176059757237036">"जडान हुँदै..."</item>
     <item msgid="3249903732481917388">"प्रमाणित गर्दै ..."</item>
-    <item msgid="7789156794775399931">"IP एड्रेस पत्ता लगाउँदै ..."</item>
-    <item msgid="492518447401534767">"कनेक्ट छ"</item>
+    <item msgid="7789156794775399931">"IP ठेगाना पत्ता लगाउँदै ..."</item>
+    <item msgid="492518447401534767">"जडान गरिएको"</item>
     <item msgid="4322989558568666518">"निलम्बित"</item>
     <item msgid="286164147080824297">"विच्छेदन गर्दै..."</item>
     <item msgid="1628460745311787730">"विच्छेदन भएको"</item>
@@ -87,8 +87,8 @@
     <item msgid="155483314608049961">"स्क्यान गर्दै..."</item>
     <item msgid="3409219643606946053">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>सँग जडान हुँदै..."</item>
     <item msgid="7891463004457278422">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>को साथ प्रमाणित गर्दै…"</item>
-    <item msgid="3193388999810487137">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>बाट IP एड्रेस प्राप्त गर्दै…"</item>
-    <item msgid="2227930004124157952">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> मा कनेक्ट गरिएको छ"</item>
+    <item msgid="3193388999810487137">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>बाट IP ठेगाना प्राप्त गर्दै…"</item>
+    <item msgid="2227930004124157952">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>सँग जडित"</item>
     <item msgid="7104168043537022445">"निलम्बित"</item>
     <item msgid="2595938203187002544">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>बाट विच्छेदन गर्दै..."</item>
     <item msgid="2435175968703898648">"विच्छेदन भएको"</item>
@@ -100,9 +100,9 @@
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
   <string-array name="eap_ocsp_type">
     <item msgid="7202884222741437608">"प्रमाणित नगर्नुहोस्"</item>
-    <item msgid="5703177653586269306">"सर्टिफिकेटको स्थिति माग्नुहोस्"</item>
-    <item msgid="326388247868439528">"सर्टिफिकेटको स्थिति चाहिन्छ"</item>
-    <item msgid="1090956283885790552">"सर्टिफिकेटका सबै अविश्वसनीय स्थितिहरू चाहिन्छ"</item>
+    <item msgid="5703177653586269306">"प्रमाणपत्रको स्थिति प्राप्त गर्न अनुरोध गर्नुहोस्"</item>
+    <item msgid="326388247868439528">"प्रमाणपत्रको स्थिति आवश्यक छ"</item>
+    <item msgid="1090956283885790552">"अविश्वसनीय प्रमाणपत्रका सबै स्थितिहरू आवश्यक छन्"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"Push बटन"</item>
@@ -123,7 +123,7 @@
     <item msgid="4241913314075719627">"कहिल्यै समय सकिँदैन"</item>
   </string-array>
   <string-array name="bluetooth_max_connected_audio_devices">
-    <item msgid="4792793579224104167">"प्रणालीको डिफल्ट सेटिङ प्रयोग गर्नुहोस्: <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
+    <item msgid="4792793579224104167">"प्रणालीको पूर्वनिर्धारित सेटिङ प्रयोग गर्नुहोस्: <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
     <item msgid="5818942631838356082">"१"</item>
     <item msgid="4804155564025402919">"२"</item>
     <item msgid="7123296338505723878">"३"</item>
@@ -133,7 +133,7 @@
   <string-array name="wifi_signal">
     <item msgid="199360311367724149">"कमजोर"</item>
     <item msgid="2470925506985305429">"कमजोर"</item>
-    <item msgid="8545211062334016668">"राम्रै"</item>
+    <item msgid="8545211062334016668">"ठिकठाक"</item>
     <item msgid="7468449584777730187">"राम्रो"</item>
     <item msgid="202124107702016530">"उत्कृष्ट"</item>
   </string-array>
@@ -144,7 +144,7 @@
   <string-array name="usage_stats_display_order_types">
     <item msgid="7527014644010884448">"उपयोग समय"</item>
     <item msgid="4631872897572423215">"पछिल्लो समय प्रयोग गरिएको"</item>
-    <item msgid="2647568941623179473">"एपको नाम"</item>
+    <item msgid="2647568941623179473">"अनुप्रयोगको नाम"</item>
   </string-array>
   <string-array name="wifi_eap_entries">
     <item msgid="6337816338410321026">"PEAP"</item>
@@ -174,9 +174,9 @@
     <item msgid="6215795691318745695">"स्थिर"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
-    <item msgid="4669222334822978847">"छैन"</item>
+    <item msgid="4669222334822978847">"कुनै पनि होइन"</item>
     <item msgid="6242198071587397280">"म्यानुअल"</item>
-    <item msgid="464383874780058242">"प्रोक्सी अटो-कन्फिगुरेसन"</item>
+    <item msgid="464383874780058242">"प्रोक्सी स्वतः समायोजन"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="2900892411844440682">"कुनै पनि होइन"</item>
@@ -190,7 +190,7 @@
     <item msgid="2254055042792806324">"IPv4/IPv6"</item>
   </string-array>
   <string-array name="bearer_entries">
-    <item msgid="6515855421456643076">"तोकिएको छैन"</item>
+    <item msgid="6515855421456643076">"निर्दिष्ट नभएको"</item>
     <item msgid="1922344287654584114">"LTE"</item>
     <item msgid="8438853814055082017">"HSPAP"</item>
     <item msgid="8761381586178359495">"HSPA"</item>
@@ -244,7 +244,7 @@
     <item msgid="2766022553327609913">"SMS पढ्नुहोस्"</item>
     <item msgid="167775364051357284">"SMS लेख्नुहोस्"</item>
     <item msgid="3397583039407928979">"SMS प्राप्त गर्नुहोस्"</item>
-    <item msgid="3658964859478786980">"आपत्‌कालीन SMS प्राप्त गर्नुहोस्"</item>
+    <item msgid="3658964859478786980">"आपतकालीन SMS प्राप्त गर्नुहोस्"</item>
     <item msgid="7975129014728281140">"MMS प्राप्त गर्नुहोस्"</item>
     <item msgid="404809195686849835">"WAP push प्राप्त गर्नुहोस्"</item>
     <item msgid="5167716820004184705">"SMS पठाउनुहोस्"</item>
@@ -263,8 +263,8 @@
     <item msgid="617344340943430125">"मास्टर ध्वनि मात्रा"</item>
     <item msgid="1249691739381713634">"वाणी मात्रा"</item>
     <item msgid="6485000384018554920">"घन्टी मात्रा"</item>
-    <item msgid="3378000878531336372">"मिडियाको भोल्युम"</item>
-    <item msgid="5272927168355895681">"अलार्मको भोल्युम"</item>
+    <item msgid="3378000878531336372">"मिडियाको आवाजको मात्रा"</item>
+    <item msgid="5272927168355895681">"अलार्मको आवाजको मात्रा"</item>
     <item msgid="4422070755065530548">"सूचना मात्रा"</item>
     <item msgid="3250654589277825306">"ब्लुटुथ मात्रा"</item>
     <item msgid="4212187233638382465">"जागा रहनुहोस्"</item>
@@ -329,9 +329,9 @@
     <item msgid="5651140069431283570">"श्रब्य फोकस"</item>
     <item msgid="745291221457314879">"मास्टर ध्वनि मात्रा"</item>
     <item msgid="4722479281326245754">"वाणीको मात्रा"</item>
-    <item msgid="6749550886745567276">"घन्टीको भोल्युम"</item>
-    <item msgid="2218685029915863168">"मिडियाको भोल्युम"</item>
-    <item msgid="4266577290496513640">"आलर्मको भोल्युम"</item>
+    <item msgid="6749550886745567276">"घन्टीको आवाजको मात्रा"</item>
+    <item msgid="2218685029915863168">"मिडियाको आवाजको मात्रा"</item>
+    <item msgid="4266577290496513640">"आलर्मको आवाजको मात्रा"</item>
     <item msgid="8608084169623998854">"सूचना भोल्युम"</item>
     <item msgid="7948784184567841794">"ब्लुटुथ भोल्युम"</item>
     <item msgid="1148968792599973150">"जागा रहनुहोस्"</item>
@@ -366,7 +366,7 @@
     <item msgid="6740026006576843477">"लामो"</item>
   </string-array>
   <string-array name="captioning_typeface_selector_titles">
-    <item msgid="2166553138528640250">"डिफल्ट"</item>
+    <item msgid="2166553138528640250">"पूर्वनिर्धारित"</item>
     <item msgid="4234707448428002595">"Sans-serif"</item>
     <item msgid="2390008695651897663">"Sans-serif condensed"</item>
     <item msgid="2396492419730702454">"सन्स-सेरिफ मोनोस्पेस"</item>
@@ -379,19 +379,12 @@
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="923916134548435468">"ज्यादै साना"</item>
     <item msgid="5738147437573674872">"सानो"</item>
-    <item msgid="3942006483573485941">"डिफल्ट"</item>
-    <item msgid="824386705928670045">"ठुलो"</item>
-    <item msgid="2790561781512874585">"ज्यादै ठुलो"</item>
-  </string-array>
-  <string-array name="captioning_font_size_selector_summaries">
-    <item msgid="5700290209695344464">"धेरै सानो आकारको पाठ"</item>
-    <item msgid="4400431625665186389">"सानो आकारको पाठ"</item>
-    <item msgid="2340994108094808362">"टेक्स्टको डिफल्ट आकार"</item>
-    <item msgid="6446684863055375405">"ठुलो आकारको पाठ"</item>
-    <item msgid="6838252010935384975">"धेरै ठुलो आकारको पाठ"</item>
+    <item msgid="8111006422178051129">"सामान्य"</item>
+    <item msgid="824386705928670045">"ठूलो"</item>
+    <item msgid="2790561781512874585">"ज्यादै ठूलो"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
-    <item msgid="70686029249840227">"डिफल्ट"</item>
+    <item msgid="70686029249840227">"पूर्वनिर्धारित"</item>
     <item msgid="4224714345662348668">"कुनै पनि होइन"</item>
     <item msgid="4132127611510627490">"रूपरेखा"</item>
     <item msgid="1226216870460161087">"छाँया राख्नुस्"</item>
@@ -405,7 +398,7 @@
     <item msgid="3237802033158517495">"१००%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="3880932435325583041">"अनुप्रयोगले सेट गरेको"</item>
+    <item msgid="4180191497452407161">"एपका पूर्वनिर्धारित सेटिङहरू प्रयोग गर्नुहोस्"</item>
     <item msgid="8719204526359229387">"कालोमा सेतो"</item>
     <item msgid="5410164687403735103">"सेतोमा कालो"</item>
     <item msgid="1119043472912497241">"कालोमा पहेँलो"</item>
@@ -456,7 +449,7 @@
   <string-array name="proc_stats_process_states">
     <item msgid="7389344075996860704">"लगातार"</item>
     <item msgid="5777152116210127847">"उच्च गतिविधि"</item>
-    <item msgid="1834030155560727324">"महत्वपूर्ण (फ‍ोरग्राउन्ड)"</item>
+    <item msgid="1834030155560727324">"महत्वपूर्ण (अग्रभूमि)"</item>
     <item msgid="8494424742994426350">"महत्वपूर्ण (पृष्ठभूमि)"</item>
     <item msgid="5099332663422156149">"जगेडा"</item>
     <item msgid="7701089238529887617">"भारी वजन"</item>
@@ -471,16 +464,16 @@
   </string-array>
   <string-array name="color_picker">
     <item msgid="3230992859486877963">"टिल"</item>
-    <item msgid="5661027589207588703">"निलो"</item>
+    <item msgid="5661027589207588703">"नीलो"</item>
     <item msgid="3795787248113275442">"इन्डिगो"</item>
     <item msgid="6331809026622602308">"बैजनी"</item>
     <item msgid="6390546163902724700">"गुलाबी"</item>
     <item msgid="6618900408138432102">"रातो"</item>
   </string-array>
   <string-array name="automatic_storage_management_days">
-    <item msgid="8896644025110620477">"कम्तीमा ३० दिन पुरानो"</item>
-    <item msgid="9083927335632626281">"कम्तीमा ६० दिन पुरानो"</item>
-    <item msgid="4146561207729203822">"कम्तीमा ९० दिन पुरानो"</item>
+    <item msgid="8896644025110620477">"३० दिनभन्दा बढी पुरानो"</item>
+    <item msgid="9083927335632626281">"६० दिनभन्दा बढी पुरानो"</item>
+    <item msgid="4146561207729203822">"९० दिनभन्दा बढी पुरानो"</item>
   </string-array>
     <!-- no translation found for swipe_direction_titles:0 (9039866451038081694) -->
     <!-- no translation found for swipe_direction_titles:1 (3175804938330683021) -->
@@ -490,15 +483,15 @@
   </string-array>
   <string-array name="wifi_metered_entries">
     <item msgid="3237321077949659241">"स्वतः पत्ता लगाउनुहोस्"</item>
-    <item msgid="3779092145391320375">"सशुल्क Wi-Fi का रूपमा लिनुहोस्"</item>
-    <item msgid="2047166446768045816">"नि:शुल्क Wi-Fi का रूपमा लिनुहोस्"</item>
+    <item msgid="3779092145391320375">"सशुल्क वाइफाइका रूपमा लिनुहोस्"</item>
+    <item msgid="2047166446768045816">"मिटर नगरिएको रूपमा व्यवहार गर्नुहोस्"</item>
   </string-array>
   <string-array name="wifi_privacy_entries">
-    <item msgid="3485945604919292489">"क्रमरहित MAC प्रयोग गरियोस् (डिफल्ट)"</item>
-    <item msgid="741680937828608749">"डिभाइसको MAC प्रयोग गर्नुहोस्"</item>
+    <item msgid="3485945604919292489">"क्रमरहित MAC प्रयोग गर्नुहोस् (पूर्वनिर्धारित)"</item>
+    <item msgid="741680937828608749">"यन्त्रको MAC प्रयोग गर्नुहोस्"</item>
   </string-array>
   <string-array name="wifi_hidden_entries">
-    <item msgid="342232116597649254">"छैन"</item>
+    <item msgid="342232116597649254">"होइन"</item>
     <item msgid="2163015208097377388">"हो"</item>
   </string-array>
   <string-array name="dark_ui_mode_entries">
@@ -525,7 +518,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="1091258946200124345">"विश्वव्यापी"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE/WCDMA"</item>
     <item msgid="7723670142495874534">"TDSCDMA मात्र"</item>
@@ -542,7 +535,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="8908263949185004366">"विश्वव्यापी"</item>
+    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>
@@ -553,6 +546,11 @@
   <string-array name="cdma_subscription_choices">
     <item msgid="6242790734457941014">"RUIM/SIM"</item>
     <item msgid="8980776035119085660">"NV"</item>
+  </string-array>
+  <string-array name="preferred_network_mode_choices_world_mode">
+    <item msgid="8219021147046131771">"विश्वव्यापी"</item>
+    <item msgid="5291208617720023560">"LTE/CDMA"</item>
+    <item msgid="6742002477816975742">"LTE / GSM / UMTS"</item>
   </string-array>
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (1841976293698111057) -->
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:1 (6822859933189908133) -->

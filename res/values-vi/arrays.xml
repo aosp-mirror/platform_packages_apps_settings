@@ -102,7 +102,7 @@
     <item msgid="7202884222741437608">"Không xác thực"</item>
     <item msgid="5703177653586269306">"Yêu cầu trạng thái chứng chỉ"</item>
     <item msgid="326388247868439528">"Cần có trạng thái chứng chỉ"</item>
-    <item msgid="1090956283885790552">"Cần có mọi trạng thái chứng chỉ không tin cậy"</item>
+    <item msgid="1090956283885790552">"Cần có tất cả trạng thái chứng chỉ không đáng tin cậy"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"Nút bấm"</item>
@@ -123,7 +123,7 @@
     <item msgid="4241913314075719627">"Không bao giờ hết thời gian chờ"</item>
   </string-array>
   <string-array name="bluetooth_max_connected_audio_devices">
-    <item msgid="4792793579224104167">"Sử dụng giá trị mặc định của hệ thống: <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
+    <item msgid="4792793579224104167">"Sử dụng cài đặt mặc định của hệ thống: <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
     <item msgid="5818942631838356082">"1"</item>
     <item msgid="4804155564025402919">"2"</item>
     <item msgid="7123296338505723878">"3"</item>
@@ -256,15 +256,15 @@
     <item msgid="4760681822601767255">"máy ảnh"</item>
     <item msgid="2172823594140104317">"ghi âm"</item>
     <item msgid="5612873260709742213">"phát âm thanh"</item>
-    <item msgid="2027206403725749996">"đọc bảng nhớ tạm"</item>
-    <item msgid="5643742956725663156">"sửa đổi bảng nhớ tạm"</item>
+    <item msgid="2027206403725749996">"đọc khay nhớ tạm"</item>
+    <item msgid="5643742956725663156">"sửa đổi khay nhớ tạm"</item>
     <item msgid="7362845549479684378">"các nút phương tiện truyền thông"</item>
     <item msgid="3843484466100107397">"tập trung âm thanh"</item>
     <item msgid="617344340943430125">"âm lượng chính"</item>
     <item msgid="1249691739381713634">"âm lượng thoại"</item>
     <item msgid="6485000384018554920">"âm lượng chuông"</item>
-    <item msgid="3378000878531336372">"âm lượng nội dung nghe nhìn"</item>
-    <item msgid="5272927168355895681">"âm lượng chuông báo"</item>
+    <item msgid="3378000878531336372">"âm lượng phương tiện"</item>
+    <item msgid="5272927168355895681">"âm lượng báo thức"</item>
     <item msgid="4422070755065530548">"âm lượng thông báo"</item>
     <item msgid="3250654589277825306">"âm lượng bluetooth"</item>
     <item msgid="4212187233638382465">"không khóa màn hình"</item>
@@ -323,15 +323,15 @@
     <item msgid="3180676986290096851">"Máy ảnh"</item>
     <item msgid="9174072114281872917">"Ghi âm"</item>
     <item msgid="1444183972646890539">"Phát âm thanh"</item>
-    <item msgid="4337542044275236638">"Đọc bảng nhớ tạm"</item>
-    <item msgid="2681224211796661809">"Sửa đổi bảng nhớ tạm"</item>
+    <item msgid="4337542044275236638">"Đọc khay nhớ tạm"</item>
+    <item msgid="2681224211796661809">"Sửa đổi khay nhớ tạm"</item>
     <item msgid="4479361062226474111">"Các nút phương tiện"</item>
     <item msgid="5651140069431283570">"Tập trung âm thanh"</item>
     <item msgid="745291221457314879">"Âm lượng chính"</item>
     <item msgid="4722479281326245754">"Âm lượng thoại"</item>
     <item msgid="6749550886745567276">"Âm lượng chuông"</item>
-    <item msgid="2218685029915863168">"Âm lượng nội dung nghe nhìn"</item>
-    <item msgid="4266577290496513640">"Âm lượng chuông báo"</item>
+    <item msgid="2218685029915863168">"Âm lượng phương tiện"</item>
+    <item msgid="4266577290496513640">"Âm lượng báo thức"</item>
     <item msgid="8608084169623998854">"Âm lượng thông báo"</item>
     <item msgid="7948784184567841794">"Âm lượng bluetooth"</item>
     <item msgid="1148968792599973150">"Không khóa màn hình"</item>
@@ -379,16 +379,9 @@
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="923916134548435468">"Rất nhỏ"</item>
     <item msgid="5738147437573674872">"Nhỏ"</item>
-    <item msgid="3942006483573485941">"Mặc định"</item>
+    <item msgid="8111006422178051129">"Bình thường"</item>
     <item msgid="824386705928670045">"Lớn"</item>
     <item msgid="2790561781512874585">"Rất lớn"</item>
-  </string-array>
-  <string-array name="captioning_font_size_selector_summaries">
-    <item msgid="5700290209695344464">"Cỡ chữ rất nhỏ"</item>
-    <item msgid="4400431625665186389">"Cỡ chữ nhỏ"</item>
-    <item msgid="2340994108094808362">"Cỡ chữ mặc định"</item>
-    <item msgid="6446684863055375405">"Cỡ chữ lớn"</item>
-    <item msgid="6838252010935384975">"Cỡ chữ rất lớn"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
     <item msgid="70686029249840227">"Mặc định"</item>
@@ -405,7 +398,7 @@
     <item msgid="3237802033158517495">"100%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="3880932435325583041">"Thiết lập theo ứng dụng"</item>
+    <item msgid="4180191497452407161">"Mặc định của ứng dụng"</item>
     <item msgid="8719204526359229387">"Chữ trắng trên nền đen"</item>
     <item msgid="5410164687403735103">"Chữ đen trên nền trắng"</item>
     <item msgid="1119043472912497241">"Chữ vàng trên nền đen"</item>
@@ -525,7 +518,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="1091258946200124345">"Toàn cầu"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE/WCDMA"</item>
     <item msgid="7723670142495874534">"Chỉ TDSCDMA"</item>
@@ -542,7 +535,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="8908263949185004366">"Toàn cầu"</item>
+    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>
@@ -553,6 +546,11 @@
   <string-array name="cdma_subscription_choices">
     <item msgid="6242790734457941014">"RUIM/SIM"</item>
     <item msgid="8980776035119085660">"NV"</item>
+  </string-array>
+  <string-array name="preferred_network_mode_choices_world_mode">
+    <item msgid="8219021147046131771">"Toàn cầu"</item>
+    <item msgid="5291208617720023560">"LTE/CDMA"</item>
+    <item msgid="6742002477816975742">"LTE/GSM/UMTS"</item>
   </string-array>
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (1841976293698111057) -->
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:1 (6822859933189908133) -->

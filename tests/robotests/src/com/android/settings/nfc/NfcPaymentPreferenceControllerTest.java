@@ -29,6 +29,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
+import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,10 +38,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowNfcAdapter.class)
 public class NfcPaymentPreferenceControllerTest {
 
     private static final String PREF_KEY = PaymentSettingsTest.PAYMENT_KEY;

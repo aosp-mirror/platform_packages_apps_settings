@@ -88,7 +88,7 @@
     <item msgid="3409219643606946053">"正在连接到 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
     <item msgid="7891463004457278422">"正在通过 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 进行身份验证..."</item>
     <item msgid="3193388999810487137">"正在从<xliff:g id="NETWORK_NAME">%1$s</xliff:g>获取IP地址..."</item>
-    <item msgid="2227930004124157952">"已连接到“<xliff:g id="NETWORK_NAME">%1$s</xliff:g>”"</item>
+    <item msgid="2227930004124157952">"已连接到 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
     <item msgid="7104168043537022445">"已暂停"</item>
     <item msgid="2595938203187002544">"正在断开与 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 的连接..."</item>
     <item msgid="2435175968703898648">"已断开连接"</item>
@@ -100,7 +100,7 @@
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
   <string-array name="eap_ocsp_type">
     <item msgid="7202884222741437608">"不验证"</item>
-    <item msgid="5703177653586269306">"要求证书状态（非强制）"</item>
+    <item msgid="5703177653586269306">"需要证书状态"</item>
     <item msgid="326388247868439528">"需要证书状态"</item>
     <item msgid="1090956283885790552">"需要所有非信任证书的状态"</item>
   </string-array>
@@ -176,7 +176,7 @@
   <string-array name="wifi_proxy_settings">
     <item msgid="4669222334822978847">"无"</item>
     <item msgid="6242198071587397280">"手动"</item>
-    <item msgid="464383874780058242">"代理自动配置 (PAC)"</item>
+    <item msgid="464383874780058242">"代理自动配置"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="2900892411844440682">"无"</item>
@@ -279,7 +279,7 @@
     <item msgid="2162456889277589861">"辅助结构"</item>
     <item msgid="4644645617399271070">"辅助屏幕截图"</item>
     <item msgid="8321845997769724385">"读取手机状态"</item>
-    <item msgid="8319500905789302082">"添加语音信息"</item>
+    <item msgid="8319500905789302082">"添加语音邮件"</item>
     <item msgid="1745447762712473288">"使用 SIP"</item>
     <item msgid="2986821801246709737">"处理拨出电话"</item>
     <item msgid="2702338156976571452">"指纹"</item>
@@ -346,7 +346,7 @@
     <item msgid="1657182386933187909">"辅助结构"</item>
     <item msgid="437655393941385937">"辅助屏幕截图"</item>
     <item msgid="973363520315356844">"读取手机状态"</item>
-    <item msgid="1203157739257425062">"添加语音信息"</item>
+    <item msgid="1203157739257425062">"添加语音邮件"</item>
     <item msgid="9143978647977300187">"使用 SIP"</item>
     <item msgid="3053060162752878562">"处理拨出电话"</item>
     <item msgid="4480721672278100858">"指纹"</item>
@@ -379,16 +379,9 @@
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="923916134548435468">"超小"</item>
     <item msgid="5738147437573674872">"小"</item>
-    <item msgid="3942006483573485941">"默认"</item>
+    <item msgid="8111006422178051129">"正常"</item>
     <item msgid="824386705928670045">"大"</item>
     <item msgid="2790561781512874585">"超大"</item>
-  </string-array>
-  <string-array name="captioning_font_size_selector_summaries">
-    <item msgid="5700290209695344464">"超小字号"</item>
-    <item msgid="4400431625665186389">"小字号"</item>
-    <item msgid="2340994108094808362">"默认字号"</item>
-    <item msgid="6446684863055375405">"大字号"</item>
-    <item msgid="6838252010935384975">"超大字号"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
     <item msgid="70686029249840227">"默认"</item>
@@ -405,7 +398,7 @@
     <item msgid="3237802033158517495">"100%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="3880932435325583041">"由应用设置"</item>
+    <item msgid="4180191497452407161">"使用应用默认样式"</item>
     <item msgid="8719204526359229387">"黑底白字"</item>
     <item msgid="5410164687403735103">"白底黑字"</item>
     <item msgid="1119043472912497241">"黑底黄字"</item>
@@ -470,7 +463,7 @@
     <item msgid="8186970968968646288">"已缓存（空）"</item>
   </string-array>
   <string-array name="color_picker">
-    <item msgid="3230992859486877963">"蓝绿色"</item>
+    <item msgid="3230992859486877963">"青色"</item>
     <item msgid="5661027589207588703">"蓝色"</item>
     <item msgid="3795787248113275442">"靛青色"</item>
     <item msgid="6331809026622602308">"紫色"</item>
@@ -525,7 +518,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="1091258946200124345">"通用"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE/WCDMA"</item>
     <item msgid="7723670142495874534">"仅限 TDSCDMA"</item>
@@ -542,7 +535,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="8908263949185004366">"全球"</item>
+    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>
@@ -553,6 +546,11 @@
   <string-array name="cdma_subscription_choices">
     <item msgid="6242790734457941014">"RUIM/SIM"</item>
     <item msgid="8980776035119085660">"NV"</item>
+  </string-array>
+  <string-array name="preferred_network_mode_choices_world_mode">
+    <item msgid="8219021147046131771">"通用"</item>
+    <item msgid="5291208617720023560">"LTE/CDMA"</item>
+    <item msgid="6742002477816975742">"LTE/GSM/UMTS"</item>
   </string-array>
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (1841976293698111057) -->
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:1 (6822859933189908133) -->
