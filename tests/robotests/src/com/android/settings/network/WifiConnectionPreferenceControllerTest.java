@@ -34,8 +34,8 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.wifi.WifiConnectionPreferenceController;
+import com.android.settings.wifi.WifiEntryPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.wifi.WifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
