@@ -77,7 +77,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
-import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
@@ -163,9 +162,6 @@ public final class Utils extends com.android.settingslib.Utils {
     /** Whether or not app hibernation targets apps that target a pre-S SDK **/
     public static final String PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS =
             "app_hibernation_targets_pre_s_apps";
-
-    /** Whether or not Settings Shared Axis transition is enabled */
-    public static final String SETTINGS_SHARED_AXIS_ENABLED = "settings_shared_axis_enabled";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -1224,10 +1220,5 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static boolean isProviderModelEnabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
-    }
-
-    public static boolean isPageTransitionEnabled(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(),
-                SETTINGS_SHARED_AXIS_ENABLED, 0) == 1;
     }
 }
