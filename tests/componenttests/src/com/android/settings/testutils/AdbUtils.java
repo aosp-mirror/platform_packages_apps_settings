@@ -23,9 +23,11 @@ import android.util.Log;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AdbUtils {
     public static boolean checkStringInAdbCommandOutput(String logTag, String command,
@@ -58,5 +60,24 @@ public class AdbUtils {
         }
 
         return false;
+    }
+
+    public static String shell(String shellCommand) {
+        String returnValue = "";
+        try (ParcelFileDescriptor.AutoCloseInputStream in =
+                     new ParcelFileDescriptor.AutoCloseInputStream(
+                             InstrumentationRegistry.getInstrumentation()
+                                     .getUiAutomation()
+                                     .executeShellCommand(shellCommand))) {
+            try (BufferedReader br =
+                         new BufferedReader(
+                                 new InputStreamReader(in, StandardCharsets.UTF_8))) {
+                returnValue = br.lines().collect(Collectors.joining());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return returnValue;
     }
 }
