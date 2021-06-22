@@ -17,17 +17,30 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.net.Uri;
+
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.widget.SettingsMainSwitchPreferenceController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 /**
  * The controller to handle one-handed mode main switch enable or disable state.
  **/
 public class OneHandedMainSwitchPreferenceController extends
-        SettingsMainSwitchPreferenceController {
+        SettingsMainSwitchPreferenceController implements OneHandedSettingsUtils.TogglesCallback,
+        LifecycleObserver, OnStart, OnStop {
+
+    private final OneHandedSettingsUtils mUtils;
+
+    private MainSwitchPreference mPreference;
 
     public OneHandedMainSwitchPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mUtils = new OneHandedSettingsUtils(context);
     }
 
     @Override
@@ -52,5 +65,31 @@ public class OneHandedMainSwitchPreferenceController extends
         }
         OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, isChecked);
         return true;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public void onStart() {
+        mUtils.registerToggleAwareObserver(this);
+    }
+
+    @Override
+    public void onStop() {
+        mUtils.unregisterToggleAwareObserver();
+    }
+
+    @Override
+    public void onChange(Uri uri) {
+        if (mPreference == null) {
+            return;
+        }
+        if (uri.equals(OneHandedSettingsUtils.ONE_HANDED_MODE_ENABLED_URI)) {
+            mPreference.setChecked(isChecked());
+        }
     }
 }

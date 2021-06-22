@@ -777,10 +777,14 @@
     <string name="security_settings_face_enroll_introduction_more">More</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_introduction_title">Unlock with your face</string>
+    <!-- Introduction title shown in face enrollment when when asking for parental consent for the face unlock feature [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_consent_introduction_title">Allow face unlock</string>
     <!-- Introduction title shown in face enrollment to introduce the face unlock feature, when face unlock is disabled by device admin [CHAR LIMIT=60] -->
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled">Use your face to authenticate</string>
     <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_message">Use your face to unlock your phone, authorize purchases, or sign in to apps.</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message">Allow your child to use their face to unlock their phone or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
     <!-- Introduction detail message shown in face enrollment dialog, when face unlock is disabled by device admin [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled">Use your face to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your face to unlock this device. For more information, contact your organization\u2019s admin.</string>
     <!-- Introduction detail message shown in face enrollment screen in setup wizard. [CHAR LIMIT=NONE] -->
@@ -789,18 +793,26 @@
     <string name="security_settings_face_enroll_introduction_info_title"></string>
     <!-- Message on the face enrollment introduction page that provides information about glasses. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_info_glasses"></string>
+    <!-- Message on the face enrollment introduction page that provides information about glasses when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_glasses"></string>
     <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_info_looking"></string>
-    <!-- Message on the face enrollment introduction page that provides information about the security of face unlock. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_enroll_introduction_info_security"></string>
+    <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_looking"></string>
     <!-- Title of a section on the face enrollment introduction page that explains how face unlock works. [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_introduction_how_title"></string>
     <!-- Message on the face enrollment introduction page that explains how face unlock works. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_how_message"></string>
+    <!-- Message on the face enrollment introduction page that explains how Face Unlock works when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_how_consent_message"></string>
     <!-- Title of a section on the face enrollment introduction page that explains privacy controls for face unlock. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_control_title"></string>
+    <!-- Title of a section on the face enrollment introduction page that explains privacy controls for face unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_control_consent_title"></string>
     <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_control_message"></string>
+    <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_control_consent_message"></string>
     <!-- Title shown in face enrollment dialog [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_repeat_title">Center your face in the circle</string>
     <!-- Button text to skip enrollment of face [CHAR LIMIT=40] -->
@@ -888,14 +900,20 @@
     </plurals>
     <!-- message shown in summary field when no fingerprints are registered -->
     <string name="security_settings_fingerprint_preference_summary_none"></string>
-    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature[CHAR LIMIT=29] -->
+    <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_introduction_title">Set up your fingerprint</string>
+    <!-- Introduction title shown in fingerprint enrollment when asking for parental consent for fingerprint unlock [CHAR LIMIT=29] -->
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title">Allow fingerprint unlock</string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Use your fingerprint</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_message">Just touch the fingerprint sensor to unlock your phone, authorize purchases, or sign in to apps. Be careful whose fingerprints you add. Even one added print can do any of these things.</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message">Use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase.</string>
+    <!-- Introduction detail message shown in fingerprint enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message">Allow your child to use their fingerprint to unlock their phone or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
     <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1">You\u2019re in control</string>
+    <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1">You and your child are in control</string>
     <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2">Keep in mind</string>
     <!-- Introduction detail message shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
@@ -935,13 +953,21 @@
     <!-- Introduction subtitle message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2">How it works</string>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Fingerprint Unlock creates a unique model of your fingerprint to recognize you during authentication. To create this fingerprint model during setup, you will take images of your fingerprint from different positions.</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2">Fingerprint Unlock creates a unique model of your fingerprint to verify it\u2019s you. To create this fingerprint model during setup, you will take images of your fingerprint from different positions.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2">Fingerprint Unlock creates a unique model of your child\u2019s fingerprint to verify it\u2019s them. To create this fingerprint model during setup, they will take images of their fingerprint from different positions.</string>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">The phone will also use images from your interactions with Fingerprint Unlock to update your fingerprint model. Images used to create your fingerprint model are never stored, but the fingerprint model is stored securely on your phone and never leaves the phone. All processing occurs securely on your phone.</string>
-    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">You can delete your fingerprint model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint models are stored on the phone until you delete them.</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3">When you use Pixel Imprint, images are used to update your fingerprint model. Images used to create your fingerprint model are never stored, but the fingerprint model is stored securely on your phone and never leaves the phone. All processing occurs securely on your phone.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3">When they use Pixel Imprint, images are used to update their fingerprint model. Images used to create your child\u2019s fingerprint model are never stored, but the fingerprint model is stored securely on the phone and never leaves the phone. All processing occurs securely on the phone.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4">You can delete your fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the phone until you delete them.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4">You and your child can delete their fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the phone until they\u2019re deleted.</string>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5">Your phone can be unlocked when you don\u2019t intend to, like if someone holds it up to your finger.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5">Your child\u2019s phone can be unlocked when they don\u2019t intend to, like if someone holds it up to their finger.</string>
     <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
 
@@ -961,7 +987,7 @@
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
 
     <!-- Message shown in fingerprint security settings home screen. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or for authentication, like when you sign in to apps or approve a purchase\n\n<annotation id="url">Learn more</annotation></string>
+    <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps\n\n<annotation id="url">Learn more</annotation></string>
 
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
@@ -982,6 +1008,10 @@
     <string name="biometric_settings_use_biometric_unlock_phone">Unlocking your phone</string>
     <!-- Text shown on a toggle which allows or disallows the device to use biometric for authentication. [CHAR LIMIT=50] -->
     <string name="biometric_settings_use_biometric_for_apps">Authentication in apps</string>
+    <!-- Message shown during enrollment to prompt a child to give the device to a parent or guardian. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_hand_back_to_guardian">Hand the phone back to your parent</string>
+    <!-- Button text shown during enrollment to proceed after a child user has handed the device to a parent or guardian. [CHAR LIMIT=22] -->
+    <string name="biometric_settings_hand_back_to_guardian_ok">OK</string>
 
     <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
     <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
@@ -1050,7 +1080,7 @@
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
     <!-- Message shown in fingerprint enrollment dialog once enrollment is completed -->
-    <string name="security_settings_fingerprint_enroll_finish_message">Now you can use your fingerprint to unlock your phone or for authentication, like when you sign in to apps</string>
+    <string name="security_settings_fingerprint_enroll_finish_message">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_enrolling_skip">Do it later</string>
     <!-- Title of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=40] -->
@@ -1182,6 +1212,8 @@
         <annotation id="url">Learn more</annotation></string>
     <!-- Text shown in fingerprint enroll when we didn't observe progress for a few seconds. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
+    <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
+    <string name="security_settings_fingerprint_bad_calibration">Please recalibrate the fingerprint sensor.</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -1203,11 +1235,8 @@
     <string name="fingerprint_v2_delete_message">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your device</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
-    <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprints to
-        unlock your phone, authorize purchases, or sign in to apps with them</string>
-    <string name="fingerprint_last_delete_message_profile_challenge">You won\'t be able to use your
-        fingerprints to unlock your work profile, authorize purchases, or sign in to work
-        apps</string>
+    <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprint to unlock your phone or verify it\'s you in apps.</string>
+    <string name="fingerprint_last_delete_message_profile_challenge">You won\'t be able to use your fingerprint to unlock your work profile, authorize purchases, or sign in to work apps.</string>
 
     <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
     <string name="fingerprint_last_delete_confirm">Yes, remove</string>
@@ -5334,10 +5363,8 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
     <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
-    <!-- Summary for software shortcut in accessibility edit shortcut dialog when user had enabled the accessibility gesture mode. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_customize_software_gesture"><annotation id="link">Customize accessibility gesture</annotation></string>
     <!-- Summary for software shortcut in accessibility edit shortcut dialog when user had enabled the accessibility floating button mode (Floating over other apps). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_software_floating"><annotation id="link">Customize accessibility button</annotation></string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_floating"><annotation id="link">More options</annotation></string>
     <!-- Footer to show help link content description. [CHAR LIMIT=NONE] -->
     <string name="footer_learn_more_content_description">Learn more about <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
     <!-- Title for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
@@ -5376,6 +5403,8 @@
     <string name="accessibility_button_intro">Using the accessibility button. The gesture isn\u2019t available with 3-button navigation.</string>
     <!-- Summary text for the accessibility button preference. [CHAR LIMIT=50] -->
     <string name="accessibility_button_summary">Quickly access accessibility features</string>
+    <!-- Description for the accessibility button & gesture page. Explain how this page works. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_button_gesture_description">Quickly access accessibility features from any screen. \n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button or gesture.</string>
     <!-- Description for the accessibility button page. Explain how this page works. [CHAR LIMIT=NONE] -->
     <string name="accessibility_button_description">Quickly access accessibility features from any screen. \n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.</string>
     <!-- Title for the button or gesture of the accessibility button. [CHAR LIMIT=35] -->
@@ -5598,6 +5627,10 @@
     </string>
     <!-- Title for setting the brightness intensity of the display using Reduce Brightness. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_intensity_preference_title">Intensity</string>
+    <!-- Start label for slider that reduces the brightness intensity of the display using Extra Dim. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_intensity_start_label">Dimmer</string>
+    <!-- End label for slider that reduces the brightness intensity of the display using Extra Dim. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_intensity_end_label">Brighter</string>
     <!-- Title for setting whether the Reduce Brightness activation state persists across reboots. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
 
@@ -5826,29 +5859,29 @@
     <!-- List of synonyms used in the settings search bar to find the “Magnification”. [CHAR LIMIT=NONE] -->
     <string name="keywords_magnification">Window Magnifier, Zoom, Magnification, Low vision, Enlarge, make bigger</string>
     <!-- List of synonyms used in the settings search bar to find the “TalkBack”. [CHAR LIMIT=NONE] -->
-    <string name="keywords_talkback">Screen reader, Voice Over, VoiceOver, Voice Assistance, Blind, Low Vision, TTS, text to speech, spoken feedback</string>
+    <string name="keywords_talkback"></string>
     <!-- List of synonyms used in the settings search bar to find the “Live Caption”. [CHAR LIMIT=NONE] -->
     <string name="keywords_live_caption">Captions, closed captions, CC, Live Transcribe, hard of hearing, hearing loss, CART, speech to text, subtitle</string>
     <!-- List of synonyms used in the settings search bar to find the “Live Transcribe”. [CHAR LIMIT=NONE] -->
-    <string name="keywords_live_transcribe">Captions, closed captions, CC, Live Caption, hard of hearing, hearing loss, CART, speech to text, subtitle</string>
+    <string name="keywords_live_transcribe"></string>
     <!-- List of synonyms used in the settings search bar to find the “Sound Notifications”. [CHAR LIMIT=NONE] -->
-    <string name="keywords_sound_notifications">Notifications, hard of hearing, hearing loss, notify</string>
+    <string name="keywords_sound_notifications"></string>
     <!-- List of synonyms used in the settings search bar to find the “Sound Amplifier”. [CHAR LIMIT=NONE] -->
-    <string name="keywords_sound_amplifier">PSAP, amplify, sound amplification, hard of hearing, hearing loss, amplification</string>
+    <string name="keywords_sound_amplifier"></string>
     <!-- List of synonyms used in the settings search bar to find the “Display size”. [CHAR LIMIT=NONE] -->
     <string name="keywords_display_size">screen size, large screen</string>
     <!-- List of synonyms used in the settings search bar to find the “Bold text”. [CHAR LIMIT=NONE] -->
     <string name="keywords_bold_text">High contrast, low vision, bold font, bold face</string>
     <!-- List of synonyms used in the settings search bar to find the “Select to Speak”. [CHAR LIMIT=NONE] -->
-    <string name="keywords_select_to_speak">Hear text, read aloud, speak screen, screen reader</string>
+    <string name="keywords_select_to_speak"></string>
     <!-- List of synonyms used in the settings search bar to find the “Color correction”. [CHAR LIMIT=NONE] -->
     <string name="keywords_color_correction">adjust color </string>
     <!-- List of synonyms used in the settings search bar to find the “Color inversion”. [CHAR LIMIT=NONE] -->
     <string name="keywords_color_inversion">turn screen dark, turn screen light</string>
     <!-- List of synonyms used in the settings search bar to find the “Accessibility Menu”. [CHAR LIMIT=NONE] -->
-    <string name="keywords_accessibility_menu">motor, quick menu, assistive menu, touch, dexterity</string>
+    <string name="keywords_accessibility_menu"></string>
     <!-- List of synonyms used in the settings search bar to find the “Switch Access”. [CHAR LIMIT=NONE] -->
-    <string name="keywords_switch_access">motor, switch, hand, AT, assistive technology, paralysis, ALS, scanning, step scanning</string>
+    <string name="keywords_switch_access"></string>
     <!-- List of synonyms used in the settings search bar to find the “Autoclick(dwell timing)”. [CHAR LIMIT=NONE] -->
     <string name="keywords_auto_click">motor, mouse</string>
     <!-- List of synonyms used in the settings search bar to find the “Hearing aids”. [CHAR LIMIT=NONE] -->
@@ -5856,7 +5889,7 @@
     <!-- List of synonyms used in the settings search bar to find the “Real-time text (RTT)”. [CHAR LIMIT=NONE] -->
     <string name="keywords_rtt">hard of hearing, hearing loss, captions, Teletype, tty</string>
     <!-- List of synonyms used in the settings search bar to find the “Voice Access”. [CHAR LIMIT=NONE] -->
-    <string name="keywords_voice_access">voice, voice control, motor, hand, mic, microphone, dictation, talk, control</string>
+    <string name="keywords_voice_access"></string>
 
     <!-- Printing settings -->
     <skip />
@@ -8767,10 +8800,13 @@
     <string name="recent_notifications_see_all_title">See all from last 7 days</string>
 
     <!-- notification header for general notification settings [CHAR LIMIT=80]-->
-    <string name="general_notification_header">General</string>
+    <string name="general_notification_header">Manage</string>
 
     <!-- notification preference for app specific notification settings [CHAR LIMIT=80]-->
     <string name="app_notification_field">App settings</string>
+
+    <!-- notification preference summary for app specific notification settings [CHAR LIMIT=120]-->
+    <string name="app_notification_field_summary">Control notifications from individual apps</string>
 
     <!-- Configure Notifications: Advanced section header [CHAR LIMIT=30] -->
     <string name="advanced_section_header">General</string>
@@ -9100,8 +9136,11 @@
     <!-- [CHAR LIMIT=60] button title -->
     <string name="conversation_settings_clear_recents">Clear recent conversations</string>
 
-    <!-- a11y feedeback for 'clear recents' button' -->
+    <!-- a11y feedback for 'clear recents' button' -->
     <string name="recent_convos_removed">Recent conversations removed</string>
+
+    <!-- a11y feedback for 'clear recent conversation' button' -->
+    <string name="recent_convo_removed">Conversation removed</string>
 
     <!-- a11y string -->
     <string name="clear">Clear</string>
@@ -9218,7 +9257,7 @@
     <!-- Sound & notification > Advanced section: Title for managing notification listeners option. [CHAR LIMIT=60] -->
     <string name="manage_notification_access_title">Device &amp; app notifications</string>
 
-    <string name="manage_notification_access_summary">Control which notifications show on your apps and devices</string>
+    <string name="manage_notification_access_summary">Control which apps and devices can read notifications</string>
 
     <!-- Notification Access section: Indicates that the work profile admin doesn't allow this
          notification listener to access work profile notifications [CHAR LIMIT=100] -->
@@ -10133,7 +10172,7 @@
     <!-- Preference title for Add link [CHAR LIMIT=60] -->
     <string name="app_launch_add_link">Add link</string>
     <!-- Footer for Open by default. [CHAR LIMIT=NONE] -->
-    <string name="app_launch_footer">An app can verify links to automatically open in the app. <annotation id="url">Learn more</annotation></string>
+    <string name="app_launch_footer">An app can verify links to automatically open in the app.</string>
 
     <!-- Title, message and button for verified links dialog. -->
     <plurals name="app_launch_verified_links_title">
@@ -10956,6 +10995,10 @@
     <string name="disabled_by_policy_title_suspend_packages">Can’t open this app</string>
     <!-- Dialog title. This dialog lets a user know that a specific setting is blocked by their credit provider. Since the user purchased the device from the credit provider, the credit provider controls what they can access. [CHAR LIMIT=50] -->
     <string name="disabled_by_policy_title_financed_device">Blocked by your credit provider</string>
+    <!-- Dialog title shown when parental consent is required for the child to set up biometric authentication. [CHAR LIMIT=30] -->
+    <string name="disabled_by_policy_title_biometric_parental_consent">Parent needed</string>
+    <!-- Dialog content shown when parental consent is required for the child to set up biometric authentication. [CHAR LIMIT=NONE] -->
+    <string name="disabled_by_policy_content_biometric_parental_consent">Hand the phone to your parent to start setting this up</string>
     <!-- Shown when the user tries to change phone settings that are blocked by their IT admin [CHAR LIMIT=200] -->
     <string name="default_admin_support_msg">If you have questions, contact your IT admin</string>
     <!-- Shown in dialog to allow user to see more information about the device admin [CHAR LIMIT=30] -->
@@ -12852,7 +12895,11 @@
     <!--  The title text of choose SIM activity. [CHAR LIMIT=NONE] -->
     <string name="choose_sim_title">Choose a number to use</string>
     <!--  The body text of choose SIM activity. [CHAR LIMIT=NONE] -->
-    <string name="choose_sim_text"><xliff:g id="number" example="2">%1$d</xliff:g> numbers are available on this device, but only one can be used at a time</string>
+    <string name="choose_sim_text">{count, plural,
+      =1      {1 number is available on this device, but only one can be used at a time}
+      =2      {2 numbers are available on this device, but only one can be used at a time}
+      other   {# numbers are available on this device, but only one can be used at a time}
+    }</string>
     <!-- String indicating that we are activating the profile [CHAR LIMIT=NONE] -->
     <string name="choose_sim_activating">Activating<xliff:g id="ellipsis" example="...">&#8230;</xliff:g></string>
     <!-- String indicating that we failed to activate the selected profile [CHAR LIMIT=NONE] -->
@@ -13311,6 +13358,12 @@
     <string name="non_carrier_network_unavailable">No other networks available</string>
     <!-- Provider Model: Summary indicating that no networks available [CHAR LIMIT=50] -->
     <string name="all_network_unavailable">No networks available</string>
+    <!-- Title of the dialog to turn off data usage [CHAR LIMIT=NONE] -->
+    <string name="mobile_data_disable_title">Turn off mobile data?</string>
+    <!-- Message body of the dialog to turn off data usage [CHAR LIMIT=NONE] -->
+    <string name="mobile_data_disable_message">You won\’t have access to data or the internet through <xliff:g id="carrier" example="T-Mobile">%s</xliff:g>. Internet will only be available via Wi\u2011Fi.</string>
+    <!-- Text used to refer to the user's current carrier in mobile_data_disable_message if the users's mobile network carrier name is not available [CHAR LIMIT=NONE] -->
+    <string name="mobile_data_disable_message_default_carrier">your carrier</string>
 
     <!-- Summary for preference when Bedtime mode is on [CHAR LIMIT=NONE] -->
     <string name="aware_summary_when_bedtime_on">Unavailable because bedtime mode is on</string>
