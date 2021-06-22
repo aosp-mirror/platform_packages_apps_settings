@@ -200,7 +200,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
      * ensure that behavior is consistent if {@link #isUiRestricted()} changes. It could be changed
      * by the Test DPC tool in AFW mode.
      */
-    private boolean mIsRestricted;
+    protected boolean mIsRestricted;
 
     @VisibleForTesting
     AirplaneModeEnabler mAirplaneModeEnabler;
@@ -218,7 +218,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     PreferenceCategory mConnectedWifiEntryPreferenceCategory;
     @VisibleForTesting
     PreferenceCategory mFirstWifiEntryPreferenceCategory;
-    private PreferenceCategory mWifiEntryPreferenceCategory;
+    @VisibleForTesting
+    PreferenceCategory mWifiEntryPreferenceCategory;
     @VisibleForTesting
     AddWifiNetworkPreference mAddWifiNetworkPreference;
     private WifiSwitchPreferenceController mWifiSwitchPreferenceController;
@@ -771,7 +772,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     }
 
-    private void updateWifiEntryPreferences() {
+    protected void updateWifiEntryPreferences() {
+        // bypass the update if the activity and the view are not ready, or it's restricted UI.
+        if (getActivity() == null || getView() == null || mIsRestricted) {
+            return;
+        }
         // in case state has changed
         if (mWifiPickerTracker.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
             return;
