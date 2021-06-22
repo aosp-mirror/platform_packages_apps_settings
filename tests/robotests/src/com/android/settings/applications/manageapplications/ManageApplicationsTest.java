@@ -28,7 +28,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -49,7 +48,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import androidx.fragment.app.FragmentActivity;
@@ -156,22 +154,6 @@ public class ManageApplicationsTest {
     }
 
     @Test
-    public void onCreateView_shouldNotShowLoadingContainer() {
-        ReflectionHelpers.setField(mFragment, "mResetAppsHelper", mock(ResetAppsHelper.class));
-        doNothing().when(mFragment).createHeader();
-
-        final LayoutInflater layoutInflater = mock(LayoutInflater.class);
-        final View view = mock(View.class);
-        final View loadingContainer = mock(View.class);
-        when(layoutInflater.inflate(anyInt(), eq(null))).thenReturn(view);
-        when(view.findViewById(R.id.loading_container)).thenReturn(loadingContainer);
-
-        mFragment.onCreateView(layoutInflater, mock(ViewGroup.class), null);
-
-        verify(loadingContainer, never()).setVisibility(View.VISIBLE);
-    }
-
-    @Test
     public void onCreateOptionsMenu_shouldSetSearchQueryListener() {
         final SearchView searchView = mock(SearchView.class);
         final MenuItem searchMenu = mock(MenuItem.class);
@@ -221,7 +203,6 @@ public class ManageApplicationsTest {
     @Test
     public void updateLoading_appLoaded_shouldNotDelayCallToHandleLoadingContainer() {
         ReflectionHelpers.setField(mFragment, "mLoadingContainer", mock(View.class));
-        ReflectionHelpers.setField(mFragment, "mListContainer", mock(View.class));
         final ManageApplications.ApplicationsAdapter adapter =
                 spy(new ManageApplications.ApplicationsAdapter(mState, mFragment,
                         AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
@@ -243,7 +224,6 @@ public class ManageApplicationsTest {
     @Test
     public void updateLoading_appNotLoaded_shouldDelayCallToHandleLoadingContainer() {
         ReflectionHelpers.setField(mFragment, "mLoadingContainer", mock(View.class));
-        ReflectionHelpers.setField(mFragment, "mListContainer", mock(View.class));
         final ManageApplications.ApplicationsAdapter adapter =
                 spy(new ManageApplications.ApplicationsAdapter(mState, mFragment,
                         AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
@@ -272,7 +252,6 @@ public class ManageApplicationsTest {
         when(listContainer.getVisibility()).thenReturn(View.INVISIBLE);
         when(listContainer.getContext()).thenReturn(context);
         ReflectionHelpers.setField(mFragment, "mLoadingContainer", loadingContainer);
-        ReflectionHelpers.setField(mFragment, "mListContainer", listContainer);
         final ManageApplications.ApplicationsAdapter adapter =
                 spy(new ManageApplications.ApplicationsAdapter(mState, mFragment,
                         AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
@@ -296,7 +275,7 @@ public class ManageApplicationsTest {
 
         adapter.onRebuildComplete(null);
 
-        verify(loadingViewController).showContent(true /* animate */);
+        verify(loadingViewController).showEmpty(false /* animate */);
     }
 
     @Test
@@ -304,15 +283,16 @@ public class ManageApplicationsTest {
         final String query = "Test";
         final RecyclerView recyclerView = mock(RecyclerView.class);
         final View emptyView = mock(View.class);
+        final View loadingContainer = mock(View.class);
         ReflectionHelpers.setField(mFragment, "mRecyclerView", recyclerView);
         ReflectionHelpers.setField(mFragment, "mEmptyView", emptyView);
+        ReflectionHelpers.setField(mFragment, "mLoadingContainer", loadingContainer);
         final SearchView searchView = mock(SearchView.class);
         ReflectionHelpers.setField(mFragment, "mSearchView", searchView);
         when(searchView.isVisibleToUser()).thenReturn(true);
         when(searchView.getQuery()).thenReturn(query);
         final View listContainer = mock(View.class);
         when(listContainer.getVisibility()).thenReturn(View.VISIBLE);
-        ReflectionHelpers.setField(mFragment, "mListContainer", listContainer);
         ReflectionHelpers.setField(
                 mFragment, "mFilterAdapter", mock(ManageApplications.FilterSpinnerAdapter.class));
         final ArrayList<ApplicationsState.AppEntry> appList = new ArrayList<>();
@@ -491,8 +471,6 @@ public class ManageApplicationsTest {
         mFragment.mFilterAdapter.updateFilterView(true);
 
         assertThat(mFragment.mSpinnerHeader.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(mFragment.mRecyclerView.getPaddingTop()).isEqualTo(
-                mContext.getResources().getDimensionPixelSize(R.dimen.app_bar_height));
     }
 
     @Test
