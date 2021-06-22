@@ -81,8 +81,6 @@ public class BatteryUtils {
 
     private static final String TAG = "BatteryUtils";
 
-    private static final double MIN_POWER_THRESHOLD_MILLI_AMP_HOURS = 0.002;
-
     private static BatteryUtils sInstance;
     private PackageManager mPackageManager;
 
@@ -180,8 +178,7 @@ public class BatteryUtils {
      * battery consumption list.
      */
     public boolean shouldHideUidBatteryConsumer(UidBatteryConsumer consumer, String[] packages) {
-        return consumer.getConsumedPower() < MIN_POWER_THRESHOLD_MILLI_AMP_HOURS
-                || mPowerUsageFeatureProvider.isTypeSystem(consumer.getUid(), packages)
+        return mPowerUsageFeatureProvider.isTypeSystem(consumer.getUid(), packages)
                 || shouldHideUidBatteryConsumerUnconditionally(consumer, packages);
     }
 
@@ -208,19 +205,8 @@ public class BatteryUtils {
             case BatteryConsumer.POWER_COMPONENT_WIFI:
                 return true;
             default:
-                return consumer.getConsumedPower(powerComponentId)
-                        < MIN_POWER_THRESHOLD_MILLI_AMP_HOURS;
+                return false;
         }
-    }
-
-    /**
-     * Returns true if the specified device custom power component should be excluded from the
-     * summary battery consumption list.
-     */
-    public boolean shouldHideCustomDevicePowerComponent(BatteryConsumer consumer,
-            int customPowerComponentId) {
-        return consumer.getConsumedPowerForCustomComponent(customPowerComponentId)
-                < MIN_POWER_THRESHOLD_MILLI_AMP_HOURS;
     }
 
     /**

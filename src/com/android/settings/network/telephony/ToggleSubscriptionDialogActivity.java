@@ -30,14 +30,12 @@ import android.util.Log;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SidecarFragment;
-import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.network.EnableMultiSimSidecar;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SwitchToEuiccSubscriptionSidecar;
 import com.android.settings.network.SwitchToRemovableSlotSidecar;
 import com.android.settings.network.UiccSlotUtil;
 import com.android.settings.sim.SimActivationNotifier;
-import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import com.google.common.collect.ImmutableList;
 
@@ -70,9 +68,6 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         Intent intent = new Intent(context, ToggleSubscriptionDialogActivity.class);
         intent.putExtra(ARG_SUB_ID, subId);
         intent.putExtra(ARG_enable, enable);
-        // suppress page transition as this is a dialog
-        intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
-                SettingsTransitionHelper.TransitionType.TRANSITION_NONE);
         return intent;
     }
 
