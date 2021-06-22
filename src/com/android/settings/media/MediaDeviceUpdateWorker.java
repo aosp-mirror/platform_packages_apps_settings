@@ -259,6 +259,10 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mLocalMediaManager.shouldDisableMediaOutput(packageName);
     }
 
+    boolean shouldEnableVolumeSeekBar(RoutingSessionInfo sessionInfo) {
+        return mLocalMediaManager.shouldEnableVolumeSeekBar(sessionInfo);
+    }
+
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
