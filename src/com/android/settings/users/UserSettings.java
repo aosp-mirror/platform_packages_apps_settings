@@ -780,51 +780,62 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mUserCreatingDialog = new UserCreatingDialog(getActivity());
         mUserCreatingDialog.show();
-        ThreadUtils.postOnBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                UserInfo user;
-                String username;
+        ThreadUtils.postOnBackgroundThread(new AddUserNowImpl(userType, mAddingUserName));
+    }
 
-                synchronized (mUserLock) {
-                    username = mAddingUserName;
-                }
+    @VisibleForTesting
+    class AddUserNowImpl implements Runnable{
+        int mUserType;
+        String mImplAddUserName;
 
-                // Could take a few seconds
-                if (userType == USER_TYPE_USER) {
-                    user = mUserManager.createUser(username, 0);
-                } else {
-                    user = mUserManager.createRestrictedProfile(username);
-                }
+        AddUserNowImpl(final int userType, final String addUserName) {
+            mUserType = userType;
+            mImplAddUserName = addUserName;
+        }
 
-                synchronized (mUserLock) {
-                    if (user == null) {
-                        mAddingUser = false;
-                        mPendingUserIcon = null;
-                        mPendingUserName = null;
-                        ThreadUtils.postOnMainThread(() -> onUserCreationFailed());
-                        return;
-                    }
+        @Override
+        public void run() {
+            UserInfo user;
+            String username;
 
-                    Drawable newUserIcon = mPendingUserIcon;
-                    if (newUserIcon == null) {
-                        newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
-                    }
-                    mUserManager.setUserIcon(user.id, UserIcons.convertToBitmap(newUserIcon));
+            synchronized (mUserLock) {
+                username = mImplAddUserName;
+            }
 
-                    if (userType == USER_TYPE_USER) {
-                        mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
-                    }
+            // Could take a few seconds
+            if (mUserType == USER_TYPE_USER) {
+                user = mUserManager.createUser(username, 0);
+            } else {
+                user = mUserManager.createRestrictedProfile(username);
+            }
 
-                    mHandler.sendMessage(mHandler.obtainMessage(
-                            MESSAGE_USER_CREATED, user.id, user.serialNumber));
-
+            synchronized (mUserLock) {
+                if (user == null) {
+                    mAddingUser = false;
                     mPendingUserIcon = null;
                     mPendingUserName = null;
+                    ThreadUtils.postOnMainThread(() -> onUserCreationFailed());
+                    return;
                 }
+
+                Drawable newUserIcon = mPendingUserIcon;
+                if (newUserIcon == null) {
+                    newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
+                }
+                mUserManager.setUserIcon(user.id, UserIcons.convertToBitmap(newUserIcon));
+
+                if (mUserType == USER_TYPE_USER) {
+                    mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+                }
+
+                mHandler.sendMessage(mHandler.obtainMessage(
+                        MESSAGE_USER_CREATED, user.id, user.serialNumber));
+
+                mPendingUserIcon = null;
+                mPendingUserName = null;
             }
-        });
-    }
+        }
+    };
 
     /**
      * Erase the current user (guest) and switch to another user.
