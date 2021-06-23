@@ -1823,6 +1823,10 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".biometrics.BiometricHandoffActivity"
+                  android:exported="false"
+                  android:screenOrientation="portrait"/>
+
         <!-- Must not be exported -->
         <activity android:name=".biometrics.BiometricEnrollActivity$InternalActivity"
             android:exported="false"

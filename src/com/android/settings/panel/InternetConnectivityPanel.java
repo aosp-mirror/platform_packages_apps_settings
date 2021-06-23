@@ -30,6 +30,7 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.HandlerExecutor;
 import android.os.Looper;
+import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
@@ -235,7 +236,10 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
 
     @Override
     public Intent getSeeMoreIntent() {
-        return null;
+        // Don't remove the see more intent for non-provider model design. This intent will be
+        // used when isCustomizedButtonUsed() returns false.
+        return new Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @Override
