@@ -69,6 +69,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     private static final int REQUEST_CONFIRM_LOCK = 2;
     // prompt for parental consent options
     private static final int REQUEST_CHOOSE_OPTIONS = 3;
+    // prompt hand phone back to parent after enrollment
+    private static final int REQUEST_HANDOFF_PARENT = 4;
 
     public static final int RESULT_SKIP = BiometricEnrollBase.RESULT_SKIP;
 
@@ -303,14 +305,23 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     final boolean isStillPrompting = mParentalConsentHelper.launchNext(
                             this, REQUEST_CHOOSE_OPTIONS, resultCode, data);
                     if (!isStillPrompting) {
-                        Log.d(TAG, "Enrollment options set, starting enrollment now");
-
-                        mParentalOptions = mParentalConsentHelper.getConsentResult();
-                        mParentalConsentHelper = null;
-                        startEnroll();
+                        Log.d(TAG, "Enrollment options set, requesting handoff");
+                        launchHandoffToParent();
                     }
                 } else {
                     Log.d(TAG, "Unknown or cancelled parental consent");
+                    setResult(RESULT_CANCELED);
+                    finish();
+                }
+                break;
+            case REQUEST_HANDOFF_PARENT:
+                if (resultCode == RESULT_OK) {
+                    Log.d(TAG, "Enrollment options set, starting enrollment");
+                    mParentalOptions = mParentalConsentHelper.getConsentResult();
+                    mParentalConsentHelper = null;
+                    startEnroll();
+                } else {
+                    Log.d(TAG, "Unknown or cancelled handoff");
                     setResult(RESULT_CANCELED);
                     finish();
                 }
@@ -490,6 +501,11 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         mMultiBiometricEnrollHelper = new MultiBiometricEnrollHelper(this, mUserId,
                 mIsFaceEnrollable, mIsFingerprintEnrollable, mGkPwHandle);
         mMultiBiometricEnrollHelper.startNextStep();
+    }
+
+    private void launchHandoffToParent() {
+        final Intent intent = BiometricUtils.getHandoffToParentIntent(this, getIntent());
+        startActivityForResult(intent, REQUEST_HANDOFF_PARENT);
     }
 
     @Override
