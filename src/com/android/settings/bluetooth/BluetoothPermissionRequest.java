@@ -293,6 +293,6 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         : BluetoothDevice.CONNECTION_ACCESS_NO);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
         intent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE, mRequestType);
-        mContext.sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_ADMIN);
+        mContext.sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_CONNECT);
     }
 }

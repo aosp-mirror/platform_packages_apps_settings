@@ -17,8 +17,7 @@
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
@@ -2222,7 +2221,7 @@
 
         <activity android:name=".bluetooth.RequestPermissionActivity"
                   android:excludeFromRecents="true"
-                  android:permission="android.permission.BLUETOOTH"
+                  android:permission="android.permission.BLUETOOTH_CONNECT"
                   android:exported="true"
                   android:theme="@style/Theme.BluetoothPermission">
             <intent-filter android:priority="1">
@@ -2265,7 +2264,7 @@
         <activity android:name=".bluetooth.RequestPermissionHelperActivity"
                   android:label="@string/bluetooth_pairing_request"
                   android:excludeFromRecents="true"
-                  android:permission="android.permission.BLUETOOTH"
+                  android:permission="android.permission.BLUETOOTH_CONNECT"
                   android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight">
         </activity>
 
@@ -2280,7 +2279,7 @@
 
         <receiver android:name=".bluetooth.BluetoothPermissionRequest"
                   android:exported="true"
-                  android:permission="android.permission.BLUETOOTH_ADMIN">
+                  android:permission="android.permission.BLUETOOTH_CONNECT">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_REQUEST" />
                 <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_CANCEL" />
@@ -2290,7 +2289,7 @@
         <activity android:name=".bluetooth.BluetoothPermissionActivity"
                   android:label="@string/bluetooth_connection_permission_request"
                   android:excludeFromRecents="true"
-                  android:permission="android.permission.BLUETOOTH_ADMIN"
+                  android:permission="android.permission.BLUETOOTH_CONNECT"
                   android:exported="true"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert">
             <intent-filter android:priority="1">
@@ -3545,7 +3544,7 @@
         <activity android:name="Settings$BluetoothDeviceDetailActivity"
                   android:label="@string/device_details_title"
                   android:exported="true"
-                  android:permission="android.permission.BLUETOOTH_ADMIN">
+                  android:permission="android.permission.BLUETOOTH_CONNECT">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3750,7 +3749,7 @@
         <receiver
             android:name=".media.BluetoothPairingReceiver"
             android:exported="true"
-            android:permission="android.permission.BLUETOOTH_ADMIN">
+            android:permission="android.permission.BLUETOOTH_CONNECT">
             <intent-filter>
                 <action android:name="com.android.settings.action.LAUNCH_BLUETOOTH_PAIRING"/>
             </intent-filter>/>
