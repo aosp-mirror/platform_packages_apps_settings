@@ -138,7 +138,8 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             mDefaultTemplate = DataUsageLib.getMobileTemplate(context, subscriptionId);
         } else if (DataUsageUtils.hasWifiRadio(context)) {
             mDataUsageTemplate = R.string.wifi_data_template;
-            mDefaultTemplate = NetworkTemplate.buildTemplateWifiWildcard();
+            mDefaultTemplate = NetworkTemplate.buildTemplateWifi(
+                    NetworkTemplate.WIFI_NETWORKID_ALL, null /* subscriberId */);
         } else {
             mDataUsageTemplate = R.string.ethernet_data_template;
             mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, subscriptionId);
@@ -178,7 +179,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         }
         RecyclerView view = mFragment.getListView();
         mEntityHeaderController.setRecyclerView(view, mLifecycle);
-        mEntityHeaderController.styleActionBar((Activity) mContext);
     }
 
     @VisibleForTesting
@@ -325,7 +325,10 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
                 mSnapshotTime = primaryPlan.getDataUsageTime();
             }
         }
-        mManageSubscriptionIntent = createManageSubscriptionIntent(mSubId);
+        // Temporarily return null, since no current users of SubscriptionPlan have this intent set.
+        // TODO (b/170330084): Remove after refactoring 5G SubscriptionPlan logic.
+        // mManageSubscriptionIntent = createManageSubscriptionIntent(mSubId);
+        mManageSubscriptionIntent = null;
         Log.i(TAG, "Have " + mDataplanCount + " plans, dflt sub-id " + mSubId
                 + ", intent " + mManageSubscriptionIntent);
     }
@@ -378,11 +381,11 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         // First plan in the list is the primary plan
         SubscriptionPlan plan = plans.get(0);
         return plan.getDataLimitBytes() > 0
-                && saneSize(plan.getDataUsageBytes())
+                && validSize(plan.getDataUsageBytes())
                 && plan.getCycleRule() != null ? plan : null;
     }
 
-    private static boolean saneSize(long value) {
+    private static boolean validSize(long value) {
         return value >= 0L && value < PETA;
     }
 

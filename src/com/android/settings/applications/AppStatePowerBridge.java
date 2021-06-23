@@ -21,20 +21,20 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import java.util.ArrayList;
 
 /**
- * Connects data from the PowerWhitelistBackend to ApplicationsState.
+ * Connects data from the PowerAllowlistBackend to ApplicationsState.
  */
 public class AppStatePowerBridge extends AppStateBaseBridge {
 
-    private final PowerWhitelistBackend mBackend;
+    private final PowerAllowlistBackend mBackend;
 
     public AppStatePowerBridge(Context context, ApplicationsState appState, Callback callback) {
         super(appState, callback);
-        mBackend = PowerWhitelistBackend.getInstance(context);
+        mBackend = PowerAllowlistBackend.getInstance(context);
     }
 
     @Override
@@ -43,17 +43,17 @@ public class AppStatePowerBridge extends AppStateBaseBridge {
         final int N = apps.size();
         for (int i = 0; i < N; i++) {
             AppEntry app = apps.get(i);
-            app.extraInfo = mBackend.isWhitelisted(app.info.packageName)
+            app.extraInfo = mBackend.isAllowlisted(app.info.packageName)
                     ? Boolean.TRUE : Boolean.FALSE;
         }
     }
 
     @Override
     protected void updateExtraInfo(AppEntry app, String pkg, int uid) {
-        app.extraInfo = mBackend.isWhitelisted(pkg) ? Boolean.TRUE : Boolean.FALSE;
+        app.extraInfo = mBackend.isAllowlisted(pkg) ? Boolean.TRUE : Boolean.FALSE;
     }
 
-    public static final AppFilter FILTER_POWER_WHITELISTED = new CompoundFilter(
+    public static final AppFilter FILTER_POWER_ALLOWLISTED = new CompoundFilter(
             ApplicationsState.FILTER_WITHOUT_DISABLED_UNTIL_USED, new AppFilter() {
         @Override
         public void init() {

@@ -30,6 +30,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 
+import com.google.android.setupdesign.util.ThemeHelper;
+
 public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivity {
 
     private static final String STATE_IS_KEYGUARD_LOCKED = "STATE_IS_KEYGUARD_LOCKED";
@@ -64,16 +66,17 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             return;
         }
         if (UserManager.get(this).isManagedProfile(credentialOwnerUserId)) {
-            setTheme(SetupWizardUtils.getTheme(getIntent()));
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
             mConfirmCredentialTheme = ConfirmCredentialTheme.WORK;
         } else if (getIntent().getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsDark);
             mConfirmCredentialTheme = ConfirmCredentialTheme.DARK;
         } else {
-            setTheme(SetupWizardUtils.getTheme(getIntent()));
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
             mConfirmCredentialTheme = ConfirmCredentialTheme.NORMAL;
         }
+        ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedState);
 
         if (mConfirmCredentialTheme == ConfirmCredentialTheme.NORMAL) {
@@ -174,6 +177,11 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
                 ConfirmDeviceCredentialBaseFragment.USE_FADE_ANIMATION, false)) {
             overridePendingTransition(0, R.anim.confirm_credential_biometric_transition_exit);
         }
+    }
+
+    @Override
+    protected boolean isToolbarEnabled() {
+        return false;
     }
 
     public void prepareEnterAnimation() {

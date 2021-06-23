@@ -32,6 +32,7 @@
             android:id="@+id/checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:background="@null"
             android:clickable="false"
             android:focusable="false"
@@ -54,8 +55,8 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="176dp"
-        android:layout_height="176dp"
+        android:layout_width="@dimen/accessibility_imageview_size"
+        android:layout_height="@dimen/accessibility_imageview_size"
         android:layout_marginStart="44dp"
         android:scaleType="fitCenter" />
 

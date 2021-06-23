@@ -18,9 +18,13 @@ package com.android.settings.wifi.addappnetworks;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,16 +39,20 @@ import android.provider.Settings;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
@@ -74,26 +82,37 @@ public class AddAppNetworksFragmentTest {
     private ArrayList<Integer> mFakedResultArrayList = new ArrayList<>();
 
     @Mock
-    private WifiEntry mMockWifiEntry;
+    private WifiEntry mWifiEntry;
+
+    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Mock
-    private WifiPickerTracker mMockWifiPickerTracker;
+    private WifiPickerTracker mWifiPickerTracker;
 
     @Mock
-    private WifiManager mMockWifiManager;
+    private WifiManager mWifiManager;
+
+    private FragmentActivity mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mAddAppNetworksFragment = spy(new AddAppNetworksFragment());
+        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
+        doReturn(mActivity).when(mAddAppNetworksFragment).getActivity();
+        when(mWifiManager.isWifiEnabled()).thenReturn(true);
+        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+
         mNewWpaSuggestionEntry = generateRegularWifiSuggestion(FAKE_NEW_WPA_SSID,
                 WifiConfiguration.KeyMgmt.WPA_PSK, "1234567890");
         mNewOpenSuggestionEntry = generateRegularWifiSuggestion(FAKE_NEW_OPEN_SSID,
                 WifiConfiguration.KeyMgmt.NONE, null);
         mSavedWpaConfigurationEntry = generateRegularWifiConfiguration(FAKE_NEW_SAVED_WPA_SSID,
                 WifiConfiguration.KeyMgmt.WPA_PSK, "\"1234567890\"");
-        when(mMockWifiManager.isWifiEnabled()).thenReturn(true);
-        mAddAppNetworksFragment.mWifiPickerTracker = mMockWifiPickerTracker;
+
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+
+        mAddAppNetworksFragment.mWifiPickerTracker = mWifiPickerTracker;
         setUpOneScannedNetworkWithScanedLevel4();
     }
 
@@ -213,7 +232,7 @@ public class AddAppNetworksFragmentTest {
     @Test
     public void withOneSuggestion_whenScanResultChanged_uiListShouldHaveNewLevel() {
         // Arrange
-        when(mMockWifiPickerTracker.getWifiState()).thenReturn(WifiManager.WIFI_STATE_ENABLED);
+        when(mWifiPickerTracker.getWifiState()).thenReturn(WifiManager.WIFI_STATE_ENABLED);
         // Setup a fake saved network list and assign to fragment.
         addOneSavedNetworkConfiguration(mSavedWpaConfigurationEntry);
         // Setup one specified networks and its results and assign to fragment.
@@ -233,7 +252,7 @@ public class AddAppNetworksFragmentTest {
     @Test
     public void withOneSuggestion_whenScanResultChangedButWifiOff_uiListShouldHaveZeroLevel() {
         // Arrange
-        when(mMockWifiPickerTracker.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
+        when(mWifiPickerTracker.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
         // Setup a fake saved network list and assign to fragment.
         addOneSavedNetworkConfiguration(mSavedWpaConfigurationEntry);
         // Setup one specified networks and its results and assign to fragment.
@@ -252,6 +271,9 @@ public class AddAppNetworksFragmentTest {
 
     @Test
     public void onDestroy_quitWorkerThread() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
         mAddAppNetworksFragment.mWorkerThread = mock(HandlerThread.class);
 
         try {
@@ -263,12 +285,182 @@ public class AddAppNetworksFragmentTest {
         verify(mAddAppNetworksFragment.mWorkerThread).quit();
     }
 
+    @Test
+    public void status_withOneNetworkSave_shouldShowOneNetworkSaving() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+
+        mAddAppNetworksFragment.showSaveStatusByState(
+                AddAppNetworksFragment.MESSAGE_START_SAVING_NETWORK);
+
+        final TextView textView = (TextView) mAddAppNetworksFragment.mLayoutView.findViewById(
+                R.id.single_status);
+        assertThat(textView.getText()).isEqualTo(mAddAppNetworksFragment.getString(
+                R.string.wifi_add_app_single_network_saving_summary));
+    }
+
+    @Test
+    public void status_withTwoNetworksSave_shouldShowMultipleNetworksSaving() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        addOneSpecifiedRegularNetworkSuggestion(mNewOpenSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+
+        mAddAppNetworksFragment.showSaveStatusByState(
+                AddAppNetworksFragment.MESSAGE_START_SAVING_NETWORK);
+
+        final TextView textView = (TextView) mAddAppNetworksFragment.mLayoutView.findViewById(
+                R.id.app_summary);
+        assertThat(textView.getText()).isEqualTo(
+                mAddAppNetworksFragment.getString(R.string.wifi_add_app_networks_saving_summary,
+                        2));
+    }
+
+    @Test
+    public void status_withOneNetworkSaved_shouldShowOneNetworkSaved() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+
+        mAddAppNetworksFragment.showSaveStatusByState(
+                AddAppNetworksFragment.MESSAGE_SHOW_SAVED_AND_CONNECT_NETWORK);
+
+        final TextView textView = (TextView) mAddAppNetworksFragment.mLayoutView.findViewById(
+                R.id.single_status);
+        assertThat(textView.getText()).isEqualTo(mAddAppNetworksFragment.getString(
+                R.string.wifi_add_app_single_network_saved_summary));
+    }
+
+    @Test
+    public void status_withTwoNetworksSaved_shouldShowMultipleNetworksSaved() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        addOneSpecifiedRegularNetworkSuggestion(mNewOpenSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+
+        mAddAppNetworksFragment.showSaveStatusByState(
+                AddAppNetworksFragment.MESSAGE_SHOW_SAVED_AND_CONNECT_NETWORK);
+
+        final TextView textView = (TextView) mAddAppNetworksFragment.mLayoutView.findViewById(
+                R.id.app_summary);
+        assertThat(textView.getText()).isEqualTo(
+                mAddAppNetworksFragment.getString(R.string.wifi_add_app_networks_saved_summary));
+    }
+
+    @Test
+    public void status_withOneNetworkSaveFailed_shouldShowOneNetworkFailed() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+
+        mAddAppNetworksFragment.showSaveStatusByState(
+                AddAppNetworksFragment.MESSAGE_SHOW_SAVE_FAILED);
+
+        final TextView textView = (TextView) mAddAppNetworksFragment.mLayoutView.findViewById(
+                R.id.single_status);
+        assertThat(textView.getText()).isEqualTo(mAddAppNetworksFragment.getString(
+                R.string.wifi_add_app_network_save_failed_summary));
+    }
+
+    @Test
+    public void status_withTwoNetworksSaveFailed_shouldShowMultipleNetworksFailed() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        addOneSpecifiedRegularNetworkSuggestion(mNewOpenSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+
+        mAddAppNetworksFragment.showSaveStatusByState(
+                AddAppNetworksFragment.MESSAGE_SHOW_SAVE_FAILED);
+
+        final TextView textView = (TextView) mAddAppNetworksFragment.mLayoutView.findViewById(
+                R.id.app_summary);
+        assertThat(textView.getText()).isEqualTo(mAddAppNetworksFragment.getString(
+                R.string.wifi_add_app_network_save_failed_summary));
+    }
+
+    @Test
+    public void saveOneNetwork_shouldCallWifiManagerSaveOnce() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+
+        mAddAppNetworksFragment.saveNetwork(0 /* index */);
+
+        verify(mWifiManager, times(1)).save(any(), any());
+    }
+
+    @Test
+    public void onSuccess_saveTwoNetworks_shouldCallWifiNamagerSaveTwice() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        addOneSpecifiedRegularNetworkSuggestion(mNewOpenSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+        mAddAppNetworksFragment.saveNetwork(0 /* index */);
+
+        final ArgumentCaptor<WifiManager.ActionListener> wifiCallbackCaptor =
+                ArgumentCaptor.forClass(WifiManager.ActionListener.class);
+        verify(mWifiManager).save(any(WifiConfiguration.class), wifiCallbackCaptor.capture());
+        wifiCallbackCaptor.getValue().onSuccess();
+
+        verify(mWifiManager, times(2)).save(any(), any());
+    }
+
+    @Test
+    public void onFailedFirstOne_saveTwoNetworks_shouldAlsoCallWifiNamagerSaveTwice() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        addOneSpecifiedRegularNetworkSuggestion(mNewOpenSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+        mAddAppNetworksFragment.saveNetwork(0 /* index */);
+
+        final ArgumentCaptor<WifiManager.ActionListener> wifiCallbackCaptor =
+                ArgumentCaptor.forClass(WifiManager.ActionListener.class);
+        verify(mWifiManager).save(any(WifiConfiguration.class), wifiCallbackCaptor.capture());
+        wifiCallbackCaptor.getValue().onFailure(anyInt());
+
+        verify(mWifiManager, times(2)).save(any(), any());
+    }
+
+    @Test
+    public void saveSuccess_shouldEnterShowAndConnectState() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+        mAddAppNetworksFragment.saveNetwork(0 /* index */);
+
+        final ArgumentCaptor<WifiManager.ActionListener> wifiCallbackCaptor =
+                ArgumentCaptor.forClass(WifiManager.ActionListener.class);
+        verify(mWifiManager).save(any(WifiConfiguration.class), wifiCallbackCaptor.capture());
+        wifiCallbackCaptor.getValue().onSuccess();
+
+        assertThat(mAddAppNetworksFragment.mHandler.hasMessages(
+                AddAppNetworksFragment.MESSAGE_SHOW_SAVED_AND_CONNECT_NETWORK)).isTrue();
+    }
+
+    @Test
+    public void saveFailed_shouldEnterFailedState() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
+        mAddAppNetworksFragment.saveNetwork(0 /* index */);
+
+        final ArgumentCaptor<WifiManager.ActionListener> wifiCallbackCaptor =
+                ArgumentCaptor.forClass(
+                        WifiManager.ActionListener.class);
+        verify(mWifiManager).save(any(WifiConfiguration.class), wifiCallbackCaptor.capture());
+        wifiCallbackCaptor.getValue().onFailure(1 /* reason */);
+
+        assertThat(mAddAppNetworksFragment.mHandler.hasMessages(
+                AddAppNetworksFragment.MESSAGE_SHOW_SAVE_FAILED)).isTrue();
+    }
+
     private void setUpOneScannedNetworkWithScanedLevel4() {
         final ArrayList list = new ArrayList<>();
-        list.add(mMockWifiEntry);
-        when(mMockWifiPickerTracker.getWifiEntries()).thenReturn(list);
-        when(mMockWifiEntry.getSsid()).thenReturn(FAKE_NEW_OPEN_SSID);
-        when(mMockWifiEntry.getLevel()).thenReturn(SCANED_LEVEL4);
+        list.add(mWifiEntry);
+        when(mWifiPickerTracker.getWifiEntries()).thenReturn(list);
+        when(mWifiEntry.getSsid()).thenReturn(FAKE_NEW_OPEN_SSID);
+        when(mWifiEntry.getLevel()).thenReturn(SCANED_LEVEL4);
     }
 
     private void addOneSavedNetworkConfiguration(@NonNull WifiConfiguration wifiConfiguration) {
@@ -299,6 +491,9 @@ public class AddAppNetworksFragmentTest {
     }
 
     private void setupFragment() {
+        when(mFakeFeatureFactory.wifiTrackerLibProvider.createWifiPickerTracker(
+                any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
+                .thenReturn(mWifiPickerTracker);
         FragmentController.setupFragment(mAddAppNetworksFragment);
     }
 

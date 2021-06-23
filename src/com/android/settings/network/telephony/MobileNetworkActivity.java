@@ -16,6 +16,8 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -81,7 +83,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         mCurSubscriptionId = updateSubscriptionIndex;
         mFragmentForceReload = (mCurSubscriptionId == oldSubId);
         final SubscriptionInfo info = getSubscription();
-        updateSubscriptions(info);
+        updateSubscriptions(info, null);
 
         // If the subscription has changed or the new intent doesnt contain the opt in action,
         // remove the old discovery dialog. If the activity is being recreated, we will see
@@ -113,6 +115,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
         }
 
         getProxySubscriptionManager().setLifecycle(getLifecycle());
@@ -132,7 +135,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         // perform registration after mCurSubscriptionId been configured.
         registerActiveSubscriptionsListener();
 
-        updateSubscriptions(subscription);
+        updateSubscriptions(subscription, savedInstanceState);
     }
 
     @VisibleForTesting
@@ -154,10 +157,15 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     public void onChanged() {
         SubscriptionInfo info = getSubscription();
         int oldSubIndex = mCurSubscriptionId;
-        updateSubscriptions(info);
+        updateSubscriptions(info, null);
 
         // Remove the dialog if the subscription associated with this activity changes.
         if (info == null) {
+            // Close the activity when subscription removed
+            if ((oldSubIndex != SUB_ID_NULL)
+                    && (!isFinishing()) && (!isDestroyed())) {
+                finish();
+            }
             return;
         }
         int subIndex = info.getSubscriptionId();
@@ -199,19 +207,21 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         // title will just default to the label for this activity that's already specified in
         // AndroidManifest.xml.
         if (subscription != null) {
-            setTitle(subscription.getDisplayName());
+            setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(subscription, this));
         }
     }
 
     @VisibleForTesting
-    void updateSubscriptions(SubscriptionInfo subscription) {
+    void updateSubscriptions(SubscriptionInfo subscription, Bundle savedInstanceState) {
         if (subscription == null) {
             return;
         }
         final int subscriptionIndex = subscription.getSubscriptionId();
 
         updateTitleAndNavigation(subscription);
-        switchFragment(subscription);
+        if (savedInstanceState == null) {
+            switchFragment(subscription);
+        }
 
         mCurSubscriptionId = subscriptionIndex;
         mFragmentForceReload = false;
@@ -247,8 +257,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         final int subId = subInfo.getSubscriptionId();
+        final Intent intent = getIntent();
         final Bundle bundle = new Bundle();
         bundle.putInt(Settings.EXTRA_SUB_ID, subId);
+        if (intent != null && Settings.ACTION_MMS_MESSAGE_SETTING.equals(intent.getAction())) {
+            // highlight "mms_message" preference.
+            bundle.putString(EXTRA_FRAGMENT_ARG_KEY, "mms_message");
+        }
 
         final String fragmentTag = buildFragmentTag(subId);
         if (fragmentManager.findFragmentByTag(fragmentTag) != null) {
@@ -284,7 +299,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         CharSequence carrierName = "";
         if (info != null) {
             subId = info.getSubscriptionId();
-            carrierName = info.getDisplayName();
+            carrierName = SubscriptionUtil.getUniqueSubscriptionDisplayName(info, this);
         }
         // If this activity was launched using ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN, show the
         // associated dialog only if the opt-in has not been granted yet.

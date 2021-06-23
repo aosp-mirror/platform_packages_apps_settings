@@ -84,7 +84,10 @@ abstract public class AbstractZenModePreferenceController extends
         mScreen = screen;
         Preference pref = screen.findPreference(KEY);
         if (pref != null) {
-            mSettingObserver = new SettingObserver(pref);
+            if (mSettingObserver == null) {
+                mSettingObserver = new SettingObserver();
+            }
+            mSettingObserver.setPreference(pref);
         }
     }
 
@@ -128,10 +131,13 @@ abstract public class AbstractZenModePreferenceController extends
         private final Uri ZEN_MODE_DURATION_URI = Settings.Secure.getUriFor(
                 Settings.Secure.ZEN_DURATION);
 
-        private final Preference mPreference;
+        private Preference mPreference;
 
-        public SettingObserver(Preference preference) {
+        public SettingObserver() {
             super(new Handler());
+        }
+
+        public void setPreference(Preference preference) {
             mPreference = preference;
         }
 

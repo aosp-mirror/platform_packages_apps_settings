@@ -25,7 +25,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
@@ -57,7 +57,7 @@ public class WifiTetherApBandPreferenceControllerTest {
 
     private Context mContext;
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
     @Mock
     private WifiManager mWifiManager;
     @Mock
@@ -74,9 +74,8 @@ public class WifiTetherApBandPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mPreference = new ListPreference(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(mConnectivityManager);
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
+        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
+        when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
         when(mContext.getResources()).thenReturn(RuntimeEnvironment.application.getResources());
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         when(mWifiManager.getSoftApConfiguration()).thenReturn(

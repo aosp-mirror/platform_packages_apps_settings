@@ -34,6 +34,10 @@
         android:title="@string/usb_use"/>
 
     <PreferenceCategory
-        android:key="usb_details_power_role"/>
+        android:key="usb_transcode_mtp"
+        android:title="@string/usb_file_transfer_title"/>
 
+    <PreferenceCategory
+        android:key="usb_details_power_role"
+        android:title="@string/usb_power_title"/>
 </PreferenceScreen>

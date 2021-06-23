@@ -21,18 +21,20 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import libcore.timezone.CountryTimeZones;
-import libcore.timezone.CountryTimeZones.TimeZoneMapping;
-import libcore.timezone.CountryZonesFinder;
+import static java.util.Collections.emptyList;
+
+import com.android.i18n.timezone.CountryTimeZones;
+import com.android.i18n.timezone.CountryTimeZones.TimeZoneMapping;
+import com.android.i18n.timezone.CountryZonesFinder;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class TimeZoneDataTest {
@@ -49,15 +51,15 @@ public class TimeZoneDataTest {
     public void testRegionsWithTimeZone() {
         TimeZoneData timeZoneData = new TimeZoneData(mCountryZonesFinder);
         CountryTimeZones countryTimeZones = mock(CountryTimeZones.class);
-        when(countryTimeZones.getTimeZoneMappings()).thenReturn(Collections.emptyList());
+        when(countryTimeZones.getTimeZoneMappings()).thenReturn(emptyList());
         when(mCountryZonesFinder.lookupCountryTimeZones("US")).thenReturn(countryTimeZones);
         assertThat(timeZoneData.lookupCountryTimeZones("US").getCountryTimeZones())
-                .isSameAs(countryTimeZones);
+                .isSameInstanceAs(countryTimeZones);
     }
 
     @Test
     public void testGetRegionIds() {
-        when(mCountryZonesFinder.lookupAllCountryIsoCodes()).thenReturn(Collections.emptyList());
+        when(mCountryZonesFinder.lookupAllCountryIsoCodes()).thenReturn(emptyList());
         TimeZoneData timeZoneData = new TimeZoneData(mCountryZonesFinder);
         assertThat(timeZoneData.getRegionIds()).isEmpty();
 
@@ -73,18 +75,40 @@ public class TimeZoneDataTest {
         CountryTimeZones US = mock(CountryTimeZones.class);
         when(US.getCountryIso()).thenReturn("us");
         when(US.getTimeZoneMappings()).thenReturn(Arrays.asList(
-           TimeZoneMapping.createForTests("Unknown/Secret_City", true, null /* notUsedAfter */),
-           TimeZoneMapping.createForTests("Unknown/Secret_City2", false, null /* notUsedAfter */)
+                TimeZoneMapping.createForTests(
+                        "Unknown/Secret_City", true, null /* notUsedAfter */, emptyList()),
+                TimeZoneMapping.createForTests(
+                        "Unknown/Secret_City2", false, null /* notUsedAfter */, emptyList())
         ));
         CountryTimeZones GB = mock(CountryTimeZones.class);
         when(GB.getCountryIso()).thenReturn("gb");
         when(GB.getTimeZoneMappings()).thenReturn(Collections.singletonList(
-            TimeZoneMapping.createForTests("Unknown/Secret_City", true, null /* notUsedAfter */)
+                TimeZoneMapping.createForTests(
+                        "Unknown/Secret_City", true, null /* notUsedAfter */, emptyList())
         ));
         when(mCountryZonesFinder.lookupCountryTimeZonesForZoneId("Unknown/Secret_City"))
                 .thenReturn(Arrays.asList(US, GB));
         assertThat(timeZoneData.lookupCountryCodesForZoneId("Unknown/Secret_City"))
                 .containsExactly("US", "GB");
         assertThat(timeZoneData.lookupCountryCodesForZoneId("Unknown/Secret_City2")).isEmpty();
+    }
+
+    @Test
+    public void lookupCountryCodesForNonCanonicalZoneId_returnsCurrentZone() {
+        TimeZoneData timeZoneData = new TimeZoneData(mCountryZonesFinder);
+
+        CountryTimeZones greenland = mock(CountryTimeZones.class);
+        when(greenland.getCountryIso()).thenReturn("gl");
+        when(greenland.getTimeZoneMappings()).thenReturn(Arrays.asList(
+                TimeZoneMapping.createForTests(
+                        "America/Nuuk",
+                        true /* showInPicker */,
+                        null /* notUsedAfter */,
+                        Arrays.asList("America/Godthab"))));
+        when(mCountryZonesFinder.lookupCountryTimeZonesForZoneId("America/Godthab"))
+                .thenReturn(Arrays.asList(greenland));
+
+        assertThat(timeZoneData.lookupCountryCodesForZoneId("America/Godthab"))
+                .containsExactly("GL");
     }
 }

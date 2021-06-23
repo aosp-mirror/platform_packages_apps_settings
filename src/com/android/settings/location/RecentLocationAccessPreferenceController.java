@@ -13,114 +13,152 @@
  */
 package com.android.settings.location;
 
-import static java.util.concurrent.TimeUnit.DAYS;
+import static android.Manifest.permission_group.LOCATION;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.RelativeDateTimeFormatter;
-import android.provider.DeviceConfig;
-import android.view.View;
+import android.os.UserHandle;
+import android.os.UserManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settingslib.location.RecentLocationAccesses;
 import com.android.settingslib.utils.StringUtil;
-import com.android.settingslib.widget.AppEntitiesHeaderController;
-import com.android.settingslib.widget.AppEntityInfo;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.AppPreference;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class RecentLocationAccessPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
-    /** Key for the recent location apps dashboard */
-    private static final String KEY_APPS_DASHBOARD = "apps_dashboard";
-    private final RecentLocationAccesses mRecentLocationAccesses;
-    private AppEntitiesHeaderController mController;
-    private static final int MAXIMUM_APP_COUNT = 3;
+/**
+ * Preference controller that handles the display of apps that access locations.
+ */
+public class RecentLocationAccessPreferenceController extends LocationBasePreferenceController {
+    public static final int MAX_APPS = 3;
+    @VisibleForTesting
+    RecentLocationAccesses mRecentLocationApps;
+    private PreferenceCategory mCategoryRecentLocationRequests;
+    private int mType = ProfileSelectFragment.ProfileType.ALL;
 
-    public RecentLocationAccessPreferenceController(Context context) {
-        this(context, new RecentLocationAccesses(context));
+    private static class PackageEntryClickedListener implements
+            Preference.OnPreferenceClickListener {
+        private final Context mContext;
+        private final String mPackage;
+        private final UserHandle mUserHandle;
+
+        PackageEntryClickedListener(Context context, String packageName,
+                UserHandle userHandle) {
+            mContext = context;
+            mPackage = packageName;
+            mUserHandle = userHandle;
+        }
+
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSION);
+            intent.putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, LOCATION);
+            intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackage);
+            intent.putExtra(Intent.EXTRA_USER, mUserHandle);
+            mContext.startActivity(intent);
+            return true;
+        }
+    }
+
+    public RecentLocationAccessPreferenceController(Context context, String key) {
+        this(context, key, new RecentLocationAccesses(context));
     }
 
     @VisibleForTesting
-    RecentLocationAccessPreferenceController(Context context,
-            RecentLocationAccesses recentAccesses) {
-        super(context);
-        mRecentLocationAccesses = recentAccesses;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_APPS_DASHBOARD;
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return Boolean.parseBoolean(
-                DeviceConfig.getProperty(DeviceConfig.NAMESPACE_PRIVACY,
-                        Utils.PROPERTY_PERMISSIONS_HUB_ENABLED));
+    public RecentLocationAccessPreferenceController(Context context, String key,
+            RecentLocationAccesses recentLocationApps) {
+        super(context, key);
+        mRecentLocationApps = recentLocationApps;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference preference = screen.findPreference(KEY_APPS_DASHBOARD);
-        final View view = preference.findViewById(R.id.app_entities_header);
-        mController = AppEntitiesHeaderController.newInstance(mContext, view)
-                .setHeaderTitleRes(R.string.location_category_recent_location_access)
-                .setHeaderDetailsRes(R.string.location_recent_location_access_view_details)
-                .setHeaderEmptyRes(R.string.location_no_recent_accesses)
-                .setHeaderDetailsClickListener((View v) -> {
-                    final Intent intent = new Intent(Intent.ACTION_REVIEW_PERMISSION_USAGE);
-                    intent.putExtra(Intent.EXTRA_PERMISSION_NAME,
-                            Manifest.permission.ACCESS_FINE_LOCATION);
-                    intent.putExtra(Intent.EXTRA_DURATION_MILLIS, DAYS.toMillis(1));
-                    mContext.startActivity(intent);
-                });
+        mCategoryRecentLocationRequests = screen.findPreference(getPreferenceKey());
+        final Context prefContext = mCategoryRecentLocationRequests.getContext();
+        final List<RecentLocationAccesses.Access> recentLocationAccesses = new ArrayList<>();
+        final UserManager userManager = UserManager.get(mContext);
+        for (RecentLocationAccesses.Access access : mRecentLocationApps.getAppListSorted(
+                /* showSystemApps= */ false)) {
+            if (isRequestMatchesProfileType(userManager, access, mType)) {
+                recentLocationAccesses.add(access);
+                if (recentLocationAccesses.size() == MAX_APPS) {
+                    break;
+                }
+            }
+        }
+
+        if (recentLocationAccesses.size() > 0) {
+            // Add preferences to container in original order (already sorted by recency).
+            for (RecentLocationAccesses.Access access : recentLocationAccesses) {
+                mCategoryRecentLocationRequests.addPreference(
+                        createAppPreference(prefContext, access, mFragment));
+            }
+        } else {
+            // If there's no item to display, add a "No recent apps" item.
+            final Preference banner = new AppPreference(prefContext);
+            banner.setTitle(R.string.location_no_recent_accesses);
+            banner.setSelectable(false);
+            mCategoryRecentLocationRequests.addPreference(banner);
+        }
     }
 
     @Override
-    public void updateState(Preference preference) {
-        updateRecentApps();
+    public void onLocationModeChanged(int mode, boolean restricted) {
+        boolean enabled = mLocationEnabler.isEnabled(mode);
+        mCategoryRecentLocationRequests.setVisible(enabled);
     }
 
-    private void updateRecentApps() {
-        final List<RecentLocationAccesses.Access> recentLocationAccesses =
-                mRecentLocationAccesses.getAppListSorted();
-        if (recentLocationAccesses.size() > 0) {
-            // Display the top 3 preferences to container in original order.
-            int i = 0;
-            for (; i < Math.min(recentLocationAccesses.size(), MAXIMUM_APP_COUNT); i++) {
-                final RecentLocationAccesses.Access access = recentLocationAccesses.get(i);
-                final AppEntityInfo appEntityInfo = new AppEntityInfo.Builder()
-                        .setIcon(access.icon)
-                        .setTitle(access.label)
-                        .setSummary(StringUtil.formatRelativeTime(mContext,
-                                System.currentTimeMillis() - access.accessFinishTime, false,
-                                RelativeDateTimeFormatter.Style.SHORT))
-                        .setOnClickListener((v) -> {
-                            final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSION);
-                            intent.putExtra(Intent.EXTRA_PERMISSION_NAME,
-                                    Manifest.permission.ACCESS_FINE_LOCATION);
-                            intent.putExtra(Intent.EXTRA_PACKAGE_NAME, access.packageName);
-                            intent.putExtra(Intent.EXTRA_USER, access.userHandle);
-                            mContext.startActivity(intent);
-                        })
-                        .build();
-                mController.setAppEntity(i, appEntityInfo);
-            }
-            for (; i < MAXIMUM_APP_COUNT; i++) {
-                mController.removeAppEntity(i);
-            }
+    /**
+     * Initialize {@link ProfileSelectFragment.ProfileType} of the controller
+     *
+     * @param type {@link ProfileSelectFragment.ProfileType} of the controller.
+     */
+    public void setProfileType(@ProfileSelectFragment.ProfileType int type) {
+        mType = type;
+    }
+
+    /**
+     * Create a {@link AppPreference}
+     */
+    public static AppPreference createAppPreference(Context prefContext,
+            RecentLocationAccesses.Access access, DashboardFragment fragment) {
+        final AppPreference pref = new AppPreference(prefContext);
+        pref.setIcon(access.icon);
+        pref.setTitle(access.label);
+        pref.setSummary(StringUtil.formatRelativeTime(prefContext,
+                System.currentTimeMillis() - access.accessFinishTime, false,
+                RelativeDateTimeFormatter.Style.SHORT));
+        pref.setOnPreferenceClickListener(new PackageEntryClickedListener(
+                fragment.getContext(), access.packageName, access.userHandle));
+        return pref;
+    }
+
+    /**
+     * Return if the {@link RecentLocationAccesses.Access} matches current UI
+     * {@ProfileSelectFragment.ProfileType}
+     */
+    public static boolean isRequestMatchesProfileType(UserManager userManager,
+            RecentLocationAccesses.Access access, @ProfileSelectFragment.ProfileType int type) {
+
+        final boolean isWorkProfile = userManager.isManagedProfile(
+                access.userHandle.getIdentifier());
+        if (isWorkProfile && (type & ProfileSelectFragment.ProfileType.WORK) != 0) {
+            return true;
         }
-        mController.apply();
+        if (!isWorkProfile && (type & ProfileSelectFragment.ProfileType.PERSONAL) != 0) {
+            return true;
+        }
+        return false;
     }
 }

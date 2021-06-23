@@ -41,6 +41,9 @@ public class AnomalyDetectionReceiver extends BroadcastReceiver {
                 + configKey + " subscriptionId = " + subscriptionId);
 
         final Bundle bundle = intent.getExtras();
+        if (bundle == null) {
+            return;
+        }
         bundle.putLong(KEY_ANOMALY_TIMESTAMP, System.currentTimeMillis());
 
         AnomalyDetectionJobService.scheduleAnomalyDetection(context, intent);

@@ -27,12 +27,11 @@
         android:selectable="false"
         settings:allowDividerBelow="true"/>
 
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="zen_automatic_rule_switch" />
+
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="zen_action_buttons"/>
-
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="zen_automatic_rule_switch"
-        android:layout="@layout/styled_switch_bar" />
 
     <!-- Days -->
     <Preference

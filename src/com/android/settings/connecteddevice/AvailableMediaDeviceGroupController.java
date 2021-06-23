@@ -68,6 +68,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
         }
         mBluetoothDeviceUpdater.registerCallback();
         mLocalBluetoothManager.getEventManager().registerCallback(this);
+        mBluetoothDeviceUpdater.refreshPreference();
     }
 
     @Override

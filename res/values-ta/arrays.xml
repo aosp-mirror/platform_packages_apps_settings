@@ -98,11 +98,12 @@
   </string-array>
     <!-- no translation found for wifi_tether_security:0 (6312112980634811065) -->
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
+    <!-- no translation found for wifi_tether_security:2 (6851763638266088835) -->
+    <!-- no translation found for wifi_tether_security:3 (5512131148045414341) -->
   <string-array name="eap_ocsp_type">
-    <item msgid="7202884222741437608">"சரிபார்க்காதே"</item>
+    <item msgid="8568170800958331461">"சரிபார்க்க வேண்டாம்"</item>
     <item msgid="5703177653586269306">"சான்றிதழ் கோரிக்கை நிலை"</item>
     <item msgid="326388247868439528">"சான்றிதழ் தேவை நிலை"</item>
-    <item msgid="1090956283885790552">"அனைத்து நம்பகத்தன்மை இல்லாத சான்றிதழ்களுக்கான தேவை நிலைகள்"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"புஷ் பட்டன்"</item>
@@ -171,11 +172,11 @@
   </string-array>
   <string-array name="wifi_ip_settings">
     <item msgid="6665889765350160154">"DHCP"</item>
-    <item msgid="6215795691318745695">"நிலையான"</item>
+    <item msgid="6215795691318745695">"நிலையானது"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
     <item msgid="4669222334822978847">"ஏதுமில்லை"</item>
-    <item msgid="6242198071587397280">"கைமுறை"</item>
+    <item msgid="6242198071587397280">"பயனர் உள்ளீடு"</item>
     <item msgid="464383874780058242">"ப்ராக்ஸி தானியங்கு-உள்ளமைவு"</item>
   </string-array>
   <string-array name="apn_auth_entries">
@@ -365,6 +366,11 @@
     <item msgid="5118829513010894576">"நடுத்தரம்"</item>
     <item msgid="6740026006576843477">"நீளமானது"</item>
   </string-array>
+  <string-array name="long_press_timeout_selector_list_titles">
+    <item msgid="8908021508913038488">"குறுகியது"</item>
+    <item msgid="7397961711906421599">"நடுத்தரமானது"</item>
+    <item msgid="4079132024502041928">"நீண்டது"</item>
+  </string-array>
   <string-array name="captioning_typeface_selector_titles">
     <item msgid="2166553138528640250">"இயல்புநிலை"</item>
     <item msgid="4234707448428002595">"Sans-serif"</item>
@@ -412,6 +418,18 @@
     <item msgid="2836895041823327816">"நீலத்தில் மஞ்சள்"</item>
     <item msgid="747238414788976867">"பிரத்தியேகம்"</item>
   </string-array>
+  <string-array name="accessibility_button_location_selector_titles">
+    <item msgid="6485511780196327736">"பிற ஆப்ஸ் மீது தோன்றுதல்"</item>
+    <item msgid="3605616699204153590">"வழிசெலுத்தல் பட்டி"</item>
+  </string-array>
+  <string-array name="accessibility_button_gesture_selector_titles">
+    <item msgid="2370918472773154939">"பட்டன்"</item>
+    <item msgid="6922258575853746220">"சைகை"</item>
+  </string-array>
+  <string-array name="accessibility_button_size_selector_titles">
+    <item msgid="7482952318152486459">"சிறியது"</item>
+    <item msgid="1666628329913333563">"பெரியது"</item>
+  </string-array>
   <string-array name="vpn_types_long">
     <item msgid="6621806338070912611">"PPTP VPN"</item>
     <item msgid="2552427673212085780">"பாதுகாப்பு விசைகளுடன் கூடிய L2TP/IPSec VPN"</item>
@@ -425,7 +443,7 @@
   </string-array>
   <string-array name="vpn_proxy_settings">
     <item msgid="7165538292837266997">"ஏதுமில்லை"</item>
-    <item msgid="2397017538263427575">"நேரடி அமைப்புகள்"</item>
+    <item msgid="2397017538263427575">"பயனர் உள்ளீடு"</item>
   </string-array>
   <string-array name="vpn_states">
     <item msgid="2262719249581510939">"துண்டிக்கப்பட்டது"</item>
@@ -498,7 +516,7 @@
     <item msgid="741680937828608749">"சாதன MACகைப் பயன்படுத்து"</item>
   </string-array>
   <string-array name="wifi_hidden_entries">
-    <item msgid="342232116597649254">"வேண்டாம்"</item>
+    <item msgid="342232116597649254">"இல்லை"</item>
     <item msgid="2163015208097377388">"ஆம்"</item>
   </string-array>
   <string-array name="dark_ui_mode_entries">
@@ -525,7 +543,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="1091258946200124345">"குளோபல்"</item>
+    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE / WCDMA"</item>
     <item msgid="7723670142495874534">"TDSCDMA மட்டும்"</item>
@@ -542,7 +560,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="8908263949185004366">"குளோபல்"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>

@@ -24,11 +24,11 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.AppSwitchPreference;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.widget.AppSwitchPreference;
 
 public class UnrestrictedDataAccessPreference extends AppSwitchPreference implements
         DataSaverBackend.Listener {
@@ -79,15 +79,15 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
 
     @Override
     protected void onClick() {
-        if (mDataUsageState.isDataSaverBlacklisted) {
-            // app is blacklisted, launch App Data Usage screen
+        if (mDataUsageState.isDataSaverDenylisted) {
+            // app is denylisted, launch App Data Usage screen
             AppInfoDashboardFragment.startAppInfoFragment(AppDataUsage.class,
                     R.string.data_usage_app_summary_title,
                     null /* arguments */,
                     mParentFragment,
                     mEntry);
         } else {
-            // app is not blacklisted, let superclass handle toggle switch
+            // app is not denylisted, let superclass handle toggle switch
             super.onClick();
         }
     }
@@ -119,7 +119,7 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
             widgetFrame.setVisibility(View.VISIBLE);
         } else {
             widgetFrame.setVisibility(
-                    mDataUsageState != null && mDataUsageState.isDataSaverBlacklisted
+                    mDataUsageState != null && mDataUsageState.isDataSaverDenylisted
                             ? View.INVISIBLE : View.VISIBLE);
         }
         super.onBindViewHolder(holder);
@@ -136,17 +136,17 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
     }
 
     @Override
-    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+    public void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {
         if (mDataUsageState != null && mEntry.info.uid == uid) {
-            mDataUsageState.isDataSaverWhitelisted = isWhitelisted;
+            mDataUsageState.isDataSaverAllowlisted = isAllowlisted;
             updateState();
         }
     }
 
     @Override
-    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+    public void onDenylistStatusChanged(int uid, boolean isDenylisted) {
         if (mDataUsageState != null && mEntry.info.uid == uid) {
-            mDataUsageState.isDataSaverBlacklisted = isBlacklisted;
+            mDataUsageState.isDataSaverDenylisted = isDenylisted;
             updateState();
         }
     }
@@ -167,15 +167,15 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         mHelper.setDisabledByAdmin(admin);
     }
 
-    // Sets UI state based on whitelist/blacklist status.
+    // Sets UI state based on allowlist/denylist status.
     public void updateState() {
         setTitle(mEntry.label);
         if (mDataUsageState != null) {
-            setChecked(mDataUsageState.isDataSaverWhitelisted);
+            setChecked(mDataUsageState.isDataSaverAllowlisted);
             if (isDisabledByAdmin()) {
                 setSummary(R.string.disabled_by_admin);
-            } else if (mDataUsageState.isDataSaverBlacklisted) {
-                setSummary(R.string.restrict_background_blacklisted);
+            } else if (mDataUsageState.isDataSaverDenylisted) {
+                setSummary(R.string.restrict_background_blocklisted);
             } else {
                 setSummary("");
             }

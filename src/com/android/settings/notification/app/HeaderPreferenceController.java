@@ -60,6 +60,11 @@ public class HeaderPreferenceController extends NotificationPreferenceController
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return true;
+    }
+
+    @Override
     public void updateState(Preference preference) {
         if (mAppRow != null && mFragment != null) {
 
@@ -79,6 +84,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
             pref = mHeaderController.setIcon(mAppRow.icon)
                     .setLabel(getLabel())
                     .setSummary(getSummary())
+                    .setSecondSummary(getSecondSummary())
                     .setPackageName(mAppRow.pkg)
                     .setUid(mAppRow.uid)
                     .setButtonActions(EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
@@ -87,17 +93,31 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                     .setRecyclerView(mFragment.getListView(), mFragment.getSettingsLifecycle())
                     .done(activity, mContext);
             pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
+            pref.findViewById(R.id.entity_header).setBackground(null);
         }
+    }
+
+    public CharSequence getLabel() {
+        if (mChannel != null && !isDefaultChannel()) {
+            return mChannel.getName();
+        } else {
+            return mAppRow.label;
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onStart() {
+        mStarted = true;
     }
 
     @Override
     public CharSequence getSummary() {
-        if (mChannel != null && !isDefaultChannel()) {
+        if (mChannel != null) {
             if (mChannelGroup != null
                     && !TextUtils.isEmpty(mChannelGroup.getName())) {
                 final SpannableStringBuilder summary = new SpannableStringBuilder();
                 BidiFormatter bidi = BidiFormatter.getInstance();
-                summary.append(bidi.unicodeWrap(mAppRow.label.toString()));
+                summary.append(bidi.unicodeWrap(mAppRow.label));
                 summary.append(bidi.unicodeWrap(mContext.getText(
                         R.string.notification_header_divider_symbol_with_spaces)));
                 summary.append(bidi.unicodeWrap(mChannelGroup.getName().toString()));
@@ -105,26 +125,11 @@ public class HeaderPreferenceController extends NotificationPreferenceController
             } else {
                 return mAppRow.label.toString();
             }
-        } else if (mChannelGroup != null) {
-            return mAppRow.label.toString();
-        } else {
-            return "";
         }
+        return "";
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    public void onStart() {
-        mStarted = true;
-        if (mHeaderController != null) {
-            mHeaderController.styleActionBar(mFragment.getActivity());
-        }
-    }
-
-    @VisibleForTesting
-    CharSequence getLabel() {
-        return (mChannel != null && !isDefaultChannel()) ? mChannel.getName()
-                : mChannelGroup != null
-                        ? mChannelGroup.getName()
-                        : mAppRow.label;
+    public CharSequence getSecondSummary() {
+        return mChannel == null ? null : mChannel.getDescription();
     }
 }
