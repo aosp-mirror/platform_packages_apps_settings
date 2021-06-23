@@ -35,7 +35,7 @@ import android.content.Context;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settingslib.wifi.WifiEntryPreference;
+import com.android.settings.wifi.WifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
