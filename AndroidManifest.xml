@@ -141,7 +141,6 @@
 
         <activity android:name=".network.telephony.MobileNetworkActivity"
                   android:label="@string/network_settings_title"
-                  android:theme="@style/Theme.SubSettings"
                   android:exported="true"
                   android:launchMode="singleTask">
             <intent-filter android:priority="1">
@@ -182,7 +181,6 @@
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
-                  android:theme="@style/Theme.SubSettings"
                   android:label="@string/settings_shortcut">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -419,7 +417,6 @@
                 android:label="@string/apn_settings"
                 android:launchMode="singleTask"
                 android:exported="true"
-                android:theme="@style/Theme.SubSettings"
                 android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APN_SETTINGS" />
@@ -474,7 +471,6 @@
 
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
-            android:theme="@style/Theme.SubSettings"
             android:exported="true"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
@@ -499,7 +495,6 @@
 
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
-                  android:theme="@style/Theme.SubSettings"
                   android:exported="false">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
@@ -507,7 +502,6 @@
 
         <activity android:name="Settings$CombinedBiometricProfileSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
-                  android:theme="@style/Theme.SubSettings"
                   android:exported="false">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricProfileSettings" />
@@ -713,8 +707,7 @@
         <activity
             android:name="Settings$ManageAssistActivity"
             android:exported="true"
-            android:label="@string/assist_and_voice_input_title"
-            android:theme="@style/Theme.SubSettings">
+            android:label="@string/assist_and_voice_input_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1154,7 +1147,6 @@
         <activity
             android:name="Settings$ManageDomainUrlsActivity"
             android:exported="true"
-            android:theme="@style/Theme.SubSettings"
             android:label="@string/domain_urls_title">
             <intent-filter>
                 <action android:name="android.settings.MANAGE_DOMAIN_URLS" />
@@ -1332,7 +1324,6 @@
         <activity
             android:name=".notification.history.NotificationHistoryActivity"
             android:exported="true"
-            android:theme="@style/Theme.SubSettings"
             android:label="@string/notification_history_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_HISTORY" />
@@ -1495,7 +1486,6 @@
         </activity>
 
         <activity android:name=".security.RequestManageCredentials"
-                  android:theme="@style/Theme.SubSettings"
                   android:exported="true">
             <intent-filter>
                 <action android:name="android.security.MANAGE_CREDENTIALS"/>
@@ -1528,7 +1518,6 @@
         <activity android:name=".applications.specialaccess.deviceadmin.DeviceAdminAdd"
                   android:label="@string/device_admin_add_title"
                   android:exported="true"
-                  android:theme="@style/Theme.SubSettings"
                   android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
@@ -2084,7 +2073,6 @@
         <activity android:name="Settings$ApnEditorActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:exported="true"
-                android:theme="@style/Theme.SubSettings"
                 android:label="@string/apn_edit">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -2455,7 +2443,6 @@
 
         <activity
             android:name="com.android.settings.accounts.AddAccountSettings"
-            android:theme="@style/Theme.SubSettings"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/header_add_an_account">
@@ -2469,7 +2456,6 @@
 
         <activity android:name="Settings$ChooseAccountActivity"
             android:label="@string/header_add_an_account"
-                  android:theme="@style/Theme.SubSettings"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.accounts.ChooseAccountFragment" />
@@ -3030,7 +3016,6 @@
         <activity
             android:name="Settings$WifiCallingSettingsActivity"
             android:exported="true"
-            android:theme="@style/Theme.SubSettings"
             android:label="@string/wifi_calling_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -3720,7 +3705,6 @@
             android:name="Settings$GestureNavigationSettingsActivity"
             android:label="@string/gesture_settings_activity_title"
             android:exported="true"
-            android:theme="@style/Theme.SubSettings"
             android:enabled="true">
             <intent-filter android:priority="32">
                 <action android:name="android.intent.action.MAIN" />
@@ -3804,7 +3788,6 @@
                  android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <activity android:name=".sim.smartForwarding.SmartForwardingActivity"
-            android:theme="@style/Theme.SubSettings.Base"
             android:exported="true"
             android:launchMode="singleTask">
         </activity>
