@@ -129,15 +129,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity
                 : ((startIntent != null)
                 ? startIntent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
                 : SUB_ID_NULL);
+        // perform registration after mCurSubscriptionId been configured.
+        registerActiveSubscriptionsListener();
 
         final SubscriptionInfo subscription = getSubscription();
         maybeShowContactDiscoveryDialog(subscription);
 
-        // Since onChanged() will take place immediately when addActiveSubscriptionsListener(),
-        // perform registration after mCurSubscriptionId been configured.
-        registerActiveSubscriptionsListener();
-
-        updateSubscriptions(subscription, savedInstanceState);
+        updateSubscriptions(subscription, null);
     }
 
     @VisibleForTesting
@@ -287,7 +285,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final Fragment fragment = new MobileNetworkSettings();
         fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.content_frame, fragment, fragmentTag);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     private void removeContactDiscoveryDialog(int subId) {
