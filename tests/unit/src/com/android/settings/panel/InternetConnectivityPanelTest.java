@@ -255,8 +255,8 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void getSeeMoreIntent_shouldBeNull() {
-        assertThat(mPanel.getSeeMoreIntent()).isNull();
+    public void getSeeMoreIntent_shouldNotNull() {
+        assertThat(mPanel.getSeeMoreIntent()).isNotNull();
     }
 
     @Test
