@@ -41,7 +41,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.wifi.AddNetworkFragment;
-import com.android.settingslib.wifi.WifiEntryPreference;
+import com.android.settings.wifi.WifiEntryPreference;
 import com.android.wifitrackerlib.SavedNetworkTracker;
 import com.android.wifitrackerlib.WifiEntry;
 
