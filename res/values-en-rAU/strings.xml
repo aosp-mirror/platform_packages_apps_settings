@@ -458,6 +458,8 @@
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Use face and fingerprint for"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Unlocking your phone"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Authentication in apps"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Hand the phone back to your parent"</string>
+    <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Skip screen lock?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Device protection features won’t be turned on. You won’t be able to prevent others from using this tablet if it’s lost, stolen or reset."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Device protection features won’t be turned on. You won’t be able to prevent others from using this device if it’s lost, stolen or reset."</string>
@@ -555,6 +557,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"In addition to unlocking your phone, you can also use your fingerprint to authorise purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" The screen lock option is disabled. To find out more, contact your organisation\'s admin. "<annotation id="admin_details">"More details"</annotation>\n\n"You can still use your fingerprint to authorise purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lift finger, then touch sensor again"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Please recalibrate the fingerprint sensor."</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"You can add up to <xliff:g id="COUNT">%d</xliff:g> fingerprints"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"You’ve added the maximum number of fingerprints"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Can’t add more fingerprints"</string>
@@ -2535,22 +2538,22 @@
     <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"light sensitivity, photophobia, dark theme, migraine, headache, reading mode, night mode, reduce brightness, white point"</string>
     <string name="keywords_accessibility" msgid="4263443239404659143">"Ease of use, ease of access, assistance, assistive"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"Window magnifier, zoom, magnification, low vision, enlarge, make bigger"</string>
-    <string name="keywords_talkback" msgid="5563641756576863139">"Screen reader, voice over, voiceover, voice assistance, blind, low vision, TTS, text to speech, spoken feedback"</string>
+    <string name="keywords_talkback" msgid="2816435437095102527"></string>
     <string name="keywords_live_caption" msgid="1667203998080567556">"Captions, closed captions, CC, Live Transcribe, hard of hearing, hearing loss, CART, speech to text, subtitle"</string>
-    <string name="keywords_live_transcribe" msgid="9139708749952089372">"Captions, closed captions, CC, Live Caption, hard of hearing, hearing loss, CART, speech to text, subtitle"</string>
-    <string name="keywords_sound_notifications" msgid="4039008340786330887">"Notifications, hard of hearing, hearing loss, notify"</string>
-    <string name="keywords_sound_amplifier" msgid="921848808218956694">"PSAP, amplify, sound amplification, hard of hearing, hearing loss, amplification"</string>
+    <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
+    <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
+    <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
     <string name="keywords_display_size" msgid="5286419615221231518">"screen size, large screen"</string>
     <string name="keywords_bold_text" msgid="6257418169207099589">"High contrast, low vision, bold font, bold face"</string>
-    <string name="keywords_select_to_speak" msgid="7701037476608073886">"Hear text, read aloud, speak screen, screen reader"</string>
+    <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"adjust colour"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"turn screen dark, turn screen light"</string>
-    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"motor, quick menu, assistive menu, touch, dexterity"</string>
-    <string name="keywords_switch_access" msgid="8016330125790412167">"motor, switch, hand, AT, assistive technology, paralysis, ALS, scanning, step scanning"</string>
+    <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
+    <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motor, mouse"</string>
     <string name="keywords_hearing_aids" msgid="524979615168196199">"hard of hearing, hearing loss"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"hard of hearing, hearing loss, captions, Teletype, TTY"</string>
-    <string name="keywords_voice_access" msgid="4486056790014652334">"voice, voice control, motor, hand, mic, microphone, dictation, talk, control"</string>
+    <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="print_settings" msgid="8519810615863882491">"Printing"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Off"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3506,7 +3509,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wi-fi, Wi-Fi, call, calling"</string>
     <string name="keywords_display" msgid="874738809280751745">"screen, touchscreen"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"dim screen, touchscreen, battery, bright"</string>
-    <string name="keywords_display_night_display" msgid="1132588285544830670">"dim screen, night, tint, night shift, brightness, screen colour, colour, color, light sensitivity, photophobia, make darker, darken, dark mode, migraine"</string>
+    <string name="keywords_display_night_display" msgid="4711054330804250058">"dim screen, night, tint, night shift, brightness, screen colour, colour, color"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"background, personalise, customise display"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"text size"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"project, cast, Screen mirroring, Screen sharing, mirroring, share screen, screen casting"</string>
@@ -3551,7 +3554,7 @@
     <string name="keywords_sim_status" msgid="8784456547742075508">"network, mobile network state, service state, signal strength, mobile network type, roaming, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serial number, hardware version"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"android security patch level, baseband version, kernel version"</string>
-    <string name="keywords_dark_ui_mode" msgid="6465231409128452489">"theme, light, dark, mode"</string>
+    <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"theme, light, dark, mode, light sensitivity, photophobia, make darker, darken, dark mode, migraine"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"dark theme"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"bug"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Ambient display, Lock screen display"</string>
@@ -5067,6 +5070,10 @@
     <string name="unknown_unavailability_setting_summary" msgid="9060213910510360231">"Setting unavailable"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Account"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Device name"</string>
+    <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Basic info"</string>
+    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Legal &amp; regulatory"</string>
+    <string name="my_device_info_device_details_category_title" msgid="4848438695638348680">"Device details"</string>
+    <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Device identifiers"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wi-Fi control"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Allow app to control Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Allow this app to turn Wi-Fi on or off, scan and connect to Wi-Fi networks, add or remove networks, or start a local-only hotspot"</string>
