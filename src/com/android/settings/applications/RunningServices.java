@@ -72,11 +72,7 @@ public class RunningServices extends SettingsPreferenceFragment {
     public void onResume() {
         super.onResume();
         boolean haveData = mRunningProcessesView.doResume(this, mRunningProcessesAvail);
-        if (haveData) {
-            mLoadingViewController.showContent(false /* animate */);
-        } else {
-            mLoadingViewController.showLoadingView();
-        }
+        mLoadingViewController.handleLoadingContainer(haveData /* done */, false /* animate */);
     }
 
     @Override
