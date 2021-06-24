@@ -52,7 +52,7 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Muutke ekraanil kuvatavat teksti suuremaks või väiksemaks."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Vähendamine"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Suurendamine"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Automaatse pööramise kasutamine"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Kasuta automaatset pööramist"</string>
     <string name="smart_rotate_text_headline" msgid="8947678366129076364">"Näotuvastus kasutab esikaamerat, et parandada automaatse pööramise täpsust. Pilte ei salvestata ega saadeta mitte kunagi Google\'ile.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Lisateave ekraanikuva automaatse pööramise kohta&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Näidistekst"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Võlur Oz"</string>
@@ -345,12 +345,10 @@
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Nõustun"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Rohkem"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Avage oma näoga"</string>
-    <!-- no translation found for security_settings_face_enroll_consent_introduction_title (3942331854413767814) -->
-    <skip />
+    <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Lubage näoga avamine"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Kasutage autentimiseks oma nägu"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Kasutage oma nägu telefoni avamiseks, ostude volitamiseks või rakendustesse sisselogimiseks."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (866117500419055444) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Lubage lapsel näo abil telefoni avada või oma isikut kinnitada. See toimub siis, kui ta üritab rakendustesse sisse logida, ostu kinnitada või teha muud."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Kasutage telefoni avamiseks või ostude kinnitamiseks oma nägu.\n\nMärkus: te ei saa kasutada oma nägu selle seadme avamiseks. Lisateabe saamiseks võtke ühendust oma organisatsiooni administraatoriga."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Kasutage oma nägu telefoni avamiseks, ostude volitamiseks või rakendustesse sisselogimiseks"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -410,16 +408,12 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Sõrmejälje seadistamine"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_consent_introduction_title (2278592030102282364) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Lubage sõrmejäljega avamine"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Sõrmejälje kasutamine"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (6100563481214337377) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (1833139688278350628) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6100563481214337377">"Kasutage oma telefoni avamiseks või oma isiku kinnitamiseks (nt rakendustesse sisselogimisel või ostude kinnitamisel) oma sõrmejälge."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Lubage lapsel sõrmejälje abil telefoni avada või oma isikut kinnitada. See toimub siis, kui ta üritab rakendustesse sisse logida, ostu kinnitada või teha muud."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Teie juhite toimuvat"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_consent_1 (1122676690472680734) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Kontroll on teie ja teie lapse käes"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Pidage meeles"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_1" msgid="7817635368506064516">"Sõrmejäljefunktsiooni salvestatud andmed talletatakse turvaliselt ja neid ei edastata telefonist väljapoole. Seadetes võite oma andmed alati kustutada."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_2" msgid="3507618608004123384">"Teie sõrmejälg võib olla ebaturvalisem kui tugev muster või PIN-kood."</string>
@@ -438,20 +432,14 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Pidage meeles"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Telefoni avamiseks sõrmejälje kasutamine võib olla vähem turvaline kui tugev muster või PIN-kood"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Kuidas see toimib?"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_2 (5909924864816776516) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2 (3493356605815124807) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (4729142136478078228) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (5908959250804145997) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Sõrmejäljega avamise funktsioon loob teie sõrmejäljest kordumatu mudeli, mille abil teie isik kinnitada. Sõrmejäljemudeli loomiseks jäädvustate seadistamise ajal kujutised oma sõrmejäljest eri asendites."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Sõrmejäljega avamise funktsioon loob teie lapse sõrmejäljest kordumatu mudeli, mille abil tema isik kinnitada. Sõrmejäljemudeli loomiseks jäädvustatakse seadistamise ajal kujutised tema sõrmejäljest eri asendites."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Kui kasutate Pixel Imprinti, kasutatakse kujutisi teie sõrmejäljemudeli värskendamiseks. Sõrmejäljemudeli loomiseks kasutatavaid kujutisi ei salvestata mitte kunagi, kuid sõrmejäljemudel salvestatakse turvaliselt teie telefoni, kust seda välja ei saadeta. Kogu töötlus toimub turvaliselt teie telefonis."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Kui ta kasutab Pixel Imprinti, kasutatakse kujutisi tema sõrmejäljemudeli värskendamiseks. Lapse sõrmejäljemudeli loomiseks kasutatavaid kujutisi ei salvestata mitte kunagi, kuid sõrmejäljemudel salvestatakse turvaliselt tema telefoni, kust seda välja ei saadeta. Kogu töötlus toimub turvaliselt telefonis."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Seadetes saate oma sõrmejäljekujutised ja -mudeli alati kustutada või sõrmejäljega avamise funktsiooni välja lülitada. Sõrmejäljekujutised ja -mudelid salvestatakse telefoni, kuni need kustutate."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (4983770600405797515) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Seadetes saate (või saab laps) sõrmejäljekujutised ja -mudeli alati kustutada või sõrmejäljega avamise funktsiooni välja lülitada. Sõrmejäljekujutised ja -mudelid salvestatakse telefoni, kuni need kustutatakse."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Teie telefoni saab avada, kui te seda teha ei kavatse (nt kui keegi hoiab seda teie sõrme vastas)."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (8356551505082794682) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Teie lapse telefoni saab avada, kui ta seda teha ei kavatse (nt kui keegi hoiab seda tema sõrme vastas)."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Muutke iga kord pisut oma sõrme asendit"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Katke ikoon oma sõrmejälje keskosaga"</string>
@@ -460,8 +448,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Tõstke sõrm ekraanilt, kui tunnete vibratsiooni"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Minge kohta, kus on mahedam valgus, ja proovige uuesti"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Olete teinud maksimaalse arvu katseid"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (1709655966777714761) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="1709655966777714761">"Kasutage oma sõrmejälge telefoni avamiseks või oma isiku kinnitamiseks (nt rakendustesse sisselogimisel)\n\n"<annotation id="url">"Lisateave"</annotation></string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Näo ja sõrmejäljega avamine"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Puudutage seadistamiseks"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Nägu ja sõrmejäljed on lisatud"</string>
@@ -471,6 +458,8 @@
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Kasuta nägu ja sõrmejälge:"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Telefoni avamine"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Autentimine rakendustes"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Anna telefon vanema kätte tagasi"</string>
+    <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Kas jätta ekraanilukk vahele?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Seadme kaitsefunktsioone ei lülitata sisse. Te ei saa tahvelarvuti kaotsimineku, varguse või lähtestamise puhul teistel selle kasutamist takistada."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Seadme kaitsefunktsioone ei lülitata sisse. Te ei saa seadme kaotsimineku, varguse või lähtestamise puhul teistel selle kasutamist takistada."</string>
@@ -506,8 +495,7 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Sõrmejälg on lisatud"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_message (3469254005423998143) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Nüüd saate telefoni avamiseks või oma isiku kinnitamiseks (nt rakendustesse sisselogimisel) oma sõrmejälge kasutada"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Teen seda hiljem"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Kas jätta sõrmejälje seadistus vahele?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Valisite telefoni avamise üheks viisiks sõrmejälje kasutamise. Kui seadistamise praegu vahele jätate, peate seda tegema hiljem. See võtab ainult umbes minuti."</string>
@@ -571,6 +559,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Lisaks telefoni avamisele saate oma sõrmejälje abil volitada ka ostusid ja juurdepääsu rakendustele. "<annotation id="url">"Lisateave"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Ekraaniluku valik on keelatud. Küsige lisateavet organisatsiooni administraatorilt. "<annotation id="admin_details">"Rohkem üksikasju"</annotation>\n\n"Saate ka edaspidi sõrmejäljega oste volitada ja rakendustele juurde pääseda. "<annotation id="url">"Lisateave"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Tõstke sõrme, seejärel puudutage sõrmejäljeandurit uuesti"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Kalibreerige sõrmejäljeandur uuesti."</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Saate lisada kuni <xliff:g id="COUNT">%d</xliff:g> sõrmejälge"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Olete lisanud maksimaalse arvu sõrmejälgi"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Rohkem sõrmejälgi ei saa lisada"</string>
@@ -578,10 +567,8 @@
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Sõrmejälje „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>” eemaldamine"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Kas soovite selle sõrmejälje kustutada?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"See kustutab sõrmejäljega „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“ seotud sõrmejäljekujutised ja -mudeli, mis on teie seadmesse salvestatud"</string>
-    <!-- no translation found for fingerprint_last_delete_message (7860374760549404410) -->
-    <skip />
-    <!-- no translation found for fingerprint_last_delete_message_profile_challenge (4104208067277655068) -->
-    <skip />
+    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Te ei saa oma sõrmejälge kasutades telefoni avada ega rakendustes oma isikut kinnitada."</string>
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Te ei saa oma sõrmejälge kasutades tööprofiili avada, oste volitada ega töörakendustesse sisse logida."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Jah, eemalda"</string>
     <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Näo ja sõrmejäljega avamine"</string>
     <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Puudutage seadistamiseks"</string>
@@ -2348,8 +2335,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Puudutage ekraanikuva allosas olevat juurdepääsetavuse nuppu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nFunktsioonide vahel vahetamiseks vajutage juurdepääsetavuse nuppu pikalt."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Pühkige kahe sõrmega ekraanikuva allosast üles.\n\nFunktsioonide vahel vahetamiseks pühkige kahe sõrmega üles ja hoidke."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Pühkige kolme sõrmega ekraanikuva allosast üles.\n\nFunktsioonide vahel vahetamiseks pühkige kolme sõrmega üles ja hoidke."</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_floating (4459254227203203324) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Rohkem valikuid"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Lisateave: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Helitugevuse klahvide allhoidmine"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"helitugevuse klahvide allhoidmine"</string>
@@ -2369,7 +2355,7 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Juurdepääsetavuse nupp ja liigutus"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Juurdepääsetavuse nupu kasutamine. Liigutus ei ole kolme nupuga navigeerimise puhul saadaval."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Kiirjuurdepääs juurdepääsufunktsioonidele"</string>
-    <!-- no translation found for accessibility_button_gesture_description (2717632658372117656) -->
+    <!-- no translation found for accessibility_button_gesture_description (2516420653060025670) -->
     <skip />
     <string name="accessibility_button_description" msgid="7372405202698400339">"Pääsege juurdepääsufunktsioonidele kiiresti juurde igalt kuvalt. \n\nAlustamiseks avage juurdepääsetavuse seaded ja valige funktsioon. Puudutage otseteed ja valige juurdepääsetavuse nupp."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Nupu või liigutuse kasutamine"</string>
@@ -2467,10 +2453,8 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Muutke ekraanikuva tumedamaks, et seda oleks mugavam lugeda.&lt;br/&gt;&lt;br/&gt; See võib olla kasulik järgmistel juhtudel. &lt;ol&gt; &lt;li&gt; Teie telefoni vaikemiinimumeredus on siiski liiga ere.&lt;/li&gt; &lt;li&gt; Kasutate oma telefoni pimedas, näiteks öösel või pimedas ruumis enne magamaminekut.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Muutke ekraanikuva tumedamaks, et seda oleks mugavam lugeda.&lt;br/&gt;&lt;br/&gt; See võib olla kasulik järgmistel juhtudel. &lt;ol&gt; &lt;li&gt; Teie tahvelarvuti vaikemiinimumheledus on siiski liiga ere.&lt;/li&gt; &lt;li&gt; Kasutate oma tahvelarvutit pimedas, näiteks öösel või pimedas ruumis enne magamaminekut.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensiivsus"</string>
-    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
-    <skip />
-    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
-    <skip />
+    <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Tuhmim"</string>
+    <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Heledam"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Hoia pärast seadme taaskäivitumist sisselülitatuna"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Lühike (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundit)</item>
@@ -2557,22 +2541,22 @@
     <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"valgustundlikkus, fotofoobia, tume teema, migreen, peavalu, lugemisrežiim, öörežiim, ereduse vähendamine, valge punkt"</string>
     <string name="keywords_accessibility" msgid="4263443239404659143">"Lihtne kasutada, lihtne juurdepääs, abi, abistav"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"Akna suurendaja, suum, suurendamine, halb nähtavus, suurendus, suuremaks muutmine"</string>
-    <string name="keywords_talkback" msgid="5563641756576863139">"Ekraanilugeja, Voice Over, VoiceOver, häälabi, pime, halb nähtavus, TTS, kõnesüntees, suuline tagasiside"</string>
+    <string name="keywords_talkback" msgid="2816435437095102527"></string>
     <string name="keywords_live_caption" msgid="1667203998080567556">"Subtiitrid, reaalajas transkriptsioon, kuulmislangus, kuulmiskadu, CART, kõnesüntees"</string>
-    <string name="keywords_live_transcribe" msgid="9139708749952089372">"Subtiitrid, reaalajas subtiitrid, kuulmislangus, kuulmiskadu, CART, kõnesüntees"</string>
-    <string name="keywords_sound_notifications" msgid="4039008340786330887">"Märguanded, kuulmislangus, kuulmiskadu, teavitama"</string>
-    <string name="keywords_sound_amplifier" msgid="921848808218956694">"PSAP, võimendus, heli võimendamine, kuulmislangus, kuulmiskadu, võimendamine"</string>
+    <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
+    <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
+    <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
     <string name="keywords_display_size" msgid="5286419615221231518">"ekraani suurus, suur ekraan"</string>
     <string name="keywords_bold_text" msgid="6257418169207099589">"Kõrge kontrastsus, halb nähtavus, paks font, paks esiletõst"</string>
-    <string name="keywords_select_to_speak" msgid="7701037476608073886">"teksti kuulmine, ettelugemine, ekraanikuvalt lugemine, ekraanilugeja"</string>
+    <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"värvide korrigeerimine"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"ekraanikuva tumendamine, ekraanikuva helendamine"</string>
-    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"motoorika, kiirmenüü, abistav menüü, puude, käeline osavus"</string>
-    <string name="keywords_switch_access" msgid="8016330125790412167">"motoorika, lüliti, käsi, AT, abistav tehnoloogia, halvatus, ALS, skannimine, sammu skannimine"</string>
+    <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
+    <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motoorika, hiir"</string>
     <string name="keywords_hearing_aids" msgid="524979615168196199">"kuulmislangus, kuulmiskadu"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"kuulmislangus, kuulmiskadu, subtiitrid, teletaip, TTY"</string>
-    <string name="keywords_voice_access" msgid="4486056790014652334">"hääl, hääljuhtimine, motoorika, käsi, mikrofon, dikteerimine, kõnelemine, juhtimine"</string>
+    <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="print_settings" msgid="8519810615863882491">"Printimine"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Väljas"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3528,7 +3512,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi, wi-fi, kõne, helistamine"</string>
     <string name="keywords_display" msgid="874738809280751745">"ekraan, puuteekraan"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"ekraani hämardamine, puuteekraan, aku, ere"</string>
-    <string name="keywords_display_night_display" msgid="1132588285544830670">"ekraanikuva hämardamine, öö, toon, öörežiim, eredus, ekraanikuva värv, värv, valgustundlikkus, fotofoobia, tumedamaks muutmine, tumendamine, tume režiim, migreen"</string>
+    <string name="keywords_display_night_display" msgid="4711054330804250058">"ekraani hämardamine, öö, toon, öörežiim, eredus, ekraanikuva värv, värv"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"taust, isikupärastamine, ekraani kohandamine"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"teksti suurus"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"projekt, ülekandmine, ekraani peegeldamine, ekraani jagamine, peegeldamine, kuva jagamine, ekraani ülekandmine"</string>
@@ -3573,7 +3557,8 @@
     <string name="keywords_sim_status" msgid="8784456547742075508">"võrk, mobiilsidevõrgu olek, teenuse olek, signaali tugevus, mobiilsidevõrgu tüüp, rändlus, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"seerianumber, riistvaraversioon"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"androidi turvapaiga tase, põhiribaversioon, tuuma versioon"</string>
-    <string name="keywords_dark_ui_mode" msgid="6465231409128452489">"teema, hele, tume, režiim"</string>
+    <!-- no translation found for keywords_dark_ui_mode (6373999418195344014) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"tume teema"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"viga"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Säästlik ekraan, lukustuskuva ekraan"</string>
@@ -3757,11 +3742,9 @@
     <string name="conversation_notifs_category" msgid="2549844862379963273">"Vestlus"</string>
     <string name="recent_notifications" msgid="1105631022180160436">"Hiljuti saadetud"</string>
     <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"Kuva kõik viimase 7 päeva kohta"</string>
-    <!-- no translation found for general_notification_header (3669031068980713359) -->
-    <skip />
+    <string name="general_notification_header" msgid="3669031068980713359">"Haldamine"</string>
     <string name="app_notification_field" msgid="3858667320444612716">"Rakenduse seaded"</string>
-    <!-- no translation found for app_notification_field_summary (5981393613897713471) -->
-    <skip />
+    <string name="app_notification_field_summary" msgid="5981393613897713471">"Individuaalsete rakenduste märguannete haldamine"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Üldine"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Töö märguanded"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Kohanduvad märguanded"</string>
@@ -3875,8 +3858,7 @@
     <string name="recent_conversations" msgid="471678228756995274">"Hiljutised vestlused"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Kustuta hiljutised vestlused"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Hiljutine vestlus eemaldati"</string>
-    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
-    <skip />
+    <string name="recent_convo_removed" msgid="8686414146325958281">"Vestlus eemaldati"</string>
     <string name="clear" msgid="5092178335409471100">"Kustuta"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Kuva prioriteetsed vestlused mullis"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioriteetsed vestlused kuvatakse allatõmmatava ala ülaosas. Saate lasta need kuvada ka mullis ja katkestada funktsiooni Mitte segada."</string>
@@ -3917,8 +3899,7 @@
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Mitte kunagi"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Seadmete ja rakenduste märguanded"</string>
-    <!-- no translation found for manage_notification_access_summary (2907135226478903997) -->
-    <skip />
+    <string name="manage_notification_access_summary" msgid="2907135226478903997">"Hallake, millised rakendused ja seadmed saavad märguandeid lugeda"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Juurdepääs tööprofiili märguannetele on blokeeritud"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Rakendused ei suuda märguandeid lugeda"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="3703008881487586312">
@@ -4248,8 +4229,7 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Toetatud lingid"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Muud vaike-eelistused"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Lingi lisamine"</string>
-    <!-- no translation found for app_launch_footer (4521865035105622557) -->
-    <skip />
+    <string name="app_launch_footer" msgid="4521865035105622557">"Rakendus saab lingid kinnitada, et need rakenduses automaatselt avada."</string>
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kinnitatud linki</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kinnitatud link</item>
@@ -4574,10 +4554,8 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Ekraanipilte ei saa jäädvustada"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Seda rakendust ei saa avada"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Blokeeris teie krediidipakkuja"</string>
-    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
-    <skip />
+    <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Vaja on vanema abi"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Anna telefon vanemale, et ta saaks selle seadistamist alustada"</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Küsimuste korral võtke ühendust IT-administraatoriga"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Rohkem üksikasju"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"Teie administraator saab jälgida ja hallata teie tööprofiiliga seotud rakendusi ning andmeid, sh seadeid, lube, ettevõtte juurdepääsu, võrgutegevusi ja seadme asukohateavet."</string>
@@ -5096,6 +5074,10 @@
     <string name="unknown_unavailability_setting_summary" msgid="9060213910510360231">"Seade pole saadaval"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Konto"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Seadme nimi"</string>
+    <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Põhiteave"</string>
+    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Seadused ja määrused"</string>
+    <string name="my_device_info_device_details_category_title" msgid="4848438695638348680">"Seadme üksikasjad"</string>
+    <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Seadme identifikaatorid"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"WiFi-seadete juhtimine"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Luba rakendusel juhtida WiFi-t"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Lubage sellel rakendusel WiFi sisse või välja lülitada, otsida WiFi-võrke ja nendega ühendus luua, võrke lisada või eemaldada või luua kohalik kuumkoht"</string>
@@ -5298,8 +5280,7 @@
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Teise SIM-kaardi seadistamine"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Valige aktiivne SIM-kaart või kasutage korraga kahte SIM-kaarti"</string>
     <string name="choose_sim_title" msgid="4804689675237716286">"Kasutatava numbri valimine"</string>
-    <!-- no translation found for choose_sim_text (4356662002583501647) -->
-    <skip />
+    <string name="choose_sim_text" msgid="4356662002583501647">"{count,plural, =1{Selles seadmes on saadaval 1 number, kuid korraga saab kasutada vaid üht}=2{Selles seadmes on saadaval 2 numbrit, kuid korraga saab kasutada vaid üht}other{Selles seadmes on saadaval # numbrit, kuid korraga saab kasutada vaid üht}}"</string>
     <string name="choose_sim_activating" msgid="9035902671985449448">"Aktiveerimine <xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Praegu ei saa aktiveerida"</string>
     <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Tundmatu number"</string>
@@ -5486,12 +5467,9 @@
     <string name="mobile_data_off_summary" msgid="3841411571485837651">"Internetiühendust ei looda automaatselt"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Ühtegi muud võrku pole saadaval"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"Ühtegi võrku pole saadaval"</string>
-    <!-- no translation found for mobile_data_disable_title (8438714772256088913) -->
-    <skip />
-    <!-- no translation found for mobile_data_disable_message (7829414836454769970) -->
-    <skip />
-    <!-- no translation found for mobile_data_disable_message_default_carrier (4449469407705838612) -->
-    <skip />
+    <string name="mobile_data_disable_title" msgid="8438714772256088913">"Kas lülitada mobiilne andmeside välja?"</string>
+    <string name="mobile_data_disable_message" msgid="7829414836454769970">"Pärast seda pole teil operaatori <xliff:g id="CARRIER">%s</xliff:g> kaudu juurdepääsu andmesidele ega internetile. Internet on saadaval ainult WiFi kaudu."</string>
+    <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"teie operaator"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Pole saadaval, kuna uneaja režiim on sisse lülitatud"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Märguande olulisuse lähtestamine viidi lõpule."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Rakendused"</string>
