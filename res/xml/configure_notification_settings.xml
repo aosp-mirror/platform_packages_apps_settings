@@ -111,6 +111,22 @@
     <PreferenceCategory
         android:key="advanced_section_header"
         android:title="@string/advanced_section_header">
+
+        <com.android.settings.custom.preference.SystemSettingSwitchPreference
+            android:key="reticker_status"
+            android:title="@string/reticker_title"
+            android:summary="@string/reticker_summary"
+            android:order="9"
+            android:defaultValue="false" />
+
+        <com.android.settings.custom.preference.SystemSettingSwitchPreference
+            android:dependency="reticker_status"
+            android:key="reticker_colored"
+            android:title="@string/reticker_colored_title"
+            android:summary="@string/reticker_colored_summary"
+            android:order="10"
+            android:defaultValue="false" />
+
         <com.android.settingslib.RestrictedPreference
             android:key="zen_mode_notifications"
             android:order="17"
