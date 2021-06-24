@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -112,7 +113,6 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                         .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
                 final boolean forBiometrics = intent
                         .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
-
                 final SetupSkipDialog dialog = SetupSkipDialog.newInstance(
                         frpSupported,
                         /* isPatternMode= */ false,
@@ -120,6 +120,11 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                         forFingerprint,
                         forFace,
                         forBiometrics);
+
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
                 dialog.show(getFragmentManager());
                 return;
             }
