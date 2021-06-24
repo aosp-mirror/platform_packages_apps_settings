@@ -208,6 +208,7 @@ public class ManageApplications extends InstrumentedFragment
     private ApplicationsAdapter mApplications;
 
     private View mLoadingContainer;
+    private View mListContainer;
     private SearchView mSearchView;
 
     // Size resource used for packages whose size computation failed for some reason
@@ -401,21 +402,25 @@ public class ManageApplications extends InstrumentedFragment
 
         mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
         mLoadingContainer = mRootView.findViewById(R.id.loading_container);
-        mEmptyView = mRootView.findViewById(android.R.id.empty);
-        mRecyclerView = mRootView.findViewById(R.id.apps_list);
+        mListContainer = mRootView.findViewById(R.id.list_container);
+        if (mListContainer != null) {
+            // Create adapter and list view here
+            mEmptyView = mListContainer.findViewById(android.R.id.empty);
 
-        mApplications = new ApplicationsAdapter(mApplicationsState, this, mFilter,
-                savedInstanceState);
-        if (savedInstanceState != null) {
-            mApplications.mHasReceivedLoadEntries =
-                    savedInstanceState.getBoolean(EXTRA_HAS_ENTRIES, false);
-            mApplications.mHasReceivedBridgeCallback =
-                    savedInstanceState.getBoolean(EXTRA_HAS_BRIDGE, false);
+            mApplications = new ApplicationsAdapter(mApplicationsState, this, mFilter,
+                    savedInstanceState);
+            if (savedInstanceState != null) {
+                mApplications.mHasReceivedLoadEntries =
+                        savedInstanceState.getBoolean(EXTRA_HAS_ENTRIES, false);
+                mApplications.mHasReceivedBridgeCallback =
+                        savedInstanceState.getBoolean(EXTRA_HAS_BRIDGE, false);
+            }
+            mRecyclerView = mListContainer.findViewById(R.id.apps_list);
+            mRecyclerView.setItemAnimator(null);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(
+                    getContext(), RecyclerView.VERTICAL, false /* reverseLayout */));
+            mRecyclerView.setAdapter(mApplications);
         }
-        mRecyclerView.setItemAnimator(null);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(
-                getContext(), RecyclerView.VERTICAL, false /* reverseLayout */));
-        mRecyclerView.setAdapter(mApplications);
 
         // We have to do this now because PreferenceFrameLayout looks at it
         // only when the view is added.
@@ -980,8 +985,16 @@ public class ManageApplications extends InstrumentedFragment
             // overlapped by floating filter.
             if (hasFilter) {
                 mManageApplications.mSpinnerHeader.setVisibility(View.VISIBLE);
+                mManageApplications.mRecyclerView.setPadding(0 /* left */,
+                        mContext.getResources().getDimensionPixelSize(
+                                R.dimen.app_bar_height) /* top */,
+                        0 /* right */,
+                        0 /* bottom */);
             } else {
                 mManageApplications.mSpinnerHeader.setVisibility(View.GONE);
+                mManageApplications.mRecyclerView.setPadding(0 /* left */, 0 /* top */,
+                        0 /* right */,
+                        0 /* bottom */);
             }
         }
     }
@@ -1031,8 +1044,7 @@ public class ManageApplications extends InstrumentedFragment
             mManageApplications = manageApplications;
             mLoadingViewController = new LoadingViewController(
                     mManageApplications.mLoadingContainer,
-                    mManageApplications.mRecyclerView,
-                    mManageApplications.mEmptyView
+                    mManageApplications.mListContainer
             );
             mContext = manageApplications.getActivity();
             mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
@@ -1291,9 +1303,11 @@ public class ManageApplications extends InstrumentedFragment
             mOriginalEntries = entries;
             notifyDataSetChanged();
             if (getItemCount() == 0) {
-                mLoadingViewController.showEmpty(false /* animate */);
+                mManageApplications.mRecyclerView.setVisibility(View.GONE);
+                mManageApplications.mEmptyView.setVisibility(View.VISIBLE);
             } else {
-                mLoadingViewController.showContent(false /* animate */);
+                mManageApplications.mEmptyView.setVisibility(View.GONE);
+                mManageApplications.mRecyclerView.setVisibility(View.VISIBLE);
 
                 if (mManageApplications.mSearchView != null
                         && mManageApplications.mSearchView.isVisibleToUser()) {
@@ -1310,6 +1324,10 @@ public class ManageApplications extends InstrumentedFragment
                 mLastIndex = -1;
             }
 
+            if (mSession.getAllApps().size() != 0
+                    && mManageApplications.mListContainer.getVisibility() != View.VISIBLE) {
+                mLoadingViewController.showContent(true /* animate */);
+            }
             if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
                 // No enabled or disabled filters for usage access.
                 return;
