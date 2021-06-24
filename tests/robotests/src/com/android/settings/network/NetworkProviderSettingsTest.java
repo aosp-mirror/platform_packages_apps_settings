@@ -535,4 +535,32 @@ public class NetworkProviderSettingsTest {
 
         assertThat(p instanceof NetworkProviderSettings.FirstWifiEntryPreference).isTrue();
     }
+
+    @Test
+    public void updateWifiEntryPreferences_activityIsNull_ShouldNotCrash() {
+        when(mNetworkProviderSettings.getActivity()).thenReturn(null);
+
+        // should not crash
+        mNetworkProviderSettings.updateWifiEntryPreferences();
+    }
+
+    @Test
+    public void updateWifiEntryPreferences_viewIsNull_ShouldNotCrash() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+        when(mNetworkProviderSettings.getView()).thenReturn(null);
+
+        // should not crash
+        mNetworkProviderSettings.updateWifiEntryPreferences();
+    }
+
+    @Test
+    public void updateWifiEntryPreferences_isRestricted_bypassUpdate() {
+        mNetworkProviderSettings.mIsRestricted = true;
+        mNetworkProviderSettings.mWifiEntryPreferenceCategory = mock(PreferenceCategory.class);
+
+        mNetworkProviderSettings.updateWifiEntryPreferences();
+
+        verify(mNetworkProviderSettings.mWifiEntryPreferenceCategory, never()).setVisible(true);
+    }
 }

@@ -34,4 +34,11 @@ public class AccessibilityButtonFooterPreferenceController extends
     protected String getLabelName() {
         return mContext.getString(R.string.accessibility_button_title);
     }
+
+    @Override
+    public CharSequence getSummary() {
+        return AccessibilityUtil.isGestureNavigateEnabled(mContext)
+                ? mContext.getString(R.string.accessibility_button_gesture_description)
+                : mContext.getString(R.string.accessibility_button_description);
+    }
 }
