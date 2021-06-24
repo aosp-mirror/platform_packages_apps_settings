@@ -116,6 +116,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     static final int MENU_ID_FORGET = Menu.FIRST + 3;
     static final int MENU_ID_MODIFY = Menu.FIRST + 4;
     static final int MENU_FIX_CONNECTIVITY = Menu.FIRST + 5;
+    static final int MENU_ID_SHARE = Menu.FIRST + 6;
 
     @VisibleForTesting
     static final int ADD_NETWORK_REQUEST = 2;
@@ -200,7 +201,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
      * ensure that behavior is consistent if {@link #isUiRestricted()} changes. It could be changed
      * by the Test DPC tool in AFW mode.
      */
-    private boolean mIsRestricted;
+    protected boolean mIsRestricted;
 
     @VisibleForTesting
     AirplaneModeEnabler mAirplaneModeEnabler;
@@ -218,7 +219,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     PreferenceCategory mConnectedWifiEntryPreferenceCategory;
     @VisibleForTesting
     PreferenceCategory mFirstWifiEntryPreferenceCategory;
-    private PreferenceCategory mWifiEntryPreferenceCategory;
+    @VisibleForTesting
+    PreferenceCategory mWifiEntryPreferenceCategory;
     @VisibleForTesting
     AddWifiNetworkPreference mAddWifiNetworkPreference;
     private WifiSwitchPreferenceController mWifiSwitchPreferenceController;
@@ -535,7 +537,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
 
         if (mSelectedWifiEntry.canDisconnect()) {
-            menu.add(Menu.NONE, MENU_ID_DISCONNECT, 0 /* order */,
+            menu.add(Menu.NONE, MENU_ID_SHARE, 0 /* order */, R.string.share);
+            menu.add(Menu.NONE, MENU_ID_DISCONNECT, 1 /* order */,
                     R.string.wifi_disconnect_button_text);
         }
 
@@ -574,6 +577,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             case MENU_ID_FORGET:
                 forget(mSelectedWifiEntry);
                 return true;
+            case MENU_ID_SHARE:
+                WifiDppUtils.showLockScreen(getContext(),
+                        () -> launchWifiDppConfiguratorActivity(mSelectedWifiEntry));
+                return true;
             case MENU_ID_MODIFY:
                 showDialog(mSelectedWifiEntry, WifiConfigUiBase2.MODE_MODIFY);
                 return true;
@@ -606,6 +613,23 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             return super.onPreferenceTreeClick(preference);
         }
         return true;
+    }
+
+    private void launchWifiDppConfiguratorActivity(WifiEntry wifiEntry) {
+        final Intent intent = WifiDppUtils.getConfiguratorQrCodeGeneratorIntentOrNull(getContext(),
+                mWifiManager, wifiEntry);
+
+        if (intent == null) {
+            Log.e(TAG, "Launch Wi-Fi DPP QR code generator with a wrong Wi-Fi network!");
+        } else {
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_SETTINGS_SHARE_WIFI_QR_CODE,
+                    SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR,
+                    /* key */ null,
+                    /* value */ Integer.MIN_VALUE);
+
+            startActivity(intent);
+        }
     }
 
     private void showDialog(WifiEntry wifiEntry, int dialogMode) {
@@ -771,7 +795,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     }
 
-    private void updateWifiEntryPreferences() {
+    protected void updateWifiEntryPreferences() {
+        // bypass the update if the activity and the view are not ready, or it's restricted UI.
+        if (getActivity() == null || getView() == null || mIsRestricted) {
+            return;
+        }
         // in case state has changed
         if (mWifiPickerTracker.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
             return;

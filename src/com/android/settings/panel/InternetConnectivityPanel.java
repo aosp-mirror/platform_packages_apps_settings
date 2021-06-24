@@ -39,7 +39,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
@@ -236,27 +235,15 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
 
     @Override
     public Intent getSeeMoreIntent() {
+        // Disable the see more button for provider model design.
+        if (mIsProviderModelEnabled) {
+            return null;
+        }
+
         // Don't remove the see more intent for non-provider model design. This intent will be
         // used when isCustomizedButtonUsed() returns false.
         return new Intent(Settings.ACTION_WIRELESS_SETTINGS)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    }
-
-    @Override
-    public boolean isCustomizedButtonUsed() {
-        return mIsProviderModelEnabled;
-    }
-
-    @Override
-    public CharSequence getCustomizedButtonTitle() {
-        return mContext.getText(
-                mInternetUpdater.isWifiEnabled() ? R.string.turn_off_wifi : R.string.turn_on_wifi);
-    }
-
-    @Override
-    public void onClickCustomizedButton(FragmentActivity panelActivity) {
-        // Don't finish the panel activity
-        mWifiManager.setWifiEnabled(!mInternetUpdater.isWifiEnabled());
     }
 
     @Override
@@ -320,7 +307,6 @@ public class InternetConnectivityPanel implements PanelContent, LifecycleObserve
         }
         updateSubtitleText();
         mCallback.onHeaderChanged();
-        mCallback.onCustomizedButtonStateChanged();
     }
 
     @VisibleForTesting
