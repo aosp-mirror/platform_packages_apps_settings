@@ -368,7 +368,12 @@ public class AppStorageSettings extends AppInfoWithHeader
         }
         ActivityManager am = (ActivityManager)
                 getActivity().getSystemService(Context.ACTIVITY_SERVICE);
-        boolean res = am.clearApplicationUserData(packageName, mClearDataObserver);
+        boolean res = false;
+        try {
+            res = am.clearApplicationUserData(packageName, mClearDataObserver);
+        } catch (SecurityException e) {
+            Log.i(TAG, "Failed to clear application user data: " + e);
+        }
         if (!res) {
             // Clearing data failed for some obscure reason. Just log error for now
             Log.i(TAG, "Couldn't clear application user data for package:" + packageName);
