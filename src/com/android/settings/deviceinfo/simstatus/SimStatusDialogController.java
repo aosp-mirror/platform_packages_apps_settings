@@ -229,7 +229,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         if (mSubscriptionInfo == null) {
             return;
         }
-
+        mTelephonyManager =
+            mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
         mPhoneStateListener = getPhoneStateListener();
         updateLatestAreaInfo();
         updateSubscriptionStatus();
@@ -538,8 +539,11 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             voiceNetworkTypeName = getNetworkTypeName(actualVoiceNetworkType);
         }
 
-        if (overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE
-                || overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA) {
+        final boolean isOverrideNwTypeNrAdvancedOrNsa =
+                overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_ADVANCED
+                        || overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA;
+        if (actualDataNetworkType == TelephonyManager.NETWORK_TYPE_LTE
+                && isOverrideNwTypeNrAdvancedOrNsa) {
             dataNetworkTypeName = "NR NSA";
         }
 
