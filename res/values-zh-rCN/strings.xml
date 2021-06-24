@@ -471,6 +471,8 @@
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"面孔和指纹的用途"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"解锁手机"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"应用内身份验证"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"请将手机交回给您的家长"</string>
+    <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"确定"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"要跳过屏幕锁定设置步骤吗？"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"系统将不会启用设备保护功能。如果您的平板电脑丢失、被盗或被重置，您将无法防止他人使用此平板电脑。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"系统将不会启用设备保护功能。如果您的设备丢失、被盗或被重置，您将无法防止他人使用此设备。"</string>
@@ -569,6 +571,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"除了将手机解锁，您还可以在购买物品时和登录应用时使用自己的指纹来验证身份。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" 屏幕锁定选项已停用。要了解详情，请与贵单位的管理员联系。"<annotation id="admin_details">"更多详情"</annotation>\n\n"您仍然可以使用指纹对购买交易进行授权以及登录应用。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"移开手指，然后再次触摸传感器"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"请重新校准指纹传感器。"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"您最多可以添加 <xliff:g id="COUNT">%d</xliff:g> 个指纹"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"您添加的指纹数量已达到上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"无法添加更多的指纹"</string>
@@ -1855,13 +1858,13 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"位置信息服务"</string>
     <string name="location_title" msgid="5819154746934945021">"我的位置"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"工作资料位置信息"</string>
-    <string name="location_app_level_permissions" msgid="907206607664629759">"应用位置权限"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"应用位置信息权限"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"位置信息服务已关闭"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> 个应用（共 <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> 个应用）有权使用位置信息</item>
       <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> 个应用（共 <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> 个应用）有权使用位置信息</item>
     </plurals>
-    <string name="location_category_recent_location_access" msgid="2558063524482178146">"最近的访问记录"</string>
+    <string name="location_category_recent_location_access" msgid="2558063524482178146">"近期位置信息访问记录"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"查看全部"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"查看详情"</string>
     <string name="location_no_recent_apps" msgid="6814206631456177033">"最近没有任何应用申请使用位置信息"</string>
@@ -2553,22 +2556,22 @@
     <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"光敏度、畏光、深色主题、偏头痛、头痛、阅读模式、夜间模式、调低亮度、白点"</string>
     <string name="keywords_accessibility" msgid="4263443239404659143">"易于使用, 易于访问, 协助, 辅助, Ease of use, ease of access, assistance, assistive"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"窗口放大镜, 缩放, 放大, 弱视, 增大, 加大, Window Magnifier, Zoom, Magnification, Low vision, Enlarge, make bigger"</string>
-    <string name="keywords_talkback" msgid="5563641756576863139">"屏幕阅读器, 旁白, 配音, 语音辅助, 盲人, 弱视, 文字转语音, 语音反馈, Screen reader, Voice Over, VoiceOver, Voice Assistance, Blind, Low Vision, TTS, text to speech, spoken feedback"</string>
+    <string name="keywords_talkback" msgid="2816435437095102527"></string>
     <string name="keywords_live_caption" msgid="1667203998080567556">"字幕, 实时转写, 听障, 听力受损, 语音转文字, Captions, closed captions, CC, Live Transcribe, hard of hearing, hearing loss, CART, speech to text, subtitle"</string>
-    <string name="keywords_live_transcribe" msgid="9139708749952089372">"字幕, 实时字幕, 听障, 听力受损, 语音转文字, Captions, closed captions, CC, Live Caption, hard of hearing, hearing loss, CART, speech to text, subtitle"</string>
-    <string name="keywords_sound_notifications" msgid="4039008340786330887">"通知, 听障, 听力受损, 告知, Notifications, hard of hearing, hearing loss, notify"</string>
-    <string name="keywords_sound_amplifier" msgid="921848808218956694">"公共安全应答点, 扩大, 声音扩大, 听障, 听力受损, 扩声, PSAP, amplify, sound amplification, hard of hearing, hearing loss, amplification"</string>
+    <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
+    <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
+    <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
     <string name="keywords_display_size" msgid="5286419615221231518">"屏幕尺寸, 大屏幕, screen size, large screen"</string>
     <string name="keywords_bold_text" msgid="6257418169207099589">"高对比度, 弱视, 加粗字体, 粗体, High contrast, low vision, bold font, bold face"</string>
-    <string name="keywords_select_to_speak" msgid="7701037476608073886">"听文字, 朗读, 朗读屏幕内容, 屏幕阅读器, Hear text, read aloud, speak screen, screen reader"</string>
+    <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"调整颜色, adjust color"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"调暗屏幕, 调亮屏幕, turn screen dark, turn screen light"</string>
-    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"电机, 快捷菜单, 辅助菜单, 轻触, 灵活, motor, quick menu, assistive menu, touch, dexterity"</string>
-    <string name="keywords_switch_access" msgid="8016330125790412167">"电机, 切换, 手, 辅助技术, 瘫痪, 渐冻症, 扫描, 循序扫描, motor, switch, hand, AT, assistive technology, paralysis, ALS, scanning, step scanning"</string>
+    <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
+    <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"电机, 鼠标, motor, mouse"</string>
     <string name="keywords_hearing_aids" msgid="524979615168196199">"听障, 听力受损, hard of hearing, hearing loss"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"听障, 听力受损, 字幕, 电传, hard of hearing, hearing loss, captions, Teletype, tty"</string>
-    <string name="keywords_voice_access" msgid="4486056790014652334">"语音, 语音控制, 电机, 手, 麦克, 麦克风, 语音输入, 说话, 控制, voice, voice control, motor, hand, mic, microphone, dictation, talk, control"</string>
+    <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="print_settings" msgid="8519810615863882491">"打印"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"关闭"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3524,7 +3527,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"Wi-Fi, WLAN, 呼叫, 通话"</string>
     <string name="keywords_display" msgid="874738809280751745">"屏幕, 触摸屏"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"屏幕变暗, 调暗屏幕, 触摸屏, 电池, 明亮"</string>
-    <string name="keywords_display_night_display" msgid="1132588285544830670">"调暗屏幕, 夜间, 色调, 夜间模式, 亮度, 屏幕颜色, 色彩, 颜色, 光敏度, 畏光, 调暗, 调低亮度, 深色模式, 偏头痛, dim screen, night, tint, night shift, brightness, screen color, colour, color, light sensitivity, photophobia, make darker, darken, dark mode, migraine"</string>
+    <string name="keywords_display_night_display" msgid="4711054330804250058">"屏幕变暗, 调暗屏幕, 夜间, 色调, night shift, 夜视模式, 亮度, 屏幕颜色, 颜色, 色彩"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"背景, 墙纸, 个性化, 自定义, 显示, 显示屏"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"字体大小"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"投影, 投射, 屏幕镜像, 屏幕共享, 镜像, 共享屏幕, 屏幕投射"</string>
@@ -3569,7 +3572,8 @@
     <string name="keywords_sim_status" msgid="8784456547742075508">"网络, 移动网络状态, 服务状态, 信号强度, 移动网络类型, 漫游, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"序列号, 硬件版本"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"Android 安全补丁程序级别, 基带版本, 内核版本"</string>
-    <string name="keywords_dark_ui_mode" msgid="6465231409128452489">"主题背景, 光亮, 深色, 模式"</string>
+    <!-- no translation found for keywords_dark_ui_mode (6373999418195344014) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"深色主题"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"错误"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"主动显示, 锁定屏幕显示"</string>
@@ -3871,8 +3875,7 @@
     <string name="recent_conversations" msgid="471678228756995274">"近期对话"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"清除近期对话"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"已移除近期对话"</string>
-    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
-    <skip />
+    <string name="recent_convo_removed" msgid="8686414146325958281">"对话已移除"</string>
     <string name="clear" msgid="5092178335409471100">"清除"</string>
     <string name="important_bubble" msgid="7911698275408390846">"以对话泡形式显示优先对话"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"优先对话会显示在下拉通知栏顶部。您也可将优先对话设置为以对话泡形式显示，并允许系统在“勿扰”模式下显示此类对话泡。"</string>
@@ -4244,8 +4247,7 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"支持的链接"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"其他默认偏好设置"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"添加链接"</string>
-    <!-- no translation found for app_launch_footer (4521865035105622557) -->
-    <skip />
+    <string name="app_launch_footer" msgid="4521865035105622557">"应用可以验证链接，通过验证的链接会自动在其中打开。"</string>
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 个已通过验证的链接</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个已通过验证的链接</item>
@@ -4570,10 +4572,8 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"无法抓取屏幕截图"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"无法打开此应用"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"已被信贷提供方屏蔽"</string>
-    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
-    <skip />
+    <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"需要家长同意"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"如需开始设置此功能，请将手机交给您的家长"</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"如有任何问题，请与您的 IT 管理员联系"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"更多详情"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"您的管理员可以监控和管理与您的工作资料相关的应用和数据（其中包括设置、权限、企业权限、网络活动和设备的位置信息）。"</string>
@@ -5092,6 +5092,10 @@
     <string name="unknown_unavailability_setting_summary" msgid="9060213910510360231">"无法更改设置"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"帐号"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"设备名称"</string>
+    <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"基本信息"</string>
+    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"法律法规"</string>
+    <string name="my_device_info_device_details_category_title" msgid="4848438695638348680">"设备详细信息"</string>
+    <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"设备标识符"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"WLAN 控制"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"允许应用控制 WLAN"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"允许此应用开启或关闭 WLAN、扫描及连接到 WLAN 网络、添加或移除网络，或启动仅限本地的热点"</string>
