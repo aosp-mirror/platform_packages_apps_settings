@@ -19,6 +19,7 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container_material"
     android:orientation="vertical"
@@ -66,19 +67,20 @@
             android:background="@android:color/transparent"
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layoutDirection="ltr"
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
             app:tabMode="fixed"
-            app:tabIndicatorColor="@*android:color/accent_device_default"
+            app:tabIndicator="@drawable/tabs_indicator_background"
+            app:tabIndicatorColor="?androidprv:attr/colorAccentPrimaryVariant"
             app:tabSelectedTextColor="@*android:color/accent_device_default"
             app:tabTextAppearance="@style/TextAppearance.Tab"
             app:tabTextColor="?android:attr/textColorSecondary"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"/>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
