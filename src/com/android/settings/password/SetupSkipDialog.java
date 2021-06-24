@@ -21,6 +21,8 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -190,11 +192,20 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
 
     @Override
     public void onClick(DialogInterface dialog, int button) {
+        Activity activity = getActivity();
         switch (button) {
             case DialogInterface.BUTTON_POSITIVE:
-                Activity activity = getActivity();
                 activity.setResult(RESULT_SKIP);
                 activity.finish();
+                break;
+            case DialogInterface.BUTTON_NEGATIVE:
+                View view = activity.getCurrentFocus();
+                if(view != null) {
+                    view.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) activity
+                            .getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+                }
                 break;
         }
     }
