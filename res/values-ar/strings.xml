@@ -487,6 +487,8 @@
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"استخدام الوجه وبصمة الإصبع لـ"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"فتح قفل هاتفك"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"المصادقة في التطبيقات"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"عليك إعادة الهاتف إلى أحد الوالدين."</string>
+    <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"حسنًا"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"هل تريد تخطّي قفل الشاشة؟"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"لن يتم تفعيل ميزات حماية الجهاز. ولن تتمكن من منع الآخرين من استخدام هذا الجهاز اللوحي في حالة فقدانه أو سرقته أو إعادة ضبطه."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"لن يتم تفعيل ميزات حماية الجهاز. ولن تتمكن من منع الآخرين من استخدام هذا الجهاز في حالة فقدانه أو سرقته أو إعادة ضبطه."</string>
@@ -585,6 +587,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"بالإضافة إلى فتح قفل هاتفك، يمكنك أيضًا استخدام بصمة إصبعك للسماح بعمليات الشراء والوصول إلى التطبيق. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" تم إيقاف خيار قفل الشاشة. لمعرفة المزيد من المعلومات، اتصل بمشرف مؤسستك. "<annotation id="admin_details">"مزيد من التفاصيل"</annotation>\n\n"ما زال بإمكانك استخدام بصمة إصبعك للسماح بعمليات الشراء والوصول إلى التطبيقات. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ارفع إصبعك ثم المس زر الاستشعار مرة أخرى."</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"يُرجى إعادة معايرة مستشعر بصمات الإصبع."</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"يمكنك إضافة ما يصل إلى <xliff:g id="COUNT">%d</xliff:g> بصمات الإصبع"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"لقد أضفت الحد الأقصى لعدد بصمات الإصبع"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"يتعذر إضافة مزيد من بصمات الإصبع"</string>
@@ -1394,7 +1397,7 @@
     <string name="display_settings" msgid="7197750639709493852">"الشاشة"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"التدوير التلقائي للشاشة"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"إيقاف"</string>
-    <string name="auto_rotate_option_on" msgid="5776678230808498171">"مفعّلة"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"مفعّل"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"تفعيل - استنادًا للوجه"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"تفعيل تقنية \"التعرّف على الوجوه\""</string>
     <string name="color_mode_title" msgid="8666690832113906028">"الألوان"</string>
@@ -2463,7 +2466,7 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"إيماءة وزرّ أدوات تسهيل الاستخدام"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"استخدام زرّ أدوات تسهيل الاستخدام: لا تتوفّر إيماءة التنقُّل باستخدام ثلاثة أزرار"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"الوصول السريع إلى ميزات تسهيل الاستخدام"</string>
-    <!-- no translation found for accessibility_button_gesture_description (2717632658372117656) -->
+    <!-- no translation found for accessibility_button_gesture_description (2516420653060025670) -->
     <skip />
     <string name="accessibility_button_description" msgid="7372405202698400339">"يمكنك الوصول بسرعة إلى ميزات تسهيل الاستخدام من أي شاشة. \n\nلبدء الاستخدام، انتقِل إلى إعدادات تسهيل الاستخدام واختَر ميزة. انقر على الاختصار واختَر زر أدوات تسهيل الاستخدام."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"استخدام الزرّ أو الإيماءة"</string>
@@ -2565,10 +2568,8 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"‏يمكنك زيادة تعتيم الشاشة لتصبح أنسب للقراءة.&lt;br/&gt;&lt;br/&gt; يمكن الاستفادة من هذه الميزة عندما: &lt;ol&gt; &lt;li&gt; تكون أقلّ درجة سطوع تلقائية في هاتفك غير كافية&lt;/li&gt; &lt;li&gt; تستخدم هاتفك في الظلام، مثلاً عندما تستخدمه ليلاً أو في غرفة مظلمة قبل النوم&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"‏يمكنك تقليل درجة سطوع الشاشة لتصبح أنسب للقراءة.&lt;br/&gt;&lt;br/&gt; يمكن الاستفادة من هذه الميزة عندما: &lt;ol&gt; &lt;li&gt; تكون أقل درجة سطوع تلقائية في جهازك اللوحي غير كافية&lt;/li&gt; &lt;li&gt; تستخدم جهازك اللوحي في الظلام، مثلاً عندما تستخدمه ليلاً أو في غرفة مظلمة قبل النوم&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"درجة السطوع"</string>
-    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
-    <skip />
-    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
-    <skip />
+    <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"أقل سطوعًا"</string>
+    <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"أكثر سطوعًا"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"إبقاء الميزة مفعّلة حتى بعد إعادة تشغيل الجهاز"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="zero">قصير (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> ثانية)</item>
@@ -2671,22 +2672,22 @@
     <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"حساسية الضوء، رهاب الضوء، المظهر الداكن، الصداع الشقِّي، الصداع، وضع القراءة، الوضع الليلي، تقليل درجة السطوع، النقطة البيضاء"</string>
     <string name="keywords_accessibility" msgid="4263443239404659143">"سهولة الاستخدام، سهولة الوصول، المساعدة، تلبية احتياجات المستهلك"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"أداة تكبير النوافذ، تصغير/تكبير، التكبير، ضعف في النظر، تكبير، جعله أكبر"</string>
-    <string name="keywords_talkback" msgid="5563641756576863139">"قارئ الشاشة، تعليق صوتيّ، تعليقات صوتية، مساعدة صوتية، كفيف، ضعف في النظر، تحويل النص إلى كلام، الوصف الشفهي للشاشة"</string>
+    <string name="keywords_talkback" msgid="2816435437095102527"></string>
     <string name="keywords_live_caption" msgid="1667203998080567556">"‏شرح، ترجمة وشرح، CC، كتابة مباشرة، ضعيف السمع، فقدان السمع، الترجمة في الوقت الفعلي، تحويل الكلام إلى نص، ترجمة"</string>
-    <string name="keywords_live_transcribe" msgid="9139708749952089372">"‏شرح، ترجمة وشرح، CC، النسخ النصي التلقائي، ضعيف السمع، فقدان السمع، الترجمة في الوقت الفعلي، تحويل الكلام إلى نص، ترجمة"</string>
-    <string name="keywords_sound_notifications" msgid="4039008340786330887">"الإشعارات، ضعيف السمع، فقدان السمع، إشعار"</string>
-    <string name="keywords_sound_amplifier" msgid="921848808218956694">"‏مركز اتصال لإحالة مكالمات السلامة العامة (PSAP)، تضخيم الصوت، مضخّم الصوت، ضعيف السمع، فقدان السمع، التكبير"</string>
+    <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
+    <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
+    <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
     <string name="keywords_display_size" msgid="5286419615221231518">"حجم الشاشة، شاشة كبيرة"</string>
     <string name="keywords_bold_text" msgid="6257418169207099589">"التباين العالي، ضعف في النظر، خط غامق، خط عريض"</string>
-    <string name="keywords_select_to_speak" msgid="7701037476608073886">"سماع النص، القراءة بصوت عالٍ، قول ما على الشاشة، قارئ الشاشة"</string>
+    <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"ضبط اللون"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"تعتيم الشاشة، تفتيح الشاشة"</string>
-    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"المهارات الحركية، القائمة السريعة، قائمة المساعدة، اللمس، القدرة الحركية"</string>
-    <string name="keywords_switch_access" msgid="8016330125790412167">"المهارات الحركية، مفتاح التبديل، اليد، التكنولوجيا المساندة، التكنولوجيا المساعدة، الشلل، داء اعتلال الأعصاب الحركية، المسح الضوئي، المسح المرحلي."</string>
+    <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
+    <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"المهارات الحركية، الماوس"</string>
     <string name="keywords_hearing_aids" msgid="524979615168196199">"ضعيف السمع، فقدان السمع"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"‏ضعيف السمع، فقدان السمع، شرح، المبرقة، tty"</string>
-    <string name="keywords_voice_access" msgid="4486056790014652334">"الصوت، التحكّم الصوتي، اليد، الميكروفون، المايك، الإملاء، التحدّث، التحكّم"</string>
+    <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="print_settings" msgid="8519810615863882491">"الطباعة"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"غير مفعّلة"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3706,7 +3707,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"‏اتصال، مكالمة، واي فاي، wifi"</string>
     <string name="keywords_display" msgid="874738809280751745">"شاشة، شاشة تعمل باللمس"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"تعتيم شاشة، شاشة تعمل باللمس، بطارية، ساطع"</string>
-    <string name="keywords_display_night_display" msgid="1132588285544830670">"تعتيم الشاشة، الليل، تعديل اللون، النوبة الليلية، السطوع، لون الشاشة، اللون، التلوين، الحساسية الخفيفة، رهاب الضوء، تعتيم، جعله داكنًا، الوضع المُعتِم، الصداع الشقِّي"</string>
+    <string name="keywords_display_night_display" msgid="4711054330804250058">"تعتيم شاشة، ليل، تلوين خفيف، نوبة ليلية، سطوع، لون شاشة، لون، تلوين"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"خلفية، تخصيص، تخصيص عرض"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"حجم النص"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"العرض، الإرسال، النسخ المطابق لمحتوى الشاشة، النسخ المطابق، مشاركة الشاشة، إرسال محتوى الشاشة"</string>
@@ -3751,7 +3752,8 @@
     <string name="keywords_sim_status" msgid="8784456547742075508">"‏شبكة، حالة شبكة الجوّال، حالة الخدمة، قوة الإشارة، نوع شبكة الجوّال، التجوال، iccid، eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"رقم تسلسلي، إصدار الجهاز"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"‏مستوى رمز تصحيح أمان android، إصدار النطاق الأساسي، إصدار النواة"</string>
-    <string name="keywords_dark_ui_mode" msgid="6465231409128452489">"تصميم، مضيء، معتم، وضع"</string>
+    <!-- no translation found for keywords_dark_ui_mode (6373999418195344014) -->
+    <skip />
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"المظهر الداكن"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"خطأ"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"العرض على الشاشة، عرض شاشة القفل"</string>
@@ -4057,8 +4059,7 @@
     <string name="recent_conversations" msgid="471678228756995274">"المحادثات الحديثة"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"محو المحادثات الأخيرة"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"تمت إزالة المحادثات الحديثة."</string>
-    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
-    <skip />
+    <string name="recent_convo_removed" msgid="8686414146325958281">"تمت إزالة المحادثة."</string>
     <string name="clear" msgid="5092178335409471100">"محو"</string>
     <string name="important_bubble" msgid="7911698275408390846">"تظهر المحادثات ذات الأولوية كفقاعات"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"تظهر المحادثات ذات الأولوية في أعلى مركز الإشعارات المنسدل. يمكنك أيضًا ضبطها لتظهر كفقاعات ولا تتقيّد بميزة \"عدم الإزعاج\"."</string>
@@ -4466,8 +4467,7 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"الروابط المتوافقة"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"الإعدادات المفضّلة الأخرى"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"إضافة رابط"</string>
-    <!-- no translation found for app_launch_footer (4521865035105622557) -->
-    <skip />
+    <string name="app_launch_footer" msgid="4521865035105622557">"يمكن للتطبيق التحقّق من الروابط ليتم فتحها تلقائيًا في التطبيق."</string>
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="zero"><xliff:g id="COUNT_1">%d</xliff:g> رابط تم التحقّق منه</item>
       <item quantity="two">رابطان (<xliff:g id="COUNT_1">%d</xliff:g>) تم التحقّق منهما</item>
@@ -4848,10 +4848,8 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"لا يمكن أخذ لقطات شاشة"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"يتعذّر فتح هذا التطبيق."</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"حظرت شركة بيع الأجهزة بالائتمان هذا الإعداد"</string>
-    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
-    <skip />
+    <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"موافقة أحد الوالدين مطلوبة"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"عليك إعطاء الهاتف لأحد الوالدين لبدء عملية الإعداد هذه."</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"إذا كانت لديك أسئلة، يُرجى التواصل مع مشرف تكنولوجيا المعلومات."</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"مزيد من التفاصيل"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"يمكن للمشرف مراقبة التطبيقات والبيانات المرتبطة بالملفات الشخصية للعمل وإدارتها، بما في ذلك الإعدادات والأذونات والدخول إلى المؤسسة ونشاط الشبكة ومعلومات موقع الجهاز."</string>
@@ -4969,12 +4967,12 @@
     <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"رسم بياني يوضح استخدام البيانات بين <xliff:g id="START_DATE">%1$s</xliff:g> و<xliff:g id="END_DATE">%2$s</xliff:g>."</string>
     <string name="data_usage_chart_no_data_content_description" msgid="5481968839079467231">"لا تتوفر بيانات لهذه المرحلة الزمنية"</string>
     <plurals name="billing_cycle_days_left" formatted="false" msgid="661792524671718753">
-      <item quantity="zero">‏يتبقى %d يوم</item>
-      <item quantity="two">‏يتبقى يومان (%d)</item>
-      <item quantity="few">‏تتبقى %d أيام</item>
-      <item quantity="many">‏يتبقى %d يومًا</item>
-      <item quantity="other">‏يتبقى %d يوم</item>
-      <item quantity="one">‏يتبقى يوم واحد (%d)</item>
+      <item quantity="zero">‏يتبقى %d يوم.</item>
+      <item quantity="two">‏يتبقى يومان (%d).</item>
+      <item quantity="few">‏تتبقى %d أيام.</item>
+      <item quantity="many">‏يتبقى %d يومًا.</item>
+      <item quantity="other">‏يتبقى %d يوم.</item>
+      <item quantity="one">‏يتبقى يوم واحد (%d).</item>
     </plurals>
     <string name="billing_cycle_none_left" msgid="1694844019159277504">"لا يتبقى أي وقت"</string>
     <string name="billing_cycle_less_than_one_day_left" msgid="1210202399053992163">"يتبقى أقل من يوم واحد"</string>
@@ -5438,6 +5436,14 @@
     <string name="unknown_unavailability_setting_summary" msgid="9060213910510360231">"الإعداد غير متاح"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"الحساب"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"اسم الجهاز"</string>
+    <!-- no translation found for my_device_info_basic_info_category_title (381963187269356548) -->
+    <skip />
+    <!-- no translation found for my_device_info_legal_category_title (7732792841537995127) -->
+    <skip />
+    <!-- no translation found for my_device_info_device_details_category_title (4848438695638348680) -->
+    <skip />
+    <!-- no translation found for my_device_info_device_identifiers_category_title (2197063484127704153) -->
+    <skip />
     <string name="change_wifi_state_title" msgid="5629648102837821525">"‏التحكّم في شبكة Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"‏السماح للتطبيق بالتحكم في شبكة Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"‏يمكنك السماح لهذا التطبيق بتفعيل شبكة Wi-Fi أو إيقافها، أو البحث عن شبكات Wi-Fi والاتصال بها، أو إضافة الشبكات أو إزالتها، أو بدء نقطة اتصال للأجهزة المحلية فقط."</string>
