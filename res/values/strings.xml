@@ -1211,7 +1211,7 @@
     <!-- Text shown in fingerprint enroll when we didn't observe progress for a few seconds. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
     <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
-    <string name="security_settings_fingerprint_bad_calibration">Please recalibrate the fingerprint sensor.</string>
+    <string name="security_settings_fingerprint_bad_calibration">Device repaired improperly. Fingerprint disabled.</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -10590,7 +10590,11 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transcoding the files that are transferred via MTP. -->
-    <string name="usb_transcode_files">Transcode exported media</string>
+    <string name="usb_transcode_files">Convert videos to AVC</string>
+    <!-- The summary text that appears when the user enables the 'Convert videos to AVC' option for
+         transcoding files to compatible formats before transferring them from the device to PC.
+         [CHAR LIMIT=NONE] -->
+    <string name="usb_transcode_files_summary">Videos will play on more media players, but quality may be reduced</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
