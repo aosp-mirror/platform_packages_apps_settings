@@ -43,10 +43,12 @@ public class AdbUtils {
     public static boolean checkStringInAdbCommandOutput(String logTag, String command,
             String prefix, String target, int timeoutInMillis) throws Exception {
         long start = System.nanoTime();
+
         //Sometimes the change do no reflect in adn output immediately, so need a wait and poll here
         while (System.nanoTime() - start < (timeoutInMillis * 1000000)) {
             String result = shell(command);
-            if (result.contains(prefix) && result.contains(target)) {
+            if (result.contains(prefix == null ? "" : prefix)
+                    && result.contains(target == null ? "" : target)) {
                 return true;
             } else {
                 Thread.sleep(100);
