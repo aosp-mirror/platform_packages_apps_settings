@@ -55,6 +55,7 @@ public class UsbDetailsTranscodeMtpController extends UsbDetailsController
         mSwitchPreference = new SwitchPreference(mPreferenceCategory.getContext());
         mSwitchPreference.setTitle(R.string.usb_transcode_files);
         mSwitchPreference.setOnPreferenceClickListener(this);
+        mSwitchPreference.setSummaryOn(R.string.usb_transcode_files_summary);
         mPreferenceCategory.addPreference(mSwitchPreference);
     }
 
