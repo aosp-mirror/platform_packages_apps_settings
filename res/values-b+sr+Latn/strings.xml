@@ -300,7 +300,7 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Prikaži podatke o profilu na zaključanom ekranu"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Nalozi"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Lokacija"</string>
-    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Koristite lokaciju"</string>
+    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Koristi lokaciju"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Isključena"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="one">Uključeno – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacija ima pristup lokaciji</item>
@@ -385,7 +385,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Izbrišite aktuelni model lica da biste ponovo podesili otključavanje licem.\n\nModel lica će biti trajno i bezbedno izbrisan.\n\nPosle brisanja trebaće vam PIN, šablon ili lozinka da biste otključali telefon ili za potvrdu identiteta u aplikacijama."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Izbrišite aktuelni model lica da biste ponovo podesili otključavanje licem.\n\nModel lica će biti trajno i bezbedno izbrisan.\n\nPosle brisanja trebaće vam otisak prsta, PIN, šablon ili lozinka da biste otključali telefon ili za potvrdu identiteta u aplikacijama."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Koristi otklj. licem:"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Uslovi za otključavanje licem"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Kada koristite otključavanje licem"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Oči moraju da budu otvorene"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Da biste otključali telefon, oči moraju da budu otvorene"</string>
@@ -501,42 +500,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Uradiću to kasnije"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Preskočiti podešavanje otiska prsta?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Izabrali ste da koristite otisak prsta kao jedan način za otključavanje telefona. Ako sada preskočite, moraćete kasnije da obavite ovo podešavanje. Za podešavanje je potrebno samo oko minut vremena."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"PIN štiti tablet ako ga izgubite ili ga neko ukrade"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Šablon štiti tablet ako ga izgubite ili ga neko ukrade"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Lozinka štiti tablet ako ga izgubite ili ga neko ukrade"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"PIN štiti uređaj ako ga izgubite ili ga neko ukrade"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Šablon štiti uređaj ako ga izgubite ili ga neko ukrade"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Lozinka štiti uređaj ako ga izgubite ili ga neko ukrade"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"PIN štiti telefon ako ga izgubite ili ga neko ukrade"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Šablon štiti telefon ako ga izgubite ili ga neko ukrade"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Lozinka štiti telefon ako ga izgubite ili ga neko ukrade"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Za podešavanje otključavanja otiskom prsta neophodan je PIN.\n\nPIN štiti tablet ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Za podešavanje otključavanja otiskom prsta neophodan je šablon.\n\nŠablon štiti tablet ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Za podešavanje otključavanja otiskom prsta neophodna je lozinka.\n\nLozinka štiti tablet ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Za podešavanje otključavanja otiskom prsta neophodan je PIN.\n\nPIN štiti uređaj ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Za podešavanje otključavanja otiskom prsta neophodan je šablon.\n\nŠablon štiti uređaj ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Za podešavanje otključavanja otiskom prsta neophodna je lozinka.\n\nLozinka štiti uređaj ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Za podešavanje otključavanja otiskom prsta neophodan je PIN.\n\nPIN štiti telefon ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Za podešavanje otključavanja otiskom prsta neophodan je šablon.\n\nŠablon štiti telefon ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Za podešavanje otključavanja otiskom prsta neophodna je lozinka.\n\nLozinka štiti telefon ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Za podešavanje otključavanja licem neophodan je PIN.\n\nPIN štiti tablet ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Za podešavanje otključavanja licem neophodan je šablon.\n\nŠablon štiti tablet ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Za podešavanje otključavanja licem neophodna je lozinka.\n\nLozinka štiti tablet ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Za podešavanje otključavanja licem neophodan je PIN.\n\nPIN štiti uređaj ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Za podešavanje otključavanja licem neophodan je šablon.\n\nŠablon štiti uređaj ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Za podešavanje otključavanja licem neophodna je lozinka.\n\nLozinka štiti uređaj ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Za podešavanje otključavanja licem neophodan je PIN.\n\nPIN štiti telefon ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Za podešavanje otključavanja licem neophodan je šablon.\n\nŠablon štiti telefon ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Za podešavanje otključavanja licem neophodna je lozinka.\n\nLozinka štiti telefon ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Za podešavanje otključavanja licem i otiskom prsta neophodan je PIN.\n\nPIN štiti tablet ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Za podešavanje otključavanja licem i otiskom prsta neophodan je šablon.\n\nŠablon štiti tablet ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Za podešavanje otključavanja licem i otiskom prsta neophodna je lozinka.\n\nLozinka štiti tablet ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Za podešavanje otključavanja licem i otiskom prsta neophodan je PIN.\n\nPIN štiti uređaj ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Za podešavanje otključavanja licem i otiskom prsta neophodan je šablon.\n\nŠablon štiti uređaj ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Za podešavanje otključavanja licem i otiskom prsta neophodna je lozinka.\n\nLozinka štiti uređaj ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Za podešavanje otključavanja licem i otiskom prsta neophodan je PIN.\n\nPIN štiti telefon ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Za podešavanje otključavanja licem i otiskom prsta neophodan je šablon.\n\nŠablon štiti telefon ako ga izgubite ili ga neko ukrade."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Za podešavanje otključavanja licem i otiskom prsta neophodna je lozinka.\n\nLozinka štiti telefon ako ga izgubite ili ga neko ukrade."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Želite li da preskočite podešavanje PIN-a?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Želite da preskočite podešavanje PIN-a i lica?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Želite da preskočite podešavanje PIN-a i otiska prsta?"</string>
@@ -561,7 +596,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Osim za otključavanje telefona, otisak prsta možete da koristite i da biste dali ovlašćenje za kupovine i pristup aplikacijama. "<annotation id="url">"Saznajte više"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Opcija zaključavanja ekrana je onemogućena. Da biste saznali više, obratite se administratoru organizacije. "<annotation id="admin_details">"Više detalja"</annotation>\n\n"I dalje možete da koristite otisak prsta za odobravanje kupovine i pristupa aplikacijama. "<annotation id="url">"Saznajte više"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Podignite prst, pa ponovo dodirnite senzor"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Ponovo obavite kalibraciju senzora za otisak prsta."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maksimalan broj otisaka prstiju koji možete da dodate je <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodali ste maksimalan broj otisaka prstiju"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Ne možete da dodate još otisaka prstiju"</string>
@@ -1422,7 +1458,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Isključuje se automatski u <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"Uključi do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"Isključi do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"Tamna tema koristi crnu pozadinu da bi baterija trajala duže na nekim ekranima. Rasporedi tamne teme čekaju da se uključe dok vam je ekran isključen."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"Tamna tema koristi crnu pozadinu da bi baterija trajala duže na nekim ekranima. Rasporedi tamne teme se uključuju tek kada se ekran isključi."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Gašenje ekrana"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Ekran se isključuje"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Posle <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neaktivnosti"</string>
@@ -3000,7 +3036,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"Korisnički sertifikat za VPN i aplikaciju"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Sertifikat za Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Podaci neće biti privatni"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Veb-sajtovi, aplikacije i VPN-ovi koriste CA sertifikate za šifrovanje. Instalirajte CA sertifikate samo iz organizacija u koje imate poverenja. \n\n Ako instalirate CA sertifikat, vlasnik sertifikata bi mogao da pristupi podacima, poput lozinki ili podataka o kreditnoj kartici, sa veb-sajtova koje posećujete ili iz aplikacija koje koristite – čak i ako su ti podaci šifrovani."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ne instaliraj"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Ipak instaliraj"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Sertifikat nije instaliran"</string>
@@ -4465,7 +4502,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Prenos datoteka"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Prenosite datoteke na drugi uređaj"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Transkodirajte izvezeni medijski sadržaj"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Prenosite slike ili datoteke ako MTP nije podržan (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB privezivanje"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
