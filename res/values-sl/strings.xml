@@ -153,7 +153,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Klicne naprave"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Druge naprave"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Shranjene naprave"</string>
-    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth bo vklopljen, da bo omogočeno seznanjanje"</string>
+    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth bo vklopljen, da bo omogočeno seznanjanje."</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Nastavitve povezave"</string>
     <string name="connected_device_previously_connected_title" msgid="605808252622814415">"Predhodno povezane naprave"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Predhodno povezane naprave"</string>
@@ -293,7 +293,7 @@
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Omogoči pripomočke"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Onemogočil skrbnik"</string>
     <string name="lockdown_settings_title" msgid="8988970335658365075">"Prikaži možnost za zaklep"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Prikaz možnosti gumba za vklop, s katero izklopite funkcijo Smart Lock, odklepanje z obrazom, odklepanje s prstnimi odtisi in obvestila na zaklenjenem zaslonu."</string>
+    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Prikaz možnosti gumba za vklop, s katerim izklopite funkcijo Smart Lock, odklepanje z obrazom, odklepanje s prstnimi odtisi in obvestila na zaklenjenem zaslonu."</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Zakleni zaslon ob izgubljenem zaupanju"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Če je ta možnost omogočena, se naprava zaklene, ko zadnji posrednik zaupanja izgubi zaupanje"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Brez"</string>
@@ -302,7 +302,7 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Pokaži podatke o profilu na zaklenjenem zaslonu"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Računi"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Lokacija"</string>
-    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Uporaba lokacije"</string>
+    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Uporabi lokacijo"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Izklopljeno"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="one">Vklopljeno – dostop do lokacije ima <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacija</item>
@@ -388,7 +388,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Če želite znova nastaviti odklepanje z obrazom, izbrišite trenutni model obraza.\n\nModel obraza bo trajno in varno izbrisan.\n\nPo izbrisu boste za odklepanje telefona ali preverjanje pristnosti v aplikacijah morali uporabiti kodo PIN, vzorec ali geslo."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Če želite znova nastaviti odklepanje z obrazom, izbrišite trenutni model obraza.\n\nModel obraza bo trajno in varno izbrisan.\n\nPo izbrisu boste za odklepanje telefona ali preverjanje pristnosti v aplikacijah morali uporabiti prstni odtis, kodo PIN, vzorec ali geslo."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Uporaba odklepanja z obrazom za"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Zahteve za odklepanje z obrazom"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Ob uporabi odklepanja z obrazom"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Oči morajo biti odprte"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Če želite odkleniti telefon, morate imeti odprte oči"</string>
@@ -507,42 +506,42 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Pozneje"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Želite preskočiti nast. prstnega odtisa?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Za odklepanja telefona ste izbrali možnost prstnega odtisa. Če zdaj preskočite, boste to morali nastaviti pozneje. Nastavitev traja samo približno eno minuto."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"Koda PIN ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Vzorec ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Geslo ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"Koda PIN ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Vzorec ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Geslo ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"Koda PIN ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Vzorec ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Geslo ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Za nastavitev odklepanja s prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Za nastavitev odklepanja s prstnim odtisom je potreben vzorec.\n\nVzorec ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Za nastavitev odklepanja s prstnim odtisom je potrebno geslo.\n\nGeslo ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Za nastavitev odklepanja s prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Za nastavitev odklepanja s prstnim odtisom je potreben vzorec.\n\nVzorec ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Za nastavitev odklepanja s prstnim odtisom je potrebno geslo.\n\nGeslo ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Za nastavitev odklepanja s prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Za nastavitev odklepanja s prstnim odtisom je potreben vzorec.\n\nVzorec ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Za nastavitev odklepanja s prstnim odtisom je potrebno geslo.\n\nGeslo ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Za nastavitev odklepanja z obrazom je potrebna koda PIN.\n\nKoda PIN ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Za nastavitev odklepanja z obrazom je potreben vzorec.\n\nVzorec ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Za nastavitev odklepanja z obrazom je potrebno geslo.\n\nGeslo ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Za nastavitev odklepanja z obrazom je potrebna koda PIN.\n\nKoda PIN ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Za nastavitev odklepanja z obrazom je potreben vzorec.\n\nVzorec ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Za nastavitev odklepanja z obrazom je potrebno geslo.\n\nGeslo ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Za nastavitev odklepanja z obrazom je potrebna koda PIN.\n\nKoda PIN ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Za nastavitev odklepanja z obrazom je potreben vzorec.\n\nVzorec ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Za nastavitev odklepanja z obrazom je potrebno geslo.\n\nGeslo ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potreben vzorec.\n\nVzorec ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebno geslo.\n\nGeslo ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potreben vzorec.\n\nVzorec ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebno geslo.\n\nGeslo ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potreben vzorec.\n\nVzorec ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebno geslo.\n\nGeslo ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"Koda PIN ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"Vzorec ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"Geslo ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"Koda PIN ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"Vzorec ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"Geslo ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"Koda PIN ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"Vzorec ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"Geslo ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"Za nastavitev odklepanja s prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"Za nastavitev odklepanja s prstnim odtisom je potreben vzorec.\n\nVzorec ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"Za nastavitev odklepanja s prstnim odtisom je potrebno geslo.\n\nGeslo ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"Za nastavitev odklepanja s prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"Za nastavitev odklepanja s prstnim odtisom je potreben vzorec.\n\nVzorec ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"Za nastavitev odklepanja s prstnim odtisom je potrebno geslo.\n\nGeslo ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"Za nastavitev odklepanja s prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"Za nastavitev odklepanja s prstnim odtisom je potreben vzorec.\n\nVzorec ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"Za nastavitev odklepanja s prstnim odtisom je potrebno geslo.\n\nGeslo ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"Za nastavitev odklepanja z obrazom je potrebna koda PIN.\n\nKoda PIN ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"Za nastavitev odklepanja z obrazom je potreben vzorec.\n\nVzorec ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"Za nastavitev odklepanja z obrazom je potrebno geslo.\n\nGeslo ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"Za nastavitev odklepanja z obrazom je potrebna koda PIN.\n\nKoda PIN ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"Za nastavitev odklepanja z obrazom je potreben vzorec.\n\nVzorec ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"Za nastavitev odklepanja z obrazom je potrebno geslo.\n\nGeslo ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"Za nastavitev odklepanja z obrazom je potrebna koda PIN.\n\nKoda PIN ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"Za nastavitev odklepanja z obrazom je potreben vzorec.\n\nVzorec ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"Za nastavitev odklepanja z obrazom je potrebno geslo.\n\nGeslo ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potreben vzorec.\n\nVzorec ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebno geslo.\n\nGeslo ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potreben vzorec.\n\nVzorec ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebno geslo.\n\nGeslo ščiti napravo, če jo izgubite ali vam jo ukradejo."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebna koda PIN.\n\nKoda PIN ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potreben vzorec.\n\nVzorec ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"Za nastavitev odklepanja z obrazom in prstnim odtisom je potrebno geslo.\n\nGeslo ščiti telefon, če ga izgubite ali vam ga ukradejo."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Ne želite nastaviti kode PIN?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Želite preskočiti nastavitev kode PIN in obraza?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Želite preskočiti nastavitev kode PIN in prstnega odtisa?"</string>
@@ -567,7 +566,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Prstni odtis lahko uporabljate za odklepanje zaslona ter potrjevanje nakupov in dostop do aplikacij. "<annotation id="url">"Več o tem"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Možnost zaklepanja zaslona je onemogočena. Če želite izvedeti več, se obrnite na skrbnika organizacije. "<annotation id="admin_details">"Več podrobnosti"</annotation>\n\n"Prstni odtis lahko še naprej uporabljate za potrjevanje nakupov in dostop do aplikacij. "<annotation id="url">"Več o tem"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Dvignite prst in se znova dotaknite tipala."</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Znova umerite tipalo prstnih odtisov."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Dodate lahko do toliko prstnih odtisov: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodali ste največje dovoljeno število prstnih odtisov"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Prstnih odtisov ni več mogoče dodati"</string>
@@ -1341,7 +1341,7 @@
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Osebni račun – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Iskanje"</string>
     <string name="display_settings" msgid="7197750639709493852">"Zaslon"</string>
-    <string name="accelerometer_title" msgid="7745991950833748909">"Samodejno zasukaj zaslon"</string>
+    <string name="accelerometer_title" msgid="7745991950833748909">"Samodejni zasuk zaslona"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Izklopljeno"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Vklopljeno"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Vklopljeno – na podlagi obraza"</string>
@@ -1887,18 +1887,18 @@
     <string name="location_title" msgid="5819154746934945021">"Moja lokacija"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokacija za delovni profil"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Dovoljenja aplikacij za lokacijo"</string>
-    <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Zaznavanje lokacije je izklopljeno"</string>
+    <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Zaznavanje lokacije je izklopljeno."</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="one"> Dostop do lokacije ima <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij</item>
-      <item quantity="two"> Dostop do lokacije ima <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij</item>
-      <item quantity="few"> Dostop do lokacije ima <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij</item>
-      <item quantity="other"> Dostop do lokacije ima <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij</item>
+      <item quantity="one"> Dostop do lokacije ima <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij.</item>
+      <item quantity="two"> Dostop do lokacije imata <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij.</item>
+      <item quantity="few"> Dostop do lokacije imajo <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij.</item>
+      <item quantity="other"> Dostop do lokacije imajo <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij.</item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Nedavni dostop"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Prikaz vseh"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Ogled podrobnosti"</string>
     <string name="location_no_recent_apps" msgid="6814206631456177033">"V zadnjem času ni nobena aplikacija zahtevala lokacijskih podatkov."</string>
-    <string name="location_no_recent_accesses" msgid="6031735777805464247">"Nobena aplikacija ni nedavno dostopala do lokacije"</string>
+    <string name="location_no_recent_accesses" msgid="6031735777805464247">"Nobena aplikacija ni nedavno dostopala do lokacije."</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Visoka poraba baterije"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Nizka poraba baterije"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Iskanje omrežij Wi‑Fi"</string>
@@ -2403,7 +2403,7 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Gumb ali poteza za funk. za ljud. s pos. potrebami"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Uporaba gumba za funkcije za ljudi s posebnimi potrebami Poteza ni na voljo pri krmarjenju s tremi gumbi."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Hiter dostop do funkcij za ljudi s posebnimi potrebami."</string>
-    <string name="accessibility_button_gesture_description" msgid="2717632658372117656">"Hitro dostopajte do funkcij za ljudi s posebnimi potrebami na poljubnem zaslonu. \n\nČe želite začeti, odprite nastavitve funkcij za ljudi s posebnimi potrebami in izberite funkcijo. Dotaknite se bližnjice in izberite gumb ali potezo za funkcije za ljudi s posebnimi potrebami."</string>
+    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Hitro dostopajte do funkcij za ljudi s posebnimi potrebami na poljubnem zaslonu. \n\nČe želite začeti, odprite nastavitve funkcij za ljudi s posebnimi potrebami in izberite funkcijo. Dotaknite se bližnjice in izberite gumb za funkcije za ljudi s posebnimi potrebami.\n\nČe želite namesto tega uporabljati gumb za funkcije za ljudi s posebnimi potrebami v vrstici za krmarjenje, preklopite na krmarjenje z dvema gumboma ali s tremi gumbi."</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Hitro dostopajte do funkcij za ljudi s posebnimi potrebami na poljubnem zaslonu. \n\nČe želite začeti, odprite nastavitve funkcij za ljudi s posebnimi potrebami in izberite funkcijo. Dotaknite se bližnjice in izberite gumb za funkcije za ljudi s posebnimi potrebami."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Uporaba gumba ali poteze"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokacija"</string>
@@ -3039,7 +3039,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"Upor. potrdilo za VPN in apl."</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Potrdilo za Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Vaši podatki ne bodo zasebni"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Spletna mesta, aplikacije in navidezna zasebna omrežja (VPN) uporabljajo potrdila overiteljev potrdil za izvajanje šifriranja. Nameščajte samo potrdila overiteljev potrdil, ki jih izdajo zaupanja vredne organizacije. \n\n Če namestite potrdilo overitelja potrdil, lahko lastnik potrdila dostopa do vaših podatkov, kot so gesla ali podrobnosti o kreditni kartici, ki izvirajo z obiskanih spletnih mest in iz uporabljenih aplikacij – tudi če so podatki šifrirani."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ne namesti"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Kljub temu namesti"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Potrdilo ni nameščeno"</string>
@@ -3646,8 +3647,7 @@
     <string name="keywords_sim_status" msgid="8784456547742075508">"omrežje, stanje mobilnega omrežja, stanje storitve, moč signala, vrsta mobilnega omrežja, gostovanje, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serijska številka, različica strojne opreme"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"raven varnostnih popravkov za android, različica radijske programske opreme, različica jedra"</string>
-    <!-- no translation found for keywords_dark_ui_mode (6373999418195344014) -->
-    <skip />
+    <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, svetla, temna, način, občutljivost na svetlobo, fotofobija, naredi temnejše, potemni, temni način, migrena"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"temna tema"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"napaka"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"prikaz na podlagi okolja, prikaz na zaklenjenem zaslonu"</string>
@@ -4533,7 +4533,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Prenos datotek"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Prenos datotek v drugo napravo"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Prekodiranje izvožene predstavnosti"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Prenos fotografij ali datotek, če MTP ni podprt (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Internet prek USB-ja"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4550,7 +4553,7 @@
     <string name="usb_control_device" msgid="527916783743021577">"Ta naprava"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Preklapljanje …"</string>
     <string name="usb_switching_failed" msgid="5721262697715454137">"Preklop ni uspel"</string>
-    <string name="usb_summary_charging_only" msgid="678095599403565146">"Polnjenje te naprave"</string>
+    <string name="usb_summary_charging_only" msgid="678095599403565146">"Polnjenje te naprave."</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Polnjenje akumulatorja v povezani napravi"</string>
     <string name="usb_summary_file_transfers" msgid="5498487271972556431">"Prenos datotek"</string>
     <string name="usb_summary_tether" msgid="2554569836525075702">"Internet prek USB-ja"</string>
@@ -5569,10 +5572,10 @@
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Za uporabo najprej nastavite zaklepanje zaslona."</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Pridržanje za Pomočnika"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Sprožite Pomočnika tako, da pridržite gumb za vklop."</string>
-    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Pokaži denarnico"</string>
+    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Prikaži denarnico"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Dovolite dostop do denarnice prek zaklenjenega zaslona in hitrih nastavitev."</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Prikaži kontrolnike naprave"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Dostop do kontrolnikov pri zaklenjenem zaslonu"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Dostopajte do kontrolnikov pri zaklenjenem zaslonu."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5594,7 +5597,7 @@
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrij predvajalnik"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Prikaži predvajalnik"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"predstavnost"</string>
-    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth se bo vklopil"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth se bo vklopil."</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Vklopljeno"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Izklopljeno"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>

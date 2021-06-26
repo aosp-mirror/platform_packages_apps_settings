@@ -138,7 +138,7 @@
     <string name="bluetooth_sap_request" msgid="473439406287008397">"Žádost o přístup k SIM kartě"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"Zařízení <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> žádá o přístup k SIM kartě. Po dobu přístupu zařízení k SIM kartě bude datové připojení ve vašem zařízení vypnuto. Chcete zařízení <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> povolit přístup?"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"Viditelné pro ostatní zařízení jako „<xliff:g id="DEVICE_NAME">^1</xliff:g>“"</string>
-    <string name="bluetooth_off_footer" msgid="76578735660216295">"Chcete-li se připojit k ostatním zařízením, zapněte Bluetooth."</string>
+    <string name="bluetooth_off_footer" msgid="76578735660216295">"Pokud se chcete připojit k ostatním zařízením, zapněte Bluetooth."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Vaše zařízení"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Spárovat nové zařízení"</string>
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"Povolte tabletu komunikovat se zařízeními Bluetooth v okolí"</string>
@@ -312,7 +312,7 @@
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Načítání…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikace s oprávněním k přístupu k zařízením v okolí mohou zjišťovat relativní polohu připojených zařízení."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Přístup k poloze je u aplikací a služeb vypnutý. Poloha zařízení může přesto být odesílána záchranářům, když vytočíte číslo tísňového volání nebo na něj pošlete SMS."</string>
+    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Přístup aplikací a služeb k poloze je vypnutý. Poloha zařízení může být přesto odesílána záchranářům, když vytočíte číslo tísňového volání nebo na něj pošlete SMS."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Přečtěte si další informace o nastavení oblastí."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Účty"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Zabezpečení"</string>
@@ -388,7 +388,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Pokud chcete odemknutí obličejem nastavit znovu, smažte stávající model obličeje.\n\nModel obličeje bude trvale a bezpečně smazán.\n\nPo smazání budete k odemykání telefonu a ověřování v aplikacích používat PIN, gesto nebo heslo."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Pokud chcete odemknutí obličejem nastavit znovu, smažte stávající model obličeje.\n\nModel obličeje bude trvale a bezpečně smazán.\n\nPo smazání budete k odemykání telefonu a ověřování v aplikacích používat otisk prstu, PIN, gesto nebo heslo."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Použít pro:"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Požadavky na odemknutí obličejem"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Při odemykání obličejem"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Požadovat otevřené oči"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"K odemknutí telefonu musíte mít otevřené oči"</string>
@@ -505,42 +504,42 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Později"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Přeskočit nastavení otisku prstu?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Jako jeden ze způsobů odemknutí telefonu jste se rozhodli používat otisk prstu. Pokud nastavení přeskočíte, bude třeba jej dokončit později. Nastavení trvá jen chviličku."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"PIN chrání tablet v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Gesto chrání tablet v případě ztráty nebo odcizení"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Heslo chrání tablet v případě ztráty nebo odcizení"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"PIN chrání zařízení v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Gesto chrání zařízení v případě ztráty nebo odcizení"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Heslo chrání zařízení v případě ztráty nebo odcizení"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"PIN chrání telefon v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Gesto chrání telefon v případě ztráty nebo odcizení"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Heslo chrání telefon v případě ztráty nebo odcizení"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"K nastavení odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání tablet v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"K nastavení odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání tablet v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"K nastavení odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání tablet v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"K nastavení odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání zařízení v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"K nastavení odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání zařízení v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"K nastavení odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání zařízení v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"K nastavení odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání telefon v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"K nastavení odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání telefon v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"K nastavení odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání telefon v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"K nastavení odemknutí obličejem je vyžadován PIN.\n\nPIN chrání tablet v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"K nastavení odemknutí obličejem je vyžadováno gesto.\n\nGesto chrání tablet v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"K nastavení odemknutí obličejem je vyžadováno heslo.\n\nHeslo chrání tablet v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"K nastavení odemknutí obličejem je vyžadován PIN.\n\nPIN chrání zařízení v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"K nastavení odemknutí obličejem je vyžadováno gesto.\n\nGesto chrání zařízení v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"K nastavení odemknutí obličejem je vyžadováno heslo.\n\nHeslo chrání zařízení v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"K nastavení odemknutí obličejem je vyžadován PIN.\n\nPIN chrání telefon v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"K nastavení odemknutí obličejem je vyžadováno gesto.\n\nGesto chrání telefon v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"K nastavení odemknutí obličejem je vyžadováno heslo.\n\nHeslo chrání telefon v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání tablet v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání tablet v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání tablet v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání zařízení v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání zařízení v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání zařízení v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání telefon v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání telefon v případě ztráty nebo odcizení."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání telefon v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN chrání tablet v případě ztráty nebo odcizení"</string>
+    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"Gesto chrání tablet v případě ztráty nebo odcizení"</string>
+    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"Heslo chrání tablet v případě ztráty nebo odcizení"</string>
+    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"PIN chrání zařízení v případě ztráty nebo odcizení"</string>
+    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"Gesto chrání zařízení v případě ztráty nebo odcizení"</string>
+    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"Heslo chrání zařízení v případě ztráty nebo odcizení"</string>
+    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"PIN chrání telefon v případě ztráty nebo odcizení"</string>
+    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"Gesto chrání telefon v případě ztráty nebo odcizení"</string>
+    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"Heslo chrání telefon v případě ztráty nebo odcizení"</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"K nastavení odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání tablet v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"K nastavení odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání tablet v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"K nastavení odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání tablet v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"K nastavení odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání zařízení v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"K nastavení odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání zařízení v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"K nastavení odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání zařízení v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"K nastavení odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání telefon v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"K nastavení odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání telefon v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"K nastavení odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání telefon v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"K nastavení odemknutí obličejem je vyžadován PIN.\n\nPIN chrání tablet v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"K nastavení odemknutí obličejem je vyžadováno gesto.\n\nGesto chrání tablet v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"K nastavení odemknutí obličejem je vyžadováno heslo.\n\nHeslo chrání tablet v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"K nastavení odemknutí obličejem je vyžadován PIN.\n\nPIN chrání zařízení v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"K nastavení odemknutí obličejem je vyžadováno gesto.\n\nGesto chrání zařízení v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"K nastavení odemknutí obličejem je vyžadováno heslo.\n\nHeslo chrání zařízení v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"K nastavení odemknutí obličejem je vyžadován PIN.\n\nPIN chrání telefon v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"K nastavení odemknutí obličejem je vyžadováno gesto.\n\nGesto chrání telefon v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"K nastavení odemknutí obličejem je vyžadováno heslo.\n\nHeslo chrání telefon v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání tablet v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání tablet v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání tablet v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání zařízení v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání zařízení v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání zařízení v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadován PIN.\n\nPIN chrání telefon v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno gesto.\n\nGesto chrání telefon v případě ztráty nebo odcizení."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"K nastavení odemknutí obličejem a odemknutí otiskem prstu je vyžadováno heslo.\n\nHeslo chrání telefon v případě ztráty nebo odcizení."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Přeskočit nastavení kódu PIN?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Přeskočit nastavení PINu a obličeje?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Přeskočit nastavení PINu a otisku?"</string>
@@ -565,7 +564,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Kromě odemknutí telefonu můžete svůj otisk prstu použít také k autorizaci nákupů a přístupu aplikací. "<annotation id="url">"Další informace"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Možnost zámku obrazovky je zakázána. Další informace vám sdělí administrátor vaší organizace. "<annotation id="admin_details">"Další podrobnosti"</annotation>\n\n"Otisk prstu můžete i nadále používat k autorizaci nákupů a přístupu k aplikacím. "<annotation id="url">"Další informace"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Prst opakovaně zvedejte a přikládejte na senzor."</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Znovu zkalibrujte snímač otisků prstů."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maximální počet otisků prstů, které lze přidat: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Přidali jste maximální počet otisků prstů"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Další otisky prstů nelze přidat"</string>
@@ -2118,7 +2118,7 @@
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Obnovit nastavení aplikací?"</string>
     <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Touto akcí obnovíte všechna nastavení pro:\n\n"<li>"deaktivované aplikace,"</li>\n<li>"deaktivovaná oznámení aplikací,"</li>\n<li>"výchozí aplikace k provádění akcí,"</li>\n<li>"omezení dat na pozadí pro aplikace,"</li>\n<li>"omezení oprávnění."</li>\n\n"O žádná data aplikací nepřijdete."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Obnovit aplikace"</string>
-    <string name="manage_space_text" msgid="9013414693633572277">"Správa paměti"</string>
+    <string name="manage_space_text" msgid="9013414693633572277">"Spravovat místo"</string>
     <string name="filter" msgid="9039576690686251462">"Filtrovat"</string>
     <string name="filter_dlg_title" msgid="3086282431958601338">"Vyberte možnosti filtru"</string>
     <string name="filter_apps_all" msgid="5705421199299914620">"Všechny aplikace"</string>
@@ -2401,7 +2401,8 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tlačítko a gesto přístupnosti."</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Použije se tlačítko přístupnosti. Toto gesto není k dispozici u navigace třemi tlačítky."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Rychlý přístup k funkcím pro usnadnění přístupu"</string>
-    <string name="accessibility_button_gesture_description" msgid="2717632658372117656">"Funkce pro usnadnění přístupu lze snadno používat na libovolné obrazovce. \n\nPokud chcete začít, přejděte do nastavení funkcí pro usnadnění přístupu a vyberte funkci. Klepněte na zkratku a vyberte tlačítko přístupnosti nebo gesto."</string>
+    <!-- no translation found for accessibility_button_gesture_description (2516420653060025670) -->
+    <skip />
     <string name="accessibility_button_description" msgid="7372405202698400339">"Funkce pro usnadnění přístupu lze snadno používat na libovolné obrazovce. \n\nPokud chcete začít, přejděte do nastavení funkcí pro usnadnění přístupu a vyberte funkci. Klepněte na zkratku a vyberte tlačítko přístupnosti."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Použít tlačítko nebo gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Umístění"</string>
@@ -2667,11 +2668,11 @@
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Aplikace není nastavena k optimalizaci baterie, nelze ji tedy omezit.\n\nChcete-li ji omezit, nejprve zapněte optimalizaci."</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Neomezeno"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimalizováno"</string>
-    <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Omezené"</string>
+    <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Omezeno"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Na pozadí lze využívat baterii neomezeně. Může být náročnější na baterii."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimalizuje se podle využití. Doporučeno pro většinu aplikací."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Na pozadí je využití baterie omezeno. Aplikace nemusí fungovat podle očekávání. Oznámení se mohou zpožďovat."</string>
-    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Změna využití baterie aplikací může ovlivnit výkon aplikace."</string>
+    <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Změna způsobu, jakým aplikace využívá baterii, může mít vliv na výkon aplikace."</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Tato aplikace vyžaduje využití baterie typu: <xliff:g id="STATE">%1$s</xliff:g>."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"neomezeno"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"optimalizováno"</string>
@@ -2711,7 +2712,7 @@
     <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"V tabletu dochází k běžnému využívání baterie na pozadí"</string>
     <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"V zařízení dochází k běžnému využívání baterie na pozadí"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Baterie je slabá"</string>
-    <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Pokud chcete prodloužit výdrž baterie, zapněte Úsporu"</string>
+    <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Pokud chcete prodloužit výdrž baterie, zapněte Spořič baterie"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Prodloužení životnosti baterie"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Zapnout Správce baterie"</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Zapnout spořič baterie"</string>
@@ -2953,7 +2954,7 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Celkem: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Na pozadí: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Údaje o využití baterie jsou přibližné a během nabíjení telefonu se využití neměří."</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Údaje o využití baterie budou k dispozici, až budete telefon používat několik hodin"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Údaje o využití baterie budou k dispozici, až budete telefon používat několik hodin."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Graf využití baterie"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistiky procesů"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Podrobné statistiky běžících procesů"</string>
@@ -3037,7 +3038,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"Certifikát pro VPN a aplikaci"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Certifikát Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Nebude zajištěno soukromí vašich dat"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Certifikáty CA slouží k šifrování na webech, v aplikacích a v sítích VPN. Instalujte pouze certifikáty CA od organizací, kterým důvěřujete. \n\n Pokud nainstalujete certifikát CA, jeho vlastník může získat přístup k vašim údajům, jako jsou hesla, zprávy nebo údaje platebních karet z webů a aplikací, které používáte, a to i když tyto informace budou šifrované."</string>
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Certifikáty CA slouží k šifrování na webech, v aplikacích a v sítích VPN. Instalujte pouze certifikáty CA od organizací, kterým důvěřujete. \n\nPokud nainstalujete certifikát CA, jeho vlastník může získat přístup k vašim údajům, jako jsou hesla, zprávy nebo údaje platebních karet z webů a aplikací, které používáte – a to i když tyto informace budou šifrované."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Neinstalovat"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Přesto nainstalovat"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certifikát nebyl nainstalován"</string>
@@ -3847,7 +3848,7 @@
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Automaticky zobrazovat navrhované akce a odpovědi"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Zobrazovat nedávná a odložená oznámení"</string>
     <string name="notification_history" msgid="8663811361243456201">"Historie oznámení"</string>
-    <string name="notification_history_toggle" msgid="9093762294928569030">"Použít historii oznámení"</string>
+    <string name="notification_history_toggle" msgid="9093762294928569030">"Používat historii oznámení"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Historie oznámení je vypnutá"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Po zapnutí historie oznámení uvidíte nedávná a odložená oznámení"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"Žádná nedávná oznámení"</string>
@@ -3900,7 +3901,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Obrazovka uzamčení, přeskočení, obejití"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Když je profil uzamčen"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Oznámení na obrazovce uzamčení"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Zobrazovat konverzace, výchozí a tiché"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Zobrazovat konverzace a výchozí i tichá oznámení"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Skrýt tiché konverzace a oznámení"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Nezobrazovat žádná oznámení"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Citlivá oznámení"</string>
@@ -4531,7 +4532,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Přenos souborů"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Přenos souborů do jiného zařízení"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Překódovat exportovaná média"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Přenést fotky nebo soubory, pokud MTP není podporováno (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Tethering přes USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -5430,7 +5434,7 @@
     <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Operátora nelze deaktivovat"</string>
     <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Něco se pokazilo a deaktivace operátora se nezdařila."</string>
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Používat dvě SIM karty?"</string>
-    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"V tomto zařízení lze používat dvě SIM karty současně. Chcete-li používat jen jednu, klepněte na „Ne, díky“."</string>
+    <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"V tomto zařízení lze používat dvě SIM karty současně. Pokud chcete používat jen jednu, klepněte na „Ne, díky“."</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Restartovat zařízení?"</string>
     <string name="sim_action_restart_text" msgid="8019300474703571013">"Nejprve restartujte zařízení. Poté budete moci přidat druhou SIM kartu."</string>
     <string name="sim_action_continue" msgid="1688813133152389943">"Pokračovat"</string>
@@ -5461,7 +5465,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Pokud budete chtít později používat mobilní data, volání a SMS, přejděte do nastavení sítě"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM karta"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vymazat staženou SIM kartu?"</string>
-    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Když vymažete tuto SIM kartu, ze zařízení bude odebrán operátor <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>.\n\nSlužba operátora <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> zrušena nebude."</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Když vymažete tuto SIM kartu, ze zařízení bude odebrána služba operátora <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>.\n\nSlužba operátora <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> zrušena nebude."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Vymazat"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Mazání SIM karty…"</string>
     <string name="erase_sim_fail_title" msgid="2024446702985862427">"SIM kartu nelze vymazat"</string>

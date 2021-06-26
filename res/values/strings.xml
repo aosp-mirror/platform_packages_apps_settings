@@ -1211,7 +1211,7 @@
     <!-- Text shown in fingerprint enroll when we didn't observe progress for a few seconds. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
     <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
-    <string name="security_settings_fingerprint_bad_calibration">Device repaired improperly. Fingerprint disabled.</string>
+    <string name="security_settings_fingerprint_bad_calibration">Can\u2019t use fingerprint sensor. Visit a repair provider</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -4393,6 +4393,25 @@
     <!-- Header on first screen of choose work profile pattern flow [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_profile_pattern_header">Set a work pattern</string>
 
+    <!-- Header on first screen of choose device password flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_password_description" product="phone">For added security, set a password to unlock the phone</string>
+    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_pin_description" product="phone">For added security, set a PIN to unlock the phone</string>
+    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=NONE] -->
+    <string name="lockpattern_choose_pattern_description" product="phone">For added security, set a pattern to unlock the phone</string>
+    <!-- Header on first screen of choose device password flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_password_description" product="tablet">For added security, set a password to unlock the tablet</string>
+    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_pin_description" product="tablet">For added security, set a PIN to unlock the tablet</string>
+    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=NONE] -->
+    <string name="lockpattern_choose_pattern_description" product="tablet">For added security, set a pattern to unlock the tablet</string>
+    <!-- Header on first screen of choose device password flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_password_description" product="default">For added security, set a password to unlock the device</string>
+    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_pin_description" product="default">For added security, set a PIN to unlock the device</string>
+    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=NONE] -->
+    <string name="lockpattern_choose_pattern_description" product="default">For added security, set a pattern to unlock the device</string>
+
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set password</string>
     <!-- Header on first screen of choose pattern as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
@@ -4438,12 +4457,12 @@
     <!-- Header on first screen of choose password/PIN as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_face">To use Face Unlock, set PIN</string>
 
-    <!-- Header on first screen of choose password/PIN as backup for biometric unlock flow. If this string cannot be translated in under 40 characters, please translate "Set biometric unlock backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_password_header_for_biometrics">To use biometrics, set password</string>
-    <!-- Header on first screen of choose pattern as backup for biometric unlock flow. If this string cannot be translated in under 40 characters, please translate "Set biometric unlock backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics">To use biometrics, set pattern</string>
-    <!-- Header on first screen of choose password/PIN as backup for biometric unlock flow. If this string cannot be translated in under 40 characters, please translate "Set biometric unlock backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_pin_header_for_biometrics">To use biometrics, set PIN</string>
+    <!-- Title of a screen that asks the user to set up a password as a backup for Face or Fingerprint Unlock. If this string can't be translated in 60 characters, please translate "Set a backup password". [CHAR LIMIT=60] -->
+    <string name="lockpassword_choose_your_password_header_for_biometrics">Set a password to use face or fingerprint</string>
+    <!-- Title of a screen that asks the user to set up a pattern as a backup for Face or Fingerprint Unlock. If this string can't be translated in 60 characters, please translate "Set a backup pattern". [CHAR LIMIT=60] -->
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics">Set a pattern to use face or fingerprint</string>
+    <!-- Title of a screen that asks the user to set up a PIN as a backup for Face or Fingerprint Unlock. If this string can't be translated in 60 characters, please translate "Set a backup PIN". [CHAR LIMIT=60] -->
+    <string name="lockpassword_choose_your_pin_header_for_biometrics">Set a PIN to use face or fingerprint</string>
 
 
     <!-- Text for button that the user should tap when they forgot their work profile password [CHAR LIMIT=40] -->
