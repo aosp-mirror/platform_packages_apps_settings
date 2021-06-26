@@ -382,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Lösche dein aktuelles Gesichtsmodell, um die Entsperrung per Gesichtserkennung neu einzurichten.\n\nDein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nDanach benötigst du zum Entsperren deines Smartphones oder zur Authentifizierung in Apps deine PIN, dein Muster oder dein Passwort."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Lösche dein aktuelles Gesichtsmodell, um die Entsperrung per Gesichtserkennung neu einzurichten.\n\nDein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nDanach benötigst du zum Entsperren deines Smartphones oder zur Authentifizierung in Apps deinen Fingerabdruck, deine PIN, dein Muster oder Passwort."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Gesichtsentsperrung für"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Voraussetzungen für die Entsperrung per Gesichtserkennung"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Bei Nutzung der Entsperrung per Gesichtserkennung"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Augen müssen geöffnet sein"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Zum Entsperren des Smartphones müssen deine Augen geöffnet sein"</string>
@@ -458,10 +457,8 @@
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Gesicht und Fingerabdruck verwenden für"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Smartphone entsperren"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Authentifizierung in Apps"</string>
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (3747619291972376153) -->
-    <skip />
-    <!-- no translation found for biometric_settings_hand_back_to_guardian_ok (1763788801883247426) -->
-    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Gib das Telefon an dein Elternteil zurück"</string>
+    <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Displaysperre überspringen?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Die Schutzfunktionen für dein Mobilgerät werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Tablet verwenden, falls es verloren geht, gestohlen oder zurückgesetzt wird."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Die Schutzfunktionen für dein Mobilgerät werden nicht aktiviert. Du kannst dann nicht verhindern, dass andere Personen dieses Gerät verwenden, falls es verloren geht, gestohlen oder zurückgesetzt wird."</string>
@@ -501,42 +498,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Später"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Fingerabdruck-Einrichtung überspringen?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Du hast festgelegt, dass du unter anderem deinen Fingerabdruck zum Entsperren deines Smartphones verwenden möchtest. Wenn du diesen Schritt jetzt überspringst, musst du die Einrichtung zu einem späteren Zeitpunkt vornehmen. Die Einrichtung dauert nur ca. eine Minute."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"Eine PIN schützt dein Tablet, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Ein Muster schützt dein Tablet, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Ein Passwort schützt dein Tablet, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"Eine PIN schützt dein Gerät, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Ein Muster schützt dein Gerät, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Ein Passwort schützt dein Gerät, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"Eine PIN schützt dein Smartphone, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Ein Muster schützt dein Smartphone, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Ein Passwort schützt dein Smartphone, falls es verloren geht oder gestohlen wird"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Zum Einrichten der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt dein Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt dein Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt dein Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Zum Einrichten der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt dein Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt dein Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt dein Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Zum Einrichten der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt dein Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt dein Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Zum Einrichten der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt dein Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Zum Einrichten der Entsperrung per Gesichtserkennung ist eine PIN erforderlich.\n\nEine PIN schützt dein Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Muster erforderlich.\n\nEin Muster schützt dein Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Passwort erforderlich.\n\nEin Passwort schützt dein Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Zum Einrichten der Entsperrung per Gesichtserkennung ist eine PIN erforderlich.\n\nEine PIN schützt dein Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Muster erforderlich.\n\nEin Muster schützt dein Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Passwort erforderlich.\n\nEin Passwort schützt dein Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Zum Einrichten der Entsperrung per Gesichtserkennung ist eine PIN erforderlich.\n\nEine PIN schützt dein Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Muster erforderlich.\n\nEin Muster schützt dein Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Zum Einrichten der Entsperrung per Gesichtserkennung ist ein Passwort erforderlich.\n\nEin Passwort schützt dein Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt dein Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt dein Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt dein Tablet, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt dein Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt dein Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt dein Gerät, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist eine PIN erforderlich.\n\nEine PIN schützt dein Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Muster erforderlich.\n\nEin Muster schützt dein Smartphone, falls es verloren geht oder gestohlen wird."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Zum Einrichten der Entsperrung per Gesichtserkennung und der Entsperrung per Fingerabdruck ist ein Passwort erforderlich.\n\nEin Passwort schützt dein Smartphone, falls es verloren geht oder gestohlen wird."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"PIN-Einrichtung überspringen?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Einrichtung für PIN &amp; Gesicht überspringen?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Einrichtung für PIN &amp; Fingerabdruck überspringen?"</string>
@@ -561,7 +594,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Du kannst deinen Fingerabdruck nicht nur dazu verwenden, dein Smartphone zu entsperren, sondern mit ihm auch Käufe autorisieren und dich in Apps anmelden. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Die Option für die Displaysperre ist deaktiviert. Wende dich an den Administrator deiner Organisation, um weitere Informationen zu erhalten. "<annotation id="admin_details">"Weitere Details"</annotation>\n\n"Du kannst deinen Fingerabdruck dennoch verwenden, um Käufe zu autorisieren und dich in Apps anzumelden. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Hebe den Finger und berühre den Sensor dann noch einmal"</string>
-    <!-- no translation found for security_settings_fingerprint_bad_calibration (7383361161604438407) -->
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
     <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kannst bis zu <xliff:g id="COUNT">%d</xliff:g> Fingerabdrücke hinzufügen."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du hast die maximale Anzahl an Fingerabdrücken hinzugefügt"</string>
@@ -2359,7 +2392,8 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Bedienungshilfen &amp; Touch-Geste"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Schaltfläche „Bedienungshilfen“ wird verwendet. Bei Bedienung über 3 Schaltflächen ist die Touch-Geste nicht verfügbar."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Schnell auf Bedienungshilfen zugreifen"</string>
-    <string name="accessibility_button_gesture_description" msgid="2717632658372117656">"Du kannst auf allen Bildschirmen schnell auf Bedienungshilfen zugreifen. \n\nGehe zuerst zu den Einstellungen für Bedienungshilfen und wähle eine Funktion aus. Tippe auf den Kurzbefehl und wähle die Schaltfläche „Bedienungshilfen“ aus oder nutze die entsprechende Touch-Geste."</string>
+    <!-- no translation found for accessibility_button_gesture_description (2516420653060025670) -->
+    <skip />
     <string name="accessibility_button_description" msgid="7372405202698400339">"Du kannst auf allen Bildschirmen schnell auf Bedienungshilfen zugreifen. \n\nGehe zuerst zu den Einstellungen für Bedienungshilfen und wähle eine Funktion aus. Tippe auf den Kurzbefehl und wähle die Schaltfläche „Bedienungshilfen“ aus."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Schaltfläche oder Touch-Geste verwenden"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ort"</string>
@@ -2616,7 +2650,7 @@
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Auf Grundlage deiner Nutzung optimieren. Für die meisten Apps empfohlen."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Akkunutzung im Hintergrund einschränken. Die App funktioniert möglicherweise nicht wie erwartet. Benachrichtigungen können verzögert ankommen."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Änderungen der Akkunutzung einer App kann Auswirkungen auf die Leistung der App haben."</string>
-    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Diese App benötigt Akkunutzung „<xliff:g id="STATE">%1$s</xliff:g>“."</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Diese App benötigt <xliff:g id="STATE">%1$s</xliff:g> Akkunutzung."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"uneingeschränkte"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"optimierte"</string>
     <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"Weitere Informationen zu den Akkunutzungsoptionen"</string>
@@ -2859,7 +2893,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Zeitplan festlegen"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Akkulaufzeit verlängern"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Bei vollem Akku ausschalten"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Der Energiesparmodus wird deaktiviert, wenn dein Smartphone-Akku zu über <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> geladen ist"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"Der Energiesparmodus wird deaktiviert, sobald dein Akku zu über <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> geladen ist"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"Der Energiesparmodus wird deaktiviert, wenn dein Tablet-Akku zu über <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> geladen ist"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"Der Energiesparmodus wird deaktiviert, wenn dein Geräteakku zu über <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> geladen ist"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
@@ -2871,11 +2905,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"bei <xliff:g id="PERCENT">%1$s</xliff:g> Akku"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Ladestandanzeige in Prozent"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Ladestand in Statusleiste in Prozent anzeigen"</string>
-    <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Akkustand: letzte 24 Stunden"</string>
-    <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"App-Nutzung: letzte 24 Stunden"</string>
-    <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Systemnutzung: letzte 24 Stunden"</string>
-    <string name="battery_system_usage_for" msgid="3248552137819897140">"Systemnutzung für <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_app_usage_for" msgid="7309909074935858949">"App-Nutzung für <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Akkustand während der letzten 24 Stunden"</string>
+    <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"App-Nutzung während der letzten 24 Stunden"</string>
+    <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Systemnutzung während der letzten 24 Stunden"</string>
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Systemnutzung im Zeitraum <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"App-Nutzung im Zeitraum <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"vormittags"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"nachmittags"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Gesamt: weniger als eine Minute"</string>
@@ -2887,7 +2921,7 @@
     <string name="battery_usage_chart" msgid="4114747521432440017">"Diagramm zur Akkunutzung"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Prozessstatistiken"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Statistiken zu laufenden Prozessen"</string>
-    <string name="app_memory_use" msgid="7559666138324410666">"Speichernutzung"</string>
+    <string name="app_memory_use" msgid="7559666138324410666">"Arbeitsspeichernutzung"</string>
     <string name="process_stats_total_duration" msgid="3898635541254636618">"<xliff:g id="USEDRAM">%1$s</xliff:g> von <xliff:g id="TOTALRAM">%2$s</xliff:g> genutzt in der letzten Zeit (<xliff:g id="TIMEDURATION">%3$s</xliff:g>)"</string>
     <string name="process_stats_total_duration_percentage" msgid="4391502694312709148">"<xliff:g id="PERCENT">%1$s</xliff:g> RAM genutzt in <xliff:g id="TIMEDURATION">%2$s</xliff:g>"</string>
     <string name="process_stats_type_background" msgid="4094034441562453522">"Hintergrund"</string>
@@ -2967,7 +3001,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"VPN- &amp; App-Nutzerzertifikat"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"WLAN-Zertifikat"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Deine Daten werden nicht geschützt"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"CA-Zertifikate werden von Websites, Apps und VPNs zur Verschlüsselung verwendet. Du solltest nur CA-Zertifikate von Organisationen installieren, denen du vertraust. \n\n Wenn du ein CA-Zertifikat installierst, hat dessen Inhaber Zugriff auf deine Daten, z. B. auf Passwörter oder Kreditkartendetails von Websites, die du besuchst, oder von Apps, die du verwendest. Das ist auch dann der Fall, wenn diese Daten verschlüsselt sind."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Nicht installieren"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Trotzdem installieren"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Zertifikat nicht installiert"</string>
@@ -3925,7 +3960,7 @@
     <string name="notif_type_ongoing" msgid="135675014223627555">"Echtzeit"</string>
     <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"Aktive Mitteilungen von Apps, die in Verwendung sind, der Navigation, Telefonanrufen und mehr"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"Unterhaltungen"</string>
-    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS und andere Kommunikation"</string>
+    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS und andere Nachrichten"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"Benachrichtigungen"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Kann klingeln oder vibrieren, abhängig von den Einstellungen"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Lautlos"</string>
@@ -4006,7 +4041,7 @@
     <string name="notification_content_block_title" msgid="6689085826061361351">"Benachrichtigungen anzeigen"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Benachrichtigungen nie in der Leiste oder auf Peripheriegeräten anzeigen"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"App-Benachrichtigungspunkt erlauben"</string>
-    <string name="notification_channel_badge_title" msgid="6505542437385640049">"App-Benachrichtigungspunkt anzeigen"</string>
+    <string name="notification_channel_badge_title" msgid="6505542437385640049">"App-Benachrichtigungs­punkt anzeigen"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"„Bitte nicht stören“ ignorieren"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Diese Benachrichtigungen dürfen auch dann gemeldet werden, wenn „Bitte nicht stören“ aktiviert ist"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Sperrbildschirm"</string>
@@ -4403,7 +4438,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Dateiübertragung"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Dateien auf ein anderes Gerät übertragen"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Exportierte Medien transcodieren"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Fotos oder Dateien übertragen, falls MTP nicht unterstützt wird (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-Tethering"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -5077,14 +5115,10 @@
     <string name="unknown_unavailability_setting_summary" msgid="9060213910510360231">"Einstellung nicht verfügbar"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Konto"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Gerätename"</string>
-    <!-- no translation found for my_device_info_basic_info_category_title (381963187269356548) -->
-    <skip />
-    <!-- no translation found for my_device_info_legal_category_title (7732792841537995127) -->
-    <skip />
-    <!-- no translation found for my_device_info_device_details_category_title (4848438695638348680) -->
-    <skip />
-    <!-- no translation found for my_device_info_device_identifiers_category_title (2197063484127704153) -->
-    <skip />
+    <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Allgemeine Informationen"</string>
+    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Rechtliche und regulatorische Informationen"</string>
+    <string name="my_device_info_device_details_category_title" msgid="4848438695638348680">"Gerätedetails"</string>
+    <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Geräte-IDs"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"WLAN-Steuerung"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"App darf WLAN steuern"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Erlaubt der App, das WLAN zu aktivieren oder zu deaktivieren, nach WLANs zu scannen und eine Verbindung zu ihnen herstellen, Netzwerke hinzuzufügen oder zu entfernen oder einen lokal beschränkten Hotspot zu starten"</string>
