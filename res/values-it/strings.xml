@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Rimpicciolisci"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Ingrandisci"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Usa la rotazione automatica"</string>
-    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"La funzionalità di riconoscimento facciale usa la fotocamera anteriore per migliorare la precisione della rotazione automatica. Le immagini non vengono mai memorizzate su Google o inviate a Google.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Scopri di più sull\'opzione Rotazione automatica&lt;/a&gt;"</string>
+    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"La funzionalità di riconoscimento facciale usa la fotocamera anteriore per migliorare la precisione della rotazione automatica. Le immagini non vengono mai memorizzate né inviate a Google.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Scopri di più sull\'opzione Rotazione automatica dello schermo&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Testo di esempio"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Il meraviglioso mago di Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Capitolo 11: La splendida Città di smeraldo di Oz"</string>
@@ -382,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Elimina l\'attuale modello del volto per riconfigurare lo sblocco con il volto.\n\nIl modello del volto verrà eliminato definitivamente e in sicurezza.\n\nDopo l\'eliminazione dovrai usare il PIN, la sequenza o la password per sbloccare il telefono o eseguire l\'autenticazione nelle app."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Elimina l\'attuale modello del volto per riconfigurare lo sblocco con il volto.\n\nIl modello del volto verrà eliminato definitivamente e in sicurezza.\n\nDopo l\'eliminazione dovrai usare l\'impronta, il PIN, la sequenza o la password per sbloccare il telefono o eseguire l\'autenticazione nelle app."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Sblocco con il volto per"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Requisiti per lo sblocco con il volto"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Quando usi lo sblocco con il volto"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Richiedi occhi aperti"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Per sbloccare il telefono gli occhi devono essere aperti"</string>
@@ -497,42 +496,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Più tardi"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Saltare configurazione impronta digitale?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Hai scelto anche l\'utilizzo dell\'impronta tra i vari metodi per sbloccare il telefono. Se salti la configurazione ora, dovrai eseguirla in un secondo momento. Basta un minuto."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"Il PIN protegge il tablet se viene smarrito o rubato"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"La sequenza protegge il tablet se viene smarrito o rubato"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"La password protegge il tablet se viene smarrito o rubato"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"Il PIN protegge il dispositivo se viene smarrito o rubato"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"La sequenza protegge il dispositivo se viene smarrito o rubato"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"La password protegge il dispositivo se viene smarrito o rubato"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"Il PIN protegge il telefono se viene smarrito o rubato"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"La sequenza protegge il telefono se viene smarrito o rubato"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"La password protegge il telefono se viene smarrito o rubato"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"È necessario un PIN per configurare lo sblocco con l\'impronta.\n\nIl PIN protegge il tablet se viene smarrito o rubato."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"È necessaria una sequenza per configurare lo sblocco con l\'impronta.\n\nLa sequenza protegge il tablet se viene smarrito o rubato."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"È necessaria una password per configurare lo sblocco con l\'impronta.\n\nLa password protegge il tablet se viene smarrito o rubato."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"È necessario un PIN per configurare lo sblocco con l\'impronta.\n\nIl PIN protegge il dispositivo se viene smarrito o rubato."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"È necessaria una sequenza per configurare lo sblocco con l\'impronta.\n\nLa sequenza protegge il dispositivo se viene smarrito o rubato."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"È necessaria una password per configurare lo sblocco con l\'impronta.\n\nLa password protegge il dispositivo se viene smarrito o rubato."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"È necessario un PIN per configurare lo sblocco con l\'impronta.\n\nIl PIN protegge il telefono se viene smarrito o rubato."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"È necessaria una sequenza per configurare lo sblocco con l\'impronta.\n\nLa sequenza protegge il telefono se viene smarrito o rubato."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"È necessaria una password per configurare lo sblocco con l\'impronta.\n\nLa password protegge il telefono se viene smarrito o rubato."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"È necessario un PIN per configurare lo sblocco con il volto.\n\nIl PIN protegge il tablet se viene smarrito o rubato."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"È necessaria una sequenza per configurare lo sblocco con il volto.\n\nLa sequenza protegge il tablet se viene smarrito o rubato."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"È necessaria una password per configurare lo sblocco con il volto.\n\nLa password protegge il tablet se viene smarrito o rubato."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"È necessario un PIN per configurare lo sblocco con il volto.\n\nIl PIN protegge il dispositivo se viene smarrito o rubato."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"È necessaria una sequenza per configurare lo sblocco con il volto.\n\nLa sequenza protegge il dispositivo se viene smarrito o rubato."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"È necessaria una password per configurare lo sblocco con il volto.\n\nLa password protegge il dispositivo se viene smarrito o rubato."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"È necessario un PIN per configurare lo sblocco con il volto.\n\nIl PIN protegge il telefono se viene smarrito o rubato."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"È necessaria una sequenza per configurare lo sblocco con il volto.\n\nLa sequenza protegge il telefono se viene smarrito o rubato."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"È necessaria una password per configurare lo sblocco con il volto.\n\nLa password protegge il telefono se viene smarrito o rubato."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"È necessario un PIN per configurare lo sblocco con il volto e con l\'impronta.\n\nIl PIN protegge il tablet se viene smarrito o rubato."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"È necessaria una sequenza per configurare lo sblocco con il volto e con l\'impronta.\n\nLa sequenza protegge il tablet se viene smarrito o rubato."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"È necessaria una password per configurare lo sblocco con il volto e con l\'impronta.\n\nLa password protegge il tablet se viene smarrito o rubato."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"È necessario un PIN per configurare lo sblocco con il volto e con l\'impronta.\n\nIl PIN protegge il dispositivo se viene smarrito o rubato."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"È necessaria una sequenza per configurare lo sblocco con il volto e con l\'impronta.\n\nLa sequenza protegge il dispositivo se viene smarrito o rubato."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"È necessaria una password per configurare lo sblocco con il volto e con l\'impronta.\n\nLa password protegge il dispositivo se viene smarrito o rubato."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"È necessario un PIN per configurare lo sblocco con il volto e con l\'impronta.\n\nIl PIN protegge il telefono se viene smarrito o rubato."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"È necessaria una sequenza per configurare lo sblocco con il volto e con l\'impronta.\n\nLa sequenza protegge il telefono se viene smarrito o rubato."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"È necessaria una password per configurare lo sblocco con il volto e con l\'impronta.\n\nLa password protegge il telefono se viene smarrito o rubato."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Saltare l\'impostazione del PIN?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Saltare l\'impostazione di PIN e volto?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Saltare l\'impostazione di PIN e impronta?"</string>
@@ -557,7 +592,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Oltre che per sbloccare il telefono, puoi utilizzare la tua impronta per autorizzare acquisti e accessi alle app. "<annotation id="url">"Scopri di più"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" L\'opzione di blocco dello schermo è disattivata. Per ulteriori informazioni, contatta l\'amministratore della tua organizzazione. "<annotation id="admin_details">"Altri dettagli"</annotation>\n\n"Puoi comunque utilizzare la tua impronta per autorizzare acquisti e accessi alle app. "<annotation id="url">"Scopri di più"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Solleva il dito, quindi tocca di nuovo il sensore"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Ricalibra il sensore di impronte digitali."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puoi aggiungere fino a <xliff:g id="COUNT">%d</xliff:g> impronte digitali"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Hai aggiunto il numero massimo di impronte digitali"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossibile aggiungere ulteriori impronte digitali"</string>
@@ -854,7 +890,7 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Avanzate"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Bluetooth avanzato"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Quando il Bluetooth è attivato, il dispositivo può comunicare con altri dispositivi che si trovano nelle vicinanze."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Quando il Bluetooth è attivo, il dispositivo può comunicare con altri dispositivi Bluetooth nelle vicinanze.\n\nPer migliorare l\'esperienza sul dispositivo, app e servizi possono comunque cercare dispositivi nelle vicinanze in qualsiasi momento, anche quando il Bluetooth non è attivo. Questo può essere utile, ad esempio, per migliorare funzionalità e servizi basati sulla posizione. Puoi modificare questa opzione nelle "<annotation id="link">"impostazioni relative alla scansione Bluetooth"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Quando il Bluetooth è attivo, il dispositivo può comunicare con altri dispositivi Bluetooth nelle vicinanze.\n\nPer migliorare l\'esperienza sul dispositivo, app e servizi possono comunque cercare dispositivi nelle vicinanze in qualsiasi momento, anche quando il Bluetooth non è attivo. Questo può essere utile, ad esempio, per migliorare funzionalità e servizi basati sulla posizione. Puoi modificare questa opzione nelle "<annotation id="link">"impostazioni relative alla ricerca di dispositivi Bluetooth"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Per una maggiore precisione della geolocalizzazione, le app e i servizi di sistema possono ancora rilevare i dispositivi Bluetooth. Puoi modificare questa impostazione nelle <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>impostazioni di scansione<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Connessione non riuscita. Riprova."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Dettagli dispositivo"</string>
@@ -1299,7 +1335,7 @@
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Account personale - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Ricerca"</string>
     <string name="display_settings" msgid="7197750639709493852">"Display"</string>
-    <string name="accelerometer_title" msgid="7745991950833748909">"Rotazione automatica"</string>
+    <string name="accelerometer_title" msgid="7745991950833748909">"Rotazione automatica dello schermo"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Off"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"On"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"On - Rotazione basata sul viso"</string>
@@ -1842,7 +1878,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"Servizi di geolocalizzazione"</string>
     <string name="location_title" msgid="5819154746934945021">"La mia posizione"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Posizione per profilo di lavoro"</string>
-    <string name="location_app_level_permissions" msgid="907206607664629759">"Autorizz. accesso posiz. app"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"Autorizzazioni per la posizione"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"La geolocalizzazione non è attiva"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> app su <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> hanno accesso alla posizione</item>
@@ -2962,7 +2998,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"Certif. utente per app e VPN"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Certificato Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"I tuoi dati non saranno privati"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"I certificati CA vengono utilizzati da siti web, app e VPN per la crittografia. Installa solo certificati CA provenienti da organizzazioni che ritieni attendibili. \n\n Se installi un certificato CA, il proprietario del certificato potrebbe accedere ai tuoi dati, ad esempio password o dettagli della carta di credito, dai siti web che visiti o dalle app che utilizzi, anche se si tratta di dati criptati."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Non installare"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installa comunque"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certificato non installato"</string>
@@ -4398,7 +4435,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Trasferimento di file"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Trasferisci i file su un altro dispositivo"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Transcodifica i contenuti multimediali esportati"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Trasferisci foto o file se la modalità MTP non è supportata (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Tethering USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>

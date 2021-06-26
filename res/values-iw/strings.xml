@@ -388,7 +388,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"כדי להגדיר שוב את התכונה \'פתיחה ע\"י זיהוי הפנים\', עליך למחוק את התבנית הנוכחית לזיהוי הפנים.\n\nהתבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך בקוד האימות, בקו ביטול הנעילה או בסיסמה כדי לבטל את נעילת הטלפון או כדי לבצע אימות באפליקציות."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"כדי להגדיר שוב את התכונה \'פתיחה ע\"י זיהוי הפנים\', עליך למחוק את התבנית הנוכחית לזיהוי הפנים.\n\nהתבנית לזיהוי הפנים שלך תימחק באופן סופי ומאובטח.\n\nאחרי המחיקה יהיה צורך בטביעת האצבע, בקוד האימות, בקו ביטול הנעילה או בסיסמה כדי לבטל את נעילת הטלפון או כדי לבצע אימות באפליקציות."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"פתיחה ע\"י זיהוי הפנים:"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"דרישות לפתיחה ע\"י זיהוי הפנים"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"בעת שימוש בתכונה \'פתיחה ע\"י זיהוי הפנים\'"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"העיניים חייבות להיות פקוחות"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"העיניים שלך חייבות להיות פקוחות כדי לבטל את נעילת הטלפון"</string>
@@ -507,42 +506,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"לא עכשיו"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"האם לדלג על הגדרת טביעת אצבע?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"בחרת להשתמש בטביעת האצבע שלך כאחת מהדרכים שבהן תהיה לך אפשרות לבטל את הנעילה בטלפון. אם החלטתך תהיה לדלג על שלב זה עכשיו, יהיה עליך לבצע את ההגדרה בהמשך. ההגדרה לוקחת רק דקה או שתיים."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"קוד האימות מגן על הטאבלט במקרים של אובדן או גניבה"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"קו ביטול הנעילה מגן על הטאבלט במקרים של אובדן או גניבה"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"הסיסמה מגינה על הטאבלט במקרים של אובדן או גניבה"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"קוד האימות מגן על המכשיר במקרים של אובדן או גניבה"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"קו ביטול הנעילה מגן על המכשיר במקרים של אובדן או גניבה"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"הסיסמה מגינה על המכשיר במקרים של אובדן או גניבה"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"קוד האימות מגן על הטלפון במקרים של אובדן או גניבה"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"קו ביטול הנעילה מגן על הטלפון במקרים של אובדן או גניבה"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"הסיסמה מגינה על הטלפון במקרים של אובדן או גניבה"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על הטאבלט במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטאבלט במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטאבלט במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על המכשיר במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על המכשיר במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על המכשיר במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על הטלפון במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטלפון במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"כדי להגדיר את התכונה \'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטלפון במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קוד אימות.\n\nקוד האימות מגן על הטאבלט במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטאבלט במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטאבלט במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קוד אימות.\n\nקוד האימות מגן על המכשיר במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על המכשיר במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרשת סיסמה.\n\nהסיסמה מגינה על המכשיר במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קוד אימות.\n\nקוד האימות מגן על הטלפון במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטלפון במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"כדי להגדיר את התכונה \'פתיחה ע\"י זיהוי הפנים\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטלפון במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על הטאבלט במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטאבלט במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטאבלט במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על המכשיר במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על המכשיר במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על המכשיר במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קוד אימות.\n\nקוד האימות מגן על הטלפון במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרש קו ביטול נעילה.\n\nקו ביטול הנעילה מגן על הטלפון במקרים של אובדן או גניבה."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"כדי להגדיר את התכונות \'פתיחה ע\"י זיהוי הפנים\' ו\'ביטול הנעילה בטביעת אצבע\', נדרשת סיסמה.\n\nהסיסמה מגינה על הטלפון במקרים של אובדן או גניבה."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"לדלג על הגדרת קוד האימות?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"לדלג על ההגדרה של קוד אימות וזיהוי פנים?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"לדלג על ההגדרה של קוד אימות וטביעת אצבע?"</string>
@@ -567,7 +602,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"בנוסף לביטול הנעילה של הטלפון, אפשר להשתמש בטביעת האצבע כדי לאשר רכישות וגישה לאפליקציות. "<annotation id="url">"למידע נוסף"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" אפשרות נעילת המסך מושבתת. למידע נוסף ניתן לפנות למנהל המכשיר בארגון. "<annotation id="admin_details">"למידע נוסף"</annotation>\n\n"עדיין ניתן להשתמש בטביעת האצבע שלך כדי לאשר רכישות ולגשת לאפליקציות. "<annotation id="url">"למידע נוסף"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"יש להרים את האצבע ולגעת שוב בחיישן"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"צריך לכייל מחדש את חיישן טביעות האצבע"</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"אפשר להוסיף עד <xliff:g id="COUNT">%d</xliff:g> טביעות אצבע"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"הוספת את המספר המרבי של טביעות אצבע."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"לא ניתן להוסיף עוד טביעות אצבע"</string>
@@ -1404,7 +1440,7 @@
     <string name="night_display_title" msgid="8532432776487216581">"תאורת לילה"</string>
     <string name="night_display_text" msgid="4789324042428095383">"תאורת הלילה מעניקה למסך גוון ענבר. כך קל יותר להביט במסך או לקרוא באור מעומעם, וגם קל יותר להירדם."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"לוח זמנים"</string>
-    <string name="night_display_auto_mode_never" msgid="2721729920187175239">"אף פעם"</string>
+    <string name="night_display_auto_mode_never" msgid="2721729920187175239">"לא להפעיל"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"הפעלה בשעה שאני אקבע"</string>
     <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"הפעלה מהשקיעה עד הזריחה"</string>
     <string name="night_display_start_time_title" msgid="2611541851596977786">"שעת התחלה"</string>
@@ -1432,7 +1468,7 @@
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"כיבוי עד השקיעה"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"מצב כהה"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"לוח זמנים"</string>
-    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"אף פעם"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"לא להפעיל"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"הפעלה מהשקיעה עד הזריחה"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"הפעלה בשעה שאני אקבע"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"סטטוס"</string>
@@ -2982,8 +3018,8 @@
     <string name="menu_duration_6h" msgid="2843895006519153126">"6 שעות"</string>
     <string name="menu_duration_12h" msgid="9206922888181602565">"12 שעות"</string>
     <string name="menu_duration_1d" msgid="8538390358158862330">"יום אחד"</string>
-    <string name="menu_show_system" msgid="3780310384799907818">"הצגת המערכת"</string>
-    <string name="menu_hide_system" msgid="5197937451381420622">"הסתרת המערכת"</string>
+    <string name="menu_show_system" msgid="3780310384799907818">"הצגת תהליכי מערכת"</string>
+    <string name="menu_hide_system" msgid="5197937451381420622">"הסתרת תהליכי מערכת"</string>
     <string name="menu_show_percentage" msgid="6143205879027928330">"הצגת אחוזים"</string>
     <string name="menu_use_uss" msgid="1663914348353623749">"‏שימוש ב-Uss"</string>
     <string name="menu_proc_stats_type" msgid="5048575824389855689">"סוג נתונים סטטיסטיים"</string>
@@ -3040,7 +3076,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"‏אישור משתמש לאפליקציה ול-VPN"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"‏אישור Wi-Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"הנתונים שלך לא יהיו פרטיים"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"‏אישורי CA משמשים אתרים, אפליקציות ורשתות VPN לצורך הצפנה. יש להתקין אישורי CA רק מארגונים מהימנים. \n\n לאחר התקנת אישור CA, לבעל האישור תהיה גישה לפרטים שלך, כמו סיסמאות או פרטי כרטיס אשראי, מאתרים שביקרת בהם או מאפליקציות שבשימוש - אפילו אם הפרטים האלו מוצפנים."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"לא להתקין"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"אני רוצה להתקין בכל זאת"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"לא הותקן אישור"</string>
@@ -4534,7 +4571,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"העברת קבצים"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"העברת קבצים למכשיר אחר"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"המרת קידוד של מדיה לייצוא"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"‏העברת תמונות או קבצים אם MTP אינו נתמך (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"‏שיתוף אינטרנט ב-USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
