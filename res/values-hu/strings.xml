@@ -382,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Törölje a jelenlegi arcmodellt, hogy újra beállíthassa az Arcalapú feloldást.\n\nAz arcmodellt véglegesen és biztonságosan töröljük.\n\nAz eltávolítás után PIN-kódra, mintára vagy jelszóra lesz szüksége a telefon feloldásához vagy az alkalmazásokban történő hitelesítéshez."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Törölje a jelenlegi arcmodellt, hogy újra beállíthassa az Arcalapú feloldást.\n\nAz arcmodellt véglegesen és biztonságosan töröljük.\n\nAz eltávolítás után ujjlenyomatra, PIN-kódra, mintára vagy jelszóra lesz szüksége a telefon feloldásához vagy az alkalmazásokban történő hitelesítéshez."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Arcalapú feloldás:"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Az Arcalapú feloldás követelményei"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Arcalapú feloldás használatakor"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"A szemének nyitva kell lennie"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"A telefon feloldásához nyitva kell lennie a szemének"</string>
@@ -497,42 +496,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Később"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Átugorja az ujjlenyomat-beállítást?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Kiválasztotta, hogy ujjlenyomattal is feloldhassa telefonját. Ha most kihagyja a lépéseket, később kell majd beállítania a funkciót. Ez hozzávetőlegesen 1 percet vesz igénybe."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"PIN-kód védi a táblagépét, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Minta védi a táblagépét, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Jelszó védi a táblagépét, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"PIN-kód védi a készülékét, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Minta védi az eszközét, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Jelszó védi az eszközt, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"PIN-kód védi a telefonját, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Minta védi a telefonját, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Jelszó védi a telefonját, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"PIN-kód szükséges a Feloldás ujjlenyomattal funkció beállításához.\n\nPIN-kód védi a táblagépet, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Minta szükséges a Feloldás ujjlenyomattal funkció beállításához.\n\nMinta védi a táblagépet, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Jelszó szükséges a Feloldás ujjlenyomattal funkció beállításához.\n\nJelszó védi a táblagépet, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"PIN-kód szükséges a Feloldás ujjlenyomattal funkció beállításához.\n\nPIN-kód védi az eszközt, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Minta szükséges a Feloldás ujjlenyomattal funkció beállításához.\n\nMinta védi az eszközt, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Jelszó szükséges a Feloldás ujjlenyomattal funkció beállításához.\n\nJelszó védi az eszközt, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"PIN-kód szükséges a Feloldás ujjlenyomattal funkció beállításához.\n\nPIN-kód védi a telefont, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Minta szükséges a Feloldás ujjlenyomattal funkció beállításához.\n\nMinta védi a telefont, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Jelszó szükséges a Feloldás ujjlenyomattal funkció beállításához.\n\nJelszó védi a telefont, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"PIN-kód szükséges az Arcalapú feloldás beállításához.\n\nPIN-kód védi a táblagépet, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Minta szükséges az Arcalapú feloldás beállításához.\n\nMinta védi a táblagépet, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Jelszó szükséges az Arcalapú feloldás beállításához.\n\nJelszó védi a táblagépet, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"PIN-kód szükséges az Arcalapú feloldás beállításához.\n\nPIN-kód védi az eszközt, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Minta szükséges az Arcalapú feloldás beállításához.\n\nMinta védi az eszközt, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Jelszó szükséges az Arcalapú feloldás beállításához.\n\nJelszó védi az eszközt, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"PIN-kód szükséges az Arcalapú feloldás beállításához.\n\nPIN-kód védi a telefont, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Minta szükséges az Arcalapú feloldás beállításához.\n\nMinta védi a telefont, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Jelszó szükséges az Arcalapú feloldás beállításához.\n\nJelszó védi a telefont, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"PIN-kód szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nPIN-kód védi a táblagépet, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Minta szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nMinta védi a táblagépet, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Jelszó szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nJelszó védi a táblagépet, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"PIN-kód szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nPIN-kód védi az eszközt, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Minta szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nMinta védi az eszközt, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Jelszó szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nJelszó védi az eszközt, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"PIN-kód szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nPIN-kód védi a telefont, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Minta szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nMinta védi a telefont, ha elvész vagy ellopják."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Jelszó szükséges az Arcalapú feloldás és a Feloldás ujjlenyomattal funkció beállításához.\n\nJelszó védi a telefont, ha elvész vagy ellopják."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Kihagyja a PIN-kód beállítását?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Kihagyja a PIN-kód és arc beállítását?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Kihagyja a PIN-kód és ujjlenyomat beállítását?"</string>
@@ -557,7 +592,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"A telefon feloldásán kívül az ujjlenyomattal a vásárlásokat és az alkalmazások hozzáféréseit is engedélyezheti. "<annotation id="url">"További információ"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" A képernyőzár lehetőség le van tiltva. Ha további információra van szüksége, lépjen kapcsolatba a szervezet rendszergazdájával. "<annotation id="admin_details">"Részletek"</annotation>\n\n"Ujjlenyomatát továbbra is használhatja vásárlások jóváhagyásához alkalmazásokhoz való hozzáféréshez. "<annotation id="url">"További információ."</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Emelje fel ujját, majd érintse meg újra az érzékelőt"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Kalibrálja újra az ujjlenyomat-érzékelőt."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Legfeljebb <xliff:g id="COUNT">%d</xliff:g> ujjlenyomatot adhat hozzá"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Elérte a hozzáadható ujjlenyomatok maximális számát"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nem lehet több ujjlenyomatot hozzáadni"</string>
@@ -2962,7 +2998,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"VPN- és appfelhasználói tanúsítvány"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi-tanúsítvány"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Adatai nem lesznek privát jellegűek"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"A CA-tanúsítványokat webhelyek, alkalmazások és VPN-ek használják titkosításra. Csak megbízható szervezettől származó CA-tanúsítványt telepítsen. \n\n Ha CA-tanúsítványt telepít, a tanúsítvány tulajdonosa az Ön által meglátogatott webhelyekről és a használt alkalmazásokból hozzáférhet az Ön adataihoz, mint pl. jelszavak vagy hitelkártyaadatok – akkor is, ha az adat titkosított."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ne telepítse"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Telepítés mindenképp"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"A tanúsítvány nincs telepítve"</string>
@@ -4398,7 +4435,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Fájlátvitel"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Fájlok átvitele más eszközre"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Exportált médiatartalom átkódolása"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Fotók vagy fájlok átvitele, ha az MTP nem támogatott (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-internetmegosztás"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>

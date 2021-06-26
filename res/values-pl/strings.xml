@@ -157,7 +157,7 @@
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Ustawienia połączeń"</string>
     <string name="connected_device_previously_connected_title" msgid="605808252622814415">"Urządzenia połączone wcześniej"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Wcześniej połączone"</string>
-    <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Włączony Bluetooth"</string>
+    <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth włączony"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Pokaż wszystkie"</string>
     <string name="date_and_time" msgid="1788358029823431692">"Data i godzina"</string>
     <string name="choose_timezone" msgid="1450780665958642147">"Wybierz strefę czasową"</string>
@@ -302,7 +302,7 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Pokaż informacje o profilu na ekranie blokady"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Konta"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Lokalizacja"</string>
-    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Użyj lokalizacji"</string>
+    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Włącz lokalizację"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Wyłączono"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="few">Włączono – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacje mają dostęp do lokalizacji</item>
@@ -388,7 +388,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Usuń bieżący model twarzy, aby ponownie skonfigurować rozpoznawanie twarzy.\n\nModel twarzy zostanie trwale i bezpiecznie usunięty.\n\nPo usunięciu tych danych będziesz potrzebować kodu PIN, wzoru lub hasła do odblokowywania telefonu i uwierzytelniania w aplikacjach."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Usuń bieżący model twarzy, aby ponownie skonfigurować rozpoznawanie twarzy.\n\nModel twarzy zostanie trwale i bezpiecznie usunięty.\n\nPo usunięciu tych danych będziesz potrzebować odcisku palca, kodu PIN, wzoru lub hasła do odblokowywania telefonu i uwierzytelniania w aplikacjach."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Używaj rozpoznawania twarzy do tych celów:"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Wymagania dotyczące rozpoznawania twarzy"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"W przypadku rozpoznawania twarzy"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Wymagaj otwartych oczu"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Aby odblokować telefon, musisz mieć otwarte oczy"</string>
@@ -505,42 +504,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Później"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Pominąć konfigurację odcisku palca?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Chcesz odblokowywać telefon m.in. odciskiem palca. Jeśli nie skonfigurujesz tej funkcji teraz, musisz to zrobić później. Zajmie Ci to około minuty."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"Kod PIN ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Wzór ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Hasło ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"Kod PIN ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Wzór ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Hasło ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"Kod PIN ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Wzór ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Hasło ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Do skonfigurowania odblokowywania odciskiem palca wymagany jest kod PIN.\n\nKod PIN ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Do skonfigurowania odblokowywania odciskiem palca wymagany jest wzór.\n\nWzór ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Do skonfigurowania odblokowywania odciskiem palca wymagane jest hasło.\n\nHasło ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Do skonfigurowania odblokowywania odciskiem palca wymagany jest kod PIN.\n\nKod PIN ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Do skonfigurowania odblokowywania odciskiem palca wymagany jest wzór.\n\nWzór ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Do skonfigurowania odblokowywania odciskiem palca wymagane jest hasło.\n\nHasło ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Do skonfigurowania odblokowywania odciskiem palca wymagany jest kod PIN.\n\nKod PIN ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Do skonfigurowania odblokowywania odciskiem palca wymagany jest wzór.\n\nWzór ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Do skonfigurowania odblokowywania odciskiem palca wymagane jest hasło.\n\nHasło ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Do skonfigurowania rozpoznawania twarzy wymagany jest kod PIN.\n\nKod PIN ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Do skonfigurowania rozpoznawania twarzy wymagany jest wzór.\n\nWzór ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Do skonfigurowania rozpoznawania twarzy wymagane jest hasło.\n\nHasło ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Do skonfigurowania rozpoznawania twarzy wymagany jest kod PIN.\n\nKod PIN ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Do skonfigurowania rozpoznawania twarzy wymagany jest wzór.\n\nWzór ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Do skonfigurowania rozpoznawania twarzy wymagane jest hasło.\n\nHasło ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Do skonfigurowania rozpoznawania twarzy wymagany jest kod PIN.\n\nKod PIN ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Do skonfigurowania rozpoznawania twarzy wymagany jest wzór.\n\nWzór ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Do skonfigurowania rozpoznawania twarzy wymagane jest hasło.\n\nHasło ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Do skonfigurowania rozpoznawania twarzy i odblokowywania odciskiem palca wymagany jest kod PIN.\n\nKod PIN ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Do skonfigurowania rozpoznawania twarzy i odblokowywania odciskiem palca wymagany jest wzór.\n\nWzór ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Do skonfigurowania rozpoznawania twarzy i odblokowywania odciskiem palca wymagane jest hasło.\n\nHasło ochroni Twój tablet, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Do skonfigurowania rozpoznawania twarzy i odblokowywania odciskiem palca wymagany jest kod PIN.\n\nKod PIN ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Do skonfigurowania rozpoznawania twarzy i odblokowywania odciskiem palca wymagany jest wzór.\n\nWzór ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Do skonfigurowania rozpoznawania twarzy i odblokowywania odciskiem palca wymagane jest hasło.\n\nHasło ochroni Twoje urządzenie, jeśli zostanie zgubione lub skradzione."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Do skonfigurowania rozpoznawania twarzy i odblokowywania odciskiem palca wymagany jest kod PIN.\n\nKod PIN ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Do skonfigurowania rozpoznawania twarzy i odblokowywania odciskiem palca wymagany jest wzór.\n\nWzór ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Do skonfigurowania rozpoznawania twarzy i odblokowywania odciskiem palca wymagane jest hasło.\n\nHasło ochroni Twój telefon, jeśli zostanie zgubiony lub skradziony."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Pominąć konfigurację kodu PIN?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Pominąć konfigurowanie kodu PIN i rozpoznawania twarzy?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Pominąć konfigurowanie kodu PIN i odcisku palca?"</string>
@@ -565,7 +600,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Odcisk palca pozwala nie tylko odblokowywać telefon, ale też autoryzować zakupy i dostęp do aplikacji. "<annotation id="url">"Więcej informacji"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Opcja blokady ekranu jest wyłączona. Aby dowiedzieć się więcej, skontaktuj się z administratorem organizacji. "<annotation id="admin_details">"Więcej informacji"</annotation>\n\n"Nadal możesz używać odcisku palca do autoryzowania zakupów i uzyskiwania dostępu do aplikacji. "<annotation id="url">"Więcej informacji"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Podnieś palec, a potem przyłóż go do czytnika jeszcze raz."</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Skalibruj ponownie czytnik linii papilarnych."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Możesz dodać do <xliff:g id="COUNT">%d</xliff:g> odcisków palców"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodano maksymalną liczbę odcisków palców"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nie można dodać więcej odcisków palców"</string>
@@ -1896,7 +1932,7 @@
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Pokaż wszystko"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Wyświetl szczegóły"</string>
     <string name="location_no_recent_apps" msgid="6814206631456177033">"Żadne aplikacje nie prosiły ostatnio o lokalizację"</string>
-    <string name="location_no_recent_accesses" msgid="6031735777805464247">"Żadne aplikacje ostatnio nie korzystały z lokalizacji"</string>
+    <string name="location_no_recent_accesses" msgid="6031735777805464247">"Żadne aplikacje nie korzystały ostatnio z lokalizacji"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Wysokie użycie baterii"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Niskie użycie baterii"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Skanowanie Wi‑Fi"</string>
@@ -3038,7 +3074,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"Certyfikat użytkownika VPN i aplikacji"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Certyfikat Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Twoje dane nie będą prywatne"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Certyfikaty CA są używane przez witryny, aplikacje i sieci VPN na potrzeby szyfrowania. Instaluj tylko certyfikaty CA organizacji, którym ufasz. \n\n Gdy zainstalujesz certyfikat CA, jego właściciel będzie mógł uzyskać dostęp do Twoich danych, np. haseł czy danych karty kredytowej, w odwiedzanych witrynach i używanych aplikacjach – nawet jeśli te informacje będą zaszyfrowane."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Nie instaluj"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Zainstaluj mimo to"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Nie zainstalowano certyfikatu"</string>
@@ -3896,7 +3933,7 @@
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Ukrywaj ciche powiadomienia na pasku stanu"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Migająca dioda"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Prywatność"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Pomijanie ekranu blokady"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Pomijaj ekran blokady"</string>
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Po odblokowaniu przechodź od razu do ostatnio używanego ekranu"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ekran blokady, Pomiń, Pomijaj"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Gdy profil służbowy jest zablokowany"</string>
@@ -4472,7 +4509,7 @@
     <string name="default_app" msgid="445053777504688596">"(Domyślna)"</string>
     <string name="system_app" msgid="1863291702508355041">"(Systemowa)"</string>
     <string name="system_default_app" msgid="2647834628622214931">"(Domyślna aplikacja systemowa)"</string>
-    <string name="apps_storage" msgid="643866814746927111">"Magazyn aplikacji"</string>
+    <string name="apps_storage" msgid="643866814746927111">"Miejsce na aplikacje"</string>
     <string name="usage_access" msgid="5487993885373893282">"Dostęp do danych o użyciu"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"Zezwalaj na dostęp do danych o użyciu"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"Ustawienia użycia aplikacji"</string>
@@ -4532,7 +4569,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Przesyłanie plików"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Przesyłaj pliki do innego urządzenia"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Transkoduj eksportowane multimedia"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Przesyłanie zdjęć lub plików, jeśli MTP nie jest obsługiwane (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Tethering przez USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -5568,9 +5608,9 @@
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Najpierw ustaw blokadę ekranu"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Przytrzymaj, aby włączyć Asystenta"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Przytrzymaj przycisk zasilania, aby uaktywnić Asystenta"</string>
-    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Pokaż portfel"</string>
-    <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Zezwól na dostęp do portfela na ekranie blokady i w szybkich ustawieniach"</string>
-    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Pokaż sterowanie urządzeniami"</string>
+    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Pokazuj portfel"</string>
+    <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Zezwalaj na dostęp do portfela na ekranie blokady i w szybkich ustawieniach"</string>
+    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Pokazuj sterowanie urządzeniami"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Kontrola dostępu po zablokowaniu"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
@@ -5663,7 +5703,7 @@
     <string name="category_name_others" msgid="2366006298768550310">"Inne"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Ogólne"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Używaj ciemnego motywu"</string>
-    <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Użyj Bluetootha"</string>
+    <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Używaj Bluetootha"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Używaj wyłączania dzwonka"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Używaj hotspota Wi‑Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Używaj przypinania aplikacji"</string>
