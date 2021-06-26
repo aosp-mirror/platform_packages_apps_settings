@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"ทำให้เล็กลง"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"ทำให้ใหญ่ขึ้น"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"ใช้การหมุนอัตโนมัติ"</string>
-    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"การตรวจจับใบหน้าใช้กล้องหน้าเพื่อเพิ่มความแม่นยำในการหมุนอัตโนมัติ ไม่มีการจัดเก็บหรือส่งรูปภาพไปยัง Google&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการหมุนหน้าจออัตโนมัติ&lt;/a&gt;"</string>
+    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"การตรวจจับใบหน้าใช้กล้องหน้าเพื่อเพิ่มความแม่นยำในการหมุนอัตโนมัติ โดยจะไม่มีการจัดเก็บหรือส่งรูปภาพไปยัง Google แต่อย่างใด&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;ดูข้อมูลเพิ่มเติมเกี่ยวกับการหมุนหน้าจออัตโนมัติ&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"ข้อความตัวอย่าง"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"พ่อมดมหัศจรรย์แห่งออซ"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"บทที่ 11: เมืองมรกตมหัศจรรย์แห่งออซ"</string>
@@ -382,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"ลบรูปแบบใบหน้าปัจจุบันแล้วตั้งค่าการปลดล็อกด้วยใบหน้าอีกครั้ง\n\nระบบจะลบรูปแบบใบหน้าออกอย่างถาวรและปลอดภัย\n\nหลังจากที่ลบแล้ว คุณจะต้องใช้ PIN, รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์ หรือสำหรับการตรวจสอบสิทธิ์ในแอป"</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"ลบรูปแบบใบหน้าปัจจุบันแล้วตั้งค่าการปลดล็อกด้วยใบหน้าอีกครั้ง\n\nระบบจะลบรูปแบบใบหน้าออกอย่างถาวรและปลอดภัย\n\nหลังจากที่ลบแล้ว คุณจะต้องใช้ลายนิ้วมือ, PIN, รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์ หรือสำหรับการตรวจสอบสิทธิ์ในแอป"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"ใช้การปลดล็อกด้วยใบหน้าเพื่อ"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"ข้อกำหนดสำหรับการปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"เมื่อใช้การปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"ต้องลืมตา"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"คุณต้องลืมตาเพื่อปลดล็อกโทรศัพท์"</string>
@@ -497,42 +496,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"ข้ามไปก่อน"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"ข้ามการตั้งค่าลายนิ้วมือไหม"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"คุณได้เลือกที่จะใช้ลายนิ้วมือเป็นวิธีการหนึ่งในการปลดล็อกโทรศัพท์ หากคุณข้ามในตอนนี้ คุณจะต้องตั้งค่าฟีเจอร์นี้ในภายหลัง การตั้งค่าจะใช้เวลาราว 1 นาทีเท่านั้น"</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"PIN จะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"รูปแบบจะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"รหัสผ่านจะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"PIN จะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"รูปแบบจะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"รหัสผ่านจะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"PIN จะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"รูปแบบจะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"รหัสผ่านจะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"ต้องมี PIN เพื่อตั้งค่าการปลดล็อกด้วยลายนิ้วมือ\n\nPIN จะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"ต้องมีรูปแบบเพื่อตั้งค่าการปลดล็อกด้วยลายนิ้วมือ\n\nรูปแบบจะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"ต้องมีรหัสผ่านเพื่อตั้งค่าการปลดล็อกด้วยลายนิ้วมือ\n\nรหัสผ่านจะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"ต้องมี PIN เพื่อตั้งค่าการปลดล็อกด้วยลายนิ้วมือ\n\nPIN จะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"ต้องมีรูปแบบเพื่อตั้งค่าการปลดล็อกด้วยลายนิ้วมือ\n\nรูปแบบจะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"ต้องมีรหัสผ่านเพื่อตั้งค่าการปลดล็อกด้วยลายนิ้วมือ\n\nรหัสผ่านจะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"ต้องมี PIN เพื่อตั้งค่าการปลดล็อกด้วยลายนิ้วมือ\n\nPIN จะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"ต้องมีรูปแบบเพื่อตั้งค่าการปลดล็อกด้วยลายนิ้วมือ\n\nรูปแบบจะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"ต้องมีรหัสผ่านเพื่อตั้งค่าการปลดล็อกด้วยลายนิ้วมือ\n\nรหัสผ่านจะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"ต้องมี PIN เพื่อตั้งค่าการปลดล็อกด้วยใบหน้า\n\nPIN จะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"ต้องมีรูปแบบเพื่อตั้งค่าการปลดล็อกด้วยใบหน้า\n\nรูปแบบจะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"ต้องมีรหัสผ่านเพื่อตั้งค่าการปลดล็อกด้วยใบหน้า\n\nรหัสผ่านจะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"ต้องมี PIN เพื่อตั้งค่าการปลดล็อกด้วยใบหน้า\n\nPIN จะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"ต้องมีรูปแบบเพื่อตั้งค่าการปลดล็อกด้วยใบหน้า\n\nรูปแบบจะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"ต้องมีรหัสผ่านเพื่อตั้งค่าการปลดล็อกด้วยใบหน้า\n\nรหัสผ่านจะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"ต้องมี PIN เพื่อตั้งค่าการปลดล็อกด้วยใบหน้า\n\nPIN จะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"ต้องมีรูปแบบเพื่อตั้งค่าการปลดล็อกด้วยใบหน้า\n\nรูปแบบจะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"ต้องมีรหัสผ่านเพื่อตั้งค่าการปลดล็อกด้วยใบหน้า\n\nรหัสผ่านจะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"ต้องมี PIN เพื่อตั้งค่าการปลดล็อกด้วยใบหน้าและลายนิ้วมือ\n\nPIN จะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"ต้องมีรูปแบบเพื่อตั้งค่าการปลดล็อกด้วยใบหน้าและลายนิ้วมือ\n\nรูปแบบจะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"ต้องมีรหัสผ่านเพื่อตั้งค่าการปลดล็อกด้วยใบหน้าและลายนิ้วมือ\n\nรหัสผ่านจะช่วยปกป้องแท็บเล็ตในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"ต้องมี PIN เพื่อตั้งค่าการปลดล็อกด้วยใบหน้าและลายนิ้วมือ\n\nPIN จะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"ต้องมีรูปแบบเพื่อตั้งค่าการปลดล็อกด้วยใบหน้าและลายนิ้วมือ\n\nรูปแบบจะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"ต้องมีรหัสผ่านเพื่อตั้งค่าการปลดล็อกด้วยใบหน้าและลายนิ้วมือ\n\nรหัสผ่านจะช่วยปกป้องอุปกรณ์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"ต้องมี PIN เพื่อตั้งค่าการปลดล็อกด้วยใบหน้าและลายนิ้วมือ\n\nPIN จะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"ต้องมีรูปแบบเพื่อตั้งค่าการปลดล็อกด้วยใบหน้าและลายนิ้วมือ\n\nรูปแบบจะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"ต้องมีรหัสผ่านเพื่อตั้งค่าการปลดล็อกด้วยใบหน้าและลายนิ้วมือ\n\nรหัสผ่านจะช่วยปกป้องโทรศัพท์ในกรณีที่สูญหายหรือถูกขโมย"</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"ข้ามการตั้ง PIN ไหม"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"ข้ามการตั้ง PIN และการปลดล็อกด้วยใบหน้าใช่ไหม"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"ข้ามการตั้ง PIN และการปลดล็อกด้วยลายนิ้วมือใช่ไหม"</string>
@@ -557,7 +592,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"นอกเหนือจากการปลดล็อกโทรศัพท์ คุณยังสามารถใช้ลายนิ้วมือเพื่อให้สิทธิ์การซื้อและการเข้าถึงแอปได้"<annotation id="url">"ดูข้อมูลเพิ่มเติม"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" ตัวเลือกการล็อกหน้าจอปิดอยู่ หากต้องการดูข้อมูลเพิ่มเติม ให้ติดต่อผู้ดูแลระบบขององค์กร "<annotation id="admin_details">"รายละเอียดเพิ่มเติม"</annotation>\n\n"คุณยังสามารถใช้ลายนิ้วมือเพื่ออนุญาตให้ซื้อและเข้าถึงแอป "<annotation id="url">"ดูข้อมูลเพิ่มเติม"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ยกนิ้วขึ้น แล้วแตะเซ็นเซอร์อีกครั้ง"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"โปรดปรับเทียบเซ็นเซอร์ลายนิ้วมืออีกครั้ง"</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"คุณสามารถเพิ่มลายนิ้วมือได้ถึง <xliff:g id="COUNT">%d</xliff:g> ลาย"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"คุณได้เพิ่มลายนิ้วมือถึงขีดจำกัดสูงสุดแล้ว"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"เพิ่มลายนิ้วมืออีกไม่ได้แล้ว"</string>
@@ -2962,7 +2998,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"ใบรับรองผู้ใช้ VPN และแอป"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"ใบรับรอง Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"ข้อมูลของคุณจะไม่เป็นส่วนตัว"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"เว็บไซต์ แอป และ VPN จะใช้ใบรับรอง CA ในการเข้ารหัส ติดตั้งใบรับรอง CA จากองค์กรที่คุณไว้วางใจเท่านั้น \n\n หากติดตั้งใบรับรอง CA เจ้าของใบรับรองจะเข้าถึงข้อมูลต่างๆ เช่น รหัสผ่านหรือรายละเอียดบัตรเครดิต ได้จากเว็บไซต์ที่คุณเข้าชมหรือแอปที่คุณใช้ แม้ว่าจะมีการเข้ารหัสข้อมูลดังกล่าวก็ตาม"</string>
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"เว็บไซต์ แอป และ VPN จะใช้ใบรับรอง CA ในการเข้ารหัส ติดตั้งใบรับรอง CA จากองค์กรที่คุณไว้วางใจเท่านั้น \n\n หากติดตั้งใบรับรอง CA เจ้าของใบรับรองจะเข้าถึงข้อมูลต่างๆ เช่น รหัสผ่านหรือรายละเอียดบัตรเครดิต ได้จากเว็บไซต์ที่คุณเข้าชมหรือแอปที่คุณใช้ แม้ว่าจะมีการเข้ารหัสข้อมูลดังกล่าวก็ตาม"</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"ไม่ติดตั้ง"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"ยืนยันว่าจะติดตั้ง"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"ไม่ได้ติดตั้งใบรับรอง"</string>
@@ -5466,7 +5502,7 @@
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"ไม่มีเครือข่ายอื่นๆ ที่พร้อมใช้งาน"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"ไม่มีเครือข่ายที่พร้อมใช้งาน"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"ปิดอินเทอร์เน็ตมือถือไหม"</string>
-    <string name="mobile_data_disable_message" msgid="7829414836454769970">"คุณจะใช้เน็ตมือถือหรืออินเทอร์เน็ตผ่าน <xliff:g id="CARRIER">%s</xliff:g> ไม่ได้ แต่จะใช้ผ่าน Wi-Fi ได้เท่านั้น"</string>
+    <string name="mobile_data_disable_message" msgid="7829414836454769970">"คุณจะใช้เน็ตมือถือหรืออินเทอร์เน็ตผ่าน <xliff:g id="CARRIER">%s</xliff:g> ไม่ได้ อินเทอร์เน็ตจะต่อผ่าน Wi-Fi ได้เท่านั้น"</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"ผู้ให้บริการของคุณ"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"ใช้ไม่ได้เนื่องจากโหมดเวลาเข้านอนเปิดอยู่"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"รีเซ็ตความสำคัญในการแจ้งเตือนแล้ว"</string>
