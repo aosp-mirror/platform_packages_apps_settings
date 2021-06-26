@@ -382,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Xóa mẫu khuôn mặt hiện tại của bạn để thiết lập lại tính năng Mở khóa bằng khuôn mặt.\n\nMẫu khuôn mặt của bạn sẽ bị xóa vĩnh viễn theo cách an toàn.\n\nSau khi xóa, bạn sẽ cần nhập mã PIN, hình mở khóa hoặc mật khẩu để mở khóa điện thoại hoặc xác thực trong các ứng dụng."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Xóa mẫu khuôn mặt hiện tại của bạn để thiết lập lại tính năng Mở khóa bằng khuôn mặt.\n\nMẫu khuôn mặt của bạn sẽ bị xóa vĩnh viễn theo cách an toàn.\n\nSau khi xóa, bạn sẽ cần nhập vân tay, mã PIN, hình mở khóa hoặc mật khẩu để mở khóa điện thoại hoặc xác thực trong các ứng dụng."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Dùng tính năng Mở khóa bằng khuôn mặt để"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Các yêu cầu của tính năng Mở khóa bằng khuôn mặt"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Khi dùng tính năng Mở khóa bằng khuôn mặt"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Yêu cầu mở mắt"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Để mở khóa điện thoại, bạn phải mở mắt"</string>
@@ -499,42 +498,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Thực hiện sau"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Bỏ qua thiết lập vân tay?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Bạn đã chọn sử dụng vân tay là cách mở khóa điện thoại của mình. Nếu bỏ qua ngay bây giờ, bạn sẽ cần thiết lập cài đặt này sau. Thiết lập sẽ chỉ mất ít phút."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"Mã PIN giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Hình mở khóa giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Mật khẩu giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"Mã PIN giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Hình mở khóa giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Mật khẩu giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"Mã PIN giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Hình mở khóa giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Mật khẩu giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng vân tay.\n\nHình mở khóa sẽ bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng vân tay.\n\nHình mở khóa giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng vân tay.\n\nHình mở khóa sẽ bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMã PIN giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nHình mở khóa giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMật khẩu giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMã PIN giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nHình mở khóa giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMật khẩu giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMã PIN giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nHình mở khóa giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt.\n\nMật khẩu giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nHình mở khóa giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ máy tính bảng của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nHình mở khóa giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ thiết bị của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Bạn cần phải nhập mã PIN để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMã PIN giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Bạn cần phải nhập hình mở khóa để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nHình mở khóa giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Bạn cần phải nhập mật khẩu để thiết lập tính năng Mở khóa bằng khuôn mặt và Mở khóa bằng vân tay.\n\nMật khẩu giúp bảo vệ điện thoại của bạn trong trường hợp bị mất hoặc bị đánh cắp."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Bỏ qua bước thiết lập mã PIN?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Bỏ qua bước thiết lập mã PIN và khuôn mặt?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Bỏ qua bước thiết lập mã PIN và vân tay?"</string>
@@ -559,7 +594,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Ngoài việc mở khóa điện thoại, bạn còn có thể dùng vân tay của mình để mua hàng và truy cập ứng dụng. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Tùy chọn khóa màn hình đã bị tắt. Hãy liên hệ với quản trị viên của tổ chức bạn để tìm hiểu thêm. "<annotation id="admin_details">"Thông tin chi tiết khác"</annotation>\n\n"Bạn vẫn có thể sử dụng vân tay của mình để ủy quyền mua hàng và truy cập ứng dụng. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Nhấc ngón tay, sau đó chạm lại vào cảm biến"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Vui lòng hiệu chỉnh lại cảm biến vân tay."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Bạn có thể thêm tối đa <xliff:g id="COUNT">%d</xliff:g> tệp tham chiếu"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Bạn đã thêm số vân tay tối đa"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Không thể thêm dấu vân tay khác"</string>
@@ -1844,7 +1880,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"Dịch vụ vị trí"</string>
     <string name="location_title" msgid="5819154746934945021">"Vị trí của tôi"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Vị trí của hồ sơ công việc"</string>
-    <string name="location_app_level_permissions" msgid="907206607664629759">"Quyền truy cập thông tin vị trí của ứng dụng"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"Quyền truy cập thông tin vị trí đối với ứng dụng"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Vị trí đang tắt"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>/<xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> ứng dụng có quyền truy cập vào vị trí</item>
@@ -2964,7 +3000,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"Chứng chỉ người dùng ứng dụng và VPN"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Chứng chỉ Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Dữ liệu của bạn sẽ không ở chế độ riêng tư"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Các trang web, ứng dụng và mạng riêng ảo (VPN) sẽ dùng chứng chỉ CA để mã hóa. Bạn chỉ nên cài đặt các chứng chỉ CA của tổ chức mà bạn tin cậy. \n\n Nếu bạn cài đặt chứng chỉ CA, thì chủ sở hữu của chứng chỉ đó có thể truy cập vào dữ liệu của bạn (chẳng hạn như mật khẩu hoặc thông tin thẻ tín dụng) trên các trang web mà bạn truy cập hoặc các ứng dụng mà bạn dùng – ngay cả khi dữ liệu của bạn đã được mã hóa."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Không cài đặt"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Vẫn cài đặt"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Chưa cài đặt chứng chỉ"</string>
@@ -4400,7 +4437,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Truyền tệp"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Truyền tệp sang thiết bị khác"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Chuyển mã nội dung nghe nhìn đã xuất"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Chuyển ảnh hoặc tệp nếu MTP không được hỗ trợ (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Chia sẻ Internet qua USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>

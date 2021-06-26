@@ -382,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Supprimez votre empreinte faciale actuelle pour reconfigurer le déverrouillage par reconnaissance faciale.\n\nElle sera supprimée de façon définitive et sécurisée.\n\nVous devrez ensuite utiliser votre code, schéma ou mot de passe pour déverrouiller votre téléphone ou vous authentifier dans les applis."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Supprimez votre empreinte faciale actuelle pour reconfigurer le déverrouillage facial.\n\nElle sera supprimée de façon définitive et sécurisée.\n\nVous devrez ensuite utiliser votre empreinte digitale, code, schéma ou mot de passe pour déverrouiller votre téléphone ou vous authentifier dans les applis."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Utiliser pour"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Critères pour le déverrouillage par reconnaissance faciale"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Avec déverrouillage par reconnaissance faciale"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Vos yeux doivent être ouverts"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Vous devez ouvrir les yeux pour déverrouiller le téléphone"</string>
@@ -497,42 +496,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Plus tard"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Ignorer config. empreintes digitales ?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Vous avez choisi de déverrouiller votre téléphone à l\'aide de votre empreinte digitale. Si vous ignorez cette étape maintenant, vous devrez reprendre la configuration ultérieurement. L\'opération prend environ une minute."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"Un code protège votre tablette en cas de perte ou de vol"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Un schéma protège votre tablette en cas de perte ou de vol"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Un mot de passe protège votre tablette en cas de perte ou de vol"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"Un code protège votre appareil en cas de perte ou de vol"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Un schéma protège votre appareil en cas de perte ou de vol"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Un mot de passe protège votre appareil en cas de perte ou de vol"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"Un code protège votre téléphone en cas de perte ou de vol"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Un schéma protège votre téléphone en cas de perte ou de vol"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Un mot de passe protège votre téléphone en cas de perte ou de vol"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Veuillez saisir un code pour configurer le déverrouillage par empreinte digitale.\n\nUn code protège votre tablette en cas de perte ou de vol."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Veuillez dessiner un schéma pour configurer le déverrouillage par empreinte digitale.\n\nUn schéma protège votre tablette en cas de perte ou de vol."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Veuillez saisir un mot de passe pour configurer le déverrouillage par empreinte digitale.\n\nUn mot de passe protège votre tablette en cas de perte ou de vol."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Veuillez saisir un code pour configurer le déverrouillage par empreinte digitale.\n\nUn code protège votre appareil en cas de perte ou de vol."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Veuillez dessiner un schéma pour configurer le déverrouillage par empreinte digitale.\n\nUn schéma protège votre appareil en cas de perte ou de vol."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Veuillez saisir un mot de passe pour configurer le déverrouillage par empreinte digitale.\n\nUn mot de passe protège votre appareil en cas de perte ou de vol."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Veuillez saisir un code pour configurer le déverrouillage par empreinte digitale.\n\nUn code protège votre téléphone en cas de perte ou de vol."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Veuillez dessiner un schéma pour configurer le déverrouillage par empreinte digitale.\n\nUn schéma protège votre téléphone en cas de perte ou de vol."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Veuillez saisir un mot de passe pour configurer le déverrouillage par empreinte digitale.\n\nUn mot de passe protège votre téléphone en cas de perte ou de vol."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Veuillez saisir un code pour configurer le déverrouillage par reconnaissance faciale.\n\nUn code protège votre tablette en cas de perte ou de vol."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Veuillez dessiner un schéma pour configurer le déverrouillage par reconnaissance faciale.\n\nUn schéma protège votre tablette en cas de perte ou de vol."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Veuillez saisir un mot de passe pour configurer le déverrouillage par reconnaissance faciale.\n\nUn mot de passe protège votre tablette en cas de perte ou de vol."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Veuillez saisir un code pour configurer le déverrouillage par reconnaissance faciale.\n\nUn code protège votre appareil en cas de perte ou de vol."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Veuillez dessiner un schéma pour configurer le déverrouillage par reconnaissance faciale.\n\nUn schéma protège votre appareil en cas de perte ou de vol."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Veuillez saisir un mot de passe pour configurer le déverrouillage par reconnaissance faciale.\n\nUn mot de passe protège votre appareil en cas de perte ou de vol."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Veuillez saisir un code pour configurer le déverrouillage par reconnaissance faciale.\n\nUn code protège votre téléphone en cas de perte ou de vol."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Veuillez dessiner un schéma pour configurer le déverrouillage par reconnaissance faciale.\n\nUn schéma protège votre téléphone en cas de perte ou de vol."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Veuillez saisir un mot de passe pour configurer le déverrouillage par reconnaissance faciale.\n\nUn mot de passe protège votre téléphone en cas de perte ou de vol."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Veuillez saisir un code pour configurer le déverrouillage par reconnaissance faciale et par empreinte digitale.\n\nUn code protège votre tablette en cas de perte ou de vol."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Veuillez dessiner un schéma pour configurer le déverrouillage par reconnaissance faciale et par empreinte digitale.\n\nUn schéma protège votre tablette en cas de perte ou de vol."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Veuillez saisir un mot de passe pour configurer le déverrouillage par reconnaissance faciale et par empreinte digitale.\n\nUn mot de passe protège votre tablette en cas de perte ou de vol."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Veuillez saisir un code pour configurer le déverrouillage par reconnaissance faciale et par empreinte digitale.\n\nUn code protège votre appareil en cas de perte ou de vol."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Veuillez dessiner un schéma pour configurer le déverrouillage par reconnaissance faciale et par empreinte digitale.\n\nUn schéma protège votre appareil en cas de perte ou de vol."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Veuillez saisir un mot de passe pour configurer le déverrouillage par reconnaissance faciale et par empreinte digitale.\n\nUn mot de passe protège votre appareil en cas de perte ou de vol."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Veuillez saisir un code pour configurer le déverrouillage par reconnaissance faciale et par empreinte digitale.\n\nUn code protège votre téléphone en cas de perte ou de vol."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Veuillez dessiner un schéma pour configurer le déverrouillage par reconnaissance faciale et par empreinte digitale.\n\nUn schéma protège votre téléphone en cas de perte ou de vol."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Veuillez saisir un mot de passe pour configurer le déverrouillage par reconnaissance faciale et par empreinte digitale.\n\nUn mot de passe protège votre téléphone en cas de perte ou de vol."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Passer la configuration du code PIN ?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Ne pas configurer de code ni de visage ?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Ne pas configurer de code ni d\'empreinte digitale ?"</string>
@@ -557,7 +592,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Votre empreinte digitale vous permet non seulement de déverrouiller votre téléphone, mais également d\'autoriser des achats et d\'accéder à des applications. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" L\'option de verrouillage de l\'écran est désactivée. Pour en savoir plus, contactez l\'administrateur de votre entreprise. "<annotation id="admin_details">"Plus d\'informations"</annotation>\n\n"Vous pouvez toujours utiliser votre empreinte digitale pour autoriser des achats et l\'accès aux applications. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Relevez le doigt, puis reposez-le sur le lecteur"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Veuillez recalibrer le lecteur d\'empreinte digitale."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> empreintes digitales."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Vous avez ajouté le nombre maximal autorisé d\'empreintes digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossible d\'ajouter d\'autres empreintes digitales"</string>
@@ -1039,7 +1075,7 @@
     <string name="wifi_subscription" msgid="4432423938285430113">"Abonnement"</string>
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Afficher ou modifier l\'abonnement"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Adresse MAC aléatoire"</string>
-    <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Ajouter un appareil"</string>
+    <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Ajoutez un appareil"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centrez le code QR ci-dessous pour ajouter l\'appareil à \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Scannez le code QR"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Centrez le code QR ci-dessous pour établir la connexion à \"<xliff:g id="SSID">%1$s</xliff:g>\"."</string>
@@ -1514,7 +1550,7 @@
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Version de la liste d\'itinérance préférée"</string>
     <string name="meid_multi_sim" msgid="7645394486193991388">"MEID (emplacement SIM %1$d)"</string>
-    <string name="scanning_status_text_on" msgid="3846571210578042940">"Activée"</string>
+    <string name="scanning_status_text_on" msgid="3846571210578042940">"Activé"</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Désactivée"</string>
     <string name="scanning_status_text_wifi_on_ble_on" msgid="7644609329607744714">"Les recherches Wi‑Fi et Bluetooth sont activées"</string>
     <string name="scanning_status_text_wifi_on_ble_off" msgid="7215007787287418186">"La recherche Wi‑Fi est activée, mais pas la recherche Bluetooth"</string>
@@ -2606,7 +2642,7 @@
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Cette appli n\'étant pas configurée pour optimiser batterie, vous ne pouvez pas la limiter.\n\nActivez optimisation batterie."</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Sans restriction"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Optimisée"</string>
-    <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Limités"</string>
+    <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Limitée"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Autoriser l\'utilisation de la batterie en arrière-plan sans restriction. Peut solliciter davantage la batterie."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimiser en fonction de votre utilisation. Recommandé pour la plupart des applis."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Limiter l\'utilisation de la batterie lorsque l\'appli est en arrière-plan. L\'appli risque de ne pas fonctionner comme prévu. Les notifications peuvent être retardées."</string>
@@ -2962,7 +2998,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"Certificat utilisateur VPN et appli"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Certificat Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Vos données ne seront pas privées"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Les certificats CA sont utilisés pour le chiffrement de sites Web, d\'applications et de VPN. N\'installez que ceux provenant d\'organisations fiables. \n\n Si vous installez un certificat CA, son propriétaire peut potentiellement accéder à vos données (mots de passe ou informations relatives à votre carte de crédit) depuis les sites Web que vous consultez ou les applications que vous utilisez, même si ces données sont chiffrées."</string>
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Les certificats CA sont utilisés pour le chiffrement de sites Web, d\'applications et de VPN. N\'installez que ceux provenant d\'organisations fiables. \n\nSi vous installez un certificat CA, son propriétaire peut potentiellement accéder à vos données (mots de passe ou informations relatives à votre carte de crédit, par exemple) depuis les sites Web que vous consultez ou les applications que vous utilisez, même si ces données sont chiffrées."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ne pas installer"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installer quand même"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certificat non installé"</string>
@@ -4398,7 +4434,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Transfert de fichiers"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Transférer des fichiers vers un autre appareil"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"Transfert de photos (PTP)"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Transcoder les contenus multimédias exportés"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Transférer des photos ou des fichiers si MTP n\'est pas compatible (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Partage de connexion via USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"Mode MIDI"</string>
@@ -5452,9 +5491,9 @@
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Autoriser Google Fi à utiliser les réseaux W+ pour améliorer la vitesse et la couverture"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Réseau W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
-    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM TÉLÉCHARGÉE"</string>
-    <string name="sim_category_active_sim" msgid="1503823567818544012">"Active"</string>
-    <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactive"</string>
+    <string name="downloaded_sim_category_title" msgid="8611467223348446658">"TÉLÉCHARGÉS"</string>
+    <string name="sim_category_active_sim" msgid="1503823567818544012">"Actif"</string>
+    <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactif"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /Valeur par défaut pour les <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="default_active_sim_calls" msgid="2390973682556353558">"appels"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
