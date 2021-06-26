@@ -306,7 +306,7 @@
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"載入中…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"如果應用程式具有鄰近裝置權限，就能判斷已連結裝置的相對位置。"</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"應用程式和服務的位置存取權已關閉。當你打電話或傳送訊息到緊急電話號碼時，系統仍會將你的裝置位置資訊傳送給緊急應變人員。"</string>
+    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"應用程式和服務的位置存取權已關閉。當你撥打緊急電話號碼時 (或是傳送訊息給對方時)，系統仍會將你的裝置位置資訊傳送給緊急應變人員。"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"進一步瞭解位置資訊設定。"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"帳戶"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"安全性"</string>
@@ -382,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"請刪除目前的臉部模型，以便重新設定人臉解鎖功能。\n\n系統會安全地將臉部模型永久刪除。\n\n模型刪除後，你必須使用 PIN 碼、解鎖圖案或密碼，才能解鎖手機或在應用程式中驗證身分。"</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"請刪除目前的臉部模型，以便重新設定人臉解鎖功能。\n\n系統會安全地將臉部模型永久刪除。\n\n模型刪除後，你必須使用指紋、PIN 碼、解鎖圖案或密碼，才能解鎖手機或在應用程式中驗證身分。"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"人臉解鎖功能的用途"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"人臉解鎖功能的要求"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"使用人臉解鎖功能時"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"必須睜開雙眼"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"必須睜開雙眼才能將手機解鎖"</string>
@@ -499,42 +498,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"稍後再說"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"要略過指紋設定程序嗎？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"你已選擇使用指紋做為其中一種手機解鎖方式。如果現在略過這項程序，你必須在稍後完成設定。設定程序只需要一分鐘左右。"</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"平板電腦遺失或遭竊時，PIN 碼可保護平板電腦中的資料"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"平板電腦遺失或遭竊時，解鎖圖案可保護平板電腦中的資料"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"平板電腦遺失或遭竊時，密碼可保護平板電腦中的資料"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"裝置遺失或遭竊時，PIN 碼可保護裝置中的資料"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"裝置遺失或遭竊時，解鎖圖案可保護裝置中的資料"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"裝置遺失或遭竊時，密碼可保護裝置中的資料"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"手機遺失或遭竊時，PIN 碼可保護手機中的資料"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"手機遺失或遭竊時，解鎖圖案可保護手機中的資料"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"手機遺失或遭竊時，密碼可保護手機中的資料"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"你必須先設定 PIN 碼，才能設定指紋解鎖功能。\n\n平板電腦遺失或遭竊時，PIN 碼可保護平板電腦中的資料。"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"你必須先設定解鎖圖案，才能設定指紋解鎖功能。\n\n平板電腦遺失或遭竊時，解鎖圖案可保護平板電腦中的資料。"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"你必須先設定密碼，才能設定指紋解鎖功能。\n\n平板電腦遺失或遭竊時，密碼可保護平板電腦中的資料。"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"你必須先設定 PIN 碼，才能設定指紋解鎖功能。\n\n裝置遺失或遭竊時，PIN 碼可保護裝置中的資料。"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"你必須先設定解鎖圖案，才能設定指紋解鎖功能。\n\n裝置遺失或遭竊時，解鎖圖案可保護裝置中的資料。"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"你必須先設定密碼，才能設定指紋解鎖功能。\n\n裝置遺失或遭竊時，密碼可保護裝置中的資料。"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"你必須先設定 PIN 碼，才能設定指紋解鎖功能。\n\n手機遺失或遭竊時，PIN 碼可保護手機中的資料。"</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"你必須先設定解鎖圖案，才能設定指紋解鎖功能。\n\n手機遺失或遭竊時，解鎖圖案可保護手機中的資料。"</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"你必須先設定密碼，才能設定指紋解鎖功能。\n\n手機遺失或遭竊時，密碼可保護手機中的資料。"</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"你必須先設定 PIN 碼，才能設定人臉解鎖功能。\n\n平板電腦遺失或遭竊時，PIN 碼可保護平板電腦中的資料。"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"你必須先設定解鎖圖案，才能設定人臉解鎖功能。\n\n平板電腦遺失或遭竊時，解鎖圖案可保護平板電腦中的資料。"</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"你必須先設定密碼，才能設定人臉解鎖功能。\n\n平板電腦遺失或遭竊時，密碼可保護平板電腦中的資料。"</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"你必須先設定 PIN 碼，才能設定人臉解鎖功能。\n\n裝置遺失或遭竊時，PIN 碼可保護裝置中的資料。"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"你必須先設定解鎖圖案，才能設定人臉解鎖功能。\n\n裝置遺失或遭竊時，解鎖圖案可保護裝置中的資料。"</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"你必須先設定密碼，才能設定人臉解鎖功能。\n\n裝置遺失或遭竊時，密碼可保護裝置中的資料。"</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"你必須先設定 PIN 碼，才能設定人臉解鎖功能。\n\n手機遺失或遭竊時，PIN 碼可保護手機中的資料。"</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"你必須先設定解鎖圖案，才能設定人臉解鎖功能。\n\n手機遺失或遭竊時，解鎖圖案可保護手機中的資料。"</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"你必須先設定密碼，才能設定人臉解鎖功能。\n\n手機遺失或遭竊時，密碼可保護手機中的資料。"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"你必須先設定 PIN 碼，才能設定人臉解鎖和指紋解鎖功能。\n\n平板電腦遺失或遭竊時，PIN 碼可保護平板電腦中的資料。"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"你必須先設定解鎖圖案，才能設定人臉解鎖和指紋解鎖功能。\n\n平板電腦遺失或遭竊時，解鎖圖案可保護平板電腦中的資料。"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"你必須先設定密碼，才能設定人臉解鎖和指紋解鎖功能。\n\n平板電腦遺失或遭竊時，密碼可保護平板電腦中的資料。"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"你必須先設定 PIN 碼，才能設定人臉解鎖和指紋解鎖功能。\n\n裝置遺失或遭竊時，PIN 碼可保護裝置中的資料。"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"你必須先設定解鎖圖案，才能設定人臉解鎖和指紋解鎖功能。\n\n裝置遺失或遭竊時，解鎖圖案可保護裝置中的資料。"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"你必須先設定密碼，才能設定人臉解鎖和指紋解鎖功能。\n\n裝置遺失或遭竊時，密碼可保護裝置中的資料。"</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"你必須先設定 PIN 碼，才能設定人臉解鎖和指紋解鎖功能。\n\n手機遺失或遭竊時，PIN 碼可保護手機中的資料。"</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"你必須先設定解鎖圖案，才能設定人臉解鎖和指紋解鎖功能。\n\n手機遺失或遭竊時，解鎖圖案可保護手機中的資料。"</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"你必須先設定密碼，才能設定人臉解鎖和指紋解鎖功能。\n\n手機遺失或遭竊時，密碼可保護手機中的資料。"</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"要略過 PIN 碼設定程序嗎？"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"要略過 PIN 碼和人臉解鎖的設定程序嗎？"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"要略過 PIN 碼和指紋解鎖的設定程序嗎？"</string>
@@ -559,7 +594,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"除了將手機解鎖，你也可以使用指紋授權購物交易及存取應用程式。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" 螢幕鎖定選項已停用。如要瞭解詳情，請與你的機構管理員聯絡。"<annotation id="admin_details">"詳細資訊"</annotation>\n\n"你依然可以使用指紋來授權購物交易及存取應用程式。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"移開手指，然後再次輕觸感應器"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"請重新校正指紋感應器。"</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"你最多可以新增 <xliff:g id="COUNT">%d</xliff:g> 個指紋"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"你新增的指紋數量已達上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"無法新增其他指紋"</string>
@@ -2964,7 +3000,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"VPN 和應用程式使用者憑證"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi 憑證"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"憑證擁有者將可查看你的資料"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"網站、應用程式和 VPN 會使用 CA 憑證進行加密，請勿安裝不信任的機構所提供的 CA 憑證。\n\n如果安裝 CA 憑證，即使你的資料 (例如密碼或信用卡資料) 經過加密，憑證擁有者仍可透過你造訪的網站或使用的應用程式存取上述資料。"</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"不要安裝"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"仍要安裝"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"未安裝憑證"</string>
@@ -5393,9 +5430,9 @@
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"長按即可啟動 Google 助理"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"按住電源按鈕一段時間即可啟動 Google 助理"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"顯示電子錢包"</string>
-    <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"允許從螢幕鎖定畫面和快速設定使用電子錢包"</string>
+    <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"允許從螢幕鎖定畫面和快速設定選單中使用電子錢包"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"顯示裝置控制"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"鎖定時控管存取權"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"在鎖定畫面上顯示控制項"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

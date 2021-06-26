@@ -382,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Hapus model wajah Anda saat ini untuk menyiapkan Face Unlock lagi.\n\nModel wajah Anda akan dihapus secara permanen dan aman.\n\nSetelah dihapus, Anda akan memerlukan PIN, pola, atau sandi untuk membuka kunci ponsel atau untuk autentikasi dalam aplikasi."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Hapus model wajah Anda saat ini untuk menyiapkan Face Unlock lagi.\n\nModel wajah Anda akan dihapus secara permanen dan aman.\n\nSetelah dihapus, Anda akan memerlukan sidik jari, PIN, pola, atau sandi untuk membuka kunci ponsel atau untuk autentikasi dalam aplikasi."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Gunakan Face Unlock untuk"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Persyaratan untuk Face Unlock"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Saat menggunakan Face Unlock"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Haruskan mata terbuka"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Untuk membuka kunci ponsel, mata harus terbuka"</string>
@@ -497,42 +496,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Lakukan nanti"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Lewati penyiapan sidik jari?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Anda telah memilih untuk menggunakan sidik jari sebagai satu cara untuk membuka kunci perangkat. Jika dilewati sekarang, Anda harus menyiapkannya nanti. Penyiapan hanya memerlukan waktu sekitar satu menit."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"PIN melindungi tablet Anda jika hilang atau dicuri"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Pola melindungi tablet Anda jika hilang atau dicuri"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Sandi melindungi tablet Anda jika hilang atau dicuri"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"PIN melindungi perangkat Anda jika hilang atau dicuri"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Pola melindungi perangkat Anda jika hilang atau dicuri"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Sandi melindungi perangkat Anda jika hilang atau dicuri"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"PIN melindungi ponsel Anda jika hilang atau dicuri"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Pola melindungi ponsel Anda jika hilang atau dicuri"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Sandi melindungi ponsel Anda jika hilang atau dicuri"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Perlu PIN untuk menyiapkan Fingerprint Unlock.\n\nPIN melindungi tablet Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Perlu pola untuk menyiapkan Fingerprint Unlock.\n\nPola melindungi tablet Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Perlu sandi untuk menyiapkan Fingerprint Unlock.\n\nSandi melindungi tablet Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Perlu PIN untuk menyiapkan Fingerprint Unlock.\n\nPIN melindungi perangkat Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Perlu pola untuk menyiapkan Fingerprint Unlock.\n\nPola melindungi perangkat Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Perlu sandi untuk menyiapkan Fingerprint Unlock.\n\nSandi melindungi perangkat Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Perlu PIN untuk menyiapkan Fingerprint Unlock.\n\nPIN melindungi ponsel Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Perlu pola untuk menyiapkan Fingerprint Unlock.\n\nPola melindungi ponsel Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Perlu sandi untuk menyiapkan Fingerprint Unlock.\n\nSandi melindungi ponsel Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Perlu PIN untuk menyiapkan Face Unlock.\n\nPIN melindungi tablet Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Perlu pola untuk menyiapkan Face Unlock.\n\nPola melindungi tablet Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Perlu sandi untuk menyiapkan Face Unlock.\n\nSandi melindungi tablet Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Perlu PIN untuk menyiapkan Face Unlock.\n\nPIN melindungi perangkat Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Perlu pola untuk menyiapkan Face Unlock.\n\nPola melindungi perangkat Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Perlu sandi untuk menyiapkan Face Unlock.\n\nSandi melindungi perangkat Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Perlu PIN untuk menyiapkan Face Unlock.\n\nPIN melindungi ponsel Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Perlu pola untuk menyiapkan Face Unlock.\n\nPola melindungi ponsel Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Perlu sandi untuk menyiapkan Face Unlock.\n\nSandi melindungi ponsel Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Perlu PIN untuk menyiapkan Face Unlock dan Fingerprint Unlock.\n\nPIN melindungi tablet Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Perlu pola untuk menyiapkan Face Unlock dan Fingerprint Unlock.\n\nPola melindungi tablet Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Perlu sandi untuk menyiapkan Face Unlock dan Fingerprint Unlock.\n\nSandi melindungi tablet Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Perlu PIN untuk menyiapkan Face Unlock dan Fingerprint Unlock.\n\nPIN melindungi perangkat Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Perlu pola untuk menyiapkan Face Unlock dan Fingerprint Unlock.\n\nPola melindungi perangkat Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Perlu sandi untuk menyiapkan Face Unlock dan Fingerprint Unlock.\n\nSandi melindungi perangkat Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Perlu PIN untuk menyiapkan Face Unlock dan Fingerprint Unlock.\n\nPIN melindungi ponsel Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Perlu pola untuk menyiapkan Face Unlock dan Fingerprint Unlock.\n\nPola melindungi ponsel Anda jika hilang atau dicuri."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Perlu sandi untuk menyiapkan Face Unlock dan Fingerprint Unlock.\n\nSandi melindungi ponsel Anda jika hilang atau dicuri."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Lewati penyiapan PIN?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Lewati penyiapan PIN dan wajah?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Lewati penyiapan PIN dan sidik jari?"</string>
@@ -557,7 +592,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Selain membuka kunci ponsel, Anda juga dapat menggunakan sidik jari untuk mengotorisasi pembelian dan akses aplikasi. "<annotation id="url">"Pelajari lebih lanjut"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Opsi layar kunci dinonaktifkan. Untuk mempelajari lebih lanjut, hubungi admin organisasi Anda. "<annotation id="admin_details">"Detail selengkapnya"</annotation>\n\n"Anda tetap dapat menggunakan sidik jari untuk mengotorisasi pembelian dan akses aplikasi. "<annotation id="url">"Pelajari lebih lanjut"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Angkat jari, lalu sentuh sensor lagi"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Harap kalibrasi ulang sensor sidik jari."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Anda dapat menambahkan maksimal <xliff:g id="COUNT">%d</xliff:g> sidik jari"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Anda telah menambahkan jumlah maksimum sidik jari"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Tidak dapat menambahkan sidik jari lagi"</string>
@@ -854,7 +890,7 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Lanjutan"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Bluetooth Lanjutan"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Saat Bluetooth aktif, perangkat dapat berkomunikasi dengan perangkat Bluetooth terdekat lainnya."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Jika Bluetooth diaktifkan, perangkat dapat berkomunikasi dengan perangkat Bluetooth lainnya di sekitar.\n\nUntuk meningkatkan pengalaman perangkat, aplikasi dan layanan masih dapat memindai perangkat di sekitar kapan saja, meski Bluetooth nonaktif. Ini dapat digunakan, misalnya, untuk meningkatkan fitur dan layanan berbasis lokasi. Anda dapat mengubahnya di "<annotation id="link">"setelan pemindaian Bluetooth"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Jika Bluetooth diaktifkan, perangkat dapat berkomunikasi dengan perangkat Bluetooth lainnya di sekitar.\n\nAgar pengalaman perangkat menjadi lebih baik, aplikasi dan layanan masih dapat memindai perangkat di sekitar kapan saja, meski Bluetooth nonaktif. Ini dapat digunakan, misalnya, untuk meningkatkan kualitas fitur dan layanan berbasis lokasi. Anda dapat mengubahnya di "<annotation id="link">"setelan pemindaian Bluetooth"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Untuk meningkatkan akurasi lokasi, aplikasi dan layanan sistem tetap dapat mendeteksi perangkat Bluetooth. Anda dapat mengubahnya di <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>setelan pemindaian<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Tidak dapat tersambung. Coba lagi."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detail perangkat"</string>
@@ -2917,7 +2953,7 @@
     <string name="voice_search_settings_title" msgid="228743187532160069">"Penelusuran suara"</string>
     <string name="keyboard_settings_title" msgid="2199286020368890114">"Keyboard Android"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"Setelan masukan suara"</string>
-    <string name="voice_input_settings_title" msgid="3708147270767296322">"Masukan suara"</string>
+    <string name="voice_input_settings_title" msgid="3708147270767296322">"Input suara"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Layanan masukan suara"</string>
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Frasa pengaktif dan interaksi lengkap"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Speech to text yang sederhana"</string>
@@ -2962,7 +2998,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"Sertifikat pengguna apl &amp; VPN"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Sertifikat Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Data Anda tidak akan bersifat pribadi"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Sertifikat CA digunakan oleh situs, aplikasi, dan VPN untuk enkripsi. Hanya instal Sertifikat CA dari organisasi yang Anda percaya. \n\n Jika Anda menginstal Sertifikat CA, pemilik sertifikat tersebut dapat mengakses data Anda, seperti sandi atau detail kartu kredit, dari situs yang Anda kunjungi atau aplikasi yang Anda gunakan – meskipun data Anda dienkripsi."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Jangan instal"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Tetap instal"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Sertifikat tidak diinstal"</string>
@@ -5497,7 +5534,7 @@
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Menggunakan penghemat baterai"</string>
     <string name="do_not_disturb_main_switch_title_on" msgid="6965566556539821313">"Nonaktifkan sekarang"</string>
     <string name="do_not_disturb_main_switch_title_off" msgid="7088088515823752545">"Aktifkan sekarang"</string>
-    <string name="night_light_main_switch_title" msgid="3428298022467805219">"Menggunakan Cahaya Malam"</string>
+    <string name="night_light_main_switch_title" msgid="3428298022467805219">"Gunakan Cahaya Malam"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"Gunakan NFC"</string>
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Menggunakan baterai adaptif"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Menggunakan kecerahan adaptif"</string>
