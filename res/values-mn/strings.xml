@@ -382,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Царайгаар түгжээ тайлахыг дахин тохируулах бол одоогийн нүүрний загвараа устгана уу.\n\nТаны нүүрний загварыг аюулгүйгээр бүрмөсөн устгана.\n\nУстгасны дараа та утасныхаа түгжээг тайлах эсвэл аппуудын баталгаажуулалтад ПИН, хээ эсвэл нууц үгээ оруулах шаардлагатай болно."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Царайгаар түгжээ тайлахыг дахин тохируулах бол одоогийн нүүрний загвараа устгана уу.\n\nТаны нүүрний загварыг аюулгүйгээр бүрмөсөн устгана.\n\nУстгасны дараа та утасныхаа түгжээг тайлах эсвэл аппуудын баталгаажуулалтад хурууны хээ, ПИН, хээ эсвэл нууц үгээ оруулах шаардлагатай болно."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Царайгаар түгжээ тайлахыг дараахад ашиглах"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Царайгаар түгжээ тайлахыг ашиглах шаардлага"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Царайгаар түгжээ тайлахыг ашиглаж буй тохиолдолд"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Нүдийг нээлттэй байхыг шаардах"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Утасны түгжээг тайлахын тулд таны нүд нээлттэй байх шаардлагатай"</string>
@@ -497,42 +496,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Дараа хийх"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Хурууны хээний тохиргоог алгасах уу?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Та утасны түгжээг тайлах нэг хувилбараар хурууны хээг сонголоо. Хэрэв та одоо алгасвал энэ тохиргоог дараа хийх шаардлагатай болно. Тохиргоо хийхэд хэдхэн хором шаардлагатай."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"Та таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Та таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Та таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"Та төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Та төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Та төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"Та утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Та утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Та утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд ПИН шаардлагатай.\n\nТа таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд хээ шаардлагатай.\n\nТа таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд нууц үг шаардлагатай.\n\nТа таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд ПИН шаардлагатай.\n\nТа төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд хээ шаардлагатай.\n\nТа төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд нууц үг шаардлагатай.\n\nТа төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд ПИН шаардлагатай.\n\nТа утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд хээ шаардлагатай.\n\nТа утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд нууц үг шаардлагатай.\n\nТа утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Царайгаар түгжээ тайлахыг тохируулахын тулд ПИН шаардлагатай.\n\nТа таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Царайгаар түгжээ тайлахыг тохируулахын тулд хээ шаардлагатай.\n\nТа таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Царайгаар түгжээ тайлахыг тохируулахын тулд нууц үг шаардлагатай.\n\nТа таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Царайгаар түгжээ тайлахыг тохируулахын тулд ПИН шаардлагатай.\n\nТа төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Царайгаар түгжээ тайлахыг тохируулахын тулд хээ шаардлагатай.\n\nТа төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Царайгаар түгжээ тайлахыг тохируулахын тулд нууц үг шаардлагатай.\n\nТа төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Царайгаар түгжээ тайлахыг тохируулахын тулд ПИН шаардлагатай.\n\nТа утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Царайгаар түгжээ тайлахыг тохируулахын тулд хээ шаардлагатай.\n\nТа утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Царайгаар түгжээ тайлахыг тохируулахын тулд нууц үг шаардлагатай.\n\nТа утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Царайгаар түгжээ тайлах болон Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд ПИН шаардлагатай.\n\nТа таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Царайгаар түгжээ тайлах болон Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд хээ шаардлагатай.\n\nТа таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Царайгаар түгжээ тайлах болон Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд нууц үг шаардлагатай.\n\nТа таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Царайгаар түгжээ тайлах болон Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд ПИН шаардлагатай.\n\nТа төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Царайгаар түгжээ тайлах болон Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд хээ шаардлагатай.\n\nТа төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Царайгаар түгжээ тайлах болон Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд нууц үг шаардлагатай.\n\nТа төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Царайгаар түгжээ тайлах болон Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд ПИН шаардлагатай.\n\nТа утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд ПИН үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Царайгаар түгжээ тайлах болон Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд хээ шаардлагатай.\n\nТа утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд хээ үүнийг хамгаалдаг."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Царайгаар түгжээ тайлах болон Хурууны хээгээр түгжээ тайлахыг тохируулахын тулд нууц үг шаардлагатай.\n\nТа утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд нууц үг үүнийг хамгаалдаг."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"ПИН-н тохируулгыг алгасах уу?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"ПИН ба царайн тохируулгыг алгасах уу?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"ПИН ба хурууны хээний тохируулгыг алгасах уу?"</string>
@@ -557,7 +592,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Хурууны хээгээ ашиглан утасны түгжээг нээхээс гадна, худалдан авалт хийж, апп-д нэвтэрч болно. "<annotation id="url">"Дэлгэрэнгүй мэдээлэл"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Дэлгэцийн түгжээний сонголтыг цуцалсан. Дэлгэрэнгүй үзэхийн тулд байгууллагынхаа админтай холбогдоно уу. "<annotation id="admin_details">"Дэлгэрэнгүй мэдээлэл"</annotation>\n\n"Ta хурууны хээгээ ашиглан худалдан авалт болон аппын хандалтыг баталгаажуулах боломжтой. "<annotation id="url">"Дэлгэрэнгүй үзэх"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Хуруугаа өргөөд мэдрэгч дээр дахин хүрнэ үү."</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Хурууны хээ мэдрэгчийг дахин тохируулна уу."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Та <xliff:g id="COUNT">%d</xliff:g> хүртэлх хурууны хээ нэмж болно"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Таны зөвшөөрөгдсөн хурууны хээний тоо гүйцсэн байна"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Өөр хурууны хээ нэмэх боломжгүй байна"</string>
@@ -1434,7 +1470,7 @@
     <string name="doze_title" msgid="1523090408230862316">"Мэдэгдэл ирэхэд дэлгэцийг сэрээх"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Дэлгэц бараан үед энэ нь шинэ мэдэгдэл ирэхэд асдаг"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Цаг, мэдээллийг үргэлж үзүүлэх"</string>
-    <string name="doze_always_on_summary" msgid="509097829739647852">"Сайжруулсан батарей ашиглалт"</string>
+    <string name="doze_always_on_summary" msgid="509097829739647852">"Нэмэгдүүлсэн батарей ашиглалт"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Тод текст"</string>
     <string name="title_font_size" msgid="570613010306330622">"Фонтын хэмжээ"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Текстийг том эсвэл жижиг болгох"</string>
@@ -2353,7 +2389,8 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Хандалтын товчлуур болон зангаа"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Хандалтын товчлуурыг ашиглаж байна. 3 товчлуурт навигацаар зангаа боломжгүй байна."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Хандалтын онцлогуудад шуурхай хандана уу"</string>
-    <string name="accessibility_button_gesture_description" msgid="2717632658372117656">"Дурын дэлгэцээс хандалтын онцлогуудад шуурхай хандана уу. \n\nЭхлүүлэхийн тулд хандалтын тохиргоо руу очиж, онцлогийг сонгоно уу. Товчлол дээр товшиж, хандалтын товчлуур эсвэл зангааг сонгоно уу."</string>
+    <!-- no translation found for accessibility_button_gesture_description (2516420653060025670) -->
+    <skip />
     <string name="accessibility_button_description" msgid="7372405202698400339">"Дурын дэлгэцээс хандалтын онцлогуудад шуурхай хандана уу. \n\nЭхлүүлэхийн тулд хандалтын тохиргоо руу очиж, онцлогийг сонгоно уу. Товчлол дээр товшиж, хандалтын товчлуурыг сонгоно уу."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Товчлуур эсвэл зангаа ашиглах"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Байршил"</string>
@@ -2961,7 +2998,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"VPN; апликейшн хэрэглэгчийн сертификат"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi сертификат"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Таны өгөгдөл хувийнх биш болно"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Вебсайт, апп болон VPN нь шифрлэхэд зориулж CA сертификатыг ашигладаг. Зөвхөн итгэдэг байгууллагаасаа CA сертификатыг суулгана уу. \n\n Хэрэв та CA сертификат суулгавал сертификатын өмчлөгч нь таны зочилдог вебсайтууд эсвэл таны ашигладаг аппуудаас нууц үг эсвэл кредит картын дэлгэрэнгүй мэдээлэл зэрэг таны өгөгдөлд, хэдий таны өгөгдөл кодчилогдсон байсан ч, хандах боломжтой байна."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Бүү суулга"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Ямар ч тохиолдолд суулгах"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Сертификатыг суулгаагүй"</string>
@@ -4397,7 +4435,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Файл дамжуулалт"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Файлыг өөр төхөөрөмж рүү шилжүүлэх"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Экспорт хийсэн медиаг хөрвүүлэх"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"MTP дэмждэггүй бол зураг, файл илгээх (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB модем болгох"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4835,7 +4876,7 @@
     <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 секунд"</string>
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 секунд"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"хүрэх боломж"</string>
-    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Дараах руу доош шударна уу"</string>
+    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Доош шударч"</string>
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Нэг гарын горимыг ашиглахын тулд дэлгэцийн доод захаас доош шударна уу. Энэ онцлогийг ашиглахын тулд системийн навигацын тохиргоонд зангааны навигац ассан эсэхийг шалгана уу."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Дэлгэцийг хүрэх хэсэг хүртлээ татах"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Дэлгэцийн дээд хэсгийг таны эрхий хуруу хүрэх хэсэг хүртэл зөөнө."</string>
@@ -4865,7 +4906,7 @@
     <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>. Өөрчлөхийн тулд товшино уу"</string>
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Та яаралтай тусламжийн бус утасны дугаар оруулсан тохиолдолд:\n • Яаралтай тусламжийг ашиглахын тулд төхөөрөмжийнхөө түгжээг тайлсан байх ёстой\n • Таны дуудлагад хариулахгүй байж магадгүй"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Мэдэгдэл харах бол хурууны хээгээ шударна уу"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Хурууны хээгээр шудрах"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Хурууны хээгээ шудрах"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Мэдэгдлээ шалгахын тулд утасныхаа арын хурууны хээ мэдрэгчийг доош шударна уу."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Мэдэгдлээ шалгахын тулд таблетынхаа арын хурууны хээ мэдрэгчийг доош шударна уу."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Мэдэгдлээ шалгахын тулд төхөөрөмжийнхөө арын хурууны хээ мэдрэгчийг доош шударна уу."</string>

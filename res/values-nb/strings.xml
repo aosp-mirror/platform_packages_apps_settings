@@ -382,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Slett den nåværende ansiktsmodellen din for å konfigurere ansiktslås igjen.\n\nAnsiktsmodellen blir slettet permanent og sikkert.\n\nEtter slettingen trenger du PIN-kode, mønster eller passord når du skal låse opp telefonen eller autentisere i apper."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Slett den nåværende ansiktsmodellen din for å konfigurere ansiktslås igjen.\n\nAnsiktsmodellen blir slettet permanent og sikkert.\n\nEtter slettingen trenger du fingeravtrykk, PIN-kode, mønster eller passord når du skal låse opp telefonen eller autentisere i apper."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Bruk ansiktslås for"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Krav for ansiktslås"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Når du bruker ansiktslås"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Krever at øynene er åpne"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Øynene dine må være åpne for å låse opp telefonen"</string>
@@ -497,42 +496,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gjør det senere"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Vil du hoppe over fingeravtrykk-oppsett?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Du har valgt å bruke fingeravtrykket ditt som én måte å låse opp telefonen din på. Hvis du hopper over konfigureringen nå, må du fullføre den senere. Konfigureringen tar bare et par minutter."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"En PIN-kode beskytter nettbrettet hvis det blir mistet eller stjålet"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Et mønster beskytter nettbrettet hvis det blir mistet eller stjålet"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Et passord beskytter nettbrettet hvis det blir mistet eller stjålet"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"En PIN-kode beskytter enheten hvis den blir mistet eller stjålet"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Et mønster beskytter enheten hvis den blir mistet eller stjålet"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Et passord beskytter enheten hvis den blir mistet eller stjålet"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"En PIN-kode beskytter telefonen hvis den blir mistet eller stjålet"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Et mønster beskytter telefonen hvis den blir mistet eller stjålet"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Et passord beskytter telefonen hvis den blir mistet eller stjålet"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"En PIN-kode kreves for å konfigurere opplåsing med fingeravtrykk.\n\nEn PIN-kode beskytter nettbrettet hvis det blir mistet eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Et mønster kreves for å konfigurere opplåsing med fingeravtrykk.\n\nEt mønster beskytter nettbrettet hvis det blir mistet eller stjålet."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Et passord kreves for å konfigurere opplåsing med fingeravtrykk.\n\nEt passord beskytter nettbrettet hvis det blir mistet eller stjålet."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"En PIN-kode kreves for å konfigurere opplåsing med fingeravtrykk.\n\nEn PIN-kode beskytter enheten hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Et mønster kreves for å konfigurere opplåsing med fingeravtrykk.\n\nEt mønster beskytter enheten hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Et passord kreves for å konfigurere opplåsing med fingeravtrykk.\n\nEt passord beskytter enheten hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"En PIN-kode kreves for å konfigurere opplåsing med fingeravtrykk.\n\nEn PIN-kode beskytter telefonen hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Et mønster kreves for å konfigurere opplåsing med fingeravtrykk.\n\nEt mønster beskytter telefonen hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Et passord kreves for å konfigurere opplåsing med fingeravtrykk.\n\nEt passord beskytter telefonen hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"En PIN-kode kreves for å konfigurere ansiktslås.\n\nEn PIN-kode beskytter nettbrettet hvis det blir mistet eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Et mønster kreves for å konfigurere ansiktslås.\n\nEt mønster beskytter nettbrettet hvis det blir mistet eller stjålet."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Et passord kreves for å konfigurere ansiktslås.\n\nEt passord beskytter nettbrettet hvis det blir mistet eller stjålet."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"En PIN-kode kreves for å konfigurere ansiktslås.\n\nEn PIN-kode beskytter enheten hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Et mønster kreves for å konfigurere ansiktslås.\n\nEt mønster beskytter enheten hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Et passord kreves for å konfigurere ansiktslås.\n\nEt passord beskytter enheten hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"En PIN-kode kreves for å konfigurere ansiktslås.\n\nEn PIN-kode beskytter telefonen hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Et mønster kreves for å konfigurere ansiktslås.\n\nEt mønster beskytter telefonen hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Et passord kreves for å konfigurere ansiktslås.\n\nEt passord beskytter telefonen hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"En PIN-kode kreves for å konfigurere ansiktslås og opplåsing med fingeravtrykk.\n\nEn PIN-kode beskytter nettbrettet hvis det blir mistet eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Et mønster kreves for å konfigurere ansiktslås og opplåsing med fingeravtrykk.\n\nEt mønster beskytter nettbrettet hvis det blir mistet eller stjålet."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Et passord kreves for å konfigurere ansiktslås og opplåsing med fingeravtrykk.\n\nEt passord beskytter nettbrettet hvis det blir mistet eller stjålet."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"En PIN-kode kreves for å konfigurere ansiktslås og opplåsing med fingeravtrykk.\n\nEn PIN-kode beskytter enheten hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Et mønster kreves for å konfigurere ansiktslås og opplåsing med fingeravtrykk.\n\nEt mønster beskytter enheten hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Et passord kreves for å konfigurere ansiktslås og opplåsing med fingeravtrykk.\n\nEt passord beskytter enheten hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"En PIN-kode kreves for å konfigurere ansiktslås og opplåsing med fingeravtrykk.\n\nEn PIN-kode beskytter telefonen hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Et mønster kreves for å konfigurere ansiktslås og opplåsing med fingeravtrykk.\n\nEt mønster beskytter telefonen hvis den blir mistet eller stjålet."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Et passord kreves for å konfigurere ansiktslås og opplåsing med fingeravtrykk.\n\nEt passord beskytter telefonen hvis den blir mistet eller stjålet."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Vil du hoppe over konfigurering av PIN-nummer?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Vil du hoppe over konfigurering av PIN-kode og ansikt?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Vil du hoppe over konfigurering av PIN-kode og fingeravtrykk?"</string>
@@ -557,7 +592,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"I tillegg til å låse opp telefonen din, kan du bruke fingeravtrykket ditt til å godkjenne kjøp og apptilgang. "<annotation id="url">"Finn ut mer"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Skjermlåsalternativet er slått av. Ta kontakt med administratoren i organisasjonen din for å finne ut mer. "<annotation id="admin_details">"Mer informasjon"</annotation>\n\n"Du kan fortsatt bruke fingeravtrykket ditt til å autorisere kjøp og apptilgang. "<annotation id="url">"Finn ut mer"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Løft fingeren og legg den på sensoren igjen"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Rekalibrer fingeravtrykkssensoren."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kan legge til opptil <xliff:g id="COUNT">%d</xliff:g> fingeravtrykk"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har lagt til maksimalt antall fingeravtrykk"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan ikke legge til flere fingeravtrykk"</string>
@@ -2353,7 +2389,8 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tilgjengelighet-knapp og bevegelse"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Bruk av Tilgjengelighet-knappen. Bevegelsen er ikke tilgjengelig med navigasjon med tre knapper."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Rask tilgang til tilgjengelighetsfunksjoner"</string>
-    <string name="accessibility_button_gesture_description" msgid="2717632658372117656">"Få rask tilgang til tilgjengelighetsfunksjoner fra hvilken som helst skjerm. \n\nFor å komme i gang, gå til tilgjengelighetsinnstillingene og velg en funksjon. Trykk på snarveien og velg Tilgjengelighet-knappen eller -bevegelsen."</string>
+    <!-- no translation found for accessibility_button_gesture_description (2516420653060025670) -->
+    <skip />
     <string name="accessibility_button_description" msgid="7372405202698400339">"Få rask tilgang til tilgjengelighetsfunksjoner fra hvilken som helst skjerm. \n\nFor å komme i gang, gå til tilgjengelighetsinnstillingene og velg en funksjon. Trykk på snarveien og velg Tilgjengelighet-knappen."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Bruk knapp eller bevegelse"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Posisjon"</string>
@@ -2961,7 +2998,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"Brukersertifikat for VPN/app"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi-sertifikat"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Dataene dine kommer ikke til å være private"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"CA-sertifikater brukes av nettsteder, apper og VPN-er for kryptering. Installer bare CA-sertifikater fra organisasjoner du stoler på. \n\n Hvis du installerer et CA-sertifikat, kan sertifikateieren få tilgang til dataene dine, for eksempel passord eller kredittkortinformasjon, fra nettsteder du besøker, eller apper du bruker – selv om dataene dine er kryptert."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ikke installer"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installer likevel"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Sertifikatet ble ikke installert"</string>
@@ -3911,7 +3949,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vil du gi tilgang til varsler for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Forbedrede varsler erstatter tilpassede Android-varsler i Android 12. Denne funksjonen viser foreslåtte handlinger og svar og organiserer varslene dine. \n\nForbedrede varsler har tilgang til varselinnhold, inkludert personopplysninger som kontaktnavn og meldinger. Funksjonen kan også avvise og svare på varsler, for eksempel svare på anrop og kontrollere «Ikke forstyrr»."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vil du gi tilgang til varsler for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan lese alle varsler, inkludert personopplysninger som kontaktnavn og tekstinnholdet i meldinger du mottar. Appen kan også avvise varsler eller bruke knapper i varsler, inkludert å svare på telefonanrop. \n\nDette gir også appen muligheten til å slå Ikke forstyrr av eller på samt endre tilknyttede innstillinger."</string>
+    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan lese alle varsler, inkludert personopplysninger som kontaktnavn og tekstinnholdet i meldinger du mottar. Appen kan også avvise varsler eller bruke knapper i varsler, blant annet svare på telefonanrop. \n\nDette gir også appen muligheten til å slå av eller på Ikke forstyrr og endre tilknyttede innstillinger."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Hvis du slår av varseltilgang for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kan tilgang til Ikke forstyrr også bli slått av."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Slå av"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Avbryt"</string>
@@ -4397,7 +4435,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Filoverføring"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Overfør filer til en annen enhet"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Omkod eksporterte medier"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Overføring av bilder eller filer hvis MTP ikke er støttet (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-internettdeling"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4835,9 +4876,9 @@
     <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 sekunder"</string>
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 sekunder"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"tilgjengelighet"</string>
-    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Sveip ned for å"</string>
+    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Sveip ned-handling"</string>
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"For å bruke enhåndsmodus, sveip ned fra den nederste kanten av skjermen. Du må sørge for at navigasjon med bevegelser er slått på i innstillingene for systemnavigasjon for å bruke denne funksjonen."</string>
-    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Trekk skjermen slik at den blir tilgjengelig"</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Trekk skjermen ned så den blir tilgjengelig"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Toppen av skjermen flyttes, slik at den blir tilgjengelig med tommelen."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Vis varsler"</string>
     <string name="one_handed_action_show_notification_summary" msgid="114988229079950849">"Varsler og innstillinger vises."</string>
@@ -5098,7 +5139,7 @@
     <string name="battery_suggestion_title" product="default" msgid="4811554469047272537">"Forbedre telefonens batterilevetid"</string>
     <string name="battery_suggestion_summary" msgid="8186720080540016197"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"Forhindre ringing"</string>
-    <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"Trykk på knappene av/på og volum opp samtidig for å"</string>
+    <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"Trykk på av/på og volum opp samtidig for å"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"Snarvei for å forhindre ringing"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrere"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Slå av lyden"</string>

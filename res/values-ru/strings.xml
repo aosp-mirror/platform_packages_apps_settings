@@ -72,7 +72,7 @@
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Заблокировать голосовой набор"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Предотвратить использование телефона Bluetooth, когда экран заблокирован"</string>
     <string name="bluetooth_devices" msgid="1063177983261608277">"Устройства Bluetooth"</string>
-    <string name="bluetooth_device_name" msgid="1294669733490268384">"Имя устройства"</string>
+    <string name="bluetooth_device_name" msgid="1294669733490268384">"Название устройства"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Настройки устройства"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Настройки профиля"</string>
     <string name="bluetooth_name_not_set" msgid="4654357917928126208">"Без настройки имени, использовать имя аккаунта"</string>
@@ -311,8 +311,8 @@
       <item quantity="other">Включено (доступ к данным о местоположении есть у <xliff:g id="COUNT_1">%1$d</xliff:g> приложения)</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Загрузка…"</string>
-    <string name="location_settings_footer_general" msgid="1040507068701188821">"Приложения с доступом к устройствам поблизости способны определять относительное позиционирование подключенных устройств."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Доступ к данным о местоположении для приложений и сервисов отключен. Данные о местоположении вашего устройства могут быть отправлены спасателям, если вы звоните по номеру экстренной службы или отправляете на него сообщение."</string>
+    <string name="location_settings_footer_general" msgid="1040507068701188821">"Приложения с доступом к устройствам поблизости могут определять относительное местоположение подключенных устройств."</string>
+    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Доступ к данным о местоположении для приложений и сервисов отключен. Если вы позвоните по номеру экстренной службы или отправите на него сообщение, данные о местоположении вашего устройства могут быть переданы спасателям."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Подробнее о настройках местоположения…"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Аккаунты"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Безопасность"</string>
@@ -388,7 +388,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Удалите модель лица и настройте фейсконтроль ещё раз.\n\nМодель лица будет удалена навсегда.\n\nПосле этого для разблокировки телефона и аутентификации в приложениях нужно будет вводить PIN-код, пароль или графический ключ."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Удалите модель лица и настройте фейсконтроль ещё раз.\n\nМодель лица будет удалена навсегда.\n\nПосле этого для разблокировки телефона и аутентификации в приложениях нужно будет использовать отпечаток пальца, PIN-код, пароль или графический ключ."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Функции фейсконтроля"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Условия фейсконтроля"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Если фейсконтроль включен"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Глаза должны быть открыты"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Для разблокировки нужно, чтобы ваши глаза были открыты"</string>
@@ -505,42 +504,78 @@
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Не сейчас"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Не настраивать доступ по отпечаткам?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Для разблокировки телефона вы выбрали сканирование отпечатка пальца. Настройка займет около минуты. Если вы пропустите ее сейчас, вам все равно придется сделать это позже."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"PIN-код защитит данные на планшете в случае его потери или кражи."</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Графический ключ защитит данные на планшете в случае его потери или кражи."</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Пароль защитит данные на планшете в случае его потери или кражи."</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"PIN-код защитит данные на устройстве в случае его потери или кражи."</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Графический ключ защитит данные на устройстве в случае его потери или кражи."</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Пароль защитит данные на устройстве в случае его потери или кражи."</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"PIN-код защитит данные на телефоне в случае его потери или кражи."</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Графический ключ защитит данные на телефоне в случае его потери или кражи."</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Пароль защитит данные на телефоне в случае его потери или кражи."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Чтобы настроить разблокировку по отпечатку пальца, нужен PIN-код.\n\nОн защитит данные в случае потери или кражи планшета."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Чтобы настроить разблокировку по отпечатку пальца, нужен графический ключ.\n\nОн защитит данные в случае потери или кражи планшета."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Чтобы настроить разблокировку по отпечатку пальца, нужен пароль.\n\nОн защитит данные в случае потери или кражи планшета."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Чтобы настроить разблокировку по отпечатку пальца, нужен PIN-код.\n\nОн защитит данные в случае потери или кражи устройства."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Чтобы настроить разблокировку по отпечатку пальца, нужен графический ключ.\n\nОн защитит данные в случае потери или кражи устройства."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Чтобы настроить разблокировку по отпечатку пальца, нужен пароль.\n\nОн защитит данные в случае потери или кражи устройства."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Чтобы настроить разблокировку по отпечатку пальца, нужен PIN-код.\n\nОн защитит данные в случае потери или кражи телефона."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Чтобы настроить разблокировку по отпечатку пальца, нужен графический ключ.\n\nОн защитит данные в случае потери или кражи телефона."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Чтобы настроить разблокировку по отпечатку пальца, нужен пароль.\n\nОн защитит данные в случае потери или кражи телефона."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Чтобы настроить фейсконтроль, нужен PIN-код.\n\nОн защитит данные в случае потери или кражи планшета."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Чтобы настроить фейсконтроль, нужен графический ключ.\n\nОн защитит данные в случае потери или кражи планшета."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Чтобы настроить фейсконтроль, нужен пароль.\n\nОн защитит данные в случае потери или кражи планшета."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Чтобы настроить фейсконтроль, нужен PIN-код.\n\nОн защитит данные в случае потери или кражи устройства."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Чтобы настроить фейсконтроль, нужен графический ключ.\n\nОн защитит данные в случае потери или кражи устройства."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Чтобы настроить фейсконтроль, нужен пароль.\n\nОн защитит данные в случае потери или кражи устройства."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Чтобы настроить фейсконтроль, нужен PIN-код.\n\nОн защитит данные в случае потери или кражи телефона."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Чтобы настроить фейсконтроль, нужен графический ключ.\n\nОн защитит данные в случае потери или кражи телефона."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Чтобы настроить фейсконтроль, нужен пароль.\n\nОн защитит данные в случае потери или кражи телефона."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Чтобы настроить фейсконтроль и разблокировку по отпечатку пальца, нужен PIN-код.\n\nОн защитит данные в случае потери или кражи планшета."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Чтобы настроить фейсконтроль и разблокировку по отпечатку пальца, нужен графический ключ.\n\nОн защитит данные в случае потери или кражи планшета."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Чтобы настроить фейсконтроль и разблокировку по отпечатку пальца, нужен пароль.\n\nОн защитит данные в случае потери или кражи планшета."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Чтобы настроить фейсконтроль и разблокировку по отпечатку пальца, нужен PIN-код.\n\nОн защитит данные в случае потери или кражи устройства."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Чтобы настроить фейсконтроль и разблокировку по отпечатку пальца, нужен графический ключ.\n\nОн защитит данные в случае потери или кражи устройства."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Чтобы настроить фейсконтроль и разблокировку по отпечатку пальца, нужен пароль.\n\nОн защитит данные в случае потери или кражи устройства."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Чтобы настроить фейсконтроль и разблокировку по отпечатку пальца, нужен PIN-код.\n\nОн защитит данные в случае потери или кражи телефона."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Чтобы настроить фейсконтроль и разблокировку по отпечатку пальца, нужен графический ключ.\n\nОн защитит данные в случае потери или кражи телефона."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Чтобы настроить фейсконтроль и разблокировку по отпечатку пальца, нужен пароль.\n\nОн защитит данные в случае потери или кражи телефона."</string>
+    <!-- no translation found for lock_screen_pin_skip_message (4938798234214623521) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (4359575348578515037) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (5420451292764062637) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (8841426051550671169) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (6296702954920045923) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (9186075211441188900) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_message (4301690296689572747) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_message (7387967847446084260) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_message (6415788841227543063) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (2350062798056164403) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (222574071926747300) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (7780323831330724644) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (7421096089691939451) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (6458468083711413617) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (1632249532665518954) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_fingerprint_message (3101384462491132314) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_fingerprint_message (382422778886929469) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_fingerprint_message (5515199168425229243) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2454239555320628731) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (4354138725903415816) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (719339718267952196) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (3729243407606881750) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (6966329744346503807) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (3020827854443297996) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_face_message (2155678903559865476) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_face_message (473271568005748452) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_face_message (4319934862372116788) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (647987565338402155) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (5293609077890072841) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (2660359318928684172) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (1278795063897397815) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8766169819759371801) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (8611216039321306045) -->
+    <skip />
+    <!-- no translation found for lock_screen_pin_skip_biometrics_message (8796878521409329051) -->
+    <skip />
+    <!-- no translation found for lock_screen_pattern_skip_biometrics_message (8423700958936341596) -->
+    <skip />
+    <!-- no translation found for lock_screen_password_skip_biometrics_message (5411689248299854172) -->
+    <skip />
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Не устанавливать PIN-код?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Пропустить настройку PIN-кода и фейсконтроля?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Пропустить настройку PIN-кода и отпечатка пальца?"</string>
@@ -565,7 +600,8 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Добавьте отпечаток пальца, чтобы только вы смогли разблокировать телефон, совершать покупки и открывать приложения. "<annotation id="url">"Подробнее…"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Настройка блокировки экрана отключена. За дополнительной информацией обращайтесь к администратору. "<annotation id="admin_details">"Подробнее…"</annotation>\n\n"Вы по-прежнему можете совершать покупки и открывать приложения с помощью отпечатка пальца. "<annotation id="url">"Подробнее…"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Поднимите палец и снова приложите его к сканеру."</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="7383361161604438407">"Откалибруйте сканер отпечатков пальцев."</string>
+    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Максимальное количество отпечатков пальца, которые можно добавить: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Вы уже добавили максимальное количество отпечатков"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Больше нельзя добавить отпечатки пальцев"</string>
@@ -1892,11 +1928,11 @@
       <item quantity="many"> Приложения с доступом к данным о местоположении: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
       <item quantity="other"> Приложения с доступом к данным о местоположении: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> из <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
     </plurals>
-    <string name="location_category_recent_location_access" msgid="2558063524482178146">"Недавний доступ"</string>
+    <string name="location_category_recent_location_access" msgid="2558063524482178146">"Доступ за последнее время"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Показать все"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Подробнее"</string>
     <string name="location_no_recent_apps" msgid="6814206631456177033">"В последнее время приложения не запрашивали данные о местоположении."</string>
-    <string name="location_no_recent_accesses" msgid="6031735777805464247">"Ни одно приложение ещё не получало доступ к местоположению."</string>
+    <string name="location_no_recent_accesses" msgid="6031735777805464247">"В последнее время приложения не получали доступ к  данным о местоположении."</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Высокий расход заряда батареи"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Низкий расход заряда батареи"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Поиск сетей Wi‑Fi"</string>
@@ -2401,7 +2437,8 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Жест и кнопка спец. возможностей"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Используется кнопка специальных возможностей. При навигации с помощью трех кнопок жест недоступен."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Быстрый доступ к специальным возможностям"</string>
-    <string name="accessibility_button_gesture_description" msgid="2717632658372117656">"Получайте быстрый доступ к специальным возможностям из любого окна.\n\nОткройте настройки специальных возможностей и выберите нужную функцию. В качестве способа быстрого включения выберите кнопку специальных возможностей или жест."</string>
+    <!-- no translation found for accessibility_button_gesture_description (2516420653060025670) -->
+    <skip />
     <string name="accessibility_button_description" msgid="7372405202698400339">"Быстрый доступ к специальным возможностям из любого окна. \n\nОткройте настройки специальных возможностей и выберите нужную функцию. В качестве способа быстрого включения выберите кнопку специальных возможностей."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Использовать кнопку или жест"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Расположение"</string>
@@ -3037,7 +3074,8 @@
     <string name="user_certificate" msgid="6897024598058566466">"Сертификат пользователя приложений и VPN"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Сертификат Wi-Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Конфиденциальность ваших данных будет нарушена"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Сайты, приложения и VPN используют для шифрования сертификаты ЦС. Устанавливайте сертификаты ЦС только тех организаций, которым вы доверяете. \n\nВладелец установленного сертификата может получить доступ к вашим данным, введенным на сайтах и в приложениях (например, паролям и реквизитам банковских карт), даже если эти сведения зашифрованы."</string>
+    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Не устанавливать"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Все равно установить"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Сертификат не установлен."</string>
@@ -3454,7 +3492,7 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Отменить ограничения"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Изменить PIN-код"</string>
     <string name="help_label" msgid="2896538416436125883">"Справка/отзыв"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Справочные статьи, по телефону и в чате"</string>
+    <string name="support_summary" msgid="6137136608018134563">"Справочные статьи, поддержка по телефону и в чате"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Аккаунт для контента"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Документ с фото"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Серьезные угрозы"</string>
@@ -4336,7 +4374,7 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Поддерживаемые ссылки"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Другие настройки по умолчанию"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Добавить ссылку"</string>
-    <string name="app_launch_footer" msgid="4521865035105622557">"Приложение может проверять безопасность ссылок и затем автоматически открывать их."</string>
+    <string name="app_launch_footer" msgid="4521865035105622557">"Приложение может проверять и автоматически открывать ссылки."</string>
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> проверенная ссылка</item>
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> проверенные ссылки</item>
@@ -4531,7 +4569,10 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Передача файлов"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Передача файлов на другое устройство"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"Режим PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Перекодирование экспортированного медиаконтента"</string>
+    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
+    <skip />
+    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Передача фотографий или файлов, если МТР не поддерживается (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-модем"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4670,7 +4711,7 @@
     <string name="notification_summary_none" msgid="9179312319023988089">"Включены для всех приложений"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Установлено приложений: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="6034002063446955592">"Установлено 24 приложения"</string>
-    <string name="storage_summary" msgid="5903562203143572768">"Используется <xliff:g id="PERCENTAGE">%1$s</xliff:g>, свободно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
+    <string name="storage_summary" msgid="5903562203143572768">"Занято <xliff:g id="PERCENTAGE">%1$s</xliff:g>, свободно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Внутренний накопитель: использовано <xliff:g id="PERCENTAGE">%1$s</xliff:g>, свободно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="5526061030874717172">"Устройство переходит в спящий режим после <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездействия"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Тёмная тема, размер шрифта, яркость"</string>
@@ -5592,7 +5633,7 @@
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Скрывать проигрыватель"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Показывать проигрыватель"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"Медиа"</string>
-    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Будет включен модуль Bluetooth"</string>
+    <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Будет включен Bluetooth"</string>
     <string name="bluetooth_setting_on" msgid="4808458394436224124">"Включено"</string>
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Отключено"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Интернет"</string>
