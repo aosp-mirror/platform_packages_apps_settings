@@ -556,8 +556,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Jy kan jou vingerafdruk nie net gebruik om jou foon te ontsluit nie, maar ook om aankope en programtoegang te magtig. "<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Die skermslotopsie is gedeaktiveer. Kontak jou organisasie se administrateur om meer te wete te kom. "<annotation id="admin_details">"Nog besonderhede"</annotation>\n\n"Jy kan steeds jou vingerafdruk gebruik om aankope en programtoegang te magtig. "<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lig vinger op en raak sensor dan weer"</string>
-    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
-    <skip />
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Kan nie vingerafdruksensor gebruik nie. Besoek \'n verskaffer wat herstelwerk doen"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Jy kan tot <xliff:g id="COUNT">%d</xliff:g> vingerafdrukke byvoeg"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Jy het die maksimum aantal vingerafdrukke bygevoeg"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan nie nog vingerafdrukke byvoeg nie"</string>
@@ -1917,6 +1916,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Stel \'n werk-PIN"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Stel \'n patroon"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Stel \'n werkpatroon"</string>
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Stel \'n wagwoord om die foon te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Stel \'n PIN om die foon te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Stel \'n patroon om die foon te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Stel \'n wagwoord om die tablet te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Stel \'n PIN om die tablet te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Stel \'n patroon om die tablet te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Stel \'n wagwoord om die toestel te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Stel \'n PIN om die toestel te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Stel \'n patroon om die toestel te ontsluit vir bykomende sekuriteit"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Stel wagwoord vir vingerafdruk"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Stel patroon vir vingerafdruk"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Stel PIN vir sekuriteit"</string>
@@ -1939,9 +1947,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Stel wagwoord om Gesigslot te gebruik"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Stel patroon om Gesigslot te gebruik"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Stel PIN om Gesigslot te gebruik"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"Stel wagwoord om biometrie te gebruik"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"Stel patroon om biometrie te gebruik"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"Stel PIN om biometrie te gebruik"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Stel \'n wagwoord om gesig of vingerafdruk te gebruik"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Stel \'n patroon om gesig of vingerafdruk te gebruik"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Stel \'n PIN om gesig of vingerafdruk te gebruik"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Jou wagwoord vergeet?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Jou patroon vergeet?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Jou PIN vergeet?"</string>
@@ -4052,7 +4060,7 @@
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Skedule skakel af wanneer wekker lui"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Moenie Steur Nie-gedrag"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Gebruik verstekinstellings"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Skep gepasmaakte instellings vir hierdie skedule"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Skep gepasmaakte instellings vir dié skedule"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Vir \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -4396,10 +4404,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Lêeroordrag"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Dra lêers na \'n ander toestel oor"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
-    <skip />
-    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
-    <skip />
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Skakel video\'s om na AVC"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"Video\'s sal op meer mediaspelers speel, maar die gehalte kan swakker wees"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Dra foto\'s of lêers oor as MTP nie gesteun word nie (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-verbinding"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>

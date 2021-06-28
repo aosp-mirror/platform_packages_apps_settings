@@ -556,8 +556,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"ስልክዎን ከማስከፈት በተጨማሪም እንዲሁም ግዢዎችን እና የመተግበሪያ መዳረሻን ለመፍቀድ የጣት አሻራዎንም መጠቀም ይችላሉ። "<annotation id="url">"ተጨማሪ ለመረዳት"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" የማያ ገጽ ቁልፍ አማራጩ ተሰናክሏል። ተጨማሪ ለማወቅ የድርጅትዎን አስተዳዳሪ ያነጋግሩ። "<annotation id="admin_details">"ተጨማሪ ዝርዝሮች"</annotation>\n\n"ለግዢዎች እና የመተግበሪያ መዳረሻ ፈቃድ ለመስጠት አሁንም የጣት አሻራዎን መጠቀም ይችላሉ። "<annotation id="url">"የበለጠ ለመረዳት"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ጣትዎን ያንሱ፣ ከዚያ በድጋሚ ዳሳሽ ይንኩ"</string>
-    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
-    <skip />
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"የጣት አሻራ ዳሳሽን መጠቀም አይቻልም። የጥገና አገልግሎት ሰጪን ይጎብኙ"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"እስከ <xliff:g id="COUNT">%d</xliff:g> የሚደርሱ የጣት አሻራዎችን ማከል ይችላሉ"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"የሚፈቀደውን ከፍተኛ የጣት አሻራ ብዛት አክለዋል"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"ተጨማሪ የጣት አሻራዎችን ማከል አይቻልም"</string>
@@ -1917,6 +1916,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"የሥራ ፒን ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"ስርዓተ-ጥለት ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"የሥራ ስርዓተ-ጥለት ያቀናብሩ"</string>
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"ለተጨማሪ ደህንነት ሲባል ስልኩን ለመክፈት የይለፍ ቃል ያቀናብሩ"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"ለተጨማሪ ደህንነት ሲባል ስልኩን ለመክፈት ፒን ያቀናብሩ"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"ለተጨማሪ ደህንነት ሲባል ስልኩን ለመክፈት ስርዓተ ጥለት ያቀናብሩ"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"ለተጨማሪ ደህንነት ሲባል ጡባዊውን ለመክፈት የይለፍ ቃል ያቀናብሩ"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"ለተጨማሪ ደህንነት ሲባል ጡባዊውን ለመክፈት ፒን ያቀናብሩ"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"ለተጨማሪ ደህንነት ሲባል ጡባዊውን ለመክፈት ስርዓተ ጥለት ያቀናብሩ"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"ለተጨማሪ ደህንነት ሲባል መሣሪያውን ለመክፈት የይለፍ ቃል ያቀናብሩ"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"ለተጨማሪ ደህንነት ሲባል መሣሪያውን ለመክፈት ፒን ያቀናብሩ"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"ለተጨማሪ ደህንነት ሲባል መሣሪያውን ለመክፈት ስርዓተ ጥለት ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"የጣት አሻራን ለመጠቀም የይለፍ ቃል ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"የጣት አሻራን ለመጠቀም፣ ሥርዓተ ጥለትን ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"ለደህንነት ሲባል ፒን ያቀናብሩ"</string>
@@ -1939,9 +1947,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"በመልክ መክፈትን ለመጠቀም የይለፍ ቃልን ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"በመልክ መክፈትን ለመጠቀም ስርዓተ-ጥለትን ያቀናብሩ"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"በመልክ መክፈትን ለመጠቀም ፒን ያቀናብሩ"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"ባዮሜትሪክስን ለመጠቀም የይለፍ ቃል ያቀናብሩ"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"ባዮሜትሪክስን ለመጠቀም ሥርዓተ ጥለት ያቀናብሩ"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"ባዮሜትሪክስን ለመጠቀም ፒን ያቀናብሩ"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"መልክ ወይም የጣት አሻራ ለመጠቀም የይለፍ ቃል ያቀናብሩ"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"መልክ ወይም የጣት አሻራ ለመጠቀም ስርዓተ ጥለት ያቀናብሩ"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"መልክ ወይም የጣት አሻራ ለመጠቀም ፒን ያቀናብሩ"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"የእርስዎን የይለፍ ቃል ረሱት?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"የእርስዎን ስርዓተ-ጥለት ረሱት?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"የእርስዎን ፒን ረሱት?"</string>
@@ -4396,10 +4404,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"ፋይልን ማስተላለፍ"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"ወደ ሌላ መሣሪያ ፋይሎችን ያስተላልፉ"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
-    <skip />
-    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
-    <skip />
+    <string name="usb_transcode_files" msgid="2441954752105119109">"ቪዲዮዎችን ወደ AVC ይቀይሩ"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"ቪዲዮዎች በተጨማሪ Media Player ላይ ይጫወታሉ፣ ነገር ግን ጥራቱ ሊቀንስ ይችላል"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"MTP የማይደገፍ ከሆነ ፎቶዎችን ወይም ፋይሎችን ማዛወር (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"ዩኤስቢን እንደ ሞደም መሰካት"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
