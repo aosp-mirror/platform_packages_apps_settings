@@ -25,6 +25,7 @@ import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -43,6 +44,8 @@ public class WifiScanModeActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addSystemFlags(
+                WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         Intent intent = getIntent();
         if (savedInstanceState == null) {
             if (intent != null && WifiManager.ACTION_REQUEST_SCAN_ALWAYS_AVAILABLE

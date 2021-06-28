@@ -101,8 +101,8 @@
   <string-array name="eap_ocsp_type">
     <item msgid="7202884222741437608">"عدم التحقق"</item>
     <item msgid="5703177653586269306">"طلب حالة الشهادة"</item>
-    <item msgid="326388247868439528">"حالة الشهادة مطلوبة"</item>
-    <item msgid="1090956283885790552">"جميع حالات الشهادات غير الموثوقة مطلوبة"</item>
+    <item msgid="326388247868439528">"يتم طلب حالة الشهادة."</item>
+    <item msgid="1090956283885790552">"يتم طلب جميع حالات الشهادات غير الموثوقة."</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"زر الدفع"</item>
@@ -176,7 +176,7 @@
   <string-array name="wifi_proxy_settings">
     <item msgid="4669222334822978847">"بلا خادم وكيل"</item>
     <item msgid="6242198071587397280">"يدويًا"</item>
-    <item msgid="464383874780058242">"إعداد الخادم الوكيل تلقائيًا"</item>
+    <item msgid="464383874780058242">"إعداد الوكيل تلقائيًا"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="2900892411844440682">"بدون"</item>
@@ -288,7 +288,7 @@
     <item msgid="7621394050624063528">"موقع وهمي"</item>
     <item msgid="37519917674959757">"قراءة مساحة التخزين"</item>
     <item msgid="3868809525697401379">"كتابة مساحة التخزين"</item>
-    <item msgid="2504191192460059817">"تفعيل الشاشة"</item>
+    <item msgid="2504191192460059817">"تشغيل الشاشة"</item>
     <item msgid="7905819538788103556">"الحصول على الحسابات"</item>
     <item msgid="1675025662248079254">"التشغيل في الخلفية"</item>
     <item msgid="2553974920157061225">"مستوى صوت \"سهولة الاستخدام\""</item>
@@ -355,7 +355,7 @@
     <item msgid="2363460595607829243">"موقع وهمي"</item>
     <item msgid="3778165903878569143">"قراءة مساحة التخزين"</item>
     <item msgid="555939881912035315">"كتابة مساحة التخزين"</item>
-    <item msgid="4281352581602735717">"تفعيل الشاشة"</item>
+    <item msgid="4281352581602735717">"تشغيل الشاشة"</item>
     <item msgid="346122795998225472">"الحصول على الحسابات"</item>
     <item msgid="3756073389408535680">"التشغيل في الخلفية"</item>
     <item msgid="2114661179947426734">"مستوى صوت \"سهولة الاستخدام\""</item>
@@ -379,16 +379,9 @@
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="923916134548435468">"صغير جدًا"</item>
     <item msgid="5738147437573674872">"صغير"</item>
-    <item msgid="3942006483573485941">"تلقائي"</item>
+    <item msgid="8111006422178051129">"عادي"</item>
     <item msgid="824386705928670045">"كبير"</item>
     <item msgid="2790561781512874585">"كبير جدًا"</item>
-  </string-array>
-  <string-array name="captioning_font_size_selector_summaries">
-    <item msgid="5700290209695344464">"حجم نص صغير جدًا"</item>
-    <item msgid="4400431625665186389">"حجم نص صغير"</item>
-    <item msgid="2340994108094808362">"حجم النص التلقائي"</item>
-    <item msgid="6446684863055375405">"حجم نص كبير"</item>
-    <item msgid="6838252010935384975">"حجم نص كبير جدًا"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
     <item msgid="70686029249840227">"التلقائية"</item>
@@ -405,7 +398,7 @@
     <item msgid="3237802033158517495">"٪۱۰۰"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="3880932435325583041">"تم ضبط الإعداد من جانب التطبيق."</item>
+    <item msgid="4180191497452407161">"استخدام الإعدادات التلقائية للتطبيق"</item>
     <item msgid="8719204526359229387">"أبيض في أسود"</item>
     <item msgid="5410164687403735103">"أسود في أبيض"</item>
     <item msgid="1119043472912497241">"أصفر في أسود"</item>
@@ -478,9 +471,9 @@
     <item msgid="6618900408138432102">"أحمر"</item>
   </string-array>
   <string-array name="automatic_storage_management_days">
-    <item msgid="8896644025110620477">"تم إنشاؤها قبل أكثر من 30 يومًا."</item>
-    <item msgid="9083927335632626281">"تم إنشاؤها قبل أكثر من 60 يومًا."</item>
-    <item msgid="4146561207729203822">"تم إنشاؤها قبل أكثر من 90 يومًا."</item>
+    <item msgid="8896644025110620477">"تم إنشاؤها منذ أكثر من 30 يومًا"</item>
+    <item msgid="9083927335632626281">"تم إنشاؤها منذ أكثر من 60 يومًا"</item>
+    <item msgid="4146561207729203822">"تم إنشاؤها منذ أكثر من 90 يومًا"</item>
   </string-array>
     <!-- no translation found for swipe_direction_titles:0 (9039866451038081694) -->
     <!-- no translation found for swipe_direction_titles:1 (3175804938330683021) -->
@@ -525,7 +518,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="1091258946200124345">"عام"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE / WCDMA"</item>
     <item msgid="7723670142495874534">"‏TDSCDMA فقط"</item>
@@ -542,7 +535,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="8908263949185004366">"عام"</item>
+    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>
@@ -553,6 +546,11 @@
   <string-array name="cdma_subscription_choices">
     <item msgid="6242790734457941014">"‏بطاقة RUIM/شريحة SIM"</item>
     <item msgid="8980776035119085660">"NV"</item>
+  </string-array>
+  <string-array name="preferred_network_mode_choices_world_mode">
+    <item msgid="8219021147046131771">"عام"</item>
+    <item msgid="5291208617720023560">"LTE / CDMA"</item>
+    <item msgid="6742002477816975742">"LTE / GSM / UMTS"</item>
   </string-array>
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (1841976293698111057) -->
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:1 (6822859933189908133) -->
