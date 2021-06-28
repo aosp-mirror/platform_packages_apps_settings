@@ -33,6 +33,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.testutils.shadow.ShadowNfcAdapter;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = PaymentSettingsTest.ShadowPaymentBackend.class)
+@Config(shadows = {PaymentSettingsTest.ShadowPaymentBackend.class, ShadowNfcAdapter.class})
 public class PaymentSettingsTest {
 
     static final String PAYMENT_KEY = "nfc_payment";

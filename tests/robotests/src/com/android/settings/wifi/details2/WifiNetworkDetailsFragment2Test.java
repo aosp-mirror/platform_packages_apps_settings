@@ -24,9 +24,9 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.view.Menu;
@@ -36,12 +36,17 @@ import android.view.MenuItem;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.wifitrackerlib.NetworkDetailsTracker;
+import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -52,11 +57,22 @@ public class WifiNetworkDetailsFragment2Test {
 
     final String TEST_PREFERENCE_KEY = "TEST_PREFERENCE_KEY";
 
+    @Mock
+    WifiEntry mWifiEntry;
+    @Mock
+    NetworkDetailsTracker mNetworkDetailsTracker;
+    @Mock
+    Menu mMenu;
     private WifiNetworkDetailsFragment2 mFragment;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        doReturn(mWifiEntry).when(mNetworkDetailsTracker).getWifiEntry();
+        doReturn(true).when(mWifiEntry).isSaved();
+
         mFragment = new WifiNetworkDetailsFragment2();
+        mFragment.mNetworkDetailsTracker = mNetworkDetailsTracker;
     }
 
     @Test
@@ -77,13 +93,21 @@ public class WifiNetworkDetailsFragment2Test {
 
     @Test
     public void onCreateOptionsMenu_shouldSetCorrectIcon() {
-        final Menu menu = mock(Menu.class);
         final MenuItem menuItem = mock(MenuItem.class);
-        doReturn(menuItem).when(menu).add(anyInt(), eq(Menu.FIRST), anyInt(), anyInt());
+        doReturn(menuItem).when(mMenu).add(anyInt(), eq(Menu.FIRST), anyInt(), anyInt());
 
-        mFragment.onCreateOptionsMenu(menu, mock(MenuInflater.class));
+        mFragment.onCreateOptionsMenu(mMenu, mock(MenuInflater.class));
 
         verify(menuItem).setIcon(com.android.internal.R.drawable.ic_mode_edit);
+    }
+
+    @Test
+    public void onCreateOptionsMenu_isNotSavedNetwork_shouldNotAddEditMenu() {
+        doReturn(false).when(mWifiEntry).isSaved();
+
+        mFragment.onCreateOptionsMenu(mMenu, mock(MenuInflater.class));
+
+        verify(mMenu, never()).add(anyInt(), anyInt(), anyInt(), eq(R.string.wifi_modify));
     }
 
     @Test
