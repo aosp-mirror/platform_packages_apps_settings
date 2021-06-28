@@ -22,16 +22,24 @@ import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -80,6 +88,9 @@ public class ScreenTimeoutSettingsTest {
     @Mock
     Preference mDisableOptionsPreference;
 
+    @Mock
+    private PackageManager mPackageManager;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -89,6 +100,15 @@ public class ScreenTimeoutSettingsTest {
         mSettings.mContext = mContext;
         mContentResolver = mContext.getContentResolver();
         mResources = spy(mContext.getResources());
+
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        when(mPackageManager.getAttentionServicePackageName()).thenReturn("some.package");
+        when(mPackageManager.checkPermission(any(), any())).thenReturn(
+                PackageManager.PERMISSION_GRANTED);
+        final ResolveInfo attentionServiceResolveInfo = new ResolveInfo();
+        attentionServiceResolveInfo.serviceInfo = new ServiceInfo();
+        when(mPackageManager.resolveService(isA(Intent.class), anyInt())).thenReturn(
+                attentionServiceResolveInfo);
 
         doReturn(TIMEOUT_ENTRIES).when(mResources).getStringArray(R.array.screen_timeout_entries);
         doReturn(TIMEOUT_VALUES).when(mResources).getStringArray(R.array.screen_timeout_entries);
@@ -143,6 +163,13 @@ public class ScreenTimeoutSettingsTest {
                 com.android.internal.R.bool.config_adaptive_sleep_available);
 
         mSettings.updateCandidates();
+
+        verify(mSettings.mAdaptiveSleepController, never()).addToScreen(mPreferenceScreen);
+    }
+
+    @Test
+    public void updateCandidates_AttentionServiceNotInstalled_doNoShowAdaptiveSleepPreference() {
+        when(mPackageManager.resolveService(isA(Intent.class), anyInt())).thenReturn(null);
 
         verify(mSettings.mAdaptiveSleepController, never()).addToScreen(mPreferenceScreen);
     }

@@ -32,8 +32,7 @@ import android.graphics.drawable.AnimatedImageDrawable;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.preference.PreferenceViewHolder;
@@ -45,6 +44,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
@@ -57,9 +57,11 @@ import java.io.InputStream;
 public class AnimatedImagePreferenceTest {
     private final Context mContext = RuntimeEnvironment.application;
     private Uri mImageUri;
-    private View mRootView;
     private PreferenceViewHolder mViewHolder;
     private AnimatedImagePreference mAnimatedImagePreference;
+
+    @Mock
+    private ViewGroup mRootView;
 
     @Spy
     private ImageView mImageView;
@@ -68,9 +70,8 @@ public class AnimatedImagePreferenceTest {
     public void init() {
         MockitoAnnotations.initMocks(this);
 
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        mRootView = spy(inflater.inflate(R.layout.preference_animated_image, /* root= */ null));
         mViewHolder = spy(PreferenceViewHolder.createInstanceForTests(mRootView));
+        doReturn(new LottieAnimationView(mContext)).when(mRootView).findViewById(R.id.lottie_view);
         mImageView = spy(new ImageView(mContext));
 
         mAnimatedImagePreference = new AnimatedImagePreference(mContext);

@@ -17,17 +17,14 @@ package com.android.settings.core;
 
 import android.annotation.LayoutRes;
 import android.app.ActivityManager;
-import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -40,10 +37,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
-import com.android.settings.Utils;
 import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
-import com.android.settingslib.transition.SettingsTransitionHelper;
 import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -53,7 +48,8 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 /** Base activity for Settings pages */
-public class SettingsBaseActivity extends FragmentActivity implements CategoryHandler {
+public class SettingsBaseActivity extends FragmentActivity implements CategoryHandler,
+        AppBarLayout.OnOffsetChangedListener {
 
     /**
      * What type of page transition should be apply.
@@ -63,11 +59,15 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
     private static final int DEFAULT_REQUEST = -1;
+    private static final int FULLY_EXPANDED_OFFSET = 0;
+    private static final int TOOLBAR_MAX_LINE_NUMBER = 2;
+    private static final String KEY_IS_TOOLBAR_COLLAPSED = "is_toolbar_collapsed";
 
     protected CategoryMixin mCategoryMixin;
     protected CollapsingToolbarLayout mCollapsingToolbarLayout;
     protected AppBarLayout mAppBarLayout;
     private Toolbar mToolbar;
+    private boolean mIsToolbarCollapsed;
 
     @Override
     public CategoryMixin getCategoryMixin() {
@@ -76,13 +76,6 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        if (Utils.isPageTransitionEnabled(this)) {
-            // Enable Activity transitions
-            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
-            SettingsTransitionHelper.applyForwardTransition(this);
-            SettingsTransitionHelper.applyBackwardTransition(this);
-        }
-
         super.onCreate(savedInstanceState);
         if (isLockTaskModePinned() && !isSettingsRunOnTop()) {
             Log.w(TAG, "Devices lock task mode pinned.");
@@ -112,6 +105,11 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             super.setContentView(R.layout.collapsing_toolbar_base_layout);
             mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
             mAppBarLayout = findViewById(R.id.app_bar);
+            mAppBarLayout.addOnOffsetChangedListener(this);
+            if (savedInstanceState != null) {
+                mIsToolbarCollapsed = savedInstanceState.getBoolean(KEY_IS_TOOLBAR_COLLAPSED);
+            }
+            initCollapsingToolbar();
             disableCollapsingToolbarLayoutScrollingBehavior();
         } else {
             super.setContentView(R.layout.settings_base_layout);
@@ -146,45 +144,15 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int id = item.getItemId();
-        if (id == android.R.id.home) {
-            // Make the up button behave the same as the back button.
-            finishAfterTransition();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void startActivityForResult(Intent intent, int requestCode,
             @androidx.annotation.Nullable Bundle options) {
         final int transitionType = getTransitionType(intent);
-        if (Utils.isPageTransitionEnabled(this) &&
-                transitionType == TransitionType.TRANSITION_SHARED_AXIS) {
-            super.startActivityForResult(intent, requestCode,
-                    createActivityOptionsBundleForTransition(options));
-            return;
-        }
-
         super.startActivityForResult(intent, requestCode, options);
         if (transitionType == TransitionType.TRANSITION_SLIDE) {
             overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
         } else if (transitionType == TransitionType.TRANSITION_FADE) {
             overridePendingTransition(android.R.anim.fade_in, R.anim.sud_stay);
         }
-    }
-
-    @Override
-    public void startActivityForResultAsUser(Intent intent, int requestCode,
-            UserHandle userHandle) {
-        if (!Utils.isPageTransitionEnabled(this) || requestCode == DEFAULT_REQUEST) {
-            super.startActivityForResultAsUser(intent, requestCode, userHandle);
-            return;
-        }
-        super.startActivityForResultAsUser(intent, requestCode,
-                createActivityOptionsBundleForTransition(null),
-                userHandle);
     }
 
     @Override
@@ -230,6 +198,23 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             mCollapsingToolbarLayout.setTitle(getText(titleId));
         } else {
             super.setTitle(titleId);
+        }
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
+        if (offset == FULLY_EXPANDED_OFFSET) {
+            mIsToolbarCollapsed = false;
+        } else {
+            mIsToolbarCollapsed = true;
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (isChangingConfigurations()) {
+            outState.putBoolean(KEY_IS_TOOLBAR_COLLAPSED, mIsToolbarCollapsed);
         }
     }
 
@@ -280,6 +265,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     }
 
     private void disableCollapsingToolbarLayoutScrollingBehavior() {
+        if (mAppBarLayout == null) {
+            return;
+        }
         final CoordinatorLayout.LayoutParams params =
                 (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         final AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
@@ -294,25 +282,41 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     }
 
     private int getTransitionType(Intent intent) {
-        return intent.getIntExtra(EXTRA_PAGE_TRANSITION_TYPE,
-                SettingsTransitionHelper.TransitionType.TRANSITION_SHARED_AXIS);
+        return intent.getIntExtra(EXTRA_PAGE_TRANSITION_TYPE, TransitionType.TRANSITION_NONE);
     }
 
-    @Nullable
-    private Bundle createActivityOptionsBundleForTransition(
-            @androidx.annotation.Nullable Bundle options) {
-        if (mToolbar == null) {
-            Log.w(TAG, "setActionBar(Toolbar) is not called. Cannot apply settings transition!");
-            return options;
+    @SuppressWarnings("RestrictTo")
+    private void initCollapsingToolbar() {
+        if (mCollapsingToolbarLayout == null || mAppBarLayout == null) {
+            return;
         }
-        final Bundle transitionOptions = ActivityOptions.makeSceneTransitionAnimation(this,
-                mToolbar, "shared_element_view").toBundle();
-        if (options == null) {
-            return transitionOptions;
-        }
-        final Bundle mergedOptions = new Bundle(options);
-        mergedOptions.putAll(transitionOptions);
-        return mergedOptions;
+        mCollapsingToolbarLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                    int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                v.removeOnLayoutChangeListener(this);
+                if (mIsToolbarCollapsed) {
+                    return;
+                }
+                final int count = mCollapsingToolbarLayout.getLineCount();
+                if (count > TOOLBAR_MAX_LINE_NUMBER) {
+                    final ViewGroup.LayoutParams lp = mCollapsingToolbarLayout.getLayoutParams();
+                    lp.height = getResources()
+                            .getDimensionPixelSize(R.dimen.toolbar_three_lines_height);
+                    mCollapsingToolbarLayout.setScrimVisibleHeightTrigger(
+                            getResources().getDimensionPixelSize(
+                                    R.dimen.scrim_visible_height_trigger_three_lines));
+                    mCollapsingToolbarLayout.setLayoutParams(lp);
+                } else if (count == TOOLBAR_MAX_LINE_NUMBER) {
+                    final ViewGroup.LayoutParams lp = mCollapsingToolbarLayout.getLayoutParams();
+                    lp.height = getResources()
+                            .getDimensionPixelSize(R.dimen.toolbar_two_lines_height);
+                    mCollapsingToolbarLayout.setScrimVisibleHeightTrigger(
+                            getResources().getDimensionPixelSize(
+                                    R.dimen.scrim_visible_height_trigger_two_lines));
+                    mCollapsingToolbarLayout.setLayoutParams(lp);
+                }
+            }
+        });
     }
-
 }
