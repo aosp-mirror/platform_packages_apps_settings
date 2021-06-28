@@ -49,7 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
-public class ActiveSubscriptionsListenerTest {
+public class ActiveSubsciptionsListenerTest {
     private static final int SUB_ID1 = 3;
     private static final int SUB_ID2 = 7;
 
@@ -68,7 +68,7 @@ public class ActiveSubscriptionsListenerTest {
     private SubscriptionManager mSubscriptionManager;
     private List<SubscriptionInfo> mActiveSubscriptions;
 
-    private ActiveSubscriptionsListenerImpl mListener;
+    private ActiveSubsciptionsListenerImpl mListener;
     private BroadcastReceiver mReceiver;
 
     @Before
@@ -83,7 +83,7 @@ public class ActiveSubscriptionsListenerTest {
         addMockSubscription(SUB_ID2);
         doReturn(mActiveSubscriptions).when(mSubscriptionManager).getActiveSubscriptionInfoList();
 
-        mListener = spy(new ActiveSubscriptionsListenerImpl(Looper.getMainLooper(), mContext));
+        mListener = spy(new ActiveSubsciptionsListenerImpl(Looper.getMainLooper(), mContext));
         doReturn(mSubscriptionManager).when(mListener).getSubscriptionManager();
         mReceiver = mListener.getSubscriptionChangeReceiver();
     }
@@ -99,8 +99,8 @@ public class ActiveSubscriptionsListenerTest {
         mListener.close();
     }
 
-    public class ActiveSubscriptionsListenerImpl extends ActiveSubscriptionsListener {
-        public ActiveSubscriptionsListenerImpl(Looper looper, Context context) {
+    public class ActiveSubsciptionsListenerImpl extends ActiveSubsciptionsListener {
+        public ActiveSubsciptionsListenerImpl(Looper looper, Context context) {
             super(looper, context);
         }
 
