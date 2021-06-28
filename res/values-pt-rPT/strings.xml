@@ -556,8 +556,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Para além de desbloquear o telemóvel, também pode utilizar a sua impressão digital para autorizar compras e o acesso de aplicações. "<annotation id="url">"Saiba mais"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" A opção de bloqueio do ecrã está desativada. Para saber mais, contacte o gestor da sua entidade. "<annotation id="admin_details">"Mais detalhes"</annotation>\n\n"Pode continuar a utilizar a impressão digital para autorizar compras e o acesso a apps. "<annotation id="url">"Saiba mais"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Levante o dedo e toque no sensor novamente"</string>
-    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
-    <skip />
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Não é possível usar o sensor de impressões digitais. Visite um fornecedor de serviços de reparação"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Pode adicionar até <xliff:g id="COUNT">%d</xliff:g> impressões digitais"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Adicionou o número máximo de impressões digitais"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Não é possível adicionar mais impressões digitais"</string>
@@ -1917,6 +1916,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Defina um PIN de trabalho"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Defina um padrão"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Defina um padrão de trabalho"</string>
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Para maior segurança, defina uma palavra-passe para desbloquear o telemóvel"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Para maior segurança, defina um PIN para desbloquear o telemóvel"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Para maior segurança, defina um padrão para desbloquear o telemóvel"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Para maior segurança, defina uma palavra-passe para desbloquear o tablet"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Para maior segurança, defina um PIN para desbloquear o tablet"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Para maior segurança, defina um padrão para desbloquear o tablet"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Para maior segurança, defina uma palavra-passe para desbloquear o dispositivo"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Para maior segurança, defina um PIN para desbloquear o dispositivo"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Para maior segurança, defina um padrão para desbloquear o dispositivo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Defina palavra-passe para usar impressão digital"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Defina padrão para usar impressão digital"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Por motivos de segurança, defina um PIN."</string>
@@ -1939,9 +1947,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Defina pal.-pas. p/ Desbloqueio facial"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Defina padrão p/ usar Desbloqueio facial"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Defina PIN para usar Desbloqueio facial"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"Defina a palavra-passe"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"Defina o padrão"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"Defina o PIN"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Defina palavra-passe para usar rosto ou impressão digital"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Defina um padrão para usar o rosto ou a impressão digital"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Defina um PIN para usar o rosto ou a impressão digital"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Esqueceu-se da sua palavra-passe?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Esqueceu-se do seu padrão?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Esqueceu-se do seu PIN?"</string>
@@ -2353,8 +2361,7 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Botão e gesto de acessibilidade"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilizar o botão Acessibilidade. O gesto não está disponível com a navegação com 3 botões."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Aceda rapidamente às funcionalidades de acessib."</string>
-    <!-- no translation found for accessibility_button_gesture_description (2516420653060025670) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Aceda rapidamente às funcionalidades de acessibilidade a partir de qualquer ecrã.\n\nPara começar, aceda às definições de acessibilidade e selecione uma funcionalidade. Toque no atalho e selecione o botão Acessibilidade.\n\nPara utilizar o botão Acessibilidade na barra de navegação, mude para a navegação com 2 botões ou navegação com 3 botões."</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Aceda rapidamente às funcionalidades de acessibilidade a partir de qualquer ecrã. \n\nPara começar, aceda às definições de acessibilidade e selecione uma funcionalidade. Toque no atalho e selecione o botão Acessibilidade."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Utilize o botão ou o gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Localização"</string>
@@ -2662,7 +2669,7 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Veja as apps com maior utilização"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Carregamento limitado temporariamente"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Para preservar a bateria. Saiba mais."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"O seu telemóvel tem sido utilizado com mais frequência do que o habitual. A bateria pode esgotar-se mais cedo do que o esperado.\n\nPrincipais aplicações por utilização da bateria:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"O seu telemóvel tem sido utilizado com mais frequência do que o habitual. A bateria pode esgotar-se mais cedo do que o esperado.\n\nPrincipais apps por utilização da bateria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"O seu tablet tem sido utilizado com mais frequência do que o habitual. A bateria pode esgotar-se mais cedo do que o esperado.\n\nPrincipais aplicações por utilização da bateria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"O seu dispositivo tem sido utilizado com mais frequência do que o habitual. A bateria pode esgotar-se mais cedo do que o esperado.\n\nPrincipais aplicações por utilização da bateria:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Inclui atividade em segundo plano de potência elevada"</string>
@@ -3555,8 +3562,7 @@
     <string name="keywords_sim_status" msgid="8784456547742075508">"rede, estado da rede móvel, estado do serviço, intensidade do sinal, tipo de rede móvel, roaming, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"número de série, versão de hardware"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"nível de patch de segurança android, versão da banda de base, versão do kernel"</string>
-    <!-- no translation found for keywords_dark_ui_mode (6373999418195344014) -->
-    <skip />
+    <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, luz, modo, escuro, sensibilidade à luz, fotofobia, tornar mais escuro, escurecer, modo escuro, enxaqueca"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"tema escuro"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"erro"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Visualização de ambiente, visualização de ecrã de bloqueio"</string>
@@ -4398,10 +4404,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Transferência de ficheiros"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Transferir ficheiros para outro dispositivo"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
-    <skip />
-    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
-    <skip />
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Converter vídeos para AVC"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"Os vídeos serão apresentados em mais leitores de multimédia, mas a qualidade poderá ser reduzida"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Transferir fotos ou ficheiros se o MTP não for suportado (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Ligação USB via telemóvel"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>

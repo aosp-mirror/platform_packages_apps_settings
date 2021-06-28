@@ -556,7 +556,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"In addition to unlocking your phone, you can also use your fingerprint to authorize purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" The screen lock option is disabled. To learn more, contact your organization\'s admin. "<annotation id="admin_details">"More details"</annotation>\n\n"You can still use your fingerprint to authorize purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lift finger, then touch sensor again"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="2193097225615229726">"Device repaired improperly. Fingerprint disabled."</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Can’t use fingerprint sensor. Visit a repair provider"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"You can add up to <xliff:g id="COUNT">%d</xliff:g> fingerprints"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"You’ve added the maximum number of fingerprints"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Can’t add more fingerprints"</string>
@@ -1916,6 +1916,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Set a work PIN"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Set a pattern"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Set a work pattern"</string>
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"For added security, set a password to unlock the phone"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"For added security, set a PIN to unlock the phone"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"For added security, set a pattern to unlock the phone"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"For added security, set a password to unlock the tablet"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"For added security, set a PIN to unlock the tablet"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"For added security, set a pattern to unlock the tablet"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"For added security, set a password to unlock the device"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"For added security, set a PIN to unlock the device"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"For added security, set a pattern to unlock the device"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"To use fingerprint, set password"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"To use fingerprint, set pattern"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"For security, set PIN"</string>
@@ -1938,9 +1947,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"To use Face Unlock, set password"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"To use Face Unlock, set pattern"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"To use Face Unlock, set PIN"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"To use biometrics, set password"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"To use biometrics, set pattern"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"To use biometrics, set PIN"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Set a password to use face or fingerprint"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Set a pattern to use face or fingerprint"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Set a PIN to use face or fingerprint"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Forgot your password?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Forgot your pattern?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Forgotten your PIN?"</string>
@@ -4395,10 +4404,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"File transfer"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Transfer files to another device"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
-    <skip />
-    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
-    <skip />
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Convert videos to AVC"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"Videos will play on more media players, but quality may be reduced"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Transfer photos or files if MTP is not supported (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB tethering"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>

@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Handitu edo txikitu pantailako testua."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Txikitu"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Handitu"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Erabili automatikoki biratzeko ezarpena"</string>
-    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"Aurpegi-hautematea eginbideak aurreko kamera erabiltzen du automatikoki biratzeko ezarpenaren zehaztasuna hobetzeko. Irudiak ez dira inoiz gordetzen, ez eta Google-ra bidaltzen ere.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Lortu informazio gehiago pantaila automatikoki biratzeari buruz&lt;/a&gt;"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Erabili automatikoki biratzeko aukera"</string>
+    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"Aurpegi-hautematea eginbideak aurreko kamera erabiltzen du automatikoki biratzeko aukeraren zehaztasuna hobetzeko. Irudiak ez dira inoiz gordetzen, ez eta Google-ra bidaltzen ere.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Lortu informazio gehiago pantaila automatikoki biratzeari buruz&lt;/a&gt;"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Testu-lagina"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Ozeko azti miragarria"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11. kapitulua: Esmeraldazko Oz hiri harrigarria"</string>
@@ -556,8 +556,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Telefonoa desblokeatzeko ez ezik, erosketak eta aplikazioetarako sarbideak baimentzeko balio du hatz-markak. "<annotation id="url">"Lortu informazio gehiago"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Desgaituta dago pantailaren blokeoa. Informazio gehiago lortzeko, jarri erakundearen administratzailearekin harremanetan. "<annotation id="admin_details">"Lortu xehetasun gehiago"</annotation>\n\n"Hala ere, hatz-marka erabil dezakezu erosketak eta aplikazioetarako sarbidea baimentzeko. "<annotation id="url">"Lortu informazio gehiago"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Jaso hatza eta ukitu berriro sentsorea"</string>
-    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
-    <skip />
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Ezin da erabili hatz-marken sentsorea. Jo konponketak egiten dituen hornitzaile batenera."</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"<xliff:g id="COUNT">%d</xliff:g> hartz-marka gehi ditzakezu gehienez"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Iritsi zara onartzen den gehieneko hatz-marka kopurura"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Ezin duzu gehitu beste hatz-markarik"</string>
@@ -1917,6 +1916,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Ezarri laneko PIN bat"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Ezarri eredu bat"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Ezarri laneko eredu bat"</string>
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Babestuago egoteko, ezarri telefonoa desblokeatzeko pasahitz bat"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Babestuago egoteko, ezarri telefonoa desblokeatzeko PIN kode bat"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Babestuago egoteko, ezarri telefonoa desblokeatzeko eredu bat"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Babestuago egoteko, ezarri tableta desblokeatzeko pasahitz bat"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Babestuago egoteko, ezarri tableta desblokeatzeko PIN kode bat"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Babestuago egoteko, ezarri tableta desblokeatzeko eredu bat"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Babestuago egoteko, ezarri gailua desblokeatzeko pasahitz bat"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Babestuago egoteko, ezarri gailua desblokeatzeko PIN kode bat"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Babestuago egoteko, ezarri gailua desblokeatzeko eredu bat"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Hatz-marka erabiltzeko, ezarri pasahitza"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Hatz-marka erabiltzeko, ezarri eredua"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Babestuta egoteko, ezarri PIN bat"</string>
@@ -1939,9 +1947,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Aurpegi bidez desblokeatzeko eginbidea erabiltzeko, ezarri pasahitz bat"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Aurpegi bidez desblokeatzeko eginbidea erabiltzeko, ezarri eredu bat"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Aurpegi bidez desblokeatzeko eginbidea erabiltzeko, ezarri PIN bat"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"Ezarri pasahitza"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"Ezarri eredua"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"Datu biometrikoak erabiltzeko, ezarri PINa"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Ezarri pasahitz bat aurpegia edo hatz-marka erabil ahal izateko"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Ezarri eredu bat aurpegia edo hatz-marka erabil ahal izateko"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Ezarri PIN kode bat aurpegia edo hatz-marka erabil ahal izateko"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Pasahitza ahaztu zaizu?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Eredua ahaztu zaizu?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"PINa ahaztu zaizu?"</string>
@@ -2961,8 +2969,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"VPN eta aplikazioetarako erabiltzaile-ziurtagiria"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wifi-ziurtagiria"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Datuak ez dira pribatuak izango"</string>
-    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
-    <skip />
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Webguneek, aplikazioek eta VPNek erabiltzen dituzte CA ziurtagiriak enkriptatze-helburuetarako. Instalatu erakunde fidagarrien CA ziurtagiriak soilik. \n\n CA ziurtagiri bat instalatzen baduzu, ziurtagiriaren jabea zure datuak atzi litzake; besteak beste, bisitatzen dituzun webgune eta erabiltzen dituzun aplikazioetako pasahitzak edo kreditu-txartelen xehetasunak, baita datuak enkriptatuta badaude ere."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Ez instalatu"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Instalatu halere"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Ziurtagiria ez dago instalatuta"</string>
@@ -4397,10 +4404,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Fitxategi-transferentzia"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Transferitu fitxategiak beste gailu batera"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
-    <skip />
-    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
-    <skip />
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Bihurtu bideoak AVCra"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"Multimedia-erreproduzigailu gehiagotan erreproduzitu ahal izango dira bideoak, baina baliteke kalitatea ez izatea hain ona"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Transferitu argazkiak edo fitxategiak MTP onartzen ez bada (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB bidez konexioa partekatzea"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI modua"</string>
