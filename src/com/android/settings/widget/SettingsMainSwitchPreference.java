@@ -86,9 +86,12 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
             mEnforcedAdmin = mRestrictedHelper.checkRestrictionEnforced();
         }
         mMainSwitchBar = (SettingsMainSwitchBar) holder.findViewById(R.id.main_switch_bar);
+        initMainSwitchBar();
         if (mIsVisible) {
             mMainSwitchBar.show();
-            updateStatus(isChecked());
+            if (mMainSwitchBar.isChecked() != isChecked()) {
+                setChecked(isChecked());
+            }
             registerListenerToSwitchBar();
         } else {
             mMainSwitchBar.hide();
@@ -142,18 +145,6 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         super.setChecked(isChecked);
-    }
-
-    /**
-     * Update the switch status of preference
-     */
-    public void updateStatus(boolean checked) {
-        setChecked(checked);
-        if (mMainSwitchBar != null) {
-            mMainSwitchBar.setTitle(mTitle);
-            mMainSwitchBar.setDisabledByAdmin(mEnforcedAdmin);
-            mMainSwitchBar.show();
-        }
     }
 
     /**
@@ -247,6 +238,13 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     public void setDisabledByAdmin(EnforcedAdmin admin) {
         mEnforcedAdmin = admin;
         if (mMainSwitchBar != null) {
+            mMainSwitchBar.setDisabledByAdmin(mEnforcedAdmin);
+        }
+    }
+
+    private void initMainSwitchBar() {
+        if (mMainSwitchBar != null) {
+            mMainSwitchBar.setTitle(mTitle);
             mMainSwitchBar.setDisabledByAdmin(mEnforcedAdmin);
         }
     }
