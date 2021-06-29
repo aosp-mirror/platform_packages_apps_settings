@@ -556,8 +556,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"तुमचा फोन अनलॉक करण्‍याव्यतिरिक्त, तुम्ही आपल्या फिंगरप्रिंटचा वापर खरेदी आणि अ‍ॅप प्रवेश प्रमाणित करण्‍यासाठी देखील करू शकता. "<annotation id="url">"अधिक जाणून घ्‍या"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" स्क्रीन लॉक पर्याय अक्षम केला आहे. अधिक जाणून घेण्यासाठी, आपल्या संस्थेच्या प्रशासकाशी संपर्क साधा. "<annotation id="admin_details">"अधिक तपशील"</annotation>\n\n"आपण अजूनही खरेद्या आणि अ‍ॅप प्रवेश अधिकृत करण्यासाठी तुमचे फिंगरप्रिंट वापरू शकता. "<annotation id="url">"अधिक जाणून घ्या"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"बोट उचला, नंतर पुन्हा सेन्सरला स्पर्श करा"</string>
-    <!-- no translation found for security_settings_fingerprint_bad_calibration (2193097225615229726) -->
-    <skip />
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"फिंगरप्रिंट सेन्सर वापरू शकत नाही. दुरुस्तीच्या सेवा पुरवठादाराला भेट द्या"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"तुम्ही <xliff:g id="COUNT">%d</xliff:g> पर्यंत फिंगरप्रिंट जोडू शकता"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"तुम्ही जास्तीत जास्त फिंगरप्रिंट जोडले आहेत"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"आणखी फिंगरप्रिंट जोडू शकत नाही"</string>
@@ -1918,6 +1917,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"कार्य प्रोफाईलसाठी पिन सेट करा"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"पॅटर्न सेट करा"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"कार्य प्रोफाईलसाठी पॅटर्न सेट करा"</string>
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"अतिरिक्त सुरक्षेसाठी, फोन अनलॉक करण्याकरिता पासवर्ड सेट करा"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"अतिरिक्त सुरक्षेसाठी, फोन अनलॉक करण्याकरिता पिन सेट करा"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"अतिरिक्त सुरक्षेसाठी, फोन अनलॉक करण्याकरिता पॅटर्न सेट करा"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"अतिरिक्त सुरक्षेसाठी, टॅबलेट अनलॉक करण्याकरिता पासवर्ड सेट करा"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"अतिरिक्त सुरक्षेसाठी, टॅबलेट अनलॉक करण्याकरिता पिन सेट करा"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"अतिरिक्त सुरक्षेसाठी, टॅबलेट अनलॉक करण्याकरिता पॅटर्न सेट करा"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"अतिरिक्त सुरक्षेसाठी, डिव्हाइस अनलॉक करण्याकरिता पासवर्ड सेट करा"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"अतिरिक्त सुरक्षेसाठी, डिव्हाइस अनलॉक करण्याकरिता पिन सेट करा"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"अतिरिक्त सुरक्षेसाठी, डिव्हाइस अनलॉक करण्याकरिता पॅटर्न सेट करा"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"फिंगरप्रिंट वापरण्यासाठी पासवर्ड सेट करा"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"फिंगरप्रिंट वापरण्यासाठी पॅटर्न सेट करा"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"सुरक्षिततेसाठी, पिन सेट करा"</string>
@@ -1940,9 +1948,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"फेस अनलॉक वापरण्यासाठी पासवर्ड सेट करा"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"फेस अनलॉक वापरण्यासाठी पॅटर्न सेट करा"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"फेस अनलॉक वापरण्यासाठी पिन सेट करा"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"बायोमेट्रिक वापरण्यासाठी पासवर्ड सेट करा"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"बायोमेट्रिक वापरण्यासाठी, पॅटर्न सेट करा"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"बायोमेट्रिक वापरण्यासाठी, पिन सेट करा"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"चेहरा किंवा फिंगरप्रिंट वापरण्यासाठी पासवर्ड सेट करा"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"चेहरा किंवा फिंगरप्रिंट वापरण्यासाठी पॅटर्न सेट करा"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"चेहरा किंवा फिंगरप्रिंट वापरण्यासाठी पिन सेट करा"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"तुमचा पासवर्ड विसरलात का?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"तुमचा पॅटर्न विसरलात का?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"तुमचा पिन विसरलात का?"</string>
@@ -2962,8 +2970,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"VPN व ॲप वापरकर्ता प्रमाणपत्र"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"वाय-फाय प्रमाणपत्र"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"तुमचा डेटा खाजगी राहणार नाही"</string>
-    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
-    <skip />
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"वेबसाइट, ॲप्स आणि VPN एंक्रिप्शनसाठी CA प्रमाणपत्रे वापरली जातात. फक्त तुमचा विश्वास असलेल्या संस्थांकडील CA प्रमाणपत्रे इंस्टॉल करा. \n\nतुम्ही CA प्रमाणपत्र इंस्टॉल केल्यास, तुमचा डेटा एंक्रिप्ट केलेला असला तरीही प्रमाणपत्र मालक तुम्ही भेट दिलेल्या वेबसाइटवरून किंवा तुम्ही वापरत असलेल्या अ‍ॅप्सवरून पासवर्ड किंवा क्रेडिट कार्ड तपशीलांसारखा तुमचा डेटा अ‍ॅक्सेस करू शकेल."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"इंस्टॉल करू नका"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"तरीही इंस्टॉल करा"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"प्रमाणपत्र इंस्टॉल केलेले नाही"</string>
@@ -4398,10 +4405,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"फाइल ट्रान्सफर"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"दुसऱ्या डिव्हाइसवर फाइल स्थानांतरित करा"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
-    <skip />
-    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
-    <skip />
+    <string name="usb_transcode_files" msgid="2441954752105119109">"व्हिडिओचे AVC मध्ये रूपांतर करा"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"व्हिडिओ एक किंवा त्यापेक्षा अधिक मीडिया प्लेअरवर प्ले होईल, पण गुणवत्ता कदाचित कमी होईल"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"MTP (PTP) समर्थित नसल्‍यास फोटो किंवा फाइल स्थानांतरित  करा"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB टेदरिंग"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
