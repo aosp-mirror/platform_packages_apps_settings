@@ -212,6 +212,8 @@ public class ProviderModelSlice extends WifiSlice {
                             R.string.mobile_data_disable_message_default_carrier);
                 }
                 showMobileDataDisableDialog(getMobileDataDisableDialog(defaultSubId, carrierName));
+                // If we need to display a reminder dialog box, do nothing here.
+                return;
             } else {
                 MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
                         false /* disableOtherSubscriptions */);
@@ -229,13 +231,24 @@ public class ProviderModelSlice extends WifiSlice {
                 .setTitle(R.string.mobile_data_disable_title)
                 .setMessage(mContext.getString(R.string.mobile_data_disable_message,
                         carrierName))
-                .setNegativeButton(android.R.string.cancel, null)
+                .setNegativeButton(android.R.string.cancel,
+                        (dialog, which) -> {
+                            // Because the toggle of mobile data will be turned off first, if the
+                            // user cancels the operation, we need to update the slice to correct
+                            // the toggle state.
+                            final NetworkProviderWorker worker = getWorker();
+                            if (worker != null) {
+                                worker.updateSlice();
+                            }
+                        })
                 .setPositiveButton(
                         com.android.internal.R.string.alert_windows_notification_turn_off_action,
                         (dialog, which) -> {
                             MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId,
                                     false /* enabled */,
                                     false /* disableOtherSubscriptions */);
+                            doCarrierNetworkAction(true /* isToggleAction */,
+                                    false /* isDataEanbed */, defaultSubId);
                             if (mSharedPref != null) {
                                 SharedPreferences.Editor editor = mSharedPref.edit();
                                 editor.putBoolean(PREF_HAS_TURNED_OFF_MOBILE_DATA, false);
