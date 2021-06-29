@@ -558,7 +558,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Além de desbloquear seu smartphone, também é possível usar sua impressão digital para autorizar compras e acesso a apps. "<annotation id="url">"Saiba mais"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" A opção de bloqueio de tela está desativada. Para saber mais, entre em contato com o administrador da sua organização. "<annotation id="admin_details">"Mais detalhes"</annotation>\n\n"Você ainda pode usar sua impressão digital para autorizar compras e acessar apps. "<annotation id="url">"Saiba mais"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Levante o dedo e depois toque no sensor novamente"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="2193097225615229726">"O dispositivo foi reparado incorretamente. Impressão digital desativada."</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Não foi possível usar o sensor de impressão digital. Entre em contato com uma assistência técnica"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"É possível adicionar até <xliff:g id="COUNT">%d</xliff:g> impressões digitais"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Você adicionou o número máximo de impressões digitais"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Não é possível adicionar mais impressões digitais"</string>
@@ -1918,6 +1918,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Defina um PIN de trabalho"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Definir um padrão"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Definir um padrão de trabalho"</string>
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Para aumentar a segurança, defina uma senha para desbloquear o smartphone"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Para aumentar a segurança, defina um PIN para desbloquear o smartphone"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Para aumentar a segurança, defina um padrão para desbloquear o smartphone"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Para aumentar a segurança, defina uma senha para desbloquear o tablet"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Para aumentar a segurança, defina um PIN para desbloquear o tablet"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Para aumentar a segurança, defina um padrão para desbloquear o tablet"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Para aumentar a segurança, defina uma senha para desbloquear o dispositivo"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Para aumentar a segurança, defina um PIN para desbloquear o dispositivo"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Para aumentar a segurança, defina um padrão para desbloquear o dispositivo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Para usar a impressão digital, defina uma senha"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para usar a impressão digital, defina um padrão"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Por segurança, defina um PIN"</string>
@@ -1940,9 +1949,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Definir backup do desbloqueio facial"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Definir backup do desbloqueio facial"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Definir backup do desbloqueio facial"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"Para usar a biometria, defina uma senha"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"Para usar a biometria, defina um padrão"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"Para usar a biometria, defina um PIN"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Defina uma senha para usar o rosto ou a impressão digital"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Defina um padrão para usar o rosto ou a impressão digital"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Defina um PIN para usar o rosto ou a impressão digital"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Esqueceu sua senha?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Esqueceu seu padrão?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Esqueceu seu PIN?"</string>
@@ -2962,8 +2971,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"Cert. do usuário do app e VPN"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Certificado de Wi-Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Seus dados não serão particulares"</string>
-    <!-- no translation found for ca_certificate_warning_description (8409850109551028774) -->
-    <skip />
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Os certificados de CA são usados por sites, apps e VPNs para criptografia. Instale apenas os certificados de CA de organizações em que você confia. \n\nSe você instalar um certificado de CA, o proprietário dele poderá acessar seus dados, como senhas ou detalhes do cartão de crédito, nos sites visitados ou apps usados, mesmo que esses dados estejam criptografados."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Não instalar"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Instalar assim mesmo"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Certificado não instalado"</string>
@@ -4398,10 +4406,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Transferência de arquivo"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Transfere arquivos para outro dispositivo"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP (fotos)"</string>
-    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
-    <skip />
-    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
-    <skip />
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Converter vídeos para AVC"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"Os vídeos poderão ser abertos em mais players de mídia, mas talvez a qualidade seja menor"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Transferir fotos ou arquivos se o MTP não for compatível (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Tethering USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"Conexão MIDI (som)"</string>
