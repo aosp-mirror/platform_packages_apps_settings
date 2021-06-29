@@ -38,7 +38,11 @@ public class ManageTrustAgentsPreferenceController extends BasePreferenceControl
     private TrustAgentManager mTrustAgentManager;
 
     public ManageTrustAgentsPreferenceController(Context context) {
-        super(context, KEY_MANAGE_TRUST_AGENTS);
+        this(context, KEY_MANAGE_TRUST_AGENTS);
+    }
+
+    public ManageTrustAgentsPreferenceController(Context context, String key) {
+        super(context, key);
         final SecurityFeatureProvider securityFeatureProvider = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider();
         mLockPatternUtils = securityFeatureProvider.getLockPatternUtils(context);

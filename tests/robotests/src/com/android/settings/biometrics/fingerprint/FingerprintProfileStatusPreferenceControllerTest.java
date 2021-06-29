@@ -101,4 +101,16 @@ public class FingerprintProfileStatusPreferenceControllerTest {
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_FOR_USER);
     }
+
+    @Test
+    public void getPreferenceKey_byDefault_returnsDefaultValue() {
+        assertThat(mController.getPreferenceKey()).isEqualTo("fingerprint_settings_profile");
+    }
+
+    @Test
+    public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+        mController = new FingerprintProfileStatusPreferenceController(mContext, "key");
+
+        assertThat(mController.getPreferenceKey()).isEqualTo("key");
+    }
 }

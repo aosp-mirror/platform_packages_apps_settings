@@ -48,7 +48,7 @@ public class EnterprisePrivacyPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new EnterprisePrivacyPreferenceController(
-                mContext, mPrivacyPreferenceControllerHelper);
+                mContext, mPrivacyPreferenceControllerHelper, KEY_ENTERPRISE_PRIVACY);
     }
 
     @Test
@@ -90,7 +90,15 @@ public class EnterprisePrivacyPreferenceControllerTest {
     }
 
     @Test
-    public void testGetPreferenceKey() {
+    public void getPreferenceKey_byDefault_returnsDefaultValue() {
         assertThat(mController.getPreferenceKey()).isEqualTo(KEY_ENTERPRISE_PRIVACY);
+    }
+
+    @Test
+    public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+        mController = new EnterprisePrivacyPreferenceController(
+                mContext, mPrivacyPreferenceControllerHelper, "key");
+
+        assertThat(mController.getPreferenceKey()).isEqualTo("key");
     }
 }
