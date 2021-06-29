@@ -65,7 +65,8 @@ public final class ActionDisabledByAdminDialogHelper {
                 R.layout.admin_support_details_dialog, null);
         mActionDisabledByAdminController = ActionDisabledByAdminControllerFactory
                 .createInstance(mActivity, restriction,
-                        new DeviceAdminStringProviderImpl(mActivity));
+                        new DeviceAdminStringProviderImpl(mActivity),
+                        UserHandle.SYSTEM);
     }
 
     private @UserIdInt int getEnforcementAdminUserId(@NonNull EnforcedAdmin admin) {
