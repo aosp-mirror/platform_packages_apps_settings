@@ -364,7 +364,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 getString(R.string.sim_action_restart_title),
                 getString(R.string.sim_action_enable_dsds_text),
                 getString(R.string.sim_action_reboot),
-                getString(R.string.cancel));
+                getString(R.string.sim_action_cancel));
     }
 
     /* Displays the SIM toggling confirmation dialog. */
@@ -385,7 +385,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 title,
                 null,
                 getString(R.string.yes),
-                getString(R.string.cancel));
+                getString(R.string.sim_action_cancel));
     }
 
     private void showEnableSimConfirmDialog() {
@@ -439,7 +439,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 getSwitchSubscriptionTitle(),
                 getSwitchDialogBodyMsg(activeSub, isSwitchingBetweenEsims),
                 getSwitchDialogPosBtnText(),
-                getString(android.R.string.cancel));
+                getString(R.string.sim_action_cancel));
     }
 
     private void showNonSwitchSimConfirmDialog() {
@@ -450,7 +450,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 getEnableSubscriptionTitle(),
                 null /* msg */,
                 getString(R.string.yes),
-                getString(android.R.string.cancel));
+                getString(R.string.sim_action_cancel));
     }
 
     private void showMepSwitchSimConfirmDialog() {
