@@ -59,6 +59,7 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -398,15 +399,13 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             return;
         }
 
-        final int screenHalfHeight = AccessibilityUtil.getScreenHeightPixels(getPrefContext()) / 2;
-        final AnimatedImagePreference animatedImagePreference =
-                new AnimatedImagePreference(getPrefContext());
-        animatedImagePreference.setImageUri(mImageUri);
-        animatedImagePreference.setSelectable(false);
-        animatedImagePreference.setMaxHeight(screenHalfHeight);
-        animatedImagePreference.setKey(KEY_ANIMATED_IMAGE);
+        final IllustrationPreference illustrationPreference =
+                new IllustrationPreference(getPrefContext());
+        illustrationPreference.setImageUri(mImageUri);
+        illustrationPreference.setSelectable(false);
+        illustrationPreference.setKey(KEY_ANIMATED_IMAGE);
 
-        getPreferenceScreen().addPreference(animatedImagePreference);
+        getPreferenceScreen().addPreference(illustrationPreference);
     }
 
     private void initToggleServiceSwitchPreference() {
