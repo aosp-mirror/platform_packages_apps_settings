@@ -67,6 +67,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class PasswordsPreferenceController extends BasePreferenceController
         implements LifecycleObserver {
     private static final String TAG = "AutofillSettings";
+    private static final boolean DEBUG = false;
 
     private final PackageManager mPm;
     private final IconDrawableFactory mIconFactory;
@@ -128,6 +129,8 @@ public class PasswordsPreferenceController extends BasePreferenceController
             pref.setIntent(
                     new Intent(Intent.ACTION_MAIN)
                             .setClassName(serviceInfo.packageName, service.getPasswordsActivity()));
+            // Set an empty summary to avoid a UI flicker when the value loads.
+            pref.setSummary(R.string.summary_placeholder);
 
             final MutableLiveData<Integer> passwordCount = new MutableLiveData<>();
             passwordCount.observe(
@@ -172,15 +175,18 @@ public class PasswordsPreferenceController extends BasePreferenceController
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             final IAutoFillService autofillService = IAutoFillService.Stub.asInterface(service);
-            // TODO check if debug is logged on user build.
-            Log.d(TAG, "Fetching password count from " + name);
+            if (DEBUG) {
+                Log.d(TAG, "Fetching password count from " + name);
+            }
             try {
                 autofillService.onSavedPasswordCountRequest(
                         new IResultReceiver.Stub() {
                             @Override
                             public void send(int resultCode, Bundle resultData) {
-                                Log.d(TAG, "Received password count result " + resultCode
-                                        + " from " + name);
+                                if (DEBUG) {
+                                    Log.d(TAG, "Received password count result " + resultCode
+                                            + " from " + name);
+                                }
                                 if (resultCode == 0 && resultData != null) {
                                     mData.postValue(resultData.getInt(EXTRA_RESULT));
                                 }
