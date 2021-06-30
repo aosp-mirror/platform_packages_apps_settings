@@ -242,6 +242,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         // This will need to be updated if the device has sensors other than BIOMETRIC_STRONG
         if (!setupWizard && authenticators == BiometricManager.Authenticators.DEVICE_CREDENTIAL) {
             launchCredentialOnlyEnroll();
+            finish();
         } else if (canUseFace && canUseFingerprint) {
             if (mParentalOptionsRequired && mGkPwHandle != null) {
                 launchFaceAndFingerprintEnroll();
@@ -403,22 +404,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         final int newResid = SetupWizardUtils.getTheme(this, getIntent());
         theme.applyStyle(R.style.SetupWizardPartnerResource, true);
         super.onApplyThemeResource(theme, newResid, first);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        if (mConfirmingCredentials
-                || mParentalOptionsRequired
-                || mMultiBiometricEnrollHelper != null) {
-            return;
-        }
-
-        if (!isChangingConfigurations()) {
-            Log.d(TAG, "Finishing in onStop");
-            finish();
-        }
     }
 
     private void setOrConfirmCredentialsNow() {
