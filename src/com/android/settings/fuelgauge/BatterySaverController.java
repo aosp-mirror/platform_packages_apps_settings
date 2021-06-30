@@ -15,6 +15,7 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -23,6 +24,7 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.util.Pair;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -30,6 +32,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -44,6 +48,7 @@ public class BatterySaverController extends BasePreferenceController
     private final BatterySaverReceiver mBatteryStateChangeReceiver;
     private final PowerManager mPowerManager;
     private Preference mBatterySaverPref;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final ContentObserver mObserver = new ContentObserver(
             new Handler(Looper.getMainLooper())) {
         @Override
@@ -56,6 +61,7 @@ public class BatterySaverController extends BasePreferenceController
         super(context, KEY_BATTERY_SAVER);
 
         mPowerManager = mContext.getSystemService(PowerManager.class);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mBatteryStateChangeReceiver = new BatterySaverReceiver(context);
         mBatteryStateChangeReceiver.setBatterySaverListener(this);
         BatterySaverUtils.revertScheduleToNoneIfNeeded(context);
@@ -121,9 +127,43 @@ public class BatterySaverController extends BasePreferenceController
         }
     }
 
+    private void logPowerSaver() {
+        if (!mPowerManager.isPowerSaveMode()) {
+            // Power saver is off, so don't do anything.
+            return;
+        }
+
+        final ContentResolver resolver = mContext.getContentResolver();
+        final int mode = Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
+                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
+        int fuelgaugeScheduleType = SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_NO_SCHEDULE;
+        switch (mode) {
+            case PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE:
+                fuelgaugeScheduleType =
+                        SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_PERCENTAGE;
+                final int powerLevelTriggerPercentage = Global.getInt(resolver,
+                        Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
+                mMetricsFeatureProvider.action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
+                        Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
+                                fuelgaugeScheduleType),
+                        Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
+                                powerLevelTriggerPercentage));
+                break;
+            case PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC:
+                fuelgaugeScheduleType = SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_ROUTINE;
+                break;
+            default:
+                // empty
+        }
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
+                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
+                        fuelgaugeScheduleType));
+    }
+
     @Override
     public void onPowerSaveModeChanged() {
         updateSummary();
+        logPowerSaver();
     }
 
     @Override
