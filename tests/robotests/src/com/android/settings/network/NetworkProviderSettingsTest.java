@@ -67,7 +67,6 @@ import com.android.settings.wifi.ConnectedWifiEntryPreference;
 import com.android.settings.wifi.LongPressWifiEntryPreference;
 import com.android.settings.wifi.WifiConfigController2;
 import com.android.settings.wifi.WifiDialog2;
-import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -105,7 +104,7 @@ public class NetworkProviderSettingsTest {
     @Mock
     private PreferenceManager mPreferenceManager;
     @Mock
-    private ConnectivitySubsystemsRecoveryManager mConnectivitySubsystemsRecoveryManager;
+    private InternetResetHelper mInternetResetHelper;
     @Mock
     private Preference mAirplaneModeMsgPreference;
     @Mock
@@ -439,49 +438,14 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    public void onOptionsItemSelected_fixConnectivity_triggerSubsystemRestart() {
-        doReturn(true).when(mConnectivitySubsystemsRecoveryManager).isRecoveryAvailable();
-        mNetworkProviderSettings.mConnectivitySubsystemsRecoveryManager =
-                mConnectivitySubsystemsRecoveryManager;
+    public void onOptionsItemSelected_fixConnectivity_restartInternet() {
+        mNetworkProviderSettings.mInternetResetHelper = mInternetResetHelper;
         doReturn(false).when(mNetworkProviderSettings).isPhoneOnCall();
         doReturn(NetworkProviderSettings.MENU_FIX_CONNECTIVITY).when(mMenuItem).getItemId();
 
         mNetworkProviderSettings.onOptionsItemSelected(mMenuItem);
 
-        verify(mConnectivitySubsystemsRecoveryManager).triggerSubsystemRestart(any(), any());
-    }
-
-    @Test
-    public void onOptionsItemSelected_fixConnectivityOnCall_neverTriggerSubsystemRestart() {
-        doReturn(true).when(mConnectivitySubsystemsRecoveryManager).isRecoveryAvailable();
-        mNetworkProviderSettings.mConnectivitySubsystemsRecoveryManager =
-                mConnectivitySubsystemsRecoveryManager;
-        doReturn(true).when(mNetworkProviderSettings).isPhoneOnCall();
-        doNothing().when(mNetworkProviderSettings).showResetInternetDialog();
-        doReturn(NetworkProviderSettings.MENU_FIX_CONNECTIVITY).when(mMenuItem).getItemId();
-
-        mNetworkProviderSettings.onOptionsItemSelected(mMenuItem);
-
-        verify(mConnectivitySubsystemsRecoveryManager, never()).triggerSubsystemRestart(any(),
-                any());
-    }
-
-    @Test
-    public void onSubsystemRestartOperationBegin_showResetInternetHideApmMsg() {
-        mNetworkProviderSettings.onSubsystemRestartOperationBegin();
-
-        verify(mResetInternetPreference).setVisible(true);
-        verify(mAirplaneModeMsgPreference).setVisible(false);
-    }
-
-    @Test
-    public void onSubsystemRestartOperationEnd_showApmMsgHideResetInternet() {
-        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
-
-        mNetworkProviderSettings.onSubsystemRestartOperationEnd();
-
-        verify(mResetInternetPreference).setVisible(false);
-        verify(mAirplaneModeMsgPreference).setVisible(true);
+        verify(mInternetResetHelper).restart();
     }
 
     @Test

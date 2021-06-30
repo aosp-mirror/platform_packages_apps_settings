@@ -28,17 +28,23 @@ public class EnterprisePrivacyPreferenceController extends AbstractPreferenceCon
 
     private static final String KEY_ENTERPRISE_PRIVACY = "enterprise_privacy";
     private final PrivacyPreferenceControllerHelper mPrivacyPreferenceControllerHelper;
+    private final String mPreferenceKey;
 
     public EnterprisePrivacyPreferenceController(Context context) {
-        this(Objects.requireNonNull(context), new PrivacyPreferenceControllerHelper(context));
+        this(Objects.requireNonNull(context), KEY_ENTERPRISE_PRIVACY);
+    }
+
+    public EnterprisePrivacyPreferenceController(Context context, String key) {
+        this(Objects.requireNonNull(context), new PrivacyPreferenceControllerHelper(context), key);
     }
 
     @VisibleForTesting
-    EnterprisePrivacyPreferenceController(
-            Context context, PrivacyPreferenceControllerHelper privacyPreferenceControllerHelper) {
+    EnterprisePrivacyPreferenceController(Context context,
+            PrivacyPreferenceControllerHelper privacyPreferenceControllerHelper, String key) {
         super(Objects.requireNonNull(context));
         mPrivacyPreferenceControllerHelper = Objects.requireNonNull(
                 privacyPreferenceControllerHelper);
+        this.mPreferenceKey = key;
     }
 
     @Override
@@ -54,6 +60,6 @@ public class EnterprisePrivacyPreferenceController extends AbstractPreferenceCon
 
     @Override
     public String getPreferenceKey() {
-        return KEY_ENTERPRISE_PRIVACY;
+        return mPreferenceKey;
     }
 }

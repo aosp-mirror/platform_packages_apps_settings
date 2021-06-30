@@ -926,16 +926,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks">No thanks</string>
-    <!-- Button text to skip enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_fingerprint_enroll_introduction_skip">No thanks</string>
-    <!-- Button text to continue to the next screen from the introduction [CHAR LIMIT=22] -->
-    <string name="security_settings_fingerprint_enroll_introduction_continue">Continue</string>
     <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
-    <!-- Button text to cancel enrollment from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup">Skip</string>
-    <!-- Button text to continue to the next screen from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup">Next</string>
     <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
     <string name="setup_fingerprint_enroll_skip_title">Skip fingerprint?</string>
     <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
@@ -13203,22 +13195,28 @@
     <string name="cards_passes_lower">cards &amp; passes</string>
 
     <!-- Power menu setting name [CHAR LIMIT=NONE] -->
-    <string name="power_menu_setting_name">Power menu</string>
+    <string name="power_menu_setting_name">Press and hold power button</string>
 
-    <!-- Power menu setting title [CHAR LIMIT=NONE] -->
-    <string name="power_menu_setting_title">Power button menu</string>
-
-    <!-- Power menu setting option none [CHAR LIMIT=NONE] -->
-    <string name="power_menu_none">Don\u2019t show any content</string>
+    <!-- Power menu setting summary to describe press and hold power button for Assistant is enabled. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_assist_enabled">Press and hold for the Assistant</string>
+    <!-- Power menu setting summary to describe press and hold power button for Assistant is disabled and power menu will appear. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu">Press and hold for the power menu</string>
+    <!-- Power menu setting summary to describe press and hold power button for Assistant is disabled and nothing will happen. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_assist_disabled_no_action">Press and hold disabled</string>
 
     <!-- Power menu setting privacy no secure screen lock set [CHAR_LIMIT=NONE] -->
     <string name="lockscreen_privacy_not_secure">To use, first set a screen lock</string>
 
-    <!-- Power menu setting use long press power to invoke assistant. [CHAR_LIMIT=NONE] -->
+    <!-- Power menu setting use long press power to invoke assistant. [CHAR LIMIT=NONE] -->
     <string name="power_menu_long_press_for_assist">Hold for Assistant</string>
 
-    <!-- Power menu setting use log press power to invoke assistant summary. [CHAR_LIMIT=NONE] -->
+    <!-- Power menu setting use log press power to invoke assistant summary. [CHAR LIMIT=NONE] -->
     <string name="power_menu_long_press_for_assist_summary">Trigger the Assistant by holding the power button</string>
+
+    <!-- Power menu explanation to press power and volume up to show power and emergency menu. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_power_volume_up_hint">Power &amp; Emergency Menu:\nPress Power and Volume up at the same time.</string>
+    <!-- Power menu explanation where to find prevent ringing option. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_power_prevent_ringing_hint">Prevent ringing:\nShortcut available in the volume menu.</string>
 
     <!-- Wallet (formerly Cards and passes) toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_wallet_setting_toggle">Show wallet</string>
@@ -13383,7 +13381,7 @@
     <string name="mobile_data_no_connection">No connection</string>
     <!-- Provider Model:
          Summary indicating that a SIM has no mobile data connection [CHAR LIMIT=50] -->
-    <string name="mobile_data_off_summary">Internet won\u0027t auto\u2011connect</string>
+    <string name="mobile_data_off_summary">Mobile data won\u0027t auto\u2011connect</string>
     <!-- Provider Model: Summary indicating that no other networks available [CHAR LIMIT=50] -->
     <string name="non_carrier_network_unavailable">No other networks available</string>
     <!-- Provider Model: Summary indicating that no networks available [CHAR LIMIT=50] -->
@@ -13445,7 +13443,7 @@
     <!-- Title for developer options main switch. [CHAR LIMIT=50] -->
     <string name="developer_options_main_switch_title">Use developer options</string>
     <!-- Title for default print service main switch. [CHAR LIMIT=50] -->
-    <string name="default_print_service_main_switch_title">Use default print service</string>
+    <string name="default_print_service_main_switch_title">Use print service</string>
     <!-- Title for multiple users main switch. [CHAR LIMIT=50] -->
     <string name="multiple_users_main_switch_title">Use multiple users</string>
     <!-- Title for wireless debugging main switch. [CHAR LIMIT=50] -->

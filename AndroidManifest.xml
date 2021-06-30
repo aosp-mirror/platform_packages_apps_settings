@@ -1324,7 +1324,8 @@
         <activity
             android:name=".notification.history.NotificationHistoryActivity"
             android:exported="true"
-            android:label="@string/notification_history_title">
+            android:label="@string/notification_history_title"
+            android:theme="@style/Theme.Settings.NoActionBar">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_HISTORY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1518,7 +1519,8 @@
         <activity android:name=".applications.specialaccess.deviceadmin.DeviceAdminAdd"
                   android:label="@string/device_admin_add_title"
                   android:exported="true"
-                  android:clearTaskOnLaunch="true">
+                  android:clearTaskOnLaunch="true"
+                  android:theme="@style/Theme.Settings.NoActionBar">
             <intent-filter>
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
                 <category android:name="android.intent.category.DEFAULT" />
