@@ -22,12 +22,14 @@ import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 
 /**
- * {@link TogglePreferenceController} that controls whether Adaptive connectivity option is enabled.
+ * {@link SettingsMainSwitchPreferenceController}
+ * that controls whether Adaptive connectivity option is enabled.
  */
-public class AdaptiveConnectivityTogglePreferenceController extends TogglePreferenceController {
+public class AdaptiveConnectivityTogglePreferenceController extends
+        SettingsMainSwitchPreferenceController {
 
     private final WifiManager mWifiManager;
 
