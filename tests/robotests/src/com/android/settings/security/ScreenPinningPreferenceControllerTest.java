@@ -89,4 +89,16 @@ public class ScreenPinningPreferenceControllerTest {
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.switch_on_text));
     }
+
+    @Test
+    public void getPreferenceKey_byDefault_returnsDefaultValue() {
+        assertThat(mController.getPreferenceKey()).isEqualTo("screen_pinning_settings");
+    }
+
+    @Test
+    public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+        mController = new ScreenPinningPreferenceController(mContext, "key");
+
+        assertThat(mController.getPreferenceKey()).isEqualTo("key");
+    }
 }

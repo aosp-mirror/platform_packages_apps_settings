@@ -32,9 +32,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.PowerManager;
-import android.os.Process;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -78,7 +76,6 @@ import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
@@ -101,7 +98,6 @@ import java.util.Optional;
 public class NetworkProviderSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener,
-        ConnectivitySubsystemsRecoveryManager.RecoveryStatusCallback,
         AirplaneModeEnabler.OnAirplaneModeChangedListener, InternetUpdater.InternetChangeListener {
 
     public static final String ACTION_NETWORK_PROVIDER_SETTINGS =
@@ -192,9 +188,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private WifiManager.ActionListener mSaveListener;
     private WifiManager.ActionListener mForgetListener;
 
-    @VisibleForTesting
-    protected ConnectivitySubsystemsRecoveryManager mConnectivitySubsystemsRecoveryManager;
-    private HandlerThread mRecoveryThread;
+    protected InternetResetHelper mInternetResetHelper;
 
     /**
      * The state of {@link #isUiRestricted()} at {@link #onCreate(Bundle)}}. This is necessary to
@@ -1274,39 +1268,17 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     }
 
     private void fixConnectivity() {
-        if (mConnectivitySubsystemsRecoveryManager == null) {
-            mRecoveryThread = new HandlerThread(TAG
-                    + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
-                    Process.THREAD_PRIORITY_BACKGROUND);
-            mRecoveryThread.start();
-            mConnectivitySubsystemsRecoveryManager = new ConnectivitySubsystemsRecoveryManager(
-                    getContext(), mRecoveryThread.getThreadHandler());
+        if (mInternetResetHelper == null) {
+            mInternetResetHelper = new InternetResetHelper(getContext(), getLifecycle());
+            mInternetResetHelper.setResettingPreference(mResetInternetPreference);
+            mInternetResetHelper.setMobileNetworkController(mNetworkMobileProviderController);
+            mInternetResetHelper.setWifiTogglePreference(
+                    findPreference(WifiSwitchPreferenceController.KEY));
+            mInternetResetHelper.addWifiNetworkPreference(mConnectedWifiEntryPreferenceCategory);
+            mInternetResetHelper.addWifiNetworkPreference(mFirstWifiEntryPreferenceCategory);
+            mInternetResetHelper.addWifiNetworkPreference(mWifiEntryPreferenceCategory);
         }
-        if (mConnectivitySubsystemsRecoveryManager.isRecoveryAvailable()) {
-            mConnectivitySubsystemsRecoveryManager.triggerSubsystemRestart(null /* reason */, this);
-        }
-    }
-
-    /**
-     * Callback for the internet recovery started.
-     */
-    public void onSubsystemRestartOperationBegin() {
-        if (mResetInternetPreference != null) {
-            mResetInternetPreference.setVisible(true);
-        }
-        updateAirplaneModeMsgPreference(false /* visible */);
-    }
-
-    /**
-     * Callback for the internet recovery ended.
-     */
-    public void onSubsystemRestartOperationEnd() {
-        if (mResetInternetPreference != null) {
-            mResetInternetPreference.setVisible(false);
-        }
-        if (mAirplaneModeEnabler.isAirplaneModeOn()) {
-            updateAirplaneModeMsgPreference(true /* visible */);
-        }
+        mInternetResetHelper.restart();
     }
 
     /**
