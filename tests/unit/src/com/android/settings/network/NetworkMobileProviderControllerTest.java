@@ -173,6 +173,44 @@ public class NetworkMobileProviderControllerTest {
         assertEquals(mPreferenceScreen.getInitialExpandedChildrenCount(), Integer.MAX_VALUE);
     }
 
+    @Test
+    public void hidePreference_hidePreferenceTrue_preferenceIsNotVisible() {
+        when(mSubscriptionsController.isAvailable()).thenReturn(true);
+        setupNetworkMobileProviderController();
+        mPreferenceCategory.setVisible(true);
+
+        mNetworkMobileProviderController.hidePreference(true /* hide */, true /* immediately*/);
+
+        assertThat(mPreferenceCategory.isVisible()).isFalse();
+    }
+
+    @Test
+    public void hidePreference_hidePreferenceFalse_preferenceIsVisible() {
+        when(mSubscriptionsController.isAvailable()).thenReturn(true);
+        setupNetworkMobileProviderController();
+
+        mNetworkMobileProviderController.hidePreference(false /* hide */, true /* immediately*/);
+
+        assertThat(mPreferenceCategory.isVisible()).isTrue();
+    }
+
+    @Test
+    public void hidePreference_hidePreferenceFalse_preferenceIsNotVisibleImmediately() {
+        when(mSubscriptionsController.isAvailable()).thenReturn(true);
+        setupNetworkMobileProviderController();
+        mPreferenceCategory.setVisible(false);
+
+        mNetworkMobileProviderController.hidePreference(false /* hide */, false /* immediately*/);
+
+        // The preference is not visible immediately.
+        assertThat(mPreferenceCategory.isVisible()).isFalse();
+
+        mNetworkMobileProviderController.displayPreference(mPreferenceScreen);
+
+        // The preference is visible after displayPreference() updated.
+        assertThat(mPreferenceCategory.isVisible()).isTrue();
+    }
+
     private void setupNetworkMobileProviderController() {
         mNetworkMobileProviderController.init(mLifecycle);
         mNetworkMobileProviderController.displayPreference(mPreferenceScreen);
