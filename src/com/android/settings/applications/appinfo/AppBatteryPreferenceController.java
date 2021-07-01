@@ -78,6 +78,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     private String mBatteryPercent;
     private final String mPackageName;
     private final int mUid;
+    private final int mUserId;
     private boolean mBatteryUsageStatsLoaded = false;
     private boolean mBatteryDiffEntriesLoaded = false;
 
@@ -88,6 +89,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         mBatteryUtils = BatteryUtils.getInstance(mContext);
         mPackageName = packageName;
         mUid = uid;
+        mUserId = mContext.getUserId();
         refreshFeatureFlag(mContext);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -173,16 +175,29 @@ public class AppBatteryPreferenceController extends BasePreferenceController
             protected BatteryDiffEntry doInBackground(Void... unused) {
                 final List<BatteryDiffEntry> batteryDiffEntries =
                         BatteryChartPreferenceController.getBatteryLast24HrUsageData(mContext);
-                if (batteryDiffEntries != null) {
-                    for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
-                        if (batteryDiffEntry.mBatteryHistEntry.mUid == mUid
-                                && batteryDiffEntry.mBatteryHistEntry.mConsumerType
-                                == ConvertUtils.CONSUMER_TYPE_UID_BATTERY) {
-                            return batteryDiffEntry;
-                        }
-                    }
+                if (batteryDiffEntries == null) {
+                    return null;
                 }
-                return null;
+                // Filter entry with consumer type to avoid system app,
+                // then use user id to divide normal app and work profile app,
+                // return target application from filter list by package name.
+                return batteryDiffEntries.stream()
+                        .filter(entry -> entry.mBatteryHistEntry.mConsumerType
+                                == ConvertUtils.CONSUMER_TYPE_UID_BATTERY)
+                        .filter(entry -> entry.mBatteryHistEntry.mUserId == mUserId)
+                        .filter(entry -> {
+                            if (entry.mBatteryHistEntry.mPackageName
+                                    .equals(mPackageName)) {
+                                Log.i(TAG, "Return target application: "
+                                        + entry.mBatteryHistEntry.mPackageName
+                                        + " | uid: " + entry.mBatteryHistEntry.mUid
+                                        + " | userId: " + entry.mBatteryHistEntry.mUserId);
+                                return true;
+                            }
+                            return false;
+                        })
+                        .findFirst()
+                        .orElse(/* other */null);
             }
 
             @Override
