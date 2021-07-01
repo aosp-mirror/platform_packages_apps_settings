@@ -88,8 +88,7 @@ public class DarkThemeScheduleComponentTest {
             CommonUtils.reopenScreen();
         });
 
-        // Recreate the scenario to make sure UI apply new mode.
-        scenario.recreate();
+        // Relaunch the scenario to make sure UI apply new mode.
         scenario.onActivity(activity -> {
             Log.d(TAG, "Activity Recreated!");
             UiUtils.waitForActivitiesInStage(2000, Stage.RESUMED);
