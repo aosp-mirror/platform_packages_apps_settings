@@ -12198,15 +12198,39 @@
     <string name="aware_summary_when_bedtime_on">Unavailable because bedtime mode is on</string>
 
     <!-- Bluetooth message permission alert for notification content [CHAR LIMIT=none] -->
-    <string name="bluetooth_message_access_notification_content">Untrusted device wants to access your messages. Tap for details.</string>
+    <string name="bluetooth_message_access_notification_content">A device wants to access your messages. Tap for details.</string>
     <!-- Bluetooth message permission alert for dialog title [CHAR LIMIT=none] -->
     <string name="bluetooth_message_access_dialog_title">Allow access to messages?</string>
     <!-- Bluetooth message permission alert for dialog content [CHAR LIMIT=none] -->
-    <string name="bluetooth_message_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your messages.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <string name="bluetooth_message_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your messages.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
     <!-- Bluetooth phonebook permission alert for notification content [CHAR LIMIT=none] -->
-    <string name="bluetooth_phonebook_access_notification_content">Untrusted device wants to access your contacts and call log. Tap for details.</string>
+    <string name="bluetooth_phonebook_access_notification_content">A device wants to access your contacts and call log. Tap for details.</string>
     <!-- Bluetooth phonebook permission alert for dialog title [CHAR LIMIT=none] -->
     <string name="bluetooth_phonebook_access_dialog_title">Allow access to contacts and call log?</string>
     <!-- Bluetooth phonebook permission alert for dialog content [CHAR LIMIT=none] -->
-    <string name="bluetooth_phonebook_access_dialog_content">An untrusted Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <string name="bluetooth_phonebook_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access your contacts and call log. This includes data about incoming and outgoing calls.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+
+    <!-- Label for button to not allow grant the permission for remote devices. [CHAR_LIMIT=50] -->
+    <string name="request_manage_bluetooth_permission_dont_allow">Don\u2019t allow</string>
+
+    <!-- Bluetooth sim card permission alert for notification title [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_notification_title">SIM card access request</string>
+    <!-- Bluetooth sim card permission alert for notification content [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_notification_content">A device wants to access your SIM card. Tap for details.</string>
+    <!-- Bluetooth sim card permission alert for dialog title [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_dialog_title">Allow access to SIM card?</string>
+    <!-- Bluetooth sim card permission alert for dialog content [CHAR LIMIT=none] -->
+    <string name="bluetooth_sim_card_access_dialog_content">A Bluetooth device, <xliff:g id="device_name" example="My device">%1$s</xliff:g>, wants to access data on your SIM card. This includes your contacts.\n\nWhile connected, <xliff:g id="device_name" example="My device">%2$s</xliff:g> will receive all calls made to <xliff:g id="phone_number" example="0912345678">%3$s</xliff:g>.</string>
+    <!-- Bluetooth connect permission alert for notification title [CHAR LIMIT=none] -->
+    <string name="bluetooth_connect_access_notification_title">Bluetooth device available</string>
+    <!-- Bluetooth connect permission alert for notification content [CHAR LIMIT=none] -->
+    <string name="bluetooth_connect_access_notification_content">A device wants to connect. Tap for details.</string>
+    <!-- Bluetooth connect permission alert for dialog title [CHAR LIMIT=none] -->
+    <string name="bluetooth_connect_access_dialog_title">Connect to Bluetooth device?</string>
+    <!-- Bluetooth connect permission alert for dialog content [CHAR LIMIT=none] -->
+    <string name="bluetooth_connect_access_dialog_content"><xliff:g id="device_name" example="My device">%1$s</xliff:g> wants to connect to this phone.\n\nYou haven\u2019t connected to <xliff:g id="device_name" example="My device">%2$s</xliff:g> before.</string>
+    <!-- Strings for Dialog don't connect button -->
+    <string name="bluetooth_connect_access_dialog_negative">Don\u2019t connect</string>
+    <!-- Strings for Dialog connect button -->
+    <string name="bluetooth_connect_access_dialog_positive">Connect</string>
 </resources>
