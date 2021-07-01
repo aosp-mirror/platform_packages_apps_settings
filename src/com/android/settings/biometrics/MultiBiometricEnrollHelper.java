@@ -20,6 +20,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -105,5 +106,12 @@ public class MultiBiometricEnrollHelper {
             BiometricUtils.launchEnrollForResult(mActivity, intent, REQUEST_FINGERPRINT_ENROLL,
                     hardwareAuthToken, mGkPwHandle, mUserId);
         }));
+    }
+
+    void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "RequestCode: " + requestCode + " resultCode: " + resultCode);
+        BiometricUtils.removeGatekeeperPasswordHandle(mActivity, mGkPwHandle);
+        mActivity.setResult(resultCode);
+        mActivity.finish();
     }
 }
