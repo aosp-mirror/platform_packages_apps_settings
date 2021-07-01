@@ -64,9 +64,13 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         super.onCreate(savedInstanceState);
 
         final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
+        final ImageView iconDeviceLocked = findViewById(R.id.icon_device_locked);
+        final ImageView iconTrashCan = findViewById(R.id.icon_trash_can);
         final ImageView iconInfo = findViewById(R.id.icon_info);
         final ImageView iconLink = findViewById(R.id.icon_link);
         iconFingerprint.getDrawable().setColorFilter(getIconColorFilter());
+        iconDeviceLocked.getDrawable().setColorFilter(getIconColorFilter());
+        iconTrashCan.getDrawable().setColorFilter(getIconColorFilter());
         iconInfo.getDrawable().setColorFilter(getIconColorFilter());
         iconLink.getDrawable().setColorFilter(getIconColorFilter());
 
@@ -87,7 +91,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @StringRes
     int getNegativeButtonTextId() {
-        return R.string.security_settings_fingerprint_enroll_introduction_skip;
+        return R.string.security_settings_fingerprint_enroll_introduction_no_thanks;
     }
 
     @StringRes
