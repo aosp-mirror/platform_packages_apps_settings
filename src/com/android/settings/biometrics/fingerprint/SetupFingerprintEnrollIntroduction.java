@@ -26,15 +26,12 @@ import android.os.UserHandle;
 import android.view.View;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
 import com.android.settings.password.SetupSkipDialog;
-
-import com.google.android.setupcompat.template.FooterButton;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction {
     /**
@@ -57,11 +54,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     }
 
     @Override
-    int getNegativeButtonTextId() {
-        return R.string.security_settings_face_enroll_introduction_cancel;
-    }
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_LOCK_SCREEN_PRESENT, mAlreadyHadLockScreenSetup);
@@ -76,19 +68,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         }
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
-    }
-
-    @Override
-    protected void initViews() {
-        super.initViews();
-
-        FooterButton nextButton = getNextButton();
-        nextButton.setText(
-                this, R.string.security_settings_fingerprint_enroll_introduction_continue_setup);
-
-        final FooterButton cancelButton = getCancelButton();
-        cancelButton.setText(
-                this, R.string.security_settings_fingerprint_enroll_introduction_cancel_setup);
     }
 
     @Override
