@@ -55,9 +55,15 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
         this(context, null /* lifecycle */);
     }
 
-    // TODO (b/73074893) Replace this constructor without Lifecycle using setter method instead.
     public VisiblePatternProfilePreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, KEY_VISIBLE_PATTERN_PROFILE);
+        this(context, lifecycle, KEY_VISIBLE_PATTERN_PROFILE);
+    }
+
+
+    // TODO (b/73074893) Replace this constructor without Lifecycle using setter method instead.
+    public VisiblePatternProfilePreferenceController(
+            Context context, Lifecycle lifecycle, String key) {
+        super(context, key);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mLockPatternUtils = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider()
