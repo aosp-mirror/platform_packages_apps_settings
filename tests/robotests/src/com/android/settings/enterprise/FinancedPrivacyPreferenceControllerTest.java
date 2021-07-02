@@ -48,7 +48,7 @@ public class FinancedPrivacyPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new FinancedPrivacyPreferenceController(
-                mContext, mPrivacyPreferenceControllerHelper);
+                mContext, mPrivacyPreferenceControllerHelper, PREF_KEY_FINANCED_PRIVACY);
     }
 
     @Test
@@ -81,7 +81,15 @@ public class FinancedPrivacyPreferenceControllerTest {
     }
 
     @Test
-    public void testGetPreferenceKey() {
+    public void getPreferenceKey_byDefault_returnsDefaultValue() {
         assertThat(mController.getPreferenceKey()).isEqualTo(PREF_KEY_FINANCED_PRIVACY);
+    }
+
+    @Test
+    public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+        mController = new FinancedPrivacyPreferenceController(
+                mContext, mPrivacyPreferenceControllerHelper, "key");
+
+        assertThat(mController.getPreferenceKey()).isEqualTo("key");
     }
 }

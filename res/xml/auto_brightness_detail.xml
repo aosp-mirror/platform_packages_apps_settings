@@ -20,12 +20,10 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/auto_brightness_title">
 
-    <com.android.settings.widget.VideoPreference
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="auto_brightness_video"
-        android:title="@string/summary_placeholder"
-        settings:animation="@raw/aab_brightness"
-        settings:preview="@drawable/aab_brightness"
-        settings:controller="com.android.settings.widget.VideoPreferenceController"/>
+        settings:searchable="false"
+        settings:lottie_rawRes="@raw/lottie_adaptive_brightness"/>
 
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="auto_brightness"

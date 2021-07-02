@@ -926,16 +926,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks">No thanks</string>
-    <!-- Button text to skip enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_fingerprint_enroll_introduction_skip">No thanks</string>
-    <!-- Button text to continue to the next screen from the introduction [CHAR LIMIT=22] -->
-    <string name="security_settings_fingerprint_enroll_introduction_continue">Continue</string>
     <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
-    <!-- Button text to cancel enrollment from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup">Skip</string>
-    <!-- Button text to continue to the next screen from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup">Next</string>
     <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
     <string name="setup_fingerprint_enroll_skip_title">Skip fingerprint?</string>
     <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
@@ -6163,11 +6155,11 @@
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_summary">To preserve your battery. Learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
+    <string name="battery_tip_dialog_message" product="default">Because you’ve used your phone more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
+    <string name="battery_tip_dialog_message" product="tablet">Because you’ve used your tablet more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
+    <string name="battery_tip_dialog_message" product="device">Because you’ve used your device more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
     <!-- Footer message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message_footer">Includes high-power background activity</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
@@ -6796,6 +6788,10 @@
     <string name="adaptive_connectivity_title">Adaptive connectivity</string>
     <!-- Summary of Adaptive connectivity preference. [CHAR LIMIT=NONE] -->
     <string name="adaptive_connectivity_summary">Extends battery life and improves device performance by automatically managing your network connections</string>
+    <!-- Switch on text of Adaptive connectivity preference. [CHAR LIMIT=NONE]-->
+    <string name="adaptive_connectivity_switch_on">On</string>
+    <!-- Switch off text of Adaptive connectivity preference. [CHAR LIMIT=NONE]-->
+    <string name="adaptive_connectivity_switch_off">Off</string>
 
     <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
     <string name="credentials_title">Credential storage</string>
@@ -6869,7 +6865,11 @@
     <!-- Label for button to uninstall all certificates installed by the credential management app [CHAR LIMIT=30] -->
     <string name="uninstall_certs_credential_management_app">Uninstall certificates</string>
     <!-- Label for button to remove the credential management app [CHAR LIMIT=30] -->
-    <string name="remove_credential_management_app">Remove</string>
+    <string name="remove_credential_management_app">Remove app</string>
+    <!-- Dialog title for button to remove the credential management app [CHAR LIMIT=30] -->
+    <string name="remove_credential_management_app_dialog_title">Remove this app?</string>
+    <!-- Dialog message for button to remove the credential management app [CHAR LIMIT=NONE] -->
+    <string name="remove_credential_management_app_dialog_message">This app won\u2019t manage certificates, but it will stay on your device. Any certificates installed by the app will be uninstalled.</string>
     <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
     <plurals name="number_of_urls">
         <item quantity="one"><xliff:g id="number">%d</xliff:g> URL</item>
@@ -7491,7 +7491,7 @@
     <!-- Button label for enabling a system CA certificate. -->
     <string name="trusted_credentials_enable_label">Enable</string>
     <!-- Button label for removing a user CA certificate. -->
-    <string name="trusted_credentials_remove_label">Remove</string>
+    <string name="trusted_credentials_remove_label">Uninstall</string>
     <!-- Button label for trusting a user CA certificate. -->
     <string name="trusted_credentials_trust_label">Trust</string>
     <!-- Alert dialog confirmation when enabling a system CA certificate. -->
@@ -10034,6 +10034,10 @@
     <string name="switch_on_text">On</string>
     <string name="switch_off_text">Off</string>
 
+    <!-- Switch text for nfc feature being on [CHAR LIMIT=NONE] -->
+    <string name="nfc_setting_on">On</string>
+    <!-- Switch text for nfc feature being off [CHAR LIMIT=NONE] -->
+    <string name="nfc_setting_off">Off</string>
 
     <!-- The subtext when screen pinning feature is enabled. [CHAR LIMIT=28] -->
     <string name="screen_pinning_switch_on_text">On</string>
@@ -11593,10 +11597,10 @@
 
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>
-    <!-- [CHAR LIMIT=60] The preference title for enabling cross-profile remote contact search -->
-    <string name="managed_profile_contact_search_title">Contact search</string>
-    <!-- [CHAR LIMIT=NONE] The preference summary for enabling cross-profile remote contact search -->
-    <string name="managed_profile_contact_search_summary">Allow contact searches by your organization to identify callers and contacts</string>
+    <!-- [CHAR LIMIT=NONE] Settings toggle. This setting lets a user's personal apps identify contacts using the user's work directory. -->
+    <string name="managed_profile_contact_search_title">Search for work directory contacts in personal apps</string>
+    <!-- [CHAR LIMIT=NONE] Settings toggle description. This setting lets a user's personal apps identify contacts using the user's work directory. "Searches" is a noun. -->
+    <string name="managed_profile_contact_search_summary">Your searches and incoming calls may be visible to your IT admin</string>
     <!-- [CHAR LIMIT=NONE] Settings label. This setting lets the user show their work events on their personal calendar. The adjective 'Cross-profile' is referring to the work and personal profiles a user has on their phone. -->
     <string name="cross_profile_calendar_title">Cross-profile calendar</string>
     <!-- [CHAR LIMIT=NONE] Setting description. If the user turns on this setting, they can see their work events on their personal calendar. -->
@@ -11748,29 +11752,16 @@
     <!-- Preference and settings suggestion title text for ambient display double tap (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="device">Double-tap to check device</string>
 
-    <!-- Title text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=60]-->
-    <string name="swipe_bottom_to_notifications_title">Swipe for notifications</string>
-    <!-- Summary text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=NONE]-->
-    <string name="swipe_bottom_to_notifications_summary">Swipe down on the bottom edge of the screen to show your notifications.\nYou can\'t use one-handed mode when this feature is turned on.</string>
-
     <!-- Preference and settings suggestion title text for one handed [CHAR LIMIT=60] -->
     <string name="one_handed_title">One-handed mode</string>
     <!-- Preference Switch for enabling one handed [CHAR LIMIT=60] -->
     <string name="one_handed_mode_enabled">Use one-handed mode</string>
-    <!-- Preference Switch for app taps to exit one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_app_taps_to_exit">Exit when switching apps</string>
-    <!-- Timeout(Never) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_title">Timeout</string>
-    <!-- Timeout(Short) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_short">4 seconds</string>
-    <!-- Timeout(Medium) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_medium">8 seconds</string>
-    <!-- Timeout(Long) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_long">12 seconds</string>
     <!-- Search keywords for "One-Handed" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_one_handed">reachability</string>
     <!-- Category title for one handed swipe down [CHAR_LIMIT=60] -->
     <string name="one_handed_mode_swipe_down_category">Swipe down to</string>
+    <!-- Category title for one handed use the shortcut [CHAR_LIMIT=60] -->
+    <string name="one_handed_mode_use_shortcut_category">Use the shortcut to</string>
     <!-- One-handed mode Intro Text [CHAR_LIMIT=NONE] -->
     <string name="one_handed_mode_intro_text">To use one handed mode, swipe down from the bottom edge of the screen. To use this feature, make sure gesture navigation is turned on in system navigation settings.</string>
     <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=60] -->
@@ -11780,7 +11771,7 @@
     <!-- One-handed mode show notification action [CHAR_LIMIT=60] -->
     <string name="one_handed_action_show_notification_title">Show notifications</string>
     <!-- One-handed mode show notification action [CHAR_LIMIT=NONE] -->
-    <string name="one_handed_action_show_notification_summary">Notification and settings will appear.</string>
+    <string name="one_handed_action_show_notification_summary">Notifications and settings will appear.</string>
     <!-- One-handed mode Intro text for gesture navigation [CHAR_LIMIT=NONE] -->
 
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
@@ -12462,6 +12453,8 @@
     <string name="prevent_ringing_option_vibrate_summary">Vibrate</string>
     <!-- Summary for prevent ringing setting -->
     <string name="prevent_ringing_option_mute_summary">Mute</string>
+    <!-- Summary for prevent ringing setting when the option itself is unavailable. [CHAR LIMIT=NONE] -->
+    <string name="prevent_ringing_option_unavailable_lpp_summary">To enable, first change \"Press and hold power button\" to the power menu.</string>
 
     <!-- Title for detail page of wifi network [CHAR LIMIT=30] -->
     <string name="pref_title_network_details">Network details</string>
@@ -13203,22 +13196,28 @@
     <string name="cards_passes_lower">cards &amp; passes</string>
 
     <!-- Power menu setting name [CHAR LIMIT=NONE] -->
-    <string name="power_menu_setting_name">Power menu</string>
+    <string name="power_menu_setting_name">Press and hold power button</string>
 
-    <!-- Power menu setting title [CHAR LIMIT=NONE] -->
-    <string name="power_menu_setting_title">Power button menu</string>
-
-    <!-- Power menu setting option none [CHAR LIMIT=NONE] -->
-    <string name="power_menu_none">Don\u2019t show any content</string>
+    <!-- Power menu setting summary to describe press and hold power button for Assistant is enabled. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_assist_enabled">Press and hold for the Assistant</string>
+    <!-- Power menu setting summary to describe press and hold power button for Assistant is disabled and power menu will appear. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu">Press and hold for the power menu</string>
+    <!-- Power menu setting summary to describe press and hold power button for Assistant is disabled and nothing will happen. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_assist_disabled_no_action">Press and hold disabled</string>
 
     <!-- Power menu setting privacy no secure screen lock set [CHAR_LIMIT=NONE] -->
     <string name="lockscreen_privacy_not_secure">To use, first set a screen lock</string>
 
-    <!-- Power menu setting use long press power to invoke assistant. [CHAR_LIMIT=NONE] -->
+    <!-- Power menu setting use long press power to invoke assistant. [CHAR LIMIT=NONE] -->
     <string name="power_menu_long_press_for_assist">Hold for Assistant</string>
 
-    <!-- Power menu setting use log press power to invoke assistant summary. [CHAR_LIMIT=NONE] -->
+    <!-- Power menu setting use log press power to invoke assistant summary. [CHAR LIMIT=NONE] -->
     <string name="power_menu_long_press_for_assist_summary">Trigger the Assistant by holding the power button</string>
+
+    <!-- Power menu explanation to press power and volume up to show power and emergency menu. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_power_volume_up_hint">Power &amp; Emergency Menu:\nPress Power and Volume up at the same time.</string>
+    <!-- Power menu explanation where to find prevent ringing option. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_power_prevent_ringing_hint">Prevent ringing:\nShortcut available in the volume menu.</string>
 
     <!-- Wallet (formerly Cards and passes) toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_wallet_setting_toggle">Show wallet</string>
@@ -13383,7 +13382,7 @@
     <string name="mobile_data_no_connection">No connection</string>
     <!-- Provider Model:
          Summary indicating that a SIM has no mobile data connection [CHAR LIMIT=50] -->
-    <string name="mobile_data_off_summary">Internet won\u0027t auto\u2011connect</string>
+    <string name="mobile_data_off_summary">Mobile data won\u0027t auto\u2011connect</string>
     <!-- Provider Model: Summary indicating that no other networks available [CHAR LIMIT=50] -->
     <string name="non_carrier_network_unavailable">No other networks available</string>
     <!-- Provider Model: Summary indicating that no networks available [CHAR LIMIT=50] -->
