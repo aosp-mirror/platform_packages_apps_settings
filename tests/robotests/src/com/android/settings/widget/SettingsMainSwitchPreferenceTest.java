@@ -76,6 +76,7 @@ public class SettingsMainSwitchPreferenceTest {
         mPreference.onBindViewHolder(mHolder);
 
         assertThat(mPreference.isShowing()).isTrue();
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
@@ -85,5 +86,6 @@ public class SettingsMainSwitchPreferenceTest {
         mPreference.onBindViewHolder(mHolder);
 
         assertThat(mPreference.isShowing()).isFalse();
+        assertThat(mPreference.isVisible()).isFalse();
     }
 }
