@@ -82,6 +82,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     // Intent extra. If true, parental consent will be requested before user enrollment.
     public static final String EXTRA_REQUIRE_PARENTAL_CONSENT = "require_consent";
 
+    // Intent extra. If true, the screen asking the user to return the device to their parent will
+    // be skipped after enrollment.
+    public static final String EXTRA_SKIP_RETURN_TO_PARENT = "skip_return_to_parent";
+
     // If EXTRA_REQUIRE_PARENTAL_CONSENT was used to start the activity then the result
     // intent will include this extra containing a bundle of the form:
     // "modality" -> consented (boolean).
@@ -102,6 +106,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     private boolean mIsFaceEnrollable = false;
     private boolean mIsFingerprintEnrollable = false;
     private boolean mParentalOptionsRequired = false;
+    private boolean mSkipReturnToParent = false;
     private Bundle mParentalOptions;
     @Nullable private Long mGkPwHandle;
     @Nullable private ParentalConsentHelper mParentalConsentHelper;
@@ -170,6 +175,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
         // determine what can be enrolled
         final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+
         if (mHasFeatureFace) {
             final FaceManager faceManager = getSystemService(FaceManager.class);
             final List<FaceSensorPropertiesInternal> faceProperties =
@@ -193,9 +199,11 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             }
         }
 
-        // TODO(b/188847063): replace with real flag when ready
-        mParentalOptionsRequired = intent.getBooleanExtra(
-                BiometricEnrollActivity.EXTRA_REQUIRE_PARENTAL_CONSENT, false);
+        mParentalOptionsRequired = intent.getBooleanExtra(EXTRA_REQUIRE_PARENTAL_CONSENT, false);
+        mSkipReturnToParent = intent.getBooleanExtra(EXTRA_SKIP_RETURN_TO_PARENT, false);
+
+        Log.d(TAG, "parentalOptionsRequired: " + mParentalOptionsRequired
+                + ", skipReturnToParent: " + mSkipReturnToParent);
 
         if (mParentalOptionsRequired && mParentalOptions == null) {
             mParentalConsentHelper = new ParentalConsentHelper(
@@ -376,7 +384,12 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
     private void finishOrLaunchHandToParent(int resultCode) {
         if (mParentalOptionsRequired) {
-            launchHandoffToParent();
+            if (!mSkipReturnToParent) {
+                launchHandoffToParent();
+            } else {
+                setResult(RESULT_OK, newResultIntent());
+                finish();
+            }
         } else {
             setResult(resultCode);
             finish();
