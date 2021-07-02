@@ -80,8 +80,7 @@ public class ProviderModelSliceHelper {
     public boolean hasCarrier() {
         if (isAirplaneModeEnabled()
                 || mSubscriptionManager == null || mTelephonyManager == null
-                || mSubscriptionManager.getDefaultDataSubscriptionId()
-                == mSubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                || mSubscriptionManager.getActiveSubscriptionIdList().length <= 0) {
             return false;
         }
         return true;
