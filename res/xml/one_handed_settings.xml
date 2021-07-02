@@ -39,7 +39,8 @@
 
     <PreferenceCategory
         android:key="gesture_one_handed_mode_swipe_down"
-        android:title="@string/one_handed_mode_swipe_down_category">
+        android:title="@string/one_handed_mode_swipe_down_category"
+        settings:controller="com.android.settings.gestures.OneHandedPreferenceCategoryController">
 
         <com.android.settingslib.widget.RadioButtonPreference
             android:key="gesture_one_handed_action_pull_screen_down"
@@ -54,5 +55,4 @@
             settings:controller="com.android.settings.gestures.OneHandedActionShowNotificationPrefController"/>
 
     </PreferenceCategory>
-
 </PreferenceScreen>

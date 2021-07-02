@@ -65,9 +65,6 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
     }
 
     void setTitle(CharSequence title) {
-        if (title == null) {
-            return;
-        }
         mTitle.setText(title);
     }
 
