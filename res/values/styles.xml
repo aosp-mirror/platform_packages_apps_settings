@@ -407,13 +407,15 @@
 
     <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored">
         <item name="android:theme">@style/RoundedCornerThemeOverlay</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
     </style>
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button"/>
 
     <style name="RoundedCornerThemeOverlay">
         <item name="android:buttonCornerRadius">24dp</item>
-        <item name="android:paddingStart">16dp</item>
-        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:colorControlHighlight">@color/ripple_material_inverse</item>
     </style>
 
     <style name="LockPatternContainerStyle">
