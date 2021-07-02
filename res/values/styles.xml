@@ -453,13 +453,16 @@
 
     <style name="device_info_dialog_label">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body1</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="device_info_dialog_value">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body2</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:paddingBottom">24dp</item>
     </style>
 
