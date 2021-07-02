@@ -48,8 +48,6 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.app.LocalePicker;
-import com.android.internal.inputmethod.Completable;
-import com.android.internal.inputmethod.ResultCallbacks;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.view.IInputMethodManager;
 import com.android.settings.R;
@@ -262,13 +260,9 @@ public abstract class DevelopmentTiles extends TileService {
             return false;
         }
 
-        @VisibleForTesting
-        boolean isImeTraceEnabled() {
+        private boolean isImeTraceEnabled() {
             try {
-                // TODO(b/175742251): Get rid of dependency on IInputMethodManager
-                final Completable.Boolean value = Completable.createBoolean();
-                mInputMethodManager.isImeTraceEnabled(ResultCallbacks.of(value));
-                return Completable.getResult(value);
+                return mInputMethodManager.isImeTraceEnabled();
             } catch (RemoteException e) {
                 Log.e(TAG, "Could not get ime trace status, defaulting to false.", e);
             }
@@ -328,16 +322,13 @@ public abstract class DevelopmentTiles extends TileService {
             }
         }
 
-        protected void setImeTraceEnabled(boolean isEnabled) {
+        private void setImeTraceEnabled(boolean isEnabled) {
             try {
-                // TODO(b/175742251): Get rid of dependency on IInputMethodManager
-                final Completable.Void value = Completable.createVoid();
                 if (isEnabled) {
-                    mInputMethodManager.startImeTrace(ResultCallbacks.of(value));
+                    mInputMethodManager.startImeTrace();
                 } else {
-                    mInputMethodManager.stopImeTrace(ResultCallbacks.of(value));
+                    mInputMethodManager.stopImeTrace();
                 }
-                Completable.getResult(value);
             } catch (RemoteException e) {
                 Log.e(TAG, "Could not set ime trace status." + e.toString());
             }
