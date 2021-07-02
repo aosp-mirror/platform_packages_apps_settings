@@ -48,8 +48,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 /** Base activity for Settings pages */
-public class SettingsBaseActivity extends FragmentActivity implements CategoryHandler,
-        AppBarLayout.OnOffsetChangedListener {
+public class SettingsBaseActivity extends FragmentActivity implements CategoryHandler {
 
     /**
      * What type of page transition should be apply.
@@ -59,16 +58,12 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
     private static final int DEFAULT_REQUEST = -1;
-    private static final int FULLY_EXPANDED_OFFSET = 0;
-    private static final int TOOLBAR_MAX_LINE_NUMBER = 2;
     private static final float TOOLBAR_LINE_SPACING_MULTIPLIER = 1.1f;
-    private static final String KEY_IS_TOOLBAR_COLLAPSED = "is_toolbar_collapsed";
 
     protected CategoryMixin mCategoryMixin;
     protected CollapsingToolbarLayout mCollapsingToolbarLayout;
     protected AppBarLayout mAppBarLayout;
     private Toolbar mToolbar;
-    private boolean mIsToolbarCollapsed;
 
     @Override
     public CategoryMixin getCategoryMixin() {
@@ -106,11 +101,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             super.setContentView(R.layout.collapsing_toolbar_base_layout);
             mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
             mAppBarLayout = findViewById(R.id.app_bar);
-            mAppBarLayout.addOnOffsetChangedListener(this);
-            if (savedInstanceState != null) {
-                mIsToolbarCollapsed = savedInstanceState.getBoolean(KEY_IS_TOOLBAR_COLLAPSED);
+            if (mCollapsingToolbarLayout != null) {
+                mCollapsingToolbarLayout.setLineSpacingMultiplier(TOOLBAR_LINE_SPACING_MULTIPLIER);
             }
-            initCollapsingToolbar();
             disableCollapsingToolbarLayoutScrollingBehavior();
         } else {
             super.setContentView(R.layout.settings_base_layout);
@@ -202,23 +195,6 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         }
     }
 
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
-        if (offset == FULLY_EXPANDED_OFFSET) {
-            mIsToolbarCollapsed = false;
-        } else {
-            mIsToolbarCollapsed = true;
-        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (isChangingConfigurations()) {
-            outState.putBoolean(KEY_IS_TOOLBAR_COLLAPSED, mIsToolbarCollapsed);
-        }
-    }
-
     /**
      * SubSetting page should show a toolbar by default. If the page wouldn't show a toolbar,
      * override this method and return false value.
@@ -284,44 +260,5 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
 
     private int getTransitionType(Intent intent) {
         return intent.getIntExtra(EXTRA_PAGE_TRANSITION_TYPE, TransitionType.TRANSITION_NONE);
-    }
-
-    @SuppressWarnings("RestrictTo")
-    private void initCollapsingToolbar() {
-        if (mCollapsingToolbarLayout == null || mAppBarLayout == null) {
-            return;
-        }
-        mCollapsingToolbarLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right, int bottom,
-                    int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                v.removeOnLayoutChangeListener(this);
-                if (mIsToolbarCollapsed) {
-                    return;
-                }
-                final int count = mCollapsingToolbarLayout.getLineCount();
-                if (count > TOOLBAR_MAX_LINE_NUMBER) {
-                    final ViewGroup.LayoutParams lp = mCollapsingToolbarLayout.getLayoutParams();
-                    lp.height = getResources()
-                            .getDimensionPixelSize(R.dimen.toolbar_three_lines_height);
-                    mCollapsingToolbarLayout.setScrimVisibleHeightTrigger(
-                            getResources().getDimensionPixelSize(
-                                    R.dimen.scrim_visible_height_trigger_three_lines));
-                    mCollapsingToolbarLayout.setLayoutParams(lp);
-                    mCollapsingToolbarLayout
-                            .setLineSpacingMultiplier(TOOLBAR_LINE_SPACING_MULTIPLIER);
-                } else if (count == TOOLBAR_MAX_LINE_NUMBER) {
-                    final ViewGroup.LayoutParams lp = mCollapsingToolbarLayout.getLayoutParams();
-                    lp.height = getResources()
-                            .getDimensionPixelSize(R.dimen.toolbar_two_lines_height);
-                    mCollapsingToolbarLayout.setScrimVisibleHeightTrigger(
-                            getResources().getDimensionPixelSize(
-                                    R.dimen.scrim_visible_height_trigger_two_lines));
-                    mCollapsingToolbarLayout.setLayoutParams(lp);
-                    mCollapsingToolbarLayout
-                            .setLineSpacingMultiplier(TOOLBAR_LINE_SPACING_MULTIPLIER);
-                }
-            }
-        });
     }
 }
