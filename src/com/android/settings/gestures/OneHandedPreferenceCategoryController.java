@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,27 +18,35 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /**
- * Preference controller for One-handed mode shortcut settings
+ * Category Preference controller for One-handed mode category
  */
-public class OneHandedEnablePreferenceController extends BasePreferenceController {
+public class OneHandedPreferenceCategoryController extends BasePreferenceController {
 
-    public OneHandedEnablePreferenceController(Context context, String preferenceKey) {
+    private Preference mPreference;
+
+    public OneHandedPreferenceCategoryController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return OneHandedSettingsUtils.isSupportOneHandedMode() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE;
     }
 
     @Override
-    public CharSequence getSummary() {
-        return mContext.getText(
-                OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)
-                        ? R.string.gesture_setting_on : R.string.gesture_setting_off);
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+        mPreference.setTitle(
+                OneHandedSettingsUtils.getNavigationBarMode(mContext) == 0 /* 3 button */
+                ? R.string.one_handed_mode_use_shortcut_category
+                : R.string.one_handed_mode_swipe_down_category);
     }
 }
