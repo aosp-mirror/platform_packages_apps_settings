@@ -394,7 +394,22 @@
 
     <style name="BiometricHeaderStyle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">24dp</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="BiometricEnrollIntroTitle">
+        <item name="android:paddingVertical">24dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="BiometricEnrollIntroMessage">
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="RingProgressBarStyle"

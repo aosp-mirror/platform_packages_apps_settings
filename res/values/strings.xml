@@ -6155,11 +6155,11 @@
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_summary">To preserve your battery. Learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
+    <string name="battery_tip_dialog_message" product="default">Because you’ve used your phone more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
+    <string name="battery_tip_dialog_message" product="tablet">Because you’ve used your tablet more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
+    <string name="battery_tip_dialog_message" product="device">Because you’ve used your device more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
     <!-- Footer message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message_footer">Includes high-power background activity</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
@@ -6788,6 +6788,10 @@
     <string name="adaptive_connectivity_title">Adaptive connectivity</string>
     <!-- Summary of Adaptive connectivity preference. [CHAR LIMIT=NONE] -->
     <string name="adaptive_connectivity_summary">Extends battery life and improves device performance by automatically managing your network connections</string>
+    <!-- Switch on text of Adaptive connectivity preference. [CHAR LIMIT=NONE]-->
+    <string name="adaptive_connectivity_switch_on">On</string>
+    <!-- Switch off text of Adaptive connectivity preference. [CHAR LIMIT=NONE]-->
+    <string name="adaptive_connectivity_switch_off">Off</string>
 
     <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
     <string name="credentials_title">Credential storage</string>
@@ -11585,10 +11589,10 @@
 
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>
-    <!-- [CHAR LIMIT=60] The preference title for enabling cross-profile remote contact search -->
-    <string name="managed_profile_contact_search_title">Contact search</string>
-    <!-- [CHAR LIMIT=NONE] The preference summary for enabling cross-profile remote contact search -->
-    <string name="managed_profile_contact_search_summary">Allow contact searches by your organization to identify callers and contacts</string>
+    <!-- [CHAR LIMIT=NONE] Settings toggle. This setting lets a user's personal apps identify contacts using the user's work directory. -->
+    <string name="managed_profile_contact_search_title">Let personal apps identify contacts using work directory</string>
+    <!-- [CHAR LIMIT=NONE] Settings toggle description. This setting lets a user's personal apps identify contacts using the user's work directory. "Searches" is a noun. -->
+    <string name="managed_profile_contact_search_summary">Searches and incoming calls may be visible to your IT admin</string>
     <!-- [CHAR LIMIT=NONE] Settings label. This setting lets the user show their work events on their personal calendar. The adjective 'Cross-profile' is referring to the work and personal profiles a user has on their phone. -->
     <string name="cross_profile_calendar_title">Cross-profile calendar</string>
     <!-- [CHAR LIMIT=NONE] Setting description. If the user turns on this setting, they can see their work events on their personal calendar. -->
@@ -11740,29 +11744,16 @@
     <!-- Preference and settings suggestion title text for ambient display double tap (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="device">Double-tap to check device</string>
 
-    <!-- Title text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=60]-->
-    <string name="swipe_bottom_to_notifications_title">Swipe for notifications</string>
-    <!-- Summary text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=NONE]-->
-    <string name="swipe_bottom_to_notifications_summary">Swipe down on the bottom edge of the screen to show your notifications.\nYou can\'t use one-handed mode when this feature is turned on.</string>
-
     <!-- Preference and settings suggestion title text for one handed [CHAR LIMIT=60] -->
     <string name="one_handed_title">One-handed mode</string>
     <!-- Preference Switch for enabling one handed [CHAR LIMIT=60] -->
     <string name="one_handed_mode_enabled">Use one-handed mode</string>
-    <!-- Preference Switch for app taps to exit one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_app_taps_to_exit">Exit when switching apps</string>
-    <!-- Timeout(Never) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_title">Timeout</string>
-    <!-- Timeout(Short) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_short">4 seconds</string>
-    <!-- Timeout(Medium) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_medium">8 seconds</string>
-    <!-- Timeout(Long) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_long">12 seconds</string>
     <!-- Search keywords for "One-Handed" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_one_handed">reachability</string>
     <!-- Category title for one handed swipe down [CHAR_LIMIT=60] -->
     <string name="one_handed_mode_swipe_down_category">Swipe down to</string>
+    <!-- Category title for one handed use the shortcut [CHAR_LIMIT=60] -->
+    <string name="one_handed_mode_use_shortcut_category">Use the shortcut to</string>
     <!-- One-handed mode Intro Text [CHAR_LIMIT=NONE] -->
     <string name="one_handed_mode_intro_text">To use one handed mode, swipe down from the bottom edge of the screen. To use this feature, make sure gesture navigation is turned on in system navigation settings.</string>
     <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=60] -->
@@ -12884,8 +12875,6 @@
     <string name="sim_action_reboot">Restart</string>
     <!-- Button on a dialog to reject SIM operations. [CHAR LIMIT=30] -->
     <string name="sim_action_no_thanks">No thanks</string>
-    <!-- Button text to cancel operations proposed by a sim operation dialog [CHAR LIMIT=20] -->
-    <string name="sim_action_cancel">Cancel</string>
     <!-- Button which will disconnect the user from one mobile network and immediately connect to another. [CHAR LIMIT=30] -->
     <string name="sim_switch_button">Switch</string>
     <!-- Title of DSDS activation failure dialog [CHAR LIMIT=40] -->
