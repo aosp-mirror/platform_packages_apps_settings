@@ -16,6 +16,8 @@
 
 package com.android.settings.privacy;
 
+import static android.hardware.SensorPrivacyManager.Sources.SETTINGS;
+
 import android.content.Context;
 
 import androidx.preference.PreferenceScreen;
@@ -51,7 +53,7 @@ public abstract class SensorToggleController extends TogglePreferenceController 
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mSensorPrivacyManagerHelper.setSensorBlocked(getSensor(), !isChecked);
+        mSensorPrivacyManagerHelper.setSensorBlocked(SETTINGS, getSensor(), !isChecked);
         return true;
     }
 
