@@ -73,6 +73,7 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
         mOldSpeed = mIm.getPointerSpeed(getContext());
         mSeekBar.setProgress(mOldSpeed - InputManager.MIN_POINTER_SPEED);
         mSeekBar.setOnSeekBarChangeListener(this);
+        mSeekBar.setContentDescription(getTitle());
     }
 
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {

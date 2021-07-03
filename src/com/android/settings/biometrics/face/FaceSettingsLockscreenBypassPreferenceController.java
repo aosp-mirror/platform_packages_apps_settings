@@ -83,10 +83,10 @@ public class FaceSettingsLockscreenBypassPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        // When the device supports multiple biometrics auth, this preference will be shown
+        // When the device supports multiple biometrics auth, this preference won't be shown
         // in face unlock category.
         if (Utils.isMultipleBiometricsSupported(mContext)) {
-            return AVAILABLE;
+            return UNSUPPORTED_ON_DEVICE;
         }
         if (mUserManager.isManagedProfile(UserHandle.myUserId())) {
             return UNSUPPORTED_ON_DEVICE;

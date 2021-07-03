@@ -129,6 +129,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
                 seekBarPreference.setMin(0);
                 seekBarPreference.setOnPreferenceChangeListener(this);
                 seekBarPreference.setIcon(R.drawable.ic_volume_remote);
+                seekBarPreference.setEnabled(mLocalMediaManager.shouldEnableVolumeSeekBar(info));
                 mPreferenceCategory.addPreference(seekBarPreference);
             }
 

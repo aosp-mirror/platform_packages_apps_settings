@@ -43,7 +43,7 @@
 
     <PreferenceCategory
         android:key="security_settings_face_manage_category"
-        android:title="@string/security_settings_face_settings_require_category">
+        android:title="@string/security_settings_face_settings_preferences_category">
         <SwitchPreference
             android:key="security_settings_face_require_attention"
             android:title="@string/security_settings_face_settings_require_attention"
@@ -63,7 +63,7 @@
             android:title="@string/lockscreen_bypass_title"
             android:summary="@string/lockscreen_bypass_summary"
             settings:keywords="@string/keywords_lockscreen_bypass"
-            settings:controller="com.android.settings.biometrics.face.FaceSettingsLockscreenBypassPreferenceController" />
+            settings:controller="com.android.settings.biometrics.face.BiometricLockscreenBypassPreferenceController" />
     </PreferenceCategory>
 
     <com.android.settingslib.widget.LayoutPreference

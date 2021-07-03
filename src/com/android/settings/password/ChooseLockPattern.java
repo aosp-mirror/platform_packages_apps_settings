@@ -16,6 +16,8 @@
 
 package com.android.settings.password;
 
+import static android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE;
+
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID;
 
@@ -496,6 +498,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     R.layout.choose_lock_pattern, container, false);
             updateActivityTitle();
             layout.setHeaderText(getActivity().getTitle());
+            layout.getHeaderTextView().setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
             if (getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
                 View iconView = layout.findViewById(R.id.sud_layout_icon);
                 if (iconView != null) {
