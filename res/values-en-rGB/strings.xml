@@ -420,11 +420,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can’t use your fingerprint to unlock this device. For more information, contact your organisation’s admin."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancel"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"No, thanks"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_skip" msgid="2284740299244691418">"No, thanks"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Continue"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"I agree"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Skip"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Next"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Skip fingerprint?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in settings."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"When you see this icon, use your fingerprint for authentication, like when you sign in to apps or approve a purchase"</string>
@@ -556,7 +552,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"In addition to unlocking your phone, you can also use your fingerprint to authorise purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" The screen lock option is disabled. To find out more, contact your organisation\'s admin. "<annotation id="admin_details">"More details"</annotation>\n\n"You can still use your fingerprint to authorise purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lift finger, then touch sensor again"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="2193097225615229726">"Device repaired improperly. Fingerprint disabled."</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Can’t use fingerprint sensor. Visit a repair provider"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"You can add up to <xliff:g id="COUNT">%d</xliff:g> fingerprints"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"You’ve added the maximum number of fingerprints"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Can’t add more fingerprints"</string>
@@ -1916,6 +1912,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Set a work PIN"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Set a pattern"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Set a work pattern"</string>
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"For added security, set a password to unlock the phone"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"For added security, set a PIN to unlock the phone"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"For added security, set a pattern to unlock the phone"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"For added security, set a password to unlock the tablet"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"For added security, set a PIN to unlock the tablet"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"For added security, set a pattern to unlock the tablet"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"For added security, set a password to unlock the device"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"For added security, set a PIN to unlock the device"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"For added security, set a pattern to unlock the device"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"To use fingerprint, set password"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"To use fingerprint, set pattern"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"For security, set PIN"</string>
@@ -1938,9 +1943,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"To use Face Unlock, set password"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"To use Face Unlock, set pattern"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"To use Face Unlock, set PIN"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"To use biometrics, set password"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"To use biometrics, set pattern"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"To use biometrics, set PIN"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Set a password to use face or fingerprint"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Set a pattern to use face or fingerprint"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Set a PIN to use face or fingerprint"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Forgot your password?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Forgot your pattern?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Forgotten your PIN?"</string>
@@ -2660,9 +2665,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"See apps with highest usage"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Charging temporarily limited"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"To preserve your battery. Learn more."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Because you’ve used your phone more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Because you’ve used your tablet more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Because you’ve used your device more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Includes high-power background activity"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">Restrict %1$d apps</item>
@@ -2938,6 +2943,8 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> not secure"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptive connectivity"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Extends battery life and improves device performance by automatically managing your network connections"</string>
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"On"</string>
+    <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Off"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Credential storage"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Install a certificate"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Install certificates from storage"</string>
@@ -3849,7 +3856,7 @@
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Show at top of conversation section and appear as floating bubbles"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Show at top of conversation section"</string>
     <string name="other_conversations" msgid="551178916855139870">"Non-priority conversations"</string>
-    <string name="other_conversations_summary" msgid="3487426787901236273">"Conversations to which you’ve made changes"</string>
+    <string name="other_conversations_summary" msgid="3487426787901236273">"Conversations that you’ve made changes to"</string>
     <string name="recent_conversations" msgid="471678228756995274">"Recent conversations"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Clear recent conversations"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Recent conversations removed"</string>
@@ -4395,10 +4402,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"File transfer"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Transfer files to another device"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
-    <skip />
-    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
-    <skip />
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Convert videos to AVC"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"Videos will play on more media players, but quality may be reduced"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Transfer photos or files if MTP is not supported (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB tethering"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4763,8 +4768,8 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope Trace"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensors Off"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Work profile settings"</string>
-    <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"Contact search"</string>
-    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Allow contact searches by your organisation to identify callers and contacts"</string>
+    <string name="managed_profile_contact_search_title" msgid="6387301144026929253">"Let personal apps identify contacts using work directory"</string>
+    <string name="managed_profile_contact_search_summary" msgid="2314393661933028415">"Searches and incoming calls may be visible to your IT admin"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Cross-profile calendar"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Show work events on your personal calendar"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4826,17 +4831,11 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Double-tap to check phone"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Double-tap to check tablet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Double-tap to check device"</string>
-    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Swipe for notifications"</string>
-    <string name="swipe_bottom_to_notifications_summary" msgid="5222014960019273801">"Swipe down on the bottom edge of the screen to show your notifications.\nYou can\'t use one-handed mode when this feature is turned on."</string>
     <string name="one_handed_title" msgid="2584414010282746195">"One-handed mode"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Use one-handed mode"</string>
-    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Exit when switching apps"</string>
-    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Timeout"</string>
-    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 seconds"</string>
-    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 seconds"</string>
-    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 seconds"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"reachability"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Swipe down to"</string>
+    <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Use the shortcut to"</string>
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"To use one-handed mode, swipe down from the bottom edge of the screen. To use this feature, make sure that gesture navigation is turned on in system navigation settings."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Pull screen into reach"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"The top of the screen will move into reach of your thumb."</string>
@@ -5384,12 +5383,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"device controls"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Cards and passes"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"cards and passes"</string>
-    <string name="power_menu_setting_name" msgid="7843519296976254765">"Power menu"</string>
-    <string name="power_menu_setting_title" msgid="7716546106215378956">"Power button menu"</string>
-    <string name="power_menu_none" msgid="4620640577918731270">"Don’t show any content"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"Press and hold power button"</string>
+    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Press and hold for Assistant"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Press and hold for the power menu"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Press and hold disabled"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"To use, first set a screen lock"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Hold for Assistant"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Trigger Assistant by holding the power button"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Power &amp; emergency menu:\nPress power and volume up at the same time."</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Prevent ringing:\nShortcut available in the volume menu."</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Show wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Allow access to wallet from lock screen and Quick Settings"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Show device controls"</string>
@@ -5462,7 +5464,7 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connected"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"No connection"</string>
-    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Internet won\'t auto‑connect"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Mobile data won\'t auto‑connect"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"No other networks available"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"No networks available"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Turn off mobile data?"</string>
@@ -5490,7 +5492,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Use Wi‑Fi hotspot"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Use app pinning"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Use Developer options"</string>
-    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"Use default print service"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Use print service"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Use multiple users"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Use wireless debugging"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Use graphics driver preferences"</string>
