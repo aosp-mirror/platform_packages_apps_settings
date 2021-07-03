@@ -23,6 +23,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.GameSettingsFeatureProvider;
@@ -173,6 +174,11 @@ public abstract class FeatureFactory {
      * Retrieve implementation for Game Settings feature.
      */
     public abstract GameSettingsFeatureProvider getGameSettingsFeatureProvider();
+
+    /**
+     * Retrieve implementation for Accessibility search index feature.
+     */
+    public abstract AccessibilitySearchFeatureProvider getAccessibilitySearchFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

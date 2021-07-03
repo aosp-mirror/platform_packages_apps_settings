@@ -246,17 +246,7 @@ public class BatteryUtilsTest {
     }
 
     @Test
-    public void testShouldHideSystemConsumer_LowPower_ReturnTrue() {
-        when(mAggregateBatteryConsumer.getConsumedPower(
-                BatteryConsumer.POWER_COMPONENT_FLASHLIGHT)).thenReturn(0.0005);
-        assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
-                BatteryConsumer.POWER_COMPONENT_FLASHLIGHT)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSystemConsumer_HighPower_ReturnFalse() {
-        when(mAggregateBatteryConsumer.getConsumedPower(
-                BatteryConsumer.POWER_COMPONENT_FLASHLIGHT)).thenReturn(0.5);
+    public void testShouldHideSystemConsumer_OtherType_ReturnFalse() {
         assertThat(mBatteryUtils.shouldHideDevicePowerComponent(mAggregateBatteryConsumer,
                 BatteryConsumer.POWER_COMPONENT_FLASHLIGHT)).isFalse();
     }

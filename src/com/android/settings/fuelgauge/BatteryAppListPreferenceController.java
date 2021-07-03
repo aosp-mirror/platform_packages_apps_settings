@@ -359,9 +359,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                 componentId < BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID
                         + deviceConsumer.getCustomPowerComponentCount();
                 componentId++) {
-            if (!showAllApps
-                    && mBatteryUtils.shouldHideCustomDevicePowerComponent(deviceConsumer,
-                    componentId)) {
+            if (!showAllApps) {
                 continue;
             }
 

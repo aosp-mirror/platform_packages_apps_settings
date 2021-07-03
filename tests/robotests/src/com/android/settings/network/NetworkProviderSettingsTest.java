@@ -66,7 +66,6 @@ import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConnectedWifiEntryPreference;
 import com.android.settings.wifi.WifiConfigController2;
 import com.android.settings.wifi.WifiDialog2;
-import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
@@ -105,7 +104,7 @@ public class NetworkProviderSettingsTest {
     @Mock
     private PreferenceManager mPreferenceManager;
     @Mock
-    private ConnectivitySubsystemsRecoveryManager mConnectivitySubsystemsRecoveryManager;
+    private InternetResetHelper mInternetResetHelper;
     @Mock
     private Preference mAirplaneModeMsgPreference;
     @Mock
@@ -439,49 +438,14 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    public void onOptionsItemSelected_fixConnectivity_triggerSubsystemRestart() {
-        doReturn(true).when(mConnectivitySubsystemsRecoveryManager).isRecoveryAvailable();
-        mNetworkProviderSettings.mConnectivitySubsystemsRecoveryManager =
-                mConnectivitySubsystemsRecoveryManager;
+    public void onOptionsItemSelected_fixConnectivity_restartInternet() {
+        mNetworkProviderSettings.mInternetResetHelper = mInternetResetHelper;
         doReturn(false).when(mNetworkProviderSettings).isPhoneOnCall();
         doReturn(NetworkProviderSettings.MENU_FIX_CONNECTIVITY).when(mMenuItem).getItemId();
 
         mNetworkProviderSettings.onOptionsItemSelected(mMenuItem);
 
-        verify(mConnectivitySubsystemsRecoveryManager).triggerSubsystemRestart(any(), any());
-    }
-
-    @Test
-    public void onOptionsItemSelected_fixConnectivityOnCall_neverTriggerSubsystemRestart() {
-        doReturn(true).when(mConnectivitySubsystemsRecoveryManager).isRecoveryAvailable();
-        mNetworkProviderSettings.mConnectivitySubsystemsRecoveryManager =
-                mConnectivitySubsystemsRecoveryManager;
-        doReturn(true).when(mNetworkProviderSettings).isPhoneOnCall();
-        doNothing().when(mNetworkProviderSettings).showResetInternetDialog();
-        doReturn(NetworkProviderSettings.MENU_FIX_CONNECTIVITY).when(mMenuItem).getItemId();
-
-        mNetworkProviderSettings.onOptionsItemSelected(mMenuItem);
-
-        verify(mConnectivitySubsystemsRecoveryManager, never()).triggerSubsystemRestart(any(),
-                any());
-    }
-
-    @Test
-    public void onSubsystemRestartOperationBegin_showResetInternetHideApmMsg() {
-        mNetworkProviderSettings.onSubsystemRestartOperationBegin();
-
-        verify(mResetInternetPreference).setVisible(true);
-        verify(mAirplaneModeMsgPreference).setVisible(false);
-    }
-
-    @Test
-    public void onSubsystemRestartOperationEnd_showApmMsgHideResetInternet() {
-        doReturn(true).when(mAirplaneModeEnabler).isAirplaneModeOn();
-
-        mNetworkProviderSettings.onSubsystemRestartOperationEnd();
-
-        verify(mResetInternetPreference).setVisible(false);
-        verify(mAirplaneModeMsgPreference).setVisible(true);
+        verify(mInternetResetHelper).restart();
     }
 
     @Test
@@ -534,5 +498,33 @@ public class NetworkProviderSettingsTest {
         final Preference p = mNetworkProviderSettings.createConnectedWifiEntryPreference(wifiEntry);
 
         assertThat(p instanceof NetworkProviderSettings.FirstWifiEntryPreference).isTrue();
+    }
+
+    @Test
+    public void updateWifiEntryPreferences_activityIsNull_ShouldNotCrash() {
+        when(mNetworkProviderSettings.getActivity()).thenReturn(null);
+
+        // should not crash
+        mNetworkProviderSettings.updateWifiEntryPreferences();
+    }
+
+    @Test
+    public void updateWifiEntryPreferences_viewIsNull_ShouldNotCrash() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+        when(mNetworkProviderSettings.getView()).thenReturn(null);
+
+        // should not crash
+        mNetworkProviderSettings.updateWifiEntryPreferences();
+    }
+
+    @Test
+    public void updateWifiEntryPreferences_isRestricted_bypassUpdate() {
+        mNetworkProviderSettings.mIsRestricted = true;
+        mNetworkProviderSettings.mWifiEntryPreferenceCategory = mock(PreferenceCategory.class);
+
+        mNetworkProviderSettings.updateWifiEntryPreferences();
+
+        verify(mNetworkProviderSettings.mWifiEntryPreferenceCategory, never()).setVisible(true);
     }
 }

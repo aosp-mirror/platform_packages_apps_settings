@@ -126,6 +126,12 @@ public class RemoteMediaSlice implements CustomSliceable {
                         + maxVolume);
                 continue;
             }
+            if (!getWorker().shouldEnableVolumeSeekBar(info)) {
+                // There is no disable state. We hide it directly.
+                Log.d(TAG, "Unable to add Slice. " + info.getName() + ": This is a group session");
+                continue;
+            }
+
             final CharSequence appName = Utils.getApplicationLabel(
                     mContext, info.getClientPackageName());
             final CharSequence outputTitle = mContext.getString(R.string.media_output_label_title,
