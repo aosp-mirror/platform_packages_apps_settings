@@ -420,11 +420,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Du kan använda fingeravtrycket för att låsa upp mobilen och godkänna köp.\n\nObs! Du kan inte använda fingeravtrycket för att låsa upp den här enheten. Kontakta organisationens administratör om du vill veta mer."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Avbryt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Nej tack"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_skip" msgid="2284740299244691418">"Nej tack"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Fortsätt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Jag godkänner"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Hoppa över"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Nästa"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Vill du hoppa över fingeravtryck?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Det tar bara ett par minuter att konfigurera fingeravtrycket. Hoppar du över det kan du lägga till fingeravtryck i inställningarna senare."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"När du ser ikonen kan du autentisera med fingeravtrycket, t.ex. när du loggar in i appar eller godkänner köp"</string>
@@ -433,7 +429,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Så fungerar det"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Med fingeravtryckslås skapas en unik modell av ditt fingeravtryck så att du kan verifiera din identitet. Fingeravtrycksmodellen skapas under konfigureringen genom att bilder tas av fingeravtrycket i olika positioner."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Med fingeravtryckslås skapas en unik modell av ditt barns fingeravtryck så att barnen kan verifiera sin identitet. Fingeravtrycksmodellen skapas under konfigureringen genom att bilder tas av fingeravtrycket i olika positioner."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"När du använder Pixel Imprint uppdateras fingeravtrycksmodellen med hjälp av bilder. De bilder som används för att skapa fingeravtrycksmodellen lagras aldrig, men fingeravtrycksmodellen lagras säkert på telefonen och lämnar den aldrig. All behandling görs säkert på telefonen."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"När du använder Pixel Imprint uppdateras fingeravtrycksmodellen med bilder. Bilderna som används för att skapa fingeravtrycksmodellen lagras aldrig. Däremot lagras fingeravtrycksmodellen men endast på telefonen, inte någon annanstans. All hantering sker säkert på telefonen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"När barnet använder Pixel Imprint uppdateras fingeravtrycksmodellen med hjälp av bilder. De bilder som används för att skapa fingeravtrycksmodellen lagras aldrig, men fingeravtrycksmodellen lagras säkert på telefonen och lämnar den aldrig. All behandling görs säkert på telefonen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Du kan radera fingeravtrycksbilderna och fingeravtrycksmodellen eller inaktivera fingeravtryckslås när du vill i inställningarna. Fingeravtrycksbilderna och fingeravtrycksmodellerna lagras på telefonen tills du raderar dem."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Du och ditt barn kan radera fingeravtrycksbilderna och fingeravtrycksmodellen eller inaktivera fingeravtryckslås när som helst i inställningarna. Fingeravtrycksbilderna och fingeravtrycksmodellerna lagras på telefonen tills du raderar dem."</string>
@@ -565,7 +561,7 @@
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Vill du radera det här fingeravtrycket?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Om du gör detta raderas fingeravtrycksbilderna och fingeravtrycksmodellen som har kopplats till <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> och lagras på enheten"</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Du kan inte låsa upp telefonen eller verifiera din identitet i appar med ditt fingeravtryck."</string>
-    <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Du kan inte låsa upp jobbprofilen, auktorisera köp eller logga in i jobbappar med ditt fingeravtryck."</string>
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Då kan du inte låsa upp jobbprofilen, auktorisera köp eller logga in i jobbappar med ditt fingeravtryck."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, ta bort"</string>
     <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Upplåsning med ansikte och fingeravtryck"</string>
     <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Tryck för att konfigurera"</string>
@@ -2669,9 +2665,12 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appar med högst batteriförbrukning"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laddning har begränsats tillfälligt"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"För att spara batteri. Läs mer."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Mobilen har använts mer än vanligt. Batteriet kan ta slut snabbare än beräknat.\n\nDe mest krävande apparna efter batteriförbrukning:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Surfplattan har använts mer än vanligt. Batteriet kan ta slut snabbare än beräknat.\n\nDe mest krävande apparna efter batteriförbrukning:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Enheten har använts mer än vanligt. Batteriet kan ta slut snabbare än beräknat.\n\nDe mest krävande apparna efter batteriförbrukning:"</string>
+    <!-- no translation found for battery_tip_dialog_message (4592387206991500075) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (111303605119856034) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (3896805213768863874) -->
+    <skip />
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Inkluderar batterikrävande aktivitet i bakgrunden"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">Begränsa %1$d appar</item>
@@ -2947,6 +2946,10 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> är inte säker"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptive Connectivity"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Får batteriet att räcka längre och ger enheten bättre prestanda genom att nätverksanslutningar hanteras automatiskt"</string>
+    <!-- no translation found for adaptive_connectivity_switch_on (3653067561620745493) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_switch_off (5076172560836115265) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"Uppgiftslagring"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installera ett certifikat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Installera certifikat från lagringsenhet"</string>
@@ -4770,8 +4773,10 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscopespårning"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensorer är inaktiverade"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Inställningar för jobbprofilen"</string>
-    <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"Kontaktsökning"</string>
-    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Tillåt att organisationen söker bland kontakter för att identifiera uppringare och kontakter"</string>
+    <!-- no translation found for managed_profile_contact_search_title (6387301144026929253) -->
+    <skip />
+    <!-- no translation found for managed_profile_contact_search_summary (2314393661933028415) -->
+    <skip />
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Kalender för flera profiler"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Visa jobbhändelser i den personliga kalendern"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4833,17 +4838,12 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Tryck snabbt två gånger för att kolla telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tryck snabbt två gånger för att kolla surfplattan"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tryck snabbt två gånger för att kolla enheten"</string>
-    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Svep för aviseringar"</string>
-    <string name="swipe_bottom_to_notifications_summary" msgid="5222014960019273801">"Svep nedåt på skärmens nederkant för att visa aviseringarna.\nDu kan inte använda enhandsläge när den här funktionen är aktiverad."</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Enhandsläge"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Använd enhandsläge"</string>
-    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Avsluta när du byter app"</string>
-    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Tidsgräns"</string>
-    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 sekunder"</string>
-    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 sekunder"</string>
-    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 sekunder"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"nåbarhet"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Svep nedåt för att"</string>
+    <!-- no translation found for one_handed_mode_use_shortcut_category (1414714099339147711) -->
+    <skip />
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Om du vill använda enhandsläge sveper du nedåt från skärmens nederkant. Se till att navigering med rörelser har aktiverats i systemnavigeringsinställningarna för att använda funktionen."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Dra skärmen inom räckhåll"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Skärmens överkant flyttas inom räckhåll för din tumme."</string>
@@ -5391,12 +5391,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"enhetsstyrning"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kort och värdekort"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kort och värdekort"</string>
-    <string name="power_menu_setting_name" msgid="7843519296976254765">"Startmeny"</string>
-    <string name="power_menu_setting_title" msgid="7716546106215378956">"Strömbrytarmeny"</string>
-    <string name="power_menu_none" msgid="4620640577918731270">"Visa inget innehåll"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"Håll strömbrytaren nedtryckt"</string>
+    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Håll nedtryckt för att öppna assistenten"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Håll nedtryckt för att öppna startmenyn"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Funktionen håll nedtryckt har inaktiverats"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Ställ först in ett skärmlås"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Håll ned för att öppna assistenten"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Öppna assistenten genom att hålla ned strömbrytaren"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Startmenyn och menyn för nödsituationer:\nTryck på strömbrytaren + höj volymen samtidigt"</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Inaktivera ringsignal:\nEn genväg finns i volymmenyn."</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Visa Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Tillåt åtkomst till Wallet från låsskärmen och snabbinställningar"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Visa enhetsstyrning"</string>
@@ -5469,7 +5472,7 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Ansluten"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Ingen anslutning"</string>
-    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Du ansluts inte automatiskt till internet"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Du ansluts inte till mobildata automatiskt"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Inga andra nätverk är tillgängliga"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"Det finns inga tillgängliga nätverk"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Vill du inaktivera mobildata?"</string>
@@ -5497,7 +5500,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Använd wifi-surfzon"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Använd fästa appar"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Använd utvecklaralternativ"</string>
-    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"Använd standardtjänst för utskrift"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Använd utskriftstjänst"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Använd flera användare"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Använd trådlös felsökning"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Använd inställningar för grafikdrivrutin"</string>
