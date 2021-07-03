@@ -50,7 +50,6 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
 
     private SettingsMainSwitchBar mMainSwitchBar;
     private CharSequence mTitle;
-    private boolean mIsVisible;
     private EnforcedAdmin mEnforcedAdmin;
     private RestrictedPreferenceHelper mRestrictedHelper;
 
@@ -87,7 +86,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
         }
         mMainSwitchBar = (SettingsMainSwitchBar) holder.findViewById(R.id.main_switch_bar);
         initMainSwitchBar();
-        if (mIsVisible) {
+        if (isVisible()) {
             mMainSwitchBar.show();
             if (mMainSwitchBar.isChecked() != isChecked()) {
                 setChecked(isChecked());
@@ -101,7 +100,6 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     private void init(Context context, AttributeSet attrs) {
         setLayoutResource(R.layout.preference_widget_main_switch);
         mSwitchChangeListeners.add(this);
-        mIsVisible = true;
 
         if (attrs != null) {
             final TypedArray a = context.obtainStyledAttributes(attrs,
@@ -151,7 +149,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
      * Show the MainSwitchBar
      */
     public void show() {
-        mIsVisible = true;
+        setVisible(true);
         if (mMainSwitchBar != null) {
             mMainSwitchBar.show();
         }
@@ -161,7 +159,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
      * Hide the MainSwitchBar
      */
     public void hide() {
-        mIsVisible = false;
+        setVisible(false);
         if (mMainSwitchBar != null) {
             mMainSwitchBar.hide();
         }

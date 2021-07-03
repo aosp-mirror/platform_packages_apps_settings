@@ -37,7 +37,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -80,7 +79,7 @@ public class CommonUtils {
         }
     }
 
-    public static boolean connectToURL(URL url) throws ExecutionException, InterruptedException {
+    public static boolean connectToURL(URL url) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         HttpURLConnection connection = null;

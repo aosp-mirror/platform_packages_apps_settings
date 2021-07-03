@@ -24,6 +24,8 @@ import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
+import android.telecom.TelecomManager;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -39,6 +41,7 @@ import com.android.settings.testutils.CommonUtils;
 import com.android.settings.testutils.UiUtils;
 
 import org.junit.After;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -46,13 +49,12 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class MobileDataPreferenceControllerComponentTest {
     public static final int TIMEOUT = 2000;
-    private static final int SUBSCRIPTION_ID = 2;
+    private static int sSubscriptionId = 2;
     public final String TAG = this.getClass().getName();
     private final Instrumentation mInstrumentation = InstrumentationRegistry.getInstrumentation();
     private final WifiManager mWifiManager =
@@ -61,6 +63,9 @@ public class MobileDataPreferenceControllerComponentTest {
     private final TelephonyManager mTelephonyManager =
             (TelephonyManager) mInstrumentation.getTargetContext().getSystemService(
                     Context.TELEPHONY_SERVICE);
+    private final TelecomManager mTelecomManager =
+            (TelecomManager) mInstrumentation.getTargetContext().getSystemService(
+                    Context.TELECOM_SERVICE);
 
     @Rule
     public ActivityScenarioRule<com.android.settings.network.telephony.MobileNetworkActivity>
@@ -73,7 +78,6 @@ public class MobileDataPreferenceControllerComponentTest {
     @Before
     public void setUp() {
         mOriginWifiEnabled = mWifiManager.isWifiEnabled();
-        Log.d(TAG, "setup! mTelephonyManager = " + mTelephonyManager);
         // Disable wifi
         set_wifi_enabled(false);
 
@@ -82,6 +86,15 @@ public class MobileDataPreferenceControllerComponentTest {
         if (!mOriginDataEnabled) {
             mTelephonyManager.enableDataConnectivity();
         }
+
+        // Current sim card is not available for data network.
+        sSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
+        Assume.assumeTrue("Device cannot mobile network! Should ignore test.",
+                sSubscriptionId != SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+
+        int simState = mTelephonyManager.getSimState();
+        Assume.assumeTrue("Sim card is not ready. Expect: " + TelephonyManager.SIM_STATE_READY
+                + ", Actual: " + simState, simState == TelephonyManager.SIM_STATE_READY);
     }
 
     /**
@@ -104,7 +117,12 @@ public class MobileDataPreferenceControllerComponentTest {
                 MobileDataPreferenceController controller = new MobileDataPreferenceController(
                         mInstrumentation.getTargetContext(), "mobile_data");
                 FragmentManager manager = ((FragmentActivity) activity).getSupportFragmentManager();
-                controller.init(manager, SUBSCRIPTION_ID);
+                controller.init(manager, sSubscriptionId);
+
+                // Make sure mobile network can connect at first.
+                assertThat(UiUtils.waitUntilCondition(1000,
+                        () -> CommonUtils.connectToURL(url))).isTrue();
+
                 Log.d(TAG, "Start to click ");
                 controller.setChecked(false);
                 Log.d(TAG, "Set Checked, wait for fully close.");
@@ -114,17 +132,9 @@ public class MobileDataPreferenceControllerComponentTest {
                         () -> !mTelephonyManager.isDataEnabled())).isTrue();
 
                 // Assert the network is not connectable.
-                assertThat(UiUtils.waitUntilCondition(3000,
-                        () -> {
-                            try {
-                                return CommonUtils.connectToURL(url);
-                            } catch (ExecutionException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            return false;
-                        })).isFalse();
+                assertThat(UiUtils.waitUntilCondition(1000,
+                        () -> CommonUtils.connectToURL(url))).isFalse();
+
             } catch (IOException e) {
 
             }
