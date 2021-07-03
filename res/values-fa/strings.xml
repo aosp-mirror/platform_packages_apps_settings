@@ -420,11 +420,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"از اثر انگشتتان برای باز کردن قفل تلفن یا تأیید خریدها استفاده کنید.\n\nتوجه: نمی‌توانید از اثر انگشتتان برای باز کردن قفل این دستگاه استفاده کنید. برای اطلاعات بیشتر، با سرپرست سیستم سازمانتان تماس بگیرید."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"لغو"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"نه متشکرم"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_skip" msgid="2284740299244691418">"نه متشکرم"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"ادامه"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"موافقم"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"رد شدن"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"بعدی"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"از تنظیم اثر انگشت رد می‌شوید؟"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"تنظیم اثر انگشت تنها یک یا دو دقیقه طول می‌کشد. اکر از این تنظیم رد شوید، می‌توانید اثر انگشتتان را بعداً در تنظیمات اضافه کنید."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"وقتی این نماد را مشاهده کردید، از اثر انگشت برای اصالت‌سنجی استفاده کنید؛ مثلاً وقتی به سیستم وارد می‌شوید یا خریدی را تأیید می‌کنید"</string>
@@ -556,8 +552,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"علاوه بر باز کردن قفل تلفنتان، همچنین می‌توانید از اثر انگشتتان برای اجازه دادن به خریدها و دسترسی برنامه استفاده کنید."<annotation id="url">"بیشتر بدانید"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" گزینه قفل صفحه غیرفعال است. با سرپرست دستگاه تماس بگیرید تا بیشتر بدانید. "<annotation id="admin_details">"جزئیات بیشتر"</annotation>\n\n"برای تأیید خریدها و دسترسی به برنامه، همچنان می‌توانید از اثر انگشتتان استفاده کنید. "<annotation id="url">" بیشتر بدانید"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"انگشت را بلند کنید، سپس دوباره حسگر را لمس کنید"</string>
-    <!-- no translation found for security_settings_fingerprint_bad_calibration (598502302101068608) -->
-    <skip />
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"امکان استفاده از حسگر اثر انگشت وجود ندارد. به ارائه‌دهنده خدمات تعمیر مراجعه کنید"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"می‌توانید حداکثر <xliff:g id="COUNT">%d</xliff:g> اثرانگشت اضافه کنید"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"حداکثر تعداد اثرانگشت را اضافه کرده‌اید"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"نمی‌توانید اثرانگشت‌های بیشتری اضافه کنید"</string>
@@ -1917,24 +1912,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"تنظیم پین کاری"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"تنظیم الگو"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"تنظیم الگوی کاری"</string>
-    <!-- no translation found for lockpassword_choose_password_description (5577129054698844787) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_pin_description (6918551978526104693) -->
-    <skip />
-    <!-- no translation found for lockpattern_choose_pattern_description (9192075941504119893) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_password_description (8643302878337665976) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_pin_description (4655253942098525998) -->
-    <skip />
-    <!-- no translation found for lockpattern_choose_pattern_description (6921239531465577215) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_password_description (5003299048956319434) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_pin_description (4979785114465985543) -->
-    <skip />
-    <!-- no translation found for lockpattern_choose_pattern_description (3226044648785762351) -->
-    <skip />
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"برای امنیت بیشتر، گذرواژه‌ای برای باز کردن قفل تلفن تنظیم کنید"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"برای امنیت بیشتر، پینی برای باز کردن قفل تلفن تنظیم کنید"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"برای امنیت بیشتر، الگویی برای باز کردن قفل تلفن تنظیم کنید"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"برای امنیت بیشتر، گذرواژه‌ای برای باز کردن قفل رایانه لوحی تنظیم کنید"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"برای امنیت بیشتر، پینی برای باز کردن قفل رایانه لوحی تنظیم کنید"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"برای امنیت بیشتر، الگویی برای باز کردن قفل رایانه لوحی تنظیم کنید"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"برای امنیت بیشتر، گذرواژه‌ای برای باز کردن قفل دستگاه تنظیم کنید"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"برای امنیت بیشتر، پینی برای باز کردن قفل دستگاه تنظیم کنید"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"برای امنیت بیشتر، الگویی برای باز کردن قفل دستگاه تنظیم کنید"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"تنظیم گذرواژه برای استفاده از اثر انگشت"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"تنظیم الگو برای استفاده از اثر انگشت"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"برای امنیت، پین تنظیم کنید"</string>
@@ -1957,12 +1943,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"برای استفاده از «قفل‌گشایی با چهره»، گذرواژه تنظیم کنید"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"برای استفاده از «قفل‌گشایی با چهره»، الگو تنظیم کنید"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"برای استفاده از «قفل‌گشایی با چهره»، پین تنظیم کنید"</string>
-    <!-- no translation found for lockpassword_choose_your_password_header_for_biometrics (2053366309272487015) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_pattern_header_for_biometrics (4038476475293734905) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_pin_header_for_biometrics (9086039918921009380) -->
-    <skip />
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"گذرواژه‌ای برای استفاده از چهره یا اثر انگشت تنظیم کنید"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"الگویی برای استفاده از چهره یا اثر انگشت تنظیم کنید"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"پینی برای استفاده از چهره یا اثر انگشت تنظیم کنید"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"گذرواژه را فراموش کردید؟"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"الگو را فراموش کردید؟"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"پین خود را فراموش کرده‌اید؟"</string>
@@ -2682,9 +2665,12 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"برنامه‌هایی که بیشترین مصرف را دارند ببینید"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"شارژ موقتاً محدود شده است"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"برای محافظت از باتری. بیشتر بدانید."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"از تلفنتان بیش‌ازحد معمول استفاده شده است. ممکن است باتری آن زودتر از موعد موردانتظار تمام شود.\n\nبرنامه‌های برتر براساس مصرف باتری:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"از رایانه لوحی بیش از حد معمول استفاده شده است. ممکن است باتری آن زودتر از موعد موردانتظار تمام شود.\n\nبرنامه‌های برتر براساس مصرف باتری:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"از دستگاه بیش از حد معمول استفاده شده است. ممکن است باتری آن زودتر از موعد موردانتظار تمام شود.\n\nبرنامه‌های برتر براساس مصرف باتری:"</string>
+    <!-- no translation found for battery_tip_dialog_message (4592387206991500075) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (111303605119856034) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (3896805213768863874) -->
+    <skip />
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"شامل فعالیت پس‌زمینه با شارژ بالا"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="one">‏%1$d برنامه را محدود کنید</item>
@@ -2960,6 +2946,10 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> امن نیست"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"اتصال تطبیقی"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"با مدیریت خودکار اتصال‌های شبکه، عمر باتری را افزایش می‌دهد و عملکرد دستگاه را بهبود می‌بخشد"</string>
+    <!-- no translation found for adaptive_connectivity_switch_on (3653067561620745493) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_switch_off (5076172560836115265) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"حافظه اطلاعات کاربری"</string>
     <string name="credentials_install" msgid="3933218407598415827">"نصب گواهینامه"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"نصب گواهی‌ها از حافظه"</string>
@@ -4417,10 +4407,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"انتقال فایل"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"انتقال فایل‌ها به دستگاه دیگر"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <!-- no translation found for usb_transcode_files (2441954752105119109) -->
-    <skip />
-    <!-- no translation found for usb_transcode_files_summary (307102635711961513) -->
-    <skip />
+    <string name="usb_transcode_files" msgid="2441954752105119109">"‏تبدیل ویدیو به AVC"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"ویدیوها در پخش‌کننده‌های رسانه بیشتری پخش خواهند شد، اما ممکن است کیفیت کاهش پیدا کند"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"‏انتقال عکس یا فایل، اگر MTP پشتیبانی نمی‌شود (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"‏اشتراک‌گذاری اینترنت با USB"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4785,8 +4773,10 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"‏رد Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"حسگرها خاموش است"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"تنظیمات نمایه کاری"</string>
-    <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"جستجوی مخاطب"</string>
-    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"جستجوهای مخاطب توسط سازمانتان برای شناسایی تماس‌گیرندگان و مخاطبین مجاز است"</string>
+    <!-- no translation found for managed_profile_contact_search_title (6387301144026929253) -->
+    <skip />
+    <!-- no translation found for managed_profile_contact_search_summary (2314393661933028415) -->
+    <skip />
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"تقویم بین‌‌نمایه‌ای"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"نمایش رویدادهای کاری در تقویم شخصی"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4848,17 +4838,12 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"دو ضربه برای چک کردن تلفن"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"برای بررسی رایانه لوحی، دو ضربه سریع بزنید"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"برای بررسی دستگاه، دو ضربه سریع بزنید"</string>
-    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"کشیدن برای دیدن اعلان‌ها"</string>
-    <string name="swipe_bottom_to_notifications_summary" msgid="5222014960019273801">"برای نمایش اعلان‌ها، در قسمت پایینی لبه صفحه تند به‌پایین بکشید.\nوقتی این ویژگی روشن باشد، نمی‌توانید از حالت یک‌دستی استفاده کنید."</string>
-    <string name="one_handed_title" msgid="2584414010282746195">"حالت تک حرکت"</string>
+    <string name="one_handed_title" msgid="2584414010282746195">"حالت یک‌دستی"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"استفاده از حالت یک‌دستی"</string>
-    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"خروج وقتی‌که بین برنامه‌ها جابه‌جا می‌شوید"</string>
-    <string name="one_handed_timeout_title" msgid="8851767822595789976">"درنگ"</string>
-    <string name="one_handed_timeout_short" msgid="304069319841702995">"۴ ثانیه"</string>
-    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"۸ ثانیه"</string>
-    <string name="one_handed_timeout_long" msgid="6537332654662635890">"۱۲ ثانیه"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"قابلیت دسترسی"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"برای کنش‌های زیر تند به پایین بکشید"</string>
+    <!-- no translation found for one_handed_mode_use_shortcut_category (1414714099339147711) -->
+    <skip />
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"برای استفاده از حالت یک‌دستی، از پایین صفحه به پایین بکشید. برای استفاده از این ویژگی، مطمئن شوید پیمایش اشاره‌ای در تنظیمات پیمایش سیستم روش باشد."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"صفحه را به قسمت دردسترس بکشید"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"بالای صفحه دردسترس انگشت شستتان قرار خواهد گرفت."</string>
@@ -5406,12 +5391,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"کنترل‌های دستگاه"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"کارت‌ها و مجوزها"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"کارت‌ها و مجوزها"</string>
-    <string name="power_menu_setting_name" msgid="7843519296976254765">"منوی روشن/خاموش"</string>
-    <string name="power_menu_setting_title" msgid="7716546106215378956">"منوی دکمه روشن/خاموش"</string>
-    <string name="power_menu_none" msgid="4620640577918731270">"محتوایی نمایش داده نشود"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"دکمه روشن/خاموش را فشار دهید و نگه دارید"</string>
+    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"برای «دستیار»، فشار دهید و نگه دارید"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"برای منوی روشن/خاموش، فشار دهید و نگه دارید"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"فشار دادن و نگه داشتن غیرفعال شده است"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"برای استفاده، نخست قفل صفحه را تنظیم کنید"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"نگه داشتن دکمه برای فراخوانی «دستیار»"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"راه‌اندازی «دستیار»‌با نگه داشتن دکمه روشن/خاموش"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"منوی روشن/خاموش و اضطراری:\nدکمه روشن/خاموش و افزایش صدا را هم‌زمان فشار دهید."</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"جلوگیری از زنگ زدن:\nمیان‌بر در منوی میزان صدا دردسترس است."</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"نمایش کیف پول"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"مجاز کردن دسترسی به کیف پول از صفحه قفل و تنظیمات فوری"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"نمایش کنترل‌های دستگاه"</string>
@@ -5484,7 +5472,7 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"متصل است"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"اتصال برقرار نیست"</string>
-    <string name="mobile_data_off_summary" msgid="3841411571485837651">"اینترنت به‌طور خودکار متصل نخواهد شد"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"داده تلفن همراه به‌طور خودکار متصل نخواهد شد"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"شبکه دیگری وجود ندارد"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"شبکه‌ای در دسترس نیست"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"داده تلفن همراه خاموش شود؟"</string>
@@ -5512,7 +5500,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"‏استفاده از نقطه اتصال Wi-Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"استفاده از سنجاق کردن برنامه"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"استفاده از گزینه‌های توسعه‌دهنده"</string>
-    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"استفاده از سرویس چاپ پیش‌فرض"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"استفاده از سرویس چاپ"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"استفاده از چند کاربر"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"استفاده از اشکال‌زدایی بی‌سیم"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"استفاده از اولویت‌های درایور گرافیک"</string>
