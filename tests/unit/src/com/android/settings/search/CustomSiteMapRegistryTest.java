@@ -62,7 +62,7 @@ public class CustomSiteMapRegistryTest {
     }
 
     @Test
-    public void shouldContainRecentLocationRequestSeeAllFragmentPairs() {
+    public void shouldContainRecentLocationAccessSeeAllFragmentPairs() {
         assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
                 RecentLocationAccessSeeAllFragment.class.getName())).isEqualTo(
                 LocationSettings.class.getName());

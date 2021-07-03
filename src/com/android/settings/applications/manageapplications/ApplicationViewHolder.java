@@ -159,6 +159,9 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         if (mSwitch != null && mWidgetContainer != null) {
             mWidgetContainer.setOnClickListener(listener);
             mWidgetContainer.setFocusable(false);
+            mWidgetContainer.setClickable(false);
+            mSwitch.setFocusable(true);
+            mSwitch.setClickable(true);
             mSwitch.setChecked(checked);
             mSwitch.setEnabled(enabled);
         }

@@ -65,13 +65,6 @@
         android:icon="@drawable/ic_folder_vd_theme_24"
         android:title="@string/bluetooth_show_files_received_via_bluetooth"/>
 
-    <SwitchPreference
-        android:key="uwb_settings"
-        android:title="@string/uwb_settings_title"
-        android:order="100"
-        android:summary="@string/summary_placeholder"
-        settings:controller="com.android.settings.uwb.UwbPreferenceController"/>
-
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="-8"/>

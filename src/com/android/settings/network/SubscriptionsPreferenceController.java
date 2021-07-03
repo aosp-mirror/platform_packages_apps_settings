@@ -603,7 +603,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         public String getNetworkType(Context context, Config config,
                 TelephonyDisplayInfo telephonyDisplayInfo, int subId) {
             String iconKey = getIconKey(telephonyDisplayInfo);
-            int resId = mapIconSets(config).get(iconKey).dataContentDescription;
+            MobileIconGroup iconGroup = mapIconSets(config).get(iconKey);
+            int resId = 0;
+            if (iconGroup != null) {
+                resId = iconGroup.dataContentDescription;
+            }
             return resId != 0
                     ? SubscriptionManager.getResourcesForSubId(context, subId).getString(resId)
                     : "";
