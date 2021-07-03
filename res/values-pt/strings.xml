@@ -3883,8 +3883,8 @@
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fechar"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Enviar feedback sobre o dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Inserir PIN do administrador"</string>
-    <string name="switch_on_text" msgid="5664542327776075105">"Ativada"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"Desativada"</string>
+    <string name="switch_on_text" msgid="5664542327776075105">"Ativado"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Desativado"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fixação de apps"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"A fixação de apps permite manter o app atual em exibição até você liberá-lo. Esse recurso pode ser usado, por exemplo, para permitir que uma pessoa em que você confia abra um jogo específico. \n\nQuando um app está fixado, ele pode abrir outros apps e acessar dados pessoais. \n\nPara usar a fixação de apps: 	\n1.	Ative a fixação de apps 	\n2.	Abra a opção \"Visão geral\" 	\n3.	Na parte superior da tela, toque no ícone do app e depois em \"Fixar\""</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"A fixação de apps permite manter o app atual em exibição até você liberá-lo. Esse recurso pode ser usado, por exemplo, para permitir que uma pessoa em que você confia abra um jogo específico. \n\nQuando um app está fixado, ele pode abrir outros apps e acessar dados pessoais. \n\nSe você quiser compartilhar seu dispositivo com alguém de forma segura, tente usar um usuário convidado. \n\nPara usar a fixação de apps: 	\n1.	Ative a fixação de apps 	\n2.	Abra a opção \"Visão geral\" 	\n3.	Na parte superior da tela, toque no ícone do app e depois em \"Fixar\""</string>
@@ -4494,7 +4494,7 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Tocar para verificar o tablet"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Tocar para verificar o dispositivo"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para ver a hora, as notificações e outras informações, toque na tela."</string>
-    <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Deslizar para baixo no sensor de impressão digital para ver as notificações"</string>
+    <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Usar impressão digital para ver as notificações"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Usar impressão digital"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Para ver suas notificações, deslize o dedo indicador para baixo no sensor de impressão digital localizado na parte traseira do smartphone."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Para ver suas notificações, deslize o dedo indicador para baixo no sensor de impressão digital localizado na parte traseira do tablet."</string>
@@ -4965,10 +4965,21 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"mídia"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"O Bluetooth será ativado"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Indisponível durante o Modo noite"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Um dispositivo não confiável quer acessar suas mensagens. Toque para ver detalhes."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Um dispositivo quer acessar suas mensagens. Toque para ver detalhes."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Conceder acesso às mensagens?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Um dispositivo Bluetooth não confiável, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quer acessar suas mensagens.\n\nVocê não se conectou ao <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> antes."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Um dispositivo não confiável quer acessar seus contatos e seu registro de chamadas. Toque para ver detalhes."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Um dispositivo Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) quer acessar suas mensagens.\n\nVocê nunca se conectou a <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Um dispositivo quer acessar seus contatos e seu registro de chamadas. Toque para ver detalhes."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Conceder acesso aos contatos e ao registro de chamadas?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Um dispositivo Bluetooth não confiável, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, quer acessar seus contatos e seu registro de chamadas. Isso inclui dados sobre chamadas recebidas e realizadas.\n\nVocê não se conectou a <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> antes."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Um dispositivo Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) quer acessar seus contatos e seu registro de chamadas. Isso inclui dados sobre chamadas recebidas e realizadas.\n\nVocê nunca se conectou a <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Não permitir"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Solicitação de acesso ao chip"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Um dispositivo quer acessar seu chip. Toque para ver detalhes."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Permitir acesso ao chip?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Um dispositivo Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) quer acessar dados no seu chip. Isso inclui seus contatos.\n\nEnquanto estiver conectado, o <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> receberá todas as chamadas feitas para o número <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Dispositivo Bluetooth disponível"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Um dispositivo quer se conectar. Toque para ver detalhes."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Conectar ao dispositivo Bluetooth?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> quer se conectar a este smartphone.\n\nVocê nunca se conectou ao <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Não conectar"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Conectar"</string>
 </resources>

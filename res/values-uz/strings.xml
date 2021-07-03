@@ -2159,11 +2159,11 @@
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Maxsus imkoniyatlar tugmasi"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"2 barmoq bilan tepaga svayp qiling"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"3 barmoq bilan tepaga svayp qiling"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Maxsus imkoniyatlar tugmasini bosing"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Maxsus imkoniyatlar tugmasini bosish"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Ekran pastidagi <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> maxsus imkoniyatlar tugmasini bosing.\n\nFunksiyalarni almashtirish uchun maxsus imkoniyatlar tugmasini bosib turing."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"2 ta barmoq bilan ekranning pastidan tepaga suring.\n\nFunksiyalarni almashtirish uchun 2 ta barmoq bilan tepaga suring va ushlab turing."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"3 ta barmoq bilan ekranning pastidan tepaga suring.\n\nFunksiyalarni almashtirish uchun 3 ta barmoq bilan tepaga suring va ushlab turing."</string>
-    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Tovush tugmalarini bosib turing"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Tovush tugmalarini bosib turish"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"tovush tugmalarini bosib turish"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Ikkala tovush tugmalarini bosib turing."</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Ekran ustiga uch marta bosing"</string>
@@ -2228,7 +2228,7 @@
     <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"Taglavhalarni sozlash funksiyasi barcha ilovalarda ishlamaydi."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Maxsus imkoniyatlar tugmasi"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"2 ta barmoq bilan yuqoriga va pastga svayp qilish"</string>
-    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Tovush tugmalarini bosib turing"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Tovush tugmalarini bosib turish"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Ekran ustiga uch marta bosing"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Davom etish"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Eshitish apparatlari"</string>
@@ -3883,7 +3883,7 @@
     <string name="suggestion_button_close" msgid="6865170855573283759">"Yopish"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Qurilma haqida fikr-mulohaza"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Administrator PIN kodini kiriting"</string>
-    <string name="switch_on_text" msgid="5664542327776075105">"YONIQ"</string>
+    <string name="switch_on_text" msgid="5664542327776075105">"Yoniq"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Yoqilmagan"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Ilovani mahkamlash"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Bu funksiya muayyan ilovaning ekranini telefonda boshqa ilovalarga kirishni yopgan holda mahkamlaydi. Undan tanishlar bilan oʻyin oʻynash uchun foydalanish mumkin. \n\nMahkamlangan ilova boshqa ilovalarni ochishi va shaxsiy maʼlumotlarga kirishi mumkin. \n\nBu funksiyadan foydalanish uchun quyidagilarni bajaring: 	\n1.	Sozlamalar orqali funksiyani yoqing 	\n2.	Umumiy menyusini oching 	\n3.	Ekranning yuqori qismidagi ilova belgisini bosib, keyin Mahkamlash tugmasini bosing."</string>
@@ -4965,10 +4965,21 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth yoqiladi"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Uyqu vaqti rejimi yoniqligi sababli ishlamaydi"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Notanish qurilma xabarlaringizga kirmoqchi. Batafsil."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Qurilma xabarlaringizga kirmoqchi. Batafsil."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Xabarlarga kirishga ruxsat berilsinmi?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Notanish Bluetooth qurilmasi (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) xabarlaringizga kirmoqchi.\n\nSiz ilgari <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> qurilmasiga ulanmagansiz."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Notanish qurilma kontakt va chaqiruvlar jurnaliga kirmoqchi. Batafsil."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Bluetooth qurilmasi (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) xabarlaringizga kirmoqchi.\n\nSiz ilgari <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> qurilmasiga ulanmagansiz."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Qurilma kontakt va chaqiruvlar jurnaliga kirmoqchi. Batafsil."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Chaqiruvlar va chaqiruvlar jurnaliga kirishga ruxsat berilsinmi?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Notanish Bluetooth qurilmasi ([<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>]) kontakt va chaqiruvlaringiz tarixiga kirmoqchi. Bunga kiruvchi va chiquvchi chaqiruvlar ham kiradi.\n\nSiz ilgari <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> qurilmasiga ulanmagansiz."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth qurilmasi (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) kontakt va chaqiruvlar jurnaliga kirmoqchi. Bunga kiruvchi va chiquvchi chaqiruvlar ham kiradi.\n\nSiz ilgari <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> qurilmasiga ulanmagansiz."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Ruxsat berilmasin"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM kartaga ruxsat soʻrovi"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Qurilma SIM kartangizga ruxsat olmoqchi. Batafsil."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"SIM kartaga ruxsat berilsinmi?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Bluetooth qurilmasi (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) SIM kartangiz maʼlumotlariga ruxsat olmoqchi. Jumladan, kontaktlaringizga.\n\nUlanganda <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> qurilmasi <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> raqamiga chaqiruvlarni qabul qila oladi."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Bluetooth qurilma topildi"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Qurilma ulanmoqchi. Batafsil."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Bluetooth qurilmaga ulansinmi?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> telefoningizga ulanmoqda.\n\nOldin <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> qurilmasiga ulanmagansiz."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Ulanmasin"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Ulansin"</string>
 </resources>

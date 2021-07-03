@@ -4806,7 +4806,7 @@
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"Fjern SIM-kortet for at deaktivere det"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"Tryk for at aktivere <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"Vil du skifte til <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Der kan kun være ét downloadet SIM-kort ad gangen.\n\nSelvom du skifter til <xliff:g id="CARRIER1">%1$s</xliff:g>, opsiger det ikke din tjeneste fra <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
+    <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Der kan kun være ét aktivt downloadet SIM-kort ad gangen.\n\nSelvom du skifter til <xliff:g id="CARRIER1">%1$s</xliff:g>, opsiger det ikke din tjeneste fra <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Skift til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Ryd SIM-kort"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"SIM-kortet kan ikke ryddes"</string>
@@ -4965,10 +4965,21 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"Medier"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth aktiveres"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ikke tilgængelig, da sengetidstilstand er aktiveret"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"En ikke-godkendt enhed vil gerne have adgang til dine beskeder. Tryk for at få flere oplysninger."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"En enhed vil gerne have adgang til dine beskeder. Tryk for at få flere oplysninger."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Vil du give adgang til beskeder?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"En ikke-godkendt Bluetooth-enhed, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vil gerne have adgang til dine beskeder.\n\nDu har ikke oprettet forbindelse til <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> før."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"En ikke-godkendt enhed vil gerne have adgang til dine kontakter og din opkaldshistorik. Tryk for at få flere oplysninger."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"En Bluetooth-enhed, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vil gerne have adgang til dine beskeder.\n\nDu har ikke oprettet forbindelse til <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> før."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"En enhed vil gerne have adgang til dine kontakter og din opkaldshistorik. Tryk for at få flere oplysninger."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Vil du give adgang til kontakter og opkaldshistorik?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"En ikke-godkendt Bluetooth-enhed, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vil gerne have adgang til dine kontakter og din opkaldshistorik. Dette omfatter data om indgående og udgående opkald.\n\nDu har ikke oprettet forbindelse til <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> før."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"En Bluetooth-enhed, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vil gerne have adgang til dine kontakter og din opkaldshistorik. Dette omfatter data om indgående og udgående opkald.\n\nDu har ikke oprettet forbindelse til <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> før."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Tillad ikke"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Anmodning om adgang til SIM-kort"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"En enhed vil gerne have adgang til dit SIM-kort. Tryk for at få flere oplysninger."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Vil du give adgang til SIM-kortet?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Bluetooth-enheden <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vil gerne have adgang til data på dit SIM-kort. Dette omfatter dine kontakter.\n\nNår der er oprettet forbindelse, vil <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> modtage alle indgående opkald til <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"En Bluetooth-enhed er tilgængelig"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"En enhed vil gerne oprette forbindelse. Tryk for at få flere oplysninger."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Vil du oprette forbindelse til Bluetooth-enheden?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vil gerne oprette forbindelse til denne telefon.\n\nDu har ikke tidligere oprettet forbindelse til <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Opret ikke forbindelse"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Opret forbindelse"</string>
 </resources>

@@ -3747,7 +3747,7 @@
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Schemat inaktiveras när ett alarm ljuder"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Hur Stör ej ska fungera"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Använd standardinställningarna"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Skapa anpassade inställningar för det här schemat"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Skapa anpassade inställningar för schemat"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"För <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>"</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -4495,7 +4495,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Tryck för att kolla enheten"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Visa tid, aviseringar och annan information genom att trycka på skärmen."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Svep över fingeravtryckssensorn för aviseringar"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Svep över fingeravtryckssensorn"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Svep över fingeravtryckssensor"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av telefonen."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av surfplattan."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Visa aviseringar genom att svepa nedåt på fingeravtryckssensorn på baksidan av enheten."</string>
@@ -4965,10 +4965,21 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth aktiveras"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Inte tillgängligt eftersom sovläget är på"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"En enhet som inte är betrodd vill få åtkomst till dina meddelanden. Tryck här för mer information."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"En enhet vill få åtkomst till dina meddelanden. Tryck här för mer information."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Vill du tillåta åtkomst till meddelanden?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"En Bluetooth-enhet som inte är betrodd, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vill få åtkomst till dina meddelanden.\n\nDu har inte anslutit till <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> tidigare."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"En enhet som inte är betrodd vill få åtkomst till dina kontakter och samtalshistoriken. Tryck här för mer information."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"En Bluetooth-enhet, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vill få åtkomst till dina meddelanden.\n\nDu har inte anslutit till <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> tidigare."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"En enhet vill få åtkomst till dina kontakter och samtalshistoriken. Tryck här för mer information."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Vill du tillåta åtkomst till kontakter och samtalshistorik?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"En Bluetooth-enhet som inte är betrodd, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vill få åtkomst till dina kontakter och samtalshistoriken. Detta inkluderar data om inkommande och utgående samtal.\n\nDu har inte anslutit till <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> tidigare."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"En Bluetooth-enhet, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vill få åtkomst till dina kontakter och samtalshistoriken. Detta inkluderar data om inkommande och utgående samtal.\n\nDu har inte anslutit till <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> tidigare."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Tillåt inte"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Begäran om åtkomst till SIM-kort"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"En enhet vill få åtkomst till ditt SIM-kort. Tryck här för mer information."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Vill du tillåta åtkomst till SIM-kortet?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"En Bluetooth-enhet, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, vill få åtkomst till data på ditt SIM-kort. Detta inkluderar dina kontakter.\n\nNär <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> är ansluten tar den emot alla samtal till <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"En Bluetooth-enhet är tillgänglig"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"En enhet vill ansluta. Tryck här för mer information."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Vill du ansluta till Bluetooth-enheten?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> vill ansluta till den här telefonen.\n\nDu har inte anslutit till <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> tidigare."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Anslut inte"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Anslut"</string>
 </resources>

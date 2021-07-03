@@ -1277,7 +1277,7 @@
     <string name="automatic_brightness" msgid="4599827881929079513">"Kecerahan otomatis"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Angkat untuk membangunkan"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Tampilan standby"</string>
-    <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Waktu ditampilkan"</string>
+    <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Kapan ditampilkan"</string>
     <string name="doze_title" msgid="1523090408230862316">"Aktifkan layar untuk notifikasi"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Dalam keadaan mati, layar akan menyala saat ada notifikasi baru"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Selalu tampilkan waktu dan info"</string>
@@ -2193,7 +2193,7 @@
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 detik"</string>
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 menit"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 menit"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Waktu tindakan (Waktu tunggu aksesibilitas)"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Waktu ambil tindakan (Waktu tunggu aksesibilitas)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Waktu ambil tindakan"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Pilih durasi tampilan pesan yang perlu ditindak, tetapi hanya terlihat sementara.\n\nTidak semua aplikasi mendukung setelan ini."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Jeda sentuh lama"</string>
@@ -2769,7 +2769,7 @@
     <string name="background_data_dialog_message" msgid="7760280837612824670">"Menonaktifkan data latar belakang memperpanjang masa pakai baterai dan mengurangi penggunaan data. Beberapa aplikasi mungkin masih menggunakan sambungan data latar belakang."</string>
     <string name="sync_automatically" msgid="4874122892765430304">"Sinkronisasi otomatis data apl"</string>
     <string name="sync_enabled" msgid="5794103781356455043">"Sinkronisasi AKTIF"</string>
-    <string name="sync_disabled" msgid="1636223106968593391">"Sinkronisasi MATI"</string>
+    <string name="sync_disabled" msgid="1636223106968593391">"Sinkronisasi NONAKTIF"</string>
     <string name="sync_error" msgid="846923369794727644">"Kesalahan sinkronisasi"</string>
     <string name="last_synced" msgid="1527008461298110443">"Terakhir disinkronkan <xliff:g id="LAST_SYNC_TIME">%1$s</xliff:g>"</string>
     <string name="sync_in_progress" msgid="6200093151211458977">"Sedang menyinkronkan..."</string>
@@ -4698,7 +4698,7 @@
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"Tekan tombol Daya &amp; Naikkan Volume secara bersamaan untuk"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"Pintasan untuk mencegah berdering"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Getar"</string>
-    <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Nonaktifkan suara"</string>
+    <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Bisukan"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Jangan lakukan apa pun"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="5649569082721304741">"Aktif (bergetar)"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="4885288334872920616">"Aktif (suara dimatikan)"</string>
@@ -4965,10 +4965,21 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth akan diaktifkan"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Tidak tersedia karena mode waktu tidur diaktifkan"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Perangkat tidak tepercaya ingin mengakses pesan Anda. Ketuk untuk melihat detailnya."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Sebuah perangkat ingin mengakses pesan Anda. Ketuk untuk melihat detailnya."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Izinkan akses ke pesan?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Perangkat Bluetooth yang tidak dipercaya, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ingin mengakses pesan Anda.\n\nAnda belum pernah terhubung ke <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> sebelumnya."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Perangkat yang tidak tepercaya ingin mengakses kontak dan log panggilan Anda. Ketuk untuk melihat detailnya."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Sebuah perangkat Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ingin mengakses pesan Anda.\n\nAnda belum pernah terhubung ke <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> sebelumnya."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Sebuah perangkat ingin mengakses kontak dan log panggilan Anda. Ketuk untuk melihat detailnya."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Izinkan akses ke kontak dan log panggilan?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Perangkat Bluetooth yang tidak tepercaya, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ingin mengakses kontak dan log panggilan Anda. Ini mencakup data tentang panggilan masuk dan keluar.\n\nAnda belum pernah terhubung ke <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> sebelumnya."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Sebuah perangkat Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, ingin mengakses kontak dan log panggilan Anda. Ini mencakup data tentang panggilan masuk dan keluar.\n\nAnda belum pernah terhubung ke <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> sebelumnya."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Jangan izinkan"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Permintaan akses kartu SIM"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Sebuah perangkat ingin mengakses kartu SIM Anda. Ketuk untuk melihat detailnya."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Izinkan akses ke kartu SIM?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Perangkat Bluetooth bernama <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ingin mengakses data di kartu SIM Anda. Data ini mencakup kontak Anda.\n\nSaat terhubung, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> akan menerima semua panggilan telepon yang dilakukan ke <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Perangkat Bluetooth tersedia"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Sebuah perangkat ingin terhubung. Ketuk untuk melihat detailnya."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Hubungkan ke perangkat Bluetooth?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ingin terhubung ke ponsel ini.\n\nAnda belum pernah terhubung ke <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> sebelumnya."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Jangan hubungkan"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Hubungkan"</string>
 </resources>
