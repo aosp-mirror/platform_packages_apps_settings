@@ -1486,6 +1486,7 @@
         </activity>
 
         <activity android:name=".security.RequestManageCredentials"
+                  android:theme="@style/Theme.SubSettings"
                   android:exported="true">
             <intent-filter>
                 <action android:name="android.security.MANAGE_CREDENTIALS"/>
@@ -1910,7 +1911,6 @@
         </activity>
 
         <activity android:name=".password.SetupChooseLockGeneric$InternalActivity"
-            android:theme="@style/GlifTheme.Light"
             android:exported="false"
             android:excludeFromRecents="true" />
 

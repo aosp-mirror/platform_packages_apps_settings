@@ -215,8 +215,10 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     }
 
     protected void onSkipButtonClick(View view) {
-        setResult(RESULT_SKIP);
-        finish();
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+            setResult(RESULT_SKIP);
+            finish();
+        }
     }
 
     @Override
