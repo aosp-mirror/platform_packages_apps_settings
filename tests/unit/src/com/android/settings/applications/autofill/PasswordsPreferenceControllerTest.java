@@ -21,11 +21,19 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.service.autofill.AutofillServiceInfo;
 
 import androidx.lifecycle.Lifecycle;
@@ -40,9 +48,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.google.android.collect.Lists;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 
 import java.util.Collections;
 import java.util.List;
@@ -56,7 +64,7 @@ public class PasswordsPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mContext = ApplicationProvider.getApplicationContext();
+        mContext = spy(ApplicationProvider.getApplicationContext());
         if (Looper.myLooper() == null) {
             Looper.prepare(); // needed to create the preference screen
         }
@@ -64,6 +72,15 @@ public class PasswordsPreferenceControllerTest {
         mPasswordsPreferenceCategory = new PreferenceCategory(mContext);
         mPasswordsPreferenceCategory.setKey("passwords");
         mScreen.addPreference(mPasswordsPreferenceCategory);
+    }
+
+    @Test
+    // Tests that getAvailabilityStatus() does not throw an exception if it's called before the
+    // Controller is initialized (this can happen during indexing).
+    public void getAvailabilityStatus_withoutInit_returnsUnavailable() {
+        PasswordsPreferenceController controller =
+                new PasswordsPreferenceController(mContext, mPasswordsPreferenceCategory.getKey());
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
@@ -105,21 +122,26 @@ public class PasswordsPreferenceControllerTest {
         assertThat(mPasswordsPreferenceCategory.getPreferenceCount()).isEqualTo(0);
     }
 
-    @Ignore("TODO: Fix the test to handle the service binding.")
     @Test
     @UiThreadTest
     public void displayPreference_withPasswords_addsPreference() {
         AutofillServiceInfo service = createServiceWithPasswords();
+        service.getServiceInfo().packageName = "";
+        service.getServiceInfo().name = "";
         PasswordsPreferenceController controller =
                 createControllerWithServices(Lists.newArrayList(service));
-        controller.onCreate(() -> mock(Lifecycle.class));
+        doReturn(false).when(mContext).bindServiceAsUser(any(), any(), anyInt(), any());
 
         controller.displayPreference(mScreen);
 
         assertThat(mPasswordsPreferenceCategory.getPreferenceCount()).isEqualTo(1);
         Preference pref = mPasswordsPreferenceCategory.getPreference(0);
         assertThat(pref.getIcon()).isNotNull();
-        assertThat(pref.getIntent().getComponent())
+        pref.performClick();
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        UserHandle user = mContext.getUser();
+        verify(mContext).startActivityAsUser(intentCaptor.capture(), eq(user));
+        assertThat(intentCaptor.getValue().getComponent())
                 .isEqualTo(
                         new ComponentName(
                                 service.getServiceInfo().packageName,
@@ -128,8 +150,10 @@ public class PasswordsPreferenceControllerTest {
 
     private PasswordsPreferenceController createControllerWithServices(
             List<AutofillServiceInfo> availableServices) {
-        return new PasswordsPreferenceController(
-                mContext, mPasswordsPreferenceCategory.getKey(), availableServices);
+        PasswordsPreferenceController controller =
+                new PasswordsPreferenceController(mContext, mPasswordsPreferenceCategory.getKey());
+        controller.init(() -> mock(Lifecycle.class), availableServices);
+        return controller;
     }
 
     private AutofillServiceInfo createServiceWithPasswords() {
