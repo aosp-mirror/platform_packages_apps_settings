@@ -421,11 +421,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Използвайте отпечатъка си, за да отключвате телефона си или да одобрявате покупки.\n\nЗабележка: Не можете да отключвате това устройство с отпечатъка си. За повече информация се свържете с администратора на организацията си."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Отказ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Не, благодаря"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_skip" msgid="2284740299244691418">"Не, благодаря"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Напред"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Приемам"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Пропускане"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Напред"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Да се пропусне ли отпечатъкът?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Настройването на отпечатък отнема само една или две минути. Ако пропуснете тази стъпка, можете да добавите отпечатъка си по-късно от настройките."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Когато видите тази икона, използвайте отпечатъка си за удостоверяване – например при влизане в прилож. или одобряване на покупка"</string>
@@ -2672,9 +2668,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Вижте приложенията с най-голямо използване"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Зареждането временно е ограничено"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"За запазване на батерията ви. Научете повече."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Телефонът ви е използван повече от обикновено. Батерията може да се изтощи по-рано от очакваното.\n\nПриложения с най-висок разход на батерията:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Таблетът ви е използван повече от обикновено. Батерията може да се изтощи по-рано от очакваното.\n\nПриложения с най-висок разход на батерията:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Устройството ви е използвано повече от обикновено. Батерията може да се изтощи по-рано от очакваното.\n\nПриложения с най-висок разход на батерията:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Тъй като сте използвали телефона си повече от обикновено, батерията ви може да се изтощи по-рано от обичайното.\n\nПриложения, използващи батерията най-много:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Тъй като сте използвали таблета си повече от обикновено, батерията ви може да се изтощи по-рано от обичайното.\n\nПриложения, използващи батерията най-много:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Тъй като сте използвали устройството си повече от обикновено, батерията ви може да се изтощи по-рано от обичайното.\n\nПриложения, използващи батерията най-много:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Включва активността на заден план, изразходваща много енергия"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">Ограничаване на %1$d приложения</item>
@@ -2950,6 +2946,8 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> незащитени"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Адаптивно свързване"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Удължава живота на батерията и подобрява ефективността на устройството чрез автоматично управление на връзките с мрежата"</string>
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Вкл."</string>
+    <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Изкл."</string>
     <string name="credentials_title" msgid="7535942196886123656">"Хранилище за идент. данни"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Инсталиране на сертификат"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Инсталиране на сертификати от хранилището"</string>
@@ -3274,7 +3272,7 @@
     <string name="n_cacrts" msgid="5886462550192731627">"%d сертификата от сертифициращи органи"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Подробности за идентификационните данни"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Премахнати идентификационни данни: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
-    <string name="user_credential_none_installed" msgid="918620912366836994">"Няма инсталирани потребителски идентификационни данни"</string>
+    <string name="user_credential_none_installed" msgid="918620912366836994">"Няма инсталирани идентификационни данни на потребителя"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Проверка на правописа"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Проверка на правописа за служебни цели"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Въведете текущата си парола за пълно резервно копие тук"</string>
@@ -3906,7 +3904,7 @@
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никога"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Известия в приложенията и на устройствата"</string>
-    <string name="manage_notification_access_summary" msgid="2907135226478903997">"Управлявайте приложенията и устройствата, които могат да четат известията"</string>
+    <string name="manage_notification_access_summary" msgid="2907135226478903997">"Управление на приложенията и устройствата, които могат да четат известията"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Достъпът до известията в служебния потребителски профил е блокиран"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Приложенията не могат да четат известията"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="3703008881487586312">
@@ -4182,7 +4180,7 @@
     <string name="device_feedback" msgid="5351614458411688608">"Отзиви за устройството"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Въведете администраторския ПИН код"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Вкл."</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"Изключено"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Изкл."</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Включено"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Изключено"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Фиксиране на приложения"</string>
@@ -4773,8 +4771,8 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Трасиране на Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Сензорите са изключени"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Настройки за служебния потребителски профил"</string>
-    <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"Търсене на контакти"</string>
-    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Разрешете търсене на контакти от организацията ви с цел идентифициране на обаждащите се и контактите"</string>
+    <string name="managed_profile_contact_search_title" msgid="6387301144026929253">"Разрешаване на личните приложения да идентифицират контактите посредством служебна директория"</string>
+    <string name="managed_profile_contact_search_summary" msgid="2314393661933028415">"Търсенията и входящите обаждания може да са видими за системния ви администратор"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Календар за няколко потребителски профила"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Показване на служебните събития в личния ви календар"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4836,17 +4834,11 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Двукратно докосване за проверка на телефона"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Двукратно докосване за проверка на таблета"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Двукратно докосване за проверка на устройството"</string>
-    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Прекарване на пръст за известия"</string>
-    <string name="swipe_bottom_to_notifications_summary" msgid="5222014960019273801">"Прекарайте пръст надолу през долния край на екрана, за да видите известията си.\nНе можете да използвате режима за работа с една ръка, когато тази функция е включена."</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Режим за работа с една ръка"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Използване на режима за работа с една ръка"</string>
-    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Изход при превключване на приложенията"</string>
-    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Време за изчакване"</string>
-    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 секунди"</string>
-    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 секунди"</string>
-    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 секунди"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"достъпност"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Прекарайте пръст надолу за"</string>
+    <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Използване на прекия път за"</string>
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"За да използвате режима за работа с една ръка, прекарайте пръст надолу от долния ъгъл на телефона. За да ползвате тази функция, уверете се, че навигирането с жестове е включено от настройките за навигиране в системата."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Издърпване на екрана в обхват"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Горната част на екрана ще се премести в обхвата на палеца ви."</string>
@@ -5394,12 +5386,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"контроли за устройството"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Карти и пропуски"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"карти и пропуски"</string>
-    <string name="power_menu_setting_name" msgid="7843519296976254765">"Меню за включване/изключване"</string>
-    <string name="power_menu_setting_title" msgid="7716546106215378956">"Меню за бутона за включване/изключване"</string>
-    <string name="power_menu_none" msgid="4620640577918731270">"Без показване на съдържание"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"Натиснете и задръжте бутона за включване/изключване"</string>
+    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Натиснете и задръжте за Асистент"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Натиснете и задръжте за менюто за включване/изключване"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Опцията за натискане и задържане е деактивирана"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"За да използвате, първо задайте заключване на екрана"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Задържане за Асистент"</string>
-    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Задействайте Асистент, като задържите бутона за захранване"</string>
+    <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Задействайте Асистент, като задържите бутона за включване/изключване"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Меню за включване/изключване и при спешни случаи:\nНатиснете едновременно бутона за включване/изключване и този за увеличаване на силата на звука."</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Предотвратяване на звъненето:\nВ менюто за силата на звука е налице пряк път."</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Показване на портфейла"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Разрешаване на достъп до портфейла от заключения екран и от бързите настройки"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Показване на контролите за устройството"</string>
@@ -5472,7 +5467,7 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Свързано"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Няма връзка"</string>
-    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Няма автоматично да се установи връзка с интернет"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Връзката за мобилни данни няма да е автоматична"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Няма други налични мрежи"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"Няма налични мрежи"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Да се изключат ли мобилните данни?"</string>
@@ -5500,7 +5495,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Използване на точка за достъп до Wi-Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Използване на функцията за фиксиране на приложение"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Използване на опциите за програмисти"</string>
-    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"Използване на стандартната услуга за отпечатване"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Използване на услуга за отпечатване"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Използване на функцията за няколко потребители"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Използване на безжичното отстраняване на грешки"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Използване на предпочитанията за графичния драйвер"</string>
