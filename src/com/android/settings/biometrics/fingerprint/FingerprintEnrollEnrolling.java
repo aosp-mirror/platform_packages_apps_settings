@@ -36,6 +36,8 @@ import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.OrientationEventListener;
+import android.view.Surface;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
@@ -116,6 +118,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private AccessibilityManager mAccessibilityManager;
     private boolean mIsAccessibilityEnabled;
 
+    private OrientationEventListener mOrientationEventListener;
+    private int mPreviousRotation = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +132,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         mAccessibilityManager = getSystemService(AccessibilityManager.class);
         mIsAccessibilityEnabled = mAccessibilityManager.isEnabled();
+
+        listenOrientationEvent();
 
         if (mCanAssumeUdfps) {
             if (BiometricUtils.isReverseLandscape(getApplicationContext())) {
@@ -253,6 +260,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     protected void onStop() {
         super.onStop();
         stopIconAnimation();
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopListenOrientationEvent();
+        super.onDestroy();
     }
 
     private void animateProgress(int progress) {
@@ -449,6 +462,31 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                     .withEndAction(() -> mErrorText.setVisibility(View.INVISIBLE))
                     .start();
         }
+    }
+
+    private void listenOrientationEvent() {
+        mOrientationEventListener = new OrientationEventListener(this) {
+            @Override
+            public void onOrientationChanged(int orientation) {
+                final int currentRotation = getDisplay().getRotation();
+                if ((mPreviousRotation == Surface.ROTATION_90
+                        && currentRotation == Surface.ROTATION_270) || (
+                        mPreviousRotation == Surface.ROTATION_270
+                                && currentRotation == Surface.ROTATION_90)) {
+                    mPreviousRotation = currentRotation;
+                    recreate();
+                }
+            }
+        };
+        mOrientationEventListener.enable();
+        mPreviousRotation = getDisplay().getRotation();
+    }
+
+    private void stopListenOrientationEvent() {
+        if (mOrientationEventListener != null) {
+            mOrientationEventListener.disable();
+        }
+        mOrientationEventListener = null;
     }
 
     private final Animator.AnimatorListener mProgressAnimationListener

@@ -23,19 +23,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.BannerMessagePreference;
 
 /**
  * The controller of camera based rotate permission warning preference. The preference appears when
  * the camera permission is missing for the camera based rotation feature.
  */
-public class SmartAutoRotatePermissionController extends BasePreferenceController {
+public class SmartAutoRotatePermissionController extends BasePreferenceController implements
+        LifecycleObserver, OnResume {
 
     private final Intent mIntent;
+    private BannerMessagePreference mPreference;
 
     public SmartAutoRotatePermissionController(Context context, String key) {
         super(context, key);
@@ -48,13 +53,25 @@ public class SmartAutoRotatePermissionController extends BasePreferenceControlle
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final BannerMessagePreference preference =
-                (BannerMessagePreference) screen.findPreference(getPreferenceKey());
-        preference
+        mPreference = screen.findPreference(getPreferenceKey());
+        mPreference
                 .setPositiveButtonText(R.string.auto_rotate_manage_permission_button)
                 .setPositiveButtonOnClickListener(v -> {
                     mContext.startActivity(mIntent);
                 });
+    }
+
+    @Override
+    public void onResume() {
+        updateState(mPreference);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference != null) {
+            preference.setVisible(isAvailable());
+        }
     }
 
     @Override
