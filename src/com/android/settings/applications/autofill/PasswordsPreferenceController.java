@@ -137,8 +137,8 @@ public class PasswordsPreferenceController extends BasePreferenceController
                 prefContext.startActivityAsUser(intent, UserHandle.of(user));
                 return true;
             });
-            // Set an empty summary to avoid a UI flicker when the value loads.
-            pref.setSummary(R.string.summary_placeholder);
+            // Set a placeholder summary to avoid a UI flicker when the value loads.
+            pref.setSummary(R.string.autofill_passwords_count_placeholder);
 
             final MutableLiveData<Integer> passwordCount = new MutableLiveData<>();
             passwordCount.observe(
