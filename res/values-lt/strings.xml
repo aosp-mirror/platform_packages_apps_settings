@@ -428,7 +428,7 @@
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Uždėkite pirštą ant jutiklio ir pakelkite, kai pajusite vibravimą"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Patraukite ir vėl prilieskite"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Vis patraukite pirštą, kad pridėtumėte skirtingas piršto atspaudo dalis"</string>
-    <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Piršto atspaudas pridėtas"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Kontrolinis kodas pridėtas"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="8220458039597261933">"Kai rodoma ši piktograma, tapatybei nustatyti ar pirkimo operacijai patvirtinti naudokite piršto antspaudą"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Atlikti vėliau"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Praleisti pirštų atspaudų nustatymą?"</string>
@@ -457,7 +457,7 @@
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Galite pridėti iki <xliff:g id="COUNT">%d</xliff:g> kontrol. kod."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Pridėjote maksimalų skaičių kontrolinių kodų"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Negalima pridėti daugiau kontrolinių kodų"</string>
-    <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Pašalinti visus pirštų atspaudus?"</string>
+    <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Pašalinti visus kontrolinius kodus?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Pašalinti „<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>“"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Ar norite ištrinti šį piršto antspaudą?"</string>
     <string name="fingerprint_last_delete_message" msgid="93311579320049852">"Negalėsite naudoti pirštų atspaudų norėdami atrakinti telefoną, įgalioti pirkimo procesus ar prisijungti prie programų"</string>
@@ -5128,10 +5128,21 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Rodyti leistuvę"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nėra jokių pasiekiamų leistuvių"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"medija"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Nepatikimas įrenginys nori pasiekti jūsų pranešimus. Palieskite, jei reikia išsamios informacijos."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Įrenginys nori pasiekti jūsų pranešimus. Palieskite, jei reikia išsamios informacijos."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Leisti pasiekti pranešimus?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Nepatikimas „Bluetooth“ įrenginys „<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>“ nori pasiekti jūsų pranešimus.\n\nPrie „<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>“ dar niekada nebuvote prisijungę."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Nepatikimas įrenginys nori pasiekti jūsų kontaktus ir skambučių žurnalą. Palieskite, jei reikia išsamios informacijos."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"„Bluetooth“ įrenginys „<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>“ nori pasiekti jūsų pranešimus.\n\nPrie „<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>“ dar niekada nebuvote prisijungę."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Įrenginys nori pasiekti jūsų kontaktus ir skambučių žurnalą. Palieskite, jei reikia išsamios informacijos."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Leisti pasiekti kontaktus ir skambučių žurnalą?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Nepatikimas „Bluetooth“ įrenginys „<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>“ nori pasiekti jūsų kontaktus ir skambučių žurnalą. Tai apima duomenis apie gaunamuosius ir siunčiamuosius skambučius.\n\nPrie „<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>“ dar niekada nebuvote prisijungę."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"„Bluetooth“ įrenginys „<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>“ nori pasiekti jūsų kontaktus ir skambučių žurnalą. Tai apima duomenis apie gaunamuosius ir siunčiamuosius skambučius.\n\nPrie „<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>“ dar niekada nebuvote prisijungę."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Neleisti"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM kortelės prieigos užklausa"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Įrenginys nori pasiekti jūsų SIM kortelę. Palieskite, jei reikia išsamios informacijos."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Leisti pasiekti SIM kortelę?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"„Bluetooth“ įrenginys (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) nori pasiekti duomenis jūsų SIM kortelėje. Tai apima jūsų kontaktus.\n\nPrisijungęs įrenginys <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> gaus visus telefono numeriu <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> atliktus skambučius."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Pasiekiamas „Bluetooth“ įrenginys"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Įrenginys nori prisijungti. Palieskite, jei reikia išsamios informacijos."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Prisijungti prie „Bluetooth“ įrenginio?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> nori prisijungti prie šio telefono.\n\nAnksčiau nebuvote prisijungę prie <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Neprisijungti"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Susieti"</string>
 </resources>

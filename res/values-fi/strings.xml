@@ -3465,7 +3465,7 @@
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Ilmoitushistoria on pois päältä"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Laita ilmoitushistoria päälle, niin voit nähdä aiemmat ja myöhemmäksi siirretyt ilmoitukset"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"Ei viimeaikaisia ilmoituksia"</string>
-    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Viimeaikaiset ja torkutetut ilmoitukset näkyvät täällä"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Viimeaikaiset ja myöhemmäksi siirretyt ilmoitukset näkyvät täällä"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"näytä ilmoitusasetukset"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"avaa ilmoitus"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Salli ilmoitusten torkuttaminen"</string>
@@ -3558,7 +3558,7 @@
     <string name="other_conversations_summary" msgid="3487426787901236273">"Keskustelut, joihin teit muutoksia"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Näytä kuplia tärkeistä keskusteluista"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Tärkeät keskustelut näkyvät vedettävän ilmoitusalueen yläreunassa. Voit myös valita, että ne näkyvät kuplina ja keskeyttävät Älä häiritse ‑tilan."</string>
-    <string name="conversation_onboarding_title" msgid="5194559958353468484">"Tärkeät ja muutetut keskustelut näkyvät tässä"</string>
+    <string name="conversation_onboarding_title" msgid="5194559958353468484">"Tärkeät ja muokatut keskustelut näkyvät tässä"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Kun merkitset keskustelun tärkeäksi tai teet keskusteluihin muita muutoksia, ne näkyvät tässä. \n\nKeskusteluasetusten muuttaminen: \nAvaa ilmoitusalue vetämällä alas näytön yläreunasta ja kosketa keskustelua pitkään."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Näytä äänettömästi ja pienennä"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Näkyy ilman ääntä"</string>
@@ -4946,10 +4946,21 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Näytä soitin"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Soittimia ei saatavilla"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Epäluotettava laite pyytää pääsyä viesteihisi. Katso lisätietoja napauttamalla."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Laite pyytää pääsyä viesteihisi. Katso lisätietoja napauttamalla."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Sallitaanko pääsy viesteihin?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Epäluotettava Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pyytää pääsyä viesteihisi.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen ollut yhteydessä laitteeseesi."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Epäluotettava laite pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Katso lisätietoja napauttamalla."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pyytää pääsyä viesteihisi.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen ollut yhteydessä laitteeseesi."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Laite pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Katso lisätietoja napauttamalla."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Sallitaanko pääsy yhteystietoihin ja puhelulokiin?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Epäluotettava Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Tämä sisältää datan saapuvista ja lähtevistä puheluista.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen ollut yhteydessä laitteeseesi."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, pyytää pääsyä yhteystietoihisi ja puhelulokiisi. Tämä sisältää datan saapuvista ja lähtevistä puheluista.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen ollut yhteydessä laitteeseesi."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Älä salli"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM-kortin pääsyoikeuspyyntö"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Laite haluaa pääsyn SIM-korttiisi. Katso lisätietoja napauttamalla."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Sallitaanko pääsy SIM-korttiin?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Bluetooth-laite, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, haluaa pääsyn SIM-korttisi dataan. Yhteystietosi sisältyvät dataan.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> vastaanottaa yhteyden aikana kaikki puhelut, jotka soitetaan numeroon <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Bluetooth-laite saatavilla"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Laite haluaa muodostaa yhteyden. Katso lisätietoja napauttamalla."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Yhdistetäänkö Bluetooth-laitteeseen?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> haluaa yhdistää tähän puhelimeen.\n\n<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ei ole ennen muodostanut yhteyttä."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Älä yhdistä"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Yhdistä"</string>
 </resources>

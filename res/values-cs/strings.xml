@@ -3671,7 +3671,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Povolit vyrušení"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Umožněte aplikacím vydávat zvuky, vibrovat nebo zobrazovat oznámení na obrazovce"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Priorita"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Najdete ji v horní části sekce konverzací jako plovoucí bublinu a na obrazovce uzamčení zobrazuje profilovou fotku"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Zobrazuje se v horní části sekce konverzací jako plovoucí bublina a na obrazovce uzamčení zobrazuje profilovou fotku"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> většinu funkcí konverzace nepodporuje. Konverzace nelze nastavit jako prioritní a nebudou se zobrazovat jako plovoucí bubliny."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"V rozbalovacím panelu sbalit oznámení na jeden řádek"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Žádný zvuk ani vibrace"</string>
@@ -3996,7 +3996,7 @@
     <string name="device_feedback" msgid="5351614458411688608">"Odeslat zpětnou vazbu o tomto zařízení"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Zadejte PIN administrátora"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Zapnuto"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"Vypnuto"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Vypnutá"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Připnutí aplikace"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Připnutí aplikace vám umožňuje nechat aktuální aplikaci zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru. \n\nKdyž je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Připnutí aplikace vám umožňuje nechat aktuální aplikaci zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru. \n\nKdyž je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nChcete-li s někým bezpečně sdílet zařízení, zkuste namísto toho použít režim hosta. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
@@ -5128,10 +5128,21 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Zobrazit přehrávač"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Nejsou k dispozici žádné přehrávače"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"média"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Nedůvěryhodné zařízení žádá o přístup k vašim zprávám. Podrobnosti zobrazíte klepnutím."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Zařízení žádá o přístup k vašim zprávám. Podrobnosti zobrazíte klepnutím."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Chcete povolit přístup ke zprávám?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Nedůvěryhodné zařízení Bluetooth <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> žádá o přístup k vašim zprávám.\n\nK zařízení <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> jste se ještě nikdy nepřipojili."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Nedůvěryhodné zařízení žádá o přístup k vašim kontaktům a seznamu hovorů. Podrobnosti zobrazíte klepnutím."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Zařízení Bluetooth <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> žádá o přístup k vašim zprávám.\n\nK zařízení <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> jste se ještě nikdy nepřipojili."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Zařízení žádá o přístup k vašim kontaktům a seznamu hovorů. Podrobnosti zobrazíte klepnutím."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Chcete povolit přístup ke kontaktům a seznamu hovorů?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Nedůvěryhodné zařízení Bluetooth <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> žádá o přístup k vašim kontaktům a seznamu hovorů. To zahrnuje data o příchozích a odchozích hovorech.\n\nK zařízení <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> jste se ještě nikdy nepřipojili."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Zařízení Bluetooth <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> žádá o přístup k vašim kontaktům a seznamu hovorů. To zahrnuje data o příchozích a odchozích hovorech.\n\nK zařízení <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> jste se ještě nikdy nepřipojili."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Nepovolovat"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Žádost o přístup k SIM kartě"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Zařízení žádá o přístup k vaší SIM kartě. Podrobnosti zobrazíte klepnutím."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Povolit přístup k SIM kartě?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Zařízení Bluetooth <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> žádá o přístup k datům na vaší SIM kartě. Tato data zahrnují i vaše kontakty.\n\nBěhem připojení bude zařízení <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> přijímat všechny hovory směrované na číslo <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Je dostupné zařízení Bluetooth"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Zařízení žádá o připojení. Podrobnosti zobrazíte klepnutím."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Připojit k zařízení Bluetooth?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"Zařízení <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> žádá o připojení k tomuto telefonu.\n\nK zařízení <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> jste se ještě nikdy nepřipojili."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Nepřipojovat"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Připojit"</string>
 </resources>

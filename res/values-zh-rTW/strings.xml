@@ -3606,9 +3606,9 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"最近沒有已安裝的應用程式要求「通知」存取權。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"授予通知存取權"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>將可讀取所有通知 (包括聯絡人姓名和你收到的訊息文字等個人資訊)，也能關閉通知或針對通知中的按鈕採取行動，包括接聽來電。\n\n此外，該應用程式將因此能夠開啟或關閉「零打擾」模式，以及變更相關設定。"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="7362924206925040510">"「<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g>」將可讀取所有通知 (包括聯絡人姓名和你收到的訊息文字等個人資訊)，也能關閉通知或針對通知中的按鈕採取行動，包括接聽來電。\n\n此外，該應用程式將因此能夠開啟或關閉「零打擾」模式，以及變更相關設定。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要授予「<xliff:g id="SERVICE">%1$s</xliff:g>」通知存取權嗎？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>將可讀取所有通知 (包括聯絡人姓名和你收到的訊息文字等個人資訊)，也能關閉通知或針對通知中的按鈕採取行動，包括接聽來電。\n\n此外，該應用程式將因此能夠開啟或關閉「零打擾」模式，以及變更相關設定。"</string>
+    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可讀取所有通知 (包括聯絡人姓名和你收到的訊息文字等個人資訊)，也能關閉通知或針對通知中的按鈕採取行動，包括接聽來電。\n\n此外，該應用程式將因此能夠開啟或關閉「零打擾」模式，以及變更相關設定。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果你停用「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」的通知存取權，「零打擾」模式的存取權可能也會一併遭到停用。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"關閉"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
@@ -4946,10 +4946,21 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"顯示播放器"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"沒有可用的播放器"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"媒體"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"不受信任的裝置想要存取你的訊息。輕觸即可瞭解詳情。"</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"一部裝置想要存取你的訊息。輕觸即可瞭解詳情。"</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"要允許存取訊息嗎？"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"不受信任的藍牙裝置「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要存取你的訊息。\n\n請注意，你從未連線到「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」。"</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"不受信任的裝置想要存取你的聯絡人和通話記錄。輕觸即可瞭解詳情。"</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"藍牙裝置「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要存取你的訊息。\n\n請注意，你從未與「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」建立連線。"</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"一部裝置想要存取你的聯絡人資料和通話記錄。輕觸即可瞭解詳情。"</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"要允許存取聯絡人和通話記錄嗎？"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"不受信任的藍牙裝置「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要存取你的聯絡人和通話記錄，包括你接聽及撥打的電話。\n\n請注意，你從未連線到「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」。"</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"藍牙裝置「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要存取你的聯絡人資料和通話記錄，包括你接聽及撥打的電話。\n\n請注意，你從未與「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」建立連線。"</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"不允許"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM 卡存取要求"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"有裝置想要存取 SIM 卡。輕觸即可瞭解詳情。"</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"要允許存取 SIM 卡嗎？"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"藍牙裝置「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要存取 SIM 卡上的資料，包括你的聯絡人。\n\n連線後，打給 <xliff:g id="PHONE_NUMBER">%3$s</xliff:g> 的每通電話都會轉到「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」。"</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"有可用的藍牙裝置"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"有裝置想要連線。輕觸即可瞭解詳情。"</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"要連線到藍牙裝置嗎？"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要連線到這支手機。\n\n請注意，你從未與「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」連線。"</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"不要連線"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"連線"</string>
 </resources>

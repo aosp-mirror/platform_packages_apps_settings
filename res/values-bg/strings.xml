@@ -2969,7 +2969,7 @@
     <string name="n_cacrts" msgid="5886462550192731627">"%d сертификата от сертифициращи органи"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Подробности за идентификационните данни"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Премахнати идентификационни данни: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
-    <string name="user_credential_none_installed" msgid="918620912366836994">"Няма инсталирани потребителски идентификационни данни"</string>
+    <string name="user_credential_none_installed" msgid="918620912366836994">"Няма инсталирани идентификационни данни на потребителя"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Проверка на правописа"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Проверка на правописа за служебни цели"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Въведете текущата си парола за пълно резервно копие тук"</string>
@@ -3872,7 +3872,7 @@
     <string name="device_feedback" msgid="5351614458411688608">"Отзиви за устройството"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Въведете администраторския ПИН код"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Вкл."</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"Изключено"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Изкл."</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Фиксиране на приложения"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Функцията за фиксиране на приложения ви дава възможност да задържите текущото приложение на преден план, докато не го премахнете. С нейна помощ можете например да позволите на доверен приятел да играе конкретна игра. \n\nКогато дадено приложение е фиксирано, то може да отваря други приложения. Възможно е също някои лични данни да са достъпни. \n\nЗа да използвате функцията за фиксиране на приложения: 	\n1.	Включете я. 	\n2.	Отворете екрана за общ преглед. 	\n3.	Докоснете иконата на приложението в горната част на екрана, след което изберете „Фиксиране“."</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Функцията за фиксиране на приложения ви дава възможност да задържите текущото приложение на преден план, докато не го премахнете. С нейна помощ можете например да позволите на доверен приятел да играе конкретна игра. \n\nКогато дадено приложение е фиксирано, то може да отваря други приложения. Възможно е също някои лични данни да са достъпни. \n\nАко искате по сигурен начин да споделите устройството си с друг човек, използвайте режима на гост. \n\nЗа да използвате функцията за фиксиране на приложения: 	\n1.	Включете я. 	\n2.	Отворете екрана за общ преглед. 	\n3.	Докоснете иконата на приложението в горната част на екрана, след което изберете „Фиксиране“."</string>
@@ -4946,10 +4946,21 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Показване на плейъра"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Няма налични плейъри"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"мултимедия"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Ненадеждно устройство иска достъп до съобщенията ви. Докоснете за подробности."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Устройство иска достъп до съобщенията ви. Докоснете за подробности."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Да се разреши ли достъпът до съобщенията?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Ненадеждно устройство с Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) иска достъп до съобщенията ви.\n\nДосега не сте се свързвали с(ъс) <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Ненадеждно устройство иска достъп до контактите и списъка с обажданията ви. Докоснете за подробности."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Устройство с Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) иска да осъществи достъп до съобщенията ви.\n\nДосега не сте се свързвали с(ъс) <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Устройство иска достъп до контактите ви и списъка с обажданията ви. Докоснете за подробности."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Да се разреши ли достъпът до контактите и списъка с обажданията?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Ненадеждно устройство с Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) иска достъп до контактите и списъка с обажданията ви. Това включва данни за входящите и изходящите обаждания.\n\nДосега не сте се свързвали с(ъс) <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Устройство с Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) иска да осъществи достъп до контактите ви и списъка с обажданията ви. Това включва данни за входящите и изходящите обаждания.\n\nДосега не сте се свързвали с(ъс) <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Забраняване"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Заявка за достъп до SIM картата"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Устройство иска да осъществи достъп до SIM картата ви. Докоснете за подробности."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Да се разреши ли достъпът до SIM картата?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Устройство с Bluetooth (<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>) иска да осъществи достъп до данните на SIM картата ви. Това включва контактите ви.\n\nДокато е свързано, устройството „<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>“ ще получава всички обаждания до <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Има налично устройство с Bluetooth"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Устройство иска да се свърже. Докоснете за подробности."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Да се установи ли връзка с устройството с Bluetooth?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> иска да се свърже с този телефон.\n\nДосега не сте се свързвали с(ъс) <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Отказ"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Свързване"</string>
 </resources>

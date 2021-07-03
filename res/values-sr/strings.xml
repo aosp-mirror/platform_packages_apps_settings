@@ -2173,7 +2173,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Да бисте користили функцију приступачности, превуците нагоре од дна екрана помоћу 2 прста.\n\nДа бисте прелазили са једне функције на другу, превуците нагоре помоћу 2 прста и задржите."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Да бисте користили функцију приступачности, превуците нагоре од дна екрана помоћу 3 прста.\n\nДа бисте прелазили са једне функције на другу, превуците нагоре помоћу 3 прста и задржите."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Важи"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Пречица услуге <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Пречица за опцију <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Дугме Приступачност"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Превуците нагоре помоћу 2 прста"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Превуците нагоре помоћу 3 прста"</string>
@@ -3525,7 +3525,7 @@
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Облачићи"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Сва подешавања облачића"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Прикажи ову конверзацију у облачићу"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Видите плутајућу икону изнад апликација"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Приказује плутајућу икону изнад апликација"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Дозволите апликацији <xliff:g id="APP_NAME">%1$s</xliff:g> да приказује нека обавештења као облачиће"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Желите да укључите облачиће за уређај?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Ако укључите облачиће за ову апликацију, они ће се укључити на нивоу уређаја.\n\nТо утиче на друге апликације или конверзације које подржавају облачиће."</string>
@@ -3562,7 +3562,7 @@
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Када је пословни профил закључан"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Обавештења на закључаном екрану"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Приказуј конверзације, и подразумеване и нечујне"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Сакриј тихе конверзације и обавештења"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Сакриј нечујне конверзације и обавештења"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не приказуј уопште обавештења"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Осетљива обавештења"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Приказуј осетљив садржај на закључаном екрану"</string>
@@ -5037,10 +5037,21 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Прикажи плејер"</string>
     <string name="media_controls_no_players" msgid="3493023121892175946">"Није доступан ниједан плејер"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"медији"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Непоуздани уређај жели да приступа порукама. Додирните за детаље."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Уређај жели да приступа порукама. Додирните за детаље."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Желите ли да дозволите приступ порукама?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Непоуздани Bluetooth уређај, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, жели да приступа порукама.\n\nРаније се нисте повезивали са уређајем <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Непоуздани уређај жели да приступа контактима и евиденцији позива. Додирните за детаље."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Bluetooth уређај, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, жели да приступа порукама.\n\nРаније се нисте повезивали са уређајем <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Уређај жели да приступа контактима и евиденцији позива. Додирните за детаље."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Желите ли да дозволите приступ контактима и евиденцији позива?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Непоуздани Bluetooth уређај, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, жели да приступа контактима и евиденцији позива. То обухвата податке о долазним и одлазним позивима.\n\nРаније се нисте повезивали са уређајем <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Bluetooth уређај, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, жели да приступа контактима и евиденцији позива. То обухвата податке о долазним и одлазним позивима.\n\nРаније се нисте повезивали са уређајем <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Не дозволи"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Захтев за приступ SIM картици"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Уређај жели да приступа SIM картици. Додирните за детаље."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Желите да дозволите приступ SIM картици?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Bluetooth уређај, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, жели да приступа подацима на SIM картици. То обухвата ваше контакте.\n\nДок сте повезани, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ће примати све позиве упућене на <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Bluetooth уређај је доступан"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Уређај жели да се повеже. Додирните за детаље."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Желите да се повежете са Bluetooth уређајем?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> жели да се повеже са овим телефоном.\n\nРаније се нисте повезивали са уређајем <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Не повезуј"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Повежи"</string>
 </resources>
