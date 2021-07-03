@@ -420,11 +420,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Bruk fingeravtrykk til å låse opp telefonen eller godta kjøp.\n\nMerk: Du kan ikke bruke fingeravtrykk til å låse opp denne enheten. Ta kontakt med administratoren for organisasjonen din for mer informasjon."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Avbryt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Nei takk"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_skip" msgid="2284740299244691418">"Nei takk"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Fortsett"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Godta"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Hopp over"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Neste"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Hoppe over fingeravtrykk?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Det tar bare et minutt eller to å konfigurere fingeravtrykk. Hvis du hopper over dette, kan du legge til fingeravtrykket ditt senere i innstillingene."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Når du ser dette ikonet, kan du autentisere med fingeravtrykk, f.eks. når du logger på apper eller godkjenner kjøp"</string>
@@ -564,8 +560,8 @@
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Fjern «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>»"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Vil du slette dette fingeravtrykket?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Dette sletter fingeravtrykkbildene og -modellen tilknyttet «<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>» som er lagret på enheten"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Du kan ikke bruke fingeravtrykket til å låse opp telefonen eller bekrefte identiteten din i apper."</string>
-    <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Du kan ikke bruke fingeravtrykket til å låse opp jobbprofilen din, autorisere kjøp eller logge på jobbapper."</string>
+    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Da kan du ikke bruke fingeravtrykket til å låse opp telefonen eller bekrefte identiteten din i apper."</string>
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Da kan du ikke bruke fingeravtrykket til å låse opp jobbprofilen din, autorisere kjøp eller logge på jobbapper."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, fjern"</string>
     <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Opplåsing med ansikt og fingeravtrykk"</string>
     <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Trykk for å konfigurere"</string>
@@ -2669,9 +2665,12 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appene med høyest batteribruk"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Lading er midlertidig begrenset"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"For å forlenge batterilevetiden. Finn ut mer."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefonen din har blitt brukt mer enn vanlig. Batteriet kan gå tomt raskere enn forventet.\n\nApper med høyest batteribruk:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Nettbrettet ditt har blitt brukt mer enn vanlig. Batteriet kan gå tomt raskere enn forventet.\n\nApper med høyest batteribruk:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Enheten din har blitt brukt mer enn vanlig. Batteriet kan gå tomt raskere enn forventet.\n\nApper med høyest batteribruk:"</string>
+    <!-- no translation found for battery_tip_dialog_message (4592387206991500075) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (111303605119856034) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (3896805213768863874) -->
+    <skip />
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Inkluderer bakgrunnsaktivitet med høyt strømforbruk"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">Begrens %1$d apper</item>
@@ -2947,6 +2946,10 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> er ikke sikker"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Adaptive Connectivity"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Forlenger batterilevetiden og enhetsytelsen ved å administrere nettverkstilkoblingene automatisk"</string>
+    <!-- no translation found for adaptive_connectivity_switch_on (3653067561620745493) -->
+    <skip />
+    <!-- no translation found for adaptive_connectivity_switch_off (5076172560836115265) -->
+    <skip />
     <string name="credentials_title" msgid="7535942196886123656">"Legitimasjonslager"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installer et sertifikat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Installer sertifikater fra lagringsenhet"</string>
@@ -4770,8 +4773,10 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope-spor"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensorene er av"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Innstillinger for jobbprofilen"</string>
-    <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"Kontaktsøk"</string>
-    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Tillat kontaktsøk for organisasjonen din for å identifisere oppringere og kontakter"</string>
+    <!-- no translation found for managed_profile_contact_search_title (6387301144026929253) -->
+    <skip />
+    <!-- no translation found for managed_profile_contact_search_summary (2314393661933028415) -->
+    <skip />
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Kalender for flere profiler"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Vis jobbaktiviteter i den personlige kalenderen din"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4833,17 +4838,12 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Dobbelttrykk for å sjekke telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Dobbelttrykk for å sjekke nettbrettet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Dobbelttrykk for å sjekke enheten"</string>
-    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Sveip for varsler"</string>
-    <string name="swipe_bottom_to_notifications_summary" msgid="5222014960019273801">"Sveip ned på den nederste kanten av skjermen for å se varslene dine.\nDu kan ikke bruke enhåndsmodus når denne funksjonen er slått på."</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Enhåndsmodus"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Bruk enhåndsmodus"</string>
-    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Avslutt når du bytter app"</string>
-    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Tidsavbrudd"</string>
-    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 sekunder"</string>
-    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 sekunder"</string>
-    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 sekunder"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"tilgjengelighet"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Sveip ned-handling"</string>
+    <!-- no translation found for one_handed_mode_use_shortcut_category (1414714099339147711) -->
+    <skip />
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"For å bruke enhåndsmodus, sveip ned fra den nederste kanten av skjermen. Du må sørge for at navigasjon med bevegelser er slått på i innstillingene for systemnavigasjon for å bruke denne funksjonen."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Trekk skjermen ned så den blir tilgjengelig"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Toppen av skjermen flyttes, slik at den blir tilgjengelig med tommelen."</string>
@@ -5391,12 +5391,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"enhetsstyring"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kort og billetter"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kort og billetter"</string>
-    <string name="power_menu_setting_name" msgid="7843519296976254765">"Av/på-meny"</string>
-    <string name="power_menu_setting_title" msgid="7716546106215378956">"Meny fra av/på-knapp"</string>
-    <string name="power_menu_none" msgid="4620640577918731270">"Ikke vis noe innhold"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"Trykk og hold på av/på-knappen"</string>
+    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Trykk og hold for assistenten"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Trykk og hold for av/på-menyen"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Trykk og hold er slått av"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Du må angi en skjermlås for å bruke denne funksjonen"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Hold for å starte assistenten"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Start assistenten ved å holde inne av/på-knappen"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Av/på- og nødmeny:\nTrykk på av/på og volum opp samtidig."</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Forhindre ringing:\nEn snarvei er tilgjengelig i volummenyen."</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Vis Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Gi tilgang til Wallet fra låseskjermen og hurtiginnstillingene"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Vis enhetsstyring"</string>
@@ -5469,7 +5472,7 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Tilkoblet"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Ingen tilkobling"</string>
-    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Internett kobles ikke til automatisk"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Mobildata kobler ikke til automatisk"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Ingen andre nettverk er tilgjengelige"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"Ingen nettverk er tilgjengelige"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Vil du slå av mobildata?"</string>
@@ -5497,7 +5500,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Bruk Wi‑Fi-sone"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Bruk festing av apper"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Bruk utvikleralternativer"</string>
-    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"Bruk standardtjenesten for utskrift"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Bruk utskriftstjeneste"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Bruk flere brukere"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Bruk trådløs feilsøking"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Bruk innstillinger for grafikkdriver"</string>
