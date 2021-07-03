@@ -1991,7 +1991,7 @@
     <string name="disable_text" msgid="5146002260857428005">"إيقاف"</string>
     <string name="enable_text" msgid="8570798764647110430">"تفعيل"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"محو مساحة التخزين"</string>
-    <string name="app_factory_reset" msgid="8974044931667015201">"إزالة التحديثات"</string>
+    <string name="app_factory_reset" msgid="8974044931667015201">"إلغاء تثبيت التحديثات"</string>
     <string name="auto_launch_enable_text" msgid="286244432074382294">"لقد اخترت تشغيل هذا التطبيق بشكل تلقائي لبعض الإجراءات."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"لقد اخترت السماح لهذا التطبيق بإنشاء الأدوات والوصول إلى بياناتها."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"لم يتم ضبط إعدادات تلقائية."</string>
@@ -2204,7 +2204,7 @@
     <string name="accessibility_settings_title" msgid="6739115703615065716">"إعدادات \"سهولة الاستخدام\""</string>
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"أجهزة قارئ الشاشة والشاشة وعناصر التحكم التفاعلية"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"إعدادات الرؤية"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"يمكنك تخصيص هذا الجهاز ليتوافق مع احتياجاتك. ويمكن تغيير ميزات \"سهولة الاستخدام\" هذه لاحقًا من خلال الإعدادات."</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"يمكنك تخصيص هذا الجهاز ليتوافق مع احتياجاتك. ويمكن تغيير ميزات \"تسهيل الاستخدام\" هذه لاحقًا من خلال الإعدادات."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"تغيير حجم الخط"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"أجهزة قارئ الشاشة"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"الصوت والنص على الشاشة"</string>
@@ -3664,7 +3664,7 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"استخدام سجلّ الإشعارات"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"سجلّ الإشعارات غير مفعّل"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"يجب تفعيل سجلّ الإشعارات لعرض الإشعارات الحديثة والمؤجلة."</string>
-    <string name="history_toggled_on_title" msgid="4518001110492652830">"ما مِن إشعارات حديثة."</string>
+    <string name="history_toggled_on_title" msgid="4518001110492652830">"ما مِن إشعارات حديثة"</string>
     <string name="history_toggled_on_summary" msgid="9034278971358282728">"ستظهر هنا الإشعارات الحديثة والمؤجلة."</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"عرض إعدادات الإشعارات"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"فتح الإشعار"</string>
@@ -5329,10 +5329,21 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"الوسائط"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"سيتم تفعيل البلوتوث."</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"الميزة غير متاحة لأن وضع \"وقت النوم\" مفعّل."</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"يريد جهاز غير موثوق الوصول إلى رسائلك. انقر للحصول على التفاصيل."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"يريد جهاز الوصول إلى رسائلك. انقر للحصول على التفاصيل."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"هل تريد السماح بالوصول إلى الرسائل؟"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"يريد جهاز غير موثوق يتضمّن بلوتوث، <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، الوصول إلى رسائلك.\n\nلم يتم ربطك بالجهاز <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> في السابق."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"يريد جهاز غير موثوق الوصول إلى جهات الاتصال وسجلّ المكالمات. انقر للحصول على التفاصيل."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"يريد جهاز يتضمّن بلوتوث، اسمه <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، الوصول إلى رسائلك.\n\nلم يتم ربطك بالجهاز <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> في السابق."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"يريد جهاز الوصول إلى جهات الاتصال وسجلّ المكالمات. انقر للحصول على التفاصيل."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"هل تريد السماح بالوصول إلى جهات الاتصال وسجلّ المكالمات؟"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"يريد جهاز غير موثوق يتضمّن بلوتوث، <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، الوصول إلى جهات الاتصال وسجلّ المكالمات. يتضمن ذلك الوصول إلى بيانات عن المكالمات الواردة والصادرة.\n\nلم يتم ربطك بالجهاز <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> في السابق."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"يريد جهاز يتضمّن بلوتوث، اسمه <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>، الوصول إلى جهات الاتصال وسجلّ المكالمات. يتضمن ذلك الوصول إلى بيانات عن المكالمات الواردة والصادرة.\n\nلم يتم ربطك بالجهاز <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> في السابق."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"عدم السماح"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"‏طلب الوصول إلى شريحة SIM"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"‏يريد أحد الأجهزة الوصول إلى شريحة SIM. انقر للحصول على التفاصيل."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"‏هل تريد السماح بالوصول إلى شريحة SIM؟"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"‏يريد الجهاز الذي يتضمّن بلوتوث <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> الوصول إلى البيانات على شريحة SIM. يتضمّن ذلك جهات اتصالك.\n\nعندما يكون الجهاز متصلاً، سيتلقّى <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> كل المكالمات التي يتم إجراؤها إلى الرقم <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"يتوفّر جهاز يتضمّن بلوتوث"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"يريد أحد الأجهزة الاتصال بجهازك. انقر للحصول على التفاصيل."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"هل تريد الاتصال بالجهاز الذي يتضمّن بلوتوث؟"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"يريد <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> الاتصال بهذا الهاتف.\n\nلم تتصل بالجهاز <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> من قبل."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"عدم الاتصال"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"الاتصال"</string>
 </resources>

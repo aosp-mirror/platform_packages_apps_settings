@@ -457,7 +457,7 @@
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Dëshiron ta fshish këtë gjurmë gishti?"</string>
     <string name="fingerprint_last_delete_message" msgid="93311579320049852">"Nuk do të jesh në gjendje të përdorësh gjurmët e gishtave për të shkyçur telefonin, për të autorizuar blerjet ose për t\'u identifikuar në aplikacione me to"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"Nuk do të jesh në gjendje të përdorësh gjurmët e gishtave për të shkyçur profilin tënd të punës, për të autorizuar blerjet ose për t\'u identifikuar në aplikacionet e punës"</string>
-    <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Po, hiqe"</string>
+    <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Po, hiqi"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Enkriptimi"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Enkripto tabletin"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Enkripto telefonin"</string>
@@ -3747,7 +3747,7 @@
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Orari çaktivizohet kur bie një alarm"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Sjellja e modalitetit \"Mos shqetëso\""</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Përdor cilësimet e parazgjedhura"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Krijo cilësimet të personalizuara për këtë planifikim"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Krijo cilësime të personalizuara për këtë orar"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Për \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -4965,10 +4965,21 @@
     <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Bluetooth-i do të aktivizohet"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nuk ofrohet sepse modaliteti i orarit të gjumit është aktiv"</string>
-    <string name="bluetooth_message_access_notification_content" msgid="2986108412562309009">"Një pajisje jo e besuar kërkon të ketë qasje te mesazhet e tua. Trokit për detaje."</string>
+    <string name="bluetooth_message_access_notification_content" msgid="5111712860712823893">"Një pajisje kërkon të ketë qasje te mesazhet e tua. Trokit për detaje."</string>
     <string name="bluetooth_message_access_dialog_title" msgid="9009836130395061579">"Të lejohet qasja te mesazhet?"</string>
-    <string name="bluetooth_message_access_dialog_content" msgid="2304761898608701739">"Një pajisje jo e besuar me Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, kërkon të ketë qasje te mesazhet e tua.\n\nNuk je lidhur me <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> më parë."</string>
-    <string name="bluetooth_phonebook_access_notification_content" msgid="4280361621526852063">"Një pajisje jo e besuar kërkon të ketë qasje te kontaktet dhe evidenca e telefonatave. Trokit për detaje."</string>
+    <string name="bluetooth_message_access_dialog_content" msgid="7186694737578788487">"Një pajisje me Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, kërkon të ketë qasje te mesazhet e tua.\n\nNuk je lidhur me <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> më parë."</string>
+    <string name="bluetooth_phonebook_access_notification_content" msgid="9175220052703433637">"Një pajisje kërkon të ketë qasje te kontaktet dhe evidenca e telefonatave. Trokit për detaje."</string>
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Të lejohet qasja te kontaktet dhe evidenca e telefonatave?"</string>
-    <string name="bluetooth_phonebook_access_dialog_content" msgid="4766700015848574532">"Një pajisje jo e besuar me Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, kërkon të ketë qasje te kontaktet dhe evidenca e telefonatave. Kjo përfshin të dhënat në lidhje me telefonatat hyrëse dhe dalëse.\n\nNuk je lidhur me <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> më parë."</string>
+    <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Një pajisje me Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, kërkon të ketë qasje te kontaktet dhe evidenca e telefonatave. Kjo përfshin të dhënat në lidhje me telefonatat hyrëse dhe dalëse.\n\nNuk je lidhur me <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> më parë."</string>
+    <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Mos lejo"</string>
+    <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Kërkesë për qasje te karta SIM"</string>
+    <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Një pajisje dëshiron të ketë qasje te karta jote SIM. Trokit për detaje."</string>
+    <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Të lejohet qasja te karta SIM?"</string>
+    <string name="bluetooth_sim_card_access_dialog_content" msgid="4153857191661567190">"Një pajisje me Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, dëshiron të ketë qasje te të dhënat në kartën tënde SIM. Kjo përfshin kontaktet e tua.\n\nKur të jetë e lidhur, <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> do të marrë të gjitha telefonatat e kryera në numrin <xliff:g id="PHONE_NUMBER">%3$s</xliff:g>."</string>
+    <string name="bluetooth_connect_access_notification_title" msgid="2573547043170883947">"Një pajisje me Bluetooth e disponueshme"</string>
+    <string name="bluetooth_connect_access_notification_content" msgid="1328465545685433304">"Një pajisje dëshiron të lidhet. Trokit për detaje."</string>
+    <string name="bluetooth_connect_access_dialog_title" msgid="1948056782712451381">"Të lidhet me pajisjen me Bluetooth?"</string>
+    <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> dëshiron të lidhet me këtë telefon.\n\nNuk je lidhur me <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> më parë."</string>
+    <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Mos lidh"</string>
+    <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Lidh"</string>
 </resources>
