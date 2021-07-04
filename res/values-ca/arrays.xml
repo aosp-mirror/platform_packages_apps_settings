@@ -88,7 +88,7 @@
     <item msgid="3409219643606946053">"S\'està connectant a <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
     <item msgid="7891463004457278422">"S\'està autenticant amb <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="3193388999810487137">"S\'està obtenint l\'adreça IP de <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
-    <item msgid="2227930004124157952">"Connectat a <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="2227930004124157952">"T\'has connectat a <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
     <item msgid="7104168043537022445">"Suspesa"</item>
     <item msgid="2595938203187002544">"S\'està desconnectant de <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="2435175968703898648">"Desconnectada"</item>
@@ -100,9 +100,9 @@
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
   <string-array name="eap_ocsp_type">
     <item msgid="7202884222741437608">"No validis"</item>
-    <item msgid="5703177653586269306">"Sol·licita l\'estat de certificat"</item>
-    <item msgid="326388247868439528">"Requereix l\'estat de certificat"</item>
-    <item msgid="1090956283885790552">"Requereix tots els estats de certificat que no siguin de confiança"</item>
+    <item msgid="5703177653586269306">"Sol·licita l\'estat del certificat"</item>
+    <item msgid="326388247868439528">"Requereix l\'estat del certificat"</item>
+    <item msgid="1090956283885790552">"Requereix estats de certificat que no són de confiança"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"Botó per prémer"</item>
@@ -171,12 +171,12 @@
   </string-array>
   <string-array name="wifi_ip_settings">
     <item msgid="6665889765350160154">"DHCP"</item>
-    <item msgid="6215795691318745695">"Estàtic"</item>
+    <item msgid="6215795691318745695">"Estàtica"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
     <item msgid="4669222334822978847">"Cap"</item>
     <item msgid="6242198071587397280">"Manual"</item>
-    <item msgid="464383874780058242">"Autoconfig. serv. inter."</item>
+    <item msgid="464383874780058242">"Serv. inter. autoconfig."</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="2900892411844440682">"Cap"</item>
@@ -264,7 +264,7 @@
     <item msgid="1249691739381713634">"volum de la veu"</item>
     <item msgid="6485000384018554920">"volum del to"</item>
     <item msgid="3378000878531336372">"volum de multimèdia"</item>
-    <item msgid="5272927168355895681">"volum de l\'alarma"</item>
+    <item msgid="5272927168355895681">"volum d\'alarma"</item>
     <item msgid="4422070755065530548">"volum de notificació"</item>
     <item msgid="3250654589277825306">"volum del Bluetooth"</item>
     <item msgid="4212187233638382465">"mantén actiu"</item>
@@ -331,7 +331,7 @@
     <item msgid="4722479281326245754">"Volum de la veu"</item>
     <item msgid="6749550886745567276">"Volum del to"</item>
     <item msgid="2218685029915863168">"Volum de multimèdia"</item>
-    <item msgid="4266577290496513640">"Volum de l\'alarma"</item>
+    <item msgid="4266577290496513640">"Volum d\'alarma"</item>
     <item msgid="8608084169623998854">"Volum de notificació"</item>
     <item msgid="7948784184567841794">"Volum del Bluetooth"</item>
     <item msgid="1148968792599973150">"Mantén actiu"</item>
@@ -379,9 +379,16 @@
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="923916134548435468">"Molt petit"</item>
     <item msgid="5738147437573674872">"Petita"</item>
-    <item msgid="8111006422178051129">"Normal"</item>
+    <item msgid="3942006483573485941">"Predeterminada"</item>
     <item msgid="824386705928670045">"Gran"</item>
     <item msgid="2790561781512874585">"Molt gran"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_summaries">
+    <item msgid="5700290209695344464">"Mida del text molt petita"</item>
+    <item msgid="4400431625665186389">"Mida del text petita"</item>
+    <item msgid="2340994108094808362">"Mida del text predeterminada"</item>
+    <item msgid="6446684863055375405">"Mida del text gran"</item>
+    <item msgid="6838252010935384975">"Mida del text molt gran"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
     <item msgid="70686029249840227">"Predeterminat"</item>
@@ -398,7 +405,7 @@
     <item msgid="3237802033158517495">"100%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="4180191497452407161">"Valors predeterminats"</item>
+    <item msgid="3880932435325583041">"Definit per l\'aplicació"</item>
     <item msgid="8719204526359229387">"Blanc sobre negre"</item>
     <item msgid="5410164687403735103">"Negre sobre blanc"</item>
     <item msgid="1119043472912497241">"Groc sobre negre"</item>
@@ -406,7 +413,7 @@
     <item msgid="747238414788976867">"Personalitzat"</item>
   </string-array>
   <string-array name="vpn_types_long">
-    <item msgid="6621806338070912611">"VPN de PPTP"</item>
+    <item msgid="6621806338070912611">"VPN PPTP"</item>
     <item msgid="2552427673212085780">"VPN L2TP/IPSec amb claus prèviament compartides"</item>
     <item msgid="7378096704485168082">"VPN L2TP/IPSec amb certificats"</item>
     <item msgid="3792393562235791509">"VPN IPSec amb claus prèviament compartides i autenticació Xauth"</item>
@@ -518,7 +525,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="1091258946200124345">"Global"</item>
+    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE/WCDMA"</item>
     <item msgid="7723670142495874534">"Només TDSCDMA"</item>
@@ -535,7 +542,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="8908263949185004366">"Global"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>
@@ -546,11 +553,6 @@
   <string-array name="cdma_subscription_choices">
     <item msgid="6242790734457941014">"RUIM/SIM"</item>
     <item msgid="8980776035119085660">"NV"</item>
-  </string-array>
-  <string-array name="preferred_network_mode_choices_world_mode">
-    <item msgid="8219021147046131771">"Global"</item>
-    <item msgid="5291208617720023560">"LTE/CDMA"</item>
-    <item msgid="6742002477816975742">"LTE/GSM/UMTS"</item>
   </string-array>
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (1841976293698111057) -->
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:1 (6822859933189908133) -->
