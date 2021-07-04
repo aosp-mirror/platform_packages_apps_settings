@@ -64,7 +64,7 @@
   </string-array>
   <string-array name="entries_font_size">
     <item msgid="4649244712522775149">"Mică"</item>
-    <item msgid="4350318459725129464">"Prestabilit"</item>
+    <item msgid="4350318459725129464">"Prestabilită"</item>
     <item msgid="722959474722634030">"Mare"</item>
     <item msgid="5468692832610514379">"Cea mai mare"</item>
   </string-array>
@@ -101,8 +101,8 @@
   <string-array name="eap_ocsp_type">
     <item msgid="7202884222741437608">"Nu se validează"</item>
     <item msgid="5703177653586269306">"Solicitați starea certificatelor"</item>
-    <item msgid="326388247868439528">"Solicitați starea certificatelor"</item>
-    <item msgid="1090956283885790552">"Solicitați toate stările certificatelor care nu prezintă încredere"</item>
+    <item msgid="326388247868439528">"Solicitați obligatoriu starea certificatelor"</item>
+    <item msgid="1090956283885790552">"Solicitați toate stările certif. care nu prezintă încredere"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"Buton WPS"</item>
@@ -131,11 +131,11 @@
     <item msgid="6702740528496186521">"5"</item>
   </string-array>
   <string-array name="wifi_signal">
-    <item msgid="199360311367724149">"Slab"</item>
-    <item msgid="2470925506985305429">"Slab"</item>
-    <item msgid="8545211062334016668">"Acceptabil"</item>
-    <item msgid="7468449584777730187">"Bun"</item>
-    <item msgid="202124107702016530">"Excelent"</item>
+    <item msgid="199360311367724149">"Slabă"</item>
+    <item msgid="2470925506985305429">"Slabă"</item>
+    <item msgid="8545211062334016668">"Acceptabilă"</item>
+    <item msgid="7468449584777730187">"Bună"</item>
+    <item msgid="202124107702016530">"Excelentă"</item>
   </string-array>
   <string-array name="data_usage_data_range">
     <item msgid="3528385925116637939">"Ultimele 30 de zile"</item>
@@ -176,7 +176,7 @@
   <string-array name="wifi_proxy_settings">
     <item msgid="4669222334822978847">"Niciuna"</item>
     <item msgid="6242198071587397280">"Manual"</item>
-    <item msgid="464383874780058242">"Config. automată proxy"</item>
+    <item msgid="464383874780058242">"Configurare automată proxy"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="2900892411844440682">"Niciunul"</item>
@@ -379,9 +379,16 @@
   <string-array name="captioning_font_size_selector_titles">
     <item msgid="923916134548435468">"Foarte mic"</item>
     <item msgid="5738147437573674872">"Mic"</item>
-    <item msgid="8111006422178051129">"Normal"</item>
+    <item msgid="3942006483573485941">"Prestabilită"</item>
     <item msgid="824386705928670045">"Mare"</item>
     <item msgid="2790561781512874585">"Foarte mare"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_summaries">
+    <item msgid="5700290209695344464">"Dimensiune foarte mică a textului"</item>
+    <item msgid="4400431625665186389">"Dimensiune mică a textului"</item>
+    <item msgid="2340994108094808362">"Dimensiunea prestabilită a textului"</item>
+    <item msgid="6446684863055375405">"Dimensiune mare a textului"</item>
+    <item msgid="6838252010935384975">"Dimensiune foarte mare a textului"</item>
   </string-array>
   <string-array name="captioning_edge_type_selector_titles">
     <item msgid="70686029249840227">"Prestabilită"</item>
@@ -398,7 +405,7 @@
     <item msgid="3237802033158517495">"100%"</item>
   </string-array>
   <string-array name="captioning_preset_selector_titles">
-    <item msgid="4180191497452407161">"Setările prestabilite"</item>
+    <item msgid="3880932435325583041">"Setat de aplicație"</item>
     <item msgid="8719204526359229387">"Alb pe negru"</item>
     <item msgid="5410164687403735103">"Negru pe alb"</item>
     <item msgid="1119043472912497241">"Galben pe negru"</item>
@@ -429,7 +436,7 @@
     <item msgid="2974952010554140659">"Nereușită"</item>
   </string-array>
   <string-array name="security_settings_premium_sms_values">
-    <item msgid="3985605994234635072">"Întrebați"</item>
+    <item msgid="3985605994234635072">"Întreabă"</item>
     <item msgid="2358187544264718285">"Nu permiteți niciodată"</item>
     <item msgid="7043782324123900484">"Permiteți întotdeauna"</item>
   </string-array>
@@ -518,7 +525,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="1091258946200124345">"Global"</item>
+    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE/WCDMA"</item>
     <item msgid="7723670142495874534">"Numai TDSCDMA"</item>
@@ -535,7 +542,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="8908263949185004366">"Global"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>
@@ -546,11 +553,6 @@
   <string-array name="cdma_subscription_choices">
     <item msgid="6242790734457941014">"RUIM/SIM"</item>
     <item msgid="8980776035119085660">"NV"</item>
-  </string-array>
-  <string-array name="preferred_network_mode_choices_world_mode">
-    <item msgid="8219021147046131771">"Global"</item>
-    <item msgid="5291208617720023560">"LTE/CDMA"</item>
-    <item msgid="6742002477816975742">"LTE/GSM/UMTS"</item>
   </string-array>
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (1841976293698111057) -->
     <!-- no translation found for enhanced_4g_lte_mode_title_variant:1 (6822859933189908133) -->
