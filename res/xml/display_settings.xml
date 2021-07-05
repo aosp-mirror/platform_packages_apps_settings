@@ -188,6 +188,13 @@
             android:defaultValue="@*android:bool/config_proximityCheckOnWakeEnabledByDefault" />
 
         <SwitchPreference
+            android:key="high_touch_polling_rate_enable"
+            android:title="@string/high_touch_polling_rate_title"
+            android:summary="@string/high_touch_polling_rate_summary"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.custom.touch.HighTouchPollingRateSettingsPreferenceController" />
+
+        <SwitchPreference
             android:key="high_touch_sensitivity_enable"
             android:title="@string/high_touch_sensitivity_title"
             android:summary="@string/high_touch_sensitivity_summary"

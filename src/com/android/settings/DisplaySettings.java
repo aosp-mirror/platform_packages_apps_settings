@@ -43,6 +43,7 @@ public class DisplaySettings extends DashboardFragment {
     private static final String TAG = "DisplaySettings";
 
     public static final String KEY_PROXIMITY_ON_WAKE = "proximity_on_wake";
+    private static final String KEY_HIGH_TOUCH_POLLING_RATE = "high_touch_polling_rate_enable";
     private static final String KEY_HIGH_TOUCH_SENSITIVITY = "high_touch_sensitivity_enable";
 
     @Override
@@ -98,6 +99,10 @@ public class DisplaySettings extends DashboardFragment {
                     if (!context.getResources().getBoolean(
                             com.android.internal.R.bool.config_proximityCheckOnWake)) {
                         keys.add(KEY_PROXIMITY_ON_WAKE);
+                    }
+                    if (!hardware.isSupported(
+                            LineageHardwareManager.FEATURE_HIGH_TOUCH_POLLING_RATE)) {
+                        keys.add(KEY_HIGH_TOUCH_POLLING_RATE);
                     }
                     if (!hardware.isSupported(
                             LineageHardwareManager.FEATURE_HIGH_TOUCH_SENSITIVITY)) {
