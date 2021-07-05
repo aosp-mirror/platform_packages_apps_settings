@@ -309,7 +309,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
 
     @Override
     public void onScan(WifiDialog2 dialog, String ssid) {
-        Intent intent = WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid);
+        Intent intent = WifiDppUtils.getEnrolleeQrCodeScannerIntent(dialog.getContext(), ssid);
         WizardManagerHelper.copyWizardManagerExtras(mIntent, intent);
 
         // Launch QR code scanner to join a network.
@@ -318,7 +318,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
 
     @Override
     public void onScan(WifiDialog dialog, String ssid) {
-        Intent intent = WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid);
+        Intent intent = WifiDppUtils.getEnrolleeQrCodeScannerIntent(dialog.getContext(), ssid);
         WizardManagerHelper.copyWizardManagerExtras(mIntent, intent);
 
         // Launch QR code scanner to join a network.
