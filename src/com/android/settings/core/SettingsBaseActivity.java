@@ -91,10 +91,17 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
         final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (isAnySetupWizard && this instanceof SubSettings) {
-            final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
-                    ? R.style.SubSettings_SetupWizard : R.style.SudThemeGlifV3_Light;
+            int appliedTheme;
+            if (ThemeHelper.trySetDynamicColor(this)) {
+                appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                        ? R.style.SudDynamicColorThemeSettings_SetupWizard_DayNight
+                        : R.style.SudDynamicColorThemeSettings_SetupWizard;
+            } else {
+                appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                        ? R.style.SubSettings_SetupWizard
+                        : R.style.SudThemeGlifV3_Light;
+            }
             setTheme(appliedTheme);
-            ThemeHelper.trySetDynamicColor(this);
         }
 
         if (isToolbarEnabled() && !isAnySetupWizard) {
