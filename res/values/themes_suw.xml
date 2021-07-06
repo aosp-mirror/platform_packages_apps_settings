@@ -223,6 +223,24 @@
     <!-- This theme was applied to Settings pages which are running under SUW. -->
     <style name="SubSettings.SetupWizard" parent="SudThemeGlifV3.Light" />
 
+    <!-- This theme was applied to Settings pages which are running under SUW with DynamicColor. -->
+    <style name="SudDynamicColorThemeSettings.SetupWizard" parent="SudDynamicColorThemeGlifV3.Light">
+        <item name="android:textAppearanceListItem">@style/TextAppearance.PreferenceTitle.SettingsLib</item>
+        <item name="android:listPreferredItemPaddingStart">24dp</item>
+        <item name="android:listPreferredItemPaddingEnd">16dp</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SettingsLib</item>
+        <item name="android:switchStyle">@style/Switch.SettingsLib</item>
+    </style>
+
+    <!-- This theme was applied to Settings pages which are running under SUW with DynamicColor. -->
+    <style name="SudDynamicColorThemeSettings.SetupWizard.DayNight" parent="SudDynamicColorThemeGlifV3.DayNight">
+        <item name="android:textAppearanceListItem">@style/TextAppearance.PreferenceTitle.SettingsLib</item>
+        <item name="android:listPreferredItemPaddingStart">24dp</item>
+        <item name="android:listPreferredItemPaddingEnd">16dp</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SettingsLib</item>
+        <item name="android:switchStyle">@style/Switch.SettingsLib</item>
+    </style>
+
     <!-- DayNight themes -->
     <style name="GlifTheme.DayNight" parent="GlifTheme.Light" />
     <style name="GlifV2Theme.DayNight" parent="GlifV2Theme.Light" />
