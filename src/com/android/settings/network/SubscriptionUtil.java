@@ -486,7 +486,7 @@ public class SubscriptionUtil {
      * @param info the subscriptionInfo to check against.
      * @return true if this subscription should be visible to the API caller.
      */
-    private static boolean isSubscriptionVisible(
+    public static boolean isSubscriptionVisible(
             SubscriptionManager subscriptionManager, Context context, SubscriptionInfo info) {
         if (info == null) return false;
         // If subscription is NOT grouped opportunistic subscription, it's visible.
