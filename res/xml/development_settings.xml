@@ -392,6 +392,11 @@
             android:entries="@array/bluetooth_max_connected_audio_devices"
             android:entryValues="@array/bluetooth_max_connected_audio_devices_values" />
 
+        <SwitchPreference
+            android:key="nfc_stack_debuglog_enabled"
+            android:title="@string/nfc_stack_debuglog_title"
+            android:summary="@string/nfc_stack_debuglog_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
