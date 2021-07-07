@@ -251,7 +251,7 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
                 if (queryImsState(subId).isWifiCallingProvisioned()) {
                     selectedList.add(subInfo);
                 }
-            } finally {}
+            } catch (Exception exception) {}
         }
         return selectedList;
     }
