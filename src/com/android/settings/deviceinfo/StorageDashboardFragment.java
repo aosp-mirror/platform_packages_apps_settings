@@ -56,7 +56,6 @@ import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -318,15 +317,6 @@ public class StorageDashboardFragment extends DashboardFragment
         getSettingsLifecycle().addObserver(mOptionMenuController);
         setHasOptionsMenu(true);
         activity.invalidateOptionsMenu();
-    }
-
-    @Override
-    public void onViewCreated(View v, Bundle savedInstanceState) {
-        super.onViewCreated(v, savedInstanceState);
-
-        EntityHeaderController.newInstance(getActivity(), this /*fragment*/,
-                null /* header view */)
-                .setRecyclerView(getListView(), getSettingsLifecycle());
     }
 
     @Override
