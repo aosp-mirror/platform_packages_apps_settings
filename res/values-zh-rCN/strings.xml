@@ -2357,8 +2357,8 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"“无障碍”按钮和手势"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"请使用“无障碍”按钮。该手势不能与“三按钮”导航搭配使用。"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"快速使用无障碍功能"</string>
-    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"不论当前显示的是何屏幕画面，您都可快速使用无障碍功能。\n\n如需开始使用，请转到无障碍功能设置部分，并选择相应功能。然后，点按相应快捷方式，并选择“无障碍”按钮。\n\n如需改用导航栏中的“无障碍”按钮，请切换到“双按钮”导航或“三按钮”导航模式。"</string>
-    <string name="accessibility_button_description" msgid="7372405202698400339">"在任意屏幕上快速使用无障碍功能。\n\n如需开始使用，请转到无障碍设置并选择相应功能。点按相应快捷方式，然后选择“无障碍”按钮。"</string>
+    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"在任何屏幕上快速使用无障碍功能。\n\n如需开始使用，请转到无障碍设置并选择相应功能。点按相应快捷方式，然后选择“无障碍”按钮。\n\n如需改用导航栏中的“无障碍”按钮，请切换到“双按钮”导航或“三按钮”导航模式。"</string>
+    <string name="accessibility_button_description" msgid="7372405202698400339">"在任何屏幕上快速使用无障碍功能。\n\n如需开始使用，请转到无障碍设置并选择相应功能。点按相应快捷方式，然后选择“无障碍”按钮。"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"使用按钮或手势"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"位置"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"大小"</string>
@@ -2431,7 +2431,7 @@
       <item quantity="one">已保存 <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> 台助听器</item>
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音频调整"</string>
-    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"开启快捷方式"</string>
+    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"快捷方式已开启"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"关闭"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"开启"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"关闭"</string>
@@ -2665,12 +2665,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看耗电量较高的应用"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充电暂时受限"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"旨在延长电池使用寿命。了解详情。"</string>
-    <!-- no translation found for battery_tip_dialog_message (4592387206991500075) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (111303605119856034) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (3896805213768863874) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"您的手机的使用强度比平时高，因此电池电量的耗尽速度可能会比平时要快。\n\n耗电量较高的应用："</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"您的平板电脑的使用强度比平时高，因此电池电量的耗尽速度可能会比平时要快。\n\n耗电量较高的应用："</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"您的设备的使用强度比平时高，因此电池电量的耗尽速度可能会比平时要快。\n\n耗电量较高的应用："</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"包括高耗电后台活动"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">限制 %1$d 个应用</item>
@@ -2946,10 +2943,8 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> 个 VPN 不安全"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"自适应网络连接"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"自动管理您的网络连接，从而延长电池续航时间并提升设备性能"</string>
-    <!-- no translation found for adaptive_connectivity_switch_on (3653067561620745493) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_switch_off (5076172560836115265) -->
-    <skip />
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"开启"</string>
+    <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"关闭"</string>
     <string name="credentials_title" msgid="7535942196886123656">"凭据存储"</string>
     <string name="credentials_install" msgid="3933218407598415827">"安装证书"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"从存储设备安装证书"</string>
@@ -2985,12 +2980,9 @@
     <string name="no_certificate_management_app" msgid="3025739370424406717">"无"</string>
     <string name="certificate_management_app_description" msgid="8507306554200869005">"当您使用以下应用和网址时，系统会通过证书验证您的身份"</string>
     <string name="uninstall_certs_credential_management_app" msgid="4945883254446077354">"卸载证书"</string>
-    <!-- no translation found for remove_credential_management_app (6089291496976812786) -->
-    <skip />
-    <!-- no translation found for remove_credential_management_app_dialog_title (5713525435104706772) -->
-    <skip />
-    <!-- no translation found for remove_credential_management_app_dialog_message (7739474298063646935) -->
-    <skip />
+    <string name="remove_credential_management_app" msgid="6089291496976812786">"移除应用"</string>
+    <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"要移除此应用吗？"</string>
+    <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"此应用将不再管理证书，但会保留在您的设备上。此应用安装的所有证书都将被卸载。"</string>
     <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
       <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> 个网址</item>
       <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> 个网址</item>
@@ -3267,8 +3259,7 @@
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"用户"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"停用"</string>
     <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"启用"</string>
-    <!-- no translation found for trusted_credentials_remove_label (8296330919329489422) -->
-    <skip />
+    <string name="trusted_credentials_remove_label" msgid="8296330919329489422">"卸载"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"信任"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"要启用该系统 CA 证书吗？"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"要停用该系统CA证书吗？"</string>
@@ -4189,10 +4180,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"输入管理员 PIN 码"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"开启"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"关闭"</string>
-    <!-- no translation found for nfc_setting_on (7701896496026725772) -->
-    <skip />
-    <!-- no translation found for nfc_setting_off (7142103438532732309) -->
-    <skip />
+    <string name="nfc_setting_on" msgid="7701896496026725772">"已开启"</string>
+    <string name="nfc_setting_off" msgid="7142103438532732309">"已关闭"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"开启"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"关闭"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"固定应用"</string>
@@ -4246,7 +4235,7 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"支持的链接"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"其他默认偏好设置"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"添加链接"</string>
-    <string name="app_launch_footer" msgid="4521865035105622557">"应用可以验证链接，通过验证的链接会自动在其中打开。"</string>
+    <string name="app_launch_footer" msgid="4521865035105622557">"应用可以验证链接，通过验证的链接会自动在应用中打开。"</string>
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 个已通过验证的链接</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个已通过验证的链接</item>
@@ -4783,10 +4772,8 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope 跟踪"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"传感器已关闭"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"工作资料设置"</string>
-    <!-- no translation found for managed_profile_contact_search_title (6562061740814513737) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_summary (4974727886709219105) -->
-    <skip />
+    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"在个人应用中搜索工作目录联系人"</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"您的 IT 管理员或许可以看到您的搜索内容和来电"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"跨个人资料日历"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"在个人日历上显示工作活动"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4852,14 +4839,12 @@
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"使用单手模式"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"可单手操作"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"向下滑动"</string>
-    <!-- no translation found for one_handed_mode_use_shortcut_category (1414714099339147711) -->
-    <skip />
+    <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"使用快捷方式执行以下操作"</string>
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"如需使用单手模式，请从屏幕底部边缘向下滑动。您必须在系统导航设置中开启手势导航，然后才能使用此功能。"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"将屏幕画面拉到手指可触及的位置"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"屏幕顶部画面将移到您的拇指可触及的位置。"</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"显示通知"</string>
-    <!-- no translation found for one_handed_action_show_notification_summary (8281689861222000436) -->
-    <skip />
+    <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"系统将会显示通知和设置。"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"点按两次屏幕即可查看时间、通知和其他信息。"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"拿起手机即显示"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"拿起平板电脑即可查看"</string>
@@ -5124,8 +5109,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"不发出任何铃声"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"振动"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"静音"</string>
-    <!-- no translation found for prevent_ringing_option_unavailable_lpp_summary (3193459102328015340) -->
-    <skip />
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"如需启用，请先从“按住电源按钮”改为电源菜单。"</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"网络详情"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"您的设备名称会显示在手机上的应用中。此外，当您连接到蓝牙设备、连接到 WLAN 网络或设置 WLAN 热点时，其他人可能也会看到您的设备名称。"</string>
     <string name="devices_title" msgid="649715719278562515">"设备"</string>
