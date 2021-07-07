@@ -101,10 +101,20 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-        ThemeHelper.trySetDynamicColor(this);
+        applyTheme();
         tryLaunchFontSizeSettings();
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
+    }
+
+    private void applyTheme() {
+        if (ThemeHelper.trySetDynamicColor(this)) {
+            final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                    ? R.style.SudDynamicColorThemeSettings_SetupWizard_DayNight
+                    : R.style.SudDynamicColorThemeSettings_SetupWizard;
+            setTheme(appliedTheme);
+        } else {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        }
     }
 
     @VisibleForTesting
