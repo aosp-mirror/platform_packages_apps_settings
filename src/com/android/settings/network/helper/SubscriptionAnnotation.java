@@ -16,9 +16,12 @@
 package com.android.settings.network.helper;
 
 import android.content.Context;
+import android.os.ParcelUuid;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
+
+import androidx.annotation.Keep;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.network.SubscriptionUtil;
 
@@ -37,6 +40,8 @@ public class SubscriptionAnnotation {
     private boolean mIsExisted;
     private boolean mIsActive;
     private boolean mIsAllowToDisplay;
+
+    public static final ParcelUuid EMPTY_UUID = ParcelUuid.fromString("0-0-0-0-0");
 
     public static final int TYPE_UNKNOWN = 0x0;
     public static final int TYPE_PSIM = 0x1;
@@ -70,6 +75,8 @@ public class SubscriptionAnnotation {
     /**
      * Constructor of class
      */
+    @Keep
+    @VisibleForTesting
     protected SubscriptionAnnotation(List<SubscriptionInfo> subInfoList, int subInfoIndex,
             Context context, List<Integer> eSimCardId,
             List<Integer> simSlotIndex, List<Integer> activeSimSlotIndexList) {
@@ -101,37 +108,50 @@ public class SubscriptionAnnotation {
     }
 
     // the index provided during construction of Builder
+    @Keep
     public int getOrderingInList() {
         return mOrderWithinList;
     }
 
     // type of subscription
+    @Keep
     public int getType() {
         return mType;
     }
 
     // if a subscription is existed within device
+    @Keep
     public boolean isExisted() {
         return mIsExisted;
     }
 
     // if a subscription is currently ON
+    @Keep
     public boolean isActive() {
         return mIsActive;
     }
 
     // if display of subscription is allowed
+    @Keep
     public boolean isDisplayAllowed() {
         return mIsAllowToDisplay;
     }
 
     // the subscription ID
+    @Keep
     public int getSubscriptionId() {
         return (mSubInfo == null) ? SubscriptionManager.INVALID_SUBSCRIPTION_ID :
                 mSubInfo.getSubscriptionId();
     }
 
+    // the grouping UUID
+    @Keep
+    public ParcelUuid getGroupUuid() {
+        return (mSubInfo == null) ? null : mSubInfo.getGroupUuid();
+    }
+
     // the SubscriptionInfo
+    @Keep
     public SubscriptionInfo getSubInfo() {
         return mSubInfo;
     }
