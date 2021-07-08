@@ -284,7 +284,14 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     abstract int getUserShortcutTypes();
 
     protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
-        switchPreference.setTitle(R.string.accessibility_service_primary_switch_title);
+        final CharSequence title =
+            getString(R.string.accessibility_service_primary_switch_title, mPackageName);
+        switchPreference.setTitle(title);
+    }
+
+    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
+        final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
+        shortcutPreference.setTitle(title);
     }
 
     protected abstract void onPreferenceToggled(String preferenceKey, boolean enabled);
@@ -434,8 +441,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setOnClickCallback(this);
 
-        final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
-        mShortcutPreference.setTitle(title);
+        updateShortcutTitle(mShortcutPreference);
 
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mShortcutPreference);
