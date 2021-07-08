@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
+import static android.hardware.SensorPrivacyManager.Sources.DIALOG;
 
 import static com.android.settings.display.SmartAutoRotateController.isRotationResolverServiceAvailable;
 
@@ -63,7 +64,7 @@ public class SmartAutoRotateCameraStateController extends BasePreferenceControll
         ((BannerMessagePreference) mPreference)
                 .setPositiveButtonText(R.string.allow)
                 .setPositiveButtonOnClickListener(v -> {
-                    mPrivacyManager.setSensorPrivacy(CAMERA, false);
+                    mPrivacyManager.setSensorPrivacy(DIALOG, CAMERA, false);
                 });
     }
 
