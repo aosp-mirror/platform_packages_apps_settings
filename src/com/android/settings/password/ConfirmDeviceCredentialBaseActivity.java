@@ -18,6 +18,8 @@ package com.android.settings.password;
 
 import android.app.KeyguardManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.UserManager;
 import android.util.Log;
 import android.view.MenuItem;
@@ -163,11 +165,14 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        // Force a garbage collection immediately to remove remnant of user password shards
-        // from memory.
-        System.gc();
-        System.runFinalization();
-        System.gc();
+        // Force a garbage collection to remove remnant of user password shards from memory.
+        // Execute this with a slight delay to allow the activity lifecycle to complete and
+        // the instance to become gc-able.
+        new Handler(Looper.myLooper()).postDelayed(() -> {
+            System.gc();
+            System.runFinalization();
+            System.gc();
+        }, 5000);
     }
 
     @Override

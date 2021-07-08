@@ -431,7 +431,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"지문 잠금 해제를 사용하면 자녀의 본인 인증을 위한 고유한 지문 모델이 생성됩니다. 설정 중 지문 모델을 만들기 위해 다양한 위치에서 자녀의 지문 이미지를 촬영합니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Pixel Imprint를 사용하면 지문 모델을 업데이트하는 데 이미지가 활용됩니다. 지문 모델을 만드는 데 사용된 이미지는 저장되지 않으나 지문 모델은 휴대전화에 안전하게 저장되며 기기 외부로 전송되지 않습니다. 모든 처리는 휴대전화 내에서 안전하게 이뤄집니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"자녀가 Pixel Imprint를 사용하면 자녀의 지문 모델을 업데이트하는 데 이미지가 활용됩니다. 자녀의 지문 모델을 만드는 데 사용된 이미지는 저장되지 않으나 지문 모델은 휴대전화에 안전하게 저장되며 기기 외부로 전송되지 않습니다. 모든 처리는 휴대전화 내에서 안전하게 이뤄집니다."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"언제든지 설정에서 지문 이미지와 모델을 삭제하거나 지문 인식을 통한 잠금 해제를 사용 중지할 수 있습니다. 지문 이미지와 모델은 삭제하기 전까지 휴대전화에 저장됩니다."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"언제든지 설정에서 지문 이미지와 모델을 삭제하거나 지문 잠금 해제를 사용 중지할 수 있습니다. 지문 이미지와 모델은 삭제하기 전까지 휴대전화에 저장됩니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"부모와 자녀가 언제든지 설정에서 자녀의 지문 이미지와 모델을 삭제하거나 지문 잠금 해제를 사용 중지할 수 있습니다. 지문 이미지와 모델은 삭제하기 전까지 휴대전화에 저장됩니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"다른 사람이 내 손가락에 휴대전화를 가져다 대는 등 내가 의도하지 않은 상황에서 휴대전화 잠금을 해제할 수 있습니다."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"다른 사람이 자녀의 손가락에 휴대전화를 가져다 대는 등 자녀가 의도하지 않은 상황에서 자녀의 휴대전화 잠금을 해제할 수 있습니다."</string>
@@ -2667,12 +2667,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"배터리 사용량이 가장 높은 앱을 확인하세요"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"충전이 일시적으로 제한됨"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"배터리 수명을 연장하는 방법입니다. 자세히 알아보세요."</string>
-    <!-- no translation found for battery_tip_dialog_message (4592387206991500075) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (111303605119856034) -->
-    <skip />
-    <!-- no translation found for battery_tip_dialog_message (3896805213768863874) -->
-    <skip />
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"휴대전화를 평소보다 더 많이 사용했기 때문에 배터리가 평소보다 더 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"태블릿을 평소보다 더 많이 사용했기 때문에 배터리가 평소보다 더 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"기기를 평소보다 더 많이 사용했기 때문에 배터리가 평소보다 더 빨리 소진될 수 있습니다.\n\n배터리 사용량이 가장 많은 앱:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"고전력 백그라운드 활동 포함"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">%1$d개 앱 제한</item>
@@ -2948,10 +2945,8 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g>개가 안전하지 않음"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"스마트 연결"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"네트워크 연결을 자동으로 관리하여 배터리 수명을 연장하고 기기 성능을 개선합니다."</string>
-    <!-- no translation found for adaptive_connectivity_switch_on (3653067561620745493) -->
-    <skip />
-    <!-- no translation found for adaptive_connectivity_switch_off (5076172560836115265) -->
-    <skip />
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"사용"</string>
+    <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"사용 안함"</string>
     <string name="credentials_title" msgid="7535942196886123656">"사용자 인증 정보 저장소"</string>
     <string name="credentials_install" msgid="3933218407598415827">"인증서 설치"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"저장소에서 인증서 설치"</string>
@@ -2987,12 +2982,9 @@
     <string name="no_certificate_management_app" msgid="3025739370424406717">"없음"</string>
     <string name="certificate_management_app_description" msgid="8507306554200869005">"아래 앱 및 URL을 사용할 때 인증서로 본인 여부를 확인합니다"</string>
     <string name="uninstall_certs_credential_management_app" msgid="4945883254446077354">"인증서 제거"</string>
-    <!-- no translation found for remove_credential_management_app (6089291496976812786) -->
-    <skip />
-    <!-- no translation found for remove_credential_management_app_dialog_title (5713525435104706772) -->
-    <skip />
-    <!-- no translation found for remove_credential_management_app_dialog_message (7739474298063646935) -->
-    <skip />
+    <string name="remove_credential_management_app" msgid="6089291496976812786">"앱 삭제"</string>
+    <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"이 앱을 삭제하시겠습니까?"</string>
+    <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"이 앱에서 인증서를 관리하지 않지만 기기에서 계속 사용할 수 있습니다. 앱에서 설치한 모든 인증서가 제거됩니다."</string>
     <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
       <item quantity="other">URL <xliff:g id="NUMBER_1">%d</xliff:g>개</item>
       <item quantity="one">URL <xliff:g id="NUMBER_0">%d</xliff:g>개</item>
@@ -3269,8 +3261,7 @@
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"사용자"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"사용 중지"</string>
     <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"사용"</string>
-    <!-- no translation found for trusted_credentials_remove_label (8296330919329489422) -->
-    <skip />
+    <string name="trusted_credentials_remove_label" msgid="8296330919329489422">"제거"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"신뢰하기"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"시스템 CA 인증서를 사용하시겠습니까?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"시스템 CA 인증서를 사용 중지하시겠습니까?"</string>
@@ -4191,10 +4182,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"관리자 PIN 입력"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"사용"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"사용 안함"</string>
-    <!-- no translation found for nfc_setting_on (7701896496026725772) -->
-    <skip />
-    <!-- no translation found for nfc_setting_off (7142103438532732309) -->
-    <skip />
+    <string name="nfc_setting_on" msgid="7701896496026725772">"사용"</string>
+    <string name="nfc_setting_off" msgid="7142103438532732309">"꺼짐"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"사용 설정"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"사용 중지"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"앱 고정"</string>
@@ -4785,10 +4774,8 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope 추적"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"센서 사용 안함"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"직장 프로필 설정"</string>
-    <!-- no translation found for managed_profile_contact_search_title (6562061740814513737) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_summary (4974727886709219105) -->
-    <skip />
+    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"개인 앱에서 직장 디렉터리 연락처 검색"</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"IT 관리자에게 내 검색어와 수신 전화가 공개될 수 있습니다."</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"교차 프로필 캘린더"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"개인 캘린더에 업무 이벤트 표시"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4854,14 +4841,12 @@
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"한 손 사용 모드 사용"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"한 손 사용 가능 여부"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"아래로 스와이프"</string>
-    <!-- no translation found for one_handed_mode_use_shortcut_category (1414714099339147711) -->
-    <skip />
+    <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"단축키 사용"</string>
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"한 손 사용 모드를 사용하려면 화면 하단 모서리에서 아래로 스와이프하세요. 이 기능을 사용하려면 시스템 탐색 설정에서 동작 탐색이 켜져 있는지 확인하세요."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"엄지가 닿는 영역으로 화면 크기 조정"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"화면 상단이 엄지가 닿을 수 있는 영역으로 이동합니다."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"알림 표시"</string>
-    <!-- no translation found for one_handed_action_show_notification_summary (8281689861222000436) -->
-    <skip />
+    <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"알림 및 설정이 표시됩니다."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"시간, 알림, 기타 정보를 확인하려면 화면을 두 번 탭하세요."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"들어 올려 휴대전화 확인"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"들어서 태블릿 확인"</string>
@@ -5126,8 +5111,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"동작 없음"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"진동"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"음소거"</string>
-    <!-- no translation found for prevent_ringing_option_unavailable_lpp_summary (3193459102328015340) -->
-    <skip />
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"사용 설정하려면 먼저 \'전원 버튼 길게 누르기\'를 전원 메뉴로 변경하세요."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"네트워크 세부정보"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"기기 이름이 휴대전화에 있는 앱에 표시됩니다. 기기 이름은 블루투스 기기 및 Wi-Fi 네트워크에 연결하거나 Wi-Fi 핫스팟을 설정할 때 다른 사용자에게도 표시될 수 있습니다."</string>
     <string name="devices_title" msgid="649715719278562515">"기기"</string>
