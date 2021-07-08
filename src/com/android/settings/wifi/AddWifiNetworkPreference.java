@@ -59,7 +59,7 @@ public class AddWifiNetworkPreference extends Preference {
                 getContext().getString(R.string.wifi_dpp_scan_qr_code));
         scanButton.setOnClickListener(view -> {
             getContext().startActivity(
-                WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
+                    WifiDppUtils.getEnrolleeQrCodeScannerIntent(getContext(), /* ssid */ null));
         });
     }
 
