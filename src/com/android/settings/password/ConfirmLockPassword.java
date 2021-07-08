@@ -25,6 +25,8 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
@@ -216,11 +218,14 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         public void onDestroy() {
             super.onDestroy();
             mPasswordEntry.setText(null);
-            // Force a garbage collection immediately to remove remnant of user password shards
-            // from memory.
-            System.gc();
-            System.runFinalization();
-            System.gc();
+            // Force a garbage collection to remove remnant of user password shards from memory.
+            // Execute this with a slight delay to allow the activity lifecycle to complete and
+            // the instance to become gc-able.
+            new Handler(Looper.myLooper()).postDelayed(() -> {
+                System.gc();
+                System.runFinalization();
+                System.gc();
+            }, 5000);
         }
 
         private int getDefaultHeader() {
