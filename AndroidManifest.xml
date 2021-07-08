@@ -1486,6 +1486,7 @@
         </activity>
 
         <activity android:name=".security.RequestManageCredentials"
+                  android:theme="@style/Theme.SubSettings"
                   android:exported="true">
             <intent-filter>
                 <action android:name="android.security.MANAGE_CREDENTIALS"/>
@@ -1910,7 +1911,6 @@
         </activity>
 
         <activity android:name=".password.SetupChooseLockGeneric$InternalActivity"
-            android:theme="@style/GlifTheme.Light"
             android:exported="false"
             android:excludeFromRecents="true" />
 
@@ -2966,6 +2966,10 @@
             </intent-filter>
         </activity>
 
+        <!--
+            The Wi-Fi result data will only be returned from WifiDialogActivity if the calling
+            package has ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION permission. (see b/185126813)
+        -->
         <activity
             android:name=".wifi.WifiDialogActivity"
             android:label=""

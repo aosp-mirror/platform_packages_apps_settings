@@ -36,6 +36,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
@@ -68,6 +69,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     // Set initial value to true allows subscription information fragment to be re-created when
     // Activity re-create occur.
     private boolean mFragmentForceReload = true;
+    private boolean mPendingSubscriptionChange = false;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -155,6 +157,10 @@ public class MobileNetworkActivity extends SettingsBaseActivity
      * Implementation of ProxySubscriptionManager.OnActiveSubscriptionChangedListener
      */
     public void onChanged() {
+        if (!getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+            mPendingSubscriptionChange = true;
+            return;
+        }
         SubscriptionInfo info = getSubscription();
         int oldSubIndex = mCurSubscriptionId;
         updateSubscriptions(info, null);
@@ -180,6 +186,10 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         super.onStart();
         // updateSubscriptions doesn't need to be called, onChanged will always be called after we
         // register a listener.
+        if (mPendingSubscriptionChange) {
+            mPendingSubscriptionChange = false;
+            onChanged();
+        }
     }
 
     @Override
