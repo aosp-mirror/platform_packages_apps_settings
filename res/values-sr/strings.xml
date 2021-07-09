@@ -432,7 +432,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Коришћење отиска прста за откључавање телефона може да буде мање безбедно него јак шаблон или PIN."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Принцип рада"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Откључавање отиском прста прави јединствени модел отиска прста ради верификовања идентитета. Да бисте направили тај модел отиска прста током подешавања, морате да сликате отисак прста из различитих положаја."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Откључавање помоћу отиска прста прави јединствени модел дететовог отиска прста ради верификовања идентитета. Да би направило тај модел отиска прста током подешавања, дете треба да слика отисак прста из различитих положаја."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Откључавање отиском прста прави јединствени модел дететовог отиска прста ради верификовања идентитета. Да би направило тај модел отиска прста током подешавања, дете треба да слика отисак прста из различитих положаја."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Када користите Pixel Imprint, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на телефону и остаје само на њему. Цео процес обраде се безбедно одвија на телефону."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Када користи Pixel Imprint, слике се користе за ажурирање модела отиска прста. Слике које се користе за прављење дететовог модела отиска прста никада се не чувају, али се модел отиска прста безбедно чува на телефону и остаје само на њему. Цео процес обраде се безбедно одвија на телефону."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Можете да избришете слике и модел отиска прста или да искључите Откључавање отискoм прста у било ком тренутку у Подешавањима. Слике и модели отисака прстију се чувају на телефону док их не избришете."</string>
@@ -1770,7 +1770,7 @@
     <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Овим бришете све податке из "<b>"интерне меморије"</b>" телефона, укључујући:\n\n"<li>"Google налог"</li>\n<li>"податке и подешавања система и апликација"</li>\n<li>"преузете апликације"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Тренутно сте пријављени на следеће налоге:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"На овом уређају су присутни и други корисници.\n"</string>
-    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Музика"</li>\n<li>"Слике"</li>\n<li>"Други подаци корисника"</li></string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"музику"</li>\n<li>"слике"</li>\n<li>"друге податке корисника"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM-ови"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"На тај начин нећете отказати мобилни тарифни пакет."</string>
     <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Да бисте обрисали музику, слике и друге податке корисника, треба да обришете "<b>"USB меморију"</b>"."</string>
@@ -3018,12 +3018,9 @@
     <string name="no_certificate_management_app" msgid="3025739370424406717">"Нема"</string>
     <string name="certificate_management_app_description" msgid="8507306554200869005">"Сертификати ће вас верификовати када користите апликације и URL-ове у наставку"</string>
     <string name="uninstall_certs_credential_management_app" msgid="4945883254446077354">"Деинсталирај сертификате"</string>
-    <!-- no translation found for remove_credential_management_app (6089291496976812786) -->
-    <skip />
-    <!-- no translation found for remove_credential_management_app_dialog_title (5713525435104706772) -->
-    <skip />
-    <!-- no translation found for remove_credential_management_app_dialog_message (7739474298063646935) -->
-    <skip />
+    <string name="remove_credential_management_app" msgid="6089291496976812786">"Уклони апликацију"</string>
+    <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Уклонићете ову апликацију?"</string>
+    <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Ова апликација неће управљати сертификатима, али ће остати на уређају. Сви сертификати које је апликација инсталирала ће бити деинсталирани."</string>
     <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
       <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> URL</item>
       <item quantity="few"><xliff:g id="NUMBER_1">%d</xliff:g> URL-а</item>
@@ -3302,8 +3299,7 @@
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"Корисник"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Онемогући"</string>
     <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"Омогући"</string>
-    <!-- no translation found for trusted_credentials_remove_label (8296330919329489422) -->
-    <skip />
+    <string name="trusted_credentials_remove_label" msgid="8296330919329489422">"Деинсталирај"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"Имај поверења"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Желите ли да омогућите системски CA сертификат?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Желите ли да онемогућите системски CA сертификат?"</string>
@@ -4239,10 +4235,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Унесите PIN администратора"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Укључено"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Искључено"</string>
-    <!-- no translation found for nfc_setting_on (7701896496026725772) -->
-    <skip />
-    <!-- no translation found for nfc_setting_off (7142103438532732309) -->
-    <skip />
+    <string name="nfc_setting_on" msgid="7701896496026725772">"Укључено"</string>
+    <string name="nfc_setting_off" msgid="7142103438532732309">"Искључено"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Укључено"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Искључено"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Качење апликација"</string>
@@ -4853,10 +4847,8 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope траг"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Сензори су искључени"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Подешавања пословног профила"</string>
-    <!-- no translation found for managed_profile_contact_search_title (6562061740814513737) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_summary (4974727886709219105) -->
-    <skip />
+    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Тражите контакте из пословног директоријума у личним апликацијама"</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Претраге и долазни позиви могу да буду видљиви ИТ администратору"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Календар за више врста профила"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Приказивање пословних догађаја у личном календару"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4930,8 +4922,7 @@
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Повлачење екрана надохват палца"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Врх екрана ће се померити надохват палца."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Приказ обавештења"</string>
-    <!-- no translation found for one_handed_action_show_notification_summary (8281689861222000436) -->
-    <skip />
+    <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Приказаће се обавештења и подешавања."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Да бисте проверили време, обавештења и друге информације, двапут додирните екран."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Подигните телефон да бисте га проверили"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Подигните таблет да бисте га проверили"</string>
@@ -5204,8 +5195,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Не ради ништа"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Вибрирај"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Искључи звук"</string>
-    <!-- no translation found for prevent_ringing_option_unavailable_lpp_summary (3193459102328015340) -->
-    <skip />
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Да бисте омогућили ово, прво промените опцију Притисните и задржите дугме за укључивање у мени дугмета за укључивање."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Детаљи о мрежи"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Апликације на телефону могу да виде назив уређаја. И други људи могу да виде назив уређаја могу када се повежете са Bluetooth уређајима или WiFi мрежом или подесите WiFi хотспот."</string>
     <string name="devices_title" msgid="649715719278562515">"Уређаји"</string>
