@@ -207,8 +207,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private WifiDialog2 mDialog;
 
-    private View mProgressHeader;
-
     @VisibleForTesting
     PreferenceCategory mConnectedWifiEntryPreferenceCategory;
     @VisibleForTesting
@@ -255,8 +253,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             return;
         }
 
-        mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
-                .findViewById(R.id.progress_bar_animation);
+        setPinnedHeaderView(R.layout.progress_header);
         setProgressBarVisible(false);
 
         mWifiManager = activity.getSystemService(WifiManager.class);
@@ -1006,9 +1003,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     }
 
     protected void setProgressBarVisible(boolean visible) {
-        if (mProgressHeader != null) {
-            mProgressHeader.setVisibility(visible ? View.VISIBLE : View.GONE);
-        }
+        showPinnedHeader(visible);
     }
 
     @VisibleForTesting

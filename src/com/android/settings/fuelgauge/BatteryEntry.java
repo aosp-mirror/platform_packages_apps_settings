@@ -572,7 +572,8 @@ public class BatteryEntry {
             name = context.getResources().getString(R.string.process_kernel_label);
         } else if ("mediaserver".equals(name)) {
             name = context.getResources().getString(R.string.process_mediaserver_label);
-        } else if ("dex2oat".equals(name)) {
+        } else if ("dex2oat".equals(name) || "dex2oat32".equals(name) ||
+                "dex2oat64".equals(name)) {
             name = context.getResources().getString(R.string.process_dex2oat_label);
         }
         return new NameAndIcon(name, icon, 0 /* iconId */);
