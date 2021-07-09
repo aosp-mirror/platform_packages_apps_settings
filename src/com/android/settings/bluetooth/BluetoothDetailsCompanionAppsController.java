@@ -26,8 +26,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.provider.DeviceConfig;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -39,6 +41,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.SettingsUIDeviceConfig;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -179,6 +183,18 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
      */
     public void updatePreferences(Context context,
             String address, PreferenceCategory container) {
+        // If the device is FastPair, remove CDM companion apps.
+        final BluetoothFeatureProvider bluetoothFeatureProvider = FeatureFactory.getFactory(context)
+                .getBluetoothFeatureProvider(context);
+        final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
+        final Uri settingsUri = bluetoothFeatureProvider.getBluetoothDeviceSettingsUri(
+                mCachedDevice.getDevice());
+        if (sliceEnabled && settingsUri != null) {
+            container.removeAll();
+            return;
+        }
+
         Set<String> addedPackages = new HashSet<>();
 
         for (String packageName : getPreferencesNeedToShow(address, container)) {
