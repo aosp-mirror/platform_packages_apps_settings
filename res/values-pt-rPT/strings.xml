@@ -433,7 +433,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Quando a criança utiliza o Pixel Imprint, são utilizadas imagens para atualizar o respetivo modelo de impressão digital. As imagens utilizadas para criar o modelo de impressão digital da criança nunca são armazenadas, mas o modelo de impressão digital é guardado em segurança no telemóvel e nunca sai do mesmo. Todo o processamento ocorre de forma segura no telemóvel."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Pode eliminar o modelo e as imagens da sua impressão digital ou desativar o Desbloqueio por impressão digital em qualquer altura nas Definições. Os modelos e as imagens de impressões digitais são armazenados no telemóvel até os eliminar."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"O utilizador e a criança podem eliminar o modelo e as imagens da impressão digital ou desativar o Desbloqueio por impressão digital em qualquer altura nas Definições. Os modelos e as imagens de impressões digitais são armazenados no telemóvel até serem eliminados."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"O telemóvel pode ser desbloqueado involuntariamente, como se alguém o encostar ao seu dedo."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"O telemóvel pode ser desbloqueado involuntariamente (por exemplo, se alguém o encostar ao seu dedo)."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"O telemóvel da criança pode ser desbloqueado involuntariamente, como se alguém o encostar ao dedo da criança."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Altere a posição do seu dedo ligeiramente de cada vez"</string>
@@ -740,8 +740,8 @@
       <item quantity="one">Tem de incluir, pelo menos, <xliff:g id="COUNT_0">%d</xliff:g> caráter.</item>
     </plurals>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="other">O PIN tem de incluir, pelo menos, <xliff:g id="COUNT_1">%d</xliff:g> dígitos.</item>
-      <item quantity="one">O PIN tem de incluir, pelo menos, <xliff:g id="COUNT_0">%d</xliff:g> dígito.</item>
+      <item quantity="other">O PIN tem de incluir, pelo menos, <xliff:g id="COUNT_1">%d</xliff:g> dígitos</item>
+      <item quantity="one">O PIN tem de incluir, pelo menos, <xliff:g id="COUNT_0">%d</xliff:g> dígito</item>
     </plurals>
     <string name="lockpassword_continue_label" msgid="2507983991979547816">"Continuar"</string>
     <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
@@ -2980,12 +2980,9 @@
     <string name="no_certificate_management_app" msgid="3025739370424406717">"Nenhuma"</string>
     <string name="certificate_management_app_description" msgid="8507306554200869005">"Os certificados vão validar a sua identidade quando utilizar as apps e os URLs abaixo"</string>
     <string name="uninstall_certs_credential_management_app" msgid="4945883254446077354">"Desinstalar certificados"</string>
-    <!-- no translation found for remove_credential_management_app (6089291496976812786) -->
-    <skip />
-    <!-- no translation found for remove_credential_management_app_dialog_title (5713525435104706772) -->
-    <skip />
-    <!-- no translation found for remove_credential_management_app_dialog_message (7739474298063646935) -->
-    <skip />
+    <string name="remove_credential_management_app" msgid="6089291496976812786">"Remover app"</string>
+    <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Pretende remover esta app?"</string>
+    <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Esta app não gere certificados, mas permanece no dispositivo. Quaisquer certificados instalados pela app serão desinstalados."</string>
     <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
       <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> URLs</item>
       <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> URL</item>
@@ -3262,8 +3259,7 @@
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"Utilizador"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Desativar"</string>
     <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"Ativar"</string>
-    <!-- no translation found for trusted_credentials_remove_label (8296330919329489422) -->
-    <skip />
+    <string name="trusted_credentials_remove_label" msgid="8296330919329489422">"Desinstalar"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"Confiar"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Ativar o certificado da AC do sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Desativar o certificado da AC do sistema?"</string>
@@ -3828,7 +3824,7 @@
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostrar conteúdo confidencial quando estiver bloqueado"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificações confidenciais do perfil de trabalho"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Mostrar conteúdo confidencial do perfil de trabalho quando estiver bloqueado"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostrar todas as notificações"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostrar os conteúdos de todas as notificações"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Mostrar conteúdo confidencial apenas se desbloqueado"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Não mostrar notificações"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Como pretende que o ecrã de bloqueio seja apresentado?"</string>
@@ -4184,10 +4180,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Introduzir o PIN do gestor"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Ativado"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Desativado"</string>
-    <!-- no translation found for nfc_setting_on (7701896496026725772) -->
-    <skip />
-    <!-- no translation found for nfc_setting_off (7142103438532732309) -->
-    <skip />
+    <string name="nfc_setting_on" msgid="7701896496026725772">"Ativado"</string>
+    <string name="nfc_setting_off" msgid="7142103438532732309">"Desativado"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Ativada"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Desativada"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fixação de apps"</string>
@@ -4778,10 +4772,8 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope Trace"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensores desativados"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Definições do perfil de trabalho"</string>
-    <!-- no translation found for managed_profile_contact_search_title (6562061740814513737) -->
-    <skip />
-    <!-- no translation found for managed_profile_contact_search_summary (4974727886709219105) -->
-    <skip />
+    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Pesquisar contactos do diretório de trabalho em apps pessoais"</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"As pesquisas e as chamadas recebidas podem ser visíveis para o administrador de TI"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Calendário de vários perfis"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Mostrar eventos de trabalho no calendário pessoal"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4852,8 +4844,7 @@
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Puxar o ecrã consoante o alcance"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"A parte superior do ecrã move-se consoante o alcance do seu polegar."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Mostrar notificações"</string>
-    <!-- no translation found for one_handed_action_show_notification_summary (8281689861222000436) -->
-    <skip />
+    <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"São apresentadas notificações e definições."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Para consultar a hora, as notificações e outras informações, toque duas vezes no ecrã."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Levantar para verificar o telemóvel"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Levantar para verificar o tablet"</string>
@@ -5118,8 +5109,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Não fazer nada"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibrar"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Desativar som"</string>
-    <!-- no translation found for prevent_ringing_option_unavailable_lpp_summary (3193459102328015340) -->
-    <skip />
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Para ativar, comece por alterar \"Premir sem soltar o botão ligar/desligar\" para o menu ligar/desligar."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detalhes da rede"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"O nome do seu dispositivo é visível para as apps do telemóvel. Também pode ser visto por outras pessoas quando se liga a dispositivos Bluetooth ou a uma rede Wi-Fi, assim como quando configura uma zona Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Dispositivos"</string>
