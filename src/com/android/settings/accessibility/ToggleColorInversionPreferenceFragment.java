@@ -73,6 +73,11 @@ public class ToggleColorInversionPreferenceFragment extends
     }
 
     @Override
+    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
+        shortcutPreference.setTitle(R.string.accessibility_display_inversion_shortcut_title);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mComponentName = COLOR_INVERSION_COMPONENT_NAME;

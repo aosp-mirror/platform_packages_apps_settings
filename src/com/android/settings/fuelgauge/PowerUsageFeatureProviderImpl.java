@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Process;
 import android.util.SparseIntArray;
 
@@ -165,6 +166,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context) {
+        return null;
+    }
+
+    @Override
+    public Uri getBatteryHistoryUri() {
         return null;
     }
 }

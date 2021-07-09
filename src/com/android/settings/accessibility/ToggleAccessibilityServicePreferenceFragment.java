@@ -55,7 +55,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
-import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -219,15 +218,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
-    }
-
-    @Override
-    protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
-        final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
-        final String switchBarText = (info == null) ? "" :
-                getString(R.string.accessibility_service_primary_switch_title,
-                        info.getResolveInfo().loadLabel(getPackageManager()));
-        switchPreference.setTitle(switchBarText);
     }
 
     @Override
