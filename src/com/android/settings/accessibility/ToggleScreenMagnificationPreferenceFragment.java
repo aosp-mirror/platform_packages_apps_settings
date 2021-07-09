@@ -397,6 +397,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
+    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
+        shortcutPreference.setTitle(R.string.accessibility_screen_magnification_shortcut_title);
+    }
+
+    @Override
     protected void updateShortcutPreference() {
         final int shortcutTypes = PreferredShortcuts.retrieveUserShortcutType(getPrefContext(),
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
