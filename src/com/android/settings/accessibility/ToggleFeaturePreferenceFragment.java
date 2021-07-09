@@ -57,7 +57,6 @@ import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.utils.LocaleUtils;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
-import com.android.settingslib.HelpUtils;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
@@ -78,6 +77,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected SettingsMainSwitchPreference mToggleServiceSwitchPreference;
     protected ShortcutPreference mShortcutPreference;
     protected Preference mSettingsPreference;
+    protected AccessibilityFooterPreferenceController mFooterPreferenceController;
     protected String mPreferenceKey;
 
     protected CharSequence mSettingsTitle;
@@ -469,33 +469,19 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final PreferenceScreen screen = getPreferenceScreen();
         final CharSequence htmlDescription = Html.fromHtml(mHtmlDescription.toString(),
                 Html.FROM_HTML_MODE_COMPACT, mImageGetter, /* tagHandler= */ null);
-        final String iconContentDescription =
-                getString(R.string.accessibility_introduction_title, mPackageName);
 
         final AccessibilityFooterPreference htmlFooterPreference =
                 new AccessibilityFooterPreference(screen.getContext());
         htmlFooterPreference.setKey(KEY_HTML_DESCRIPTION_PREFERENCE);
         htmlFooterPreference.setSummary(htmlDescription);
-        htmlFooterPreference.setContentDescription(
-                generateFooterContentDescription(htmlDescription));
-
-        // Only framework tools support help link
-        if (getHelpResource() != 0) {
-            htmlFooterPreference.setLearnMoreAction(view -> {
-                final Intent helpIntent = HelpUtils.getHelpIntent(
-                        getContext(), getContext().getString(getHelpResource()),
-                        getContext().getClass().getName());
-                view.startActivityForResult(helpIntent, 0);
-            });
-
-            final String learnMoreContentDescription = getPrefContext().getString(
-                    R.string.footer_learn_more_content_description, mPackageName);
-            htmlFooterPreference.setLearnMoreContentDescription(learnMoreContentDescription);
-            htmlFooterPreference.setLinkEnabled(true);
-        } else {
-            htmlFooterPreference.setLinkEnabled(false);
-        }
         screen.addPreference(htmlFooterPreference);
+
+        // TODO(b/171272809): Migrate to DashboardFragment.
+        final String title = getString(R.string.accessibility_introduction_title, mPackageName);
+        mFooterPreferenceController = new AccessibilityFooterPreferenceController(
+            screen.getContext(), htmlFooterPreference.getKey());
+        mFooterPreferenceController.setIntroductionTitle(title);
+        mFooterPreferenceController.displayPreference(screen);
     }
 
     private void initFooterPreference() {
@@ -518,41 +504,22 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
      *
      * @param screen The preference screen to add the footer preference
      * @param summary The summary of the preference summary.
-     * @param iconContentDescription The content description of icon in the footer.
+     * @param introductionTitle The title of introduction in the footer.
      */
     @VisibleForTesting
     void createFooterPreference(PreferenceScreen screen, CharSequence summary,
-            String iconContentDescription) {
+            String introductionTitle) {
         final AccessibilityFooterPreference footerPreference =
                 new AccessibilityFooterPreference(screen.getContext());
         footerPreference.setSummary(summary);
-        footerPreference.setContentDescription(
-                generateFooterContentDescription(summary));
-
-        // Only framework tools support help link
-        if (getHelpResource() != 0) {
-            footerPreference.setLearnMoreAction(view -> {
-                final Intent helpIntent = HelpUtils.getHelpIntent(
-                        getContext(), getContext().getString(getHelpResource()),
-                        getContext().getClass().getName());
-                view.startActivityForResult(helpIntent, 0);
-            });
-
-            final String learnMoreContentDescription = getPrefContext().getString(
-                    R.string.footer_learn_more_content_description, mPackageName);
-            footerPreference.setLearnMoreContentDescription(learnMoreContentDescription);
-        }
         screen.addPreference(footerPreference);
+
+        mFooterPreferenceController = new AccessibilityFooterPreferenceController(
+            screen.getContext(), footerPreference.getKey());
+        mFooterPreferenceController.setIntroductionTitle(introductionTitle);
+        mFooterPreferenceController.displayPreference(screen);
     }
 
-    private CharSequence generateFooterContentDescription(CharSequence footerContent) {
-        final StringBuffer sb = new StringBuffer();
-        sb.append(getPrefContext().getString(
-                R.string.accessibility_introduction_title, mPackageName))
-                .append("\n\n")
-                .append(footerContent);
-        return sb;
-    }
     @VisibleForTesting
     void setupEditShortcutDialog(Dialog dialog) {
         final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
