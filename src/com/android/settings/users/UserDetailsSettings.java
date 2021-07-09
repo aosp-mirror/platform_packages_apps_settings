@@ -62,6 +62,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
     private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
+    private static final String KEY_APP_COPYING = "app_copying";
 
     /** Integer extra containing the userId to manage */
     static final String EXTRA_USER_ID = "user_id";
@@ -84,9 +85,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     Preference mAppAndContentAccessPref;
     @VisibleForTesting
+    Preference mAppCopyingPref;
+    @VisibleForTesting
     Preference mRemoveUserPref;
 
     @VisibleForTesting
+    /** The user being studied (not the user doing the studying). */
     UserInfo mUserInfo;
     private Bundle mDefaultGuestRestrictions;
 
@@ -141,6 +145,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             }
         } else if (preference == mAppAndContentAccessPref) {
             openAppAndContentAccessScreen(false);
+            return true;
+        } else if (preference == mAppCopyingPref) {
+            openAppCopyingScreen();
             return true;
         }
         return false;
@@ -241,6 +248,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mPhonePref = findPreference(KEY_ENABLE_TELEPHONY);
         mRemoveUserPref = findPreference(KEY_REMOVE_USER);
         mAppAndContentAccessPref = findPreference(KEY_APP_AND_CONTENT_ACCESS);
+        mAppCopyingPref = findPreference(KEY_APP_COPYING);
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
@@ -258,6 +266,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             removePreference(KEY_ENABLE_TELEPHONY);
             removePreference(KEY_REMOVE_USER);
             removePreference(KEY_APP_AND_CONTENT_ACCESS);
+            removePreference(KEY_APP_COPYING);
         } else {
             if (!Utils.isVoiceCapable(context)) { // no telephony
                 removePreference(KEY_ENABLE_TELEPHONY);
@@ -292,6 +301,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
                 mRemoveUserPref.setTitle(R.string.user_remove_user);
+                removePreference(KEY_APP_COPYING);
             }
             if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                     UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
@@ -301,6 +311,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mRemoveUserPref.setOnPreferenceClickListener(this);
             mPhonePref.setOnPreferenceChangeListener(this);
             mAppAndContentAccessPref.setOnPreferenceClickListener(this);
+            mAppCopyingPref.setOnPreferenceClickListener(this);
         }
     }
 
@@ -391,6 +402,17 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 .setDestination(AppRestrictionsFragment.class.getName())
                 .setArguments(extras)
                 .setTitleRes(R.string.user_restrictions_title)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
+    }
+
+    private void openAppCopyingScreen() {
+        final Bundle extras = new Bundle();
+        extras.putInt(AppRestrictionsFragment.EXTRA_USER_ID, mUserInfo.id);
+        new SubSettingLauncher(getContext())
+                .setDestination(AppCopyFragment.class.getName())
+                .setArguments(extras)
+                .setTitleRes(R.string.user_copy_apps_menu_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
