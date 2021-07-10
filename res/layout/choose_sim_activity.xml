@@ -20,30 +20,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:entries="@xml/items_multiple_carrier"
-    android:icon="@drawable/ic_network_signal_blue">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            style="@style/SudContentFrame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/subtitle_bottom_padding">
-            <TextView
-                android:id="@+id/subtitle"
-                style="@style/SudDescription.Glif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <com.google.android.setupdesign.GlifRecyclerLayout
-            android:id="@+id/recycler_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:entries="@xml/items_multiple_carrier" />
-
-    </LinearLayout>
-</com.google.android.setupdesign.GlifRecyclerLayout>
+    android:icon="@drawable/ic_network_signal_blue" />
