@@ -101,8 +101,11 @@ public final class BatteryChartPreferenceControllerTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mContext = spy(RuntimeEnvironment.application);
-        mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
+        final Resources resources = spy(mContext.getResources());
+        resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
+        doReturn(resources).when(mContext).getResources();
+        doReturn(new String[] {"com.android.googlequicksearchbox"})
+            .when(resources).getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
@@ -467,7 +470,7 @@ public final class BatteryChartPreferenceControllerTest {
             spy(createBatteryDiffEntry(
                 /*foregroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS,
                 /*backgroundUsageTimeInMs=*/ DateUtils.MINUTE_IN_MILLIS));
-        doReturn("com.google.android.googlequicksearchbox").when(batteryDiffEntry)
+        doReturn("com.android.googlequicksearchbox").when(batteryDiffEntry)
             .getPackageName();
 
         mBatteryChartPreferenceController.setPreferenceSummary(pref, batteryDiffEntry);
@@ -678,7 +681,7 @@ public final class BatteryChartPreferenceControllerTest {
 
         // Verifies the item which is defined in the array list.
         assertThat(mBatteryChartPreferenceController
-                .isValidToShowSummary("com.google.android.googlequicksearchbox"))
+                .isValidToShowSummary("com.android.googlequicksearchbox"))
             .isFalse();
     }
 
