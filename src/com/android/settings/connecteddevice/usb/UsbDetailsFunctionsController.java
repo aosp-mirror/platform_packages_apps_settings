@@ -116,6 +116,8 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             if (mUsbBackend.areFunctionsSupported(option)) {
                 if (isAccessoryMode(functions)) {
                     pref.setChecked(UsbManager.FUNCTION_MTP == option);
+                } else if (functions == UsbManager.FUNCTION_NCM) {
+                    pref.setChecked(UsbManager.FUNCTION_RNDIS == option);
                 } else {
                     pref.setChecked(functions == option);
                 }
@@ -148,7 +150,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
                 preference.setChecked(true);
             }
 
-            if (function == UsbManager.FUNCTION_RNDIS) {
+            if (function == UsbManager.FUNCTION_RNDIS || function == UsbManager.FUNCTION_NCM) {
                 // We need to have entitlement check for usb tethering, so use API in
                 // TetheringManager.
                 mTetheringManager.startTethering(
