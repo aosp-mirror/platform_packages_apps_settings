@@ -36,48 +36,48 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class WifiNonPersistentMacRandomizationPreferenceControllerTest {
-    private static final String NON_PERSISTENT_MAC_RANDOMIZATION_FEATURE_FLAG =
-            "non_persistent_mac_randomization_force_enabled";
+public class WifiEnhancedMacRandomizationPreferenceControllerTest {
+    private static final String ENHANCED_MAC_RANDOMIZATION_FEATURE_FLAG =
+            "enhanced_mac_randomization_force_enabled";
     @Mock
     private SwitchPreference mPreference;
     @Mock
     private PreferenceScreen mPreferenceScreen;
     private Context mContext;
-    private WifiNonPersistentMacRandomizationPreferenceController mController;
+    private WifiEnhancedMacRandomizationPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new WifiNonPersistentMacRandomizationPreferenceController(mContext);
+        mController = new WifiEnhancedMacRandomizationPreferenceController(mContext);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
                 .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 
     @Test
-    public void onPreferenceChanged_enabled_shouldTurnOnNonPersistentRandomization() {
+    public void onPreferenceChanged_enabled_shouldTurnOnEnhancedRandomization() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
         int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                NON_PERSISTENT_MAC_RANDOMIZATION_FEATURE_FLAG, -1);
+                ENHANCED_MAC_RANDOMIZATION_FEATURE_FLAG, -1);
         assertThat(mode).isEqualTo(1);
     }
 
     @Test
-    public void onPreferenceChanged_disabled_shouldTurnOffNonPersistentRandomization() {
+    public void onPreferenceChanged_disabled_shouldTurnOffEnhancedRandomization() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
         int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                NON_PERSISTENT_MAC_RANDOMIZATION_FEATURE_FLAG, -1);
+                ENHANCED_MAC_RANDOMIZATION_FEATURE_FLAG, -1);
         assertThat(mode).isEqualTo(0);
     }
 
     @Test
     public void updateState_preferenceShouldBeChecked() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                NON_PERSISTENT_MAC_RANDOMIZATION_FEATURE_FLAG, 1);
+                ENHANCED_MAC_RANDOMIZATION_FEATURE_FLAG, 1);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
@@ -86,7 +86,7 @@ public class WifiNonPersistentMacRandomizationPreferenceControllerTest {
     @Test
     public void updateState_preferenceShouldNotBeChecked() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                NON_PERSISTENT_MAC_RANDOMIZATION_FEATURE_FLAG, 0);
+                ENHANCED_MAC_RANDOMIZATION_FEATURE_FLAG, 0);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
@@ -97,7 +97,7 @@ public class WifiNonPersistentMacRandomizationPreferenceControllerTest {
         mController.onDeveloperOptionsSwitchDisabled();
 
         int mode = Settings.Global.getInt(mContext.getContentResolver(),
-                NON_PERSISTENT_MAC_RANDOMIZATION_FEATURE_FLAG, -1);
+                ENHANCED_MAC_RANDOMIZATION_FEATURE_FLAG, -1);
 
         assertThat(mode).isEqualTo(0);
         assertThat(mPreference.isChecked()).isFalse();
