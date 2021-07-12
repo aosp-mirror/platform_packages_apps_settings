@@ -16,7 +16,6 @@
 package com.android.settings.network.helper;
 
 import android.content.Context;
-import android.os.ParcelUuid;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -29,29 +28,38 @@ import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
  * This is a Callable class to query user selectable subscription list.
+ *
+ * Here's example of creating a Callable for retrieving a list of SubscriptionAnnotation
+ * for active Subscriptions:
+ *
+ * List<SubscriptionAnnotation> result = (new SelectableSubscriptions(context, false)).call();
+ *
+ * Another example for retrieving a list of SubscriptionAnnotation for all subscriptions
+ * accessible in another thread.
+ *
+ * List<SubscriptionAnnotation> result = ExecutorService.submit(
+ *     new SelectableSubscriptions(context, true)).get()
  */
 public class SelectableSubscriptions implements Callable<List<SubscriptionAnnotation>> {
     private static final String TAG = "SelectableSubscriptions";
 
-    private static final ParcelUuid mEmptyUuid = ParcelUuid.fromString("0-0-0-0-0");
-
     private Context mContext;
     private Supplier<List<SubscriptionInfo>> mSubscriptions;
     private Predicate<SubscriptionAnnotation> mFilter;
+    private Function<List<SubscriptionAnnotation>, List<SubscriptionAnnotation>> mFinisher;
 
     /**
      * Constructor of class
@@ -65,6 +73,17 @@ public class SelectableSubscriptions implements Callable<List<SubscriptionAnnota
                 (() -> getActiveSubInfoList(context));
         mFilter = disabledSlotsIncluded ? (subAnno -> subAnno.isExisted()) :
                 (subAnno -> subAnno.isActive());
+        mFinisher = annoList -> annoList;
+    }
+
+    /**
+     * Add UnaryOperator to be applied to the final result.
+     * @param finisher a function to be applied to the final result.
+     */
+    public SelectableSubscriptions addFinisher(
+            UnaryOperator<List<SubscriptionAnnotation>> finisher) {
+        mFinisher = mFinisher.andThen(finisher);
+        return this;
     }
 
     /**
@@ -96,58 +115,18 @@ public class SelectableSubscriptions implements Callable<List<SubscriptionAnnota
             List<Integer> simSlotIndexList = atomicToList(simSlotIndex.get());
             List<Integer> activeSimSlotIndexList = atomicToList(activeSimSlotIndex.get());
 
-            // group by GUID
-            Map<ParcelUuid, List<SubscriptionAnnotation>> groupedSubInfoList =
-                    IntStream.range(0, subInfoList.size())
+            // build a list of SubscriptionAnnotation
+            return IntStream.range(0, subInfoList.size())
                     .mapToObj(subInfoIndex ->
                             new SubscriptionAnnotation.Builder(subInfoList, subInfoIndex))
                     .map(annoBdr -> annoBdr.build(mContext,
                             eSimCardIdList, simSlotIndexList, activeSimSlotIndexList))
                     .filter(mFilter)
-                    .collect(Collectors.groupingBy(subAnno -> getGroupUuid(subAnno)));
-
-            // select best one from subscription(s) within the same group
-            groupedSubInfoList.replaceAll((uuid, annoList) -> {
-                if ((uuid == mEmptyUuid) || (annoList.size() <= 1)) {
-                    return annoList;
-                }
-                return Collections.singletonList(selectBestFromList(annoList));
-            });
-
-            // build a list of subscriptions (based on the order of slot index)
-            return groupedSubInfoList.values().stream().flatMap(List::stream)
-                    .sorted(Comparator.comparingInt(anno -> anno.getSubInfo().getSimSlotIndex()))
-                    .collect(Collectors.toList());
+                    .collect(Collectors.collectingAndThen(Collectors.toList(), mFinisher));
         } catch (Exception exception) {
             Log.w(TAG, "Fail to request subIdList", exception);
         }
         return Collections.emptyList();
-    }
-
-    protected ParcelUuid getGroupUuid(SubscriptionAnnotation subAnno) {
-        ParcelUuid groupUuid = subAnno.getSubInfo().getGroupUuid();
-        return (groupUuid == null) ? mEmptyUuid : groupUuid;
-    }
-
-    protected SubscriptionAnnotation selectBestFromList(List<SubscriptionAnnotation> annoList) {
-        Comparator<SubscriptionAnnotation> annoSelector = (anno1, anno2) -> {
-            if (anno1.isDisplayAllowed() != anno2.isDisplayAllowed()) {
-                return anno1.isDisplayAllowed() ? -1 : 1;
-            }
-            if (anno1.isActive() != anno2.isActive()) {
-                return anno1.isActive() ? -1 : 1;
-            }
-            if (anno1.isExisted() != anno2.isExisted()) {
-                return anno1.isExisted() ? -1 : 1;
-            }
-            return 0;
-        };
-        annoSelector = annoSelector
-                // eSIM in front of pSIM
-                .thenComparingInt(anno -> -anno.getType())
-                // subscription ID in reverse order
-                .thenComparingInt(anno -> -anno.getSubscriptionId());
-        return annoList.stream().sorted(annoSelector).findFirst().orElse(null);
     }
 
     protected List<SubscriptionInfo> getSubInfoList(Context context,
