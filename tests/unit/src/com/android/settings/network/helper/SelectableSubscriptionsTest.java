@@ -33,7 +33,6 @@ public class SelectableSubscriptionsTest {
     public void setUp() {
     }
 
-
     @Test
     public void atomicToList_nullInput_getNoneNullEmptyList() {
         List<Integer> result = SelectableSubscriptions.atomicToList(null);
