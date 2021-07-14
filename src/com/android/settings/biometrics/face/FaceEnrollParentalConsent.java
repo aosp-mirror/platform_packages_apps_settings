@@ -82,6 +82,12 @@ public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
 
     @Override
     @StringRes
+    protected int getInfoMessageRequireEyes() {
+        return R.string.security_settings_face_enroll_introduction_info_consent_gaze;
+    }
+
+    @Override
+    @StringRes
     protected int getHowMessage() {
         return R.string.security_settings_face_enroll_introduction_how_consent_message;
     }
