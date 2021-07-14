@@ -92,12 +92,20 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
                 updateSwitchBarToggleSwitch();
             }
         };
-        return super.onCreateView(inflater, container, savedInstanceState);
+
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        updateFooterPreference();
+        return view;
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private void updateFooterPreference() {
+        final String title = getPrefContext()
+                .getString(R.string.accessibility_daltonizer_about_title);
+        final String learnMoreContentDescription = getPrefContext()
+                .getString(R.string.accessibility_daltonizer_footer_learn_more_content_description);
+        mFooterPreferenceController.setIntroductionTitle(title);
+        mFooterPreferenceController.setupHelpLink(getHelpResource(), learnMoreContentDescription);
+        mFooterPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     /** Customizes the order by preference key. */
