@@ -606,6 +606,14 @@
             android:title="@string/inactive_apps_title"
             android:fragment="com.android.settings.fuelgauge.InactiveApps" />
 
+        <Preference
+            android:key="tare"
+            android:title="@string/tare_title" >
+            <intent
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.development.tare.TareHomePage" />
+        </Preference>
+
         <SwitchPreference
             android:key="force_allow_on_external"
             android:title="@string/force_allow_on_external"
