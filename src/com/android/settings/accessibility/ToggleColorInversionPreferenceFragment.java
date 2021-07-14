@@ -38,8 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Settings page for color inversion. */
-public class ToggleColorInversionPreferenceFragment extends
-        ToggleFeaturePreferenceFragment {
+public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
     private final Handler mHandler = new Handler();
@@ -95,7 +94,20 @@ public class ToggleColorInversionPreferenceFragment extends
                 updateSwitchBarToggleSwitch();
             }
         };
-        return super.onCreateView(inflater, container, savedInstanceState);
+
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        updateFooterPreference();
+        return view;
+    }
+
+    private void updateFooterPreference() {
+        final String title = getPrefContext().getString(
+                R.string.accessibility_color_inversion_about_title);
+        final String learnMoreContentDescription = getPrefContext().getString(
+                R.string.accessibility_color_inversion_footer_learn_more_content_description);
+        mFooterPreferenceController.setIntroductionTitle(title);
+        mFooterPreferenceController.setupHelpLink(getHelpResource(), learnMoreContentDescription);
+        mFooterPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     @Override
