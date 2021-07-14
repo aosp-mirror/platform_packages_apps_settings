@@ -1,11 +1,13 @@
 package com.android.settings.testutils.shadow;
 
+import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_DEFAULT;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
 
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.UserIdInt;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyManager.DeviceOwnerType;
 import android.app.admin.PasswordMetrics;
 import android.app.admin.PasswordPolicy;
 import android.content.ComponentName;
@@ -23,6 +25,7 @@ import java.util.Objects;
 public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDevicePolicyManager {
 
     private final Map<Integer, Long> mProfileTimeouts = new HashMap<>();
+    private final Map<String, Integer> mDeviceOwnerTypes = new HashMap<>();
     private Map<Integer, CharSequence> mSupportMessagesMap = new HashMap<>();
     private boolean mIsAdminActiveAsUser = false;
     private ComponentName mDeviceOwnerComponentName;
@@ -75,6 +78,16 @@ public class ShadowDevicePolicyManager extends org.robolectric.shadows.ShadowDev
 
     public void setDeviceOwnerComponentOnAnyUser(ComponentName admin) {
         mDeviceOwnerComponentName = admin;
+    }
+
+    public void setDeviceOwnerType(@NonNull ComponentName admin,
+            @DeviceOwnerType int deviceOwnerType) {
+        mDeviceOwnerTypes.put(admin.getPackageName(), deviceOwnerType);
+    }
+
+    @DeviceOwnerType
+    public int getDeviceOwnerType(@NonNull ComponentName admin) {
+        return mDeviceOwnerTypes.getOrDefault(admin.getPackageName(), DEVICE_OWNER_TYPE_DEFAULT);
     }
 
     @Implementation

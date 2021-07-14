@@ -19,6 +19,7 @@ package com.android.settings.sim;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -34,6 +35,7 @@ public abstract class SimDialogFragment extends InstrumentedDialogFragment imple
     private static final String KEY_DIALOG_TYPE = "dialog_type";
 
     private SubscriptionsChangeListener mChangeListener;
+    protected boolean mWasDismissed = false;
 
     protected static Bundle initArguments(int dialogType, int titleResId) {
         final Bundle args = new Bundle();
@@ -53,6 +55,8 @@ public abstract class SimDialogFragment extends InstrumentedDialogFragment imple
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        Log.d(TAG, "Dialog Attached.");
+        mWasDismissed = false;
         mChangeListener = new SubscriptionsChangeListener(context, this);
     }
 
@@ -70,6 +74,8 @@ public abstract class SimDialogFragment extends InstrumentedDialogFragment imple
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
+        Log.d(TAG, "Dialog Dismissed.");
+        mWasDismissed = true;
         super.onDismiss(dialog);
         final SimDialogActivity activity = (SimDialogActivity) getActivity();
         if (activity != null && !activity.isFinishing()) {

@@ -106,7 +106,7 @@ public class SlicesIndexerTest {
 
     @Test
     public void testInsertSliceData_nonPublicSlice_mockDataInserted() {
-        final List<SliceData> sliceData = getDummyIndexableData(false);
+        final List<SliceData> sliceData = getMockIndexableData(false);
         doReturn(sliceData).when(mManager).getSliceData();
 
         mManager.run();
@@ -151,7 +151,7 @@ public class SlicesIndexerTest {
 
     @Test
     public void insertSliceData_publicSlice_mockDataInserted() {
-        final List<SliceData> sliceData = getDummyIndexableData(true);
+        final List<SliceData> sliceData = getMockIndexableData(true);
         doReturn(sliceData).when(mManager).getSliceData();
 
         mManager.run();
@@ -209,7 +209,7 @@ public class SlicesIndexerTest {
         db.close();
     }
 
-    private List<SliceData> getDummyIndexableData(boolean isPublicSlice) {
+    private List<SliceData> getMockIndexableData(boolean isPublicSlice) {
         final List<SliceData> sliceData = new ArrayList<>();
         final SliceData.Builder builder = new SliceData.Builder()
                 .setSummary(SUMMARY)

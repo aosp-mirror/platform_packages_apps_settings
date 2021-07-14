@@ -30,22 +30,21 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.BatteryStats;
+import android.os.BatteryUsageStats;
 import android.os.Bundle;
+import android.os.UidBatteryConsumer;
 
 import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.os.BatterySipper;
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.BatteryDiffEntry;
 import com.android.settings.fuelgauge.BatteryUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -67,19 +66,19 @@ public class AppBatteryPreferenceControllerTest {
     @Mock
     private BatteryUtils mBatteryUtils;
     @Mock
-    private BatterySipper mBatterySipper;
+    private BatteryUsageStats mBatteryUsageStats;
     @Mock
-    private BatterySipper mOtherBatterySipper;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private BatteryStatsHelper mBatteryStatsHelper;
+    private UidBatteryConsumer mUidBatteryConsumer;
     @Mock
-    private BatteryStats.Uid mUid;
+    private UidBatteryConsumer mOtherUidBatteryConsumer;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
     private PackageManager mPackageManager;
     @Mock
     private LoaderManager mLoaderManager;
+    @Mock
+    private BatteryDiffEntry mBatteryDiffEntry;
 
     private Context mContext;
     private AppInfoDashboardFragment mFragment;
@@ -96,13 +95,15 @@ public class AppBatteryPreferenceControllerTest {
 
         mBatteryPreference = spy(new Preference(RuntimeEnvironment.application));
 
-        mBatterySipper.drainType = BatterySipper.DrainType.IDLE;
-        mBatterySipper.uidObj = mUid;
-        doReturn(TARGET_UID).when(mBatterySipper).getUid();
-        doReturn(OTHER_UID).when(mOtherBatterySipper).getUid();
+        when(mUidBatteryConsumer.getUid()).thenReturn(TARGET_UID);
+        when(mOtherUidBatteryConsumer.getUid()).thenReturn(OTHER_UID);
 
         mController = spy(new AppBatteryPreferenceController(
-            RuntimeEnvironment.application, mFragment, "package1", null /* lifecycle */));
+                RuntimeEnvironment.application,
+                mFragment,
+                "package1" /* packageName */,
+                0 /* uId */,
+                null /* lifecycle */));
         mController.mBatteryUtils = mBatteryUtils;
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mBatteryPreference);
     }
@@ -119,14 +120,14 @@ public class AppBatteryPreferenceControllerTest {
     }
 
     @Test
-    public void findTargetSipper_findCorrectSipper() {
-        final List<BatterySipper> usageList = new ArrayList<>();
-        usageList.add(mBatterySipper);
-        usageList.add(mOtherBatterySipper);
-        when(mBatteryStatsHelper.getUsageList()).thenReturn(usageList);
+    public void findTargetBatteryConsumer_findCorrectBatteryConsumer() {
+        final List<UidBatteryConsumer> uidBatteryConsumers = new ArrayList<>();
+        uidBatteryConsumers.add(mUidBatteryConsumer);
+        uidBatteryConsumers.add(mOtherUidBatteryConsumer);
+        when(mBatteryUsageStats.getUidBatteryConsumers()).thenReturn(uidBatteryConsumers);
 
-        assertThat(mController.findTargetSipper(mBatteryStatsHelper, TARGET_UID))
-            .isEqualTo(mBatterySipper);
+        assertThat(mController.findTargetUidBatteryConsumer(mBatteryUsageStats, TARGET_UID))
+            .isEqualTo(mUidBatteryConsumer);
     }
 
     @Test
@@ -141,11 +142,10 @@ public class AppBatteryPreferenceControllerTest {
 
     @Test
     public void updateBattery_hasBatteryStats_summaryPercent() {
-        mController.mBatteryHelper = mBatteryStatsHelper;
-        mController.mSipper = mBatterySipper;
+        mController.mBatteryUsageStats = mBatteryUsageStats;
+        mController.mUidBatteryConsumer = mUidBatteryConsumer;
         doReturn(BATTERY_LEVEL).when(mBatteryUtils).calculateBatteryPercent(anyDouble(),
-                anyDouble(), anyDouble(), anyInt());
-        doReturn(new ArrayList<>()).when(mBatteryStatsHelper).getUsageList();
+                anyDouble(), anyInt());
         mController.displayPreference(mScreen);
 
         mController.updateBattery();
@@ -154,9 +154,32 @@ public class AppBatteryPreferenceControllerTest {
     }
 
     @Test
+    public void updateBatteryWithDiffEntry_noConsumePower_summaryNo() {
+        mController.displayPreference(mScreen);
+        mController.mIsChartGraphEnabled = true;
+
+        mController.updateBatteryWithDiffEntry();
+
+        assertThat(mBatteryPreference.getSummary()).isEqualTo("No battery use for past 24 hours");
+    }
+
+    @Test
+    public void updateBatteryWithDiffEntry_withConsumePower_summaryPercent() {
+        mController.displayPreference(mScreen);
+        mController.mIsChartGraphEnabled = true;
+        mBatteryDiffEntry.mConsumePower = 1;
+        mController.mBatteryDiffEntry = mBatteryDiffEntry;
+        when(mBatteryDiffEntry.getPercentOfTotal()).thenReturn(60.0);
+
+        mController.updateBatteryWithDiffEntry();
+
+        assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use for past 24 hours");
+    }
+
+    @Test
     public void isBatteryStatsAvailable_hasBatteryStatsHelperAndSipper_returnTrue() {
-        mController.mBatteryHelper = mBatteryStatsHelper;
-        mController.mSipper = mBatterySipper;
+        mController.mBatteryUsageStats = mBatteryUsageStats;
+        mController.mUidBatteryConsumer = mUidBatteryConsumer;
 
         assertThat(mController.isBatteryStatsAvailable()).isTrue();
     }
@@ -173,8 +196,8 @@ public class AppBatteryPreferenceControllerTest {
         when(mFragment.getActivity()).thenReturn(mActivity);
         final String key = mController.getPreferenceKey();
         when(mBatteryPreference.getKey()).thenReturn(key);
-        mController.mSipper = mBatterySipper;
-        mController.mBatteryHelper = mBatteryStatsHelper;
+        mController.mBatteryUsageStats = mBatteryUsageStats;
+        mController.mUidBatteryConsumer = mUidBatteryConsumer;
 
         // Should not crash
         mController.handlePreferenceTreeClick(mBatteryPreference);
@@ -187,7 +210,8 @@ public class AppBatteryPreferenceControllerTest {
         mController.onResume();
 
         verify(mLoaderManager)
-            .restartLoader(AppInfoDashboardFragment.LOADER_BATTERY, Bundle.EMPTY, mController);
+                .restartLoader(AppInfoDashboardFragment.LOADER_BATTERY_USAGE_STATS, Bundle.EMPTY,
+                        mController.mBatteryUsageStatsLoaderCallbacks);
     }
 
     @Test
@@ -196,6 +220,6 @@ public class AppBatteryPreferenceControllerTest {
 
         mController.onPause();
 
-        verify(mLoaderManager).destroyLoader(AppInfoDashboardFragment.LOADER_BATTERY);
+        verify(mLoaderManager).destroyLoader(AppInfoDashboardFragment.LOADER_BATTERY_USAGE_STATS);
     }
 }

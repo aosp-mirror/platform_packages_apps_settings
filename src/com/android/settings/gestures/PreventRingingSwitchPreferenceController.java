@@ -16,11 +16,7 @@
 
 package com.android.settings.gestures;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
 import android.provider.Settings;
 import android.widget.Switch;
 
@@ -30,19 +26,18 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 public class PreventRingingSwitchPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {
+        implements PreferenceControllerMixin, OnMainSwitchChangeListener {
 
     private static final String KEY = "gesture_prevent_ringing_switch";
     private final Context mContext;
-    private SettingObserver mSettingObserver;
 
     @VisibleForTesting
-    SwitchBar mSwitch;
+    MainSwitchPreference mSwitch;
 
     public PreventRingingSwitchPreferenceController(Context context) {
         super(context);
@@ -58,9 +53,8 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         if (isAvailable()) {
-            LayoutPreference pref = screen.findPreference(getPreferenceKey());
+            Preference pref = screen.findPreference(getPreferenceKey());
             if (pref != null) {
-                mSettingObserver = new SettingObserver(pref);
                 pref.setOnPreferenceClickListener(preference -> {
                     int preventRinging = Settings.Secure.getInt(mContext.getContentResolver(),
                             Settings.Secure.VOLUME_HUSH_GESTURE,
@@ -72,18 +66,17 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
                                     : Settings.Secure.VOLUME_HUSH_VIBRATE);
                     return true;
                 });
-                mSwitch = pref.findViewById(R.id.switch_bar);
-                if (mSwitch != null) {
-                    mSwitch.addOnSwitchChangeListener(this);
-                    mSwitch.show();
-                }
+                mSwitch = (MainSwitchPreference) pref;
+                mSwitch.setTitle(mContext.getString(R.string.prevent_ringing_main_switch_title));
+                mSwitch.addOnSwitchChangeListener(this);
+                updateState(mSwitch);
             }
         }
     }
 
     public void setChecked(boolean isChecked) {
         if (mSwitch != null) {
-            mSwitch.setChecked(isChecked);
+            mSwitch.updateStatus(isChecked);
         }
     }
 
@@ -112,33 +105,5 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
                 Settings.Secure.VOLUME_HUSH_GESTURE, isChecked
                         ? newRingingSetting
                         : Settings.Secure.VOLUME_HUSH_OFF);
-    }
-
-    private class SettingObserver extends ContentObserver {
-        private final Uri VOLUME_HUSH_GESTURE = Settings.Secure.getUriFor(
-                Settings.Secure.VOLUME_HUSH_GESTURE);
-
-        private final Preference mPreference;
-
-        public SettingObserver(Preference preference) {
-            super(new Handler());
-            mPreference = preference;
-        }
-
-        public void register(ContentResolver cr) {
-            cr.registerContentObserver(VOLUME_HUSH_GESTURE, false, this);
-        }
-
-        public void unregister(ContentResolver cr) {
-            cr.unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            super.onChange(selfChange, uri);
-            if (uri == null || VOLUME_HUSH_GESTURE.equals(uri)) {
-                updateState(mPreference);
-            }
-        }
     }
 }

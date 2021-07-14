@@ -17,12 +17,15 @@
 package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
 
-import android.app.admin.DevicePolicyManager;
+import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
+
 import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.app.admin.PasswordMetrics;
 import android.content.Context;
 import android.os.UserHandle;
+import android.os.UserManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -35,80 +38,140 @@ import java.util.List;
 
 /**
  * A controller for ChooseLockGeneric, and other similar classes which shows a list of possible
- * screen locks for the user to choose from.
+ * screen lock types for the user to choose from. This is the main place where different
+ * restrictions on allowed screen lock types are aggregated in Settings.
+ *
+ * Each screen lock type has two states: whether it is visible and whether it is enabled.
+ * Visibility is affected by things like resource configs, whether it's for a managed profile,
+ * or whether the caller allows it or not. This is determined by
+ * {@link #isScreenLockVisible(ScreenLockType)}. For visible screen lock types, they can be disabled
+ * by a combination of admin policies and request from the calling app, which is determined by
+ * {@link #isScreenLockEnabled(ScreenLockType}.
  */
+
 public class ChooseLockGenericController {
 
     private final Context mContext;
     private final int mUserId;
-    @PasswordComplexity private final int mRequestedMinComplexity;
-    private ManagedLockPasswordProvider mManagedPasswordProvider;
-    private DevicePolicyManager mDpm;
+    private final boolean mHideInsecureScreenLockTypes;
+    @PasswordComplexity private final int mAppRequestedMinComplexity;
+    private final boolean mDevicePasswordRequirementOnly;
+    private final int mUnificationProfileId;
+    private final ManagedLockPasswordProvider mManagedPasswordProvider;
     private final LockPatternUtils mLockPatternUtils;
 
-    public ChooseLockGenericController(Context context, int userId) {
-        this(
-                context,
-                userId,
-                PASSWORD_COMPLEXITY_NONE,
-                new LockPatternUtils(context));
-    }
-
-    /**
-     * @param requestedMinComplexity specifies the min password complexity to be taken into account
-     *                               when determining the available screen lock types
-     */
     public ChooseLockGenericController(Context context, int userId,
-            @PasswordComplexity int requestedMinComplexity, LockPatternUtils lockPatternUtils) {
-        this(
-                context,
-                userId,
-                requestedMinComplexity,
-                context.getSystemService(DevicePolicyManager.class),
-                ManagedLockPasswordProvider.get(context, userId),
-                lockPatternUtils);
-    }
-
-    @VisibleForTesting
-    ChooseLockGenericController(
-            Context context,
-            int userId,
-            @PasswordComplexity int requestedMinComplexity,
-            DevicePolicyManager dpm,
-            ManagedLockPasswordProvider managedLockPasswordProvider,
-            LockPatternUtils lockPatternUtils) {
+            ManagedLockPasswordProvider managedPasswordProvider, LockPatternUtils lockPatternUtils,
+            boolean hideInsecureScreenLockTypes, int appRequestedMinComplexity,
+            boolean devicePasswordRequirementOnly, int unificationProfileId) {
         mContext = context;
         mUserId = userId;
-        mRequestedMinComplexity = requestedMinComplexity;
-        mManagedPasswordProvider = managedLockPasswordProvider;
-        mDpm = dpm;
+        mManagedPasswordProvider = managedPasswordProvider;
         mLockPatternUtils = lockPatternUtils;
+        mHideInsecureScreenLockTypes = hideInsecureScreenLockTypes;
+        mAppRequestedMinComplexity = appRequestedMinComplexity;
+        mDevicePasswordRequirementOnly = devicePasswordRequirementOnly;
+        mUnificationProfileId = unificationProfileId;
+    }
+
+    /** Builder class for {@link ChooseLockGenericController} */
+    public static class Builder {
+        private final Context mContext;
+        private final int mUserId;
+        private final ManagedLockPasswordProvider mManagedPasswordProvider;
+        private final LockPatternUtils mLockPatternUtils;
+
+        private boolean mHideInsecureScreenLockTypes = false;
+        @PasswordComplexity private int mAppRequestedMinComplexity = PASSWORD_COMPLEXITY_NONE;
+        private boolean mDevicePasswordRequirementOnly = false;
+        private int mUnificationProfileId = UserHandle.USER_NULL;
+
+        public Builder(Context context, int userId) {
+            this(context, userId, new LockPatternUtils(context));
+        }
+
+        public Builder(Context context, int userId,
+                LockPatternUtils lockPatternUtils) {
+            this(
+                    context,
+                    userId,
+                    ManagedLockPasswordProvider.get(context, userId),
+                    lockPatternUtils);
+        }
+
+        @VisibleForTesting
+        Builder(
+                Context context,
+                int userId,
+                ManagedLockPasswordProvider managedLockPasswordProvider,
+                LockPatternUtils lockPatternUtils) {
+            mContext = context;
+            mUserId = userId;
+            mManagedPasswordProvider = managedLockPasswordProvider;
+            mLockPatternUtils = lockPatternUtils;
+        }
+        /**
+         * Sets the password complexity requested by the calling app via
+         * {@link android.app.admin.DevicePolicyManager#EXTRA_PASSWORD_COMPLEXITY}.
+         */
+        public Builder setAppRequestedMinComplexity(int complexity) {
+            mAppRequestedMinComplexity = complexity;
+            return this;
+        }
+
+        /**
+         * Sets whether the enrolment flow should discard any password policies originating from the
+         * work profile, even if the work profile currently has unified challenge. This can be
+         * requested by the calling app via
+         * {@link android.app.admin.DevicePolicyManager#EXTRA_DEVICE_PASSWORD_REQUIREMENT_ONLY}.
+         */
+        public Builder setEnforceDevicePasswordRequirementOnly(boolean deviceOnly) {
+            mDevicePasswordRequirementOnly = deviceOnly;
+            return this;
+        }
+
+        /**
+         * Sets the user ID of any profile whose work challenge should be unified at the end of this
+         * enrolment flow. This will lead to all password policies from that profile to be taken
+         * into consideration by this class, so that we are enrolling a compliant password. This is
+         * because once unified, the profile's password policy will be enforced on the new
+         * credential.
+         */
+        public Builder setProfileToUnify(int profileId) {
+            mUnificationProfileId = profileId;
+            return this;
+        }
+
+        /**
+         * Sets whether insecure screen lock types (NONE and SWIPE) should be hidden in the UI.
+         */
+        public Builder setHideInsecureScreenLockTypes(boolean hide) {
+            mHideInsecureScreenLockTypes = hide;
+            return this;
+        }
+
+        /** Creates {@link ChooseLockGenericController} instance. */
+        public ChooseLockGenericController build() {
+            return new ChooseLockGenericController(mContext, mUserId, mManagedPasswordProvider,
+                    mLockPatternUtils, mHideInsecureScreenLockTypes, mAppRequestedMinComplexity,
+                    mDevicePasswordRequirementOnly, mUnificationProfileId);
+        }
     }
 
     /**
-     * Returns the highest quality among the specified {@code quality}, the quality required by
-     * {@link DevicePolicyManager#getPasswordQuality}, and the quality required by min password
-     * complexity.
-     */
-    public int upgradeQuality(int quality) {
-        // Compare specified quality and dpm quality
-        // TODO(b/142781408): convert from quality to credential type once PIN is supported.
-        int dpmUpgradedQuality = Math.max(quality, mDpm.getPasswordQuality(null, mUserId));
-        return Math.max(dpmUpgradedQuality,
-                PasswordMetrics.complexityLevelToMinQuality(mRequestedMinComplexity));
-    }
-
-    /**
-     * Whether the given screen lock type should be visible in the given context.
+     * Returns whether the given screen lock type should be visible in the given context.
      */
     public boolean isScreenLockVisible(ScreenLockType type) {
-        final boolean managedProfile = mUserId != UserHandle.myUserId();
+        final boolean managedProfile = mContext.getSystemService(UserManager.class)
+                .isManagedProfile(mUserId);
         switch (type) {
             case NONE:
-                return !mContext.getResources().getBoolean(R.bool.config_hide_none_security_option)
+                return !mHideInsecureScreenLockTypes
+                    && !mContext.getResources().getBoolean(R.bool.config_hide_none_security_option)
                     && !managedProfile; // Profiles should use unified challenge instead.
             case SWIPE:
-                return !mContext.getResources().getBoolean(R.bool.config_hide_swipe_security_option)
+                return !mHideInsecureScreenLockTypes
+                    && !mContext.getResources().getBoolean(R.bool.config_hide_swipe_security_option)
                     && !managedProfile; // Swipe doesn't make sense for profiles.
             case MANAGED:
                 return mManagedPasswordProvider.isManagedPasswordChoosable();
@@ -123,29 +186,27 @@ public class ChooseLockGenericController {
     }
 
     /**
-     * Whether screen lock with {@code type} should be enabled.
-     *
-     * @param type The screen lock type.
-     * @param quality The minimum required quality. This can either be requirement by device policy
-     *                manager or because some flow only makes sense with secure lock screens.
+     * Whether screen lock with {@code type} should be enabled assuming all relevant password
+     * requirements. The lock's visibility ({@link #isScreenLockVisible}) is not considered here.
      */
-    public boolean isScreenLockEnabled(ScreenLockType type, int quality) {
-        return type.maxQuality >= quality;
+    public boolean isScreenLockEnabled(ScreenLockType type) {
+        return type.maxQuality >= upgradeQuality(PASSWORD_QUALITY_UNSPECIFIED);
     }
 
     /**
-     * Whether screen lock with {@code type} is disabled by device policy admin.
-     *
-     * @param type The screen lock type.
-     * @param adminEnforcedQuality The minimum quality that the admin enforces.
+     * Increases the given quality to be as high as the combined quality from all relevant
+     * password requirements.
      */
-    public boolean isScreenLockDisabledByAdmin(ScreenLockType type, int adminEnforcedQuality) {
-        boolean disabledByAdmin = type.maxQuality < adminEnforcedQuality;
-        if (type == ScreenLockType.MANAGED) {
-            disabledByAdmin = disabledByAdmin
-                    || !mManagedPasswordProvider.isManagedPasswordChoosable();
-        }
-        return disabledByAdmin;
+    // TODO(b/142781408): convert from quality to credential type once PIN is supported.
+    public int upgradeQuality(int quality) {
+        return Math.max(quality,
+                Math.max(
+                        LockPatternUtils.credentialTypeToPasswordQuality(
+                                getAggregatedPasswordMetrics().credType),
+                        PasswordMetrics.complexityLevelToMinQuality(
+                                getAggregatedPasswordComplexity())
+                )
+        );
     }
 
     /**
@@ -170,27 +231,72 @@ public class ChooseLockGenericController {
     }
 
     /**
-     * Gets a list of screen locks that should be visible for the given quality. The returned list
-     * is ordered in the natural order of the enum (the order those enums were defined).
-     *
-     * @param quality The minimum quality required in the context of the current flow. This should
-     *                be one of the constants defined in
-     *                {@code DevicePolicyManager#PASSWORD_QUALITY_*}.
-     * @param includeDisabled Whether to include screen locks disabled by {@code quality}
-     *                        requirements in the returned list.
+     * Gets a list of screen lock types that should be visible for the given quality. The returned
+     * list is ordered in the natural order of the enum (the order those enums were defined). Screen
+     * locks disabled by password policy will not be returned.
      */
     @NonNull
-    public List<ScreenLockType> getVisibleScreenLockTypes(int quality, boolean includeDisabled) {
-        int upgradedQuality = upgradeQuality(quality);
+    public List<ScreenLockType> getVisibleAndEnabledScreenLockTypes() {
         List<ScreenLockType> locks = new ArrayList<>();
         // EnumSet's iterator guarantees the natural order of the enums
         for (ScreenLockType lock : ScreenLockType.values()) {
-            if (isScreenLockVisible(lock)) {
-                if (includeDisabled || isScreenLockEnabled(lock, upgradedQuality)) {
-                    locks.add(lock);
-                }
+            if (isScreenLockVisible(lock) && isScreenLockEnabled(lock)) {
+                locks.add(lock);
             }
         }
         return locks;
+    }
+
+    /**
+     * Returns the combined password metrics from all relevant policies which affects the current
+     * user. Normally password policies set on the current user's work profile instance will be
+     * taken into consideration here iff the work profile doesn't have its own work challenge.
+     * By setting {@link #mUnificationProfileId}, the work profile's password policy will always
+     * be combined here. Alternatively, by setting {@link #mDevicePasswordRequirementOnly}, its
+     * password policy will always be disregarded here.
+     */
+    public PasswordMetrics getAggregatedPasswordMetrics() {
+        PasswordMetrics metrics = mLockPatternUtils.getRequestedPasswordMetrics(mUserId,
+                mDevicePasswordRequirementOnly);
+        if (mUnificationProfileId != UserHandle.USER_NULL) {
+            metrics.maxWith(mLockPatternUtils.getRequestedPasswordMetrics(mUnificationProfileId));
+        }
+        return metrics;
+    }
+
+    /**
+     * Returns the combined password complexity from all relevant policies which affects the current
+     * user. The same logic of handling work profile password policies as
+     * {@link #getAggregatedPasswordMetrics} applies here.
+     */
+    public int getAggregatedPasswordComplexity() {
+        int complexity = Math.max(mAppRequestedMinComplexity,
+                mLockPatternUtils.getRequestedPasswordComplexity(
+                        mUserId, mDevicePasswordRequirementOnly));
+        if (mUnificationProfileId != UserHandle.USER_NULL) {
+            complexity = Math.max(complexity,
+                    mLockPatternUtils.getRequestedPasswordComplexity(mUnificationProfileId));
+        }
+        return complexity;
+    }
+
+    /**
+     * Returns whether any screen lock type has been disabled only due to password policy
+     * from the admin. Will return {@code false} if the restriction is purely due to calling
+     * app's request.
+     */
+    public boolean isScreenLockRestrictedByAdmin() {
+        return getAggregatedPasswordMetrics().credType != CREDENTIAL_TYPE_NONE
+                || isComplexityProvidedByAdmin();
+    }
+
+    /**
+     * Returns whether the aggregated password complexity is non-zero and comes from
+     * admin policy.
+     */
+    public boolean isComplexityProvidedByAdmin() {
+        final int aggregatedComplexity = getAggregatedPasswordComplexity();
+        return aggregatedComplexity > mAppRequestedMinComplexity
+                && aggregatedComplexity > PASSWORD_COMPLEXITY_NONE;
     }
 }

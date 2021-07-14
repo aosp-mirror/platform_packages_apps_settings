@@ -205,7 +205,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     public RadioButtonPreference bindPreference(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey) {
         pref.setTitle(info.loadLabel());
-        Utils.setSafeIcon(pref, info.loadIcon());
+        pref.setIcon(Utils.getSafeIcon(info.loadIcon()));
         pref.setKey(key);
         if (TextUtils.equals(defaultKey, key)) {
             pref.setChecked(true);

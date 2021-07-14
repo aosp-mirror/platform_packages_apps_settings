@@ -79,8 +79,10 @@ public class SavedDeviceGroupControllerTest {
     public void testRegister() {
         // register the callback in onStart()
         mSavedDeviceGroupController.onStart();
+
         verify(mBluetoothDeviceUpdater).registerCallback();
         verify(mSavedDockUpdater).registerCallback();
+        verify(mBluetoothDeviceUpdater).refreshPreference();
     }
 
     @Test

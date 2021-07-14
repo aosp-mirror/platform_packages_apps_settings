@@ -277,7 +277,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
             if (pe == null) {
                 Log.w(TAG, "AppOp permission exists for package " + packageOp.getPackageName()
                         + " of user " + userId + " but package doesn't exist or did not request "
-                        + mPermissions + " access");
+                        + Arrays.toString(mPermissions) + " access");
                 continue;
             }
 

@@ -107,7 +107,7 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
                         mContext.getContentResolver(),
                         Settings.System.PEAK_REFRESH_RATE,
                         getDefaultPeakRefreshRate());
-        return peakRefreshRate == mPeakRefreshRate;
+        return Math.round(peakRefreshRate) == Math.round(mPeakRefreshRate);
     }
 
     @Override
@@ -129,10 +129,11 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
         mDeviceConfigDisplaySettings.stopListening();
     }
 
-    private float findPeakRefreshRate(Display.Mode[] modes) {
+    @VisibleForTesting
+    float findPeakRefreshRate(Display.Mode[] modes) {
         float peakRefreshRate = DEFAULT_REFRESH_RATE;
         for (Display.Mode mode : modes) {
-            if (Math.round(mode.getRefreshRate()) > DEFAULT_REFRESH_RATE) {
+            if (Math.round(mode.getRefreshRate()) > peakRefreshRate) {
                 peakRefreshRate = mode.getRefreshRate();
             }
         }
@@ -189,6 +190,7 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
                     com.android.internal.R.integer.config_defaultPeakRefreshRate);
         }
 
+        Log.d(TAG, "DeviceConfig getDefaultPeakRefreshRate : " + defaultPeakRefreshRate);
         return defaultPeakRefreshRate;
     }
 }

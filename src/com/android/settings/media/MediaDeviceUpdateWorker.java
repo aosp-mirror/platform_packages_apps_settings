@@ -18,8 +18,6 @@ package com.android.settings.media;
 
 import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
 
-import static com.android.settings.media.MediaOutputSlice.MEDIA_PACKAGE_NAME;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +28,7 @@ import android.net.Uri;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -50,6 +49,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         implements LocalMediaManager.DeviceCallback {
+
+    private static final String TAG = "MediaDeviceUpdateWorker";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
+    public static final String MEDIA_PACKAGE_NAME = "media_package_name";
 
     protected final Context mContext;
     protected final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
@@ -213,6 +217,10 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         final List<RoutingSessionInfo> sessionInfos = new ArrayList<>();
         for (RoutingSessionInfo info : mLocalMediaManager.getActiveMediaSession()) {
             if (!info.isSystemSession()) {
+                if (DEBUG) {
+                    Log.d(TAG, "getActiveRemoteMediaDevice() info : " + info.toString()
+                            + ", package name : " + info.getClientPackageName());
+                }
                 sessionInfos.add(info);
             }
         }
@@ -245,6 +253,14 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return um.hasBaseUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME,
                 UserHandle.of(UserHandle.myUserId()));
 
+    }
+
+    boolean shouldDisableMediaOutput(String packageName) {
+        return mLocalMediaManager.shouldDisableMediaOutput(packageName);
+    }
+
+    boolean shouldEnableVolumeSeekBar(RoutingSessionInfo sessionInfo) {
+        return mLocalMediaManager.shouldEnableVolumeSeekBar(sessionInfo);
     }
 
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {

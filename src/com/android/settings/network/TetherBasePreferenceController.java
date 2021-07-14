@@ -17,7 +17,7 @@
 package com.android.settings.network;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -33,7 +33,7 @@ public abstract class TetherBasePreferenceController extends TogglePreferenceCon
         TetherEnabler.OnTetherStateUpdateListener {
 
     private static final String TAG = "TetherBasePreferenceController";
-    final ConnectivityManager mCm;
+    final TetheringManager mTm;
     private final DataSaverBackend mDataSaverBackend;
 
     private TetherEnabler mTetherEnabler;
@@ -43,7 +43,7 @@ public abstract class TetherBasePreferenceController extends TogglePreferenceCon
 
     TetherBasePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mCm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        mTm = context.getSystemService(TetheringManager.class);
         mDataSaverBackend = new DataSaverBackend(context);
         mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
     }
@@ -129,11 +129,11 @@ public abstract class TetherBasePreferenceController extends TogglePreferenceCon
     }
 
     @Override
-    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+    public void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {
     }
 
     @Override
-    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+    public void onDenylistStatusChanged(int uid, boolean isDenylisted) {
     }
 
     /**

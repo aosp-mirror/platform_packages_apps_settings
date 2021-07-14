@@ -46,6 +46,8 @@ public class ShadowUtils {
     private static boolean sIsSystemAlertWindowEnabled;
     private static boolean sIsVoiceCapable;
     private static ArraySet<String> sResultLinks = new ArraySet<>();
+    private static boolean sIsBatteryPresent;
+    private static boolean sIsMultipleBiometricsSupported;
 
     @Implementation
     protected static int enforceSameOwner(Context context, int userId) {
@@ -67,6 +69,8 @@ public class ShadowUtils {
         sIsDemoUser = false;
         sIsVoiceCapable = false;
         sResultLinks = new ArraySet<>();
+        sIsBatteryPresent = true;
+        sIsMultipleBiometricsSupported = false;
     }
 
     public static void setIsDemoUser(boolean isDemoUser) {
@@ -154,5 +158,23 @@ public class ShadowUtils {
 
     public static void setHandledDomains(ArraySet<String> links) {
         sResultLinks = links;
+    }
+
+    @Implementation
+    protected static boolean isBatteryPresent(Context context) {
+        return sIsBatteryPresent;
+    }
+
+    public static void setIsBatteryPresent(boolean isBatteryPresent) {
+        sIsBatteryPresent = isBatteryPresent;
+    }
+
+    @Implementation
+    protected static boolean isMultipleBiometricsSupported(Context context) {
+        return sIsMultipleBiometricsSupported;
+    }
+
+    public static void setIsMultipleBiometricsSupported(boolean isMultipleBiometricsSupported) {
+        sIsMultipleBiometricsSupported = isMultipleBiometricsSupported;
     }
 }
