@@ -99,6 +99,7 @@ public class MobileNetworkUtils {
             "esim.enable_esim_system_ui_by_default";
     private static final String LEGACY_ACTION_CONFIGURE_PHONE_ACCOUNT =
             "android.telecom.action.CONNECTION_SERVICE_CONFIGURE";
+    private static final String RTL_MARK = "\u200F";
 
     // The following constants are used to draw signal icon.
     public static final int NO_CELL_DATA_TYPE_ICON = 0;
@@ -921,7 +922,7 @@ public class MobileNetworkUtils {
     /**
      * Returns preferred status of Calls & SMS separately when Provider Model is enabled.
      */
-    public static CharSequence getPreferredStatus(Context context,
+    public static CharSequence getPreferredStatus(boolean isRtlMode, Context context,
             SubscriptionManager subscriptionManager, boolean isPreferredCallStatus) {
         final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(
                 subscriptionManager);
@@ -954,6 +955,10 @@ public class MobileNetworkUtils {
                 // Do not add ", " for the last subscription.
                 if (subInfo != subs.get(subs.size() - 1)) {
                     summary.append(", ");
+                }
+
+                if (isRtlMode) {
+                    summary.insert(0, RTL_MARK).insert(summary.length(), RTL_MARK);
                 }
             }
             return summary;
