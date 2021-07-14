@@ -33,8 +33,14 @@ public class AccessibilityButtonFooterPreferenceController extends
     }
 
     @Override
-    protected String getLabelName() {
-        return mContext.getString(R.string.accessibility_button_title);
+    protected String getLearnMoreContentDescription() {
+        return mContext.getString(
+            R.string.accessibility_button_gesture_footer_learn_more_content_description);
+    }
+
+    @Override
+    protected String getIntroductionTitle() {
+        return mContext.getString(R.string.accessibility_button_about_title);
     }
 
     @Override
