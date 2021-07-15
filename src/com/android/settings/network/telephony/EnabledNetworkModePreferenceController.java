@@ -152,7 +152,10 @@ public class EnabledNetworkModePreferenceController extends
             mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                     mContext.getMainExecutor());
             mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
-                    () -> updatePreference());
+                    () -> {
+                        mBuilder.updateConfig();
+                        updatePreference();
+                    });
         }
 
         lifecycle.addObserver(this);
