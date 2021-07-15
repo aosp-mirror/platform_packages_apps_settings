@@ -24,6 +24,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.telephony.AccessNetworkConstants;
+import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -106,7 +108,12 @@ public class ProviderModelSliceHelper {
      * @return whether the ServiceState's data state is in-service.
      */
     public boolean isDataStateInService() {
-        return mTelephonyManager.getDataState() == mTelephonyManager.DATA_CONNECTED;
+        final ServiceState serviceState = mTelephonyManager.getServiceState();
+        NetworkRegistrationInfo regInfo =
+                (serviceState == null) ? null : serviceState.getNetworkRegistrationInfo(
+                        NetworkRegistrationInfo.DOMAIN_PS,
+                        AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
+        return (regInfo == null) ? false : regInfo.isRegistered();
     }
 
     /**
