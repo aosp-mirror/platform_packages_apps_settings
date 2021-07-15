@@ -24,6 +24,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.concurrent.Executor;
 
@@ -46,6 +48,10 @@ public abstract class SensorToggleController extends TogglePreferenceController 
      */
     public abstract int getSensor();
 
+    protected String getRestriction() {
+        return null;
+    }
+
     @Override
     public boolean isChecked() {
         return !mSensorPrivacyManagerHelper.isSensorBlocked(getSensor());
@@ -60,6 +66,14 @@ public abstract class SensorToggleController extends TogglePreferenceController 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+
+        RestrictedSwitchPreference preference =
+                (RestrictedSwitchPreference) screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setDisabledByAdmin(RestrictedLockUtilsInternal
+                    .checkIfRestrictionEnforced(mContext, getRestriction(), mContext.getUserId()));
+        }
+
         mSensorPrivacyManagerHelper.addSensorBlockedListener(
                 getSensor(),
                 (sensor, blocked) -> updateState(screen.findPreference(mPreferenceKey)),
