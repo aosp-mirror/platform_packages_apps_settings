@@ -22,23 +22,22 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
-import android.media.session.PlaybackState;
 import android.text.TextUtils;
 
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.media.MediaOutputUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import java.util.List;
 
 /**
- * This class allows launching MediaOutputSlice to switch output device.
+ * This class allows launching MediaOutputDialog to switch output device.
  * Preference would hide only when
  * - Bluetooth = OFF
  * - Bluetooth = ON and Connected Devices = 0 and Previously Connected = 0
@@ -51,7 +50,8 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
 
     public MediaOutputPreferenceController(Context context, String key) {
         super(context, key);
-        mMediaController = getActiveLocalMediaController();
+        mMediaController = MediaOutputUtils.getActiveLocalMediaController(context.getSystemService(
+                MediaSessionManager.class));
     }
 
     @Override
@@ -133,34 +133,15 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            final Intent intent = new Intent()
-                    .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(intent);
+            mContext.sendBroadcast(new Intent()
+                    .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                    .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
+                    .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
+                            mMediaController.getPackageName())
+                    .putExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
+                            mMediaController.getSessionToken()));
             return true;
         }
         return false;
-    }
-
-    @Nullable
-    MediaController getActiveLocalMediaController() {
-        final MediaSessionManager mMediaSessionManager = mContext.getSystemService(
-                MediaSessionManager.class);
-
-        for (MediaController controller : mMediaSessionManager.getActiveSessions(null)) {
-            final MediaController.PlaybackInfo pi = controller.getPlaybackInfo();
-            if (pi == null) {
-                return null;
-            }
-            final PlaybackState playbackState = controller.getPlaybackState();
-            if (playbackState == null) {
-                return null;
-            }
-            if (pi.getPlaybackType() == MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL
-                    && playbackState.getState() == PlaybackState.STATE_PLAYING) {
-                return controller;
-            }
-        }
-        return null;
     }
 }

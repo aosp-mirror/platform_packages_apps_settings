@@ -13,9 +13,17 @@
  */
 package com.android.settings.display;
 
+import static android.hardware.display.ColorDisplayManager.COLOR_MODE_AUTOMATIC;
+import static android.hardware.display.ColorDisplayManager.COLOR_MODE_BOOSTED;
+import static android.hardware.display.ColorDisplayManager.COLOR_MODE_NATURAL;
+import static android.hardware.display.ColorDisplayManager.COLOR_MODE_SATURATED;
+import static android.hardware.display.ColorDisplayManager.VENDOR_COLOR_MODE_RANGE_MAX;
+import static android.hardware.display.ColorDisplayManager.VENDOR_COLOR_MODE_RANGE_MIN;
+
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.hardware.display.ColorDisplayManager;
@@ -36,28 +44,26 @@ import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("WeakerAccess")
 @SearchIndexable
 public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
 
-    @VisibleForTesting
-    static final String KEY_COLOR_MODE_NATURAL = "color_mode_natural";
-    @VisibleForTesting
-    static final String KEY_COLOR_MODE_BOOSTED = "color_mode_boosted";
-    @VisibleForTesting
-    static final String KEY_COLOR_MODE_SATURATED = "color_mode_saturated";
-    @VisibleForTesting
-    static final String KEY_COLOR_MODE_AUTOMATIC = "color_mode_automatic";
+    private static final String KEY_COLOR_MODE_PREFIX = "color_mode_";
+
+    private static final int COLOR_MODE_FALLBACK = COLOR_MODE_NATURAL;
 
     private ContentObserver mContentObserver;
     private ColorDisplayManager mColorDisplayManager;
+    private Resources mResources;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
+        mResources = context.getResources();
 
         final ContentResolver cr = context.getContentResolver();
         mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
@@ -81,11 +87,11 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
 
     @Override
     public void onDetach() {
-        super.onDetach();
         if (mContentObserver != null) {
             getContext().getContentResolver().unregisterContentObserver(mContentObserver);
             mContentObserver = null;
         }
+        super.onDetach();
     }
 
     @Override
@@ -108,70 +114,70 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
 
     @Override
     protected List<? extends CandidateInfo> getCandidates() {
-        final Context c = getContext();
-        final int[] availableColorModes = c.getResources().getIntArray(
-                com.android.internal.R.array.config_availableColorModes);
-
-        List<ColorModeCandidateInfo> candidates = new ArrayList<>();
-        if (availableColorModes != null) {
-            for (int colorMode : availableColorModes) {
-                if (colorMode == ColorDisplayManager.COLOR_MODE_NATURAL) {
-                    candidates.add(new ColorModeCandidateInfo(
-                                c.getText(R.string.color_mode_option_natural),
-                                KEY_COLOR_MODE_NATURAL, true /* enabled */));
-                } else if (colorMode == ColorDisplayManager.COLOR_MODE_BOOSTED) {
-                    candidates.add(new ColorModeCandidateInfo(
-                                c.getText(R.string.color_mode_option_boosted),
-                                KEY_COLOR_MODE_BOOSTED, true /* enabled */));
-                } else if (colorMode == ColorDisplayManager.COLOR_MODE_SATURATED) {
-                    candidates.add(new ColorModeCandidateInfo(
-                                c.getText(R.string.color_mode_option_saturated),
-                                KEY_COLOR_MODE_SATURATED, true /* enabled */));
-                } else if (colorMode == ColorDisplayManager.COLOR_MODE_AUTOMATIC) {
-                    candidates.add(new ColorModeCandidateInfo(
-                                c.getText(R.string.color_mode_option_automatic),
-                                KEY_COLOR_MODE_AUTOMATIC, true /* enabled */));
-                }
-            }
+        final Map<Integer, String> colorModesToSummaries =
+                ColorModeUtils.getColorModeMapping(mResources);
+        final List<ColorModeCandidateInfo> candidates = new ArrayList<>();
+        for (int colorMode : mResources.getIntArray(
+                com.android.internal.R.array.config_availableColorModes)) {
+            candidates.add(new ColorModeCandidateInfo(
+                    colorModesToSummaries.get(colorMode),
+                    getKeyForColorMode(colorMode),
+                    true /* enabled */));
         }
         return candidates;
     }
 
     @Override
     protected String getDefaultKey() {
-        final int colorMode = mColorDisplayManager.getColorMode();
-        if (colorMode == ColorDisplayManager.COLOR_MODE_AUTOMATIC) {
-            return KEY_COLOR_MODE_AUTOMATIC;
-        } else if (colorMode == ColorDisplayManager.COLOR_MODE_SATURATED) {
-            return KEY_COLOR_MODE_SATURATED;
-        } else if (colorMode == ColorDisplayManager.COLOR_MODE_BOOSTED) {
-            return KEY_COLOR_MODE_BOOSTED;
+        final int colorMode = getColorMode();
+        if (isValidColorMode(colorMode)) {
+            return getKeyForColorMode(colorMode);
         }
-        return KEY_COLOR_MODE_NATURAL;
+        return getKeyForColorMode(COLOR_MODE_FALLBACK);
     }
 
     @Override
     protected boolean setDefaultKey(String key) {
-        switch (key) {
-            case KEY_COLOR_MODE_NATURAL:
-                mColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_NATURAL);
-                break;
-            case KEY_COLOR_MODE_BOOSTED:
-                mColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_BOOSTED);
-                break;
-            case KEY_COLOR_MODE_SATURATED:
-                mColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_SATURATED);
-                break;
-            case KEY_COLOR_MODE_AUTOMATIC:
-                mColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_AUTOMATIC);
-                break;
+        int colorMode = Integer.parseInt(key.substring(key.lastIndexOf("_") + 1));
+        if (isValidColorMode(colorMode)) {
+            setColorMode(colorMode);
         }
         return true;
+    }
+
+    /**
+     * Wraps ColorDisplayManager#getColorMode for substitution in testing.
+     */
+    @VisibleForTesting
+    public int getColorMode() {
+        return mColorDisplayManager.getColorMode();
+    }
+
+    /**
+     * Wraps ColorDisplayManager#setColorMode for substitution in testing.
+     */
+    @VisibleForTesting
+    public void setColorMode(int colorMode) {
+        mColorDisplayManager.setColorMode(colorMode);
     }
 
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.COLOR_MODE_SETTINGS;
+    }
+
+    @VisibleForTesting
+    String getKeyForColorMode(int colorMode) {
+        return KEY_COLOR_MODE_PREFIX + colorMode;
+    }
+
+    private boolean isValidColorMode(int colorMode) {
+        return colorMode == COLOR_MODE_NATURAL
+                || colorMode == COLOR_MODE_BOOSTED
+                || colorMode == COLOR_MODE_SATURATED
+                || colorMode == COLOR_MODE_AUTOMATIC
+                || (colorMode >= VENDOR_COLOR_MODE_RANGE_MIN
+                && colorMode <= VENDOR_COLOR_MODE_RANGE_MAX);
     }
 
     @VisibleForTesting

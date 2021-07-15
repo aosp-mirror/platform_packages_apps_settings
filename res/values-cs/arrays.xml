@@ -98,11 +98,12 @@
   </string-array>
     <!-- no translation found for wifi_tether_security:0 (6312112980634811065) -->
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
+    <!-- no translation found for wifi_tether_security:2 (6851763638266088835) -->
+    <!-- no translation found for wifi_tether_security:3 (5512131148045414341) -->
   <string-array name="eap_ocsp_type">
-    <item msgid="7202884222741437608">"Neověřovat"</item>
-    <item msgid="5703177653586269306">"Vyžadovat stav certifikátu"</item>
-    <item msgid="326388247868439528">"Požadovat stav certifikátu"</item>
-    <item msgid="1090956283885790552">"Požadovat stav všech nedůvěryhodných certifikátů"</item>
+    <item msgid="8568170800958331461">"Neověřovat"</item>
+    <item msgid="5703177653586269306">"Požádat o stav certifikátu"</item>
+    <item msgid="326388247868439528">"Vyžadovat stav certifikátu"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"Stisknutí tlačítka"</item>
@@ -134,7 +135,7 @@
     <item msgid="199360311367724149">"Nízká"</item>
     <item msgid="2470925506985305429">"Slabý"</item>
     <item msgid="8545211062334016668">"Velmi dobrý"</item>
-    <item msgid="7468449584777730187">"Dobrý"</item>
+    <item msgid="7468449584777730187">"Dobrá"</item>
     <item msgid="202124107702016530">"Vynikající"</item>
   </string-array>
   <string-array name="data_usage_data_range">
@@ -174,9 +175,9 @@
     <item msgid="6215795691318745695">"Statická"</item>
   </string-array>
   <string-array name="wifi_proxy_settings">
-    <item msgid="4669222334822978847">"Žádné"</item>
+    <item msgid="4669222334822978847">"Žádný"</item>
     <item msgid="6242198071587397280">"Ručně"</item>
-    <item msgid="464383874780058242">"Autom. konfigurace proxy"</item>
+    <item msgid="464383874780058242">"Automatická konfigurace proxy"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="2900892411844440682">"Žádné"</item>
@@ -365,6 +366,11 @@
     <item msgid="5118829513010894576">"Střední"</item>
     <item msgid="6740026006576843477">"Dlouhá"</item>
   </string-array>
+  <string-array name="long_press_timeout_selector_list_titles">
+    <item msgid="8908021508913038488">"Krátká"</item>
+    <item msgid="7397961711906421599">"Střední"</item>
+    <item msgid="4079132024502041928">"Dlouhá"</item>
+  </string-array>
   <string-array name="captioning_typeface_selector_titles">
     <item msgid="2166553138528640250">"Výchozí"</item>
     <item msgid="4234707448428002595">"Bezpatkové"</item>
@@ -412,6 +418,18 @@
     <item msgid="2836895041823327816">"Žluté na modrém"</item>
     <item msgid="747238414788976867">"Vlastní"</item>
   </string-array>
+  <string-array name="accessibility_button_location_selector_titles">
+    <item msgid="6485511780196327736">"Plovoucí přes ostatní aplikace"</item>
+    <item msgid="3605616699204153590">"Navigační panel"</item>
+  </string-array>
+  <string-array name="accessibility_button_gesture_selector_titles">
+    <item msgid="2370918472773154939">"Tlačítko"</item>
+    <item msgid="6922258575853746220">"Gesto"</item>
+  </string-array>
+  <string-array name="accessibility_button_size_selector_titles">
+    <item msgid="7482952318152486459">"Malé"</item>
+    <item msgid="1666628329913333563">"Velké"</item>
+  </string-array>
   <string-array name="vpn_types_long">
     <item msgid="6621806338070912611">"VPN s protokolem PPTP"</item>
     <item msgid="2552427673212085780">"L2TP/IPSec VPN s předsdílenými klíči"</item>
@@ -424,7 +442,7 @@
     <item msgid="6630554779981113046">"IKEv2/IPSec VPN s certifikáty"</item>
   </string-array>
   <string-array name="vpn_proxy_settings">
-    <item msgid="7165538292837266997">"Žádné"</item>
+    <item msgid="7165538292837266997">"Žádný"</item>
     <item msgid="2397017538263427575">"Ručně"</item>
   </string-array>
   <string-array name="vpn_states">
@@ -473,7 +491,7 @@
     <item msgid="3230992859486877963">"Šedozelená"</item>
     <item msgid="5661027589207588703">"Modrá"</item>
     <item msgid="3795787248113275442">"Indigo"</item>
-    <item msgid="6331809026622602308">"Nachová"</item>
+    <item msgid="6331809026622602308">"Fialová"</item>
     <item msgid="6390546163902724700">"Růžová"</item>
     <item msgid="6618900408138432102">"Červená"</item>
   </string-array>
@@ -489,7 +507,7 @@
     <item msgid="9080166583718385565">"0"</item>
   </string-array>
   <string-array name="wifi_metered_entries">
-    <item msgid="3237321077949659241">"Zjistit automaticky"</item>
+    <item msgid="3237321077949659241">"Zjišťovat automaticky"</item>
     <item msgid="3779092145391320375">"Považovat za měřenou síť"</item>
     <item msgid="2047166446768045816">"Považovat za neměřenou síť"</item>
   </string-array>
@@ -525,7 +543,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="1091258946200124345">"Globální"</item>
+    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE/WCDMA"</item>
     <item msgid="7723670142495874534">"Pouze TDSCDMA"</item>
@@ -542,7 +560,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="8908263949185004366">"Globální"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>

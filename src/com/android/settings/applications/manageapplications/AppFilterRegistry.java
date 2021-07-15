@@ -19,8 +19,10 @@ package com.android.settings.applications.manageapplications;
 import androidx.annotation.IntDef;
 
 import com.android.settings.R;
+import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
+import com.android.settings.applications.AppStateMediaManagementAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
@@ -35,8 +37,8 @@ import com.android.settingslib.applications.ApplicationsState;
 public class AppFilterRegistry {
 
     @IntDef(value = {
-            FILTER_APPS_POWER_WHITELIST,
-            FILTER_APPS_POWER_WHITELIST_ALL,
+            FILTER_APPS_POWER_ALLOWLIST,
+            FILTER_APPS_POWER_ALLOWLIST_ALL,
             FILTER_APPS_ALL,
             FILTER_APPS_ENABLED,
             FILTER_APPS_INSTANT,
@@ -50,20 +52,22 @@ public class AppFilterRegistry {
             FILTER_APPS_WRITE_SETTINGS,
             FILTER_APPS_INSTALL_SOURCES,
             FILTER_APPS_BLOCKED,
+            FILTER_ALARMS_AND_REMINDERS,
+            FILTER_APPS_MEDIA_MANAGEMENT,
     })
     @interface FilterType {
     }
 
     // Filter options used for displayed list of applications
     // Filters will appear sorted based on their value defined here.
-    public static final int FILTER_APPS_POWER_WHITELIST = 0;
-    public static final int FILTER_APPS_POWER_WHITELIST_ALL = 1;
-    public static final int FILTER_APPS_ALL = 2;
-    public static final int FILTER_APPS_ENABLED = 3;
-    public static final int FILTER_APPS_INSTANT = 4;
-    public static final int FILTER_APPS_DISABLED = 5;
-    public static final int FILTER_APPS_RECENT = 6;
-    public static final int FILTER_APPS_FREQUENT = 7;
+    public static final int FILTER_APPS_POWER_ALLOWLIST = 0;
+    public static final int FILTER_APPS_POWER_ALLOWLIST_ALL = 1;
+    public static final int FILTER_APPS_RECENT = 2;
+    public static final int FILTER_APPS_FREQUENT = 3;
+    public static final int FILTER_APPS_ALL = 4;
+    public static final int FILTER_APPS_ENABLED = 5;
+    public static final int FILTER_APPS_INSTANT = 6;
+    public static final int FILTER_APPS_DISABLED = 7;
     public static final int FILTER_APPS_PERSONAL = 8;
     public static final int FILTER_APPS_WORK = 9;
     public static final int FILTER_APPS_USAGE_ACCESS = 10;
@@ -73,29 +77,31 @@ public class AppFilterRegistry {
     public static final int FILTER_APP_CAN_CHANGE_WIFI_STATE = 15;
     public static final int FILTER_APPS_BLOCKED = 16;
     public static final int FILTER_MANAGE_EXTERNAL_STORAGE = 17;
-    // Next id: 18. If you add an entry here, length of mFilters should be updated
+    public static final int FILTER_ALARMS_AND_REMINDERS = 18;
+    public static final int FILTER_APPS_MEDIA_MANAGEMENT = 19;
+    // Next id: 20. If you add an entry here, length of mFilters should be updated
 
     private static AppFilterRegistry sRegistry;
 
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[18];
+        mFilters = new AppFilterItem[20];
 
-        // High power whitelist, on
-        mFilters[FILTER_APPS_POWER_WHITELIST] = new AppFilterItem(
+        // High power allowlist, on
+        mFilters[FILTER_APPS_POWER_ALLOWLIST] = new AppFilterItem(
                 new ApplicationsState.CompoundFilter(
-                        AppStatePowerBridge.FILTER_POWER_WHITELISTED,
+                        AppStatePowerBridge.FILTER_POWER_ALLOWLISTED,
                         ApplicationsState.FILTER_ALL_ENABLED),
-                FILTER_APPS_POWER_WHITELIST,
+                FILTER_APPS_POWER_ALLOWLIST,
                 R.string.high_power_filter_on);
 
         // Without disabled until used
-        mFilters[FILTER_APPS_POWER_WHITELIST_ALL] = new AppFilterItem(
+        mFilters[FILTER_APPS_POWER_ALLOWLIST_ALL] = new AppFilterItem(
                 new ApplicationsState.CompoundFilter(
                         ApplicationsState.FILTER_WITHOUT_DISABLED_UNTIL_USED,
                         ApplicationsState.FILTER_ALL_ENABLED),
-                FILTER_APPS_POWER_WHITELIST_ALL,
+                FILTER_APPS_POWER_ALLOWLIST_ALL,
                 R.string.filter_all_apps);
 
         // All apps
@@ -185,6 +191,18 @@ public class AppFilterRegistry {
                 AppStateManageExternalStorageBridge.FILTER_MANAGE_EXTERNAL_STORAGE,
                 FILTER_MANAGE_EXTERNAL_STORAGE,
                 R.string.filter_manage_external_storage);
+
+        // Apps that can schedule alarms and reminders
+        mFilters[FILTER_ALARMS_AND_REMINDERS] = new AppFilterItem(
+                AppStateAlarmsAndRemindersBridge.FILTER_CLOCK_APPS,
+                FILTER_ALARMS_AND_REMINDERS,
+                R.string.alarms_and_reminders_title);
+
+        // Apps that can manage media files
+        mFilters[FILTER_APPS_MEDIA_MANAGEMENT] = new AppFilterItem(
+                AppStateMediaManagementAppsBridge.FILTER_MEDIA_MANAGEMENT_APPS,
+                FILTER_APPS_MEDIA_MANAGEMENT,
+                R.string.media_management_apps_title);
     }
 
     public static AppFilterRegistry getInstance() {
@@ -200,7 +218,7 @@ public class AppFilterRegistry {
             case ManageApplications.LIST_TYPE_USAGE_ACCESS:
                 return FILTER_APPS_USAGE_ACCESS;
             case ManageApplications.LIST_TYPE_HIGH_POWER:
-                return FILTER_APPS_POWER_WHITELIST;
+                return FILTER_APPS_POWER_ALLOWLIST;
             case ManageApplications.LIST_TYPE_OVERLAY:
                 return FILTER_APPS_WITH_OVERLAY;
             case ManageApplications.LIST_TYPE_WRITE_SETTINGS:
@@ -213,6 +231,10 @@ public class AppFilterRegistry {
                 return FILTER_APPS_RECENT;
             case ManageApplications.LIST_MANAGE_EXTERNAL_STORAGE:
                 return FILTER_MANAGE_EXTERNAL_STORAGE;
+            case ManageApplications.LIST_TYPE_ALARMS_AND_REMINDERS:
+                return FILTER_ALARMS_AND_REMINDERS;
+            case ManageApplications.LIST_TYPE_MEDIA_MANAGEMENT_APPS:
+                return FILTER_APPS_MEDIA_MANAGEMENT;
             default:
                 return FILTER_APPS_ALL;
         }

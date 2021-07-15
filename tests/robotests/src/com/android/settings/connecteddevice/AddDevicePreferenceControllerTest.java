@@ -79,6 +79,7 @@ public class AddDevicePreferenceControllerTest {
         String key = mAddDevicePreferenceController.getPreferenceKey();
         mAddDevicePreference = new RestrictedPreference(mContext);
         mAddDevicePreference.setKey(key);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
         when(mScreen.findPreference(key)).thenReturn(mAddDevicePreference);
         mAddDevicePreferenceController.displayPreference(mScreen);
     }
@@ -86,7 +87,7 @@ public class AddDevicePreferenceControllerTest {
     @Test
     public void addDevice_bt_resume_on_then_off() {
         when(mBluetoothAdapter.isEnabled()).thenReturn(true);
-        mAddDevicePreferenceController.updateState();
+        mAddDevicePreferenceController.updateState(mAddDevicePreference);
         assertTrue(TextUtils.isEmpty(mAddDevicePreference.getSummary()));
 
         Intent intent = new Intent(BluetoothAdapter.ACTION_STATE_CHANGED);
@@ -102,7 +103,7 @@ public class AddDevicePreferenceControllerTest {
     @Test
     public void addDevice_bt_resume_off_then_on() {
         when(mBluetoothAdapter.isEnabled()).thenReturn(false);
-        mAddDevicePreferenceController.updateState();
+        mAddDevicePreferenceController.updateState(mAddDevicePreference);
         assertThat(mAddDevicePreference.getSummary()).isEqualTo(
                 mContext.getString(R.string.connected_device_add_device_summary));
 
@@ -127,5 +128,13 @@ public class AddDevicePreferenceControllerTest {
         mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, true);
         assertThat(mAddDevicePreferenceController.getAvailabilityStatus())
                 .isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_noBluetoothFeature_unSupported() {
+        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
+
+        assertThat(mAddDevicePreferenceController.getAvailabilityStatus())
+                .isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }

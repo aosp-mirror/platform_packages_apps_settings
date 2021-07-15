@@ -22,7 +22,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -94,9 +93,9 @@ public class MediaOutputIndicatorWorkerTest {
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
         mMediaOutputIndicatorWorker = new MediaOutputIndicatorWorker(mContext, URI);
-        when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mMediaSessionManager);
+        doReturn(mMediaSessionManager).when(mContext).getSystemService(MediaSessionManager.class);
         mMediaControllers.add(mMediaController);
-        when(mMediaSessionManager.getActiveSessions(any())).thenReturn(mMediaControllers);
+        doReturn(mMediaControllers).when(mMediaSessionManager).getActiveSessions(any());
 
         mResolver = mock(ContentResolver.class);
         doReturn(mResolver).when(mContext).getContentResolver();
@@ -144,6 +143,7 @@ public class MediaOutputIndicatorWorkerTest {
 
     @Test
     public void onSlicePinned_noActiveController_noPackageName() {
+        mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
         mMediaControllers.clear();
 
         mMediaOutputIndicatorWorker.onSlicePinned();
@@ -186,18 +186,16 @@ public class MediaOutputIndicatorWorkerTest {
 
     @Test
     public void onReceive_shouldNotifyChange() {
+        mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
         mMediaOutputIndicatorWorker.onSlicePinned();
         waitForLocalMediaManagerInit();
-        // onSlicePinned will registerCallback() and get first callback. Callback triggers this at
-        // the first time.
-        verify(mResolver, times(1)).notifyChange(URI, null);
 
         final Intent intent = new Intent(AudioManager.STREAM_DEVICES_CHANGED_ACTION);
         for (BroadcastReceiver receiver : mShadowApplication.getReceiversForIntent(intent)) {
             receiver.onReceive(mContext, intent);
         }
         // Intent receiver triggers notifyChange() again
-        verify(mResolver, times(2)).notifyChange(URI, null /* observer */);
+        verify(mResolver).notifyChange(URI, null /* observer */);
     }
 
     @Test
@@ -258,6 +256,31 @@ public class MediaOutputIndicatorWorkerTest {
 
         when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
         when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+
+        assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isNull();
+    }
+
+    @Test
+    public void getActiveLocalMediaController_bothHaveRemoteMediaAndLocalMedia_returnNull() {
+        final MediaController.PlaybackInfo playbackInfo = new MediaController.PlaybackInfo(
+                MediaController.PlaybackInfo.PLAYBACK_TYPE_REMOTE,
+                VolumeProvider.VOLUME_CONTROL_ABSOLUTE,
+                100,
+                10,
+                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build(),
+                null);
+        final PlaybackState playbackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_PLAYING, 0, 1)
+                .build();
+        final MediaController remoteMediaController = mock(MediaController.class);
+
+        mMediaControllers.add(remoteMediaController);
+        initPlayback();
+
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        when(remoteMediaController.getPlaybackInfo()).thenReturn(playbackInfo);
+        when(remoteMediaController.getPlaybackState()).thenReturn(playbackState);
 
         assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isNull();
     }

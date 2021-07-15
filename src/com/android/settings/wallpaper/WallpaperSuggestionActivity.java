@@ -23,6 +23,7 @@ import android.content.Intent;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.R;
 import com.android.settings.display.WallpaperPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.Indexable;
@@ -40,11 +41,18 @@ public class WallpaperSuggestionActivity extends StyleSuggestionActivityBase imp
     private static final String WALLPAPER_FLAVOR_EXTRA = "com.android.launcher3.WALLPAPER_FLAVOR";
     private static final String WALLPAPER_FOCUS = "focus_wallpaper";
     private static final String WALLPAPER_ONLY = "wallpaper_only";
+    private static final String LAUNCHED_SUW = "app_launched_suw";
+
+    private String mWallpaperLaunchExtra;
 
     @Override
     protected void addExtras(Intent intent) {
         if (WizardManagerHelper.isAnySetupWizard(intent)) {
             intent.putExtra(WALLPAPER_FLAVOR_EXTRA, WALLPAPER_ONLY);
+
+            mWallpaperLaunchExtra =
+                    getResources().getString(R.string.config_wallpaper_picker_launch_extra);
+            intent.putExtra(mWallpaperLaunchExtra, LAUNCHED_SUW);
         } else {
             intent.putExtra(WALLPAPER_FLAVOR_EXTRA, WALLPAPER_FOCUS);
         }
@@ -69,7 +77,7 @@ public class WallpaperSuggestionActivity extends StyleSuggestionActivityBase imp
                         boolean enabled) {
                     final List<SearchIndexableRaw> result = new ArrayList<>();
                     WallpaperPreferenceController controller =
-                            new WallpaperPreferenceController(context, "dummy key");
+                            new WallpaperPreferenceController(context, "unused key");
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = controller.getTitle();
                     data.screenTitle = data.title;

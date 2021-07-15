@@ -16,8 +16,8 @@
 
 package com.android.settings.development.graphicsdriver;
 
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_OFF;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -62,7 +62,7 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
     private final ContentResolver mContentResolver;
     private final String mPreferenceTitle;
     private final String mPreferenceDefault;
-    private final String mPreferenceGameDriver;
+    private final String mPreferenceProductionDriver;
     private final String mPreferencePrereleaseDriver;
     private final String mPreferenceSystem;
     @VisibleForTesting
@@ -88,8 +88,8 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
         final Resources resources = context.getResources();
         mPreferenceTitle = resources.getString(R.string.graphics_driver_app_preference_title);
         mPreferenceDefault = resources.getString(R.string.graphics_driver_app_preference_default);
-        mPreferenceGameDriver =
-                resources.getString(R.string.graphics_driver_app_preference_game_driver);
+        mPreferenceProductionDriver =
+                resources.getString(R.string.graphics_driver_app_preference_production_driver);
         mPreferencePrereleaseDriver =
                 resources.getString(R.string.graphics_driver_app_preference_prerelease_driver);
         mPreferenceSystem = resources.getString(R.string.graphics_driver_app_preference_system);
@@ -101,19 +101,21 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
         mAppInfos = getAppInfos(context);
 
         mDevOptInApps =
-                getGlobalSettingsString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS);
+                getGlobalSettingsString(mContentResolver,
+                                        Settings.Global.UPDATABLE_DRIVER_PRODUCTION_OPT_IN_APPS);
         mDevPrereleaseOptInApps = getGlobalSettingsString(
-                mContentResolver, Settings.Global.GAME_DRIVER_PRERELEASE_OPT_IN_APPS);
+                mContentResolver, Settings.Global.UPDATABLE_DRIVER_PRERELEASE_OPT_IN_APPS);
         mDevOptOutApps =
-                getGlobalSettingsString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS);
+                getGlobalSettingsString(mContentResolver,
+                                        Settings.Global.UPDATABLE_DRIVER_PRODUCTION_OPT_OUT_APPS);
     }
 
     @Override
     public int getAvailabilityStatus() {
         return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
                 && (Settings.Global.getInt(mContentResolver,
-                Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)
-                != GAME_DRIVER_OFF)
+                Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT)
+                != UPDATABLE_DRIVER_OFF)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
@@ -157,7 +159,7 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
             mDevOptInApps.remove(packageName);
             mDevPrereleaseOptInApps.remove(packageName);
             mDevOptOutApps.add(packageName);
-        } else if (value.equals(mPreferenceGameDriver)) {
+        } else if (value.equals(mPreferenceProductionDriver)) {
             mDevOptInApps.add(packageName);
             mDevPrereleaseOptInApps.remove(packageName);
             mDevOptOutApps.remove(packageName);
@@ -174,13 +176,15 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
         listPref.setSummary(value);
 
         // Push the updated Sets for stable/prerelease opt-in and opt-out apps to
-        // corresponding Settings.Global.GAME_DRIVER(_PRERELEASE)?_OPT_(IN|OUT)_APPS
-        Settings.Global.putString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS,
+        // corresponding Settings.Global.UPDATABLE_DRIVER_[PRODUCTION|PRERELEASE]_OPT_(IN|OUT)_APPS
+        Settings.Global.putString(mContentResolver,
+                Settings.Global.UPDATABLE_DRIVER_PRODUCTION_OPT_IN_APPS,
                 String.join(",", mDevOptInApps));
         Settings.Global.putString(mContentResolver,
-                Settings.Global.GAME_DRIVER_PRERELEASE_OPT_IN_APPS,
+                Settings.Global.UPDATABLE_DRIVER_PRERELEASE_OPT_IN_APPS,
                 String.join(",", mDevPrereleaseOptInApps));
-        Settings.Global.putString(mContentResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS,
+        Settings.Global.putString(mContentResolver,
+                Settings.Global.UPDATABLE_DRIVER_PRODUCTION_OPT_OUT_APPS,
                 String.join(",", mDevOptOutApps));
 
         return true;
@@ -251,7 +255,7 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
         listPreference.setEntryValues(mEntryList);
 
         // Initialize preference default and summary with the opt in/out choices
-        // from Settings.Global.GAME_DRIVER(_PRERELEASE)?_OPT_(IN|OUT)_APPS
+        // from Settings.Global.UPDATABLE_DRIVER_[PRODUCTION|PRERELEASE]_OPT_[IN|OUT]_APPS
         if (mDevOptOutApps.contains(packageName)) {
             listPreference.setValue(mPreferenceSystem);
             listPreference.setSummary(mPreferenceSystem);
@@ -259,8 +263,8 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
             listPreference.setValue(mPreferencePrereleaseDriver);
             listPreference.setSummary(mPreferencePrereleaseDriver);
         } else if (mDevOptInApps.contains(packageName)) {
-            listPreference.setValue(mPreferenceGameDriver);
-            listPreference.setSummary(mPreferenceGameDriver);
+            listPreference.setValue(mPreferenceProductionDriver);
+            listPreference.setSummary(mPreferenceProductionDriver);
         } else {
             listPreference.setValue(mPreferenceDefault);
             listPreference.setSummary(mPreferenceDefault);

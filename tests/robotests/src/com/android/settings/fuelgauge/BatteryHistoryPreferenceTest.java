@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,7 +89,7 @@ public class BatteryHistoryPreferenceTest {
         TextView view = (TextView) mViewHolder.findViewById(R.id.bottom_summary);
         assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(view.getText()).isEqualTo(TEST_STRING);
-        assertThat(mBatteryHistoryPreference.hideSummary).isFalse();
+        assertThat(mBatteryHistoryPreference.mHideSummary).isFalse();
     }
 
     @Test
@@ -100,6 +100,6 @@ public class BatteryHistoryPreferenceTest {
         TextView view = (TextView) mViewHolder.findViewById(R.id.bottom_summary);
         assertThat(view.getVisibility()).isEqualTo(View.GONE);
         assertThat(view.getText()).isEqualTo("");
-        assertThat(mBatteryHistoryPreference.hideSummary).isTrue();
+        assertThat(mBatteryHistoryPreference.mHideSummary).isTrue();
     }
 }

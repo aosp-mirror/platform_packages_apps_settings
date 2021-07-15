@@ -30,7 +30,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -51,8 +50,6 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     private final String PREF_KEY_VIDEO = "gesture_prevent_ringing_video";
     private final String KEY = "gesture_prevent_ringing_category";
     private final Context mContext;
-
-    private VideoPreference mVideoPreference;
 
     @VisibleForTesting
     PreferenceCategory mPreferenceCategory;
@@ -85,8 +82,6 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
         if (mPreferenceCategory != null) {
             mSettingObserver = new SettingObserver(mPreferenceCategory);
         }
-
-        mVideoPreference = screen.findPreference(getVideoPrefKey());
     }
 
     @Override
@@ -142,20 +137,12 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
             mSettingObserver.register(mContext.getContentResolver());
             mSettingObserver.onChange(false, null);
         }
-
-        if (mVideoPreference != null) {
-            mVideoPreference.onViewVisible();
-        }
     }
 
     @Override
     public void onPause() {
         if (mSettingObserver != null) {
             mSettingObserver.unregister(mContext.getContentResolver());
-        }
-
-        if (mVideoPreference != null) {
-            mVideoPreference.onViewInvisible();
         }
     }
 

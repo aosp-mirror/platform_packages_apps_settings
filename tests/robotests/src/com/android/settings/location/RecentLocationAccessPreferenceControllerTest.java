@@ -24,19 +24,17 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.provider.DeviceConfig;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settingslib.location.RecentLocationAccesses;
-import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -55,10 +53,13 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDeviceConfig.class})
 public class RecentLocationAccessPreferenceControllerTest {
+    private static final String PREFERENCE_KEY = "test_preference_key";
     @Mock
-    private LayoutPreference mLayoutPreference;
+    private PreferenceCategory mLayoutPreference;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private DashboardFragment mDashboardFragment;
     @Mock
     private RecentLocationAccesses mRecentLocationApps;
 
@@ -71,15 +72,16 @@ public class RecentLocationAccessPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mController = spy(
-                new RecentLocationAccessPreferenceController(mContext, mRecentLocationApps));
+                new RecentLocationAccessPreferenceController(mContext, PREFERENCE_KEY,
+                        mRecentLocationApps));
+        mController.init(mDashboardFragment);
         final String key = mController.getPreferenceKey();
         mAppEntitiesHeaderView = LayoutInflater.from(mContext).inflate(
                 R.layout.app_entities_header, null /* root */);
         when(mScreen.findPreference(key)).thenReturn(mLayoutPreference);
         when(mLayoutPreference.getKey()).thenReturn(key);
         when(mLayoutPreference.getContext()).thenReturn(mContext);
-        when(mLayoutPreference.findViewById(R.id.app_entities_header)).thenReturn(
-                mAppEntitiesHeaderView);
+        when(mDashboardFragment.getContext()).thenReturn(mContext);
     }
 
     @After
@@ -88,16 +90,7 @@ public class RecentLocationAccessPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_permissionHubNotSet_shouldReturnFalse() {
-        // We have not yet set the property to show the Permissions Hub.
-        assertThat(mController.isAvailable()).isEqualTo(false);
-    }
-
-    @Test
-    public void isAvailable_permissionHubEnabled_shouldReturnTrue() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
-                Utils.PROPERTY_PERMISSIONS_HUB_ENABLED, "true", true);
-
+    public void isAvailable_shouldReturnTrue() {
         assertThat(mController.isAvailable()).isEqualTo(true);
     }
 
@@ -105,7 +98,7 @@ public class RecentLocationAccessPreferenceControllerTest {
     @Test
     @Ignore
     public void updateState_whenAppListIsEmpty_shouldDisplayTitleTextAndDetailsText() {
-        doReturn(new ArrayList<>()).when(mRecentLocationApps).getAppListSorted();
+        doReturn(new ArrayList<>()).when(mRecentLocationApps).getAppListSorted(false);
         mController.displayPreference(mScreen);
         mController.updateState(mLayoutPreference);
 
@@ -116,39 +109,6 @@ public class RecentLocationAccessPreferenceControllerTest {
         assertThat(details.getText()).isEqualTo(
                 mContext.getText(R.string.location_recent_location_access_view_details));
         assertThat(details.hasOnClickListeners()).isTrue();
-    }
-
-    @Test
-    public void updateState_whenAppListMoreThanThree_shouldDisplayTopThreeApps() {
-        final List<RecentLocationAccesses.Access> accesses = createMockAccesses(6);
-        doReturn(accesses).when(mRecentLocationApps).getAppListSorted();
-        mController.displayPreference(mScreen);
-        mController.updateState(mLayoutPreference);
-
-        // The widget can display the top 3 apps from the list when there're more than 3.
-        final View app1View = mAppEntitiesHeaderView.findViewById(R.id.app1_view);
-        final ImageView appIconView1 = app1View.findViewById(R.id.app_icon);
-        final TextView appTitle1 = app1View.findViewById(R.id.app_title);
-
-        assertThat(app1View.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(appIconView1.getDrawable()).isNotNull();
-        assertThat(appTitle1.getText()).isEqualTo("appTitle0");
-
-        final View app2View = mAppEntitiesHeaderView.findViewById(R.id.app2_view);
-        final ImageView appIconView2 = app2View.findViewById(R.id.app_icon);
-        final TextView appTitle2 = app2View.findViewById(R.id.app_title);
-
-        assertThat(app2View.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(appIconView2.getDrawable()).isNotNull();
-        assertThat(appTitle2.getText()).isEqualTo("appTitle1");
-
-        final View app3View = mAppEntitiesHeaderView.findViewById(R.id.app3_view);
-        final ImageView appIconView3 = app3View.findViewById(R.id.app_icon);
-        final TextView appTitle3 = app3View.findViewById(R.id.app_title);
-
-        assertThat(app3View.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(appIconView3.getDrawable()).isNotNull();
-        assertThat(appTitle3.getText()).isEqualTo("appTitle2");
     }
 
     private List<RecentLocationAccesses.Access> createMockAccesses(int count) {

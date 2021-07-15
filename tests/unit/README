@@ -1,8 +1,20 @@
+The simplest way to run all SettingsUnitTests is with atest
+$ atest SettingsUnitTests
+
+A single class can also be tested with the following command
+$ atest -c <YourClassName>
+
+// The following instrutions show how to run the test suite using make + adb //
+
 To build the tests you can use the following command at the root of your android source tree
 $ make SettingsUnitTests
 
-The test apk then needs to be installed onto your test device via for example
-$ adb install -r out/target/product/shamu/data/app/SettingsUnitTests/SettingsUnitTests.apk
+The test apk then needs to be installed onto your test device. The apk's location will vary
+depending on your device model and architecture. At the end of the make command's output, there
+should be a line similar to the following:
+"Copy: out/target/product/shamu/testcases/SettingsUnitTests/arm64/SettingsUnitTests.apk"
+Install via the following command:
+$ adb install -r out/target/product/shamu/testcases/SettingsUnitTests/arm64/SettingsUnitTests.apk
 
 To run all tests:
 $ adb shell am instrument -w com.android.settings.tests.unit/androidx.test.runner.AndroidJUnitRunner

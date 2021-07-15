@@ -16,24 +16,18 @@
 
 package com.android.settings.notification;
 
-import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
-
 import android.app.Activity;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
-import android.app.usage.IUsageStatsManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.os.UserManager;
-import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -63,6 +57,8 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
 
     private RingtonePreference mRequestPreference;
 
+    private NotificationAssistantPreferenceController mNotificationAssistantPreferenceController;
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.CONFIGURE_NOTIFICATION;
@@ -91,17 +87,18 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     }
 
     @Override
-    protected boolean isParalleledControllers() {
-        return true;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mNotificationAssistantPreferenceController =
+                use(NotificationAssistantPreferenceController.class);
+        mNotificationAssistantPreferenceController.setFragment(this);
+        mNotificationAssistantPreferenceController.setBackend(new NotificationBackend());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Application app, Fragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new RecentNotifyingAppsPreferenceController(
-                context, new NotificationBackend(), IUsageStatsManager.Stub.asInterface(
-                        ServiceManager.getService(Context.USAGE_STATS_SERVICE)),
-                context.getSystemService(UserManager.class), app, host));
         controllers.add(new ShowOnLockScreenNotificationPreferenceController(
                 context, KEY_LOCKSCREEN));
         controllers.add(new NotificationRingtonePreferenceController(context) {
@@ -111,28 +108,10 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
             }
 
         });
+        controllers.add(new EmergencyBroadcastPreferenceController(context,
+                "app_and_notif_cell_broadcast_settings"));
+
         return controllers;
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        final PreferenceScreen screen = getPreferenceScreen();
-        final Bundle arguments = getArguments();
-
-        if (screen == null) {
-            return;
-        }
-        if (arguments != null) {
-            final String highlightKey = arguments.getString(EXTRA_FRAGMENT_ARG_KEY);
-            if (!TextUtils.isEmpty(highlightKey)) {
-                final PreferenceCategory advancedCategory =
-                        screen.findPreference(KEY_ADVANCED_CATEGORY);
-                // Has highlight row - expand everything
-                advancedCategory.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
-                scrollToPreference(advancedCategory);
-            }
-        }
     }
 
     @Override
@@ -186,4 +165,14 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
                     return keys;
                 }
             };
+
+    // Dialogs only have access to the parent fragment, not the controller, so pass the information
+    // along to keep business logic out of this file
+    protected void enableNAS(ComponentName cn) {
+        final PreferenceScreen screen = getPreferenceScreen();
+        NotificationAssistantPreferenceController napc =
+                use(NotificationAssistantPreferenceController.class);
+        napc.setNotificationAssistantGranted(cn);
+        napc.updateState(screen.findPreference(napc.getPreferenceKey()));
+    }
 }

@@ -18,7 +18,6 @@ package com.android.settings.password;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -74,7 +73,7 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
 
             // Copy the original extras into the new intent
             copyBooleanExtra(activityIntent, intent,
-                    ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+                    ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, false);
             copyBooleanExtra(activityIntent, intent,
                     ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
             if (activityIntent.hasExtra(
@@ -83,8 +82,6 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
                         ChooseLockGenericFragment.EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS));
             }
             intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, selectedLockType.defaultQuality);
-            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE,
-                    activityIntent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0));
             WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
             activity.startActivity(intent);
             activity.finish();
@@ -102,7 +99,9 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final int userId = getArguments().getInt(ARG_USER_ID);
-        mController = new ChooseLockGenericController(getContext(), userId);
+        mController = new ChooseLockGenericController.Builder(getContext(), userId)
+                .setHideInsecureScreenLockTypes(true)
+                .build();
     }
 
     @Override
@@ -126,10 +125,7 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Context context = getContext();
         Builder builder = new Builder(context);
-        List<ScreenLockType> locks =
-                mController.getVisibleScreenLockTypes(
-                        DevicePolicyManager.PASSWORD_QUALITY_SOMETHING,
-                        false /* includeDisabled */);
+        List<ScreenLockType> locks = mController.getVisibleAndEnabledScreenLockTypes();
         mAdapter = new ScreenLockAdapter(context, locks, mController);
         builder.setAdapter(mAdapter, this);
         builder.setTitle(R.string.setup_lock_settings_options_dialog_title);

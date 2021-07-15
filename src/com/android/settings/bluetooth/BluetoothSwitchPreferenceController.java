@@ -23,7 +23,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.location.ScanningSettings;
+import com.android.settings.location.BluetoothScanningFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.widget.SwitchWidgetController;
@@ -100,7 +100,7 @@ public class BluetoothSwitchPreferenceController
     public void onClick(View v) {
         // send users to scanning settings if they click on the link in the summary text
         new SubSettingLauncher(mContext)
-                .setDestination(ScanningSettings.class.getName())
+                .setDestination(BluetoothScanningFragment.class.getName())
                 .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_FRAGMENT)
                 .launch();
     }

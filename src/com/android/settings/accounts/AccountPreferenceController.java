@@ -75,7 +75,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
 
     private static final String TAG = "AccountPrefController";
 
-    private static final int ORDER_ACCOUNT_PROFILES = 1;
+    private static final int ORDER_ACCOUNT_PROFILES = 101;
     private static final int ORDER_LAST = 1002;
     private static final int ORDER_NEXT_TO_LAST = 1001;
     private static final int ORDER_NEXT_TO_NEXT_TO_LAST = 1000;
@@ -323,11 +323,12 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 mHelper.createAccessiblePreferenceCategory(
                         mFragment.getPreferenceManager().getContext());
         preferenceGroup.setOrder(mAccountProfileOrder++);
+        preferenceGroup.setTitle(R.string.account_settings); // default title; may be modified below
         if (isSingleProfile()) {
-            preferenceGroup.setTitle(context.getString(R.string.account_for_section_header,
-                    BidiFormatter.getInstance().unicodeWrap(userInfo.name)));
-            preferenceGroup.setContentDescription(
-                    mContext.getString(R.string.account_settings));
+            final String title = context.getString(R.string.account_for_section_header,
+                    BidiFormatter.getInstance().unicodeWrap(userInfo.name));
+            preferenceGroup.setTitle(title);
+            preferenceGroup.setContentDescription(title);
         } else if (userInfo.isManagedProfile()) {
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 preferenceGroup.setTitle(R.string.category_work);

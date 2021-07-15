@@ -33,7 +33,7 @@ import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 /**
  * Controller to control whether an app can run in the background
@@ -54,18 +54,18 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
     BatteryUtils mBatteryUtils;
     private InstrumentedPreferenceFragment mFragment;
     private String mTargetPackage;
-    private PowerWhitelistBackend mPowerWhitelistBackend;
+    private PowerAllowlistBackend mPowerAllowlistBackend;
 
     public BackgroundActivityPreferenceController(Context context,
             InstrumentedPreferenceFragment fragment, int uid, String packageName) {
-        this(context, fragment, uid, packageName, PowerWhitelistBackend.getInstance(context));
+        this(context, fragment, uid, packageName, PowerAllowlistBackend.getInstance(context));
     }
 
     @VisibleForTesting
     BackgroundActivityPreferenceController(Context context, InstrumentedPreferenceFragment fragment,
-            int uid, String packageName, PowerWhitelistBackend backend) {
+            int uid, String packageName, PowerAllowlistBackend backend) {
         super(context);
-        mPowerWhitelistBackend = backend;
+        mPowerAllowlistBackend = backend;
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mDpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
@@ -84,8 +84,8 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
         }
         final int mode = mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mTargetPackage);
-        final boolean whitelisted = mPowerWhitelistBackend.isWhitelisted(mTargetPackage);
-        if (whitelisted || mode == AppOpsManager.MODE_ERRORED
+        final boolean allowlisted = mPowerAllowlistBackend.isAllowlisted(mTargetPackage);
+        if (allowlisted || mode == AppOpsManager.MODE_ERRORED
                 || Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mTargetPackage)) {
             preference.setEnabled(false);
         } else {
@@ -117,8 +117,8 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
     }
 
     public void updateSummary(Preference preference) {
-        if (mPowerWhitelistBackend.isWhitelisted(mTargetPackage)) {
-            preference.setSummary(R.string.background_activity_summary_whitelisted);
+        if (mPowerAllowlistBackend.isAllowlisted(mTargetPackage)) {
+            preference.setSummary(R.string.background_activity_summary_allowlisted);
             return;
         }
         final int mode = mAppOpsManager

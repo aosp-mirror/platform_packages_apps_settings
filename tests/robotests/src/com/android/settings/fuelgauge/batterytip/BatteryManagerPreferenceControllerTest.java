@@ -63,31 +63,20 @@ public class BatteryManagerPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_smartBatteryOnWithRestrictApps_showSummary() {
-        mController.updateSummary(mPreference, true /* smartBatteryOn */, 2);
+    public void updateState_smartBatteryWithRestrictApps_showSummary() {
+        mController.updateSummary(mPreference, 2);
 
         assertThat(mPreference.getSummary()).isEqualTo("2 apps restricted");
     }
 
     @Test
-    public void updateState_smartBatteryOnWithoutRestriction_showSummary() {
+    public void updateState_smartBatteryWithoutRestriction_showSummary() {
         when(mFeatureFactory.powerUsageFeatureProvider.isSmartBatterySupported()).thenReturn(true);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, ON);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo("On / Detecting when apps drain battery");
-    }
-
-    @Test
-    public void updateState_smartBatteryOff_showSummary() {
-        when(mFeatureFactory.powerUsageFeatureProvider.isSmartBatterySupported()).thenReturn(true);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.ADAPTIVE_BATTERY_MANAGEMENT_ENABLED, OFF);
-
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.getSummary()).isEqualTo("Off");
+        assertThat(mPreference.getSummary()).isEqualTo("Detecting when apps drain battery");
     }
 }

@@ -39,6 +39,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class SearchIndexableResourcesTest {
@@ -89,6 +90,7 @@ public class SearchIndexableResourcesTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
     public void testNonIndexableKeys_GetsKeyFromProvider() {
         mSearchProvider.getSearchIndexableResources().getProviderValues().clear();
         mSearchProvider.getSearchIndexableResources().addIndex(

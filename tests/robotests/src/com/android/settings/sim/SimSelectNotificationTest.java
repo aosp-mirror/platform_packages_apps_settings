@@ -15,17 +15,22 @@
  */
 package com.android.settings.sim;
 
-
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_INCOMING_MMS;
 import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_OUTGOING_MMS;
 import static android.provider.Settings.EXTRA_ENABLE_MMS_DATA_REQUEST_REASON;
 import static android.provider.Settings.EXTRA_SUB_ID;
+import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE;
+import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA;
+import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DISMISS;
 import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_NAMES;
 import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE;
 import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE_DUAL_CDMA;
 import static android.telephony.data.ApnSetting.TYPE_MMS;
 
+import static com.android.settings.sim.SimDialogActivity.DATA_PICK;
+import static com.android.settings.sim.SimDialogActivity.INVALID_PICK;
+import static com.android.settings.sim.SimDialogActivity.PICK_DISMISS;
 import static com.android.settings.sim.SimSelectNotification.ENABLE_MMS_NOTIFICATION_CHANNEL;
 import static com.android.settings.sim.SimSelectNotification.ENABLE_MMS_NOTIFICATION_ID;
 import static com.android.settings.sim.SimSelectNotification.SIM_WARNING_NOTIFICATION_CHANNEL;
@@ -36,6 +41,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -52,9 +58,10 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 
 import com.android.settings.R;
-
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
@@ -65,6 +72,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+
+import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
@@ -83,6 +92,8 @@ public class SimSelectNotificationTest {
     private Resources mResources;
     @Mock
     private SubscriptionInfo mSubInfo;
+    @Mock
+    private DisplayMetrics mDisplayMetrics;
 
     private final String mFakeDisplayName = "fake_display_name";
     private final CharSequence mFakeNotificationChannelTitle = "fake_notification_channel_title";
@@ -108,6 +119,7 @@ public class SimSelectNotificationTest {
                 .thenReturn(mNotificationManager);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE))
                 .thenReturn(mSubscriptionManager);
         when(mContext.getApplicationInfo()).thenReturn(new ApplicationInfo());
@@ -117,8 +129,11 @@ public class SimSelectNotificationTest {
 
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         when(mTelephonyManager.isDataEnabledForApn(TYPE_MMS)).thenReturn(false);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubInfo));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(mSubInfo));
         when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(true);
         when(mSubscriptionManager.getActiveSubscriptionInfo(mSubId)).thenReturn(mSubInfo);
+        when(mSubInfo.getSubscriptionId()).thenReturn(mSubId);
         when(mSubInfo.getDisplayName()).thenReturn(mFakeDisplayName);
         when(mContext.getResources()).thenReturn(mResources);
 
@@ -135,6 +150,9 @@ public class SimSelectNotificationTest {
                 .thenReturn(mFakeDualCdmaWarningTitle);
         when(mResources.getString(R.string.dual_cdma_sim_warning_notification_summary,
                 mSimCombinationName)).thenReturn(mFakeDualCdmaWarningSummary);
+
+        when(mResources.getDisplayMetrics()).thenReturn(mDisplayMetrics);
+        mDisplayMetrics.density = 1.5f;
     }
 
     @Test
@@ -197,6 +215,50 @@ public class SimSelectNotificationTest {
     }
 
     @Test
+    public void onReceivePrimarySubListChange_WithDataPickExtra_shouldStartActivity() {
+        Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
+        intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA);
+
+        mSimSelectNotification.onReceive(mContext, intent);
+
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(intentCaptor.capture());
+        Intent capturedIntent = intentCaptor.getValue();
+        assertThat(capturedIntent).isNotNull();
+        assertThat(capturedIntent.getComponent().getClassName()).isEqualTo(
+                SimDialogActivity.class.getName());
+        assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK)
+                .isNotEqualTo(0);
+        assertThat(capturedIntent.getIntExtra(SimDialogActivity.DIALOG_TYPE_KEY, INVALID_PICK))
+                .isEqualTo(DATA_PICK);
+    }
+
+    @Test
+    public void onReceivePrimarySubListChange_WithDismissExtra_shouldDismiss() {
+        Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
+        intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA);
+
+        mSimSelectNotification.onReceive(mContext, intent);
+        clearInvocations(mContext);
+
+        // Dismiss.
+        intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DISMISS);
+        mSimSelectNotification.onReceive(mContext, intent);
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(intentCaptor.capture());
+        Intent capturedIntent = intentCaptor.getValue();
+        assertThat(capturedIntent).isNotNull();
+        assertThat(capturedIntent.getComponent().getClassName()).isEqualTo(
+                SimDialogActivity.class.getName());
+        assertThat(capturedIntent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK)
+                .isNotEqualTo(0);
+        assertThat(capturedIntent.getIntExtra(SimDialogActivity.DIALOG_TYPE_KEY, INVALID_PICK))
+                .isEqualTo(PICK_DISMISS);
+    }
+    @Test
     public void onReceivePrimarySubListChange_DualCdmaWarning_notificationShouldSend() {
         Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
 
@@ -225,4 +287,3 @@ public class SimSelectNotificationTest {
         assertThat(notification.getValue().contentIntent).isNotNull();
     }
 }
-
