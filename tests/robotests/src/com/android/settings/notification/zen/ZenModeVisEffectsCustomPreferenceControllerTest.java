@@ -38,11 +38,9 @@ import android.content.Context;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.notification.zen.ZenCustomRadioButtonPreference;
-import com.android.settings.notification.zen.ZenModeBackend;
-import com.android.settings.notification.zen.ZenModeVisEffectsCustomPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,7 +59,7 @@ public class ZenModeVisEffectsCustomPreferenceControllerTest {
     @Mock
     private ZenModeBackend mBackend;
     @Mock
-    private ZenCustomRadioButtonPreference mockPref;
+    private RadioButtonPreference mPref;
     private Context mContext;
     @Mock
     private PreferenceScreen mScreen;
@@ -83,7 +81,7 @@ public class ZenModeVisEffectsCustomPreferenceControllerTest {
                 mContext, mock(Lifecycle.class), PREF_KEY);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPref);
         mController.displayPreference(mScreen);
     }
 
@@ -102,9 +100,9 @@ public class ZenModeVisEffectsCustomPreferenceControllerTest {
     @Test
     public void updateState_notChecked_noVisEffects() {
         mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, 0);
-        mController.updateState(mockPref);
+        mController.updateState(mPref);
 
-        verify(mockPref).setChecked(false);
+        verify(mPref).setChecked(false);
     }
 
     @Test
@@ -119,25 +117,25 @@ public class ZenModeVisEffectsCustomPreferenceControllerTest {
                 | SUPPRESSED_EFFECT_PEEK
                 | SUPPRESSED_EFFECT_NOTIFICATION_LIST;
         mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, allSuppressed);
-        mController.updateState(mockPref);
+        mController.updateState(mPref);
 
-        verify(mockPref).setChecked(false);
+        verify(mPref).setChecked(false);
     }
 
     @Test
     public void updateState_checked() {
         mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, 2);
-        mController.updateState(mockPref);
+        mController.updateState(mPref);
 
-        verify(mockPref).setChecked(true);
+        verify(mPref).setChecked(true);
     }
 
     @Test
     public void updateState_listeners() {
         mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, 2);
-        mController.updateState(mockPref);
+        mController.updateState(mPref);
 
-        verify(mockPref).setOnGearClickListener(any());
-        verify(mockPref).setOnRadioButtonClickListener(any());
+        verify(mPref).setExtraWidgetOnClickListener(any());
+        verify(mPref).setOnClickListener(any());
     }
 }

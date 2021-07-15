@@ -19,13 +19,20 @@ package com.android.settings.display;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.hardware.display.AmbientDisplayConfiguration;
+import android.os.PowerManager;
 import android.provider.Settings;
 
+import com.android.internal.R;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
@@ -41,24 +48,41 @@ import org.robolectric.annotation.Config;
 @Config(shadows = ShadowSecureSettings.class)
 public class AmbientDisplayAlwaysOnPreferenceControllerTest {
 
+    private static final String TEST_PACKAGE = "com.android.test";
+
     @Mock
     private AmbientDisplayConfiguration mConfig;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private PowerManager mPowerManager;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
 
     private Context mContext;
 
     private ContentResolver mContentResolver;
 
     private AmbientDisplayAlwaysOnPreferenceController mController;
-    private boolean mCallbackInvoked;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mContentResolver = mContext.getContentResolver();
         mController = new AmbientDisplayAlwaysOnPreferenceController(mContext, "key");
         mController.setConfig(mConfig);
-        mController.setCallback(() -> mCallbackInvoked = true);
+
+        mApplicationInfo.uid = 1;
+        when(mContext.getString(R.string.config_defaultWellbeingPackage)).thenReturn(TEST_PACKAGE);
+
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(
+                TEST_PACKAGE, /* flag= */0);
+
+        doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
+        when(mPowerManager.isAmbientDisplaySuppressedForTokenByApp(anyString(), anyInt()))
+                .thenReturn(false);
     }
 
     @Test
@@ -108,13 +132,6 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_callback() {
-        assertThat(mCallbackInvoked).isFalse();
-        mController.setChecked(true);
-        assertThat(mCallbackInvoked).isTrue();
-    }
-
-    @Test
     public void isSliceableCorrectKey_returnsTrue() {
         final AmbientDisplayAlwaysOnPreferenceController controller =
                 new AmbientDisplayAlwaysOnPreferenceController(mContext,
@@ -132,5 +149,40 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     @Test
     public void isPublicSlice_returnTrue() {
         assertThat(mController.isPublicSlice()).isTrue();
+    }
+
+    @Test
+    public void isAodSuppressedByBedtime_bedTimeModeOn_returnTrue() {
+        when(mPowerManager.isAmbientDisplaySuppressedForTokenByApp(anyString(), anyInt()))
+                .thenReturn(true);
+
+        assertThat(AmbientDisplayAlwaysOnPreferenceController
+                .isAodSuppressedByBedtime(mContext)).isTrue();
+    }
+
+    @Test
+    public void isAodSuppressedByBedtime_bedTimeModeOff_returnFalse() {
+        assertThat(AmbientDisplayAlwaysOnPreferenceController
+                .isAodSuppressedByBedtime(mContext)).isFalse();
+    }
+
+    @Test
+    public void isAodSuppressedByBedtime_notFoundWellbeingPackage_returnFalse()
+            throws PackageManager.NameNotFoundException {
+        when(mPackageManager.getApplicationInfo(TEST_PACKAGE, /* flag= */0)).thenThrow(
+                new PackageManager.NameNotFoundException());
+
+        assertThat(AmbientDisplayAlwaysOnPreferenceController
+                .isAodSuppressedByBedtime(mContext)).isFalse();
+    }
+
+    @Test
+    public void getSummary_bedTimeModeOn_shouldReturnUnavailableSummary() {
+        when(mPowerManager.isAmbientDisplaySuppressedForTokenByApp(anyString(), anyInt()))
+                .thenReturn(true);
+
+        final CharSequence summary = mController.getSummary();
+        assertThat(summary).isEqualTo(mContext.getString(
+                com.android.settings.R.string.aware_summary_when_bedtime_on));
     }
 }

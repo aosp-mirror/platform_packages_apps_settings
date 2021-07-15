@@ -16,6 +16,8 @@
 
 package com.android.settings.development;
 
+import static android.service.quicksettings.TileService.ACTION_QS_TILE_PREFERENCES;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothA2dp;
@@ -23,12 +25,14 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCodecStatus;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +45,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.development.autofill.AutofillLoggingLevelPreferenceController;
 import com.android.settings.development.autofill.AutofillResetOptionsPreferenceController;
@@ -52,15 +57,18 @@ import com.android.settings.development.bluetooth.BluetoothCodecDialogPreference
 import com.android.settings.development.bluetooth.BluetoothHDAudioPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
+import com.android.settings.development.qstile.DevelopmentTiles;
 import com.android.settings.development.storage.SharedDataPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.search.actionbar.SearchMenuController;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -69,7 +77,7 @@ import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
-        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
+        implements OnMainSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
         BluetoothA2dpHwOffloadRebootDialog.OnA2dpHwDialogConfirmedListener,
         AbstractBluetoothPreferenceController.Callback {
@@ -80,7 +88,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             new BluetoothA2dpConfigStore();
 
     private boolean mIsAvailable = true;
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mSwitchBar;
     private DevelopmentSwitchBarController mSwitchBarController;
     private List<AbstractPreferenceController> mPreferenceControllers = new ArrayList<>();
     private BluetoothA2dp mBluetoothA2dp;
@@ -167,6 +175,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        SearchMenuController.init(this);
         if (Utils.isMonkeyRunning()) {
             getActivity().finish();
             return;
@@ -189,19 +198,51 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             getPreferenceScreen().removeAll();
             return;
         }
-        // Set up master switch
+        // Set up primary switch
         mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
+        mSwitchBar.setTitle(getContext().getString(R.string.developer_options_main_switch_title));
+        mSwitchBar.show();
         mSwitchBarController = new DevelopmentSwitchBarController(
                 this /* DevelopmentSettings */, mSwitchBar, mIsAvailable,
                 getSettingsLifecycle());
-        mSwitchBar.show();
 
         // Restore UI state based on whether developer options is enabled
         if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
             enableDeveloperOptions();
+            handleQsTileLongPressActionIfAny();
         } else {
             disableDeveloperOptions();
         }
+    }
+
+    /**
+     * Long-pressing a developer options quick settings tile will by default (see
+     * QS_TILE_PREFERENCES in the manifest) take you to the developer options page.
+     * Some tiles may want to go into their own page within the developer options.
+     */
+    private void handleQsTileLongPressActionIfAny() {
+        Intent intent = getActivity().getIntent();
+        if (intent == null || !TextUtils.equals(ACTION_QS_TILE_PREFERENCES, intent.getAction())) {
+            return;
+        }
+
+        Log.d(TAG, "Developer options started from qstile long-press");
+        final ComponentName componentName = (ComponentName) intent.getParcelableExtra(
+                Intent.EXTRA_COMPONENT_NAME);
+        if (componentName == null) {
+            return;
+        }
+
+        if (DevelopmentTiles.WirelessDebugging.class.getName().equals(
+                componentName.getClassName()) && getDevelopmentOptionsController(
+                WirelessDebuggingPreferenceController.class).isAvailable()) {
+            Log.d(TAG, "Long press from wireless debugging qstile");
+            new SubSettingLauncher(getContext())
+                    .setDestination(WirelessDebuggingFragment.class.getName())
+                    .setSourceMetricsCategory(SettingsEnums.SETTINGS_ADB_WIRELESS)
+                    .launch();
+        }
+        // Add other qstiles here
     }
 
     @Override
@@ -346,7 +387,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     protected int getPreferenceScreenResId() {
-        return Utils.isMonkeyRunning()? R.xml.placeholder_prefs : R.xml.development_settings;
+        return Utils.isMonkeyRunning() ? R.xml.placeholder_prefs : R.xml.development_settings;
     }
 
     @Override
@@ -359,11 +400,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getSettingsLifecycle(), this /* devOptionsDashboardFragment */,
                 new BluetoothA2dpConfigStore());
         return mPreferenceControllers;
-    }
-
-    @Override
-    protected boolean isParalleledControllers() {
-        return true;
     }
 
     private void registerReceivers() {
@@ -479,7 +515,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothMapVersionPreferenceController(context));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothMaxConnectedAudioDevicesPreferenceController(context));
-        controllers.add(new EnhancedConnectivityPreferenceController(context));
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
@@ -513,15 +548,14 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ResizableActivityPreferenceController(context));
         controllers.add(new FreeformWindowsPreferenceController(context));
         controllers.add(new DesktopModePreferenceController(context));
-        controllers.add(new SizeCompatFreeformPreferenceController(context));
+        controllers.add(new NonResizableMultiWindowPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));
         controllers.add(new DefaultLaunchPreferenceController(context, "running_apps"));
         controllers.add(new DefaultLaunchPreferenceController(context, "demo_mode"));
         controllers.add(new DefaultLaunchPreferenceController(context, "quick_settings_tiles"));
         controllers.add(new DefaultLaunchPreferenceController(context, "feature_flags_dashboard"));
-        controllers.add(
-            new DefaultLaunchPreferenceController(context, "default_usb_configuration"));
+        controllers.add(new DefaultUsbConfigurationPreferenceController(context));
         controllers.add(new DefaultLaunchPreferenceController(context, "density"));
         controllers.add(new DefaultLaunchPreferenceController(context, "background_check"));
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));

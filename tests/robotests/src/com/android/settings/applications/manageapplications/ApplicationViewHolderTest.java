@@ -35,6 +35,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.concurrent.CountDownLatch;
+
 @RunWith(RobolectricTestRunner.class)
 public class ApplicationViewHolderTest {
 
@@ -67,6 +69,22 @@ public class ApplicationViewHolderTest {
 
         mHolder.setSummary(R.string.disabled);
         assertThat(mHolder.mSummary.getText()).isEqualTo(mContext.getText(R.string.disabled));
+    }
+
+    @Test
+    public void setTitle_titleIsNotEmptyAndContentIsNotEmpty_shouldSetTitleAndContentDescription() {
+        mHolder.setTitle("title", "content");
+
+        assertThat(mHolder.mAppName.getText()).isEqualTo("title");
+        assertThat(mHolder.mAppName.getContentDescription()).isEqualTo("content");
+    }
+
+    @Test
+    public void setTitle_titleIsNotEmptyButContentIsEmpty_shouldSetTitle() {
+        mHolder.setTitle("title", "");
+
+        assertThat(mHolder.mAppName.getText()).isEqualTo("title");
+        assertThat(mHolder.mAppName.getContentDescription()).isNull();
     }
 
     @Test
@@ -107,13 +125,16 @@ public class ApplicationViewHolderTest {
 
     @Test
     public void updateSwitch() {
+        final CountDownLatch latch = new CountDownLatch(1);
         mView = ApplicationViewHolder.newView(new FrameLayout(mContext), true);
         mHolder = new ApplicationViewHolder(mView);
-        mHolder.updateSwitch(v -> {
-        } /* listener */, true, true);
+        mHolder.updateSwitch((buttonView, isChecked) -> latch.countDown(), true, true);
 
         assertThat(mHolder.mSwitch.isChecked()).isTrue();
         assertThat(mHolder.mSwitch.isEnabled()).isTrue();
-        assertThat(mHolder.mWidgetContainer.hasOnClickListeners()).isTrue();
+        assertThat(mHolder.mSwitch.isFocusable()).isTrue();
+        assertThat(mHolder.mSwitch.isClickable()).isTrue();
+        mHolder.mSwitch.callOnClick();
+        assertThat(latch.getCount()).isEqualTo(0);
     }
 }

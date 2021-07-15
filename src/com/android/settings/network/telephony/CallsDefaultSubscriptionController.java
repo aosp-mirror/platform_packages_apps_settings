@@ -20,6 +20,8 @@ import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
+import com.android.settings.Utils;
+
 public class CallsDefaultSubscriptionController extends DefaultSubscriptionController {
 
     public CallsDefaultSubscriptionController(Context context, String preferenceKey) {
@@ -39,5 +41,14 @@ public class CallsDefaultSubscriptionController extends DefaultSubscriptionContr
     @Override
     protected void setDefaultSubscription(int subscriptionId) {
         mManager.setDefaultVoiceSubscriptionId(subscriptionId);
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        if (Utils.isProviderModelEnabled(mContext)) {
+            return MobileNetworkUtils.getPreferredStatus(mContext, mManager, true);
+        } else {
+            return super.getSummary();
+        }
     }
 }

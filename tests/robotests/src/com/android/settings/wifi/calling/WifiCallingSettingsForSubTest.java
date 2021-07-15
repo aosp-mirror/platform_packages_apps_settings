@@ -16,18 +16,17 @@
 
 package com.android.settings.wifi.calling;
 
+import static junit.framework.Assert.assertEquals;
+
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static junit.framework.Assert.assertEquals;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -55,8 +54,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.network.ims.MockWifiCallingQueryImsState;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.testutils.shadow.ShadowFragment;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.ToggleSwitch;
+import com.android.settings.widget.SettingsMainSwitchBar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -85,19 +83,28 @@ public class WifiCallingSettingsForSubTest {
     private final PersistableBundle mBundle = new PersistableBundle();
 
     private MockWifiCallingQueryImsState mQueryImsState;
+    private SettingsMainSwitchBar mSwitchBar;
 
-    @Mock private static CarrierConfigManager sCarrierConfigManager;
-    @Mock private CarrierConfigManager mMockConfigManager;
-    @Mock private ImsMmTelManager mImsMmTelManager;
-    @Mock private TelephonyManager mTelephonyManager;
-    @Mock private PreferenceScreen mPreferenceScreen;
-    @Mock private SettingsActivity mActivity;
-    @Mock private SwitchBar mSwitchBar;
-    @Mock private ToggleSwitch mToggleSwitch;
-    @Mock private View mView;
-    @Mock private ListWithEntrySummaryPreference mButtonWfcMode;
-    @Mock private ListWithEntrySummaryPreference mButtonWfcRoamingMode;
-    @Mock private Preference mUpdateAddress;
+    @Mock
+    private static CarrierConfigManager sCarrierConfigManager;
+    @Mock
+    private CarrierConfigManager mMockConfigManager;
+    @Mock
+    private ImsMmTelManager mImsMmTelManager;
+    @Mock
+    private TelephonyManager mTelephonyManager;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
+    @Mock
+    private SettingsActivity mActivity;
+    @Mock
+    private View mView;
+    @Mock
+    private ListWithEntrySummaryPreference mButtonWfcMode;
+    @Mock
+    private ListWithEntrySummaryPreference mButtonWfcRoamingMode;
+    @Mock
+    private Preference mUpdateAddress;
 
     @Before
     public void setUp() throws Exception {
@@ -125,7 +132,7 @@ public class WifiCallingSettingsForSubTest {
         mEmptyView = new TextView(mContext);
         doReturn(mEmptyView).when(mView).findViewById(android.R.id.empty);
 
-        ReflectionHelpers.setField(mSwitchBar, "mSwitch", mToggleSwitch);
+        mSwitchBar = new SettingsMainSwitchBar(mContext);
         doReturn(mSwitchBar).when(mView).findViewById(R.id.switch_bar);
 
         mQueryImsState = new MockWifiCallingQueryImsState(mContext, SUB_ID);
@@ -364,6 +371,7 @@ public class WifiCallingSettingsForSubTest {
         }
 
         @Override
-        void showAlert(Intent intent) {}
+        void showAlert(Intent intent) {
+        }
     }
 }

@@ -42,6 +42,9 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Settings screen for configuring, deleting or switching to a specific user.
@@ -67,9 +70,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CONFIRM_ENABLE_CALLING = 2;
     private static final int DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS = 3;
     private static final int DIALOG_SETUP_USER = 4;
+    private static final int DIALOG_CONFIRM_RESET_GUEST = 5;
 
     private UserManager mUserManager;
     private UserCapabilities mUserCaps;
+    private boolean mGuestUserAutoCreated;
+    private final AtomicBoolean mGuestCreationScheduled = new AtomicBoolean();
+    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
     @VisibleForTesting
     RestrictedPreference mSwitchUserPref;
@@ -97,6 +104,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mUserCaps = UserCapabilities.create(context);
         addPreferencesFromResource(R.xml.user_details_settings);
 
+        mGuestUserAutoCreated = getPrefContext().getResources().getBoolean(
+                com.android.internal.R.bool.config_guestUserAutoCreated);
+
         initialize(context, getArguments());
     }
 
@@ -104,13 +114,20 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         mSwitchUserPref.setEnabled(canSwitchUserNow());
+        if (mGuestUserAutoCreated) {
+            mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
+        }
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference == mRemoveUserPref) {
             if (canDeleteUser()) {
-                showDialog(DIALOG_CONFIRM_REMOVE);
+                if (mUserInfo.isGuest()) {
+                    showDialog(DIALOG_CONFIRM_RESET_GUEST);
+                } else {
+                    showDialog(DIALOG_CONFIRM_REMOVE);
+                }
                 return true;
             }
         } else if (preference == mSwitchUserPref) {
@@ -144,6 +161,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE:
+            case DIALOG_CONFIRM_RESET_GUEST:
                 return SettingsEnums.DIALOG_USER_REMOVE;
             case DIALOG_CONFIRM_ENABLE_CALLING:
                 return SettingsEnums.DIALOG_USER_ENABLE_CALLING;
@@ -179,8 +197,28 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                                 switchUser();
                             }
                         });
+            case DIALOG_CONFIRM_RESET_GUEST:
+                return UserDialogs.createResetGuestDialog(getActivity(),
+                        (dialog, which) -> resetGuest());
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
+    }
+
+    /**
+     * Erase the current guest user and create a new one in the background. UserSettings will
+     * handle guest creation after receiving the {@link UserSettings.RESULT_GUEST_REMOVED} result.
+     */
+    private void resetGuest() {
+        // Just to be safe, check that the selected user is a guest
+        if (!mUserInfo.isGuest()) {
+            return;
+        }
+        mMetricsFeatureProvider.action(getActivity(),
+                SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED);
+
+        mUserManager.removeUser(mUserInfo.id);
+        setResult(UserSettings.RESULT_GUEST_REMOVED);
+        finishFragment();
     }
 
     @VisibleForTesting
@@ -206,7 +244,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
-                        mUserInfo.name));
+                        UserSettings.getUserName(context, mUserInfo)));
 
         if (mUserCaps.mDisallowSwitchUser) {
             mSwitchUserPref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
@@ -239,11 +277,17 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             if (mUserInfo.isGuest()) {
                 // These are not for an existing user, just general Guest settings.
                 // Default title is for calling and SMS. Change to calling-only here
+                // TODO(b/191483069): These settings can't be changed unless guest user exists
                 mPhonePref.setTitle(R.string.user_enable_calling);
                 mDefaultGuestRestrictions = mUserManager.getDefaultGuestRestrictions();
                 mPhonePref.setChecked(
                         !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
-                mRemoveUserPref.setTitle(R.string.user_exit_guest_title);
+                mRemoveUserPref.setTitle(mGuestUserAutoCreated
+                        ? com.android.settingslib.R.string.guest_reset_guest
+                        : R.string.user_exit_guest_title);
+                if (mGuestUserAutoCreated) {
+                    mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
+                }
             } else {
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
@@ -290,6 +334,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     void switchUser() {
         try {
+            if (mUserInfo.isGuest()) {
+                mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_SWITCH_TO_GUEST);
+            }
             ActivityManager.getService().switchUser(mUserInfo.id);
         } catch (RemoteException re) {
             Log.e(TAG, "Error while switching to other user.");
@@ -309,7 +356,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             // Update the guest's restrictions, if there is a guest
             // TODO: Maybe setDefaultGuestRestrictions() can internally just set the restrictions
             // on any existing guest rather than do it here with multiple Binder calls.
-            List<UserInfo> users = mUserManager.getUsers(true);
+            List<UserInfo> users = mUserManager.getAliveUsers();
             for (UserInfo user : users) {
                 if (user.isGuest()) {
                     UserHandle userHandle = UserHandle.of(user.id);

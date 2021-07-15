@@ -54,6 +54,8 @@ import java.util.Collections;
 public class WifiCallingSettingsTest {
     private static final int SUB_ID1 = 111;
     private static final int SUB_ID2 = 222;
+    private static final CharSequence DISPLAY_NAME1 = "Carrier1";
+    private static final CharSequence DISPLAY_NAME2 = "Carrier2";
 
     private Context mContext;
 
@@ -87,6 +89,7 @@ public class WifiCallingSettingsTest {
 
     @Test
     public void setupFragment_noSubscriptions_noCrash() {
+        SubscriptionUtil.setActiveSubscriptionsForTesting(null);
         FragmentController.setupFragment(mFragment, FragmentActivity.class, 0 /* containerViewId*/,
                 null /* bundle */);
     }
@@ -119,7 +122,11 @@ public class WifiCallingSettingsTest {
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
         when(info1.getSubscriptionId()).thenReturn(SUB_ID1);
         when(info2.getSubscriptionId()).thenReturn(SUB_ID2);
+        when(info1.getDisplayName()).thenReturn(DISPLAY_NAME1);
+        when(info2.getDisplayName()).thenReturn(DISPLAY_NAME2);
 
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(new ArrayList<>(
+                Arrays.asList(info1, info2)));
         SubscriptionUtil.setActiveSubscriptionsForTesting(new ArrayList<>(
                 Arrays.asList(info1, info2)));
 

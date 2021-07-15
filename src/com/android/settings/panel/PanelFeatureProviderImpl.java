@@ -16,9 +16,6 @@
 
 package com.android.settings.panel;
 
-import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT;
-import static com.android.settingslib.media.MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT_GROUP;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -39,16 +36,12 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
         switch (panelType) {
             case Settings.Panel.ACTION_INTERNET_CONNECTIVITY:
                 return InternetConnectivityPanel.create(context);
-            case ACTION_MEDIA_OUTPUT:
-                return MediaOutputPanel.create(context, mediaPackageName);
             case Settings.Panel.ACTION_NFC:
                 return NfcPanel.create(context);
             case Settings.Panel.ACTION_WIFI:
                 return WifiPanel.create(context);
             case Settings.Panel.ACTION_VOLUME:
                 return VolumePanel.create(context);
-            case ACTION_MEDIA_OUTPUT_GROUP:
-                return MediaOutputGroupPanel.create(context, mediaPackageName);
         }
 
         throw new IllegalStateException("No matching panel for: "  + panelType);

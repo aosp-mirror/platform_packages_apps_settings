@@ -19,16 +19,20 @@ package com.android.settings.biometrics.face;
 import android.content.Context;
 import android.os.UserHandle;
 
-import com.android.settings.R;
-
 import androidx.preference.Preference;
+
+import com.android.settings.R;
 
 public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceController {
 
     private static final String KEY_FACE_SETTINGS = "face_settings_profile";
 
     public FaceProfileStatusPreferenceController(Context context) {
-        super(context, KEY_FACE_SETTINGS);
+        this(context, KEY_FACE_SETTINGS);
+    }
+
+    public FaceProfileStatusPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override

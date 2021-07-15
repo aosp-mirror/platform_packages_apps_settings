@@ -70,7 +70,8 @@ public class FaceSettingsKeyguardPreferenceController extends FaceSettingsPrefer
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        // When the device supports multiple biometrics auth, this preference will be unavailable.
+        return Utils.isMultipleBiometricsSupported(mContext) ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
     }
 
     @Override

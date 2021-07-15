@@ -26,11 +26,12 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.MasterSwitchController;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.GenericSwitchController;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -43,8 +44,8 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
     @VisibleForTesting
     static final String STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY = "ro.storage_manager.enabled";
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private MasterSwitchPreference mSwitch;
-    private MasterSwitchController mSwitchController;
+    private PrimarySwitchPreference mSwitch;
+    private GenericSwitchController mSwitchController;
     private FragmentManager mFragmentManager;
 
     public AutomaticStorageManagementSwitchPreferenceController(Context context, String key) {
@@ -66,6 +67,9 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
 
     @Override
     public int getAvailabilityStatus() {
+        if (!mContext.getResources().getBoolean(R.bool.config_show_smart_storage_toggle)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         return !ActivityManager.isLowRamDeviceStatic() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
@@ -77,7 +81,7 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
         mSwitch.setChecked(Utils.isStorageManagerEnabled(mContext));
 
         if (mSwitch != null) {
-            mSwitchController = new MasterSwitchController(mSwitch);
+            mSwitchController = new GenericSwitchController(mSwitch);
             mSwitchController.setListener(this);
             mSwitchController.startListening();
         }

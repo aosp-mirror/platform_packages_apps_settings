@@ -48,10 +48,6 @@ public class FaceEnrollSidecar extends BiometricEnrollSidecar {
     @Override
     public void startEnrollment() {
         super.startEnrollment();
-        if (mUserId != UserHandle.USER_NULL) {
-            mFaceManager.setActiveUser(mUserId);
-        }
-
         mFaceManager.enroll(mUserId, mToken, mEnrollmentCancel,
                 mEnrollmentCallback, mDisabledFeatures);
     }

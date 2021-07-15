@@ -20,23 +20,17 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/auto_brightness_title">
 
-    <com.android.settings.widget.VideoPreference
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="auto_brightness_video"
-        android:title="@string/summary_placeholder"
-        settings:animation="@raw/aab_brightness"
-        settings:preview="@drawable/aab_brightness"
-        settings:controller="com.android.settings.widget.VideoPreferenceController"/>
+        settings:searchable="false"
+        settings:lottie_rawRes="@raw/lottie_adaptive_brightness"/>
 
-    <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
-    <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="auto_brightness"
-        android:title="@string/auto_brightness_title"
-        android:summary="@string/auto_brightness_summary"
+        android:title="@string/adaptive_brightness_main_switch_title"
         settings:keywords="@string/keywords_display_auto_brightness"
-        settings:controller="com.android.settings.display.AutoBrightnessDetailPreferenceController"
-        settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_brightness"
-        settings:allowDividerAbove="true" />
+        settings:controller="com.android.settings.display.AutoBrightnessDetailPreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="auto_brightness_footer"

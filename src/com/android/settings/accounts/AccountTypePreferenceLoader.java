@@ -58,7 +58,6 @@ public class AccountTypePreferenceLoader {
     private static final String LAUNCHING_LOCATION_SETTINGS =
         "com.android.settings.accounts.LAUNCHING_LOCATION_SETTINGS";
 
-
     private AuthenticatorHelper mAuthenticatorHelper;
     private UserHandle mUserHandle;
     private PreferenceFragmentCompat mFragment;

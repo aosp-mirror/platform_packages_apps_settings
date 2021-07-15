@@ -26,8 +26,11 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
+import android.os.Binder;
 import android.provider.Settings;
 import android.service.notification.ConditionProviderService;
+import android.util.Log;
+import android.util.Slog;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -36,6 +39,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Map;
+import java.util.Objects;
 
 abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         AbstractZenModePreferenceController implements PreferenceControllerMixin {
@@ -92,7 +96,7 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
                 ? ci.metaData.getString(ConditionProviderService.META_DATA_RULE_TYPE)
                 : ci.metaData.getString(NotificationManager.META_DATA_AUTOMATIC_RULE_TYPE);
 
-        final ComponentName configurationActivity = getSettingsActivity(null, ci);
+        final ComponentName configurationActivity = getSettingsActivity(pm, null, ci);
         if (ruleType != null && !ruleType.trim().isEmpty() && configurationActivity != null) {
             final ZenRuleInfo ri = new ZenRuleInfo();
             ri.serviceComponent =
@@ -110,28 +114,44 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         return null;
     }
 
-    protected static ComponentName getSettingsActivity(AutomaticZenRule rule, ComponentInfo ci) {
+    protected static ComponentName getSettingsActivity(PackageManager pm, AutomaticZenRule rule,
+            ComponentInfo ci) {
+        String owner = rule != null ? rule.getPackageName() : ci.packageName;
+        ComponentName settingsActivity = null;
         // prefer config activity on the rule itself; fallback to manifest definition
         if (rule != null && rule.getConfigurationActivity() != null) {
-            return rule.getConfigurationActivity();
-        }
-        if (ci == null) {
-            return null;
-        }
-        // new activity backed rule
-        if (ci instanceof ActivityInfo) {
-            return new ComponentName(ci.packageName, ci.name);
-        }
-        // old service backed rule
-        if (ci.metaData != null) {
-            final String configurationActivity = ci.metaData.getString(
-                    ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY);
-            if (configurationActivity != null) {
-                return ComponentName.unflattenFromString(configurationActivity);
+            settingsActivity = rule.getConfigurationActivity();
+        } else {
+            if (ci == null) {
+                settingsActivity = null;
+            } else if (ci instanceof ActivityInfo) {
+                // new activity backed rule
+                settingsActivity = new ComponentName(ci.packageName, ci.name);
+            } else if (ci.metaData != null) {
+                // old service backed rule
+                final String configurationActivity = ci.metaData.getString(
+                        ConditionProviderService.META_DATA_CONFIGURATION_ACTIVITY);
+                if (configurationActivity != null) {
+                    settingsActivity = ComponentName.unflattenFromString(configurationActivity);
+                }
             }
         }
-
-        return null;
+        if (settingsActivity == null || owner == null) {
+            return settingsActivity;
+        }
+        try {
+            int ownerUid = pm.getPackageUid(owner, 0);
+            int configActivityOwnerUid = pm.getPackageUid(settingsActivity.getPackageName(), 0);
+            if (ownerUid == configActivityOwnerUid) {
+                return settingsActivity;
+            } else {
+                Log.w(TAG, "Config activity not in owner package for " + rule.getName());
+                return null;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Failed to find config activity");
+            return null;
+        }
     }
 
     public class RuleNameChangeListener implements ZenRuleNameDialog.PositiveClickListener {

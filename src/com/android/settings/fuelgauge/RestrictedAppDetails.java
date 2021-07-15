@@ -44,8 +44,10 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.AppCheckBoxPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
@@ -76,6 +78,8 @@ public class RestrictedAppDetails extends DashboardFragment implements
     @VisibleForTesting
     BatteryDatabaseManager mBatteryDatabaseManager;
 
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+
     public static void startRestrictedAppDetails(InstrumentedPreferenceFragment fragment,
             List<AppInfo> appInfos) {
         final Bundle args = new Bundle();
@@ -100,7 +104,8 @@ public class RestrictedAppDetails extends DashboardFragment implements
         mIconDrawableFactory = IconDrawableFactory.newInstance(context);
         mBatteryUtils = BatteryUtils.getInstance(context);
         mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
-
+        mMetricsFeatureProvider =
+                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider();
         refreshUi();
     }
 
@@ -162,7 +167,9 @@ public class RestrictedAppDetails extends DashboardFragment implements
                             (Boolean) value);
                     fragment.setTargetFragment(this, 0 /* requestCode */);
                     fragment.show(getFragmentManager(), TAG);
-
+                    mMetricsFeatureProvider.action(getContext(),
+                            SettingsEnums.ACTION_APP_RESTRICTED_LIST_UNCHECKED,
+                            appInfo.packageName);
                     return false;
                 });
 

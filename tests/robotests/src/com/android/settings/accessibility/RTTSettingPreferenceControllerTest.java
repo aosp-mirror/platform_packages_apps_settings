@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,66 +26,64 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.ResolveInfoBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowPackageManager;
 
+/** Tests for {@link RTTSettingPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
 public class RTTSettingPreferenceControllerTest {
 
-    private Context mContext;
     private ShadowPackageManager mShadowPackageManager;
     private RTTSettingPreferenceController mController;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        mShadowPackageManager = shadowOf(mContext.getPackageManager());
-        mController = spy(new RTTSettingPreferenceController(mContext, "rtt_setting"));
+        MockitoAnnotations.initMocks(this);
+        final Context context = spy(ApplicationProvider.getApplicationContext());
+        mShadowPackageManager = shadowOf(context.getPackageManager());
+        mController = spy(new RTTSettingPreferenceController(context, "rtt_setting"));
         mController.mRTTIntent = new Intent("com.android.test.action.example");
     }
 
     @Test
-    public void getAvailabilityStatus_defaultDialerIsExpected_intentCanBeHandled_returnAVAILABLE() {
-        // Default dialer is expected.
-        doReturn(true).when(mController).isDialerSupportRTTSetting();
-        // Intent can be handled.
-        final ResolveInfo info = new ResolveInfoBuilder("pkg")
-                .setActivity("pkg", "class").build();
-        final Intent intent = new Intent("com.android.test.action.example");
-        mShadowPackageManager.addResolveInfoForIntent(intent, info);
+    public void getAvailabilityStatus_resolvedIsEmpty_shouldReturnUNSUPPORTED_ON_DEVICE() {
+        doReturn(true).when(mController).isRttSettingSupported();
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_intentIsHandledButRttSettingNotSupported_returnAVAILABLE() {
+        setupTestIntent();
+        doReturn(false).when(mController).isRttSettingSupported();
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_intentCanBeHandledAndRttSettingSupported_returnAVAILABLE() {
+        setupTestIntent();
+        doReturn(true).when(mController).isRttSettingSupported();
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
-    @Test
-    public void getAvailabilityStatus_intentCanNotBeHandled_shouldReturnUNSUPPORTED_ON_DEVICE() {
-        // Default dialer is expected.
-        doReturn(true).when(mController).isDialerSupportRTTSetting();
-        // Intent can not be handled.
-
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_defaultDialerIsNotExpected_returnUNSUPPORTED_ON_DEVICE() {
-        // Default dialer is not expected.
-        doReturn(false).when(mController).isDialerSupportRTTSetting();
-        // Intent can be handled.
+    private void setupTestIntent() {
         final ResolveInfo info = new ResolveInfoBuilder("pkg")
                 .setActivity("pkg", "class").build();
         final Intent intent = new Intent("com.android.test.action.example");
         mShadowPackageManager.addResolveInfoForIntent(intent, info);
-
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 }
