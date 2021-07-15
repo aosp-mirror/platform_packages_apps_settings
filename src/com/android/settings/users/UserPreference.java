@@ -36,7 +36,6 @@ public class UserPreference extends RestrictedPreference {
     private static final int ALPHA_DISABLED = 102;
 
     public static final int USERID_UNKNOWN = -10;
-    public static final int USERID_GUEST_DEFAULTS = -11;
     public static final Comparator<UserPreference> SERIAL_NUMBER_COMPARATOR =
             (p1, p2) -> {
 
@@ -93,8 +92,6 @@ public class UserPreference extends RestrictedPreference {
             // If the userId is unknown
             if (mUserId == USERID_UNKNOWN) {
                 return Integer.MAX_VALUE;
-            } else if (mUserId == USERID_GUEST_DEFAULTS) {
-                return Integer.MAX_VALUE - 1;
             }
             mSerialNumber = ((UserManager) getContext().getSystemService(Context.USER_SERVICE))
                     .getUserSerialNumber(mUserId);

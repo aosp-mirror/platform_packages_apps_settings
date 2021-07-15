@@ -23,6 +23,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -31,7 +32,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
@@ -39,6 +39,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceScreen;
@@ -61,7 +62,6 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 public class MobileNetworkSummaryControllerTest {
     @Mock
     private Lifecycle mLifecycle;
@@ -84,10 +84,11 @@ public class MobileNetworkSummaryControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
-        when(mContext.getSystemService(EuiccManager.class)).thenReturn(mEuiccManager);
-        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
+        doReturn(mSubscriptionManager).when(mContext).getSystemService(SubscriptionManager.class);
+        doReturn(mEuiccManager).when(mContext).getSystemService(EuiccManager.class);
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+
         when(mTelephonyManager.getNetworkCountryIso()).thenReturn("");
         when(mSubscriptionManager.isActiveSubscriptionId(anyInt())).thenReturn(true);
         when(mEuiccManager.isEnabled()).thenReturn(true);
@@ -102,14 +103,13 @@ public class MobileNetworkSummaryControllerTest {
 
     @After
     public void tearDown() {
+        SubscriptionUtil.setActiveSubscriptionsForTesting(null);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(null);
     }
 
     @Test
     public void isAvailable_wifiOnlyMode_notAvailable() {
-        final ConnectivityManager cm = mock(ConnectivityManager.class);
-        when(cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(false);
-        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(cm);
+        when(mTelephonyManager.isDataCapable()).thenReturn(false);
         when(mUserManager.isAdminUser()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -117,11 +117,8 @@ public class MobileNetworkSummaryControllerTest {
 
     @Test
     public void isAvailable_secondaryUser_notAvailable() {
-        final ConnectivityManager cm = mock(ConnectivityManager.class);
-        when(cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(true);
-        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(cm);
+        when(mTelephonyManager.isDataCapable()).thenReturn(true);
         when(mUserManager.isAdminUser()).thenReturn(false);
-
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -153,6 +150,7 @@ public class MobileNetworkSummaryControllerTest {
         when(sub1.getSubscriptionId()).thenReturn(1);
         when(sub1.getDisplayName()).thenReturn("sub1");
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("sub1");
@@ -168,6 +166,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void getSummary_oneInactivePSim_cannotDisablePsim_correctSummaryAndClickHandler() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
@@ -191,6 +190,7 @@ public class MobileNetworkSummaryControllerTest {
         when(sub1.getSubscriptionId()).thenReturn(1);
         when(sub1.getDisplayName()).thenReturn("sub1");
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         when(mSubscriptionManager.isActiveSubscriptionId(eq(1))).thenReturn(false);
         when(mSubscriptionManager.canDisablePhysicalSubscription()).thenReturn(true);
 
@@ -211,6 +211,7 @@ public class MobileNetworkSummaryControllerTest {
 
     @Test
     public void getSummary_twoSubscriptions_correctSummaryAndFragment() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
@@ -225,6 +226,7 @@ public class MobileNetworkSummaryControllerTest {
 
     @Test
     public void getSummaryAfterUpdate_twoSubscriptionsBecomesOne_correctSummaryAndFragment() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
@@ -233,6 +235,7 @@ public class MobileNetworkSummaryControllerTest {
         when(sub2.getDisplayName()).thenReturn("sub2");
 
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("2 SIMs");
@@ -253,6 +256,7 @@ public class MobileNetworkSummaryControllerTest {
 
     @Test
     public void getSummaryAfterUpdate_oneSubscriptionBecomesTwo_correctSummaryAndFragment() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
@@ -260,7 +264,9 @@ public class MobileNetworkSummaryControllerTest {
         when(sub1.getDisplayName()).thenReturn("sub1");
         when(sub2.getDisplayName()).thenReturn("sub2");
 
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
+        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
+                Arrays.asList(sub1));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("sub1");
@@ -277,6 +283,28 @@ public class MobileNetworkSummaryControllerTest {
         mController.onResume();
         assertThat(mController.getSummary()).isEqualTo("2 SIMs");
         assertThat(mPreference.getFragment()).isEqualTo(MobileNetworkListFragment.class.getName());
+    }
+
+    @Test
+    public void getSummary_providerModel_Enabled() {
+        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
+        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
+        when(sub1.getSubscriptionId()).thenReturn(1);
+        when(sub2.getSubscriptionId()).thenReturn(2);
+        when(sub1.getDisplayName()).thenReturn("sub1");
+        when(sub2.getDisplayName()).thenReturn("sub2");
+
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, true);
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        assertThat(mController.getSummary()).isEqualTo("sub1, sub2");
+
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        assertThat(mController.getSummary()).isEqualTo("2 SIMs");
     }
 
     @Test

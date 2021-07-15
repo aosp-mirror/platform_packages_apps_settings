@@ -18,9 +18,12 @@ package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.provider.Settings;
+import android.content.res.Resources;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -29,61 +32,44 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
 public class PowerMenuPreferenceControllerTest {
     private Context mContext;
+    private Resources mResources;
     private PowerMenuPreferenceController mController;
-    private ShadowPackageManager mShadowPackageManager;
 
     private static final String KEY_GESTURE_POWER_MENU = "gesture_power_menu";
-    private static final String CONTROLS_ENABLED = Settings.Secure.CONTROLS_ENABLED;
-    private static final String CONTROLS_FEATURE = PackageManager.FEATURE_CONTROLS;
-    private static final String CARDS_ENABLED = Settings.Secure.GLOBAL_ACTIONS_PANEL_ENABLED;
-    private static final String CARDS_AVAILABLE = Settings.Secure.GLOBAL_ACTIONS_PANEL_AVAILABLE;
+
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        mContext = spy(RuntimeEnvironment.application);
+        mResources = mock(Resources.class);
+        when(mResources.getBoolean(
+            com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                .thenReturn(true);
+        when(mContext.getResources()).thenReturn(mResources);
         mController = new PowerMenuPreferenceController(mContext, KEY_GESTURE_POWER_MENU);
     }
 
     @Test
-    public void getAvailabilityStatus_bothAvailable_available() {
-        Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 1);
-        mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, true);
+    public void getAvailabilityStatus_assistAvailable_available() {
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                    .thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_onlyCardsAvailable_available() {
-        Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 1);
-        mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, false);
+    public void getAvailabilityStatus_assistUnavailable_unavailable() {
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable))
+                    .thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_onlyControlsAvailable_available() {
-        Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 0);
-        mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_bothUnavailable_unavailable() {
-        Settings.Secure.putInt(mContext.getContentResolver(), CARDS_AVAILABLE, 0);
-        mShadowPackageManager.setSystemFeature(CONTROLS_FEATURE, false);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 }

@@ -25,7 +25,11 @@ public class FingerprintProfileStatusPreferenceController
     public static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings_profile";
 
     public FingerprintProfileStatusPreferenceController(Context context) {
-        super(context, KEY_FINGERPRINT_SETTINGS);
+        this(context, KEY_FINGERPRINT_SETTINGS);
+    }
+
+    public FingerprintProfileStatusPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override

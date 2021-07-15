@@ -22,11 +22,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.telephony.ims.ImsManager;
-import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;

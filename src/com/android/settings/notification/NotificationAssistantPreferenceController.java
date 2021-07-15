@@ -18,44 +18,81 @@ package com.android.settings.notification;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.UserHandle;
+import android.os.UserManager;
+import android.provider.Settings;
 
-import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.widget.CandidateInfo;
+import androidx.fragment.app.Fragment;
+
+import com.android.settings.core.TogglePreferenceController;
 
 import com.google.common.annotations.VisibleForTesting;
 
-public class NotificationAssistantPreferenceController extends BasePreferenceController {
+public class NotificationAssistantPreferenceController extends TogglePreferenceController {
+    private static final String TAG = "NASPreferenceController";
+    private static final String KEY_NAS = "notification_assistant";
+
+    private static final int AVAILABLE = 1;
+    private final UserManager mUserManager;
+    private Fragment mFragment;
+    private int mUserId = UserHandle.myUserId();
 
     @VisibleForTesting
     protected NotificationBackend mNotificationBackend;
-    private PackageManager mPackageManager;
 
-    public NotificationAssistantPreferenceController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
-        mNotificationBackend = new NotificationBackend();
-        mPackageManager = mContext.getPackageManager();
+    public NotificationAssistantPreferenceController(Context context) {
+        super(context, KEY_NAS);
+        mUserManager = UserManager.get(context);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return BasePreferenceController.AVAILABLE;
+        return AVAILABLE;
     }
 
     @Override
-    public CharSequence getSummary() {
-        CandidateInfo appSelected = new NotificationAssistantPicker.CandidateNone(mContext);
-        ComponentName assistant = mNotificationBackend.getAllowedNotificationAssistant();
-        if (assistant != null) {
-            appSelected = createCandidateInfo(assistant);
+    public boolean isChecked() {
+        ComponentName acn = mNotificationBackend.getAllowedNotificationAssistant();
+        ComponentName dcn = mNotificationBackend.getDefaultNotificationAssistant();
+        return (acn != null && acn.equals(dcn));
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        ComponentName cn = isChecked
+                ? mNotificationBackend.getDefaultNotificationAssistant() : null;
+        if (isChecked) {
+            if (mFragment == null) {
+                throw new IllegalStateException("No fragment to start activity");
+            }
+            showDialog(cn);
+            return false;
+        } else {
+            setNotificationAssistantGranted(null);
+            return true;
         }
-        return appSelected.loadLabel();
+    }
+
+    protected void setNotificationAssistantGranted(ComponentName cn) {
+        if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, mUserId) == 0) {
+            mNotificationBackend.setNASMigrationDoneAndResetDefault(mUserId, cn != null);
+        }
+        mNotificationBackend.setNotificationAssistantGranted(cn);
+    }
+
+    protected void showDialog(ComponentName cn) {
+        NotificationAssistantDialogFragment dialogFragment =
+                NotificationAssistantDialogFragment.newInstance(mFragment, cn);
+        dialogFragment.show(mFragment.getFragmentManager(), TAG);
+    }
+
+    public void setFragment(Fragment fragment) {
+        mFragment = fragment;
     }
 
     @VisibleForTesting
-    protected CandidateInfo createCandidateInfo(ComponentName cn) {
-        return new DefaultAppInfo(mContext, mPackageManager, UserHandle.myUserId(), cn);
+    void setBackend(NotificationBackend backend) {
+        mNotificationBackend = backend;
     }
 }

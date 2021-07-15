@@ -63,7 +63,7 @@ public class BluetoothAvrcpVersionPreferenceController extends DeveloperOptionsP
     public void updateState(Preference preference) {
         final ListPreference listPreference = (ListPreference) preference;
         final String currentValue = SystemProperties.get(BLUETOOTH_AVRCP_VERSION_PROPERTY);
-        int index = 0; // Defaults to AVRCP 1.4
+        int index = 0; // Defaults to AVRCP 1.5
         for (int i = 0; i < mListValues.length; i++) {
             if (TextUtils.equals(currentValue, mListValues[i])) {
                 index = i;

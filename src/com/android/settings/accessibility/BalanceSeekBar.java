@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.HapticFeedbackConstants.CLOCK_TICK;
 import static com.android.settings.Utils.isNightMode;
 
 import android.content.Context;
@@ -44,6 +45,7 @@ public class BalanceSeekBar extends SeekBar {
     private final Context mContext;
     private final Object mListenerLock = new Object();
     private OnSeekBarChangeListener mOnSeekBarChangeListener;
+    private int mLastProgress = -1;
     private final OnSeekBarChangeListener mProxySeekBarListener = new OnSeekBarChangeListener() {
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
@@ -72,6 +74,12 @@ public class BalanceSeekBar extends SeekBar {
                         && progress < mCenter + mSnapThreshold) {
                     progress = mCenter;
                     seekBar.setProgress(progress); // direct update (fromUser becomes false)
+                }
+                if (progress != mLastProgress) {
+                    if (progress == mCenter || progress == getMin() || progress == getMax()) {
+                        seekBar.performHapticFeedback(CLOCK_TICK);
+                    }
+                    mLastProgress = progress;
                 }
                 final float balance = (progress - mCenter) * 0.01f;
                 Settings.System.putFloatForUser(mContext.getContentResolver(),
@@ -115,6 +123,7 @@ public class BalanceSeekBar extends SeekBar {
                 res.getDimensionPixelSize(R.dimen.balance_seekbar_center_marker_width),
                 res.getDimensionPixelSize(R.dimen.balance_seekbar_center_marker_height));
         mCenterMarkerPaint = new Paint();
+        // TODO use a more suitable colour?
         mCenterMarkerPaint.setColor(isNightMode(context) ? Color.WHITE : Color.BLACK);
         mCenterMarkerPaint.setStyle(Paint.Style.FILL);
         // Remove the progress colour
@@ -150,11 +159,6 @@ public class BalanceSeekBar extends SeekBar {
         canvas.drawRect(mCenterMarkerRect, mCenterMarkerPaint);
         canvas.restore();
         super.onDraw(canvas);
-    }
-
-    @VisibleForTesting
-    OnSeekBarChangeListener getProxySeekBarListener() {
-        return mProxySeekBarListener;
     }
 }
 

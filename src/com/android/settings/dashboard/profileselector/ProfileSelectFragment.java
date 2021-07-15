@@ -21,6 +21,7 @@ import static android.content.Intent.EXTRA_USER_ID;
 import android.annotation.IntDef;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -113,6 +114,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         viewPager.setAdapter(new ProfileSelectFragment.ViewPagerAdapter(this));
         final TabLayout tabs = tabContainer.findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+        setupTabTextColor(tabs);
         tabContainer.setVisibility(View.VISIBLE);
         final TabLayout.Tab tab = tabs.getTabAt(selectedTab);
         tab.select();
@@ -129,6 +131,30 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         return mContentView;
     }
 
+    /**
+     * TabLayout uses ColorStateList of 2 states, selected state and empty state.
+     * It's expected to use textColorSecondary default state color as empty state tabTextColor.
+     *
+     * However, TabLayout uses textColorSecondary by a not expected state.
+     * This method sets tabTextColor with the color of expected textColorSecondary state.
+     */
+    private void setupTabTextColor(TabLayout tabLayout) {
+        final ColorStateList defaultColorStateList = tabLayout.getTabTextColors();
+        final ColorStateList resultColorStateList = new ColorStateList(
+                new int[][]{
+                    new int[]{android.R.attr.state_selected},
+                    new int[]{}
+                },
+                new int[] {
+                    defaultColorStateList.getColorForState(new int[]{android.R.attr.state_selected},
+                            Utils.getColorAttrDefaultColor(getContext(),
+                            com.android.internal.R.attr.colorAccentPrimaryVariant)),
+                    Utils.getColorAttrDefaultColor(getContext(), android.R.attr.textColorSecondary)
+                }
+        );
+        tabLayout.setTabTextColors(resultColorStateList);
+    }
+
     @Override
     public int getMetricsCategory() {
         return METRICS_CATEGORY_UNKNOWN;
@@ -142,7 +168,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.dummy_preference_screen;
+        return R.xml.placeholder_preference_screen;
     }
 
     @Override

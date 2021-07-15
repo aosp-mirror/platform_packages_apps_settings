@@ -35,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
@@ -60,11 +61,19 @@ public class AccessibilityServiceWarning {
         return false;
     };
 
+    /**
+     * The interface to execute the uninstallation action.
+     */
+    interface UninstallActionPerformer {
+        void uninstallPackage();
+    }
+
     /** Returns a {@link Dialog} to be shown to confirm that they want to enable a service. */
-    public static Dialog createCapabilitiesDialog(Context context,
-            AccessibilityServiceInfo info, View.OnClickListener listener) {
+    public static Dialog createCapabilitiesDialog(@NonNull Context context,
+            @NonNull AccessibilityServiceInfo info, @NonNull View.OnClickListener listener,
+            @NonNull UninstallActionPerformer performer) {
         final AlertDialog ad = new AlertDialog.Builder(context)
-                .setView(createEnableDialogContentView(context, info, listener))
+                .setView(createEnableDialogContentView(context, info, listener, performer))
                 .create();
 
         Window window = ad.getWindow();
@@ -88,7 +97,8 @@ public class AccessibilityServiceWarning {
     }
 
     private static View createEnableDialogContentView(Context context,
-            AccessibilityServiceInfo info, View.OnClickListener listener) {
+            @NonNull AccessibilityServiceInfo info, View.OnClickListener listener,
+            UninstallActionPerformer performer) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
 
@@ -129,6 +139,14 @@ public class AccessibilityServiceWarning {
         permissionAllowButton.setOnTouchListener(filterTouchListener);
         permissionDenyButton.setOnClickListener(listener);
 
+        final Button uninstallButton = content.findViewById(
+                R.id.permission_enable_uninstall_button);
+        // Shows an uninstall button to help users quickly remove the non-system App due to the
+        // required permissions.
+        if (!AccessibilityUtil.isSystemApp(info)) {
+            uninstallButton.setVisibility(View.VISIBLE);
+            uninstallButton.setOnClickListener(v -> performer.uninstallPackage());
+        }
         return content;
     }
 

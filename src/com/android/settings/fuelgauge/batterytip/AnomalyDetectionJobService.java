@@ -46,7 +46,7 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -96,8 +96,8 @@ public class AnomalyDetectionJobService extends JobService {
             final BatteryUtils batteryUtils = BatteryUtils.getInstance(this);
             final ContentResolver contentResolver = getContentResolver();
             final UserManager userManager = getSystemService(UserManager.class);
-            final PowerWhitelistBackend powerWhitelistBackend =
-                    PowerWhitelistBackend.getInstance(context);
+            final PowerAllowlistBackend powerAllowlistBackend =
+                    PowerAllowlistBackend.getInstance(context);
             final PowerUsageFeatureProvider powerUsageFeatureProvider = FeatureFactory
                     .getFactory(this).getPowerUsageFeatureProvider(this);
             final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory
@@ -105,7 +105,7 @@ public class AnomalyDetectionJobService extends JobService {
 
             for (JobWorkItem item = dequeueWork(params); item != null; item = dequeueWork(params)) {
                 saveAnomalyToDatabase(context, userManager,
-                        batteryDatabaseManager, batteryUtils, policy, powerWhitelistBackend,
+                        batteryDatabaseManager, batteryUtils, policy, powerAllowlistBackend,
                         contentResolver, powerUsageFeatureProvider, metricsFeatureProvider,
                         item.getIntent().getExtras());
 
@@ -127,7 +127,7 @@ public class AnomalyDetectionJobService extends JobService {
     @VisibleForTesting
     void saveAnomalyToDatabase(Context context, UserManager userManager,
             BatteryDatabaseManager databaseManager, BatteryUtils batteryUtils,
-            BatteryTipPolicy policy, PowerWhitelistBackend powerWhitelistBackend,
+            BatteryTipPolicy policy, PowerAllowlistBackend powerAllowlistBackend,
             ContentResolver contentResolver, PowerUsageFeatureProvider powerUsageFeatureProvider,
             MetricsFeatureProvider metricsFeatureProvider, Bundle bundle) {
         // The Example of intentDimsValue is: 35:{1:{1:{1:10013|}|}|}
@@ -151,7 +151,7 @@ public class AnomalyDetectionJobService extends JobService {
             final String packageName = batteryUtils.getPackageName(uid);
             final long versionCode = batteryUtils.getAppLongVersionCode(packageName);
             final String versionedPackage = packageName + "/" + versionCode;
-            if (batteryUtils.shouldHideAnomaly(powerWhitelistBackend, uid, anomalyInfo)) {
+            if (batteryUtils.shouldHideAnomaly(powerAllowlistBackend, uid, anomalyInfo)) {
                 metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
                         SettingsEnums.ACTION_ANOMALY_IGNORED,
                         SettingsEnums.PAGE_UNKNOWN,

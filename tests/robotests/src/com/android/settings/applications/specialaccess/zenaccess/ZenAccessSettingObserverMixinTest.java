@@ -65,7 +65,7 @@ public class ZenAccessSettingObserverMixinTest {
     }
 
     @Test
-    public void onStart_lowMemory_shouldNotRegisterListener() {
+    public void onStart_shouldRegisterListener() {
         final ShadowActivityManager sam = Shadow.extract(
                 mContext.getSystemService(ActivityManager.class));
         sam.setIsLowRamDevice(true);
@@ -73,36 +73,18 @@ public class ZenAccessSettingObserverMixinTest {
         mLifecycle.handleLifecycleEvent(ON_START);
 
         mContext.getContentResolver().notifyChange(Settings.Secure.getUriFor(
-                Settings.Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES), null);
-
-        verify(mListener, never()).onZenAccessPolicyChanged();
-    }
-
-    @Test
-    public void onStart_highMemory_shouldRegisterListener() {
-        final ShadowActivityManager sam = Shadow.extract(
-                mContext.getSystemService(ActivityManager.class));
-        sam.setIsLowRamDevice(false);
-
-        mLifecycle.handleLifecycleEvent(ON_START);
-
-        mContext.getContentResolver().notifyChange(Settings.Secure.getUriFor(
-                Settings.Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES), null);
+                Settings.Secure.ENABLED_NOTIFICATION_LISTENERS), null);
 
         verify(mListener).onZenAccessPolicyChanged();
     }
 
     @Test
     public void onStop_shouldUnregisterListener() {
-        final ShadowActivityManager sam = Shadow.extract(
-                mContext.getSystemService(ActivityManager.class));
-        sam.setIsLowRamDevice(false);
-
         mLifecycle.handleLifecycleEvent(ON_START);
         mLifecycle.handleLifecycleEvent(ON_STOP);
 
         mContext.getContentResolver().notifyChange(Settings.Secure.getUriFor(
-                Settings.Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES), null);
+                Settings.Secure.ENABLED_NOTIFICATION_LISTENERS), null);
 
         verify(mListener, never()).onZenAccessPolicyChanged();
     }

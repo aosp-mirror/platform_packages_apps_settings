@@ -21,9 +21,8 @@
         android:key="pref_app_header"
         android:layout="@layout/settings_entity_header" />
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="block"
-        android:layout="@layout/styled_switch_bar" />
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="block" />
 
     <!-- Channels added here -->
 
@@ -32,9 +31,9 @@
         android:title="@string/app_settings_link"
         settings:allowDividerAbove="true"/>
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="desc" />
 
-    <com.android.settings.notification.NotificationFooterPreference
+    <com.android.settingslib.widget.FooterPreference
         android:key="block_desc" />
 </PreferenceScreen>

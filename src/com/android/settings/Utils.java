@@ -48,12 +48,14 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
+import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
@@ -83,6 +85,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -92,6 +95,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.drawable.IconCompat;
@@ -109,8 +113,8 @@ import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.ActionBarShadowController;
+import com.android.settingslib.widget.AdaptiveIcon;
 
-import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -140,6 +144,24 @@ public final class Utils extends com.android.settingslib.Utils {
      * Whether to show the Permissions Hub.
      */
     public static final String PROPERTY_PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
+
+    /**
+     * Whether to show location indicators.
+     */
+    public static final String PROPERTY_LOCATION_INDICATORS_ENABLED = "location_indicators_enabled";
+
+    /**
+     * Whether to show location indicator settings in developer options.
+     */
+    public static final String PROPERTY_LOCATION_INDICATOR_SETTINGS_ENABLED =
+            "location_indicator_settings_enabled";
+
+    /** Whether or not app hibernation is enabled on the device **/
+    public static final String PROPERTY_APP_HIBERNATION_ENABLED = "app_hibernation_enabled";
+
+    /** Whether or not app hibernation targets apps that target a pre-S SDK **/
+    public static final String PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS =
+            "app_hibernation_targets_pre_s_apps";
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -231,13 +253,13 @@ public final class Utils extends com.android.settingslib.Utils {
 
     private static String formatIpAddresses(LinkProperties prop) {
         if (prop == null) return null;
-        final Iterator<InetAddress> iter = prop.getAllAddresses().iterator();
+        final Iterator<LinkAddress> iter = prop.getAllLinkAddresses().iterator();
         // If there are no entries, return null
         if (!iter.hasNext()) return null;
         // Concatenate all available addresses, comma separated
         String addresses = "";
         while (iter.hasNext()) {
-            addresses += iter.next().getHostAddress();
+            addresses += iter.next().getAddress().getHostAddress();
             if (iter.hasNext()) addresses += "\n";
         }
         return addresses;
@@ -265,6 +287,15 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static boolean isBatteryPresent(Intent batteryChangedIntent) {
         return batteryChangedIntent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, true);
+    }
+
+    /**
+     * Return true if battery is present.
+     */
+    public static boolean isBatteryPresent(Context context) {
+        Intent batteryBroadcast = context.registerReceiver(null /* receiver */,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return isBatteryPresent(batteryBroadcast);
     }
 
     public static String getBatteryPercentage(Intent batteryChangedIntent) {
@@ -437,6 +468,19 @@ public final class Utils extends com.android.settingslib.Utils {
         return UserHandle.USER_NULL;
     }
 
+    /** Returns user ID of current user, throws IllegalStateException if it's not available. */
+    public static int getCurrentUserId(UserManager userManager, boolean isWorkProfile)
+            throws IllegalStateException {
+        if (isWorkProfile) {
+            final UserHandle managedUserHandle = getManagedProfile(userManager);
+            if (managedUserHandle == null) {
+                throw new IllegalStateException("Work profile user ID is not available.");
+            }
+            return managedUserHandle.getIdentifier();
+        }
+        return UserHandle.myUserId();
+    }
+
     /**
      * Returns the target user for a Settings activity.
      * <p>
@@ -525,7 +569,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * @return UserInfo of the user or null for non-existent user.
      */
     public static UserInfo getExistingUser(UserManager userManager, UserHandle checkUser) {
-        final List<UserInfo> users = userManager.getUsers(true /* excludeDying */);
+        final List<UserInfo> users = userManager.getAliveUsers();
         final int checkUserId = checkUser.getIdentifier();
         for (UserInfo user : users) {
             if (user.id == checkUserId) {
@@ -634,7 +678,7 @@ public final class Utils extends com.android.settingslib.Utils {
      *
      * @param isInternal indicating if the caller is "internal" to the system,
      *            meaning we're willing to trust extras like
-     *            {@link ChooseLockSettingsHelper#EXTRA_ALLOW_ANY_USER}.
+     *            {@link ChooseLockSettingsHelper#EXTRA_KEY_ALLOW_ANY_USER}.
      * @throws SecurityException if the given userId does not belong to the
      *             current user group.
      */
@@ -643,7 +687,7 @@ public final class Utils extends com.android.settingslib.Utils {
             return getCredentialOwnerUserId(context);
         }
         final boolean allowAnyUser = isInternal
-                && bundle.getBoolean(ChooseLockSettingsHelper.EXTRA_ALLOW_ANY_USER, false);
+                && bundle.getBoolean(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, false);
         final int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         if (userId == LockPatternUtils.USER_FRP) {
             return allowAnyUser ? userId : enforceSystemUser(context, userId);
@@ -818,6 +862,13 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Return true if the device supports multiple biometrics authentications.
+     */
+    public static boolean isMultipleBiometricsSupported(Context context) {
+        return hasFingerprintHardware(context) && hasFaceHardware(context);
+    }
+
+    /**
      * Launches an intent which may optionally have a user id defined.
      * @param fragment Fragment to use to launch the activity.
      * @param intent Intent to launch.
@@ -936,15 +987,36 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Sets the preference icon with a drawable that is scaled down to to avoid crashing Settings if
-     * it's too big.
+     * Gets the adaptive icon with a drawable that wrapped with an adaptive background using {@code
+     * backgroundColor} if it is not a {@link AdaptiveIconDrawable}
+     *
+     * If the given {@code icon} is too big, it will be auto scaled down to to avoid crashing
+     * Settings.
      */
-    public static void setSafeIcon(Preference pref, Drawable icon) {
+    public static Drawable getAdaptiveIcon(Context context, Drawable icon,
+            @ColorInt int backgroundColor) {
+        Drawable adaptiveIcon = getSafeIcon(icon);
+
+        if (!(adaptiveIcon instanceof AdaptiveIconDrawable)) {
+            adaptiveIcon = new AdaptiveIcon(context, adaptiveIcon);
+            ((AdaptiveIcon) adaptiveIcon).setBackgroundColor(backgroundColor);
+        }
+
+        return adaptiveIcon;
+    }
+
+    /**
+     * Gets the icon with a drawable that is scaled down to to avoid crashing Settings if it's too
+     * big and not a {@link VectorDrawable}.
+     */
+    public static Drawable getSafeIcon(Drawable icon) {
         Drawable safeIcon = icon;
+
         if ((icon != null) && !(icon instanceof VectorDrawable)) {
             safeIcon = getSafeDrawable(icon, 500, 500);
         }
-        pref.setIcon(safeIcon);
+
+        return safeIcon;
     }
 
     /**
@@ -954,7 +1026,7 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param maxWidth maximum width, in pixels.
      * @param maxHeight maximum height, in pixels.
      */
-    public static Drawable getSafeDrawable(Drawable original, int maxWidth, int maxHeight) {
+    private static Drawable getSafeDrawable(Drawable original, int maxWidth, int maxHeight) {
         final int actualWidth = original.getMinimumWidth();
         final int actualHeight = original.getMinimumHeight();
 
@@ -1086,13 +1158,17 @@ public final class Utils extends com.android.settingslib.Utils {
                 == ProfileSelectFragment.ProfileType.PERSONAL : false;
         final boolean isWork = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK : false;
-        if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
-                && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
-                && !isWork && !isPersonal) {
-            f = Fragment.instantiate(activity, ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName),
-                    args);
-        } else {
-            f = Fragment.instantiate(activity, fragmentName, args);
+        try {
+            if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
+                    && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
+                    && !isWork && !isPersonal) {
+                f = Fragment.instantiate(activity,
+                        ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName), args);
+            } else {
+                f = Fragment.instantiate(activity, fragmentName, args);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Unable to get target fragment", e);
         }
         return f;
     }
@@ -1136,5 +1212,17 @@ public final class Utils extends com.android.settingslib.Utils {
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
         return roundedBitmap;
+    }
+
+    /**
+     * Returns the color of homepage preference icons.
+     */
+    @ColorInt
+    public static int getHomepageIconColor(Context context) {
+        return getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
+    }
+
+    public static boolean isProviderModelEnabled(Context context) {
+        return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
     }
 }

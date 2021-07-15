@@ -16,6 +16,9 @@
 
 package com.android.settings.core;
 
+import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_PAGE_SCROLL;
+import static com.android.internal.jank.InteractionJankMonitor.Configuration;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,7 +27,9 @@ import android.util.Log;
 import androidx.annotation.XmlRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.jank.InteractionJankMonitor;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.survey.SurveyMixin;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -47,6 +52,7 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     protected final int PLACEHOLDER_METRIC = 10000;
 
     private VisibilityLoggerMixin mVisibilityLoggerMixin;
+    private RecyclerView.OnScrollListener mOnScrollListener;
 
     @Override
     public void onAttach(Context context) {
@@ -62,7 +68,23 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     @Override
     public void onResume() {
         mVisibilityLoggerMixin.setSourceMetricsCategory(getActivity());
+        // Add scroll listener to trace interaction jank.
+        final RecyclerView recyclerView = getListView();
+        if (recyclerView != null) {
+            mOnScrollListener = new OnScrollListener(getClass().getName());
+            recyclerView.addOnScrollListener(mOnScrollListener);
+        }
         super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        final RecyclerView recyclerView = getListView();
+        if (mOnScrollListener != null) {
+            recyclerView.removeOnScrollListener(mOnScrollListener);
+            mOnScrollListener = null;
+        }
+        super.onPause();
     }
 
     @Override
@@ -123,4 +145,29 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         }
     }
 
+    private static final class OnScrollListener extends RecyclerView.OnScrollListener {
+        private final InteractionJankMonitor mMonitor = InteractionJankMonitor.getInstance();
+        private final String mClassName;
+
+        private OnScrollListener(String className) {
+            mClassName = className;
+        }
+
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            switch (newState) {
+                case RecyclerView.SCROLL_STATE_DRAGGING:
+                    final Configuration.Builder builder =
+                            new Configuration.Builder(CUJ_SETTINGS_PAGE_SCROLL)
+                                    .setView(recyclerView)
+                                    .setTag(mClassName);
+                    mMonitor.begin(builder);
+                    break;
+                case RecyclerView.SCROLL_STATE_IDLE:
+                    mMonitor.end(CUJ_SETTINGS_PAGE_SCROLL);
+                    break;
+                default:
+            }
+        }
+    }
 }

@@ -21,13 +21,9 @@
     android:title="@string/accessibility_control_timeout_preference_title"
     android:persistent="false" >
 
-    <com.android.settings.widget.VideoPreference
-        android:key="accessibility_control_timeout_video"
-        android:title="@string/summary_placeholder"
-        settings:animation="@raw/accessibility_timeout"
-        settings:preview="@drawable/accessibility_timeout"
-        settings:controller="com.android.settings.widget.VideoPreferenceController"
-        android:persistent="false" />
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="accessibility_control_timeout_banner"
+        settings:lottie_rawRes="@raw/accessibility_timeout_banner"/>
 
     <com.android.settingslib.widget.RadioButtonPreference
         android:key="accessibility_control_timeout_default"
@@ -55,8 +51,11 @@
         android:title="@string/accessibility_timeout_2mins"
         android:persistent="false" />
 
-    <com.android.settingslib.widget.FooterPreference
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="accessibility_control_timeout_footer"
         android:title="@string/accessibility_control_timeout_preference_summary"
-        android:selectable="false" />
-
+        android:persistent="false"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.AccessibilityControlTimeoutFooterPreferenceController"/>
 </PreferenceScreen>

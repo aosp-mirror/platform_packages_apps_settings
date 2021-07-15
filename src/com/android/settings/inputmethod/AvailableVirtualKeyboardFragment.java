@@ -91,11 +91,19 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
         List<String> permittedList = mDpm.getPermittedInputMethodsForCurrentUser();
         final Context context = getPrefContext();
         final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
+        final List<InputMethodInfo> enabledImis = mImm.getEnabledInputMethodList();
         final int numImis = (imis == null ? 0 : imis.size());
         for (int i = 0; i < numImis; ++i) {
             final InputMethodInfo imi = imis.get(i);
+            // TODO (b/182876800): Move this logic out of isAllowedByOrganization and
+            // into a new boolean.
+            // If an input method is enabled but not included in the permitted list, then set it as
+            // allowed by organization. Doing so will allow the user to disable the input method and
+            // remain complaint with the organization's policy. Once disabled, the input method
+            // cannot be re-enabled because it is not in the permitted list.
             final boolean isAllowedByOrganization = permittedList == null
-                    || permittedList.contains(imi.getPackageName());
+                    || permittedList.contains(imi.getPackageName())
+                    || enabledImis.contains(imi);
             final InputMethodPreference pref = new InputMethodPreference(
                     context, imi, true, isAllowedByOrganization, this);
             pref.setIcon(imi.loadIcon(context.getPackageManager()));

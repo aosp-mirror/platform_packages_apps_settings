@@ -18,6 +18,8 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -25,20 +27,29 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothPan;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.FeatureFlagUtils;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.FeatureFlags;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -56,6 +67,8 @@ public class TetherSettingsTest {
     private ConnectivityManager mConnectivityManager;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private TetheringManager mTetheringManager;
 
     @Before
     public void setUp() {
@@ -66,11 +79,13 @@ public class TetherSettingsTest {
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
         doReturn(mUserManager)
                 .when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(mTetheringManager)
+                .when(mContext).getSystemService(Context.TETHERING_SERVICE);
 
         setupIsTetherAvailable(true);
 
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
     }
 
     @Test
@@ -100,7 +115,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_usbNotAvailable_usbKeyReturned() {
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -113,7 +128,7 @@ public class TetherSettingsTest {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         // We can ignore the condition of Utils.isMonkeyRunning()
         // In normal case, monkey and robotest should not execute at the same time
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{"dummyRegex"});
+        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[]{"fakeRegex"});
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -123,7 +138,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_bluetoothNotAvailable_bluetoothKeyReturned() {
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -134,8 +149,8 @@ public class TetherSettingsTest {
     @Test
     public void testTetherNonIndexableKeys_bluetoothAvailable_bluetoothKeyNotReturned() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
-        when(mConnectivityManager.getTetherableBluetoothRegexs())
-                .thenReturn(new String[]{"dummyRegex"});
+        when(mTetheringManager.getTetherableBluetoothRegexs())
+                .thenReturn(new String[]{"fakeRegex"});
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -148,16 +163,92 @@ public class TetherSettingsTest {
         final TetherSettings spyTetherSettings = spy(new TetherSettings());
         when(spyTetherSettings.getContext()).thenReturn(mContext);
         final Preference mockPreference = mock(Preference.class);
-        when(spyTetherSettings.findPreference(TetherSettings.KEY_TETHER_PREFS_FOOTER))
+        when(spyTetherSettings.findPreference(TetherSettings.KEY_TETHER_PREFS_TOP_INTRO))
             .thenReturn(mockPreference);
         final WifiManager mockWifiManager = mock(WifiManager.class);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mockWifiManager);
         when(mockWifiManager.isStaApConcurrencySupported()).thenReturn(true);
 
-        spyTetherSettings.setFooterPreferenceTitle();
+        spyTetherSettings.setTopIntroPreferenceTitle();
 
         verify(mockPreference, never()).setTitle(R.string.tethering_footer_info);
         verify(mockPreference).setTitle(R.string.tethering_footer_info_sta_ap_concurrency);
+    }
+
+    @Test
+    public void testBluetoothState_updateBluetoothState_bluetoothTetheringStateOn() {
+        final TetherSettings spyTetherSettings = spy(new TetherSettings());
+        when(spyTetherSettings.getContext()).thenReturn(mContext);
+        final SwitchPreference mockSwitchPreference = mock(SwitchPreference.class);
+        when(spyTetherSettings.findPreference(TetherSettings.KEY_ENABLE_BLUETOOTH_TETHERING))
+            .thenReturn(mockSwitchPreference);
+        final FragmentActivity mockActivity = mock(FragmentActivity.class);
+        when(spyTetherSettings.getActivity()).thenReturn(mockActivity);
+        final ArgumentCaptor<BroadcastReceiver> captor =
+                ArgumentCaptor.forClass(BroadcastReceiver.class);
+        when(mockActivity.registerReceiver(captor.capture(), any(IntentFilter.class)))
+            .thenReturn(null);
+        // Bluetooth tethering state is on
+        when(spyTetherSettings.getBluetoothState()).thenReturn(BluetoothAdapter.STATE_ON);
+        when(spyTetherSettings.isBluetoothTetheringOn()).thenReturn(true);
+
+        spyTetherSettings.setupTetherPreference();
+        spyTetherSettings.registerReceiver();
+        updateOnlyBluetoothState(spyTetherSettings);
+
+        // Simulate Bluetooth tethering state changed
+        final BroadcastReceiver receiver = captor.getValue();
+        final Intent bluetoothTetheringOn = new Intent(BluetoothPan.ACTION_TETHERING_STATE_CHANGED);
+        bluetoothTetheringOn.putExtra(BluetoothPan.EXTRA_TETHERING_STATE,
+                BluetoothPan.TETHERING_STATE_ON);
+        receiver.onReceive(mockActivity, bluetoothTetheringOn);
+
+        verify(mockSwitchPreference).setEnabled(true);
+        verify(mockSwitchPreference).setChecked(true);
+    }
+
+    @Test
+    public void testBluetoothState_updateBluetoothState_bluetoothTetheringStateOff() {
+        final TetherSettings spyTetherSettings = spy(new TetherSettings());
+        when(spyTetherSettings.getContext()).thenReturn(mContext);
+        final SwitchPreference mockSwitchPreference = mock(SwitchPreference.class);
+        when(spyTetherSettings.findPreference(TetherSettings.KEY_ENABLE_BLUETOOTH_TETHERING))
+            .thenReturn(mockSwitchPreference);
+        final FragmentActivity mockActivity = mock(FragmentActivity.class);
+        when(spyTetherSettings.getActivity()).thenReturn(mockActivity);
+        final ArgumentCaptor<BroadcastReceiver> captor =
+                ArgumentCaptor.forClass(BroadcastReceiver.class);
+        when(mockActivity.registerReceiver(captor.capture(), any(IntentFilter.class)))
+            .thenReturn(null);
+        // Bluetooth tethering state is off
+        when(spyTetherSettings.getBluetoothState()).thenReturn(BluetoothAdapter.STATE_ON);
+        when(spyTetherSettings.isBluetoothTetheringOn()).thenReturn(false);
+
+        spyTetherSettings.setupTetherPreference();
+        spyTetherSettings.registerReceiver();
+        updateOnlyBluetoothState(spyTetherSettings);
+
+        // Simulate Bluetooth tethering state changed
+        final BroadcastReceiver receiver = captor.getValue();
+        final Intent bluetoothTetheringOn = new Intent(BluetoothPan.ACTION_TETHERING_STATE_CHANGED);
+        bluetoothTetheringOn.putExtra(BluetoothPan.EXTRA_TETHERING_STATE,
+                BluetoothPan.TETHERING_STATE_ON);
+        receiver.onReceive(mockActivity, bluetoothTetheringOn);
+
+        verify(mockSwitchPreference).setEnabled(true);
+        verify(mockSwitchPreference).setChecked(false);
+    }
+
+    private void updateOnlyBluetoothState(TetherSettings tetherSettings) {
+        doReturn(mTetheringManager).when(tetherSettings)
+            .getSystemService(Context.TETHERING_SERVICE);
+        when(mTetheringManager.getTetherableIfaces()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetheredIfaces()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetheringErroredIfaces()).thenReturn(new String[0]);
+        doNothing().when(tetherSettings).updateUsbState(any(String[].class), any(String[].class),
+                any(String[].class));
+        doNothing().when(tetherSettings).updateEthernetState(any(String[].class),
+                any(String[].class));
     }
 
     private void setupIsTetherAvailable(boolean returnValue) {

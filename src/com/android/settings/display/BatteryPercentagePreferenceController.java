@@ -17,15 +17,19 @@ package com.android.settings.display;
 
 import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * A controller to manage the switch for showing battery percentage in the status bar.
@@ -34,12 +38,27 @@ import com.android.settings.core.PreferenceControllerMixin;
 public class BatteryPercentagePreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
+    private Preference mPreference;
+
     public BatteryPercentagePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+        if (!Utils.isBatteryPresent(mContext)) {
+            // Disable battery percentage
+            onPreferenceChange(mPreference, false /* newValue */);
+        }
+    }
+
+    @Override
     public int getAvailabilityStatus() {
+        if (!Utils.isBatteryPresent(mContext)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return mContext.getResources().getBoolean(
                 R.bool.config_battery_percentage_setting_available) ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
@@ -58,6 +77,8 @@ public class BatteryPercentagePreferenceController extends BasePreferenceControl
         boolean showPercentage = (Boolean) newValue;
         Settings.System.putInt(mContext.getContentResolver(), SHOW_BATTERY_PERCENT,
                 showPercentage ? 1 : 0);
+        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+                .action(mContext, SettingsEnums.OPEN_BATTERY_PERCENTAGE, showPercentage);
         return true;
     }
 }

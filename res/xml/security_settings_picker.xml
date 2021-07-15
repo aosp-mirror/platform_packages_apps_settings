@@ -16,32 +16,36 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
-        android:title="@string/lock_settings_picker_title"
         android:key="lock_settings_picker">
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_off"
             android:title="@string/unlock_set_unlock_off_title"
+            android:icon="@drawable/ic_lock_none"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_none"
             android:title="@string/unlock_set_unlock_none_title"
+            android:icon="@drawable/ic_lock_swipe"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_pattern"
             android:title="@string/unlock_set_unlock_pattern_title"
+            android:icon="@drawable/ic_pattern"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_pin"
             android:title="@string/unlock_set_unlock_pin_title"
+            android:icon="@drawable/ic_lock_pin"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
             android:key="unlock_set_password"
             android:title="@string/unlock_set_unlock_password_title"
+            android:icon="@drawable/ic_password"
             android:persistent="false"/>
 
     <com.android.settingslib.RestrictedPreference
@@ -57,6 +61,11 @@
             android:key="unlock_skip_face"
             android:title="@string/face_unlock_skip_face"
             android:persistent="false"/>
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="unlock_skip_biometrics"
+        android:title="@string/biometrics_unlock_skip_biometrics"
+        android:persistent="false"/>
 
     <com.android.settingslib.widget.FooterPreference
             android:key="lock_settings_footer"
