@@ -24,11 +24,9 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
 
-/** Dashboard Fragment to display all recent location requests, sorted by recency. */
-@SearchIndexable
+/** @deprecated Use {@link RecentLocationAccessSeeAllFragment} instead. */
+@Deprecated
 public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
     private static final String TAG = "RecentLocationReqAll";
     public static final String PATH =
@@ -99,10 +97,4 @@ public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
                 R.string.menu_hide_system);
         updateMenu();
     }
-
-    /**
-     * For Search.
-     */
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.location_recent_requests_see_all);
 }

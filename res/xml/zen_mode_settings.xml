@@ -42,6 +42,7 @@
         <Preference
             android:key="zen_mode_behavior_apps"
             android:title="@string/zen_category_apps"
+            android:summary=" "
             android:fragment="com.android.settings.notification.zen.ZenModeBypassingAppsSettings" />
 
         <!-- All sounds -->
@@ -52,15 +53,18 @@
     </PreferenceCategory>
 
     <!-- Automatic rules -->
-    <Preference
-        android:key="zen_mode_automation_settings"
-        android:title="@string/zen_category_schedule"
-        settings:allowDividerAbove="true"
-        android:fragment="com.android.settings.notification.zen.ZenModeAutomationSettings"/>
+    <PreferenceCategory
+        android:key="zen_mode_settings_schedule"
+        android:title="@string/zen_category_schedule">
+        <Preference
+            android:key="zen_mode_automation_settings"
+            android:title="@string/zen_category_schedule"
+            android:fragment="com.android.settings.notification.zen.ZenModeAutomationSettings"/>
+    </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="zen_mode_settings_advanced"
-        settings:initialExpandedChildrenCount="0">
+        android:title="@string/zen_settings_general"
+        android:key="zen_mode_settings_advanced">
 
         <!-- DND duration settings -->
         <com.android.settings.notification.zen.ZenDurationDialogPreference

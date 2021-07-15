@@ -88,9 +88,6 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
      */
     private int[] mWifiDppRemoteBandSupport;
 
-    /** Secret extra that allows fake networks to show in UI for testing purposes */
-    private boolean mIsTest;
-
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR;
@@ -147,32 +144,8 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
                 }
                 break;
             case Settings.ACTION_PROCESS_WIFI_EASY_CONNECT_URI:
-                final Uri uri = intent.getData();
-                final String uriString = (uri == null) ? null : uri.toString();
-                mIsTest = intent.getBooleanExtra(WifiDppUtils.EXTRA_TEST, false);
-                mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(uriString);
-                mWifiDppRemoteBandSupport = intent.getIntArrayExtra(
-                        Settings.EXTRA_EASY_CONNECT_BAND_LIST); // returns null if none
-                final boolean isDppSupported = WifiDppUtils.isWifiDppEnabled(this);
-                if (!isDppSupported) {
-                    Log.e(TAG,
-                            "ACTION_PROCESS_WIFI_EASY_CONNECT_URI for a device that doesn't "
-                                    + "support Wifi DPP - use WifiManager#isEasyConnectSupported");
-                }
-                if (mWifiDppQrCode == null) {
-                    Log.e(TAG, "ACTION_PROCESS_WIFI_EASY_CONNECT_URI with null URI!");
-                }
-                if (mWifiDppQrCode == null || !isDppSupported) {
-                    cancelActivity = true;
-                } else {
-                    final WifiNetworkConfig connectedConfig = getConnectedWifiNetworkConfigOrNull();
-                    if (connectedConfig == null || !connectedConfig.isSupportWifiDpp(this)) {
-                        showChooseSavedWifiNetworkFragment(/* addToBackStack */ false);
-                    } else {
-                        mWifiNetworkConfig = connectedConfig;
-                        showAddDeviceFragment(/* addToBackStack */ false);
-                    }
-                }
+                WifiDppUtils.showLockScreen(this,
+                        () -> handleActionProcessWifiEasyConnectUriIntent(intent));
                 break;
             default:
                 cancelActivity = true;
@@ -181,6 +154,34 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
 
         if (cancelActivity) {
             finish();
+        }
+    }
+
+    private void handleActionProcessWifiEasyConnectUriIntent(Intent intent) {
+        final Uri uri = intent.getData();
+        final String uriString = (uri == null) ? null : uri.toString();
+        mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(uriString);
+        mWifiDppRemoteBandSupport = intent.getIntArrayExtra(
+                Settings.EXTRA_EASY_CONNECT_BAND_LIST); // returns null if none
+        final boolean isDppSupported = WifiDppUtils.isWifiDppEnabled(this);
+        if (!isDppSupported) {
+            Log.e(TAG,
+                    "ACTION_PROCESS_WIFI_EASY_CONNECT_URI for a device that doesn't "
+                            + "support Wifi DPP - use WifiManager#isEasyConnectSupported");
+        }
+        if (mWifiDppQrCode == null) {
+            Log.e(TAG, "ACTION_PROCESS_WIFI_EASY_CONNECT_URI with null URI!");
+        }
+        if (mWifiDppQrCode == null || !isDppSupported) {
+            finish();
+        } else {
+            final WifiNetworkConfig connectedConfig = getConnectedWifiNetworkConfigOrNull();
+            if (connectedConfig == null || !connectedConfig.isSupportWifiDpp(this)) {
+                showChooseSavedWifiNetworkFragment(/* addToBackStack */ false);
+            } else {
+                mWifiNetworkConfig = connectedConfig;
+                showAddDeviceFragment(/* addToBackStack */ false);
+            }
         }
     }
 
@@ -239,11 +240,6 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
 
         if (fragment == null) {
             fragment = new WifiDppChooseSavedWifiNetworkFragment();
-            if (mIsTest) {
-                Bundle bundle = new Bundle();
-                bundle.putBoolean(WifiDppUtils.EXTRA_TEST, true);
-                fragment.setArguments(bundle);
-            }
         } else {
             if (fragment.isVisible()) {
                 return;

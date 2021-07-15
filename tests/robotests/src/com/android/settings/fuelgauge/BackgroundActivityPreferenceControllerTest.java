@@ -40,7 +40,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -79,7 +79,7 @@ public class BackgroundActivityPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private AdvancedPowerUsageDetail mFragment;
     @Mock
-    private PowerWhitelistBackend mPowerWhitelistBackend;
+    private PowerAllowlistBackend mPowerAllowlistBackend;
     private BackgroundActivityPreferenceController mController;
     private RestrictedPreference mPreference;
     private Context mShadowContext;
@@ -103,7 +103,7 @@ public class BackgroundActivityPreferenceControllerTest {
         when(mPackageManager.getApplicationInfo(LOW_SDK_PACKAGE, PackageManager.GET_META_DATA))
                 .thenReturn(mLowApplicationInfo);
 
-        when(mPowerWhitelistBackend.isWhitelisted(LOW_SDK_PACKAGE)).thenReturn(false);
+        when(mPowerAllowlistBackend.isAllowlisted(LOW_SDK_PACKAGE)).thenReturn(false);
         mHighApplicationInfo.targetSdkVersion = Build.VERSION_CODES.O;
         mLowApplicationInfo.targetSdkVersion = Build.VERSION_CODES.L;
 
@@ -113,7 +113,7 @@ public class BackgroundActivityPreferenceControllerTest {
         mPreference = spy(new RestrictedPreference(mShadowContext, null /* attrs */));
         mPreference.setKey(BackgroundActivityPreferenceController.KEY_BACKGROUND_ACTIVITY);
         mController = spy(new BackgroundActivityPreferenceController(
-                mContext, mFragment, UID_LOW_SDK, LOW_SDK_PACKAGE, mPowerWhitelistBackend));
+                mContext, mFragment, UID_LOW_SDK, LOW_SDK_PACKAGE, mPowerAllowlistBackend));
         mController.mDpm = mDevicePolicyManagerWrapper;
         mController.mBatteryUtils = mBatteryUtils;
     }
@@ -150,12 +150,12 @@ public class BackgroundActivityPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_whitelisted() {
-        when(mPowerWhitelistBackend.isWhitelisted(LOW_SDK_PACKAGE)).thenReturn(true);
+    public void updateState_allowlisted() {
+        when(mPowerAllowlistBackend.isAllowlisted(LOW_SDK_PACKAGE)).thenReturn(true);
         mController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isFalse();
         assertThat(mPreference.getSummary()).isEqualTo(
-                mShadowContext.getText(R.string.background_activity_summary_whitelisted));
+                mShadowContext.getText(R.string.background_activity_summary_allowlisted));
     }
 
     @Test

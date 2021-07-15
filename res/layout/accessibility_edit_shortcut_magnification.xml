@@ -15,64 +15,69 @@
   limitations under the License
   -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container_layout"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbarStyle="outsideOverlay">
+    android:layout_height="wrap_content"
+    android:clipChildren="true">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/container_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
-
-        <include
-            android:id="@+id/software_shortcut"
-            layout="@layout/accessibility_edit_shortcut_component"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp" />
-
-        <include
-            android:id="@+id/hardware_shortcut"
-            layout="@layout/accessibility_edit_shortcut_component"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp" />
+        android:layout_height="match_parent"
+        android:scrollbarStyle="outsideOverlay">
 
         <LinearLayout
-            android:id="@+id/advanced_shortcut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?android:attr/listPreferredItemHeightSmall"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="24dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_keyboard_arrow_down" />
-
-            <TextView
+            <include
+                android:id="@+id/software_shortcut"
+                layout="@layout/accessibility_edit_shortcut_component"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingStart="12dp"
-                android:text="@string/accessibility_shortcut_edit_dialog_title_advance"
-                android:textAppearance="?android:attr/textAppearanceListItem"
-                android:textColor="?android:attr/colorAccent"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp" />
+
+            <include
+                android:id="@+id/hardware_shortcut"
+                layout="@layout/accessibility_edit_shortcut_component"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp" />
+
+            <LinearLayout
+                android:id="@+id/advanced_shortcut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_keyboard_arrow_down" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:text="@string/accessibility_shortcut_edit_dialog_title_advance"
+                    android:textAppearance="?android:attr/textAppearanceListItem"
+                    android:textColor="?android:attr/colorAccent"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <include
+                android:id="@+id/triple_tap_shortcut"
+                layout="@layout/accessibility_edit_shortcut_component"
+                android:visibility="gone" />
 
         </LinearLayout>
-
-        <include
-            android:id="@+id/triple_tap_shortcut"
-            layout="@layout/accessibility_edit_shortcut_component"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+</FrameLayout>

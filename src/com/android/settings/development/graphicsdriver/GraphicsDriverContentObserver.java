@@ -52,7 +52,7 @@ public class GraphicsDriverContentObserver extends ContentObserver {
      */
     public void register(ContentResolver contentResolver) {
         contentResolver.registerContentObserver(
-                Settings.Global.getUriFor(Settings.Global.GAME_DRIVER_ALL_APPS), false, this);
+                Settings.Global.getUriFor(Settings.Global.UPDATABLE_DRIVER_ALL_APPS), false, this);
     }
 
     /**

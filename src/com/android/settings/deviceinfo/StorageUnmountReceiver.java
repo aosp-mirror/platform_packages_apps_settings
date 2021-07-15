@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,9 +23,11 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.util.Log;
 
-import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
+import com.android.settings.deviceinfo.storage.StorageUtils.UnmountTask;
 
 public class StorageUnmountReceiver extends BroadcastReceiver {
+    private static final String TAG = "StorageUnmountReceiver";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         final StorageManager storage = context.getSystemService(StorageManager.class);

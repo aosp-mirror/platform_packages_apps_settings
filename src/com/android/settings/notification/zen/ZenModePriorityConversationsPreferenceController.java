@@ -16,13 +16,11 @@
 
 package com.android.settings.notification.zen;
 
-import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_GONE;
-import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_SETTING;
-
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
+import android.icu.text.MessageFormat;
 import android.os.AsyncTask;
 import android.service.notification.ConversationChannelWrapper;
 import android.view.View;
@@ -36,12 +34,14 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.ConversationListSettings;
-import com.android.settings.widget.RadioButtonPreferenceWithExtraWidget;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Options to choose the priority conversations that are allowed to bypass DND.
@@ -130,12 +130,13 @@ public class ZenModePriorityConversationsPreferenceController
 
         if (numConversations == UNSET) {
             return null;
-        } else if (numConversations == 0) {
-            return mContext.getResources().getString(
-                    R.string.zen_mode_conversations_count_none);
         } else {
-            return mContext.getResources().getQuantityString(
-                    R.plurals.zen_mode_conversations_count, numConversations, numConversations);
+            MessageFormat msgFormat = new MessageFormat(
+                    mContext.getString(R.string.zen_mode_conversations_count),
+                    Locale.getDefault());
+            Map<String, Object> args = new HashMap<>();
+            args.put("count", numConversations);
+            return msgFormat.format(args);
         }
     }
 
@@ -181,13 +182,10 @@ public class ZenModePriorityConversationsPreferenceController
     }
 
     private RadioButtonPreference makeRadioPreference(String key, int titleId) {
-        RadioButtonPreferenceWithExtraWidget pref =
-                new RadioButtonPreferenceWithExtraWidget(mPreferenceCategory.getContext());
+        final RadioButtonPreference pref =
+                new RadioButtonPreference(mPreferenceCategory.getContext());
         if (KEY_ALL.equals(key) || KEY_IMPORTANT.equals(key)) {
             pref.setExtraWidgetOnClickListener(mConversationSettingsWidgetClickListener);
-            pref.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
-        } else {
-            pref.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_GONE);
         }
         pref.setKey(key);
         pref.setTitle(titleId);

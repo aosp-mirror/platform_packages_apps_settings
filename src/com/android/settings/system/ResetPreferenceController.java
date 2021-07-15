@@ -40,13 +40,4 @@ public class ResetPreferenceController extends BasePreferenceController {
         return mContext.getResources().getBoolean(R.bool.config_show_reset_dashboard)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
-
-    @Override
-    public CharSequence getSummary() {
-        if (!mNetworkReset.isAvailable() && !mFactpruReset.isAvailable()) {
-            return mContext.getText(R.string.reset_dashboard_summary_onlyApps);
-        }
-
-        return mContext.getText(R.string.reset_dashboard_summary);
-    }
 }

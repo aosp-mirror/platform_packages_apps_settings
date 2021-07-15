@@ -19,20 +19,25 @@ package com.android.settings.accounts;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
-import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -42,13 +47,18 @@ public class EnterpriseDisclosurePreferenceControllerTest {
 
     private Context mContext;
     private EnterpriseDisclosurePreferenceController mController;
-    private Preference mPreference;
+    private FooterPreference mPreference;
+
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = spy(new EnterpriseDisclosurePreferenceController(mContext, "my_key"));
-        mPreference = spy(new Preference(mContext));
+        mPreference = spy(new FooterPreference(mContext));
+        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mPreference);
     }
 
     @Test
@@ -68,19 +78,19 @@ public class EnterpriseDisclosurePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_hasDisclosure_shouldSetTitle() {
+    public void displayPreference_hasDisclosure_shouldSetTitle() {
         doReturn(TEST_DISCLOSURE).when(mController).getDisclosure();
 
-        mController.updateState(mPreference);
+        mController.displayPreference(mPreferenceScreen);
 
         assertThat(mPreference.getTitle()).isEqualTo(TEST_DISCLOSURE);
     }
 
     @Test
-    public void updateState_noDisclosure_shouldBeInvisible() {
+    public void displayPreference_noDisclosure_shouldBeInvisible() {
         doReturn(null).when(mController).getDisclosure();
 
-        mController.updateState(mPreference);
+        mController.displayPreference(mPreferenceScreen);
 
         verify(mPreference, never()).setTitle(any());
     }

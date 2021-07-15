@@ -15,28 +15,32 @@
   limitations under the License
   -->
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container_layout"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbarStyle="outsideOverlay">
+    android:layout_height="wrap_content"
+    android:clipChildren="true">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/container_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="match_parent"
+        android:scrollbarStyle="outsideOverlay">
 
-        <include android:id="@+id/software_shortcut"
-            layout="@layout/accessibility_edit_shortcut_component"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp" />
+            android:orientation="vertical"
+            android:padding="24dp">
 
-        <include android:id="@+id/hardware_shortcut"
-            layout="@layout/accessibility_edit_shortcut_component" />
+            <include android:id="@+id/software_shortcut"
+                layout="@layout/accessibility_edit_shortcut_component"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp" />
 
-    </LinearLayout>
+            <include android:id="@+id/hardware_shortcut"
+                layout="@layout/accessibility_edit_shortcut_component" />
 
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

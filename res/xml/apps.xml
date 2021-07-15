@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2020 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="apps_screen"
+    android:title="@string/apps_dashboard_title">
+
+    <Preference
+        android:key="all_app_infos"
+        android:title="@string/all_apps"
+        android:summary="@string/summary_placeholder"
+        android:order="-999"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:keywords="@string/keywords_applications_settings"/>
+
+    <PreferenceCategory
+        android:key="recent_apps_category"
+        android:title="@string/recent_app_category_title"
+        android:order="-998"
+        settings:searchable="false">
+        <!-- Placeholder for a list of recent apps -->
+
+        <!-- See all apps -->
+        <Preference
+            android:key="see_all_apps"
+            android:title="@string/default_see_all_apps_title"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            android:order="5"
+            settings:searchable="false">
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="general_category"
+        android:title="@string/category_name_general"
+        android:order="-997"
+        android:visibility="gone"
+        settings:searchable="false"/>
+
+    <Preference
+        android:key="default_apps"
+        android:title="@string/app_default_dashboard_title"
+        android:order="-996"
+        settings:controller="com.android.settings.applications.DefaultAppsPreferenceController">
+        <intent android:action="android.settings.MANAGE_DEFAULT_APPS_SETTINGS"/>
+    </Preference>
+
+    <Preference
+        android:key="game_settings"
+        android:title="@string/game_settings_title"
+        android:summary="@string/game_settings_summary"
+        android:order="-995"
+        settings:controller="com.android.settings.applications.GameSettingsPreferenceController">
+    </Preference>
+
+    <PreferenceCategory
+        android:key="dashboard_tile_placeholder"
+        android:order="10"/>
+
+    <Preference
+        android:key="hibernated_apps"
+        android:title="@string/unused_apps"
+        android:summary="@string/summary_placeholder"
+        android:order="15"
+        settings:keywords="app_hibernation_key"
+        settings:controller="com.android.settings.applications.HibernatedAppsPreferenceController">
+        <intent android:action="android.intent.action.MANAGE_UNUSED_APPS"/>
+    </Preference>
+
+    <Preference
+        android:key="special_access"
+        android:fragment="com.android.settings.applications.specialaccess.SpecialAccessSettings"
+        android:title="@string/special_access"
+        android:order="20"
+        settings:controller="com.android.settings.applications.SpecialAppAccessPreferenceController"/>
+
+</PreferenceScreen>

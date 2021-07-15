@@ -31,11 +31,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.security.SecuritySettings;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -44,6 +45,7 @@ import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.search.SearchIndexableRaw;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +63,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
 
     private final LockPatternUtils mLockPatternUtils;
     private final TrustAgentManager mTrustAgentManager;
-    private final SecuritySettings mHost;
+    private final SettingsPreferenceFragment mHost;
 
     private Intent mTrustAgentClickIntent;
     private PreferenceCategory mSecurityCategory;
@@ -69,7 +71,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
     @VisibleForTesting
     final List<String> mTrustAgentsKeyList;
 
-    public TrustAgentListPreferenceController(Context context, SecuritySettings host,
+    public TrustAgentListPreferenceController(Context context, SettingsPreferenceFragment host,
             Lifecycle lifecycle) {
         super(context);
         final SecurityFeatureProvider provider = FeatureFactory.getFactory(context)
@@ -120,11 +122,16 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
         if (!mTrustAgentsKeyList.contains(preference.getKey())) {
             return super.handlePreferenceTreeClick(preference);
         }
-        final ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(
-                mHost.getActivity(), mHost);
+
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(mHost.getActivity(), mHost);
+        final boolean confirmationLaunched = builder.setRequestCode(CHANGE_TRUST_AGENT_SETTINGS)
+                .setTitle(preference.getTitle())
+                .show();
+
         mTrustAgentClickIntent = preference.getIntent();
-        boolean confirmationLaunched = helper.launchConfirmationActivity(
-                CHANGE_TRUST_AGENT_SETTINGS, preference.getTitle());
+        mTrustAgentClickIntent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
+                SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
 
         if (!confirmationLaunched && mTrustAgentClickIntent != null) {
             // If this returns false, it means no password confirmation is required.

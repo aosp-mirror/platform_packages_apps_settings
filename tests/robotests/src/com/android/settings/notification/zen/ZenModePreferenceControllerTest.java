@@ -33,10 +33,6 @@ import android.content.Context;
 
 import androidx.preference.Preference;
 
-import com.android.settings.R;
-import com.android.settings.notification.zen.ZenModePreferenceController;
-import com.android.settings.notification.zen.ZenModeSettings;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -85,7 +81,7 @@ public class ZenModePreferenceControllerTest {
         when(mPreference.isEnabled()).thenReturn(true);
 
         mController.updateState(mPreference);
-        verify(mPreference).setSummary(mContext.getString(R.string.zen_mode_sound_summary_off));
+        verify(mPreference).setSummary("Off");
 
         doReturn(1).when(mSummaryBuilder).getEnabledAutomaticRulesCount();
         mController.updateState(mPreference);
