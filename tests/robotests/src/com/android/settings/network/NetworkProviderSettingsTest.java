@@ -53,6 +53,7 @@ import android.view.View;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
@@ -79,6 +80,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowToast;
 
 @RunWith(RobolectricTestRunner.class)
@@ -526,5 +529,29 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.updateWifiEntryPreferences();
 
         verify(mNetworkProviderSettings.mWifiEntryPreferenceCategory, never()).setVisible(true);
+    }
+
+    @Test
+    @Config(shadows = ShadowPreferenceFragmentCompat.class)
+    public void onStop_shouldRemoveCallbacks() {
+        View fragmentView = mock(View.class);
+        when(mNetworkProviderSettings.getView()).thenReturn(fragmentView);
+
+        mNetworkProviderSettings.onStop();
+
+        verify(fragmentView).removeCallbacks(mNetworkProviderSettings.mRemoveLoadingRunnable);
+        verify(fragmentView).removeCallbacks(
+                mNetworkProviderSettings.mUpdateWifiEntryPreferencesRunnable);
+        verify(fragmentView).removeCallbacks(mNetworkProviderSettings.mHideProgressBarRunnable);
+        verify(mAirplaneModeEnabler).stop();
+    }
+
+    @Implements(PreferenceFragmentCompat.class)
+    public static class ShadowPreferenceFragmentCompat {
+
+        @Implementation
+        public void onStop() {
+            // do nothing
+        }
     }
 }
