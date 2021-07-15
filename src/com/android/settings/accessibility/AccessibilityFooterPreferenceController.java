@@ -21,14 +21,18 @@ import android.content.Intent;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.HelpUtils;
 
 /**
- * Base class for accessibility preference footer.
+ * Preference controller that controls the help link and customizes the preference title in {@link
+ * AccessibilityFooterPreference}.
  */
-public abstract class AccessibilityFooterPreferenceController extends BasePreferenceController {
+public class AccessibilityFooterPreferenceController extends BasePreferenceController {
+
+    private int mHelpResource;
+    private String mLearnMoreContentDescription;
+    private String mIntroductionTitle;
 
     public AccessibilityFooterPreferenceController(Context context, String key) {
         super(context, key);
@@ -49,23 +53,55 @@ public abstract class AccessibilityFooterPreferenceController extends BasePrefer
     }
 
     /**
-     * Override this if showing a help item in the footer bar, by returning the resource id.
+     * Setups a help item in the {@link AccessibilityFooterPreference} with specific content
+     * description.
+     */
+    public void setupHelpLink(int helpResource, String learnMoreContentDescription) {
+        mHelpResource = helpResource;
+        mLearnMoreContentDescription = learnMoreContentDescription;
+    }
+
+    /**
+     * Overrides this if showing a help item in the {@link AccessibilityFooterPreference}, by
+     * returning the resource id.
      *
      * @return the resource id for the help url
      */
     protected int getHelpResource() {
-        return 0;
+        return mHelpResource;
     }
 
-    /** Returns the accessibility feature name. */
-    protected abstract String getLabelName();
+    /**
+     * Overrides this if showing a help item in the {@link AccessibilityFooterPreference} with
+     * specific content description.
+     *
+     * @return the content description for the help url
+     */
+    protected String getLearnMoreContentDescription() {
+        return mLearnMoreContentDescription;
+    }
+
+    /**
+     * Sets the announcement the specific features introduction in the {@link
+     * AccessibilityFooterPreference}.
+     */
+    public void setIntroductionTitle(String introductionTitle) {
+        mIntroductionTitle = introductionTitle;
+    }
+
+    /**
+     * Overrides this if announcement the specific features introduction in the {@link
+     * AccessibilityFooterPreference}.
+     *
+     * @return the extended content description for specific features introduction
+     */
+    protected String getIntroductionTitle() {
+        return mIntroductionTitle;
+    }
 
     private void updateFooterPreferences(AccessibilityFooterPreference footerPreference) {
         final StringBuffer sb = new StringBuffer();
-        sb.append(mContext.getString(
-                R.string.accessibility_introduction_title, getLabelName()))
-                .append("\n\n")
-                .append(footerPreference.getTitle());
+        sb.append(getIntroductionTitle()).append("\n\n").append(footerPreference.getTitle());
         footerPreference.setContentDescription(sb);
 
         if (getHelpResource() != 0) {
@@ -75,10 +111,10 @@ public abstract class AccessibilityFooterPreferenceController extends BasePrefer
                         mContext.getClass().getName());
                 view.startActivityForResult(helpIntent, 0);
             });
-
-            final String learnMoreContentDescription = mContext.getString(
-                    R.string.footer_learn_more_content_description, getLabelName());
-            footerPreference.setLearnMoreContentDescription(learnMoreContentDescription);
+            footerPreference.setLearnMoreContentDescription(getLearnMoreContentDescription());
+            footerPreference.setLinkEnabled(true);
+        } else {
+            footerPreference.setLinkEnabled(false);
         }
     }
 }
