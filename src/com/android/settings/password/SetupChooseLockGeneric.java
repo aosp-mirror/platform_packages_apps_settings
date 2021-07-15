@@ -21,17 +21,14 @@ import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -42,11 +39,10 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupEncryptionInterstitial;
 import com.android.settings.SetupWizardUtils;
-import com.android.settings.biometrics.BiometricEnrollActivity;
-import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollFindSensor;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Setup Wizard's version of ChooseLockGeneric screen. It inherits the logic and basic structure
@@ -71,13 +67,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
     }
 
     @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstance) {
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstance);
 
         if(getIntent().hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)) {
@@ -94,6 +86,12 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         }
 
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
+    }
+
+    @Override
+    protected boolean isToolbarEnabled() {
+        // Hide the action bar from this page.
+        return false;
     }
 
     public static class SetupChooseLockGenericFragment extends ChooseLockGenericFragment {
@@ -163,22 +161,12 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             return SetupChooseLockGeneric.InternalActivity.class;
         }
 
-        /***
-         * Disables preferences that are less secure than required quality and shows only secure
-         * screen lock options here.
-         *
-         * @param quality the requested quality.
-         */
         @Override
-        protected void disableUnusablePreferences(final int quality, boolean hideDisabled) {
+        protected boolean alwaysHideInsecureScreenLockTypes() {
             // At this part of the flow, the user has already indicated they want to add a pin,
-            // pattern or password, so don't show "None" or "Slide". We disable them here and set
-            // the HIDE_DISABLED flag to true to hide them. This only happens for setup wizard.
-            // We do the following max check here since the device may already have a Device Admin
-            // installed with a policy we need to honor.
-            final int newQuality = Math.max(quality,
-                    DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-            super.disableUnusablePreferencesImpl(newQuality, true /* hideDisabled */);
+            // pattern or password, so don't show "None" or "Slide". We disable them here.
+            // This only happens for setup wizard.
+            return true;
         }
 
         @Override
@@ -200,8 +188,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
                                 .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false),
                         /* isPatternMode= */ false,
                         /* isAlphaMode= */ false,
-                        /* isFingerprintSupported= */ false,
-                        /* isFaceSupported= */ false
+                        /* forFingerprint= */ false,
+                        /* forFace= */ false,
+                        /* forBiometrics= */ false
                 );
                 dialog.show(getFragmentManager());
                 return true;
@@ -242,7 +231,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         }
 
         private boolean isForBiometric() {
-            return mForFingerprint || mForFace;
+            return mForFingerprint || mForFace || mForBiometrics;
         }
     }
 

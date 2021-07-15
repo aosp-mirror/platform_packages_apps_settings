@@ -16,7 +16,6 @@
 package com.android.settings.wifi;
 
 import android.content.Intent;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -24,7 +23,6 @@ import com.android.settings.ButtonBarHandler;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
-import com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 
 public class WifiPickerActivity extends SettingsActivity implements ButtonBarHandler {
@@ -41,14 +39,8 @@ public class WifiPickerActivity extends SettingsActivity implements ButtonBarHan
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        boolean isSavedAccessPointsWifiSettings;
-        if (FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-            isSavedAccessPointsWifiSettings =
-                    SavedAccessPointsWifiSettings2.class.getName().equals(fragmentName);
-        } else {
-            isSavedAccessPointsWifiSettings =
-                    SavedAccessPointsWifiSettings.class.getName().equals(fragmentName);
-        }
+        final boolean isSavedAccessPointsWifiSettings =
+                SavedAccessPointsWifiSettings2.class.getName().equals(fragmentName);
 
         if (WifiSettings.class.getName().equals(fragmentName)
                 || WifiP2pSettings.class.getName().equals(fragmentName)

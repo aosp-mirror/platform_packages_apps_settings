@@ -1,3 +1,12 @@
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "packages_apps_Settings_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    default_applicable_licenses: ["packages_apps_Settings_license"],
+}
+
 android_test {
     name: "SettingsUnitTests",
 
@@ -17,10 +26,14 @@ android_test {
         "androidx.test.espresso.core",
         "androidx.test.espresso.contrib-nodeps",
         "androidx.test.espresso.intents-nodeps",
+        "androidx.test.ext.junit",
+        "androidx.preference_preference",
         "mockito-target-minus-junit4",
         "platform-test-annotations",
         "truth-prebuilt",
         "ub-uiautomator",
+        // Don't add SettingsLib libraries here - you can use them directly as they are in the
+        // instrumented Settings app.
     ],
 
     // Include all test java files.

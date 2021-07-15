@@ -32,7 +32,7 @@ import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.icu.text.ListFormatter;
+import android.icu.text.MessageFormat;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 
@@ -47,7 +47,9 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
@@ -130,24 +132,21 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                             || PRIORITY_CATEGORY_EVENTS == category,
                     true);
             int numCategories = enabledCategories.size();
-            if (numCategories == 0) {
-                return mContext.getResources().getString(R.string.zen_mode_other_sounds_none);
+            MessageFormat msgFormat = new MessageFormat(
+                    mContext.getString(R.string.zen_mode_other_sounds_summary),
+                    Locale.getDefault());
+            Map<String, Object> args = new HashMap<>();
+            args.put("count", numCategories);
+            if (numCategories >= 1) {
+                args.put("sound_category_1", enabledCategories.get(0));
+                if (numCategories >= 2) {
+                    args.put("sound_category_2", enabledCategories.get(1));
+                    if (numCategories == 3) {
+                        args.put("sound_category_3", enabledCategories.get(2));
+                    }
+                }
             }
-
-            List<String> displayCategories = new ArrayList<>();
-            if (numCategories <= 2) {
-                displayCategories = enabledCategories;
-            } else {
-                displayCategories.add(enabledCategories.get(0));
-                displayCategories.add(enabledCategories.get(1));
-                displayCategories.add(mContext.getString(R.string.zen_mode_other_sounds_list_count,
-                        numCategories - 2));
-            }
-
-            return mContext.getResources().getQuantityString(
-                    R.plurals.zen_mode_other_sounds_summary,
-                    numCategories /* quantity */,
-                    ListFormatter.getInstance().format(displayCategories));
+            return msgFormat.format(args);
         }
 
         String getCallsSettingSummary(Policy policy) {
@@ -192,15 +191,12 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                             description);
                 }
             } else {
-                final int count = getEnabledAutomaticRulesCount();
-                if (count > 0) {
-                    return mContext.getString(R.string.zen_mode_sound_summary_off_with_info,
-                            mContext.getResources().getQuantityString(
-                                    R.plurals.zen_mode_sound_summary_summary_off_info,
-                                    count, count));
-                }
-
-                return mContext.getString(R.string.zen_mode_sound_summary_off);
+                MessageFormat msgFormat = new MessageFormat(
+                        mContext.getString(R.string.zen_mode_sound_summary_off),
+                        Locale.getDefault());
+                Map<String, Object> msgArgs = new HashMap<>();
+                msgArgs.put("count", getEnabledAutomaticRulesCount());
+                return msgFormat.format(msgArgs);
             }
         }
 
@@ -218,10 +214,12 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         }
 
         String getAutomaticRulesSummary() {
-            final int count = getEnabledAutomaticRulesCount();
-            return count == 0 ? mContext.getString(R.string.zen_mode_settings_summary_off)
-                    : mContext.getResources().getQuantityString(
-                            R.plurals.zen_mode_settings_summary_on, count, count);
+            MessageFormat msgFormat = new MessageFormat(
+                    mContext.getString(R.string.zen_mode_settings_schedules_summary),
+                    Locale.getDefault());
+            Map<String, Object> msgArgs = new HashMap<>();
+            msgArgs.put("count", getEnabledAutomaticRulesCount());
+            return msgFormat.format(msgArgs);
         }
 
         @VisibleForTesting

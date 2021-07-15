@@ -16,52 +16,67 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
+import static com.android.settings.applications.AppInfoBase.ARG_PACKAGE_NAME;
+
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
+import android.companion.ICompanionDeviceManager;
+import android.compat.annotation.ChangeId;
+import android.compat.annotation.EnabledAfter;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
-import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.service.notification.NotificationListenerFilter;
 import android.service.notification.NotificationListenerService;
-import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.Slog;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.applications.AppUtils;
+import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.bluetooth.Utils;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import java.util.List;
 import java.util.Objects;
 
-public class NotificationAccessDetails extends AppInfoBase {
+public class NotificationAccessDetails extends DashboardFragment {
     private static final String TAG = "NotifAccessDetails";
-    private static final String SWITCH_PREF_KEY = "notification_access_switch";
 
-    private boolean mCreated;
+    private NotificationBackend mNm = new NotificationBackend();
     private ComponentName mComponentName;
     private CharSequence mServiceName;
+    protected ServiceInfo mServiceInfo;
+    protected PackageInfo mPackageInfo;
+    protected int mUserId;
+    protected String mPackageName;
+    protected RestrictedLockUtils.EnforcedAdmin mAppsControlDisallowedAdmin;
+    protected boolean mAppsControlDisallowedBySystem;
     private boolean mIsNls;
-
-    private NotificationManager mNm;
     private PackageManager mPm;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onAttach(Context context) {
+        super.onAttach(context);
         final Intent intent = getIntent();
         if (mComponentName == null && intent != null) {
             String cn = intent.getStringExtra(Settings.EXTRA_NOTIFICATION_LISTENER_COMPONENT_NAME);
@@ -73,38 +88,56 @@ public class NotificationAccessDetails extends AppInfoBase {
                 }
             }
         }
-        super.onCreate(savedInstanceState);
-        mNm = getContext().getSystemService(NotificationManager.class);
         mPm = getPackageManager();
-        addPreferencesFromResource(R.xml.notification_access_permission_details);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (mCreated) {
-            Log.w(TAG, "onActivityCreated: ignoring duplicate call");
-            return;
-        }
-        mCreated = true;
-        if (mPackageInfo == null) return;
+        retrieveAppEntry();
         loadNotificationListenerService();
-        final Activity activity = getActivity();
-        final Preference pref = EntityHeaderController
-                .newInstance(activity, this, null /* header */)
-                .setRecyclerView(getListView(), getSettingsLifecycle())
-                .setIcon(IconDrawableFactory.newInstance(getContext())
-                        .getBadgedIcon(mPackageInfo.applicationInfo))
-                .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
-                .setSummary(mServiceName)
-                .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
-                .setPackageName(mPackageName)
-                .setUid(mPackageInfo.applicationInfo.uid)
-                .setHasAppInfoLink(true)
-                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
-                        EntityHeaderController.ActionType.ACTION_NONE)
-                .done(activity, getPrefContext());
-        getPreferenceScreen().addPreference(pref);
+        NotificationBackend backend = new NotificationBackend();
+        int listenerTargetSdk = Build.VERSION_CODES.S;
+        try {
+            listenerTargetSdk = mPm.getTargetSdkVersion(mComponentName.getPackageName());
+        } catch (PackageManager.NameNotFoundException e){
+            // how did we get here?
+        }
+        use(ApprovalPreferenceController.class)
+                .setPkgInfo(mPackageInfo)
+                .setCn(mComponentName)
+                .setNm(context.getSystemService(NotificationManager.class))
+                .setPm(mPm)
+                .setParent(this);
+        use(HeaderPreferenceController.class)
+                .setFragment(this)
+                .setPackageInfo(mPackageInfo)
+                .setPm(context.getPackageManager())
+                .setServiceName(mServiceName)
+                .setBluetoothManager(Utils.getLocalBtManager(context))
+                .setCdm(ICompanionDeviceManager.Stub.asInterface(
+                        ServiceManager.getService(Context.COMPANION_DEVICE_SERVICE)))
+                .setCn(mComponentName)
+                .setUserId(mUserId);
+        use(PreUpgradePreferenceController.class)
+                .setNm(backend)
+                .setCn(mComponentName)
+                .setUserId(mUserId)
+                .setTargetSdk(listenerTargetSdk);
+        use(BridgedAppsLinkPreferenceController.class)
+                .setNm(backend)
+                .setCn(mComponentName)
+                .setUserId(mUserId)
+                .setTargetSdk(listenerTargetSdk);
+        final int finalListenerTargetSdk = listenerTargetSdk;
+        getPreferenceControllers().forEach(controllers -> {
+            controllers.forEach(controller -> {
+                if (controller instanceof TypeFilterPreferenceController) {
+                    TypeFilterPreferenceController tfpc =
+                            (TypeFilterPreferenceController) controller;
+                    tfpc.setNm(backend)
+                            .setCn(mComponentName)
+                            .setServiceInfo(mServiceInfo)
+                            .setUserId(mUserId)
+                            .setTargetSdk(finalListenerTargetSdk);
+                }
+            });
+        });
     }
 
     @Override
@@ -112,9 +145,7 @@ public class NotificationAccessDetails extends AppInfoBase {
         return SettingsEnums.NOTIFICATION_ACCESS_DETAIL;
     }
 
-    @Override
     protected boolean refreshUi() {
-        final Context context = getContext();
         if (mComponentName == null) {
             // No service given
             Slog.d(TAG, "No component name provided");
@@ -130,72 +161,112 @@ public class NotificationAccessDetails extends AppInfoBase {
             Slog.d(TAG, "NLSes aren't allowed in work profiles");
             return false;
         }
-        updatePreference(findPreference(SWITCH_PREF_KEY));
         return true;
     }
 
     @Override
-    protected AlertDialog createDialog(int id, int errorCode) {
-        return null;
+    public void onResume() {
+        super.onResume();
+        mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
+        mAppsControlDisallowedBySystem = RestrictedLockUtilsInternal.hasBaseUserRestriction(
+                getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
+
+        if (!refreshUi()) {
+            setIntentAndFinish(true /* appChanged */);
+        }
+        Preference apps = getPreferenceScreen().findPreference(
+                use(BridgedAppsLinkPreferenceController.class).getPreferenceKey());
+        if (apps != null) {
+
+            apps.setOnPreferenceClickListener(preference -> {
+                final Bundle args = new Bundle();
+                args.putString(AppInfoBase.ARG_PACKAGE_NAME, mPackageName);
+                args.putString(Settings.EXTRA_NOTIFICATION_LISTENER_COMPONENT_NAME,
+                        mComponentName.flattenToString());
+
+                new SubSettingLauncher(getContext())
+                        .setDestination(BridgedAppsSettings.class.getName())
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .setTitleRes(R.string.notif_listener_excluded_app_screen_title)
+                        .setArguments(args)
+                        .setUserHandle(UserHandle.of(mUserId))
+                        .launch();
+                return true;
+            });
+        }
     }
 
-    public void updatePreference(SwitchPreference preference) {
-        final CharSequence label = mPackageInfo.applicationInfo.loadLabel(mPm);
-        preference.setChecked(isServiceEnabled(mComponentName));
-        preference.setOnPreferenceChangeListener((p, newValue) -> {
-            final boolean access = (Boolean) newValue;
-            if (!access) {
-                if (!isServiceEnabled(mComponentName)) {
-                    return true; // already disabled
-                }
-                // show a friendly dialog
-                new FriendlyWarningDialogFragment()
-                        .setServiceInfo(mComponentName, label, this)
-                        .show(getFragmentManager(), "friendlydialog");
-                return false;
-            } else {
-                if (isServiceEnabled(mComponentName)) {
-                    return true; // already enabled
-                }
-                // show a scary dialog
-                new ScaryWarningDialogFragment()
-                        .setServiceInfo(mComponentName, label, this)
-                        .show(getFragmentManager(), "dialog");
-                return false;
+    protected void setIntentAndFinish(boolean appChanged) {
+        Log.i(TAG, "appChanged=" + appChanged);
+        Intent intent = new Intent();
+        intent.putExtra(ManageApplications.APP_CHG, appChanged);
+        SettingsActivity sa = (SettingsActivity) getActivity();
+        sa.finishPreferencePanel(Activity.RESULT_OK, intent);
+    }
+
+    protected void retrieveAppEntry() {
+        final Bundle args = getArguments();
+        mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
+        Intent intent = (args == null) ?
+                getIntent() : (Intent) args.getParcelable("intent");
+        if (mPackageName == null) {
+            if (intent != null && intent.getData() != null) {
+                mPackageName = intent.getData().getSchemeSpecificPart();
             }
-        });
+        }
+        if (intent != null && intent.hasExtra(Intent.EXTRA_USER_HANDLE)) {
+            mUserId = ((UserHandle) intent.getParcelableExtra(
+                    Intent.EXTRA_USER_HANDLE)).getIdentifier();
+        } else {
+            mUserId = UserHandle.myUserId();
+        }
+
+        try {
+            mPackageInfo = mPm.getPackageInfoAsUser(mPackageName,
+                    PackageManager.MATCH_DISABLED_COMPONENTS |
+                            PackageManager.GET_SIGNING_CERTIFICATES |
+                            PackageManager.GET_PERMISSIONS, mUserId);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Exception when retrieving package:" + mPackageName, e);
+        }
     }
 
-    @VisibleForTesting
-    void logSpecialPermissionChange(boolean enable, String packageName) {
-        int logCategory = enable ? SettingsEnums.APP_SPECIAL_PERMISSION_NOTIVIEW_ALLOW
-                : SettingsEnums.APP_SPECIAL_PERMISSION_NOTIVIEW_DENY;
-        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
-                logCategory, packageName);
-    }
-
+    // Dialogs only have access to the parent fragment, not the controller, so pass the information
+    // along to keep business logic out of this file
     public void disable(final ComponentName cn) {
-        logSpecialPermissionChange(true, cn.getPackageName());
-        mNm.setNotificationListenerAccessGranted(cn, false);
-        AsyncTask.execute(() -> {
-            if (!mNm.isNotificationPolicyAccessGrantedForPackage(
-                    cn.getPackageName())) {
-                mNm.removeAutomaticZenRules(cn.getPackageName());
-            }
+        final PreferenceScreen screen = getPreferenceScreen();
+        ApprovalPreferenceController apc = use(ApprovalPreferenceController.class);
+        apc.disable(cn);
+        apc.updateState(screen.findPreference(apc.getPreferenceKey()));
+        getPreferenceControllers().forEach(controllers -> {
+            controllers.forEach(controller -> {
+                if (controller instanceof TypeFilterPreferenceController) {
+                    TypeFilterPreferenceController tfpc =
+                            (TypeFilterPreferenceController) controller;
+                    tfpc.updateState(screen.findPreference(tfpc.getPreferenceKey()));
+                }
+            });
         });
-        refreshUi();
     }
 
     protected void enable(ComponentName cn) {
-        logSpecialPermissionChange(true, cn.getPackageName());
-        mNm.setNotificationListenerAccessGranted(cn, true);
-        refreshUi();
+        final PreferenceScreen screen = getPreferenceScreen();
+        ApprovalPreferenceController apc = use(ApprovalPreferenceController.class);
+        apc.enable(cn);
+        apc.updateState(screen.findPreference(apc.getPreferenceKey()));
+        getPreferenceControllers().forEach(controllers -> {
+            controllers.forEach(controller -> {
+                if (controller instanceof TypeFilterPreferenceController) {
+                    TypeFilterPreferenceController tfpc =
+                            (TypeFilterPreferenceController) controller;
+                    tfpc.updateState(screen.findPreference(tfpc.getPreferenceKey()));
+                }
+            });
+        });
     }
 
-    protected boolean isServiceEnabled(ComponentName cn) {
-        return mNm.isNotificationListenerAccessGranted(cn);
-    }
-
+    // To save binder calls, load this in the fragment rather than each preference controller
     protected void loadNotificationListenerService() {
         mIsNls = false;
 
@@ -213,9 +284,20 @@ public class NotificationAccessDetails extends AppInfoBase {
                 if (Objects.equals(mComponentName, info.getComponentName())) {
                     mIsNls = true;
                     mServiceName = info.loadLabel(mPm);
+                    mServiceInfo = info;
                     break;
                 }
             }
         }
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.notification_access_permission_details;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 }

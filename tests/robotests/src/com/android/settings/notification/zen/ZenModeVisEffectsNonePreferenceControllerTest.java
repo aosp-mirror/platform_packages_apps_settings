@@ -40,11 +40,9 @@ import android.content.Context;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.notification.zen.ZenCustomRadioButtonPreference;
-import com.android.settings.notification.zen.ZenModeBackend;
-import com.android.settings.notification.zen.ZenModeVisEffectsNonePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -63,7 +61,7 @@ public class ZenModeVisEffectsNonePreferenceControllerTest {
     @Mock
     private ZenModeBackend mBackend;
     @Mock
-    private ZenCustomRadioButtonPreference mockPref;
+    private RadioButtonPreference mMockPref;
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
     @Mock
@@ -86,7 +84,7 @@ public class ZenModeVisEffectsNonePreferenceControllerTest {
                 mContext, mock(Lifecycle.class), PREF_KEY);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mMockPref);
         mController.displayPreference(mScreen);
     }
 
@@ -98,17 +96,17 @@ public class ZenModeVisEffectsNonePreferenceControllerTest {
     @Test
     public void updateState_notChecked() {
         mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, 1);
-        mController.updateState(mockPref);
+        mController.updateState(mMockPref);
 
-        verify(mockPref).setChecked(false);
+        verify(mMockPref).setChecked(false);
     }
 
     @Test
     public void updateState_checked() {
         mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, 0);
-        mController.updateState(mockPref);
+        mController.updateState(mMockPref);
 
-        verify(mockPref).setChecked(true);
+        verify(mMockPref).setChecked(true);
     }
 
     @Test
@@ -123,7 +121,7 @@ public class ZenModeVisEffectsNonePreferenceControllerTest {
                 | SUPPRESSED_EFFECT_PEEK
                 | SUPPRESSED_EFFECT_NOTIFICATION_LIST;
         mBackend.mPolicy = new NotificationManager.Policy(0, 0, 0, 1);
-        mController.onRadioButtonClick(mockPref);
+        mController.onRadioButtonClicked(mMockPref);
         verify(mBackend).saveVisualEffectsPolicy(allSuppressed, false);
         verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
                 eq(ACTION_ZEN_SOUND_ONLY),

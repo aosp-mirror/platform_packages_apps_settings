@@ -16,7 +16,7 @@
 
 package com.android.settings.wifi.tether;
 
-import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
+import static android.net.TetheringManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 
 import android.app.settings.SettingsEnums;
@@ -39,7 +39,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -54,8 +54,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private static final String TAG = "WifiTetherSettings";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
     private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
-    private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 3;
-    private static final int EXPANDED_CHILD_COUNT_DEFAULT = 4;
+    private static final int EXPANDED_CHILD_COUNT_DEFAULT = 3;
 
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
@@ -64,13 +63,14 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_turn_off";
     @VisibleForTesting
-    static final String KEY_WIFI_TETHER_NETWORK_AP_BAND = "wifi_tether_network_ap_band";
+    static final String KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY =
+            WifiTetherMaximizeCompatibilityPreferenceController.PREF_KEY;
 
     private WifiTetherSwitchBarController mSwitchBarController;
     private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
     private WifiTetherPasswordPreferenceController mPasswordPreferenceController;
-    private WifiTetherApBandPreferenceController mApBandPreferenceController;
     private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
+    private WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
 
     private WifiManager mWifiManager;
     private boolean mRestartWifiApAfterConfigChange;
@@ -116,7 +116,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mSSIDPreferenceController = use(WifiTetherSSIDPreferenceController.class);
         mSecurityPreferenceController = use(WifiTetherSecurityPreferenceController.class);
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
-        mApBandPreferenceController = use(WifiTetherApBandPreferenceController.class);
+        mMaxCompatibilityPrefController =
+                use(WifiTetherMaximizeCompatibilityPreferenceController.class);
     }
 
     @Override
@@ -128,7 +129,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         // Assume we are in a SettingsActivity. This is only safe because we currently use
         // SettingsActivity as base for all preference fragments.
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar switchBar = activity.getSwitchBar();
+        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+        switchBar.setTitle(getContext().getString(R.string.use_wifi_hotsopt_main_switch_title));
         mSwitchBarController = new WifiTetherSwitchBarController(activity, switchBar);
         getSettingsLifecycle().addObserver(mSwitchBarController);
         switchBar.show();
@@ -179,17 +181,16 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         controllers.add(new WifiTetherSSIDPreferenceController(context, listener));
         controllers.add(new WifiTetherSecurityPreferenceController(context, listener));
         controllers.add(new WifiTetherPasswordPreferenceController(context, listener));
-        controllers.add(new WifiTetherApBandPreferenceController(context, listener));
         controllers.add(
                 new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
-
+        controllers.add(new WifiTetherMaximizeCompatibilityPreferenceController(context, listener));
         return controllers;
     }
 
     @Override
     public void onTetherConfigUpdated(AbstractPreferenceController context) {
         final SoftApConfiguration config = buildNewConfig();
-        mPasswordPreferenceController.updateVisibility(config.getSecurityType());
+        mPasswordPreferenceController.setSecurityType(config.getSecurityType());
 
         /**
          * if soft AP is stopped, bring up
@@ -213,12 +214,12 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         final int securityType = mSecurityPreferenceController.getSecurityType();
         configBuilder.setSsid(mSSIDPreferenceController.getSSID());
-        if (securityType == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK) {
+        if (securityType != SoftApConfiguration.SECURITY_TYPE_OPEN) {
             configBuilder.setPassphrase(
                     mPasswordPreferenceController.getPasswordValidated(securityType),
-                    SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
+                    securityType);
         }
-        configBuilder.setBand(mApBandPreferenceController.getBandIndex());
+        mMaxCompatibilityPrefController.setupMaximizeCompatibility(configBuilder);
         return configBuilder.build();
     }
 
@@ -228,14 +229,10 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     }
 
     private void updateDisplayWithNewConfig() {
-        use(WifiTetherSSIDPreferenceController.class)
-                .updateDisplay();
-        use(WifiTetherSecurityPreferenceController.class)
-                .updateDisplay();
-        use(WifiTetherPasswordPreferenceController.class)
-                .updateDisplay();
-        use(WifiTetherApBandPreferenceController.class)
-                .updateDisplay();
+        use(WifiTetherSSIDPreferenceController.class).updateDisplay();
+        use(WifiTetherSecurityPreferenceController.class).updateDisplay();
+        use(WifiTetherPasswordPreferenceController.class).updateDisplay();
+        use(WifiTetherMaximizeCompatibilityPreferenceController.class).updateDisplay();
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -249,7 +246,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                         keys.add(KEY_WIFI_TETHER_NETWORK_NAME);
                         keys.add(KEY_WIFI_TETHER_NETWORK_PASSWORD);
                         keys.add(KEY_WIFI_TETHER_AUTO_OFF);
-                        keys.add(KEY_WIFI_TETHER_NETWORK_AP_BAND);
+                        keys.add(KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
                     }
 
                     // Remove duplicate
@@ -293,22 +290,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     private void reConfigInitialExpandedChildCount() {
         final PreferenceGroup screen = getPreferenceScreen();
-        if (mSecurityPreferenceController.getSecurityType()
-                == SoftApConfiguration.SECURITY_TYPE_OPEN) {
-            screen.setInitialExpandedChildrenCount(EXPANDED_CHILD_COUNT_WITH_SECURITY_NON);
-            return;
+        if (screen != null) {
+            screen.setInitialExpandedChildrenCount(getInitialExpandedChildCount());
         }
-        screen.setInitialExpandedChildrenCount(EXPANDED_CHILD_COUNT_DEFAULT);
-    }
-
-    @Override
-    public int getInitialExpandedChildCount() {
-        if (mSecurityPreferenceController == null) {
-            return EXPANDED_CHILD_COUNT_DEFAULT;
-        }
-
-        return (mSecurityPreferenceController.getSecurityType()
-                == SoftApConfiguration.SECURITY_TYPE_OPEN)
-            ? EXPANDED_CHILD_COUNT_WITH_SECURITY_NON : EXPANDED_CHILD_COUNT_DEFAULT;
     }
 }

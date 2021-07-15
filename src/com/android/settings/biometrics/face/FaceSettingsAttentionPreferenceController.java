@@ -57,15 +57,15 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
 
     private final GetFeatureCallback mGetFeatureCallback = new GetFeatureCallback() {
         @Override
-        public void onCompleted(boolean success, int feature, boolean value) {
-            if (feature == FaceManager.FEATURE_REQUIRE_ATTENTION && success) {
-                if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
-                    mPreference.setEnabled(false);
-                } else {
-                    mPreference.setEnabled(true);
-                    mPreference.setChecked(value);
+        public void onCompleted(boolean success, int[] features, boolean[] featureState) {
+            boolean requireAttentionEnabled = false;
+            for (int i = 0; i < features.length; i++) {
+                if (features[i] == FaceManager.FEATURE_REQUIRE_ATTENTION) {
+                    requireAttentionEnabled = featureState[i];
                 }
             }
+            mPreference.setEnabled(success);
+            mPreference.setChecked(requireAttentionEnabled);
         }
     };
 

@@ -17,61 +17,82 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="storage_dashboard_fragment"
     android:title="@string/storage_settings"
-    android:orderingFromXml="false">
-    <com.android.settings.deviceinfo.storage.StorageSummaryDonutPreference
-        android:key="storage_summary"
-        android:order="0"
+    settings:keywords="@string/keywords_storage">
+    <com.android.settingslib.widget.SettingsSpinnerPreference
+        android:key="storage_spinner"
+        android:order="1"
         settings:searchable="false"
-        settings:controller="com.android.settings.deviceinfo.storage.StorageSummaryDonutPreferenceController"/>
-    <com.android.settings.widget.MasterSwitchPreference
+        settings:controller="com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController"/>
+    <com.android.settingslib.widget.UsageProgressBarPreference
+        android:key="storage_summary"
+        android:order="2"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"/>
+    <com.android.settings.widget.PrimarySwitchPreference
         android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
         android:key="toggle_asm"
         android:title="@string/automatic_storage_manager_preference_title"
         android:icon="@drawable/ic_storage"
-        android:order="1"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="true"
-        settings:controller="com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController" />
+        android:order="3"
+        settings:controller="com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController"/>
+    <com.android.settings.widget.CardPreference
+        android:key="free_up_space"
+        android:order="4"
+        android:title="@string/storage_free_up_space_title"
+        android:summary="@string/storage_free_up_space_summary"
+        android:icon="@drawable/ic_files_go_round"/>
+    <!-- Preference order 100~200 are 'ONLY' for storage category preferences below. -->
+    <Preference
+        android:key="pref_public_storage"
+        android:title="@string/storage_files"
+        android:icon="@drawable/ic_folder_vd_theme_24"
+        android:order="100"/>
     <com.android.settings.deviceinfo.StorageItemPreference
-        android:key="pref_photos_videos"
-        android:title="@string/storage_photos_videos"
+        android:key="pref_images"
+        android:title="@string/storage_images"
         android:icon="@drawable/ic_photo_library"
-        settings:allowDividerAbove="true"
-        android:order="2" />
+        android:order="101"/>
     <com.android.settings.deviceinfo.StorageItemPreference
-        android:key="pref_music_audio"
-        android:title="@string/storage_music_audio"
+        android:key="pref_videos"
+        android:title="@string/storage_videos"
+        android:icon="@drawable/ic_local_movies"
+        android:order="102"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_audio"
+        android:title="@string/storage_audio"
         android:icon="@drawable/ic_media_stream"
-        android:order="3" />
+        android:order="103"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_apps"
+        android:title="@string/storage_apps"
+        android:icon="@drawable/ic_storage_apps"
+        android:order="104"/>
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_games"
         android:title="@string/storage_games"
         android:icon="@drawable/ic_videogame_vd_theme_24"
-        android:order="4" />
+        android:order="105"/>
     <com.android.settings.deviceinfo.StorageItemPreference
-        android:key="pref_movies"
-        android:title="@string/storage_movies_tv"
-        android:icon="@drawable/ic_local_movies"
-        android:order="5" />
-    <com.android.settings.deviceinfo.StorageItemPreference
-        android:key="pref_other_apps"
-        android:title="@string/storage_other_apps"
-        android:icon="@drawable/ic_storage_apps"
-        android:order="6" />
-    <com.android.settings.deviceinfo.StorageItemPreference
-        android:key="pref_files"
-        android:title="@string/storage_files"
+        android:key="pref_documents_and_other"
+        android:title="@string/storage_documents_and_other"
         android:icon="@drawable/ic_folder_vd_theme_24"
-        android:order="7"
-        settings:keywords="@string/keywords_storage_files"/>
+        android:order="106"/>
     <com.android.settings.deviceinfo.StorageItemPreference
         android:key="pref_system"
-        android:title="@string/storage_detail_system"
+        android:title="@string/storage_system"
         android:icon="@drawable/ic_system_update"
-        android:order="100" />
+        android:order="107"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_trash"
+        android:title="@string/storage_trash"
+        android:icon="@drawable/ic_trash_can"
+        android:order="108"/>
+    <!-- Preference order 100~200 are 'ONLY' for storage category preferences above. -->
     <PreferenceCategory
         android:key="pref_secondary_users"
         android:title="@string/storage_other_users"
-        android:order="200" />
+        android:order="201" />
 </PreferenceScreen>

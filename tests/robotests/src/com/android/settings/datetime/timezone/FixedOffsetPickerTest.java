@@ -23,10 +23,9 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
+import com.android.i18n.timezone.CountryZonesFinder;
 import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
-
-import libcore.timezone.CountryZonesFinder;
 
 import org.junit.Before;
 import org.junit.Test;

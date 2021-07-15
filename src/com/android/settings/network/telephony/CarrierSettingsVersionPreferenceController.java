@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
+import android.text.TextUtils;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -49,6 +50,6 @@ public class CarrierSettingsVersionPreferenceController extends BasePreferenceCo
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return TextUtils.isEmpty(getSummary()) ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
     }
 }

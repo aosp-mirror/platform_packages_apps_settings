@@ -27,6 +27,9 @@ import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.autofill.PasswordsPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultWorkAutofillPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -67,15 +70,29 @@ public class AccountDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
-        return buildPreferenceControllers(context, this /* parent */, authorities);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            SettingsPreferenceFragment parent, String[] authorities) {
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        buildAutofillPreferenceControllers(context, controllers);
+        final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
+        buildAccountPreferenceControllers(context, this /* parent */, authorities, controllers);
+        return controllers;
+    }
 
+    static void buildAutofillPreferenceControllers(
+            Context context, List<AbstractPreferenceController> controllers) {
+        controllers.add(new DefaultAutofillPreferenceController(context));
+        controllers.add(new DefaultWorkAutofillPreferenceController(context));
+    }
+
+    private static void buildAccountPreferenceControllers(
+            Context context, SettingsPreferenceFragment parent, String[] authorities,
+            List<AbstractPreferenceController> controllers) {
         final AccountPreferenceController accountPrefController =
                 new AccountPreferenceController(context, parent, authorities,
                         ProfileSelectFragment.ProfileType.ALL);
@@ -86,7 +103,6 @@ public class AccountDashboardFragment extends DashboardFragment {
         controllers.add(new AutoSyncDataPreferenceController(context, parent));
         controllers.add(new AutoSyncPersonalDataPreferenceController(context, parent));
         controllers.add(new AutoSyncWorkDataPreferenceController(context, parent));
-        return controllers;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -95,8 +111,11 @@ public class AccountDashboardFragment extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(
-                            context, null /* parent */, null /* authorities*/);
+                    final List<AbstractPreferenceController> controllers = new ArrayList<>();
+                    buildAccountPreferenceControllers(
+                            context, null /* parent */, null /* authorities*/, controllers);
+                    buildAutofillPreferenceControllers(context, controllers);
+                    return controllers;
                 }
 
                 @Override

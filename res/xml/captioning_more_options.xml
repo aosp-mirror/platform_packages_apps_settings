@@ -25,8 +25,12 @@
         android:summary="%s"
         android:title="@string/captioning_locale" />
 
-    <com.android.settingslib.widget.FooterPreference
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="captioning_more_options_footer"
         android:title="@string/accessibility_caption_preference_summary"
-        android:selectable="false" />
+        android:persistent="false"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.CaptionFooterPreferenceController"/>
 
 </PreferenceScreen>

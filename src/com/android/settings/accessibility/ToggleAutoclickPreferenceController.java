@@ -25,6 +25,7 @@ import android.content.res.Resources;
 import android.provider.Settings;
 import android.util.ArrayMap;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -44,16 +45,23 @@ import java.util.Map;
 public class ToggleAutoclickPreferenceController extends BasePreferenceController implements
         LifecycleObserver, RadioButtonPreference.OnClickListener, PreferenceControllerMixin {
 
-    private static final String CONTROL_AUTOCLICK_DELAY_SECURE =
+    @VisibleForTesting
+    static final String CONTROL_AUTOCLICK_DELAY_SECURE =
             Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY;
-    private static final String KEY_AUTOCLICK_CUSTOM_SEEKBAR = "autoclick_custom_seekbar";
+
+    @VisibleForTesting
+    static final String KEY_AUTOCLICK_CUSTOM_SEEKBAR = "autoclick_custom_seekbar";
     static final String KEY_DELAY_MODE = "delay_mode";
 
-    private static final int AUTOCLICK_OFF_MODE = 0;
-    private static final int AUTOCLICK_CUSTOM_MODE = 2000;
+    @VisibleForTesting
+    static final int AUTOCLICK_OFF_MODE = 0;
+
+    @VisibleForTesting
+    static final int AUTOCLICK_CUSTOM_MODE = 2000;
 
     // Pair the preference key and autoclick mode value.
-    private final Map<String, Integer> mAccessibilityAutoclickKeyToValueMap = new ArrayMap<>();
+    @VisibleForTesting
+    Map<String, Integer> mAccessibilityAutoclickKeyToValueMap = new ArrayMap<>();
 
     private SharedPreferences mSharedPreferences;
     private final ContentResolver mContentResolver;
@@ -70,13 +78,7 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
     private int mCurrentUiAutoClickMode;
 
     public ToggleAutoclickPreferenceController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
-
-        mSharedPreferences = context.getSharedPreferences(context.getPackageName(), MODE_PRIVATE);
-        mContentResolver = context.getContentResolver();
-        mResources = context.getResources();
-
-        setAutoclickModeToKeyMap();
+        this(context, /* lifecycle= */ null, preferenceKey);
     }
 
     public ToggleAutoclickPreferenceController(Context context, Lifecycle lifecycle,

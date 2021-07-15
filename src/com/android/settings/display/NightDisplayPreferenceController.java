@@ -15,18 +15,33 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
+import android.hardware.display.NightDisplayListener;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public class NightDisplayPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+/** A controller can control the behavior of night display setting. */
+public class NightDisplayPreferenceController extends TogglePreferenceController
+        implements NightDisplayListener.Callback, LifecycleObserver, OnStart, OnStop {
 
-    private static final String KEY_NIGHT_DISPLAY = "night_display";
+    private final ColorDisplayManager mColorDisplayManager;
+    private final NightDisplayListener mNightDisplayListener;
+    private final NightDisplayTimeFormatter mTimeFormatter;
+    private PrimarySwitchPreference mPreference;
 
-    public NightDisplayPreferenceController(Context context) {
-        super(context);
+    public NightDisplayPreferenceController(Context context, String key) {
+        super(context, key);
+
+        mColorDisplayManager = context.getSystemService(ColorDisplayManager.class);
+        mNightDisplayListener = new NightDisplayListener(context);
+        mTimeFormatter = new NightDisplayTimeFormatter(context);
     }
 
     public static boolean isSuggestionComplete(Context context) {
@@ -41,12 +56,47 @@ public class NightDisplayPreferenceController extends AbstractPreferenceControll
     }
 
     @Override
-    public boolean isAvailable() {
-        return ColorDisplayManager.isNightDisplayAvailable(mContext);
+    public void onStart() {
+        // Listen for changes only while attached.
+        mNightDisplayListener.setCallback(this);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_NIGHT_DISPLAY;
+    public void onStop() {
+        // Stop listening for state changes.
+        mNightDisplayListener.setCallback(null);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        return ColorDisplayManager.isNightDisplayAvailable(mContext)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean isChecked() {
+        return mColorDisplayManager.isNightDisplayActivated();
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        return mColorDisplayManager.setNightDisplayActivated(isChecked);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        preference.setSummary(mTimeFormatter.getAutoModeSummary(mContext, mColorDisplayManager));
+    }
+
+    @Override
+    public void onActivated(boolean activated) {
+        updateState(mPreference);
     }
 }

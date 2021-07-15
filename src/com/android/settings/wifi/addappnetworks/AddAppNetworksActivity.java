@@ -30,7 +30,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.core.HideNonSystemOverlayMixin;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 /**
  * When apps send a new intent with a WifiConfiguration list extra to Settings APP. Settings APP

@@ -38,7 +38,7 @@ public class InvisibleToggleAccessibilityServicePreferenceFragment extends
     @Override
     protected void onInstallSwitchPreferenceToggleSwitch() {
         super.onInstallSwitchPreferenceToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setVisible(false);
+        mToggleServiceSwitchPreference.setVisible(false);
     }
 
     /**

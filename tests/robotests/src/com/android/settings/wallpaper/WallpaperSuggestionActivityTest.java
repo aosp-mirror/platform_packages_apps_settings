@@ -56,6 +56,7 @@ public class WallpaperSuggestionActivityTest {
     private static final String PACKAGE_WALLPAPER_ACTIVITY =
             "com.android.settings.wallpaper.WallpaperSuggestionActivity";
     private static final String WALLPAPER_FLAVOR = "com.android.launcher3.WALLPAPER_FLAVOR";
+    private static final String WALLPAPER_LAUNCH_SOURCE = "com.android.wallpaper.LAUNCH_SOURCE";
 
     @Before
     public void setUp() {
@@ -100,7 +101,7 @@ public class WallpaperSuggestionActivityTest {
     }
 
     @Test
-    public void addExtras_intentFromSetupWizard_extrasHasWallpaperOnly() {
+    public void addExtras_intentFromSetupWizard_extrasHasWallpaperOnlyAndLaunchedSuw() {
         WallpaperSuggestionActivity activity =
                 Robolectric.buildActivity(WallpaperSuggestionActivity.class, new Intent(
                         Intent.ACTION_MAIN).setComponent(
@@ -112,6 +113,8 @@ public class WallpaperSuggestionActivityTest {
 
         assertThat(intent).isNotNull();
         assertThat(intent.getStringExtra(WALLPAPER_FLAVOR)).isEqualTo("wallpaper_only");
+        assertThat(intent.getStringExtra(WALLPAPER_LAUNCH_SOURCE))
+                .isEqualTo("app_launched_suw");
     }
 
     @Test
