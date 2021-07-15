@@ -33,6 +33,7 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.SetupSkipDialog;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -225,13 +226,17 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mResultIntent = data;
-        if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
+        if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
+                || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST) {
             // If the user finished or skipped enrollment, finish this activity
-            if (resultCode == RESULT_FINISHED || resultCode == RESULT_SKIP
-                    || resultCode == RESULT_TIMEOUT) {
+            if (resultCode == RESULT_SKIP || resultCode == RESULT_FINISHED
+                    || resultCode == SetupSkipDialog.RESULT_SKIP) {
                 setResult(resultCode, data);
                 finish();
             }
+        } else if (resultCode == RESULT_TIMEOUT) {
+            setResult(resultCode, data);
+            finish();
         }
     }
 
