@@ -31,6 +31,8 @@ import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.AccessNetworkConstants;
+import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -274,9 +276,16 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         if (!tmForSubId.isDataEnabled()) {
             return mContext.getString(R.string.mobile_data_off_summary);
         }
+        final ServiceState serviceState = tmForSubId.getServiceState();
+        final NetworkRegistrationInfo regInfo = (serviceState == null)
+                ? null
+                : serviceState.getNetworkRegistrationInfo(
+                        NetworkRegistrationInfo.DOMAIN_PS,
+                        AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
 
-        final boolean isDataInService = tmForSubId.getDataState()
-                == TelephonyManager.DATA_CONNECTED;
+        final boolean isDataInService = (regInfo == null)
+                ? false
+                : regInfo.isRegistered();
         final boolean isCarrierNetworkActive =
                 (mWifiPickerTrackerHelper != null)
                         && mWifiPickerTrackerHelper.isCarrierNetworkActive();
@@ -311,9 +320,16 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             return icon;
         }
 
-        final boolean isDataInService = tmForSubId.getDataState()
-                == TelephonyManager.DATA_CONNECTED;
         final ServiceState serviceState = tmForSubId.getServiceState();
+        final NetworkRegistrationInfo regInfo = (serviceState == null)
+                ? null
+                : serviceState.getNetworkRegistrationInfo(
+                        NetworkRegistrationInfo.DOMAIN_PS,
+                        AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
+
+        final boolean isDataInService = (regInfo == null)
+                ? false
+                : regInfo.isRegistered();
         final boolean isVoiceInService = (serviceState == null)
                 ? false
                 : (serviceState.getState() == ServiceState.STATE_IN_SERVICE);
