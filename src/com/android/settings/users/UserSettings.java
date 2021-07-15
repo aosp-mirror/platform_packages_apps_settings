@@ -16,8 +16,7 @@
 
 package com.android.settings.users;
 
-import static android.os.Process.myUserHandle;
-
+import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -39,16 +38,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
@@ -66,13 +68,15 @@ import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.MainSwitchBarController;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.users.EditUserInfoController;
+import com.android.settingslib.users.UserCreatingDialog;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -83,7 +87,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Screen that manages the list of users on the device.
@@ -109,7 +115,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_ADD_GUEST = "guest_add";
     private static final String KEY_ADD_USER = "user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
-    private static final String KEY_MULTIUSER_FOOTER = "multiuser_footer";
+    private static final String KEY_MULTIUSER_TOP_INTRO = "multiuser_top_intro";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
@@ -125,6 +131,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int DIALOG_USER_PROFILE_EDITOR = 9;
     private static final int DIALOG_USER_PROFILE_EDITOR_ADD_USER = 10;
     private static final int DIALOG_USER_PROFILE_EDITOR_ADD_RESTRICTED_PROFILE = 11;
+    private static final int DIALOG_CONFIRM_RESET_GUEST = 12;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
     private static final int MESSAGE_USER_CREATED = 2;
@@ -133,6 +140,9 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int USER_TYPE_RESTRICTED_PROFILE = 2;
 
     private static final int REQUEST_CHOOSE_LOCK = 10;
+    private static final int REQUEST_EDIT_GUEST = 11;
+
+    static final int RESULT_GUEST_REMOVED = 100;
 
     private static final String KEY_ADD_USER_LONG_MESSAGE_DISPLAYED =
             "key_add_user_long_message_displayed";
@@ -157,6 +167,7 @@ public class UserSettings extends SettingsPreferenceFragment
     SparseArray<Bitmap> mUserIcons = new SparseArray<>();
     private int mRemovingUserId = -1;
     private boolean mAddingUser;
+    private boolean mGuestUserAutoCreated;
     private String mAddingUserName;
     private UserCapabilities mUserCaps;
     private boolean mShouldUpdateUserList = true;
@@ -165,9 +176,13 @@ public class UserSettings extends SettingsPreferenceFragment
     private static SparseArray<Bitmap> sDarkDefaultUserBitmapCache = new SparseArray<>();
 
     private MultiUserSwitchBarController mSwitchBarController;
-    private EditUserInfoController mEditUserInfoController = new EditUserInfoController();
+    private EditUserInfoController mEditUserInfoController =
+            new EditUserInfoController(Utils.FILE_PROVIDER_AUTHORITY);
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
-    private MultiUserFooterPreferenceController mMultiUserFooterPreferenceController;
+    private MultiUserTopIntroPreferenceController mMultiUserTopIntroPreferenceController;
+    private UserCreatingDialog mUserCreatingDialog;
+    private final AtomicBoolean mGuestCreationScheduled = new AtomicBoolean();
+    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
     private CharSequence mPendingUserName;
     private Drawable mPendingUserIcon;
@@ -175,6 +190,8 @@ public class UserSettings extends SettingsPreferenceFragment
     // A place to cache the generated default avatar
     private Drawable mDefaultIconDrawable;
 
+    // TODO:   Replace current Handler solution to something that doesn't leak memory and works
+    // TODO:   during a configuration change
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -215,11 +232,12 @@ public class UserSettings extends SettingsPreferenceFragment
         // Assume we are in a SettingsActivity. This is only safe because we currently use
         // SettingsActivity as base for all preference fragments.
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar switchBar = activity.getSwitchBar();
-        mSwitchBarController = new MultiUserSwitchBarController(activity,
-                new SwitchBarController(switchBar), this /* listener */);
-        getSettingsLifecycle().addObserver(mSwitchBarController);
+        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+        switchBar.setTitle(getContext().getString(R.string.multiple_users_main_switch_title));
         switchBar.show();
+        mSwitchBarController = new MultiUserSwitchBarController(activity,
+                new MainSwitchBarController(switchBar), this /* listener */);
+        getSettingsLifecycle().addObserver(mSwitchBarController);
     }
 
     @Override
@@ -232,15 +250,18 @@ public class UserSettings extends SettingsPreferenceFragment
             return;
         }
 
+        mGuestUserAutoCreated = getPrefContext().getResources().getBoolean(
+                        com.android.internal.R.bool.config_guestUserAutoCreated);
+
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
                 activity, KEY_ADD_USER_WHEN_LOCKED);
 
-        mMultiUserFooterPreferenceController = new MultiUserFooterPreferenceController(activity,
-                KEY_MULTIUSER_FOOTER);
+        mMultiUserTopIntroPreferenceController = new MultiUserTopIntroPreferenceController(activity,
+                KEY_MULTIUSER_TOP_INTRO);
 
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
-        mMultiUserFooterPreferenceController.displayPreference(screen);
+        mMultiUserTopIntroPreferenceController.displayPreference(screen);
 
         screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
@@ -321,9 +342,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
         mEditUserInfoController.onSaveInstanceState(outState);
         outState.putInt(SAVE_REMOVING_USER, mRemovingUserId);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -335,7 +356,10 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        if (!mUserCaps.mIsAdmin && canSwitchUserNow()) {
+        // TODO(b/191509236): The menu item does not need to be accessible for guest users,
+        //  regardless of mGuestUserAutoCreated
+        if (!mUserCaps.mIsAdmin && canSwitchUserNow() && !(isCurrentUserGuest()
+                && mGuestUserAutoCreated)) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -379,7 +403,9 @@ public class UserSettings extends SettingsPreferenceFragment
         if (isCurrentUserGuest()) {
             // No need to load profile information
             mMePreference.setIcon(getEncircledDefaultIcon());
-            mMePreference.setTitle(R.string.user_exit_guest_title);
+            mMePreference.setTitle(
+                    mGuestUserAutoCreated ? com.android.settingslib.R.string.guest_reset_guest
+                            : R.string.user_exit_guest_title);
             mMePreference.setSelectable(true);
             // removing a guest will result in switching back to the admin user
             mMePreference.setEnabled(canSwitchUserNow());
@@ -424,8 +450,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void launchChooseLockscreen() {
         Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
-        chooseLockIntent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        chooseLockIntent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS,
+                true);
         startActivityForResult(chooseLockIntent, REQUEST_CHOOSE_LOCK);
     }
 
@@ -437,6 +463,9 @@ public class UserSettings extends SettingsPreferenceFragment
             if (resultCode != Activity.RESULT_CANCELED && hasLockscreenSecurity()) {
                 addUserNow(USER_TYPE_RESTRICTED_PROFILE);
             }
+        } else if (mGuestUserAutoCreated && requestCode == REQUEST_EDIT_GUEST
+                && resultCode == RESULT_GUEST_REMOVED) {
+            scheduleGuestCreation();
         } else {
             mEditUserInfoController.onActivityResult(requestCode, resultCode, data);
         }
@@ -471,21 +500,44 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void onUserCreated(int userId) {
+        hideUserCreatingDialog();
+        // prevent crash when config changes during user creation
+        if (getContext() == null) {
+            return;
+        }
         mAddingUser = false;
         UserInfo userInfo = mUserManager.getUserInfo(userId);
         openUserDetails(userInfo, true);
+    }
+
+    private void hideUserCreatingDialog() {
+        if (mUserCreatingDialog != null && mUserCreatingDialog.isShowing()) {
+            mUserCreatingDialog.dismiss();
+        }
+    }
+
+    private void onUserCreationFailed() {
+        Toast.makeText(getContext(),
+                com.android.settingslib.R.string.add_user_failed,
+                Toast.LENGTH_SHORT).show();
+        hideUserCreatingDialog();
     }
 
     private void openUserDetails(UserInfo userInfo, boolean newUser) {
         Bundle extras = new Bundle();
         extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
         extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
-        new SubSettingLauncher(getContext())
+
+        final Context context = getContext();
+        SubSettingLauncher launcher = new SubSettingLauncher(context)
                 .setDestination(UserDetailsSettings.class.getName())
                 .setArguments(extras)
-                .setTitleText(userInfo.name)
-                .setSourceMetricsCategory(getMetricsCategory())
-                .launch();
+                .setTitleText(getUserName(context, userInfo))
+                .setSourceMetricsCategory(getMetricsCategory());
+        if (mGuestUserAutoCreated && userInfo.isGuest()) {
+            launcher.setResultListener(this, REQUEST_EDIT_GUEST);
+        }
+        launcher.launch();
     }
 
     @Override
@@ -605,94 +657,86 @@ public class UserSettings extends SettingsPreferenceFragment
                 return dlg;
             }
             case DIALOG_USER_PROFILE_EDITOR: {
-                UserHandle user = myUserHandle();
-                UserInfo info = mUserManager.getUserInfo(user.getIdentifier());
-                return mEditUserInfoController.createDialog(
-                        this,
-                        Utils.getUserIcon(getPrefContext(), mUserManager, info),
-                        info.name,
-                        getString(com.android.settingslib.R.string.profile_info_settings_title),
-                        new EditUserInfoController.OnContentChangedCallback() {
-                            @Override
-                            public void onPhotoChanged(UserHandle user, Drawable photo) {
-                                ThreadUtils.postOnBackgroundThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mUserManager.setUserIcon(user.getIdentifier(),
-                                                UserIcons.convertToBitmap(photo));
-                                    }
-                                });
-                                mMePreference.setIcon(photo);
-                            }
-
-                            @Override
-                            public void onLabelChanged(UserHandle user, CharSequence label) {
-                                mMePreference.setTitle(label.toString());
-                                mUserManager.setUserName(user.getIdentifier(), label.toString());
-                            }
-                        },
-                        user,
-                        null);
+                return buildEditCurrentUserDialog();
             }
             case DIALOG_USER_PROFILE_EDITOR_ADD_USER: {
                 synchronized (mUserLock) {
-                    mPendingUserIcon = UserIcons.getDefaultUserIcon(getPrefContext().getResources(),
-                            new Random(System.currentTimeMillis()).nextInt(8), false);
                     mPendingUserName = getString(
                             com.android.settingslib.R.string.user_new_user_name);
+                    mPendingUserIcon = null;
                 }
-                return buildAddUserProfileEditorDialog(USER_TYPE_USER);
+                return buildAddUserDialog(USER_TYPE_USER);
             }
             case DIALOG_USER_PROFILE_EDITOR_ADD_RESTRICTED_PROFILE: {
                 synchronized (mUserLock) {
-                    mPendingUserIcon = UserIcons.getDefaultUserIcon(getPrefContext().getResources(),
-                            new Random(System.currentTimeMillis()).nextInt(8), false);
                     mPendingUserName = getString(
                             com.android.settingslib.R.string.user_new_profile_name);
+                    mPendingUserIcon = null;
                 }
-                return buildAddUserProfileEditorDialog(USER_TYPE_RESTRICTED_PROFILE);
+                return buildAddUserDialog(USER_TYPE_RESTRICTED_PROFILE);
+            }
+            case DIALOG_CONFIRM_RESET_GUEST: {
+                return UserDialogs.createResetGuestDialog(getActivity(),
+                        (dialog, which) -> resetGuest());
             }
             default:
                 return null;
         }
     }
 
-    private Dialog buildAddUserProfileEditorDialog(int userType) {
+    private Dialog buildEditCurrentUserDialog() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return null;
+        }
+
+        UserInfo user = mUserManager.getUserInfo(Process.myUserHandle().getIdentifier());
+        Drawable userIcon = Utils.getUserIcon(activity, mUserManager, user);
+
+        return mEditUserInfoController.createDialog(
+                activity,
+                this::startActivityForResult,
+                userIcon,
+                user.name,
+                getString(com.android.settingslib.R.string.profile_info_settings_title),
+                (newUserName, newUserIcon) -> {
+                    if (newUserIcon != userIcon) {
+                        ThreadUtils.postOnBackgroundThread(() ->
+                                mUserManager.setUserIcon(user.id,
+                                        UserIcons.convertToBitmap(newUserIcon)));
+                        mMePreference.setIcon(newUserIcon);
+                    }
+
+                    if (!TextUtils.isEmpty(newUserName) && !newUserName.equals(user.name)) {
+                        mMePreference.setTitle(newUserName);
+                        mUserManager.setUserName(user.id, newUserName);
+                    }
+                }, null);
+    }
+
+    private Dialog buildAddUserDialog(int userType) {
         Dialog d;
         synchronized (mUserLock) {
             d = mEditUserInfoController.createDialog(
-                    this,
-                    mPendingUserIcon,
-                    mPendingUserName,
+                    getActivity(),
+                    this::startActivityForResult,
+                    null,
+                    mPendingUserName.toString(),
                     getString(userType == USER_TYPE_USER
                             ? com.android.settingslib.R.string.user_info_settings_title
                             : com.android.settingslib.R.string.profile_info_settings_title),
-                    new EditUserInfoController.OnContentChangedCallback() {
-                        @Override
-                        public void onPhotoChanged(UserHandle user, Drawable photo) {
-                            mPendingUserIcon = photo;
-                        }
-
-                        @Override
-                        public void onLabelChanged(UserHandle user, CharSequence label) {
-                            mPendingUserName = label;
-                        }
+                    (userName, userIcon) -> {
+                        mPendingUserIcon = userIcon;
+                        mPendingUserName = userName;
+                        addUserNow(userType);
                     },
-                    myUserHandle(),
-                    new EditUserInfoController.OnDialogCompleteCallback() {
-                        @Override
-                        public void onPositive() {
-                            addUserNow(userType);
+                    () -> {
+                        synchronized (mUserLock) {
+                            mPendingUserIcon = null;
+                            mPendingUserName = null;
                         }
-
-                        @Override
-                        public void onNegativeOrCancel() {
-                            synchronized (mUserLock) {
-                                mPendingUserIcon = null;
-                                mPendingUserName = null;
-                            }
-                        }
-                    });
+                    }
+            );
         }
         return d;
     }
@@ -711,6 +755,7 @@ public class UserSettings extends SettingsPreferenceFragment
             case DIALOG_NEED_LOCKSCREEN:
                 return SettingsEnums.DIALOG_USER_NEED_LOCKSCREEN;
             case DIALOG_CONFIRM_EXIT_GUEST:
+            case DIALOG_CONFIRM_RESET_GUEST:
                 return SettingsEnums.DIALOG_USER_CONFIRM_EXIT_GUEST;
             case DIALOG_USER_PROFILE_EDITOR:
             case DIALOG_USER_PROFILE_EDITOR_ADD_USER:
@@ -743,8 +788,10 @@ public class UserSettings extends SettingsPreferenceFragment
             return;
         }
         try {
+            getContext().getSystemService(UserManager.class)
+                    .removeUserOrSetEphemeral(UserHandle.myUserId(),
+                            /* evenWhenDisallowed= */ false);
             ActivityManager.getService().switchUser(UserHandle.USER_SYSTEM);
-            getContext().getSystemService(UserManager.class).removeUser(UserHandle.myUserId());
         } catch (RemoteException re) {
             Log.e(TAG, "Unable to remove self user");
         }
@@ -759,6 +806,9 @@ public class UserSettings extends SettingsPreferenceFragment
                     : (mPendingUserName != null ? mPendingUserName.toString()
                             : getString(R.string.user_new_profile_name));
         }
+
+        mUserCreatingDialog = new UserCreatingDialog(getActivity());
+        mUserCreatingDialog.show();
         ThreadUtils.postOnBackgroundThread(new Runnable() {
             @Override
             public void run() {
@@ -781,13 +831,15 @@ public class UserSettings extends SettingsPreferenceFragment
                         mAddingUser = false;
                         mPendingUserIcon = null;
                         mPendingUserName = null;
+                        ThreadUtils.postOnMainThread(() -> onUserCreationFailed());
                         return;
                     }
 
-                    if (mPendingUserIcon != null) {
-                        mUserManager.setUserIcon(user.id,
-                                UserIcons.convertToBitmap(mPendingUserIcon));
+                    Drawable newUserIcon = mPendingUserIcon;
+                    if (newUserIcon == null) {
+                        newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
                     }
+                    mUserManager.setUserIcon(user.id, UserIcons.convertToBitmap(newUserIcon));
 
                     if (userType == USER_TYPE_USER) {
                         mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
@@ -806,12 +858,64 @@ public class UserSettings extends SettingsPreferenceFragment
     /**
      * Erase the current user (guest) and switch to another user.
      */
-    private void exitGuest() {
+    @VisibleForTesting
+    void exitGuest() {
         // Just to be safe
         if (!isCurrentUserGuest()) {
             return;
         }
+        mMetricsFeatureProvider.action(getActivity(),
+                SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED);
         removeThisUser();
+    }
+
+    /**
+     * Erase the current user (assuming it is a guest user), and create a new one in the background
+     */
+    @VisibleForTesting
+    void resetGuest() {
+        // Just to be safe
+        if (!isCurrentUserGuest()) {
+            return;
+        }
+        int guestUserId = UserHandle.myUserId();
+        // Using markGuestForDeletion allows us to create a new guest before this one is
+        // fully removed. This could happen if someone calls scheduleGuestCreation()
+        // immediately after calling this method.
+        boolean marked = mUserManager.markGuestForDeletion(guestUserId);
+        if (!marked) {
+            Log.w(TAG, "Couldn't mark the guest for deletion for user " + guestUserId);
+            return;
+        }
+        exitGuest();
+        scheduleGuestCreation();
+    }
+
+    /**
+     * Create a guest user in the background
+     */
+    @VisibleForTesting
+    void scheduleGuestCreation() {
+        // TODO(b/191067027): Move guest recreation to system_server
+        if (mGuestCreationScheduled.compareAndSet(/* expect= */ false, /* update= */ true)) {
+            // Once mGuestCreationScheduled=true, mAddGuest needs to be updated so that it shows
+            // "Resetting guest..."
+            mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+            mExecutor.execute(() -> {
+                UserInfo guest = mUserManager.createGuest(
+                        getContext(), getString(com.android.settingslib.R.string.user_guest));
+                mGuestCreationScheduled.set(false);
+                if (guest == null) {
+                    Log.e(TAG, "Unable to automatically recreate guest user");
+                }
+                // The list needs to be updated whether or not guest creation worked. If guest
+                // creation failed, the list needs to update so that "Add guest" is displayed.
+                // Otherwise, the UX could be stuck in a state where there is no way to switch to
+                // the guest user (e.g. Guest would not be selectable, and it would be stuck
+                // saying "Resetting guest...")
+                mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+            });
+        }
     }
 
     @VisibleForTesting
@@ -820,7 +924,7 @@ public class UserSettings extends SettingsPreferenceFragment
         if (context == null) {
             return;
         }
-        final List<UserInfo> users = mUserManager.getUsers(true);
+        final List<UserInfo> users = mUserManager.getAliveUsers();
 
         final ArrayList<Integer> missingIcons = new ArrayList<>();
         final ArrayList<UserPreference> userPreferences = new ArrayList<>();
@@ -837,32 +941,30 @@ public class UserSettings extends SettingsPreferenceFragment
             UserPreference pref;
             if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
-            } else if (user.isGuest()) {
-                pref = new UserPreference(getPrefContext(), null, user.id);
-                pref.setTitle(R.string.user_guest);
-                pref.setIcon(getEncircledDefaultIcon());
-                pref.setKey(KEY_USER_GUEST);
+            } else {
+                final Context prefContext = getPrefContext();
+                pref = new UserPreference(prefContext, null, user.id);
+                pref.setTitle(getUserName(prefContext, user));
                 userPreferences.add(pref);
+                pref.setOnPreferenceClickListener(this);
                 pref.setEnabled(canOpenUserDetails);
                 pref.setSelectable(true);
 
-                if (mUserCaps.mDisallowSwitchUser) {
-                    pref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
+                if (user.isGuest()) {
+                    pref.setIcon(getEncircledDefaultIcon());
+                    pref.setKey(KEY_USER_GUEST);
+                    if (mUserCaps.mDisallowSwitchUser) {
+                        pref.setDisabledByAdmin(
+                                RestrictedLockUtilsInternal.getDeviceOwner(context));
+                    } else {
+                        pref.setDisabledByAdmin(null);
+                    }
                 } else {
-                    pref.setDisabledByAdmin(null);
+                    pref.setKey("id=" + user.id);
+                    if (user.isAdmin()) {
+                        pref.setSummary(R.string.user_admin);
+                    }
                 }
-                pref.setOnPreferenceClickListener(this);
-            } else {
-                pref = new UserPreference(getPrefContext(), null, user.id);
-                pref.setKey("id=" + user.id);
-                userPreferences.add(pref);
-                if (user.isAdmin()) {
-                    pref.setSummary(R.string.user_admin);
-                }
-                pref.setTitle(user.name);
-                pref.setOnPreferenceClickListener(this);
-                pref.setEnabled(canOpenUserDetails);
-                pref.setSelectable(true);
             }
             if (pref == null) {
                 continue;
@@ -926,14 +1028,14 @@ public class UserSettings extends SettingsPreferenceFragment
         // Remove everything from mUserListCategory and add new users.
         mUserListCategory.removeAll();
 
-        // If multi-user is disabled, just show footer and return.
+        // If multi-user is disabled, just show top info and return.
         final Preference addUserOnLockScreen = getPreferenceScreen().findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey());
         mAddUserWhenLockedPreferenceController.updateState(addUserOnLockScreen);
 
-        final Preference multiUserFooterPrefence = getPreferenceScreen().findPreference(
-                mMultiUserFooterPreferenceController.getPreferenceKey());
-        mMultiUserFooterPreferenceController.updateState(multiUserFooterPrefence);
+        final Preference multiUserTopIntroPrefence = getPreferenceScreen().findPreference(
+                mMultiUserTopIntroPreferenceController.getPreferenceKey());
+        mMultiUserTopIntroPreferenceController.updateState(multiUserTopIntroPrefence);
         mUserListCategory.setVisible(mUserCaps.mUserSwitcherEnabled);
 
         updateAddGuest(context, users.stream().anyMatch(UserInfo::isGuest));
@@ -964,8 +1066,15 @@ public class UserSettings extends SettingsPreferenceFragment
                 && mUserCaps.mUserSwitcherEnabled) {
             mAddGuest.setVisible(true);
             mAddGuest.setIcon(getEncircledDefaultIcon());
-            mAddGuest.setEnabled(canSwitchUserNow());
             mAddGuest.setSelectable(true);
+            if (mGuestUserAutoCreated && mGuestCreationScheduled.get()) {
+                mAddGuest.setTitle(com.android.settingslib.R.string.user_guest);
+                mAddGuest.setSummary(R.string.guest_resetting);
+                mAddGuest.setEnabled(false);
+            } else {
+                mAddGuest.setTitle(com.android.settingslib.R.string.guest_new_guest);
+                mAddGuest.setEnabled(canSwitchUserNow());
+            }
         } else {
             mAddGuest.setVisible(false);
         }
@@ -1041,11 +1150,23 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
+    /** Returns the user's name, or the appropriate string in the case of a Guest. */
+    public static String getUserName(Context context, @NonNull UserInfo userInfo) {
+        if (userInfo.isGuest()) {
+            return context.getString(R.string.user_guest);
+        }
+        return userInfo.name;
+    }
+
     @Override
     public boolean onPreferenceClick(Preference pref) {
         if (pref == mMePreference) {
             if (isCurrentUserGuest()) {
-                showDialog(DIALOG_CONFIRM_EXIT_GUEST);
+                if (mGuestUserAutoCreated) {
+                    showDialog(DIALOG_CONFIRM_RESET_GUEST);
+                } else {
+                    showDialog(DIALOG_CONFIRM_EXIT_GUEST);
+                }
             } else {
                 showDialog(DIALOG_USER_PROFILE_EDITOR);
             }
@@ -1065,8 +1186,15 @@ public class UserSettings extends SettingsPreferenceFragment
             return true;
         } else if (pref == mAddGuest) {
             mAddGuest.setEnabled(false); // prevent multiple tap issue
+            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
             UserInfo guest = mUserManager.createGuest(
                     getContext(), getString(com.android.settingslib.R.string.user_guest));
+            if (guest == null) {
+                Toast.makeText(getContext(),
+                        com.android.settingslib.R.string.add_user_failed,
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            }
             openUserDetails(guest, true);
             return true;
         }

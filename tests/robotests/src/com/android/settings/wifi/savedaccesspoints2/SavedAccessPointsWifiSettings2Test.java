@@ -18,11 +18,22 @@ package com.android.settings.wifi.savedaccesspoints2;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import android.content.Context;
+import android.os.Bundle;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -30,9 +41,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowInteractionJankMonitor.class)
 public class SavedAccessPointsWifiSettings2Test {
 
     @Mock
@@ -41,11 +56,15 @@ public class SavedAccessPointsWifiSettings2Test {
     private SavedAccessPointsPreferenceController2 mSavedApController;
 
     private TestFragment mSettings;
+    private Context mContext;
+    private FragmentActivity mActivity;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         mSettings = spy(new TestFragment());
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
 
         doReturn(mSubscribedApController).when(mSettings)
                 .use(SubscribedAccessPointsPreferenceController2.class);
@@ -58,6 +77,54 @@ public class SavedAccessPointsWifiSettings2Test {
         assertThat(mSettings.getMetricsCategory()).isEqualTo(MetricsEvent.WIFI_SAVED_ACCESS_POINTS);
         assertThat(mSettings.getPreferenceScreenResId())
                 .isEqualTo(R.xml.wifi_display_saved_access_points2);
+    }
+
+    @Test
+    public void getTag_shouldReturnRightTag() {
+        assertThat(mSettings.getLogTag()).isEqualTo(SavedAccessPointsWifiSettings2.TAG);
+    }
+
+    @Test
+    public void onAttach_shouldCallSavedControllerSetHost() {
+        mSettings.onAttach(mContext);
+
+        verify(mSavedApController, times(1)).setHost(any());
+    }
+
+    @Test
+    public void onAttach_shouldCallSubscriptionControllerSetHost() {
+        mSettings.onAttach(mContext);
+
+        verify(mSubscribedApController, times(1)).setHost(any());
+    }
+
+    @Test
+    public void onCreate_shouldNewSavedNetworkTracker() {
+        mSettings = new TestFragment();
+        final FragmentManager fragmentManager = mActivity.getSupportFragmentManager();
+        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(mSettings, null /* tag */);
+        fragmentTransaction.commit();
+        final Bundle bundle = new Bundle();
+
+        mSettings.onCreate(bundle);
+
+        assertThat(mSettings.mSavedNetworkTracker).isNotNull();
+    }
+
+    @Test
+    public void onDestroy_shouldTerminateWorkerThread() {
+        mSettings = new TestFragment();
+        final FragmentManager fragmentManager = mActivity.getSupportFragmentManager();
+        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(mSettings, null /* tag */);
+        fragmentTransaction.commit();
+        final Bundle bundle = new Bundle();
+        mSettings.onCreate(bundle);
+
+        mSettings.onDestroy();
+
+        assertThat(mSettings.mWorkerThread.getState()).isEqualTo(Thread.State.TERMINATED);
     }
 
     public static class TestFragment extends SavedAccessPointsWifiSettings2 {

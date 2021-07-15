@@ -29,6 +29,7 @@ import android.nfc.NfcManager;
 import android.os.UserManager;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,9 +38,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowNfcAdapter.class)
 public class NfcAndPaymentFragmentControllerTest {
     private NfcAndPaymentFragmentController mController;
     private Context mContext;
@@ -50,29 +54,28 @@ public class NfcAndPaymentFragmentControllerTest {
     private UserManager mUserManager;
     @Mock
     private NfcManager mNfcManager;
-    @Mock
-    private NfcAdapter mNfcAdapter;
+
+    private ShadowNfcAdapter mShadowNfcAdapter;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mShadowNfcAdapter = Shadow.extract(NfcAdapter.getDefaultAdapter(mContext));
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.NFC_SERVICE)).thenReturn(mNfcManager);
-        when(NfcAdapter.getDefaultAdapter(mContext)).thenReturn(mNfcAdapter);
 
         mController = new NfcAndPaymentFragmentController(mContext, "fakeKey");
-        ReflectionHelpers.setField(mController, "mNfcAdapter", mNfcAdapter);
     }
 
     @Test
     public void getAvailabilityStatus_hasNfc_shouldReturnAvailable() {
         when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
         when(mUserManager.isAdminUser()).thenReturn(true);
-        when(mNfcAdapter.isEnabled()).thenReturn(true);
+        mShadowNfcAdapter.setEnabled(true);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(NfcAndPaymentFragmentController.AVAILABLE);
@@ -87,14 +90,14 @@ public class NfcAndPaymentFragmentControllerTest {
 
     @Test
     public void getSummary_nfcOn_shouldProvideOnSummary() {
-        when(mNfcAdapter.isEnabled()).thenReturn(true);
+        mShadowNfcAdapter.setEnabled(true);
         assertThat(mController.getSummary().toString()).contains(
                 mContext.getString(R.string.switch_on_text));
     }
 
     @Test
     public void getSummary_nfcOff_shouldProvideOffSummary() {
-        when(mNfcAdapter.isEnabled()).thenReturn(false);
+        mShadowNfcAdapter.setEnabled(false);
         assertThat(mController.getSummary().toString()).contains(
                 mContext.getString(R.string.switch_off_text));
     }

@@ -65,6 +65,14 @@ public class WifiSummaryUpdaterTest {
     }
 
     @Test
+    public void register_true_shouldFetchInitialStateAndSendSummaryChange() {
+        mSummaryUpdater.register(true);
+
+        verify(mWifiTracker).fetchInitialState();
+        verify(mListener).onSummaryChanged(anyString());
+    }
+
+    @Test
     public void register_false_shouldUnregisterListenerAndTracker() {
         mSummaryUpdater.register(true);
         mSummaryUpdater.register(false);

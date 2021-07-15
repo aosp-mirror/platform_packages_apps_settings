@@ -55,6 +55,12 @@
         settings:keywords="@string/keywords_system_navigation" />
 
     <Preference
+        android:key="gesture_one_handed"
+        android:title="@string/one_handed_title"
+        android:fragment="com.android.settings.gestures.OneHandedSettings"
+        settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController" />
+
+    <Preference
         android:key="gesture_tap_screen_input_summary"
         android:title="@string/ambient_display_tap_screen_title"
         android:fragment="com.android.settings.gestures.TapScreenGestureSettings"
@@ -76,14 +82,14 @@
         settings:controller="com.android.settings.gestures.PickupGesturePreferenceController" />
 
     <Preference
-        android:key="gesture_prevent_ringing_summary"
-        android:title="@string/gesture_prevent_ringing_screen_title"
-        android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
-        settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
-
-    <Preference
         android:key="gesture_power_menu_summary"
         android:title="@string/power_menu_setting_name"
         android:fragment="com.android.settings.gestures.PowerMenuSettings"
         settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
+
+    <com.android.settings.widget.PrimarySwitchPreference
+        android:key="gesture_prevent_ringing_summary"
+        android:title="@string/gesture_prevent_ringing_screen_title"
+        android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
+        settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 </PreferenceScreen>

@@ -59,7 +59,7 @@ public class SettingsBackupHelper extends BackupAgentHelper {
 
             try (FileOutputStream out = new FileOutputStream(newState.getFileDescriptor())) {
                 if (getVersionCode(oldState) != VERSION_CODE) {
-                    data.writeEntityHeader("dummy", 1);
+                    data.writeEntityHeader("placeholder", 1);
                     data.writeEntityData(new byte[1], 1);
                 }
 

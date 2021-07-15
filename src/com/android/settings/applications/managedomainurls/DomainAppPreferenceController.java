@@ -28,7 +28,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.AppLaunchSettings;
+import com.android.settings.applications.intentpicker.AppLaunchSettings;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;

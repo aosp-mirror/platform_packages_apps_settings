@@ -13,7 +13,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,7 +29,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?android:attr/colorBackgroundFloating"
             android:paddingTop="@dimen/conversation_message_list_padding"
             android:paddingStart="@dimen/conversation_message_list_padding"
             android:paddingEnd="@dimen/conversation_message_list_padding"
@@ -75,4 +75,4 @@
                 app:iconBackgroundColor="@color/message_icon_background_incoming" />
         </LinearLayout>
     </view>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

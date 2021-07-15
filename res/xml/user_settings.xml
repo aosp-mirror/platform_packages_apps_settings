@@ -20,6 +20,11 @@
     android:key="user_settings_screen"
     android:title="@string/user_settings_title">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="multiuser_top_intro"
+        android:title="@string/user_settings_footer_text"
+        settings:controller="com.android.settings.users.MultiUserTopIntroPreferenceController"/>
+
     <PreferenceCategory
         android:key="user_list"
         android:title="@string/user_list_title"
@@ -44,12 +49,5 @@
         android:singleLineTitle="false"
         android:order="105"
         settings:allowDividerAbove="true"/>
-
-    <com.android.settingslib.widget.FooterPreference
-        android:key="multiuser_footer"
-        android:title="@string/user_settings_footer_text"
-        android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.users.MultiUserFooterPreferenceController"/>
 
 </PreferenceScreen>

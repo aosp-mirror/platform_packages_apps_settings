@@ -36,7 +36,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.JobSchedulerImpl;
 import android.app.StatsManager;
@@ -59,8 +58,7 @@ import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settings.testutils.shadow.ShadowPowerWhitelistBackend;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -78,7 +76,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowConnectivityManager.class, ShadowPowerWhitelistBackend.class})
+@Config(shadows = {ShadowConnectivityManager.class})
 public class AnomalyDetectionJobServiceTest {
     private static final int UID = 12345;
     private static final String SYSTEM_PACKAGE = "com.android.system";
@@ -95,7 +93,7 @@ public class AnomalyDetectionJobServiceTest {
     @Mock
     private BatteryUtils mBatteryUtils;
     @Mock
-    private PowerWhitelistBackend mPowerWhitelistBackend;
+    private PowerAllowlistBackend mPowerAllowlistBackend;
     @Mock
     private StatsDimensionsValue mStatsDimensionsValue;
     @Mock
@@ -145,13 +143,13 @@ public class AnomalyDetectionJobServiceTest {
     }
 
     @Test
-    public void saveAnomalyToDatabase_systemWhitelisted_doNotSave() {
+    public void saveAnomalyToDatabase_systemAllowlisted_doNotSave() {
         doReturn(UID).when(mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
-        doReturn(true).when(mPowerWhitelistBackend).isWhitelisted(any(String[].class));
+        doReturn(true).when(mPowerAllowlistBackend).isAllowlisted(any(String[].class));
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
-                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mPowerAllowlistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider,
                 mFeatureFactory.metricsFeatureProvider, mBundle);
 
@@ -165,14 +163,14 @@ public class AnomalyDetectionJobServiceTest {
         cookies.add(SUBSCRIBER_COOKIES_AUTO_RESTRICTION);
         mBundle.putStringArrayList(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES, cookies);
         doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
-        doReturn(false).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
+        doReturn(false).when(mPowerAllowlistBackend).isSysAllowlisted(SYSTEM_PACKAGE);
         doReturn(Process.FIRST_APPLICATION_UID).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
         doReturn(true).when(mBatteryUtils).shouldHideAnomaly(any(), anyInt(), any());
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
-                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mPowerAllowlistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider,
                 mFeatureFactory.metricsFeatureProvider, mBundle);
 
@@ -192,7 +190,7 @@ public class AnomalyDetectionJobServiceTest {
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
-                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mPowerAllowlistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
                 mBundle);
 
@@ -207,7 +205,7 @@ public class AnomalyDetectionJobServiceTest {
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
-                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mPowerAllowlistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
                 mBundle);
 
@@ -221,13 +219,13 @@ public class AnomalyDetectionJobServiceTest {
         cookies.add(SUBSCRIBER_COOKIES_AUTO_RESTRICTION);
         mBundle.putStringArrayList(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES, cookies);
         doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
-        doReturn(false).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
+        doReturn(false).when(mPowerAllowlistBackend).isSysAllowlisted(SYSTEM_PACKAGE);
         doReturn(Process.FIRST_APPLICATION_UID).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
-                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mPowerAllowlistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
                 mBundle);
 
@@ -246,13 +244,13 @@ public class AnomalyDetectionJobServiceTest {
         cookies.add(SUBSCRIBER_COOKIES_NOT_AUTO_RESTRICTION);
         mBundle.putStringArrayList(StatsManager.EXTRA_STATS_BROADCAST_SUBSCRIBER_COOKIES, cookies);
         doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
-        doReturn(false).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
+        doReturn(false).when(mPowerAllowlistBackend).isSysAllowlisted(SYSTEM_PACKAGE);
         doReturn(Process.FIRST_APPLICATION_UID).when(
                 mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mContext,
                 mUserManager, mBatteryDatabaseManager, mBatteryUtils, mPolicy,
-                mPowerWhitelistBackend, mContext.getContentResolver(),
+                mPowerAllowlistBackend, mContext.getContentResolver(),
                 mFeatureFactory.powerUsageFeatureProvider, mFeatureFactory.metricsFeatureProvider,
                 mBundle);
 

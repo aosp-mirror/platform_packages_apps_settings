@@ -103,7 +103,7 @@ public class RegionZonePicker extends BaseTimeZoneInfoPicker {
         // It could be a timely operations if there are many time zones. A region in time zone data
         // contains a maximum of 29 time zones currently. It may change in the future, but it's
         // unlikely to be changed drastically.
-        return getRegionTimeZoneInfo(filteredCountryTimeZones.getTimeZoneIds());
+        return getRegionTimeZoneInfo(filteredCountryTimeZones.getPreferredTimeZoneIds());
     }
 
     /**

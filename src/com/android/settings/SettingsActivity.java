@@ -61,7 +61,7 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -172,7 +172,7 @@ public class SettingsActivity extends SettingsBaseActivity
         }
     };
 
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mMainSwitch;
 
     private Button mNextButton;
 
@@ -181,8 +181,8 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private DashboardFeatureProvider mDashboardFeatureProvider;
 
-    public SwitchBar getSwitchBar() {
-        return mSwitchBar;
+    public SettingsMainSwitchBar getSwitchBar() {
+        return mMainSwitch;
     }
 
     @Override
@@ -215,7 +215,7 @@ public class SettingsActivity extends SettingsBaseActivity
     private String getMetricsTag() {
         String tag = null;
         if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_FRAGMENT)) {
-            tag = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
+            tag = getInitialFragmentName(getIntent());
         }
         if (TextUtils.isEmpty(tag)) {
             Log.w(LOG_TAG, "MetricsTag is invalid " + tag);
@@ -246,7 +246,7 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         // Getting Intent properties can only be done after the super.onCreate(...)
-        final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
+        final String initialFragmentName = getInitialFragmentName(intent);
 
         // This is a "Sub Settings" when:
         // - this is a real SubSettings
@@ -290,9 +290,10 @@ public class SettingsActivity extends SettingsBaseActivity
             actionBar.setHomeButtonEnabled(!isInSetupWizard);
             actionBar.setDisplayShowTitleEnabled(true);
         }
-        mSwitchBar = findViewById(R.id.switch_bar);
-        if (mSwitchBar != null) {
-            mSwitchBar.setMetricsTag(getMetricsTag());
+        mMainSwitch = findViewById(R.id.switch_bar);
+        if (mMainSwitch != null) {
+            mMainSwitch.setMetricsTag(getMetricsTag());
+            mMainSwitch.setTranslationZ(findViewById(R.id.main_content).getTranslationZ() + 1);
         }
 
         // see if we should show Back/Next buttons
@@ -344,6 +345,12 @@ public class SettingsActivity extends SettingsBaseActivity
         if (DEBUG_TIMING) {
             Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
+    }
+
+    /** Returns the initial fragment name that the activity will launch. */
+    @VisibleForTesting
+    public String getInitialFragmentName(Intent intent) {
+        return intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
     }
 
     @Override
@@ -567,7 +574,7 @@ public class SettingsActivity extends SettingsBaseActivity
     /**
      * Switch to a specific Fragment with taking care of validation, Title and BackStack
      */
-    private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
+    private void switchToFragment(String fragmentName, Bundle args, boolean validate,
             int titleResId, CharSequence title) {
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
         if (validate && !isValidFragment(fragmentName)) {
@@ -575,6 +582,9 @@ public class SettingsActivity extends SettingsBaseActivity
                     + fragmentName);
         }
         Fragment f = Utils.getTargetFragment(this, fragmentName, args);
+        if (f == null) {
+            return;
+        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_content, f);
         if (titleResId > 0) {
@@ -585,7 +595,6 @@ public class SettingsActivity extends SettingsBaseActivity
         transaction.commitAllowingStateLoss();
         getSupportFragmentManager().executePendingTransactions();
         Log.d(LOG_TAG, "Executed frag manager pendingTransactions");
-        return f;
     }
 
     private void updateTilesList() {
@@ -678,7 +687,7 @@ public class SettingsActivity extends SettingsBaseActivity
         if (somethingChanged) {
             Log.d(LOG_TAG, "Enabled state changed for some tiles, reloading all categories "
                     + changedList.toString());
-            updateCategories();
+            mCategoryMixin.updateCategories();
         } else {
             Log.d(LOG_TAG, "No enabled state changed, skipping updateCategory call");
         }

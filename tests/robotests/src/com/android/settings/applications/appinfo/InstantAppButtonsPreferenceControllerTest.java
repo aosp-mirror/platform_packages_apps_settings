@@ -33,6 +33,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.InstallSourceInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -87,7 +88,7 @@ public class InstantAppButtonsPreferenceControllerTest {
     private InstantAppButtonsPreferenceController mController;
 
     @Before
-    public void setUp() {
+    public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
@@ -107,6 +108,10 @@ public class InstantAppButtonsPreferenceControllerTest {
         when(mPreference.getKey()).thenReturn("instant_app_buttons");
         mScreen.addPreference(mPreference);
         when(mPreference.findViewById(R.id.instant_app_button_container)).thenReturn(buttons);
+        final InstallSourceInfo installSourceInfo = mock(InstallSourceInfo.class);
+        when(mPackageManager.getInstallSourceInfo(TEST_AIA_PACKAGE_NAME))
+            .thenReturn(installSourceInfo);
+        when(installSourceInfo.getInstallingPackageName()).thenReturn(TEST_INSTALLER_PACKAGE_NAME);
     }
 
     @Test
@@ -165,12 +170,7 @@ public class InstantAppButtonsPreferenceControllerTest {
     @Test
     public void onPrepareOptionsMenu_hasAppStoreLink_shoulNotDisableInstallInstantAppMenu() {
         ReflectionHelpers.setField(mController, "mLaunchUri", "www.test.launch");
-        final ResolveInfo resolveInfo = mock(ResolveInfo.class);
-        final ActivityInfo activityInfo = mock(ActivityInfo.class);
-        resolveInfo.activityInfo = activityInfo;
-        activityInfo.packageName = TEST_INSTALLER_PACKAGE_NAME;
-        activityInfo.name = TEST_INSTALLER_ACTIVITY_NAME;
-        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
+        initAppStoreInfo();
         final Menu menu = mock(Menu.class);
         final MenuItem menuItem = mock(MenuItem.class);
         when(menu.findItem(AppInfoDashboardFragment.INSTALL_INSTANT_APP_MENU)).thenReturn(menuItem);
@@ -191,12 +191,7 @@ public class InstantAppButtonsPreferenceControllerTest {
 
     @Test
     public void onOptionsItemSelected_shouldOpenAppStore() {
-        final ResolveInfo resolveInfo = mock(ResolveInfo.class);
-        final ActivityInfo activityInfo = mock(ActivityInfo.class);
-        resolveInfo.activityInfo = activityInfo;
-        activityInfo.packageName = TEST_INSTALLER_PACKAGE_NAME;
-        activityInfo.name = TEST_INSTALLER_ACTIVITY_NAME;
-        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
+        initAppStoreInfo();
         mController.displayPreference(mScreen);
         final ComponentName componentName =
             new ComponentName(TEST_INSTALLER_PACKAGE_NAME, TEST_INSTALLER_ACTIVITY_NAME);
@@ -235,12 +230,7 @@ public class InstantAppButtonsPreferenceControllerTest {
 
     @Test
     public void displayPreference_hasAppStoreLink_shoulSetClickListenerForInstallButton() {
-        final ResolveInfo resolveInfo = mock(ResolveInfo.class);
-        final ActivityInfo activityInfo = mock(ActivityInfo.class);
-        resolveInfo.activityInfo = activityInfo;
-        activityInfo.packageName = TEST_INSTALLER_PACKAGE_NAME;
-        activityInfo.name = TEST_INSTALLER_ACTIVITY_NAME;
-        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
+        initAppStoreInfo();
 
         mController.displayPreference(mScreen);
 
@@ -272,12 +262,7 @@ public class InstantAppButtonsPreferenceControllerTest {
 
     @Test
     public void clickInstallButton_shouldOpenAppStore() {
-        final ResolveInfo resolveInfo = mock(ResolveInfo.class);
-        final ActivityInfo activityInfo = mock(ActivityInfo.class);
-        resolveInfo.activityInfo = activityInfo;
-        activityInfo.packageName = TEST_INSTALLER_PACKAGE_NAME;
-        activityInfo.name = TEST_INSTALLER_ACTIVITY_NAME;
-        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
+        initAppStoreInfo();
         mController.displayPreference(mScreen);
         final ComponentName componentName =
             new ComponentName(TEST_INSTALLER_PACKAGE_NAME, TEST_INSTALLER_ACTIVITY_NAME);
@@ -301,5 +286,14 @@ public class InstantAppButtonsPreferenceControllerTest {
 
         verify(fragmentTransaction).add(any(InstantAppButtonDialogFragment.class),
             eq("instant_app_buttons"));
+    }
+
+    private void initAppStoreInfo() {
+        final ResolveInfo resolveInfo = mock(ResolveInfo.class);
+        final ActivityInfo activityInfo = mock(ActivityInfo.class);
+        resolveInfo.activityInfo = activityInfo;
+        activityInfo.packageName = TEST_INSTALLER_PACKAGE_NAME;
+        activityInfo.name = TEST_INSTALLER_ACTIVITY_NAME;
+        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
     }
 }

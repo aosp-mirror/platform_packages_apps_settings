@@ -19,7 +19,6 @@ package com.android.settings.sim;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.SubscriptionManager;
@@ -54,6 +53,8 @@ public class SimDialogActivity extends FragmentActivity {
     public static final int PREFERRED_PICK = 3;
     // Show the "select SMS subscription" dialog, but don't save as default, just return a result
     public static final int SMS_PICK_FOR_MESSAGE = 4;
+    // Dismiss the current dialog and finish the activity.
+    public static final int PICK_DISMISS = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,12 @@ public class SimDialogActivity extends FragmentActivity {
 
     private void showOrUpdateDialog() {
         final int dialogType = getIntent().getIntExtra(DIALOG_TYPE_KEY, INVALID_PICK);
+
+        if (dialogType == PICK_DISMISS) {
+            finishAndRemoveTask();
+            return;
+        }
+
         final String tag = Integer.toString(dialogType);
         final FragmentManager fragmentManager = getSupportFragmentManager();
         SimDialogFragment fragment = (SimDialogFragment) fragmentManager.findFragmentByTag(tag);
