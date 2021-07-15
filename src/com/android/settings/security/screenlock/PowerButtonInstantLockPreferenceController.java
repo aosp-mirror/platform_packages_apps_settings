@@ -78,7 +78,7 @@ public class PowerButtonInstantLockPreferenceController extends AbstractPreferen
                     R.string.lockpattern_settings_power_button_instantly_locks_summary,
                     trustAgentLabel));
         } else {
-            preference.setSummary(R.string.summary_placeholder);
+            preference.setSummary(R.string.summary_empty);
         }
     }
 

@@ -62,8 +62,8 @@ public class EncryptionInterstitial extends SettingsActivity {
 
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
+        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
+        super.onApplyThemeResource(theme, new_resid, first);
     }
 
     @Override
@@ -111,6 +111,8 @@ public class EncryptionInterstitial extends SettingsActivity {
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             final boolean forFace = getActivity().getIntent()
                     .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
+            final boolean forBiometrics = getActivity().getIntent()
+                    .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
             Intent intent = getActivity().getIntent();
             mRequestedPasswordQuality = intent.getIntExtra(EXTRA_PASSWORD_QUALITY, 0);
             mUnlockMethodIntent = intent.getParcelableExtra(EXTRA_UNLOCK_METHOD_INTENT);
@@ -121,6 +123,8 @@ public class EncryptionInterstitial extends SettingsActivity {
                             R.string.encryption_interstitial_message_pattern_for_fingerprint :
                             forFace ?
                             R.string.encryption_interstitial_message_pattern_for_face :
+                            forBiometrics ?
+                            R.string.encryption_interstitial_message_pattern_for_biometrics :
                             R.string.encryption_interstitial_message_pattern;
                     break;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
@@ -129,6 +133,8 @@ public class EncryptionInterstitial extends SettingsActivity {
                             R.string.encryption_interstitial_message_pin_for_fingerprint :
                             forFace ?
                             R.string.encryption_interstitial_message_pin_for_face :
+                            forBiometrics ?
+                            R.string.encryption_interstitial_message_pin_for_biometrics :
                             R.string.encryption_interstitial_message_pin;
                     break;
                 default:
@@ -136,6 +142,8 @@ public class EncryptionInterstitial extends SettingsActivity {
                             R.string.encryption_interstitial_message_password_for_fingerprint :
                             forFace ?
                             R.string.encryption_interstitial_message_password_for_face :
+                            forBiometrics ?
+                            R.string.encryption_interstitial_message_password_for_biometrics :
                             R.string.encryption_interstitial_message_password;
                     break;
             }

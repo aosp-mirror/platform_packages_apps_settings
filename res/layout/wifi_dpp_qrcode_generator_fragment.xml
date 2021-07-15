@@ -33,8 +33,8 @@
             style="@style/TextAppearance.SudGlifBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="?attr/sudMarginSides"
-            android:layout_marginEnd="?attr/sudMarginSides"
+            android:layout_marginStart="?attr/sudMarginStart"
+            android:layout_marginEnd="?attr/sudMarginEnd"
             android:textAlignment="center"
             android:accessibilityLiveRegion="polite"/>
 
@@ -42,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:id="@+id/wifi_dpp_layout"
             android:orientation="vertical">
 
             <ImageView
@@ -54,8 +55,11 @@
                 android:id="@+id/password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
                 android:textAlignment="center"
+                android:textIsSelectable="true"
+                android:focusable="true"
+                android:longClickable="true"
                 android:textAppearance="@android:style/TextAppearance.Material.Body1"
                 android:textColor="?android:attr/textColorSecondary"/>
         </LinearLayout>

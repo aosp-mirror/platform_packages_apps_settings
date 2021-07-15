@@ -59,6 +59,11 @@ public class AllowSoundPreferenceController extends NotificationPreferenceContro
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return mPreferenceFilter.contains(NotificationChannel.EDIT_SOUND);
+    }
+
+    @Override
     public void updateState(Preference preference) {
         if (mChannel != null) {
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;

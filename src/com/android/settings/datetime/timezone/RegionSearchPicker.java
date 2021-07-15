@@ -71,14 +71,14 @@ public class RegionSearchPicker extends BaseTimeZonePicker {
         final FilteredCountryTimeZones countryTimeZones = mTimeZoneData.lookupCountryTimeZones(
                 regionId);
         final Activity activity = getActivity();
-        if (countryTimeZones == null || countryTimeZones.getTimeZoneIds().isEmpty()) {
+        if (countryTimeZones == null || countryTimeZones.getPreferredTimeZoneIds().isEmpty()) {
             Log.e(TAG, "Region has no time zones: " + regionId);
             activity.setResult(Activity.RESULT_CANCELED);
             activity.finish();
             return;
         }
 
-        List<String> timeZoneIds = countryTimeZones.getTimeZoneIds();
+        List<String> timeZoneIds = countryTimeZones.getPreferredTimeZoneIds();
         // Choose the time zone associated the region if there is only one time zone in that region
         if (timeZoneIds.size() == 1) {
             final Intent resultData = new Intent()

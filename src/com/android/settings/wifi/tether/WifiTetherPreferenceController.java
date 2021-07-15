@@ -18,7 +18,7 @@ package com.android.settings.wifi.tether;
 
 import android.annotation.NonNull;
 import android.content.Context;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiClient;
 import android.net.wifi.WifiManager;
@@ -44,7 +44,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
 
     private static final String WIFI_TETHER_SETTINGS = "wifi_tether";
 
-    private final ConnectivityManager mConnectivityManager;
+    private final TetheringManager mTetheringManager;
     private final String[] mWifiRegexs;
     private final WifiManager mWifiManager;
     private final Lifecycle mLifecycle;
@@ -62,10 +62,9 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     WifiTetherPreferenceController(Context context, Lifecycle lifecycle,
             boolean initSoftApManager) {
         super(context);
-        mConnectivityManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        mTetheringManager = context.getSystemService(TetheringManager.class);
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        mWifiRegexs = mConnectivityManager.getTetherableWifiRegexs();
+        mWifiRegexs = mTetheringManager.getTetherableWifiRegexs();
         mLifecycle = lifecycle;
         if (lifecycle != null) {
             lifecycle.addObserver(this);

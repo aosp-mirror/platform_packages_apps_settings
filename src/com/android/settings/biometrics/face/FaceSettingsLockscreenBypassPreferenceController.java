@@ -26,6 +26,7 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -82,6 +83,11 @@ public class FaceSettingsLockscreenBypassPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
+        // When the device supports multiple biometrics auth, this preference won't be shown
+        // in face unlock category.
+        if (Utils.isMultipleBiometricsSupported(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         if (mUserManager.isManagedProfile(UserHandle.myUserId())) {
             return UNSUPPORTED_ON_DEVICE;
         }

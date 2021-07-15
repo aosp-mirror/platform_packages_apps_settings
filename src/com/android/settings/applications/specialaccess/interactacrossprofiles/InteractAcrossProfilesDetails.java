@@ -142,7 +142,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     }
 
     private void logNonConfigurableAppMetrics() {
-        if (!isCrossProfilePackageWhitelisted(mPackageName)) {
+        if (!isCrossProfilePackageAllowlisted(mPackageName)) {
             logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_ADMIN_RESTRICTED);
             return;
         }
@@ -382,7 +382,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     private boolean refreshUiForNonConfigurableApps() {
         mSwitchPref.setChecked(false);
         mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
-        if (!isCrossProfilePackageWhitelisted(mPackageName)) {
+        if (!isCrossProfilePackageAllowlisted(mPackageName)) {
             mInstallBanner.setVisible(false);
             mSwitchPref.setDisabledByAdmin(RestrictedLockUtils.getProfileOrDeviceOwner(
                     mContext, mWorkProfile));
@@ -417,7 +417,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         return false;
     }
 
-    private boolean isCrossProfilePackageWhitelisted(String packageName) {
+    private boolean isCrossProfilePackageAllowlisted(String packageName) {
         return mContext.getSystemService(DevicePolicyManager.class)
                 .getAllCrossProfilePackages().contains(packageName);
     }

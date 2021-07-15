@@ -29,6 +29,7 @@ import com.google.android.material.card.MaterialCardView;
  * Preference that wrapped by {@link MaterialCardView}, only support to set icon, title and summary
  */
 public class CardPreference extends Preference {
+
     public CardPreference(Context context) {
         this(context, null /* attrs */);
     }

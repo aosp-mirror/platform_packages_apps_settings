@@ -19,8 +19,7 @@ import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
-import android.view.View;
-import android.widget.Button;
+import android.widget.Switch;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -29,22 +28,22 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.time.LocalTime;
 
 /**
  * Controller for activate/deactivate night mode button
  */
-public class DarkModeActivationPreferenceController extends BasePreferenceController {
+public class DarkModeActivationPreferenceController extends BasePreferenceController implements
+        OnMainSwitchChangeListener {
 
     private final UiModeManager mUiModeManager;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private PowerManager mPowerManager;
-    private Button mTurnOffButton;
-    private Button mTurnOnButton;
     private TimeFormatter mFormat;
-    private LayoutPreference mPreference;
+    private MainSwitchPreference mPreference;
 
     public DarkModeActivationPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -62,49 +61,9 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
 
     @Override
     public final void updateState(Preference preference) {
-
-        final boolean batterySaver = mPowerManager.isPowerSaveMode();
-        if (batterySaver) {
-            mTurnOnButton.setVisibility(View.GONE);
-            mTurnOffButton.setVisibility(View.GONE);
-            return;
-        }
-
         final boolean active = (mContext.getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_YES) != 0;
-        updateNightMode(active);
-    }
-
-    private void updateNightMode(boolean active) {
-        final int mode = mUiModeManager.getNightMode();
-        String buttonText;
-
-        if (mode == UiModeManager.MODE_NIGHT_AUTO) {
-            buttonText = mContext.getString(active
-                    ? R.string.dark_ui_activation_off_auto
-                    : R.string.dark_ui_activation_on_auto);
-        } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
-            final LocalTime time = active
-                    ? mUiModeManager.getCustomNightModeStart()
-                    : mUiModeManager.getCustomNightModeEnd();
-            final String timeStr = mFormat.of(time);
-            buttonText = mContext.getString(active
-                    ? R.string.dark_ui_activation_off_custom
-                    : R.string.dark_ui_activation_on_custom, timeStr);
-        } else {
-            buttonText = mContext.getString(active
-                    ? R.string.dark_ui_activation_off_manual
-                    : R.string.dark_ui_activation_on_manual);
-        }
-        if (active) {
-            mTurnOnButton.setVisibility(View.GONE);
-            mTurnOffButton.setVisibility(View.VISIBLE);
-            mTurnOffButton.setText(buttonText);
-        } else {
-            mTurnOnButton.setVisibility(View.VISIBLE);
-            mTurnOffButton.setVisibility(View.GONE);
-            mTurnOnButton.setText(buttonText);
-        }
+        mPreference.updateStatus(active);
     }
 
     @Override
@@ -132,26 +91,19 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
         }
     }
 
-    private final View.OnClickListener mListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
-            final boolean active = (mContext.getResources().getConfiguration().uiMode
-                    & Configuration.UI_MODE_NIGHT_YES) != 0;
-            mUiModeManager.setNightModeActivated(!active);
-            updateNightMode(!active);
-        }
-    };
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
+        final boolean active = (mContext.getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_YES) != 0;
+        mUiModeManager.setNightModeActivated(!active);
+    }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-
-        mPreference = screen.findPreference(getPreferenceKey());
-        mTurnOnButton = mPreference.findViewById(R.id.dark_ui_turn_on_button);
-        mTurnOnButton.setOnClickListener(mListener);
-        mTurnOffButton = mPreference.findViewById(R.id.dark_ui_turn_off_button);
-        mTurnOffButton.setOnClickListener(mListener);
+        mPreference = (MainSwitchPreference) screen.findPreference(getPreferenceKey());
+        mPreference.addOnSwitchChangeListener(this);
     }
 
     @Override

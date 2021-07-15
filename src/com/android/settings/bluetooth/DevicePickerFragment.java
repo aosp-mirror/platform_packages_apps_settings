@@ -212,6 +212,6 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
             }
         }
 
-        mContext.sendBroadcast(intent, Manifest.permission.BLUETOOTH_ADMIN);
+        mContext.sendBroadcast(intent, Manifest.permission.BLUETOOTH_CONNECT);
     }
 }
