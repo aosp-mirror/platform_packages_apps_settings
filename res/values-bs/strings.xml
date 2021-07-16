@@ -54,8 +54,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Napravi manji"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Napravi veći"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Koristi automatsko rotiranje"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Prepoznavanje lica koristi prednju kameru da poboljša preciznost automatskog rotiranja. Slike se nikad ne pohranjuju niti šalju Googleu."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Uzorak teksta"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Čarobnjak iz Oza"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Poglavlje 11: Smaragdni grad Oz"</string>
@@ -291,8 +290,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Dodavanje teksta na zaklj. ekranu"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Omogući vidžete"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Onemogućio administrator"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Prikaži opciju zaključavanja"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Prikaz opcije dugmeta za uključivanje koja isključuje Smart Lock, otključavanje licem, otključavanje otiskom prsta i obavještenja na zaključanom ekranu"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Zaključan ekran kad nema pouzdanosti"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Ako je omogućeno, uređaj će se zaključati kad zadnji pouzdani agent više ne bude pouzdan"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Ništa"</string>
@@ -360,6 +357,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -4644,7 +4643,7 @@
     <string name="condition_expand_show" msgid="1501084007540953213">"Prikaži"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"Sakrij"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"Pristupna tačka je aktivna"</string>
-    <string name="condition_airplane_title" msgid="5847967403687381705">"Airplane način rada je uključen"</string>
+    <string name="condition_airplane_title" msgid="5847967403687381705">"Način rada u avionu je uključen"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"Mreže nisu dostupne"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"Uključen način rada Ne ometaj"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Zvuk na telefonu je isključen"</string>
@@ -4896,7 +4895,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Za odlazak na početni ekran, prevucite prema gore s dna ekrana. Da prebacite aplikacije, prevucite prema gore s dna, zadržite, a zatim otpustite. Za vraćanje, prevucite s lijevog ili desnog ruba ekrana."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigacija pomoću 3 dugmeta"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Za vraćanje, otvaranje početnog ekrana i promjenu aplikacije, koristite dugmad u dnu ekrana."</string>
-    <string name="keywords_system_navigation" msgid="3131782378486554934">"navigiranje za sistem, navigiranje pomoću 2 dugmeta, navigiranje pomoću 3 dugmeta, navigiranje pokretima, prevlačenje"</string>
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"navigacija za sistem, navigacija pomoću 2 dugmeta, navigacija pomoću 3 dugmeta, navigacija pokretima, prevlačenje"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Nije podržano u vašoj zadanoj aplikaciji početnog ekrana, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Promijeni zadanu aplik. početnog ekrana"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitalni asistent"</string>
@@ -4910,7 +4909,7 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Veća osjetljivost može izazvati probleme prilikom korištenja pokreta aplikacija uz ivice ekrana."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Osjetljivost pokreta za povratak"</string>
     <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Postavke pokreta"</string>
-    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigiranje pokretima, osjetljivost pokreta za povratak, pokret za povratak"</string>
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigacija pokretima, osjetljivost pokreta za povratak, pokret za povratak"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Dodirnite dvaput da provjerite telefon"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Provjera tableta dvostrukim dodirom"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Provjera uređaja dvostrukim dodirom"</string>
@@ -4919,7 +4918,7 @@
     <string name="keywords_one_handed" msgid="969440592493034101">"mogućnost dosega"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Prevucite dolje za:"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Koristite prečicu za"</string>
-    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Da koristite način rada jednom rukom, prevucite prema dolje s gornjeg ruba ekrana. Da koristite ovu funkciju, provjerite je li navigiranje pokretima uključeno u postavkama navigacije sistema."</string>
+    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Da koristite način rada jednom rukom, prevucite prema dolje s gornjeg ruba ekrana. Da koristite ovu funkciju, provjerite je li navigacija pokretima uključena u postavkama navigacije sistema."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Prevucite ekran nadohvat palca"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Vrh ekrana će se pomjeriti nadohvat vašeg palca."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Prikaži obavještenja"</string>
@@ -5442,8 +5441,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"NASTAVI"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NE, HVALA"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Lokacija"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Vaš mobilni operater može prikupiti informacije o vašoj lokaciji prilikom korištenja ove usluge za hitne pozive.\n\nDetalje potražite u pravilima privatnosti mobilnog operatera."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Možete izgubiti pristup preostalom vremenu ili podacima. Prije uklanjanja, provjerite s pružaocem usluga."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"snimanje sadržaja, sadržaj aplikacije"</string>
     <string name="content_capture" msgid="868372905432812238">"Sadržaj aplikacije"</string>
