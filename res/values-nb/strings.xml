@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Gjør mindre"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Gjør større"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Bruk automatisk rotasjon"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Ansiktsgjenkjenning bruker frontkameraet til å forbedre nøyaktigheten til automatisk rotasjon. Bilder blir aldri lagret eller sendt til Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Eksempeltekst"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Trollmannen fra Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kapittel 11: Den vidunderlige smaragdbyen Oz"</string>
@@ -289,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Legg til tekst på låseskjermen"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Aktiver moduler"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Avslått av administratoren"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Vis alternativet for låsing"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Vis alternativet for av/på-knappen som slår av Smart Lock, ansiktslås, opplåsing med fingeravtrykk og varsler på låseskjermen"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Låseskjerm ved tapt pålitelighet"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Hvis alternativet er slått på, låses enheten når den siste pålitelige agenten ikke anses som pålitelig lenger"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Ingen"</string>
@@ -357,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -887,8 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Husk innstillinger"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimalt antall Bluetooth-lydenheter"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Velg maksimalt antall tilkoblede Bluetooth-lydenheter"</string>
-    <string name="nfc_stack_debuglog_title" msgid="1919539589005762645">"Slå på feilsøkingslogg for NFC-stabel"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="5602987951235764002">"Øk loggføringsnivå for NFC-stabel"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Feilsøkingslogg for NFC-stabel"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Øk loggføringsnivå for NFC-stabel"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"speil"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Slå på trådløs skjermdeling"</string>
@@ -2289,8 +2288,15 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Skjermleseren er hovedsakelig for blinde og svaksynte"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Trykk på elementer på skjermen din for å få dem opplest"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Valg for teksting"</string>
+    <!-- no translation found for accessibility_captioning_about_title (3542171637334191563) -->
+    <skip />
+    <!-- no translation found for accessibility_captioning_footer_learn_more_content_description (5730040700677017706) -->
+    <skip />
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Forstørring"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Forstørringssnarvei"</string>
+    <!-- no translation found for accessibility_screen_magnification_about_title (8857919020223505415) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_footer_learn_more_content_description (924848332575978463) -->
     <skip />
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Forstørringstype"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Forstørr hele skjermen eller et bestemt område, eller bytt mellom de to alternativene."</string>
@@ -2360,6 +2366,12 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Tillater at funksjonssnarveien slås på fra låseskjermen. Hold inne begge volumtastene i noen sekunder."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Tilgjengelighet-knapp"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Tilgjengelighet-knapp og bevegelse"</string>
+    <!-- no translation found for accessibility_button_about_title (3581116105084067926) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_about_title (8468987303602865536) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_footer_learn_more_content_description (4144803517680297869) -->
+    <skip />
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Bruk av Tilgjengelighet-knappen. Bevegelsen er ikke tilgjengelig med navigasjon med tre knapper."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Rask tilgang til tilgjengelighetsfunksjoner"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Få rask tilgang til tilgjengelighetsfunksjoner fra hvilken som helst skjerm.\n\nFor å komme i gang, gå til tilgjengelighetsinnstillingene og velg en funksjon. Trykk på snarveien og velg Tilgjengelighet-knappen.\n\nFor å bruke Tilgjengelighet-knappen i navigasjonsraden i stedet, bytt til navigasjon med to knapper eller navigasjon med tre knapper."</string>
@@ -2389,15 +2401,22 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minutt"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minutter"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Tidsperiode for handling (ventetid)"</string>
+    <!-- no translation found for accessibility_control_timeout_about_title (813588002683460837) -->
+    <skip />
+    <!-- no translation found for accessibility_control_timeout_footer_learn_more_content_description (8118584413220542193) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Tidsperiode for handling"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Velg hvor lenge du vil se meldinger som ber deg gjøre noe, men som bare vises midlertidig.\n\nIkke alle apper støtter denne innstillingen."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Forsinkelse for trykk-og-hold"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Fargeinvertering"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Bruk fargeinvertering"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Snarvei til fargeinvertering"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Med fargeinvertering blir skjermen mørk.&lt;br/&gt;&lt;br/&gt; Merk: &lt;ol&gt; &lt;li&gt; Fargeinvertering gjør også mørke skjermer lyse.&lt;/li&gt; &lt;li&gt; Farger endres i medier og bilder.&lt;/li&gt; &lt;li&gt; Mørkt tema kan brukes for å vise en mørk bakgrunn. Mørkt tema fungerer med støttede apper. Fargeinvertering fungerer på alle apper.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Autoklikk (holdetid)"</string>
+    <!-- no translation found for accessibility_autoclick_about_title (152923024405552594) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_footer_learn_more_content_description (7056189627042350691) -->
+    <skip />
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Autoklikk fungerer med en tilkoblet mus. Du kan angi at musemarkøren skal klikke automatisk etter at den har stått i ro en viss tid."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Av"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Kort"</string>
@@ -2417,7 +2436,14 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Bruk <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Åpne <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Bruk fargekorrigering"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Snarvei til fargekorrigering"</string>
+    <!-- no translation found for accessibility_daltonizer_about_title (6063650804116981287) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_footer_learn_more_content_description (2091679253892040910) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_about_title (8275754480247040136) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_footer_learn_more_content_description (5382579548498952445) -->
     <skip />
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Vis teksting"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Bare for apper som støttes"</string>
@@ -2458,7 +2484,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Blå-gul"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra dimmet"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Ekstra dimmet skjerm"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Snarvei til ekstra dimmet"</string>
+    <!-- no translation found for reduce_bright_colors_about_title (503655452544934393) -->
     <skip />
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Gjør skjermen mørkere enn den laveste lysstyrken på telefonen"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Gjør skjermen mørkere enn den laveste lysstyrken på nettbrettet"</string>
@@ -4525,7 +4552,7 @@
     <string name="camera_gesture_desc" msgid="7557645057320805328">"Åpne kameraappen ved å vri to ganger på håndleddet"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"Tykk på av/på-knappen to ganger for kamera"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"Åpne kameraet raskt uten å låse opp skjermen"</string>
-    <string name="screen_zoom_title" msgid="6928045302654960559">"Skjermstørrelse"</string>
+    <string name="screen_zoom_title" msgid="6928045302654960559">"Visningsstørrelse"</string>
     <string name="screen_zoom_short_summary" msgid="2458636490408833800">"Gjør alt på skjermen større eller mindre"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"skjermtetthet, zoom på skjermen, skala, skalering"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"Gjør alt på skjermen større eller mindre. Enkelte apper kan bli flyttet på skjermen."</string>
@@ -5279,6 +5306,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Ja"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Start på nytt"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Nei takk"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Avbryt"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Bytt"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Kan ikke aktivere SIM-kortet"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Fjern SIM-kortet og sett det inn igjen. Start enheten på nytt hvis problemet vedvarer."</string>
@@ -5363,8 +5391,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"FORTSETT"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NEI TAKK"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Posisjon"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Operatøren din kan samle inn posisjonen din når du bruker denne tjenesten for nødanrop.\n\nSe personvernreglene til operatøren for mer informasjon."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Du kan miste tilgang til gjenværende tid eller data. Sjekk med leverandøren din før fjerning."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"innholdsregistrering, appinnhold"</string>
     <string name="content_capture" msgid="868372905432812238">"Appinnhold"</string>

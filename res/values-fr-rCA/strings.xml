@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Rapetisser"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Utiliser la rotation automatique"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La technologie de détection du visage utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images sont jamais stockées ni envoyées à Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemple de texte"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Le Magicien d\'Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chapitre 11 : La merveilleuse cité d\'émeraude d\'Oz"</string>
@@ -289,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Ajouter texte sur écr. de verr."</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Activer les widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Désactivé par l\'administrateur"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Afficher l\'option de verrouillage"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Affichez l\'option de l\'interrupteur qui désactive Smart Lock, le déverrouillage par reconnaissance faciale, le déverrouillage par empreinte digitale et les notifications sur l\'écran de verrouillage"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Verr. écran en cas de perte de confiance"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Si cette fonction est activée, l\'appareil sera verrouillé lorsque le dernier agent de confiance perd sa marque de confiance"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Aucun"</string>
@@ -357,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -887,10 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Mémoriser ces paramètres"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maximum d\'appareils audio Bluetooth connectés"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Sélectionnez le nombre maximal d\'appareils Bluetooth connectés"</string>
-    <!-- no translation found for nfc_stack_debuglog_title (1919539589005762645) -->
-    <skip />
-    <!-- no translation found for nfc_stack_debuglog_summary (5602987951235764002) -->
-    <skip />
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Journal de débogage de la pile de la CCP"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Accroître le niveau de journalisation de la pile de la CCP"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"miroir"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activer l\'affichage sans fil"</string>
@@ -2291,8 +2288,15 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Le lecteur d\'écran est destiné principalement aux personnes atteintes de cécité et de troubles de la vue"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Touchez les éléments à l\'écran pour les entendre à haute voix"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Préférences de sous-titres"</string>
+    <!-- no translation found for accessibility_captioning_about_title (3542171637334191563) -->
+    <skip />
+    <!-- no translation found for accessibility_captioning_footer_learn_more_content_description (5730040700677017706) -->
+    <skip />
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Zoom"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Raccourci de l\'agrandissement"</string>
+    <!-- no translation found for accessibility_screen_magnification_about_title (8857919020223505415) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_footer_learn_more_content_description (924848332575978463) -->
     <skip />
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Type d\'agrandissement"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Agrandissez la totalité de votre écran, une région précise ou passez d\'une option à l\'autre"</string>
@@ -2362,6 +2366,12 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Autorisez le raccourci à activer la fonctionnalité à l\'écran de verrouillage. Pour cela, maintenez enfoncées les deux touches de volume pendant quelques secondes."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Bouton d\'accessibilité"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Bouton d\'accessibilité et geste"</string>
+    <!-- no translation found for accessibility_button_about_title (3581116105084067926) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_about_title (8468987303602865536) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_footer_learn_more_content_description (4144803517680297869) -->
+    <skip />
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilisez le bouton d\'accessibilité. Le geste n\'est pas proposé avec la navigation à trois boutons."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accès rapide aux fonctionnalités d\'accessibilité"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Accédez rapidement aux fonctionnalités d\'accessibilité à partir de n\'importe quel écran.\n\nPour commencer, accédez aux paramètres d\'accessibilité et sélectionnez une fonctionnalité. Touchez le raccourci et sélectionnez le bouton d\'accessibilité.\n\nPour plutôt utiliser le bouton d\'accessibilité dans la barre de navigation, passez à la navigation à deux boutons ou à la navigation à trois boutons."</string>
@@ -2391,15 +2401,22 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minute"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minutes"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Délai pour eff. une action (accessibilité)"</string>
+    <!-- no translation found for accessibility_control_timeout_about_title (813588002683460837) -->
+    <skip />
+    <!-- no translation found for accessibility_control_timeout_footer_learn_more_content_description (8118584413220542193) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Temps pour réagir"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Choisissez la durée d\'affichage des messages vous demandant d\'agir, mais qui ne sont visibles que temporairement.\n\nCe ne sont pas toutes les applications qui prennent en charge ce paramètre."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Délai de pression"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversion des couleurs"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utiliser l\'inversion des couleurs"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Raccourci de l\'inversion des couleurs"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"L\'inversion des couleurs assombrit les écrans lumineux.&lt;br/&gt;&lt;br/&gt; Remarque : &lt;ol&gt; &lt;li&amp;gtL\'inversion des couleurs éclaircit aussi les écrans sombres.&lt;/li&gt; &lt;li&gt;Les couleurs changeront dans les éléments multimédias et les images.&lt;/li&gt; &lt;li&gt;Le thème sombre peut être utilisé pour afficher un arrière-plan sombre. Le thème sombre fonctionne avec les applications prises en charge. L\'inversion des couleurs fonctionne avec toutes les applications.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatique (temps d\'arrêt)"</string>
+    <!-- no translation found for accessibility_autoclick_about_title (152923024405552594) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_footer_learn_more_content_description (7056189627042350691) -->
+    <skip />
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Le clic automatique fonctionne avec une souris connectée. Vous pouvez configurer votre souris de façon à ce qu\'un clic s\'effectue automatiquement lorsque le curseur s\'immobilise pendant un certain temps."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Désactivé"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Court"</string>
@@ -2419,7 +2436,14 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Utiliser <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Ouvrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Utiliser la correction des couleurs"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Raccourci de la correction des couleurs"</string>
+    <!-- no translation found for accessibility_daltonizer_about_title (6063650804116981287) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_footer_learn_more_content_description (2091679253892040910) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_about_title (8275754480247040136) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_footer_learn_more_content_description (5382579548498952445) -->
     <skip />
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Afficher les sous-titres"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Pour l\'application prise en charge seulement"</string>
@@ -2460,7 +2484,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Bleu-jaune"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Réduction supplémentaire de la luminosité"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Activer la réduction suppl. de la luminosité"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Raccourci de la réduction supplémentaire de la luminosité"</string>
+    <!-- no translation found for reduce_bright_colors_about_title (503655452544934393) -->
     <skip />
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Assombrir l\'écran de votre téléphone au-delà de sa luminosité minimale"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Assombrir l\'écran de votre tablette au-delà de sa luminosité minimale"</string>
@@ -4267,7 +4292,7 @@
     </plurals>
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Ajouter"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"S\'ouvre dans <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
-    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé dans <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé(s) dans <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="979243131665635278">"stockage interne"</string>
     <string name="storage_type_external" msgid="125078274000280821">"stockage externe"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> utilisés depuis <xliff:g id="DATE">%2$s</xliff:g>"</string>
@@ -5281,6 +5306,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Oui"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Redémarrer"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Non merci"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Annuler"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Changer"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Impossible d\'activer la carte SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Retirez la carte SIM, puis réinsérez-la. Si le problème persiste, redémarrez votre appareil."</string>
@@ -5365,8 +5391,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"CONTINUER"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NON MERCI"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Lieu"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Votre fournisseur de services peut collecter les données relatives à votre position lorsque vous utilisez ce service en lien avec les appels d\'urgence.\n\nConsultez la politique de confidentialité de votre fournisseur de services pour obtenir plus de détails."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Vous risquez de perdre l\'accès au temps ou aux données restants. Communiquez avec votre fournisseur de services avant de procéder au retrait."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"capture de contenu, contenu de l\'application"</string>
     <string name="content_capture" msgid="868372905432812238">"Contenu de l\'application"</string>
@@ -5474,8 +5499,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Réseau W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM TÉLÉCHARGÉE"</string>
-    <!-- no translation found for downloaded_sims_category_title (8779223441781763315) -->
-    <skip />
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"CARTES SIM TÉLÉCHARGÉES"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Active"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactive"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Configuration par défaut pour <xliff:g id="ID_1">%1$s</xliff:g>"</string>

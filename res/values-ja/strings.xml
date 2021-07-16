@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"拡大"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"自動回転を使用する"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"顔検出は、前面カメラを使用して自動回転の精度を高めます。画像が Google に保存されたり送信されたりすることはありません。"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"サンプル テキスト"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"オズの魔法使い"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"第 11 章: オズの不思議なエメラルド シティ"</string>
@@ -289,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"ロック画面にテキストを追加"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"ウィジェットの有効化"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"管理アプリによって無効化"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"ロックダウン オプションの表示"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Smart Lock、顔認証、指紋認証、ロック画面上の通知をすべて無効にするオプションを電源ボタンの長押しで表示します"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"信頼が失われた場合に画面をロック"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"有効にすると、前回の信頼エージェントの信頼が失われたときにデバイスがロックされます。"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"なし"</string>
@@ -357,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -887,8 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"設定を保存"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"接続できる Bluetooth オーディオ デバイスの上限"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"接続できる Bluetooth オーディオ デバイス数の上限の選択"</string>
-    <string name="nfc_stack_debuglog_title" msgid="1919539589005762645">"NFC スタック デバッグログを有効にする"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="5602987951235764002">"NFC スタック ロギングレベルを増やす"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC スタック デバッグログ"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC スタック ロギングレベルを増やす"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"キャスト"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ミラー"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ワイヤレス ディスプレイの有効化"</string>
@@ -2289,9 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"主に視覚障害者を対象としたスクリーンリーダー ツールです"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"画面上の項目をタップすると、読み上げます"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"字幕の設定"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"字幕の設定について"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"字幕の設定の詳細"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"拡大"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
-    <skip />
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"拡大のショートカット"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"拡大について"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"拡大の詳細"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"拡大の種類"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"常に画面全体または画面の一部を拡大するか、画面全体と一部の拡大を切り替えるかを選択できます"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"全画面"</string>
@@ -2360,6 +2362,9 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"有効にすると、音量大と音量小の両方のボタンを数秒ほど長押しすることで、ロック画面でもショートカットを ON にできます。"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"ユーザー補助機能ボタン"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"ユーザー補助機能ボタンと操作"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"ユーザー補助機能ボタンについて"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"ユーザー補助機能ボタンと操作について"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"ユーザー補助機能ボタンと操作の詳細"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"ユーザー補助機能ボタンを使用します。3 ボタン ナビゲーションでは操作は利用できません。"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"ユーザー補助機能にすばやくアクセスできます"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"どの画面からでもユーザー補助機能にすばやくアクセスできます。\n\n開始するには、[ユーザー補助] の設定に移動し、機能を選択します。ショートカットをタップし、ユーザー補助機能ボタンを選択します。\n\nこのボタンではなく、ナビゲーション バーにあるユーザー補助機能ボタンを使用するには、2 ボタン ナビゲーションまたは 3 ボタン ナビゲーションに切り替えます。"</string>
@@ -2389,15 +2394,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1分"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2分"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"操作までの時間（ユーザー補助タイムアウト）"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"操作までの時間（ユーザー補助タイムアウト）について"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"操作までの時間（ユーザー補助タイムアウト）の詳細"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"操作要求の表示時間"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"短い時間しか表示されない操作要求メッセージについて、表示時間を指定してください。\n\nこの設定に対応していないアプリもあります。"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"長押しする時間"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"色反転"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"色反転を使用"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"色反転のショートカット"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"色反転機能を使用すると、明るい画面が暗くなります。&lt;br/&gt;&lt;br/&gt; 注: &lt;ol&gt; &lt;li&gt; 暗い画面は逆に明るくなります。&lt;/li&gt; &lt;li&gt; メディアや画像の色が変わります。&lt;/li&gt; &lt;li&gt; ダークモードを使って背景を暗くすることもできます。ダークモードはアプリ側のサポートが必要ですが、色反転機能はすべてのアプリでご利用いただけます。&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"自動クリック（静止時間）"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"自動クリック（静止時間）について"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"自動クリック（静止時間）の詳細"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"自動クリックはマウスが接続されている場合に使えます。有効にすると、マウスのカーソルの動きを一定時間静止することで、自動的にクリックできます。"</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"OFF"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"短め"</string>
@@ -2417,8 +2425,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」の使用"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>を開く"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"色補正を使用"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
-    <skip />
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"色補正のショートカット"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"色補正について"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"色補正の詳細"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"色反転について"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"色反転の詳細"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"字幕の表示"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"対応アプリでのみ利用可能です"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"字幕のサイズとスタイル"</string>
@@ -2458,8 +2469,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"青 / 黄"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"さらに輝度を下げる"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"画面の輝度をさらに下げる"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
-    <skip />
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"さらに輝度を下げる機能のショートカット"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"さらに輝度を下げる機能について"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"スマートフォンで設定できる最低限の明るさよりも画面を暗くします"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"タブレットで設定できる最低限の明るさよりも画面を暗くします"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"画面を暗くして表示を見やすくします。&lt;br/&gt;&lt;br/&gt; 次のような場合に便利です。&lt;ol&gt; &lt;li&gt; デフォルトの最低限の明るさでも、スマートフォンの画面が明るすぎる&lt;/li&gt; &lt;li&gt; 夜の時間帯や就寝前の照明を消した部屋など、暗い場所でスマートフォンを使用している&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -2676,7 +2687,7 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"使用量の多いアプリを確認"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充電は一時的に制限されています"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"バッテリーを長持ちさせるためのヒントをご確認ください。"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"スマートフォンの使用が通常より多いため、バッテリーが通常より早くなくなる可能性があります。\n\nバッテリーを多く使用しているアプリ:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"スマートフォンのバッテリー使用量が通常より多いため、通常より早くバッテリーがなくなる可能性があります。\n\nバッテリーを多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"タブレットの使用が通常より多いため、バッテリーが通常より早くなくなる可能性があります。\n\nバッテリーを多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"デバイスの使用が通常より多いため、バッテリーが通常より早くなくなる可能性があります。\n\nバッテリーを多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"電力消費量の多いバックグラウンド アクティビティを含める"</string>
@@ -4585,7 +4596,7 @@
     <string name="condition_expand_show" msgid="1501084007540953213">"表示"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"非表示"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"アクセス ポイント有効"</string>
-    <string name="condition_airplane_title" msgid="5847967403687381705">"機内モードが ON"</string>
+    <string name="condition_airplane_title" msgid="5847967403687381705">"機内モードは ON です"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"ネットワークは利用できません"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"サイレント モード ON"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"スマートフォンをミュートに設定"</string>
@@ -5279,6 +5290,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"はい"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"再起動"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"いいえ"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"キャンセル"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"切り替える"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM を有効にできません"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM カードを取り出して、もう一度挿入してください。問題が解決しない場合は、デバイスを再起動してください。"</string>
@@ -5363,8 +5375,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"続行"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"同意しない"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"場所"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"このサービスを緊急通報に使用すると、携帯通信会社に位置情報を収集されることがあります。\n\n詳しくは、携帯通信会社のプライバシー ポリシーをご覧ください。"</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"残り時間や残りデータを利用できなくなる可能性があります。削除前にプロバイダにご確認ください。"</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"コンテンツの取得, アプリのコンテンツ"</string>
     <string name="content_capture" msgid="868372905432812238">"アプリのコンテンツ"</string>

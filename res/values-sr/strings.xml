@@ -54,8 +54,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Умањи"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увећај"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Користи аутоматско ротирање"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Препознавање лица користи предњу камеру за побољшање прецизности аутоматског ротирања. Слике се никада не чувају нити шаљу Google-у."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Пример текста"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Чаробњак из Оза"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Поглавље 11: Чудесни Смарагдни град Оза"</string>
@@ -291,8 +290,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Додајте текст на закључан екран"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Омогући виџете"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Администратор је онемогућио"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Прикажи опцију закључавања"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Прикажите опцију дугмета за напајање која искључује Smart Lock, откључавање лицем, откључавање отиском прста и обавештења на закључаном екрану"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Закључај екран када је агент непоуздан"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Ако се омогући, уређај ће се закључати када последњи поуздани агент више не буде поуздан"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Ништа"</string>
@@ -360,6 +357,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -904,8 +903,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Запамти подешавања"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максималан број повезаних Bluetooth аудио уређаја"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Изаберите максимални број повезаних Bluetooth аудио уређаја"</string>
-    <string name="nfc_stack_debuglog_title" msgid="1919539589005762645">"Омогући NFC евиденцију отклањања грешака"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="5602987951235764002">"Повећајте ниво евиденције за NFC групу"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Евиденција отклањања грешака за NFC групу"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Повећајте ниво евиденције за NFC групу"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Пребацивање"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"пресликати"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Омогући бежични приказ"</string>
@@ -2313,8 +2312,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Читач екрана првенствено намењен слепим и слабовидим особама"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Додирните ставке на екрану да бисте их чули"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Подешавања титла"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"О подешавањима титлова"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Сазнајте више о подешавањима титлова"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Увећање"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Пречица за увећање"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"О увећању"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Сазнајте више о увећању"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Тип увећања"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Увећајте цео екран, одређену област или прелазите са једне опције на другу"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Цео екран"</string>
@@ -2383,6 +2386,9 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Дозволите пречици функције да се укључи са закључаног екрана. Задржите оба тастера за јачину звука пар секунди."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Дугме Приступачност"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Дугме и покрет Приступачност"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"О дугмету Приступачност"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"О дугмету и покрету Приступачност"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Сазнајте више о дугмету и покрету Приступачност"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Коришћење дугмета Приступачност. Покрет није доступан уз навигацију помоћу 3 дугмета."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Брзо приступајте функцијама приступачности"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Брзо приступајте функцијама приступачности са било ког екрана.\n\nДа бисте започели, идите у подешавања приступачности и изаберите функцију. Додирните пречицу и изаберите дугме Приступачност.\n\nДа бисте користили дугме Приступачност на траци за навигацију, пређите на навигацију помоћу 2 дугмета или навигацију помоћу 3 дугмета."</string>
@@ -2412,6 +2418,8 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 минут"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 минута"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Период за реаговање (временско ограничење за приступачност)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"О периоду за реаговање (временско ограничење за приступачност)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Сазнајте више о периоду за реаговање (временско ограничење за приступачност)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Време за реаговање"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Одаберите колико дуго ће се приказивати поруке које траже да реагујете, али су видљиве само привремено.\n\nОво подешавање не подржавају све апликације."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Одлагање додира и задржавањa"</string>
@@ -2420,6 +2428,8 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Пречица за инверзију боја"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Инверзија боја претвара светле екране у тамне.&lt;br/&gt;&lt;br/&gt; Напомена: &lt;ol&gt; &lt;li&gt; Инверзија боја такође мења тамне екране у светле.&lt;/li&gt; &lt;li&gt; Боје се мењају у медијима и на сликама.&lt;/li&gt; &lt;li&gt; Тамна тема може да се користи за приказивање тамне позадине. Тамна тема функционише са подржаним апликацијама. Инверзија боја функционише у свим апликацијама.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Аутоматски клик (време задржавања)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Аутоматски клик (време задржавања)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Сазнајте више о аутоматском клику (време задржавања)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Аутоматски клик ради са повезаним мишем. Можете да подесите курсор да аутоматски кликне када престане да се креће у одређеном периоду."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Искључено"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Кратко"</string>
@@ -2440,6 +2450,10 @@
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Отворите апликацију <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Користи корекцију боја"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Пречица за корекцију боја"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"О корекцији боја"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Сазнајте више о корекцији боја"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"О инверзији боја"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Сазнајте више о инверзији боја"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Прикажи титл"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Само за подржане апликације"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Величина и стил титла"</string>
@@ -2481,6 +2495,7 @@
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Додатно затамњено"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Додатно затамни екран"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Пречица за додатно затамњење"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"О додатном затамњењу"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Затамните екран више од минималне осветљености телефона"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Затамните екран више од минималне осветљености таблета"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Затамните екран да би вам читање било пријатније.&lt;br/&gt;&lt;br/&gt; То може да вам буде корисно: &lt;ol&gt; &lt;li&gt; када је подразумевана минимална осветљеност телефона и даље јака&lt;/li&gt; &lt;li&gt; када користите телефон у мраку, на пример, ноћу или у тамној соби пре одласка на спавање&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -5362,6 +5377,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Да"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Рестартуј"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Не, хвала"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Откажи"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Пређи"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Активирање SIM картице није успело"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Уклоните SIM картицу, па је ставите поново. Ако се проблем и даље јавља, рестартујте уређај."</string>
@@ -5448,8 +5464,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"НАСТАВИ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"НЕ, ХВАЛА"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Локација"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Мобилни оператер може да прикупља податке о локацији када користите ову услугу за хитне позиве.\n\nПотражите детаље у политици приватности мобилног оператера."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Можете да изгубите приступ преосталом времену или подацима. Проверите са добављачем услуге пре уклањања."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"снимање садржаја, садржај апликације"</string>
     <string name="content_capture" msgid="868372905432812238">"Садржај апликације"</string>
