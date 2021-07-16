@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"放大"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"使用自動旋轉"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"面孔偵測功能會使用前置鏡頭提高自動旋轉的準確度。系統絕不會將相關圖像儲存或傳送給 Google。"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"範例文字"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"《綠野仙蹤》"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"第 11 章：奧茲國的奇妙翡翠城"</string>
@@ -357,6 +356,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -2290,9 +2291,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"主要為失明和弱視人士而設的螢幕閱讀器"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"輕按畫面上的項目即可收聽系統朗讀項目"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"字幕偏好設定"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"關於字幕偏好設定"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"進一步瞭解字幕偏好設定"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"放大"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
-    <skip />
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"放大功能捷徑"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"關於放大功能"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"進一步瞭解放大功能"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"放大類型"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"你可以放大成個或者局部畫面，亦都可以轉換呢兩種模式"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"全螢幕"</string>
@@ -2361,6 +2365,9 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"允許在上鎖畫面開啟功能捷徑。同時按住兩個音量鍵幾秒。"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"無障礙功能按鈕"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"無障礙工具按鈕和手勢"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"關於無障礙工具按鈕"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"關於無障礙工具按鈕和手勢"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"進一步瞭解無障礙工具按鈕和手勢"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"請使用無障礙功能按鈕。手勢無法與三按鈕導覽配搭使用。"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"快速使用無障礙功能"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"在任何畫面上快速使用無障礙功能。\n\n如要開始使用，請前往無障礙功能設定頁面並選擇所需功能，然後輕按快速鍵並選取無障礙功能按鈕。\n\n如要改用導覽列中的無障礙功能按鈕，請切換至雙按鈕導覽或三按鈕導覽。"</string>
@@ -2390,15 +2397,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 分鐘"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 分鐘"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"操作執行時間 (無障礙功能逾時)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"關於提示顯示時間 (無障礙功能逾時)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"進一步瞭解提示顯示時間 (無障礙功能逾時)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"處理時間"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"選擇需要您執行操作的訊息會暫時顯示多久。\n\n只有部分應用程式支援此設定。"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"輕觸並按住延遲"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"色彩反轉"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"使用色彩反轉"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"色彩反轉捷徑"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"色彩反轉功能可以將明亮的畫面調暗。&lt;br/&gt;&lt;br/&gt; 注意：&lt;ol&gt; &lt;li&gt; 此功能亦會將深色畫面轉為淺色。&lt;/li&gt; &lt;li&gt; 媒體和圖片的顏色會有所改變。&lt;/li&gt; &lt;li&gt; 深色主題可用於顯示深色的背景，但只適用於支援的應用程式。色彩反轉功能則適用於所有應用程式。&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"自動點擊 (停留時間)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"關於自動點擊 (停留時間)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"進一步瞭解自動點擊 (停留時間)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"自動點擊功能只適用於已連接的滑鼠。您可以設定滑鼠，讓游標停止移動一段時間後自動點擊。"</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"關閉"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"短"</string>
@@ -2418,8 +2428,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"使用「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"開 <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"使用色彩校正"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
-    <skip />
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"色彩校正捷徑"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"關於色彩校正"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"進一步瞭解色彩校正"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"關於色彩反轉"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"進一步瞭解色彩反轉"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"顯示字幕"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"僅限支援的應用程式"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"字幕大小和樣式"</string>
@@ -2459,8 +2472,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"藍黃不分"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"超暗"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"使用超暗螢幕"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
-    <skip />
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"超暗功能捷徑"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"關於超暗功能"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"將螢幕調至比手機最低亮度更暗"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"將螢幕調至比平板電腦最低亮度更暗"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"將螢幕調暗可讓您看手機時更舒適。&lt;br/&gt;&lt;br/&gt; 此設定適用於以下情況：&lt;ol&gt; &lt;li&gt; 手機預設的最低亮度仍然太亮&lt;/li&gt; &lt;li&gt; 在夜間或睡前黑暗的房間等昏暗環境下使用手機&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -2677,7 +2690,7 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看用電量最高的應用程式"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充電暫時受限"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"延長電池壽命。瞭解詳情。"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"由於您的手機使用率比平常高，因此電池可能比平時更快耗盡。\n\n耗電量最高的應用程式："</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"您比平常多用手機，電池電量可能會比平時更快用完。\n\n耗電量最高的應用程式："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"由於您的平板電腦使用率比平常高，因此電池可能比平時更快耗盡。\n\n耗電量最高的應用程式："</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"由於您的裝置使用率比平常高，因此電池可能比平時更快耗盡。\n\n耗電量最高的應用程式："</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"包括高耗電背景活動"</string>
@@ -5364,8 +5377,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"繼續"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"不用了，謝謝"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"位置"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"使用此服務撥打緊急電話時，流動網絡供應商可能會收集您的位置資訊。\n\n請瀏覽流動網絡供應商的私隱權政策瞭解詳情。"</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"您可能會失去所有剩餘時間或資料的存取權。移除前，請聯絡您的供應商尋求指示。"</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"內容擷取, 應用程式內容"</string>
     <string name="content_capture" msgid="868372905432812238">"應用程式內容"</string>

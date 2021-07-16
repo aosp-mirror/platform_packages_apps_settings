@@ -54,8 +54,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Samazināt"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Palielināt"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Automātiska pagriešana"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Sejas noteikšanas funkcija izmanto priekšējo kameru, lai uzlabotu automātiskās pagriešanas precizitāti. Attēli nekad netiek ne glabāti, ne sūtīti uzņēmumam Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Teksta paraugs"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Brīnumainais burvis no Oza zemes"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11. nodaļa: Oza zemes brīnumainā Smaragda pilsēta"</string>
@@ -360,6 +359,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -2311,8 +2312,15 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Ekrāna lasītājs, kas galvenokārt paredzēts akliem un vājredzīgiem lietotājiem"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Pieskarieties vienumiem ekrānā, lai tie tiktu skaļi nolasīti."</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Subtitru preferences"</string>
+    <!-- no translation found for accessibility_captioning_about_title (3542171637334191563) -->
+    <skip />
+    <!-- no translation found for accessibility_captioning_footer_learn_more_content_description (5730040700677017706) -->
+    <skip />
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Palielinājums"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Palielinājuma saīsne"</string>
+    <!-- no translation found for accessibility_screen_magnification_about_title (8857919020223505415) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_footer_learn_more_content_description (924848332575978463) -->
     <skip />
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Palielinājuma veids"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Varat palielināt visu ekrānu vai noteiktu apgabalu vai pāriet starp abām iespējām"</string>
@@ -2382,6 +2390,12 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Atļaut funkcijas saīsni ieslēgt no bloķēšanas ekrāna. Turiet abas skaļuma pogas dažas sekundes."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Pieejamības poga"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Pieejamības poga un žests"</string>
+    <!-- no translation found for accessibility_button_about_title (3581116105084067926) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_about_title (8468987303602865536) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_footer_learn_more_content_description (4144803517680297869) -->
+    <skip />
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Tiek izmantota pieejamības poga. Žests nav pieejams, izmantojot 3 pogu navigāciju."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Ātri piekļūt pieejamības funkcijām"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Ātra piekļuve pieejamības funkcijām no jebkura ekrāna.\n\nLai sāktu darbu, pārejiet uz pieejamības iestatījumiem un atlasiet funkciju. Pieskarieties saīsnei un atlasiet pieejamības pogu.\n\nLai izmantotu navigācijas joslā esošo pieejamības pogu, ieslēdziet 2 pogu navigāciju vai 3 pogu navigāciju."</string>
@@ -2411,15 +2425,22 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minūte"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minūtes"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Laiks darbībai (pieejamības noildze)"</string>
+    <!-- no translation found for accessibility_control_timeout_about_title (813588002683460837) -->
+    <skip />
+    <!-- no translation found for accessibility_control_timeout_footer_learn_more_content_description (8118584413220542193) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Laiks veikt darbību"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Izvēlieties to ziņojumu rādīšanas ilgumu, kuros ir iekļauts aicinājums uz darbību, bet kuri tiek rādīti tikai noteiktu laiku.\n\nNe visās lietotnēs šis iestatījums tiek atbalstīts."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Aizkave, pieskaroties un turot"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Krāsu inversija"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Izmantot krāsu inversiju"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Krāsu inversijas saīsne"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Izmantojot krāsu inversiju, ekrāna saturs gaišā krāsā tiek rādīts tumšā krāsā.&lt;br/&gt;&lt;br/&gt; Piezīme. &lt;ol&gt; &lt;li&gt; Tāpat, izmantojot krāsu inversiju, ekrāna saturs tumšā krāsā tiek rādīts gaišā krāsā.&lt;/li&gt; &lt;li&gt; Krāsas tiks mainītas multividē un attēlos.&lt;/li&gt; &lt;li&gt; Tumšo motīvu var izmantot, lai tiktu rādīts tumšs fons. Tumšais motīvs darbojas ar atbalstītajām lietotnēm. Krāsu inversija darbojas visās lietotnēs.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automātiska klikšķināšana (pārdomu laiks)"</string>
+    <!-- no translation found for accessibility_autoclick_about_title (152923024405552594) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_footer_learn_more_content_description (7056189627042350691) -->
+    <skip />
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Automātiskās klikšķināšanas funkcija darbojas ar savienotu peli. Varat iestatīt, lai peles kursors automātiski noklikšķina, kad tas noteiktu laiku nekustas."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Izslēgt"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Īss"</string>
@@ -2439,7 +2460,14 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Izmantot lietotni <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Atvērt lietotni <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Izmantot krāsu korekciju"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Krāsu korekcijas saīsne"</string>
+    <!-- no translation found for accessibility_daltonizer_about_title (6063650804116981287) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_footer_learn_more_content_description (2091679253892040910) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_about_title (8275754480247040136) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_footer_learn_more_content_description (5382579548498952445) -->
     <skip />
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Subtitru rādīšana"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Tikai atbalstītai lietotnei"</string>
@@ -2481,7 +2509,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Zila/dzeltena krāsa"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Papildu aptumšošana"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Izmantot ekrāna papildu aptumšošanu"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Papildu aptumšošanas saīsne"</string>
+    <!-- no translation found for reduce_bright_colors_about_title (503655452544934393) -->
     <skip />
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Padariet ekrānu tumšāku par tālruņa minimālo spilgtumu."</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Padariet ekrānu tumšāku par planšetdatora minimālo spilgtumu."</string>
@@ -5450,8 +5479,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"TURPINĀT"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NĒ, PALDIES"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Atrašanās vieta"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Ja izmantosiet šo pakalpojumu ārkārtas izsaukumiem, mobilo sakaru operators var ievākt jūsu atrašanās vietas informāciju.\n\nLai uzzinātu vairāk, skatiet mobilo sakaru operatora konfidencialitātes politiku."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Iespējams, zaudēsiet piekļuvi atlikušajam laikam vai datiem. Pirms noņemšanas sazinieties ar pakalpojuma sniedzēju."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"satura uzņēmums, lietotņu saturs"</string>
     <string name="content_capture" msgid="868372905432812238">"Lietotnes saturs"</string>

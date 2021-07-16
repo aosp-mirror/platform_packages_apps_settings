@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"ทำให้เล็กลง"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"ทำให้ใหญ่ขึ้น"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"ใช้การหมุนอัตโนมัติ"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"การตรวจจับใบหน้าใช้กล้องหน้าเพื่อเพิ่มความแม่นยำในการหมุนอัตโนมัติ รูปภาพจะไม่จัดเก็บหรือส่งไปยัง Google"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"ข้อความตัวอย่าง"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"พ่อมดมหัศจรรย์แห่งออซ"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"บทที่ 11: เมืองมรกตมหัศจรรย์แห่งออซ"</string>
@@ -357,6 +356,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -1434,7 +1435,7 @@
     <string name="force_bold_text" msgid="4620929631102086716">"ทำข้อความเป็นตัวหนา"</string>
     <string name="title_font_size" msgid="570613010306330622">"ขนาดอักษร"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"ทำให้ข้อความมีขนาดใหญ่ขึ้นหรือเล็กลง"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"การตั้งค่าการล็อก​ซิมการ์ด"</string>
+    <string name="sim_lock_settings" msgid="4493069398250139205">"การตั้งค่าการล็อกซิ⁠ม⁠ก⁠าร์⁠ด"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"การล็อกซิมการ์ด"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"ปิด"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"ล็อกแล้ว"</string>
@@ -2287,9 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"โปรแกรมอ่านหน้าจอที่ใช้สำหรับคนตาบอดหรือผู้มีสายตาบกพร่องเป็นหลัก"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"แตะรายการบนหน้าจอเพื่อฟังการอ่านออกเสียง"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"ค่ากำหนดคำบรรยายวิดีโอ"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"เกี่ยวกับค่ากำหนดคำบรรยาย"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"ดูข้อมูลเพิ่มเติมเกี่ยวกับค่ากำหนดคำบรรยาย"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"การขยาย"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
-    <skip />
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"ทางลัดการขยาย"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"เกี่ยวกับการขยาย"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการขยาย"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"ประเภทการขยาย"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"ขยายเป็นเต็มหน้าจอ ขยายพื้นที่ที่เจาะจง หรือจะสลับไปมาระหว่างตัวเลือกทั้ง 2 อย่างก็ได้"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"เต็มหน้าจอ"</string>
@@ -2358,6 +2362,9 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"อนุญาตให้ทางลัดฟีเจอร์เปิดขึ้นจากหน้าจอล็อก กดปุ่มปรับระดับเสียงทั้ง 2 ปุ่มค้างไว้ 2-3 วินาที"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"ปุ่มการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"ปุ่มและท่าทางสัมผัสการช่วยเหลือพิเศษ"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"เกี่ยวกับปุ่มการช่วยเหลือพิเศษ"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"เกี่ยวกับปุ่มการช่วยเหลือพิเศษและท่าทางสัมผัส"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"ดูข้อมูลเพิ่มเติมเกี่ยวกับปุ่มการช่วยเหลือพิเศษและท่าทางสัมผัส"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"กำลังใช้ปุ่มการช่วยเหลือพิเศษ ท่าทางสัมผัสดังกล่าวใช้กับการนำทางแบบ 3 ปุ่มไม่ได้"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"เข้าถึงฟีเจอร์การช่วยเหลือพิเศษได้อย่างรวดเร็ว"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"เข้าถึงฟีเจอร์การช่วยเหลือพิเศษได้อย่างรวดเร็วจากหน้าจอใดก็ได้\n\nหากต้องการเริ่มต้นใช้งาน ให้ไปที่การตั้งค่าการช่วยเหลือพิเศษแล้วเลือกฟีเจอร์ที่ต้องการ แตะทางลัดแล้วเลือกปุ่มการช่วยเหลือพิเศษ\n\nหากต้องการใช้ปุ่มการช่วยเหลือพิเศษในแถบนำทางแทน ให้เปลี่ยนไปใช้การนำทางแบบ 2 ปุ่มหรือการนำทางแบบ 3 ปุ่ม"</string>
@@ -2387,15 +2394,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 นาที"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 นาที"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"เวลาดำเนินการ (ระยะหมดเวลาช่วยเหลือพิเศษ)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"เกี่ยวกับเวลาดำเนินการ (ระยะหมดเวลาช่วยเหลือพิเศษ)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"ดูข้อมูลเพิ่มเติมเกี่ยวกับเวลาดำเนินการ (ระยะหมดเวลาช่วยเหลือพิเศษ)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"เวลาในการดำเนินการ"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"เลือกระยะเวลาแสดงข้อความที่ขอให้คุณดำเนินการแต่ปรากฏเพียงชั่วคราวเท่านั้น\n\nแอปบางแอปไม่รองรับการตั้งค่านี้"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"การหน่วงเวลาด้วยการแตะค้างไว้"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"การกลับสี"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"ใช้การกลับสี"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"ทางลัดการกลับสี"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"การกลับสีปรับหน้าจอที่สว่างให้มืดลง&lt;br/&gt;&lt;br/&gt; หมายเหตุ: &lt;ol&gt; &lt;li&gt; การกลับสีจะปรับหน้าจอที่มืดให้สว่างขึ้นด้วย&lt;/li&gt; &lt;li&gt; สีในสื่อและรูปภาพจะเปลี่ยนไป&lt;/li&gt; &lt;li&gt; คุณใช้ธีมมืดเพื่อแสดงพื้นหลังสีมืดได้ ธีมมืดใช้ได้กับแอปที่รองรับ การกลับสีใช้ได้กับทุกแอป&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"การคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"เกี่ยวกับการคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"การคลิกอัตโนมัติใช้งานได้กับเมาส์ที่เชื่อมต่อ คุณตั้งค่าให้เคอร์เซอร์เมาส์คลิกโดยอัตโนมัติเมื่อเคอร์เซอร์หยุดเคลื่อนที่เป็นระยะเวลาหนึ่งได้"</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"ปิด"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"สั้น"</string>
@@ -2415,8 +2425,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"ใช้ <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"เปิด <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"ใช้การแก้สี"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
-    <skip />
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"ทางลัดการแก้สี"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"เกี่ยวกับการแก้สี"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการแก้สี"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"เกี่ยวกับการกลับสี"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการกลับสี"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"แสดงคำบรรยาย"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"สำหรับแอปที่รองรับเท่านั้น"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"ขนาดและรูปแบบของคำบรรยาย"</string>
@@ -2456,8 +2469,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"สีน้ำเงิน/เหลือง"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"หรี่แสงเพิ่มเติม"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"หรี่แสงหน้าจอเพิ่มเติม"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
-    <skip />
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"ทางลัดการหรี่แสงเพิ่มเติม"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"เกี่ยวกับการหรี่แสงเพิ่มเติม"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"หรี่แสงหน้าจอให้มืดกว่าความสว่างต่ำสุดของโทรศัพท์"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"หรี่แสงหน้าจอให้มืดกว่าความสว่างต่ำสุดของแท็บเล็ต"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"หรี่แสงหน้าจอเพื่อให้อ่านได้สบายตายิ่งขึ้น&lt;br/&gt;&lt;br/&gt; ฟีเจอร์นี้จะเป็นประโยชน์เมื่อ &lt;ol&gt; &lt;li&gt; ความสว่างต่ำสุดเริ่มต้นของโทรศัพท์ยังคงสว่างเกินไป&lt;/li&gt; &lt;li&gt; คุณกำลังใช้โทรศัพท์ในสภาพแวดล้อมที่มืด เช่น ในเวลากลางคืนหรือก่อนเข้านอนในห้องที่มืด&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -3557,7 +3570,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"สด, RGB, sRGB, สี, ธรรมชาติ, มาตรฐาน"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"สี, อุณหภูมิ, D65, D73, ขาว, เหลือง, น้ำเงิน, อบอุ่น, เย็น"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"เลื่อนเพื่อปลดล็อก, รหัสผ่าน, รูปแบบ, PIN"</string>
-    <string name="keywords_app_pinning" msgid="1564144561464945019">"การตรึงหน้าจอ"</string>
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"การปักหมุดหน้าจอ"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"ความท้าทายในการทำงาน, งาน, โปรไฟล์"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"โปรไฟล์งาน, โปรไฟล์ที่มีการจัดการ, รวม, การรวม, งาน, โปรไฟล์"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"ท่าทางสัมผัส"</string>
@@ -5361,8 +5374,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ต่อไป"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"ไม่เป็นไร"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"ตำแหน่ง"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"ผู้ให้บริการอาจรวบรวมข้อมูลตำแหน่งเมื่อใช้บริการนี้สำหรับหมายเลขฉุกเฉิน\n\nไปที่นโยบายความเป็นส่วนตัวของผู้ให้บริการเพื่อดูรายละเอียด"</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"คุณอาจใช้เวลาหรืออินเทอร์เน็ตที่เหลือต่อไม่ได้ โปรดสอบถามผู้ให้บริการก่อนนำออก"</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"การบันทึกเนื้อหา เนื้อหาแอป"</string>
     <string name="content_capture" msgid="868372905432812238">"เนื้อหาแอป"</string>
