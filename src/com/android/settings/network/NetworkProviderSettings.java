@@ -167,7 +167,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     }
 
     private boolean mIsViewLoading;
-    private final Runnable mRemoveLoadingRunnable = () -> {
+    @VisibleForTesting
+    final Runnable mRemoveLoadingRunnable = () -> {
         if (mIsViewLoading) {
             setLoading(false, false);
             mIsViewLoading = false;
@@ -175,11 +176,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     };
 
     private boolean mIsWifiEntryListStale = true;
-    private final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
+    @VisibleForTesting
+    final Runnable mUpdateWifiEntryPreferencesRunnable = () -> {
         updateWifiEntryPreferences();
         getView().postDelayed(mRemoveLoadingRunnable, 10);
     };
-    private final Runnable mHideProgressBarRunnable = () -> {
+    @VisibleForTesting
+    final Runnable mHideProgressBarRunnable = () -> {
         setProgressBarVisible(false);
     };
 
@@ -445,6 +448,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onStop() {
         mIsWifiEntryListStale = true;
+        getView().removeCallbacks(mRemoveLoadingRunnable);
         getView().removeCallbacks(mUpdateWifiEntryPreferencesRunnable);
         getView().removeCallbacks(mHideProgressBarRunnable);
         mAirplaneModeEnabler.stop();
