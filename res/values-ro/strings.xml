@@ -54,8 +54,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Micșorați"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Măriți"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Folosiți Rotirea automată"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Detectarea facială folosește camera foto frontală pentru a îmbunătăți precizia Rotirii automate. Imaginile nu sunt niciodată stocate sau trimise la Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemplu de text"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Minunatul Vrăjitor din Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Capitolul 11: Minunatul Oraș de Smarald Oz"</string>
@@ -360,6 +359,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -2313,9 +2314,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Cititor de ecran destinat în principal utilizatorilor nevăzători și cu deficiențe de vedere"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Atingeți elementele de pe ecran pentru a le auzi cititte cu voce tare"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferințe pentru subtitrări"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Despre preferințele legate de subtitrări"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Aflați mai multe despre preferințele legate de subtitrări"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Mărire"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
-    <skip />
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Comandă rapidă pentru mărire"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Despre mărire"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Aflați mai multe despre mărire"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Tip de mărire"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Măriți tot ecranul sau o anumită zonă ori comutați între cele două opțiuni"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Ecran complet"</string>
@@ -2384,6 +2388,9 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permiteți activarea comenzii rapide pentru funcție din ecranul de blocare. Apăsați ambele taste pentru volum timp de câteva secunde."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Buton de accesibilitate"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Buton și gest de accesibilitate"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Despre butonul de accesibilitate"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Despre butonul de accesibilitate și gest"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Aflați mai multe despre butonul de accesibilitate și gest"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Folosirea butonului de accesibilitate. Gestul nu este disponibil în cazul navigării cu 3 butoane."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accesați rapid funcțiile de accesibilitate"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Accesați rapid funcțiile de accesibilitate de pe orice ecran.\n\nPentru a începe, accesați setările de accesibilitate și selectați o funcție. Atingeți comanda rapidă și selectați butonul de accesibilitate.\n\nPentru a folosi butonul de accesibilitate din bara de navigare, comutați la navigarea cu 2 butoane sau la navigarea cu 3 butoane."</string>
@@ -2413,15 +2420,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"Un minut"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minute"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Timp de reacție (timp limită de accesibilitate)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Despre timpul de reacție (timp limită de accesibilitate)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Aflați mai multe despre timpul de reacție (timp limită de accesibilitate)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Timp pentru a acționa"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Alegeți durata de afișare a mesajelor care vă cer să acționați, dar care sunt vizibile numai temporar.\n\nNu toate aplicațiile permit această setare."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Întârziere la atingere lungă"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversarea culorilor"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Folosiți inversarea culorilor"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Comandă rapidă pentru inversarea culorilor"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Inversarea culorilor întunecă ecranele luminoase.&lt;br/&gt;&lt;br/&gt; Notă &lt;ol&gt; &lt;li&gt; Dar, prin inversarea culorilor se deschid la culoare ecranele întunecate.&lt;/li&gt; &lt;li&gt; Culorile conținutului media și ale imaginilor se schimbă.&lt;/li&gt; &lt;li&gt; Puteți folosi Tema întunecată pentru a afișa un fundal întunecat. Tema întunecată funcționează cu aplicațiile compatibile. Inversarea culorilor funcționează în toate aplicațiile.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automat (durată de staționare)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Despre clicul automat (durată de staționare)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Aflați mai multe despre clicul automat (durată de staționare)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Clicul automat funcționează cu un mouse conectat. Puteți seta cursorul mouse-ului să dea clic automat când nu se mai mișcă pentru un anumit interval de timp."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Dezactivat"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Scurt"</string>
@@ -2441,8 +2451,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Folosiți <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Deschideți <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Folosiți corecția culorii"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
-    <skip />
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Comandă rapidă pentru corecția culorii"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Despre corecția culorii"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Aflați mai multe despre corecția culorii"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Despre inversarea culorilor"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Aflați mai multe despre inversarea culorilor"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Afișează subtitrările"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Numai pentru aplicațiile compatibile"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Dimensiunea și stilul subtitrărilor"</string>
@@ -2483,8 +2496,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Albastru-galben"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Luminozitate redusă suplimentar"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Reduceți suplimentar luminozitatea"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
-    <skip />
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Comandă rapidă pentru luminozitate redusă suplimentar"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Despre luminozitatea redusă suplimentar"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Întunecați ecranul sub setarea minimă pentru luminozitate a telefonului"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Întunecați ecranul sub setarea minimă pentru luminozitate a tabletei"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Întunecați ecranul pentru a citi mai confortabil.&lt;br/&gt;&lt;br/&gt; Această opțiune poate fi utilă atunci când: &lt;ol&gt; &lt;li&gt; luminozitatea minimă prestabilită a telefonului este prea mare;&lt;/li&gt; &lt;li&gt; folosiți telefonul în condiții de luminozitate scăzută, de exemplu, noaptea sau într-o cameră întunecată înainte de culcare.&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -5452,8 +5465,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"CONTINUAȚI"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NU, MULȚUMESC"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Locație"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Operatorul dvs. vă poate colecta locația atunci când folosiți acest serviciu pentru apeluri de urgență\n\nConsultați politica de confidențialitate a operatorului pentru detalii."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Puteți pierde accesul la timpul sau datele rămase. Consultați operatorul înainte de eliminare."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"captură de conținut, conținutul aplicației"</string>
     <string name="content_capture" msgid="868372905432812238">"Conținutul aplicației"</string>

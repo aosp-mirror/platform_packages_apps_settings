@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Réduire"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Utiliser la rotation automatique"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La détection de visages utilise l\'appareil photo frontal pour améliorer la précision de la rotation automatique. Les images ne sont jamais stockées ni envoyées à Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemple de texte"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Le Magicien d\'Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chapitre 11 : La merveilleuse cité d\'émeraude"</string>
@@ -357,6 +356,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -2287,8 +2288,15 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Le lecteur d\'écran est destiné principalement aux personnes atteintes de cécité ou de troubles de la vue"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Appuyez sur des éléments à l\'écran pour qu\'ils soient lus à voix haute"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Préférences pour les sous-titres"</string>
+    <!-- no translation found for accessibility_captioning_about_title (3542171637334191563) -->
+    <skip />
+    <!-- no translation found for accessibility_captioning_footer_learn_more_content_description (5730040700677017706) -->
+    <skip />
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Agrandissement"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Raccourci d\'agrandissement"</string>
+    <!-- no translation found for accessibility_screen_magnification_about_title (8857919020223505415) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_footer_learn_more_content_description (924848332575978463) -->
     <skip />
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Type d\'agrandissement"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Agrandir tout ou partie de l\'écran, ou basculer entre ces deux options"</string>
@@ -2358,6 +2366,12 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Autoriser le raccourci de la fonctionnalité à s\'activer à partir de l\'écran de verrouillage. Appuyer sur les deux touches de volume pendant quelques secondes."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Bouton Accessibilité"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Bouton et geste Accessibilité"</string>
+    <!-- no translation found for accessibility_button_about_title (3581116105084067926) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_about_title (8468987303602865536) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_footer_learn_more_content_description (4144803517680297869) -->
+    <skip />
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilisation du bouton Accessibilité. Geste indisponible avec la navigation à trois boutons."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accès rapide aux fonctionnalités d\'accessibilité"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Accédez rapidement aux fonctionnalités d\'accessibilité depuis n\'importe quel écran.\n\nPour commencer, allez dans les paramètres d\'accessibilité et sélectionnez une fonctionnalité. Appuyez sur le raccourci et sélectionnez le bouton Accessibilité.\n\nPour utiliser le bouton Accessibilité de la barre de navigation à la place, utilisez la navigation à deux boutons ou la navigation à trois boutons."</string>
@@ -2387,15 +2401,22 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minute"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minutes"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Temps pour réagir (accessibilité)"</string>
+    <!-- no translation found for accessibility_control_timeout_about_title (813588002683460837) -->
+    <skip />
+    <!-- no translation found for accessibility_control_timeout_footer_learn_more_content_description (8118584413220542193) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Temps pour réagir"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Choisissez pendant combien de temps doivent rester affichés les messages temporaires qui vous invitent à agir.\n\nCertaines applications ne sont pas compatibles avec ce paramètre."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Délai de l’appui prolongé"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversion des couleurs"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utiliser l\'inversion des couleurs"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Raccourci d\'inversion des couleurs"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"L\'inversion des couleurs assombrit les écrans lumineux.&lt;br/&gt;&lt;br/&gt; Remarque : &lt;ol&gt; &lt;li&gt; Elle éclaircit aussi les écrans sombres.&lt;/li&gt; &lt;li&gt; Les contenus multimédias et les images changeront de couleur.&lt;/li&gt; &lt;li&gt; Vous pouvez utiliser le thème sombre pour afficher un fond noir. Le thème sombre ne fonctionne que dans les applis compatibles. L\'inversion des couleurs fonctionne dans toutes les applis.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatique (temps d\'interaction)"</string>
+    <!-- no translation found for accessibility_autoclick_about_title (152923024405552594) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_footer_learn_more_content_description (7056189627042350691) -->
+    <skip />
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Le clic automatique fonctionne avec une souris connectée. Vous pouvez configurer le curseur de la souris de sorte qu\'un clic soit automatiquement déclenché s\'il cesse de bouger pendant un certain temps."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Désactiver"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Court"</string>
@@ -2415,7 +2436,14 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Utiliser <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Ouvrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Utiliser la correction des couleurs"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Raccourci de correction des couleurs"</string>
+    <!-- no translation found for accessibility_daltonizer_about_title (6063650804116981287) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_footer_learn_more_content_description (2091679253892040910) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_about_title (8275754480247040136) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_footer_learn_more_content_description (5382579548498952445) -->
     <skip />
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Afficher les sous-titres"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Pour les applications compatibles uniquement"</string>
@@ -2456,7 +2484,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Bleu-jaune"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Encore moins lumineux"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Rendre l\'écran encore moins lumineux"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Raccourci de \"encore moins lumineux\""</string>
+    <!-- no translation found for reduce_bright_colors_about_title (503655452544934393) -->
     <skip />
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Diminuer encore la luminosité minimale du téléphone"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Diminuer encore la luminosité minimale de la tablette"</string>
@@ -5361,8 +5390,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"CONTINUER"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NON MERCI"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Position"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Il se peut que votre opérateur recueille votre position lorsque vous utilisez ce service pour les appels d\'urgence.\n\nPour en savoir plus, consultez les règles de confidentialité de votre opérateur."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Vous risquez de perdre l\'accès au temps ou aux données restants. Contactez votre opérateur avant de procéder au retrait."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"capture de contenu, contenu de l\'application"</string>
     <string name="content_capture" msgid="868372905432812238">"Contenu des applications"</string>
