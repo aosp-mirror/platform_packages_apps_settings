@@ -25,10 +25,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Creates a warning dialog explaining the consequences of installing a CA certificate
@@ -40,8 +42,11 @@ public class InstallCaCertificateWarning extends Activity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        ThemeHelper.trySetDynamicColor(this);
         setContentView(R.layout.ca_certificate_warning_dialog);
         final GlifLayout layout = findViewById(R.id.setup_wizard_layout);
+        layout.setHeaderText(R.string.ca_certificate_warning_title);
 
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
         mixin.setSecondaryButton(
