@@ -288,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Voeg teks by op sluitskerm"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Aktiveer legstukke"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Gedeaktiveer deur administrateur"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Wys snelsluitopsie"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Wys aan/af-skakelaar-opsie wat Smart Lock, Gesigslot, Vingerafdrukslot en kennisgewings op die sluitskerm afskakel"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Sluit skerm wanneer vertroue verloor word"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"As dit geaktiveer is, sal die toestel sluit wanneer die laaste vertrouensagent vertroue verloor"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Geen"</string>
@@ -356,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -886,8 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Onthou instellings"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maks. gekoppelde Bluetooth-oudiotoestelle"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Kies maksimum aantal gekoppelde Bluetooth-oudiotoestelle"</string>
-    <string name="nfc_stack_debuglog_title" msgid="1919539589005762645">"Aktiveer NFC-stapelontfoutloglêer"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="5602987951235764002">"Verhoog NFC-stapelloglêervlak"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC-stapelontfoutingloglêer"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Verhoog NFC-stapelloglêervlak"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Saai uit"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"weerspieël"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktiveer draadlose skermdeling"</string>
@@ -2288,8 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Skermleser hoofsaaklik vir mense wat blind of swaksiende is"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tik op items op jou skerm om te hoor hoe hulle hardop gelees word"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Onderskrifvoorkeure"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Meer oor onderskrifvoorkeure"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Kom meer te wete oor onderskrifvoorkeure"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Vergroting"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Vergrotingkortpad"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Meer oor vergroting"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Kom meer te wete oor vergroting"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Vergrotingtipe"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Vergroot jou hele skerm of \'n spesifieke area, of wissel tussen die twee opsies"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Volskerm"</string>
@@ -2358,6 +2362,9 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Laat toe dat kenmerkkortpad van die sluitskerm af aangeskakel word. Hou albei volumesleutels \'n paar sekondes lank."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Toeganklikheidknoppie"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Toeganklikheidsknoppie en -gebaar"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Meer oor toeganklikheidknoppie"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Meer oor toeganklikheidknoppie en -gebaar"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Kom meer te wete oor toeganklikheidknoppie en -gebaar"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Gebruik tans toeganklikheidsknoppie. Die gebaar is nie beskikbaar met 3-knoppienavigasie nie."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Kry vinnig toegang tot toeganklikheidskenmerke"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Kry vinnig toegang tot toeganklikheidskenmerke op enige skerm.\n\nGaan na toeganklikheidsinstellings en kies \'n kenmerk om te begin. Tik op die kortpad en kies die toeganklikheidsknoppie.\n\nSkakel oor na 2-knoppienavigasie of 3-knoppienavigasie om eerder die toeganklikheidsknoppie in die navigasiebalk te gebruik."</string>
@@ -2387,6 +2394,8 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minuut"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minute"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Tyd vir aksie (toeganklikheiduittelling)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Meer oor Tyd vir Aksie (toeganklikheiduittelling)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Kom meer te wete oor Tyd vir Aksie (toeganklikheiduittelling)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Tyd om iets te doen"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Kies hoe lank om boodskappe te wys wat jou vra om iets te doen, maar wat net tydelik sigbaar is.\n\nNie alle programme ondersteun hierdie instelling nie."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Raak-en-hou-vertraging"</string>
@@ -2395,6 +2404,8 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Kleuromkeringkortpad"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Kleuromkering maak ligte skerms donker.&lt;br/&gt;&lt;br/&gt; Let wel: &lt;ol&gt; &lt;li&gt; Kleuromkering maak ook donker skerms lig.&lt;/li&gt; &lt;li&gt; Kleure in media en prente sal verander.&lt;/li&gt; &lt;li&gt; Donkertema kan gebruik word om \'n donker agtergrond te vertoon. Donkertema werk goed saam met gesteunde programme. Kleuromkering werk op alle programme.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Outoklik (stilstandtydtelling)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Oor outoklik (stilstandtydtelling)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Kom meer te wete oor outoklik (stilstandtydtelling)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Outoklik werk met \'n gekoppelde muis. Jy kan die muisskermpyltjie stel om outomaties te klik wanneer die skermpyltjie vir \'n sekere tydperk nie beweeg het nie."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Af"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Kort"</string>
@@ -2415,6 +2426,10 @@
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Maak <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> oop"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Gebruik kleurregstelling"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Kleurregstellingkortpad"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Meer oor kleurregstelling"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Kom meer te wete oor kleurregstelling"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Meer oor kleuromkering"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Kom meer te wete oor kleuromkering"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Wys onderskrifte"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Net vir gesteunde program"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Grootte en styl van onderskrif"</string>
@@ -2455,6 +2470,7 @@
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra donker"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Maak skerm ekstra donker"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Ekstra Donker-kortpad"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Meer oor ekstra donker"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Maak skerm donkerder as jou foon se minimum helderheid"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Maak skerm donkerder as jou tablet se minimum helderheid"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Maak jou skerm donkerder sodat dit geriefliker is om te lees.&lt;br/&gt;&lt;br/&gt; Dit kan nuttig wees wanneer: &lt;ol&gt; &lt;li&gt; Jou foon se verstek- minimum helderheid steeds te helder is&lt;/li&gt; &lt;li&gt; Jy jou foon in donker situasies gebruik, soos snags of in \'n donker vertrek voor slaaptyd&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -5274,6 +5290,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Ja"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Herbegin"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Nee, dankie"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Kanselleer"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Skakel oor"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Kan nie SIM aktiveer nie"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Verwyder die SIM en voeg dit weer in. Herbegin jou toestel as die probleem voortduur."</string>
@@ -5358,8 +5375,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"GAAN VOORT"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NEE, DANKIE"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Ligging"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Jou diensverskaffer kan jou ligging bepaal wanneer jy hierdie diens vir noodoproepe gebruik.\n\nKry besonderhede op jou diensverskaffer se privaatheidsbeleid."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Jy kan toegang tot enige oorblywende tyd of data verloor. Vra jou verskaffer voordat jy dit verwyder."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"inhoudvaslegging, programinhoud"</string>
     <string name="content_capture" msgid="868372905432812238">"Programinhoud"</string>

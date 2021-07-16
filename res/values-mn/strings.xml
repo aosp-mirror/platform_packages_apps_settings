@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Жижигрүүлэх"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Томруулах"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Автоматаар эргүүлэх онцлогийг ашиглах"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Царай илрүүлэх онцлог нь Автоматаар эргүүлэх онцлогийн нарийвчлалыг сайжруулахын тулд урд талын камерыг ашиглана. Зургийг Google-д хадгалдаггүйгээс гадна илгээдэггүй."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Жишээ текст"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Озын Гайхамшигт шидтэн"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Бүлэг 11: Озын Гайхамшигт Маргад эрдэнийн хот"</string>
@@ -289,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Түгжсэн дэлгэц дээр текст нэмэх"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Хэрэгсэл идэвхжүүлэх"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Админ цуцалсан"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Аюулгүйгээр түгжих (lockdown) сонголтыг харуулах"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Ухаалаг түгжээ, Царайгаар түгжээ тайлах, Хурууны хээгээр түгжээ тайлах болон түгжигдсэн дэлгэц дээрх мэдэгдлийг унтраадаг Асаах/Унтраах товчийн сонголтыг харуулна"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Итгэмжлэлийг алдах үед дэлгэцийг түгжинэ"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Хэрэв идэвхжүүлсэн бол төхөөрөмж хамгийн сүүлийн итгэмжлэгдсэн агент итгэмжлэлээ алдах үед түгжигдэнэ"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Байхгүй"</string>
@@ -357,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -887,8 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Тохиргоог сануулах"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Холбогдсон Bluetooth аудио төхөөрөмжийн дээд тоо"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Холбогдсон Bluetooth аудио төхөөрөмжийн дээд тоог сонгох"</string>
-    <string name="nfc_stack_debuglog_title" msgid="1919539589005762645">"NFC стекийн дебаг хийх логийг идэвхжүүлэх"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="5602987951235764002">"NFC стекийн логийн түвшинг нэмэгдүүлэх"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC стекийн дебаг хийх лог"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC стекийн логийн түвшнийг нэмэгдүүлэх"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Дамжуулах"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"тусгал"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Утасгүй дэлгэцийг идэвхжүүлэх"</string>
@@ -955,7 +954,7 @@
     <string name="wifi_poor_network_detection" msgid="8210035875160288422">"Муу холболтуудаас зайлсхийх"</string>
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"Wi-Fi сүлжээний интернет холболт муу байвал бүү ашиглаарай"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"Зөвхөн сайн интернет холболттой сүлжээг ашиглах"</string>
-    <string name="use_open_wifi_automatically_title" msgid="7193846454986712009">"Олон нийтийн Wi-Fi сүлжээнд холбогдох"</string>
+    <string name="use_open_wifi_automatically_title" msgid="7193846454986712009">"Нийтийн Wi-Fi сүлжээнд холбогдох"</string>
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"Өндөр чанартай нийтийн сүлжээнд автоматаар холбогдох"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Ашиглахын тулд сүлжээний үнэлгээ үзүүлэгчийг сонгоно уу"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Ашиглахын тулд тохирох сүлжээний үнэлгээ үзүүлэгчийг сонгоно уу"</string>
@@ -2289,9 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Дэлгэц уншигчийг ерөнхийдөө хараагүй болон сул хараатай хүмүүст зориулсан"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Дэлгэц дээрх зүйлсийг чанга уншуулахын тулд дарна уу"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Тайлбарын сонголт"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Тайлбарын тохиргооны тухай"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Тайлбарын тохиргооны тухай нэмэлт мэдээлэл авах"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Томруулах"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
-    <skip />
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Томруулах онцлогийн товчлол"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Томруулалтын тухай"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Томруулалтын тухай нэмэлт мэдээлэл авах"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Томруулах төрөл"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Бүтэн дэлгэц, тодорхой хэсгийг томруулах эсвэл аль аль сонголтын хооронд сэлгээрэй"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Бүтэн дэлгэц"</string>
@@ -2360,6 +2362,9 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Онцлогийн товчлолд түгжигдсэн дэлгэцээс асахыг зөвшөөрнө үү. Дууны түвшний хоёр түлхүүрийг хэдэн секундийн турш дарна уу."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Хандалтын товчлуур"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Хандалтын товчлуур болон зангаа"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Хандалтын товчлуурын тухай"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Хандалтын товчлуур болон зангааны тухай"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Хандалтын товчлуур болон зангааны тухай нэмэлт мэдээлэл авах"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Хандалтын товчлуурыг ашиглаж байна. 3 товчлуурт навигацаар зангаа боломжгүй байна."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Хандалтын онцлогуудад шуурхай хандана уу"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Дурын дэлгэцээс хандалтын онцлогуудад шуурхай хандана уу.\n\nЭхлүүлэхийн тулд хандалтын тохиргоо руу очиж, онцлогийг сонгоно уу. Товчлол дээр товшиж, хандалтын товчлуурыг сонгоно уу.\n\nХандалтын товчлуурыг оронд нь навигацын самбарт ашиглахын тулд 2 товчлуурт навигац эсвэл 3 товчлуурт навигац руу сэлгэнэ үү."</string>
@@ -2389,15 +2394,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 минут"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 минут"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Үйлдэл хийх хугацаа (Хандалтын хугацаа)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Үйлдэл хийх хугацааны тухай (Хандалтын хугацаа)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Үйлдэл хийх хугацааны тухай нэмэлт мэдээлэл авах (Хандалтын хугацаа)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Үйлдэл хийх хугацаа"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Танаас үйлдэл хийхийг шаарддаг хэдий ч зөвхөн түр хугацаанд харагддаг мессежийг хэр удаан хугацаагаар харуулахыг сонгоно уу.\n\nЗарим апп энэ тохиргоог дэмждэггүй."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Удаан дарах саатал"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Өнгө хувиргалт"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Өнгө хувиргалтыг ашиглах"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Өнгө урвуулах товчлол"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Өнгө хувиргалт нь цайвар дэлгэцийг бараан болгодог.&lt;br/&gt;&lt;br/&gt; Тэмдэглэл: &lt;ol&gt; &lt;li&gt; Өнгө хувиргалт нь мөн бараан дэлгэцийг цайвар болгодог.&lt;/li&gt; &lt;li&gt; Медиа болон зургийн өнгийг өөрчилнө.&lt;/li&gt; &lt;li&gt;Бараан дэвсгэрийг үзүүлэхийн тулд Бараан загварыг ашиглах боломжтой. Бараан загвар нь дэмждэг аппууд дээр ажилладаг. Өнгө хувиргалт нь бүх апп дээр ажилладаг.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Автомат товшилт (тодорхой хугацаатай)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Автомат товшилтын талаар (тодорхой хугацаа)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Автомат товшилтын талаар нэмэлт мэдээлэл авах (тодорхой хугацаа)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Автомат товшилт нь холбогдсон хулганатай ажилладаг. Курсор тодорхой хугацааны турш хөдлөхгүй зогсох үед та хулганын курсорыг автоматаар товшихоор тохируулах боломжтой."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Унтраах"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Богино"</string>
@@ -2417,8 +2425,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>-г ашиглах"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>-г нээх"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Өнгөний засварыг ашиглах"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
-    <skip />
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Өнгөний засварын товчлол"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Өнгөний засварын тухай"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Өнгөний засварын тухай нэмэлт мэдээлэл авах"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Өнгө урвуулах тухай"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Өнгө урвуулах тухай нэмэлт мэдээлэл авах"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Хадмалыг харуулах"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Зөвхөн дэмждэг аппад"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Тайлбарын үсгийн хэмжээ, загвар"</string>
@@ -2458,8 +2469,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Цэнхэр-шар"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Хэт бүүдгэр"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Дэлгэцийг хэт бүүдгэр болгох"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
-    <skip />
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Хэт бүүдгэр онцлогийн товчлол"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Хэт бүүдгэр онцлогийн тухай"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Дэлгэцийг таны утасны хамгийн бага гэрэлтүүлгээс бүүдгэр болгох"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Дэлгэцийг таны таблетын хамгийн бага гэрэлтүүлгээс бүүдгэр болгох"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Дэлгэцээ бүүдгэр болгосноор уншихад илүү тухтай болно.&lt;br/&gt;&lt;br/&gt; Энэ нь дараах тохиолдолд хэрэгтэй байж болно: &lt;ol&gt; &lt;li&gt; Таны утасны өгөгдмөл хамгийн бага гэрэлтүүлэг хэт тод хэвээр байх үед&lt;/li&gt; &lt;li&gt; Та утсаа шөнө эсвэл орондоо орохоос өмнө харанхуй өрөөнд байх зэргээр харанхуй нөхцөлд ашиглаж байгаа үед&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -5279,6 +5290,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Тийм"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Дахин эхлүүлэх"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Үгүй, баярлалаа"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Цуцлах"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Сэлгэх"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM-г идэвхжүүлэх боломжгүй"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM-г салгаад, дахин хийнэ үү. Хэрэв асуудал үргэлжилсээр байвал төхөөрөмжөө дахин эхлүүлнэ үү."</string>
@@ -5363,8 +5375,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ҮРГЭЛЖЛҮҮЛЭХ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"ҮГҮЙ, БАЯРЛАЛАА"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Байршил"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Таныг энэ үйлчилгээг яаралтай дуудлагад ашиглах үед таны оператор компани байршлын мэдээллийг тань цуглуулж магадгүй.\n\nДэлгэрэнгүй мэдээлэл авах бол оператор компанийнхаа нууцлалын бодлогод зочилно уу."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Та үлдсэн хугацаа эсвэл датад хандах эрхгүй болж магадгүй. Устгахаас өмнө үйлчилгээ үзүүлэгчтэйгээ холбогдоно уу."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"контентын зураг авах, аппын контент"</string>
     <string name="content_capture" msgid="868372905432812238">"Аппын контент"</string>
@@ -5454,7 +5465,7 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Түр хугацаанд боломжгүй"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM байхгүй"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Сүлжээний тохиргоо"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Олон нийтийн Wi-Fi сүлжээнд холбогдох"</string>
+    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Нийтийн Wi-Fi сүлжээнд холбогдох"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"сүлжээний холболт, интернэт, утасгүй интернэт, дата, wifi, wi-fi, wi fi, үүрэн холбоо, мобайл, үүрэн холбооны оператор, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"Wi‑Fi асаах"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"Wi-Fi-г унтраах"</string>

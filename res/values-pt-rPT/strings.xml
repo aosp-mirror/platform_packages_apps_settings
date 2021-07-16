@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Diminuir"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Aumentar"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Utilizar a rotação automática"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"A deteção facial utiliza a câmara frontal para melhorar a precisão da rotação automática. As imagens nunca são armazenadas nem enviadas à Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemplo de texto"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"O Maravilhoso Feiticeiro de Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Capítulo 11: A Maravilhosa Cidade Esmeralda de Oz"</string>
@@ -289,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Adicionar texto ao ecrã de bloqueio"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Ativar widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Desativado pelo gestor"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Mostrar opção de bloqueio"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Apresente a opção de botão ligar/desligar que desativa o Smart Lock, o Desbloqueio facial, o Desbloqueio por impressão digital e as notificações no ecrã de bloqueio"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Bloq. ecrã quando se perder a confiança"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Se estiver ativado, o dispositivo fica bloqueado quando o último agente fidedigno perder a confiança."</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Nenhum"</string>
@@ -357,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -887,8 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Memorizar definições"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Máximo de dispositivos de áudio Bluetooth associados"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selecione o número máximo de dispositivos de áudio Bluetooth associados."</string>
-    <string name="nfc_stack_debuglog_title" msgid="1919539589005762645">"Ativar registo de depuração de pilha NFC"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="5602987951235764002">"Aumentar nível de registo de pilha NFC"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Registo de depuração de pilha NFC"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Aumente o nível de registo de pilha NFC"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Transmitir"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"espelhar"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Ativar display sem fios"</string>
@@ -2289,8 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Leitor de ecrã principalmente para pessoas invisuais ou com visão reduzida"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Toque nos itens no ecrã para que sejam lidos em voz alta"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferências de legendas"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Acerca das preferências de legendas"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Saiba mais acerca das preferências de legendas"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ampliação"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Atalho da ampliação"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Acerca da ampliação"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Saiba mais acerca da ampliação"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Tipo de ampliação"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Ampliar o ecrã inteiro, uma área específica ou alternar entre as duas opções"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Ecrã inteiro"</string>
@@ -2359,6 +2362,9 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permita que o atalho da funcionalidade seja ativado a partir do ecrã de bloqueio. Mantenha premidas ambas as teclas de volume durante alguns segundos."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Botão Acessibilidade"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Botão e gesto de acessibilidade"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Acerca do botão Acessibilidade"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Acerca do gesto e botão Acessibilidade"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Saiba mais acerca do gesto e botão Acessibilidade"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilizar o botão Acessibilidade. O gesto não está disponível com a navegação com 3 botões."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Aceda rapidamente às funcionalidades de acessib."</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Aceda rapidamente às funcionalidades de acessibilidade a partir de qualquer ecrã.\n\nPara começar, aceda às definições de acessibilidade e selecione uma funcionalidade. Toque no atalho e selecione o botão Acessibilidade.\n\nPara utilizar o botão Acessibilidade na barra de navegação, mude para a navegação com 2 botões ou navegação com 3 botões."</string>
@@ -2388,6 +2394,8 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minuto"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minutos"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Limite de tempo para ações (Acessibilidade)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Acerca do limite de tempo para ações (Acessibilidade)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Saiba mais acerca do limite de tempo para ações (Acessibilidade)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Tempo para tomar medidas"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Escolha o tempo durante o qual pretende mostrar mensagens que lhe solicitam que tome medidas, mas que são visíveis apenas temporariamente.\n\nNem todas as aplicações são compatíveis com esta definição."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Atraso ao manter premida a tecla"</string>
@@ -2396,6 +2404,8 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Atalho da inversão de cores"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"A inversão de cores escurece os ecrãs claros.&lt;br/&gt;&lt;br/&gt; Nota: &lt;ol&gt; &lt;li&gt; A inversão de cores também torna os ecrãs escuros claros.&lt;/li&gt; &lt;li&gt; As cores são alteradas no conteúdo multimédia e nas imagens.&lt;/li&gt; &lt;li&gt; Pode utilizar o tema escuro para apresentar um fundo escuro. O tema escuro funciona com apps suportadas. A inversão de cores funciona em todas as apps.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clique automático (tempo de permanência)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Clique automático (tempo de perm.)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Saiba mais acerca do clique automático (tempo de permanência)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"O clique automático funciona com um rato ligado. Pode definir o cursor do rato para clicar automaticamente quando o cursor deixar de se mover durante um determinado período de tempo."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Desativar"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Curto"</string>
@@ -2416,6 +2426,10 @@
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Abrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Utilizar a correção da cor"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Atalho da correção da cor"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Acerca da correção da cor"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Saiba mais acerca da correção da cor"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Acerca da inversão de cores"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Saiba mais acerca da inversão de cores"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Mostrar legendas"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Apenas para a app suportada."</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Tamanho e estilo das legendas"</string>
@@ -2456,6 +2470,7 @@
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Escurecimento extra"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Ativar escurecimento extra do ecrã"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Atalho do escurecimento extra"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Acerca do escurecimento extra"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Escureça o ecrã para além do brilho mínimo do seu telemóvel"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Escureça o ecrã para além do brilho mínimo do seu tablet"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Escureça o ecrã para tornar a leitura mais confortável.&lt;br/&gt;&lt;br/&gt; Isto pode ser útil quando: &lt;ol&gt; &lt;li&gt; O brilho mínimo predefinido do telemóvel ainda é demasiado intenso&lt;/li&gt; &lt;li&gt; Está a utilizar o telemóvel em ambientes escuros, como à noite ou num quarto escuro antes de dormir&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -3017,7 +3032,7 @@
     <string name="device_admin_settings_title" msgid="31392408594557070">"Definições de administração do dispositivo"</string>
     <string name="active_device_admin_msg" msgid="7744106305636543184">"App administração do dispositivo"</string>
     <string name="remove_device_admin" msgid="3143059558744287259">"Desativar esta app de administração do dispositivo"</string>
-    <string name="uninstall_device_admin" msgid="4481095209503956916">"Desinstalar aplicação"</string>
+    <string name="uninstall_device_admin" msgid="4481095209503956916">"Desinstalar app"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Desativar e desinstalar"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Apps de administração do dispositivo"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Nenhuma aplicação de administração do dispositivo disponível"</string>
@@ -5275,6 +5290,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Sim"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Reiniciar"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Não, obrigado"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Cancelar"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Mudar"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Não é possível ativar o SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Remova o SIM e insira-o novamente. Se o problema continuar, reinicie o dispositivo."</string>
@@ -5359,8 +5375,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"CONTINUAR"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NÃO, OBRIGADO"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Localização"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"O operador pode recolher a sua localização quando utiliza este serviço para chamadas de emergência.\n\nVisite a política de privacidade do seu operador para obter os detalhes."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Pode perder o acesso a qualquer tempo ou dados restantes. Consulte o seu fornecedor antes de remover."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"captura do conteúdo, conteúdo da aplicação"</string>
     <string name="content_capture" msgid="868372905432812238">"Conteúdo da aplicação"</string>
