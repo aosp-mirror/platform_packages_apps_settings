@@ -55,8 +55,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Уменьшить"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увеличить"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Автоповорот"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Функция \"Распознавание лиц\" улучшает точность автоповорота с помощью фронтальной камеры. Изображения никогда не сохраняются и не отправляются в Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Пример текста"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Удивительный волшебник из страны Оз"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Глава 11. Изумрудный Город страны Оз"</string>
@@ -363,6 +362,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -2335,8 +2336,15 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Инструмент для озвучивания данных с экрана для людей с нарушениями зрения"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Чтобы услышать описание элемента, нажмите на него"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Настройки субтитров"</string>
+    <!-- no translation found for accessibility_captioning_about_title (3542171637334191563) -->
+    <skip />
+    <!-- no translation found for accessibility_captioning_footer_learn_more_content_description (5730040700677017706) -->
+    <skip />
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Увеличение"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Быстрый запуск увеличения"</string>
+    <!-- no translation found for accessibility_screen_magnification_about_title (8857919020223505415) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_footer_learn_more_content_description (924848332575978463) -->
     <skip />
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Тип увеличения"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Вы можете увеличить весь экран или его часть либо переключаться между этими вариантами"</string>
@@ -2406,6 +2414,12 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Включать специальную функцию с заблокированного экрана, нажимая и удерживая обе кнопки регулировки громкости в течение нескольких секунд"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Кнопка специальных возможностей"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Жест и кнопка спец. возможностей"</string>
+    <!-- no translation found for accessibility_button_about_title (3581116105084067926) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_about_title (8468987303602865536) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_footer_learn_more_content_description (4144803517680297869) -->
+    <skip />
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Используется кнопка специальных возможностей. При навигации с помощью трех кнопок жест недоступен."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Быстрый доступ к специальным возможностям"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Быстрый доступ к специальным возможностям из любого окна.\n\nОткройте настройки специальных возможностей и выберите нужную функцию. Нажмите сочетание клавиш и выберите кнопку специальных возможностей.\n\nЧтобы использовать кнопку специальных возможностей на панели навигации, включите навигацию с помощью двух кнопок или навигацию с помощью трех кнопок."</string>
@@ -2435,15 +2449,22 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 минута"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 минуты"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Время на выполнение действия"</string>
+    <!-- no translation found for accessibility_control_timeout_about_title (813588002683460837) -->
+    <skip />
+    <!-- no translation found for accessibility_control_timeout_footer_learn_more_content_description (8118584413220542193) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Время на выполнение действия"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Укажите, сколько времени вам нужно на выполнение действий в автоматически исчезающих сообщениях.\n\nЭта настройка поддерживается не во всех приложениях."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Задержка при нажатии и удержании"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Инверсия цветов"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Использовать инверсию цветов"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Быстрый запуск инверсии цветов"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Инверсия цветов позволяет сделать светлые цвета тёмными.&lt;br/&gt;&lt;br/&gt; Обратите внимание: &lt;ol&gt; &lt;li&gt; Тёмные цвета станут светлыми.&lt;/li&gt; &lt;li&gt; Инверсия цветов будет также применяться и в медиаконтенте и изображениях.&lt;/li&gt; &lt;li&gt; Чтобы сделать фон экрана тёмным, включите тёмную тему. Тёмная тема поддерживается только в некоторых приложениях, а инверсия цветов – во всех.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Автонажатие (время задержки)"</string>
+    <!-- no translation found for accessibility_autoclick_about_title (152923024405552594) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_footer_learn_more_content_description (7056189627042350691) -->
+    <skip />
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Автоматическое нажатие работает с подключенной мышью. Если указатель остается неподвижным в течение выбранного времени, выполняется клик."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Отключено"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Короткая задержка"</string>
@@ -2463,7 +2484,14 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Использовать приложение \"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\""</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Открыть <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Использовать коррекцию цвета"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Быстрый запуск коррекции цвета"</string>
+    <!-- no translation found for accessibility_daltonizer_about_title (6063650804116981287) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_footer_learn_more_content_description (2091679253892040910) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_about_title (8275754480247040136) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_footer_learn_more_content_description (5382579548498952445) -->
     <skip />
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Показывать субтитры"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Только в поддерживаемых приложениях"</string>
@@ -2506,7 +2534,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Синий и желтый"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Дополнительное уменьшение яркости"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Дополнительно уменьшить яркость экрана"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Быстрый запуск дополнительного уменьшения яркости"</string>
+    <!-- no translation found for reduce_bright_colors_about_title (503655452544934393) -->
     <skip />
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Сделать экран телефона темнее, чем при минимальной яркости"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Сделать экран планшета темнее, чем при минимальной яркости"</string>
@@ -2805,7 +2834,7 @@
       <item quantity="other">%1$d приложения с ограниченным доступом</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
-    <string name="battery_missing_message" msgid="400958471814422770">"Не удается получить данные об уровне заряда батареи."</string>
+    <string name="battery_missing_message" msgid="400958471814422770">"Не удалось узнать уровень заряда батареи."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Подробнее об этой ошибке…"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Остановить приложение?"</string>
@@ -5539,8 +5568,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ДАЛЕЕ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"НЕТ"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Местоположение"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Когда вы пользуетесь этим сервисом для экстренных вызовов, ваш оператор связи может собирать данные о местоположении устройства.\n\nЧтобы узнать больше, прочитайте Политику конфиденциальности вашего оператора."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Вы можете потерять доступ к оставшимся минутам или трафику. Прежде чем выполнять удаление, обратитесь к оператору связи."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"content capture, контент приложения"</string>
     <string name="content_capture" msgid="868372905432812238">"Контент приложений"</string>

@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Pienennä"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Suurenna"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Käytä automaattista kääntöä"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Kasvojentunnistus käyttää etukameraa automaattisen kääntämisen tarkkuuden parantamiseksi. Kuvia ei koskaan tallenneta tai lähetetä Googlelle."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Esimerkkiteksti"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Ihmemaa Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Luku 11: Ozin ihastuttava smaragdikaupunki"</string>
@@ -357,6 +356,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -2287,8 +2288,15 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Näytönlukuohjelma ensisijaisesti näkövammaisille ja heikkonäköisille"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Napauta kohteita näytöllä, niin ne luetaan ääneen."</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Tekstitysvalinnat"</string>
+    <!-- no translation found for accessibility_captioning_about_title (3542171637334191563) -->
+    <skip />
+    <!-- no translation found for accessibility_captioning_footer_learn_more_content_description (5730040700677017706) -->
+    <skip />
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Suurennus"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Suurennuksen pikanäppäin"</string>
+    <!-- no translation found for accessibility_screen_magnification_about_title (8857919020223505415) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_footer_learn_more_content_description (924848332575978463) -->
     <skip />
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Suurennustapa"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Suurenna koko näyttö tai tietty alue tai vaihda yhdestä näistä vaihtoehdoista toiseen"</string>
@@ -2358,6 +2366,12 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Salli ominaisuuden päälle laittaminen lukitusnäytön pikakuvakkeella. Paina molempia äänenvoimakkuuspainikkeita muutaman sekunnin ajan."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Esteettömyyspainike"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Esteettömyyspainike ja ‑ele"</string>
+    <!-- no translation found for accessibility_button_about_title (3581116105084067926) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_about_title (8468987303602865536) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_footer_learn_more_content_description (4144803517680297869) -->
+    <skip />
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Esteettömyyspainikkeen käyttö. Elettä ei voi käyttää kolmen painikkeen navigoinnissa."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Avaa esteettömyysominaisuudet nopeasti"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Käytä esteettömyysominaisuuksia helposti millä tahansa näytöllä.\n\nSiirry ensin esteettömyysasetuksiin ja valitse ominaisuus. Napauta pikakuvaketta ja valitse esteettömyyspainike.\n\nJos käytät mieluummin navigointipalkin esteettömyyspainiketta, vaihda kahden tai kolmen painikkeen navigointiin."</string>
@@ -2387,15 +2401,22 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minuutti"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minuuttia"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Toiminnon aika (esteettömyyskatkaisu)"</string>
+    <!-- no translation found for accessibility_control_timeout_about_title (813588002683460837) -->
+    <skip />
+    <!-- no translation found for accessibility_control_timeout_footer_learn_more_content_description (8118584413220542193) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Reagointiaika"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Valitse, miten pitkään haluat nähdä viestit, jotka pyytävät reagoimaan mutta näkyvät vain väliaikaisesti.\n\nKaikki sovellukset eivät tue tätä asetusta."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Pitkäkestoisen kosketuksen viive"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Käänteiset värit"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Käytä käänteisiä värejä"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Käänteisten värien pikanäppäin"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Käänteiset värit tekee kirkkaista näytöistä tummia.&lt;br/&gt;&lt;br/&gt; Huom. &lt;ol&gt; &lt;li&gt; Käänteiset värit myös tekevät tummista näytöistä kirkkaita.&lt;/li&gt; &lt;li&gt; Median ja kuvien värit muuttuvat.&lt;/li&gt; &lt;li&gt; Saat tumman taustan myös käyttämällä tummaa teemaa. Tumma teema toimii yhteensopivissa sovelluksissa. Käänteiset värit toimivat kaikissa sovelluksissa.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automaattinen klikkaus (viiveaika)"</string>
+    <!-- no translation found for accessibility_autoclick_about_title (152923024405552594) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_footer_learn_more_content_description (7056189627042350691) -->
+    <skip />
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Automaattiset klikkaukset ovat käytettävissä hiiren kanssa. Voit laittaa kursorin klikkaamaan automaattisesti, kun hiiri on ollut paikoillaan tietyn aikaa."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Pois päältä"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Lyhyt"</string>
@@ -2415,7 +2436,14 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> käytössä"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Avaa <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Käytä värinkorjausta"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Värinkorjauksen pikanäppäin"</string>
+    <!-- no translation found for accessibility_daltonizer_about_title (6063650804116981287) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_footer_learn_more_content_description (2091679253892040910) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_about_title (8275754480247040136) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_footer_learn_more_content_description (5382579548498952445) -->
     <skip />
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Näytä tekstitykset"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Vain tuetuille sovelluksille"</string>
@@ -2456,7 +2484,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Sini-keltasokeus"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Erittäin himmeä"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Tee näytöstä erittäin himmeä"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Erittäin himmeän pikanäppäin"</string>
+    <!-- no translation found for reduce_bright_colors_about_title (503655452544934393) -->
     <skip />
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Himmennä näyttöä puhelimen vähimmäiskirkkautta himmeämmäksi"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Himmennä näyttöä tabletin vähimmäiskirkkautta himmeämmäksi"</string>
@@ -5361,8 +5390,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"JATKA"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"EI KIITOS"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Sijainti"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Operaattori voi selvittää sijaintisi, kun käytät ominaisuutta hätäpuheluihin.\n\nKatso lisätietoja operaattorin tietosuojakäytännöstä."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Voit menettää jäljellä olevan ajan tai datan. Tarkista asia operaattorilta ennen poistamista."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"sisällön tallennus, sovelluksen sisältö"</string>
     <string name="content_capture" msgid="868372905432812238">"Sovelluksen sisältö"</string>
