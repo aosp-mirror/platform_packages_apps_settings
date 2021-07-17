@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"अझ सानो बनाउनुहोस्"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"अझ ठुलो बनाउनुहोस्"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"अटो-रोटेट प्रयोग गरियोस्"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"अनुहार पत्ता लगाउने सुविधाले स्वतः रोटेट गर्ने सुविधाको सटीकता सुधार गर्न अगाडिको क्यामेरा प्रयोग गर्छ। फोटोहरू कहिल्यै स्टोर गरिँदैनन् वा Google मा सुरक्षित गरिँदैनन्।"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"नमूना पाठ"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"दि वन्डरफुल विजार्ड अफ ओज"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"अध्याय ११: दि वन्डरफुल एमरल्ड सिटी अफ ओज"</string>
@@ -289,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"लक स्क्रिनमा टेक्स्ट थपियोस्"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"विजेटहरू सक्षम पार्नुहोस्"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"एडमिनले अफ गरेको छ"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"लकडाउन विकल्प देखाइयोस्"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Smart Lock, फेस अनलक, फिंगरप्रिन्ट अनलक र लक स्क्रिनमा सूचना देखाउने सुविधा अफ गर्ने \'पावर बटन\' विकल्प देखाइयोस्"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"विश्वास गुमाइँदा स्क्रिन लक गर्नुहोस्"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"यो सुविधा सक्षम पारियो भने अन्तिम विश्वस्त एजेन्टले विश्वास गुमाउँदा यन्त्र लक हुने छ"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"कुनै पनि होइन"</string>
@@ -357,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -465,7 +464,7 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"डिभाइसको सुरक्षासम्बन्धी सुविधाहरू सक्रिय गरिने छैनन्। तपाईं यो फोन हराएको वा चोरी भएको अवस्थामा अरूलाई यो चलाउनबाट रोक्न सक्नुहुने छैन।"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"जसरी पनि छाड्नुहोस्"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"पछाडि फिर्ता जानुहोस्"</string>
-    <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"छाड्नुहोस्"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"स्किप गर्नुहोस्"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"रद्द गर्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"सेन्सरमा छुनुहोस्"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"फिंगरप्रिन्ट सेटअप गर्ने तरिका"</string>
@@ -887,10 +886,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"सेटिङहरू सम्झनुहोस्"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"जडान भएका ब्लुटुथ अडियो डिभाइसहरूको अधिकतम सङ्ख्या"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"जडान भएका ब्लुटुथ अडियो डिभाइसहरूको अधिकतम सङ्ख्या चयन गर्नुहोस्"</string>
-    <!-- no translation found for nfc_stack_debuglog_title (1919539589005762645) -->
-    <skip />
-    <!-- no translation found for nfc_stack_debuglog_summary (5602987951235764002) -->
-    <skip />
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC स्ट्याकको डिबग लग"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC स्ट्याकको लगिङ लेभल बढाउनुहोस्"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"स्क्रिन मिरर गर्नुहोस्"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"वायरलेस प्रदर्शन सक्षम गर्नुहोस्"</string>
@@ -2291,8 +2288,15 @@
     <string name="talkback_summary" msgid="5820927220378864281">"मुख्तया दृष्टिविहीन र आँखा कम देख्ने व्यक्तिहरूको लागि स्क्रिन रिडर"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"ठुलो आवाजमा सुन्न आफ्नो स्क्रिनमा भएका वस्तुहरूमा ट्याप गर्नुहोस्"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"क्याप्सनसम्बन्धी प्राथमिकताहरू"</string>
+    <!-- no translation found for accessibility_captioning_about_title (3542171637334191563) -->
+    <skip />
+    <!-- no translation found for accessibility_captioning_footer_learn_more_content_description (5730040700677017706) -->
+    <skip />
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"म्याग्निफिकेसन"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"जुम इनको सर्टकट"</string>
+    <!-- no translation found for accessibility_screen_magnification_about_title (8857919020223505415) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_footer_learn_more_content_description (924848332575978463) -->
     <skip />
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"जुम इनको प्रकार"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"स्क्रिनको पूरै भाग वा केही भाग जुम इन गर्नुहोस् वा यी दुई विकल्प अदलबदल गर्नुहोस्"</string>
@@ -2362,6 +2366,12 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"केही सेकेन्डसम्म दुवै भोल्युम की थिचेर लक स्क्रिनबाटै यो सर्टकट प्रयोग गर्न मिल्ने बनाइयोस्।"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"एक्सेसिबिलिटी बटन"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"एक्सेसिबिलिटी बटन तथा जेस्चर"</string>
+    <!-- no translation found for accessibility_button_about_title (3581116105084067926) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_about_title (8468987303602865536) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_footer_learn_more_content_description (4144803517680297869) -->
+    <skip />
     <string name="accessibility_button_intro" msgid="2601976470525277903">"एक्सेसिबिलिटी बटन प्रयोग गरिँदै छ। यो जेस्चर ३ बटनमार्फत गरिने नेभिगेसनका सहायताले प्रयोग गर्न मिल्दैन।"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"एक्सेसिबिलिटी सुविधा तुरुन्तै प्रयोग गर्नुहोस्"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"तपाईं जुनसुकै स्क्रिनमा भए पनि सर्वसुलभता कायम गर्ने सुविधाहरू तुरुन्तै प्रयोग गर्न सक्नुहुन्छ।\n\nसुरु गर्न सर्वसुलभतासम्बन्धी सेटिङमा जानुहोस् अनि कुनै सुविधा चयन गर्नुहोस्। सर्टकटमा ट्याप गर्नुहोस् अनि एक्सेसिबिलिटी बटन चयन गर्नुहोस्।\n\nतपाईं यसको साटो नेभिगेसन बारमा एक्सेसिबिलिटी बटन प्रयोग गर्न चाहनुहुन्छ भने \"२ बटनमार्फत गरिने नेभिगेसन\" वा \"३ बटनमार्फत गरिने नेभिगेसन\" प्रयोग गर्नुहोस्।"</string>
@@ -2391,15 +2401,22 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"१ मिनेट"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"२ मिनेट"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"कारबाही गर्न लाग्ने समय (एक्सेसिबिलिटी टाइमआउट)"</string>
+    <!-- no translation found for accessibility_control_timeout_about_title (813588002683460837) -->
+    <skip />
+    <!-- no translation found for accessibility_control_timeout_footer_learn_more_content_description (8118584413220542193) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"कारबाही गर्ने समय"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"तपाईंलाई कारबाही गर्न लगाउने अस्थायी म्यासेज कति बेर देखाइनु पर्छ भन्ने कुरा छान्नुहोस्।\n\nयो सेटिङले सबै एपमा काम गर्दैन।"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"टच एण्ड होल्डको ढिलाइ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"रङ्ग उल्टाउने सुविधा"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"रङ्ग उल्टाउने सुविधा प्रयोग गरियोस्"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"कलर इन्भर्सनको सर्टकट"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"रङ्ग उल्टाउने सुविधाले उज्यालो स्क्रिनलाई अँध्यारो बनाउँछ।&lt;br/&gt;&lt;br/&gt; ध्यान दिनु पर्ने कुरा: &lt;ol&gt; &lt;li&gt; रङ्ग उल्टाउने सुविधाले अँध्यारो स्क्रिनलाई उज्यालो पनि बनाउँछ&lt;/li&gt; &lt;li&gt; मिडिया र फोटोका रङ्ग परिवर्तन हुने छन्।&lt;/li&gt; &lt;li&gt; ब्याकग्राउन्ड अँध्यारो बनाउन अँध्यारो थिम प्रयोग गर्न सकिन्छ। अँध्यारो थिमले यो सुविधा चल्ने एपहरूमा मात्र काम गर्छ। रङ्ग उल्टाउने सुविधाले सबै एपमा काम गर्छ।&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"अटोक्लिक (ड्वेल टाइमिङ)"</string>
+    <!-- no translation found for accessibility_autoclick_about_title (152923024405552594) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_footer_learn_more_content_description (7056189627042350691) -->
+    <skip />
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"डिभाइसमा जोडिएको माउसबाट अटोक्लिक प्रयोग गर्न मिल्छ। तपाईं माउसको कर्सर निश्चित समयका लागि नचलिकन एकै ठाउँमा रोकिँदा कर्सरले उक्त ठाउँमा स्वतः क्लिक गर्ने गरी आफ्नो माउसको कर्सर सेट गर्न सक्नुहुन्छ।"</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"अफ छ"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"छोटो"</string>
@@ -2419,7 +2436,14 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> प्रयोग गर्नुहोस्"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> खोल्नुहोस्"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"रङ्ग सच्याउने सुविधा प्रयोग गरियोस्"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"रङ सच्याउने सुविधाको सर्टकट"</string>
+    <!-- no translation found for accessibility_daltonizer_about_title (6063650804116981287) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_footer_learn_more_content_description (2091679253892040910) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_about_title (8275754480247040136) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_footer_learn_more_content_description (5382579548498952445) -->
     <skip />
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"क्याप्सन देखाइयोस्"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"यो सुविधा चल्ने एपमा मात्र"</string>
@@ -2460,7 +2484,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"निलो-पहेँलो"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"अझै मधुरो"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"स्क्रिन अझै मधुरो बनाइयोस्"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"\"अझै मधुरो\" सुविधाको सर्टकट"</string>
+    <!-- no translation found for reduce_bright_colors_about_title (503655452544934393) -->
     <skip />
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"फोनको स्क्रिनको चमक घटाएर न्यूनतम चमकभन्दा पनि मधुरो बनाइयोस्"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"ट्याब्लेटको स्क्रिनको चमक घटाएर न्यूनतम चमकभन्दा पनि मधुरो बनाइयोस्"</string>
@@ -5281,6 +5306,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"अँ"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"रिस्टार्ट गर्नुहोस्"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"पर्दैन, धन्यवाद"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"रद्द गर्नुहोस्"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"बदल्नुहोस्"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"SIM सक्रिय गर्न सकिएन"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"SIM बाहिर झिकेर फेरि हाल्नुहोस्। अझै समस्या रहिरह्यो भने आफ्नो डिभाइस रिस्टार्ट गर्नुहोस्।"</string>
@@ -5365,8 +5391,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"जारी राख्नुहोस्"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"पर्दैन, धन्यवाद"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"स्थान"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"तपाईंले यो सेवा प्रयोग गरेर आपत्कालीन अवस्थामा कल गर्दा तपाईंका सेवा प्रदायकले तपाईंको लोकेसन सङ्कलन गर्न सक्छ।\n\nविस्तृत विवरणका लागि सेवा प्रदायककको गोपनीयता नीति हेर्नुहोस्।"</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"तपाईं बाँकी जुनसुकै समय वा डेटामाथिको पहुँच गुमाउन सक्नुहुन्छ। हटाउनुभन्दा पहिले आफ्ना सेवा प्रदायकमार्फत जाँच गर्नुहोस्।"</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"सामग्री समावेश, एपको सामग्री"</string>
     <string name="content_capture" msgid="868372905432812238">"एपको सामग्री"</string>
@@ -5474,8 +5499,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ नेटवर्क"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"डाउनलोड गरिएको SIM"</string>
-    <!-- no translation found for downloaded_sims_category_title (8779223441781763315) -->
-    <skip />
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"डाउनलोड गरिएका SIM हरू"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"सक्रिय छ"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"निष्क्रिय छ"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / <xliff:g id="ID_1">%1$s</xliff:g> को डिफल्ट कन्फिगुरेसन"</string>
@@ -5485,7 +5509,7 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"इन्टरनेटमा कनेक्ट गरिएको छ"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"इन्टरनेट छैन"</string>
-    <string name="mobile_data_off_summary" msgid="1884248776904165539">"मोबाइल डेटा स्वतः कनेक्ट हुँदैन"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"मोबाइल डेटा स्वतः अन हुँदैन"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"अन्य नेटवर्क उपलब्ध छैनन्"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"कुनै पनि नेटवर्क उपलब्ध छैन"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"मोबाइल डेटा अफ गर्ने हो?"</string>
