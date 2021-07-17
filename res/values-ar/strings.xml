@@ -57,8 +57,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"تصغير"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"تكبير"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"استخدام \"التدوير التلقائي\""</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"‏تستخدم ميزة \"التعرّف على الوجوه\" الكاميرا الأمامية لتحسين دقة \"التدوير التلقائي\". لا يتم تخزين الصور أو إرسالها إلى Google مطلقًا."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"نموذج نص"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"ساحر أوز العجيب"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"الفصل ۱۱: مدينة أوز الزمردية العجيبة"</string>
@@ -297,8 +296,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"إضافة نص على شاشة القفل"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"تفعيل الأدوات"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"تم إيقاف الإعداد بواسطة المشرف"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"عرض خيار إلغاء التأمين"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"‏عرض خيار \"زر التشغيل\" الذي يوقِف ميزات Smart Lock و\"فتح الجهاز بالتعرف على الوجه\" و\"فتح الجهاز ببصمة الإصبع\" والإشعارات على شاشة القفل"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"قفل الشاشة عند فقدان الثقة"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"في حال تفعيل الميزة، سيتم قفل الجهاز عندما يفقد الوكيل المعتمد الأخير الثقة."</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"بدون"</string>
@@ -369,6 +366,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -955,8 +954,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"تذكّر الإعدادات"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"الحد الأقصى لعدد الأجهزة الصوتية المتّصلة باستخدام البلوتوث"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"اختيار الحد الأقصى لعدد الأجهزة الصوتية المتّصلة باستخدام البلوتوث"</string>
-    <string name="nfc_stack_debuglog_title" msgid="1919539589005762645">"‏تفعيل سجلّ تصحيح الأخطاء لحزمة الاتصال القصير المدى (NFC)"</string>
-    <string name="nfc_stack_debuglog_summary" msgid="5602987951235764002">"‏زيادة مستوى التسجيل لحزمة الاتصال القصير المدى (NFC)"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"‏سجلّ تصحيح أخطاء حزمة الاتصال القصير المدى (NFC)"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"‏زيادة مستوى التسجيل لحزمة الاتصال القصير المدى (NFC)"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"الإرسال"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"انعكاس"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"تفعيل عرض شاشة لاسلكي"</string>
@@ -2385,8 +2384,15 @@
     <string name="talkback_summary" msgid="5820927220378864281">"إن تطبيق قارئ الشاشة مُصمَّم في الأساس من أجل الأشخاص الكفيفين والذين يعانون من ضعف في النظر."</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"يمكنك النقر على بيانات على شاشتك لتتم قراءتها بصوت عالٍ"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"الإعدادات المفضّلة للشرح"</string>
+    <!-- no translation found for accessibility_captioning_about_title (3542171637334191563) -->
+    <skip />
+    <!-- no translation found for accessibility_captioning_footer_learn_more_content_description (5730040700677017706) -->
+    <skip />
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"تكبير حجم الشاشة"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"اختصار التكبير"</string>
+    <!-- no translation found for accessibility_screen_magnification_about_title (8857919020223505415) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_footer_learn_more_content_description (924848332575978463) -->
     <skip />
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"نوع التكبير"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"تكبير الشاشة كلها أو جزء معيّن منها أو التبديل بين الخيارين"</string>
@@ -2456,6 +2462,12 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"يمكنك السماح بتفعيل اختصار الميزة من شاشة القفل. اضغط مع الاستمرار على مفتاحَي مستوى الصوت لبضع ثوانٍ."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"زر أدوات تسهيل الاستخدام"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"إيماءة وزرّ أدوات تسهيل الاستخدام"</string>
+    <!-- no translation found for accessibility_button_about_title (3581116105084067926) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_about_title (8468987303602865536) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_footer_learn_more_content_description (4144803517680297869) -->
+    <skip />
     <string name="accessibility_button_intro" msgid="2601976470525277903">"استخدام زرّ أدوات تسهيل الاستخدام: لا تتوفّر إيماءة التنقُّل باستخدام ثلاثة أزرار"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"الوصول السريع إلى ميزات تسهيل الاستخدام"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"يمكنك الوصول بسرعة إلى ميزات تسهيل الاستخدام من أي شاشة.\n\nللبدء، انتقِل إلى إعدادات تسهيل الاستخدام واختَر ميزة. انقر على الاختصار واختَر زر أدوات تسهيل الاستخدام.\n\nلاستخدام زر أدوات تسهيل الاستخدام في شريط التنقُّل بدلاً من ذلك، عليك التبديل إلى نظام التنقُّل باستخدام زرّين أو نظام التنقُّل باستخدام ثلاثة أزرار."</string>
@@ -2485,15 +2497,22 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"دقيقة واحدة"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"دقيقتان"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"وقت اتخاذ إجراء (مهلة تسهيل الاستخدام)"</string>
+    <!-- no translation found for accessibility_control_timeout_about_title (813588002683460837) -->
+    <skip />
+    <!-- no translation found for accessibility_control_timeout_footer_learn_more_content_description (8118584413220542193) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"وقت اتخاذ الإجراء"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"اختَر مدة عرض الرسائل التي تطلب منك اتخاذ إجراء، ولكن يقتصر عرضها على فترة مؤقتة.\n\nلا تتوافق بعض التطبيقات مع هذا الإعداد."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"مهلة النقر مع الاستمرار"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"قلب الألوان"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"استخدام قلب الألوان"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"اختصار قلب الألوان"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"‏تحوّل ميزة \"قلب الألوان\" الشاشات المضيئة إلى شاشات معتمة.&lt;br/&gt;&lt;br/&gt; ملاحظة: &lt;ol&gt; &lt;li&gt; تحوّل أيضًا ميزة \"قلب الألوان\" الشاشات المعتمة إلى شاشات مضيئة.&lt;/li&gt; &lt;li&gt; ستتغيّر الألوان في الوسائط والصور.&lt;/li&gt; &lt;li&gt; يمكن استخدام المظهر الداكن لعرض خلفية داكنة. يعمل وضع \"المظهر الداكن\" مع التطبيقات المتوافقة. أما خيار \"قلب الألوان\"، فيعمل مع جميع التطبيقات.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"النقر التلقائي (فترة الثبات)"</string>
+    <!-- no translation found for accessibility_autoclick_about_title (152923024405552594) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_footer_learn_more_content_description (7056189627042350691) -->
+    <skip />
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"تعمل ميزة النقر التلقائي مع ماوس متصل. يمكنك ضبط مؤشر الماوس بحيث يتم النقر تلقائيًا عند توقف المؤشر عن الحركة لمدة زمنية معيّنة."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"غير مفعَّل"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"قصير"</string>
@@ -2513,7 +2532,14 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"استخدام <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"فتح <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"استخدام ميزة \"تصحيح الألوان\""</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"اختصار تصحيح الألوان"</string>
+    <!-- no translation found for accessibility_daltonizer_about_title (6063650804116981287) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_footer_learn_more_content_description (2091679253892040910) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_about_title (8275754480247040136) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_footer_learn_more_content_description (5382579548498952445) -->
     <skip />
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"عرض الشرح"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"للتطبيقات المتوافقة فقط"</string>
@@ -2558,7 +2584,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"الأزرق والأصفر"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"زيادة تعتيم الشاشة"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"زيادة تعتيم الشاشة"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"اختصار زيادة تعتيم الشاشة"</string>
+    <!-- no translation found for reduce_bright_colors_about_title (503655452544934393) -->
     <skip />
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"يمكنك ضبط تعتيم الشاشة على مستوى أقلّ من الحد الأدنى لسطوع هاتفك."</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"يمكنك ضبط تعتيم الشاشة على مستوى أقلّ من الحد الأدنى لسطوع جهازك اللوحي."</string>
@@ -5627,6 +5654,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"نعم"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"إعادة التشغيل"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"لا، شكرًا"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"إلغاء"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"تبديل"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"‏يتعذّر تفعيل شريحة SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"‏يجب إزالة شريحة SIM ثم إدخالها مرة أخرى. إذا استمرت المشكلة، عليك إعادة تشغيل الجهاز."</string>
@@ -5719,8 +5747,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"متابعة"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"لا، شكرًا"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"الموقع الجغرافي"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"يمكن أن يجمع مشغّل شبكة الجوّال بيانات موقعك الجغرافي عندما تستخدم هذه الخدمة لإجراء مكالمات الطوارئ.\n\nيمكنك الاطّلاع على سياسة خصوصية مشغّل شبكة الجوّال للحصول على مزيد من التفاصيل."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"قد تفقد إمكانية الوصول إلى أي وقت أو بيانات متبقية. يُرجى مراجعة ذلك مع مقدّم الخدمة قبل الإزالة."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"تسجيل المحتوى، محتوى التطبيق"</string>
     <string name="content_capture" msgid="868372905432812238">"محتوى التطبيق"</string>

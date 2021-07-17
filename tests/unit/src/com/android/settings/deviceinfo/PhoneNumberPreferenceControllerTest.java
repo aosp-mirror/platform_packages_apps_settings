@@ -36,6 +36,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.annotation.UiThreadTest;
@@ -67,6 +68,7 @@ public class PhoneNumberPreferenceControllerTest {
     private SubscriptionInfo mSubscriptionInfo;
     @Mock
     private SubscriptionManager mSubscriptionManager;
+    private PreferenceCategory mCategory;
     private PreferenceScreen mScreen;
 
     private Context mContext;
@@ -92,6 +94,10 @@ public class PhoneNumberPreferenceControllerTest {
         mPreference.setKey(mController.getPreferenceKey());
         mPreference.setVisible(true);
         mScreen.addPreference(mPreference);
+        final String categoryKey = "basic_info_category";
+        mCategory = new PreferenceCategory(mContext);
+        mCategory.setKey(categoryKey);
+        mScreen.addPreference(mCategory);
 
         doReturn(mSubscriptionInfo).when(mController).getSubscriptionInfo(anyInt());
         doReturn(mSecondPreference).when(mController).createNewPreference(mContext);
@@ -117,9 +123,11 @@ public class PhoneNumberPreferenceControllerTest {
     public void displayPreference_multiSim_shouldAddSecondPreference() {
         when(mTelephonyManager.getPhoneCount()).thenReturn(2);
 
+        final Preference sim1Preference = new Preference(mContext);
+        mCategory.addItemFromInflater(sim1Preference);
         mController.displayPreference(mScreen);
 
-        assertThat(mScreen.getPreferenceCount()).isEqualTo(2);
+        assertThat(mCategory.getPreferenceCount()).isEqualTo(2);
     }
 
     @Test
