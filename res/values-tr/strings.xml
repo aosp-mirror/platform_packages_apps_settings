@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Küçült"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Büyüt"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Otomatik döndürmeyi kullan"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Yüz Algılama işlevi, Otomatik Döndürme doğruluğunu iyileştirmek için ön kamerayı kullanır. Resimler hiçbir zaman saklanmaz veya Google\'a gönderilmez."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Örnek metin"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Muhteşem Oz Büyücüsü"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11. Bölüm: Oz\'un Muhteşem Zümrüt Kenti"</string>
@@ -357,6 +356,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -2287,9 +2288,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Özellikle görme engelliler ve gözleri az görenler için tasarlanmış bir ekran okuyucu"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Sesli okunması için ekranınızdaki öğelere dokunun"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Altyazı tercihleri"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Altyazı tercihleri hakkında"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Altyazı tercihleri hakkında daha fazla bilgi edinin"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Büyütme"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
-    <skip />
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Büyütme kısayolu"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Büyütme hakkında"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Büyütme hakkında daha fazla bilgi edinin"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Büyütme yöntemi"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Ekranınızın tümünü veya belirli bir bölümünü büyütebilir ya da bu iki seçenek arasında geçiş yapabilirsiniz"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Tam ekran"</string>
@@ -2358,6 +2362,9 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Özellik kısayolunun kilit ekranından açılmasına izin verin. Ses tuşlarının ikisini birden birkaç saniyeliğine basılı tutun."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Erişilebilirlik düğmesi"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Erişilebilirlik düğmesi ve hareketi"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Erişilebilirlik düğmesi hakkında"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Erişilebilirlik düğmesi ve hareketi hakkında"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Erişilebilirlik düğmesi ve hareketi hakkında daha fazla bilgi edinin"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Erişilebilirlik düğmesini kullanma. Hareket, 3 düğmeli gezinme ile kullanılamaz."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Erişilebilirlik özelliklerine hızlıca erişin"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Erişilebilirlik özelliklerine herhangi bir ekrandan hızlıca erişin.\n\nBaşlamak için erişilebilirlik ayarlarına gidip bir özellik seçin. Kısayola dokunun ve erişilebilirlik düğmesini seçin.\n\nBunun yerine gezinme çubuğundaki erişilebilirlik düğmesini kullanmak için 2 düğmeli gezinme veya 3 düğmeli gezinmeye geçin."</string>
@@ -2387,15 +2394,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 dakika"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 dakika"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"İşlem yapma süresi (Erişilebilirlik zaman aşımı)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"İşlem yapma süresi (Erişilebilirlik zaman aşımı)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"İşlem yapma süresi (Erişilebilirlik zaman aşımı) hakkında daha fazla bilgi edinin"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"İşlem yapma süresi"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"İşlem yapmanızı isteyen, ancak geçici olarak görüntülenen mesajların ne kadar süre gösterileceğini seçin.\n\nBu ayarı her uygulama desteklemez."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Dokunma ve basılı tutma süresi"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Rengi ters çevirme"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Rengi ters çevirme işlevini kullan"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Rengi ters çevirme kısayolu"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Rengi ters çevirme özelliği açık renkli ekranları koyulaştırır.&lt;br/&gt;&lt;br/&gt; Not: &lt;ol&gt; &lt;li&gt; Rengi ters çevirme özelliği ayrıca koyu renkli ekranları açık renk yapar.&lt;/li&gt; &lt;li&gt; Renkler medyada ve resimlerde değişir.&lt;/li&gt; &lt;li&gt; Koyu arka plan görüntülemek için Koyu tema kullanılabilir. Koyu tema, desteklenen uygulamalarda çalışır. Rengi ters çevirme özelliği tüm uygulamalarda çalışır.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Otomatik tıklama (bekleme süresi)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Oto tık (bekleme süresi) hakkında"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Otomatik tıklama (bekleme süresi) hakkında daha fazla bilgi edinin"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Otomatik tıklama, bağlı bir fare ile çalışır. Fare imlecini, imleç belirli bir süre hareket etmediğinde otomatik olarak tıklayacak şekilde ayarlayabilirsiniz."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Kapalı"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Kısa"</string>
@@ -2415,8 +2425,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> özelliğini kullan"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> sayfasını aç"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Renk düzeltme işlevini kullan"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
-    <skip />
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Renk düzeltme kısayolu"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Renk düzeltme hakkında"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Renk düzeltme hakkında daha fazla bilgi edinin"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Rengi ters çevirme hakkında"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Rengi ters çevirme hakkında daha fazla bilgi edinin"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Altyazıları göster"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Yalnızca desteklenen uygulamalar için"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Altyazı boyutu ve stili"</string>
@@ -2456,8 +2469,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Mavi-sarı"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Ekstra loş"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Ekranı ekstra loş yap"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
-    <skip />
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Ekstra loş kısayolu"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Ekstra loş hakkında"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Ekranı, telefonunuzun minimum parlaklığından daha loş yapın"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Ekranı, tabletinizin minimum parlaklığından daha loş yapın"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Daha rahat okuyabilmek için ekranınızın parlaklığını azaltın.&lt;br/&gt;&lt;br/&gt; Bu özelliğin kullanışlı olacağı durumlar: &lt;ol&gt; &lt;li&gt; Telefonunuzun varsayılan minimum parlaklığı çok açık&lt;/li&gt; &lt;li&gt; Telefonunuzu gece veya uyumadan önce, karanlık bir oda gibi ışıksız ortamda kullanıyorsunuz&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -5361,8 +5374,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"DEVAM"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"HAYIR TEŞEKKÜRLER"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Konum"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Bu hizmeti acil durum aramaları için kullandığınızda operatörünüz konum verilerinizi toplayabilir.\n\nAyrıntılı bilgi için operatörünüzün gizlilik politikasına göz atın."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Kalan sürelere veya verilere erişiminizi kaybedebilirsiniz. Kaldırmadan önce sağlayıcınıza başvurun."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"içerik yakalama, uygulama içeriği"</string>
     <string name="content_capture" msgid="868372905432812238">"Uygulama içeriği"</string>

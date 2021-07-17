@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Кішірек ету"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Үлкенірек ету"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Автоматты бұруды пайдалану"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Автоматты бұру дәлдігін арттыру үшін бетті анықтау функциясында алдыңғы камера пайдаланылады. Суреттер Google-ға жіберілмейді немесе сақталмайды."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Мәтін үлгісі"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Оз елінің ғажап сиқыршысы"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11-тарау. Оз елінің Зубаржат қаласы"</string>
@@ -357,6 +356,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -2287,8 +2288,15 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Экранды оқу құралы негізінен көру қабілеті нашар адамдарға арналған"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Дауыстап оқылуы үшін экрандағы элементтерді түртіңіз"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Субтитр параметрлері"</string>
+    <!-- no translation found for accessibility_captioning_about_title (3542171637334191563) -->
+    <skip />
+    <!-- no translation found for accessibility_captioning_footer_learn_more_content_description (5730040700677017706) -->
+    <skip />
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ұлғайту"</string>
-    <!-- no translation found for accessibility_screen_magnification_shortcut_title (2387963646377987780) -->
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Ұлғайту таңбашасы"</string>
+    <!-- no translation found for accessibility_screen_magnification_about_title (8857919020223505415) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_footer_learn_more_content_description (924848332575978463) -->
     <skip />
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Ұлғайту түрі"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Толық экранды не оның бір бөлігін ұлғайтуға немесе осы опцияларды алма-кезек қолдануға болады."</string>
@@ -2358,6 +2366,12 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Функцияның құлыптаулы экраннан жылдам пәрмен арқылы іске қосылуына мүмкіндік береді. Дыбыс деңгейі пернелерін бірнеше секунд ұстап тұрыңыз."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Арнайы мүмкіндіктер түймесі"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Арнайы мүмкіндіктер түймесі мен қимылы"</string>
+    <!-- no translation found for accessibility_button_about_title (3581116105084067926) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_about_title (8468987303602865536) -->
+    <skip />
+    <!-- no translation found for accessibility_button_gesture_footer_learn_more_content_description (4144803517680297869) -->
+    <skip />
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Арнайы мүмкіндіктер түймесі қолданылуда. Бұл қимыл 3 түймемен басқарылмайды."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Арнайы мүмкіндіктерге жылдам қол жеткізу"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Арнайы мүмкіндіктерді кез келген экраннан пайдалануға болады.\n\nОл үшін арнайы мүмкіндіктер параметрлерінен қажетті функцияны таңдаңыз. Таңбашаны түртіңіз де, \"Арнайы мүмкіндіктер\" түймесін таңдаңыз.\n\n\"Арнайы мүмкіндіктер\" түймесін навигация жолағында қолдану үшін 2 түймемен басқару немесе 3 түймемен басқару режиміне ауысыңыз."</string>
@@ -2387,15 +2401,22 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 минут"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 минут"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Шара қолдану ұзақтығы"</string>
+    <!-- no translation found for accessibility_control_timeout_about_title (813588002683460837) -->
+    <skip />
+    <!-- no translation found for accessibility_control_timeout_footer_learn_more_content_description (8118584413220542193) -->
+    <skip />
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Шара қолдану ұзақтығы"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Шара қолдануды талап ететін хабарлардың көрсетілу ұзақтығын таңдаңыз.\n\nБұл параметр барлық қолданбаларда бола бермейді."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Түртіп ұстағандағы кідіріс"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Түс инверсиясы"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Түстер инверсиясын пайдалану"</string>
-    <!-- no translation found for accessibility_display_inversion_shortcut_title (6889624526691513462) -->
-    <skip />
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Түс инверсиясы таңбашасы"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Түс инверсиясы жарық экранды қараңғыға ауыстырады.&lt;br/&gt;&lt;br/&gt; Ескертпе: &lt;ol&gt; &lt;li&gt; Қараңғы экранды жарыққа ауыстыру мүмкіндігі де бар.&lt;/li&gt; &lt;li&gt; Мультимедиа мен суреттердегі түстер өзгереді.&lt;/li&gt; &lt;li&gt; Қараңғы фонды көрсету үшін қараңғы тақырыпты қолдануға болады. Бірақ қараңғы тақырып қолдау көрсетілетін қолданбаларда ғана қосылады. Ал түстер инверсиясы кез келген қолданбада бар.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Автоматты түрде басу (күту уақыты)"</string>
+    <!-- no translation found for accessibility_autoclick_about_title (152923024405552594) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_footer_learn_more_content_description (7056189627042350691) -->
+    <skip />
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Автоматты түрде басу функциясы тінтуір жалғанғанда ғана жұмыс істейді. Курсор белгілі бір уақыт бойы жылжымаған кезде, тінтуір түймесі автоматты түрде басылатын етіп реттеуге болады."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Өшіру"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Қысқа"</string>
@@ -2415,7 +2436,14 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> пайдалану"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> қолданбасын ашу"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Түсті түзету функциясын пайдалану"</string>
-    <!-- no translation found for accessibility_daltonizer_shortcut_title (7480360363995502369) -->
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Түсті түзету таңбашасы"</string>
+    <!-- no translation found for accessibility_daltonizer_about_title (6063650804116981287) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_footer_learn_more_content_description (2091679253892040910) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_about_title (8275754480247040136) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_footer_learn_more_content_description (5382579548498952445) -->
     <skip />
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Субтитрді көрсету"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Тек қолдау көрсетілетін қолданба үшін"</string>
@@ -2456,7 +2484,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Көк – сары"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Экранды қарайту"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Экранды қарайту"</string>
-    <!-- no translation found for reduce_bright_colors_shortcut_title (495648157059202745) -->
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Экранды қарайту таңбашасы"</string>
+    <!-- no translation found for reduce_bright_colors_about_title (503655452544934393) -->
     <skip />
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Экран күңгірттігін телефондағы минималды жарықтықтан да төмендету"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Экран күңгірттігін планшеттегі минималды жарықтықтан да төмендету"</string>
@@ -5361,8 +5390,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ЖАЛҒАСТЫРУ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"ЖОҚ, РАҚМЕТ"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Локация"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Бұл функцияны құтқару қызметіне қоңырау шалу үшін пайдаланған кезде, операторыңыз локация дерегін жинауы мүмкін.\n\nТолық мәлімет үшін операторыңыздың құпиялылық саясатын қарап шығыңыз."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Қалған уақыт немесе деректерді пайдалана алмай қалуыңыз мүмкін. Алып тастау алдында провайдермен ақылдасыңыз."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"мазмұн түсіру, қолданба мазмұны"</string>
     <string name="content_capture" msgid="868372905432812238">"Қолданба мазмұны"</string>
