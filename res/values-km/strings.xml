@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"កំណត់ឲ្យតូចជាងមុន"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"កំណត់ឲ្យធំជាងមុន"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"ប្រើការបង្វិល​ស្វ័យ​ប្រវត្តិ"</string>
-    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"ការសម្គាល់​មុខប្រើកាមេរ៉ាខាងមុខ ដើម្បីកែលម្អភាពត្រឹមត្រូវនៃការបង្វិល​ស្វ័យ​ប្រវត្តិ។ រូបភាពមិនត្រូវបានរក្សាទុក ឬផ្ញើទៅ Google ទេ។&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;ស្វែងយល់បន្ថែម​អំពីការបង្វិល​អេក្រង់ស្វ័យប្រវត្តិ&lt;/a&gt;"</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"ការសម្គាល់​មុខប្រើកាមេរ៉ាខាងមុខ ដើម្បីកែលម្អភាពត្រឹមត្រូវនៃការបង្វិល​ស្វ័យ​ប្រវត្តិ។ រូបភាព​មិនត្រូវបានរក្សាទុក ឬផ្ញើទៅ Google ឡើយ។"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"អត្ថបទគំរូ"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"មេធ្មប់ដ៏អស្ចារ្យនៃទឹកដីពិសិដ្ឋ"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"ជំពូកទី 11៖ ទីក្រុងមរកតដ៏អស្ចារ្យនៃទឹកដីពិសិដ្ឋ"</string>
@@ -288,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"បញ្ចូលអក្សរ​នៅលើ​អេក្រង់ចាក់សោ"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"បើក​ធាតុ​ក្រាហ្វិក"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"បានបិទដោយអ្នកគ្រប់គ្រង"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"បង្ហាញ​ជម្រើស​ចាក់សោ"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"បង្ហាញ​ជម្រើស​ប៊ូតុងថាមពល​ដែលបិទ Smart Lock, ការដោះសោ​តាមទម្រង់មុខ, ការដោះសោ​ដោយប្រើ​ស្នាមម្រាមដៃ និង​ការជូនដំណឹង​នៅលើ​អេក្រង់ចាក់សោ"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"ចាក់សោ​អេក្រង់ នៅពេល​ដែលលែងទុកចិត្ត"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"ប្រសិនបើ​បើក នោះឧបករណ៍​នឹងចាក់សោ នៅពេល​ដែលភ្នាក់ងារ​ទុកចិត្ត​ចុងក្រោយ​លែងទុកចិត្ត"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"គ្មាន"</string>
@@ -356,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -2665,7 +2665,7 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"មើលកម្មវិធី​ដែលមាន​ការប្រើប្រាស់ខ្ពស់បំផុត"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"បានដាក់កម្រិត​ការសាកថ្មជា​បណ្ដោះអាសន្ន"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"ដើម្បីរក្សា​ថ្មរបស់អ្នក។ ស្វែងយល់​បន្ថែម។"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"ដោយសារអ្នក​បានប្រើ​ទូរសព្ទ​របស់អ្នក​ច្រើនជាងធម្មតា ថ្មរបស់អ្នក​អាចនឹង​ឆាប់អស់ជាង​ពេលធម្មតា។\n\nកម្មវិធី​ដែលប្រើថ្ម​ច្រើនបំផុត៖"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"ដោយសារអ្នក​បានប្រើ​ទូរសព្ទ​របស់អ្នក​ច្រើនជាងប្រក្រតី ថ្មរបស់អ្នក​អាចនឹង​ឆាប់អស់ជាង​ពេលធម្មតា។\n\nកម្មវិធី​ដែលប្រើថ្ម​ច្រើនបំផុត៖"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"ដោយសារអ្នក​បានប្រើ​ថេប្លេត​របស់អ្នក​ច្រើនជាងធម្មតា ថ្មរបស់អ្នក​អាចនឹង​ឆាប់អស់ជាង​ពេលធម្មតា។\n\nកម្មវិធី​ដែលប្រើថ្ម​ច្រើនបំផុត៖"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"ដោយសារអ្នក​បានប្រើ​ឧបករណ៍​របស់អ្នក​ច្រើនជាងធម្មតា ថ្មរបស់អ្នក​អាចនឹង​ឆាប់អស់ជាង​ពេលធម្មតា។\n\nកម្មវិធី​ដែលប្រើថ្ម​ច្រើនបំផុត៖"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"រួម​បញ្ចូល​សកម្មភាព​ផ្ទៃខាងក្រោយ​ដែលប្រើថាមពលច្រើន"</string>
@@ -2720,7 +2720,7 @@
       <item quantity="one">កម្មវិធី %1$d ត្រូវបាន​ដាក់កំហិត</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
-    <string name="battery_missing_message" msgid="400958471814422770">"មានបញ្ហាក្នុង​ការអាន​ឧបករណ៍រង្វាស់កម្រិតថ្ម។"</string>
+    <string name="battery_missing_message" msgid="400958471814422770">"មានបញ្ហាក្នុង​ការអាន​រង្វាស់កម្រិតថ្ម។"</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"ចុច ដើម្បីស្វែងយល់បន្ថែម​អំពីបញ្ហានេះ"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"បញ្ឈប់កម្មវិធី?"</string>
@@ -5352,7 +5352,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"បន្ត"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"ទេ អរគុណ"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"ទីតាំង"</string>
-    <string name="wfc_disclaimer_location_desc_text" msgid="2799241640320172899">"ក្រុមហ៊ុនផ្ដល់សេវា​របស់អ្នកអាចប្រមូល​ទីតាំងរបស់អ្នក ដើម្បី​ផ្ដល់សេវាកម្ម​នេះ។\n\nសូមពិនិត្យមើល​គោលការណ៍​ឯកជនភាព​របស់ក្រុមហ៊ុនផ្ដល់សេវារបស់អ្នក។"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"ក្រុមហ៊ុនសេវាទូរសព្ទ​របស់អ្នកអាចនឹងប្រមូល​ទីតាំងរបស់អ្នក នៅពេលអ្នកប្រើ​សេវាកម្មនេះសម្រាប់​ការហៅទៅលេខសង្គ្រោះបន្ទាន់។\n\nសូមចូលទៅកាន់​គោលការណ៍ឯកជនភាព​របស់ក្រុមហ៊ុនសេវាទូរសព្ទអ្នក ដើម្បីទទួលបាន​ព័ត៌មានលម្អិត។"</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"អ្នក​អាចនឹងបាត់បង់​សិទ្ធិ​ចូលប្រើទិន្នន័យ និងរយៈពេលនៅសល់។ សូម​សាកសួរ​ក្រុមហ៊ុន​ផ្ដល់សេវារបស់អ្នក មុនពេលលុប។"</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"ការថត​ខ្លឹមសារ ខ្លឹមសារ​កម្មវិធី"</string>
     <string name="content_capture" msgid="868372905432812238">"ខ្លឹមសារ​កម្មវិធី"</string>

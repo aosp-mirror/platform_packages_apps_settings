@@ -284,8 +284,10 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
-            if (resultCode == RESULT_FINISHED || resultCode == RESULT_SKIP
-                    || resultCode == RESULT_TIMEOUT) {
+            if (resultCode == RESULT_SKIP || resultCode == RESULT_FINISHED) {
+                onSkipButtonClick(mFooterBarMixin.getSecondaryButtonView());
+                return;
+            } else if (resultCode == RESULT_TIMEOUT) {
                 setResult(resultCode, data);
                 finish();
                 return;
@@ -335,7 +337,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
         } else if (requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST) {
             Log.d(TAG, "ENROLL_NEXT_BIOMETRIC_REQUEST, result: " + resultCode);
-            if (resultCode != RESULT_CANCELED) {
+            if (resultCode == RESULT_SKIP || resultCode == RESULT_FINISHED) {
+                onSkipButtonClick(mFooterBarMixin.getSecondaryButtonView());
+            } else if (resultCode != RESULT_CANCELED) {
                 setResult(resultCode, data);
                 finish();
             }
