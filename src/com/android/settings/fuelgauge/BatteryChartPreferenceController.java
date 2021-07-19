@@ -332,9 +332,12 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
         mTrapezoidIndex = trapezoidIndex;
         mHandler.post(() -> {
+            final long start = System.currentTimeMillis();
             removeAndCacheAllPrefs();
             addAllPreferences();
             refreshCategoryTitle();
+            Log.d(TAG, String.format("refreshUi is finished in %d/ms",
+                    (System.currentTimeMillis() - start)));
         });
         return true;
     }
