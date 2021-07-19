@@ -78,7 +78,7 @@ public class DoubleTwistPreferenceControllerTest {
         when(mContext.getResources().getString(anyInt())).thenReturn("test");
         when(mContext.getSystemService(Context.SENSOR_SERVICE)).thenReturn(mSensorManager);
         when(mSensorManager.getSensorList(anyInt())).thenReturn(sensorList);
-        when(sensorList.get(0).getName()).thenReturn("test");
+        when(sensorList.get(0).getStringType()).thenReturn("test");
         when(sensorList.get(0).getVendor()).thenReturn("test");
 
         assertThat(mController.isAvailable()).isTrue();
@@ -97,7 +97,7 @@ public class DoubleTwistPreferenceControllerTest {
         when(mContext.getResources().getString(anyInt())).thenReturn("test");
         when(mContext.getSystemService(Context.SENSOR_SERVICE)).thenReturn(mSensorManager);
         when(mSensorManager.getSensorList(anyInt())).thenReturn(sensorList);
-        when(sensorList.get(0).getName()).thenReturn("not_test");
+        when(sensorList.get(0).getStringType()).thenReturn("not_test");
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -105,9 +105,9 @@ public class DoubleTwistPreferenceControllerTest {
     @Test
     public void isSuggestionCompleted_doubleTwist_trueWhenNotAvailable() {
         SettingsShadowResources.overrideResource(
-                R.string.gesture_double_twist_sensor_name, "nonexistant name");
+                R.string.gesture_double_twist_sensor_type, "nonexistent type");
         SettingsShadowResources.overrideResource(
-                R.string.gesture_double_twist_sensor_vendor, "nonexistant vendor");
+                R.string.gesture_double_twist_sensor_vendor, "nonexistent vendor");
 
         assertThat(DoubleTwistPreferenceController.isSuggestionComplete(
                 RuntimeEnvironment.application, null /* prefs */))
