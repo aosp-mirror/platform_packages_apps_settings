@@ -957,12 +957,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @VisibleForTesting
     void setAdditionalSettingsSummaries() {
-        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
-            mConfigureWifiSettingsPreference.setSummary(getString(
-                    isWifiWakeupEnabled()
-                            ? R.string.wifi_configure_settings_preference_summary_wakeup_on
-                            : R.string.wifi_configure_settings_preference_summary_wakeup_off));
-        }
+        mConfigureWifiSettingsPreference.setSummary(getString(
+                isWifiWakeupEnabled()
+                        ? R.string.wifi_configure_settings_preference_summary_wakeup_on
+                        : R.string.wifi_configure_settings_preference_summary_wakeup_off));
 
         final int numSavedNetworks = mWifiPickerTracker.getNumSavedNetworks();
         final int numSavedSubscriptions = mWifiPickerTracker.getNumSavedSubscriptions();
