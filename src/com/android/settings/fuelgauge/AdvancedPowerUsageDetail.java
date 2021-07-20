@@ -53,7 +53,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,8 @@ import java.util.List;
  */
 public class AdvancedPowerUsageDetail extends DashboardFragment implements
         ButtonActionDialogFragment.AppButtonsDialogListener,
-        BatteryTipPreferenceController.BatteryTipListener, RadioButtonPreference.OnClickListener {
+        BatteryTipPreferenceController.BatteryTipListener,
+        SelectorWithWidgetPreference.OnClickListener {
 
     public static final String TAG = "AdvancedPowerDetail";
     public static final String EXTRA_UID = "extra_uid";
@@ -107,11 +108,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     FooterPreference mFooterPreference;
     @VisibleForTesting
-    RadioButtonPreference mRestrictedPreference;
+    SelectorWithWidgetPreference mRestrictedPreference;
     @VisibleForTesting
-    RadioButtonPreference mOptimizePreference;
+    SelectorWithWidgetPreference mOptimizePreference;
     @VisibleForTesting
-    RadioButtonPreference mUnrestrictedPreference;
+    SelectorWithWidgetPreference mUnrestrictedPreference;
     @VisibleForTesting
     boolean enableTriState = true;
 
@@ -385,8 +386,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
 
         mAppButtonsPreferenceController = new AppButtonsPreferenceController(
-                (SettingsActivity) getActivity(), this, getSettingsLifecycle(), packageName,
-                mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
+                (SettingsActivity) getActivity(), this, getSettingsLifecycle(),
+                packageName, mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
         if (enableTriState) {
             controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
@@ -425,7 +426,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     @Override
-    public void onRadioButtonClicked(RadioButtonPreference selected) {
+    public void onRadioButtonClicked(SelectorWithWidgetPreference selected) {
         final String selectedKey = selected.getKey();
         updatePreferenceState(mUnrestrictedPreference, selectedKey);
         updatePreferenceState(mOptimizePreference, selectedKey);
@@ -452,7 +453,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         }
     }
 
-    private void updatePreferenceState(RadioButtonPreference preference, String selectedKey) {
+    private void updatePreferenceState(SelectorWithWidgetPreference preference,
+            String selectedKey) {
         preference.setChecked(selectedKey.equals(preference.getKey()));
     }
 
