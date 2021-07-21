@@ -29,7 +29,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.biometrics.MultiBiometricEnrollHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
 import com.android.settings.password.SetupSkipDialog;
@@ -85,16 +84,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
                 data = setFingerprintCount(data);
             }
         }
-
-        // If user has skipped or finished enrolling, don't restart enrollment.
-        final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
-                || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
-        final boolean isResultSkipOrFinished = resultCode == RESULT_SKIP
-                || resultCode == SetupSkipDialog.RESULT_SKIP || resultCode == RESULT_FINISHED;
-        if (isEnrollRequest && isResultSkipOrFinished) {
-            data = setSkipPendingEnroll(data);
-        }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -122,14 +111,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         return data;
     }
 
-    private Intent setSkipPendingEnroll(Intent data) {
-        if (data == null) {
-            data = new Intent();
-        }
-        data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
-        return data;
-    }
-
     @Override
     protected void onCancelButtonClick(View view) {
         final int resultCode;
@@ -149,11 +130,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
 
         setResult(resultCode, data);
         finish();
-    }
-
-    @Override
-    protected void onSkipButtonClick(View view) {
-        onCancelButtonClick(view);
     }
 
     /**
