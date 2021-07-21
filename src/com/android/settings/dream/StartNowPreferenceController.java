@@ -17,63 +17,54 @@
 package com.android.settings.dream;
 
 import android.content.Context;
-import android.widget.Button;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.dream.DreamBackend;
-import com.android.settingslib.widget.LayoutPreference;
 
-public class StartNowPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+/**
+ * Controller that used to enable screen saver
+ */
+public class StartNowPreferenceController extends SettingsMainSwitchPreferenceController {
 
-    private static final String PREF_KEY = "dream_start_now_button_container";
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public StartNowPreferenceController(Context context) {
-        super(context);
-
+    public StartNowPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         mBackend = DreamBackend.getInstance(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return PREF_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        LayoutPreference pref = screen.findPreference(getPreferenceKey());
-        Button startButton = pref.findViewById(R.id.dream_start_now_button);
-        startButton.setOnClickListener(v -> {
-            mMetricsFeatureProvider.logClickedPreference(pref,
-                    pref.getExtras().getInt(DashboardFragment.CATEGORY));
-            mBackend.startDreaming();
-        });
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     @Override
     public void updateState(Preference preference) {
-        super.updateState(preference);
+        mSwitchPreference.setChecked(false);
+        mSwitchPreference.setEnabled(mBackend.getWhenToDreamSetting() != DreamBackend.NEVER);
+    }
 
-        Button startButton = ((LayoutPreference) preference)
-                .findViewById(R.id.dream_start_now_button);
-        startButton.setEnabled(mBackend.getWhenToDreamSetting() != DreamBackend.NEVER);
+    @Override
+    public boolean isChecked() {
+        return false;
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        if (isChecked) {
+            if (mSwitchPreference != null) {
+                mMetricsFeatureProvider.logClickedPreference(mSwitchPreference,
+                        mSwitchPreference.getExtras().getInt(DashboardFragment.CATEGORY));
+            }
+            mBackend.startDreaming();
+        }
+        return true;
     }
 }

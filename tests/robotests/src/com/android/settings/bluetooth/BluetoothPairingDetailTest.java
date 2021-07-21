@@ -35,6 +35,8 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.util.Pair;
 
 import androidx.preference.PreferenceGroup;
 
@@ -70,6 +72,9 @@ public class BluetoothPairingDetailTest {
     private PreferenceGroup mPreferenceGroup;
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
+    @Mock
+    private Drawable mDrawable;
+
     private BluetoothPairingDetail mFragment;
     private Context mContext;
     private BluetoothProgressCategory mAvailableDevicesCategory;
@@ -82,11 +87,13 @@ public class BluetoothPairingDetailTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        Pair<Drawable, String> pairs = new Pair<>(mDrawable, "fake_device");
         mContext = RuntimeEnvironment.application;
         mFragment = spy(new BluetoothPairingDetail());
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mResource).when(mFragment).getResources();
         when(mCachedBluetoothDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS);
+        when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pairs);
 
         mAvailableDevicesCategory = spy(new BluetoothProgressCategory(mContext));
         mFooterPreference = new FooterPreference(mContext);

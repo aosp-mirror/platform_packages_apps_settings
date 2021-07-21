@@ -16,6 +16,8 @@
 
 package com.android.settings.development.bluetooth;
 
+import static android.bluetooth.BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.never;
@@ -199,7 +201,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
         verify(mBluetoothA2dpConfigStore).setSampleRate(mCodecConfigAAC.getSampleRate());
         verify(mBluetoothA2dpConfigStore).setBitsPerSample(mCodecConfigAAC.getBitsPerSample());
         verify(mBluetoothA2dpConfigStore).setChannelMode(mCodecConfigAAC.getChannelMode());
-        verify(mBluetoothA2dpConfigStore).setCodecPriority(mCodecConfigAAC.getCodecPriority());
+        verify(mBluetoothA2dpConfigStore).setCodecPriority(CODEC_PRIORITY_HIGHEST);
         verify(mBluetoothA2dpConfigStore).setCodecSpecific1Value(
                 mCodecConfigAAC.getCodecSpecific1());
     }

@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static android.view.HapticFeedbackConstants.CLOCK_TICK;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -37,6 +39,7 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
     private boolean mRestoredOldState;
 
     private boolean mTouchInProgress;
+    private int mLastProgress = -1;
 
     private ContentObserver mSpeedObserver = new ContentObserver(new Handler()) {
         @Override
@@ -70,11 +73,16 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
         mOldSpeed = mIm.getPointerSpeed(getContext());
         mSeekBar.setProgress(mOldSpeed - InputManager.MIN_POINTER_SPEED);
         mSeekBar.setOnSeekBarChangeListener(this);
+        mSeekBar.setContentDescription(getTitle());
     }
 
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
         if (!mTouchInProgress) {
             mIm.tryPointerSpeed(progress + InputManager.MIN_POINTER_SPEED);
+        }
+        if (progress != mLastProgress) {
+            seekBar.performHapticFeedback(CLOCK_TICK);
+            mLastProgress = progress;
         }
     }
 

@@ -21,14 +21,18 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils.ErrorListener;
@@ -152,5 +156,37 @@ public final class Utils {
     public static boolean isBluetoothScanningEnabled(Context context) {
         return Settings.Global.getInt(context.getContentResolver(),
                 Settings.Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+    }
+
+    /**
+     * Check if the Bluetooth device supports advanced details header
+     *
+     * @param bluetoothDevice the BluetoothDevice to get metadata
+     * @return true if it supports advanced details header, false otherwise.
+     */
+    public static boolean isAdvancedDetailsHeader(@NonNull BluetoothDevice bluetoothDevice) {
+        final boolean advancedEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, true);
+        if (!advancedEnabled) {
+            Log.d(TAG, "isAdvancedDetailsHeader: advancedEnabled is false");
+            return false;
+        }
+        // The metadata is for Android R
+        final boolean untetheredHeadset = BluetoothUtils.getBooleanMetaData(bluetoothDevice,
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET);
+        if (untetheredHeadset) {
+            Log.d(TAG, "isAdvancedDetailsHeader: untetheredHeadset is true");
+            return true;
+        }
+        // The metadata is for Android S
+        final String deviceType = BluetoothUtils.getStringMetaData(bluetoothDevice,
+                BluetoothDevice.METADATA_DEVICE_TYPE);
+        if (TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_UNTETHERED_HEADSET)
+                || TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_WATCH)
+                || TextUtils.equals(deviceType, BluetoothDevice.DEVICE_TYPE_DEFAULT)) {
+            Log.d(TAG, "isAdvancedDetailsHeader: deviceType is " + deviceType);
+            return true;
+        }
+        return false;
     }
 }

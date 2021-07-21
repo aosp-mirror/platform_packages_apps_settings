@@ -28,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.LabeledSeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.search.SearchIndexable;
 
 /**
@@ -115,6 +116,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
     private void initSeekBarPreference(final String key) {
         final LabeledSeekBarPreference pref = getPreferenceScreen().findPreference(key);
         pref.setContinuousUpdates(true);
+        pref.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_TICKS);
 
         final String settingsKey = key == LEFT_EDGE_SEEKBAR_KEY
                 ? Settings.Secure.BACK_GESTURE_INSET_SCALE_LEFT

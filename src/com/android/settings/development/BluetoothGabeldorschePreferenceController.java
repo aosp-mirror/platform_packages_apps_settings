@@ -17,7 +17,7 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.os.SystemProperties;
+import android.provider.DeviceConfig;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -35,9 +35,9 @@ public class BluetoothGabeldorschePreferenceController extends
 
     private static final String BLUETOOTH_GABELDORSCHE_KEY =
             "bluetooth_gabeldorsche_enable";
+
     @VisibleForTesting
-    static final String BLUETOOTH_GABELDORSCHE_PROPERTY =
-            "bluetooth.gd.enabled";
+    static final String CURRENT_GD_FLAG = "INIT_gd_scanning";
 
     public BluetoothGabeldorschePreferenceController(Context context) {
         super(context);
@@ -51,22 +51,23 @@ public class BluetoothGabeldorschePreferenceController extends
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        SystemProperties.set(BLUETOOTH_GABELDORSCHE_PROPERTY,
-                isEnabled ? "true" : "false");
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_BLUETOOTH,
+                CURRENT_GD_FLAG, isEnabled ? "true" : "false", false /* makeDefault */);
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final boolean isEnabled = SystemProperties.getBoolean(
-                BLUETOOTH_GABELDORSCHE_PROPERTY, false /* default */);
+        final boolean isEnabled = DeviceConfig.getBoolean(
+                DeviceConfig.NAMESPACE_BLUETOOTH, CURRENT_GD_FLAG, false /* default */);
         ((SwitchPreference) mPreference).setChecked(isEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        SystemProperties.set(BLUETOOTH_GABELDORSCHE_PROPERTY, "false");
+        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_BLUETOOTH,
+                CURRENT_GD_FLAG, null, false /* makeDefault */);
         ((SwitchPreference) mPreference).setChecked(false);
     }
 }

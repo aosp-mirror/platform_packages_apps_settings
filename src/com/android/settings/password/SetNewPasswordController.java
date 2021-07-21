@@ -19,7 +19,6 @@ package com.android.settings.password;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FACE;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT;
-import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 
 import static com.android.internal.util.Preconditions.checkNotNull;
 
@@ -111,50 +110,61 @@ final class SetNewPasswordController {
      */
     public void dispatchSetNewPasswordIntent() {
         final Bundle extras;
-        // TODO: handle the case with multiple biometrics, perhaps take an arg for biometric type?
-        if (mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)
-                && mFaceManager != null
-                && mFaceManager.isHardwareDetected()
-                && !mFaceManager.hasEnrolledTemplates(mTargetUserId)
-                && !isFaceDisabledByAdmin()) {
-            extras = getFaceChooseLockExtras();
-        } else if (mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
-                && mFingerprintManager != null
+
+        final boolean hasFeatureFingerprint = mPackageManager
+                .hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
+        final boolean hasFeatureFace = mPackageManager
+                .hasSystemFeature(PackageManager.FEATURE_FACE);
+
+        final boolean shouldShowFingerprintEnroll = mFingerprintManager != null
                 && mFingerprintManager.isHardwareDetected()
                 && !mFingerprintManager.hasEnrolledFingerprints(mTargetUserId)
-                && !isFingerprintDisabledByAdmin()) {
+                && !isFingerprintDisabledByAdmin();
+        final boolean shouldShowFaceEnroll = mFaceManager != null
+                && mFaceManager.isHardwareDetected()
+                && !mFaceManager.hasEnrolledTemplates(mTargetUserId)
+                && !isFaceDisabledByAdmin();
+
+        if (hasFeatureFace && shouldShowFaceEnroll
+                && hasFeatureFingerprint && shouldShowFingerprintEnroll) {
+            extras = getBiometricChooseLockExtras();
+        } else if (hasFeatureFace && shouldShowFaceEnroll) {
+            extras = getFaceChooseLockExtras();
+        } else if (hasFeatureFingerprint && shouldShowFingerprintEnroll) {
             extras = getFingerprintChooseLockExtras();
         } else {
             extras = new Bundle();
         }
+
         // No matter we show fingerprint options or not, we should tell the next activity which
         // user is setting new password.
         extras.putInt(Intent.EXTRA_USER_ID, mTargetUserId);
         mUi.launchChooseLock(extras);
     }
 
+    private Bundle getBiometricChooseLockExtras() {
+        Bundle chooseLockExtras = new Bundle();
+        chooseLockExtras.putBoolean(
+                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
+        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
+        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, true);
+        return chooseLockExtras;
+    }
+
     private Bundle getFingerprintChooseLockExtras() {
         Bundle chooseLockExtras = new Bundle();
-        long challenge = mFingerprintManager.preEnroll();
-        chooseLockExtras.putInt(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
-                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
-        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
-        chooseLockExtras.putLong(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
+        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
         return chooseLockExtras;
     }
 
     private Bundle getFaceChooseLockExtras() {
         Bundle chooseLockExtras = new Bundle();
-        long challenge = mFaceManager.generateChallenge();
-        chooseLockExtras.putInt(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
-                PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
-                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
-        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
-        chooseLockExtras.putLong(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+                ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS, true);
+        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, true);
         return chooseLockExtras;
     }

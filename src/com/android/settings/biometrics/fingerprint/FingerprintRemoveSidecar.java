@@ -79,9 +79,6 @@ public class FingerprintRemoveSidecar extends InstrumentedFragment {
             Log.e(TAG, "Remove already in progress");
             return;
         }
-        if (userId != UserHandle.USER_NULL) {
-            mFingerprintManager.setActiveUser(userId);
-        }
         mFingerprintRemoving = fingerprint;
         mFingerprintManager.remove(fingerprint, userId, mRemoveCallback);;
     }

@@ -37,6 +37,7 @@ public class CustomListPreference extends ListPreference {
 
     public CustomListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setSingleLineTitle(true);
     }
 
     public CustomListPreference(Context context, AttributeSet attrs, int defStyleAttr,

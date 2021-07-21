@@ -25,7 +25,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.location.LocationPersonalSettings;
 import com.android.settings.location.LocationSwitchBarController;
 import com.android.settings.location.LocationWorkProfileSettings;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 
 /**
  * Location Setting page for personal/managed profile.
@@ -36,9 +36,8 @@ public class ProfileSelectLocationFragment extends ProfileSelectFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar switchBar = activity.getSwitchBar();
-        switchBar.setSwitchBarText(R.string.location_settings_master_switch_title,
-                R.string.location_settings_master_switch_title);
+        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+        switchBar.setTitle(getContext().getString(R.string.location_settings_primary_switch_title));
         final LocationSwitchBarController switchBarController = new LocationSwitchBarController(
                 activity, switchBar, getSettingsLifecycle());
         switchBar.show();

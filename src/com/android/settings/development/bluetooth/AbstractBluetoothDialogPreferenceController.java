@@ -16,6 +16,8 @@
 
 package com.android.settings.development.bluetooth;
 
+import static android.bluetooth.BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
+
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothCodecConfig;
 import android.bluetooth.BluetoothCodecStatus;
@@ -113,7 +115,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         mBluetoothA2dpConfigStore.setSampleRate(config.getSampleRate());
         mBluetoothA2dpConfigStore.setBitsPerSample(config.getBitsPerSample());
         mBluetoothA2dpConfigStore.setChannelMode(config.getChannelMode());
-        mBluetoothA2dpConfigStore.setCodecPriority(config.getCodecPriority());
+        mBluetoothA2dpConfigStore.setCodecPriority(CODEC_PRIORITY_HIGHEST);
         mBluetoothA2dpConfigStore.setCodecSpecific1Value(config.getCodecSpecific1());
     }
 

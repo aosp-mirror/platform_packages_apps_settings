@@ -134,6 +134,11 @@
                 android:text="@string/accessibility_dialog_button_deny"
                 style="@style/AccessibilityDialogButton" />
 
+            <Button
+                android:id="@+id/permission_enable_uninstall_button"
+                android:text="@string/uninstall_text"
+                android:visibility="gone"
+                style="@style/AccessibilityDialogButton" />
         </LinearLayout>
     </LinearLayout>
 

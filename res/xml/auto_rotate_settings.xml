@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2021 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/accelerometer_title" >
+
+    <SwitchPreference
+        android:key="auto_rotate_switch"
+        android:title="@string/auto_rotate_settings_primary_switch_title"
+        settings:controller="com.android.settings.display.AutoRotatePreferenceController"/>
+
+    <com.android.settingslib.widget.BannerMessagePreference
+        android:key="face_rotate_permission"
+        android:title="@string/adaptive_sleep_title_no_permission"
+        android:summary="@string/auto_rotate_summary_no_permission"
+        settings:controller="com.android.settings.display.SmartAutoRotatePermissionController" />
+
+    <com.android.settingslib.widget.BannerMessagePreference
+        android:key="camera_lock_state"
+        android:title="@string/auto_rotate_camera_lock_title"
+        android:summary="@string/auto_rotate_camera_lock_summary"
+        settings:controller="com.android.settings.display.SmartAutoRotateCameraStateController" />
+
+    <com.android.settingslib.widget.BannerMessagePreference
+        android:key="camera_battery_saver_state"
+        android:title="@string/ambient_camera_summary_battery_saver_on"
+        settings:controller="com.android.settings.display.SmartAutoRotateBatterySaverController" />
+
+    <SwitchPreference
+        android:key="face_based_rotate"
+        android:title="@string/auto_rotate_switch_face_based"
+        settings:controller="com.android.settings.display.SmartAutoRotateController" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:icon="@drawable/ic_privacy_shield_24dp"
+        android:selectable="false"
+        settings:searchable="false" />
+
+</PreferenceScreen>

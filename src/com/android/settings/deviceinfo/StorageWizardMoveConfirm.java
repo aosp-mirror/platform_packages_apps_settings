@@ -21,8 +21,6 @@ import static android.content.Intent.EXTRA_TITLE;
 import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
 import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -39,6 +37,8 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 public class StorageWizardMoveConfirm extends StorageWizardBase {
+    private static final String TAG = "StorageWizardMoveConfirm";
+
     private static final int REQUEST_CREDENTIAL = 100;
 
     private String mPackageName;
@@ -61,7 +61,7 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
             return;
         }
 
-        // Sanity check that target volume is candidate
+        // Check that target volume is candidate
         Preconditions.checkState(
                 getPackageManager().getPackageCandidateVolumes(mApp).contains(mVolume));
 
@@ -85,8 +85,14 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
                     Log.d(TAG, "User " + user.id + " is currently locked; requesting unlock");
                     final CharSequence description = TextUtils.expandTemplate(
                             getText(R.string.storage_wizard_move_unlock), user.name);
-                    new ChooseLockSettingsHelper(this).launchConfirmationActivityForAnyUser(
-                            REQUEST_CREDENTIAL, null, null, description, user.id);
+                    final ChooseLockSettingsHelper.Builder builder =
+                            new ChooseLockSettingsHelper.Builder(this);
+                    builder.setRequestCode(REQUEST_CREDENTIAL)
+                            .setDescription(description)
+                            .setUserId(user.id)
+                            .setForceVerifyPath(true)
+                            .setAllowAnyUserId(true)
+                            .show();
                     return;
                 }
             }

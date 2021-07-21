@@ -16,7 +16,7 @@
 
 package com.android.settings.applications.defaultapps;
 
-import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
+import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -28,8 +28,8 @@ import android.os.UserManager;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 import org.junit.Before;
 import org.junit.Test;

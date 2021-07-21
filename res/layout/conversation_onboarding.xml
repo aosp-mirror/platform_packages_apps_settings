@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="?android:attr/textColorSecondary"
+        android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
         android:layout_marginTop="47dp"
         android:text="@string/conversation_onboarding_title"/>
     <TextView
@@ -41,5 +41,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="24dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="?android:attr/textColorSecondary"
         android:text="@string/conversation_onboarding_summary"/>
 </LinearLayout>

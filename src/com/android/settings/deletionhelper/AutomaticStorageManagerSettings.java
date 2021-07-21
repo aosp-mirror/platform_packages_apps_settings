@@ -34,7 +34,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -52,7 +52,7 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
 
     private AutomaticStorageManagerSwitchBarController mSwitchController;
     private DropDownPreference mDaysToRetain;
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mSwitchBar;
 
     @Override
     public View onCreateView(
@@ -83,8 +83,8 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
     private void initializeSwitchBar() {
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
-        mSwitchBar.setSwitchBarText(R.string.automatic_storage_manager_master_switch_title,
-                R.string.automatic_storage_manager_master_switch_title);
+        mSwitchBar.setTitle(
+                getContext().getString(R.string.automatic_storage_manager_primary_switch_title));
         mSwitchBar.show();
         mSwitchController =
                 new AutomaticStorageManagerSwitchBarController(

@@ -33,12 +33,15 @@ import android.content.DialogInterface;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+
+import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
@@ -72,6 +75,8 @@ public class PreferredSimDialogFragmentTest extends
 
     @Test
     public void onCreateDialog_twoSimsSelectFirst_correctMessage() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
         mIntent.putExtra(PREFERRED_SIM, 0);
 
         final AlertDialog alertDialog = startDialog();
@@ -83,6 +88,8 @@ public class PreferredSimDialogFragmentTest extends
 
     @Test
     public void onCreateDialog_twoSimsSelectSecond_correctMessage() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
         mIntent.putExtra(PREFERRED_SIM, 1);
 
         final AlertDialog alertDialog = startDialog();
@@ -94,6 +101,7 @@ public class PreferredSimDialogFragmentTest extends
 
     @Test
     public void onClick_yesClicked_callsOnSubscriptionSelected() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
         mIntent.putExtra(PREFERRED_SIM, 0);
 
         final AlertDialog alertDialog = startDialog();
@@ -108,6 +116,7 @@ public class PreferredSimDialogFragmentTest extends
 
     @Test
     public void onClick_noClicked_doesNotCallOnSubscriptionSelected() {
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSim1, mSim2));
         mIntent.putExtra(PREFERRED_SIM, 0);
 
         final AlertDialog alertDialog = startDialog();

@@ -17,17 +17,17 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
+import android.os.BatteryUsageStats;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batterytip.detectors.BatteryDefenderDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.EarlyWarningDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
-import com.android.settings.fuelgauge.batterytip.detectors.SummaryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
@@ -47,13 +47,13 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
 
     private static final boolean USE_FAKE_DATA = false;
 
-    private BatteryStatsHelper mBatteryStatsHelper;
+    private BatteryUsageStats mBatteryUsageStats;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
 
-    public BatteryTipLoader(Context context, BatteryStatsHelper batteryStatsHelper) {
+    public BatteryTipLoader(Context context, BatteryUsageStats batteryUsageStats) {
         super(context);
-        mBatteryStatsHelper = batteryStatsHelper;
+        mBatteryUsageStats = batteryUsageStats;
         mBatteryUtils = BatteryUtils.getInstance(context);
     }
 
@@ -64,15 +64,15 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
         }
         final List<BatteryTip> tips = new ArrayList<>();
         final BatteryTipPolicy policy = new BatteryTipPolicy(getContext());
-        final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(mBatteryStatsHelper, TAG);
+        final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(TAG);
         final Context context = getContext();
 
         tips.add(new LowBatteryDetector(context, policy, batteryInfo).detect());
-        tips.add(new HighUsageDetector(context, policy, mBatteryStatsHelper,
-                batteryInfo.discharging).detect());
-        tips.add(new SmartBatteryDetector(policy, context.getContentResolver()).detect());
+        tips.add(new HighUsageDetector(context, policy, mBatteryUsageStats, batteryInfo).detect());
+        tips.add(new SmartBatteryDetector(
+                context, policy, batteryInfo, context.getContentResolver()).detect());
         tips.add(new EarlyWarningDetector(policy, context).detect());
-        tips.add(new SummaryDetector(policy, batteryInfo.averageTimeToDischarge).detect());
+        tips.add(new BatteryDefenderDetector(batteryInfo).detect());
         // Disable this feature now since it introduces false positive cases. We will try to improve
         // it in the future.
         // tips.add(new RestrictAppDetector(context, policy).detect());
@@ -89,8 +89,7 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
         final List<BatteryTip> tips = new ArrayList<>();
         tips.add(new SummaryTip(BatteryTip.StateType.NEW,
                 EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
-        tips.add(new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */,
-                "Fake data"));
+        tips.add(new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */));
 
         return tips;
     }
