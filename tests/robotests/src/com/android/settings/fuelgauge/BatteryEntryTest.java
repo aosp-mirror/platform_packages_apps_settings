@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -36,6 +37,7 @@ import android.os.UserBatteryConsumer;
 import android.os.UserManager;
 
 import com.android.settings.R;
+import com.android.settings.fuelgauge.BatteryEntry.NameAndIcon;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -64,6 +66,7 @@ public class BatteryEntryTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mMockContext;
+    private Context mContext;
     @Mock private Handler mockHandler;
     @Mock private PackageManager mockPackageManager;
     @Mock private UserManager mockUserManager;
@@ -71,6 +74,7 @@ public class BatteryEntryTest {
 
     @Before
     public void stubContextToReturnMockPackageManager() {
+        mContext = spy(RuntimeEnvironment.application);
         when(mMockContext.getPackageManager()).thenReturn(mockPackageManager);
     }
 
@@ -247,5 +251,78 @@ public class BatteryEntryTest {
         final BatteryEntry entry = createUserBatteryConsumer(2);
         final String key = entry.getKey();
         assertThat(key).isEqualTo("U|2");
+    }
+
+    @Test
+    public void getNameAndIconFromUserId_nullUserInfo_returnDefaultNameAndIcon() {
+        final int userId = 1001;
+        doReturn(mockUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(null).when(mockUserManager).getUserInfo(userId);
+
+        final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromUserId(
+                mContext, userId);
+        assertThat(nameAndIcon.name).isEqualTo(getString(
+                R.string.running_process_item_removed_user_label));
+        assertThat(nameAndIcon.icon).isNull();
+    }
+
+    @Test
+    public void getNameAndIconFromUid_rerturnExpectedName() {
+        final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromUid(
+                mContext, /* name */ null, /* uid */ 0);
+        assertThat(nameAndIcon.name).isEqualTo(getString(R.string.process_kernel_label));
+
+        assertNameAndIcon("mediaserver", R.string.process_mediaserver_label);
+        assertNameAndIcon("dex2oat32", R.string.process_dex2oat_label);
+        assertNameAndIcon("dex2oat64", R.string.process_dex2oat_label);
+        assertNameAndIcon("dex2oat", R.string.process_dex2oat_label);
+    }
+
+    @Test
+    public void getNameAndIconFromPowerComponent_rerturnExpectedNameAndIcon() {
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY,
+                R.string.ambient_display_screen_title,
+                R.drawable.ic_settings_aod);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_BLUETOOTH,
+                R.string.power_bluetooth,
+                com.android.internal.R.drawable.ic_settings_bluetooth);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_CAMERA,
+                R.string.power_camera,
+                R.drawable.ic_settings_camera);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO,
+                R.string.power_cell,
+                R.drawable.ic_cellular_1_bar);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_FLASHLIGHT,
+                R.string.power_flashlight,
+                R.drawable.ic_settings_display);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_PHONE,
+                R.string.power_phone,
+                R.drawable.ic_settings_voice_calls);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_SCREEN,
+                R.string.power_screen,
+                R.drawable.ic_settings_display);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_WIFI,
+                R.string.power_wifi,
+                R.drawable.ic_settings_wireless);
+        assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_IDLE,
+                R.string.power_idle,
+                R.drawable.ic_settings_phone_idle);
+    }
+
+    private void assertNameAndIcon(String name, int stringId) {
+        final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromUid(
+                mContext, name, /* uid */ 1000);
+        assertThat(nameAndIcon.name).isEqualTo(getString(stringId));
+    }
+
+    private void assertNameAndIcon(int powerComponentId, int stringId, int iconId) {
+        final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromPowerComponent(
+                mContext, powerComponentId);
+        assertThat(nameAndIcon.name).isEqualTo(getString(stringId));
+        assertThat(nameAndIcon.iconId).isEqualTo(iconId);
+    }
+
+    private String getString(int stringId) {
+        return mContext.getResources().getString(stringId);
     }
 }
