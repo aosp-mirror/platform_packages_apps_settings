@@ -111,7 +111,6 @@ public class WifiEntryPreferenceTest {
 
         assertThat(pref.getTitle()).isEqualTo(MOCK_TITLE);
         assertThat(pref.getSummary()).isEqualTo(MOCK_SUMMARY);
-        assertThat(false).isTrue();
     }
 
     @Test
