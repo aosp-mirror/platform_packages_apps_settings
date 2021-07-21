@@ -72,6 +72,20 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
+    protected void onEnrollmentSkipped(@Nullable Intent data) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+            super.onEnrollmentSkipped(data);
+        }
+    }
+
+    @Override
+    protected void onFinishedEnrolling(@Nullable Intent data) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+            super.onFinishedEnrolling(data);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
