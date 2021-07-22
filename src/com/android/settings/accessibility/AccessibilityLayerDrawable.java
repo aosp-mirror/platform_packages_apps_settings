@@ -27,10 +27,10 @@ import com.android.settings.R;
 
 import java.util.Objects;
 
-/** LayerDrawable that contains device icon as background and floating menu icon as foreground. */
-public class FloatingMenuLayerDrawable extends LayerDrawable {
+/** LayerDrawable that contains device icon as background and given icon as foreground. */
+public class AccessibilityLayerDrawable extends LayerDrawable {
 
-    private FloatingMenuLayerDrawableState mState;
+    private AccessibilityLayerDrawableState mState;
 
     /**
      * Creates a new layer drawable with the list of specified layers.
@@ -38,23 +38,23 @@ public class FloatingMenuLayerDrawable extends LayerDrawable {
      * @param layers a list of drawables to use as layers in this new drawable,
      *               must be non-null
      */
-    private FloatingMenuLayerDrawable(@NonNull Drawable[] layers) {
+    private AccessibilityLayerDrawable(@NonNull Drawable[] layers) {
         super(layers);
     }
 
     /**
-     * Create the {@link LayerDrawable} that contains device icon as background and floating menu
-     * icon with given {@code opacity} value as foreground.
+     * Create the {@link LayerDrawable} that contains device icon as background and given menu icon
+     * with given {@code opacity} value as foreground.
      *
      * @param context the valid context used to get the icon
-     * @param resId the resource ID of the floating menu icon
+     * @param resId the resource ID of the given icon
      * @param opacity the opacity to apply to the given icon
-     * @return the drawable that combines the device icon and the floating menu icon
+     * @return the drawable that combines the device icon and the given icon
      */
-    public static FloatingMenuLayerDrawable createLayerDrawable(Context context, int resId,
+    public static AccessibilityLayerDrawable createLayerDrawable(Context context, int resId,
             int opacity) {
         final Drawable bg = context.getDrawable(R.drawable.accessibility_button_preview_base);
-        final FloatingMenuLayerDrawable basicDrawable = new FloatingMenuLayerDrawable(
+        final AccessibilityLayerDrawable basicDrawable = new AccessibilityLayerDrawable(
                 new Drawable[]{bg, null});
 
         basicDrawable.updateLayerDrawable(context, resId, opacity);
@@ -66,7 +66,7 @@ public class FloatingMenuLayerDrawable extends LayerDrawable {
      * value at index 1 layer.
      *
      * @param context the valid context used to get the icon
-     * @param resId the resource ID of the floating menu icon
+     * @param resId the resource ID of the given icon
      * @param opacity the opacity to apply to the given icon
      */
     public void updateLayerDrawable(Context context, int resId, int opacity) {
@@ -83,18 +83,18 @@ public class FloatingMenuLayerDrawable extends LayerDrawable {
 
     /** Stores the constant state and data to the given drawable. */
     private void setConstantState(Context context, int resId, int opacity) {
-        mState = new FloatingMenuLayerDrawableState(context, resId, opacity);
+        mState = new AccessibilityLayerDrawableState(context, resId, opacity);
     }
 
-    /** {@link ConstantState} to store the data of {@link FloatingMenuLayerDrawable}. */
+    /** {@link ConstantState} to store the data of {@link AccessibilityLayerDrawable}. */
     @VisibleForTesting
-    static class FloatingMenuLayerDrawableState extends ConstantState {
+    static class AccessibilityLayerDrawableState extends ConstantState {
 
         private final Context mContext;
         private final int mResId;
         private final int mOpacity;
 
-        FloatingMenuLayerDrawableState(Context context, int resId, int opacity) {
+        AccessibilityLayerDrawableState(Context context, int resId, int opacity) {
             mContext = context;
             mResId = resId;
             mOpacity = opacity;
@@ -119,7 +119,7 @@ public class FloatingMenuLayerDrawable extends LayerDrawable {
             if (o == null || getClass() != o.getClass()) {
                 return false;
             }
-            final FloatingMenuLayerDrawableState that = (FloatingMenuLayerDrawableState) o;
+            final AccessibilityLayerDrawableState that = (AccessibilityLayerDrawableState) o;
             return mResId == that.mResId
                     && mOpacity == that.mOpacity
                     && Objects.equals(mContext, that.mContext);

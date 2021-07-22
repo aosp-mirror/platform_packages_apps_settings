@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -41,9 +42,9 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
-/** Tests for {@link AccessibilityButtonFooterPreferenceController}. */
+/** Tests for {@link AccessibilityButtonPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
-public class AccessibilityButtonFooterPreferenceControllerTest {
+public class AccessibilityButtonPreferenceControllerTest {
 
     @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
@@ -53,13 +54,13 @@ public class AccessibilityButtonFooterPreferenceControllerTest {
     private final Resources mResources = mContext.getResources();
     @Mock
     private PreferenceScreen mScreen;
-    private AccessibilityButtonFooterPreferenceController mController;
-    private AccessibilityFooterPreference mPreference;
+    private Preference mPreference;
+    private AccessibilityButtonPreferenceController mController;
 
     @Before
     public void setUp() {
-        mController = new AccessibilityButtonFooterPreferenceController(mContext, "test_key");
-        mPreference = new AccessibilityFooterPreference(mContext);
+        mController = new AccessibilityButtonPreferenceController(mContext, "test_key");
+        mPreference = new Preference(mContext);
         mPreference.setKey("test_key");
 
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -74,7 +75,7 @@ public class AccessibilityButtonFooterPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.getTitle()).isEqualTo(
-                mContext.getText(R.string.accessibility_button_gesture_description));
+                mContext.getText(R.string.accessibility_button_gesture_title));
     }
 
     @Test
@@ -85,6 +86,6 @@ public class AccessibilityButtonFooterPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.getTitle()).isEqualTo(
-                mContext.getText(R.string.accessibility_button_description));
+                mContext.getText(R.string.accessibility_button_title));
     }
 }
