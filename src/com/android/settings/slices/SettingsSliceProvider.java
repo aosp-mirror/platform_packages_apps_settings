@@ -145,13 +145,17 @@ public class SettingsSliceProvider extends SliceProvider {
     final Map<Uri, SliceBackgroundWorker> mPinnedWorkers = new ArrayMap<>();
 
     private Boolean mNightMode;
+    private boolean mFirstSlicePinned;
+    private boolean mFirstSliceBound;
 
     public SettingsSliceProvider() {
         super(READ_SEARCH_INDEXABLES);
+        Log.d(TAG, "init");
     }
 
     @Override
     public boolean onCreateSliceProvider() {
+        Log.d(TAG, "onCreateSliceProvider");
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
         mSliceWeakDataCache = new WeakHashMap<>();
         return true;
@@ -159,6 +163,10 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSlicePinned(Uri sliceUri) {
+        if (!mFirstSlicePinned) {
+            Log.d(TAG, "onSlicePinned: " + sliceUri);
+            mFirstSlicePinned = true;
+        }
         if (CustomSliceRegistry.isValidUri(sliceUri)) {
             final Context context = getContext();
             final CustomSliceable sliceable = FeatureFactory.getFactory(context)
@@ -194,6 +202,9 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public Slice onBindSlice(Uri sliceUri) {
+        if (!mFirstSliceBound) {
+            Log.d(TAG, "onBindSlice start: " + sliceUri);
+        }
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
         try {
             if (!ThreadUtils.isMainThread()) {
@@ -261,6 +272,10 @@ public class SettingsSliceProvider extends SliceProvider {
             return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
         } finally {
             StrictMode.setThreadPolicy(oldPolicy);
+            if (!mFirstSliceBound) {
+                Log.v(TAG, "onBindSlice end");
+                mFirstSliceBound = true;
+            }
         }
     }
 
