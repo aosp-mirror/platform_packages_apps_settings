@@ -30,9 +30,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-/** Tests for {@link FloatingMenuLayerDrawable}. */
+/** Tests for {@link AccessibilityLayerDrawable}. */
 @RunWith(RobolectricTestRunner.class)
-public class FloatingMenuLayerDrawableTest {
+public class AccessibilityLayerDrawableTest {
 
     private static final int TEST_RES_ID =
             com.android.internal.R.drawable.ic_accessibility_magnification;
@@ -46,8 +46,8 @@ public class FloatingMenuLayerDrawableTest {
                 R.drawable.accessibility_button_preview_base);
         final Drawable expected2ndDrawable = mContext.getDrawable(TEST_RES_ID);
 
-        final FloatingMenuLayerDrawable actualDrawable =
-                FloatingMenuLayerDrawable.createLayerDrawable(mContext, TEST_RES_ID,
+        final AccessibilityLayerDrawable actualDrawable =
+                AccessibilityLayerDrawable.createLayerDrawable(mContext, TEST_RES_ID,
                         /* opacity= */ 27);
 
         final Drawable actual1stDrawable = actualDrawable.getDrawable(0);
@@ -60,14 +60,14 @@ public class FloatingMenuLayerDrawableTest {
 
     @Test
     public void updateLayerDrawable_expectedFloatingMenuLayerDrawableState() {
-        final FloatingMenuLayerDrawable originalDrawable =
-                FloatingMenuLayerDrawable.createLayerDrawable(mContext, TEST_RES_ID, /* opacity= */
+        final AccessibilityLayerDrawable originalDrawable =
+                AccessibilityLayerDrawable.createLayerDrawable(mContext, TEST_RES_ID, /* opacity= */
                         72);
 
         originalDrawable.updateLayerDrawable(mContext, TEST_RES_ID_2, /* opacity= */ 27);
 
         assertThat(originalDrawable.getConstantState()).isEqualTo(
-                new FloatingMenuLayerDrawable.FloatingMenuLayerDrawableState(mContext,
+                new AccessibilityLayerDrawable.AccessibilityLayerDrawableState(mContext,
                         TEST_RES_ID_2, /* opacity= */ 27));
     }
 }
