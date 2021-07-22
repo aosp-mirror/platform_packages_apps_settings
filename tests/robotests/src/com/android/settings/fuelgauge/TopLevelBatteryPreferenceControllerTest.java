@@ -32,6 +32,7 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.preference.Preference;
 
@@ -42,6 +43,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
@@ -53,6 +55,7 @@ public class TopLevelBatteryPreferenceControllerTest {
     private FakeFeatureFactory mFeatureFactory;
     private TopLevelBatteryPreferenceController mController;
     private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
+    private ArgumentCaptor<Intent> mIntentArgumentCaptor;
 
     @Before
     public void setUp() {
@@ -107,8 +110,9 @@ public class TopLevelBatteryPreferenceControllerTest {
         ComponentName newPathName = mController.convertClassPathToComponentName(newFragmentPath);
         when(mBatterySettingsFeatureProvider.getReplacingActivity(any())).thenReturn(
                 newPathName);
-        doNothing().when(mContext).startActivity(any());
+        doNothing().when(mContext).startActivity(mIntentArgumentCaptor.capture());
 
+        assertThat(mIntentArgumentCaptor.getValue().getComponent()).isEqualTo(newPathName);
         assertThat(mController.handlePreferenceTreeClick(preference)).isTrue();
     }
 
