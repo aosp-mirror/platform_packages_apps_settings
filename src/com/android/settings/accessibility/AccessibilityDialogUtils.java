@@ -344,12 +344,11 @@ public class AccessibilityDialogUtils {
 
     private static void initSoftwareShortcut(Context context, View view) {
         final View dialogView = view.findViewById(R.id.software_shortcut);
-        final CharSequence title = context.getText(
-                R.string.accessibility_shortcut_edit_dialog_title_software);
         final TextView summary = dialogView.findViewById(R.id.summary);
         final int lineHeight = summary.getLineHeight();
 
-        setupShortcutWidget(dialogView, title,
+        setupShortcutWidget(dialogView,
+                retrieveTitle(context),
                 retrieveSoftwareShortcutSummary(context, lineHeight),
                 retrieveSoftwareShortcutImageResId(context));
     }
@@ -398,20 +397,49 @@ public class AccessibilityDialogUtils {
         return sb;
     }
 
+    private static CharSequence retrieveTitle(Context context) {
+        int resId;
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            resId = R.string.accessibility_shortcut_edit_dialog_title_software;
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = R.string.accessibility_shortcut_edit_dialog_title_software_by_gesture;
+        } else {
+            resId = R.string.accessibility_shortcut_edit_dialog_title_software;
+        }
+        return context.getText(resId);
+    }
+
     private static CharSequence retrieveSoftwareShortcutSummary(Context context, int lineHeight) {
         final SpannableStringBuilder sb = new SpannableStringBuilder();
-        if (!AccessibilityUtil.isFloatingMenuEnabled(context)) {
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            sb.append(getCustomizeAccessibilityButtonLink(context));
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            final int resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.string.accessibility_shortcut_edit_dialog_summary_software_gesture_talkback
+                    : R.string.accessibility_shortcut_edit_dialog_summary_software_gesture;
+            sb.append(context.getText(resId));
+            sb.append("\n\n");
+            sb.append(getCustomizeAccessibilityButtonLink(context));
+        } else {
             sb.append(getSummaryStringWithIcon(context, lineHeight));
             sb.append("\n\n");
+            sb.append(getCustomizeAccessibilityButtonLink(context));
         }
-        sb.append(getCustomizeAccessibilityButtonLink(context));
         return sb;
     }
 
     private static int retrieveSoftwareShortcutImageResId(Context context) {
-        return AccessibilityUtil.isFloatingMenuEnabled(context)
-                ? R.drawable.accessibility_shortcut_type_software_floating
-                : R.drawable.accessibility_shortcut_type_software;
+        int resId;
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            resId = R.drawable.accessibility_shortcut_type_software_floating;
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
+                    : R.drawable.accessibility_shortcut_type_software_gesture;
+        } else {
+            resId = R.drawable.accessibility_shortcut_type_software;
+        }
+        return resId;
     }
 
     private static CharSequence getCustomizeAccessibilityButtonLink(Context context) {
@@ -422,7 +450,6 @@ public class AccessibilityDialogUtils {
                 .launch();
         final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
                 AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, linkListener);
-
         return AnnotationSpan.linkify(context.getText(
                 R.string.accessibility_shortcut_edit_dialog_summary_software_floating), linkInfo);
     }

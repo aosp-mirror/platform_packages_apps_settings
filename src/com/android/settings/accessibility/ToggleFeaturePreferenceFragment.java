@@ -584,6 +584,18 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         return value;
     }
 
+    private static CharSequence getSoftwareShortcutTypeSummary(Context context) {
+        int resId;
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            resId = R.string.accessibility_shortcut_edit_summary_software;
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = R.string.accessibility_shortcut_edit_summary_software_gesture;
+        } else {
+            resId = R.string.accessibility_shortcut_edit_summary_software;
+        }
+        return context.getText(resId);
+    }
+
     protected CharSequence getShortcutTypeSummary(Context context) {
         if (!mShortcutPreference.isSettingsEditable()) {
             return context.getText(R.string.accessibility_shortcut_edit_dialog_title_hardware);
@@ -597,11 +609,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
 
         final List<CharSequence> list = new ArrayList<>();
-        final CharSequence softwareTitle = context.getText(
-                R.string.accessibility_shortcut_edit_summary_software);
-
         if (hasShortcutType(shortcutTypes, UserShortcutType.SOFTWARE)) {
-            list.add(softwareTitle);
+            list.add(getSoftwareShortcutTypeSummary(context));
         }
         if (hasShortcutType(shortcutTypes, UserShortcutType.HARDWARE)) {
             final CharSequence hardwareTitle = context.getText(
@@ -611,7 +620,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         // Show software shortcut if first time to use.
         if (list.isEmpty()) {
-            list.add(softwareTitle);
+            list.add(getSoftwareShortcutTypeSummary(context));
         }
 
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
