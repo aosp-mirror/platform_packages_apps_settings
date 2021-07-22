@@ -24,6 +24,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +36,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.MultiBiometricEnrollHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.SetupSkipDialog;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
@@ -87,6 +90,32 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         final TextView footerTitle2 = findViewById(R.id.footer_title_2);
         footerTitle1.setText(getFooterTitle1());
         footerTitle2.setText(getFooterTitle2());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // If user has skipped or finished enrolling, don't restart enrollment.
+        final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
+                || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
+        final boolean isResultSkipOrFinished = resultCode == RESULT_SKIP
+                || resultCode == SetupSkipDialog.RESULT_SKIP || resultCode == RESULT_FINISHED;
+        if (isEnrollRequest && isResultSkipOrFinished) {
+            data = setSkipPendingEnroll(data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onCancelButtonClick(View view) {
+        // User has explicitly canceled enroll. Don't restart it automatically.
+        Intent data = setSkipPendingEnroll(new Intent());
+        setResult(RESULT_SKIP, data);
+        finish();
+    }
+
+    @Override
+    protected void onSkipButtonClick(View view) {
+        onCancelButtonClick(view);
     }
 
     @StringRes
@@ -281,5 +310,14 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @StringRes
     protected int getMoreButtonTextRes() {
         return R.string.security_settings_face_enroll_introduction_more;
+    }
+
+    @NonNull
+    protected static Intent setSkipPendingEnroll(@Nullable Intent data) {
+        if (data == null) {
+            data = new Intent();
+        }
+        data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
+        return data;
     }
 }
