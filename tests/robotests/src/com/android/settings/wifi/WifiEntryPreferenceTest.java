@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settingslib.R;
+import com.android.settingslib.wifi.WifiUtils;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
@@ -49,7 +50,7 @@ public class WifiEntryPreferenceTest {
     @Mock
     private WifiEntry mMockWifiEntry;
     @Mock
-    private WifiEntryPreference.IconInjector mMockIconInjector;
+    private WifiUtils.InternetIconInjector mMockIconInjector;
 
     @Mock
     private Drawable mMockDrawable0;
