@@ -55,8 +55,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Зменшити"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Збільшити"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Увімкнути автообертання"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Технологія розпізнавання облич використовує фронтальну камеру, щоб підвищувати точність автообертання. Зображення ніколи не зберігаються та не надсилаються на сервери Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Зразок тексту"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Чарівник країни Оз"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Глава 11. Дивовижне Смарагдове місто країни Оз"</string>
@@ -293,8 +292,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Текст на заблокованому екрані"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Увімкнути віджети"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Вимкнено адміністратором"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Показувати опцію блокування"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Додати в меню кнопки живлення функцію, яка вимикає Smart Lock, фейсконтроль, розблокування відбитком пальця та сповіщення на заблокованому екрані"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Блокувати екран, коли втрачено довіру"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Якщо цю функцію ввімкнено, пристрій заблокується, коли останній агент утратить довіру"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Немає"</string>
@@ -363,6 +360,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -2728,9 +2727,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Переглянути додатки, що найбільше використовують заряд"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Заряджання тимчасово обмежено"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Це запобігає старінню акумулятора. Докладніше."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Оскільки ви користувалися телефоном більше, ніж зазвичай, акумулятор може розрядитися швидше.\n\nДодатки, які споживають найбільше заряду, наведено нижче."</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Оскільки ви користувалися планшетом більше, ніж зазвичай, акумулятор може розрядитися швидше.\n\nДодатки, які споживають найбільше заряду, наведено нижче."</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Оскільки ви користувалися пристроєм більше, ніж зазвичай, акумулятор може розрядитися швидше.\n\nДодатки, які споживають найбільше заряду, наведено нижче."</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Оскільки ви користувалися телефоном більше, ніж зазвичай, акумулятор може розрядитися швидше.\n\nДодатки, які споживають найбільше заряду:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Оскільки ви користувалися планшетом більше, ніж зазвичай, акумулятор може розрядитися швидше.\n\nДодатки, які споживають найбільше заряду:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Оскільки ви користувалися пристроєм більше, ніж зазвичай, акумулятор може розрядитися швидше.\n\nДодатки, які споживають найбільше заряду:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Виявлено енергозатратну активність у фоновому режимі"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="one">Обмежити %1$d додаток</item>
@@ -2797,7 +2796,7 @@
       <item quantity="other">%1$d додатка обмежено</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
-    <string name="battery_missing_message" msgid="400958471814422770">"Не вдалось отримати дані лічильника акумулятора."</string>
+    <string name="battery_missing_message" msgid="400958471814422770">"Не вдалось отримати дані про рівень заряду акумулятора."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Натисніть, щоб дізнатися більше про цю помилку"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Припинити роботу додатка?"</string>
@@ -5531,8 +5530,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ПРОДОВЖИТИ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"НІ, ДЯКУЮ"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Місцезнаходження"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Оператор може збирати дані про ваше місцезнаходження, коли ви користуєтеся цим сервісом для здійснення екстрених викликів.\n\nЩоб дізнатися більше, перегляньте політику конфіденційності свого оператора."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Ви можете втратити доступ до залишку часу або даних. Щоб дізнатися більше, зв’яжіться з оператором."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"запис вмісту, вміст додатків"</string>
     <string name="content_capture" msgid="868372905432812238">"Контент додатків"</string>

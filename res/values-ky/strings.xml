@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Кичирээк кылуу"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Чоңураак кылуу"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Автоматтык бурулууну иштетүү"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Жүздү аныктоо функциясы автоматтык түрдө бурулуунун тактыгын жакшыртуу үчүн маңдайкы камераны колдонот. Сүрөттөр Google\'га эч качан жөнөтүлбөйт же анда сакталбайт."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Үлгү текст"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Оз өлкөсүнүн ажайып сыйкырчысы"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11-бөлүм: Оз өлкөсүнүн ажайып зумурут шаары"</string>
@@ -289,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Кулпуланган экрандагы текст"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Виджеттерди жандыруу"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Администратор өчүрүп койгон"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Кулпулоо опциясын көрсөтүү"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Кубат баскычынын менюсуна Smart Lock\'ту, Жүзүнөн таанып ачуу, Манжа изи менен ачуу параметрин жана кулпуланган экрандагы билдирмелерди өчүрө турган функция кошулат"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Ишеним жоготулганда экранды кулпулоо"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Эгер иштетилсе, акыркы ишеним агенти ишеничин жоготкондо, түзмөк кулпуланып калат"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Жок"</string>
@@ -357,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -5353,8 +5352,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ООБА"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"ЖОК, РАХМАТ"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Жайгашкан жер"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Шашылыш чалуулар үчүн бул кызматты колдонгонуңузда, байланыш операторуңуз жайгашкан жериңиз тууралуу маалыматты чогултушу мүмкүн.\n\nКеңири маалымат алуу үчүн байланыш операторуңуздун купуялык саясатына баш багыңыз."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Калган убакытты же маалыматтарды пайдалануу мүмкүнчүлүгүнөн айрыласыз. Өчүрүүдөн мурда, операторуңузга байланышыңыз."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"мазмунду сүрөткө тартуу, колдонмонун мазмуну"</string>
     <string name="content_capture" msgid="868372905432812238">"Колдонмонун мазмуну"</string>
@@ -5451,12 +5449,12 @@
     <string name="reset_your_internet_title" msgid="4856899004343241310">"Интернетти баштапкы абалга келтиресизби?"</string>
     <string name="reset_internet_text" product="default" msgid="8797910368942544453">"Ушуну менен телефон чалууңуз бүтөт"</string>
     <string name="reset_internet_text" product="tablet" msgid="8797910368942544453">"Ушуну менен телефон чалууңуз бүтөт"</string>
-    <string name="resetting_internet_text" msgid="6696779371800051806">"Интернет баштапкы абалга келтирилүүдө…"</string>
+    <string name="resetting_internet_text" msgid="6696779371800051806">"Бир аз күтө туруңуз…"</string>
     <string name="fix_connectivity" msgid="2781433603228089501">"Байланышты оңдоо"</string>
     <string name="networks_available" msgid="3299512933684383474">"Жеткиликтүү тармактар"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Башка тармактарга которулуу үчүн Ethernet кабелин ажыратыңыз"</string>
     <string name="wifi_is_off" msgid="8308136482502734453">"Wi-Fi өчүк"</string>
-    <string name="tap_a_network_to_connect" msgid="8044777400224037875">"Туташуу үчүн тармакты таптаңыз"</string>
+    <string name="tap_a_network_to_connect" msgid="8044777400224037875">"Кайсы тармакка туташасыз?"</string>
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"W+ туташуулары"</string>
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Google Fi кызматына W+ тармактарын колдонуп, ылдамдыкты жакшыртып, камтуу аймагын кеңейтүүгө уруксат берүү"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ тармак"</string>
@@ -5471,7 +5469,7 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Туташты"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Байланыш жок"</string>
-    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Мобилдик трафик автоматтык түрдө туташтырылбайт"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Мобилдик Интернетке автоматтык түрдө туташпайт"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Башка тармактар жеткиликсиз"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"Тармактар жеткиликтүү эмес"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Мобилдик трафик өчүрүлсүнбү?"</string>
