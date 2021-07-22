@@ -68,6 +68,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     private static final int EVENT_NETWORK_SCAN_COMPLETED = 4;
 
     private static final String PREF_KEY_NETWORK_OPERATORS = "network_operators_preference";
+    private static final int MIN_NUMBER_OF_SCAN_REQUIRED = 2;
 
     private PreferenceCategory mPreferenceCategory;
     @VisibleForTesting
@@ -87,8 +88,8 @@ public class NetworkSelectSettings extends DashboardFragment {
     private long mRequestIdManualNetworkSelect;
     private long mRequestIdManualNetworkScan;
     private long mWaitingForNumberOfScanResults;
-
-    private static final int MIN_NUMBER_OF_SCAN_REQUIRED = 2;
+    @VisibleForTesting
+    boolean mIsAggregationEnabled = false;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -117,6 +118,9 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
 
         mMetricsFeatureProvider = getMetricsFeatureProvider(getContext());
+        mIsAggregationEnabled = enableAggregation(getContext());
+        Log.d(TAG, "init: mUseNewApi:" + mUseNewApi
+                + " ,mIsAggregationEnabled:" + mIsAggregationEnabled);
     }
 
     @Keep
@@ -124,6 +128,13 @@ public class NetworkSelectSettings extends DashboardFragment {
     protected boolean enableNewAutoSelectNetworkUI(Context context) {
         return context.getResources().getBoolean(
                 com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
+    }
+
+    @Keep
+    @VisibleForTesting
+    protected boolean enableAggregation(Context context) {
+        return context.getResources().getBoolean(
+                R.bool.config_network_selection_list_aggregation_enabled);
     }
 
     @Keep
@@ -324,6 +335,31 @@ public class NetworkSelectSettings extends DashboardFragment {
         }
     };
 
+    @VisibleForTesting
+    List<CellInfo> doAggregation(List<CellInfo> cellInfoListInput) {
+        if (!mIsAggregationEnabled) {
+            Log.d(TAG, "no aggregation");
+            return new ArrayList<>(cellInfoListInput);
+        }
+        ArrayList<CellInfo> aggregatedList = new ArrayList<>();
+        for (CellInfo cellInfo : cellInfoListInput) {
+            String plmn = CellInfoUtil.getNetworkTitle(cellInfo.getCellIdentity(),
+                    CellInfoUtil.getCellIdentityMccMnc(cellInfo.getCellIdentity()));
+            Class className = cellInfo.getClass();
+
+            if (aggregatedList.stream().anyMatch(
+                    i -> {
+                        return (CellInfoUtil.getNetworkTitle(i.getCellIdentity(),
+                                CellInfoUtil.getCellIdentityMccMnc(i.getCellIdentity())) == plmn)
+                                && i.getClass().equals(className);
+                    })) {
+                continue;
+            }
+            aggregatedList.add(cellInfo);
+        }
+        return aggregatedList;
+    }
+
     private final NetworkScanHelper.NetworkScanCallback mCallback =
             new NetworkScanHelper.NetworkScanCallback() {
                 public void onResults(List<CellInfo> results) {
@@ -356,7 +392,7 @@ public class NetworkSelectSettings extends DashboardFragment {
             stopNetworkQuery();
         }
 
-        mCellInfoList = new ArrayList<>(results);
+        mCellInfoList = doAggregation(results);
         Log.d(TAG, "CellInfoList: " + CellInfoUtil.cellInfoListToString(mCellInfoList));
         if (mCellInfoList != null && mCellInfoList.size() != 0) {
             final NetworkOperatorPreference connectedPref =
