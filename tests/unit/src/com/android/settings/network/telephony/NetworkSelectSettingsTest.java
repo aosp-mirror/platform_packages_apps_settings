@@ -28,7 +28,13 @@ import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellIdentity;
+import android.telephony.CellIdentityGsm;
+import android.telephony.CellIdentityLte;
 import android.telephony.CellInfo;
+import android.telephony.CellInfoGsm;
+import android.telephony.CellInfoLte;
+import android.telephony.CellSignalStrengthGsm;
+import android.telephony.CellSignalStrengthLte;
 import android.telephony.TelephonyManager;
 
 import androidx.preference.PreferenceCategory;
@@ -45,6 +51,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class NetworkSelectSettingsTest {
     private static final int SUB_ID = 2;
@@ -78,6 +86,7 @@ public class NetworkSelectSettingsTest {
 
     public Context mContext;
     public PreferenceCategory mPreferenceCategory;
+    public boolean mIsAggregationEnabled = true;
 
     private Bundle mInitArguments;
     private TargetClass mNetworkSelectSettings;
@@ -93,10 +102,11 @@ public class NetworkSelectSettingsTest {
 
         mPreferenceCategory = spy(new PreferenceCategory(mContext));
         doReturn(mPreferenceManager).when(mPreferenceCategory).getPreferenceManager();
-
+        doReturn(mCellId1).when(mCellInfo1).getCellIdentity();
         doReturn(CARRIER_NAME1).when(mCellId1).getOperatorAlphaLong();
+        doReturn(mCellId2).when(mCellInfo2).getCellIdentity();
         doReturn(CARRIER_NAME2).when(mCellId2).getOperatorAlphaLong();
-
+        mIsAggregationEnabled = true;
         mNetworkSelectSettings = spy(new TargetClass(this));
 
         PersistableBundle config = new PersistableBundle();
@@ -169,6 +179,11 @@ public class NetworkSelectSettingsTest {
             }
             return pref;
         }
+
+        @Override
+        protected boolean enableAggregation(Context context) {
+            return mTestEnv.mIsAggregationEnabled;
+        }
     }
 
     @Test
@@ -177,7 +192,6 @@ public class NetworkSelectSettingsTest {
         mNetworkSelectSettings.onCreateInitialization();
         mNetworkSelectSettings.enablePreferenceScreen(true);
         mNetworkSelectSettings.scanResultHandler(Arrays.asList(mCellInfo1, mCellInfo2));
-
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(2);
         final NetworkOperatorPreference preference =
                 (NetworkOperatorPreference) mPreferenceCategory.getPreference(1);
@@ -194,5 +208,91 @@ public class NetworkSelectSettingsTest {
 
         // Should not Crash
         mNetworkSelectSettings.updateForbiddenPlmns();
+    }
+
+    @Test
+    public void doAggregation_hasDuplicateItemsDiffCellIdCase1_removeSamePlmnRatItem() {
+        mNetworkSelectSettings.onCreateInitialization();
+        List<CellInfo> testList = Arrays.asList(
+                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
+                createLteCellInfo(true, 1234, "123", "232", "CarrierA"),
+                createGsmCellInfo(false, 123, "123", "232", "CarrierB"));
+        List<CellInfo> expected = Arrays.asList(
+                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
+                createGsmCellInfo(false, 123, "123", "232", "CarrierB"));
+        assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
+    }
+
+    @Test
+    public void doAggregation_hasDuplicateItemsDiffCellIdCase2_removeSamePlmnRatItem() {
+        mNetworkSelectSettings.onCreateInitialization();
+        List<CellInfo> testList = Arrays.asList(
+                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
+                createGsmCellInfo(false, 123, "123", "232", "CarrierB"),
+                createLteCellInfo(false, 1234, "123", "232", "CarrierB"),
+                createGsmCellInfo(false, 1234, "123", "232", "CarrierB"));
+        List<CellInfo> expected = Arrays.asList(
+                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
+                createGsmCellInfo(false, 123, "123", "232", "CarrierB"),
+                createLteCellInfo(false, 1234, "123", "232", "CarrierB"));
+        assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
+    }
+
+    @Test
+    public void doAggregation_hasDuplicateItemsDiffMccMncCase1_removeSamePlmnRatItem() {
+        mNetworkSelectSettings.onCreateInitialization();
+        List<CellInfo> testList = Arrays.asList(
+                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
+                createLteCellInfo(true, 123, "456", "232", "CarrierA"),
+                createGsmCellInfo(false, 123, "123", "232", "CarrierB"));
+        List<CellInfo> expected = Arrays.asList(
+                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
+                createGsmCellInfo(false, 123, "123", "232", "CarrierB"));
+        assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
+    }
+
+    @Test
+    public void doAggregation_hasDuplicateItemsDiffMccMncCase2_removeSamePlmnRatItem() {
+        mNetworkSelectSettings.onCreateInitialization();
+        List<CellInfo> testList = Arrays.asList(
+                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
+                createGsmCellInfo(false, 123, "123", "232", "CarrierB"),
+                createLteCellInfo(false, 1234, "123", "232", "CarrierB"),
+                createGsmCellInfo(false, 123, "456", "232", "CarrierB"));
+        List<CellInfo> expected = Arrays.asList(
+                createLteCellInfo(true, 123, "123", "232", "CarrierA"),
+                createGsmCellInfo(false, 123, "123", "232", "CarrierB"),
+                createLteCellInfo(false, 1234, "123", "232", "CarrierB"));
+        assertThat(mNetworkSelectSettings.doAggregation(testList)).isEqualTo(expected);
+    }
+
+    private CellInfoLte createLteCellInfo(boolean registered, int cellId, String mcc, String mnc,
+            String plmnName) {
+        CellIdentityLte cil = new CellIdentityLte(
+                cellId, 5, 200, 2000, new int[]{1, 2}, 10000, mcc,
+                mnc, plmnName, plmnName,
+                Collections.emptyList(), null);
+        CellSignalStrengthLte cssl = new CellSignalStrengthLte(15, 16, 17, 18, 19, 20);
+
+        CellInfoLte cellInfoLte = new CellInfoLte();
+        cellInfoLte.setRegistered(registered);
+        cellInfoLte.setTimeStamp(22);
+        cellInfoLte.setCellIdentity(cil);
+        cellInfoLte.setCellSignalStrength(cssl);
+        return cellInfoLte;
+    }
+
+    private CellInfoGsm createGsmCellInfo(boolean registered, int cellId, String mcc, String mnc,
+            String plmnName) {
+        CellIdentityGsm cig = new CellIdentityGsm(1, cellId, 40, 5, mcc,
+                mnc, plmnName, plmnName,
+                Collections.emptyList());
+        CellSignalStrengthGsm cssg = new CellSignalStrengthGsm(5, 6, 7);
+        CellInfoGsm cellInfoGsm = new CellInfoGsm();
+        cellInfoGsm.setRegistered(registered);
+        cellInfoGsm.setTimeStamp(9);
+        cellInfoGsm.setCellIdentity(cig);
+        cellInfoGsm.setCellSignalStrength(cssg);
+        return cellInfoGsm;
     }
 }
