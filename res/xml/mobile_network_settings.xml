@@ -86,7 +86,8 @@
         <Preference
             android:key="carrier_wifi_network"
             android:title="@string/carrier_wifi_network_title"
-            android:selectable="false"/>
+            android:selectable="false"
+            settings:searchable="false"/>
 
         <SwitchPreference
             android:key="mms_message"
