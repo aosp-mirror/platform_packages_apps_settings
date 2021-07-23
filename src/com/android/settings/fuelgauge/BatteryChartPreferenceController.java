@@ -226,8 +226,8 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             new Pair(ConvertUtils.METRIC_KEY_PACKAGE, packageName),
             new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, histEntry.mBatteryLevel),
             new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, powerPref.getPercent()));
-        Log.d(TAG, String.format("handleClick() label=%s key=%s enntry=\n%s",
-                diffEntry.getAppLabel(), histEntry.getKey(), histEntry));
+        Log.d(TAG, String.format("handleClick() label=%s key=%s package=%s",
+                diffEntry.getAppLabel(), histEntry.getKey(), histEntry.mPackageName));
         AdvancedPowerUsageDetail.startBatteryDetailPage(
                 mActivity, mFragment, diffEntry, powerPref.getPercent(),
                 isValidToShowSummary(packageName), getSlotInformation());
@@ -285,9 +285,10 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
         forceRefreshUi();
         Log.d(TAG, String.format(
-            "setBatteryHistoryMap() size=%d\nkeys=%s\nlevels=%s",
+            "setBatteryHistoryMap() size=%d key=%s\nlevels=%s",
             batteryHistoryMap.size(),
-            utcToLocalTime(mPrefContext, mBatteryHistoryKeys),
+            ConvertUtils.utcToLocalTime(mPrefContext,
+                mBatteryHistoryKeys[mBatteryHistoryKeys.length - 1]),
             Arrays.toString(mBatteryHistoryLevels)));
 
         // Loads item icon and label in the background.
@@ -403,14 +404,14 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             final String appLabel = entry.getAppLabel();
             final Drawable appIcon = entry.getAppIcon();
             if (TextUtils.isEmpty(appLabel) || appIcon == null) {
-                Log.w(TAG, "cannot find app resource for\n" + entry);
+                Log.w(TAG, "cannot find app resource for:" + entry.getPackageName());
                 continue;
             }
             final String prefKey = entry.mBatteryHistEntry.getKey();
             PowerGaugePreference pref = mAppListPrefGroup.findPreference(prefKey);
             if (pref != null) {
                 isAdded = true;
-                Log.w(TAG, "preference should be removed for\n" + entry);
+                Log.w(TAG, "preference should be removed for:" + entry.getPackageName());
             } else {
                 pref = (PowerGaugePreference) mPreferenceCache.get(prefKey);
             }
@@ -585,15 +586,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 ? R.string.battery_usage_screen_footer
                 : R.string.battery_usage_screen_footer_empty));
         mHandler.post(() -> mPreferenceScreen.addPreference(mFooterPreference));
-    }
-
-    private static String utcToLocalTime(Context context, long[] timestamps) {
-        final StringBuilder builder = new StringBuilder();
-        for (int index = 0; index < timestamps.length; index++) {
-            builder.append(String.format("%s| ",
-                  ConvertUtils.utcToLocalTime(context, timestamps[index])));
-        }
-        return builder.toString();
     }
 
     private static boolean contains(String target, CharSequence[] packageNames) {
