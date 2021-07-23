@@ -29,20 +29,20 @@ import com.google.common.primitives.Ints;
 
 import java.util.Optional;
 
-/** Preference controller that controls the preferred location in accessibility button page. */
-public class AccessibilityButtonLocationPreferenceController extends BasePreferenceController
+/** Preference controller that controls the button or gesture in accessibility button page. */
+public class AccessibilityButtonGesturePreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
-    private Optional<Integer> mDefaultLocation = Optional.empty();
+    private Optional<Integer> mDefaultGesture = Optional.empty();
 
-    public AccessibilityButtonLocationPreferenceController(Context context, String preferenceKey) {
+    public AccessibilityButtonGesturePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     public int getAvailabilityStatus() {
         return AccessibilityUtil.isGestureNavigateEnabled(mContext)
-                ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -67,16 +67,16 @@ public class AccessibilityButtonLocationPreferenceController extends BasePrefere
 
     private String getCurrentAccessibilityButtonMode() {
         final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, getDefaultLocationValue());
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, getDefaultGestureValue());
         return String.valueOf(mode);
     }
 
-    private int getDefaultLocationValue() {
-        if (!mDefaultLocation.isPresent()) {
+    private int getDefaultGestureValue() {
+        if (!mDefaultGesture.isPresent()) {
             final String[] valuesList = mContext.getResources().getStringArray(
-                    R.array.accessibility_button_location_selector_values);
-            mDefaultLocation = Optional.of(Integer.parseInt(valuesList[0]));
+                    R.array.accessibility_button_gesture_selector_values);
+            mDefaultGesture = Optional.of(Integer.parseInt(valuesList[0]));
         }
-        return mDefaultLocation.get();
+        return mDefaultGesture.get();
     }
 }
