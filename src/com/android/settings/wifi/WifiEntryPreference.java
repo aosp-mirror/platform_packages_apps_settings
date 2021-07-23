@@ -62,7 +62,7 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
 
     // StateListDrawable to display secured lock / metered "$" icon
     @Nullable private final StateListDrawable mFrictionSld;
-    private final IconInjector mIconInjector;
+    private final WifiUtils.InternetIconInjector mIconInjector;
     private WifiEntry mWifiEntry;
     private int mLevel = -1;
     private boolean mShowX; // Shows the Wi-Fi signl icon of Pie+x when it's true.
@@ -70,12 +70,12 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
     private OnButtonClickListener mOnButtonClickListener;
 
     public WifiEntryPreference(@NonNull Context context, @NonNull WifiEntry wifiEntry) {
-        this(context, wifiEntry, new IconInjector(context));
+        this(context, wifiEntry, new WifiUtils.InternetIconInjector(context));
     }
 
     @VisibleForTesting
     WifiEntryPreference(@NonNull Context context, @NonNull WifiEntry wifiEntry,
-            @NonNull IconInjector iconInjector) {
+            @NonNull WifiUtils.InternetIconInjector iconInjector) {
         super(context);
 
         setLayoutResource(R.layout.preference_access_point);
@@ -258,19 +258,6 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
                 mWifiEntry.getSecurity() == WifiEntry.SECURITY_NONE
                         ? context.getString(R.string.accessibility_wifi_security_type_none)
                         : context.getString(R.string.accessibility_wifi_security_type_secured));
-    }
-
-
-    static class IconInjector {
-        private final Context mContext;
-
-        IconInjector(Context context) {
-            mContext = context;
-        }
-
-        public Drawable getIcon(boolean showX, int level) {
-            return mContext.getDrawable(WifiUtils.getInternetIconResource(level, showX));
-        }
     }
 
     /**
