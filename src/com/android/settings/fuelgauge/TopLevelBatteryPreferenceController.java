@@ -105,7 +105,7 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
             return super.handlePreferenceTreeClick(preference);
         }
         Intent intent = new Intent();
-        intent.setComponent(currentFragmentName);
+        intent.setComponent(replacingActivity);
         mContext.startActivity(intent);
         return true;
     }
