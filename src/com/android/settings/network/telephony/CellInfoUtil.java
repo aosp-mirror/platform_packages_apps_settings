@@ -143,29 +143,71 @@ public final class CellInfoUtil {
     public static String cellInfoToString(CellInfo cellInfo) {
         final String cellType = cellInfo.getClass().getSimpleName();
         final CellIdentity cid = getCellIdentity(cellInfo);
-        String mcc = null;
-        String mnc = null;
-        if (cid != null) {
-            if (cid instanceof CellIdentityGsm) {
-                mcc = ((CellIdentityGsm) cid).getMccString();
-                mnc = ((CellIdentityGsm) cid).getMncString();
-            } else if (cid instanceof CellIdentityWcdma) {
-                mcc = ((CellIdentityWcdma) cid).getMccString();
-                mnc = ((CellIdentityWcdma) cid).getMncString();
-            } else if (cid instanceof CellIdentityTdscdma) {
-                mcc = ((CellIdentityTdscdma) cid).getMccString();
-                mnc = ((CellIdentityTdscdma) cid).getMncString();
-            } else if (cid instanceof CellIdentityLte) {
-                mcc = ((CellIdentityLte) cid).getMccString();
-                mnc = ((CellIdentityLte) cid).getMncString();
-            } else if (cid instanceof CellIdentityNr) {
-                mcc = ((CellIdentityNr) cid).getMccString();
-                mnc = ((CellIdentityNr) cid).getMncString();
-            }
-        }
+        String mcc = getCellIdentityMcc(cid);
+        String mnc = getCellIdentityMnc(cid);
         return String.format(
                 "{CellType = %s, isRegistered = %b, mcc = %s, mnc = %s, alphaL = %s, alphaS = %s}",
                 cellType, cellInfo.isRegistered(), mcc, mnc,
                 cid.getOperatorAlphaLong(), cid.getOperatorAlphaShort());
+    }
+
+    /**
+     * Returns the MccMnc.
+     *
+     * @param cid contains the identity of the network.
+     * @return MccMnc string.
+     */
+    public static String getCellIdentityMccMnc(CellIdentity cid) {
+        String mcc = getCellIdentityMcc(cid);
+        String mnc = getCellIdentityMnc(cid);
+        return (mcc == null || mnc == null) ? null : mcc + mnc;
+    }
+
+    /**
+     * Returns the Mcc.
+     *
+     * @param cid contains the identity of the network.
+     * @return Mcc string.
+     */
+    public static String getCellIdentityMcc(CellIdentity cid) {
+        String mcc = null;
+        if (cid != null) {
+            if (cid instanceof CellIdentityGsm) {
+                mcc = ((CellIdentityGsm) cid).getMccString();
+            } else if (cid instanceof CellIdentityWcdma) {
+                mcc = ((CellIdentityWcdma) cid).getMccString();
+            } else if (cid instanceof CellIdentityTdscdma) {
+                mcc = ((CellIdentityTdscdma) cid).getMccString();
+            } else if (cid instanceof CellIdentityLte) {
+                mcc = ((CellIdentityLte) cid).getMccString();
+            } else if (cid instanceof CellIdentityNr) {
+                mcc = ((CellIdentityNr) cid).getMccString();
+            }
+        }
+        return (mcc == null) ? null : mcc;
+    }
+
+    /**
+     * Returns the Mnc.
+     *
+     * @param cid contains the identity of the network.
+     * @return Mcc string.
+     */
+    public static String getCellIdentityMnc(CellIdentity cid) {
+        String mnc = null;
+        if (cid != null) {
+            if (cid instanceof CellIdentityGsm) {
+                mnc = ((CellIdentityGsm) cid).getMncString();
+            } else if (cid instanceof CellIdentityWcdma) {
+                mnc = ((CellIdentityWcdma) cid).getMncString();
+            } else if (cid instanceof CellIdentityTdscdma) {
+                mnc = ((CellIdentityTdscdma) cid).getMncString();
+            } else if (cid instanceof CellIdentityLte) {
+                mnc = ((CellIdentityLte) cid).getMncString();
+            } else if (cid instanceof CellIdentityNr) {
+                mnc = ((CellIdentityNr) cid).getMncString();
+            }
+        }
+        return (mnc == null) ? null : mnc;
     }
 }
