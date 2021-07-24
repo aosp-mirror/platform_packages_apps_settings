@@ -100,11 +100,10 @@ public class SubscriptionAnnotation {
             return;
         }
 
-        mIsExisted = simSlotIndex.contains(mSubInfo.getSimSlotIndex());
-        mIsActive = activeSimSlotIndexList.contains(mSubInfo.getSimSlotIndex());
-        if (mIsExisted) {
-            mIsAllowToDisplay = isDisplayAllowed(context);
-        }
+        mIsExisted = true;
+        mIsActive = (mSubInfo.getSimSlotIndex() > SubscriptionManager.INVALID_SIM_SLOT_INDEX)
+            && activeSimSlotIndexList.contains(mSubInfo.getSimSlotIndex());
+        mIsAllowToDisplay = isDisplayAllowed(context);
     }
 
     // the index provided during construction of Builder
