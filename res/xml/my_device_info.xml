@@ -29,6 +29,8 @@
         settings:isPreferenceVisible="false"/>
 
     <PreferenceCategory
+        android:key="basic_info_category"
+        android:selectable="false"
         android:title="@string/my_device_info_basic_info_category_title">
 
         <!-- Device name -->
@@ -88,6 +90,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="device_detail_category"
+        android:selectable="false"
         android:title="@string/my_device_info_device_details_category_title">
 
         <!-- SIM status -->
