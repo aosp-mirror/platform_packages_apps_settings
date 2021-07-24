@@ -162,6 +162,11 @@ public class FaceSettings extends DashboardFragment {
                     R.string.security_settings_face_profile_preference_title));
         }
 
+        mLockscreenController = Utils.isMultipleBiometricsSupported(context)
+                ? use(BiometricLockscreenBypassPreferenceController.class)
+                : use(FaceSettingsLockscreenBypassPreferenceController.class);
+        mLockscreenController.setUserId(mUserId);
+
         Preference keyguardPref = findPreference(FaceSettingsKeyguardPreferenceController.KEY);
         Preference appPref = findPreference(FaceSettingsAppPreferenceController.KEY);
         Preference attentionPref = findPreference(FaceSettingsAttentionPreferenceController.KEY);
@@ -193,14 +198,6 @@ public class FaceSettings extends DashboardFragment {
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        mLockscreenController = use(FaceSettingsLockscreenBypassPreferenceController.class);
-        mLockscreenController.setUserId(mUserId);
     }
 
     @Override
