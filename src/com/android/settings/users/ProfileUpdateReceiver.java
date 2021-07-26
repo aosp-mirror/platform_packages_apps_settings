@@ -63,6 +63,9 @@ public class ProfileUpdateReceiver extends BroadcastReceiver {
 
     /** Returns whether the current user name is different from the default one. */
     private static boolean isCurrentNameInteresting(Context context, UserManager um) {
+        if (!um.isUserNameSet()) {
+            return false;
+        }
         final String currentName = um.getUserName();
         final String defaultName = um.isRestrictedProfile() || um.isProfile() ?
                 context.getString(com.android.settingslib.R.string.user_new_profile_name) :
