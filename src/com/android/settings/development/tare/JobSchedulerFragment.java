@@ -30,10 +30,10 @@ import android.widget.Toast;
 import com.android.settings.R;
 
 /**
- * Creates the AlarmManager fragment to display all the AlarmManager factors
- * when the AlarmManager policy is chosen in the dropdown TARE menu.
+ * Creates the JobScheduler fragment to display all the JobScheduler factors
+ * when the JobScheduler policy is chosen in the dropdown TARE menu.
  */
-public class AlarmManagerFragment extends Fragment {
+public class JobSchedulerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,16 +48,17 @@ public class AlarmManagerFragment extends Fragment {
                     int groupPosition, int childPosition, long id) {
                 final String selected =
                         (String) expListAdapter.getChild(groupPosition, childPosition);
-                Toast.makeText(getActivity(), selected, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), selected, Toast.LENGTH_SHORT)
+                        .show();
                 return true;
             }
         });
         return v;
     }
 
-     /**
-     * Creates the expandable list containing all AlarmManager factors within the
-     * AlarmManager fragment.
+    /**
+     * Creates the expandable list containing all JobScheduler factors within the
+     * JobScheduler fragment.
      */
     public class SavedTabsListAdapter extends BaseExpandableListAdapter {
 
@@ -82,7 +83,7 @@ public class AlarmManagerFragment extends Fragment {
                 {},
                 mResources.getStringArray(R.array.tare_min_satiated_balance_subfactors),
                 mResources.getStringArray(R.array.tare_modifiers_subfactors),
-                mResources.getStringArray(R.array.tare_alarm_manager_actions),
+                mResources.getStringArray(R.array.tare_job_scheduler_actions),
                 mResources.getStringArray(R.array.tare_rewards_subfactors)
         };
 

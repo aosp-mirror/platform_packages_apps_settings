@@ -16,6 +16,10 @@
 
 package com.android.settings.development.tare;
 
+import static com.android.settings.development.tare.DropdownActivity.EXTRA_POLICY;
+import static com.android.settings.development.tare.DropdownActivity.POLICY_ALARM_MANAGER;
+import static com.android.settings.development.tare.DropdownActivity.POLICY_JOB_SCHEDULER;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -66,6 +70,15 @@ public class TareHomePage extends Activity {
 
     /** Opens up the AlarmManager TARE policy page with its factors to view and edit */
     public void launchAlarmManagerPage(View v) {
-        startActivity(new Intent(getApplicationContext(), DropdownActivity.class));
+        Intent i = new Intent(getApplicationContext(), DropdownActivity.class);
+        i.putExtra(EXTRA_POLICY, POLICY_ALARM_MANAGER);
+        startActivity(i);
+    }
+
+    /** Opens up the JobScheduler TARE policy page with its factors to view and edit */
+    public void launchJobSchedulerPage(View v) {
+        Intent i = new Intent(getApplicationContext(), DropdownActivity.class);
+        i.putExtra(EXTRA_POLICY, POLICY_JOB_SCHEDULER);
+        startActivity(i);
     }
 }
