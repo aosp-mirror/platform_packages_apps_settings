@@ -13612,16 +13612,24 @@
     <!-- Strings for Dialog connect button -->
     <string name="bluetooth_connect_access_dialog_positive">Connect</string>
 
-    <!-- Title for the button to edit The Android Resource Economy settings. [CHAR LIMIT=NONE] -->
+    <!-- Title for the button to edit The Android Resource Economy settings. "TARE" is the name of
+    the feature that contains the AlarmManager and JobScheduler policies which are both android
+    APIs. AlarmManager and JobScheduler are the names of Android system services and cannot be
+    translated. "TARE" is not translatable. [CHAR LIMIT=NONE] -->
     <string name="tare_title" translatable="false">TARE</string>
-    <!-- TARE settings title in developer options; TARE" is not translatable but "settings" is [CHAR LIMIT=40] -->
+    <!-- TARE settings title in developer options; "TARE" is the name of the feature and cannot be
+    translated. [CHAR LIMIT=40] -->
     <string name="tare_settings">TARE Settings</string>
     <!-- Allows user to revert the TARE settings to their default values [CHAR LIMIT=40] -->
     <string name="tare_revert">Revert to Default Settings</string>
-    <!-- Allows user to view Alarm Manager policy factors [CHAR LIMIT=40]-->
-    <string name="tare_alarm_manager">Alarm Manager</string>
-    <!-- Allows user to view Job Scheduler policy factors [CHAR LIMIT=40]-->
-    <string name="tare_job_scheduler">Job Scheduler</string>
-    <!-- Toast notifying the developer that settings were reverted to their default [CHAR LIMIT=40]-->
+    <!-- Allows user to view AlarmManager policy factors. Alarm in this context is referring to the
+    possible alarm cases in the AlarmManager policy. AlarmManager is the name of an Android system
+    service and cannot be translated. [CHAR LIMIT=40]-->
+    <string name="tare_alarmmanager" translatable="false">AlarmManager</string>
+    <!-- Allows user to view JobScheduler policy factors. JobScheduler is the name of an Android
+    system service and cannot be translated.[CHAR LIMIT=40]-->
+    <string name="tare_jobscheduler" translatable="false">JobScheduler</string>
+    <!-- Toast notifying the developer that settings were reverted to their
+    default [CHAR LIMIT=40]-->
     <string name="tare_settings_reverted_toast">Settings reverted to default.</string>
 </resources>
