@@ -23,6 +23,7 @@ import android.util.Log;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
+import com.android.settings.network.helper.SubscriptionGrouping;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -150,6 +151,10 @@ public class MobileNetworkSummaryStatus {
 
     private List<SubscriptionAnnotation> getSubscriptions(Context context) {
         return (new SelectableSubscriptions(context, true))
+
+                // To maintain the consistency with SubscriptionUtil#getAvailableSubscriptions().
+                .addFinisher(new SubscriptionGrouping())
+
                 .call()
                 .stream()
                 .filter(SubscriptionAnnotation::isDisplayAllowed)
