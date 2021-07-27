@@ -61,7 +61,7 @@ public class CombinedBiometricStatusPreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(KEY_BIOMETRIC_SETTINGS);
+        mPreference = screen.findPreference(mPreferenceKey);
     }
 
     @Override
