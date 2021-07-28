@@ -201,7 +201,7 @@
     <string name="sdcard_settings_scanning_status" product="default" msgid="3297316465982471437">"Recherche de fichiers multimédia sur la carte SD…"</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3444648373391629840">"Mémoire USB en lecture seule"</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="4338796260718910164">"Carte SD installée en lecture seule"</string>
-    <string name="skip_label" msgid="6380034601349015895">"Passer"</string>
+    <string name="skip_label" msgid="6380034601349015895">"Ignorer"</string>
     <string name="next_label" msgid="1248293387735652187">"Suivant"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Langues"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Supprimer"</string>
@@ -398,7 +398,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou autoriser des achats.\n\nRemarque : Votre empreinte digitale peut être moins sécurisée qu\'un schéma ou un NIP fiables."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Annuler"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Continuer"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Passer"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Ignorer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Suivant"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Ignorer configuration empreinte?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"La configuration de l\'empreinte digitale ne prend qu\'une minute ou deux. Si vous ignorez cette étape, vous pouvez ajouter votre empreinte digitale plus tard dans les paramètres."</string>
@@ -753,6 +753,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Mémoriser ces paramètres"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maximum d\'appareils audio Bluetooth connectés"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Sélectionnez le nombre maximal d\'appareils Bluetooth connectés"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Journal de débogage de la pile de la CCP"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Accroître le niveau de journalisation de la pile de la CCP"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"miroir"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activer l\'affichage sans fil"</string>
@@ -782,19 +784,19 @@
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Autoriser ART à vérifier le code à octets pour les applications débogables"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"Afficher le taux d\'actualisation"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Afficher le taux d\'actualisation actuel"</string>
-    <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="3622326550467939809">"Autoriser l\'échange de données lorsque la tablette touche un appareil NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Autoriser l\'échange de données lorsque le téléphone touche un appareil NFC"</string>
-    <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Activer la fonction NFC"</string>
-    <string name="nfc_disclaimer_content" msgid="8256675597551036207">"La technologie NFC échange des données entre cet appareil et d\'autres appareils ou cibles à proximité, tels que les terminaux de paiement, les lecteurs d\'accès et les annonces ou les balises interactifs"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Déverrouillage de l\'appareil requis pour utiliser la fonctionnalité NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Autoriser l\'utilisation de la technologie NFC pour les paiements et les transports en commun uniquement lorsque l\'écran est déverrouillé"</string>
+    <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"CCP"</string>
+    <string name="nfc_quick_toggle_summary" product="tablet" msgid="3622326550467939809">"Autoriser l\'échange de données lorsque la tablette touche un appareil CCP"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Autoriser l\'échange de données lorsque le téléphone touche un appareil CCP"</string>
+    <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Activer la technologie CCP"</string>
+    <string name="nfc_disclaimer_content" msgid="8256675597551036207">"La technologie CCP échange des données entre cet appareil et d\'autres appareils ou cibles à proximité, tels que les terminaux de paiement, les lecteurs d\'accès et les annonces ou les balises interactifs"</string>
+    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Déverrouillage de l\'appareil requis pour utiliser la fonctionnalité CCP"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Autoriser l\'utilisation de la technologie CCP pour les paiements et les transports en commun uniquement lorsque l\'écran est déverrouillé"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
-    <string name="android_beam_on_summary" msgid="6067720758437490896">"Prêt à partager le contenu de l\'application par NFC"</string>
+    <string name="android_beam_on_summary" msgid="6067720758437490896">"Prêt à partager le contenu de l\'application par CCP"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Désactivé"</string>
-    <string name="nfc_disabled_summary" msgid="8737797364522502351">"Non accessible, car la NFC est désactivée"</string>
+    <string name="nfc_disabled_summary" msgid="8737797364522502351">"Non accessible, car la CCP est désactivée"</string>
     <string name="android_beam_label" msgid="7168565080321110094">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="5684416131846701256">"Lorsque cette fonctionnalité est activée, vous pouvez partager le contenu d\'une application avec un appareil compatible NFC en rapprochant les appareils. Vous pouvez, par exemple, partager des pages Web, des vidéos YouTube, des contacts et plus encore.\n\nIl vous suffit de rapprocher les appareils (en les plaçant généralement dos à dos), puis de toucher votre écran. L\'application détermine le contenu à transférer."</string>
+    <string name="android_beam_explained" msgid="5684416131846701256">"Lorsque cette fonctionnalité est activée, vous pouvez partager le contenu d\'une application avec un appareil compatible CCP en rapprochant les appareils. Vous pouvez, par exemple, partager des pages Web, des vidéos YouTube, des contacts et plus encore.\n\nIl vous suffit de rapprocher les appareils (en les plaçant généralement dos à dos), puis de toucher votre écran. L\'application détermine le contenu à transférer."</string>
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Activer le Wi-Fi"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
@@ -3131,8 +3133,8 @@
     <string name="restriction_wifi_config_summary" msgid="920419010472168694">"Autoriser les modifications des paramètres du Wi‑Fi et des données cellulaires"</string>
     <string name="restriction_bluetooth_config_title" msgid="220586273589093821">"Bluetooth"</string>
     <string name="restriction_bluetooth_config_summary" msgid="7558879931011271603">"Autoriser les modifications des associations et des paramètres Bluetooth"</string>
-    <string name="restriction_nfc_enable_title" msgid="525512312298242911">"NFC"</string>
-    <string name="restriction_nfc_enable_summary_config" msgid="8065688740509581028">"Autoriser l\'échange de données lorsque cet appareil (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) touche un autre appareil NFC"</string>
+    <string name="restriction_nfc_enable_title" msgid="525512312298242911">"CCP"</string>
+    <string name="restriction_nfc_enable_summary_config" msgid="8065688740509581028">"Autoriser l\'échange de données lorsque cet appareil (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) touche un autre appareil CCP"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="6397567147629410131">"Autoriser l\'échange de données lorsque la tablette est en contact avec un autre appareil"</string>
     <string name="restriction_nfc_enable_summary" product="default" msgid="3331800894734678808">"Autoriser l\'échange de données lorsque le téléphone est en contact avecun autre appareil"</string>
     <string name="restriction_location_enable_title" msgid="4872281754836538066">"Position"</string>
@@ -3193,15 +3195,15 @@
     <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"utilisation de données"</string>
     <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"point d\'accès sans fil"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Appareils connectés"</string>
-    <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, mode Voiture, NFC"</string>
+    <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, mode Voiture, CCP"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, mode Voiture"</string>
-    <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
+    <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, CCP"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
-    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, mode Voiture, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, mode Voiture, CCP"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, mode Voiture"</string>
-    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, CCP"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
-    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non accessible parce que la fonctionnalité NFC est désactivée"</string>
+    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non accessible parce que la technologie CCP est désactivée"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pour l\'utiliser, installez d\'abord une application de paiement"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Applis et notifications"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Applications récentes, applications par défaut"</string>
@@ -3927,7 +3929,7 @@
     <string name="app_launch_open_domain_urls_summary" msgid="3609156836041234957">"Ouvrir sans demander"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Liens compatibles"</string>
     <string name="app_launch_other_defaults_title" msgid="3296350563585863885">"Autres défauts"</string>
-    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé dans <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilisé(s) dans <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="979243131665635278">"stockage interne"</string>
     <string name="storage_type_external" msgid="125078274000280821">"stockage externe"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> utilisés depuis <xliff:g id="DATE">%2$s</xliff:g>"</string>
