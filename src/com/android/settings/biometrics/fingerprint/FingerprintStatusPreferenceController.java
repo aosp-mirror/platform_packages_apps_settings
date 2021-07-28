@@ -52,7 +52,7 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(KEY_FINGERPRINT_SETTINGS);
+        mPreference = screen.findPreference(mPreferenceKey);
     }
 
     @Override
