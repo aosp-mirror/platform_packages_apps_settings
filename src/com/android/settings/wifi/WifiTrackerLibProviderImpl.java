@@ -18,7 +18,6 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 
@@ -47,7 +46,6 @@ public class WifiTrackerLibProviderImpl implements WifiTrackerLibProvider {
                 lifecycle, context,
                 context.getSystemService(WifiManager.class),
                 context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
                 mainHandler, workerHandler, clock,
                 maxScanAgeMillis, scanIntervalMillis,
                 listener);
@@ -66,7 +64,6 @@ public class WifiTrackerLibProviderImpl implements WifiTrackerLibProvider {
                 lifecycle, context,
                 context.getSystemService(WifiManager.class),
                 context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
                 mainHandler, workerHandler, clock,
                 maxScanAgeMillis, scanIntervalMillis,
                 key);
