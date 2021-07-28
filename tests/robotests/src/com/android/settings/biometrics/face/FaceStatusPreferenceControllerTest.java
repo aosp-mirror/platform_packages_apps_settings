@@ -55,6 +55,9 @@ import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public class FaceStatusPreferenceControllerTest {
+
+    private static final String TEST_PREF_KEY = "baz";
+
     @Mock
     private LockPatternUtils mLockPatternUtils;
     @Mock
@@ -82,7 +85,7 @@ public class FaceStatusPreferenceControllerTest {
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
         when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {1234});
-        mController = new FaceStatusPreferenceController(mContext);
+        mController = new FaceStatusPreferenceController(mContext, TEST_PREF_KEY);
     }
 
     @Test
