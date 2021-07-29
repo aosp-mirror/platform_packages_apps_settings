@@ -59,7 +59,8 @@ public abstract class SensorToggleController extends TogglePreferenceController 
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mSensorPrivacyManagerHelper.setSensorBlocked(SETTINGS, getSensor(), !isChecked);
+        mSensorPrivacyManagerHelper.setSensorBlockedForProfileGroup(SETTINGS, getSensor(),
+                !isChecked);
         return true;
     }
 
