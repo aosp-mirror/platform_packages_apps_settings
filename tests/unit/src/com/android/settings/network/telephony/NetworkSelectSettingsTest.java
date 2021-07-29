@@ -169,8 +169,8 @@ public class NetworkSelectSettingsTest {
     private CellInfoLte createLteCellInfo(boolean registered, int cellId, String mcc, String mnc,
             String plmnName) {
         CellIdentityLte cil = new CellIdentityLte(
-                cellId, 5, 200, 2000, new int[]{1, 2}, 10000, mcc,
-                mnc, plmnName, plmnName,
+                cellId, 5, 200, 2000, new int[]{1, 2}, 10000, new String(mcc),
+                new String(mnc), new String(plmnName), new String(plmnName),
                 Collections.emptyList(), null);
         CellSignalStrengthLte cssl = new CellSignalStrengthLte(15, 16, 17, 18, 19, 20);
 
@@ -184,8 +184,8 @@ public class NetworkSelectSettingsTest {
 
     private CellInfoGsm createGsmCellInfo(boolean registered, int cellId, String mcc, String mnc,
             String plmnName) {
-        CellIdentityGsm cig = new CellIdentityGsm(1, cellId, 40, 5, mcc,
-                mnc, plmnName, plmnName,
+        CellIdentityGsm cig = new CellIdentityGsm(1, cellId, 40, 5, new String(mcc),
+                new String(mnc), new String(plmnName), new String(plmnName),
                 Collections.emptyList());
         CellSignalStrengthGsm cssg = new CellSignalStrengthGsm(5, 6, 7);
         CellInfoGsm cellInfoGsm = new CellInfoGsm();

@@ -20,10 +20,8 @@ import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
@@ -31,8 +29,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Preference controller for "Backup Calling" summary list
@@ -41,16 +37,24 @@ public class NetworkProviderBackupCallingPreferenceController extends
         BasePreferenceController implements LifecycleObserver {
 
     private static final String TAG = "NetProvBackupCallingCtrl";
+    private static final String KEY_PREFERENCE_CATEGORY = "provider_model_backup_calling_category";
 
-    private Context mContext;
     private PreferenceCategory mPreferenceCategory;
+    private PreferenceScreen mPreferenceScreen;
+    private NetworkProviderBackupCallingGroup mNetworkProviderBackupCallingGroup;
+    private List<SubscriptionInfo> mSubscriptionList;
 
     /**
      * Preference controller for "Backup Calling" summary list
      */
     public NetworkProviderBackupCallingPreferenceController(Context context, String key) {
         super(context, key);
-        mContext = context;
+    }
+
+    protected NetworkProviderBackupCallingGroup createBackupCallingControllerForSub(
+            Lifecycle lifecycle, List<SubscriptionInfo> subscriptionList) {
+        return new NetworkProviderBackupCallingGroup(mContext, lifecycle, subscriptionList,
+                KEY_PREFERENCE_CATEGORY);
     }
 
     /**
@@ -59,73 +63,34 @@ public class NetworkProviderBackupCallingPreferenceController extends
      * @param lifecycle Lifecycle of UI which owns this Preference
      */
     public void init(Lifecycle lifecycle) {
-        lifecycle.addObserver(this);
+        mSubscriptionList = getActiveSubscriptionList();
+        mNetworkProviderBackupCallingGroup = createBackupCallingControllerForSub(lifecycle,
+                mSubscriptionList);
+    }
+
+    private List<SubscriptionInfo> getActiveSubscriptionList() {
+        SubscriptionManager subscriptionManager =
+                mContext.getSystemService(SubscriptionManager.class);
+        return SubscriptionUtil.getActiveSubscriptions(subscriptionManager);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        List<SubscriptionInfo> subList = getActiveSubscriptions();
-        if (subList.size() < 2) {
+        if (mNetworkProviderBackupCallingGroup == null
+                || mSubscriptionList == null
+                || mSubscriptionList.size() < 2) {
             return CONDITIONALLY_UNAVAILABLE;
+        } else {
+            return AVAILABLE;
         }
-        return (getPreferences(subList).size() >= 1) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-
-        PreferenceCategory prefCategory = screen.findPreference(getPreferenceKey());
-        updatePreferenceList(prefCategory);
-        prefCategory.setVisible(isAvailable());
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        // Do nothing in this case since preference is invisible
-        if (preference == null) {
-            return;
-        }
-        updatePreferenceList((PreferenceCategory) preference);
-    }
-
-    private String getPreferenceKey(int subscriptionId) {
-        return getPreferenceKey() + "_subId_" + subscriptionId;
-    }
-
-    private SwitchPreference getPreference(SubscriptionInfo subInfo) {
-        int subId = subInfo.getSubscriptionId();
-        BackupCallingPreferenceController prefCtrl =
-                new BackupCallingPreferenceController(mContext, getPreferenceKey(subId));
-        prefCtrl.init(subId);
-        if (prefCtrl.getAvailabilityStatus(subId) != BasePreferenceController.AVAILABLE) {
-            return null;
-        }
-        SwitchPreference pref = new SwitchPreference(mContext);
-        prefCtrl.updateState(pref);
-        pref.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, mContext));
-        return pref;
-    }
-
-    private List<SwitchPreference> getPreferences(List<SubscriptionInfo> subList) {
-        return subList.stream()
-                .map(subInfo -> getPreference(subInfo))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-    }
-
-    private List<SubscriptionInfo> getActiveSubscriptions() {
-        return SubscriptionUtil.getActiveSubscriptions(
-                mContext.getSystemService(SubscriptionManager.class));
-    }
-
-    private void updatePreferenceList(PreferenceCategory prefCategory) {
-        List<SwitchPreference> prefList = getPreferences(getActiveSubscriptions());
-
-        prefCategory.removeAll();
-        for (SwitchPreference pref : prefList) {
-            prefCategory.addPreference(pref);
-        }
+        mPreferenceScreen = screen;
+        mPreferenceCategory = screen.findPreference(KEY_PREFERENCE_CATEGORY);
+        mPreferenceCategory.setVisible(isAvailable());
+        mNetworkProviderBackupCallingGroup.displayPreference(screen);
     }
 }
