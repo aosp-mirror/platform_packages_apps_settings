@@ -41,6 +41,7 @@ import java.util.TimeZone;
 
 /** A utility class to convert data into another types. */
 public final class ConvertUtils {
+    private static final boolean DEBUG = false;
     private static final String TAG = "ConvertUtils";
     private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
     private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
@@ -259,10 +260,12 @@ public final class ConvertUtils {
                     foregroundUsageTimeInMs + backgroundUsageTimeInMs;
                 if (totalUsageTimeInMs > TOTAL_TIME_THRESHOLD) {
                     final float ratio = TOTAL_TIME_THRESHOLD / totalUsageTimeInMs;
-                    Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
-                          Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
-                          Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
-                          currentEntry));
+                    if (DEBUG) {
+                        Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
+                                Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
+                                Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
+                                currentEntry));
+                    }
                     foregroundUsageTimeInMs =
                         Math.round(foregroundUsageTimeInMs * ratio);
                     backgroundUsageTimeInMs =
