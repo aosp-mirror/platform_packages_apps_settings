@@ -348,10 +348,10 @@ public class NetworkSelectSettings extends DashboardFragment {
             Class className = cellInfo.getClass();
 
             if (aggregatedList.stream().anyMatch(
-                    i -> {
-                        return (CellInfoUtil.getNetworkTitle(i.getCellIdentity(),
-                                CellInfoUtil.getCellIdentityMccMnc(i.getCellIdentity())) == plmn)
-                                && i.getClass().equals(className);
+                    item -> {
+                        String itemPlmn = CellInfoUtil.getNetworkTitle(item.getCellIdentity(),
+                                CellInfoUtil.getCellIdentityMccMnc(item.getCellIdentity()));
+                        return itemPlmn.equals(plmn) && item.getClass().equals(className);
                     })) {
                 continue;
             }
