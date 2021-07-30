@@ -205,11 +205,25 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         mSkipReturnToParent = intent.getBooleanExtra(EXTRA_SKIP_RETURN_TO_PARENT, false);
 
         Log.d(TAG, "parentalOptionsRequired: " + mParentalOptionsRequired
-                + ", skipReturnToParent: " + mSkipReturnToParent);
+                + ", skipReturnToParent: " + mSkipReturnToParent
+                + ", isSetupWizard: " + isSetupWizard);
+
+        // TODO(b/195128094): remove this restriction
+        // Consent can only be recorded when this activity is launched directly from the kids
+        // module. This can be removed when there is a way to notify consent status out of band.
+        if (isSetupWizard && mParentalOptionsRequired) {
+            Log.w(TAG, "Enrollment with parental consent is not supported when launched "
+                    + " directly from SuW - skipping enrollment");
+            setResult(RESULT_SKIP);
+            finish();
+            return;
+        }
 
         // Only allow the consent flow to happen once when running from setup wizard.
         // This isn't common and should only happen if setup wizard is not completed normally
         // due to a restart, etc.
+        // This check should probably remain even if b/195128094 is fixed to prevent SuW from
+        // restarting the process once it has been fully completed at least one time.
         if (isSetupWizard && mParentalOptionsRequired) {
             final boolean consentAlreadyManaged = ParentalControlsUtils.parentConsentRequired(this,
                     BiometricAuthenticator.TYPE_FACE | BiometricAuthenticator.TYPE_FINGERPRINT)
