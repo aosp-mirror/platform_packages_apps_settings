@@ -266,7 +266,8 @@ public class MobileNetworkUtils {
         return false;
     }
 
-    private static Boolean showEuiccSettingsDetecting(Context context) {
+    // The same as #showEuiccSettings(Context context)
+    public static Boolean showEuiccSettingsDetecting(Context context) {
         final EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(EuiccManager.class);
         if (!euiccManager.isEnabled()) {
