@@ -50,7 +50,8 @@ public class QueryEsimCardId implements Callable<AtomicIntegerArray> {
         }
         return new AtomicIntegerArray(cardInfos.stream()
                 .filter(Objects::nonNull)
-                .filter(cardInfo -> (!cardInfo.isRemovable() && (cardInfo.getCardId() >= 0)))
+                .filter(cardInfo -> (!cardInfo.isRemovable()
+                        && (cardInfo.getCardId() != TelephonyManager.UNSUPPORTED_CARD_ID)))
                 .mapToInt(UiccCardInfo::getCardId)
                 .toArray());
     }

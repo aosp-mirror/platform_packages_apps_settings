@@ -93,9 +93,10 @@ public class SubscriptionAnnotation {
         if (mType == TYPE_ESIM) {
             int cardId = mSubInfo.getCardId();
             mIsExisted = eSimCardId.contains(cardId);
-            mIsActive = activeSimSlotIndexList.contains(mSubInfo.getSimSlotIndex());
-            mIsAllowToDisplay = (cardId < 0)    // always allow when eSIM not in slot
-                  || isDisplayAllowed(context);
+            if (mIsExisted) {
+                mIsActive = activeSimSlotIndexList.contains(mSubInfo.getSimSlotIndex());
+                mIsAllowToDisplay = isDisplayAllowed(context);
+            }
             return;
         }
 
@@ -157,12 +158,5 @@ public class SubscriptionAnnotation {
     private boolean isDisplayAllowed(Context context) {
         return SubscriptionUtil.isSubscriptionVisible(
                 context.getSystemService(SubscriptionManager.class), context, mSubInfo);
-    }
-
-    public String toString() {
-        return TAG + "{" + "subId=" + getSubscriptionId()
-                + ",type=" + getType() + ",exist=" + isExisted()
-                + ",active=" + isActive() + ",displayAllow=" + isDisplayAllowed()
-                + "}";
     }
 }

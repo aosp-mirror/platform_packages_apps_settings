@@ -71,17 +71,8 @@ public class SelectableSubscriptions implements Callable<List<SubscriptionAnnota
         mContext = context;
         mSubscriptions = disabledSlotsIncluded ? (() -> getAvailableSubInfoList(context)) :
                 (() -> getActiveSubInfoList(context));
-        if (disabledSlotsIncluded) {
-            mFilter = subAnno -> {
-                if (subAnno.isExisted()) {
-                    return true;
-                }
-                return ((subAnno.getType() == SubscriptionAnnotation.TYPE_ESIM)
-                        && (subAnno.isDisplayAllowed()));
-            };
-        } else {
-            mFilter = subAnno -> subAnno.isActive();
-        }
+        mFilter = disabledSlotsIncluded ? (subAnno -> subAnno.isExisted()) :
+                (subAnno -> subAnno.isActive());
         mFinisher = annoList -> annoList;
     }
 

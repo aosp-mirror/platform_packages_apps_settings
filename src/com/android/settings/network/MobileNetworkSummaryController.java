@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
 
@@ -35,9 +36,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.network.helper.SelectableSubscriptions;
-import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.Utils;
@@ -61,8 +61,6 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
     private SubscriptionsChangeListener mChangeListener;
     private AddPreference mPreference;
 
-    private MobileNetworkSummaryStatus mStatusCache = new MobileNetworkSummaryStatus();
-
     /**
      * This controls the summary text and click behavior of the "Mobile network" item on the
      * Network & internet page. There are 3 separate cases depending on the number of mobile network
@@ -84,8 +82,8 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mUserManager = context.getSystemService(UserManager.class);
         if (lifecycle != null) {
-            mChangeListener = new SubscriptionsChangeListener(context, this);
-            lifecycle.addObserver(this);
+          mChangeListener = new SubscriptionsChangeListener(context, this);
+          lifecycle.addObserver(this);
         }
     }
 
@@ -108,24 +106,25 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public CharSequence getSummary() {
-        mStatusCache.update(mContext, null);
-        List<SubscriptionAnnotation> subs = mStatusCache.getSubscriptionList();
-
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
+                mContext);
         if (subs.isEmpty()) {
-            if (mStatusCache.isEuiccConfigSupport()) {
+            if (MobileNetworkUtils.showEuiccSettings(mContext)) {
                 return mContext.getResources().getString(
                         R.string.mobile_network_summary_add_a_network);
             }
-            // set empty string to override previous text for carrier when SIM available
-            return "";
+            return null;
         } else if (subs.size() == 1) {
-            SubscriptionAnnotation info = subs.get(0);
-            CharSequence displayName = mStatusCache.getDisplayName(info.getSubscriptionId());
-            if (info.getSubInfo().isEmbedded() || info.isActive()
-                    || mStatusCache.isPhysicalSimDisableSupport()) {
+            final SubscriptionInfo info = subs.get(0);
+            final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    info, mContext);
+            final int subId = info.getSubscriptionId();
+            if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
+                    && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
+                return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
+            } else {
                 return displayName;
             }
-            return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
         } else {
             if (com.android.settings.Utils.isProviderModelEnabled(mContext)) {
                 return getSummaryForProviderModel(subs);
@@ -136,16 +135,10 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         }
     }
 
-    private CharSequence getSummaryForProviderModel(List<SubscriptionAnnotation> subs) {
-        return subs.stream()
-                .mapToInt(SubscriptionAnnotation::getSubscriptionId)
-                .mapToObj(subId -> mStatusCache.getDisplayName(subId))
-                .collect(Collectors.joining(", "));
-    }
-
-    private void logPreferenceClick(Preference preference) {
-        mMetricsFeatureProvider.logClickedPreference(preference,
-                preference.getExtras().getInt(DashboardFragment.CATEGORY));
+    private CharSequence getSummaryForProviderModel(List<SubscriptionInfo> subs) {
+        return String.join(", ", subs.stream().map(subInfo -> {
+            return SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, mContext);
+        }).collect(Collectors.toList()));
     }
 
     private void startAddSimFlow() {
@@ -154,64 +147,62 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
         mContext.startActivity(intent);
     }
 
-    private void initPreference() {
+    private void update() {
+        if (mPreference == null || mPreference.isDisabledByAdmin()) {
+            return;
+        }
         refreshSummary(mPreference);
         mPreference.setOnPreferenceClickListener(null);
         mPreference.setOnAddClickListener(null);
         mPreference.setFragment(null);
         mPreference.setEnabled(!mChangeListener.isAirplaneModeOn());
-    }
 
-    private void update() {
-        if (mPreference == null || mPreference.isDisabledByAdmin()) {
-            return;
-        }
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(
+                mContext);
 
-        mStatusCache.update(mContext, statusCache -> initPreference());
-
-        List<SubscriptionAnnotation> subs = mStatusCache.getSubscriptionList();
         if (subs.isEmpty()) {
-            if (mStatusCache.isEuiccConfigSupport()) {
+            if (MobileNetworkUtils.showEuiccSettings(mContext)) {
                 mPreference.setOnPreferenceClickListener((Preference pref) -> {
-                    logPreferenceClick(pref);
+                    mMetricsFeatureProvider.logClickedPreference(pref,
+                            pref.getExtras().getInt(DashboardFragment.CATEGORY));
                     startAddSimFlow();
                     return true;
                 });
             } else {
                 mPreference.setEnabled(false);
             }
-            return;
-        }
-
-        // We have one or more existing subscriptions, so we want the plus button if eSIM is
-        // supported.
-        if (mStatusCache.isEuiccConfigSupport()) {
-            mPreference.setAddWidgetEnabled(!mChangeListener.isAirplaneModeOn());
-            mPreference.setOnAddClickListener(p -> {
-                logPreferenceClick(p);
-                startAddSimFlow();
-            });
-        }
-
-        if (subs.size() == 1) {
-            mPreference.setOnPreferenceClickListener((Preference pref) -> {
-                logPreferenceClick(pref);
-
-                SubscriptionAnnotation info = subs.get(0);
-                if (info.getSubInfo().isEmbedded() || info.isActive()
-                        || mStatusCache.isPhysicalSimDisableSupport()) {
-                    final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
-                    intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
-                    mContext.startActivity(intent);
-                    return true;
-                }
-
-                SubscriptionUtil.startToggleSubscriptionDialogActivity(
-                        mContext, info.getSubscriptionId(), true);
-                return true;
-            });
         } else {
-            mPreference.setFragment(MobileNetworkListFragment.class.getCanonicalName());
+            // We have one or more existing subscriptions, so we want the plus button if eSIM is
+            // supported.
+            if (MobileNetworkUtils.showEuiccSettings(mContext)) {
+                mPreference.setAddWidgetEnabled(!mChangeListener.isAirplaneModeOn());
+                mPreference.setOnAddClickListener(p -> {
+                    mMetricsFeatureProvider.logClickedPreference(p,
+                            p.getExtras().getInt(DashboardFragment.CATEGORY));
+                    startAddSimFlow();
+                });
+            }
+
+            if (subs.size() == 1) {
+                mPreference.setOnPreferenceClickListener((Preference pref) -> {
+                    mMetricsFeatureProvider.logClickedPreference(pref,
+                            pref.getExtras().getInt(DashboardFragment.CATEGORY));
+                    final SubscriptionInfo info = subs.get(0);
+                    final int subId = info.getSubscriptionId();
+                    if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
+                            && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
+                        SubscriptionUtil.startToggleSubscriptionDialogActivity(
+                                mContext, subId, true);
+                    } else {
+                        final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
+                        intent.putExtra(Settings.EXTRA_SUB_ID, subs.get(0).getSubscriptionId());
+                        mContext.startActivity(intent);
+                    }
+                    return true;
+                });
+            } else {
+                mPreference.setFragment(MobileNetworkListFragment.class.getCanonicalName());
+            }
         }
     }
 
@@ -227,14 +218,12 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
 
     @Override
     public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
-        mStatusCache.update(mContext, statusCache -> update());
+        update();
     }
 
     @Override
     public void onSubscriptionsChanged() {
-        mStatusCache.update(mContext, statusCache -> {
-            refreshSummary(mPreference);
-            update();
-        });
+        refreshSummary(mPreference);
+        update();
     }
 }
