@@ -31,6 +31,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -44,15 +45,20 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RawRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.utils.AnnotationSpan;
+
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -63,6 +69,7 @@ import java.util.List;
  * Utility class for creating the edit dialog.
  */
 public class AccessibilityDialogUtils {
+    private static final String TAG = "AccessibilityDialogUtils";
 
     /** Denotes the dialog emuns for show dialog. */
     @Retention(RetentionPolicy.SOURCE)
@@ -315,9 +322,22 @@ public class AccessibilityDialogUtils {
     }
 
     private static void setupShortcutWidget(View view, CharSequence titleText,
-            CharSequence summaryText, int imageResId) {
+            CharSequence summaryText, @DrawableRes int imageResId) {
+        setupShortcutWidgetWithTitleAndSummary(view, titleText, summaryText);
+        setupShortcutWidgetWithImageResource(view, imageResId);
+    }
+
+    private static void setupShortcutWidgetWithImageRawResource(View view, CharSequence titleText,
+            CharSequence summaryText, @RawRes int imageRawResId) {
+        setupShortcutWidgetWithTitleAndSummary(view, titleText, summaryText);
+        setupShortcutWidgetWithImageRawResource(view, imageRawResId);
+    }
+
+    private static void setupShortcutWidgetWithTitleAndSummary(View view, CharSequence titleText,
+            CharSequence summaryText) {
         final CheckBox checkBox = view.findViewById(R.id.checkbox);
         checkBox.setText(titleText);
+
         final TextView summary = view.findViewById(R.id.summary);
         if (TextUtils.isEmpty(summaryText)) {
             summary.setVisibility(View.GONE);
@@ -326,8 +346,23 @@ public class AccessibilityDialogUtils {
             summary.setMovementMethod(LinkMovementMethod.getInstance());
             summary.setFocusable(false);
         }
-        final ImageView image = view.findViewById(R.id.image);
-        image.setImageResource(imageResId);
+    }
+
+    private static void setupShortcutWidgetWithImageResource(View view,
+            @DrawableRes int imageResId) {
+        final ImageView imageView = view.findViewById(R.id.image);
+        imageView.setImageResource(imageResId);
+    }
+
+    private static void setupShortcutWidgetWithImageRawResource(View view,
+            @RawRes int imageRawResId) {
+        final LottieAnimationView lottieView = view.findViewById(R.id.image);
+        lottieView.setFailureListener(
+                result -> Log.w(TAG, "Invalid image raw resource id: " + imageRawResId,
+                        result));
+        lottieView.setAnimation(imageRawResId);
+        lottieView.setRepeatCount(LottieDrawable.INFINITE);
+        lottieView.playAnimation();
     }
 
     private static void initSoftwareShortcutForSUW(Context context, View view) {
@@ -361,7 +396,6 @@ public class AccessibilityDialogUtils {
                 R.string.accessibility_shortcut_edit_dialog_summary_hardware);
         setupShortcutWidget(dialogView, title, summary,
                 R.drawable.accessibility_shortcut_type_hardware);
-        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
     }
 
     private static void initMagnifyShortcut(Context context, View view) {
@@ -374,9 +408,8 @@ public class AccessibilityDialogUtils {
         final Object[] arguments = {3};
         summary = MessageFormat.format(summary, arguments);
 
-        setupShortcutWidget(dialogView, title, summary,
-                R.drawable.accessibility_shortcut_type_triple_tap);
-        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
+        setupShortcutWidgetWithImageRawResource(dialogView, title, summary,
+                R.raw.accessibility_shortcut_type_triple_tap);
     }
 
     private static void initAdvancedWidget(View view) {

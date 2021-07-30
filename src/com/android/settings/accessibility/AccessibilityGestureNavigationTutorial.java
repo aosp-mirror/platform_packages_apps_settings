@@ -352,7 +352,7 @@ public final class AccessibilityGestureNavigationTutorial {
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_triple);
         final ImageView image =
-                createImageView(context, R.drawable.accessibility_shortcut_type_triple_tap);
+                createImageView(context, R.raw.accessibility_shortcut_type_triple_tap);
         final CharSequence instruction =
                 context.getText(R.string.accessibility_tutorial_dialog_message_triple);
         final ImageView indicatorIcon =
