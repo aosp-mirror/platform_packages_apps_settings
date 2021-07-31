@@ -28,6 +28,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricManager.Authenticators;
 import android.hardware.biometrics.BiometricManager.BiometricError;
@@ -116,8 +117,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final Intent intent = getIntent();
+
         if (this instanceof InternalActivity) {
-            mUserId = getIntent().getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
+            mUserId = intent.getIntExtra(Intent.EXTRA_USER_ID, UserHandle.myUserId());
             if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
                 mGkPwHandle = BiometricUtils.getGatekeeperPasswordHandle(getIntent());
             }
@@ -135,7 +138,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         }
 
         // Log a framework stats event if this activity was launched via intent action.
-        final Intent intent = getIntent();
         if (!mIsEnrollActionLogged && ACTION_BIOMETRIC_ENROLL.equals(intent.getAction())) {
             mIsEnrollActionLogged = true;
 
@@ -205,6 +207,22 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         Log.d(TAG, "parentalOptionsRequired: " + mParentalOptionsRequired
                 + ", skipReturnToParent: " + mSkipReturnToParent);
 
+        // Only allow the consent flow to happen once when running from setup wizard.
+        // This isn't common and should only happen if setup wizard is not completed normally
+        // due to a restart, etc.
+        if (isSetupWizard && mParentalOptionsRequired) {
+            final boolean consentAlreadyManaged = ParentalControlsUtils.parentConsentRequired(this,
+                    BiometricAuthenticator.TYPE_FACE | BiometricAuthenticator.TYPE_FINGERPRINT)
+                    != null;
+            if (consentAlreadyManaged) {
+                Log.w(TAG, "Consent was already setup - skipping enrollment");
+                setResult(RESULT_SKIP);
+                finish();
+                return;
+            }
+        }
+
+        // start enrollment process if we haven't bailed out yet
         if (mParentalOptionsRequired && mParentalOptions == null) {
             mParentalConsentHelper = new ParentalConsentHelper(
                     mIsFaceEnrollable, mIsFingerprintEnrollable, mGkPwHandle);
