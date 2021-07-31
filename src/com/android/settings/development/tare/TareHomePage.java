@@ -42,8 +42,8 @@ public class TareHomePage extends Activity {
 
         mOnSwitch = findViewById(R.id.on_switch);
         mRevButton = findViewById(R.id.revert_button);
-        mAlarmManagerView = findViewById(R.id.alarm_manager);
-        mJobSchedulerView = findViewById(R.id.job_scheduler);
+        mAlarmManagerView = findViewById(R.id.alarmmanager);
+        mJobSchedulerView = findViewById(R.id.jobscheduler);
 
         // TODO: Set the status of the buttons based on the current status
 
