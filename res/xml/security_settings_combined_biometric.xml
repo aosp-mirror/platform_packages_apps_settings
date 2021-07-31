@@ -26,14 +26,14 @@
         android:key="biometric_ways_to_unlock"
         android:title="@string/biometric_settings_category_ways_to_unlock">
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="biometric_face_settings"
             android:title="@string/security_settings_face_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_face_settings"
             settings:controller="com.android.settings.biometrics.combination.BiometricFaceStatusPreferenceController" />
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="biometric_fingerprint_settings"
             android:title="@string/security_settings_fingerprint_preference_title"
             android:summary="@string/summary_placeholder"
