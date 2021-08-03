@@ -18,10 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto">
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="caption_preview"
-        android:title="@string/summary_placeholder"
-        android:layout="@layout/accessibility_button_preview"
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="accessibility_button_preview"
         android:selectable="false"
         settings:searchable="false"
         android:persistent="false"
