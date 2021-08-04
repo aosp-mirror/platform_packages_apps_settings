@@ -18,6 +18,7 @@ package com.android.settings.development.tare;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,15 +35,26 @@ import com.android.settings.R;
 public class DropdownActivity extends Activity {
 
     private Fragment mAlarmManagerFragment;
+    private Fragment mJobSchedulerFragment;
     private Spinner mSpinner;
+    static final String EXTRA_POLICY = "policy";
+    static final int POLICY_ALARM_MANAGER = 0;
+    static final int POLICY_JOB_SCHEDULER = 1;
+    private static final int DEFAULT_POLICY = POLICY_ALARM_MANAGER;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tare_dropdown_page);
 
+        // Determines what policy fragment to open up to
+        Intent intent = getIntent();
+        int policy = intent.getIntExtra(EXTRA_POLICY, DEFAULT_POLICY);
+
         mSpinner = findViewById(R.id.spinner);
         mAlarmManagerFragment = new AlarmManagerFragment();
+        mJobSchedulerFragment = new JobSchedulerFragment();
 
         String[] policies = getResources().getStringArray(R.array.tare_policies);
 
@@ -51,11 +63,14 @@ public class DropdownActivity extends Activity {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(arrayAdapter);
 
+        mSpinner.setSelection(policy);
+        selectFragment(policy);
+
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position,
                     long id) {
-                openFragment(mAlarmManagerFragment);
+                selectFragment(position);
             }
 
             @Override
@@ -64,7 +79,21 @@ public class DropdownActivity extends Activity {
         });
     }
 
-    /** Selects the correct policy fragment to display */
+    /** Selects the correct policy fragment to display based on user selection */
+    private void selectFragment(int policy) {
+        switch (policy) {
+            case POLICY_ALARM_MANAGER:
+                openFragment(mAlarmManagerFragment);
+                break;
+            case POLICY_JOB_SCHEDULER:
+                openFragment(mJobSchedulerFragment);
+                break;
+            default:
+                openFragment(mAlarmManagerFragment);
+        }
+    }
+
+    /** Opens the correct policy fragment */
     private void openFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);

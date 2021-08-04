@@ -13704,6 +13704,39 @@
     <!-- An event type denoting that an app was interacted with in some way by the user
     [CHAR LIMIT=40]-->
     <string name="tare_other_interaction">Other User Interaction</string>
+    <!-- Title for the initiation of a max priority job by an app as defined in the JobScheduler
+     API [CHAR LIMIT=40]-->
+    <string name="tare_job_max_start">Job Max Start</string>
+    <!-- Title for the process of carrying out of a max priority job by an app as defined in the
+    JobScheduler API [CHAR LIMIT=40]-->
+    <string name="tare_job_max_running">Job Max Running</string>
+    <!-- Title for the initiation of a high priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=40]-->
+    <string name="tare_job_high_start">Job High Start</string>
+    <!-- Title for the process of carrying out of a high priority job by an app as defined in the
+    JobScheduler API [CHAR LIMIT=40]-->
+    <string name="tare_job_high_running">Job High Running</string>
+    <!-- Title for the initiation of a default priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=40]-->
+    <string name="tare_job_default_start">Job Default Start</string>
+    <!-- Title for the process of carrying out of a default priority job by an app as defined in the
+    JobScheduler API [CHAR LIMIT=40]-->
+    <string name="tare_job_default_running">Job Default Running</string>
+    <!-- Title for the initiation of a low priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=40]-->
+    <string name="tare_job_low_start">Job Low Start</string>
+    <!-- Title for the process of carrying out of a low priority job by an app as defined in the
+    JobScheduler API [CHAR LIMIT=40]-->
+    <string name="tare_job_low_running">Job Low Running</string>
+    <!-- Title for the initiation of a minimum priority job by an app as defined in the JobScheduler
+    API [CHAR LIMIT=40]-->
+    <string name="tare_job_min_start">Job Min Start</string>
+    <!-- Title for the process of carrying out of a minimum priority job by an app as defined in the
+    JobScheduler API [CHAR LIMIT=40]-->
+    <string name="tare_job_min_running">Job Min Running</string>
+    <!-- Title for the penalty an app receives for letting a job use the maximum execution time and
+     time out [CHAR LIMIT=40]-->
+    <string name="tare_job_timeout_penalty">Job Timeout Penalty</string>
     <!-- Titles for the minimum satiated credit balances for different types of apps
     (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
     <string-array name="tare_min_satiated_balance_subfactors" translatable="false">
@@ -13724,7 +13757,7 @@
     <!-- Various AlarmManager alarms with different costs to produce and price paid by apps
     if they want to produce these alarms. Alarm in this context refers to the possible alarm cases
     in AlarmManager. [CHAR LIMIT=40]-->
-    <string-array name="tare_actions_subfactors" translatable="false">
+    <string-array name="tare_alarm_manager_actions" translatable="false">
         <item>@string/tare_wakeup_exact_idle</item>
         <item>@string/tare_wakeup_inexact_idle</item>
         <item>@string/tare_wakeup_exact</item>
@@ -13745,9 +13778,25 @@
         <item>@string/tare_widget_interaction</item>
         <item>@string/tare_other_interaction</item>
     </string-array>
+    <!-- Various JobScheduler tasks with different costs to produce and willingness to pay by apps
+    if they want to carry out these different tasks [CHAR LIMIT=40]-->
+    <string-array name="tare_job_scheduler_actions" translatable="false">
+        <item>@string/tare_job_max_start</item>
+        <item>@string/tare_job_max_running</item>
+        <item>@string/tare_job_high_start</item>
+        <item>@string/tare_job_high_running</item>
+        <item>@string/tare_job_default_start</item>
+        <item>@string/tare_job_default_running</item>
+        <item>@string/tare_job_low_start</item>
+        <item>@string/tare_job_low_running</item>
+        <item>@string/tare_job_min_start</item>
+        <item>@string/tare_job_min_running</item>
+        <item>@string/tare_job_timeout_penalty</item>
+    </string-array>
     <!-- Array used to populate dropdown menu with the different policies in the TARE
     settings [CHAR LIMIT=40]-->
     <string-array name="tare_policies" translatable="false">
         <item>@string/tare_alarmmanager</item>
+        <item>@string/tare_jobscheduler</item>
     </string-array>
 </resources>
