@@ -40,6 +40,8 @@ public class TareHomePage extends Activity {
     private Button mRevButton;
     private TextView mAlarmManagerView;
     private TextView mJobSchedulerView;
+    private static final int SETTING_VALUE_OFF = 0;
+    private static final int SETTING_VALUE_ON = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +53,17 @@ public class TareHomePage extends Activity {
         mAlarmManagerView = findViewById(R.id.alarmmanager);
         mJobSchedulerView = findViewById(R.id.jobscheduler);
 
-        // TODO: Set the status of the buttons based on the current status
+        final boolean isTareEnabled = Settings.Global.getInt(getContentResolver(),
+                Settings.Global.ENABLE_TARE, Settings.Global.DEFAULT_ENABLE_TARE) == 1;
+        setEnabled(isTareEnabled);
 
         mOnSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mRevButton.setEnabled(isChecked);
-                mAlarmManagerView.setEnabled(isChecked);
-                mJobSchedulerView.setEnabled(isChecked);
+                setEnabled(isChecked);
+                Settings.Global.putInt(getContentResolver(),
+                        Settings.Global.ENABLE_TARE,
+                        isChecked ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
             }
         });
     }
@@ -83,5 +88,13 @@ public class TareHomePage extends Activity {
         Intent i = new Intent(getApplicationContext(), DropdownActivity.class);
         i.putExtra(EXTRA_POLICY, POLICY_JOB_SCHEDULER);
         startActivity(i);
+    }
+
+    /** Changes the enabled state of the TARE homepage buttons based on global toggle */
+    private void setEnabled(boolean tareStatus) {
+        mRevButton.setEnabled(tareStatus);
+        mAlarmManagerView.setEnabled(tareStatus);
+        mJobSchedulerView.setEnabled(tareStatus);
+        mOnSwitch.setChecked(tareStatus);
     }
 }
