@@ -284,7 +284,7 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             launchCredentialOnlyEnroll();
             finish();
         } else if (canUseFace && canUseFingerprint) {
-            if (mParentalOptionsRequired && mGkPwHandle != null) {
+            if (mGkPwHandle != null) {
                 launchFaceAndFingerprintEnroll();
             } else {
                 setOrConfirmCredentialsNow();
