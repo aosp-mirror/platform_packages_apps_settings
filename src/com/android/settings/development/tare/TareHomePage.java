@@ -16,9 +16,14 @@
 
 package com.android.settings.development.tare;
 
+import static com.android.settings.development.tare.DropdownActivity.EXTRA_POLICY;
+import static com.android.settings.development.tare.DropdownActivity.POLICY_ALARM_MANAGER;
+import static com.android.settings.development.tare.DropdownActivity.POLICY_JOB_SCHEDULER;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -62,10 +67,21 @@ public class TareHomePage extends Activity {
     // TODO: Establish default TARE values and make this method revert all settings back to default.
     public void revertSettings(View v) {
         Toast.makeText(this, R.string.tare_settings_reverted_toast, Toast.LENGTH_LONG).show();
+        Settings.Global.putString(getApplicationContext().getContentResolver(),
+                Settings.Global.ENABLE_TARE, null);
     }
 
     /** Opens up the AlarmManager TARE policy page with its factors to view and edit */
     public void launchAlarmManagerPage(View v) {
-        startActivity(new Intent(getApplicationContext(), DropdownActivity.class));
+        Intent i = new Intent(getApplicationContext(), DropdownActivity.class);
+        i.putExtra(EXTRA_POLICY, POLICY_ALARM_MANAGER);
+        startActivity(i);
+    }
+
+    /** Opens up the JobScheduler TARE policy page with its factors to view and edit */
+    public void launchJobSchedulerPage(View v) {
+        Intent i = new Intent(getApplicationContext(), DropdownActivity.class);
+        i.putExtra(EXTRA_POLICY, POLICY_JOB_SCHEDULER);
+        startActivity(i);
     }
 }
