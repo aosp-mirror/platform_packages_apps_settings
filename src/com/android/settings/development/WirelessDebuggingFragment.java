@@ -430,7 +430,7 @@ public class WirelessDebuggingFragment extends DashboardFragment
             case FORGET_ACTION:
                 try {
                     p = (PairDevice) data.getParcelableExtra(PAIRED_DEVICE_EXTRA);
-                    mAdbManager.unpairDevice(p.getGuid());
+                    mAdbManager.unpairDevice(p.guid);
                 } catch (RemoteException e) {
                     Log.e(TAG, "Unable to forget the device");
                 }
