@@ -27,27 +27,27 @@
         settings:searchable="false"
         settings:lottie_rawRes="@drawable/accessibility_dwell" />
 
-    <com.android.settingslib.widget.RadioButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_autoclick_default"
         android:title="@string/accessibility_autoclick_default_title"
         settings:allowDividerAbove="true" />
 
-    <com.android.settingslib.widget.RadioButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_autoclick_200ms"
         android:title="@string/accessibility_autoclick_short_title"
         android:summary="@string/accessibility_autoclick_short_summary" />
 
-    <com.android.settingslib.widget.RadioButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_autoclick_600ms"
         android:title="@string/accessibility_autoclick_medium_title"
         android:summary="@string/accessibility_autoclick_medium_summary" />
 
-    <com.android.settingslib.widget.RadioButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_autoclick_1sec"
         android:title="@string/accessibility_autoclick_long_title"
         android:summary="@string/accessibility_autoclick_long_summary" />
 
-    <com.android.settingslib.widget.RadioButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_autoclick_custom"
         android:title="@string/accessibility_autoclick_custom_title" />
 

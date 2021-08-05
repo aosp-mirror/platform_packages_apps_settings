@@ -53,7 +53,7 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -181,8 +181,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         }
 
         for (CandidateInfo info : candidateList) {
-            RadioButtonPreference pref =
-                    new RadioButtonPreference(getPrefContext());
+            SelectorWithWidgetPreference pref =
+                    new SelectorWithWidgetPreference(getPrefContext());
             bindPreference(pref, info.getKey(), info, defaultKey);
             screen.addPreference(pref);
         }
@@ -192,8 +192,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         if (!candidateList.isEmpty() && (selectedTimeout > maxTimeout)) {
             // The selected time out value is longer than the max timeout allowed by the admin.
             // Select the largest value from the list by default.
-            final RadioButtonPreference preferenceWithLargestTimeout =
-                    (RadioButtonPreference) screen.getPreference(candidateList.size() - 1);
+            final SelectorWithWidgetPreference preferenceWithLargestTimeout =
+                    (SelectorWithWidgetPreference) screen.getPreference(candidateList.size() - 1);
             preferenceWithLargestTimeout.setChecked(true);
         }
 

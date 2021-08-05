@@ -39,7 +39,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -100,8 +100,8 @@ public class UsbDetailsDataRoleControllerTest {
         mDetailsDataRoleController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
                 DATA_ROLE_DEVICE);
 
-        final RadioButtonPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
-        final RadioButtonPreference hostPref = getRadioPreference(DATA_ROLE_HOST);
+        final SelectorWithWidgetPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
+        final SelectorWithWidgetPreference hostPref = getRadioPreference(DATA_ROLE_HOST);
         assertThat(devicePref.isChecked()).isTrue();
         assertThat(hostPref.isChecked()).isFalse();
     }
@@ -113,8 +113,8 @@ public class UsbDetailsDataRoleControllerTest {
         mDetailsDataRoleController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
                 DATA_ROLE_HOST);
 
-        final RadioButtonPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
-        final RadioButtonPreference hostPref = getRadioPreference(DATA_ROLE_HOST);
+        final SelectorWithWidgetPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
+        final SelectorWithWidgetPreference hostPref = getRadioPreference(DATA_ROLE_HOST);
         assertThat(devicePref.isChecked()).isFalse();
         assertThat(hostPref.isChecked()).isTrue();
     }
@@ -134,7 +134,7 @@ public class UsbDetailsDataRoleControllerTest {
         mDetailsDataRoleController.displayPreference(mScreen);
         when(mUsbBackend.getDataRole()).thenReturn(DATA_ROLE_HOST);
 
-        final RadioButtonPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
+        final SelectorWithWidgetPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
         devicePref.performClick();
 
         verify(mUsbBackend).setDataRole(DATA_ROLE_DEVICE);
@@ -147,7 +147,7 @@ public class UsbDetailsDataRoleControllerTest {
         mDetailsDataRoleController.displayPreference(mScreen);
         when(mUsbBackend.getDataRole()).thenReturn(DATA_ROLE_HOST);
 
-        final RadioButtonPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
+        final SelectorWithWidgetPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
         devicePref.performClick();
 
         assertThat(devicePref.getSummary())
@@ -161,7 +161,7 @@ public class UsbDetailsDataRoleControllerTest {
         mDetailsDataRoleController.displayPreference(mScreen);
         when(mUsbBackend.getDataRole()).thenReturn(DATA_ROLE_HOST);
 
-        final RadioButtonPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
+        final SelectorWithWidgetPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
         devicePref.performClick();
 
         verify(mUsbBackend).setDataRole(DATA_ROLE_DEVICE);
@@ -179,7 +179,7 @@ public class UsbDetailsDataRoleControllerTest {
         mDetailsDataRoleController.displayPreference(mScreen);
         when(mUsbBackend.getDataRole()).thenReturn(DATA_ROLE_HOST);
 
-        final RadioButtonPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
+        final SelectorWithWidgetPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
         devicePref.performClick();
 
         verify(mUsbBackend).setDataRole(DATA_ROLE_DEVICE);
@@ -198,7 +198,7 @@ public class UsbDetailsDataRoleControllerTest {
         mDetailsDataRoleController.displayPreference(mScreen);
         when(mUsbBackend.getDataRole()).thenReturn(DATA_ROLE_HOST);
 
-        final RadioButtonPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
+        final SelectorWithWidgetPreference devicePref = getRadioPreference(DATA_ROLE_DEVICE);
         devicePref.performClick();
 
         verify(mUsbBackend).setDataRole(DATA_ROLE_DEVICE);
@@ -214,8 +214,8 @@ public class UsbDetailsDataRoleControllerTest {
                 .isEqualTo(mContext.getString(R.string.usb_switching_failed));
     }
 
-    private RadioButtonPreference getRadioPreference(int role) {
-        return (RadioButtonPreference)
+    private SelectorWithWidgetPreference getRadioPreference(int role) {
+        return (SelectorWithWidgetPreference)
                 mPreference.findPreference(UsbBackend.dataRoleToString(role));
     }
 }

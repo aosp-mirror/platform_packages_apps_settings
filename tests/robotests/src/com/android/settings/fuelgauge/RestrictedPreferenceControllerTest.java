@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class RestrictedPreferenceControllerTest {
     private static final String PACKAGE_NAME = "com.android.app";
 
     private RestrictedPreferenceController mController;
-    private RadioButtonPreference mPreference;
+    private SelectorWithWidgetPreference mPreference;
 
     @Mock BatteryOptimizeUtils mockBatteryOptimizeUtils;
 
@@ -48,7 +48,7 @@ public class RestrictedPreferenceControllerTest {
 
         mController = new RestrictedPreferenceController(
                 RuntimeEnvironment.application, UID, PACKAGE_NAME);
-        mPreference = new RadioButtonPreference(RuntimeEnvironment.application);
+        mPreference = new SelectorWithWidgetPreference(RuntimeEnvironment.application);
         mController.mBatteryOptimizeUtils = mockBatteryOptimizeUtils;
     }
 

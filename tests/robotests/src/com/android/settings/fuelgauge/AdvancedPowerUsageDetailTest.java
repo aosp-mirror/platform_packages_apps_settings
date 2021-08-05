@@ -62,7 +62,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -127,9 +127,9 @@ public class AdvancedPowerUsageDetailTest {
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
     private FooterPreference mFooterPreference;
-    private RadioButtonPreference mRestrictedPreference;
-    private RadioButtonPreference mOptimizePreference;
-    private RadioButtonPreference mUnrestrictedPreference;
+    private SelectorWithWidgetPreference mRestrictedPreference;
+    private SelectorWithWidgetPreference mOptimizePreference;
+    private SelectorWithWidgetPreference mUnrestrictedPreference;
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
     private FakeFeatureFactory mFeatureFactory;
@@ -208,9 +208,9 @@ public class AdvancedPowerUsageDetailTest {
         mForegroundPreference = new Preference(mContext);
         mBackgroundPreference = new Preference(mContext);
         mFooterPreference = new FooterPreference(mContext);
-        mRestrictedPreference = new RadioButtonPreference(mContext);
-        mOptimizePreference = new RadioButtonPreference(mContext);
-        mUnrestrictedPreference = new RadioButtonPreference(mContext);
+        mRestrictedPreference = new SelectorWithWidgetPreference(mContext);
+        mOptimizePreference = new SelectorWithWidgetPreference(mContext);
+        mUnrestrictedPreference = new SelectorWithWidgetPreference(mContext);
         mFragment.mForegroundPreference = mForegroundPreference;
         mFragment.mBackgroundPreference = mBackgroundPreference;
         mFragment.mFooterPreference = mFooterPreference;
