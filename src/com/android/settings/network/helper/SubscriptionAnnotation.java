@@ -160,7 +160,7 @@ public class SubscriptionAnnotation {
 
     public String toString() {
         return TAG + "{" + "subId=" + getSubscriptionId()
-                + ",type=" + getType()
+                + ",type=" + getType() + ",exist=" + isExisted()
                 + ",active=" + isActive() + ",displayAllow=" + isDisplayAllowed()
                 + "}";
     }
