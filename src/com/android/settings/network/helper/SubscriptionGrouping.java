@@ -16,7 +16,6 @@
 package com.android.settings.network.helper;
 
 import android.os.ParcelUuid;
-import android.util.Log;
 
 import androidx.annotation.Keep;
 import androidx.annotation.VisibleForTesting;
@@ -45,12 +44,9 @@ import java.util.stream.Collectors;
  */
 public class SubscriptionGrouping
         implements UnaryOperator<List<SubscriptionAnnotation>> {
-    private static final String LOG_TAG = "SubscriptionGrouping";
 
     // implementation of UnaryOperator
     public List<SubscriptionAnnotation> apply(List<SubscriptionAnnotation> listOfSubscriptions) {
-        Log.d(LOG_TAG, "Grouping " + listOfSubscriptions);
-
         // group by GUID
         Map<ParcelUuid, List<SubscriptionAnnotation>> groupedSubInfoList =
                 listOfSubscriptions.stream()
@@ -93,8 +89,8 @@ public class SubscriptionGrouping
         annoSelector = annoSelector
                 // eSIM in front of pSIM
                 .thenComparingInt(anno -> -anno.getType())
-                // maintain the ordering given within constructor
-                .thenComparingInt(anno -> annoList.indexOf(anno));
+                // subscription ID in reverse order
+                .thenComparingInt(anno -> -anno.getSubscriptionId());
         return annoList.stream().sorted(annoSelector).findFirst().orElse(null);
     }
 }
