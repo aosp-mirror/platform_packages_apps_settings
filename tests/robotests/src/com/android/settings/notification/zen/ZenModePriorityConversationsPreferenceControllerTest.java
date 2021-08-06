@@ -44,7 +44,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +74,7 @@ public class ZenModePriorityConversationsPreferenceControllerTest {
     @Mock
     private NotificationBackend mNotifBackend;
 
-    private List<RadioButtonPreference> mRadioButtonPreferences;
+    private List<SelectorWithWidgetPreference> mSelectorWithWidgetPreferences;
     private ContentResolver mContentResolver;
     private Context mContext;
     @Before
@@ -102,7 +102,7 @@ public class ZenModePriorityConversationsPreferenceControllerTest {
 
     @Test
     public void clickAllConversations() {
-        RadioButtonPreference allConversationsRb = getButton(KEY_ALL);
+        SelectorWithWidgetPreference allConversationsRb = getButton(KEY_ALL);
         allConversationsRb.onClick();
 
         verify(mZenBackend).saveConversationSenders(CONVERSATION_SENDERS_ANYONE);
@@ -110,7 +110,7 @@ public class ZenModePriorityConversationsPreferenceControllerTest {
 
     @Test
     public void clickImportantConversations() {
-        RadioButtonPreference importantConversationsRb = getButton(KEY_IMPORTANT);
+        SelectorWithWidgetPreference importantConversationsRb = getButton(KEY_IMPORTANT);
         importantConversationsRb.onClick();
 
         verify(mZenBackend).saveConversationSenders(CONVERSATION_SENDERS_IMPORTANT);
@@ -118,7 +118,7 @@ public class ZenModePriorityConversationsPreferenceControllerTest {
 
     @Test
     public void clickNoConversations() {
-        RadioButtonPreference noConversationsRb = getButton(KEY_NONE);
+        SelectorWithWidgetPreference noConversationsRb = getButton(KEY_NONE);
         noConversationsRb.onClick();
 
         verify(mZenBackend)
@@ -126,20 +126,20 @@ public class ZenModePriorityConversationsPreferenceControllerTest {
     }
 
     private void captureRadioButtons() {
-        ArgumentCaptor<RadioButtonPreference> rbCaptor =
-                ArgumentCaptor.forClass(RadioButtonPreference.class);
+        ArgumentCaptor<SelectorWithWidgetPreference> rbCaptor =
+                ArgumentCaptor.forClass(SelectorWithWidgetPreference.class);
         mController.displayPreference(mPreferenceScreen);
 
         // verifies 3 buttons were added
         verify(mMockPrefCategory, times(3)).addPreference(rbCaptor.capture());
-        mRadioButtonPreferences = rbCaptor.getAllValues();
-        assertThat(mRadioButtonPreferences.size()).isEqualTo(3);
+        mSelectorWithWidgetPreferences = rbCaptor.getAllValues();
+        assertThat(mSelectorWithWidgetPreferences.size()).isEqualTo(3);
 
         reset(mMockPrefCategory);
     }
 
-    private RadioButtonPreference getButton(String key) {
-        for (RadioButtonPreference pref : mRadioButtonPreferences) {
+    private SelectorWithWidgetPreference getButton(String key) {
+        for (SelectorWithWidgetPreference pref : mSelectorWithWidgetPreferences) {
             if (key.equals(pref.getKey())) {
                 return pref;
             }

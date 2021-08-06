@@ -33,7 +33,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class ZenModePrioritySendersPreferenceController
     private final boolean mIsMessages; // if this is false, then this preference is for calls
 
     private PreferenceCategory mPreferenceCategory;
-    private List<RadioButtonPreference> mRadioButtonPreferences = new ArrayList<>();
+    private List<SelectorWithWidgetPreference> mSelectorWithWidgetPreferences = new ArrayList<>();
 
     public ZenModePrioritySendersPreferenceController(Context context, String key,
             Lifecycle lifecycle, boolean isMessages) {
@@ -110,7 +110,7 @@ public class ZenModePrioritySendersPreferenceController
     public void updateState(Preference preference) {
         final int currSetting = getPrioritySenders();
 
-        for (RadioButtonPreference pref : mRadioButtonPreferences) {
+        for (SelectorWithWidgetPreference pref : mSelectorWithWidgetPreferences) {
             pref.setChecked(keyToSetting(pref.getKey()) == currSetting);
         }
     }
@@ -122,7 +122,7 @@ public class ZenModePrioritySendersPreferenceController
     }
 
     private void updateSummaries() {
-        for (RadioButtonPreference pref : mRadioButtonPreferences) {
+        for (SelectorWithWidgetPreference pref : mSelectorWithWidgetPreferences) {
             pref.setSummary(getSummary(pref.getKey()));
         }
     }
@@ -165,9 +165,9 @@ public class ZenModePrioritySendersPreferenceController
         }
     }
 
-    private RadioButtonPreference makeRadioPreference(String key, int titleId) {
-        final RadioButtonPreference pref =
-                new RadioButtonPreference(mPreferenceCategory.getContext());
+    private SelectorWithWidgetPreference makeRadioPreference(String key, int titleId) {
+        final SelectorWithWidgetPreference pref =
+                new SelectorWithWidgetPreference(mPreferenceCategory.getContext());
         pref.setKey(key);
         pref.setTitle(titleId);
         pref.setOnClickListener(mRadioButtonClickListener);
@@ -178,14 +178,14 @@ public class ZenModePrioritySendersPreferenceController
         }
 
         mPreferenceCategory.addPreference(pref);
-        mRadioButtonPreferences.add(pref);
+        mSelectorWithWidgetPreferences.add(pref);
         return pref;
     }
 
-    private RadioButtonPreference.OnClickListener mRadioButtonClickListener =
-            new RadioButtonPreference.OnClickListener() {
+    private SelectorWithWidgetPreference.OnClickListener mRadioButtonClickListener =
+            new SelectorWithWidgetPreference.OnClickListener() {
         @Override
-        public void onRadioButtonClicked(RadioButtonPreference preference) {
+        public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
             int selectedSetting = keyToSetting(preference.getKey());
             if (selectedSetting != getPrioritySenders()) {
                 mBackend.saveSenders(
