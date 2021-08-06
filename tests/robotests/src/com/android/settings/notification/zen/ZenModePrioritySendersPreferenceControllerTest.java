@@ -46,7 +46,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -76,7 +76,7 @@ public class ZenModePrioritySendersPreferenceControllerTest {
     @Mock
     private NotificationBackend mNotifBackend;
 
-    private List<RadioButtonPreference> mRadioButtonPreferences;
+    private List<SelectorWithWidgetPreference> mSelectorWithWidgetPreferences;
     private ContentResolver mContentResolver;
     private Context mContext;
     @Before
@@ -108,7 +108,7 @@ public class ZenModePrioritySendersPreferenceControllerTest {
         when(mZenBackend.getPriorityMessageSenders()).thenReturn(PRIORITY_SENDERS_STARRED);
 
         // WHEN user clicks the any senders option
-        RadioButtonPreference allSendersRb = getButton(KEY_ANY);
+        SelectorWithWidgetPreference allSendersRb = getButton(KEY_ANY);
         allSendersRb.onClick();
 
         // THEN any senders gets saved as priority senders for messages
@@ -121,7 +121,7 @@ public class ZenModePrioritySendersPreferenceControllerTest {
         when(mZenBackend.getPriorityMessageSenders()).thenReturn(PRIORITY_SENDERS_ANY);
 
         // WHEN user clicks the starred contacts option
-        RadioButtonPreference starredRb = getButton(KEY_STARRED);
+        SelectorWithWidgetPreference starredRb = getButton(KEY_STARRED);
         starredRb.onClick();
 
         // THEN starred contacts gets saved as priority senders for messages
@@ -134,7 +134,7 @@ public class ZenModePrioritySendersPreferenceControllerTest {
         when(mZenBackend.getPriorityMessageSenders()).thenReturn(PRIORITY_SENDERS_ANY);
 
         // WHEN user clicks the contacts only option
-        RadioButtonPreference contactsRb = getButton(KEY_CONTACTS);
+        SelectorWithWidgetPreference contactsRb = getButton(KEY_CONTACTS);
         contactsRb.onClick();
 
         // THEN contacts gets saved as priority senders for messages
@@ -147,7 +147,7 @@ public class ZenModePrioritySendersPreferenceControllerTest {
         when(mZenBackend.getPriorityMessageSenders()).thenReturn(PRIORITY_SENDERS_ANY);
 
         // WHEN user clicks the no senders option
-        RadioButtonPreference noSenders = getButton(KEY_NONE);
+        SelectorWithWidgetPreference noSenders = getButton(KEY_NONE);
         noSenders.onClick();
 
         // THEN no senders gets saved as priority senders for messages
@@ -160,7 +160,7 @@ public class ZenModePrioritySendersPreferenceControllerTest {
         when(mZenBackend.getPriorityMessageSenders()).thenReturn(PRIORITY_SENDERS_ANY);
 
         // WHEN user clicks the any senders option multiple times again
-        RadioButtonPreference anySenders = getButton(KEY_ANY);
+        SelectorWithWidgetPreference anySenders = getButton(KEY_ANY);
         anySenders.onClick();
         anySenders.onClick();
         anySenders.onClick();
@@ -170,20 +170,20 @@ public class ZenModePrioritySendersPreferenceControllerTest {
     }
 
     private void captureRadioButtons() {
-        ArgumentCaptor<RadioButtonPreference> rbCaptor =
-                ArgumentCaptor.forClass(RadioButtonPreference.class);
+        ArgumentCaptor<SelectorWithWidgetPreference> rbCaptor =
+                ArgumentCaptor.forClass(SelectorWithWidgetPreference.class);
         mMessagesController.displayPreference(mPreferenceScreen);
 
         // verifies 4 buttons were added
         verify(mMockPrefCategory, times(4)).addPreference(rbCaptor.capture());
-        mRadioButtonPreferences = rbCaptor.getAllValues();
-        assertThat(mRadioButtonPreferences.size()).isEqualTo(4);
+        mSelectorWithWidgetPreferences = rbCaptor.getAllValues();
+        assertThat(mSelectorWithWidgetPreferences.size()).isEqualTo(4);
 
         reset(mMockPrefCategory);
     }
 
-    private RadioButtonPreference getButton(String key) {
-        for (RadioButtonPreference pref : mRadioButtonPreferences) {
+    private SelectorWithWidgetPreference getButton(String key) {
+        for (SelectorWithWidgetPreference pref : mSelectorWithWidgetPreferences) {
             if (key.equals(pref.getKey())) {
                 return pref;
             }

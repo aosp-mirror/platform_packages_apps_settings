@@ -27,7 +27,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 public class RestrictedPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -55,13 +55,13 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
 
         if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
             Log.d(TAG, "is system or default app, disable pref");
-            ((RadioButtonPreference) preference).setChecked(false);
+            ((SelectorWithWidgetPreference) preference).setChecked(false);
             preference.setEnabled(false);
         } else if (mBatteryOptimizeUtils.getAppUsageState() == RESTRICTED) {
             Log.d(TAG, "is restricted states");
-            ((RadioButtonPreference) preference).setChecked(true);
+            ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else {
-            ((RadioButtonPreference) preference).setChecked(false);
+            ((SelectorWithWidgetPreference) preference).setChecked(false);
         }
     }
 

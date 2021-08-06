@@ -36,7 +36,7 @@ import com.android.settings.Utils;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import com.google.android.collect.Lists;
 
@@ -214,7 +214,7 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
     private void refresh(long functions) {
         final PreferenceScreen screen = getPreferenceScreen();
         for (long option : UsbDetailsFunctionsController.FUNCTIONS_MAP.keySet()) {
-            final RadioButtonPreference pref =
+            final SelectorWithWidgetPreference pref =
                     screen.findPreference(UsbBackend.usbFunctionsToString(option));
             if (pref != null) {
                 final boolean isSupported = mUsbBackend.areFunctionsSupported(option);

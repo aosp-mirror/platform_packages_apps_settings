@@ -93,7 +93,7 @@ public class SubscriptionGrouping
         annoSelector = annoSelector
                 // eSIM in front of pSIM
                 .thenComparingInt(anno -> -anno.getType())
-                // maintain the ordering within from list given
+                // maintain the ordering given within constructor
                 .thenComparingInt(anno -> annoList.indexOf(anno));
         return annoList.stream().sorted(annoSelector).findFirst().orElse(null);
     }
