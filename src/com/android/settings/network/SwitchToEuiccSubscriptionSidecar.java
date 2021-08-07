@@ -26,7 +26,7 @@ import com.android.settings.network.telephony.EuiccOperationSidecar;
 public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
     private static final String TAG = "SwitchToEuiccSubscriptionSidecar";
     private static final String ACTION_SWITCH_TO_SUBSCRIPTION =
-            "com.android.settings.network.switchToSubscription";
+            "com.android.settings.network.SWITCH_TO_SUBSCRIPTION";
 
     private PendingIntent mCallbackIntent;
 
