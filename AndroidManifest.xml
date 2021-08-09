@@ -2886,9 +2886,7 @@
         <activity android:name=".notification.app.ChannelPanelActivity"
                   android:label="@string/notification_channel_title"
                   android:theme="@style/Theme.Panel"
-                  android:launchMode="singleInstance"
                   android:excludeFromRecents="true"
-                  android:noHistory="true"
                   android:configChanges="orientation|keyboardHidden|screenSize"
                   android:exported="true">
             <intent-filter android:priority="1">
