@@ -41,6 +41,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityGestureNavigationTutorial;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -150,9 +151,18 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
 
         pref.setSummary(((CandidateInfoExtra) info).loadSummary());
 
-        if (info.getKey() == KEY_SYSTEM_NAV_GESTURAL) {
+        if (KEY_SYSTEM_NAV_GESTURAL.equals(info.getKey())) {
             pref.setExtraWidgetOnClickListener((v) -> startActivity(new Intent(
                     GestureNavigationSettingsFragment.GESTURE_NAVIGATION_SETTINGS)));
+        }
+
+        if (KEY_SYSTEM_NAV_2BUTTONS.equals(info.getKey()) || KEY_SYSTEM_NAV_3BUTTONS.equals(
+                info.getKey())) {
+            pref.setExtraWidgetOnClickListener((v) ->
+                    new SubSettingLauncher(getContext())
+                            .setDestination(ButtonNavigationSettingsFragment.class.getName())
+                            .setSourceMetricsCategory(SettingsEnums.SETTINGS_GESTURE_SWIPE_UP)
+                            .launch());
         }
     }
 
