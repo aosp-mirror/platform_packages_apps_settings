@@ -16,14 +16,19 @@
 
 package com.android.settings.wifi;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.ActionListener;
 import android.os.Bundle;
+import android.util.EventLog;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -53,10 +58,12 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
 
     public static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
 
-    private static final int RESULT_CONNECTED = RESULT_FIRST_USER;
+    @VisibleForTesting
+    static final int RESULT_CONNECTED = RESULT_FIRST_USER;
     private static final int RESULT_FORGET = RESULT_FIRST_USER + 1;
 
-    private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
+    @VisibleForTesting
+    static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
     private WifiDialog mDialog;
 
@@ -156,17 +163,22 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             }
         }
 
-        Intent resultData = new Intent();
+        Intent resultData = hasPermissionForResult() ? createResultData(config, accessPoint) : null;
+        setResult(RESULT_CONNECTED, resultData);
+        finish();
+    }
+
+    protected Intent createResultData(WifiConfiguration config, AccessPoint accessPoint) {
+        Intent result = new Intent();
         if (accessPoint != null) {
             Bundle accessPointState = new Bundle();
             accessPoint.saveWifiState(accessPointState);
-            resultData.putExtra(KEY_ACCESS_POINT_STATE, accessPointState);
+            result.putExtra(KEY_ACCESS_POINT_STATE, accessPointState);
         }
         if (config != null) {
-            resultData.putExtra(KEY_WIFI_CONFIGURATION, config);
+            result.putExtra(KEY_WIFI_CONFIGURATION, config);
         }
-        setResult(RESULT_CONNECTED, resultData);
-        finish();
+        return result;
     }
 
     @Override
@@ -192,9 +204,44 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             if (resultCode != RESULT_OK) {
                 return;
             }
-
-            setResult(RESULT_CONNECTED, data);
+            if (hasPermissionForResult()) {
+                setResult(RESULT_CONNECTED, data);
+            } else {
+                setResult(RESULT_CONNECTED);
+            }
             finish();
         }
+    }
+
+    protected boolean hasPermissionForResult() {
+        final String callingPackage = getCallingPackage();
+        if (callingPackage == null) {
+            Log.d(TAG, "Failed to get the calling package, don't return the result.");
+            EventLog.writeEvent(0x534e4554, "185126813", -1 /* UID */, "no calling package");
+            return false;
+        }
+
+        if (getPackageManager().checkPermission(ACCESS_COARSE_LOCATION, callingPackage)
+                == PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "The calling package has ACCESS_COARSE_LOCATION permission for result.");
+            return true;
+        }
+
+        if (getPackageManager().checkPermission(ACCESS_FINE_LOCATION, callingPackage)
+                == PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "The calling package has ACCESS_FINE_LOCATION permission for result.");
+            return true;
+        }
+
+        Log.d(TAG, "The calling package does not have the necessary permissions for result.");
+        try {
+            EventLog.writeEvent(0x534e4554, "185126813",
+                    getPackageManager().getPackageUid(callingPackage, 0 /* flags */),
+                    "no permission");
+        } catch (PackageManager.NameNotFoundException e) {
+            EventLog.writeEvent(0x534e4554, "185126813", -1 /* UID */, "no permission");
+            Log.w(TAG, "Cannot find the UID, calling package: " + callingPackage, e);
+        }
+        return false;
     }
 }
