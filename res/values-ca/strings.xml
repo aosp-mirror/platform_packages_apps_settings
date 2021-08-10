@@ -1882,7 +1882,7 @@
     <string name="location_access_title" msgid="4052667453826272040">"Accés a la meva ubicació"</string>
     <string name="location_access_summary" msgid="8634100005481578143">"Permet que les aplicacions que hagin demanat permís utilitzin la informació sobre la ubicació"</string>
     <string name="location_sources_heading" msgid="6126965815860570524">"Fonts d\'ubicació"</string>
-    <string name="about_settings" product="tablet" msgid="2888705054709289693">"Informació sobre la tauleta"</string>
+    <string name="about_settings" product="tablet" msgid="2888705054709289693">"Informació de la tauleta"</string>
     <string name="about_settings" product="default" msgid="4038626127378127613">"Informació del telèfon"</string>
     <string name="about_settings" product="device" msgid="9012888717090302815">"Informació del dispositiu"</string>
     <string name="about_settings" product="emulator" msgid="2516560858771320366">"Sobre el dispositiu emulat"</string>
@@ -5436,6 +5436,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Quan s\'utilitzen 2 SIM, la connexió de la tauleta es limita a 4G. "<annotation id="url">"Més informació"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Quan s\'utilitzen 2 SIM, la connexió del dispositiu es limita a 4G. "<annotation id="url">"Més informació"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspèn l\'execució d\'aplicacions en la memòria cau"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"No caduca mai."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"La concessió no caduca mai."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permet les superposicions de pantalla a Configuració"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permet que les aplicacions que poden mostrar-se sobre altres aplicacions se superposin sobre les pantalles de Configuració"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multimèdia"</string>
@@ -5574,38 +5576,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"Configuració de TARE"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Torna a la configuració predeterminada"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Configuració predeterminada restablerta."</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Saldo màxim amb càrrega completa"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Circulació màxima"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Saldo mínim amb càrrega completa"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Modificadors"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Accions"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Recompenses"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Exempta"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"App del sistema sense interfície gràfica"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Una altra aplicació"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Activitat principal"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Notificació vista"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notificació vista en 15 minuts"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Interacció amb una notificació"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Interacció amb un widget"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Una altra interacció de l\'usuari"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Inici d\'una tasca amb prioritat màxima"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Execució d\'una tasca amb prioritat màxima"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Inici d\'una tasca amb prioritat alta"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Execució d\'una tasca amb prioritat alta"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Inici d\'una tasca predeterminada"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Execució d\'una tasca predeterminada"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Inici d\'una tasca amb prioritat baixa"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Execució d\'una tasca amb prioritat baixa"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Inici d\'una tasca amb prioritat mínima"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Execució d\'una tasca amb prioritat mínima"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Penalització per esgotar temps de la tasca"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"Càrrega"</item>
+    <item msgid="658627268149681677">"Migdiada"</item>
+    <item msgid="1599558140284643834">"Mode d\'estalvi de bateria"</item>
+    <item msgid="588427840913221601">"Estat del procés"</item>
+  </string-array>
 </resources>

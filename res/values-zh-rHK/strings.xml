@@ -5439,6 +5439,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"使用 2 張 SIM 卡時，此平板電腦將只能使用 4G。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"使用 2 張 SIM 卡時，此裝置將只能使用 4G。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"暫停執行快取應用程式"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"永不過期。"</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"租約永不過期。"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"允許在「設定」上顯示重疊式畫面"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"允許可以在其他應用程式上顯示内容的應用程式重疊「設定」畫面"</string>
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
@@ -5577,38 +5579,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"TARE 設定"</string>
     <string name="tare_revert" msgid="3855325741125236638">"還原為預設設定"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"已還原為預設設定。"</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"裝置充滿電時的最大可用電量"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"最大循環"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"裝置充滿電時的最低可用電量"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"修飾符"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"操作"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"獎賞"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"例外"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"無使用者介面的系統應用程式"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"其他應用程式"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"最上層顯示的活動"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"已查看通知"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"15 分鐘內看過通知"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"通知互動"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"小工具互動"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"其他使用者互動"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"啟動最高優先順序工作"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"正在執行最高優先順序工作"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"啟動高優先順序工作"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"正在執行高優先順序工作"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"啟動預設優先順序工作"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"正在執行預設優先順序工作"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"啟動低優先順序工作"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"正在執行低優先順序工作"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"啟動最低優先順序工作"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"正在執行最低優先順序工作"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"工作逾時處罰"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"充電"</item>
+    <item msgid="658627268149681677">"休息模式"</item>
+    <item msgid="1599558140284643834">"省電模式"</item>
+    <item msgid="588427840913221601">"處理狀態"</item>
+  </string-array>
 </resources>

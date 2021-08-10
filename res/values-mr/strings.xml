@@ -5437,6 +5437,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"दोन सिम वापरताना या टॅबलेटचे नेट 4G पुरते मर्यादित असेल. "<annotation id="url">"अधिक जाणून घ्या"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"दोन सिम वापरताना या डिव्हाइसचे नेट 4G पुरते मर्यादित असेल. "<annotation id="url">"अधिक जाणून घ्या"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"कॅशे केलेल्या ॲप्सची अंमलबजावणी निलंबित करा"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"कधीही एक्स्पायर होत नाही."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"मुदत कधीही एक्स्पायर होत नाही."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Settings यामध्ये स्‍क्रीन ओव्‍हरलेची अनुमती द्या"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Settings स्क्रीनवर ओव्हरले करण्यासाठी इतर अ‍ॅप्सवर प्रदर्शित करू शकणाऱ्या अ‍ॅप्सना अनुमती द्या"</string>
     <string name="media_controls_title" msgid="403271085636252597">"मीडिया"</string>
@@ -5575,38 +5577,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"TARE सेटिंग्ज"</string>
     <string name="tare_revert" msgid="3855325741125236638">"डीफॉल्ट सेटिंग्जवर परत बदला"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"सेटिंग्ज डीफॉल्टवर परत बदलली."</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"डिव्हाइस पूर्ण चार्ज झाले असताना कमाल शिल्लक"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"कमाल सर्क्युलेशन"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"डिव्हाइस पूर्ण चार्ज झाले असताना किमान शिल्लक"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"मॉडिफायर"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"कृती"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"रिवॉर्ड"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"वगळलेली"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"Headless System App"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"इतर ॲप"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"टॉप अ‍ॅक्टिव्हिटी"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"सूचना पाहिली"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"१५ मिनिटांमध्ये सूचना पाहिली"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"सूचनेशी संवाद साधला"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"विजेटशी संवाद साधला"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"वापरकर्त्याचा इतर संवाद"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"कमाल प्राधान्य असलेला जॉब सुरू करणे"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"कमाल प्राधान्य असलेला जॉब रन करणे"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"उच्च प्राधान्य असलेला जॉब सुरू करणे"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"उच्च प्राधान्य असलेला जॉब रन करणे"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"डीफॉल्ट प्राधान्य असलेला जॉब सुरू करणे"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"डीफॉल्ट प्राधान्य असलेला जॉब रन करणे"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"कमी प्राधान्य असलेला जॉब सुरू करणे"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"कमी प्राधान्य असलेला जॉब रन करणे"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"किमान प्राधान्य असलेला जॉब सुरू करणे"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"किमान प्राधान्य असलेला जॉब रन करणे"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"जॉब टाइमआउट झाल्याचा दंड"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"चार्ज होत आहे"</item>
+    <item msgid="658627268149681677">"डोझ"</item>
+    <item msgid="1599558140284643834">"पॉवर सेव्ह मोड"</item>
+    <item msgid="588427840913221601">"प्रक्रियेची स्थिती"</item>
+  </string-array>
 </resources>
