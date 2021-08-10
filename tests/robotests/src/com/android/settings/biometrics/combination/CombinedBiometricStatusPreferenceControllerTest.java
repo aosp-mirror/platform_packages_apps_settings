@@ -48,6 +48,8 @@ import org.robolectric.shadows.ShadowApplication;
 @RunWith(RobolectricTestRunner.class)
 public class CombinedBiometricStatusPreferenceControllerTest {
 
+    private static final String TEST_PREF_KEY = "foo";
+
     @Mock
     private LockPatternUtils mLockPatternUtils;
     @Mock
@@ -80,7 +82,7 @@ public class CombinedBiometricStatusPreferenceControllerTest {
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
         when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {1234});
-        mController = new CombinedBiometricStatusPreferenceController(mContext);
+        mController = new CombinedBiometricStatusPreferenceController(mContext, TEST_PREF_KEY);
     }
 
     @Test

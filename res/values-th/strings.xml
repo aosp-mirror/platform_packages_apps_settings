@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"ทำให้เล็กลง"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"ทำให้ใหญ่ขึ้น"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"ใช้การหมุนอัตโนมัติ"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"การตรวจจับใบหน้าใช้กล้องหน้าเพื่อเพิ่มความแม่นยำในการหมุนอัตโนมัติ รูปภาพจะไม่จัดเก็บหรือส่งไปยัง Google"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"ข้อความตัวอย่าง"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"พ่อมดมหัศจรรย์แห่งออซ"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"บทที่ 11: เมืองมรกตมหัศจรรย์แห่งออซ"</string>
@@ -289,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"เพิ่มข้อความในหน้าจอล็อก"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"เปิดใช้งานวิดเจ็ต"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"ปิดใช้โดยผู้ดูแลระบบ"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"แสดงตัวเลือกการปิดล็อก"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"แสดงตัวเลือกปุ่มเปิด/ปิดที่จะปิด Smart Lock, การปลดล็อกด้วยใบหน้า, การปลดล็อกด้วยลายนิ้วมือ และการแจ้งเตือนในหน้าจอล็อก"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"หน้าจอล็อกเมื่อสภาพแวดล้อมไม่น่าเชื่อถือ"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"หากเปิดใช้ อุปกรณ์จะล็อกเมื่อเอเจนต์ความน่าเชื่อถือล่าสุดเห็นว่าสภาพแวดล้อมไม่น่าเชื่อถือ"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"ไม่มี"</string>
@@ -357,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -1434,7 +1433,7 @@
     <string name="force_bold_text" msgid="4620929631102086716">"ทำข้อความเป็นตัวหนา"</string>
     <string name="title_font_size" msgid="570613010306330622">"ขนาดอักษร"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"ทำให้ข้อความมีขนาดใหญ่ขึ้นหรือเล็กลง"</string>
-    <string name="sim_lock_settings" msgid="4493069398250139205">"การตั้งค่าการล็อก​ซิมการ์ด"</string>
+    <string name="sim_lock_settings" msgid="4493069398250139205">"การตั้งค่าการล็อกซิ⁠ม⁠ก⁠าร์⁠ด"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"การล็อกซิมการ์ด"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"ปิด"</string>
     <string name="sim_lock_settings_summary_on" msgid="1562184566830887925">"ล็อกแล้ว"</string>
@@ -1856,7 +1855,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"การสแกนหาบลูทูธ"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"อนุญาตให้แอปและบริการต่างๆ สแกนหาอุปกรณ์ใกล้เคียงตลอดเวลา แม้บลูทูธจะปิดอยู่ การตั้งค่านี้ใช้เพื่อทำสิ่งต่างๆ เช่น ปรับปรุงฟีเจอร์และบริการตามสถานที่"</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"บริการตำแหน่ง"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"บริการตำแหน่ง"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"บริการตำแหน่ง"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"บริการตำแหน่งสำหรับการทำงาน"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"ใช้ตำแหน่งเพื่อตั้งค่าเขตเวลา"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"ต้องใช้ตำแหน่งของอุปกรณ์"</string>
@@ -2662,7 +2661,7 @@
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"โหมดประหยัดแบตเตอรี่เปิดอยู่"</string>
     <string name="battery_saver_link_a11y" msgid="740558184830458845">"ดูข้อมูลเพิ่มเติมเกี่ยวกับโหมดประหยัดแบตเตอรี่"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"อาจมีการจำกัดฟีเจอร์บางอย่าง"</string>
-    <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"การใช้งานแบตเตอรี่สูงกว่า"</string>
+    <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"การใช้งานแบตเตอรี่สูงกว่าปกติ"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"ดูแอปที่มีการใช้งานแบตเตอรี่สูงสุด"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"จำกัดการชาร์จชั่วคราว"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"เพื่อถนอมแบตเตอรี่ ดูข้อมูลเพิ่มเติม"</string>
@@ -2873,8 +2872,8 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"ระดับแบตเตอรี่ใน 24 ชม. ที่ผ่านมา"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"การใช้งานแอปใน 24 ชม. ที่ผ่านมา"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"การใช้งานระบบใน 24 ชม. ที่ผ่านมา"</string>
-    <string name="battery_system_usage_for" msgid="3248552137819897140">"การใช้งานระบบของ <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_app_usage_for" msgid="7309909074935858949">"การใช้งานแอปของ <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"การใช้งานระบบเมื่อ <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"การใช้งานแอปเมื่อ <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"AM"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"PM"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"รวม: ไม่ถึง 1 นาที"</string>
@@ -3549,7 +3548,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"สด, RGB, sRGB, สี, ธรรมชาติ, มาตรฐาน"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"สี, อุณหภูมิ, D65, D73, ขาว, เหลือง, น้ำเงิน, อบอุ่น, เย็น"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"เลื่อนเพื่อปลดล็อก, รหัสผ่าน, รูปแบบ, PIN"</string>
-    <string name="keywords_app_pinning" msgid="1564144561464945019">"การตรึงหน้าจอ"</string>
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"การปักหมุดหน้าจอ"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"ความท้าทายในการทำงาน, งาน, โปรไฟล์"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"โปรไฟล์งาน, โปรไฟล์ที่มีการจัดการ, รวม, การรวม, งาน, โปรไฟล์"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"ท่าทางสัมผัส"</string>
@@ -5353,8 +5352,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ต่อไป"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"ไม่เป็นไร"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"ตำแหน่ง"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"ผู้ให้บริการอาจรวบรวมข้อมูลตำแหน่งเมื่อใช้บริการนี้สำหรับหมายเลขฉุกเฉิน\n\nไปที่นโยบายความเป็นส่วนตัวของผู้ให้บริการเพื่อดูรายละเอียด"</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"คุณอาจใช้เวลาหรืออินเทอร์เน็ตที่เหลือต่อไม่ได้ โปรดสอบถามผู้ให้บริการก่อนนำออก"</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"การบันทึกเนื้อหา เนื้อหาแอป"</string>
     <string name="content_capture" msgid="868372905432812238">"เนื้อหาแอป"</string>

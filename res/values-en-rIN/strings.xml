@@ -288,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Add text on lock screen"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Enable widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Disabled by admin"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Show lockdown option"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Display power button option that turns off Smart Lock, Face Unlock, Fingerprint Unlock and notifications on the lock screen"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Lock screen when trust is lost"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"If enabled, the device will lock when the last trust agent loses trust"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"None"</string>
@@ -322,7 +320,7 @@
     <string name="security_passwords_title" msgid="4154420930973818581">"Privacy"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Not available"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Security status"</string>
-    <string name="security_dashboard_summary" msgid="7571035662779425918">"Screen lock, Find My Device app security"</string>
+    <string name="security_dashboard_summary" msgid="7571035662779425918">"Screen lock, Find My Device, app security"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Face added"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tap to set up face"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Face Unlock"</string>
@@ -356,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -1467,7 +1467,7 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Use <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="7182406911552216373">"Update preferred SIM card?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls and SMS messages?"</string>
-    <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Incorrect SIM PIN code; you must now contact your carrier to unlock your device."</string>
+    <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Incorrect SIM PIN code; you must now contact your operator to unlock your device."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
       <item quantity="other">Incorrect SIM PIN code, you have <xliff:g id="NUMBER_1">%d</xliff:g> remaining attempts.</item>
       <item quantity="one">Incorrect SIM PIN code, you have <xliff:g id="NUMBER_0">%d</xliff:g> remaining attempt before you must contact your operator to unlock your device.</item>
@@ -1855,7 +1855,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth scanning"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Location Services"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Location Services"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Location Services"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Location services for work"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Use location to set time zone"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Device location needed"</string>
@@ -3397,14 +3397,14 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G Calling"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Use LTE services to improve voice and other communications (recommended)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Use 4G services to improve voice and other communications (recommended)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Send contacts to carrier"</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Send contacts to operator"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Send your contacts’ phone numbers to provide enhanced features"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Send contacts to <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Send contacts to your carrier?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Send contacts to your operator?"</string>
     <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Your contacts’ phone numbers will be periodically sent to <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>This info identifies whether your contacts can use certain features, like video calls or some messaging features."</string>
-    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Your contacts’ phone numbers will be periodically sent to your carrier.<xliff:g id="EMPTY_LINE">
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Your contacts’ phone numbers will be periodically sent to your operator.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>This info identifies whether your contacts can use certain features, like video calls or some messaging features."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Preferred network type"</string>

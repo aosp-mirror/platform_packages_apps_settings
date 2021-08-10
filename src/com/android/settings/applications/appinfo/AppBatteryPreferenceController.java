@@ -173,6 +173,9 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         new AsyncTask<Void, Void, BatteryDiffEntry>() {
             @Override
             protected BatteryDiffEntry doInBackground(Void... unused) {
+                if (mPackageName == null) {
+                    return null;
+                }
                 final List<BatteryDiffEntry> batteryDiffEntries =
                         BatteryChartPreferenceController.getBatteryLast24HrUsageData(mContext);
                 if (batteryDiffEntries == null) {
@@ -186,8 +189,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
                                 == ConvertUtils.CONSUMER_TYPE_UID_BATTERY)
                         .filter(entry -> entry.mBatteryHistEntry.mUserId == mUserId)
                         .filter(entry -> {
-                            if (entry.mBatteryHistEntry.mPackageName
-                                    .equals(mPackageName)) {
+                            if (mPackageName.equals(entry.getPackageName())) {
                                 Log.i(TAG, "Return target application: "
                                         + entry.mBatteryHistEntry.mPackageName
                                         + " | uid: " + entry.mBatteryHistEntry.mUid
