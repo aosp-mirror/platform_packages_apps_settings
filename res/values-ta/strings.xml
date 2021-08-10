@@ -823,7 +823,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"பின்வருவதுடன் இணைக்கவும்:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;இது, இந்தக் கடவுச்சொல்லைக் காட்டுகிறது என்பதை உறுதிப்படுத்தவும்:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"பின்வருவதில் இருந்து:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;இந்தச் சாதனத்தை இணைக்கவா?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"இதனுடன் இணைக்க:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>இதை உள்ளிடவும்:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, Return அல்லது Enter ஐ அழுத்தவும்."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"உங்கள் தொடர்புகள் மற்றும் அழைப்பு வரலாற்றை அணுக அனுமதிக்கவும்"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"உங்கள் தொடர்புகள் மற்றும் அழைப்புப் பதிவை அணுக அனுமதிக்கவும்"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> உடன் இணைக்க முடியவில்லை."</string>
     <string name="bluetooth_preference_scan_title" msgid="3460316252463771851">"சாதனங்களுக்கு ஸ்கேன் செய்"</string>
@@ -5436,6 +5436,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"2 சிம்களைப் பயன்படுத்தும்போது இந்த டேப்லெட்டை 4Gயுடன் மட்டுமே இணைக்க முடியும். "<annotation id="url">"மேலும் அறிக"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"2 சிம்களைப் பயன்படுத்தும்போது இந்தச் சாதனத்தை 4Gயுடன் மட்டுமே இணைக்க முடியும். "<annotation id="url">"மேலும் அறிக"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"தற்காலிக சேமிப்பக ஆப்ஸின் செயல்பாட்டை நிறுத்துதல்"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"ஒருபோதும் காலாவதியாகாது."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"குத்தகை ஒருபோதும் காலாவதியாகாது."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"அமைப்புகளில் திரை மேலடுக்கை அனுமதித்தல்"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"அமைப்புகள் திரைகளுக்கு மேலாகக் காட்டுவதற்கு மற்ற ஆப்ஸில் டிஸ்ப்ளே செய்யப்படக்கூடிய ஆப்ஸை அனுமதிக்கும்"</string>
     <string name="media_controls_title" msgid="403271085636252597">"மீடியா"</string>
@@ -5574,38 +5576,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"TARE அமைப்புகள்"</string>
     <string name="tare_revert" msgid="3855325741125236638">"இயல்புநிலை அமைப்புகளுக்கு மாற்றியமை"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"அமைப்புகள் இயல்புநிலைக்கு மாற்றப்பட்டன."</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"அதிகபட்ச பேட்டரி இருப்பு"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"அதிகபட்ச சர்குலேஷன்"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"குறைந்தபட்ச பேட்டரி இருப்பு"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"மாற்றிகள்"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"செயல்கள்"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"ரிவார்டுகள்"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"விலக்களிக்கப்பட்டவை"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"காட்சி இடைமுகமற்ற சிஸ்டம் ஆப்ஸ்"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"பிற ஆப்ஸ்"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"சிறந்த செயல்பாடு"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"அறிவிப்பு பார்க்கப்பட்டது"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"15 நிமிடங்களுக்குள் பார்க்கப்பட்டது"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"அறிவிப்பைப் பார்த்துள்ளார்"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"விட்ஜெட்டின் பங்கேற்பு"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"வேறு பயனர் பார்த்துள்ளார்"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"அதிகபட்ச முன்னுரிமை வேலை தொடங்குகிறது"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"அதிகபட்ச முன்னுரிமை வேலை இயங்குகிறது"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"அதிக முன்னுரிமை வேலை தொடங்குகிறது"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"அதிக முன்னுரிமை வேலை இயங்குகிறது"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"இயல்புநிலை வேலை தொடங்குகிறது"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"இயல்புநிலை வேலை இயங்குகிறது"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"குறைந்த முன்னுரிமை வேலை தொடங்குகிறது"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"குறைந்த முன்னுரிமை வேலை இயங்குகிறது"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"குறைந்தபட்ச முன்னுரிமை வேலை தொடங்குகிறது"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"குறைந்தபட்ச முன்னுரிமை வேலை இயங்குகிறது"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"வேலை நேர முடிவுக்கான நடவடிக்கை"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"சார்ஜாகிறது"</item>
+    <item msgid="658627268149681677">"பேட்டரி சேமிப்பு"</item>
+    <item msgid="1599558140284643834">"பவர் சேமிப்புப் பயன்முறை"</item>
+    <item msgid="588427840913221601">"செயலாக்க நிலை"</item>
+  </string-array>
 </resources>
