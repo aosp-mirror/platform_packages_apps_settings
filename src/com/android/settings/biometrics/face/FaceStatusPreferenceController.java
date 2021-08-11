@@ -53,7 +53,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(KEY_FACE_SETTINGS);
+        mPreference = screen.findPreference(mPreferenceKey);
     }
 
     @Override
