@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"சிறிதாக்கு"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"பெரிதாக்கு"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"\'தானாகச் சுழற்றுதலைப்\' பயன்படுத்து"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"தானாகச் சுழற்றுதலின் துல்லியத்தை மேம்படுத்த, முகம் கண்டறிதல் அம்சம் முன்பக்கக் கேமராவைப் பயன்படுத்துகிறது. படங்கள் ஒருபோதும் சேமிக்கப்படாது, Googleளுக்கும் அனுப்பப்படாது."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"மாதிரி உரை"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"தி விசார்ட் ஆஃப் ஓஸ்"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"அத்தியாயம் 11: ஓஸின் அற்புதமான மரகத நகரம்"</string>
@@ -289,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"லாக்ஸ்கிரீனில் உரையைச் சேர்"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"விட்ஜெட்களை இயக்கு"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"நிர்வாகி முடக்கியுள்ளார்"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"பூட்டு விருப்பத்தைக் காட்டு"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Smart Lock, முகம் காட்டித் திறத்தல், கைரேகை அன்லாக், பூட்டுத் திரையில் தோன்றும் அறிவிப்புகள் ஆகியவற்றை முடக்கக்கூடிய \'பவர் பட்டன்\' விருப்பத்தைக் காட்டும்"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"நம்பிக்கை இழந்ததும் திரை பூட்டப்படுதல்"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"இயக்கப்பட்டால், கடைசி நம்பகமான ஏஜெண்ட் நம்பிக்கையை இழந்ததும் சாதனம் பூட்டப்படும்"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"ஏதுமில்லை"</string>
@@ -357,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -824,7 +823,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"பின்வருவதுடன் இணைக்கவும்:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;இது, இந்தக் கடவுச்சொல்லைக் காட்டுகிறது என்பதை உறுதிப்படுத்தவும்:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"பின்வருவதில் இருந்து:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;இந்தச் சாதனத்தை இணைக்கவா?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"இதனுடன் இணைக்க:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>இதை உள்ளிடவும்:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, Return அல்லது Enter ஐ அழுத்தவும்."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"உங்கள் தொடர்புகள் மற்றும் அழைப்பு வரலாற்றை அணுக அனுமதிக்கவும்"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"உங்கள் தொடர்புகள் மற்றும் அழைப்புப் பதிவை அணுக அனுமதிக்கவும்"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> உடன் இணைக்க முடியவில்லை."</string>
     <string name="bluetooth_preference_scan_title" msgid="3460316252463771851">"சாதனங்களுக்கு ஸ்கேன் செய்"</string>
@@ -1593,7 +1592,7 @@
     <string name="storage_title_usb" msgid="1332488715547400452">"USB கணினி இணைப்பு"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"இவ்வாறு இணை"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"மீடியா சாதனம் (MTP)"</string>
-    <string name="usb_mtp_summary" msgid="6293240861011560842">"நீங்கள் Windows இல் மீடியா கோப்புகளை இடமாற்றவும் அல்லது Mac இல் Android கோப்பின் இடமாற்றத்தைப் பயன்படுத்தவும் அனுமதிக்கிறது (www.android.com/filetransfer ஐப் பார்க்கவும்)"</string>
+    <string name="usb_mtp_summary" msgid="6293240861011560842">"நீங்கள் Windows இல் மீடியா கோப்புகளை இடமாற்றவும் அல்லது Mac இல் Android ஃபைலின் இடமாற்றத்தைப் பயன்படுத்தவும் அனுமதிக்கிறது (www.android.com/filetransfer ஐப் பார்க்கவும்)"</string>
     <string name="usb_ptp_title" msgid="4496529268189091846">"கேமரா (PTP)"</string>
     <string name="usb_ptp_summary" msgid="8382539472311655671">"கேமரா மென்பொருளைப் பயன்படுத்தி நீங்கள் படங்களை அனுப்பவும், மேலும் MTP ஆதரிக்காத கணினிகளில் எந்தக் கோப்புகளையும் பரிமாற்றவும் உதவுகிறது."</string>
     <string name="usb_midi_title" msgid="1139558846427981761">"MIDI"</string>
@@ -1856,7 +1855,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"புளூடூத் ஸ்கேன் செய்தல்"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"புளூடூத் ஆஃப் செய்யப்பட்டிருந்தாலும்கூட, எந்தநேரத்திலும் அருகிலுள்ள சாதனங்களைத் தேட, ஆப்ஸையும் சேவைகளையும் அனுமதிக்கும். மற்றவற்றிற்கும் இதைப் பயன்படுத்தலாம், உதாரணமாக, இருப்பிடம் சார்ந்த அம்சங்கள் மற்றும் சேவைகளை மேம்படுத்துதல்."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"இருப்பிடச் சேவைகள்"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"இருப்பிடச் சேவைகள்"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"இருப்பிடச் சேவைகள்"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"பணிக் கணக்கிற்கான இருப்பிடச் சேவைகள்"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"நேர மண்டலத்தை அமைக்க இருப்பிடத்தைப் பயன்படுத்துக"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"சாதனத்தின் இருப்பிடம் தேவை"</string>
@@ -3767,7 +3766,7 @@
     <string name="notification_history" msgid="8663811361243456201">"இதுவரை வந்த அறிவிப்புகள்"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"\'இதுவரை வந்த அறிவிப்புகள்\' அம்சத்தைப் பயன்படுத்து"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"\'இதுவரை வந்த அறிவிப்புகள்\' அம்சம் ஆஃப் செய்யப்பட்டது"</string>
-    <string name="notification_history_off_summary" msgid="671359587084797617">"சமீபத்திய அறிவிப்புகளையும் ஒத்திவைக்கப்பட்ட அறிவிப்புகளையும் பார்க்க அறிவிப்பு வரலாற்றை ஆன் செய்யவும்"</string>
+    <string name="notification_history_off_summary" msgid="671359587084797617">"சமீபத்திய அறிவிப்புகளையும் ஒத்திவைக்கப்பட்ட அறிவிப்புகளையும் பார்க்க \'இதுவரை வந்த அறிவிப்புகள்\' அம்சத்தை ஆன் செய்யவும்"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"சமீபத்திய அறிவிப்புகள் எதுவுமில்லை"</string>
     <string name="history_toggled_on_summary" msgid="9034278971358282728">"சமீபத்திய மற்றும் ஒத்திவைக்கப்பட்ட அறிவிப்புகள் இங்கே காட்டப்படும்"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"அறிவிப்பு அமைப்புகளைக் காட்டு"</string>
@@ -5353,8 +5352,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"தொடர்க"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"வேண்டாம்"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"இருப்பிடம்"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"அவசர அழைப்புகளுக்கு இந்தச் சேவையை நீங்கள் உபயோகிக்கும்போது மொபைல் நிறுவனம் உங்கள் இருப்பிடத்தைச் சேகரிக்கக்கூடும்.\n\nவிவரங்களுக்கு உங்கள் மொபைல் நிறுவனத்தின் தனியுரிமைக் கொள்கையைப் பார்க்கவும்."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"மீதமிருக்கும் நேரம் அல்லது தரவிற்கான அணுகலை நீங்கள் இழக்கக்கூடும். இதை அகற்றுவதற்கு முன்பாக வழங்குநரைத் தொடர்புகொள்ளவும்."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"உள்ளடக்கத்தைச் சேமித்தல், ஆப்ஸ் உள்ளடக்கம்"</string>
     <string name="content_capture" msgid="868372905432812238">"ஆப்ஸ் உள்ளடக்கம்"</string>

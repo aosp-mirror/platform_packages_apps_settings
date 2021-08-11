@@ -55,8 +55,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Уменьшить"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увеличить"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Автоповорот"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Функция \"Распознавание лиц\" улучшает точность автоповорота с помощью фронтальной камеры. Изображения никогда не сохраняются и не отправляются в Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Пример текста"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Удивительный волшебник из страны Оз"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Глава 11. Изумрудный Город страны Оз"</string>
@@ -293,8 +292,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Текст на заблокированном экране"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Включить виджеты"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Отключено администратором"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Добавить кнопку блокировки"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Добавить в меню кнопки питания возможность отключения Smart Lock, фейсконтроля, разблокировки по отпечатку пальца и уведомлений на заблокированном экране"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Блокировать экран при утрате доверия"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Если параметр включен, устройство блокируется, когда последний агент доверия теряет доверие"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Нет текста"</string>
@@ -363,6 +360,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -1900,7 +1899,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Поиск Bluetooth-устройств"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Разрешить приложениям и сервисам искать устройства поблизости, даже когда Bluetooth отключен. Это может улучшить работу функций и сервисов, использующих данные о местоположении."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Геолокация"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Геолокация"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Геолокация"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Геолокация для работы"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Определять часовой пояс по местоположению"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Нет доступа к данным о местоположении"</string>
@@ -2438,7 +2437,7 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Задержка при нажатии и удержании"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Инверсия цветов"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Использовать инверсию цветов"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Инверсия цветов позволяет сделать светлые цвета тёмными.&lt;br/&gt;&lt;br/&gt; Обратите внимание: &lt;ol&gt; &lt;li&gt; Тёмные цвета станут светлыми.&lt;/li&gt; &lt;li&gt; Инверсия цветов будет также применяться и в медиаконтенте и изображениях.&lt;/li&gt; &lt;li&gt; Чтобы сделать фон экрана тёмным, включите тёмную тему. Тёмная тема поддерживается только в некоторых приложениях, а инверсия цветов – во всех.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Инверсия цветов позволяет сделать светлые цвета тёмными.&lt;br/&gt;&lt;br/&gt; Обратите внимание: &lt;ol&gt; &lt;li&gt; Тёмные цвета станут светлыми.&lt;/li&gt; &lt;li&gt; Инверсия цветов будет также применяться и в медиаконтенте и изображениях.&lt;/li&gt; &lt;li&gt; Чтобы сделать фон экрана тёмным, включите тёмную тему. Тёмная тема поддерживается только в некоторых приложениях, а инверсия цветов – во всех.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Автонажатие (время задержки)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Автоматическое нажатие работает с подключенной мышью. Если указатель остается неподвижным в течение выбранного времени, выполняется клик."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Отключено"</string>
@@ -2502,8 +2501,8 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Дополнительно уменьшить яркость экрана"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Сделать экран телефона темнее, чем при минимальной яркости"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Сделать экран планшета темнее, чем при минимальной яркости"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Сделайте экран темнее для удобства чтения.&lt;br/&gt;&lt;br/&gt; Это может помочь, если: &lt;ol&gt;&lt;li&gt; при минимальной яркости экран телефона все равно слишком яркий;&lt;/li&gt; &lt;li&gt; вы используете телефон в темноте, например ночью или в темной комнате перед сном.&lt;/li&gt;&lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Сделайте экран темнее для удобства чтения.&lt;br/&gt;&lt;br/&gt;Это может помочь, если:&lt;ol&gt;&lt;li&gt; при минимальной яркости экран планшета все равно слишком яркий;&lt;/li&gt;&lt;li&gt; вы используете планшет в темноте, например ночью или в темной комнате перед сном.&lt;/li&gt;&lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Сделайте экран темнее для удобства чтения.&lt;br/&gt;&lt;br/&gt; Это может помочь, если: &lt;ol&gt;&lt;li&gt; при минимальной яркости экран телефона все равно слишком яркий;&lt;/li&gt; &lt;li&gt; вы используете телефон в темноте, например ночью или в темной комнате перед сном.&lt;/li&gt;&lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Сделайте экран темнее для удобства чтения.&lt;br/&gt;&lt;br/&gt;Это может помочь, если:&lt;ol&gt;&lt;li&gt; при минимальной яркости экран планшета все равно слишком яркий;&lt;/li&gt;&lt;li&gt; вы используете планшет в темноте, например ночью или в темной комнате перед сном.&lt;/li&gt;&lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Интенсивность"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Темнее"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Светлее"</string>
@@ -2797,7 +2796,7 @@
       <item quantity="other">%1$d приложения с ограниченным доступом</item>
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
-    <string name="battery_missing_message" msgid="400958471814422770">"Не удается получить данные об уровне заряда батареи."</string>
+    <string name="battery_missing_message" msgid="400958471814422770">"Не удалось узнать уровень заряда батареи."</string>
     <string name="battery_missing_link_message" msgid="6021565067124898074"></string>
     <string name="battery_missing_link_a11y_message" msgid="3310971406602316323">"Подробнее об этой ошибке…"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Остановить приложение?"</string>
@@ -2947,8 +2946,8 @@
     <string name="battery_percentage" msgid="1779934245963043490">"Уровень заряда батареи"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Показывать уровень заряда батареи в строке состояния"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Уровень заряда батареи за последние 24 часа"</string>
-    <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Расход со стороны приложений за 24 часа"</string>
-    <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Расход со стороны системы за последние 24 часа"</string>
+    <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Расход приложениями за 24 часа"</string>
+    <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Расход системой за 24 часа"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Использование системой за <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Использование приложениями за <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"AM"</string>
@@ -4713,7 +4712,7 @@
     <string name="condition_expand_show" msgid="1501084007540953213">"Показать"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"Скрыть"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"Точка доступа активна"</string>
-    <string name="condition_airplane_title" msgid="5847967403687381705">"Режим полета включен"</string>
+    <string name="condition_airplane_title" msgid="5847967403687381705">"Включен режим полета"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"Сети недоступны"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"Режим \"Не беспокоить\" включен"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Все звуковые сигналы выключены"</string>
@@ -4765,7 +4764,7 @@
     <string name="cellular_data_usage" msgid="5874156338825285334">"Мобильный трафик"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Трафик приложений"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"Трафик Wi-Fi"</string>
-    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Передача данных не через оператора связи"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Передача данных не по мобильной сети"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Передача данных Ethernet"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
@@ -5531,8 +5530,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ДАЛЕЕ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"НЕТ"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Местоположение"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Когда вы пользуетесь этим сервисом для экстренных вызовов, ваш оператор связи может собирать данные о местоположении устройства.\n\nЧтобы узнать больше, прочитайте Политику конфиденциальности вашего оператора."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Вы можете потерять доступ к оставшимся минутам или трафику. Прежде чем выполнять удаление, обратитесь к оператору связи."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"content capture, контент приложения"</string>
     <string name="content_capture" msgid="868372905432812238">"Контент приложений"</string>
@@ -5648,7 +5646,7 @@
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"Мобильный интернет"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Подключено"</string>
-    <string name="mobile_data_no_connection" msgid="905897142426974030">"Нет подключения к интернету"</string>
+    <string name="mobile_data_no_connection" msgid="905897142426974030">"Нет подключения"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"Без автоподключения к мобильному интернету"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Нет других доступных сетей"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"Нет доступных сетей"</string>

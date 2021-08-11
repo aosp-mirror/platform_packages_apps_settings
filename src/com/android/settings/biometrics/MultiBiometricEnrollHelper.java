@@ -37,6 +37,7 @@ public class MultiBiometricEnrollHelper {
     private static final int REQUEST_FINGERPRINT_ENROLL = 3001;
 
     public static final String EXTRA_ENROLL_AFTER_FACE = "enroll_after_face";
+    public static final String EXTRA_SKIP_PENDING_ENROLL = "skip_pending_enroll";
 
     @NonNull private final FragmentActivity mActivity;
     private final long mGkPwHandle;
