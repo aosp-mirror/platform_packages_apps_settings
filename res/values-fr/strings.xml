@@ -5436,6 +5436,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Lorsque vous utilisez deux profils SIM, cette tablette est limitée à la 4G. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Lorsque vous utilisez deux profils SIM, cet appareil est limité à la 4G. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspendre l\'exécution pour applis mises en cache"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"Durée illimitée."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"Bail à durée illimitée."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Autoriser superpositions d\'écran dans paramètres"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Autoriser les applications pouvant se superposer à d\'autres à se superposer aux écrans de paramètres"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multimédia"</string>
@@ -5574,38 +5576,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"Paramètres TARE"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Rétablir les paramètres par défaut"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Paramètres par défaut rétablis."</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Solde maximal à satiété"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Circulation maximale"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Solde minimal à satiété"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Modificateurs"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Actions"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Récompenses"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Exclues"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"Appli système sans interface graphique"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Autre application"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Activité principale"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Notification vue"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notification vue dans les 15 minutes"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Interaction avec la notification"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Interaction avec un widget"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Autre interaction de l\'utilisateur"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Lancement de la tâche à priorité max."</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Exécution de la tâche à priorité max."</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Lancement de la tâche prioritaire"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Exécution de la tâche prioritaire"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Lancement de la tâche par défaut"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Exécution de la tâche par défaut"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Lancement de la tâche non prioritaire"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Exécution de la tâche non prioritaire"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Lancement de la tâche à priorité min."</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Exécution de la tâche à priorité min."</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Pénalité pour expiration du délai"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"En charge"</item>
+    <item msgid="658627268149681677">"Sommeil"</item>
+    <item msgid="1599558140284643834">"Mode Économie d\'énergie"</item>
+    <item msgid="588427840913221601">"État du processus"</item>
+  </string-array>
 </resources>

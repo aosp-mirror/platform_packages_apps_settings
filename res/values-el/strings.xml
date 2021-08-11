@@ -5436,6 +5436,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Κατά τη χρήση 2 SIM, αυτό το tablet θα περιορίζεται στη χρήση 4G. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Κατά τη χρήση 2 SIM, αυτή η συσκευή θα περιορίζεται στη χρήση 4G. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Αναστολή εκτέλ. εφαρμογών αποθηκ. στην κρυφή μνήμη"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"Δεν λήγει ποτέ."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"Η ενοικίαση δεν λήγει ποτέ."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Να επιτρέπονται οι επικαλ. οθόνης στις Ρυθμίσεις"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Να επιτρέπονται εφαρμογές που μπορούν να εμφανίζονται πάνω από άλλες εφαρμογές για επικάλυψη των οθονών ρυθμίσεων"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Μέσα"</string>
@@ -5574,38 +5576,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"Ρυθμίσεις TARE"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Επαναφορά στις προεπιλεγμένες ρυθμίσεις"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Έγινε επαναφορά στις προεπιλ. ρυθμίσεις."</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Μέγιστη ισορροπία πλήρους φόρτισης"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Μέγιστη κυκλοφορία"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Ελάχιστη ισορροπία πλήρους φόρτισης"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Μεταβλητές"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Ενέργειες"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Επιβραβεύσεις"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Εξαιρούμενες"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"Headless εφαρμογή συστήματος"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Άλλη εφαρμογή"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Κορυφαία δραστηριότητα"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Η ειδοποίηση προβλήθηκε"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Η ειδοποίηση προβλήθηκε εντός 15 λεπτών"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Αλληλεπίδραση ειδοποίησης"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Αλληλεπίδραση με γραφικό στοιχείο"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Άλλη αλληλεπίδραση χρήστη"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Έναρξη εργασίας ύψιστης προτεραιότητας"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Εκτέλεση εργασίας ύψιστης προτεραιότητας"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Έναρξη εργασίας υψηλής προτεραιότητας"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Εκτέλεση εργασίας υψηλής προτεραιότητας"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Έναρξη εργασίας προεπιλεγμένης προτερ."</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Εκτέλεση εργασίας προεπιλεγμένης προτερ."</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Έναρξη εργασίας χαμηλής προτεραιότητας"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Εκτέλεση εργασίας χαμηλής προτεραιότητας"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Έναρξη εργασίας χαμηλότερης προτεραιότ."</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Εκτέλεση εργασίας χαμηλότ. προτεραιότ."</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Ποινή χρονικού ορίου εργασίας"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"Φόρτιση"</item>
+    <item msgid="658627268149681677">"Υπνάκος"</item>
+    <item msgid="1599558140284643834">"Λειτουργία εξοικονόμησης ενέργειας"</item>
+    <item msgid="588427840913221601">"Κατάσταση επεξεργασίας"</item>
+  </string-array>
 </resources>

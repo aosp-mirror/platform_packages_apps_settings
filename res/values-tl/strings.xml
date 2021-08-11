@@ -5436,6 +5436,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Kapag gumagamit ng 2 SIM, magiging limitado sa 4G ang tablet na ito. "<annotation id="url">"Matuto pa"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Kapag gumagamit ng 2 SIM, magiging limitado sa 4G ang device na ito. "<annotation id="url">"Matuto pa"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspindihin: pag-execute para sa naka-cache na app"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"Hindi kailanman nag-e-expire."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"Hindi kailanman nag-e-expire ang lease."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Payagan ang pag-overlay sa screen sa Mga Setting"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Payagang mag-overlay sa mga screen ng Mga Setting ang mga app na puwedeng lumabas sa ibabaw ng ibang app"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
@@ -5574,38 +5576,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"Mga Setting ng TARE"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Bumalik sa Mga Default na Setting"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Ibinalik sa default ang mga setting."</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Max na Balanse Kapag Ganap na Na-charge"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Maximum na Pag-ikot"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Min na Balanse Kapag Ganap na Na-charge"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Mga Modifier"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Mga Pagkilos"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Mga Reward"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Hindi Kasama"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"Headless System App"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Ibang App"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Nangungunang Aktibidad"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Nakita ang Notification"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Nakita ang Notification sa loob ng 15Min"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Interaction sa Notification"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Interaction sa Widget"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Interaction ng Ibang User"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Sinimulan: Trabaho (Max na Priyoridad)"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Gumagana: Trabaho (Max na Priyoridad)"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Sinimulan: Trabaho (Mataas na Priyoridad)"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Gumagana: Trabaho (Mataas na Priyoridad)"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Sinimulan: Trabaho (Default na Priyoridad)"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Gumagana: Trabaho (Default na Priyoridad)"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Sinimulan: Trabaho (Mababang Priyoridad)"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Gumagana: Trabaho (Mababang Priyoridad)"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Sinimulan: Trabaho (Min na Priyoridad)"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Gumagana: Trabaho (Min na Priyoridad)"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Penalty sa Timeout ng Trabaho"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"Pag-charge"</item>
+    <item msgid="658627268149681677">"Pag-doze"</item>
+    <item msgid="1599558140284643834">"Power Save Mode"</item>
+    <item msgid="588427840913221601">"Status ng Pagproseso"</item>
+  </string-array>
 </resources>

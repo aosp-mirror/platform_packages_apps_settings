@@ -2565,7 +2565,7 @@
     <string name="keywords_accessibility" msgid="4263443239404659143">"Facilidade de uso, fácil acceso, asistencia, asistencial"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"Lupa de ventá, zoom, ampliación, visión reducida, aumentar tamaño, agrandar"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
-    <string name="keywords_live_caption" msgid="1667203998080567556">"Subtítulos, subtitulado, Transcrición instantánea, problemas auditivos, perda de audición, subtitulado en tempo real, CART, síntese de voz, subtítulo"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"Subtítulos, subtitulado, Transcrición instantánea, problemas auditivos, perda de audición, subtitulado en tempo real, CART, conversión de voz a texto, subtítulo"</string>
     <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
     <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
     <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
@@ -2945,7 +2945,7 @@
     <string name="voice_input_settings_title" msgid="3708147270767296322">"Entrada de voz"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Servizos de entrada de voz"</string>
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Interacción e palabra de activación completa"</string>
-    <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Síntese de voz simple"</string>
+    <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Conversión simple de voz a texto"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Este servizo de entrada de voz poderá supervisar que a voz sempre estea activada e controlar as aplicacións compatibles coa voz no teu nome. Procede da aplicación <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Queres activar o uso deste servizo?"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Motor preferido"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Configuración do motor"</string>
@@ -5436,6 +5436,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Cando se utilicen dúas SIM, esta tableta limitarase á rede 4G. "<annotation id="url">"Máis información"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Cando se utilicen dúas SIM, este dispositivo limitarase á rede 4G. "<annotation id="url">"Máis información"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspender execución das apps da memoria caché"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"Non caduca nunca."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"A concesión non caduca nunca."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permitir superposic. na pantalla en Configuración"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permite que as aplicacións que se poden mostrar sobre outras se superpoñan nas pantallas da aplicación Configuración"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Contido multimedia"</string>
@@ -5574,38 +5576,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"Configuración de TARE"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Volver á configuración predeterminada"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Volveuse á configuración predeterminada."</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Saldo máximo con carga completa"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Circulación máxima"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Saldo mínimo con carga completa"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Modificadores"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Accións"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Recompensas"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Excluídas"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"Aplicación do sistema sen interface"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Outra aplicación"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Actividade principal"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Notificación vista"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notificación vista nun prazo de 15 min"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Interacción coa notificación"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Interacción co widget"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Outra interacción do usuario"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Inicio de tarefa de prioridade máxima"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Execución de tarefa de prioridade máxima"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Inicio de tarefa de prioridade alta"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Execución de tarefa de prioridade alta"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Inicio tarefa prioridade predeterminada"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Execución tarefa prioridade predetermin."</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Inicio de tarefa de prioridade baixa"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Execución de tarefa de prioridade baixa"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Inicio de tarefa de prioridade mínima"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Execución de tarefa de prioridade mínima"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Penalización: tempo da tarefa esgotado"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"Cargando"</item>
+    <item msgid="658627268149681677">"Sesta"</item>
+    <item msgid="1599558140284643834">"Modo de aforro de batería"</item>
+    <item msgid="588427840913221601">"Estado do proceso"</item>
+  </string-array>
 </resources>

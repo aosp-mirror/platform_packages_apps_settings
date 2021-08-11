@@ -5436,6 +5436,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"২ খন ছিম ব্যৱহাৰ কৰাৰ সময়ত এই টেবলেটটোৰ ব্যৱহাৰ 4Gত সীমিত হৈ পৰিব। "<annotation id="url">"অধিক জানক"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"২ খন ছিম ব্যৱহাৰ কৰাৰ সময়ত এই ডিভাইচটোৰ ব্যৱহাৰ 4Gত সীমিত হৈ পৰিব। "<annotation id="url">"অধিক জানক"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"কেশ্ব কৰা এপ্‌সমূহৰ বাবে কাৰ্যকৰীকৰণ নিলম্বন কৰক"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"ম্যাদ কেতিয়াও উকলি নাযায়।"</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"লীজৰ ম্যাদ কেতিয়াও উকলি নাযায়।"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"ছেটিংসমূহত স্ক্ৰীন অ’ভাৰলে’ৰ অনুমতি দিয়ে"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"এনে এপ্‌সমূহক অনুমতি দিয়ে যি ছেটিংসমূহৰ স্ক্ৰীনসমূহ অ’ভাৰলে’ কৰিবলৈ অন্য এপ্‌সমূহৰ ওপৰত প্ৰদৰ্শিত হ’ব পাৰে"</string>
     <string name="media_controls_title" msgid="403271085636252597">"মিডিয়া"</string>
@@ -5574,38 +5576,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"TARE ছেটিং"</string>
     <string name="tare_revert" msgid="3855325741125236638">"ছেটিং ডিফ’ল্ট অৱস্থালৈ নিয়ক"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"ছেটিং ডিফ’ল্ট অৱস্থালৈ নিয়া হ’ল।"</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"ডিভাইচ সম্পূৰ্ণ চাৰ্জ হ’লে থকা সৰ্বাধিক বেলেঞ্চ"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"সৰ্বাধিক প্ৰচলন"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"ডিভাইচ সম্পূৰ্ণ চাৰ্জ হ’লে থকা সৰ্বনিম্ন বেলেঞ্চ"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"সংশোধক"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"কাৰ্য"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"পুৰস্কাৰ"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"ৰেহাই দিয়া হৈছে"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"ব্যৱহাৰকাৰীৰ ইণ্টাৰফে’চ নথকা এপ্‌"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"অন্য এপ্‌"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"শীৰ্ষ কাৰ্যকলাপ"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"জাননী চোৱা"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"১৫ মিনিটৰ ভিতৰত চোৱা জাননী"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"জাননী ব্যৱহাৰ কৰা"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"ৱিজেট ব্যৱহাৰ কৰা"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"ব্যৱহাৰকাৰীয়ে অন্য ধৰণে এপ্‌ ব্যৱহাৰ কৰা"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"সৰ্বোচ্চ অগ্ৰাধিকাৰপ্ৰাপ্ত কাম আৰম্ভ কৰা"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"সৰ্বোচ্চ অগ্ৰাধিকাৰপ্ৰাপ্ত কাম চলি থকা"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"উচ্চ অগ্ৰাধিকাৰপ্ৰাপ্ত কাম আৰম্ভ কৰা"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"উচ্চ অগ্ৰাধিকাৰপ্ৰাপ্ত কাম চলি থকা"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"ডিফ’ল্ট হিচাপে কাম আৰম্ভ কৰা"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"ডিফ’ল্ট হিচাপে কাম চলি থকা"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"কম অগ্ৰাধিকাৰপ্ৰাপ্ত কাম আৰম্ভ কৰা"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"কম অগ্ৰাধিকাৰপ্ৰাপ্ত কাম চলি থকা"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"সৰ্বনিম্ন অগ্ৰাধিকাৰপ্ৰাপ্ত কাম আৰম্ভ কৰা"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"সৰ্বনিম্ন অগ্ৰাধিকাৰপ্ৰাপ্ত কাম চলি থকা"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"কামৰ সময় উকলাৰ জৰিমনা"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"চাৰ্জ হৈ আছে"</item>
+    <item msgid="658627268149681677">"ড’জ"</item>
+    <item msgid="1599558140284643834">"পাৱাৰ সঞ্চয়কাৰী ম’ড"</item>
+    <item msgid="588427840913221601">"প্ৰক্ৰিয়াৰ স্থিতি"</item>
+  </string-array>
 </resources>
