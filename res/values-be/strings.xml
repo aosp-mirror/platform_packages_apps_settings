@@ -5616,6 +5616,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Пры выкарыстанні 2 SIM-карт гэты планшэт можа падключыцца толькі да сеткі 4G. "<annotation id="url">"Даведацца больш"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Пры выкарыстанні 2 SIM-карт гэта прылада можа падключыцца толькі да сеткі 4G. "<annotation id="url">"Даведацца больш"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Прыпыніць выкананне для кэшаваных праграм"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"Бестэрмінова."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"Бестэрміновая арэнда."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дазволіць экранныя накладкі на Налады"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дазвольце праграмам, якія могуць паказвацца паверх іншых, накладацца на экраны Налад"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Мультымедыя"</string>
@@ -5754,38 +5756,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"Налады TARE"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Вярнуцца да стандартных налад"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Налады скінуты да стандартных."</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Максімальны баланс пры поўнай зарадцы"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Максімальнае абарачэнне"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Мінімальны баланс пры поўнай зарадцы"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Мадыфікатары"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Дзеянні"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Бонусы"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Унесена ў спіс выключэнняў"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"Сістэмная праграма без інтэрфейсу"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Іншая праграма"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Найвышэйшая актыўнасць"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Апавяшчэнне прагледжана"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Апавяшчэнне прагледжана на працягу 15 хв"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Узаемадзеянне з апавяшчэннем"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Узаемадзеянне з віджэтам"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Іншае ўзаемадзеянне карыстальніка"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Запуск задачы з максімальным прыярытэтам"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Выконваецца задача з макс. прыярытэтам"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Запуск задачы з высокім прыярытэтам"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Выконваецца задача з высокім прыярытэтам"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Запуск стандартнай задачы"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Выконваецца стандартная задача"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Запуск задачы з нізкім прыярытэтам"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Выконваецца задача з нізкім прыярытэтам"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Запуск задачы з мінімальным прыярытэтам"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Выконваецца задача з мін. прыярытэтам"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Штраф за час чакання"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"Зарадка"</item>
+    <item msgid="658627268149681677">"Дрымота"</item>
+    <item msgid="1599558140284643834">"Рэжым эканоміі зараду"</item>
+    <item msgid="588427840913221601">"Стан працэсу"</item>
+  </string-array>
 </resources>

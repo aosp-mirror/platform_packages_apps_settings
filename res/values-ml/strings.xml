@@ -5436,6 +5436,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"2 സിമ്മുകൾ ഉപയോഗിക്കുമ്പോൾ ഈ ടാബ്‌ലെറ്റിൽ 4G മാത്രമേ ലഭിക്കൂ. "<annotation id="url">"കൂടുതലറിയുക"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"2 സിമ്മുകൾ ഉപയോഗിക്കുമ്പോൾ ഈ ഉപകരണത്തിൽ 4G മാത്രമേ ലഭിക്കൂ. "<annotation id="url">"കൂടുതലറിയുക"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"കാഷെ ചെയ്ത ആപ്പിനുള്ള നിർവഹണം തൽക്കാലം റദ്ദാക്കൽ"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"ഒരിക്കലും കാലഹരണപ്പെടില്ല."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"ലീസ് ഒരിക്കലും കാലഹരണപ്പെടില്ല."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Settings ആപ്പിൽ സ്‌ക്രീൻ ഓവർലേ അനുവദിക്കുക"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Settings സ്‌ക്രീനുകളിൽ ഓവർലേ ചെയ്യാൻ മറ്റ് ആപ്പുകൾക്ക് മുകളിൽ കാണിക്കാനാകുന്ന ആപ്പുകളെ അനുവദിക്കുക"</string>
     <string name="media_controls_title" msgid="403271085636252597">"മീഡിയ"</string>
@@ -5574,38 +5576,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"TARE ക്രമീകരണം"</string>
     <string name="tare_revert" msgid="3855325741125236638">"ഡിഫോൾട്ട് ക്രമീകരണത്തിലേക്ക് പുനഃസ്ഥാപിക്കൂ"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"ക്രമീകരണം ഡിഫോൾട്ടായി പുനഃസ്ഥാപിച്ചു."</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"ഉപകരണം ചാർജായാലുള്ള പരമാവധി ബാലൻസ്"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"പരമാവധി പ്രചാരം"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"ഉപകരണം ചാർജായാലുള്ള കുറഞ്ഞ ബാലൻസ്"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"മോഡിഫയറുകൾ"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"പ്രവർത്തനങ്ങൾ"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"റിവാർഡുകൾ"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"ഒഴിവാക്കിയത്"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"ഹെഡ്‌ലെസ് സിസ്റ്റം ആപ്പ്"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"മറ്റേ ആപ്പ്"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"മികച്ച പ്രവർത്തനം"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"അറിയിപ്പ് കണ്ടു"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"15 മിനിറ്റിനുള്ളിൽ അറിയിപ്പ് കണ്ടു"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"അറിയിപ്പുമായുള്ള ഇടപഴകൽ"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"വിജറ്റുമായുള്ള ഇടപഴകൽ"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"മറ്റ് ഉപയോക്തൃ ഇടപഴകൽ"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"മുൻഗണന പരമാവധിയുള്ള ജോബ് ആരംഭിക്കൽ"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"മുൻഗണന പരമാവധിയുള്ള ജോബ് റൺ ചെയ്യൽ"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"മുൻഗണന കൂടിയ ജോബ് ആരംഭിക്കൽ"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"മുൻഗണന കൂടിയ ജോബ് റൺ ചെയ്യൽ"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"ഡിഫോൾട്ട് ജോബ് ആരംഭിക്കൽ"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"ഡിഫോൾട്ട് ജോബ് റൺ ചെയ്യൽ"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"മുൻഗണന കുറവുള്ള ജോബ് ആരംഭിക്കൽ"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"മുൻഗണന കുറവുള്ള ജോബ് റൺ ചെയ്യൽ"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"മുൻഗണന കുറഞ്ഞ ജോബ് ആരംഭിക്കൽ"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"മുൻഗണന കുറഞ്ഞ ജോബ് റൺ ചെയ്യൽ"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"ജോബ് ടൈംഔട്ട് ആയതിന് പിഴ"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"ചാർജ് ചെയ്യുന്നു"</item>
+    <item msgid="658627268149681677">"ഡോസ്"</item>
+    <item msgid="1599558140284643834">"ഊർജ്ജം ലാഭിക്കൽ മോഡ്"</item>
+    <item msgid="588427840913221601">"പ്രോസസിന്റെ നില"</item>
+  </string-array>
 </resources>

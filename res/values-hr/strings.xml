@@ -2500,7 +2500,7 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"O dodatnom zatamnjenju"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Zatamnite zaslon više od minimalne svjetline svojeg telefona"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Zatamnite zaslon više od minimalne svjetline svojeg tableta"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Zatamnite zaslon kako vam ne bi blještao u oči dok čitate.&lt;br/&gt;&lt;br/&gt; To može biti korisno u sljedećim situacijama: &lt;ol&gt; &lt;li&gt; Zadana minimalna svjetlina na telefonu i dalje je presvijetla.&lt;/li&gt; &lt;li&gt; Koristite telefon u mraku, na primjer noću ili u tamnoj sobi prije spavanja.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Zatamnite zaslon kako vam ne bi blještao u oči dok čitate.&lt;br/&gt;&lt;br/&gt; To može biti korisno u sljedećim situacijama: &lt;ol&gt; &lt;li&gt; Zadana minimalna svjetlina na telefonu i dalje je presvijetla.&lt;/li&gt; &lt;li&gt; Koristite telefon u mraku, na primjer noću ili u tamnoj sobi prije spavanja.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Zatamnite zaslon kako vam ne bi blještao u oči dok čitate.&lt;br/&gt;&lt;br/&gt; To može biti korisno u sljedećim situacijama: &lt;ol&gt; &lt;li&gt; Zadana minimalna svjetlina na tabletu i dalje je presvijetla.&lt;/li&gt; &lt;li&gt; Koristite tablet u mraku, na primjer noću ili u tamnoj sobi prije spavanja.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intenzitet"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Tamnije"</string>
@@ -5527,6 +5527,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Kad se koriste dva SIM-a, tablet će biti ograničen na 4G. "<annotation id="url">"Saznajte više"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Kad se koriste dva SIM-a, uređaj će biti ograničen na 4G. "<annotation id="url">"Saznajte više"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Obustavi izvršenje za predmemorirane aplikacije"</string>
+    <string name="blob_never_expires_text" msgid="7293376386620106623">"Nikad ne istječe."</string>
+    <string name="accessor_never_expires_text" msgid="4647624492147788340">"Najam nikad ne istječe."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Dopustite preklapanja na zaslonu na Postavkama"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Dopustite aplikacije koje se mogu prikazivati iznad drugih da se preklapaju na zaslonima Postavki"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Mediji"</string>
@@ -5665,38 +5667,36 @@
     <string name="tare_settings" msgid="3788654800004869077">"Postavke TARE-a"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Vraćanje na zadane postavke"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Postavke su vraćene na zadano."</string>
-    <!-- no translation found for tare_max_satiated_balance (3914973999573150340) -->
-    <skip />
-    <!-- no translation found for tare_max_circulation (1119152898303214809) -->
-    <skip />
-    <!-- no translation found for tare_min_satiated_balance (8038047539584856564) -->
-    <skip />
-    <!-- no translation found for tare_modifiers (8919975635360280820) -->
-    <skip />
-    <!-- no translation found for tare_actions (4573323466443513639) -->
-    <skip />
-    <!-- no translation found for tare_rewards (602131401590928885) -->
-    <skip />
-    <!-- no translation found for tare_exempted (223247432456678980) -->
-    <skip />
-    <!-- no translation found for tare_headless_app (6523878455829211651) -->
-    <skip />
-    <!-- no translation found for tare_other_app (4361184813378127700) -->
-    <skip />
-    <!-- no translation found for tare_top_activity (7266560655483385757) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen (7829963536020087742) -->
-    <skip />
-    <!-- no translation found for tare_notification_seen_15_min (832174185809497764) -->
-    <skip />
-    <!-- no translation found for tare_notification_interaction (3806204222322830129) -->
-    <skip />
-    <!-- no translation found for tare_widget_interaction (2260701564089214184) -->
-    <skip />
-    <!-- no translation found for tare_other_interaction (8069163421115212751) -->
-    <skip />
-    <!-- no translation found for tare_modifiers_subfactors:0 (3325940509857535498) -->
-    <!-- no translation found for tare_modifiers_subfactors:1 (658627268149681677) -->
-    <!-- no translation found for tare_modifiers_subfactors:2 (1599558140284643834) -->
-    <!-- no translation found for tare_modifiers_subfactors:3 (588427840913221601) -->
+    <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Maksimalan zasićeni balans"</string>
+    <string name="tare_max_circulation" msgid="1119152898303214809">"Maksimalna cirkulacija"</string>
+    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Minimalan zasićeni balans"</string>
+    <string name="tare_modifiers" msgid="8919975635360280820">"Modifikatori"</string>
+    <string name="tare_actions" msgid="4573323466443513639">"Radnje"</string>
+    <string name="tare_rewards" msgid="602131401590928885">"Nagrade"</string>
+    <string name="tare_exempted" msgid="223247432456678980">"Izuzeto"</string>
+    <string name="tare_headless_app" msgid="6523878455829211651">"Apl. sustava bez graf. korisnič. sučelja"</string>
+    <string name="tare_other_app" msgid="4361184813378127700">"Druga aplikacija"</string>
+    <string name="tare_top_activity" msgid="7266560655483385757">"Glavna aktivnost"</string>
+    <string name="tare_notification_seen" msgid="7829963536020087742">"Obavijest je viđena"</string>
+    <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Obavijest je viđena u roku od 15 minuta"</string>
+    <string name="tare_notification_interaction" msgid="3806204222322830129">"Interakcija s obavijestima"</string>
+    <string name="tare_widget_interaction" msgid="2260701564089214184">"Interakcija s widgetima"</string>
+    <string name="tare_other_interaction" msgid="8069163421115212751">"Ostale korisničke interakcije"</string>
+    <string name="tare_job_max_start" msgid="1586399578665940836">"Pokretanje zadatka najvišeg prioriteta"</string>
+    <string name="tare_job_max_running" msgid="2897217372986518495">"Izvodi se zadatak najvišeg prioriteta"</string>
+    <string name="tare_job_high_start" msgid="7464143754932031022">"Pokretanje zadatka visokog prioriteta"</string>
+    <string name="tare_job_high_running" msgid="6541171046405088669">"Izvodi se zadatak visokog prioriteta"</string>
+    <string name="tare_job_default_start" msgid="6744427210148953151">"Pokretanje zadatka zadanog prioriteta"</string>
+    <string name="tare_job_default_running" msgid="8429081804128945217">"Izvodi se zadatak zadanog prioriteta"</string>
+    <string name="tare_job_low_start" msgid="4605440035856891746">"Pokretanje zadatka niskog prioriteta"</string>
+    <string name="tare_job_low_running" msgid="831668616902849604">"Izvodi se zadatak niskog prioriteta"</string>
+    <string name="tare_job_min_start" msgid="6508233901992538188">"Pokretanje zadatka najnižeg prioriteta"</string>
+    <string name="tare_job_min_running" msgid="6167128996320622604">"Izvodi se zadatak najnižeg prioriteta"</string>
+    <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Sankcija za istek vremena za zadatak"</string>
+  <string-array name="tare_modifiers_subfactors">
+    <item msgid="3325940509857535498">"Punjenje"</item>
+    <item msgid="658627268149681677">"Drijemanje"</item>
+    <item msgid="1599558140284643834">"Način rada za uštedu energije"</item>
+    <item msgid="588427840913221601">"Stanje procesa"</item>
+  </string-array>
 </resources>
