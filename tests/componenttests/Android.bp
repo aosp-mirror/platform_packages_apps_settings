@@ -21,6 +21,8 @@ android_test {
     static_libs: [
         "truth-prebuilt",
         "androidx.test.core",
+        "androidx.test.espresso.core",
+        "androidx.test.espresso.intents-nodeps",
         "androidx.test.runner",
         "androidx.test.rules",
         "androidx.test.ext.junit",
