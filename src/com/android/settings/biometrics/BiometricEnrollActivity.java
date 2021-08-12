@@ -242,12 +242,11 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             }
         }
 
-        // start enrollment process if we haven't bailed out yet
         if (mParentalOptionsRequired && mParentalOptions == null) {
-            mParentalConsentHelper = new ParentalConsentHelper(
-                    mIsFaceEnrollable, mIsFingerprintEnrollable, mGkPwHandle);
+            mParentalConsentHelper = new ParentalConsentHelper(mGkPwHandle);
             setOrConfirmCredentialsNow();
         } else {
+            // Start enrollment process if we haven't bailed out yet
             startEnroll();
         }
     }
@@ -263,7 +262,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
     private void startEnrollWith(@Authenticators.Types int authenticators, boolean setupWizard) {
         // If the caller is not setup wizard, and the user has something enrolled, finish.
-        if (!setupWizard) {
+        // Allow parental consent flow to skip this check, since one modality could be consented
+        // and another non-consented. This can also happen if the restriction is applied when
+        // enrollments already exists.
+        if (!setupWizard && !mParentalOptionsRequired) {
             final BiometricManager bm = getSystemService(BiometricManager.class);
             final @BiometricError int result = bm.canAuthenticate(authenticators);
             if (result != BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED) {
@@ -330,6 +332,25 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         // single enrollment is handled entirely by the launched activity
         // this handles multi enroll or if parental consent is required
         if (mParentalConsentHelper != null) {
+            // Lazily retrieve the values from ParentalControlUtils, since the value may not be
+            // ready in onCreate.
+            final boolean faceConsentRequired = ParentalControlsUtils
+                    .parentConsentRequired(this, BiometricAuthenticator.TYPE_FACE) != null;
+            final boolean fpConsentRequired = ParentalControlsUtils
+                    .parentConsentRequired(this, BiometricAuthenticator.TYPE_FINGERPRINT) != null;
+
+            final boolean requestFaceConsent = faceConsentRequired && mHasFeatureFace;
+            final boolean requestFpConsent = fpConsentRequired && mHasFeatureFingerprint;
+
+            Log.d(TAG, "faceConsentRequired: " + faceConsentRequired
+                    + ", fpConsentRequired: " + fpConsentRequired
+                    + ", hasFeatureFace: " + mHasFeatureFace
+                    + ", hasFeatureFingerprint: " + mHasFeatureFingerprint
+                    + ", faceEnrollable: " + mIsFaceEnrollable
+                    + ", fpEnrollable: " + mIsFingerprintEnrollable);
+
+            mParentalConsentHelper.setConsentRequirement(requestFaceConsent, requestFpConsent);
+
             handleOnActivityResultWhileConsenting(requestCode, resultCode, data);
         } else {
             handleOnActivityResultWhileEnrolling(requestCode, resultCode, data);
@@ -362,10 +383,18 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     final boolean isStillPrompting = mParentalConsentHelper.launchNext(
                             this, REQUEST_CHOOSE_OPTIONS, resultCode, data);
                     if (!isStillPrompting) {
-                        Log.d(TAG, "Enrollment consent options set, starting enrollment");
                         mParentalOptions = mParentalConsentHelper.getConsentResult();
                         mParentalConsentHelper = null;
-                        startEnroll();
+                        Log.d(TAG, "Enrollment consent options set, starting enrollment: "
+                                + mParentalOptions);
+                        // Note that we start enrollment with CONVENIENCE instead of the default
+                        // of WEAK in startEnroll(), since we want to allow enrollment for any
+                        // sensor as long as it has been consented for. We should eventually
+                        // clean up this logic and do something like pass in the parental consent
+                        // result, so that we can request enrollment for specific sensors, but
+                        // that's quite a large and risky change to the startEnrollWith() logic.
+                        startEnrollWith(Authenticators.BIOMETRIC_CONVENIENCE,
+                                WizardManagerHelper.isAnySetupWizard(getIntent()));
                     }
                 } else {
                     Log.d(TAG, "Unknown or cancelled parental consent");
