@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings.Global;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
@@ -103,6 +104,10 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
                 @Override
                 public void onLoadFinished(Loader<BatteryInfo> loader, BatteryInfo batteryInfo) {
+                    if (batteryInfo == null) {
+                        Log.w(TAG, "mBatteryInfoLoaderCallbacks: batteryInfo = null");
+                        return;
+                    }
                     mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
                     mBatteryHeaderPreferenceController.updateHeaderByBatteryTips(
                             mBatteryTipPreferenceController.getCurrentBatteryTip(), batteryInfo);
@@ -126,6 +131,10 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 @Override
                 public void onLoadFinished(Loader<List<BatteryTip>> loader,
                         List<BatteryTip> data) {
+                    if (mBatteryInfo == null) {
+                        Log.w(TAG, "mBatteryTipsCallbacks: batteryInfo = null");
+                        return;
+                    }
                     mBatteryTipPreferenceController.updateBatteryTips(data);
                     mBatteryHeaderPreferenceController.updateHeaderByBatteryTips(
                             mBatteryTipPreferenceController.getCurrentBatteryTip(), mBatteryInfo);
