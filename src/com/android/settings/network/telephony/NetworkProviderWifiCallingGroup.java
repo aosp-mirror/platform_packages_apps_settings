@@ -29,6 +29,7 @@ import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -66,7 +67,7 @@ public class NetworkProviderWifiCallingGroup extends
     @VisibleForTesting
     protected CarrierConfigManager mCarrierConfigManager;
     private SubscriptionManager mSubscriptionManager;
-
+    private PhoneCallStateTelephonyCallback mTelephonyCallback;
     private String mPreferenceGroupKey;
     private PreferenceGroup mPreferenceGroup;
     private Map<Integer, TelephonyManager> mTelephonyManagerList = new HashMap<>();
@@ -79,10 +80,12 @@ public class NetworkProviderWifiCallingGroup extends
         super(context);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-
         mPreferenceGroupKey = preferenceGroupKey;
         mWifiCallingForSubPreferences = new ArrayMap<>();
         setSubscriptionInfoList(context);
+        if (mTelephonyCallback == null) {
+            mTelephonyCallback = new PhoneCallStateTelephonyCallback();
+        }
         lifecycle.addObserver(this);
     }
 
@@ -134,7 +137,15 @@ public class NetworkProviderWifiCallingGroup extends
 
     @OnLifecycleEvent(Event.ON_RESUME)
     public void onResume() {
+        updateListener();
         update();
+    }
+
+    @OnLifecycleEvent(Event.ON_PAUSE)
+    public void onPause() {
+        if ((mTelephonyCallback != null)) {
+            mTelephonyCallback.unregister();
+        }
     }
 
     @Override
@@ -167,8 +178,6 @@ public class NetworkProviderWifiCallingGroup extends
         if (mPreferenceGroup == null) {
             return;
         }
-
-        setSubscriptionInfoList(mContext);
 
         if (!isAvailable()) {
             for (Preference pref : mWifiCallingForSubPreferences.values()) {
@@ -246,7 +255,38 @@ public class NetworkProviderWifiCallingGroup extends
 
     @Override
     public void onSubscriptionsChanged() {
+        setSubscriptionInfoList(mContext);
+        updateListener();
         update();
+    }
+
+    private void updateListener() {
+        for (SubscriptionInfo info : mSubInfoListForWfc) {
+            int subId = info.getSubscriptionId();
+            if ((mTelephonyCallback != null)) {
+                mTelephonyCallback.register(mContext, subId);
+            }
+        }
+    }
+
+    private class PhoneCallStateTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.CallStateListener {
+
+        private TelephonyManager mTelephonyManager;
+
+        @Override
+        public void onCallStateChanged(int state) {
+            update();
+        }
+
+        public void register(Context context, int subId) {
+            mTelephonyManager = getTelephonyManagerForSubscriptionId(subId);
+            mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(), this);
+        }
+
+        public void unregister() {
+            mTelephonyManager.unregisterTelephonyCallback(this);
+        }
     }
 
     /**
