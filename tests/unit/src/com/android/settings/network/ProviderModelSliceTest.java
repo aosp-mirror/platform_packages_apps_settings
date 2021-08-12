@@ -46,6 +46,8 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.slice.Slice;
+import androidx.slice.SliceItem;
+import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
@@ -104,8 +106,6 @@ public class ProviderModelSliceTest {
     ListBuilder.RowBuilder mMockCarrierRowBuild;
     @Mock
     WifiPickerTracker mWifiPickerTracker;
-    @Mock
-    WifiSliceItem mWifiSliceItem;
     AlertDialog mMockAlertDialog;
 
     private FakeFeatureFactory mFeatureFactory;
@@ -127,7 +127,7 @@ public class ProviderModelSliceTest {
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
-
+        when(mWifiManager.isWifiEnabled()).thenReturn(true);
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -192,7 +192,24 @@ public class ProviderModelSliceTest {
 
     @Test
     @UiThreadTest
-    public void getSlice_haveTwoWifiAndOneCarrier_getCarrierAndTwoWiFiAndSeeAll() {
+    public void getSlice_airplaneModeIsOn_oneWifiToggle() {
+        mWifiList.clear();
+        mMockNetworkProviderWorker.updateSelfResults(null);
+        mockHelperCondition(true, false, false, null);
+
+        final Slice slice = mMockProviderModelSlice.getSlice();
+
+        assertThat(slice).isNotNull();
+        verify(mListBuilder, times(1)).addRow(any(ListBuilder.RowBuilder.class));
+        final SliceItem sliceTitle =
+                SliceMetadata.from(mContext, slice).getListContent().getHeader().getTitleItem();
+        assertThat(sliceTitle.getText()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "wifi_settings"));
+    }
+
+    @Test
+    @UiThreadTest
+    public void getSlice_haveTwoWifiAndOneCarrier_getFiveRow() {
         mWifiList.clear();
         mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
                 WifiEntry.CONNECTED_STATE_CONNECTED, "wifi1_key", true);
@@ -207,13 +224,13 @@ public class ProviderModelSliceTest {
 
         assertThat(slice).isNotNull();
         verify(mListBuilder, times(1)).addRow(mMockCarrierRowBuild);
-        verify(mListBuilder, times(4)).addRow(any(ListBuilder.RowBuilder.class));
+        verify(mListBuilder, times(5)).addRow(any(ListBuilder.RowBuilder.class));
         assertThat(mMockProviderModelSlice.hasSeeAllRow()).isTrue();
     }
 
     @Test
     @UiThreadTest
-    public void getSlice_haveOneConnectedWifiAndTwoDisconnectedWifiAndNoCarrier_getFourRow() {
+    public void getSlice_haveOneConnectedWifiAndTwoDisconnectedWifiAndNoCarrier_getFiveRow() {
         mWifiList.clear();
         mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
                 WifiEntry.CONNECTED_STATE_CONNECTED, "wifi1_key", true);
@@ -230,13 +247,13 @@ public class ProviderModelSliceTest {
         final Slice slice = mMockProviderModelSlice.getSlice();
 
         assertThat(slice).isNotNull();
-        verify(mListBuilder, times(4)).addRow(any(ListBuilder.RowBuilder.class));
+        verify(mListBuilder, times(5)).addRow(any(ListBuilder.RowBuilder.class));
         assertThat(mMockProviderModelSlice.hasSeeAllRow()).isTrue();
     }
 
     @Test
     @UiThreadTest
-    public void getSlice_haveTwoDisconnectedWifiAndNoCarrier_getThreeRow() {
+    public void getSlice_haveTwoDisconnectedWifiAndNoCarrier_getFourRow() {
         mWifiList.clear();
         mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
                 WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi1_key", true);
@@ -250,13 +267,13 @@ public class ProviderModelSliceTest {
         final Slice slice = mMockProviderModelSlice.getSlice();
 
         assertThat(slice).isNotNull();
-        verify(mListBuilder, times(3)).addRow(any(ListBuilder.RowBuilder.class));
+        verify(mListBuilder, times(4)).addRow(any(ListBuilder.RowBuilder.class));
         assertThat(mMockProviderModelSlice.hasSeeAllRow()).isTrue();
     }
 
     @Test
     @UiThreadTest
-    public void getSlice_haveEthernetAndCarrierAndTwoDisconnectedWifi_getFiveRow() {
+    public void getSlice_haveEthernetAndCarrierAndTwoDisconnectedWifi_getSixRow() {
         mWifiList.clear();
         mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
                 WifiEntry.CONNECTED_STATE_DISCONNECTED, "wifi1_key", true);
@@ -274,13 +291,13 @@ public class ProviderModelSliceTest {
         assertThat(slice).isNotNull();
         assertThat(mMockProviderModelSlice.hasCreateEthernetRow()).isTrue();
         verify(mListBuilder, times(1)).addRow(mMockCarrierRowBuild);
-        verify(mListBuilder, times(5)).addRow(any(ListBuilder.RowBuilder.class));
+        verify(mListBuilder, times(6)).addRow(any(ListBuilder.RowBuilder.class));
         assertThat(mMockProviderModelSlice.hasSeeAllRow()).isTrue();
     }
 
     @Test
     @UiThreadTest
-    public void getSlice_haveEthernetAndCarrierAndConnectedWifiAndDisconnectedWifi_getFiveRow() {
+    public void getSlice_haveEthernetAndCarrierAndConnectedWifiAndDisconnectedWifi_getSixRow() {
         mWifiList.clear();
         mockWifiItemCondition(mMockWifiSliceItem1, "wifi1", "wifi1",
                 WifiEntry.CONNECTED_STATE_CONNECTED, "wifi1_key", true);
@@ -298,7 +315,7 @@ public class ProviderModelSliceTest {
         assertThat(slice).isNotNull();
         assertThat(mMockProviderModelSlice.hasCreateEthernetRow()).isTrue();
         verify(mListBuilder, times(1)).addRow(mMockCarrierRowBuild);
-        verify(mListBuilder, times(5)).addRow(any(ListBuilder.RowBuilder.class));
+        verify(mListBuilder, times(6)).addRow(any(ListBuilder.RowBuilder.class));
         assertThat(mMockProviderModelSlice.hasSeeAllRow()).isTrue();
     }
 
@@ -394,6 +411,11 @@ public class ProviderModelSliceTest {
         protected ListBuilder.RowBuilder getSeeAllRow() {
             mHasSeeAllRow = true;
             return super.getSeeAllRow();
+        }
+
+        @Override
+        public ListBuilder.RowBuilder getWifiSliceItemRow(WifiSliceItem wifiSliceItem) {
+            return super.getWifiSliceItemRow(wifiSliceItem);
         }
 
         public boolean hasCreateEthernetRow() {
