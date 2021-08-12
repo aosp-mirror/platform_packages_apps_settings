@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -62,6 +63,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     private TextView mErrorText;
     protected boolean mConfirmingCredentials;
     protected boolean mNextClicked;
+    private boolean mParentalConsentRequired;
 
     @Nullable private PorterDuffColorFilter mIconColorFilter;
 
@@ -138,6 +140,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
      */
     public abstract void onClick(LinkSpan span);
 
+    public abstract @BiometricAuthenticator.Modality int getModality();
+
     protected interface GenerateChallengeCallback {
         void onChallengeGenerated(int sensorId, int userId, long challenge);
     }
@@ -161,7 +165,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mBiometricUnlockDisabledByAdmin = isDisabledByAdmin();
 
         setContentView(getLayoutResource());
-        if (mBiometricUnlockDisabledByAdmin) {
+        mParentalConsentRequired = ParentalControlsUtils.parentConsentRequired(this, getModality())
+                != null;
+        if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
             setHeaderText(getHeaderResDisabledByAdmin());
         } else {
             setHeaderText(getHeaderResDefault());
@@ -399,7 +405,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void initViews() {
         super.initViews();
 
-        if (mBiometricUnlockDisabledByAdmin) {
+        if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
             setDescriptionText(getDescriptionResDisabledByAdmin());
         }
     }
