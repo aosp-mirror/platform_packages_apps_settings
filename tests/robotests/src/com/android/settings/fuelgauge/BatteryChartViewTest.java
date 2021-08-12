@@ -33,7 +33,6 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -44,7 +43,6 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryChartViewTest {
@@ -232,22 +230,5 @@ public final class BatteryChartViewTest {
             .removeCallbacks(mBatteryChartView.mUpdateClickableStateRun);
         verify(mBatteryChartView.mHandler)
             .postDelayed(mBatteryChartView.mUpdateClickableStateRun, 500L);
-    }
-
-    @Ignore
-    @Test
-    public void testSetLatestTimestamp_generateExpectedTimestamps() {
-        final long timestamp = 1619196786769L;
-        ConvertUtils.sSimpleDateFormatForHour = null;
-        // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTimeHour(
-            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
-        ConvertUtils.sSimpleDateFormatForHour
-            .setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
-        final String[] expectedTimestamps = new String[] {"00", "06", "12", "18", "00"};
-
-        mBatteryChartView.setLatestTimestamp(timestamp);
-
-        assertThat(mBatteryChartView.mTimestamps).isEqualTo(expectedTimestamps);
     }
 }
