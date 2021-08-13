@@ -42,6 +42,7 @@ public class TareFactorDialogFragment extends DialogFragment {
     private final String mFactorKey;
     private final String mFactorTitle;
     private final int mFactorValue;
+    private final int mFactorPolicy;
     private int mFactorEditedValue;
 
     private EditText mFactorValueView;
@@ -53,10 +54,11 @@ public class TareFactorDialogFragment extends DialogFragment {
      * @param defaultValue the initial value set for the Factor before any changes
      */
     public TareFactorDialogFragment(@NonNull String title, @NonNull String key, int defaultValue,
-            TareFactorController tareFactorController) {
+            int factorPolicy, TareFactorController tareFactorController) {
         mFactorTitle = title;
         mFactorKey = key;
         mFactorValue = defaultValue;
+        mFactorPolicy = factorPolicy;
         mTareFactorController = tareFactorController;
     }
 
@@ -84,7 +86,8 @@ public class TareFactorDialogFragment extends DialogFragment {
                         Log.e(TAG, "Error converting '" + stringValue + "' to integer. Using "
                                 + mFactorValue + " instead", e);
                     }
-                    // TODO: Update csv with new factor value
+                    mTareFactorController.updateValue(mFactorKey, mFactorEditedValue,
+                            mFactorPolicy);
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
                     // When the negative button is clicked do nothing
