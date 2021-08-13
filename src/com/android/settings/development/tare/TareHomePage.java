@@ -74,6 +74,7 @@ public class TareHomePage extends Activity {
         Toast.makeText(this, R.string.tare_settings_reverted_toast, Toast.LENGTH_LONG).show();
         Settings.Global.putString(getApplicationContext().getContentResolver(),
                 Settings.Global.ENABLE_TARE, null);
+        setEnabled(Settings.Global.DEFAULT_ENABLE_TARE == SETTING_VALUE_ON);
     }
 
     /** Opens up the AlarmManager TARE policy page with its factors to view and edit */
