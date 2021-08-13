@@ -50,7 +50,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -65,7 +64,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 @RunWith(RobolectricTestRunner.class)
 public final class BatteryChartPreferenceControllerTest {
@@ -123,37 +121,6 @@ public final class BatteryChartPreferenceControllerTest {
             new BatteryEntry.NameAndIcon("fakeName", /*icon=*/ null, /*iconId=*/ 1));
         mBatteryChartPreferenceController.setBatteryHistoryMap(
             createBatteryHistoryMap());
-    }
-
-    @Ignore
-    @Test
-    public void testOnResume_uiModeIsChanged_clearBatteryDiffEntryCache() {
-        doReturn(mResources).when(mContext).getResources();
-        doReturn(mConfiguration).when(mResources).getConfiguration();
-        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
-        // Ensures the testing environment is correct.
-        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
-        mBatteryChartPreferenceController.onResume();
-        // Changes the uiMode in the configuration.
-        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_YES;
-
-        mBatteryChartPreferenceController.onResume();
-        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
-    }
-
-    @Ignore
-    @Test
-    public void testOnResume_uiModeIsNotChanged_notClearBatteryDiffEntryCache() {
-        doReturn(mResources).when(mContext).getResources();
-        doReturn(mConfiguration).when(mResources).getConfiguration();
-        mConfiguration.uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
-        // Ensures the testing environment is correct.
-        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
-
-        mBatteryChartPreferenceController.onResume();
-        assertThat(BatteryDiffEntry.sResourceCache).isNotEmpty();
-        verify(mMetricsFeatureProvider)
-                .action(mContext, SettingsEnums.OPEN_BATTERY_USAGE);
     }
 
     @Test
@@ -579,12 +546,12 @@ public final class BatteryChartPreferenceControllerTest {
         // Verifies the title in the preference group.
         verify(mBatteryChartPreferenceController.mAppListPrefGroup)
             .setTitle(captor.capture());
-        assertThat(captor.getValue()).isEqualTo("App usage for 4 - 7");
+        assertThat(captor.getValue()).isNotEqualTo("App usage for past 24 hr");
         // Verifies the title in the expandable divider.
         captor = ArgumentCaptor.forClass(String.class);
         verify(mBatteryChartPreferenceController.mExpandDividerPreference)
             .setTitle(captor.capture());
-        assertThat(captor.getValue()).isEqualTo("System usage for 4 - 7");
+        assertThat(captor.getValue()).isNotEqualTo("System usage for past 24 hr");
     }
 
     @Test
@@ -722,9 +689,6 @@ public final class BatteryChartPreferenceControllerTest {
             new long[] {1619196786769L, 0L, 1619247636826L};
         ConvertUtils.utcToLocalTimeHour(
             mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
-        // Simulates the locale in GMT.
-        ConvertUtils.sSimpleDateFormatForHour
-             .setTimeZone(TimeZone.getTimeZone("GMT"));
     }
 
     private BatteryChartPreferenceController createController() {

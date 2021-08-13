@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip;
 
 import android.content.Context;
 import android.os.BatteryUsageStats;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -67,16 +68,17 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
         final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(TAG);
         final Context context = getContext();
 
+        tips.add(new EarlyWarningDetector(policy, context).detect());
+        if (batteryInfo == null) {
+            Log.w(TAG, "loadInBackground() batteryInfo = null");
+            return tips;
+        }
+
         tips.add(new LowBatteryDetector(context, policy, batteryInfo).detect());
         tips.add(new HighUsageDetector(context, policy, mBatteryUsageStats, batteryInfo).detect());
         tips.add(new SmartBatteryDetector(
                 context, policy, batteryInfo, context.getContentResolver()).detect());
-        tips.add(new EarlyWarningDetector(policy, context).detect());
         tips.add(new BatteryDefenderDetector(batteryInfo).detect());
-        // Disable this feature now since it introduces false positive cases. We will try to improve
-        // it in the future.
-        // tips.add(new RestrictAppDetector(context, policy).detect());
-
         Collections.sort(tips);
         return tips;
     }
