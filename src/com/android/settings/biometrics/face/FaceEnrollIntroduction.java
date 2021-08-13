@@ -19,6 +19,7 @@ package com.android.settings.biometrics.face;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
@@ -285,6 +286,11 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     public void onClick(LinkSpan span) {
         // TODO(b/110906762)
+    }
+
+    @Override
+    public @BiometricAuthenticator.Modality int getModality() {
+        return BiometricAuthenticator.TYPE_FACE;
     }
 
     @Override
