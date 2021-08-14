@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.UserManager;
 import android.text.format.DateUtils;
 
@@ -72,11 +73,14 @@ public class BatteryAppListPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        final Resources resources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(resources);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {});
-
+        when(resources.getTextArray(R.array.allowlist_hide_summary_in_battery_usage))
+                .thenReturn(new String[] {"com.android.googlequicksearchbox"});
         FakeFeatureFactory.setupForTest();
 
         mPreference = new PowerGaugePreference(mContext);
@@ -119,7 +123,7 @@ public class BatteryAppListPreferenceControllerTest {
     public void testSetUsageSummary_timeMoreThanOneMinute_GoogleApp_shouldNotSetScreenSummary() {
         when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(2 * DateUtils.MINUTE_IN_MILLIS);
         when(mBatteryEntry.getDefaultPackageName())
-                .thenReturn("com.google.android.googlequicksearchbox");
+                .thenReturn("com.android.googlequicksearchbox");
         doReturn(mContext.getText(R.string.battery_used_for)).when(mFragment).getText(
                 R.string.battery_used_for);
         doReturn(mContext).when(mFragment).getContext();

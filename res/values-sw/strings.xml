@@ -288,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Weka maandishi kwenye skrini iliyofungwa"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Washa wijeti"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Imezimwa na msimamizi"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Onyesha chaguo la kufunga"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Onyesha chaguo la Kitufe cha kuwasha/kuzima ambacho huzima vipengele vya Smart Lock, Kufungua kwa uso, Kufungua kwa alama ya kidole na arifa kwenye skrini iliyofungwa"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Funga skrini ikiacha kuaminika"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Ikiwashwa, kifaa kitafungwa wakati kipengele cha mwisho cha kutathmini hali ya kuaminika kitaacha kuaminika"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Hamna"</string>
@@ -356,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -1855,7 +1855,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Kutafuta Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Ruhusu programu na huduma zitafute vifaa vilivyo karibu wakati wowote, hata wakati umezima Bluetooth. Hali hii inaweza kutumika, kwa mfano, kuboresha huduma na vipengele vinavyohusiana na mahali."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Huduma za mahali"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Huduma za Mahali"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Huduma za mahali"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Huduma za Mahali za kazini"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Tumia mahali ili uweke saa za eneo"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Maelezo ya mahali kilipo kifaa yanahitajika"</string>
@@ -2451,8 +2451,8 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Punguza mwangaza wa skrini zaidi"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Punguza mwangaza wa skrini zaidi ya kiwango cha chini cha ung\'aavu wa simu yako"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Punguza mwangaza wa skrini zaidi ya kiwango cha chini cha ung\'aavu wa kompyuta yako kibao"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Punguza mwangaza wa skrini yako zaidi ili uweze kusoma bila tatizo.&lt;br/&gt;&lt;br/&gt; Hali hii inaweza kukusaidia wakati: &lt;ol&gt; &lt;li&gt; Ung\'aavu chaguomsingi wa kiwango cha chini kwenye simu yako bado una mwangaza mkubwa&lt;/li&gt; &lt;li&gt; Unatumia simu yako katika hali zenye giza, kama vile usiku au katika chumba chenye giza kabla ya kulala&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Fanya skrini yako iwe nyeusi kidogo ili uweze kusoma bila tatizo.&lt;br/&gt;&lt;br/&gt; Hali hii inaweza kuwa muhimu wakati: &lt;ol&gt; &lt;li&gt; Ung\'aavu chaguomsingi wa kiwango cha chini kwenye kompyuta yako kibao bado una mwangaza mkubwa&lt;/li&gt; &lt;li&gt; Unatumia kompyuta yako kibao katika hali zenye giza, kama vile usiku au katika chumba chenye giza kabla ya kulala&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Punguza mwangaza wa skrini yako zaidi ili uweze kusoma bila tatizo.&lt;br/&gt;&lt;br/&gt; Hali hii inaweza kukusaidia wakati: &lt;ol&gt; &lt;li&gt; Ung\'aavu chaguomsingi wa kiwango cha chini kwenye simu yako bado una mwangaza mkubwa&lt;/li&gt; &lt;li&gt; Unatumia simu yako katika hali zenye giza, kama vile usiku au katika chumba chenye giza kabla ya kulala&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Fanya skrini yako iwe nyeusi kidogo ili uweze kusoma bila tatizo.&lt;br/&gt;&lt;br/&gt; Hali hii inaweza kuwa muhimu wakati: &lt;ol&gt; &lt;li&gt; Ung\'aavu chaguomsingi wa kiwango cha chini kwenye kompyuta yako kibao bado una mwangaza mkubwa&lt;/li&gt; &lt;li&gt; Unatumia kompyuta yako kibao katika hali zenye giza, kama vile usiku au katika chumba chenye giza kabla ya kulala&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Ukolezaji"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Punguza ung\'aavu"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Ung\'aavu zaidi"</string>
@@ -5470,7 +5470,7 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Imeunganishwa"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Hakuna muunganisho"</string>
-    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Data ya mtandao wa simu haitaunganishwa kiotomatiki"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Data ya simu haitaunganishwa kiotomatiki"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Hakuna mitandao mingine inayopatikana"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"Hakuna mitandao inayopatikana"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Ungependa kuzima data ya mtandao wa simu?"</string>
