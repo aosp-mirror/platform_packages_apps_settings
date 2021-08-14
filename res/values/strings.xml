@@ -7724,6 +7724,11 @@
     <!-- Applicaitons with restrictions - settings button [CHAR LIMIT=30] -->
     <string name="apps_with_restrictions_settings_button">Expand settings for application</string>
 
+    <!-- Title for copying apps to another user [CHAR LIMIT=45] -->
+    <string name="user_choose_copy_apps_to_another_user">Choose apps to install</string>
+    <!-- Menu title for copying apps to another user [CHAR LIMIT=35] -->
+    <string name="user_copy_apps_menu_title">Install available apps</string>
+
     <!-- NFC payment settings --><skip/>
     <string name="nfc_payment_settings_title">Contactless payments</string>
     <!-- Caption for button linking to a page explaining how Tap and Pay works-->
@@ -13635,14 +13640,20 @@
     <string name="tare_settings_reverted_toast">Settings reverted to default.</string>
     <!-- Title for the TARE policy factor that determines the maximum credits an app can have in one
     battery life cycle. Satiated means battery is fully charged; If this is not easily translatable,
-    translate "maximum balance when device is fully charged" instead. [CHAR LIMIT=40]-->
+    translate "maximum balance when device is fully charged" instead. Balance is the same meaning as
+    having money in a bank account. Balance in our feature is the amount of Android Resource Credits
+    an app can have. Android Resource Credits are a form of payment used by apps to be able to
+    perform tasks. [CHAR LIMIT=40]-->
     <string name="tare_max_satiated_balance">Maximum Satiated Balance</string>
     <!-- Title for the TARE policy factor that determines the maximum credits in circulation between
     all the apps [CHAR LIMIT=40]-->
     <string name="tare_max_circulation">Maximum Circulation</string>
     <!-- Title for the TARE policy factor that determines the minimum credits an app can have in one
     battery life cycle. Satiated means battery is fully charged; If this is not easily translatable,
-    translate "minimum balance when device is fully charged" instead. [CHAR LIMIT=40]-->
+    translate "minimum balance when device is fully charged" instead. Balance is the same meaning as
+    having money in a bank account. Balance in our feature is the amount of Android Resource Credits
+    an app can have. Android Resource Credits are a form of payment used by apps to be able to
+    perform tasks. [CHAR LIMIT=40]-->
     <string name="tare_min_satiated_balance">Minimum Satiated Balance</string>
     <!-- Title for the various modifiers that alter the cost of TARE tasks based on battery status
     (charging, power save mode, etc.) [CHAR LIMIT=40]-->
@@ -13654,89 +13665,94 @@
     benefit the user. [CHAR LIMIT=40]-->
     <string name="tare_rewards">Rewards</string>
     <!-- Title for the Allow While Idle Exact Wakeup Alarm set via
-    AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=40]-->
+    AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=50]-->
     <string name="tare_wakeup_exact_idle" translatable="false">
         Allow While Idle Exact Wakeup Alarm</string>
     <!-- Title for the Allow While Idle Inexact Wakeup Alarm set via
-    AlarmManager.setAndAllowWhileIdle() [CHAR LIMIT=40]-->
+    AlarmManager.setAndAllowWhileIdle() [CHAR LIMIT=50]-->
     <string name="tare_wakeup_inexact_idle" translatable="false">
         Allow While Idle Inexact Wakeup Alarm</string>
-    <!-- Title for the Exact Wakeup Alarm set via AlarmManager.setExact() [CHAR LIMIT=40]-->
+    <!-- Title for the Exact Wakeup Alarm set via AlarmManager.setExact() [CHAR LIMIT=50]-->
     <string name="tare_wakeup_exact" translatable="false">Exact Wakeup Alarm</string>
-    <!-- Title for the Inexact Wakeup Alarm set via AlarmManager.set() [CHAR LIMIT=40]-->
+    <!-- Title for the Inexact Wakeup Alarm set via AlarmManager.set() [CHAR LIMIT=50]-->
     <string name="tare_wakeup_inexact" translatable="false">Inexact Wakeup Alarm</string>
     <!-- Title for the Allow While Idle Exact NonWakeup Alarm set via
-    AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=40]-->
+    AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=50]-->
     <string name="tare_nonwakeup_exact_idle" translatable="false">
         Allow While Idle Exact NonWakeup Alarm</string>
-    <!-- Title for the Exact NonWakeup Alarm set via AlarmManager.setExact() [CHAR LIMIT=40]-->
+    <!-- Title for the Exact NonWakeup Alarm set via AlarmManager.setExact() [CHAR LIMIT=50]-->
     <string name="tare_nonwakeup_exact" translatable="false">Exact NonWakeup Alarm</string>
     <!-- Title for the Allow While Idle Inexact NonWakeup Alarm set via
-    AlarmManager.setAndAllowWhileIdle() [CHAR LIMIT=40]-->
+    AlarmManager.setAndAllowWhileIdle() [CHAR LIMIT=50]-->
     <string name="tare_nonwakeup_inexact_idle" translatable="false">
         Allow While Idle Inexact NonWakeup Alarm</string>
-    <!-- Title for the Inexact NonWakeup Alarm set via AlarmManager.set() [CHAR LIMIT=40]-->
+    <!-- Title for the Inexact NonWakeup Alarm set via AlarmManager.set() [CHAR LIMIT=50]-->
     <string name="tare_nonwakeup_inexact" translatable="false">Inexact NonWakeup Alarm</string>
-    <!-- Title for the AlarmClock alarm set via AlarmManager.setAlarmClock() [CHAR LIMIT=40]-->
+    <!-- Title for the AlarmClock alarm set via AlarmManager.setAlarmClock() [CHAR LIMIT=50]-->
     <string name="tare_alarm_clock" translatable="false">AlarmClock</string>
-    <!-- Exempted apps are those apps exempted from most power saving features. [CHAR LIMIT=40]-->
+    <!-- Exempted apps are those apps exempted from most power saving features. [CHAR LIMIT=50]-->
     <string name="tare_exempted">Exempted</string>
     <!-- A headless system app is a preinstalled app that does not have any activities/UI that the
-    user can interact with. [CHAR LIMIT=40]-->
+    user can interact with. [CHAR LIMIT=50]-->
     <string name="tare_headless_app">Headless System App</string>
     <!-- Other apps are those apps interacted with by users that are not exempted or headless
-    system apps. [CHAR LIMIT=40]-->
+    system apps. [CHAR LIMIT=50]-->
     <string name="tare_other_app">Other App</string>
     <!-- Top activity means an app is in the TOP android process state and is thus visible to the
-    user[CHAR LIMIT=40]-->
+    user[CHAR LIMIT=50]-->
     <string name="tare_top_activity">Top Activity</string>
     <!-- An event type denoting that a notification was viewed by the user, as defined in
-    UsageEvents.java [CHAR LIMIT=40]-->
+    UsageEvents.java [CHAR LIMIT=50]-->
     <string name="tare_notification_seen">Notification Seen</string>
     <!-- An event type denoting that a notification was viewed by the user within 15 minutes
-    [CHAR LIMIT=40]-->
+    [CHAR LIMIT=50]-->
     <string name="tare_notification_seen_15_min">Notification Seen Within 15 Minutes</string>
     <!-- An event type denoting that a notification was interacted with in some way by the user
-    [CHAR LIMIT=40]-->
+    [CHAR LIMIT=50]-->
     <string name="tare_notification_interaction">Notification Interaction</string>
     <!-- An event type denoting that an app's widget was interacted with in some way by the user
-    [CHAR LIMIT=40]-->
+    [CHAR LIMIT=50]-->
     <string name="tare_widget_interaction">Widget Interaction</string>
     <!-- An event type denoting that an app was interacted with in some way by the user
-    [CHAR LIMIT=40]-->
+    [CHAR LIMIT=50]-->
     <string name="tare_other_interaction">Other User Interaction</string>
     <!-- Title for the initiation of a max priority job by an app as defined in the JobScheduler
-     API [CHAR LIMIT=40]-->
+     API [CHAR LIMIT=50]-->
     <string name="tare_job_max_start">Job Max Start</string>
-    <!-- Title for the process of carrying out of a max priority job by an app as defined in the
-    JobScheduler API [CHAR LIMIT=40]-->
+    <!-- Title of an event where a job with max priority is running, but it does not necessarily
+     mean the max priority job is running at that moment. In this context, running is a synonym for
+     “ongoing execution of a job with max priority”. [CHAR LIMIT=50]-->
     <string name="tare_job_max_running">Job Max Running</string>
     <!-- Title for the initiation of a high priority job by an app as defined in the JobScheduler
-    API [CHAR LIMIT=40]-->
+    API [CHAR LIMIT=50]-->
     <string name="tare_job_high_start">Job High Start</string>
-    <!-- Title for the process of carrying out of a high priority job by an app as defined in the
-    JobScheduler API [CHAR LIMIT=40]-->
+    <!-- Title of an event where a job with high priority is running, but it does not necessarily
+     mean the high priority job is running at that moment. In this context, running is a synonym for
+     “ongoing execution of a job with high priority”. [CHAR LIMIT=50]-->
     <string name="tare_job_high_running">Job High Running</string>
     <!-- Title for the initiation of a default priority job by an app as defined in the JobScheduler
-    API [CHAR LIMIT=40]-->
+    API [CHAR LIMIT=50]-->
     <string name="tare_job_default_start">Job Default Start</string>
-    <!-- Title for the process of carrying out of a default priority job by an app as defined in the
-    JobScheduler API [CHAR LIMIT=40]-->
+    <!-- Title of an event where a job with default priority is running, but it does not necessarily
+     mean the default job is running at that moment. In this context, running is a synonym for
+     “ongoing execution of a job with default priority”. [CHAR LIMIT=50]-->
     <string name="tare_job_default_running">Job Default Running</string>
     <!-- Title for the initiation of a low priority job by an app as defined in the JobScheduler
-    API [CHAR LIMIT=40]-->
+    API [CHAR LIMIT=50]-->
     <string name="tare_job_low_start">Job Low Start</string>
-    <!-- Title for the process of carrying out of a low priority job by an app as defined in the
-    JobScheduler API [CHAR LIMIT=40]-->
+    <!-- Title of an event where a job with low priority is running, but it does not necessarily
+     mean the low priority job is running at that moment. In this context, running is a synonym for
+     “ongoing execution of a job with low priority”. [CHAR LIMIT=50]-->
     <string name="tare_job_low_running">Job Low Running</string>
     <!-- Title for the initiation of a minimum priority job by an app as defined in the JobScheduler
-    API [CHAR LIMIT=40]-->
+    API [CHAR LIMIT=50]-->
     <string name="tare_job_min_start">Job Min Start</string>
-    <!-- Title for the process of carrying out of a minimum priority job by an app as defined in the
-    JobScheduler API [CHAR LIMIT=40]-->
+    <!-- Title of an event where a job with minimum priority is running, but it does not necessarily
+     mean the job is running at that moment. In this context, running is a synonym for
+     “ongoing execution of a job with minimum priority”. [CHAR LIMIT=50]-->
     <string name="tare_job_min_running">Job Min Running</string>
     <!-- Title for the penalty an app receives for letting a job use the maximum execution time and
-     time out [CHAR LIMIT=40]-->
+     time out [CHAR LIMIT=50]-->
     <string name="tare_job_timeout_penalty">Job Timeout Penalty</string>
     <!-- Titles for the minimum satiated credit balances for different types of apps
     (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
@@ -13746,7 +13762,7 @@
         <item>@string/tare_other_app</item>
     </string-array>
     <!-- Various modifier subfactors that alter the cost of TARE tasks depending on what battery
-    state the device is in [CHAR LIMIT=40]-->
+    state the device is in [CHAR LIMIT=50]-->
     <string-array name="tare_modifiers_subfactors">
         <item>Charging</item>
         <!-- Doze refers to the Android Doze feature -->
@@ -13757,7 +13773,7 @@
     </string-array>
     <!-- Various AlarmManager alarms with different costs to produce and price paid by apps
     if they want to produce these alarms. Alarm in this context refers to the possible alarm cases
-    in AlarmManager. [CHAR LIMIT=40]-->
+    in AlarmManager. [CHAR LIMIT=50]-->
     <string-array name="tare_alarm_manager_actions" translatable="false">
         <item>@string/tare_wakeup_exact_idle</item>
         <item>@string/tare_wakeup_inexact_idle</item>
@@ -13770,7 +13786,7 @@
         <item>@string/tare_alarm_clock</item>
     </string-array>
     <!-- Titles for the different rewards apps could obtain for actions that benefit the user;
-    each has instant, ongoing, and max credit rewards apps could gain [CHAR LIMIT=40]-->
+    each has instant, ongoing, and max credit rewards apps could gain [CHAR LIMIT=50]-->
     <string-array name="tare_rewards_subfactors" translatable="false">
         <item>@string/tare_top_activity</item>
         <item>@string/tare_notification_seen</item>
@@ -13780,7 +13796,7 @@
         <item>@string/tare_other_interaction</item>
     </string-array>
     <!-- Various JobScheduler tasks with different costs to produce and willingness to pay by apps
-    if they want to carry out these different tasks [CHAR LIMIT=40]-->
+    if they want to carry out these different tasks [CHAR LIMIT=50]-->
     <string-array name="tare_job_scheduler_actions" translatable="false">
         <item>@string/tare_job_max_start</item>
         <item>@string/tare_job_max_running</item>

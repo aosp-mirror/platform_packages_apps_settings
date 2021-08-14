@@ -42,27 +42,31 @@ public class TareFactorDialogFragment extends DialogFragment {
     private final String mFactorKey;
     private final String mFactorTitle;
     private final int mFactorValue;
+    private final int mFactorPolicy;
     private int mFactorEditedValue;
 
     private EditText mFactorValueView;
+    private TareFactorController mTareFactorController;
 
     /**
      * @param title        the title that will show at the top of the Dialog for the Factor
      * @param key          the key of the Factor being initialized.
      * @param defaultValue the initial value set for the Factor before any changes
      */
-    public TareFactorDialogFragment(@NonNull String title, @NonNull String key, int defaultValue) {
+    public TareFactorDialogFragment(@NonNull String title, @NonNull String key, int defaultValue,
+            int factorPolicy, TareFactorController tareFactorController) {
         mFactorTitle = title;
         mFactorKey = key;
         mFactorValue = defaultValue;
+        mFactorPolicy = factorPolicy;
+        mTareFactorController = tareFactorController;
     }
 
     /**
      * Gets the current value of the Factor
      */
     private String getFactorValue() {
-        // TODO: Get value from locally cached copy
-        return Integer.toString(mFactorEditedValue);
+        return Integer.toString(mFactorValue);
     }
 
     @NonNull
@@ -82,10 +86,11 @@ public class TareFactorDialogFragment extends DialogFragment {
                         Log.e(TAG, "Error converting '" + stringValue + "' to integer. Using "
                                 + mFactorValue + " instead", e);
                     }
-                    // TODO: Update csv with new factor value
+                    mTareFactorController.updateValue(mFactorKey, mFactorEditedValue,
+                            mFactorPolicy);
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                    // TODO: Add proper dismiss for negative button press
+                    // When the negative button is clicked do nothing
                 });
 
         return builder.create();

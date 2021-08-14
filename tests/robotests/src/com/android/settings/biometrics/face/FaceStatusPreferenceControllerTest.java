@@ -23,7 +23,10 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,6 +37,7 @@ import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
 import android.os.UserManager;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -41,6 +45,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -71,11 +76,15 @@ public class FaceStatusPreferenceControllerTest {
     private Context mContext;
     private FaceStatusPreferenceController mController;
     private Preference mPreference;
+    private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
         ShadowApplication.getInstance().setSystemService(Context.FACE_SERVICE, mFaceManager);
@@ -85,7 +94,7 @@ public class FaceStatusPreferenceControllerTest {
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
         when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {1234});
-        mController = new FaceStatusPreferenceController(mContext, TEST_PREF_KEY);
+        mController = new FaceStatusPreferenceController(mContext, TEST_PREF_KEY, mLifecycle);
     }
 
     @Test
@@ -147,5 +156,10 @@ public class FaceStatusPreferenceControllerTest {
         mController.mPreference = restrictedPreference;
         mController.updateStateInternal(admin);
         verify(restrictedPreference).setDisabledByAdmin(eq(admin));
+
+        reset(admin);
+
+        mController.updateStateInternal(null /* enforcedAdmin */);
+        verify(restrictedPreference, never()).setDisabledByAdmin(any());
     }
 }

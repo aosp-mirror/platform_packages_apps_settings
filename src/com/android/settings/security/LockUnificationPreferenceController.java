@@ -107,7 +107,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
     @Override
     public boolean isAvailable() {
         return mProfileUserId != UserHandle.USER_NULL
-                && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileUserId);
+                && mUm.isManagedProfile(mProfileUserId);
     }
 
     @Override

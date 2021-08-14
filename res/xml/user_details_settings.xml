@@ -30,6 +30,10 @@
             android:icon="@drawable/ic_lock_closed"
             android:title="@string/user_restrictions_title" />
     <com.android.settingslib.RestrictedPreference
+            android:key="app_copying"
+            android:icon="@drawable/ic_apps"
+            android:title="@string/user_copy_apps_menu_title" />
+    <com.android.settingslib.RestrictedPreference
             android:key="remove_user"
             android:icon="@drawable/ic_delete"
             settings:userRestriction="no_remove_user"

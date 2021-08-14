@@ -18,6 +18,8 @@ package com.android.settings.biometrics.combination;
 import android.content.Context;
 import android.os.UserHandle;
 
+import androidx.lifecycle.Lifecycle;
+
 /**
  * Preference controller for face settings within the biometrics settings page of work profile,
  * that controls the ability to unlock the phone with face authentication.
@@ -29,10 +31,15 @@ public class BiometricFaceProfileStatusPreferenceController extends
         super(context, key);
     }
 
+    public BiometricFaceProfileStatusPreferenceController(
+            Context context, String key, Lifecycle lifecycle) {
+        super(context, key, lifecycle);
+    }
+
     @Override
     protected boolean isUserSupported() {
         return mProfileChallengeUserId != UserHandle.USER_NULL
-                && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId);
+                && mUm.isManagedProfile(mProfileChallengeUserId);
     }
 
     @Override
