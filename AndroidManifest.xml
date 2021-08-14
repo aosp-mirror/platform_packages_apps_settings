@@ -2711,6 +2711,10 @@
             </intent-filter>
         </activity>
 
+        <!--
+            The Wi-Fi result data will only be returned from WifiDialogActivity if the calling
+            package has ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION permission. (see b/185126813)
+        -->
         <activity
             android:name=".wifi.WifiDialogActivity"
             android:label=""
