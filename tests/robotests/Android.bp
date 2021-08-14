@@ -1,4 +1,4 @@
-//############################################################
+    //############################################################
 // Build SettingsRoboTestStub.apk which includes test-only resources.#
 //############################################################
 
@@ -72,14 +72,14 @@ android_robolectric_test {
 
     static_libs: [
         "SettingsLib-robo-testutils",
-	"android-support-annotations",
+        "android-support-annotations",
         "androidx.test.core",
         "androidx.test.runner",
         "androidx.test.ext.junit",
+        "androidx.test.espresso.core",
     ],
 
     libs: [
-        "framework-wifi.impl",
         "ims-common",
     ],
 

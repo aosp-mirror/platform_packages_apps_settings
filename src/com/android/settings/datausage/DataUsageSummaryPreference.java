@@ -32,6 +32,7 @@ import android.text.style.AbsoluteSizeSpan;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -156,24 +157,24 @@ public class DataUsageSummaryPreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        ProgressBar bar = (ProgressBar) holder.findViewById(R.id.determinateBar);
+        ProgressBar bar = getProgressBar(holder);
         if (mChartEnabled && (!TextUtils.isEmpty(mStartLabel) || !TextUtils.isEmpty(mEndLabel))) {
             bar.setVisibility(View.VISIBLE);
-            holder.findViewById(R.id.label_bar).setVisibility(View.VISIBLE);
+            getLabelBar(holder).setVisibility(View.VISIBLE);
             bar.setProgress((int) (mProgress * 100));
-            ((TextView) holder.findViewById(android.R.id.text1)).setText(mStartLabel);
-            ((TextView) holder.findViewById(android.R.id.text2)).setText(mEndLabel);
+            (getLabel1(holder)).setText(mStartLabel);
+            (getLabel2(holder)).setText(mEndLabel);
         } else {
             bar.setVisibility(View.GONE);
-            holder.findViewById(R.id.label_bar).setVisibility(View.GONE);
+            getLabelBar(holder).setVisibility(View.GONE);
         }
 
         updateDataUsageLabels(holder);
 
-        TextView usageTitle = (TextView) holder.findViewById(R.id.usage_title);
-        TextView carrierInfo = (TextView) holder.findViewById(R.id.carrier_and_update);
-        Button launchButton = (Button) holder.findViewById(R.id.launch_mdp_app_button);
-        TextView limitInfo = (TextView) holder.findViewById(R.id.data_limits);
+        TextView usageTitle = getUsageTitle(holder);
+        TextView carrierInfo = getCarrierInfo(holder);
+        Button launchButton = getLaunchButton(holder);
+        TextView limitInfo = getDataLimits(holder);
 
         if (mWifiMode && mSingleWifi) {
             updateCycleTimeText(holder);
@@ -187,7 +188,7 @@ public class DataUsageSummaryPreference extends Preference {
         } else if (mWifiMode) {
             usageTitle.setText(R.string.data_usage_wifi_title);
             usageTitle.setVisibility(View.VISIBLE);
-            TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
+            TextView cycleTime = getCycleTime(holder);
             cycleTime.setText(mUsagePeriod);
             carrierInfo.setVisibility(View.GONE);
             limitInfo.setVisibility(View.GONE);
@@ -236,7 +237,7 @@ public class DataUsageSummaryPreference extends Preference {
     }
 
     private void updateDataUsageLabels(PreferenceViewHolder holder) {
-        TextView usageNumberField = (TextView) holder.findViewById(R.id.data_usage_view);
+        TextView usageNumberField = getDataUsed(holder);
 
         final Formatter.BytesResult usedResult = Formatter.formatBytes(getContext().getResources(),
                 mDataplanUse, Formatter.FLAG_CALCULATE_ROUNDED | Formatter.FLAG_IEC_UNITS);
@@ -251,11 +252,10 @@ public class DataUsageSummaryPreference extends Preference {
                 TextUtils.expandTemplate(template, usageNumberText, usedResult.units);
         usageNumberField.setText(usageText);
 
-        final MeasurableLinearLayout layout =
-                (MeasurableLinearLayout) holder.findViewById(R.id.usage_layout);
+        final MeasurableLinearLayout layout = getLayout(holder);
 
         if (mHasMobileData && mNumPlans >= 0 && mDataplanSize > 0L) {
-            TextView usageRemainingField = (TextView) holder.findViewById(R.id.data_remaining_view);
+            TextView usageRemainingField = getDataRemaining(holder);
             long dataRemaining = mDataplanSize - mDataplanUse;
             if (dataRemaining >= 0) {
                 usageRemainingField.setText(
@@ -277,7 +277,7 @@ public class DataUsageSummaryPreference extends Preference {
     }
 
     private void updateCycleTimeText(PreferenceViewHolder holder) {
-        TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
+        TextView cycleTime = getCycleTime(holder);
 
         // Takes zero as a special case which value is never set.
         if (mCycleEndTimeMs == CYCLE_TIME_UNINITIAL_VALUE) {
@@ -319,7 +319,10 @@ public class DataUsageSummaryPreference extends Preference {
                     textResourceId = R.string.no_carrier_update_text;
                 }
                 updateTime = StringUtil.formatElapsedTime(
-                        getContext(), updateAgeMillis, false /* withSeconds */);
+                        getContext(),
+                        updateAgeMillis,
+                        false /* withSeconds */,
+                        false /* collapseTimeUnit */);
             }
             carrierInfo.setText(TextUtils.expandTemplate(
                     getContext().getText(textResourceId),
@@ -363,11 +366,70 @@ public class DataUsageSummaryPreference extends Preference {
     }
 
     @VisibleForTesting
-    long getHistoricalUsageLevel() {
+    protected long getHistoricalUsageLevel() {
         final DataUsageController controller = new DataUsageController(getContext());
         return controller.getHistoricalUsageLevel(
                 NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
                 null /* subscriberId */));
     }
 
+    @VisibleForTesting
+    protected TextView getUsageTitle(PreferenceViewHolder holder) {
+        return (TextView) holder.findViewById(R.id.usage_title);
+    }
+
+    @VisibleForTesting
+    protected TextView getCycleTime(PreferenceViewHolder holder) {
+        return (TextView) holder.findViewById(R.id.cycle_left_time);
+    }
+
+    @VisibleForTesting
+    protected TextView getCarrierInfo(PreferenceViewHolder holder) {
+        return (TextView) holder.findViewById(R.id.carrier_and_update);
+    }
+
+    @VisibleForTesting
+    protected TextView getDataLimits(PreferenceViewHolder holder) {
+        return (TextView) holder.findViewById(R.id.data_limits);
+    }
+
+    @VisibleForTesting
+    protected TextView getDataUsed(PreferenceViewHolder holder) {
+        return (TextView) holder.findViewById(R.id.data_usage_view);
+    }
+
+    @VisibleForTesting
+    protected TextView getDataRemaining(PreferenceViewHolder holder) {
+        return (TextView) holder.findViewById(R.id.data_remaining_view);
+    }
+
+    @VisibleForTesting
+    protected Button getLaunchButton(PreferenceViewHolder holder) {
+        return (Button) holder.findViewById(R.id.launch_mdp_app_button);
+    }
+
+    @VisibleForTesting
+    protected LinearLayout getLabelBar(PreferenceViewHolder holder) {
+        return (LinearLayout) holder.findViewById(R.id.label_bar);
+    }
+
+    @VisibleForTesting
+    protected TextView getLabel1(PreferenceViewHolder holder) {
+        return (TextView) holder.findViewById(android.R.id.text1);
+    }
+
+    @VisibleForTesting
+    protected TextView getLabel2(PreferenceViewHolder holder) {
+        return (TextView) holder.findViewById(android.R.id.text2);
+    }
+
+    @VisibleForTesting
+    protected ProgressBar getProgressBar(PreferenceViewHolder holder) {
+        return (ProgressBar) holder.findViewById(R.id.determinateBar);
+    }
+
+    @VisibleForTesting
+    protected MeasurableLinearLayout getLayout(PreferenceViewHolder holder) {
+        return (MeasurableLinearLayout) holder.findViewById(R.id.usage_layout);
+    }
 }

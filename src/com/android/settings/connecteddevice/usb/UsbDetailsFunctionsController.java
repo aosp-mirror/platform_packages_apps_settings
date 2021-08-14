@@ -17,11 +17,12 @@
 package com.android.settings.connecteddevice.usb;
 
 import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
-import static android.net.ConnectivityManager.TETHERING_USB;
 
 import android.content.Context;
 import android.hardware.usb.UsbManager;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
+import android.os.Handler;
+import android.os.HandlerExecutor;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -55,7 +56,8 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     }
 
     private PreferenceCategory mProfilesContainer;
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
+    private Handler mHandler;
     @VisibleForTesting
     OnStartTetheringCallback mOnStartTetheringCallback;
     @VisibleForTesting
@@ -64,15 +66,18 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     public UsbDetailsFunctionsController(Context context, UsbDetailsFragment fragment,
             UsbBackend backend) {
         super(context, fragment, backend);
-        mConnectivityManager = context.getSystemService(ConnectivityManager.class);
+        mTetheringManager = context.getSystemService(TetheringManager.class);
         mOnStartTetheringCallback = new OnStartTetheringCallback();
         mPreviousFunction = mUsbBackend.getCurrentFunctions();
+        mHandler = new Handler(context.getMainLooper());
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mProfilesContainer = screen.findPreference(getPreferenceKey());
+        refresh(/* connected */ false, /* functions */ mUsbBackend.getDefaultUsbFunctions(),
+                /* powerRole */ 0, /* dataRole */ 0);
     }
 
     /**
@@ -84,6 +89,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             pref = new RadioButtonPreference(mProfilesContainer.getContext());
             pref.setKey(key);
             pref.setTitle(titleId);
+            pref.setSingleLineTitle(false);
             pref.setOnClickListener(this);
             mProfilesContainer.addPreference(pref);
         }
@@ -110,6 +116,8 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             if (mUsbBackend.areFunctionsSupported(option)) {
                 if (isAccessoryMode(functions)) {
                     pref.setChecked(UsbManager.FUNCTION_MTP == option);
+                } else if (functions == UsbManager.FUNCTION_NCM) {
+                    pref.setChecked(UsbManager.FUNCTION_RNDIS == option);
                 } else {
                     pref.setChecked(functions == option);
                 }
@@ -130,7 +138,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
                     + UsbManager.usbFunctionsToString(previousFunction));
         }
         if (function != previousFunction && !Utils.isMonkeyRunning()
-                && !shouldIgnoreClickEvent(function, previousFunction)) {
+                && !isClickEventIgnored(function, previousFunction)) {
             mPreviousFunction = previousFunction;
 
             //Update the UI in advance to make it looks smooth
@@ -142,10 +150,11 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
                 preference.setChecked(true);
             }
 
-            if (function == UsbManager.FUNCTION_RNDIS) {
+            if (function == UsbManager.FUNCTION_RNDIS || function == UsbManager.FUNCTION_NCM) {
                 // We need to have entitlement check for usb tethering, so use API in
-                // ConnectivityManager.
-                mConnectivityManager.startTethering(TETHERING_USB, true /* showProvisioningUi */,
+                // TetheringManager.
+                mTetheringManager.startTethering(
+                        TetheringManager.TETHERING_USB, new HandlerExecutor(mHandler),
                         mOnStartTetheringCallback);
             } else {
                 mUsbBackend.setCurrentFunctions(function);
@@ -153,7 +162,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
         }
     }
 
-    private boolean shouldIgnoreClickEvent(long function, long previousFunction) {
+    private boolean isClickEventIgnored(long function, long previousFunction) {
         return isAccessoryMode(previousFunction) && function == UsbManager.FUNCTION_MTP;
     }
 
@@ -172,12 +181,11 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     }
 
     @VisibleForTesting
-    final class OnStartTetheringCallback extends
-            ConnectivityManager.OnStartTetheringCallback {
+    final class OnStartTetheringCallback implements TetheringManager.StartTetheringCallback {
 
         @Override
-        public void onTetheringFailed() {
-            super.onTetheringFailed();
+        public void onTetheringFailed(int error) {
+            Log.w(TAG, "onTetheringFailed() error : " + error);
             mUsbBackend.setCurrentFunctions(mPreviousFunction);
         }
     }

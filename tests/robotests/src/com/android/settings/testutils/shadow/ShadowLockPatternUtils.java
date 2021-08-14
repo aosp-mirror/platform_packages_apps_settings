@@ -17,20 +17,39 @@
 package com.android.settings.testutils.shadow;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.PasswordMetrics;
 import android.content.ComponentName;
+import android.os.UserHandle;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Implements(LockPatternUtils.class)
 public class ShadowLockPatternUtils {
 
     private static boolean sDeviceEncryptionEnabled;
+    private static Map<Integer, Integer> sUserToComplexityMap = new HashMap<>();
+    private static Map<Integer, Integer> sUserToProfileComplexityMap = new HashMap<>();
+    private static Map<Integer, PasswordMetrics> sUserToMetricsMap = new HashMap<>();
+    private static Map<Integer, PasswordMetrics> sUserToProfileMetricsMap = new HashMap<>();
+
+
+    @Resetter
+    public static void reset() {
+        sUserToComplexityMap.clear();
+        sUserToProfileComplexityMap.clear();
+        sUserToMetricsMap.clear();
+        sUserToProfileMetricsMap.clear();
+        sDeviceEncryptionEnabled = false;
+    }
 
     @Implementation
     protected boolean hasSecureLockScreen() {
@@ -76,4 +95,53 @@ public class ShadowLockPatternUtils {
     protected boolean checkPasswordHistory(byte[] passwordToCheck, byte[] hashFactor, int userId) {
         return false;
     }
+
+    @Implementation
+    public @DevicePolicyManager.PasswordComplexity int getRequestedPasswordComplexity(int userId) {
+        return getRequestedPasswordComplexity(userId, false);
+    }
+
+    @Implementation
+    public @DevicePolicyManager.PasswordComplexity int getRequestedPasswordComplexity(int userId,
+            boolean deviceWideOnly) {
+        int complexity = sUserToComplexityMap.getOrDefault(userId,
+                DevicePolicyManager.PASSWORD_COMPLEXITY_NONE);
+        if (!deviceWideOnly) {
+            complexity = Math.max(complexity, sUserToProfileComplexityMap.getOrDefault(userId,
+                    DevicePolicyManager.PASSWORD_COMPLEXITY_NONE));
+        }
+        return complexity;
+    }
+
+    public static void setRequiredPasswordComplexity(int userHandle, int complexity) {
+        sUserToComplexityMap.put(userHandle, complexity);
+    }
+
+    public static void setRequiredPasswordComplexity(int complexity) {
+        sUserToComplexityMap.put(UserHandle.myUserId(), complexity);
+    }
+
+    public static void setRequiredProfilePasswordComplexity(int complexity) {
+        sUserToProfileComplexityMap.put(UserHandle.myUserId(), complexity);
+    }
+
+    @Implementation
+    public PasswordMetrics getRequestedPasswordMetrics(int userId, boolean deviceWideOnly) {
+        PasswordMetrics metrics = sUserToMetricsMap.getOrDefault(userId,
+                new PasswordMetrics(LockPatternUtils.CREDENTIAL_TYPE_NONE));
+        if (!deviceWideOnly) {
+            metrics.maxWith(sUserToProfileMetricsMap.getOrDefault(userId,
+                    new PasswordMetrics(LockPatternUtils.CREDENTIAL_TYPE_NONE)));
+        }
+        return metrics;
+    }
+
+    public static void setRequestedPasswordMetrics(PasswordMetrics metrics) {
+        sUserToMetricsMap.put(UserHandle.myUserId(), metrics);
+    }
+
+    public static void setRequestedProfilePasswordMetrics(PasswordMetrics metrics) {
+        sUserToProfileMetricsMap.put(UserHandle.myUserId(), metrics);
+    }
+
 }

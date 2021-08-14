@@ -16,6 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_BUTTON_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -30,6 +33,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
@@ -37,6 +43,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
@@ -61,44 +68,83 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             return;
         }
 
-        // In case the A11yServiceInfo doesn't exist, go to ally services list.
         final ComponentName componentName = ComponentName.unflattenFromString(extraComponentName);
+        if (openSystemAccessibilitySettingsAndFinish(componentName)) {
+            return;
+        }
+
+        if (openAccessibilityDetailsSettingsAndFinish(componentName)) {
+            return;
+        }
+        // Fall back to open accessibility services list.
+        openAccessibilitySettingsAndFinish();
+    }
+
+    private boolean openSystemAccessibilitySettingsAndFinish(
+            @Nullable ComponentName componentName) {
+        final LaunchFragmentArguments launchArguments =
+                getSystemAccessibilitySettingsLaunchArguments(componentName);
+        if (launchArguments == null) {
+            return false;
+        }
+        openSubSettings(launchArguments.mDestination, launchArguments.mArguments);
+        finish();
+        return true;
+    }
+
+    @Nullable
+    private LaunchFragmentArguments getSystemAccessibilitySettingsLaunchArguments(
+            @Nullable ComponentName componentName) {
+        if (MAGNIFICATION_COMPONENT_NAME.equals(componentName)) {
+            final String destination = ToggleScreenMagnificationPreferenceFragment.class.getName();
+            final Bundle arguments = new Bundle();
+            MagnificationGesturesPreferenceController.populateMagnificationGesturesPreferenceExtras(
+                    arguments, getContext());
+            return new LaunchFragmentArguments(destination, arguments);
+        }
+
+        if (ACCESSIBILITY_BUTTON_COMPONENT_NAME.equals(componentName)) {
+            final String destination = AccessibilityButtonFragment.class.getName();
+            return new LaunchFragmentArguments(destination, /* arguments= */ null);
+        }
+
+        return null;
+    }
+
+
+    private void openAccessibilitySettingsAndFinish() {
+        openSubSettings(AccessibilitySettings.class.getName(), /* arguments= */ null);
+        finish();
+    }
+
+    private boolean openAccessibilityDetailsSettingsAndFinish(
+            @Nullable ComponentName componentName) {
+        // In case the A11yServiceInfo doesn't exist, go to ally services list.
         final AccessibilityServiceInfo info = getAccessibilityServiceInfo(componentName);
         if (info == null) {
-            Log.w(TAG, "Open accessibility services list due to invalid component name.");
-            openAccessibilitySettingsAndFinish();
-            return;
+            Log.w(TAG, "openAccessibilityDetailsSettingsAndFinish : invalid component name.");
+            return false;
         }
 
         // In case this accessibility service isn't permitted, go to a11y services list.
         if (!isServiceAllowed(componentName.getPackageName())) {
             Log.w(TAG,
-                    "Open accessibility services list due to target accessibility service is "
+                    "openAccessibilityDetailsSettingsAndFinish: target accessibility service is"
                             + "prohibited by Device Admin.");
-            openAccessibilitySettingsAndFinish();
-            return;
+            return false;
         }
-
-        openAccessibilityDetailsSettingsAndFinish(buildArguments(info));
-    }
-
-    @VisibleForTesting
-    void openAccessibilitySettingsAndFinish() {
-        new SubSettingLauncher(getActivity())
-                .setDestination(AccessibilitySettings.class.getName())
-                .setSourceMetricsCategory(getMetricsCategory())
-                .launch();
+        openSubSettings(ToggleAccessibilityServicePreferenceFragment.class.getName(),
+                buildArguments(info));
         finish();
+        return true;
     }
 
-    @VisibleForTesting
-    void openAccessibilityDetailsSettingsAndFinish(Bundle arguments) {
+    private void openSubSettings(@NonNull String destination, @Nullable Bundle arguments) {
         new SubSettingLauncher(getActivity())
-                .setDestination(ToggleAccessibilityServicePreferenceFragment.class.getName())
+                .setDestination(destination)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .setArguments(arguments)
                 .launch();
-        finish();
     }
 
     @VisibleForTesting
@@ -174,5 +220,14 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             return;
         }
         activity.finish();
+    }
+
+    private static class LaunchFragmentArguments {
+        final String mDestination;
+        final Bundle mArguments;
+        LaunchFragmentArguments(@NonNull String destination, @Nullable Bundle arguments) {
+            mDestination = Objects.requireNonNull(destination);
+            mArguments = arguments;
+        }
     }
 }

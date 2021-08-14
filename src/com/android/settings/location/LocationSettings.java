@@ -28,7 +28,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -41,7 +41,7 @@ import java.util.List;
  * <ul>
  *     <li>Platform location controls</li>
  *     <ul>
- *         <li>In switch bar: location master switch. Used to toggle location on and off.
+ *         <li>In switch bar: location primary switch. Used to toggle location on and off.
  *         </li>
  *     </ul>
  *     <li>Recent location requests: automatically populated by {@link RecentLocationApps}</li>
@@ -55,11 +55,14 @@ import java.util.List;
  * implementation.
  */
 @SearchIndexable
-public class LocationSettings extends DashboardFragment {
+public class LocationSettings extends DashboardFragment implements
+        LocationEnabler.LocationModeChangeListener {
 
     private static final String TAG = "LocationSettings";
+    private static final String RECENT_LOCATION_ACCESS_PREF_KEY = "recent_location_access";
 
     private LocationSwitchBarController mSwitchBarController;
+    private LocationEnabler mLocationEnabler;
 
     @Override
     public int getMetricsCategory() {
@@ -70,12 +73,12 @@ public class LocationSettings extends DashboardFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar switchBar = activity.getSwitchBar();
-        switchBar.setSwitchBarText(R.string.location_settings_master_switch_title,
-                R.string.location_settings_master_switch_title);
+        final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
+        switchBar.setTitle(getContext().getString(R.string.location_settings_primary_switch_title));
+        switchBar.show();
         mSwitchBarController = new LocationSwitchBarController(activity, switchBar,
                 getSettingsLifecycle());
-        switchBar.show();
+        mLocationEnabler = new LocationEnabler(getContext(), this, getSettingsLifecycle());
     }
 
     @Override
@@ -83,11 +86,10 @@ public class LocationSettings extends DashboardFragment {
         super.onAttach(context);
 
         use(AppLocationPermissionPreferenceController.class).init(this);
-        use(RecentLocationRequestPreferenceController.class).init(this);
-        use(LocationServicePreferenceController.class).init(this);
-        use(LocationFooterPreferenceController.class).init(this);
+        use(RecentLocationAccessPreferenceController.class).init(this);
+        use(RecentLocationAccessSeeAllButtonPreferenceController.class).init(this);
         use(LocationForWorkPreferenceController.class).init(this);
-        use(LocationServiceForWorkPreferenceController.class).init(this);
+        use(LocationSettingsFooterPreferenceController.class).init(this);
     }
 
     @Override
@@ -98,6 +100,13 @@ public class LocationSettings extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    public void onLocationModeChanged(int mode, boolean restricted) {
+        if (mLocationEnabler.isEnabled(mode)) {
+            scrollToPreference(RECENT_LOCATION_ACCESS_PREF_KEY);
+        }
     }
 
     static void addPreferencesSorted(List<Preference> prefs, PreferenceGroup container) {

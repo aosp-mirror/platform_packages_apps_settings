@@ -18,15 +18,12 @@ package com.android.settings.widget;
 
 import android.annotation.IdRes;
 import android.annotation.UserIdInt;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -48,7 +45,6 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.ActionBarShadowController;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.lang.annotation.Retention;
@@ -244,7 +240,6 @@ public class EntityHeaderController {
      * Done mutating entity header, rebinds everything (optionally skip rebinding buttons).
      */
     public View done(Activity activity, boolean rebindActions) {
-        styleActionBar(activity);
         ImageView iconView = mHeader.findViewById(R.id.entity_header_icon);
         if (iconView != null) {
             iconView.setImageDrawable(mIcon);
@@ -300,32 +295,6 @@ public class EntityHeaderController {
             }
         });
         return;
-    }
-
-    /**
-     * Styles the action bar (elevation, scrolling behaviors, color, etc).
-     * <p/>
-     * This method must be called after {@link Fragment#onCreate(Bundle)}.
-     */
-    public EntityHeaderController styleActionBar(Activity activity) {
-        if (activity == null) {
-            Log.w(TAG, "No activity, cannot style actionbar.");
-            return this;
-        }
-        final ActionBar actionBar = activity.getActionBar();
-        if (actionBar == null) {
-            Log.w(TAG, "No actionbar, cannot style actionbar.");
-            return this;
-        }
-        actionBar.setBackgroundDrawable(
-                new ColorDrawable(
-                        Utils.getColorAttrDefaultColor(activity, android.R.attr.colorPrimaryDark)));
-        actionBar.setElevation(0);
-        if (mRecyclerView != null && mLifecycle != null) {
-            ActionBarShadowController.attachToView(mActivity, mLifecycle, mRecyclerView);
-        }
-
-        return this;
     }
 
     /**

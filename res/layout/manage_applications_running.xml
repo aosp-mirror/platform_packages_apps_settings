@@ -14,14 +14,15 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <FrameLayout
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
         <view class="com.android.settings.applications.RunningProcessesView"
                 android:id="@+id/running_processes"

@@ -58,11 +58,13 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.ActivityTile;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
@@ -268,8 +270,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     METHOD_GET_DYNAMIC_SUMMARY);
             refreshSummary(uri, preference);
             return createDynamicDataObserver(METHOD_GET_DYNAMIC_SUMMARY, uri, preference);
-        } else {
-            preference.setSummary(R.string.summary_placeholder);
         }
         return null;
     }
@@ -340,16 +340,16 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void setSwitchChecked(Preference pref, boolean checked) {
-        if (pref instanceof MasterSwitchPreference) {
-            ((MasterSwitchPreference) pref).setChecked(checked);
+        if (pref instanceof PrimarySwitchPreference) {
+            ((PrimarySwitchPreference) pref).setChecked(checked);
         } else if (pref instanceof SwitchPreference) {
             ((SwitchPreference) pref).setChecked(checked);
         }
     }
 
     private void setSwitchEnabled(Preference pref, boolean enabled) {
-        if (pref instanceof MasterSwitchPreference) {
-            ((MasterSwitchPreference) pref).setSwitchEnabled(enabled);
+        if (pref instanceof PrimarySwitchPreference) {
+            ((PrimarySwitchPreference) pref).setSwitchEnabled(enabled);
         } else {
             pref.setEnabled(enabled);
         }
@@ -357,19 +357,14 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @VisibleForTesting
     void bindIcon(Preference preference, Tile tile, boolean forceRoundedIcon) {
-        // Use preference context instead here when get icon from Tile, as we are using the context
-        // to get the style to tint the icon. Using mContext here won't get the correct style.
-        final Icon tileIcon = tile.getIcon(preference.getContext());
-        if (tileIcon != null) {
-            Drawable iconDrawable = tileIcon.loadDrawable(preference.getContext());
-            if (forceRoundedIcon
-                    && !TextUtils.equals(mContext.getPackageName(), tile.getPackageName())) {
-                iconDrawable = new AdaptiveIcon(mContext, iconDrawable);
-                ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);
-            }
-            preference.setIcon(iconDrawable);
-        } else if (tile.getMetaData() != null
+        // Icon provided by the content provider overrides any static icon.
+        if (tile.getMetaData() != null
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_ICON_URI)) {
+            // Set a transparent color before starting to fetch the real icon, this is necessary
+            // to avoid preference padding change.
+            setPreferenceIcon(preference, tile, forceRoundedIcon, mContext.getPackageName(),
+                    Icon.createWithResource(mContext, android.R.color.transparent));
+
             ThreadUtils.postOnBackgroundThread(() -> {
                 final Intent intent = tile.getIntent();
                 String packageName = null;
@@ -388,11 +383,33 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     return;
                 }
                 final Icon icon = Icon.createWithResource(iconInfo.first, iconInfo.second);
-                ThreadUtils.postOnMainThread(() ->
-                        preference.setIcon(icon.loadDrawable(preference.getContext()))
-                );
+                ThreadUtils.postOnMainThread(() -> {
+                    setPreferenceIcon(preference, tile, forceRoundedIcon, iconInfo.first, icon);
+                });
             });
+            return;
         }
+
+        // Use preference context instead here when get icon from Tile, as we are using the context
+        // to get the style to tint the icon. Using mContext here won't get the correct style.
+        final Icon tileIcon = tile.getIcon(preference.getContext());
+        if (tileIcon == null) {
+            return;
+        }
+        setPreferenceIcon(preference, tile, forceRoundedIcon, tile.getPackageName(), tileIcon);
+    }
+
+    private void setPreferenceIcon(Preference preference, Tile tile, boolean forceRoundedIcon,
+            String iconPackage, Icon icon) {
+        Drawable iconDrawable = icon.loadDrawable(preference.getContext());
+        if (TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
+            iconDrawable.setTint(Utils.getHomepageIconColor(preference.getContext()));
+        } else if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
+            iconDrawable = new AdaptiveIcon(mContext, iconDrawable,
+                    R.dimen.dashboard_tile_foreground_image_inset);
+            ((AdaptiveIcon) iconDrawable).setBackgroundColor(mContext, tile);
+        }
+        preference.setIcon(iconDrawable);
     }
 
     private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,
@@ -402,26 +419,41 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             return;
         }
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
+        mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
 
         if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
-            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             activity.startActivityForResult(intent, 0);
         } else if (tile.userHandle.size() == 1) {
-            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
         } else {
-            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
             if (userHandle != null && tile.userHandle.contains(userHandle)) {
                 activity.startActivityForResultAsUser(intent, 0, userHandle);
-            } else {
-                ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
-                        sourceMetricCategory);
+                return;
             }
+
+            final List<UserHandle> resolvableUsers = getResolvableUsers(intent, tile);
+            if (resolvableUsers.size() == 1) {
+                activity.startActivityForResultAsUser(intent, 0, resolvableUsers.get(0));
+                return;
+            }
+
+            ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
+                    sourceMetricCategory);
         }
     }
 
     private boolean isIntentResolvable(Intent intent) {
         return mPackageManager.resolveActivity(intent, 0) != null;
+    }
+
+    private List<UserHandle> getResolvableUsers(Intent intent, Tile tile) {
+        final ArrayList<UserHandle> eligibleUsers = new ArrayList<>();
+        for (UserHandle user : tile.userHandle) {
+            if (mPackageManager.resolveActivityAsUser(intent, 0, user.getIdentifier()) != null) {
+                eligibleUsers.add(user);
+            }
+        }
+        return eligibleUsers;
     }
 }

@@ -86,16 +86,20 @@ public class CategoryManager {
         tryInitCategories(context, forceClearCache);
     }
 
-    public synchronized void updateCategoryFromBlacklist(Set<ComponentName> tileBlacklist) {
+    /**
+     * Update category from deny list
+     * @param tileDenylist
+     */
+    public synchronized void updateCategoryFromDenylist(Set<ComponentName> tileDenylist) {
         if (mCategories == null) {
-            Log.w(TAG, "Category is null, skipping blacklist update");
+            Log.w(TAG, "Category is null, skipping denylist update");
             return;
         }
         for (int i = 0; i < mCategories.size(); i++) {
             DashboardCategory category = mCategories.get(i);
             for (int j = 0; j < category.getTilesCount(); j++) {
                 Tile tile = category.getTile(j);
-                if (tileBlacklist.contains(tile.getIntent().getComponent())) {
+                if (tileDenylist.contains(tile.getIntent().getComponent())) {
                     category.removeTile(j--);
                 }
             }

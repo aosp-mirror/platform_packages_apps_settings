@@ -93,6 +93,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     static final int LOADER_CHART_DATA = 2;
     static final int LOADER_STORAGE = 3;
     static final int LOADER_BATTERY = 4;
+    static final int LOADER_BATTERY_USAGE_STATS = 5;
 
     public static final String ARG_PACKAGE_NAME = "package";
     public static final String ARG_PACKAGE_UID = "uid";
@@ -108,6 +109,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private PackageInfo mPackageInfo;
     private int mUserId;
     private String mPackageName;
+    private int mUid;
 
     private DevicePolicyManager mDpm;
     private UserManager mUserManager;
@@ -163,6 +165,14 @@ public class AppInfoDashboardFragment extends DashboardFragment
         use(AppStoragePreferenceController.class).setParentFragment(this);
         use(AppVersionPreferenceController.class).setParentFragment(this);
         use(InstantAppDomainsPreferenceController.class).setParentFragment(this);
+        use(ExtraAppInfoPreferenceController.class).setPackageName(packageName);
+
+        final HibernationSwitchPreferenceController appHibernationSettings =
+                use(HibernationSwitchPreferenceController.class);
+        appHibernationSettings.setParentFragment(this);
+        appHibernationSettings.setPackage(packageName);
+        use(AppHibernationPreferenceCategoryController.class).setChildren(
+                Arrays.asList(appHibernationSettings));
 
         final WriteSystemSettingsPreferenceController writeSystemSettings =
                 use(WriteSystemSettingsPreferenceController.class);
@@ -187,8 +197,14 @@ public class AppInfoDashboardFragment extends DashboardFragment
         acrossProfiles.setPackageName(packageName);
         acrossProfiles.setParentFragment(this);
 
+        final AlarmsAndRemindersDetailPreferenceController alarmsAndReminders =
+                use(AlarmsAndRemindersDetailPreferenceController.class);
+        alarmsAndReminders.setPackageName(packageName);
+        alarmsAndReminders.setParentFragment(this);
+
         use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
-                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles));
+                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles,
+                alarmsAndReminders));
     }
 
     @Override
@@ -281,7 +297,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 (SettingsActivity) getActivity(), this, lifecycle, packageName, mState,
                 REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
-        controllers.add(new AppBatteryPreferenceController(context, this, packageName, lifecycle));
+        controllers.add(new AppBatteryPreferenceController(
+                context, this, packageName, getUid(), lifecycle));
         controllers.add(new AppMemoryPreferenceController(context, this, lifecycle));
         controllers.add(new DefaultHomeShortcutPreferenceController(context, packageName));
         controllers.add(new DefaultBrowserShortcutPreferenceController(context, packageName));
@@ -290,11 +307,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         controllers.add(new DefaultSmsShortcutPreferenceController(context, packageName));
 
         return controllers;
-    }
-
-    @Override
-    protected boolean isParalleledControllers() {
-        return true;
     }
 
     void addToCallbackList(Callback callback) {
@@ -526,7 +538,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     @VisibleForTesting
     int getNumberOfUserWithPackageInstalled(String packageName) {
-        final List<UserInfo> userInfos = mUserManager.getUsers(true);
+        final List<UserInfo> userInfos = mUserManager.getAliveUsers();
         int count = 0;
 
         for (final UserInfo userInfo : userInfos) {
@@ -552,13 +564,28 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final Bundle args = getArguments();
         mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
         if (mPackageName == null) {
-            final Intent intent = (args == null) ?
+            final Intent intent = args == null ?
                     getActivity().getIntent() : (Intent) args.getParcelable("intent");
             if (intent != null) {
                 mPackageName = intent.getData().getSchemeSpecificPart();
             }
         }
         return mPackageName;
+    }
+
+    private int getUid() {
+        if (mUid > 0) {
+            return mUid;
+        }
+        final Bundle args = getArguments();
+        mUid = (args != null) ? args.getInt(ARG_PACKAGE_UID) : -1;
+        if (mUid <= 0) {
+            final Intent intent = args == null
+                    ? getActivity().getIntent() : (Intent) args.getParcelable("intent");
+            mUid = intent != null && intent.getExtras() != null
+                    ? mUid = intent.getIntExtra("uId", -1) : -1;
+        }
+        return mUid;
     }
 
     @VisibleForTesting

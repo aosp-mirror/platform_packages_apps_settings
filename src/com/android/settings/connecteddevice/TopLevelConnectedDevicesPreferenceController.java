@@ -33,10 +33,4 @@ public class TopLevelConnectedDevicesPreferenceController extends BasePreference
         return mContext.getResources().getBoolean(R.bool.config_show_top_level_connected_devices)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
-
-    @Override
-    public CharSequence getSummary() {
-        return mContext.getText(
-                AdvancedConnectedDeviceController.getConnectedDevicesSummaryResourceId(mContext));
-    }
 }

@@ -19,17 +19,16 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/nfc_quick_toggle_title">
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="nfc_detection_point"
-        android:selectable="false"
-        android:layout="@layout/nfc_detection_point"
-        settings:controller="com.android.settings.nfc.NfcDetectionPointController"/>
-
-    <SwitchPreference
+    <com.android.settingslib.widget.MainSwitchPreference
         android:key="toggle_nfc"
-        android:title="@string/nfc_quick_toggle_title"
-        android:summary="@string/nfc_quick_toggle_summary"
+        android:title="@string/nfc_main_switch_title"
         settings:controller="com.android.settings.nfc.NfcPreferenceController"/>
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="nfc_detection_point"
+        settings:searchable="false"
+        settings:lottie_rawRes="@drawable/nfc_detection_point"
+        settings:controller="com.android.settings.nfc.NfcDetectionPointController"/>
 
     <SwitchPreference
         android:key="nfc_secure_settings"

@@ -16,43 +16,37 @@
 
 package com.android.settings.dream;
 
-import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settingslib.dream.DreamBackend;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class StartNowPreferenceControllerTest {
 
     private StartNowPreferenceController mController;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private LayoutPreference mLayoutPref;
-    @Mock
-    private Button mButton;
+    private MainSwitchPreference mPref;
     @Mock
     private DreamBackend mBackend;
 
@@ -60,36 +54,38 @@ public class StartNowPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        mController = new StartNowPreferenceController(mContext);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mLayoutPref);
-        when(mLayoutPref.findViewById(R.id.dream_start_now_button)).thenReturn(mButton);
+        mContext = spy(RuntimeEnvironment.application);
+        mController = new StartNowPreferenceController(mContext, "key");
+        mPref = mock(MainSwitchPreference.class);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPref);
 
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
     }
 
     @Test
-    public void setsOnClickListenerForStartNow() {
-        ArgumentCaptor<OnClickListener> captor =
-                ArgumentCaptor.forClass(Button.OnClickListener.class);
-
+    public void displayPreference_shouldAddOnSwitchChangeListener() {
         mController.displayPreference(mScreen);
-        verify(mButton).setOnClickListener(captor.capture());
-        assertThat(captor.getValue()).isNotNull();
+
+        verify(mPref).addOnSwitchChangeListener(mController);
     }
 
     @Test
-    public void buttonIsDisabledWhenNeverDreaming() {
+    public void updateState_neverDreaming_preferenceShouldDidabled() {
         when(mBackend.getWhenToDreamSetting()).thenReturn(DreamBackend.NEVER);
+        mController.displayPreference(mScreen);
 
-        mController.updateState(mLayoutPref);
-        verify(mButton).setEnabled(false);
+        mController.updateState(mPref);
+
+        verify(mPref).setEnabled(false);
     }
 
     @Test
-    public void buttonIsEnabledWhenDreamIsAvailable() {
+    public void updateState_dreamIsAvailable_preferenceShouldEnabled() {
         when(mBackend.getWhenToDreamSetting()).thenReturn(DreamBackend.EITHER);
+        mController.displayPreference(mScreen);
 
-        mController.updateState(mLayoutPref);
-        verify(mButton).setEnabled(true);
+        mController.updateState(mPref);
+
+        verify(mPref).setEnabled(true);
     }
 }

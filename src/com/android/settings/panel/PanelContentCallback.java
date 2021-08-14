@@ -37,4 +37,14 @@ public interface PanelContentCallback {
      * It will be called when panel requests to close itself.
      */
     void forceClose();
+
+    /**
+     * It will be called when panel requests to change the title.
+     */
+    void onTitleChanged();
+
+    /**
+     * It will be called when panel requests to change the progress bar visibility.
+     */
+    void onProgressBarVisibleChanged();
 }

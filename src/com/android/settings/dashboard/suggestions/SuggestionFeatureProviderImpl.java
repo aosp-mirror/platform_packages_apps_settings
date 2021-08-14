@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollSuggestionActivity;
@@ -84,6 +85,11 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     @Override
     public SharedPreferences getSharedPrefs(Context context) {
         return context.getSharedPreferences(SHARED_PREF_FILENAME, Context.MODE_PRIVATE);
+    }
+
+    @Override
+    public Class<? extends Fragment> getContextualSuggestionFragment() {
+        return null;
     }
 
     public SuggestionFeatureProviderImpl(Context context) {

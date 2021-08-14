@@ -44,9 +44,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.core.HideNonSystemOverlayMixin;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.vpn2.VpnUtils;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 /**
  * CredentialStorage handles resetting and installing keys into KeyStore.
@@ -358,9 +358,11 @@ public final class CredentialStorage extends FragmentActivity {
      */
     private boolean confirmKeyGuard(int requestCode) {
         final Resources res = getResources();
-        return new ChooseLockSettingsHelper(this)
-                .launchConfirmationActivity(requestCode,
-                        res.getText(R.string.credentials_title), true);
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(this);
+        return builder.setRequestCode(requestCode)
+                .setTitle(res.getText(R.string.credentials_title))
+                .show();
     }
 
     @Override

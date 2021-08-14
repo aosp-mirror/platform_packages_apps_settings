@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/dialog_scrollview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -335,7 +335,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/wifi_item" >
-                <!--  Dummy to enable right-justification of checkbox -->
+                <!--  Placeholder to enable right-justification of checkbox -->
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -445,7 +445,7 @@
                     android:layout_height="wrap_content"
                     style="@style/wifi_item"
                     android:visibility="gone">
-                <!--  Dummy to enable right-justification of warning -->
+                <!--  Placeholder to enable right-justification of warning -->
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -704,4 +704,4 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

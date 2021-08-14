@@ -27,10 +27,13 @@ android_test {
         "androidx.test.espresso.contrib-nodeps",
         "androidx.test.espresso.intents-nodeps",
         "androidx.test.ext.junit",
+        "androidx.preference_preference",
         "mockito-target-minus-junit4",
         "platform-test-annotations",
         "truth-prebuilt",
         "ub-uiautomator",
+        // Don't add SettingsLib libraries here - you can use them directly as they are in the
+        // instrumented Settings app.
     ],
 
     // Include all test java files.

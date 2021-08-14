@@ -66,6 +66,7 @@ public class NetworkSelectSettings extends DashboardFragment {
     private static final int EVENT_NETWORK_SCAN_COMPLETED = 4;
 
     private static final String PREF_KEY_NETWORK_OPERATORS = "network_operators_preference";
+    private static final int MIN_NUMBER_OF_SCAN_REQUIRED = 2;
 
     @VisibleForTesting
     PreferenceCategory mPreferenceCategory;
@@ -87,8 +88,8 @@ public class NetworkSelectSettings extends DashboardFragment {
     private long mRequestIdManualNetworkSelect;
     private long mRequestIdManualNetworkScan;
     private long mWaitingForNumberOfScanResults;
-
-    private static final int MIN_NUMBER_OF_SCAN_REQUIRED = 2;
+    @VisibleForTesting
+    boolean mIsAggregationEnabled = false;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -115,6 +116,11 @@ public class NetworkSelectSettings extends DashboardFragment {
 
         mMetricsFeatureProvider = FeatureFactory
                 .getFactory(getContext()).getMetricsFeatureProvider();
+
+        mIsAggregationEnabled = getContext().getResources().getBoolean(
+                R.bool.config_network_selection_list_aggregation_enabled);
+        Log.d(TAG, "init: mUseNewApi:" + mUseNewApi
+                + " ,mIsAggregationEnabled:" + mIsAggregationEnabled);
     }
 
     @Override
@@ -244,7 +250,7 @@ public class NetworkSelectSettings extends DashboardFragment {
                         stopNetworkQuery();
                     }
 
-                    mCellInfoList = new ArrayList<>(results);
+                    mCellInfoList = doAggregation(results);
                     Log.d(TAG, "CellInfoList: " + CellInfoUtil.cellInfoListToString(mCellInfoList));
                     if (mCellInfoList != null && mCellInfoList.size() != 0) {
                         final NetworkOperatorPreference connectedPref =
@@ -307,6 +313,31 @@ public class NetworkSelectSettings extends DashboardFragment {
             return;
         }
     };
+
+    @VisibleForTesting
+    List<CellInfo> doAggregation(List<CellInfo> cellInfoListInput) {
+        if (!mIsAggregationEnabled) {
+            Log.d(TAG, "no aggregation");
+            return new ArrayList<>(cellInfoListInput);
+        }
+        ArrayList<CellInfo> aggregatedList = new ArrayList<>();
+        for (CellInfo cellInfo : cellInfoListInput) {
+            String plmn = CellInfoUtil.getNetworkTitle(cellInfo.getCellIdentity(),
+                    CellInfoUtil.getCellIdentityMccMnc(cellInfo.getCellIdentity()));
+            Class className = cellInfo.getClass();
+
+            if (aggregatedList.stream().anyMatch(
+                    item -> {
+                        String itemPlmn = CellInfoUtil.getNetworkTitle(item.getCellIdentity(),
+                                CellInfoUtil.getCellIdentityMccMnc(item.getCellIdentity()));
+                        return itemPlmn.equals(plmn) && item.getClass().equals(className);
+                    })) {
+                continue;
+            }
+            aggregatedList.add(cellInfo);
+        }
+        return aggregatedList;
+    }
 
     private final NetworkScanHelper.NetworkScanCallback mCallback =
             new NetworkScanHelper.NetworkScanCallback() {
@@ -414,19 +445,30 @@ public class NetworkSelectSettings extends DashboardFragment {
             if (networkList == null || networkList.size() == 0) {
                 return;
             }
+            // Due to the aggregation of cell between carriers, it's possible to get CellIdentity
+            // containing forbidden PLMN.
+            // Getting current network from ServiceState is no longer a good idea.
+            // Add an additional rule to avoid from showing forbidden PLMN to the user.
+            if (mForbiddenPlmns == null) {
+                updateForbiddenPlmns();
+            }
             for (NetworkRegistrationInfo regInfo : networkList) {
                 final CellIdentity cellIdentity = regInfo.getCellIdentity();
-                if (cellIdentity != null) {
-                    final NetworkOperatorPreference pref = new NetworkOperatorPreference(
-                            getPrefContext(), cellIdentity, mForbiddenPlmns, mShow4GForLTE);
-                    pref.setSummary(R.string.network_connected);
-                    // Update the signal strength icon, since the default signalStrength value
-                    // would be zero
-                    // (it would be quite confusing why the connected network has no signal)
-                    pref.setIcon(SignalStrength.NUM_SIGNAL_STRENGTH_BINS - 1);
-                    mPreferenceCategory.addPreference(pref);
-                    break;
+                if (cellIdentity == null) {
+                    continue;
                 }
+                final NetworkOperatorPreference pref = new NetworkOperatorPreference(
+                        getPrefContext(), cellIdentity, mForbiddenPlmns, mShow4GForLTE);
+                if (pref.isForbiddenNetwork()) {
+                    continue;
+                }
+                pref.setSummary(R.string.network_connected);
+                // Update the signal strength icon, since the default signalStrength value
+                // would be zero
+                // (it would be quite confusing why the connected network has no signal)
+                pref.setIcon(SignalStrength.NUM_SIGNAL_STRENGTH_BINS - 1);
+                mPreferenceCategory.addPreference(pref);
+                break;
             }
         }
     }

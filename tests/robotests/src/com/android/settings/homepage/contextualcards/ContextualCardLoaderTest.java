@@ -71,25 +71,25 @@ public class ContextualCardLoaderTest {
     }
 
     @Test
-    public void getDisplayableCards_twoEligibleCards_notExceedDefaultCardCount() {
+    public void getDisplayableCards_twoEligibleCards_shouldShowAll() {
         final List<ContextualCard> cards = getContextualCardList().stream().limit(2)
                 .collect(Collectors.toList());
         doReturn(cards).when(mContextualCardLoader).filterEligibleCards(anyList());
 
         final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(cards);
 
-        assertThat(result).hasSize(Math.min(cards.size(), DEFAULT_CARD_COUNT));
+        assertThat(result).hasSize(cards.size());
     }
 
     @Test
-    public void getDisplayableCards_fourEligibleCards_notExceedDefaultCardCount() {
+    public void getDisplayableCards_fourEligibleCards_shouldShowDefaultCardCount() {
         final List<ContextualCard> cards = getContextualCardList().stream().limit(4)
                 .collect(Collectors.toList());
         doReturn(cards).when(mContextualCardLoader).filterEligibleCards(anyList());
 
         final List<ContextualCard> result = mContextualCardLoader.getDisplayableCards(cards);
 
-        assertThat(result).hasSize(Math.min(cards.size(), DEFAULT_CARD_COUNT));
+        assertThat(result).hasSize(DEFAULT_CARD_COUNT);
     }
 
     @Test
@@ -139,7 +139,7 @@ public class ContextualCardLoaderTest {
 
     @Test
     public void getCardCount_noConfiguredCardCount_returnDefaultCardCount() {
-        assertThat(mContextualCardLoader.getCardCount(mContext)).isEqualTo(DEFAULT_CARD_COUNT);
+        assertThat(mContextualCardLoader.getCardCount()).isEqualTo(DEFAULT_CARD_COUNT);
     }
 
     @Test
@@ -148,7 +148,7 @@ public class ContextualCardLoaderTest {
         Settings.Global.putLong(mContext.getContentResolver(),
                 ContextualCardLoader.CONTEXTUAL_CARD_COUNT, configCount);
 
-        assertThat(mContextualCardLoader.getCardCount(mContext)).isEqualTo(configCount);
+        assertThat(mContextualCardLoader.getCardCount()).isEqualTo(configCount);
     }
 
     private List<ContextualCard> getContextualCardList() {

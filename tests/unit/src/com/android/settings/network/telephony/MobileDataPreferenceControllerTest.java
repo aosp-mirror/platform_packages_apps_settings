@@ -28,7 +28,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Instrumentation;
 import android.content.Context;
-import android.content.res.Resources;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -39,6 +38,8 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
+
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -168,8 +169,9 @@ public class MobileDataPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
-        assertThat(mPreference.getSummary())
-                .isEqualTo(resourceString("mobile_data_settings_summary_auto_switch"));
+        assertThat(mPreference.getSummary()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext,
+                        "mobile_data_settings_summary_auto_switch"));
     }
 
     @Test
@@ -180,12 +182,7 @@ public class MobileDataPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isTrue();
-        assertThat(mPreference.getSummary())
-                .isEqualTo(resourceString("mobile_data_settings_summary"));
-    }
-
-    public String resourceString(String name) {
-        final Resources res = mContext.getResources();
-        return res.getString(res.getIdentifier(name, "string", mContext.getPackageName()));
+        assertThat(mPreference.getSummary()).isEqualTo(
+                ResourcesUtils.getResourcesString(mContext, "mobile_data_settings_summary"));
     }
 }

@@ -25,9 +25,13 @@ import static com.android.settings.network.telephony.TelephonyConstants.RadioAcc
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -38,8 +42,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.PersistableBundle;
 import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -47,6 +55,8 @@ import android.telephony.TelephonyManager;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.network.ims.MockWfcQueryImsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -83,11 +93,18 @@ public class MobileNetworkUtilsTest {
     private ResolveInfo mResolveInfo;
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
+    @Mock
+    private ConnectivityManager mConnectivityManager;
+    @Mock
+    private TelecomManager mTelecomManager;
 
     private Context mContext;
     private PersistableBundle mCarrierConfig;
     private PhoneAccountHandle mPhoneAccountHandle;
     private ComponentName mComponentName;
+    private NetworkCapabilities mNetworkCapabilities;
+    private Network mNetwork;
+    private MockWfcQueryImsState mMockQueryWfcState;
 
     @Before
     public void setUp() {
@@ -96,7 +113,6 @@ public class MobileNetworkUtilsTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID_1)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID_2)).thenReturn(mTelephonyManager2);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
@@ -107,6 +123,10 @@ public class MobileNetworkUtilsTest {
         mCarrierConfig = new PersistableBundle();
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID_1)).thenReturn(mCarrierConfig);
 
+        mNetwork = mock(Network.class, CALLS_REAL_METHODS);
+        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
+        when(mConnectivityManager.getActiveNetwork()).thenReturn(mNetwork);
+
         when(mSubscriptionInfo1.getSubscriptionId()).thenReturn(SUB_ID_1);
         when(mSubscriptionInfo1.getCarrierName()).thenReturn(PLMN_FROM_SUB_ID_1);
         when(mSubscriptionInfo2.getSubscriptionId()).thenReturn(SUB_ID_2);
@@ -114,11 +134,14 @@ public class MobileNetworkUtilsTest {
 
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
-        when(mSubscriptionManager.getAccessibleSubscriptionInfoList()).thenReturn(
-                Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
 
         when(mTelephonyManager.getNetworkOperatorName()).thenReturn(
                 PLMN_FROM_TELEPHONY_MANAGER_API);
+
+        when(mContext.getSystemService(TelecomManager.class)).thenReturn(mTelecomManager);
+        when(mTelecomManager.getSimCallManagerForSubscription(SUB_ID_1))
+                .thenReturn(mPhoneAccountHandle);
+        mMockQueryWfcState = new MockWfcQueryImsState(mContext, SUB_ID_1);
     }
 
     @Test
@@ -152,8 +175,7 @@ public class MobileNetworkUtilsTest {
 
     @Test
     public void buildConfigureIntent_noActivityHandleIntent_returnNull() {
-        when(mPackageManager.queryIntentActivities(nullable(Intent.class), anyInt()))
-                .thenReturn(new ArrayList<>());
+        buildPhoneAccountConfigureIntent(false);
 
         assertThat(MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
                 mPhoneAccountHandle)).isNull();
@@ -161,10 +183,7 @@ public class MobileNetworkUtilsTest {
 
     @Test
     public void buildConfigureIntent_hasActivityHandleIntent_returnIntent() {
-        mComponentName = new ComponentName(PACKAGE_NAME, "testClass");
-        mPhoneAccountHandle = new PhoneAccountHandle(mComponentName, "");
-        when(mPackageManager.queryIntentActivities(nullable(Intent.class), anyInt()))
-                .thenReturn(Arrays.asList(mResolveInfo));
+        buildPhoneAccountConfigureIntent(true);
 
         assertThat(MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
                 mPhoneAccountHandle)).isNotNull();
@@ -343,5 +362,73 @@ public class MobileNetworkUtilsTest {
     public void getCurrentCarrierNameForDisplay_withoutSubId_returnNotNull() {
         assertThat(MobileNetworkUtils.getCurrentCarrierNameForDisplay(
                 mContext)).isNotNull();
+    }
+
+    @Test
+    public void isCellularNetwork_withCellularNetwork_returnTrue() {
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
+
+        assertTrue(MobileNetworkUtils.activeNetworkIsCellular(mContext));
+    }
+
+    @Test
+    public void isCellularNetwork_withWifiNetwork_returnFalse() {
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+
+        assertFalse(MobileNetworkUtils.activeNetworkIsCellular(mContext));
+    }
+
+    private void addNetworkTransportType (int networkType) {
+        mNetworkCapabilities = new NetworkCapabilities.Builder()
+                .addTransportType(networkType).build();
+        when(mConnectivityManager.getNetworkCapabilities(mNetwork)).thenReturn(
+                mNetworkCapabilities);
+    }
+
+    @Test
+    public void isWifiCallingEnabled_hasPhoneAccountHandleAndHasActivityHandleIntent_returnTrue() {
+        buildPhoneAccountConfigureIntent(true);
+
+        assertTrue(MobileNetworkUtils.isWifiCallingEnabled(mContext, SUB_ID_1,
+                null, mPhoneAccountHandle));
+    }
+
+    @Test
+    public void isWifiCallingEnabled_hasPhoneAccountHandleAndNoActivityHandleIntent_returnFalse() {
+        buildPhoneAccountConfigureIntent(false);
+
+        assertFalse(MobileNetworkUtils.isWifiCallingEnabled(mContext, SUB_ID_1,
+                null, mPhoneAccountHandle));
+    }
+
+    @Test
+    public void isWifiCallingEnabled_noPhoneAccountHandleAndWifiCallingIsReady_returnTrue() {
+        setWifiCallingEnabled(true);
+
+        assertTrue(MobileNetworkUtils.isWifiCallingEnabled(mContext, SUB_ID_1,
+                mMockQueryWfcState, null));
+    }
+
+    @Test
+    public void isWifiCallingEnabled_noPhoneAccountHandleAndWifiCallingNotReady_returnFalse() {
+        setWifiCallingEnabled(false);
+
+        assertFalse(MobileNetworkUtils.isWifiCallingEnabled(mContext, SUB_ID_1,
+                mMockQueryWfcState, null));
+    }
+
+    private void setWifiCallingEnabled(boolean enabled){
+        mMockQueryWfcState.setIsEnabledByUser(enabled);
+        mMockQueryWfcState.setServiceStateReady(enabled);
+        mMockQueryWfcState.setIsEnabledByPlatform(enabled);
+        mMockQueryWfcState.setIsProvisionedOnDevice(enabled);
+    }
+
+    private void buildPhoneAccountConfigureIntent(boolean hasActivityHandleIntent) {
+        mComponentName = new ComponentName(PACKAGE_NAME, "testClass");
+        mPhoneAccountHandle = new PhoneAccountHandle(mComponentName, "");
+        when(mPackageManager.queryIntentActivities(nullable(Intent.class), anyInt()))
+                .thenReturn(
+                        hasActivityHandleIntent ? Arrays.asList(mResolveInfo) : new ArrayList<>());
     }
 }

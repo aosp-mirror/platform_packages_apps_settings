@@ -24,10 +24,11 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.UserManager;
+import android.text.BidiFormatter;
 
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
 
 import org.junit.After;
 import org.junit.Before;
@@ -47,11 +48,7 @@ import org.robolectric.util.ReflectionHelpers;
 public class TopLevelNetworkEntryPreferenceControllerTest {
 
     @Mock
-    private WifiMasterSwitchPreferenceController mWifiPreferenceController;
-    @Mock
-    private MobileNetworkPreferenceController mMobileNetworkPreferenceController;
-    @Mock
-    private TetherPreferenceController mTetherPreferenceController;
+    private MobileNetworkPreferenceController mMobileNetworkPreferenceController;;
 
     private Context mContext;
     private TopLevelNetworkEntryPreferenceController mController;
@@ -66,12 +63,8 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
 
         mController = new TopLevelNetworkEntryPreferenceController(mContext, "test_key");
 
-        ReflectionHelpers.setField(mController, "mWifiPreferenceController",
-                mWifiPreferenceController);
         ReflectionHelpers.setField(mController, "mMobileNetworkPreferenceController",
                 mMobileNetworkPreferenceController);
-        ReflectionHelpers.setField(mController, "mTetherPreferenceController",
-                mTetherPreferenceController);
     }
 
     @After
@@ -86,21 +79,18 @@ public class TopLevelNetworkEntryPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_hasMobileAndHotspot_shouldReturnMobileSummary() {
-        when(mWifiPreferenceController.isAvailable()).thenReturn(true);
+    public void getSummary_hasMobile_shouldReturnMobileSummary() {
         when(mMobileNetworkPreferenceController.isAvailable()).thenReturn(true);
-        when(mTetherPreferenceController.isAvailable()).thenReturn(true);
 
-        assertThat(mController.getSummary())
-                .isEqualTo("Wi\u2011Fi, mobile, data usage, and hotspot");
+        assertThat(mController.getSummary()).isEqualTo(BidiFormatter.getInstance().unicodeWrap(
+                mContext.getString(R.string.network_dashboard_summary_mobile)));
     }
 
     @Test
-    public void getSummary_noMobileOrHotspot_shouldReturnSimpleSummary() {
-        when(mWifiPreferenceController.isAvailable()).thenReturn(true);
+    public void getSummary_noMobile_shouldReturnNoMobileSummary() {
         when(mMobileNetworkPreferenceController.isAvailable()).thenReturn(false);
-        when(mTetherPreferenceController.isAvailable()).thenReturn(false);
 
-        assertThat(mController.getSummary()).isEqualTo("Wi\u2011Fi and data usage");
+        assertThat(mController.getSummary()).isEqualTo(BidiFormatter.getInstance().unicodeWrap(
+                mContext.getString(R.string.network_dashboard_summary_no_mobile)));
     }
 }

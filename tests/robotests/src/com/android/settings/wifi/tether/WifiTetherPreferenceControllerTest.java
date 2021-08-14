@@ -31,7 +31,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -66,7 +66,7 @@ public class WifiTetherPreferenceControllerTest {
     private WifiTetherPreferenceController mController;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
-    private MasterSwitchPreference mPreference;
+    private PrimarySwitchPreference mPreference;
 
     @Before
     public void setUp() {
@@ -76,7 +76,7 @@ public class WifiTetherPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         FakeFeatureFactory.setupForTest();
-        mPreference = new MasterSwitchPreference(RuntimeEnvironment.application);
+        mPreference = new PrimarySwitchPreference(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);

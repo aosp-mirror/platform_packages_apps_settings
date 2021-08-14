@@ -24,12 +24,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.ProxyInfo;
 
-import androidx.preference.Preference;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -39,7 +36,7 @@ public class GlobalHttpProxyPreferenceControllerTest {
 
     private static final String KEY_GLOBAL_HTTP_PROXY = "global_http_proxy";
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    @Mock
     private Context mContext;
     @Mock
     private ConnectivityManager mCm;
@@ -49,6 +46,7 @@ public class GlobalHttpProxyPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mCm);
         mController = new GlobalHttpProxyPreferenceController(mContext);
     }
 
@@ -59,12 +57,6 @@ public class GlobalHttpProxyPreferenceControllerTest {
 
         when(mCm.getGlobalProxy()).thenReturn(ProxyInfo.buildDirectProxy("localhost", 123));
         assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void testHandlePreferenceTreeClick() {
-        assertThat(mController.handlePreferenceTreeClick(new Preference(mContext, null, 0, 0)))
-                .isFalse();
     }
 
     @Test
