@@ -405,18 +405,6 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
-    public void assertThat_chooseLockIconChanged_WhenFingerprintExtraSet() {
-        ShadowDrawable drawable = setActivityAndGetIconDrawable(true);
-        assertThat(drawable.getCreatedFromResId()).isEqualTo(R.drawable.ic_fingerprint_header);
-    }
-
-    @Test
-    public void assertThat_chooseLockIconNotChanged_WhenFingerprintExtraSet() {
-        ShadowDrawable drawable = setActivityAndGetIconDrawable(false);
-        assertThat(drawable.getCreatedFromResId()).isNotEqualTo(R.drawable.ic_fingerprint_header);
-    }
-
-    @Test
     public void validateComplexityMergedFromDpmOnCreate() {
         ShadowLockPatternUtils.setRequiredPasswordComplexity(PASSWORD_COMPLEXITY_LOW);
 
