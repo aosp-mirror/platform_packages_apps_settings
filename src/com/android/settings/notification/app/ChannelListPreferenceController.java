@@ -41,7 +41,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
@@ -82,6 +82,11 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
             }
         }
         return true;
+    }
+
+    @Override
+    boolean isIncludedInFilter() {
+        return false;
     }
 
     @Override
@@ -204,23 +209,23 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
      * the preference.
      */
     @NonNull
-    private MasterSwitchPreference findOrCreateChannelPrefForKey(
+    private PrimarySwitchPreference findOrCreateChannelPrefForKey(
             @NonNull PreferenceGroup groupPrefGroup, @NonNull String key, int expectedIndex) {
         int preferenceCount = groupPrefGroup.getPreferenceCount();
         if (expectedIndex < preferenceCount) {
             Preference preference = groupPrefGroup.getPreference(expectedIndex);
             if (key.equals(preference.getKey())) {
-                return (MasterSwitchPreference) preference;
+                return (PrimarySwitchPreference) preference;
             }
         }
         for (int i = 0; i < preferenceCount; i++) {
             Preference preference = groupPrefGroup.getPreference(i);
             if (key.equals(preference.getKey())) {
                 preference.setOrder(expectedIndex);
-                return (MasterSwitchPreference) preference;
+                return (PrimarySwitchPreference) preference;
             }
         }
-        MasterSwitchPreference channelPref = new MasterSwitchPreference(mContext);
+        PrimarySwitchPreference channelPref = new PrimarySwitchPreference(mContext);
         channelPref.setOrder(expectedIndex);
         channelPref.setKey(key);
         groupPrefGroup.addPreference(channelPref);
@@ -252,7 +257,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 continue;
             }
             // Get or create the row, and populate its current state.
-            MasterSwitchPreference channelPref = findOrCreateChannelPrefForKey(groupPrefGroup,
+            PrimarySwitchPreference channelPref = findOrCreateChannelPrefForKey(groupPrefGroup,
                     channel.getId(), /* expectedIndex */ finalOrderedPrefs.size());
             updateSingleChannelPrefs(channelPref, channel, group.isBlocked());
             finalOrderedPrefs.add(channelPref);
@@ -307,7 +312,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
     }
 
     /** Update the properties of the channel preference with the values from the channel object. */
-    private void updateSingleChannelPrefs(@NonNull final MasterSwitchPreference channelPref,
+    private void updateSingleChannelPrefs(@NonNull final PrimarySwitchPreference channelPref,
             @NonNull final NotificationChannel channel,
             final boolean groupBlocked) {
         channelPref.setSwitchEnabled(mAdmin == null
@@ -317,9 +322,9 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         if (channel.getImportance() > IMPORTANCE_LOW) {
             channelPref.setIcon(getAlertingIcon());
         } else {
-            channelPref.setIcon(null);
+            channelPref.setIcon(R.drawable.empty_icon);
         }
-        channelPref.setIconSize(MasterSwitchPreference.ICON_SIZE_SMALL);
+        channelPref.setIconSize(PrimarySwitchPreference.ICON_SIZE_SMALL);
         channelPref.setTitle(channel.getName());
         channelPref.setSummary(NotificationBackend.getSentSummary(
                 mContext, mAppRow.sentByChannel.get(channel.getId()), false));
@@ -339,11 +344,13 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         channelPref.setOnPreferenceChangeListener(
                 (preference, o) -> {
                     boolean value = (Boolean) o;
-                    int importance = value ? channel.getOriginalImportance() : IMPORTANCE_NONE;
+                    int importance = value
+                            ? Math.max(channel.getOriginalImportance(), IMPORTANCE_LOW)
+                            : IMPORTANCE_NONE;
                     channel.setImportance(importance);
                     channel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
-                    MasterSwitchPreference channelPref1 = (MasterSwitchPreference) preference;
-                    channelPref1.setIcon(null);
+                    PrimarySwitchPreference channelPref1 = (PrimarySwitchPreference) preference;
+                    channelPref1.setIcon(R.drawable.empty_icon);
                     if (channel.getImportance() > IMPORTANCE_LOW) {
                         channelPref1.setIcon(getAlertingIcon());
                     }

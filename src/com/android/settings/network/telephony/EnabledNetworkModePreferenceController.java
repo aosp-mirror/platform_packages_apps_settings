@@ -35,6 +35,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
+import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 import java.util.ArrayList;
@@ -47,7 +48,8 @@ import java.util.stream.Stream;
  */
 public class EnabledNetworkModePreferenceController extends
         TelephonyBasePreferenceController implements
-        ListPreference.OnPreferenceChangeListener, LifecycleObserver {
+        ListPreference.OnPreferenceChangeListener, LifecycleObserver,
+        SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
 
     private static final String LOG_TAG = "EnabledNetworkMode";
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
@@ -56,9 +58,12 @@ public class EnabledNetworkModePreferenceController extends
     private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
     private PreferenceEntriesBuilder mBuilder;
+    private SubscriptionsChangeListener mSubscriptionsListener;
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
+        mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
+        mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
     }
 
     @Override
@@ -85,6 +90,7 @@ public class EnabledNetworkModePreferenceController extends
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
+        mSubscriptionsListener.start();
         if (mAllowedNetworkTypesListener == null) {
             return;
         }
@@ -93,6 +99,7 @@ public class EnabledNetworkModePreferenceController extends
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
+        mSubscriptionsListener.stop();
         if (mAllowedNetworkTypesListener == null) {
             return;
         }
@@ -139,14 +146,16 @@ public class EnabledNetworkModePreferenceController extends
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
-        mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
         mBuilder = new PreferenceEntriesBuilder(mContext, mSubId);
 
         if (mAllowedNetworkTypesListener == null) {
             mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                     mContext.getMainExecutor());
             mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
-                    () -> updatePreference());
+                    () -> {
+                        mBuilder.updateConfig();
+                        updatePreference();
+                    });
         }
 
         lifecycle.addObserver(this);
@@ -196,11 +205,14 @@ public class EnabledNetworkModePreferenceController extends
         PreferenceEntriesBuilder(Context context, int subId) {
             this.mContext = context;
             this.mSubId = subId;
-
             mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
             mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                     .createForSubscriptionId(mSubId);
+            updateConfig();
+        }
 
+        public void updateConfig() {
+            mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
             final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
             mAllowed5gNetworkType = checkSupportedRadioBitmask(
                     mTelephonyManager.getAllowedNetworkTypesForReason(
@@ -214,6 +226,11 @@ public class EnabledNetworkModePreferenceController extends
                     && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
             mShow4gForLTE = carrierConfig != null && carrierConfig.getBoolean(
                     CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
+            Log.d(LOG_TAG, "PreferenceEntriesBuilder: subId" + mSubId
+                    + ",Supported5gRadioAccessFamily :" + mSupported5gRadioAccessFamily
+                    + ",mAllowed5gNetworkType :" + mAllowed5gNetworkType
+                    + ",IsGlobalCdma :" + mIsGlobalCdma
+                    + ",Show4gForLTE :" + mShow4gForLTE);
         }
 
         void setPreferenceEntries() {
@@ -572,9 +589,7 @@ public class EnabledNetworkModePreferenceController extends
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA:
                     setSelectedEntry(
                             TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA);
-                    setSummary(getResourcesForSubId().getString(R.string.network_5G)
-                            + getResourcesForSubId().getString(
-                            R.string.network_recommended));
+                    setSummary(getResourcesForSubId().getString(R.string.network_5G_recommended));
                     break;
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA:
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM:
@@ -583,15 +598,11 @@ public class EnabledNetworkModePreferenceController extends
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
                     setSelectedEntry(TelephonyManagerConstants
                             .NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
-                    setSummary(getResourcesForSubId().getString(R.string.network_5G)
-                            + getResourcesForSubId().getString(
-                            R.string.network_recommended));
+                    setSummary(getResourcesForSubId().getString(R.string.network_5G_recommended));
                     break;
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO:
                     setSelectedEntry(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO);
-                    setSummary(getResourcesForSubId().getString(R.string.network_5G)
-                            + getResourcesForSubId().getString(
-                            R.string.network_recommended));
+                    setSummary(getResourcesForSubId().getString(R.string.network_5G_recommended));
                     break;
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA:
                     setSelectedEntry(
@@ -601,9 +612,8 @@ public class EnabledNetworkModePreferenceController extends
                             || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
                         setSummary(R.string.network_global);
                     } else {
-                        setSummary(getResourcesForSubId().getString(R.string.network_5G)
-                                + getResourcesForSubId().getString(
-                                R.string.network_recommended));
+                        setSummary(getResourcesForSubId().getString(
+                                R.string.network_5G_recommended));
                     }
                     break;
                 default:
@@ -620,7 +630,7 @@ public class EnabledNetworkModePreferenceController extends
          * @return the corresponding network mode with 5G.
          */
         private int addNrToLteNetworkType(int networkType) {
-            switch(networkType) {
+            switch (networkType) {
                 case TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY:
                     return TelephonyManagerConstants.NETWORK_MODE_NR_LTE;
                 case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO:
@@ -654,7 +664,7 @@ public class EnabledNetworkModePreferenceController extends
          * @return the corresponding network mode without 5G.
          */
         private int reduceNrToLteNetworkType(int networkType) {
-            switch(networkType) {
+            switch (networkType) {
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE:
                     return TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY;
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO:
@@ -695,8 +705,7 @@ public class EnabledNetworkModePreferenceController extends
         private void add5gEntry(int value) {
             boolean isNRValue = value >= TelephonyManagerConstants.NETWORK_MODE_NR_ONLY;
             if (showNrList() && isNRValue) {
-                mEntries.add(getResourcesForSubId().getString(R.string.network_5G)
-                        + getResourcesForSubId().getString(R.string.network_recommended));
+                mEntries.add(getResourcesForSubId().getString(R.string.network_5G_recommended));
                 mEntriesValue.add(value);
                 mIs5gEntryDisplayed = true;
             } else {
@@ -817,5 +826,14 @@ public class EnabledNetworkModePreferenceController extends
             return mIs5gEntryDisplayed;
         }
 
+    }
+
+    @Override
+    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
+    }
+
+    @Override
+    public void onSubscriptionsChanged() {
+        mBuilder.updateConfig();
     }
 }

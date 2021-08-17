@@ -97,10 +97,14 @@ public abstract class BaseBluetoothDialogPreference extends CustomDialogPreferen
             radioButton.setText(mRadioButtonStrings.get(i));
             radioButton.setEnabled(selectableIndex.contains(i));
         }
-        // View will be invisible when all options are enabled.
+        // Initial help information text view
+        final TextView helpTextView = view.findViewById(R.id.bluetooth_audio_codec_help_info);
         if (selectableIndex.size() == mRadioButtonIds.size()) {
-            final TextView helpTextView = view.findViewById(R.id.bluetooth_audio_codec_help_info);
+            // View will be invisible when all options are enabled.
             helpTextView.setVisibility(View.GONE);
+        } else {
+            helpTextView.setText(R.string.bluetooth_select_a2dp_codec_type_help_info);
+            helpTextView.setVisibility(View.VISIBLE);
         }
     }
 

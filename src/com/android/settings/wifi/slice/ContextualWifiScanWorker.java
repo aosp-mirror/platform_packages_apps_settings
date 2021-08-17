@@ -18,47 +18,14 @@ package com.android.settings.wifi.slice;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.SystemClock;
 
 /**
  * {@link SliceBackgroundWorker} for Wi-Fi, used by {@link ContextualWifiSlice}.
  */
 public class ContextualWifiScanWorker extends WifiScanWorker {
 
-    private static long sVisibleUiSessionToken;
-    private static long sActiveSession;
-
     public ContextualWifiScanWorker(Context context, Uri uri) {
         super(context, uri);
-    }
-
-    /**
-     * Starts a new visible UI session for the purpose of automatically starting captive portal.
-     *
-     * A visible UI session is defined as a duration of time when a UI screen is visible to user.
-     * Going to a sub-page and coming out breaks the continuation, leaving the page and coming back
-     * breaks it too.
-     */
-    public static void newVisibleUiSession() {
-        sVisibleUiSessionToken = SystemClock.elapsedRealtime();
-    }
-
-    static void saveSession() {
-        sActiveSession = sVisibleUiSessionToken;
-    }
-
-    @Override
-    protected void clearClickedWifiOnSliceUnpinned() {
-        // Do nothing for contextual Wi-Fi slice
-    }
-
-    @Override
-    protected boolean isSessionValid() {
-        if (sVisibleUiSessionToken != sActiveSession) {
-            clearClickedWifi();
-            return false;
-        }
-        return true;
     }
 
     @Override

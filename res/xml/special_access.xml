@@ -29,17 +29,6 @@
     </Preference>
 
     <Preference
-        android:key="high_power_apps"
-        android:title="@string/high_power_apps"
-        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-        settings:keywords="@string/keywords_ignore_optimizations"
-        settings:controller="com.android.settings.applications.specialaccess.HighPowerAppsController">
-        <extra
-            android:name="classname"
-            android:value="com.android.settings.Settings$HighPowerApplicationsActivity" />
-    </Preference>
-
-    <Preference
         android:key="interact_across_profiles"
         android:title="@string/interact_across_profiles_title"
         android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
@@ -72,6 +61,16 @@
         settings:controller="com.android.settings.applications.specialaccess.zenaccess.ZenAccessController" />
 
     <Preference
+        android:key="media_management_apps"
+        android:title="@string/media_management_apps_title"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:keywords="@string/keywords_media_management_apps">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$MediaManagementAppsActivity" />
+    </Preference>
+
+    <Preference
         android:key="write_settings_apps"
         android:title="@string/write_settings"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
@@ -80,13 +79,6 @@
             android:name="classname"
             android:value="com.android.settings.Settings$WriteSettingsActivity" />
     </Preference>
-
-    <com.android.settingslib.widget.apppreference.AppPreference
-        android:key="notification_assistant"
-        android:title="@string/notification_assistant_title"
-        android:summary="@string/summary_placeholder"
-        settings:fragment="com.android.settings.notification.NotificationAssistantPicker"
-        settings:controller="com.android.settings.notification.NotificationAssistantPreferenceController"/>
 
     <Preference
         android:key="notification_access"
@@ -121,6 +113,16 @@
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$ManageExternalSourcesActivity" />
+    </Preference>
+
+    <Preference
+        android:key="alarms_and_reminders"
+        android:title="@string/alarms_and_reminders_title"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:keywords="@string/keywords_alarms_and_reminders">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$AlarmsAndRemindersActivity" />
     </Preference>
 
     <Preference

@@ -28,6 +28,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Pair;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
@@ -69,6 +71,8 @@ public class SavedBluetoothDeviceUpdaterTest {
     private CachedBluetoothDeviceManager mDeviceManager;
     @Mock
     private LocalBluetoothManager mBluetoothManager;
+    @Mock
+    private Drawable mDrawable;
 
     private Context mContext;
     private SavedBluetoothDeviceUpdater mBluetoothDeviceUpdater;
@@ -78,11 +82,13 @@ public class SavedBluetoothDeviceUpdaterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        Pair<Drawable, String> pairs = new Pair<>(mDrawable, "fake_device");
         mContext = RuntimeEnvironment.application;
         doReturn(mContext).when(mDashboardFragment).getContext();
         when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
         when(mBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
+        when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pairs);
 
         mBluetoothDeviceUpdater = spy(new SavedBluetoothDeviceUpdater(mContext, mDashboardFragment,
                 mDevicePreferenceCallback));

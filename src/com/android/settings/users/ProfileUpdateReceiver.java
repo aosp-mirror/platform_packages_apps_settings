@@ -50,14 +50,26 @@ public class ProfileUpdateReceiver extends BroadcastReceiver {
             return;
         }
 
-        int userId = UserHandle.myUserId();
-        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        String profileName = Utils.getMeProfileName(context, false /* partial name */);
-        if (profileName != null && profileName.length() > 0) {
-            um.setUserName(userId, profileName);
+        final int userId = UserHandle.myUserId();
+        final UserManager um = context.getSystemService(UserManager.class);
+        final String newName = Utils.getMeProfileName(context, false /* partial name */);
+        if (newName != null && newName.length() > 0 && !isCurrentNameInteresting(context, um)) {
+            um.setUserName(userId, newName);
             // Flag that we've written the profile one time at least. No need to do it in the
             // future.
             prefs.edit().putBoolean(KEY_PROFILE_NAME_COPIED_ONCE, true).commit();
         }
+    }
+
+    /** Returns whether the current user name is different from the default one. */
+    private static boolean isCurrentNameInteresting(Context context, UserManager um) {
+        if (!um.isUserNameSet()) {
+            return false;
+        }
+        final String currentName = um.getUserName();
+        final String defaultName = um.isRestrictedProfile() || um.isProfile() ?
+                context.getString(com.android.settingslib.R.string.user_new_profile_name) :
+                context.getString(com.android.settingslib.R.string.user_new_user_name);
+        return currentName != null && !currentName.equals(defaultName);
     }
 }

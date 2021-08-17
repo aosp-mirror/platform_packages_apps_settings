@@ -34,7 +34,6 @@ import android.os.Parcel;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
-import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
@@ -45,10 +44,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class RestrictAppTipTest {
@@ -198,7 +197,7 @@ public class RestrictAppTipTest {
         appInfos.add(mUninstallAppInfo);
         final BatteryTip batteryTip = new RestrictAppTip(BatteryTip.StateType.NEW, appInfos);
 
-        batteryTip.sanityCheck(mContext);
+        batteryTip.validateCheck(mContext);
 
         assertThat(batteryTip.getState()).isEqualTo(BatteryTip.StateType.INVISIBLE);
     }
@@ -210,7 +209,7 @@ public class RestrictAppTipTest {
         appInfos.add(mUninstallAppInfo);
         final BatteryTip batteryTip = new RestrictAppTip(BatteryTip.StateType.NEW, appInfos);
 
-        batteryTip.sanityCheck(mContext);
+        batteryTip.validateCheck(mContext);
 
         assertThat(batteryTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
     }

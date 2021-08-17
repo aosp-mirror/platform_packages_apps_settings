@@ -52,6 +52,7 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -149,27 +150,7 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     @Override
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
-            final long startMillis = SystemClock.elapsedRealtime();
-            showAutoSelectProgressBar();
-            mSwitchPreference.setEnabled(false);
-            ThreadUtils.postOnBackgroundThread(() -> {
-                // set network selection mode in background
-                mTelephonyManager.setNetworkSelectionModeAutomatic();
-                final int mode = mTelephonyManager.getNetworkSelectionMode();
-
-                //Update UI in UI thread
-                final long durationMillis = SystemClock.elapsedRealtime() - startMillis;
-                mUiHandler.postDelayed(() -> {
-                            mSwitchPreference.setEnabled(true);
-                            mSwitchPreference.setChecked(
-                                    mode == TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
-                            for (OnNetworkSelectModeListener lsn : mListeners) {
-                                lsn.onNetworkSelectModeChanged();
-                            }
-                            dismissProgressBar();
-                        },
-                        Math.max(MINIMUM_DIALOG_TIME_MILLIS - durationMillis, 0));
-            });
+            setAutomaticSelectionMode();
             return false;
         } else {
             final Bundle bundle = new Bundle();
@@ -182,6 +163,30 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
                     .launch();
             return false;
         }
+    }
+
+    @VisibleForTesting
+    Future setAutomaticSelectionMode() {
+        final long startMillis = SystemClock.elapsedRealtime();
+        showAutoSelectProgressBar();
+        mSwitchPreference.setEnabled(false);
+        return ThreadUtils.postOnBackgroundThread(() -> {
+            // set network selection mode in background
+            mTelephonyManager.setNetworkSelectionModeAutomatic();
+            final int mode = mTelephonyManager.getNetworkSelectionMode();
+
+            //Update UI in UI thread
+            final long durationMillis = SystemClock.elapsedRealtime() - startMillis;
+            mUiHandler.postDelayed(() -> {
+                mSwitchPreference.setEnabled(true);
+                mSwitchPreference.setChecked(
+                        mode == TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
+                for (OnNetworkSelectModeListener lsn : mListeners) {
+                    lsn.onNetworkSelectModeChanged();
+                }
+                dismissProgressBar();
+            }, Math.max(MINIMUM_DIALOG_TIME_MILLIS - durationMillis, 0));
+        });
     }
 
     public AutoSelectPreferenceController init(Lifecycle lifecycle, int subId) {

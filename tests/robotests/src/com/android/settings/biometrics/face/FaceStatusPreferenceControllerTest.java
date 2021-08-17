@@ -22,8 +22,10 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -37,6 +39,8 @@ import androidx.preference.Preference;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,6 +55,9 @@ import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public class FaceStatusPreferenceControllerTest {
+
+    private static final String TEST_PREF_KEY = "baz";
+
     @Mock
     private LockPatternUtils mLockPatternUtils;
     @Mock
@@ -78,7 +85,7 @@ public class FaceStatusPreferenceControllerTest {
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
         when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {1234});
-        mController = new FaceStatusPreferenceController(mContext);
+        mController = new FaceStatusPreferenceController(mContext, TEST_PREF_KEY);
     }
 
     @Test
@@ -128,5 +135,17 @@ public class FaceStatusPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(mContext.getResources()
                 .getString(R.string.security_settings_face_preference_summary));
         assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void updateState_parentalConsentRequired_preferenceDisabled() {
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+
+        RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
+        RestrictedLockUtils.EnforcedAdmin admin = mock(RestrictedLockUtils.EnforcedAdmin.class);
+
+        mController.mPreference = restrictedPreference;
+        mController.updateStateInternal(admin);
+        verify(restrictedPreference).setDisabledByAdmin(eq(admin));
     }
 }

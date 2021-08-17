@@ -40,6 +40,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.notification.zen.ZenModeBackend;
 import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,7 +62,7 @@ public class ZenModeButtonPreferenceControllerTest {
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private Preference mockPref;
+    private Preference mMockPref;
     @Mock
     private NotificationManager.Policy mPolicy;
     @Mock
@@ -88,15 +89,15 @@ public class ZenModeButtonPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mZenButtonOn", mZenButtonOn);
         ReflectionHelpers.setField(mController, "mZenButtonOff", mZenButtonOff);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
+                mMockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
     @Test
     public void updateState_TotalSilence() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_NO_INTERRUPTIONS);
-        final Preference mockPref = mock(Preference.class);
-        mController.updateState(mockPref);
+        mController.updateState(mMockPref);
 
         verify(mZenButtonOn).setVisibility(View.GONE);
         verify(mZenButtonOff).setVisibility(View.VISIBLE);
@@ -105,8 +106,7 @@ public class ZenModeButtonPreferenceControllerTest {
     @Test
     public void updateState_AlarmsOnly() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_ALARMS);
-        final Preference mockPref = mock(Preference.class);
-        mController.updateState(mockPref);
+        mController.updateState(mMockPref);
 
         verify(mZenButtonOn).setVisibility(View.GONE);
         verify(mZenButtonOff).setVisibility(View.VISIBLE);
@@ -115,8 +115,7 @@ public class ZenModeButtonPreferenceControllerTest {
     @Test
     public void updateState_Priority() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        final Preference mockPref = mock(Preference.class);
-        mController.updateState(mockPref);
+        mController.updateState(mMockPref);
 
         verify(mZenButtonOn).setVisibility(View.GONE);
         verify(mZenButtonOff).setVisibility(View.VISIBLE);
@@ -125,8 +124,7 @@ public class ZenModeButtonPreferenceControllerTest {
     @Test
     public void updateState_ZenOff() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_OFF);
-        final Preference mockPref = mock(Preference.class);
-        mController.updateState(mockPref);
+        mController.updateState(mMockPref);
 
         verify(mZenButtonOn).setVisibility(View.VISIBLE);
         verify(mZenButtonOff).setVisibility(View.GONE);
@@ -134,9 +132,8 @@ public class ZenModeButtonPreferenceControllerTest {
 
     @Test
     public void updateState_otherUserChangedZen() {
-        final Preference mockPref = mock(Preference.class);
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_OFF);
-        mController.updateState(mockPref);
+        mController.updateState(mMockPref);
         verify(mZenButtonOn).setVisibility(View.VISIBLE);
         verify(mZenButtonOff).setVisibility(View.GONE);
 

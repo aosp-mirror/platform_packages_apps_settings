@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.app;
 
+import android.app.NotificationChannel;
 import android.content.Context;
 
 import androidx.preference.Preference;
@@ -42,9 +43,17 @@ public class NotificationsOffPreferenceController extends NotificationPreference
         if (mAppRow == null) {
             return false;
         }
+        if (mPreferenceFilter != null && !isIncludedInFilter()) {
+            return false;
+        }
         // Available only when other controllers are unavailable - this UI replaces the UI that
         // would give more detailed notification controls.
         return !super.isAvailable();
+    }
+
+    @Override
+    boolean isIncludedInFilter() {
+        return mPreferenceFilter.contains(NotificationChannel.EDIT_IMPORTANCE);
     }
 
     public void updateState(Preference preference) {

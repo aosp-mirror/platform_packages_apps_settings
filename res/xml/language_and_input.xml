@@ -18,8 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/language_settings"
-    settings:initialExpandedChildrenCount="3">
+    android:title="@string/language_settings">
 
     <Preference
         android:key="phone_language"
@@ -53,12 +52,6 @@
             android:title="@string/spellcheckers_settings_title"
             android:persistent="false"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings" />
-
-        <Preference
-            android:key="default_autofill"
-            android:title="@string/autofill_app"
-            android:fragment="com.android.settings.applications.defaultapps.AutofillPicker"
-            settings:keywords="@string/autofill_keywords" />
 
         <!-- User dictionary preference title and fragment will be set programmatically. -->
         <Preference

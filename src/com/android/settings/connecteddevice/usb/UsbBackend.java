@@ -28,7 +28,7 @@ import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
@@ -74,9 +74,8 @@ public class UsbBackend {
         mIsAdminUser = userManager.isAdminUser();
 
         mMidiSupported = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI);
-        ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        mTetheringSupported = cm.isTetheringSupported();
+        final TetheringManager tm = context.getSystemService(TetheringManager.class);
+        mTetheringSupported = tm.isTetheringSupported();
 
         updatePorts();
     }

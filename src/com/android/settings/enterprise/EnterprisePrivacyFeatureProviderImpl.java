@@ -41,6 +41,9 @@ import java.util.List;
 
 public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFeatureProvider {
 
+    public static final String ACTION_PARENTAL_CONTROLS =
+            "android.settings.SHOW_PARENTAL_CONTROLS";
+
     private final Context mContext;
     private final DevicePolicyManager mDpm;
     private final PackageManager mPm;
@@ -97,9 +100,6 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         } else {
             disclosure.append(mResources.getString(R.string.do_disclosure_generic));
         }
-        disclosure.append(mResources.getString(R.string.do_disclosure_learn_more_separator));
-        disclosure.append(mResources.getString(R.string.learn_more),
-                new EnterprisePrivacySpan(mContext), 0);
         return disclosure;
     }
 
@@ -242,6 +242,34 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         }
 
         return false;
+    }
+
+    @Override
+    public boolean showParentalControls() {
+        Intent intent = getParentalControlsIntent();
+        if (intent != null) {
+            mContext.startActivity(intent);
+            return true;
+        }
+
+        return false;
+    }
+
+    private Intent getParentalControlsIntent() {
+        final ComponentName componentName =
+                mDpm.getProfileOwnerOrDeviceOwnerSupervisionComponent(new UserHandle(MY_USER_ID));
+        if (componentName == null) {
+            return null;
+        }
+
+        final Intent intent = new Intent(ACTION_PARENTAL_CONTROLS)
+                .setPackage(componentName.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        final List<ResolveInfo> activities = mPm.queryIntentActivitiesAsUser(intent, 0, MY_USER_ID);
+        if (activities.size() != 0) {
+            return intent;
+        }
+        return null;
     }
 
     private ComponentName getDeviceOwnerComponent() {

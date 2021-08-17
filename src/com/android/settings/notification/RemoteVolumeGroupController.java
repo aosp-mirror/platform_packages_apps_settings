@@ -34,7 +34,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -129,13 +129,14 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
                 seekBarPreference.setMin(0);
                 seekBarPreference.setOnPreferenceChangeListener(this);
                 seekBarPreference.setIcon(R.drawable.ic_volume_remote);
+                seekBarPreference.setEnabled(mLocalMediaManager.shouldEnableVolumeSeekBar(info));
                 mPreferenceCategory.addPreference(seekBarPreference);
             }
 
             Preference switcherPreference = mPreferenceCategory.findPreference(
                     SWITCHER_PREFIX + info.getId());
-            final boolean isMediaOutputDisabled = Utils.isMediaOutputDisabled(
-                    mRouterManager, info.getClientPackageName());
+            final boolean isMediaOutputDisabled = mLocalMediaManager.shouldDisableMediaOutput(
+                    info.getClientPackageName());
             final CharSequence outputTitle = mContext.getString(R.string.media_output_label_title,
                     appName);
             if (switcherPreference != null) {
@@ -196,9 +197,9 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             if (TextUtils.equals(info.getId(),
                     preference.getKey().substring(SWITCHER_PREFIX.length()))) {
                 final Intent intent = new Intent()
-                        .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
-                        .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
-                        .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                        .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                        .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
+                        .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
                                 info.getClientPackageName());
                 mContext.sendBroadcast(intent);
                 return true;

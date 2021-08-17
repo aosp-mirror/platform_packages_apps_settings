@@ -49,6 +49,8 @@
     <string name="config_wallpaper_picker_class" translatable="false">com.android.settings.Settings$WallpaperSettingsActivity</string>
     <!-- Fully-qualified class name for the styles & wallpaper picker activity. -->
     <string name="config_styles_and_wallpaper_picker_class" translatable="false"></string>
+    <!-- Intent extra for wallpaper picker activity. -->
+    <string name="config_wallpaper_picker_launch_extra" translatable="false">com.android.wallpaper.LAUNCH_SOURCE</string>
 
     <!-- Manufacturer backup settings to launch -->
     <string name="config_backup_settings_intent" translatable="false"></string>
@@ -56,8 +58,8 @@
     <!-- Manufacturer backup settings label -->
     <string name="config_backup_settings_label" translatable="true"></string>
 
-    <!-- Double twist sensor name and vendor used by gesture setting -->
-    <string name="gesture_double_twist_sensor_name" translatable="false"></string>
+    <!-- Double twist sensor type and vendor used by gesture setting -->
+    <string name="gesture_double_twist_sensor_type" translatable="false"></string>
     <string name="gesture_double_twist_sensor_vendor" translatable="false"></string>
 
     <!-- When true enable gesture setting. -->
@@ -80,8 +82,16 @@
         -->
     </string-array>
 
+    <!-- List containing the component names of pre-installed captioning services. -->
+    <string-array name="config_preinstalled_captions_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        -->
+    </string-array>
+
     <!-- List containing the component names of pre-installed audio and captioning services. -->
-    <string-array name="config_preinstalled_audio_and_caption_services" translatable="false">
+    <string-array name="config_preinstalled_audio_services" translatable="false">
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
         <item>com.example.package.second/com.example.class.SecondService</item>
@@ -113,15 +123,28 @@
         -->
     </string-array>
 
-    <!-- List containing the order of services in audio and caption category by preference key
-         or componentname. All preference keys in a category need to be specified to guarantee
-         correct behavior.-->
-    <string-array name="config_order_audio_and_caption_services" translatable="false">
+    <!-- List containing the order of services in captions category by preference key or
+         componentname. All preference keys in a category need to be specified to guarantee correct
+         behavior.-->
+    <string-array name="config_order_captions_services" translatable="false">
         <!--
         <item>com.example.package.first/com.example.class.FirstService</item>
         <item>com.example.package.second/com.example.class.SecondService</item>
-        <item>toggle_master_mono</item>
-        <item>seekbar_master_balance</item>
+        <item>captioning_preference_screen</item>
+        <item>rtt_setting</item>
+        <item>...</item>
+        -->
+    </string-array>
+
+    <!-- List containing the order of services in audio and caption category by preference key
+         or componentname. All preference keys in a category need to be specified to guarantee
+         correct behavior.-->
+    <string-array name="config_order_audio_services" translatable="false">
+        <!--
+        <item>com.example.package.first/com.example.class.FirstService</item>
+        <item>com.example.package.second/com.example.class.SecondService</item>
+        <item>toggle_primary_mono</item>
+        <item>seekbar_primary_balance</item>
         <item>...</item>
         -->
     </string-array>
@@ -152,8 +175,8 @@
         -->
     </string-array>
 
-    <!-- List of packages that should be whitelisted for slice uri access. Do not translate -->
-    <string-array name="slice_whitelist_package_names" translatable="false"/>
+    <!-- List of packages that should be allowlisted for slice uri access. Do not translate -->
+    <string-array name="slice_allowlist_package_names" translatable="false"/>
 
     <!-- Whether or not App & Notification screen should display recently used apps -->
     <bool name="config_display_recent_apps">true</bool>
@@ -245,6 +268,12 @@
 
     <!-- ComponentName to launch a vendor-specific enrollment activity if available -->
     <string name="config_face_enroll" translatable="false"></string>
+
+    <!-- Whether to show the "require eyes" info section on the face enroll intro screen -->
+    <bool name="config_face_intro_show_require_eyes">true</bool>
+
+    <!-- Whether to use the Lottie animation for the face education enrollment screen -->
+    <bool name="config_face_education_use_lottie">false</bool>
 
     <!-- App intent -->
     <string name="config_account_intent_uri" translatable="false"></string>
@@ -460,6 +489,63 @@
     <!-- Whether to show Smooth Display feature in Settings Options -->
     <bool name="config_show_smooth_display">false</bool>
 
+    <!-- Whether to show emergency gesture in Settings -->
+    <bool name="config_show_emergency_gesture_settings">true</bool>
+
+    <!-- Optional package name if another 1p app wants to take over the emergency gesture settings UI -->
+    <string name="emergency_gesture_settings_package"></string>
+
     <!-- Whether to show the Preference for Adaptive connectivity -->
     <bool name="config_show_adaptive_connectivity">false</bool>
+
+    <!-- Authority of advanced device battery prediction -->
+    <string name="config_battery_prediction_authority" translatable="false"></string>
+
+    <!-- Whether to handle slot change events -->
+    <bool name="config_handle_sim_slot_change">false</bool>
+
+    <!-- whether use partner overlay theme for outside setupwizard flow -->
+    <bool name="config_suc_use_partner_resource">false</bool>
+
+    <!-- Cell broacast receiver package name -->
+    <string name="config_cell_broadcast_receiver_package" translatable="false">com.android.cellbroadcastreceiver.module</string>
+
+    <!-- TODO(b/174964885): These media Uri are not defined in framework yet. Replace with framework defined variables once it's available. -->
+    <!-- Media Uri to view images storage category. -->
+    <string name="config_images_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/images_root</string>
+
+    <!-- Media Uri to view videos storage category. -->
+    <string name="config_videos_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/videos_root</string>
+
+    <!-- Media Uri to view audio storage category. -->
+    <string name="config_audio_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/audio_root</string>
+
+    <!-- Media Uri to view documents & other storage category. -->
+    <string name="config_documents_and_other_storage_category_uri" translatable="false">content://com.android.providers.media.documents/root/documents_root</string>
+
+    <!-- Whether to show Smart Storage toggle -->
+    <bool name="config_show_smart_storage_toggle">true</bool>
+
+    <!-- Display settings screen, Color mode options. Must be the same length and order as
+         config_color_mode_options_values below. Only the values that also appear in
+         frameworks/base/core/res/res/values/config.xml's config_availableColorModes are shown. -->
+    <string-array name="config_color_mode_options_strings" translatable="false">
+        <item>@string/color_mode_option_natural</item>
+        <item>@string/color_mode_option_boosted</item>
+        <item>@string/color_mode_option_saturated</item>
+        <item>@string/color_mode_option_automatic</item>
+    </string-array>
+
+    <!-- Display settings screen, Color mode options. Must be the same length and order as
+         config_color_mode_options_strings above. Only the values that also appear in
+         frameworks/base/core/res/res/values/config.xml's config_availableColorModes are shown. -->
+    <integer-array name="config_color_mode_options_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </integer-array>
+
+    <!-- Whether to aggregate for network selection list-->
+    <bool name="config_network_selection_list_aggregation_enabled">false</bool>
 </resources>

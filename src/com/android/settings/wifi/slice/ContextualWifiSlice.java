@@ -18,14 +18,11 @@ package com.android.settings.wifi.slice;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
-import android.net.NetworkInfo.DetailedState;
-import android.net.NetworkInfo.State;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -38,15 +35,12 @@ import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
-import com.android.settingslib.wifi.AccessPoint;
+import com.android.wifitrackerlib.WifiEntry;
 
 /**
  * {@link CustomSliceable} for Wi-Fi, used by contextual homepage.
  */
 public class ContextualWifiSlice extends WifiSlice {
-
-    @VisibleForTesting
-    static final String CONTEXTUAL_WIFI_EXPANDABLE = "contextual_wifi_expandable";
 
     @VisibleForTesting
     static final int COLLAPSED_ROW_COUNT = 0;
@@ -56,8 +50,12 @@ public class ContextualWifiSlice extends WifiSlice {
     @VisibleForTesting
     static boolean sApRowCollapsed;
 
+    private final ConnectivityManager mConnectivityManager;
+
     public ContextualWifiSlice(Context context) {
         super(context);
+
+        mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
     }
 
     @Override
@@ -67,17 +65,13 @@ public class ContextualWifiSlice extends WifiSlice {
 
     @Override
     public Slice getSlice() {
-        if (isExpandable()) {
-            final long currentUiSession = FeatureFactory.getFactory(mContext)
-                    .getSlicesFeatureProvider().getUiSessionToken();
-            if (currentUiSession != sActiveUiSession) {
-                sActiveUiSession = currentUiSession;
-                sApRowCollapsed = hasWorkingNetwork();
-            } else if (!mWifiManager.isWifiEnabled()) {
-                sApRowCollapsed = false;
-            }
-        } else {
-            sApRowCollapsed = true;
+        final long currentUiSession = FeatureFactory.getFactory(mContext)
+                .getSlicesFeatureProvider().getUiSessionToken();
+        if (currentUiSession != sActiveUiSession) {
+            sActiveUiSession = currentUiSession;
+            sApRowCollapsed = hasWorkingNetwork();
+        } else if (!mWifiManager.isWifiEnabled()) {
+            sApRowCollapsed = false;
         }
         return super.getSlice();
     }
@@ -92,22 +86,17 @@ public class ContextualWifiSlice extends WifiSlice {
     }
 
     @Override
-    protected ListBuilder.RowBuilder getHeaderRow(boolean isWifiEnabled, AccessPoint accessPoint) {
-        final ListBuilder.RowBuilder builder = super.getHeaderRow(isWifiEnabled, accessPoint);
-        builder.setTitleItem(getHeaderIcon(isWifiEnabled, accessPoint), ListBuilder.ICON_IMAGE);
-        if (sApRowCollapsed && isWifiEnabled) {
-            builder.setSubtitle(getSubtitle(accessPoint));
+    protected ListBuilder.RowBuilder getHeaderRow(boolean isWifiEnabled,
+            WifiSliceItem wifiSliceItem) {
+        final ListBuilder.RowBuilder builder = super.getHeaderRow(isWifiEnabled, wifiSliceItem);
+        builder.setTitleItem(getHeaderIcon(isWifiEnabled, wifiSliceItem), ListBuilder.ICON_IMAGE);
+        if (sApRowCollapsed) {
+            builder.setSubtitle(getHeaderSubtitle(wifiSliceItem));
         }
         return builder;
     }
 
-    private boolean isExpandable() {
-        // Return whether this slice can be expandable.
-        return Settings.Global.getInt(mContext.getContentResolver(), CONTEXTUAL_WIFI_EXPANDABLE, 0)
-                != 0;
-    }
-
-    private IconCompat getHeaderIcon(boolean isWifiEnabled, AccessPoint accessPoint) {
+    private IconCompat getHeaderIcon(boolean isWifiEnabled, WifiSliceItem wifiSliceItem) {
         final Drawable drawable;
         final int tint;
         if (!isWifiEnabled) {
@@ -117,7 +106,8 @@ public class ContextualWifiSlice extends WifiSlice {
         } else {
             // get icon of medium signal strength
             drawable = mContext.getDrawable(com.android.settingslib.Utils.getWifiIconResource(2));
-            if (isNetworkConnected(accessPoint)) {
+            if (wifiSliceItem != null
+                    && wifiSliceItem.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
                 tint = Utils.getColorAccentDefaultColor(mContext);
             } else {
                 tint = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal);
@@ -127,49 +117,16 @@ public class ContextualWifiSlice extends WifiSlice {
         return Utils.createIconWithDrawable(drawable);
     }
 
-    private boolean isNetworkConnected(AccessPoint accessPoint) {
-        if (accessPoint == null) {
-            return false;
-        }
-
-        final NetworkInfo networkInfo = accessPoint.getNetworkInfo();
-        if (networkInfo == null) {
-            return false;
-        }
-
-        return networkInfo.getState() == State.CONNECTED;
-    }
-
-    private CharSequence getSubtitle(AccessPoint accessPoint) {
-        if (isCaptivePortal()) {
-            final int id = mContext.getResources()
-                    .getIdentifier("network_available_sign_in", "string", "android");
-            return mContext.getText(id);
-        }
-
-        if (accessPoint == null) {
+    private CharSequence getHeaderSubtitle(WifiSliceItem wifiSliceItem) {
+        if (wifiSliceItem == null
+                || wifiSliceItem.getConnectedState() == WifiEntry.CONNECTED_STATE_DISCONNECTED) {
             return mContext.getText(R.string.disconnected);
         }
-
-        final NetworkInfo networkInfo = accessPoint.getNetworkInfo();
-        if (networkInfo == null) {
-            return mContext.getText(R.string.disconnected);
+        if (wifiSliceItem.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTING) {
+            return mContext.getString(R.string.wifi_connecting_to_message,
+                wifiSliceItem.getTitle());
         }
-
-        final State state = networkInfo.getState();
-        DetailedState detailedState;
-        if (state == State.CONNECTING) {
-            detailedState = DetailedState.CONNECTING;
-        } else if (state == State.CONNECTED) {
-            detailedState = DetailedState.CONNECTED;
-        } else {
-            detailedState = networkInfo.getDetailedState();
-        }
-
-        final String[] formats = mContext.getResources().getStringArray(
-                R.array.wifi_status_with_ssid);
-        final int index = detailedState.ordinal();
-        return String.format(formats[index], accessPoint.getTitle());
+        return mContext.getString(R.string.wifi_connected_to_message, wifiSliceItem.getTitle());
     }
 
     private boolean hasWorkingNetwork() {

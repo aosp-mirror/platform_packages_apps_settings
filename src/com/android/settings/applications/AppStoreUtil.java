@@ -18,6 +18,9 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.InstallSourceInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.util.Log;
 
@@ -31,15 +34,30 @@ public class AppStoreUtil {
                 .setClassName(result.activityInfo.packageName, result.activityInfo.name) : null;
     }
 
-    // Returns the package name of the app which installed a given packageName, if one is
-    // available.
+    // Returns the package name of the app that we consider to be the user-visible 'installer'
+    // of given packageName, if one is available.
     public static String getInstallerPackageName(Context context, String packageName) {
-        String installerPackageName = null;
+        String installerPackageName;
         try {
-            installerPackageName =
-                    context.getPackageManager().getInstallerPackageName(packageName);
-        } catch (IllegalArgumentException e) {
+            InstallSourceInfo source =
+                    context.getPackageManager().getInstallSourceInfo(packageName);
+            // By default, use the installing package name.
+            installerPackageName = source.getInstallingPackageName();
+            // Use the recorded originating package name only if the initiating package is a system
+            // app (eg. Package Installer). The originating package is not verified by the platform,
+            // so we choose to ignore this when supplied by a non-system app.
+            String originatingPackageName = source.getOriginatingPackageName();
+            String initiatingPackageName = source.getInitiatingPackageName();
+            if (originatingPackageName != null && initiatingPackageName != null) {
+                ApplicationInfo ai = context.getPackageManager().getApplicationInfo(
+                        initiatingPackageName, 0);
+                if ((ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                    installerPackageName = originatingPackageName;
+                }
+            }
+        } catch (NameNotFoundException e) {
             Log.e(LOG_TAG, "Exception while retrieving the package installer of " + packageName, e);
+            installerPackageName = null;
         }
         return installerPackageName;
     }

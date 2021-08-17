@@ -132,4 +132,10 @@ public interface EnterprisePrivacyFeatureProvider {
      * info" page. Returns {@code true} if the activity has indeed been launched.
      */
     boolean showWorkPolicyInfo();
+
+    /**
+     * Launches the parental controls settings page. Returns {@code true} if the activity has
+     * been launched.
+     */
+    boolean showParentalControls();
 }

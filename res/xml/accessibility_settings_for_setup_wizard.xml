@@ -14,46 +14,44 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:persistent="true"
     android:title="@string/vision_settings_title">
 
-    <com.android.settings.accessibility.DividerAllowedBelowPreference
-        android:key="vision_settings_summary"
-        android:layout="@layout/preference_multiline_title"
-        android:selectable="false"
-        android:title="@string/vision_settings_description" />
-
-    <Preference
-        settings:controller="com.android.settings.accessibility.MagnificationPreferenceController"
-        android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
-        android:key="screen_magnification_preference"
-        android:summary="@string/accessibility_preference_magnification_summary"
-        android:title="@string/accessibility_screen_magnification_title" />
-
     <Preference
         android:fragment="com.android.settings.display.FontSizePreferenceFragmentForSetupWizard"
         android:key="font_size_preference"
+        android:icon="@drawable/ic_font_size"
         android:summary="@string/short_summary_font_size"
-        android:title="@string/title_font_size" />
+        android:title="@string/title_font_size"/>
 
     <com.android.settings.display.ScreenZoomPreference
         android:fragment="com.android.settings.display.ScreenZoomPreferenceFragmentForSetupWizard"
         android:key="force_density_preference"
+        android:icon="@drawable/ic_screen_zoom"
         android:summary="@string/screen_zoom_short_summary"
-        android:title="@string/screen_zoom_title" />
+        android:title="@string/screen_zoom_title"/>
 
     <Preference
+        android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
+        android:key="screen_magnification_preference"
+        android:icon="@drawable/ic_accessibility_magnification"
+        android:summary="@string/accessibility_preference_magnification_summary"
+        android:title="@string/accessibility_screen_magnification_title"
+        settings:controller="com.android.settings.accessibility.MagnificationPreferenceController"/>
+
+    <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.accessibility.ToggleSelectToSpeakPreferenceFragmentForSetupWizard"
         android:key="select_to_speak_preference"
         android:persistent="true"
-        android:summary="@string/select_to_speak_summary" />
+        android:summary="@string/select_to_speak_summary"/>
 
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.accessibility.ToggleScreenReaderPreferenceFragmentForSetupWizard"
         android:key="screen_reader_preference"
         android:persistent="true"
-        android:summary="@string/talkback_summary" />
+        android:summary="@string/talkback_summary"/>
 
 </PreferenceScreen>

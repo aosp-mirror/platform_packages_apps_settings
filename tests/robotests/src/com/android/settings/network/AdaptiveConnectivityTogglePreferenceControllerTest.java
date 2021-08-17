@@ -19,8 +19,13 @@ package com.android.settings.network;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
 import org.junit.Before;
@@ -29,6 +34,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class AdaptiveConnectivityTogglePreferenceControllerTest {
@@ -37,12 +43,16 @@ public class AdaptiveConnectivityTogglePreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
     private Context mContext;
+    @Mock
+    WifiManager mWifiManager;
 
     private AdaptiveConnectivityTogglePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         mController = new AdaptiveConnectivityTogglePreferenceController(mContext, PREF_KEY);
     }
 
@@ -61,6 +71,7 @@ public class AdaptiveConnectivityTogglePreferenceControllerTest {
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 1))
                 .isEqualTo(1);
+        verify(mWifiManager, atLeastOnce()).setWifiScoringEnabled(true);
     }
 
     @Test
@@ -73,5 +84,6 @@ public class AdaptiveConnectivityTogglePreferenceControllerTest {
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 1))
                 .isEqualTo(0);
+        verify(mWifiManager).setWifiScoringEnabled(false);
     }
 }

@@ -18,7 +18,7 @@ package com.android.settings.notification.app;
 
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_ALL;
 import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
-import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
+import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -67,6 +67,11 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
     }
 
     @Override
+    boolean isIncludedInFilter() {
+        return false;
+    }
+
+    @Override
     public String getPreferenceKey() {
         return KEY;
     }
@@ -101,7 +106,7 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
 
     private boolean isGloballyEnabled() {
         ActivityManager am = mContext.getSystemService(ActivityManager.class);
-        return !am.isLowRamDevice() && Settings.Global.getInt(mContext.getContentResolver(),
+        return !am.isLowRamDevice() && Settings.Secure.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON) == ON;
     }
 }

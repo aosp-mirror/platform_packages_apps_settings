@@ -17,18 +17,29 @@
 package com.android.settings.biometrics.face;
 
 import android.content.Context;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
+import com.android.settings.biometrics.ParentalControlsUtils;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 
 public class FaceStatusPreferenceController extends BiometricStatusPreferenceController {
 
     public static final String KEY_FACE_SETTINGS = "face_settings";
 
     protected final FaceManager mFaceManager;
+    @VisibleForTesting
+    RestrictedPreference mPreference;
 
     public FaceStatusPreferenceController(Context context) {
         this(context, KEY_FACE_SETTINGS);
@@ -40,13 +51,34 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(mPreferenceKey);
+    }
+
+    @Override
     protected boolean isDeviceSupported() {
-        return FaceSettings.isFaceHardwareDetected(mContext);
+        return !Utils.isMultipleBiometricsSupported(mContext) && Utils.hasFaceHardware(mContext);
     }
 
     @Override
     protected boolean hasEnrolledBiometrics() {
         return mFaceManager.hasEnrolledTemplates(getUserId());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        final RestrictedLockUtils.EnforcedAdmin admin = ParentalControlsUtils
+                .parentConsentRequired(mContext, BiometricAuthenticator.TYPE_FACE);
+        updateStateInternal(admin);
+    }
+
+    @VisibleForTesting
+    void updateStateInternal(@Nullable RestrictedLockUtils.EnforcedAdmin enforcedAdmin) {
+        if (enforcedAdmin != null && mPreference != null) {
+            mPreference.setDisabledByAdmin(enforcedAdmin);
+        }
     }
 
     @Override

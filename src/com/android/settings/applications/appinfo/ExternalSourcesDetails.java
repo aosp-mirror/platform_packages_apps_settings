@@ -18,7 +18,6 @@ package com.android.settings.applications.appinfo;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
-import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -30,7 +29,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.applications.AppInfoWithHeader;
@@ -46,7 +44,6 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
 
     private AppStateInstallAppsBridge mAppBridge;
     private AppOpsManager mAppOpsManager;
-    private ActivityManager mActivityManager;
     private UserManager mUserManager;
     private RestrictedSwitchPreference mSwitchPref;
     private InstallAppsState mInstallAppsState;
@@ -58,7 +55,6 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
         final Context context = getActivity();
         mAppBridge = new AppStateInstallAppsBridge(context, mState, null);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        mActivityManager = context.getSystemService(ActivityManager.class);
         mUserManager = UserManager.get(context);
 
         addPreferencesFromResource(R.xml.external_sources_details);
@@ -103,21 +99,10 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
                 : R.string.app_permission_summary_not_allowed);
     }
 
-    @VisibleForTesting
-    void setCanInstallApps(boolean newState) {
+    private void setCanInstallApps(boolean newState) {
         mAppOpsManager.setMode(AppOpsManager.OP_REQUEST_INSTALL_PACKAGES,
                 mPackageInfo.applicationInfo.uid, mPackageName,
                 newState ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
-        if (!newState) {
-            killApp(mPackageInfo.applicationInfo.uid);
-        }
-    }
-
-    private void killApp(int uid) {
-        if (UserHandle.isCore(uid)) {
-            return;
-        }
-        mActivityManager.killUid(uid, "User denied OP_REQUEST_INSTALL_PACKAGES");
     }
 
     @Override

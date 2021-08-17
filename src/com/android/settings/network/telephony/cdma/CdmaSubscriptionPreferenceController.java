@@ -80,7 +80,7 @@ public class CdmaSubscriptionPreferenceController extends CdmaBasePreferenceCont
     @VisibleForTesting
     boolean deviceSupportsNvAndRuim() {
         // retrieve the list of subscription types supported by device.
-        final String subscriptionsSupported = SystemProperties.get("ril.subscription.types");
+        final String subscriptionsSupported = getRilSubscriptionTypes();
         boolean nvSupported = false;
         boolean ruimSupported = false;
 
@@ -98,5 +98,10 @@ public class CdmaSubscriptionPreferenceController extends CdmaBasePreferenceCont
         }
 
         return (nvSupported && ruimSupported);
+    }
+
+    @VisibleForTesting
+    protected String getRilSubscriptionTypes() {
+        return SystemProperties.get("ril.subscription.types");
     }
 }

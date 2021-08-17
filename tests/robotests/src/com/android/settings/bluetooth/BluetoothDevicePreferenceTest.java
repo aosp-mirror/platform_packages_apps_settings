@@ -28,7 +28,9 @@ import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.UserManager;
+import android.util.Pair;
 import android.view.ContextThemeWrapper;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -63,6 +65,7 @@ public class BluetoothDevicePreferenceTest {
     private static final String MAC_ADDRESS_4 = "07:52:C7:0B:D8:3C";
     private static final Comparator<BluetoothDevicePreference> COMPARATOR =
             Comparator.naturalOrder();
+    private static final String FAKE_DESCRIPTION = "fake_description";
 
     private Context mContext;
     @Mock
@@ -73,6 +76,8 @@ public class BluetoothDevicePreferenceTest {
     private CachedBluetoothDevice mCachedDevice2;
     @Mock
     private CachedBluetoothDevice mCachedDevice3;
+    @Mock
+    private Drawable mDrawable;
 
     private FakeFeatureFactory mFakeFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -87,9 +92,17 @@ public class BluetoothDevicePreferenceTest {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
+        when(mCachedBluetoothDevice.getDrawableWithDescription())
+                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
         when(mCachedDevice1.getAddress()).thenReturn(MAC_ADDRESS_2);
+        when(mCachedDevice1.getDrawableWithDescription())
+                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
         when(mCachedDevice2.getAddress()).thenReturn(MAC_ADDRESS_3);
+        when(mCachedDevice2.getDrawableWithDescription())
+                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
         when(mCachedDevice3.getAddress()).thenReturn(MAC_ADDRESS_4);
+        when(mCachedDevice3.getDrawableWithDescription())
+                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                 SHOW_DEVICES_WITHOUT_NAMES, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
     }

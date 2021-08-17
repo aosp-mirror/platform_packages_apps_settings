@@ -54,11 +54,6 @@ public class ZenAccessSettingObserverMixin extends ContentObserver implements Li
     @Override
     public void onStart() {
         mContext.getContentResolver().registerContentObserver(
-                Settings.Secure.getUriFor(
-                        Settings.Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES),
-                false /* notifyForDescendants */,
-                this /* observer */);
-        mContext.getContentResolver().registerContentObserver(
                 Settings.Secure.getUriFor(Settings.Secure.ENABLED_NOTIFICATION_LISTENERS),
                 false /* notifyForDescendants */,
                 this /* observer */);
