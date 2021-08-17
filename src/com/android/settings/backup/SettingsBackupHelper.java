@@ -22,6 +22,7 @@ import android.app.backup.BackupDataOutput;
 import android.app.backup.BackupHelper;
 import android.os.ParcelFileDescriptor;
 
+import com.android.settings.fuelgauge.BatteryBackupHelper;
 import com.android.settings.shortcut.CreateShortcutPreferenceController;
 
 import java.io.FileInputStream;
@@ -37,6 +38,7 @@ public class SettingsBackupHelper extends BackupAgentHelper {
     public void onCreate() {
         super.onCreate();
         addHelper("no-op", new NoOpHelper());
+        addHelper(BatteryBackupHelper.TAG, new BatteryBackupHelper(this));
     }
 
     @Override
