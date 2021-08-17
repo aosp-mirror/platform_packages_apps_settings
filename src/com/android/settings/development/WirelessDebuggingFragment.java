@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.debug.AdbManager;
+import android.debug.FingerprintAndPairDevice;
 import android.debug.IAdbManager;
 import android.debug.PairDevice;
 import android.os.Build;
@@ -310,8 +311,12 @@ public class WirelessDebuggingFragment extends DashboardFragment
             mAdbManager = IAdbManager.Stub.asInterface(ServiceManager.getService(
                     Context.ADB_SERVICE));
             try {
-                Map<String, PairDevice> newList = mAdbManager.getPairedDevices();
-                updatePairedDevicePreferences(newList);
+                FingerprintAndPairDevice[] newList = mAdbManager.getPairedDevices();
+                Map<String, PairDevice> newMap = new HashMap<>();
+                for (FingerprintAndPairDevice pair : newList) {
+                    newMap.put(pair.keyFingerprint, pair.device);
+                }
+                updatePairedDevicePreferences(newMap);
                 mConnectionPort = mAdbManager.getAdbWirelessPort();
                 if (mConnectionPort > 0) {
                     Log.i(TAG, "onEnabled(): connect_port=" + mConnectionPort);
@@ -430,7 +435,7 @@ public class WirelessDebuggingFragment extends DashboardFragment
             case FORGET_ACTION:
                 try {
                     p = (PairDevice) data.getParcelableExtra(PAIRED_DEVICE_EXTRA);
-                    mAdbManager.unpairDevice(p.getGuid());
+                    mAdbManager.unpairDevice(p.guid);
                 } catch (RemoteException e) {
                     Log.e(TAG, "Unable to forget the device");
                 }
