@@ -179,16 +179,18 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
                     POWER_BUTTON_LONG_PRESS_SETTING, LONG_PRESS_POWER_ASSISTANT_VALUE);
         }
 
-        // We need to determine the right disabled value - we set it to device default
-        // if it's different than Assist, otherwise we fallback to either global actions or power
-        // menu.
+        // We need to determine the right disabled value based on the device default
+        // for long-press power.
+
+        // If the default is to start the assistant, then the fallback is GlobalActions.
         final int defaultPowerButtonValue = mContext.getResources().getInteger(
                 POWER_BUTTON_LONG_PRESS_DEFAULT_VALUE_RESOURCE);
         if (defaultPowerButtonValue == LONG_PRESS_POWER_ASSISTANT_VALUE) {
             return Settings.Global.putInt(mContext.getContentResolver(),
-                    POWER_BUTTON_LONG_PRESS_SETTING, LONG_PRESS_POWER_NO_ACTION);
+                    POWER_BUTTON_LONG_PRESS_SETTING, LONG_PRESS_POWER_GLOBAL_ACTIONS);
         }
 
+        // If the default is something different than Assist, we use that default.
         return Settings.Global.putInt(mContext.getContentResolver(),
                 POWER_BUTTON_LONG_PRESS_SETTING, defaultPowerButtonValue);
     }
