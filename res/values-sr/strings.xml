@@ -54,8 +54,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Умањи"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увећај"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Користи аутоматско ротирање"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Препознавање лица користи предњу камеру за побољшање прецизности аутоматског ротирања. Слике се никада не чувају нити шаљу Google-у."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Пример текста"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Чаробњак из Оза"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Поглавље 11: Чудесни Смарагдни град Оза"</string>
@@ -291,8 +290,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Додајте текст на закључан екран"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Омогући виџете"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Администратор је онемогућио"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Прикажи опцију закључавања"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Прикажите опцију дугмета за напајање која искључује Smart Lock, откључавање лицем, откључавање отиском прста и обавештења на закључаном екрану"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Закључај екран када је агент непоуздан"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Ако се омогући, уређај ће се закључати када последњи поуздани агент више не буде поуздан"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Ништа"</string>
@@ -360,6 +357,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -1878,7 +1877,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth скенирање"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Дозволите апликацијама и услугама да траже уређаје у близини у сваком тренутку, чак и када је Bluetooth искључен. Ово може да се користи, на пример, за побољшање функција и услуга заснованих на локацији."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Услуге локације"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Услуге локације"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Услуге локације"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Услуге локације за посао"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Користи локацију за подешавање временске зоне"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Потребна је локација уређаја"</string>
@@ -2151,7 +2150,7 @@
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Никада није коришћено)"</string>
     <string name="no_default_apps" msgid="8966319676910104570">"Нема подразумев. апл."</string>
     <string name="storageuse_settings_title" msgid="3125650750657988194">"Коришћење меморије"</string>
-    <string name="storageuse_settings_summary" msgid="5001621552305431831">"Преглед искоришћене меморије по апликацијама"</string>
+    <string name="storageuse_settings_summary" msgid="5001621552305431831">"Преглед употребе меморијског простора по апликацијама"</string>
     <string name="service_restarting" msgid="5104563288155809226">"Поновно покретање"</string>
     <string name="cached" msgid="5379485147573438201">"Кеширани позадински процес"</string>
     <string name="no_running_services" msgid="9079738069349859373">"Нема покренутих услуга."</string>
@@ -4613,7 +4612,7 @@
     <string name="apps_summary" msgid="4007416751775414252">"Инсталираних апликација: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="6034002063446955592">"Инсталиране су 24 апликације"</string>
     <string name="storage_summary" msgid="5903562203143572768">"У употреби <xliff:g id="PERCENTAGE">%1$s</xliff:g> – <xliff:g id="FREE_SPACE">%2$s</xliff:g> слободно"</string>
-    <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Интерна меморија: <xliff:g id="PERCENTAGE">%1$s</xliff:g> је искоришћено – <xliff:g id="FREE_SPACE">%2$s</xliff:g> је слободно"</string>
+    <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Интерна меморија: <xliff:g id="PERCENTAGE">%1$s</xliff:g> је у употреби – <xliff:g id="FREE_SPACE">%2$s</xliff:g> је слободно"</string>
     <string name="display_summary" msgid="5526061030874717172">"Пређи у режим спавања после <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Тамна тема, величина фонта, осветљеност"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"Прелазак у режим спавања после 10 минута неактивности"</string>
@@ -5442,8 +5441,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"НАСТАВИ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"НЕ, ХВАЛА"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Локација"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Мобилни оператер може да прикупља податке о локацији када користите ову услугу за хитне позиве.\n\nПотражите детаље у политици приватности мобилног оператера."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Можете да изгубите приступ преосталом времену или подацима. Проверите са добављачем услуге пре уклањања."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"снимање садржаја, садржај апликације"</string>
     <string name="content_capture" msgid="868372905432812238">"Садржај апликације"</string>

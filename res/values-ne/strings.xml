@@ -53,8 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"अझ सानो बनाउनुहोस्"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"अझ ठुलो बनाउनुहोस्"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"अटो-रोटेट प्रयोग गरियोस्"</string>
-    <!-- no translation found for smart_rotate_text_headline (436277795183609578) -->
-    <skip />
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"अनुहार पत्ता लगाउने सुविधाले स्वतः रोटेट गर्ने सुविधाको सटीकता सुधार गर्न अगाडिको क्यामेरा प्रयोग गर्छ। फोटोहरू कहिल्यै स्टोर गरिँदैनन् वा Google मा सुरक्षित गरिँदैनन्।"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"नमूना पाठ"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"दि वन्डरफुल विजार्ड अफ ओज"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"अध्याय ११: दि वन्डरफुल एमरल्ड सिटी अफ ओज"</string>
@@ -289,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"लक स्क्रिनमा टेक्स्ट थपियोस्"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"विजेटहरू सक्षम पार्नुहोस्"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"एडमिनले अफ गरेको छ"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"लकडाउन विकल्प देखाइयोस्"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Smart Lock, फेस अनलक, फिंगरप्रिन्ट अनलक र लक स्क्रिनमा सूचना देखाउने सुविधा अफ गर्ने \'पावर बटन\' विकल्प देखाइयोस्"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"विश्वास गुमाइँदा स्क्रिन लक गर्नुहोस्"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"यो सुविधा सक्षम पारियो भने अन्तिम विश्वस्त एजेन्टले विश्वास गुमाउँदा यन्त्र लक हुने छ"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"कुनै पनि होइन"</string>
@@ -357,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -465,7 +464,7 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"डिभाइसको सुरक्षासम्बन्धी सुविधाहरू सक्रिय गरिने छैनन्। तपाईं यो फोन हराएको वा चोरी भएको अवस्थामा अरूलाई यो चलाउनबाट रोक्न सक्नुहुने छैन।"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"जसरी पनि छाड्नुहोस्"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"पछाडि फिर्ता जानुहोस्"</string>
-    <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"छाड्नुहोस्"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"स्किप गर्नुहोस्"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"रद्द गर्नुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"सेन्सरमा छुनुहोस्"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"फिंगरप्रिन्ट सेटअप गर्ने तरिका"</string>
@@ -1856,7 +1855,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"ब्लुटुथको खोजी"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"एप तथा सेवाहरूलाई जुनसुकै बेला (ब्लुटुथ अफ भएको बेलामा पनि) वरपरका डिभाइस खोज्ने अनुमति दिनुहोस्‌। यसलाई लोकेसनमा आधारित सुविधा तथा सेवाहरू सुधार गर्ने जस्ता कार्यहरू गर्नाका लागि प्रयोग गर्न सकिन्छ।"</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"लोकेसन सर्भिस"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"लोकेसन सर्भिस"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"लोकेसनसम्बन्धी सेवाहरू"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"कार्यस्थलका लागि लोकेसन सर्भिस"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"प्रामाणिक समय सेट गर्न स्थानसम्बन्धी जानकारी प्रयोग गरियोस्"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"डिभाइसको लोकेसन सर्भिस अन गर्नु पर्ने हुन्छ"</string>
@@ -5353,8 +5352,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"जारी राख्नुहोस्"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"पर्दैन, धन्यवाद"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"स्थान"</string>
-    <!-- no translation found for wfc_disclaimer_location_desc_text (1417004513415772582) -->
-    <skip />
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"तपाईंले यो सेवा प्रयोग गरेर आपत्कालीन अवस्थामा कल गर्दा तपाईंका सेवा प्रदायकले तपाईंको लोकेसन सङ्कलन गर्न सक्छ।\n\nविस्तृत विवरणका लागि सेवा प्रदायककको गोपनीयता नीति हेर्नुहोस्।"</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"तपाईं बाँकी जुनसुकै समय वा डेटामाथिको पहुँच गुमाउन सक्नुहुन्छ। हटाउनुभन्दा पहिले आफ्ना सेवा प्रदायकमार्फत जाँच गर्नुहोस्।"</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"सामग्री समावेश, एपको सामग्री"</string>
     <string name="content_capture" msgid="868372905432812238">"एपको सामग्री"</string>
@@ -5471,7 +5469,7 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"इन्टरनेटमा कनेक्ट गरिएको छ"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"इन्टरनेट छैन"</string>
-    <string name="mobile_data_off_summary" msgid="1884248776904165539">"मोबाइल डेटा स्वतः कनेक्ट हुँदैन"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"मोबाइल डेटा स्वतः अन हुँदैन"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"अन्य नेटवर्क उपलब्ध छैनन्"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"कुनै पनि नेटवर्क उपलब्ध छैन"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"मोबाइल डेटा अफ गर्ने हो?"</string>

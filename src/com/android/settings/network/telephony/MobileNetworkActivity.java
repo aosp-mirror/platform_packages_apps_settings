@@ -257,6 +257,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         if (currentSubInfo == null) {
             currentSubInfo = subList.stream()
                     .filter(SubscriptionAnnotation::isDisplayAllowed)
+                    .filter(SubscriptionAnnotation::isActive)
                     .findFirst().orElse(null);
         }
         return (currentSubInfo == null) ? null : currentSubInfo.getSubInfo();
