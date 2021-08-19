@@ -18,6 +18,8 @@ package com.android.settings.biometrics.combination;
 import android.content.Context;
 import android.os.UserHandle;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.android.settings.Settings;
 
 /**
@@ -35,6 +37,16 @@ public class CombinedBiometricProfileStatusPreferenceController extends
 
     public CombinedBiometricProfileStatusPreferenceController(Context context, String key) {
         super(context, key);
+    }
+
+    public CombinedBiometricProfileStatusPreferenceController(
+            Context context, Lifecycle lifecycle) {
+        super(context, KEY_BIOMETRIC_SETTINGS, lifecycle);
+    }
+
+    public CombinedBiometricProfileStatusPreferenceController(
+            Context context, String key, Lifecycle lifecycle) {
+        super(context, key, lifecycle);
     }
 
     @Override
