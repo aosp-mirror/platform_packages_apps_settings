@@ -43,9 +43,8 @@ public class DisableSmartForwardingTask implements Runnable {
             }
 
             if (callForwardingInfo != null
-                    && callForwardingInfo[i] != null
-                    && callForwardingInfo[i].getTimeoutSeconds() > 0) {
-                Log.d(TAG, "Restore call waiting to " + callForwardingInfo);
+                    && callForwardingInfo[i] != null) {
+                Log.d(TAG, "Restore call forwarding to " + callForwardingInfo[i]);
                 tm.setCallForwarding(callForwardingInfo[i], null, null);
             }
         }
