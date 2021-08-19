@@ -19,17 +19,28 @@ package com.android.settings.biometrics.fingerprint;
 import android.content.Context;
 import android.os.UserHandle;
 
+import androidx.lifecycle.Lifecycle;
+
 public class FingerprintProfileStatusPreferenceController
         extends FingerprintStatusPreferenceController {
 
     public static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings_profile";
 
     public FingerprintProfileStatusPreferenceController(Context context) {
-        this(context, KEY_FINGERPRINT_SETTINGS);
+        super(context, KEY_FINGERPRINT_SETTINGS);
     }
 
     public FingerprintProfileStatusPreferenceController(Context context, String key) {
         super(context, key);
+    }
+
+    public FingerprintProfileStatusPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, KEY_FINGERPRINT_SETTINGS, lifecycle);
+    }
+
+    public FingerprintProfileStatusPreferenceController(
+            Context context, String key, Lifecycle lifecycle) {
+        super(context, key, lifecycle);
     }
 
     @Override
