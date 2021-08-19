@@ -175,7 +175,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
      */
     @Override
     protected void refresh() {
-        updatePreferences(mContext, mCachedDevice.getAddress(), mProfilesContainer);
+        // Do nothing. More details in b/191992001
     }
 
     /**
