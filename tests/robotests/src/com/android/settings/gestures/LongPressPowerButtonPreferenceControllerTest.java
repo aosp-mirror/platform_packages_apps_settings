@@ -137,7 +137,7 @@ public class LongPressPowerButtonPreferenceControllerTest {
         when(mResources.getInteger(
                 com.android.internal.R.integer.config_keyChordPowerVolumeUp))
                 .thenReturn(
-                      LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_NO_ACTION);
+                     LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_NO_ACTION);
 
         verify(mController.mFooterHint).setVisible(false);
     }
@@ -148,7 +148,7 @@ public class LongPressPowerButtonPreferenceControllerTest {
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.POWER_BUTTON_LONG_PRESS, -1)).isEqualTo(
-                LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_ASSISTANT_VALUE);
+                PowerMenuSettingsUtils.LONG_PRESS_POWER_ASSISTANT_VALUE);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
                 LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS);
@@ -162,19 +162,19 @@ public class LongPressPowerButtonPreferenceControllerTest {
         when(mResources.getInteger(
                 com.android.internal.R.integer.config_longPressOnPowerBehavior))
                 .thenReturn(
-                        LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_GLOBAL_ACTIONS);
+                        PowerMenuSettingsUtils.LONG_PRESS_POWER_GLOBAL_ACTIONS);
 
         mController.onPreferenceChange(null, false);
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.POWER_BUTTON_LONG_PRESS, -1)).isEqualTo(
-                LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_GLOBAL_ACTIONS);
+                PowerMenuSettingsUtils.LONG_PRESS_POWER_GLOBAL_ACTIONS);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
                 LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_NO_ACTION);
         verify(mController.mAssistSwitch).setSummary(
                 getString(
-                       R.string.power_menu_summary_long_press_for_assist_disabled_with_power_menu));
+                      R.string.power_menu_summary_long_press_for_assist_disabled_with_power_menu));
     }
 
     @Test
@@ -203,13 +203,13 @@ public class LongPressPowerButtonPreferenceControllerTest {
         when(mResources.getInteger(
                 com.android.internal.R.integer.config_longPressOnPowerBehavior))
                 .thenReturn(
-                        LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_ASSISTANT_VALUE);
+                        PowerMenuSettingsUtils.LONG_PRESS_POWER_ASSISTANT_VALUE);
 
         mController.onPreferenceChange(null, false);
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.POWER_BUTTON_LONG_PRESS, -1)).isEqualTo(
-                LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_GLOBAL_ACTIONS);
+                PowerMenuSettingsUtils.LONG_PRESS_POWER_GLOBAL_ACTIONS);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
                 LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_NO_ACTION);

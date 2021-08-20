@@ -16,6 +16,8 @@
 
 package com.android.settings.gestures;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -24,9 +26,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
+import com.android.internal.R;
 import com.android.settings.widget.LabeledSeekBarPreference;
 
 import org.junit.Before;
@@ -41,7 +46,9 @@ import org.robolectric.RuntimeEnvironment;
 public class LabeledSeekBarPreferenceTest {
 
     private Context mContext;
+    private PreferenceViewHolder mViewHolder;
     private SeekBar mSeekBar;
+    private TextView mSummary;
     private LabeledSeekBarPreference mSeekBarPreference;
 
     @Mock
@@ -57,7 +64,9 @@ public class LabeledSeekBarPreferenceTest {
         final View view =
                 inflater.inflate(mSeekBarPreference.getLayoutResource(),
                         new LinearLayout(mContext), false);
-        mSeekBar = view.findViewById(com.android.internal.R.id.seekbar);
+        mViewHolder = PreferenceViewHolder.createInstanceForTests(view);
+        mSeekBar = (SeekBar) mViewHolder.findViewById(R.id.seekbar);
+        mSummary = (TextView) mViewHolder.findViewById(R.id.summary);
     }
 
     @Test
@@ -68,5 +77,24 @@ public class LabeledSeekBarPreferenceTest {
         mSeekBarPreference.onStopTrackingTouch(mSeekBar);
 
         verify(mListener, times(1)).onPreferenceChange(mSeekBarPreference, 2);
+    }
+
+    @Test
+    public void seekBarPreferenceSummarySet_returnsValue() {
+        final String summary = "this is a summary";
+        mSeekBarPreference.setSummary(summary);
+        mSeekBarPreference.onBindViewHolder(mViewHolder);
+
+        assertThat(mSeekBarPreference.getSummary()).isEqualTo(summary);
+        assertThat(mSummary.getText()).isEqualTo(summary);
+    }
+
+    @Test
+    public void seekBarPreferenceSummaryNull_hidesView() {
+        mSeekBarPreference.setSummary(null);
+        mSeekBarPreference.onBindViewHolder(mViewHolder);
+
+        assertThat(mSummary.getText()).isEqualTo("");
+        assertThat(mSummary.getVisibility()).isEqualTo(View.GONE);
     }
 }
