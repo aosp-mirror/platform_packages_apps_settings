@@ -20,9 +20,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceViewHolder;
 
@@ -35,6 +37,8 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
     private final int mTextEndId;
     private final int mTickMarkId;
     private OnPreferenceChangeListener mStopListener;
+    @Nullable
+    private CharSequence mSummary;
 
     public LabeledSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
@@ -52,6 +56,7 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
                 R.string.summary_placeholder);
         mTickMarkId = styledAttrs.getResourceId(
                 R.styleable.LabeledSeekBarPreference_tickMark, /* defValue= */ 0);
+        mSummary = styledAttrs.getText(R.styleable.Preference_android_summary);
         styledAttrs.recycle();
     }
 
@@ -76,6 +81,15 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
                     com.android.internal.R.id.seekbar);
             seekBar.setTickMark(tickMark);
         }
+
+        final TextView summary = (TextView) holder.findViewById(android.R.id.summary);
+        if (mSummary != null) {
+            summary.setText(mSummary);
+            summary.setVisibility(View.VISIBLE);
+        } else {
+            summary.setText(null);
+            summary.setVisibility(View.GONE);
+        }
     }
 
     public void setOnPreferenceChangeStopListener(OnPreferenceChangeListener listener) {
@@ -89,6 +103,25 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
         if (mStopListener != null) {
             mStopListener.onPreferenceChange(this, seekBar.getProgress());
         }
+    }
+
+    @Override
+    public void setSummary(CharSequence summary) {
+        super.setSummary(summary);
+        mSummary = summary;
+        notifyChanged();
+    }
+
+    @Override
+    public void setSummary(int summaryResId) {
+        super.setSummary(summaryResId);
+        mSummary = getContext().getText(summaryResId);
+        notifyChanged();
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mSummary;
     }
 }
 
