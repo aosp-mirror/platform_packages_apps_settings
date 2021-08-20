@@ -32,7 +32,6 @@ import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -77,13 +76,13 @@ public final class AccessibilityGestureNavigationTutorial {
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
             DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_BUTTON,
-            DialogType.LAUNCH_SERVICE_BY_GESTURE_NAVIGATION,
+            DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_GESTURE,
             DialogType.GESTURE_NAVIGATION_SETTINGS,
     })
 
     private @interface DialogType {
         int LAUNCH_SERVICE_BY_ACCESSIBILITY_BUTTON = 0;
-        int LAUNCH_SERVICE_BY_GESTURE_NAVIGATION = 1;
+        int LAUNCH_SERVICE_BY_ACCESSIBILITY_GESTURE = 1;
         int GESTURE_NAVIGATION_SETTINGS = 2;
     }
 
@@ -92,13 +91,17 @@ public final class AccessibilityGestureNavigationTutorial {
     private static final DialogInterface.OnClickListener mOnClickListener =
             (DialogInterface dialog, int which) -> dialog.dismiss();
 
-    public static void showGestureNavigationSettingsTutorialDialog(Context context,
-            DialogInterface.OnDismissListener dismissListener) {
+    /**
+     * Displays a dialog that guides users to use accessibility features with accessibility
+     * gestures under system gesture navigation mode.
+     */
+    public static void showGestureNavigationTutorialDialog(Context context,
+            DialogInterface.OnDismissListener onDismissListener) {
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setView(createTutorialDialogContentView(context,
                         DialogType.GESTURE_NAVIGATION_SETTINGS))
                 .setNegativeButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
-                .setOnDismissListener(dismissListener)
+                .setOnDismissListener(onDismissListener)
                 .create();
 
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -117,8 +120,8 @@ public final class AccessibilityGestureNavigationTutorial {
         return alertDialog;
     }
 
-    static AlertDialog showGestureNavigationTutorialDialog(Context context) {
-        return createDialog(context, DialogType.LAUNCH_SERVICE_BY_GESTURE_NAVIGATION);
+    static AlertDialog showAccessibilityGestureTutorialDialog(Context context) {
+        return createDialog(context, DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_GESTURE);
     }
 
     static AlertDialog createAccessibilityTutorialDialog(Context context, int shortcutTypes) {
@@ -129,7 +132,7 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     /**
-     * Get a content View for a dialog to confirm that they want to enable a service.
+     * Gets a content View for a dialog to confirm that they want to enable a service.
      *
      * @param context    A valid context
      * @param dialogType The type of tutorial dialog
@@ -146,40 +149,34 @@ public final class AccessibilityGestureNavigationTutorial {
                 content = inflater.inflate(
                         R.layout.tutorial_dialog_launch_service_by_accessibility_button, null);
                 break;
-            case DialogType.LAUNCH_SERVICE_BY_GESTURE_NAVIGATION:
+            case DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_GESTURE:
                 content = inflater.inflate(
                         R.layout.tutorial_dialog_launch_service_by_gesture_navigation, null);
-                final TextureView gestureTutorialVideo = content.findViewById(
-                        R.id.gesture_tutorial_video);
-                final TextView gestureTutorialMessage = content.findViewById(
-                        R.id.gesture_tutorial_message);
-                VideoPlayer.create(context, AccessibilityUtil.isTouchExploreEnabled(context)
-                                ? R.raw.illustration_accessibility_gesture_three_finger
-                                : R.raw.illustration_accessibility_gesture_two_finger,
-                        gestureTutorialVideo);
-                gestureTutorialMessage.setText(AccessibilityUtil.isTouchExploreEnabled(context)
-                        ? R.string.accessibility_tutorial_dialog_message_gesture_talkback
-                        : R.string.accessibility_tutorial_dialog_message_gesture);
+                setupGestureNavigationTextWithImage(context, content);
                 break;
             case DialogType.GESTURE_NAVIGATION_SETTINGS:
                 content = inflater.inflate(
                         R.layout.tutorial_dialog_launch_by_gesture_navigation_settings, null);
-                final TextureView gestureSettingsTutorialVideo = content.findViewById(
-                        R.id.gesture_tutorial_video);
-                final TextView gestureSettingsTutorialMessage = content.findViewById(
-                        R.id.gesture_tutorial_message);
-                VideoPlayer.create(context, AccessibilityUtil.isTouchExploreEnabled(context)
-                                ? R.raw.illustration_accessibility_gesture_three_finger
-                                : R.raw.illustration_accessibility_gesture_two_finger,
-                        gestureSettingsTutorialVideo);
-                final int stringResId = AccessibilityUtil.isTouchExploreEnabled(context)
-                        ? R.string.accessibility_tutorial_dialog_message_gesture_settings_talkback
-                        : R.string.accessibility_tutorial_dialog_message_gesture_settings;
-                gestureSettingsTutorialMessage.setText(stringResId);
+                setupGestureNavigationTextWithImage(context, content);
                 break;
         }
 
         return content;
+    }
+
+    private static void setupGestureNavigationTextWithImage(Context context, View view) {
+        final boolean isTouchExploreEnabled = AccessibilityUtil.isTouchExploreEnabled(context);
+
+        final ImageView imageView = view.findViewById(R.id.image);
+        final int gestureSettingsImageResId =
+                isTouchExploreEnabled ? R.drawable.illustration_accessibility_gesture_three_finger
+                        : R.drawable.illustration_accessibility_gesture_two_finger;
+        imageView.setImageResource(gestureSettingsImageResId);
+
+        final TextView textView = view.findViewById(R.id.gesture_tutorial_message);
+        textView.setText(isTouchExploreEnabled
+                ? R.string.accessibility_tutorial_dialog_message_gesture_settings_talkback
+                : R.string.accessibility_tutorial_dialog_message_gesture_settings);
     }
 
     private static AlertDialog createDialog(Context context, int dialogType) {
