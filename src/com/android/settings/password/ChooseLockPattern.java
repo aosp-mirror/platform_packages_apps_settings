@@ -361,7 +361,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
             Introduction(
                     R.string.lock_settings_picker_biometrics_added_security_message,
-                    ID_EMPTY_MESSAGE,
+                    R.string.lockpattern_choose_pattern_description,
                     R.string.lockpattern_recording_intro_header,
                     LeftButtonMode.Gone, RightButtonMode.ContinueDisabled,
                     ID_EMPTY_MESSAGE, true),
@@ -370,13 +370,13 @@ public class ChooseLockPattern extends SettingsActivity {
                     LeftButtonMode.Gone, RightButtonMode.Ok, ID_EMPTY_MESSAGE, false),
             ChoiceTooShort(
                     R.string.lock_settings_picker_biometrics_added_security_message,
-                    ID_EMPTY_MESSAGE,
+                    R.string.lockpattern_choose_pattern_description,
                     R.string.lockpattern_recording_incorrect_too_short,
                     LeftButtonMode.Retry, RightButtonMode.ContinueDisabled,
                     ID_EMPTY_MESSAGE, true),
             FirstChoiceValid(
                     R.string.lock_settings_picker_biometrics_added_security_message,
-                    ID_EMPTY_MESSAGE,
+                    R.string.lockpattern_choose_pattern_description,
                     R.string.lockpattern_pattern_entered_header,
                     LeftButtonMode.Retry, RightButtonMode.Continue, ID_EMPTY_MESSAGE, false),
             NeedToConfirm(
@@ -505,13 +505,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     layout.getMixin(IconMixin.class).setVisibility(View.GONE);
                 }
             } else {
-                if (mForFingerprint) {
-                    layout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
-                } else if (mForFace) {
-                    layout.setIcon(getActivity().getDrawable(R.drawable.ic_face_header));
-                } else if (mForBiometrics) {
-                    layout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
-                }
+                layout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
             }
 
             final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);

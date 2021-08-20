@@ -268,7 +268,9 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_choose_your_pin_header_for_fingerprint,
                     R.string.lockpassword_choose_your_pin_header_for_face,
                     R.string.lockpassword_choose_your_pin_header_for_biometrics,
+                    R.string.lockpassword_choose_password_description,
                     R.string.lock_settings_picker_biometrics_added_security_message,
+                    R.string.lockpassword_choose_pin_description,
                     R.string.lock_settings_picker_biometrics_added_security_message,
                     R.string.next_label),
 
@@ -283,6 +285,8 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
+                    0,
+                    0,
                     0,
                     0,
                     R.string.lockpassword_confirm_label),
@@ -300,15 +304,26 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_pins_dont_match,
                     0,
                     0,
+                    0,
+                    0,
                     R.string.lockpassword_confirm_label);
 
-            Stage(int hintInAlpha, int hintInAlphaForProfile,
-                    int hintInAlphaForFingerprint, int hintInAlphaForFace, int hintInAlphaForBiometrics,
-                    int hintInNumeric, int hintInNumericForProfile,
-                    int hintInNumericForFingerprint, int hintInNumericForFace, int hintInNumericForBiometrics,
+            Stage(int hintInAlpha,
+                    int hintInAlphaForProfile,
+                    int hintInAlphaForFingerprint,
+                    int hintInAlphaForFace,
+                    int hintInAlphaForBiometrics,
+                    int hintInNumeric,
+                    int hintInNumericForProfile,
+                    int hintInNumericForFingerprint,
+                    int hintInNumericForFace,
+                    int hintInNumericForBiometrics,
+                    int messageInAlpha,
                     int messageInAlphaForBiometrics,
+                    int messageInNumeric,
                     int messageInNumericForBiometrics,
                     int nextButtonText) {
+
                 this.alphaHint = hintInAlpha;
                 this.alphaHintForProfile = hintInAlphaForProfile;
                 this.alphaHintForFingerprint = hintInAlphaForFingerprint;
@@ -321,8 +336,12 @@ public class ChooseLockPassword extends SettingsActivity {
                 this.numericHintForFace = hintInNumericForFace;
                 this.numericHintForBiometrics = hintInNumericForBiometrics;
 
+                this.alphaMessage = messageInAlpha;
                 this.alphaMessageForBiometrics = messageInAlphaForBiometrics;
+
+                this.numericMessage = messageInNumeric;
                 this.numericMessageForBiometrics = messageInNumericForBiometrics;
+
                 this.buttonText = nextButtonText;
             }
 
@@ -331,22 +350,28 @@ public class ChooseLockPassword extends SettingsActivity {
             public static final int TYPE_FACE = 2;
             public static final int TYPE_BIOMETRIC = 3;
 
-            // Password
+            // Password header
             public final int alphaHint;
             public final int alphaHintForProfile;
             public final int alphaHintForFingerprint;
             public final int alphaHintForFace;
             public final int alphaHintForBiometrics;
 
-            // PIN
+            // PIN header
             public final int numericHint;
             public final int numericHintForProfile;
             public final int numericHintForFingerprint;
             public final int numericHintForFace;
             public final int numericHintForBiometrics;
 
+            // Password description
+            public final int alphaMessage;
             public final int alphaMessageForBiometrics;
+
+            // PIN description
+            public final int numericMessage;
             public final int numericMessageForBiometrics;
+
             public final int buttonText;
 
             public @StringRes int getHint(boolean isAlpha, int type, boolean isProfile) {
@@ -374,10 +399,15 @@ public class ChooseLockPassword extends SettingsActivity {
             }
 
             public @StringRes int getMessage(boolean isAlpha, int type) {
-                if (isAlpha) {
-                    return type != TYPE_NONE ? alphaMessageForBiometrics : 0;
-                } else {
-                    return type != TYPE_NONE ? numericMessageForBiometrics : 0;
+                switch (type) {
+                    case TYPE_FINGERPRINT:
+                    case TYPE_FACE:
+                    case TYPE_BIOMETRIC:
+                        return isAlpha ? alphaMessageForBiometrics : numericMessageForBiometrics;
+
+                    case TYPE_NONE:
+                    default:
+                        return isAlpha ? alphaMessage : numericMessage;
                 }
             }
         }
@@ -469,13 +499,7 @@ public class ChooseLockPassword extends SettingsActivity {
             mNextButton = mixin.getPrimaryButton();
 
             mMessage = view.findViewById(R.id.sud_layout_description);
-            if (mForFingerprint) {
-                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
-            } else if (mForFace) {
-                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_face_header));
-            } else if (mForBiometrics) {
-                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
-            }
+            mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
 
             mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mPasswordType
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mPasswordType

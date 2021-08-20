@@ -43,6 +43,7 @@ import com.android.settings.fuelgauge.BatteryDiffEntry;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.BatteryUsageStatsLoader;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.ConvertUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -77,6 +78,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     private String mBatteryPercent;
     private final String mPackageName;
     private final int mUid;
+    private final int mUserId;
     private boolean mBatteryUsageStatsLoaded = false;
     private boolean mBatteryDiffEntriesLoaded = false;
 
@@ -87,6 +89,7 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         mBatteryUtils = BatteryUtils.getInstance(mContext);
         mPackageName = packageName;
         mUid = uid;
+        mUserId = mContext.getUserId();
         refreshFeatureFlag(mContext);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -113,7 +116,13 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         if (!KEY_BATTERY.equals(preference.getKey())) {
             return false;
         }
+
         if (mBatteryDiffEntry != null) {
+            Log.i(TAG, "BatteryDiffEntry not null, launch : "
+                    + mBatteryDiffEntry.getPackageName()
+                    + " | uid : "
+                    + mBatteryDiffEntry.mBatteryHistEntry.mUid
+                    + " with DiffEntry data");
             AdvancedPowerUsageDetail.startBatteryDetailPage(
                     mParent.getActivity(),
                     mParent,
@@ -131,10 +140,16 @@ public class AppBatteryPreferenceController extends BasePreferenceController
             final BatteryEntry entry = new BatteryEntry(mContext, /* handler */null, userManager,
                     mUidBatteryConsumer, /* isHidden */ false,
                     mUidBatteryConsumer.getUid(), /* packages */ null, mPackageName);
+            Log.i(TAG, "Battery consumer available, launch : "
+                    + entry.getDefaultPackageName()
+                    + " | uid : "
+                    + entry.getUid()
+                    + " with BatteryEntry data");
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent, entry,
                     mIsChartGraphEnabled ? Utils.formatPercentage(0) : mBatteryPercent,
                     !mIsChartGraphEnabled);
         } else {
+            Log.i(TAG, "Launch : " + mPackageName + " with package name");
             AdvancedPowerUsageDetail.startBatteryDetailPage(mParent.getActivity(), mParent,
                     mPackageName);
         }
@@ -158,16 +173,33 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         new AsyncTask<Void, Void, BatteryDiffEntry>() {
             @Override
             protected BatteryDiffEntry doInBackground(Void... unused) {
+                if (mPackageName == null) {
+                    return null;
+                }
                 final List<BatteryDiffEntry> batteryDiffEntries =
                         BatteryChartPreferenceController.getBatteryLast24HrUsageData(mContext);
-                if (batteryDiffEntries != null) {
-                    for (BatteryDiffEntry batteryDiffEntry : batteryDiffEntries) {
-                        if (batteryDiffEntry.mBatteryHistEntry.mUid == mUid) {
-                            return batteryDiffEntry;
-                        }
-                    }
+                if (batteryDiffEntries == null) {
+                    return null;
                 }
-                return null;
+                // Filter entry with consumer type to avoid system app,
+                // then use user id to divide normal app and work profile app,
+                // return target application from filter list by package name.
+                return batteryDiffEntries.stream()
+                        .filter(entry -> entry.mBatteryHistEntry.mConsumerType
+                                == ConvertUtils.CONSUMER_TYPE_UID_BATTERY)
+                        .filter(entry -> entry.mBatteryHistEntry.mUserId == mUserId)
+                        .filter(entry -> {
+                            if (mPackageName.equals(entry.getPackageName())) {
+                                Log.i(TAG, "Return target application: "
+                                        + entry.mBatteryHistEntry.mPackageName
+                                        + " | uid: " + entry.mBatteryHistEntry.mUid
+                                        + " | userId: " + entry.mBatteryHistEntry.mUserId);
+                                return true;
+                            }
+                            return false;
+                        })
+                        .findFirst()
+                        .orElse(/* other */null);
             }
 
             @Override

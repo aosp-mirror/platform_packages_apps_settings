@@ -104,4 +104,26 @@ public class OneHandedActionShowNotificationPrefControllerTest {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
     }
+
+    @Test
+    public void getAvailabilityStatus_setShortcutEnabled_shouldEnabled() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
+        mUtils.setNavigationBarMode(mContext, "0" /* 3-button mode */);
+        mUtils.setShortcutEnabled(mContext, true);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_setShortcutDisabled_shouldDisabled() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
+        mUtils.setNavigationBarMode(mContext, "0" /* 3-button mode */);
+        mUtils.setShortcutEnabled(mContext, false);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
+    }
 }

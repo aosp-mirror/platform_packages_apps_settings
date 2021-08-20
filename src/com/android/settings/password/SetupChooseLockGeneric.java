@@ -23,7 +23,6 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_R
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.UserHandle;
@@ -43,6 +42,7 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.utils.SettingsDividerItemDecoration;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
+import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Setup Wizard's version of ChooseLockGeneric screen. It inherits the logic and basic structure
@@ -67,13 +67,9 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
     }
 
     @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
-        super.onApplyThemeResource(theme, new_resid, first);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstance) {
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstance);
 
         if(getIntent().hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)) {
@@ -90,6 +86,12 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         }
 
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
+    }
+
+    @Override
+    protected boolean isToolbarEnabled() {
+        // Hide the action bar from this page.
+        return false;
     }
 
     public static class SetupChooseLockGenericFragment extends ChooseLockGenericFragment {

@@ -20,7 +20,7 @@
     android:id="@+id/panel_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/settings_panel_background" >
+    android:background="@drawable/settings_panel_rounded_top_corner_background" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,11 @@
         <LinearLayout
             android:id="@+id/panel_header"
             android:layout_width="match_parent"
-            android:layout_height="94dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/settings_panel_title_margin"
+            android:layout_marginEnd="@dimen/settings_panel_title_margin"
+            android:layout_marginTop="@dimen/settings_panel_title_margin"
+            android:layout_marginBottom="@dimen/settings_panel_title_margin"
             android:gravity="start|center_vertical"
             android:orientation="horizontal"
             android:visibility="gone">
@@ -51,14 +55,13 @@
                 android:id="@+id/header_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/header_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="?android:attr/textColorPrimary"
@@ -81,11 +84,12 @@
             android:id="@+id/panel_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_panel_title_margin"
+            android:layout_marginBottom="@dimen/settings_panel_title_margin"
             android:gravity="center"
-            android:paddingBottom="24dp"
-            android:paddingTop="18dp"
             android:textColor="?android:attr/textColorPrimary"
-            android:textSize="20sp"/>
+            android:textSize="24sp"
+            android:fontFamily="sans-serif-reqular"/>
 
         <ProgressBar
             android:id="@+id/progress_bar"
