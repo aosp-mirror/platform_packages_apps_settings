@@ -98,3 +98,15 @@ android_robolectric_test {
         "SettingsLib-search",
     ],
 }
+
+java_library {
+    name: "Settings-robo-testutils",
+    srcs: ["src/com/android/settings/testutils/**/*.java"],
+
+    libs: [
+        "Settings-core",
+        "Robolectric_all-target",
+        "mockito-robolectric-prebuilt",
+        "truth-prebuilt",
+    ],
+}
