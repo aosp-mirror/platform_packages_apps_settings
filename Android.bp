@@ -109,3 +109,21 @@ android_library_import {
     name: "contextualcards",
     aars: ["libs/contextualcards.aar"],
 }
+
+filegroup {
+    name: "Settings_proguard_flags",
+    srcs: ["proguard.flags"],
+}
+
+// The sources for Settings need to be exposed to SettingsGoogle, etc.
+// so they can run the com.android.settingslib.search.IndexableProcessor
+// over all the sources together.
+filegroup {
+    name: "Settings_srcs",
+    srcs: ["src/**/*.java"],
+}
+
+filegroup {
+    name: "Settings_manifest",
+    srcs: ["AndroidManifest.xml"],
+}
