@@ -710,6 +710,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             Log.i(TAG, "onWifiStateChanged called with wifi state: " + wifiState);
         }
 
+        if (isFinishingOrDestroyed()) {
+            Log.w(TAG, "onWifiStateChanged shouldn't run when fragment is finishing or destroyed");
+            return;
+        }
+
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
                 updateWifiEntryPreferences();
@@ -981,6 +986,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private String getSavedNetworkSettingsSummaryText(
             int numSavedNetworks, int numSavedSubscriptions) {
+        if (getResources() == null) {
+            Log.w(TAG, "getSavedNetworkSettingsSummaryText shouldn't run if resource is not ready");
+            return null;
+        }
+
         if (numSavedSubscriptions == 0) {
             return getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
                     numSavedNetworks, numSavedNetworks);
