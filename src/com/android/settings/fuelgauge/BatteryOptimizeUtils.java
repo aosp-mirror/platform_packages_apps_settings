@@ -59,18 +59,23 @@ public class BatteryOptimizeUtils {
         mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName);
     }
 
-    public AppUsageState getAppUsageState() {
-        refreshState();
-        if (!mAllowListed && mMode == AppOpsManager.MODE_IGNORED) {
+    /** Gets the {@link AppUsageState} based on mode and allowed list. */
+    public static AppUsageState getAppUsageState(int mode, boolean isAllowListed) {
+        if (!isAllowListed && mode == AppOpsManager.MODE_IGNORED) {
             return AppUsageState.RESTRICTED;
-        } else if (mAllowListed && mMode == AppOpsManager.MODE_ALLOWED) {
+        } else if (isAllowListed && mode == AppOpsManager.MODE_ALLOWED) {
             return AppUsageState.UNRESTRICTED;
-        } else if (!mAllowListed && mMode == AppOpsManager.MODE_ALLOWED) {
+        } else if (!isAllowListed && mode == AppOpsManager.MODE_ALLOWED) {
             return AppUsageState.OPTIMIZED;
         } else {
-            Log.d(TAG, "get unknown app usage state.");
             return AppUsageState.UNKNOWN;
         }
+    }
+
+    /** Gets the current {@link AppUsageState}. */
+    public AppUsageState getAppUsageState() {
+        refreshState();
+        return getAppUsageState(mMode, mAllowListed);
     }
 
     public void setAppUsageState(AppUsageState state) {
