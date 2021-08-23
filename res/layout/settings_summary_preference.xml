@@ -30,7 +30,7 @@
         android:layout_marginBottom="5dp"
         android:fontFamily="@*android:string/config_headlineFontFamily"
         android:paddingTop="0dp"
-        android:textColor="?android:attr/colorAccent"
+        android:textColor="?android:attr/textColorPrimary"
         android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Display1"
         />
 
@@ -45,9 +45,9 @@
     <ProgressBar
         android:id="@+id/color_bar"
         style="?android:attr/progressBarStyleHorizontal"
+        android:scaleY="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:progressDrawable="@drawable/color_bar_progress"/>
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/label_bar"
