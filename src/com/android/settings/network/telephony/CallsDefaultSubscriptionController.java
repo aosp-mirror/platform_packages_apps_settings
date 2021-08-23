@@ -46,7 +46,7 @@ public class CallsDefaultSubscriptionController extends DefaultSubscriptionContr
     @Override
     public CharSequence getSummary() {
         if (Utils.isProviderModelEnabled(mContext)) {
-            return MobileNetworkUtils.getPreferredStatus(mContext, mManager, true);
+            return MobileNetworkUtils.getPreferredStatus(isRtlMode(), mContext, mManager, true);
         } else {
             return super.getSummary();
         }
