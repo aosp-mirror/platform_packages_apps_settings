@@ -22,7 +22,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -135,9 +134,6 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
         final Window window = getWindow();
         final WindowManager.LayoutParams lp = window.getAttributes();
         window.setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
-        lp.setFitInsetsTypes(WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars());
-        lp.setFitInsetsSides(WindowInsets.Side.all());
-        lp.setFitInsetsIgnoringVisibility(true);
         window.setAttributes(lp);
     }
 
