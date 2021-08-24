@@ -73,6 +73,7 @@ android_library {
         "android.hardware.dumpstate-V1.0-java",
         "android.hardware.dumpstate-V1.1-java",
         "lottie",
+        "windowExtLib",
     ],
 
     libs: [
@@ -101,6 +102,10 @@ android_app {
     ],
     static_libs: ["Settings-core"],
     uses_libs: ["org.apache.http.legacy"],
+    optional_uses_libs: [
+        "androidx.window.extensions",
+        "androidx.window.sidecar",
+    ],
     resource_dirs: [],
     optimize: {
         proguard_flags_files: ["proguard.flags"],
@@ -110,6 +115,11 @@ android_app {
 android_library_import {
     name: "contextualcards",
     aars: ["libs/contextualcards.aar"],
+}
+
+android_library_import {
+    name: "windowExtLib",
+    aars: ["libs/window_ext_lib.aar"],
 }
 
 filegroup {
