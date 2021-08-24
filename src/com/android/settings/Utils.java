@@ -1013,7 +1013,8 @@ public final class Utils extends com.android.settingslib.Utils {
         Drawable safeIcon = icon;
 
         if ((icon != null) && !(icon instanceof VectorDrawable)) {
-            safeIcon = getSafeDrawable(icon, 500, 500);
+            safeIcon = getSafeDrawable(icon,
+                    /* MAX_DRAWABLE_SIZE */ 600, /* MAX_DRAWABLE_SIZE */ 600);
         }
 
         return safeIcon;
