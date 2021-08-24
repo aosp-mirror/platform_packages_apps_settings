@@ -120,7 +120,10 @@
             android:directBootAware="true"
             android:appComponentFactory="androidx.core.app.CoreComponentFactory">
 
-        <uses-library android:name="org.apache.http.legacy" />
+        <uses-library android:name="org.apache.http.legacy"/>
+        <uses-library android:name="androidx.window.extensions" android:required="false"/>
+        <uses-library android:name="androidx.window.sidecar" android:required="false"/>
+
         <!-- Settings -->
 
         <activity android:name=".homepage.SettingsHomepageActivity"
