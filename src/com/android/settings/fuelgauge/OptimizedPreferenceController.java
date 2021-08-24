@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.OPTIMIZED;
-
 import android.content.Context;
 import android.util.Log;
 
@@ -59,7 +57,8 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
             Log.d(TAG, "is system or default app, disable pref");
             ((SelectorWithWidgetPreference) preference).setChecked(false);
             preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.getAppUsageState() == OPTIMIZED) {
+        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
+                == BatteryOptimizeUtils.MODE_OPTIMIZED) {
             Log.d(TAG, "is optimized states");
             ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else {
@@ -78,7 +77,7 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
             return false;
         }
 
-        mBatteryOptimizeUtils.setAppUsageState(OPTIMIZED);
+        mBatteryOptimizeUtils.setAppOptimizationMode(BatteryOptimizeUtils.MODE_OPTIMIZED);
         Log.d(TAG, "Set optimized");
         return true;
     }
