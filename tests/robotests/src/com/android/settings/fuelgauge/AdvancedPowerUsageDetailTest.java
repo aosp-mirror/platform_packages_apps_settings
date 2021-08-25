@@ -30,9 +30,11 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -123,6 +125,9 @@ public class AdvancedPowerUsageDetailTest {
     private BatteryUtils mBatteryUtils;
     @Mock
     private BatteryOptimizeUtils mBatteryOptimizeUtils;
+    @Mock
+    private BackupManager mBackupManager;
+
     private Context mContext;
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
@@ -180,9 +185,10 @@ public class AdvancedPowerUsageDetailTest {
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
-        mFragment.enableTriState = true;
+        mFragment.mEnableTriState = true;
         mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
         mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
+        mFragment.mBackupManager = mBackupManager;
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());
@@ -231,7 +237,7 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void testGetPreferenceScreenResId_disableTriState_returnLegacyLayout() {
-        mFragment.enableTriState = false;
+        mFragment.mEnableTriState = false;
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.power_usage_detail_legacy);
     }
 
@@ -779,5 +785,39 @@ public class AdvancedPowerUsageDetailTest {
                     new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
                     new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, "app label")
                 });
+    }
+
+    @Test
+    public void notifyBackupManager_optimizationModeIsNotChanged_notInvokeDataChanged() {
+        final int mode = BatteryOptimizeUtils.MODE_RESTRICTED;
+        mFragment.mOptimizationMode = mode;
+        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
+
+        mFragment.notifyBackupManager();
+
+        verifyZeroInteractions(mBackupManager);
+    }
+
+    @Test
+    public void notifyBackupManager_optimizationModeIsChanged_invokeDataChanged() {
+        mFragment.mOptimizationMode = BatteryOptimizeUtils.MODE_RESTRICTED;
+        when(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .thenReturn(BatteryOptimizeUtils.MODE_UNRESTRICTED);
+
+        mFragment.notifyBackupManager();
+
+        verify(mBackupManager).dataChanged();
+    }
+
+    @Test
+    public void notifyBackupManager_triStateIsNotEnabled_notInvokeDataChanged() {
+        mFragment.mOptimizationMode = BatteryOptimizeUtils.MODE_RESTRICTED;
+        when(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .thenReturn(BatteryOptimizeUtils.MODE_UNRESTRICTED);
+        mFragment.mEnableTriState = false;
+
+        mFragment.notifyBackupManager();
+
+        verifyZeroInteractions(mBackupManager);
     }
 }
