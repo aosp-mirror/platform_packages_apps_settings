@@ -180,8 +180,8 @@ public final class BatteryBackupHelperTest {
 
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
 
-        final String expectedResult =
-                packageName1 + "|UNRESTRICTED," + packageName2 + "|RESTRICTED,";
+        // 2 for UNRESTRICTED mode and 1 for RESTRICTED mode.
+        final String expectedResult = packageName1 + "|2," + packageName2 + "|1,";
         final byte[] expectedBytes = expectedResult.getBytes();
         verify(mBackupDataOutput).writeEntityHeader(
                 BatteryBackupHelper.KEY_OPTIMIZATION_LIST, expectedBytes.length);
