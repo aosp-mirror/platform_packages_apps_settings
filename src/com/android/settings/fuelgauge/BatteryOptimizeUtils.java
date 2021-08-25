@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge;
 
+import android.annotation.IntDef;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.util.Log;
@@ -23,6 +24,9 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /** A utility class for application usage operation. */
 public class BatteryOptimizeUtils {
@@ -32,21 +36,27 @@ public class BatteryOptimizeUtils {
     @VisibleForTesting AppOpsManager mAppOpsManager;
     @VisibleForTesting BatteryUtils mBatteryUtils;
     @VisibleForTesting PowerAllowlistBackend mPowerAllowListBackend;
+
     private final String mPackageName;
     private final int mUid;
 
     private int mMode;
     private boolean mAllowListed;
 
-    /**
-     * Usage type of application.
-     */
-    public enum AppUsageState {
-        UNKNOWN,
-        RESTRICTED,
-        UNRESTRICTED,
-        OPTIMIZED,
-    }
+    // Optimization modes.
+    static final int MODE_UNKNOWN = 0;
+    static final int MODE_RESTRICTED = 1;
+    static final int MODE_UNRESTRICTED = 2;
+    static final int MODE_OPTIMIZED = 3;
+
+    @IntDef(prefix = {"MODE_"}, value = {
+        MODE_UNKNOWN,
+        MODE_RESTRICTED,
+        MODE_UNRESTRICTED,
+        MODE_OPTIMIZED,
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    static @interface OptimizationMode {}
 
     public BatteryOptimizeUtils(Context context, int uid, String packageName) {
         mUid = uid;
@@ -59,41 +69,44 @@ public class BatteryOptimizeUtils {
         mAllowListed = mPowerAllowListBackend.isAllowlisted(mPackageName);
     }
 
-    /** Gets the {@link AppUsageState} based on mode and allowed list. */
-    public static AppUsageState getAppUsageState(int mode, boolean isAllowListed) {
+    /** Gets the {@link OptimizationMode} based on mode and allowed list. */
+    @OptimizationMode
+    public static int getAppOptimizationMode(int mode, boolean isAllowListed) {
         if (!isAllowListed && mode == AppOpsManager.MODE_IGNORED) {
-            return AppUsageState.RESTRICTED;
+            return MODE_RESTRICTED;
         } else if (isAllowListed && mode == AppOpsManager.MODE_ALLOWED) {
-            return AppUsageState.UNRESTRICTED;
+            return MODE_UNRESTRICTED;
         } else if (!isAllowListed && mode == AppOpsManager.MODE_ALLOWED) {
-            return AppUsageState.OPTIMIZED;
+            return MODE_OPTIMIZED;
         } else {
-            return AppUsageState.UNKNOWN;
+            return MODE_UNKNOWN;
         }
     }
 
-    /** Gets the current {@link AppUsageState}. */
-    public AppUsageState getAppUsageState() {
+    /** Gets the {@link OptimizationMode} for associated app. */
+    @OptimizationMode
+    public int getAppOptimizationMode() {
         refreshState();
-        return getAppUsageState(mMode, mAllowListed);
+        return getAppOptimizationMode(mMode, mAllowListed);
     }
 
-    public void setAppUsageState(AppUsageState state) {
-        switch (state) {
-            case RESTRICTED:
+    /** Sets the {@link OptimizationMode} for associated app. */
+    public void setAppOptimizationMode(@OptimizationMode int mode) {
+        switch (mode) {
+            case MODE_RESTRICTED:
                 mBatteryUtils.setForceAppStandby(mUid, mPackageName, AppOpsManager.MODE_IGNORED);
                 mPowerAllowListBackend.removeApp(mPackageName);
                 break;
-            case UNRESTRICTED:
+            case MODE_UNRESTRICTED:
                 mBatteryUtils.setForceAppStandby(mUid, mPackageName, AppOpsManager.MODE_ALLOWED);
                 mPowerAllowListBackend.addApp(mPackageName);
                 break;
-            case OPTIMIZED:
+            case MODE_OPTIMIZED:
                 mBatteryUtils.setForceAppStandby(mUid, mPackageName, AppOpsManager.MODE_ALLOWED);
                 mPowerAllowListBackend.removeApp(mPackageName);
                 break;
             default:
-                Log.d(TAG, "set unknown app usage state.");
+                Log.d(TAG, "set unknown app optimization mode.");
         }
     }
 

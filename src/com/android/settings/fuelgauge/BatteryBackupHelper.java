@@ -37,8 +37,6 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -135,13 +133,16 @@ public final class BatteryBackupHelper implements BackupHelper {
         for (ApplicationInfo info : applications) {
             final int mode = appOps.checkOpNoThrow(
                     AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, info.uid, info.packageName);
-            final AppUsageState state = BatteryOptimizeUtils.getAppUsageState(
+            @BatteryOptimizeUtils.OptimizationMode
+            final int optimizationMode = BatteryOptimizeUtils.getAppOptimizationMode(
                     mode, allowlistedApps.contains(info.packageName));
             // Ignores default optimized or unknown state.
-            if (state == AppUsageState.OPTIMIZED || state == AppUsageState.UNKNOWN) {
+            if (optimizationMode == BatteryOptimizeUtils.MODE_OPTIMIZED
+                    || optimizationMode == BatteryOptimizeUtils.MODE_UNKNOWN) {
                 continue;
             }
-            final String packageOptimizeMode = info.packageName + DELIMITER_MODE + state;
+            final String packageOptimizeMode =
+                    info.packageName + DELIMITER_MODE + optimizationMode;
             builder.append(packageOptimizeMode + DELIMITER);
             debugLog(packageOptimizeMode);
         }
