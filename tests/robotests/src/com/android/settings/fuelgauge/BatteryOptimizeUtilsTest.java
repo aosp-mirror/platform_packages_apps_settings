@@ -16,9 +16,9 @@
 
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.OPTIMIZED;
-import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.RESTRICTED;
-import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.UNRESTRICTED;
+import static com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_OPTIMIZED;
+import static com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_RESTRICTED;
+import static com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNRESTRICTED;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -65,30 +65,33 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
-    public void testGetAppUsageState_returnRestricted() {
+    public void testGetAppOptimizationMode_returnRestricted() {
         when(mockBackend.isAllowlisted(anyString())).thenReturn(false);
         when(mockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
                 .thenReturn(AppOpsManager.MODE_IGNORED);
 
-        assertThat(mBatteryOptimizeUtils.getAppUsageState()).isEqualTo(RESTRICTED);
+        assertThat(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .isEqualTo(MODE_RESTRICTED);
     }
 
     @Test
-    public void testGetAppUsageState_returnUnrestricted() {
+    public void testGetAppOptimizationMode_returnUnrestricted() {
         when(mockBackend.isAllowlisted(anyString())).thenReturn(true);
         when(mockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
                 .thenReturn(AppOpsManager.MODE_ALLOWED);
 
-        assertThat(mBatteryOptimizeUtils.getAppUsageState()).isEqualTo(UNRESTRICTED);
+        assertThat(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .isEqualTo(MODE_UNRESTRICTED);
     }
 
     @Test
-    public void testGetAppUsageState_returnOptimized() {
+    public void testGetAppOptimizationMode_returnOptimized() {
         when(mockBackend.isAllowlisted(anyString())).thenReturn(false);
         when(mockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
                 .thenReturn(AppOpsManager.MODE_ALLOWED);
 
-        assertThat(mBatteryOptimizeUtils.getAppUsageState()).isEqualTo(OPTIMIZED);
+        assertThat(mBatteryOptimizeUtils.getAppOptimizationMode())
+                .isEqualTo(MODE_OPTIMIZED);
     }
 
     @Test
@@ -118,8 +121,8 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
-    public void testSetAppUsageState_Restricted_verifyAction() {
-        mBatteryOptimizeUtils.setAppUsageState(RESTRICTED);
+    public void testSetAppOptimizationMode_Restricted_verifyAction() {
+        mBatteryOptimizeUtils.setAppOptimizationMode(MODE_RESTRICTED);
 
         verify(mockBatteryUtils).setForceAppStandby(UID,
                 PACKAGE_NAME, AppOpsManager.MODE_IGNORED);
@@ -127,8 +130,8 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
-    public void  testSetAppUsageState_Unrestricted_verifyAction() {
-        mBatteryOptimizeUtils.setAppUsageState(UNRESTRICTED);
+    public void  testSetAppOptimizationMode_Unrestricted_verifyAction() {
+        mBatteryOptimizeUtils.setAppOptimizationMode(MODE_UNRESTRICTED);
 
         verify(mockBatteryUtils).setForceAppStandby(UID,
                 PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
@@ -136,8 +139,8 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
-    public void  testSetAppUsageState_Optimized_verifyAction() {
-        mBatteryOptimizeUtils.setAppUsageState(OPTIMIZED);
+    public void  testSetAppOptimizationMode_Optimized_verifyAction() {
+        mBatteryOptimizeUtils.setAppOptimizationMode(MODE_OPTIMIZED);
 
         verify(mockBatteryUtils).setForceAppStandby(UID,
                 PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);

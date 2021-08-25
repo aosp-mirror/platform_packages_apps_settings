@@ -17,8 +17,6 @@
 
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.RESTRICTED;
-
 import android.content.Context;
 import android.util.Log;
 
@@ -57,7 +55,8 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
             Log.d(TAG, "is system or default app, disable pref");
             ((RadioButtonPreference) preference).setChecked(false);
             preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.getAppUsageState() == RESTRICTED) {
+        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
+                == BatteryOptimizeUtils.MODE_RESTRICTED) {
             Log.d(TAG, "is restricted states");
             ((RadioButtonPreference) preference).setChecked(true);
         } else {
@@ -81,7 +80,7 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
             return false;
         }
 
-        mBatteryOptimizeUtils.setAppUsageState(RESTRICTED);
+        mBatteryOptimizeUtils.setAppOptimizationMode(BatteryOptimizeUtils.MODE_RESTRICTED);
         Log.d(TAG, "Set restricted");
         return true;
     }
