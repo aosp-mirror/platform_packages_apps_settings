@@ -20,6 +20,7 @@ import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
+import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -113,7 +114,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     RadioButtonPreference mUnrestrictedPreference;
     @VisibleForTesting
-    boolean enableTriState = true;
+    boolean mEnableTriState = true;
+    @VisibleForTesting
+    @BatteryOptimizeUtils.OptimizationMode
+    int mOptimizationMode = BatteryOptimizeUtils.MODE_UNKNOWN;
+    @VisibleForTesting
+    BackupManager mBackupManager;
 
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
     private BackgroundActivityPreferenceController mBackgroundActivityPreferenceController;
@@ -245,7 +251,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onCreate(icicle);
 
         final String packageName = getArguments().getString(EXTRA_PACKAGE_NAME);
-        if (enableTriState) {
+        if (mEnableTriState) {
             onCreateForTriState(packageName);
         } else {
             mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
@@ -263,7 +269,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onResume();
 
         initHeader();
-        if (enableTriState) {
+        if (mEnableTriState) {
             initPreferenceForTriState(getContext());
             final String packageName = mBatteryOptimizeUtils.getPackageName();
             FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
@@ -273,6 +279,22 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                     packageName);
         } else {
             initPreference(getContext());
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        notifyBackupManager();
+    }
+
+    @VisibleForTesting
+    void notifyBackupManager() {
+        if (mEnableTriState
+                && mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
+            final BackupManager backupManager = mBackupManager != null
+                    ? mBackupManager : new BackupManager(getContext());
+            backupManager.dataChanged();
         }
     }
 
@@ -303,7 +325,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
         }
 
-        if (enableTriState) {
+        if (mEnableTriState) {
             final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
             final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
             final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
@@ -374,7 +396,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return enableTriState ? R.xml.power_usage_detail : R.xml.power_usage_detail_legacy;
+        return mEnableTriState ? R.xml.power_usage_detail : R.xml.power_usage_detail_legacy;
     }
 
     @Override
@@ -388,7 +410,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 (SettingsActivity) getActivity(), this, getSettingsLifecycle(), packageName,
                 mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
-        if (enableTriState) {
+        if (mEnableTriState) {
             controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
             controllers.add(new OptimizedPreferenceController(context, uid, packageName));
             controllers.add(new RestrictedPreferenceController(context, uid, packageName));
@@ -467,6 +489,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         mBatteryOptimizeUtils = new BatteryOptimizeUtils(
                 getContext(), getArguments().getInt(EXTRA_UID), packageName);
+        mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
     }
 
     private CharSequence getAppActiveTime(
