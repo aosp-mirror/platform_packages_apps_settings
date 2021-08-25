@@ -84,8 +84,8 @@ public class RestrictedPreferenceControllerTest {
     @Test
     public void testUpdateState_isRestrictedStates_prefChecked() {
         when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
-        when(mockBatteryOptimizeUtils.getAppUsageState()).thenReturn(
-                BatteryOptimizeUtils.AppUsageState.RESTRICTED);
+        when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
+                BatteryOptimizeUtils.MODE_RESTRICTED);
 
         mController.updateState(mPreference);
 
@@ -106,8 +106,8 @@ public class RestrictedPreferenceControllerTest {
         mPreference.setKey(mController.KEY_RESTRICTED_PREF);
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mockBatteryOptimizeUtils).setAppUsageState(
-                BatteryOptimizeUtils.AppUsageState.RESTRICTED);
+        verify(mockBatteryOptimizeUtils).setAppOptimizationMode(
+                BatteryOptimizeUtils.MODE_RESTRICTED);
     }
 
     @Test
