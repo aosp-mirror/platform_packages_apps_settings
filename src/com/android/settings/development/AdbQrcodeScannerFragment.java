@@ -44,11 +44,14 @@ import android.widget.TextView;
 import androidx.annotation.StringRes;
 
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.wifi.dpp.AdbQrCode;
 import com.android.settings.wifi.dpp.WifiDppQrCodeBaseFragment;
 import com.android.settings.wifi.dpp.WifiNetworkConfig;
 import com.android.settings.wifi.qrcode.QrCamera;
 import com.android.settings.wifi.qrcode.QrDecorateView;
+
+import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Fragment shown when clicking on the "Pair by QR code" preference in
@@ -144,6 +147,9 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Context context = getContext();
+        context.setTheme(SetupWizardUtils.getTheme(context, getActivity().getIntent()));
+        ThemeHelper.trySetDynamicColor(getContext());
         super.onCreate(savedInstanceState);
 
         mIntentFilter = new IntentFilter(AdbManager.WIRELESS_DEBUG_PAIRING_RESULT_ACTION);
@@ -158,14 +164,13 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mSummary = view.findViewById(R.id.sud_layout_subtitle);
 
         mTextureView = (TextureView) view.findViewById(R.id.preview_view);
         mTextureView.setSurfaceTextureListener(this);
 
         mDecorateView = view.findViewById(R.id.decorate_view);
         setProgressBarShown(false);
-
-        setHeaderIconImageResource(R.drawable.ic_scan_24dp);
 
         mQrCameraView = view.findViewById(R.id.camera_layout);
         mVerifyingView = view.findViewById(R.id.verifying_layout);
@@ -181,12 +186,18 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
     public void onResume() {
         super.onResume();
 
+        restartCamera();
+
         mAdbManager = IAdbManager.Stub.asInterface(ServiceManager.getService(Context.ADB_SERVICE));
         getActivity().registerReceiver(mReceiver, mIntentFilter);
     }
 
     @Override
     public void onPause() {
+        if (mCamera != null) {
+            mCamera.stop();
+        }
+
         super.onPause();
 
         getActivity().unregisterReceiver(mReceiver);
@@ -195,8 +206,6 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to cancel pairing");
         }
-        getActivity().setResult(Activity.RESULT_CANCELED);
-        getActivity().finish();
     }
 
     @Override
@@ -213,7 +222,6 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getActivity().getActionBar().hide();
         // setTitle for TalkBack
         getActivity().setTitle(R.string.wifi_dpp_scan_qr_code);
     }
