@@ -67,7 +67,7 @@ import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.MainSwitchBarController;
-import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
@@ -844,11 +844,11 @@ public class WifiSettings extends RestrictedSettingsFragment
                         : context.getText(R.string.pref_title_network_details);
 
         final Bundle bundle = new Bundle();
-        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY, wifiEntry.getKey());
+        bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY, wifiEntry.getKey());
 
         new SubSettingLauncher(context)
                 .setTitleText(title)
-                .setDestination(WifiNetworkDetailsFragment2.class.getName())
+                .setDestination(WifiNetworkDetailsFragment.class.getName())
                 .setArguments(bundle)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
@@ -1121,7 +1121,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
         final Bundle bundle = new Bundle();
-        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY,
+        bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY,
                 wifiEntry.getKey());
         new SubSettingLauncher(getContext())
                 .setTitleText(wifiEntry.getTitle())

@@ -37,6 +37,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,6 +65,8 @@ public final class BatteryBackupHelper implements BackupHelper {
     static final String KEY_FULL_POWER_LIST = "full_power_list";
     static final String KEY_OPTIMIZATION_LIST = "optimization_mode_list";
 
+    @VisibleForTesting
+    PowerAllowlistBackend mPowerAllowlistBackend;
     @VisibleForTesting
     IDeviceIdleController mIDeviceIdleController;
     @VisibleForTesting
@@ -127,6 +131,7 @@ public final class BatteryBackupHelper implements BackupHelper {
             Log.w(TAG, "no data found in the getInstalledApplications()");
             return;
         }
+        int backupCount = 0;
         final StringBuilder builder = new StringBuilder();
         final AppOpsManager appOps = mContext.getSystemService(AppOpsManager.class);
         // Converts application into the AppUsageState.
@@ -136,20 +141,22 @@ public final class BatteryBackupHelper implements BackupHelper {
             @BatteryOptimizeUtils.OptimizationMode
             final int optimizationMode = BatteryOptimizeUtils.getAppOptimizationMode(
                     mode, allowlistedApps.contains(info.packageName));
-            // Ignores default optimized or unknown state.
+            // Ignores default optimized/unknown state or system/default apps.
             if (optimizationMode == BatteryOptimizeUtils.MODE_OPTIMIZED
-                    || optimizationMode == BatteryOptimizeUtils.MODE_UNKNOWN) {
+                    || optimizationMode == BatteryOptimizeUtils.MODE_UNKNOWN
+                    || isSystemOrDefaultApp(info.packageName)) {
                 continue;
             }
             final String packageOptimizeMode =
                     info.packageName + DELIMITER_MODE + optimizationMode;
             builder.append(packageOptimizeMode + DELIMITER);
             debugLog(packageOptimizeMode);
+            backupCount++;
         }
 
         writeBackupData(data, KEY_OPTIMIZATION_LIST, builder.toString());
-        Log.d(TAG, String.format("backup getInstalledApplications() size=%d in %d/ms",
-                applications.size(), (System.currentTimeMillis() - timestamp)));
+        Log.d(TAG, String.format("backup getInstalledApplications():%d count=%d in %d/ms",
+                applications.size(), backupCount, (System.currentTimeMillis() - timestamp)));
     }
 
     // Provides an opportunity to inject mock IDeviceIdleController for testing.
@@ -168,6 +175,20 @@ public final class BatteryBackupHelper implements BackupHelper {
         }
         mIPackageManager = AppGlobals.getPackageManager();
         return mIPackageManager;
+    }
+
+    private PowerAllowlistBackend getPowerAllowlistBackend() {
+        if (mPowerAllowlistBackend != null) {
+            return mPowerAllowlistBackend;
+        }
+        mPowerAllowlistBackend = PowerAllowlistBackend.getInstance(mContext);
+        return mPowerAllowlistBackend;
+    }
+
+    private boolean isSystemOrDefaultApp(String packageName) {
+        final PowerAllowlistBackend powerAllowlistBackend = getPowerAllowlistBackend();
+        return powerAllowlistBackend.isSysAllowlisted(packageName)
+                || powerAllowlistBackend.isDefaultActiveApp(packageName);
     }
 
     private List<ApplicationInfo> getInstalledApplications() {
