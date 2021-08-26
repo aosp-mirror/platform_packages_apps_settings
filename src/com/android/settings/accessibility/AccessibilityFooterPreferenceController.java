@@ -104,11 +104,17 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
         sb.append(getIntroductionTitle()).append("\n\n").append(footerPreference.getTitle());
         footerPreference.setContentDescription(sb);
 
+        final Intent helpIntent;
         if (getHelpResource() != 0) {
+            // Returns may be null if content is wrong or empty.
+            helpIntent = HelpUtils.getHelpIntent(mContext, mContext.getString(getHelpResource()),
+                    mContext.getClass().getName());
+        } else {
+            helpIntent = null;
+        }
+
+        if (helpIntent != null) {
             footerPreference.setLearnMoreAction(view -> {
-                final Intent helpIntent = HelpUtils.getHelpIntent(
-                        mContext, mContext.getString(getHelpResource()),
-                        mContext.getClass().getName());
                 view.startActivityForResult(helpIntent, 0);
             });
             footerPreference.setLearnMoreContentDescription(getLearnMoreContentDescription());
