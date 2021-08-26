@@ -40,6 +40,8 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -59,6 +61,9 @@ import org.robolectric.annotation.Resetter;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {BatteryBackupHelperTest.ShadowUserHandle.class})
 public final class BatteryBackupHelperTest {
+    private static final String PACKAGE_NAME1 = "com.android.testing.1";
+    private static final String PACKAGE_NAME2 = "com.android.testing.2";
+    private static final String PACKAGE_NAME3 = "com.android.testing.3";
 
     private Context mContext;
     private BatteryBackupHelper mBatteryBackupHelper;
@@ -73,6 +78,8 @@ public final class BatteryBackupHelperTest {
     private AppOpsManager mAppOpsManager;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private PowerAllowlistBackend mPowerAllowlistBackend;
 
     @Before
     public void setUp() {
@@ -84,6 +91,7 @@ public final class BatteryBackupHelperTest {
         mBatteryBackupHelper = new BatteryBackupHelper(mContext);
         mBatteryBackupHelper.mIDeviceIdleController = mDeviceController;
         mBatteryBackupHelper.mIPackageManager = mIPackageManager;
+        mBatteryBackupHelper.mPowerAllowlistBackend = mPowerAllowlistBackend;
     }
 
     @After
@@ -172,16 +180,49 @@ public final class BatteryBackupHelperTest {
 
     @Test
     public void backupOptimizationMode_backupOptimizationMode() throws Exception {
-        final String packageName1 = "com.android.testing.1";
-        final String packageName2 = "com.android.testing.2";
-        final String packageName3 = "com.android.testing.3";
-        final List<String> allowlistedApps = Arrays.asList(packageName1);
-        createTestingData(packageName1, packageName2, packageName3);
+        final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);
+        createTestingData(PACKAGE_NAME1, PACKAGE_NAME2, PACKAGE_NAME3);
 
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
 
         // 2 for UNRESTRICTED mode and 1 for RESTRICTED mode.
-        final String expectedResult = packageName1 + "|2," + packageName2 + "|1,";
+        final String expectedResult = PACKAGE_NAME1 + "|2," + PACKAGE_NAME2 + "|1,";
+        verifyBackupData(expectedResult);
+    }
+
+    @Test
+    public void backupOptimizationMode_backupOptimizationModeAndIgnoreSystemApp()
+            throws Exception {
+        final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);
+        createTestingData(PACKAGE_NAME1, PACKAGE_NAME2, PACKAGE_NAME3);
+        // Sets "com.android.testing.1" as system app.
+        doReturn(true).when(mPowerAllowlistBackend).isSysAllowlisted(PACKAGE_NAME1);
+        doReturn(false).when(mPowerAllowlistBackend).isDefaultActiveApp(anyString());
+
+        mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
+
+        // "com.android.testing.2" for RESTRICTED mode.
+        final String expectedResult = PACKAGE_NAME2 + "|1,";
+        verifyBackupData(expectedResult);
+    }
+
+    @Test
+    public void backupOptimizationMode_backupOptimizationModeAndIgnoreDefaultApp()
+            throws Exception {
+        final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);
+        createTestingData(PACKAGE_NAME1, PACKAGE_NAME2, PACKAGE_NAME3);
+        // Sets "com.android.testing.1" as device default app.
+        doReturn(true).when(mPowerAllowlistBackend).isDefaultActiveApp(PACKAGE_NAME1);
+        doReturn(false).when(mPowerAllowlistBackend).isSysAllowlisted(anyString());
+
+        mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
+
+        // "com.android.testing.2" for RESTRICTED mode.
+        final String expectedResult = PACKAGE_NAME2 + "|1,";
+        verifyBackupData(expectedResult);
+    }
+
+    private void verifyBackupData(String expectedResult) throws Exception {
         final byte[] expectedBytes = expectedResult.getBytes();
         verify(mBackupDataOutput).writeEntityHeader(
                 BatteryBackupHelper.KEY_OPTIMIZATION_LIST, expectedBytes.length);
