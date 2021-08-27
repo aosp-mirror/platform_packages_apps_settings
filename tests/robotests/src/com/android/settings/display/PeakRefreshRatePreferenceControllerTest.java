@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.view.Display;
 
 import androidx.preference.SwitchPreference;
 
@@ -100,6 +101,21 @@ public class PeakRefreshRatePreferenceControllerTest {
         disableSmoothDisplayPreference();
 
         assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void findPeakRefreshRate_moreThanOneHigherThanDefault() {
+        Display.Mode lower = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE - 1);
+        Display.Mode def = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE);
+        Display.Mode higher = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE + 1);
+        Display.Mode higher1 = new Display.Mode(0, 0, 0, DEFAULT_REFRESH_RATE + 2);
+
+        assertThat(mController.findPeakRefreshRate(
+                new Display.Mode[] {lower, def, higher, higher1}))
+                .isEqualTo(DEFAULT_REFRESH_RATE + 2);
+        assertThat(mController.findPeakRefreshRate(
+                new Display.Mode[] {lower, def, higher1, higher}))
+                .isEqualTo(DEFAULT_REFRESH_RATE + 2);
     }
 
     private void enableSmoothDisplayPreference() {

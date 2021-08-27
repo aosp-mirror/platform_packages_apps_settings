@@ -98,11 +98,12 @@
   </string-array>
     <!-- no translation found for wifi_tether_security:0 (6312112980634811065) -->
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
+    <!-- no translation found for wifi_tether_security:2 (6851763638266088835) -->
+    <!-- no translation found for wifi_tether_security:3 (5512131148045414341) -->
   <string-array name="eap_ocsp_type">
-    <item msgid="7202884222741437608">"Niet valideren"</item>
+    <item msgid="8568170800958331461">"Niet verifiëren"</item>
     <item msgid="5703177653586269306">"Certificaatstatus opvragen"</item>
     <item msgid="326388247868439528">"Certificaatstatus vereisen"</item>
-    <item msgid="1090956283885790552">"Alle niet-vertrouwde certificaatstatussen vereisen"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"Knop indrukken"</item>
@@ -123,7 +124,7 @@
     <item msgid="4241913314075719627">"Geen time-out"</item>
   </string-array>
   <string-array name="bluetooth_max_connected_audio_devices">
-    <item msgid="4792793579224104167">"Systeemstandaard gebruiken: <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
+    <item msgid="4792793579224104167">"Gebruik systeemstandaard: <xliff:g id="DEFAULT_BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES">%1$d</xliff:g>"</item>
     <item msgid="5818942631838356082">"1"</item>
     <item msgid="4804155564025402919">"2"</item>
     <item msgid="7123296338505723878">"3"</item>
@@ -267,12 +268,12 @@
     <item msgid="5272927168355895681">"wekkervolume"</item>
     <item msgid="4422070755065530548">"meldingsvolume"</item>
     <item msgid="3250654589277825306">"bluetooth-volume"</item>
-    <item msgid="4212187233638382465">"ingeschakeld houden"</item>
+    <item msgid="4212187233638382465">"actief houden"</item>
     <item msgid="5099026183238335900">"monitorlocatie"</item>
     <item msgid="2297727967385895059">"locatie met hoog energieverbruik controleren"</item>
     <item msgid="8700593962030471569">"gebruiksstatistieken ophalen"</item>
-    <item msgid="4140820386622184831">"microfoon dempen/dempen opheffen"</item>
-    <item msgid="317746827951691657">"toast weergeven"</item>
+    <item msgid="4140820386622184831">"microfoon uit-/aanzetten"</item>
+    <item msgid="317746827951691657">"toast tonen"</item>
     <item msgid="5679422988212309779">"media projecteren"</item>
     <item msgid="6454031639780101439">"VPN activeren"</item>
     <item msgid="2441327072846850561">"achtergrond schrijven"</item>
@@ -288,7 +289,7 @@
     <item msgid="7621394050624063528">"neplocatie"</item>
     <item msgid="37519917674959757">"opslag lezen"</item>
     <item msgid="3868809525697401379">"schrijven naar opslag"</item>
-    <item msgid="2504191192460059817">"scherm inschakelen"</item>
+    <item msgid="2504191192460059817">"scherm aanzetten"</item>
     <item msgid="7905819538788103556">"accounts ophalen"</item>
     <item msgid="1675025662248079254">"uitvoeren op de achtergrond"</item>
     <item msgid="2553974920157061225">"toegankelijkheidsvolume"</item>
@@ -334,12 +335,12 @@
     <item msgid="4266577290496513640">"Wekkervolume"</item>
     <item msgid="8608084169623998854">"Meldingsvolume"</item>
     <item msgid="7948784184567841794">"Bluetooth-volume"</item>
-    <item msgid="1148968792599973150">"Ingeschakeld houden"</item>
+    <item msgid="1148968792599973150">"Actief houden"</item>
     <item msgid="8482874682804856549">"Locatie"</item>
     <item msgid="5186169827582545242">"Locatie"</item>
     <item msgid="6122293931012635638">"Gebruiksstatistieken ophalen"</item>
-    <item msgid="2526677383312751932">"Microfoon dempen/dempen opheffen"</item>
-    <item msgid="4000577305179914546">"Toast weergeven"</item>
+    <item msgid="2526677383312751932">"Microfoon uit-/aanzetten"</item>
+    <item msgid="4000577305179914546">"Toast tonen"</item>
     <item msgid="8660207174515570558">"Media projecteren"</item>
     <item msgid="3904996949561946108">"VPN activeren"</item>
     <item msgid="504052124101832515">"Achtergrond schrijven"</item>
@@ -355,7 +356,7 @@
     <item msgid="2363460595607829243">"Neplocatie"</item>
     <item msgid="3778165903878569143">"Opslag lezen"</item>
     <item msgid="555939881912035315">"Schrijven naar opslag"</item>
-    <item msgid="4281352581602735717">"Scherm inschakelen"</item>
+    <item msgid="4281352581602735717">"Scherm aanzetten"</item>
     <item msgid="346122795998225472">"Accounts ophalen"</item>
     <item msgid="3756073389408535680">"Uitvoeren op de achtergrond"</item>
     <item msgid="2114661179947426734">"Toegankelijkheidsvolume"</item>
@@ -364,6 +365,11 @@
     <item msgid="6926391290986427331">"Kort"</item>
     <item msgid="5118829513010894576">"Normaal"</item>
     <item msgid="6740026006576843477">"Lang"</item>
+  </string-array>
+  <string-array name="long_press_timeout_selector_list_titles">
+    <item msgid="8908021508913038488">"Kort"</item>
+    <item msgid="7397961711906421599">"Normaal"</item>
+    <item msgid="4079132024502041928">"Lang"</item>
   </string-array>
   <string-array name="captioning_typeface_selector_titles">
     <item msgid="2166553138528640250">"Standaard"</item>
@@ -411,6 +417,18 @@
     <item msgid="1119043472912497241">"Geel op zwart"</item>
     <item msgid="2836895041823327816">"Geel op blauw"</item>
     <item msgid="747238414788976867">"Aangepast"</item>
+  </string-array>
+  <string-array name="accessibility_button_location_selector_titles">
+    <item msgid="6485511780196327736">"Zwevend over andere apps"</item>
+    <item msgid="3605616699204153590">"Navigatiebalk"</item>
+  </string-array>
+  <string-array name="accessibility_button_gesture_selector_titles">
+    <item msgid="2370918472773154939">"Knop"</item>
+    <item msgid="6922258575853746220">"Gebaar"</item>
+  </string-array>
+  <string-array name="accessibility_button_size_selector_titles">
+    <item msgid="7482952318152486459">"Klein"</item>
+    <item msgid="1666628329913333563">"Groot"</item>
   </string-array>
   <string-array name="vpn_types_long">
     <item msgid="6621806338070912611">"PPTP-VPN"</item>
@@ -489,13 +507,13 @@
     <item msgid="9080166583718385565">"0"</item>
   </string-array>
   <string-array name="wifi_metered_entries">
-    <item msgid="3237321077949659241">"Automatisch detecteren"</item>
+    <item msgid="3237321077949659241">"Detecteer automatisch"</item>
     <item msgid="3779092145391320375">"Behandelen als wifi met datalimiet"</item>
     <item msgid="2047166446768045816">"Behandelen als wifi zonder datalimiet"</item>
   </string-array>
   <string-array name="wifi_privacy_entries">
-    <item msgid="3485945604919292489">"Willekeurig MAC-adres gebruiken (standaard)"</item>
-    <item msgid="741680937828608749">"MAC-adres van apparaat gebruiken"</item>
+    <item msgid="3485945604919292489">"Gebruik een willekeurig MAC-adres (standaard)"</item>
+    <item msgid="741680937828608749">"Gebruik MAC-adres van apparaat"</item>
   </string-array>
   <string-array name="wifi_hidden_entries">
     <item msgid="342232116597649254">"Nee"</item>
@@ -507,7 +525,7 @@
   </string-array>
   <string-array name="autofill_logging_level_entries">
     <item msgid="2263571982739726576">"Uit"</item>
-    <item msgid="4295717421282345505">"Fouten opsporen"</item>
+    <item msgid="4295717421282345505">"Spoor fouten op"</item>
     <item msgid="8657797891533816070">"Uitgebreid"</item>
   </string-array>
   <string-array name="cdma_system_select_choices">
@@ -525,7 +543,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="1091258946200124345">"Algemeen"</item>
+    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE/WCDMA"</item>
     <item msgid="7723670142495874534">"Alleen TDSCDMA"</item>
@@ -542,7 +560,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="8908263949185004366">"Algemeen"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>

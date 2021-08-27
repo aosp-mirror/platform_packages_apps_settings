@@ -149,13 +149,13 @@ public class PlatformCompatDashboard extends DashboardFragment {
         final List<CompatibilityChangeInfo> disabledChanges = new ArrayList<>();
         final Map<Integer, List<CompatibilityChangeInfo>> targetSdkChanges = new TreeMap<>();
         for (CompatibilityChangeInfo change : mChanges) {
-            if (change.getEnableAfterTargetSdk() != 0) {
+            if (change.getEnableSinceTargetSdk() > 0) {
                 List<CompatibilityChangeInfo> sdkChanges;
-                if (!targetSdkChanges.containsKey(change.getEnableAfterTargetSdk())) {
+                if (!targetSdkChanges.containsKey(change.getEnableSinceTargetSdk())) {
                     sdkChanges = new ArrayList<>();
-                    targetSdkChanges.put(change.getEnableAfterTargetSdk(), sdkChanges);
+                    targetSdkChanges.put(change.getEnableSinceTargetSdk(), sdkChanges);
                 } else {
-                    sdkChanges = targetSdkChanges.get(change.getEnableAfterTargetSdk());
+                    sdkChanges = targetSdkChanges.get(change.getEnableSinceTargetSdk());
                 }
                 sdkChanges.add(change);
             } else if (change.getDisabled()) {

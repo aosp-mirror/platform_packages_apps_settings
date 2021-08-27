@@ -21,22 +21,25 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
+import com.android.settings.wifi.WifiPrimarySwitchPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -57,14 +60,20 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.network_and_internet;
+        if (Utils.isProviderModelEnabled(getContext())) {
+            return R.xml.network_provider_internet;
+        } else {
+            return R.xml.network_and_internet;
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
+        if (!Utils.isProviderModelEnabled(context)) {
+            use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
+        }
         use(AirplaneModePreferenceController.class).setFragment(this);
         getSettingsLifecycle().addObserver(use(AllInOneTetherPreferenceController.class));
     }
@@ -86,18 +95,21 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 this /* fragment */, this /* mobilePlanHost */);
     }
 
-    @Override
-    protected boolean isParalleledControllers() {
-        return true;
-    }
-
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, MetricsFeatureProvider metricsFeatureProvider, Fragment fragment,
             MobilePlanPreferenceHost mobilePlanHost) {
         final MobilePlanPreferenceController mobilePlanPreferenceController =
                 new MobilePlanPreferenceController(context, mobilePlanHost);
-        final WifiMasterSwitchPreferenceController wifiPreferenceController =
-                new WifiMasterSwitchPreferenceController(context, metricsFeatureProvider);
+        final WifiPrimarySwitchPreferenceController wifiPreferenceController =
+                Utils.isProviderModelEnabled(context)
+                        ? null
+                        : new WifiPrimarySwitchPreferenceController(
+                                context,
+                                metricsFeatureProvider);
+        final InternetPreferenceController internetPreferenceController =
+                Utils.isProviderModelEnabled(context)
+                        ? new InternetPreferenceController(context, lifecycle)
+                        : null;
 
         final VpnPreferenceController vpnPreferenceController =
                 new VpnPreferenceController(context);
@@ -106,7 +118,9 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         if (lifecycle != null) {
             lifecycle.addObserver(mobilePlanPreferenceController);
-            lifecycle.addObserver(wifiPreferenceController);
+            if (wifiPreferenceController != null) {
+                lifecycle.addObserver(wifiPreferenceController);
+            }
             lifecycle.addObserver(vpnPreferenceController);
             lifecycle.addObserver(privateDnsPreferenceController);
         }
@@ -118,8 +132,16 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         controllers.add(vpnPreferenceController);
         controllers.add(new ProxyPreferenceController(context));
         controllers.add(mobilePlanPreferenceController);
-        controllers.add(wifiPreferenceController);
+        if (wifiPreferenceController != null) {
+            controllers.add(wifiPreferenceController);
+        }
+        if (internetPreferenceController != null) {
+            controllers.add(internetPreferenceController);
+        }
         controllers.add(privateDnsPreferenceController);
+        if (Utils.isProviderModelEnabled(context)) {
+            controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
+        }
         return controllers;
     }
 
@@ -155,6 +177,18 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.network_and_internet) {
+
+                @Override
+                // TODO(b/167474581): Should remove this method when Provider Model finished.
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    if (Utils.isProviderModelEnabled(context)) {
+                        final SearchIndexableResource sir = new SearchIndexableResource(context);
+                        sir.xmlResId = R.xml.network_provider_internet;
+                        return Arrays.asList(sir);
+                    }
+                    return super.getXmlResourcesToIndex(context, enabled);
+                }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context

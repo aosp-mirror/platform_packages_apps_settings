@@ -98,11 +98,12 @@
   </string-array>
     <!-- no translation found for wifi_tether_security:0 (6312112980634811065) -->
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
+    <!-- no translation found for wifi_tether_security:2 (6851763638266088835) -->
+    <!-- no translation found for wifi_tether_security:3 (5512131148045414341) -->
   <string-array name="eap_ocsp_type">
-    <item msgid="7202884222741437608">"Təsdiq etməyin"</item>
+    <item msgid="8568170800958331461">"Doğrulamayın"</item>
     <item msgid="5703177653586269306">"Sertifikat statusu tələb edin"</item>
     <item msgid="326388247868439528">"Sertifikat statusu tələb edin"</item>
-    <item msgid="1090956283885790552">"Bütün etibarsız sertifikat statuslarını tələb edin"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"Düyməyə basın"</item>
@@ -176,7 +177,7 @@
   <string-array name="wifi_proxy_settings">
     <item msgid="4669222334822978847">"Heç biri"</item>
     <item msgid="6242198071587397280">"Manual"</item>
-    <item msgid="464383874780058242">"Proksi Avto-Konfiq"</item>
+    <item msgid="464383874780058242">"Proksi avtokonfiqurasiyası"</item>
   </string-array>
   <string-array name="apn_auth_entries">
     <item msgid="2900892411844440682">"Heç biri"</item>
@@ -220,7 +221,7 @@
     <item msgid="2362840341195111674">"Sistem qərar versin"</item>
   </string-array>
   <string-array name="app_ops_categories">
-    <item msgid="528483497841471005">"Yerləşmə"</item>
+    <item msgid="528483497841471005">"Məkan"</item>
     <item msgid="7786376598377098070">"Şəxsi"</item>
     <item msgid="7707692387382449990">"Mesajlaşma"</item>
     <item msgid="2235402926760712958">"Media"</item>
@@ -304,7 +305,7 @@
     <item msgid="2348589304974534308">"Zəng jurnalına dəyişiklik edin"</item>
     <item msgid="4089146706115315300">"Təqvim oxuyun"</item>
     <item msgid="1305780729690198918">"Təqvimə dəyişiklik edin"</item>
-    <item msgid="3461096740171440592">"Yerləşmə"</item>
+    <item msgid="3461096740171440592">"Məkan"</item>
     <item msgid="6657539556093198883">"Bildiriş göndərin"</item>
     <item msgid="8112680908829570200">"Məkan"</item>
     <item msgid="5019327268152480733">"Telefon zəngi"</item>
@@ -335,8 +336,8 @@
     <item msgid="8608084169623998854">"Bildiriş həcmi"</item>
     <item msgid="7948784184567841794">"Bluetooth həcmi"</item>
     <item msgid="1148968792599973150">"Oyaq saxla"</item>
-    <item msgid="8482874682804856549">"Yer"</item>
-    <item msgid="5186169827582545242">"Yer"</item>
+    <item msgid="8482874682804856549">"Məkan"</item>
+    <item msgid="5186169827582545242">"Məkan"</item>
     <item msgid="6122293931012635638">"İstifadə statistikasını əldə edin"</item>
     <item msgid="2526677383312751932">"Mikrofonu susdurun/susdurmayın"</item>
     <item msgid="4000577305179914546">"Tostu göstərin"</item>
@@ -364,6 +365,11 @@
     <item msgid="6926391290986427331">"Qısa"</item>
     <item msgid="5118829513010894576">"Orta"</item>
     <item msgid="6740026006576843477">"Uzun"</item>
+  </string-array>
+  <string-array name="long_press_timeout_selector_list_titles">
+    <item msgid="8908021508913038488">"Qısa"</item>
+    <item msgid="7397961711906421599">"Orta"</item>
+    <item msgid="4079132024502041928">"Uzun"</item>
   </string-array>
   <string-array name="captioning_typeface_selector_titles">
     <item msgid="2166553138528640250">"Defolt"</item>
@@ -411,6 +417,18 @@
     <item msgid="1119043472912497241">"Qara üstündə sarı"</item>
     <item msgid="2836895041823327816">"Mavi üstündə sarı"</item>
     <item msgid="747238414788976867">"Fərd"</item>
+  </string-array>
+  <string-array name="accessibility_button_location_selector_titles">
+    <item msgid="6485511780196327736">"Digər tətbiqlərin üzərində üzür"</item>
+    <item msgid="3605616699204153590">"Naviqasiya paneli"</item>
+  </string-array>
+  <string-array name="accessibility_button_gesture_selector_titles">
+    <item msgid="2370918472773154939">"Düymə"</item>
+    <item msgid="6922258575853746220">"Jest"</item>
+  </string-array>
+  <string-array name="accessibility_button_size_selector_titles">
+    <item msgid="7482952318152486459">"Kiçik"</item>
+    <item msgid="1666628329913333563">"Böyük"</item>
   </string-array>
   <string-array name="vpn_types_long">
     <item msgid="6621806338070912611">"PPTP VPN"</item>
@@ -478,9 +496,9 @@
     <item msgid="6618900408138432102">"Qırmızı"</item>
   </string-array>
   <string-array name="automatic_storage_management_days">
-    <item msgid="8896644025110620477">"30 gündən köhnədir"</item>
-    <item msgid="9083927335632626281">"60 gündən köhnədir"</item>
-    <item msgid="4146561207729203822">"90 gündən köhnədir"</item>
+    <item msgid="8896644025110620477">"30 gündən köhnə"</item>
+    <item msgid="9083927335632626281">"60 gündən köhnə"</item>
+    <item msgid="4146561207729203822">"90 gündən köhnə"</item>
   </string-array>
     <!-- no translation found for swipe_direction_titles:0 (9039866451038081694) -->
     <!-- no translation found for swipe_direction_titles:1 (3175804938330683021) -->
@@ -489,13 +507,13 @@
     <item msgid="9080166583718385565">"0"</item>
   </string-array>
   <string-array name="wifi_metered_entries">
-    <item msgid="3237321077949659241">"Avtomatik silin"</item>
-    <item msgid="3779092145391320375">"Limitli olaraq qəbul edin"</item>
-    <item msgid="2047166446768045816">"Limitisiz olaraq qəbul edin"</item>
+    <item msgid="3237321077949659241">"Avtomatik aşkarlansın"</item>
+    <item msgid="3779092145391320375">"Tarifikasiya ilə işlədin"</item>
+    <item msgid="2047166446768045816">"Tarifikasiyasız işlədin"</item>
   </string-array>
   <string-array name="wifi_privacy_entries">
     <item msgid="3485945604919292489">"İxtiyari MAC (defolt) istifadə edin"</item>
-    <item msgid="741680937828608749">"MAC cihazından istifadə edin"</item>
+    <item msgid="741680937828608749">"Cihazın MAC-ünvanını istifadə edin"</item>
   </string-array>
   <string-array name="wifi_hidden_entries">
     <item msgid="342232116597649254">"Xeyr"</item>
@@ -525,7 +543,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="1091258946200124345">"Qlobal"</item>
+    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE / WCDMA"</item>
     <item msgid="7723670142495874534">"Yalnız TDSCDMA"</item>
@@ -542,7 +560,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="8908263949185004366">"Qlobal"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>

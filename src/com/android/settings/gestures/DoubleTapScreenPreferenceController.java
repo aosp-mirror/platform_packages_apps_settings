@@ -35,7 +35,7 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     private static final String PREF_KEY_VIDEO = "gesture_double_tap_screen_video";
 
-    private final String SECURE_KEY = DOZE_DOUBLE_TAP_GESTURE;
+    private static final String SECURE_KEY = DOZE_DOUBLE_TAP_GESTURE;
 
     private AmbientDisplayConfiguration mAmbientConfig;
     @UserIdInt

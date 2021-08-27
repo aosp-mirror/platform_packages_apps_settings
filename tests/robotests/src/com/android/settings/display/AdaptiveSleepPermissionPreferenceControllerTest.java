@@ -11,73 +11,69 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings.display;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 
-import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
-import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class AdaptiveSleepPermissionPreferenceControllerTest {
-    private final static String PACKAGE_NAME = "package_name";
+    private Context mContext;
     private AdaptiveSleepPermissionPreferenceController mController;
+
     @Mock
     private PackageManager mPackageManager;
     @Mock
-    private Preference mPreference;
+    private PreferenceScreen mScreen;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        Context context = Mockito.spy(RuntimeEnvironment.application);
-        doReturn(mPackageManager).when(context).getPackageManager();
-        doReturn(PACKAGE_NAME).when(mPackageManager).getAttentionServicePackageName();
-        doReturn(PackageManager.PERMISSION_GRANTED).when(mPackageManager).checkPermission(
-                Manifest.permission.CAMERA, PACKAGE_NAME);
-        mController = new AdaptiveSleepPermissionPreferenceController(context, "test_key");
-        doReturn(mController.getPreferenceKey()).when(mPreference).getKey();
+        mContext = spy(getApplicationContext());
+
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        when(mPackageManager.getAttentionServicePackageName()).thenReturn("some.package");
+        when(mPackageManager.checkPermission(any(), any())).thenReturn(
+                PackageManager.PERMISSION_GRANTED);
+
+        mController = new AdaptiveSleepPermissionPreferenceController(mContext);
     }
 
     @Test
-    public void getAvailabilityStatus_returnAvailableUnsearchable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+    public void addToScreen_normalCase_hidePreference() {
+        mController.addToScreen(mScreen);
+
+        verify(mScreen, never()).addPreference(mController.mPreference);
     }
 
     @Test
-    public void updateStates_permissionGranted_preferenceInvisible() {
-        mController.updateState(mPreference);
+    public void addToScreen_permissionNotGranted_showPreference() {
+        when(mPackageManager.checkPermission(any(), any())).thenReturn(
+                PackageManager.PERMISSION_DENIED);
 
-        verify(mPreference).setVisible(false);
-    }
+        mController.addToScreen(mScreen);
 
-    @Test
-    public void updateStates_permissionRevoked_preferenceVisible() {
-        doReturn(PackageManager.PERMISSION_DENIED).when(mPackageManager).checkPermission(
-                Manifest.permission.CAMERA, PACKAGE_NAME);
-
-        mController.updateState(mPreference);
-
-        verify(mPreference).setVisible(true);
+        verify(mScreen).addPreference(mController.mPreference);
     }
 }

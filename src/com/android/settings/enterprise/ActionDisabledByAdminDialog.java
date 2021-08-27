@@ -37,7 +37,7 @@ public class ActionDisabledByAdminDialog extends Activity
         final RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
                 getAdminDetailsFromIntent(getIntent());
         final String restriction = getRestrictionFromIntent(getIntent());
-        mDialogHelper = new ActionDisabledByAdminDialogHelper(this);
+        mDialogHelper = new ActionDisabledByAdminDialogHelper(this, restriction);
         mDialogHelper.prepareDialogBuilder(restriction, enforcedAdmin)
                 .setOnDismissListener(this)
                 .show();

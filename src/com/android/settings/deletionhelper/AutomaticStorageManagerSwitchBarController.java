@@ -26,25 +26,26 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 import com.android.internal.util.Preconditions;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /** Handles the logic for flipping the storage management toggle on a {@link SwitchBar}. */
 public class AutomaticStorageManagerSwitchBarController
-        implements SwitchBar.OnSwitchChangeListener {
+        implements OnMainSwitchChangeListener {
     private static final String STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY =
             "ro.storage_manager.enabled";
 
     private Context mContext;
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mSwitchBar;
     private MetricsFeatureProvider mMetrics;
     private Preference mDaysToRetainPreference;
     private FragmentManager mFragmentManager;
 
     public AutomaticStorageManagerSwitchBarController(
             Context context,
-            SwitchBar switchBar,
+            SettingsMainSwitchBar switchBar,
             MetricsFeatureProvider metrics,
             Preference daysToRetainPreference,
             FragmentManager fragmentManager) {

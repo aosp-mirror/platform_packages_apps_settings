@@ -19,6 +19,8 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -28,9 +30,10 @@
     <uses-permission android:name="android.permission.UPDATE_APP_OPS_STATS" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
 
-    <application>
+    <application android:debuggable="true">
         <uses-library android:name="android.test.runner" />
         <activity android:name="com.android.settings.tests.BluetoothRequestPermissionTest"
+            android:exported="true"
             android:label="Bluetooth Perm Test" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +41,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Operator" android:label="Operator Hook Test" >
+        <activity android:name="Operator" android:label="Operator Hook Test"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.android.settings.OPERATOR_APPLICATION_SETTING" />
             </intent-filter>
@@ -46,7 +50,8 @@
             <meta-data android:name="com.android.settings.summary" android:resource="@string/operator_settings_summary" />
             <meta-data android:name="com.android.settings.icon" android:resource="@drawable/ic_settings_applications" />
         </activity>
-        <activity android:name="Manufacturer" android:label="Manufacturer Hook Test" >
+        <activity android:name="Manufacturer" android:label="Manufacturer Hook Test"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
             </intent-filter>
@@ -55,7 +60,8 @@
             <meta-data android:name="com.android.settings.icon" android:resource="@drawable/ic_settings_applications" />
         </activity>
 
-        <service android:name="com.android.settings.accounts.TestAuthService">
+        <service android:name="com.android.settings.accounts.TestAuthService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>

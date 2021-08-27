@@ -19,7 +19,7 @@ package com.android.settings.development;
 import androidx.annotation.NonNull;
 
 import com.android.settings.Utils;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -28,12 +28,12 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 public class DevelopmentSwitchBarController implements LifecycleObserver, OnStart, OnStop {
 
-    private final SwitchBar mSwitchBar;
+    private final SettingsMainSwitchBar mSwitchBar;
     private final boolean mIsAvailable;
     private final DevelopmentSettingsDashboardFragment mSettings;
 
     public DevelopmentSwitchBarController(@NonNull DevelopmentSettingsDashboardFragment settings,
-            SwitchBar switchBar, boolean isAvailable, Lifecycle lifecycle) {
+            SettingsMainSwitchBar switchBar, boolean isAvailable, Lifecycle lifecycle) {
         mSwitchBar = switchBar;
         mIsAvailable = isAvailable && !Utils.isMonkeyRunning();
         mSettings = settings;

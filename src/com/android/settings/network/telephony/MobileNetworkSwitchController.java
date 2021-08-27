@@ -32,14 +32,13 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SubscriptionsChangeListener;
-import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settings.widget.SettingsMainSwitchPreference;
 
 /** This controls a switch to allow enabling/disabling a mobile network */
 public class MobileNetworkSwitchController extends BasePreferenceController implements
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient, LifecycleObserver {
     private static final String TAG = "MobileNetworkSwitchCtrl";
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchPreference mSwitchBar;
     private int mSubId;
     private SubscriptionsChangeListener mChangeListener;
     private SubscriptionManager mSubscriptionManager;
@@ -70,16 +69,14 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference pref = screen.findPreference(mPreferenceKey);
-        mSwitchBar = pref.findViewById(R.id.switch_bar);
-        mSwitchBar.setSwitchBarText(R.string.mobile_network_use_sim_on,
-                R.string.mobile_network_use_sim_off);
+        mSwitchBar = (SettingsMainSwitchPreference) screen.findPreference(mPreferenceKey);
+        mSwitchBar.setTitle(mContext.getString(R.string.mobile_network_use_sim_on));
 
-        mSwitchBar.getSwitch().setOnBeforeCheckedChangeListener((toggleSwitch, isChecked) -> {
+        mSwitchBar.setOnBeforeCheckedChangeListener((toggleSwitch, isChecked) -> {
             // TODO b/135222940: re-evaluate whether to use
             // mSubscriptionManager#isSubscriptionEnabled
-            if (mSubscriptionManager.isActiveSubscriptionId(mSubId) != isChecked
-                    && (!mSubscriptionManager.setSubscriptionEnabled(mSubId, isChecked))) {
+            if (mSubscriptionManager.isActiveSubscriptionId(mSubId) != isChecked) {
+                SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, mSubId, isChecked);
                 return true;
             }
             return false;
@@ -118,7 +115,8 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
     }
 
     @Override
-    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {}
+    public void onAirplaneModeChanged(boolean airplaneModeEnabled) {
+    }
 
     @Override
     public void onSubscriptionsChanged() {

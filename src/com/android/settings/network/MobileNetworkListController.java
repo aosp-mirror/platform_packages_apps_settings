@@ -26,6 +26,12 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.ArrayMap;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.network.telephony.MobileNetworkActivity;
@@ -34,12 +40,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 import java.util.Map;
-
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 /**
  * This populates the entries on a page which lists all available mobile subscriptions. Each entry
@@ -106,7 +106,9 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                 pref = new Preference(mPreferenceScreen.getContext());
                 mPreferenceScreen.addPreference(pref);
             }
-            pref.setTitle(info.getDisplayName());
+            final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    info, mContext);
+            pref.setTitle(displayName);
 
             if (info.isEmbedded()) {
                 if (mSubscriptionManager.isActiveSubscriptionId(subId)) {
@@ -121,14 +123,14 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                     pref.setSummary(mContext.getString(R.string.mobile_network_inactive_sim));
                 } else {
                     pref.setSummary(mContext.getString(R.string.mobile_network_tap_to_activate,
-                            SubscriptionUtil.getDisplayName(info)));
+                            displayName));
                 }
             }
 
             pref.setOnPreferenceClickListener(clickedPref -> {
                 if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
                         && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
-                    mSubscriptionManager.setSubscriptionEnabled(subId, true);
+                    SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, true);
                 } else {
                     final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
                     intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());

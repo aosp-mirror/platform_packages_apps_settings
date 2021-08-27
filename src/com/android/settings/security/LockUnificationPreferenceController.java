@@ -33,6 +33,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
@@ -42,6 +43,7 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 /**
  * Controller for password unification/un-unification flows.
@@ -67,10 +69,11 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
     private final DevicePolicyManager mDpm;
     private final LockPatternUtils mLockPatternUtils;
     private final int mProfileUserId;
-    private final SecuritySettings mHost;
+    private final SettingsPreferenceFragment mHost;
 
     private RestrictedSwitchPreference mUnifyProfile;
 
+    private final String mPreferenceKey;
 
     private LockscreenCredential mCurrentDevicePassword;
     private LockscreenCredential mCurrentProfilePassword;
@@ -79,10 +82,15 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mUnifyProfile = screen.findPreference(KEY_UNIFICATION);
+        mUnifyProfile = screen.findPreference(mPreferenceKey);
     }
 
-    public LockUnificationPreferenceController(Context context, SecuritySettings host) {
+    public LockUnificationPreferenceController(Context context, SettingsPreferenceFragment host) {
+        this(context, host, KEY_UNIFICATION);
+    }
+
+    public LockUnificationPreferenceController(
+            Context context, SettingsPreferenceFragment host, String key) {
         super(context);
         mHost = host;
         mUm = context.getSystemService(UserManager.class);
@@ -93,6 +101,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         mProfileUserId = Utils.getManagedProfileId(mUm, MY_USER_ID);
         mCurrentDevicePassword = LockscreenCredential.createNone();
         mCurrentProfilePassword = LockscreenCredential.createNone();
+        this.mPreferenceKey = key;
     }
 
     @Override
@@ -103,7 +112,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
 
     @Override
     public String getPreferenceKey() {
-        return KEY_UNIFICATION;
+        return mPreferenceKey;
     }
 
     @Override
@@ -118,11 +127,15 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
             startUnification();
         } else {
             final String title = mContext.getString(R.string.unlock_set_unlock_launch_picker_title);
-            final ChooseLockSettingsHelper helper =
-                    new ChooseLockSettingsHelper(mHost.getActivity(), mHost);
-            if (!helper.launchConfirmationActivity(
-                    UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST,
-                    title, true /* returnCredentials */, MY_USER_ID)) {
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(mHost.getActivity(), mHost);
+            final boolean launched = builder.setRequestCode(UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST)
+                    .setTitle(title)
+                    .setReturnCredentials(true)
+                    .setUserId(MY_USER_ID)
+                    .show();
+
+            if (!launched) {
                 ununifyLocks();
             }
         }
@@ -166,20 +179,27 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         extras.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, mCurrentDevicePassword);
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                .setTitleRes(R.string.lock_settings_picker_title_profile)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .setArguments(extras)
+                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
                 .launch();
     }
 
-    void startUnification() {
+    /**
+     * Unify primary and profile locks.
+     */
+    public void startUnification() {
         // Confirm profile lock
         final String title = mContext.getString(
                 R.string.unlock_set_unlock_launch_picker_title_profile);
-        final ChooseLockSettingsHelper helper =
-                new ChooseLockSettingsHelper(mHost.getActivity(), mHost);
-        if (!helper.launchConfirmationActivity(
-                UNIFY_LOCK_CONFIRM_PROFILE_REQUEST, title, true, mProfileUserId)) {
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(mHost.getActivity(), mHost);
+        final boolean launched = builder.setRequestCode(UNIFY_LOCK_CONFIRM_PROFILE_REQUEST)
+                .setTitle(title)
+                .setReturnCredentials(true)
+                .setUserId(mProfileUserId)
+                .show();
+        if (!launched) {
             // If profile has no lock, go straight to unification.
             unifyLocks();
             // TODO: update relevant prefs.
@@ -218,6 +238,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
                 .setTitleRes(R.string.lock_settings_picker_title)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .setArguments(extras)
+                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
                 .launch();
     }
 

@@ -16,24 +16,20 @@
 package com.android.settings.users;
 
 import android.content.Context;
-import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 public class AddUserWhenLockedPreferenceController extends TogglePreferenceController {
 
     private final UserCapabilities mUserCaps;
-    private final LockPatternUtils mLockPatternUtils;
 
     public AddUserWhenLockedPreferenceController(Context context, String key) {
         super(context, key);
         mUserCaps = UserCapabilities.create(context);
-        mLockPatternUtils = new LockPatternUtils(context);
     }
 
     @Override
@@ -57,8 +53,6 @@ public class AddUserWhenLockedPreferenceController extends TogglePreferenceContr
             return DISABLED_FOR_USER;
         } else if (mUserCaps.disallowAddUser() || mUserCaps.disallowAddUserSetByAdmin()) {
             return DISABLED_FOR_USER;
-        } else if (!mLockPatternUtils.isSecure(UserHandle.myUserId())) {
-            return CONDITIONALLY_UNAVAILABLE;
         } else {
             return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
         }

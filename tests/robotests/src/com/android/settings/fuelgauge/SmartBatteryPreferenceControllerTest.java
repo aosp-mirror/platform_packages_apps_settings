@@ -27,6 +27,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;

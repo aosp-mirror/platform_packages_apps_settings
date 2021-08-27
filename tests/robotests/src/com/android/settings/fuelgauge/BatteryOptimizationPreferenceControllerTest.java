@@ -33,7 +33,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,8 +46,8 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class BatteryOptimizationPreferenceControllerTest {
 
-    private static final String PKG_IN_WHITELIST = "com.pkg.in.whitelist";
-    private static final String PKG_NOT_IN_WHITELIST = "com.pkg.not.in.whitelist";
+    private static final String PKG_IN_ALLOWLIST = "com.pkg.in.allowlist";
+    private static final String PKG_NOT_IN_ALLOWLIST = "com.pkg.not.in.allowlist";
     private static final String KEY_OPTIMIZATION = "battery_optimization";
     private static final String KEY_OTHER = "other";
     @Mock
@@ -55,7 +55,7 @@ public class BatteryOptimizationPreferenceControllerTest {
     @Mock
     private DashboardFragment mFragment;
     @Mock
-    private TestPowerWhitelistBackend mBackend;
+    private TestPowerAllowlistBackend mBackend;
 
     private BatteryOptimizationPreferenceController mController;
     private Preference mPreference;
@@ -66,12 +66,12 @@ public class BatteryOptimizationPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        doReturn(false).when(mBackend).isWhitelisted(PKG_NOT_IN_WHITELIST);
-        doReturn(true).when(mBackend).isWhitelisted(PKG_IN_WHITELIST);
+        doReturn(false).when(mBackend).isAllowlisted(PKG_NOT_IN_ALLOWLIST);
+        doReturn(true).when(mBackend).isAllowlisted(PKG_IN_ALLOWLIST);
 
         mPreference = new SwitchPreference(mContext);
         mController = spy(new BatteryOptimizationPreferenceController(mSettingsActivity, mFragment,
-                PKG_NOT_IN_WHITELIST, mBackend));
+                PKG_NOT_IN_ALLOWLIST, mBackend));
     }
 
     @Test
@@ -95,10 +95,10 @@ public class BatteryOptimizationPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_appInWhitelist_showSummaryNotOptimized() {
+    public void testUpdateState_appInAllowlist_showSummaryNotOptimized() {
         BatteryOptimizationPreferenceController controller =
                 new BatteryOptimizationPreferenceController(mSettingsActivity, mFragment,
-                        PKG_IN_WHITELIST, mBackend);
+                        PKG_IN_ALLOWLIST, mBackend);
 
         controller.updateState(mPreference);
 
@@ -106,18 +106,25 @@ public class BatteryOptimizationPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_appNotInWhitelist_showSummaryOptimized() {
+    public void testUpdateState_appNotInAllowlist_showSummaryOptimized() {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary()).isEqualTo(mContext.getString(R.string.high_power_off));
     }
 
+    @Test
+    public void testUpdateState_refreshList() {
+        mController.updateState(mPreference);
+
+        verify(mBackend).refreshList();
+    }
+
     /**
      * Create this test class so we could mock it
      */
-    public static class TestPowerWhitelistBackend extends PowerWhitelistBackend {
+    public static class TestPowerAllowlistBackend extends PowerAllowlistBackend {
 
-        public TestPowerWhitelistBackend(Context context) {
+        public TestPowerAllowlistBackend(Context context) {
             super(context);
         }
 

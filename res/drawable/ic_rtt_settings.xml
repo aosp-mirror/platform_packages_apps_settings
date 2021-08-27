@@ -1,0 +1,35 @@
+<!--
+  Copyright 2021 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <com.android.settingslib.widget.AdaptiveIconShapeDrawable
+            android:width="@dimen/accessibility_icon_size"
+            android:height="@dimen/accessibility_icon_size"
+            android:color="@color/accessibility_feature_background"/>
+    </item>
+    <item android:gravity="center">
+        <vector
+            android:width="@dimen/accessibility_icon_foreground_size"
+            android:height="@dimen/accessibility_icon_foreground_size"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            <path
+                android:fillColor="#ffffff"
+                android:pathData="M15,6L15,6c-0.55,0 -1,-0.45 -1,-1v0c0,-0.55 0.45,-1 1,-1h0c0.55,0 1,0.45 1,1v0C16,5.55 15.55,6 15,6zM17,7L17,7c-0.55,0 -1,0.45 -1,1v0c0,0.55 0.45,1 1,1h0c0.55,0 1,-0.45 1,-1v0C18,7.45 17.55,7 17,7zM20,9L20,9c0.55,0 1,-0.45 1,-1v0c0,-0.55 -0.45,-1 -1,-1h0c-0.55,0 -1,0.45 -1,1v0C19,8.55 19.45,9 20,9zM18,4L18,4c-0.55,0 -1,0.45 -1,1v0c0,0.55 0.45,1 1,1h0c0.55,0 1,-0.45 1,-1v0C19,4.45 18.55,4 18,4zM14,7L14,7c-0.55,0 -1,0.45 -1,1v0c0,0.55 0.45,1 1,1h0c0.55,0 1,-0.45 1,-1v0C15,7.45 14.55,7 14,7zM18,10L18,10c-0.55,0 -1,0.45 -1,1v0c0,0.55 0.45,1 1,1h0c0.55,0 1,-0.45 1,-1v0C19,10.45 18.55,10 18,10zM15,10L15,10c-0.55,0 -1,0.45 -1,1v0c0,0.55 0.45,1 1,1h0c0.55,0 1,-0.45 1,-1v0C16,10.45 15.55,10 15,10zM12,4L12,4c-0.55,0 -1,0.45 -1,1v0c0,0.55 0.45,1 1,1h0c0.55,0 1,-0.45 1,-1v0C13,4.45 12.55,4 12,4zM20,15.82v4.15c0,0.56 -0.47,1.03 -1.03,1c-2.89,-0.17 -5.6,-1.03 -7.97,-2.4C8.27,16.99 6.01,14.73 4.43,12C3.05,9.63 2.2,6.92 2.03,4.03C2,3.47 2.47,3 3.03,3h4.15c0.48,0 0.89,0.34 0.98,0.8L8.9,7.48c0.07,0.33 -0.04,0.67 -0.27,0.9L6.1,10.9c1.43,2.5 3.5,4.57 6,6l2.52,-2.52c0.24,-0.24 0.58,-0.34 0.9,-0.27l3.67,0.73C19.66,14.93 20,15.34 20,15.82zM5.18,8.99l1.65,-1.65L6.36,5H4.13C4.3,6.37 4.66,7.71 5.18,8.99zM18,16.64l-2.34,-0.47l-1.65,1.65c1.28,0.52 2.63,0.87 3.99,1.05V16.64zM20,5L20,5c0,0.55 0.45,1 1,1h0c0.55,0 1,-0.45 1,-1v0c0,-0.55 -0.45,-1 -1,-1h0C20.45,4 20,4.45 20,5zM21,12L21,12c0.55,0 1,-0.45 1,-1v0c0,-0.55 -0.45,-1 -1,-1h0c-0.55,0 -1,0.45 -1,1v0C20,11.55 20.45,12 21,12zM12,10L12,10c-0.55,0 -1,0.45 -1,1v0c0,0.55 0.45,1 1,1h0c0.55,0 1,-0.45 1,-1v0C13,10.45 12.55,10 12,10z"/>
+        </vector>
+    </item>
+</layer-list>

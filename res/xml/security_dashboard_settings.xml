@@ -19,8 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="security_dashboard_page"
-    android:title="@string/security_settings_title"
-    settings:initialExpandedChildrenCount="9">
+    android:title="@string/security_settings_title">
 
     <!-- security_settings_status.xml -->
     <PreferenceCategory
@@ -44,54 +43,23 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_lockscreen" />
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="fingerprint_settings"
             android:title="@string/security_settings_fingerprint_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_fingerprint_settings" />
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="face_settings"
             android:title="@string/security_settings_face_preference_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_face_settings" />
-    </PreferenceCategory>
-
-    <!-- work profile security section -->
-    <PreferenceCategory
-        android:order="20"
-        android:key="security_category_profile"
-        android:title="@string/lock_settings_profile_title">
-
-        <!-- security_settings_unification -->
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="unification"
-            android:title="@string/lock_settings_profile_unification_title"
-            android:summary="@string/lock_settings_profile_unification_summary"
-            settings:keywords="@string/keywords_unification" />
 
         <com.android.settingslib.RestrictedPreference
-            android:key="unlock_set_or_change_profile"
-            android:title="@string/unlock_set_unlock_launch_picker_title_profile"
-            android:summary="@string/unlock_set_unlock_mode_pattern"
-            settings:keywords="@string/keywords_lockscreen" />
-
-        <SwitchPreference
-            android:key="visiblepattern_profile"
+            android:key="biometric_settings"
+            android:title="@string/security_settings_biometric_preference_title"
             android:summary="@string/summary_placeholder"
-            android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile"
-            settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController" />
-
-        <Preference
-            android:key="fingerprint_settings_profile"
-            android:title="@string/security_settings_fingerprint_preference_title"
-            android:summary="@string/summary_placeholder" />
-
-        <Preference
-            android:key="face_settings_profile"
-            android:title="@string/security_settings_face_preference_title"
-            android:summary="@string/summary_placeholder" />
-
+            settings:keywords="@string/keywords_biometric_settings" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -109,6 +77,12 @@
         <Preference
             android:key="enterprise_privacy"
             android:title="@string/enterprise_privacy_settings"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings" />
+
+        <Preference
+            android:key="financed_privacy"
+            android:title="@string/financed_privacy_settings"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings" />
 
@@ -154,5 +128,46 @@
         android:title="@string/confirm_sim_deletion_title"
         android:summary="@string/confirm_sim_deletion_description"
         settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController"/>
+
+    <!-- work profile security section -->
+    <PreferenceCategory
+        android:order="100"
+        android:key="security_category_profile"
+        android:title="@string/lock_settings_profile_title">
+
+        <!-- security_settings_unification -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="unification"
+            android:title="@string/lock_settings_profile_unification_title"
+            android:summary="@string/lock_settings_profile_unification_summary"
+            settings:keywords="@string/keywords_unification" />
+
+        <com.android.settingslib.RestrictedPreference
+            android:key="unlock_set_or_change_profile"
+            android:title="@string/unlock_set_unlock_launch_picker_title_profile"
+            android:summary="@string/unlock_set_unlock_mode_pattern"
+            settings:keywords="@string/keywords_lockscreen" />
+
+        <SwitchPreference
+            android:key="visiblepattern_profile"
+            android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile"
+            settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController" />
+
+        <com.android.settingslib.RestrictedPreference
+            android:key="fingerprint_settings_profile"
+            android:title="@string/security_settings_fingerprint_preference_title"
+            android:summary="@string/summary_placeholder" />
+
+        <com.android.settingslib.RestrictedPreference
+            android:key="face_settings_profile"
+            android:title="@string/security_settings_face_preference_title"
+            android:summary="@string/summary_placeholder" />
+
+        <com.android.settingslib.RestrictedPreference
+            android:key="biometric_settings_profile"
+            android:title="@string/security_settings_biometric_preference_title"
+            android:summary="@string/summary_placeholder" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

@@ -16,13 +16,10 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="mobile_network_pref_screen"
-    settings:initialExpandedChildrenCount="8">
+    android:key="mobile_network_pref_screen">
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="use_sim_switch"
-        android:title="@string/summary_placeholder"
-        android:layout="@layout/styled_switch_bar"
         settings:controller="com.android.settings.network.telephony.MobileNetworkSwitchController"/>
 
     <PreferenceCategory
@@ -79,6 +76,18 @@
             android:key="billing_preference"
             android:title="@string/billing_cycle"
             settings:controller="com.android.settings.datausage.BillingCyclePreferenceController"/>
+
+        <SwitchPreference
+            android:key="carrier_wifi_toggle"
+            android:title="@string/carrier_wifi_offload_title"
+            android:summary="@string/carrier_wifi_offload_summary"
+            settings:controller="com.android.settings.network.CarrierWifiTogglePreferenceController"/>
+
+        <Preference
+            android:key="carrier_wifi_network"
+            android:title="@string/carrier_wifi_network_title"
+            android:selectable="false"
+            settings:searchable="false"/>
 
         <SwitchPreference
             android:key="mms_message"
@@ -155,7 +164,7 @@
             android:title="@string/call_category"
             settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController">
 
-            <PreferenceScreen
+            <Preference
                 android:key="wifi_calling"
                 android:title="@string/wifi_calling_settings_title"
                 android:summary="@string/wifi_calling_summary"
@@ -165,13 +174,21 @@
                         android:targetClass="com.android.settings.Settings$WifiCallingSettingsActivity">
                     <extra android:name="show_drawer_menu" android:value="true"/>
                 </intent>
-            </PreferenceScreen>
+            </Preference>
 
             <SwitchPreference
                 android:key="video_calling_key"
                 android:title="@string/video_calling_settings_title"
                 android:persistent="true"
                 settings:controller="com.android.settings.network.telephony.VideoCallingPreferenceController"/>
+
+            <SwitchPreference
+                android:key="backup_calling_key"
+                android:title="@string/backup_calling_settings_title"
+                android:persistent="false"
+                android:summary="@string/backup_calling_setting_summary"
+                settings:keywords="@string/keywords_backup_calling"
+                settings:controller="com.android.settings.network.telephony.BackupCallingPreferenceController"/>
 
         </PreferenceCategory>
 
@@ -224,6 +241,12 @@
             settings:controller="com.android.settings.network.telephony.CarrierPreferenceController">
         </Preference>
 
+        <SwitchPreference
+            android:key="enable_2g"
+            android:title="@string/enable_2g_title"
+            android:summary="@string/enable_2g_summary"
+            settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController" />
+
     </PreferenceCategory>
 
     <Preference
@@ -248,5 +271,4 @@
         settings:allowDividerAbove="true"
         settings:searchable="false"
         settings:controller="com.android.settings.network.telephony.NrDisabledInDsdsFooterPreferenceController"/>
-
 </PreferenceScreen>

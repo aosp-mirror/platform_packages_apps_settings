@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
@@ -112,7 +113,7 @@ public class SetupChooseLockPatternTest {
         AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
         int count = chooserDialog.getListView().getCount();
-        assertThat(count).named("List items shown").isEqualTo(3);
+        assertWithMessage("List items shown").that(count).isEqualTo(3);
     }
 
     @Config(qualifiers = "sw400dp")

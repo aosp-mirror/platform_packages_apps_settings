@@ -25,6 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -35,6 +36,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -56,6 +58,7 @@ import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
@@ -105,6 +108,8 @@ public class UserDetailsSettingsTest {
     private FragmentActivity mActivity;
     private Context mContext;
     private UserCapabilities mUserCapabilities;
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private UserDetailsSettings mFragment;
     private Bundle mArguments;
     private UserInfo mUserInfo;
@@ -128,6 +133,7 @@ public class UserDetailsSettingsTest {
 
         ReflectionHelpers.setField(mFragment, "mUserManager", userManager);
         ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
+        ReflectionHelpers.setField(mFragment, "mMetricsFeatureProvider", mMetricsFeatureProvider);
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mActivity).when(mFragment).getContext();
 
@@ -472,6 +478,23 @@ public class UserDetailsSettingsTest {
         mFragment.onPreferenceClick(mSwitchUserPref);
 
         verify(mFragment).switchUser();
+        verify(mMetricsFeatureProvider, never()).action(any(),
+                eq(SettingsEnums.ACTION_SWITCH_TO_GUEST));
+    }
+
+    @Test
+    public void onPreferenceClick_switchToGuestClicked_canSwitch_shouldSwitch() {
+        setupSelectedGuest();
+        mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_OK);
+        mFragment.mSwitchUserPref = mSwitchUserPref;
+        mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
+        mFragment.mUserInfo = mUserInfo;
+
+        mFragment.onPreferenceClick(mSwitchUserPref);
+
+        verify(mFragment).switchUser();
+        verify(mMetricsFeatureProvider).action(any(), eq(SettingsEnums.ACTION_SWITCH_TO_GUEST));
     }
 
     @Test

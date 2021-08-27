@@ -20,21 +20,17 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.BatteryStats;
+import android.content.res.Resources;
 import android.os.UserManager;
-import android.text.TextUtils;
 import android.text.format.DateUtils;
 
 import androidx.preference.PreferenceGroup;
 
-import com.android.internal.os.BatterySipper;
-import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -51,12 +47,8 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class BatteryAppListPreferenceControllerTest {
 
-    private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
     private static final String KEY_APP_LIST = "app_list";
-    private static final int UID = 123;
 
-    @Mock
-    private BatterySipper mNormalBatterySipper;
     @Mock
     private SettingsActivity mSettingsActivity;
     @Mock
@@ -69,6 +61,8 @@ public class BatteryAppListPreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private BatteryEntry mBatteryEntry;
 
     private Context mContext;
     private PowerGaugePreference mPreference;
@@ -79,143 +73,76 @@ public class BatteryAppListPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        final Resources resources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(resources);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {});
-
+        when(resources.getTextArray(R.array.allowlist_hide_summary_in_battery_usage))
+                .thenReturn(new String[] {"com.android.googlequicksearchbox"});
         FakeFeatureFactory.setupForTest();
 
         mPreference = new PowerGaugePreference(mContext);
-        when(mNormalBatterySipper.getPackages()).thenReturn(PACKAGE_NAMES);
-        when(mNormalBatterySipper.getUid()).thenReturn(UID);
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
-        mNormalBatterySipper.uidObj = mock(BatteryStats.Uid.class);
 
         mPreferenceController = new BatteryAppListPreferenceController(mContext, KEY_APP_LIST, null,
                 mSettingsActivity, mFragment);
         mPreferenceController.mBatteryUtils = mBatteryUtils;
         mPreferenceController.mAppListGroup = mAppListGroup;
-    }
 
-    @Test
-    public void testExtractKeyFromSipper_typeAPPUidObjectNull_returnPackageNames() {
-        mNormalBatterySipper.uidObj = null;
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
-
-        final String key = mPreferenceController.extractKeyFromSipper(mNormalBatterySipper);
-        assertThat(key).isEqualTo(TextUtils.concat(mNormalBatterySipper.getPackages()).toString());
-    }
-
-    @Test
-    public void testExtractKeyFromSipper_typeOther_returnDrainType() {
-        mNormalBatterySipper.uidObj = null;
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.BLUETOOTH;
-
-        final String key = mPreferenceController.extractKeyFromSipper(mNormalBatterySipper);
-        assertThat(key).isEqualTo(mNormalBatterySipper.drainType.toString());
-    }
-
-    @Test
-    public void testExtractKeyFromSipper_typeUser_returnDrainTypeWithUserId() {
-        mNormalBatterySipper.uidObj = null;
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.USER;
-        mNormalBatterySipper.userId = 2;
-
-        final String key = mPreferenceController.extractKeyFromSipper(mNormalBatterySipper);
-        assertThat(key).isEqualTo("USER2");
-    }
-
-    @Test
-    public void testExtractKeyFromSipper_typeAPPUidObjectNotNull_returnUid() {
-        mNormalBatterySipper.uidObj = new BatteryStatsImpl.Uid(new BatteryStatsImpl(), UID);
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
-
-        final String key = mPreferenceController.extractKeyFromSipper(mNormalBatterySipper);
-        assertThat(key).isEqualTo(Integer.toString(mNormalBatterySipper.getUid()));
+        BatteryAppListPreferenceController.sConfig =
+                new BatteryAppListPreferenceController.Config() {
+                    @Override
+                    public boolean shouldShowBatteryAttributionList(Context context) {
+                        return true;
+                    }
+                };
     }
 
     @Test
     public void testSetUsageSummary_timeLessThanOneMinute_DoNotSetSummary() {
-        mNormalBatterySipper.usageTimeMs = 59 * DateUtils.SECOND_IN_MILLIS;
+        when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(59 * DateUtils.SECOND_IN_MILLIS);
 
-        mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
+        mPreferenceController.setUsageSummary(mPreference, mBatteryEntry);
         assertThat(mPreference.getSummary()).isNull();
     }
 
     @Test
     public void testSetUsageSummary_timeMoreThanOneMinute_normalApp_setScreenSummary() {
-        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
+        when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(2 * DateUtils.MINUTE_IN_MILLIS);
         doReturn(mContext.getText(R.string.battery_used_for)).when(mFragment).getText(
                 R.string.battery_used_for);
         doReturn(mContext).when(mFragment).getContext();
 
-        mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
+        mPreferenceController.setUsageSummary(mPreference, mBatteryEntry);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo("Used for 2 min");
     }
 
     @Test
     public void testSetUsageSummary_timeMoreThanOneMinute_GoogleApp_shouldNotSetScreenSummary() {
-        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
-        mNormalBatterySipper.packageWithHighestDrain = "com.google.android.googlequicksearchbox";
+        when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(2 * DateUtils.MINUTE_IN_MILLIS);
+        when(mBatteryEntry.getDefaultPackageName())
+                .thenReturn("com.android.googlequicksearchbox");
         doReturn(mContext.getText(R.string.battery_used_for)).when(mFragment).getText(
                 R.string.battery_used_for);
         doReturn(mContext).when(mFragment).getContext();
 
-        mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
+        mPreferenceController.setUsageSummary(mPreference, mBatteryEntry);
 
         assertThat(mPreference.getSummary()).isNull();
     }
 
     @Test
     public void testSetUsageSummary_timeMoreThanOneMinute_hiddenApp_setUsedSummary() {
-        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
-        doReturn(true).when(mBatteryUtils).shouldHideSipper(mNormalBatterySipper);
+        when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(2 * DateUtils.MINUTE_IN_MILLIS);
+        when(mBatteryEntry.isHidden()).thenReturn(true);
+
         doReturn(mContext).when(mFragment).getContext();
 
-        mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
+        mPreferenceController.setUsageSummary(mPreference, mBatteryEntry);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo("2 min");
-    }
-
-    @Test
-    public void testSetUsageSummary_timeMoreThanOneMinute_notApp_setUsedSummary() {
-        mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.PHONE;
-        doReturn(mContext).when(mFragment).getContext();
-
-        mPreferenceController.setUsageSummary(mPreference, mNormalBatterySipper);
-
-        assertThat(mPreference.getSummary().toString()).isEqualTo("2 min");
-    }
-
-    @Test
-    public void testShouldHideSipper_typeOvercounted_returnTrue() {
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.OVERCOUNTED;
-
-        assertThat(mPreferenceController.shouldHideSipper(mNormalBatterySipper)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSipper_typeUnaccounted_returnTrue() {
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.UNACCOUNTED;
-
-        assertThat(mPreferenceController.shouldHideSipper(mNormalBatterySipper)).isTrue();
-    }
-
-    @Test
-    public void testShouldHideSipper_typeNormal_returnFalse() {
-        mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
-
-        assertThat(mPreferenceController.shouldHideSipper(mNormalBatterySipper)).isFalse();
-    }
-
-    @Test
-    public void testShouldHideSipper_hiddenSystemModule_returnTrue() {
-        when(mBatteryUtils.isHiddenSystemModule(mNormalBatterySipper)).thenReturn(true);
-
-        assertThat(mPreferenceController.shouldHideSipper(mNormalBatterySipper)).isTrue();
     }
 
     @Test

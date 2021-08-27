@@ -22,10 +22,11 @@
 
     <Button
         android:id="@+id/security_settings_face_settings_remove_button"
-        android:layout_marginStart="@dimen/screen_margin_sides"
+        style="@style/SudGlifButton.Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:text="@string/security_settings_face_settings_remove_face_data"/>
+        android:layout_marginStart="20dp"
+        android:text="@string/security_settings_face_settings_remove_face_model"/>
 
 </LinearLayout>

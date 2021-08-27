@@ -56,7 +56,7 @@ public class ControllerRendererPool {
         final Class<? extends ContextualCardController> clz =
                 ContextualCardLookupTable.getCardControllerClass(cardType);
         for (ContextualCardController controller : mControllers) {
-            if (controller.getClass() == clz) {
+            if (controller.getClass().getName().equals(clz.getName())) {
                 Log.d(TAG, "Controller is already there.");
                 return (T) controller;
             }

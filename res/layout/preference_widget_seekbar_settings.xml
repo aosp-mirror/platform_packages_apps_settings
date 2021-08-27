@@ -15,49 +15,55 @@
 -->
 
 <!-- Layout used by SeekBarPreference for the seekbar widget style. -->
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="6dp"
-    android:layout_marginBottom="6dp"
     android:gravity="center_vertical"
-    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:clickable="false"
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@android:id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal"
-        android:paddingStart="56dp"
-        android:paddingEnd="8dp"
-        android:singleLine="true"
-        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
-        android:textColor="?android:attr/textColorPrimary" />
+    <include layout="@layout/settingslib_icon_frame"/>
 
-    <TextView
-        android:id="@android:id/summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@android:id/title"
-        android:layout_below="@android:id/title"
-        android:maxLines="4"
-        android:paddingStart="56dp"
-        android:paddingEnd="8dp"
-        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-        android:textColor="?android:attr/textColorSecondary" />
-
-    <com.android.settings.widget.DefaultIndicatorSeekBar
-        android:id="@*android:id/seekbar"
-        style="@android:style/Widget.Material.SeekBar.Discrete"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@android:id/summary"
-        android:paddingStart="56dp"
-        android:paddingEnd="12dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="16dp">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@android:id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textColor="?android:attr/textColorPrimary"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"/>
+            <!-- Preference should place its actual preference widget here. -->
+            <LinearLayout
+                android:id="@android:id/widget_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="end|center_vertical"
+                android:paddingStart="12dp"
+                android:orientation="vertical"/>
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@*android:id/seekbar"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:paddingStart="0dp"
+            android:paddingEnd="12dp"
+            android:layout_height="48dp"/>
+    </LinearLayout>
+
+</LinearLayout>

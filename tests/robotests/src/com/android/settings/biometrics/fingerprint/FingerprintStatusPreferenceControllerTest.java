@@ -22,8 +22,13 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -32,11 +37,15 @@ import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserManager;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,11 +74,15 @@ public class FingerprintStatusPreferenceControllerTest {
     private Context mContext;
     private FingerprintStatusPreferenceController mController;
     private Preference mPreference;
+    private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)).thenReturn(true);
         ShadowApplication.getInstance().setSystemService(Context.FINGERPRINT_SERVICE,
@@ -80,7 +93,7 @@ public class FingerprintStatusPreferenceControllerTest {
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
         when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {1234});
-        mController = new FingerprintStatusPreferenceController(mContext);
+        mController = new FingerprintStatusPreferenceController(mContext, mLifecycle);
     }
 
     @Test
@@ -129,5 +142,22 @@ public class FingerprintStatusPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(mContext.getResources().getQuantityString(
                 R.plurals.security_settings_fingerprint_preference_summary, 1, 1));
         assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void updateState_parentalConsentRequired_preferenceDisabled() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+
+        RestrictedPreference restrictedPreference = mock(RestrictedPreference.class);
+        RestrictedLockUtils.EnforcedAdmin admin = mock(RestrictedLockUtils.EnforcedAdmin.class);
+
+        mController.mPreference = restrictedPreference;
+        mController.updateStateInternal(admin);
+        verify(restrictedPreference).setDisabledByAdmin(eq(admin));
+
+        reset(admin);
+
+        mController.updateStateInternal(null /* enforcedAdmin */);
+        verify(restrictedPreference, never()).setDisabledByAdmin(any());
     }
 }

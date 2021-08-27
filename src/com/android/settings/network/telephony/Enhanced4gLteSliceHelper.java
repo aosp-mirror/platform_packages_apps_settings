@@ -23,8 +23,6 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
@@ -83,6 +81,10 @@ public class Enhanced4gLteSliceHelper {
      */
     private static final String RESOURCE_ENHANCED_4G_LTE_MODE_TITLE_VARIANT =
             "enhanced_4g_lte_mode_title_variant";
+
+    private static final int MODE_VOLTE = 0;
+    private static final int MODE_ADVANCED_CALL = 1;
+    private static final int MODE_4G_CALLING = 2;
 
     @VisibleForTesting
     public Enhanced4gLteSliceHelper(Context context) {
@@ -217,40 +219,47 @@ public class Enhanced4gLteSliceHelper {
     }
 
     private CharSequence getEnhanced4glteModeTitle(int subId) {
-        CharSequence ret = mContext.getText(R.string.enhanced_4g_lte_mode_title);
-        try {
-            if (isCarrierConfigManagerKeyEnabled(
-                    CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_BOOL,
-                    subId,
-                    false)) {
-                final PackageManager manager = mContext.getPackageManager();
-                final Resources resources = manager.getResourcesForApplication(
-                        PACKAGE_PHONE);
-                final int resId = resources.getIdentifier(
-                        RESOURCE_ENHANCED_4G_LTE_MODE_TITLE_VARIANT,
-                        RESOURCE_TYPE_STRING, PACKAGE_PHONE);
-                ret = resources.getText(resId);
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "package name not found");
+        final int variant4gLteTitleIndex = getCarrierConfigManagerKeyValue(
+                CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, subId, 0);
+        final boolean show4GForLTE = isCarrierConfigManagerKeyEnabled(
+                CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL, subId, false);
+        final CharSequence[] variantTitles = mContext.getResources()
+                .getTextArray(R.array.enhanced_4g_lte_mode_title_variant);
+        int index = MODE_ADVANCED_CALL;
+        if (variant4gLteTitleIndex != MODE_ADVANCED_CALL) {
+            index = show4GForLTE ? MODE_4G_CALLING : MODE_VOLTE;
         }
-        return ret;
+        return variantTitles[index];
     }
 
     /**
      * Returns {@code true} when the key is enabled for the carrier, and {@code false} otherwise.
      */
-    private boolean isCarrierConfigManagerKeyEnabled(String key,
-            int subId, boolean defaultValue) {
-        final CarrierConfigManager configManager = getCarrierConfigManager();
-        boolean ret = defaultValue;
-        if (configManager != null) {
-            final PersistableBundle bundle = configManager.getConfigForSubId(subId);
-            if (bundle != null) {
-                ret = bundle.getBoolean(key, defaultValue);
-            }
+    private boolean isCarrierConfigManagerKeyEnabled(String key, int subId, boolean defaultValue) {
+        boolean result = defaultValue;
+        final PersistableBundle carrierConfig = getCarrierConfig(subId);
+        if (carrierConfig != null) {
+            result = carrierConfig.getBoolean(key, defaultValue);
         }
-        return ret;
+        return result;
+    }
+
+    private int getCarrierConfigManagerKeyValue(String key, int subId, int defaultValue) {
+        int result = defaultValue;
+        final PersistableBundle carrierConfig = getCarrierConfig(subId);
+        if (carrierConfig != null) {
+            result = carrierConfig.getInt(key, defaultValue);
+        }
+        return result;
+    }
+
+    private PersistableBundle getCarrierConfig(int subId) {
+        final CarrierConfigManager configManager = getCarrierConfigManager();
+        PersistableBundle bundle = null;
+        if (configManager != null) {
+            bundle = configManager.getConfigForSubId(subId);
+        }
+        return bundle;
     }
 
     protected CarrierConfigManager getCarrierConfigManager() {
@@ -261,7 +270,7 @@ public class Enhanced4gLteSliceHelper {
         final Intent intent = new Intent(action);
         intent.setClass(mContext, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(mContext, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
+                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     /**
@@ -278,7 +287,8 @@ public class Enhanced4gLteSliceHelper {
         final Intent intent = new Intent(action);
         intent.setPackage(SETTINGS_PACKAGE_NAME);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */);
+        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     @VisibleForTesting

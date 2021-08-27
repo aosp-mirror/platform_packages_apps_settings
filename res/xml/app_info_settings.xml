@@ -18,33 +18,33 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="installed_app_detail_settings_screen"
-    settings:initialExpandedChildrenCount="6">
+    android:key="installed_app_detail_settings_screen">
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
         android:selectable="false"
-        android:order="-10000"
-        settings:allowDividerBelow="true"/>
+        android:order="-10000" />
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="instant_app_buttons"
         android:layout="@layout/instant_app_buttons"
         android:selectable="false"
-        android:order="-9999"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="true"/>
+        android:order="-9999" />
 
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         android:order="-9998" />
 
     <Preference
+        android:key="app_settings_link"
+        android:title="@string/app_settings_link"
+        settings:controller="com.android.settings.applications.appinfo.AppSettingPreferenceController" />
+
+    <Preference
         android:key="notification_settings"
         android:title="@string/notifications_label"
-        settings:controller="com.android.settings.applications.appinfo.AppNotificationPreferenceController"
-        settings:allowDividerAbove="true"/>
+        settings:controller="com.android.settings.applications.appinfo.AppNotificationPreferenceController" />
 
     <com.android.settings.widget.FixedLineSummaryPreference
         android:key="permission_settings"
@@ -72,8 +72,15 @@
         settings:controller="com.android.settings.applications.appinfo.AppDataUsagePreferenceController" />
 
     <Preference
+        android:key="extra_app_info_settings"
+        android:title="@string/extra_app_info_label"
+        android:summary="@string/extra_app_info_summary"
+        settings:controller="com.android.settings.applications.appinfo.ExtraAppInfoPreferenceController" />
+
+    <Preference
         android:key="time_spent_in_app"
         android:title="@string/time_spent_in_app_pref_title"
+        android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.applications.appinfo.TimeSpentInAppPreferenceController" />
 
     <Preference
@@ -120,6 +127,19 @@
         android:title="@string/sms_application_title"
         android:summary="@string/summary_placeholder" />
 
+    <PreferenceCategory
+        android:key="app_hibernation_info"
+        android:title="@string/unused_apps"
+        settings:controller=
+            "com.android.settings.applications.appinfo.AppHibernationPreferenceCategoryController">
+
+        <SwitchPreference
+            android:key="hibernation_switch"
+            android:title="@string/unused_apps_switch"
+            settings:controller=
+                "com.android.settings.applications.appinfo.HibernationSwitchPreferenceController" />
+    </PreferenceCategory>
+
     <!-- Advanced apps settings -->
     <PreferenceCategory
         android:key="advanced_app_info"
@@ -156,6 +176,12 @@
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetailsPreferenceController" />
 
+        <Preference
+            android:key="alarms_and_reminders"
+            android:title="@string/alarms_and_reminders_title"
+            android:summary="@string/summary_placeholder"
+            settings:controller="com.android.settings.applications.appinfo.AlarmsAndRemindersDetailPreferenceController" />
+
     </PreferenceCategory>
 
     <!-- App installer info -->
@@ -170,12 +196,6 @@
             settings:controller="com.android.settings.applications.appinfo.AppInstallerInfoPreferenceController" />
 
     </PreferenceCategory>
-
-    <Preference
-        android:key="app_settings_link"
-        android:title="@string/app_settings_link"
-        settings:controller="com.android.settings.applications.appinfo.AppSettingPreferenceController"
-        settings:allowDividerAbove="true" />
 
     <Preference
         android:key="app_version"
