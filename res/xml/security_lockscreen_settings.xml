@@ -46,12 +46,6 @@
             android:summary="@string/owner_info_settings_summary" />
 
         <SwitchPreference
-            android:key="security_setting_lockdown_enabled"
-            android:title="@string/lockdown_settings_title"
-            android:summary="@string/lockdown_settings_summary"
-            settings:controller="com.android.settings.security.LockdownButtonPreferenceController" />
-
-        <SwitchPreference
             android:key="lockscreen_privacy_wallet_switch"
             android:title="@string/lockscreen_privacy_wallet_setting_toggle"
             android:summary="@string/lockscreen_privacy_wallet_summary"

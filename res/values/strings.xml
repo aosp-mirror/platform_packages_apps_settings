@@ -101,10 +101,7 @@
     <string name="auto_rotate_settings_primary_switch_title">Use Auto-rotate</string>
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
-    <string name="smart_rotate_text_headline">
-        Face Detection uses the front-facing camera to improve Auto-rotate accuracy. Images are never stored or sent to Google.&lt;br>&lt;br>
-       &lt;a href="<xliff:g example="http://www.google.com" id="url">http://support.google.com/mobile?p=telephony_rtt</xliff:g>">Learn more about Auto-rotate screen&lt;/a>
-    </string>
+    <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve Auto-rotate accuracy. Images are never stored or sent to Google.</string>
     <string name="font_size_preview_text_headline">Sample text</string>
     <string name="font_size_preview_text_title"
             translation_description="Title text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
@@ -649,10 +646,6 @@
     <string name="security_enable_widgets_title">Enable widgets</string>
     <!-- Summary for settings checkbox to disable widgets when the setting has been disabled by an installed device admin [CHAR LIMIT=50] -->
     <string name="security_enable_widgets_disabled_summary">Disabled by admin</string>
-    <!-- Text shown for the title of the lockdown option -->
-    <string name="lockdown_settings_title">Show lockdown option</string>
-    <!-- Text shown for the description of the lockdown option -->
-    <string name="lockdown_settings_summary">Display Power button option that turns off Smart Lock, Face Unlock, Fingerprint Unlock, and notifications on the lock screen</string>
 
     <!-- Text shown for the title of the lock when trust lost option [CHAR LIMIT=40] -->
     <string name="trust_lost_locks_screen_title">Lock screen when trust is lost</string>
@@ -799,6 +792,11 @@
     <string name="security_settings_face_enroll_introduction_info_looking"></string>
     <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_info_consent_looking"></string>
+    <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_gaze"></string>
+    <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze"></string>
+
     <!-- Title of a section on the face enrollment introduction page that explains how face unlock works. [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_introduction_how_title"></string>
     <!-- Message on the face enrollment introduction page that explains how face unlock works. [CHAR LIMIT=NONE] -->
@@ -4247,7 +4245,7 @@
     <!-- [CHAR LIMIT=60] Location Services preference title -->
     <string name="location_services_preference_title">Location services</string>
     <!-- [CHAR LIMIT=60] Location Services screen, screen title -->
-    <string name="location_services_screen_title">Location Services</string>
+    <string name="location_services_screen_title">Location services</string>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
     <string name="managed_profile_location_services">Location services for work</string>
 
@@ -6865,7 +6863,11 @@
     <!-- Label for button to uninstall all certificates installed by the credential management app [CHAR LIMIT=30] -->
     <string name="uninstall_certs_credential_management_app">Uninstall certificates</string>
     <!-- Label for button to remove the credential management app [CHAR LIMIT=30] -->
-    <string name="remove_credential_management_app">Remove</string>
+    <string name="remove_credential_management_app">Remove app</string>
+    <!-- Dialog title for button to remove the credential management app [CHAR LIMIT=30] -->
+    <string name="remove_credential_management_app_dialog_title">Remove this app?</string>
+    <!-- Dialog message for button to remove the credential management app [CHAR LIMIT=NONE] -->
+    <string name="remove_credential_management_app_dialog_message">This app won\u2019t manage certificates, but it will stay on your device. Any certificates installed by the app will be uninstalled.</string>
     <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
     <plurals name="number_of_urls">
         <item quantity="one"><xliff:g id="number">%d</xliff:g> URL</item>
@@ -7487,7 +7489,7 @@
     <!-- Button label for enabling a system CA certificate. -->
     <string name="trusted_credentials_enable_label">Enable</string>
     <!-- Button label for removing a user CA certificate. -->
-    <string name="trusted_credentials_remove_label">Remove</string>
+    <string name="trusted_credentials_remove_label">Uninstall</string>
     <!-- Button label for trusting a user CA certificate. -->
     <string name="trusted_credentials_trust_label">Trust</string>
     <!-- Alert dialog confirmation when enabling a system CA certificate. -->
@@ -11594,9 +11596,9 @@
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>
     <!-- [CHAR LIMIT=NONE] Settings toggle. This setting lets a user's personal apps identify contacts using the user's work directory. -->
-    <string name="managed_profile_contact_search_title">Let personal apps identify contacts using work directory</string>
+    <string name="managed_profile_contact_search_title">Search for work directory contacts in personal apps</string>
     <!-- [CHAR LIMIT=NONE] Settings toggle description. This setting lets a user's personal apps identify contacts using the user's work directory. "Searches" is a noun. -->
-    <string name="managed_profile_contact_search_summary">Searches and incoming calls may be visible to your IT admin</string>
+    <string name="managed_profile_contact_search_summary">Your searches and incoming calls may be visible to your IT admin</string>
     <!-- [CHAR LIMIT=NONE] Settings label. This setting lets the user show their work events on their personal calendar. The adjective 'Cross-profile' is referring to the work and personal profiles a user has on their phone. -->
     <string name="cross_profile_calendar_title">Cross-profile calendar</string>
     <!-- [CHAR LIMIT=NONE] Setting description. If the user turns on this setting, they can see their work events on their personal calendar. -->
@@ -11767,7 +11769,7 @@
     <!-- One-handed mode show notification action [CHAR_LIMIT=60] -->
     <string name="one_handed_action_show_notification_title">Show notifications</string>
     <!-- One-handed mode show notification action [CHAR_LIMIT=NONE] -->
-    <string name="one_handed_action_show_notification_summary">Notification and settings will appear.</string>
+    <string name="one_handed_action_show_notification_summary">Notifications and settings will appear.</string>
     <!-- One-handed mode Intro text for gesture navigation [CHAR_LIMIT=NONE] -->
 
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
@@ -12148,6 +12150,9 @@
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> password</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> passwords</item>
     </plurals>
+    <!-- DO NOT TRANSLATE Summary placeholder for when the passwords count is still loading or is
+         unavailable. -->
+    <string name="autofill_passwords_count_placeholder" translatable="false">\u2014</string>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill, password</string>
 
@@ -12449,6 +12454,8 @@
     <string name="prevent_ringing_option_vibrate_summary">Vibrate</string>
     <!-- Summary for prevent ringing setting -->
     <string name="prevent_ringing_option_mute_summary">Mute</string>
+    <!-- Summary for prevent ringing setting when the option itself is unavailable. [CHAR LIMIT=NONE] -->
+    <string name="prevent_ringing_option_unavailable_lpp_summary">To enable, first change \"Press and hold power button\" to the power menu.</string>
 
     <!-- Title for detail page of wifi network [CHAR LIMIT=30] -->
     <string name="pref_title_network_details">Network details</string>
@@ -13082,8 +13089,8 @@
     <!-- Label for the title on wfc disclaimer location. [CHAR LIMIT=30] -->
     <string name="wfc_disclaimer_location_title_text">Location</string>
 
-    <!-- Warn the user that the phone may share its location with the service provider. [CHAR LIMIT=NONE] -->
-    <string name="wfc_disclaimer_location_desc_text">Your service provider may collect your location in order to provide this service.\n\nPlease review your service provider\u2019s privacy policy.</string>
+    <!-- Warn the user that the phone may share its location with the carrier. [CHAR LIMIT=NONE] -->
+    <string name="wfc_disclaimer_location_desc_text">Your carrier may collect your location when you use this service for emergency calls.\n\nVisit your carrier\u2019s privacy policy for details.</string>
 
     <!-- Message for forget passpoint dialog [CHAR LIMIT=none] -->
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>

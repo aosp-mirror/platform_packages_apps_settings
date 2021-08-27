@@ -58,8 +58,8 @@
     <!-- Manufacturer backup settings label -->
     <string name="config_backup_settings_label" translatable="true"></string>
 
-    <!-- Double twist sensor name and vendor used by gesture setting -->
-    <string name="gesture_double_twist_sensor_name" translatable="false"></string>
+    <!-- Double twist sensor type and vendor used by gesture setting -->
+    <string name="gesture_double_twist_sensor_type" translatable="false"></string>
     <string name="gesture_double_twist_sensor_vendor" translatable="false"></string>
 
     <!-- When true enable gesture setting. -->
@@ -268,6 +268,9 @@
 
     <!-- ComponentName to launch a vendor-specific enrollment activity if available -->
     <string name="config_face_enroll" translatable="false"></string>
+
+    <!-- Whether to show the "require eyes" info section on the face enroll intro screen -->
+    <bool name="config_face_intro_show_require_eyes">true</bool>
 
     <!-- Whether to use the Lottie animation for the face education enrollment screen -->
     <bool name="config_face_education_use_lottie">false</bool>
@@ -542,4 +545,7 @@
         <item>2</item>
         <item>3</item>
     </integer-array>
+
+    <!-- Whether to aggregate for network selection list-->
+    <bool name="config_network_selection_list_aggregation_enabled">false</bool>
 </resources>

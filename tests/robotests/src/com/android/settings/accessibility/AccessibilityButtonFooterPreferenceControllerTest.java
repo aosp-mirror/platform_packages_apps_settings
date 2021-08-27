@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -26,6 +25,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
@@ -34,6 +34,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -50,30 +51,29 @@ public class AccessibilityButtonFooterPreferenceControllerTest {
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Spy
     private final Resources mResources = mContext.getResources();
+    @Mock
+    private PreferenceScreen mScreen;
     private AccessibilityButtonFooterPreferenceController mController;
+    private AccessibilityFooterPreference mPreference;
 
     @Before
     public void setUp() {
-        mController = new AccessibilityButtonFooterPreferenceController(mContext,
-                "test_key");
+        mController = new AccessibilityButtonFooterPreferenceController(mContext, "test_key");
+        mPreference = new AccessibilityFooterPreference(mContext);
+        mPreference.setKey("test_key");
+
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mContext.getResources()).thenReturn(mResources);
     }
 
     @Test
-    public void getSummary_navigationGestureEnabled_shouldReturnButtonAndGestureSummary() {
+    public void displayPreference_navigationGestureEnabled_setCorrectTitle() {
         when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
-                    .thenReturn(NAV_BAR_MODE_GESTURAL);
+                .thenReturn(NAV_BAR_MODE_GESTURAL);
 
-        assertThat(mController.getSummary()).isEqualTo(
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.getTitle()).isEqualTo(
                 mContext.getText(R.string.accessibility_button_gesture_description));
-    }
-
-    @Test
-    public void getSummary_navigationGestureDisabled_shouldReturnButtonSummary() {
-        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
-                .thenReturn(NAV_BAR_MODE_2BUTTON);
-
-        assertThat(mController.getSummary()).isEqualTo(
-                mContext.getText(R.string.accessibility_button_description));
     }
 }

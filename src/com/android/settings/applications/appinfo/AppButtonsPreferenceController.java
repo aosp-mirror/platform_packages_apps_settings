@@ -272,6 +272,11 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
              mMetricsFeatureProvider.action(
                      mActivity, SettingsEnums.ACTION_APP_INFO_FORCE_STOP);
             // force stop
+            if (mPm.isPackageStateProtected(mAppEntry.info.packageName, mUserId)) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mActivity,
+                        RestrictedLockUtilsInternal.getDeviceOwner(mActivity));
+                return;
+            }
             if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
                         mActivity, mAppsControlDisallowedAdmin);
