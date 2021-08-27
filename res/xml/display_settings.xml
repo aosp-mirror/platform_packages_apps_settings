@@ -31,7 +31,7 @@
             settings:useAdminDisabledSummary="true"
             settings:userRestriction="no_config_brightness"/>
 
-        <com.android.settings.widget.PrimarySwitchPreference
+        <com.android.settingslib.PrimarySwitchPreference
             android:key="auto_brightness_entry"
             android:title="@string/auto_brightness_title"
             android:fragment="com.android.settings.display.AutoBrightnessSettings"
@@ -85,7 +85,7 @@
     <PreferenceCategory
         android:title="@string/category_name_color">
 
-        <com.android.settings.widget.PrimarySwitchPreference
+        <com.android.settingslib.PrimarySwitchPreference
             android:key="night_display"
             android:title="@string/night_display_title"
             android:fragment="com.android.settings.display.NightDisplaySettings"

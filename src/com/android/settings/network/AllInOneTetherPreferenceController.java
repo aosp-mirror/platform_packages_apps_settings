@@ -43,7 +43,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.widget.GenericSwitchController;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.TetherUtil;
 
 import java.util.concurrent.atomic.AtomicReference;

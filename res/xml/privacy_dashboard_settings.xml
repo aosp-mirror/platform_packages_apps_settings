@@ -128,12 +128,11 @@
         android:summary="@string/content_capture_summary"
         settings:controller="com.android.settings.privacy.EnableContentCapturePreferenceController"/>
 
-    <com.android.settings.widget.PrimarySwitchPreference
+    <com.android.settingslib.PrimarySwitchPreference
         android:key="content_capture_custom_settings"
         android:title="@string/content_capture"
         android:summary="@string/content_capture_summary"
-        settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController">
-    </com.android.settings.widget.PrimarySwitchPreference>
+        settings:controller="com.android.settings.privacy.EnableContentCaptureWithServiceSettingsPreferenceController"/>
 
     <!-- Clipboard access notifications -->
     <SwitchPreference
