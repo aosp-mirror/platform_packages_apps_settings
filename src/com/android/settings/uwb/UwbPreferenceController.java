@@ -57,7 +57,9 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
     public UwbPreferenceController(Context context, String key) {
         super(context, key);
         mExecutor = Executors.newSingleThreadExecutor();
-        mUwbManager = context.getSystemService(UwbManager.class);
+        if (isUwbSupportedOnDevice()) {
+            mUwbManager = context.getSystemService(UwbManager.class);
+        }
         mAirplaneModeOn = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
         mAirplaneModeChangedReceiver = new BroadcastReceiver() {
