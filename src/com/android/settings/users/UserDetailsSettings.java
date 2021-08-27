@@ -73,6 +73,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final int DIALOG_SETUP_USER = 4;
     private static final int DIALOG_CONFIRM_RESET_GUEST = 5;
 
+    /** Whether to enable the app_copying fragment. */
+    private static final boolean SHOW_APP_COPYING_PREF = false;
+
     private UserManager mUserManager;
     private UserCapabilities mUserCaps;
     private boolean mGuestUserAutoCreated;
@@ -297,6 +300,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 if (mGuestUserAutoCreated) {
                     mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
                 }
+                if (!SHOW_APP_COPYING_PREF) {
+                    removePreference(KEY_APP_COPYING);
+                }
             } else {
                 mPhonePref.setChecked(!mUserManager.hasUserRestriction(
                         UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
@@ -407,6 +413,9 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     }
 
     private void openAppCopyingScreen() {
+        if (!SHOW_APP_COPYING_PREF) {
+            return;
+        }
         final Bundle extras = new Bundle();
         extras.putInt(AppRestrictionsFragment.EXTRA_USER_ID, mUserInfo.id);
         new SubSettingLauncher(getContext())
