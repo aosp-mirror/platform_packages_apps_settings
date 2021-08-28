@@ -2187,7 +2187,7 @@
     <string name="hardkeyboard_category" msgid="8729780593378161071">"物理键盘设置"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"按空格键两次可插入句号"</string>
     <string name="show_password" msgid="7101900779571040117">"显示密码"</string>
-    <string name="show_password_summary" msgid="9025960283785111619">"输入时短暂显示这些字符"</string>
+    <string name="show_password_summary" msgid="9025960283785111619">"输入时短暂显示字符"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"此拼写检查工具可能会收集您键入的所有文字，包括密码和信用卡号等个人数据。它源自应用“<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>”。要使用此拼写检查工具吗？"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"设置"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"语言"</string>
@@ -4617,7 +4617,7 @@
     <string name="color_temperature_toast" msgid="7611532183532407342">"要应用颜色更改，请关闭屏幕"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"相机激光传感器"</string>
     <string name="ota_disable_automatic_update" msgid="1953894421412420231">"系统自动更新"</string>
-    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"重启设备时应用更新"</string>
+    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"设备重启时执行更新"</string>
     <string name="usage" msgid="287782903846013936">"流量消耗"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"移动数据用量"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"应用的流量使用情况"</string>
@@ -5397,14 +5397,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"长按电源按钮即可启动 Google 助理"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"“电源和急救信息”菜单：\n同时按电源按钮和音量调高按钮。"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"阻止响铃：\n音量菜单中提供了快捷方式。"</string>
-    <!-- no translation found for power_menu_long_press_for_assist_sensitivity_title (1626808509158422185) -->
-    <skip />
-    <!-- no translation found for power_menu_long_press_for_assist_sensitivity_summary (7550610071666801935) -->
-    <skip />
-    <!-- no translation found for power_menu_long_press_for_assist_sensitivity_low_label (3430099983480845635) -->
-    <skip />
-    <!-- no translation found for power_menu_long_press_for_assist_sensitivity_high_label (2059686170350829156) -->
-    <skip />
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"按住电源按钮的持续时间"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"通过选择按住电源按钮的持续时间来调节灵敏度"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"短"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"长"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"显示电子钱包"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"允许从锁定屏幕和快捷设置使用电子钱包"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"显示设备控制器"</string>
@@ -5450,7 +5446,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"暂时无法使用"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"没有 SIM 卡"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"网络偏好设置"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"连接到公共网络"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"网络连接, 互联网, 无线, 数据, WiFi, Wi-Fi, Wi Fi, WLAN, 移动网络, 移动, 手机运营商, 4G, 3G, 2G, LTE"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"开启 WLAN"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"关闭 WLAN"</string>
@@ -5468,6 +5463,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ 网络"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM 卡"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"已下载的 SIM 卡"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"已下载的 SIM 卡"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"使用中"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"未使用"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /<xliff:g id="ID_1">%1$s</xliff:g>默认配置"</string>
@@ -5541,7 +5537,7 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"有助于确定附近支持超宽带 (UWB) 的设备的相对位置"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"会关闭飞行模式，以使用超宽带 (UWB)"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"摄像头使用权限"</string>
-    <string name="mic_toggle_title" msgid="265145278323852547">"麦克风访问权限"</string>
+    <string name="mic_toggle_title" msgid="265145278323852547">"麦克风使用权限"</string>
     <string name="sensor_toggle_description" msgid="8248823248606795411">"适用于所有应用和服务"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"游戏设置"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"开启游戏信息中心快捷方式等"</string>
