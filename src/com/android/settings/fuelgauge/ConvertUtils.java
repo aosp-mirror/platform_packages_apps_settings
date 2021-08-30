@@ -24,6 +24,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.overlay.FeatureFactory;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.text.SimpleDateFormat;
@@ -288,7 +290,7 @@ public final class ConvertUtils {
         }
         insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
         if (purgeLowPercentageAndFakeData) {
-            purgeLowPercentageAndFakeData(resultMap);
+            purgeLowPercentageAndFakeData(context, resultMap);
         }
         return resultMap;
     }
@@ -327,7 +329,12 @@ public final class ConvertUtils {
 
     // Removes low percentage data and fake usage data, which will be zero value.
     private static void purgeLowPercentageAndFakeData(
+            final Context context,
             final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
+        final List<CharSequence> backgroundUsageTimeHideList =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getHideBackgroundUsageTimeList(context);
         for (List<BatteryDiffEntry> entries : indexedUsageMap.values()) {
             final Iterator<BatteryDiffEntry> iterator = entries.iterator();
             while (iterator.hasNext()) {
@@ -335,6 +342,12 @@ public final class ConvertUtils {
                 if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD
                         || FAKE_PACKAGE_NAME.equals(entry.getPackageName())) {
                     iterator.remove();
+                }
+                final String packageName = entry.getPackageName();
+                if (packageName != null
+                        && !backgroundUsageTimeHideList.isEmpty()
+                        && backgroundUsageTimeHideList.contains(packageName)) {
+                  entry.mBackgroundUsageTimeInMs = 0;
                 }
             }
         }
