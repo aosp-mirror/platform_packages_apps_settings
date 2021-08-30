@@ -36,12 +36,11 @@ public class BatteryOptimizeUtils {
     @VisibleForTesting AppOpsManager mAppOpsManager;
     @VisibleForTesting BatteryUtils mBatteryUtils;
     @VisibleForTesting PowerAllowlistBackend mPowerAllowListBackend;
+    @VisibleForTesting int mMode;
+    @VisibleForTesting boolean mAllowListed;
 
     private final String mPackageName;
     private final int mUid;
-
-    private int mMode;
-    private boolean mAllowListed;
 
     // Optimization modes.
     static final int MODE_UNKNOWN = 0;
@@ -92,6 +91,10 @@ public class BatteryOptimizeUtils {
 
     /** Sets the {@link OptimizationMode} for associated app. */
     public void setAppOptimizationMode(@OptimizationMode int mode) {
+        if (getAppOptimizationMode(mMode, mAllowListed) == mode) {
+            Log.w(TAG, "set the same optimization mode for: " + mPackageName);
+            return;
+        }
         switch (mode) {
             case MODE_RESTRICTED:
                 mBatteryUtils.setForceAppStandby(mUid, mPackageName, AppOpsManager.MODE_IGNORED);
