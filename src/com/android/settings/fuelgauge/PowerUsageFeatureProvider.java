@@ -24,6 +24,7 @@ import android.util.SparseIntArray;
 import com.android.internal.os.BatterySipper;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -147,4 +148,9 @@ public interface PowerUsageFeatureProvider {
      * Returns {@link Uri} to monitor battery history data is update.
      */
     Uri getBatteryHistoryUri();
+
+    /**
+     * Returns {@link List} for hidding applications background usage time.
+     */
+    List<CharSequence> getHideBackgroundUsageTimeList(Context context);
 }
