@@ -16,18 +16,27 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.BatteryBackupHelper.DELIMITER;
+import static com.android.settings.fuelgauge.BatteryBackupHelper.DELIMITER_MODE;
+import static com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_RESTRICTED;
+import static com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNRESTRICTED;
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.app.backup.BackupDataInputStream;
 import android.app.backup.BackupDataOutput;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -49,6 +58,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -69,7 +80,11 @@ public final class BatteryBackupHelperTest {
     private BatteryBackupHelper mBatteryBackupHelper;
 
     @Mock
+    private PackageManager mPackageManager;
+    @Mock
     private BackupDataOutput mBackupDataOutput;
+    @Mock
+    private BackupDataInputStream mBackupDataInputStream;
     @Mock
     private IDeviceIdleController mDeviceController;
     @Mock
@@ -80,18 +95,25 @@ public final class BatteryBackupHelperTest {
     private UserManager mUserManager;
     @Mock
     private PowerAllowlistBackend mPowerAllowlistBackend;
+    @Mock
+    private BatteryOptimizeUtils mBatteryOptimizeUtils;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mAppOpsManager).when(mContext).getSystemService(AppOpsManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
         mBatteryBackupHelper = new BatteryBackupHelper(mContext);
         mBatteryBackupHelper.mIDeviceIdleController = mDeviceController;
         mBatteryBackupHelper.mIPackageManager = mIPackageManager;
         mBatteryBackupHelper.mPowerAllowlistBackend = mPowerAllowlistBackend;
+        mBatteryBackupHelper.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
+        mockUid(1001 /*fake uid*/, PACKAGE_NAME1);
+        mockUid(1002 /*fake uid*/, PACKAGE_NAME2);
+        mockUid(BatteryUtils.UID_NULL, PACKAGE_NAME3);
     }
 
     @After
@@ -144,8 +166,7 @@ public final class BatteryBackupHelperTest {
 
         mBatteryBackupHelper.performBackup(null, mBackupDataOutput, null);
 
-        final String expectedResult = fullPowerList[0]
-                + BatteryBackupHelper.DELIMITER + fullPowerList[1];
+        final String expectedResult = fullPowerList[0] + DELIMITER + fullPowerList[1];
         final byte[] expectedBytes = expectedResult.getBytes();
         verify(mBackupDataOutput).writeEntityHeader(
                 BatteryBackupHelper.KEY_FULL_POWER_LIST, expectedBytes.length);
@@ -186,7 +207,7 @@ public final class BatteryBackupHelperTest {
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
 
         // 2 for UNRESTRICTED mode and 1 for RESTRICTED mode.
-        final String expectedResult = PACKAGE_NAME1 + "|2," + PACKAGE_NAME2 + "|1,";
+        final String expectedResult = PACKAGE_NAME1 + ":2," + PACKAGE_NAME2 + ":1,";
         verifyBackupData(expectedResult);
     }
 
@@ -202,7 +223,7 @@ public final class BatteryBackupHelperTest {
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
 
         // "com.android.testing.2" for RESTRICTED mode.
-        final String expectedResult = PACKAGE_NAME2 + "|1,";
+        final String expectedResult = PACKAGE_NAME2 + ":1,";
         verifyBackupData(expectedResult);
     }
 
@@ -218,8 +239,101 @@ public final class BatteryBackupHelperTest {
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
 
         // "com.android.testing.2" for RESTRICTED mode.
-        final String expectedResult = PACKAGE_NAME2 + "|1,";
+        final String expectedResult = PACKAGE_NAME2 + ":1,";
         verifyBackupData(expectedResult);
+    }
+
+    @Test
+    public void restoreEntity_nonOwner_notReadBackupData() throws Exception {
+        ShadowUserHandle.setUid(1);
+        mockBackupData(30 /*dataSize*/, BatteryBackupHelper.KEY_OPTIMIZATION_LIST);
+
+        mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
+
+        verifyZeroInteractions(mBackupDataInputStream);
+    }
+
+    @Test
+    public void restoreEntity_zeroDataSize_notReadBackupData() throws Exception {
+        final int zeroDataSize = 0;
+        mockBackupData(zeroDataSize, BatteryBackupHelper.KEY_OPTIMIZATION_LIST);
+
+        mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
+
+        verify(mBackupDataInputStream, never()).read(any(), anyInt(), anyInt());
+    }
+
+    @Test
+    public void restoreEntity_incorrectDataKey_notReadBackupData() throws Exception {
+        final String incorrectDataKey = BatteryBackupHelper.KEY_FULL_POWER_LIST;
+        mockBackupData(30 /*dataSize*/, incorrectDataKey);
+
+        mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
+
+        verify(mBackupDataInputStream, never()).read(any(), anyInt(), anyInt());
+    }
+
+    @Test
+    public void restoreEntity_readExpectedDataFromBackupData() throws Exception {
+        final int dataSize = 30;
+        mockBackupData(dataSize, BatteryBackupHelper.KEY_OPTIMIZATION_LIST);
+
+        mBatteryBackupHelper.restoreEntity(mBackupDataInputStream);
+
+        final ArgumentCaptor<byte[]> captor = ArgumentCaptor.forClass(byte[].class);
+        verify(mBackupDataInputStream).read(captor.capture(), eq(0), eq(dataSize));
+        assertThat(captor.getValue().length).isEqualTo(dataSize);
+    }
+
+    @Test
+    public void restoreOptimizationMode_nullBytesData_skipRestore() throws Exception {
+        mBatteryBackupHelper.restoreOptimizationMode(new byte[0]);
+        verifyZeroInteractions(mBatteryOptimizeUtils);
+
+        mBatteryBackupHelper.restoreOptimizationMode("invalid data format".getBytes());
+        verifyZeroInteractions(mBatteryOptimizeUtils);
+
+        mBatteryBackupHelper.restoreOptimizationMode(DELIMITER.getBytes());
+        verifyZeroInteractions(mBatteryOptimizeUtils);
+    }
+
+    @Test
+    public void restoreOptimizationMode_invalidModeFormat_skipRestore() throws Exception {
+        final String invalidNumberFormat = "google";
+        final String packageModes =
+                PACKAGE_NAME1 + DELIMITER_MODE + MODE_RESTRICTED + DELIMITER +
+                PACKAGE_NAME2 + DELIMITER_MODE + invalidNumberFormat;
+
+        mBatteryBackupHelper.restoreOptimizationMode(packageModes.getBytes());
+
+        final InOrder inOrder = inOrder(mBatteryOptimizeUtils);
+        inOrder.verify(mBatteryOptimizeUtils).setAppOptimizationMode(MODE_RESTRICTED);
+        inOrder.verify(mBatteryOptimizeUtils, never()).setAppOptimizationMode(anyInt());
+    }
+
+    @Test
+    public void restoreOptimizationMode_restoreExpectedModes() throws Exception {
+        final String packageModes =
+                PACKAGE_NAME1 + DELIMITER_MODE + MODE_RESTRICTED + DELIMITER +
+                PACKAGE_NAME2 + DELIMITER_MODE + MODE_UNRESTRICTED + DELIMITER +
+                PACKAGE_NAME3 + DELIMITER_MODE + MODE_RESTRICTED + DELIMITER;
+
+        mBatteryBackupHelper.restoreOptimizationMode(packageModes.getBytes());
+
+        final InOrder inOrder = inOrder(mBatteryOptimizeUtils);
+        inOrder.verify(mBatteryOptimizeUtils).setAppOptimizationMode(MODE_RESTRICTED);
+        inOrder.verify(mBatteryOptimizeUtils).setAppOptimizationMode(MODE_UNRESTRICTED);
+        inOrder.verify(mBatteryOptimizeUtils, never()).setAppOptimizationMode(MODE_RESTRICTED);
+    }
+
+    private void mockUid(int uid, String packageName) throws Exception {
+        doReturn(uid).when(mPackageManager)
+                .getPackageUid(packageName, PackageManager.GET_META_DATA);
+    }
+
+    private void mockBackupData(int dataSize, String dataKey) {
+        doReturn(dataSize).when(mBackupDataInputStream).size();
+        doReturn(dataKey).when(mBackupDataInputStream).getKey();
     }
 
     private void verifyBackupData(String expectedResult) throws Exception {
