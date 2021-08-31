@@ -491,8 +491,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
         use = 450;
         for (int i = 0; i < 100; i++) {
-            builder.getOrCreateUidBatteryConsumerBuilder(
-                            new FakeUid(Process.FIRST_APPLICATION_UID + i))
+            builder.getOrCreateUidBatteryConsumerBuilder(Process.FIRST_APPLICATION_UID + i)
                     .setTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND, 10000 + i * 1000)
                     .setTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND, 20000 + i * 2000)
                     .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, use);
@@ -500,18 +499,17 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         }
 
         // Simulate dex2oat process.
-        builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID))
+        builder.getOrCreateUidBatteryConsumerBuilder(Process.FIRST_APPLICATION_UID)
                 .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
-        builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID + 1))
+        builder.getOrCreateUidBatteryConsumerBuilder(Process.FIRST_APPLICATION_UID + 1)
                 .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
-        builder.getOrCreateUidBatteryConsumerBuilder(
-                        new FakeUid(UserHandle.getSharedAppGid(Process.LOG_UID)))
+        builder.getOrCreateUidBatteryConsumerBuilder(UserHandle.getSharedAppGid(Process.LOG_UID))
                 .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 900.0);
 
