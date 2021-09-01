@@ -54,10 +54,13 @@ public class ZenModePrioritySendersPreferenceController
     @VisibleForTesting static final String KEY_NONE = "senders_none";
 
     private static final Intent ALL_CONTACTS_INTENT =
-            new Intent(Contacts.Intents.UI.LIST_DEFAULT);
+            new Intent(Contacts.Intents.UI.LIST_DEFAULT)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     private static final Intent STARRED_CONTACTS_INTENT =
-            new Intent(Contacts.Intents.UI.LIST_STARRED_ACTION);
-    private static final Intent FALLBACK_INTENT = new Intent(Intent.ACTION_MAIN);
+            new Intent(Contacts.Intents.UI.LIST_STARRED_ACTION)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK  | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    private static final Intent FALLBACK_INTENT = new Intent(Intent.ACTION_MAIN)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
     private final PackageManager mPackageManager;
     private final boolean mIsMessages; // if this is false, then this preference is for calls
