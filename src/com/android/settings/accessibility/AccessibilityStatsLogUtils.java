@@ -41,4 +41,21 @@ public final class AccessibilityStatsLogUtils {
         return enabled ? SettingsStatsLog.ACCESSIBILITY_SERVICE_REPORTED__SERVICE_STATUS__ENABLED
                 : SettingsStatsLog.ACCESSIBILITY_SERVICE_REPORTED__SERVICE_STATUS__DISABLED;
     }
+
+    /**
+     * Logs when the non-a11y category service is disabled. Calls this when the user disables the
+     * non-a11y category service for the first time.
+     *
+     * @param packageName package name of the service
+     * @param durationMills    duration in milliseconds between starting the page and disabling the
+     *                    service
+     */
+    static void logDisableNonA11yCategoryService(String packageName, long durationMills) {
+        com.android.internal.accessibility.util.AccessibilityStatsLogUtils
+                .logNonA11yToolServiceWarningReported(
+                        packageName,
+                        com.android.internal.accessibility.util.AccessibilityStatsLogUtils
+                                .ACCESSIBILITY_PRIVACY_WARNING_STATUS_SERVICE_DISABLED,
+                        durationMills);
+    }
 }
