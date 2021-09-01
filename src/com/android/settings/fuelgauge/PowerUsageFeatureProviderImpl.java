@@ -23,10 +23,11 @@ import android.net.Uri;
 import android.os.Process;
 import android.util.SparseIntArray;
 
-import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
@@ -46,25 +47,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public boolean isTypeService(BatterySipper sipper) {
-        return false;
-    }
-
-    @Override
-    public boolean isTypeSystem(BatterySipper sipper) {
-        final int uid = sipper.uidObj == null ? -1 : sipper.getUid();
-        sipper.mPackages = mPackageManager.getPackagesForUid(uid);
-        // Classify all the sippers to type system if the range of uid is 0...FIRST_APPLICATION_UID
-        if (uid >= Process.ROOT_UID && uid < Process.FIRST_APPLICATION_UID) {
-            return true;
-        } else if (sipper.mPackages != null) {
-            for (final String packageName : sipper.mPackages) {
-                if (ArrayUtils.contains(PACKAGES_SYSTEM, packageName)) {
-                    return true;
-                }
-            }
-        }
-
+    public boolean isTypeService(int uid) {
         return false;
     }
 
@@ -172,5 +155,10 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public Uri getBatteryHistoryUri() {
         return null;
+    }
+
+    @Override
+    public List<CharSequence> getHideBackgroundUsageTimeList(Context context) {
+        return new ArrayList<>();
     }
 }
