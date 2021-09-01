@@ -288,7 +288,7 @@ public class RequestManageCredentials extends Activity {
                     // On down scroll, hide text in floating action button by setting
                     // extended to false.
                     if (dy > 0 && mExtendedFab.getVisibility() == View.VISIBLE) {
-                        mExtendedFab.setExtended(false);
+                        mExtendedFab.shrink();
                     }
                     if (isRecyclerScrollable()) {
                         mExtendedFab.show();

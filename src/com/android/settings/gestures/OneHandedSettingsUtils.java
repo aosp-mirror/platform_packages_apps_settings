@@ -16,6 +16,8 @@
 
 package com.android.settings.gestures;
 
+import static com.android.internal.accessibility.AccessibilityShortcutController.ONE_HANDED_COMPONENT_NAME;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -33,6 +35,9 @@ import androidx.annotation.VisibleForTesting;
  */
 public class OneHandedSettingsUtils {
 
+    static final String ONE_HANDED_MODE_TARGET_NAME =
+            ONE_HANDED_COMPONENT_NAME.getShortClassName();
+
     static final String SUPPORT_ONE_HANDED_MODE = "ro.support_one_handed_mode";
     static final int OFF = 0;
     static final int ON = 1;
@@ -40,6 +45,8 @@ public class OneHandedSettingsUtils {
             Settings.Secure.getUriFor(Settings.Secure.ONE_HANDED_MODE_ENABLED);
     static final Uri SHOW_NOTIFICATION_ENABLED_URI =
             Settings.Secure.getUriFor(Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED);
+    static final Uri SHORTCUT_ENABLED_URI =
+            Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
 
     public enum OneHandedTimeout {
         NEVER(0), SHORT(4), MEDIUM(8), LONG(12);
@@ -220,8 +227,30 @@ public class OneHandedSettingsUtils {
      * navigation settings.
      */
     public static boolean canEnableController(Context context) {
-        return (OneHandedSettingsUtils.isOneHandedModeEnabled(context)
-                && OneHandedSettingsUtils.getNavigationBarMode(context) != 0 /* 3-button mode */);
+        return ((OneHandedSettingsUtils.isOneHandedModeEnabled(context)
+                && getNavigationBarMode(context) != 0 /* 3-button */)
+                || getShortcutEnabled(context));
+    }
+
+    /**
+     * Queries one-handed mode shortcut enabled in settings or not.
+     *
+     * @return true if user enabled one-handed shortcut in settings, false otherwise.
+     */
+    public static boolean getShortcutEnabled(Context context) {
+        final String targets = Settings.Secure.getStringForUser(context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS, sCurrentUserId);
+        return targets != null ? targets.contains(ONE_HANDED_MODE_TARGET_NAME) : false;
+    }
+
+    /**
+     * This is a test only API for set Shortcut enabled or not.
+     */
+    @VisibleForTesting
+    public void setShortcutEnabled(Context context, boolean enabled) {
+        final String targetName = enabled ? ONE_HANDED_MODE_TARGET_NAME : "";
+        Settings.Secure.putStringForUser(context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS, targetName, sCurrentUserId);
     }
 
     /**
@@ -256,6 +285,7 @@ public class OneHandedSettingsUtils {
             final ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(ONE_HANDED_MODE_ENABLED_URI, true, this);
             resolver.registerContentObserver(SHOW_NOTIFICATION_ENABLED_URI, true, this);
+            resolver.registerContentObserver(SHORTCUT_ENABLED_URI, true, this);
         }
 
         @Override

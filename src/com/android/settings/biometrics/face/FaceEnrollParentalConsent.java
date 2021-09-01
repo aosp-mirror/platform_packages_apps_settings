@@ -50,6 +50,16 @@ public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
         onConsentResult(false /* granted */);
     }
 
+    @Override
+    protected void onEnrollmentSkipped(@Nullable Intent data) {
+        onConsentResult(false /* granted */);
+    }
+
+    @Override
+    protected void onFinishedEnrolling(@Nullable Intent data) {
+        onConsentResult(true /* granted */);
+    }
+
     private void onConsentResult(boolean granted) {
         final Intent result = new Intent();
         result.putExtra(EXTRA_KEY_MODALITY, TYPE_FACE);
@@ -78,6 +88,12 @@ public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
     @StringRes
     protected int getInfoMessageLooking() {
         return R.string.security_settings_face_enroll_introduction_info_consent_looking;
+    }
+
+    @Override
+    @StringRes
+    protected int getInfoMessageRequireEyes() {
+        return R.string.security_settings_face_enroll_introduction_info_consent_gaze;
     }
 
     @Override
