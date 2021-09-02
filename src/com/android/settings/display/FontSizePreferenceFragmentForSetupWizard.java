@@ -18,8 +18,15 @@ package com.android.settings.display;
 
 import android.app.settings.SettingsEnums;
 
+import com.android.settings.R;
+
 public class FontSizePreferenceFragmentForSetupWizard
         extends ToggleFontSizePreferenceFragment {
+
+    @Override
+    protected int getActivityLayoutResId() {
+        return R.layout.suw_font_size_fragment;
+    }
 
     @Override
     public int getMetricsCategory() {
