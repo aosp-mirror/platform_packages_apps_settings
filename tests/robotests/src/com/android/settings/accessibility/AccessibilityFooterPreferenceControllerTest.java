@@ -109,16 +109,16 @@ public class AccessibilityFooterPreferenceControllerTest {
     }
 
     @Test
-    public void onBindViewHolder_setupHelpLink_setCorrectHelpLinkAndContentDescription() {
-        mController.setupHelpLink(TEST_HELP_ID, TEST_CONTENT_DESCRIPTION);
+    public void onBindViewHolder_setHelpResource_emptyString_notVisible() {
+        mController.setupHelpLink(R.string.help_url_timeout, TEST_CONTENT_DESCRIPTION);
         mController.displayPreference(mScreen);
 
         mPreference.onBindViewHolder(mPreferenceViewHolder);
 
         final TextView learnMoreView = (TextView) mPreferenceViewHolder
                 .findViewById(com.android.settingslib.R.id.settingslib_learn_more);
-        assertThat(learnMoreView.getContentDescription().toString())
-                .contains(TEST_CONTENT_DESCRIPTION);
-        assertThat(mPreference.isLinkEnabled()).isTrue();
+        assertThat(learnMoreView.getContentDescription()).isNull();
+        assertThat(learnMoreView.getVisibility()).isEqualTo(View.GONE);
+        assertThat(mPreference.isLinkEnabled()).isFalse();
     }
 }
