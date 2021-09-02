@@ -40,6 +40,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -339,8 +340,8 @@ public final class ConvertUtilsTest {
             "package3", "label3", 500, 5L, 3600000L, 7200000L);
         entryMap.put(entry.getKey(), entry);
         batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[2]), entryMap);
-        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeList(mContext))
-            .thenReturn(Arrays.asList((CharSequence) "package3"));
+        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeSet(mContext))
+            .thenReturn(new HashSet(Arrays.asList((CharSequence) "package3")));
 
         final Map<Integer, List<BatteryDiffEntry>> purgedResultMap =
             ConvertUtils.getIndexedUsageMap(

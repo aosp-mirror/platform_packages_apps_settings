@@ -123,10 +123,12 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mIs24HourFormat = DateFormat.is24HourFormat(context);
         mNotAllowShowSummaryPackages = context.getResources()
             .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
-        mNotAllowShowEntryPackages = context.getResources()
-            .getTextArray(R.array.allowlist_hide_entry_in_battery_usage);
         mMetricsFeatureProvider =
             FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
+        mNotAllowShowEntryPackages =
+            FeatureFactory.getFactory(mContext)
+                .getPowerUsageFeatureProvider(context)
+                .getHideApplicationEntries(mContext);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
