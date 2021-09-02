@@ -27,9 +27,9 @@ import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
 
@@ -177,7 +177,12 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public List<CharSequence> getHideBackgroundUsageTimeList(Context context) {
-        return new ArrayList<>();
+    public Set<CharSequence> getHideBackgroundUsageTimeSet(Context context) {
+        return new HashSet<>();
+    }
+
+    @Override
+    public CharSequence[] getHideApplicationEntries(Context context) {
+        return new CharSequence[0];
     }
 }

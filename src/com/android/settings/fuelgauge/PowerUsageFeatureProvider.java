@@ -24,8 +24,8 @@ import android.util.SparseIntArray;
 import com.android.internal.os.BatterySipper;
 import com.android.settingslib.fuelgauge.Estimate;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Feature Provider used in power usage
@@ -150,7 +150,12 @@ public interface PowerUsageFeatureProvider {
     Uri getBatteryHistoryUri();
 
     /**
-     * Returns {@link List} for hidding applications background usage time.
+     * Returns {@link Set} for hidding applications background usage time.
      */
-    List<CharSequence> getHideBackgroundUsageTimeList(Context context);
+    Set<CharSequence> getHideBackgroundUsageTimeSet(Context context);
+
+    /**
+     * Returns package names for hidding application in the usage screen.
+     */
+    CharSequence[] getHideApplicationEntries(Context context);
 }
