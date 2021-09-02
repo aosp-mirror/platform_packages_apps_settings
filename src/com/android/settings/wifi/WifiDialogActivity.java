@@ -197,13 +197,11 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
     public void onDestroy() {
         if (mIsWifiTrackerLib) {
             if (mDialog2 != null && mDialog2.isShowing()) {
-                mDialog2.dismiss();
                 mDialog2 = null;
             }
             mWorkerThread.quit();
         } else {
             if (mDialog != null && mDialog.isShowing()) {
-                mDialog.dismiss();
                 mDialog = null;
             }
         }
