@@ -1059,10 +1059,16 @@
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon">Follow the fingerprint icon</string>
     <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_repeat_message">Keep lifting your finger to add the different parts of your fingerprint</string>
-    <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
-    <string name="security_settings_udfps_enroll_repeat_message">Touch &amp; hold each time the fingerprint icon moves. This helps capture your full fingerprint.</string>
-    <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor.-->
-    <string name="security_settings_udfps_enroll_repeat_a11y_message">This helps capture your full fingerprint</string>
+    <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=160] -->
+    <string name="security_settings_udfps_enroll_repeat_message">Touch &amp; hold each time the fingerprint icon moves. This helps capture more of your fingerprint.</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Place the tip of your finger on the sensor</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_edge_title">Finally, place the edges of your finger</string>
+    <!-- Message shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=160] -->
+    <string name="security_settings_udfps_enroll_edge_message">Place the side of your fingerprint on the sensor and hold, then switch to the other side</string>
+    <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor. [CHAR LIMIT=160] -->
+    <string name="security_settings_udfps_enroll_repeat_a11y_message">This helps capture more of your fingerprint</string>
     <!-- Message read to a11y users when enrollment progress is made. The number is from 0 to 100. [CHAR LIMIT=NONE]-->
     <string name="security_settings_udfps_enroll_progress_a11y_message">Enrolling fingerprint <xliff:g id="percentage" example="10">%d</xliff:g> percent</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
