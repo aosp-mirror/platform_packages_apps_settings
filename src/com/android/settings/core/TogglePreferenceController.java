@@ -20,8 +20,8 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SliceData;
-import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settings.widget.TwoStateButtonPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 
 /**
  * Abstract class that consolidates logic for updating toggle controllers.
