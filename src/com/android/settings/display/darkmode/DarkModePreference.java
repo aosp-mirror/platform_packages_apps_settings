@@ -21,7 +21,7 @@ import android.os.PowerManager;
 import android.util.AttributeSet;
 
 import com.android.settings.R;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 
 import java.time.LocalTime;
 
