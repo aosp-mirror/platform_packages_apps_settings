@@ -7992,9 +7992,13 @@
     <!-- Enhaced 4G LTE Mode title for carriers who want to show 4G Calling.  [CHAR LIMIT=50] -->
     <string name="enhanced_4g_lte_mode_title_4g_calling">4G Calling</string>
     <!-- Enhaced 4G LTE Mode summary.  [CHAR LIMIT=100] -->
-    <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice and other communications (recommended)</string>
+    <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice calls (recommended)</string>
     <!-- Enhaced 4G LTE Mode summary for 4g calling.  [CHAR LIMIT=100] -->
-    <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice and other communications (recommended)</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice calls (recommended)</string>
+    <!-- NR advanced calling(VoNR or Vo5G) title.  [CHAR LIMIT=50] -->
+    <string name="nr_advanced_calling_title">Vo5G</string>
+    <!-- NR advanced calling(VoNR or Vo5G) summary.  [CHAR LIMIT=NONE] -->
+    <string name="nr_advanced_calling_summary">Use 5G for voice calls</string>
     <!-- Title of a preference determining whether or not the user has allowed the device to share
          their contacts' phone numbers with their carrier in order to implement contact discovery,
          which is a service that exchanges contacts with the carrier to determine if your
@@ -8388,6 +8392,9 @@
 
     <!-- List of synonyms for the enhance 4G LTE titles, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_enhance_4g_lte">volte, advanced calling, 4g calling</string>
+
+    <!-- List of synonyms for the NR advanced calling(VoNR or Vo5G) titles, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_nr_advanced_calling">vo5g, vonr, advanced calling, 5g calling</string>
 
     <!-- List of synonyms for add language, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_add_language">add language, add a language</string>
@@ -9367,7 +9374,7 @@
     <string name="notification_listener_security_warning_summary">
         <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to read all notifications,
         including personal information such as contact names and the text of messages you receive.
-        This app will also be able to dismiss notifications or take action on buttons in notifications, including answering phone calls.
+        This app will also be able to snooze or dismiss notifications or take action on buttons in notifications, including answering phone calls.
         \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
     </string>
     <string name="notification_listener_disable_warning_summary">

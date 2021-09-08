@@ -247,6 +247,13 @@
             android:summary="@string/enable_2g_summary"
             settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController" />
 
+        <SwitchPreference
+            android:key="nr_advanced_calling"
+            android:title="@string/nr_advanced_calling_title"
+            android:persistent="false"
+            android:summary="@string/nr_advanced_calling_summary"
+            settings:keywords="@string/keywords_nr_advanced_calling"
+            settings:controller="com.android.settings.network.telephony.NrAdvancedCallingPreferenceController"/>
     </PreferenceCategory>
 
     <Preference
