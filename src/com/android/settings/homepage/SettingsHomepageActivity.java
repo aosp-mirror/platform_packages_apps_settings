@@ -62,7 +62,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     public static final String EXTRA_IS_FROM_SETTINGS_HOMEPAGE = "is_from_settings_homepage";
 
     // An alias class name of SettingsHomepageActivity.
-    private static final String ALIAS_DEEP_LINK = "com.android.settings.DeepLinkHomepageActivity";
+    public static final String ALIAS_DEEP_LINK = "com.android.settings.DeepLinkHomepageActivity";
 
     private static final long HOMEPAGE_LOADING_TIMEOUT_MS = 300;
 

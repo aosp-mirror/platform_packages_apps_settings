@@ -32,6 +32,8 @@ import androidx.window.embedding.SplitPlaceholderRule;
 
 import com.android.settings.Settings;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
+import com.android.settings.homepage.SettingsHomepageActivity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -89,7 +91,10 @@ public class ActivityEmbeddingRulesController {
 
     private void registerHomepagePlaceholderRule() {
         final Set<ActivityFilter> activityFilters = new HashSet<>();
+        activityFilters.add(new ActivityFilter(getComponentName(SettingsHomepageActivity.class)));
         activityFilters.add(new ActivityFilter(getComponentName(Settings.class)));
+        activityFilters.add(new ActivityFilter(new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
+                SettingsHomepageActivity.ALIAS_DEEP_LINK)));
         final Intent intent = new Intent();
         intent.setComponent(getComponentName(Settings.NetworkDashboardActivity.class));
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
