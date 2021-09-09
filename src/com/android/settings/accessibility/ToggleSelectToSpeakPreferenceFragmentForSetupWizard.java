@@ -33,7 +33,7 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER;
+        return SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SELECT_TO_SPEAK;
     }
 
     @Override
