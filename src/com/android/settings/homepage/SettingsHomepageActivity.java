@@ -18,8 +18,14 @@ package com.android.settings.homepage;
 
 import android.animation.LayoutTransition;
 import android.app.ActivityManager;
+import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
@@ -31,20 +37,32 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.accounts.AvatarViewMixin;
 import com.android.settings.core.CategoryMixin;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
+
+import java.net.URISyntaxException;
 
 /** Settings homepage activity */
 public class SettingsHomepageActivity extends FragmentActivity implements
         CategoryMixin.CategoryHandler {
 
     private static final String TAG = "SettingsHomepageActivity";
+
+    // Put true value to the intent when startActivity for a deep link intent from this Activity.
+    public static final String EXTRA_IS_FROM_SETTINGS_HOMEPAGE = "is_from_settings_homepage";
+
+    // An alias class name of SettingsHomepageActivity.
+    private static final String ALIAS_DEEP_LINK = "com.android.settings.DeepLinkHomepageActivity";
 
     private static final long HOMEPAGE_LOADING_TIMEOUT_MS = 300;
 
@@ -105,6 +123,20 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         showFragment(new TopLevelSettings(), R.id.main_content);
         ((FrameLayout) findViewById(R.id.main_content))
                 .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+
+        // Launch the intent from deep link for large screen devices.
+        launchDeepLinkIntentToRight();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        // When it's large screen 2-pane and Settings app is in background. Receiving a Intent
+        // in this Activity will not finish nor onCreate. setIntent here for this case.
+        setIntent(intent);
+        // Launch the intent from deep link for large screen devices.
+        launchDeepLinkIntentToRight();
     }
 
     private void showSuggestionFragment() {
@@ -139,6 +171,54 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             fragmentTransaction.show(showFragment);
         }
         fragmentTransaction.commit();
+    }
+
+    private void launchDeepLinkIntentToRight() {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
+            return;
+        }
+
+        final Intent intent = getIntent();
+        if (intent == null || !TextUtils.equals(intent.getAction(),
+                Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK)) {
+            return;
+        }
+
+        final String intentUriString = intent.getStringExtra(
+                Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI);
+        if (TextUtils.isEmpty(intentUriString)) {
+            Log.e(TAG, "No EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI to deep link");
+            finish();
+            return;
+        }
+
+        final Intent targetIntent;
+        try {
+            targetIntent = Intent.parseUri(intentUriString, Intent.URI_INTENT_SCHEME);
+        } catch (URISyntaxException e) {
+            Log.e(TAG, "Failed to parse deep link intent: " + e);
+            finish();
+            return;
+        }
+
+        final ComponentName targetComponentName = targetIntent.resolveActivity(getPackageManager());
+        if (targetComponentName == null) {
+            Log.e(TAG, "No valid target for the deep link intent: " + targetIntent);
+            finish();
+            return;
+        }
+
+        targetIntent.setFlags(targetIntent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        targetIntent.putExtra(EXTRA_IS_FROM_SETTINGS_HOMEPAGE, true);
+
+        // Set 2-pane pair rule for the external deep link page.
+        ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
+                new ComponentName(Utils.SETTINGS_PACKAGE_NAME, ALIAS_DEEP_LINK),
+                targetComponentName,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */);
+        startActivity(targetIntent);
     }
 
     private void initHomepageContainer() {
