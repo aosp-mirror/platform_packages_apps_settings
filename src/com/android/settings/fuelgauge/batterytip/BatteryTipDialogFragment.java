@@ -20,6 +20,9 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
@@ -40,6 +43,7 @@ import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -50,6 +54,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
     private static final String ARG_BATTERY_TIP = "battery_tip";
     private static final String ARG_METRICS_KEY = "metrics_key";
+    private static final double CHARGE_LIMIT_LEVEL = 0.8f;
 
     @VisibleForTesting
     BatteryTip mBatteryTip;
@@ -138,6 +143,28 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
                         .setPositiveButton(R.string.battery_tip_unrestrict_app_dialog_ok, this)
                         .setNegativeButton(R.string.battery_tip_unrestrict_app_dialog_cancel, null)
                         .create();
+            case BatteryTip.TipType.BATTERY_DEFENDER:
+                mMetricsFeatureProvider.action(context,
+                        SettingsEnums.ACTION_TIP_BATTERY_DEFENDER, mMetricsKey);
+                final String percentage =
+                        NumberFormat.getPercentInstance().format(CHARGE_LIMIT_LEVEL);
+                final String message = context.getString(
+                        R.string.battery_tip_limited_temporarily_dialog_msg, percentage);
+                final boolean isPluggedIn = isPluggedIn();
+                final AlertDialog.Builder dialogBuilder =
+                        new AlertDialog.Builder(context)
+                                .setTitle(R.string.battery_tip_limited_temporarily_title)
+                                .setMessage(message);
+                if (isPluggedIn) {
+                    dialogBuilder
+                            .setPositiveButton(
+                                    R.string.battery_tip_limited_temporarily_dialog_resume_charge,
+                                    this)
+                            .setNegativeButton(R.string.okay, null);
+                } else {
+                    dialogBuilder.setPositiveButton(R.string.okay, null);
+                }
+                return dialogBuilder.create();
             default:
                 throw new IllegalArgumentException("unknown type " + mBatteryTip.getType());
         }
@@ -161,6 +188,13 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
             action.handlePositiveAction(mMetricsKey);
         }
         lsn.onBatteryTipHandled(mBatteryTip);
+    }
+
+    private boolean isPluggedIn() {
+        final Intent batteryIntent = getContext().registerReceiver(null /* receiver */,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return batteryIntent != null && batteryIntent.getIntExtra(
+                BatteryManager.EXTRA_PLUGGED, 0) != 0;
     }
 
 }
