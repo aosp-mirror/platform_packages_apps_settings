@@ -46,4 +46,9 @@ public abstract class FaceSettingsPreferenceController extends TogglePreferenceC
         return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                 mContext, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId);
     }
+
+    @Override
+    public final boolean isSliceable() {
+        return false;
+    }
 }
