@@ -288,7 +288,7 @@ public class MobileNetworkUtils {
         final ContentResolver cr = context.getContentResolver();
         final boolean esimIgnoredDevice =
                 Arrays.asList(TextUtils.split(SystemProperties.get(KEY_ESIM_CID_IGNORE, ""), ","))
-                        .contains(SystemProperties.get(KEY_CID, null));
+                        .contains(SystemProperties.get(KEY_CID));
         final boolean enabledEsimUiByDefault =
                 SystemProperties.getBoolean(KEY_ENABLE_ESIM_UI_BY_DEFAULT, true);
         final boolean euiccProvisioned =
