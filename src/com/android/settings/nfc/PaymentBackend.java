@@ -28,6 +28,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 
@@ -141,21 +142,21 @@ public class PaymentBackend {
 
     boolean isForegroundMode() {
         try {
-            return Settings.Secure.getInt(mContext.getContentResolver(),
-                    Settings.Secure.NFC_PAYMENT_FOREGROUND) != 0;
+            return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.NFC_PAYMENT_FOREGROUND, UserHandle.myUserId()) != 0;
         } catch (SettingNotFoundException e) {
             return false;
         }
     }
 
     void setForegroundMode(boolean foreground) {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.NFC_PAYMENT_FOREGROUND, foreground ? 1 : 0);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NFC_PAYMENT_FOREGROUND, foreground ? 1 : 0, UserHandle.myUserId());
     }
 
     ComponentName getDefaultPaymentApp() {
-        String componentString = Settings.Secure.getString(mContext.getContentResolver(),
-                Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT);
+        String componentString = Settings.Secure.getStringForUser(mContext.getContentResolver(),
+                Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT, UserHandle.myUserId());
         if (componentString != null) {
             return ComponentName.unflattenFromString(componentString);
         } else {
@@ -164,9 +165,9 @@ public class PaymentBackend {
     }
 
     public void setDefaultPaymentApp(ComponentName app) {
-        Settings.Secure.putString(mContext.getContentResolver(),
+        Settings.Secure.putStringForUser(mContext.getContentResolver(),
                 Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT,
-                app != null ? app.flattenToString() : null);
+                app != null ? app.flattenToString() : null, UserHandle.myUserId());
         refresh();
     }
 
