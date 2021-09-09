@@ -20,7 +20,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.android.internal.view.RotationPolicy;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 
 /**
  * component for the display settings auto rotate toggle

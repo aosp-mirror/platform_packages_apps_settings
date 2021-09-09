@@ -121,4 +121,9 @@ public class PowerUsageFeatureProviderImplTest {
 
         assertThat(mPowerFeatureProvider.isSmartBatterySupported()).isFalse();
     }
+
+    @Test
+    public void testGetResumeChargeIntent_returnNull() {
+        assertThat(mPowerFeatureProvider.getResumeChargeIntent()).isNull();
+    }
 }

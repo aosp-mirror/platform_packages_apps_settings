@@ -90,7 +90,6 @@ public class NotificationHistoryAdapter extends
                     .putExtra(EXTRA_APP_PACKAGE, hn.getPackage())
                     .putExtra(EXTRA_CHANNEL_ID, hn.getChannelId())
                     .putExtra(EXTRA_CONVERSATION_ID, hn.getConversationId());
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             holder.itemView.getContext().startActivityAsUser(intent, UserHandle.of(hn.getUserId()));
         };
         holder.itemView.setOnClickListener(onClick);
