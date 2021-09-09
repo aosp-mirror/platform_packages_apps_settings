@@ -148,6 +148,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public Intent getResumeChargeIntent() {
+        return null;
+    }
+
+    @Override
     public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context) {
         return null;
     }
