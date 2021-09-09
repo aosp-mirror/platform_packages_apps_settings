@@ -47,6 +47,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -440,8 +441,10 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     }
 
     private boolean shouldShowSummary(BatteryEntry entry) {
-        final CharSequence[] allowlistPackages = mContext.getResources()
-                .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
+        final CharSequence[] allowlistPackages =
+                FeatureFactory.getFactory(mContext)
+                        .getPowerUsageFeatureProvider(mContext)
+                        .getHideApplicationSummary(mContext);
         final String target = entry.getDefaultPackageName();
 
         for (CharSequence packageName : allowlistPackages) {
