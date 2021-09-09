@@ -32,6 +32,8 @@ import androidx.window.embedding.SplitPlaceholderRule;
 
 import com.android.settings.Settings;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
+import com.android.settings.homepage.SettingsHomepageActivity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -60,14 +62,39 @@ public class ActivityEmbeddingRulesController {
         mSplitController.clearRegisteredRules();
 
         // Set a placeholder for home page.
-        mSplitController.registerRule(getHomepagePlaceholderRule());
+        registerHomepagePlaceholderRule();
         // Set subsettings rule.
-        mSplitController.registerRule(getSubSettingsPairRule());
+        registerTwoPanePairRule(mContext,
+                getComponentName(Settings.class),
+                getComponentName(SubSettings.class),
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */);
     }
 
-    private SplitPlaceholderRule getHomepagePlaceholderRule() {
+    /** Register a SplitPairRule for 2-pane. */
+    public static void registerTwoPanePairRule(Context context,
+            ComponentName primary, ComponentName secondary,
+            boolean finishPrimaryWithSecondary, boolean finishSecondaryWithPrimary) {
+        final Set<SplitPairFilter> filters = new HashSet<>();
+        filters.add(new SplitPairFilter(primary, secondary,
+                null /* secondaryActivityIntentAction */,
+                null /* secondaryActivityIntentCategory */));
+
+        new SplitController(context).registerRule(new SplitPairRule(filters,
+                finishPrimaryWithSecondary,
+                finishSecondaryWithPrimary, true /* clearTop */,
+                ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(context),
+                ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(context),
+                ActivityEmbeddingUtils.SPLIT_RATIO,
+                LayoutDirection.LOCALE));
+    }
+
+    private void registerHomepagePlaceholderRule() {
         final Set<ActivityFilter> activityFilters = new HashSet<>();
+        activityFilters.add(new ActivityFilter(getComponentName(SettingsHomepageActivity.class)));
         activityFilters.add(new ActivityFilter(getComponentName(Settings.class)));
+        activityFilters.add(new ActivityFilter(new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
+                SettingsHomepageActivity.ALIAS_DEEP_LINK)));
         final Intent intent = new Intent();
         intent.setComponent(getComponentName(Settings.NetworkDashboardActivity.class));
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
@@ -78,27 +105,7 @@ public class ActivityEmbeddingRulesController {
                 ActivityEmbeddingUtils.SPLIT_RATIO,
                 LayoutDirection.LOCALE);
 
-        return placeholderRule;
-    }
-
-    private SplitPairRule getSubSettingsPairRule() {
-        final Set<SplitPairFilter> pairFilters = new HashSet<>();
-        pairFilters.add(new SplitPairFilter(
-                getComponentName(Settings.class),
-                getComponentName(SubSettings.class),
-                null /* secondaryActivityIntentAction */,
-                null /* secondaryActivityIntentCategory */));
-        final SplitPairRule rule = new SplitPairRule(
-                pairFilters,
-                true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */,
-                true /* clearTop */,
-                ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(mContext),
-                ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(mContext),
-                ActivityEmbeddingUtils.SPLIT_RATIO,
-                LayoutDirection.LOCALE);
-
-        return rule;
+        mSplitController.registerRule(placeholderRule);
     }
 
     @NonNull
