@@ -113,7 +113,7 @@ public class BatteryDiffEntry {
     /** Gets the app icon {@link Drawable} for this entry. */
     public Drawable getAppIcon() {
         loadLabelAndIcon();
-        return mAppIcon;
+        return mAppIcon.getConstantState().newDrawable();
     }
 
     /** Gets the app icon id for this entry. */
@@ -348,8 +348,8 @@ public class BatteryDiffEntry {
 
     private Drawable getBadgeIconForUser(Drawable icon) {
         final int userId = UserHandle.getUserId((int) mBatteryHistEntry.mUid);
-        final UserHandle userHandle = new UserHandle(userId);
-        return mUserManager.getBadgedIconForUser(icon, userHandle);
+        return userId == UserHandle.USER_OWNER ? icon :
+            mUserManager.getBadgedIconForUser(icon, new UserHandle(userId));
     }
 
     private static boolean isSystemUid(int uid) {
