@@ -58,6 +58,8 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -240,7 +242,22 @@ public class SettingsActivity extends SettingsBaseActivity
         // Should happen before any call to getIntent()
         getMetaData();
 
+        // If it's a deep link intent, start the Activity from SettingsHomepageActivity for 2-pane.
         final Intent intent = getIntent();
+        final boolean isFromSettingsHomepage = intent.getBooleanExtra(
+                SettingsHomepageActivity.EXTRA_IS_FROM_SETTINGS_HOMEPAGE, /* defaultValue */ false);
+        if (ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) && !isFromSettingsHomepage
+                && isOnlyOneActivityInActivityStack()) {
+            final Intent trampolineIntent =
+                    new Intent(android.provider.Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK);
+            trampolineIntent.putExtra(
+                    android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI,
+                    intent.toUri(Intent.URI_INTENT_SCHEME));
+            startActivity(trampolineIntent);
+            finish();
+            return;
+        }
+
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
@@ -345,6 +362,12 @@ public class SettingsActivity extends SettingsBaseActivity
         if (DEBUG_TIMING) {
             Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
+    }
+
+    private boolean isOnlyOneActivityInActivityStack() {
+        final ActivityManager activityManager = getSystemService(ActivityManager.class);
+        List<ActivityManager.RunningTaskInfo> taskList = activityManager.getRunningTasks(2);
+        return taskList.get(0).numActivities == 1;
     }
 
     /** Returns the initial fragment name that the activity will launch. */
