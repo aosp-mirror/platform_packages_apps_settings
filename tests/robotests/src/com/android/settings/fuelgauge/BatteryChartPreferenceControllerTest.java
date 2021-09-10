@@ -103,7 +103,8 @@ public final class BatteryChartPreferenceControllerTest {
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         doReturn(resources).when(mContext).getResources();
         doReturn(new String[] {"com.android.googlequicksearchbox"})
-            .when(resources).getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
+            .when(mFeatureFactory.powerUsageFeatureProvider)
+            .getHideApplicationSummary(mContext);
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
