@@ -29,7 +29,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 public class BatteryDefenderTip extends BatteryTip {
 
     public BatteryDefenderTip(@StateType int state) {
-        super(TipType.BATTERY_DEFENDER, state, false /* showDialog */);
+        super(TipType.BATTERY_DEFENDER, state, true /* showDialog */);
     }
 
     private BatteryDefenderTip(Parcel in) {

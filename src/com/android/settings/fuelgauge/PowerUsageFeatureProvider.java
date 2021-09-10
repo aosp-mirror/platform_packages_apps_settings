@@ -139,6 +139,11 @@ public interface PowerUsageFeatureProvider {
     boolean isChartGraphSlotsEnabled(Context context);
 
     /**
+     * Gets a intent for one time bypass charge limited to resume charging.
+     */
+    Intent getResumeChargeIntent();
+
+    /**
      * Returns battery history data with corresponding timestamp key.
      */
     Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
