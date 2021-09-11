@@ -113,7 +113,9 @@ public class BatteryDiffEntry {
     /** Gets the app icon {@link Drawable} for this entry. */
     public Drawable getAppIcon() {
         loadLabelAndIcon();
-        return mAppIcon.getConstantState().newDrawable();
+        return mAppIcon != null && mAppIcon.getConstantState() != null
+                ? mAppIcon.getConstantState().newDrawable()
+                : null;
     }
 
     /** Gets the app icon id for this entry. */
