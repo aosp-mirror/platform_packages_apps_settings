@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"మరోసారి"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"వేలిముద్ర చిహ్నన్ని ట్యాప్ చేయండి"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"మీ వేలిముద్ర యొక్క వివిధ భాగాలను జోడించడం కోసం మీ వేలిని అనేకసార్లు పైకి ఎత్తండి"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"వేలిముద్ర చిహ్నం కదిలిన ప్రతిసారీ తాకి &amp; నొక్కి ఉంచండి. ఇది మీ పూర్తి వేలిముద్రను క్యాప్చర్ చేయడానికి సహాయపడుతుంది."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"ఇది మీ పూర్తి వేలిముద్రను క్యాప్చర్ చేయడానికి సహాయపడుతుంది"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"వేలిముద్ర చిహ్నం కదిలిన ప్రతిసారీ తాకి &amp; నొక్కి ఉంచండి. మీ వేలిముద్రను స్పష్టంగా క్యాప్చర్ చేయడానికి ఇది సహాయపడుతుంది."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"మీ వేలి కొనను సెన్సార్ మీద ఉంచండి"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"చివరగా, మీ వేలు అంచులను ఉంచండి"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"సెన్సార్‌పై మీ వేలిముద్రలో కొంత భాగాన్ని ఒక వైపునకు నొక్కి ఉంచి, ఆపై మరొక వైపునకు మార్చండి"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"మీ వేలిముద్రను స్పష్టంగా క్యాప్చర్ చేయడానికి ఇది సహాయపడుతుంది"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"వేలిముద్ర <xliff:g id="PERCENTAGE">%d</xliff:g> శాతం ఎన్‌రోల్ అవుతోంది"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"వేలిముద్ర జోడించబడింది"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"ఇప్పుడు మీరు మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మీ వేలిముద్రను ఉపయోగించవచ్చు లేదా మీరు యాప్‌నకు సైన్ ఇన్ చేసినప్పుడు ఇది మీరేనని వెరిఫై చేయవచ్చు"</string>
@@ -2257,7 +2260,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"గాడ్జెట్‌ను ఎంచుకోండి"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"విడ్జెట్‌ను ఎంచుకోండి"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"విడ్జెట్‌ను సృష్టించి యాక్సెస్‌ను అనుమతించాలా?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"మీరు విడ్జెట్‌ను సృష్టించిన తర్వాత, ఇది ప్రదర్శించే మొత్తం డేటాను <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> యాక్సెస్ చేయవచ్చు."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"మీరు విడ్జెట్‌ను క్రియేట్ చేసిన తర్వాత, డిస్‌ప్లే పైన కనిపించే ప్రతి దాన్ని ఆ యాప్ యాక్సెస్ చేయగలదు.\n\nయాప్: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nవిడ్జెట్: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"విడ్జెట్‌లను సృష్టించి, వాటి డేటాను యాక్సెస్ చేయడానికి <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>ని ఎల్లప్పుడూ అనుమతించండి"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"వినియోగ గణాంకాలు"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"వినియోగ గణాంకాలు"</string>
@@ -2687,6 +2690,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"చాలా ఎక్కువగా బ్యాటరీని వినియోగించే యాప్‌లను చూడండి"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"ఛార్జింగ్ తాత్కాలికంగా పరిమితం చేయబడింది"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"మీ బ్యాటరీని కాపాడటానికి. మరింత తెలుసుకోండి."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"ఛార్జింగ్‌ను కొనసాగించండి"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"అధిక ఉష్ణోగ్రతలు, దీర్ఘకాలిక ఛార్జింగ్ వంటి కొన్ని సందర్భాలలో, బ్యాటరీ స్థితిని కాపాడటానికి ఛార్జింగ్ <xliff:g id="PERCENT">%1$s</xliff:g>కు పరిమితం చేయబడవచ్చు.\n\nఆ పరిస్థితులు మారినప్పుడు, మీ ఫోన్ ఆటోమేటిక్‌గా సాధారణంగా ఛార్జ్ అవుతుంది."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"అధిక ఉష్ణోగ్రతలు, దీర్ఘకాలిక ఛార్జింగ్ వంటి కొన్ని సందర్భాలలో, బ్యాటరీ స్థితిని కాపాడటానికి ఛార్జింగ్ <xliff:g id="PERCENT">%1$s</xliff:g>కు పరిమితం చేయబడవచ్చు.\n\nఆ పరిస్థితులు మారినప్పుడు, మీ టాబ్లెట్ ఆటోమేటిక్‌గా సాధారణంగా ఛార్జ్ అవుతుంది."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"మీరు మీ ఫోన్‌ను సాధారణం కంటే ఎక్కువగా ఉపయోగించారు కాబట్టి, సాధారణంగా ఖాళీ అయ్యే సమయం కంటే త్వరగా మీ బ్యాటరీ ఖాళీ అవ్వొచ్చు.\n\nబ్యాటరీని ఎక్కువగా ఉపయోగిస్తున్న యాప్‌లు:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"మీరు మీ టాబ్లెట్‌ను సాధారణం కంటే ఎక్కువగా ఉపయోగించారు కాబట్టి, సాధారణంగా ఖాళీ అయ్యే సమయం కంటే త్వరగా మీ బ్యాటరీ ఖాళీ అవ్వొచ్చు.\n\nబ్యాటరీని ఎక్కువగా ఉపయోగిస్తున్న యాప్‌లు:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"మీరు మీ పరికరాన్ని సాధారణం కంటే ఎక్కువగా ఉపయోగించారు కాబట్టి, సాధారణంగా ఖాళీ అయ్యే సమయం కంటే త్వరగా మీ బ్యాటరీ ఖాళీ అవ్వొచ్చు.\n\nబ్యాటరీని ఎక్కువగా ఉపయోగిస్తున్న యాప్‌లు:"</string>
@@ -3090,7 +3096,7 @@
     <string name="sync_gmail" msgid="228561698646018808">"Gmail"</string>
     <string name="sync_calendar" msgid="4603704438090387251">"Calendar"</string>
     <string name="sync_contacts" msgid="2376465611511325472">"కాంటాక్ట్‌లు"</string>
-    <string name="sync_plug" msgid="7956982719077985381"><font fgcolor="#ffffffff">"Google సింక్‌కు స్వాగతం!"</font>" \nమీరు ఎక్కడ ఉన్నా సరే మీకాంటాక్ట్‌లు, నియామకాలు మరియు మరిన్నింటికి యాక్సెస్‌ను అనుమతించడం కోసం డేటాను సమకాలీకరించడానికి Google అవలంబించే విధానం."</string>
+    <string name="sync_plug" msgid="7956982719077985381"><font fgcolor="#ffffffff">"Google సింక్‌కు స్వాగతం!"</font>" \nమీరు ఎక్కడ ఉన్నా సరే మీకాంటాక్ట్‌లు, నియామకాలు మరియు మరిన్నింటికి యాక్సెస్‌ను అనుమతించడం కోసం డేటాను సింక్ చేయడానికి Google అవలంబించే విధానం."</string>
     <string name="header_application_sync_settings" msgid="7427706834875419243">"యాప్‌ సింక్‌ సెట్టింగ్‌లు"</string>
     <string name="header_data_and_synchronization" msgid="453920312552838939">"డేటా &amp; సింక్‌"</string>
     <string name="preference_change_password_title" msgid="5465821666939825972">"పాస్‌వర్డ్‌ని మార్చండి"</string>
@@ -3390,7 +3396,7 @@
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"ఆటోమేటిక్ పేమెంట్ యాప్‌ను అప్‌డేట్ చేయండి"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"స్పర్శరహిత టెర్మినల్ వద్ద, <xliff:g id="APP">%1$s</xliff:g> ద్వారా పేమెంట్ చేయండి"</string>
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"స్పర్శరహిత టెర్మినల్ వద్ద, <xliff:g id="APP_0">%1$s</xliff:g>ద్వారా పేమెంట్ చేయండి. \n\n ఇది మీ ఆటోమేటిక్ పేమెంట్ యాప్‌గా <xliff:g id="APP_1">%2$s</xliff:g>ను రీప్లేస్ చేస్తుంది."</string>
-    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"డిఫాల్ట్‌గా సెట్ చేయండి"</string>
+    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"ఆటోమేటిక్ ఆప్షన్‌గా సెట్ చేయండి"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"అప్‌డేట్ చేయండి"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"పరిమితులు"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"పరిమితులను తీసివేయి"</string>
@@ -3417,8 +3423,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"అధునాతన కాలింగ్"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G కాలింగ్"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"వాయిస్, ఇతర కమ్యూనికేషన్‌లను మెరుగుపరచడానికి LTE సేవలను ఉపయోగించు (సిఫార్సు చేయబడింది)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"వాయిస్, ఇతర కమ్యూనికేషన్‌లను మెరుగుపరచడానికి 4G సేవలను ఉపయోగించండి (సిఫార్సు చేయబడింది)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"వాయిస్ కాల్స్‌ను మెరుగుపరచడానికి LTE సర్వీస్‌లను ఉపయోగించండి (సిఫార్సు చేయడమైనది)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"వాయిస్ కాల్స్‌ను మెరుగుపరచడానికి 4G సర్వీస్‌లను ఉపయోగించండి (సిఫార్సు చేయడమైనది)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"వాయిస్ కాల్స్ కోసం 5Gని ఉపయోగించండి"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"కాంటాక్ట్‌లను క్యారియర్‌కు పంపండి"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"మెరుగైన ఫీచర్‌లను అందించడానికి మీ కాంటాక్ట్‌ల ఫోన్ నంబర్‌లను పంపండి"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"కాంటాక్ట్‌లను <xliff:g id="CARRIER">%1$s</xliff:g>కు పంపమంటారా?"</string>
@@ -3612,6 +3620,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"బ్యాటరీ సేవర్, అనుబంధితం, స్థిరం, పవర్ సేవర్, బ్యాటరీ"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"సాధారణ సమయం, షెడ్యూల్, బ్యాటరీ సేవర్, పవర్ సేవర్, బ్యాటరీ, ఆటోమేటిక్, శాతం"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, అధునాతన కాలింగ్, 4g కాలింగ్"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, అధునాతన కాలింగ్, 5g కాలింగ్"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"భాషను జోడించు, ఒక భాషను జోడించు"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"టెక్స్ట్ సైజ్, పెద్ద ప్రింట్, పెద్ద ఫాంట్, పెద్ద టెక్స్ట్, తక్కువ విజన్, టెక్స్ట్‌ను పెద్దగా చేయి, ఫాంట్ పెద్దగా చేసేది, పెద్ద ఫాంట్"</string>
     <string name="default_sound" msgid="6604374495015245195">"ఆటోమేటిక్ సౌండ్"</string>
@@ -3746,7 +3755,7 @@
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"సెట్టింగ్‌లు"</string>
     <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"నోటిఫికేషన్‌లు కనిపించవు, వినిపించవు"</string>
     <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"నోటిఫికేషన్‌ల సౌండ్ రాదు"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"మీరు నోటిఫికేషన్‌లను చూడలేరు లేదా వినలేరు. నక్షత్రం గుర్తు ఉన్న కాంటాక్ట్‌ల మరియు రిపీట్ కాలర్‌‌ల నుండి కాల్స్‌ అనుమతించబడతాయి."</string>
+    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"మీరు నోటిఫికేషన్‌లను చూడలేరు లేదా వినలేరు. స్టార్ గుర్తు ఉన్న కాంటాక్ట్‌ల మరియు రిపీట్ కాలర్‌‌ల నుండి కాల్స్‌ అనుమతించబడతాయి."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(ప్రస్తుత సెట్టింగ్)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"అంతరాయం కలిగించవద్దు నోటిఫికేషన్‌ సెట్టింగ్‌లను మార్చాలా?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"ఆఫీస్‌ ప్రొఫైల్ సౌండ్స్"</string>
@@ -3940,7 +3949,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్ అనుమతించాలా?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12లో Android అనుకూల నోటిఫికేషన్‌లను, మెరుగైన నోటిఫికేషన్‌లు భర్తీ చేశాయి. సూచించిన చర్యలు, రిప్లయిలను ఈ ఫీచర్ చూపించి, మీ నోటిఫికేషన్‌లను ఆర్గనైజ్ చేస్తుంది. \n\nకాంటాక్ట్ పేర్లు, మెసేజ్‌లు లాంటి వ్యక్తిగత సమాచారంతో సహా నోటిఫికేషన్ కంటెంట్‌ను మెరుగైన నోటిఫికేషన్‌లు యాక్సెస్ చేయవచ్చు. ఫోన్ కాల్స్‌కు సమాధానమివ్వడం, \'అంతరాయం కలిగించవద్దు\' ఆప్షన్‌ను కంట్రోల్ చేయడం లాంటి నోటిఫికేషన్‌లను విస్మరించడం లేదా ప్రతిస్పందించడం కూడా ఈ ఫీచర్ చేయగలదు."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్‌ను అనుమతించాలా?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> కాంటాక్ట్ పేర్లు అలాగే మీరు స్వీకరించిన మెసేజ్‌ల వంటి వ్యక్తిగత సమాచారంతో సహా అన్ని నోటిఫికేషన్‌లను చదవగలదు. ఈ యాప్ నోటిఫికేషన్‌లను విస్మరించగలదు, అలాగే ఫోన్ కాల్స్‌కు సమాధానం ఇవ్వడంతో సహా నోటిఫికేషన్‌లలోని బటన్‌లపై చర్యలు తీసుకోగలదు. \n\nదీని వలన, \'అంతరాయం కలిగించవద్దు\' ఎంపికను ఆన్ చేయగల లేదా ఆఫ్ చేయగలిగే సామర్థ్యం ఈ యాప్‌నకు వస్తుంది, సంబంధిత సెట్టింగ్‌లు కూడా మారతాయి."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, కాంటాక్ట్ పేర్లు అలాగే మీరు అందుకున్న మెసేజ్‌ల వంటి వ్యక్తిగత సమాచారంతో సహా అన్ని నోటిఫికేషన్‌లను చదవగలదు. ఈ యాప్ నోటిఫికేషన్‌లను తాత్కాలికంగా వాయిదా వేయగలదు విస్మరించగలదు, అలాగే ఫోన్ కాల్స్‌కు సమాధానం ఇవ్వడంతో సహా నోటిఫికేషన్‌లలోని బటన్‌లపై చర్యలను తీసుకోగలదు. \n\nదీని వలన, \'అంతరాయం కలిగించవద్దు\' ఎంపికను ఆన్ చేయగల లేదా ఆఫ్ చేయగలిగే సామర్థ్యం ఈ యాప్‌నకు వస్తుంది, సంబంధిత సెట్టింగ్‌లు కూడా మారతాయి."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"మీరు <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్‌ను ఆఫ్ చేస్తే, అంతరాయం కలిగించవద్దు ఎంపిక యాక్సెస్ కూడా ఆఫ్ చేయబడవచ్చు."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ఆఫ్ చేయండి"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"రద్దు చేయి"</string>
@@ -4100,7 +4109,7 @@
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"అంతరాయం కలిగించగల కాల్స్‌"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"అనుమతించిన కాల్స్‌ వచ్చినప్పుడు శబ్దం వస్తుందని నిర్ధారించుకోవడానికి, పరికరం రింగ్ మోడ్‌లో ఉందో లేదో చెక్ చేయండి"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ సంబంధిత‌ ఇన్‌కమింగ్ కాల్స్‌ బ్లాక్ చేయబడ్డాయి. మీ ఫ్రెండ్స్, ఫ్యామిలీ మెంబెర్స్ లేదా ఇతర కాంటాక్ట్‌లు మిమ్మల్ని సంప్రదించగలిగేలా మీరు సెట్టింగ్‌లను సర్దుబాటు చేయవచ్చు."</string>
-    <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"నక్షత్రం గుర్తు ఉన్న కాంటాక్ట్‌లు"</string>
+    <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"స్టార్ గుర్తు ఉన్న కాంటాక్ట్‌లు"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{ఏవీ లేవు}=1{{contact_1}}=2{{contact_1}, {contact_2}}=3{{contact_1}, {contact_2}, {contact_3}}other{{contact_1}, {contact_2}, # మంది ఇతరులు}}"</string>
     <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(పేరు లేదు)"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"మెసేజ్‌లు"</string>
@@ -4115,7 +4124,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"ఎవరైనా"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"కాంటాక్ట్‌లు"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"స్టార్ గుర్తు ఉన్న కాంటాక్ట్‌లు"</string>
-    <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"నక్షత్రం గుర్తు ఉన్న కాంటాక్ట్‌లు అలాగే రిపీట్ కాలర్‌ల నుండి"</string>
+    <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"స్టార్ గుర్తు ఉన్న కాంటాక్ట్‌లు అలాగే రిపీట్ కాలర్‌ల నుండి"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"కాంటాక్ట్‌లు అలాగే రిపీట్ కాలర్‌ల నుండి"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"రిపీట్ కాలర్‌ల నుండి మాత్రమే"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"ఏవీ లేవు"</string>
@@ -4164,7 +4173,7 @@
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"పునరావృత కాలర్‌లను అనుమతించు"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"ఎవరైనా"</string>
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"కాంటాక్ట్‌లు"</string>
-    <string name="zen_mode_starred_callers" msgid="1002370699564211178">"నక్షత్రం గుర్తు ఉన్న కాంటాక్ట్‌లు"</string>
+    <string name="zen_mode_starred_callers" msgid="1002370699564211178">"స్టార్ గుర్తు ఉన్న కాంటాక్ట్‌లు"</string>
     <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"పునరావృత కాలర్‌లు"</string>
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
@@ -4419,8 +4428,8 @@
     <string name="additional_permissions_more" msgid="8188145515437525307">"మరో <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="share_remote_bugreport_dialog_title" msgid="1575283098565582433">"బగ్ రిపోర్ట్‌ను షేర్ చేయాలా?"</string>
     <string name="share_remote_bugreport_dialog_message_finished" msgid="4869053468609007680">"మీ ఐటి అడ్మిన్ ఈ పరికరం సమస్యకు పరిష్కారాన్ని కనుగొనడంలో సహాయం కోసం బగ్ రిపోర్ట్‌ను రిక్వెస్ట్ చేశారు. యాప్‌లు మరియు డేటా షేర్ చేయబడవచ్చు."</string>
-    <string name="share_remote_bugreport_dialog_message" msgid="8714439220818865391">"మీ ఐటి అడ్మిన్ ఈ పరికరం సమస్యకు పరిష్కారాన్ని కనుగొనడంలో సహాయం కోసం బగ్ రిపోర్ట్‌ను రిక్వెస్ట్ చేశారు. యాప్‌లు మరియు డేటా షేర్ చేయబడవచ్చు మరియు మీ పరికరం పనితీరు తాత్కాలికంగా నెమ్మదించవచ్చు."</string>
-    <string name="sharing_remote_bugreport_dialog_message" msgid="3523877008096439251">"ఈ బగ్ రిపోర్ట్‌ మీ ఐటి అడ్మిన్‌తో షేర్ చేయబడుతోంది. మరిన్ని వివరాల కోసం వారిని సంప్రదించండి."</string>
+    <string name="share_remote_bugreport_dialog_message" msgid="8714439220818865391">"మీ IT అడ్మిన్ ఈ పరికరం సమస్యకు పరిష్కారాన్ని కనుగొనడంలో సహాయం కోసం బగ్ రిపోర్ట్‌ను రిక్వెస్ట్ చేశారు. యాప్‌లు మరియు డేటా షేర్ చేయబడవచ్చు మరియు మీ పరికరం పనితీరు తాత్కాలికంగా నెమ్మదించవచ్చు."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="3523877008096439251">"ఈ బగ్ రిపోర్ట్‌ మీ IT అడ్మిన్‌తో షేర్ చేయబడుతోంది. మరిన్ని వివరాల కోసం వారిని సంప్రదించండి."</string>
     <string name="share_remote_bugreport_action" msgid="7173093464692893276">"షేర్ చేయి"</string>
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"తిరస్కరిస్తున్నాను"</string>
     <string name="usb_use_charging_only" msgid="1743303747327057947">"డేటా బదిలీ లేదు"</string>
@@ -4707,7 +4716,7 @@
     <string name="unrestricted_app_title" msgid="7117585996574329284">"అనియంత్రిత డేటా వినియోగం"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"డేటా సేవర్‌లో అనియంత్రిత డేటా"</string>
     <string name="home_app" msgid="6056850504746902747">"మొదటి స్క్రీన్ యాప్"</string>
-    <string name="no_default_home" msgid="3588073707316139318">"డిఫాల్ట్ హోమ్ లేదు"</string>
+    <string name="no_default_home" msgid="3588073707316139318">"మొదటి స్క్రీన్ కోసం ఆటోమేటిక్ సెట్టింగ్ ఏదీ లేదు"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="4098653943835666086">"సురక్షిత ప్రారంభం"</string>
     <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="311325321794497404">"మీ డివైజ్‌ను ప్రారంభించడానికి ఆకృతి అవసరం. ఆఫ్‌లో ఉన్నప్పుడు, ఈ డివైజ్ కాల్స్‌, మెసేజ్‌లు, నోటిఫికేషన్‌లు లేదా అలారాలను స్వీకరించలేదు."</string>
     <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="1881271630312222251">"మీ డివైజ్‌ను ప్రారంభించడానికి పిన్ అవసరం. ఆఫ్‌లో ఉన్నప్పుడు, ఈ డివైజ్ కాల్స్‌, మెసేజ్‌లు, నోటిఫికేషన్‌లు లేదా అలారాలను స్వీకరించలేదు."</string>
@@ -4841,8 +4850,8 @@
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-బటన్ నావిగేషన్‌"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"మీ స్క్రీన్ దిగువన ఉన్న బటన్‌లతో వెనుకకు వెళ్ళండి, హోమ్ స్క్రీన్‌కు వెళ్ళండి అలాగే యాప్‌ల మధ్యన మారండి."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"సిస్టమ్ నావిగేషన్‌, 2 బటన్ నావిగేషన్‌, 3 బటన్ నావిగేషన్‌, సంజ్ఞ నావిగేషన్, స్వైప్"</string>
-    <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"మీ డిఫాల్ట్ హోమ్ యాప్ ద్వారా మద్దతు లేదు, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
-    <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"డిఫాల్ట్ హోమ్ యాప్‌ని మార్చండి"</string>
+    <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"ఆటోమేటిక్ ఆప్షన్‌గా మీరు సెట్ చేసిన మొదటి స్క్రీన్ యాప్ <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> దీనిని సపోర్ట్ చేయదు"</string>
+    <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"మొదటి స్క్రీన్ కోసం ఆటోమేటిక్‌గా సెట్ చేసిన యాప్‌ను మార్చండి"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"డిజిటల్ అసిస్టెంట్"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"అసిస్టెంట్‌ను అమలు చేయడానికి స్వైప్ చేయండి"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"డిజిటల్ అసిస్టెంట్ యాప్‌ను అమలు చేయడానికి దిగువున మూల నుండి పైకి స్వైప్ చేయండి."</string>
