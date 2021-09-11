@@ -105,6 +105,9 @@ public final class BatteryChartPreferenceControllerTest {
         doReturn(new String[] {"com.android.googlequicksearchbox"})
             .when(mFeatureFactory.powerUsageFeatureProvider)
             .getHideApplicationSummary(mContext);
+        doReturn(new String[] {"com.android.gms.persistent"})
+            .when(mFeatureFactory.powerUsageFeatureProvider)
+            .getHideApplicationEntries(mContext);
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
@@ -661,7 +664,7 @@ public final class BatteryChartPreferenceControllerTest {
 
         // Verifies the items which are defined in the array list.
         assertThat(mBatteryChartPreferenceController
-                .isValidToShowEntry("com.google.android.gms.persistent"))
+                .isValidToShowEntry("com.android.gms.persistent"))
             .isFalse();
     }
 
