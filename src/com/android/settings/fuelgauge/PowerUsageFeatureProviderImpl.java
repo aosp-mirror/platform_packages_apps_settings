@@ -190,4 +190,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public CharSequence[] getHideApplicationEntries(Context context) {
         return new CharSequence[0];
     }
+
+    @Override
+    public CharSequence[] getHideApplicationSummary(Context context) {
+        return new CharSequence[0];
+    }
 }
