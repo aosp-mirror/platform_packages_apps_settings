@@ -77,9 +77,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
             mPhoneStateListener = new PhoneCallStateListener();
         }
 
-        if (mSubId == subId) {
-            return this;
-        }
         mSubId = subId;
         final PersistableBundle carrierConfig = getCarrierConfigForSubId(subId);
         if (carrierConfig == null) {
@@ -130,7 +127,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public void onStart() {
-        if (!isModeMatched() || (mPhoneStateListener == null)) {
+        if (mPhoneStateListener == null) {
             return;
         }
         mPhoneStateListener.register(mContext, mSubId);

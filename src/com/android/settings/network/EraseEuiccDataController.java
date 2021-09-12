@@ -17,6 +17,7 @@
 package com.android.settings.network;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
@@ -50,6 +51,8 @@ public class EraseEuiccDataController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_TELEPHONY_EUICC) ? AVAILABLE_UNSEARCHABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 }
