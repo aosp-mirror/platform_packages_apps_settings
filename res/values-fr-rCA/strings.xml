@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Rapetisser"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Utiliser la rotation automatique"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La technologie de détection du visage utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images sont jamais stockées ni envoyées à Google."</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La technologie de détection des visages utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images sont jamais stockées ni envoyées à Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemple de texte"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Le Magicien d\'Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chapitre 11 : La merveilleuse cité d\'émeraude d\'Oz"</string>
@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Encore une fois."</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Suivez l\'icône d\'empreinte digitale"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Déplacez légèrement votre doigt lorsque vous le relevez pour ajouter toutes les parties de votre empreinte digitale."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Maintenez le doigt sur le capteur chaque fois que l\'icône de l\'empreinte digitale bouge. Cette action permet de capturer l\'intégralité de votre empreinte digitale."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Cette action permet de capturer l\'intégralité de votre empreinte digitale"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Maintenez le doigt sur le capteur chaque fois que l\'icône de l\'empreinte digitale bouge. Cela aide à capter une plus grande partie de votre empreinte digitale."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Placer le bout de votre doigt sur le capteur"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Finalement, placer les bords de votre doigt"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Placez le côté de votre doigt sur le capteur et maintenez-le en place, puis passez à l\'autre côté"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Ce geste aide à capter une plus grande partie de votre empreinte digitale"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Inscription de l\'empreinte digitale : <xliff:g id="PERCENTAGE">%d</xliff:g> pour cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Empreinte digitale ajoutée"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Vous pouvez maintenant utiliser votre empreinte digitale pour déverrouiller votre téléphone ou vérifier qu\'il s\'agit bien de vous, par exemple pour vous connecter à des applications"</string>
@@ -612,7 +615,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Verrouillage de l\'écran"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisissez un verrouillage d\'écran"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisir un verrouillage d\'écran"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Choisissez nouv. verr. écran"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Choisir verrouillage pour applis pro"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Choisir nouveau verrouillage prof."</string>
@@ -1350,9 +1353,9 @@
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Activer la fonctionnalité d\'écran attentif"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Empêchez l\'écran de s\'éteindre pendant que vous le regardez"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"L\'appareil photo est verrouillé"</string>
-    <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"L\'appareil photo doit être déverrouillé pour utiliser la détection du visage"</string>
+    <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"L\'appareil photo doit être déverrouillé pour utiliser la détection des visages"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"L\'appareil photo doit être déverrouillé pour utiliser la fonctionnalité d\'écran attentif"</string>
-    <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"L\'accès à l\'appareil photo est nécessaire pour utiliser la détection du visage. Touchez pour gérer les services de personnalisation de l\'appareil"</string>
+    <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"L\'accès à l\'appareil photo est nécessaire pour utiliser la détection des visages. Touchez pour gérer les services de personnalisation de l\'appareil"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Gérer les autorisations"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Éclairage nocturne"</string>
     <string name="night_display_text" msgid="4789324042428095383">"Le mode Éclairage nocturne donne une teinte ambre à votre écran. Cela vous permet de le regarder plus facilement lorsque l\'éclairage est faible et peut vous aider à vous endormir plus facilement."</string>
