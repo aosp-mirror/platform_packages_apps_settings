@@ -47,7 +47,7 @@ public class ActivityEmbeddingRulesController {
 
     public ActivityEmbeddingRulesController(Context context) {
         mContext = context;
-        mSplitController = new SplitController(context);
+        mSplitController = SplitController.getInstance();
     }
 
     /**
@@ -77,10 +77,9 @@ public class ActivityEmbeddingRulesController {
             boolean finishPrimaryWithSecondary, boolean finishSecondaryWithPrimary) {
         final Set<SplitPairFilter> filters = new HashSet<>();
         filters.add(new SplitPairFilter(primary, secondary,
-                null /* secondaryActivityIntentAction */,
-                null /* secondaryActivityIntentCategory */));
+                null /* secondaryActivityIntentAction */));
 
-        new SplitController(context).registerRule(new SplitPairRule(filters,
+        SplitController.getInstance().registerRule(new SplitPairRule(filters,
                 finishPrimaryWithSecondary,
                 finishSecondaryWithPrimary, true /* clearTop */,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(context),
@@ -91,10 +90,12 @@ public class ActivityEmbeddingRulesController {
 
     private void registerHomepagePlaceholderRule() {
         final Set<ActivityFilter> activityFilters = new HashSet<>();
-        activityFilters.add(new ActivityFilter(getComponentName(SettingsHomepageActivity.class)));
-        activityFilters.add(new ActivityFilter(getComponentName(Settings.class)));
+        activityFilters.add(new ActivityFilter(getComponentName(SettingsHomepageActivity.class),
+                null /* intentAction */));
+        activityFilters.add(new ActivityFilter(getComponentName(Settings.class),
+                null /* intentAction */));
         activityFilters.add(new ActivityFilter(new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
-                SettingsHomepageActivity.ALIAS_DEEP_LINK)));
+                SettingsHomepageActivity.ALIAS_DEEP_LINK), null /* intentAction */));
         final Intent intent = new Intent();
         intent.setComponent(getComponentName(Settings.NetworkDashboardActivity.class));
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
