@@ -116,9 +116,11 @@ public class SecuritySettings extends DashboardFragment {
         controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
 
         final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
-        securityPreferenceControllers.add(new FaceStatusPreferenceController(context));
-        securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
-        securityPreferenceControllers.add(new CombinedBiometricStatusPreferenceController(context));
+        securityPreferenceControllers.add(new FaceStatusPreferenceController(context, lifecycle));
+        securityPreferenceControllers.add(new FingerprintStatusPreferenceController(
+                context, lifecycle));
+        securityPreferenceControllers.add(new CombinedBiometricStatusPreferenceController(
+                context, lifecycle));
         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
                 .setChildren(securityPreferenceControllers));
@@ -130,10 +132,12 @@ public class SecuritySettings extends DashboardFragment {
         profileSecurityControllers.add(new LockUnificationPreferenceController(context, host));
         profileSecurityControllers.add(new VisiblePatternProfilePreferenceController(
                 context, lifecycle));
-        profileSecurityControllers.add(new FaceProfileStatusPreferenceController(context));
-        profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(context));
+        profileSecurityControllers.add(new FaceProfileStatusPreferenceController(
+                context, lifecycle));
+        profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(
+                context, lifecycle));
         profileSecurityControllers
-                .add(new CombinedBiometricProfileStatusPreferenceController(context));
+                .add(new CombinedBiometricProfileStatusPreferenceController(context, lifecycle));
         controllers.add(new PreferenceCategoryController(context, WORK_PROFILE_SECURITY_CATEGORY)
                 .setChildren(profileSecurityControllers));
         controllers.addAll(profileSecurityControllers);

@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Եվս մեկ անգամ"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Հետևեք ձեր մատնահետքի պատկերակին"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Փոքր-ինչ տեղաշարժեք մատը՝ մատնահետքի տարբեր հատվածներ ավելացնելու համար"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Հպեք մատնահետքի պատկերակին և պահեք ամեն անգամ, երբ այն տեղաշարժվում է։ Սա կօգնի գրանցել ձեր ամբողջական մատնահետքը։"</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Սա կօգնի գրանցել ձեր ամբողջական մատնահետքը"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Հպեք մատնահետքի պատկերակին և պահեք ամեն անգամ, երբ այն տեղաշարժվում է։ Այդպես տվիչն ավելի մեծ մակերեսով կնկարի ձեր մատնահետքը։"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Մատի ծայրը դրեք տվիչի վրա"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Այժմ դրեք մատի եզրերը"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Մատի մի կողմը դրեք տվիչի վրա և պահեք, ապա նույնն արեք մյուս կողմով"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Այդպես տվիչն ավելի մեծ մակերեսով կնկարի ձեր մատնահետքը"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Մատնահետքը գրանցվել է <xliff:g id="PERCENTAGE">%d</xliff:g> տոկոսով"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Մատնահետքն ավելացվեց"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Այժմ կարող եք օգտագործել ձեր մատնահետքը՝ հեռախոսն ապակողպելու կամ հավելվածներում ձեր ինքնությունը հաստատելու համար (օր․՝ մուտք գործելիս)։"</string>
@@ -1602,8 +1605,8 @@
     <string name="storage_external_title" msgid="8984075540312137135">"Դյուրակիր հիշողություն"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"Օգտագործված է <xliff:g id="TOTAL">%1$s</xliff:g>-ից"</string>
-    <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> պահեստը միացվեց"</string>
-    <string name="storage_mount_failure" msgid="3667915814876418011">"Չհաջողվեց միացնել <xliff:g id="NAME">%1$s</xliff:g> պահեստը"</string>
+    <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> պահոցը միացվեց"</string>
+    <string name="storage_mount_failure" msgid="3667915814876418011">"Չհաջողվեց միացնել <xliff:g id="NAME">%1$s</xliff:g> պահոցը"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> կրիչն անվնաս անջատվեց"</string>
     <string name="storage_unmount_failure" msgid="3796912279003790607">"Չհաջողվեց անվնաս անջատել <xliff:g id="NAME">%1$s</xliff:g> կրիչը"</string>
     <string name="storage_format_success" msgid="3028114521294256851">"<xliff:g id="NAME">%1$s</xliff:g> կրիչի ձևաչափումը հաջողվեց"</string>
@@ -1613,7 +1616,7 @@
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Այս <xliff:g id="NAME_0">^1</xliff:g> վնասված է: \n\nԱյս <xliff:g id="NAME_1">^1</xliff:g> օգտագործելու համար անհրաժեշտ է նախ կարգավորել այն:"</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"Ձևաչափումից հետո այս <xliff:g id="NAME_0">^1</xliff:g>-ը կարող եք օգտագործել այլ սարքերում: \n\nԱյս <xliff:g id="NAME_1">^1</xliff:g>-ի վրայի բոլոր տվյալները կջնջվեն: Ուստի, չմոռանաք նախ պահուստավորել: \n\n"<b>"Պահուստավորեք լուսանկարներն ու այլ մեդիա ֆայլերը"</b>" \nՏեղափոխեք մեդիա ֆայլերը այս սարքի մեկ այլ պահեստ կամ որևէ համակարգիչ USB մալուխի միջոցով: \n\n"<b>"Պահուստավորեք հավելվածները"</b>" \nԱյս <xliff:g id="NAME_6">^1</xliff:g>-ի վրայի բոլոր հավելվածները ապատեղադրվելու են, իսկ նրանց տվյալները ջնջվելու են: Հավելվածները պահպանելու համար տեղափոխեք դրանք այս սարքի մեկ այլ պահեստ:"</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Եթե հանեք այս <xliff:g id="NAME_0">^1</xliff:g>-ը, նրա վրա պահեստավորված հավելվածներն այլևս չեն աշխատի, իսկ մեդիա ֆայլերը հասանելի չեն լինի մինչև նորից չզետեղեք այն:"</b>" \n\nԱյս <xliff:g id="NAME_1">^1</xliff:g>-ը ձևաչափված է միայն այս սարքի վրա աշխատելու համար: Այն չի աշխատի այլ սարքերի վրա:"</string>
-    <string name="storage_internal_forget_details" msgid="5606507270046186691">"Այս <xliff:g id="NAME">^1</xliff:g>-ում առկա հավելվածները, լուսանկարները կամ տվյալները օգտագործելու համար հանեք և նորից զետեղեք այն: \n\nԻնչպես նաև, կարող եք հեռացնել այս պահեստը, եթե սարքն անհասանելի է: \n\nԵթե նախընտրեք հեռացնել այն, սարքի վրայի բոլոր տվյալները մշտապես կկորչեն: \n\nԿարող եք հետագայում նորից տեղադրել հավելվածները, բայց այս սարքի վրա պահեստավորված նրանց տվյալները կկորչեն:"</string>
+    <string name="storage_internal_forget_details" msgid="5606507270046186691">"Այս <xliff:g id="NAME">^1</xliff:g>-ում առկա հավելվածները, լուսանկարները կամ տվյալները օգտագործելու համար հանեք և նորից զետեղեք այն: \n\nԻնչպես նաև, կարող եք հեռացնել այս պահոցը, եթե սարքն անհասանելի է: \n\nԵթե նախընտրեք հեռացնել այն, սարքի վրայի բոլոր տվյալները մշտապես կկորչեն: \n\nԿարող եք հետագայում նորից տեղադրել հավելվածները, բայց այս սարքի վրա պահեստավորված նրանց տվյալները կկորչեն:"</string>
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Մոռանա՞լ <xliff:g id="NAME">^1</xliff:g> սարքը:"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Այս <xliff:g id="NAME">^1</xliff:g> սարքում պահվող բոլոր հավելվածները, լուսանկարները և տվյալները ընդմիշտ ջնջվելու են:"</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Համակարգը ներառում է ֆայլեր, որոնք անհրաժեշտ են Android-ի <xliff:g id="VERSION">%s</xliff:g> տարբերակի աշխատանքի համար"</string>

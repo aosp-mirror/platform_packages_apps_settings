@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
@@ -270,6 +271,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                 Log.w(TAG, "Activity was not found for intent, " + e);
             }
         }
+    }
+
+    @Override
+    public @BiometricAuthenticator.Modality int getModality() {
+        return BiometricAuthenticator.TYPE_FINGERPRINT;
     }
 
     @Override

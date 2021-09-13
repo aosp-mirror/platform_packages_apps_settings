@@ -17,6 +17,8 @@ package com.android.settings.biometrics.combination;
 
 import android.content.Context;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.android.settings.Utils;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 
@@ -29,6 +31,11 @@ public class BiometricFingerprintStatusPreferenceController extends
 
     public BiometricFingerprintStatusPreferenceController(Context context, String key) {
         super(context, key);
+    }
+
+    public BiometricFingerprintStatusPreferenceController(
+            Context context, String key, Lifecycle lifecycle) {
+        super(context, key, lifecycle);
     }
 
     @Override
