@@ -239,7 +239,7 @@ public class DashboardFeatureProviderImplTest {
                 any(Intent.class),
                 eq(MetricsEvent.SETTINGS_GESTURES));
         verify(mActivity)
-                .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
+                .startActivityAsUser(any(Intent.class), any(UserHandle.class));
     }
 
     @Test
@@ -257,7 +257,7 @@ public class DashboardFeatureProviderImplTest {
                 any(Intent.class),
                 anyInt());
         verify(mActivity)
-                .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
+                .startActivityAsUser(any(Intent.class), any(UserHandle.class));
     }
 
     @Test
@@ -568,7 +568,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl.openTileIntent(mActivity, tile);
 
         verify(mActivity, never())
-                .startActivityForResult(any(Intent.class), eq(0));
+                .startActivity(any(Intent.class));
         verify(mActivity).getSupportFragmentManager();
     }
 
@@ -585,7 +585,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl.openTileIntent(mActivity, tile);
 
         verify(mActivity, never())
-                .startActivityForResult(any(Intent.class), eq(0));
+                .startActivity(any(Intent.class));
         verify(mActivity).getSupportFragmentManager();
     }
 
@@ -602,7 +602,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl.openTileIntent(mActivity, tile);
 
         verify(mActivity)
-                .startActivityForResult(any(Intent.class), eq(0));
+                .startActivity(any(Intent.class));
         verify(mActivity, never()).getSupportFragmentManager();
     }
 
@@ -623,7 +623,7 @@ public class DashboardFeatureProviderImplTest {
 
         final ArgumentCaptor<UserHandle> argument = ArgumentCaptor.forClass(UserHandle.class);
         verify(mActivity)
-                .startActivityForResultAsUser(any(Intent.class), anyInt(), argument.capture());
+                .startActivityAsUser(any(Intent.class), argument.capture());
         assertThat(argument.getValue().getIdentifier()).isEqualTo(userId);
         verify(mActivity, never()).getSupportFragmentManager();
     }
@@ -642,7 +642,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl.openTileIntent(mActivity, tile);
 
         verify(mActivity, never())
-                .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
+                .startActivityAsUser(any(Intent.class), any(UserHandle.class));
         verify(mActivity).getSupportFragmentManager();
     }
 
@@ -665,7 +665,7 @@ public class DashboardFeatureProviderImplTest {
 
         final ArgumentCaptor<UserHandle> argument = ArgumentCaptor.forClass(UserHandle.class);
         verify(mActivity)
-                .startActivityForResultAsUser(any(Intent.class), anyInt(), argument.capture());
+                .startActivityAsUser(any(Intent.class), argument.capture());
         assertThat(argument.getValue().getIdentifier()).isEqualTo(0);
         verify(mActivity, never()).getSupportFragmentManager();
     }
