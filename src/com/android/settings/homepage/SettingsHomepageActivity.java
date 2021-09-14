@@ -213,6 +213,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         targetIntent.setFlags(targetIntent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
 
+        // Sender of intent may want to send intent extra data to the destination of targetIntent.
+        targetIntent.replaceExtras(intent);
+
         targetIntent.putExtra(EXTRA_IS_FROM_SETTINGS_HOMEPAGE, true);
 
         // Set 2-pane pair rule for the external deep link page.
