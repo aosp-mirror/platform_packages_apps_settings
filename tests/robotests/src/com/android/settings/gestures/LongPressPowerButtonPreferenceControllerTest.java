@@ -199,7 +199,7 @@ public class LongPressPowerButtonPreferenceControllerTest {
 
     @Test
     public void preferenceUnchecked_assistDefault_setNoAction() {
-        // Value out of range chosen deliberately.
+        // Ensure that the Assistant is the default behavior for LPP.
         when(mResources.getInteger(
                 com.android.internal.R.integer.config_longPressOnPowerBehavior))
                 .thenReturn(
@@ -209,13 +209,12 @@ public class LongPressPowerButtonPreferenceControllerTest {
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.POWER_BUTTON_LONG_PRESS, -1)).isEqualTo(
-                LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_NO_ACTION);
+                LongPressPowerButtonPreferenceController.LONG_PRESS_POWER_GLOBAL_ACTIONS);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
                 LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_NO_ACTION);
-        verify(mController.mAssistSwitch).setSummary(
-                getString(
-                        R.string.power_menu_summary_long_press_for_assist_disabled_no_action));
+        verify(mController.mAssistSwitch).setSummary(getString(
+                    R.string.power_menu_summary_long_press_for_assist_disabled_with_power_menu));
     }
 
     private String getString(@StringRes int id) {
