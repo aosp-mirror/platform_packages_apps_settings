@@ -304,7 +304,7 @@
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"載入中…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"如果應用程式具有鄰近裝置權限，就能判斷已連結裝置的相對位置。"</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"應用程式和服務的位置存取權已關閉。當你撥打緊急電話號碼時 (或是傳送訊息給對方時)，系統仍會將你的裝置位置資訊傳送給緊急應變人員。"</string>
+    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"應用程式和服務的位置存取權已關閉。當你撥打或傳訊息到緊急電話號碼時，系統仍會將你的裝置位置資訊傳送給緊急應變人員。"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"進一步瞭解位置資訊設定。"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"帳戶"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"安全性"</string>
@@ -448,7 +448,7 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"輕觸即可設定"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已新增臉孔和指紋"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已新增臉孔和指紋"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"如果你設定了人臉解鎖和指紋解鎖功能，當你戴著口罩或人在昏暗的地方時，手機會要求你使用指紋解鎖"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"設定人臉解鎖和指紋解鎖功能時，如果你戴著口罩或人在昏暗的地方，手機會要求你提供指紋"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"解鎖方式"</string>
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"臉孔和指紋的用途"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"將手機解鎖"</string>
@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"再一次"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"依照指紋圖示重複按下手指"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"重覆按壓指紋感應器，以建立完整的指紋檔案"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"請依照指紋圖示的移動方式重複按下手指。這麼做可擷取你的完整指紋。"</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"這麼做可擷取你的完整指紋"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"請依照指紋圖示的移動方式重複按下手指。這樣做可以擷取更多指紋。"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"將指尖放上感應器"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"最後，請將手指邊緣放上感應器"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"將指紋的一側放上感應器並按住，然後再換另一側"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"這樣做可以擷取更多指紋"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -633,7 +636,7 @@
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"螢幕鎖定"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5799070517574360310">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / 休眠後立即啟動"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4572132216801894216">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / 休眠 <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g>後"</string>
-    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"工作資料夾鎖定"</string>
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"工作資料夾鎖定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="4746783679112447948">"變更鎖定畫面"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="6023813780512501969">"變更或停用圖案、PIN 或密碼安全性"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"選擇你要鎖定螢幕的方式"</string>
@@ -2259,7 +2262,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"選擇小工具"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"選擇小工具"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"是否要建立小工具並允許存取？"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"建立小工具後，<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> 即可存取所顯示的所有資料。"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"當你建立小工具之後，應用程式可以存取所有顯示的內容。\n\n應用程式：<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\n小工具：<xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"一律允許 <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> 建立小工具並存取其資料"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"使用情形統計資料"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"使用情形統計資料"</string>
@@ -2689,6 +2692,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看電池用量最高的應用程式"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充電功能暫時受到限制"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"這是為了延長電池壽命。瞭解詳情。"</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"繼續充電"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"在高溫和長時間充電等特定情況下，手機可能會將充電量限制在 <xliff:g id="PERCENT">%1$s</xliff:g> 以延長電池壽命。\n\n當上述情況解除後，手機就會自動正常充電。"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"在高溫和長時間充電等特定情況下，平板電腦可能會將充電量限制在 <xliff:g id="PERCENT">%1$s</xliff:g> 以延長電池壽命。\n\n當上述情況解除後，平板電腦就會自動正常充電。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"你的手機使用頻率比平常高，因此電量消耗速度可能比平時還要更快。\n\n耗電量最高的應用程式："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"你的平板電腦使用頻率比平常高，因此電池可能比平時還快沒電。\n\n耗電量最高的應用程式："</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"你的裝置使用頻率比平常高，因此電池可能比平時還快沒電。\n\n耗電量最高的應用程式："</string>
@@ -3419,8 +3425,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"進階通話功能"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G 通話功能"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"使用 LTE 服務提升語音通訊和其他通訊的品質 (建議)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"使用 4G 服務改善語音和其他通訊的品質 (建議)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"使用 LTE 服務提升語音通話品質 (建議)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"使用 4G 服務提升語音通話品質 (建議)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"使用 5G 進行語音通話"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"將聯絡人電話號碼傳送給電信業者"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"傳送你的聯絡人電話號碼，以便提供進階功能"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"要將聯絡人電話號碼傳送給「<xliff:g id="CARRIER">%1$s</xliff:g>」嗎？"</string>
@@ -3614,6 +3622,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"省電, 固定式, 保留, 省電模式, 電池"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"日常安排, 時間表, 省電, 節約電量, 電池, 自動, 百分比"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, 進階通話功能, 4G 通話功能"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, 進階通話, 5g 通話"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"新增語言, 新增一種語言"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字, 大字型, 大型文字, 低視能, 放大文字, 放大字型, 使用大字型"</string>
     <string name="default_sound" msgid="6604374495015245195">"預設音效"</string>
@@ -3942,7 +3951,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"在 Android 12 中，加強型通知功能已取代 Android 自動調整通知。這項功能可以顯示建議的操作和回覆內容，也可以幫你整理通知訊息。\n\n加強型通知功能可存取通知內容，包括聯絡人名稱和訊息內文等個人資訊。此外，這項功能還能關閉或回覆通知，例如接聽來電及控管「零打擾」功能。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要授予「<xliff:g id="SERVICE">%1$s</xliff:g>」通知存取權嗎？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可讀取所有通知 (包括聯絡人姓名和你收到的訊息文字等個人資訊)，也能關閉通知或針對通知中的按鈕採取行動，包括接聽來電。\n\n此外，該應用程式將因此能夠開啟或關閉「零打擾」模式，以及變更相關設定。"</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可讀取所有通知 (例如聯絡人姓名和你收到的訊息文字等個人資訊)，也可延後或關閉通知或操作通知中的按鈕，包括接聽電話。\n\n此外，這個應用程式還可開啟或關閉「零打擾」功能及變更相關設定。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果你停用「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」的通知存取權，「零打擾」模式的存取權可能也會一併遭到停用。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"關閉"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
