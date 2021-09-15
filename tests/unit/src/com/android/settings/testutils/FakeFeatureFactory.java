@@ -124,6 +124,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         extraAppInfoFeatureProvider = mock(ExtraAppInfoFeatureProvider.class);
         securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
         gameSettingsFeatureProvider = mock(GameSettingsFeatureProvider.class);
+        mAccessibilitySearchFeatureProvider = mock(AccessibilitySearchFeatureProvider.class);
     }
 
     @Override
