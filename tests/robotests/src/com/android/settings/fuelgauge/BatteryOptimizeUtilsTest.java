@@ -125,6 +125,18 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
+    public void testIsAllowlistedExpectIdle_isAllowlistedExceptIdle_returnTrue() {
+        when(mMockBackend.isAllowlistedExceptIdle(anyString())).thenReturn(true);
+
+        assertThat(mBatteryOptimizeUtils.isAllowlistedExceptIdleApp()).isTrue();
+    }
+
+    @Test
+    public void testIsAllowlistedExpectIdle_notAllowlistedExpectIdle_returnFalse() {
+        assertThat(mBatteryOptimizeUtils.isAllowlistedExceptIdleApp()).isFalse();
+    }
+
+    @Test
     public void testSetAppOptimizationMode_Restricted_verifyAction() {
         // Sets the current mode as MODE_UNRESTRICTED.
         mBatteryOptimizeUtils.mAllowListed = false;
