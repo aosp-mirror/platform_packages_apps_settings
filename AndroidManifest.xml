@@ -136,7 +136,7 @@
                   android:taskAffinity="com.android.settings.root"
                   android:launchMode="singleTask"
                   android:exported="true"
-                  android:configChanges="keyboard|keyboardHidden">
+                  android:configChanges="keyboard|keyboardHidden|screenSize|screenLayout">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
