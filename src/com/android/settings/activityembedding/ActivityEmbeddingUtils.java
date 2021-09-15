@@ -28,7 +28,7 @@ import androidx.window.embedding.SplitController;
 public class ActivityEmbeddingUtils {
     public static final float SPLIT_RATIO = 0.5f;
     // The smallest value of current width of the window when the split should be used.
-    private static final float MIN_CURRENT_SCREEN_SPLIT_WIDTH_DP = 600f;
+    private static final float MIN_CURRENT_SCREEN_SPLIT_WIDTH_DP = 720f;
     // The smallest value of the smallest-width (sw) of the window in any rotation when
     // the split should be used.
     private static final float MIN_SMALLEST_SCREEN_SPLIT_WIDTH_DP = 600f;
