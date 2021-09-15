@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Rapetisser"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Utiliser la rotation automatique"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La technologie de détection du visage utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images sont jamais stockées ni envoyées à Google."</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La technologie de détection des visages utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images sont jamais stockées ni envoyées à Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemple de texte"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Le Magicien d\'Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chapitre 11 : La merveilleuse cité d\'émeraude d\'Oz"</string>
@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Encore une fois."</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Suivez l\'icône d\'empreinte digitale"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Déplacez légèrement votre doigt lorsque vous le relevez pour ajouter toutes les parties de votre empreinte digitale."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Maintenez le doigt sur le capteur chaque fois que l\'icône de l\'empreinte digitale bouge. Cette action permet de capturer l\'intégralité de votre empreinte digitale."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Cette action permet de capturer l\'intégralité de votre empreinte digitale"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Maintenez le doigt sur le capteur chaque fois que l\'icône de l\'empreinte digitale bouge. Cela aide à capter une plus grande partie de votre empreinte digitale."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Placer le bout de votre doigt sur le capteur"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Finalement, placer les bords de votre doigt"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Placez le côté de votre doigt sur le capteur et maintenez-le en place, puis passez à l\'autre côté"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Ce geste aide à capter une plus grande partie de votre empreinte digitale"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Inscription de l\'empreinte digitale : <xliff:g id="PERCENTAGE">%d</xliff:g> pour cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Empreinte digitale ajoutée"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Vous pouvez maintenant utiliser votre empreinte digitale pour déverrouiller votre téléphone ou vérifier qu\'il s\'agit bien de vous, par exemple pour vous connecter à des applications"</string>
@@ -612,7 +615,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Verrouillage de l\'écran"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisissez un verrouillage d\'écran"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisir un verrouillage d\'écran"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Choisissez nouv. verr. écran"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Choisir verrouillage pour applis pro"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Choisir nouveau verrouillage prof."</string>
@@ -719,7 +722,7 @@
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> recommande d\'utiliser un NIP ou un mot de passe robuste et risque de ne pas fonctionner comme prévu si vous n\'en définissez pas un"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> recommande d\'utiliser un nouveau NIP ou mot de passe et risque de ne pas fonctionner comme prévu si vous n\'en définissez pas un"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> recommande d\'utiliser un nouveau schéma, NIP ou mot de passe et risque de ne pas fonctionner comme prévu si vous n\'en définissez pas un"</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> vous recommande d\'utiliser une nouveau mode verrouillage de l\'écran"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"L\'application <xliff:g id="APP_NAME">%1$s</xliff:g> vous recommande d\'utiliser un nouveau mode de verrouillage de l\'écran"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Réessayez. Tentative <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> sur <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Vos données seront supprimées"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Si vous entrez un schéma incorrect à la prochaine tentative, les données de cet appareil seront supprimées."</string>
@@ -1350,9 +1353,9 @@
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Activer la fonctionnalité d\'écran attentif"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Empêchez l\'écran de s\'éteindre pendant que vous le regardez"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"L\'appareil photo est verrouillé"</string>
-    <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"L\'appareil photo doit être déverrouillé pour utiliser la détection du visage"</string>
+    <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"L\'appareil photo doit être déverrouillé pour utiliser la détection des visages"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"L\'appareil photo doit être déverrouillé pour utiliser la fonctionnalité d\'écran attentif"</string>
-    <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"L\'accès à l\'appareil photo est nécessaire pour utiliser la détection du visage. Touchez pour gérer les services de personnalisation de l\'appareil"</string>
+    <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"L\'accès à l\'appareil photo est nécessaire pour utiliser la détection des visages. Touchez pour gérer les services de personnalisation de l\'appareil"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Gérer les autorisations"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Éclairage nocturne"</string>
     <string name="night_display_text" msgid="4789324042428095383">"Le mode Éclairage nocturne donne une teinte ambre à votre écran. Cela vous permet de le regarder plus facilement lorsque l\'éclairage est faible et peut vous aider à vous endormir plus facilement."</string>
@@ -2187,7 +2190,7 @@
     <string name="hardkeyboard_category" msgid="8729780593378161071">"Paramètres du clavier physique"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Appuyez deux fois sur la touche Espace pour insérer « . »"</string>
     <string name="show_password" msgid="7101900779571040117">"Afficher les mots de passe"</string>
-    <string name="show_password_summary" msgid="9025960283785111619">"Afficher les caractères brièvement lorsque que vous écrivez"</string>
+    <string name="show_password_summary" msgid="9025960283785111619">"Affichez les caractères brièvement lorsque que vous écrivez"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Ce correcteur orthographique peut recueillir l\'ensemble du texte saisi, y compris des données personnelles comme des mots de passe et des numéros de carte de paiement. Il provient de l\'application <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utiliser ce correcteur orthographique?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Paramètres"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Langue"</string>
@@ -4293,7 +4296,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Aucune autorisation demandée"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Gérez l\'accès des applis à vos données"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Tableau de bord de confidentialité"</string>
-    <string name="permissions_usage_summary" msgid="6784310472062516454">"Afficher les applications qui ont récemment utilisé les autorisations"</string>
+    <string name="permissions_usage_summary" msgid="6784310472062516454">"Affichez les applications qui ont récemment utilisé les autorisations"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Applications non utilisées"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> application non utilisée</item>
@@ -5356,7 +5359,7 @@
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Vous risquez de perdre l\'accès au temps ou aux données restants. Communiquez avec votre fournisseur de services avant de procéder au retrait."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"capture de contenu, contenu de l\'application"</string>
     <string name="content_capture" msgid="868372905432812238">"Contenu de l\'application"</string>
-    <string name="content_capture_summary" msgid="49720773699715531">"Autoriser les applications à envoyer du contenu au système Android"</string>
+    <string name="content_capture_summary" msgid="49720773699715531">"Autorisez les applications à envoyer du contenu au système Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Capturer l\'empreinte de mémoire système"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Capture de l\'empreinte de mémoire système en cours…"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Impossible de capturer l\'empreinte de mémoire du système"</string>
@@ -5526,7 +5529,7 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Autoriser les réseaux 2G"</string>
     <string name="enable_2g_summary" msgid="906487478332145407">"Utiliser les connexions cellulaires 2G. La 2G est toujours activée pour les appels d\'urgence."</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Afficher l\'accès au presse-papiers"</string>
-    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Afficher un message lorsque les applications accèdent à du texte, à des images ou à d\'autres contenus que vous avez copiés"</string>
+    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Affichez un message lorsque les applications accèdent à du texte, à des images ou à d\'autres contenus que vous avez copiés"</string>
     <string name="all_apps" msgid="3054120149509114789">"Toutes les applications"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Ne pas autoriser"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"Bande ultralarge (BUL)"</string>
