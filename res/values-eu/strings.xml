@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Beste behin"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Jarraitu hatz-marken ikonoari"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Jarraitu hatza jasotzen, hatz-markaren zati guztiak gehitzeko"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Eduki ukituta sentsorea hatz-markaren ikonoa mugitzen den bakoitzean. Horrela, hatz-marka osoa detektatuko da."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Horrela, hatz-marka osoa detektatuko da"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Hatz-markaren ikonoa mugitzen den bakoitzean, eduki sakatuta sentsorea. Horrela, hatz-markaren eremu zabalagoa hartzen da."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Jarri hatzaren punta sentsorearen gainean"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Amaitzeko, jarri hatzaren alboak"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Jarri hatz-markaren albo bat sentsorearen gainean eta eutsi horrela. Ondoren, egin gauza bera beste alboarekin."</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Horrela, hatz-markaren eremu zabalagoa hartzen da"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Hatz-markaren ehuneko <xliff:g id="PERCENTAGE">%d</xliff:g> erregistratu da"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Gehitu da hatz-marka"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Orain, hatz-marka erabil dezakezu telefonoa desblokeatzeko edo zeu zarela egiaztatzeko, hala nola aplikazioetan saioa hastean"</string>
@@ -1819,10 +1822,10 @@
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Laguntza"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Sare mugikorra"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Mugikorraren plana"</string>
-    <string name="sms_application_title" msgid="4791107002724108809">"SMSak"</string>
-    <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"SMS mezuetarako aplikazioa aldatu?"</string>
-    <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"<xliff:g id="NEW_APP">%1$s</xliff:g> aplikazioaren ordez, <xliff:g id="CURRENT_APP">%2$s</xliff:g> aplikazioa erabili SMS mezuetarako?"</string>
-    <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"Erabili <xliff:g id="NEW_APP">%s</xliff:g> SMS mezuetarako aplikazio gisa?"</string>
+    <string name="sms_application_title" msgid="4791107002724108809">"SMSetarako aplikazioa"</string>
+    <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"SMSetarako aplikazioa aldatu nahi duzu?"</string>
+    <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"<xliff:g id="NEW_APP">%1$s</xliff:g> aplikazioaren ordez, <xliff:g id="CURRENT_APP">%2$s</xliff:g> erabili nahi duzu SMSetarako aplikazio gisa?"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"<xliff:g id="NEW_APP">%s</xliff:g> erabili nahi duzu SMSetarako aplikazio gisa?"</string>
     <string name="network_scorer_picker_title" msgid="2022922801936206195">"Sare-balorazioen hornitzailea"</string>
     <string name="network_scorer_picker_none_preference" msgid="8894034333043177807">"Bat ere ez"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Wifi-laguntzailea aldatu nahi duzu?"</string>
@@ -4323,8 +4326,8 @@
     <string name="domain_urls_summary_some" msgid="1197692164421314523">"Ireki <xliff:g id="DOMAIN">%s</xliff:g> eta beste URL batzuk"</string>
     <string name="domain_urls_apps_summary_off" msgid="2534980824850890416">"Ez dago esteka bateragarriak ireki ditzakeen aplikaziorik"</string>
     <plurals name="domain_urls_apps_summary_on" formatted="false" msgid="7864816862441985323">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikaziok ireki ditzakete onartutako estekak</item>
-      <item quantity="one">Aplikazio batek ireki ditzake onartutako estekak</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikaziok ireki ditzakete esteka bateragarriak</item>
+      <item quantity="one">Aplikazio batek ireki ditzake esteka bateragarriak</item>
     </plurals>
     <string name="app_link_open_always" msgid="9167065494930657503">"Eman esteka bateragarriak irekitzeko baimena aplikazioari"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Galdetu beti"</string>
@@ -5267,7 +5270,7 @@
     <string name="sim_action_continue" msgid="1688813133152389943">"Egin aurrera"</string>
     <string name="sim_action_yes" msgid="8076556020131395515">"Bai"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Berrabiarazi"</string>
-    <string name="sim_action_no_thanks" msgid="435717748384544195">"Ez"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Ez, eskerrik asko"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Aldatu"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Ezin da aktibatu SIM txartela"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Kendu SIM txartela eta sar ezazu berriro. Arazoak badirau, berrabiarazi gailua."</string>
