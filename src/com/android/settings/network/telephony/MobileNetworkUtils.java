@@ -84,6 +84,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class MobileNetworkUtils {
 
@@ -258,9 +260,16 @@ public class MobileNetworkUtils {
     public static boolean showEuiccSettings(Context context) {
         long timeForAccess = SystemClock.elapsedRealtime();
         try {
-            return ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(()
-                    -> showEuiccSettingsDetecting(context))).get();
-        } catch (ExecutionException | InterruptedException exception) {
+            Boolean isShow = ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(() -> {
+                        try {
+                            return showEuiccSettingsDetecting(context);
+                        } catch (Exception threadException) {
+                            Log.w(TAG, "Accessing Euicc failure", threadException);
+                        }
+                        return Boolean.FALSE;
+                    })).get(3, TimeUnit.SECONDS);
+            return ((isShow != null) && isShow.booleanValue());
+        } catch (ExecutionException | InterruptedException | TimeoutException exception) {
             timeForAccess = SystemClock.elapsedRealtime() - timeForAccess;
             Log.w(TAG, "Accessing Euicc takes too long: +" + timeForAccess + "ms");
         }
