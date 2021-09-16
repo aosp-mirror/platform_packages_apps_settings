@@ -23,6 +23,8 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.os.UserHandle;
 
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
 /**
  * BluetoothPairingRequest is a receiver for any Bluetooth pairing request. It
  * checks if the Bluetooth Settings is currently visible and brings up the PIN, the passkey or a
@@ -47,9 +49,11 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
         boolean shouldShowDialog = LocalBluetoothPreferences.shouldShowDialogInForeground(
                 context, deviceAddress, deviceName);
 
+        final LocalBluetoothManager mBluetoothManager = Utils.getLocalBtManager(context);
         // Skips consent pairing dialog if the device was recently associated with CDM
         if (pairingVariant == BluetoothDevice.PAIRING_VARIANT_CONSENT
-                && device.canBondWithoutDialog()) {
+                && (device.canBondWithoutDialog()
+                || mBluetoothManager.getCachedDeviceManager().isOngoingPairByCsip(device))) {
             device.setPairingConfirmation(true);
         } else if (powerManager.isInteractive() && shouldShowDialog) {
             // Since the screen is on and the BT-related activity is in the foreground,
