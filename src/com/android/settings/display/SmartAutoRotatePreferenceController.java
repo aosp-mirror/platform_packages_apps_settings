@@ -22,6 +22,7 @@ import static android.provider.Settings.Secure.CAMERA_AUTOROTATE;
 import static com.android.settings.display.SmartAutoRotateController.hasSufficientPermission;
 import static com.android.settings.display.SmartAutoRotateController.isRotationResolverServiceAvailable;
 
+import android.text.TextUtils;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -80,6 +81,16 @@ public class SmartAutoRotatePreferenceController extends TogglePreferenceControl
     }
 
     @Override
+    public boolean isSliceable() {
+        return TextUtils.equals(getPreferenceKey(), "auto_rotate");
+    }
+
+    @Override
+    public boolean isPublicSlice() {
+        return true;
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
@@ -100,7 +111,7 @@ public class SmartAutoRotatePreferenceController extends TogglePreferenceControl
                 @Override
                 public void onChange() {
                     if (mPreference != null) {
-                        refreshSummary(mPreference);
+                        updateState(mPreference);
                     }
                 }
             };
