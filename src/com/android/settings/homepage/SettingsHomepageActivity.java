@@ -208,6 +208,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
+        // To prevent launchDeepLinkIntentToRight again for configuration change.
+        intent.setAction(null);
+
         targetIntent.setFlags(targetIntent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
 
         targetIntent.putExtra(EXTRA_IS_FROM_SETTINGS_HOMEPAGE, true);

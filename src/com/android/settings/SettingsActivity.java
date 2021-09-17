@@ -233,6 +233,12 @@ public class SettingsActivity extends SettingsBaseActivity
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         Log.d(LOG_TAG, "Starting onCreate");
+
+        if (launchHomepageForTwonPaneDeepLink()) {
+            finish();
+            return;
+        }
+
         long startTime = System.currentTimeMillis();
 
         final FeatureFactory factory = FeatureFactory.getFactory(this);
@@ -242,22 +248,7 @@ public class SettingsActivity extends SettingsBaseActivity
         // Should happen before any call to getIntent()
         getMetaData();
 
-        // If it's a deep link intent, start the Activity from SettingsHomepageActivity for 2-pane.
         final Intent intent = getIntent();
-        final boolean isFromSettingsHomepage = intent.getBooleanExtra(
-                SettingsHomepageActivity.EXTRA_IS_FROM_SETTINGS_HOMEPAGE, /* defaultValue */ false);
-        if (ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) && !isFromSettingsHomepage
-                && isOnlyOneActivityInActivityStack()) {
-            final Intent trampolineIntent =
-                    new Intent(android.provider.Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK);
-            trampolineIntent.putExtra(
-                    android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI,
-                    intent.toUri(Intent.URI_INTENT_SCHEME));
-            startActivity(trampolineIntent);
-            finish();
-            return;
-        }
-
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
@@ -265,17 +256,11 @@ public class SettingsActivity extends SettingsBaseActivity
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = getInitialFragmentName(intent);
 
-        // This is a "Sub Settings" when:
-        // - this is a real SubSettings
-        // - or :settings:show_fragment_as_subsetting is passed to the Intent
-        final boolean isSubSettings = this instanceof SubSettings ||
-                intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
-
         // If this is a sub settings, then apply the SubSettings Theme for the ActionBar content
         // insets.
         // If this is in setup flow, don't apply theme. Because light theme needs to be applied
         // in SettingsBaseActivity#onCreate().
-        if (isSubSettings && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
+        if (isSubSettings(intent) && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
             setTheme(R.style.Theme_SubSettings);
         }
 
@@ -364,10 +349,43 @@ public class SettingsActivity extends SettingsBaseActivity
         }
     }
 
-    private boolean isOnlyOneActivityInActivityStack() {
-        final ActivityManager activityManager = getSystemService(ActivityManager.class);
-        List<ActivityManager.RunningTaskInfo> taskList = activityManager.getRunningTasks(2);
-        return taskList.get(0).numActivities == 1;
+    private boolean isSubSettings(Intent intent) {
+        return this instanceof SubSettings ||
+            intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
+    }
+
+    /** Returns true if the Activity is started by a deep link intent for large screen devices. */
+    private boolean launchHomepageForTwonPaneDeepLink() {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
+            return false;
+        }
+
+        final Intent intent = getIntent();
+        // Only starts trampoline for deep links. Should return false for all the cases that
+        // Settings app starts SettingsActivity or SubSetting by itself.
+        if (intent.getAction() == null) {
+            // Other apps should send deep link intent which matches intent filter of the Activity.
+            return false;
+        }
+
+        if (isSubSettings(intent)) {
+            return false;
+        }
+
+        if (intent.getBooleanExtra(SettingsHomepageActivity.EXTRA_IS_FROM_SETTINGS_HOMEPAGE,
+                /* defaultValue */ false)) {
+            return false;
+        }
+
+        // It's a deep link intent, SettingsHomepageActivity will set SplitPairRule and start it.
+        final Intent trampolineIntent =
+                new Intent(android.provider.Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK);
+        trampolineIntent.putExtra(
+                android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI,
+                intent.toUri(Intent.URI_INTENT_SCHEME));
+        startActivity(trampolineIntent);
+
+        return true;
     }
 
     /** Returns the initial fragment name that the activity will launch. */
