@@ -492,8 +492,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Ještě jednou"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Sledujte ikonu otisku prstu"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Prst opakovaně zvedejte a pokládejte, aby se zaznamenaly různé části otisku."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Podržte snímač pokaždé, když se ikona otisku prstu pohne. To pomůže zaznamenat celý otisk prstu."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"To pomůže zaznamenat celý otisk prstu"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Podržte snímač pokaždé, když se ikona otisku prstu pohne. Bude tak zachycena větší část otisku prstu."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Umístěte špičku prstu na snímač"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Nakonec umístěte okraje prstu"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Umístěte boční stranu prstu na snímač a podržte ho, poté ho „překulte“ na druhou stranu"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Bude tak zachycena větší část otisku prstu"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrace otisku prstu: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisk byl přidán"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Odteď můžete pomocí otisku prstu odemykat telefon nebo ověřovat svoji totožnost, například při přihlašování do aplikací."</string>
@@ -2727,6 +2730,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Zobrazte aplikace s největším využitím baterie"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Nabíjení je dočasně omezeno"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Za účelem úspory baterie. Další informace"</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Obnovit nabíjení"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Za určitých podmínek, jako je vysoká teplota a dlouhá doba mezi nabitími, může být nabíjení omezeno na <xliff:g id="PERCENT">%1$s</xliff:g> za účelem udržení výdrže baterie.\n\nKdyž tyto podmínky pominou, telefon se automaticky začne nabíjet normálně."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Za určitých podmínek, jako je vysoká teplota a dlouhá doba mezi nabitími, může být nabíjení omezeno na <xliff:g id="PERCENT">%1$s</xliff:g> za účelem udržení výdrže baterie.\n\nKdyž tyto podmínky pominou, tablet se automaticky začne nabíjet normálně."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Protože jste telefon používali více než obvykle, může se baterie vybít dříve, než je běžné.\n\nNejvíc baterii vybíjejí tyto aplikace:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Protože jste tablet používali více než obvykle, může se baterie vybít dříve, než je běžné.\n\nNejvíc baterii vybíjejí tyto aplikace:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Protože jste zařízení používali více než obvykle, může se baterie vybít dříve, než je běžné.\n\nNejvíc baterii vybíjejí tyto aplikace:"</string>
@@ -3481,8 +3487,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Rozšířené volání"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Volání přes síť 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Používat ke zlepšení hlasové a další komunikace služby LTE (doporučeno)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Používat ke zlepšení hlasové a další komunikace služby 4G (doporučeno)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Používat ke zlepšení hlasových hovorů služby LTE (doporučeno)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Používat ke zlepšení hlasových hovorů služby 4G (doporučeno)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Pro hlasové hovory používat síť 5G"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Odesílat kontakty operátorovi"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Odesílejte telefonní čísla kontaktů a získejte rozšířené funkce"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Odesílat kontakty operátorovi <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3678,6 +3686,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"spořič baterie, pevné, trvalé, úspora energie, baterie"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"sled činností, plán, spořič baterie, úspora energie, baterie, automatické, procenta"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, rozšířené volání, volání 4g"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, rozšířené volání, volání 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"přidat jazyk, přidání jazyka"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"velikost textu, velké písmo, velký text, slabozrakost, zvětšení textu, zvětšovač písma, zvětšení písma"</string>
     <string name="default_sound" msgid="6604374495015245195">"Výchozí zvuk"</string>
@@ -4014,7 +4023,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Povolit službě <xliff:g id="SERVICE">%1$s</xliff:g> přístup k oznámením?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Adaptivní oznámení pro Android byla v systému Android 12 nahrazena vylepšenými oznámeními. Tato funkce ukazuje navrhované akce a odpovědi a uspořádává oznámení. \n\nVylepšená oznámení mají přístup k obsahu oznámení, včetně osobních údajů, jako jsou jména kontaktů a zprávy. Tato funkce také může zavírat oznámení nebo na ně odpovídat, například přijímat telefonní hovory a ovládat režim Nerušit."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Povolit službě <xliff:g id="SERVICE">%1$s</xliff:g> přístup k oznámením?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"Aplikace <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude moci číst všechna oznámení, včetně osobních údajů, jako jsou jména kontaktů a texty zpráv, které obdržíte. Bude také moci automaticky zavírat oznámení nebo aktivovat tlačítka v oznámeních, včetně přijímání telefonických hovorů. \n\nTímto také aplikaci umožníte zapínat nebo vypínat režim Nerušit a měnit související nastavení."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"Aplikace <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> bude moci číst všechna oznámení, včetně osobních údajů, jako jsou jména kontaktů a texty zpráv, které obdržíte. Bude také moci automaticky odkládat nebo zavírat oznámení nebo aktivovat tlačítka v oznámeních, včetně přijímání telefonických hovorů. \n\nTímto také aplikaci umožníte zapínat nebo vypínat režim Nerušit a měnit související nastavení."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Pokud aplikaci <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vypnete přístup k oznámením, můžete tím vypnout i přístup k režimu Nerušit."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Vypnout"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Zrušit"</string>

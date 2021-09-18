@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Mais uma vez"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Siga o ícone da impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Vá levantando o dedo para adicionar as diferentes partes da sua impressão digital"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Toque sem soltar de cada vez que o ícone da impressão digital se mover. Isto ajuda a capturar a sua impressão digital completa."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Isto ajuda a capturar a sua impressão digital completa"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Toque sem soltar de cada vez que o ícone da impressão digital se mover. Isto ajuda a capturar mais da sua impressão digital."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Coloque a ponta do dedo no sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Por fim, coloque as extremidades do dedo"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Coloque o lado da sua impressão digital no sensor, mantenha essa posição e, em seguida, mude para o outro lado"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Isto ajuda a capturar mais da sua impressão digital"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Inscrição da impressão digital: <xliff:g id="PERCENTAGE">%d</xliff:g> por cento"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impressão digital adicionada"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Já pode utilizar a sua impressão digital para desbloquear o telemóvel ou validar a sua identidade, como quando inicia sessão em apps"</string>
@@ -2665,6 +2668,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Veja as apps com maior utilização"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Carregamento limitado temporariamente"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Para preservar a bateria. Saiba mais."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Retomar carregamento"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Em determinadas condições, como temperaturas elevadas e períodos de carregamento longos, o carregamento pode estar limitado a <xliff:g id="PERCENT">%1$s</xliff:g> para ajudar a preservar o estado da bateria.\n\nQuando essas condições terminarem, o telemóvel irá carregar normalmente de forma automática."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Em determinadas condições, como temperaturas elevadas e períodos de carregamento longos, o carregamento pode estar limitado a <xliff:g id="PERCENT">%1$s</xliff:g> para ajudar a preservar o estado da bateria.\n\nQuando essas condições terminarem, o tablet irá carregar normalmente de forma automática."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Uma vez que tem utilizado o telemóvel mais do que o habitual, pode ficar sem bateria mais cedo do que o esperado.\n\nApps que utilizam mais bateria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Uma vez que tem utilizado o tablet mais do que o habitual, pode ficar sem bateria mais cedo do que o esperado.\n\nApps que utilizam mais bateria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Uma vez que tem utilizado o dispositivo mais do que o habitual, pode ficar sem bateria mais cedo do que o esperado.\n\nApps que utilizam mais bateria:"</string>
@@ -3393,8 +3399,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Chamadas avançadas"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Chamadas 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Utilizar os serviços LTE para melhorar a voz e outras comunicações (recomendado)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Utilizar os serviços 4G para melhorar a voz e outras comunicações (recomendado)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Utilize os serviços LTE para melhorar a as chamadas de voz (recomendado)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Utilize os serviços 4G para melhorar as chamadas de voz (recomendado)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Utilize o 5G para chamadas de voz"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Enviar contactos para o operador"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Envie os números de telefone dos seus contactos para fornecer funcionalidades melhoradas."</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Pretende enviar os contactos para o operador <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3588,6 +3596,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"poupança de bateria, fixa, persistente, poupança de energia, bateria"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rotina, horário, poupança de bateria, poupança de energia, bateria, automática, percentagem"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, chamadas avançadas, chamadas 4g"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, chamadas avançadas, chamadas 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"adicionar idioma, adicionar um idioma"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"tamanho do texto, formato·grande, tipo de letra grande, texto grande, visão reduzida, aumentar o texto, aumentar o tipo de letra, aumento do tipo de letra"</string>
     <string name="default_sound" msgid="6604374495015245195">"Som predefinido"</string>
@@ -3916,7 +3925,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Permitir o acesso a notificações do <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"As notificações melhoradas substituíram as notificações adaptáveis do Android no Android 12. Esta funcionalidade mostra ações e respostas sugeridas e organiza as suas notificações. \n\nAs notificações melhoradas podem aceder a todo o conteúdo das notificações, incluindo informações pessoais como nomes de contactos e mensagens. Esta funcionalidade também pode ignorar ou responder a notificações, como atender chamadas telefónicas, e controlar o modo Não incomodar."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Permitir o acesso a notificações do <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"O <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pode ler todas as notificações, incluindo informações pessoais como nomes de contactos e o texto das mensagens recebidas. Esta app também pode ignorar notificações ou acionar botões em notificações, incluindo atender chamadas telefónicas. \n\nDeste modo, a app também pode ativar ou desativar o modo Não incomodar e alterar as definições relacionadas."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"A app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pode ler todas as notificações, incluindo informações pessoais como nomes de contactos e o texto das mensagens recebidas. Esta app também pode suspender ou ignorar notificações, ou acionar botões em notificações, incluindo atender chamadas telefónicas. \n\nDeste modo, a app também pode ativar ou desativar o modo Não incomodar e alterar as definições relacionadas."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Se desativar o acesso às notificações para <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, é possível que o acesso ao modo Não incomodar seja igualmente desativado."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desativar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>

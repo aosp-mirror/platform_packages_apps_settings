@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Veel üks kord"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Järgige sõrmejälje ikooni"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Tõstke sõrme, et lisada sõrmejälje eri osad."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Puudutage pikalt iga kord, kui sõrmejäljeikoon liigub. See aitab jäädvustada teie täieliku sõrmejälje."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"See aitab jäädvustada teie täieliku sõrmejälje."</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Puudutage pikalt iga kord, kui sõrmejäljeikoon liigub. See aitab jäädvustada suurema osa teie sõrmejäljest."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Asetage oma sõrmeots andurile"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Lõpuks asetage andurile oma sõrme küljed"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Asetage oma sõrmejälje külg andurile ja hoidke all, seejärel asetage andurile sõrmejälje teine külg"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"See aitab jäädvustada suurema osa teie sõrmejäljest"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -2667,6 +2670,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Vaadake suurima akukasutusega rakendusi"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laadimine on ajutiselt piiratud"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Aku säästmiseks. Vaadake lisateavet."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Jätka laadimist"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Teatud tingimustel, nt kõrge temperatuuriga ja pikal laadimisperioodil, võib laadimine olla piiratud tasemeni <xliff:g id="PERCENT">%1$s</xliff:g>, et säilitada aku seisukord.\n\nNende tingimuste lõppedes hakkab telefon automaatselt jälle tavapäraselt laadima."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Teatud tingimustel, nt kõrge temperatuuriga ja pikal laadimisperioodil, võib laadimine olla piiratud tasemeni <xliff:g id="PERCENT">%1$s</xliff:g>, et säilitada aku seisukord.\n\nNende tingimuste lõppedes hakkab tahvelarvuti automaatselt jälle tavapäraselt laadima."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Kuna kasutasite telefoni tavapärasest rohkem, võib aku kiiremini tühjaks saada.\n\nKõige rohkem akut kasutavad rakendused:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Kuna kasutasite tahvelarvutit tavapärasest rohkem, võib aku kiiremini tühjaks saada.\n\nKõige rohkem akut kasutavad rakendused:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Kuna kasutasite seadet tavapärasest rohkem, võib aku kiiremini tühjaks saada.\n\nKõige rohkem akut kasutavad rakendused:"</string>
@@ -3395,8 +3401,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Täiustatud helistamine"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G-helistamine"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Parema hääl- ja muu side kvaliteedi tagamiseks LTE-teenuste kasutamine (soovitatav)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Parema hääl- ja muu side kvaliteedi tagamiseks 4G-teenuste kasutamine (soovitatav)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Kasuta häälkõnede kvaliteedi parandamiseks LTE-teenuseid (soovitatav)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Kasuta häälkõnede kvaliteedi parandamiseks 4G-teenuseid (soovitatav)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Kasuta häälkõnede puhul 5G-d"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Kontaktide saatmine operaatorile"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Saatke oma kontaktide telefoninumbrid, et pakkuda täiustatud funktsioone"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Kas saata kontaktid operaatorile <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3590,6 +3598,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"akusäästja, kinnitatav, pidev, aku säästmine, aku"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutiin, ajakava, akusäästja, toite säästmine, aku, automaatne, protsent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, täiustatud helistamine, 4g-kõned"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, täiustatud helistamine, 5g-kõned"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"lisa keel, keele lisamine"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"teksti suurus, suur tekst, suur font, halb nähtavus, teksti suuremaks muutmine, fondi suurendaja, fondi suurendamine"</string>
     <string name="default_sound" msgid="6604374495015245195">"Vaikeheli"</string>
@@ -3918,7 +3927,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Kas <xliff:g id="SERVICE">%1$s</xliff:g> pääseb märguannetele juurde?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Androidi versioonis 12 asendasid täiustatud märguanded Androidi kohanduvad märguanded. See funktsioon näitab soovitatud toiminguid ja vastuseid ning korrastab teie märguandeid. \n\nTäiustatud märguanded pääsevad juurde märguande sisule, sh isiklikule teabele, nagu kontaktide nimed ja sõnumid. Samuti saab selle funktsiooni abil märguannetest loobuda või neile vastata (nt vastata telefonikõnedele ja juhtida funktsiooni Mitte segada)."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Kas <xliff:g id="SERVICE">%1$s</xliff:g> pääseb märguannetele juurde?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> saab lugeda kõiki märguandeid, sh isiklikke andmeid, nagu kontaktide nimed ja teile saadetud tekstsõnumid. Rakendus saab ka märguandeid eemaldada või aktiveerida märguannetes olevaid toimingunuppe, sealhulgas vastata telefonikõnedele. \n\nSee võimaldab rakendusel ka lülitada sisse või välja funktsiooni Mitte segada ja muuta sellega seotud seadeid."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> saab lugeda kõiki märguandeid, sh isiklikke andmeid, nagu kontaktide nimed ja teile saadetud tekstsõnumid. Rakendus saab ka märguandeid edasi lükata ja eemaldada või aktiveerida märguannetes olevaid toimingunuppe, sealhulgas vastata telefonikõnedele. \n\nSee võimaldab rakendusel ka lülitada sisse või välja funktsiooni Mitte segada ja muuta sellega seotud seadeid."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Kui lülitate teenuse <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> jaoks juurdepääsu märguannetele välja, võidakse välja lülitada ka juurdepääs funktsioonile Mitte segada."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Lülita välja"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Tühista"</string>

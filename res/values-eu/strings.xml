@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Beste behin"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Jarraitu hatz-marken ikonoari"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Jarraitu hatza jasotzen, hatz-markaren zati guztiak gehitzeko"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Eduki ukituta sentsorea hatz-markaren ikonoa mugitzen den bakoitzean. Horrela, hatz-marka osoa detektatuko da."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Horrela, hatz-marka osoa detektatuko da"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Hatz-markaren ikonoa mugitzen den bakoitzean, eduki sakatuta sentsorea. Horrela, hatz-markaren eremu zabalagoa hartzen da."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Jarri hatzaren punta sentsorearen gainean"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Amaitzeko, jarri hatzaren alboak"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Jarri hatz-markaren albo bat sentsorearen gainean eta eutsi horrela. Ondoren, egin gauza bera beste alboarekin."</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Horrela, hatz-markaren eremu zabalagoa hartzen da"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Hatz-markaren ehuneko <xliff:g id="PERCENTAGE">%d</xliff:g> erregistratu da"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Gehitu da hatz-marka"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Orain, hatz-marka erabil dezakezu telefonoa desblokeatzeko edo zeu zarela egiaztatzeko, hala nola aplikazioetan saioa hastean"</string>
@@ -1819,10 +1822,10 @@
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Laguntza"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Sare mugikorra"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Mugikorraren plana"</string>
-    <string name="sms_application_title" msgid="4791107002724108809">"SMSak"</string>
-    <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"SMS mezuetarako aplikazioa aldatu?"</string>
-    <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"<xliff:g id="NEW_APP">%1$s</xliff:g> aplikazioaren ordez, <xliff:g id="CURRENT_APP">%2$s</xliff:g> aplikazioa erabili SMS mezuetarako?"</string>
-    <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"Erabili <xliff:g id="NEW_APP">%s</xliff:g> SMS mezuetarako aplikazio gisa?"</string>
+    <string name="sms_application_title" msgid="4791107002724108809">"SMSetarako aplikazioa"</string>
+    <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"SMSetarako aplikazioa aldatu nahi duzu?"</string>
+    <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"<xliff:g id="NEW_APP">%1$s</xliff:g> aplikazioaren ordez, <xliff:g id="CURRENT_APP">%2$s</xliff:g> erabili nahi duzu SMSetarako aplikazio gisa?"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"<xliff:g id="NEW_APP">%s</xliff:g> erabili nahi duzu SMSetarako aplikazio gisa?"</string>
     <string name="network_scorer_picker_title" msgid="2022922801936206195">"Sare-balorazioen hornitzailea"</string>
     <string name="network_scorer_picker_none_preference" msgid="8894034333043177807">"Bat ere ez"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Wifi-laguntzailea aldatu nahi duzu?"</string>
@@ -2665,6 +2668,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ikusi bateria gehien erabiltzen duten aplikazioak"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Kargatzeko aukera mugatuta dago aldi baterako"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Bateriak gehiago iraun dezan. Lortu informazio gehiago."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Berrekin kargatzeari"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Egoera jakin batzuetan (adibidez, tenperatura altua denean edo kargatze-epe luzeetan), baliteke gehienez <xliff:g id="PERCENT">%1$s</xliff:g> arte kargatu ahal izatea telefonoa, bateria ez kaltetzeko.\n\nEgoera horiek amaitzean, telefonoa automatikoki hasiko da berriro ohi bezala kargatzen."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Egoera jakin batzuetan (adibidez, tenperatura altua denean edo kargatze-epe luzeetan), baliteke gehienez <xliff:g id="PERCENT">%1$s</xliff:g> kargatu ahal izatea telefonoa, bateria ez kaltetzeko.\n\nEgoera horiek amaitzean, telefonoa automatikoki hasiko da berriro ohi bezala kargatzen."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Telefonoa ohi baino gehiago erabili duzunez, baliteke bateria espero baino lehenago agortzea.\n\nHauek dira bateria gehien erabili duten aplikazioak:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Tableta ohi baino gehiago erabili duzunez, baliteke bateria espero baino lehenago agortzea.\n\nHauek dira bateria gehien erabili duten aplikazioak:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Gailua ohi baino gehiago erabili duzunez, baliteke bateria espero baino lehenago agortzea.\n\nHauek dira bateria gehien erabili duten aplikazioak:"</string>
@@ -3393,8 +3399,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Deitzeko aukera aurreratuak"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G bidezko deiak"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Erabili LTE zerbitzuak ahotsa eta bestelako komunikazioak hobetzeko (gomendatua)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Erabili 4G bidezko zerbitzuak ahotsa eta bestelako komunikazioak hobetzeko (gomendatua)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Erabili LTE ahots-deiak hobetzeko (gomendatua)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Erabili 4G ahots-deiak hobetzeko (gomendatua)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Erabili 5G ahots-deiak egiteko"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Bidali kontaktuak operadoreari"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Bidali kontaktuen telefono-zenbakiak eginbide hobetuak emateko"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"<xliff:g id="CARRIER">%1$s</xliff:g> operadoreari kontaktuak bidali nahi dizkiozu?"</string>
@@ -3588,6 +3596,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"bateria-aurrezlea, finkoa, iraunkorra, energia-aurrezlea, bateria"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ohitura, ordutegia, programazioa, programatu, bateria-aurrezlea, aurreztu bateria, bateria automatikoa, ehunekoa"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, deitzeko aukera aurreratuak, 4G bidezko deiak"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, deitzeko aukera aurreratuak, 5g bidezko deiak"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"gehitu hizkuntza, gehitu hizkuntza bat"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"testuaren tamaina, letra-tipo handia, letra handia, testu handia, ikusmen txarra, handitu testua, testua handitzea, letra handitzea, letra handiagoa"</string>
     <string name="default_sound" msgid="6604374495015245195">"Soinu lehenetsia"</string>
@@ -3916,7 +3925,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari jakinarazpenetarako sarbidea eman nahi diozu?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12-n, jakinarazpen hobetuek ordeztu dituzte Android-eko jakinarazpen egokituak. Eginbide horrek, iradokitako ekintzak eta erantzunak erakusten, eta zure jakinarazpenak antolatzen ditu. \n\nJakinarazpen hobetuek jakinarazpenen eduki osoa atzi dezakete, informazio pertsonala barne (esaterako, kontaktuen izenak eta mezuak). Halaber, eginbideak jakinarazpenak bazter ditzake edo haiei erantzun diezaieke; adibidez, telefono-deiei erantzun diezaieke eta ez molestatzeko modua kontrola dezake."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Jakinarazpenak atzitzeko baimena eman nahi diozu <xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> aplikazioak jakinarazpen guztiak irakurri ahalko ditu eta, haien barnean, informazio pertsonala egongo da agian (adibidez, kontaktuen izenak eta jasotzen dituzun testu-mezuak). Halaber, aplikazioak jakinarazpenak baztertu ahal izango ditu, edo jakinarazpen-botoiak erabili, telefono-deiak erantzutea barne. \n\nHorrez gain, ez molestatzeko modua aktibatzeko eta desaktibatzeko aukera izango du aplikazioak, baita harekin erlazionatutako ezarpenak aldatzekoa ere."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> aplikazioak jakinarazpen guztiak irakurri ahalko ditu eta, haien barnean, informazio pertsonala egongo da agian (adibidez, kontaktuen izenak eta jasotzen dituzun testu-mezuak). Halaber, aplikazioak jakinarazpenak atzeratu edo baztertu ahal izango ditu, edo jakinarazpenetako botoiak erabili, telefono-deiei erantzuteko botoia barne. \n\nHorrez gain, ez molestatzeko modua aktibatzeko eta desaktibatzeko aukera izango du aplikazioak, baita harekin erlazionatutako ezarpenak aldatzekoa ere."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> aplikazioari jakinarazpenak atzitzeko aukera desaktibatzen badiozu, baliteke ez molestatzeko modurako sarbidea ere desaktibatzea."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desaktibatu"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Utzi"</string>
@@ -4321,8 +4330,8 @@
     <string name="domain_urls_summary_some" msgid="1197692164421314523">"Ireki <xliff:g id="DOMAIN">%s</xliff:g> eta beste URL batzuk"</string>
     <string name="domain_urls_apps_summary_off" msgid="2534980824850890416">"Ez dago esteka bateragarriak ireki ditzakeen aplikaziorik"</string>
     <plurals name="domain_urls_apps_summary_on" formatted="false" msgid="7864816862441985323">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikaziok ireki ditzakete onartutako estekak</item>
-      <item quantity="one">Aplikazio batek ireki ditzake onartutako estekak</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikaziok ireki ditzakete esteka bateragarriak</item>
+      <item quantity="one">Aplikazio batek ireki ditzake esteka bateragarriak</item>
     </plurals>
     <string name="app_link_open_always" msgid="9167065494930657503">"Eman esteka bateragarriak irekitzeko baimena aplikazioari"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Galdetu beti"</string>
@@ -5265,7 +5274,7 @@
     <string name="sim_action_continue" msgid="1688813133152389943">"Egin aurrera"</string>
     <string name="sim_action_yes" msgid="8076556020131395515">"Bai"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Berrabiarazi"</string>
-    <string name="sim_action_no_thanks" msgid="435717748384544195">"Ez"</string>
+    <string name="sim_action_no_thanks" msgid="435717748384544195">"Ez, eskerrik asko"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Aldatu"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Ezin da aktibatu SIM txartela"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Kendu SIM txartela eta sar ezazu berriro. Arazoak badirau, berrabiarazi gailua."</string>

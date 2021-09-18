@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Sekali lagi"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Ikuti ikon sidik jari"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Angkat dan sentuhkan jari secara berulang untuk menambahkan bagian lain dari sidik jari Anda"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Sentuh lama setiap kali ikon sidik jari berpindah. Tindakan ini membantu merekam sidik jari Anda secara penuh."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Tindakan ini membantu merekam sidik jari Anda secara penuh"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Sentuh lama setiap kali ikon sidik jari berpindah. Tindakan ini membantu mengambil sidik jari Anda secara lebih menyeluruh."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Posisikan ujung jari Anda pada sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Terakhir, posisikan tepi jari Anda pada sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Posisikan sisi sidik jari Anda pada sensor, kemudian tahan, lalu beralihlah ke sisi lainnya"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tindakan ini membantu mengambil sidik jari Anda secara lebih menyeluruh"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Mendaftarkan sidik jari <xliff:g id="PERCENTAGE">%d</xliff:g> persen"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Sidik jari ditambahkan"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Kini Anda dapat menggunakan sidik jari untuk membuka kunci ponsel atau memverifikasi diri Anda, seperti saat login ke aplikasi"</string>
@@ -2665,6 +2668,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Lihat aplikasi dengan penggunaan tertinggi"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Pengisian daya dibatasi untuk sementara"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Untuk menghemat daya baterai. Pelajari lebih lanjut."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Lanjutkan pengisian daya"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Dalam kondisi tertentu, seperti suhu yang tinggi dan periode pengisian daya yang lama, pengisian daya dapat dibatasi hingga <xliff:g id="PERCENT">%1$s</xliff:g> untuk membantu menjaga kesehatan baterai.\n\nSaat kondisi tersebut berakhir, ponsel akan otomatis mengisi daya secara normal."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Dalam kondisi tertentu, seperti suhu yang tinggi dan periode pengisian daya yang lama, pengisian daya dapat dibatasi hingga <xliff:g id="PERCENT">%1$s</xliff:g> untuk membantu menjaga kesehatan baterai.\n\nSaat kondisi tersebut berakhir, tablet akan otomatis mengisi daya secara normal."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Karena Anda lebih sering menggunakan ponsel dari biasanya, daya baterai mungkin lebih cepat habis.\n\nAplikasi yang paling banyak menggunakan daya baterai:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Karena Anda lebih sering menggunakan tablet dari biasanya, daya baterai mungkin lebih cepat habis.\n\nAplikasi yang paling banyak menggunakan daya baterai:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Karena Anda lebih sering menggunakan perangkat dari biasanya, daya baterai mungkin lebih cepat habis.\n\nAplikasi yang paling banyak menggunakan daya baterai:"</string>
@@ -3393,8 +3399,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Advanced Calling"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Panggilan 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Gunakan layanan LTE untuk menyempurnakan suara dan komunikasi lainnya (disarankan)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Gunakan layanan 4G untuk menyempurnakan suara dan komunikasi lainnya (disarankan)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Gunakan layanan LTE untuk meningkatkan panggilan suara (direkomendasikan)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Gunakan layanan 4G untuk meningkatkan panggilan suara (direkomendasikan)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Gunakan 5G untuk panggilan suara"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Kirimkan kontak ke operator"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Kirim nomor telepon kontak untuk menyediakan fitur yang disempurnakan"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Kirimkan kontak ke <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3588,6 +3596,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"penghemat baterai, sticky, tetap, penghemat daya, baterai"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutinitas, jadwal, penghemat baterai, penghemat daya, baterai, otomatis, persen"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, panggilan telepon lanjutan, panggilan telepon 4g"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, panggilan telepon lanjutan, panggilan telepon 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"tambahkan bahasa, tambahkan sebuah bahasa"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"ukuran teks, hasil cetak besar, font besar, teks besar, gangguan penglihatan, buat teks lebih besar, pembesar font, pembesaran font"</string>
     <string name="default_sound" msgid="6604374495015245195">"Suara default"</string>
@@ -3916,7 +3925,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Izinkan akses notifikasi untuk <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Notifikasi yang ditingkatkan menggantikan Notifikasi Adaptif Android di Android 12. Fitur ini menunjukkan tindakan dan balasan yang disarankan, serta mengatur notifikasi. \n\nNotifikasi yang ditingkatkan dapat mengakses konten notifikasi, termasuk informasi pribadi seperti nama kontak dan pesan. Fitur ini juga dapat menutup atau merespons notifikasi, seperti menjawab panggilan telepon dan mengontrol fitur Jangan Ganggu."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Izinkan akses notifikasi untuk <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> akan dapat membaca semua notifikasi, termasuk informasi pribadi seperti nama kontak dan pesan teks yang Anda terima. Aplikasi ini juga akan dapat menutup notifikasi atau memicu tindakan pada tombol di notifikasi, termasuk menjawab panggilan telepon. \n\nIni juga akan memberi aplikasi kemampuan untuk mengaktifkan atau menonaktifkan fitur Jangan Ganggu dan mengubah setelan terkait."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> akan dapat membaca semua notifikasi, termasuk informasi pribadi seperti nama kontak dan teks pesan yang Anda terima. Aplikasi ini juga akan dapat menunda atau menutup notifikasi atau melakukan tindakan pada tombol di notifikasi, termasuk menjawab panggilan telepon. \n\nTindakan ini juga akan memberi aplikasi kemampuan untuk mengaktifkan atau menonaktifkan fitur Jangan Ganggu dan mengubah setelan terkait."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Jika Anda menonaktifkan akses notifikasi untuk <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, akses status Jangan Ganggu mungkin juga akan dinonaktifkan."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Nonaktifkan"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Batalkan"</string>

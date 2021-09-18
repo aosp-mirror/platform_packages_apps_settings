@@ -488,8 +488,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Vēlreiz…"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Atkārtota pieskaršanās pirksta nospieduma ikonai"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Atkārtoti uzlieciet pirkstu, lai pievienotu dažādas pirksta nospieduma daļas."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Pieskarieties pirksta nospieduma ikonai un turiet to ikreiz, kad tā pārvietojas. Tādējādi varat tvert visu pirksta nospiedumu."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Tādējādi varat tvert visu pirksta nospiedumu."</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Pieskarieties pirksta nospieduma ikonai un turiet to ikreiz, kad tā pārvietojas. Tādējādi tiks tverts plašāks pirksta nospiedums."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Novietojiet pirksta galu uz sensora"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Visbeidzot, novietojiet pirksta sānus"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Novietojiet pirksta sānu uz sensora un turiet, pēc tam novietojiet otru pirksta sānu."</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tādējādi tiks tverts plašāks pirksta nospiedums."</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Pirksta nospieduma reģistrēšana: <xliff:g id="PERCENTAGE">%d</xliff:g> procenti"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Pirksta nospiedums pievienots"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Tagad varat izmantot pirksta nospiedumu, lai autorizētu tālruni vai apstiprinātu savu identitāti, piemēram, pierakstoties lietotnēs."</string>
@@ -2696,6 +2699,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Skatiet lietotnes, kas patērē visvairāk akumulatora enerģijas"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Uzlāde īslaicīgi ierobežota"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Akumulatora enerģijas taupīšana. Uzziniet vairāk."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Atsākt uzlādi"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Noteiktos apstākļos, piemēram, augstā temperatūrā un ilgos uzlādes periodos, uzlādes līmenis var tikt ierobežots līdz <xliff:g id="PERCENT">%1$s</xliff:g>, lai palīdzētu uzturēt akumulatoru darba kārtībā.\n\nKad šie apstākļi vairs nepastāv, jūsu tālrunis tiek automātiski uzlādēts kā parasti."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Noteiktos apstākļos, piemēram, augstā temperatūrā un ilgos uzlādes periodos, uzlādes līmenis var tikt ierobežots līdz <xliff:g id="PERCENT">%1$s</xliff:g>, lai palīdzētu uzturēt akumulatoru darba kārtībā.\n\nKad šie apstākļi vairs nepastāv, jūsu planšetdators tiek automātiski uzlādēts kā parasti."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Tā kā jūsu tālrunis tiek izmantots vairāk nekā parasti, akumulators var izlādēties ātrāk.\n\nTālāk norādītas lietotnes, kas izmanto visvairāk akumulatora enerģijas."</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Tā kā jūsu planšetdators tiek izmantots vairāk nekā parasti, akumulators var izlādēties ātrāk.\n\nTālāk norādītas lietotnes, kas izmanto visvairāk akumulatora enerģijas."</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Tā kā jūsu ierīce tiek izmantota vairāk nekā parasti, akumulators var izlādēties ātrāk.\n\nTālāk norādītas lietotnes, kas izmanto visvairāk akumulatora enerģijas."</string>
@@ -3437,8 +3443,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Paplašinātas zvanu iespējas"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G zvani"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Lietojiet LTE pakalpojumus, lai uzlabotu balss un cita veida saziņu (ieteicams)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Lietojiet 4G pakalpojumus, lai uzlabotu balss un cita veida saziņu (ieteicams)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Izmantojiet LTE pakalpojumus, lai uzlabotu balss zvanus (ieteicams)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Izmantojiet 4G pakalpojumus, lai uzlabotu balss zvanus (ieteicams)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Izmantojiet 5G balss zvaniem"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Sūtīt kontaktpersonu informāciju operatoram"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Sūtīt jūsu kontaktpersonu tālruņa numurus, lai nodrošinātu uzlabotās funkcijas"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Vai sūtīt kontaktpersonu informāciju operatoram <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3633,6 +3641,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"akumulatora enerģijas taupīšanas režīms, fiksēts, saglabāties, enerģijas taupīšanas režīms, akumulators"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"darbību secība, grafiks, akumulatora enerģijas taupīšanas režīms, enerģijas taupīšanas režīms, akumulators, automātiski, procenti"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, paplašinātas zvanu iespējas, 4G zvani"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, paplašinātas zvanu iespējas, 5g zvani"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"pievienot valodu, valodas pievienošana"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"teksta lielums, lieli burti, lieli fonti, liels teksts, vājredzība, padarīt tekstu lielāku, fontu palielinātājs, fontu palielināšana"</string>
     <string name="default_sound" msgid="6604374495015245195">"Noklusējuma skaņa"</string>
@@ -3965,7 +3974,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vai atļaut pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> piekļūt paziņojumiem?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android adaptīvie paziņojumi ir aizstāti ar funkciju “Uzlabotie paziņojumi” operētājsistēmā Android 12. Šī funkcija parāda ieteiktās darbības un atbildes, kā arī kārto jūsu paziņojumus. \n\nFunkcija “Uzlabotie paziņojumi” var piekļūt paziņojumu saturam, tostarp personas informācijai, piemēram, kontaktpersonu vārdiem un ziņojumiem. Šī funkcija var arī noraidīt paziņojumus vai atbildēt uz tiem, piemēram, atbildēt uz tālruņa zvaniem vai pārvaldīt funkciju “Netraucēt”."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vai atļaut pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> piekļūt paziņojumiem?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> varēs lasīt visus paziņojumus, tostarp personas informāciju, piemēram, kontaktpersonu vārdu un saņemtās īsziņas. Šī lietotne varēs arī noraidīt paziņojumus vai izmantot paziņojumos esošās pogas darbību veikšanai, tostarp atbildēt uz tālruņa zvaniem. \n\nLietotne varēs arī ieslēgt vai izslēgt režīmu “Netraucēt” un mainīt saistītos iestatījumus."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> varēs lasīt visus paziņojumus, tostarp personas informāciju, piemēram, kontaktpersonu vārdu un saņemtās īsziņas. Šī lietotne varēs arī atlikt vai noraidīt paziņojumus vai izmantot paziņojumos esošās pogas darbību veikšanai, tostarp atbildēt uz tālruņa zvaniem. \n\nLietotne varēs arī ieslēgt vai izslēgt režīmu “Netraucēt” un mainīt saistītos iestatījumus."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Izslēdzot paziņojumu piekļuvi lietotnei <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, iespējams, tiks izslēgta arī piekļuve režīmam “Netraucēt”."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Izslēgt"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Atcelt"</string>
