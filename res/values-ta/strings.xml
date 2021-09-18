@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"மீண்டும் ஒருமுறை தொடுங்கள்"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"கைரேகை ஐகானைப் பின்பற்றுங்கள்"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"கைரேகையின் பகுதிகளைச் சேர்க்க, விரலை எடுத்து எடுத்து வைக்கவும்"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"கைரேகை ஐகான் அசையும்போதெல்லாம் அதைத் தொட்டுப் பிடித்திருங்கள். உங்கள் கைரேகை முழுவதையும் பதிவுசெய்ய இது உதவுகிறது."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"உங்கள் கைரேகை முழுவதையும் பதிவுசெய்ய இது உதவுகிறது"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"கைரேகை ஐகான் அசையும் போதெல்லாம் சென்சாரைத் தொட்டுப் பிடித்திருக்கவும். இது உங்கள் கைரேகையைத் துல்லியமாகப் பதிவுசெய்ய உதவும்."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"விரல்நுனியை சென்சாரின் மீது வைக்கவும்"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"இறுதியாக விரலின் விளிம்புகளை சென்சாரின் மீது வைக்கவும்"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"உங்கள் விரலின் விளிம்புப் பகுதியை சென்சாரின் ஒரு பக்கத்தில் வைத்துப் பிடித்திருந்து, பிறகு மற்றொரு பக்கத்திற்கு மாற்றவும்"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"இது உங்கள் கைரேகையைத் துல்லியமாகப் பதிவுசெய்ய உதவும்"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"கைரேகை <xliff:g id="PERCENTAGE">%d</xliff:g> சதவீதம் பதிவுசெய்யப்பட்டது"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"கைரேகை சேர்க்கப்பட்டது"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"மொபைலை அன்லாக் செய்வதற்கும் நீங்கள்தான் என்பதை உறுதிப்படுத்துவதற்கும் (உதாரணமாக, ஆப்ஸில் உள்நுழைதல்) இனி உங்கள் கைரேகையைப் பயன்படுத்தலாம்"</string>
@@ -2255,7 +2258,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"கேஜெட்டைத் தேர்வுசெய்க"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"விட்ஜெட்டைத் தேர்வுசெய்யவும்"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"விட்ஜெட்டை உருவாக்கி, அணுகலை அனுமதிக்கவா?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"விட்ஜெட்டை உருவாக்கியவுடன், இது காண்பிக்கும் எல்லா தரவையும் <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> அணுக முடியும்."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"விட்ஜெட்டை உருவாக்கியதும் திரையில் தோன்றும் எல்லாவற்றையும் ஆப்ஸால் அணுக முடியும்.\n\nஆப்ஸ்: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nவிட்ஜெட்: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"விட்ஜெட்களை உருவாக்கவும், அவற்றின் தரவை அணுகவும் எப்போதும் <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> ஐ அனுமதி"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"பயன்பாட்டுப் புள்ளிவிவரங்கள்"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"பயன்பாட்டுப் புள்ளிவிவரங்கள்"</string>
@@ -2685,6 +2688,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"பேட்டரியை அதிகமாக உபயோகிக்கும் ஆப்ஸைக் காண்க"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"சார்ஜாவது தற்காலிகமாக வரம்பிடப்பட்டுள்ளது"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"உங்கள் பேட்டரியின் சார்ஜைச் சேமிக்க. மேலும் அறிக."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"சார்ஜ் செய்வதை மீண்டும் தொடங்கு"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"அதிக வெப்பநிலை மற்றும் நீண்ட நேரம் சார்ஜ் ஆவது போன்ற குறிப்பிட்ட சில சூழல்களில் பேட்டரியின் ஆயுளைப் பாதுகாக்க <xliff:g id="PERCENT">%1$s</xliff:g> அளவிற்கு மட்டுமே உங்கள் மொபைல் சார்ஜ் ஆகக்கூடும்.\n\n அந்தச் சூழல்கள் முடிந்த பின் உங்கள் மொபைல் தானாக எப்போதும் போல் சார்ஜ் ஆகும்."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"அதிக வெப்பநிலை மற்றும் நீண்ட நேரம் சார்ஜ் ஆவது போன்ற குறிப்பிட்ட சில சூழல்களில் பேட்டரியின் ஆயுளைப் பாதுகாக்க <xliff:g id="PERCENT">%1$s</xliff:g> அளவிற்கு மட்டுமே உங்கள் டேப்லெட் சார்ஜ் ஆகக்கூடும்.\n\n அந்தச் சூழல்கள் முடிந்த பின் உங்கள் டேப்லெட் தானாக முன்பு போல் சார்ஜ் ஆகும்."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"உங்கள் மொபைல் வழக்கத்தைவிட அதிகமாகப் பயன்படுத்தப்பட்டுள்ளது என்பதால் உங்கள் பேட்டரியின் ஆற்றல் இயல்பைவிட வேகமாகக் குறைந்து தீர்ந்துவிடக்கூடும்.\n\nஅதிகளவு பேட்டரியைப் பயன்படுத்தும் ஆப்ஸ்:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"உங்கள் டேப்லெட் வழக்கத்தைவிட அதிகமாகப் பயன்படுத்தப்பட்டுள்ளது என்பதால் உங்கள் பேட்டரியின் ஆற்றல் இயல்பைவிட வேகமாகக் குறைந்து தீர்ந்துவிடக்கூடும்.\n\nஅதிகளவு பேட்டரியைப் பயன்படுத்தும் ஆப்ஸ்:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"உங்கள் சாதனம் வழக்கத்தைவிட அதிகமாகப் பயன்படுத்தப்பட்டுள்ளது என்பதால் உங்கள் பேட்டரியின் ஆற்றல் இயல்பைவிட வேகமாகக் குறைந்து தீர்ந்துவிடக்கூடும்.\n\nஅதிகளவு பேட்டரியைப் பயன்படுத்தும் ஆப்ஸ்:"</string>
@@ -3413,8 +3419,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"மேம்பட்ட அழைப்பு"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G அழைப்பு"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"குரலையும் வேறு தகவல்தொடர்புகளையும் மேம்படுத்த LTE சேவைகளைப் பயன்படுத்தவும் (பரிந்துரைக்கப்பட்டது)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"குரலையும் வேறு தகவல்தொடர்புகளையும் மேம்படுத்த 4G சேவைகளைப் பயன்படுத்தவும் (பரிந்துரைக்கப்பட்டது)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"குரல் அழைப்புகளை மேம்படுத்த LTE சேவைகளைப் பயன்படுத்தலாம் (பரிந்துரைக்கப்பட்டது)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"குரல் அழைப்புகளை மேம்படுத்த 4G சேவைகளைப் பயன்படுத்தலாம் (பரிந்துரைக்கப்பட்டது)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"குரல் அழைப்புகளுக்கு 5G சேவைகளைப் பயன்படுத்தலாம்"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"மொபைல் நிறுவனத்திற்குத் தொடர்புகளை அனுப்பு"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"தொடர்புகளின் மொபைல் எண்களை அனுப்புவதன் மூலம் அவர்களுக்கு மேம்பட்ட அம்சங்கள் கிடைக்கும்"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"<xliff:g id="CARRIER">%1$s</xliff:g> நிறுவனத்திற்குத் தொடர்புகளை அனுப்பவா?"</string>
@@ -3608,6 +3616,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"பேட்டரி சேமிப்பான், ஸ்டிக்கி, பெர்சிஸ்ட், மின்சக்தி சேமிப்பான், பேட்டரி"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"வழக்கமான செயல்பாடு, கால அட்டவணை, பேட்டரி சேமிப்பான், மின்சக்தி சேமிப்பான், பேட்டரி, தானியங்கு, சதவீதம்"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, மேம்பட்ட அழைப்பு, 4g அழைப்பு"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, மேம்பட்ட அழைப்பு, 5g அழைப்பு"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"மொழியைச் சேர்க்கவும், ஒரு மொழியைச் சேர்க்கவும்"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"உரை அளவு, பெரிய அச்சு, பெரிய எழுத்து, பெரிய உரை, குறைந்த பார்வைத்திறன், உரையைப் பெரிதாக்குதல், எழுத்துப் பெரிதாக்கி, எழுத்தைப் பெரிதாக்குவது"</string>
     <string name="default_sound" msgid="6604374495015245195">"இயல்பு ஒலி"</string>
@@ -3936,7 +3945,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> சேவைக்கான அறிவிப்பு அணுகலை அனுமதிக்கவா?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 பதிப்பில் \'Android சூழலுக்கேற்ற அறிவிப்புகள்\' அம்சத்திற்குப் பதிலாக \'மேம்பட்ட அறிவிப்புகள்\' கொடுக்கப்பட்டுள்ளது. இந்த அம்சம், பரிந்துரைக்கப்படும் செயல்களையும் பதில்களையும் காட்டுவதுடன் உங்கள் அறிவிப்புகளையும் ஒழுங்கமைக்கும். \n\nதொடர்புகளின் பெயர்கள், மெசேஜ்கள் போன்ற தனிப்பட்ட தகவல்கள் உட்பட அனைத்து அறிவிப்பு உள்ளடக்கத்தையும் \'மேம்பட்ட அறிவிப்புகள்\' அணுக முடியும். மேலும் இந்த அம்சத்தால் அறிவிப்புகளை நிராகரிக்கவும் அவற்றுக்குப் பதிலளிக்கவும் முடியும் (அழைப்புகளுக்குப் பதிலளிப்பது, \'தொந்தரவு செய்ய வேண்டாம்\' அம்சத்தைக் கட்டுப்படுத்துவது போன்றவை)."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g>க்கான அறிவிப்பு அணுகலை அனுமதிக்கவா?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"தொடர்புகளின் பெயர்கள், உங்களுக்கு வரும் மெசேஜ் போன்ற தனிப்பட்ட தகவல்கள் உட்பட அனைத்து அறிவிப்புகளையும் <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> சேவையால் படிக்க இயலும். இந்த ஆப்ஸால் அறிவிப்புகளை நிராகரிக்கவோ, அழைப்புகளுக்குப் பதிலளிப்பது போன்றவற்றில் பட்டன்களை இயக்கவோ முடியும். \n\n\'தொந்தரவு செய்ய வேண்டாம்\' அம்சத்தை ஆன் அல்லது ஆஃப் செய்வதற்கும் அது தொடர்பான அமைப்புகளை மாற்றுவதற்கும் இந்த ஆப்ஸிற்கு அனுமதி கிடைக்கும்."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"தொடர்புகளின் பெயர்கள் மற்றும் உங்களுக்கான மெசேஜ்களில் இருக்கும் உரைகள் போன்ற தனிப்பட்ட தகவல்கள் அடங்கிய அனைத்து அறிவிப்புகளையும் <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ஆப்ஸால் படிக்க இயலும். இந்த ஆப்ஸால் அறிவிப்புகளைச் சற்றுநேரம் நிறுத்திவைக்கவோ நிராகரிக்கவோ, அழைப்புகளுக்குப் பதிலளிப்பது உட்பட அவற்றிலுள்ள பட்டன்களில் நடவடிக்கை எடுக்கவோ முடியும். \n\nதொந்தரவு செய்ய வேண்டாம் அம்சத்தை ஆன் அல்லது ஆஃப் செய்வதற்கு ஆப்ஸை அனுமதிப்பதோடு அது தொடர்பான அமைப்புகளை மாற்றவும் இதனால் முடியும்."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>க்கு அறிவிப்பு அணுகலை முடக்கினால், \'தொந்தரவு செய்யாதே\' அணுகலும் முடக்கப்படலாம்."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"முடக்கு"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ரத்துசெய்"</string>
@@ -4932,7 +4941,7 @@
     <string name="enterprise_privacy_security_logs" msgid="8494681624247959075">"மிகச் சமீபத்திய பாதுகாப்புப் பதிவு"</string>
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"ஏதுமில்லை"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"நிறுவிய ஆப்ஸ்"</string>
-    <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"ஆப்ஸின் எண்ணிக்கை கணிப்பின் அடிப்படையிலானது. இதில் Play ஸ்டோரிலிருந்து நிறுவப்படாத ஆப்ஸ் சேர்க்கப்படாமல் இருக்கலாம்."</string>
+    <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"ஆப்ஸின் எண்ணிக்கை கணிப்பின் அடிப்படையிலானது. இதில் Play Storeரிலிருந்து நிறுவப்படாத ஆப்ஸ் சேர்க்கப்படாமல் இருக்கலாம்."</string>
     <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
       <item quantity="other">குறைந்தபட்சம் <xliff:g id="COUNT_1">%d</xliff:g> ஆப்ஸ்</item>
       <item quantity="one">குறைந்தபட்சம் <xliff:g id="COUNT_0">%d</xliff:g> பயன்பாடு</item>
