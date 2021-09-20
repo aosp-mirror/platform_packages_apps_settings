@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Уште еднаш"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Следете ја иконата за отпечаток"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Подигнувајте го прстот за да ги додадете различните делови од отпечатокот"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Допрете и задржете секој пат кога иконата за отпечаток ќе се премести. Ова помага да се сними целиот отпечаток."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Ова помага да се сними целиот отпечаток"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Допрете и задржете секој пат кога иконата за отпечаток ќе се премести. Ова помага за да се сними повеќе од отпечатокот."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Поставете го врвот на прстот на сензорот"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"За крај, поставете ги рабовите на прстот"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Поставете го отпечаток странично на сензорот и задржете, а потоа направете исто со другата страна"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Ова помага за да се сними повеќе од отпечатокот"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -2257,7 +2260,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Избери украсна програма"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Избери виџет"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Создади виџет и дозволи пристап?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Откако ќе создадете виџет, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> може да пристапи кон сите податоци што ги прикажува."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Откако ќе го создадете виџетот, апликацијата може да пристапи до сѐ што е прикажано.\n\nАпликација: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nВиџет: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Дозволи <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> да создава виџети и секогаш да пристапува кон нивните податоци"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Статистика на користење"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Статистика на користење"</string>
@@ -2687,6 +2690,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Прегледајте ги апликациите со најголемо користење"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Полнењето е привремено ограничено"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"За да се заштеди батеријата. Дознајте повеќе."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Продолжи со полнење"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"При одредени услови, како високи температури и долги периоди на полнење, полнењето може да се ограничи на <xliff:g id="PERCENT">%1$s</xliff:g> за да помогне да се зачува состојбата на батеријата.\n\nКога таквите услови ќе завршат, вашиот телефон автоматски ќе се полни нормално."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"При одредени услови, како високи температури и долги периоди на полнење, полнењето може да се ограничи на <xliff:g id="PERCENT">%1$s</xliff:g> за да помогне да се зачува состојбата на батеријата.\n\nКога таквите услови ќе завршат, вашиот таблет автоматски ќе се полни нормално."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Бидејќи сте го користеле телефонот повеќе од вообичаено, батеријата може да ви се потроши порано од обично.\n\nАпликации што најмногу ја користат батеријата:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Бидејќи сте го користеле таблетот повеќе од вообичаено, батеријата може да ви се потроши порано од обично.\n\nАпликации што најмногу ја користат батеријата:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Бидејќи сте го користеле уредот повеќе од вообичаено, батеријата може да ви се потроши порано од обично.\n\nАпликации што најмногу ја користат батеријата:"</string>
@@ -3415,8 +3421,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Напредно повикување"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Повици преку 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Користете ги LTE-услугите за да ја подобрите гласовната и другите видови комуникација (препорачано)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Користете ги услугите 4G за да ја подобрите гласовната и другите видови комуникација (препорачано)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Користете ги LTE-услугите за да ги подобрите гласовните повици (препорачано)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Користете ги 4G-услугите за да ги подобрите гласовните повици (препорачано)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Користете 5G за гласовни повици"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Испраќајте ги контактите кај операторот"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Испраќајте ги телефонските броеви на контактите за да се обезбедат подобрени функции"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Да се испраќаат контакти кај <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3610,6 +3618,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"штедач на батерија, леплив, упорен, штедач на енергија, батерија"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"рутина, распоред, штедач на батерија, штедач на енергија, батерија, автоматски, процент"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, напредно повикување, повикување преку 4G"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, напредно повикување, повикување преку 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"додај јазик, додај некој јазик"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"големина на текст, големи букви, голем фонт, голем текст, слаб вид, зголемување текст, фонт, зголеми, зголеми фонт"</string>
     <string name="default_sound" msgid="6604374495015245195">"Стандарден звук"</string>
@@ -3938,7 +3947,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Да му се дозволи пристап до известувања на <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"„Подобрените известувања“ ги заменија „Адаптивните известувања на Android“ во Android 12. Оваа функција прикажува предложени дејства и одговори и ги организира вашите известувања. \n\n„Подобрените известувања“ може да пристапуваат до содржините од известувањата, вклучително и личните податоци, како што се имињата на контактите и пораките. Функцијава може и да ги отфрла или да одговара на известувањата, како на пример, да одговара на телефонски повици и да го контролира режимот „Не вознемирувај“."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Да се дозволи пристап на <xliff:g id="SERVICE">%1$s</xliff:g> до известувањата?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ќе може да ги чита сите известувања, вклучувајќи ги личните податоци како што се имињата на контактите и текстот од пораките што ги примате. Ќе може и да отфрла известувања или да ги користи копчињата во известувањата, вклучително и да одговара на телефонски повици. \n\nОва ќе ѝ овозможи на апликацијата да го вклучува и исклучува „Не вознемирувај“ и да ги менува поврзаните поставки."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ќе може да ги чита сите известувања, вклучително и личните податоци, како што се имињата на контактите и текстот од пораките што ги примате. Ќе може да одложува или отфрла известувања или да ги користи копчињата во известувањата, вклучително и да одговара на телефонски повици. \n\nОва ќе ѝ овозможи на апликацијата да го вклучува и исклучува „Не вознемирувај“ и да ги менува поврзаните поставки."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ако го исклучите пристапот на <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до известувањата, пристапот до „Не вознемирувај“ може исто така да се исклучи."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Исклучи"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Откажи"</string>

@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Un cop més"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Segueix la icona de l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Continua aixecant el dit per afegir les diferents parts de l\'empremta digital"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Mantén premut el sensor cada vegada que la icona d\'empremta digital es mogui. Això ajuda a capturar l\'empremta digital completa."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Això ajuda a capturar l\'empremta digital completa"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Mantén premuda la icona d\'empremta digital cada vegada que es mogui. Això ajuda a capturar millor l\'empremta digital."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Col·loca la punta del dit al sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Per acabar, col·loca les vores del dit"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Col·loca un costat del dit al sensor i espera; a continuació, canvia a l\'altre costat"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Això ajuda a capturar millor l\'empremta digital"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registre de l\'empremta digital <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"S\'ha afegit l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Ara pots utilitzar l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat, com ara quan inicies la sessió en aplicacions"</string>
@@ -1290,7 +1293,7 @@
     <string name="account_settings" msgid="255404935489127404">"Comptes"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Comptes del perfil de treball: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Comptes del perfil personal"</string>
-    <string name="accessibility_work_account_title" msgid="7622485151217943839">"Compte de la feina: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
+    <string name="accessibility_work_account_title" msgid="7622485151217943839">"Compte de treball: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Compte personal: <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Cerca"</string>
     <string name="display_settings" msgid="7197750639709493852">"Pantalla"</string>
@@ -2255,7 +2258,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Selecció de gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Selecció de widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Vols crear el widget i permetre l\'accés?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Després de crear el widget, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> podrà accedir a totes les dades que mostri."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Després de crear el widget, l\'aplicació pot accedir a tot el que es mostra.\n\nAplicació: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nWidget: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Permet sempre que <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> creï widgets i que accedeixi a les seves dades"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Estadístiques d\'ús"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Estadístiques d\'ús"</string>
@@ -2685,6 +2688,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Mostra les aplicacions que més bateria utilitzen"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Càrrega limitada temporalment"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Per estalviar bateria. Obtén més informació."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Reprèn la càrrega"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"En determinades condicions, com ara altes temperatures i llargs períodes de càrrega, pot ser que la càrrega de la bateria es limiti al <xliff:g id="PERCENT">%1$s</xliff:g> per mantenir el bon estat de la bateria.\n\nQuan finalitzin aquestes condicions, el telèfon tornarà a carregar-se de manera normal automàticament."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"En determinades condicions, com ara altes temperatures i llargs períodes de càrrega, pot ser que la càrrega de la bateria es limiti al <xliff:g id="PERCENT">%1$s</xliff:g> per mantenir el bon estat de la bateria.\n\nQuan finalitzin aquestes condicions, la tauleta tornarà a carregar-se de manera normal automàticament."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Com que has utilitzat el telèfon més de l\'habitual, és possible que la bateria s\'esgoti abans del normal.\n\nAquestes són les aplicacions que consumeixen més bateria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Com que has utilitzat la tauleta més de l\'habitual, és possible que la bateria s\'esgoti abans del normal.\n\nAquestes són les aplicacions que consumeixen més bateria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Com que has utilitzat el dispositiu més de l\'habitual, és possible que la bateria s\'esgoti abans del normal.\n\nAquestes són les aplicacions que consumeixen més bateria:"</string>
@@ -3413,8 +3419,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Trucades avançades"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Trucades 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Utilitza els serveis LTE per millorar la veu i la comunicació (opció recomanada)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Utilitza els serveis 4G per millorar la veu i la comunicació (opció recomanada)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Utilitza els serveis LTE per millorar les trucades de veu (opció recomanada)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Utilitza els serveis 4G per millorar les trucades de veu (opció recomanada)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Utilitza 5G per a les trucades de veu"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Envia els contactes a l\'operador"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Envia els números de telèfon dels teus contactes per proporcionar funcions millorades"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Vols enviar els contactes a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3608,6 +3616,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"estalvi de bateria, fixa, duració, estalvi d\'energia, bateria"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, programació, estalvi de bateria, estalvi d\'energia, bateria, automàtic, percentatge"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, trucades avançades, trucades 4g"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, trucades avançades, trucades 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"afegir idioma, afegir un idioma"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"mida del text, impressió gran, lletra gran, text gran, poca visió, fer el text més gran, ampliador de font, ampliació de font"</string>
     <string name="default_sound" msgid="6604374495015245195">"So predeterminat"</string>
@@ -3936,7 +3945,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vols que <xliff:g id="SERVICE">%1$s</xliff:g> tingui accés a les notificacions?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Les notificacions millorades han substituït les notificacions adaptatives d\'Android a Android 12. Aquesta funció mostra les accions i respostes suggerides, i organitza les teves notificacions. \n\nLes notificacions millorades poden accedir al contingut de les notificacions, inclosa la informació personal com els noms dels contactes i els missatges. Aquesta funció també pot ignorar les notificacions o respondre-hi; per exemple, pot contestar a trucades i controlar el mode No molestis."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vols que <xliff:g id="SERVICE">%1$s</xliff:g> tingui accés a les notificacions?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrà llegir totes les notificacions, inclosa la informació personal, com ara els noms dels contactes i el text dels missatges que rebis. Aquesta aplicació també podrà ignorar les notificacions o fer accions amb els botons de les notificacions, com ara contestar a trucades telefòniques. \n\nL\'aplicació també podrà activar i desactivar el mode No molestis i canviar la configuració que hi estigui relacionada."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrà llegir totes les notificacions, inclosa la informació personal, com ara els noms dels contactes i el text dels missatges que rebis. Aquesta aplicació també podrà posposar o ignorar les notificacions o fer accions amb els botons de les notificacions, com ara contestar a trucades. \n\nL\'aplicació també podrà activar i desactivar el mode No molestis i canviar la configuració que hi estigui relacionada."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si desactives l\'accés a les notificacions per a <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, és possible que també es desactivi l\'accés al mode No molestis."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desactiva"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancel·la"</string>
@@ -4924,7 +4933,7 @@
     <string name="enterprise_privacy_exposure_category" msgid="2507761423540037308">"Tipus d\'informació que la teva organització pot veure"</string>
     <string name="enterprise_privacy_exposure_changes_category" msgid="5459989751333816587">"Canvis fets per l\'administrador de la teva organització"</string>
     <string name="enterprise_privacy_device_access_category" msgid="140157499478630004">"El teu accés a aquest dispositiu"</string>
-    <string name="enterprise_privacy_enterprise_data" msgid="3963070078195245028">"Dades associades al teu compte de la feina, com ara el correu electrònic i el calendari"</string>
+    <string name="enterprise_privacy_enterprise_data" msgid="3963070078195245028">"Dades associades al teu compte de treball, com ara el correu electrònic i el calendari"</string>
     <string name="enterprise_privacy_installed_packages" msgid="6707006112254572820">"Llista de les aplicacions que hi ha al dispositiu"</string>
     <string name="enterprise_privacy_usage_stats" msgid="6328506963853465534">"Temps dedicat i dades utilitzades en cada aplicació"</string>
     <string name="enterprise_privacy_network_logs" msgid="3081744541193695887">"Registre del trànsit de xarxa més recent"</string>

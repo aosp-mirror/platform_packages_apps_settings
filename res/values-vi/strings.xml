@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Vui lòng chạm lần nữa"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Đi theo biểu tượng vân tay"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Tiếp tục nhấc ngón tay để thêm các phần khác của vân tay"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Chạm và giữ mỗi khi biểu tượng vân tay di chuyển. Thao tác này giúp chụp toàn bộ vân tay của bạn."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Thao tác này giúp chụp toàn bộ vân tay của bạn"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Chạm và giữ mỗi khi biểu tượng vân tay di chuyển. Thao tác này giúp ghi lại được nhiều vân tay hơn."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Đặt đầu ngón tay lên cảm biến"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Cuối cùng, đặt các cạnh của ngón tay"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Đặt vân tay ở phần bên của ngón tay lên cảm biến rồi giữ, sau đó chuyển sang phần bên kia"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Thao tác này giúp ghi lại được nhiều vân tay hơn"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -2257,7 +2260,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Chọn tiện ích"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Chọn tiện ích"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Tạo tiện ích và cho phép truy cập?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Sau khi bạn tạo tiện ích, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> có thể truy cập tất cả dữ liệu mà nó hiển thị."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Sau khi bạn tạo tiện ích, ứng dụng có thể truy cập vào mọi dữ liệu được hiển thị.\n\nỨng dụng: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nTiện ích: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Luôn cho phép <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> tạo các tiện ích và truy cập dữ liệu của chúng"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Thống kê sử dụng"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Thống kê sử dụng"</string>
@@ -2687,6 +2690,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Xem các ứng dụng có mức sử dụng pin cao nhất"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Khả năng sạc tạm thời bị hạn chế"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Để kéo dài tuổi thọ pin. Tìm hiểu thêm."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Tiếp tục sạc"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Trong một số điều kiện, chẳng hạn như nhiệt độ cao và thời gian sạc lâu, mức sạc có thể bị hạn chế ở <xliff:g id="PERCENT">%1$s</xliff:g> để duy trì độ bền của pin.\n\nKhi các điều kiện đó chấm dứt, điện thoại của bạn sẽ tự động sạc như bình thường."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Trong một số điều kiện, chẳng hạn như nhiệt độ cao và thời gian sạc lâu, mức sạc có thể bị hạn chế ở <xliff:g id="PERCENT">%1$s</xliff:g> để duy trì độ bền của pin.\n\nKhi các điều kiện đó chấm dứt, điện thoại của bạn sẽ tự động sạc như bình thường."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Do bạn đã dùng điện thoại nhiều hơn mức bình thường, nên pin có thể hết sớm hơn thường lệ.\n\nNhững ứng dụng tiêu hao nhiều pin nhất:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Do bạn đã dùng máy tính bảng nhiều hơn mức bình thường, nên pin có thể hết sớm hơn thường lệ.\n\nNhững ứng dụng tiêu hao nhiều pin nhất:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Do bạn đã dùng thiết bị nhiều hơn mức bình thường, nên pin có thể hết sớm hơn thường lệ.\n\nNhững ứng dụng tiêu hao nhiều pin nhất:"</string>
@@ -3415,8 +3421,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Gọi nâng cao"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Gọi qua 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Dùng dịch vụ LTE để cải thiện tính năng thoại và các phương thức giao tiếp khác (khuyên dùng)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Sử dụng dịch vụ 4G để cải tiến tính năng thoại và các phương thức giao tiếp khác (đề xuất)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Dùng dịch vụ LTE để cải thiện chất lượng cuộc gọi thoại (khuyên dùng)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Dùng dịch vụ 4G để cải thiện chất lượng cuộc gọi thoại (khuyên dùng)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Dùng 5G để gọi thoại"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Gửi danh bạ cho nhà mạng"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Gửi số điện thoại trên danh bạ của bạn để cung cấp các tính năng nâng cao"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Gửi danh bạ cho <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3610,6 +3618,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"trình tiết kiệm pin, cố định, tiếp tục, trình tiết kiệm điện, pin"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"quy trình, lịch biểu, trình tiết kiệm pin, trình tiết kiệm điện, pin, tự động, phần trăm"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, gọi nâng cao, gọi qua mạng 4G"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, tính năng gọi nâng cao, gọi qua 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"thêm ngôn ngữ, thêm một ngôn ngữ"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"cỡ chữ, bản in lớn, phông chữ lớn, chữ lớn, thị lực kém, tăng cỡ chữ, tăng kích cỡ phông chữ, phóng to phông chữ"</string>
     <string name="default_sound" msgid="6604374495015245195">"Âm thanh mặc định"</string>
@@ -3938,7 +3947,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Cho phép <xliff:g id="SERVICE">%1$s</xliff:g> truy cập thông báo?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Thông báo nâng cao đã thay thế Thông báo thích ứng trên Android trong Android 12. Tính năng này hiển thị những thao tác và câu trả lời đề xuất, đồng thời sắp xếp các thông báo của bạn. \n\nThông báo nâng cao có thể đọc mọi nội dung thông báo, bao gồm cả thông tin cá nhân như tên của người liên hệ và tin nhắn. Tính năng này cũng có thể đóng hoặc phản hồi các thông báo, chẳng hạn như trả lời cuộc gọi điện thoại, đồng thời có thể kiểm soát chế độ Không làm phiền."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Cho phép <xliff:g id="SERVICE">%1$s</xliff:g> truy cập thông báo?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> có thể đọc mọi thông báo, bao gồm thông tin cá nhân như tên của người liên hệ và nội dung của thông báo bạn nhận được. Ứng dụng này cũng có thể đóng các thông báo hoặc thao tác với các nút trong thông báo, bao gồm cả trả lời cuộc gọi điện thoại. \n\nNgoài ra, việc này còn cho phép ứng dụng bật hoặc tắt chế độ Không làm phiền và thay đổi chế độ cài đặt liên quan."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> có thể đọc mọi thông báo, bao gồm thông tin cá nhân như tên của người liên hệ và nội dung của thông báo mà bạn nhận được. Ứng dụng này cũng có thể tạm ẩn hoặc đóng các thông báo hoặc thao tác với các nút trong thông báo, bao gồm cả trả lời cuộc gọi điện thoại. \n\nNgoài ra, việc này còn cho phép ứng dụng bật hoặc tắt chế độ Không làm phiền và thay đổi các chế độ cài đặt liên quan."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Nếu bạn tắt quyền truy cập thông báo của <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, quyền truy cập chế độ Không làm phiền cũng có thể bị tắt."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Tắt"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Hủy"</string>

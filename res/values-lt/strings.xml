@@ -492,8 +492,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Dar kartą"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Stebėkite kontrolinio kodo piktogramą"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Vis patraukite pirštą, kad pridėtumėte skirtingas piršto atspaudo dalis"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Palieskite ir palaikykite kiekvieną kartą, kai kontrolinio kodo piktograma sujuda. Tai padės užfiksuoti visą kontrolinį kodą."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Tai padės užfiksuoti visą kontrolinį kodą"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Palieskite ir palaikykite kiekvieną kartą, kai kontrolinio kodo piktograma sujuda. Taip užfiksuojama daugiau piršto atspaudo"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Padėkite piršto galiuką ant jutiklio"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Galiausiai padėkite piršto kraštus"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Padėkite vieną piršto šoną ant jutiklio ir palaikykite, tada tą patį atlikite su kitu šonu"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Taip užfiksuojama daugiau piršto atspaudo"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registracija kontroliniu kodu: <xliff:g id="PERCENTAGE">%d</xliff:g> proc."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Kontrolinis kodas pridėtas"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Dabar galite naudoti kontrolinį kodą, kad atrakintumėte telefoną ar patvirtintumėte savo tapatybę, pvz., kai prisijungiate prie programų"</string>
@@ -2303,7 +2306,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Pasirinkti programėlę"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Pasirinkti valdiklį"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Sukurti valdiklį ir leisti prieigą?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Sukūrus valdiklį, „<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>“ gali pasiekti visus jame pateikiamus duomenis."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Sukūrus valdiklį, programa galės pasiekti visus pateikiamus duomenis.\n\nPrograma: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nValdiklis: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Visada leisti „<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>“ kurti valdiklius ir pasiekti jų duomenis"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Naudojimo statistika"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Naudojimo statistika"</string>
@@ -2747,6 +2750,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Žr. daugiausia energijos vartojančias programas"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Įkrovimas laikinai apribotas"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Tausojama akumuliatoriaus energija. Sužinokite daugiau."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Tęsti įkrovimą"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Esant tam tikroms sąlygoms, pvz., aukštai temperatūrai ar ilgai kraunant, įkrovimas gali būti apribotas iki <xliff:g id="PERCENT">%1$s</xliff:g>, siekiant apsaugoti akumuliatorių.\n\nKai šių sąlygų nebebus, telefonas bus automatiškai įprastai įkraunamas."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Esant tam tikroms sąlygoms, pvz., aukštai temperatūrai ar ilgai kraunant, įkrovimas gali būti apribotas iki <xliff:g id="PERCENT">%1$s</xliff:g>, siekiant apsaugoti akumuliatorių.\n\nKai šių sąlygų nebebus, planšetinis kompiuteris bus automatiškai įprastai įkraunamas."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Telefonas naudojamas daugiau nei įprastai, todėl gali greičiau išsekti akumuliatoriaus energija.\n\nDaugiausiai akumuliatoriaus energijos suvartojančios programos:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Planšetinis kompiuteris naudojamas daugiau nei įprastai, todėl gali greičiau išsekti akumuliatoriaus energija.\n\nDaugiausiai akumuliatoriaus energijos suvartojančios programos:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Įrenginys naudojamas daugiau nei įprastai, todėl gali greičiau išsekti akumuliatoriaus energija.\n\nDaugiausiai akumuliatoriaus energijos suvartojančios programos:"</string>
@@ -3501,8 +3507,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Išplėstinės skambinimo parinktys"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G skambinimas"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Naudoti LTE paslaugas „Voice“ ir kitiems ryšiams patobulinti (rekomenduojama)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Naudoti 4G paslaugas „Voice“ ir kitiems ryšiams patobulinti (rekomenduojama)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Naudoti LTE paslaugas balso skambučiams tobulinti (rekomenduojama)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Naudoti 4G paslaugas balso skambučiams tobulinti (rekomenduojama)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Naudoti 5G balso skambučiams"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Siųsti kontaktus operatoriui"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Siųskite kontaktų telefono numerius, kad būtų teikiamos patobulintos funkcijos"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Siųsti kontaktus operatoriui „<xliff:g id="CARRIER">%1$s</xliff:g>“?"</string>
@@ -3698,6 +3706,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"akumuliatoriaus tausojimo priemonė, fiksuotas, išlaikyti, energijos tausojimo priemonė, akumuliatorius"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"veiksmų seka, tvarkaraštis, akumuliatoriaus tausojimo priemonė, energijos tausojimo priemonė, akumuliatorius, automatinis, procentai"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"„VoLTE“, išplėstinės skambinimo parinktys, 4G skambinimas"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, išplėstinės skambinimo parinktys, 5G skambinimas"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"pridėti kalbą"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"teksto dydis, didelis spaudinys, didelis šriftas, didelis tekstas, sutrikusio regėjimo asmuo, padaryti tekstą didesnį, šrifto didinimo priemonė, šrifto padidinimas"</string>
     <string name="default_sound" msgid="6604374495015245195">"Numatytasis garsas"</string>
@@ -4034,7 +4043,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Leisti paslaugos „<xliff:g id="SERVICE">%1$s</xliff:g>“ prieigą prie pranešimų?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"12 versijos „Android“ patobulinti pranešimai pakeitė „Android“ prisitaikančius pranešimus. Ši funkcija rodo siūlomus veiksmus bei atsakymus ir tvarko jūsų pranešimus. \n\nPatobulintų pranešimų funkcija gali pasiekti pranešimų turinį, įskaitant asmens informaciją (pvz., kontaktų vardus ir pranešimus). Ši funkcija taip pat gali atsisakyti pranešimų arba į juos atsakyti, pvz., atsakyti į telefono skambučius ir valdyti netrukdymo režimą."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Leisti <xliff:g id="SERVICE">%1$s</xliff:g> pranešimo prieigą?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"„<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ galės skaityti visus pranešimus, įskaitant asmens informaciją, pvz., kontaktų vardus ir gautų pranešimų tekstą. Ši programa taip pat galės praleisti pranešimus ar imtis veiksmų su pranešimuose esančiais mygtukais, įskaitant atsakymą į telefono skambučius. \n\nPrograma taip pat galės įjungti ar išjungti režimą „Netrukdyti“ ir keisti susijusius nustatymus."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"„<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ galės skaityti visus pranešimus, įskaitant asmens informaciją, pvz., kontaktų vardus ir gautų pranešimų tekstą. Ši programa taip pat galės atidėti pranešimus ar jų atsisakyti arba imtis veiksmų su pranešimuose esančiais mygtukais, įskaitant atsakymą į telefono skambučius. \n\nPrograma taip pat galės įjungti ar išjungti netrukdymo režimą ir keisti susijusius nustatymus."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Jei išjungsite „<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“ prieigą prie pranešimų, prieiga prie režimo „Netrukdyti“ taip pat gali būti išjungta."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Išjungti"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Atšaukti"</string>
