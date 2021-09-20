@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"یک‌بار دیگر"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"دنبال کردن نماد اثر انگشت"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"مدام انگشتتان را جابه‌جا کنید تا بخش‌های مختلف اثر انگشتتان را اضافه کنید"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"هر بار که نماد اثر انگشت حرکت می‌کند، لمس کنید و نگه دارید. این کار کمک می‌کند اثر انگشتتان به‌طور کامل ثبت شود."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"این کار کمک می‌کند اثر انگشتتان به‌طور کامل ثبت شود"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"هر بار که نماد اثر انگشت حرکت می‌کند، لمس کنید و نگه دارید. این کار کمک می‌کند بخش بیشتری از اثر انگشتتان ثبت شود."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"نوک انگشتتان را روی حسگر قرار دهید"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"در نهایت، گوشه‌های انگشتتان را روی حسگر قرار دهید"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"یک سمت انگشتتان را روی حسگر اثر انگشت قرار دهید و نگه دارید، سپس این کار را با سمت دیگر تکرار کنید"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"این کار کمک می‌کند بخش بیشتری از اثر انگشتتان ثبت شود"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"درحال ثبت اثر انگشت: <xliff:g id="PERCENTAGE">%d</xliff:g> درصد"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"اثر انگشت اضافه شد"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"اکنون می‌توانید از اثر انگشتتان برای باز کردن قفل تلفن یا به‌تأیید رساندن هویتتان (مثلاً وقتی به سیستم برنامه‌ها وارد می‌شوید) استفاده کنید"</string>
@@ -2255,7 +2258,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"انتخاب اسبابک"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"انتخاب ابزارک"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"آیا مایل به ایجاد ابزارک و دادن اجازهٔ دسترسی هستید؟"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"پس از اینکه ابزارک را ایجاد کردید٬ <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> می‌تواند به همهٔ اطلاعاتی که ابزارک نمایش می‌دهد٬ دسترسی داشته باشد."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"پس‌از اینکه ابزارک را ایجاد کردید، این برنامه می‌تواند به همه موارد نمایش داده‌شده دسترسی داشته باشد.\n\nبرنامه: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nابزارک: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"همیشه به <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> برای ایجاد ابزارک‌ها و دسترسی به اطلاعات آن‌ها اجازه داده شود"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"آمار کاربرد"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"آمار کاربرد"</string>
@@ -2685,6 +2688,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"برنامه‌هایی که بیشترین مصرف را دارند ببینید"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"شارژ موقتاً محدود شده است"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"برای محافظت از باتری. بیشتر بدانید."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"ازسرگیری شارژ شدن"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"در برخی شرایط، مثل دمای بالا و دوره‌های طولانی شارژ، ممکن است شارژ شدن به <xliff:g id="PERCENT">%1$s</xliff:g> محدود شود تا سلامت باتری حفظ شود.\n\nوقتی این شرایط به‌پایان برسد، تلفن به‌طور خودکار در حالت عادی شارژ خواهد شد."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"در برخی شرایط، مثل دمای بالا و دوره‌های طولانی شارژ، ممکن است شارژ شدن به <xliff:g id="PERCENT">%1$s</xliff:g> محدود شود تا سلامت باتری حفظ شود.\n\nوقتی این شرایط به‌پایان برسد، رایانه لوحی به‌طور خودکار در حالت عادی شارژ خواهد شد."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"چون بیشتر از حد معمول از تلفنتان استفاده کرده‌اید، ممکن است شارژ باتری‌تان زودتر از همیشه تمام شود.\n\nبرنامه‌هایی که بیشترین استفاده را از باتری دارند:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"چون بیشتر از حد معمول از رایانه لوحی‌تان استفاده کرده‌اید، ممکن است شارژ باتری‌تان زودتر از همیشه تمام شود.\n\nبرنامه‌هایی که بیشترین استفاده را از باتری دارند:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"چون بیشتر از حد معمول از دستگاهتان استفاده کرده‌اید، ممکن است شارژ باتری‌تان زودتر از همیشه تمام شود.\n\nبرنامه‌هایی که بیشترین استفاده را از باتری دارند:"</string>
@@ -3413,8 +3419,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"تماس پیشرفته"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"‏تماس 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"‏استفاده از سرویس‌های LTE جهت بهبود ارتباطات صوتی و سایر ارتباطات (توصیه می‌شود)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"‏استفاده از سرویس‌های 4G برای بهبود صدا و سایر ارتباطات (توصیه می‌شود)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"‏استفاده از سرویس‌های LTE برای بهبود تماس‌های صوتی (توصیه می‌شود)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"استفاده از سرویس‌های نسل چهارم شبکه تلفن همراه برای بهبود تماس‌های صوتی (توصیه می‌شود)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"استفاده از نسل پنجم شبکه تلفن همراه برای تماس‌های صوتی"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"ارسال مخاطبین به شرکت مخابراتی"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"شماره تلفن مخاطبین ارسال می‌شود تا ویژگی‌های بهبودیافته ارائه شود."</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"مخاطبین به <xliff:g id="CARRIER">%1$s</xliff:g> ارسال شود؟"</string>
@@ -3608,6 +3616,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"بهینه‌سازی باتری، چسبان، باقی ماندن، بهینه‌سازی نیرو، باتری"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"روال، زمان‌بندی، بهینه‌سازی باتری، بهینه‌سازی نیرو، باتری، خودکار، درصد"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"‏volte، تماس پیشرفته، تماس 4g"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"‏vo5g،‏ vonr، تماس پیشرفته، تماس نسل پنجم شبکه تلفن همراه"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"افزودن زبان، افزودن یک زبان"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"اندازه نوشتار، چاپ درشت، قلم بزرگ، نوشتار بزرگ، کم‌بینا، بزرگ کردن نوشتار، بزرگ‌کننده قلم، بزرگ کردن قلم"</string>
     <string name="default_sound" msgid="6604374495015245195">"صدای پیش‌فرض"</string>
@@ -3936,7 +3945,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"دسترسی به اعلان برای <xliff:g id="SERVICE">%1$s</xliff:g> مجاز شود؟"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"‏در Android نسخه ۱۲، اعلان‌های بهبودیافته جایگزین «اعلان‌های تطبیقی» شده است. این ویژگی پاسخ‌ها و کنش‌های پیشنهادی را نمایش می‌دهد و اعلان‌هایتان را سازمان‌دهی می‌کند. \n\nاعلان‌های بهبودیافته می‌تواند به محتوای اعلان، ازجمله اطلاعات شخصی مثل نام‌ها و پیام‌های مخاطبین دسترسی داشته باشد. این ویژگی همچنین می‌تواند اعلان‌ها را رد کند یا به آن‌ها پاسخ دهد؛ مثلاً پاسخ به تماس‌های تلفنی و کنترل کردن «مزاحم نشوید»."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"به دسترسی به اعلان برای <xliff:g id="SERVICE">%1$s</xliff:g> اجازه می‌دهید؟"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> می‌تواند همه اعلان‌ها را بخواند، ازجمله اطلاعات شخصی مانند نام مخاطبین و پیام‌های نوشتاری که دریافت می‌کنید. همچنین این برنامه می‌تواند اعلان‌ها را رد کند یا روی دکمه‌های موجود در اعلان‌ها اقداماتی انجام دهد (ازجمله پاسخ دادن به تماس‌های تلفنی). \n\nهمچنین به این برنامه امکان می‌دهد «مزاحم نشوید» را روشن یا خاموش کند و تنظیمات مربوطه را تغییر دهد."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> می‌تواند همه اعلان‌ها را بخواند، ازجمله اطلاعات شخصی مثل نام مخاطبین و پیام‌های نوشتاری که دریافت می‌کنید. همچنین این برنامه می‌تواند اعلان‌ها را به‌تعویق بیندازد یا رد کند یا براساس دکمه‌های موجود در اعلان‌ها اقداماتی انجام دهد (ازجمله پاسخ دادن به تماس‌های تلفنی). \n\nهمچنین به این برنامه امکان می‌دهد «مزاحم نشوید» را روشن یا خاموش کند و تنظیمات مربوطه را تغییر دهد."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"اگر دسترسی اعلان را برای <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> خاموش کنید، دسترسی «مزاحم نشوید» نیز ممکن است خاموش شود."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"خاموش کردن"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"لغو"</string>

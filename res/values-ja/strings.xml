@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"もう一度"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"指紋アイコンに合わせて操作"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"指を何度か離して、あらゆる角度から指紋を登録します。"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"指紋アイコンの動きに合わせて長押ししてください。指紋全体を登録します。"</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"指紋全体を登録しています"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"指紋アイコンの動きに合わせて長押ししてください。これで指紋を正しく登録できるようになります。"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"指先をセンサーに当ててください"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"最後に指の縁の部分を当ててください"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"指紋をセンサーに当てて長押しし、指を離してから別の部分を当ててください"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"これで指紋を正しく登録できるようになります。"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋の登録完了"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"指紋を使って、スマートフォンのロック解除や本人確認（アプリへのログインなど）を行えるようになりました"</string>
@@ -2255,7 +2258,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"ガジェットを選択"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"ウィジェットを選択"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"ウィジェットの作成とアクセスの許可"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"ウィジェットを作成すると、<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>は表示されるすべてのデータにアクセスできるようになります。"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"ウィジェットを作成すると、アプリは表示されるすべてにアクセスできるようになります。\n\nアプリ: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nウィジェット: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>によるウィジェットの作成とデータへのアクセスを常に許可する"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"使用統計情報"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"使用統計情報"</string>
@@ -2685,6 +2688,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"使用量の多いアプリを確認"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充電は一時的に制限されています"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"バッテリーを長持ちさせるためのヒントをご確認ください。"</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"充電を再開"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"気温が高い、充電時間が長いなど、条件によって、バッテリーの状態を保つために充電が <xliff:g id="PERCENT">%1$s</xliff:g> に制限されることがあります。\n\nこれらの条件が解消されると、スマートフォンは自動的に通常どおり充電されます。"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"気温が高い、充電時間が長いなど、条件によって、バッテリーの状態を保つために充電が <xliff:g id="PERCENT">%1$s</xliff:g> に制限されることがあります。\n\nこれらの条件が解消されると、タブレットは自動的に通常どおり充電されます。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"スマートフォンのバッテリー使用量が通常より多いため、通常より早くバッテリーがなくなる可能性があります。\n\nバッテリーを多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"タブレットの使用が通常より多いため、バッテリーが通常より早くなくなる可能性があります。\n\nバッテリーを多く使用しているアプリ:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"デバイスの使用が通常より多いため、バッテリーが通常より早くなくなる可能性があります。\n\nバッテリーを多く使用しているアプリ:"</string>
@@ -3413,8 +3419,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"拡張モードでの通話"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G 回線による通話"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"LTE サービスを使用して音声などの通信を改善する（推奨）"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"4G サービスを使用して、音声やその他の通話の品質を改善する（推奨）"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"LTE サービスを使用して音声通話を改善する（推奨）"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"4G サービスを使用して音声通話を改善する（推奨）"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"音声通話に 5G を使用する"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"連絡先を携帯通信会社に送信する"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"拡張機能を利用するために、連絡先の電話番号を送信します"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"連絡先を <xliff:g id="CARRIER">%1$s</xliff:g> に送信しますか？"</string>
@@ -3608,6 +3616,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"バッテリー セーバー, 固定, 永続, パワー セーバー, 電池"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ルーティン, スケジュール, バッテリー セーバー, パワーセーバー, 電池, 自動, パーセント, 繰り返し, 定型, 消費電力, 節約, パワー, バッテリー"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE、拡張モードでの通話、4G 回線による通話"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, 拡張 通信, 5G 通信"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"言語を追加, 追加 言語"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"テキスト サイズ, 大きい 活字, 大きい フォント, 大きい テキスト, ロー ビジョン, 切り替え テキスト 大きく, フォント 大きく, フォント 拡大"</string>
     <string name="default_sound" msgid="6604374495015245195">"デフォルトの通知音"</string>
@@ -3936,7 +3945,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"通知へのアクセスを<xliff:g id="SERVICE">%1$s</xliff:g>に許可しますか？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 では Android 通知の自動調整が拡張通知に切り替えられました。この機能が操作や返信の候補を提示し、通知の整理を行います。\n\n拡張通知は通知コンテンツにアクセスできます。これには、連絡先の名前などの個人情報やメッセージも含まれます。また、この機能は、通知を非表示にしたり通知に応答したりすることもできます。たとえば、電話に出ることやサイレント モードを管理することができます。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> による通知へのアクセスを許可しますか？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> がすべての通知を読み取れるようになります。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知を非表示にしたり、電話に出るなど、通知内の操作ボタンをタップしたりすることも許可されます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> はすべての通知を読み取ることができます。通知には、連絡先名などの個人情報や受信したメッセージの本文も含まれます。また、通知をスヌーズ、非表示にしたり、電話に出るなどの通知内のボタン操作を実行したりすることもできます。\n\nこれにより、アプリがサイレント モード設定を切り替えたり、関連する設定を変更したりすることも可能になります。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> の通知アクセスを OFF にすると、サイレント モードの利用権限も OFF になります。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"OFF にする"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"キャンセル"</string>

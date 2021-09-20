@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"კიდევ ერთხელ"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"მიჰყევით თითის ანაბეჭდის ხატულას"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"რამდენჯერმე აიღეთ და ისევ შეახეთ თითი სენსორს, რათა თქვენი თითის ანაბეჭდის ყველა ნაწილის დამატება შეძლოთ"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"ხანგრძლივად შეეხეთ ყოველ ჯერზე, როცა თითის ანაბეჭდის ხატულა ამოძრავდება. ეს თითის ანაბეჭდის სრულად აღბეჭდვაში დაგეხმარებათ."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"ეს დაგეხმარებათ თქვენი სრული თითის ანაბეჭდის აღბეჭდვაში"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"ხანგრძლივად შეეხეთ ყოველ ჯერზე, როცა თითის ანაბეჭდის ხატულა ამოძრავდება. ეს ხელს შეუწყობს სრულყოფილი თითის ანაბეჭდის შექმნას."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"თითის წვერი დაადეთ სენსორს"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"ბოლოს, დაადეთ თითის კიდეები"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"დაადეთ თითის ერთი მხარე სენსორს და გააჩერეთ ცოტა ხნით, შემდეგ კი დაადეთ მეორე მხარე"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ეს ხელს შეუწყობს სრულყოფილი თითის ანაბეჭდის შექმნას"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"მიმდინარეობს თითის ანაბეჭდის რეგისტრაცია, <xliff:g id="PERCENTAGE">%d</xliff:g> პროცენტი"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"თითის ანაბეჭდი დამატებულია"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით ტელეფონის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
@@ -2255,7 +2258,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"გაჯეტის არჩევა"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"ვიჯეტის არჩევა"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"შეიქმნას ვიჯეტი და მიეცეს წვდომის უფლება?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"ვიჯეტის შექმნის შემდეგ, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>-ს ექნება წვდომა ყველა იმ მონაცემთან, რომელიც ეკრანზე გამოაქვს."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"ვიჯეტის შექმნის შემდეგ აპს წვდომა ექნება ყველა იმ მონაცემზე, რომელიც ეკრანზე ჩანს.\n\nაპი: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nვიჯეტი: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>-ს ყოველთვის მიეცეს ვიჯეტების შექმნისა და მათ მონაცემებზე წვდომის უფლება"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"გამოყენების სტატისტიკა"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"გამოყენების სტატისტიკა"</string>
@@ -2685,6 +2688,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"ყველაზე დიდი მოხმარების აპების ნახვა"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"დატენვა დროებით შეზღუდულია"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"თქვენი ბატარეის დასაზოგად. შეიტყვეთ მეტი."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"დატენვის გაგრძელება"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"გარკვეულ პირობებში, მაგალითად, მაღალი ტემპერატურის ან ხანგრძლივი დატენვის დროს, დატენვა, შესაძლოა, შეიზღუდოს <xliff:g id="PERCENT">%1$s</xliff:g>-მდე ბატარეის გამართულობის შესანარჩუნებლად.\n\nამ პირობების დასრულებისთანავე თქვენი ტელეფონი ავტომატურად ჩვეულ რეჟიმში დაიტენება."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"გარკვეულ პირობებში, მაგალითად, მაღალი ტემპერატურის ან ხანგრძლივი დატენვის დროს, დატენვა, შესაძლოა, შეიზღუდოს <xliff:g id="PERCENT">%1$s</xliff:g>-მდე ბატარეის გამართულობის შესანარჩუნებლად.\n\nამ პირობების დასრულებისთანავე თქვენი ტაბლეტი ავტომატურად ჩვეულ რეჟიმში დაიტენება."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"ვინაიდან თქვენს ტელეფონს ჩვეულებრივზე მეტად მოიხმარდით, თქვენი ბატარეა შეიძლება ჩვეულებრივზე მალე დაიცალოს.\n\nაპები, რომლებიც ბატარეას ყველაზე მეტად ხარჯავენ:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"ვინაიდან თქვენს ტაბლეტს ჩვეულებრივზე მეტად მოიხმარდით, თქვენი ბატარეა შეიძლება ჩვეულებრივზე მალე დაიცალოს.\n\nაპები, რომლებიც ბატარეას ყველაზე მეტად ხარჯავენ:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"ვინაიდან თქვენს მოწყობილობას ჩვეულებრივზე მეტად მოიხმარდით, თქვენი ბატარეა შეიძლება ჩვეულებრივზე მალე დაიცალოს.\n\nაპები, რომლებიც ბატარეას ყველაზე მეტად ხარჯავენ:"</string>
@@ -3413,8 +3419,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"გაფართოებული დარეკვა"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G დარეკვა"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"LTE სერვისების გამოყენება ხმისა და სხვა კომუნიკაციების გასაუმჯობესებლად (რეკომენდებული)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"გამოიყენეთ 4G სერვისები ხმისა და სხვა კომუნიკაციების გასაუმჯობესებლად (რეკომენდებული)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"ხმოვანი ზარების გასაუმჯობესებლად გამოიყენეთ LTE სერვისები (რეკომენდებული)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"ხმოვანი ზარების გასაუმჯობესებლად გამოიყენეთ 4G სერვისები (რეკომენდებული)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"ხმოვანი ზარებისთვის გამოიყენეთ 5G"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"კონტაქტების გაგზავნა ოპერატორთან"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"გაიგზავნოს თქვენი კონტაქტების ტელეფონის ნომრები გაფართოებული ფუნქციების უზრუნველსაყოფად"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"გაეგზავნოს კონტაქტები <xliff:g id="CARRIER">%1$s</xliff:g>-ს?"</string>
@@ -3608,6 +3616,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ბატარეის დამზოგი, ფიქსირებული, მუდმივობა, ენერგიის დამზოგი, ბატარეა"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"რუტინა, განრიგი, ბატარეის დამზოგი, ენერგიის დამზოგი, ბატარეა, ავტომატური, პროცენტი"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, გაუმჯობესებული დარეკვა, 4g დარეკვა"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, გაუმჯობესებული დარეკვა, 5g დარეკვა"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ენის დამატება, დაამატეთ ენა"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"ტექსტის ზომა, დიდი ასოები, დიდი შრიფტი, დიდი ზომის ტექსტი, მხედველობადაქვეითებული, ტექსტის გადიდება, შრიფტის გამადიდებელი, შრიფტის გადიდება"</string>
     <string name="default_sound" msgid="6604374495015245195">"ნაგულისხმევი ხმა"</string>
@@ -3936,7 +3945,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"გსურთ მიანიჭოთ <xliff:g id="SERVICE">%1$s</xliff:g>-ს შეტყობინებებზე წვდომა?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"გაფართოებულმა შეტყობინებებმა ჩაანაცვლა Android-ის ადაპტაციური შეტყობინებების ფუნქცია Android 12-ში. ეს ფუნქცია გაჩვენებთ შემოთავაზებულ მოქმედებებს და პასუხებს, ამასთანავე კი ახდენს თქვენი შეტყობინებების ორგანიზებას. \n\nგაფართოებულ შეტყობინებებს შეუძლია ყველა შეტყობინების კონტენტზე, მათ შორის, ისეთ პერსონალურ ინფორმაციაზე წვდომა, როგორიცაა კონტაქტების სახელები და შეტყობინებები. ამ ფუნქციას ასევე შეუძლია შეტყობინებათა დახურვა ან მათზე პასუხის გაცემა, მაგალითად, სატელეფონო ზარებზე პასუხი და „არ შემაწუხოთ“ რეჟიმის მართვა."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"გსურთ მიანიჭოთ <xliff:g id="SERVICE">%1$s</xliff:g>-ს შეტყობინებებზე წვდომა?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> შეძლებს ყველა შეტყობინების წაკითხვას, მათ შორის, ისეთი პერსონალური ინფორმაციის, როგორიცაა კონტაქტების სახელები და თქვენ მიერ მიღებული შეტყობინებების ტექსტი. ეს აპი ასევე შეძლებს, დახუროს შეტყობინებები და აამოქმედოს შეტყობინებათა ღილაკები, მათ შორის, სატელეფონო ზარებზე პასუხი. \n\nაპს მიეცემა „არ შემაწუხოთ“ რეჟიმის ჩართვის ან გამორთვის და დაკავშირებული პარამეტრების შეცვლის შესაძლებლობაც."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> შეძლებს ყველა შეტყობინების წაკითხვას, მათ შორის, ისეთი პერსონალური ინფორმაციის, როგორიცაა კონტაქტების სახელები და თქვენ მიერ მიღებული შეტყობინებების ტექსტი. ეს აპი ასევე შეძლებს, ჩააჩუმოს ან დახუროს შეტყობინებები და აამოქმედოს შეტყობინებათა ღილაკები, მათ შორის, სატელეფონო ზარებზე პასუხი. \n\nაპს მიეცემა „არ შემაწუხოთ“ რეჟიმის ჩართვის ან გამორთვის და დაკავშირებული პარამეტრების შეცვლის შესაძლებლობაც."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"შეტყობინებებზე წვდომის გამორთვის შემთხვევაში, <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, სავარაუდოდ, „არ შემაწუხოთ“ რეჟიმზე წვდომასაც დაკარგავს."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"გამორთვა"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"გაუქმება"</string>

@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"En gang til"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Følg fingeravtrykkikonet"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Løft fingeren gjentatte ganger for å legge til de forskjellige delene av fingeravtrykket ditt"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Trykk og hold hver gang fingeravtrykkikonet beveger seg. Dette bidrar til å registrere hele fingeravtrykket ditt."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Dette bidrar til å registrere hele fingeravtrykket ditt"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Trykk og hold hver gang fingeravtrykkikonet beveger seg. Dette bidrar til å registrere mer av fingeravtrykket."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Plassér fingertuppen på sensoren"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Plassér til slutt kantene av fingeren"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Plassér siden av fingeravtrykket på sensoren og hold. Bytt deretter til den andre siden"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dette bidrar til å registrere mer av fingeravtrykket"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrerer fingeravtrykket: <xliff:g id="PERCENTAGE">%d</xliff:g> prosent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeravtrykket er lagt til"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Nå kan du bruke fingeravtrykket til å låse opp telefonen eller bekrefte identiteten din, for eksempel når du logger på apper"</string>
@@ -2255,7 +2258,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Velg gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Velg skrivebordselement"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Vil du opprette modulen og gi tilgang?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Når du har opprettet modulen, kan <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> lese alle dataene den viser."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Når du har opprettet modulen, får appen tilgang til alt som vises.\n\nApp: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nModul: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Gi alltid <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> tillatelse til å opprette moduler og lese moduldata"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Bruksstatistikk"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Bruksstatistikk"</string>
@@ -2685,6 +2688,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appene med høyest batteribruk"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Lading er midlertidig begrenset"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"For å forlenge batterilevetiden. Finn ut mer."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Gjenoppta ladingen"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Under visse omstendigheter, for eksempel høye temperaturer og lange ladetider, kan lading begrenses til <xliff:g id="PERCENT">%1$s</xliff:g> for å bevare batteritilstanden.\n\nNår disse omstendighetene avsluttes, lader telefonen automatisk som normalt."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Under visse omstendigheter, for eksempel høye temperaturer og lange ladetider, kan lading begrenses til <xliff:g id="PERCENT">%1$s</xliff:g> for å bevare batteritilstanden.\n\nNår disse omstendighetene avsluttes, lader nettbrettet automatisk som normalt."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Siden du har brukt telefonen mer enn vanlig, kan batteriet gå tomt raskere enn normalt.\n\nApper med høyest batteribruk:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Siden du har brukt nettbrettet mer enn vanlig, kan batteriet gå tomt raskere enn normalt.\n\nApper med høyest batteribruk:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Siden du har brukt enheten mer enn vanlig, kan batteriet gå tomt raskere enn normalt.\n\nApper med høyest batteribruk:"</string>
@@ -3413,8 +3419,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Avansert ringing"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G-ringing"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Bruk LTE-tjenester for å forbedre stemmekommunikasjonen og andre typer kommunikasjon (anbefalt)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Bruk 4G-tjenester for å forbedre stemmekommunikasjon og andre typer kommunikasjon (anbefalt)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Bruk LTE-tjenester for å forbedre taleanrop (anbefales)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Bruk 4G-tjenester for å forbedre taleanrop (anbefales)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Bruk 5G for taleanrop"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Send kontakter til operatøren"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Send telefonnumrene til kontaktene dine for å levere avanserte funksjoner"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Vil du sende kontakter til <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3608,6 +3616,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"batterisparing, festet, vedvarende, strømsparing, batteri"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutine, tidsplan, batterisparing, strømsparing, batteri, automatisk, prosent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, avansert ringing, 4g-ringing"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, avansert ringing, 5g-ringing"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"Legg til språk, legg til et språk"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"tekststørrelse, stor skrift, stor skrifttype, stor tekst, nedsatt synsevne, gjør tekst større, tekstforstørrer, forstørring av tekst"</string>
     <string name="default_sound" msgid="6604374495015245195">"Standardlyd"</string>
@@ -3936,7 +3945,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vil du gi tilgang til varsler for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Forbedrede varsler erstatter tilpassede Android-varsler i Android 12. Denne funksjonen viser foreslåtte handlinger og svar og organiserer varslene dine. \n\nForbedrede varsler har tilgang til varselinnhold, inkludert personopplysninger som kontaktnavn og meldinger. Funksjonen kan også avvise og svare på varsler, for eksempel svare på anrop og kontrollere «Ikke forstyrr»."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vil du gi tilgang til varsler for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan lese alle varsler, inkludert personopplysninger som kontaktnavn og tekstinnholdet i meldinger du mottar. Appen kan også avvise varsler eller bruke knapper i varsler, blant annet svare på telefonanrop. \n\nDette gir også appen muligheten til å slå av eller på Ikke forstyrr og endre tilknyttede innstillinger."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan lese alle varsler, inkludert personopplysninger som kontaktnavn og tekstinnholdet i meldinger du mottar. Appen kan også slumre eller avvise varsler eller bruke knapper i varsler, inkludert å svare på telefonanrop. \n\nDette gir også appen muligheten til å slå Ikke forstyrr av eller på samt endre tilknyttede innstillinger."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Hvis du slår av varseltilgang for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kan tilgang til Ikke forstyrr også bli slått av."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Slå av"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Avbryt"</string>

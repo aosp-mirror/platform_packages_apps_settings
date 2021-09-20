@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"एक बार और छुएं"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"फ़िंगरप्रिंट आइकॉन को दबाते रहें"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"अपने फ़िंगरप्रिंट के अलग-अलग हिस्सों को जोड़ने के लिए अपनी उंगली को हटाते रहें"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"हर बार फ़िंगरप्रिंट आइकॉन में हलचल होने पर, उसे दबाकर रखें. इससे, पूरा फ़िंगरप्रिंट कैप्चर करने में मदद मिलती है."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"इससे, पूरा फ़िंगरप्रिंट कैप्चर करने में मदद मिलती है"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"हर बार फ़िंगरप्रिंट आइकॉन में हलचल होने पर, उसे दबाकर रखें. ऐसा करके, आपके फ़िंगरप्रिंट को बेहतर तरीके से कैप्चर किया जा सकता है."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"अपनी उंगली के सबसे ऊपरी हिस्से को सेंसर पर रखें"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"आखिर में, अपनी उंगली के दोनों किनारों को बारी-बारी से सेंसर पर रखें"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"पहले अपनी उंगली के एक किनारे को सेंसर पर कुछ देर के लिए रखें और फिर दूसरी तरफ़ से भी ऐसा करें"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ऐसा करके, आपके फ़िंगरप्रिंट को बेहतर तरीके से कैप्चर किया जा सकता है"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"फ़िंगरप्रिंट सेट अप करने की प्रक्रिया <xliff:g id="PERCENTAGE">%d</xliff:g> प्रतिशत तक पूरी हो चुकी है"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"फ़िंगरप्रिंट जोड़ा गया"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"अब आप अपना फ़ोन अनलॉक करने के लिए, अपने फ़िंगरप्रिंट का इस्तेमाल कर सकते हैं. इसके अलावा, किसी ऐप्लिकेशन में साइन इन करने या ऐसे और काम करने के दौरान, अपनी पहचान की पुष्टि करने के लिए भी आप अपने फ़िंगरप्रिंट का इस्तेमाल कर सकते हैं"</string>
@@ -2255,7 +2258,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"गैजेट चुनें"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"विजेट चुनें"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"विजेट बनाएं और पहुंच की अनुमति दें?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"विजेट बना लेने के बाद, इसके द्वारा प्रदर्शित सभी डेटा पर <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> पहुंच सकता है."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"जब आप यह विजेट बना देंगे, तो डिसप्ले पर मौजूद सभी चीज़ों को यह ऐप्लिकेशन ऐक्सेस कर पाएगा.\n\nऐप्लिकेशन: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nविजेट: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> को हमेशा शॉर्टकट बनाने दें और उनके डेटा पर पहुंचने दें"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"उपयोग के आंकड़े"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"उपयोग के आंकड़े"</string>
@@ -2685,6 +2688,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"सबसे ज़्यादा बैटरी खर्च करने वाले ऐप्लिकेशन देखें"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"चार्जिंग कुछ समय के लिए सीमित की गई"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"बैटरी कम खर्च करने के लिए. ज़्यादा जानें."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"चार्जिंग फिर से शुरू करें"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"लंबे समय तक चार्ज करने और ज़्यादा गर्म होने जैसी कुछ स्थितियों में, बैटरी की परफ़ॉर्मेंस को बेहतर बनाए रखने के लिए, हो सकता है कि वह <xliff:g id="PERCENT">%1$s</xliff:g> तक ही चार्ज हो पाए.\n\nइन स्थितियों के बदल जाने पर, आपका फ़ोन अपने-आप सामान्य रूप से चार्ज होने लगेगा."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"लंबे समय तक चार्ज करने और ज़्यादा गर्म होने जैसी कुछ स्थितियों में, बैटरी की परफ़ॉर्मेंस को बेहतर बनाए रखने के लिए, हो सकता है कि वह <xliff:g id="PERCENT">%1$s</xliff:g> तक ही चार्ज हो पाए.\n\nइन स्थितियों के बदल जाने पर, आपका टैबलेट अपने-आप सामान्य रूप से चार्ज होने लगेगा."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"आपने फ़ोन का सामान्य से ज़्यादा इस्तेमाल किया है. इसलिए, आपके फ़ोन की बैटरी समय से पहले खत्म हो सकती है.\n\nसबसे ज़्यादा बैटरी इस्तेमाल करने वाले ऐप्लिकेशन हैं:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"आपने टैबलेट का सामान्य से ज़्यादा इस्तेमाल किया है. इसलिए, आपके टैबलेट की बैटरी समय से पहले खत्म हो सकती है.\n\nसबसे ज़्यादा बैटरी इस्तेमाल करने वाले ऐप्लिकेशन हैं:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"आपने डिवाइस का सामान्य से ज़्यादा इस्तेमाल किया है. इसलिए, आपके डिवाइस की बैटरी समय से पहले खत्म हो सकती है.\n\nसबसे ज़्यादा बैटरी इस्तेमाल करने वाले ऐप्लिकेशन हैं:"</string>
@@ -3413,8 +3419,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"बेहतर कॉलिंग"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G कॉलिंग"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"आवाज़ और दूसरी तरह के संचार को बेहतर बनाने के लिए LTE सेवाओं का इस्तेमाल करें (सुझाया गया)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"आवाज़ और दूसरे संचारों को बेहतर बनाने के लिए 4G सेवाओं का इस्तेमाल करें (सुझाया गया)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"वॉइस कॉल की बेहतर क्वालिटी पाने के लिए, LTE सेवाओं का इस्तेमाल करें (सुझाया गया)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"वॉइस कॉल की बेहतर क्वालिटी पाने के लिए, 4G सेवाओं का इस्तेमाल करें (सुझाया गया)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"वॉइस कॉल के लिए, 5G का इस्तेमाल करें"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी को संपर्कों की जानकारी भेजें"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"अपने संपर्कों के फ़ोन नंबर भेजें, ताकि आपको बेहतर सुविधाएं दी जा सकें"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"क्या आप <xliff:g id="CARRIER">%1$s</xliff:g> को संपर्कों की जानकारी भेजना चाहते हैं?"</string>
@@ -3608,6 +3616,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"बैटरी सेव करने वाला, स्टिकी, लगातार, पावर सेवर, बैटरी"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"रूटीन, शेड्यूल, बैटरी सेवर, पावर सेवर, बैटरी, ऑटोमैटिक, प्रतिशत"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, बेहतर कॉलिंग, 4g कॉलिंग"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, बेहतर कॉलिंग, 5G कॉलिंग"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"भाषा जोड़ें, किसी भाषा को जोड़ें"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"टेक्स्ट का साइज़, बड़ा प्रिंट, बड़ा फ़ॉन्ट, बड़ा टेक्स्ट, कम दृष्टि, टेक्स्ट बड़ा करना, फ़ॉन्ट बड़ा करने वाला टूल, फ़ॉन्ट बड़ा करना"</string>
     <string name="default_sound" msgid="6604374495015245195">"डिफ़ॉल्‍ट ध्‍वनि"</string>
@@ -3936,7 +3945,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"क्या आप <xliff:g id="SERVICE">%1$s</xliff:g> के लिए सूचना ऐक्सेस करने की अनुमति देना चाहते हैं?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 में, ज़रूरत के हिसाब से सूचनाएं पाने की सुविधा की जगह अब \'बेहतर सूचनाएं\' सुविधा काम करेगी. यह सुविधा आपको कार्रवाइयों और जवाबों के सुझाव दिखाती है. साथ ही, आपके डिवाइस पर मिलने वाली सूचनाओं को व्यवस्थित करती है. \n\n\'बेहतर सूचनाएं\' सुविधा, डिवाइस पर मिलने वाली सभी सूचनाओं का कॉन्टेंट ऐक्सेस कर सकती है. इसमें आपकी निजी जानकारी, जैसे कि संपर्कों के नाम और मैसेज शामिल हैं. यह सुविधा, सूचनाओं को खारिज कर सकती है या उनका जवाब भी दे सकती है, जैसे कि फ़ोन कॉल का जवाब देना और \'परेशान न करें\' को कंट्रोल करना."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"क्या आप <xliff:g id="SERVICE">%1$s</xliff:g> के लिए सूचना को ऐक्सेस करने की अनुमति देना चाहते हैं?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> आपकी हर सूचना पढ़ पाएगा. इसमें आपकी निजी जानकारी, जैसे कि संपर्कों के नाम और आपको आने वाले मैसेज शामिल हैं. यह ऐप्लिकेशन, सूचनाओं में मौजूद बटन से कार्रवाई कर सकता है या सूचनाओं को खारिज भी कर सकता है. इसमें फ़ोन कॉल का जवाब देना भी शामिल है. \n\nइससे यह ऐप्लिकेशन \'परेशान न करें\' मोड चालू या बंद कर पाएगा या इससे जुड़ी सेटिंग बदल पाएगा."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, आपकी हर सूचना को पढ़ पाएगा. इसमें आपकी निजी जानकारी, जैसे कि संपर्कों के नाम और आपको मिलने वाले मैसेज शामिल हैं. यह ऐप्लिकेशन, सूचनाओं में मौजूद बटन से कार्रवाई कर सकता है या सूचनाओं को स्नूज़ (थोड़ी देर के लिए बंद करना) या खारिज भी कर सकता है. इसमें, फ़ोन कॉल का जवाब देना भी शामिल है. \n\nइससे यह ऐप्लिकेशन, \'परेशान न करें\' मोड को चालू या बंद कर पाएगा और इससे जुड़ी सेटिंग में बदलाव कर पाएगा."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"अगर आप <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> के लिए सूचना का ऐक्सेस बंद करते हैं, तो \'परेशान न करें\' सेवा का ऐक्सेस भी बंद हो सकता है."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"बंद करें"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"रद्द करें"</string>
@@ -4932,7 +4941,7 @@
     <string name="enterprise_privacy_security_logs" msgid="8494681624247959075">"हाल ही का सुरक्षा लॉग"</string>
     <string name="enterprise_privacy_none" msgid="6026527690979756431">"कोई नहीं"</string>
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"इंस्टॉल किए गए ऐप्लिकेशन"</string>
-    <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"ऐप्लिकेशन की संख्या अनुमानित है. हो सकता है इसमें Play स्टोर के बाहर से इंस्टॉल किए गए ऐप्लिकेशन शामिल ना हों."</string>
+    <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"ऐप्लिकेशन की संख्या अनुमानित है. हो सकता है इसमें Play Store के बाहर से इंस्टॉल किए गए ऐप्लिकेशन शामिल ना हों."</string>
     <plurals name="enterprise_privacy_number_packages_lower_bound" formatted="false" msgid="5403847001419529018">
       <item quantity="one">कम से कम <xliff:g id="COUNT_1">%d</xliff:g> ऐप्लिकेशन</item>
       <item quantity="other">कम से कम <xliff:g id="COUNT_1">%d</xliff:g> ऐप्लिकेशन</item>
