@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"En gång till"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Följ ikonen för fingeravtryck"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Lyft fingret flera gånger för att lägga till hela fingeravtrycket"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Tryck länge på fingeravtrycksikonen varje gång den flyttas. Det här gör att hela fingeravtrycket registreras."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Det här gör att hela fingeravtrycket registreras"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Tryck länge på fingeravtrycksikonen varje gång den flyttas. På så sätt kan mer av ditt fingeravtryck registreras."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Placera fingerspetsen på sensorn"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Slutligen trycker du med fingerspetsens sidor"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Placera sidan av fingerspetsen på sensorn, håll kvar och byt sedan till andra sidan"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"På så sätt kan mer av ditt fingeravtryck registreras"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Fingeravtrycket registreras: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeravtrycket är tillagt"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Nu kan du låsa upp telefonen eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar"</string>
@@ -2665,6 +2668,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appar med högst batteriförbrukning"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laddning har begränsats tillfälligt"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"För att spara batteri. Läs mer."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Återuppta laddning"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Under vissa omständigheter, till exempel vid höga temperaturer och långa laddningsperioder, kan laddningen begränsas till <xliff:g id="PERCENT">%1$s</xliff:g> för att bevara batteriets livslängd.\n\nTelefonen återgår automatiskt till normal laddning när det är möjligt."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Under vissa omständigheter, till exempel vid höga temperaturer och långa laddningsperioder, kan laddningen begränsas till <xliff:g id="PERCENT">%1$s</xliff:g> för att bevara batteriets livslängd.\n\nSurfplattan återgår automatiskt till normal laddning när det är möjligt."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Eftersom du har använt telefonen mer än vanligt kan batteriet ta slut snabbare än normalt.\n\nAppar med högst batteriförbrukning:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Eftersom du har använt surfplattan mer än vanligt kan batteriet kan ta slut snabbare än normalt.\n\nAppar med högst batteriförbrukning:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Eftersom du har använt enheten mer än vanligt kan batteriet kan ta slut snabbare än normalt.\n\nAppar med högst batteriförbrukning:"</string>
@@ -3393,8 +3399,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Avancerade samtal"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G-samtal"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Använd LTE-tjänster för att förbättra bl.a. röstkommunikation (rekommenderas)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Använd 4G-tjänster för att förbättra bl.a. röstkommunikation (rekommenderas)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Använd LTE-tjänster för att förbättra röstsamtal (rekommenderas)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Använd 4G-tjänster för att förbättra röstsamtal (rekommenderas)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Använd 5G för röstsamtal"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Skicka kontakter till operatören"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Skicka dina kontakters telefonnummer för att aktivera utökade funktioner"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Vill du skicka kontakter till <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3588,6 +3596,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"batterisparläge, fast position, beständig, strömläge, batteri"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutin, schema, batterisparläge, energisparläge, batteri, automatiskt, procent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, avancerade samtal, 4g-samtal"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, avancerade samtal, 5g-samtal"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"lägg till språk, lägg till ett språk"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"textstorlek, stora tecken, stort teckensnitt, stor text, nedsatt syn, göra texten större, teckenförstoring, förstora teckensnitt"</string>
     <string name="default_sound" msgid="6604374495015245195">"Standardsignal"</string>
@@ -3916,7 +3925,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vill du tillåta åtkomst till aviseringar för <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Förbättrade aviseringar har ersatt Anpassade aviseringar för Android i Android 12. Den här funktionen visar förslag på åtgärder och svar och organiserar dina aviseringar. \n\nFörbättrade aviseringar har åtkomst till allt innehåll i aviseringar, inklusive personliga uppgifter som namn på kontakter och meddelanden. Funktionen kan även ignorera aviseringar eller utföra åtgärder utifrån dem, till exempel svara på telefonsamtal och styra Stör ej."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vill du tillåta åtkomst till aviseringar för <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan läsa alla aviseringar, inklusive personliga uppgifter som namn på kontaktpersoner och texten i mottagna meddelanden. Appen kan även stänga aviseringar eller använda åtgärdsknappar i aviseringar för att t.ex. svara på telefonsamtal. \n\nAppen kan också aktivera eller inaktivera Stör ej och ändra relaterade inställningar."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan läsa alla aviseringar, inklusive personliga uppgifter som namn på kontaktpersoner och texten i mottagna meddelanden. Appen kan även skjuta upp och stänga aviseringar eller använda åtgärdsknappar i aviseringar för att t.ex. svara på telefonsamtal. \n\nAppen kan också aktivera eller inaktivera Stör ej och ändra relaterade inställningar."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Om du inaktiverar aviseringsåtkomst för <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan åtkomsten till Stör ej också inaktiveras."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Inaktivera"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Avbryt"</string>
