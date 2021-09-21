@@ -492,8 +492,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Še enkrat"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Sledite ikoni prstnega odtisa"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Še naprej privzdigujte prst, da dodate različne dele prstnega odtisa."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Dotaknite se in pridržite vsakič, ko se ikona prstnega odtisa premakne. Tako bo lažje zajeti celoten prstni odtis."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Tako bo lažje zajeti celoten prstni odtis."</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Dotaknite se in pridržite vsakič, ko se ikona prstnega odtisa premakne. Tako bo sistem lahko zajel večji del prstnega odtisa."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Na tipalo položite konico prsta."</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Nazadnje na tipalo položite robove prsta."</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Stranski del prstnega odtisa položite na tipalo prstnih odtisov in ga pridržite, nato zamenjajte stran."</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tako bo sistem lahko zajel večji del prstnega odtisa."</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -2729,6 +2732,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ogled aplikacij z najvišjo porabo energije"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Začasno omejeno polnjenje"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Da se bo energija baterija počasneje porabljala. Več o tem"</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Nadaljuj polnjenje"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"V nekaterih pogojih, na primer pri visokih temperaturah ali daljšem polnjenju, bo polnjenje morda omejeno na <xliff:g id="PERCENT">%1$s</xliff:g> za ohranjanje ustreznega stanja baterije.\n\nKo teh pogojev ni več, polnjenje baterije telefona samodejno zopet poteka kot običajno."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"V nekaterih pogojih, na primer pri visokih temperaturah ali daljšem polnjenju, bo polnjenje morda omejeno na <xliff:g id="PERCENT">%1$s</xliff:g> za ohranjanje ustreznega stanja baterije.\n\nKo teh pogojev ni več, polnjenje baterije tabličnega računalnika samodejno zopet poteka kot običajno."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Telefon ste uporabljali več kot običajno, zato se bo baterija morda izpraznila prej kot običajno.\n\nAplikacije, ki porabljajo največ energije baterije:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Tablični računalnik ste uporabljali več kot običajno, zato se bo baterija morda izpraznila prej kot običajno.\n\nAplikacije, ki porabljajo največ energije baterije:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Napravo ste uporabljali več kot običajno, zato se bo baterija morda izpraznila prej kot običajno.\n\nAplikacije, ki porabljajo največ energije baterije:"</string>
@@ -3483,8 +3489,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Napredno klicanje"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Klicanje prek omrežja 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Uporaba storitev LTE za izboljšanje glasovne in druge komunikacije (priporočeno)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Uporaba storitev 4G za izboljšanje glasovne in druge komunikacije (priporočeno)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Uporaba storitev LTE za izboljšanje glasovnih klicev (priporočeno)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Uporaba storitev 4G za izboljšanje glasovnih klicev (priporočeno)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Uporaba tehnologije 5G za glasovne klice"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Pošiljanje stikov operaterju"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Pošiljajte telefonske številke stikov za zagotavljanje dodatnih funkcij"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Želite stike pošiljati operaterju <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3680,6 +3688,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"varčevanje z energijo baterije, lepljivo, trajno, varčevanje z energijo, baterija"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, vsakodnevni opravek, razpored, urnik, varčevanje z energijo baterije, varčevanje z energijo, baterija, samodejno, odstotek, delež"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, napredno klicanje, klicanje 4g"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, napredno klicanje, klicanje 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"dodajanje jezika, dodajte jezik"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"velikost besedila, velika pisava, velike črke, veliko besedilo, slabovidnost, povečaj besedilo, povečevalnik pisave, povečanje pisave"</string>
     <string name="default_sound" msgid="6604374495015245195">"Privzeti zvok"</string>
@@ -4016,7 +4025,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Želite storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dovoliti dostop do obvestil?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Pametna obvestila so v Androidu 12 zamenjala prilagodljiva obvestila Android. Ta funkcija prikazuje predlagana dejanja in odgovore ter organizira vaša obvestila. \n\nPametna obvestila lahko preberejo vso vsebino obvestil, vključno z osebnimi podatki, kot so imena in sporočila stikov. Ta funkcija lahko tudi opusti obvestila ali se odziva nanje (npr. sprejema telefonske klice in upravlja način Ne moti)."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Želite storitvi <xliff:g id="SERVICE">%1$s</xliff:g> dovoliti dostop do obvestil?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> lahko prebere vsa obvestila, vključno z osebnimi podatki, kot so imena stikov in besedilo prejetih sporočil. Ta aplikacija bo lahko tudi opustila obvestila in izvajala dejanja z gumbi v obvestilih, vključno s sprejemanjem telefonskih klicev. \n\nS tem lahko aplikacija tudi vklopi ali izklopi način »Ne moti« in spremeni povezane nastavitve."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> lahko prebere vsa obvestila, vključno z osebnimi podatki, kot so imena stikov in besedilo prejetih sporočil. Ta aplikacija bo lahko tudi preložila ali opustila obvestila in izvajala dejanja z gumbi v obvestilih, vključno s sprejemanjem telefonskih klicev. \n\nS tem lahko aplikacija tudi vklopi ali izklopi način »ne moti« in spremeni povezane nastavitve."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Če za aplikacijo <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> izklopite dostop do obvestil, bo dostop do načina »Ne moti« morda tudi izklopljen."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Izklopi"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Prekliči"</string>

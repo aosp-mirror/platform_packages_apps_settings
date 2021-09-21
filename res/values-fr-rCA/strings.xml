@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Rapetisser"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Utiliser la rotation automatique"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La technologie de détection du visage utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images sont jamais stockées ni envoyées à Google."</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La technologie de détection des visages utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images sont jamais stockées ni envoyées à Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemple de texte"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Le Magicien d\'Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chapitre 11 : La merveilleuse cité d\'émeraude d\'Oz"</string>
@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Encore une fois."</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Suivez l\'icône d\'empreinte digitale"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Déplacez légèrement votre doigt lorsque vous le relevez pour ajouter toutes les parties de votre empreinte digitale."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Maintenez le doigt sur le capteur chaque fois que l\'icône de l\'empreinte digitale bouge. Cette action permet de capturer l\'intégralité de votre empreinte digitale."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Cette action permet de capturer l\'intégralité de votre empreinte digitale"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Maintenez le doigt sur le capteur chaque fois que l\'icône de l\'empreinte digitale bouge. Cela aide à capter une plus grande partie de votre empreinte digitale."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Placer le bout de votre doigt sur le capteur"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Finalement, placer les bords de votre doigt"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Placez le côté de votre doigt sur le capteur et maintenez-le en place, puis passez à l\'autre côté"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Ce geste aide à capter une plus grande partie de votre empreinte digitale"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Inscription de l\'empreinte digitale : <xliff:g id="PERCENTAGE">%d</xliff:g> pour cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Empreinte digitale ajoutée"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Vous pouvez maintenant utiliser votre empreinte digitale pour déverrouiller votre téléphone ou vérifier qu\'il s\'agit bien de vous, par exemple pour vous connecter à des applications"</string>
@@ -612,7 +615,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Verrouillage de l\'écran"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisissez un verrouillage d\'écran"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisir un verrouillage d\'écran"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Choisissez nouv. verr. écran"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Choisir verrouillage pour applis pro"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Choisir nouveau verrouillage prof."</string>
@@ -719,7 +722,7 @@
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> recommande d\'utiliser un NIP ou un mot de passe robuste et risque de ne pas fonctionner comme prévu si vous n\'en définissez pas un"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> recommande d\'utiliser un nouveau NIP ou mot de passe et risque de ne pas fonctionner comme prévu si vous n\'en définissez pas un"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> recommande d\'utiliser un nouveau schéma, NIP ou mot de passe et risque de ne pas fonctionner comme prévu si vous n\'en définissez pas un"</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> vous recommande d\'utiliser une nouveau mode verrouillage de l\'écran"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"L\'application <xliff:g id="APP_NAME">%1$s</xliff:g> vous recommande d\'utiliser un nouveau mode de verrouillage de l\'écran"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Réessayez. Tentative <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> sur <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Vos données seront supprimées"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Si vous entrez un schéma incorrect à la prochaine tentative, les données de cet appareil seront supprimées."</string>
@@ -1350,9 +1353,9 @@
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Activer la fonctionnalité d\'écran attentif"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Empêchez l\'écran de s\'éteindre pendant que vous le regardez"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"L\'appareil photo est verrouillé"</string>
-    <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"L\'appareil photo doit être déverrouillé pour utiliser la détection du visage"</string>
+    <string name="auto_rotate_camera_lock_summary" msgid="5699491516271544672">"L\'appareil photo doit être déverrouillé pour utiliser la détection des visages"</string>
     <string name="adaptive_sleep_camera_lock_summary" msgid="8417541183603618098">"L\'appareil photo doit être déverrouillé pour utiliser la fonctionnalité d\'écran attentif"</string>
-    <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"L\'accès à l\'appareil photo est nécessaire pour utiliser la détection du visage. Touchez pour gérer les services de personnalisation de l\'appareil"</string>
+    <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"L\'accès à l\'appareil photo est nécessaire pour utiliser la détection des visages. Touchez pour gérer les services de personnalisation de l\'appareil"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Gérer les autorisations"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Éclairage nocturne"</string>
     <string name="night_display_text" msgid="4789324042428095383">"Le mode Éclairage nocturne donne une teinte ambre à votre écran. Cela vous permet de le regarder plus facilement lorsque l\'éclairage est faible et peut vous aider à vous endormir plus facilement."</string>
@@ -2665,6 +2668,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Affichez les applications qui utilisent le plus d\'énergie"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Recharge temporairement limitée"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Pour préserver votre pile. Apprenez-en plus."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Reprendre la charge"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Dans certaines conditions, comme des températures élevées ou de longues périodes de charge, la charge pourrait être limitée à <xliff:g id="PERCENT">%1$s</xliff:g> pour aider à préserver la santé de la pile.\n\nLorsque ces conditions prennent fin, votre téléphone se chargera normalement de façon automatique."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Dans certaines conditions, comme des températures élevées ou de longues périodes de charge, la charge pourrait être limitée à <xliff:g id="PERCENT">%1$s</xliff:g> pour aider à préserver la santé de la pile.\n\nLorsque ces conditions prennent fin, votre tablette se chargera normalement de façon automatique."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Comme vous avez utilisé votre téléphone plus que d\'habitude, votre pile risque de s\'épuiser plus tôt que prévu. \n\nLes applications qui utilisent le plus d\'énergie de la pile :"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Comme vous avez utilisé votre tablette plus que d\'habitude, votre pile risque de s\'épuiser plus tôt que prévu. \n\nLes applications qui utilisent le plus d\'énergie de la pile :"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Comme vous avez utilisé votre appareil plus que d\'habitude, votre pile risque de s\'épuiser plus tôt que prévu. \n\nLes applications qui utilisent le plus d\'énergie de la pile :"</string>
@@ -3393,8 +3399,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Appels avancés"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Appels 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Utiliser les services LTE pour améliorer les communications vocales et autres (recommandé)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Utiliser les services 4G pour améliorer les communications vocales et autres (recommandé)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Utiliser les services LTE pour améliorer les appels vocaux (recommandé)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Utiliser les services 4G pour améliorer les appels vocaux (recommandé)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Voix sur 5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Utiliser le réseau 5G pour passer des appels vocaux"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Envoyer les contacts au fournisseur de services"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Envoyer les numéros de téléphone de vos contacts pour accéder à des fonctionnalités améliorées"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Envoyer les contacts à <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3588,6 +3596,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"économiseur de pile, fixe, persistant, économie d\'énergie, pile"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"routine, horaire, économiseur de pile, économie d\'énergie, pile, automatique, pour cent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, appels avancés, appels 4g"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Voix sur 5G, voix sur NR, appels avancés, appels 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ajouter langue, ajouter une langue"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"taille du texte, grands caractères, police de grande taille, texte de grande taille, vision faible, agrandir le texte, agrandisseur de police, agrandissement de la police"</string>
     <string name="default_sound" msgid="6604374495015245195">"Son par défaut"</string>
@@ -3916,7 +3925,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder aux notifications?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Les notifications améliorées ont remplacé les notifications adaptatives Android sous Android 12. Cette fonctionnalité vous présente des suggestions d\'actions et de réponses, et organise vos notifications. \n\nLes notifications améliorées peuvent accéder au contenu de toutes les notifications, y compris les renseignements personnels comme le nom des contacts et les messages. Cette fonctionnalité peut aussi fermer des notifications ou interagir avec elles, comme répondre aux appels téléphoniques et gérer le mode Ne pas déranger."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder aux notifications?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pourra lire toutes les notifications, y compris des renseignements personnels, comme le nom des contacts et le texte des messages que vous recevez. Cette application pourra aussi fermer les notifications ou effectuer des actions sur les boutons dans les notifications, y compris répondre aux appels téléphoniques. \n\nCela permettra également à l\'application d\'activer et de désactiver la fonctionnalité Ne pas déranger et de modifier les paramètres connexes."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pourra lire toutes les notifications, y compris des renseignements personnels, comme le nom des contacts et le texte des messages que vous recevez. Cette application pourra aussi fermer ou reporter des notifications ou effectuer des actions sur les boutons des notifications, y compris répondre aux appels téléphoniques. \n\nCette action permettra également à l\'application d\'activer et de désactiver la fonctionnalité Ne pas déranger et de modifier les paramètres connexes."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si vous désactivez l\'accès aux notifications pour <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, l\'accès au mode Ne pas déranger peut également être désactivé."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Désactiver"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Annuler"</string>
