@@ -69,7 +69,7 @@ public final class AccessibilityControlTimeoutPreferenceFragment extends Dashboa
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACCESSIBILITY;
+        return SettingsEnums.ACCESSIBILITY_TIMEOUT;
     }
 
     @Override
