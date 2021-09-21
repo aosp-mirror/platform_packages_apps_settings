@@ -427,6 +427,34 @@ public class BluetoothPairingDialogTest {
         userEntryDialogExistingTextTest("test");
     }
 
+    @Test
+    public void groupPairing_setMemberDevice_showsMessageHint() {
+        // set the correct dialog type
+        when(controller.getDialogType()).thenReturn(BluetoothPairingController.CONFIRMATION_DIALOG);
+        when(controller.isCoordinatedSetMemberDevice()).thenReturn(true);
+
+        // build the fragment
+        BluetoothPairingDialogFragment frag = makeFragment();
+
+        // verify message is what we expect it to be and is visible
+        TextView message = frag.getmDialog().findViewById(R.id.pairing_group_message);
+        assertThat(message.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void groupPairing_nonSetMemberDevice_hidesMessageHint() {
+        // set the correct dialog type
+        when(controller.getDialogType()).thenReturn(BluetoothPairingController.CONFIRMATION_DIALOG);
+        when(controller.isCoordinatedSetMemberDevice()).thenReturn(false);
+
+        // build the fragment
+        BluetoothPairingDialogFragment frag = makeFragment();
+
+        // verify message is what we expect it to be and is visible
+        TextView message = frag.getmDialog().findViewById(R.id.pairing_group_message);
+        assertThat(message.getVisibility()).isEqualTo(View.GONE);
+    }
+
     // Runs a test simulating the user entry dialog type in a situation like device rotation, where
     // the dialog fragment gets created and we already have some existing text entered into the
     // pin field.
