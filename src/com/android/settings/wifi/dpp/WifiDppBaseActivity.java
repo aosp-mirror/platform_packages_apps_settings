@@ -26,7 +26,7 @@ import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.core.InstrumentedActivity;
 
-abstract class WifiDppBaseActivity extends InstrumentedActivity {
+public abstract class WifiDppBaseActivity extends InstrumentedActivity {
     protected FragmentManager mFragmentManager;
 
     protected abstract void handleIntent(Intent intent);
