@@ -102,6 +102,16 @@ public class RestrictedPreferenceControllerTest {
     }
 
     @Test
+    public void testUpdateState_isAllowlistedExceptIdleApp_prefDisabled() {
+        when(mockBatteryOptimizeUtils.isAllowlistedExceptIdleApp()).thenReturn(true);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
     public void testHandlePreferenceTreeClick_samePrefKey_verifyAction() {
         mPreference.setKey(mController.KEY_RESTRICTED_PREF);
         mController.handlePreferenceTreeClick(mPreference);
