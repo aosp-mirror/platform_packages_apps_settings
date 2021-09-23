@@ -56,7 +56,7 @@ public class SpatialAudioPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(AudioManager.class)).thenReturn(mAudioManager);
+        when((Object) mContext.getSystemService(AudioManager.class)).thenReturn(mAudioManager);
         when(mAudioManager.getSpatializer()).thenReturn(mSpatializer);
         mController = new SpatialAudioPreferenceController(mContext);
     }
