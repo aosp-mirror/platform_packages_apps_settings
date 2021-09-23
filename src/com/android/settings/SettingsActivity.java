@@ -384,6 +384,7 @@ public class SettingsActivity extends SettingsBaseActivity
         trampolineIntent.putExtra(
                 android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI,
                 intent.toUri(Intent.URI_INTENT_SCHEME));
+        trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         startActivity(trampolineIntent);
 
         return true;
