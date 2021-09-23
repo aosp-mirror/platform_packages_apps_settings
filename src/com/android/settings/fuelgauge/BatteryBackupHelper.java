@@ -263,7 +263,9 @@ public final class BatteryBackupHelper implements BackupHelper {
     private boolean isSystemOrDefaultApp(String packageName) {
         final PowerAllowlistBackend powerAllowlistBackend = getPowerAllowlistBackend();
         return powerAllowlistBackend.isSysAllowlisted(packageName)
-                || powerAllowlistBackend.isDefaultActiveApp(packageName);
+                || powerAllowlistBackend.isDefaultActiveApp(packageName)
+                // Optimize mode only for app which is in the allow list not idle app.
+                || powerAllowlistBackend.isAllowlistedExceptIdle(packageName);
     }
 
     private List<ApplicationInfo> getInstalledApplications() {
