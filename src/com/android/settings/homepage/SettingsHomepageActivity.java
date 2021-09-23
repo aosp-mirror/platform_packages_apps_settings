@@ -24,7 +24,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -40,6 +39,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.accounts.AvatarViewMixin;
 import com.android.settings.core.CategoryMixin;
@@ -180,12 +180,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         final Intent intent = getIntent();
         if (intent == null || !TextUtils.equals(intent.getAction(),
-                Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK)) {
+                android.provider.Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK)) {
             return;
         }
 
         final String intentUriString = intent.getStringExtra(
-                Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI);
+                android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI);
         if (TextUtils.isEmpty(intentUriString)) {
             Log.e(TAG, "No EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI to deep link");
             finish();
@@ -215,9 +215,14 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         targetIntent.putExtra(EXTRA_IS_FROM_SETTINGS_HOMEPAGE, true);
 
-        // Set 2-pane pair rule for the external deep link page.
+        // Set 2-pane pair rule for the deep link page.
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
                 new ComponentName(Utils.SETTINGS_PACKAGE_NAME, ALIAS_DEEP_LINK),
+                targetComponentName,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */);
+        ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
+                new ComponentName(Settings.class.getPackageName(), Settings.class.getName()),
                 targetComponentName,
                 true /* finishPrimaryWithSecondary */,
                 true /* finishSecondaryWithPrimary */);
