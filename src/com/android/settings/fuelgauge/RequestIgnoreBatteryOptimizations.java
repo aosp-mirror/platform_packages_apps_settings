@@ -41,6 +41,8 @@ public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addSystemFlags(android.view.WindowManager.LayoutParams
+                .SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
 
         mPowerWhitelistManager = getSystemService(PowerWhitelistManager.class);
 
@@ -92,13 +94,6 @@ public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
         p.mPositiveButtonListener = this;
         p.mNegativeButtonListener = this;
         setupAlert();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        getWindow().addSystemFlags(android.view.WindowManager.LayoutParams
-                .SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
     }
 
     @Override
