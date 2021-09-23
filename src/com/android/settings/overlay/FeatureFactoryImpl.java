@@ -25,6 +25,8 @@ import android.os.UserManager;
 
 import androidx.annotation.Keep;
 
+import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider;
+import com.android.settings.accessibility.AccessibilityMetricsFeatureProviderImpl;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProviderImpl;
 import com.android.settings.accounts.AccountFeatureProvider;
@@ -109,6 +111,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
     private GameSettingsFeatureProvider mGameSettingsFeatureProvider;
     private AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
+    private AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -345,5 +348,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mAccessibilitySearchFeatureProvider = new AccessibilitySearchFeatureProviderImpl();
         }
         return mAccessibilitySearchFeatureProvider;
+    }
+
+    @Override
+    public AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider() {
+        if (mAccessibilityMetricsFeatureProvider == null) {
+            mAccessibilityMetricsFeatureProvider = new AccessibilityMetricsFeatureProviderImpl();
+        }
+        return mAccessibilityMetricsFeatureProvider;
     }
 }
