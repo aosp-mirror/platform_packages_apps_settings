@@ -154,6 +154,13 @@
         android:ringtoneType="alarm"
         android:order="-60"/>
 
+    <!-- Spatial audio -->
+    <SwitchPreference
+        android:key="spatial_audio"
+        android:title="@string/spatial_audio_title"
+        android:order="-55"
+        settings:controller="com.android.settings.notification.SpatialAudioPreferenceController"/>
+
     <!-- Dial pad tones -->
     <SwitchPreference
         android:key="dial_pad_tones"
