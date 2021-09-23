@@ -41,6 +41,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -164,6 +165,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         assertThat(checkboxValue).isEqualTo(AccessibilityUtil.UserShortcutType.HARDWARE);
     }
 
+    @Ignore
     @Test
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_assignToVariable() {
