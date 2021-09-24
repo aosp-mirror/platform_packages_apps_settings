@@ -48,6 +48,7 @@ import com.android.settings.testutils.FakeToggleController;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -80,6 +81,7 @@ public class SliceBroadcastReceiverTest {
     }
 
     @Test
+    @Ignore
     public void onReceive_toggleChanged() {
         final String key = "key";
         final Uri uri = buildUri(key);
@@ -111,6 +113,7 @@ public class SliceBroadcastReceiverTest {
     }
 
     @Test
+    @Ignore
     public void toggleUpdate_synchronously_notifyChange_should_be_called() {
         // Monitor the ContentResolver
         final ContentResolver resolver = spy(mContext.getContentResolver());
@@ -142,6 +145,7 @@ public class SliceBroadcastReceiverTest {
     }
 
     @Test
+    @Ignore
     public void toggleUpdate_asynchronously_notifyChange_should_not_be_called() {
         // Monitor the ContentResolver
         final ContentResolver resolver = spy(mContext.getContentResolver());
@@ -162,6 +166,7 @@ public class SliceBroadcastReceiverTest {
     }
 
     @Test
+    @Ignore
     public void onReceive_sliderChanged() {
         final String key = "key";
         final Uri uri = buildUri(key);
@@ -198,6 +203,7 @@ public class SliceBroadcastReceiverTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    @Ignore
     public void onReceive_invalidController_throwsException() {
         final String key = "key";
         final int position = 0;
@@ -214,6 +220,7 @@ public class SliceBroadcastReceiverTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    @Ignore
     public void sliderOnReceive_noKey_throwsException() {
         // Build action
         final Intent intent = new Intent(SettingsSliceProvider.ACTION_SLIDER_CHANGED)
@@ -224,12 +231,14 @@ public class SliceBroadcastReceiverTest {
     }
 
     @Test(expected = IllegalStateException.class)
+    @Ignore
     public void toggleOnReceive_noExtra_illegalStateException() {
         final Intent intent = new Intent(SettingsSliceProvider.ACTION_TOGGLE_CHANGED);
         mReceiver.onReceive(mContext, intent);
     }
 
     @Test(expected = IllegalStateException.class)
+    @Ignore
     public void toggleOnReceive_emptyKey_throwsIllegalStateException() {
         final Intent intent = new Intent(SettingsSliceProvider.ACTION_TOGGLE_CHANGED)
                 .putExtra(SettingsSliceProvider.EXTRA_SLICE_KEY, (String) null);
@@ -237,6 +246,7 @@ public class SliceBroadcastReceiverTest {
     }
 
     @Test
+    @Ignore
     public void toggleUpdate_unavailableUriNotified() {
         // Monitor the ContentResolver
         final ContentResolver resolver = spy(mContext.getContentResolver());
@@ -271,6 +281,7 @@ public class SliceBroadcastReceiverTest {
     }
 
     @Test
+    @Ignore
     public void sliderUpdate_unavailableUriNotified() {
         // Monitor the ContentResolver
         final ContentResolver resolver = spy(mContext.getContentResolver());
