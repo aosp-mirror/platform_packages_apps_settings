@@ -59,6 +59,7 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -134,6 +135,7 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
+    @Ignore
     public void getRawDataToIndex_isNull() {
         final List<SearchIndexableRaw> indexableRawList =
                 AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
