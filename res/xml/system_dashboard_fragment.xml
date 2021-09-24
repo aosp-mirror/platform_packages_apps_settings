@@ -65,14 +65,6 @@
         <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS"/>
     </Preference>
 
-    <SwitchPreference
-        android:key="ota_disable_automatic_update"
-        android:title="@string/ota_disable_automatic_update"
-        android:summary="@string/ota_disable_automatic_update_summary"
-        android:icon="@drawable/ic_system_update"
-        android:order="-57"
-        settings:controller="com.android.settings.system.DisableAutomaticUpdatesPreferenceController"/>
-
     <Preference
         android:key="reset_dashboard"
         android:title="@string/reset_dashboard_title"
