@@ -42,6 +42,7 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -95,6 +96,7 @@ public class CombinedBiometricStatusPreferenceControllerTest {
                 mContext, TEST_PREF_KEY, mLifecycle);
     }
 
+    @Ignore
     @Test
     public void updateState_parentalConsentRequired_preferenceDisabled() {
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
