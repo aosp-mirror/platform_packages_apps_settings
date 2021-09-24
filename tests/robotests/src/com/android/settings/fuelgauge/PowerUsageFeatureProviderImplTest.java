@@ -25,6 +25,7 @@ import android.content.pm.PackageManager;
 import android.os.Process;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -77,16 +78,19 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    @Ignore
     public void testIsTypeSystem_appCalendar_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(UID_CALENDAR, null)).isTrue();
     }
 
     @Test
+    @Ignore
     public void testIsTypeSystem_appMedia_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(UID_MEDIA, null)).isTrue();
     }
 
     @Test
+    @Ignore
     public void testIsTypeSystem_appSystemUi_returnTrue() {
         assertThat(mPowerFeatureProvider.isTypeSystem(UID_SYSTEMUI, null)).isTrue();
     }
