@@ -212,6 +212,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         intent.setAction(null);
 
         targetIntent.setFlags(targetIntent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
+        targetIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+
+        // Sender of intent may want to send intent extra data to the destination of targetIntent.
+        targetIntent.replaceExtras(intent);
 
         targetIntent.putExtra(EXTRA_IS_FROM_SETTINGS_HOMEPAGE, true);
 
