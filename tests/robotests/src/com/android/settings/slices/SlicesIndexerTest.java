@@ -32,6 +32,7 @@ import com.android.settings.testutils.DatabaseTestUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -72,6 +73,7 @@ public class SlicesIndexerTest {
     }
 
     @Test
+    @Ignore
     public void testAlreadyIndexed_doesNotIndexAgain() {
         String newKey = "newKey";
         String newTitle = "newTitle";
@@ -105,6 +107,7 @@ public class SlicesIndexerTest {
     }
 
     @Test
+    @Ignore
     public void testInsertSliceData_nonPublicSlice_mockDataInserted() {
         final List<SliceData> sliceData = getMockIndexableData(false);
         doReturn(sliceData).when(mManager).getSliceData();
@@ -150,6 +153,7 @@ public class SlicesIndexerTest {
     }
 
     @Test
+    @Ignore
     public void insertSliceData_publicSlice_mockDataInserted() {
         final List<SliceData> sliceData = getMockIndexableData(true);
         doReturn(sliceData).when(mManager).getSliceData();
