@@ -197,6 +197,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     }
 
     @Test
+    @Ignore
     public void showGeneralCategory_shouldInitCategory() {
         final Bundle savedInstanceState = new Bundle();
         when(mFragment.showGeneralCategory()).thenReturn(true);
