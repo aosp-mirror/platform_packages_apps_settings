@@ -41,7 +41,6 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -165,7 +164,6 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         assertThat(checkboxValue).isEqualTo(AccessibilityUtil.UserShortcutType.HARDWARE);
     }
 
-    @Ignore
     @Test
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_assignToVariable() {
@@ -182,8 +180,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         savedInstanceState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE,
                 AccessibilityUtil.UserShortcutType.SOFTWARE
                         | AccessibilityUtil.UserShortcutType.HARDWARE);
-        mFragment.onCreate(savedInstanceState);
         mFragment.onAttach(mContext);
+        mFragment.onCreate(savedInstanceState);
         mFragment.setupEditShortcutDialog(dialog);
         final int value = mFragment.getShortcutTypeCheckBoxValue();
         mFragment.saveNonEmptyUserShortcutType(value);
@@ -197,10 +195,11 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     }
 
     @Test
-    @Ignore
+    @Config(shadows = ShadowFragment.class)
     public void showGeneralCategory_shouldInitCategory() {
         final Bundle savedInstanceState = new Bundle();
         when(mFragment.showGeneralCategory()).thenReturn(true);
+        mFragment.onAttach(mContext);
         mFragment.onCreate(savedInstanceState);
 
         verify(mFragment).initGeneralCategory();
