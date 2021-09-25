@@ -55,7 +55,7 @@ public class ActivityEmbeddingUtils {
     public static boolean isEmbeddingActivityEnabled(Context context) {
         final boolean isFlagEnabled = FeatureFlagUtils.isEnabled(context,
                 FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN);
-        final boolean isSplitSupported = new SplitController(context).isSplitSupported();
+        final boolean isSplitSupported = SplitController.getInstance().isSplitSupported();
 
         Log.d(TAG, "isFlagEnabled = " + isFlagEnabled);
         Log.d(TAG, "isSplitSupported = " + isSplitSupported);

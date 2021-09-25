@@ -112,6 +112,14 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         howMessage.setText(getHowMessage());
         inControlMessage.setText(getInControlMessage());
 
+        // Set up and show the "less secure" info section if necessary.
+        if (getResources().getBoolean(R.bool.config_face_intro_show_less_secure)) {
+            final LinearLayout infoRowLessSecure = findViewById(R.id.info_row_less_secure);
+            final ImageView iconLessSecure = findViewById(R.id.icon_less_secure);
+            infoRowLessSecure.setVisibility(View.VISIBLE);
+            iconLessSecure.getBackground().setColorFilter(getIconColorFilter());
+        }
+
         // Set up and show the "require eyes" info section if necessary.
         if (getResources().getBoolean(R.bool.config_face_intro_show_require_eyes)) {
             final LinearLayout infoRowRequireEyes = findViewById(R.id.info_row_require_eyes);
