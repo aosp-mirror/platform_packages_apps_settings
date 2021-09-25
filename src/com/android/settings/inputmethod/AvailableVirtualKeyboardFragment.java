@@ -105,7 +105,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
                     || permittedList.contains(imi.getPackageName())
                     || enabledImis.contains(imi);
             final InputMethodPreference pref = new InputMethodPreference(
-                    context, imi, true, isAllowedByOrganization, this);
+                    context, imi, isAllowedByOrganization, this);
             pref.setIcon(imi.loadIcon(context.getPackageManager()));
             mInputMethodPreferenceList.add(pref);
         }

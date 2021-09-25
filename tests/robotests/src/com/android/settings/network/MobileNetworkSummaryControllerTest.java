@@ -145,6 +145,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void getSummary_oneSubscription_correctSummaryAndClickHandler() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
@@ -185,6 +186,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void getSummary_oneInactivePSim_canDisablePsim_correctSummaryAndClickHandler() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         when(sub1.getSubscriptionId()).thenReturn(1);
@@ -210,6 +212,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void getSummary_twoSubscriptions_correctSummaryAndFragment() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
@@ -225,6 +228,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void getSummaryAfterUpdate_twoSubscriptionsBecomesOne_correctSummaryAndFragment() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
@@ -255,6 +259,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void getSummaryAfterUpdate_oneSubscriptionBecomesTwo_correctSummaryAndFragment() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
@@ -286,6 +291,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void getSummary_providerModel_Enabled() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
@@ -333,6 +339,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void addButton_oneSubscription_hasAddClickListener() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
@@ -342,6 +349,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void addButton_twoSubscriptions_hasAddClickListener() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
@@ -352,6 +360,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void addButton_oneSubscriptionAirplaneModeTurnedOn_addButtonGetsDisabled() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
@@ -367,6 +376,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void onResume_oneSubscriptionAirplaneMode_isDisabled() {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
@@ -409,6 +419,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void onAirplaneModeChanged_oneSubscriptionAirplaneModeGetsTurnedOff_isEnabled() {
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
