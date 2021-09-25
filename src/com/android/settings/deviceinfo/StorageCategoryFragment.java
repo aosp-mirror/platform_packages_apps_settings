@@ -286,6 +286,7 @@ public class StorageCategoryFragment extends DashboardFragment
             metricsFeatureProvider.logClickedPreference(preference, getMetricsCategory());
             metricsFeatureProvider.action(context, SettingsEnums.STORAGE_FREE_UP_SPACE_NOW);
             final Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivityAsUser(intent, new UserHandle(mUserId));
             return true;
         }
