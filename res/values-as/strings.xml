@@ -316,7 +316,7 @@
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"লক স্ক্ৰীন"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"কি কি দেখুওৱাব লাগে"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"মোৰ অৱস্থান, স্ক্ৰীন আনলক, ছিম কাৰ্ডৰ লক, ক্ৰিডেনশ্বিয়েল ষ্ট\'ৰেজৰ লক ছেট কৰক"</string>
-    <string name="cdma_security_settings_summary" msgid="2455517905101186330">"মোৰ অৱস্থান, স্ক্ৰীণ আনলক, ক্ৰেডেনশ্বিয়েল সঞ্চয়াগাৰৰ লক ছেট কৰক"</string>
+    <string name="cdma_security_settings_summary" msgid="2455517905101186330">"মোৰ অৱস্থান, স্ক্ৰীন আনলক, ক্ৰিডেনশ্বিয়েল ষ্ট\'ৰেজৰ লক ছেট কৰক"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"গোপনীয়তা"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"উপলব্ধ নহয়"</string>
     <string name="security_status_title" msgid="6958004275337618656">"সুৰক্ষা স্থিতি"</string>
@@ -354,6 +354,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
@@ -397,8 +398,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"আপোনাৰ মুখাৱয়বৰ ম’ডেলটো স্থায়ী তথা সুৰক্ষিতভাৱে মচা হ’ব।\n\nমচাৰ পাছত, নিজৰ ফ’নটো আনলক কৰিবলৈ অথবা এপত বিশ্বাসযোগ্যতা প্ৰমাণীকৰণৰ বাবে আপোনাক নিজৰ ফিংগাৰপ্ৰিণ্ট, পিন, আৰ্হি অথবা পাছৱৰ্ডৰ প্ৰয়োজন হ’ব।"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"আপোনাৰ ফ’নটো আনলক কৰিবলৈ ফেচ আনলক ব্যৱহাৰ কৰক"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"ফিংগাৰপ্ৰিণ্ট"</string>
-    <!-- no translation found for security_settings_work_fingerprint_preference_title (2076006873519745979) -->
-    <skip />
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"কৰ্মস্থানৰ ফিংগাৰপ্ৰিণ্ট"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"ফিংগাৰপ্ৰিণ্টসমূহ পৰিচালনা কৰক"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰক"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"ফিংগাৰপ্ৰিণ্ট যোগ কৰক"</string>
@@ -639,7 +639,7 @@
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"কৰ্মস্থানৰ প্ৰ’ফাইলৰ লক"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="4746783679112447948">"লক স্ক্ৰীন সলনি কৰক"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="6023813780512501969">"আৰ্হি, পিন বা পাছৱৰ্ড সুৰক্ষা সলনি বা অক্ষম কৰক"</string>
-    <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"স্ক্ৰীণ লক কৰিবলৈ এটা পদ্ধতি বাছক"</string>
+    <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"স্ক্ৰীন লক কৰিবলৈ এটা পদ্ধতি বাছক"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"নাই"</string>
     <string name="unlock_set_unlock_off_summary" msgid="4578319976164001322"></string>
     <string name="unlock_set_unlock_none_title" msgid="2844029875174409728">"ছোৱাইপ কৰক"</string>
@@ -724,7 +724,7 @@
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g>এ এটা নতুন পিন বা পাছৱৰ্ড ছেট কৰিবলৈ চুপাৰিছ কৰিছে আৰু ছেট নকৰিলে আশা কৰা ধৰণে কাম নকৰিবও পাৰে"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g>এ এটা নতুন পিন বা পাছৱৰ্ড ছেট কৰিবলৈ চুপাৰিছ কৰিছে আৰু ছেট নকৰিলে আশা কৰা ধৰণে কাম নকৰিবও পাৰে"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g>এ এটা নতুন আৰ্হি, পিন বা পাছৱৰ্ড ছেট কৰিবলৈ চুপাৰিছ কৰিছে আৰু ছেট নকৰিলে ই ভালদৰে কাম নকৰিবও পাৰে"</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g>এ এটা নতুন স্ক্ৰীণ লক ছেট কৰিবলৈ চুপাৰিছ কৰিছে"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g>এ এটা নতুন স্ক্ৰীন লক ছেট কৰিবলৈ চুপাৰিছ কৰিছে"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"আকৌ চেষ্টা কৰক। <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>ৰ ভিতৰত <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> প্ৰয়াস।"</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"আপোনাৰ ডেটা মচা হ\'ব"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"আপুনি পৰৱৰ্তী চেষ্টাত ভুল আৰ্হি আঁকিলে এই ডিভাইচটোৰ ডেটা মচা হ’ব"</string>
@@ -860,6 +860,8 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"সংযোগ কৰিব পৰা নগ\'ল। আকৌ চেষ্টা কৰক।"</string>
     <string name="device_details_title" msgid="1155622417516195481">"ডিভাইচৰ বিষয়ে সবিশেষ"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"ডিভাইচৰ ব্লুটুথৰ ঠিকনা: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <!-- no translation found for bluetooth_multuple_devices_mac_address (4974301550897923376) -->
+    <skip />
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"ডিভাইচটো পাহৰিবনে?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"জড়িত হৈ থকাটো আঁতৰাওক"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"এপ্‌টোৰ সংযোগ বিচ্ছিন্ন কৰিবনে?"</string>
@@ -2547,7 +2549,7 @@
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g>ক নিম্নোক্ত অনুমতিকেইটাৰ আৱশ্যক:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"যিহেতু এটা এপে অনুমতি বিচাৰি কৰা অনুৰোধ ঢাকি ধৰিছে, Settingsএ আপোনাৰ উত্তৰ সত্যাপন কৰিব পৰা নাই।"</string>
     <string name="enable_service_encryption_warning" msgid="931082737770453755">"যদি আপুনি <xliff:g id="SERVICE">%1$s</xliff:g> অন কৰে, তেন্তে আপোনাৰ ডিভাইচটোৱে ডেটা এনক্ৰিপশ্বন বঢ়াবলৈ স্ক্ৰীণ লক ব্যৱহাৰ নকৰিব।"</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"যিহেতু আপুনি দিব্যাংগসকলৰ বাবে থকা এটা সেৱা অন কৰিছে, গতিকে আপোনাৰ ডিভাইচটোৱে ডেটা এনক্ৰিপশ্বন বঢ়াবলৈ আপোনাৰ স্ক্ৰীণ লকটো ব্যৱহাৰ নকৰিব।"</string>
+    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"যিহেতু আপুনি দিব্যাংগসকলৰ বাবে থকা এটা সেৱা অন কৰিছে, গতিকে আপোনাৰ ডিভাইচটোৱে ডেটা এনক্ৰিপশ্বন বঢ়াবলৈ আপোনাৰ স্ক্ৰীন লকটো ব্যৱহাৰ নকৰিব।"</string>
     <string name="enable_service_pattern_reason" msgid="6832846117817938536">"যিহেতু <xliff:g id="SERVICE">%1$s</xliff:g>ক সক্ৰিয় কৰিলে ডেটা এনক্ৰিপশ্বনত প্ৰভাৱ পৰিব, গতিকে আপুনি আপোনাৰ আৰ্হিটো নিশ্চিত কৰিব লাগিব।"</string>
     <string name="enable_service_pin_reason" msgid="6040417014360237703">"যিহেতু <xliff:g id="SERVICE">%1$s</xliff:g> সক্ৰিয় কৰিলে ডেটা এনক্ৰিপশ্বনত প্ৰভাৱ পৰিব, গতিকে আপুনি আপোনাৰ পিনটো নিশ্চিত কৰিব লাগিব।"</string>
     <string name="enable_service_password_reason" msgid="6962544350351734238">"যিহেতু <xliff:g id="SERVICE">%1$s</xliff:g>ক সক্ৰিয় কৰিলে ডেটা এনক্ৰিপশ্বনত প্ৰভাৱ পৰিব, গতিকে আপুনি আপোনাৰ পাছৱৰ্ডটো নিশ্চিত কৰিব লাগিব।"</string>
@@ -2835,7 +2837,7 @@
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> মি.এ."</string>
     <string name="battery_used_for" msgid="6401552215008504483">"<xliff:g id="TIME">^1</xliff:g> ব্যৱহাৰ কৰা হৈছে"</string>
     <string name="battery_active_for" msgid="4416277218863232476">"<xliff:g id="TIME">^1</xliff:g> ধৰি সক্ৰিয় হৈ আছে"</string>
-    <string name="battery_screen_usage" msgid="90008745183187461">"স্ক্ৰীণৰ ব্যৱহাৰ <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_screen_usage" msgid="90008745183187461">"স্ক্ৰীনৰ ব্যৱহাৰ <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="APP">%2$s</xliff:g>ৰ দ্বাৰা <xliff:g id="PERCENT">%1$s</xliff:g> ব্যৱহাৰ হৈছে"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"সামগ্ৰিক বেটাৰিৰ <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"শেহতীয়াভাৱে পূৰ্ণ চাৰ্জ কৰাৰ পিছত হোৱা বেটাৰি ক্ষয়"</string>
@@ -3649,6 +3651,8 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"সদায় কম্পন হ’ব লাগে"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"প্ৰথমে কম্পন হৈ তাৰপাছত ক্ৰমে ৰিং হ’ব লাগে"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"অইন ধ্বনিসমূহ"</string>
+    <!-- no translation found for spatial_audio_title (6591051622375191603) -->
+    <skip />
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"ডায়েল পেডৰ ট\'নসমূহ"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"স্ক্ৰীন লক কৰাৰ ধ্বনি"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"চ্চাৰ্জ কৰাৰ ধ্বনি আৰু কম্পন"</string>
@@ -4204,7 +4208,7 @@
     <string name="zen_mode_screen_on" msgid="7312758100468915319">"যেতিয়া স্ক্ৰীনখন অন হৈ থাকে"</string>
     <string name="zen_mode_screen_on_summary" msgid="510055058460316698">"অসুবিধা নিদিব সুবিধাৰ দ্বাৰা নীৰৱ কৰা জাননীবোৰ স্ক্ৰীনত দেখুৱাবলৈ আৰু এটা স্থিতি দণ্ডৰ আইকন দেখুৱাবলৈ দিয়ক"</string>
     <string name="zen_mode_screen_off" msgid="7069798697669366075">"যেতিয়া স্ক্ৰীণখন অফ হৈ থাকে"</string>
-    <string name="zen_mode_screen_off_summary" msgid="4698018253505406152">"অসুবিধা নিদিবৰ দ্বাৰা নীৰৱ কৰা হোৱা জাননীসমূহক স্ক্ৰীণ অন কৰিবলৈ আৰু লাইট জ্বলা-নুমুৱা কৰিবলৈ দিয়ক"</string>
+    <string name="zen_mode_screen_off_summary" msgid="4698018253505406152">"অসুবিধা নিদিবৰ দ্বাৰা নীৰৱ কৰা হোৱা জাননীসমূহক স্ক্ৰীন অন কৰিবলৈ আৰু লাইট জ্বলা-নুমুৱা কৰিবলৈ দিয়ক"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="1958271859408992636">"অসুবিধা নিদিব সুবিধাৰ দ্বাৰা নীৰৱ কৰা হোৱা জাননীসমূহক স্ক্ৰীন অন কৰিবলৈ দিয়ক"</string>
     <string name="notification_app_settings_button" msgid="4692549882609342128">"জাননীৰ ছেটিং"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"সকীয়নি"</string>
@@ -4848,7 +4852,7 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"সুৰক্ষা আৰু জৰুৰীকালীন"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"জৰুৰীকালীন SOS, স্বাস্থ্য সম্পৰ্কীয় তথ্য, সতৰ্কবাণী"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"আঙুলিৰ স্পৰ্শৰ নিৰ্দেশেৰে কৰা নেভিগেশ্বন"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"গৃহপৃষ্ঠালৈ যাবলৈ স্ক্ৰীণৰ তলৰ অংশৰ পৰা ওপৰলৈ ছোৱাইপ কৰক। এপ্‌সমূহ সলনি কৰিবলৈ তলৰ পৰা ওপৰলৈ ছোৱাইপ কৰক, ধৰি ৰাখক আৰু তাৰপিছত এৰি দিয়ক। উভতি যাবলৈ, বাওঁফালে অথবা সোঁফালে কাষৰ পৰা ছোৱাইপ কৰক।"</string>
+    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"গৃহপৃষ্ঠালৈ যাবলৈ স্ক্ৰীনৰ তলৰ অংশৰ পৰা ওপৰলৈ ছোৱাইপ কৰক। এপ্‌সমূহ সলনি কৰিবলৈ তলৰ পৰা ওপৰলৈ ছোৱাইপ কৰক, ধৰি ৰাখক আৰু তাৰপিছত এৰি দিয়ক। উভতি যাবলৈ, বাওঁফালে অথবা সোঁফালে কাষৰ পৰা ছোৱাইপ কৰক।"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"৩টা বুটামেৰে কৰা নেভিগেশ্বন"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"আপোনাৰ স্ক্ৰীনৰ তলৰ অংশত থকা বুটামবোৰৰ জৰিয়তে উভতি যাওক, গৃহলৈ যাওক আৰু এপ্‌সমূহ সলনি কৰক।"</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"ছিষ্টেম নেভিগেশ্বন, ২ টা বুটামেৰে কৰা নেভিগেশ্বন, ৩ টা বুটামেৰে কৰা নেভিগেশ্বন, আঙুলিৰ স্পৰ্শৰ নিৰ্দেশেৰে কৰা নেভিগেশ্বন, ছোৱাইপ"</string>
