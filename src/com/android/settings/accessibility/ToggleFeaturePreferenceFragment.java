@@ -406,10 +406,13 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             return;
         }
 
+        final int displayHalfHeight =
+                AccessibilityUtil.getDisplayBounds(getPrefContext()).height() / 2;
         final IllustrationPreference illustrationPreference =
                 new IllustrationPreference(getPrefContext());
         illustrationPreference.setImageUri(mImageUri);
         illustrationPreference.setSelectable(false);
+        illustrationPreference.setMaxHeight(displayHalfHeight);
         illustrationPreference.setKey(KEY_ANIMATED_IMAGE);
 
         getPreferenceScreen().addPreference(illustrationPreference);
