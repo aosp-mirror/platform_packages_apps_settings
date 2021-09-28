@@ -405,6 +405,11 @@ public class BatteryUtils {
                 batteryUsageStats, estimate, elapsedRealtimeUs, false /* shortString */);
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
 
+        try {
+            batteryUsageStats.close();
+        } catch (Exception e) {
+            Log.e(TAG, "BatteryUsageStats.close() failed", e);
+        }
         return batteryInfo;
     }
 
