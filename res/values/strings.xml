@@ -997,12 +997,16 @@
     <string name="biometric_settings_intro">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
     <string name="biometric_settings_category_ways_to_unlock">Ways to unlock</string>
-    <!-- Biometric category title - configuration options for using biometric to unlock the device or authenticate in apps. [CHAR LIMIT=50] -->
-    <string name="biometric_settings_category_ways_to_use">Use face and fingerprint for</string>
     <!-- Text shown on a toggle which allows or disallows the device to use biometric for unlocking the device. [CHAR LIMIT=50] -->
-    <string name="biometric_settings_use_biometric_unlock_phone">Unlocking your phone</string>
+    <string name="biometric_settings_use_biometric_unlock_phone">Unlock your phone</string>
     <!-- Text shown on a toggle which allows or disallows the device to use biometric for authentication. [CHAR LIMIT=50] -->
-    <string name="biometric_settings_use_biometric_for_apps">Authentication in apps</string>
+    <string name="biometric_settings_use_biometric_for_apps">Verify it\u2019s you in apps</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Face Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_face_preference_summary">Using face</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Fingerprint Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_fingerprint_preference_summary">Using fingerprint</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can be performed by using either Face Unlock or Fingerprint Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary">Using face or fingerprint</string>
     <!-- Message shown during enrollment to prompt a child to give the device to a parent or guardian. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_hand_back_to_guardian">Hand the phone back to your parent</string>
     <!-- Button text shown during enrollment to proceed after a child user has handed the device to a parent or guardian. [CHAR LIMIT=22] -->
@@ -1241,25 +1245,6 @@
 
     <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
     <string name="fingerprint_last_delete_confirm">Yes, remove</string>
-
-    <!-- Title of the combined biometrics settings screen. [CHAR LIMIT=40] -->
-    <string name="security_settings_biometrics_title">Face \u0026 fingerprint unlock</string>
-    <!-- Summary of the current biometrics setting when no biometrics have been enrolled. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_summary_none">Tap to set up</string>
-    <!-- Summary of the current biometrics setting when the user has enrolled a face but no fingerprint. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_summary_face">Face only</string>
-    <!-- Summary of the current biometrics setting when the user has enrolled a fingerprint but no face. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_summary_fingerprint">Fingerprint only</string>
-    <!-- Summary of the current biometrics setting when the user has enrolled both a face and a fingerprint. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_summary_both">Face and fingerprint</string>
-    <!-- Description shown on the combined biometrics settings screen. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_biometrics_description">When you set up face and fingerprint unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area</string>
-    <!-- Title of a section on the biometrics settings screen for setting up different types of authentication. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_types_category">Ways to unlock</string>
-    <!-- Title of a section on the biometrics settings screen for adjusting authentication preferences. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_preferences_category">Use face or fingerprint for</string>
-    <!-- Title of a section on the biometrics settings screen for adjusting authentication preferences. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_preference_use_with_apps">Authentication in apps</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
