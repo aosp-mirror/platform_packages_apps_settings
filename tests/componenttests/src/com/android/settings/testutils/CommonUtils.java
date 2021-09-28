@@ -139,7 +139,7 @@ public class CommonUtils {
         UiUtils.waitUntilCondition(1000, () -> sPowerManager.isInteractive());
 
         // After power on screen, need to unlock and goto home page.
-        AdbUtils.shell("input keyevent KEYCODE_MENU");
+        sPowerManager.wakeUp(1000,  PowerManager.WAKE_REASON_POWER_BUTTON, "Wakeup");
     }
 
     /**
