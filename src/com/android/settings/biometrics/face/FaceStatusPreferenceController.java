@@ -21,6 +21,9 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -33,7 +36,8 @@ import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
-public class FaceStatusPreferenceController extends BiometricStatusPreferenceController {
+public class FaceStatusPreferenceController extends BiometricStatusPreferenceController
+        implements LifecycleObserver {
 
     public static final String KEY_FACE_SETTINGS = "face_settings";
 
@@ -42,12 +46,29 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     RestrictedPreference mPreference;
 
     public FaceStatusPreferenceController(Context context) {
-        this(context, KEY_FACE_SETTINGS);
+        this(context, KEY_FACE_SETTINGS, null /* lifecycle */);
     }
 
     public FaceStatusPreferenceController(Context context, String key) {
+        this(context, key, null /* lifecycle */);
+    }
+
+    public FaceStatusPreferenceController(Context context, Lifecycle lifecycle) {
+        this(context, KEY_FACE_SETTINGS, lifecycle);
+    }
+
+    public FaceStatusPreferenceController(Context context, String key, Lifecycle lifecycle) {
         super(context, key);
         mFaceManager = Utils.getFaceManagerOrNull(context);
+
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume() {
+        updateStateInternal();
     }
 
     @Override
@@ -69,14 +90,17 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final RestrictedLockUtils.EnforcedAdmin admin = ParentalControlsUtils
-                .parentConsentRequired(mContext, BiometricAuthenticator.TYPE_FACE);
-        updateStateInternal(admin);
+        updateStateInternal();
+    }
+
+    private void updateStateInternal() {
+        updateStateInternal(ParentalControlsUtils.parentConsentRequired(
+                mContext, BiometricAuthenticator.TYPE_FACE));
     }
 
     @VisibleForTesting
     void updateStateInternal(@Nullable RestrictedLockUtils.EnforcedAdmin enforcedAdmin) {
-        if (enforcedAdmin != null && mPreference != null) {
+        if (mPreference != null) {
             mPreference.setDisabledByAdmin(enforcedAdmin);
         }
     }
