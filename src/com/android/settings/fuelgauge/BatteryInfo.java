@@ -162,7 +162,9 @@ public class BatteryInfo {
                                 .getBatteryUsageStats();
                     } catch (RuntimeException e) {
                         Log.e(TAG, "getBatteryInfo() from getBatteryUsageStats()", e);
-                        return null;
+                        // Use default BatteryUsageStats.
+                        stats = new BatteryUsageStats.Builder(
+                                new String[0], /* includePowerModels */ false).build();
                     }
                 }
                 return getBatteryInfo(context, stats, shortString);

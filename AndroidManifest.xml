@@ -177,6 +177,7 @@
         <activity-alias android:name="DeepLinkHomepageActivity"
                 android:label="@string/settings_label_launcher"
                 android:exported="true"
+                android:permission="android.permission.LAUNCH_TWO_PANE_SETTINGS_DEEP_LINK"
                 android:targetActivity=".homepage.SettingsHomepageActivity">
             <intent-filter>
                 <action android:name="android.settings.SETTINGS_LARGE_SCREEN_DEEP_LINK" />
