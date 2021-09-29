@@ -22,6 +22,7 @@ import android.os.BatteryStats;
 import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.overlay.FeatureFactory;
@@ -34,6 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DebugEstimatesLoader extends AsyncLoaderCompat<List<BatteryInfo>> {
+    private static final String TAG = "DebugEstimatesLoader";
+
     private BatteryStatsHelper mStatsHelper;
 
     public DebugEstimatesLoader(Context context, BatteryStatsHelper statsHelper) {
@@ -58,8 +61,16 @@ public class DebugEstimatesLoader extends AsyncLoaderCompat<List<BatteryInfo>> {
         Intent batteryBroadcast = getContext().registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         BatteryStats stats = mStatsHelper.getStats();
-        BatteryUsageStats batteryUsageStats =
-                context.getSystemService(BatteryStatsManager.class).getBatteryUsageStats();
+        BatteryUsageStats batteryUsageStats;
+        try {
+            batteryUsageStats = context.getSystemService(BatteryStatsManager.class)
+                    .getBatteryUsageStats();
+        } catch (RuntimeException e) {
+            Log.e(TAG, "getBatteryInfo() from getBatteryUsageStats()", e);
+            // Use default BatteryUsageStats.
+            batteryUsageStats = new BatteryUsageStats.Builder(
+                    new String[0], /* includePowerModels */ false).build();
+        }
         BatteryInfo oldinfo = BatteryInfo.getBatteryInfoOld(getContext(), batteryBroadcast,
                 batteryUsageStats, elapsedRealtimeUs, false);
 
@@ -74,6 +85,12 @@ public class DebugEstimatesLoader extends AsyncLoaderCompat<List<BatteryInfo>> {
         List<BatteryInfo> infos = new ArrayList<>();
         infos.add(oldinfo);
         infos.add(newInfo);
+
+        try {
+            batteryUsageStats.close();
+        } catch (Exception e) {
+            Log.e(TAG, "BatteryUsageStats.close() failed", e);
+        }
         return infos;
     }
 }
