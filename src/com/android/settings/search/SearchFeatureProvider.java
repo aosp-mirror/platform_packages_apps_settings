@@ -104,7 +104,7 @@ public interface SearchFeatureProvider {
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                     .logSettingsTileClick(KEY_HOMEPAGE_SEARCH_BAR, pageId);
             final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();
-            activity.startActivityForResult(intent, REQUEST_CODE, bundle);
+            activity.startActivity(intent, bundle);
         });
     }
 
