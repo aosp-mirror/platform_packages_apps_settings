@@ -401,7 +401,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Vaš model lica izbrisat će se trajno i sigurno.\n\nNakon brisanja trebat će vam otisak prsta, PIN, uzorak ili zaporka da biste otključali telefon ili za autentifikaciju u aplikacijama."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Otključajte telefon licem"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Otisak prsta"</string>
-    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisak prsta za posao"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisak za posl. profil"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Otisci prstiju"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Upotreba otiska prsta"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Dodajte otisak prsta"</string>
@@ -456,9 +456,16 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Dodano je lice i otisak prsta"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Kad postavite otključavanje licem i otključavanje otiskom prsta, telefon će tražiti vaš otisak prsta kad nosite masku ili se nalazite u tamnom prostoru."</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Načini otključavanja"</string>
-    <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Upotrijebite lice i otisak prsta za"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Otključav. telefona"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Autentifikacija u aplikacijama"</string>
+    <!-- no translation found for biometric_settings_use_biometric_unlock_phone (8180914579885804358) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_biometric_for_apps (6201168728906364189) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_preference_summary (1821648836899408477) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_fingerprint_preference_summary (6077762097826050165) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_fingerprint_preference_summary (3029102492674234728) -->
+    <skip />
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Vrati telefon roditelju"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"U redu"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Želite li preskočiti zaključavanje zaslona?"</string>
@@ -574,15 +581,6 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Otiskom prsta nećete moći otključati telefon niti potvrditi da ste to vi u aplikacijama."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Otiskom prsta nećete moći otključati poslovni profil, autorizirati kupnje niti se prijaviti u poslovne aplikacije."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Da, ukloni"</string>
-    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Otključavanje licem i otiskom prsta"</string>
-    <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Dodirnite za postavljanje"</string>
-    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"Samo lice"</string>
-    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"Samo otisak prsta"</string>
-    <string name="security_settings_biometrics_summary_both" msgid="7328638955127876021">"Lice i otisak prsta"</string>
-    <string name="security_settings_biometrics_description" msgid="1669340998063178097">"Kad postavite otključavanje licem i otiskom prsta, telefon će tražiti vaš otisak prsta kad nosite masku ili ste u tamnom prostoru"</string>
-    <string name="security_settings_biometrics_types_category" msgid="4875227478250058267">"Načini otključavanja"</string>
-    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"Upotreba lica ili otiska prsta za"</string>
-    <string name="security_settings_biometrics_preference_use_with_apps" msgid="4068551659594090167">"Autentifikacija u aplikacijama"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Enkripcija"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Kriptiraj tablet računalo"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Šifriraj telefon"</string>
@@ -3691,8 +3689,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Uvijek vibriraj"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Najprije vibriraj, zatim postupno zvoni"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Ostali zvukovi"</string>
-    <!-- no translation found for spatial_audio_title (6591051622375191603) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="6591051622375191603">"Prostorni zvuk"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Tonovi brojčanika"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Zvuk zaključavanja zaslona"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Zvukovi i vibracija punjenja"</string>
