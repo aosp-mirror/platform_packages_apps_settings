@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.BatteryUsageStats;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.Menu;
 
 import androidx.annotation.NonNull;
@@ -103,6 +104,16 @@ public abstract class PowerUsageBase extends DashboardFragment {
         final long startTime = System.currentTimeMillis();
         historyPref.setBatteryUsageStats(mBatteryUsageStats);
         BatteryUtils.logRuntime(TAG, "updatePreference", startTime);
+        if (mBatteryUsageStats == null) {
+            return;
+        }
+        try {
+            mBatteryUsageStats.close();
+        } catch (Exception e) {
+            Log.e(TAG, "BatteryUsageStats.close() failed", e);
+        } finally {
+            mBatteryUsageStats = null;
+        }
     }
 
     private class BatteryUsageStatsLoaderCallbacks
