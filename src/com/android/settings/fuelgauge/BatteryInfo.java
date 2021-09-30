@@ -167,7 +167,14 @@ public class BatteryInfo {
                                 new String[0], /* includePowerModels */ false).build();
                     }
                 }
-                return getBatteryInfo(context, stats, shortString);
+                final BatteryInfo batteryInfo =
+                        getBatteryInfo(context, stats, shortString);
+                try {
+                    stats.close();
+                } catch (Exception e) {
+                    Log.e(TAG, "BatteryUsageStats.close() failed", e);
+                }
+                return batteryInfo;
             }
 
             @Override

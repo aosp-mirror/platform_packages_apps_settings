@@ -398,7 +398,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Model wajah Anda akan dihapus secara permanen dan aman.\n\nSetelah dihapus, Anda akan memerlukan sidik jari, PIN, pola, atau sandi untuk membuka kunci ponsel atau untuk autentikasi dalam aplikasi."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Gunakan Face Unlock untuk membuka kunci ponsel Anda"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Sidik jari"</string>
-    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Sidik jari profil kerja"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Sidik jari untuk profil kerja"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Mengelola sidik jari"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Sidik jari untuk"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Tambahkan sidik jari"</string>
@@ -452,9 +452,16 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Wajah dan sidik jari ditambahkan"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Saat Anda menyiapkan Face Unlock dan Fingerprint Unlock, ponsel akan meminta sidik jari saat Anda memakai masker atau berada di area yang gelap"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Cara membuka kunci"</string>
-    <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Gunakan wajah dan sidik jari untuk"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Membuka kunci ponsel"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Autentikasi dalam aplikasi"</string>
+    <!-- no translation found for biometric_settings_use_biometric_unlock_phone (8180914579885804358) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_biometric_for_apps (6201168728906364189) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_preference_summary (1821648836899408477) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_fingerprint_preference_summary (6077762097826050165) -->
+    <skip />
+    <!-- no translation found for biometric_settings_use_face_or_fingerprint_preference_summary (3029102492674234728) -->
+    <skip />
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Serahkan kembali ponsel ke orang tua"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Oke"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Lewati kunci layar?"</string>
@@ -568,15 +575,6 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Anda tidak akan dapat menggunakan sidik jari untuk membuka kunci ponsel atau memverifikasi diri Anda di aplikasi."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Anda tidak akan dapat menggunakan sidik jari untuk membuka kunci profil kerja, menyetujui pembelian, atau login ke aplikasi kerja."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ya, hapus"</string>
-    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Face unlock &amp; buka kunci sidik jari"</string>
-    <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Ketuk untuk menyiapkan"</string>
-    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"Hanya wajah"</string>
-    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"Hanya sidik jari"</string>
-    <string name="security_settings_biometrics_summary_both" msgid="7328638955127876021">"Wajah dan sidik jari"</string>
-    <string name="security_settings_biometrics_description" msgid="1669340998063178097">"Saat Anda menyiapkan face unlock dan buka kunci sidik jari, ponsel akan meminta sidik jari saat Anda memakai masker atau berada di area yang gelap"</string>
-    <string name="security_settings_biometrics_types_category" msgid="4875227478250058267">"Cara membuka kunci"</string>
-    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"Gunakan wajah atau sidik jari untuk"</string>
-    <string name="security_settings_biometrics_preference_use_with_apps" msgid="4068551659594090167">"Autentikasi dalam aplikasi"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Enkripsi"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Enkripsi tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Enkripsi ponsel"</string>
@@ -860,8 +858,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Tidak dapat terhubung. Coba lagi."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detail perangkat"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Alamat Bluetooth perangkat: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_multuple_devices_mac_address (4974301550897923376) -->
-    <skip />
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Alamat Bluetooth perangkat:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Lupakan perangkat?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Hapus atribusi"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Putuskan Koneksi Aplikasi?"</string>
@@ -3651,8 +3648,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Selalu bergetar"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Getar dulu, lalu dering bertahap"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Suara lainnya"</string>
-    <!-- no translation found for spatial_audio_title (6591051622375191603) -->
-    <skip />
+    <string name="spatial_audio_title" msgid="6591051622375191603">"Audio spasial"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Nada tombol nomor"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Suara penguncian layar"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Getaran &amp; suara pengisian daya"</string>
@@ -5582,7 +5578,8 @@
     <string name="mic_toggle_title" msgid="265145278323852547">"Akses mikrofon"</string>
     <string name="sensor_toggle_description" msgid="8248823248606795411">"Untuk semua aplikasi dan layanan"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Setelan game"</string>
-    <string name="game_settings_summary" msgid="2548056479103747555">"Aktifkan pintasan Dasbor Game, dsb."</string>
+    <!-- no translation found for game_settings_summary (8623110986485071064) -->
+    <skip />
     <string name="previous_page_content_description" msgid="6438292457923282991">"Sebelumnya"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Berikutnya"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Pratinjau warna"</string>
