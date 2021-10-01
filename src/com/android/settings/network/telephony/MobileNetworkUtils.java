@@ -468,11 +468,14 @@ public class MobileNetworkUtils {
             return false;
         }
 
+        if (!isWorldMode(context, subId)) {
+            return isGsmBasicOptions(context, subId);
+        }
+
         final int networkMode = getNetworkTypeFromRaf(
                 (int) telephonyManager.getAllowedNetworkTypesForReason(
                         TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
-        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
-                && isWorldMode(context, subId)) {
+        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO) {
             return false;
         }
         if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
@@ -483,10 +486,8 @@ public class MobileNetworkUtils {
             return true;
         }
 
-        if (isWorldMode(context, subId)) {
-            if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
-                return true;
-            }
+        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
+            return true;
         }
 
         return false;
