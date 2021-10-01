@@ -28,7 +28,6 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.ActionListener;
 import android.os.Bundle;
-import android.util.EventLog;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -217,7 +216,6 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
         final String callingPackage = getCallingPackage();
         if (callingPackage == null) {
             Log.d(TAG, "Failed to get the calling package, don't return the result.");
-            EventLog.writeEvent(0x534e4554, "185126813", -1 /* UID */, "no calling package");
             return false;
         }
 
@@ -234,14 +232,6 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
         }
 
         Log.d(TAG, "The calling package does not have the necessary permissions for result.");
-        try {
-            EventLog.writeEvent(0x534e4554, "185126813",
-                    getPackageManager().getPackageUid(callingPackage, 0 /* flags */),
-                    "no permission");
-        } catch (PackageManager.NameNotFoundException e) {
-            EventLog.writeEvent(0x534e4554, "185126813", -1 /* UID */, "no permission");
-            Log.w(TAG, "Cannot find the UID, calling package: " + callingPackage, e);
-        }
         return false;
     }
 }
