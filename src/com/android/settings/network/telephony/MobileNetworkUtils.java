@@ -582,6 +582,9 @@ public class MobileNetworkUtils {
      */
     @VisibleForTesting
     static boolean shouldSpeciallyUpdateGsmCdma(Context context, int subId) {
+        if (!isWorldMode(context, subId)) {
+            return false;
+        }
         final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         final int networkMode = getNetworkTypeFromRaf(
@@ -594,7 +597,7 @@ public class MobileNetworkUtils {
                 || networkMode
                 == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
-            if (!isTdscdmaSupported(context, subId) && isWorldMode(context, subId)) {
+            if (!isTdscdmaSupported(context, subId)) {
                 return true;
             }
         }
