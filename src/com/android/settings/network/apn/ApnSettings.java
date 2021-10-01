@@ -301,7 +301,7 @@ public class ApnSettings extends RestrictedSettingsFragment
 
     @Override
     public EnforcedAdmin getRestrictionEnforcedAdmin() {
-        final UserHandle user = UserHandle.of(mUserManager.getUserHandle());
+        final UserHandle user = UserHandle.of(mUserManager.getProcessUserId());
         if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS, user)
                 && !mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS,
                         user)) {
