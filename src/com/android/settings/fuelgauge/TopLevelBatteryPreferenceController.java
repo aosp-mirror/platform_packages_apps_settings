@@ -30,6 +30,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.HashMap;
 
@@ -38,8 +39,9 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
 
     @VisibleForTesting
     protected boolean mIsBatteryPresent = true;
+    @VisibleForTesting
+    Preference mPreference;
     private final BatteryBroadcastReceiver mBatteryBroadcastReceiver;
-    private Preference mPreference;
     private BatteryInfo mBatteryInfo;
     private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
     private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
@@ -140,12 +142,24 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         }
 
         if (batteryStatusUpdate) {
-            if (!mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info)) {
-                mBatteryStatusLabel = null; // will generateLabel()
-            }
+            setSummaryAsync(info);
         }
 
         return (mBatteryStatusLabel == null) ? generateLabel(info) : mBatteryStatusLabel;
+    }
+
+    private void setSummaryAsync(BatteryInfo info) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final boolean triggerBatteryStatusUpdate =
+                    mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info);
+            ThreadUtils.postOnMainThread(() -> {
+                if (!triggerBatteryStatusUpdate) {
+                    mBatteryStatusLabel = null; // will generateLabel()
+                }
+                mPreference.setSummary(
+                        (mBatteryStatusLabel == null) ? generateLabel(info) : mBatteryStatusLabel);
+            });
+        });
     }
 
     private CharSequence generateLabel(BatteryInfo info) {
