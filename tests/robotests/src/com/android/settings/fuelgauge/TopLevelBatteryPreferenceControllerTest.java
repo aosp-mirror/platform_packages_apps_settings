@@ -156,6 +156,7 @@ public class TopLevelBatteryPreferenceControllerTest {
 
     @Test
     public void getDashboardLabel_returnsCorrectLabel() {
+        mController.mPreference = new Preference(mContext);
         BatteryInfo info = new BatteryInfo();
         info.batteryPercentString = "3%";
         assertThat(mController.getDashboardLabel(mContext, info, true))
