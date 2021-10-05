@@ -3675,6 +3675,11 @@
             </intent-filter>
         </provider>
 
+        <provider
+            android:name=".activityembedding.ActivityEmbeddingProvider"
+            android:authorities="com.android.settings.activityembedding"
+            android:exported="true"/>
+
         <activity
             android:name=".wifi.dpp.WifiDppConfiguratorActivity"
             android:exported="true">
