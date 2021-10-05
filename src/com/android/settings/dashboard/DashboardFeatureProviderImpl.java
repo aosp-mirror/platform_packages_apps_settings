@@ -421,6 +421,11 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
         mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
 
+        //TODO(b/201970810): Add test cases.
+        if (tile.isNewTask(mContext)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+
         if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
             activity.startActivity(intent);
         } else if (tile.userHandle.size() == 1) {
