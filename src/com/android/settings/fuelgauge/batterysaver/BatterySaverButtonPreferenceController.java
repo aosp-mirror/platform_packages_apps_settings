@@ -19,6 +19,8 @@ package com.android.settings.fuelgauge.batterysaver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.SettingsSlicesContract;
 import android.widget.Switch;
@@ -42,10 +44,12 @@ import com.android.settingslib.widget.OnMainSwitchChangeListener;
 public class BatterySaverButtonPreferenceController extends
         TogglePreferenceController implements OnMainSwitchChangeListener, LifecycleObserver,
         OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
+    private static final long SWITCH_ANIMATION_DURATION = 350L;
 
     private final BatterySaverReceiver mBatterySaverReceiver;
     private final PowerManager mPowerManager;
 
+    private Handler mHandler;
     private MainSwitchPreference mPreference;
 
     public BatterySaverButtonPreferenceController(Context context, String key) {
@@ -53,6 +57,7 @@ public class BatterySaverButtonPreferenceController extends
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mBatterySaverReceiver = new BatterySaverReceiver(context);
         mBatterySaverReceiver.setBatterySaverListener(this);
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     @Override
@@ -83,6 +88,7 @@ public class BatterySaverButtonPreferenceController extends
     @Override
     public void onStop() {
         mBatterySaverReceiver.setListening(false);
+        mHandler.removeCallbacksAndMessages(null /* token */);
     }
 
     @Override
@@ -114,6 +120,11 @@ public class BatterySaverButtonPreferenceController extends
 
     @Override
     public void onPowerSaveModeChanged() {
+        mHandler.postDelayed(() -> onPowerSaveModeChangedInternal(),
+                SWITCH_ANIMATION_DURATION);
+    }
+
+    private void onPowerSaveModeChangedInternal() {
         final boolean isChecked = isChecked();
         if (mPreference != null && mPreference.isChecked() != isChecked) {
             mPreference.setChecked(isChecked);
