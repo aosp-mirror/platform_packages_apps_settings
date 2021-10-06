@@ -16,13 +16,9 @@
 
 package com.android.settings.wifi;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -57,12 +53,10 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
 
     public static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
 
-    @VisibleForTesting
-    static final int RESULT_CONNECTED = RESULT_FIRST_USER;
+    private static final int RESULT_CONNECTED = RESULT_FIRST_USER;
     private static final int RESULT_FORGET = RESULT_FIRST_USER + 1;
 
-    @VisibleForTesting
-    static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
+    private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
     private WifiDialog mDialog;
 
@@ -162,22 +156,17 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             }
         }
 
-        Intent resultData = hasPermissionForResult() ? createResultData(config, accessPoint) : null;
-        setResult(RESULT_CONNECTED, resultData);
-        finish();
-    }
-
-    protected Intent createResultData(WifiConfiguration config, AccessPoint accessPoint) {
-        Intent result = new Intent();
+        Intent resultData = new Intent();
         if (accessPoint != null) {
             Bundle accessPointState = new Bundle();
             accessPoint.saveWifiState(accessPointState);
-            result.putExtra(KEY_ACCESS_POINT_STATE, accessPointState);
+            resultData.putExtra(KEY_ACCESS_POINT_STATE, accessPointState);
         }
         if (config != null) {
-            result.putExtra(KEY_WIFI_CONFIGURATION, config);
+            resultData.putExtra(KEY_WIFI_CONFIGURATION, config);
         }
-        return result;
+        setResult(RESULT_CONNECTED, resultData);
+        finish();
     }
 
     @Override
@@ -203,35 +192,9 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             if (resultCode != RESULT_OK) {
                 return;
             }
-            if (hasPermissionForResult()) {
-                setResult(RESULT_CONNECTED, data);
-            } else {
-                setResult(RESULT_CONNECTED);
-            }
+
+            setResult(RESULT_CONNECTED, data);
             finish();
         }
-    }
-
-    protected boolean hasPermissionForResult() {
-        final String callingPackage = getCallingPackage();
-        if (callingPackage == null) {
-            Log.d(TAG, "Failed to get the calling package, don't return the result.");
-            return false;
-        }
-
-        if (getPackageManager().checkPermission(ACCESS_COARSE_LOCATION, callingPackage)
-                == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "The calling package has ACCESS_COARSE_LOCATION permission for result.");
-            return true;
-        }
-
-        if (getPackageManager().checkPermission(ACCESS_FINE_LOCATION, callingPackage)
-                == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "The calling package has ACCESS_FINE_LOCATION permission for result.");
-            return true;
-        }
-
-        Log.d(TAG, "The calling package does not have the necessary permissions for result.");
-        return false;
     }
 }
