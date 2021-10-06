@@ -79,12 +79,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private boolean mIsSlotsClickabled;
     private String[] mPercentages = getPercentages();
 
-    @VisibleForTesting int mSelectedIndex;
+    @VisibleForTesting int mHoveredIndex = SELECTED_INDEX_INVALID;
+    @VisibleForTesting int mSelectedIndex = SELECTED_INDEX_INVALID;
     @VisibleForTesting String[] mTimestamps;
 
     // Colors for drawing the trapezoid shape and dividers.
     private int mTrapezoidColor;
     private int mTrapezoidSolidColor;
+    private int mTrapezoidHoverColor;
     // For drawing the percentage information.
     private int mTextPadding;
     private final Rect mIndent = new Rect();
@@ -254,12 +256,40 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     public boolean onTouchEvent(MotionEvent event) {
         // Caches the location to calculate selected trapezoid index.
         final int action = event.getAction();
-        if (action == MotionEvent.ACTION_UP) {
-            mTouchUpEventX = event.getX();
-        } else if (action == MotionEvent.ACTION_CANCEL) {
-            mTouchUpEventX = Float.MIN_VALUE; // reset
+        switch (action) {
+            case MotionEvent.ACTION_UP:
+                mTouchUpEventX = event.getX();
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                mTouchUpEventX = Float.MIN_VALUE; // reset
+                break;
         }
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onHoverEvent(MotionEvent event) {
+        final int action = event.getAction();
+        switch (action) {
+            case MotionEvent.ACTION_HOVER_ENTER:
+            case MotionEvent.ACTION_HOVER_MOVE:
+                final int trapezoidIndex = getTrapezoidIndex(event.getX());
+                if (mHoveredIndex != trapezoidIndex) {
+                    mHoveredIndex = trapezoidIndex;
+                    invalidate();
+                }
+                break;
+        }
+        return super.onHoverEvent(event);
+    }
+
+    @Override
+    public void onHoverChanged(boolean hovered) {
+        super.onHoverChanged(hovered);
+        if (!hovered) {
+            mHoveredIndex = SELECTED_INDEX_INVALID; // reset
+            invalidate();
+        }
     }
 
     @Override
@@ -347,6 +377,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         setBackgroundColor(Color.TRANSPARENT);
         mTrapezoidSolidColor = Utils.getColorAccentDefaultColor(context);
         mTrapezoidColor = Utils.getDisabled(context, mTrapezoidSolidColor);
+        mTrapezoidHoverColor = Utils.getColorAttrDefaultColor(context,
+            com.android.internal.R.attr.colorAccentSecondaryVariant);
         // Initializes the divider line paint.
         final Resources resources = getContext().getResources();
         mDividerWidth = resources.getDimensionPixelSize(R.dimen.chartview_divider_width);
@@ -494,7 +526,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                     ? mTrapezoidColor
                     : mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
                         ? mTrapezoidSolidColor : mTrapezoidColor;
-            mTrapezoidPaint.setColor(trapezoidColor);
+            final boolean isHover = mHoveredIndex == index && isValidToDraw(mHoveredIndex);
+            mTrapezoidPaint.setColor(isHover ? mTrapezoidHoverColor : trapezoidColor);
 
             final float leftTop = round(trapezoidBottom - mLevels[index] * unitHeight);
             final float rightTop = round(trapezoidBottom - mLevels[index + 1] * unitHeight);
