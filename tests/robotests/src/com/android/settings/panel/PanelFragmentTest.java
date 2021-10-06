@@ -18,7 +18,6 @@
 package com.android.settings.panel;
 
 import static com.android.settings.panel.PanelContent.VIEW_TYPE_SLIDER;
-import static com.android.settings.panel.PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -36,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.core.graphics.drawable.IconCompat;
@@ -213,22 +213,6 @@ public class PanelFragmentTest {
     }
 
     @Test
-    public void sliderLargeIconPanelType_displayFooterDivider() {
-        mFakePanelContent.setViewType(VIEW_TYPE_SLIDER_LARGE_ICON);
-        final ActivityController<FakeSettingsPanelActivity> activityController =
-                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
-        activityController.setup();
-        final PanelFragment panelFragment = (PanelFragment)
-                Objects.requireNonNull(activityController
-                        .get()
-                        .getSupportFragmentManager()
-                        .findFragmentById(R.id.main_content));
-        final View footerDivider = panelFragment.mLayoutView.findViewById(R.id.footer_divider);
-        // Check visibility
-        assertThat(footerDivider.getVisibility()).isEqualTo(View.VISIBLE);
-    }
-
-    @Test
     public void sliderPanelType_notDisplayFooterDivider() {
         mFakePanelContent.setViewType(VIEW_TYPE_SLIDER);
         final ActivityController<FakeSettingsPanelActivity> activityController =
@@ -324,5 +308,26 @@ public class PanelFragmentTest {
 
         assertThat(seeMoreButton.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(seeMoreButton.getText()).isEqualTo("test_title");
+    }
+
+    @Test
+    public void onProgressBarVisibleChanged_isProgressBarVisible_showProgressBar() {
+        final ActivityController<FakeSettingsPanelActivity> activityController =
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
+        activityController.setup();
+        final PanelFragment panelFragment = (PanelFragment)
+                Objects.requireNonNull(activityController
+                        .get()
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.main_content));
+
+        final ProgressBar progressBar = panelFragment.mLayoutView.findViewById(R.id.progress_bar);
+
+        mFakePanelContent.setIsProgressBarVisible(true);
+        verify(mFakePanelContent).registerCallback(mPanelContentCbs.capture());
+        final PanelContentCallback panelContentCallbacks = mPanelContentCbs.getValue();
+        panelContentCallbacks.onProgressBarVisibleChanged();
+
+        assertThat(progressBar.getVisibility()).isEqualTo(View.VISIBLE);
     }
 }

@@ -16,29 +16,60 @@
 
 package com.android.settings.wifi;
 
-import android.app.Activity;
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Process;
+import android.os.SimpleClock;
+import android.os.SystemClock;
+import android.text.TextUtils;
+import android.util.EventLog;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settingslib.core.lifecycle.ObservableActivity;
 import com.android.settingslib.wifi.AccessPoint;
+import com.android.wifitrackerlib.NetworkDetailsTracker;
+import com.android.wifitrackerlib.WifiEntry;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+import com.google.android.setupdesign.util.ThemeHelper;
 
-public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialogListener,
-        DialogInterface.OnDismissListener {
+import java.time.Clock;
+import java.time.ZoneOffset;
+
+/**
+ * The activity shows a Wi-fi editor dialog.
+ *
+ * TODO(b/152571756): This activity supports both WifiTrackerLib and SettingsLib because this is an
+ *                    exported UI component, some other APPs (e.g., SetupWizard) still use
+ *                    SettingsLib. Remove the SettingsLib compatible part after these APPs use
+ *                    WifiTrackerLib.
+ */
+public class WifiDialogActivity extends ObservableActivity implements WifiDialog.WifiDialogListener,
+        WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener {
 
     private static final String TAG = "WifiDialogActivity";
 
+    // For the callers which support WifiTrackerLib.
+    public static final String KEY_CHOSEN_WIFIENTRY_KEY = "key_chosen_wifientry_key";
+
+    // For the callers which support SettingsLib.
     public static final String KEY_ACCESS_POINT_STATE = "access_point_state";
 
     /**
@@ -52,54 +83,143 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
 
     public static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
 
-    private static final int RESULT_CONNECTED = RESULT_FIRST_USER;
+    @VisibleForTesting
+    static final int RESULT_CONNECTED = RESULT_FIRST_USER;
     private static final int RESULT_FORGET = RESULT_FIRST_USER + 1;
 
-    private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
+    @VisibleForTesting
+    static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
+
+    // Max age of tracked WifiEntries.
+    private static final long MAX_SCAN_AGE_MILLIS = 15_000;
+    // Interval between initiating NetworkDetailsTracker scans.
+    private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
     private WifiDialog mDialog;
+    private AccessPoint mAccessPoint;
+
+    private WifiDialog2 mDialog2;
+
+    // The received intent supports a key of WifiTrackerLib or SettingsLib.
+    private boolean mIsWifiTrackerLib;
 
     private Intent mIntent;
+    private NetworkDetailsTracker mNetworkDetailsTracker;
+    private HandlerThread mWorkerThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mIntent = getIntent();
         if (WizardManagerHelper.isSetupWizardIntent(mIntent)) {
-            setTheme(SetupWizardUtils.getTransparentTheme(mIntent));
+            setTheme(SetupWizardUtils.getTransparentTheme(this, mIntent));
         }
 
         super.onCreate(savedInstanceState);
 
-        final Bundle accessPointState = mIntent.getBundleExtra(KEY_ACCESS_POINT_STATE);
-        AccessPoint accessPoint = null;
-        if (accessPointState != null) {
-            accessPoint = new AccessPoint(this, accessPointState);
+        mIsWifiTrackerLib = !TextUtils.isEmpty(mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY));
+
+        if (mIsWifiTrackerLib) {
+            mWorkerThread = new HandlerThread(
+                    TAG + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
+                    Process.THREAD_PRIORITY_BACKGROUND);
+            mWorkerThread.start();
+            final Clock elapsedRealtimeClock = new SimpleClock(ZoneOffset.UTC) {
+                @Override
+                public long millis() {
+                    return SystemClock.elapsedRealtime();
+                }
+            };
+            mNetworkDetailsTracker = FeatureFactory.getFactory(this)
+                    .getWifiTrackerLibProvider()
+                    .createNetworkDetailsTracker(
+                            getLifecycle(),
+                            this,
+                            new Handler(Looper.getMainLooper()),
+                            mWorkerThread.getThreadHandler(),
+                            elapsedRealtimeClock,
+                            MAX_SCAN_AGE_MILLIS,
+                            SCAN_INTERVAL_MILLIS,
+                            mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY));
+        } else {
+            final Bundle accessPointState = mIntent.getBundleExtra(KEY_ACCESS_POINT_STATE);
+            if (accessPointState != null) {
+                mAccessPoint = new AccessPoint(this, accessPointState);
+            }
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mDialog2 != null || mDialog != null) {
+            return;
         }
 
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-            mDialog = WifiDialog.createModal(this, this, accessPoint,
-                    WifiConfigUiBase.MODE_CONNECT, R.style.SuwAlertDialogThemeCompat_Light);
+            final int targetStyle = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                    ? R.style.SuwAlertDialogThemeCompat_DayNight :
+                    R.style.SuwAlertDialogThemeCompat_Light;
+            if (mIsWifiTrackerLib) {
+                mDialog2 = WifiDialog2.createModal(this, this,
+                        mNetworkDetailsTracker.getWifiEntry(),
+                        WifiConfigUiBase2.MODE_CONNECT, targetStyle);
+            } else {
+                mDialog = WifiDialog.createModal(this, this, mAccessPoint,
+                        WifiConfigUiBase.MODE_CONNECT, targetStyle);
+            }
         } else {
-            mDialog = WifiDialog.createModal(
-                    this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
+            if (mIsWifiTrackerLib) {
+                mDialog2 = WifiDialog2.createModal(this, this,
+                        mNetworkDetailsTracker.getWifiEntry(), WifiConfigUiBase2.MODE_CONNECT);
+            } else {
+                mDialog = WifiDialog.createModal(
+                        this, this, mAccessPoint, WifiConfigUiBase.MODE_CONNECT);
+            }
         }
-        mDialog.show();
-        mDialog.setOnDismissListener(this);
+
+        if (mIsWifiTrackerLib) {
+            mDialog2.show();
+            mDialog2.setOnDismissListener(this);
+        } else {
+            mDialog.show();
+            mDialog.setOnDismissListener(this);
+        }
     }
 
     @Override
     public void finish() {
-        super.finish();
         overridePendingTransition(0, 0);
+
+        super.finish();
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
-        if (mDialog != null && mDialog.isShowing()) {
-            mDialog.dismiss();
-            mDialog = null;
+        if (mIsWifiTrackerLib) {
+            if (mDialog2 != null && mDialog2.isShowing()) {
+                mDialog2.dismiss();
+                mDialog2 = null;
+            }
+            mWorkerThread.quit();
+        } else {
+            if (mDialog != null && mDialog.isShowing()) {
+                mDialog.dismiss();
+                mDialog = null;
+            }
         }
+
+        super.onDestroy();
+    }
+
+    @Override
+    public void onForget(WifiDialog2 dialog) {
+        final WifiEntry wifiEntry = dialog.getController().getWifiEntry();
+        if (wifiEntry != null && wifiEntry.canForget()) {
+            wifiEntry.forget(null /* callback */);
+        }
+
+        setResult(RESULT_FORGET);
+        finish();
     }
 
     @Override
@@ -133,6 +253,24 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
     }
 
     @Override
+    public void onSubmit(WifiDialog2 dialog) {
+        final WifiEntry wifiEntry = dialog.getController().getWifiEntry();
+        final WifiConfiguration config = dialog.getController().getConfig();
+
+        if (getIntent().getBooleanExtra(KEY_CONNECT_FOR_CALLER, true)) {
+            if (config == null && wifiEntry != null && wifiEntry.canConnect()) {
+                wifiEntry.connect(null /* callback */);
+            } else {
+                getSystemService(WifiManager.class).connect(config, null /* listener */);
+            }
+        }
+
+        Intent resultData = hasPermissionForResult() ? createResultData(config, null) : null;
+        setResult(RESULT_CONNECTED, resultData);
+        finish();
+    }
+
+    @Override
     public void onSubmit(WifiDialog dialog) {
         final WifiConfiguration config = dialog.getController().getConfig();
         final AccessPoint accessPoint = dialog.getController().getAccessPoint();
@@ -155,23 +293,38 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             }
         }
 
-        Intent resultData = new Intent();
-        if (accessPoint != null) {
-            Bundle accessPointState = new Bundle();
-            accessPoint.saveWifiState(accessPointState);
-            resultData.putExtra(KEY_ACCESS_POINT_STATE, accessPointState);
-        }
-        if (config != null) {
-            resultData.putExtra(KEY_WIFI_CONFIGURATION, config);
-        }
+        Intent resultData = hasPermissionForResult() ? createResultData(config, accessPoint) : null;
         setResult(RESULT_CONNECTED, resultData);
         finish();
     }
 
+    protected Intent createResultData(WifiConfiguration config, AccessPoint accessPoint) {
+        Intent result = new Intent();
+        if (accessPoint != null) {
+            Bundle accessPointState = new Bundle();
+            accessPoint.saveWifiState(accessPointState);
+            result.putExtra(KEY_ACCESS_POINT_STATE, accessPointState);
+        }
+        if (config != null) {
+            result.putExtra(KEY_WIFI_CONFIGURATION, config);
+        }
+        return result;
+    }
+
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
+        mDialog2 = null;
         mDialog = null;
         finish();
+    }
+
+    @Override
+    public void onScan(WifiDialog2 dialog, String ssid) {
+        Intent intent = WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid);
+        WizardManagerHelper.copyWizardManagerExtras(mIntent, intent);
+
+        // Launch QR code scanner to join a network.
+        startActivityForResult(intent, REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
     }
 
     @Override
@@ -191,9 +344,44 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             if (resultCode != RESULT_OK) {
                 return;
             }
-
-            setResult(RESULT_CONNECTED, data);
+            if (hasPermissionForResult()) {
+                setResult(RESULT_CONNECTED, data);
+            } else {
+                setResult(RESULT_CONNECTED);
+            }
             finish();
         }
+    }
+
+    protected boolean hasPermissionForResult() {
+        final String callingPackage = getCallingPackage();
+        if (callingPackage == null) {
+            Log.d(TAG, "Failed to get the calling package, don't return the result.");
+            EventLog.writeEvent(0x534e4554, "185126813", -1 /* UID */, "no calling package");
+            return false;
+        }
+
+        if (getPackageManager().checkPermission(ACCESS_COARSE_LOCATION, callingPackage)
+                == PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "The calling package has ACCESS_COARSE_LOCATION permission for result.");
+            return true;
+        }
+
+        if (getPackageManager().checkPermission(ACCESS_FINE_LOCATION, callingPackage)
+                == PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "The calling package has ACCESS_FINE_LOCATION permission for result.");
+            return true;
+        }
+
+        Log.d(TAG, "The calling package does not have the necessary permissions for result.");
+        try {
+            EventLog.writeEvent(0x534e4554, "185126813",
+                    getPackageManager().getPackageUid(callingPackage, 0 /* flags */),
+                    "no permission");
+        } catch (PackageManager.NameNotFoundException e) {
+            EventLog.writeEvent(0x534e4554, "185126813", -1 /* UID */, "no permission");
+            Log.w(TAG, "Cannot find the UID, calling package: " + callingPackage, e);
+        }
+        return false;
     }
 }

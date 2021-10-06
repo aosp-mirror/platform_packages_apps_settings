@@ -49,8 +49,8 @@ import com.android.settings.network.TetherEnabler;
 import com.android.settings.network.UsbTetherPreferenceController;
 import com.android.settings.network.WifiTetherDisablePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.MainSwitchBarController;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.wifi.tether.WifiTetherApBandPreferenceController;
 import com.android.settings.wifi.tether.WifiTetherAutoOffPreferenceController;
 import com.android.settings.wifi.tether.WifiTetherBasePreferenceController;
@@ -227,15 +227,15 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
             adapter.getProfileProxy(activity.getApplicationContext(), mProfileServiceListener,
                     BluetoothProfile.PAN);
         }
-        final SwitchBar switchBar = activity.getSwitchBar();
+        final SettingsMainSwitchBar mainSwitch = activity.getSwitchBar();
         mTetherEnabler = new TetherEnabler(activity,
-                new SwitchBarController(switchBar), mBluetoothPan);
+                new MainSwitchBarController(mainSwitch), mBluetoothPan);
         getSettingsLifecycle().addObserver(mTetherEnabler);
         use(UsbTetherPreferenceController.class).setTetherEnabler(mTetherEnabler);
         use(BluetoothTetherPreferenceController.class).setTetherEnabler(mTetherEnabler);
         use(EthernetTetherPreferenceController.class).setTetherEnabler(mTetherEnabler);
         use(WifiTetherDisablePreferenceController.class).setTetherEnabler(mTetherEnabler);
-        switchBar.show();
+        mainSwitch.show();
     }
 
     @Override
@@ -304,12 +304,12 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     }
 
     @Override
-    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+    public void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {
         // Do nothing
     }
 
     @Override
-    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+    public void onDenylistStatusChanged(int uid, boolean isDenylisted) {
         // Do nothing
     }
 
@@ -355,7 +355,7 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onTetherConfigUpdated(AbstractPreferenceController controller) {
         final SoftApConfiguration config = buildNewConfig();
-        mPasswordPreferenceController.updateVisibility(config.getSecurityType());
+        mPasswordPreferenceController.setSecurityType(config.getSecurityType());
         mWifiManager.setSoftApConfiguration(config);
 
         if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {

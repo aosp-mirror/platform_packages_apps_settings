@@ -19,10 +19,16 @@ package com.android.settings;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.security.SecuritySettingsFeatureProvider;
+
+import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Top-level Settings activity
@@ -37,6 +43,8 @@ public class Settings extends SettingsActivity {
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
     public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
     public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class CombinedBiometricSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity {
         // TODO(b/147675042): Clean the override up when we enable the new Fragment persistently.
         @Override
@@ -78,10 +86,10 @@ public class Settings extends SettingsActivity {
     public static class DataSaverSummaryActivity extends SettingsActivity{ /* empty */ }
     public static class DateTimeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeForgetActivity extends SettingsActivity { /* empty */ }
-    public static class PrivateVolumeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PublicVolumeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiSettings2Activity extends SettingsActivity { /* empty */ }
+    public static class NetworkProviderSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
@@ -95,6 +103,7 @@ public class Settings extends SettingsActivity {
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySuggestionActivity extends NightDisplaySettingsActivity { /* empty */ }
+    public static class SmartAutoRotateSettingsActivity extends SettingsActivity { /* empty */ }
     public static class MyDeviceInfoActivity extends SettingsActivity { /* empty */ }
     public static class ModuleLicensesActivity extends SettingsActivity { /* empty */ }
     public static class ApplicationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -110,14 +119,79 @@ public class Settings extends SettingsActivity {
     public static class AccessibilityInversionSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityContrastSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityDaltonizerSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class SecurityDashboardActivity extends SettingsActivity { /* empty */ }
+    /**
+     * Activity for lockscreen settings.
+     */
+    public static class LockScreenSettingsActivity extends SettingsActivity { /* empty */ }
+    /**
+     * Activity for Reduce Bright Colors.
+     */
+    public static class ReduceBrightColorsSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the security dashboard. */
+    public static class SecurityDashboardActivity extends SettingsActivity {
+
+        /** Whether the given fragment is allowed. */
+        @VisibleForTesting
+        @Override
+        public boolean isValidFragment(String fragmentName) {
+            return super.isValidFragment(fragmentName)
+                    || (fragmentName != null
+                            && TextUtils.equals(fragmentName, getAlternativeFragmentName()));
+        }
+
+        @Override
+        public String getInitialFragmentName(Intent intent) {
+            final String alternativeFragmentName = getAlternativeFragmentName();
+            if (alternativeFragmentName != null) {
+                return alternativeFragmentName;
+            }
+
+            return super.getInitialFragmentName(intent);
+        }
+
+        private String getAlternativeFragmentName() {
+            String alternativeFragmentClassname = null;
+            final SecuritySettingsFeatureProvider securitySettingsFeatureProvider =
+                    FeatureFactory.getFactory(this).getSecuritySettingsFeatureProvider();
+            if (securitySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
+                alternativeFragmentClassname = securitySettingsFeatureProvider
+                        .getAlternativeSecuritySettingsFragmentClassname();
+            }
+            return alternativeFragmentClassname;
+        }
+    }
     public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ScanningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivacyDashboardActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
-    public static class FactoryResetActivity extends SettingsActivity { /* empty */ }
+    public static class FactoryResetActivity extends SettingsActivity {
+        @Override
+        protected void onCreate(Bundle savedState) {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            ThemeHelper.trySetDynamicColor(this);
+            super.onCreate(savedState);
+        }
+
+        @Override
+        protected boolean isToolbarEnabled() {
+            return false;
+        }
+    }
+    public static class FactoryResetConfirmActivity extends SettingsActivity {
+        @Override
+        protected void onCreate(Bundle savedState) {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            ThemeHelper.trySetDynamicColor(this);
+            super.onCreate(savedState);
+        }
+
+        @Override
+        protected boolean isToolbarEnabled() {
+            return false;
+        }
+    }
     public static class RunningServicesActivity extends SettingsActivity { /* empty */ }
     public static class BatterySaverSettingsActivity extends SettingsActivity { /* empty */ }
     public static class BatterySaverScheduleSettingsActivity extends SettingsActivity { /* empty */ }
@@ -168,10 +242,6 @@ public class Settings extends SettingsActivity {
     public static class ManageDomainUrlsActivity extends SettingsActivity { /* empty */ }
     public static class AutomaticStorageManagerSettingsActivity extends SettingsActivity { /* empty */ }
     public static class GamesStorageActivity extends SettingsActivity { /* empty */ }
-    public static class MoviesStorageActivity extends SettingsActivity { /* empty */ }
-    public static class PhotosStorageActivity extends SettingsActivity {
-        /* empty */
-    }
     public static class GestureNavigationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class InteractAcrossProfilesSettingsActivity extends SettingsActivity {
         /* empty */
@@ -187,6 +257,8 @@ public class Settings extends SettingsActivity {
     public static class OverlaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageExternalStorageActivity extends SettingsActivity { /* empty */ }
     public static class AppManageExternalStorageActivity extends SettingsActivity { /* empty */ }
+    public static class MediaManagementAppsActivity extends SettingsActivity { /* empty */ }
+    public static class AppMediaManagementAppsActivity extends SettingsActivity { /* empty */ }
     public static class WriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChangeWifiStateActivity extends SettingsActivity { /* empty */ }
     public static class AppDrawOverlaySettingsActivity extends SettingsActivity { /* empty */ }
@@ -198,6 +270,10 @@ public class Settings extends SettingsActivity {
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
 
+    /** Actviity to manage apps with {@link android.Manifest.permission#SCHEDULE_EXACT_ALARM} */
+    public static class AlarmsAndRemindersActivity extends SettingsActivity {/* empty */ }
+    /** App specific version of {@link AlarmsAndRemindersActivity} */
+    public static class AlarmsAndRemindersAppActivity extends SettingsActivity {/* empty */ }
 
     public static class ApnEditorActivity extends SettingsActivity { /* empty */ }
     public static class ChooseAccountActivity extends SettingsActivity { /* empty */ }
@@ -209,7 +285,11 @@ public class Settings extends SettingsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            if (!EnterprisePrivacySettings.isPageEnabled(this)) {
+            if (FeatureFactory.getFactory(this)
+                    .getEnterprisePrivacyFeatureProvider(this)
+                    .showParentalControls()) {
+                finish();
+            } else if (!EnterprisePrivacySettings.isPageEnabled(this)) {
                 finish();
             }
         }
@@ -219,9 +299,7 @@ public class Settings extends SettingsActivity {
     public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
     public static class MobileNetworkListActivity extends SettingsActivity {}
-    public static class GlobalActionsPanelSettingsActivity extends SettingsActivity {}
     public static class PowerMenuSettingsActivity extends SettingsActivity {}
-    public static class QuickControlsSettingsActivity extends SettingsActivity {}
     /**
      * Activity for BugReportHandlerPicker.
      */
@@ -231,7 +309,6 @@ public class Settings extends SettingsActivity {
     public static class NetworkDashboardActivity extends SettingsActivity {}
     public static class ConnectedDeviceDashboardActivity extends SettingsActivity {}
     public static class PowerUsageSummaryActivity extends SettingsActivity { /* empty */ }
-    public static class AppAndNotificationDashboardActivity extends SettingsActivity {}
     public static class StorageDashboardActivity extends SettingsActivity {}
     public static class AccountDashboardActivity extends SettingsActivity {}
     public static class SystemDashboardActivity extends SettingsActivity {}
@@ -241,4 +318,8 @@ public class Settings extends SettingsActivity {
      */
     public static class MediaControlsSettingsActivity extends SettingsActivity {}
 
+    /**
+     * Activity for AppDashboard.
+     */
+    public static class AppDashboardActivity extends SettingsActivity {}
 }

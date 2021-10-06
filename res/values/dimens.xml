@@ -51,14 +51,13 @@
     <dimen name="pager_tabs_title_padding">16dp</dimen>
     <dimen name="pager_tabs_selected_indicator_height">3dp</dimen>
 
-    <!-- Minimum width for the popup for updating a user's photo. -->
-    <dimen name="update_user_photo_popup_min_width">300dip</dimen>
-
     <dimen name="captioning_preview_height">200dp</dimen>
 
     <dimen name="autoclick_preview_height">200dp</dimen>
 
     <dimen name="color_mode_preview_height">320dp</dimen>
+
+    <dimen name="accessibility_button_preview_height">200dp</dimen>
 
     <dimen name="ring_progress_bar_thickness">4dp</dimen>
 
@@ -86,7 +85,7 @@
     <dimen name="notification_importance_button_padding">14dp</dimen>
 
     <dimen name="notification_history_header_drawable_start">26dp</dimen>
-    <dimen name="conversation_icon_size">48dp</dimen>
+    <dimen name="conversation_icon_size">32dp</dimen>
 
     <dimen name="zen_mode_icon_size">36dp</dimen>
     <dimen name="zen_mode_icon_margin">16dp</dimen>
@@ -126,18 +125,21 @@
     <dimen name="switchbar_subsettings_margin_start">72dp</dimen>
     <dimen name="switchbar_subsettings_margin_end">16dp</dimen>
 
+    <!-- Search bar -->
     <dimen name="search_bar_margin">16dp</dimen>
+    <dimen name="search_bar_height">52dp</dimen>
+    <dimen name="search_bar_text_size">20sp</dimen>
+    <dimen name="search_bar_corner_radius">28dp</dimen>
+    <dimen name="search_bar_content_inset">56dp</dimen>
 
-    <dimen name="search_bar_height">48dp</dimen>
-    <dimen name="search_bar_corner_radius">2dp</dimen>
-    <dimen name="search_bar_text_size">16dp</dimen>
-    <dimen name="search_bar_card_elevation">2dp</dimen>
-    <dimen name="search_bar_content_inset">64dp</dimen>
-    <dimen name="search_bar_avatar_end_padding">16dp</dimen>
-    <!-- 32dp (avatar size) + 16 dp (search_bar_avatar_end_padding) -->
-    <dimen name="search_bar_avatar_width">48dp</dimen>
-    <!-- (search_bar_height 48dp - avatar size 32dp) / 2  -->
-    <dimen name="search_bar_avatar_top_bottom_padding">8dp</dimen>
+    <!-- Avatar -->
+    <dimen name="avatar_length">48dp</dimen>
+    <dimen name="avatar_margin_top">56dp</dimen>
+    <dimen name="avatar_margin_end">24dp</dimen>
+
+    <!-- Homepage title -->
+    <dimen name="homepage_title_margin_bottom">8dp</dimen>
+    <dimen name="homepage_title_margin_horizontal">24dp</dimen>
 
     <!-- Dimensions for Wifi Assistant Card -->
     <dimen name="wifi_assistant_padding_top_bottom">16dp</dimen>
@@ -147,8 +149,6 @@
     <dimen name="wifi_assistant_height">182dp</dimen>
     <dimen name="wifi_assistant_image_top">32dp</dimen>
     <dimen name="wifi_assistant_image_start">24dp</dimen>
-    <!-- appbar height is equal search bar height (48dp) plus search bar top and bottom margin  -->
-    <dimen name="app_bar_height">80dp</dimen>
 
     <!-- CryptKeeper top margin for password/pin screen -->
     <dimen name="crypt_keeper_password_top_margin">88dip</dimen>
@@ -183,9 +183,6 @@
     <!-- Sim Card Name length -->
     <integer name="sim_name_length">32</integer>
 
-    <!-- Height of a user icon view -->
-    <dimen name="user_icon_view_height">56dp</dimen>
-
     <!-- CheckBoxPreference -->
     <dimen name="checkbox_widget_min_width">58dip</dimen>
     <dimen name="checkbox_layout_padding">16dip</dimen>
@@ -197,10 +194,17 @@
     <dimen name="bluetooth_pairing_edittext_padding">21dp</dimen>
     <dimen name="bluetooth_checkbox_padding">16dp</dimen>
 
+    <!-- CompanionAppWidgetPreferencce Padding -->
+    <dimen name="bluetooth_companion_app_widget">20dp</dimen>
+
     <!-- WiFi Preferences -->
     <dimen name="wifi_divider_height">1px</dimen>
     <dimen name="wifi_ap_band_checkbox_padding">16dp</dimen>
     <dimen name="wifi_detail_page_header_image_size">32dp</dimen>
+
+    <!-- Internet Preferences -->
+    <dimen name="airplane_mode_message_margin_vertical">24dp</dimen>
+    <dimen name="reset_internet_ring_progress_right_margin">4dp</dimen>
 
     <!-- Color picker -->
     <dimen name="color_swatch_size">16dp</dimen>
@@ -256,8 +260,9 @@
 
     <!-- Admin support contact details dialog. -->
     <dimen name="admin_details_dialog_padding">24dp</dimen>
-    <dimen name="admin_details_dialog_title_bottom_padding">20dp</dimen>
-    <dimen name="admin_details_dialog_icon_size">48dp</dimen>
+    <dimen name="admin_details_dialog_padding_bottom">32dp</dimen>
+    <dimen name="admin_details_dialog_title_bottom_padding">16dp</dimen>
+    <dimen name="admin_details_dialog_icon_size">32dp</dimen>
     <dimen name="admin_details_dialog_link_padding_top">36dp</dimen>
     <dimen name="admin_details_dialog_learn_more_button_top_margin">24dp</dimen>
     <dimen name="admin_details_dialog_learn_more_button_padding">8dp</dimen>
@@ -279,6 +284,13 @@
     <!-- Accessibility Settings -->
     <dimen name="accessibility_layout_margin_start_end">16dp</dimen>
     <dimen name="accessibility_button_preference_padding_top_bottom">18dp</dimen>
+    <dimen name="accessibility_imageview_size">176dp</dimen>
+    <!-- The margin between two Textviews-->
+    <dimen name="accessibility_textview_layout_margin_bottom">24dp</dimen>
+
+    <!-- Accessibility icon -->
+    <dimen name="accessibility_icon_size">32dp</dimen>
+    <dimen name="accessibility_icon_foreground_size">18dp</dimen>
 
     <!-- Restricted icon in switch bar -->
     <dimen name="restricted_icon_margin_end">16dp</dimen>
@@ -306,19 +318,6 @@
     <dimen name="select_dialog_item_margin_start">12dp</dimen>
     <dimen name="select_dialog_summary_padding_bottom">8dp</dimen>
 
-    <!-- Padding between the donut and the storage summary. -->
-    <dimen name="storage_summary_padding_end">16dp</dimen>
-    <!-- Text size of the big number in the donut. -->
-    <dimen name="storage_donut_view_percent_text_size">45sp</dimen>
-    <!-- Text size of the percentage sign in the donut. -->
-    <dimen name="storage_donut_view_percent_sign_size">20sp</dimen>
-    <!-- Text size of the label text in the donut. -->
-    <dimen name="storage_donut_view_label_text_size">21sp</dimen>
-    <!-- Text size of the label text in the donut if the label text is long. -->
-    <dimen name="storage_donut_view_shrunken_label_text_size">10sp</dimen>
-    <!-- The width of the storage summary donut -->
-    <dimen name="storage_donut_thickness">4dp</dimen>
-
     <!-- Battery meter view size -->
     <dimen name="battery_meter_width">66dp</dimen>
     <dimen name="battery_meter_height">100dp</dimen>
@@ -326,8 +325,7 @@
     <!-- Margin for the reset screens -->
     <dimen name="reset_network_margin_start">72dp</dimen>
     <dimen name="reset_network_margin_end">12dp</dimen>
-    <dimen name="reset_master_clear_margin_start">32dp</dimen>
-    <dimen name="reset_master_clear_margin_end">12dp</dimen>
+    <dimen name="reset_button_margin_end">20dp</dimen>
 
     <!-- Padding for the reset screens -->
     <dimen name="reset_checkbox_padding_end">8dp</dimen>
@@ -348,7 +346,6 @@
     <dimen name="contextual_half_card_padding_top">12dp</dimen>
     <dimen name="contextual_half_card_padding_bottom">16dp</dimen>
     <dimen name="contextual_half_card_title_margin_top">12dp</dimen>
-    <dimen name="contextual_card_preallocated_height">0dp</dimen>
 
     <!-- Homepage dismissal cards size and padding -->
     <dimen name="contextual_card_dismissal_margin_top">12dp</dimen>
@@ -393,8 +390,6 @@
     <!-- Elevation of bluetooth icon -->
     <dimen name="bt_icon_elevation">4dp</dimen>
 
-    <dimen name="two_target_min_width">80dp</dimen>
-
     <!-- Maximum height for SliceView, override on slices/view/src/main/res/values/dimens.xml -->
     <dimen name="abc_slice_large_height">1800dp</dimen>
 
@@ -424,10 +419,25 @@
 
     <!-- Output switcher panel related dimensions -->
     <dimen name="output_switcher_slice_padding_top">11dp</dimen>
-    <dimen name="output_switcher_slice_max_height">458dp</dimen>
+    <dimen name="output_switcher_slice_max_height">600dp</dimen>
     <dimen name="output_switcher_panel_icon_size">52dp</dimen>
     <dimen name="output_switcher_panel_icon_corner_radius">16dp</dimen>
 
+    <!-- Settings panel related dimensions -->
+    <dimen name="settings_panel_corner_radius">28dp</dimen>
+    <dimen name="settings_panel_title_margin">24dp</dimen>
+
     <!-- Text padding for EmptyTextSettings -->
     <dimen name="empty_text_padding">24dp</dimen>
+
+    <!--  Choose SIM Activity dimens  -->
+    <dimen name="subtitle_bottom_padding">24dp</dimen>
+
+    <!-- Battery usage chart view component -->
+    <dimen name="chartview_text_padding">6dp</dimen>
+    <dimen name="chartview_divider_width">1dp</dimen>
+    <dimen name="chartview_divider_height">4dp</dimen>
+    <dimen name="chartview_trapezoid_radius">3dp</dimen>
+    <dimen name="chartview_trapezoid_margin_start">1dp</dimen>
+    <dimen name="chartview_trapezoid_margin_bottom">2dp</dimen>
 </resources>

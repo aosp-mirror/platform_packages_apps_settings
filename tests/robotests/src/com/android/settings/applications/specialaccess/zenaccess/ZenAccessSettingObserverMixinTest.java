@@ -73,7 +73,7 @@ public class ZenAccessSettingObserverMixinTest {
         mLifecycle.handleLifecycleEvent(ON_START);
 
         mContext.getContentResolver().notifyChange(Settings.Secure.getUriFor(
-                Settings.Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES), null);
+                Settings.Secure.ENABLED_NOTIFICATION_LISTENERS), null);
 
         verify(mListener).onZenAccessPolicyChanged();
     }
@@ -84,7 +84,7 @@ public class ZenAccessSettingObserverMixinTest {
         mLifecycle.handleLifecycleEvent(ON_STOP);
 
         mContext.getContentResolver().notifyChange(Settings.Secure.getUriFor(
-                Settings.Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES), null);
+                Settings.Secure.ENABLED_NOTIFICATION_LISTENERS), null);
 
         verify(mListener, never()).onZenAccessPolicyChanged();
     }

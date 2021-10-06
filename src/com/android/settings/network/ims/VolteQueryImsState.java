@@ -16,11 +16,14 @@
 
 package com.android.settings.network.ims;
 
+import static android.telephony.ims.ProvisioningManager.KEY_VOIMS_OPT_IN_STATUS;
+
 import android.content.Context;
 import android.telecom.TelecomManager;
 import android.telephony.AccessNetworkConstants;
 import android.telephony.SubscriptionManager;
 import android.telephony.ims.ImsException;
+import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
 import android.util.Log;
@@ -132,5 +135,16 @@ public class VolteQueryImsState extends ImsQueryController {
             return false;
         }
         return isEnabledByUser(mSubId);
+    }
+
+    /**
+     * Get VoIMS opt-in configuration.
+     *
+     * @return true when VoIMS opt-in has been enabled, otherwise false
+     */
+    public boolean isVoImsOptInEnabled() {
+        int voImsOptInStatus = ProvisioningManager.createForSubscriptionId(mSubId)
+                .getProvisioningIntValue(KEY_VOIMS_OPT_IN_STATUS);
+        return voImsOptInStatus == ProvisioningManager.PROVISIONING_VALUE_ENABLED;
     }
 }

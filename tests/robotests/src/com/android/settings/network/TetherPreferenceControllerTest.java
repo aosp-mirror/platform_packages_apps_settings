@@ -32,7 +32,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
-import android.net.ConnectivityManager;
 import android.net.TetheringManager;
 import android.provider.Settings;
 
@@ -198,7 +197,7 @@ public class TetherPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mContext", context);
         mController.onResume();
 
-        context.sendBroadcast(new Intent(ConnectivityManager.ACTION_TETHER_STATE_CHANGED));
+        context.sendBroadcast(new Intent(TetheringManager.ACTION_TETHER_STATE_CHANGED));
 
         verify(mController).updateSummary();
     }

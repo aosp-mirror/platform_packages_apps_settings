@@ -48,6 +48,7 @@ public class FakePanelContent implements PanelContent {
     private int mViewType;
     private boolean mIsCustomizedButtonUsed = false;
     private CharSequence mCustomizedButtonTitle;
+    private boolean mIsProgressBarVisible;
 
     @Override
     public IconCompat getIcon() {
@@ -116,5 +117,14 @@ public class FakePanelContent implements PanelContent {
 
     public void setCustomizedButtonTitle(CharSequence title) {
         mCustomizedButtonTitle = title;
+    }
+
+    @Override
+    public boolean isProgressBarVisible() {
+        return mIsProgressBarVisible;
+    }
+
+    public void setIsProgressBarVisible(boolean isProgressBarVisible) {
+        mIsProgressBarVisible = isProgressBarVisible;
     }
 }

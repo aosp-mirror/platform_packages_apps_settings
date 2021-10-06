@@ -33,7 +33,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.testutils.shadow.ShadowWirelessDebuggingPreferenceController;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
@@ -54,7 +54,7 @@ public class WirelessDebuggingPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private MasterSwitchPreference mPreference;
+    private PrimarySwitchPreference mPreference;
     @Mock
     private IAdbManager mAdbManager;
     @Mock

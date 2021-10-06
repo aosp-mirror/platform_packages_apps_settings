@@ -56,6 +56,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.network.ProxySubscriptionManager;
+import com.android.settings.network.SubscriptionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -310,7 +311,8 @@ public class IccLockSettings extends SettingsPreferenceFragment
                 mTabHost.addTab(buildTabSpec(tag,
                         String.valueOf(subInfo == null
                                 ? getContext().getString(R.string.sim_editor_title, slot + 1)
-                                : subInfo.getDisplayName())));
+                                : SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                                        subInfo, getContext()))));
             }
 
             mTabHost.setCurrentTabByTag(getTagForSlotId(mSlotId));

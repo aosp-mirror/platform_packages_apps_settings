@@ -22,11 +22,11 @@
 
     <PreferenceCategory
         android:key="zen_custom_rule_category">
-        <com.android.settings.notification.zen.ZenCustomRadioButtonPreference
+        <com.android.settingslib.widget.RadioButtonPreference
             android:key="zen_custom_rule_setting_default"
             android:title="@string/zen_mode_custom_behavior_summary_default"/>
 
-        <com.android.settings.notification.zen.ZenCustomRadioButtonPreference
+        <com.android.settingslib.widget.RadioButtonPreference
             android:key="zen_custom_rule_setting"
             android:title="@string/zen_mode_custom_behavior_summary" />
     </PreferenceCategory>

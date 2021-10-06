@@ -19,14 +19,16 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
 import android.util.AttributeSet;
+
 import com.android.settings.R;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 
 import java.time.LocalTime;
 
 /**
- * component for the display settings dark ui summary*/
-public class DarkModePreference extends MasterSwitchPreference {
+ * component for the display settings dark ui summary
+ */
+public class DarkModePreference extends PrimarySwitchPreference {
 
     private UiModeManager mUiModeManager;
     private DarkModeObserver mDarkModeObserver;
@@ -72,10 +74,10 @@ public class DarkModePreference extends MasterSwitchPreference {
             return;
         }
         final int mode = mUiModeManager.getNightMode();
-        String detail;
+        String summary;
 
         if (mode == UiModeManager.MODE_NIGHT_AUTO) {
-            detail = getContext().getString(active
+            summary = getContext().getString(active
                     ? R.string.dark_ui_summary_on_auto_mode_auto
                     : R.string.dark_ui_summary_off_auto_mode_auto);
         } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
@@ -83,17 +85,14 @@ public class DarkModePreference extends MasterSwitchPreference {
                     ? mUiModeManager.getCustomNightModeEnd()
                     : mUiModeManager.getCustomNightModeStart();
             final String timeStr = mFormat.of(time);
-            detail = getContext().getString(active
+            summary = getContext().getString(active
                     ? R.string.dark_ui_summary_on_auto_mode_custom
                     : R.string.dark_ui_summary_off_auto_mode_custom, timeStr);
         } else {
-            detail = getContext().getString(active
+            summary = getContext().getString(active
                     ? R.string.dark_ui_summary_on_auto_mode_never
                     : R.string.dark_ui_summary_off_auto_mode_never);
         }
-        String summary = getContext().getString(active
-                ? R.string.dark_ui_summary_on
-                : R.string.dark_ui_summary_off, detail);
 
         setSummary(summary);
     }

@@ -25,7 +25,6 @@
 
         <Preference
             android:key="memory"
-            android:icon="@drawable/ic_settings_memory"
             android:title="@string/memory_settings_title"
             android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.applications.ProcessStatsSummary" />
@@ -135,7 +134,7 @@
         android:title="@string/debug_debugging_category"
         android:order="200">
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="enable_adb"
             android:title="@string/enable_adb"
             android:summary="@string/enable_adb_summary" />
@@ -143,7 +142,7 @@
         <Preference android:key="clear_adb_keys"
                     android:title="@string/clear_adb_keys" />
 
-        <com.android.settings.widget.MasterSwitchPreference
+        <com.android.settings.widget.PrimarySwitchPreference
             android:fragment="com.android.settings.development.WirelessDebuggingFragment"
             android:key="toggle_adb_wireless"
             android:title="@string/enable_adb_wireless"
@@ -174,14 +173,6 @@
             android:key="automatic_system_server_heap_dumps"
             android:title="@string/automatic_system_heap_dump_title"
             android:summary="@string/automatic_system_heap_dump_summary" />
-
-        <Preference android:key="mock_location_app"
-                    android:title="@string/mock_location_app" />
-
-        <SwitchPreference
-            android:key="enable_gnss_raw_meas_full_tracking"
-            android:title="@string/enable_gnss_raw_meas_full_tracking"
-            android:summary="@string/enable_gnss_raw_meas_full_tracking_summary" />
 
         <SwitchPreference
             android:key="debug_view_attributes"
@@ -302,10 +293,9 @@
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
 
-        <Preference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="default_usb_configuration"
             android:fragment="com.android.settings.connecteddevice.usb.UsbDefaultFragment"
-            android:icon="@drawable/ic_usb"
             android:title="@string/usb_default_label"/>
 
         <SwitchPreference
@@ -505,8 +495,7 @@
 
         <SwitchPreference
             android:key="enable_blurs_on_windows"
-            android:title="@string/enable_blurs_on_windows_title"
-            android:summary="@string/enable_blurs_on_windows_summary" />
+            android:title="@string/window_blurs"/>
 
         <SwitchPreference
             android:key="force_msaa"
@@ -532,10 +521,15 @@
         android:title="@string/media_category"
         android:order="800">
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="usb_audio"
             android:title="@string/usb_audio_disable_routing"
             android:summary="@string/usb_audio_disable_routing_summary" />
+
+        <Preference
+            android:key="transcode_settings"
+            android:title="@string/transcode_settings_title"
+            android:fragment="com.android.settings.development.transcode.TranscodeSettingsFragment" />
 
     </PreferenceCategory>
 
@@ -600,15 +594,12 @@
             android:title="@string/show_notification_channel_warnings"
             android:summary="@string/show_notification_channel_warnings_summary" />
 
-        <SwitchPreference
-            android:key="asst_capability_prioritizer"
-            android:title="@string/asst_capability_prioritizer_title"
-            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
-
-        <SwitchPreference
-            android:key="asst_capability_ranking"
-            android:title="@string/asst_capability_ranking_title"
-            settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="asst_importance_reset"
+            android:title="@string/asst_importance_reset_title"
+            android:selectable="false"
+            android:layout="@layout/reset_importance_button"
+            settings:controller="com.android.settings.notification.ImportanceResetPreferenceController" />
 
         <Preference
             android:key="inactive_apps"
@@ -636,9 +627,9 @@
             android:summary="@string/force_desktop_mode_summary" />
 
         <SwitchPreference
-            android:key="enable_sizecompat_freeform"
-            android:title="@string/enable_sizecompat_freeform"
-            android:summary="@string/enable_sizecompat_freeform_summary" />
+            android:key="enable_non_resizable_multi_window"
+            android:title="@string/enable_non_resizable_multi_window"
+            android:summary="@string/enable_non_resizable_multi_window_summary" />
 
         <Preference
             android:key="reset_shortcut_manager_throttling"
@@ -648,6 +639,7 @@
     <com.android.settings.development.autofill.AutofillPreferenceCategory
         android:key="debug_autofill_category"
         android:title="@string/debug_autofill_category"
+        settings:searchable="false"
         android:order="1100"> <!-- Incremented by 100 from last order (i.e. 1000) -->
 
         <ListPreference
@@ -683,5 +675,26 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.development.storage.BlobInfoListView" />
         </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="location_category"
+        android:title="@string/location_category"
+        android:order="1300">
+
+        <Preference android:key="mock_location_app"
+                    android:title="@string/mock_location_app" />
+
+        <SwitchPreference
+            android:key="enable_gnss_raw_meas_full_tracking"
+            android:title="@string/enable_gnss_raw_meas_full_tracking"
+            android:summary="@string/enable_gnss_raw_meas_full_tracking_summary" />
+
+        <SwitchPreference
+            android:title="@string/location_indicator_settings_title"
+            android:summary="@string/location_indicator_settings_description"
+            android:defaultValue="true"
+            android:key="location_indicator_settings"
+            settings:controller="com.android.settings.location.LocationIndicatorsPreferenceController"/>
     </PreferenceCategory>
 </PreferenceScreen>

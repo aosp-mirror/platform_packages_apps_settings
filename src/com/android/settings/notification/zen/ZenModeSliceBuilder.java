@@ -142,13 +142,14 @@ public class ZenModeSliceBuilder {
 
     private static PendingIntent getPrimaryAction(Context context) {
         final Intent intent = getIntent(context);
-        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
+        return PendingIntent.getActivity(context, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     private static PendingIntent getBroadcastIntent(Context context) {
         final Intent intent = new Intent(ACTION_ZEN_MODE_SLICE_CHANGED)
                 .setClass(context, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
+                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
     }
 }

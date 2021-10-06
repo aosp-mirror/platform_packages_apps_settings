@@ -29,7 +29,6 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
@@ -39,8 +38,6 @@ import java.util.List;
 public class SystemDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "SystemDashboardFrag";
-
-    private static final String KEY_RESET = "reset_dashboard";
 
     public static final String EXTRA_SHOW_AWARE_DISABLED = "show_aware_dialog_disabled";
 

@@ -17,13 +17,13 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/preview_viewport"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.android.settings.accessibility.PaletteListView
-        android:id="@+id/palette_listView"
+    <LinearLayout
+        android:id="@+id/palette_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:importantForAccessibility="noHideDescendants" />
-
+        android:orientation="vertical"
+        android:importantForAccessibility="noHideDescendants"/>
 </FrameLayout>

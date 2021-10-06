@@ -24,6 +24,20 @@
     settings:keywords="@string/keywords_gesture_navigation_settings">
 
     <PreferenceCategory
+        android:key="assistant_gesture_category"
+        android:persistent="false"
+        android:title="@string/assistant_gesture_category_title">
+
+        <SwitchPreference
+            android:key="assistant_gesture_corner_swipe"
+            android:title="@string/assistant_corner_gesture_title"
+            android:summary="@string/assistant_corner_gesture_summary"
+            settings:controller="com.android.settings.gestures.GestureNavigationSettingsAssistController"
+        />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="back_sensitivity_category"
         android:persistent="false"
         android:title="@string/back_sensitivity_dialog_title">
@@ -31,7 +45,7 @@
         <com.android.settings.widget.LabeledSeekBarPreference
             android:key="gesture_left_back_sensitivity"
             android:title="@string/left_edge"
-            android:max="3"
+            android:max="2"
             android:selectable="true"
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
@@ -39,7 +53,7 @@
         <com.android.settings.widget.LabeledSeekBarPreference
             android:key="gesture_right_back_sensitivity"
             android:title="@string/right_edge"
-            android:max="3"
+            android:max="2"
             android:selectable="true"
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
@@ -49,7 +63,6 @@
         android:key="gesture_navigation_settings_footer"
         android:title="@string/back_sensitivity_dialog_message"
         android:selectable="false"
-        settings:searchable="false"
-        settings:allowDividerAbove="true"/>
+        settings:searchable="false"/>
 </PreferenceScreen>
 

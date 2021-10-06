@@ -25,18 +25,29 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.Log;
 
+import androidx.annotation.Keep;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * A proxy to the subscription manager
  */
 public class ProxySubscriptionManager implements LifecycleObserver {
+
+    private static final String LOG_TAG = "ProxySubscriptionManager";
+
+    private static final int LISTENER_END_OF_LIFE = -1;
+    private static final int LISTENER_IS_INACTIVE = 0;
+    private static final int LISTENER_IS_ACTIVE = 1;
 
     /**
      * Interface for monitor active subscriptions list changing
@@ -74,39 +85,57 @@ public class ProxySubscriptionManager implements LifecycleObserver {
     private ProxySubscriptionManager(Context context) {
         final Looper looper = context.getMainLooper();
 
+        ActiveSubscriptionsListener subscriptionMonitor = new ActiveSubscriptionsListener(
+                looper, context) {
+            public void onChanged() {
+                notifySubscriptionInfoMightChanged();
+            }
+        };
+        GlobalSettingsChangeListener airplaneModeMonitor = new GlobalSettingsChangeListener(
+                looper, context, Settings.Global.AIRPLANE_MODE_ON) {
+            public void onChanged(String field) {
+                subscriptionMonitor.clearCache();
+                notifySubscriptionInfoMightChanged();
+            }
+        };
+
+        init(context, subscriptionMonitor, airplaneModeMonitor);
+    }
+
+    @Keep
+    @VisibleForTesting
+    protected void init(Context context, ActiveSubscriptionsListener activeSubscriptionsListener,
+            GlobalSettingsChangeListener airplaneModeOnSettingsChangeListener) {
+
         mActiveSubscriptionsListeners =
                 new ArrayList<OnActiveSubscriptionChangedListener>();
+        mPendingNotifyListeners =
+                new ArrayList<OnActiveSubscriptionChangedListener>();
 
-        mSubscriptionMonitor = new ActiveSubsciptionsListener(looper, context) {
-            public void onChanged() {
-                notifyAllListeners();
-            }
-        };
-        mAirplaneModeMonitor = new GlobalSettingsChangeListener(looper,
-                context, Settings.Global.AIRPLANE_MODE_ON) {
-            public void onChanged(String field) {
-                mSubscriptionMonitor.clearCache();
-                notifyAllListeners();
-            }
-        };
+        mSubscriptionMonitor = activeSubscriptionsListener;
+        mAirplaneModeMonitor = airplaneModeOnSettingsChangeListener;
 
         mSubscriptionMonitor.start();
     }
 
     private Lifecycle mLifecycle;
-    private ActiveSubsciptionsListener mSubscriptionMonitor;
+    private ActiveSubscriptionsListener mSubscriptionMonitor;
     private GlobalSettingsChangeListener mAirplaneModeMonitor;
 
     private List<OnActiveSubscriptionChangedListener> mActiveSubscriptionsListeners;
+    private List<OnActiveSubscriptionChangedListener> mPendingNotifyListeners;
 
-    private void notifyAllListeners() {
-        for (OnActiveSubscriptionChangedListener listener : mActiveSubscriptionsListeners) {
-            final Lifecycle lifecycle = listener.getLifecycle();
-            if ((lifecycle == null)
-                    || (lifecycle.getCurrentState().isAtLeast(Lifecycle.State.STARTED))) {
-                listener.onChanged();
-            }
-        }
+    @Keep
+    @VisibleForTesting
+    protected void notifySubscriptionInfoMightChanged() {
+        // create a merged list for processing all listeners
+        List<OnActiveSubscriptionChangedListener> listeners =
+                new ArrayList<OnActiveSubscriptionChangedListener>(mPendingNotifyListeners);
+        listeners.addAll(mActiveSubscriptionsListeners);
+
+        mActiveSubscriptionsListeners.clear();
+        mPendingNotifyListeners.clear();
+        processStatusChangeOnListeners(listeners);
     }
 
     /**
@@ -131,6 +160,11 @@ public class ProxySubscriptionManager implements LifecycleObserver {
     @OnLifecycleEvent(ON_START)
     void onStart() {
         mSubscriptionMonitor.start();
+
+        // callback notify those listener(s) which back to active state
+        List<OnActiveSubscriptionChangedListener> listeners = mPendingNotifyListeners;
+        mPendingNotifyListeners = new ArrayList<OnActiveSubscriptionChangedListener>();
+        processStatusChangeOnListeners(listeners);
     }
 
     @OnLifecycleEvent(ON_STOP)
@@ -215,12 +249,17 @@ public class ProxySubscriptionManager implements LifecycleObserver {
     }
 
     /**
-     * Add listener to active subscriptions monitor list
+     * Add listener to active subscriptions monitor list.
+     * Note: listener only take place when change happens.
+     *       No immediate callback performed after the invoke of this method.
      *
      * @param listener listener to active subscriptions change
      */
+    @Keep
     public void addActiveSubscriptionsListener(OnActiveSubscriptionChangedListener listener) {
-        if (mActiveSubscriptionsListeners.contains(listener)) {
+        removeSpecificListenerAndCleanList(listener, mPendingNotifyListeners);
+        removeSpecificListenerAndCleanList(listener, mActiveSubscriptionsListeners);
+        if ((listener == null) || (getListenerState(listener) == LISTENER_END_OF_LIFE)) {
             return;
         }
         mActiveSubscriptionsListeners.add(listener);
@@ -231,7 +270,51 @@ public class ProxySubscriptionManager implements LifecycleObserver {
      *
      * @param listener listener to active subscriptions change
      */
+    @Keep
     public void removeActiveSubscriptionsListener(OnActiveSubscriptionChangedListener listener) {
-        mActiveSubscriptionsListeners.remove(listener);
+        removeSpecificListenerAndCleanList(listener, mPendingNotifyListeners);
+        removeSpecificListenerAndCleanList(listener, mActiveSubscriptionsListeners);
+    }
+
+    private int getListenerState(OnActiveSubscriptionChangedListener listener) {
+        Lifecycle lifecycle = listener.getLifecycle();
+        if (lifecycle == null) {
+            return LISTENER_IS_ACTIVE;
+        }
+        Lifecycle.State lifecycleState = lifecycle.getCurrentState();
+        if (lifecycleState == Lifecycle.State.DESTROYED) {
+            Log.d(LOG_TAG, "Listener dead detected - " + listener);
+            return LISTENER_END_OF_LIFE;
+        }
+        return lifecycleState.isAtLeast(Lifecycle.State.STARTED) ?
+                LISTENER_IS_ACTIVE : LISTENER_IS_INACTIVE;
+    }
+
+    private void removeSpecificListenerAndCleanList(OnActiveSubscriptionChangedListener listener,
+            List<OnActiveSubscriptionChangedListener> list) {
+        // also drop listener(s) which is end of life
+        list.removeIf(it -> (it == listener) || (getListenerState(it) == LISTENER_END_OF_LIFE));
+    }
+
+    private void processStatusChangeOnListeners(
+            List<OnActiveSubscriptionChangedListener> listeners) {
+        // categorize listener(s), and end of life listener(s) been ignored
+        Map<Integer, List<OnActiveSubscriptionChangedListener>> categorizedListeners =
+                listeners.stream()
+                .collect(Collectors.groupingBy(it -> getListenerState(it)));
+
+        // have inactive listener(s) in pending list
+        categorizedListeners.computeIfPresent(LISTENER_IS_INACTIVE, (category, list) -> {
+            mPendingNotifyListeners.addAll(list);
+            return list;
+        });
+
+        // get active listener(s)
+        categorizedListeners.computeIfPresent(LISTENER_IS_ACTIVE, (category, list) -> {
+            mActiveSubscriptionsListeners.addAll(list);
+            // notify each one of them
+            list.stream().forEach(it -> it.onChanged());
+            return list;
+        });
     }
 }

@@ -61,6 +61,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
         mBluetoothDeviceUpdater.registerCallback();
         mConnectedUsbDeviceUpdater.registerCallback();
         mConnectedDockUpdater.registerCallback();
+        mBluetoothDeviceUpdater.refreshPreference();
     }
 
     @Override

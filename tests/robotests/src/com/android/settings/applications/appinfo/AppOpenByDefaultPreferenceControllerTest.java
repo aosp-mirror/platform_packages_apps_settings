@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -33,11 +34,12 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.verify.domain.DomainVerificationManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.applications.AppLaunchSettings;
+import com.android.settings.applications.intentpicker.AppLaunchSettings;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -66,6 +68,8 @@ public class AppOpenByDefaultPreferenceControllerTest {
     private Preference mPreference;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private DomainVerificationManager mDomainVerificationManager;
 
     private Context mContext;
     private AppOpenByDefaultPreferenceController mController;
@@ -78,6 +82,8 @@ public class AppOpenByDefaultPreferenceControllerTest {
         mController.setParentFragment(mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getSystemService(DomainVerificationManager.class)).thenReturn(
+                mDomainVerificationManager);
     }
 
     @Test
@@ -194,10 +200,27 @@ public class AppOpenByDefaultPreferenceControllerTest {
         final AppEntry appEntry = mock(AppEntry.class);
         appEntry.info = new ApplicationInfo();
         when(mFragment.getAppEntry()).thenReturn(appEntry);
+        doReturn(true).when(mController).isLinkHandlingAllowed();
 
         mController.updateState(mPreference);
 
         verify(mPreference).setVisible(true);
         verify(mPreference).setSummary(any());
+    }
+
+    @Test
+    public void getSubtext_allowedLinkHandling_returnAllowedString() {
+        final String allowdedString = "Allow app to open supported links";
+        doReturn(true).when(mController).isLinkHandlingAllowed();
+
+        assertThat(mController.getSubtext()).isEqualTo(allowdedString);
+    }
+
+    @Test
+    public void getSubtext_notAllowedLinkHandling_returnNotAllowedString() {
+        final String notAllowdedString = "Don’t allow app to open links";
+        doReturn(false).when(mController).isLinkHandlingAllowed();
+
+        assertThat(mController.getSubtext()).isEqualTo(notAllowdedString);
     }
 }
