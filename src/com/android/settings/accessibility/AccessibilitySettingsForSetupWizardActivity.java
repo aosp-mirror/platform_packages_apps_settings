@@ -16,7 +16,10 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityScreenSizeForSetupWizardActivity.VISION_FRAGMENT_NO;
+
 import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -30,7 +33,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.display.FontSizePreferenceFragmentForSetupWizard;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -123,19 +125,12 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
                 && new ComponentName(getPackageName(),
                 CLASS_NAME_FONT_SIZE_SETTINGS_FOR_SUW).equals(
                 getIntent().getComponent())) {
-            final Bundle args = new Bundle();
-            args.putInt(HelpResourceProvider.HELP_URI_RESOURCE_KEY, 0);
-            args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
-            final SubSettingLauncher subSettingLauncher = new SubSettingLauncher(this)
-                    .setDestination(FontSizePreferenceFragmentForSetupWizard.class.getName())
-                    .setArguments(args)
-                    .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
-                    .setExtras(SetupWizardUtils.copyLifecycleExtra(getIntent().getExtras(),
-                            new Bundle()))
-                    .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_FADE);
-
+            final Intent intent = new Intent(this,
+                    AccessibilityScreenSizeForSetupWizardActivity.class);
+            intent.putExtra(VISION_FRAGMENT_NO,
+                    getResources().getInteger(R.integer.suw_font_size_fragment_no));
+            startActivity(intent);
             Log.d(LOG_TAG, "Launch font size settings");
-            subSettingLauncher.launch();
             finish();
         }
     }
