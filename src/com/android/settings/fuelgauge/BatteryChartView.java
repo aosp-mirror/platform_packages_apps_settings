@@ -108,7 +108,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     Paint mTrapezoidCurvePaint = null;
     private TrapezoidSlot[] mTrapezoidSlots;
     // Records the location to calculate selected index.
-    private MotionEvent mTouchUpEvent;
+    private float mTouchUpEventX = Float.MIN_VALUE;
     private BatteryChartView.OnSelectListener mOnSelectListener;
 
     public BatteryChartView(Context context) {
@@ -255,20 +255,20 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         // Caches the location to calculate selected trapezoid index.
         final int action = event.getAction();
         if (action == MotionEvent.ACTION_UP) {
-            mTouchUpEvent = MotionEvent.obtain(event);
+            mTouchUpEventX = event.getX();
         } else if (action == MotionEvent.ACTION_CANCEL) {
-            mTouchUpEvent = null; // reset
+            mTouchUpEventX = Float.MIN_VALUE; // reset
         }
         return super.onTouchEvent(event);
     }
 
     @Override
     public void onClick(View view) {
-        if (mTouchUpEvent == null) {
+        if (mTouchUpEventX == Float.MIN_VALUE) {
             Log.w(TAG, "invalid motion event for onClick() callback");
             return;
         }
-        final int trapezoidIndex = getTrapezoidIndex(mTouchUpEvent.getX());
+        final int trapezoidIndex = getTrapezoidIndex(mTouchUpEventX);
         // Ignores the click event if the level is zero.
         if (trapezoidIndex == SELECTED_INDEX_INVALID
                 || !isValidToDraw(trapezoidIndex)) {
