@@ -229,7 +229,7 @@ public class SubscriptionUtil {
     }
 
     /**
-     * Return a mapping of active subscription ids to diaplay names. Each display name is
+     * Return a mapping of active subscription ids to display names. Each display name is
      * guaranteed to be unique in the following manner:
      * 1) If the original display name is not unique, the last four digits of the phone number
      *    will be appended.
@@ -237,7 +237,7 @@ public class SubscriptionUtil {
      *    subscription, the subscription id will be appended to the original display name.
      * More details can be found at go/unique-sub-display-names.
      *
-     * @return map of active subscription ids to diaplay names.
+     * @return map of active subscription ids to display names.
      */
     @VisibleForTesting
     public static Map<Integer, CharSequence> getUniqueSubscriptionDisplayNames(Context context) {
@@ -328,7 +328,7 @@ public class SubscriptionUtil {
      *    subscription, the subscription id will be appended to the original display name.
      * More details can be found at go/unique-sub-display-names.
      *
-     * @return map of active subscription ids to diaplay names.
+     * @return map of active subscription ids to display names.
      */
     @VisibleForTesting
     public static CharSequence getUniqueSubscriptionDisplayName(
@@ -346,7 +346,7 @@ public class SubscriptionUtil {
      *    subscription, the subscription id will be appended to the original display name.
      * More details can be found at go/unique-sub-display-names.
      *
-     * @return map of active subscription ids to diaplay names.
+     * @return map of active subscription ids to display names.
      */
     public static CharSequence getUniqueSubscriptionDisplayName(
             SubscriptionInfo info, Context context) {
@@ -486,7 +486,7 @@ public class SubscriptionUtil {
      * @param info the subscriptionInfo to check against.
      * @return true if this subscription should be visible to the API caller.
      */
-    private static boolean isSubscriptionVisible(
+    public static boolean isSubscriptionVisible(
             SubscriptionManager subscriptionManager, Context context, SubscriptionInfo info) {
         if (info == null) return false;
         // If subscription is NOT grouped opportunistic subscription, it's visible.

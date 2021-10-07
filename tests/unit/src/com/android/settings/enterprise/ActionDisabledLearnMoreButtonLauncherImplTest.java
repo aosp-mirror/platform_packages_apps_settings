@@ -111,7 +111,7 @@ public class ActionDisabledLearnMoreButtonLauncherImplTest {
 
     @Test
     public void showHelpPage_works() {
-        mImpl.showHelpPage(mActivity, URL);
+        mImpl.showHelpPage(mActivity, URL, CONTEXT_USER);
 
         verify(mActivity).startActivityAsUser(mIntentCaptor.capture(), eq(CONTEXT_USER));
         assertActionViewIntent(mIntentCaptor.getValue());

@@ -101,10 +101,7 @@
     <string name="auto_rotate_settings_primary_switch_title">Use Auto-rotate</string>
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
-    <string name="smart_rotate_text_headline">
-        Face Detection uses the front-facing camera to improve Auto-rotate accuracy. Images are never stored or sent to Google.&lt;br>&lt;br>
-       &lt;a href="<xliff:g example="http://www.google.com" id="url">http://support.google.com/mobile?p=telephony_rtt</xliff:g>">Learn more about Auto-rotate screen&lt;/a>
-    </string>
+    <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve Auto-rotate accuracy. Images are never stored or sent to Google.</string>
     <string name="font_size_preview_text_headline">Sample text</string>
     <string name="font_size_preview_text_title"
             translation_description="Title text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
@@ -649,10 +646,6 @@
     <string name="security_enable_widgets_title">Enable widgets</string>
     <!-- Summary for settings checkbox to disable widgets when the setting has been disabled by an installed device admin [CHAR LIMIT=50] -->
     <string name="security_enable_widgets_disabled_summary">Disabled by admin</string>
-    <!-- Text shown for the title of the lockdown option -->
-    <string name="lockdown_settings_title">Show lockdown option</string>
-    <!-- Text shown for the description of the lockdown option -->
-    <string name="lockdown_settings_summary">Display Power button option that turns off Smart Lock, Face Unlock, Fingerprint Unlock, and notifications on the lock screen</string>
 
     <!-- Text shown for the title of the lock when trust lost option [CHAR LIMIT=40] -->
     <string name="trust_lost_locks_screen_title">Lock screen when trust is lost</string>
@@ -799,6 +792,11 @@
     <string name="security_settings_face_enroll_introduction_info_looking"></string>
     <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_info_consent_looking"></string>
+    <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_gaze"></string>
+    <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze"></string>
+
     <!-- Title of a section on the face enrollment introduction page that explains how face unlock works. [CHAR LIMIT=40] -->
     <string name="security_settings_face_enroll_introduction_how_title"></string>
     <!-- Message on the face enrollment introduction page that explains how face unlock works. [CHAR LIMIT=NONE] -->
@@ -851,8 +849,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint">Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
     <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
     <string name="security_settings_face_settings_use_face_category">Use Face Unlock for</string>
-    <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. -->
-    <string name="security_settings_face_settings_require_category">Requirements for Face Unlock</string>
     <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
     <string name="security_settings_face_settings_preferences_category">When using Face Unlock</string>
     <!-- Text shown on a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=30] -->
@@ -928,16 +924,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks">No thanks</string>
-    <!-- Button text to skip enrollment [CHAR LIMIT=30] -->
-    <string name="security_settings_fingerprint_enroll_introduction_skip">No thanks</string>
-    <!-- Button text to continue to the next screen from the introduction [CHAR LIMIT=22] -->
-    <string name="security_settings_fingerprint_enroll_introduction_continue">Continue</string>
     <!-- Button text to agree the consent and continue to the next screen from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_agree">I agree</string>
-    <!-- Button text to cancel enrollment from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup">Skip</string>
-    <!-- Button text to continue to the next screen from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup">Next</string>
     <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
     <string name="setup_fingerprint_enroll_skip_title">Skip fingerprint?</string>
     <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
@@ -1071,10 +1059,16 @@
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon">Follow the fingerprint icon</string>
     <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_repeat_message">Keep lifting your finger to add the different parts of your fingerprint</string>
-    <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
-    <string name="security_settings_udfps_enroll_repeat_message">Touch &amp; hold each time the fingerprint icon moves. This helps capture your full fingerprint.</string>
-    <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor.-->
-    <string name="security_settings_udfps_enroll_repeat_a11y_message">This helps capture your full fingerprint</string>
+    <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=160] -->
+    <string name="security_settings_udfps_enroll_repeat_message">Touch &amp; hold each time the fingerprint icon moves. This helps capture more of your fingerprint.</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Place the tip of your finger on the sensor</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_edge_title">Finally, place the edges of your finger</string>
+    <!-- Message shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=160] -->
+    <string name="security_settings_udfps_enroll_edge_message">Place the side of your fingerprint on the sensor and hold, then switch to the other side</string>
+    <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor. [CHAR LIMIT=160] -->
+    <string name="security_settings_udfps_enroll_repeat_a11y_message">This helps capture more of your fingerprint</string>
     <!-- Message read to a11y users when enrollment progress is made. The number is from 0 to 100. [CHAR LIMIT=NONE]-->
     <string name="security_settings_udfps_enroll_progress_a11y_message">Enrolling fingerprint <xliff:g id="percentage" example="10">%d</xliff:g> percent</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
@@ -1088,77 +1082,77 @@
     <!-- Content of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=NONE] -->
     <string name="setup_fingerprint_enroll_enrolling_skip_message">You\u2019ve chosen to use your fingerprint as one way to unlock your phone. If you skip now, you\u2019ll need to set this up later. Setup takes only a minute or so.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_message" product="tablet">A PIN protects your tablet if it\u2019s lost or stolen</string>
+    <string name="lock_screen_pin_skip_message" product="tablet">A PIN protects the tablet if it\u2019s lost or stolen</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_message" product="tablet">A pattern protects your tablet if it\u2019s lost or stolen</string>
+    <string name="lock_screen_pattern_skip_message" product="tablet">A pattern protects the tablet if it\u2019s lost or stolen</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_message" product="tablet">A password protects your tablet if it\u2019s lost or stolen</string>
+    <string name="lock_screen_password_skip_message" product="tablet">A password protects the tablet if it\u2019s lost or stolen</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_message" product="device">A PIN protects your device if it\u2019s lost or stolen</string>
+    <string name="lock_screen_pin_skip_message" product="device">A PIN protects the device if it\u2019s lost or stolen</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_message" product="device">A pattern protects your device if it\u2019s lost or stolen</string>
+    <string name="lock_screen_pattern_skip_message" product="device">A pattern protects the device if it\u2019s lost or stolen</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_message" product="device">A password protects your device if it\u2019s lost or stolen</string>
+    <string name="lock_screen_password_skip_message" product="device">A password protects the device if it\u2019s lost or stolen</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_message" product="default">A PIN protects your phone if it\u2019s lost or stolen</string>
+    <string name="lock_screen_pin_skip_message" product="default">A PIN protects the phone if it\u2019s lost or stolen</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_message" product="default">A pattern protects your phone if it\u2019s lost or stolen</string>
+    <string name="lock_screen_pattern_skip_message" product="default">A pattern protects the phone if it\u2019s lost or stolen</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_message" product="default">A password protects your phone if it\u2019s lost or stolen</string>
+    <string name="lock_screen_password_skip_message" product="default">A password protects the phone if it\u2019s lost or stolen</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects your tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects your tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet">A password is required to set up Fingerprint Unlock.\n\nA password protects your tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet">A password is required to set up Fingerprint Unlock.\n\nA password protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects your device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects your device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_fingerprint_message" product="device">A password is required to set up Fingerprint Unlock.\n\nA password protects your device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="device">A password is required to set up Fingerprint Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects your phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default">A PIN is required to set up Fingerprint Unlock.\n\nA PIN protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects your phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default">A pattern is required to set up Fingerprint Unlock.\n\nA pattern protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_fingerprint_message" product="default">A password is required to set up Fingerprint Unlock.\n\nA password protects your phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="default">A password is required to set up Fingerprint Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_face_message" product="tablet">A PIN is required to set up Face Unlock.\n\nA PIN protects your tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_face_message" product="tablet">A PIN is required to set up Face Unlock.\n\nA PIN protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_face_message" product="tablet">A pattern is required to set up Face Unlock.\n\nA pattern protects your tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_face_message" product="tablet">A pattern is required to set up Face Unlock.\n\nA pattern protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_face_message" product="tablet">A password is required to set up Face Unlock.\n\nA password protects your tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_face_message" product="tablet">A password is required to set up Face Unlock.\n\nA password protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_face_message" product="device">A PIN is required to set up Face Unlock.\n\nA PIN protects your device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_face_message" product="device">A PIN is required to set up Face Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_face_message" product="device">A pattern is required to set up Face Unlock.\n\nA pattern protects your device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_face_message" product="device">A pattern is required to set up Face Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_face_message" product="device">A password is required to set up Face Unlock.\n\nA password protects your device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_face_message" product="device">A password is required to set up Face Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_face_message" product="default">A PIN is required to set up Face Unlock.\n\nA PIN protects your phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_face_message" product="default">A PIN is required to set up Face Unlock.\n\nA PIN protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_face_message" product="default">A pattern is required to set up Face Unlock.\n\nA pattern protects your phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_face_message" product="default">A pattern is required to set up Face Unlock.\n\nA pattern protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_face_message" product="default">A password is required to set up Face Unlock.\n\nA password protects your phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_face_message" product="default">A password is required to set up Face Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects your tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects your tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects your tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_biometrics_message" product="device">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects your device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="device">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects your device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_biometrics_message" product="device">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects your device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="device">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_biometrics_message" product="default">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects your phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects your phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_biometrics_message" product="default">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects your phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
     <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=48]-->
     <string name="lock_screen_pin_skip_title">Skip PIN setup?</string>
     <!-- Title of dialog shown when the user tries to skip setting up a PIN, warning them of potential consequences of not doing so [CHAR LIMIT=90]-->
@@ -1213,7 +1207,7 @@
     <!-- Text shown in fingerprint enroll when we didn't observe progress for a few seconds. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
     <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
-    <string name="security_settings_fingerprint_bad_calibration">Please recalibrate the fingerprint sensor.</string>
+    <string name="security_settings_fingerprint_bad_calibration">Can\u2019t use fingerprint sensor. Visit a repair provider</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -4257,7 +4251,7 @@
     <!-- [CHAR LIMIT=60] Location Services preference title -->
     <string name="location_services_preference_title">Location services</string>
     <!-- [CHAR LIMIT=60] Location Services screen, screen title -->
-    <string name="location_services_screen_title">Location Services</string>
+    <string name="location_services_screen_title">Location services</string>
     <!-- [CHAR LIMIT=50] Location settings screen, sub category for location services for managed profile -->
     <string name="managed_profile_location_services">Location services for work</string>
 
@@ -4395,6 +4389,25 @@
     <!-- Header on first screen of choose work profile pattern flow [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_profile_pattern_header">Set a work pattern</string>
 
+    <!-- Header on first screen of choose device password flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_password_description" product="phone">For added security, set a password to unlock the phone</string>
+    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_pin_description" product="phone">For added security, set a PIN to unlock the phone</string>
+    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=NONE] -->
+    <string name="lockpattern_choose_pattern_description" product="phone">For added security, set a pattern to unlock the phone</string>
+    <!-- Header on first screen of choose device password flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_password_description" product="tablet">For added security, set a password to unlock the tablet</string>
+    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_pin_description" product="tablet">For added security, set a PIN to unlock the tablet</string>
+    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=NONE] -->
+    <string name="lockpattern_choose_pattern_description" product="tablet">For added security, set a pattern to unlock the tablet</string>
+    <!-- Header on first screen of choose device password flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_password_description" product="default">For added security, set a password to unlock the device</string>
+    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_pin_description" product="default">For added security, set a PIN to unlock the device</string>
+    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=NONE] -->
+    <string name="lockpattern_choose_pattern_description" product="default">For added security, set a pattern to unlock the device</string>
+
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set password</string>
     <!-- Header on first screen of choose pattern as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
@@ -4440,12 +4453,12 @@
     <!-- Header on first screen of choose password/PIN as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_face">To use Face Unlock, set PIN</string>
 
-    <!-- Header on first screen of choose password/PIN as backup for biometric unlock flow. If this string cannot be translated in under 40 characters, please translate "Set biometric unlock backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_password_header_for_biometrics">To use biometrics, set password</string>
-    <!-- Header on first screen of choose pattern as backup for biometric unlock flow. If this string cannot be translated in under 40 characters, please translate "Set biometric unlock backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics">To use biometrics, set pattern</string>
-    <!-- Header on first screen of choose password/PIN as backup for biometric unlock flow. If this string cannot be translated in under 40 characters, please translate "Set biometric unlock backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_pin_header_for_biometrics">To use biometrics, set PIN</string>
+    <!-- Title of a screen that asks the user to set up a password as a backup for Face or Fingerprint Unlock. If this string can't be translated in 60 characters, please translate "Set a backup password". [CHAR LIMIT=60] -->
+    <string name="lockpassword_choose_your_password_header_for_biometrics">Set a password to use face or fingerprint</string>
+    <!-- Title of a screen that asks the user to set up a pattern as a backup for Face or Fingerprint Unlock. If this string can't be translated in 60 characters, please translate "Set a backup pattern". [CHAR LIMIT=60] -->
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics">Set a pattern to use face or fingerprint</string>
+    <!-- Title of a screen that asks the user to set up a PIN as a backup for Face or Fingerprint Unlock. If this string can't be translated in 60 characters, please translate "Set a backup PIN". [CHAR LIMIT=60] -->
+    <string name="lockpassword_choose_your_pin_header_for_biometrics">Set a PIN to use face or fingerprint</string>
 
 
     <!-- Text for button that the user should tap when they forgot their work profile password [CHAR LIMIT=40] -->
@@ -5403,8 +5416,8 @@
     <string name="accessibility_button_intro">Using the accessibility button. The gesture isn\u2019t available with 3-button navigation.</string>
     <!-- Summary text for the accessibility button preference. [CHAR LIMIT=50] -->
     <string name="accessibility_button_summary">Quickly access accessibility features</string>
-    <!-- Description for the accessibility button & gesture page. Explain how this page works. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_button_gesture_description">Quickly access accessibility features from any screen. \n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button or gesture.</string>
+    <!-- Description for the accessibility button in gesture navigation. Explain how this page works. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_button_gesture_description">Quickly access accessibility features from any screen.\n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.\n\nTo use the accessibility button in the navigation bar instead, switch to 2-button navigation or 3-button navigation.</string>
     <!-- Description for the accessibility button page. Explain how this page works. [CHAR LIMIT=NONE] -->
     <string name="accessibility_button_description">Quickly access accessibility features from any screen. \n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.</string>
     <!-- Title for the button or gesture of the accessibility button. [CHAR LIMIT=35] -->
@@ -6146,11 +6159,11 @@
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_summary">To preserve your battery. Learn more.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
+    <string name="battery_tip_dialog_message" product="default">Because you’ve used your phone more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
+    <string name="battery_tip_dialog_message" product="tablet">Because you’ve used your tablet more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop apps by battery usage:</string>
+    <string name="battery_tip_dialog_message" product="device">Because you’ve used your device more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
     <!-- Footer message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message_footer">Includes high-power background activity</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
@@ -6779,6 +6792,10 @@
     <string name="adaptive_connectivity_title">Adaptive connectivity</string>
     <!-- Summary of Adaptive connectivity preference. [CHAR LIMIT=NONE] -->
     <string name="adaptive_connectivity_summary">Extends battery life and improves device performance by automatically managing your network connections</string>
+    <!-- Switch on text of Adaptive connectivity preference. [CHAR LIMIT=NONE]-->
+    <string name="adaptive_connectivity_switch_on">On</string>
+    <!-- Switch off text of Adaptive connectivity preference. [CHAR LIMIT=NONE]-->
+    <string name="adaptive_connectivity_switch_off">Off</string>
 
     <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
     <string name="credentials_title">Credential storage</string>
@@ -6825,7 +6842,7 @@
     <!-- Title of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
     <string name="ca_certificate_warning_title">Your data won\u2019t be private</string>
     <!-- Description of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
-    <string name="ca_certificate_warning_description">CA certificates are used by websites, apps, and VPNs for encryption. Only install CA certificates from organizations you trust. \n\n If you install a CA certificate, the certificate owner could access your data, such as passwords or credit card details, from websites you visit or apps you use – even if your data is encrypted.</string>
+    <string name="ca_certificate_warning_description">CA certificates are used by websites, apps, and VPNs for encryption. Only install CA certificates from organizations you trust. \n\nIf you install a CA certificate, the certificate owner could access your data, such as passwords or credit card details, from websites you visit or apps you use – even if your data is encrypted.</string>
     <!-- Label for button to not install a certificate [CHAR_LIMIT=50] -->
     <string name="certificate_warning_dont_install">Don\u2019t install</string>
     <!-- Label for button to continue installing a certificate [CHAR_LIMIT=50] -->
@@ -6852,7 +6869,11 @@
     <!-- Label for button to uninstall all certificates installed by the credential management app [CHAR LIMIT=30] -->
     <string name="uninstall_certs_credential_management_app">Uninstall certificates</string>
     <!-- Label for button to remove the credential management app [CHAR LIMIT=30] -->
-    <string name="remove_credential_management_app">Remove</string>
+    <string name="remove_credential_management_app">Remove app</string>
+    <!-- Dialog title for button to remove the credential management app [CHAR LIMIT=30] -->
+    <string name="remove_credential_management_app_dialog_title">Remove this app?</string>
+    <!-- Dialog message for button to remove the credential management app [CHAR LIMIT=NONE] -->
+    <string name="remove_credential_management_app_dialog_message">This app won\u2019t manage certificates, but it will stay on your device. Any certificates installed by the app will be uninstalled.</string>
     <!-- List item found in the credential management app's authentication policy [CHAR LIMIT=NONE] -->
     <plurals name="number_of_urls">
         <item quantity="one"><xliff:g id="number">%d</xliff:g> URL</item>
@@ -7474,7 +7495,7 @@
     <!-- Button label for enabling a system CA certificate. -->
     <string name="trusted_credentials_enable_label">Enable</string>
     <!-- Button label for removing a user CA certificate. -->
-    <string name="trusted_credentials_remove_label">Remove</string>
+    <string name="trusted_credentials_remove_label">Uninstall</string>
     <!-- Button label for trusting a user CA certificate. -->
     <string name="trusted_credentials_trust_label">Trust</string>
     <!-- Alert dialog confirmation when enabling a system CA certificate. -->
@@ -8204,7 +8225,7 @@
     <string name="keywords_wifi_calling">wifi, wi-fi, call, calling</string>
     <string name="keywords_display">screen, touchscreen</string>
     <string name="keywords_display_brightness_level">dim screen, touchscreen, battery, bright</string>
-    <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color, light sensitivity, photophobia, make darker, darken, dark mode, migraine</string>
+    <string name="keywords_display_night_display">dim screen, night, tint, night shift, brightness, screen color, colour, color</string>
     <string name="keywords_display_wallpaper">background, personalize, customize display</string>
     <string name="keywords_display_font_size">text size</string>
     <!-- Search keyword for "Cast" settings [CHAR_LIMIT=NONE]-->
@@ -8252,7 +8273,7 @@
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
     <!-- Search keywords for dark mode settings [CHAR LIMIT=NONE] -->
-    <string name="keywords_dark_ui_mode">theme, light, dark, mode</string>
+    <string name="keywords_dark_ui_mode">theme, light, dark, mode, light sensitivity, photophobia, make darker, darken, dark mode, migraine</string>
 
     <!-- Search keyword for Device Theme Settings [CHAR LIMIT=NONE] -->
     <string name="keywords_systemui_theme">dark theme</string>
@@ -10017,6 +10038,10 @@
     <string name="switch_on_text">On</string>
     <string name="switch_off_text">Off</string>
 
+    <!-- Switch text for nfc feature being on [CHAR LIMIT=NONE] -->
+    <string name="nfc_setting_on">On</string>
+    <!-- Switch text for nfc feature being off [CHAR LIMIT=NONE] -->
+    <string name="nfc_setting_off">Off</string>
 
     <!-- The subtext when screen pinning feature is enabled. [CHAR LIMIT=28] -->
     <string name="screen_pinning_switch_on_text">On</string>
@@ -10592,7 +10617,11 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transcoding the files that are transferred via MTP. -->
-    <string name="usb_transcode_files">Transcode exported media</string>
+    <string name="usb_transcode_files">Convert videos to AVC</string>
+    <!-- The summary text that appears when the user enables the 'Convert videos to AVC' option for
+         transcoding files to compatible formats before transferring them from the device to PC.
+         [CHAR LIMIT=NONE] -->
+    <string name="usb_transcode_files_summary">Videos will play on more media players, but quality may be reduced</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
@@ -11572,10 +11601,10 @@
 
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>
-    <!-- [CHAR LIMIT=60] The preference title for enabling cross-profile remote contact search -->
-    <string name="managed_profile_contact_search_title">Contact search</string>
-    <!-- [CHAR LIMIT=NONE] The preference summary for enabling cross-profile remote contact search -->
-    <string name="managed_profile_contact_search_summary">Allow contact searches by your organization to identify callers and contacts</string>
+    <!-- [CHAR LIMIT=NONE] Settings toggle. This setting lets a user's personal apps identify contacts using the user's work directory. -->
+    <string name="managed_profile_contact_search_title">Search for work directory contacts in personal apps</string>
+    <!-- [CHAR LIMIT=NONE] Settings toggle description. This setting lets a user's personal apps identify contacts using the user's work directory. "Searches" is a noun. -->
+    <string name="managed_profile_contact_search_summary">Your searches and incoming calls may be visible to your IT admin</string>
     <!-- [CHAR LIMIT=NONE] Settings label. This setting lets the user show their work events on their personal calendar. The adjective 'Cross-profile' is referring to the work and personal profiles a user has on their phone. -->
     <string name="cross_profile_calendar_title">Cross-profile calendar</string>
     <!-- [CHAR LIMIT=NONE] Setting description. If the user turns on this setting, they can see their work events on their personal calendar. -->
@@ -11727,29 +11756,16 @@
     <!-- Preference and settings suggestion title text for ambient display double tap (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="device">Double-tap to check device</string>
 
-    <!-- Title text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=60]-->
-    <string name="swipe_bottom_to_notifications_title">Swipe for notifications</string>
-    <!-- Summary text for swiping downwards on the bottom of the screen for notifications [CHAR LIMIT=NONE]-->
-    <string name="swipe_bottom_to_notifications_summary">Swipe down on the bottom edge of the screen to show your notifications.\nYou can\'t use one-handed mode when this feature is turned on.</string>
-
     <!-- Preference and settings suggestion title text for one handed [CHAR LIMIT=60] -->
     <string name="one_handed_title">One-handed mode</string>
     <!-- Preference Switch for enabling one handed [CHAR LIMIT=60] -->
     <string name="one_handed_mode_enabled">Use one-handed mode</string>
-    <!-- Preference Switch for app taps to exit one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_app_taps_to_exit">Exit when switching apps</string>
-    <!-- Timeout(Never) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_title">Timeout</string>
-    <!-- Timeout(Short) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_short">4 seconds</string>
-    <!-- Timeout(Medium) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_medium">8 seconds</string>
-    <!-- Timeout(Long) title for one handed [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_long">12 seconds</string>
     <!-- Search keywords for "One-Handed" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_one_handed">reachability</string>
     <!-- Category title for one handed swipe down [CHAR_LIMIT=60] -->
     <string name="one_handed_mode_swipe_down_category">Swipe down to</string>
+    <!-- Category title for one handed use the shortcut [CHAR_LIMIT=60] -->
+    <string name="one_handed_mode_use_shortcut_category">Use the shortcut to</string>
     <!-- One-handed mode Intro Text [CHAR_LIMIT=NONE] -->
     <string name="one_handed_mode_intro_text">To use one handed mode, swipe down from the bottom edge of the screen. To use this feature, make sure gesture navigation is turned on in system navigation settings.</string>
     <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=60] -->
@@ -11759,7 +11775,7 @@
     <!-- One-handed mode show notification action [CHAR_LIMIT=60] -->
     <string name="one_handed_action_show_notification_title">Show notifications</string>
     <!-- One-handed mode show notification action [CHAR_LIMIT=NONE] -->
-    <string name="one_handed_action_show_notification_summary">Notification and settings will appear.</string>
+    <string name="one_handed_action_show_notification_summary">Notifications and settings will appear.</string>
     <!-- One-handed mode Intro text for gesture navigation [CHAR_LIMIT=NONE] -->
 
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
@@ -12140,6 +12156,9 @@
         <item quantity="one"><xliff:g id="count">%1$d</xliff:g> password</item>
         <item quantity="other"><xliff:g id="count">%1$d</xliff:g> passwords</item>
     </plurals>
+    <!-- DO NOT TRANSLATE Summary placeholder for when the passwords count is still loading or is
+         unavailable. -->
+    <string name="autofill_passwords_count_placeholder" translatable="false">\u2014</string>
     <!-- Keywords for the auto-fill feature. [CHAR LIMIT=NONE] -->
     <string name="autofill_keywords">auto, fill, autofill, password</string>
 
@@ -12353,6 +12372,15 @@
     <!-- Title for preference showing the name of the device. [CHAR LIMIT=60]-->
     <string name="my_device_info_device_name_preference_title">Device name</string>
 
+    <!-- Title for preference category showing the name of basic info. [CHAR LIMIT=60]-->
+    <string name="my_device_info_basic_info_category_title">Basic info</string>
+    <!-- Title for preference category showing the name of legal & regulatory. [CHAR LIMIT=60]-->
+    <string name="my_device_info_legal_category_title">Legal &amp; regulatory</string>
+    <!-- Title for preference category showing the name of device details. [CHAR LIMIT=60]-->
+    <string name="my_device_info_device_details_category_title">Device details</string>
+    <!-- Title for preference category showing the name of device identifiers. [CHAR LIMIT=60]-->
+    <string name="my_device_info_device_identifiers_category_title">Device identifiers</string>
+
     <!-- Title for Wifi Access settings [CHAR LIMIT=35] -->
     <string name="change_wifi_state_title">Wi-Fi control</string>
 
@@ -12432,6 +12460,8 @@
     <string name="prevent_ringing_option_vibrate_summary">Vibrate</string>
     <!-- Summary for prevent ringing setting -->
     <string name="prevent_ringing_option_mute_summary">Mute</string>
+    <!-- Summary for prevent ringing setting when the option itself is unavailable. [CHAR LIMIT=NONE] -->
+    <string name="prevent_ringing_option_unavailable_lpp_summary">To enable, first change \"Press and hold power button\" to the power menu.</string>
 
     <!-- Title for detail page of wifi network [CHAR LIMIT=30] -->
     <string name="pref_title_network_details">Network details</string>
@@ -13065,8 +13095,8 @@
     <!-- Label for the title on wfc disclaimer location. [CHAR LIMIT=30] -->
     <string name="wfc_disclaimer_location_title_text">Location</string>
 
-    <!-- Warn the user that the phone may share its location with the service provider. [CHAR LIMIT=NONE] -->
-    <string name="wfc_disclaimer_location_desc_text">Your service provider may collect your location in order to provide this service.\n\nPlease review your service provider\u2019s privacy policy.</string>
+    <!-- Warn the user that the phone may share its location with the carrier. [CHAR LIMIT=NONE] -->
+    <string name="wfc_disclaimer_location_desc_text">Your carrier may collect your location when you use this service for emergency calls.\n\nVisit your carrier\u2019s privacy policy for details.</string>
 
     <!-- Message for forget passpoint dialog [CHAR LIMIT=none] -->
     <string name="forget_passpoint_dialog_message">You may lose access to any remaining time or data. Check with your provider before removing.</string>
@@ -13173,22 +13203,28 @@
     <string name="cards_passes_lower">cards &amp; passes</string>
 
     <!-- Power menu setting name [CHAR LIMIT=NONE] -->
-    <string name="power_menu_setting_name">Power menu</string>
+    <string name="power_menu_setting_name">Press and hold power button</string>
 
-    <!-- Power menu setting title [CHAR LIMIT=NONE] -->
-    <string name="power_menu_setting_title">Power button menu</string>
-
-    <!-- Power menu setting option none [CHAR LIMIT=NONE] -->
-    <string name="power_menu_none">Don\u2019t show any content</string>
+    <!-- Power menu setting summary to describe press and hold power button for Assistant is enabled. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_assist_enabled">Press and hold for the Assistant</string>
+    <!-- Power menu setting summary to describe press and hold power button for Assistant is disabled and power menu will appear. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu">Press and hold for the power menu</string>
+    <!-- Power menu setting summary to describe press and hold power button for Assistant is disabled and nothing will happen. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_summary_long_press_for_assist_disabled_no_action">Press and hold disabled</string>
 
     <!-- Power menu setting privacy no secure screen lock set [CHAR_LIMIT=NONE] -->
     <string name="lockscreen_privacy_not_secure">To use, first set a screen lock</string>
 
-    <!-- Power menu setting use long press power to invoke assistant. [CHAR_LIMIT=NONE] -->
+    <!-- Power menu setting use long press power to invoke assistant. [CHAR LIMIT=NONE] -->
     <string name="power_menu_long_press_for_assist">Hold for Assistant</string>
 
-    <!-- Power menu setting use log press power to invoke assistant summary. [CHAR_LIMIT=NONE] -->
+    <!-- Power menu setting use log press power to invoke assistant summary. [CHAR LIMIT=NONE] -->
     <string name="power_menu_long_press_for_assist_summary">Trigger the Assistant by holding the power button</string>
+
+    <!-- Power menu explanation to press power and volume up to show power and emergency menu. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_power_volume_up_hint">Power &amp; Emergency Menu:\nPress Power and Volume up at the same time.</string>
+    <!-- Power menu explanation where to find prevent ringing option. [CHAR LIMIT=NONE] -->
+    <string name="power_menu_power_prevent_ringing_hint">Prevent ringing:\nShortcut available in the volume menu.</string>
 
     <!-- Wallet (formerly Cards and passes) toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_wallet_setting_toggle">Show wallet</string>
@@ -13353,7 +13389,7 @@
     <string name="mobile_data_no_connection">No connection</string>
     <!-- Provider Model:
          Summary indicating that a SIM has no mobile data connection [CHAR LIMIT=50] -->
-    <string name="mobile_data_off_summary">Internet won\u0027t auto\u2011connect</string>
+    <string name="mobile_data_off_summary">Mobile data won\u0027t auto\u2011connect</string>
     <!-- Provider Model: Summary indicating that no other networks available [CHAR LIMIT=50] -->
     <string name="non_carrier_network_unavailable">No other networks available</string>
     <!-- Provider Model: Summary indicating that no networks available [CHAR LIMIT=50] -->
@@ -13415,7 +13451,7 @@
     <!-- Title for developer options main switch. [CHAR LIMIT=50] -->
     <string name="developer_options_main_switch_title">Use developer options</string>
     <!-- Title for default print service main switch. [CHAR LIMIT=50] -->
-    <string name="default_print_service_main_switch_title">Use default print service</string>
+    <string name="default_print_service_main_switch_title">Use print service</string>
     <!-- Title for multiple users main switch. [CHAR LIMIT=50] -->
     <string name="multiple_users_main_switch_title">Use multiple users</string>
     <!-- Title for wireless debugging main switch. [CHAR LIMIT=50] -->

@@ -24,8 +24,10 @@ import android.os.UserManager;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.util.Slog;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.android.settings.R;
@@ -222,26 +224,18 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
         return userId + "|" + pkg;
     }
 
-    public View.OnClickListener getSwitchOnClickListener(final AppEntry entry) {
-        if (entry != null) {
-            return v -> {
-                ViewGroup view = (ViewGroup) v;
-                Switch toggle = view.findViewById(R.id.switchWidget);
-                if (toggle != null) {
-                    if (!toggle.isEnabled()) {
-                        return;
-                    }
-                    toggle.toggle();
-                    mBackend.setNotificationsEnabledForPackage(
-                            entry.info.packageName, entry.info.uid, toggle.isChecked());
-                    NotificationsSentState stats = getNotificationsSentState(entry);
-                    if (stats != null) {
-                        stats.blocked = !toggle.isChecked();
-                    }
-                }
-            };
+    public CompoundButton.OnCheckedChangeListener getSwitchOnCheckedListener(final AppEntry entry) {
+        if (entry == null) {
+            return null;
         }
-        return null;
+        return (buttonView, isChecked) -> {
+            mBackend.setNotificationsEnabledForPackage(
+                    entry.info.packageName, entry.info.uid, isChecked);
+            NotificationsSentState stats = getNotificationsSentState(entry);
+            if (stats != null) {
+                stats.blocked = !isChecked;
+            }
+        };
     }
 
     public static final AppFilter FILTER_APP_NOTIFICATION_RECENCY = new AppFilter() {

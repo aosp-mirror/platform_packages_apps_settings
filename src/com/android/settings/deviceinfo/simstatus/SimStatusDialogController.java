@@ -38,7 +38,6 @@ import android.telephony.CellBroadcastIntents;
 import android.telephony.CellBroadcastService;
 import android.telephony.CellSignalStrength;
 import android.telephony.ICellBroadcastService;
-import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -245,6 +244,8 @@ public class SimStatusDialogController implements LifecycleObserver {
     private void updateSubscriptionStatus() {
         updateNetworkProvider();
 
+        // getServiceState() may return null when the subscription is inactive
+        // or when there was an error communicating with the phone process.
         final ServiceState serviceState = mTelephonyManager.getServiceState();
         final SignalStrength signalStrength = mTelephonyManager.getSignalStrength();
 
@@ -577,7 +578,10 @@ public class SimStatusDialogController implements LifecycleObserver {
     }
 
     private void updateRoamingStatus(ServiceState serviceState) {
-        if (serviceState.getRoaming()) {
+        // If the serviceState is null, we assume that roaming is disabled.
+        if (serviceState == null) {
+            mDialog.setText(ROAMING_INFO_VALUE_ID, mRes.getString(R.string.radioInfo_unknown));
+        } else if (serviceState.getRoaming()) {
             mDialog.setText(ROAMING_INFO_VALUE_ID, mRes.getString(R.string.radioInfo_roaming_in));
         } else {
             mDialog.setText(ROAMING_INFO_VALUE_ID, mRes.getString(R.string.radioInfo_roaming_not));

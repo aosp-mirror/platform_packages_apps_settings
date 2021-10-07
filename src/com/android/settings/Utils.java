@@ -1158,13 +1158,17 @@ public final class Utils extends com.android.settingslib.Utils {
                 == ProfileSelectFragment.ProfileType.PERSONAL : false;
         final boolean isWork = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK : false;
-        if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
-                && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
-                && !isWork && !isPersonal) {
-            f = Fragment.instantiate(activity, ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName),
-                    args);
-        } else {
-            f = Fragment.instantiate(activity, fragmentName, args);
+        try {
+            if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
+                    && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
+                    && !isWork && !isPersonal) {
+                f = Fragment.instantiate(activity,
+                        ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName), args);
+            } else {
+                f = Fragment.instantiate(activity, fragmentName, args);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Unable to get target fragment", e);
         }
         return f;
     }

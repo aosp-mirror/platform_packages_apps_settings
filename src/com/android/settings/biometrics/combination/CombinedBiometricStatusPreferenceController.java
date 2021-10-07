@@ -21,6 +21,9 @@ import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -38,7 +41,7 @@ import com.android.settingslib.RestrictedPreference;
  * with face and fingerprint.
  */
 public class CombinedBiometricStatusPreferenceController extends
-        BiometricStatusPreferenceController {
+        BiometricStatusPreferenceController implements LifecycleObserver {
     private static final String KEY_BIOMETRIC_SETTINGS = "biometric_settings";
 
     @Nullable
@@ -49,19 +52,37 @@ public class CombinedBiometricStatusPreferenceController extends
     RestrictedPreference mPreference;
 
     public CombinedBiometricStatusPreferenceController(Context context) {
-        this(context, KEY_BIOMETRIC_SETTINGS);
+        this(context, KEY_BIOMETRIC_SETTINGS, null /* lifecycle */);
     }
 
     public CombinedBiometricStatusPreferenceController(Context context, String key) {
+        this(context, key, null /* lifecycle */);
+    }
+
+    public CombinedBiometricStatusPreferenceController(Context context, Lifecycle lifecycle) {
+        this(context, KEY_BIOMETRIC_SETTINGS, lifecycle);
+    }
+
+    public CombinedBiometricStatusPreferenceController(
+            Context context, String key, Lifecycle lifecycle) {
         super(context, key);
         mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
         mFaceManager = Utils.getFaceManagerOrNull(context);
+
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume() {
+        updateStateInternal();
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(KEY_BIOMETRIC_SETTINGS);
+        mPreference = screen.findPreference(mPreferenceKey);
     }
 
     @Override
@@ -77,17 +98,19 @@ public class CombinedBiometricStatusPreferenceController extends
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        updateStateInternal();
+    }
+
+    private void updateStateInternal() {
         // This controller currently is shown if fingerprint&face exist on the device. If this
         // changes in the future, the modalities passed into the below will need to be updated.
-        final RestrictedLockUtils.EnforcedAdmin admin = ParentalControlsUtils
-                .parentConsentRequired(mContext,
-                BiometricAuthenticator.TYPE_FACE | BiometricAuthenticator.TYPE_FINGERPRINT);
-        updateStateInternal(admin);
+        updateStateInternal(ParentalControlsUtils.parentConsentRequired(mContext,
+                BiometricAuthenticator.TYPE_FACE | BiometricAuthenticator.TYPE_FINGERPRINT));
     }
 
     @VisibleForTesting
     void updateStateInternal(@Nullable RestrictedLockUtils.EnforcedAdmin enforcedAdmin) {
-        if (enforcedAdmin != null && mPreference != null) {
+        if (mPreference != null) {
             mPreference.setDisabledByAdmin(enforcedAdmin);
         }
     }

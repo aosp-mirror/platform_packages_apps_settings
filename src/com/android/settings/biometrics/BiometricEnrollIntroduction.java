@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -36,6 +37,7 @@ import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.SetupSkipDialog;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -61,6 +63,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     private TextView mErrorText;
     protected boolean mConfirmingCredentials;
     protected boolean mNextClicked;
+    private boolean mParentalConsentRequired;
 
     @Nullable private PorterDuffColorFilter mIconColorFilter;
 
@@ -137,6 +140,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
      */
     public abstract void onClick(LinkSpan span);
 
+    public abstract @BiometricAuthenticator.Modality int getModality();
+
     protected interface GenerateChallengeCallback {
         void onChallengeGenerated(int sensorId, int userId, long challenge);
     }
@@ -160,7 +165,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mBiometricUnlockDisabledByAdmin = isDisabledByAdmin();
 
         setContentView(getLayoutResource());
-        if (mBiometricUnlockDisabledByAdmin) {
+        mParentalConsentRequired = ParentalControlsUtils.parentConsentRequired(this, getModality())
+                != null;
+        if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
             setHeaderText(getHeaderResDisabledByAdmin());
         } else {
             setHeaderText(getHeaderResDefault());
@@ -284,11 +291,11 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
-            if (resultCode == RESULT_FINISHED || resultCode == RESULT_SKIP
-                    || resultCode == RESULT_TIMEOUT) {
+            if (isResultSkipOrFinished(resultCode)) {
+                handleBiometricResultSkipOrFinished(resultCode, data);
+            } else if (resultCode == RESULT_TIMEOUT) {
                 setResult(resultCode, data);
                 finish();
-                return;
             }
         } else if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
             mConfirmingCredentials = false;
@@ -335,12 +342,33 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
         } else if (requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST) {
             Log.d(TAG, "ENROLL_NEXT_BIOMETRIC_REQUEST, result: " + resultCode);
-            if (resultCode != RESULT_CANCELED) {
+            if (isResultSkipOrFinished(resultCode)) {
+                handleBiometricResultSkipOrFinished(resultCode, data);
+            } else if (resultCode != RESULT_CANCELED) {
                 setResult(resultCode, data);
                 finish();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private static boolean isResultSkipOrFinished(int resultCode) {
+        return resultCode == RESULT_SKIP || resultCode == SetupSkipDialog.RESULT_SKIP
+                || resultCode == RESULT_FINISHED;
+    }
+
+    private void handleBiometricResultSkipOrFinished(int resultCode, @Nullable Intent data) {
+        if (data != null
+                && data.getBooleanExtra(
+                        MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, false)) {
+            getIntent().removeExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE);
+        }
+
+        if (resultCode == RESULT_SKIP) {
+            onEnrollmentSkipped(data);
+        } else if (resultCode == RESULT_FINISHED) {
+            onFinishedEnrolling(data);
+        }
     }
 
     /**
@@ -360,7 +388,16 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     protected void onSkipButtonClick(View view) {
-        setResult(RESULT_SKIP);
+        onEnrollmentSkipped(null /* data */);
+    }
+
+    protected void onEnrollmentSkipped(@Nullable Intent data) {
+        setResult(RESULT_SKIP, data);
+        finish();
+    }
+
+    protected void onFinishedEnrolling(@Nullable Intent data) {
+        setResult(RESULT_FINISHED, data);
         finish();
     }
 
@@ -368,7 +405,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void initViews() {
         super.initViews();
 
-        if (mBiometricUnlockDisabledByAdmin) {
+        if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
             setDescriptionText(getDescriptionResDisabledByAdmin());
         }
     }

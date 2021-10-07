@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Maak kleiner"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Maak groter"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Gebruik outodraai"</string>
-    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"Gesigbespeuring gebruik die voorste kamera om die akkuraatheid van outodraai te verbeter. Prente word nooit geberg of na Google toe gestuur nie.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Kom meer te wete oor outodraaiskerm&lt;/a&gt;"</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Gesigbespeuring gebruik die voorste kamera om die akkuraatheid van outodraai te verbeter. Prente word nooit geberg of na Google toe gestuur nie."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Voorbeeldteks"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Die Wonderlike Towenaar van Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Hoofstuk 11: Die Wonderlike Smaragstad van Oz"</string>
@@ -288,8 +288,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Voeg teks by op sluitskerm"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Aktiveer legstukke"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Gedeaktiveer deur administrateur"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Wys snelsluitopsie"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Wys aan/af-skakelaar-opsie wat Smart Lock, Gesigslot, Vingerafdrukslot en kennisgewings op die sluitskerm afskakel"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Sluit skerm wanneer vertroue verloor word"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"As dit geaktiveer is, sal die toestel sluit wanneer die laaste vertrouensagent vertroue verloor"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Geen"</string>
@@ -345,12 +343,10 @@
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Ek stem in"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Meer"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Ontsluit met jou gesig"</string>
-    <!-- no translation found for security_settings_face_enroll_consent_introduction_title (3942331854413767814) -->
-    <skip />
+    <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Laat Gesigslot toe"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Gebruik jou gesig om te staaf"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Gebruik jou gesig om jou foon te ontsluit, aankope te magtig, of by programme aan te meld."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (866117500419055444) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Laat jou kind toe om sy of haar gesig te gebruik om hul foon te ontsluit of te verifieer dis hy of sy. Dit gebeur wanneer jou kind by programme aanmeld, \'n aankoop goedkeur, en meer"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Gebruik jou gesig om jou foon te ontsluit of aankope goed te keur.\n\nLet wel: Jy kan nie jou gesig gebruik om hierdie toestel te ontsluit nie. Kontak jou organisasie se administrateur vir meer inligting."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Gebruik jou gesig om jou foon te ontsluit, aankope te magtig, of by programme aan te meld"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -358,6 +354,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -384,7 +382,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Vee jou huidige gesigmodel uit om Gesigslot weer op te stel.\n\nJou gesigmodel sal permanent en veilig uitgevee word.\n\nNadat dit uitgevee is, sal jy jou PIN, patroon of wagwoord moet hê om jou foon te ontsluit of vir stawing in programme."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Vee jou huidige gesigmodel uit om Gesigslot weer op te stel.\n\nJou gesigmodel sal permanent en veilig uitgevee word.\n\nNadat dit uitgevee is, sal jy jou vingerafdruk, PIN, patroon of wagwoord moet hê om jou foon te ontsluit of vir stawing in programme."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Gebruik Gesigslot vir"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Vereistes vir Gesigslot"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Wanneer jy Gesigslot gebruik"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Vereis dat oë oop moet wees"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Jou oë moet oop wees om die foon te ontsluit"</string>
@@ -410,16 +407,12 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Stel jou vingerafdruk op"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_consent_introduction_title (2278592030102282364) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Laat vingerafdrukslot toe"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Gebruik jou vingerafdruk"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (6100563481214337377) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (1833139688278350628) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6100563481214337377">"Gebruik jou vingerafdruk om jou foon te ontsluit of te verifieer dis jy, soos wanneer jy by programme aanmeld of \'n aankoop goedkeur."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Laat jou kind toe om sy of haar vingerafdruk te gebruik om hul foon te ontsluit of te verifieer dis hy of sy. Dit gebeur wanneer jou kind by programme aanmeld, \'n aankoop goedkeur, en meer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Jy is in beheer"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_consent_1 (1122676690472680734) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Jy en jou kind is in beheer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Hou in gedagte"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_1" msgid="7817635368506064516">"Die data wat deur vingerafdruk opgeneem word, word veilig geberg en bly altyd net op jou foon. Jy kan jou data enige tyd in Instellings uitvee."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_2" msgid="3507618608004123384">"Jou vingerafdruk sal dalk minder veilig as \'n sterk patroon of PIN wees."</string>
@@ -427,31 +420,21 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Gebruik jou vingerafdruk om jou foon te ontsluit of aankope goed te keur.\n\nLet wel: Jy kan nie jou vingerafdruk gebruik om hierdie toestel te ontsluit nie. Gebruik jou organisasie se administrateur vir meer inligting."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Kanselleer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Nee, dankie"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_skip" msgid="2284740299244691418">"Nee, dankie"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Gaan voort"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Ek stem in"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Slaan oor"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Volgende"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Slaan vingerafdruk oor?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Vingerafdrukopstelling neem net \'n minuut of twee. As jy dit oorslaan, kan jy jou vingerafdruk later in instellings byvoeg."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Wanneer jy dié ikoon sien, moet jy jou vingerafdruk vir stawing gebruik, soos wanneer jy by programme aanmeld of \'n aankoop goedkeur"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Hou in gedagte"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Om jou vingerafdruk te gebruik om jou foon te ontsluit, kan minder veilig as \'n sterk patroon of PIN wees"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Hoe dit werk"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_2 (5909924864816776516) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2 (3493356605815124807) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (4729142136478078228) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (5908959250804145997) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Vingerafdrukslot skep \'n unieke model van jou vingerafdruk om te verifieer dis jy. Jy sal jou vingerafdruk uit verskillende posisies afneem om hierdie vingerafdrukmodel tydens opstelling te skep."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Vingerafdrukslot skep \'n unieke model van jou kind se vingerafdruk om te verifieer dis hy of sy. Jou kind sal sy of haar vingerafdruk uit verskillende posisies afneem om hierdie vingerafdrukmodel tydens die opstelling te skep."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Wanneer jy Pixel Imprint gebruik, word prente gebruik om jou vingerafdrukmodel op te dateer. Prente wat gebruik word om jou vingerafdrukmodel te skep, word nooit geberg nie. Die vingerafdrukmodel word egter veilig op jou foon geberg en verlaat nooit die foon nie. Alle verwerking vind veilig op jou foon plaas."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Wanneer jou kind Pixel Imprint gebruik, word prente gebruik om sy of haar vingerafdrukmodel op te dateer. Prente wat gebruik word om jou kind se vingerafdrukmodel te skep, word nooit geberg nie. Die vingerafdrukmodel word egter veilig op die foon geberg en verlaat nooit die foon nie. Alle verwerking vind veilig op die foon plaas."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Jy kan enige tyd in Instellings jou vingerafdrukprente en -model uitvee of Vingerafdrukslot afskakel. Vingerafdrukprente en -modelle word veilig op jou foon geberg totdat jy hulle uitvee."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (4983770600405797515) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Jy en jou kind kan enige tyd in Instellings sy of haar vingerafdrukprente en -model uitvee of Vingerafdrukslot afskakel. Vingerafdrukprente en -modelle word op die foon geberg totdat hulle uitgevee word."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Jou foon kan ontsluit word wanneer jy nie bedoel om dit te doen nie, soos as iemand dit teen jou vinger druk."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (8356551505082794682) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Jou kind se foon kan ontsluit word wanneer hulle nie bedoel om dit te doen nie, soos as iemand dit teen sy of haar vinger druk."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Verander elke keer die posisie van jou vinger so effens"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Maak die ikoon met die middel van jou vingerafdruk toe"</string>
@@ -460,8 +443,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Lig jou vinger nadat jy \'n vibrasie gevoel het"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Beweeg na waar die lig sagter is en probeer weer"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Jy het die maksimum aantal pogings bereik"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (1709655966777714761) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="1709655966777714761">"Gebruik jou vingerafdruk om jou foon te ontsluit of te verifieer dis jy, soos wanneer jy aanmeld by programme.\n\n"<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Gesigslot en vingerafdrukslot"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tik om op te stel"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gesig en vingerafdrukke is bygevoeg"</string>
@@ -471,6 +453,8 @@
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Gebruik gesig en vingerafdruk vir"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Ontsluit tans jou foon"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Stawing in programme"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Gee die foon terug vir jou ouer"</string>
+    <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Slaan skermslot oor?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Toestelbeskermingkenmerke sal nie aangeskakel word nie. Jy sal nie ander mense kan keer om hierdie tablet te gebruik as dit verloor, gesteel of teruggestel word nie."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Toestelbeskermingkenmerke sal nie aangeskakel word nie. Jy sal nie ander mense kan keer om hierdie toestel te gebruik as dit verloor, gesteel of teruggestel word nie."</string>
@@ -500,51 +484,53 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Nog een keer"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Volg die vingerafdrukikoon"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Hou aan om jou vinger op te lig om die verskillende dele van jou vingerafdruk by te voeg"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Raak en hou elke keer wanneer die vingerafdrukikoon skuif. Dit help om jou volle vingerafdruk vas te vang."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Dit help om jou volle vingerafdruk vas te vang"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Raak en hou elke keer wanneer die vingerafdrukikoon skuif. Dit help om meer van jou vingerafdruk vas te vang."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Plaas jou vingertop op die sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Plaas laaste die kante van jou vinger"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Plaas die kant van jou vingerafdruk op die sensor en hou; ruil dan om na die ander kant"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dit help om meer van jou vingerafdruk vas te vang"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Skryf tans vingerafdruk in <xliff:g id="PERCENTAGE">%d</xliff:g> persent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Vingerafdruk bygevoeg"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_message (3469254005423998143) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Jy kan nou jou vingerafdruk gebruik om jou foon te ontsluit of te verifieer dis jy, soos wanneer jy by programme aanmeld"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Doen dit later"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Slaan vingerafdrukopstelling oor?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Jy het gekies om jou vingerafdruk te gebruik as een manier om jou foon te ontsluit. As jy dit nou oorslaan, sal jy dit later moet opstel. Dit neem net \'n minuut of wat om op te stel."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"\'n PIN beskerm jou tablet as dit verlore raak of gesteel word"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"\'n Patroon beskerm jou tablet as dit verlore raak of gesteel word"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"\'n Wagwoord beskerm jou tablet as dit verlore raak of gesteel word"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"\'n PIN beskerm jou toestel as dit verlore raak of gesteel word"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"\'n Patroon beskerm jou toestel as dit verlore raak of gesteel word"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"\'n Wagwoord beskerm jou toestel as dit verlore raak of gesteel word"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"\'n PIN beskerm jou foon as dit verlore raak of gesteel word"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"\'n Patroon beskerm jou foon as dit verlore raak of gesteel word"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"\'n Wagwoord beskerm jou foon as dit verlore raak of gesteel word"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"\'n PIN word vereis om Vingerafdrukslot op te stel.\n\n\'n PIN beskerm jou tablet as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"\'n Patroon word vereis om Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm jou tablet as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"\'n Wagwoord word vereis om Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm jou tablet as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"\'n PIN word vereis om Vingerafdrukslot op te stel.\n\n\'n PIN beskerm jou toestel as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"\'n Patroon word vereis om Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm jou toestel as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"\'n Wagwoord word vereis om Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm jou toestel as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"\'n PIN word vereis om Vingerafdrukslot op te stel.\n\n\'n PIN beskerm jou foon as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"\'n Patroon word vereis om Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm jou foon as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"\'n Wagwoord word vereis om Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm jou foon as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"\'n PIN word vereis om Gesigslot op te stel.\n\n\'n PIN beskerm jou tablet as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"\'n Patroon word vereis om Gesigslot op te stel.\n\n\'n Patroon beskerm jou tablet as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"\'n Wagwoord word vereis om Gesigslot op te stel.\n\n\'n Wagwoord beskerm jou tablet as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"\'n PIN word vereis om Gesigslot op te stel.\n\n\'n PIN beskerm jou toestel as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"\'n Patroon word vereis om Gesigslot op te stel.\n\n\'n Patroon beskerm jou toestel as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"\'n Wagwoord word vereis om Gesigslot op te stel.\n\n\'n Wagwoord beskerm jou toestel as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"\'n PIN word vereis om Gesigslot op te stel.\n\n\'n PIN beskerm jou foon as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"\'n Patroon word vereis om Gesigslot op te stel.\n\n\'n Patroon beskerm jou foon as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"\'n Wagwoord word vereis om Gesigslot op te stel.\n\n\'n Wagwoord beskerm jou foon as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"\'n PIN word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n PIN beskerm jou tablet as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"\'n Patroon word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm jou tablet as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"\'n Wagwoord word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm jou tablet as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"\'n PIN word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n PIN beskerm jou toestel as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"\'n Patroon word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm jou toestel as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"\'n Wagwoord word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm jou toestel as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"\'n PIN word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n PIN beskerm jou foon as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"\'n Patroon word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm jou foon as dit velore raak of gesteel word."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"\'n Wagwoord word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm jou foon as dit velore raak of gesteel word."</string>
+    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"\'n PIN beskerm die tablet as dit verloor of gesteel word"</string>
+    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"\'n Patroon beskerm die tablet as dit verloor of gesteel word"</string>
+    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"\'n Wagwoord beskerm die tablet as dit verloor of gesteel word"</string>
+    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"\'n PIN beskerm die toestel as dit verloor of gesteel word"</string>
+    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"\'n Patroon beskerm die toestel as dit verloor of gesteel word"</string>
+    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"\'n Wagwoord beskerm die toestel as dit verloor of gesteel word"</string>
+    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"\'n PIN beskerm die foon as dit verloor of gesteel word"</string>
+    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"\'n Patroon beskerm die foon as dit verloor of gesteel word"</string>
+    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"\'n Wagwoord beskerm die foon as dit verloor of gesteel word"</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"\'n PIN word vereis om Vingerafdrukslot op te stel.\n\n\'n PIN beskerm die tablet as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"\'n Patroon word vereis om Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm die tablet as dit verloor of gesteel word."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"\'n Wagwoord word vereis om Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm die tablet as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"\'n PIN word vereis om Vingerafdrukslot op te stel.\n\n\'n PIN beskerm die toestel as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"\'n Patroon word vereis om Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm die toestel as dit verloor of gesteel word."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"\'n Wagwoord word vereis om Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm die toestel as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"\'n PIN word vereis om Vingerafdrukslot op te stel.\n\n\'n PIN beskerm die foon as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"\'n Patroon word vereis om Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm die foon as dit verloor of gesteel word."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"\'n Wagwoord word vereis om Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm die foon as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"\'n PIN word vereis om Gesigslot op te stel.\n\n\'n PIN beskerm die tablet as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"\'n Patroon word vereis om Gesigslot op te stel.\n\n\'n Patroon beskerm die tablet as dit verloor of gesteel word."</string>
+    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"\'n Wagwoord word vereis om Gesigslot op te stel.\n\n\'n Wagwoord beskerm die tablet as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"\'n PIN word vereis om Gesigslot op te stel.\n\n\'n PIN beskerm die toestel as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"\'n Patroon word vereis om Gesigslot op te stel.\n\n\'n Patroon beskerm die toestel as dit verloor of gesteel word."</string>
+    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"\'n Wagwoord word vereis om Gesigslot op te stel.\n\n\'n Wagwoord beskerm die toestel as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"\'n PIN word vereis om Gesigslot op te stel.\n\n\'n PIN beskerm die foon as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"\'n Patroon word vereis om Gesigslot op te stel.\n\n\'n Patroon beskerm die foon as dit verloor of gesteel word."</string>
+    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"\'n Wagwoord word vereis om Gesigslot op te stel.\n\n\'n Wagwoord beskerm die foon as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"\'n PIN word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n PIN beskerm die tablet as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"\'n Patroon word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm die tablet as dit verloor of gesteel word."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"\'n Wagwoord word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm die tablet as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"\'n PIN word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n PIN beskerm die toestel as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"\'n Patroon word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm die toestel as dit verloor of gesteel word."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"\'n Wagwoord word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm die toestel as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"\'n PIN word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n PIN beskerm die foon as dit verloor of gesteel word."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"\'n Patroon word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Patroon beskerm die foon as dit verloor of gesteel word."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"\'n Wagwoord word vereis om Gesigslot en Vingerafdrukslot op te stel.\n\n\'n Wagwoord beskerm die foon as dit verloor of gesteel word."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Slaan PIN-opstelling oor?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Slaan opstelling vir PIN en gesig oor?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Slaan opstelling vir PIN en vingerafdruk oor?"</string>
@@ -569,6 +555,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Jy kan jou vingerafdruk nie net gebruik om jou foon te ontsluit nie, maar ook om aankope en programtoegang te magtig. "<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Die skermslotopsie is gedeaktiveer. Kontak jou organisasie se administrateur om meer te wete te kom. "<annotation id="admin_details">"Nog besonderhede"</annotation>\n\n"Jy kan steeds jou vingerafdruk gebruik om aankope en programtoegang te magtig. "<annotation id="url">"Kom meer te wete"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lig vinger op en raak sensor dan weer"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Kan nie vingerafdruksensor gebruik nie. Besoek \'n verskaffer wat herstelwerk doen"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Jy kan tot <xliff:g id="COUNT">%d</xliff:g> vingerafdrukke byvoeg"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Jy het die maksimum aantal vingerafdrukke bygevoeg"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan nie nog vingerafdrukke byvoeg nie"</string>
@@ -576,10 +563,8 @@
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Verwyder \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Wil jy hierdie vingerafdruk uitvee?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Dit vee die vingerafdrukprente en -model uit wat met \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" geassosieer word en op jou toestel geberg is"</string>
-    <!-- no translation found for fingerprint_last_delete_message (7860374760549404410) -->
-    <skip />
-    <!-- no translation found for fingerprint_last_delete_message_profile_challenge (4104208067277655068) -->
-    <skip />
+    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Jy sal nie jou vingerafdruk kan gebruik om jou foon te ontsluit of in programme te verifieer dis jy nie."</string>
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Jy sal nie jou vingerafdruk kan gebruik om jou werkprofiel te ontsluit, aankope te magtig of by werkprogramme aan te meld nie."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, verwyder"</string>
     <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Gesigslot en Vingerafdrukslot"</string>
     <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Tik om op te stel"</string>
@@ -1873,7 +1858,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth-opsporing"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Laat programme en dienste toe om enige tyd na toestelle in die omtrek te soek, selfs wanneer Bluetooth af is. Dit kan byvoorbeeld gebruik word om ligginggegronde kenmerke en dienste te verbeter."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Liggingdienste"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Liggingdienste"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Liggingdienste"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Liggingdienste vir werk"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Gebruik ligging om tydsone te stel"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Toestelligging word benodig"</string>
@@ -1930,6 +1915,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Stel \'n werk-PIN"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Stel \'n patroon"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Stel \'n werkpatroon"</string>
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Stel \'n wagwoord om die foon te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Stel \'n PIN om die foon te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Stel \'n patroon om die foon te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Stel \'n wagwoord om die tablet te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Stel \'n PIN om die tablet te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Stel \'n patroon om die tablet te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Stel \'n wagwoord om die toestel te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Stel \'n PIN om die toestel te ontsluit vir bykomende sekuriteit"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Stel \'n patroon om die toestel te ontsluit vir bykomende sekuriteit"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Stel wagwoord vir vingerafdruk"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Stel patroon vir vingerafdruk"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Stel PIN vir sekuriteit"</string>
@@ -1952,9 +1946,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Stel wagwoord om Gesigslot te gebruik"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Stel patroon om Gesigslot te gebruik"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Stel PIN om Gesigslot te gebruik"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"Stel wagwoord om biometrie te gebruik"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"Stel patroon om biometrie te gebruik"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"Stel PIN om biometrie te gebruik"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Stel \'n wagwoord om gesig of vingerafdruk te gebruik"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Stel \'n patroon om gesig of vingerafdruk te gebruik"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Stel \'n PIN om gesig of vingerafdruk te gebruik"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Jou wagwoord vergeet?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Jou patroon vergeet?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Jou PIN vergeet?"</string>
@@ -2346,8 +2340,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Tik op die toeganklikheidknoppie <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> aan die onderkant van jou skerm.\n\nRaak en hou die toeganklikheidknoppie om tussen kenmerke te wissel."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Swiep met 2 vingers van die onderkant van die skerm af op.\n\nSwiep op met 2 vingers en hou om tussen kenmerke te wissel."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Swiep met 3 vingers van die onderkant van die skerm af op.\n\nSwiep op met 3 vingers en hou om tussen kenmerke te wissel."</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_floating (4459254227203203324) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Meer opsies"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Kom meer te wete oor <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Hou volumesleutels in"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"hou volumesleutels"</string>
@@ -2367,8 +2360,7 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Toeganklikheidsknoppie en -gebaar"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Gebruik tans toeganklikheidsknoppie. Die gebaar is nie beskikbaar met 3-knoppienavigasie nie."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Kry vinnig toegang tot toeganklikheidskenmerke"</string>
-    <!-- no translation found for accessibility_button_gesture_description (2717632658372117656) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Kry vinnig toegang tot toeganklikheidskenmerke op enige skerm.\n\nGaan na toeganklikheidsinstellings en kies \'n kenmerk om te begin. Tik op die kortpad en kies die toeganklikheidsknoppie.\n\nSkakel oor na 2-knoppienavigasie of 3-knoppienavigasie om eerder die toeganklikheidsknoppie in die navigasiebalk te gebruik."</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Kry van enige skerm af vinnig toegang tot toeganklikheidskenmerke. \n\nGaan na toeganklikheidinstellings en kies \'n kenmerk om te begin. Tik op die kortpad en kies die toeganklikheidknoppie."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Gebruik knoppie of gebaar"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ligging"</string>
@@ -2553,22 +2545,22 @@
     <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"ligsensitiwiteit, fotofobie, donkertema, migraine, hoofpyn, leesmodus, nagmodus, verlaag helderheid, witpunt"</string>
     <string name="keywords_accessibility" msgid="4263443239404659143">"Gebruiksgemak, toegangsgemak, bystand, ondersteunend"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"Venstervergrootglas, zoem, vergroting, swak sig, vergroot, maak groter"</string>
-    <string name="keywords_talkback" msgid="5563641756576863139">"Skermleser, stembeskrywing, stembystand, blind, swak sig, TTS, teks na spraak, gesproke terugvoer"</string>
+    <string name="keywords_talkback" msgid="2816435437095102527"></string>
     <string name="keywords_live_caption" msgid="1667203998080567556">"Onderskrifte, onderskrifte, CC, kitstranskripsie, hardhorend, gehoorverlies, CART, spraak-na-teks, onderskrifte"</string>
-    <string name="keywords_live_transcribe" msgid="9139708749952089372">"Onderskrifte, onderskrifte, CC, intydse onderskrifte, hardhorend, gehoorverlies, CART, spraak-na-teks, onderskrifte"</string>
-    <string name="keywords_sound_notifications" msgid="4039008340786330887">"Kennisgewings, hardhorend, gehoorverlies, stel in kennis"</string>
-    <string name="keywords_sound_amplifier" msgid="921848808218956694">"PSAP, versterk, klankversterker, hardhorend, gehoorverlies, versterking"</string>
+    <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
+    <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
+    <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
     <string name="keywords_display_size" msgid="5286419615221231518">"skermgrootte, groot skerm"</string>
     <string name="keywords_bold_text" msgid="6257418169207099589">"Hoë kontras, swak sig, vetdruklettertipe, vetdruk"</string>
-    <string name="keywords_select_to_speak" msgid="7701037476608073886">"Hoor teks, lees hardop, lees op skerm, skermleser"</string>
+    <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"verstel kleur"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"maak skerm donker, maak skerm lig"</string>
-    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"motories, kitskieslys, bystandskieslys, raak, handvaardigheid"</string>
-    <string name="keywords_switch_access" msgid="8016330125790412167">"motories, skakelaar, hand, AT, bystandtegnologie, verlamming, ALS, skandering, stapskandering"</string>
+    <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
+    <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"motories, muis"</string>
     <string name="keywords_hearing_aids" msgid="524979615168196199">"hardhorend, gehoorverlies"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"hardhorend, gehoorverlies, onderskrifte, telesetter, TTY"</string>
-    <string name="keywords_voice_access" msgid="4486056790014652334">"stem, stembeheer, motories, hand, mikrofoon, dikteer, praat, beheer"</string>
+    <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="print_settings" msgid="8519810615863882491">"Druk"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Af"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -2626,8 +2618,8 @@
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Beperk batterygebruik terwyl dit op die agtergrond is. Program sal dalk nie werk soos verwag nie. Kennisgewings kan vertraag word."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"\'n Program se werkverrigting kan geraak word as jy verander hoe dit jou battery gebruik."</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Hierdie program vereis <xliff:g id="STATE">%1$s</xliff:g> batterygebruik."</string>
-    <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"onbeperk"</string>
-    <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"geoptimeer"</string>
+    <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"onbeperkte"</string>
+    <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"geoptimeerde"</string>
     <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"Kom meer te wete oor batterygebruikopsies"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Skermgebruik sedert battery volgelaai is"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Batterygebruik sedert dit vol gelaai is"</string>
@@ -2676,9 +2668,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Sien programme met die hoogste gebruik"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laaiproses word tydelik beperk"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Om jou battery te spaar. Kom meer te wete."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Jou foon is meer as normaalweg gebruik. Jou battery kan gouer as verwag afloop.\n\nTopprogramme volgens batterygebruik:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Jou tablet is meer as normaalweg gebruik. Jou battery kan gouer as verwag afloop.\n\nTopprogramme volgens batterygebruik:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Jou toestel is meer as normaalweg gebruik. Jou battery kan gouer as verwag afloop.\n\nTopprogramme volgens batterygebruik:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Jy het jou foon meer as gewoonlik gebruik en daarom sal jou battery dalk gouer as normaalweg pap word.\n\nProgramme wat die meeste batterykrag gebruik:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Jy het jou tablet meer as gewoonlik gebruik en daarom sal jou battery dalk gouer as normaalweg pap word.\n\nProgramme wat die meeste batterykrag gebruik:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Jy het jou toestel meer as gewoonlik gebruik en daarom sal jou battery dalk gouer as normaalweg pap word.\n\nProgramme wat die meeste batterykrag gebruik:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Sluit hoëkrag-agtergrondaktiwiteit in"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="other">Beperk %1$d programme</item>
@@ -2954,6 +2946,8 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> is nie veilig nie"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Aanpasbare konnektiwiteit"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Verleng die batterylewe en verbeter die toestel se werkverrigting deur jou netwerkverbindings outomaties te bestuur"</string>
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Aan"</string>
+    <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Af"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Eiebewysberging"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installeer \'n sertifikaat"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Installeer sertifikate uit berging"</string>
@@ -2976,7 +2970,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"VPN-/programgebruikersertifikaat"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi-sertifikaat"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Jou data sal nie privaat wees nie"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"CA-sertifikate word deur webwerwe, programme en VPN\'e vir enkripsie gebruik. Installeer net CA-sertifikate vanaf organisasies wat jy vertrou. \n\n As jy \'n CA-sertifikaat installeer, kan die sertifikaateienaar dalk toegang kry tot jou data, soos wagwoorde of kredietkaartbesonderhede, vanaf webwerwe wat jy besoek of programme wat jy gebruik – selfs al is jou data geënkripteer."</string>
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"CA-sertifikate word deur webwerwe, programme en VPN\'e vir enkripsie gebruik. Installeer net CA-sertifikate vanaf organisasies wat jy vertrou. \n\nAs jy \'n CA-sertifikaat installeer, kan die sertifikaateienaar dalk toegang kry tot jou data, soos wagwoorde of kredietkaartbesonderhede, vanaf webwerwe wat jy besoek of programme wat jy gebruik – selfs al is jou data geënkripteer."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Moenie installeer nie"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Installeer tog"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Sertifikaat is nie geïnstalleer nie"</string>
@@ -2989,7 +2983,9 @@
     <string name="no_certificate_management_app" msgid="3025739370424406717">"Geen"</string>
     <string name="certificate_management_app_description" msgid="8507306554200869005">"Sertifikate sal jou verifieer wanneer jy die programme en URL\'e hieronder gebruik"</string>
     <string name="uninstall_certs_credential_management_app" msgid="4945883254446077354">"Deïnstalleer sertifikate"</string>
-    <string name="remove_credential_management_app" msgid="6879631067380232928">"Verwyder"</string>
+    <string name="remove_credential_management_app" msgid="6089291496976812786">"Verwyder program"</string>
+    <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Verwyder hierdie program?"</string>
+    <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Hierdie program sal nie sertifikate bestuur nie, maar dit sal op jou toestel bly. Enige sertifikate wat deur die program geïnstalleer is, sal gedeïnstalleer word."</string>
     <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
       <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> URL\'e</item>
       <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> URL</item>
@@ -3266,7 +3262,7 @@
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"Gebruiker"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Deaktiveer"</string>
     <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"Aktiveer"</string>
-    <string name="trusted_credentials_remove_label" msgid="8975881053042174913">"Verwyder"</string>
+    <string name="trusted_credentials_remove_label" msgid="8296330919329489422">"Deïnstalleer"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"Vertrou"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Aktiveer die stelsel se CA-sertifikaat?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Deaktiveer die stelsel se CA-sertifikaat?"</string>
@@ -3524,7 +3520,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi, wi-fi, oproep, bel tans"</string>
     <string name="keywords_display" msgid="874738809280751745">"skerm, raakskerm"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"dowwe skerm, raakskerm, battery, helder"</string>
-    <string name="keywords_display_night_display" msgid="1132588285544830670">"demp skerm, nag, tint, nagskof, helderheid, skermkleur, kleur, ligsensitiwiteit, fotofobie, maak donkerder, maak donker, donkermodus, migraine"</string>
+    <string name="keywords_display_night_display" msgid="4711054330804250058">"dowwe skerm, nag, tint, nagskof, helderheid, skermkleur, kleur, kleur"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"agtergrond, personaliseer, pasmaak skerm"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"teksgrootte"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"projek, saai uit, Skermweerspieëling, Skermdeling, weerspieëling, deel skerm, skermuitsending"</string>
@@ -3569,7 +3565,7 @@
     <string name="keywords_sim_status" msgid="8784456547742075508">"netwerk, selnetwerkstaat, diensstaat, seinsterkte, selnetwerktipe, swerwing, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"reeksnommer, hardewareweergawe"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"android-sekuriteitregstellingvlak, basisband-weergawe, kernweergawe"</string>
-    <string name="keywords_dark_ui_mode" msgid="6465231409128452489">"tema, lig, donker, modus"</string>
+    <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"tema, lig, donker, modus, ligsensitiwiteit, fotofobie, maak donkerder, maak donker, donkermodus, migraine"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"donker tema"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"fout"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Stemmingvertoning, sluitskermvertoning"</string>
@@ -3753,11 +3749,9 @@
     <string name="conversation_notifs_category" msgid="2549844862379963273">"Gesprek"</string>
     <string name="recent_notifications" msgid="1105631022180160436">"Onlangs gestuur"</string>
     <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"Sien alles van afgelope 7 dae"</string>
-    <!-- no translation found for general_notification_header (3669031068980713359) -->
-    <skip />
+    <string name="general_notification_header" msgid="3669031068980713359">"Bestuur"</string>
     <string name="app_notification_field" msgid="3858667320444612716">"Programinstellings"</string>
-    <!-- no translation found for app_notification_field_summary (5981393613897713471) -->
-    <skip />
+    <string name="app_notification_field_summary" msgid="5981393613897713471">"Beheer kennisgewings van individuele programme af"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Algemeen"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Werkkennisgewings"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Aanpasbare kennisgewings"</string>
@@ -3912,8 +3906,7 @@
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nooit"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Toestel- en programkennisgewings"</string>
-    <!-- no translation found for manage_notification_access_summary (2907135226478903997) -->
-    <skip />
+    <string name="manage_notification_access_summary" msgid="2907135226478903997">"Beheer watter programme en toestelle kennisgewings kan lees"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Toegang tot werkprofielkennisgewings is geblokkeer"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Programme kan nie kennisgewings lees nie"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="3703008881487586312">
@@ -4070,7 +4063,7 @@
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Skedule skakel af wanneer wekker lui"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Moenie Steur Nie-gedrag"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Gebruik verstekinstellings"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Skep gepasmaakte instellings vir hierdie skedule"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Skep gepasmaakte instellings vir dié skedule"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Vir \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -4190,6 +4183,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Voer admin-PIN in"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Aan"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Af"</string>
+    <string name="nfc_setting_on" msgid="7701896496026725772">"Aan"</string>
+    <string name="nfc_setting_off" msgid="7142103438532732309">"Af"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Aan"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Af"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Programvasspeld"</string>
@@ -4414,7 +4409,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Lêeroordrag"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Dra lêers na \'n ander toestel oor"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Transkodeer uitgevoerde media"</string>
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Skakel video\'s om na AVC"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"Video\'s sal op meer mediaspelers speel, maar die gehalte kan swakker wees"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Dra foto\'s of lêers oor as MTP nie gesteun word nie (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-verbinding"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4779,8 +4775,8 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope-spoor"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensors Af"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Werkprofielinstellings"</string>
-    <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"Kontaksoektog"</string>
-    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Laat kontaksoektogte deur jou organisasie toe om bellers en kontakte te identifiseer"</string>
+    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Soek werkgidskontakte in persoonlike programme"</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Jou IT-admin sal dalk jou soektogte en inkomende oproepe kan sien"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Kruisprofielkalender"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Wys werkgeleenthede op jou persoonlike kalender"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4842,22 +4838,16 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Dubbeltik om na foon te kyk"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Dubbeltik om na tablet te kyk"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Dubbeltik om na toestel te kyk"</string>
-    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Swiep vir kennisgewings"</string>
-    <string name="swipe_bottom_to_notifications_summary" msgid="5222014960019273801">"Swiep af na die onderkant van die skerm om jou kennisgewings te wys.\nJy kan nie eenhandmodus gebruik wanneer hierdie kenmerk aangeskakel is nie."</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Eenhandmodus"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Gebruik eenhandmodus"</string>
-    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Verlaat wanneer jy tussen programme wissel"</string>
-    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Uitteltyd"</string>
-    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 sekondes"</string>
-    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 sekondes"</string>
-    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 sekondes"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"bereikbaarheid"</string>
-    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Swiep af om"</string>
+    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Swiep af om die volgende te doen:"</string>
+    <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Gebruik die kortpad om"</string>
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Swiep af van die onderkant van die skerm af om eenhandmodus te gebruik. Maak seker dat gebaarnavigasie in stelselnavigasie-instellings aangeskakel is as jy hierdie kenmerk wil gebruik."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Trek skerm na binne jou bereik"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Die bokant van die skerm sal skuif om binne bereik van jou duim te wees."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Wys kennisgewings"</string>
-    <string name="one_handed_action_show_notification_summary" msgid="114988229079950849">"Kennisgewing en instellings sal verskyn."</string>
+    <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Kennisgewings en instellings sal verskyn."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Dubbeltik op jou skerm om na die horlosie, kennisgewings en ander inligting te kyk."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Tel foon op om te kyk"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Tel op om na tablet te kyk"</string>
@@ -5088,6 +5078,10 @@
     <string name="unknown_unavailability_setting_summary" msgid="9060213910510360231">"Instelling is onbeskikbaar"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Rekening"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Toestelnaam"</string>
+    <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Basiese inligting"</string>
+    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Wetlik en regulerend"</string>
+    <string name="my_device_info_device_details_category_title" msgid="4848438695638348680">"Toestelbesonderhede"</string>
+    <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Toestelidentifiseerders"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wi-Fi-beheer"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Laat program toe om Wi-Fi te beheer"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Laat hierdie program toe om Wi-Fi aan of af te skakel, Wi-Fi-netwerke te soek en aan hulle te koppel, netwerke by te voeg en te verwyder, en om \'n slegsplaaslike warmkol te begin"</string>
@@ -5118,6 +5112,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Doen niks nie"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Vibreer"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Demp"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"As jy wil aktiveer, moet jy eers \"Druk en Hou aan/af-skakelaar\" na die aan/af-kieslys verander."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Netwerkbesonderhede"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Programme op jou foon kan jou toestelnaam sien. Ander mense sal dit dalk ook kan sien wanneer jy aan Bluetooth-toestelle koppel, aan \'n wi-fi-netwerk koppel of \'n wi-fi-warmkol opstel."</string>
     <string name="devices_title" msgid="649715719278562515">"Toestelle"</string>
@@ -5290,8 +5285,7 @@
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Stel jou ander SIM op"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Kies jou aktiewe SIM of gebruik tegelyk 2 SIM\'s"</string>
     <string name="choose_sim_title" msgid="4804689675237716286">"Kies \'n nommer om te gebruik"</string>
-    <!-- no translation found for choose_sim_text (4356662002583501647) -->
-    <skip />
+    <string name="choose_sim_text" msgid="4356662002583501647">"{count,plural, =1{1 nommer is op hierdie toestel beskikbaar, maar net een kan op \'n slag gebruik word}=2{2 nommers is op hierdie toestel beskikbaar, maar net een kan op \'n slag gebruik word}other{# nommers is op hierdie toestel beskikbaar, maar net een kan op \'n slag gebruik word}}"</string>
     <string name="choose_sim_activating" msgid="9035902671985449448">"Aktiveer tans <xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Kan nie nou onmiddellik geaktiveer word nie"</string>
     <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Onbekende nommer"</string>
@@ -5361,7 +5355,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"GAAN VOORT"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NEE, DANKIE"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Ligging"</string>
-    <string name="wfc_disclaimer_location_desc_text" msgid="2799241640320172899">"Jou diensverskaffer kan dalk jou ligging verkry om hierdie diens te verskaf.\n\nGaan jou diensverskaffer se privaatheidsbeleid na."</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Jou diensverskaffer kan jou ligging bepaal wanneer jy hierdie diens vir noodoproepe gebruik.\n\nKry besonderhede op jou diensverskaffer se privaatheidsbeleid."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Jy kan toegang tot enige oorblywende tyd of data verloor. Vra jou verskaffer voordat jy dit verwyder."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"inhoudvaslegging, programinhoud"</string>
     <string name="content_capture" msgid="868372905432812238">"Programinhoud"</string>
@@ -5397,12 +5391,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"toestelkontroles"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kaarte en passe"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kaarte en passe"</string>
-    <string name="power_menu_setting_name" msgid="7843519296976254765">"Aan/af-kieslys"</string>
-    <string name="power_menu_setting_title" msgid="7716546106215378956">"Aan/af-skakelaarkieslys"</string>
-    <string name="power_menu_none" msgid="4620640577918731270">"Moenie enige inhoud wys nie"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"Druk en hou aan/af-skakelaar"</string>
+    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Druk en hou vir die Assistent"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Druk en hou vir die aan/af-kieslys"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Druk en hou is gedeaktiveer"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Om dit te gebruik, moet jy eers \'n skermslot stel"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Hou in vir Assistent"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Aktiveer die Assistent deur die aan/af-skakelaar te hou"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Aan/af- en noodkieslys:\nDruk tegelyk aan/af-skakelaar en volume harder."</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Keer dat dit lui:\nKortpad in die volumekieslys beskikbaar."</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Wys beursie"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Laat toegang tot beursie vanaf sluitskerm en kitsinstellings toe"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Wys toestelkontroles"</string>
@@ -5475,15 +5472,12 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Gekoppel"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Geen verbinding nie"</string>
-    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Internet sal nie outomaties koppel nie"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Mobiele data sal nie outomaties koppel nie"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Geen ander netwerke beskikbaar nie"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"Geen netwerke beskikbaar nie"</string>
-    <!-- no translation found for mobile_data_disable_title (8438714772256088913) -->
-    <skip />
-    <!-- no translation found for mobile_data_disable_message (7829414836454769970) -->
-    <skip />
-    <!-- no translation found for mobile_data_disable_message_default_carrier (4449469407705838612) -->
-    <skip />
+    <string name="mobile_data_disable_title" msgid="8438714772256088913">"Skakel mobiele data af?"</string>
+    <string name="mobile_data_disable_message" msgid="7829414836454769970">"Jy sal nie deur <xliff:g id="CARRIER">%s</xliff:g> toegang tot data of die internet hê nie. Internet sal net deur wi-fi beskikbaar wees."</string>
+    <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"jou diensverskaffer"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nie beskikbaar nie omdat slaaptydmodus aan is"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Terugstelling van kennisgewingbelangrikheid is voltooi."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Programme"</string>
@@ -5506,7 +5500,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Gebruik Wi-Fi-warmkol"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Gebruik programvasspeld"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Gebruik ontwikkelaaropsies"</string>
-    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"Gebruik verstekdrukdiens"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Gebruik drukdiens"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Gebruik veelvuldige gebruikers"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Gebruik draadlose ontfouting"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Gebruik grafikadrywervoorkeure"</string>

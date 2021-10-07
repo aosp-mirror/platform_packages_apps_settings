@@ -43,9 +43,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-24dp"
-            android:layout_marginBottom="4dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 style="@style/SudContentIllustration"
@@ -66,15 +64,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/security_settings_face_enroll_introduction_info_title"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="20sp"/>
+                style="@style/BiometricEnrollIntroTitle"
+                android:text="@string/security_settings_face_enroll_introduction_info_title" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="24dp">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/icon_glasses"
@@ -88,15 +84,13 @@
                     android:id="@+id/info_message_glasses"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp"/>
+                    style="@style/BiometricEnrollIntroMessage" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="24dp">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/icon_looking"
@@ -110,56 +104,57 @@
                     android:id="@+id/info_message_looking"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp"/>
+                    style="@style/BiometricEnrollIntroMessage" />
             </LinearLayout>
 
-            <Space
+            <LinearLayout
+                android:id="@+id/info_row_require_eyes"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/icon_require_eyes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_settings_24dp"/>
+                <Space
+                    android:layout_width="16dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/info_message_require_eyes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/BiometricEnrollIntroMessage" />
+            </LinearLayout>
 
             <!-- How it works -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/security_settings_face_enroll_introduction_how_title"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20sp"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="24dp"/>
+                style="@style/BiometricEnrollIntroTitle"
+                android:text="@string/security_settings_face_enroll_introduction_how_title" />
 
             <TextView
                 android:id="@+id/how_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="16sp"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="24dp"/>
+                style="@style/BiometricEnrollIntroMessage" />
 
             <!-- You're in control -->
             <TextView
                 android:id="@+id/title_in_control"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="20sp"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="24dp"/>
+                style="@style/BiometricEnrollIntroTitle" />
 
             <TextView
                 android:id="@+id/message_in_control"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="16sp"/>
+                style="@style/BiometricEnrollIntroMessage"
+                android:paddingBottom="0dp" />
 
         </LinearLayout>
 

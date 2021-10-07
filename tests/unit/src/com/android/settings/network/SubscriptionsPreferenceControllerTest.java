@@ -42,6 +42,8 @@ import android.net.NetworkCapabilities;
 import android.os.Looper;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.AccessNetworkConstants;
+import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
@@ -430,7 +432,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), true, true,
-                TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
+                true, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
@@ -451,7 +453,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
-                TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
+                true, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(true));
@@ -476,7 +478,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, false,
-                TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
+                true, ServiceState.STATE_IN_SERVICE);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
 
@@ -496,7 +498,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
-                TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
+                true, ServiceState.STATE_IN_SERVICE);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
@@ -532,7 +534,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), true, true,
-                TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
+                true, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
@@ -558,7 +560,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
-                TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
+                true, ServiceState.STATE_IN_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
@@ -585,7 +587,7 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
-                TelephonyManager.DATA_DISCONNECTED, ServiceState.STATE_OUT_OF_SERVICE);
+                false, ServiceState.STATE_OUT_OF_SERVICE);
         doReturn(mock(MobileMappings.Config.class)).when(sInjector).getConfig(mContext);
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(false));
@@ -665,7 +667,7 @@ public class SubscriptionsPreferenceControllerTest {
         Drawable icon = mock(Drawable.class);
         doReturn(icon).when(sInjector).getIcon(any(), anyInt(), anyInt(), eq(false));
         setupGetIconConditions(sub.get(0).getSubscriptionId(), true, true,
-                TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
+                true, ServiceState.STATE_IN_SERVICE);
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -683,7 +685,7 @@ public class SubscriptionsPreferenceControllerTest {
         Drawable icon = mock(Drawable.class);
         doReturn(icon).when(sInjector).getIcon(any(), anyInt(), anyInt(), eq(false));
         setupGetIconConditions(subId, false, true,
-                TelephonyManager.DATA_CONNECTED, ServiceState.STATE_IN_SERVICE);
+                true, ServiceState.STATE_IN_SERVICE);
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
         Drawable actualIcon = mPreferenceCategory.getPreference(0).getIcon();
@@ -702,12 +704,22 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(icon).when(sInjector).getIcon(any(), anyInt(), anyInt(), eq(false));
 
         setupGetIconConditions(subId, false, false,
-                TelephonyManager.DATA_DISCONNECTED, ServiceState.STATE_IN_SERVICE);
+                false, ServiceState.STATE_IN_SERVICE);
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
         Drawable actualIcon = mPreferenceCategory.getPreference(0).getIcon();
-        doReturn(TelephonyManager.DATA_CONNECTED).when(mTelephonyManagerForSub).getDataState();
+        ServiceState ss = mock(ServiceState.class);
+        NetworkRegistrationInfo regInfo = new NetworkRegistrationInfo.Builder()
+                .setDomain(NetworkRegistrationInfo.DOMAIN_PS)
+                .setTransportType(AccessNetworkConstants.TRANSPORT_TYPE_WWAN)
+                .setRegistrationState(NetworkRegistrationInfo.REGISTRATION_STATE_HOME)
+                .setAccessNetworkTechnology(TelephonyManager.NETWORK_TYPE_LTE)
+                .build();
+        doReturn(ss).when(mTelephonyManagerForSub).getServiceState();
+        doReturn(regInfo).when(ss).getNetworkRegistrationInfo(
+                NetworkRegistrationInfo.DOMAIN_PS,
+                AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
 
         assertThat(icon).isEqualTo(actualIcon);
     }
@@ -733,14 +745,23 @@ public class SubscriptionsPreferenceControllerTest {
     }
 
     private void setupGetIconConditions(int subId, boolean isActiveCellularNetwork,
-            boolean isDataEnable, int dataState, int servicestate) {
+            boolean isDataEnable, boolean dataState, int servicestate) {
         doReturn(mTelephonyManagerForSub).when(mTelephonyManager).createForSubscriptionId(subId);
         doReturn(isActiveCellularNetwork).when(sInjector).isActiveCellularNetwork(mContext);
         doReturn(isDataEnable).when(mTelephonyManagerForSub).isDataEnabled();
-        doReturn(dataState).when(mTelephonyManagerForSub).getDataState();
         ServiceState ss = mock(ServiceState.class);
+        NetworkRegistrationInfo regInfo = new NetworkRegistrationInfo.Builder()
+                .setDomain(NetworkRegistrationInfo.DOMAIN_PS)
+                .setTransportType(AccessNetworkConstants.TRANSPORT_TYPE_WWAN)
+                .setRegistrationState(dataState ? NetworkRegistrationInfo.REGISTRATION_STATE_HOME
+                        : NetworkRegistrationInfo.REGISTRATION_STATE_NOT_REGISTERED_SEARCHING)
+                .setAccessNetworkTechnology(TelephonyManager.NETWORK_TYPE_LTE)
+                .build();
         doReturn(ss).when(mTelephonyManagerForSub).getServiceState();
         doReturn(servicestate).when(ss).getState();
+        doReturn(regInfo).when(ss).getNetworkRegistrationInfo(
+                NetworkRegistrationInfo.DOMAIN_PS,
+                AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
     }
 
     private List<SubscriptionInfo> setupMockSubscriptions(int count) {

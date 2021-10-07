@@ -37,9 +37,14 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+import com.google.common.annotations.VisibleForTesting;
+
 /** The controller manages the behaviour of the Prevent Ringing gesture setting. */
 public class PreventRingingParentPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
+
+    @VisibleForTesting
+    static final int KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE = 1;
 
     final String SECURE_KEY = VOLUME_HUSH_GESTURE;
 
@@ -59,6 +64,10 @@ public class PreventRingingParentPreferenceController extends TogglePreferenceCo
 
     @Override
     public boolean isChecked() {
+        if (!isVolumePowerKeyChordSetToHush()) {
+            return false;
+        }
+
         final int preventRinging = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.VOLUME_HUSH_GESTURE,
                 Settings.Secure.VOLUME_HUSH_VIBRATE);
@@ -85,25 +94,47 @@ public class PreventRingingParentPreferenceController extends TogglePreferenceCo
         final int value = Settings.Secure.getInt(
                 mContext.getContentResolver(), SECURE_KEY, VOLUME_HUSH_VIBRATE);
         CharSequence summary;
-        switch (value) {
-            case VOLUME_HUSH_VIBRATE:
-                summary = mContext.getText(R.string.prevent_ringing_option_vibrate_summary);
-                break;
-            case VOLUME_HUSH_MUTE:
-                summary = mContext.getText(R.string.prevent_ringing_option_mute_summary);
-                break;
-            // VOLUME_HUSH_OFF
-            default:
-                summary = mContext.getText(R.string.switch_off_text);
+        if (isVolumePowerKeyChordSetToHush()) {
+            switch (value) {
+                case VOLUME_HUSH_VIBRATE:
+                    summary = mContext.getText(R.string.prevent_ringing_option_vibrate_summary);
+                    break;
+                case VOLUME_HUSH_MUTE:
+                    summary = mContext.getText(R.string.prevent_ringing_option_mute_summary);
+                    break;
+                // VOLUME_HUSH_OFF
+                default:
+                    summary = mContext.getText(R.string.switch_off_text);
+            }
+            preference.setEnabled(true);
+            mPreference.setSwitchEnabled(true);
+        } else {
+            summary = mContext.getText(R.string.prevent_ringing_option_unavailable_lpp_summary);
+            preference.setEnabled(false);
+            mPreference.setSwitchEnabled(false);
         }
+
         preference.setSummary(summary);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_volumeHushGestureEnabled)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        if (!mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_volumeHushGestureEnabled)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+        if (isVolumePowerKeyChordSetToHush()) {
+            return AVAILABLE;
+        }
+        if (mContext.getResources().getBoolean(
+                com.android.internal
+                        .R.bool.config_longPressOnPowerForAssistantSettingAvailable)) {
+            // The power + volume key chord is not set to hush gesture - it's been disabled
+            // by long press power for Assistant.
+            return DISABLED_DEPENDENT_SETTING;
+        }
+
+        return UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -121,9 +152,26 @@ public class PreventRingingParentPreferenceController extends TogglePreferenceCo
         }
     }
 
+    /**
+     * Returns true if power + volume up key chord is actually set to "mute toggle". If not,
+     * this setting will have no effect and should be disabled.
+     *
+     * This handles the condition when long press on power for Assistant changes power + volume
+     * chord to power menu and this setting needs to be disabled.
+     */
+    private boolean isVolumePowerKeyChordSetToHush() {
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.KEY_CHORD_POWER_VOLUME_UP,
+                mContext.getResources().getInteger(
+                        com.android.internal.R.integer.config_keyChordPowerVolumeUp))
+                == KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE;
+    }
+
     private class SettingObserver extends ContentObserver {
         private final Uri mVolumeHushGestureUri = Settings.Secure.getUriFor(
                 Settings.Secure.VOLUME_HUSH_GESTURE);
+        private final Uri mKeyChordVolumePowerUpUri = Settings.Global.getUriFor(
+                Settings.Global.KEY_CHORD_POWER_VOLUME_UP);
 
         private final Preference mPreference;
 
@@ -133,6 +181,7 @@ public class PreventRingingParentPreferenceController extends TogglePreferenceCo
         }
 
         public void register(ContentResolver cr) {
+            cr.registerContentObserver(mKeyChordVolumePowerUpUri, false, this);
             cr.registerContentObserver(mVolumeHushGestureUri, false, this);
         }
 
@@ -143,7 +192,8 @@ public class PreventRingingParentPreferenceController extends TogglePreferenceCo
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
-            if (uri == null || mVolumeHushGestureUri.equals(uri)) {
+            if (uri == null || mVolumeHushGestureUri.equals(uri)
+                    || mKeyChordVolumePowerUpUri.equals(uri)) {
                 updateState(mPreference);
             }
         }

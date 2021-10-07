@@ -168,6 +168,19 @@ public class UsbDetailsFunctionsControllerTest {
     }
 
     @Test
+    public void displayRefresh_ncmEnabled_checksSwitches() {
+        when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
+
+        mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NCM, POWER_ROLE_SINK,
+                DATA_ROLE_DEVICE);
+        List<RadioButtonPreference> prefs = getRadioPreferences();
+
+        assertThat(prefs.get(1).getKey())
+                .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS));
+        assertThat(prefs.get(1).isChecked()).isTrue();
+    }
+
+    @Test
     public void onClickMtp_noneEnabled_shouldEnableMtp() {
         when(mUsbBackend.areFunctionsSupported(anyLong())).thenReturn(true);
 
@@ -242,6 +255,20 @@ public class UsbDetailsFunctionsControllerTest {
     @Test
     public void onRadioButtonClicked_functionRndis_startTetheringInvoked() {
         mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS));
+        doReturn(UsbManager.FUNCTION_MTP).when(mUsbBackend).getCurrentFunctions();
+
+        mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
+
+        verify(mTetheringManager).startTethering(eq(TetheringManager.TETHERING_USB),
+                any(),
+                eq(mDetailsFunctionsController.mOnStartTetheringCallback));
+        assertThat(mDetailsFunctionsController.mPreviousFunction).isEqualTo(
+                UsbManager.FUNCTION_MTP);
+    }
+
+    @Test
+    public void onRadioButtonClicked_functionNcm_startsTethering() {
+        mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_NCM));
         doReturn(UsbManager.FUNCTION_MTP).when(mUsbBackend).getCurrentFunctions();
 
         mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);

@@ -58,6 +58,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
     private static final int DEFAULT_REQUEST = -1;
+    private static final float TOOLBAR_LINE_SPACING_MULTIPLIER = 1.1f;
 
     protected CategoryMixin mCategoryMixin;
     protected CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -90,16 +91,26 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
         final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (isAnySetupWizard && this instanceof SubSettings) {
-            final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
-                    ? R.style.SubSettings_SetupWizard : R.style.SudThemeGlifV3_Light;
+            int appliedTheme;
+            if (ThemeHelper.trySetDynamicColor(this)) {
+                appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                        ? R.style.SudDynamicColorThemeSettings_SetupWizard_DayNight
+                        : R.style.SudDynamicColorThemeSettings_SetupWizard;
+            } else {
+                appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                        ? R.style.SubSettings_SetupWizard
+                        : R.style.SudThemeGlifV3_Light;
+            }
             setTheme(appliedTheme);
-            ThemeHelper.trySetDynamicColor(this);
         }
 
         if (isToolbarEnabled() && !isAnySetupWizard) {
             super.setContentView(R.layout.collapsing_toolbar_base_layout);
             mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
             mAppBarLayout = findViewById(R.id.app_bar);
+            if (mCollapsingToolbarLayout != null) {
+                mCollapsingToolbarLayout.setLineSpacingMultiplier(TOOLBAR_LINE_SPACING_MULTIPLIER);
+            }
             disableCollapsingToolbarLayoutScrollingBehavior();
         } else {
             super.setContentView(R.layout.settings_base_layout);
@@ -238,6 +249,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     }
 
     private void disableCollapsingToolbarLayoutScrollingBehavior() {
+        if (mAppBarLayout == null) {
+            return;
+        }
         final CoordinatorLayout.LayoutParams params =
                 (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         final AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();

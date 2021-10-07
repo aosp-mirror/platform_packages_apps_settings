@@ -17,6 +17,7 @@
 package com.android.settings.notification.zen;
 
 import android.annotation.Nullable;
+import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -117,6 +118,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
         }
         ArraySet<String> autoApproved = new ArraySet<>();
         autoApproved.addAll(mNoMan.getEnabledNotificationListenerPackages());
+        autoApproved.addAll(ZenAccessController.getPackagesWithManageNotifications());
         Collections.sort(apps, new PackageItemInfo.DisplayNameComparator(mPkgMan));
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;

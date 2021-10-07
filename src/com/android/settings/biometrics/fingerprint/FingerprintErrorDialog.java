@@ -45,7 +45,7 @@ public class FingerprintErrorDialog extends BiometricErrorDialog {
                 // This message happens when the underlying crypto layer decides to revoke the
                 // enrollment auth token.
                 return R.string.security_settings_fingerprint_enroll_error_timeout_dialog_message;
-            case FingerprintManager.FINGERPRINT_ERROR_BAD_CALIBARTION:
+            case FingerprintManager.FINGERPRINT_ERROR_BAD_CALIBRATION:
                 return R.string.security_settings_fingerprint_bad_calibration;
             default:
                 // There's nothing specific to tell the user about. Ask them to try again.

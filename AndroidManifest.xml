@@ -17,8 +17,7 @@
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
@@ -141,7 +140,6 @@
 
         <activity android:name=".network.telephony.MobileNetworkActivity"
                   android:label="@string/network_settings_title"
-                  android:theme="@style/Theme.SubSettings"
                   android:exported="true"
                   android:launchMode="singleTask">
             <intent-filter android:priority="1">
@@ -182,7 +180,6 @@
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
-                  android:theme="@style/Theme.SubSettings"
                   android:label="@string/settings_shortcut">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -419,7 +416,6 @@
                 android:label="@string/apn_settings"
                 android:launchMode="singleTask"
                 android:exported="true"
-                android:theme="@style/Theme.SubSettings"
                 android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APN_SETTINGS" />
@@ -474,7 +470,6 @@
 
         <activity android:name="Settings$FaceSettingsActivity"
             android:label="@string/security_settings_face_preference_title"
-            android:theme="@style/Theme.SubSettings"
             android:exported="true"
             android:icon="@drawable/ic_face_header">
             <intent-filter>
@@ -499,7 +494,6 @@
 
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
-                  android:theme="@style/Theme.SubSettings"
                   android:exported="false">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
@@ -507,7 +501,6 @@
 
         <activity android:name="Settings$CombinedBiometricProfileSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
-                  android:theme="@style/Theme.SubSettings"
                   android:exported="false">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricProfileSettings" />
@@ -713,8 +706,7 @@
         <activity
             android:name="Settings$ManageAssistActivity"
             android:exported="true"
-            android:label="@string/assist_and_voice_input_title"
-            android:theme="@style/Theme.SubSettings">
+            android:label="@string/assist_and_voice_input_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VOICE_INPUT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1154,7 +1146,6 @@
         <activity
             android:name="Settings$ManageDomainUrlsActivity"
             android:exported="true"
-            android:theme="@style/Theme.SubSettings"
             android:label="@string/domain_urls_title">
             <intent-filter>
                 <action android:name="android.settings.MANAGE_DOMAIN_URLS" />
@@ -1332,8 +1323,8 @@
         <activity
             android:name=".notification.history.NotificationHistoryActivity"
             android:exported="true"
-            android:theme="@style/Theme.SubSettings"
-            android:label="@string/notification_history_title">
+            android:label="@string/notification_history_title"
+            android:theme="@style/Theme.Settings.NoActionBar">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_HISTORY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1528,8 +1519,8 @@
         <activity android:name=".applications.specialaccess.deviceadmin.DeviceAdminAdd"
                   android:label="@string/device_admin_add_title"
                   android:exported="true"
-                  android:theme="@style/Theme.SubSettings"
-                  android:clearTaskOnLaunch="true">
+                  android:clearTaskOnLaunch="true"
+                  android:theme="@style/Theme.Settings.NoActionBar">
             <intent-filter>
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1920,7 +1911,6 @@
         </activity>
 
         <activity android:name=".password.SetupChooseLockGeneric$InternalActivity"
-            android:theme="@style/GlifTheme.Light"
             android:exported="false"
             android:excludeFromRecents="true" />
 
@@ -2088,7 +2078,6 @@
         <activity android:name="Settings$ApnEditorActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:exported="true"
-                android:theme="@style/Theme.SubSettings"
                 android:label="@string/apn_edit">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -2213,6 +2202,7 @@
         </activity>
 
         <activity android:name=".bluetooth.BluetoothPairingDialog"
+                  android:permission="android.permission.BLUETOOTH_PRIVILEGED"
                   android:excludeFromRecents="true"
                   android:windowSoftInputMode="stateVisible|adjustResize"
                   android:theme="@style/Theme.AlertDialog"
@@ -2226,7 +2216,7 @@
 
         <activity android:name=".bluetooth.RequestPermissionActivity"
                   android:excludeFromRecents="true"
-                  android:permission="android.permission.BLUETOOTH"
+                  android:permission="android.permission.BLUETOOTH_CONNECT"
                   android:exported="true"
                   android:theme="@style/Theme.BluetoothPermission">
             <intent-filter android:priority="1">
@@ -2269,7 +2259,7 @@
         <activity android:name=".bluetooth.RequestPermissionHelperActivity"
                   android:label="@string/bluetooth_pairing_request"
                   android:excludeFromRecents="true"
-                  android:permission="android.permission.BLUETOOTH"
+                  android:permission="android.permission.BLUETOOTH_CONNECT"
                   android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight">
         </activity>
 
@@ -2284,7 +2274,7 @@
 
         <receiver android:name=".bluetooth.BluetoothPermissionRequest"
                   android:exported="true"
-                  android:permission="android.permission.BLUETOOTH_ADMIN">
+                  android:permission="android.permission.BLUETOOTH_CONNECT">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_REQUEST" />
                 <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_CANCEL" />
@@ -2294,7 +2284,7 @@
         <activity android:name=".bluetooth.BluetoothPermissionActivity"
                   android:label="@string/bluetooth_connection_permission_request"
                   android:excludeFromRecents="true"
-                  android:permission="android.permission.BLUETOOTH_ADMIN"
+                  android:permission="android.permission.BLUETOOTH_CONNECT"
                   android:exported="true"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert">
             <intent-filter android:priority="1">
@@ -2459,7 +2449,6 @@
 
         <activity
             android:name="com.android.settings.accounts.AddAccountSettings"
-            android:theme="@style/Theme.SubSettings"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/header_add_an_account">
@@ -2473,7 +2462,6 @@
 
         <activity android:name="Settings$ChooseAccountActivity"
             android:label="@string/header_add_an_account"
-                  android:theme="@style/Theme.SubSettings"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.accounts.ChooseAccountFragment" />
@@ -2875,9 +2863,7 @@
         <activity android:name=".notification.app.ChannelPanelActivity"
                   android:label="@string/notification_channel_title"
                   android:theme="@style/Theme.Panel"
-                  android:launchMode="singleInstance"
                   android:excludeFromRecents="true"
-                  android:noHistory="true"
                   android:configChanges="orientation|keyboardHidden|screenSize"
                   android:exported="true">
             <intent-filter android:priority="1">
@@ -3034,7 +3020,6 @@
         <activity
             android:name="Settings$WifiCallingSettingsActivity"
             android:exported="true"
-            android:theme="@style/Theme.SubSettings"
             android:label="@string/wifi_calling_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -3549,7 +3534,7 @@
         <activity android:name="Settings$BluetoothDeviceDetailActivity"
                   android:label="@string/device_details_title"
                   android:exported="true"
-                  android:permission="android.permission.BLUETOOTH_ADMIN">
+                  android:permission="android.permission.BLUETOOTH_CONNECT">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3724,7 +3709,6 @@
             android:name="Settings$GestureNavigationSettingsActivity"
             android:label="@string/gesture_settings_activity_title"
             android:exported="true"
-            android:theme="@style/Theme.SubSettings"
             android:enabled="true">
             <intent-filter android:priority="32">
                 <action android:name="android.intent.action.MAIN" />
@@ -3754,7 +3738,7 @@
         <receiver
             android:name=".media.BluetoothPairingReceiver"
             android:exported="true"
-            android:permission="android.permission.BLUETOOTH_ADMIN">
+            android:permission="android.permission.BLUETOOTH_CONNECT">
             <intent-filter>
                 <action android:name="com.android.settings.action.LAUNCH_BLUETOOTH_PAIRING"/>
             </intent-filter>/>
@@ -3808,7 +3792,6 @@
                  android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <activity android:name=".sim.smartForwarding.SmartForwardingActivity"
-            android:theme="@style/Theme.SubSettings.Base"
             android:exported="true"
             android:launchMode="singleTask">
         </activity>

@@ -20,7 +20,10 @@ import static com.android.settings.network.InternetUpdater.INTERNET_ETHERNET;
 import static com.android.settingslib.mobile.MobileMappings.getIconKey;
 import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
@@ -54,17 +57,28 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         DataConnectivityListener.Client, InternetUpdater.InternetChangeListener,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
     private static final String TAG = "NetworkProviderWorker";
-    private static final int PROVIDER_MODEL_DEFAULT_EXPANDED_ROW_COUNT = 5;
+    private static final int PROVIDER_MODEL_DEFAULT_EXPANDED_ROW_COUNT = 6;
     private DataContentObserver mMobileDataObserver;
     private SignalStrengthListener mSignalStrengthListener;
     private SubscriptionsChangeListener mSubscriptionsListener;
     private MobileDataEnabledListener mDataEnabledListener;
     private DataConnectivityListener mConnectivityListener;
-    private int mDefaultDataSubid = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    private int mDefaultDataSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private final Context mContext;
     final Handler mHandler;
     @VisibleForTesting
     final NetworkProviderTelephonyCallback mTelephonyCallback;
+    private final BroadcastReceiver mConnectionChangeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (action.equals(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED)) {
+                Log.d(TAG, "ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED");
+                updateListener();
+            }
+        }
+    };
+
     private TelephonyManager mTelephonyManager;
     private Config mConfig = null;
     private TelephonyDisplayInfo mTelephonyDisplayInfo =
@@ -80,10 +94,10 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         mMobileDataObserver = new DataContentObserver(mHandler, this);
 
         mContext = context;
-        mDefaultDataSubid = getDefaultDataSubscriptionId();
-
+        mDefaultDataSubId = getDefaultDataSubscriptionId();
+        Log.d(TAG, "Init, SubId: " + mDefaultDataSubId);
         mTelephonyManager = mContext.getSystemService(
-                TelephonyManager.class).createForSubscriptionId(mDefaultDataSubid);
+                TelephonyManager.class).createForSubscriptionId(mDefaultDataSubId);
         mTelephonyCallback = new NetworkProviderTelephonyCallback();
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
         mDataEnabledListener = new MobileDataEnabledListener(context, this);
@@ -98,12 +112,15 @@ public class NetworkProviderWorker extends WifiScanWorker implements
     @Override
     protected void onSlicePinned() {
         Log.d(TAG, "onSlicePinned");
-        mMobileDataObserver.register(mContext, mDefaultDataSubid);
+        mMobileDataObserver.register(mContext, mDefaultDataSubId);
         mSubscriptionsListener.start();
-        mDataEnabledListener.start(mDefaultDataSubid);
+        mDataEnabledListener.start(mDefaultDataSubId);
         mConnectivityListener.start();
         mSignalStrengthListener.resume();
         mTelephonyManager.registerTelephonyCallback(mHandler::post, mTelephonyCallback);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
+        mContext.registerReceiver(mConnectionChangeReceiver, filter);
         super.onSlicePinned();
     }
 
@@ -116,6 +133,9 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         mConnectivityListener.stop();
         mSignalStrengthListener.pause();
         mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
+        if (mConnectionChangeReceiver != null) {
+            mContext.unregisterReceiver(mConnectionChangeReceiver);
+        }
         super.onSliceUnpinned();
     }
 
@@ -137,14 +157,14 @@ public class NetworkProviderWorker extends WifiScanWorker implements
         notifySliceChange();
     }
 
-    @Override
-    public void onSubscriptionsChanged() {
+    private void updateListener() {
         int defaultDataSubId = getDefaultDataSubscriptionId();
-        if (mDefaultDataSubid == defaultDataSubId) {
-            Log.d(TAG, "onSubscriptionsChanged: no change");
+        if (mDefaultDataSubId == defaultDataSubId) {
+            Log.d(TAG, "DDS: no change");
             return;
         }
-        Log.d(TAG, "onSubscriptionsChanged: defaultDataSubId:" + defaultDataSubId);
+        mDefaultDataSubId = defaultDataSubId;
+        Log.d(TAG, "DDS: defaultDataSubId:" + mDefaultDataSubId);
         if (SubscriptionManager.isUsableSubscriptionId(defaultDataSubId)) {
             mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
             mMobileDataObserver.unregister(mContext);
@@ -158,6 +178,12 @@ public class NetworkProviderWorker extends WifiScanWorker implements
             mSignalStrengthListener.updateSubscriptionIds(Collections.emptySet());
         }
         updateSlice();
+    }
+
+    @Override
+    public void onSubscriptionsChanged() {
+        Log.d(TAG, "onSubscriptionsChanged");
+        updateListener();
     }
 
     @Override
@@ -283,7 +309,7 @@ public class NetworkProviderWorker extends WifiScanWorker implements
      */
     public String getNetworkTypeDescription() {
         return updateNetworkTypeName(mContext, mConfig, mTelephonyDisplayInfo,
-                mDefaultDataSubid);
+                mDefaultDataSubId);
     }
 
     /**

@@ -142,11 +142,7 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
     /** Confirms connection of the carrier network connected with the internet access */
     public boolean isCarrierNetworkActive() {
         final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
-        if (mergedCarrierEntry != null) {
-            return mergedCarrierEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED
-                    && mergedCarrierEntry.hasInternetAccess();
-        }
-        return false;
+        return (mergedCarrierEntry != null && mergedCarrierEntry.isDefaultNetwork());
     }
 
     /** Return the carrier network ssid */

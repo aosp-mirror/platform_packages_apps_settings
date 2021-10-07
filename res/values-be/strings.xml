@@ -55,7 +55,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Паменшыць"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Павялічыць"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Выкарыстоўваць аўтапаварот"</string>
-    <string name="smart_rotate_text_headline" msgid="8947678366129076364">"Функцыя \"Выяўленне твару\" выкарыстоўвае франтальную камеру для паляпшэння дакладнасці аўтапавароту. Відарысы ніколі не адпраўляюцца ў Google і не захоўваюцца там.&lt;br&gt;&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;Даведацца больш пра экран аўтапавароту&lt;/a&gt;"</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Функцыя \"Выяўленне твару\" выкарыстоўвае франтальную камеру для паляпшэння дакладнасці аўтапавароту. Відарысы ніколі не захоўваюцца і не адпраўляюцца ў Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Прыклад тэксту"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Чараўнік краіны Оз"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Раздзел 11. Цудоўны Смарагдавы Горад у краіне Оз"</string>
@@ -292,8 +292,6 @@
     <string name="owner_info_settings_title" msgid="3555626140700093017">"Тэкст на экране блакіроўкі"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Уключыць віджэты"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Адключана адміністратарам"</string>
-    <string name="lockdown_settings_title" msgid="8988970335658365075">"Паказваць кнопку блакіроўкі"</string>
-    <string name="lockdown_settings_summary" msgid="5857509790740495057">"Дадаць у меню кнопкі сілкавання функцыю, якая выключае Smart Lock, распазнаванне твару, разблакіраванне адбіткам пальца і апавяшчэнні на экране блакіроўкі"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Блакіраваць экран, калі давер страчаны"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Пры ўключанай функцыі прылада будзе заблакіравана, калі страціць давер апошні агент"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Няма"</string>
@@ -351,12 +349,10 @@
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Я згаджаюся"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Яшчэ"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Разблакіруйце праз твар"</string>
-    <!-- no translation found for security_settings_face_enroll_consent_introduction_title (3942331854413767814) -->
-    <skip />
+    <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Дазволіць распазнаванне твару"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Выкарыстоўвайце твар для аўтэнтыфікацыі"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Выкарыстоўвайце функцыю распазнавання твару для разблакіроўкі тэлефона, аўтарызацыі купляў і ўваходу ў праграмы."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (866117500419055444) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Дазвольце дзіцяці выкарыстоўваць твар для разблакіроўкі тэлефона ці спраўджання сваёй асобы. Гэта функцыя можа быць карыснай падчас уваходу ў праграмы, ухвалення куплі і іншых дзеянняў."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Для ўхвалення куплі ці разблакіроўкі тэлефона можна карыстацца функцыяй распазнавання твару.\n\nЗаўвага. Вы не можаце выкарыстоўваць твар для разблакіроўкі гэтай прылады. Для атрымання дадатковай інфармацыі звяжыцеся з адміністратарам арганізацыі."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Выкарыстоўвайце функцыю распазнавання твару для разблакіроўкі тэлефона, аўтарызацыі купляў і ўваходу ў праграмы"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -364,6 +360,8 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
     <string name="security_settings_face_enroll_introduction_how_message" msgid="4192656589626667797"></string>
     <string name="security_settings_face_enroll_introduction_how_consent_message" msgid="9028182363896853946"></string>
@@ -390,7 +388,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Каб паўторна наладзіць функцыю распазнавання твару, выдаліце існуючую мадэль твару.\n\nВаша мадэль твару будзе канчаткова і бяспечна выдалена.\n\nПасля выдалення для разблакіроўкі тэлефона ці аўтэнтыфікацыі ў праграмах вам трэба выкарыстоўваць PIN-код, узор разблакіроўкі ці пароль."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Каб паўторна наладзіць функцыю распазнавання твару, выдаліце існуючую мадэль твару.\n\nВаша мадэль твару будзе канчаткова і бяспечна выдалена.\n\nПасля выдалення для разблакіроўкі тэлефона ці аўтэнтыфікацыі ў праграмах вам трэба выкарыстоўваць адбітак пальца, PIN-код, узор разблакіроўкі ці пароль."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Налады распазнавання"</string>
-    <string name="security_settings_face_settings_require_category" msgid="57974315752919587">"Патрабаванні для распазнавання твару"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Падчас выкарыстання распазнавання твару"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Вочы павінны быць расплюшчаны"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Каб разблакіраваць тэлефон, расплюшчыце вочы"</string>
@@ -418,16 +415,12 @@
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Наладзьце адбітак пальца"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_consent_introduction_title (2278592030102282364) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Дазволіць разблакіраванне адбіткам"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Сканер адбіткаў пальцаў"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message (6100563481214337377) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_consent_message (1833139688278350628) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6100563481214337377">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі тэлефона ці спраўджання вашай асобы, напрыклад падчас уваходу ў праграмы ці ўхвалення куплі."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Дазвольце дзіцяці выкарыстоўваць адбітак пальца для разблакіроўкі тэлефона ці спраўджання сваёй асобы. Гэта функцыя можа быць карыснай падчас уваходу ў праграмы, ухвалення куплі і іншых дзеянняў."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Усё пад кантролем"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_consent_1 (1122676690472680734) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Доступ ёсць у вас і вашага дзіцяці"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Важная інфармацыя"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_1" msgid="7817635368506064516">"Даныя, запісаныя сканерам адбітка пальца, будуць захоўвацца толькі на вашым тэлефоне. Вы можаце ў любы час выдаліць іх у Наладах."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_2" msgid="3507618608004123384">"Выкарыстанне адбітка пальца можа быць менш бяспечным, чым складаны ўзор разблакіроўкі або PIN-код."</string>
@@ -435,31 +428,21 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Для ўхвалення куплі ці разблакіроўкі тэлефона можна карыстацца адбіткам пальца.\n\nЗаўвага. Вы не можаце выкарыстоўваць адбітак пальца для разблакіроўкі гэтай прылады. Для атрымання дадатковай інфармацыі звяжыцеся з адміністратарам арганізацыі."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Скасаваць"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Не, дзякуй"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_skip" msgid="2284740299244691418">"Не, дзякуй"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Далей"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Я згаджаюся"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Прапусціць"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Далей"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Не наладжваць адбітак?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Для наладжвання адбітка пальца спатрэбіцца пара хвілін. Вы можаце прапусціць гэты крок і дадаць адбітак пальца пазней у наладах."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Аўтэнтыфікацыя адбіткам пальца"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Важная інфармацыя"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Выкарыстанне адбітка пальца для разблакіроўкі тэлефона можа быць менш бяспечным, чым складаны ўзор або PIN-код"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Як гэта працуе"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_2 (5909924864816776516) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2 (3493356605815124807) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_3 (4729142136478078228) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3 (5908959250804145997) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Каб спраўджваць вашу асобу, функцыя разблакіравання адбіткам пальца стварае ўнікальную мадэль адбітка вашага пальца. Для стварэння мадэлі адсканіруйце свой палец у розных паставах."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Каб спраўджваць асобу дзіцяці, функцыя разблакіравання адбіткам пальца стварае ўнікальную мадэль адбітка яго пальца. Для стварэння мадэлі трэба адсканіраваць палец дзіцяці ў розных паставах."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Калі вы ўжываеце Pixel Imprint, відарысы выкарыстоўваюцца для абнаўлення мадэлі адбітка пальца. Відарысы, якія выкарыстоўваліся для стварэння мадэлі адбітка пальца, ніколі не захоўваюцца. На вашым тэлефоне бяспечна захоўваецца толькі сама мадэль, і яна нікуды не адпраўляецца. Уся апрацоўка выконваецца толькі на вашым тэлефоне."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Калі дзіця ўжывае функцыю Pixel Imprint, відарысы выкарыстоўваюцца для абнаўлення мадэлі адбітка пальца. Відарысы, якія выкарыстоўваліся для стварэння мадэлі адбітка пальца дзіцяці, ніколі не захоўваюцца. На тэлефоне бяспечна захоўваецца толькі сама мадэль, і яна нікуды не адпраўляецца. Уся апрацоўка выконваецца толькі на тэлефоне."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Вы можаце ў любы час выдаліць відарысы і мадэль адбітка пальца ці выключыць разблакіраванне адбіткам пальца ў Наладах. Відарысы і мадэлі адбіткаў пальца будуць захоўвацца на вашым тэлефоне, пакуль вы іх не выдаліце."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4 (4983770600405797515) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Вы і ваша дзіця можаце ў любы час выдаліць відарысы і мадэль адбітка пальца ці выключыць разблакіраванне адбіткам пальца ў Наладах. Відарысы і мадэлі адбіткаў пальца будуць захоўвацца на тэлефоне, пакуль іх не выдаляць."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Ваш тэлефон можа быць разблакіраваны без вашага намеру, напрыклад, калі хтосьці паднясе яго да вашага пальца."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5 (8356551505082794682) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Тэлефон можна разблакіраваць, нават калі дзіця не збіралася гэта рабіць, напрыклад, калі хтосьці прыкладзе палец дзіцяці да тэлефона."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Кожны раз крыху мяняйце пазіцыю пальца"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Накрыйце значок падушачкай пальца"</string>
@@ -468,8 +451,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Падніміце палец, як толькі адчуеце вібрацыю"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Перайдзіце ў месца з не такім яркім асвятленнем і паўтарыце спробу"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Вы дасягнулі максімальнай колькасці спроб"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen (1709655966777714761) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="1709655966777714761">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі тэлефона ці спраўджання асобы, напрыклад падчас уваходу ў праграмы\n\n"<annotation id="url">"Даведацца больш"</annotation></string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Распазнаванне твару і разблакіраванне адбіткам пальца"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Дакраніцеся, каб наладзіць"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Дададзены твар і адбіткі пальцаў"</string>
@@ -479,6 +461,8 @@
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Выкарыстоўваць распазнаванне твару і адбітка, каб"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Разблакіроўка"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Аўтэнтыфікацыя ў праграмах"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Дайце тэлефон аднаму з бацькоў"</string>
+    <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"ОК"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Прапусціць наладжванне блакіроўкі экрана?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Функцыі абароны прылады не будуць уключаны. Вы не зможаце забараніць іншым карыстацца гэтым планшэтам у выпадку згубы, крадзяжу ці скіду налад."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Функцыі абароны прылады не будуць уключаны. Вы не зможаце забараніць іншым карыстацца гэтай прыладай у выпадку згубы, крадзяжу ці скіду налад."</string>
@@ -508,53 +492,55 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Яшчэ адзін раз"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Сачыце за значком адбітка пальца"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Дакраніцеся некалькі разоў, каб адбітак быў больш дакладны"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Кожны раз падчас руху значка адбітка пальца ўтрымлівайце палец націснутым. Гэта дзеянне дапаможа атрымаць поўны адбітак пальца."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Гэта дзеянне дапаможа атрымаць поўны адбітак пальца"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Кожны раз падчас руху значка адбітка пальца ўтрымлівайце палец націснутым. Гэта працэдура дапаможа больш дакладна зафіксаваць адбітак пальца."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Прыкладзіце да датчыка кончык пальца"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Пасля прыкладзіце краі пальца"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Прыкладзіце палец да датчыка адным бокам і ўтрымлівайце яго, потым павярніце іншым бокам"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Гэта працэдура дапаможа больш дакладна зафіксаваць адбітак пальца"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Адбітак пальца дададзены"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_message (3469254005423998143) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Цяпер вы можаце выкарыстоўваць адбітак пальца для разблакіроўкі тэлефона ці спраўджання сваёй асобы, напрыклад падчас уваходу ў праграмы"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Пазней"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Не наладжваць доступ па адбітку пальца?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Вы вырашылі выкарыстоўваць свой адбітак пальца як адзін са спосабаў разблакіроўкі тэлефона. Калі вы прапусціце гэты крок зараз, вам трэба будзе наладзіць спосаб пазней. Наладжванне займае ўсяго каля хвіліны."</string>
-    <string name="lock_screen_pin_skip_message" product="tablet" msgid="9195989505229595603">"PIN-код абараняе ваш планшэт у выпадку страты ці крадзяжу"</string>
-    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="5795719350671856684">"Узор разблакіроўкі абараняе ваш планшэт у выпадку страты ці крадзяжу"</string>
-    <string name="lock_screen_password_skip_message" product="tablet" msgid="5761059676925588798">"Пароль абараняе ваш планшэт у выпадку страты ці крадзяжу"</string>
-    <string name="lock_screen_pin_skip_message" product="device" msgid="5908770694317903692">"PIN-код абараняе вашу прыладу ў выпадку страты ці крадзяжу"</string>
-    <string name="lock_screen_pattern_skip_message" product="device" msgid="7809307154579816285">"Узор разблакіроўкі абараняе вашу прыладу ў выпадку страты ці крадзяжу"</string>
-    <string name="lock_screen_password_skip_message" product="device" msgid="5882852659289437575">"Пароль абараняе вашу прыладу ў выпадку страты ці крадзяжу"</string>
-    <string name="lock_screen_pin_skip_message" product="default" msgid="8723651130066134307">"PIN-код абараняе ваш тэлефон у выпадку страты ці крадзяжу"</string>
-    <string name="lock_screen_pattern_skip_message" product="default" msgid="9051347407964208353">"Узор разблакіроўкі абараняе ваш тэлефон у выпадку страты ці крадзяжу"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="7866352587819826281">"Пароль абараняе ваш тэлефон у выпадку страты ці крадзяжу"</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="5614978271232428549">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе ваш планшэт у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="1534716773690760116">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе ваш планшэт у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="4403549482404707319">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе ваш планшэт у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="3044531417274778836">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе вашу прыладу ў выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6951296689998068518">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе вашу прыладу ў выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="4373257500347847553">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе вашу прыладу ў выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3333169324984189907">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе ваш тэлефон у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="9199694568213289593">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе ваш тэлефон у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="4655151300089161236">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе ваш тэлефон у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="4887371059378527563">"Каб наладзіць распазнаванне твару, неабходна ўвесці PIN-код.\n\nPIN-код абараняе ваш планшэт у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="1609143235438236167">"Каб наладзіць распазнаванне твару, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе ваш планшэт у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="7407787214685786194">"Каб наладзіць распазнаванне твару, неабходна ўвесці пароль.\n\nПароль абараняе ваш планшэт у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pin_skip_face_message" product="device" msgid="122973137827455767">"Каб наладзіць распазнаванне твару, неабходна ўвесці PIN-код.\n\nPIN-код абараняе вашу прыладу ў выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="7241517014796847076">"Каб наладзіць распазнаванне твару, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе вашу прыладу ў выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_password_skip_face_message" product="device" msgid="3702145992391373080">"Каб наладзіць распазнаванне твару, неабходна ўвесці пароль.\n\nПароль абараняе вашу прыладу ў выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2066696762927428746">"Каб наладзіць распазнаванне твару, неабходна ўвесці PIN-код.\n\nPIN-код абараняе ваш тэлефон у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="7838649522839312235">"Каб наладзіць распазнаванне твару, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе ваш тэлефон у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_password_skip_face_message" product="default" msgid="3798698398093181328">"Каб наладзіць распазнаванне твару, неабходна ўвесці пароль.\n\nПароль абараняе ваш тэлефон у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="3362798486974318857">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе ваш планшэт у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="6322976802579649503">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе ваш планшэт у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="3853247493008948022">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе ваш планшэт у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="7457251905996372858">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе вашу прыладу ў выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="1591285878799890757">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе вашу прыладу ў выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="1184315894605608136">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе вашу прыладу ў выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="7864459360216692930">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе ваш тэлефон у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="802091446777705967">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе ваш тэлефон у выпадку страты ці крадзяжу."</string>
-    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="2161523108223289241">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе ваш тэлефон у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN-код абараняе планшэт у выпадку страты ці крадзяжу"</string>
+    <string name="lock_screen_pattern_skip_message" product="tablet" msgid="4359575348578515037">"Узор разблакіроўкі абараняе планшэт у выпадку страты ці крадзяжу"</string>
+    <string name="lock_screen_password_skip_message" product="tablet" msgid="5420451292764062637">"Пароль абараняе планшэт у выпадку страты ці крадзяжу"</string>
+    <string name="lock_screen_pin_skip_message" product="device" msgid="8841426051550671169">"PIN-код абараняе прыладу ў выпадку страты ці крадзяжу"</string>
+    <string name="lock_screen_pattern_skip_message" product="device" msgid="6296702954920045923">"Узор разблакіроўкі абараняе прыладу ў выпадку страты ці крадзяжу"</string>
+    <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"Пароль абараняе прыладу ў выпадку страты ці крадзяжу"</string>
+    <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"PIN-код абараняе тэлефон у выпадку страты ці крадзяжу"</string>
+    <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"Узор разблакіроўкі абараняе тэлефон у выпадку страты ці крадзяжу"</string>
+    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"Пароль абараняе тэлефон у выпадку страты ці крадзяжу"</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе планшэт у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе планшэт у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе планшэт у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="device" msgid="7421096089691939451">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе прыладу ў выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="device" msgid="6458468083711413617">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе прыладу ў выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="device" msgid="1632249532665518954">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе прыладу ў выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pin_skip_fingerprint_message" product="default" msgid="3101384462491132314">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе тэлефон у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pattern_skip_fingerprint_message" product="default" msgid="382422778886929469">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе тэлефон у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_password_skip_fingerprint_message" product="default" msgid="5515199168425229243">"Каб наладзіць разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе тэлефон у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pin_skip_face_message" product="tablet" msgid="2454239555320628731">"Каб наладзіць распазнаванне твару, неабходна ўвесці PIN-код.\n\nPIN-код абараняе планшэт у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="tablet" msgid="4354138725903415816">"Каб наладзіць распазнаванне твару, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе планшэт у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_password_skip_face_message" product="tablet" msgid="719339718267952196">"Каб наладзіць распазнаванне твару, неабходна ўвесці пароль.\n\nПароль абараняе планшэт у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pin_skip_face_message" product="device" msgid="3729243407606881750">"Каб наладзіць распазнаванне твару, неабходна ўвесці PIN-код.\n\nPIN-код абараняе прыладу ў выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="device" msgid="6966329744346503807">"Каб наладзіць распазнаванне твару, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе прыладу ў выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_password_skip_face_message" product="device" msgid="3020827854443297996">"Каб наладзіць распазнаванне твару, неабходна ўвесці пароль.\n\nПароль абараняе прыладу ў выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pin_skip_face_message" product="default" msgid="2155678903559865476">"Каб наладзіць распазнаванне твару, неабходна ўвесці PIN-код.\n\nPIN-код абараняе тэлефон у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pattern_skip_face_message" product="default" msgid="473271568005748452">"Каб наладзіць распазнаванне твару, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе тэлефон у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_password_skip_face_message" product="default" msgid="4319934862372116788">"Каб наладзіць распазнаванне твару, неабходна ўвесці пароль.\n\nПароль абараняе тэлефон у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet" msgid="647987565338402155">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе планшэт у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet" msgid="5293609077890072841">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе планшэт у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet" msgid="2660359318928684172">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе планшэт у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="device" msgid="1278795063897397815">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе прыладу ў выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device" msgid="8766169819759371801">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе прыладу ў выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="device" msgid="8611216039321306045">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе прыладу ў выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default" msgid="8796878521409329051">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці PIN-код.\n\nPIN-код абараняе тэлефон у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default" msgid="8423700958936341596">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці ўзор разблакіроўкі.\n\nУзор разблакіроўкі абараняе тэлефон у выпадку страты ці крадзяжу."</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default" msgid="5411689248299854172">"Каб наладзіць распазнаванне твару і разблакіраванне адбіткам пальца, неабходна ўвесці пароль.\n\nПароль абараняе тэлефон у выпадку страты ці крадзяжу."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Прапусціць наладку PIN-кода?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Прапусціць наладжванне PIN-кода і твару?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Прапусціць наладжванне PIN-кода і адбітка пальца?"</string>
@@ -579,6 +565,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Акрамя разблакіроўкі тэлефона вы можаце выкарыстоўваць свае адбіткі пальцаў для аўтарызацыі купляў і доступу да праграм. "<annotation id="url">"Даведацца больш"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Опцыя блакіроўкі экрана выключана. Звяжыцеся з адміністратарам сваёй арганізацыі, каб даведацца больш. "<annotation id="admin_details">"Дадатковая інфармацыя"</annotation>\n\n"Вы па-ранейшаму можаце выкарыстоўваць адбіткі пальцаў для аўтарызацыі куплі і доступу да праграм. "<annotation id="url">"Даведацца больш"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Падыміце палец, потым дакраніцеся да сканера зноў"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Не ўдалося скарыстаць сканер адбіткаў пальцаў. Звярніцеся ў сэрвісны цэнтр."</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Вы можаце дадаць да <xliff:g id="COUNT">%d</xliff:g> адбіткаў пальца"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Вы дадалі максімальную колькасць адбіткаў пальцаў"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Немагчыма дадаць больш адбіткаў пальцаў"</string>
@@ -586,12 +573,10 @@
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Выдаліць \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Хочаце выдаліць гэты адбітак пальца?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Відарысы і мадэль адбіткаў пальцаў, звязаныя з адбіткам \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\", будуць выдалены"</string>
-    <!-- no translation found for fingerprint_last_delete_message (7860374760549404410) -->
-    <skip />
-    <!-- no translation found for fingerprint_last_delete_message_profile_challenge (4104208067277655068) -->
-    <skip />
+    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Вы не зможаце выкарыстоўваць адбітак пальца для разблакіроўкі тэлефона ці спраўджання сваёй асобы ў праграмах."</string>
+    <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Вы не зможаце выкарыстоўваць адбітак пальца для разблакіроўкі свайго працоўнага профілю, аўтарызацыі купляў і ўваходу ў працоўныя праграмы."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Так, выдаліць"</string>
-    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Распазнаванне твару і адбітка пальца"</string>
+    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Распазнаванне твару і разблакіраванне адбіткам пальца"</string>
     <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Дакраніцеся, каб наладзіць"</string>
     <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"Толькі распазнаванне твару"</string>
     <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"Толькі распазнаванне адбітка пальца"</string>
@@ -903,7 +888,7 @@
     <string name="bluetooth_menu_advanced" msgid="7633682234855216066">"Пашыраныя налады"</string>
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Пашыраны Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Калі Bluetooth уключаны, ваша прылада можа звязвацца з іншымі прыладамі з Bluetooth, якія знаходзяцца побач."</string>
-    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Калі Bluetooth уключаны, прылада можа абменьвацца данымі з іншымі прыладамі з Bluetooth, якія знаходзяцца паблізу.\n\nПраграмы і сэрвісы будуць шукаць прылады паблізу, нават калі Bluetooth выключаны. Гэту функцыю можна выкарыстоўваць для паляпшэння працы прылады, напрыклад, для больш дакладнага вызначэння месцазнаходжання. Вы можаце змяніць яе ў "<annotation id="link">"наладах сканіравання Bluetooth"</annotation>"."</string>
+    <string name="bluetooth_scanning_on_info_message" msgid="6667723887545056976">"Калі Bluetooth уключаны, прылада можа абменьвацца данымі з іншымі прыладамі з Bluetooth, якія знаходзяцца паблізу.\n\nПраграмы і сэрвісы будуць шукаць прылады паблізу, нават калі Bluetooth выключаны. Гэту функцыю можна выкарыстоўваць для паляпшэння працы прылады, напрыклад для больш дакладнага вызначэння месцазнаходжання. Вы можаце змяніць яе ў "<annotation id="link">"наладах пошуку Bluetooth"</annotation>"."</string>
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Для паляпшэння дакладнасці вызначэння месцазнаходжання сістэмныя праграмы і службы могуць знаходзіць прылады Bluetooth. Вы можаце змяніць гэта ў <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>наладах сканіравання<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Не атрымалася ўсталяваць злучэнне. Паўтарыце спробу."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Звесткі пра прыладу"</string>
@@ -1314,7 +1299,7 @@
     <string name="notification_volume_title" msgid="328053763590888609">"Апавяшчэнне"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1798481722572489141">"Выкарыстоўваць гучнасць уваходных выклікаў для паведамленняў"</string>
     <string name="home_work_profile_not_supported" msgid="2605589489324241338">"Працоўныя профілі не падтрымліваюцца"</string>
-    <string name="notification_sound_dialog_title" msgid="7431891669251806266">"Гук паведамлення па змаўчаннi"</string>
+    <string name="notification_sound_dialog_title" msgid="7431891669251806266">"Стандартны гук паведамлення"</string>
     <string name="media_volume_title" msgid="5209147840160985178">"Мультымедыя"</string>
     <string name="media_volume_summary" msgid="4671324482655564873">"Вызначыць гучнасць для музыкі і відэа"</string>
     <string name="alarm_volume_title" msgid="706302621191735343">"Будзільнік"</string>
@@ -1395,7 +1380,7 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Яркасць экрана будзе мяняцца аўтаматычна, у залежнасці ад наваколля і вашых дзеянняў. Можна пераключаць паўзунок уручную, каб дастасаваць функцыю да вашых параметраў."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Паказваць баланс белага"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плаўнае адлюстраванне"</string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плаўны паказ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Аўтаматычна павялічвае частату абнаўлення пэўнага змесціва з 60 да 90 Гц. Павышае выкарыстанне зараду акумулятара."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Прымусовая пікавая частата абнаўлення"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Найвышэйшая частата абнаўлення для лепшага рэагавання на дотыкі і вышэйшай якасці анімацыі. Павышае выкарыстанне зараду акумулятара."</string>
@@ -1486,7 +1471,7 @@
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Абуджэнне пры падняцці"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Неактыўны рэжым экрана"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Калі паказваць"</string>
-    <string name="doze_title" msgid="1523090408230862316">"Абуджаць экран з апавяшчэннямі"</string>
+    <string name="doze_title" msgid="1523090408230862316">"Абуджаць экран апавяшчэннямі"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Цёмны экран уключаецца, калі прыходзяць новыя апавяшчэнні"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Заўсёды паказваць час і даныя"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Павышанае выкарыстанне зараду"</string>
@@ -1785,7 +1770,7 @@
     <string name="error_mcc_not3" msgid="883659545640179094">"У полі MCC павінна быць 3 сімвалы."</string>
     <string name="error_mnc_not23" msgid="7642478711158474918">"У полі MCC павінна быць 2 ці 3 сімвала."</string>
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Аператар не дазваляе дадаваць APN тыпу %s."</string>
-    <string name="restore_default_apn" msgid="6596048535642130689">"Аднаўленне параметраў APN па змаўчанні"</string>
+    <string name="restore_default_apn" msgid="6596048535642130689">"Аднаўленне стандартных параметраў APN"</string>
     <string name="menu_restore" msgid="4310539620115151551">"Скінуць налады"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Стандартныя налады адноўлены."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Параметры скіду"</string>
@@ -1919,7 +1904,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Пошук прылад Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Дазвольце праграмам і сэрвісам шукаць прылады паблізу, нават калі Bluetooth выключаны. Гэту функцыю можна выкарыстоўваць для паляпшэння працы геасэрвісаў."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Службы геалакацыі"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Службы геалакацыі"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Службы геалакацыі"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Службы геалакацыі для працы"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Выкарыстоўваць даныя геалакацыі, каб вызначаць часавы пояс"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Патрабуюцца даныя пра месцазнаходжанне прылады"</string>
@@ -1976,6 +1961,15 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Задайце PIN-код для працоўнага профілю"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Задайце ўзор разблакіроўкі"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Задайце ўзор разблакіроўкі для працы"</string>
+    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"У мэтах дадатковай бяспекі задайце пароль для разблакіроўкі тэлефона"</string>
+    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"У мэтах дадатковай бяспекі задайце PIN-код для разблакіроўкі тэлефона"</string>
+    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"У мэтах дадатковай бяспекі задайце ўзор разблакіроўкі тэлефона"</string>
+    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"У мэтах дадатковай бяспекі задайце пароль для разблакіроўкі планшэта"</string>
+    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"У мэтах дадатковай бяспекі задайце PIN-код для разблакіроўкі планшэта"</string>
+    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"У мэтах дадатковай бяспекі задайце ўзор разблакіроўкі планшэта"</string>
+    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"У мэтах дадатковай бяспекі задайце пароль для разблакіроўкі прылады"</string>
+    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"У мэтах дадатковай бяспекі задайце PIN-код для разблакіроўкі прылады"</string>
+    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"У мэтах дадатковай бяспекі задайце ўзор разблакіроўкі прылады"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Задайце пароль для выкарыстання адбітка"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Спачатку задайце ўзор"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Задайце PIN-код, каб абараніць прыладу"</string>
@@ -1998,9 +1992,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Для распазнавання твару задайце пароль"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Для распазнавання твару наладзьце ўзор"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Для распазнавання твару задайце PIN-код"</string>
-    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="9091792721166354172">"Каб скарыстаць біяметрыю, задайце пароль"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4949972592985176347">"Каб скарыстаць біяметрыю, задайце ўзор"</string>
-    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="4215367936503271941">"Каб скарыстаць біяметрыю, задайце PIN"</string>
+    <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Задайце пароль для выкарыстання твару ці адбітка пальца"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Задайце ўзор для выкарыстання твару ці адбітка пальца"</string>
+    <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Задайце PIN-код для выкарыстання твару ці адбітка пальца"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Забылі пароль?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Забылі ўзор разблакіроўкі?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Забылі PIN-код?"</string>
@@ -2183,7 +2177,7 @@
     <string name="instant_app_details_summary" msgid="417197491598208216">"Дадатковая інфармацыя ў <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Выконваецца"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Не выкарыстоўваецца)"</string>
-    <string name="no_default_apps" msgid="8966319676910104570">"Няма дадаткаў па змаўчанні."</string>
+    <string name="no_default_apps" msgid="8966319676910104570">"Няма праграм."</string>
     <string name="storageuse_settings_title" msgid="3125650750657988194">"Выкарыстанне сховішча"</string>
     <string name="storageuse_settings_summary" msgid="5001621552305431831">"Паглядзець месца, якое выкарыстоўваюць прыкладанні"</string>
     <string name="service_restarting" msgid="5104563288155809226">"Перазагрузка"</string>
@@ -2271,7 +2265,7 @@
     <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"Выбар раскладкі клавіятуры"</string>
     <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"Наладка раскладкі клавіятуры"</string>
     <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"Каб перакл., націсніце Ctrl-Space"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"Па змаўчанні"</string>
+    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"Стандартна"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Раскладкі клавіятуры"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Асабісты слоўнік"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Асабісты слоўнік для працы"</string>
@@ -2396,8 +2390,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Націсніце кнопку спецыяльных магчымасцей \"<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>\", якая знаходзіцца ўнізе экрана.\n\nКаб пераключыцца на іншую функцыю, утрымлівайце кнопку спецыяльных магчымасцей націснутай."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Правядзіце па экране двума пальцамі знізу ўверх.\n\nКаб пераключыцца на іншую функцыю, правядзіце двума пальцамі ўверх і ўтрымлівайце іх на экране."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Правядзіце па экране трыма пальцамі знізу ўверх.\n\nКаб пераключыцца на іншую функцыю, правядзіце трыма пальцамі ўверх і ўтрымлівайце іх на экране."</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_floating (4459254227203203324) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Дадатковыя параметры"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Даведацца больш пра сэрвіс \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Утрымліваць клавішы гучнасці націснутымі"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"утрыманне клавіш гучнасці націснутымі"</string>
@@ -2417,8 +2410,7 @@
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Кнопка спец. магчымасцей; жэст"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Выкарыстанне кнопкі спецыяльных магчымасцей. Гэты жэст недаступны з 3-кнопачнай навігацыяй."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Хуткі доступ да спецыяльных магчымасцей"</string>
-    <!-- no translation found for accessibility_button_gesture_description (2717632658372117656) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Хуткі доступ да спецыяльных магчымасцей з любога экрана.\n\nКаб пачаць, адкрыйце налады спецыяльных магчымасцей і выберыце патрэбную функцыю. Націсніце ярлык і выберыце кнопку спецыяльных магчымасцей.\n\nКаб скарыстаць кнопку спецыяльных магчымасцей на панэлі навігацыі, пераключыцеся на 2-кнопачную ці 3-кнопачную навігацыю."</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Хуткі доступ да спецыяльных магчымасцей з любога экрана. \n\nКаб пачаць, адкрыйце налады спецыяльных магчымасцей і выберыце патрэбную функцыю. Націсніце ярлык і выберыце кнопку спецыяльных магчымасцей."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Скарыстаць кнопку ці жэст"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Месцазнаходжанне"</string>
@@ -2501,7 +2493,7 @@
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Сэрвіс працуе некарэктна. Націсніце, каб даведацца больш."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Сэрвіс працуе некарэктна."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Хуткія каманды спецыяльных магчымасцей"</string>
-    <string name="enable_quick_setting" msgid="6648073323202243604">"Паказваць у Хуткіх наладах"</string>
+    <string name="enable_quick_setting" msgid="6648073323202243604">"Паказваць у хуткіх наладах"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Рэжым карэкцыі"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Дэйтэранамалія"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"Пратанамалія"</string>
@@ -2517,10 +2509,8 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Зацямніце экран, каб было зручней чытаць.&lt;br/&gt;&lt;br/&gt; Гэта можа быць карысным у наступных выпадках: &lt;ol&gt; &lt;li&gt; узровень стандартнай мінімальнай яркасці на вашым тэлефоне даволі высокі;&lt;/li&gt; &lt;li&gt; вы выкарыстоўваеце тэлефон ва ўмовах цемнаты, напрыклад ноччу ці ў цёмным памяшканні перад адыходам да сну.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Зацямніце экран, каб было зручней чытаць.&lt;br/&gt;&lt;br/&gt; Гэта можа быць карысным у наступных выпадках: &lt;ol&gt; &lt;li&gt; узровень стандартнай мінімальнай яркасці на вашым планшэце даволі высокі;&lt;/li&gt; &lt;li&gt; вы выкарыстоўваеце планшэт ва ўмовах цемнаты, напрыклад ноччу ці ў цёмным памяшканні перад адыходам да сну.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Інтэнсіўнасць"</string>
-    <!-- no translation found for reduce_bright_colors_intensity_start_label (930387498396426039) -->
-    <skip />
-    <!-- no translation found for reduce_bright_colors_intensity_end_label (1422600205484299860) -->
-    <skip />
+    <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Цямней"</string>
+    <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Ярчэй"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Працягнуць пасля перазапуску прылады"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="one">Кароткі (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
@@ -2577,7 +2567,7 @@
     <string name="captioning_preview_characters" msgid="7854812443613580460">"Аа"</string>
     <string name="locale_default" msgid="8948077172250925164">"Стандартна"</string>
     <string name="color_title" msgid="2511586788643787427">"Колер"</string>
-    <string name="color_unspecified" msgid="4102176222255378320">"Па змаўчанні"</string>
+    <string name="color_unspecified" msgid="4102176222255378320">"Стандартна"</string>
     <string name="color_none" msgid="3703632796520710651">"Няма"</string>
     <string name="color_white" msgid="1896703263492828323">"Белы"</string>
     <string name="color_gray" msgid="8554077329905747877">"Шэры"</string>
@@ -2615,22 +2605,22 @@
     <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"адчувальнасць да святла, фотафобія, цёмная тэма, мігрэнь, галаўны боль, рэжым чытання, начны рэжым, паменшыць яркасць, кропка белага"</string>
     <string name="keywords_accessibility" msgid="4263443239404659143">"Лёгкасць выкарыстання, прастата доступу, дапамога, дапаможны"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"Лупа для акна, маштаб, павелічэнне, слабы зрок, павялічыць, зрабіць большым"</string>
-    <string name="keywords_talkback" msgid="5563641756576863139">"Праграма чытання з экрана, голас за кадрам, VoiceOver, Галасавая дапамога, слепата, слабы зрок, TTS, сінтэз маўлення, агучванне"</string>
+    <string name="keywords_talkback" msgid="2816435437095102527"></string>
     <string name="keywords_live_caption" msgid="1667203998080567556">"Субцітры, субцітры, цітры, Імгненная транскрыпцыя, слабы слых, страта слыху, транскрыпцыя ў рэальным часе, пераўтварэнне маўлення ў тэкст, субцітр"</string>
-    <string name="keywords_live_transcribe" msgid="9139708749952089372">"Субцітры, субцітры, цітры, Імгненныя субцітры, слабы слых, страта слыху, транскрыпцыя ў рэальным часе, пераўтварэнне маўлення ў тэкст, субцітр"</string>
-    <string name="keywords_sound_notifications" msgid="4039008340786330887">"Апавяшчэнні, слабы слых, страта слыху, апавясціць"</string>
-    <string name="keywords_sound_amplifier" msgid="921848808218956694">"Персанальныя прадукты для ўзмацнення гучнасці, узмацніць, узмацненне гуку, слабы слых, страта слыху, узмацненне"</string>
+    <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
+    <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
+    <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
     <string name="keywords_display_size" msgid="5286419615221231518">"памер экрана, вялікі экран"</string>
     <string name="keywords_bold_text" msgid="6257418169207099589">"Высокая кантраснасць, слабы зрок, паўтлусты шрыфт, моцнае вылучэнне"</string>
-    <string name="keywords_select_to_speak" msgid="7701037476608073886">"Слухаць тэкст, чытаць услых, экран маўлення, праграма чытання з экрана"</string>
+    <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"змяніць колер"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"зацямніць экран, асвятліць экран"</string>
-    <string name="keywords_accessibility_menu" msgid="6914186159748988391">"маторыка, хуткае меню, дапаможнае меню, дотык, спрыт"</string>
-    <string name="keywords_switch_access" msgid="8016330125790412167">"маторыка, пераключальнік, рука, спецыяльныя магчымасці, дапаможная тэхналогія, параліч, бакавы аміатрафічны скляроз, сканіраванне, пакрокавае сканіраванне"</string>
+    <string name="keywords_accessibility_menu" msgid="4300579436464706608"></string>
+    <string name="keywords_switch_access" msgid="5813094504384313402"></string>
     <string name="keywords_auto_click" msgid="7151756353013736931">"маторыка, мыш"</string>
     <string name="keywords_hearing_aids" msgid="524979615168196199">"слабы слых, страта слыху"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"слабы слых, страта слыху, субцітры, тэлетайп, TTY"</string>
-    <string name="keywords_voice_access" msgid="4486056790014652334">"голас, галасавое кіраванне, маторыка, рука, мікрафон, мікрафон, дыктаванне, маўленне, кіраванне"</string>
+    <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="print_settings" msgid="8519810615863882491">"Друк"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Выключана"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -2742,9 +2732,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Паглядзіце, якія праграмы найбольш спажываюць зарад"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Зарадка часова абмежавана"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Для эканоміі зараду акумулятара. Даведайцеся больш."</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Тэлефон выкарыстоўваецца больш, чым звычайна. Акумулятар хутка разрадзіцца.\n\nПраграмы з самым высокім спажываннем энергіі:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Планшэт выкарыстоўваецца больш, чым звычайна. Акумулятар хутка разрадзіцца.\n\nПраграмы з самым высокім спажываннем энергіі:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Ваша прылада выкарыстоўваецца больш, чым звычайна. Акумулятар хутка разрадзіцца.\n\nПраграмы з самым высокім спажываннем энергіі:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"З прычыны таго, што вы карысталіся тэлефонам больш, чым звычайна, акумулятар можа разрадзіцца хутчэй, чым чакалася.\n\nПраграмы з высокім спажываннем энергіі:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"З прычыны таго, што вы карысталіся планшэтам больш, чым звычайна, акумулятар можа разрадзіцца хутчэй, чым чакалася.\n\nПраграмы з высокім спажываннем энергіі:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"З прычыны таго, што вы карысталіся прыладай больш, чым звычайна, акумулятар можа разрадзіцца хутчэй, чым чакалася.\n\nПраграмы з высокім спажываннем энергіі:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Утрымлівае энергазатратныя дзеянні ў фонавым рэжыме"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="one">Абмежаваць працу %1$d праграмы</item>
@@ -2954,7 +2944,7 @@
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Уключыць"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Карыстанне рэжымам эканоміі зараду"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Выкарыстоўваць эканомію зараду"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"Уключаць аўтаматычна"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Ніколі"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"пры ўзроўні зараду акумулятара <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -3034,6 +3024,8 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"Сеткі VPN (<xliff:g id="VPN_COUNT">%d</xliff:g> шт.) не абаронены"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Адаптыўная магчымасць падключэння"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Павялічвае тэрмін службы акумулятара і павышае прадукцыйнасць прылады праз аўтаматычнае кіраванне падключэннямі да сеткі"</string>
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Уключана"</string>
+    <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Выключана"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Сховішча ўліковых даных"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Усталяваць сертыфікат"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="6644116499934553975">"Усталяваць сертыфікаты са сховішча"</string>
@@ -3056,7 +3048,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"Сертыфікат карыстальніка VPN і праграм"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Сертыфікат Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Вашы даныя не будуць прыватнымі"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Сертыфікаты ЦС выкарыстоўваюцца вэб-сайтамі, праграмамі і VPN для шыфравання. Усталёўвайце сертыфікаты ЦС толькі ад арганізацый, якім давяраеце. \n\n Калі вы ўсталюеце сертыфікат ЦС, яго ўладальнік зможа атрымаць доступ да вашых даных, напрыклад пароляў, рэквізітаў карткі, звестак пра вэб-сайты, якія вы наведалі, і пра праграмы, якімі карысталіся, нават калі такая інфармацыя зашыфравана."</string>
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Сертыфікаты ЦС выкарыстоўваюцца вэб-сайтамі, праграмамі і VPN для шыфравання. Усталёўвайце сертыфікаты ЦС толькі ад арганізацый, якім давяраеце. \n\nКалі вы ўсталюеце сертыфікат ЦС, яго ўладальнік зможа атрымаць доступ да вашых даных, напрыклад пароляў, рэквізітаў карткі, звестак пра вэб-сайты, якія вы наведалі, і пра праграмы, якімі карысталіся, нават калі такая інфармацыя зашыфравана."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Не ўсталёўваць"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Усё роўна ўсталяваць"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Сертыфікат не ўсталяваны"</string>
@@ -3069,7 +3061,9 @@
     <string name="no_certificate_management_app" msgid="3025739370424406717">"Няма"</string>
     <string name="certificate_management_app_description" msgid="8507306554200869005">"Падчас выкарыстання вамі праграм і URL-адрасоў, прыведзеных ніжэй, сертыфікаты будуць спраўджваць вашу асобу"</string>
     <string name="uninstall_certs_credential_management_app" msgid="4945883254446077354">"Выдаліць сертыфікаты"</string>
-    <string name="remove_credential_management_app" msgid="6879631067380232928">"Выдаліць"</string>
+    <string name="remove_credential_management_app" msgid="6089291496976812786">"Выдаліць праграму"</string>
+    <string name="remove_credential_management_app_dialog_title" msgid="5713525435104706772">"Выдаліць гэту праграму?"</string>
+    <string name="remove_credential_management_app_dialog_message" msgid="7739474298063646935">"Гэта праграма не будзе кіраваць сертыфікатамі, аднак яна застанецца на вашай прыладзе. Усе ўсталяваныя праграмай сертыфікаты будуць выдалены."</string>
     <plurals name="number_of_urls" formatted="false" msgid="403979258551655023">
       <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> URL-адрас</item>
       <item quantity="few"><xliff:g id="NUMBER_1">%d</xliff:g> URL-адрасы</item>
@@ -3142,7 +3136,7 @@
     <string name="work_mode_on_summary" msgid="2042885311126239961">"Пад кіраваннем вашай арганізацыі"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"Праграмы і апавяшчэнні выключаны"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"Выдаліць працоўны профіль"</string>
-    <string name="background_data" msgid="321903213000101158">"Зыходныя дадзеныя"</string>
+    <string name="background_data" msgid="321903213000101158">"Фонавая перадача даных"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Прыкладанні ў любы час могуць сінхранізаваць, адпраўляць і атрымлiваць дадзеныя"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"Адключыць фонавыя дадзеныя?"</string>
     <string name="background_data_dialog_message" msgid="7760280837612824670">"Адключэнне перадачы дадзеных у фоне падаўжае час аўтаномнай працы і памяншае выкарыстанне дадзеных. Некаторыя прыкладанні могуць па-ранейшаму выкарыстоўваць падключэнне для перадачы дадзеных у фоне."</string>
@@ -3189,7 +3183,7 @@
     <string name="misc_files_selected_count_bytes" msgid="7622766714974500289">"<xliff:g id="NUMBER">%1$s</xliff:g> з <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="7898929601615536401">"Выбраць усё"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"Выкарыстанне трафіка"</string>
-    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Мабільныя даныя і Wi‑Fi"</string>
+    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Мабільная перадача даных і Wi‑Fi"</string>
     <string name="data_usage_accounting" msgid="6832015632699116754">"Улік даных аператара можа адрознівацца ад уліку вашай прылады."</string>
     <string name="data_usage_app" msgid="6367974637783240699">"Выкарыстанне памяці"</string>
     <string name="data_usage_app_info_label" msgid="3542220416056122841">"ЗВЕСТКІ ПРА ПРАГРАМЫ"</string>
@@ -3237,7 +3231,7 @@
     <string name="data_usage_forground_label" msgid="5762048187044975428">"На пярэднім плане:"</string>
     <string name="data_usage_background_label" msgid="5363718469293175279">"Фонавае"</string>
     <string name="data_usage_app_settings" msgid="5693524672522122485">"Налады праграмы"</string>
-    <string name="data_usage_app_restrict_background" msgid="5728840276368097276">"Фонавы трафік"</string>
+    <string name="data_usage_app_restrict_background" msgid="5728840276368097276">"Фонавая перадача даных"</string>
     <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"Уключыць выкарыстанне мабільнай перадачы даных у фоне"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="8213268097024597864">"Каб абмежаваць зыходныя дадзеныя для гэтага прыкладання, спачатку ўсталюйце ліміт мабільных дадзеных."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="5383874438677899255">"Абмежаваць зыходныя даныя?"</string>
@@ -3350,7 +3344,7 @@
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"Карыстальнік"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Адключыць"</string>
     <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"Уключыць"</string>
-    <string name="trusted_credentials_remove_label" msgid="8975881053042174913">"Выдаліць"</string>
+    <string name="trusted_credentials_remove_label" msgid="8296330919329489422">"Выдаліць"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"Давяраць"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"Уключыць сістэмны сертыфікат ЦС?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"Адключыць сістэмны сертыфікат ЦС?"</string>
@@ -3618,7 +3612,7 @@
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi, wi-fi, выклік, тэлефанія"</string>
     <string name="keywords_display" msgid="874738809280751745">"экран, сэнсарны экран"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"зацямненне экрана, сэнсарны экран, акумулятар, яркі"</string>
-    <string name="keywords_display_night_display" msgid="1132588285544830670">"зацямненне экрана, ноч, адценне, начная змена, яркасць, колер экрана, колер, фарба, адчувальнасць да святла, фотафобія, зацямніць, зрабіць цямнейшым, цёмны рэжым, мігрэнь"</string>
+    <string name="keywords_display_night_display" msgid="4711054330804250058">"зацямненне экрана, ноч, адценне, начная змена, яркасць, колер экрана, колер, фарба"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"фон, персаналізаваць, дапасаваць дысплэй"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"памер тэксту"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"праект, трансляцыя, адлюстраванне экрана, абагульванне экрана, адлюстраванне, абагульваць экран, трансляцыя экрана"</string>
@@ -3663,7 +3657,7 @@
     <string name="keywords_sim_status" msgid="8784456547742075508">"сетка, стан мабільнай сеткі, рабочы стан, магутнасць сігналу, тып мабільнай сеткі, роўмінг, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"серыйны нумар, версія апаратнага забеспячэння"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"узровень патчу бяспекі android, версія дыяпазону, версія ядра"</string>
-    <string name="keywords_dark_ui_mode" msgid="6465231409128452489">"тэма, светлая, цёмная, рэжым"</string>
+    <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"тэма, святло, цёмны, рэжым, адчувальнасць да святла, фотафобія, зрабіць цямнейшым, зацямніць, цёмны рэжым, мігрэнь"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"цёмная тэма"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"памылка"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Аўтаматычнае ўключэнне экрана, экран блакіроўкі"</string>
@@ -3693,7 +3687,7 @@
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, пашыраныя магчымасці выкліку, выклік у 4g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"дадаць мову, дадаць мову"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"памер тэксту, вялікі шрыфт, буйны шрыфт, павялічаны тэкст, слабы зрок, павялічыць тэкст, праграма для павелічэння шрыфту, павелічэнне шрыфту"</string>
-    <string name="default_sound" msgid="6604374495015245195">"Гук па змаўчанні"</string>
+    <string name="default_sound" msgid="6604374495015245195">"Стандартная мелодыя"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Гучнасць званкоў і апавяшчэнняў: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Гучнасць, вібрацыя, рэжым \"Не турбаваць\""</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Для гуку выкліку заданы рэжым вібрацыі"</string>
@@ -3811,7 +3805,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Праграмы"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Будзільнікі і іншыя апавяшчэнні"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"Расклады"</string>
-    <string name="zen_category_duration" msgid="7515850842082631460">"Працягласць пры ўключэнні з Хуткіх налад"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"Працягласць пры ўключэнні з хуткіх налад"</string>
     <string name="zen_settings_general" msgid="2704932194620124153">"Агульныя налады"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"Калі ўключаны рэжым \"Не турбаваць\", выключаюцца гук і вібрацыя для ўсіх элементаў, акрамя выбраных вамі вышэй."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Карыстальніцкія налады"</string>
@@ -3847,11 +3841,9 @@
     <string name="conversation_notifs_category" msgid="2549844862379963273">"Размова"</string>
     <string name="recent_notifications" msgid="1105631022180160436">"Нядаўна адпраўленыя"</string>
     <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"Прагледзець усё за апошнія 7 дзён"</string>
-    <!-- no translation found for general_notification_header (3669031068980713359) -->
-    <skip />
+    <string name="general_notification_header" msgid="3669031068980713359">"Кіраваць"</string>
     <string name="app_notification_field" msgid="3858667320444612716">"Налады праграмы"</string>
-    <!-- no translation found for app_notification_field_summary (5981393613897713471) -->
-    <skip />
+    <string name="app_notification_field_summary" msgid="5981393613897713471">"Кіраваць апавяшчэннямі з асобных праграм"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Агульныя налады"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Апавяшчэнні працоўнага профілю"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Адаптыўныя апавяшчэнні"</string>
@@ -3922,7 +3914,7 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Апавяшчэнні на экране блакіроўкі"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Паказваць усе размовы: стандартныя і без гуку"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Не паказваць размовы і апавяшчэнні без гуку"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не паказваць апавяшчэнняў"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не паказваць апавяшчэнні"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Канфідэнцыяльныя апавяшчэнні"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Паказваць канфідэнцыяльнае змесціва на заблакіраваным экране"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Канфідэнцыяльныя апавяшчэнні працоўнага профілю"</string>
@@ -3967,8 +3959,7 @@
     <string name="recent_conversations" msgid="471678228756995274">"Нядаўнія размовы"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"Ачысціць нядаўнія размовы"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"Нядаўнія размовы выдалены"</string>
-    <!-- no translation found for recent_convo_removed (8686414146325958281) -->
-    <skip />
+    <string name="recent_convo_removed" msgid="8686414146325958281">"Размова выдалена"</string>
     <string name="clear" msgid="5092178335409471100">"Ачысціць"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Паказваць прыярытэтныя размовы ў выглядзе ўсплывальных апавяшчэнняў"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Прыярытэтныя размовы паказваюцца ў верхняй частцы панэлі апавяшчэнняў. Вы можаце таксама наладзіць іх паказ у выглядзе ўсплывальных апавяшчэнняў і пры ўключаным рэжыме \"Не турбаваць\"."</string>
@@ -4013,8 +4004,7 @@
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Ніколі"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Апавяшчэнні прылад і праграм"</string>
-    <!-- no translation found for manage_notification_access_summary (2907135226478903997) -->
-    <skip />
+    <string name="manage_notification_access_summary" msgid="2907135226478903997">"Вызначыце праграмы і прылады, якія змогуць мець доступ да апавяшчэнняў"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"Доступ да апавяшчэнняў працоўнага профілю заблакіраваны"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Прыкладанні не могуць чытаць апавяшчэнні"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="3703008881487586312">
@@ -4219,7 +4209,7 @@
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Толькі ад абанентаў, якія выклікаюць паўторна"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Няма"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Ніякія"</string>
-    <string name="zen_mode_alarms" msgid="5989343060100771099">"Сігналы"</string>
+    <string name="zen_mode_alarms" msgid="5989343060100771099">"Сігналы будзільніка"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Ад таймераў, будзільнікаў, сістэм бяспекі і іншых праграм"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"будзільнікі"</string>
     <string name="zen_mode_alarms_list_first" msgid="2780418316613576610">"Будзільнікі"</string>
@@ -4305,6 +4295,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Увядзіце PIN-код адміністратара"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Уключана"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Выключана"</string>
+    <string name="nfc_setting_on" msgid="7701896496026725772">"Уключана"</string>
+    <string name="nfc_setting_off" msgid="7142103438532732309">"Выключана"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Уключана"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Выключана"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Замацаванне праграм"</string>
@@ -4358,8 +4350,7 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Спасылкі, якія падтрымліваюцца"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Іншыя стандартныя налады"</string>
     <string name="app_launch_add_link" msgid="8622558044530305811">"Дадаць спасылку"</string>
-    <!-- no translation found for app_launch_footer (4521865035105622557) -->
-    <skip />
+    <string name="app_launch_footer" msgid="4521865035105622557">"Праграма можа спраўджваць спасылкі, якія будуць адкрывацца ў ёй аўтаматычна."</string>
     <plurals name="app_launch_verified_links_title" formatted="false" msgid="3945301449178587783">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> спраўджаная спасылка</item>
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> спраўджаныя спасылкі</item>
@@ -4554,7 +4545,8 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Перадача файлаў"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Перадача файлаў на іншую прыладу"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"Перадача фота (PTP)"</string>
-    <string name="usb_transcode_files" msgid="5999760694155541693">"Перакадзіраваць экспартаваныя мультымедыя"</string>
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Пераўтвараць відэа ў фармат AVC"</string>
+    <string name="usb_transcode_files_summary" msgid="307102635711961513">"Відэа будуць прайгравацца на большай колькасці медыяпрайгравальнікаў, аднак іх якасць можа пагоршыцца"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Перадача фатаграфій або файлаў, калі МТР не падтрымліваецца (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB-мадэм"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
@@ -4712,10 +4704,8 @@
     <string name="disabled_by_policy_title_screen_capture" msgid="6085100101044105811">"Нельга рабіць здымкі экрана"</string>
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Не ўдалося адкрыць праграму"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Заблакіравана крэдыторам"</string>
-    <!-- no translation found for disabled_by_policy_title_biometric_parental_consent (2463673997797134678) -->
-    <skip />
-    <!-- no translation found for disabled_by_policy_content_biometric_parental_consent (7124116806784305206) -->
-    <skip />
+    <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Патрабуецца дапамога бацькоў"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Каб наладзіць гэту функцыю, перадайце тэлефон аднаму з бацькоў"</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Калі ў вас ёсць пытанні, звярніцеся да IT-адміністратара"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Дадатковая інфармацыя"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"У вашага адміністратара ёсць магчымасць маніторынгу і адміністравання праграм і даных, звязаных з вашым працоўным профілем, у тым ліку налад, дазволаў, карпаратыўнага доступу, сеткавай актыўнасці і геаданых."</string>
@@ -4774,7 +4764,7 @@
     <string name="color_temperature_toast" msgid="7611532183532407342">"Каб прымяніць змяненне колеру, адключыце экран"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"Лазерны датчык камеры"</string>
     <string name="ota_disable_automatic_update" msgid="1953894421412420231">"Аўтаматычныя абнаўленні сістэмы"</string>
-    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"Ужыць абнаўленні падчас перазапуску прылады"</string>
+    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"Прымяняць абнаўленні падчас перазапуску прылады"</string>
     <string name="usage" msgid="287782903846013936">"Выкарыстанне"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"Выкарыстанне мабільнай перадачы даных"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Выкарыстанне трафіка"</string>
@@ -4844,7 +4834,7 @@
     <string name="data_saver_on" msgid="7848893946018448793">"Уключана"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Выключана"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Уключыць эканомію трафіка"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Неабмежаваная перадача даных"</string>
+    <string name="unrestricted_app_title" msgid="7117585996574329284">"Неабмежаванае выкарыстанне трафіка"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Не абмяжоўваць перадачу даных пры ўключанай Эканоміі трафіка"</string>
     <string name="home_app" msgid="6056850504746902747">"Галоўны экран"</string>
     <string name="no_default_home" msgid="3588073707316139318">"Няма стандартнай Галоўнай старонкі"</string>
@@ -4937,8 +4927,8 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Трасіроўка Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Датчыкі выключаны"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Налады працоўнага профілю"</string>
-    <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"Пошук кантактаў"</string>
-    <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Дазволіць пошук кантактаў у арганізацыі для вызначэння абанентаў і кантактаў"</string>
+    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Шукаць кантакты ў асабістых праграмах з выкарыстаннем працоўнага каталога"</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"Вынікі пошукаў і ўваходныя выклікі могуць быць бачнымі вашаму ІT-адміністратару"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Каляндар для некалькіх профіляў"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Паказваць падзеі, звязаныя з працай, у прыватным календары"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -5006,22 +4996,16 @@
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Двойчы дакрануцца, каб праверыць апавяшчэнні"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Двойчы дакраніцеся, каб праверыць планшэт"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Двойчы дакраніцеся, каб праверыць прыладу"</string>
-    <string name="swipe_bottom_to_notifications_title" msgid="7631744948948666524">"Прагартаць (апавяшчэнні)"</string>
-    <string name="swipe_bottom_to_notifications_summary" msgid="5222014960019273801">"Каб праглядзець апавяшчэнні, трэба правесці пальцам па ніжняй частцы экрана ўніз.\nКалі гэта функцыя ўключана, рэжым кіравання адной рукой недаступны."</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Рэжым кіравання адной рукой"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Выкарыстоўваць рэжым кіравання адной рукой"</string>
-    <string name="one_handed_app_taps_to_exit" msgid="1496702498286387879">"Выходзіць з праграмы пры пераключэнні на іншую праграму"</string>
-    <string name="one_handed_timeout_title" msgid="8851767822595789976">"Час чакання"</string>
-    <string name="one_handed_timeout_short" msgid="304069319841702995">"4 секунды"</string>
-    <string name="one_handed_timeout_medium" msgid="6723411319911799018">"8 секунд"</string>
-    <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 секунд"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"дасягальнасць"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Правядзіце пальцам уніз"</string>
-    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Каб выкарыстоўваць рэжым кіравання адной рукой, правядзіце пальцам ад ніжняга краю экрана ўверх. Для карыстання гэтай функцыяй неабходна ўключыць у наладах навігацыі навігацыю жэстамі."</string>
-    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Перацягніце экран у зону доступу"</string>
+    <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Выкарыстоўваць ярлык, каб"</string>
+    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Каб выкарыстоўваць рэжым кіравання адной рукой, правядзіце пальцам ад ніжняга краю экрана ўверх. Для карыстання гэтай функцыяй неабходна ўключыць у наладах навігацыю жэстамі."</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Перацягнуць экран у зону доступу"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Верхняя частка экрана перамесціцца ў зону доступу вялікага пальца."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Паказаць апавяшчэнні"</string>
-    <string name="one_handed_action_show_notification_summary" msgid="114988229079950849">"З\'явяцца апавяшчэнне і налады."</string>
+    <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"З\'явяцца апавяшчэнні і налады."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Каб праверыць час, апавяшчэнні і іншую інфармацыю, двойчы дакраніцеся да экрана."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Падняць, каб праверыць тэлефон"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Падніміце планшэт, каб праверыць яго"</string>
@@ -5268,6 +5252,10 @@
     <string name="unknown_unavailability_setting_summary" msgid="9060213910510360231">"Налада недаступная"</string>
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Уліковы запіс"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Назва прылады"</string>
+    <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Асноўныя звесткі"</string>
+    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Прававая інфармацыя і нарматыўныя патрабаванні"</string>
+    <string name="my_device_info_device_details_category_title" msgid="4848438695638348680">"Падрабязныя звесткі пра прыладу"</string>
+    <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Ідэнтыфікатары прылады"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Кіраванне наладамі Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Дазволіць праграме кіраваць наладамі Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Дазволіць гэтай праграме ўключаць ці выключаць Wi-Fi, шукаць сеткі Wi-Fi і падключацца да іх, дадаваць або выдаляць сеткі ці запускаць лакальны хот-спот"</string>
@@ -5298,6 +5286,7 @@
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"Нічога не рабіць"</string>
     <string name="prevent_ringing_option_vibrate_summary" msgid="3435299885425754304">"Вібрацыя"</string>
     <string name="prevent_ringing_option_mute_summary" msgid="3939350522269337013">"Выключыць гук"</string>
+    <string name="prevent_ringing_option_unavailable_lpp_summary" msgid="3193459102328015340">"Каб уключыць, спачатку змяніце ў меню кнопкі сілкавання параметр \"Націск і ўтрыманне кнопкі сілкавання\"."</string>
     <string name="pref_title_network_details" msgid="7329759534269363308">"Інфармацыя аб сетцы"</string>
     <string name="about_phone_device_name_warning" msgid="1938930553285875166">"Назва вашай прылады даступная для праграм на вашым тэлефоне. Яе таксама будуць бачыць іншыя людзі, калі вы падключыцеся да прылад праз Bluetooth, падключыцеся да сеткі Wi-Fi ці наладзіце хот-спот Wi-Fi."</string>
     <string name="devices_title" msgid="649715719278562515">"Прылады"</string>
@@ -5472,8 +5461,7 @@
     <string name="dsds_notification_after_suw_title" msgid="3738898232310273982">"Наладзьце іншую SIM-карту"</string>
     <string name="dsds_notification_after_suw_text" msgid="1287357774676361084">"Выберыце актыўную SIM-карту ці выкарыстоўвайце 2 SIM-карты адначасова"</string>
     <string name="choose_sim_title" msgid="4804689675237716286">"Выберыце нумар для выкарыстання"</string>
-    <!-- no translation found for choose_sim_text (4356662002583501647) -->
-    <skip />
+    <string name="choose_sim_text" msgid="4356662002583501647">"{count,plural, =1{На гэтай прыладзе ёсць 1 даступны нумар, але адначасова можа выкарыстоўвацца толькі адзін}=2{На гэтай прыладзе ёсць 2 даступныя нумары, але адначасова можа выкарыстоўвацца толькі адзін}one{На гэтай прыладзе ёсць # даступны нумар, але адначасова можа выкарыстоўвацца толькі адзін}few{На гэтай прыладзе ёсць # даступныя нумары, але адначасова можа выкарыстоўвацца толькі адзін}many{На гэтай прыладзе ёсць # даступных нумароў, але адначасова можа выкарыстоўвацца толькі адзін}other{На гэтай прыладзе ёсць # даступнага нумара, але адначасова можа выкарыстоўвацца толькі адзін}}"</string>
     <string name="choose_sim_activating" msgid="9035902671985449448">"Ідзе актывацыя<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="choose_sim_could_not_activate" msgid="2154564459842291617">"Цяпер не ўдалося актываваць"</string>
     <string name="choose_sim_item_summary_unknown" msgid="7854314795485227568">"Невядомы нумар"</string>
@@ -5547,7 +5535,7 @@
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ПРАЦЯГНУЦЬ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"НЕ, ДЗЯКУЙ"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Месцазнаходжанне"</string>
-    <string name="wfc_disclaimer_location_desc_text" msgid="2799241640320172899">"Аператар мабільнай сувязі можа збіраць даныя пра ваша месцазнаходжанне, каб забяспечваць якаснае абслугоўванне.\n\nАзнаёмцеся з палітыкай прыватнасці вашага аператара"</string>
+    <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Аператар можа збіраць даныя пра ваша месцазнаходжанне, калі вы выкарыстоўваеце гэты сэрвіс для экстранных выклікаў.\n\nПадрабязнасці глядзіце ў палітыцы прыватнасці вашага аператара."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Вы можаце страціць доступ да нявыкарыстаных хвілін і трафіка. Перш чым выдаляць, звярніцеся да свайго аператара."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"захаванне змесціва, змесціва праграмы"</string>
     <string name="content_capture" msgid="868372905432812238">"Змесціва праграмы"</string>
@@ -5583,12 +5571,15 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"элементы кіравання прыладай"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Карткі і талоны"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"карткі і талоны"</string>
-    <string name="power_menu_setting_name" msgid="7843519296976254765">"Меню сiлкавання"</string>
-    <string name="power_menu_setting_title" msgid="7716546106215378956">"Меню кнопкі сілкавання"</string>
-    <string name="power_menu_none" msgid="4620640577918731270">"Не паказваць ніякае змесціва"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"Націск і ўтрыманне кнопкі сілкавання"</string>
+    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Націск і ўтрыманне для выкліку Памочніка"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Націск і ўтрыманне для выкліку меню кнопкі сілкавання"</string>
+    <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Націск і ўтрыманне выключаны"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Спачатку трэба наладзіць блакіроўку экрана"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Выклік Памочніка доўгім націсканнем"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Для выкліку Памочніка ўтрымлівайце націснутай кнопку сілкавання"</string>
+    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Меню кнопкі сілкавання і экстранных выклікаў:\nадначасова націсніце кнопку сілкавання і павелічэння гучнасці."</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Прадухіліць званок:\nярлык даступны ў меню гучнасці."</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Паказ кашалька"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Дазволіць доступ да кашалька з заблакіраванага экрана і хуткіх налад"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Паказ элементаў кіравання прыладай"</string>
@@ -5608,7 +5599,7 @@
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дазвольце праграмам, якія могуць паказвацца паверх іншых, накладацца на экраны Налад"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Мультымедыя"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Замацаваць медыяпрайгравальнік"</string>
-    <string name="media_controls_resume_description" msgid="3163482266454802097">"Каб хутка ўзнавіць прайграванне, медыяпрайгравальнік застаецца адкрытым у Хуткіх наладах"</string>
+    <string name="media_controls_resume_description" msgid="3163482266454802097">"Каб хутка ўзнавіць прайграванне, медыяпрайгравальнік застаецца адкрытым у хуткіх наладах"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Паказваць рэкамендацыі мультымедыя"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"На аснове вашых дзеянняў"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Схаваць прайгравальнік"</string>
@@ -5661,15 +5652,12 @@
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Падключана"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Няма падключэння"</string>
-    <string name="mobile_data_off_summary" msgid="3841411571485837651">"Аўтаматычнае падключэнне да інтэрнэту адсутнічае"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Мабільная перадача даных не ўключаецца аўтаматычна"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Больш няма даступных сетак"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"Няма даступных сетак"</string>
-    <!-- no translation found for mobile_data_disable_title (8438714772256088913) -->
-    <skip />
-    <!-- no translation found for mobile_data_disable_message (7829414836454769970) -->
-    <skip />
-    <!-- no translation found for mobile_data_disable_message_default_carrier (4449469407705838612) -->
-    <skip />
+    <string name="mobile_data_disable_title" msgid="8438714772256088913">"Выключыць мабільную перадачу даных?"</string>
+    <string name="mobile_data_disable_message" msgid="7829414836454769970">"У вас не будзе доступу да інтэрнэту і перадачы даных праз аператара \"<xliff:g id="CARRIER">%s</xliff:g>\". Інтэрнэт будзе даступны толькі праз Wi-Fi."</string>
+    <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"ваш аператар"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Недаступна, бо ўключаны начны рэжым"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Скід налад важнасці апавяшчэнняў завершаны."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Праграмы"</string>
@@ -5692,7 +5680,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Выкарыстоўваць хот-спот Wi‑Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Выкарыстоўваць замацаванне праграмы"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Выкарыстоўваць параметры распрацоўшчыка"</string>
-    <string name="default_print_service_main_switch_title" msgid="5906994446393902832">"Выкарыстоўваць стандартны сэрвіс друку"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Скарыстаць сэрвіс друку"</string>
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Выкарыстоўваць шматкарыстальніцкі рэжым"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Выкарыстоўваць адладку па Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Выкарыстоўваць налады драйвера графічнай сістэмы"</string>

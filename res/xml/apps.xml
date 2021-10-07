@@ -55,7 +55,7 @@
         settings:searchable="false"/>
 
     <Preference
-        android:key="default_apps_v2"
+        android:key="default_apps"
         android:title="@string/app_default_dashboard_title"
         android:order="-996"
         settings:controller="com.android.settings.applications.DefaultAppsPreferenceController">
@@ -85,7 +85,7 @@
     </Preference>
 
     <Preference
-        android:key="special_access_v2"
+        android:key="special_access"
         android:fragment="com.android.settings.applications.specialaccess.SpecialAccessSettings"
         android:title="@string/special_access"
         android:order="20"

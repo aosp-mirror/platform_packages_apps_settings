@@ -1505,7 +1505,7 @@ public class ManageApplications extends InstrumentedFragment
             switch (mManageApplications.mListType) {
                 case LIST_TYPE_NOTIFICATION:
                     holder.updateSwitch(((AppStateNotificationBridge) mExtraInfoBridge)
-                                    .getSwitchOnClickListener(entry),
+                                    .getSwitchOnCheckedListener(entry),
                             AppStateNotificationBridge.enableSwitch(entry),
                             AppStateNotificationBridge.checkSwitch(entry));
                     if (entry.extraInfo != null

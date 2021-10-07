@@ -386,8 +386,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                                 + otherData.documentsAndOtherSize
                                 + otherData.trashSize
                                 + otherData.allAppsExceptGamesSize;
-                attributedSize += otherData.externalStats.totalBytes
-                        - otherData.externalStats.appBytes;
                 attributedSize -= otherData.duplicateCodeSize;
             }
 
