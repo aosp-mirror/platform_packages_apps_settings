@@ -18,11 +18,9 @@ package com.android.settings.homepage;
 
 import android.animation.LayoutTransition;
 import android.app.ActivityManager;
-import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
@@ -36,16 +34,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.accounts.AvatarViewMixin;
-import com.android.settings.core.CategoryMixin;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.core.CategoryMixin;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
@@ -207,6 +204,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             finish();
             return;
         }
+        targetIntent.setComponent(targetComponentName);
 
         // To prevent launchDeepLinkIntentToRight again for configuration change.
         intent.setAction(null);
@@ -223,11 +221,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
                 new ComponentName(Utils.SETTINGS_PACKAGE_NAME, ALIAS_DEEP_LINK),
                 targetComponentName,
+                targetIntent.getAction(),
                 true /* finishPrimaryWithSecondary */,
                 true /* finishSecondaryWithPrimary */);
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
                 new ComponentName(Settings.class.getPackageName(), Settings.class.getName()),
                 targetComponentName,
+                targetIntent.getAction(),
                 true /* finishPrimaryWithSecondary */,
                 true /* finishSecondaryWithPrimary */);
         startActivity(targetIntent);
