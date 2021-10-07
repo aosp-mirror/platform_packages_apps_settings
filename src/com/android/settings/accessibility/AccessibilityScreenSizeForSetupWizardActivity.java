@@ -15,13 +15,16 @@
  */
 package com.android.settings.accessibility;
 
+import static com.android.settings.core.SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE;
+
 import android.app.settings.SettingsEnums;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -29,11 +32,15 @@ import com.android.settings.R;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.display.FontSizePreferenceFragmentForSetupWizard;
 import com.android.settings.display.ScreenZoomPreferenceFragmentForSetupWizard;
+import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /** Settings font/display size activity for SUW. */
 public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedActivity {
@@ -42,26 +49,32 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
     // A parameter decides which fragment ({@link FontSizePreferenceFragmentForSetupWizard} or
     // {@link ScreenZoomPreferenceFragmentForSetupWizard}) will be visioned.
     static final String VISION_FRAGMENT_NO = "vision_fragment_no";
-
-    private int mFragmentNo;
-    private int mFontSizeFragmentNo;
+    /**
+     * Flags indicating the type of the fragment.
+     */
+    @IntDef({
+        FragmentType.FONT_SIZE,
+        FragmentType.SCREEN_SIZE,
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface FragmentType {
+        int FONT_SIZE = 1;
+        int SCREEN_SIZE = 2;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFontSizeFragmentNo = getResources().getInteger(R.integer.suw_font_size_fragment_no);
         final int appliedTheme = ThemeHelper.trySetDynamicColor(this)
                 ? R.style.SudDynamicColorThemeGlifV3_DayNight : R.style.SudThemeGlifV3_DayNight;
         setTheme(appliedTheme);
         setContentView(R.layout.accessibility_screen_size_setup_wizard);
-        mFragmentNo = getIntent().getExtras().getInt(VISION_FRAGMENT_NO);
-        Log.d(TAG, "onCreate: fragment no: " + mFragmentNo);
-        generateHeader(mFragmentNo);
+        generateHeader();
         scrollToBottom();
         initFooterButton();
         if (savedInstanceState == null) {
             final PreferenceFragmentCompat fragment =
-                    (mFragmentNo == mFontSizeFragmentNo)
+                    getFragmentType(getIntent()) == FragmentType.FONT_SIZE
                             ? new FontSizePreferenceFragmentForSetupWizard()
                             : new ScreenZoomPreferenceFragmentForSetupWizard();
             getSupportFragmentManager()
@@ -72,29 +85,37 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
     }
 
     @Override
+    protected void onPause() {
+        // For accessibility activities launched from setup wizard.
+        if (getTransitionType(getIntent()) == TransitionType.TRANSITION_FADE) {
+            overridePendingTransition(R.anim.sud_stay, android.R.anim.fade_out);
+        }
+        super.onPause();
+    }
+
+    @Override
     public int getMetricsCategory() {
-        return mFragmentNo == mFontSizeFragmentNo ? SettingsEnums.SUW_ACCESSIBILITY_FONT_SIZE
+        return getFragmentType(getIntent()) == FragmentType.FONT_SIZE
+                ? SettingsEnums.SUW_ACCESSIBILITY_FONT_SIZE
                 : SettingsEnums.SUW_ACCESSIBILITY_DISPLAY_SIZE;
     }
 
     @VisibleForTesting
-    void generateHeader(int fragmentNo) {
+    void generateHeader() {
         ((TextView) findViewById(R.id.suc_layout_title)).setText(
-                fragmentNo == mFontSizeFragmentNo ? R.string.title_font_size
+                getFragmentType(getIntent()) == FragmentType.FONT_SIZE
+                        ? R.string.title_font_size
                         : R.string.screen_zoom_title);
         ((TextView) findViewById(R.id.sud_layout_subtitle)).setText(
-                fragmentNo == mFontSizeFragmentNo ? R.string.short_summary_font_size
+                getFragmentType(getIntent()) == FragmentType.FONT_SIZE
+                        ? R.string.short_summary_font_size
                         : R.string.screen_zoom_short_summary);
     }
 
-    @VisibleForTesting
-    void initFooterButton() {
+    private void initFooterButton() {
         final GlifLayout layout = findViewById(R.id.setup_wizard_layout);
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
-        final View.OnClickListener nextButtonListener =
-                v -> {
-                    onBackPressed();
-                };
+        final View.OnClickListener nextButtonListener = v -> onBackPressed();
         final FooterButton primaryButton =
                 new FooterButton.Builder(this)
                         .setText(R.string.done)
@@ -123,5 +144,13 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
                 });
             }
         });
+    }
+
+    private int getTransitionType(Intent intent) {
+        return intent.getIntExtra(EXTRA_PAGE_TRANSITION_TYPE, TransitionType.TRANSITION_NONE);
+    }
+
+    private int getFragmentType(Intent intent) {
+        return intent.getIntExtra(VISION_FRAGMENT_NO, FragmentType.FONT_SIZE);
     }
 }
