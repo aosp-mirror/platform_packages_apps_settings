@@ -67,17 +67,21 @@ public class ActivityEmbeddingRulesController {
         registerTwoPanePairRule(mContext,
                 getComponentName(Settings.class),
                 getComponentName(SubSettings.class),
+                null /* secondaryIntentAction */,
                 true /* finishPrimaryWithSecondary */,
                 true /* finishSecondaryWithPrimary */);
     }
 
     /** Register a SplitPairRule for 2-pane. */
     public static void registerTwoPanePairRule(Context context,
-            ComponentName primary, ComponentName secondary,
-            boolean finishPrimaryWithSecondary, boolean finishSecondaryWithPrimary) {
+            ComponentName primaryComponent,
+            ComponentName secondaryComponent,
+            String secondaryIntentAction,
+            boolean finishPrimaryWithSecondary,
+            boolean finishSecondaryWithPrimary) {
         final Set<SplitPairFilter> filters = new HashSet<>();
-        filters.add(new SplitPairFilter(primary, secondary,
-                null /* secondaryActivityIntentAction */));
+        filters.add(new SplitPairFilter(primaryComponent, secondaryComponent,
+                secondaryIntentAction));
 
         SplitController.getInstance().registerRule(new SplitPairRule(filters,
                 finishPrimaryWithSecondary,
