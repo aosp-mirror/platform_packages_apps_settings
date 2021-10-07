@@ -80,7 +80,7 @@ public class WorkPolicyInfoPreferenceControllerTest {
 
         final Preference pref = new Preference(mContext);
         assertThat(controller.handlePreferenceTreeClick(pref)).isFalse();
-        verify(mEnterpriseProvider, never()).showWorkPolicyInfo();
+        verify(mEnterpriseProvider, never()).showWorkPolicyInfo(mContext);
     }
 
     @Test
@@ -92,6 +92,6 @@ public class WorkPolicyInfoPreferenceControllerTest {
         final Preference pref = new Preference(mContext);
         pref.setKey(controller.getPreferenceKey());
         assertThat(controller.handlePreferenceTreeClick(pref)).isTrue();
-        verify(mEnterpriseProvider).showWorkPolicyInfo();
+        verify(mEnterpriseProvider).showWorkPolicyInfo(mContext);
     }
 }
