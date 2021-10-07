@@ -237,6 +237,16 @@
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>
     </style>
 
+    <style name="screen_size_imageview_style">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:tint">?android:attr/textColorPrimary</item>
+        <item name="android:tintMode">src_in</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:focusable">true</item>
+    </style>
+
     <style name="TextAppearance" parent="android:TextAppearance.DeviceDefault"/>
 
     <style name="TextAppearance.info_label">

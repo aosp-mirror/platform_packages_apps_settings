@@ -28,11 +28,11 @@ import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.LinearLayout;
 
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +42,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.RestrictedPreference;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
-import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.List;
 
@@ -81,16 +80,11 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         super.onViewCreated(view, savedInstanceState);
 
         final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-        layout.setDividerInsets(Integer.MAX_VALUE, 0);
-        layout.setDescriptionText(R.string.vision_settings_description);
-        layout.setHeaderText(R.string.vision_settings_title);
-        layout.setIcon(getPrefContext().getDrawable(R.drawable.ic_accessibility_visibility));
-
-        if (ThemeHelper.shouldApplyExtendedPartnerConfig(getActivity())) {
-            final LinearLayout headerLayout = layout.findManagedViewById(R.id.sud_layout_header);
-            headerLayout.setPadding(0, headerLayout.getPaddingTop(), 0,
-                    headerLayout.getPaddingBottom());
-        }
+        final String title = getContext().getString(R.string.vision_settings_title);
+        final String description = getContext().getString(R.string.vision_settings_description);
+        final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
+        AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
+                description, icon);
     }
 
     @Override
@@ -143,6 +137,13 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         return super.onPreferenceTreeClick(preference);
     }
 
+    /**
+     * Returns accessibility service info by given package name and service name.
+     *
+     * @param packageName Package of accessibility service
+     * @param serviceName Class of accessibility service
+     * @return {@link AccessibilityServiceInfo} instance if available, null otherwise.
+     */
     private AccessibilityServiceInfo findService(String packageName, String serviceName) {
         final AccessibilityManager manager =
                 getActivity().getSystemService(AccessibilityManager.class);
@@ -150,8 +151,8 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
                 manager.getInstalledAccessibilityServiceList();
         for (AccessibilityServiceInfo info : accessibilityServices) {
             ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
-            if (packageName.equals(serviceInfo.packageName)
-                    && serviceName.equals(serviceInfo.name)) {
+            if (TextUtils.equals(packageName, serviceInfo.packageName)
+                    && TextUtils.equals(serviceName, serviceInfo.name)) {
                 return info;
             }
         }
