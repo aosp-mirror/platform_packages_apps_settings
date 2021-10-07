@@ -1555,8 +1555,8 @@
     <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"Desconectar la tarjeta SD para extraerla de forma segura"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="9164545135649775664">"Inserta USB para activar almacenamiento"</string>
     <string name="sd_insert_summary" product="default" msgid="5949168259622002192">"Insertar una tarjeta SD para el montaje"</string>
-    <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"Activar almacenamiento USB"</string>
-    <string name="sd_mount" product="default" msgid="5279813999455776169">"Activar tarjeta SD"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"Montar almacenamiento USB"</string>
+    <string name="sd_mount" product="default" msgid="5279813999455776169">"Montar tarjeta SD"</string>
     <string name="sd_mount_summary" product="nosdcard" msgid="2190410240845521205"></string>
     <string name="sd_mount_summary" product="default" msgid="2190410240845521205"></string>
     <string name="sd_format" product="nosdcard" msgid="8657427883364711513">"Borrar almacenamiento USB"</string>
@@ -1579,7 +1579,7 @@
     <string name="storage_low_title" msgid="8002650511493419567">"No queda espacio de almacenamiento"</string>
     <string name="storage_low_summary" msgid="7341022293583384506">"Es posible que algunas funciones del sistema, como la sincronización, no funcionen correctamente. Prueba a eliminar o a desactivar elementos para liberar espacio (por ejemplo, aplicaciones o contenido multimedia)."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Cambiar nombre"</string>
-    <string name="storage_menu_mount" msgid="4760531872302820569">"Activar"</string>
+    <string name="storage_menu_mount" msgid="4760531872302820569">"Montar"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Expulsar"</string>
     <string name="storage_menu_format" msgid="5454870642788909443">"Formatear"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatear como portátil"</string>
@@ -1606,13 +1606,13 @@
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"En uso de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> se ha activado"</string>
-    <string name="storage_mount_failure" msgid="3667915814876418011">"Error al activar <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_mount_failure" msgid="3667915814876418011">"Error al montar <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> se ha expulsado de forma segura"</string>
     <string name="storage_unmount_failure" msgid="3796912279003790607">"No se ha podido expulsar <xliff:g id="NAME">%1$s</xliff:g> de forma segura"</string>
     <string name="storage_format_success" msgid="3028114521294256851">"<xliff:g id="NAME">%1$s</xliff:g> se ha formateado"</string>
     <string name="storage_format_failure" msgid="2042691589726261987">"Error al formatear <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_rename_title" msgid="5911285992205282312">"Cambiar nombre de almacenamiento"</string>
-    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) se ha extraído de forma segura, pero sigue estando disponible. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes activarlo."</string>
+    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) se ha extraído de forma segura, pero sigue estando disponible. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes montarlo."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) está dañado. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes configurarlo."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"Después de formatear la unidad, puedes utilizar tu <xliff:g id="NAME_0">^1</xliff:g> en otros dispositivos. \n\nTe recomendamos que hagas una copia de seguridad de los datos de tu <xliff:g id="NAME_1">^1</xliff:g>, ya que se borrarán cuando se formatee. \n\n"<b>"Copia de seguridad de fotos y de otro contenido multimedia"</b>" \nMueve tus archivos multimedia a otro espacio de almacenamiento del dispositivo o transfiérelos a un ordenador con un cable USB. \n\n"<b>"Copia de seguridad de aplicaciones"</b>" \nSe desinstalarán todas las aplicaciones almacenadas en tu <xliff:g id="NAME_6">^1</xliff:g> y se borrarán sus datos. Para conservarlas, muévelas a otro espacio de almacenamiento del dispositivo."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Al extraer tu <xliff:g id="NAME_0">^1</xliff:g>, las aplicaciones almacenadas en esta unidad dejarán de funcionar y los archivos multimedia guardados en ella no estarán disponibles hasta que se vuelva a insertar."</b>" \n\nTu <xliff:g id="NAME_1">^1</xliff:g> se ha formateado para que solo funcione en este dispositivo."</string>
@@ -2374,7 +2374,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualizar ampliación automáticamente"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualizar ampliación de la pantalla al cambiar aplicaciones"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"El botón de encendido cuelga"</string>
-    <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Puntero del ratón grande"</string>
+    <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Cursor del ratón grande"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Quitar animaciones"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio en mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combina canales al reproducir audio"</string>
