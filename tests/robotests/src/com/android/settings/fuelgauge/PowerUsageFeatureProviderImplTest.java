@@ -127,6 +127,11 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void testIsAdaptiveChargingSupported_returnFalse() {
+        assertThat(mPowerFeatureProvider.isAdaptiveChargingSupported()).isFalse();
+    }
+
+    @Test
     public void testGetResumeChargeIntent_returnNull() {
         assertThat(mPowerFeatureProvider.getResumeChargeIntent()).isNull();
     }

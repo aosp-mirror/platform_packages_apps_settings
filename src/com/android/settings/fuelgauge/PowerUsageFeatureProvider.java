@@ -134,6 +134,11 @@ public interface PowerUsageFeatureProvider {
     boolean isChartGraphSlotsEnabled(Context context);
 
     /**
+     * Checks whether adaptive charging feature is supported in this device
+     */
+    boolean isAdaptiveChargingSupported();
+
+    /**
      * Gets a intent for one time bypass charge limited to resume charging.
      */
     Intent getResumeChargeIntent();
