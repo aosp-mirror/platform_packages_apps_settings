@@ -14,13 +14,15 @@
 
 package com.android.settings;
 
+import static android.content.pm.PackageManager.FEATURE_ETHERNET;
+import static android.content.pm.PackageManager.FEATURE_WIFI;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.net.Uri;
 import android.os.IBinder;
@@ -101,26 +103,33 @@ public class SettingsDumpService extends Service {
     private JSONObject dumpDataUsage() throws JSONException {
         JSONObject obj = new JSONObject();
         DataUsageController controller = new DataUsageController(this);
-        ConnectivityManager connectivityManager = getSystemService(ConnectivityManager.class);
         SubscriptionManager manager = this.getSystemService(SubscriptionManager.class);
         TelephonyManager telephonyManager = this.getSystemService(TelephonyManager.class);
-        if (connectivityManager.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)) {
+        final PackageManager packageManager = this.getPackageManager();
+        if (telephonyManager.isDataCapable()) {
             JSONArray array = new JSONArray();
             for (SubscriptionInfo info : manager.getAvailableSubscriptionInfoList()) {
                 telephonyManager = telephonyManager
                         .createForSubscriptionId(info.getSubscriptionId());
-                NetworkTemplate mobileAll = NetworkTemplate.buildTemplateMobileAll(
-                        telephonyManager.getSubscriberId());
-                final JSONObject usage = dumpDataUsage(mobileAll, controller);
+                String subscriberId = telephonyManager.getSubscriberId();
+                // The null subscriberId means that no any mobile/carrier network will be matched.
+                // Using old API: buildTemplateMobileAll for the null subscriberId to avoid NPE.
+                NetworkTemplate template = subscriberId != null
+                        ? NetworkTemplate.buildTemplateCarrierMetered(subscriberId)
+                        : NetworkTemplate.buildTemplateMobileAll(subscriberId);
+                final JSONObject usage = dumpDataUsage(template, controller);
                 usage.put("subId", info.getSubscriptionId());
                 array.put(usage);
             }
             obj.put("cell", array);
         }
-        if (connectivityManager.isNetworkSupported(ConnectivityManager.TYPE_WIFI)) {
-            obj.put("wifi", dumpDataUsage(NetworkTemplate.buildTemplateWifiWildcard(), controller));
+        if (packageManager.hasSystemFeature(FEATURE_WIFI)) {
+            obj.put("wifi", dumpDataUsage(
+                    NetworkTemplate.buildTemplateWifi(
+                    NetworkTemplate.WIFI_NETWORKID_ALL, null /* subscriberId */), controller));
         }
-        if (connectivityManager.isNetworkSupported(ConnectivityManager.TYPE_ETHERNET)) {
+
+        if (packageManager.hasSystemFeature(FEATURE_ETHERNET)) {
             obj.put("ethernet", dumpDataUsage(NetworkTemplate.buildTemplateEthernet(), controller));
         }
         return obj;

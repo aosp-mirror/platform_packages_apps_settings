@@ -73,7 +73,7 @@ public class SystemDashboardFragmentTest {
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
 
-        assertThat(keys).containsAllIn(niks);
+        assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
     @Test

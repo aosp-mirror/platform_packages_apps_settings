@@ -17,17 +17,22 @@
 package com.android.settings.security;
 
 import android.content.Context;
-import android.hardware.face.FaceManager;
-import android.hardware.fingerprint.FingerprintManager;
+import android.text.TextUtils;
 
-import com.android.settings.R;
-import com.android.settings.Utils;
+import androidx.preference.Preference;
+
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.overlay.FeatureFactory;
 
 public class TopLevelSecurityEntryPreferenceController extends BasePreferenceController {
 
+    private final SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
+
     public TopLevelSecurityEntryPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mSecuritySettingsFeatureProvider = FeatureFactory.getFactory(mContext)
+                .getSecuritySettingsFeatureProvider();
     }
 
     @Override
@@ -36,17 +41,24 @@ public class TopLevelSecurityEntryPreferenceController extends BasePreferenceCon
     }
 
     @Override
-    public CharSequence getSummary() {
-        final FingerprintManager fpm =
-                Utils.getFingerprintManagerOrNull(mContext);
-        final FaceManager faceManager =
-                Utils.getFaceManagerOrNull(mContext);
-        if (faceManager != null && faceManager.isHardwareDetected()) {
-            return mContext.getText(R.string.security_dashboard_summary_face);
-        } else if (fpm != null && fpm.isHardwareDetected()) {
-            return mContext.getText(R.string.security_dashboard_summary);
-        } else {
-            return mContext.getText(R.string.security_dashboard_summary_no_fingerprint);
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return super.handlePreferenceTreeClick(preference);
         }
+
+        if (mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {
+            String alternativeFragmentClassname =
+                    mSecuritySettingsFeatureProvider
+                            .getAlternativeSecuritySettingsFragmentClassname();
+            if (alternativeFragmentClassname != null) {
+                new SubSettingLauncher(mContext)
+                        .setDestination(alternativeFragmentClassname)
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .launch();
+                return true;
+            }
+        }
+
+        return super.handlePreferenceTreeClick(preference);
     }
 }

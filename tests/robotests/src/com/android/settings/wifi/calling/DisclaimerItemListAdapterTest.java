@@ -17,9 +17,10 @@
 package com.android.settings.wifi.calling;
 
 import static com.android.settings.wifi.calling.DisclaimerItemListAdapter
-        .DisclaimerItemViewHolder.ID_DISCLAIMER_ITEM_TITLE;
-import static com.android.settings.wifi.calling.DisclaimerItemListAdapter
         .DisclaimerItemViewHolder.ID_DISCLAIMER_ITEM_DESCRIPTION;
+import static com.android.settings.wifi.calling.DisclaimerItemListAdapter
+        .DisclaimerItemViewHolder.ID_DISCLAIMER_ITEM_TITLE;
+
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
@@ -33,17 +34,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.settings.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class DisclaimerItemListAdapterTest {

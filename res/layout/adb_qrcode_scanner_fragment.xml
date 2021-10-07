@@ -19,7 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/GlifV3Theme.Light"
+    android:theme="@style/GlifV3Theme"
     android:icon="@drawable/ic_scan_32dp">
 
     <LinearLayout
@@ -41,8 +41,8 @@
                 style="@style/TextAppearance.SudGlifBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="?attr/sudMarginSides"
-                android:layout_marginEnd="?attr/sudMarginSides"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
                 android:textAlignment="center"
                 android:accessibilityLiveRegion="polite"/>
 
@@ -72,8 +72,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginStart="?attr/sudMarginSides"
-                    android:layout_marginEnd="?attr/sudMarginSides"
+                    android:layout_marginStart="?attr/sudMarginStart"
+                    android:layout_marginEnd="?attr/sudMarginEnd"
                     android:textAlignment="center"
                     android:visibility="invisible"/>
 

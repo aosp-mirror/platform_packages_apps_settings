@@ -22,13 +22,14 @@ import com.android.settings.DisplaySettings;
 import com.android.settings.LegalSettings;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
-import com.android.settings.applications.AppAndNotificationDashboardFragment;
+import com.android.settings.applications.AppDashboardFragment;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.display.NightDisplaySettings;
+import com.android.settings.emergency.EmergencyDashboardFragment;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.fuelgauge.SmartBatterySettings;
@@ -75,12 +76,14 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_CONNECT);
         PARENT_TO_CATEGORY_KEY_MAP.put(AdvancedConnectedDeviceDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_DEVICE);
-        PARENT_TO_CATEGORY_KEY_MAP.put(AppAndNotificationDashboardFragment.class.getName(),
+        PARENT_TO_CATEGORY_KEY_MAP.put(AppDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_APPS);
         PARENT_TO_CATEGORY_KEY_MAP.put(PowerUsageSummary.class.getName(),
                 CategoryKey.CATEGORY_BATTERY);
         PARENT_TO_CATEGORY_KEY_MAP.put(DisplaySettings.class.getName(),
                 CategoryKey.CATEGORY_DISPLAY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(EmergencyDashboardFragment.class.getName(),
+                CategoryKey.CATEGORY_EMERGENCY);
         PARENT_TO_CATEGORY_KEY_MAP.put(SoundSettings.class.getName(),
                 CategoryKey.CATEGORY_SOUND);
         PARENT_TO_CATEGORY_KEY_MAP.put(StorageDashboardFragment.class.getName(),

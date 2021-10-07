@@ -159,7 +159,7 @@ public class SliceBuilderUtils {
                 .setClass(context, SliceBroadcastReceiver.class)
                 .putExtra(EXTRA_SLICE_KEY, data.getKey());
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
     }
 
     /**
@@ -167,7 +167,8 @@ public class SliceBuilderUtils {
      */
     public static PendingIntent getContentPendingIntent(Context context, SliceData sliceData) {
         final Intent intent = getContentIntent(context, sliceData);
-        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
+        return PendingIntent.getActivity(context, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     /**

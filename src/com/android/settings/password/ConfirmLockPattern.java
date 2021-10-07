@@ -45,6 +45,8 @@ import com.android.settingslib.animation.AppearAnimationCreator;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 
+import com.google.android.setupdesign.GlifLayout;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -90,8 +92,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         private boolean mDisappearing = false;
         private CountDownTimer mCountdownTimer;
 
-        private TextView mHeaderTextView;
-        private TextView mDetailsTextView;
+        private GlifLayout mGlifLayout;
 
         // caller-supplied text for various prompts
         private CharSequence mHeaderText;
@@ -117,9 +118,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                             : R.layout.confirm_lock_pattern,
                     container,
                     false);
-            mHeaderTextView = (TextView) view.findViewById(R.id.headerText);
+            mGlifLayout = view.findViewById(R.id.setup_wizard_layout);
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
-            mDetailsTextView = (TextView) view.findViewById(R.id.sud_layout_description);
             mErrorTextView = (TextView) view.findViewById(R.id.errorText);
 
             mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
@@ -177,7 +177,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                             return (float)(numRows - row) / numRows;
                         }
                     });
-            setAccessibilityTitle(mHeaderTextView.getText());
+            setAccessibilityTitle(mGlifLayout.getHeaderText());
 
             mCredentialCheckResultTracker = (CredentialCheckResultTracker) getFragmentManager()
                     .findFragmentByTag(FRAGMENT_TAG_CHECK_LOCK_RESULT);
@@ -242,13 +242,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         @Override
         public void prepareEnterAnimation() {
             super.prepareEnterAnimation();
-            mHeaderTextView.setAlpha(0f);
+            mGlifLayout.getHeaderTextView().setAlpha(0f);
             mCancelButton.setAlpha(0f);
             if (mForgotButton != null) {
                 mForgotButton.setAlpha(0f);
             }
             mLockPatternView.setAlpha(0f);
-            mDetailsTextView.setAlpha(0f);
+            mGlifLayout.getDescriptionTextView().setAlpha(0f);
         }
 
         private int getDefaultDetails() {
@@ -269,8 +269,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private Object[][] getActiveViews() {
             ArrayList<ArrayList<Object>> result = new ArrayList<>();
-            result.add(new ArrayList<>(Collections.singletonList(mHeaderTextView)));
-            result.add(new ArrayList<>(Collections.singletonList(mDetailsTextView)));
+            result.add(new ArrayList<>(Collections.singletonList(mGlifLayout.getHeaderTextView())));
+            result.add(new ArrayList<>(
+                    Collections.singletonList(mGlifLayout.getDescriptionTextView())));
             if (mCancelButton.getVisibility() == View.VISIBLE) {
                 result.add(new ArrayList<>(Collections.singletonList(mCancelButton)));
             }
@@ -306,14 +307,14 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             switch (stage) {
                 case NeedToUnlock:
                     if (mHeaderText != null) {
-                        mHeaderTextView.setText(mHeaderText);
+                        mGlifLayout.setHeaderText(mHeaderText);
                     } else {
-                        mHeaderTextView.setText(getDefaultHeader());
+                        mGlifLayout.setHeaderText(getDefaultHeader());
                     }
                     if (mDetailsText != null) {
-                        mDetailsTextView.setText(mDetailsText);
+                        mGlifLayout.setDescriptionText(mDetailsText);
                     } else {
-                        mDetailsTextView.setText(getDefaultDetails());
+                        mGlifLayout.setDescriptionText(getDefaultDetails());
                     }
                     mErrorTextView.setText("");
                     updateErrorMessage(
@@ -341,7 +342,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
             // Always announce the header for accessibility. This is a no-op
             // when accessibility is disabled.
-            mHeaderTextView.announceForAccessibility(mHeaderTextView.getText());
+            mGlifLayout.getHeaderTextView().announceForAccessibility(mGlifLayout.getHeaderText());
         }
 
         private int getDefaultHeader() {
@@ -422,14 +423,18 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
                 mLockPatternView.setEnabled(false);
 
-                final boolean verifyChallenge = getActivity().getIntent().getBooleanExtra(
-                        ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
                 final LockscreenCredential credential = LockscreenCredential.createPattern(pattern);
-                //TODO: how to sanitize this?
+                // TODO(b/161956762): Sanitize this
                 Intent intent = new Intent();
-                if (verifyChallenge) {
+                if (mReturnGatekeeperPassword) {
                     if (isInternalActivity()) {
-                        startVerifyPattern(credential, intent);
+                        startVerifyPattern(credential, intent,
+                                LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE);
+                        return;
+                    }
+                } else if (mForceVerifyPath) {
+                    if (isInternalActivity()) {
+                        startVerifyPattern(credential, intent, 0 /* flags */);
                         return;
                     }
                 } else {
@@ -445,36 +450,33 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             }
 
             private void startVerifyPattern(final LockscreenCredential pattern,
-                    final Intent intent) {
+                    final Intent intent, @LockPatternUtils.VerifyFlag int flags) {
                 final int localEffectiveUserId = mEffectiveUserId;
                 final int localUserId = mUserId;
-                long challenge = getActivity().getIntent().getLongExtra(
-                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
                 final LockPatternChecker.OnVerifyCallback onVerifyCallback =
-                    new LockPatternChecker.OnVerifyCallback() {
-                        @Override
-                        public void onVerified(byte[] token, int timeoutMs) {
-                            mPendingLockCheck = null;
-                            boolean matched = false;
-                            if (token != null) {
-                                matched = true;
-                                if (mReturnCredentials) {
-                                    intent.putExtra(
-                                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
-                                            token);
-                                }
+                    (response, timeoutMs) -> {
+                        mPendingLockCheck = null;
+                        final boolean matched = response.isMatched();
+                        if (matched && mReturnCredentials) {
+                            if ((flags & LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE) != 0) {
+                                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+                                        response.getGatekeeperPasswordHandle());
+                            } else {
+                                intent.putExtra(
+                                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
+                                        response.getGatekeeperHAT());
                             }
-                            mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
-                                    localEffectiveUserId);
                         }
-                    };
+                        mCredentialCheckResultTracker.setResult(matched, intent, timeoutMs,
+                                localEffectiveUserId);
+                };
                 mPendingLockCheck = (localEffectiveUserId == localUserId)
                         ? LockPatternChecker.verifyCredential(
-                                mLockPatternUtils, pattern, challenge, localUserId,
+                                mLockPatternUtils, pattern, localUserId, flags,
                                 onVerifyCallback)
                         : LockPatternChecker.verifyTiedProfileChallenge(
-                                mLockPatternUtils, pattern,
-                                challenge, localUserId, onVerifyCallback);
+                                mLockPatternUtils, pattern, localUserId, flags,
+                                onVerifyCallback);
             }
 
             private void startCheckPattern(final LockscreenCredential pattern,

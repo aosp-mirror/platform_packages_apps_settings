@@ -17,17 +17,17 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/gesture_prevent_ringing_screen_title">
 
-    <com.android.settings.widget.VideoPreference
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="gesture_prevent_ringing_video"
-        app:animation="@raw/gesture_prevent_ringing"
-        app:preview="@drawable/gesture_prevent_ringing" />
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/lottie_prevent_ringing"/>
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="gesture_prevent_ringing_switch"
-        android:layout="@layout/styled_switch_bar" />
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="gesture_prevent_ringing_switch" />
 
     <PreferenceCategory
         android:key="gesture_prevent_ringing_category"

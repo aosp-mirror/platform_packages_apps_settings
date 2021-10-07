@@ -20,8 +20,6 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.telephony.SubscriptionManager;
 
 import androidx.lifecycle.Lifecycle;
@@ -29,7 +27,7 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.network.PreferredNetworkModeContentObserver;
+import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.widget.PreferenceCategoryController;
 
 /**
@@ -39,15 +37,15 @@ public class NetworkPreferenceCategoryController extends PreferenceCategoryContr
         implements LifecycleObserver {
 
     private PreferenceScreen mPreferenceScreen;
-    private PreferredNetworkModeContentObserver mPreferredNetworkModeObserver;
+    private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
     protected int mSubId;
 
     public NetworkPreferenceCategoryController(Context context, String key) {
         super(context, key);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        mPreferredNetworkModeObserver = new PreferredNetworkModeContentObserver(
-                new Handler(Looper.getMainLooper()));
-        mPreferredNetworkModeObserver.setPreferredNetworkModeChangedListener(
+        mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
+                context.getMainExecutor());
+        mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
                 () -> updatePreference());
     }
 
@@ -57,12 +55,12 @@ public class NetworkPreferenceCategoryController extends PreferenceCategoryContr
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
-        mPreferredNetworkModeObserver.register(mContext, mSubId);
+        mAllowedNetworkTypesListener.register(mContext, mSubId);
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
-        mPreferredNetworkModeObserver.unregister(mContext);
+        mAllowedNetworkTypesListener.unregister(mContext, mSubId);
     }
 
     @Override

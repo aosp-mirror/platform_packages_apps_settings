@@ -47,6 +47,6 @@ public class MetricsFeatureProviderTest {
         MetricsFeatureProvider feature2 =
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
 
-        assertThat(feature1).isSameAs(feature2);
+        assertThat(feature1).isSameInstanceAs(feature2);
     }
 }

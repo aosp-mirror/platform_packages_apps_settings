@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
@@ -31,6 +33,7 @@ public final class DevicePickerActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         setContentView(R.layout.bluetooth_device_picker);
     }
 }

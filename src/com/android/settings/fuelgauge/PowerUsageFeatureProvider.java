@@ -23,6 +23,9 @@ import android.util.SparseIntArray;
 import com.android.internal.os.BatterySipper;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Feature Provider used in power usage
  */
@@ -57,6 +60,11 @@ public interface PowerUsageFeatureProvider {
      * Check whether it is type system
      */
     boolean isTypeSystem(BatterySipper sipper);
+
+    /**
+     * Check whether it is type system
+     */
+    boolean isTypeSystem(int uid, String[] packages);
 
     /**
      * Check whether the toggle for power accounting is enabled
@@ -119,4 +127,24 @@ public interface PowerUsageFeatureProvider {
      * Checks whether smart battery feature is supported in this device
      */
     boolean isSmartBatterySupported();
+
+    /**
+     * Checks whether we should enable chart graph design or not.
+     */
+    boolean isChartGraphEnabled(Context context);
+
+    /**
+     * Checks whether we should show usage information by slots or not.
+     */
+    boolean isChartGraphSlotsEnabled(Context context);
+
+    /**
+     * Returns battery history data with corresponding timestamp key.
+     */
+    Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
+
+    /**
+     * Returns {@link List} for hidding applications background usage time.
+     */
+    List<CharSequence> getHideBackgroundUsageTimeList(Context context);
 }

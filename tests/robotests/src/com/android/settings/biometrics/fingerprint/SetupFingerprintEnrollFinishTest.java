@@ -19,6 +19,7 @@ package com.android.settings.biometrics.fingerprint;
 import static com.android.settings.biometrics.fingerprint.FingerprintEnrollFinish.FINGERPRINT_SUGGESTION_ACTIVITY;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
@@ -76,7 +77,7 @@ public class SetupFingerprintEnrollFinishTest {
 
         ShadowActivity.IntentForResult startedActivity =
                 Shadows.shadowOf(mActivity).getNextStartedActivityForResult();
-        assertThat(startedActivity).named("Next activity").isNotNull();
+        assertWithMessage("Next activity").that(startedActivity).isNotNull();
         assertThat(startedActivity.intent.getComponent())
                 .isEqualTo(enrollingComponent);
     }
@@ -91,7 +92,7 @@ public class SetupFingerprintEnrollFinishTest {
 
         ShadowActivity.IntentForResult startedActivity =
                 Shadows.shadowOf(mActivity).getNextStartedActivityForResult();
-        assertThat(startedActivity).named("Next activity").isNotNull();
+        assertWithMessage("Next activity").that(startedActivity).isNotNull();
         assertThat(startedActivity.intent.getComponent())
                 .isEqualTo(enrollingComponent);
     }

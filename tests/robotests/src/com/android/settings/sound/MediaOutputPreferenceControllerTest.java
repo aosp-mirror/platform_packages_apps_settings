@@ -23,6 +23,7 @@ import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -57,7 +58,7 @@ import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.After;
 import org.junit.Before;
@@ -147,7 +148,7 @@ public class MediaOutputPreferenceControllerTest {
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
 
-        when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mMediaSessionManager);
+        doReturn(mMediaSessionManager).when(mContext).getSystemService(MediaSessionManager.class);
         when(mMediaSessionManager.getActiveSessions(any())).thenReturn(mMediaControllers);
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
         mPlaybackInfo = new MediaController.PlaybackInfo(
@@ -299,9 +300,9 @@ public class MediaOutputPreferenceControllerTest {
 
         mPreference.setKey(TEST_KEY);
         mController.handlePreferenceTreeClick(mPreference);
-        verify(mContext).startActivity(intentCaptor.capture());
+        verify(mContext).sendBroadcast(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getAction())
-                .isEqualTo(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT);
+                .isEqualTo(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
     }
 
     /**

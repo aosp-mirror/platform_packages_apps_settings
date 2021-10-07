@@ -19,8 +19,11 @@ import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
 import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
 import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SOURCE;
 
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfUsbDataSignalingIsDisabled;
+
 import android.content.Context;
 import android.hardware.usb.UsbManager;
+import android.os.UserHandle;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -30,6 +33,7 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -45,7 +49,7 @@ public class ConnectedUsbDeviceUpdater {
     private UsbBackend mUsbBackend;
     private DevicePreferenceCallback mDevicePreferenceCallback;
     @VisibleForTesting
-    Preference mUsbPreference;
+    RestrictedPreference mUsbPreference;
     @VisibleForTesting
     UsbConnectionBroadcastReceiver mUsbReceiver;
 
@@ -88,16 +92,18 @@ public class ConnectedUsbDeviceUpdater {
     }
 
     public void initUsbPreference(Context context) {
-        mUsbPreference = new Preference(context, null /* AttributeSet */);
+        mUsbPreference = new RestrictedPreference(context, null /* AttributeSet */);
         mUsbPreference.setTitle(R.string.usb_pref);
         mUsbPreference.setIcon(R.drawable.ic_usb);
         mUsbPreference.setKey(PREF_KEY);
+        mUsbPreference.setDisabledByAdmin(
+                checkIfUsbDataSignalingIsDisabled(context, UserHandle.myUserId()));
         mUsbPreference.setOnPreferenceClickListener((Preference p) -> {
             mMetricsFeatureProvider.logClickedPreference(p, mFragment.getMetricsCategory());
             // New version - uses a separate screen.
             new SubSettingLauncher(mFragment.getContext())
                     .setDestination(UsbDetailsFragment.class.getName())
-                    .setTitleRes(R.string.device_details_title)
+                    .setTitleRes(R.string.usb_preference)
                     .setSourceMetricsCategory(mFragment.getMetricsCategory())
                     .launch();
             return true;

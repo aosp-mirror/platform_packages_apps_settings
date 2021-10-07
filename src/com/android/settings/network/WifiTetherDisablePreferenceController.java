@@ -68,7 +68,7 @@ public final class WifiTetherDisablePreferenceController extends TetherBasePrefe
 
     @Override
     public boolean shouldShow() {
-        final String[] wifiRegexs = mCm.getTetherableWifiRegexs();
+        final String[] wifiRegexs = mTm.getTetherableWifiRegexs();
         return wifiRegexs != null && wifiRegexs.length != 0 && !Utils.isMonkeyRunning()
                 && getTetheringStateOfOtherInterfaces() != TetherEnabler.TETHERING_OFF;
     }

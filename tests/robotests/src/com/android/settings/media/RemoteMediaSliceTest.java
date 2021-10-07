@@ -32,6 +32,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.net.Uri;
 
@@ -87,6 +88,7 @@ public class RemoteMediaSliceTest {
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
 
         mRemoteMediaSlice = new RemoteMediaSlice(mContext);
+        mRemoteMediaSlice.mRouterManager = mock(MediaRouter2Manager.class);
         sMediaDeviceUpdateWorker = spy(new MediaDeviceUpdateWorker(mContext,
                 REMOTE_MEDIA_SLICE_URI));
         sMediaDeviceUpdateWorker.mLocalMediaManager = mLocalMediaManager;

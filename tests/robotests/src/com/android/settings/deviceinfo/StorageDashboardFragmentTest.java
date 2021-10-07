@@ -33,8 +33,6 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.settings.deviceinfo.storage.CachedStorageValuesHelper;
-import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.drawer.CategoryKey;
 
@@ -70,47 +68,6 @@ public class StorageDashboardFragmentTest {
         mFragment.initializeOptionsMenu(activity);
 
         verify(activity).invalidateOptionsMenu();
-    }
-
-    @Test
-    public void test_cacheProviderProvidesValuesIfBothCached() {
-        CachedStorageValuesHelper helper = mock(CachedStorageValuesHelper.class);
-        PrivateStorageInfo info = new PrivateStorageInfo(0, 0);
-        when(helper.getCachedPrivateStorageInfo()).thenReturn(info);
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
-        when(helper.getCachedAppsStorageResult()).thenReturn(result);
-
-        mFragment.setCachedStorageValuesHelper(helper);
-        mFragment.initializeCachedValues();
-
-        assertThat(mFragment.getPrivateStorageInfo()).isEqualTo(info);
-        assertThat(mFragment.getAppsStorageResult()).isEqualTo(result);
-    }
-
-    @Test
-    public void test_cacheProviderDoesntProvideValuesIfAppsMissing() {
-        CachedStorageValuesHelper helper = mock(CachedStorageValuesHelper.class);
-        PrivateStorageInfo info = new PrivateStorageInfo(0, 0);
-        when(helper.getCachedPrivateStorageInfo()).thenReturn(info);
-
-        mFragment.setCachedStorageValuesHelper(helper);
-        mFragment.initializeCachedValues();
-
-        assertThat(mFragment.getPrivateStorageInfo()).isNull();
-        assertThat(mFragment.getAppsStorageResult()).isNull();
-    }
-
-    @Test
-    public void test_cacheProviderDoesntProvideValuesIfVolumeInfoMissing() {
-        CachedStorageValuesHelper helper = mock(CachedStorageValuesHelper.class);
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
-        when(helper.getCachedAppsStorageResult()).thenReturn(result);
-
-        mFragment.setCachedStorageValuesHelper(helper);
-        mFragment.initializeCachedValues();
-
-        assertThat(mFragment.getPrivateStorageInfo()).isNull();
-        assertThat(mFragment.getAppsStorageResult()).isNull();
     }
 
     @Test
@@ -169,7 +126,7 @@ public class StorageDashboardFragmentTest {
         mFragment = spy(mFragment);
         when(mFragment.getView()).thenReturn(fakeView);
         when(mFragment.getListView()).thenReturn(fakeRecyclerView);
-        mFragment.setAppsStorageResult(new SparseArray<>());
+        mFragment.setStorageResult(new SparseArray<>());
 
         mFragment.maybeSetLoading(true);
 
@@ -185,7 +142,7 @@ public class StorageDashboardFragmentTest {
         when(mFragment.getView()).thenReturn(fakeView);
         when(mFragment.getListView()).thenReturn(fakeRecyclerView);
 
-        mFragment.setAppsStorageResult(new SparseArray<>());
+        mFragment.setStorageResult(new SparseArray<>());
         PrivateStorageInfo storageInfo = new PrivateStorageInfo(0, 0);
         mFragment.setPrivateStorageInfo(storageInfo);
 

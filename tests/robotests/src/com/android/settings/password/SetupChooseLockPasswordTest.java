@@ -17,12 +17,14 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
@@ -54,6 +56,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowDialog;
+import org.robolectric.shadows.ShadowInputMethodManager;
 
 import java.util.Collections;
 import java.util.List;
@@ -82,7 +85,7 @@ public class SetupChooseLockPasswordTest {
 
     @Test
     public void createActivity_shouldNotCrash() {
-        // Basic sanity test for activity created without crashing
+        // Basic test for activity created without crashing
         final Intent intent =
                 SetupChooseLockPassword.modifyIntentForSetup(
                         application,
@@ -115,7 +118,7 @@ public class SetupChooseLockPasswordTest {
         activity.findViewById(R.id.screen_lock_options).performClick();
         AlertDialog latestAlertDialog = (AlertDialog) ShadowDialog.getLatestDialog();
         int count = latestAlertDialog.getListView().getCount();
-        assertThat(count).named("List items shown").isEqualTo(3);
+        assertWithMessage("List items shown").that(count).isEqualTo(3);
     }
 
     @Test
@@ -141,13 +144,16 @@ public class SetupChooseLockPasswordTest {
         assertThat(nextStartedActivity).isNotNull();
         assertThat(nextStartedActivity.getBooleanExtra(
                 ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false)).isTrue();
-        assertThat(nextStartedActivity.getStringExtra("foo")).named("Foo extra")
+        assertWithMessage("Foo extra").that(nextStartedActivity.getStringExtra("foo"))
                 .isEqualTo("bar");
     }
 
     @Test
     public void createActivity_skipButtonInIntroductionStage_shouldBeVisible() {
         SetupChooseLockPassword activity = createSetupChooseLockPassword();
+        final InputMethodManager inputMethodManager = activity
+                .getSystemService(InputMethodManager.class);
+        final ShadowInputMethodManager shadowImm = Shadows.shadowOf(inputMethodManager);
 
         final PartnerCustomizationLayout layout = activity.findViewById(R.id.setup_wizard_layout);
         final Button skipOrClearButton =
@@ -158,6 +164,7 @@ public class SetupChooseLockPasswordTest {
         skipOrClearButton.performClick();
         final AlertDialog chooserDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(chooserDialog).isNotNull();
+        assertThat(shadowImm.isSoftInputVisible()).isFalse();
     }
 
     @Test
@@ -197,8 +204,7 @@ public class SetupChooseLockPasswordTest {
     @Implements(ChooseLockGenericController.class)
     public static class ShadowChooseLockGenericController {
         @Implementation
-        protected List<ScreenLockType> getVisibleScreenLockTypes(int quality,
-                boolean includeDisabled) {
+        protected List<ScreenLockType> getVisibleScreenLockTypes() {
             return Collections.emptyList();
         }
     }

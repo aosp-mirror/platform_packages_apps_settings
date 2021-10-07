@@ -16,9 +16,9 @@
 
 package com.android.settings.network;
 
-import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
-import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
-import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
+import static android.net.ConnectivitySettingsManager.PRIVATE_DNS_MODE_OFF;
+import static android.net.ConnectivitySettingsManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
+import static android.net.ConnectivitySettingsManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
 import static android.provider.Settings.Global.PRIVATE_DNS_DEFAULT_MODE;
 import static android.provider.Settings.Global.PRIVATE_DNS_MODE;
 import static android.provider.Settings.Global.PRIVATE_DNS_SPECIFIER;
@@ -29,6 +29,7 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
+import android.net.ConnectivitySettingsManager;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.Uri;
@@ -118,7 +119,7 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
     public CharSequence getSummary() {
         final Resources res = mContext.getResources();
         final ContentResolver cr = mContext.getContentResolver();
-        final String mode = PrivateDnsModeDialogPreference.getModeFromSettings(cr);
+        final int mode = ConnectivitySettingsManager.getPrivateDnsMode(mContext);
         final LinkProperties lp = mLatestLinkProperties;
         final List<InetAddress> dnses = (lp == null) ? null : lp.getValidatedPrivateDnsServers();
         final boolean dnsesResolved = !ArrayUtils.isEmpty(dnses);

@@ -7,10 +7,10 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -28,7 +28,7 @@ public class AutomaticStorageManagerDescriptionPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private Preference mPreference;
+    private FooterPreference mPreference;
     private AutomaticStorageManagerDescriptionPreferenceController mController;
     private Context mContext = RuntimeEnvironment.application;
 

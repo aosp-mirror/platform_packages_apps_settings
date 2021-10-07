@@ -119,7 +119,7 @@ public class PowerButtonInstantLockPreferenceControllerTest {
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isFalse();
         assertThat(mPreference.getSummary()).isEqualTo(mContext.getString(
-                R.string.summary_placeholder));
+                R.string.summary_empty));
     }
 
     @Test

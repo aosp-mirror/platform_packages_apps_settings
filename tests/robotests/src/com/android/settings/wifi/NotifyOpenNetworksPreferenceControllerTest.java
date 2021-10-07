@@ -26,7 +26,6 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;

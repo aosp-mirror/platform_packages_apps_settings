@@ -312,13 +312,9 @@ public class AppStorageSettings extends AppInfoWithHeader
             if (appHasSpaceManagementUI) {
                 mButtonsPref.setButton1Text(R.string.manage_space_text);
             } else {
-                mButtonsPref
-                        .setButton1Text(R.string.clear_user_data_text)
-                        .setButton1Icon(R.drawable.ic_settings_delete);
+                mButtonsPref.setButton1Text(R.string.clear_user_data_text);
             }
-            mButtonsPref
-                    .setButton1Text(R.string.clear_user_data_text)
-                    .setButton1Icon(R.drawable.ic_settings_delete)
+            mButtonsPref.setButton1Icon(R.drawable.ic_settings_delete)
                     .setButton1OnClickListener(v -> handleClearDataClick());
         }
 
@@ -372,7 +368,12 @@ public class AppStorageSettings extends AppInfoWithHeader
         }
         ActivityManager am = (ActivityManager)
                 getActivity().getSystemService(Context.ACTIVITY_SERVICE);
-        boolean res = am.clearApplicationUserData(packageName, mClearDataObserver);
+        boolean res = false;
+        try {
+            res = am.clearApplicationUserData(packageName, mClearDataObserver);
+        } catch (SecurityException e) {
+            Log.i(TAG, "Failed to clear application user data: " + e);
+        }
         if (!res) {
             // Clearing data failed for some obscure reason. Just log error for now
             Log.i(TAG, "Couldn't clear application user data for package:" + packageName);

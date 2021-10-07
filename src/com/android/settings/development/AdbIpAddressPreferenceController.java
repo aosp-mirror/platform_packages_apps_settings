@@ -19,6 +19,7 @@ package com.android.settings.development;
 import android.content.Context;
 import android.debug.IAdbManager;
 import android.net.ConnectivityManager;
+import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.wifi.WifiManager;
 import android.os.RemoteException;
@@ -126,7 +127,7 @@ public class AdbIpAddressPreferenceController extends AbstractConnectivityPrefer
      * @return the formatted and newline-separated IP addresses, or null if none.
      */
     private static String getDefaultIpAddresses(ConnectivityManager cm) {
-        LinkProperties prop = cm.getActiveLinkProperties();
+        LinkProperties prop = cm.getLinkProperties(cm.getActiveNetwork());
         return formatIpAddresses(prop);
     }
 
@@ -135,7 +136,7 @@ public class AdbIpAddressPreferenceController extends AbstractConnectivityPrefer
             return null;
         }
 
-        Iterator<InetAddress> iter = prop.getAllAddresses().iterator();
+        Iterator<LinkAddress> iter = prop.getAllLinkAddresses().iterator();
         // If there are no entries, return null
         if (!iter.hasNext()) {
             return null;
@@ -144,7 +145,7 @@ public class AdbIpAddressPreferenceController extends AbstractConnectivityPrefer
         // Concatenate all available addresses, newline separated
         StringBuilder addresses = new StringBuilder();
         while (iter.hasNext()) {
-            InetAddress addr = iter.next();
+            InetAddress addr = iter.next().getAddress();
             if (addr instanceof Inet4Address) {
                 // adb only supports ipv4 at the moment
                 addresses.append(addr.getHostAddress());

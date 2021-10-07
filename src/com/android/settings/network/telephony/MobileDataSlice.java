@@ -167,13 +167,13 @@ public class MobileDataSlice implements CustomSliceable {
             return null; // no summary text
         }
 
-        return defaultSubscription.getDisplayName();
+        return SubscriptionUtil.getUniqueSubscriptionDisplayName(defaultSubscription, mContext);
     }
 
     private PendingIntent getPrimaryAction() {
         final Intent intent = getIntent();
-        return PendingIntent.getActivity(mContext, 0 /* requestCode */,
-                intent, 0 /* flags */);
+        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     /**

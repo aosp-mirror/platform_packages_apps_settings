@@ -94,6 +94,6 @@ public class SettingsInitializeTest {
 
         final List<ShortcutInfo> updatedShortcuts = mShortcutManager.getPinnedShortcuts();
         assertThat(updatedShortcuts).hasSize(1);
-        assertThat(updatedShortcuts.get(0)).isSameAs(info);
+        assertThat(updatedShortcuts.get(0)).isSameInstanceAs(info);
     }
 }

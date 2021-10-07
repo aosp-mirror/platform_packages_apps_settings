@@ -45,7 +45,7 @@ public class GraphicsDriverDashboardTest {
     @Test
     public void getMetricesCategory_shouldReturnGraphicsDriverDashboard() {
         assertThat(mDashboard.getMetricsCategory())
-                .isEqualTo(SettingsEnums.SETTINGS_GAME_DRIVER_DASHBOARD);
+                .isEqualTo(SettingsEnums.SETTINGS_GRAPHICS_DRIVER_DASHBOARD);
     }
 
     @Test

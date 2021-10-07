@@ -19,14 +19,19 @@ package com.android.settings.print;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.print.PrintJob;
 import android.print.PrintJobInfo;
@@ -61,6 +66,8 @@ public class PrintSettingsPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock
     private RestrictedPreference mPreference;
+    @Mock
+    private PackageManager mPackageManager;
 
     private Context mContext;
     private PrintSettingPreferenceController mController;
@@ -77,6 +84,7 @@ public class PrintSettingsPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         ReflectionHelpers.setField(mController, "mPrintManager", mPrintManager);
+        ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
         mLifecycle.addObserver(mController);
     }
 
@@ -87,6 +95,17 @@ public class PrintSettingsPreferenceControllerTest {
 
         verify(mPrintManager).addPrintJobStateChangeListener(mController);
         verify(mPrintManager).removePrintJobStateChangeListener(mController);
+    }
+
+    @Test
+    public void onStartStop_printManagerIsNull_doNothing() {
+        ReflectionHelpers.setField(mController, "mPrintManager", null);
+
+        mLifecycle.handleLifecycleEvent(ON_START);
+        mLifecycle.handleLifecycleEvent(ON_STOP);
+
+        verify(mPrintManager, never()).addPrintJobStateChangeListener(mController);
+        verify(mPrintManager, never()).removePrintJobStateChangeListener(mController);
     }
 
     @Test
@@ -132,5 +151,30 @@ public class PrintSettingsPreferenceControllerTest {
     public void updateState_shouldCheckRestriction() {
         mController.updateState(mPreference);
         verify(mPreference).checkRestrictionAndSetDisabled(UserManager.DISALLOW_PRINTING);
+    }
+
+    @Test
+    public void getAvailabilityStatus_hasFeature_returnsAvailable() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_PRINTING))
+                .thenReturn(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_noFeature_returnsUnsupported() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_PRINTING))
+                .thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_printManagerIsNull_returnsUnsupported() {
+        ReflectionHelpers.setField(mController, "mPrintManager", null);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_PRINTING))
+                .thenReturn(true);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }

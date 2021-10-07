@@ -16,25 +16,25 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
+import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.android.settings.notification.BadgingNotificationPreferenceController.OFF;
 import static com.android.settings.notification.BadgingNotificationPreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
+
+import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +44,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
 public class BubbleNotificationPreferenceControllerTest {
@@ -53,7 +55,7 @@ public class BubbleNotificationPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private BubbleNotificationPreferenceController mController;
-    private Preference mPreference;
+    private MainSwitchPreference mPreference;
 
     private static final String KEY_NOTIFICATION_BUBBLES = "notification_bubbles";
 
@@ -63,70 +65,77 @@ public class BubbleNotificationPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = new BubbleNotificationPreferenceController(mContext,
                 KEY_NOTIFICATION_BUBBLES);
-        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference = new MainSwitchPreference(RuntimeEnvironment.application);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
+        mController.displayPreference(mScreen);
     }
 
     @Test
-    public void getAvilabilityStatus_returnsAvailable() {
+    public void isAvailable_lowRam_returnsUnsupported() {
+        final ShadowActivityManager activityManager =
+                Shadow.extract(mContext.getSystemService(ActivityManager.class));
+        activityManager.setIsLowRamDevice(true);
+        assertEquals(UNSUPPORTED_ON_DEVICE, mController.getAvailabilityStatus());
+    }
+
+    @Test
+    public void isAvailable_notLowRam_returnsAvailable() {
+        final ShadowActivityManager activityManager =
+                Shadow.extract(mContext.getSystemService(ActivityManager.class));
+        activityManager.setIsLowRamDevice(false);
         assertEquals(AVAILABLE, mController.getAvailabilityStatus());
     }
 
     @Test
-    public void updateState_settingIsOn_preferenceSetChecked() {
-        final TwoStatePreference preference = mock(TwoStatePreference.class);
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
-
-        mController.updateState(preference);
-
-        verify(preference).setChecked(true);
-    }
-
-    @Test
     public void updateState_settingIsOff_preferenceSetUnchecked() {
-        final TwoStatePreference preference = mock(TwoStatePreference.class);
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON)).isEqualTo(OFF);
 
-        mController.updateState(preference);
+        mPreference.updateStatus(false);
 
-        verify(preference).setChecked(false);
+        assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
-    public void isChecked_settingIsOff_shouldReturnFalse() {
+    public void onSwitchChanged_true_settingIsOff_flagShouldOn() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
 
-        assertThat(mController.isChecked()).isFalse();
+        mController.onSwitchChanged(null, true);
+
+        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, OFF)).isEqualTo(ON);
     }
 
     @Test
-    public void isChecked_settingIsOn_shouldReturnTrue() {
+    public void onSwitchChanged_false_settingIsOn_flagShouldOff() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
 
-        assertThat(mController.isChecked()).isTrue();
+        mController.onSwitchChanged(null, false);
+
+        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
+                NOTIFICATION_BUBBLES, ON)).isEqualTo(OFF);
     }
 
     @Test
     public void setChecked_setFalse_disablesSetting() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
 
         mController.setChecked(false);
         int updatedValue = Settings.Global.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, -1);
+                NOTIFICATION_BUBBLES, ON);
 
         assertThat(updatedValue).isEqualTo(OFF);
     }
 
     @Test
     public void setChecked_setTrue_enablesSetting() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
 
         mController.setChecked(true);
         int updatedValue = Settings.Global.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, -1);
+                NOTIFICATION_BUBBLES, OFF);
 
         assertThat(updatedValue).isEqualTo(ON);
     }

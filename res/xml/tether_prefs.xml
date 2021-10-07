@@ -19,14 +19,19 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/tether_settings_title_all">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="tether_prefs_top_intro"
+        settings:searchable="false"/>
+
     <com.android.settings.widget.FixedLineSummaryPreference
         android:key="wifi_tether"
         android:title="@string/wifi_hotspot_checkbox_text"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.wifi.tether.WifiTetherSettings"
-        settings:summaryLineCount="2" />
+        settings:allowDividerAbove="true"
+        settings:maxLines="2"/>
 
-    <SwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="usb_tether_settings"
         android:title="@string/usb_tethering_button_text"
         android:summary="@string/usb_tethering_subtext"
@@ -44,14 +49,9 @@
         android:summary="@string/ethernet_tethering_subtext"
         settings:keywords="@string/keywords_hotspot_tethering" />
 
-    <Preference
-        android:key="disabled_on_data_saver"
-        android:summary="@string/tether_settings_disabled_on_data_saver"
-        android:selectable="false"
-        settings:allowDividerAbove="true" />
-
     <com.android.settingslib.widget.FooterPreference
-        android:key="tether_prefs_footer"
+        android:key="disabled_on_data_saver"
+        android:title="@string/tether_settings_disabled_on_data_saver"
         android:selectable="false"
         settings:searchable="false"/>
 </PreferenceScreen>

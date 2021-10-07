@@ -45,6 +45,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -55,11 +56,13 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowInteractionJankMonitor.class)
 public class WifiP2pSettingsTest {
 
     private Context mContext;
@@ -103,7 +106,7 @@ public class WifiP2pSettingsTest {
             preferenceKeys.add(controller.getPreferenceKey());
         }
 
-        assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
+        assertThat(preferenceScreenKeys).containsAtLeastElementsIn(preferenceKeys);
     }
 
     @Test
@@ -319,6 +322,18 @@ public class WifiP2pSettingsTest {
         mFragment.onPause();
 
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
+        assertThat(mFragment.mChannel).isNull();
+    }
+
+    @Test
+    public void peerDiscovery_whenOnResume_shouldInitChannelAgain() {
+        mFragment.onPause();
+
+        verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
+        assertThat(mFragment.mChannel).isNull();
+
+        mFragment.onResume();
+        assertThat(mFragment.mChannel).isNotNull();
     }
 
     @Test
@@ -489,6 +504,7 @@ public class WifiP2pSettingsTest {
 
     @Test
     public void onActivityCreate_withNullP2pManager_shouldGetP2pManagerAgain() {
+        mFragment.mChannel = null; // Reset channel to re-test onActivityCreated flow
         mFragment.mWifiP2pManager = null;
 
         mFragment.onActivityCreated(new Bundle());
@@ -499,7 +515,7 @@ public class WifiP2pSettingsTest {
     @Test
     public void onActivityCreate_withNullChannel_shouldSetP2pManagerNull() {
         doReturn(null).when(mWifiP2pManager).initialize(any(), any(), any());
-
+        mFragment.mChannel = null; // Reset channel to re-test onActivityCreated flow
         mFragment.onActivityCreated(new Bundle());
 
         assertThat(mFragment.mWifiP2pManager).isNull();

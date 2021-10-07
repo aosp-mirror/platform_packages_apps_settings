@@ -71,7 +71,7 @@
   <string-array name="wifi_status">
     <item msgid="1201478116293383426"></item>
     <item msgid="7388036070768806193">"Memindai..."</item>
-    <item msgid="1656176059757237036">"Menyambung…"</item>
+    <item msgid="1656176059757237036">"Menghubungkan…"</item>
     <item msgid="3249903732481917388">"Mengautentikasi…"</item>
     <item msgid="7789156794775399931">"Mendapatkan alamat IP…"</item>
     <item msgid="492518447401534767">"Terhubung"</item>
@@ -85,7 +85,7 @@
   <string-array name="wifi_status_with_ssid">
     <item msgid="1528087426723432177"></item>
     <item msgid="155483314608049961">"Memindai..."</item>
-    <item msgid="3409219643606946053">"Menyambung ke <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="3409219643606946053">"Menghubungkan ke <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="7891463004457278422">"Mengautentikasi dengan <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="3193388999810487137">"Mendapatkan alamat IP dari <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
     <item msgid="2227930004124157952">"Terhubung ke <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
@@ -98,11 +98,12 @@
   </string-array>
     <!-- no translation found for wifi_tether_security:0 (6312112980634811065) -->
     <!-- no translation found for wifi_tether_security:1 (1428294025896439258) -->
+    <!-- no translation found for wifi_tether_security:2 (6851763638266088835) -->
+    <!-- no translation found for wifi_tether_security:3 (5512131148045414341) -->
   <string-array name="eap_ocsp_type">
-    <item msgid="7202884222741437608">"Jangan validasi"</item>
+    <item msgid="8568170800958331461">"Jangan verifikasi"</item>
     <item msgid="5703177653586269306">"Minta status sertifikat"</item>
     <item msgid="326388247868439528">"Wajibkan status sertifikat"</item>
-    <item msgid="1090956283885790552">"Wajibkan semua status sertifikat yang tidak dipercaya"</item>
   </string-array>
   <string-array name="wifi_p2p_wps_setup">
     <item msgid="1446717102923442720">"Tekan tombol"</item>
@@ -110,7 +111,7 @@
     <item msgid="6088264311596031080">"PIN dari perangkat ini"</item>
   </string-array>
   <string-array name="wifi_p2p_status">
-    <item msgid="8357401480964012245">"Tersambung"</item>
+    <item msgid="8357401480964012245">"Terhubung"</item>
     <item msgid="66312817817365647">"Diundang"</item>
     <item msgid="4463567967438038210">"Gagal"</item>
     <item msgid="6556827947082659801">"Tersedia"</item>
@@ -365,6 +366,11 @@
     <item msgid="5118829513010894576">"Sedang"</item>
     <item msgid="6740026006576843477">"Lama"</item>
   </string-array>
+  <string-array name="long_press_timeout_selector_list_titles">
+    <item msgid="8908021508913038488">"Singkat"</item>
+    <item msgid="7397961711906421599">"Sedang"</item>
+    <item msgid="4079132024502041928">"Lama"</item>
+  </string-array>
   <string-array name="captioning_typeface_selector_titles">
     <item msgid="2166553138528640250">"Default"</item>
     <item msgid="4234707448428002595">"Sans-serif"</item>
@@ -412,6 +418,18 @@
     <item msgid="2836895041823327816">"Kuning berlatar biru"</item>
     <item msgid="747238414788976867">"Khusus"</item>
   </string-array>
+  <string-array name="accessibility_button_location_selector_titles">
+    <item msgid="6485511780196327736">"Mengambang di atas aplikasi lain"</item>
+    <item msgid="3605616699204153590">"Menu navigasi"</item>
+  </string-array>
+  <string-array name="accessibility_button_gesture_selector_titles">
+    <item msgid="2370918472773154939">"Tombol"</item>
+    <item msgid="6922258575853746220">"Gestur"</item>
+  </string-array>
+  <string-array name="accessibility_button_size_selector_titles">
+    <item msgid="7482952318152486459">"Kecil"</item>
+    <item msgid="1666628329913333563">"Besar"</item>
+  </string-array>
   <string-array name="vpn_types_long">
     <item msgid="6621806338070912611">"PPTP VPN"</item>
     <item msgid="2552427673212085780">"L2TP/IPSec VPN dengan kunci pra-bagi"</item>
@@ -430,9 +448,9 @@
   <string-array name="vpn_states">
     <item msgid="2262719249581510939">"Terputus"</item>
     <item msgid="9141074028293812365">"Memulai..."</item>
-    <item msgid="2234425878608626285">"Menyambung…"</item>
+    <item msgid="2234425878608626285">"Menghubungkan…"</item>
     <item msgid="27547778933579155">"Terhubung"</item>
-    <item msgid="893506841727300393">"Waktu habis"</item>
+    <item msgid="893506841727300393">"Waktu tunggu"</item>
     <item msgid="2974952010554140659">"Gagal"</item>
   </string-array>
   <string-array name="security_settings_premium_sms_values">
@@ -458,7 +476,7 @@
     <item msgid="5777152116210127847">"Aktivitas teratas"</item>
     <item msgid="1834030155560727324">"Penting (latar depan)"</item>
     <item msgid="8494424742994426350">"Penting (latar belakang)"</item>
-    <item msgid="5099332663422156149">"Cadangan"</item>
+    <item msgid="5099332663422156149">"Pencadangan"</item>
     <item msgid="7701089238529887617">"Beban berat"</item>
     <item msgid="3006466648960525485">"Layanan (berjalan)"</item>
     <item msgid="2253476667031759713">"Layanan (memulai ulang)"</item>
@@ -525,7 +543,7 @@
     <item msgid="30756226617172695">"CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2847125869624632806">"CDMA + LTE/EvDo"</item>
     <item msgid="2247906254631766720">"GSM/WCDMA/LTE"</item>
-    <item msgid="1091258946200124345">"Global"</item>
+    <item msgid="4147872615520331421">"LTE/CDMA/EvDo/GSM/WCDMA"</item>
     <item msgid="2908834445708457736">"LTE"</item>
     <item msgid="2947411877551747693">"LTE/WCDMA"</item>
     <item msgid="7723670142495874534">"Hanya TDSCDMA"</item>
@@ -542,7 +560,7 @@
     <item msgid="8150548370973671395">"NR/LTE"</item>
     <item msgid="5237423971422723128">"NR/LTE/CDMA/EvDo"</item>
     <item msgid="6856991565745877075">"NR/LTE/GSM/WCDMA"</item>
-    <item msgid="473436147270962091">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="8908263949185004366">"Global"</item>
     <item msgid="6692179237956480280">"NR/LTE/WCDMA"</item>
     <item msgid="8160757136163231885">"NR/LTE/TDSCDMA"</item>
     <item msgid="2207530656708814396">"NR/LTE/TDSCDMA/GSM"</item>

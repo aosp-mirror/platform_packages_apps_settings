@@ -40,11 +40,13 @@ public class AirplaneModeConditionController implements ConditionalCardControlle
     private final ConditionManager mConditionManager;
     private final Context mAppContext;
     private final Receiver mReceiver;
+    private final ConnectivityManager mConnectivityManager;
 
     public AirplaneModeConditionController(Context appContext, ConditionManager conditionManager) {
         mAppContext = appContext;
         mConditionManager = conditionManager;
         mReceiver = new Receiver();
+        mConnectivityManager = mAppContext.getSystemService(ConnectivityManager.class);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class AirplaneModeConditionController implements ConditionalCardControlle
 
     @Override
     public void onActionClick() {
-        ConnectivityManager.from(mAppContext).setAirplaneMode(false);
+        mConnectivityManager.setAirplaneMode(false);
     }
 
     @Override

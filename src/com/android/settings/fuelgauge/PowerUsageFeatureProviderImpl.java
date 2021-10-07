@@ -26,6 +26,10 @@ import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider {
 
     private static final String PACKAGE_CALENDAR_PROVIDER = "com.android.providers.calendar";
@@ -62,6 +66,21 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
             }
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean isTypeSystem(int uid, String[] packages) {
+        // Classify all the sippers to type system if the range of uid is 0...FIRST_APPLICATION_UID
+        if (uid >= Process.ROOT_UID && uid < Process.FIRST_APPLICATION_UID) {
+            return true;
+        } else if (packages != null) {
+            for (final String packageName : packages) {
+                if (ArrayUtils.contains(PACKAGES_SYSTEM, packageName)) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -134,5 +153,25 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public boolean isSmartBatterySupported() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_smart_battery_available);
+    }
+
+    @Override
+    public boolean isChartGraphEnabled(Context context) {
+        return false;
+    }
+
+    @Override
+    public boolean isChartGraphSlotsEnabled(Context context) {
+        return false;
+    }
+
+    @Override
+    public Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context) {
+        return null;
+    }
+
+    @Override
+    public List<CharSequence> getHideBackgroundUsageTimeList(Context context) {
+        return new ArrayList<>();
     }
 }

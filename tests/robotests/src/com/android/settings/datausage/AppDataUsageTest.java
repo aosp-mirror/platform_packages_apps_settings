@@ -18,6 +18,7 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -309,7 +310,8 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mContext", context);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mTemplate",
-                NetworkTemplate.buildTemplateWifiWildcard());
+                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
+                null /* subscriberId */));
         final long end = System.currentTimeMillis();
         final long start = end - (DateUtils.WEEK_IN_MILLIS * 4);
 
@@ -334,7 +336,8 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mContext", context);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mTemplate",
-                NetworkTemplate.buildTemplateWifiWildcard());
+                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
+                null /* subscriberId */));
         final long end = System.currentTimeMillis();
         final long start = end - (DateUtils.WEEK_IN_MILLIS * 4);
 
@@ -365,7 +368,8 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mCycles", testCycles);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mTemplate",
-                NetworkTemplate.buildTemplateWifiWildcard());
+                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
+                null /* subscriberId */));
 
         final NetworkCycleDataForUidLoader loader = (NetworkCycleDataForUidLoader)
                 mFragment.mUidDataCallbacks.onCreateLoader(0 /* id */, Bundle.EMPTY /* args */);
@@ -436,6 +440,9 @@ public class AppDataUsageTest {
         mFragment.onCreate(Bundle.EMPTY);
 
         assertThat(mFragment.mTemplate.getMatchRule())
-                .isEqualTo(NetworkTemplate.MATCH_WIFI_WILDCARD);
+                .isEqualTo(NetworkTemplate.MATCH_WIFI);
+        assertNull(mFragment.mTemplate.getSubscriberId());
+        assertThat(mFragment.mTemplate.getNetworkId())
+                .isEqualTo(NetworkTemplate.WIFI_NETWORKID_ALL);
     }
 }

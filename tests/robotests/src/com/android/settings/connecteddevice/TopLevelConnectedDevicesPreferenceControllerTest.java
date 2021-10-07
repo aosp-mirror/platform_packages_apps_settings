@@ -23,16 +23,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 
 @RunWith(RobolectricTestRunner.class)
 public class TopLevelConnectedDevicesPreferenceControllerTest {
@@ -55,21 +51,5 @@ public class TopLevelConnectedDevicesPreferenceControllerTest {
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_unsupportedWhenSet() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
-    @Config(shadows = ShadowAdvancedConnectedDeviceController.class)
-    public void getSummary_shouldCallAdvancedConnectedDeviceController() {
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getText(R.string.settings_label_launcher));
-    }
-
-    @Implements(AdvancedConnectedDeviceController.class)
-    private static class ShadowAdvancedConnectedDeviceController {
-
-        @Implementation
-        protected static int getConnectedDevicesSummaryResourceId(Context context) {
-            return R.string.settings_label_launcher;
-        }
     }
 }

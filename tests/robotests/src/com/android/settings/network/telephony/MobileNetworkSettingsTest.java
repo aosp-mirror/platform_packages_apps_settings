@@ -74,7 +74,7 @@ public class MobileNetworkSettingsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
+        when(mActivity.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(NetworkStatsManager.class)).thenReturn(mNetworkStatsManager);
         ShadowEntityHeaderController.setUseMock(mock(EntityHeaderController.class));

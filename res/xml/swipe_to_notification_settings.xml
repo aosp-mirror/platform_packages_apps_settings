@@ -16,21 +16,21 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res-auto"
                   xmlns:app="http://schemas.android.com/apk/res-auto"
                   android:key="gesture_swipe_down_fingerprint_screen"
                   android:title="@string/fingerprint_gesture_screen_title">
 
-    <com.android.settings.widget.VideoPreference
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="gesture_swipe_down_fingerprint_video"
-        app:animation="@raw/gesture_fingerprint_swipe"
-        app:preview="@drawable/gesture_fingerprint_swipe" />
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/lottie_swipe_fingerprint"/>
 
     <SwitchPreference
         android:key="gesture_swipe_down_fingerprint"
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:summary="@string/fingerprint_swipe_for_notifications_summary"
         app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController"
-        app:allowDividerAbove="true" />
+        app:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
 </PreferenceScreen>

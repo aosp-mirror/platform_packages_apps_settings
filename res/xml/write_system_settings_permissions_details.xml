@@ -22,8 +22,8 @@
         android:key="app_ops_settings_switch"
         android:title="@string/permit_write_settings"/>
 
-    <Preference
-        android:summary="@string/write_settings_description"
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/write_settings_description"
         android:selectable="false"/>
 
 </PreferenceScreen>

@@ -101,9 +101,9 @@ public class TetherEnablerTest {
         when(context.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
         when(context.getSystemService(Context.NETWORK_POLICY_SERVICE)).thenReturn(
                 mNetworkPolicyManager);
-        when(mConnectivityManager.getTetherableIfaces()).thenReturn(new String[0]);
-        when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[0]);
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableIfaces()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetheredIfaces()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
         panReference.set(mBluetoothPan);
         mEnabler = spy(new TetherEnabler(context, mSwitchWidgetController, panReference));
         ReflectionHelpers.setField(mEnabler, "mBluetoothAdapter", mBluetoothAdapter);
@@ -111,8 +111,8 @@ public class TetherEnablerTest {
 
     @Test
     public void lifecycle_onStart_setCheckedCorrectly() {
-        when(mConnectivityManager.getTetheredIfaces()).thenReturn(USB_TETHERED);
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(USB_TETHERED);
+        when(mTetheringManager.getTetheredIfaces()).thenReturn(USB_TETHERED);
+        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(USB_TETHERED);
 
         mEnabler.onStart();
         assertThat(mSwitchBar.isChecked()).isTrue();
@@ -150,7 +150,7 @@ public class TetherEnablerTest {
         mEnabler.onStart();
         mEnabler.startTethering(TetheringManager.TETHERING_WIFI);
 
-        when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetheredIfaces()).thenReturn(new String[0]);
         mEnabler.mOnStartTetheringCallback.onTetheringFailed();
 
         assertThat(mSwitchBar.isChecked()).isFalse();
@@ -255,8 +255,8 @@ public class TetherEnablerTest {
 
     @Test
     public void updateState_shouldEnableSwitchBarTethering() {
-        when(mConnectivityManager.getTetheredIfaces()).thenReturn(USB_TETHERED);
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(USB_TETHERED);
+        when(mTetheringManager.getTetheredIfaces()).thenReturn(USB_TETHERED);
+        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(USB_TETHERED);
 
         mSwitchWidgetController.setListener(mEnabler);
         mSwitchWidgetController.startListening();

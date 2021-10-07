@@ -22,8 +22,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
 import android.provider.SearchIndexableResource;
+
+import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,16 +35,20 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowNfcAdapter.class)
 public class NfcAndPaymentFragmentTest {
+    @Mock
+    private PackageManager mPackageManager;
+
     private NfcAndPaymentFragment mFragment;
     private Context mContext;
-
-    @Mock
-    private NfcAdapter mNfcAdapter;
+    private ShadowNfcAdapter mShadowNfcAdapter;
 
     @Before
     public void setUp() {
@@ -49,6 +56,9 @@ public class NfcAndPaymentFragmentTest {
 
         mFragment = new NfcAndPaymentFragment();
         mContext = spy(RuntimeEnvironment.application);
+        mShadowNfcAdapter = Shadow.extract(NfcAdapter.getDefaultAdapter(mContext));
+
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
     }
 
     @Test
@@ -64,8 +74,10 @@ public class NfcAndPaymentFragmentTest {
     @Test
     public void searchIndexProvider_shouldIndexValidItems() {
         when(mContext.getApplicationContext()).thenReturn(mContext);
-        when(NfcAdapter.getDefaultAdapter(mContext)).thenReturn(mNfcAdapter);
-        when(mNfcAdapter.isSecureNfcSupported()).thenReturn(true);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
+        when(mPackageManager.hasSystemFeature(
+                PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)).thenReturn(true);
+        mShadowNfcAdapter.setSecureNfcSupported(true);
 
         final List<String> niks = NfcAndPaymentFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);

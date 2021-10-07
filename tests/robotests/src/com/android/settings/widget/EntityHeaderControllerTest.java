@@ -26,13 +26,11 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.ColorDrawable;
 import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,7 +103,7 @@ public class EntityHeaderControllerTest {
         mController = EntityHeaderController.newInstance(mActivity, mFragment, inputView);
         View view = mController.done(mActivity);
 
-        assertThat(view).isSameAs(inputView);
+        assertThat(view).isSameInstanceAs(inputView);
     }
 
     @Test
@@ -300,30 +298,6 @@ public class EntityHeaderControllerTest {
                 header.getResources().getString(R.string.install_type_instant));
         assertThat(header.findViewById(R.id.entity_header_summary).getVisibility())
                 .isEqualTo(View.GONE);
-    }
-
-    @Test
-    public void styleActionBar_invalidObjects_shouldNotCrash() {
-        mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
-        mController.styleActionBar(null);
-
-        when(mActivity.getActionBar()).thenReturn(null);
-        mController.styleActionBar(mActivity);
-
-        verify(mActivity).getActionBar();
-    }
-
-    @Test
-    public void styleActionBar_setElevationAndBackground() {
-        final ActionBar actionBar = mActivity.getActionBar();
-
-        mController = EntityHeaderController.newInstance(mActivity, mFragment, null);
-        mController.styleActionBar(mActivity);
-
-        verify(actionBar).setElevation(0);
-        // Enforce a color drawable as background here, as image based drawables might not be
-        // wide enough to cover entire action bar.
-        verify(actionBar).setBackgroundDrawable(any(ColorDrawable.class));
     }
 
     @Test

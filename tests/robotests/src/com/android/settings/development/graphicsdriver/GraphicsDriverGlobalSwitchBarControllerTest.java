@@ -16,8 +16,8 @@
 
 package com.android.settings.development.graphicsdriver;
 
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.UPDATABLE_DRIVER_OFF;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -61,9 +61,9 @@ public class GraphicsDriverGlobalSwitchBarControllerTest {
     }
 
     @Test
-    public void constructor_gameDriverOn_shouldCheckSwitchBar() {
+    public void constructor_updatableDriverOn_shouldCheckSwitchBar() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
         mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
 
@@ -71,8 +71,9 @@ public class GraphicsDriverGlobalSwitchBarControllerTest {
     }
 
     @Test
-    public void constructor_gameDriverOff_shouldUncheckSwitchBar() {
-        Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
+    public void constructor_updatableDriverOff_shouldUncheckSwitchBar() {
+        Settings.Global.putInt(mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_OFF);
         mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
 
@@ -122,27 +123,30 @@ public class GraphicsDriverGlobalSwitchBarControllerTest {
     }
 
     @Test
-    public void onSwitchToggled_checked_shouldTurnOnGameDriver() {
-        Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
+    public void onSwitchToggled_checked_shouldTurnOnUpdatableDriver() {
+        Settings.Global.putInt(mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                UPDATABLE_DRIVER_OFF);
         mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
         mController.onSwitchToggled(true);
 
         assertThat(Settings.Global.getInt(
-                           mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
-                .isEqualTo(GAME_DRIVER_DEFAULT);
+                           mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                           UPDATABLE_DRIVER_DEFAULT))
+                .isEqualTo(UPDATABLE_DRIVER_DEFAULT);
     }
 
     @Test
-    public void onSwitchToggled_unchecked_shouldTurnOffGameDriver() {
+    public void onSwitchToggled_unchecked_shouldTurnOffUpdatableDriver() {
         Settings.Global.putInt(
-                mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
+                mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS, UPDATABLE_DRIVER_DEFAULT);
         mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
         mController.onSwitchToggled(false);
 
         assertThat(Settings.Global.getInt(
-                           mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT))
-                .isEqualTo(GAME_DRIVER_OFF);
+                           mResolver, Settings.Global.UPDATABLE_DRIVER_ALL_APPS,
+                           UPDATABLE_DRIVER_DEFAULT))
+                .isEqualTo(UPDATABLE_DRIVER_OFF);
     }
 }

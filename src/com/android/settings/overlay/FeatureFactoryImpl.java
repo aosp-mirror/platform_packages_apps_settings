@@ -20,14 +20,21 @@ import android.app.AppGlobals;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.VpnManager;
 import android.os.UserManager;
 
 import androidx.annotation.Keep;
 
+import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
+import com.android.settings.accessibility.AccessibilitySearchFeatureProviderImpl;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.applications.GameSettingsFeatureProvider;
+import com.android.settings.applications.GameSettingsFeatureProviderImpl;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProviderImpl;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.aware.AwareFeatureProviderImpl;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
@@ -42,6 +49,10 @@ import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
+import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
+import com.android.settings.fuelgauge.BatterySettingsFeatureProviderImpl;
+import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
+import com.android.settings.fuelgauge.BatteryStatusFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProviderImpl;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
@@ -56,10 +67,14 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecurityFeatureProviderImpl;
+import com.android.settings.security.SecuritySettingsFeatureProvider;
+import com.android.settings.security.SecuritySettingsFeatureProviderImpl;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.users.UserFeatureProviderImpl;
+import com.android.settings.wifi.WifiTrackerLibProvider;
+import com.android.settings.wifi.WifiTrackerLibProviderImpl;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -78,6 +93,8 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private SecurityFeatureProvider mSecurityFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+    private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
+    private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
     private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
     private UserFeatureProvider mUserFeatureProvider;
     private SlicesFeatureProvider mSlicesFeatureProvider;
@@ -87,6 +104,11 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
     private AwareFeatureProvider mAwareFeatureProvider;
     private FaceFeatureProvider mFaceFeatureProvider;
+    private WifiTrackerLibProvider mWifiTrackerLibProvider;
+    private ExtraAppInfoFeatureProvider mExtraAppInfoFeatureProvider;
+    private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
+    private GameSettingsFeatureProvider mGameSettingsFeatureProvider;
+    private AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -108,6 +130,23 @@ public class FeatureFactoryImpl extends FeatureFactory {
                     context.getApplicationContext());
         }
         return mPowerUsageFeatureProvider;
+    }
+
+    @Override
+    public BatteryStatusFeatureProvider getBatteryStatusFeatureProvider(Context context) {
+        if (mBatteryStatusFeatureProvider == null) {
+            mBatteryStatusFeatureProvider = new BatteryStatusFeatureProviderImpl(
+                    context.getApplicationContext());
+        }
+        return mBatteryStatusFeatureProvider;
+    }
+
+    @Override
+    public BatterySettingsFeatureProvider getBatterySettingsFeatureProvider(Context context) {
+        if (mBatterySettingsFeatureProvider == null) {
+            mBatterySettingsFeatureProvider = new BatterySettingsFeatureProviderImpl(context);
+        }
+        return mBatterySettingsFeatureProvider;
     }
 
     @Override
@@ -157,7 +196,8 @@ public class FeatureFactoryImpl extends FeatureFactory {
                             Context.DEVICE_POLICY_SERVICE),
                     appContext.getPackageManager(),
                     UserManager.get(appContext),
-                    (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE),
+                    appContext.getSystemService(ConnectivityManager.class),
+                    appContext.getSystemService(VpnManager.class),
                     appContext.getResources());
         }
         return mEnterprisePrivacyFeatureProvider;
@@ -265,5 +305,45 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mFaceFeatureProvider = new FaceFeatureProviderImpl();
         }
         return mFaceFeatureProvider;
+    }
+
+    @Override
+    public WifiTrackerLibProvider getWifiTrackerLibProvider() {
+        if (mWifiTrackerLibProvider == null) {
+            mWifiTrackerLibProvider = new WifiTrackerLibProviderImpl();
+        }
+        return mWifiTrackerLibProvider;
+    }
+
+    @Override
+    public ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider() {
+        if (mExtraAppInfoFeatureProvider == null) {
+            mExtraAppInfoFeatureProvider = new ExtraAppInfoFeatureProviderImpl();
+        }
+        return mExtraAppInfoFeatureProvider;
+    }
+
+    @Override
+    public SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider() {
+        if (mSecuritySettingsFeatureProvider == null) {
+            mSecuritySettingsFeatureProvider = new SecuritySettingsFeatureProviderImpl();
+        }
+        return mSecuritySettingsFeatureProvider;
+    }
+
+    @Override
+    public GameSettingsFeatureProvider getGameSettingsFeatureProvider() {
+        if (mGameSettingsFeatureProvider == null) {
+            mGameSettingsFeatureProvider = new GameSettingsFeatureProviderImpl();
+        }
+        return mGameSettingsFeatureProvider;
+    }
+
+    @Override
+    public AccessibilitySearchFeatureProvider getAccessibilitySearchFeatureProvider() {
+        if (mAccessibilitySearchFeatureProvider == null) {
+            mAccessibilitySearchFeatureProvider = new AccessibilitySearchFeatureProviderImpl();
+        }
+        return mAccessibilitySearchFeatureProvider;
     }
 }

@@ -90,12 +90,15 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
 
     @Override
     public boolean isChecked() {
-        return mManager.isDataAllowedInVoiceCall();
+        return mManager.isMobileDataPolicyEnabled(
+                TelephonyManager.MOBILE_DATA_POLICY_DATA_ON_NON_DEFAULT_DURING_VOICE_CALL);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mManager.setDataAllowedDuringVoiceCall(isChecked);
+        mManager.setMobileDataPolicyEnabled(
+                TelephonyManager.MOBILE_DATA_POLICY_DATA_ON_NON_DEFAULT_DURING_VOICE_CALL,
+                isChecked);
         return true;
     }
 

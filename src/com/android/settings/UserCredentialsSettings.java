@@ -34,9 +34,8 @@ import android.security.Credentials;
 import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
-import android.security.KeyStore;
-import android.security.keymaster.KeyCharacteristics;
-import android.security.keymaster.KeymasterDefs;
+import android.security.keystore.KeyProperties;
+import android.security.keystore2.AndroidKeyStoreLoadStoreParameter;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -55,16 +54,26 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
+import java.security.Key;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
+import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import javax.crypto.SecretKey;
+
 public class UserCredentialsSettings extends SettingsPreferenceFragment
         implements View.OnClickListener {
     private static final String TAG = "UserCredentialsSettings";
+
+    private static final String KEYSTORE_PROVIDER = "AndroidKeyStore";
 
     @Override
     public int getMetricsCategory() {
@@ -201,21 +210,14 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
             }
 
             private void deleteWifiCredential(final Credential credential) {
-                final KeyStore keyStore = KeyStore.getInstance();
-                final EnumSet<Credential.Type> storedTypes = credential.getStoredTypes();
-
-                // Remove all Wi-Fi credentials
-                if (storedTypes.contains(Credential.Type.USER_KEY)) {
-                    keyStore.delete(Credentials.USER_PRIVATE_KEY + credential.getAlias(),
-                            Process.WIFI_UID);
-                }
-                if (storedTypes.contains(Credential.Type.USER_CERTIFICATE)) {
-                    keyStore.delete(Credentials.USER_CERTIFICATE + credential.getAlias(),
-                            Process.WIFI_UID);
-                }
-                if (storedTypes.contains(Credential.Type.CA_CERTIFICATE)) {
-                    keyStore.delete(Credentials.CA_CERTIFICATE + credential.getAlias(),
-                            Process.WIFI_UID);
+                try {
+                    final KeyStore keyStore = KeyStore.getInstance(KEYSTORE_PROVIDER);
+                    keyStore.load(
+                            new AndroidKeyStoreLoadStoreParameter(
+                                    KeyProperties.NAMESPACE_WIFI));
+                    keyStore.deleteEntry(credential.getAlias());
+                } catch (Exception e) {
+                    throw new RuntimeException("Failed to delete keys from keystore.");
                 }
             }
 
@@ -266,73 +268,98 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
          */
         @Override
         protected List<Credential> doInBackground(Void... params) {
-            final KeyStore keyStore = KeyStore.getInstance();
-
             // Certificates can be installed into SYSTEM_UID or WIFI_UID through CertInstaller.
             final int myUserId = UserHandle.myUserId();
             final int systemUid = UserHandle.getUid(myUserId, Process.SYSTEM_UID);
             final int wifiUid = UserHandle.getUid(myUserId, Process.WIFI_UID);
 
-            List<Credential> credentials = new ArrayList<>();
-            credentials.addAll(getCredentialsForUid(keyStore, systemUid).values());
-            credentials.addAll(getCredentialsForUid(keyStore, wifiUid).values());
-            return credentials;
-        }
+            try {
+                KeyStore processKeystore = KeyStore.getInstance(KEYSTORE_PROVIDER);
+                processKeystore.load(null);
+                KeyStore wifiKeystore = null;
+                if (myUserId == 0) {
+                    wifiKeystore = KeyStore.getInstance(KEYSTORE_PROVIDER);
+                    wifiKeystore.load(new AndroidKeyStoreLoadStoreParameter(
+                            KeyProperties.NAMESPACE_WIFI));
+                }
 
-        private boolean isAsymmetric(KeyStore keyStore, String alias, int uid)
-            throws UnrecoverableKeyException {
-                KeyCharacteristics keyCharacteristics = new KeyCharacteristics();
-                int errorCode = keyStore.getKeyCharacteristics(alias, null, null, uid,
-                        keyCharacteristics);
-                if (errorCode != KeyStore.NO_ERROR) {
-                    throw (UnrecoverableKeyException)
-                            new UnrecoverableKeyException("Failed to obtain information about key")
-                                    .initCause(KeyStore.getKeyStoreException(errorCode));
+                List<Credential> credentials = new ArrayList<>();
+                credentials.addAll(getCredentialsForUid(processKeystore, systemUid).values());
+                if (wifiKeystore != null) {
+                    credentials.addAll(getCredentialsForUid(wifiKeystore, wifiUid).values());
                 }
-                Integer keymasterAlgorithm = keyCharacteristics.getEnum(
-                        KeymasterDefs.KM_TAG_ALGORITHM);
-                if (keymasterAlgorithm == null) {
-                    throw new UnrecoverableKeyException("Key algorithm unknown");
-                }
-                return keymasterAlgorithm == KeymasterDefs.KM_ALGORITHM_RSA ||
-                        keymasterAlgorithm == KeymasterDefs.KM_ALGORITHM_EC;
+                return credentials;
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to load credentials from Keystore.", e);
+            }
         }
 
         private SortedMap<String, Credential> getCredentialsForUid(KeyStore keyStore, int uid) {
-            final SortedMap<String, Credential> aliasMap = new TreeMap<>();
-            for (final Credential.Type type : Credential.Type.values()) {
-                for (final String prefix : type.prefix) {
-                    for (final String alias : keyStore.list(prefix, uid)) {
-                        if (UserHandle.getAppId(uid) == Process.SYSTEM_UID) {
+            try {
+                final SortedMap<String, Credential> aliasMap = new TreeMap<>();
+                boolean isSystem = UserHandle.getAppId(uid) == Process.SYSTEM_UID;
+                Enumeration<String> aliases = keyStore.aliases();
+                while (aliases.hasMoreElements()) {
+                    String alias = aliases.nextElement();
+                    Credential c = new Credential(alias, uid);
+                    Key key = null;
+                    try {
+                        key = keyStore.getKey(alias, null);
+                    } catch (NoSuchAlgorithmException | UnrecoverableKeyException e) {
+                        Log.e(TAG, "Error tying to retrieve key: " + alias, e);
+                        continue;
+                    }
+                    if (key != null) {
+                        // So we have a key
+                        if (key instanceof SecretKey) {
+                            // We don't display any symmetric key entries.
+                            continue;
+                        }
+                        if (isSystem) {
                             // Do not show work profile keys in user credentials
                             if (alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_ENCRYPT) ||
                                     alias.startsWith(LockPatternUtils.PROFILE_KEY_NAME_DECRYPT)) {
                                 continue;
                             }
                             // Do not show synthetic password keys in user credential
+                            // We should never reach this point because the synthetic password key
+                            // is symmetric.
                             if (alias.startsWith(LockPatternUtils.SYNTHETIC_PASSWORD_KEY_PREFIX)) {
                                 continue;
                             }
                         }
-                        try {
-                            if (type == Credential.Type.USER_KEY &&
-                                    !isAsymmetric(keyStore, prefix + alias, uid)) {
-                                continue;
+                        // At this point we have determined that we have an asymmetric key.
+                        // so we have at least a USER_KEY and USER_CERTIFICATE.
+                        c.storedTypes.add(Credential.Type.USER_KEY);
+
+                        Certificate[] certs =  keyStore.getCertificateChain(alias);
+                        if (certs != null) {
+                            c.storedTypes.add(Credential.Type.USER_CERTIFICATE);
+                            if (certs.length > 1) {
+                                c.storedTypes.add(Credential.Type.CA_CERTIFICATE);
                             }
-                        } catch (UnrecoverableKeyException e) {
-                            Log.e(TAG, "Unable to determine algorithm of key: " + prefix + alias, e);
-                            continue;
                         }
-                        Credential c = aliasMap.get(alias);
-                        if (c == null) {
-                            c = new Credential(alias, uid);
-                            aliasMap.put(alias, c);
+                    } else {
+                        // So there is no key but we have an alias. This must mean that we have
+                        // some certificate.
+                        if (keyStore.isCertificateEntry(alias)) {
+                            c.storedTypes.add(Credential.Type.CA_CERTIFICATE);
+                        } else {
+                            // This is a weired inconsistent case that should not exist.
+                            // Pure trusted certificate entries should be stored in CA_CERTIFICATE,
+                            // but if isCErtificateEntry returns null this means that only the
+                            // USER_CERTIFICATE is populated which should never be the case without
+                            // a private key. It can still be retrieved with
+                            // keystore.getCertificate().
+                            c.storedTypes.add(Credential.Type.USER_CERTIFICATE);
                         }
-                        c.storedTypes.add(type);
                     }
+                    aliasMap.put(alias, c);
                 }
+                return aliasMap;
+            } catch (KeyStoreException e) {
+                throw new RuntimeException("Failed to load credential from Android Keystore.", e);
             }
-            return aliasMap;
         }
 
         @Override

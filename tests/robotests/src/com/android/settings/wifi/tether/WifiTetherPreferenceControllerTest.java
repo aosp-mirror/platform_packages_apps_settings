@@ -23,7 +23,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 
@@ -31,7 +31,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -56,7 +56,7 @@ public class WifiTetherPreferenceControllerTest {
 
     private Context mContext;
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
     @Mock
     private WifiManager mWifiManager;
     @Mock
@@ -66,7 +66,7 @@ public class WifiTetherPreferenceControllerTest {
     private WifiTetherPreferenceController mController;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
-    private MasterSwitchPreference mPreference;
+    private PrimarySwitchPreference mPreference;
 
     @Before
     public void setUp() {
@@ -76,15 +76,14 @@ public class WifiTetherPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         FakeFeatureFactory.setupForTest();
-        mPreference = new MasterSwitchPreference(RuntimeEnvironment.application);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(mConnectivityManager);
+        mPreference = new PrimarySwitchPreference(RuntimeEnvironment.application);
+        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mSoftApConfiguration = new SoftApConfiguration.Builder().setSsid(SSID).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
 
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
+        when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
         mController = new WifiTetherPreferenceController(mContext, mLifecycle,
                 false /* initSoftApManager */);
         mController.displayPreference(mScreen);
@@ -92,7 +91,7 @@ public class WifiTetherPreferenceControllerTest {
 
     @Test
     public void isAvailable_noTetherRegex_shouldReturnFalse() {
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{});
+        when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{});
         mController = new WifiTetherPreferenceController(mContext, mLifecycle,
                 false /* initSoftApManager */);
 

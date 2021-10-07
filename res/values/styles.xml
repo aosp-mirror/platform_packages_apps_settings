@@ -13,7 +13,8 @@
      limitations under the License.
 -->
 
-<resources>
+<resources
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
 
     <style name="Widget.ActionBar.Base"
            parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid"/>
@@ -216,16 +217,17 @@
     <style name="vpn_label">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     </style>
 
     <style name="vpn_value">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Medium</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:singleLine">true</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:minHeight">@dimen/min_tap_target_size</item>
+        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="vpn_warning">
@@ -307,9 +309,12 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
-    <style name="TextAppearance.SearchBar"
-           parent="@*android:style/TextAppearance.DeviceDefault.Widget.Toolbar.Subtitle">
+    <style name="TextAppearance.SearchBar">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
         <item name="android:textSize">@dimen/search_bar_text_size</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:singleLine">true</item>
     </style>
 
     <style name="TextAppearance.HomepageCardTitle"
@@ -333,22 +338,13 @@
         <item name="android:padding">8dp</item>
     </style>
 
-    <style name="TextAppearance.NotificationHistory">
+    <style name="TextAppearance.NotificationHistory" parent="@android:style/Theme.DeviceDefault.DayNight">
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextAppearance.NotificationHistory.AppName">
         <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
         <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="TextAppearance.NotificationHistory.Title">
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
-    </style>
-
-    <style name="TextAppearance.NotificationHistory.Text">
-        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="TextAppearance.ContextualCardDismissalText"
@@ -374,11 +370,11 @@
     </style>
 
     <style name="FingerprintLayoutTheme">
-        <item name="android:icon">@drawable/ic_fingerprint_header</item>
+        <item name="android:icon">@drawable/ic_lock</item>
     </style>
 
     <style name="FaceLayoutTheme">
-        <item name="android:icon">@drawable/ic_face_header</item>
+        <item name="android:icon">@drawable/ic_lock</item>
     </style>
 
     <style name="PreviewPagerPageIndicator">
@@ -396,16 +392,24 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="FingerprintHeaderStyle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
+    <style name="BiometricHeaderStyle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:paddingTop">16dp</item>
-        <item name="android:textColor">@color/primary_dark_material_light</item>
+        <item name="android:paddingBottom">24dp</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
-    <style name="FaceHeaderStyle" parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:textColor">@color/primary_dark_material_light</item>
+    <style name="BiometricEnrollIntroTitle">
+        <item name="android:paddingVertical">24dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="BiometricEnrollIntroMessage">
         <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="RingProgressBarStyle"
@@ -416,9 +420,18 @@
         <item name="android:progressDrawable">@drawable/ring_progress</item>
     </style>
 
-    <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored"/>
-
+    <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button.Colored">
+        <item name="android:theme">@style/RoundedCornerThemeOverlay</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
+    </style>
     <style name="ActionSecondaryButton" parent="android:Widget.DeviceDefault.Button"/>
+
+    <style name="RoundedCornerThemeOverlay">
+        <item name="android:buttonCornerRadius">24dp</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:colorControlHighlight">@color/ripple_material_inverse</item>
+    </style>
 
     <style name="LockPatternContainerStyle">
         <item name="android:maxHeight">400dp</item>
@@ -457,13 +470,16 @@
 
     <style name="device_info_dialog_label">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body1</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="device_info_dialog_value">
         <item name="android:textAlignment">viewStart</item>
-        <item name="android:textAppearance">@*android:style/TextAppearance.DeviceDefault.Body2</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:paddingBottom">24dp</item>
     </style>
 
@@ -471,20 +487,15 @@
         <item name="android:layout_marginBottom">@dimen/contextual_card_vertical_margin</item>
         <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
         <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
-        <item name="cardBackgroundColor">@color/contextual_card_background</item>
+        <item name="cardBackgroundColor">?androidprv:attr/colorSurface</item>
         <item name="cardCornerRadius">@dimen/contextual_card_corner_radius</item>
         <item name="cardElevation">0dp</item>
-        <item name="strokeColor">@color/contextual_card_stroke_color</item>
-        <item name="strokeWidth">1dp</item>
         <item name="rippleColor">?android:attr/colorControlHighlight</item>
     </style>
 
     <style name="SearchBarStyle">
-        <item name="android:layout_margin">@dimen/search_bar_margin</item>
-        <item name="cardCornerRadius">@*android:dimen/config_dialogCornerRadius</item>
-        <item name="enforceMaterialTheme">true</item>
-        <item name="cardElevation">3dp</item>
-        <item name="shapeAppearance">@null</item>
+        <item name="cardCornerRadius">@dimen/search_bar_corner_radius</item>
+        <item name="cardElevation">0dp</item>
     </style>
 
     <style name="ConditionCardBorderlessButton"
@@ -585,8 +596,8 @@
     <style name="SliceRow.Slider.LargeIcon">
         <!-- 10dp start padding for the start icon -->
         <item name="titleItemStartPadding">10dp</item>
-        <!-- Layout is 48dp and actual icon size is 48-(iconSize/2) -->
-        <item name="iconSize">12dp</item>
+        <!-- Title icon size -->
+        <item name="iconSize">36dp</item>
         <!-- RecycleView item animator -->
         <item name="disableRecyclerViewItemAnimator">true</item>
     </style>
@@ -605,7 +616,7 @@
 
     <style name="SetupWizardPartnerResource">
         <!-- Disable to use partner overlay theme for outside setupwizard flow. -->
-        <item name="sucUsePartnerResource">false</item>
+        <item name="sucUsePartnerResource">@bool/config_suc_use_partner_resource</item>
         <!-- Enable heavy theme style inside setupwizard flow. -->
         <item name="sudUsePartnerHeavyTheme">true</item>
     </style>
@@ -618,7 +629,7 @@
 
     <style name="TextAppearance.NotificationImportanceButton">
         <item name="android:textSize">@dimen/notification_importance_button_text</item>
-        <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -655,7 +666,7 @@
     <style name="AccessibilityDialogIcon">
         <item name="android:layout_width">18dp</item>
         <item name="android:layout_height">18dp</item>
-        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
 
@@ -666,7 +677,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:fontFamily">google-sans-medium</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
     </style>
 
     <style name="AccessibilityDialogDescription"
@@ -677,7 +688,6 @@
         <item name="android:layout_marginBottom">32dp</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="AccessibilityDialogPermissionTitle"
@@ -686,7 +696,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
     </style>
 
     <style name="AccessibilityDialogPermissionDescription"
@@ -695,7 +705,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
-        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="AccessibilityDialogButtonBarSpace">
@@ -716,8 +725,8 @@
            parent="@*android:style/Widget.DeviceDefault.Button.ButtonBar.AlertDialog">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">56dp</item>
-        <item name="android:paddingLeft">8dp</item>
-        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingStart">8dp</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
@@ -786,5 +795,123 @@
     <style name="TextAppearance.HeadLineFontFamily.Subhead"
            parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+    </style>
+
+    <style name="HomepageTitleText" parent="CollapsingToolbarTitle.Expanded">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/homepage_title_margin_bottom</item>
+        <item name="android:layout_marginHorizontal">@dimen/homepage_title_margin_horizontal</item>
+    </style>
+
+    <style name="RequestManageCredentialsButtonPanel">
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">?android:colorBackground</item>
+    </style>
+
+    <style name="RoundedCornerButtonTheme">
+        <item name="android:buttonCornerRadius">50dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingBottom">18dp</item>
+    </style>
+
+    <style name="RequestManageCredentialsAllowButton" parent="@style/ActionPrimaryButton">
+        <item name="android:fontFamily">google-sans-medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="RequestManageCredentialsDontAllowButton"
+           parent="@style/Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:fontFamily">google-sans-medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="RequestManageCredentialsFab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+
+    <style name="RequestManageCredentialsHeader">
+        <item name="android:paddingStart">40dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">58dp</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="RequestManageCredentialsHeaderLandscape">
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
+    </style>
+
+    <style name="RequestManageCredentialsTitle">
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="RequestManageCredentialsDescription">
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:alpha">0.7</item>
+    </style>
+
+    <style name="AppAuthenticationPolicyItem">
+        <item name="android:paddingStart">40dp</item>
+        <item name="android:paddingEnd">24dp</item>
+    </style>
+
+    <style name="AppAuthenticationPolicyIcon">
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+    </style>
+
+    <style name="AppAuthenticationPolicyText">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="AppAuthenticationPolicyNumberOfUrisText">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:alpha">0.7</item>
+    </style>
+
+    <style name="AppAuthenticationExpander">
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:scaleType">fitEnd</item>
+    </style>
+
+    <style name="AppUriAuthenticationPolicyText">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="TextAppearance.AdminDialogTitle"
+           parent="@*android:style/TextAppearance.DeviceDefault.Title">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.AdminDialogMessage"
+           parent="@*android:style/TextAppearance.DeviceDefault">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 </resources>

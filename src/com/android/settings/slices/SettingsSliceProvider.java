@@ -47,6 +47,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.bluetooth.BluetoothSliceBuilder;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.notification.VolumeSeekBarPreferenceController;
 import com.android.settings.notification.zen.ZenModeSliceBuilder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.SliceBroadcastRelay;
@@ -144,13 +145,17 @@ public class SettingsSliceProvider extends SliceProvider {
     final Map<Uri, SliceBackgroundWorker> mPinnedWorkers = new ArrayMap<>();
 
     private Boolean mNightMode;
+    private boolean mFirstSlicePinned;
+    private boolean mFirstSliceBound;
 
     public SettingsSliceProvider() {
         super(READ_SEARCH_INDEXABLES);
+        Log.d(TAG, "init");
     }
 
     @Override
     public boolean onCreateSliceProvider() {
+        Log.d(TAG, "onCreateSliceProvider");
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
         mSliceWeakDataCache = new WeakHashMap<>();
         return true;
@@ -158,6 +163,10 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSlicePinned(Uri sliceUri) {
+        if (!mFirstSlicePinned) {
+            Log.d(TAG, "onSlicePinned: " + sliceUri);
+            mFirstSlicePinned = true;
+        }
         if (CustomSliceRegistry.isValidUri(sliceUri)) {
             final Context context = getContext();
             final CustomSliceable sliceable = FeatureFactory.getFactory(context)
@@ -184,12 +193,18 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public void onSliceUnpinned(Uri sliceUri) {
-        SliceBroadcastRelay.unregisterReceivers(getContext(), sliceUri);
+        final Context context = getContext();
+        if (!VolumeSliceHelper.unregisterUri(context, sliceUri)) {
+            SliceBroadcastRelay.unregisterReceivers(context, sliceUri);
+        }
         ThreadUtils.postOnMainThread(() -> stopBackgroundWorker(sliceUri));
     }
 
     @Override
     public Slice onBindSlice(Uri sliceUri) {
+        if (!mFirstSliceBound) {
+            Log.d(TAG, "onBindSlice start: " + sliceUri);
+        }
         final StrictMode.ThreadPolicy oldPolicy = StrictMode.getThreadPolicy();
         try {
             if (!ThreadUtils.isMainThread()) {
@@ -257,6 +272,10 @@ public class SettingsSliceProvider extends SliceProvider {
             return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
         } finally {
             StrictMode.setThreadPolicy(oldPolicy);
+            if (!mFirstSliceBound) {
+                Log.v(TAG, "onBindSlice end");
+                mFirstSliceBound = true;
+            }
         }
     }
 
@@ -328,7 +347,7 @@ public class SettingsSliceProvider extends SliceProvider {
                     .collect(Collectors.toList());
             descendants.addAll(customSlices);
         }
-        grantWhitelistedPackagePermissions(getContext(), descendants);
+        grantAllowlistedPackagePermissions(getContext(), descendants);
         return descendants;
     }
 
@@ -339,28 +358,28 @@ public class SettingsSliceProvider extends SliceProvider {
         final Intent settingsIntent = new Intent(Settings.ACTION_SETTINGS)
                 .setPackage(Utils.SETTINGS_PACKAGE_NAME);
         final PendingIntent noOpIntent = PendingIntent.getActivity(getContext(),
-                0 /* requestCode */, settingsIntent, 0 /* flags */);
+                0 /* requestCode */, settingsIntent, PendingIntent.FLAG_IMMUTABLE);
         return noOpIntent;
     }
 
     @VisibleForTesting
-    static void grantWhitelistedPackagePermissions(Context context, List<Uri> descendants) {
+    static void grantAllowlistedPackagePermissions(Context context, List<Uri> descendants) {
         if (descendants == null) {
             Log.d(TAG, "No descendants to grant permission with, skipping.");
         }
-        final String[] whitelistPackages =
-                context.getResources().getStringArray(R.array.slice_whitelist_package_names);
-        if (whitelistPackages == null || whitelistPackages.length == 0) {
-            Log.d(TAG, "No packages to whitelist, skipping.");
+        final String[] allowlistPackages =
+                context.getResources().getStringArray(R.array.slice_allowlist_package_names);
+        if (allowlistPackages == null || allowlistPackages.length == 0) {
+            Log.d(TAG, "No packages to allowlist, skipping.");
             return;
         } else {
             Log.d(TAG, String.format(
-                    "Whitelisting %d uris to %d pkgs.",
-                    descendants.size(), whitelistPackages.length));
+                    "Allowlisting %d uris to %d pkgs.",
+                    descendants.size(), allowlistPackages.length));
         }
         final SliceManager sliceManager = context.getSystemService(SliceManager.class);
         for (Uri descendant : descendants) {
-            for (String toPackage : whitelistPackages) {
+            for (String toPackage : allowlistPackages) {
                 sliceManager.grantSlicePermission(toPackage, descendant);
             }
         }
@@ -390,7 +409,13 @@ public class SettingsSliceProvider extends SliceProvider {
 
         final IntentFilter filter = controller.getIntentFilter();
         if (filter != null) {
-            registerIntentToUri(filter, uri);
+            if (controller instanceof VolumeSeekBarPreferenceController) {
+                // Register volume slices to a broadcast relay to reduce unnecessary UI updates
+                VolumeSliceHelper.registerIntentToUri(getContext(), filter, uri,
+                        ((VolumeSeekBarPreferenceController) controller).getAudioStream());
+            } else {
+                registerIntentToUri(filter, uri);
+            }
         }
 
         ThreadUtils.postOnMainThread(() -> startBackgroundWorker(controller, uri));
@@ -426,7 +451,7 @@ public class SettingsSliceProvider extends SliceProvider {
         try {
             KEY_VALUE_LIST_PARSER.setString(value);
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Bad Settings Slices Whitelist flags", e);
+            Log.e(TAG, "Bad Settings Slices Allowlist flags", e);
             return set;
         }
 

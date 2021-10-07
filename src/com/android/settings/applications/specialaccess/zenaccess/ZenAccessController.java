@@ -40,30 +40,34 @@ public class ZenAccessController extends BasePreferenceController {
 
     private static final String TAG = "ZenAccessController";
 
-    private final ActivityManager mActivityManager;
-
     public ZenAccessController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mActivityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return isSupported(mActivityManager) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-    }
-
-    public static boolean isSupported(ActivityManager activityManager) {
-        return !activityManager.isLowRamDevice();
+        return AVAILABLE;
     }
 
     public static Set<String> getPackagesRequestingNotificationPolicyAccess() {
+        final String[] PERM = {
+                android.Manifest.permission.ACCESS_NOTIFICATION_POLICY
+        };
+        return getPackagesWithPermissions(PERM);
+    }
+
+    public static Set<String> getPackagesWithManageNotifications() {
+        final String[] PERM = {
+                android.Manifest.permission.MANAGE_NOTIFICATIONS
+        };
+        return getPackagesWithPermissions(PERM);
+    }
+
+    public static Set<String> getPackagesWithPermissions(String[] permList) {
         final ArraySet<String> requestingPackages = new ArraySet<>();
         try {
-            final String[] PERM = {
-                    android.Manifest.permission.ACCESS_NOTIFICATION_POLICY
-            };
             final ParceledListSlice list = AppGlobals.getPackageManager()
-                    .getPackagesHoldingPermissions(PERM, 0 /*flags*/,
+                    .getPackagesHoldingPermissions(permList, 0 /*flags*/,
                             ActivityManager.getCurrentUser());
             final List<PackageInfo> pkgs = list.getList();
             if (pkgs != null) {

@@ -21,7 +21,6 @@ import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
 import android.util.Log;
 
-
 /**
  * An {@link ImsQuery} for accessing IMS provision stat
  */

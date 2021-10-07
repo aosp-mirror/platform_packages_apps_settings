@@ -16,7 +16,6 @@
 
 package com.android.settings.network;
 
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
@@ -25,7 +24,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.net.EthernetManager;
 import android.net.TetheringManager;
 
@@ -49,7 +47,7 @@ public class EthernetTetherPreferenceControllerTest {
     public MockitoRule mocks = MockitoJUnit.rule();
 
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
     @Mock
     private EthernetManager mEthernetManager;
     @Mock
@@ -64,9 +62,8 @@ public class EthernetTetherPreferenceControllerTest {
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mPreference = spy(SwitchPreference.class);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(mConnectivityManager);
-        when(mConnectivityManager.getTetherableIfaces()).thenReturn(new String[]{ETHERNET_REGEX});
+        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
+        when(mTetheringManager.getTetherableIfaces()).thenReturn(new String[]{ETHERNET_REGEX});
         when(mContext.getSystemService(Context.ETHERNET_SERVICE)).thenReturn(mEthernetManager);
         mController = new EthernetTetherPreferenceController(mContext, "ethernet");
         mController.setTetherEnabler(mTetherEnabler);
@@ -105,7 +102,7 @@ public class EthernetTetherPreferenceControllerTest {
 
     @Test
     public void shouldEnable_noTetherable() {
-        when(mConnectivityManager.getTetherableIfaces()).thenReturn(new String[0]);
+        when(mTetheringManager.getTetherableIfaces()).thenReturn(new String[0]);
         assertThat(mController.shouldEnable()).isFalse();
     }
 

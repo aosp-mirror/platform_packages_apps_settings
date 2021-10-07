@@ -67,19 +67,20 @@ public class CdmaSubscriptionPreferenceController extends CdmaBasePreferenceCont
     public boolean onPreferenceChange(Preference preference, Object object) {
         final int newMode = Integer.parseInt((String) object);
         //TODO(b/117611981): only set it in one place
-        if (mTelephonyManager.setCdmaSubscriptionMode(newMode)) {
+        try {
+            mTelephonyManager.setCdmaSubscriptionMode(newMode);
             Settings.Global.putInt(mContext.getContentResolver(),
                     Settings.Global.CDMA_SUBSCRIPTION_MODE, newMode);
             return true;
+        } catch (IllegalStateException e) {
+            return false;
         }
-
-        return false;
     }
 
     @VisibleForTesting
     boolean deviceSupportsNvAndRuim() {
         // retrieve the list of subscription types supported by device.
-        final String subscriptionsSupported = SystemProperties.get("ril.subscription.types");
+        final String subscriptionsSupported = getRilSubscriptionTypes();
         boolean nvSupported = false;
         boolean ruimSupported = false;
 
@@ -97,5 +98,10 @@ public class CdmaSubscriptionPreferenceController extends CdmaBasePreferenceCont
         }
 
         return (nvSupported && ruimSupported);
+    }
+
+    @VisibleForTesting
+    protected String getRilSubscriptionTypes() {
+        return SystemProperties.get("ril.subscription.types");
     }
 }

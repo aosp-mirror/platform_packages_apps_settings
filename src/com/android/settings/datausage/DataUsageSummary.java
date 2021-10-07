@@ -35,6 +35,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -170,9 +171,11 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         category.setTemplate(DataUsageLib.getMobileTemplate(getContext(), subId),
                 subId, services);
         category.pushTemplates(services);
-        if (subInfo != null && !TextUtils.isEmpty(subInfo.getDisplayName())) {
+        final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                subInfo, getContext());
+        if (subInfo != null && !TextUtils.isEmpty(displayName)) {
             Preference title  = category.findPreference(KEY_MOBILE_USAGE_TITLE);
-            title.setTitle(subInfo.getDisplayName());
+            title.setTitle(displayName);
         }
     }
 
@@ -180,7 +183,9 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     void addWifiSection() {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_wifi);
-        category.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(), 0, services);
+        category.setTemplate(
+                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
+                null /* subscriberId */), 0, services);
     }
 
     private void addEthernetSection() {

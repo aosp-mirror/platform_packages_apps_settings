@@ -32,6 +32,7 @@ import com.android.settings.overlay.FeatureFactory;
  */
 public class SmartBatteryPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener {
+
     private static final String KEY_SMART_BATTERY = "smart_battery";
     private static final int ON = 1;
     private static final int OFF = 0;

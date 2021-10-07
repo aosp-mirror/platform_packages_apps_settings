@@ -31,6 +31,7 @@ import static com.android.settings.network.telephony.TelephonyConstants.Telephon
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
 
+import android.annotation.Nullable;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +42,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.os.SystemProperties;
@@ -48,6 +52,7 @@ import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -68,6 +73,8 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
@@ -198,11 +205,13 @@ public class MobileNetworkUtils {
             return false;
         }
         PersistableBundle bundle = carrierConfigManager.getConfigForSubId(subId);
-        return bundle.getBoolean(CarrierConfigManager.KEY_USE_RCS_PRESENCE_BOOL, false /*default*/);
+        return bundle.getBoolean(
+                CarrierConfigManager.KEY_USE_RCS_PRESENCE_BOOL, false /*default*/)
+                || bundle.getBoolean(CarrierConfigManager.Ims.KEY_RCS_BULK_CAPABILITY_EXCHANGE_BOOL,
+                false /*default*/);
     }
 
-    @VisibleForTesting
-    static Intent buildPhoneAccountConfigureIntent(
+    public static Intent buildPhoneAccountConfigureIntent(
             Context context, PhoneAccountHandle accountHandle) {
         Intent intent = buildConfigureIntent(
                 context, accountHandle, TelecomManager.ACTION_CONFIGURE_PHONE_ACCOUNT);
@@ -257,7 +266,8 @@ public class MobileNetworkUtils {
         return false;
     }
 
-    private static Boolean showEuiccSettingsDetecting(Context context) {
+    // The same as #showEuiccSettings(Context context)
+    public static Boolean showEuiccSettingsDetecting(Context context) {
         final EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(EuiccManager.class);
         if (!euiccManager.isEnabled()) {
@@ -279,9 +289,26 @@ public class MobileNetworkUtils {
                 String.format("showEuiccSettings: esimIgnoredDevice: %b, enabledEsimUiByDefault: "
                         + "%b, euiccProvisioned: %b, inDeveloperMode: %b.",
                 esimIgnoredDevice, enabledEsimUiByDefault, euiccProvisioned, inDeveloperMode));
-        return (inDeveloperMode || euiccProvisioned
+        return (euiccProvisioned
+                || (!esimIgnoredDevice && inDeveloperMode)
                 || (!esimIgnoredDevice && enabledEsimUiByDefault
                         && isCurrentCountrySupported(context)));
+    }
+
+    /**
+     * Return {@code true} if mobile data is enabled
+     */
+    public static boolean isMobileDataEnabled(Context context) {
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
+        if (!telephonyManager.isDataEnabled()) {
+            // Check if the data is enabled on the second SIM in the case of dual SIM.
+            final TelephonyManager tmDefaultData = telephonyManager.createForSubscriptionId(
+                    SubscriptionManager.getDefaultDataSubscriptionId());
+            if (tmDefaultData == null || !tmDefaultData.isDataEnabled()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -334,10 +361,10 @@ public class MobileNetworkUtils {
         }
 
         if (isWorldMode(context, subId)) {
-            final int settingsNetworkMode = android.provider.Settings.Global.getInt(
-                    context.getContentResolver(),
-                    android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                    TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+            final int settingsNetworkMode = getNetworkTypeFromRaf(
+                    (int) telephonyManager.getAllowedNetworkTypesForReason(
+                            TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
+
             if (settingsNetworkMode == NETWORK_MODE_LTE_GSM_WCDMA
                     || settingsNetworkMode == NETWORK_MODE_LTE_CDMA_EVDO
                     || settingsNetworkMode == NETWORK_MODE_NR_LTE_GSM_WCDMA
@@ -363,10 +390,11 @@ public class MobileNetworkUtils {
         if (isGsmBasicOptions(context, subId)) {
             return true;
         }
-        final int networkMode = android.provider.Settings.Global.getInt(
-                context.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(subId);
+        final int networkMode = getNetworkTypeFromRaf(
+                (int) telephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
         if (isWorldMode(context, subId)) {
             if (networkMode == NETWORK_MODE_LTE_CDMA_EVDO
                     || networkMode == NETWORK_MODE_LTE_GSM_WCDMA
@@ -430,10 +458,9 @@ public class MobileNetworkUtils {
             return false;
         }
 
-        final int networkMode = android.provider.Settings.Global.getInt(
-                context.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+        final int networkMode = getNetworkTypeFromRaf(
+                (int) telephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
         if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
                 && isWorldMode(context, subId)) {
             return false;
@@ -475,8 +502,9 @@ public class MobileNetworkUtils {
         if (carrierConfig.getBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL)) {
             return true;
         }
-
-        final String operatorNumeric = telephonyManager.getServiceState().getOperatorNumeric();
+        final ServiceState serviceState = telephonyManager.getServiceState();
+        final String operatorNumeric =
+                (serviceState != null) ? serviceState.getOperatorNumeric() : null;
         final String[] numericArray = carrierConfig.getStringArray(
                 CarrierConfigManager.KEY_SUPPORT_TDSCDMA_ROAMING_NETWORKS_STRING_ARRAY);
         if (numericArray == null || operatorNumeric == null) {
@@ -544,15 +572,17 @@ public class MobileNetworkUtils {
      */
     @VisibleForTesting
     static boolean shouldSpeciallyUpdateGsmCdma(Context context, int subId) {
-        final int networkMode = android.provider.Settings.Global.getInt(
-                context.getContentResolver(),
-                android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
+        final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(subId);
+        final int networkMode = getNetworkTypeFromRaf(
+                (int) telephonyManager.getAllowedNetworkTypesForReason(
+                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
         if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA
-                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
+                || networkMode
+                == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
             if (!isTdscdmaSupported(context, subId) && isWorldMode(context, subId)) {
                 return true;
@@ -572,8 +602,7 @@ public class MobileNetworkUtils {
         final Drawable networkDrawable =
                 iconType == NO_CELL_DATA_TYPE_ICON
                         ? EMPTY_DRAWABLE
-                        : context
-                                .getResources().getDrawable(iconType, context.getTheme());
+                        : context.getResources().getDrawable(iconType, context.getTheme());
 
         // Overlay the two drawables
         final Drawable[] layers = {networkDrawable, signalDrawable};
@@ -620,12 +649,8 @@ public class MobileNetworkUtils {
         return getOperatorNameFromTelephonyManager(context);
     }
 
-    private static SubscriptionInfo getSubscriptionInfo(SubscriptionManager subManager,
-            int subId) {
-        List<SubscriptionInfo> subInfos = subManager.getAccessibleSubscriptionInfoList();
-        if (subInfos == null) {
-            subInfos = subManager.getActiveSubscriptionInfoList();
-        }
+    private static SubscriptionInfo getSubscriptionInfo(SubscriptionManager subManager, int subId) {
+        List<SubscriptionInfo> subInfos = subManager.getActiveSubscriptionInfoList();
         if (subInfos == null) {
             return null;
         }
@@ -851,4 +876,119 @@ public class MobileNetworkUtils {
         raf = ((NR & raf) > 0) ? (NR | raf) : raf;
         return raf;
     }
+
+    /**
+     * Copied from SubscriptionsPreferenceController#activeNetworkIsCellular()
+     */
+    public static boolean activeNetworkIsCellular(Context context) {
+        final ConnectivityManager connectivityManager =
+                context.getSystemService(ConnectivityManager.class);
+        final Network activeNetwork = connectivityManager.getActiveNetwork();
+        if (activeNetwork == null) {
+            return false;
+        }
+        final NetworkCapabilities networkCapabilities =
+                connectivityManager.getNetworkCapabilities(activeNetwork);
+        if (networkCapabilities == null) {
+            return false;
+        }
+        return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR);
+    }
+
+    /**
+     * Copied from WifiCallingPreferenceController#isWifiCallingEnabled()
+     */
+    public static boolean isWifiCallingEnabled(Context context, int subId,
+            @Nullable WifiCallingQueryImsState queryImsState,
+            @Nullable PhoneAccountHandle phoneAccountHandle) {
+        if (phoneAccountHandle == null){
+            phoneAccountHandle = context.getSystemService(TelecomManager.class)
+                    .getSimCallManagerForSubscription(subId);
+        }
+        boolean isWifiCallingEnabled;
+        if (phoneAccountHandle != null) {
+            final Intent intent = buildPhoneAccountConfigureIntent(context, phoneAccountHandle);
+            isWifiCallingEnabled = intent != null;
+        } else {
+            if (queryImsState == null) {
+                queryImsState = new WifiCallingQueryImsState(context, subId);
+            }
+            isWifiCallingEnabled = queryImsState.isReadyToWifiCalling();
+        }
+        return isWifiCallingEnabled;
+    }
+
+
+    /**
+     * Returns preferred status of Calls & SMS separately when Provider Model is enabled.
+     */
+    public static CharSequence getPreferredStatus(Context context,
+            SubscriptionManager subscriptionManager, boolean isPreferredCallStatus) {
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(
+                subscriptionManager);
+        if (!subs.isEmpty()) {
+            final StringBuilder summary = new StringBuilder();
+            for (SubscriptionInfo subInfo : subs) {
+                int subsSize = subs.size();
+                final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                        subInfo, context);
+
+                // Set displayName as summary if there is only one valid SIM.
+                if (subsSize == 1
+                        && SubscriptionManager.isValidSubscriptionId(subInfo.getSubscriptionId())) {
+                    return displayName;
+                }
+
+                CharSequence status = isPreferredCallStatus
+                        ? getPreferredCallStatus(context, subInfo)
+                        : getPreferredSmsStatus(context, subInfo);
+                if (status.toString().isEmpty()) {
+                    // If there are 2 or more SIMs and one of these has no preferred status,
+                    // set only its displayName as summary.
+                    summary.append(displayName);
+                } else {
+                    summary.append(displayName)
+                            .append(" (")
+                            .append(status)
+                            .append(")");
+                }
+                // Do not add ", " for the last subscription.
+                if (subInfo != subs.get(subs.size() - 1)) {
+                    summary.append(", ");
+                }
+            }
+            return summary;
+        } else {
+            return "";
+        }
+    }
+
+    private static CharSequence getPreferredCallStatus(Context context, SubscriptionInfo subInfo) {
+        final int subId = subInfo.getSubscriptionId();
+        String status = "";
+        boolean isDataPreferred = subId == SubscriptionManager.getDefaultVoiceSubscriptionId();
+
+        if (isDataPreferred) {
+            status = setSummaryResId(context, R.string.calls_sms_preferred);
+        }
+
+        return status;
+    }
+
+    private static CharSequence getPreferredSmsStatus(Context context, SubscriptionInfo subInfo) {
+        final int subId = subInfo.getSubscriptionId();
+        String status = "";
+        boolean isSmsPreferred = subId == SubscriptionManager.getDefaultSmsSubscriptionId();
+
+        if (isSmsPreferred) {
+            status = setSummaryResId(context, R.string.calls_sms_preferred);
+        }
+
+        return status;
+    }
+
+    private static String setSummaryResId(Context context, int resId) {
+        return context.getResources().getString(resId);
+    }
+
 }

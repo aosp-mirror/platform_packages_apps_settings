@@ -223,6 +223,10 @@
     <!-- Security types for wireless tether -->
     <string-array name="wifi_tether_security">
         <!-- Do not translate. -->
+        <item>@string/wifi_security_sae</item>
+        <!-- Do not translate. -->
+        <item>@string/wifi_security_psk_sae</item>
+        <!-- Do not translate. -->
         <item>@string/wifi_security_wpa2</item>
         <!-- Do not translate. -->
         <item>@string/wifi_security_none</item>
@@ -230,6 +234,10 @@
 
     <!-- Values for security type for wireless tether -->
     <string-array name="wifi_tether_security_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>3</item>
+        <!-- Do not translate. -->
+        <item>2</item>
         <!-- Do not translate. -->
         <item>1</item>
         <!-- Do not translate. -->
@@ -270,10 +278,9 @@
 
     <!-- Type of OCSP -->
     <string-array name="eap_ocsp_type" translatable="true">
-        <item>Do not validate</item>
+        <item>Do not verify</item>
         <item>Request certificate status</item>
         <item>Require certificate status</item>
-        <item>Require all non-trusted certificate statuses</item>
     </string-array>
 
     <!-- Wi-Fi AP band settings.  Either 2.4GHz or 5GHz prefer. -->
@@ -749,6 +756,17 @@
         <item>Long</item>
     </string-array>
 
+    <!-- Avoid the gender issue, create the new fork of the string long_press_timeout_selector_titles -->
+    <!-- Titles for the list of long press timeout options in preference. -->
+    <string-array name="long_press_timeout_selector_list_titles">
+        <!-- A title for the option for short long-press timeout [CHAR LIMIT=25] -->
+        <item>Short</item>
+        <!-- A title for the option for medium long-press timeout [CHAR LIMIT=25] -->
+        <item>Medium</item>
+        <!-- A title for the option for long long-press timeout [CHAR LIMIT=25] -->
+        <item>Long</item>
+    </string-array>
+
     <!-- Values for the list of long press timeout options. -->
     <string-array name="long_press_timeout_selector_values" translatable="false">
         <item>400</item>
@@ -947,6 +965,50 @@
         <item>-1</item>
     </integer-array>
 
+    <!-- Titles for the accessibility button location. [CHAR LIMIT=35] -->
+    <string-array name="accessibility_button_location_selector_titles">
+        <item>Floating over other apps</item>
+        <item>Navigation bar</item>
+    </string-array>
+
+    <!-- Values for the accessibility button location. -->
+    <!-- Should Keep in sync with Settings.Secure.ACCESSIBILITY_BUTTON_MODE_* -->
+    <string-array name="accessibility_button_location_selector_values" translatable="false">
+        <!-- Floating over other apps -->
+        <item>1</item>
+        <!-- Navigation bar -->
+        <item>0</item>
+    </string-array>
+
+    <!-- Titles for the accessibility button or gesture. [CHAR LIMIT=35] -->
+    <string-array name="accessibility_button_gesture_selector_titles">
+        <item>Button</item>
+        <item>Gesture</item>
+    </string-array>
+
+    <!-- Values for the accessibility button or gesture. -->
+    <!-- Should Keep in sync with Settings.Secure.ACCESSIBILITY_BUTTON_MODE_* -->
+    <string-array name="accessibility_button_gesture_selector_values" translatable="false">
+        <!-- Button -->
+        <item>1</item>
+        <!-- Gesture -->
+        <item>2</item>
+    </string-array>
+
+    <!-- Titles for the accessibility button size. [CHAR LIMIT=35] -->
+    <string-array name="accessibility_button_size_selector_titles">
+        <item>Small</item>
+        <item>Large</item>
+    </string-array>
+
+    <!-- Values for the accessibility button size. -->
+    <string-array name="accessibility_button_size_selector_values" translatable="false" >
+        <!-- Small -->
+        <item>0</item>
+        <!-- Large -->
+        <item>1</item>
+    </string-array>
+
     <!-- Match this with the constants in VpnProfile. --> <skip />
     <!-- Short names for each VPN type, not really translatable. [CHAR LIMIT=20] -->
     <string-array name="vpn_types" translatable="false">
@@ -1071,6 +1133,7 @@
         <item>daltonizer_mode_deuteranomaly</item>
         <item>daltonizer_mode_protanomaly</item>
         <item>daltonizer_mode_tritanomaly</item>
+        <item>daltonizer_mode_grayscale</item>
     </string-array>
 
     <!-- Values for display color space adjustment modes for accessibility -->
@@ -1078,6 +1141,7 @@
         <item>12</item>
         <item>11</item>
         <item>13</item>
+        <item>0</item>
     </integer-array>
 
     <!-- Battery saver mode: allowable trigger threshold levels. -->
@@ -1352,7 +1416,7 @@
         <item>CDMA/EvDo/GSM/WCDMA</item>
         <item>CDMA + LTE/EvDo</item>
         <item>GSM/WCDMA/LTE</item>
-        <item>Global</item>
+        <item>LTE/CDMA/EvDo/GSM/WCDMA</item>
         <item>LTE</item>
         <item>LTE / WCDMA</item>
         <item>TDSCDMA only</item>
@@ -1369,7 +1433,8 @@
         <item>NR/LTE</item>
         <item>NR/LTE/CDMA/EvDo</item>
         <item>NR/LTE/GSM/WCDMA</item>
-        <item>NR/LTE/CDMA/EvDo/GSM/WCDMA</item>
+        <!-- Global includes NR/LTE/CDMA/EvDo/GSM/WCDMA -->
+        <item>Global</item>
         <item>NR/LTE/WCDMA</item>
         <item>NR/LTE/TDSCDMA</item>
         <item>NR/LTE/TDSCDMA/GSM</item>
@@ -1461,14 +1526,19 @@
         <item>@string/enhanced_4g_lte_mode_summary_4g_calling</item>
     </string-array>
 
-    <!-- A whitelist which packages won't show summary in battery usage screen.  [CHAR LIMIT=NONE] -->
-    <string-array name="whitelist_hide_summary_in_battery_usage" translatable="false">
-        <!-- Google -->
-        <item>"com.google.android.googlequicksearchbox"</item>
+    <!-- An allowlist which packages won't show summary in battery usage screen.
+         [CHAR LIMIT=NONE] -->
+    <string-array name="allowlist_hide_summary_in_battery_usage" translatable="false">
+    </string-array>
+
+    <!-- An allowlist which packages won't show entry in battery usage screen.
+        [CHAR LIMIT=NONE] -->
+    <string-array name="allowlist_hide_entry_in_battery_usage" translatable="false">
+        <item>"com.google.android.gms.persistent"</item>
     </string-array>
 
     <!-- Array of titles palette list for accessibility. -->
-    <string-array name="setting_palette_colors" translatable="false" >
+    <string-array name="setting_palette_data" translatable="false" >
         <item>@string/color_red</item>
         <item>@string/color_orange</item>
         <item>@string/color_yellow</item>
@@ -1476,10 +1546,11 @@
         <item>@string/color_cyan</item>
         <item>@string/color_blue</item>
         <item>@string/color_purple</item>
+        <item>@string/color_gray</item>
     </string-array>
 
     <!-- Values for palette list view preference. -->
-    <array name="setting_palette_data" translatable="false" >
+    <array name="setting_palette_colors" translatable="false" >
         <item>@color/palette_list_color_red</item>
         <item>@color/palette_list_color_orange</item>
         <item>@color/palette_list_color_yellow</item>
@@ -1487,6 +1558,7 @@
         <item>@color/palette_list_color_cyan</item>
         <item>@color/palette_list_color_blue</item>
         <item>@color/palette_list_color_purple</item>
+        <item>@color/palette_list_color_gray</item>
     </array>
 
     <!--String arrays for showing the rtt settings options -->
@@ -1501,4 +1573,28 @@
         <item>@string/rtt_settings_always_visible</item>
     </string-array>
 
+    <!-- Values of list for one-handed timeout options. [DO NOT TRANSLATE] -->
+    <string-array name="one_handed_timeout_values" translatable="false">
+        <item>0</item>
+        <item>4</item>
+        <item>8</item>
+        <item>12</item>
+    </string-array>
+
+    <!-- Array of titles list for notification listener notification types. [DO NOT TRANSLATE] -->
+    <string-array name="notif_types_titles" translatable="false">
+        <item>@string/notif_type_ongoing</item>
+        <item>@string/notif_type_conversation</item>
+        <item>@string/notif_type_alerting</item>
+        <item>@string/notif_type_silent</item>
+    </string-array>
+
+    <!-- Values of list for notification listener notification types. Values need to match
+    android.service.notification.NotificationListenerService. [DO NOT TRANSLATE] -->
+    <string-array name="notif_types_values" translatable="false">
+        <item>8</item>
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+    </string-array>
 </resources>

@@ -34,7 +34,7 @@ import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
@@ -57,7 +57,7 @@ public class UsbBackendTest {
     @Mock
     private UserManager mUserManager;
     @Mock
-    private ConnectivityManager mConnectivityManager;
+    private TetheringManager mTetheringManager;
     @Mock
     private UsbPort mUsbPort;
     @Mock
@@ -69,8 +69,8 @@ public class UsbBackendTest {
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI))
                 .thenReturn(true);
         when((Object) mContext.getSystemService(UsbManager.class)).thenReturn(mUsbManager);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(mConnectivityManager);
+        when((Object) mContext.getSystemService(
+                TetheringManager.class)).thenReturn(mTetheringManager);
         when(mUsbManager.getPorts()).thenReturn(Collections.singletonList(mUsbPort));
         when(mUsbPortStatus.isConnected()).thenReturn(true);
         when(mUsbPort.getStatus()).thenReturn(mUsbPortStatus);
@@ -180,5 +180,25 @@ public class UsbBackendTest {
         final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
 
         assertThat(usbBackend.areFunctionsSupported(UsbManager.FUNCTION_MTP)).isTrue();
+    }
+
+    @Test
+    public void areFunctionsDisallowedByNonAdminUser_isAdminUser_returnFalse() {
+        when(mUserManager.isAdminUser()).thenReturn(true);
+
+        final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
+
+        assertThat(usbBackend.areFunctionsDisallowedByNonAdminUser(
+                UsbManager.FUNCTION_RNDIS)).isFalse();
+    }
+
+    @Test
+    public void areFunctionsDisallowedByNonAdminUser_isNotAdminUser_returnTrue() {
+        when(mUserManager.isAdminUser()).thenReturn(false);
+
+        final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
+
+        assertThat(usbBackend.areFunctionsDisallowedByNonAdminUser(
+                UsbManager.FUNCTION_RNDIS)).isTrue();
     }
 }

@@ -17,14 +17,13 @@
 package com.android.settings.password;
 
 import android.app.Activity;
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -65,8 +64,7 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.content_parent);
-        layout.setFitsSystemWindows(false);
+        findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
 
     public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment
@@ -83,9 +81,11 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             super.onViewCreated(view, savedInstanceState);
             final Activity activity = getActivity();
             ChooseLockGenericController chooseLockGenericController =
-                    new ChooseLockGenericController(activity, mUserId);
-            boolean anyOptionsShown = chooseLockGenericController.getVisibleScreenLockTypes(
-                    DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false).size() > 0;
+                    new ChooseLockGenericController.Builder(activity, mUserId)
+                    .setHideInsecureScreenLockTypes(true)
+                    .build();
+            boolean anyOptionsShown = chooseLockGenericController
+                    .getVisibleAndEnabledScreenLockTypes().size() > 0;
             boolean showOptionsButton = activity.getIntent().getBooleanExtra(
                     ChooseLockGeneric.ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
             if (!anyOptionsShown) {
@@ -104,18 +104,27 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         @Override
         protected void onSkipOrClearButtonClick(View view) {
             if (mLeftButtonIsSkip) {
-                SetupSkipDialog dialog = SetupSkipDialog.newInstance(
-                        getActivity().getIntent()
-                                .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false),
+                final Intent intent = getActivity().getIntent();
+                final boolean frpSupported = intent
+                        .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false);
+                final boolean forFingerprint = intent
+                        .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
+                final boolean forFace = intent
+                        .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
+                final boolean forBiometrics = intent
+                        .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, false);
+                final SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                        frpSupported,
                         /* isPatternMode= */ false,
                         mIsAlphaMode,
-                        getActivity().getIntent()
-                                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT,
-                                        false),
-                        getActivity().getIntent()
-                                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false)
+                        forFingerprint,
+                        forFace,
+                        forBiometrics);
 
-                );
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
                 dialog.show(getFragmentManager());
                 return;
             }

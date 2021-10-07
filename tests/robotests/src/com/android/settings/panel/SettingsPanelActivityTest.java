@@ -18,31 +18,32 @@ package com.android.settings.panel;
 
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
-import static com.android.settings.panel.SettingsPanelActivity.KEY_MEDIA_PACKAGE_NAME;
-import static com.android.settings.panel.SettingsPanelActivity.KEY_PANEL_TYPE_ARGUMENT;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.android.settings.core.HideNonSystemOverlayMixin;
+import androidx.fragment.app.FragmentManager;
+
+import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
@@ -56,6 +57,10 @@ public class SettingsPanelActivityTest {
     private FakeSettingsPanelActivity mSettingsPanelActivity;
     private PanelFeatureProvider mPanelFeatureProvider;
     private FakePanelContent mFakePanelContent;
+    @Mock
+    private PanelFragment mPanelFragment;
+    @Mock
+    private FragmentManager mFragmentManager;
 
     @Before
     public void setUp() {
@@ -67,35 +72,10 @@ public class SettingsPanelActivityTest {
         mFakeFeatureFactory.panelFeatureProvider = mPanelFeatureProvider;
         mFakePanelContent = new FakePanelContent();
         doReturn(mFakePanelContent).when(mPanelFeatureProvider).getPanel(any(), any());
-    }
 
-    @Test
-    public void startMediaOutputSlice_withPackageName_bundleShouldHaveValue() {
-        final Intent intent = new Intent()
-                .setAction("com.android.settings.panel.action.MEDIA_OUTPUT")
-                .putExtra("com.android.settings.panel.extra.PACKAGE_NAME",
-                        "com.google.android.music");
-
-        final SettingsPanelActivity activity =
-                Robolectric.buildActivity(SettingsPanelActivity.class, intent).create().get();
-
-        assertThat(activity.mBundle.getString(KEY_MEDIA_PACKAGE_NAME))
-                .isEqualTo("com.google.android.music");
-        assertThat(activity.mBundle.getString(KEY_PANEL_TYPE_ARGUMENT))
-                .isEqualTo("com.android.settings.panel.action.MEDIA_OUTPUT");
-    }
-
-    @Test
-    public void startMediaOutputSlice_withoutPackageName_bundleShouldHaveValue() {
-        final Intent intent = new Intent()
-                .setAction("com.android.settings.panel.action.MEDIA_OUTPUT");
-
-        final SettingsPanelActivity activity =
-                Robolectric.buildActivity(SettingsPanelActivity.class, intent).create().get();
-
-        assertThat(activity.mBundle.containsKey(KEY_MEDIA_PACKAGE_NAME)).isTrue();
-        assertThat(activity.mBundle.getString(KEY_PANEL_TYPE_ARGUMENT))
-                .isEqualTo("com.android.settings.panel.action.MEDIA_OUTPUT");
+        mSettingsPanelActivity.mPanelFragment = mPanelFragment;
+        when(mFragmentManager.findFragmentById(R.id.main_content)).thenReturn(mPanelFragment);
+        when(mSettingsPanelActivity.getSupportFragmentManager()).thenReturn(mFragmentManager);
     }
 
     @Test
@@ -142,10 +122,61 @@ public class SettingsPanelActivityTest {
     }
 
     @Test
+    public void onStop_panelIsNotCreating_shouldForceUpdate() {
+        mSettingsPanelActivity.mForceCreation = false;
+        when(mPanelFragment.isPanelCreating()).thenReturn(false);
+        mSettingsPanelActivity.mPanelFragment = mPanelFragment;
+
+        mSettingsPanelActivity.onStop();
+
+        assertThat(mSettingsPanelActivity.mForceCreation).isTrue();
+    }
+
+    @Test
+    public void onStop_panelIsCreating_shouldNotForceUpdate() {
+        mSettingsPanelActivity.mForceCreation = false;
+        when(mPanelFragment.isPanelCreating()).thenReturn(true);
+        mSettingsPanelActivity.mPanelFragment = mPanelFragment;
+
+        mSettingsPanelActivity.onStop();
+
+        assertThat(mSettingsPanelActivity.mForceCreation).isFalse();
+    }
+
+    @Test
     public void onConfigurationChanged_shouldForceUpdate() {
         mSettingsPanelActivity.mForceCreation = false;
+
         mSettingsPanelActivity.onConfigurationChanged(new Configuration());
 
         assertThat(mSettingsPanelActivity.mForceCreation).isTrue();
+    }
+
+    @Test
+    public void onNewIntent_panelIsNotCreating_shouldUpdatePanel() {
+        when(mPanelFragment.isPanelCreating()).thenReturn(false);
+
+        mSettingsPanelActivity.onNewIntent(mSettingsPanelActivity.getIntent());
+
+        verify(mPanelFragment).updatePanelWithAnimation();
+    }
+
+    @Test
+    public void onNewIntent_panelIsCreating_shouldNotUpdatePanel() {
+        when(mPanelFragment.isPanelCreating()).thenReturn(true);
+
+        mSettingsPanelActivity.onNewIntent(mSettingsPanelActivity.getIntent());
+
+        verify(mPanelFragment, never()).updatePanelWithAnimation();
+    }
+
+    @Test
+    public void onNewIntent_panelIsShowingTheSameAction_shouldNotUpdatePanel() {
+        when(mPanelFragment.isPanelCreating()).thenReturn(false);
+        when(mPanelFragment.getArguments()).thenReturn(mSettingsPanelActivity.mBundle);
+
+        mSettingsPanelActivity.onNewIntent(mSettingsPanelActivity.getIntent());
+
+        verify(mPanelFragment, never()).updatePanelWithAnimation();
     }
 }

@@ -49,19 +49,18 @@ public class LowBatteryDetector implements BatteryTipDetector {
         final boolean lowBattery = mBatteryInfo.batteryLevel <= mWarningLevel
                 || (mBatteryInfo.discharging && mBatteryInfo.remainingTimeUs != 0
                 && mBatteryInfo.remainingTimeUs < TimeUnit.HOURS.toMicros(mPolicy.lowBatteryHour));
+        final boolean lowBatteryEnabled = mPolicy.lowBatteryEnabled && !powerSaveModeOn;
+        final boolean dischargingLowBatteryState =
+                mPolicy.testLowBatteryTip || (mBatteryInfo.discharging && lowBattery);
 
         int state = BatteryTip.StateType.INVISIBLE;
-        if (mPolicy.lowBatteryEnabled) {
-            if (powerSaveModeOn) {
-                // Show it is handled if battery saver is on
-                state = BatteryTip.StateType.HANDLED;
-            } else if (mPolicy.testLowBatteryTip || (mBatteryInfo.discharging && lowBattery)) {
-                // Show it is new if in test or in discharging low battery state
-                state = BatteryTip.StateType.NEW;
-            }
+
+        // Show it as new if in test or in discharging low battery state,
+        // dismiss it if battery saver is on or disabled by config.
+        if (lowBatteryEnabled && dischargingLowBatteryState) {
+            state = BatteryTip.StateType.NEW;
         }
 
-        return new LowBatteryTip(
-                state, powerSaveModeOn, mBatteryInfo.suggestionLabel);
+        return new LowBatteryTip(state, powerSaveModeOn);
     }
 }

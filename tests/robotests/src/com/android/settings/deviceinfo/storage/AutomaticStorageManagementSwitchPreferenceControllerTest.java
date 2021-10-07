@@ -22,12 +22,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.SystemProperties;
 import android.provider.Settings;
 
@@ -38,11 +40,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.RoSystemProperties;
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,20 +63,23 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private MasterSwitchPreference mPreference;
+    private PrimarySwitchPreference mPreference;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mMockContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private FragmentManager mFragmentManager;
 
     private Context mContext;
+    private Resources mResources;
     private AutomaticStorageManagementSwitchPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application.getApplicationContext();
+        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         FeatureFactory.getFactory(mContext);
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
 
         mController = new AutomaticStorageManagementSwitchPreferenceController(mContext, "testkey");
         mController.setFragmentManager(mFragmentManager);
@@ -81,14 +87,27 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_shouldReturnTrue_forHighRamDevice() {
+    public void getAvailabilityStatus_configFalse_shouldUnsupportedOnDevice() {
+        when(mResources.getBoolean(R.bool.config_show_smart_storage_toggle)).thenReturn(false);
+
+        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_forHighRamDevice_shouldAvailable() {
+        when(mResources.getBoolean(R.bool.config_show_smart_storage_toggle)).thenReturn(true);
+
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void isAvailable_shouldAlwaysReturnFalse_forLowRamDevice() {
+    public void getAvailabilityStatus_forLowRamDevice_shouldUnsupportedOnDevice() {
+        when(mResources.getBoolean(R.bool.config_show_smart_storage_toggle)).thenReturn(true);
+
         ReflectionHelpers.setStaticField(RoSystemProperties.class, "CONFIG_LOW_RAM", true);
         assertThat(mController.isAvailable()).isFalse();
         assertThat(mController.getAvailabilityStatus()).isEqualTo(

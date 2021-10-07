@@ -22,6 +22,7 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.applications.manageapplications.ResetAppPrefPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.EraseEuiccDataController;
 import com.android.settings.network.NetworkResetPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -55,6 +56,12 @@ public class ResetDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getSettingsLifecycle());
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(EraseEuiccDataController.class).setFragment(this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
