@@ -27,6 +27,9 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +37,8 @@ import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
 import com.android.settings.datetime.timezone.model.TimeZoneDataLoader;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.Locale;
 
@@ -43,12 +48,15 @@ import java.util.Locale;
  * The search matches the prefix of words in the search text.
  */
 public abstract class BaseTimeZonePicker extends InstrumentedFragment
-        implements SearchView.OnQueryTextListener {
+        implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener {
 
     public static final String EXTRA_RESULT_REGION_ID =
             "com.android.settings.datetime.timezone.result_region_id";
     public static final String EXTRA_RESULT_TIME_ZONE_ID =
             "com.android.settings.datetime.timezone.result_time_zone_id";
+
+    protected AppBarLayout mAppBarLayout;
+
     private final int mTitleResId;
     private final int mSearchHintResId;
     private final boolean mSearchEnabled;
@@ -88,6 +96,8 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, /* reverseLayout */ false));
         mRecyclerView.setAdapter(mAdapter);
+        mAppBarLayout = getActivity().findViewById(R.id.app_bar);
+        disableToolBarScrollableBehavior();
 
         // Initialize TimeZoneDataLoader only when mRecyclerView is ready to avoid race
         // during onDateLoaderReady callback.
@@ -121,6 +131,7 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
             inflater.inflate(R.menu.time_zone_base_search_menu, menu);
 
             final MenuItem searchMenuItem = menu.findItem(R.id.time_zone_search_menu);
+            searchMenuItem.setOnActionExpandListener(this);
             mSearchView = (SearchView) searchMenuItem.getActionView();
 
             mSearchView.setQueryHint(getText(mSearchHintResId));
@@ -149,6 +160,23 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
     }
 
     @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        // To prevent a large space on tool bar.
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        // To prevent user can expand the collapsing tool bar view.
+        ViewCompat.setNestedScrollingEnabled(mRecyclerView, false);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        // We keep the collapsed status after user cancel the search function.
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        ViewCompat.setNestedScrollingEnabled(mRecyclerView, true);
+        return true;
+    }
+
+    @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
@@ -165,4 +193,17 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
         void onListItemClick(T item);
     }
 
+    private void disableToolBarScrollableBehavior() {
+        CoordinatorLayout.LayoutParams params =
+                (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
+        AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
+        behavior.setDragCallback(
+                new AppBarLayout.Behavior.DragCallback() {
+                    @Override
+                    public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+                        return false;
+                    }
+                });
+        params.setBehavior(behavior);
+    }
 }

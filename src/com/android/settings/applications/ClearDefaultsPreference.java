@@ -117,7 +117,7 @@ public class ClearDefaultsPreference extends Preference {
                 if (mUsbManager != null) {
                     final int userId = UserHandle.myUserId();
                     mPm.clearPackagePreferredActivities(mPackageName);
-                    if (isDefaultBrowser(mPackageName)) {
+                    if (AppUtils.isDefaultBrowser(getContext(), mPackageName)) {
                         mPm.setDefaultBrowserPackageNameAsUser(null, userId);
                     }
                     try {
@@ -141,7 +141,7 @@ public class ClearDefaultsPreference extends Preference {
 
         TextView autoLaunchView = (TextView) view.findViewById(R.id.auto_launch);
         boolean autoLaunchEnabled = AppUtils.hasPreferredActivities(mPm, mPackageName)
-                || isDefaultBrowser(mPackageName)
+                || AppUtils.isDefaultBrowser(getContext(), mPackageName)
                 || AppUtils.hasUsbDefaults(mUsbManager, mPackageName);
         if (!autoLaunchEnabled && !hasBindAppWidgetPermission) {
             resetLaunchDefaultsUi(autoLaunchView);
@@ -183,11 +183,6 @@ public class ClearDefaultsPreference extends Preference {
             mActivitiesButton.setEnabled(true);
         }
         return true;
-    }
-
-    private boolean isDefaultBrowser(String packageName) {
-        final String defaultBrowser = mPm.getDefaultBrowserPackageNameAsUser(UserHandle.myUserId());
-        return packageName.equals(defaultBrowser);
     }
 
     private void resetLaunchDefaultsUi(TextView autoLaunchView) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2019 The Android Open Source Project
+  ~ Copyright (C) 2021 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -12,32 +12,27 @@
   ~ distributed under the License is distributed on an "AS IS" BASIS,
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
-  ~ limitations under the License
+  ~ limitations under the License.
   -->
 
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:FaceEnrollAccessibilitySwitch="http://schemas.android.com/apk/res/com.android.settings"
     style="?attr/face_layout_theme"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:sudDescriptionText="@string/security_settings_face_enroll_introduction_message">
 
     <LinearLayout
         style="@style/SudContentFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:orientation="vertical">
-
-        <com.google.android.setupdesign.view.RichTextView
-            android:id="@+id/sud_layout_description"
-            style="@style/SudDescription.Glif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/security_settings_face_enroll_introduction_message"/>
+        android:orientation="vertical"
+        android:layout_marginStart="?attr/sudMarginStart"
+        android:layout_marginEnd="?attr/sudMarginEnd">
 
         <com.google.android.setupdesign.view.RichTextView
             android:id="@+id/error_text"
@@ -48,25 +43,29 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="12dp">
+            android:layout_height="wrap_content">
 
-            <com.google.android.setupdesign.view.IllustrationVideoView
-                android:id="@+id/illustration_normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
                 style="@style/SudContentIllustration"
-                app:sudVideo="@raw/face_settings"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:src="@drawable/face_enroll_intro_illustration"/>
 
         </FrameLayout>
 
-        <!-- Contains the buttons and extra information text at the bottom -->
+        <!-- Contains the extra information text at the bottom -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal|bottom"
-            android:paddingTop="12dp">
+            android:orientation="vertical">
+
+            <!-- Keep in mind -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/BiometricEnrollIntroTitle"
+                android:text="@string/security_settings_face_enroll_introduction_info_title" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,81 +73,88 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/icon_glasses"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_info_outline_24dp">
-                </ImageView>
+                    android:background="@drawable/ic_face_enroll_introduction_glasses"/>
                 <Space
-                    android:layout_width="24dp"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/info_message_glasses"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/security_settings_face_enroll_introduction_footer_part_0"/>
-
+                    style="@style/BiometricEnrollIntroMessage" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="24dp">
+                android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/icon_looking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_face_enroll_introduction_shield">
-                </ImageView>
+                    android:background="@drawable/ic_face_enroll_introduction_visibility"/>
                 <Space
-                    android:layout_width="24dp"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/info_message_looking"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/security_settings_face_enroll_introduction_footer_part_1"/>
-
+                    style="@style/BiometricEnrollIntroMessage" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/info_row_require_eyes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="24dp">
+                android:visibility="gone">
 
                 <ImageView
+                    android:id="@+id/icon_require_eyes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_face_enroll_introduction_visibility">
-                </ImageView>
+                    android:background="@drawable/ic_settings_24dp"/>
                 <Space
-                    android:layout_width="24dp"
+                    android:layout_width="16dp"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/face_enroll_introduction_footer_part_2"
+                    android:id="@+id/info_message_require_eyes"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
+                    android:layout_height="wrap_content"
+                    style="@style/BiometricEnrollIntroMessage" />
             </LinearLayout>
 
-            <LinearLayout
+            <!-- How it works -->
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="24dp">
+                style="@style/BiometricEnrollIntroTitle"
+                android:text="@string/security_settings_face_enroll_introduction_how_title" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_face_enroll_introduction_people">
-                </ImageView>
-                <Space
-                    android:layout_width="24dp"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/security_settings_face_enroll_introduction_footer_part_3"/>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/how_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/BiometricEnrollIntroMessage" />
+
+            <!-- You're in control -->
+            <TextView
+                android:id="@+id/title_in_control"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/BiometricEnrollIntroTitle" />
+
+            <TextView
+                android:id="@+id/message_in_control"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/BiometricEnrollIntroMessage"
+                android:paddingBottom="0dp" />
 
         </LinearLayout>
 

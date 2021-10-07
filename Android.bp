@@ -72,6 +72,7 @@ android_library {
         "zxing-core-1.7",
         "android.hardware.dumpstate-V1.0-java",
         "android.hardware.dumpstate-V1.1-java",
+        "lottie",
     ],
 
     libs: [
@@ -89,6 +90,7 @@ platform_compat_config {
 
 android_app {
     name: "Settings",
+    defaults: ["platform_app_defaults"],
     platform_apis: true,
     certificate: "platform",
     system_ext_specific: true,

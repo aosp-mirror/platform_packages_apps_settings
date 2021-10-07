@@ -42,6 +42,7 @@ import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.RouteInfo;
 import android.net.Uri;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -62,6 +63,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.net.module.util.Inet4AddressUtils;
 import com.android.settings.R;
@@ -69,10 +71,10 @@ import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.datausage.WifiDataUsageSummaryPreferenceController;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiDialog2.WifiDialog2Listener;
-import com.android.settings.wifi.WifiEntryShell;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -86,14 +88,10 @@ import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
-import com.android.wifitrackerlib.WifiEntry.ConnectCallback.ConnectStatus;
 import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 import com.android.wifitrackerlib.WifiEntry.DisconnectCallback;
-import com.android.wifitrackerlib.WifiEntry.DisconnectCallback.DisconnectStatus;
 import com.android.wifitrackerlib.WifiEntry.ForgetCallback;
-import com.android.wifitrackerlib.WifiEntry.ForgetCallback.ForgetStatus;
 import com.android.wifitrackerlib.WifiEntry.SignInCallback;
-import com.android.wifitrackerlib.WifiEntry.SignInCallback.SignInStatus;
 import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback;
 
 import java.net.Inet4Address;
@@ -155,6 +153,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     static final String KEY_IPV6_CATEGORY = "ipv6_category";
     @VisibleForTesting
     static final String KEY_IPV6_ADDRESSES_PREF = "ipv6_addresses";
+    @VisibleForTesting
+    static final String KEY_WIFI_TYPE_PREF = "type";
 
     private final WifiEntry mWifiEntry;
     private final ConnectivityManager mConnectivityManager;
@@ -186,6 +186,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private Preference mGatewayPref;
     private Preference mSubnetPref;
     private Preference mDnsPref;
+    private Preference mTypePref;
     private PreferenceCategory mIpv6Category;
     private Preference mIpv6AddressPref;
     private Lifecycle mLifecycle;
@@ -382,11 +383,10 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         mGatewayPref = screen.findPreference(KEY_GATEWAY_PREF);
         mSubnetPref = screen.findPreference(KEY_SUBNET_MASK_PREF);
         mDnsPref = screen.findPreference(KEY_DNS_PREF);
+        mTypePref = screen.findPreference(KEY_WIFI_TYPE_PREF);
 
         mIpv6Category = screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
-
-        mSecurityPref.setSummary(mWifiEntry.getSecurityString(false /* concise */));
     }
 
     /**
@@ -475,7 +475,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return mContext.getString(R.string.wifi_time_remaining, StringUtil.formatElapsedTime(
                     mContext,
                     Duration.between(now, expiryTime).getSeconds() * 1000,
-                    false /* withSeconds */));
+                    false /* withSeconds */, false /* collapseTimeUnit */));
         }
 
         // For more than 2 days, show the expiry date
@@ -514,6 +514,12 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     @Override
     public void onResume() {
+        // Disable the animation of the EntityHeaderController
+        final RecyclerView recyclerView = mFragment.getListView();
+        if (recyclerView != null) {
+            recyclerView.setItemAnimator(null);
+        }
+
         // Ensure mNetwork is set before any callbacks above are delivered, since our
         // NetworkCallback only looks at changes to mNetwork.
         updateNetworkInfo();
@@ -540,6 +546,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         refreshRssiViews();
         // Frequency Pref
         refreshFrequency();
+        // Security Pref
+        refreshSecurity();
         // Transmit Link Speed Pref
         refreshTxSpeed();
         // Receive Link Speed Pref
@@ -552,6 +560,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         refreshEapSimSubscription();
         // MAC Address Pref
         refreshMacAddress();
+        // Wifi Type
+        refreshWifiType();
     }
 
     private void refreshRssiViews() {
@@ -620,14 +630,16 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             return;
         }
 
+        // TODO(b/190390803): We should get the band string directly from WifiEntry.ConnectedInfo
+        //                    instead of doing the frequency -> band conversion here.
         final int frequency = connectedInfo.frequencyMhz;
         String band = null;
-        if (frequency >= WifiEntryShell.LOWER_FREQ_24GHZ
-                && frequency < WifiEntryShell.HIGHER_FREQ_24GHZ) {
+        if (frequency >= WifiEntry.MIN_FREQ_24GHZ && frequency < WifiEntry.MAX_FREQ_24GHZ) {
             band = mContext.getResources().getString(R.string.wifi_band_24ghz);
-        } else if (frequency >= WifiEntryShell.LOWER_FREQ_5GHZ
-                && frequency < WifiEntryShell.HIGHER_FREQ_5GHZ) {
+        } else if (frequency >= WifiEntry.MIN_FREQ_5GHZ && frequency < WifiEntry.MAX_FREQ_5GHZ) {
             band = mContext.getResources().getString(R.string.wifi_band_5ghz);
+        } else if (frequency >= WifiEntry.MIN_FREQ_6GHZ && frequency < WifiEntry.MAX_FREQ_6GHZ) {
+            band = mContext.getResources().getString(R.string.wifi_band_6ghz);
         } else {
             // Connecting state is unstable, make it disappeared if unexpected
             if (mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTING) {
@@ -639,6 +651,10 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         }
         mFrequencyPref.setSummary(band);
         mFrequencyPref.setVisible(true);
+    }
+
+    private void refreshSecurity() {
+        mSecurityPref.setSummary(mWifiEntry.getSecurityString(false /* concise */));
     }
 
     private void refreshTxSpeed() {
@@ -698,8 +714,10 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         final int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
         if (activeSubscriptionInfos != null) {
             for (SubscriptionInfo subscriptionInfo : activeSubscriptionInfos) {
+                final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                        subscriptionInfo, mContext);
                 if (config.carrierId == subscriptionInfo.getCarrierId()) {
-                    mEapSimSubscriptionPref.setSummary(subscriptionInfo.getDisplayName());
+                    mEapSimSubscriptionPref.setSummary(displayName);
                     return;
                 }
 
@@ -707,7 +725,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                 // defaultDataSubscriptionId.
                 if (config.carrierId == TelephonyManager.UNKNOWN_CARRIER_ID
                         && defaultDataSubscriptionId == subscriptionInfo.getSubscriptionId()) {
-                    mEapSimSubscriptionPref.setSummary(subscriptionInfo.getDisplayName());
+                    mEapSimSubscriptionPref.setSummary(displayName);
                     return;
                 }
             }
@@ -740,16 +758,52 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         }
 
         mMacAddressPref.setVisible(true);
-
-        mMacAddressPref.setTitle((mWifiEntry.getPrivacy() == WifiEntry.PRIVACY_RANDOMIZED_MAC)
-                ? R.string.wifi_advanced_randomized_mac_address_title
-                : R.string.wifi_advanced_device_mac_address_title);
+        mMacAddressPref.setTitle(getMacAddressTitle());
 
         if (macAddress.equals(WifiInfo.DEFAULT_MAC_ADDRESS)) {
             mMacAddressPref.setSummary(R.string.device_info_not_available);
         } else {
             mMacAddressPref.setSummary(macAddress);
         }
+    }
+
+    private void refreshWifiType() {
+        final ConnectedInfo connectedInfo = mWifiEntry.getConnectedInfo();
+        if (connectedInfo == null) {
+            mTypePref.setVisible(false);
+            return;
+        }
+
+        final int typeString = getWifiStandardTypeString(connectedInfo.wifiStandard);
+        if (typeString != -1) {
+            mTypePref.setSummary(typeString);
+            mTypePref.setVisible(true);
+        } else {
+            mTypePref.setVisible(false);
+        }
+    }
+
+    private int getWifiStandardTypeString(int wifiStandardType) {
+        Log.d(TAG, "Wifi Type " + wifiStandardType);
+        switch (wifiStandardType) {
+            case ScanResult.WIFI_STANDARD_11AX:
+                return R.string.wifi_type_11AX;
+            case ScanResult.WIFI_STANDARD_11AC:
+                return R.string.wifi_type_11AC;
+            case ScanResult.WIFI_STANDARD_11N:
+                return R.string.wifi_type_11N;
+            default:
+                return -1;
+        }
+    }
+
+    private int getMacAddressTitle() {
+        if (mWifiEntry.getPrivacy() == WifiEntry.PRIVACY_RANDOMIZED_MAC) {
+            return mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED
+                    ? R.string.wifi_advanced_randomized_mac_address_title
+                    : R.string.wifi_advanced_randomized_mac_address_disconnected_title;
+        }
+        return R.string.wifi_advanced_device_mac_address_title;
     }
 
     private void updatePreference(Preference pref, String detailText) {
@@ -915,9 +969,11 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mWifiEntry.forget(this);
         }
 
-        mMetricsFeatureProvider.action(
-                mFragment.getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
-        mFragment.getActivity().finish();
+        final Activity activity = mFragment.getActivity();
+        if (activity != null) {
+            mMetricsFeatureProvider.action(activity, SettingsEnums.ACTION_WIFI_FORGET);
+            activity.finish();
+        }
     }
 
     @VisibleForTesting
@@ -1009,7 +1065,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         }
 
         public Drawable getIcon(boolean showX, int level) {
-            return mContext.getDrawable(Utils.getWifiIconResource(showX, level)).mutate();
+            return mContext.getDrawable(WifiUtils.getInternetIconResource(level, showX)).mutate();
         }
     }
 
@@ -1092,8 +1148,11 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             Log.e(TAG, "Forget Wi-Fi network failed");
         }
 
-        mMetricsFeatureProvider.action(mFragment.getActivity(), SettingsEnums.ACTION_WIFI_FORGET);
-        mFragment.getActivity().finish();
+        final Activity activity = mFragment.getActivity();
+        if (activity != null) {
+            mMetricsFeatureProvider.action(activity, SettingsEnums.ACTION_WIFI_FORGET);
+            activity.finish();
+        }
     }
 
     /**

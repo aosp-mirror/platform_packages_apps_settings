@@ -269,7 +269,14 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
 
         @Override
         public void onClick(View v) {
+             mMetricsFeatureProvider.action(
+                     mActivity, SettingsEnums.ACTION_APP_INFO_FORCE_STOP);
             // force stop
+            if (mPm.isPackageStateProtected(mAppEntry.info.packageName, mUserId)) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mActivity,
+                        RestrictedLockUtilsInternal.getDeviceOwner(mActivity));
+                return;
+            }
             if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
                         mActivity, mAppsControlDisallowedAdmin);
@@ -613,8 +620,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     /** Returns whether there is only one user on this device, not including the system-only user */
     private boolean isSingleUser() {
         final int userCount = mUserManager.getUserCount();
-        return userCount == 1
-                || (mUserManager.isSplitSystemUser() && userCount == 2);
+        return userCount == 1;
     }
 
     private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
@@ -725,6 +731,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                         mPackageName, AUTO_REVOKED_APP_INTERACTION__ACTION__OPEN_IN_SETTINGS);
             }
             mContext.startActivityAsUser(mAppLaunchIntent, new UserHandle(mUserId));
+            mMetricsFeatureProvider.action(mActivity,
+                    SettingsEnums.ACTION_APP_INFO_OPEN, mPackageName);
         }
     }
 

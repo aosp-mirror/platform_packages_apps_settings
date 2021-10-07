@@ -35,8 +35,8 @@ public class BatteryDefenderDetector implements BatteryTipDetector {
     public BatteryTip detect() {
         final int state =
                 BatteryUtils.isBatteryDefenderOn(mBatteryInfo)
-                        ? BatteryTip.StateType.NEW
-                        : BatteryTip.StateType.INVISIBLE;
+                    ? BatteryTip.StateType.NEW
+                    : BatteryTip.StateType.INVISIBLE;
         return new BatteryDefenderTip(state);
     }
 }

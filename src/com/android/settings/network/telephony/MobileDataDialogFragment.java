@@ -28,6 +28,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.wifi.WifiPickerTrackerHelper;
 
 /**
  * Dialog Fragment to show dialog for "mobile data"
@@ -49,6 +51,8 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
     private int mType;
     private int mSubId;
 
+    private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
+
     public static MobileDataDialogFragment newInstance(int type, int subId) {
         final MobileDataDialogFragment dialogFragment = new MobileDataDialogFragment();
 
@@ -64,6 +68,8 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSubscriptionManager = getContext().getSystemService(SubscriptionManager.class);
+        mWifiPickerTrackerHelper = new WifiPickerTrackerHelper(getSettingsLifecycle(), getContext(),
+                null /* WifiPickerTrackerCallback */);
     }
 
     @Override
@@ -91,12 +97,14 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                 final String previousName = (nextSubInfo == null)
                         ? getContext().getResources().getString(
                         R.string.sim_selection_required_pref)
-                        : nextSubInfo.getDisplayName().toString();
+                        : SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                                nextSubInfo, getContext()).toString();
 
                 final String newName = (currentSubInfo == null)
                         ? getContext().getResources().getString(
                         R.string.sim_selection_required_pref)
-                        : currentSubInfo.getDisplayName().toString();
+                        : SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                                currentSubInfo, getContext()).toString();
 
                 return new AlertDialog.Builder(context)
                         .setTitle(context.getString(R.string.sim_change_data_title, newName))
@@ -123,11 +131,19 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
             case TYPE_DISABLE_DIALOG:
                 MobileNetworkUtils.setMobileDataEnabled(getContext(), mSubId, false /* enabled */,
                         false /* disableOtherSubscriptions */);
+                if (mWifiPickerTrackerHelper != null
+                        && !mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(mSubId)) {
+                    mWifiPickerTrackerHelper.setCarrierNetworkEnabled(false);
+                }
                 break;
             case TYPE_MULTI_SIM_DIALOG:
                 mSubscriptionManager.setDefaultDataSubId(mSubId);
                 MobileNetworkUtils.setMobileDataEnabled(getContext(), mSubId, true /* enabled */,
                         true /* disableOtherSubscriptions */);
+                if (mWifiPickerTrackerHelper != null
+                        && !mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(mSubId)) {
+                    mWifiPickerTrackerHelper.setCarrierNetworkEnabled(true);
+                }
                 break;
             default:
                 throw new IllegalArgumentException("unknown type " + mType);

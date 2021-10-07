@@ -22,10 +22,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.IDeviceIdleController;
 import android.os.PowerManager;
-import android.os.RemoteException;
-import android.os.ServiceManager;
+import android.os.PowerWhitelistManager;
 import android.util.Log;
 
 import com.android.internal.app.AlertActivity;
@@ -36,17 +34,14 @@ public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
         DialogInterface.OnClickListener {
     static final String TAG = "RequestIgnoreBatteryOptimizations";
 
-    private static final String DEVICE_IDLE_SERVICE = "deviceidle";
-
-    IDeviceIdleController mDeviceIdleService;
+    private PowerWhitelistManager mPowerWhitelistManager;
     String mPackageName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDeviceIdleService = IDeviceIdleController.Stub.asInterface(
-                ServiceManager.getService(DEVICE_IDLE_SERVICE));
+        mPowerWhitelistManager = getSystemService(PowerWhitelistManager.class);
 
         Uri data = getIntent().getData();
         if (data == null) {
@@ -99,14 +94,17 @@ public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        getWindow().addSystemFlags(android.view.WindowManager.LayoutParams
+                .SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+    }
+
+    @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case BUTTON_POSITIVE:
-                try {
-                    mDeviceIdleService.addPowerSaveWhitelistApp(mPackageName);
-                } catch (RemoteException e) {
-                    Log.w(TAG, "Unable to reach IDeviceIdleController", e);
-                }
+                mPowerWhitelistManager.addToWhitelist(mPackageName);
                 setResult(RESULT_OK);
                 break;
             case BUTTON_NEGATIVE:

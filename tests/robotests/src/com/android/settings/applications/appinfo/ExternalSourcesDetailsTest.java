@@ -19,17 +19,11 @@ package com.android.settings.applications.appinfo;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.ActivityManager;
-import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.pm.ApplicationInfo;
@@ -61,10 +55,6 @@ public class ExternalSourcesDetailsTest {
     @Mock
     private UserManager mUserManager;
     @Mock
-    private ActivityManager mActivityManager;
-    @Mock
-    private AppOpsManager mAppOpsManager;
-    @Mock
     private RestrictedSwitchPreference mSwitchPref;
     @Mock
     private RestrictedPreferenceHelper mHelper;
@@ -79,44 +69,7 @@ public class ExternalSourcesDetailsTest {
 
         mFragment = new ExternalSourcesDetails();
         ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mFragment, "mActivityManager", mActivityManager);
-        ReflectionHelpers.setField(mFragment, "mAppOpsManager", mAppOpsManager);
         ReflectionHelpers.setField(mFragment, "mSwitchPref", mSwitchPref);
-    }
-
-    @Test
-    public void setCanInstallApps_false_shouldKillNonCoreUid() {
-        int mockUid = 23456;
-        ReflectionHelpers.setField(mFragment, "mPackageInfo", mPackageInfo);
-
-        mPackageInfo.applicationInfo = new ApplicationInfo();
-        mPackageInfo.applicationInfo.uid = mockUid;
-        assertThat(UserHandle.isCore(mockUid)).isFalse();
-        mFragment.setCanInstallApps(false);
-        verify(mActivityManager).killUid(eq(mockUid), anyString());
-    }
-
-    @Test
-    public void setCanInstallApps_false_shouldNotKillCoreUid() {
-        int mockUid = 1234;
-        ReflectionHelpers.setField(mFragment, "mPackageInfo", mPackageInfo);
-
-        mPackageInfo.applicationInfo = new ApplicationInfo();
-        mPackageInfo.applicationInfo.uid = mockUid;
-        assertThat(UserHandle.isCore(mockUid)).isTrue();
-        mFragment.setCanInstallApps(false);
-        verify(mActivityManager, never()).killUid(eq(mockUid), anyString());
-    }
-
-    @Test
-    public void setCanInstallApps_true_shouldNotKillUid() {
-        int mockUid = 23456;
-        ReflectionHelpers.setField(mFragment, "mPackageInfo", mPackageInfo);
-
-        mPackageInfo.applicationInfo = new ApplicationInfo();
-        mPackageInfo.applicationInfo.uid = mockUid;
-        mFragment.setCanInstallApps(true);
-        verify(mActivityManager, never()).killUid(eq(mockUid), anyString());
     }
 
     @Test

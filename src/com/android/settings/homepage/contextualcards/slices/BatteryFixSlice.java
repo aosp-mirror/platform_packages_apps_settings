@@ -29,6 +29,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.BatteryUsageStats;
 import android.util.ArrayMap;
 import android.view.View;
 
@@ -40,11 +41,10 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
-import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
+import com.android.settings.fuelgauge.BatteryUsageStatsLoader;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
@@ -163,7 +163,8 @@ public class BatteryFixSlice implements CustomSliceable {
 
     private PendingIntent getPrimaryAction() {
         final Intent intent = getIntent();
-        return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent, 0  /* flags */);
+        return PendingIntent.getActivity(mContext, 0  /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     private Slice buildBatteryGoodSlice(ListBuilder sliceBuilder, boolean isError) {
@@ -205,9 +206,10 @@ public class BatteryFixSlice implements CustomSliceable {
     @WorkerThread
     @VisibleForTesting
     static List<BatteryTip> refreshBatteryTips(Context context) {
-        final BatteryStatsHelperLoader statsLoader = new BatteryStatsHelperLoader(context);
-        final BatteryStatsHelper statsHelper = statsLoader.loadInBackground();
-        final BatteryTipLoader loader = new BatteryTipLoader(context, statsHelper);
+        final BatteryUsageStatsLoader statsLoader = new BatteryUsageStatsLoader(context,
+                /* includeBatteryHistory */ false);
+        final BatteryUsageStats batteryUsageStats = statsLoader.loadInBackground();
+        final BatteryTipLoader loader = new BatteryTipLoader(context, batteryUsageStats);
         final List<BatteryTip> batteryTips = loader.loadInBackground();
         for (BatteryTip batteryTip : batteryTips) {
             if (batteryTip.getState() != BatteryTip.StateType.INVISIBLE) {

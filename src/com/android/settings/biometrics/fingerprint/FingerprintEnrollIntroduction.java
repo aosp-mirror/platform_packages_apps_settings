@@ -20,51 +20,138 @@ import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
+import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.MultiBiometricEnrollHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.SetupSkipDialog;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
-import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.span.LinkSpan;
+
+import java.util.List;
 
 public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     private static final String TAG = "FingerprintIntro";
 
     private FingerprintManager mFingerprintManager;
+    @Nullable private FooterButton mPrimaryFooterButton;
+    @Nullable private FooterButton mSecondaryFooterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
+        if (mFingerprintManager == null) {
+            Log.e(TAG, "Null FingerprintManager");
+            finish();
+            return;
+        }
 
-        mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
-        mFooterBarMixin.setSecondaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.security_settings_face_enroll_introduction_cancel)
-                        .setListener(this::onCancelButtonClick)
-                        .setButtonType(FooterButton.ButtonType.SKIP)
-                        .setTheme(R.style.SudGlifButton_Secondary)
-                        .build()
-        );
+        super.onCreate(savedInstanceState);
 
-        mFooterBarMixin.setPrimaryButton(
-                new FooterButton.Builder(this)
-                        .setText(R.string.wizard_next)
-                        .setListener(this::onNextButtonClick)
-                        .setButtonType(FooterButton.ButtonType.NEXT)
-                        .setTheme(R.style.SudGlifButton_Primary)
-                        .build()
-        );
+        final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
+        final ImageView iconDeviceLocked = findViewById(R.id.icon_device_locked);
+        final ImageView iconTrashCan = findViewById(R.id.icon_trash_can);
+        final ImageView iconInfo = findViewById(R.id.icon_info);
+        final ImageView iconLink = findViewById(R.id.icon_link);
+        iconFingerprint.getDrawable().setColorFilter(getIconColorFilter());
+        iconDeviceLocked.getDrawable().setColorFilter(getIconColorFilter());
+        iconTrashCan.getDrawable().setColorFilter(getIconColorFilter());
+        iconInfo.getDrawable().setColorFilter(getIconColorFilter());
+        iconLink.getDrawable().setColorFilter(getIconColorFilter());
+
+        final TextView footerMessage2 = findViewById(R.id.footer_message_2);
+        final TextView footerMessage3 = findViewById(R.id.footer_message_3);
+        final TextView footerMessage4 = findViewById(R.id.footer_message_4);
+        final TextView footerMessage5 = findViewById(R.id.footer_message_5);
+        footerMessage2.setText(getFooterMessage2());
+        footerMessage3.setText(getFooterMessage3());
+        footerMessage4.setText(getFooterMessage4());
+        footerMessage5.setText(getFooterMessage5());
+
+        final TextView footerTitle1 = findViewById(R.id.footer_title_1);
+        final TextView footerTitle2 = findViewById(R.id.footer_title_2);
+        footerTitle1.setText(getFooterTitle1());
+        footerTitle2.setText(getFooterTitle2());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // If user has skipped or finished enrolling, don't restart enrollment.
+        final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
+                || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
+        final boolean isResultSkipOrFinished = resultCode == RESULT_SKIP
+                || resultCode == SetupSkipDialog.RESULT_SKIP || resultCode == RESULT_FINISHED;
+        if (isEnrollRequest && isResultSkipOrFinished) {
+            data = setSkipPendingEnroll(data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onCancelButtonClick(View view) {
+        // User has explicitly canceled enroll. Don't restart it automatically.
+        Intent data = setSkipPendingEnroll(new Intent());
+        setResult(RESULT_SKIP, data);
+        finish();
+    }
+
+    @Override
+    protected void onSkipButtonClick(View view) {
+        onCancelButtonClick(view);
+    }
+
+    @StringRes
+    int getNegativeButtonTextId() {
+        return R.string.security_settings_fingerprint_enroll_introduction_no_thanks;
+    }
+
+    @StringRes
+    protected int getFooterTitle1() {
+        return R.string.security_settings_fingerprint_enroll_introduction_footer_title_1;
+    }
+
+    @StringRes
+    protected int getFooterTitle2() {
+        return R.string.security_settings_fingerprint_enroll_introduction_footer_title_2;
+    }
+
+    @StringRes
+    protected int getFooterMessage2() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_2;
+    }
+
+    @StringRes
+    protected int getFooterMessage3() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_3;
+    }
+
+    @StringRes
+    protected int getFooterMessage4() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_4;
+    }
+
+    @StringRes
+    protected int getFooterMessage5() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_5;
     }
 
     @Override
@@ -117,8 +204,10 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     protected int checkMaxEnrolled() {
         if (mFingerprintManager != null) {
-            final int max = getResources().getInteger(
-                    com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
+            final List<FingerprintSensorPropertiesInternal> props =
+                    mFingerprintManager.getSensorPropertiesInternal();
+            // This will need to be updated for devices with multiple fingerprint sensors
+            final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFingerprints =
                     mFingerprintManager.getEnrolledFingerprints(mUserId).size();
             if (numEnrolledFingerprints >= max) {
@@ -131,12 +220,13 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected long getChallenge() {
+    protected void getChallenge(GenerateChallengeCallback callback) {
         mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
         if (mFingerprintManager == null) {
-            return 0;
+            callback.onChallengeGenerated(0, 0, 0L);
+            return;
         }
-        return mFingerprintManager.preEnroll();
+        mFingerprintManager.generateChallenge(mUserId, callback::onChallengeGenerated);
     }
 
     @Override
@@ -146,7 +236,12 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected Intent getEnrollingIntent() {
-        return new Intent(this, FingerprintEnrollFindSensor.class);
+        final Intent intent = new Intent(this, FingerprintEnrollFindSensor.class);
+        if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+                    BiometricUtils.getGatekeeperPasswordHandle(getIntent()));
+        }
+        return intent;
     }
 
     @Override
@@ -176,5 +271,59 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
                 Log.w(TAG, "Activity was not found for intent, " + e);
             }
         }
+    }
+
+    @Override
+    public @BiometricAuthenticator.Modality int getModality() {
+        return BiometricAuthenticator.TYPE_FINGERPRINT;
+    }
+
+    @Override
+    @NonNull
+    protected FooterButton getPrimaryFooterButton() {
+        if (mPrimaryFooterButton == null) {
+            mPrimaryFooterButton = new FooterButton.Builder(this)
+                    .setText(R.string.security_settings_fingerprint_enroll_introduction_agree)
+                    .setListener(this::onNextButtonClick)
+                    .setButtonType(FooterButton.ButtonType.OPT_IN)
+                    .setTheme(R.style.SudGlifButton_Primary)
+                    .build();
+        }
+        return mPrimaryFooterButton;
+    }
+
+    @Override
+    @NonNull
+    protected FooterButton getSecondaryFooterButton() {
+        if (mSecondaryFooterButton == null) {
+            mSecondaryFooterButton = new FooterButton.Builder(this)
+                    .setText(getNegativeButtonTextId())
+                    .setListener(this::onSkipButtonClick)
+                    .setButtonType(FooterButton.ButtonType.NEXT)
+                    .setTheme(R.style.SudGlifButton_Primary)
+                    .build();
+        }
+        return mSecondaryFooterButton;
+    }
+
+    @Override
+    @StringRes
+    protected int getAgreeButtonTextRes() {
+        return R.string.security_settings_fingerprint_enroll_introduction_agree;
+    }
+
+    @Override
+    @StringRes
+    protected int getMoreButtonTextRes() {
+        return R.string.security_settings_face_enroll_introduction_more;
+    }
+
+    @NonNull
+    protected static Intent setSkipPendingEnroll(@Nullable Intent data) {
+        if (data == null) {
+            data = new Intent();
+        }
+        data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
+        return data;
     }
 }

@@ -1,0 +1,50 @@
+
+<!--
+  ~ Copyright (C) 2021 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="safety_and_emergency_screen"
+    android:title="@string/emergency_settings_preference_title">
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="more_emergency_settings"
+        android:layout="@layout/more_settings_button"
+        android:order="0"
+        android:selectable="false"
+        settings:controller="com.android.settings.emergency.MoreSettingsPreferenceController" />
+    <Preference
+        android:key="gesture_emergency_summary"
+        android:title="@string/emergency_gesture_screen_title"
+        android:icon="@drawable/ic_emergency_gesture_24dp"
+        android:order="100"
+        android:fragment="com.android.settings.emergency.EmergencyGestureSettings"
+        settings:controller="com.android.settings.emergency.EmergencyGestureEntrypointPreferenceController" />
+    <PreferenceCategory
+        android:order="170"
+        android:layout="@layout/preference_category_no_label"
+        settings:allowDividerAbove="true"/>
+    <com.android.settingslib.RestrictedPreference
+        android:key="app_and_notif_cell_broadcast_settings"
+        android:title="@string/cell_broadcast_settings"
+        android:order="200"
+        settings:useAdminDisabledSummary="true">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="@string/config_cell_broadcast_receiver_package"
+            android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings"/>
+    </com.android.settingslib.RestrictedPreference>
+</PreferenceScreen>

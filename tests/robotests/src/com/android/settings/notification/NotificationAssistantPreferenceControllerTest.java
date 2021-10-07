@@ -16,17 +16,29 @@
 
 package com.android.settings.notification;
 
-import static junit.framework.TestCase.assertEquals;
-
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.os.Debug;
+import android.os.UserManager;
+import android.provider.Settings;
 
-import com.android.settingslib.widget.CandidateInfo;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +47,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
+
 
 @RunWith(RobolectricTestRunner.class)
 public class NotificationAssistantPreferenceControllerTest {
@@ -44,57 +58,102 @@ public class NotificationAssistantPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
+    private ConfigureNotificationSettings mFragment;
+    @Mock
+    private FragmentManager mFragmentManager;
+    @Mock
+    private FragmentTransaction mFragmentTransaction;
+    @Mock
     private NotificationBackend mBackend;
+    @Mock
+    private UserManager mUserManager;
     private NotificationAssistantPreferenceController mPreferenceController;
+    ComponentName mNASComponent = new ComponentName("a", "b");
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mPreferenceController = new TestPreferenceController(mContext, mBackend);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        ShadowApplication.getInstance().setSystemService(Context.USER_SERVICE, mUserManager);
+        doReturn(mContext).when(mFragment).getContext();
+        when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
+        when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
+        when(mBackend.getDefaultNotificationAssistant()).thenReturn(mNASComponent);
+        mPreferenceController = new NotificationAssistantPreferenceController(mContext);
+        mPreferenceController.setBackend(mBackend);
+        mPreferenceController.setFragment(mFragment);
+        when(mUserManager.getProfileIds(eq(0), anyBoolean())).thenReturn(new int[] {0, 10});
+        when(mUserManager.getProfileIds(eq(20), anyBoolean())).thenReturn(new int[] {20});
     }
 
     @Test
-    public void testGetSummary_noAssistant() {
+    public void testIsChecked() throws Exception {
+        when(mBackend.getAllowedNotificationAssistant()).thenReturn(mNASComponent);
+        assertTrue(mPreferenceController.isChecked());
+
         when(mBackend.getAllowedNotificationAssistant()).thenReturn(null);
-        CharSequence noneLabel = new NotificationAssistantPicker.CandidateNone(mContext)
-                .loadLabel();
-        assertEquals(noneLabel, mPreferenceController.getSummary());
+        assertFalse(mPreferenceController.isChecked());
     }
 
     @Test
-    public void testGetSummary_TestAssistant() {
-        String testName = "test_pkg/test_cls";
-        when(mBackend.getAllowedNotificationAssistant()).thenReturn(
-                ComponentName.unflattenFromString(testName));
-        assertEquals(testName, mPreferenceController.getSummary());
+    public void testSetChecked() throws Exception {
+        // Verify a dialog is shown when the switch is to be enabled.
+        assertFalse(mPreferenceController.setChecked(true));
+        verify(mFragmentTransaction).add(
+                any(NotificationAssistantDialogFragment.class), anyString());
+        verify(mBackend, times(0)).setNotificationAssistantGranted(any());
+
+        // Verify no dialog is shown and NAS set to null when disabled
+        assertTrue(mPreferenceController.setChecked(false));
+        verify(mBackend, times(1)).setNotificationAssistantGranted(null);
     }
 
-    private final class TestPreferenceController extends NotificationAssistantPreferenceController {
+    @Test
+    @Config(shadows = ShadowSecureSettings.class)
+    public void testMigrationFromSetting_userEnable_multiProfile() throws Exception {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, 0);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, 10);
 
-        private TestPreferenceController(Context context, NotificationBackend backend) {
-            super(context, KEY);
-            mNotificationBackend = backend;
-        }
+        //Test user enable for the first time
+        mPreferenceController.setNotificationAssistantGranted(mNASComponent);
+        verify(mBackend, times(1))
+                .setNASMigrationDoneAndResetDefault(eq(0), eq(true));
+        verify(mBackend, never())
+                .setNASMigrationDoneAndResetDefault(eq(10), anyBoolean());
+    }
 
-        @Override
-        public String getPreferenceKey() {
-            return KEY;
-        }
+    @Test
+    @Config(shadows = ShadowSecureSettings.class)
+    public void testMigrationFromSetting_userEnable_multiUser() throws Exception {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, 0);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, 20);
 
-        @Override
-        protected CandidateInfo createCandidateInfo(ComponentName cn) {
-            return new CandidateInfo(true) {
-                @Override
-                public CharSequence loadLabel() { return cn.flattenToString(); }
+        //Test user 0 enable for the first time
+        mPreferenceController.setNotificationAssistantGranted(mNASComponent);
+        verify(mBackend, times(1))
+                .setNASMigrationDoneAndResetDefault(eq(0), eq(true));
+        verify(mBackend, never())
+                .setNASMigrationDoneAndResetDefault(eq(20), anyBoolean());
+    }
 
-                @Override
-                public Drawable loadIcon() { return null; }
+    @Test
+    @Config(shadows = ShadowSecureSettings.class)
+    public void testMigrationFromSetting_userDisable_multiProfile() throws Exception {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, 0);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAS_SETTINGS_UPDATED, 0, 10);
 
-                @Override
-                public String getKey() { return null; }
-            };
-        }
+        //Test user disable for the first time
+        mPreferenceController.setChecked(false);
+        verify(mBackend, times(1))
+                .setNASMigrationDoneAndResetDefault(eq(0), eq(false));
+        verify(mBackend, never())
+                .setNASMigrationDoneAndResetDefault(eq(10), anyBoolean());
     }
 
 }

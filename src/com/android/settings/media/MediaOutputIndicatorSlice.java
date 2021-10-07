@@ -36,7 +36,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 public class MediaOutputIndicatorSlice implements CustomSliceable {
 
@@ -87,7 +87,7 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
 
     @Override
     public Intent getIntent() {
-        // This Slice reflects active media device information and launch MediaOutputSlice. It does
+        // This Slice reflects active media device information and launch MediaOutputDialog. It does
         // not contain its owned Slice data
         return null;
     }
@@ -128,15 +128,15 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         }
         // Launch media output dialog
         mContext.sendBroadcast(new Intent()
-                .setPackage(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME)
-                .setAction(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
-                .putExtra(MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN,
+                .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
+                .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
+                .putExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
                         mediaController.getSessionToken())
-                .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
                         mediaController.getPackageName()));
         // Dismiss volume panel
         mContext.sendBroadcast(new Intent()
-                .setPackage(MediaOutputSliceConstants.SETTINGS_PACKAGE_NAME)
-                .setAction(MediaOutputSliceConstants.ACTION_CLOSE_PANEL));
+                .setPackage(MediaOutputConstants.SETTINGS_PACKAGE_NAME)
+                .setAction(MediaOutputConstants.ACTION_CLOSE_PANEL));
     }
 }

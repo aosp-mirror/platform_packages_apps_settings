@@ -98,4 +98,18 @@ public class LockUnificationPreferenceControllerTest {
 
         assertThat(mController.isAvailable()).isTrue();
     }
+
+    @Test
+    public void getPreferenceKey_byDefault_returnsDefaultValue() {
+        init();
+
+        assertThat(mController.getPreferenceKey()).isEqualTo("unification");
+    }
+
+    @Test
+    public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+        mController = new LockUnificationPreferenceController(mContext, mHost, "key");
+
+        assertThat(mController.getPreferenceKey()).isEqualTo("key");
+    }
 }

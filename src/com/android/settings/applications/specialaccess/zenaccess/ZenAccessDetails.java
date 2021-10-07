@@ -79,11 +79,11 @@ public class ZenAccessDetails extends AppInfoWithHeader implements
             final boolean access = (Boolean) newValue;
             if (access) {
                 new ScaryWarningDialogFragment()
-                        .setPkgInfo(mPackageName, label)
+                        .setPkgInfo(mPackageName, label, ZenAccessDetails.this)
                         .show(getFragmentManager(), "dialog");
             } else {
                 new FriendlyWarningDialogFragment()
-                        .setPkgInfo(mPackageName, label)
+                        .setPkgInfo(mPackageName, label, ZenAccessDetails.this)
                         .show(getFragmentManager(), "dialog");
             }
             return false;

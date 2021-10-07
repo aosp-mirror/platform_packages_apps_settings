@@ -68,6 +68,11 @@ public class VisibilityPreferenceController extends NotificationPreferenceContro
         return checkCanBeVisible(NotificationManager.IMPORTANCE_LOW) && isLockScreenSecure();
     }
 
+    @Override
+    boolean isIncludedInFilter() {
+        return mPreferenceFilter.contains(NotificationChannel.EDIT_LOCKED_DEVICE);
+    }
+
     public void updateState(Preference preference) {
         if (mChannel != null && mAppRow != null) {
             RestrictedListPreference pref = (RestrictedListPreference) preference;

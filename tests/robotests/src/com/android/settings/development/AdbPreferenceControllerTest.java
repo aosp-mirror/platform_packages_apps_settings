@@ -18,16 +18,21 @@ package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,24 +46,29 @@ import org.robolectric.RuntimeEnvironment;
 public class AdbPreferenceControllerTest {
 
     @Mock
-    private SwitchPreference mPreference;
+    private RestrictedSwitchPreference mPreference;
     @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private DevelopmentSettingsDashboardFragment mFragment;
+    @Mock
+    private DevicePolicyManager mDevicePolicyManager;
 
     private Context mContext;
     private AdbPreferenceController mController;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mController = spy(new AdbPreferenceController(mContext, mFragment));
         doReturn(true).when(mController).isAvailable();
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
             .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
+        when(mContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDevicePolicyManager);
+        doReturn(mContext).when(mContext).createPackageContextAsUser(
+                any(String.class), anyInt(), any(UserHandle.class));
     }
 
     @Test

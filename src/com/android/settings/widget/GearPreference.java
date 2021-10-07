@@ -29,7 +29,8 @@ import com.android.settingslib.RestrictedPreference;
  * A preference with a Gear on the side
  */
 public class GearPreference extends RestrictedPreference implements View.OnClickListener {
-
+    // Default true for gear available even if the preference itself is disabled.
+    protected boolean mGearState = true;
     private OnGearClickListener mOnGearClickListener;
 
     public GearPreference(Context context, AttributeSet attrs) {
@@ -39,6 +40,16 @@ public class GearPreference extends RestrictedPreference implements View.OnClick
     public void setOnGearClickListener(OnGearClickListener l) {
         mOnGearClickListener = l;
         notifyChanged();
+    }
+
+    /** Sets state of gear button. */
+    public void setGearEnabled(boolean enabled) {
+        mGearState = enabled;
+    }
+
+    /** Gets state of gear button. */
+    public boolean isGearEnabled() {
+        return mGearState;
     }
 
     @Override
@@ -62,7 +73,8 @@ public class GearPreference extends RestrictedPreference implements View.OnClick
             gear.setVisibility(View.GONE);
             gear.setOnClickListener(null);
         }
-        gear.setEnabled(true);  // Make gear available even if the preference itself is disabled.
+        // Make gear available even if the preference itself is disabled.
+        gear.setEnabled(mGearState);
     }
 
     @Override

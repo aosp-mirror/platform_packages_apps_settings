@@ -106,7 +106,9 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                 pref = new Preference(mPreferenceScreen.getContext());
                 mPreferenceScreen.addPreference(pref);
             }
-            pref.setTitle(info.getDisplayName());
+            final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    info, mContext);
+            pref.setTitle(displayName);
 
             if (info.isEmbedded()) {
                 if (mSubscriptionManager.isActiveSubscriptionId(subId)) {
@@ -121,14 +123,14 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                     pref.setSummary(mContext.getString(R.string.mobile_network_inactive_sim));
                 } else {
                     pref.setSummary(mContext.getString(R.string.mobile_network_tap_to_activate,
-                            SubscriptionUtil.getDisplayName(info)));
+                            displayName));
                 }
             }
 
             pref.setOnPreferenceClickListener(clickedPref -> {
                 if (!info.isEmbedded() && !mSubscriptionManager.isActiveSubscriptionId(subId)
                         && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
-                    mSubscriptionManager.setSubscriptionEnabled(subId, true);
+                    SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, true);
                 } else {
                     final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
                     intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());

@@ -15,6 +15,7 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
@@ -34,37 +35,23 @@
         android:clipToPadding="false"
         android:paddingStart="?android:attr/listPreferredItemPaddingStart">
 
-        <LinearLayout
-            android:id="@+id/icon_frame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start|center_vertical"
-            android:minWidth="56dp"
-            android:orientation="horizontal"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp">
-            <com.android.internal.widget.PreferenceImageView
-                android:id="@android:id/icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxWidth="24dp"
-                android:maxHeight="24dp"/>
-        </LinearLayout>
+        <include layout="@layout/settingslib_icon_frame"/>
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical" >
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@android:id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
+                android:textSize="20sp"
                 android:textAlignment="viewStart"
                 android:ellipsize="marquee"
-                android:fadingEdge="horizontal" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@android:id/summary"/>
 
             <TextView
                 android:id="@android:id/summary"
@@ -72,9 +59,11 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="viewStart"
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
+                android:textSize="20sp"
                 android:textColor="?android:attr/textColorSecondary"
                 android:maxLines="10"
-                android:layout_alignParentEnd="true"/>
+                app:layout_constraintBaseline_toBaselineOf="@android:id/title"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <ProgressBar
                 android:id="@android:id/progress"
@@ -84,8 +73,8 @@
                 android:layout_marginBottom="4dp"
                 android:max="100"
                 android:layout_below="@android:id/title"
-                android:layout_alignStart="@android:id/title"
+                app:layout_constraintTop_toBottomOf="@android:id/title"
                 style="?android:attr/progressBarStyleHorizontal" />
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </LinearLayout>

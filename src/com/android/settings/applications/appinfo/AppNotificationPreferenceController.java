@@ -72,6 +72,9 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
 
     private CharSequence getNotificationSummary(ApplicationsState.AppEntry appEntry,
             Context context, NotificationBackend backend) {
+        if (appEntry == null) {
+            return "";
+        }
         NotificationBackend.AppRow appRow =
                 backend.loadAppRow(context, context.getPackageManager(), appEntry.info);
         return getNotificationSummary(appRow, context);

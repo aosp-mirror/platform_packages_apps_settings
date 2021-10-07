@@ -38,6 +38,8 @@ import androidx.preference.Preference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.notification.NotificationBackend;
 
+import com.google.common.collect.ImmutableList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,6 +49,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.sql.Array;
+import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class ConversationPromotePreferenceControllerTest {
@@ -81,7 +86,7 @@ public class ConversationPromotePreferenceControllerTest {
     public void testIsAvailable_notConversation() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -90,7 +95,7 @@ public class ConversationPromotePreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
         channel.setConversationId("a", "a");
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -100,8 +105,29 @@ public class ConversationPromotePreferenceControllerTest {
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
         channel.setConversationId("a", "a");
         channel.setDemoted(true);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
         assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_filteredIn() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
+        channel.setConversationId("a", "a");
+        channel.setDemoted(true);
+        mController.onResume(appRow, channel, null, null, null, null,
+                ImmutableList.of(NotificationChannel.EDIT_CONVERSATION));
+        assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_filteredOut() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
+        channel.setConversationId("a", "a");
+        channel.setDemoted(true);
+        mController.onResume(appRow, channel, null, null, null, null, new ArrayList<>());
+        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -111,7 +137,7 @@ public class ConversationPromotePreferenceControllerTest {
         channel.setConversationId("a", "a");
         channel.setDemoted(true);
         channel.setBypassDnd(true);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
 
         Preference pref = mock(Preference.class);
         when(pref.getKey()).thenReturn("convo_promote");
@@ -133,7 +159,7 @@ public class ConversationPromotePreferenceControllerTest {
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
         channel.setConversationId("a", "a");
         channel.setDemoted(true);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
 
         Preference pref = mock(Preference.class);
         when(pref.getKey()).thenReturn("wrong");

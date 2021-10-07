@@ -68,7 +68,7 @@ public class ConfigureWifiEntryFragmentTest {
     @Test
     public void getMode_shouldBeModeConnected() {
         assertThat(mConfigureWifiEntryFragment.getMode()).isEqualTo(
-                WifiConfigUiBase.MODE_CONNECT);
+                WifiConfigUiBase2.MODE_CONNECT);
     }
 
     @Test

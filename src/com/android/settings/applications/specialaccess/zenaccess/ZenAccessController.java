@@ -50,13 +50,24 @@ public class ZenAccessController extends BasePreferenceController {
     }
 
     public static Set<String> getPackagesRequestingNotificationPolicyAccess() {
+        final String[] PERM = {
+                android.Manifest.permission.ACCESS_NOTIFICATION_POLICY
+        };
+        return getPackagesWithPermissions(PERM);
+    }
+
+    public static Set<String> getPackagesWithManageNotifications() {
+        final String[] PERM = {
+                android.Manifest.permission.MANAGE_NOTIFICATIONS
+        };
+        return getPackagesWithPermissions(PERM);
+    }
+
+    public static Set<String> getPackagesWithPermissions(String[] permList) {
         final ArraySet<String> requestingPackages = new ArraySet<>();
         try {
-            final String[] PERM = {
-                    android.Manifest.permission.ACCESS_NOTIFICATION_POLICY
-            };
             final ParceledListSlice list = AppGlobals.getPackageManager()
-                    .getPackagesHoldingPermissions(PERM, 0 /*flags*/,
+                    .getPackagesHoldingPermissions(permList, 0 /*flags*/,
                             ActivityManager.getCurrentUser());
             final List<PackageInfo> pkgs = list.getList();
             if (pkgs != null) {
