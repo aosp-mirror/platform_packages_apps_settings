@@ -350,7 +350,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private void addAllPreferences() {
         final List<BatteryDiffEntry> entries =
             mBatteryIndexedMap.get(Integer.valueOf(mTrapezoidIndex));
-        addFooterPreferenceIfNeeded(!entries.isEmpty());
+        addFooterPreferenceIfNeeded(entries != null && !entries.isEmpty());
         if (entries == null) {
             Log.w(TAG, "cannot find BatteryDiffEntry for:" + mTrapezoidIndex);
             return;
