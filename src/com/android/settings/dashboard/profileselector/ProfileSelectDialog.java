@@ -19,7 +19,6 @@ package com.android.settings.dashboard.profileselector;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,23 +44,19 @@ public class ProfileSelectDialog extends DialogFragment implements OnClickListen
 
     private int mSourceMetricCategory;
     private Tile mSelectedTile;
-    private OnCancelListener mOnCancelListener;
 
     /**
      * Display the profile select dialog, adding the fragment to the given FragmentManager.
      * @param manager The FragmentManager this fragment will be added to.
      * @param tile The tile for this fragment.
      * @param sourceMetricCategory The source metric category.
-     * @param listener The listener listens to the dialog cancelling event.
      */
-    public static void show(FragmentManager manager, Tile tile, int sourceMetricCategory,
-            OnCancelListener listener) {
+    public static void show(FragmentManager manager, Tile tile, int sourceMetricCategory) {
         final ProfileSelectDialog dialog = new ProfileSelectDialog();
         final Bundle args = new Bundle();
         args.putParcelable(ARG_SELECTED_TILE, tile);
         args.putInt(ARG_SOURCE_METRIC_CATEGORY, sourceMetricCategory);
         dialog.setArguments(args);
-        dialog.mOnCancelListener = listener;
         dialog.show(manager, "select_profile");
     }
 
@@ -94,13 +89,6 @@ public class ProfileSelectDialog extends DialogFragment implements OnClickListen
                         which == 1 /* isWorkProfile */);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         getActivity().startActivityAsUser(intent, user);
-    }
-
-    @Override
-    public void onCancel(DialogInterface dialog) {
-        if (mOnCancelListener != null) {
-            mOnCancelListener.onCancel(dialog);
-        }
     }
 
     public static void updateUserHandlesIfNeeded(Context context, Tile tile) {

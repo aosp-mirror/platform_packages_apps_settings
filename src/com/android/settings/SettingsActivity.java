@@ -149,13 +149,9 @@ public class SettingsActivity extends SettingsBaseActivity
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
             "com.android.settings.FRAGMENT_CLASS";
 
-    public static final String META_DATA_KEY_HIGHLIGHT_MENU_KEY =
-            "com.android.settings.HIGHLIGHT_MENU_KEY";
-
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
 
     private String mFragmentClass;
-    private String mHighlightMenuKey;
 
     private CharSequence mInitialTitle;
     private int mInitialTitleResId;
@@ -238,19 +234,21 @@ public class SettingsActivity extends SettingsBaseActivity
         super.onCreate(savedState);
         Log.d(LOG_TAG, "Starting onCreate");
 
-        long startTime = System.currentTimeMillis();
-
-        // Should happen before any call to getIntent()
-        getMetaData();
-        final Intent intent = getIntent();
-        if (launchHomepageForTwoPaneDeepLink(intent)) {
+        if (launchHomepageForTwonPaneDeepLink()) {
             finish();
             return;
         }
 
+        long startTime = System.currentTimeMillis();
+
         final FeatureFactory factory = FeatureFactory.getFactory(this);
+
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
 
+        // Should happen before any call to getIntent()
+        getMetaData();
+
+        final Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
@@ -357,7 +355,8 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     /** Returns true if the Activity is started by a deep link intent for large screen devices. */
-    private boolean launchHomepageForTwoPaneDeepLink(Intent intent) {
+    private boolean launchHomepageForTwonPaneDeepLink() {
+        final Intent intent = getIntent();
         if (!shouldShowTwoPaneDeepLink(intent)) {
             return false;
         }
@@ -369,9 +368,6 @@ public class SettingsActivity extends SettingsBaseActivity
         trampolineIntent.putExtra(
                 android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI,
                 intent.toUri(Intent.URI_INTENT_SCHEME));
-        trampolineIntent.putExtra(
-                android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_HIGHLIGHT_MENU_KEY,
-                mHighlightMenuKey);
         trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         startActivity(trampolineIntent);
 
@@ -780,7 +776,6 @@ public class SettingsActivity extends SettingsBaseActivity
                     PackageManager.GET_META_DATA);
             if (ai == null || ai.metaData == null) return;
             mFragmentClass = ai.metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);
-            mHighlightMenuKey = ai.metaData.getString(META_DATA_KEY_HIGHLIGHT_MENU_KEY);
         } catch (NameNotFoundException nnfe) {
             // No recovery
             Log.d(LOG_TAG, "Cannot get Metadata for: " + getComponentName().toString());
