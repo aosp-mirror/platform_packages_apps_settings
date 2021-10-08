@@ -32,7 +32,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.network.helper.ConfirmationSimDeletionPredicate;
 import com.android.settings.system.ResetDashboardFragment;
+import com.android.settings.wifi.dpp.WifiDppUtils;
 
 public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {
@@ -73,13 +75,24 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
         }
 
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            AsyncTask.execute(new Runnable() {
-                @Override
-                public void run() {
-                    RecoverySystem.wipeEuiccData(
-                            getContext(), PACKAGE_NAME_EUICC_DATA_MANAGEMENT_CALLBACK);
-                }
-            });
+            if (ConfirmationSimDeletionPredicate.getSingleton().test(getContext())) {
+                // Create a "verify it's you" verification over keyguard
+                // when "erase" button been pressed.
+                // This might protect from erasing by some automation process.
+                WifiDppUtils.showLockScreen(getContext(), () -> runAsyncWipe());
+            } else {
+                runAsyncWipe();
+            }
         }
+    }
+
+    private void runAsyncWipe() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                RecoverySystem.wipeEuiccData(
+                        getContext(), PACKAGE_NAME_EUICC_DATA_MANAGEMENT_CALLBACK);
+            }
+        });
     }
 }
