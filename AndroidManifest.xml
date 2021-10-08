@@ -1843,6 +1843,26 @@
         </activity>
 
         <activity
+            android:name="Settings$AccessibilityInversionSettingsActivity"
+            android:exported="true"
+            android:label="@string/accessibility_display_inversion_preference_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.COLOR_INVERSION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.ToggleColorInversionPreferenceFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_accessibility"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$CaptioningSettingsActivity"
             android:exported="true"
             android:label="@string/accessibility_captioning_title">
