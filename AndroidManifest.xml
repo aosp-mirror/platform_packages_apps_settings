@@ -2008,6 +2008,7 @@
                   android:label="@string/select_webview_provider_dialog_title" />
 
         <activity android:name=".bluetooth.BluetoothPairingDialog"
+                  android:permission="android.permission.BLUETOOTH_PRIVILEGED"
                   android:excludeFromRecents="true"
                   android:windowSoftInputMode="stateVisible|adjustResize"
                   android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar">
