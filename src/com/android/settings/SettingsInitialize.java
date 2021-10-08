@@ -34,7 +34,6 @@ import android.content.pm.ShortcutManager;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -150,10 +149,6 @@ public class SettingsInitialize extends BroadcastReceiver {
     }
 
     private void enableTwoPaneDeepLinkActivityIfNecessary(PackageManager pm, Intent intent) {
-        if (!TextUtils.equals(intent.getAction(), Intent.ACTION_PRE_BOOT_COMPLETED)) {
-            return;
-        }
-
         final ComponentName deepLinkHome = new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
                 SettingsHomepageActivity.ALIAS_DEEP_LINK);
         final int enableState = SplitController.getInstance().isSplitSupported()
