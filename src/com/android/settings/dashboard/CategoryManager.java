@@ -17,7 +17,6 @@ package com.android.settings.dashboard;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
@@ -25,7 +24,6 @@ import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.homepage.HighlightableMenu;
 import com.android.settingslib.applications.InterestingConfigChanges;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -155,14 +153,6 @@ public class CategoryManager {
             filterDuplicateTiles(mCategoryByKeyMap);
             if (firstLoading) {
                 logTiles(context);
-                for (Tile tile : mCategoryByKeyMap.get(CategoryKey.CATEGORY_HOMEPAGE).getTiles()) {
-                    final String key = tile.getKey(context);
-                    if (TextUtils.isEmpty(key)) {
-                        Log.w(TAG, "Key hint missing for homepage tile: " + tile.getTitle(context));
-                        continue;
-                    }
-                    HighlightableMenu.addMenuKey(key);
-                }
             }
         }
     }

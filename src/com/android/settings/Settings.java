@@ -83,8 +83,7 @@ public class Settings extends SettingsActivity {
     }
 
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
-    /** Activity for Data saver settings. */
-    public static class DataSaverSummaryActivity extends SettingsActivity { /* empty */ }
+    public static class DataSaverSummaryActivity extends SettingsActivity{ /* empty */ }
     public static class DateTimeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeForgetActivity extends SettingsActivity { /* empty */ }
     public static class PublicVolumeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -122,9 +121,13 @@ public class Settings extends SettingsActivity {
     public static class AccessibilityInversionSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityContrastSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityDaltonizerSettingsActivity extends SettingsActivity { /* empty */ }
-    /** Activity for lockscreen settings. */
+    /**
+     * Activity for lockscreen settings.
+     */
     public static class LockScreenSettingsActivity extends SettingsActivity { /* empty */ }
-    /** Activity for Reduce Bright Colors. */
+    /**
+     * Activity for Reduce Bright Colors.
+     */
     public static class ReduceBrightColorsSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the security dashboard. */
     public static class SecurityDashboardActivity extends SettingsActivity {
