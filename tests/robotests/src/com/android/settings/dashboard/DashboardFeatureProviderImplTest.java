@@ -114,7 +114,6 @@ public class DashboardFeatureProviderImplTest {
     private Bundle mSwitchMetaData;
     private DashboardFeatureProviderImpl mImpl;
     private boolean mForceRoundedIcon;
-    private DashboardFragment mFragment;
 
     @Before
     public void setUp() {
@@ -145,7 +144,6 @@ public class DashboardFeatureProviderImplTest {
                 .thenReturn(new ResolveInfo());
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mImpl = new DashboardFeatureProviderImpl(mContext);
-        mFragment = new TestFragment();
     }
 
     @Test
@@ -161,8 +159,8 @@ public class DashboardFeatureProviderImplTest {
         doReturn(Icon.createWithBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565)))
                 .when(tile).getIcon(any(Context.class));
         mActivityInfo.metaData.putString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS, "HI");
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, "123", Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.SETTINGS_GESTURES, preference, tile, "123", Preference.DEFAULT_ORDER);
 
         assertThat(preference.getTitle()).isEqualTo(mContext.getText(R.string.settings_label));
         assertThat(preference.getSummary())
@@ -182,8 +180,8 @@ public class DashboardFeatureProviderImplTest {
         doReturn(Icon.createWithBitmap(Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565)))
                 .when(tile).getIcon(any(Context.class));
         final List<DynamicDataObserver> observers = mImpl.bindPreferenceToTileAndGetObservers(
-                mActivity, mFragment, mForceRoundedIcon, preference, tile, null /* key*/,
-                Preference.DEFAULT_ORDER);
+                mActivity, mForceRoundedIcon, MetricsEvent.SETTINGS_GESTURES, preference, tile,
+                null /* key*/, Preference.DEFAULT_ORDER);
 
         assertThat(preference.getTitle()).isEqualTo(mContext.getText(R.string.settings_label));
         assertThat(preference.getSummary())
@@ -200,8 +198,8 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putInt(META_DATA_KEY_ORDER, 10);
         final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
 
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, "123", Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.SETTINGS_GESTURES, preference, tile, "123", Preference.DEFAULT_ORDER);
 
         assertThat(preference.getFragment()).isNull();
         assertThat(preference.getOnPreferenceClickListener()).isNotNull();
@@ -216,8 +214,8 @@ public class DashboardFeatureProviderImplTest {
         tile.userHandle.add(mock(UserHandle.class));
         tile.userHandle.add(mock(UserHandle.class));
 
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, "123", Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.SETTINGS_GESTURES, preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
 
         verify(mActivity).getSupportFragmentManager();
@@ -233,8 +231,8 @@ public class DashboardFeatureProviderImplTest {
         when(mActivity.getSystemService(Context.USER_SERVICE))
                 .thenReturn(mUserManager);
 
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, "123", Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.SETTINGS_GESTURES, preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
 
         verify(mFeatureFactory.metricsFeatureProvider).logStartedIntent(
@@ -252,8 +250,8 @@ public class DashboardFeatureProviderImplTest {
         tile.userHandle = new ArrayList<>();
         tile.userHandle.add(mock(UserHandle.class));
 
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, "123", Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.SETTINGS_GESTURES, preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.getOnPreferenceClickListener().onPreferenceClick(null);
         verify(mFeatureFactory.metricsFeatureProvider).logStartedIntent(
                 any(Intent.class),
@@ -265,8 +263,8 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void bindPreference_nullPreference_shouldIgnore() {
         final Tile tile = mock(Tile.class);
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                null /* keys */, tile, "123", Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.VIEW_UNKNOWN, null, tile, "123", Preference.DEFAULT_ORDER);
 
         verifyZeroInteractions(tile);
     }
@@ -275,8 +273,8 @@ public class DashboardFeatureProviderImplTest {
     public void bindPreference_withNullKeyNullPriority_shouldGenerateKeyAndPriority() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, null /* key */,
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
                 Preference.DEFAULT_ORDER);
 
         assertThat(preference.getKey()).isNotNull();
@@ -290,8 +288,9 @@ public class DashboardFeatureProviderImplTest {
 
         final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
 
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, null /* key */, Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
+                Preference.DEFAULT_ORDER);
 
         assertThat(preference.getSummary()).isNull();
     }
@@ -305,8 +304,8 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putString(TileUtils.META_DATA_PREFERENCE_SUMMARY_URI, uriString);
 
         final List<DynamicDataObserver> observers = mImpl.bindPreferenceToTileAndGetObservers(
-                mActivity, mFragment, mForceRoundedIcon, preference, tile, null /* key */,
-                Preference.DEFAULT_ORDER);
+                mActivity, mForceRoundedIcon, MetricsEvent.VIEW_UNKNOWN, preference, tile,
+                null /*key */, Preference.DEFAULT_ORDER);
 
         assertThat(preference.getSummary()).isEqualTo(ShadowTileUtils.MOCK_SUMMARY);
         assertThat(observers.get(0).getUri().toString()).isEqualTo(uriString);
@@ -321,8 +320,8 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putString(TileUtils.META_DATA_PREFERENCE_TITLE_URI, uriString);
 
         final List<DynamicDataObserver> observers = mImpl.bindPreferenceToTileAndGetObservers(
-                mActivity, mFragment, mForceRoundedIcon, preference, tile, null /* key */,
-                Preference.DEFAULT_ORDER);
+                mActivity, mForceRoundedIcon, MetricsEvent.VIEW_UNKNOWN, preference, tile,
+                null /*key */, Preference.DEFAULT_ORDER);
 
         assertThat(preference.getTitle()).isEqualTo(ShadowTileUtils.MOCK_SUMMARY);
         assertThat(observers.get(0).getUri().toString()).isEqualTo(uriString);
@@ -337,8 +336,9 @@ public class DashboardFeatureProviderImplTest {
         final Bundle bundle = new Bundle();
         bundle.putBoolean(EXTRA_SWITCH_SET_CHECKED_ERROR, false);
         ShadowTileUtils.setResultBundle(bundle);
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, null /* key */, Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
+                Preference.DEFAULT_ORDER);
 
         preference.callChangeListener(false);
 
@@ -358,8 +358,9 @@ public class DashboardFeatureProviderImplTest {
         final Bundle bundle = new Bundle();
         bundle.putBoolean(EXTRA_SWITCH_SET_CHECKED_ERROR, true);
         ShadowTileUtils.setResultBundle(bundle);
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, null /* key */, Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
+                Preference.DEFAULT_ORDER);
 
         preference.callChangeListener(true);
 
@@ -377,8 +378,8 @@ public class DashboardFeatureProviderImplTest {
         final Tile tile = new ProviderTile(mProviderInfo, CategoryKey.CATEGORY_HOMEPAGE,
                 mSwitchMetaData);
         final List<DynamicDataObserver> observers = mImpl.bindPreferenceToTileAndGetObservers(
-                mActivity, mFragment, mForceRoundedIcon, preference, tile, null /* key */,
-                Preference.DEFAULT_ORDER);
+                mActivity, mForceRoundedIcon, MetricsEvent.VIEW_UNKNOWN, preference, tile,
+                null /*key */, Preference.DEFAULT_ORDER);
 
         ShadowTileUtils.setProviderChecked(false);
         observers.get(0).onDataChanged();
@@ -396,8 +397,9 @@ public class DashboardFeatureProviderImplTest {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
         final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, null /* key */, Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.VIEW_UNKNOWN, preference, tile, null /* key */,
+                Preference.DEFAULT_ORDER);
 
         assertThat(preference.getKey()).isEqualTo(tile.getKey(mContext));
     }
@@ -481,8 +483,8 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putInt(META_DATA_KEY_ORDER, 10);
         final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
 
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, "123", baseOrder);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.VIEW_UNKNOWN, preference, tile, "123", baseOrder);
 
         assertThat(preference.getOrder()).isEqualTo(tile.getOrder() + baseOrder);
     }
@@ -494,8 +496,8 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putInt(META_DATA_KEY_ORDER, 10);
         final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putInt(META_DATA_KEY_ORDER, testOrder);
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, "123", Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.VIEW_UNKNOWN, preference, tile, "123", Preference.DEFAULT_ORDER);
 
         assertThat(preference.getOrder()).isEqualTo(testOrder);
     }
@@ -506,8 +508,8 @@ public class DashboardFeatureProviderImplTest {
         final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_KEY_ORDER, "hello");
 
-        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mFragment, mForceRoundedIcon,
-                preference, tile, "123", Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(mActivity, mForceRoundedIcon,
+                MetricsEvent.VIEW_UNKNOWN, preference, tile, "123", Preference.DEFAULT_ORDER);
 
         assertThat(preference.getOrder()).isEqualTo(Preference.DEFAULT_ORDER);
     }
@@ -520,8 +522,8 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
         mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");
         tile.userHandle = null;
-        mImpl.bindPreferenceToTileAndGetObservers(activity, mFragment, mForceRoundedIcon,
-                preference, tile, "123", Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(activity, mForceRoundedIcon,
+                MetricsEvent.SETTINGS_GESTURES, preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.performClick();
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
 
@@ -544,8 +546,8 @@ public class DashboardFeatureProviderImplTest {
         mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");
         tile.userHandle = null;
 
-        mImpl.bindPreferenceToTileAndGetObservers(activity, mFragment, mForceRoundedIcon,
-                preference, tile, "123", Preference.DEFAULT_ORDER);
+        mImpl.bindPreferenceToTileAndGetObservers(activity, mForceRoundedIcon,
+                MetricsEvent.SETTINGS_GESTURES, preference, tile, "123", Preference.DEFAULT_ORDER);
         preference.performClick();
 
         final ShadowActivity.IntentForResult launchIntent =
@@ -666,23 +668,5 @@ public class DashboardFeatureProviderImplTest {
                 .startActivityAsUser(any(Intent.class), argument.capture());
         assertThat(argument.getValue().getIdentifier()).isEqualTo(0);
         verify(mActivity, never()).getSupportFragmentManager();
-    }
-
-    private static class TestFragment extends DashboardFragment {
-
-        @Override
-        public int getMetricsCategory() {
-            return MetricsEvent.SETTINGS_GESTURES;
-        }
-
-        @Override
-        protected int getPreferenceScreenResId() {
-            return R.xml.gestures;
-        }
-
-        @Override
-        protected String getLogTag() {
-            return "TestFragment";
-        }
     }
 }

@@ -43,6 +43,7 @@ import android.os.UserManager;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -150,9 +151,9 @@ public class AccountDetailDashboardFragmentTest {
 
         final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         final Preference preference = new Preference(mContext);
-        dashboardFeatureProvider.bindPreferenceToTileAndGetObservers(activity, mFragment,
-                false /* forceRoundedIcon */, preference, tile, null /* key */,
-                Preference.DEFAULT_ORDER);
+        dashboardFeatureProvider.bindPreferenceToTileAndGetObservers(activity,
+                false /* forceRoundedIcon */, MetricsProto.MetricsEvent.DASHBOARD_SUMMARY,
+                preference, tile, null /* key */, Preference.DEFAULT_ORDER);
 
         assertThat(preference.getKey()).isEqualTo(tile.getKey(mContext));
         preference.performClick();

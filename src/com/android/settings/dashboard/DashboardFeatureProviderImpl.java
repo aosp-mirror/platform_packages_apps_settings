@@ -36,7 +36,6 @@ import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITL
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.IContentProvider;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -61,7 +60,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
-import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -125,7 +123,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @Override
     public List<DynamicDataObserver> bindPreferenceToTileAndGetObservers(FragmentActivity activity,
-            DashboardFragment fragment, boolean forceRoundedIcon, Preference pref, Tile tile,
+            boolean forceRoundedIcon, int sourceMetricsCategory, Preference pref, Tile tile,
             String key, int baseOrder) {
         if (pref == null) {
             return null;
@@ -151,7 +149,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         bindIcon(pref, tile, forceRoundedIcon);
 
         if (tile instanceof ActivityTile) {
-            final int sourceMetricsCategory = fragment.getMetricsCategory();
             final Bundle metadata = tile.getMetaData();
             String clsName = null;
             String action = null;
@@ -169,17 +166,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     intent.setAction(action);
                 }
                 pref.setOnPreferenceClickListener(preference -> {
-                    OnCancelListener listener = null;
-                    if (fragment instanceof TopLevelSettings) {
-                        final TopLevelSettings topLevelSettings = (TopLevelSettings) fragment;
-                        // Highlight the tile immediately whenever it's clicked
-                        topLevelSettings.setHighlightPreferenceKey(key);
-                        // If the tile allows users to select profile, the pop-op dialog may be
-                        // cancelled and then the previous highlight entry should be restored.
-                        listener = dialog -> topLevelSettings.restorePreviousHighlight();
-                    }
-                    launchIntentOrSelectProfile(activity, tile, intent, sourceMetricsCategory,
-                            listener);
+                    launchIntentOrSelectProfile(activity, tile, intent, sourceMetricsCategory);
                     return true;
                 });
             }
@@ -211,8 +198,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 .putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
                         SettingsEnums.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        launchIntentOrSelectProfile(activity, tile, intent, SettingsEnums.DASHBOARD_SUMMARY,
-                /* listener= */ null);
+        launchIntentOrSelectProfile(activity, tile, intent, SettingsEnums.DASHBOARD_SUMMARY);
     }
 
     private DynamicDataObserver createDynamicDataObserver(String method, Uri uri, Preference pref) {
@@ -427,7 +413,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,
-            int sourceMetricCategory, OnCancelListener listener) {
+            int sourceMetricCategory) {
         if (!isIntentResolvable(intent)) {
             Log.w(TAG, "Cannot resolve intent, skipping. " + intent);
             return;
@@ -458,7 +444,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             }
 
             ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
-                    sourceMetricCategory, listener);
+                    sourceMetricCategory);
         }
     }
 

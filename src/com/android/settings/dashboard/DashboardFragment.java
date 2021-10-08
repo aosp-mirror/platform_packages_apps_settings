@@ -496,15 +496,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             if (mDashboardTilePrefKeys.containsKey(key)) {
                 // Have the key already, will rebind.
                 final Preference preference = screen.findPreference(key);
-                mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(), this,
-                        forceRoundedIcons, preference, tile, key,
+                mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(),
+                        forceRoundedIcons, getMetricsCategory(), preference, tile, key,
                         mPlaceholderPreferenceController.getOrder());
             } else {
                 // Don't have this key, add it.
                 final Preference pref = createPreference(tile);
                 final List<DynamicDataObserver> observers =
                         mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(),
-                                this, forceRoundedIcons, pref, tile, key,
+                                forceRoundedIcons, getMetricsCategory(), pref, tile, key,
                                 mPlaceholderPreferenceController.getOrder());
                 screen.addPreference(pref);
                 registerDynamicDataObservers(observers);
