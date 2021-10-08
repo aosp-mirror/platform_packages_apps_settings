@@ -16,6 +16,10 @@
 
 package com.android.settings.homepage;
 
+import static android.provider.Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK;
+import static android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI;
+import static android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_HIGHLIGHT_MENU_KEY;
+
 import android.animation.LayoutTransition;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
@@ -37,6 +41,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.accounts.AvatarViewMixin;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
@@ -61,6 +66,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     // An alias class name of SettingsHomepageActivity.
     public static final String ALIAS_DEEP_LINK = "com.android.settings.DeepLinkHomepageActivity";
 
+    private static final int DEFAULT_HIGHLIGHT_MENU_KEY = R.string.menu_key_network;
     private static final long HOMEPAGE_LOADING_TIMEOUT_MS = 300;
 
     private View mHomepageView;
@@ -117,7 +123,11 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
             }
         }
-        showFragment(new TopLevelSettings(), R.id.main_content);
+        final Fragment fragment = new TopLevelSettings();
+        fragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+                getHighlightMenuKey());
+        showFragment(fragment, R.id.main_content);
+
         ((FrameLayout) findViewById(R.id.main_content))
                 .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
@@ -129,9 +139,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        // When it's large screen 2-pane and Settings app is in background. Receiving a Intent
-        // in this Activity will not finish nor onCreate. setIntent here for this case.
+        // When it's large screen 2-pane and Settings app is in the background, receiving an Intent
+        // will not recreate this activity. Update the intent for this case.
         setIntent(intent);
+        reloadHighlightMenuKey();
+        if (isFinishing()) {
+            return;
+        }
         // Launch the intent from deep link for large screen devices.
         launchDeepLinkIntentToRight();
     }
@@ -177,12 +191,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         final Intent intent = getIntent();
         if (intent == null || !TextUtils.equals(intent.getAction(),
-                android.provider.Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK)) {
+                ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK)) {
             return;
         }
 
         final String intentUriString = intent.getStringExtra(
-                android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI);
+                EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI);
         if (TextUtils.isEmpty(intentUriString)) {
             Log.e(TAG, "No EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI to deep link");
             finish();
@@ -231,6 +245,29 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 true /* finishPrimaryWithSecondary */,
                 true /* finishSecondaryWithPrimary */);
         startActivity(targetIntent);
+    }
+
+    private String getHighlightMenuKey() {
+        final Intent intent = getIntent();
+        if (intent != null && TextUtils.equals(intent.getAction(),
+                ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK)) {
+            final String menuKey = intent.getStringExtra(
+                    EXTRA_SETTINGS_LARGE_SCREEN_HIGHLIGHT_MENU_KEY);
+            if (!TextUtils.isEmpty(menuKey)) {
+                return menuKey;
+            }
+        }
+        return getString(DEFAULT_HIGHLIGHT_MENU_KEY);
+    }
+
+    private void reloadHighlightMenuKey() {
+        final TopLevelSettings fragment =
+                (TopLevelSettings) getSupportFragmentManager().findFragmentById(R.id.main_content);
+        if (fragment != null) {
+            fragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+                    getHighlightMenuKey());
+            fragment.reloadHighlightMenuKey();
+        }
     }
 
     private void initHomepageContainer() {
