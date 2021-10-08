@@ -49,8 +49,7 @@ public class BatteryUsageStatsLoader extends AsyncLoaderCompat<BatteryUsageStats
         } catch (RuntimeException e) {
             Log.e(TAG, "loadInBackground() for getBatteryUsageStats()", e);
             // Use default BatteryUsageStats.
-            return new BatteryUsageStats.Builder(
-                    new String[0], /* includePowerModels */ false).build();
+            return new BatteryUsageStats.Builder(new String[0]).build();
         }
     }
 
