@@ -23,10 +23,9 @@
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="my_device_info_header"
-        android:order="0"
+        android:order="-1"
         android:layout="@layout/settings_entity_header"
-        android:selectable="false"
-        settings:isPreferenceVisible="false"/>
+        android:selectable="false"/>
 
     <PreferenceCategory
         android:key="basic_info_category"
