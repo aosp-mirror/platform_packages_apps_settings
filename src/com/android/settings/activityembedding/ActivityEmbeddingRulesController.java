@@ -17,6 +17,7 @@
 package com.android.settings.activityembedding;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.window.embedding.ActivityFilter;
+import androidx.window.embedding.ActivityRule;
 import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitPairFilter;
 import androidx.window.embedding.SplitPairRule;
@@ -34,6 +36,7 @@ import com.android.settings.Settings;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -70,6 +73,8 @@ public class ActivityEmbeddingRulesController {
                 null /* secondaryIntentAction */,
                 true /* finishPrimaryWithSecondary */,
                 true /* finishSecondaryWithPrimary */);
+        // Set rules here to show full screen for specified Activity.
+        registerAlwaysExpandRule();
     }
 
     /** Register a SplitPairRule for 2-pane. */
@@ -85,21 +90,31 @@ public class ActivityEmbeddingRulesController {
 
         SplitController.getInstance().registerRule(new SplitPairRule(filters,
                 finishPrimaryWithSecondary,
-                finishSecondaryWithPrimary, true /* clearTop */,
+                finishSecondaryWithPrimary,
+                true /* clearTop */,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.SPLIT_RATIO,
                 LayoutDirection.LOCALE));
     }
 
+    private void registerAlwaysExpandRule() {
+        final Set<ActivityFilter> activityFilters = new HashSet<>();
+
+        final Intent searchIntent = FeatureFactory.getFactory(mContext).getSearchFeatureProvider()
+                .buildSearchIntent(mContext, SettingsEnums.SETTINGS_HOMEPAGE);
+        addActivityFilter(activityFilters, searchIntent);
+
+        mSplitController.registerRule(new ActivityRule(activityFilters, true /* alwaysExpand */));
+    }
+
     private void registerHomepagePlaceholderRule() {
         final Set<ActivityFilter> activityFilters = new HashSet<>();
-        activityFilters.add(new ActivityFilter(getComponentName(SettingsHomepageActivity.class),
-                null /* intentAction */));
-        activityFilters.add(new ActivityFilter(getComponentName(Settings.class),
-                null /* intentAction */));
-        activityFilters.add(new ActivityFilter(new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
-                SettingsHomepageActivity.ALIAS_DEEP_LINK), null /* intentAction */));
+        addActivityFilter(activityFilters, SettingsHomepageActivity.class);
+        addActivityFilter(activityFilters, Settings.class);
+        addActivityFilter(activityFilters, new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
+                SettingsHomepageActivity.ALIAS_DEEP_LINK));
+
         final Intent intent = new Intent();
         intent.setComponent(getComponentName(Settings.NetworkDashboardActivity.class));
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
@@ -111,6 +126,22 @@ public class ActivityEmbeddingRulesController {
                 LayoutDirection.LOCALE);
 
         mSplitController.registerRule(placeholderRule);
+    }
+
+    private void addActivityFilter(Set<ActivityFilter> activityFilters,
+            Class<? extends Activity> activityClass) {
+        activityFilters.add(new ActivityFilter(getComponentName(activityClass),
+                null /* intentAction */));
+    }
+
+    private void addActivityFilter(Set<ActivityFilter> activityFilters, Intent intent) {
+        activityFilters.add(new ActivityFilter(new ComponentName("*" /* pkg */, "*" /* cls */),
+                intent.getAction()));
+    }
+
+    private void addActivityFilter(Set<ActivityFilter> activityFilters,
+            ComponentName componentName) {
+        activityFilters.add(new ActivityFilter(componentName, null /* intentAction */));
     }
 
     @NonNull

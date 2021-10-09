@@ -102,7 +102,9 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             }
 
             PowerProfile powerProfile = new PowerProfile(context);
-            return powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL)
+            // Cheap hack to try to figure out if the power_profile.xml was populated.
+            return powerProfile.getAveragePowerForOrdinal(
+                    PowerProfile.POWER_GROUP_DISPLAY_SCREEN_FULL, 0)
                     >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
         }
     };
