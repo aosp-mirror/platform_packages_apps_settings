@@ -13,218 +13,254 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="0dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp" >
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <LinearLayout android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+        android:id="@+id/dialog_alert_subtitle"
+        android:text="@string/vpn_insecure_dialog_subtitle"
+        android:textColor="?android:attr/colorError"
+        android:visibility="gone"
+        android:includeFontPadding="false"
+        android:padding="0dp" />
 
-        <LinearLayout android:id="@+id/editor"
-                android:layout_width="match_parent"
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:paddingTop="24dp">
 
-            <TextView style="@style/vpn_label"
-                    android:text="@string/vpn_name"
-                    android:labelFor="@+id/name"/>
-            <EditText style="@style/vpn_value" android:id="@+id/name"
-                    android:inputType="textCapWords"/>
-
-            <TextView style="@style/vpn_label"
-                    android:text="@string/vpn_type"
-                    android:labelFor="@+id/type"/>
-            <Spinner style="@style/vpn_value"
-                     android:id="@+id/type"
-                    android:prompt="@string/vpn_type"
-                    android:entries="@array/vpn_types"/>
-
-            <TextView style="@style/vpn_label"
-                    android:text="@string/vpn_server"
-                    android:labelFor="@+id/server"/>
-            <EditText style="@style/vpn_value" android:id="@+id/server"/>
-
-            <CheckBox style="@style/vpn_value" android:id="@+id/mppe"
-                    android:text="@string/vpn_mppe"
-                    android:singleLine="false"
-                    android:visibility="gone"/>
-
-            <LinearLayout android:id="@+id/l2tp"
+            <LinearLayout android:id="@+id/editor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
+
                 <TextView style="@style/vpn_label"
-                        android:text="@string/vpn_l2tp_secret"
-                        android:labelFor="@+id/l2tp_secret"/>
-                <EditText style="@style/vpn_value" android:id="@+id/l2tp_secret"
-                        android:password="true"
-                        android:hint="@string/vpn_not_used"/>
+                        android:text="@string/vpn_name"
+                        android:labelFor="@+id/name"/>
+                <EditText style="@style/vpn_value"
+                        android:id="@+id/name"
+                        android:inputType="textCapWords"/>
+
+                <TextView style="@style/vpn_label"
+                        android:text="@string/vpn_type"
+                        android:labelFor="@+id/type"/>
+                <Spinner style="@style/vpn_value"
+                        android:id="@+id/type"
+                        android:prompt="@string/vpn_type"
+                        android:entries="@array/vpn_types"/>
+
+                <TextView style="@style/vpn_label"
+                        android:text="@string/vpn_server"
+                        android:labelFor="@+id/server"/>
+                <EditText style="@style/vpn_value"
+                        android:id="@+id/server"/>
+
+                <CheckBox style="@style/vpn_value"
+                        android:id="@+id/mppe"
+                        android:text="@string/vpn_mppe"
+                        android:singleLine="false"
+                        android:visibility="gone"/>
+
+                <LinearLayout android:id="@+id/l2tp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                    <TextView style="@style/vpn_label"
+                            android:text="@string/vpn_l2tp_secret"
+                            android:labelFor="@+id/l2tp_secret"/>
+                    <EditText style="@style/vpn_value"
+                            android:id="@+id/l2tp_secret"
+                            android:password="true"
+                            android:hint="@string/vpn_not_used"/>
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/options_ipsec_identity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                    <TextView style="@style/vpn_label"
+                            android:text="@string/vpn_ipsec_identifier"
+                            android:labelFor="@+id/ipsec_identifier"/>
+                    <EditText style="@style/vpn_value"
+                            android:id="@+id/ipsec_identifier"
+                            android:hint="@string/vpn_not_used"/>
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/ipsec_psk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                    <TextView style="@style/vpn_label"
+                            android:text="@string/vpn_ipsec_secret"
+                            android:labelFor="@+id/ipsec_secret"/>
+                    <EditText style="@style/vpn_value"
+                            android:id="@+id/ipsec_secret"
+                            android:password="true"/>
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/ipsec_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                    <TextView style="@style/vpn_label"
+                            android:text="@string/vpn_ipsec_user_cert"
+                            android:labelFor="@+id/ipsec_user_cert"/>
+                    <Spinner style="@style/vpn_value"
+                            android:id="@+id/ipsec_user_cert"
+                            android:prompt="@string/vpn_ipsec_user_cert" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/ipsec_peer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                    <TextView style="@style/vpn_label"
+                            android:text="@string/vpn_ipsec_ca_cert"
+                            android:labelFor="@+id/ipsec_ca_cert"/>
+                    <Spinner style="@style/vpn_value"
+                            android:id="@+id/ipsec_ca_cert"
+                            android:prompt="@string/vpn_ipsec_ca_cert" />
+
+                    <TextView style="@style/vpn_label"
+                            android:text="@string/vpn_ipsec_server_cert"
+                            android:labelFor="@+id/ipsec_server_cert"/>
+                    <Spinner style="@style/vpn_value"
+                            android:id="@+id/ipsec_server_cert"
+                            android:prompt="@string/vpn_ipsec_server_cert" />
+                </LinearLayout>
+
+                <CheckBox style="@style/vpn_value"
+                        android:id="@+id/show_options"
+                        android:singleLine="false"
+                        android:text="@string/vpn_show_options"/>
             </LinearLayout>
 
-            <LinearLayout android:id="@+id/options_ipsec_identity"
+            <LinearLayout android:id="@+id/options"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
-                <TextView style="@style/vpn_label"
-                        android:text="@string/vpn_ipsec_identifier"
-                        android:labelFor="@+id/ipsec_identifier"/>
-                <EditText style="@style/vpn_value" android:id="@+id/ipsec_identifier"
-                        android:hint="@string/vpn_not_used"/>
+                <LinearLayout android:id="@+id/network_options"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    <TextView style="@style/vpn_label"
+                            android:text="@string/vpn_search_domains"
+                            android:labelFor="@+id/search_domains"/>
+                    <EditText style="@style/vpn_value"
+                            android:id="@+id/search_domains"
+                            android:hint="@string/vpn_not_used"/>
+
+                    <TextView style="@style/vpn_label"
+                            android:text="@string/vpn_dns_servers"
+                            android:labelFor="@+id/dns_servers"/>
+                    <EditText style="@style/vpn_value"
+                            android:id="@+id/dns_servers"
+                            android:hint="@string/vpn_not_used"/>
+
+                    <TextView style="@style/vpn_label"
+                            android:text="@string/vpn_routes"
+                            android:labelFor="@+id/routes"/>
+                    <EditText style="@style/vpn_value"
+                            android:id="@+id/routes"
+                            android:hint="@string/vpn_not_used"/>
+                </LinearLayout>
+
+                <TextView android:id="@+id/vpn_proxy_settings_title"
+                          style="@style/vpn_label"
+                          android:text="@string/proxy_settings_title"
+                          android:labelFor="@+id/vpn_proxy_settings" />
+
+                <Spinner android:id="@+id/vpn_proxy_settings"
+                         style="@style/vpn_value"
+                         android:prompt="@string/proxy_settings_title"
+                         android:entries="@array/vpn_proxy_settings" />
+
+                <LinearLayout
+                    android:id="@+id/vpn_proxy_fields"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <TextView
+                        style="@style/vpn_label"
+                        android:text="@string/proxy_hostname_label"
+                        android:labelFor="@+id/vpn_proxy_host" />
+
+                    <EditText
+                        android:id="@+id/vpn_proxy_host"
+                        style="@style/vpn_value"
+                        android:hint="@string/proxy_hostname_hint"
+                        android:inputType="textNoSuggestions" />
+
+                    <TextView
+                        style="@style/vpn_label"
+                        android:text="@string/proxy_port_label"
+                        android:labelFor="@+id/vpn_proxy_port" />
+
+                    <EditText
+                        android:id="@+id/vpn_proxy_port"
+                        style="@style/vpn_value"
+                        android:hint="@string/proxy_port_hint"
+                        android:inputType="number" />
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout android:id="@+id/ipsec_psk"
+            <LinearLayout android:id="@+id/userpass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:orientation="vertical">
+
                 <TextView style="@style/vpn_label"
-                        android:text="@string/vpn_ipsec_secret"
-                        android:labelFor="@+id/ipsec_secret"/>
-                <EditText style="@style/vpn_value" android:id="@+id/ipsec_secret"
+                        android:text="@string/vpn_username"
+                        android:labelFor="@+id/username"/>
+                <EditText style="@style/vpn_value"
+                        android:id="@+id/username"/>
+
+                <TextView style="@style/vpn_label"
+                        android:text="@string/vpn_password"
+                        android:labelFor="@+id/password"/>
+                <EditText style="@style/vpn_value"
+                        android:id="@+id/password"
                         android:password="true"/>
+
+                <CheckBox style="@style/vpn_value"
+                        android:id="@+id/save_login"
+                        android:singleLine="false"
+                        android:text="@string/vpn_save_login"/>
             </LinearLayout>
 
-            <LinearLayout android:id="@+id/ipsec_user"
+            <LinearLayout android:id="@+id/connect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
-                <TextView style="@style/vpn_label"
-                        android:text="@string/vpn_ipsec_user_cert"
-                        android:labelFor="@+id/ipsec_user_cert"/>
-                <Spinner style="@style/vpn_value" android:id="@+id/ipsec_user_cert"
-                        android:prompt="@string/vpn_ipsec_user_cert" />
-            </LinearLayout>
-
-            <LinearLayout android:id="@+id/ipsec_peer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-                <TextView style="@style/vpn_label"
-                        android:text="@string/vpn_ipsec_ca_cert"
-                        android:labelFor="@+id/ipsec_ca_cert"/>
-                <Spinner style="@style/vpn_value" android:id="@+id/ipsec_ca_cert"
-                        android:prompt="@string/vpn_ipsec_ca_cert" />
-
-                <TextView style="@style/vpn_label"
-                        android:text="@string/vpn_ipsec_server_cert"
-                        android:labelFor="@+id/ipsec_server_cert"/>
-                <Spinner style="@style/vpn_value" android:id="@+id/ipsec_server_cert"
-                        android:prompt="@string/vpn_ipsec_server_cert" />
-            </LinearLayout>
-
-            <CheckBox style="@style/vpn_value" android:id="@+id/show_options"
-                    android:singleLine="false"
-                    android:text="@string/vpn_show_options"/>
-        </LinearLayout>
-
-        <LinearLayout android:id="@+id/options"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-            <LinearLayout android:id="@+id/network_options"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView style="@style/vpn_label"
-                        android:text="@string/vpn_search_domains"
-                        android:labelFor="@+id/search_domains"/>
-                <EditText style="@style/vpn_value" android:id="@+id/search_domains"
-                        android:hint="@string/vpn_not_used"/>
-
-                <TextView style="@style/vpn_label"
-                        android:text="@string/vpn_dns_servers"
-                        android:labelFor="@+id/dns_servers"/>
-                <EditText style="@style/vpn_value" android:id="@+id/dns_servers"
-                        android:hint="@string/vpn_not_used"/>
-
-                <TextView style="@style/vpn_label"
-                        android:text="@string/vpn_routes"
-                        android:labelFor="@+id/routes"/>
-                <EditText style="@style/vpn_value" android:id="@+id/routes"
-                        android:hint="@string/vpn_not_used"/>
-            </LinearLayout>
-
-            <TextView android:id="@+id/vpn_proxy_settings_title"
-                      style="@style/vpn_label"
-                      android:text="@string/proxy_settings_title"
-                      android:labelFor="@+id/vpn_proxy_settings" />
-
-            <Spinner android:id="@+id/vpn_proxy_settings"
-                     style="@style/vpn_value"
-                     android:prompt="@string/proxy_settings_title"
-                     android:entries="@array/vpn_proxy_settings" />
-
-            <LinearLayout
-                android:id="@+id/vpn_proxy_fields"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone" >
-
-                <TextView
-                    style="@style/vpn_label"
-                    android:text="@string/proxy_hostname_label"
-                    android:labelFor="@+id/vpn_proxy_host" />
-
-                <EditText
-                    android:id="@+id/vpn_proxy_host"
-                    style="@style/vpn_value"
-                    android:hint="@string/proxy_hostname_hint"
-                    android:inputType="textNoSuggestions" />
-
-                <TextView
-                    style="@style/vpn_label"
-                    android:text="@string/proxy_port_label"
-                    android:labelFor="@+id/vpn_proxy_port" />
-
-                <EditText
-                    android:id="@+id/vpn_proxy_port"
-                    style="@style/vpn_value"
-                    android:hint="@string/proxy_port_hint"
-                    android:inputType="number" />
+                    android:animateLayoutChanges="true">
+                <CheckBox style="@style/vpn_value"
+                        android:id="@+id/always_on_vpn"
+                        android:singleLine="false"
+                        android:text="@string/vpn_menu_lockdown"/>
+                <TextView style="@style/vpn_warning"
+                        android:id="@+id/always_on_invalid_reason"
+                        android:singleLine="false"
+                        android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout android:id="@+id/userpass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <TextView style="@style/vpn_label"
-                    android:text="@string/vpn_username"
-                    android:labelFor="@+id/username"/>
-            <EditText style="@style/vpn_value" android:id="@+id/username"/>
-
-            <TextView style="@style/vpn_label"
-                    android:text="@string/vpn_password"
-                    android:labelFor="@+id/password"/>
-            <EditText style="@style/vpn_value" android:id="@+id/password"
-                    android:password="true"/>
-
-            <CheckBox style="@style/vpn_value" android:id="@+id/save_login"
-                    android:singleLine="false"
-                    android:text="@string/vpn_save_login"/>
-        </LinearLayout>
-
-        <LinearLayout android:id="@+id/connect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:animateLayoutChanges="true">
-            <CheckBox style="@style/vpn_value" android:id="@+id/always_on_vpn"
-                android:singleLine="false"
-                android:text="@string/vpn_menu_lockdown"/>
-            <TextView style="@style/vpn_warning" android:id="@+id/always_on_invalid_reason"
-                android:singleLine="false"
-                android:visibility="gone"/>
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

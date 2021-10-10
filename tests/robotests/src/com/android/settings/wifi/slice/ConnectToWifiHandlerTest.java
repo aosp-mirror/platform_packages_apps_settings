@@ -26,95 +26,69 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.NetworkSelectionStatus;
-import android.net.wifi.WifiManager;
+import android.content.Intent;
 
-import com.android.settings.testutils.shadow.ShadowWifiManager;
-import com.android.settingslib.wifi.AccessPoint;
+import com.android.settings.wifi.WifiDialogActivity;
+import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowWifiManager.class)
 public class ConnectToWifiHandlerTest {
 
     private static final String AP_SSID = "\"ap\"";
     private Context mContext;
     private ConnectToWifiHandler mHandler;
-    private WifiConfiguration mWifiConfig;
     @Mock
-    private AccessPoint mAccessPoint;
+    private WifiScanWorker mWifiScanWorker;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
-        mHandler = new ConnectToWifiHandler();
-        mWifiConfig = spy(new WifiConfiguration());
-        mWifiConfig.SSID = AP_SSID;
-        doReturn(mWifiConfig).when(mAccessPoint).getConfig();
+        mContext = spy(RuntimeEnvironment.application);
+        mHandler = spy(new ConnectToWifiHandler());
+        doReturn(mWifiScanWorker).when(mHandler).getWifiScanWorker(any());
     }
 
     @Test
-    public void connect_shouldConnectToUnsavedOpenNetwork() {
-        when(mAccessPoint.isSaved()).thenReturn(false);
-        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_NONE);
+    public void onReceive_nonNullKeyAndUri_shouldConnectWifintry() {
+        final Intent intent = new Intent();
+        final String key = "key";
+        intent.putExtra(ConnectToWifiHandler.KEY_CHOSEN_WIFIENTRY_KEY, key);
+        intent.putExtra(ConnectToWifiHandler.KEY_WIFI_SLICE_URI,
+                com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI);
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(mWifiScanWorker.getWifiEntry(key)).thenReturn(wifiEntry);
 
-        mHandler.connect(mContext, mAccessPoint);
+        mHandler.onReceive(mContext, intent);
 
-        assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP_SSID);
+        verify(wifiEntry).connect(any());
     }
 
     @Test
-    public void connect_shouldStartOsuProvisioning() {
-        when(mAccessPoint.isSaved()).thenReturn(false);
-        when(mAccessPoint.isOsuProvider()).thenReturn(true);
+    public void onConnectResult_failNoConfig_shouldStartActivity() {
+        final String key = "key";
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(wifiEntry.getKey()).thenReturn(key);
+        final ConnectToWifiHandler.WifiEntryConnectCallback callback =
+                spy(new ConnectToWifiHandler.WifiEntryConnectCallback(mContext, wifiEntry));
 
-        mHandler.connect(mContext, mAccessPoint);
+        callback.onConnectResult(ConnectCallback.CONNECT_STATUS_FAILURE_NO_CONFIG);
 
-        verify(mAccessPoint).startOsuProvisioning(any(WifiManager.ActionListener.class));
-    }
-
-
-    @Test
-    public void connect_shouldConnectWithPasspointProvider() {
-        when(mAccessPoint.isSaved()).thenReturn(false);
-        when(mAccessPoint.isPasspoint()).thenReturn(true);
-
-        mHandler.connect(mContext, mAccessPoint);
-
-        assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP_SSID);
-    }
-
-    @Test
-    public void connect_shouldConnectToSavedSecuredNetwork() {
-        when(mAccessPoint.isSaved()).thenReturn(true);
-        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_PSK);
-        final NetworkSelectionStatus status = mock(NetworkSelectionStatus.class);
-        when(status.hasEverConnected()).thenReturn(true);
-        when(mWifiConfig.getNetworkSelectionStatus()).thenReturn(status);
-
-        mHandler.connect(mContext, mAccessPoint);
-
-        assertThat(ShadowWifiManager.get().savedWifiConfig.SSID).isEqualTo(AP_SSID);
-    }
-
-    @Test
-    public void connect_shouldNotConnectToUnsavedSecuredNetwork() {
-        when(mAccessPoint.isSaved()).thenReturn(false);
-        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_PSK);
-
-        mHandler.connect(mContext, mAccessPoint);
-
-        assertThat(ShadowWifiManager.get().savedWifiConfig).isNull();
+        final ArgumentCaptor<Intent> argument = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(argument.capture());
+        assertThat(argument.getValue().getStringExtra(WifiDialogActivity.KEY_CHOSEN_WIFIENTRY_KEY))
+                .isEqualTo(key);
+        assertThat(argument.getValue().getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK)
+                .isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 }

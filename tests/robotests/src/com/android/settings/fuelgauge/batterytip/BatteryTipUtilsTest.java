@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryDefenderAction;
-import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenBatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenRestrictAppFragmentAction;
 import com.android.settings.fuelgauge.batterytip.actions.RestrictAppAction;
@@ -68,8 +67,7 @@ public class BatteryTipUtilsTest {
         mEarlyWarningTip = spy(
                 new EarlyWarningTip(BatteryTip.StateType.NEW, true /* powerSaveModeOn */));
         mLowBatteryTip = spy(
-                new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */,
-                        "" /* summary */));
+                new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */));
         mBatteryDefenderTip = spy(new BatteryDefenderTip(BatteryTip.StateType.NEW));
     }
 
@@ -90,32 +88,16 @@ public class BatteryTipUtilsTest {
     }
 
     @Test
-    public void testGetActionForBatteryTip_typeEarlyWarningStateNew_returnActionBatterySaver() {
+    public void testGetActionForBatteryTip_typeEarlyWarningStateNew_returnActionOpen() {
         when(mEarlyWarningTip.getState()).thenReturn(BatteryTip.StateType.NEW);
-
-        assertThat(BatteryTipUtils.getActionForBatteryTip(mEarlyWarningTip, mSettingsActivity,
-                mFragment)).isInstanceOf(BatterySaverAction.class);
-    }
-
-    @Test
-    public void testGetActionForBatteryTip_typeEarlyWarningStateHandled_returnActionOpen() {
-        when(mEarlyWarningTip.getState()).thenReturn(BatteryTip.StateType.HANDLED);
 
         assertThat(BatteryTipUtils.getActionForBatteryTip(mEarlyWarningTip, mSettingsActivity,
                 mFragment)).isInstanceOf(OpenBatterySaverAction.class);
     }
 
     @Test
-    public void testGetActionForBatteryTip_typeLowBatteryStateNew_returnActionBatterySaver() {
+    public void testGetActionForBatteryTip_typeLowBatteryStateNew_returnActionOpen() {
         when(mLowBatteryTip.getState()).thenReturn(BatteryTip.StateType.NEW);
-
-        assertThat(BatteryTipUtils.getActionForBatteryTip(mLowBatteryTip, mSettingsActivity,
-                mFragment)).isInstanceOf(BatterySaverAction.class);
-    }
-
-    @Test
-    public void testGetActionForBatteryTip_typeLowBatteryStateHandled_returnActionOpen() {
-        when(mLowBatteryTip.getState()).thenReturn(BatteryTip.StateType.HANDLED);
 
         assertThat(BatteryTipUtils.getActionForBatteryTip(mLowBatteryTip, mSettingsActivity,
                 mFragment)).isInstanceOf(OpenBatterySaverAction.class);

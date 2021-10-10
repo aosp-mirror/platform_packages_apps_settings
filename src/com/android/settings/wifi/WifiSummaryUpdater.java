@@ -74,6 +74,7 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
     @Override
     public void register(boolean register) {
         if (register) {
+            mWifiTracker.fetchInitialState();
             notifyChangeIfNeeded();
             mContext.registerReceiver(mReceiver, INTENT_FILTER);
         } else {
@@ -97,5 +98,12 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
         return mContext.getResources().getString(
                 com.android.settingslib.R.string.preference_summary_default_combination,
                 ssid, mWifiTracker.statusLabel);
+    }
+
+    /**
+     * return true if Wi-Fi connected.
+     */
+    public boolean isWifiConnected() {
+        return mWifiTracker.connected;
     }
 }

@@ -86,11 +86,11 @@ public class EarlyWarningDetectorTest {
     }
 
     @Test
-    public void testDetect_batterySaverOn_tipHandled() {
+    public void testDetect_batterySaverOn_tipInvisible() {
         doReturn(true).when(mPowerManager).isPowerSaveMode();
 
         assertThat(mEarlyWarningDetector.detect().getState())
-                .isEqualTo(BatteryTip.StateType.HANDLED);
+                .isEqualTo(BatteryTip.StateType.INVISIBLE);
     }
 
     @Test

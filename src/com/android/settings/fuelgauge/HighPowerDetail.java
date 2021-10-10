@@ -38,7 +38,7 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 public class HighPowerDetail extends InstrumentedDialogFragment implements OnClickListener,
         View.OnClickListener {
@@ -46,7 +46,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     private static final String ARG_DEFAULT_ON = "default_on";
 
     @VisibleForTesting
-    PowerWhitelistBackend mBackend;
+    PowerAllowlistBackend mBackend;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
     @VisibleForTesting
@@ -70,7 +70,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
         super.onCreate(savedInstanceState);
         final Context context = getContext();
         mBatteryUtils = BatteryUtils.getInstance(context);
-        mBackend = PowerWhitelistBackend.getInstance(context);
+        mBackend = PowerAllowlistBackend.getInstance(context);
 
         mPackageName = getArguments().getString(AppInfoBase.ARG_PACKAGE_NAME);
         mPackageUid = getArguments().getInt(AppInfoBase.ARG_PACKAGE_UID);
@@ -81,7 +81,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
             mLabel = mPackageName;
         }
         mDefaultOn = getArguments().getBoolean(ARG_DEFAULT_ON);
-        mIsEnabled = mDefaultOn || mBackend.isWhitelisted(mPackageName);
+        mIsEnabled = mDefaultOn || mBackend.isAllowlisted(mPackageName);
     }
 
     public Checkable setup(View view, boolean on) {
@@ -91,7 +91,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
                 ? R.string.ignore_optimizations_on_desc : R.string.ignore_optimizations_off_desc);
         view.setClickable(true);
         view.setOnClickListener(this);
-        if (!on && mBackend.isSysWhitelisted(mPackageName)) {
+        if (!on && mBackend.isSysAllowlisted(mPackageName)) {
             view.setEnabled(false);
         }
         return (Checkable) view;
@@ -103,7 +103,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
                 .setTitle(mLabel)
                 .setNegativeButton(R.string.cancel, null)
                 .setView(R.layout.ignore_optimizations_content);
-        if (!mBackend.isSysWhitelisted(mPackageName)) {
+        if (!mBackend.isSysAllowlisted(mPackageName)) {
             b.setPositiveButton(R.string.done, this);
         }
         return b.create();
@@ -137,7 +137,7 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
             boolean newValue = mIsEnabled;
-            boolean oldValue = mBackend.isWhitelisted(mPackageName);
+            boolean oldValue = mBackend.isAllowlisted(mPackageName);
             if (newValue != oldValue) {
                 logSpecialPermissionChange(newValue, mPackageName, getContext());
                 if (newValue) {
@@ -152,8 +152,8 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     }
 
     @VisibleForTesting
-    static void logSpecialPermissionChange(boolean whitelist, String packageName, Context context) {
-        int logCategory = whitelist ? SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_DENY
+    static void logSpecialPermissionChange(boolean allowlist, String packageName, Context context) {
+        int logCategory = allowlist ? SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_DENY
                 : SettingsEnums.APP_SPECIAL_PERMISSION_BATTERY_ALLOW;
         FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context, logCategory,
                 packageName);
@@ -173,16 +173,16 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
     }
 
     public static CharSequence getSummary(Context context, String pkg) {
-        return getSummary(context, PowerWhitelistBackend.getInstance(context), pkg);
+        return getSummary(context, PowerAllowlistBackend.getInstance(context), pkg);
     }
 
     @VisibleForTesting
-    static CharSequence getSummary(Context context, PowerWhitelistBackend powerWhitelist,
+    static CharSequence getSummary(Context context, PowerAllowlistBackend powerAllowlist,
             String pkg) {
         return context.getString(
-                powerWhitelist.isSysWhitelisted(pkg) || powerWhitelist.isDefaultActiveApp(pkg)
+                powerAllowlist.isSysAllowlisted(pkg) || powerAllowlist.isDefaultActiveApp(pkg)
                         ? R.string.high_power_system
-                        : powerWhitelist.isWhitelisted(pkg)
+                        : powerAllowlist.isAllowlisted(pkg)
                                 ? R.string.high_power_on
                                 : R.string.high_power_off);
     }

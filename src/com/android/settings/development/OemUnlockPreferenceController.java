@@ -52,8 +52,8 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     private final OemLockManager mOemLockManager;
     private final UserManager mUserManager;
     private final TelephonyManager mTelephonyManager;
+    private final Activity mActivity;
     private final DevelopmentSettingsDashboardFragment mFragment;
-    private final ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private RestrictedSwitchPreference mPreference;
 
     public OemUnlockPreferenceController(Context context, Activity activity,
@@ -69,12 +69,8 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
         }
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        mActivity = activity;
         mFragment = fragment;
-        if (activity != null || mFragment != null) {
-            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(activity, mFragment);
-        } else {
-            mChooseLockSettingsHelper = null;
-        }
     }
 
     @Override
@@ -204,8 +200,11 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
 
     @VisibleForTesting
     boolean showKeyguardConfirmation(Resources resources, int requestCode) {
-        return mChooseLockSettingsHelper.launchConfirmationActivity(
-                requestCode, resources.getString(R.string.oem_unlock_enable));
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(mActivity, mFragment);
+        return builder.setRequestCode(requestCode)
+                .setTitle(resources.getString(R.string.oem_unlock_enable))
+                .show();
     }
 
     @VisibleForTesting

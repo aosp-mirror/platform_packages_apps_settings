@@ -41,18 +41,21 @@ public class ConversationNotificationSettings extends NotificationSettings {
     @Override
     public void onResume() {
         super.onResume();
-        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null) {
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null
+                || mConversationInfo == null) {
             Log.w(TAG, "Missing package or uid or packageinfo or channel");
             finish();
             return;
         }
+        getActivity().setTitle(mConversationInfo.getLabel());
 
         for (NotificationPreferenceController controller : mControllers) {
             controller.onResume(mAppRow, mChannel, mChannelGroup, mConversationDrawable,
-                    mConversationInfo, mSuspendedAppsAdmin);
+                    mConversationInfo, mSuspendedAppsAdmin, mPreferenceFilter);
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();
+        animatePanel();
     }
 
     @Override

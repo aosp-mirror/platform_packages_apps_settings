@@ -537,7 +537,8 @@ public class WifiCallingSliceHelper {
      */
     public static PendingIntent getSettingsIntent(Context context) {
         final Intent intent = new Intent(Settings.ACTION_SETTINGS);
-        return PendingIntent.getActivity(context, 0 /* requestCode */, intent, 0 /* flags */);
+        return PendingIntent.getActivity(context, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     private PendingIntent getBroadcastIntent(String action) {
@@ -545,7 +546,7 @@ public class WifiCallingSliceHelper {
         intent.setClass(mContext, SliceBroadcastReceiver.class);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         return PendingIntent.getBroadcast(mContext, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
+                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     /**
@@ -555,7 +556,8 @@ public class WifiCallingSliceHelper {
         final Intent intent = new Intent(action);
         intent.setPackage(SETTINGS_PACKAGE_NAME);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */);
+        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_IMMUTABLE);
     }
 
     private Resources getResourcesForSubId(int subId) {

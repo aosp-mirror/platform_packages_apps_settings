@@ -23,17 +23,35 @@ import com.android.settings.notification.AudioHelper;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
 @Implements(AudioHelper.class)
 public class ShadowAudioHelper {
 
+    private static boolean sIsSingleVolume = true;
+    private static int sManagedProfileId = UserHandle.USER_CURRENT;
+
+    @Resetter
+    public static void reset() {
+        sIsSingleVolume = true;
+        sManagedProfileId = UserHandle.USER_CURRENT;
+    }
+
+    public static void setIsSingleVolume(boolean isSingleVolume) {
+        sIsSingleVolume = isSingleVolume;
+    }
+
+    public static void setManagedProfileId(int managedProfileId) {
+        sManagedProfileId = managedProfileId;
+    }
+
     @Implementation
     protected boolean isSingleVolume() {
-        return true;
+        return sIsSingleVolume;
     }
 
     @Implementation
     protected int getManagedProfileId(UserManager um) {
-        return UserHandle.USER_CURRENT;
+        return sManagedProfileId;
     }
 }

@@ -65,14 +65,15 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
     }
 
     void setTitle(CharSequence title) {
-        if (title == null) {
-            return;
-        }
         mTitle.setText(title);
     }
 
     void setIcon(Drawable icon) {
         mIcon.setImageDrawable(icon);
+    }
+
+    void setIconBackground(Drawable background) {
+        mIcon.setBackground(background);
     }
 
     void setPackageLabel(String pkg) {
@@ -98,7 +99,8 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
         Intent appIntent = itemView.getContext().getPackageManager()
                 .getLaunchIntentForPackage(pkg);
         boolean isPendingIntentValid = pi != null && PendingIntent.getActivity(
-                itemView.getContext(), 0, pi.getIntent(), PendingIntent.FLAG_NO_CREATE) != null;
+                itemView.getContext(), 0, pi.getIntent(),
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_NO_CREATE) != null;
         if (isPendingIntentValid || appIntent != null) {
             itemView.setOnClickListener(v -> {
                 uiEventLogger.logWithInstanceIdAndPosition(

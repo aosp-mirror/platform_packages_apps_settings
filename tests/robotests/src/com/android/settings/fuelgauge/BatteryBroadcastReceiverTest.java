@@ -78,7 +78,6 @@ public class BatteryBroadcastReceiverTest {
 
     @Test
     @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
             BatteryFixSliceTest.ShadowBatteryTipLoader.class
     })
     public void testOnReceive_batteryLevelChanged_dataUpdated() {
@@ -93,7 +92,6 @@ public class BatteryBroadcastReceiverTest {
 
     @Test
     @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
             BatteryFixSliceTest.ShadowBatteryTipLoader.class
     })
     public void testOnReceive_batteryHealthChanged_dataUpdated() {
@@ -108,7 +106,6 @@ public class BatteryBroadcastReceiverTest {
 
     @Test
     @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
             BatteryFixSliceTest.ShadowBatteryTipLoader.class
     })
     public void onReceive_batteryNotPresent_shouldShowHelpMessage() {
@@ -121,7 +118,6 @@ public class BatteryBroadcastReceiverTest {
 
     @Test
     @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
             BatteryFixSliceTest.ShadowBatteryTipLoader.class
     })
     public void testOnReceive_powerSaveModeChanged_listenerInvoked() {
@@ -133,7 +129,6 @@ public class BatteryBroadcastReceiverTest {
 
     @Test
     @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
             BatteryFixSliceTest.ShadowBatteryTipLoader.class
     })
     public void testOnReceive_batteryDataNotChanged_listenerNotInvoked() {
@@ -154,7 +149,6 @@ public class BatteryBroadcastReceiverTest {
 
     @Test
     @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
             BatteryFixSliceTest.ShadowBatteryTipLoader.class
     })
     public void testRegister_updateBatteryStatus() {

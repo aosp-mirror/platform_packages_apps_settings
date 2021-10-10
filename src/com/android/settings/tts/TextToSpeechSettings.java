@@ -318,11 +318,15 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         mDefaultRatePref.setProgress(getSeekBarProgressFromValue(KEY_DEFAULT_RATE, mDefaultRate));
         mDefaultRatePref.setOnPreferenceChangeListener(this);
         mDefaultRatePref.setMax(getSeekBarProgressFromValue(KEY_DEFAULT_RATE, MAX_SPEECH_RATE));
+        mDefaultRatePref.setContinuousUpdates(true);
+        mDefaultRatePref.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
 
         mDefaultPitchPref.setProgress(
                 getSeekBarProgressFromValue(KEY_DEFAULT_PITCH, mDefaultPitch));
         mDefaultPitchPref.setOnPreferenceChangeListener(this);
         mDefaultPitchPref.setMax(getSeekBarProgressFromValue(KEY_DEFAULT_PITCH, MAX_SPEECH_PITCH));
+        mDefaultPitchPref.setContinuousUpdates(true);
+        mDefaultPitchPref.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
 
         if (mTts != null) {
             mCurrentEngine = mTts.getCurrentEngine();

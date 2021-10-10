@@ -76,14 +76,14 @@ public class BugReportHandlerUtil {
         int handlerUser = getCustomBugReportHandlerUser(context);
 
         boolean needToResetOutdatedSettings = false;
-        if (!isBugreportWhitelistedApp(handlerApp)) {
+        if (!isBugreportAllowlistedApp(handlerApp)) {
             handlerApp = getDefaultBugReportHandlerApp(context);
             handlerUser = UserHandle.USER_SYSTEM;
         } else if (getBugReportHandlerAppReceivers(context, handlerApp, handlerUser).isEmpty()) {
             // It looks like the settings are outdated, need to reset outdated settings.
             //
             // i.e.
-            // If user chooses which profile and which bugreport-whitelisted app in that
+            // If user chooses which profile and which bugreport-allowlisted app in that
             // profile to handle a bugreport, then user remove the profile.
             // === RESULT ===
             // The chosen bugreport handler app is outdated because the profile is removed,
@@ -93,7 +93,7 @@ public class BugReportHandlerUtil {
             needToResetOutdatedSettings = true;
         }
 
-        if (!isBugreportWhitelistedApp(handlerApp)
+        if (!isBugreportAllowlistedApp(handlerApp)
                 || getBugReportHandlerAppReceivers(context, handlerApp, handlerUser).isEmpty()) {
             // It looks like current handler app may be too old and doesn't support to handle a
             // bugreport, so change to let shell to handle a bugreport and need to reset
@@ -136,7 +136,7 @@ public class BugReportHandlerUtil {
      */
     public boolean setCurrentBugReportHandlerAppAndUser(Context context, String handlerApp,
             int handlerUser) {
-        if (!isBugreportWhitelistedApp(handlerApp)) {
+        if (!isBugreportAllowlistedApp(handlerApp)) {
             return false;
         } else if (getBugReportHandlerAppReceivers(context, handlerApp, handlerUser).isEmpty()) {
             return false;
@@ -155,17 +155,17 @@ public class BugReportHandlerUtil {
     public List<Pair<ApplicationInfo, Integer>> getValidBugReportHandlerInfos(Context context) {
         final List<Pair<ApplicationInfo, Integer>> validBugReportHandlerApplicationInfos =
                 new ArrayList<>();
-        List<String> bugreportWhitelistedPackages;
+        List<String> bugreportAllowlistedPackages;
         try {
-            bugreportWhitelistedPackages =
+            bugreportAllowlistedPackages =
                     ActivityManager.getService().getBugreportWhitelistedPackages();
         } catch (RemoteException e) {
-            Log.e(TAG, "Failed to get bugreportWhitelistedPackages:", e);
+            Log.e(TAG, "Failed to get bugreportAllowlistedPackages:", e);
             return validBugReportHandlerApplicationInfos;
         }
 
         // Add "Shell with system user" as System default preference on top of screen
-        if (bugreportWhitelistedPackages.contains(SHELL_APP_PACKAGE)
+        if (bugreportAllowlistedPackages.contains(SHELL_APP_PACKAGE)
                 && !getBugReportHandlerAppReceivers(context, SHELL_APP_PACKAGE,
                 UserHandle.USER_SYSTEM).isEmpty()) {
             try {
@@ -181,7 +181,7 @@ public class BugReportHandlerUtil {
         final UserManager userManager = context.getSystemService(UserManager.class);
         final List<UserInfo> profileList = userManager.getProfiles(UserHandle.getCallingUserId());
         // Only add non-Shell app as normal preference
-        final List<String> nonShellPackageList = bugreportWhitelistedPackages.stream()
+        final List<String> nonShellPackageList = bugreportAllowlistedPackages.stream()
                 .filter(pkg -> !SHELL_APP_PACKAGE.equals(pkg)).collect(Collectors.toList());
         Collections.sort(nonShellPackageList);
         for (String pkg : nonShellPackageList) {
@@ -202,15 +202,15 @@ public class BugReportHandlerUtil {
         return validBugReportHandlerApplicationInfos;
     }
 
-    private boolean isBugreportWhitelistedApp(String app) {
-        // Verify the app is bugreport-whitelisted
+    private boolean isBugreportAllowlistedApp(String app) {
+        // Verify the app is bugreport-allowlisted
         if (TextUtils.isEmpty(app)) {
             return false;
         }
         try {
             return ActivityManager.getService().getBugreportWhitelistedPackages().contains(app);
         } catch (RemoteException e) {
-            Log.e(TAG, "Failed to get bugreportWhitelistedPackages:", e);
+            Log.e(TAG, "Failed to get bugreportAllowlistedPackages:", e);
             return false;
         }
     }

@@ -22,11 +22,11 @@ import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import android.app.NotificationChannel;
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedSwitchPreference;
-
-import androidx.preference.Preference;
 
 public class HighImportancePreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener  {
@@ -58,6 +58,11 @@ public class HighImportancePreferenceController extends NotificationPreferenceCo
            return false;
         }
         return mChannel.getImportance() >= IMPORTANCE_DEFAULT;
+    }
+
+    @Override
+    boolean isIncludedInFilter() {
+        return mPreferenceFilter.contains(NotificationChannel.EDIT_IMPORTANCE);
     }
 
     @Override

@@ -34,7 +34,6 @@ import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
-import android.os.UserManager;
 import android.security.keystore.KeyProperties;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -43,7 +42,6 @@ import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -62,7 +60,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -72,9 +69,8 @@ import com.android.net.module.util.NetUtils;
 import com.android.net.module.util.ProxyUtils;
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.utils.AndroidKeystoreAliasLoader;
-import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
-import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
@@ -151,6 +147,10 @@ public class WifiConfigController implements TextWatcher,
         UNDESIRED_CERTIFICATE_MACRANDSAPSECRET
     };
 
+    // Should be the same index value as wifi_privacy_entries in arrays.xml
+    @VisibleForTesting static final int PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC = 0;
+    @VisibleForTesting static final int PRIVACY_SPINNER_INDEX_DEVICE_MAC = 1;
+
     /* Phase2 methods supported by PEAP are limited */
     private ArrayAdapter<CharSequence> mPhase2PeapAdapter;
     /* Phase2 methods supported by TTLS are limited */
@@ -167,7 +167,6 @@ public class WifiConfigController implements TextWatcher,
     private String mUseSystemCertsString;
     private String mDoNotProvideEapUserCertString;
 
-    private ScrollView mDialogContainer;
     private Spinner mSecuritySpinner;
     @VisibleForTesting Spinner mEapMethodSpinner;
     @VisibleForTesting Spinner mEapSimSpinner;    // For EAP-SIM, EAP-AKA and EAP-AKA-PRIME.
@@ -275,7 +274,6 @@ public class WifiConfigController implements TextWatcher,
             mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
 
         mSsidScanButton = (ImageButton) mView.findViewById(R.id.ssid_scanner_button);
-        mDialogContainer = mView.findViewById(R.id.dialog_scrollview);
         mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
         mIpSettingsSpinner.setOnItemSelectedListener(this);
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
@@ -312,15 +310,9 @@ public class WifiConfigController implements TextWatcher,
                         ? HIDDEN_NETWORK
                         : NOT_HIDDEN_NETWORK);
 
-                int prefMacValue;
-                if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-                    prefMacValue = WifiPrivacyPreferenceController2
-                            .translateMacRandomizedValueToPrefValue(config.macRandomizationSetting);
-                } else {
-                    prefMacValue = WifiPrivacyPreferenceController
-                            .translateMacRandomizedValueToPrefValue(config.macRandomizationSetting);
-                }
-                mPrivacySettingsSpinner.setSelection(prefMacValue);
+                mPrivacySettingsSpinner.setSelection(
+                        config.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_PERSISTENT
+                        ? PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC : PRIVACY_SPINNER_INDEX_DEVICE_MAC);
 
                 if (config.getIpConfiguration().getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
@@ -451,10 +443,7 @@ public class WifiConfigController implements TextWatcher,
 
             mSsidScanButton.setVisibility(View.GONE);
         }
-
-        if (!isSplitSystemUser()) {
-            mSharedCheckBox.setVisibility(View.GONE);
-        }
+        mSharedCheckBox.setVisibility(View.GONE);
 
         mConfigUi.setCancelButton(res.getString(R.string.wifi_cancel));
         if (mConfigUi.getSubmitButton() != null) {
@@ -465,13 +454,6 @@ public class WifiConfigController implements TextWatcher,
         if (mRequestFocus) {
             mView.findViewById(R.id.l_wifidialog).requestFocus();
         }
-    }
-
-    @VisibleForTesting
-    boolean isSplitSystemUser() {
-        final UserManager userManager =
-                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
-        return userManager.isSplitSystemUser();
     }
 
     private void addRow(ViewGroup group, int name, String value) {
@@ -552,8 +534,9 @@ public class WifiConfigController implements TextWatcher,
         } else {
             enabled = ipAndProxyFieldsAreValid();
         }
-        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP ||
-                mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
+        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
                 && mEapCaCertSpinner != null
                 && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
             String caCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
@@ -569,8 +552,9 @@ public class WifiConfigController implements TextWatcher,
                 enabled = false;
             }
         }
-        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP ||
-                mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
+        if ((mAccessPointSecurity == AccessPoint.SECURITY_EAP
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE
+                || mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B)
                 && mEapUserCertSpinner != null
                 && mView.findViewById(R.id.l_user_cert).getVisibility() != View.GONE
                 && mEapUserCertSpinner.getSelectedItem().equals(mUnspecifiedCertString)) {
@@ -667,10 +651,13 @@ public class WifiConfigController implements TextWatcher,
                 break;
 
             case AccessPoint.SECURITY_EAP:
+            case AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE:
             case AccessPoint.SECURITY_EAP_SUITE_B:
                 if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
                     // allowedSuiteBCiphers will be set according to certificate type
                     config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
+                } else if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE) {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_WPA3_ENTERPRISE);
                 } else {
                     config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
                 }
@@ -836,15 +823,10 @@ public class WifiConfigController implements TextWatcher,
         }
 
         if (mPrivacySettingsSpinner != null) {
-            int macValue;
-            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-                macValue = WifiPrivacyPreferenceController2.translatePrefValueToMacRandomizedValue(
-                        mPrivacySettingsSpinner.getSelectedItemPosition());
-            } else {
-                macValue = WifiPrivacyPreferenceController.translatePrefValueToMacRandomizedValue(
-                        mPrivacySettingsSpinner.getSelectedItemPosition());
-            }
-            config.macRandomizationSetting = macValue;
+            config.macRandomizationSetting = mPrivacySettingsSpinner.getSelectedItemPosition()
+                    == PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC
+                    ? WifiConfiguration.RANDOMIZATION_PERSISTENT
+                    : WifiConfiguration.RANDOMIZATION_NONE;
         }
 
         return config;
@@ -1521,8 +1503,8 @@ public class WifiConfigController implements TextWatcher,
         }
 
         // Shows display name of each active subscription.
-        final String[] displayNames = mActiveSubscriptionInfos.stream().map(
-                SubscriptionInfo::getDisplayName).toArray(String[]::new);
+        final String[] displayNames = SubscriptionUtil.getUniqueSubscriptionDisplayNames(
+                mContext).values().stream().toArray(String[]::new);
         mEapSimSpinner.setAdapter(getSpinnerAdapter(displayNames));
         mEapSimSpinner.setSelection(0 /* position */);
         if (displayNames.length == 1) {
@@ -1732,9 +1714,14 @@ public class WifiConfigController implements TextWatcher,
         if (mWifiManager.isWpa3SaeSupported()) {
             spinnerAdapter.add(mContext.getString(R.string.wifi_security_sae));
             mSecurityInPosition[idx++] = AccessPoint.SECURITY_SAE;
+            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_wpa_wpa2));
+            mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP;
+            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_wpa3));
+            mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP_WPA3_ENTERPRISE;
+        } else {
+            spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap));
+            mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP;
         }
-        spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap));
-        mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP;
         if (mWifiManager.isWpa3SuiteBSupported()) {
             spinnerAdapter.add(mContext.getString(R.string.wifi_security_eap_suiteb));
             mSecurityInPosition[idx++] = AccessPoint.SECURITY_EAP_SUITE_B;

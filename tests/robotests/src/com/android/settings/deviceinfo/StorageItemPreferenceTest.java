@@ -46,15 +46,9 @@ public class StorageItemPreferenceTest {
     }
 
     @Test
-    public void testBeforeLoad() {
-        assertThat(mPreference.getSummary())
-            .isEqualTo(mContext.getString(R.string.memory_calculating_size));
-    }
-
-    @Test
     public void testAfterLoad() {
         mPreference.setStorageSize(MEGABYTE_IN_BYTES * 10, MEGABYTE_IN_BYTES * 100);
-        assertThat(mPreference.getSummary()).isEqualTo("0.01 GB");
+        assertThat(mPreference.getSummary()).isEqualTo("10 MB");
     }
 
     @Test
@@ -68,5 +62,12 @@ public class StorageItemPreferenceTest {
 
         assertThat(progressBar).isNotNull();
         assertThat(progressBar.getProgress()).isEqualTo(10);
+    }
+
+    @Test
+    public void getStorageSize_setStorageSize_getCorrectStorageSize() {
+        mPreference.setStorageSize(MEGABYTE_IN_BYTES, MEGABYTE_IN_BYTES * 10);
+
+        assertThat(mPreference.getStorageSize()).isEqualTo(MEGABYTE_IN_BYTES);
     }
 }

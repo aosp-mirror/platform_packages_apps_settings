@@ -38,19 +38,31 @@
         android:summary="@string/summary_placeholder"
         settings:userRestriction="no_config_date_time"/>
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="auto_zone"
-        android:title="@string/zone_auto_title"
-        settings:allowDividerAbove="true"
-        settings:userRestriction="no_config_date_time"/>
+    <PreferenceCategory
+        android:key="timezone_preference_category"
+        android:title="@string/date_time_set_timezone_title">
 
-    <com.android.settingslib.RestrictedPreference
-        android:key="timezone"
-        android:title="@string/date_time_set_timezone_title"
-        android:summary="@string/summary_placeholder"
-        android:fragment="com.android.settings.datetime.timezone.TimeZoneSettings"
-        settings:userRestriction="no_config_date_time"
-        settings:keywords="@string/keywords_time_zone"/>
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="auto_zone"
+            android:title="@string/zone_auto_title"
+            settings:allowDividerAbove="true"
+            settings:userRestriction="no_config_date_time"/>
+
+        <!-- This preference gets removed if location-based time zone detection is not supported -->
+        <SwitchPreference
+            android:key="location_time_zone_detection"
+            android:title="@string/location_time_zone_detection_toggle_title"
+            settings:controller="com.android.settings.datetime.LocationTimeZoneDetectionPreferenceController"/>
+
+        <com.android.settingslib.RestrictedPreference
+            android:key="timezone"
+            android:title="@string/date_time_set_timezone_title"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.datetime.timezone.TimeZoneSettings"
+            settings:userRestriction="no_config_date_time"
+            settings:keywords="@string/keywords_time_zone"/>
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="time_format_preference_category"

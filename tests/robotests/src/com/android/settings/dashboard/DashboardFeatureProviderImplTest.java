@@ -21,6 +21,8 @@ import static android.content.Intent.EXTRA_USER;
 import static com.android.settingslib.drawer.SwitchesProvider.EXTRA_SWITCH_SET_CHECKED_ERROR;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_ORDER;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_KEY_PROFILE;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON;
+import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_ICON_URI;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_KEYHINT;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY;
 import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SWITCH_URI;
@@ -48,10 +50,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Pair;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -60,6 +64,7 @@ import androidx.preference.SwitchPreference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowTileUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -277,7 +282,7 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    public void bindPreference_noSummary_shouldSetSummaryToPlaceholder() {
+    public void bindPreference_noSummary_shouldSetNullSummary() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         mActivityInfo.metaData.remove(META_DATA_PREFERENCE_SUMMARY);
 
@@ -287,8 +292,7 @@ public class DashboardFeatureProviderImplTest {
                 MetricsEvent.VIEW_UNKNOWN, preference, tile, null /*key */,
                 Preference.DEFAULT_ORDER);
 
-        assertThat(preference.getSummary())
-                .isEqualTo(RuntimeEnvironment.application.getString(R.string.summary_placeholder));
+        assertThat(preference.getSummary()).isNull();
     }
 
     @Test
@@ -401,17 +405,75 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = {ShadowTileUtils.class})
-    public void bindPreference_withIconUri_shouldLoadIconFromContentProvider() {
+    public void bindIcon_withStaticIcon_shouldLoadStaticIcon() {
         final Preference preference = new Preference(RuntimeEnvironment.application);
         mActivityInfo.packageName = RuntimeEnvironment.application.getPackageName();
         final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
         mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
-        mActivityInfo.metaData.putString(TileUtils.META_DATA_PREFERENCE_ICON_URI,
+        mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON, R.drawable.ic_add_40dp);
+
+        mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
+
+        final Bitmap preferenceBmp = Utils.createIconWithDrawable(preference.getIcon()).getBitmap();
+        final Drawable staticIcon = Icon.createWithResource(mActivityInfo.packageName,
+                R.drawable.ic_add_40dp).loadDrawable(preference.getContext());
+        final Bitmap staticIconBmp = Utils.createIconWithDrawable(staticIcon).getBitmap();
+        assertThat(preferenceBmp.sameAs(staticIconBmp)).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {ShadowTileUtils.class})
+    public void bindIcon_withIconUri_shouldLoadIconFromContentProvider() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        mActivityInfo.packageName = RuntimeEnvironment.application.getPackageName();
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_URI,
                 "content://com.android.settings/tile_icon");
+
         mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
 
         assertThat(preference.getIcon()).isNotNull();
+    }
+
+    @Test
+    @Config(shadows = {ShadowTileUtils.class})
+    public void bindIcon_withStaticIconAndIconUri_shouldLoadIconFromContentProvider() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        mActivityInfo.packageName = RuntimeEnvironment.application.getPackageName();
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+        mActivityInfo.metaData.putInt(META_DATA_PREFERENCE_ICON, R.drawable.ic_add_40dp);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_ICON_URI,
+                "content://com.android.settings/tile_icon");
+
+        mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
+
+        final Bitmap preferenceBmp = Utils.createIconWithDrawable(preference.getIcon()).getBitmap();
+        final Drawable staticIcon = Icon.createWithResource(mActivityInfo.packageName,
+                R.drawable.ic_add_40dp).loadDrawable(preference.getContext());
+        final Bitmap staticIconBmp = Utils.createIconWithDrawable(staticIcon).getBitmap();
+        assertThat(preferenceBmp.sameAs(staticIconBmp)).isFalse();
+
+        final Pair<String, Integer> iconInfo = TileUtils.getIconFromUri(
+                mContext, "pkg", null /* uri */, null /* providerMap */);
+        final Drawable iconFromUri = Icon.createWithResource(iconInfo.first, iconInfo.second)
+                .loadDrawable(preference.getContext());
+        final Bitmap iconBmpFromUri = Utils.createIconWithDrawable(iconFromUri).getBitmap();
+        assertThat(preferenceBmp.sameAs(iconBmpFromUri)).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {ShadowTileUtils.class})
+    public void bindIcon_noIcon_shouldNotLoadIcon() {
+        final Preference preference = new Preference(RuntimeEnvironment.application);
+        mActivityInfo.packageName = RuntimeEnvironment.application.getPackageName();
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+
+        mImpl.bindIcon(preference, tile, false /* forceRoundedIcon */);
+
+        assertThat(preference.getIcon()).isNull();
     }
 
     @Test
@@ -582,5 +644,29 @@ public class DashboardFeatureProviderImplTest {
         verify(mActivity, never())
                 .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
         verify(mActivity).getSupportFragmentManager();
+    }
+
+    @Test
+    public void openTileIntent_profileSelectionDialog_unresolvableWorkProfileIntentShouldNotShow() {
+        final int userId = 10;
+        ShadowUserManager.getShadow().addUser(userId, "Someone", 0);
+        final UserHandle userHandle = new UserHandle(userId);
+        final Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        final ArrayList<UserHandle> handles = new ArrayList<>();
+        handles.add(new UserHandle(0));
+        handles.add(userHandle);
+        tile.userHandle = handles;
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), eq(0)))
+                .thenReturn(new ResolveInfo());
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), eq(userId)))
+                .thenReturn(null);
+
+        mImpl.openTileIntent(mActivity, tile);
+
+        final ArgumentCaptor<UserHandle> argument = ArgumentCaptor.forClass(UserHandle.class);
+        verify(mActivity)
+                .startActivityForResultAsUser(any(Intent.class), anyInt(), argument.capture());
+        assertThat(argument.getValue().getIdentifier()).isEqualTo(0);
+        verify(mActivity, never()).getSupportFragmentManager();
     }
 }

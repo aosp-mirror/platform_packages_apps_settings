@@ -23,7 +23,6 @@ import static android.os.UserManager.SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
@@ -35,6 +34,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -62,6 +62,7 @@ import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
@@ -112,6 +113,8 @@ public class UserSettingsTest {
     private RestrictedPreference mAddGuestPreference;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     private FragmentActivity mActivity;
     private Context mContext;
@@ -129,12 +132,13 @@ public class UserSettingsTest {
         mFragment = spy(new UserSettings());
         ReflectionHelpers.setField(mFragment, "mAddUserWhenLockedPreferenceController",
                 mock(AddUserWhenLockedPreferenceController.class));
-        ReflectionHelpers.setField(mFragment, "mMultiUserFooterPreferenceController",
-                mock(MultiUserFooterPreferenceController.class));
+        ReflectionHelpers.setField(mFragment, "mMultiUserTopIntroPreferenceController",
+                mock(MultiUserTopIntroPreferenceController.class));
         ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
         ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
         ReflectionHelpers.setField(mFragment, "mAddingUser", false);
+        ReflectionHelpers.setField(mFragment, "mMetricsFeatureProvider", mMetricsFeatureProvider);
 
         doReturn(mUserManager).when(mActivity).getSystemService(UserManager.class);
 
@@ -170,6 +174,22 @@ public class UserSettingsTest {
     public void testAssignDefaultPhoto_ContextNull_ReturnFalseAndNotCrash() {
         // Should not crash here
         assertThat(UserSettings.assignDefaultPhoto(null, ACTIVE_USER_ID)).isFalse();
+    }
+
+    @Test
+    public void testExitGuest_ShouldLogAction() {
+        mUserCapabilities.mIsGuest = true;
+        mFragment.exitGuest();
+        verify(mMetricsFeatureProvider).action(any(),
+                eq(SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED));
+    }
+
+    @Test
+    public void testExitGuestWhenNotGuest_ShouldNotLogAction() {
+        mUserCapabilities.mIsGuest = false;
+        mFragment.exitGuest();
+        verify(mMetricsFeatureProvider, never()).action(any(),
+                eq(SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED));
     }
 
     @Test
@@ -575,7 +595,7 @@ public class UserSettingsTest {
 
         verify(mUserManager, never()).getUserIcon(anyInt());
         // updateUserList should be called only once
-        verify(mUserManager).getUsers(true);
+        verify(mUserManager).getAliveUsers();
     }
 
     @Test
@@ -592,7 +612,7 @@ public class UserSettingsTest {
 
         verify(mUserManager).getUserIcon(ACTIVE_USER_ID);
         // updateUserList should be called another time after loading the icons
-        verify(mUserManager, times(2)).getUsers(true);
+        verify(mUserManager, times(2)).getAliveUsers();
     }
 
     @Test
@@ -617,6 +637,7 @@ public class UserSettingsTest {
                 .isEqualTo(createdGuest.id);
         assertThat(arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, false))
                 .isEqualTo(true);
+        verify(mMetricsFeatureProvider).action(any(), eq(SettingsEnums.ACTION_USER_GUEST_ADD));
     }
 
     @Test
@@ -672,7 +693,7 @@ public class UserSettingsTest {
     private void givenUsers(UserInfo... userInfo) {
         List<UserInfo> users = Arrays.asList(userInfo);
         doReturn(users).when(mUserManager).getUsers();
-        doReturn(users).when(mUserManager).getUsers(anyBoolean());
+        doReturn(users).when(mUserManager).getAliveUsers();
     }
 
     private static void removeFlag(UserInfo userInfo, int flag) {

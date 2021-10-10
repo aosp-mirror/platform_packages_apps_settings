@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2017 The Android Open Source Project
+  Copyright (C) 2021 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -22,44 +22,38 @@
     <com.android.settingslib.widget.LayoutPreference
         android:key="header_view"
         android:layout="@layout/settings_entity_header"
-        android:selectable="false"
-        android:order="-10000"
-        settings:allowDividerBelow="true"/>
+        android:selectable="false"/>
 
     <com.android.settingslib.widget.ActionButtonsPreference
-        android:key="action_buttons"
-        android:order="-9999"/>
+        android:key="action_buttons"/>
 
     <PreferenceCategory
         android:title="@string/battery_detail_manage_title">
 
-        <com.android.settingslib.RestrictedPreference
-            android:key="background_activity"
-            android:title="@string/background_activity_title"
-            android:selectable="true"
-            settings:userRestriction="no_control_apps"/>
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="unrestricted_pref"
+            android:summary="@string/manager_battery_usage_unrestricted_summary"
+            android:title="@string/manager_battery_usage_unrestricted_title"
+            settings:controller="com.android.settings.fuelgauge.UnrestrictedPreferenceController"/>
 
-        <Preference
-            android:key="battery_optimization"
-            android:title="@string/high_power_apps"
-            android:summary="@string/high_power_off"
-            android:selectable="true"/>
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="optimized_pref"
+            android:summary="@string/manager_battery_usage_optimized_summary"
+            android:title="@string/manager_battery_usage_optimized_title"
+            settings:controller="com.android.settings.fuelgauge.OptimizedPreferenceController"/>
 
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/battery_detail_info_title">
-
-        <Preference
-            android:key="app_usage_foreground"
-            android:title="@string/battery_detail_foreground"
-            android:selectable="false"/>
-
-        <Preference
-            android:key="app_usage_background"
-            android:title="@string/battery_detail_background"
-            android:selectable="false"/>
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="restricted_pref"
+            android:summary="@string/manager_battery_usage_restricted_summary"
+            android:title="@string/manager_battery_usage_restricted_title"
+            settings:controller="com.android.settings.fuelgauge.RestrictedPreferenceController"/>
 
     </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="app_usage_footer_preference"
+        android:title="@string/manager_battery_usage_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

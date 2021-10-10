@@ -37,6 +37,7 @@ import android.os.RemoteException;
 import android.view.IWindowManager;
 import android.widget.Toast;
 
+import com.android.internal.view.IInputMethodManager;
 import com.android.settings.testutils.shadow.ShadowParcel;
 
 import org.junit.After;
@@ -55,6 +56,8 @@ public class WinscopeTraceTest {
     @Mock
     private IWindowManager mWindowManager;
     @Mock
+    private IInputMethodManager mInputMethodManager;
+    @Mock
     private IBinder mSurfaceFlinger;
     @Mock
     private Toast mToast;
@@ -66,6 +69,7 @@ public class WinscopeTraceTest {
         MockitoAnnotations.initMocks(this);
         mWinscopeTrace = spy(new DevelopmentTiles.WinscopeTrace());
         ReflectionHelpers.setField(mWinscopeTrace, "mWindowManager", mWindowManager);
+        ReflectionHelpers.setField(mWinscopeTrace, "mInputMethodManager", mInputMethodManager);
         ReflectionHelpers.setField(mWinscopeTrace, "mSurfaceFlinger", mSurfaceFlinger);
         ReflectionHelpers.setField(mWinscopeTrace, "mToast", mToast);
     }
@@ -78,7 +82,7 @@ public class WinscopeTraceTest {
     @Test
     @Config(shadows = ShadowParcel.class)
     public void wmReturnsTraceEnabled_shouldReturnEnabled() throws RemoteException {
-        // Assume Surface Trace is disabled.
+        // Assume Surface Trace and Input Method Manager are disabled.
         ShadowParcel.sReadBoolResult = false;
         doReturn(true).when(mWindowManager).isWindowTraceEnabled();
         assertThat(mWinscopeTrace.isEnabled()).isTrue();
@@ -87,8 +91,9 @@ public class WinscopeTraceTest {
     @Test
     @Config(shadows = ShadowParcel.class)
     public void sfReturnsTraceEnabled_shouldReturnEnabled() throws RemoteException {
-        // Assume Window Trace is disabled.
+        // Assume Window Trace and Input Method Manager are disabled.
         doReturn(false).when(mWindowManager).isWindowTraceEnabled();
+        doReturn(false).when(mInputMethodManager).isImeTraceEnabled();
         ShadowParcel.sReadBoolResult = true;
         assertThat(mWinscopeTrace.isEnabled()).isTrue();
         verify(mSurfaceFlinger)
@@ -106,14 +111,46 @@ public class WinscopeTraceTest {
     }
 
     @Test
-    public void wmAndSfReturnsTraceDisabled_shouldReturnDisabled() throws RemoteException {
+    public void wmAndSfAndImmReturnTraceDisabled_shouldReturnDisabled() throws RemoteException {
         ShadowParcel.sReadBoolResult = false;
         doReturn(false).when(mWindowManager).isWindowTraceEnabled();
+        doReturn(false).when(mInputMethodManager).isImeTraceEnabled();
         assertThat(mWinscopeTrace.isEnabled()).isFalse();
         verify(mSurfaceFlinger)
                 .transact(eq(SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE), any(), any(),
-                        eq(0 /* flags */));
+                eq(0 /* flags */));
         verifyNoMoreInteractions(mSurfaceFlinger);
+    }
+
+    @Test
+    public void wmAndSfReturnTraceDisabled_immReturnsTraceEnabled_shouldReturnEnabled()
+            throws RemoteException {
+        ShadowParcel.sReadBoolResult = false;
+        doReturn(false).when(mWindowManager).isWindowTraceEnabled();
+        doReturn(true).when(mInputMethodManager).isImeTraceEnabled();
+        assertThat(mWinscopeTrace.isEnabled()).isTrue();
+        verify(mSurfaceFlinger)
+                .transact(eq(SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE), any(), any(),
+                eq(0 /* flags */));
+        verifyNoMoreInteractions(mSurfaceFlinger);
+    }
+
+    @Test
+    @Config(shadows = ShadowParcel.class)
+    public void immReturnsTraceEnabled_shouldReturnEnabled() throws RemoteException {
+        // Assume Window Manager and Surface Trace are disabled.
+        ShadowParcel.sReadBoolResult = false;
+        doReturn(true).when(mInputMethodManager).isImeTraceEnabled();
+        assertThat(mWinscopeTrace.isEnabled()).isTrue();
+    }
+
+    @Test
+    @Config(shadows = ShadowParcel.class)
+    public void immReturnsTraceDisabled_shouldReturnDisabled() throws RemoteException {
+        // Assume Window Manager and Surface Trace are disabled.
+        ShadowParcel.sReadBoolResult = false;
+        doReturn(false).when(mInputMethodManager).isImeTraceEnabled();
+        assertThat(mWinscopeTrace.isEnabled()).isFalse();
     }
 
     @Test
@@ -127,9 +164,10 @@ public class WinscopeTraceTest {
     }
 
     @Test
-    public void sfUnavailableAndWmReturnsTraceDisabled_shouldReturnDisabled()
+    public void sfUnavailableAndWmAndImmReturnTraceDisabled_shouldReturnDisabled()
             throws RemoteException {
         doReturn(false).when(mWindowManager).isWindowTraceEnabled();
+        doReturn(false).when(mInputMethodManager).isImeTraceEnabled();
         ReflectionHelpers.setField(mWinscopeTrace, "mSurfaceFlinger", null);
         assertThat(mWinscopeTrace.isEnabled()).isFalse();
     }
@@ -139,6 +177,13 @@ public class WinscopeTraceTest {
         mWinscopeTrace.setIsEnabled(true);
         verify(mWindowManager).startWindowTrace();
         verifyNoMoreInteractions(mWindowManager);
+    }
+
+    @Test
+    public void setIsEnableTrue_shouldEnableImeTrace() throws RemoteException {
+        mWinscopeTrace.setIsEnabled(true);
+        verify(mInputMethodManager).startImeTrace();
+        verifyNoMoreInteractions(mInputMethodManager);
     }
 
     @Test
@@ -158,6 +203,15 @@ public class WinscopeTraceTest {
         mWinscopeTrace.setIsEnabled(false);
         verify(mWindowManager).stopWindowTrace();
         verifyNoMoreInteractions(mWindowManager);
+        verify(mToast).show();
+    }
+
+    @Test
+    @Config(shadows = ShadowParcel.class)
+    public void setIsEnableFalse_shouldDisableImeTrace() throws RemoteException {
+        mWinscopeTrace.setIsEnabled(false);
+        verify(mInputMethodManager).stopImeTrace();
+        verifyNoMoreInteractions(mInputMethodManager);
         verify(mToast).show();
     }
 
@@ -187,6 +241,17 @@ public class WinscopeTraceTest {
     public void setIsEnableAndWmThrowsRemoteException_shouldFailGracefully()
             throws RemoteException {
         doThrow(new RemoteException("Unknown")).when(mWindowManager).isWindowTraceEnabled();
+        mWinscopeTrace.setIsEnabled(true);
+    }
+
+    /**
+     * Verify when input method manager call throws a remote exception, it is handled without
+     * re-throwing the exception.
+     */
+    @Test
+    public void setIsEnableAndImmThrowsRemoteException_shouldFailGracefully()
+            throws RemoteException {
+        doThrow(new RemoteException("Unknown")).when(mInputMethodManager).isImeTraceEnabled();
         mWinscopeTrace.setIsEnabled(true);
     }
 
