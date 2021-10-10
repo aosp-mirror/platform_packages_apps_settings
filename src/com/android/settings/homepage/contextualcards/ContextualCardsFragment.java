@@ -16,8 +16,6 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-
 import static com.android.settings.homepage.contextualcards.ContextualCardsAdapter.SPAN_COUNT;
 
 import android.app.settings.SettingsEnums;
@@ -36,14 +34,12 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.homepage.contextualcards.slices.BluetoothUpdateWorker;
 import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.slice.ContextualWifiScanWorker;
 
 public class ContextualCardsFragment extends InstrumentedFragment implements
         FocusRecyclerView.FocusListener {
@@ -83,7 +79,6 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         super.onStart();
         registerScreenOffReceiver();
         registerKeyEventReceiver();
-        ContextualWifiScanWorker.newVisibleUiSession();
         mContextualCardManager.loadContextualCards(LoaderManager.getInstance(this),
                 sRestartLoaderNeeded);
         sRestartLoaderNeeded = false;
@@ -108,20 +103,8 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         final View rootView = inflater.inflate(R.layout.settings_homepage, container, false);
         mCardsContainer = rootView.findViewById(R.id.card_container);
         mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT,
-                GridLayoutManager.VERTICAL, false /* reverseLayout */) {
-            @Override
-            public void onLayoutCompleted(RecyclerView.State state) {
-                super.onLayoutCompleted(state);
-                // Once cards finish laying out, make the RV back to wrap content for flexibility.
-                final ViewGroup.LayoutParams params = mCardsContainer.getLayoutParams();
-                if (params.height != WRAP_CONTENT) {
-                    params.height = WRAP_CONTENT;
-                    mCardsContainer.setLayoutParams(params);
-                }
-            }
-        };
+                GridLayoutManager.VERTICAL, false /* reverseLayout */);
         mCardsContainer.setLayoutManager(mLayoutManager);
-        preAllocateHeight(context);
         mContextualCardsAdapter = new ContextualCardsAdapter(context, this /* lifecycleOwner */,
                 mContextualCardManager);
         mCardsContainer.setItemAnimator(null);
@@ -172,25 +155,6 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         sRestartLoaderNeeded = true;
         unregisterScreenOffReceiver();
         FeatureFactory.getFactory(context).getSlicesFeatureProvider().newUiSession();
-    }
-
-    private void preAllocateHeight(Context context) {
-        final int cardCount = ContextualCardLoader.getCardCount(context);
-        if (cardCount != 1) {
-            // only pre-allocate space when card count is one
-            Log.d(TAG, "Skip height pre-allocating. card count = " + cardCount);
-            return;
-        }
-
-        final int preAllocatedHeight = getResources().getDimensionPixelSize(
-                R.dimen.contextual_card_preallocated_height);
-        if (preAllocatedHeight == 0) {
-            return;
-        }
-
-        final ViewGroup.LayoutParams params = mCardsContainer.getLayoutParams();
-        params.height = preAllocatedHeight;
-        mCardsContainer.setLayoutParams(params);
     }
 
     /**

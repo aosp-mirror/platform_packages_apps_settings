@@ -63,6 +63,7 @@ public class SavedDeviceGroupController extends BasePreferenceController
     public void onStart() {
         mBluetoothDeviceUpdater.registerCallback();
         mSavedDockUpdater.registerCallback();
+        mBluetoothDeviceUpdater.refreshPreference();
     }
 
     @Override

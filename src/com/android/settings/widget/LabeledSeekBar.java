@@ -16,6 +16,8 @@
 
 package com.android.settings.widget;
 
+import static android.view.HapticFeedbackConstants.CLOCK_TICK;
+
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -47,6 +49,8 @@ public class LabeledSeekBar extends SeekBar {
 
     /** Labels for discrete progress values. */
     private String[] mLabels;
+
+    private int mLastProgress = -1;
 
     public LabeledSeekBar(Context context, AttributeSet attrs) {
         this(context, attrs, com.android.internal.R.attr.seekBarStyle);
@@ -117,6 +121,10 @@ public class LabeledSeekBar extends SeekBar {
             if (mOnSeekBarChangeListener != null) {
                 mOnSeekBarChangeListener.onProgressChanged(seekBar, progress, fromUser);
                 sendClickEventForAccessibility(progress);
+            }
+            if (progress != mLastProgress) {
+                seekBar.performHapticFeedback(CLOCK_TICK);
+                mLastProgress = progress;
             }
         }
     };

@@ -32,6 +32,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -50,15 +51,15 @@ import java.time.ZoneOffset;
 public class SavedAccessPointsWifiSettings2 extends DashboardFragment
         implements SavedNetworkTracker.SavedNetworkTrackerCallback {
 
-    private static final String TAG = "SavedAccessPoints2";
+    @VisibleForTesting static final String TAG = "SavedAccessPoints2";
 
     // Max age of tracked WifiEntries
     private static final long MAX_SCAN_AGE_MILLIS = 15_000;
     // Interval between initiating SavedNetworkTracker scans
     private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
-    private SavedNetworkTracker mSavedNetworkTracker;
-    private HandlerThread mWorkerThread;
+    @VisibleForTesting SavedNetworkTracker mSavedNetworkTracker;
+    @VisibleForTesting HandlerThread mWorkerThread;
 
     @Override
     public int getMetricsCategory() {

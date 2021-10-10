@@ -31,7 +31,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
+import com.android.settings.deviceinfo.storage.StorageUtils.UnmountTask;
 import com.android.settings.search.actionbar.SearchMenuController;
 
 public class PrivateVolumeUnmount extends InstrumentedFragment {

@@ -117,4 +117,16 @@ public class ManageTrustAgentsPreferenceControllerTest {
                 .isEqualTo(mContext.getResources().getQuantityString(
                         R.plurals.manage_trust_agents_summary_on, 1, 1));
     }
+
+    @Test
+    public void getPreferenceKey_byDefault_returnsDefaultValue() {
+        assertThat(mController.getPreferenceKey()).isEqualTo("manage_trust_agents");
+    }
+
+    @Test
+    public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+        mController = new ManageTrustAgentsPreferenceController(mContext, "key");
+
+        assertThat(mController.getPreferenceKey()).isEqualTo("key");
+    }
 }

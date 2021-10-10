@@ -29,26 +29,23 @@
     <PreferenceCategory
         android:key="important_conversations"
         android:title="@string/important_conversations"
-        android:visibility="gone"
-        settings:allowDividerAbove="false"
-        settings:allowDividerBelow="true" >
-        <Preference
-            android:key="behavior"
-            android:summary="@string/important_conversation_behavior_summary"/>
+        settings:isPreferenceVisible="false" >
         <!-- Important conversations added here -->
         <PreferenceCategory
-            android:key="important_conversations_list"
-            settings:allowDividerAbove="false"
-            settings:allowDividerBelow="false" >
+            android:key="important_conversations_list" >
         </PreferenceCategory>
     </PreferenceCategory>
 
-
-    <!--Other conversations added here -->
+    <!-- Non-priority modified conversations added here -->
     <PreferenceCategory
         android:title="@string/other_conversations"
         android:key="other_conversations"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="false" />
+        settings:isPreferenceVisible="false" />
+
+    <!-- Recent conversations added here -->
+    <PreferenceCategory
+        android:title="@string/recent_conversations"
+        android:key="recent_conversations"
+        settings:isPreferenceVisible="false"/>
 
 </PreferenceScreen>

@@ -37,7 +37,7 @@ import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppChannelsBypassingDndSettings;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.apppreference.AppPreference;
+import com.android.settingslib.widget.AppPreference;
 
 import java.util.ArrayList;
 import java.util.List;

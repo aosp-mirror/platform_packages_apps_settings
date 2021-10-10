@@ -18,7 +18,7 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.role.RoleControllerManager;
+import android.app.role.RoleManager;
 import android.content.Context;
 
 import org.junit.Before;
@@ -37,15 +37,14 @@ public class DefaultPhoneShortcutPreferenceControllerTest {
     private static final String PREFERENCE_KEY = "default_phone_app";
 
     @Mock
-    private RoleControllerManager mRoleControllerManager;
+    private RoleManager mRoleManager;
 
     private DefaultPhoneShortcutPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication.getInstance().setSystemService(Context.ROLE_CONTROLLER_SERVICE,
-                mRoleControllerManager);
+        ShadowApplication.getInstance().setSystemService(Context.ROLE_SERVICE, mRoleManager);
         mController = new DefaultPhoneShortcutPreferenceController(RuntimeEnvironment.application,
                 TEST_PACKAGE_NAME);
     }

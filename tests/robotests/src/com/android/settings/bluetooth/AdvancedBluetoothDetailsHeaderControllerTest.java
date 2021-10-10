@@ -41,7 +41,9 @@ import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
@@ -61,8 +63,12 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     private static final int BATTERY_LEVEL_RIGHT = 45;
     private static final int LOW_BATTERY_LEVEL = 15;
     private static final int CASE_LOW_BATTERY_LEVEL = 19;
+    private static final int LOW_BATTERY_LEVEL_THRESHOLD = 15;
+    private static final int BATTERY_LEVEL_5 = 5;
+    private static final int BATTERY_LEVEL_50 = 50;
     private static final String ICON_URI = "content://test.provider/icon.png";
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
+    private static final String DEVICE_SUMMARY = "test summary";
 
     private Context mContext;
 
@@ -108,7 +114,83 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
+    public void refresh_connectedWatch_behaveAsExpected() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertThat(mLayoutPreference.findViewById(R.id.layout_left).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_right).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_middle).getVisibility()).isEqualTo(
+                View.VISIBLE);
+        // TODO (b/188954766) : clarify settings design
+    }
+
+    @Test
+    public void refresh_connectedWatch_unknownBatteryLevel_shouldNotShowBatteryLevel() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_MAIN_BATTERY)).thenReturn(
+                String.valueOf(BluetoothUtils.META_INT_ERROR).getBytes());
+        when(mBluetoothDevice.getBatteryLevel()).thenReturn(BluetoothDevice.BATTERY_LEVEL_UNKNOWN);
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertThat(mLayoutPreference.findViewById(R.id.layout_left).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_right).getVisibility()).isEqualTo(
+                View.GONE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_middle).getVisibility()).isEqualTo(
+                View.VISIBLE);
+        assertThat(mLayoutPreference.findViewById(R.id.layout_middle)
+                .requireViewById(R.id.bt_battery_summary).getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void refresh_connectedUntetheredHeadset_behaveAsExpected() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_UNTETHERED_HEADSET.getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(false).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_LEFT).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_RIGHT).getBytes());
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY)).thenReturn(
+                String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+
+        mController.refresh();
+
+        assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_left), BATTERY_LEVEL_LEFT);
+        assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_right), BATTERY_LEVEL_RIGHT);
+        assertBatteryLevel(mLayoutPreference.findViewById(R.id.layout_middle), BATTERY_LEVEL_MAIN);
+    }
+
+    @Test
     public void refresh_connected_updateCorrectInfo() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(true).getBytes());
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY)).thenReturn(
                 String.valueOf(BATTERY_LEVEL_LEFT).getBytes());
@@ -148,7 +230,25 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     }
 
     @Test
+    public void refresh_connectedWatch_checkSummary() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_DEVICE_TYPE)).thenReturn(
+                BluetoothDevice.DEVICE_TYPE_WATCH.getBytes());
+        when(mCachedDevice.isConnected()).thenReturn(true);
+        when(mCachedDevice.getConnectionSummary(/* shortSummary= */ true))
+                .thenReturn(DEVICE_SUMMARY);
+
+        mController.refresh();
+
+        assertThat(((TextView) (mLayoutPreference.findViewById(R.id.entity_header_summary)))
+                .getText()).isEqualTo(DEVICE_SUMMARY);
+    }
+
+    @Test
     public void refresh_withLowBatteryAndUncharged_showAlertIcon() {
+        when(mBluetoothDevice.getMetadata(
+                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn(
+                String.valueOf(true).getBytes());
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY)).thenReturn(
                 String.valueOf(LOW_BATTERY_LEVEL).getBytes());
@@ -283,6 +383,68 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
 
         assertThat(mController.mIconCache).isEmpty();
         verify(mBitmap).recycle();
+    }
+
+    @Test
+    public void showBatteryPredictionIfNecessary_estimateReadyIsAvailable_showView() {
+        mController.showBatteryPredictionIfNecessary(1, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_left));
+        mController.showBatteryPredictionIfNecessary(1, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_middle));
+        mController.showBatteryPredictionIfNecessary(1, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_right));
+
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_left),
+                View.VISIBLE);
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_middle),
+                View.VISIBLE);
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_right),
+                View.VISIBLE);
+    }
+
+    @Test
+    public void showBatteryPredictionIfNecessary_estimateReadyIsNotAvailable_notShowView() {
+        mController.showBatteryPredictionIfNecessary(0, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_left));
+        mController.showBatteryPredictionIfNecessary(0, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_middle));
+        mController.showBatteryPredictionIfNecessary(0, 14218009,
+                mLayoutPreference.findViewById(R.id.layout_right));
+
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_left),
+                View.GONE);
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_middle),
+                View.GONE);
+        assertBatteryPredictionVisible(mLayoutPreference.findViewById(R.id.layout_right),
+                View.GONE);
+    }
+
+    @Test
+    public void showBatteryPredictionIfNecessary_estimateReadyIsAvailable_showCorrectValue() {
+        final String leftBatteryPrediction =
+                StringUtil.formatElapsedTime(mContext, 12000000, false, false).toString();
+        final String rightBatteryPrediction =
+                StringUtil.formatElapsedTime(mContext, 1200000, false, false).toString();
+
+        mController.showBatteryPredictionIfNecessary(1, 12000000,
+                mLayoutPreference.findViewById(R.id.layout_left));
+        mController.showBatteryPredictionIfNecessary(1, 1200000,
+                mLayoutPreference.findViewById(R.id.layout_right));
+
+        assertBatteryPrediction(mLayoutPreference.findViewById(R.id.layout_left),
+                leftBatteryPrediction);
+        assertBatteryPrediction(mLayoutPreference.findViewById(R.id.layout_right),
+                rightBatteryPrediction);
+    }
+
+    private void assertBatteryPredictionVisible(LinearLayout linearLayout, int visible) {
+        final TextView textView = linearLayout.findViewById(R.id.bt_battery_prediction);
+        assertThat(textView.getVisibility()).isEqualTo(visible);
+    }
+
+    private void assertBatteryPrediction(LinearLayout linearLayout, String prediction) {
+        final TextView textView = linearLayout.findViewById(R.id.bt_battery_prediction);
+        assertThat(textView.getText().toString()).isEqualTo(prediction);
     }
 
     private void assertBatteryLevel(LinearLayout linearLayout, int batteryLevel) {

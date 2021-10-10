@@ -93,7 +93,7 @@ public class CreateShortcutPreferenceControllerTest {
         final Intent intent = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
                 .setClass(mContext, Settings.ManageApplicationsActivity.class);
         final ResolveInfo ri = mContext.getPackageManager().resolveActivity(intent, 0);
-        final Intent result = mController.createResultIntent(intent, ri, "dummy");
+        final Intent result = mController.createResultIntent(intent, ri, "mock");
 
         assertThat(result.getStringExtra("d1")).isEqualTo("d2");
         assertThat((Object) result.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT)).isNotNull();

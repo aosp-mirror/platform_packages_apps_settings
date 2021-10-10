@@ -51,6 +51,11 @@ public class DeletedChannelsPreferenceController extends NotificationPreferenceC
         return mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid) > 0;
     }
 
+    @Override
+    boolean isIncludedInFilter() {
+        return false;
+    }
+
     public void updateState(Preference preference) {
         if (mAppRow != null) {
             int deletedChannelCount = mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid);

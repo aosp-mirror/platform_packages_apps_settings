@@ -19,35 +19,56 @@ package com.android.settings.accessibility;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import static java.util.Collections.singletonList;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
+import androidx.test.core.app.ApplicationProvider;
+
+import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
+import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowAccessibilityManager;
@@ -55,15 +76,14 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+/** Test for {@link AccessibilitySettings}. */
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilitySettingsTest {
-    private static final String DUMMY_PACKAGE_NAME = "com.dummy.example";
-    private static final String DUMMY_CLASS_NAME = DUMMY_PACKAGE_NAME + ".dummy_a11y_service";
-    private static final ComponentName DUMMY_COMPONENT_NAME = new ComponentName(DUMMY_PACKAGE_NAME,
-            DUMMY_CLASS_NAME);
+    private static final String PACKAGE_NAME = "com.android.test";
+    private static final String CLASS_NAME = PACKAGE_NAME + ".test_a11y_service";
+    private static final ComponentName COMPONENT_NAME = new ComponentName(PACKAGE_NAME, CLASS_NAME);
     private static final int ON = 1;
     private static final int OFF = 0;
     private static final String EMPTY_STRING = "";
@@ -72,24 +92,35 @@ public class AccessibilitySettingsTest {
     private static final String DEFAULT_LABEL = "default label";
     private static final Boolean SERVICE_ENABLED = true;
     private static final Boolean SERVICE_DISABLED = false;
-
-    private Context mContext;
-    private AccessibilitySettings mSettings;
-    private ShadowAccessibilityManager mShadowAccessibilityManager;
-    private AccessibilityServiceInfo mServiceInfo;
+    @Rule
+    public final MockitoRule mocks = MockitoJUnit.rule();
+    @Spy
+    private final Context mContext = ApplicationProvider.getApplicationContext();
+    @Spy
+    private final AccessibilityServiceInfo mServiceInfo = getMockAccessibilityServiceInfo(
+            PACKAGE_NAME, CLASS_NAME);
+    @Spy
+    private final AccessibilitySettings mFragment = new AccessibilitySettings();
     @Mock
     private AccessibilityShortcutInfo mShortcutInfo;
+    @Mock
+    private FragmentActivity mActivity;
+    @Mock
+    private ContentResolver mContentResolver;
+    @Mock
+    private PreferenceManager mPreferenceManager;
+    private ShadowAccessibilityManager mShadowAccessibilityManager;
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
-
-        mContext = spy(RuntimeEnvironment.application);
-        mSettings = spy(new AccessibilitySettings());
-        mServiceInfo = spy(getMockAccessibilityServiceInfo());
         mShadowAccessibilityManager = Shadow.extract(AccessibilityManager.getInstance(mContext));
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
-        doReturn(mContext).when(mSettings).getContext();
+        when(mFragment.getContext()).thenReturn(mContext);
+        when(mFragment.getActivity()).thenReturn(mActivity);
+        when(mActivity.getContentResolver()).thenReturn(mContentResolver);
+        when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
+        when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
+        mContext.setTheme(R.style.Theme_AppCompat);
     }
 
     @Test
@@ -100,6 +131,14 @@ public class AccessibilitySettingsTest {
                 XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_settings);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
+    }
+
+    @Test
+    public void getRawDataToIndex_isNull() {
+        final List<SearchIndexableRaw> indexableRawList =
+                AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
+
+        assertThat(indexableRawList).isNull();
     }
 
     @Test
@@ -216,11 +255,11 @@ public class AccessibilitySettingsTest {
 
     @Test
     public void createAccessibilityServicePreferenceList_hasOneInfo_containsSameKey() {
-        final String key = DUMMY_COMPONENT_NAME.flattenToString();
+        final String key = COMPONENT_NAME.flattenToString();
         final AccessibilitySettings.RestrictedPreferenceHelper helper =
                 new AccessibilitySettings.RestrictedPreferenceHelper(mContext);
         final List<AccessibilityServiceInfo> infoList = new ArrayList<>(
-                Collections.singletonList(mServiceInfo));
+                singletonList(mServiceInfo));
 
         final List<RestrictedPreference> preferenceList =
                 helper.createAccessibilityServicePreferenceList(infoList);
@@ -231,12 +270,12 @@ public class AccessibilitySettingsTest {
 
     @Test
     public void createAccessibilityActivityPreferenceList_hasOneInfo_containsSameKey() {
-        final String key = DUMMY_COMPONENT_NAME.flattenToString();
+        final String key = COMPONENT_NAME.flattenToString();
         final AccessibilitySettings.RestrictedPreferenceHelper helper =
                 new AccessibilitySettings.RestrictedPreferenceHelper(mContext);
         setMockAccessibilityShortcutInfo(mShortcutInfo);
         final List<AccessibilityShortcutInfo> infoList = new ArrayList<>(
-                Collections.singletonList(mShortcutInfo));
+                singletonList(mShortcutInfo));
 
         final List<RestrictedPreference> preferenceList =
                 helper.createAccessibilityActivityPreferenceList(infoList);
@@ -245,21 +284,94 @@ public class AccessibilitySettingsTest {
         assertThat(preference.getKey()).isEqualTo(key);
     }
 
-    private AccessibilityServiceInfo getMockAccessibilityServiceInfo() {
+    @Test
+    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
+    public void onCreate_haveRegisterToSpecificUrisAndActions() {
+        final ArgumentCaptor<IntentFilter> captor = ArgumentCaptor.forClass(IntentFilter.class);
+        final IntentFilter intentFilter;
+        mFragment.onAttach(mContext);
+
+        mFragment.onCreate(Bundle.EMPTY);
+
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS)),
+                anyBoolean(),
+                any(SettingsContentObserver.class));
+        verify(mContentResolver).registerContentObserver(eq(Settings.Secure.getUriFor(
+                Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)), anyBoolean(),
+                any(SettingsContentObserver.class));
+        verify(mActivity, atLeast(1)).registerReceiver(any(PackageMonitor.class), captor.capture(),
+                isNull(), any());
+        intentFilter = captor.getAllValues().get(/* first time */ 0);
+        assertThat(intentFilter.hasAction(Intent.ACTION_PACKAGE_ADDED)).isTrue();
+        assertThat(intentFilter.hasAction(Intent.ACTION_PACKAGE_REMOVED)).isTrue();
+    }
+
+    @Test
+    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
+    public void onDestroy_unregisterObserverAndReceiver() {
+        setupFragment();
+        mFragment.onPause();
+        mFragment.onStop();
+
+        mFragment.onDestroy();
+
+        verify(mContentResolver).unregisterContentObserver(any(SettingsContentObserver.class));
+        verify(mActivity).unregisterReceiver(any(PackageMonitor.class));
+
+    }
+
+    @Test
+    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
+    public void onContentChanged_updatePreferenceInForeground_preferenceUpdated() {
+        setupFragment();
+        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
+                singletonList(mServiceInfo));
+
+        mFragment.onContentChanged();
+
+        RestrictedPreference preference = mFragment.getPreferenceScreen().findPreference(
+                COMPONENT_NAME.flattenToString());
+
+        assertThat(preference).isNotNull();
+
+    }
+
+    @Test
+    @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
+    public void onContentChanged_updatePreferenceInBackground_preferenceUpdated() {
+        setupFragment();
+        mFragment.onPause();
+        mFragment.onStop();
+
+        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
+                singletonList(mServiceInfo));
+
+        mFragment.onContentChanged();
+        mFragment.onStart();
+
+        RestrictedPreference preference = mFragment.getPreferenceScreen().findPreference(
+                COMPONENT_NAME.flattenToString());
+
+        assertThat(preference).isNotNull();
+
+    }
+
+    private AccessibilityServiceInfo getMockAccessibilityServiceInfo(String packageName,
+            String className) {
         final ApplicationInfo applicationInfo = new ApplicationInfo();
         final ServiceInfo serviceInfo = new ServiceInfo();
-        applicationInfo.packageName = DUMMY_PACKAGE_NAME;
-        serviceInfo.packageName = DUMMY_PACKAGE_NAME;
-        serviceInfo.name = DUMMY_CLASS_NAME;
+        applicationInfo.packageName = packageName;
+        serviceInfo.packageName = packageName;
+        serviceInfo.name = className;
         serviceInfo.applicationInfo = applicationInfo;
 
         final ResolveInfo resolveInfo = new ResolveInfo();
         resolveInfo.serviceInfo = serviceInfo;
-
         try {
             final AccessibilityServiceInfo info = new AccessibilityServiceInfo(resolveInfo,
                     mContext);
-            info.setComponentName(DUMMY_COMPONENT_NAME);
+            info.setComponentName(new ComponentName(packageName, className));
             return info;
         } catch (XmlPullParserException | IOException e) {
             // Do nothing
@@ -274,11 +386,18 @@ public class AccessibilitySettingsTest {
         when(activityInfo.loadLabel(any())).thenReturn(DEFAULT_LABEL);
         when(mockInfo.loadSummary(any())).thenReturn(DEFAULT_SUMMARY);
         when(mockInfo.loadDescription(any())).thenReturn(DEFAULT_DESCRIPTION);
-        when(mockInfo.getComponentName()).thenReturn(DUMMY_COMPONENT_NAME);
+        when(mockInfo.getComponentName()).thenReturn(COMPONENT_NAME);
     }
 
     private void setInvisibleToggleFragmentType(AccessibilityServiceInfo info) {
         info.getResolveInfo().serviceInfo.applicationInfo.targetSdkVersion = Build.VERSION_CODES.R;
         info.flags |= AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON;
+    }
+
+    private void setupFragment() {
+        mFragment.onAttach(mContext);
+        mFragment.onCreate(Bundle.EMPTY);
+        mFragment.onStart();
+        mFragment.onResume();
     }
 }

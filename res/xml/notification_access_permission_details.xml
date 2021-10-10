@@ -17,11 +17,58 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="notification_access_permission_detail_settings"
     android:title="@string/manage_notification_access_title">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="pref_app_header"
+        android:layout="@layout/settings_entity_header"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.HeaderPreferenceController"/>
+
     <com.android.settings.widget.FilterTouchesSwitchPreference
         android:key="notification_access_switch"
-        android:title="@string/notification_access_detail_switch"/>
+        android:title="@string/notification_access_detail_switch"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.ApprovalPreferenceController"/>
+
+    <CheckBoxPreference
+        android:key="type_filter_ongoing"
+        android:title="@string/notif_type_ongoing"
+        android:summary="@string/notif_type_ongoing_summary"
+        android:icon="@drawable/ic_ongoing_notification"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.OngoingTypeFilterPreferenceController"/>
+    <CheckBoxPreference
+        android:key="type_filter_conversation"
+        android:title="@string/notif_type_conversation"
+        android:summary="@string/notif_type_conversation_summary"
+        android:icon="@drawable/ic_promote_conversation"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.ConversationTypeFilterPreferenceController"/>
+    <CheckBoxPreference
+        android:key="type_filter_alerting"
+        android:title="@string/notif_type_alerting"
+        android:summary="@string/notif_type_alerting_summary"
+        android:icon="@drawable/ic_notification_alert"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.AlertingTypeFilterPreferenceController"/>
+    <CheckBoxPreference
+        android:key="type_filter_silent"
+        android:title="@string/notif_type_silent"
+        android:summary="@string/notif_type_silent_summary"
+        android:icon="@drawable/ic_notification_silence"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.SilentTypeFilterPreferenceController"/>
+
+    <Preference
+        android:key="bridged_apps"
+        android:title="@string/notif_listener_excluded_app_title"
+        android:summary="@string/notif_listener_excluded_app_summary"
+        android:fragment="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsSettings"
+        settings:searchable="false"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.BridgedAppsLinkPreferenceController" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="notif_listener_not_migrated"
+        android:title="@string/notif_listener_not_migrated"
+        settings:controller="com.android.settings.applications.specialaccess.notificationaccess.PreUpgradePreferenceController"
+        android:selectable="false"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

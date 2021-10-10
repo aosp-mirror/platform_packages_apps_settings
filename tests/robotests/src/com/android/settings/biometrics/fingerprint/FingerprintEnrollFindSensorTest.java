@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.RuntimeEnvironment.application;
 
@@ -30,7 +31,6 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
 import android.os.CancellationSignal;
-import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
@@ -152,8 +152,8 @@ public class FingerprintEnrollFindSensorTest {
                 any(byte[].class),
                 any(CancellationSignal.class),
                 anyInt(),
-                anyInt(),
-                callbackCaptor.capture());
+                callbackCaptor.capture(),
+                eq(FingerprintManager.ENROLL_FIND_SENSOR));
 
         return callbackCaptor.getValue();
     }

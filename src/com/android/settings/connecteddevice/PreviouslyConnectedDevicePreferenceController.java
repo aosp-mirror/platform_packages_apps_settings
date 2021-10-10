@@ -103,6 +103,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
             final Context context = screen.getContext();
             mBluetoothDeviceUpdater.setPrefContext(context);
             mSavedDockUpdater.setPreferenceContext(context);
+            mBluetoothDeviceUpdater.forceUpdate();
         }
     }
 
@@ -111,6 +112,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         mBluetoothDeviceUpdater.registerCallback();
         mSavedDockUpdater.registerCallback();
         mContext.registerReceiver(mReceiver, mIntentFilter);
+        mBluetoothDeviceUpdater.refreshPreference();
     }
 
     @Override
@@ -144,7 +146,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     private void addPreference(int index, Preference preference) {
         if (preference instanceof BluetoothDevicePreference) {
-            if (mDevicesList.size() >= index) {
+            if (index >= 0 && mDevicesList.size() >= index) {
                 mDevicesList.add(index, preference);
             } else {
                 mDevicesList.add(preference);

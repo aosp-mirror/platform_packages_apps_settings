@@ -58,8 +58,10 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 
 import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
@@ -70,6 +72,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+
+import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
@@ -88,6 +92,8 @@ public class SimSelectNotificationTest {
     private Resources mResources;
     @Mock
     private SubscriptionInfo mSubInfo;
+    @Mock
+    private DisplayMetrics mDisplayMetrics;
 
     private final String mFakeDisplayName = "fake_display_name";
     private final CharSequence mFakeNotificationChannelTitle = "fake_notification_channel_title";
@@ -113,6 +119,7 @@ public class SimSelectNotificationTest {
                 .thenReturn(mNotificationManager);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE))
                 .thenReturn(mSubscriptionManager);
         when(mContext.getApplicationInfo()).thenReturn(new ApplicationInfo());
@@ -122,8 +129,11 @@ public class SimSelectNotificationTest {
 
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         when(mTelephonyManager.isDataEnabledForApn(TYPE_MMS)).thenReturn(false);
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(mSubInfo));
+        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(mSubInfo));
         when(mSubscriptionManager.isActiveSubscriptionId(mSubId)).thenReturn(true);
         when(mSubscriptionManager.getActiveSubscriptionInfo(mSubId)).thenReturn(mSubInfo);
+        when(mSubInfo.getSubscriptionId()).thenReturn(mSubId);
         when(mSubInfo.getDisplayName()).thenReturn(mFakeDisplayName);
         when(mContext.getResources()).thenReturn(mResources);
 
@@ -140,6 +150,9 @@ public class SimSelectNotificationTest {
                 .thenReturn(mFakeDualCdmaWarningTitle);
         when(mResources.getString(R.string.dual_cdma_sim_warning_notification_summary,
                 mSimCombinationName)).thenReturn(mFakeDualCdmaWarningSummary);
+
+        when(mResources.getDisplayMetrics()).thenReturn(mDisplayMetrics);
+        mDisplayMetrics.density = 1.5f;
     }
 
     @Test
@@ -274,4 +287,3 @@ public class SimSelectNotificationTest {
         assertThat(notification.getValue().contentIntent).isNotNull();
     }
 }
-

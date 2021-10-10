@@ -42,9 +42,9 @@
     <!-- Factory reset -->
     <com.android.settingslib.RestrictedPreference
         android:key="factory_reset"
-        android:title="@string/master_clear_title"
+        android:title="@string/main_clear_title"
         settings:keywords="@string/keywords_factory_data_reset"
         settings:userRestriction="no_factory_reset"
         settings:useAdminDisabledSummary="true"
-        android:fragment="com.android.settings.MasterClear" />
+        android:fragment="com.android.settings.MainClear" />
 </PreferenceScreen>

@@ -30,15 +30,6 @@
         android:clipToPadding="false"
         android:clipChildren="false">
 
-        <TextView
-            android:id="@+id/sud_layout_description"
-            style="@style/SudDescription.Glif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/sud_description_glif_margin_top"
-            android:minLines="3"
-            android:text="@string/security_settings_fingerprint_enroll_finish_message"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -61,6 +52,7 @@
                     android:layout_height="match_parent"
                     android:padding="7dp"
                     android:contentDescription="@android:string/fingerprint_icon_content_description"
+                    android:importantForAccessibility="no"
                     android:src="@drawable/fingerprint_enroll_finish" />
             </com.google.android.setupdesign.view.FillContentLayout>
 

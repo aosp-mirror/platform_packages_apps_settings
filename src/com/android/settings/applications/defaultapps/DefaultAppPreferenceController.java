@@ -16,7 +16,7 @@
 
 package com.android.settings.applications.defaultapps;
 
-import static com.android.settingslib.TwoTargetPreference.ICON_SIZE_MEDIUM;
+import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM;
 
 import android.content.Context;
 import android.content.Intent;
@@ -33,9 +33,9 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
-import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 public abstract class DefaultAppPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -65,11 +65,19 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
             ((TwoTargetPreference) preference).setIconSize(ICON_SIZE_MEDIUM);
         }
         if (!TextUtils.isEmpty(defaultAppLabel)) {
-            preference.setSummary(defaultAppLabel);
-            Utils.setSafeIcon(preference, getDefaultAppIcon());
+            if (showLabelAsTitle()) {
+                preference.setTitle(defaultAppLabel);
+            } else {
+                preference.setSummary(defaultAppLabel);
+            }
+            preference.setIcon(Utils.getSafeIcon(getDefaultAppIcon()));
         } else {
             Log.d(TAG, "No default app");
-            preference.setSummary(R.string.app_list_preference_none);
+            if (showLabelAsTitle()) {
+                preference.setTitle(R.string.app_list_preference_none);
+            } else {
+                preference.setSummary(R.string.app_list_preference_none);
+            }
             preference.setIcon(null);
         }
         mayUpdateGearIcon(app, preference);
@@ -100,6 +108,13 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
     protected Intent getSettingIntent(DefaultAppInfo info) {
         //By default return null. It's up to subclasses to provide logic.
         return null;
+    }
+
+    /**
+     * Whether to show the default app label as the title, instead of as the summary.
+     */
+    protected boolean showLabelAsTitle() {
+        return false;
     }
 
     public Drawable getDefaultAppIcon() {

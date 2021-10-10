@@ -38,7 +38,7 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.settings.R;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (MediaOutputSliceConstants.ACTION_CLOSE_PANEL.equals(intent.getAction())) {
+            if (MediaOutputConstants.ACTION_CLOSE_PANEL.equals(intent.getAction())) {
                 mCallback.forceClose();
             }
         }
@@ -73,7 +73,7 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
         final IntentFilter filter = new IntentFilter();
-        filter.addAction(MediaOutputSliceConstants.ACTION_CLOSE_PANEL);
+        filter.addAction(MediaOutputConstants.ACTION_CLOSE_PANEL);
         mContext.registerReceiver(mReceiver, filter);
     }
 

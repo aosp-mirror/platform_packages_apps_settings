@@ -19,6 +19,7 @@ package com.android.settings.wifi.tether;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -75,9 +76,9 @@ public class WifiTetherPasswordPreferenceControllerTest {
                 .setPassphrase(INITIAL_PASSWORD, SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)
                 .build();
 
-        when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
+        doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mConfig);
-        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
+        doReturn(mTetheringManager).when(mContext).getSystemService(TetheringManager.class);
         when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
         when(mContext.getResources()).thenReturn(RuntimeEnvironment.application.getResources());
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);

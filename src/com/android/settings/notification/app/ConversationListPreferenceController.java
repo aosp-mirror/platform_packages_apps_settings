@@ -18,7 +18,6 @@ package com.android.settings.notification.app;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -34,6 +33,7 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.AppPreference;
 
 import java.text.Collator;
 import java.util.Comparator;
@@ -63,20 +63,18 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
 
     protected void populateList(List<ConversationChannelWrapper> conversations,
             PreferenceGroup containerGroup) {
-        // TODO: if preference has children, compare with newly loaded list
+        containerGroup.setVisible(false);
         containerGroup.removeAll();
         if (conversations != null) {
             populateConversations(conversations, containerGroup);
         }
 
-        if (containerGroup.getPreferenceCount() == 0) {
-            containerGroup.setVisible(false);
-        } else {
-            containerGroup.setVisible(true);
+        if (containerGroup.getPreferenceCount() != 0) {
             Preference summaryPref = getSummaryPreference();
             if (summaryPref != null) {
                 containerGroup.addPreference(summaryPref);
             }
+            containerGroup.setVisible(true);
         }
     }
 
@@ -98,7 +96,7 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
 
     protected Preference createConversationPref(final ConversationChannelWrapper conversation,
             int order) {
-        Preference pref = new Preference(mContext);
+        AppPreference pref = new AppPreference(mContext);
         pref.setOrder(order);
 
         pref.setTitle(getTitle(conversation));
@@ -163,8 +161,16 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
                         return o1.getNotificationChannel().getId().compareTo(
                                 o2.getNotificationChannel().getId());
                     }
-                    return sCollator.compare(o1.getShortcutInfo().getLabel(),
-                            o2.getShortcutInfo().getLabel());
+                    if (o1.getShortcutInfo().getLabel() == null
+                            && o2.getShortcutInfo().getLabel() != null) {
+                        return 1;
+                    }
+                    if (o1.getShortcutInfo().getLabel() != null
+                            && o2.getShortcutInfo().getLabel() == null) {
+                        return -1;
+                    }
+                    return sCollator.compare(o1.getShortcutInfo().getLabel().toString(),
+                            o2.getShortcutInfo().getLabel().toString());
                 }
             };
 }

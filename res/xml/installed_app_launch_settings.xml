@@ -16,31 +16,54 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/launch_by_default">
 
-    <PreferenceCategory android:key="app_launch_domain_links"
-                        android:title="@string/app_launch_domain_links_title">
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="open_by_default_supported_links"
+        android:title="@string/app_launch_open_domain_urls_title"/>
 
-        <Preference
-            android:key="app_link_state"
-            android:summary="@string/summary_placeholder"
-            android:title="@string/app_launch_open_domain_urls_title"/>
+    <PreferenceCategory
+        android:layout="@layout/preference_category_no_label"
+        android:key="open_by_default_main_category"
+        settings:searchable="false">
 
-        <com.android.settings.applications.AppDomainsPreference
-            android:key="app_launch_supported_domain_urls"
-            android:title="@string/app_launch_supported_domain_urls_title"
-            android:dependency="app_link_state"
-        />
+        <PreferenceCategory
+            android:title="@string/app_launch_links_category">
+
+            <com.android.settings.applications.intentpicker.VerifiedLinksPreference
+                android:key="open_by_default_verified_links"
+                android:title="@string/summary_placeholder"
+                android:order="-100"
+                settings:searchable="false"/>
+
+            <PreferenceCategory
+                android:layout="@layout/preference_category_no_label"
+                android:key="open_by_default_selected_links_category"
+                android:order="100"
+                settings:searchable="false"/>
+
+            <Preference
+                android:key="open_by_default_add_link"
+                android:title="@string/app_launch_add_link"
+                android:order="300"
+                android:icon="@drawable/ic_add_24dp"/>
+
+        </PreferenceCategory>
+
+        <PreferenceCategory android:key="app_launch_other_defaults"
+                            android:title="@string/app_launch_other_defaults_title">
+
+            <com.android.settings.applications.ClearDefaultsPreference
+                android:key="app_launch_clear_defaults"
+                android:selectable="false"/>
+
+        </PreferenceCategory>
+
+        <com.android.settingslib.widget.FooterPreference
+            android:key="open_by_default_footer"
+            android:selectable="false"
+            settings:searchable="false"/>
 
     </PreferenceCategory>
-
-    <PreferenceCategory android:key="app_launch_other_defaults"
-                        android:title="@string/app_launch_other_defaults_title">
-
-        <com.android.settings.applications.ClearDefaultsPreference
-            android:key="app_launch_clear_defaults"
-            android:selectable="false"/>
-
-    </PreferenceCategory>
-
 </PreferenceScreen>

@@ -16,7 +16,7 @@
 
 package com.android.settings.panel;
 
-import static com.android.settingslib.media.MediaOutputSliceConstants.EXTRA_PACKAGE_NAME;
+import static com.android.settingslib.media.MediaOutputConstants.EXTRA_PACKAGE_NAME;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -35,7 +35,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.core.HideNonSystemOverlayMixin;
+import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 /**
  * Dialog Activity to host Settings Slices.
