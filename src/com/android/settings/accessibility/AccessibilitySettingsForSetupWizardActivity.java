@@ -32,11 +32,13 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.accessibility.AccessibilityScreenSizeForSetupWizardActivity.FragmentType;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.transition.SettingsTransitionHelper;
+import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
@@ -127,8 +129,8 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
                 getIntent().getComponent())) {
             final Intent intent = new Intent(this,
                     AccessibilityScreenSizeForSetupWizardActivity.class);
-            intent.putExtra(VISION_FRAGMENT_NO,
-                    getResources().getInteger(R.integer.suw_font_size_fragment_no));
+            intent.putExtra(VISION_FRAGMENT_NO, FragmentType.FONT_SIZE);
+            intent.putExtra(EXTRA_PAGE_TRANSITION_TYPE, TransitionType.TRANSITION_FADE);
             startActivity(intent);
             Log.d(LOG_TAG, "Launch font size settings");
             finish();
