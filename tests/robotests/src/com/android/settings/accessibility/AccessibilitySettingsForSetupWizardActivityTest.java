@@ -27,6 +27,7 @@ import android.content.Intent;
 import androidx.test.filters.SmallTest;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityScreenSizeForSetupWizardActivity.FragmentType;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -66,7 +67,7 @@ public class AccessibilitySettingsForSetupWizardActivityTest {
         final Intent launchIntent = Shadows.shadowOf(activity).getNextStartedActivity();
         assertThat(launchIntent).isNotNull();
         assertThat(launchIntent.getIntExtra(VISION_FRAGMENT_NO, -1)).isEqualTo(
-                activity.getResources().getInteger(R.integer.suw_font_size_fragment_no));
+                FragmentType.FONT_SIZE);
         assertThat(activity.isFinishing()).isTrue();
     }
 
