@@ -18,96 +18,56 @@
 <!-- Used in phone portrait and tablet, as referenced in alias.xml. -->
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:icon="@drawable/ic_lock"
-    android:layout="@layout/sud_glif_blank_template"
-    settings:sucHeaderText="@string/lockpassword_choose_your_screen_lock_header">
+    android:icon="@drawable/ic_lock">
 
+    <!-- takes up all space above button bar at bottom -->
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
+        style="@style/SudContentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp">
 
-        <LinearLayout
-            style="@style/SudGlifHeaderContainer"
+        <TextView
+            android:id="@+id/headerText"
+            style="@style/SudDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/sud_layout_icon"
-                style="@style/SudGlifIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_lock" />
-
-            <TextView
-                android:id="@+id/suc_layout_title"
-                style="@style/SudGlifHeaderTitle"
-                android:accessibilityLiveRegion="polite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <!-- takes up all space above button bar at bottom -->
-        <LinearLayout
-            style="@style/SudContentFrame"
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1"
+            android:minLines="2"
             android:gravity="center"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp">
+            android:paddingStart="?attr/sudMarginStart"
+            android:paddingEnd="?attr/sudMarginEnd"
+            android:fontFamily="@*android:string/config_headlineFontFamily" />
 
-            <TextView
-                android:id="@+id/sud_layout_description"
-                style="@style/SudDescription.Glif"
+        <com.google.android.setupdesign.view.FillContentLayout
+            style="@style/LockPatternContainerStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.android.internal.widget.LockPatternView
+                android:id="@+id/lockPattern"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="?attr/sudMarginSides"
-                android:minLines="2" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center"/>
 
-            <TextView android:id="@+id/headerText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minLines="2"
-                android:gravity="center"
-                android:paddingHorizontal="?attr/sudMarginSides"
-                android:textSize="12sp" />
-
-            <com.google.android.setupdesign.view.FillContentLayout
-                style="@style/LockPatternContainerStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <com.android.internal.widget.LockPatternView
-                    android:id="@+id/lockPattern"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center" />
-
-            </com.google.android.setupdesign.view.FillContentLayout>
-
-        </LinearLayout>
+        </com.google.android.setupdesign.view.FillContentLayout>
 
         <TextView android:id="@+id/footerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:minHeight="50dip"
-            android:textSize="14sp"
-            android:visibility="gone"/>
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:minHeight="50dip"
+                  android:textSize="14sp"
+                  android:visibility="gone"/>
 
         <Button
             android:id="@+id/screen_lock_options"
@@ -115,8 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/setup_lock_settings_options_button_label"
-            android:visibility="gone" />
-
+            android:visibility="gone"/>
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 
 </com.google.android.setupdesign.GlifLayout>

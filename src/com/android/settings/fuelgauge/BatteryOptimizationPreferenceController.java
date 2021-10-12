@@ -27,7 +27,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 /**
  * Controller that jumps to high power optimization fragment
@@ -38,7 +38,7 @@ public class BatteryOptimizationPreferenceController extends AbstractPreferenceC
     private static final String KEY_BACKGROUND_ACTIVITY = "battery_optimization";
 
 
-    private PowerWhitelistBackend mBackend;
+    private PowerAllowlistBackend mBackend;
     private DashboardFragment mFragment;
     private SettingsActivity mSettingsActivity;
     private String mPackageName;
@@ -49,12 +49,12 @@ public class BatteryOptimizationPreferenceController extends AbstractPreferenceC
         mFragment = fragment;
         mSettingsActivity = settingsActivity;
         mPackageName = packageName;
-        mBackend = PowerWhitelistBackend.getInstance(mSettingsActivity);
+        mBackend = PowerAllowlistBackend.getInstance(mSettingsActivity);
     }
 
     @VisibleForTesting
     BatteryOptimizationPreferenceController(SettingsActivity settingsActivity,
-            DashboardFragment fragment, String packageName, PowerWhitelistBackend backend) {
+            DashboardFragment fragment, String packageName, PowerAllowlistBackend backend) {
         super(settingsActivity);
         mFragment = fragment;
         mSettingsActivity = settingsActivity;
@@ -69,8 +69,9 @@ public class BatteryOptimizationPreferenceController extends AbstractPreferenceC
 
     @Override
     public void updateState(Preference preference) {
-        final boolean isWhitelisted = mBackend.isWhitelisted(mPackageName);
-        preference.setSummary(isWhitelisted ? R.string.high_power_on : R.string.high_power_off);
+        mBackend.refreshList();
+        final boolean isAllowlisted = mBackend.isAllowlisted(mPackageName);
+        preference.setSummary(isAllowlisted ? R.string.high_power_on : R.string.high_power_off);
     }
 
     @Override

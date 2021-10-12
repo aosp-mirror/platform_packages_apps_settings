@@ -33,18 +33,4 @@ public class TopLevelDisplayPreferenceController extends BasePreferenceControlle
         ? AVAILABLE
         : UNSUPPORTED_ON_DEVICE;
     }
-
-    @Override
-    public CharSequence getSummary() {
-        final WallpaperPreferenceController controller =
-                new WallpaperPreferenceController(mContext, "dummy_key");
-        if (controller.isAvailable()) {
-            return mContext.getText(
-                    controller.areStylesAvailable()
-                    ? R.string.display_dashboard_summary_with_style
-                    : R.string.display_dashboard_summary);
-        } else {
-            return mContext.getText(R.string.display_dashboard_nowallpaper_summary);
-        }
-    }
 }

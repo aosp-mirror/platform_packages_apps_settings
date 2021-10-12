@@ -33,7 +33,7 @@
         android:layout_gravity="center_vertical"
         android:focusable="false"
         android:clickable="false"
-        android:checked="true"
+        android:checked="false"
         android:duplicateParentState="true"/>
 
     <LinearLayout
@@ -43,13 +43,13 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/TextAppearance.SudGlifItemTitle"
+            style="@style/TextAppearance.PreferenceTitle.SettingsLib"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reset_esim_title"/>
 
         <TextView
-            style="@style/TextAppearance.SudGlifItemSummary"
+            style="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/reset_esim_desc"/>

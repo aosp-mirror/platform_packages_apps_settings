@@ -20,17 +20,26 @@
     android:title="@string/night_display_title"
     settings:keywords="@string/keywords_display_night_display">
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="night_display_top_intro"
+        android:title="@string/night_display_text"
+        settings:controller="com.android.settings.display.NightDisplayTopIntroPreferenceController"/>
+
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="night_display_activated"
+        android:title="@string/night_light_main_switch_title"
+        settings:controller="com.android.settings.display.NightDisplayActivationPreferenceController"/>
+
+    <com.android.settingslib.widget.BannerMessagePreference
         android:key="dark_ui_location_off"
-        android:selectable="false"
-        android:layout="@layout/twilight_mode_location_off"
-        settings:controller="com.android.settings.display.TwilightLocationPreferenceController"
-        settings:allowDividerBelow="true"/>
+        android:title="@string/twilight_mode_location_off_dialog_message"
+        settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
 
     <DropDownPreference
         android:key="night_display_auto_mode"
         android:title="@string/night_display_auto_mode_title"
         android:summary="%s"
+        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.display.NightDisplayAutoModePreferenceController"/>
 
     <Preference
@@ -49,21 +58,5 @@
         settings:keywords="@string/keywords_display_night_display"
         settings:controller="com.android.settings.display.NightDisplayIntensityPreferenceController"
         settings:unavailableSliceSubtitle="@string/night_display_not_currently_on"/>
-
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="night_display_activated"
-        android:title="@string/night_display_title"
-        android:selectable="false"
-        android:layout="@layout/night_display_activation_button"
-        settings:allowDividerBelow="true"
-        settings:keywords="@string/keywords_display_night_display"
-        settings:controller="com.android.settings.display.NightDisplayActivationPreferenceController"/>
-
-    <com.android.settingslib.widget.FooterPreference
-        android:key="night_display_footer"
-        android:title="@string/night_display_text"
-        android:selectable="false"
-        settings:allowDividerAbove="true"
-        settings:controller="com.android.settings.display.NightDisplayFooterPreferenceController"/>
 
 </PreferenceScreen>

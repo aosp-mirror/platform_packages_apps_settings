@@ -19,25 +19,17 @@
 <!-- Things unrelated to preference framework UI customization should go to other styles files -->
 <resources>
 
-    <style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay.SettingsBase">
+    <style name="SettingsPreferenceTheme" parent="@style/PreferenceTheme.SettingsLib">
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
         <item name="cardPreferenceStyle">@style/CardPreference</item>
         <item name="slicePreferenceStyle">@style/SlicePreference</item>
         <item name="seekBarPreferenceStyle">@style/SettingsSeekBarPreference</item>
         <item name="twoStateButtonPreferenceStyle">@style/TwoStateButtonPreference</item>
-        <item name="preferenceCategoryTitleTextAppearance">@style/TextAppearance.CategoryTitle
-        </item>
-        <item name="preferenceCategoryStyle">@style/SettingsCategoryPreference</item>
-        <!-- For preference category color -->
-        <item name="preferenceCategoryTitleTextColor">?android:attr/textColorSecondary</item>
         <item name="preferenceFragmentCompatStyle">@style/SettingsPreferenceFragmentStyle</item>
     </style>
 
-    <style name="SettingsCategoryPreference" parent="Preference.Category.Material" />
-
-    <style name="PreferenceTheme.SetupWizard">
+    <style name="PreferenceTheme.SetupWizard" parent="@style/SettingsPreferenceTheme">
         <item name="preferenceFragmentCompatStyle">@style/SetupWizardPreferenceFragmentStyle</item>
-        <item name="preferenceStyle">@style/Preference.Material</item>
     </style>
 
     <style name="ApnPreference" parent="@style/Preference.Material">
@@ -54,9 +46,10 @@
 
     <style name="SettingsSeekBarPreference" parent="@style/Preference.Material">
         <item name="android:layout">@layout/preference_widget_seekbar_settings</item>
+        <item name="iconSpaceReserved">@bool/settingslib_config_icon_space_reserved</item>
     </style>
 
-    <style name="SyncSwitchPreference" parent="@style/Preference.Material">
+    <style name="SyncSwitchPreference" parent="@style/SettingsSwitchPreference.SettingsLib">
         <item name="android:widgetLayout">@layout/preference_widget_sync_toggle</item>
     </style>
 
@@ -67,6 +60,7 @@
     <style name="SettingsMultiSelectListPreference" parent="@style/Preference.Material">
         <item name="android:positiveButtonText">@android:string/ok</item>
         <item name="android:negativeButtonText">@android:string/cancel</item>
+        <item name="iconSpaceReserved">@bool/settingslib_config_icon_space_reserved</item>
     </style>
 
     <style name="SettingsPreferenceFragmentStyle" parent="@style/PreferenceFragment.Material">

@@ -174,8 +174,8 @@ public class ChartDataUsagePreference extends Preference {
     @VisibleForTesting
     List<DataUsageSummaryNode> getDensedStatsData(List<NetworkCycleData> usageSummary) {
         final List<DataUsageSummaryNode> dataUsageSummaryNodes = new ArrayList<>();
-        final long overallDataUsage = usageSummary.stream()
-                .mapToLong(NetworkCycleData::getTotalUsage).sum();
+        final long overallDataUsage = Math.max(1L, usageSummary.stream()
+                .mapToLong(NetworkCycleData::getTotalUsage).sum());
         long cumulatedDataUsage = 0L;
         int cumulatedDataUsagePercentage = 0;
 

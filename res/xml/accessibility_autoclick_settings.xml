@@ -19,14 +19,13 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/accessibility_autoclick_preference_title">
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="accessibility_autoclick_preview"
-        android:layout="@layout/accessibility_autoclick_preview"
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="accessibility_autoclick_banner"
         android:persistent="false"
         android:selectable="false"
-        android:title="@string/summary_placeholder"
         settings:allowDividerBelow="true"
-        settings:searchable="false" />
+        settings:searchable="false"
+        settings:lottie_rawRes="@drawable/accessibility_dwell" />
 
     <com.android.settingslib.widget.RadioButtonPreference
         android:key="accessibility_control_autoclick_default"
@@ -60,10 +59,11 @@
         settings:allowDividerBelow="true"
         settings:controller="com.android.settings.accessibility.ToggleAutoclickCustomSeekbarController" />
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="autoclick_footer"
+    <com.android.settings.accessibility.AccessibilityFooterPreference
+        android:key="accessibility_autoclick_footer"
         android:title="@string/accessibility_autoclick_description"
+        android:persistent="false"
         android:selectable="false"
-        settings:searchable="false" />
-
+        settings:searchable="false"
+        settings:controller="com.android.settings.accessibility.ToggleAutoclickFooterPreferenceController"/>
 </PreferenceScreen>

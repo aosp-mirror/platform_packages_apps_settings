@@ -16,14 +16,19 @@
 
 package com.android.settings.development;
 
+import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfUsbDataSignalingIsDisabled;
+
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class UsbAudioRoutingPreferenceController extends DeveloperOptionsPreferenceController
@@ -36,6 +41,8 @@ public class UsbAudioRoutingPreferenceController extends DeveloperOptionsPrefere
     @VisibleForTesting
     static final int SETTING_VALUE_OFF = 0;
 
+    private RestrictedSwitchPreference mPreference;
+
     public UsbAudioRoutingPreferenceController(Context context) {
         super(context);
     }
@@ -43,6 +50,12 @@ public class UsbAudioRoutingPreferenceController extends DeveloperOptionsPrefere
     @Override
     public String getPreferenceKey() {
         return USB_AUDIO_KEY;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -58,7 +71,9 @@ public class UsbAudioRoutingPreferenceController extends DeveloperOptionsPrefere
     public void updateState(Preference preference) {
         final int usbAudioRoutingMode = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(usbAudioRoutingMode != SETTING_VALUE_OFF);
+        mPreference.setChecked(usbAudioRoutingMode != SETTING_VALUE_OFF);
+        mPreference.setDisabledByAdmin(
+                checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId()));
     }
 
     @Override
@@ -67,5 +82,12 @@ public class UsbAudioRoutingPreferenceController extends DeveloperOptionsPrefere
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED, SETTING_VALUE_OFF);
         ((SwitchPreference) mPreference).setChecked(false);
+    }
+
+    @Override
+    protected void onDeveloperOptionsSwitchEnabled() {
+        super.onDeveloperOptionsSwitchEnabled();
+        mPreference.setDisabledByAdmin(
+                checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId()));
     }
 }

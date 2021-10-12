@@ -53,13 +53,13 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
 
     public static boolean isGestureAvailable(Context context) {
         final Resources resources = context.getResources();
-        final String name = resources.getString(R.string.gesture_double_twist_sensor_name);
+        final String type = resources.getString(R.string.gesture_double_twist_sensor_type);
         final String vendor = resources.getString(R.string.gesture_double_twist_sensor_vendor);
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(vendor)) {
+        if (!TextUtils.isEmpty(type) && !TextUtils.isEmpty(vendor)) {
             final SensorManager sensorManager =
                     (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
             for (Sensor s : sensorManager.getSensorList(Sensor.TYPE_ALL)) {
-                if (name.equals(s.getName()) && vendor.equals(s.getVendor())) {
+                if (type.equals(s.getStringType()) && vendor.equals(s.getVendor())) {
                     return true;
                 }
             }

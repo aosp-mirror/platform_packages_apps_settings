@@ -30,31 +30,6 @@
         android:clipToPadding="false"
         android:clipChildren="false">
 
-        <!-- Make both texts included for layout, so the lower part doesn't jump around when we
-             switch the text -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                style="@style/SudDescription.Glif"
-                android:id="@+id/sud_layout_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minLines="3"
-                android:text="@string/security_settings_fingerprint_enroll_start_message"/>
-
-            <TextView
-                style="@style/SudDescription.Glif"
-                android:id="@+id/repeat_message"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minLines="3"
-                android:text="@string/security_settings_fingerprint_enroll_repeat_message"
-                android:visibility="invisible"/>
-
-        </FrameLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"

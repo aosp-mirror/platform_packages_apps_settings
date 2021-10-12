@@ -18,8 +18,6 @@ package com.android.settings.media;
 
 import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
 
-import static com.android.settings.media.MediaOutputSlice.MEDIA_PACKAGE_NAME;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -54,6 +52,8 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
 
     private static final String TAG = "MediaDeviceUpdateWorker";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
+    public static final String MEDIA_PACKAGE_NAME = "media_package_name";
 
     protected final Context mContext;
     protected final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
@@ -253,6 +253,14 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return um.hasBaseUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME,
                 UserHandle.of(UserHandle.myUserId()));
 
+    }
+
+    boolean shouldDisableMediaOutput(String packageName) {
+        return mLocalMediaManager.shouldDisableMediaOutput(packageName);
+    }
+
+    boolean shouldEnableVolumeSeekBar(RoutingSessionInfo sessionInfo) {
+        return mLocalMediaManager.shouldEnableVolumeSeekBar(sessionInfo);
     }
 
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {

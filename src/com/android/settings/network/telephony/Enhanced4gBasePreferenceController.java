@@ -20,11 +20,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
 import android.util.Log;
@@ -54,7 +54,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     @VisibleForTesting
     Preference mPreference;
-    private PhoneCallStateListener mPhoneStateListener;
+    private PhoneCallStateTelephonyCallback mTelephonyCallback;
     private boolean mShow5gLimitedDialog;
     boolean mIsNrEnabledFromCarrierConfig;
     private boolean mHas5gCapability;
@@ -73,8 +73,8 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     }
 
     public Enhanced4gBasePreferenceController init(int subId) {
-        if (mPhoneStateListener == null) {
-            mPhoneStateListener = new PhoneCallStateListener();
+        if (mTelephonyCallback == null) {
+            mTelephonyCallback = new PhoneCallStateTelephonyCallback();
         }
 
         mSubId = subId;
@@ -106,12 +106,18 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         if (!isModeMatched()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+        final VolteQueryImsState queryState = queryImsState(subId);
+        // Show VoLTE settings if VoIMS opt-in has been enabled irrespective of other VoLTE settings
+        if (queryState.isVoImsOptInEnabled()) {
+            return AVAILABLE;
+        }
+
         final PersistableBundle carrierConfig = getCarrierConfigForSubId(subId);
         if ((carrierConfig == null)
                 || carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL)) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        final VolteQueryImsState queryState = queryImsState(subId);
+
         if (!queryState.isReadyToVoLte()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
@@ -127,18 +133,18 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public void onStart() {
-        if (mPhoneStateListener == null) {
+        if (mTelephonyCallback == null) {
             return;
         }
-        mPhoneStateListener.register(mContext, mSubId);
+        mTelephonyCallback.register(mContext, mSubId);
     }
 
     @Override
     public void onStop() {
-        if (mPhoneStateListener == null) {
+        if (mTelephonyCallback == null) {
             return;
         }
-        mPhoneStateListener.unregister();
+        mTelephonyCallback.unregister();
     }
 
     @Override
@@ -185,6 +191,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         return this;
     }
 
+    @VisibleForTesting
     protected int getMode() {
         return MODE_NONE;
     }
@@ -194,12 +201,12 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     }
 
     @VisibleForTesting
-    VolteQueryImsState queryImsState(int subId) {
+    protected VolteQueryImsState queryImsState(int subId) {
         return new VolteQueryImsState(mContext, subId);
     }
 
     @VisibleForTesting
-    boolean isCallStateIdle() {
+    protected boolean isCallStateIdle() {
         return (mCallState != null) && (mCallState == TelephonyManager.CALL_STATE_IDLE);
     }
 
@@ -210,16 +217,13 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
                 CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL);
     }
 
-    private class PhoneCallStateListener extends PhoneStateListener {
-
-        PhoneCallStateListener() {
-            super(Looper.getMainLooper());
-        }
+    private class PhoneCallStateTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.CallStateListener {
 
         private TelephonyManager mTelephonyManager;
 
         @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
+        public void onCallStateChanged(int state) {
             mCallState = state;
             updateState(mPreference);
         }
@@ -232,7 +236,8 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
             // assign current call state so that it helps to show correct preference state even
             // before first onCallStateChanged() by initial registration.
             mCallState = mTelephonyManager.getCallState(subId);
-            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
+            mTelephonyManager.registerTelephonyCallback(
+                    mContext.getMainExecutor(), mTelephonyCallback);
 
             final long supportedRadioBitmask = mTelephonyManager.getSupportedRadioAccessFamily();
             mHas5gCapability =
@@ -242,7 +247,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         public void unregister() {
             mCallState = null;
             if (mTelephonyManager != null) {
-                mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
+                mTelephonyManager.unregisterTelephonyCallback(this);
             }
         }
     }

@@ -26,18 +26,28 @@ import android.text.TextUtils;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockGeneric;
+import com.android.settingslib.transition.SettingsTransitionHelper;
 
 public class ChangeProfileScreenLockPreferenceController extends
         ChangeScreenLockPreferenceController {
 
     private static final String KEY_UNLOCK_SET_OR_CHANGE_PROFILE = "unlock_set_or_change_profile";
 
+    private final String mPreferenceKey;
+
     public ChangeProfileScreenLockPreferenceController(Context context,
-            SecuritySettings host) {
+            SettingsPreferenceFragment host) {
+        this(context, host, KEY_UNLOCK_SET_OR_CHANGE_PROFILE);
+    }
+
+    public ChangeProfileScreenLockPreferenceController(Context context,
+            SettingsPreferenceFragment host, String key) {
         super(context, host);
+        this.mPreferenceKey = key;
     }
 
     public boolean isAvailable() {
@@ -63,7 +73,7 @@ public class ChangeProfileScreenLockPreferenceController extends
 
     @Override
     public String getPreferenceKey() {
-        return KEY_UNLOCK_SET_OR_CHANGE_PROFILE;
+        return mPreferenceKey;
     }
 
     @Override
@@ -78,9 +88,9 @@ public class ChangeProfileScreenLockPreferenceController extends
         extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
         new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                .setTitleRes(R.string.lock_settings_picker_title_profile)
                 .setSourceMetricsCategory(mHost.getMetricsCategory())
                 .setArguments(extras)
+                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
                 .launch();
 
         return true;
