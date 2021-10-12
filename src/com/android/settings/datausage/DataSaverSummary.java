@@ -32,6 +32,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.ApplicationsState.Session;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 
 @SearchIndexable
 public class DataSaverSummary extends SettingsPreferenceFragment
-        implements OnMainSwitchChangeListener, Listener, Callback {
+        implements OnMainSwitchChangeListener, Listener, Callback, Callbacks {
 
     private static final String KEY_UNRESTRICTED_ACCESS = "unrestricted_access";
 
@@ -149,6 +150,46 @@ public class DataSaverSummary extends SettingsPreferenceFragment
         }
         mUnrestrictedAccess.setSummary(getResources().getQuantityString(
                 R.plurals.data_saver_unrestricted_summary, count, count));
+    }
+
+    @Override
+    public void onRunningStateChanged(boolean running) {
+
+    }
+
+    @Override
+    public void onPackageListChanged() {
+
+    }
+
+    @Override
+    public void onRebuildComplete(ArrayList<AppEntry> apps) {
+
+    }
+
+    @Override
+    public void onPackageIconChanged() {
+
+    }
+
+    @Override
+    public void onPackageSizeChanged(String packageName) {
+
+    }
+
+    @Override
+    public void onAllSizesComputed() {
+
+    }
+
+    @Override
+    public void onLauncherInfoChanged() {
+
+    }
+
+    @Override
+    public void onLoadEntriesCompleted() {
+
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
