@@ -119,8 +119,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     @VisibleForTesting
     public HighlightablePreferenceGroupAdapter mAdapter;
-    @VisibleForTesting
-    public boolean mPreferenceHighlighted = false;
+    private boolean mPreferenceHighlighted = false;
 
     @Override
     public void onCreate(Bundle icicle) {
