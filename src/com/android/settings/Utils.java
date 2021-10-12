@@ -1223,6 +1223,14 @@ public final class Utils extends com.android.settingslib.Utils {
         return getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
     }
 
+    /**
+     * Returns the highlight color of homepage preference icons.
+     */
+    @ColorInt
+    public static int getHomepageIconColorHighlight(Context context) {
+        return getColorAttrDefaultColor(context, android.R.attr.textColorSecondaryInverse);
+    }
+
     public static boolean isProviderModelEnabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
     }
