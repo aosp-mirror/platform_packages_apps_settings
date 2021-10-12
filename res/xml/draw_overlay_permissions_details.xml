@@ -22,8 +22,8 @@
         android:key="app_ops_settings_switch"
         android:title="@string/permit_draw_overlay"/>
 
-    <Preference
-        android:summary="@string/allow_overlay_description"
+    <com.android.settingslib.widget.FooterPreference
+        android:title="@string/allow_overlay_description"
         android:selectable="false"/>
 
 </PreferenceScreen>

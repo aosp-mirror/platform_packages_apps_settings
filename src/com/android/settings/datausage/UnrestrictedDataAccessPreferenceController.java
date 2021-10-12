@@ -185,11 +185,11 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
         if (preference instanceof UnrestrictedDataAccessPreference) {
             final UnrestrictedDataAccessPreference
                     accessPreference = (UnrestrictedDataAccessPreference) preference;
-            boolean whitelisted = newValue == Boolean.TRUE;
-            logSpecialPermissionChange(whitelisted, accessPreference.getEntry().info.packageName);
-            mDataSaverBackend.setIsWhitelisted(accessPreference.getEntry().info.uid,
-                    accessPreference.getEntry().info.packageName, whitelisted);
-            accessPreference.getDataUsageState().isDataSaverWhitelisted = whitelisted;
+            boolean allowlisted = newValue == Boolean.TRUE;
+            logSpecialPermissionChange(allowlisted, accessPreference.getEntry().info.packageName);
+            mDataSaverBackend.setIsAllowlisted(accessPreference.getEntry().info.uid,
+                    accessPreference.getEntry().info.packageName, allowlisted);
+            accessPreference.getDataUsageState().isDataSaverAllowlisted = allowlisted;
             return true;
         }
         return false;
@@ -223,8 +223,8 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
     }
 
     @VisibleForTesting
-    void logSpecialPermissionChange(boolean whitelisted, String packageName) {
-        final int logCategory = whitelisted ? SettingsEnums.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW
+    void logSpecialPermissionChange(boolean allowlisted, String packageName) {
+        final int logCategory = allowlisted ? SettingsEnums.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW
                 : SettingsEnums.APP_SPECIAL_PERMISSION_UNL_DATA_DENY;
         FeatureFactory.getFactory(mContext).getMetricsFeatureProvider().action(mContext,
                 logCategory, packageName);

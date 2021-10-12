@@ -30,7 +30,6 @@ import com.android.internal.util.CollectionUtils;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryDefenderAction;
-import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenBatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenRestrictAppFragmentAction;
@@ -99,11 +98,7 @@ public class BatteryTipUtils {
                 return new SmartBatteryAction(settingsActivity, fragment);
             case BatteryTip.TipType.BATTERY_SAVER:
             case BatteryTip.TipType.LOW_BATTERY:
-                if (batteryTip.getState() == BatteryTip.StateType.HANDLED) {
-                    return new OpenBatterySaverAction(settingsActivity);
-                } else {
-                    return new BatterySaverAction(settingsActivity);
-                }
+                return new OpenBatterySaverAction(settingsActivity);
             case BatteryTip.TipType.APP_RESTRICTION:
                 if (batteryTip.getState() == BatteryTip.StateType.HANDLED) {
                     return new OpenRestrictAppFragmentAction(fragment, (RestrictAppTip) batteryTip);
@@ -127,7 +122,7 @@ public class BatteryTipUtils {
             throws StatsManager.StatsUnavailableException {
         final Intent extraIntent = new Intent(context, AnomalyDetectionReceiver.class);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE,
-                extraIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                extraIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
         statsManager.setBroadcastSubscriber(pendingIntent,
                 StatsManagerConfig.ANOMALY_CONFIG_KEY, StatsManagerConfig.SUBSCRIBER_ID);
     }

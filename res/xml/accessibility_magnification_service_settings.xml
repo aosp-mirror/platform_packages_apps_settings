@@ -29,13 +29,4 @@
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.MagnificationModePreferenceController" />
 
-    <SwitchPreference
-        android:key="magnification_enable"
-        android:persistent="false"
-        android:title="@string/accessibility_magnification_enable_mode_title"
-        android:summaryOn="@string/accessibility_magnification_area_settings_full_screen_summary"
-        android:summaryOff="@string/accessibility_magnification_area_settings_window_screen_summary"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.MagnificationEnablePreferenceController" />
-
 </PreferenceScreen>

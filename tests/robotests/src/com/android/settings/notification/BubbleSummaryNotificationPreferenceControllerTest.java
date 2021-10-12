@@ -16,7 +16,7 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
+import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
@@ -61,14 +61,14 @@ public class BubbleSummaryNotificationPreferenceControllerTest {
 
     @Test
     public void getSummary_NOTIFICATION_BUBBLESIsOff_returnOffString() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
 
         assertThat(mController.getSummary()).isEqualTo("Off");
     }
 
     @Test
     public void getSummary_NOTIFICATION_BUBBLESIsOff_returnOnString() {
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
+        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
 
         String onString = mContext.getString(R.string.notifications_bubble_setting_on_summary);
         assertThat(mController.getSummary()).isEqualTo(onString);

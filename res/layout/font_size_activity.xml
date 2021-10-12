@@ -14,17 +14,18 @@
      limitations under the License.
 -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
-        <include layout="@layout/preview_seek_bar_view_pager" />
+        <include layout="@layout/preview_seek_bar_view_pager"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -40,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:padding="6dp" />
+                android:padding="6dp"/>
 
             <TextView
                 android:id="@+id/current_label"
@@ -49,13 +50,12 @@
                 android:layout_gravity="center_horizontal"
                 android:padding="6dp"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView"
-                android:elevation="2dp" />
+                android:elevation="2dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layoutDirection="ltr"
                 android:paddingTop="8dp">
 
                 <ImageView
@@ -68,7 +68,7 @@
                     android:tintMode="src_in"
                     android:scaleType="center"
                     android:focusable="true"
-                    android:contentDescription="@string/font_size_make_smaller_desc" />
+                    android:contentDescription="@string/font_size_make_smaller_desc"/>
 
                 <com.android.settings.widget.LabeledSeekBar
                     android:id="@+id/seek_bar"
@@ -87,7 +87,7 @@
                     android:tintMode="src_in"
                     android:scaleType="center"
                     android:focusable="true"
-                    android:contentDescription="@string/font_size_make_larger_desc" />
+                    android:contentDescription="@string/font_size_make_larger_desc"/>
             </LinearLayout>
 
             <TextView
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/font_size_summary"
                 android:layout_marginBottom="16dp"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead" />
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"/>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

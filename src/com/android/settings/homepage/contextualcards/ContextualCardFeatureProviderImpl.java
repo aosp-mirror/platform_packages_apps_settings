@@ -55,11 +55,6 @@ public class ContextualCardFeatureProviderImpl implements ContextualCardFeatureP
     }
 
     @Override
-    public ContextualCard getDefaultContextualCard() {
-        return null;
-    }
-
-    @Override
     public int markCardAsDismissed(Context context, String cardName) {
         final SQLiteDatabase db = CardDatabaseHelper.getInstance(mContext).getWritableDatabase();
         final ContentValues values = new ContentValues();

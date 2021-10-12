@@ -36,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SubscriptionsChangeListener;
 
@@ -90,7 +91,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     @Override
     public int getAvailabilityStatus(int subId) {
         final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
-        if (subs.size() > 1) {
+        if (subs.size() > 1 || Utils.isProviderModelEnabled(mContext)) {
             return AVAILABLE;
         } else {
             return CONDITIONALLY_UNAVAILABLE;
@@ -125,7 +126,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         final SubscriptionInfo info = getDefaultSubscriptionInfo();
         if (info != null) {
             // display subscription based account
-            return info.getDisplayName();
+            return SubscriptionUtil.getUniqueSubscriptionDisplayName(info, mContext);
         } else {
             if (isAskEverytimeSupported()) {
                 return mContext.getString(R.string.calls_and_sms_ask_every_time);
@@ -157,6 +158,13 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
         final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
 
+        if (Utils.isProviderModelEnabled(mContext) && subs.size() == 1) {
+            mPreference.setEnabled(false);
+            mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    subs.get(0), mContext));
+            return;
+        }
+
         final int serviceDefaultSubId = getDefaultSubscriptionId();
         boolean subIsAvailable = false;
 
@@ -164,7 +172,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             if (sub.isOpportunistic()) {
                 continue;
             }
-            displayNames.add(sub.getDisplayName());
+            displayNames.add(SubscriptionUtil.getUniqueSubscriptionDisplayName(sub, mContext));
             final int subId = sub.getSubscriptionId();
             subscriptionIds.add(Integer.toString(subId));
             if (subId == serviceDefaultSubId) {

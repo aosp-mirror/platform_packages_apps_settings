@@ -25,8 +25,8 @@ import com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController;
 import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.MainSwitchBarController;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
@@ -42,7 +42,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     private static final String KEY_BLUETOOTH_SCREEN_FOOTER = "bluetooth_screen_footer";
 
     private FooterPreference mFooterPreference;
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mSwitchBar;
     private BluetoothSwitchPreferenceController mController;
 
     @Override
@@ -83,8 +83,9 @@ public class BluetoothDashboardFragment extends DashboardFragment {
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.setTitle(getContext().getString(R.string.bluetooth_main_switch_title));
         mController = new BluetoothSwitchPreferenceController(activity,
-                new SwitchBarController(mSwitchBar), mFooterPreference);
+                new MainSwitchBarController(mSwitchBar), mFooterPreference);
         Lifecycle lifecycle = getSettingsLifecycle();
         if (lifecycle != null) {
             lifecycle.addObserver(mController);

@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -40,7 +41,8 @@ import java.util.List;
 
 public class PhoneNumberPreferenceController extends BasePreferenceController {
 
-    private final static String KEY_PHONE_NUMBER = "phone_number";
+    private static final String KEY_PHONE_NUMBER = "phone_number";
+    private static final String KEY_PREFERENCE_CATEGORY = "basic_info_category";
 
     private final TelephonyManager mTelephonyManager;
     private final SubscriptionManager mSubscriptionManager;
@@ -66,6 +68,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
+        final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
         mPreferenceList.add(preference);
 
         final int phonePreferenceOrder = preference.getOrder();
@@ -76,7 +79,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
             multiSimPreference.setOrder(phonePreferenceOrder + simSlotNumber);
             multiSimPreference.setKey(KEY_PHONE_NUMBER + simSlotNumber);
             multiSimPreference.setSelectable(false);
-            screen.addPreference(multiSimPreference);
+            category.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
         }
     }

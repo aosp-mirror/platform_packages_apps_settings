@@ -23,20 +23,44 @@
     settings:keywords="@string/keywords_accounts">
 
     <PreferenceCategory
+        android:key="passwords_category"
+        android:order="10"
+        android:persistent="false"
+        android:title="@string/autofill_passwords"
+        settings:controller="com.android.settings.applications.autofill.PasswordsPreferenceController"
+        settings:keywords="@string/autofill_keywords" />
+
+    <PreferenceCategory
+        android:key="default_service_category"
+        android:order="20"
+        android:title="@string/autofill_app">
+
+        <com.android.settings.widget.GearPreference
+            android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
+            android:key="default_autofill_main"
+            android:title="@string/autofill_app"
+            settings:keywords="@string/autofill_keywords">
+            <extra
+                android:name="for_work"
+                android:value="false" />
+        </com.android.settings.widget.GearPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="dashboard_tile_placeholder"
-        android:order="30"/>
+        android:order="130"/>
 
     <SwitchPreference
         android:key="auto_sync_account_data"
         android:title="@string/auto_sync_account_title"
         android:summary="@string/auto_sync_account_summary"
-        android:order="100"
+        android:order="200"
         settings:allowDividerAbove="true"/>
 
     <SwitchPreference
         android:key="auto_sync_personal_account_data"
         android:title="@string/account_settings_menu_auto_sync_personal"
         android:summary="@string/auto_sync_account_summary"
-        android:order="110"/>
+        android:order="210"/>
 
 </PreferenceScreen>

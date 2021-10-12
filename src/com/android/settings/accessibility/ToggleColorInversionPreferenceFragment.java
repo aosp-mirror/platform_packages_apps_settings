@@ -31,15 +31,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.preference.SwitchPreference;
-
 import com.android.settings.R;
+import com.android.settings.widget.SettingsMainSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Settings page for color inversion. */
-public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
+public class ToggleColorInversionPreferenceFragment extends
+        ToggleFeaturePreferenceFragment {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
     private final Handler mHandler = new Handler();
@@ -64,23 +64,12 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     protected void onRemoveSwitchPreferenceToggleSwitch() {
         super.onRemoveSwitchPreferenceToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(null);
+        mToggleServiceSwitchPreference.setOnPreferenceClickListener(null);
     }
 
     @Override
-    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+    protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         switchPreference.setTitle(R.string.accessibility_display_inversion_switch_title);
-    }
-
-    @Override
-    protected void onInstallSwitchPreferenceToggleSwitch() {
-        super.onInstallSwitchPreferenceToggleSwitch();
-        updateSwitchBarToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
-            boolean checked = ((SwitchPreference) preference).isChecked();
-            onPreferenceToggled(mPreferenceKey, checked);
-            return false;
-        });
     }
 
     @Override
@@ -91,7 +80,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
-                .appendPath(String.valueOf(R.drawable.accessibility_color_inversion_banner))
+                .appendPath(String.valueOf(R.raw.accessibility_color_inversion_banner))
                 .build();
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
         enableServiceFeatureKeys.add(ENABLED);
@@ -123,22 +112,17 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
-    public void onSettingsClicked(ShortcutPreference preference) {
-        super.onSettingsClicked(preference);
-        showDialog(DialogEnums.EDIT_SHORTCUT);
-    }
-
-    @Override
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
     }
 
-    private void updateSwitchBarToggleSwitch() {
+    @Override
+    protected void updateSwitchBarToggleSwitch() {
         final boolean checked = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
-        if (mToggleServiceDividerSwitchPreference.isChecked() == checked) {
+        if (mToggleServiceSwitchPreference.isChecked() == checked) {
             return;
         }
-        mToggleServiceDividerSwitchPreference.setChecked(checked);
+        mToggleServiceSwitchPreference.setChecked(checked);
     }
 }

@@ -19,6 +19,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryStats;
+import android.os.BatteryStatsManager;
+import android.os.BatteryUsageStats;
 import android.os.SystemClock;
 
 import com.android.internal.os.BatteryStatsHelper;
@@ -56,15 +58,17 @@ public class DebugEstimatesLoader extends AsyncLoaderCompat<List<BatteryInfo>> {
         Intent batteryBroadcast = getContext().registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         BatteryStats stats = mStatsHelper.getStats();
-
+        BatteryUsageStats batteryUsageStats =
+                context.getSystemService(BatteryStatsManager.class).getBatteryUsageStats();
         BatteryInfo oldinfo = BatteryInfo.getBatteryInfoOld(getContext(), batteryBroadcast,
-                stats, elapsedRealtimeUs, false);
+                batteryUsageStats, elapsedRealtimeUs, false);
 
         Estimate estimate = powerUsageFeatureProvider.getEnhancedBatteryPrediction(context);
         if (estimate == null) {
             estimate = new Estimate(0, false, EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         }
-        BatteryInfo newInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast, stats,
+        BatteryInfo newInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast,
+                batteryUsageStats,
                 estimate, elapsedRealtimeUs, false);
 
         List<BatteryInfo> infos = new ArrayList<>();

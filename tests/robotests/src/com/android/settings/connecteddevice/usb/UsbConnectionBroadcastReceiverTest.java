@@ -99,6 +99,20 @@ public class UsbConnectionBroadcastReceiverTest {
     }
 
     @Test
+    public void onReceive_usbConnectedNcmEnabled_invokesCallback() {
+        Intent intent = new Intent();
+        intent.setAction(UsbManager.ACTION_USB_STATE);
+        intent.putExtra(UsbManager.USB_CONNECTED, true);
+        intent.putExtra(UsbManager.USB_FUNCTION_NCM, true);
+        intent.putExtra(UsbManager.USB_DATA_UNLOCKED, true);
+
+        mReceiver.onReceive(mContext, intent);
+
+        verify(mListener).onUsbConnectionChanged(/* connected */ true, UsbManager.FUNCTION_NCM,
+                POWER_ROLE_NONE, DATA_ROLE_NONE);
+    }
+
+    @Test
     public void onReceive_usbPortStatus_invokeCallback() {
         final Intent intent = new Intent();
         intent.setAction(UsbManager.ACTION_USB_PORT_CHANGED);

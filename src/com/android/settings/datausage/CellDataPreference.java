@@ -36,6 +36,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.ProxySubscriptionManager;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 
@@ -200,12 +201,14 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
 
         final String previousName = (nextSir == null)
             ? getContext().getResources().getString(R.string.sim_selection_required_pref)
-            : nextSir.getDisplayName().toString();
+                : SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                        nextSir, getContext()).toString();
 
         builder.setTitle(R.string.sim_change_data_title);
         builder.setMessage(getContext().getString(R.string.sim_change_data_message,
-                String.valueOf(currentSir != null ? currentSir.getDisplayName() : null),
-                previousName));
+                String.valueOf(currentSir != null
+                    ? SubscriptionUtil.getUniqueSubscriptionDisplayName(currentSir, getContext())
+                    : null), previousName));
 
         builder.setPositiveButton(R.string.okay, listener);
         builder.setNegativeButton(R.string.cancel, null);

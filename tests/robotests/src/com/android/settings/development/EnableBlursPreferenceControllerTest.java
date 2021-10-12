@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.SystemProperties;
+import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -65,26 +65,25 @@ public final class EnableBlursPreferenceControllerTest {
     public void onPreferenceChanged_settingEnabled_enableBlurs() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final boolean mode = SystemProperties
-                .getBoolean(EnableBlursPreferenceController.DISABLE_BLURS_SYSPROP,
-                        false /* default */);
-        assertThat(mode).isFalse();
+        final boolean blursDisabled = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.DISABLE_WINDOW_BLURS, 0) == 1;
+        assertThat(blursDisabled).isFalse();
     }
 
     @Test
     public void onPreferenceChanged_settingDisabled_disableBlurs() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final boolean mode = SystemProperties
-                .getBoolean(EnableBlursPreferenceController.DISABLE_BLURS_SYSPROP,
-                        false /* default */);
+        final boolean blursDisabled = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.DISABLE_WINDOW_BLURS, 0) == 1;
 
-        assertThat(mode).isTrue();
+        assertThat(blursDisabled).isTrue();
     }
 
     @Test
     public void updateState_settingEnabled_preferenceShouldNotBeChecked() {
-        SystemProperties.set(EnableBlursPreferenceController.DISABLE_BLURS_SYSPROP, "1");
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DISABLE_WINDOW_BLURS, 1);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
@@ -92,7 +91,8 @@ public final class EnableBlursPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_preferenceShouldBeChecked() {
-        SystemProperties.set(EnableBlursPreferenceController.DISABLE_BLURS_SYSPROP, "0");
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DISABLE_WINDOW_BLURS, 0);
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);

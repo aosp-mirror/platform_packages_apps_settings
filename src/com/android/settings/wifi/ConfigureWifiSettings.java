@@ -21,6 +21,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -40,7 +42,14 @@ public class ConfigureWifiSettings extends DashboardFragment {
     public static final int WIFI_WAKEUP_REQUEST_CODE = 600;
 
     private WifiWakeupPreferenceController mWifiWakeupPreferenceController;
-    private UseOpenWifiPreferenceController mUseOpenWifiPreferenceController;
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
+            getActivity().setTitle(R.string.network_and_internet_preferences_title);
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -50,15 +59,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
     @Override
     protected String getLogTag() {
         return TAG;
-    }
-
-    @Override
-    public int getInitialExpandedChildCount() {
-        int tileLimit = 2;
-        if (mUseOpenWifiPreferenceController.isAvailable()) {
-            tileLimit++;
-        }
-        return tileLimit;
     }
 
     @Override
@@ -82,19 +82,12 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
         mWifiWakeupPreferenceController = use(WifiWakeupPreferenceController.class);
         mWifiWakeupPreferenceController.setFragment(this);
-
-        mUseOpenWifiPreferenceController = use(UseOpenWifiPreferenceController.class);
-        mUseOpenWifiPreferenceController.setFragment(this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == WIFI_WAKEUP_REQUEST_CODE) {
             mWifiWakeupPreferenceController.onActivityResult(requestCode, resultCode);
-            return;
-        }
-        if (requestCode == UseOpenWifiPreferenceController.REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY) {
-            mUseOpenWifiPreferenceController.onActivityResult(requestCode, resultCode);
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);

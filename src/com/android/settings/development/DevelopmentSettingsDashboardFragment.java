@@ -60,13 +60,15 @@ import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPrefe
 import com.android.settings.development.qstile.DevelopmentTiles;
 import com.android.settings.development.storage.SharedDataPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.search.actionbar.SearchMenuController;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -75,7 +77,7 @@ import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
-        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
+        implements OnMainSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
         BluetoothA2dpHwOffloadRebootDialog.OnA2dpHwDialogConfirmedListener,
         AbstractBluetoothPreferenceController.Callback {
@@ -86,7 +88,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             new BluetoothA2dpConfigStore();
 
     private boolean mIsAvailable = true;
-    private SwitchBar mSwitchBar;
+    private SettingsMainSwitchBar mSwitchBar;
     private DevelopmentSwitchBarController mSwitchBarController;
     private List<AbstractPreferenceController> mPreferenceControllers = new ArrayList<>();
     private BluetoothA2dp mBluetoothA2dp;
@@ -173,6 +175,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        SearchMenuController.init(this);
         if (Utils.isMonkeyRunning()) {
             getActivity().finish();
             return;
@@ -195,12 +198,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             getPreferenceScreen().removeAll();
             return;
         }
-        // Set up master switch
+        // Set up primary switch
         mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
+        mSwitchBar.setTitle(getContext().getString(R.string.developer_options_main_switch_title));
+        mSwitchBar.show();
         mSwitchBarController = new DevelopmentSwitchBarController(
                 this /* DevelopmentSettings */, mSwitchBar, mIsAvailable,
                 getSettingsLifecycle());
-        mSwitchBar.show();
 
         // Restore UI state based on whether developer options is enabled
         if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
@@ -231,7 +235,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
         if (DevelopmentTiles.WirelessDebugging.class.getName().equals(
                 componentName.getClassName()) && getDevelopmentOptionsController(
-                    WirelessDebuggingPreferenceController.class).isAvailable()) {
+                WirelessDebuggingPreferenceController.class).isAvailable()) {
             Log.d(TAG, "Long press from wireless debugging qstile");
             new SubSettingLauncher(getContext())
                     .setDestination(WirelessDebuggingFragment.class.getName())
@@ -383,7 +387,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     protected int getPreferenceScreenResId() {
-        return Utils.isMonkeyRunning()? R.xml.placeholder_prefs : R.xml.development_settings;
+        return Utils.isMonkeyRunning() ? R.xml.placeholder_prefs : R.xml.development_settings;
     }
 
     @Override
@@ -396,11 +400,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getSettingsLifecycle(), this /* devOptionsDashboardFragment */,
                 new BluetoothA2dpConfigStore());
         return mPreferenceControllers;
-    }
-
-    @Override
-    protected boolean isParalleledControllers() {
-        return true;
     }
 
     private void registerReceivers() {
@@ -550,15 +549,14 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ResizableActivityPreferenceController(context));
         controllers.add(new FreeformWindowsPreferenceController(context));
         controllers.add(new DesktopModePreferenceController(context));
-        controllers.add(new SizeCompatFreeformPreferenceController(context));
+        controllers.add(new NonResizableMultiWindowPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));
         controllers.add(new DefaultLaunchPreferenceController(context, "running_apps"));
         controllers.add(new DefaultLaunchPreferenceController(context, "demo_mode"));
         controllers.add(new DefaultLaunchPreferenceController(context, "quick_settings_tiles"));
         controllers.add(new DefaultLaunchPreferenceController(context, "feature_flags_dashboard"));
-        controllers.add(
-            new DefaultLaunchPreferenceController(context, "default_usb_configuration"));
+        controllers.add(new DefaultUsbConfigurationPreferenceController(context));
         controllers.add(new DefaultLaunchPreferenceController(context, "density"));
         controllers.add(new DefaultLaunchPreferenceController(context, "background_check"));
         controllers.add(new DefaultLaunchPreferenceController(context, "inactive_apps"));

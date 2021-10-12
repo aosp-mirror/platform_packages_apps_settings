@@ -40,8 +40,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.deviceinfo.StorageSettings.MountTask;
-import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
+import com.android.settings.deviceinfo.storage.StorageUtils.MountTask;
+import com.android.settings.deviceinfo.storage.StorageUtils.UnmountTask;
 
 import java.io.File;
 import java.util.Objects;

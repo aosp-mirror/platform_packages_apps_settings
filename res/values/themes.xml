@@ -23,12 +23,10 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <style name="Theme.SettingsBase" parent="@android:style/Theme.DeviceDefault.Settings" />
-
     <style name="Theme.Settings" parent="Theme.SettingsBase">
-        <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="android:clipToPadding">false</item>
         <item name="android:clipChildren">false</item>
+        <item name="preferenceTheme">@style/SettingsPreferenceTheme</item>
         <item name="android:listPreferredItemHeight">72dip</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
@@ -37,6 +35,10 @@
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
         <item name="face_layout_theme">@style/FaceLayoutTheme</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_dark</item>
+
+        <!-- For edge-to-edge -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
 
         <!-- For wifi icon -->
         <item name="wifi_signal">@drawable/wifi_signal</item>
@@ -72,11 +74,13 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.SubSettings.Base" parent="Theme.Settings">
+    <style name="Theme.SubSettings.Base" parent="Theme.Settings.NoActionBar">
         <!-- Redefine the ActionBar style for contentInsetStart -->
         <item name="android:actionBarStyle">@style/Widget.ActionBar.SubSettings</item>
 
         <item name="switchBarTheme">@style/ThemeOverlay.SwitchBar.Settings</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.SubSettings" parent="Theme.SubSettings.Base"/>
@@ -89,6 +93,10 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="Theme.LocalePickerWithRegionActivity" parent="Theme.Settings">
+        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="ThemeOverlay.SwitchBar.Settings.Base" parent="@*android:style/ThemeOverlay.DeviceDefault.ActionBar">
@@ -124,7 +132,8 @@
 
     <style name="Theme.AlertDialog.Base" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
-        <item name="android:colorBackground">@color/dialog_background</item>
+        <item name="android:colorError">@color/settings_dialog_colorError</item>
+        <item name="android:colorBackground">@*android:color/surface_light</item>
     </style>
 
     <style name="Theme.AlertDialog" parent="Theme.AlertDialog.Base">
@@ -193,7 +202,7 @@
     <style name="Theme.Settings.HomeBase" parent="Theme.Settings.NoActionBar">
         <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
-        <item name="preferenceTheme">@style/PreferenceTheme</item>
+        <item name="preferenceTheme">@style/SettingsPreferenceTheme</item>
 
         <!-- action bar, needed for search bar icon tinting -->
         <item name="android:actionBarTheme">@*android:style/ThemeOverlay.DeviceDefault.ActionBar</item>
@@ -206,8 +215,9 @@
         <item name="colorPrimaryDark">@*android:color/primary_dark_device_default_settings_light</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarDividerColor">@*android:color/ripple_material_light</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowBackground">@android:color/white</item>
+        <!-- Homepage should follow device default design, the values is same as device default theme.-->
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
     </style>
 
     <style name="Theme.Settings.ContextualCard" parent="Theme.Settings.Home">
@@ -244,21 +254,15 @@
         <item name="android:textColorSecondary">@*android:color/secondary_text_light</item>
     </style>
 
-    <!-- Light theme for those pages inherit SubSettings and launched during setup flow -->
-    <style name="LightTheme.SubSettings.SetupWizard" parent="@android:style/Theme.DeviceDefault.Light">
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">@android:color/white</item>
-        <item name="android:navigationBarColor">@android:color/white</item>
-        <item name="android:windowLightNavigationBar">true</item>
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="android:navigationBarDividerColor">@*android:color/navigation_bar_divider_device_default_settings</item>
-
-        <item name="android:colorPrimary">@android:color/white</item>
-        <item name="android:colorPrimaryDark">@android:color/white</item>
-        <item name="android:colorAccent">@color/material_blue_700</item>
-    </style>
     <!-- Material theme for the pages containing TabLayout and ViewPager -->
     <style name="Theme.TabTheme" parent="@style/Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@*android:color/edge_effect_device_default_light</item>
+    </style>
+
+    <style name="Theme.CollapsingToolbar.Settings" parent="@style/Theme.MaterialComponents.DayNight">
+        <item name="elevationOverlayEnabled">true</item>
+        <item name="elevationOverlayColor">?attr/colorPrimary</item>
+        <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
+        <item name="colorAccent">@*android:color/accent_device_default_light</item>
     </style>
 </resources>

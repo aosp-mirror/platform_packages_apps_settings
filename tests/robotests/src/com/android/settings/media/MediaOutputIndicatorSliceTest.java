@@ -51,7 +51,7 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.MediaDevice;
-import com.android.settingslib.media.MediaOutputSliceConstants;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -219,13 +219,13 @@ public class MediaOutputIndicatorSliceTest {
         Intent intent = intentList.get(0);
 
         assertThat(TextUtils.equals(TEST_PACKAGE_NAME, intent.getStringExtra(
-                MediaOutputSliceConstants.EXTRA_PACKAGE_NAME))).isTrue();
-        assertThat(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG).isEqualTo(
+                MediaOutputConstants.EXTRA_PACKAGE_NAME))).isTrue();
+        assertThat(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG).isEqualTo(
                 intent.getAction());
-        assertThat(TextUtils.equals(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME,
+        assertThat(TextUtils.equals(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME,
                 intent.getPackage())).isTrue();
         assertThat(mToken == intent.getExtras().getParcelable(
-                MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN)).isTrue();
+                MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN)).isTrue();
     }
 
     @Test
@@ -240,13 +240,13 @@ public class MediaOutputIndicatorSliceTest {
         Intent intent = intentList.get(0);
 
         assertThat(TextUtils.isEmpty(intent.getStringExtra(
-                MediaOutputSliceConstants.EXTRA_PACKAGE_NAME))).isTrue();
-        assertThat(MediaOutputSliceConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG).isEqualTo(
+                MediaOutputConstants.EXTRA_PACKAGE_NAME))).isTrue();
+        assertThat(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG).isEqualTo(
                 intent.getAction());
-        assertThat(TextUtils.equals(MediaOutputSliceConstants.SYSTEMUI_PACKAGE_NAME,
+        assertThat(TextUtils.equals(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME,
                 intent.getPackage())).isTrue();
         assertThat(intent.getExtras().getParcelable(
-                MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN) == null).isTrue();
+                MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN) == null).isTrue();
     }
 
     @Test
