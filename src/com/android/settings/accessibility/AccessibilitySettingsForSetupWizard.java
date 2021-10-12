@@ -38,7 +38,7 @@ import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.RestrictedPreference;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
@@ -48,8 +48,9 @@ import java.util.List;
 /**
  * Activity with the accessibility settings specific to Setup Wizard.
  */
-public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragment
+public class AccessibilitySettingsForSetupWizard extends DashboardFragment
         implements Preference.OnPreferenceChangeListener {
+    private static final String TAG = "AccessibilitySettingsForSetupWizard";
 
     // Preferences.
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE =
@@ -97,8 +98,6 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.accessibility_settings_for_setup_wizard);
-
         mDisplayMagnificationPreference = findPreference(DISPLAY_MAGNIFICATION_PREFERENCE);
         mScreenReaderPreference = findPreference(SCREEN_READER_PREFERENCE);
         mSelectToSpeakPreference = findPreference(SELECT_TO_SPEAK_PREFERENCE);
@@ -135,6 +134,16 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         }
 
         return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_settings_for_setup_wizard;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     /**
