@@ -68,8 +68,7 @@ public class DebugEstimatesLoader extends AsyncLoaderCompat<List<BatteryInfo>> {
         } catch (RuntimeException e) {
             Log.e(TAG, "getBatteryInfo() from getBatteryUsageStats()", e);
             // Use default BatteryUsageStats.
-            batteryUsageStats = new BatteryUsageStats.Builder(
-                    new String[0], /* includePowerModels */ false).build();
+            batteryUsageStats = new BatteryUsageStats.Builder(new String[0]).build();
         }
         BatteryInfo oldinfo = BatteryInfo.getBatteryInfoOld(getContext(), batteryBroadcast,
                 batteryUsageStats, elapsedRealtimeUs, false);

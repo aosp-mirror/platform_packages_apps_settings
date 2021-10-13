@@ -375,9 +375,7 @@ public class BatteryUtils {
         } catch (RuntimeException e) {
             Log.e(TAG, "getBatteryInfo() error from getBatteryUsageStats()", e);
             // Use default BatteryUsageStats.
-            batteryUsageStats =
-                    new BatteryUsageStats.Builder(new String[0], /* includePowerModels */ false)
-                            .build();
+            batteryUsageStats = new BatteryUsageStats.Builder(new String[0]).build();
         }
 
         final long startTime = System.currentTimeMillis();
