@@ -585,15 +585,16 @@
     </style>
 
     <style name="SliceRow.Slider">
-        <!-- Padding between content and the start icon is 0dp -->
-        <item name="contentStartPadding">0dp</item>
-        <item name="contentEndPadding">36dp</item>
+        <!-- Padding between content and the start icon is 5dp -->
+        <item name="contentStartPadding">5dp</item>
+        <item name="contentEndPadding">0dp</item>
 
         <!-- 0dp start padding for the end item -->
         <item name="endItemStartPadding">0dp</item>
         <!-- 8dp end padding for the end item -->
         <item name="endItemEndPadding">8dp</item>
 
+        <item name="titleSize">20sp</item>
         <!-- Align text with slider -->
         <item name="titleStartPadding">11dp</item>
         <item name="subContentStartPadding">11dp</item>
@@ -622,6 +623,15 @@
         <item name="android:layout_margin">16dp</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:paddingEnd">8dp</item>
+    </style>
+
+    <style name="PanelOptionRoundedOutlinedButton" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/volume_dialog_button_background_outline</item>
+    </style>
+
+    <style name="PanelOptionRoundedSolidButton" parent="@android:style/Widget.Material.Button">
+        <item name="android:textColor">@android:color/system_neutral1_900</item>
+        <item name="android:background">@drawable/volume_dialog_button_background_solid</item>
     </style>
 
     <style name="SetupWizardPartnerResource">
