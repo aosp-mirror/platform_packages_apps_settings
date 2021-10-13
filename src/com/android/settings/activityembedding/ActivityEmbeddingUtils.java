@@ -62,4 +62,12 @@ public class ActivityEmbeddingUtils {
 
         return isFlagEnabled && isSplitSupported;
     }
+
+    /** Whether the screen meets two-pane resolution. */
+    public static boolean isTwoPaneResolution(Context context) {
+        final Context appContext = context.getApplicationContext();
+        final DisplayMetrics dm = appContext.getResources().getDisplayMetrics();
+        return dm.widthPixels >= getMinCurrentScreenSplitWidthPx(appContext)
+                && dm.heightPixels >= getMinSmallestScreenSplitWidthPx(appContext);
+    }
 }

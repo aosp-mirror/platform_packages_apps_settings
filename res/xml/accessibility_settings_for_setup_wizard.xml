@@ -24,25 +24,15 @@
         android:key="font_size_preference"
         android:icon="@drawable/ic_font_size"
         android:summary="@string/short_summary_font_size"
-        android:title="@string/title_font_size">
-        <intent
-            android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.accessibility.AccessibilityScreenSizeForSetupWizardActivity">
-            <extra android:name="vision_fragment_no" android:value="@integer/suw_font_size_fragment_no"/>
-        </intent>
-    </Preference>
+        android:title="@string/title_font_size"
+        settings:controller="com.android.settings.accessibility.FontSizePreferenceController" />
 
     <com.android.settings.display.ScreenZoomPreference
         android:key="force_density_preference"
         android:icon="@drawable/ic_screen_zoom"
         android:summary="@string/screen_zoom_short_summary"
-        android:title="@string/screen_zoom_title">
-        <intent
-            android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.accessibility.AccessibilityScreenSizeForSetupWizardActivity">
-            <extra android:name="vision_fragment_no" android:value="@integer/suw_display_size_fragment_no"/>
-        </intent>
-    </com.android.settings.display.ScreenZoomPreference>
+        android:title="@string/screen_zoom_title"
+        settings:controller="com.android.settings.accessibility.ScreenSizePreferenceController" />
 
     <Preference
         android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"

@@ -19,6 +19,7 @@ package com.android.settings.network;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -75,23 +76,24 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
         }
 
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            if (ConfirmationSimDeletionPredicate.getSingleton().test(getContext())) {
+            Context context = getContext();
+            if (ConfirmationSimDeletionPredicate.getSingleton().test(context)) {
                 // Create a "verify it's you" verification over keyguard
                 // when "erase" button been pressed.
                 // This might protect from erasing by some automation process.
-                WifiDppUtils.showLockScreen(getContext(), () -> runAsyncWipe());
+                WifiDppUtils.showLockScreen(context, () -> runAsyncWipe(context));
             } else {
-                runAsyncWipe();
+                runAsyncWipe(context);
             }
         }
     }
 
-    private void runAsyncWipe() {
+    private void runAsyncWipe(Context context) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 RecoverySystem.wipeEuiccData(
-                        getContext(), PACKAGE_NAME_EUICC_DATA_MANAGEMENT_CALLBACK);
+                        context, PACKAGE_NAME_EUICC_DATA_MANAGEMENT_CALLBACK);
             }
         });
     }

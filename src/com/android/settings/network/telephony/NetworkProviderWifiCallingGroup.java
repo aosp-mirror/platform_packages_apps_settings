@@ -285,7 +285,9 @@ public class NetworkProviderWifiCallingGroup extends
         }
 
         public void unregister() {
-            mTelephonyManager.unregisterTelephonyCallback(this);
+            if (mTelephonyManager != null) {
+                mTelephonyManager.unregisterTelephonyCallback(this);
+            }
         }
     }
 
