@@ -19,7 +19,6 @@ package com.android.settings.panel;
 import static com.android.settings.panel.PanelContent.VIEW_TYPE_SLIDER;
 import static com.android.settings.panel.PanelSlicesAdapter.MAX_NUM_OF_SLICES;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
-import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -122,53 +121,6 @@ public class PanelSlicesAdapterTest {
 
         assertThat(adapter.getItemCount()).isEqualTo(MAX_NUM_OF_SLICES);
         assertThat(adapter.getData().size()).isEqualTo(MAX_NUM_OF_SLICES);
-    }
-
-    @Test
-    public void mediaOutputIndicatorSlice_shouldNotAllowDividerAbove() {
-        addTestLiveData(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
-
-        final PanelSlicesAdapter adapter =
-                new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
-        final int position = 0;
-        final ViewGroup view = new FrameLayout(mContext);
-        final SliceRowViewHolder viewHolder =
-                adapter.onCreateViewHolder(view, 0 /* view type*/);
-
-        adapter.onBindViewHolder(viewHolder, position);
-
-        assertThat(viewHolder.isDividerAllowedAbove()).isFalse();
-    }
-
-    @Test
-    public void sliderPanelType_shouldAllowDividerBelow() {
-        addTestLiveData(VOLUME_MEDIA_URI);
-        mFakePanelContent.setViewType(PanelContent.VIEW_TYPE_SLIDER);
-
-        final PanelSlicesAdapter adapter =
-                new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
-        final int position = 0;
-        final ViewGroup view = new FrameLayout(mContext);
-        final SliceRowViewHolder viewHolder =
-                adapter.onCreateViewHolder(view, PanelContent.VIEW_TYPE_SLIDER);
-        adapter.onBindViewHolder(viewHolder, position);
-
-        assertThat(viewHolder.isDividerAllowedBelow()).isTrue();
-    }
-
-    @Test
-    public void defaultPanelType_shouldAllowDividerBelow() {
-        addTestLiveData(VOLUME_MEDIA_URI);
-        mFakePanelContent.setViewType(0 /* viewType */);
-
-        final PanelSlicesAdapter adapter =
-                new PanelSlicesAdapter(mPanelFragment, mData, 0 /* metrics category */);
-        final int position = 0;
-        final ViewGroup view = new FrameLayout(mContext);
-        final SliceRowViewHolder viewHolder = adapter.onCreateViewHolder(view, 0/* viewType */);
-        adapter.onBindViewHolder(viewHolder, position);
-
-        assertThat(viewHolder.isDividerAllowedBelow()).isTrue();
     }
 
     @Test
