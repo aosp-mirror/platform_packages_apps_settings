@@ -35,12 +35,11 @@
         settings:controller="com.android.settings.accessibility.ScreenSizePreferenceController" />
 
     <Preference
-        android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
+        android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragmentForSetupWizard"
         android:key="screen_magnification_preference"
         android:icon="@drawable/ic_accessibility_magnification"
         android:summary="@string/accessibility_preference_magnification_summary"
-        android:title="@string/accessibility_screen_magnification_title"
-        settings:controller="com.android.settings.accessibility.MagnificationPreferenceController"/>
+        android:title="@string/accessibility_screen_magnification_title" />
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.accessibility.ToggleSelectToSpeakPreferenceFragmentForSetupWizard"
