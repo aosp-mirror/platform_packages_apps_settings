@@ -93,8 +93,9 @@ public class BluetoothCodecDialogPreferenceController extends
         int codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
         switch (index) {
             case 0:
-                codecTypeValue = getHighestCodec(getSelectableConfigs(
-                    mBluetoothA2dp.getActiveDevice()));
+                final BluetoothDevice activeDevice = mBluetoothA2dp.getActiveDevice();
+                codecTypeValue = getHighestCodec(mBluetoothA2dp, activeDevice,
+                        getSelectableConfigs(activeDevice));
                 codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
                 break;
             case 1:
@@ -145,6 +146,11 @@ public class BluetoothCodecDialogPreferenceController extends
     public void onIndexUpdated(int index) {
         super.onIndexUpdated(index);
         mCallback.onBluetoothCodecChanged();
+    }
+
+    @Override
+    public void onHDAudioEnabled(boolean enabled) {
+        writeConfigurationValues(/* index= */ 0);
     }
 
     private List<Integer> getIndexFromConfig(BluetoothCodecConfig[] configs) {
