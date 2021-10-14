@@ -33,7 +33,7 @@
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <!-- LockPatternView colors -->
-        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
     </style>
 
     <style name="GlifTheme.Light" parent="SudThemeGlif.Light">
@@ -51,7 +51,7 @@
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
-        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
     </style>
 
     <style name="GlifV2Theme" parent="SudThemeGlifV2.DayNight">
@@ -70,7 +70,7 @@
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <!-- LockPatternView colors -->
-        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
     </style>
 
     <style name="GlifV2Theme.Light" parent="SudThemeGlifV2.Light">
@@ -88,7 +88,7 @@
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
-        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
     </style>
 
     <style name="GlifV3Theme" parent="SudThemeGlifV3.DayNight">
@@ -107,7 +107,7 @@
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
         <!-- LockPatternView colors -->
-        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
     </style>
 
     <style name="GlifV3Theme.Footer" parent="@style/SudThemeGlifV3.DayNight">
@@ -130,7 +130,7 @@
         <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
         <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
 
-        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
     </style>
 
     <style name="GlifV3Theme.Light.NoActionBar" parent="GlifV3Theme.Light">
@@ -223,9 +223,6 @@
 
         <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
     </style>
-
-    <!-- This theme was applied to Settings pages which are running under SUW. -->
-    <style name="SubSettings.SetupWizard" parent="SudThemeGlifV3.Light" />
 
     <!-- This theme was applied to Settings pages which are running under SUW with DynamicColor. -->
     <style name="SudDynamicColorThemeSettings.SetupWizard" parent="SudDynamicColorThemeGlifV3.Light">
