@@ -51,6 +51,7 @@ public class ModuleLicensePreference extends Preference {
                         ModuleLicenseProvider.LICENSE_FILE_MIME_TYPE)
                 .putExtra(Intent.EXTRA_TITLE, mModule.getName())
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .addCategory(Intent.CATEGORY_DEFAULT)
                 .setPackage("com.android.htmlviewer");
         try {
