@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -42,6 +43,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -85,8 +88,11 @@ public class HighlightablePreferenceGroupAdapterTest {
 
     @Test
     public void requestHighlight_hasKey_notHighlightedBefore_shouldRequest() {
-        mAdapter.requestHighlight(mRoot, mock(RecyclerView.class));
+        when(mAdapter.getPreferenceAdapterPosition(anyString())).thenReturn(1);
+        mAdapter.requestHighlight(mRoot, mock(RecyclerView.class), mock(AppBarLayout.class));
 
+        verify(mRoot).postDelayed(any(),
+                eq(HighlightablePreferenceGroupAdapter.DELAY_COLLAPSE_DURATION_MILLIS));
         verify(mRoot).postDelayed(any(),
                 eq(HighlightablePreferenceGroupAdapter.DELAY_HIGHLIGHT_DURATION_MILLIS));
     }
@@ -95,21 +101,21 @@ public class HighlightablePreferenceGroupAdapterTest {
     public void requestHighlight_noKey_highlightedBefore_noRecyclerView_shouldNotRequest() {
         ReflectionHelpers.setField(mAdapter, "mHighlightKey", null);
         ReflectionHelpers.setField(mAdapter, "mHighlightRequested", false);
-        mAdapter.requestHighlight(mRoot, mock(RecyclerView.class));
+        mAdapter.requestHighlight(mRoot, mock(RecyclerView.class),  mock(AppBarLayout.class));
 
         ReflectionHelpers.setField(mAdapter, "mHighlightKey", TEST_KEY);
         ReflectionHelpers.setField(mAdapter, "mHighlightRequested", true);
-        mAdapter.requestHighlight(mRoot, mock(RecyclerView.class));
+        mAdapter.requestHighlight(mRoot, mock(RecyclerView.class), mock(AppBarLayout.class));
 
         ReflectionHelpers.setField(mAdapter, "mHighlightKey", TEST_KEY);
         ReflectionHelpers.setField(mAdapter, "mHighlightRequested", false);
-        mAdapter.requestHighlight(mRoot, null /* recyclerView */);
+        mAdapter.requestHighlight(mRoot, null /* recyclerView */,  mock(AppBarLayout.class));
 
         verifyZeroInteractions(mRoot);
     }
 
     @Test
-    public void adjustInitialExpandedChildCount_invalidInput_shouldNotadjust() {
+    public void adjustInitialExpandedChildCount_invalidInput_shouldNotAdjust() {
         HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(null /* host */);
         HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
         final Bundle args = new Bundle();
@@ -178,7 +184,7 @@ public class HighlightablePreferenceGroupAdapterTest {
         assertThat(mAdapter.mFadeInAnimated).isTrue();
         assertThat(mViewHolder.itemView.getBackground()).isInstanceOf(ColorDrawable.class);
         assertThat(mViewHolder.itemView.getTag(R.id.preference_highlighted)).isEqualTo(true);
-        verify(mAdapter).requestRemoveHighlightDelayed(mViewHolder.itemView);
+        verify(mAdapter).requestRemoveHighlightDelayed(mViewHolder);
     }
 
     @Test
@@ -191,14 +197,14 @@ public class HighlightablePreferenceGroupAdapterTest {
         // through animation.
         assertThat(mAdapter.mFadeInAnimated).isTrue();
         // remove highlight should be requested.
-        verify(mAdapter).requestRemoveHighlightDelayed(mViewHolder.itemView);
+        verify(mAdapter).requestRemoveHighlightDelayed(mViewHolder);
 
         ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
         mAdapter.updateBackground(mViewHolder, 10);
         // only sets background color once - if it's animation this would be called many times
         verify(mViewHolder.itemView).setBackgroundColor(mAdapter.mHighlightColor);
         // remove highlight should be requested.
-        verify(mAdapter, times(2)).requestRemoveHighlightDelayed(mViewHolder.itemView);
+        verify(mAdapter, times(2)).requestRemoveHighlightDelayed(mViewHolder);
     }
 
     @Test

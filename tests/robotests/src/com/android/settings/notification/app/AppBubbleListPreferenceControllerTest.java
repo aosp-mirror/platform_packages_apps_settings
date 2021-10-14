@@ -104,7 +104,7 @@ public class AppBubbleListPreferenceControllerTest {
     public void isAvailable_BUBBLE_PREFERENCE_NONE_false() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.bubblePreference = BUBBLE_PREFERENCE_NONE;
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -113,7 +113,7 @@ public class AppBubbleListPreferenceControllerTest {
     public void isAvailable_BUBBLE_PREFERENCE_SELECTED_true() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.bubblePreference = BUBBLE_PREFERENCE_SELECTED;
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -122,7 +122,7 @@ public class AppBubbleListPreferenceControllerTest {
     public void isAvailable_BUBBLE_PREFERENCE_ALL_true() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.bubblePreference = BUBBLE_PREFERENCE_ALL;
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -131,7 +131,7 @@ public class AppBubbleListPreferenceControllerTest {
     public void filterAndSortConversations_BUBBLE_PREFERENCE_SELECTED_filtersAllowedBubbles() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.bubblePreference = BUBBLE_PREFERENCE_SELECTED;
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
 
         List<ConversationChannelWrapper> result =
                 mController.filterAndSortConversations(mConvoList.getList());
@@ -144,7 +144,7 @@ public class AppBubbleListPreferenceControllerTest {
     public void filterAndSortConversations_BUBBLE_PREFERENCE_ALL_filtersExcludedBubbles() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.bubblePreference = BUBBLE_PREFERENCE_ALL;
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
 
         List<ConversationChannelWrapper> result =
                 mController.filterAndSortConversations(mConvoList.getList());
@@ -158,7 +158,7 @@ public class AppBubbleListPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.bubblePreference = BUBBLE_PREFERENCE_ALL;
         appRow.pkg = "PKG";
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
         mController.mPreference = new PreferenceCategory(mContext);
 
         ConversationChannelWrapper ccw = mConvoList.getList().get(0);

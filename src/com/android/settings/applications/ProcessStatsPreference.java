@@ -22,7 +22,7 @@ import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
 
-import com.android.settingslib.widget.apppreference.AppPreference;
+import com.android.settingslib.widget.AppPreference;
 
 public class ProcessStatsPreference extends AppPreference {
     static final String TAG = "ProcessStatsPreference";

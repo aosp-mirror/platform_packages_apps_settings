@@ -144,7 +144,7 @@ public class ContactDiscoveryPreferenceController extends TelephonyTogglePrefere
 
         for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(context)) {
             if (mSubId == info.getSubscriptionId()) {
-                result = info.getDisplayName();
+                result = SubscriptionUtil.getUniqueSubscriptionDisplayName(info, context);
                 break;
             }
         }

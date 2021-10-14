@@ -132,7 +132,6 @@ abstract class AbstractMobileNetworkSettings extends RestrictedDashboardFragment
         final TelephonyStatusControlSession session =
                 setTelephonyAvailabilityStatus(controllers);
 
-
         final PreferenceScreen screen = getPreferenceScreen();
         controllers.forEach(controller -> {
             controller.displayPreference(screen);

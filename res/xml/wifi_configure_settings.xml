@@ -27,13 +27,6 @@
         settings:controller="com.android.settings.wifi.WifiWakeupPreferenceController"/>
 
     <SwitchPreference
-        android:key="use_open_wifi_automatically"
-        android:icon="@drawable/ic_open_wifi_autoconnect"
-        android:title="@string/use_open_wifi_automatically_title"
-        android:summary="@string/use_open_wifi_automatically_summary"
-        settings:controller="com.android.settings.wifi.UseOpenWifiPreferenceController"/>
-
-    <SwitchPreference
         android:key="notify_open_networks"
         android:title="@string/wifi_notify_open_networks"
         android:icon="@drawable/ic_open_wifi_notifications"
@@ -58,12 +51,6 @@
             <extra android:name="certificate_install_usage" android:value="wifi"/>
         </intent>
     </Preference>
-
-    <Preference
-        android:key="network_scorer_picker"
-        android:title="@string/network_scorer_picker_title"
-        android:fragment="com.android.settings.network.NetworkScorerPicker"
-        settings:controller="com.android.settings.network.NetworkScorerPickerPreferenceController" />
 
     <Preference
         android:key="wifi_direct"

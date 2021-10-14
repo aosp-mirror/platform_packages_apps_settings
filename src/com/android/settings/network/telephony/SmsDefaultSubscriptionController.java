@@ -21,6 +21,8 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
+import com.android.settings.Utils;
+
 public class SmsDefaultSubscriptionController extends DefaultSubscriptionController {
 
     private final boolean mIsAskEverytimeSupported;
@@ -55,5 +57,14 @@ public class SmsDefaultSubscriptionController extends DefaultSubscriptionControl
     public PhoneAccountHandle getDefaultCallingAccountHandle() {
         // Not supporting calling account override by VoIP
         return null;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        if (Utils.isProviderModelEnabled(mContext)) {
+            return MobileNetworkUtils.getPreferredStatus(mContext, mManager, false);
+        } else {
+            return super.getSummary();
+        }
     }
 }

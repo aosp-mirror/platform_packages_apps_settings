@@ -22,8 +22,8 @@ import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -41,7 +41,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settingslib.RestrictedLockUtils;
@@ -62,7 +63,7 @@ import java.util.List;
  * <p>The key of {@link WifiEntry} should be saved to the intent Extras when launching this class
  * in order to properly render this page.
  */
-public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
+public class WifiNetworkDetailsFragment2 extends RestrictedDashboardFragment implements
         WifiDialog2.WifiDialog2Listener {
 
     private static final String TAG = "WifiNetworkDetailsFrg2";
@@ -76,12 +77,42 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
     private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
     @VisibleForTesting
+    boolean mIsUiRestricted;
+    @VisibleForTesting
     NetworkDetailsTracker mNetworkDetailsTracker;
     private HandlerThread mWorkerThread;
     private WifiDetailPreferenceController2 mWifiDetailPreferenceController2;
     private List<WifiDialog2.WifiDialog2Listener> mWifiDialogListeners = new ArrayList<>();
     @VisibleForTesting
     List<AbstractPreferenceController> mControllers;
+
+    public WifiNetworkDetailsFragment2() {
+        super(UserManager.DISALLOW_CONFIG_WIFI);
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        setIfOnlyAvailableForAdmins(true);
+        mIsUiRestricted = isUiRestricted();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mIsUiRestricted) {
+            restrictUi();
+        }
+    }
+
+    @VisibleForTesting
+    void restrictUi() {
+        clearWifiEntryCallback();
+        if (!isUiRestrictedByOnlyAdmin()) {
+            getEmptyTextView().setText(R.string.wifi_empty_list_user_restricted);
+        }
+        getPreferenceScreen().removeAll();
+    }
 
     @Override
     public void onDestroy() {
@@ -126,7 +157,7 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (isEditable()) {
+        if (!mIsUiRestricted && isEditable()) {
             MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
             item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -242,18 +273,28 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
             }
         };
 
-        mNetworkDetailsTracker = NetworkDetailsTracker.createNetworkDetailsTracker(
-                getSettingsLifecycle(),
-                context,
-                context.getSystemService(WifiManager.class),
-                context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
-                new Handler(Looper.getMainLooper()),
-                mWorkerThread.getThreadHandler(),
-                elapsedRealtimeClock,
-                MAX_SCAN_AGE_MILLIS,
-                SCAN_INTERVAL_MILLIS,
-                getArguments().getString(KEY_CHOSEN_WIFIENTRY_KEY));
+        mNetworkDetailsTracker = FeatureFactory.getFactory(context)
+                .getWifiTrackerLibProvider()
+                .createNetworkDetailsTracker(
+                        getSettingsLifecycle(),
+                        context,
+                        new Handler(Looper.getMainLooper()),
+                        mWorkerThread.getThreadHandler(),
+                        elapsedRealtimeClock,
+                        MAX_SCAN_AGE_MILLIS,
+                        SCAN_INTERVAL_MILLIS,
+                        getArguments().getString(KEY_CHOSEN_WIFIENTRY_KEY));
+    }
+
+    private void clearWifiEntryCallback() {
+        if (mNetworkDetailsTracker == null) {
+            return;
+        }
+        final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
+        if (wifiEntry == null) {
+            return;
+        }
+        wifiEntry.setListener(null);
     }
 
     private boolean isEditable() {

@@ -29,9 +29,9 @@ import com.android.settings.core.BasePreferenceController;
 public class EncryptionStatusPreferenceController extends BasePreferenceController {
 
 
-    static final String PREF_KEY_ENCRYPTION_DETAIL_PAGE =
+    public static final String PREF_KEY_ENCRYPTION_DETAIL_PAGE =
             "encryption_and_credentials_encryption_status";
-    static final String PREF_KEY_ENCRYPTION_SECURITY_PAGE = "encryption_and_credential";
+    public static final String PREF_KEY_ENCRYPTION_SECURITY_PAGE = "encryption_and_credential";
 
     private final UserManager mUserManager;
 

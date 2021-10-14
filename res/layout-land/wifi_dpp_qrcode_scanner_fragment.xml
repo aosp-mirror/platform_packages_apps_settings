@@ -17,9 +17,11 @@
 
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:icon="@drawable/ic_scan_32dp">
+    android:icon="@drawable/ic_scan_32dp"
+    app:sudDescriptionText="@string/wifi_dpp_scan_qr_code_join_unknown_network">
 
     <LinearLayout
         style="@style/SudContentFrame"
@@ -27,15 +29,6 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@android:id/summary"
-            style="@style/TextAppearance.SudGlifBody"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="?attr/sudMarginSides"
-            android:layout_marginEnd="?attr/sudMarginSides"
-            android:textAlignment="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,8 +56,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="?attr/sudMarginSides"
-                android:layout_marginEnd="?attr/sudMarginSides"
+                android:layout_marginStart="?attr/sudMarginStart"
+                android:layout_marginEnd="?attr/sudMarginEnd"
                 android:textAlignment="center"
                 android:visibility="invisible"/>
 

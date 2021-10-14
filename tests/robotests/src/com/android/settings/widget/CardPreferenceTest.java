@@ -37,7 +37,7 @@ public class CardPreferenceTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mContext.setTheme(R.style.PreferenceTheme);
+        mContext.setTheme(R.style.SettingsPreferenceTheme);
         mCardPreference = new CardPreference(mContext);
     }
 
@@ -45,5 +45,4 @@ public class CardPreferenceTest {
     public void getLayoutResource() {
         assertThat(mCardPreference.getLayoutResource()).isEqualTo(R.layout.card_preference_layout);
     }
-
 }

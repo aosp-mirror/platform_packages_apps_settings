@@ -23,9 +23,11 @@ import android.os.SystemProperties;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-class SelectDSUPreferenceController extends DeveloperOptionsPreferenceController {
+class SelectDSUPreferenceController extends DeveloperOptionsPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String DSU_LOADER_KEY = "dsu_loader";
 

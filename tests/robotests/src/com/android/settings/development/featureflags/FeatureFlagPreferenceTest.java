@@ -41,17 +41,8 @@ public class FeatureFlagPreferenceTest {
     }
 
     @Test
-    public void constructor_shouldSetTitleAndSummary() {
+    public void constructor_shouldSetTitle() {
         assertThat(mPreference.getTitle()).isEqualTo(KEY);
-        assertThat(mPreference.getSummary()).isEqualTo("false");
         assertThat(mPreference.isChecked()).isFalse();
-    }
-
-    @Test
-    public void toggle_shouldUpdateSummary() {
-        mPreference.setChecked(true);
-
-        assertThat(mPreference.getSummary()).isEqualTo("true");
-        assertThat(mPreference.isChecked()).isTrue();
     }
 }
