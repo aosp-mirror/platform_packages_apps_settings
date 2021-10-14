@@ -178,8 +178,9 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         .setOnlyAlertOnce(false)
                         .setDefaults(Notification.DEFAULT_ALL)
                         .setContentIntent(PendingIntent.getActivity(context, 0,
-                                connectionAccessIntent, 0))
-                        .setDeleteIntent(PendingIntent.getBroadcast(context, 0, deleteIntent, 0))
+                                connectionAccessIntent, PendingIntent.FLAG_IMMUTABLE))
+                        .setDeleteIntent(PendingIntent.getBroadcast(context, 0, deleteIntent,
+                                PendingIntent.FLAG_IMMUTABLE))
                         .setColor(context.getColor(
                                 com.android.internal.R.color.system_notification_accent_color))
                         .setLocalOnly(true)
@@ -292,6 +293,6 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         : BluetoothDevice.CONNECTION_ACCESS_NO);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
         intent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE, mRequestType);
-        mContext.sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_ADMIN);
+        mContext.sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_CONNECT);
     }
 }

@@ -33,6 +33,12 @@ import android.content.pm.ShortcutInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.BulletSpan;
+import android.text.style.QuoteSpan;
+import android.text.style.SubscriptSpan;
+import android.text.style.UnderlineSpan;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -209,6 +215,29 @@ public class ConversationListPreferenceControllerTest {
                 ccw.getNotificationChannel().getId());
         assertThat(extras.getString(Settings.EXTRA_CONVERSATION_ID)).isEqualTo(
                 ccw.getNotificationChannel().getConversationId());
+    }
+
+    @Test
+    public void testCompareSpans() {
+        ConversationChannelWrapper one = new ConversationChannelWrapper();
+        String text1 = "one one";
+        SpannableStringBuilder builder1 = new SpannableStringBuilder(text1);
+        Object first1 = new SubscriptSpan();
+        builder1.setSpan(first1, 2, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ShortcutInfo s1 = new ShortcutInfo.Builder(mContext, "one").setShortLabel(
+                builder1).build();
+        one.setShortcutInfo(s1);
+
+        ConversationChannelWrapper two = new ConversationChannelWrapper();
+        String text2 = "two two";
+        SpannableStringBuilder builder2 = new SpannableStringBuilder(text2);
+        Object first2 = new SubscriptSpan();
+        builder2.setSpan(first2, 2, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ShortcutInfo s2 = new ShortcutInfo.Builder(mContext, "two").setShortLabel(
+                builder2).build();
+        two.setShortcutInfo(s2);
+
+        assertThat(mController.mConversationComparator.compare(one, two)).isLessThan(0);
     }
 
     private final class TestPreferenceController extends ConversationListPreferenceController {

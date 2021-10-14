@@ -50,11 +50,6 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected boolean isParalleledControllers() {
-        return true;
-    }
-
-    @Override
     public int getHelpResource() {
         return R.string.help_url_connected_devices;
     }

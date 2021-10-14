@@ -111,9 +111,13 @@ public class SettingsDumpService extends Service {
             for (SubscriptionInfo info : manager.getAvailableSubscriptionInfoList()) {
                 telephonyManager = telephonyManager
                         .createForSubscriptionId(info.getSubscriptionId());
-                NetworkTemplate carrier = NetworkTemplate.buildTemplateCarrierMetered(
-                        telephonyManager.getSubscriberId());
-                final JSONObject usage = dumpDataUsage(carrier, controller);
+                String subscriberId = telephonyManager.getSubscriberId();
+                // The null subscriberId means that no any mobile/carrier network will be matched.
+                // Using old API: buildTemplateMobileAll for the null subscriberId to avoid NPE.
+                NetworkTemplate template = subscriberId != null
+                        ? NetworkTemplate.buildTemplateCarrierMetered(subscriberId)
+                        : NetworkTemplate.buildTemplateMobileAll(subscriberId);
+                final JSONObject usage = dumpDataUsage(template, controller);
                 usage.put("subId", info.getSubscriptionId());
                 array.put(usage);
             }

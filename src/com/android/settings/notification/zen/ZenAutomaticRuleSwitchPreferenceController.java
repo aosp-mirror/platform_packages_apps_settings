@@ -25,18 +25,18 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 public class ZenAutomaticRuleSwitchPreferenceController extends
         AbstractZenModeAutomaticRulePreferenceController implements
-        SwitchBar.OnSwitchChangeListener {
+        OnMainSwitchChangeListener {
 
     private static final String KEY = "zen_automatic_rule_switch";
     private AutomaticZenRule mRule;
     private String mId;
-    private SwitchBar mSwitchBar;
+    private MainSwitchPreference mSwitchBar;
 
     public ZenAutomaticRuleSwitchPreferenceController(Context context, Fragment parent,
             Lifecycle lifecycle) {
@@ -56,12 +56,11 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        LayoutPreference pref = screen.findPreference(KEY);
-        mSwitchBar = pref.findViewById(R.id.switch_bar);
+        final Preference pref = screen.findPreference(KEY);
+        mSwitchBar = (MainSwitchPreference) pref;
 
         if (mSwitchBar != null) {
-            mSwitchBar.setSwitchBarText(R.string.zen_mode_use_automatic_rule,
-                    R.string.zen_mode_use_automatic_rule);
+            mSwitchBar.setTitle(mContext.getString(R.string.zen_mode_use_automatic_rule));
             try {
                 pref.setOnPreferenceClickListener(preference -> {
                     mRule.setEnabled(!mRule.isEnabled());
@@ -72,7 +71,6 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
             } catch (IllegalStateException e) {
                 // an exception is thrown if you try to add the listener twice
             }
-            mSwitchBar.show();
         }
     }
 
@@ -83,7 +81,7 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
 
     public void updateState(Preference preference) {
         if (mRule != null) {
-            mSwitchBar.setChecked(mRule.isEnabled());
+            mSwitchBar.updateStatus(mRule.isEnabled());
         }
     }
 

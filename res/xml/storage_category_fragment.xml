@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2021 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!-- Layout for the storage breakdown for a profile of the primary user. -->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/storage_settings">
+    <com.android.settings.widget.CardPreference
+        android:key="free_up_space"
+        android:order="4"
+        android:title="@string/storage_free_up_space_title"
+        android:summary="@string/storage_free_up_space_summary"
+        android:icon="@drawable/ic_files_go_round"/>
+    <!-- Preference order 100~200 are 'ONLY' for storage category preferences below. -->
+    <Preference
+        android:key="pref_public_storage"
+        android:title="@string/storage_files"
+        android:icon="@drawable/ic_folder_vd_theme_24"
+        android:order="100"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_images"
+        android:title="@string/storage_images"
+        android:icon="@drawable/ic_photo_library"
+        android:order="101"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_videos"
+        android:title="@string/storage_videos"
+        android:icon="@drawable/ic_local_movies"
+        android:order="102"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_audio"
+        android:title="@string/storage_audio"
+        android:icon="@drawable/ic_media_stream"
+        android:order="103"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_apps"
+        android:title="@string/storage_apps"
+        android:icon="@drawable/ic_storage_apps"
+        android:order="104"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_games"
+        android:title="@string/storage_games"
+        android:icon="@drawable/ic_videogame_vd_theme_24"
+        android:order="105"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_documents_and_other"
+        android:title="@string/storage_documents_and_other"
+        android:icon="@drawable/ic_folder_vd_theme_24"
+        android:order="106"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_system"
+        android:title="@string/storage_system"
+        android:icon="@drawable/ic_system_update"
+        android:order="107"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_trash"
+        android:title="@string/storage_trash"
+        android:icon="@drawable/ic_trash_can"
+        android:order="108"/>
+    <!-- Preference order 100~200 are 'ONLY' for storage category preferences above. -->
+    <PreferenceCategory
+        android:key="pref_secondary_users"
+        android:title="@string/storage_other_users"
+        android:order="201" />
+</PreferenceScreen>

@@ -38,21 +38,16 @@ public class FeatureFlagPreference extends SwitchPreference {
         } else {
             isFeatureEnabled = FeatureFlagUtils.isEnabled(context, key);
         }
-        setCheckedInternal(isFeatureEnabled);
+        super.setChecked(isFeatureEnabled);
     }
 
     @Override
     public void setChecked(boolean isChecked) {
-        setCheckedInternal(isChecked);
+        super.setChecked(isChecked);
         if (mIsPersistent) {
             FeatureFlagPersistent.setEnabled(getContext(), mKey, isChecked);
         } else {
             FeatureFlagUtils.setEnabled(getContext(), mKey, isChecked);
         }
-    }
-
-    private void setCheckedInternal(boolean isChecked) {
-        super.setChecked(isChecked);
-        setSummary(Boolean.toString(isChecked));
     }
 }

@@ -20,24 +20,22 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/graphics_driver_dashboard_title">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="top_info_graphics_driver"
+        android:title="@string/graphics_driver_footer_text"
+        settings:controller="com.android.settings.development.graphicsdriver.GraphicsDriverTopIntroPreferenceController"/>
+
     <ListPreference
         android:key="graphics_driver_all_apps_preference"
         android:title="@string/graphics_driver_all_apps_preference_title"
         android:dialogTitle="@string/graphics_driver_all_apps_preference_title"
-        settings:controller="com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController">
-    </ListPreference>
+        settings:controller="com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController"
+        settings:allowDividerAbove="true"/>
 
     <PreferenceCategory
         android:key="graphics_driver_category"
         android:title="@string/graphics_driver_app_preference_title"
         settings:controller="com.android.settings.development.graphicsdriver.GraphicsDriverAppPreferenceController">
     </PreferenceCategory>
-
-    <com.android.settingslib.widget.FooterPreference
-        android:key="graphics_driver_footer"
-        android:title="@string/graphics_driver_footer_text"
-        android:selectable="false"
-        settings:controller="com.android.settings.development.graphicsdriver.GraphicsDriverFooterPreferenceController">
-    </com.android.settingslib.widget.FooterPreference>
 
 </PreferenceScreen>

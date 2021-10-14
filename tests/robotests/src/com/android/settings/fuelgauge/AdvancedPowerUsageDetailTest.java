@@ -33,6 +33,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -41,14 +42,13 @@ import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.util.Pair;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.os.BatterySipper;
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -58,8 +58,11 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -82,6 +85,7 @@ public class AdvancedPowerUsageDetailTest {
     private static final String SUMMARY = "summary";
     private static final String[] PACKAGE_NAME = {"com.android.app"};
     private static final String USAGE_PERCENT = "16%";
+    private static final String SLOT_TIME = "12 am-2 am";
     private static final int ICON_ID = 123;
     private static final int UID = 1;
     private static final int POWER_MAH = 150;
@@ -90,14 +94,10 @@ public class AdvancedPowerUsageDetailTest {
     private static final long FOREGROUND_SERVICE_TIME_MS = 444;
     private static final long FOREGROUND_TIME_MS =
             FOREGROUND_ACTIVITY_TIME_MS + FOREGROUND_SERVICE_TIME_MS;
-    private static final long PROCSTATE_TOP_TIME_MS = FOREGROUND_ACTIVITY_TIME_MS;
-    private static final long BACKGROUND_TIME_US = BACKGROUND_TIME_MS * 1000;
-    private static final long FOREGROUND_ACTIVITY_TIME_US = FOREGROUND_ACTIVITY_TIME_MS * 1000;
     private static final long FOREGROUND_SERVICE_TIME_US = FOREGROUND_SERVICE_TIME_MS * 1000;
-    private static final long FOREGROUND_TIME_US = FOREGROUND_TIME_MS * 1000;
-    private static final long PROCSTATE_TOP_TIME_US = PROCSTATE_TOP_TIME_MS * 1000;
-    private static final long PHONE_FOREGROUND_TIME_MS = 250 * 1000;
-    private static final long PHONE_BACKGROUND_TIME_MS = 0;
+    private static final String KEY_PREF_UNRESTRICTED = "unrestricted_pref";
+    private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
+    private static final String KEY_PREF_RESTRICTED = "restricted_pref";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private FragmentActivity mActivity;
@@ -114,33 +114,35 @@ public class AdvancedPowerUsageDetailTest {
     @Mock
     private BatteryEntry mBatteryEntry;
     @Mock
-    private BatterySipper mBatterySipper;
-    @Mock
-    private BatteryStatsHelper mBatteryStatsHelper;
-    @Mock
-    private BatteryStats.Uid mUid;
-    @Mock
     private PackageManager mPackageManager;
     @Mock
     private AppOpsManager mAppOpsManager;
     @Mock
     private LoaderManager mLoaderManager;
     @Mock
-    private BatteryStats.Timer mForegroundActivityTimer;
-    @Mock
     private BatteryUtils mBatteryUtils;
+    @Mock
+    private BatteryOptimizeUtils mBatteryOptimizeUtils;
     private Context mContext;
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
+    private FooterPreference mFooterPreference;
+    private RadioButtonPreference mRestrictedPreference;
+    private RadioButtonPreference mOptimizePreference;
+    private RadioButtonPreference mUnrestrictedPreference;
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
+    private FakeFeatureFactory mFeatureFactory;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        FakeFeatureFactory.setupForTest();
+        when(mContext.getPackageName()).thenReturn("foo");
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
 
         mFragment = spy(new AdvancedPowerUsageDetail());
         doReturn(mContext).when(mFragment).getContext();
@@ -149,6 +151,8 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(APP_LABEL).when(mBundle).getString(nullable(String.class));
         when(mFragment.getArguments()).thenReturn(mBundle);
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
+                .thenReturn(true);
 
         ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
@@ -168,23 +172,17 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mEntityHeaderController).when(mEntityHeaderController)
                 .setSummary(nullable(String.class));
 
-        doReturn(UID).when(mBatterySipper).getUid();
+        when(mBatteryEntry.getUid()).thenReturn(UID);
         when(mBatteryEntry.getLabel()).thenReturn(APP_LABEL);
-        doReturn(BACKGROUND_TIME_US).when(mUid).getProcessStateTime(
-                eq(BatteryStats.Uid.PROCESS_STATE_BACKGROUND), anyLong(), anyInt());
-        doReturn(PROCSTATE_TOP_TIME_US).when(mUid).getProcessStateTime(
-                eq(BatteryStats.Uid.PROCESS_STATE_TOP), anyLong(), anyInt());
-        doReturn(mForegroundActivityTimer).when(mUid).getForegroundActivityTimer();
-        doReturn(FOREGROUND_ACTIVITY_TIME_US).when(mForegroundActivityTimer)
-                .getTotalTimeLocked(anyLong(), anyInt());
-        ReflectionHelpers.setField(mBatteryEntry, "sipper", mBatterySipper);
+        when(mBatteryEntry.getTimeInBackgroundMs()).thenReturn(BACKGROUND_TIME_MS);
+        when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(FOREGROUND_TIME_MS);
         mBatteryEntry.iconId = ICON_ID;
-        mBatterySipper.uidObj = mUid;
-        mBatterySipper.drainType = BatterySipper.DrainType.APP;
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
+        mFragment.enableTriState = true;
         mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
+        mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());
@@ -200,6 +198,7 @@ public class AdvancedPowerUsageDetailTest {
 
         Answer<Void> callable = invocation -> {
             mBundle = captor.getValue().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+            System.out.println("mBundle = " + mBundle);
             return null;
         };
         doAnswer(callable).when(mActivity).startActivityAsUser(captor.capture(),
@@ -208,13 +207,32 @@ public class AdvancedPowerUsageDetailTest {
 
         mForegroundPreference = new Preference(mContext);
         mBackgroundPreference = new Preference(mContext);
+        mFooterPreference = new FooterPreference(mContext);
+        mRestrictedPreference = new RadioButtonPreference(mContext);
+        mOptimizePreference = new RadioButtonPreference(mContext);
+        mUnrestrictedPreference = new RadioButtonPreference(mContext);
         mFragment.mForegroundPreference = mForegroundPreference;
         mFragment.mBackgroundPreference = mBackgroundPreference;
+        mFragment.mFooterPreference = mFooterPreference;
+        mFragment.mRestrictedPreference = mRestrictedPreference;
+        mFragment.mOptimizePreference = mOptimizePreference;
+        mFragment.mUnrestrictedPreference = mUnrestrictedPreference;
     }
 
     @After
     public void reset() {
         ShadowEntityHeaderController.reset();
+    }
+
+    @Test
+    public void testGetPreferenceScreenResId_returnNewLayout() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.power_usage_detail);
+    }
+
+    @Test
+    public void testGetPreferenceScreenResId_disableTriState_returnLegacyLayout() {
+        mFragment.enableTriState = false;
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.power_usage_detail_legacy);
     }
 
     @Test
@@ -261,9 +279,339 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
+    public void testInitHeader_noUsageTimeAndGraphDisabled_hasCorrectSummary() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
+                .thenReturn(false);
+
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("No usage from last full charge");
+    }
+
+    @Test
+    public void testInitHeader_bgTwoMinFgZeroAndGraphDisabled_hasCorrectSummary() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
+                .thenReturn(false);
+
+        final long backgroundTimeTwoMinutes = 120000;
+        final long foregroundTimeZero = 0;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeZero);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("2 min background from last full charge");
+    }
+
+    @Test
+    public void testInitHeader_bgLessThanAMinFgZeroAndGraphDisabled_hasCorrectSummary() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
+                .thenReturn(false);
+
+        final long backgroundTimeLessThanAMinute = 59999;
+        final long foregroundTimeZero = 0;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanAMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeZero);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("Background less than a minute from last full charge");
+    }
+
+    @Test
+    public void testInitHeader_totalUsageLessThanAMinAndGraphDisabled_hasCorrectSummary() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
+                .thenReturn(false);
+
+        final long backgroundTimeLessThanHalfMinute = 20000;
+        final long foregroundTimeLessThanHalfMinute = 20000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanHalfMinute);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeLessThanHalfMinute);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("Total less than a minute from last full charge");
+    }
+
+    @Test
+    public void testInitHeader_TotalAMinutesBgLessThanAMinAndGraphDisabled_hasCorrectSummary() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
+                .thenReturn(false);
+
+        final long backgroundTimeZero = 59999;
+        final long foregroundTimeTwoMinutes = 1;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("1 min total • background less than a minute\nfrom last full charge");
+    }
+
+    @Test
+    public void testInitHeader_TotalAMinBackgroundZeroAndGraphDisabled_hasCorrectSummary() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
+                .thenReturn(false);
+        final long backgroundTimeZero = 0;
+        final long foregroundTimeAMinutes = 60000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeAMinutes);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("1 min total from last full charge");
+    }
+
+    @Test
+    public void testInitHeader_fgTwoMinBgFourMinAndGraphDisabled_hasCorrectSummary() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
+                .thenReturn(false);
+        final long backgroundTimeFourMinute = 240000;
+        final long foregroundTimeTwoMinutes = 120000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeFourMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        when(mFragment.getArguments()).thenReturn(bundle);
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("6 min total • 4 min background\nfrom last full charge");
+    }
+
+    @Test
+    public void testInitHeader_noUsageTime_hasCorrectSummary() {
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("No usage for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_backgroundTwoMinForegroundZero_hasCorrectSummary() {
+        final long backgroundTimeTwoMinutes = 120000;
+        final long foregroundTimeZero = 0;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeTwoMinutes);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeZero);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("2 min background for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_backgroundLessThanAMinForegroundZero_hasCorrectSummary() {
+        final long backgroundTimeLessThanAMinute = 59999;
+        final long foregroundTimeZero = 0;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanAMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeZero);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("Background less than a minute for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_totalUsageLessThanAMin_hasCorrectSummary() {
+        final long backgroundTimeLessThanHalfMinute = 20000;
+        final long foregroundTimeLessThanHalfMinute = 20000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanHalfMinute);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeLessThanHalfMinute);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("Total less than a minute for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_TotalAMinutesBackgroundLessThanAMin_hasCorrectSummary() {
+        final long backgroundTimeZero = 59999;
+        final long foregroundTimeTwoMinutes = 1;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("1 min total • background less than a minute\nfor past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_TotalAMinBackgroundZero_hasCorrectSummary() {
+        final long backgroundTimeZero = 0;
+        final long foregroundTimeAMinutes = 60000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeAMinutes);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("1 min total for past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_foregroundTwoMinBackgroundFourMin_hasCorrectSummary() {
+        final long backgroundTimeFourMinute = 240000;
+        final long foregroundTimeTwoMinutes = 120000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeFourMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        when(mFragment.getArguments()).thenReturn(bundle);
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("6 min total • 4 min background\nfor past 24 hr");
+    }
+
+    @Test
+    public void testInitHeader_totalUsageLessThanAMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeLessThanHalfMinute = 20000;
+        final long foregroundTimeLessThanHalfMinute = 20000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanHalfMinute);
+        bundle.putLong(
+                AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeLessThanHalfMinute);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("Total less than a minute for 12 am-2 am");
+    }
+
+    @Test
+    public void testInitHeader_TotalAMinBackgroundLessThanAMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeZero = 59999;
+        final long foregroundTimeTwoMinutes = 1;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("1 min total • background less than a minute\nfor 12 am-2 am");
+    }
+
+    @Test
+    public void testInitHeader_TotalAMinBackgroundZeroWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeZero = 0;
+        final long foregroundTimeAMinutes = 60000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeAMinutes);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("1 min total for 12 am-2 am");
+    }
+
+    @Test
+    public void testInitHeader_foregroundTwoMinBackgroundFourMinWithSlotTime_hasCorrectSummary() {
+        final long backgroundTimeFourMinute = 240000;
+        final long foregroundTimeTwoMinutes = 120000;
+        Bundle bundle = new Bundle(2);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeFourMinute);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
+        bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
+        when(mFragment.getArguments()).thenReturn(bundle);
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString())
+                .isEqualTo("6 min total • 4 min background\nfor 12 am-2 am");
+    }
+
+    @Test
     public void testStartBatteryDetailPage_hasBasicData() {
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
@@ -275,28 +623,25 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testStartBatteryDetailPage_typeNotApp_hasBasicData() {
-        mBatterySipper.drainType = BatterySipper.DrainType.PHONE;
-        mBatterySipper.usageTimeMs = PHONE_FOREGROUND_TIME_MS;
-
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+    public void testStartBatteryDetailPage_invalidToShowSummary_noFGBDData() {
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ false);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
-        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME))
-            .isEqualTo(PHONE_FOREGROUND_TIME_MS);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME))
-            .isEqualTo(PHONE_BACKGROUND_TIME_MS);
+                .isEqualTo(0);
+        assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME))
+                .isEqualTo(0);
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT))
-            .isEqualTo(USAGE_PERCENT);
+                .isEqualTo(USAGE_PERCENT);
     }
 
     @Test
     public void testStartBatteryDetailPage_NormalApp() {
-        mBatterySipper.mPackages = PACKAGE_NAME;
-        mBatteryEntry.defaultPackageName = PACKAGE_NAME[0];
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        when(mBatteryEntry.getDefaultPackageName()).thenReturn(PACKAGE_NAME[0]);
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(
                 PACKAGE_NAME[0]);
@@ -304,9 +649,10 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void testStartBatteryDetailPage_SystemApp() {
-        mBatterySipper.mPackages = null;
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        when(mBatteryEntry.getDefaultPackageName()).thenReturn(null);
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_LABEL)).isEqualTo(APP_LABEL);
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_ICON_ID)).isEqualTo(ICON_ID);
@@ -316,23 +662,22 @@ public class AdvancedPowerUsageDetailTest {
     @Test
     public void testStartBatteryDetailPage_WorkApp() {
         final int appUid = 1010019;
-        mBatterySipper.mPackages = PACKAGE_NAME;
-        doReturn(appUid).when(mBatterySipper).getUid();
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        doReturn(appUid).when(mBatteryEntry).getUid();
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
 
         verify(mActivity).startActivityAsUser(any(Intent.class), eq(new UserHandle(10)));
     }
 
     @Test
     public void testStartBatteryDetailPage_typeUser_startByCurrentUser() {
-        mBatterySipper.drainType = BatterySipper.DrainType.USER;
-        mBatterySipper.userId = 10;
+        when(mBatteryEntry.isUserEntry()).thenReturn(true);
 
         final int currentUser = 20;
         ShadowActivityManager.setCurrentUser(currentUser);
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mFragment,
+                mBatteryEntry, USAGE_PERCENT, /*isValidToShowSummary=*/ true);
 
         verify(mActivity).startActivityAsUser(any(Intent.class), eq(new UserHandle(currentUser)));
     }
@@ -365,18 +710,6 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testStartBatteryDetailPage_defaultPackageNull_chooseFromBatterySipper() {
-        mBatteryEntry.defaultPackageName = null;
-        mBatteryEntry.sipper.mPackages = PACKAGE_NAME;
-
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mActivity, mBatteryUtils, mFragment,
-                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT);
-
-        assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME))
-            .isEqualTo(PACKAGE_NAME[0]);
-    }
-
-    @Test
     public void testInitPreference_hasCorrectSummary() {
         Bundle bundle = new Bundle(4);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, BACKGROUND_TIME_MS);
@@ -390,9 +723,61 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mContext.getText(R.string.battery_active_for)).when(mFragment).getText(
                 R.string.battery_active_for);
 
-        mFragment.initPreference();
+        mFragment.initPreference(mContext);
 
         assertThat(mForegroundPreference.getSummary().toString()).isEqualTo("Used for 0 min");
         assertThat(mBackgroundPreference.getSummary().toString()).isEqualTo("Active for 0 min");
+    }
+
+    @Test
+    public void testInitPreferenceForTriState_isValidPackageName_hasCorrectString() {
+        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(false);
+
+        mFragment.initPreferenceForTriState(mContext);
+
+        assertThat(mFooterPreference.getTitle().toString())
+                .isEqualTo("This app requires optimized battery usage.");
+    }
+
+    @Test
+    public void testInitPreferenceForTriState_isSystemOrDefaultApp_hasCorrectString() {
+        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
+
+        mFragment.initPreferenceForTriState(mContext);
+
+        assertThat(mFooterPreference.getTitle()
+                .toString()).isEqualTo("This app requires unrestricted battery usage.");
+    }
+
+    @Test
+    public void testInitPreferenceForTriState_hasCorrectString() {
+        when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
+        when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(false);
+
+        mFragment.initPreferenceForTriState(mContext);
+
+        assertThat(mFooterPreference.getTitle().toString())
+                .isEqualTo("Changing how an app uses your battery can affect its performance.");
+    }
+
+    @Test
+    public void testOnRadioButtonClicked_clickOptimizePref_optimizePreferenceChecked() {
+        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
+        mRestrictedPreference.setKey(KEY_PREF_RESTRICTED);
+        mUnrestrictedPreference.setKey(KEY_PREF_UNRESTRICTED);
+        mFragment.onRadioButtonClicked(mOptimizePreference);
+
+        assertThat(mOptimizePreference.isChecked()).isTrue();
+        assertThat(mRestrictedPreference.isChecked()).isFalse();
+        assertThat(mUnrestrictedPreference.isChecked()).isFalse();
+        verify(mMetricsFeatureProvider)
+            .action(
+                mContext,
+                SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
+                (Pair<Integer, Object>[]) new Pair[] {
+                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
+                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, "app label")
+                });
     }
 }

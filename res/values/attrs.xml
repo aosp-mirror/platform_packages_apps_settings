@@ -139,13 +139,11 @@
         <attr name="android:gravity" />
     </declare-styleable>
 
-    <!-- For DonutView -->
-    <declare-styleable name="DonutView">
-        <attr name="meterBackgroundColor" format="color" />
-        <attr name="meterConsumedColor" format="color" />
-        <attr name="applyColorAccent" format="boolean" />
-        <attr name="showPercentString" format="boolean" />
-        <attr name="thickness" format="dimension" />
+    <!-- For biometric enroll checkboxes -->
+    <declare-styleable name="BiometricEnrollCheckbox">
+        <attr name="icon" format="reference" />
+        <attr name="title" format="reference" />
+        <attr name="description" format="reference" />
     </declare-styleable>
 
     <!-- For Face enroll accessibility toggle -->
@@ -163,6 +161,7 @@
     <declare-styleable name="LabeledSeekBarPreference">
         <attr name="textStart" format="reference" />
         <attr name="textEnd" format="reference" />
+        <attr name="tickMark" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="TintDrawable">

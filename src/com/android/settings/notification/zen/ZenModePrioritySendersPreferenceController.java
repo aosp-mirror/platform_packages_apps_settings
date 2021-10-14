@@ -19,9 +19,6 @@ package com.android.settings.notification.zen;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
 
-import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_GONE;
-import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_SETTING;
-
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +32,6 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.widget.RadioButtonPreferenceWithExtraWidget;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.RadioButtonPreference;
 
@@ -67,7 +63,7 @@ public class ZenModePrioritySendersPreferenceController
     private final boolean mIsMessages; // if this is false, then this preference is for calls
 
     private PreferenceCategory mPreferenceCategory;
-    private List<RadioButtonPreferenceWithExtraWidget> mRadioButtonPreferences = new ArrayList<>();
+    private List<RadioButtonPreference> mRadioButtonPreferences = new ArrayList<>();
 
     public ZenModePrioritySendersPreferenceController(Context context, String key,
             Lifecycle lifecycle, boolean isMessages) {
@@ -114,7 +110,7 @@ public class ZenModePrioritySendersPreferenceController
     public void updateState(Preference preference) {
         final int currSetting = getPrioritySenders();
 
-        for (RadioButtonPreferenceWithExtraWidget pref : mRadioButtonPreferences) {
+        for (RadioButtonPreference pref : mRadioButtonPreferences) {
             pref.setChecked(keyToSetting(pref.getKey()) == currSetting);
         }
     }
@@ -126,7 +122,7 @@ public class ZenModePrioritySendersPreferenceController
     }
 
     private void updateSummaries() {
-        for (RadioButtonPreferenceWithExtraWidget pref : mRadioButtonPreferences) {
+        for (RadioButtonPreference pref : mRadioButtonPreferences) {
             pref.setSummary(getSummary(pref.getKey()));
         }
     }
@@ -169,9 +165,9 @@ public class ZenModePrioritySendersPreferenceController
         }
     }
 
-    private RadioButtonPreferenceWithExtraWidget makeRadioPreference(String key, int titleId) {
-        RadioButtonPreferenceWithExtraWidget pref =
-                new RadioButtonPreferenceWithExtraWidget(mPreferenceCategory.getContext());
+    private RadioButtonPreference makeRadioPreference(String key, int titleId) {
+        final RadioButtonPreference pref =
+                new RadioButtonPreference(mPreferenceCategory.getContext());
         pref.setKey(key);
         pref.setTitle(titleId);
         pref.setOnClickListener(mRadioButtonClickListener);
@@ -179,9 +175,6 @@ public class ZenModePrioritySendersPreferenceController
         View.OnClickListener widgetClickListener = getWidgetClickListener(key);
         if (widgetClickListener != null) {
             pref.setExtraWidgetOnClickListener(widgetClickListener);
-            pref.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
-        } else {
-            pref.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_GONE);
         }
 
         mPreferenceCategory.addPreference(pref);

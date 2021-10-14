@@ -70,7 +70,7 @@ public class SwitchBarTest {
 
     @Test
     public void cycleChecked_customLabel_shouldUpdateTextAndBackground() {
-        final int onText = R.string.master_clear_progress_text;
+        final int onText = R.string.main_clear_progress_text;
         final int offText = R.string.manage_space_text;
 
         mBar.setSwitchBarText(onText, offText);
@@ -87,9 +87,9 @@ public class SwitchBarTest {
     @Test
     public void setCheck_customLabelWithStringType_shouldUpdateTextAndBackground() {
         final String onText = mContext.getString(
-                R.string.accessibility_service_master_switch_title);
+                R.string.accessibility_service_primary_switch_title);
         final String offText = mContext.getString(
-                R.string.accessibility_service_master_switch_title);
+                R.string.accessibility_service_primary_switch_title);
         final TextView switchBarTextView = ((TextView) mBar.findViewById(R.id.switch_text));
 
         mBar.setSwitchBarText(onText, offText);

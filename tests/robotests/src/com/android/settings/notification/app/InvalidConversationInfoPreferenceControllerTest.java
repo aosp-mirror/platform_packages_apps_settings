@@ -24,6 +24,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
@@ -33,6 +34,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,6 +48,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
@@ -90,7 +95,7 @@ public class InvalidConversationInfoPreferenceControllerTest {
         appRow.pkg = "hi";
         appRow.uid = 0;
         appRow.banned = true;
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -100,7 +105,7 @@ public class InvalidConversationInfoPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.pkg = "hi";
         appRow.uid = 0;
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -110,8 +115,29 @@ public class InvalidConversationInfoPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.pkg = "hi";
         appRow.uid = 0;
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
         assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_filteredIn() {
+        when(mBackend.isInInvalidMsgState(anyString(), anyInt())).thenReturn(true);
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "hi";
+        appRow.uid = 0;
+        mController.onResume(appRow, null, null, null, null, null, ImmutableList.of(
+                NotificationChannel.EDIT_CONVERSATION));
+        assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_filteredOut() {
+        when(mBackend.isInInvalidMsgState(anyString(), anyInt())).thenReturn(true);
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "hi";
+        appRow.uid = 0;
+        mController.onResume(appRow, null, null, null, null, null, new ArrayList<>());
+        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -121,7 +147,7 @@ public class InvalidConversationInfoPreferenceControllerTest {
         appRow.pkg = "hi";
         appRow.uid = 0;
         appRow.label = "plum";
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null, null);
         Preference pref = new Preference(mContext);
         mController.updateState(pref);
         assertTrue(pref.getSummary().toString().contains(appRow.label));

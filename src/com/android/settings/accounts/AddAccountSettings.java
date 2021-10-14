@@ -163,11 +163,13 @@ public class AddAccountSettings extends Activity {
         } else {
             // If the user is locked by fbe: we couldn't start the authenticator. So we must ask the
             // user to unlock it first.
-            ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-            if (!helper.launchConfirmationActivity(UNLOCK_WORK_PROFILE_REQUEST,
-                    getString(R.string.unlock_set_unlock_launch_picker_title),
-                    false,
-                    mUserHandle.getIdentifier())) {
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            final boolean launched = builder.setRequestCode(UNLOCK_WORK_PROFILE_REQUEST)
+                    .setTitle(getString(R.string.unlock_set_unlock_launch_picker_title))
+                    .setUserId(mUserHandle.getIdentifier())
+                    .show();
+            if (!launched) {
                 requestChooseAccount();
             }
         }
@@ -237,7 +239,7 @@ public class AddAccountSettings extends Activity {
          * or broadcasts.
          *
          * Unfortunately for legacy reasons we still need to support this. But
-         * we can cripple the intent so that 3rd party authenticators can't
+         * we can disable the intent so that 3rd party authenticators can't
          * fill in addressing information and launch arbitrary actions.
          */
         Intent identityIntent = new Intent();
@@ -245,7 +247,8 @@ public class AddAccountSettings extends Activity {
         identityIntent.setAction(SHOULD_NOT_RESOLVE);
         identityIntent.addCategory(SHOULD_NOT_RESOLVE);
 
-        mPendingIntent = PendingIntent.getBroadcast(this, 0, identityIntent, 0);
+        mPendingIntent = PendingIntent.getBroadcast(this, 0, identityIntent,
+                PendingIntent.FLAG_IMMUTABLE);
         addAccountOptions.putParcelable(KEY_CALLER_IDENTITY, mPendingIntent);
         addAccountOptions.putBoolean(EXTRA_HAS_MULTIPLE_USERS, Utils.hasMultipleUsers(this));
         AccountManager.get(this).addAccountAsUser(

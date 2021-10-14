@@ -75,7 +75,7 @@ public class WifiP2pSettings extends DashboardFragment
 
     private final IntentFilter mIntentFilter = new IntentFilter();
     @VisibleForTesting WifiP2pManager mWifiP2pManager;
-    private WifiP2pManager.Channel mChannel;
+    @VisibleForTesting WifiP2pManager.Channel mChannel;
     @VisibleForTesting OnClickListener mRenameListener;
     @VisibleForTesting OnClickListener mDisconnectListener;
     @VisibleForTesting OnClickListener mCancelConnectListener;
@@ -144,7 +144,9 @@ public class WifiP2pSettings extends DashboardFragment
                 // Requesting our own device info as an app holding the NETWORK_SETTINGS permission
                 // ensures that the MAC address will be available in the result.
                 if (DBG) Log.d(TAG, "This device changed. Requesting device info.");
-                mWifiP2pManager.requestDeviceInfo(mChannel, WifiP2pSettings.this);
+                if (mWifiP2pManager != null && mChannel != null) {
+                    mWifiP2pManager.requestDeviceInfo(mChannel, WifiP2pSettings.this);
+                }
             } else if (WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION.equals(action)) {
                 int discoveryState = intent.getIntExtra(WifiP2pManager.EXTRA_DISCOVERY_STATE,
                     WifiP2pManager.WIFI_P2P_DISCOVERY_STOPPED);
@@ -155,7 +157,7 @@ public class WifiP2pSettings extends DashboardFragment
                     updateSearchMenu(false);
                 }
             } else if (WifiP2pManager.ACTION_WIFI_P2P_PERSISTENT_GROUPS_CHANGED.equals(action)) {
-                if (mWifiP2pManager != null) {
+                if (mWifiP2pManager != null && mChannel != null) {
                     mWifiP2pManager.requestPersistentGroupInfo(mChannel, WifiP2pSettings.this);
                 }
             }
@@ -204,9 +206,7 @@ public class WifiP2pSettings extends DashboardFragment
         }
 
         if (mWifiP2pManager != null) {
-            mChannel = mWifiP2pManager.initialize(activity.getApplicationContext(),
-                    getActivity().getMainLooper(), null);
-            if (mChannel == null) {
+            if (!initChannel()) {
                 //Failure to set up connection
                 Log.e(TAG, "Failed to set up connection with wifi p2p service");
                 mWifiP2pManager = null;
@@ -230,7 +230,7 @@ public class WifiP2pSettings extends DashboardFragment
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
-                    if (mWifiP2pManager != null) {
+                    if (mWifiP2pManager != null && mChannel != null) {
                         String name = mDeviceNameText.getText().toString();
                         if (name != null) {
                             for (int i = 0; i < name.length(); i++) {
@@ -266,7 +266,7 @@ public class WifiP2pSettings extends DashboardFragment
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
-                    if (mWifiP2pManager != null) {
+                    if (mWifiP2pManager != null && mChannel != null) {
                         mWifiP2pManager.removeGroup(mChannel, new WifiP2pManager.ActionListener() {
                             public void onSuccess() {
                                 if (DBG) Log.d(TAG, " remove group success");
@@ -285,7 +285,7 @@ public class WifiP2pSettings extends DashboardFragment
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
-                    if (mWifiP2pManager != null) {
+                    if (mWifiP2pManager != null && mChannel != null) {
                         mWifiP2pManager.cancelConnect(mChannel,
                                 new WifiP2pManager.ActionListener() {
                             public void onSuccess() {
@@ -305,7 +305,7 @@ public class WifiP2pSettings extends DashboardFragment
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
-                    if (mWifiP2pManager != null) {
+                    if (mWifiP2pManager != null && mChannel != null) {
                         if (mSelectedGroup != null) {
                             if (DBG) Log.d(TAG, " deleting group " + mSelectedGroup.getGroupName());
                             mWifiP2pManager.deletePersistentGroup(mChannel,
@@ -346,9 +346,9 @@ public class WifiP2pSettings extends DashboardFragment
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_DISCOVERY_CHANGED_ACTION);
         mIntentFilter.addAction(WifiP2pManager.ACTION_WIFI_P2P_PERSISTENT_GROUPS_CHANGED);
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
-
-        getActivity().registerReceiver(mReceiver, mIntentFilter);
-        if (mWifiP2pManager != null) {
+        if (mWifiP2pManager != null && initChannel()) {
+            // Register receiver after make sure channel exist
+            getActivity().registerReceiver(mReceiver, mIntentFilter);
             mWifiP2pManager.requestPeers(mChannel, WifiP2pSettings.this);
             mWifiP2pManager.requestDeviceInfo(mChannel, WifiP2pSettings.this);
             mIsIgnoreInitConnectionInfoCallback = false;
@@ -373,8 +373,13 @@ public class WifiP2pSettings extends DashboardFragment
     @Override
     public void onPause() {
         super.onPause();
-        if (mWifiP2pManager != null) {
+        if (mWifiP2pManager != null && mChannel != null) {
             mWifiP2pManager.stopPeerDiscovery(mChannel, null);
+            if (!mLastGroupFormed) {
+                // Close the channel when p2p doesn't connected.
+                mChannel.close();
+                mChannel = null;
+            }
         }
         getActivity().unregisterReceiver(mReceiver);
     }
@@ -447,19 +452,20 @@ public class WifiP2pSettings extends DashboardFragment
                         config.wps.setup = WpsInfo.DISPLAY;
                     }
                 }
-
-                mWifiP2pManager.connect(mChannel, config,
-                        new WifiP2pManager.ActionListener() {
-                            public void onSuccess() {
-                                if (DBG) Log.d(TAG, " connect success");
-                            }
-                            public void onFailure(int reason) {
-                                Log.e(TAG, " connect fail " + reason);
-                                Toast.makeText(getActivity(),
-                                        R.string.wifi_p2p_failed_connect_message,
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                    });
+                if (mWifiP2pManager != null && mChannel != null) {
+                    mWifiP2pManager.connect(mChannel, config,
+                            new WifiP2pManager.ActionListener() {
+                                public void onSuccess() {
+                                    if (DBG) Log.d(TAG, " connect success");
+                                }
+                                public void onFailure(int reason) {
+                                    Log.e(TAG, " connect fail " + reason);
+                                    Toast.makeText(getActivity(),
+                                            R.string.wifi_p2p_failed_connect_message,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                        });
+                }
             }
         } else if (preference instanceof WifiP2pPersistentGroup) {
             mSelectedGroup = (WifiP2pPersistentGroup) preference;
@@ -626,7 +632,7 @@ public class WifiP2pSettings extends DashboardFragment
     }
 
     private void startSearch() {
-        if (mWifiP2pManager != null && !mWifiP2pSearching) {
+        if (mWifiP2pManager != null && mChannel != null && !mWifiP2pSearching) {
             mWifiP2pManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
                 public void onSuccess() {
                 }
@@ -635,5 +641,20 @@ public class WifiP2pSettings extends DashboardFragment
                 }
             });
         }
+    }
+
+    private boolean initChannel() {
+        if (mChannel != null) {
+            return true;
+        }
+        if (mWifiP2pManager != null) {
+            mChannel = mWifiP2pManager.initialize(getActivity().getApplicationContext(),
+                    getActivity().getMainLooper(), null);
+        }
+        if (mChannel == null) {
+            Log.e(TAG, "Failed to set up connection with wifi p2p service");
+            return false;
+        }
+        return true;
     }
 }

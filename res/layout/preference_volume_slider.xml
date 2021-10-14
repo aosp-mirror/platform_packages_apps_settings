@@ -25,28 +25,13 @@
     android:clickable="false"
     android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/icon_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="44dp"
-        android:gravity="start|center_vertical"
-        android:orientation="horizontal"
-        android:paddingEnd="12dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp">
-        <com.android.internal.widget.PreferenceImageView
-            android:id="@android:id/icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
-    </LinearLayout>
+    <include layout="@layout/settingslib_icon_frame"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
+        android:paddingTop="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,10 +41,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingStart="12dp"
                 android:singleLine="true"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Subhead"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textAppearance="?android:attr/textAppearanceListItem"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"/>
             <!-- Preference should place its actual preference widget here. -->
@@ -80,7 +63,8 @@
             <SeekBar
                 android:id="@*android:id/seekbar"
                 android:layout_gravity="center_vertical"
-                android:paddingStart="12dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"/>
 
@@ -88,7 +72,6 @@
                 android:id="@+id/suppression_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="12dp"
                 android:layout_gravity="center_vertical|start"
                 android:textAlignment="viewStart"
                 android:singleLine="true"

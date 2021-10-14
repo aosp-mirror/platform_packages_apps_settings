@@ -24,6 +24,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_HIGH;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
@@ -49,7 +50,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -104,18 +104,17 @@ public class SetNewPasswordActivityTest {
     }
 
     @Test
-    @Ignore
     public void testSetupChooseLockGeneric() {
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0);
+        Intent intent = new Intent(ACTION_SET_NEW_PASSWORD);
+        intent.putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true);
         SetNewPasswordActivity activity =
-                Robolectric.buildActivity(SetNewPasswordActivity.class).get();
-        activity.launchChooseLock(new Bundle());
+                Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent intent = getLaunchChooseLockIntent(shadowActivity);
-        intent.putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true);
 
-        assertThat(intent.getComponent())
+        Intent nextIntent = shadowActivity.getNextStartedActivityForResult().intent;
+        assertThat(nextIntent.getComponent())
                 .isEqualTo(new ComponentName(activity, SetupChooseLockGeneric.class));
     }
 
@@ -300,6 +299,8 @@ public class SetNewPasswordActivityTest {
         Intent actualIntent = getLaunchChooseLockIntent(shadowActivity);
         assertThat(actualIntent.getAction()).isEqualTo(ACTION_SET_NEW_PARENT_PROFILE_PASSWORD);
         assertThat(actualIntent.hasExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY)).isFalse();
+        assertThat(actualIntent.getBooleanExtra(
+                EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY, false)).isFalse();
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
         assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME)).isEqualTo(APP_LABEL);
         verify(mockMetricsProvider).action(
@@ -308,6 +309,30 @@ public class SetNewPasswordActivityTest {
                 SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
                 PKG_NAME,
                 Integer.MIN_VALUE);
+    }
+    @Test
+    @Config(shadows = {ShadowPasswordUtils.class})
+    public void launchChooseLock_setNewParentProfilePassword_DevicePasswordRequirementExtra() {
+        ShadowPasswordUtils.setCallingAppPackageName(PKG_NAME);
+        Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
+
+        Intent intent = new Intent(ACTION_SET_NEW_PARENT_PROFILE_PASSWORD)
+                .putExtra(DevicePolicyManager.EXTRA_DEVICE_PASSWORD_REQUIREMENT_ONLY, true);
+        SetNewPasswordActivity activity =
+                Robolectric.buildActivity(SetNewPasswordActivity.class, intent).create().get();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        Intent actualIntent = getLaunchChooseLockIntent(shadowActivity);
+
+        assertThat(actualIntent.getBooleanExtra(
+                EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY, false)).isTrue();
+        verify(mockMetricsProvider).action(
+                SettingsEnums.PAGE_UNKNOWN,
+                SettingsEnums.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD,
+                SettingsEnums.SET_NEW_PASSWORD_ACTIVITY,
+                PKG_NAME,
+                Integer.MIN_VALUE | (1 << 30));
     }
 
     @Test

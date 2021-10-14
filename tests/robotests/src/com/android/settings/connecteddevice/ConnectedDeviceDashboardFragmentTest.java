@@ -53,6 +53,7 @@ public class ConnectedDeviceDashboardFragmentTest {
     private static final String KEY_NEARBY_DEVICES = "bt_nearby_slice";
     private static final String KEY_DISCOVERABLE_FOOTER = "discoverable_footer";
     private static final String KEY_SEE_ALL = "previously_connected_devices_see_all";
+    private static final String KEY_ADD_BT_DEVICES = "add_bt_devices";
 
     @Mock
     private PackageManager mPackageManager;

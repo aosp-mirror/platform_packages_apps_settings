@@ -92,8 +92,7 @@ public final class UserDialogs {
         View view = inflater.inflate(R.layout.delete_managed_profile_dialog, null);
         ImageView imageView =
                 (ImageView) view.findViewById(R.id.delete_managed_profile_mdm_icon_view);
-        Drawable badgedApplicationIcon = packageManager.getUserBadgedIcon(
-                packageManager.getApplicationIcon(mdmApplicationInfo), new UserHandle(userId));
+        Drawable badgedApplicationIcon = packageManager.getApplicationIcon(mdmApplicationInfo);
         imageView.setImageDrawable(badgedApplicationIcon);
 
         CharSequence appLabel = packageManager.getApplicationLabel(mdmApplicationInfo);
@@ -153,6 +152,26 @@ public final class UserDialogs {
                         onConfirmListener)
                 .setNegativeButton(com.android.settingslib.R.string.user_setup_button_setup_later,
                         null)
+                .create();
+    }
+
+    /**
+     * Creates a dialog to confirm with the user if it's ok to reset the guest user, which will
+     * delete all the guest user's data.
+     *
+     * @param context a Context object
+     * @param onConfirmListener Callback object for positive action
+     * @return the created Dialog
+     */
+    public static Dialog createResetGuestDialog(Context context,
+            DialogInterface.OnClickListener onConfirmListener) {
+        return new AlertDialog.Builder(context)
+                .setTitle(com.android.settingslib.R.string.guest_reset_guest_dialog_title)
+                .setMessage(R.string.user_exit_guest_confirm_message)
+                .setPositiveButton(
+                        com.android.settingslib.R.string.guest_reset_guest_confirm_button,
+                        onConfirmListener)
+                .setNegativeButton(android.R.string.cancel, null)
                 .create();
     }
 }
