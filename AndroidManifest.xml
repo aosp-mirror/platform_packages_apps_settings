@@ -1477,6 +1477,23 @@
         </activity>
 
         <activity
+            android:name="Settings$WifiScanningSettingsActivity"
+            android:label="@string/location_scanning_wifi_always_scanning_title"
+            android:icon="@drawable/ic_homepage_location"
+            android:exported="true"
+            android:permission="android.permission.CHANGE_WIFI_STATE"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.WIFI_SCANNING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.location.WifiScanningFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
             android:name=".Settings$SecurityDashboardActivity"
             android:label="@string/security_settings_title"
             android:icon="@drawable/ic_homepage_security"
