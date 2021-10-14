@@ -100,10 +100,8 @@ public class PanelFragment extends Fragment {
     private TextView mHeaderTitle;
     private TextView mHeaderSubtitle;
     private int mMaxHeight;
-    private View mFooterDivider;
     private boolean mPanelCreating;
     private ProgressBar mProgressBar;
-    private View mHeaderDivider;
 
     private final Map<Uri, LiveData<Slice>> mSliceLiveData = new LinkedHashMap<>();
 
@@ -210,9 +208,7 @@ public class PanelFragment extends Fragment {
         mHeaderLayout = mLayoutView.findViewById(R.id.header_layout);
         mHeaderTitle = mLayoutView.findViewById(R.id.header_title);
         mHeaderSubtitle = mLayoutView.findViewById(R.id.header_subtitle);
-        mFooterDivider = mLayoutView.findViewById(R.id.footer_divider);
         mProgressBar = mLayoutView.findViewById(R.id.progress_bar);
-        mHeaderDivider = mLayoutView.findViewById(R.id.header_divider);
 
         // Make the panel layout gone here, to avoid janky animation when updating from old panel.
         // We will make it visible once the panel is ready to load.
@@ -256,8 +252,6 @@ public class PanelFragment extends Fragment {
         } else {
             enableTitle(title);
         }
-
-        mFooterDivider.setVisibility(View.GONE);
 
         mSeeMoreButton.setOnClickListener(getSeeMoreListener());
         mDoneButton.setOnClickListener(getCloseListener());
@@ -324,10 +318,8 @@ public class PanelFragment extends Fragment {
     private void updateProgressBar() {
         if (mPanel.isProgressBarVisible()) {
             mProgressBar.setVisibility(View.VISIBLE);
-            mHeaderDivider.setVisibility(View.GONE);
         } else {
             mProgressBar.setVisibility(View.GONE);
-            mHeaderDivider.setVisibility(View.VISIBLE);
         }
     }
 
