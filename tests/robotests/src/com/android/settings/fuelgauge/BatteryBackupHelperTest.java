@@ -114,9 +114,6 @@ public final class BatteryBackupHelperTest {
         mockUid(1001 /*fake uid*/, PACKAGE_NAME1);
         mockUid(1002 /*fake uid*/, PACKAGE_NAME2);
         mockUid(BatteryUtils.UID_NULL, PACKAGE_NAME3);
-        doReturn(false).when(mPowerAllowlistBackend).isDefaultActiveApp(anyString());
-        doReturn(false).when(mPowerAllowlistBackend).isDefaultActiveApp(anyString());
-        doReturn(false).when(mPowerAllowlistBackend).isAllowlistedExceptIdle(anyString());
     }
 
     @After
@@ -221,6 +218,7 @@ public final class BatteryBackupHelperTest {
         createTestingData(PACKAGE_NAME1, PACKAGE_NAME2, PACKAGE_NAME3);
         // Sets "com.android.testing.1" as system app.
         doReturn(true).when(mPowerAllowlistBackend).isSysAllowlisted(PACKAGE_NAME1);
+        doReturn(false).when(mPowerAllowlistBackend).isDefaultActiveApp(anyString());
 
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
 
@@ -236,21 +234,7 @@ public final class BatteryBackupHelperTest {
         createTestingData(PACKAGE_NAME1, PACKAGE_NAME2, PACKAGE_NAME3);
         // Sets "com.android.testing.1" as device default app.
         doReturn(true).when(mPowerAllowlistBackend).isDefaultActiveApp(PACKAGE_NAME1);
-
-        mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
-
-        // "com.android.testing.2" for RESTRICTED mode.
-        final String expectedResult = PACKAGE_NAME2 + ":1,";
-        verifyBackupData(expectedResult);
-    }
-
-    @Test
-    public void backupOptimizationMode_backupOptimizationAndIgnoreAppInTheAllowlist()
-            throws Exception {
-        final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);
-        createTestingData(PACKAGE_NAME1, PACKAGE_NAME2, PACKAGE_NAME3);
-        // Sets "com.android.testing.1" in the allowlist.
-        doReturn(true).when(mPowerAllowlistBackend).isAllowlistedExceptIdle(PACKAGE_NAME1);
+        doReturn(false).when(mPowerAllowlistBackend).isSysAllowlisted(anyString());
 
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, allowlistedApps);
 
