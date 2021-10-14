@@ -58,7 +58,7 @@
         <!-- For AndroidX AlertDialog -->
         <item name="alertDialogTheme">@style/Theme.AlertDialog</item>
 
-        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
 
         <!-- For AppBarLayout -->
         <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
@@ -123,7 +123,7 @@
         <item name="android:windowDrawsSystemBarBackgrounds">false</item>
         <item name="android:background">@android:color/black</item>
 
-        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Unlock</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
     </style>
 
     <style name="ThemeOverlay.AlertDialog" parent="@android:style/ThemeOverlay.Material.Dialog.Alert">
@@ -164,13 +164,13 @@
         <item name="confirmDeviceCredentialsSideMargin">32dp</item>
         <item name="confirmDeviceCredentialsTopMargin">32dp</item>
 
-        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Dark</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
 
         <item name="android:windowAnimationStyle">@style/ConfirmDeviceCredentialsAnimationStyle</item>
     </style>
 
     <style name="Theme.ConfirmDeviceCredentialsWork" parent="Theme.ConfirmDeviceCredentialsDark">
-        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Dark.Work</item>
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
         <item name="android:colorAccent">@*android:color/white</item>
     </style>
 
