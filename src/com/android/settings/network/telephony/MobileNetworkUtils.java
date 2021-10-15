@@ -508,12 +508,15 @@ public class MobileNetworkUtils {
         if (carrierConfig.getBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL)) {
             return true;
         }
+        final String[] numericArray = carrierConfig.getStringArray(
+                CarrierConfigManager.KEY_SUPPORT_TDSCDMA_ROAMING_NETWORKS_STRING_ARRAY);
+        if (numericArray == null) {
+            return false;
+        }
         final ServiceState serviceState = telephonyManager.getServiceState();
         final String operatorNumeric =
                 (serviceState != null) ? serviceState.getOperatorNumeric() : null;
-        final String[] numericArray = carrierConfig.getStringArray(
-                CarrierConfigManager.KEY_SUPPORT_TDSCDMA_ROAMING_NETWORKS_STRING_ARRAY);
-        if (numericArray == null || operatorNumeric == null) {
+        if (operatorNumeric == null) {
             return false;
         }
         for (String numeric : numericArray) {
