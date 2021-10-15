@@ -454,28 +454,10 @@
     </style>
 
     <style name="LockPatternStyle">
-        <item name="*android:regularColor">@color/lock_pattern_view_regular_color</item>
-        <item name="*android:successColor">@color/lock_pattern_view_success_color</item>
+        <item name="*android:regularColor">?android:attr/colorAccent</item>
+        <item name="*android:successColor">?android:attr/textColorPrimary</item>
         <item name="*android:errorColor">?android:attr/colorError</item>
-    </style>
-
-    <style name="LockPatternStyle.Dark">
-        <item name="*android:regularColor">@color/lock_pattern_view_regular_color_dark</item>
-        <item name="*android:successColor">@color/lock_pattern_view_regular_color_dark</item>
-    </style>
-
-    <style name="LockPatternStyle.Dark.Work">
-        <item name="*android:regularColor">@*android:color/white</item>
-    </style>
-
-    <style name="LockPatternStyle.Unlock">
-        <item name="*android:regularColor">@color/unlock_pattern_view_regular_color</item>
-        <item name="*android:successColor">@color/unlock_pattern_view_success_color</item>
-    </style>
-
-    <style name="LockPatternStyle.Setup">
-        <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
-        <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
+        <item name="*android:dotColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="device_info_dialog_label">

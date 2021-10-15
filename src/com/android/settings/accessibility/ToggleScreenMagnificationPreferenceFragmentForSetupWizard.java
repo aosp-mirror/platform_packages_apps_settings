@@ -39,7 +39,8 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
         final String title = getContext().getString(
                 R.string.accessibility_screen_magnification_title);
-        final String description = getContext().getString(R.string.accelerometer_title);
+        final String description = getContext().getString(
+                R.string.accessibility_preference_magnification_summary);
         final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
         AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                 description, icon);

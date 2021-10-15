@@ -130,13 +130,6 @@ public class BatteryOptimizeUtils {
                 || mPowerAllowListBackend.isDefaultActiveApp(mPackageName);
     }
 
-    /**
-     * Return {@code true} if this package is in allow list except idle app.
-     */
-    public boolean isAllowlistedExceptIdleApp() {
-        return mPowerAllowListBackend.isAllowlistedExceptIdle(mPackageName);
-    }
-
     String getPackageName() {
         return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
     }

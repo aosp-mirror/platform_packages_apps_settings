@@ -746,16 +746,6 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testInitPreferenceForTriState_isAllowlistedExceptIdleApp_hasCorrectString() {
-        when(mBatteryOptimizeUtils.isAllowlistedExceptIdleApp()).thenReturn(true);
-
-        mFragment.initPreferenceForTriState(mContext);
-
-        assertThat(mFooterPreference.getTitle().toString())
-                .isEqualTo("This app requires optimized battery usage.");
-    }
-
-    @Test
     public void testInitPreferenceForTriState_isSystemOrDefaultApp_hasCorrectString() {
         when(mBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
         when(mBatteryOptimizeUtils.isSystemOrDefaultApp()).thenReturn(true);
