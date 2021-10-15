@@ -18,11 +18,16 @@ package com.android.settings.wifi;
 import static android.content.Context.WIFI_SERVICE;
 
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -38,16 +43,39 @@ import java.util.List;
 public class ConfigureWifiSettings extends DashboardFragment {
 
     private static final String TAG = "ConfigureWifiSettings";
+    private static final String KEY_INSTALL_CREDENTIALS = "install_credentials";
+    private static final String ACTION_INSTALL_CERTS = "android.credentials.INSTALL";
+    private static final String PACKAGE_INSTALL_CERTS = "com.android.certinstaller";
+    private static final String CLASS_INSTALL_CERTS = "com.android.certinstaller.CertInstallerMain";
+    private static final String KEY_INSTALL_CERTIFICATE = "certificate_install_usage";
+    private static final String INSTALL_CERTIFICATE_VALUE = "wifi";
 
     public static final int WIFI_WAKEUP_REQUEST_CODE = 600;
 
     private WifiWakeupPreferenceController mWifiWakeupPreferenceController;
+    private Preference mCertinstallerPreference;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
             getActivity().setTitle(R.string.network_and_internet_preferences_title);
+        }
+
+        mCertinstallerPreference = findPreference(KEY_INSTALL_CREDENTIALS);
+        if (mCertinstallerPreference != null) {
+            mCertinstallerPreference.setOnPreferenceClickListener(preference -> {
+                Intent intent = new Intent(ACTION_INSTALL_CERTS);
+                intent.setFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setComponent(
+                        new ComponentName(PACKAGE_INSTALL_CERTS, CLASS_INSTALL_CERTS));
+                intent.putExtra(KEY_INSTALL_CERTIFICATE, INSTALL_CERTIFICATE_VALUE);
+                getContext().startActivity(intent);
+                return true;
+            });
+        } else {
+            Log.d(TAG, "Can not find the preference.");
         }
     }
 
