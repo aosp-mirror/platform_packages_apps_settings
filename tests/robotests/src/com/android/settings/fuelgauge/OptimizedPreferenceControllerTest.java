@@ -94,16 +94,6 @@ public class OptimizedPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_isAllowlistedExceptIdleApp_prefEnabled() {
-        when(mockBatteryOptimizeUtils.isAllowlistedExceptIdleApp()).thenReturn(true);
-
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.isEnabled()).isTrue();
-        assertThat(mPreference.isChecked()).isTrue();
-    }
-
-    @Test
     public void testHandlePreferenceTreeClick_samePrefKey_verifyAction() {
         mPreference.setKey(mController.KEY_OPTIMIZED_PREF);
         mController.handlePreferenceTreeClick(mPreference);

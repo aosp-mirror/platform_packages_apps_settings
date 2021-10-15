@@ -40,8 +40,7 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
 
         final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
         final String title = getArguments().getString(AccessibilitySettings.EXTRA_TITLE);
-        final String description = getContext().getString(
-                R.string.accessibility_screen_magnification_title);
+        final String description = getContext().getString(R.string.talkback_summary);
         final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
         AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                 description, icon);
