@@ -22,6 +22,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.Nullable;
@@ -119,7 +120,15 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         }
 
         mAnimation = null;
-        if (!mCanAssumeUdfps) {
+        if (mCanAssumeUdfps) {
+            LottieAnimationView lottieAnimationView = findViewById(R.id.illustration_lottie);
+            lottieAnimationView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onStartButtonClick(v);
+                }
+            });
+        } else {
             View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
             if (animationView instanceof FingerprintFindSensorAnimation) {
                 mAnimation = (FingerprintFindSensorAnimation) animationView;
