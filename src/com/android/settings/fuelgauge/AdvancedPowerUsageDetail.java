@@ -361,8 +361,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final String stateString;
         final String footerString;
 
-        if (!mBatteryOptimizeUtils.isValidPackageName()
-                || mBatteryOptimizeUtils.isAllowlistedExceptIdleApp()) {
+        if (!mBatteryOptimizeUtils.isValidPackageName()) {
             // Present optimized only string when the package name is invalid or
             // it's in allow list not idle app.
             stateString = context.getString(R.string.manager_battery_usage_optimized_only);
