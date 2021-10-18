@@ -89,8 +89,16 @@ public class BatteryOptimizeUtils {
         return getAppOptimizationMode(mMode, mAllowListed);
     }
 
-    /** Sets the {@link OptimizationMode} for associated app. */
     public void setAppOptimizationMode(@OptimizationMode int mode) {
+        try {
+            setAppUsageStateInternal(mode);
+        } catch (Exception e) {
+            Log.e(TAG, "setAppUsageState() is failed for " + mPackageName, e);
+        }
+    }
+
+    /** Sets the {@link OptimizationMode} for associated app. */
+    public void setAppUsageStateInternal(@OptimizationMode int mode) {
         if (getAppOptimizationMode(mMode, mAllowListed) == mode) {
             Log.w(TAG, "set the same optimization mode for: " + mPackageName);
             return;
@@ -128,13 +136,6 @@ public class BatteryOptimizeUtils {
 
         return mPowerAllowListBackend.isSysAllowlisted(mPackageName)
                 || mPowerAllowListBackend.isDefaultActiveApp(mPackageName);
-    }
-
-    /**
-     * Return {@code true} if this package is in allow list except idle app.
-     */
-    public boolean isAllowlistedExceptIdleApp() {
-        return mPowerAllowListBackend.isAllowlistedExceptIdle(mPackageName);
     }
 
     String getPackageName() {
