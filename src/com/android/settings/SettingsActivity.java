@@ -29,6 +29,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.graphics.drawable.Icon;
 import android.os.AsyncTask;
@@ -467,6 +468,9 @@ public class SettingsActivity extends SettingsBaseActivity
                     return;
                 } catch (NameNotFoundException e) {
                     Log.w(LOG_TAG, "Could not find package" + initialTitleResPackageName);
+                } catch (Resources.NotFoundException resourceNotFound) {
+                    Log.w(LOG_TAG,
+                            "Could not find title resource in " + initialTitleResPackageName);
                 }
             } else {
                 setTitle(mInitialTitleResId);
