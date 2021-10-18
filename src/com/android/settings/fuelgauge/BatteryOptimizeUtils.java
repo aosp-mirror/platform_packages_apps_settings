@@ -89,8 +89,16 @@ public class BatteryOptimizeUtils {
         return getAppOptimizationMode(mMode, mAllowListed);
     }
 
-    /** Sets the {@link OptimizationMode} for associated app. */
     public void setAppOptimizationMode(@OptimizationMode int mode) {
+        try {
+            setAppUsageStateInternal(mode);
+        } catch (Exception e) {
+            Log.e(TAG, "setAppUsageState() is failed for " + mPackageName, e);
+        }
+    }
+
+    /** Sets the {@link OptimizationMode} for associated app. */
+    public void setAppUsageStateInternal(@OptimizationMode int mode) {
         if (getAppOptimizationMode(mMode, mAllowListed) == mode) {
             Log.w(TAG, "set the same optimization mode for: " + mPackageName);
             return;
