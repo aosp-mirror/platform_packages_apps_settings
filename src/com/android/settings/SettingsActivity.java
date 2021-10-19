@@ -244,7 +244,7 @@ public class SettingsActivity extends SettingsBaseActivity
         getMetaData();
         final Intent intent = getIntent();
         if (launchHomepageForTwoPaneDeepLink(intent)) {
-            finish();
+            finishAndRemoveTask();
             return;
         }
 

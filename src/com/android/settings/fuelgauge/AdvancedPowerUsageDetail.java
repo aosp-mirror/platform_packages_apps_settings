@@ -363,17 +363,17 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final String footerString;
 
         if (!mBatteryOptimizeUtils.isValidPackageName()) {
-            //Present optimized only string when the package name is invalid.
+            // Present optimized only string when the package name is invalid.
             stateString = context.getString(R.string.manager_battery_usage_optimized_only);
             footerString = context.getString(
                     R.string.manager_battery_usage_footer_limited, stateString);
         } else if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-            //Present unrestricted only string when the package is system or default active app.
+            // Present unrestricted only string when the package is system or default active app.
             stateString = context.getString(R.string.manager_battery_usage_unrestricted_only);
             footerString = context.getString(
                     R.string.manager_battery_usage_footer_limited, stateString);
         } else {
-            //Present default string to normal app.
+            // Present default string to normal app.
             footerString = context.getString(R.string.manager_battery_usage_footer);
         }
         mFooterPreference.setTitle(footerString);

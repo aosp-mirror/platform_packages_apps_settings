@@ -31,7 +31,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -73,8 +72,6 @@ public class RenameMobileNetworkDialogFragmentTest {
     @Mock
     private TelephonyManager mTelephonyMgr;
     @Mock
-    private ServiceState mServiceState;
-    @Mock
     private SubscriptionManager mSubscriptionMgr;
     @Mock
     private SubscriptionInfo mSubscriptionInfo;
@@ -95,11 +92,9 @@ public class RenameMobileNetworkDialogFragmentTest {
         stm.setTelephonyManagerForSubscriptionId(mSubscriptionId, mTelephonyMgr);
         when(mTelephonyMgr.createForSubscriptionId(anyInt())).thenReturn(mTelephonyMgr);
 
-        when(mTelephonyMgr.getServiceState()).thenReturn(mServiceState);
-        when(mServiceState.getOperatorAlphaLong()).thenReturn("fake carrier name");
-
         when(mSubscriptionInfo.getSubscriptionId()).thenReturn(mSubscriptionId);
         when(mSubscriptionInfo.getDisplayName()).thenReturn("test");
+        when(mSubscriptionInfo.getCarrierName()).thenReturn("fake carrier name");
         when(mSubscriptionMgr.setDisplayName(any(), anyInt(), anyInt())).thenReturn(0);
 
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).setup().get());
