@@ -364,13 +364,13 @@ public class SettingsActivity extends SettingsBaseActivity
 
         // It's a deep link intent, SettingsHomepageActivity will set SplitPairRule and start it.
         final Intent trampolineIntent =
-                new Intent(android.provider.Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK);
+                new Intent(android.provider.Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY);
         trampolineIntent.replaceExtras(intent);
         trampolineIntent.putExtra(
-                android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI,
+                android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI,
                 intent.toUri(Intent.URI_INTENT_SCHEME));
         trampolineIntent.putExtra(
-                android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_HIGHLIGHT_MENU_KEY,
+                android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY,
                 mHighlightMenuKey);
         trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         startActivity(trampolineIntent);

@@ -108,8 +108,8 @@
     <uses-permission android:name="android.permission.READ_DREAM_STATE" />
     <uses-permission android:name="android.permission.READ_DREAM_SUPPRESSION" />
     <uses-permission android:name="android.permission.MANAGE_APP_HIBERNATION" />
-    <uses-permission android:name="android.permission.LAUNCH_TWO_PANE_SETTINGS_DEEP_LINK" />
-    <uses-permission android:name="android.permission.ALLOW_PLACE_IN_TWO_PANE_SETTINGS" />
+    <uses-permission android:name="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK" />
+    <uses-permission android:name="android.permission.ALLOW_PLACE_IN_MULTI_PANE_SETTINGS" />
 
     <application
             android:name=".SettingsApplication"
@@ -177,10 +177,10 @@
         <activity-alias android:name="DeepLinkHomepageActivity"
                 android:label="@string/settings_label_launcher"
                 android:exported="true"
-                android:permission="android.permission.LAUNCH_TWO_PANE_SETTINGS_DEEP_LINK"
+                android:permission="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK"
                 android:targetActivity=".homepage.SettingsHomepageActivity">
             <intent-filter>
-                <action android:name="android.settings.SETTINGS_LARGE_SCREEN_DEEP_LINK" />
+                <action android:name="android.settings.SETTINGS_EMBED_DEEP_LINK_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity-alias>
