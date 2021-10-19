@@ -60,6 +60,10 @@ android_app {
         "ims-common",
     ],
     uses_libs: ["org.apache.http.legacy"],
+    optional_uses_libs: [
+        "androidx.window.extensions",
+        "androidx.window.sidecar",
+    ],
 }
 
 //############################################################
