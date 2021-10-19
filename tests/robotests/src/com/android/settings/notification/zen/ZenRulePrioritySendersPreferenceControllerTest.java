@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@ package com.android.settings.notification.zen;
 
 import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_ANYONE;
 import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_NONE;
-import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
-import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
 import static android.app.NotificationManager.Policy.PRIORITY_SENDERS_ANY;
 import static android.app.NotificationManager.Policy.PRIORITY_SENDERS_CONTACTS;
 import static android.app.NotificationManager.Policy.PRIORITY_SENDERS_STARRED;
@@ -30,15 +28,19 @@ import static com.android.settings.notification.zen.ZenPrioritySendersHelper.KEY
 import static com.android.settings.notification.zen.ZenPrioritySendersHelper.KEY_NONE;
 import static com.android.settings.notification.zen.ZenPrioritySendersHelper.UNKNOWN;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.AutomaticZenRule;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.service.notification.ZenPolicy;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -57,9 +59,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-public class ZenModePrioritySendersPreferenceControllerTest {
-    private ZenModePrioritySendersPreferenceController mMessagesController;
-    private ZenModePrioritySendersPreferenceController mCallsController;
+public class ZenRulePrioritySendersPreferenceControllerTest {
+    private ZenRulePrioritySendersPreferenceController mMessagesController;
+    private ZenRulePrioritySendersPreferenceController mCallsController;
 
     @Mock
     private ZenModeBackend mZenBackend;
@@ -73,22 +75,30 @@ public class ZenModePrioritySendersPreferenceControllerTest {
     private ZenPrioritySendersHelper mHelper;
 
     private Context mContext;
+    private final String mId = "test_zen_rule_id";
+    private AutomaticZenRule mRule;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mMessagesController = new ZenModePrioritySendersPreferenceController(
+        mRule = new AutomaticZenRule("test", null, null, null, null,
+                NotificationManager.INTERRUPTION_FILTER_PRIORITY, true);
+        mMessagesController = new ZenRulePrioritySendersPreferenceController(
                 mContext, "test_key_messages", mock(Lifecycle.class), true,
                 mNotifBackend);
         ReflectionHelpers.setField(mMessagesController, "mBackend", mZenBackend);
         ReflectionHelpers.setField(mMessagesController, "mHelper", mHelper);
+        ReflectionHelpers.setField(mMessagesController, "mRule", mRule);
+        ReflectionHelpers.setField(mMessagesController, "mId", mId);
 
-        mCallsController = new ZenModePrioritySendersPreferenceController(
+        mCallsController = new ZenRulePrioritySendersPreferenceController(
                 mContext, "test_key_calls", mock(Lifecycle.class), false,
                 mNotifBackend);
         ReflectionHelpers.setField(mCallsController, "mBackend", mZenBackend);
         ReflectionHelpers.setField(mCallsController, "mHelper", mHelper);
+        ReflectionHelpers.setField(mCallsController, "mRule", mRule);
+        ReflectionHelpers.setField(mCallsController, "mId", mId);
 
         when(mMockMessagesPrefCategory.getContext()).thenReturn(mContext);
         when(mMockCallsPrefCategory.getContext()).thenReturn(mContext);
@@ -96,6 +106,7 @@ public class ZenModePrioritySendersPreferenceControllerTest {
                 .thenReturn(mMockMessagesPrefCategory);
         when(mPreferenceScreen.findPreference(mCallsController.getPreferenceKey()))
                 .thenReturn(mMockCallsPrefCategory);
+        when(mZenBackend.getAutomaticZenRule(mId)).thenReturn(mRule);
     }
 
     @Test
@@ -111,11 +122,11 @@ public class ZenModePrioritySendersPreferenceControllerTest {
     public void clickPreference_Messages() {
         // While most of the actual logical functionality for the preference key -> result
         // is/should be controlled by the ZenPrioritySendersHelper, here we need to make sure
-        // the returned values from the helper are successfully passed through the click listener.
+        // the returned values from the helper are correctly saved to the zen policy in mRule.
 
         // GIVEN current priority message senders are STARRED and conversation senders NONE
-        when(mZenBackend.getPriorityMessageSenders()).thenReturn(PRIORITY_SENDERS_STARRED);
-        when(mZenBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_NONE);
+        setMessageSenders(PRIORITY_SENDERS_STARRED);
+        setConversationSenders(CONVERSATION_SENDERS_NONE);
 
         // When we ask mHelper for settings to save on click, it returns ANY for senders and
         // conversations (what it would return if the user clicked "Anyone")
@@ -129,16 +140,16 @@ public class ZenModePrioritySendersPreferenceControllerTest {
 
         // THEN any senders gets saved as priority senders for messages
         // and also allow any conversations
-        verify(mZenBackend).saveSenders(PRIORITY_CATEGORY_MESSAGES, PRIORITY_SENDERS_ANY);
-        verify(mZenBackend).saveConversationSenders(CONVERSATION_SENDERS_ANYONE);
+        assertThat(getMessageSenders()).isEqualTo(PRIORITY_SENDERS_ANY);
+        assertThat(getConversationSenders()).isEqualTo(CONVERSATION_SENDERS_ANYONE);
     }
 
     @Test
     public void clickPreference_MessagesUnset() {
-        // Confirm that when asked to not set something, no ZenModeBackend call occurs.
+        // Confirm that when asked to not set something, no change occurs.
         // GIVEN current priority message senders are STARRED and conversation senders NONE
-        when(mZenBackend.getPriorityMessageSenders()).thenReturn(PRIORITY_SENDERS_STARRED);
-        when(mZenBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_NONE);
+        setMessageSenders(PRIORITY_SENDERS_STARRED);
+        setConversationSenders(CONVERSATION_SENDERS_NONE);
 
         when(mHelper.settingsToSaveOnClick(
                 any(SelectorWithWidgetPreference.class), anyInt(), anyInt()))
@@ -148,21 +159,17 @@ public class ZenModePrioritySendersPreferenceControllerTest {
         SelectorWithWidgetPreference nonePref = makePreference(KEY_NONE, true, true);
         nonePref.onClick();
 
-        // THEN "none" gets saved as priority senders for messages
-        verify(mZenBackend).saveSenders(PRIORITY_CATEGORY_MESSAGES, SOURCE_NONE);
+        // THEN priority senders for messages is set to NONE
+        assertThat(getMessageSenders()).isEqualTo(SOURCE_NONE);
 
-        // AND that no changes are made to conversation senders
-        verify(mZenBackend, never()).saveConversationSenders(anyInt());
+        // AND that conversation senders remains unchanged
+        assertThat(getConversationSenders()).isEqualTo(CONVERSATION_SENDERS_NONE);
     }
 
     @Test
     public void clickPreference_Calls() {
         // GIVEN current priority call senders are ANY
-        when(mZenBackend.getPriorityCallSenders()).thenReturn(PRIORITY_SENDERS_ANY);
-
-        // (and this shouldn't happen, but also be prepared to give an answer if asked for
-        // conversation senders)
-        when(mZenBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_ANYONE);
+        setCallSenders(PRIORITY_SENDERS_ANY);
 
         // Helper returns what would've happened to set priority senders to contacts
         when(mHelper.settingsToSaveOnClick(
@@ -174,13 +181,9 @@ public class ZenModePrioritySendersPreferenceControllerTest {
         contactsPref.onClick();
 
         // THEN contacts gets saved as priority senders for calls
-        // and no conversation policies are modified
-        verify(mZenBackend).saveSenders(PRIORITY_CATEGORY_CALLS, PRIORITY_SENDERS_CONTACTS);
-        verify(mZenBackend, never()).saveConversationSenders(anyInt());
+        assertThat(getCallSenders()).isEqualTo(PRIORITY_SENDERS_CONTACTS);
     }
 
-    // Makes a preference with the provided key and whether it's a checkbox with
-    // mSelectorClickListener as the onClickListener set.
     private SelectorWithWidgetPreference makePreference(
             String key, boolean isCheckbox, boolean isMessages) {
         final SelectorWithWidgetPreference pref =
@@ -190,5 +193,46 @@ public class ZenModePrioritySendersPreferenceControllerTest {
                 isMessages ? mMessagesController.mSelectorClickListener
                         : mCallsController.mSelectorClickListener);
         return pref;
+    }
+
+    // Helper methods for setting up and reading current state on mRule. These are mostly helpful
+    // just to handle translating between the enums used in ZenPolicy from the ones used in
+    // the settings for message/call senders.
+    private void setMessageSenders(int messageSenders) {
+        mRule.setZenPolicy(new ZenPolicy.Builder(mRule.getZenPolicy())
+                .allowMessages(
+                        ZenRulePrioritySendersPreferenceController.zenPolicySettingFromSender(
+                                messageSenders))
+                .build());
+    }
+
+    private int getMessageSenders() {
+        return ZenModeBackend.getContactSettingFromZenPolicySetting(
+                mRule.getZenPolicy().getPriorityMessageSenders());
+    }
+
+    private void setCallSenders(int callSenders) {
+        mRule.setZenPolicy(new ZenPolicy.Builder(mRule.getZenPolicy())
+                .allowCalls(
+                        ZenRulePrioritySendersPreferenceController.zenPolicySettingFromSender(
+                                callSenders))
+                .build());
+    }
+
+    private int getCallSenders() {
+        return ZenModeBackend.getContactSettingFromZenPolicySetting(
+                mRule.getZenPolicy().getPriorityCallSenders());
+    }
+
+    // There's no enum conversion on the conversation senders, as they use the same enum, but
+    // these methods provide some convenient parallel usage compared to the others.
+    private void setConversationSenders(int conversationSenders) {
+        mRule.setZenPolicy(new ZenPolicy.Builder(mRule.getZenPolicy())
+                .allowConversations(conversationSenders)
+                .build());
+    }
+
+    private int getConversationSenders() {
+        return mRule.getZenPolicy().getPriorityConversationSenders();
     }
 }
