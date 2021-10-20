@@ -16,9 +16,9 @@
 
 package com.android.settings.homepage;
 
-import static android.provider.Settings.ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK;
-import static android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI;
-import static android.provider.Settings.EXTRA_SETTINGS_LARGE_SCREEN_HIGHLIGHT_MENU_KEY;
+import static android.provider.Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY;
+import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY;
+import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
 
 import android.animation.LayoutTransition;
 import android.app.ActivityManager;
@@ -191,14 +191,14 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         final Intent intent = getIntent();
         if (intent == null || !TextUtils.equals(intent.getAction(),
-                ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK)) {
+                ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)) {
             return;
         }
 
         final String intentUriString = intent.getStringExtra(
-                EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI);
+                EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI);
         if (TextUtils.isEmpty(intentUriString)) {
-            Log.e(TAG, "No EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_URI to deep link");
+            Log.e(TAG, "No EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI to deep link");
             finish();
             return;
         }
@@ -250,9 +250,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private String getHighlightMenuKey() {
         final Intent intent = getIntent();
         if (intent != null && TextUtils.equals(intent.getAction(),
-                ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK)) {
+                ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)) {
             final String menuKey = intent.getStringExtra(
-                    EXTRA_SETTINGS_LARGE_SCREEN_HIGHLIGHT_MENU_KEY);
+                    EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY);
             if (!TextUtils.isEmpty(menuKey)) {
                 return menuKey;
             }
