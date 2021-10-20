@@ -26,6 +26,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.nfc.AndroidBeamPreferenceController;
 import com.android.settings.print.PrintSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.uwb.UwbPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -43,6 +44,7 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
     private static final String TAG = "AdvancedConnectedDeviceFrag";
 
     static final String KEY_BLUETOOTH = "bluetooth_settings";
+    static final String KEY_UWB = "uwb_settings";
 
     @Override
     public int getMetricsCategory() {
@@ -62,6 +64,15 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.connected_devices_advanced;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        UwbPreferenceController uwbPreferenceController = use(UwbPreferenceController.class);
+        if (uwbPreferenceController != null && getSettingsLifecycle() != null) {
+            getSettingsLifecycle().addObserver(uwbPreferenceController);
+        }
     }
 
     @Override
