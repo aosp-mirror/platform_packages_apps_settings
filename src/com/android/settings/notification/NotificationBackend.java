@@ -404,15 +404,6 @@ public class NotificationBackend {
         }
     }
 
-    public int getNumAppsBypassingDnd(int uid) {
-        try {
-            return sINM.getAppsBypassingDndCount(uid);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return 0;
-        }
-    }
-
     public boolean shouldHideSilentStatusBarIcons(Context context) {
         try {
             return sINM.shouldHideSilentStatusIcons(context.getPackageName());
