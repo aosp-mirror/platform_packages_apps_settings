@@ -196,8 +196,8 @@ public class TopLevelSettings extends DashboardFragment implements
         }
 
         Log.d(TAG, "onCreateAdapter, pref key: " + mHighlightedPreferenceKey);
-        mTopLevelAdapter = new HighlightableTopLevelPreferenceAdapter(preferenceScreen,
-                getListView(), mHighlightedPreferenceKey);
+        mTopLevelAdapter = new HighlightableTopLevelPreferenceAdapter(
+                getActivity(), preferenceScreen, getListView(), mHighlightedPreferenceKey);
         return mTopLevelAdapter;
     }
 
