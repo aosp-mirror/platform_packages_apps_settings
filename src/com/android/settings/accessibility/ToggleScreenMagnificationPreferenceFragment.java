@@ -38,7 +38,6 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.CheckBox;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
@@ -132,12 +131,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     public Dialog onCreateDialog(int dialogId) {
         if (mDialogDelegate != null) {
-            final Dialog dialog = mDialogDelegate.onCreateDialog(dialogId);
-            if (dialog != null) {
-                return dialog;
+            mDialog = mDialogDelegate.onCreateDialog(dialogId);
+            if (mDialog != null) {
+                return mDialog;
             }
         }
-        final AlertDialog dialog;
         switch (dialogId) {
             case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
                 return AccessibilityGestureNavigationTutorial
@@ -148,10 +146,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? DialogType.EDIT_SHORTCUT_MAGNIFICATION_SUW
                         : DialogType.EDIT_SHORTCUT_MAGNIFICATION;
-                dialog = AccessibilityDialogUtils.showEditShortcutDialog(getPrefContext(),
+                mDialog = AccessibilityDialogUtils.showEditShortcutDialog(getPrefContext(),
                         dialogType, dialogTitle, this::callOnAlertDialogCheckboxClicked);
-                setupMagnificationEditShortcutDialog(dialog);
-                return dialog;
+                setupMagnificationEditShortcutDialog(mDialog);
+                return mDialog;
             default:
                 return super.onCreateDialog(dialogId);
         }
@@ -209,7 +207,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @VisibleForTesting
-    void setupMagnificationEditShortcutDialog(AlertDialog dialog) {
+    void setupMagnificationEditShortcutDialog(Dialog dialog) {
         final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
         mSoftwareTypeCheckBox = dialogSoftwareView.findViewById(R.id.checkbox);
         setDialogTextAreaClickListener(dialogSoftwareView, mSoftwareTypeCheckBox);
