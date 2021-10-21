@@ -326,10 +326,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         }
 
         if (mEnableTriState) {
-            final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
-            final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-            final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
-            controller.setSummary(getAppActiveTime(foregroundTimeMs, backgroundTimeMs, slotTime));
+            controller.setSummary(getAppActiveTime(bundle));
         }
 
         controller.done(context, true /* rebindActions */);
@@ -493,16 +490,21 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
     }
 
-    private CharSequence getAppActiveTime(
-            long foregroundTimeMs, long backgroundTimeMs, String slotTime) {
+    private CharSequence getAppActiveTime(Bundle bundle) {
+        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
+        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
+        final int consumedPower = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
+        final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
         final CharSequence usageTimeSummary;
         final PowerUsageFeatureProvider powerFeatureProvider =
                 FeatureFactory.getFactory(getContext()).getPowerUsageFeatureProvider(getContext());
 
         if (totalTimeMs == 0) {
+            final int batteryWithoutUsageTime = consumedPower > 0
+                    ? R.string.battery_usage_without_time : R.string.battery_not_usage_24hr;
             usageTimeSummary = getText(powerFeatureProvider.isChartGraphEnabled(getContext())
-                    ? R.string.battery_not_usage_24hr : R.string.battery_not_usage);
+                    ? batteryWithoutUsageTime : R.string.battery_not_usage);
         } else if (slotTime == null) {
             // Shows summary text with past 24 hr or full charge if slot time is null.
             usageTimeSummary = powerFeatureProvider.isChartGraphEnabled(getContext())
