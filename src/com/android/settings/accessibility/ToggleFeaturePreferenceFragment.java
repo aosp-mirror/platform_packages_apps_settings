@@ -79,6 +79,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected Preference mSettingsPreference;
     protected AccessibilityFooterPreferenceController mFooterPreferenceController;
     protected String mPreferenceKey;
+    protected Dialog mDialog;
 
     protected CharSequence mSettingsTitle;
     protected Intent mSettingsIntent;
@@ -106,6 +107,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     public static final int NOT_SET = -1;
     // Save user's shortcutType value when savedInstance has value (e.g. device rotated).
     protected int mSavedCheckBoxValue = NOT_SET;
+    private boolean mSavedAccessibilityFloatingMenuEnabled;
 
     // For html description of accessibility service, must follow the rule, such as
     // <img src="R.drawable.fileName"/>, a11y settings will get the resources successfully.
@@ -127,7 +129,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Restore the user shortcut type.
         if (savedInstanceState != null && savedInstanceState.containsKey(
                 KEY_SAVED_USER_SHORTCUT_TYPE)) {
@@ -200,6 +201,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mSettingsContentObserver.register(getContentResolver());
         updateShortcutPreferenceData();
         updateShortcutPreference();
+
+        updateEditShortcutDialogIfNeeded();
     }
 
     @Override
@@ -208,6 +211,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 AccessibilityManager.class);
         am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
         mSettingsContentObserver.unregister(getContentResolver());
+        mSavedAccessibilityFloatingMenuEnabled = AccessibilityUtil.isFloatingMenuEnabled(
+                getContext());
         super.onPause();
     }
 
@@ -222,24 +227,23 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
-        Dialog dialog;
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getPrefContext().getString(
                         R.string.accessibility_shortcut_title, mPackageName);
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? DialogType.EDIT_SHORTCUT_GENERIC_SUW : DialogType.EDIT_SHORTCUT_GENERIC;
-                dialog = AccessibilityDialogUtils.showEditShortcutDialog(
+                mDialog = AccessibilityDialogUtils.showEditShortcutDialog(
                         getPrefContext(), dialogType, dialogTitle,
                         this::callOnAlertDialogCheckboxClicked);
-                setupEditShortcutDialog(dialog);
-                return dialog;
+                setupEditShortcutDialog(mDialog);
+                return mDialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                dialog = AccessibilityGestureNavigationTutorial
+                mDialog = AccessibilityGestureNavigationTutorial
                         .createAccessibilityTutorialDialog(getPrefContext(),
                                 getUserShortcutTypes());
-                dialog.setCanceledOnTouchOutside(false);
-                return dialog;
+                mDialog.setCanceledOnTouchOutside(false);
+                return mDialog;
             default:
                 throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
         }
@@ -730,6 +734,20 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (shortcutName != null) {
             Settings.Secure.putString(context.getContentResolver(), targetKey,
                     shortcutName.flattenToString());
+        }
+    }
+
+    private void updateEditShortcutDialogIfNeeded() {
+        if (mDialog == null || !mDialog.isShowing()) {
+            return;
+        }
+
+        // Content in software shortcut need to be adjusted depend on the accessibility button
+        // mode status which can be changed in background.
+        final boolean valueChanged = mSavedAccessibilityFloatingMenuEnabled
+                != AccessibilityUtil.isFloatingMenuEnabled(getContext());
+        if (valueChanged) {
+            AccessibilityDialogUtils.updateSoftwareShortcutInDialog(getContext(), mDialog);
         }
     }
 

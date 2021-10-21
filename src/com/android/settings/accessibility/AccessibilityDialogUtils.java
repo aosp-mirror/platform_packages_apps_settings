@@ -180,6 +180,23 @@ public class AccessibilityDialogUtils {
         return alertDialog;
     }
 
+    /**
+     * Updates the software shortcut in edit shortcut dialog.
+     *
+     * @param context A valid context
+     * @param editShortcutDialog Need to be a type of edit shortcut dialog
+     * @return True if the update is successful
+     */
+    public static boolean updateSoftwareShortcutInDialog(Context context,
+            Dialog editShortcutDialog) {
+        final View container = editShortcutDialog.findViewById(R.id.container_layout);
+        if (container != null) {
+            initSoftwareShortcut(context, container);
+            return true;
+        }
+        return false;
+    }
+
     private static AlertDialog createDialog(Context context, int dialogType,
             CharSequence dialogTitle, DialogInterface.OnClickListener listener) {
 
