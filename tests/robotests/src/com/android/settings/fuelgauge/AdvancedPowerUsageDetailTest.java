@@ -438,6 +438,21 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
+    public void testInitHeader_noUsageTimeButConsumedPower_hasEmptySummary() {
+        Bundle bundle = new Bundle(3);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
+        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_AMOUNT, /* value */ 10);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue().toString()).isEmpty();
+    }
+
+    @Test
     public void testInitHeader_backgroundTwoMinForegroundZero_hasCorrectSummary() {
         final long backgroundTimeTwoMinutes = 120000;
         final long foregroundTimeZero = 0;

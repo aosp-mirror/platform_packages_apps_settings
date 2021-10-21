@@ -212,8 +212,6 @@
     <string name="bluetooth_notif_message">Tap to pair with <xliff:g id="device_name">%1$s</xliff:g>.</string>
     <!-- Item in bluetooth settings screen, used to show the list of received files [CHAR LIMIT=30] -->
     <string name="bluetooth_show_received_files">Received files</string>
-    <!-- Item in bluetooth settings screen, used to show the list of Files received via Bluetooth [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_show_files_received_via_bluetooth">Files received via Bluetooth</string>
 
     <!-- Title for contextual Bluetooth devices card when Bluetooth is off [CHAR LIMIT=NONE]-->
     <string name="bluetooth_devices_card_off_title">Bluetooth is off</string>
@@ -4800,7 +4798,7 @@
     <!-- Manage applications, individual application screen, confirmation dialog title. Displays when user selects to "Clear data". -->
     <string name="clear_data_dlg_title">Delete app data?</string>
     <!-- Manage applications, individual application screen, confirmation dialog message. Displays when user selects to "Clear data". It warns the user of the consequences of clearing the data for an app. -->
-    <string name="clear_data_dlg_text">All this app\u2019s data will be deleted permanently. This includes all files, settings, accounts, databases, etc.</string>
+    <string name="clear_data_dlg_text">This app\u2019s data will be permanently deleted. This includes files, settings, databases, and other app data.</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. -->
     <string name="dlg_ok">OK</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". -->
@@ -6560,6 +6558,8 @@
     <string name="battery_not_usage">No usage from last full charge</string>
     <!-- Description for no any battery usage for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_not_usage_24hr">No usage for past 24 hr</string>
+    <!-- Description for no usage time but have battery usage [CHAR LIMIT=120] -->
+    <string name="battery_usage_without_time"></string>
 
     <!-- Graph subtext displayed to user when enhanced battery estimate is being used [CHAR LIMIT=120] -->
     <string name="advanced_battery_graph_subtext">Battery left estimate is based on your device usage</string>
