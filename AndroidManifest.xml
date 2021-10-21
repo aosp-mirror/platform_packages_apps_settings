@@ -301,6 +301,17 @@
                 android:value="true" />
         </activity>
 
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias
+            android:name="Settings$WifiSettings2Activity"
+            android:targetActivity="Settings$WifiSettingsActivity"
+            android:label="@string/wifi_settings"
+            android:icon="@drawable/ic_homepage_network"
+            android:exported="true">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.WifiSettings" />
+        </activity-alias>
+
         <activity
             android:name="Settings$NetworkProviderSettingsActivity"
             android:label="@string/provider_internet_settings"
