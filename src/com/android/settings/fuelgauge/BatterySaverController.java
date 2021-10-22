@@ -19,6 +19,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
@@ -137,17 +138,13 @@ public class BatterySaverController extends BasePreferenceController
         final int mode = Global.getInt(resolver, Global.AUTOMATIC_POWER_SAVE_MODE,
                 PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
         int fuelgaugeScheduleType = SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_NO_SCHEDULE;
+        int powerLevelTriggerPercentage = -1;
         switch (mode) {
             case PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE:
                 fuelgaugeScheduleType =
                         SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_PERCENTAGE;
-                final int powerLevelTriggerPercentage = Global.getInt(resolver,
+                powerLevelTriggerPercentage = Global.getInt(resolver,
                         Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
-                mMetricsFeatureProvider.action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
-                        Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                                fuelgaugeScheduleType),
-                        Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
-                                powerLevelTriggerPercentage));
                 break;
             case PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC:
                 fuelgaugeScheduleType = SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_ROUTINE;
@@ -157,13 +154,15 @@ public class BatterySaverController extends BasePreferenceController
         }
         mMetricsFeatureProvider.action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
                 Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                        fuelgaugeScheduleType));
+                        fuelgaugeScheduleType),
+                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
+                        powerLevelTriggerPercentage));
     }
 
     @Override
     public void onPowerSaveModeChanged() {
         updateSummary();
-        logPowerSaver();
+        AsyncTask.execute(() -> logPowerSaver());
     }
 
     @Override
