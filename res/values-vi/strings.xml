@@ -2092,7 +2092,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Bộ nhớ trong"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Đang tính toán lại kích thước…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Xóa dữ liệu ứng dụng?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Tất cả dữ liệu của ứng dụng này sẽ bị xóa vĩnh viễn, bao gồm tất cả các tệp, các tùy chọn cài đặt, tài khoản, cơ sở dữ liệu, v.v."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Dữ liệu của ứng dụng này sẽ bị xóa vĩnh viễn. Dữ liệu này bao gồm các tệp, chế độ cài đặt, cơ sở dữ liệu và dữ liệu ứng dụng khác."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Hủy"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -4100,6 +4100,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Các cuộc trò chuyện có thể làm gián đoạn"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Mọi cuộc trò chuyện"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Cuộc trò chuyện ưu tiên"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"cuộc trò chuyện ưu tiên"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Không có"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Không có}=1{1 cuộc trò chuyện}other{# cuộc trò chuyện}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Những người liên hệ có thể làm gián đoạn"</string>
@@ -4124,6 +4125,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Bất kỳ ai"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Danh bạ"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Người liên hệ có gắn dấu sao"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"Một số người hoặc cuộc trò chuyện"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Từ liên hệ có gắn dấu sao và người gọi nhiều lần"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Từ danh bạ và người gọi nhiều lần"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Chỉ từ người gọi nhiều lần"</string>
@@ -5273,8 +5275,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Chế độ mạng <xliff:g id="NETWORKMODEID">%1$d</xliff:g> không hợp lệ. Bỏ qua."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Tên điểm truy cập"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Không sử dụng được khi kết nối với <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <!-- no translation found for see_more (8436037008285546409) -->
-    <skip />
+    <string name="see_more" msgid="8436037008285546409">"Cài đặt"</string>
     <string name="see_less" msgid="2642392725363552793">"Ẩn bớt"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Bật <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Bật SIM?"</string>
@@ -5506,8 +5507,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"cuộc gọi"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"Tin nhắn SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"dữ liệu di động"</string>
-    <!-- no translation found for wifi_scan_notify_message (4130641837826688879) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Để cải thiện trải nghiệm khi dùng thiết bị, các ứng dụng và dịch vụ vẫn có thể quét tìm mạng Wi‑Fi bất cứ lúc nào, ngay cả khi Wi‑Fi tắt. Chế độ này có thể cải thiện các tính năng và dịch vụ dựa trên vị trí. Bạn có thể thay đổi chế độ này trong phần cài đặt tính năng Quét tìm Wi‑Fi. "<annotation id="link">"Thay đổi"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Đã kết nối"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Không có kết nối"</string>
