@@ -2090,7 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"आन्तरिक भण्डारण"</string>
     <string name="recompute_size" msgid="1098091228370999128">"आकार पुनःगणना गर्दै ..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"एपको डेटा मेटाउन चाहनुहुन्छ?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"यस एपका सम्पूर्ण डेटाहरू स्थायी रूपमा मेटाइने छ। यसमा सम्पूर्ण फाइल, सेटिङ, खाताहरू, डेटाबेस आदि पर्दछन्।"</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"यो एपका डेटा सदाका लागि मेटाइने छ। यसमा फाइल, सेटिङ, डेटाबेस र एपका अन्य डेटा पर्छन्।"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ठिक छ"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"रद्द गर्नुहोस्"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -4098,6 +4098,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"यो सेटिङ लागू नहुने वार्तालाप"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"सबै वार्तालापहरू"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"महत्वपूर्ण वार्तालापहरू"</string>
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"महत्त्वपूर्ण वार्तालापहरू"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"कुनै पनि होइन"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{कुनै पनि वार्तालाप होइन}=1{एउटा वार्तालाप}other{# वटा वार्तालाप}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"यो सेटिङ लागू नहुने व्यक्तिहरू"</string>
@@ -4122,6 +4123,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"जोसुकै"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"सम्पर्क ठेगानाहरू"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"ताराङ्कित सम्पर्क ठेगानाहरू"</string>
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"केही मान्छे वा वार्तालापहरू"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"ताराङ्कित सम्पर्क ठेगाना तथा बारम्बार कल गर्ने व्यक्तिका कलहरू"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"सम्पर्क ठेगानामा भएका तथा बारम्बार कल गर्ने व्यक्तिका कलहरू"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"बारम्बार कल गर्ने व्यक्तिका कलहरू मात्र"</string>
@@ -5271,8 +5273,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"अमान्य नेटवर्क मोड <xliff:g id="NETWORKMODEID">%1$d</xliff:g>। बेवास्ता गर्नुहोस्।"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"एक्सेस पोइन्ट नामहरू"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> मा जडान हुँदा उपलब्ध छैन"</string>
-    <!-- no translation found for see_more (8436037008285546409) -->
-    <skip />
+    <string name="see_more" msgid="8436037008285546409">"सेटिङ"</string>
     <string name="see_less" msgid="2642392725363552793">"कम हेर्नुहोस्"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> अन गर्ने हो?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIM सक्रिय गर्ने हो?"</string>
@@ -5504,8 +5505,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"कलहरू"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"मोबाइल डेटा"</string>
-    <!-- no translation found for wifi_scan_notify_message (4130641837826688879) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"डिभाइस प्रयोगको अनुभवमा सुधार गर्न, एप तथा सेवाहरूले अझै पनि जुनसुकै बेला (Wi‑Fi अफ भएका बेलामा पनि) Wi‑Fi नेटवर्क खोज्न सक्छन्। यसलाई लोकेसनमा आधारित सुविधा तथा सेवाहरूमा सुधार गर्ने जस्ता कार्यहरू गर्नका लागि प्रयोग गर्न सकिन्छ। तपाईं यसलाई Wi-Fi स्क्यानिङका सेटिङमा गई परिवर्तन गर्न सक्नुहुन्छ। "<annotation id="link">"बदल्नुहोस्"</annotation></string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"इन्टरनेटमा कनेक्ट गरिएको छ"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"इन्टरनेट छैन"</string>

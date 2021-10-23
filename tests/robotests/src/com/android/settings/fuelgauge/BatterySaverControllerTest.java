@@ -88,9 +88,13 @@ public class BatterySaverControllerTest {
                 Settings.Global.AUTOMATIC_POWER_SAVE_MODE, -1);
 
         mBatterySaverController.onPowerSaveModeChanged();
+
+        waitAWhile();
         verify(mMetricsFeatureProvider).action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
                 Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                        SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_NO_SCHEDULE));
+                        SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_NO_SCHEDULE),
+                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
+                        -1));
     }
 
     @Test
@@ -104,6 +108,8 @@ public class BatterySaverControllerTest {
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, percentageVal);
 
         mBatterySaverController.onPowerSaveModeChanged();
+
+        waitAWhile();
         verify(mMetricsFeatureProvider).action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
                 Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
                         SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_PERCENTAGE),
@@ -119,9 +125,13 @@ public class BatterySaverControllerTest {
                 PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
 
         mBatterySaverController.onPowerSaveModeChanged();
+
+        waitAWhile();
         verify(mMetricsFeatureProvider).action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
                 Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                        SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_ROUTINE));
+                        SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_ROUTINE),
+                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
+                        -1));
     }
 
     @Test
@@ -166,5 +176,12 @@ public class BatterySaverControllerTest {
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
         assertThat(mBatterySaverController.getSummary()).isEqualTo("Off");
+    }
+
+    private static void waitAWhile() {
+        try {
+            Thread.sleep(200);
+        } catch (Exception e) {
+        }
     }
 }
