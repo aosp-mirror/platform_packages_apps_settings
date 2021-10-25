@@ -16,17 +16,20 @@
 
 package com.android.settings.fuelgauge.batterysaver;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +37,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 import com.android.settingslib.widget.CandidateInfo;
@@ -58,6 +62,8 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     public BatterySaverScheduleRadioButtonsController mRadioButtonController;
     @VisibleForTesting
     Context mContext;
+    private int mSaverPercentage;
+    private String mSaverScheduleKey;
     private BatterySaverScheduleSeekBarController mSeekBarController;
 
     @VisibleForTesting
@@ -90,6 +96,8 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
                 Settings.Secure.getUriFor(Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED),
                 false,
                 mSettingsObserver);
+        mSaverScheduleKey = mRadioButtonController.getDefaultKey();
+        mSaverPercentage = getSaverPercentage();
     }
 
     @Override
@@ -107,6 +115,7 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     @Override
     public void onPause() {
         mContext.getContentResolver().unregisterContentObserver(mSettingsObserver);
+        AsyncTask.execute(() -> logPowerSaver());
         super.onPause();
     }
 
@@ -172,6 +181,43 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     @Override
     public int getMetricsCategory() {
         return 0;
+    }
+
+    private void logPowerSaver() {
+        int currentSaverPercentage = getSaverPercentage();
+        String currentSaverScheduleKey = mRadioButtonController.getDefaultKey();
+        if (mSaverScheduleKey.equals(currentSaverScheduleKey)
+                && mSaverPercentage == currentSaverPercentage) {
+            return;
+        }
+        int scheduleType = -1;
+        int schedulePercentage = -1;
+        switch (currentSaverScheduleKey) {
+            case BatterySaverScheduleRadioButtonsController.KEY_NO_SCHEDULE:
+                scheduleType = SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_NO_SCHEDULE;
+                break;
+            case BatterySaverScheduleRadioButtonsController.KEY_ROUTINE:
+                scheduleType = SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_ROUTINE;
+                break;
+            case BatterySaverScheduleRadioButtonsController.KEY_PERCENTAGE:
+                scheduleType = SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_PERCENTAGE;
+                schedulePercentage = currentSaverPercentage;
+                break;
+            // Unknown schedule type.
+            default:
+                return;
+        }
+        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+                .action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
+                        Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
+                                scheduleType),
+                        Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
+                                schedulePercentage));
+    }
+
+    private int getSaverPercentage() {
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, -1);
     }
 
     static class BatterySaverScheduleCandidateInfo extends CandidateInfo {
