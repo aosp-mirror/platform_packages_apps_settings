@@ -365,7 +365,6 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
                 // The classname and intent information comes from the PreIndexData
                 // This will be more clear when provider conversion is done at PreIndex time.
                 raw.className = bundle.getTargetClass().getName();
-
             }
             rawList.addAll(providerRaws);
         }
