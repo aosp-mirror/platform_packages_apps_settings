@@ -16,6 +16,7 @@
 
 package com.android.settings.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -53,6 +54,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     final int mIconColorHighlight;
 
     private final Context mContext;
+    private final Activity mActivity;
     private final RecyclerView mRecyclerView;
     private final int mNormalBackgroundRes;
     private String mHighlightKey;
@@ -61,12 +63,13 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     private boolean mHighlightNeeded;
     private boolean mScrolled;
 
-    public HighlightableTopLevelPreferenceAdapter(PreferenceGroup preferenceGroup,
-            RecyclerView recyclerView, String key) {
+    public HighlightableTopLevelPreferenceAdapter(Activity activity,
+            PreferenceGroup preferenceGroup, RecyclerView recyclerView, String key) {
         super(preferenceGroup);
         mRecyclerView = recyclerView;
         mHighlightKey = key;
         mContext = preferenceGroup.getContext();
+        mActivity = activity;
         final TypedValue outValue = new TypedValue();
         mContext.getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
                 outValue, true /* resolveRefs */);
@@ -233,6 +236,6 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     }
 
     private boolean isHighlightNeeded() {
-        return ActivityEmbeddingUtils.isTwoPaneResolution(mContext);
+        return ActivityEmbeddingUtils.isTwoPaneResolution(mActivity);
     }
 }
