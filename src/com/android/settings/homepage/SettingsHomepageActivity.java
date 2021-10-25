@@ -42,6 +42,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsApplication;
 import com.android.settings.Utils;
 import com.android.settings.accounts.AvatarViewMixin;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
@@ -95,6 +96,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((SettingsApplication) getApplication()).setHomeActivity(this);
         setContentView(R.layout.settings_homepage_container);
 
         final View appBar = findViewById(R.id.app_bar_container);
