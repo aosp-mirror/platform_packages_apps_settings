@@ -29,9 +29,6 @@ import android.util.Pair;
 
 import androidx.preference.Preference;
 
-import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,16 +48,12 @@ public class BatterySaverControllerTest {
 
     private BatterySaverController mBatterySaverController;
     private Context mContext;
-    private FakeFeatureFactory mFeatureFactory;
-    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mMetricsFeatureProvider = mFeatureFactory.metricsFeatureProvider;
         mBatterySaverController = spy(new BatterySaverController(mContext));
         ReflectionHelpers.setField(mBatterySaverController, "mPowerManager", mPowerManager);
         ReflectionHelpers.setField(mBatterySaverController, "mBatterySaverPref", mBatterySaverPref);
@@ -79,59 +72,6 @@ public class BatterySaverControllerTest {
     public void onPreferenceChange_onPowerSaveModeChanged() {
         mBatterySaverController.onPowerSaveModeChanged();
         verify(mBatterySaverPref).setSummary("Off");
-    }
-
-    @Test
-    public void onPreferenceChange_onPowerSaveModeChanged_manualTrigger_logsType() {
-        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AUTOMATIC_POWER_SAVE_MODE, -1);
-
-        mBatterySaverController.onPowerSaveModeChanged();
-
-        waitAWhile();
-        verify(mMetricsFeatureProvider).action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
-                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                        SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_NO_SCHEDULE),
-                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
-                        -1));
-    }
-
-    @Test
-    public void onPreferenceChange_onPowerSaveModeChanged_triggerPercent_logsTypeAndPercentage() {
-        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AUTOMATIC_POWER_SAVE_MODE,
-                PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
-        final int percentageVal = 15;
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, percentageVal);
-
-        mBatterySaverController.onPowerSaveModeChanged();
-
-        waitAWhile();
-        verify(mMetricsFeatureProvider).action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
-                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                        SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_PERCENTAGE),
-                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
-                        percentageVal));
-    }
-
-    @Test
-    public void onPreferenceChange_onPowerSaveModeChanged_triggerDynamic_logsType() {
-        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AUTOMATIC_POWER_SAVE_MODE,
-                PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC);
-
-        mBatterySaverController.onPowerSaveModeChanged();
-
-        waitAWhile();
-        verify(mMetricsFeatureProvider).action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
-                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                        SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_ROUTINE),
-                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
-                        -1));
     }
 
     @Test
@@ -176,12 +116,5 @@ public class BatterySaverControllerTest {
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
         assertThat(mBatterySaverController.getSummary()).isEqualTo("Off");
-    }
-
-    private static void waitAWhile() {
-        try {
-            Thread.sleep(200);
-        } catch (Exception e) {
-        }
     }
 }
