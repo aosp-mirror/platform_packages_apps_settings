@@ -16,6 +16,7 @@
 
 package com.android.settings.activityembedding;
 
+import android.app.Activity;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -23,13 +24,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.android.settings.SettingsApplication;
+
 /**
  * A content provider for querying the state of activity embedding feature
  */
 public class ActivityEmbeddingProvider extends ContentProvider {
 
     private static final String METHOD_IS_EMBEDDING_ACTIVITY_ENABLED = "isEmbeddingActivityEnabled";
+    private static final String METHOD_IS_IN_SETTINGS_TWO_PANE = "isInSettingsTwoPane";
     private static final String EXTRA_ENABLED_STATE = "enabled_state";
+    private static final String EXTRA_TWO_PANE_STATE = "two_pane_state";
 
     @Override
     public boolean onCreate() {
@@ -42,6 +47,14 @@ public class ActivityEmbeddingProvider extends ContentProvider {
             final Bundle bundle = new Bundle();
             bundle.putBoolean(EXTRA_ENABLED_STATE,
                     ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext()));
+            return bundle;
+        } else if (TextUtils.equals(method, METHOD_IS_IN_SETTINGS_TWO_PANE)) {
+            final Activity homeActivity =
+                    ((SettingsApplication) getContext().getApplicationContext()).getHomeActivity();
+            final Bundle bundle = new Bundle();
+            bundle.putBoolean(EXTRA_TWO_PANE_STATE,
+                    homeActivity == null ? false
+                            : ActivityEmbeddingUtils.isTwoPaneResolution(homeActivity));
             return bundle;
         }
         return null;
