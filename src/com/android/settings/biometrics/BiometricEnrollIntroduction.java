@@ -257,8 +257,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             // Lock thingy is already set up, launch directly to the next page
             launchNextEnrollingActivity(mToken);
         } else {
-            setResult(RESULT_FINISHED);
-            finish();
+            boolean couldStartNextBiometric = BiometricUtils.tryStartingNextBiometricEnroll(this,
+                    ENROLL_NEXT_BIOMETRIC_REQUEST, "enrollIntroduction#onNextButtonClicked");
+            if (!couldStartNextBiometric) {
+                setResult(RESULT_FINISHED);
+                finish();
+            }
         }
     }
 
