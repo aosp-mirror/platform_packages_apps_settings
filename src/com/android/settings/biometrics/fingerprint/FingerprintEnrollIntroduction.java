@@ -44,6 +44,7 @@ import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
 
 import java.util.List;
@@ -203,6 +204,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected int checkMaxEnrolled() {
+        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (mFingerprintManager != null) {
             final List<FingerprintSensorPropertiesInternal> props =
                     mFingerprintManager.getSensorPropertiesInternal();
@@ -210,13 +212,22 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
             final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFingerprints =
                     mFingerprintManager.getEnrolledFingerprints(mUserId).size();
-            if (numEnrolledFingerprints >= max) {
+            final int maxFingerprintsEnrollableIfSUW = getApplicationContext().getResources()
+                    .getInteger(R.integer.suw_max_fingerprints_enrollable);
+            if (isSetupWizard) {
+                if (numEnrolledFingerprints >= maxFingerprintsEnrollableIfSUW) {
+                    return R.string.fingerprint_intro_error_max;
+                } else {
+                    return 0;
+                }
+            } else if (numEnrolledFingerprints >= max) {
                 return R.string.fingerprint_intro_error_max;
+            } else {
+                return 0;
             }
         } else {
             return R.string.fingerprint_intro_error_unknown;
         }
-        return 0;
     }
 
     @Override
