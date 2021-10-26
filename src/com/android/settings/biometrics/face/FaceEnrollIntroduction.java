@@ -234,13 +234,20 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     private boolean maxFacesEnrolled() {
+        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (mFaceManager != null) {
             final List<FaceSensorPropertiesInternal> props =
                     mFaceManager.getSensorPropertiesInternal();
             // This will need to be updated for devices with multiple face sensors.
             final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFaces = mFaceManager.getEnrolledFaces(mUserId).size();
-            return numEnrolledFaces >= max;
+            final int maxFacesEnrollableIfSUW = getApplicationContext().getResources()
+                    .getInteger(R.integer.suw_max_faces_enrollable);
+            if (isSetupWizard) {
+                return numEnrolledFaces >= maxFacesEnrollableIfSUW;
+            } else {
+                return numEnrolledFaces >= max;
+            }
         } else {
             return false;
         }
