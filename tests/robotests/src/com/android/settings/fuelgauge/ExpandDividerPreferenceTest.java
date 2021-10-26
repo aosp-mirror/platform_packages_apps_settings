@@ -18,11 +18,7 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,8 +32,6 @@ import com.android.settings.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -52,7 +46,6 @@ public final class ExpandDividerPreferenceTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mImageView = spy(new ImageView(mContext));
         mTextView = spy(new TextView(mContext));
@@ -64,9 +57,9 @@ public final class ExpandDividerPreferenceTest {
     @Test
     public void testConstructor_returnExpectedResult() {
         assertThat(mExpandDividerPreference.getKey())
-            .isEqualTo(ExpandDividerPreference.PREFERENCE_KEY);
+                .isEqualTo(ExpandDividerPreference.PREFERENCE_KEY);
         assertThat(mExpandDividerPreference.getLayoutResource())
-            .isEqualTo(R.layout.preference_expand_divider);
+                .isEqualTo(R.layout.preference_expand_divider);
     }
 
     @Test
@@ -75,9 +68,7 @@ public final class ExpandDividerPreferenceTest {
         mExpandDividerPreference.mTextView = mTextView;
 
         mExpandDividerPreference.setTitle(titleContent);
-        final ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
-        verify(mTextView).postDelayed(captor.capture(), eq(50L));
-        captor.getValue().run();
+
         verify(mTextView).setText(titleContent);
     }
 
@@ -86,7 +77,7 @@ public final class ExpandDividerPreferenceTest {
         final boolean[] isExpandedArray = new boolean[] {false};
         mExpandDividerPreference.mImageView = mImageView;
         mExpandDividerPreference.setOnExpandListener(
-            isExpanded -> isExpandedArray[0] = isExpanded);
+                isExpanded -> isExpandedArray[0] = isExpanded);
 
         // Click the item first time from false -> true.
         mExpandDividerPreference.onClick();
@@ -106,7 +97,7 @@ public final class ExpandDividerPreferenceTest {
         final boolean[] isExpandedArray = new boolean[] {false};
         mExpandDividerPreference.mImageView = mImageView;
         mExpandDividerPreference.setOnExpandListener(
-            isExpanded -> isExpandedArray[0] = isExpanded);
+                isExpanded -> isExpandedArray[0] = isExpanded);
 
         mExpandDividerPreference.setIsExpanded(true);
 
