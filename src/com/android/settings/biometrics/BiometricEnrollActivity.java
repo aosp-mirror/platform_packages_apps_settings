@@ -182,9 +182,12 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             final FaceManager faceManager = getSystemService(FaceManager.class);
             final List<FaceSensorPropertiesInternal> faceProperties =
                     faceManager.getSensorPropertiesInternal();
+            final int maxFacesEnrollableIfSUW = getApplicationContext().getResources()
+                    .getInteger(R.integer.suw_max_faces_enrollable);
             if (!faceProperties.isEmpty()) {
                 final int maxEnrolls =
-                        isSetupWizard ? 1 : faceProperties.get(0).maxEnrollmentsPerUser;
+                        isSetupWizard ? maxFacesEnrollableIfSUW
+                                : faceProperties.get(0).maxEnrollmentsPerUser;
                 mIsFaceEnrollable =
                         faceManager.getEnrolledFaces(mUserId).size() < maxEnrolls;
             }
@@ -193,9 +196,12 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             final FingerprintManager fpManager = getSystemService(FingerprintManager.class);
             final List<FingerprintSensorPropertiesInternal> fpProperties =
                     fpManager.getSensorPropertiesInternal();
+            final int maxFingerprintsEnrollableIfSUW = getApplicationContext().getResources()
+                    .getInteger(R.integer.suw_max_fingerprints_enrollable);
             if (!fpProperties.isEmpty()) {
                 final int maxEnrolls =
-                        isSetupWizard ? 1 : fpProperties.get(0).maxEnrollmentsPerUser;
+                        isSetupWizard ? maxFingerprintsEnrollableIfSUW
+                                : fpProperties.get(0).maxEnrollmentsPerUser;
                 mIsFingerprintEnrollable =
                         fpManager.getEnrolledFingerprints(mUserId).size() < maxEnrolls;
             }
