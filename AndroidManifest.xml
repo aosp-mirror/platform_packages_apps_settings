@@ -3932,6 +3932,25 @@
                        android:value="true" />
         </activity>
 
+        <activity
+            android:name="Settings$ButtonNavigationSettingsActivity"
+            android:label="Button Navigation Settings"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter android:priority="32">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.BUTTON_NAVIGATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.gestures.ButtonNavigationSettingsFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <activity android:name="Settings$MediaControlsSettingsActivity"
                   android:exported="true"
                   android:label="@strings/media_controls_title">
