@@ -2090,8 +2090,7 @@
     <string name="internal_storage" msgid="999496851424448809">"આંતરિક સ્ટોરેજ"</string>
     <string name="recompute_size" msgid="1098091228370999128">"કદની ફરીથી ગણના કરી રહ્યું છે…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ઍપનો ડેટા ડિલીટ કરીએ?"</string>
-    <!-- no translation found for clear_data_dlg_text (1107610960337399006) -->
-    <skip />
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"આ ઍપના ડેટાને કાયમી રીતે કાઢી નાખવામાં આવશે. આમાં ફાઇલો, સેટિંગ, ડેટાબેઝ અને અન્ય ઍપ ડેટા પણ શામેલ હોય છે."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ઓકે"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"રદ કરો"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2862,6 +2861,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"બૅટરીનો કુલ વપરાશ <xliff:g id="TIME_0">^1</xliff:g> થયો • <xliff:g id="TIME_PERIOD">^2</xliff:g> દરમિયાન બૅટરીનો બૅકગ્રાઉન્ડમાં\nએક મિનિટ કરતાં પણ ઓછા સમય માટે વપરાશ થયો"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"છેલ્લે પૂર્ણ ચાર્જ કરાયા પછી બિલકુલ વપરાશ થયો નથી"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"છેલ્લા 24 કલાકમાં બિલકુલ વપરાશ થયો નથી"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"બાકી રહેલી બૅટરીનો અંદાજ ડિવાઇસના તમારા ઉપયોગ પર આધારિત છે"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"અંદાજિત બાકી સમય"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"સંપૂર્ણપણે ચાર્જ થવામાં"</string>
@@ -4099,8 +4099,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"વિક્ષેપ ઊભો કરી શકે તેવી વાતચીત"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"બધી વાતચીત"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"પ્રાધાન્ય આપ્યું હોય તેવી વાતચીત"</string>
-    <!-- no translation found for zen_mode_from_important_conversations_second (7588299891972136599) -->
-    <skip />
+    <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"પ્રાધાન્યતા ધરાવતી વાતચીતો"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"કોઈ નહીં"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{એકપણ નહીં}=1{1 વાતચીત}one{# વાતચીત}other{# વાતચીત}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"વિક્ષેપ ઊભો કરી શકે છે તે"</string>
@@ -4125,8 +4124,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"કોઈપણ"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"સંપર્કો"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"સ્ટાર આપેલા સંપર્કો"</string>
-    <!-- no translation found for zen_mode_from_some (3708450042225044524) -->
-    <skip />
+    <string name="zen_mode_from_some" msgid="3708450042225044524">"અમુક લોકો અથવા વાતચીતો"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"સ્ટાર આપેલ સંપર્કો અને પુનરાવર્તિત કૉલરોના"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"સંપર્કો અને પુનરાવર્તિત કૉલરોના"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"ફક્ત પુનરાવર્તિત કૉલરોના"</string>
@@ -5577,7 +5575,10 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWBનો ઉપયોગ કરવા માટે એરપ્લેન મોડ બંધ કરો"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"કૅમેરાનો ઍક્સેસ"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"માઇક્રોફોનનો ઍક્સેસ"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"બધી ઍપ અને સેવાઓ માટે"</string>
+    <!-- no translation found for cam_toggle_description (9212762204005146404) -->
+    <skip />
+    <!-- no translation found for mic_toggle_description (484139688645092237) -->
+    <skip />
     <string name="game_settings_title" msgid="1028178627743422090">"ગેમ સેટિંગ"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"ગેમ ડૅશબોર્ડનો શૉર્ટકટ અને અન્ય સેટિંગ ચાલુ કરો"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"પાછળ"</string>
