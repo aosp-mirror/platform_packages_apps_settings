@@ -17,7 +17,6 @@
 package com.android.settings.activityembedding;
 
 import android.app.Activity;
-import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +25,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.window.embedding.ActivityFilter;
-import androidx.window.embedding.ActivityRule;
 import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitPairFilter;
 import androidx.window.embedding.SplitPairRule;
@@ -36,7 +34,6 @@ import com.android.settings.Settings;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.homepage.SettingsHomepageActivity;
-import com.android.settings.overlay.FeatureFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -73,8 +70,6 @@ public class ActivityEmbeddingRulesController {
                 null /* secondaryIntentAction */,
                 true /* finishPrimaryWithSecondary */,
                 true /* finishSecondaryWithPrimary */);
-        // Set rules here to show full screen for specified Activity.
-        registerAlwaysExpandRule();
     }
 
     /** Register a SplitPairRule for 2-pane. */
@@ -96,16 +91,6 @@ public class ActivityEmbeddingRulesController {
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.SPLIT_RATIO,
                 LayoutDirection.LOCALE));
-    }
-
-    private void registerAlwaysExpandRule() {
-        final Set<ActivityFilter> activityFilters = new HashSet<>();
-
-        final Intent searchIntent = FeatureFactory.getFactory(mContext).getSearchFeatureProvider()
-                .buildSearchIntent(mContext, SettingsEnums.SETTINGS_HOMEPAGE);
-        addActivityFilter(activityFilters, searchIntent);
-
-        mSplitController.registerRule(new ActivityRule(activityFilters, true /* alwaysExpand */));
     }
 
     private void registerHomepagePlaceholderRule() {
