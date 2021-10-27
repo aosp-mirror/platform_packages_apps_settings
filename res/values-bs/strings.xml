@@ -99,7 +99,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"Zahtjev za uparivanje"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Dodirnite za spajanje s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Primljeni fajlovi"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Fajlovi primljeni putem Bluetootha"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth je isključen"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Dodirnite da ga uključite"</string>
     <string name="device_picker" msgid="2427027896389445414">"Odaberi Bluetooth uređaj"</string>
@@ -2111,7 +2110,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Unutrašnja pohrana"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Ponovno izračunavanje veličine…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Izbrisati podatke aplikacija?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Svi podaci ove aplikacije će biti trajno izbrisani. To uključuje sve fajlove, postavke, račune, baze podataka itd."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Ovi podaci aplikacije će se trajno izbrisati. To obuhvata fajlove, postavke, baze podataka i ostale podatke aplikacije."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"Uredu"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Otkaži"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2896,6 +2895,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"Ukupno: <xliff:g id="TIME_0">^1</xliff:g> • vrijeme u pozadini je kraće od minute\nza period <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Nema korištenja od posljednje potpune napunjenosti"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Nema korištenja za posljednja 24 h"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Procjena preostalog trajanja baterije zasnovana je na korištenju uređaja"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Procjena preostalog vremena"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Do potpune napunjenosti"</string>
@@ -5337,7 +5337,7 @@
     <string name="carrier_settings_euicc" msgid="1541279297111378907">"Operater"</string>
     <string name="carrier_settings_version" msgid="3364919669057317776">"Verzija postavki mobilnog operatera"</string>
     <string name="call_category" msgid="641461844504128789">"Pozivanje"</string>
-    <string name="video_calling_settings_title" msgid="5490466306783552190">"Operater video pozivanja"</string>
+    <string name="video_calling_settings_title" msgid="5490466306783552190">"Video pozivi putem mobilnog operatera"</string>
     <string name="cdma_system_select_title" msgid="8261408056382123386">"Odabir sistema"</string>
     <string name="cdma_system_select_summary" msgid="384128007068464145">"Promijenite način rada CDMA rominga"</string>
     <string name="cdma_system_select_dialogtitle" msgid="6143586810486936984">"Odabir sistema"</string>
@@ -5653,7 +5653,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Isključite način rada u avionu da koristite UWB"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Pristup kameri"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Pristup mikrofonu"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"Za sve aplikacije i usluge"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"Za aplikacije i usluge"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"Za aplikacije i usluge. Ako je ta postavka isključena, podaci mikrofona i dalje se mogu dijeliti kad nazovete broj hitne službe."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Postavke igre"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"Uključite prečicu za kontrolnu tablu igre, itd."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Nazad"</string>

@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Reducir"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Ampliar"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Usar Xirar automaticamente"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"A función Detección facial utiliza a cámara frontal para mellorar a precisión da opción Xirar automaticamente. As imaxes nunca se almacenan nin se envían a Google."</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"A función Detección facial utiliza a cámara dianteira para mellorar a precisión da opción Xirar automaticamente. As imaxes nunca se almacenan nin se envían a Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Texto de mostra"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"O marabilloso mago de Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Capítulo 11: A marabillosa Cidade Esmeralda de Oz"</string>
@@ -98,7 +98,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"Solicitude de vinculación"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Tocar para vincular con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Ficheiros recibidos"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Ficheiros recibidos (Bluetooth)"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"O Bluetooth está desactivado"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Toca para activalo"</string>
     <string name="device_picker" msgid="2427027896389445414">"Escolle un dispositivo de Bluetooth"</string>
@@ -2087,7 +2086,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Almacenamento interno"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Recalculando o tamaño…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Eliminar os datos da aplicación?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Eliminaranse todos os datos desta aplicación permanentemente. Entre estes inclúense todos os ficheiros, opcións de configuracións, contas, bases de datos etc."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Os datos desta aplicación (como os ficheiros, a configuración e as bases de datos) eliminaranse de forma permanente."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"Aceptar"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Cancelar"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2858,6 +2857,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> en total • menos dun minuto en segundo plano\nentre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Sen uso da batería desde a última carga completa"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Sen uso da batería nas últimas 24 horas"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"A estimación do nivel de batería baséase no uso do dispositivo"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tempo restante estimado"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Para completar a carga"</string>
@@ -4827,7 +4827,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Abrir cámara rapidamente"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Para abrir rapidamente a cámara, preme dúas veces o botón de acendido. Isto funciona en calquera pantalla."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Abre a cámara rapidamente"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Xirar para cambiar á cámara frontal"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Xirar para cambiar á cámara dianteira"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Fai autofotos máis rápido"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Navegación do sistema"</string>
@@ -5564,7 +5564,10 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Desactiva o modo avión para utilizar a banda ultralarga"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Acceso á cámara"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Acceso ao micrófono"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"Para todas as aplicacións e servizos"</string>
+    <!-- no translation found for cam_toggle_description (9212762204005146404) -->
+    <skip />
+    <!-- no translation found for mic_toggle_description (484139688645092237) -->
+    <skip />
     <string name="game_settings_title" msgid="1028178627743422090">"Configuración para xogos"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"Activa o atallo ao panel de xogo etc."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Anterior"</string>
