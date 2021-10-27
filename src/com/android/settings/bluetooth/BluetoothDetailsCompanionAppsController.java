@@ -29,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.provider.DeviceConfig;
 import android.text.TextUtils;
 import android.util.Log;
@@ -126,8 +127,8 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
         try {
             java.util.Objects.requireNonNull(ICompanionDeviceManager.Stub.asInterface(
                     ServiceManager.getService(
-                            Context.COMPANION_DEVICE_SERVICE))).disassociate(
-                                    address, packageName);
+                            Context.COMPANION_DEVICE_SERVICE))).legacyDisassociate(
+                                    address, packageName, UserHandle.myUserId());
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

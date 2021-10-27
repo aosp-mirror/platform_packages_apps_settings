@@ -24,9 +24,9 @@ import static org.mockito.Mockito.when;
 
 import android.companion.AssociationInfo;
 import android.companion.CompanionDeviceManager;
-import android.companion.DeviceId;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.MacAddress;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -100,15 +100,14 @@ public class BluetoothDetailsCompanionAppsControllerTest extends
         setupFakeLabelAndInfo(packageName, appName);
 
         final int associationId = mAssociations.size() + 1;
-        final DeviceId deviceId =
-                new DeviceId(DeviceId.TYPE_MAC_ADDRESS, mCachedDevice.getAddress());
         final AssociationInfo association = new AssociationInfo(
                 associationId,
                 /* userId */ 0,
                 packageName,
-                Arrays.asList(deviceId),
+                MacAddress.fromString(mCachedDevice.getAddress()),
+                /* displayName */ null,
                 /* deviceProfile */ "",
-                /* managedByCompanionApp */ false,
+                /* selfManaged */ false,
                 /* notifyOnDeviceNearby */ true,
                 /* timeApprovedMs */ System.currentTimeMillis());
 
