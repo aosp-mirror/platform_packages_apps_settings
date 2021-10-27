@@ -22,7 +22,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.companion.Association;
+import android.companion.AssociationInfo;
 import android.companion.CompanionDeviceManager;
 import android.companion.DeviceId;
 import android.content.pm.ApplicationInfo;
@@ -63,7 +63,7 @@ public class BluetoothDetailsCompanionAppsControllerTest extends
     private PreferenceCategory mProfiles;
     private List<String> mPackages;
     private List<CharSequence> mAppNames;
-    private List<Association> mAssociations;
+    private List<AssociationInfo> mAssociations;
 
 
     @Override
@@ -102,7 +102,7 @@ public class BluetoothDetailsCompanionAppsControllerTest extends
         final int associationId = mAssociations.size() + 1;
         final DeviceId deviceId =
                 new DeviceId(DeviceId.TYPE_MAC_ADDRESS, mCachedDevice.getAddress());
-        final Association association = new Association(
+        final AssociationInfo association = new AssociationInfo(
                 associationId,
                 /* userId */ 0,
                 packageName,
