@@ -282,7 +282,7 @@ public class ProcStatsData {
                         final ProcessState proc = mStats.mProcesses.get(pkgProc.getName(),
                                 pkgProc.getUid());
                         if (proc == null) {
-                            Log.w(TAG, "No process found for pkg " + st.mPackageName
+                            if (DEBUG) Log.w(TAG, "No process found for pkg " + st.mPackageName
                                     + "/" + st.mUid + " proc name " + pkgProc.getName());
                             continue;
                         }
