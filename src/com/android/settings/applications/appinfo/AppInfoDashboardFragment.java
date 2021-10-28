@@ -205,6 +205,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
         use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
                 writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles,
                 alarmsAndReminders));
+
+        final AppLocalePreferenceController appLocale =
+                use(AppLocalePreferenceController.class);
+        appLocale.setParentFragment(this);
     }
 
     @Override

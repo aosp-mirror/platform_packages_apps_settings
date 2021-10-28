@@ -89,6 +89,12 @@
         android:summary="@string/summary_placeholder" />
 
     <Preference
+        android:key="app_language_setting"
+        android:title="@string/app_locale_preference_title"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.applications.appinfo.AppLocalePreferenceController" />
+
+    <Preference
         android:key="preferred_settings"
         android:title="@string/launch_by_default"
         android:summary="@string/summary_placeholder"

@@ -461,7 +461,7 @@
     <string name="next_label">Next</string>
 
     <!-- LocalePicker -->
-    <!-- Title for the locale picker activity -->
+    <!-- Title for the locale picker activity. [CHAR LIMIT=30]-->
     <string name="language_picker_title">Languages</string>
 
     <!-- Menu item in the locale menu. Will remove the selected locales. [CHAR LIMIT=30] -->
@@ -470,6 +470,29 @@
     <!-- "Button" that opens a language picker. The selected language gets added to the language list. [CHAR LIMIT=30] -->
     <string name="add_a_language">Add a language</string>
 
+    <!-- Title of preference for the locale picker activity. [CHAR LIMIT=30]-->
+    <string name="app_locale_preference_title">Language</string>
+
+    <!-- Title for the locale picker category. [CHAR LIMIT=50]-->
+    <string name="locale_picker_category_title">Preferred Language</string>
+
+    <!-- Title for the Apps' locale menu entry [CHAR LIMIT=50]-->
+    <string name="app_locales_picker_menu_title">App Languages</string>
+
+    <!-- Summary for the app's locale picker activity. [CHAR LIMIT=50]-->
+    <string name="app_locale_picker_summary">Set the language for each app</string>
+
+    <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
+    <string name="app_locale_picker_title">App Language</string>
+
+    <!-- Category for the suggested app's locales. [CHAR LIMIT=50]-->
+    <string name="suggested_app_locales_title">Suggested languages</string>
+
+    <!-- Category for the app's locale picker activity. [CHAR LIMIT=50]-->
+    <string name="all_supported_app_locales_title">All languages</string>
+
+    <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
+    <string name="no_multiple_language_supported">The app is set to <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g> by default and doesn\u2019t support multiple languages.</string>
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <plurals name="dlg_remove_locales_title">
         <item quantity="one">Remove selected language?</item>
