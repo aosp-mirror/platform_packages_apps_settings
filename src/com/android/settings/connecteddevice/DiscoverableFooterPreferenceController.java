@@ -52,6 +52,7 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
     private BluetoothAdapter mBluetoothAdapter;
     private AlwaysDiscoverable mAlwaysDiscoverable;
     private FooterPreference mPreference;
+    private boolean mIsAlwaysDiscoverable;
 
     public DiscoverableFooterPreferenceController(Context context, String key) {
         super(context, key);
@@ -84,7 +85,9 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
         }
         mContext.registerReceiver(mBluetoothChangedReceiver,
                 new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
-        mAlwaysDiscoverable.start();
+        if (mIsAlwaysDiscoverable) {
+            mAlwaysDiscoverable.start();
+        }
         updateFooterPreferenceTitle(mBluetoothAdapter.getState());
     }
 
@@ -94,7 +97,19 @@ public class DiscoverableFooterPreferenceController extends BasePreferenceContro
             return;
         }
         mContext.unregisterReceiver(mBluetoothChangedReceiver);
-        mAlwaysDiscoverable.stop();
+        if (mIsAlwaysDiscoverable) {
+            mAlwaysDiscoverable.stop();
+        }
+    }
+
+    /**
+     * Set whether the device can be discovered. By default the value will be {@code false}.
+     *
+     * @param isAlwaysDiscoverable {@code true} if the device can be discovered,
+     *     otherwise {@code false}
+     */
+    public void setAlwaysDiscoverable(boolean isAlwaysDiscoverable) {
+        mIsAlwaysDiscoverable = isAlwaysDiscoverable;
     }
 
     private void updateFooterPreferenceTitle(int bluetoothState) {
