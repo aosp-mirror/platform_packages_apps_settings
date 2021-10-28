@@ -19,6 +19,8 @@ package com.android.settings.network;
 import static android.net.wifi.WifiConfiguration.NetworkSelectionStatus.NETWORK_SELECTION_ENABLED;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
+import static com.android.settings.Settings.WifiSettingsActivity;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -27,6 +29,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -277,6 +280,17 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
+            final Intent intent = new Intent(getContext(), WifiSettingsActivity.class);
+            final Bundle extras = getActivity().getIntent().getExtras();
+            if (extras != null) {
+                intent.putExtras(extras);
+            }
+            getContext().startActivity(intent);
+            finish();
+            return;
+        }
+
         mAirplaneModeEnabler = new AirplaneModeEnabler(getContext(), this);
 
         // TODO(b/37429702): Add animations and preference comparator back after initial screen is
@@ -464,7 +478,9 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onDestroy() {
-        mAirplaneModeEnabler.close();
+        if (mAirplaneModeEnabler != null) {
+            mAirplaneModeEnabler.close();
+        }
         super.onDestroy();
     }
 
@@ -756,7 +772,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         if (context == null) {
             return;
         }
-        if (isWifiEnabled || !mWifiManager.isScanAlwaysAvailable()) {
+
+        final LocationManager locationManager = context.getSystemService(LocationManager.class);
+        if (isWifiEnabled || !locationManager.isLocationEnabled()
+                || !mWifiManager.isScanAlwaysAvailable()) {
             mWifiStatusMessagePreference.setVisible(false);
             return;
         }
