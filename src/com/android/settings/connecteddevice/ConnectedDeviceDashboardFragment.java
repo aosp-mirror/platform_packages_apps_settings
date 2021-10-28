@@ -16,9 +16,14 @@
 package com.android.settings.connecteddevice;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -36,6 +41,9 @@ import java.util.List;
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "ConnectedDeviceFrag";
+    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
+    private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     @VisibleForTesting
     static final String KEY_CONNECTED_DEVICES = "connected_device_list";
@@ -84,10 +92,27 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        String callingAppPackageName = getCallingAppPackageName(getActivity().getActivityToken());
+        if (DEBUG) {
+            Log.d(TAG, "onAttach() calling package name is : " + callingAppPackageName);
+        }
         use(AvailableMediaDeviceGroupController.class).init(this);
         use(ConnectedDeviceGroupController.class).init(this);
         use(PreviouslyConnectedDevicePreferenceController.class).init(this);
-        use(DiscoverableFooterPreferenceController.class).init(this);
+        use(DiscoverableFooterPreferenceController.class).init(this,
+                TextUtils.equals(SETTINGS_PACKAGE_NAME, callingAppPackageName)
+                        || TextUtils.equals(SYSTEMUI_PACKAGE_NAME, callingAppPackageName));
+    }
+
+    private String getCallingAppPackageName(IBinder activityToken) {
+        String pkg = null;
+        try {
+            pkg = ActivityManager.getService().getLaunchedFromPackage(activityToken);
+        } catch (RemoteException e) {
+            Log.v(TAG, "Could not talk to activity manager.", e);
+        }
+        return pkg;
     }
 
     @VisibleForTesting
