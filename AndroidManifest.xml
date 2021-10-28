@@ -291,10 +291,6 @@
             android:icon="@drawable/ic_homepage_network"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.WIFI_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wifi.WifiSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -320,6 +316,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NETWORK_PROVIDER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.WIFI_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter android:priority="1">
