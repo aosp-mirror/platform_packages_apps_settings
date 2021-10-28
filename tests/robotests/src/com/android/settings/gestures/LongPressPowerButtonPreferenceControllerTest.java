@@ -152,9 +152,6 @@ public class LongPressPowerButtonPreferenceControllerTest {
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.KEY_CHORD_POWER_VOLUME_UP, -1)).isEqualTo(
                 LongPressPowerButtonPreferenceController.KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS);
-        verify(mController.mAssistSwitch).setSummary(
-                getString(
-                        R.string.power_menu_summary_long_press_for_assist_enabled));
     }
 
     @Test
