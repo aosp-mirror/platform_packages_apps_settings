@@ -18,7 +18,7 @@ package com.android.settings.bluetooth;
 
 import static com.android.internal.util.CollectionUtils.filter;
 
-import android.companion.Association;
+import android.companion.AssociationInfo;
 import android.companion.CompanionDeviceManager;
 import android.companion.ICompanionDeviceManager;
 import android.content.Context;
@@ -88,7 +88,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
         mProfilesContainer.setLayoutResource(R.layout.preference_companion_app);
     }
 
-    private List<Association> getAssociations(String address) {
+    private List<AssociationInfo> getAssociations(String address) {
         return filter(
                 mCompanionDeviceManager.getAllAssociations(),
                 a -> Objects.equal(address, a.getDeviceMacAddress()));
@@ -150,7 +150,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
     private List<String> getPreferencesNeedToShow(String address, PreferenceCategory container) {
         List<String> preferencesToRemove = new ArrayList<>();
         Set<String> packages = getAssociations(address)
-                .stream().map(Association::getPackageName)
+                .stream().map(AssociationInfo::getPackageName)
                 .collect(Collectors.toSet());
 
         for (int i = 0; i < container.getPreferenceCount(); i++) {
