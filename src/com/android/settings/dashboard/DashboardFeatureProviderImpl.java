@@ -60,6 +60,8 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
@@ -170,7 +172,17 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 }
                 pref.setOnPreferenceClickListener(preference -> {
                     OnCancelListener listener = null;
-                    if (fragment instanceof TopLevelSettings) {
+                    if (fragment instanceof TopLevelSettings
+                            && ActivityEmbeddingUtils.isEmbeddingActivityEnabled(mContext)) {
+                        // Register the rule for injected apps.
+                        ActivityEmbeddingRulesController.registerTwoPanePairRule(mContext,
+                                new ComponentName(activity.getPackageName(),
+                                        com.android.settings.Settings.class.getName()),
+                                new ComponentName(tile.getPackageName(),
+                                        tile.getComponentName()),
+                                null, true, true);
+
+                        // Highlight preference ui.
                         final TopLevelSettings topLevelSettings = (TopLevelSettings) fragment;
                         // Highlight the tile immediately whenever it's clicked
                         topLevelSettings.setHighlightPreferenceKey(key);
