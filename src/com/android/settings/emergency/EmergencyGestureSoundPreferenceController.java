@@ -53,6 +53,12 @@ public class EmergencyGestureSoundPreferenceController extends TogglePreferenceC
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        // not needed since it's not sliceable
+        return 0;
+    }
+
+    @Override
     public boolean isChecked() {
         return mEmergencyNumberUtils.getEmergencyGestureSoundEnabled();
     }

@@ -120,6 +120,11 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
         return false;
     }
 
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
+    }
+
     private void refreshStateDisplay() {
         if (mAssistSwitch != null) {
             mAssistSwitch.setSummary(getSummary());

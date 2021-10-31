@@ -61,4 +61,9 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
                 ? R.string.auto_brightness_summary_on
                 : R.string.auto_brightness_summary_off);
     }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
+    }
 }

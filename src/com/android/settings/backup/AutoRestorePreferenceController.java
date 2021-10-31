@@ -27,6 +27,7 @@ import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 public class AutoRestorePreferenceController extends TogglePreferenceController {
@@ -83,5 +84,10 @@ public class AutoRestorePreferenceController extends TogglePreferenceController 
         }
 
         return result;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
     }
 }

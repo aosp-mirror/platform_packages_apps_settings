@@ -21,6 +21,7 @@ import android.provider.Settings;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 
@@ -50,5 +51,10 @@ public class PowerButtonEndsCallPreferenceController extends TogglePreferenceCon
     public int getAvailabilityStatus() {
         return !KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
                 || !Utils.isVoiceCapable(mContext) ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_accessibility;
     }
 }
