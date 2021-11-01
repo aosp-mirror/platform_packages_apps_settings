@@ -73,12 +73,6 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!KEY_OPTIMIZED_PREF.equals(preference.getKey())) {
-            return false;
-        }
-
-        mBatteryOptimizeUtils.setAppOptimizationMode(BatteryOptimizeUtils.MODE_OPTIMIZED);
-        Log.d(TAG, "Set optimized");
-        return true;
+        return getPreferenceKey().equals(preference.getKey());
     }
 }

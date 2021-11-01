@@ -16,6 +16,7 @@
 
 package com.android.settings.slices;
 
+import static com.android.settings.SettingsActivity.EXTRA_IS_FROM_SLICE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 
@@ -211,7 +212,9 @@ public class SliceBuilderUtils {
                 .setTitleText(screenTitle)
                 .setSourceMetricsCategory(sourceMetricsCategory)
                 .toIntent();
-        searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
+        searchDestination
+                .putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
+                .putExtra(EXTRA_IS_FROM_SLICE, true)
                 .setAction("com.android.settings.SEARCH_RESULT_TRAMPOLINE")
                 .setComponent(null);
         searchDestination.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
