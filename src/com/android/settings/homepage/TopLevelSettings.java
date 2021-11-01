@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -98,6 +99,10 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        // Register SplitPairRule for SubSettings.
+        ActivityEmbeddingRulesController.registerSubSettingsPairRuleIfNeeded(getContext(),
+                true /* clearTop*/);
+
         setHighlightPreferenceKey(preference.getKey());
         return super.onPreferenceTreeClick(preference);
     }

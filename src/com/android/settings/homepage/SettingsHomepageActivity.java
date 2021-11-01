@@ -239,13 +239,15 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 targetComponentName,
                 targetIntent.getAction(),
                 true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */);
+                true /* finishSecondaryWithPrimary */,
+                true /* clearTop*/);
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
                 new ComponentName(Settings.class.getPackageName(), Settings.class.getName()),
                 targetComponentName,
                 targetIntent.getAction(),
                 true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */);
+                true /* finishSecondaryWithPrimary */,
+                true /* clearTop*/);
         startActivity(targetIntent);
     }
 
