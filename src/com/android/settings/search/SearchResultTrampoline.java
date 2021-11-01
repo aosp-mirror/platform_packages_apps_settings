@@ -25,6 +25,7 @@ import android.os.Bundle;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.overlay.FeatureFactory;
 
 /**
@@ -52,6 +53,11 @@ public class SearchResultTrampoline extends Activity {
         args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, settingKey);
         args.putInt(EXTRA_SHOW_FRAGMENT_TAB, tab);
         intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
+
+        // Register SplirPairRule for SubSettings, set clearTop false to prevent unexpected back
+        // navigation behavior.
+        ActivityEmbeddingRulesController.registerSubSettingsPairRuleIfNeeded(this /* context */,
+                false /* clearTop*/);
 
         // Reroute request to SubSetting.
         intent.setClass(this /* context */, SubSettings.class)
