@@ -129,7 +129,6 @@
         <uses-library android:name="androidx.window.sidecar" android:required="false"/>
 
         <!-- Settings -->
-
         <activity android:name=".homepage.SettingsHomepageActivity"
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
@@ -145,18 +144,15 @@
                        android:value="true" />
         </activity>
 
-        <activity android:name=".network.telephony.MobileNetworkActivity"
-                  android:label="@string/network_settings_title"
-                  android:exported="true"
-                  android:launchMode="singleTask">
-            <intent-filter android:priority="1">
-                <!-- Displays the MobileNetworkActivity and opt-in dialog for capability discovery. -->
-                <action android:name="android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN" />
-                <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
-                <action android:name="android.settings.DATA_ROAMING_SETTINGS" />
-                <action android:name="android.settings.MMS_MESSAGE_SETTING" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+        <activity android:name=".homepage.SliceDeepLinkHomepageActivity"
+                  android:label="@string/settings_label_launcher"
+                  android:theme="@style/Theme.Settings.Home"
+                  android:taskAffinity=""
+                  android:launchMode="singleTask"
+                  android:exported="false"
+                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout">
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
         </activity>
 
         <!-- Alias for launcher activity only, as this belongs to each profile. -->
@@ -232,6 +228,20 @@
                 android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity android:name=".network.telephony.MobileNetworkActivity"
+                  android:label="@string/network_settings_title"
+                  android:exported="true"
+                  android:launchMode="singleTask">
+            <intent-filter android:priority="1">
+                <!-- Displays the MobileNetworkActivity and opt-in dialog for capability discovery. -->
+                <action android:name="android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN" />
+                <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
+                <action android:name="android.settings.DATA_ROAMING_SETTINGS" />
+                <action android:name="android.settings.MMS_MESSAGE_SETTING" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".Settings$MobileNetworkListActivity"
@@ -2546,6 +2556,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_battery"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2571,6 +2583,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accounts.AccountSyncSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_accounts"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2585,6 +2599,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accounts.ManagedProfileSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_accounts"/>
         </activity>
 
         <activity
@@ -2605,6 +2621,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.accounts.ChooseAccountFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_accounts"/>
         </activity>
 
         <activity android:name=".CryptKeeper"
@@ -2663,6 +2681,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.security.CryptKeeperSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity
@@ -2680,6 +2700,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.datausage.DataUsageSummary" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_network"/>
         </activity>
         <activity
             android:name="Settings$MobileDataUsageListActivity"
@@ -2691,6 +2713,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.datausage.DataUsageList" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_network"/>
         </activity>
 
         <activity
