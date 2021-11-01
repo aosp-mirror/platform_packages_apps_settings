@@ -41,7 +41,7 @@ import java.util.Set;
 /** A class to initialize split rules for activity embedding. */
 public class ActivityEmbeddingRulesController {
 
-    private static final String TAG = "ActivityEmbeddingCtrl ";
+    private static final String TAG = "ActivityEmbeddingCtrl";
     private final Context mContext;
     private final SplitController mSplitController;
 
@@ -126,11 +126,6 @@ public class ActivityEmbeddingRulesController {
             Class<? extends Activity> activityClass) {
         activityFilters.add(new ActivityFilter(getComponentName(activityClass),
                 null /* intentAction */));
-    }
-
-    private void addActivityFilter(Set<ActivityFilter> activityFilters, Intent intent) {
-        activityFilters.add(new ActivityFilter(new ComponentName("*" /* pkg */, "*" /* cls */),
-                intent.getAction()));
     }
 
     private void addActivityFilter(Set<ActivityFilter> activityFilters,
