@@ -18,8 +18,6 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
@@ -98,14 +96,11 @@ public class OptimizedPreferenceControllerTest {
         mPreference.setKey(mController.KEY_OPTIMIZED_PREF);
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mockBatteryOptimizeUtils).setAppOptimizationMode(
-                BatteryOptimizeUtils.MODE_OPTIMIZED);
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
     }
 
     @Test
     public void testHandlePreferenceTreeClick_incorrectPrefKey_noAction() {
-        mController.handlePreferenceTreeClick(mPreference);
-
-        verifyZeroInteractions(mockBatteryOptimizeUtils);
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
     }
 }

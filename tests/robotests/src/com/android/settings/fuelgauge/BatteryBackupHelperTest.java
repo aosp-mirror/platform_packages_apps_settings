@@ -20,6 +20,7 @@ import static com.android.settings.fuelgauge.BatteryBackupHelper.DELIMITER;
 import static com.android.settings.fuelgauge.BatteryBackupHelper.DELIMITER_MODE;
 import static com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_RESTRICTED;
 import static com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNRESTRICTED;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -33,7 +34,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
 import android.app.backup.BackupDataInputStream;
@@ -51,9 +51,6 @@ import android.os.UserManager;
 
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -68,6 +65,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {BatteryBackupHelperTest.ShadowUserHandle.class})
@@ -305,10 +306,11 @@ public final class BatteryBackupHelperTest {
                 PACKAGE_NAME2 + DELIMITER_MODE + invalidNumberFormat;
 
         mBatteryBackupHelper.restoreOptimizationMode(packageModes.getBytes());
+        TimeUnit.SECONDS.sleep(1);
 
         final InOrder inOrder = inOrder(mBatteryOptimizeUtils);
-        inOrder.verify(mBatteryOptimizeUtils).setAppOptimizationMode(MODE_RESTRICTED);
-        inOrder.verify(mBatteryOptimizeUtils, never()).setAppOptimizationMode(anyInt());
+        inOrder.verify(mBatteryOptimizeUtils).setAppUsageState(MODE_RESTRICTED);
+        inOrder.verify(mBatteryOptimizeUtils, never()).setAppUsageState(anyInt());
     }
 
     @Test
@@ -319,11 +321,12 @@ public final class BatteryBackupHelperTest {
                 PACKAGE_NAME3 + DELIMITER_MODE + MODE_RESTRICTED + DELIMITER;
 
         mBatteryBackupHelper.restoreOptimizationMode(packageModes.getBytes());
+        TimeUnit.SECONDS.sleep(1);
 
         final InOrder inOrder = inOrder(mBatteryOptimizeUtils);
-        inOrder.verify(mBatteryOptimizeUtils).setAppOptimizationMode(MODE_RESTRICTED);
-        inOrder.verify(mBatteryOptimizeUtils).setAppOptimizationMode(MODE_UNRESTRICTED);
-        inOrder.verify(mBatteryOptimizeUtils, never()).setAppOptimizationMode(MODE_RESTRICTED);
+        inOrder.verify(mBatteryOptimizeUtils).setAppUsageState(MODE_RESTRICTED);
+        inOrder.verify(mBatteryOptimizeUtils).setAppUsageState(MODE_UNRESTRICTED);
+        inOrder.verify(mBatteryOptimizeUtils, never()).setAppUsageState(MODE_RESTRICTED);
     }
 
     private void mockUid(int uid, String packageName) throws Exception {
