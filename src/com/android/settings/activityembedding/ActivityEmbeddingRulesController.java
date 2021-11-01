@@ -41,7 +41,7 @@ import java.util.Set;
 /** A class to initialize split rules for activity embedding. */
 public class ActivityEmbeddingRulesController {
 
-    private static final String TAG = "ActivityEmbeddingCtrl ";
+    private static final String TAG = "ActivityEmbeddingCtrl";
     private final Context mContext;
     private final SplitController mSplitController;
 
@@ -63,13 +63,6 @@ public class ActivityEmbeddingRulesController {
 
         // Set a placeholder for home page.
         registerHomepagePlaceholderRule();
-        // Set subsettings rule.
-        registerTwoPanePairRule(mContext,
-                getComponentName(Settings.class),
-                getComponentName(SubSettings.class),
-                null /* secondaryIntentAction */,
-                true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */);
     }
 
     /** Register a SplitPairRule for 2-pane. */
@@ -78,7 +71,8 @@ public class ActivityEmbeddingRulesController {
             ComponentName secondaryComponent,
             String secondaryIntentAction,
             boolean finishPrimaryWithSecondary,
-            boolean finishSecondaryWithPrimary) {
+            boolean finishSecondaryWithPrimary,
+            boolean clearTop) {
         final Set<SplitPairFilter> filters = new HashSet<>();
         filters.add(new SplitPairFilter(primaryComponent, secondaryComponent,
                 secondaryIntentAction));
@@ -86,11 +80,26 @@ public class ActivityEmbeddingRulesController {
         SplitController.getInstance().registerRule(new SplitPairRule(filters,
                 finishPrimaryWithSecondary,
                 finishSecondaryWithPrimary,
-                true /* clearTop */,
+                clearTop,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.SPLIT_RATIO,
                 LayoutDirection.LOCALE));
+    }
+
+    /** Register a SplitPairRule for SubSettings if the device supports 2-pane. */
+    public static void registerSubSettingsPairRuleIfNeeded(Context context, boolean clearTop) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
+            return;
+        }
+
+        registerTwoPanePairRule(context,
+                getComponentName(context, Settings.class),
+                getComponentName(context, SubSettings.class),
+                null /* secondaryIntentAction */,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                clearTop);
     }
 
     private void registerHomepagePlaceholderRule() {
@@ -119,11 +128,6 @@ public class ActivityEmbeddingRulesController {
                 null /* intentAction */));
     }
 
-    private void addActivityFilter(Set<ActivityFilter> activityFilters, Intent intent) {
-        activityFilters.add(new ActivityFilter(new ComponentName("*" /* pkg */, "*" /* cls */),
-                intent.getAction()));
-    }
-
     private void addActivityFilter(Set<ActivityFilter> activityFilters,
             ComponentName componentName) {
         activityFilters.add(new ActivityFilter(componentName, null /* intentAction */));
@@ -131,6 +135,12 @@ public class ActivityEmbeddingRulesController {
 
     @NonNull
     private ComponentName getComponentName(Class<? extends Activity> activityClass) {
-        return new ComponentName(mContext.getPackageName(), activityClass.getName());
+        return getComponentName(mContext, activityClass);
+    }
+
+    @NonNull
+    private static ComponentName getComponentName(Context context,
+                Class<? extends Activity> activityClass) {
+        return new ComponentName(context.getPackageName(), activityClass.getName());
     }
 }

@@ -126,14 +126,14 @@ public class AccessibilityScreenSizeForSetupWizardActivityTest {
     }
 
     @Test
-    public void generateHeader_displaySizePage_returnDisplaySizeTitle() {
+    public void updateHeaderLayout_displaySizePage_returnDisplaySizeTitle() {
         final Intent intent = new Intent();
         intent.putExtra(VISION_FRAGMENT_NO, FragmentType.SCREEN_SIZE);
         intent.putExtra(EXTRA_PAGE_TRANSITION_TYPE, TransitionType.TRANSITION_FADE);
         final AccessibilityScreenSizeForSetupWizardActivity activity = Robolectric.buildActivity(
                 AccessibilityScreenSizeForSetupWizardActivity.class, intent).get();
         activity.setContentView(R.layout.accessibility_screen_size_setup_wizard);
-        activity.generateHeader();
+        activity.updateHeaderLayout();
         final GlifLayout layout = activity.findViewById(R.id.setup_wizard_layout);
         assertThat(layout.getHeaderText()).isEqualTo(mContext.getText(R.string.screen_zoom_title));
     }
