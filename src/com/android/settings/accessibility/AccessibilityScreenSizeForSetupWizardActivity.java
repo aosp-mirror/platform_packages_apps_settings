@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -69,7 +70,7 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
                 ? R.style.SudDynamicColorThemeGlifV3_DayNight : R.style.SudThemeGlifV3_DayNight;
         setTheme(appliedTheme);
         setContentView(R.layout.accessibility_screen_size_setup_wizard);
-        generateHeader();
+        updateHeaderLayout();
         scrollToBottom();
         initFooterButton();
         if (savedInstanceState == null) {
@@ -101,7 +102,15 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
     }
 
     @VisibleForTesting
-    void generateHeader() {
+    void updateHeaderLayout() {
+        if (ThemeHelper.shouldApplyExtendedPartnerConfig(this) && isSuwSupportedTwoPanes()) {
+            final GlifLayout layout = findViewById(R.id.setup_wizard_layout);
+            final LinearLayout headerLayout = layout.findManagedViewById(R.id.sud_layout_header);
+            if (headerLayout != null) {
+                headerLayout.setPadding(0, layout.getPaddingTop(), 0,
+                        layout.getPaddingBottom());
+            }
+        }
         ((TextView) findViewById(R.id.suc_layout_title)).setText(
                 getFragmentType(getIntent()) == FragmentType.FONT_SIZE
                         ? R.string.title_font_size
@@ -110,6 +119,10 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
                 getFragmentType(getIntent()) == FragmentType.FONT_SIZE
                         ? R.string.short_summary_font_size
                         : R.string.screen_zoom_short_summary);
+    }
+
+    private boolean isSuwSupportedTwoPanes() {
+        return getResources().getBoolean(R.bool.config_suw_supported_two_panes);
     }
 
     private void initFooterButton() {
