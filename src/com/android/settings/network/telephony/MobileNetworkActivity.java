@@ -207,6 +207,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     protected void runSubscriptionUpdate(Runnable onUpdateRemaining) {
         SubscriptionInfo subInfo = getSubscription(mCurSubscriptionId, null);
         if (subInfo == null) {
+            onUpdateRemaining.run();
             tryToFinishActivity();
             return;
         }
