@@ -76,12 +76,6 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!KEY_RESTRICTED_PREF.equals(preference.getKey())) {
-            return false;
-        }
-
-        mBatteryOptimizeUtils.setAppOptimizationMode(BatteryOptimizeUtils.MODE_RESTRICTED);
-        Log.d(TAG, "Set restricted");
-        return true;
+        return getPreferenceKey().equals(preference.getKey());
     }
 }
