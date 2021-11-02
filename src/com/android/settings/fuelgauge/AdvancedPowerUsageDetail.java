@@ -284,6 +284,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        if (mEnableTriState) {
+            Log.d(TAG, "Leave with mode: " + getSelectedPreference());
+            mBatteryOptimizeUtils.setAppUsageState(getSelectedPreference());
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         notifyBackupManager();
@@ -489,6 +498,18 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         mBatteryOptimizeUtils = new BatteryOptimizeUtils(
                 getContext(), getArguments().getInt(EXTRA_UID), packageName);
         mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
+    }
+
+    private int getSelectedPreference() {
+        if (mRestrictedPreference.isChecked()) {
+            return BatteryOptimizeUtils.MODE_RESTRICTED;
+        } else if (mUnrestrictedPreference.isChecked()) {
+            return BatteryOptimizeUtils.MODE_UNRESTRICTED;
+        } else if (mOptimizePreference.isChecked()) {
+            return BatteryOptimizeUtils.MODE_OPTIMIZED;
+        } else {
+            return BatteryOptimizeUtils.MODE_UNKNOWN;
+        }
     }
 
     private CharSequence getAppActiveTime(Bundle bundle) {

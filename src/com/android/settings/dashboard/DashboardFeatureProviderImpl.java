@@ -180,7 +180,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                                         com.android.settings.Settings.class.getName()),
                                 new ComponentName(tile.getPackageName(),
                                         tile.getComponentName()),
-                                null, true, true);
+                                null /* secondaryIntentAction */,
+                                true /* finishPrimaryWithSecondary */,
+                                true /* finishSecondaryWithPrimary */,
+                                true /* clearTop */);
 
                         // Highlight preference ui.
                         final TopLevelSettings topLevelSettings = (TopLevelSettings) fragment;

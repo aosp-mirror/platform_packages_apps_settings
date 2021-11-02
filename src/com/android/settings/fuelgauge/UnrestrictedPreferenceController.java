@@ -74,12 +74,6 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!KEY_UNRESTRICTED_PREF.equals(preference.getKey())) {
-            return false;
-        }
-
-        mBatteryOptimizeUtils.setAppOptimizationMode(BatteryOptimizeUtils.MODE_UNRESTRICTED);
-        Log.d(TAG, "Set unrestricted");
-        return true;
+        return getPreferenceKey().equals(preference.getKey());
     }
 }
