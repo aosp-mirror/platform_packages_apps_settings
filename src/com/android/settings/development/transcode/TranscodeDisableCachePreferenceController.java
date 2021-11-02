@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.SystemProperties;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -49,5 +50,10 @@ public class TranscodeDisableCachePreferenceController extends TogglePreferenceC
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
     }
 }

@@ -213,6 +213,7 @@ class SliceDataConverter {
                 final String unavailableSliceSubtitle = bundle.getString(
                         METADATA_UNAVAILABLE_SLICE_SUBTITLE);
                 final boolean isPublicSlice = controller.isPublicSlice();
+                final int highlightMenuRes = controller.getSliceHighlightMenuRes();
 
                 final SliceData xmlSlice = new SliceData.Builder()
                         .setKey(key)
@@ -226,6 +227,7 @@ class SliceDataConverter {
                         .setSliceType(sliceType)
                         .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
                         .setIsPublicSlice(isPublicSlice)
+                        .setHighlightMenuRes(highlightMenuRes)
                         .build();
 
                 xmlSliceData.add(xmlSlice);

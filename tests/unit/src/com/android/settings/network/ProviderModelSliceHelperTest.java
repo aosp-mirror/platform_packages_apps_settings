@@ -302,6 +302,11 @@ public class ProviderModelSliceHelperTest {
         public Intent getIntent() {
             return new Intent();
         }
+
+        @Override
+        public int getSliceHighlightMenuRes() {
+            return 0;
+        }
     }
 
     private class MockProviderModelSliceHelper extends ProviderModelSliceHelper {
