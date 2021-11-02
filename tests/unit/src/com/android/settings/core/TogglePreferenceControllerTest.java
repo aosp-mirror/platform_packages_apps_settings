@@ -120,6 +120,11 @@ public class TogglePreferenceControllerTest {
         }
 
         @Override
+        public int getSliceHighlightMenuRes() {
+            return 5678;
+        }
+
+        @Override
         public int getAvailabilityStatus() {
             return AVAILABLE;
         }

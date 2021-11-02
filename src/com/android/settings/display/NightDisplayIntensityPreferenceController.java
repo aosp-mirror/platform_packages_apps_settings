@@ -23,6 +23,7 @@ import android.text.TextUtils;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.widget.SeekBarPreference;
 
@@ -53,6 +54,11 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
     @Override
     public boolean isPublicSlice() {
         return true;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
     }
 
     @Override

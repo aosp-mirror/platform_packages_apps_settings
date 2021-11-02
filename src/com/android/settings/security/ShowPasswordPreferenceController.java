@@ -58,5 +58,9 @@ public class ShowPasswordPreferenceController extends TogglePreferenceController
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_security;
+    }
 }
 
