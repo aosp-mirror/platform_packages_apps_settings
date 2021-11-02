@@ -143,5 +143,10 @@ public class SpecialCaseSliceManagerTest {
         public Intent getIntent() {
             return null;
         }
+
+        @Override
+        public int getSliceHighlightMenuRes() {
+            return 0;
+        }
     }
 }

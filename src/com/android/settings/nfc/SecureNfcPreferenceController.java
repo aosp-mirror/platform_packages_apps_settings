@@ -21,6 +21,7 @@ import android.nfc.NfcAdapter;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -79,6 +80,11 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
     @Override
     public boolean isPublicSlice() {
         return true;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_connected_devices;
     }
 
     @Override

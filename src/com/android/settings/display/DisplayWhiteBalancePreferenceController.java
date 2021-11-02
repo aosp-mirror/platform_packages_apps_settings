@@ -21,18 +21,18 @@ import android.hardware.display.ColorDisplayManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.UserHandle;
 import android.provider.Settings.Secure;
 import android.provider.Settings.System;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-
-import com.android.settings.core.TogglePreferenceController;
 
 public class DisplayWhiteBalancePreferenceController extends TogglePreferenceController
     implements LifecycleObserver, OnStart, OnStop {
@@ -60,6 +60,11 @@ public class DisplayWhiteBalancePreferenceController extends TogglePreferenceCon
     @Override
     public boolean setChecked(boolean isChecked) {
         return getColorDisplayManager().setDisplayWhiteBalanceEnabled(isChecked);
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
     }
 
     @Override

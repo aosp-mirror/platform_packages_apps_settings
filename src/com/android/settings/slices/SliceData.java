@@ -19,6 +19,7 @@ package com.android.settings.slices;
 import android.annotation.IntDef;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -50,6 +51,8 @@ public class SliceData {
         int SLIDER = 2;
     }
 
+    private static final String TAG = "SliceData";
+
     private final String mKey;
 
     private final String mTitle;
@@ -67,6 +70,8 @@ public class SliceData {
     private final Uri mUri;
 
     private final String mPreferenceController;
+
+    private final int mHighlightMenuRes;
 
     @SliceType
     private final int mSliceType;
@@ -119,6 +124,10 @@ public class SliceData {
         return mUnavailableSliceSubtitle;
     }
 
+    public int getHighlightMenuRes() {
+        return mHighlightMenuRes;
+    }
+
     public boolean isPublicSlice() {
         return mIsPublicSlice;
     }
@@ -136,6 +145,7 @@ public class SliceData {
         mSliceType = builder.mSliceType;
         mUnavailableSliceSubtitle = builder.mUnavailableSliceSubtitle;
         mIsPublicSlice = builder.mIsPublicSlice;
+        mHighlightMenuRes = builder.mHighlightMenuRes;
     }
 
     @Override
@@ -174,6 +184,8 @@ public class SliceData {
         private int mSliceType;
 
         private String mUnavailableSliceSubtitle;
+
+        private int mHighlightMenuRes;
 
         private boolean mIsPublicSlice;
 
@@ -233,6 +245,11 @@ public class SliceData {
             return this;
         }
 
+        public Builder setHighlightMenuRes(int highlightMenuRes) {
+            mHighlightMenuRes = highlightMenuRes;
+            return this;
+        }
+
         public Builder setIsPublicSlice(boolean isPublicSlice) {
             mIsPublicSlice = isPublicSlice;
             return this;
@@ -253,6 +270,10 @@ public class SliceData {
 
             if (TextUtils.isEmpty(mPrefControllerClassName)) {
                 throw new InvalidSliceDataException("Preference Controller cannot be empty");
+            }
+
+            if (mHighlightMenuRes == 0) {
+                Log.w(TAG, "Highlight menu key res is empty: " + mPrefControllerClassName);
             }
 
             return new SliceData(this);

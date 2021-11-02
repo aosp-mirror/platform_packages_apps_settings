@@ -20,6 +20,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.Spatializer;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -52,5 +53,10 @@ public class SpatialAudioPreferenceController extends TogglePreferenceController
     public boolean setChecked(boolean isChecked) {
         mSpatializer.setEnabled(isChecked);
         return isChecked == isChecked();
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_notifications;
     }
 }

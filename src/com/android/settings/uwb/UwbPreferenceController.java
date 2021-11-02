@@ -162,5 +162,10 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
             return mContext.getResources().getString(R.string.uwb_settings_summary);
         }
     }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_connected_devices;
+    }
 }
 

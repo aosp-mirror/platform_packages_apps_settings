@@ -181,7 +181,9 @@ public class RemoteMediaSlice implements CustomSliceable {
         final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 SoundSettings.class.getName(),
                 id,
-                mContext.getText(R.string.sound_settings).toString(), 0);
+                mContext.getText(R.string.sound_settings).toString(),
+                0 /* sourceMetricsCategory */,
+                R.string.menu_key_sound);
         intent.setClassName(mContext.getPackageName(), SubSettings.class.getName());
         intent.setData(contentUri);
         final PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent,
@@ -219,6 +221,11 @@ public class RemoteMediaSlice implements CustomSliceable {
     @Override
     public Intent getIntent() {
         return null;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_connected_devices;
     }
 
     @Override

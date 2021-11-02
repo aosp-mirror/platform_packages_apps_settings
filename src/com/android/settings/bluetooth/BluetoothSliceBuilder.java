@@ -98,7 +98,8 @@ public class BluetoothSliceBuilder {
                 SettingsSlicesContract.KEY_BLUETOOTH).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(context,
                 BluetoothDashboardFragment.class.getName(), null /* key */, screenTitle,
-                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY)
+                SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY,
+                R.string.menu_key_connected_devices)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }
