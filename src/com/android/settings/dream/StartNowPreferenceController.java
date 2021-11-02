@@ -20,6 +20,7 @@ import android.content.Context;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.SettingsMainSwitchPreferenceController;
@@ -66,5 +67,10 @@ public class StartNowPreferenceController extends SettingsMainSwitchPreferenceCo
             mBackend.startDreaming();
         }
         return true;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
     }
 }
