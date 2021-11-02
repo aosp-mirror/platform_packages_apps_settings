@@ -102,7 +102,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"طلب اقتران"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"انقر للإقران مع <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"الملفات التي تم استلامها"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"الملفات المستلَمة عبر البلوتوث"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"تم إيقاف البلوتوث"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"انقر لتفعيل البلوتوث"</string>
     <string name="device_picker" msgid="2427027896389445414">"اختيار جهاز البلوتوث"</string>
@@ -2183,7 +2182,7 @@
     <string name="internal_storage" msgid="999496851424448809">"وحدة التخزين الداخلية"</string>
     <string name="recompute_size" msgid="1098091228370999128">"جارٍ إعادة حساب الحجم..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"هل تريد حذف بيانات التطبيق؟"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"سيتم حذف جميع بيانات هذا التطبيق نهائيًا. ويشمل ذلك جميع الملفات والإعدادات والحسابات وقواعد البيانات وما إلى ذلك."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"سيتم حذف بيانات هذا التطبيق نهائيًا، بما في ذلك الملفات والإعدادات وقواعد البيانات وبيانات التطبيق الأخرى."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"حسنًا"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"إلغاء"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -3010,6 +3009,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"إجمالي مدة الاستخدام: <xliff:g id="TIME_0">^1</xliff:g> • تم استخدام البطارية في الخلفية أقل من دقيقة\nفي الفترة <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"لم يتم استخدام البطارية منذ آخر عملية شحن كاملة."</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"لم يتم استخدام البطارية في آخر 24 ساعة."</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"يستند تقدير شحن البطارية المتبقي على استخدام الجهاز"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"الوقت التقديري المتبقي"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"إلى أن يتم الشحن بالكامل"</string>
@@ -5766,7 +5766,7 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"العمل"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"الإعداد التلقائي للنظام"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"لم يعد هذا الاختيار صالحًا. يُرجى إعادة المحاولة."</string>
-    <string name="quick_controls_lower" msgid="6675573610027367819">"أدوات التحكم بالأجهزة"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"التحكّم بالجهاز"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"البطاقات والتذاكر"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"البطاقات والتذاكر"</string>
     <string name="power_menu_setting_name" msgid="7291642927216934159">"الضغط مع الاستمرار على زر التشغيل"</string>
@@ -5920,7 +5920,10 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"يجب إيقاف وضع الطيران لاستخدام النطاق الواسع جدًا."</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"الوصول إلى الكاميرا"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"الوصول إلى الميكروفون"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"لكل التطبيقات والخدمات"</string>
+    <!-- no translation found for cam_toggle_description (9212762204005146404) -->
+    <skip />
+    <!-- no translation found for mic_toggle_description (484139688645092237) -->
+    <skip />
     <string name="game_settings_title" msgid="1028178627743422090">"إعدادات الألعاب"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"تفعيل \"اختصار لوحة بيانات الألعاب\" إلخ"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"السابق"</string>
