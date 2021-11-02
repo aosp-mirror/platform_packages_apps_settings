@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.fonts.FontStyle;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /** PreferenceController for displaying all text in bold. */
@@ -46,5 +47,10 @@ public class FontWeightAdjustmentPreferenceController extends TogglePreferenceCo
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.FONT_WEIGHT_ADJUSTMENT, (isChecked ? BOLD_TEXT_ADJUSTMENT : 0));
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_accessibility;
     }
 }
