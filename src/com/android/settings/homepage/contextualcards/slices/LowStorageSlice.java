@@ -109,9 +109,15 @@ public class LowStorageSlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 StorageDashboardFragment.class.getName(), "" /* key */,
                 screenTitle,
-                SettingsEnums.SLICE)
+                SettingsEnums.SLICE,
+                this)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(CustomSliceRegistry.LOW_STORAGE_SLICE_URI);
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_storage;
     }
 
     private RowBuilder buildRowBuilder(CharSequence title, String summary, IconCompat icon) {
