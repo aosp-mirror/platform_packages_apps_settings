@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.widget.Toast;
 
+import androidx.annotation.StringRes;
 import androidx.slice.Slice;
 
 import com.android.settings.R;
@@ -135,10 +136,16 @@ public interface Sliceable {
     }
 
     /**
-     * @return a resource ID that indicates which menu entry should be highlighted in multi-pane
-     * mode.
+     * Used to mark a {@link Sliceable} that has no highlight menu string resource.
      */
-    default int getSliceHighlightMenuRes() {
-        return 0;
+    int NO_RES = 0;
+
+    /**
+     * @return a string resource declared in res/values/menu_keys.xml that indicates which menu
+     * entry should be highlighted in two-pane mode, or {@link #NO_RES} representing highlighting is
+     * not applicable.
+     */
+    @StringRes default int getSliceHighlightMenuRes() {
+        return NO_RES;
     }
 }
