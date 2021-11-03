@@ -97,7 +97,7 @@ public class SearchResultTrampoline extends Activity {
         } else if (isFromSettingsIntelligence(callingActivity)) {
             // Register SplitPairRule for SubSettings, set clearTop false to prevent unexpected back
             // navigation behavior.
-            ActivityEmbeddingRulesController.registerSubSettingsPairRuleIfNeeded(this,
+            ActivityEmbeddingRulesController.registerSubSettingsPairRule(this,
                     false /* clearTop */);
             // TODO: pass menu key to homepage
             intent.setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
