@@ -270,6 +270,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         initHeader();
         if (mEnableTriState) {
+            mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
             initPreferenceForTriState(getContext());
             final String packageName = mBatteryOptimizeUtils.getPackageName();
             FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
@@ -286,8 +287,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     public void onPause() {
         super.onPause();
         if (mEnableTriState) {
-            Log.d(TAG, "Leave with mode: " + getSelectedPreference());
-            mBatteryOptimizeUtils.setAppUsageState(getSelectedPreference());
+            final int selectedPreference = getSelectedPreference();
+
+            logMetricCategory(selectedPreference);
+            mBatteryOptimizeUtils.setAppUsageState(selectedPreference);
+            Log.d(TAG, "Leave with mode: " + selectedPreference);
         }
     }
 
@@ -461,30 +465,40 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         updatePreferenceState(mUnrestrictedPreference, selectedKey);
         updatePreferenceState(mOptimizePreference, selectedKey);
         updatePreferenceState(mRestrictedPreference, selectedKey);
-
-        // Logs metric.
-        int metricCategory = 0;
-        if (selectedKey.equals(mUnrestrictedPreference.getKey())) {
-            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_UNRESTRICTED;
-        } else if (selectedKey.equals(mOptimizePreference.getKey())) {
-            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED;
-        } else if (selectedKey.equals(mRestrictedPreference.getKey())) {
-            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_RESTRICTED;
-        }
-        if (metricCategory != 0) {
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
-                .action(
-                    getContext(),
-                    metricCategory,
-                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE,
-                            mBatteryOptimizeUtils.getPackageName()),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE,
-                            getArguments().getString(EXTRA_POWER_USAGE_PERCENT)));
-        }
     }
 
     private void updatePreferenceState(RadioButtonPreference preference, String selectedKey) {
         preference.setChecked(selectedKey.equals(preference.getKey()));
+    }
+
+    private void logMetricCategory(int selectedKey) {
+        if (selectedKey == mOptimizationMode) {
+            return;
+        }
+
+        int metricCategory = 0;
+        switch (selectedKey) {
+            case BatteryOptimizeUtils.MODE_UNRESTRICTED:
+                metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_UNRESTRICTED;
+                break;
+            case BatteryOptimizeUtils.MODE_OPTIMIZED:
+                metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED;
+                break;
+            case BatteryOptimizeUtils.MODE_RESTRICTED:
+                metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_RESTRICTED;
+                break;
+        }
+
+        if (metricCategory != 0) {
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                    .action(
+                            getContext(),
+                            metricCategory,
+                            new Pair(ConvertUtils.METRIC_KEY_PACKAGE,
+                                    mBatteryOptimizeUtils.getPackageName()),
+                            new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE,
+                                    getArguments().getString(EXTRA_POWER_USAGE_PERCENT)));
+        }
     }
 
     private void onCreateForTriState(String packageName) {
@@ -498,7 +512,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         mBatteryOptimizeUtils = new BatteryOptimizeUtils(
                 getContext(), getArguments().getInt(EXTRA_UID), packageName);
-        mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
     }
 
     private int getSelectedPreference() {
