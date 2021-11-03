@@ -290,22 +290,16 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         if (mEnableTriState) {
             final int selectedPreference = getSelectedPreference();
 
+            notifyBackupManager();
             logMetricCategory(selectedPreference);
             mBatteryOptimizeUtils.setAppUsageState(selectedPreference);
             Log.d(TAG, "Leave with mode: " + selectedPreference);
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        notifyBackupManager();
-    }
-
     @VisibleForTesting
     void notifyBackupManager() {
-        if (mEnableTriState
-                && mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
+        if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
             final BackupManager backupManager = mBackupManager != null
                     ? mBackupManager : new BackupManager(getContext());
             backupManager.dataChanged();
