@@ -255,7 +255,8 @@ public class SettingsActivity extends SettingsBaseActivity
         // Should happen before any call to getIntent()
         getMetaData();
         final Intent intent = getIntent();
-        if (launchHomepageForTwoPaneDeepLink(intent)) {
+        if (shouldShowTwoPaneDeepLink(intent)) {
+            launchHomepageForTwoPaneDeepLink(intent);
             finishAndRemoveTask();
             return;
         }
@@ -368,16 +369,13 @@ public class SettingsActivity extends SettingsBaseActivity
             intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
     }
 
-    /** Returns true if the Activity is started by a deep link intent for large screen devices. */
-    private boolean launchHomepageForTwoPaneDeepLink(Intent intent) {
-        if (!shouldShowTwoPaneDeepLink(intent)) {
-            return false;
-        }
-
+    /**
+     * Returns the deep link trampoline intent for large screen devices.
+     */
+    public static Intent getTrampolineIntent(Intent intent, String highlightMenuKey) {
         final Intent detailIntent = new Intent(intent);
         // It's a deep link intent, SettingsHomepageActivity will set SplitPairRule and start it.
         final Intent trampolineIntent = new Intent(ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY);
-
         trampolineIntent.replaceExtras(detailIntent);
 
         // Relay detail intent data to prevent failure of Intent#ParseUri.
@@ -391,22 +389,27 @@ public class SettingsActivity extends SettingsBaseActivity
         trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI,
                 detailIntent.toUri(Intent.URI_INTENT_SCHEME));
 
-        if (detailIntent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
-            trampolineIntent.setClass(this, SliceDeepLinkHomepageActivity.class);
+        trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY,
+                highlightMenuKey);
+        trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        return trampolineIntent;
+    }
+
+    private void launchHomepageForTwoPaneDeepLink(Intent intent) {
+        final Intent trampolineIntent;
+        if (intent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
             // Get menu key for slice deep link case.
-            final String highlightMenuKey = detailIntent.getStringExtra(
+            final String highlightMenuKey = intent.getStringExtra(
                     EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY);
             if (!TextUtils.isEmpty(highlightMenuKey)) {
                 mHighlightMenuKey = highlightMenuKey;
             }
+            trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
+            trampolineIntent.setClass(this, SliceDeepLinkHomepageActivity.class);
+        } else {
+            trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
         }
-
-        trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY,
-                mHighlightMenuKey);
-        trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         startActivity(trampolineIntent);
-
-        return true;
     }
 
     private boolean shouldShowTwoPaneDeepLink(Intent intent) {

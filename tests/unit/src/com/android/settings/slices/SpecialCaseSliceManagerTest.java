@@ -146,7 +146,7 @@ public class SpecialCaseSliceManagerTest {
 
         @Override
         public int getSliceHighlightMenuRes() {
-            return 0;
+            return NO_RES;
         }
     }
 }

@@ -16,7 +16,6 @@
 
 package com.android.settings.widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -34,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.Utils;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.homepage.SettingsHomepageActivity;
 
 /**
  *  Adapter for highlighting top level preferences
@@ -54,7 +54,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     final int mIconColorHighlight;
 
     private final Context mContext;
-    private final Activity mActivity;
+    private final SettingsHomepageActivity mHomepageActivity;
     private final RecyclerView mRecyclerView;
     private final int mNormalBackgroundRes;
     private String mHighlightKey;
@@ -63,13 +63,13 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     private boolean mHighlightNeeded;
     private boolean mScrolled;
 
-    public HighlightableTopLevelPreferenceAdapter(Activity activity,
+    public HighlightableTopLevelPreferenceAdapter(SettingsHomepageActivity homepageActivity,
             PreferenceGroup preferenceGroup, RecyclerView recyclerView, String key) {
         super(preferenceGroup);
         mRecyclerView = recyclerView;
         mHighlightKey = key;
         mContext = preferenceGroup.getContext();
-        mActivity = activity;
+        mHomepageActivity = homepageActivity;
         final TypedValue outValue = new TypedValue();
         mContext.getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
                 outValue, true /* resolveRefs */);
@@ -115,7 +115,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
      * A function can highlight a specific setting in recycler view.
      */
     public void requestHighlight() {
-        if (mRecyclerView == null || TextUtils.isEmpty(mHighlightKey)) {
+        if (mRecyclerView == null) {
             return;
         }
 
@@ -194,6 +194,11 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
             return;
         }
 
+        if (mHomepageActivity.registerHomepageLoadedListenerIfNeeded(
+                () -> scrollToPositionIfNeeded(position))) {
+            return;
+        }
+
         // Only when the recyclerView is loaded, it can be scrolled
         final View view = mRecyclerView.getChildAt(position);
         if (view == null) {
@@ -236,6 +241,6 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     }
 
     private boolean isHighlightNeeded() {
-        return ActivityEmbeddingUtils.isTwoPaneResolution(mActivity);
+        return ActivityEmbeddingUtils.isTwoPaneResolution(mHomepageActivity);
     }
 }
