@@ -19,7 +19,6 @@ package com.android.settings.search;
 import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
 
 import android.annotation.NonNull;
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Context;
@@ -30,8 +29,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.search.SearchIndexableResources;
 
@@ -66,7 +69,7 @@ public interface SearchFeatureProvider {
     /**
      * Initializes the search toolbar.
      */
-    default void initSearchToolbar(Activity activity, Toolbar toolbar, int pageId) {
+    default void initSearchToolbar(FragmentActivity activity, Toolbar toolbar, int pageId) {
         if (activity == null || toolbar == null) {
             return;
         }
@@ -91,7 +94,8 @@ public interface SearchFeatureProvider {
 
         toolbar.setOnClickListener(tb -> {
             final Context context = activity.getApplicationContext();
-            final Intent intent = buildSearchIntent(context, pageId);
+            final Intent intent = buildSearchIntent(context, pageId)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
             if (activity.getPackageManager().queryIntentActivities(intent,
                     PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
@@ -103,8 +107,19 @@ public interface SearchFeatureProvider {
 
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                     .logSettingsTileClick(KEY_HOMEPAGE_SEARCH_BAR, pageId);
-            final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();
-            activity.startActivity(intent, bundle);
+
+            if (ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
+                final TopLevelSettings fragment = (TopLevelSettings) activity
+                        .getSupportFragmentManager().findFragmentById(R.id.main_content);
+                if (fragment != null) {
+                    fragment.disableMenuHighlight();
+                }
+                activity.startActivity(intent);
+            } else {
+                final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity)
+                        .toBundle();
+                activity.startActivity(intent, bundle);
+            }
         });
     }
 
