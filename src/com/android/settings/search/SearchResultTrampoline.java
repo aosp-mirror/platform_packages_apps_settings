@@ -20,52 +20,102 @@ import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENT
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.overlay.FeatureFactory;
+
+import java.net.URISyntaxException;
 
 /**
  * A trampoline activity that launches setting result page.
  */
 public class SearchResultTrampoline extends Activity {
 
+    private static final String TAG = "SearchResultTrampoline";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final ComponentName callingActivity = getCallingActivity();
         // First make sure caller has privilege to launch a search result page.
         FeatureFactory.getFactory(this)
                 .getSearchFeatureProvider()
-                .verifyLaunchSearchResultPageCaller(this, getCallingActivity());
+                .verifyLaunchSearchResultPageCaller(this, callingActivity);
         // Didn't crash, proceed and launch the result as a subsetting.
-        final Intent intent = getIntent();
+        Intent intent = getIntent();
+        final String highlightMenuKey = intent.getStringExtra(
+                Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY);
 
-        // Hack to take EXTRA_FRAGMENT_ARG_KEY from intent and set into
-        // EXTRA_SHOW_FRAGMENT_ARGUMENTS. This is necessary because intent could be from external
-        // caller and args may not persisted.
-        final String settingKey = intent.getStringExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY);
-        final int tab = intent.getIntExtra(EXTRA_SHOW_FRAGMENT_TAB, 0);
-        final Bundle args = new Bundle();
-        args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, settingKey);
-        args.putInt(EXTRA_SHOW_FRAGMENT_TAB, tab);
-        intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
+        final String fragment = intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT);
+        if (!TextUtils.isEmpty(fragment)) {
+            // Hack to take EXTRA_FRAGMENT_ARG_KEY from intent and set into
+            // EXTRA_SHOW_FRAGMENT_ARGUMENTS. This is necessary because intent could be from
+            // external caller and args may not persisted.
+            final String settingKey = intent.getStringExtra(
+                    SettingsActivity.EXTRA_FRAGMENT_ARG_KEY);
+            final int tab = intent.getIntExtra(EXTRA_SHOW_FRAGMENT_TAB, 0);
+            final Bundle args = new Bundle();
+            args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, settingKey);
+            args.putInt(EXTRA_SHOW_FRAGMENT_TAB, tab);
+            intent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
 
-        // Register SplirPairRule for SubSettings, set clearTop false to prevent unexpected back
-        // navigation behavior.
-        ActivityEmbeddingRulesController.registerSubSettingsPairRuleIfNeeded(this /* context */,
-                false /* clearTop*/);
+            // Reroute request to SubSetting.
+            intent.setClass(this /* context */, SubSettings.class);
+        } else {
+            // Direct link case
+            final String intentUriString = intent.getStringExtra(
+                    Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI);
+            if (TextUtils.isEmpty(intentUriString)) {
+                Log.e(TAG, "No EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI for deep link");
+                finish();
+                return;
+            }
 
-        // Reroute request to SubSetting.
-        intent.setClass(this /* context */, SubSettings.class)
-                .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        startActivity(intent);
+            try {
+                intent = Intent.parseUri(intentUriString, Intent.URI_INTENT_SCHEME);
+            } catch (URISyntaxException e) {
+                Log.e(TAG, "Failed to parse deep link intent: " + e);
+                finish();
+                return;
+            }
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
+            startActivity(intent);
+        } else if (isFromSettingsIntelligence(callingActivity)) {
+            // Register SplitPairRule for SubSettings, set clearTop false to prevent unexpected back
+            // navigation behavior.
+            ActivityEmbeddingRulesController.registerSubSettingsPairRuleIfNeeded(this,
+                    false /* clearTop */);
+            // TODO: pass menu key to homepage
+            intent.setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else {
+            // Two-pane case
+            intent.setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(SettingsActivity.getTrampolineIntent(intent, highlightMenuKey));
+        }
 
         // Done.
         finish();
     }
 
+    private boolean isFromSettingsIntelligence(ComponentName callingActivity) {
+        return callingActivity != null && TextUtils.equals(
+                callingActivity.getPackageName(),
+                FeatureFactory.getFactory(this).getSearchFeatureProvider()
+                        .getSettingsIntelligencePkgName(this));
+    }
 }
