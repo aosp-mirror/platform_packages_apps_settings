@@ -101,7 +101,7 @@ public class TopLevelSettings extends DashboardFragment implements
     public boolean onPreferenceTreeClick(Preference preference) {
         // Register SplitPairRule for SubSettings.
         ActivityEmbeddingRulesController.registerSubSettingsPairRuleIfNeeded(getContext(),
-                true /* clearTop*/);
+                true /* clearTop */);
 
         setHighlightPreferenceKey(preference.getKey());
         return super.onPreferenceTreeClick(preference);
@@ -184,6 +184,15 @@ public class TopLevelSettings extends DashboardFragment implements
         }
     }
 
+    /** Disable highlight on the menu entry */
+    public void disableMenuHighlight() {
+        if (mTopLevelAdapter == null) {
+            return;
+        }
+        mHighlightedPreferenceKey = null;
+        mTopLevelAdapter.highlightPreference(mHighlightedPreferenceKey, /* scrollNeeded= */ false);
+    }
+
     @Override
     protected boolean shouldForceRoundedIcon() {
         return getContext().getResources()
@@ -202,7 +211,8 @@ public class TopLevelSettings extends DashboardFragment implements
 
         Log.d(TAG, "onCreateAdapter, pref key: " + mHighlightedPreferenceKey);
         mTopLevelAdapter = new HighlightableTopLevelPreferenceAdapter(
-                getActivity(), preferenceScreen, getListView(), mHighlightedPreferenceKey);
+                (SettingsHomepageActivity) getActivity(), preferenceScreen, getListView(),
+                mHighlightedPreferenceKey);
         return mTopLevelAdapter;
     }
 
