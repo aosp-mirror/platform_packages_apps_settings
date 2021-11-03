@@ -22,6 +22,7 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVE
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -57,5 +58,10 @@ public class ButtonNavigationSettingsAssistController extends TogglePreferenceCo
         }
 
         return UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
     }
 }

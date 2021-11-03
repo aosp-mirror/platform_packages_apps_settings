@@ -18,8 +18,8 @@ package com.android.settings.privacy;
 
 import android.annotation.NonNull;
 import android.content.Context;
-import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.utils.ContentCaptureUtils;
 
@@ -45,5 +45,10 @@ public final class EnableContentCapturePreferenceController extends TogglePrefer
         boolean available = ContentCaptureUtils.isFeatureAvailable()
                 && ContentCaptureUtils.getServiceSettingsComponentName() == null;
         return available ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_privacy;
     }
 }

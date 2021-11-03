@@ -50,6 +50,8 @@ public interface Sliceable {
      * - Must be understandable as a stand-alone Setting.
      * <p>
      * This does not guarantee the setting is available.
+     * <p>
+     * {@link #getSliceHighlightMenuRes} should also be overridden when returning true.
      *
      * @return {@code true} if the controller should be used as a Slice.
      */
@@ -130,5 +132,13 @@ public interface Sliceable {
      */
     default Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
         return null;
+    }
+
+    /**
+     * @return a resource ID that indicates which menu entry should be highlighted in multi-pane
+     * mode.
+     */
+    default int getSliceHighlightMenuRes() {
+        return 0;
     }
 }

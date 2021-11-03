@@ -383,12 +383,14 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             footerString = context.getString(R.string.manager_battery_usage_footer);
         }
         mFooterPreference.setTitle(footerString);
-        mFooterPreference.setLearnMoreAction(v ->
-                startActivityForResult(HelpUtils.getHelpIntent(context,
-                        context.getString(R.string.help_url_app_usage_settings),
-                        /*backupContext=*/ ""), /*requestCode=*/ 0));
-        mFooterPreference.setLearnMoreContentDescription(
-                context.getString(R.string.manager_battery_usage_link_a11y));
+        final Intent helpIntent = HelpUtils.getHelpIntent(context, context.getString(
+                R.string.help_url_app_usage_settings), /*backupContext=*/ "");
+        if (helpIntent != null) {
+            mFooterPreference.setLearnMoreAction(v ->
+                    startActivityForResult(helpIntent, /*requestCode=*/ 0));
+            mFooterPreference.setLearnMoreContentDescription(
+                    context.getString(R.string.manager_battery_usage_link_a11y));
+        }
     }
 
     @Override

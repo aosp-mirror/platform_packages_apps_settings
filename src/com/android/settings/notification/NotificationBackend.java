@@ -20,6 +20,7 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
+import static android.os.UserHandle.USER_SYSTEM;
 
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
@@ -44,6 +45,7 @@ import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
 import android.service.notification.NotificationListenerFilter;
 import android.text.format.DateUtils;
@@ -112,15 +114,25 @@ public class NotificationBackend {
 
     void recordCanBeBlocked(Context context, PackageManager pm, RoleManager rm, PackageInfo app,
             AppRow row) {
-        row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
-        List<String> roles = rm.getHeldRolesFromController(app.packageName);
-        if (roles.contains(RoleManager.ROLE_DIALER)
-                || roles.contains(RoleManager.ROLE_EMERGENCY)) {
-            row.systemApp = true;
+        if (Settings.Secure.getIntForUser(context.getContentResolver(),
+                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 0, USER_SYSTEM) != 0) {
+            try {
+                row.systemApp = row.lockedImportance =
+                        sINM.isPermissionFixed(app.packageName, row.userId);
+            } catch (RemoteException e) {
+                Log.w(TAG, "Error calling NMS", e);
+            }
+        } else {
+            row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
+            List<String> roles = rm.getHeldRolesFromController(app.packageName);
+            if (roles.contains(RoleManager.ROLE_DIALER)
+                    || roles.contains(RoleManager.ROLE_EMERGENCY)) {
+                row.systemApp = true;
+            }
+            final String[] nonBlockablePkgs = context.getResources().getStringArray(
+                    com.android.internal.R.array.config_nonBlockableNotificationPackages);
+            markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
         }
-        final String[] nonBlockablePkgs = context.getResources().getStringArray(
-                com.android.internal.R.array.config_nonBlockableNotificationPackages);
-        markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
     }
 
     @VisibleForTesting static void markAppRowWithBlockables(String[] nonBlockablePkgs, AppRow row,
@@ -651,6 +663,11 @@ public class NotificationBackend {
             Log.w(TAG, "Error calling NoMan", e);
         }
         return false;
+    }
+
+    @VisibleForTesting
+    void setNm(INotificationManager inm) {
+        sINM = inm;
     }
 
     /**

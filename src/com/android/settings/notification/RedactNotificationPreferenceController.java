@@ -32,6 +32,7 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
@@ -144,6 +145,11 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
         }
 
         return AVAILABLE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_notifications;
     }
 
     @Override

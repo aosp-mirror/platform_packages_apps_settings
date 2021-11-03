@@ -16,6 +16,9 @@
 
 package com.android.settings.notification;
 
+import static android.os.UserHandle.USER_SYSTEM;
+import static android.provider.Settings.*;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertFalse;
@@ -24,6 +27,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.app.INotificationManager;
 import android.app.role.RoleManager;
 import android.app.usage.UsageEvents;
 import android.bluetooth.BluetoothAdapter;
@@ -33,6 +37,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
+import android.provider.Settings;
 
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -63,11 +68,16 @@ public class NotificationBackendTest {
     @Mock
     CachedBluetoothDeviceManager mCbm;
     ComponentName mCn = new ComponentName("a", "b");
+    @Mock
+    INotificationManager mInm;
+    NotificationBackend mNotificationBackend;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mBm.getCachedDeviceManager()).thenReturn(mCbm);
+        mNotificationBackend = new NotificationBackend();
+        mNotificationBackend.setNm(mInm);
     }
 
     @Test
@@ -99,6 +109,46 @@ public class NotificationBackendTest {
                 mock(PackageManager.class), rm, pi);
 
         assertTrue(appRow.systemApp);
+    }
+
+    @Test
+    public void testMarkAppRow_fixedPermission() throws Exception {
+        Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
+
+        PackageInfo pi = new PackageInfo();
+        pi.packageName = "test";
+        pi.applicationInfo = new ApplicationInfo();
+        pi.applicationInfo.packageName = "test";
+        pi.applicationInfo.uid = 123;
+
+        when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(true);
+
+        AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
+                mock(PackageManager.class), mock(RoleManager.class), pi);
+
+        assertTrue(appRow.systemApp);
+        assertTrue(appRow.lockedImportance);
+    }
+
+    @Test
+    public void testMarkAppRow_notFixedPermission() throws Exception {
+        Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
+
+        PackageInfo pi = new PackageInfo();
+        pi.packageName = "test";
+        pi.applicationInfo = new ApplicationInfo();
+        pi.applicationInfo.packageName = "test";
+        pi.applicationInfo.uid = 123;
+
+        when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(false);
+
+        AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
+                mock(PackageManager.class), mock(RoleManager.class), pi);
+
+        assertFalse(appRow.systemApp);
+        assertFalse(appRow.lockedImportance);
     }
 
     @Test

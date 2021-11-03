@@ -104,6 +104,7 @@ public class SlicesDatabaseAccessorTest {
         assertThat(data.getFragmentClassName()).isEqualTo(SliceTestUtils.FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isNull();
         assertThat(data.getPreferenceController()).isEqualTo(SliceTestUtils.FAKE_CONTROLLER_NAME);
+        assertThat(data.getHighlightMenuRes()).isEqualTo(SliceTestUtils.FAKE_HIGHLIGHT_MENU_RES);
         assertThat(data.getUnavailableSliceSubtitle()).isNull();
     }
 
@@ -125,6 +126,7 @@ public class SlicesDatabaseAccessorTest {
         assertThat(data.getFragmentClassName()).isEqualTo(SliceTestUtils.FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isNull();
         assertThat(data.getPreferenceController()).isEqualTo(SliceTestUtils.FAKE_CONTROLLER_NAME);
+        assertThat(data.getHighlightMenuRes()).isEqualTo(SliceTestUtils.FAKE_HIGHLIGHT_MENU_RES);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -159,6 +161,7 @@ public class SlicesDatabaseAccessorTest {
         assertThat(data.getFragmentClassName()).isEqualTo(SliceTestUtils.FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isEqualTo(uri);
         assertThat(data.getPreferenceController()).isEqualTo(SliceTestUtils.FAKE_CONTROLLER_NAME);
+        assertThat(data.getHighlightMenuRes()).isEqualTo(SliceTestUtils.FAKE_HIGHLIGHT_MENU_RES);
     }
 
     @Test(expected = IllegalStateException.class)
@@ -303,6 +306,7 @@ public class SlicesDatabaseAccessorTest {
         assertThat(data.getFragmentClassName()).isEqualTo(SliceTestUtils.FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isNull();
         assertThat(data.getPreferenceController()).isEqualTo(SliceTestUtils.FAKE_CONTROLLER_NAME);
+        assertThat(data.getHighlightMenuRes()).isEqualTo(SliceTestUtils.FAKE_HIGHLIGHT_MENU_RES);
         assertThat(data.getUnavailableSliceSubtitle()).isNull();
     }
 
@@ -324,6 +328,7 @@ public class SlicesDatabaseAccessorTest {
         assertThat(data.getFragmentClassName()).isEqualTo(SliceTestUtils.FAKE_FRAGMENT_NAME);
         assertThat(data.getUri()).isNull();
         assertThat(data.getPreferenceController()).isEqualTo(SliceTestUtils.FAKE_CONTROLLER_NAME);
+        assertThat(data.getHighlightMenuRes()).isEqualTo(SliceTestUtils.FAKE_HIGHLIGHT_MENU_RES);
         assertThat(data.getUnavailableSliceSubtitle()).isEqualTo(subtitle);
     }
 
