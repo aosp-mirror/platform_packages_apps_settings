@@ -103,6 +103,9 @@ public interface CustomSliceable extends Sliceable {
         return true;
     }
 
+    @Override
+    int getSliceHighlightMenuRes();
+
     /**
      * Build an instance of a {@link CustomSliceable} which has a {@link Context}-only constructor.
      */

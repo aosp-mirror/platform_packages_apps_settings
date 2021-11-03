@@ -526,8 +526,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                     ? mTrapezoidColor
                     : mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
                         ? mTrapezoidSolidColor : mTrapezoidColor;
-            final boolean isHover = mHoveredIndex == index && isValidToDraw(mHoveredIndex);
-            mTrapezoidPaint.setColor(isHover ? mTrapezoidHoverColor : trapezoidColor);
+            final boolean isHoverState =
+                mIsSlotsClickabled && mHoveredIndex == index && isValidToDraw(mHoveredIndex);
+            mTrapezoidPaint.setColor(isHoverState ? mTrapezoidHoverColor : trapezoidColor);
 
             final float leftTop = round(trapezoidBottom - mLevels[index] * unitHeight);
             final float rightTop = round(trapezoidBottom - mLevels[index + 1] * unitHeight);

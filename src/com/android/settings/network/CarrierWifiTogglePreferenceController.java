@@ -22,6 +22,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
@@ -86,6 +87,11 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
         super.displayPreference(screen);
         mCarrierNetworkPreference = screen.findPreference(CARRIER_WIFI_NETWORK_PREF_KEY);
         updateCarrierNetworkPreference();
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_network;
     }
 
     @Override

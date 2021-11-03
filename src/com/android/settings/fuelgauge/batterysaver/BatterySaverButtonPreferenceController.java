@@ -119,6 +119,11 @@ public class BatterySaverButtonPreferenceController extends
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_battery;
+    }
+
+    @Override
     public void onPowerSaveModeChanged() {
         mHandler.postDelayed(() -> onPowerSaveModeChangedInternal(),
                 SWITCH_ANIMATION_DURATION);

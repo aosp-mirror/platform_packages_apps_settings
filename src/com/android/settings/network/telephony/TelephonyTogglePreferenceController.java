@@ -65,6 +65,12 @@ public abstract class TelephonyTogglePreferenceController extends TogglePreferen
         return false;
     }
 
+    @Override
+    public int getSliceHighlightMenuRes() {
+        // not needed since it's not sliceable
+        return 0;
+    }
+
     /**
      * Get carrier config based on specific subscription id.
      *
