@@ -91,7 +91,7 @@ public class BubbleNotificationPreferenceController extends
     @Override
     public int getSliceHighlightMenuRes() {
         // not needed since it's not sliceable
-        return 0;
+        return NO_RES;
     }
 
     @Override
