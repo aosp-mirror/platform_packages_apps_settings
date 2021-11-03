@@ -856,7 +856,7 @@ public class AdvancedPowerUsageDetailTest {
                 .thenReturn(BatteryOptimizeUtils.MODE_UNRESTRICTED);
         mFragment.mEnableTriState = false;
 
-        mFragment.notifyBackupManager();
+        mFragment.onPause();
 
         verifyZeroInteractions(mBackupManager);
     }
