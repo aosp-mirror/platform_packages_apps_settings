@@ -77,6 +77,6 @@ public class BiometricSettingsKeyguardPreferenceController extends TogglePrefere
     @Override
     public int getSliceHighlightMenuRes() {
         // not needed since it's not sliceable
-        return 0;
+        return NO_RES;
     }
 }

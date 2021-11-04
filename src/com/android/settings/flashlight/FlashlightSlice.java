@@ -120,7 +120,7 @@ public class FlashlightSlice implements CustomSliceable {
     @Override
     public int getSliceHighlightMenuRes() {
         // no landing page in Settings
-        return 0;
+        return NO_RES;
     }
 
     private static String getCameraId(Context context) throws CameraAccessException {
