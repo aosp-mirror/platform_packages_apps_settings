@@ -16,7 +16,6 @@
 
 package com.android.settings.wifi;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 import android.content.DialogInterface;
@@ -357,12 +356,6 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             Log.d(TAG, "Failed to get the calling package, don't return the result.");
             EventLog.writeEvent(0x534e4554, "185126813", -1 /* UID */, "no calling package");
             return false;
-        }
-
-        if (getPackageManager().checkPermission(ACCESS_COARSE_LOCATION, callingPackage)
-                == PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "The calling package has ACCESS_COARSE_LOCATION permission for result.");
-            return true;
         }
 
         if (getPackageManager().checkPermission(ACCESS_FINE_LOCATION, callingPackage)
