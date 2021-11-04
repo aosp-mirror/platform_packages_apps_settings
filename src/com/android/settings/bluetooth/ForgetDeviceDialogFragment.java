@@ -29,7 +29,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
@@ -73,8 +72,6 @@ public class ForgetDeviceDialogFragment extends InstrumentedDialogFragment {
         };
         Context context = getContext();
         mDevice = getDevice(context);
-        final boolean untetheredHeadset = BluetoothUtils.getBooleanMetaData(
-                mDevice.getDevice(), BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET);
 
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setPositiveButton(R.string.bluetooth_unpair_dialog_forget_confirm_button,
@@ -82,9 +79,7 @@ public class ForgetDeviceDialogFragment extends InstrumentedDialogFragment {
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
         dialog.setTitle(R.string.bluetooth_unpair_dialog_title);
-        dialog.setMessage(context.getString(untetheredHeadset
-                        ? R.string.bluetooth_untethered_unpair_dialog_body
-                        : R.string.bluetooth_unpair_dialog_body,
+        dialog.setMessage(context.getString(R.string.bluetooth_unpair_dialog_body,
                 mDevice.getName()));
         return dialog;
     }

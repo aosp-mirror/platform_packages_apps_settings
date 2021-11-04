@@ -58,6 +58,7 @@ import androidx.preference.PreferenceManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.activityembedding.SplitStateObserver;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
@@ -255,11 +256,8 @@ public class SettingsActivity extends SettingsBaseActivity
         // Should happen before any call to getIntent()
         getMetaData();
         final Intent intent = getIntent();
-        if (shouldShowTwoPaneDeepLink(intent)) {
-            launchHomepageForTwoPaneDeepLink(intent);
-            finishAndRemoveTask();
-            return;
-        }
+
+        registerSplitStateObserverForTwoPaneDeepLink();
 
         final FeatureFactory factory = FeatureFactory.getFactory(this);
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
@@ -364,6 +362,29 @@ public class SettingsActivity extends SettingsBaseActivity
         }
     }
 
+    private void registerSplitStateObserverForTwoPaneDeepLink() {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
+            return;
+        }
+
+        final SplitStateObserver splitStateObserver = new SplitStateObserver(this /* activity*/,
+                true /* listenOnce */,
+                splitInfos -> {
+                    if (!splitInfos.isEmpty()) {
+                        // It's already in 2-pane and no need to go 2-pane deep link flow.
+                        return;
+                    }
+
+                    if (shouldShowTwoPaneDeepLink(getIntent())) {
+                        launchHomepageForTwoPaneDeepLink(getIntent());
+                        finishAndRemoveTask();
+                        return;
+                    }
+                }
+            );
+        getLifecycle().addObserver(splitStateObserver);
+    }
+
     private boolean isSubSettings(Intent intent) {
         return this instanceof SubSettings ||
             intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
@@ -413,10 +434,6 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     private boolean shouldShowTwoPaneDeepLink(Intent intent) {
-        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
-            return false;
-        }
-
         // Only starts trampoline for deep links. Should return false for all the cases that
         // Settings app starts SettingsActivity or SubSetting by itself.
         if (intent.getAction() == null) {
@@ -431,11 +448,6 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         if (isSubSettings(intent)) {
-            return false;
-        }
-
-        if (intent.getBooleanExtra(SettingsHomepageActivity.EXTRA_IS_FROM_SETTINGS_HOMEPAGE,
-                /* defaultValue */ false)) {
             return false;
         }
 
