@@ -91,6 +91,7 @@ public class Settings extends SettingsActivity {
     public static class WifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiSettings2Activity extends SettingsActivity { /* empty */ }
     public static class NetworkProviderSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class NetworkSelectActivity extends SettingsActivity { /* empty */ }
     /** Activity for the Wi-Fi network details settings. */
     public static class WifiDetailsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }

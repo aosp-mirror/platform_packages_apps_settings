@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -97,7 +98,11 @@ public class NetworkSelectSettings extends DashboardFragment {
 
         mUseNewApi = getContext().getResources().getBoolean(
                 com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
-        mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID);
+        Intent intent = getActivity().getIntent();
+        if (intent != null) {
+            mSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        }
 
         mPreferenceCategory = findPreference(PREF_KEY_NETWORK_OPERATORS);
         mStatusMessagePreference = new Preference(getContext());
@@ -120,13 +125,12 @@ public class NetworkSelectSettings extends DashboardFragment {
         mIsAggregationEnabled = getContext().getResources().getBoolean(
                 R.bool.config_network_selection_list_aggregation_enabled);
         Log.d(TAG, "init: mUseNewApi:" + mUseNewApi
-                + " ,mIsAggregationEnabled:" + mIsAggregationEnabled);
+                + " ,mIsAggregationEnabled:" + mIsAggregationEnabled + " ,mSubId:" + mSubId);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         final Activity activity = getActivity();
         if (activity != null) {
             mProgressHeader = setPinnedHeaderView(R.layout.progress_header)
