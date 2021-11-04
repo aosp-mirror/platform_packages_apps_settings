@@ -31,7 +31,6 @@ import com.android.settings.testutils.DatabaseTestUtils;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -90,7 +89,6 @@ public class BatteryDatabaseManagerTest {
     }
 
     @Test
-    @Ignore
     public void allAnomalyFunctions() {
         mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW,
                 AnomalyDatabaseHelper.State.NEW, NOW);
@@ -116,7 +114,6 @@ public class BatteryDatabaseManagerTest {
     }
 
     @Test
-    @Ignore
     public void updateAnomalies_updateSuccessfully() {
         mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW,
                 AnomalyDatabaseHelper.State.NEW, NOW);
@@ -142,7 +139,6 @@ public class BatteryDatabaseManagerTest {
     }
 
     @Test
-    @Ignore
     public void queryAnomalies_removeDuplicateByUid() {
         mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW,
                 AnomalyDatabaseHelper.State.NEW, NOW);
@@ -156,7 +152,6 @@ public class BatteryDatabaseManagerTest {
     }
 
     @Test
-    @Ignore
     public void allActionFunctions() {
         final long timestamp = System.currentTimeMillis();
         mBatteryDatabaseManager.insertAction(AnomalyDatabaseHelper.ActionType.RESTRICTION, UID_OLD,
