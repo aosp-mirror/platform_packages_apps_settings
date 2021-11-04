@@ -27,6 +27,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
@@ -54,6 +55,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import java.net.URISyntaxException;
+import java.util.Set;
 
 /** Settings homepage activity */
 public class SettingsHomepageActivity extends FragmentActivity implements
@@ -79,10 +81,27 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private View mHomepageView;
     private View mSuggestionView;
     private CategoryMixin mCategoryMixin;
+    private Set<HomepageLoadedListener> mLoadedListeners;
 
-    @Override
-    public CategoryMixin getCategoryMixin() {
-        return mCategoryMixin;
+    /** A listener receiving homepage loaded events. */
+    public interface HomepageLoadedListener {
+        /** Called when the homepage is loaded. */
+        void onHomepageLoaded();
+    }
+
+    /**
+     *  Try to register a {@link HomepageLoadedListener}. If homepage is already loaded, the
+     *  listener will not be notified.
+     *
+     *  @return Whether the listener should be registered.
+     */
+    public boolean registerHomepageLoadedListenerIfNeeded(HomepageLoadedListener listener) {
+        if (mHomepageView == null) {
+            return false;
+        } else {
+            mLoadedListeners.add(listener);
+            return true;
+        }
     }
 
     /**
@@ -97,17 +116,25 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
         mHomepageView.setVisibility(View.VISIBLE);
         mHomepageView = null;
+        mLoadedListeners.forEach(listener -> listener.onHomepageLoaded());
+        mLoadedListeners.clear();
+    }
+
+    @Override
+    public CategoryMixin getCategoryMixin() {
+        return mCategoryMixin;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((SettingsApplication) getApplication()).setHomeActivity(this);
+        setHomeActivity();
         setContentView(R.layout.settings_homepage_container);
 
         final View appBar = findViewById(R.id.app_bar_container);
         appBar.setMinimumHeight(getSearchBoxHeight());
         initHomepageContainer();
+        mLoadedListeners = new ArraySet<>();
 
         final Toolbar toolbar = findViewById(R.id.search_action_bar);
         FeatureFactory.getFactory(this).getSearchFeatureProvider()
@@ -156,6 +183,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
         // Launch the intent from deep link for large screen devices.
         launchDeepLinkIntentToRight();
+    }
+
+    protected void setHomeActivity() {
+        ((SettingsApplication) getApplication()).setHomeActivity(this);
     }
 
     private void showSuggestionFragment() {
