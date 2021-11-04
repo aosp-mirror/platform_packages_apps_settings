@@ -52,7 +52,7 @@ public class VibrateForCallsPreferenceFragmentTest {
     @Test
     public void getDefaultKey_applyRampingRinger_keyRampingRinger() {
         Settings.System.putInt(mContentResolver, Settings.System.VIBRATE_WHEN_RINGING, OFF);
-        Settings.Global.putInt(mContentResolver, Settings.Global.APPLY_RAMPING_RINGER, ON);
+        Settings.System.putInt(mContentResolver, Settings.System.APPLY_RAMPING_RINGER, ON);
 
         assertThat(mFragment.getDefaultKey()).isEqualTo(
                 VibrateForCallsPreferenceFragment.KEY_RAMPING_RINGER);
@@ -61,7 +61,7 @@ public class VibrateForCallsPreferenceFragmentTest {
     @Test
     public void getDefaultKey_enableVibrateWhenRinging_keyAlwaysVibrate() {
         Settings.System.putInt(mContentResolver, Settings.System.VIBRATE_WHEN_RINGING, ON);
-        Settings.Global.putInt(mContentResolver, Settings.Global.APPLY_RAMPING_RINGER, OFF);
+        Settings.System.putInt(mContentResolver, Settings.System.APPLY_RAMPING_RINGER, OFF);
 
         assertThat(mFragment.getDefaultKey()).isEqualTo(
                 VibrateForCallsPreferenceFragment.KEY_ALWAYS_VIBRATE);
@@ -70,7 +70,7 @@ public class VibrateForCallsPreferenceFragmentTest {
     @Test
     public void getDefaultKey_notApplyRampingRingerDisableVibrateWhenRinging_keyNeverVibrate() {
         Settings.System.putInt(mContentResolver, Settings.System.VIBRATE_WHEN_RINGING, OFF);
-        Settings.Global.putInt(mContentResolver, Settings.Global.APPLY_RAMPING_RINGER, OFF);
+        Settings.System.putInt(mContentResolver, Settings.System.APPLY_RAMPING_RINGER, OFF);
 
         assertThat(mFragment.getDefaultKey()).isEqualTo(
                 VibrateForCallsPreferenceFragment.KEY_NEVER_VIBRATE);
@@ -80,8 +80,8 @@ public class VibrateForCallsPreferenceFragmentTest {
     public void setDefaultKey_keyRampingRinger_applyRampingRingerDisableVibrateWhenRinging() {
         mFragment.setDefaultKey(VibrateForCallsPreferenceFragment.KEY_RAMPING_RINGER);
 
-        assertThat(Settings.Global.getInt(
-            mContentResolver, Settings.Global.APPLY_RAMPING_RINGER, OFF)).isEqualTo(ON);
+        assertThat(Settings.System.getInt(
+            mContentResolver, Settings.System.APPLY_RAMPING_RINGER, OFF)).isEqualTo(ON);
         assertThat(Settings.System.getInt(
             mContentResolver, Settings.System.VIBRATE_WHEN_RINGING, OFF)).isEqualTo(OFF);
     }
@@ -90,8 +90,8 @@ public class VibrateForCallsPreferenceFragmentTest {
     public void setDefaultKey_keyAlwaysVibrate_notApplyRampingRingerEnableVibrateWhenRinging() {
         mFragment.setDefaultKey(VibrateForCallsPreferenceFragment.KEY_ALWAYS_VIBRATE);
 
-        assertThat(Settings.Global.getInt(
-            mContentResolver, Settings.Global.APPLY_RAMPING_RINGER, OFF)).isEqualTo(OFF);
+        assertThat(Settings.System.getInt(
+            mContentResolver, Settings.System.APPLY_RAMPING_RINGER, OFF)).isEqualTo(OFF);
         assertThat(Settings.System.getInt(
             mContentResolver, Settings.System.VIBRATE_WHEN_RINGING, OFF)).isEqualTo(ON);
     }
@@ -100,8 +100,8 @@ public class VibrateForCallsPreferenceFragmentTest {
     public void setDefaultKey_keyNeverVibrate_notApplyRampingRingerDisableVibrateWhenRinging() {
         mFragment.setDefaultKey(VibrateForCallsPreferenceFragment.KEY_NEVER_VIBRATE);
 
-        assertThat(Settings.Global.getInt(
-            mContentResolver, Settings.Global.APPLY_RAMPING_RINGER, OFF)).isEqualTo(OFF);
+        assertThat(Settings.System.getInt(
+            mContentResolver, Settings.System.APPLY_RAMPING_RINGER, OFF)).isEqualTo(OFF);
         assertThat(Settings.System.getInt(
             mContentResolver, Settings.System.VIBRATE_WHEN_RINGING, OFF)).isEqualTo(OFF);
     }

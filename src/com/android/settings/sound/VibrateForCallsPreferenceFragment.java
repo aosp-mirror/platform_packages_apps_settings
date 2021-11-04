@@ -78,18 +78,18 @@ public class VibrateForCallsPreferenceFragment extends RadioButtonPickerFragment
         if (TextUtils.equals(key, KEY_ALWAYS_VIBRATE)) {
             Settings.System.putInt(
                     getContext().getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, ON);
-            Settings.Global.putInt(
-                    getContext().getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, OFF);
+            Settings.System.putInt(
+                    getContext().getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, OFF);
         } else if (TextUtils.equals(key, KEY_RAMPING_RINGER)) {
             Settings.System.putInt(
                     getContext().getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, OFF);
-            Settings.Global.putInt(
-                    getContext().getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, ON);
+            Settings.System.putInt(
+                    getContext().getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, ON);
         } else {
             Settings.System.putInt(
                     getContext().getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, OFF);
-            Settings.Global.putInt(
-                    getContext().getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, OFF);
+            Settings.System.putInt(
+                    getContext().getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, OFF);
         }
     }
 
@@ -104,9 +104,9 @@ public class VibrateForCallsPreferenceFragment extends RadioButtonPickerFragment
 
     @Override
     protected String getDefaultKey() {
-        if (Settings.Global.getInt(
+        if (Settings.System.getInt(
                  getContext().getContentResolver(),
-                 Settings.Global.APPLY_RAMPING_RINGER, OFF) == ON) {
+                 Settings.System.APPLY_RAMPING_RINGER, OFF) == ON) {
             return KEY_RAMPING_RINGER;
         } else if (Settings.System.getInt(
                     getContext().getContentResolver(),

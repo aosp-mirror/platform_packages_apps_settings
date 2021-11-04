@@ -295,8 +295,8 @@ public class AccessibilitySettings extends DashboardFragment {
     }
 
     static boolean isRampingRingerEnabled(final Context context) {
-        return Settings.Global.getInt(
-                context.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 0) == 1;
+        return Settings.System.getInt(
+                context.getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, 0) == 1;
     }
 
     @VisibleForTesting

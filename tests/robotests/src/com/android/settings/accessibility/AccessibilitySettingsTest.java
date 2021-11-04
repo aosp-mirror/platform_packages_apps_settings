@@ -146,16 +146,16 @@ public class AccessibilitySettingsTest {
     @Test
     @Config(shadows = {ShadowDeviceConfig.class})
     public void isRampingRingerEnabled_settingsFlagOn_Enabled() {
-        Settings.Global.putInt(
-                mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, ON);
+        Settings.System.putInt(
+                mContext.getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, ON);
         assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isTrue();
     }
 
     @Test
     @Config(shadows = {ShadowDeviceConfig.class})
     public void isRampingRingerEnabled_settingsFlagOff_Disabled() {
-        Settings.Global.putInt(
-                mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, OFF);
+        Settings.System.putInt(
+                mContext.getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, OFF);
         assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isFalse();
     }
 
