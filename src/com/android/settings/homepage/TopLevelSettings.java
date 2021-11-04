@@ -201,7 +201,8 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
-        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext())) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext())
+                || !(getActivity() instanceof SettingsHomepageActivity)) {
             return super.onCreateAdapter(preferenceScreen);
         }
 

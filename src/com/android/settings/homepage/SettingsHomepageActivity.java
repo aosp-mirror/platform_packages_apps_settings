@@ -95,7 +95,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (mHomepageView == null) {
             return false;
         } else {
-            mLoadedListeners.add(listener);
+            if (!mLoadedListeners.contains(listener)) {
+                mLoadedListeners.add(listener);
+            }
             return true;
         }
     }
@@ -109,11 +111,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
         Log.i(TAG, "showHomepageWithSuggestion: " + showSuggestion);
+        final View homepageView = mHomepageView;
         mSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
-        mHomepageView.setVisibility(View.VISIBLE);
         mHomepageView = null;
+
         mLoadedListeners.forEach(listener -> listener.onHomepageLoaded());
         mLoadedListeners.clear();
+        homepageView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -195,7 +199,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mSuggestionView = findViewById(R.id.suggestion_content);
         mHomepageView = findViewById(R.id.settings_homepage_container);
         // Hide the homepage for preparing the suggestion.
-        mHomepageView.setVisibility(View.GONE);
+        mHomepageView.setVisibility(View.INVISIBLE);
         // Schedule a timer to show the homepage and hide the suggestion on timeout.
         mHomepageView.postDelayed(() -> showHomepageWithSuggestion(false),
                 HOMEPAGE_LOADING_TIMEOUT_MS);
