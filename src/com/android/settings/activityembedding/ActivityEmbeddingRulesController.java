@@ -111,6 +111,16 @@ public class ActivityEmbeddingRulesController {
 
         registerTwoPanePairRule(
                 context,
+                new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
+                        SettingsHomepageActivity.ALIAS_DEEP_LINK),
+                secondaryComponent,
+                secondaryIntentAction,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                clearTop);
+
+        registerTwoPanePairRule(
+                context,
                 getComponentName(context, SettingsHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
