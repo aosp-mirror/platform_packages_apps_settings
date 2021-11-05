@@ -175,14 +175,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     if (fragment instanceof TopLevelSettings
                             && ActivityEmbeddingUtils.isEmbeddingActivityEnabled(mContext)) {
                         // Register the rule for injected apps.
-                        ActivityEmbeddingRulesController.registerTwoPanePairRule(mContext,
-                                new ComponentName(activity.getPackageName(),
-                                        com.android.settings.Settings.class.getName()),
-                                new ComponentName(tile.getPackageName(),
-                                        tile.getComponentName()),
+                        ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+                                mContext,
+                                new ComponentName(tile.getPackageName(), tile.getComponentName()),
                                 null /* secondaryIntentAction */,
-                                true /* finishPrimaryWithSecondary */,
-                                true /* finishSecondaryWithPrimary */,
                                 true /* clearTop */);
 
                         // Highlight preference ui.
