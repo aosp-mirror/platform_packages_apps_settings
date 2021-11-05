@@ -310,7 +310,7 @@ public class WifiDialogActivityTest {
     }
 
     @Test
-    public void hasPermissionForResult_hasCoarseLocationPermission_returnTrue() {
+    public void hasPermissionForResult_hasCoarseLocationPermission_returnFalse() {
         WifiDialogActivity activity = spy(Robolectric.setupActivity(WifiDialogActivity.class));
         when(activity.getCallingPackage()).thenReturn(CALLING_PACKAGE);
         when(activity.getPackageManager()).thenReturn(mPackageManager);
@@ -321,7 +321,7 @@ public class WifiDialogActivityTest {
 
         final boolean result = activity.hasPermissionForResult();
 
-        assertThat(result).isTrue();
+        assertThat(result).isFalse();
     }
 
     @Test
