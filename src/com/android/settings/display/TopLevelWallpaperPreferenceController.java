@@ -31,6 +31,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -102,6 +103,11 @@ public class TopLevelWallpaperPreferenceController extends BasePreferenceControl
                     mContext)) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             }
+            ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+                    mContext,
+                    intent.getComponent(),
+                    null /* secondaryIntentAction */,
+                    true /* clearTop */);
             preference.getContext().startActivity(intent);
             return true;
         }
