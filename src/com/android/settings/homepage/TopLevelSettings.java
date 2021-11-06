@@ -100,7 +100,7 @@ public class TopLevelSettings extends DashboardFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         // Register SplitPairRule for SubSettings.
-        ActivityEmbeddingRulesController.registerSubSettingsPairRuleIfNeeded(getContext(),
+        ActivityEmbeddingRulesController.registerSubSettingsPairRule(getContext(),
                 true /* clearTop */);
 
         setHighlightPreferenceKey(preference.getKey());
@@ -201,7 +201,8 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
-        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext())) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext())
+                || !(getActivity() instanceof SettingsHomepageActivity)) {
             return super.onCreateAdapter(preferenceScreen);
         }
 

@@ -73,6 +73,9 @@ public class ActivityEmbeddingRulesController {
             boolean finishPrimaryWithSecondary,
             boolean finishSecondaryWithPrimary,
             boolean clearTop) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
+            return;
+        }
         final Set<SplitPairFilter> filters = new HashSet<>();
         filters.add(new SplitPairFilter(primaryComponent, secondaryComponent,
                 secondaryIntentAction));
@@ -87,18 +90,55 @@ public class ActivityEmbeddingRulesController {
                 LayoutDirection.LOCALE));
     }
 
+    /**
+     * Register a new SplitPairRule for Settings home. Because homepage is able to be opened by
+     * {@link Settings} or {@link SettingsHomepageActivity}, we register split rule twice for
+     * two cases.
+     */
+    public static void registerTwoPanePairRuleForSettingsHome(Context context,
+            ComponentName secondaryComponent,
+            String secondaryIntentAction,
+            boolean clearTop) {
+
+        registerTwoPanePairRule(
+                context,
+                getComponentName(context, Settings.class),
+                secondaryComponent,
+                secondaryIntentAction,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                clearTop);
+
+        registerTwoPanePairRule(
+                context,
+                new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
+                        SettingsHomepageActivity.ALIAS_DEEP_LINK),
+                secondaryComponent,
+                secondaryIntentAction,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                clearTop);
+
+        registerTwoPanePairRule(
+                context,
+                getComponentName(context, SettingsHomepageActivity.class),
+                secondaryComponent,
+                secondaryIntentAction,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                clearTop);
+    }
+
     /** Register a SplitPairRule for SubSettings if the device supports 2-pane. */
-    public static void registerSubSettingsPairRuleIfNeeded(Context context, boolean clearTop) {
+    public static void registerSubSettingsPairRule(Context context, boolean clearTop) {
         if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
             return;
         }
 
-        registerTwoPanePairRule(context,
-                getComponentName(context, Settings.class),
+        registerTwoPanePairRuleForSettingsHome(
+                context,
                 getComponentName(context, SubSettings.class),
                 null /* secondaryIntentAction */,
-                true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */,
                 clearTop);
     }
 
@@ -140,7 +180,7 @@ public class ActivityEmbeddingRulesController {
 
     @NonNull
     private static ComponentName getComponentName(Context context,
-                Class<? extends Activity> activityClass) {
+            Class<? extends Activity> activityClass) {
         return new ComponentName(context.getPackageName(), activityClass.getName());
     }
 }
