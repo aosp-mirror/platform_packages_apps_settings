@@ -451,6 +451,11 @@ public class SettingsActivity extends SettingsBaseActivity
             return false;
         }
 
+        if (intent.getBooleanExtra(SettingsHomepageActivity.EXTRA_IS_FROM_SETTINGS_HOMEPAGE,
+                /* defaultValue */ false)) {
+            return false;
+        }
+
         if (TextUtils.equals(intent.getAction(), Intent.ACTION_CREATE_SHORTCUT)) {
             // Returns false to show full screen for Intent.ACTION_CREATE_SHORTCUT because
             // - Launcher startActivityForResult for Intent.ACTION_CREATE_SHORTCUT and activity
