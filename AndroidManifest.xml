@@ -1196,6 +1196,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.security.LockscreenDashboardFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_display"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -1222,6 +1224,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.deviceinfo.legal.ModuleLicensesDashboard" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_about_device"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -1242,6 +1246,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1265,6 +1271,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.managedomainurls.ManageDomainUrls" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity android:name="Settings$AppMemoryUsageActivity"
@@ -1277,6 +1285,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.ProcessStatsUi" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -1289,6 +1299,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1395,6 +1407,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1416,6 +1430,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2251,6 +2267,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.network.apn.ApnEditor" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_network"/>
         </activity>
 
         <activity
@@ -2279,6 +2297,8 @@
                        android:value="com.android.settings.development.DevelopmentSettingsDashboardFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_system"/>
         </activity>
 
         <!-- The opposite of DevelopmentSettingsActivity, it's no-op and only enabled when the real
@@ -2313,6 +2333,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.print.PrintSettingsFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_connected_devices"/>
         </activity>
 
         <activity android:name="Settings$PrintJobSettingsActivity"
@@ -2325,6 +2347,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.print.PrintJobSettingsFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_connected_devices"/>
         </activity>
 
         <activity android:name=".development.AppPicker"
@@ -2345,7 +2369,10 @@
                   android:label="@string/accessor_info_title" />
 
         <activity android:name="Settings$WebViewAppPickerActivity"
-                  android:label="@string/select_webview_provider_dialog_title" />
+                  android:label="@string/select_webview_provider_dialog_title">
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_system"/>
+        </activity>
 
         <activity android:name="Settings$BugReportHandlerPickerActivity"
             android:label="@string/bug_report_handler_title"
@@ -2359,6 +2386,8 @@
                 android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.bugreporthandler.BugReportHandlerPicker" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity android:name=".bluetooth.BluetoothPairingDialog"

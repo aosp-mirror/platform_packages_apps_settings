@@ -94,17 +94,16 @@ public class SearchResultTrampoline extends Activity {
 
         if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
             startActivity(intent);
-        } else if (isFromSettingsIntelligence(callingActivity)) {
+        } else if (isSettingsIntelligence(callingActivity)) {
             // Register SplitPairRule for SubSettings, set clearTop false to prevent unexpected back
             // navigation behavior.
-            ActivityEmbeddingRulesController.registerSubSettingsPairRuleIfNeeded(this,
+            ActivityEmbeddingRulesController.registerSubSettingsPairRule(this,
                     false /* clearTop */);
             // TODO: pass menu key to homepage
             intent.setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else {
             // Two-pane case
-            intent.setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(SettingsActivity.getTrampolineIntent(intent, highlightMenuKey));
         }
 
@@ -112,7 +111,7 @@ public class SearchResultTrampoline extends Activity {
         finish();
     }
 
-    private boolean isFromSettingsIntelligence(ComponentName callingActivity) {
+    private boolean isSettingsIntelligence(ComponentName callingActivity) {
         return callingActivity != null && TextUtils.equals(
                 callingActivity.getPackageName(),
                 FeatureFactory.getFactory(this).getSearchFeatureProvider()
