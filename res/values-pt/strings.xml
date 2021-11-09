@@ -54,7 +54,7 @@
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Tornar maior"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Usar o giro automático"</string>
     <string name="smart_rotate_text_headline" msgid="436277795183609578">"A detecção facial usa a câmera frontal para melhorar a precisão do giro automático. As imagens nunca são armazenadas ou enviadas ao Google."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Texto de amostra"</string>
+    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemplo de texto"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"O Mágico de Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Capítulo 11: A maravilhosa Cidade das Esmeraldas de Oz"</string>
     <string name="font_size_preview_text_body" msgid="3323732544011097199">"Mesmo com os olhos protegidos pelos óculos verdes, Dorothy e seus amigos foram ofuscados pelo brilho da magnífica cidade. As ruas estavam repletas de belas casas, todas feitas de mármore verde e cravejadas de esmeraldas brilhantes por toda a parte. Eles caminharam pela calçada do mesmo mármore verde, e, onde os blocos se encontravam, havia fileiras de esmeraldas bem próximas umas das outras, brilhantes à luz do sol. As janelas eram de vidro verde. Até mesmo o céu sobre a cidade era esverdeado, e os raios do sol eram verdes. \n\nHavia muitas pessoas, homens, mulheres e crianças, caminhando por lá, e todos vestiam roupas verdes e tinham a pele esverdeada. Eles olharam para Dorothy e seus estranhos companheiros com olhos curiosos, e todas as crianças fugiram e se esconderam atrás de suas mães quando viram o Leão; mas ninguém falou com eles. Havia muitas lojas na rua, e Dorothy viu que tudo nelas era verde. Doces verdes e pipoca verde estavam à venda, assim como sapatos verdes, chapéus verdes e roupas verdes de todos os tipos. Em um lugar, um homem estava vendendo limonada verde, e quando as crianças a compravam, Dorothy viu que elas pagavam com moedas verdes. \n\nParecia não haver nenhum cavalo nem animais de nenhuma espécie. Os homens carregavam as coisas em pequenos carrinhos verdes, que eles empurravam à sua frente. Todos pareciam felizes, satisfeitos e prósperos."</string>
@@ -339,7 +339,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Cancelar"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Não, obrigado."</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Agora não."</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Aceito"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Mais"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Desbloquear com seu rosto"</string>
@@ -397,6 +397,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Seu modelo de rosto será excluído de maneira permanente e segura.\n\nApós a exclusão, você precisará usar a impressão digital, o PIN, o padrão ou a senha para desbloquear o smartphone ou fazer a autenticação em apps."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Usar o Desbloqueio facial para acessar o smartphone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Impressão digital"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Impressão digital do trabalho"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Gerenciar impressões digitais"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Usar impressão digital para"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Adicionar impressão digital"</string>
@@ -484,8 +485,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Mais uma vez"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Siga o ícone de impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Repita o processo de tocar e levantar o dedo para registrar todas as partes da sua impressão digital"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Toque na tela e a mantenha pressionada sempre que o ícone de impressão digital se mover. Isso ajudará a fazer uma captura completa."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Isso ajuda a capturar toda a impressão digital"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Toque na tela e a mantenha pressionada sempre que o ícone de impressão digital se mover. Isso ajuda na captura da sua impressão digital."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Coloque a ponta do dedo no sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Por fim, coloque as laterais do dedo"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Coloque a lateral da sua impressão digital no sensor e mantenha o dedo parado por alguns instantes. Depois, mude para o outro lado"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Isso ajuda na captura da sua impressão digital"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -998,7 +1002,7 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Busca por Wi‑Fi ativada"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Opções avançadas"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Lista suspensa \"Opções avançadas\""</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"expandir"</string>
+    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"abrir"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Nome da rede"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Digite o SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Segurança"</string>
@@ -2257,7 +2261,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Escolher o gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Escolher widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Criar widget e permitir acesso?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Após a criação do widget, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> poderá acessar todos os dados exibidos."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Após a criação do widget, o aplicativo poderá acessar todos os itens exibidos na tela.\n\nAplicativo: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nWidget: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Sempre permitir que <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> crie widgets e acesse os dados"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Estatísticas de uso"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Estatísticas de uso"</string>
@@ -2270,7 +2274,7 @@
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Tela, interação, áudio"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Configuração visual"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"É possível personalizar este dispositivo para atender às suas necessidades. Esses recursos de acessibilidade podem ser alterados posteriormente em \"Configurar\"."</string>
-    <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Alterar tamanho da fonte"</string>
+    <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Mudar o tamanho da fonte"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Leitor de tela"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Legendas"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Áudio"</string>
@@ -2667,6 +2671,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ver apps com maior uso"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Carregamento temporariamente limitado"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Isso economiza a bateria. Saiba mais."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Retomar o carregamento"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Em determinadas condições, como temperaturas altas ou longos períodos de carregamento, a carga pode ser limitada a <xliff:g id="PERCENT">%1$s</xliff:g> para preservar a integridade da bateria.\n\nQuando sair de uma condição assim, o smartphone voltará a ser carregado normalmente."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Em determinadas condições, como temperaturas altas ou longos períodos de carregamento, a carga pode ser limitada a <xliff:g id="PERCENT">%1$s</xliff:g> para preservar a integridade da bateria.\n\nQuando sair de uma condição assim, o tablet voltará a ser carregado normalmente."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Como o smartphone foi usado mais que o normal, é possível que a bateria acabe antes do esperado.\n\nVeja os apps que mais consomem bateria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Como o tablet foi usado além do normal, é possível que a bateria acabe antes do esperado.\n\nVeja os apps que mais consomem bateria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Como o dispositivo foi usado além do normal, é possível que a bateria acabe antes do esperado.\n\nVeja os apps que mais consomem bateria:"</string>
@@ -2876,8 +2883,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Uso do sistema nas últimas 24h"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Uso do sistema em <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Uso do app em <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"manhã"</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"tarde/noite"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: menos de um minuto"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Segundo plano: menos de um minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3397,8 +3402,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Chamada avançada"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Chamada 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Usar serviços de LTE para melhorar a comunicação por voz e de outros tipos (recomendado)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Usar os serviços 4G para melhorar comunicações por voz e de outros tipos (recomendado)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Usar serviços de LTE para melhorar chamadas de voz (recomendado)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Usar serviços 4G para melhorar chamadas de voz (recomendado)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Usar o 5G em chamadas de voz"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Enviar contatos para a operadora"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Enviar os números de telefone dos contatos para fornecer recursos avançados"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Enviar contatos para a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3592,6 +3599,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"economia de bateria, fixo, persistir, economia de energia, bateria"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rotina, agenda, economia de bateria, economia de energia, bateria, automático, percentagem"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, chamada avançada, chamadas por 4g"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, chamada avançada, chamada 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"adicionar idioma, adicionar um idioma"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"tamanho do texto, letras grandes, fonte grande, texto grande, baixa visão, aumentar texto, ampliador de fonte, aumento de fonte"</string>
     <string name="default_sound" msgid="6604374495015245195">"Som padrão"</string>
@@ -3920,7 +3928,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Permitir que o app <xliff:g id="SERVICE">%1$s</xliff:g> acesse as notificações?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"No Android 12, as notificações aprimoradas substituíram as notificações adaptáveis. Esse recurso exibe ações e respostas sugeridas, além de organizar suas notificações. \n\nAs notificações aprimoradas podem acessar o conteúdo das notificações, incluindo informações pessoais como nomes de contatos e mensagens. Elas também podem dispensar ou responder às notificações, como atender chamadas telefônicas e controlar o Não perturbe."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> acesse as notificações?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"O app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> poderá ler todas as notificações, incluindo informações pessoais, como nomes de contato e o texto das mensagens que você recebe. O app também poderá dispensar notificações ou ativar botões de ação que elas contenham, incluindo atender chamadas telefônicas. \n\nIsso também autoriza o app a ativar ou desativar o modo Não perturbe e alterar as configurações relacionadas."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> poderá ler todas as notificações, incluindo informações pessoais, como nomes de contato e o texto das mensagens que você recebe. O app também poderá adiar ou dispensar notificações ou acionar botões que elas contenham, incluindo atender chamadas telefônicas. \n\nIsso também autoriza o app a ativar ou desativar o modo Não perturbe e mudar as configurações relacionadas."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Se você desativar o acesso a notificações para <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, é possível que o acesso ao Não perturbe também seja desativado."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desativar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>
@@ -4314,7 +4322,7 @@
     <string name="advanced_apps" msgid="7643010673326578815">"Avançado"</string>
     <string name="configure_apps" msgid="5468359087126598115">"Configurar apps"</string>
     <string name="unknown_app" msgid="2027248925719898714">"App desconhecido"</string>
-    <string name="app_permissions" msgid="8666537659217653626">"Gerenciar permissões"</string>
+    <string name="app_permissions" msgid="8666537659217653626">"Gerenciador de permissões"</string>
     <string name="app_permissions_summary" msgid="2709819220672938860">"Apps usando <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="app_permissions_summary_more" msgid="6247952473615352350">"Apps usando <xliff:g id="APPS">%1$s</xliff:g> e mais"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Tocar para ativar"</string>
@@ -5399,6 +5407,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Mantenha o botão liga/desliga pressionado para acionar o Google Assistente"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Menu liga/desliga e de emergência:\nPressione os botões liga/desliga e aumentar volume ao mesmo tempo."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Impedir o toque:\nAtalho disponível no menu de volumes."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Duração do pressionamento"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Ajuste a sensibilidade escolhendo por quanto tempo manter o botão liga/desliga pressionado"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Curto"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Longo"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Mostrar carteira"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Permitir acesso à carteira pela tela de bloqueio e pelas Configurações rápidas"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Mostrar controles do dispositivo"</string>
@@ -5444,7 +5456,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Temporariamente indisponível"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Sem chip"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Preferências de rede"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Conectar-se a redes públicas"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"conexão de rede, internet, sem fio, dados, wifi, wi-fi, wi fi, celular, rede móvel, operadora de celular, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"Ativar o Wi-Fi"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"Desativar o Wi-Fi"</string>
@@ -5462,6 +5473,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Rede W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"Chip"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"CHIP TRANSFERIDO POR DOWNLOAD"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"CHIPS TRANSFERIDOS POR DOWNLOAD"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Ativo"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inativo"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Padrão para <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5539,6 +5551,9 @@
     <string name="sensor_toggle_description" msgid="8248823248606795411">"Para todos os apps e serviços"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Configurações de jogos"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"Ativar o atalho do Painel de jogo etc."</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"Anterior"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"Próxima"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Visualização da cor"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Solicitação de acesso ao chip"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Um dispositivo quer acessar seu chip. Toque para ver detalhes."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Permitir acesso ao chip?"</string>
