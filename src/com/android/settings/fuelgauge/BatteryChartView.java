@@ -57,7 +57,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
 
     private static final int DEFAULT_TRAPEZOID_COUNT = 12;
-    private static final int DEFAULT_TIMESTAMP_COUNT = 5;
+    private static final int DEFAULT_TIMESTAMP_COUNT = 4;
+    private static final int TIMESTAMP_GAPS_COUNT = DEFAULT_TIMESTAMP_COUNT - 1;
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
     private static final long UPDATE_STATE_DELAYED_TIME = 500L;
 
@@ -91,7 +92,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         new Rect[] {new Rect(), new Rect(), new Rect()};
     // For drawing the timestamp information.
     private final Rect[] mTimestampsBounds =
-        new Rect[] {new Rect(), new Rect(), new Rect(), new Rect(), new Rect()};
+        new Rect[] {new Rect(), new Rect(), new Rect(), new Rect()};
 
     @VisibleForTesting
     Handler mHandler = new Handler();
@@ -198,13 +199,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         if (mTimestamps == null) {
             mTimestamps = new String[DEFAULT_TIMESTAMP_COUNT];
         }
-        final long timeSlotOffset = DateUtils.HOUR_IN_MILLIS * 6;
+        final long timeSlotOffset =
+            DateUtils.HOUR_IN_MILLIS * (/*total 24 hours*/ 24 / TIMESTAMP_GAPS_COUNT);
         final boolean is24HourFormat = DateFormat.is24HourFormat(getContext());
         for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
             mTimestamps[index] =
                 ConvertUtils.utcToLocalTimeHour(
                     getContext(),
-                    latestTimestamp - (4 - index) * timeSlotOffset,
+                    latestTimestamp - (TIMESTAMP_GAPS_COUNT - index) * timeSlotOffset,
                     is24HourFormat);
         }
         requestLayout();
@@ -426,8 +428,9 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             final float[] xOffsets = new float[DEFAULT_TIMESTAMP_COUNT];
             final float baselineX = mDividerWidth * .5f;
             final float offsetX = mDividerWidth + unitWidth;
+            final int slotBarOffset = (/*total 12 bars*/ 12) / TIMESTAMP_GAPS_COUNT;
             for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
-                xOffsets[index] = baselineX + index * offsetX * 3;
+                xOffsets[index] = baselineX + index * offsetX * slotBarOffset;
             }
             drawTimestamp(canvas, xOffsets);
         }
@@ -439,13 +442,15 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             mTimestamps[0],
             xOffsets[0] - mTimestampsBounds[0].left,
             getTimestampY(0), mTextPaint);
+        final int latestIndex = DEFAULT_TIMESTAMP_COUNT - 1;
         // Draws the last timestamp info.
         canvas.drawText(
-            mTimestamps[4],
-            xOffsets[4] - mTimestampsBounds[4].width() - mTimestampsBounds[4].left,
-            getTimestampY(4), mTextPaint);
+            mTimestamps[latestIndex],
+            xOffsets[latestIndex] - mTimestampsBounds[latestIndex].width()
+                    - mTimestampsBounds[latestIndex].left,
+            getTimestampY(latestIndex), mTextPaint);
         // Draws the rest of timestamp info since it is located in the center.
-        for (int index = 1; index <= 3; index++) {
+        for (int index = 1; index <= DEFAULT_TIMESTAMP_COUNT - 2; index++) {
             canvas.drawText(
                 mTimestamps[index],
                 xOffsets[index] -

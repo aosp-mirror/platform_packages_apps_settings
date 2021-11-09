@@ -30,7 +30,6 @@ import android.os.UserHandle;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -320,69 +319,36 @@ public final class ConvertUtilsTest {
             .isEqualTo(entry.mConsumePower * ratio);
     }
 
-    @Ignore
     @Test
-    public void testUtcToLocalTime_returnExpectedResult() {
-        ConvertUtils.sZoneId = null;
-        ConvertUtils.sLocale = null;
-        final long timestamp = 1619196786769L;
-        final String expectedZoneId = "America/Los_Angeles";
-        ConvertUtils.sSimpleDateFormat = null;
-        // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTime(mContext, /*timestamp=*/ 0);
-        ConvertUtils.sSimpleDateFormat
-            .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
-        mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
+    public void testGetIndexedUsageMap_hideBackgroundUsageTime_returnsExpectedResult() {
+        final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L};
+        final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
+        final BatteryHistEntry fakeEntry = createBatteryHistEntry(
+            ConvertUtils.FAKE_PACKAGE_NAME, "fake_label", 0, 0L, 0L, 0L);
+        // Adds the index = 0 data.
+        Map<String, BatteryHistEntry> entryMap = new HashMap<>();
+        entryMap.put(fakeEntry.getKey(), fakeEntry);
+        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[0]), entryMap);
+        // Adds the index = 1 data.
+        entryMap = new HashMap<>();
+        entryMap.put(fakeEntry.getKey(), fakeEntry);
+        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[1]), entryMap);
+        // Adds the index = 2 data.
+        entryMap = new HashMap<>();
+        final BatteryHistEntry entry = createBatteryHistEntry(
+            "package3", "label3", 500, 5L, 3600000L, 7200000L);
+        entryMap.put(entry.getKey(), entry);
+        batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[2]), entryMap);
+        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeList(mContext))
+            .thenReturn(Arrays.asList((CharSequence) "package3"));
 
-        assertThat(ConvertUtils.utcToLocalTime(mContext, timestamp))
-            .isEqualTo("Apr 24,2021 00:53:06");
-        assertThat(ConvertUtils.sZoneId).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocale).isEqualTo(new Locale("en_US"));
-    }
+        final Map<Integer, List<BatteryDiffEntry>> purgedResultMap =
+            ConvertUtils.getIndexedUsageMap(
+                mContext, /*timeSlotSize=*/ 1, batteryHistoryKeys, batteryHistoryMap,
+                /*purgeLowPercentageAndFakeData=*/ true);
 
-    @Ignore
-    @Test
-    public void testUtcToLocalTimeHour_12HourFormat_returnExpectedResult() {
-        ConvertUtils.sZoneIdForHour = null;
-        ConvertUtils.sLocaleForHour = null;
-        final long timestamp = 1619000086769L;
-        final String expectedZoneId = "America/Los_Angeles";
-        ConvertUtils.sSimpleDateFormatForHour = null;
-        // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTimeHour(
-            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
-        ConvertUtils.sSimpleDateFormatForHour
-            .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
-        mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
-
-        assertThat(ConvertUtils.utcToLocalTimeHour(
-            mContext, timestamp, /*is24HourFormat=*/ false)).isEqualTo("6");
-        assertThat(ConvertUtils.sZoneIdForHour).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocaleForHour).isEqualTo(new Locale("en_US"));
-    }
-
-    @Ignore
-    @Test
-    public void testUtcToLocalTimeHour_24HourFormat_returnExpectedResult() {
-        ConvertUtils.sZoneIdForHour = null;
-        ConvertUtils.sLocaleForHour = null;
-        final long timestamp = 1619000086769L;
-        final String expectedZoneId = "America/Los_Angeles";
-        ConvertUtils.sSimpleDateFormatForHour = null;
-        // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTimeHour(
-            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
-        ConvertUtils.sSimpleDateFormatForHour
-            .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
-        mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
-
-        assertThat(ConvertUtils.utcToLocalTimeHour(
-            mContext, timestamp, /*is24HourFormat=*/ true)).isEqualTo("18");
-        assertThat(ConvertUtils.sZoneIdForHour).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocaleForHour).isEqualTo(new Locale("en_US"));
+        final BatteryDiffEntry resultEntry = purgedResultMap.get(0).get(0);
+        assertThat(resultEntry.mBackgroundUsageTimeInMs).isEqualTo(0);
     }
 
     @Test
