@@ -178,7 +178,8 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
 
     private boolean getAllowPrivateNotifications(int userId) {
         return Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1, userId) != 0;
+                LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1, userId) != 0
+                && getEnforcedAdmin(userId) == null;
     }
 
     private boolean getLockscreenNotificationsEnabled(int userId) {
