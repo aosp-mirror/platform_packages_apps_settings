@@ -188,7 +188,8 @@ public final class BluetoothPairingService extends Service {
         }
 
         PendingIntent pairIntent = PendingIntent.getService(this, 0, pairingDialogIntent,
-                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT
+                        | PendingIntent.FLAG_IMMUTABLE);
 
         Intent serviceIntent = new Intent(ACTION_DISMISS_PAIRING);
         serviceIntent.setClass(this, BluetoothPairingService.class);
