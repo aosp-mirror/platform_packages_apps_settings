@@ -29,7 +29,6 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -184,35 +183,18 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     }
 
     private void logPowerSaver() {
-        int currentSaverPercentage = getSaverPercentage();
-        String currentSaverScheduleKey = mRadioButtonController.getDefaultKey();
+        final int currentSaverPercentage = getSaverPercentage();
+        final String currentSaverScheduleKey = mRadioButtonController.getDefaultKey();
         if (mSaverScheduleKey.equals(currentSaverScheduleKey)
                 && mSaverPercentage == currentSaverPercentage) {
             return;
         }
-        int scheduleType = -1;
-        int schedulePercentage = -1;
-        switch (currentSaverScheduleKey) {
-            case BatterySaverScheduleRadioButtonsController.KEY_NO_SCHEDULE:
-                scheduleType = SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_NO_SCHEDULE;
-                break;
-            case BatterySaverScheduleRadioButtonsController.KEY_ROUTINE:
-                scheduleType = SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_ROUTINE;
-                break;
-            case BatterySaverScheduleRadioButtonsController.KEY_PERCENTAGE:
-                scheduleType = SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_PERCENTAGE;
-                schedulePercentage = currentSaverPercentage;
-                break;
-            // Unknown schedule type.
-            default:
-                return;
-        }
         FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
-                .action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
-                        Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                                scheduleType),
-                        Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
-                                schedulePercentage));
+                .action(SettingsEnums.FUELGAUGE_BATTERY_SAVER,
+                        SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
+                        SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
+                        currentSaverScheduleKey,
+                        currentSaverPercentage);
     }
 
     private int getSaverPercentage() {
