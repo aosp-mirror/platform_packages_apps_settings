@@ -377,6 +377,17 @@
                 android:value="true" />
         </activity>
 
+        <activity android:name=".Settings$AdaptiveBrightnessActivity"
+            android:label="@string/auto_brightness_title"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.ADAPTIVE_BRIGHTNESS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.display.AutoBrightnessSettings"/>
+        </activity>
+
         <activity
             android:name="Settings$ConfigureWifiSettingsActivity"
             android:label="@string/wifi_configure_settings_preference_title"
