@@ -78,13 +78,14 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"/>
 
-        <com.android.settings.notification.history.NotificationHistoryRecyclerView
-            android:id="@+id/notification_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipChildren="true"
-            android:clipToPadding="true"
-            android:importantForAccessibility="yes"
-            android:scrollbars="none"/>
+    <com.android.settings.notification.history.NotificationHistoryRecyclerView
+        android:id="@+id/notification_list"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:clipToOutline="true"
+        android:importantForAccessibility="yes"
+        android:scrollbars="none"/>
 
 </LinearLayout>

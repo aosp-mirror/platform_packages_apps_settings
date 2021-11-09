@@ -72,6 +72,11 @@ public class NotificationHistoryAdapter extends
     }
 
     @Override
+    public long getItemId(int position) {
+        return mValues.get(position).hashCode();
+    }
+
+    @Override
     public void onBindViewHolder(final @NonNull NotificationHistoryViewHolder holder,
             int position) {
         final HistoricalNotification hn = mValues.get(position);
