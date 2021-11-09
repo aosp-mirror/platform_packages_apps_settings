@@ -272,8 +272,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         if (mWifiManager != null) {
             setLoading(true, false);
             mIsViewLoading = true;
-            getView().postDelayed(mRemoveLoadingRunnable,
-                    mWifiManager.isWifiEnabled() ? 1000 : 100);
         }
     }
 
@@ -431,6 +429,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onStart() {
         super.onStart();
+        if (mIsViewLoading) {
+            final long delayMillis = mWifiManager.isWifiEnabled() ? 1000 : 100;
+            getView().postDelayed(mRemoveLoadingRunnable, delayMillis);
+        }
         if (mIsRestricted) {
             restrictUi();
             return;
