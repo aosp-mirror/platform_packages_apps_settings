@@ -40,7 +40,6 @@ import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -132,7 +131,6 @@ public class HeaderPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testGetSummary() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.label = "bananas";
@@ -140,8 +138,6 @@ public class HeaderPreferenceControllerTest {
         assertEquals("", mController.getSummary());
 
         NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
-        mController.onResume(appRow, null, group, null, null, null, null);
-        assertEquals(appRow.label, mController.getSummary());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
         mController.onResume(appRow, channel, group, null, null, null, null);
@@ -159,7 +155,6 @@ public class HeaderPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testGetSecondSummary() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.label = "bananas";
@@ -167,8 +162,6 @@ public class HeaderPreferenceControllerTest {
         assertEquals("", mController.getSecondSummary());
 
         NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
-        mController.onResume(appRow, null, group, null, null, null, null);
-        assertEquals("", mController.getSecondSummary());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
         mController.onResume(appRow, channel, group, null, null, null, null);
