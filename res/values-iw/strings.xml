@@ -403,6 +403,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"התבנית לזיהוי הפנים תימחק באופן סופי ומאובטח.\n\nלאחר המחיקה, יהיה צורך בטביעת האצבע, בקוד האימות, בקו ביטול הנעילה או בסיסמה שלך כדי לבטל את נעילת הטלפון או כדי לבצע אימות באפליקציות."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"שימוש בפתיחה ע\"י זיהוי הפנים לצורך ביטול הנעילה של הטלפון"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"טביעת אצבע"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"טביעת אצבע לעבודה"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"ניהול טביעות אצבע"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"שימוש בטביעות אצבע ל-"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"הוספת טביעת אצבע"</string>
@@ -492,8 +493,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"ושוב…"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"עוקבים אחר הסמל של טביעת האצבע"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"יש להרים את האצבע ולגעת בחיישן עם חלקים שונים של האצבע לקבלת טביעת אצבע מלאה"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"לוחצים לחיצה ארוכה בכל פעם שסמל טביעת האצבע זז. כך טביעת האצבע תצולם במלואה."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"כך טביעת האצבע תצולם במלואה"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"לוחצים לחיצה ארוכה בכל פעם שסמל טביעת האצבע זז. כך יתועד חלק גדול יותר מהאצבע."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"מניחים את קצה האצבע על החיישן"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"בסוף מניחים את קצוות האצבע"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"מניחים צד אחד של האצבע על החיישן ומחזיקים. אחר כך עוברים לצד השני"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"כך יתועד חלק גדול יותר מהאצבע"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -2305,7 +2309,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"בחירת גאדג\'ט"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"‏בחירת Widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"‏האם ליצור Widget‏ ולאפשר גישה?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"‏לאחר יצירת ה-Widget‏, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> יוכל לגשת לכל הנתונים שהוא מציג."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"אחרי שיוצרים את הווידג\'ט, האפליקציה יכולה לגשת לכל מה שמוצג.\n\nאפליקציה: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nווידג\'ט: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"אני תמיד רוצה לאפשר ל-<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> ליצור וודג\'טים ולגשת לנתונים שלהם"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"סטטיסטיקת שימוש"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"סטטיסטיקת שימוש"</string>
@@ -2729,6 +2733,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"הצגת האפליקציות המובילות במידת השימוש בסוללה"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"הטעינה מוגבלת זמנית"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"לשמירה על חיי הסוללה. מידע נוסף."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"המשך הטעינה"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"במצבים מסוימים, כמו טמפרטורה גבוהה וטעינה במשך הרבה זמן, יכול להיות שתהיה הגבלה של <xliff:g id="PERCENT">%1$s</xliff:g> על הטעינה כדי לשמור על תקינות הסוללה.\n\nכשמצבים כאלה מסתיימים, טעינת הטלפון תחזור למצב הרגיל באופן אוטומטי."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"במצבים מסוימים, כמו טמפרטורה גבוהה וטעינה במשך הרבה זמן, יכול להיות שתהיה הגבלה של <xliff:g id="PERCENT">%1$s</xliff:g> על הטעינה כדי לשמור על תקינות הסוללה.\n\nכשמצבים כאלה מסתיימים, טעינת הטאבלט תחזור למצב הרגיל באופן אוטומטי."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"נעשה שימוש רב מהרגיל בטלפון שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"נעשה שימוש רב מהרגיל בטאבלט שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"נעשה שימוש רב מהרגיל במכשיר שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
@@ -2952,8 +2959,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"צריכת הסוללה של המערכת ב-24 השעות האחרונות"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"צריכת הסוללה על ידי המערכת במשך <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"צריכת הסוללה על ידי האפליקציה במשך <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"AM"</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"PM"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"סה\"כ: פחות מדקה"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"ברקע: פחות מדקה"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"סה\"כ: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3485,8 +3490,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"שיחות טלפון מתקדמות"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"‏שיחות 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"‏שימוש בשירותי LTE כדי לשפר את הקול ודרכי תקשורת אחרות (מומלץ)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"‏שימוש בשירותי 4G משפר את התקשורת הקולית ותקשורת אחרת (מומלץ)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"‏שימוש בשירותי LTE כדי לשפר שיחות קוליות (מומלץ)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"‏שימוש בשירותי 4G כדי לשפר שיחות קוליות (מומלץ)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"‏שימוש ב-5G לביצוע שיחות קוליות"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"שליחת אנשי הקשר לספק"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"שליחת מספרי הטלפון של אנשי הקשר כדי ליהנות מתכונות משופרות"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"לשלוח את אנשי הקשר אל <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3682,6 +3689,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"חיסכון בסוללה, קבוע, מצב קבוע, חיסכון בחשמל, סוללה"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"תרחיש, לוח זמנים, מצב חיסכון בסוללה, חיסכון בחשמל, סוללה, אוטומטי, אחוז"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"‏volte, שיחות טלפון מתקדמות; שיחות 4g"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"‏Vo5G,‏ VoNR,‏ שיחות מתקדמות, התקשרות באמצעות 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"הוספת שפה, להוסיף שפה"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"גודל הטקסט, אותיות גדולות, גופן גדול, טקסט גדול, לקוי ראייה, הגדלת טקסט, מגדיל טקסט"</string>
     <string name="default_sound" msgid="6604374495015245195">"צליל ברירת מחדל"</string>
@@ -4018,7 +4026,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"לאשר לאפליקציה \'<xliff:g id="SERVICE">%1$s</xliff:g>\' לגשת אל ההתראות?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"‏התכונה \'התראות משופרות\' החליפה את \'התראות מותאמות ל-Android\' ב-‏Android 12. התכונה הזו מציגה הצעות לפעולות ולתשובות ומארגנת את ההתראות שלך. \n\nל\'התראות משופרות\' יש גישה לתוכן של התראות, כולל מידע אישי כמו שמות אנשי קשר והודעות. התכונה הזו יכולה גם לסגור התראות או להגיב עליהן (למשל לענות לשיחות טלפון) ולשלוט בתכונה \'נא לא להפריע\'."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"לאשר לאפליקציה \'<xliff:g id="SERVICE">%1$s</xliff:g>\' לגשת אל ההתראות?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"האפליקציה \'<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\' תוכל לקרוא את כל ההתראות, כולל מידע אישי כמו שמות של אנשי קשר ותוכן של הודעות שקיבלת. האפליקציה תוכל גם לסגור התראות או להפעיל לחצני פעולה בהתראות, ולענות לשיחות טלפון. \n\nבנוסף, האפליקציה תוכל להפעיל או לכבות את התכונה \'נא לא להפריע\' ולשנות הגדרות קשורות."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> תוכל לקרוא את כל ההתראות, כולל מידע אישי כמו שמות של אנשי קשר והודעות טקסט שמתקבלות. האפליקציה תוכל גם לבטל התראות, להעביר אותן למצב נודניק או להפעיל לחצני פעולה שהן כוללות, וכן לענות לשיחות טלפון. \n\nכמו כן, האפליקציה תוכל להפעיל או לכבות את התכונה \'נא לא להפריע\' ולשנות הגדרות קשורות."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"אם משביתים את הגישה של <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> להתראות, יכול להיות שגם הגישה לתכונה \'נא לא להפריע\' תושבת."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"השבתה"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ביטול"</string>
@@ -4688,7 +4696,7 @@
     <string name="display_dashboard_summary" msgid="1599453894989339454">"עיצוב כהה, גודל הגופן, בהירות"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"מעבר למצב שינה לאחר 10 דקות של חוסר פעילות"</string>
     <string name="memory_summary" msgid="8221954450951651735">"ממוצע של <xliff:g id="USED_MEMORY">%1$s</xliff:g> מתוך <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> זיכרון בשימוש"</string>
-    <string name="users_summary" msgid="8473589474976307510">"בוצעה כניסה בתור <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="users_summary" msgid="8473589474976307510">"התחברת בתור <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"ברירת המחדל היא <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="backup_disabled" msgid="4503062265560959320">"הגיבוי מושבת"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"‏המערכת עודכנה ל-Android גרסה ‏<xliff:g id="VERSION">%1$s</xliff:g>"</string>
@@ -4761,7 +4769,7 @@
     <string name="color_temperature_toast" msgid="7611532183532407342">"יש לכבות את המסך כדי להחיל שינוי צבע"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"חיישן הלייזר של המצלמה"</string>
     <string name="ota_disable_automatic_update" msgid="1953894421412420231">"עדכוני מערכת אוטומטיים"</string>
-    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"החלת עדכונים כאשר המכשיר מופעל מחדש"</string>
+    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"עדכונים יותקנו עם הפעלת המכשיר מחדש"</string>
     <string name="usage" msgid="287782903846013936">"שימוש"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"שימוש בחבילת הגלישה"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"שימוש בנתונים באפליקציות"</string>
@@ -5577,6 +5585,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"‏כדי להפעיל את Assistant, לוחצים לחיצה ארוכה על לחצן ההפעלה"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"תפריט הפעלה וחירום:\nלוחצים על לחצן ההפעלה ועל הלחצן להגברת עוצמת הקול בו-זמנית."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"מניעת השמעה של צלצול:\nקיצור דרך זמין בתפריט עוצמת הקול."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"משך הלחיצה"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"כדי להתאים את מידת הרגישות, צריך לבחור את משך הלחיצה על לחצן ההפעלה."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"לחיצה קצרה"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"לחיצה ארוכה"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"הצגת הארנק"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"אישור גישה אל הארנק ממסך הנעילה ומההגדרות המהירות"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"הצגת פקדי המכשיר"</string>
@@ -5622,7 +5634,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"לא זמין באופן זמני"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"‏אין כרטיס SIM"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"העדפות רשת"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"חיבור לרשתות ציבוריות"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"‏חיבור לרשת, אינטרנט, אלחוטי, נתונים, Wi-Fi, wi-fi, wi fi, סלולרי, נייד, ספק סלולרי, 4g,‏ 3g,‏ 2g,‏ lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"‏הפעלת Wi-Fi"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"‏כיבוי ה-Wi-Fi"</string>
@@ -5640,6 +5651,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"‏רשת +‏W"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"‏SIM שהורד"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"‏כרטיסי SIM שהורדת"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"פעיל"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"לא פעיל"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / ברירת המחדל של <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5717,6 +5729,9 @@
     <string name="sensor_toggle_description" msgid="8248823248606795411">"לכל האפליקציות והשירותים"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"הגדרות משחקים"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"הפעלת הלחצן המהיר למרכז בקרת המשחקים, וכו\'"</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"הקודם"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"הבא"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"תצוגה מקדימה של הצבע"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"‏בקשת גישה לכרטיס ה-SIM"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"‏מכשיר מבקש גישה לכרטיס SIM שלך. יש להקיש לקבלת פרטים."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"‏להעניק גישה לכרטיס ה-SIM?"</string>

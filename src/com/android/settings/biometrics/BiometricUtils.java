@@ -244,7 +244,9 @@ public class BiometricUtils {
      * @return true if the next enrollment was started
      */
     public static boolean tryStartingNextBiometricEnroll(@NonNull Activity activity,
-            int requestCode) {
+            int requestCode, String debugReason) {
+
+        Log.d(TAG, "tryStartingNextBiometricEnroll, debugReason: " + debugReason);
         final PendingIntent pendingIntent = (PendingIntent) activity.getIntent()
                 .getExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE);
         if (pendingIntent != null) {

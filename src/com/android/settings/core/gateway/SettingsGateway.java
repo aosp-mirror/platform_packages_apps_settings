@@ -112,6 +112,7 @@ import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.location.LocationServices;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.network.MobileNetworkListFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.network.NetworkProviderSettings;
@@ -159,6 +160,7 @@ import com.android.settings.wifi.WifiInfo;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.calling.WifiCallingDisclaimerFragment;
 import com.android.settings.wifi.calling.WifiCallingSettings;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2;
 import com.android.settings.wifi.tether.WifiTetherSettings;
@@ -173,6 +175,7 @@ public class SettingsGateway {
             AdvancedConnectedDeviceDashboardFragment.class.getName(),
             CreateShortcut.class.getName(),
             WifiSettings.class.getName(),
+            WifiNetworkDetailsFragment.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings2.class.getName(),
             AllInOneTetherSettings.class.getName(),
@@ -199,6 +202,7 @@ public class SettingsGateway {
             ProcessStatsUi.class.getName(),
             NotificationStation.class.getName(),
             LocationSettings.class.getName(),
+            WifiScanningFragment.class.getName(),
             PrivacyDashboardFragment.class.getName(),
             LocationServices.class.getName(),
             SecuritySettings.class.getName(),

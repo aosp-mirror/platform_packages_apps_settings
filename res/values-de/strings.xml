@@ -397,6 +397,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Dein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nNach dem Entfernen benötigst du deinen Fingerabdruck, deine PIN, dein Muster oder dein Passwort, um dein Smartphone zu entsperren und dich in Apps zu authentifizieren."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Verwende die Entsperrung per Gesichtserkennung, um dein Smartphone zu entsperren"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingerabdruck"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerabdruck-Einstellungen für die Arbeit"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Fingerabdrücke verwalten"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Abdruck nutzen für"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Fingerabdruck hinzufügen"</string>
@@ -484,8 +485,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Noch mal"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Dem Fingerabdruck-Symbol folgen"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Lege den Finger immer wieder in leicht geänderter Position auf, bis der Abdruck vollständig erfasst ist."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Lege deinen Finger jedes Mal für längere Zeit auf den Sensor, wenn sich das Fingerabdrucksymbol bewegt. Hierdurch kann dein kompletter Fingerabdruck besser erfasst werden."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Hierdurch kann dein kompletter Fingerabdruck besser erfasst werden"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Leg deinen Finger jedes Mal für längere Zeit auf den Sensor, wenn sich das Fingerabdrucksymbol bewegt. Dadurch kann dein Fingerabdruck besser erfasst werden."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Leg deine Fingerkuppe auf den Sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Roll den Finger zu beiden Seiten"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Halte nacheinander beide Seiten der Fingerkuppe auf den Sensor"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dadurch kann dein Fingerabdruck besser erfasst werden"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -1403,7 +1407,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Beim dunklen Design ist der Hintergrund einiger Bildschirme schwarz, damit dein Akku länger hält. Zeitpläne für das dunkle Design werden erst aktiviert, wenn das Display aus ist."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Display automatisch ausschalten"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Display wird ausgeschaltet."</string>
-    <string name="screen_timeout_summary" msgid="5558778019594643427">"Nach <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ohne Aktivität"</string>
+    <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ohne Aktivität"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Hintergrund"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Hintergrund &amp; Stil"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Startseite, Sperrbildschirm"</string>
@@ -1892,7 +1896,7 @@
     <string name="contributors_title" msgid="7965640251547037965">"Mitwirkende"</string>
     <string name="manual" msgid="3651593989906084868">"Handbuch"</string>
     <string name="regulatory_labels" msgid="5960251403367154270">"Zulassungszeichen"</string>
-    <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Sicherheits- &amp; Regulierungsinformationen"</string>
+    <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Sicherheitsinformationen &amp; rechtliche Hinweise"</string>
     <string name="copyright_title" msgid="83245306827757857">"Urheberrecht"</string>
     <string name="license_title" msgid="8745742085916617540">"Lizenz"</string>
     <string name="module_license_title" msgid="8705484239826702828">"Lizenzen für Google Play-Systemupdates"</string>
@@ -2258,7 +2262,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Gadget auswählen"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Widget auswählen"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Widget erstellen und Zugriff erlauben?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Nach der Erstellung des Widgets hat <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> Zugriff auf alle von ihm angezeigten Daten."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Nach der Erstellung des Widgets hat die App Zugriff auf alle angezeigten Daten.\n\nApp: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nWidget: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"<xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> immer das Erstellen von Widgets und den Zugriff auf ihre Daten erlauben"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Nutzungsstatistik"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Nutzungsstatistik"</string>
@@ -2668,6 +2672,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Apps mit der höchsten Nutzung anzeigen"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Aufladen vorübergehend eingeschränkt"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Dadurch wird der Akku geschont. Weitere Informationen"</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Ladevorgang fortsetzen"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Unter bestimmten Umständen, z. B. bei hohen Temperaturen und langen Ladezeiten, kann die Ladung auf <xliff:g id="PERCENT">%1$s</xliff:g> begrenzt sein, um den Akku zu schonen.\n\nSobald sich diese Umstände ändern, wird dein Smartphone wieder normal aufgeladen."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Unter bestimmten Umständen, z. B. bei hohen Temperaturen und langen Ladezeiten, kann die Ladung auf <xliff:g id="PERCENT">%1$s</xliff:g> begrenzt sein, um den Akkus zu schonen.\n\nSobald sich diese Umstände ändern, wird dein Tablet wieder normal aufgeladen."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Dein Smartphone wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Dein Tablet wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Dein Gerät wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
@@ -2877,8 +2884,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Systemnutzung während der letzten 24 Stunden"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Systemnutzung im Zeitraum <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"App-Nutzung im Zeitraum <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"vormittags"</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"nachmittags"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Gesamt: weniger als eine Minute"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Hintergrund: weniger als eine Minute"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Gesamt: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3398,8 +3403,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Erweiterte Anruffunktionen"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G-Anrufe"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Zur Verbesserung von Sprache und Kommunikation LTE-Dienste verwenden (empfohlen)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Zur Verbesserung von Sprache und Kommunikation 4G-Dienste verwenden (empfohlen)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Zur Verbesserung von Sprachanrufen LTE-Dienste verwenden (empfohlen)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Zur Verbesserung von Sprachanrufen 4G-Dienste verwenden (empfohlen)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"5G für Sprachanrufe verwenden"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Kontakte an Mobilfunkanbieter senden"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Telefonnummern meiner Kontakte senden, um erweiterte Funktionen bereitzustellen"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Kontakte an <xliff:g id="CARRIER">%1$s</xliff:g> senden?"</string>
@@ -3593,6 +3600,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"Energiesparmodus, fixiert, nichtflüchtig, Stromsparfunktion, Akku"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ablauf, zeitplan, energiesparmodus, stromsparfunktion, akku, automatisch, prozent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, erweiterte Anruffunktionen, 4G-Anrufe"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5g, VoNR, erweiterte Anruffunktionen, 5G-Anrufe"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"Sprache hinzufügen, eine Sprache hinzufügen"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"Textgröße, Großdruck, Großschrift, großer Text, eingeschränktes Sehvermögen, Text vergrößern, Textvergrößerung"</string>
     <string name="default_sound" msgid="6604374495015245195">"Standardton"</string>
@@ -3819,7 +3827,7 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Nach der Entsperrung direkt zum zuletzt genutzten Bildschirm gehen"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Sperrbildschirm, überspringen, umgehen"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Wenn das Arbeitsprofil gesperrt ist"</string>
-    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Benachrichtigungen auf dem Sperrbildschirm"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Benachrichtigungen auf Sperrbildschirm"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Lautlose und Standardunterhaltungen anzeigen"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Lautlose Unterhaltungen und Benachrichtigungen verbergen"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Keine Benachrichtigungen anzeigen"</string>
@@ -3921,7 +3929,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> Zugriff auf Benachrichtigungen erlauben?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Die adaptiven Benachrichtigungen wurden in Android 12 durch die Funktion „Erweiterte Benachrichtigungen“ ersetzt. Diese Funktion zeigt Vorschläge für Aktionen und Antworten an und sortiert Benachrichtigungen. \n\nDie Funktion hat Zugriff auf alle Benachrichtigungen, darunter auch personenbezogene Daten wie Kontaktnamen und Nachrichten. Außerdem kann sie auf Benachrichtigungen antworten oder diese schließen und so beispielsweise Anrufe entgegennehmen oder „Bitte nicht stören“ steuern."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Benachrichtigungszugriff für <xliff:g id="SERVICE">%1$s</xliff:g> zulassen?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kann alle Benachrichtigungen lesen, darunter auch personenbezogene Daten wie Kontaktnamen und eingehende Nachrichten. Außerdem kann die App Benachrichtigungen schließen oder Schaltflächen in Benachrichtigungen verwenden und so beispielsweise Anrufe entgegennehmen. \n\nZusätzlich wird die App in die Lage versetzt, die „Bitte nicht stören“-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kann alle Benachrichtigungen lesen, darunter auch personenbezogene Daten wie Kontaktnamen und eingehende Nachrichten. Außerdem kann die App Benachrichtigungen zurückstellen oder schließen sowie Schaltflächen in Benachrichtigungen verwenden und so beispielsweise Anrufe entgegennehmen. \n\nZusätzlich wird die App in die Lage versetzt, die „Bitte nicht stören“-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Wenn du den Benachrichtigungszugriff für <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> deaktivierst, wird möglicherweise auch der „Bitte nicht stören“-Zugriff deaktiviert."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Deaktivieren"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Abbrechen"</string>
@@ -5400,6 +5408,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Halte die Ein-/Aus-Taste gedrückt, um Assistant zu aktivieren"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"„Ein-/Aus- und Notfall-Menü“:\nEin-/Aus-Taste und Lautertaste gleichzeitig drücken."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"„Klingeln verhindern“:\nVerknüpfung im Lautstärke-Menü verfügbar."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Dauer des Gedrückthaltens"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Stelle die Empfindlichkeit ein, indem du festlegst, wie lange du die Ein-/Aus-Taste gedrückt halten musst"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Kurz"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lang"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Geldbörse anzeigen"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Zugriff auf Geldbörse aus Sperrbildschirm und Schnelleinstellungen erlauben"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Gerätesteuerung anzeigen"</string>
@@ -5445,7 +5457,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Momentan nicht verfügbar"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Keine SIM-Karte"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Netzwerkeinstellungen"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Mit öffentlichen Netzwerken verbinden"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"netzwerkverbindung, internet, kabellos, drahtlos, daten, wlan, w-lan, mobilfunk, mobil, mobilfunkanbieter, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"WLAN aktivieren"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"WLAN deaktivieren"</string>
@@ -5463,6 +5474,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+-Netzwerk"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"HERUNTERGELADENE SIM"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"HERUNTERGELADENE SIMs"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktiv"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inaktiv"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Standard für <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5540,6 +5552,9 @@
     <string name="sensor_toggle_description" msgid="8248823248606795411">"Für alle Apps und Dienste"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Spieleinstellungen"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"„Dashboard für Spiele“-Schaltfläche aktivieren usw."</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"Zurück"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"Weiter"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Farbvorschau"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Anfrage nach Zugriff auf SIM-Karte"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Ein Gerät möchte auf deine SIM-Karte zugreifen. Weitere Informationen."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Zugriff auf SIM-Karte erlauben?"</string>
