@@ -768,7 +768,7 @@ public class ManageApplications extends InstrumentedFragment
         int i = item.getItemId();
         if (i == R.id.sort_order_alpha || i == R.id.sort_order_size) {
             if (mApplications != null) {
-                mApplications.rebuild(menuId);
+                mApplications.rebuild(menuId, false);
             }
         } else if (i == R.id.show_system || i == R.id.hide_system) {
             mShowSystem = !mShowSystem;
@@ -1097,13 +1097,13 @@ public class ManageApplications extends InstrumentedFragment
             // Notification filters require resorting the list
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 if (FILTER_APPS_FREQUENT == appFilter.getFilterType()) {
-                    rebuild(R.id.sort_order_frequent_notification);
+                    rebuild(R.id.sort_order_frequent_notification, false);
                 } else if (FILTER_APPS_RECENT == appFilter.getFilterType()) {
-                    rebuild(R.id.sort_order_recent_notification);
+                    rebuild(R.id.sort_order_recent_notification, false);
                 } else if (FILTER_APPS_BLOCKED == appFilter.getFilterType()) {
-                    rebuild(R.id.sort_order_alpha);
+                    rebuild(R.id.sort_order_alpha, true);
                 } else {
-                    rebuild(R.id.sort_order_alpha);
+                    rebuild(R.id.sort_order_alpha, true);
                 }
             } else {
                 rebuild();
@@ -1121,7 +1121,7 @@ public class ManageApplications extends InstrumentedFragment
                 }
                 rebuild();
             } else {
-                rebuild(sort);
+                rebuild(sort, false);
             }
         }
 
@@ -1149,8 +1149,8 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
 
-        public void rebuild(int sort) {
-            if (sort == mLastSortMode) {
+        public void rebuild(int sort, boolean force) {
+            if (sort == mLastSortMode && !force) {
                 return;
             }
             mManageApplications.mSortOrder = sort;
