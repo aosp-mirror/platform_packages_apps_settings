@@ -43,22 +43,22 @@ public final class BatterySaverScheduleSettingsTest {
 
     @Test
     public void onPause_withNoScheduleType_logExpectedData() {
-        setSchedule(PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE, 0);
+        int expectedPercentage = 0;
+        setSchedule(PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE, expectedPercentage);
 
         mBatterySaverScheduleSettings.onPause();
 
-        verifySchedule(SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_NO_SCHEDULE,
-                /* schedulePercentage= */ -1);
+        verifySchedule("key_battery_saver_no_schedule", expectedPercentage);
     }
 
     @Test
     public void onPause_withRoutineScheduleType_logExpectedData() {
-        setSchedule(PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC, 0);
+        int expectedPercentage = 0;
+        setSchedule(PowerManager.POWER_SAVE_MODE_TRIGGER_DYNAMIC, expectedPercentage);
 
         mBatterySaverScheduleSettings.onPause();
 
-        verifySchedule(SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_ROUTINE,
-                /* schedulePercentage= */ -1);
+        verifySchedule("key_battery_saver_routine", expectedPercentage);
     }
 
     @Test
@@ -68,8 +68,7 @@ public final class BatterySaverScheduleSettingsTest {
 
         mBatterySaverScheduleSettings.onPause();
 
-        verifySchedule(SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_PERCENTAGE,
-                expectedPercentage);
+        verifySchedule("key_battery_saver_percentage", expectedPercentage);
     }
 
     @Test
@@ -90,8 +89,7 @@ public final class BatterySaverScheduleSettingsTest {
 
         mBatterySaverScheduleSettings.onPause();
 
-        verifySchedule(SettingsEnums.BATTERY_SAVER_SCHEDULE_TYPE_BASED_ON_PERCENTAGE,
-                expectedPercentage);
+        verifySchedule("key_battery_saver_percentage", expectedPercentage);
     }
 
     private void setSchedule(int scheduleType, int schedulePercentage) {
@@ -101,13 +99,12 @@ public final class BatterySaverScheduleSettingsTest {
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, schedulePercentage);
     }
 
-    private void verifySchedule(int scheduleType, int schedulePercentage) {
+    private void verifySchedule(String scheduleTypeKey, int schedulePercentage) {
         waitAWhile();
-        verify(mMetricsFeatureProvider).action(mContext, SettingsEnums.FUELGAUGE_BATTERY_SAVER,
-                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
-                        scheduleType),
-                Pair.create(SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
-                        schedulePercentage));
+        verify(mMetricsFeatureProvider).action(SettingsEnums.FUELGAUGE_BATTERY_SAVER,
+                SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
+                SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
+                scheduleTypeKey, schedulePercentage);
     }
 
     private void waitAWhile() {
