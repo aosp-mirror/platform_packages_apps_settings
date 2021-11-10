@@ -28,7 +28,6 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -65,6 +64,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 ExpandDividerPreference.OnExpandListener {
     private static final String TAG = "BatteryChartPreferenceController";
     private static final String KEY_FOOTER_PREF = "battery_graph_footer";
+    private static final String PACKAGE_NAME_NONE = "none";
 
     /** Desired battery history size for timestamp slots. */
     public static final int DESIRED_HISTORY_SIZE = 25;
@@ -223,13 +223,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         final String packageName = histEntry.mPackageName;
         final boolean isAppEntry = histEntry.isAppEntry();
         mMetricsFeatureProvider.action(
-            mPrefContext,
-            isAppEntry
-                ? SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM
-                : SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
-            new Pair(ConvertUtils.METRIC_KEY_PACKAGE, packageName),
-            new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, histEntry.mBatteryLevel),
-            new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, powerPref.getPercent()));
+                /* attribution */ SettingsEnums.OPEN_BATTERY_USAGE,
+                /* action */ isAppEntry
+                        ? SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM
+                        : SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
+                /* pageId */ SettingsEnums.OPEN_BATTERY_USAGE,
+                TextUtils.isEmpty(packageName) ? PACKAGE_NAME_NONE : packageName,
+                (int) Math.round(diffEntry.getPercentOfTotal()));
         Log.d(TAG, String.format("handleClick() label=%s key=%s package=%s",
                 diffEntry.getAppLabel(), histEntry.getKey(), histEntry.mPackageName));
         AdvancedPowerUsageDetail.startBatteryDetailPage(
