@@ -370,8 +370,9 @@ public class SettingsActivity extends SettingsBaseActivity
         final SplitStateObserver splitStateObserver = new SplitStateObserver(this /* activity*/,
                 true /* listenOnce */,
                 splitInfos -> {
-                    if (!splitInfos.isEmpty()) {
-                        // It's already in 2-pane and no need to go 2-pane deep link flow.
+                    if (!splitInfos.isEmpty() || !SettingsActivity.this.isTaskRoot()) {
+                        // It's already in 2-pane or in a non-empty task, there is no need to go
+                        // 2-pane deep link flow.
                         return;
                     }
 
