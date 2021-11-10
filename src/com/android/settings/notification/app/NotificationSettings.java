@@ -270,6 +270,9 @@ abstract public class NotificationSettings extends DashboardFragment {
         String conversationId = intent != null
                 ? intent.getStringExtra(Settings.EXTRA_CONVERSATION_ID) : null;
         mChannel = mBackend.getChannel(mPkg, mUid, channelId, conversationId);
+        if (mChannel == null) {
+            mBackend.getChannel(mPkg, mUid, channelId, null);
+        }
     }
 
     private void loadConversation() {
