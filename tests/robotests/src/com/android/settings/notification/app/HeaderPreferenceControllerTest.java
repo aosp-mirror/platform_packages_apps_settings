@@ -151,7 +151,7 @@ public class HeaderPreferenceControllerTest {
         NotificationChannel defaultChannel = new NotificationChannel(
                 NotificationChannel.DEFAULT_CHANNEL_ID, "", IMPORTANCE_NONE);
         mController.onResume(appRow, defaultChannel, null, null, null, null, null);
-        assertEquals("", mController.getSummary());
+        assertEquals(appRow.label, mController.getSummary());
     }
 
     @Test
@@ -159,13 +159,13 @@ public class HeaderPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.label = "bananas";
         mController.onResume(appRow, null, null, null, null, null, null);
-        assertEquals("", mController.getSecondSummary());
+        assertEquals(null, mController.getSecondSummary());
 
         NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
         mController.onResume(appRow, channel, group, null, null, null, null);
-        assertEquals("", mController.getSecondSummary());
+        assertEquals(null, mController.getSecondSummary());
 
         channel.setDescription("description");
         mController.onResume(appRow, channel, group, null, null, null, null);
