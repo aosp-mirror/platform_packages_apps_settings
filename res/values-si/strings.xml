@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"ඔබගේ ටැබ්ලට් පරිගණකය තවදුරටත් <xliff:g id="DEVICE_NAME">%1$s</xliff:g> සමග යුගල නොකරනු ඇත"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"ඔබගේ උපාංගය තවදුරටත් <xliff:g id="DEVICE_NAME">%1$s</xliff:g> සමග යුගල නොකරනු ඇත"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> යෙදුම තවදුරටත් ඔබගේ <xliff:g id="DEVICE_NAME">%2$s</xliff:g> වෙත සම්බන්ධ නොවනු ඇත"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> මෙම ගිණුමට සබැඳි කළ කිසිම උපාංගයකට තවදුරටත් යුගලන නොකෙරේ"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"උපාංගය අමතක කරන්න"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"යෙදුම විසන්ධි කරන්න"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"වෙත සම්බන්ධ වෙන්න…"</string>
@@ -2771,7 +2770,7 @@
     <string name="power_camera" msgid="4778315081581293923">"කැමරාව"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"බ්ලූටූත්"</string>
-    <string name="power_cell" msgid="5507921058696341513">"ජංගම ජාලය පොරොත්තු"</string>
+    <string name="power_cell" msgid="7793805106954398186">"ජංගම ජාලය"</string>
     <string name="power_phone" msgid="2768396619208561670">"හඬ ඇමතුම්"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"අක්‍රිය ටැබ්ලටය"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"අක්‍රිය දුරකථනය"</string>
@@ -3847,6 +3846,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"අගුළු තිරය, අගුළුතිරය, මඟහරින්න, මඟහැරයාම"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"කාර්යාල පැතිකඩ අගුලු දමා ඇති විට"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"අගුලු තිරයෙහි දැනුම් දීම්"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"සංවාද, පෙරනිමිය සහ නිහඬ පෙන්වන්න"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"නිහඬ සංවාද සහ දැනුම් දීම් සඟවන්න"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"කිසිදු දැනුම් දීමක් නොපෙන්වන්න"</string>
@@ -3924,12 +3925,12 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"සියලු <xliff:g id="APP_NAME">%1$s</xliff:g> දැනුම් දීම්"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"අනුවර්තී දැනුම්දීම්"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">දිනකට දැනුම්දීම් ~<xliff:g id="NUMBER_1">%d</xliff:g> ක්</item>
-      <item quantity="other">දිනකට දැනුම්දීම් ~<xliff:g id="NUMBER_1">%d</xliff:g> ක්</item>
+      <item quantity="one">දිනකට දැනුම්දීම් ~<xliff:g id="NUMBER_1">%,d</xliff:g> ක්</item>
+      <item quantity="other">දිනකට දැනුම්දීම් ~<xliff:g id="NUMBER_1">%,d</xliff:g> ක්</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">සතියකට දැනුම්දීම් ~<xliff:g id="NUMBER_1">%d</xliff:g> ක්</item>
-      <item quantity="other">සතියකට දැනුම්දීම් ~<xliff:g id="NUMBER_1">%d</xliff:g> ක්</item>
+      <item quantity="one">සතියකට දැනුම්දීම් ~<xliff:g id="NUMBER_1">%,d</xliff:g> ක්</item>
+      <item quantity="other">සතියකට දැනුම්දීම් ~<xliff:g id="NUMBER_1">%,d</xliff:g> ක්</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"කිසි විටක නැත"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"උපාංගය සහ යෙදුම් දැනුම්දීම්"</string>
@@ -3948,7 +3949,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g>සඳහා දැනුම්දීම් ප්‍රවේශයට ඉඩ දෙන්න ද?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"වැඩිදියුණු කළ දැනුම්දීම් Android 12 හි Android අනුවර්තී දැනුම්දීම් ප්‍රතිස්ථාපනය කරයි. මෙම විශේෂාංගය යෝජිත ක්‍රියා සහ පිළිතුරු පෙන්වන අතර, ඔබගේ දැනුම්දීම් සංවිධානය කරයි. \n\nවැඩිදියුණු කළ දැනුම්දීම්වලට සම්බන්ධතා නම් සහ පණිවිඩ වැනි පුද්ගලික තොරතුරු ඇතුළුව, සියලු දැනුම්දීම් අන්තර්ගතය වෙත ප්‍රවේශ විය හැකිය. මෙම විශේෂාංගයට දැනුම්දීම් ඉවත දැමීමට හෝ දුරකථන ඇමතුම්වලට පිළිතුරු දීම සහ බාධා නොකිරීම පාලනය කිරීම වැනි, දැනුම්දීම්වලට ප්‍රතිචාර දැක්වීමටද හැකිය."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> සඳහා දැනුම්දීම් ප්‍රවේශය ඉඩ දෙන්නද?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> හට සම්බන්ධතා නම් සහ ඔබට ලැබෙන පණිවිඩවල පෙළ වැනි පෞද්ගලික තොරතුරු ඇතුළුව, සියලු දැනුම් දීම් කියවීමට හැකියාව ලැබෙනු ඇත. මෙම යෙදුමට දැනුම් දීම් යළි සිහිකැඳවීමට හෝ ඉවත ලෑමට හෝ දුරකථන ඇමතුම්වලට පිළිතුරු දීම ඇතුළුව, දැනුම් දීම්වල බොත්තම් මත ක්‍රියා මාර්ග ගැනීමටද හැකියාව ලැබෙනු ඇත. \n\nමෙය යෙදුමට බාධා නොකරන්න ක්‍රියාත්මක හෝ ක්‍රියාවිරහිත කිරීමට සහ අදාළ සැකසීම් වෙනස් කිරීමට හැකියාවද ලබා දෙනු ඇත."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"ඔබ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> සඳහා දැනුම්දීම් ප්‍රවේශය ක්‍රියාවිරහිත කළහොත්, බාධා නොකරන්න ප්‍රවේශයද ක්‍රියාවිරහිත කරනු ඇත."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ක්‍රියා විරහිත කරන්න"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"අවලංගු කරන්න"</string>
@@ -4855,10 +4871,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ඩිජිටල් සහායක"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"සහායක ඉල්ලීමට ස්වයිප් කරන්න"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"ඩිජිටල් සහායක යෙදුම ඉල්ලීමට පහළ කෙළවරේ සිට ඉහළට ස්වයිප් කරන්න."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"සහායක ආරම්භ කිරීමට මුල් පිටු බොත්තම ඔබා අල්ලාගෙන සිටින්න"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"ඩිජිටල් සහායක යෙදුම ආරම්භ කිරීමට මුල් පිටු බොත්තම ඔබා අල්ලාගෙන සිටින්න."</string>
     <string name="information_label" msgid="6939310810756569298">"තොරතුරු"</string>
     <string name="low_label" msgid="6525629096999711220">"අඩු"</string>
     <string name="high_label" msgid="357503396626018487">"වැඩි"</string>
@@ -4867,11 +4881,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"වඩා ඉහළ සංවේදීතාව තිරයෙහි මායිම් දිගේ යම් යෙදුම් ඉංගිත සමග ගැටීමට හැකිය."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"පසු සංවේදීතාව"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"අභින සංචාලන සංවේදීතාව"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"බොත්තම් සංචාලනය"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ඉංගිත සංචාලනය, පසු සංවේදීතාව, පසු ඉංගිතය"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"සංචාලනය, මුල් පිටු බොත්තම"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"දුරකථනය පරීක්ෂා කිරීමට දෙවරක් තට්ටු කරන්න"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ටැබ්ලට් පරිගණකය පරීක්ෂා කිරීමට දෙවරක් තට්ටු කරන්න"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"උපාංගය පරීක්ෂා කිරීමට දෙවරක් තට්ටු කරන්න"</string>

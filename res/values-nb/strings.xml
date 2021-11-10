@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Nettbrettet ditt kommer ikke lenger til å være koblet sammen med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Enheten din kommer ikke lenger til å være koblet sammen med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g>-appen kobler ikke lenger til <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> blir ikke lenger koblet til enheter som er knyttet til denne kontoen"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Glem enheten"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Koble fra appen"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Koble til…"</string>
@@ -2687,8 +2686,8 @@
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Lading er midlertidig begrenset"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"For å forlenge batterilevetiden. Finn ut mer."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Gjenoppta ladingen"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Under visse omstendigheter, for eksempel høye temperaturer og lange ladetider, kan lading begrenses til <xliff:g id="PERCENT">%1$s</xliff:g> for å bevare batteritilstanden.\n\nNår disse omstendighetene avsluttes, lader telefonen automatisk som normalt."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Under visse omstendigheter, for eksempel høye temperaturer og lange ladetider, kan lading begrenses til <xliff:g id="PERCENT">%1$s</xliff:g> for å bevare batteritilstanden.\n\nNår disse omstendighetene avsluttes, lader nettbrettet automatisk som normalt."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Under visse omstendigheter, for eksempel høye temperaturer og lange ladetider, kan ladingen begrenses til <xliff:g id="PERCENT">%1$s</xliff:g> for å bevare batteriet.\n\nNår slike omstendigheter er over, gjenopptar telefonen automatisk normal lading."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Under visse omstendigheter, for eksempel høye temperaturer og lange ladetider, kan ladingen begrenses til <xliff:g id="PERCENT">%1$s</xliff:g> for å bevare batteriet.\n\nNår slike omstendigheter er over, gjenopptar telefonen automatisk normal lading."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Siden du har brukt telefonen mer enn vanlig, kan batteriet gå tomt raskere enn normalt.\n\nApper med høyest batteribruk:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Siden du har brukt nettbrettet mer enn vanlig, kan batteriet gå tomt raskere enn normalt.\n\nApper med høyest batteribruk:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Siden du har brukt enheten mer enn vanlig, kan batteriet gå tomt raskere enn normalt.\n\nApper med høyest batteribruk:"</string>
@@ -2771,7 +2770,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Mobilnettverk i ventemodus"</string>
+    <string name="power_cell" msgid="7793805106954398186">"Mobilnettverk"</string>
     <string name="power_phone" msgid="2768396619208561670">"Telefonsamtaler"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Nettbrettet ikke i bruk"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Telefonen ikke i bruk"</string>
@@ -3847,6 +3846,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Låseskjerm, låseskjerm, hopp over, omgå"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Når jobbprofilen er låst"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Varsler på låseskjermen"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Vis samtaler, både standard og lydløse"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Skjul lydløse samtaler og varsler"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ikke vis noen varsler"</string>
@@ -3924,11 +3925,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>: alle varsler"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Varsler som kan tilpasses"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> varsler per dag</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> varsler per dag</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> varsel per dag</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> varsler per uke</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> varsler per uke</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> varsel per uke</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldri"</string>
@@ -3948,7 +3949,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vil du gi tilgang til varsler for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Forbedrede varsler erstatter tilpassede Android-varsler i Android 12. Denne funksjonen viser foreslåtte handlinger og svar og organiserer varslene dine. \n\nForbedrede varsler har tilgang til varselinnhold, inkludert personopplysninger som kontaktnavn og meldinger. Funksjonen kan også avvise og svare på varsler, for eksempel svare på anrop og kontrollere «Ikke forstyrr»."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vil du gi tilgang til varsler for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan lese alle varsler, inkludert personopplysninger som kontaktnavn og tekstinnholdet i meldinger du mottar. Appen kan også slumre eller avvise varsler eller bruke knapper i varsler, inkludert å svare på telefonanrop. \n\nDette gir også appen muligheten til å slå Ikke forstyrr av eller på samt endre tilknyttede innstillinger."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Hvis du slår av varseltilgang for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, kan tilgang til Ikke forstyrr også bli slått av."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Slå av"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Avbryt"</string>
@@ -4855,10 +4871,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Sveip for å kalle opp assistenten"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Sveip opp fra et av de nederste hjørnene for å kalle opp den digitale assistenten."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Hold inne hjemknappen for å kalle opp assistenten"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Trykk og hold inne hjemknappen for å kalle opp den digitale assistenten."</string>
     <string name="information_label" msgid="6939310810756569298">"Informasjon"</string>
     <string name="low_label" msgid="6525629096999711220">"Lav"</string>
     <string name="high_label" msgid="357503396626018487">"Høy"</string>
@@ -4867,11 +4881,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Høyere følsomhet kan komme i konflikt med eventuelle appbevegelser langs kantene av skjermen."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Følsomhet for tilbakebevegelsen"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Sensitivitet for navigasjon med bevegelser"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigasjon med knapper"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigasjon med bevegelser, følsomhet for tilbakebevegelsen, tilbakebevegelse"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigasjon, hjemknapp"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Dobbelttrykk for å sjekke telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Dobbelttrykk for å sjekke nettbrettet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Dobbelttrykk for å sjekke enheten"</string>

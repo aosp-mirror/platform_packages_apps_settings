@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Surfplattan kopplas bort från <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Enheten kopplas bort från <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Appen <xliff:g id="APP_NAME">%1$s</xliff:g> blir inte längre ansluten till <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kopplas inte längre till någon enhet som har länkats till det här kontot"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Glöm enhet"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Koppla från appen"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Anslut till…"</string>
@@ -2685,7 +2684,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Högre batteriförbrukning"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appar med högst batteriförbrukning"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laddning har begränsats tillfälligt"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"För att spara batteri. Läs mer."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Detta bevarar batteriets livslängd. Läs mer."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Återuppta laddning"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Under vissa omständigheter, till exempel vid höga temperaturer och långa laddningsperioder, kan laddningen begränsas till <xliff:g id="PERCENT">%1$s</xliff:g> för att bevara batteriets livslängd.\n\nTelefonen återgår automatiskt till normal laddning när det är möjligt."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Under vissa omständigheter, till exempel vid höga temperaturer och långa laddningsperioder, kan laddningen begränsas till <xliff:g id="PERCENT">%1$s</xliff:g> för att bevara batteriets livslängd.\n\nSurfplattan återgår automatiskt till normal laddning när det är möjligt."</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wifi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Strömsparläge för mobilnätverk"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Röstsamtal"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Surfplattan är inaktiv"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Telefonen är inaktiv"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Låsskärm, Hoppa över, Kringgå"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"När jobbprofilen är låst"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Aviseringar på låsskärmen"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Visa konversationer, standard och ljudlösa"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Dölj ljudlösa konversationer och aviseringar"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Visa inga aviseringar"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Alla aviseringar från <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Anpassade aviseringar"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">ca <xliff:g id="NUMBER_1">%d</xliff:g> aviseringar om dagen</item>
+      <item quantity="other">ca <xliff:g id="NUMBER_1">%,d</xliff:g> aviseringar om dagen</item>
       <item quantity="one">ca <xliff:g id="NUMBER_0">%d</xliff:g> avisering om dagen</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">Ca <xliff:g id="NUMBER_1">%d</xliff:g> aviseringar i veckan</item>
+      <item quantity="other">Ca <xliff:g id="NUMBER_1">%,d</xliff:g> aviseringar i veckan</item>
       <item quantity="one">Ca <xliff:g id="NUMBER_0">%d</xliff:g> avisering i veckan</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldrig"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vill du tillåta åtkomst till aviseringar för <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Förbättrade aviseringar har ersatt Anpassade aviseringar för Android i Android 12. Den här funktionen visar förslag på åtgärder och svar och organiserar dina aviseringar. \n\nFörbättrade aviseringar har åtkomst till allt innehåll i aviseringar, inklusive personliga uppgifter som namn på kontakter och meddelanden. Funktionen kan även ignorera aviseringar eller utföra åtgärder utifrån dem, till exempel svara på telefonsamtal och styra Stör ej."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Vill du tillåta åtkomst till aviseringar för <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan läsa alla aviseringar, inklusive personliga uppgifter som namn på kontaktpersoner och texten i mottagna meddelanden. Appen kan även skjuta upp och stänga aviseringar eller använda åtgärdsknappar i aviseringar för att t.ex. svara på telefonsamtal. \n\nAppen kan också aktivera eller inaktivera Stör ej och ändra relaterade inställningar."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Om du inaktiverar aviseringsåtkomst för <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan åtkomsten till Stör ej också inaktiveras."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Inaktivera"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Avbryt"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Aktivera assistenten genom att svepa"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Svep uppåt från något av de nedre hörnen för att aktivera appen digital assistent."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Håll nere hemknappen för att anropa assistenten"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Håll hemknappen nedtryckt för att anropa den digitala assistentappen."</string>
     <string name="information_label" msgid="6939310810756569298">"Information"</string>
     <string name="low_label" msgid="6525629096999711220">"Låg"</string>
     <string name="high_label" msgid="357503396626018487">"Hög"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Om känsligheten höjs kan konflikter med apprörelser längs skärmens kant uppstå."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Känslighet för tillbaka-rörelsen"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Känslighet för navigering med rörelser"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigering med knappar"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigering med rörelser, känslighet för bakåtrörelsen, bakåtrörelse"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigering, hemknappen"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Tryck snabbt två gånger för att kolla telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tryck snabbt två gånger för att kolla surfplattan"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tryck snabbt två gånger för att kolla enheten"</string>

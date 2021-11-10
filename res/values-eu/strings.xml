@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Aurrerantzean, tableta ez da parekatuko <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gailuarekin"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Aurrerantzean, gailua ez da parekatuko <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gailuarekin"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Aurrerantzean, <xliff:g id="APP_NAME">%1$s</xliff:g> ez da konektatuko <xliff:g id="DEVICE_NAME">%2$s</xliff:g> gailura"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"Aurrerantzean, <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ez da parekatuko kontu hau lotuta duen inongo gailurekin"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Ahaztu gailua"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Deskonektatu aplikazioa"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Konektatu hona…"</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wifia"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth-a"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Sare mugikorra egonean"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Ahots-deiak"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tableta inaktibo"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Telefonoa inaktibo"</string>
@@ -2917,7 +2917,7 @@
     <string name="process_stats_type_cached" msgid="129788969589599563">"Cachean gordeta"</string>
     <string name="process_stats_os_label" msgid="2096501347732184886">"Android sistema eragilea"</string>
     <string name="process_stats_os_native" msgid="794547105037548539">"Natiboa"</string>
-    <string name="process_stats_os_kernel" msgid="5626269994512354996">"Kernela"</string>
+    <string name="process_stats_os_kernel" msgid="5626269994512354996">"Kernel-a"</string>
     <string name="process_stats_os_zram" msgid="3067278664868354143">"Z-Ram"</string>
     <string name="process_stats_os_cache" msgid="4753163023524305711">"Cacheak"</string>
     <string name="process_stats_ram_use" msgid="5966645638783509937">"RAM erabilera"</string>
@@ -3847,6 +3847,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"pantaila blokeatua, blokeo pantaila, saltatu, zeharbidea"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Laneko profila blokeatu bada"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Pantaila blokeatuko jakinarazpenak"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Erakutsi elkarrizketak, bai lehenetsiak, bai isilak"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Erakutsi elkarrizketak, bai lehenetsiak, bai isilak"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ezkutatu elkarrizketa isilak eta jakinarazpenak"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ez erakutsi jakinarazpenik"</string>
@@ -3924,11 +3925,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> aplikazioaren jakinarazpen guztiak"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Jakinarazpen egokituak"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> jakinarazpen inguru eguneko</item>
+      <item quantity="other"><xliff:g id="NUMBER_1">%,d</xliff:g> jakinarazpen inguru eguneko</item>
       <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> jakinarazpen inguru eguneko</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> jakinarazpen inguru asteko</item>
+      <item quantity="other"><xliff:g id="NUMBER_1">%,d</xliff:g> jakinarazpen inguru asteko</item>
       <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> jakinarazpen inguru asteko</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Inoiz ez"</string>
@@ -3948,7 +3949,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari jakinarazpenetarako sarbidea eman nahi diozu?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12-n, jakinarazpen hobetuek ordeztu dituzte Android-eko jakinarazpen egokituak. Eginbide horrek, iradokitako ekintzak eta erantzunak erakusten, eta zure jakinarazpenak antolatzen ditu. \n\nJakinarazpen hobetuek jakinarazpenen eduki osoa atzi dezakete, informazio pertsonala barne (esaterako, kontaktuen izenak eta mezuak). Halaber, eginbideak jakinarazpenak bazter ditzake edo haiei erantzun diezaieke; adibidez, telefono-deiei erantzun diezaieke eta ez molestatzeko modua kontrola dezake."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Jakinarazpenak atzitzeko baimena eman nahi diozu <xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> aplikazioak jakinarazpen guztiak irakurri ahalko ditu eta, haien barnean, informazio pertsonala egongo da agian (adibidez, kontaktuen izenak eta jasotzen dituzun testu-mezuak). Halaber, aplikazioak jakinarazpenak atzeratu edo baztertu ahal izango ditu, edo jakinarazpenetako botoiak erabili, telefono-deiei erantzuteko botoia barne. \n\nHorrez gain, ez molestatzeko modua aktibatzeko eta desaktibatzeko aukera izango du aplikazioak, baita harekin erlazionatutako ezarpenak aldatzekoa ere."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> aplikazioari jakinarazpenak atzitzeko aukera desaktibatzen badiozu, baliteke ez molestatzeko modurako sarbidea ere desaktibatzea."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desaktibatu"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Utzi"</string>
@@ -4855,10 +4871,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Laguntzaile digitala"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Laguntzaile digitala abiarazteko, pasatu hatza"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Laguntzaile digitalaren aplikazioa abiarazteko, pasatu hatza beheko ertz batetik gora."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Laguntzaileari deitzeko, eduki sakatuta Hasiera"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Laguntzaile digitalaren aplikazioari deitzeko, eduki sakatuta Hasiera botoia"</string>
     <string name="information_label" msgid="6939310810756569298">"Informazioa"</string>
     <string name="low_label" msgid="6525629096999711220">"Txikia"</string>
     <string name="high_label" msgid="357503396626018487">"Handia"</string>
@@ -4867,11 +4881,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Sentikortasun handiagoa ezarriz gero, baliteke gatazkak sortzea pantailaren ertzetan egiten diren aplikazioen keinuekin."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Atzera egiteko keinuaren sentikortasuna"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Keinu bidezko nabigazioaren sentikortasuna"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Botoi bidezko nabigazioa"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"keinu bidezko nabigazioa, atzera egiteko keinuaren sentikortasuna, atzera egiteko keinua"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"nabigazioa, Hasiera botoia"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Sakatu birritan telefonoa pantailako informazioa ikusteko"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Sakatu birritan tableta bertan dagoela ikusteko"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Sakatu birritan gailua bertan dagoela ikusteko"</string>

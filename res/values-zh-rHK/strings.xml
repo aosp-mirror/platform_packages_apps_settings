@@ -862,7 +862,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"您的平板電腦將與 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 取消配對"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"您的裝置將與 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 取消配對"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式將與「<xliff:g id="DEVICE_NAME">%2$s</xliff:g>」解除連結"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」將與連結至此帳戶的所有裝置取消配對"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"忘記裝置"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"解除連結應用程式"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"連線至..."</string>
@@ -2774,7 +2773,7 @@
     <string name="power_camera" msgid="4778315081581293923">"相機"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"藍牙"</string>
-    <string name="power_cell" msgid="5507921058696341513">"流動網絡備用中"</string>
+    <string name="power_cell" msgid="7793805106954398186">"流動網絡"</string>
     <string name="power_phone" msgid="2768396619208561670">"語音通話"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"平板電腦閒置"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"手機閒置"</string>
@@ -3850,6 +3849,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"上鎖畫面, 鎖定螢幕, 略過, 繞過"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"當工作設定檔被鎖定時"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"上鎖畫面上的通知"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"顯示預設對話和靜音對話"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"隱藏靜音對話和通知"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"不要顯示任何通知"</string>
@@ -3927,11 +3928,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"所有「<xliff:g id="APP_NAME">%1$s</xliff:g>」通知"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"自動調節通知"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~每天 <xliff:g id="NUMBER_1">%d</xliff:g> 個通知</item>
+      <item quantity="other">~每天 <xliff:g id="NUMBER_1">%,d</xliff:g> 個通知</item>
       <item quantity="one">~每天 <xliff:g id="NUMBER_0">%d</xliff:g> 個通知</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~每星期 <xliff:g id="NUMBER_1">%d</xliff:g> 個通知</item>
+      <item quantity="other">~每星期 <xliff:g id="NUMBER_1">%,d</xliff:g> 個通知</item>
       <item quantity="one">~每星期 <xliff:g id="NUMBER_0">%d</xliff:g> 個通知</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"永不"</string>
@@ -3951,7 +3952,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"在 Android 12 中，我們將 Android 自動調整通知取代成強化通知。此功能可顯示建議操作和回覆，以及整理通知。\n\n強化通知功能可存取所有通知內容 (包括聯絡人姓名和訊息等個人資料)，以及關閉或回應通知，例如接聽來電和控制「請勿騷擾」功能。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可讀取所有通知 (包括聯絡人姓名和您收到的訊息內容等個人資料)，以及延後或關閉通知或針對通知中的按鈕採取行動，包括接聽來電。\n\n此外，該應用程式還能開啟或關閉「請勿騷擾」模式及變更相關設定。"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您關閉「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」的通知存取權，「請勿騷擾」的存取權亦可能會關閉。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"關閉"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
@@ -4858,10 +4874,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"數碼助理"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"滑動即可調用數碼助理應用程式"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"如要調用數碼助理應用程式，請從底部角落向上滑動。"</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"按住主按鈕即可調用「Google 助理」"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"按住主按鈕即可調用數碼助理應用程式。"</string>
     <string name="information_label" msgid="6939310810756569298">"資料"</string>
     <string name="low_label" msgid="6525629096999711220">"低"</string>
     <string name="high_label" msgid="357503396626018487">"高"</string>
@@ -4870,11 +4884,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"較高的敏感度可能會與任何在螢幕邊緣的應用程式手勢互相衝突。"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"返回手勢的敏感度"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"手勢導覽敏感度"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"按鈕導覽"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"手勢導覽, 返回手勢的敏感度, 返回手勢"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"導覽, 主按鈕"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"輕按兩下顯示畫面"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"輕按兩下即可查看平板電腦"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"輕按兩下即可查看裝置"</string>

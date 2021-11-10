@@ -862,7 +862,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Máy tính bảng của bạn sẽ không được ghép nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nữa"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Thiết bị của bạn sẽ không được ghép nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nữa"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Ứng dụng <xliff:g id="APP_NAME">%1$s</xliff:g> sẽ không kết nối với <xliff:g id="DEVICE_NAME">%2$s</xliff:g> nữa"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ không được ghép nối với bất kỳ thiết bị nào liên kết với tài khoản này"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Xóa thiết bị"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Ngắt kết nối ứng dụng"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Kết nối với…"</string>
@@ -2686,7 +2685,7 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Một số tính năng có thể bị hạn chế"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Mức sử dụng pin cao"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Xem các ứng dụng có mức sử dụng pin cao nhất"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Khả năng sạc tạm thời bị hạn chế"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Chức năng sạc tạm thời bị hạn chế"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Để kéo dài tuổi thọ pin. Tìm hiểu thêm."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Tiếp tục sạc"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Trong một số điều kiện, chẳng hạn như nhiệt độ cao và thời gian sạc lâu, mức sạc có thể bị hạn chế ở <xliff:g id="PERCENT">%1$s</xliff:g> để duy trì độ bền của pin.\n\nKhi các điều kiện đó chấm dứt, điện thoại của bạn sẽ tự động sạc như bình thường."</string>
@@ -2773,7 +2772,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Máy ảnh"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Mạng di động ở chế độ chờ"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Cuộc gọi thoại"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Máy tính bảng ở chế độ rảnh"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Điện thoại ở chế độ rảnh"</string>
@@ -3849,6 +3849,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Khóa màn hình, Màn hình khóa, Bỏ qua"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Khi hồ sơ công việc bị khóa"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Thông báo trên màn hình khóa"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Hiện các cuộc trò chuyện ở chế độ mặc định và im lặng"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ẩn các thông báo và cuộc trò chuyện ở chế độ im lặng"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Không hiện bất kỳ thông báo nào"</string>
@@ -3926,11 +3928,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Tất cả thông báo của <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Thông báo thích ứng"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> thông báo mỗi ngày</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> thông báo mỗi ngày</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> thông báo mỗi ngày</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> thông báo mỗi tuần</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> thông báo mỗi tuần</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> thông báo mỗi tuần</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Không bao giờ"</string>
@@ -3950,7 +3952,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Cho phép <xliff:g id="SERVICE">%1$s</xliff:g> truy cập thông báo?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Thông báo nâng cao đã thay thế Thông báo thích ứng trên Android trong Android 12. Tính năng này hiển thị những thao tác và câu trả lời đề xuất, đồng thời sắp xếp các thông báo của bạn. \n\nThông báo nâng cao có thể đọc mọi nội dung thông báo, bao gồm cả thông tin cá nhân như tên của người liên hệ và tin nhắn. Tính năng này cũng có thể đóng hoặc phản hồi các thông báo, chẳng hạn như trả lời cuộc gọi điện thoại, đồng thời có thể kiểm soát chế độ Không làm phiền."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Cho phép <xliff:g id="SERVICE">%1$s</xliff:g> truy cập thông báo?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> có thể đọc mọi thông báo, bao gồm thông tin cá nhân như tên của người liên hệ và nội dung của thông báo mà bạn nhận được. Ứng dụng này cũng có thể tạm ẩn hoặc đóng các thông báo hoặc thao tác với các nút trong thông báo, bao gồm cả trả lời cuộc gọi điện thoại. \n\nNgoài ra, việc này còn cho phép ứng dụng bật hoặc tắt chế độ Không làm phiền và thay đổi các chế độ cài đặt liên quan."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Nếu bạn tắt quyền truy cập thông báo của <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, quyền truy cập chế độ Không làm phiền cũng có thể bị tắt."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Tắt"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Hủy"</string>
@@ -4857,10 +4874,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Trợ lý kỹ thuật số"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Vuốt để gọi trợ lý"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Vuốt lên từ góc dưới cùng để gọi ứng dụng trợ lý kỹ thuật số."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Giữ nút Màn hình chính để gọi trợ lý"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Nhấn và giữ nút Màn hình chính để gọi ứng dụng trợ lý kỹ thuật số."</string>
     <string name="information_label" msgid="6939310810756569298">"Thông tin"</string>
     <string name="low_label" msgid="6525629096999711220">"Thấp"</string>
     <string name="high_label" msgid="357503396626018487">"Cao"</string>
@@ -4869,11 +4884,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Độ nhạy cao hơn có thể xung đột với những cử chỉ trong ứng dụng dọc theo các cạnh màn hình."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Độ nhạy với cử chỉ quay lại"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Độ nhạy của thao tác bằng cử chỉ"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Thao tác bằng nút"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"thao tác bằng cử chỉ, độ nhạy với cử chỉ quay lại, cử chỉ quay lại"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"thao tác, nút màn hình chính"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Nhấn đúp để kiểm tra điện thoại"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Nhấn đúp để kiểm tra máy tính bảng"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Nhấn đúp để kiểm tra thiết bị"</string>

@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"თქვენი ტაბლეტი აღარ იქნება დაწყვილებული <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-თან"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"თქვენი მოწყობილობა აღარ იქნება დაწყვილებული <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-თან"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> აპი აღარ დაუკავშირდება თქვენს <xliff:g id="DEVICE_NAME">%2$s</xliff:g>-ს"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> აღარ იქნება დაწყვილებული ამ ანგარიშთან მიბმულ რომელიმე მოწყობილობასთან"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"მოწყობილობის დავიწყება"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"აპთან კავშირის გაწყვეტა"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"დაუკავშირდი…"</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"კამერა"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"მობილური ქსელის მოლოდინის რეჟიმი"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"ხმოვანი ზარები"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"მოცდის რეჟიმი"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"მოცდის რეჟიმი"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ჩაკეტილი ეკრანი, დაბლოკილი ეკრანი, გამოტოვება, გვერდის ავლა"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"როცა სამსახურის პროფილი დაბლოკილია"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"შეტყობინებები ჩაკეტილ ეკრანზე"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"მიმოწერების, ნაგულისხმევისა და ჩუმის ჩვენება"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"ჩუმი მიმოწერებისა და შეტყობინებების დამალვა"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"არ მაჩვენო არცერთი შეტყობინება"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>-ის ყველა შეტყობინება"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ადაპტაციური შეტყობინებები"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> შეტყობინება დღეში</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> შეტყობინება დღეში</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> შეტყობინება დღეში</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> შეტყობინება კვირაში</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> შეტყობინება კვირაში</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> შეტყობინება კვირაში</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"არასოდეს"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"გსურთ მიანიჭოთ <xliff:g id="SERVICE">%1$s</xliff:g>-ს შეტყობინებებზე წვდომა?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"გაფართოებულმა შეტყობინებებმა ჩაანაცვლა Android-ის ადაპტაციური შეტყობინებების ფუნქცია Android 12-ში. ეს ფუნქცია გაჩვენებთ შემოთავაზებულ მოქმედებებს და პასუხებს, ამასთანავე კი ახდენს თქვენი შეტყობინებების ორგანიზებას. \n\nგაფართოებულ შეტყობინებებს შეუძლია ყველა შეტყობინების კონტენტზე, მათ შორის, ისეთ პერსონალურ ინფორმაციაზე წვდომა, როგორიცაა კონტაქტების სახელები და შეტყობინებები. ამ ფუნქციას ასევე შეუძლია შეტყობინებათა დახურვა ან მათზე პასუხის გაცემა, მაგალითად, სატელეფონო ზარებზე პასუხი და „არ შემაწუხოთ“ რეჟიმის მართვა."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"გსურთ მიანიჭოთ <xliff:g id="SERVICE">%1$s</xliff:g>-ს შეტყობინებებზე წვდომა?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> შეძლებს ყველა შეტყობინების წაკითხვას, მათ შორის, ისეთი პერსონალური ინფორმაციის, როგორიცაა კონტაქტების სახელები და თქვენ მიერ მიღებული შეტყობინებების ტექსტი. ეს აპი ასევე შეძლებს, ჩააჩუმოს ან დახუროს შეტყობინებები და აამოქმედოს შეტყობინებათა ღილაკები, მათ შორის, სატელეფონო ზარებზე პასუხი. \n\nაპს მიეცემა „არ შემაწუხოთ“ რეჟიმის ჩართვის ან გამორთვის და დაკავშირებული პარამეტრების შეცვლის შესაძლებლობაც."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"შეტყობინებებზე წვდომის გამორთვის შემთხვევაში, <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, სავარაუდოდ, „არ შემაწუხოთ“ რეჟიმზე წვდომასაც დაკარგავს."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"გამორთვა"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"გაუქმება"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ციფრული ასისტენტი"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"გადაფურცლეთ ასისტენტის გამოსაძახებლად"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"გადაფურცლეთ ქვედა კუთხიდან ზემოთ ციფრული ასისტენტის აპის გამოსაძახებლად."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"ასისტენტის გამოსაძახებლად ხანგრძ. დააჭ. მთავ. ეკრანის ღილაკს"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"ციფრული ასისტენტის აპის გამოსაძახებლად ხანგრძლივად დააჭირეთ მთავარი ეკრანის ღილაკს."</string>
     <string name="information_label" msgid="6939310810756569298">"ინფორმაცია"</string>
     <string name="low_label" msgid="6525629096999711220">"დაბალი"</string>
     <string name="high_label" msgid="357503396626018487">"მაღალი"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"უფრო მაღალმა მგრძნობიარობამ შეიძლება კონფლიქტი შექმნას აპის რომელიმე ჟესტთან ეკრანის კიდეების გასწვრივ."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"უკან გადასვლის მგრძნობიარობა"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ჟესტებით ნავიგაციის მგრძნობიარობა"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ნავიგაცია ღილაკის მეშვეობით"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ჟესტებით ნავიგაცია, უკან გადასვლის მგრძნობიარობა, უკან გადასვლის ჟესტი"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"ნავიგაცია, მთავარი ეკრანის ღილაკი"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ტელეფონის შესამოწმებლად, შეეხეთ ორმაგად"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ტაბლეტის შესამოწმებლად, შეეხეთ ორმაგად"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"მოწყობილობის შესამოწმებლად, შეეხეთ ორმაგად"</string>
