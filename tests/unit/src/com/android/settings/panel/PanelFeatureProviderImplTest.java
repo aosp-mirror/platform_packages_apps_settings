@@ -20,7 +20,12 @@ import static com.android.settings.panel.SettingsPanelActivity.KEY_PANEL_TYPE_AR
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 
@@ -36,25 +41,28 @@ public class PanelFeatureProviderImplTest {
 
     private static final String TEST_PACKAGENAME = "com.test.packagename";
 
+    private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
     private Context mContext;
     private PanelFeatureProviderImpl mProvider;
     private Bundle mBundle;
 
     @Before
     public void setUp() {
-        mContext = ApplicationProvider.getApplicationContext();
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mProvider = new PanelFeatureProviderImpl();
         mBundle = new Bundle();
         mBundle.putString(KEY_MEDIA_PACKAGE_NAME, TEST_PACKAGENAME);
     }
 
     @Test
-    public void getPanel_internetConnectivityKey_returnsCorrectPanel() {
+    public void getPanel_internetConnectivityKey_sendsCorrectBroadcast() {
         mBundle.putString(KEY_PANEL_TYPE_ARGUMENT, Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+        mProvider.getPanel(mContext, mBundle);
+        Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
+                .setPackage(SYSTEMUI_PACKAGE_NAME);
 
-        final PanelContent panel = mProvider.getPanel(mContext, mBundle);
-
-        assertThat(panel).isInstanceOf(InternetConnectivityPanel.class);
+        verify(mContext, never()).sendBroadcast(intent);
     }
 
     @Test

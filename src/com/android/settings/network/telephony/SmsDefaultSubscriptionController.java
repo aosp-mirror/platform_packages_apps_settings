@@ -62,7 +62,7 @@ public class SmsDefaultSubscriptionController extends DefaultSubscriptionControl
     @Override
     public CharSequence getSummary() {
         if (Utils.isProviderModelEnabled(mContext)) {
-            return MobileNetworkUtils.getPreferredStatus(mContext, mManager, false);
+            return MobileNetworkUtils.getPreferredStatus(isRtlMode(), mContext, mManager, false);
         } else {
             return super.getSummary();
         }
