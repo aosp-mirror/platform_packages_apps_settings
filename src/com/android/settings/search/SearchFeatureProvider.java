@@ -33,8 +33,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.activityembedding.ActivityEmbeddingUtils;
-import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.search.SearchIndexableResources;
 
@@ -108,18 +106,8 @@ public interface SearchFeatureProvider {
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                     .logSettingsTileClick(KEY_HOMEPAGE_SEARCH_BAR, pageId);
 
-            if (ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
-                final TopLevelSettings fragment = (TopLevelSettings) activity
-                        .getSupportFragmentManager().findFragmentById(R.id.main_content);
-                if (fragment != null) {
-                    fragment.disableMenuHighlight();
-                }
-                activity.startActivity(intent);
-            } else {
-                final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity)
-                        .toBundle();
-                activity.startActivity(intent, bundle);
-            }
+            final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();
+            activity.startActivity(intent, bundle);
         });
     }
 

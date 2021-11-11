@@ -34,6 +34,7 @@ import com.android.settings.Settings;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.homepage.SliceDeepLinkHomepageActivity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -122,6 +123,15 @@ public class ActivityEmbeddingRulesController {
         registerTwoPanePairRule(
                 context,
                 getComponentName(context, SettingsHomepageActivity.class),
+                secondaryComponent,
+                secondaryIntentAction,
+                true /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                clearTop);
+
+        registerTwoPanePairRule(
+                context,
+                getComponentName(context, SliceDeepLinkHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
                 true /* finishPrimaryWithSecondary */,
