@@ -343,14 +343,12 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(
             mPowerGaugePreference)).isTrue();
         verify(mMetricsFeatureProvider)
-            .action(
-                mContext,
-                SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
-                (Pair<Integer, Object>[]) new Pair[] {
-                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, 0),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, null)
-                });
+                .action(
+                        SettingsEnums.OPEN_BATTERY_USAGE,
+                        SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
+                        SettingsEnums.OPEN_BATTERY_USAGE,
+                        /* package name */ "none",
+                        /* percentage of total */ 0);
     }
 
     @Test
@@ -362,14 +360,12 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(
             mPowerGaugePreference)).isTrue();
         verify(mMetricsFeatureProvider)
-            .action(
-                mContext,
-                SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
-                (Pair<Integer, Object>[]) new Pair[] {
-                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, 0),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, null)
-                });
+                .action(
+                        SettingsEnums.OPEN_BATTERY_USAGE,
+                        SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
+                        SettingsEnums.OPEN_BATTERY_USAGE,
+                        /* package name */ "none",
+                        /* percentage of total */ 0);
     }
 
     @Test

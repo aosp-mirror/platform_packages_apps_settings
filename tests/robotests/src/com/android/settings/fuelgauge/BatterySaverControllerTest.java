@@ -117,4 +117,10 @@ public class BatterySaverControllerTest {
 
         assertThat(mBatterySaverController.getSummary()).isEqualTo("Off");
     }
+
+    @Test
+    public void getAvailabilityStatus_returnAvailable() {
+        assertThat(mBatterySaverController.getAvailabilityStatus())
+                .isEqualTo(BatterySaverController.AVAILABLE);
+    }
 }

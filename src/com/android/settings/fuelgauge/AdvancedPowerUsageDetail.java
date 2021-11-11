@@ -29,7 +29,6 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -88,6 +87,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
     private static final String KEY_PREF_RESTRICTED = "restricted_pref";
     private static final String KEY_FOOTER_PREFERENCE = "app_usage_footer_preference";
+    private static final String PACKAGE_NAME_NONE = "none";
 
     private static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
@@ -485,14 +485,14 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         }
 
         if (metricCategory != 0) {
+            final String packageName = mBatteryOptimizeUtils.getPackageName();
             FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
                     .action(
-                            getContext(),
-                            metricCategory,
-                            new Pair(ConvertUtils.METRIC_KEY_PACKAGE,
-                                    mBatteryOptimizeUtils.getPackageName()),
-                            new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE,
-                                    getArguments().getString(EXTRA_POWER_USAGE_PERCENT)));
+                            /* attribution */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                            /* action */ metricCategory,
+                            /* pageId */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                            TextUtils.isEmpty(packageName) ? PACKAGE_NAME_NONE : packageName,
+                            getArguments().getInt(EXTRA_POWER_USAGE_AMOUNT));
         }
     }
 
