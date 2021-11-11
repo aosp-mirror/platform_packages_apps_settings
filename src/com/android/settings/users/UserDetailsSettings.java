@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.Trace;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
@@ -344,6 +345,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     @VisibleForTesting
     void switchUser() {
+        Trace.beginSection("UserDetailSettings.switchUser");
         try {
             if (mUserInfo.isGuest()) {
                 mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_SWITCH_TO_GUEST);
@@ -352,6 +354,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         } catch (RemoteException re) {
             Log.e(TAG, "Error while switching to other user.");
         } finally {
+            Trace.endSection();
             finishFragment();
         }
     }
