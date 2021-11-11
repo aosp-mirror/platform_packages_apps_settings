@@ -806,12 +806,11 @@ public class AdvancedPowerUsageDetailTest {
 
         verify(mMetricsFeatureProvider)
                 .action(
-                        mContext,
+                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
                         SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
-                        (Pair<Integer, Object>[]) new Pair[] {
-                                new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
-                                new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, "app label")
-                        });
+                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                        /* package name*/ "none",
+                        /* consumed battery */ 0);
     }
 
     @Test
