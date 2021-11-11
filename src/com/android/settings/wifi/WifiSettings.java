@@ -59,6 +59,7 @@ import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
@@ -231,7 +232,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
+        if (Utils.isProviderModelEnabled(getContext())) {
             final Intent intent = new Intent("android.settings.NETWORK_PROVIDER_SETTINGS");
             // Add FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TASK to avoid multiple
             // instances issue. (e.g. b/191956700)
@@ -1067,6 +1068,11 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wifi_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !Utils.isProviderModelEnabled(context);
+                }
+
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);

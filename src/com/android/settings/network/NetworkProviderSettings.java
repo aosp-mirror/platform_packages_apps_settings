@@ -60,6 +60,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
@@ -133,7 +134,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     static final String PREF_KEY_FIRST_ACCESS_POINTS = "first_access_points";
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
-    private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_wifi_settings";
+    private static final String PREF_KEY_CONFIGURE_NETWORK_SETTINGS = "configure_network_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
     @VisibleForTesting
     static final String PREF_KEY_DATA_USAGE = "non_carrier_data_usage";
@@ -280,7 +281,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
+        if (!Utils.isProviderModelEnabled(getContext())) {
             final Intent intent = new Intent(getContext(), WifiSettingsActivity.class);
             final Bundle extras = getActivity().getIntent().getExtras();
             if (extras != null) {
@@ -310,7 +311,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mConnectedWifiEntryPreferenceCategory = findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
         mFirstWifiEntryPreferenceCategory = findPreference(PREF_KEY_FIRST_ACCESS_POINTS);
         mWifiEntryPreferenceCategory = findPreference(PREF_KEY_ACCESS_POINTS);
-        mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_WIFI_SETTINGS);
+        mConfigureWifiSettingsPreference = findPreference(PREF_KEY_CONFIGURE_NETWORK_SETTINGS);
         mSavedNetworksPreference = findPreference(PREF_KEY_SAVED_NETWORKS);
         mAddWifiNetworkPreference = new AddWifiNetworkPreference(getPrefContext());
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
@@ -1184,6 +1185,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.network_provider_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return Utils.isProviderModelEnabled(context);
+                }
+
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
