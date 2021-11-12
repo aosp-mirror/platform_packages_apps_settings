@@ -157,7 +157,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     }
 
     /*
-     * Launch carrier emergency address managemnent activity
+     * Launch carrier emergency address management activity
      */
     private final OnPreferenceClickListener mUpdateAddressListener =
             preference -> {
