@@ -26,6 +26,9 @@ import android.util.ArrayMap;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -45,7 +48,8 @@ import java.util.Map;
  * This controller displays up to four recently used apps.
  * If there is no recently used app, we only show up an "App Info" preference.
  */
-public class AppsPreferenceController extends BasePreferenceController {
+public class AppsPreferenceController extends BasePreferenceController implements
+        LifecycleObserver {
 
     public static final int SHOW_RECENT_APP_COUNT = 4;
 
@@ -73,6 +77,7 @@ public class AppsPreferenceController extends BasePreferenceController {
     Preference mSeeAllPref;
 
     private Fragment mHost;
+    private boolean mInitialLaunch = false;
 
     public AppsPreferenceController(Context context) {
         super(context, KEY_RECENT_APPS_CATEGORY);
@@ -95,12 +100,23 @@ public class AppsPreferenceController extends BasePreferenceController {
         super.displayPreference(screen);
         initPreferences(screen);
         refreshUi();
+        mInitialLaunch = true;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        refreshUi();
+        if (!mInitialLaunch) {
+            refreshUi();
+        }
+    }
+
+    /**
+     * Called when the apps page pauses.
+     */
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void onPause() {
+        mInitialLaunch = false;
     }
 
     @VisibleForTesting
@@ -109,11 +125,15 @@ public class AppsPreferenceController extends BasePreferenceController {
         mRecentApps = loadRecentApps();
         if (!mRecentApps.isEmpty()) {
             displayRecentApps();
+            mAllAppsInfoPref.setVisible(false);
             mRecentAppsCategory.setVisible(true);
             mGeneralCategory.setVisible(true);
             mSeeAllPref.setVisible(true);
         } else {
             mAllAppsInfoPref.setVisible(true);
+            mRecentAppsCategory.setVisible(false);
+            mGeneralCategory.setVisible(false);
+            mSeeAllPref.setVisible(false);
         }
     }
 

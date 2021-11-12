@@ -36,6 +36,10 @@
         <item name="face_layout_theme">@style/FaceLayoutTheme</item>
         <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_dark</item>
 
+        <!-- For edge-to-edge -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
         <!-- For wifi icon -->
         <item name="wifi_signal">@drawable/wifi_signal</item>
         <item name="wifi_signal_color">?android:attr/colorAccent</item>
@@ -211,6 +215,9 @@
         <item name="colorPrimaryDark">@*android:color/primary_dark_device_default_settings_light</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:navigationBarDividerColor">@*android:color/ripple_material_light</item>
+        <!-- Homepage should follow device default design, the values is same as device default theme.-->
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
     </style>
 
     <style name="Theme.Settings.ContextualCard" parent="Theme.Settings.Home">

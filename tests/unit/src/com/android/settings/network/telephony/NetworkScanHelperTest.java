@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
@@ -27,11 +28,17 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.telephony.AccessNetworkConstants;
 import android.telephony.CellInfo;
+import android.telephony.ModemInfo;
 import android.telephony.NetworkScan;
 import android.telephony.NetworkScanRequest;
+import android.telephony.PhoneCapability;
+import android.telephony.RadioAccessSpecifier;
 import android.telephony.TelephonyManager;
 import android.telephony.TelephonyScanManager;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,22 +48,20 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.robolectric.RobolectricTestRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class NetworkScanHelperTest {
 
     @Mock
     private TelephonyManager mTelephonyManager;
-
     @Mock
     private List<CellInfo> mCellInfos;
-
     @Mock
     private NetworkScanHelper.NetworkScanCallback mNetworkScanCallback;
 
@@ -70,7 +75,7 @@ public class NetworkScanHelperTest {
 
     private NetworkScan mNetworkScan;
 
-    private class NetworkScanMock extends NetworkScan {
+    public class NetworkScanMock extends NetworkScan {
         NetworkScanMock(int scanId, int subId) {
             super(scanId, subId);
         }
@@ -161,6 +166,87 @@ public class NetworkScanHelperTest {
         startNetworkScan_incremental(false);
 
         verify(mNetworkScan, times(1)).stopScan();
+    }
+
+    @Test
+    public void createNetworkScanForPreferredAccessNetworks_deviceNoNrSa_noNgran() {
+        int[] deviceNrCapabilities = new int[]{PhoneCapability.DEVICE_NR_CAPABILITY_NSA};
+        PhoneCapability phoneCapability = createPhoneCapability(deviceNrCapabilities);
+        doReturn(TelephonyManager.NETWORK_CLASS_BITMASK_2G
+                | TelephonyManager.NETWORK_CLASS_BITMASK_3G
+                | TelephonyManager.NETWORK_CLASS_BITMASK_4G
+                | TelephonyManager.NETWORK_CLASS_BITMASK_5G).when(
+                mTelephonyManager).getPreferredNetworkTypeBitmask();
+        doReturn(phoneCapability).when(mTelephonyManager).getPhoneCapability();
+        List<RadioAccessSpecifier> radioAccessSpecifiers = new ArrayList<>();
+        radioAccessSpecifiers.add(
+                new RadioAccessSpecifier(AccessNetworkConstants.AccessNetworkType.GERAN, null,
+                        null));
+        radioAccessSpecifiers.add(
+                new RadioAccessSpecifier(AccessNetworkConstants.AccessNetworkType.UTRAN, null,
+                        null));
+        radioAccessSpecifiers.add(
+                new RadioAccessSpecifier(AccessNetworkConstants.AccessNetworkType.EUTRAN, null,
+                        null));
+        NetworkScanRequest expectedNetworkScanRequest = createNetworkScanRequest(
+                radioAccessSpecifiers);
+
+        assertEquals(expectedNetworkScanRequest,
+                mNetworkScanHelper.createNetworkScanForPreferredAccessNetworks());
+    }
+
+    @Test
+    public void createNetworkScanForPreferredAccessNetworks_deviceHasNrSa_hasNgran() {
+        int[] deviceNrCapabilities = new int[]{PhoneCapability.DEVICE_NR_CAPABILITY_NSA,
+                PhoneCapability.DEVICE_NR_CAPABILITY_SA};
+        PhoneCapability phoneCapability = createPhoneCapability(deviceNrCapabilities);
+        doReturn(TelephonyManager.NETWORK_CLASS_BITMASK_2G
+                | TelephonyManager.NETWORK_CLASS_BITMASK_3G
+                | TelephonyManager.NETWORK_CLASS_BITMASK_4G
+                | TelephonyManager.NETWORK_CLASS_BITMASK_5G).when(
+                mTelephonyManager).getPreferredNetworkTypeBitmask();
+        doReturn(phoneCapability).when(mTelephonyManager).getPhoneCapability();
+        List<RadioAccessSpecifier> radioAccessSpecifiers = new ArrayList<>();
+        radioAccessSpecifiers.add(
+                new RadioAccessSpecifier(AccessNetworkConstants.AccessNetworkType.GERAN, null,
+                        null));
+        radioAccessSpecifiers.add(
+                new RadioAccessSpecifier(AccessNetworkConstants.AccessNetworkType.UTRAN, null,
+                        null));
+        radioAccessSpecifiers.add(
+                new RadioAccessSpecifier(AccessNetworkConstants.AccessNetworkType.EUTRAN, null,
+                        null));
+        radioAccessSpecifiers.add(
+                new RadioAccessSpecifier(AccessNetworkConstants.AccessNetworkType.NGRAN, null,
+                        null));
+        NetworkScanRequest expectedNetworkScanRequest = createNetworkScanRequest(
+                radioAccessSpecifiers);
+
+        assertEquals(expectedNetworkScanRequest,
+                mNetworkScanHelper.createNetworkScanForPreferredAccessNetworks());
+    }
+
+    private PhoneCapability createPhoneCapability(int[] deviceNrCapabilities) {
+        int maxActiveVoiceCalls = 1;
+        int maxActiveData = 2;
+        ModemInfo modemInfo = new ModemInfo(1, 2, true, false);
+        List<ModemInfo> logicalModemList = new ArrayList<>();
+        logicalModemList.add(modemInfo);
+        return new PhoneCapability(maxActiveVoiceCalls, maxActiveData,
+                logicalModemList, false, deviceNrCapabilities);
+    }
+
+    private NetworkScanRequest createNetworkScanRequest(
+            List<RadioAccessSpecifier> radioAccessSpecifiers) {
+        return new NetworkScanRequest(
+                NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
+                radioAccessSpecifiers.toArray(
+                        new RadioAccessSpecifier[radioAccessSpecifiers.size()]),
+                mNetworkScanHelper.SEARCH_PERIODICITY_SEC,
+                mNetworkScanHelper.MAX_SEARCH_TIME_SEC,
+                mNetworkScanHelper.INCREMENTAL_RESULTS,
+                mNetworkScanHelper.INCREMENTAL_RESULTS_PERIODICITY_SEC,
+                null /* List of PLMN ids (MCC-MNC) */);
     }
 
     private void startNetworkScan_incremental(boolean waitForCompletion) {

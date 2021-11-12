@@ -582,9 +582,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         if (mUid <= 0) {
             final Intent intent = args == null
                     ? getActivity().getIntent() : (Intent) args.getParcelable("intent");
-            if (intent != null && intent.getExtras() != null) {
-                mUid = intent.getIntExtra("uId", -1);
-            }
+            mUid = intent != null && intent.getExtras() != null
+                    ? mUid = intent.getIntExtra("uId", -1) : -1;
         }
         return mUid;
     }

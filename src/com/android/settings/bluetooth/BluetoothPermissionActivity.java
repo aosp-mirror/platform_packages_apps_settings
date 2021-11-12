@@ -221,7 +221,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         intent.putExtra(BluetoothDevice.EXTRA_ALWAYS_ALLOWED, always);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
         intent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE, mRequestType);
-        sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_ADMIN);
+        sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_CONNECT);
     }
 
     public void onClick(DialogInterface dialog, int which) {

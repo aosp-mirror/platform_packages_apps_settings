@@ -41,9 +41,9 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.utils.CandidateInfoExtra;
 import com.android.settings.widget.RadioButtonPickerFragment;
-import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.ArrayList;
@@ -67,7 +67,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
 
     private IOverlayManager mOverlayManager;
 
-    private VideoPreference mVideoPreference;
+    private IllustrationPreference mVideoPreference;
 
     @Override
     public void onAttach(Context context) {
@@ -81,11 +81,8 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         mOverlayManager = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService(Context.OVERLAY_SERVICE));
 
-        mVideoPreference = new VideoPreference(context);
+        mVideoPreference = new IllustrationPreference(context);
         setIllustrationVideo(mVideoPreference, getDefaultKey());
-        mVideoPreference.setHeight( /* Illustration height in dp */
-                getResources().getDimension(R.dimen.system_navigation_illustration_height)
-                        / getResources().getDisplayMetrics().density);
 
         migrateOverlaySensitivityToSettings(context, mOverlayManager);
     }
@@ -234,18 +231,17 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         }
     }
 
-    private static void setIllustrationVideo(VideoPreference videoPref, String systemNavKey) {
-        videoPref.setVideo(0, 0);
+    private static void setIllustrationVideo(IllustrationPreference videoPref,
+            String systemNavKey) {
         switch (systemNavKey) {
             case KEY_SYSTEM_NAV_GESTURAL:
-                videoPref.setVideo(R.raw.system_nav_fully_gestural,
-                        R.drawable.system_nav_fully_gestural);
+                videoPref.setLottieAnimationResId(R.raw.lottie_system_nav_fully_gestural);
                 break;
             case KEY_SYSTEM_NAV_2BUTTONS:
-                videoPref.setVideo(R.raw.system_nav_2_button, R.drawable.system_nav_2_button);
+                videoPref.setLottieAnimationResId(R.raw.lottie_system_nav_2_button);
                 break;
             case KEY_SYSTEM_NAV_3BUTTONS:
-                videoPref.setVideo(R.raw.system_nav_3_button, R.drawable.system_nav_3_button);
+                videoPref.setLottieAnimationResId(R.raw.lottie_system_nav_3_button);
                 break;
         }
     }

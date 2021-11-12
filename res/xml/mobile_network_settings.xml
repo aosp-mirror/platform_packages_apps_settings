@@ -86,7 +86,8 @@
         <Preference
             android:key="carrier_wifi_network"
             android:title="@string/carrier_wifi_network_title"
-            android:selectable="false"/>
+            android:selectable="false"
+            settings:searchable="false"/>
 
         <SwitchPreference
             android:key="mms_message"
@@ -240,6 +241,12 @@
             settings:controller="com.android.settings.network.telephony.CarrierPreferenceController">
         </Preference>
 
+        <SwitchPreference
+            android:key="enable_2g"
+            android:title="@string/enable_2g_title"
+            android:summary="@string/enable_2g_summary"
+            settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController" />
+
     </PreferenceCategory>
 
     <Preference
@@ -264,10 +271,4 @@
         settings:allowDividerAbove="true"
         settings:searchable="false"
         settings:controller="com.android.settings.network.telephony.NrDisabledInDsdsFooterPreferenceController"/>
-
-    <SwitchPreference
-        android:key="enable_2g"
-        android:title="@string/enable_2g_title"
-        android:summary="@string/enable_2g_summary"
-        settings:controller="com.android.settings.network.telephony.Enable2gPreferenceController" />
 </PreferenceScreen>

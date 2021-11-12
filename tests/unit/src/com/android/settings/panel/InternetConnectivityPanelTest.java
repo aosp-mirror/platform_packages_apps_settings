@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,7 +31,6 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -89,8 +87,6 @@ public class InternetConnectivityPanelTest {
     private WifiManager mWifiManager;
     @Mock
     private ProviderModelSliceHelper mProviderModelSliceHelper;
-    @Mock
-    private FragmentActivity mPanelActivity;
 
     private Context mContext;
     private FakeHandlerInjector mFakeHandlerInjector;
@@ -223,20 +219,6 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void getCustomizedButtonTitle_wifiOff_turnOnWifi() {
-        doReturn(false).when(mInternetUpdater).isWifiEnabled();
-
-        assertThat(mPanel.getCustomizedButtonTitle()).isEqualTo(BUTTON_TURN_ON_WIFI);
-    }
-
-    @Test
-    public void getCustomizedButtonTitle_wifiOn_turnOffWifi() {
-        doReturn(true).when(mInternetUpdater).isWifiEnabled();
-
-        assertThat(mPanel.getCustomizedButtonTitle()).isEqualTo(BUTTON_TURN_OFF_WIFI);
-    }
-
-    @Test
     public void getSlices_providerModelDisabled_containsNecessarySlices() {
         mPanel.mIsProviderModelEnabled = false;
         List<Uri> uris = mPanel.getSlices();
@@ -255,33 +237,17 @@ public class InternetConnectivityPanelTest {
     }
 
     @Test
-    public void getSeeMoreIntent_shouldNotNull() {
+    public void getSeeMoreIntent_providerModelDisabled_shouldNotNull() {
+        mPanel.mIsProviderModelEnabled = false;
+
         assertThat(mPanel.getSeeMoreIntent()).isNotNull();
     }
 
     @Test
-    public void onClickCustomizedButton_wifiOn_setWifiOff() {
-        doReturn(true).when(mInternetUpdater).isWifiEnabled();
+    public void getSeeMoreIntent_providerModelEnabled_shouldBeNull() {
+        mPanel.mIsProviderModelEnabled = true;
 
-        mPanel.onClickCustomizedButton(mPanelActivity);
-
-        verify(mWifiManager).setWifiEnabled(false);
-    }
-
-    @Test
-    public void onClickCustomizedButton_wifiOff_setWifiOn() {
-        doReturn(false).when(mInternetUpdater).isWifiEnabled();
-
-        mPanel.onClickCustomizedButton(mPanelActivity);
-
-        verify(mWifiManager).setWifiEnabled(true);
-    }
-
-    @Test
-    public void onClickCustomizedButton_shouldNotFinishActivity() {
-        mPanel.onClickCustomizedButton(mPanelActivity);
-
-        verify(mPanelActivity, never()).finish();
+        assertThat(mPanel.getSeeMoreIntent()).isNull();
     }
 
     @Test
@@ -291,26 +257,6 @@ public class InternetConnectivityPanelTest {
         mPanel.updatePanelTitle();
 
         verify(mPanelContentCallback).onHeaderChanged();
-    }
-
-    @Test
-    public void onWifiEnabledChanged_wifiOff_onCustomizedButtonStateChanged() {
-        doReturn(false).when(mInternetUpdater).isWifiEnabled();
-        clearInvocations(mPanelContentCallback);
-
-        mPanel.onWifiEnabledChanged(false);
-
-        verify(mPanelContentCallback).onCustomizedButtonStateChanged();
-    }
-
-    @Test
-    public void onWifiEnabledChanged_wifiOn_onCustomizedButtonStateChanged() {
-        doReturn(true).when(mInternetUpdater).isWifiEnabled();
-        clearInvocations(mPanelContentCallback);
-
-        mPanel.onWifiEnabledChanged(true);
-
-        verify(mPanelContentCallback).onCustomizedButtonStateChanged();
     }
 
     @Test

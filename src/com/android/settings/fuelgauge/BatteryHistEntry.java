@@ -22,6 +22,7 @@ import java.time.Duration;
 
 /** A container class to carry data from {@link ContentValues}. */
 public class BatteryHistEntry {
+    private static final boolean DEBUG = false;
     private static final String TAG = "BatteryHistEntry";
 
     /** Keys for accessing {@link ContentValues} or {@link Cursor}. */
@@ -316,9 +317,11 @@ public class BatteryHistEntry {
         if (upperHistEntry.mConsumePower < consumePower
                 || upperHistEntry.mForegroundUsageTimeInMs < foregroundUsageTimeInMs
                 || upperHistEntry.mBackgroundUsageTimeInMs < backgroundUsageTimeInMs) {
-            Log.w(TAG, String.format(
-                "abnormal interpolation:\nupper:%s\nlower:%s",
-                upperHistEntry, lowerHistEntry));
+            if (DEBUG) {
+                Log.w(TAG, String.format(
+                        "abnormal interpolation:\nupper:%s\nlower:%s",
+                        upperHistEntry, lowerHistEntry));
+            }
         }
         final double batteryLevel =
             lowerHistEntry == null

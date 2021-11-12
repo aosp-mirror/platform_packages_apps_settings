@@ -30,6 +30,7 @@ import android.content.pm.PackageManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -41,6 +42,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Ignore("b/191992001")
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothDetailsCompanionAppsControllerTest extends
         BluetoothDetailsControllerTestBase {

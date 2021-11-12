@@ -27,40 +27,39 @@
     <ScrollView
         android:id="@+id/main_clear_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/reset_main_clear_margin_start"
-        android:layout_marginEnd="@dimen/reset_main_clear_margin_end">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/main_clear_container"
             style="@style/SudContentFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:orientation="vertical">
 
             <TextView
-                style="@style/TextAppearance.SudGlifItemSummary"
+                style="@style/TextAppearance.PreferenceTitle.SettingsLib"
                 android:id="@+id/sud_layout_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_clear_desc"/>
             <TextView
                 android:id="@+id/also_erases_external"
-                style="@style/TextAppearance.SudGlifItemSummary"
+                style="@style/TextAppearance.PreferenceTitle.SettingsLib"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:text="@string/main_clear_desc_also_erases_external"/>
             <TextView
                 android:id="@+id/also_erases_esim"
-                style="@style/TextAppearance.SudGlifItemSummary"
+                style="@style/TextAppearance.PreferenceTitle.SettingsLib"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:text="@string/main_clear_desc_also_erases_esim"/>
             <TextView
                 android:id="@+id/accounts_label"
-                style="@style/TextAppearance.SudGlifItemSummary"
+                style="@style/TextAppearance.PreferenceTitle.SettingsLib"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
@@ -76,21 +75,21 @@
             </LinearLayout>
             <TextView
                 android:id="@+id/other_users_present"
-                style="@style/TextAppearance.SudGlifItemSummary"
+                style="@style/TextAppearance.PreferenceTitle.SettingsLib"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:text="@string/main_clear_other_users_present"/>
             <TextView
                 android:id="@+id/no_cancel_mobile_plan"
-                style="@style/TextAppearance.SudGlifItemSummary"
+                style="@style/TextAppearance.PreferenceTitle.SettingsLib"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:text="@string/main_clear_desc_no_cancel_mobile_plan"/>
             <TextView
                 android:id="@+id/erase_external_option_text"
-                style="@style/TextAppearance.SudGlifItemSummary"
+                style="@style/TextAppearance.PreferenceTitle.SettingsLib"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_clear_desc_erase_external_storage"/>
@@ -116,12 +115,12 @@
                     android:layout_gravity="center_vertical"
                     android:orientation="vertical">
                     <TextView
-                        style="@style/TextAppearance.SudGlifItemTitle"
+                        style="@style/TextAppearance.PreferenceTitle.SettingsLib"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/erase_external_storage"/>
                     <TextView
-                        style="@style/TextAppearance.SudGlifItemSummary"
+                        style="?android:attr/textAppearanceListItemSecondary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/erase_external_storage_description"/>

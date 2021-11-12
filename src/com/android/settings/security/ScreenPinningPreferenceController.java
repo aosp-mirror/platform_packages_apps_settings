@@ -27,7 +27,11 @@ public class ScreenPinningPreferenceController extends BasePreferenceController 
     private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
 
     public ScreenPinningPreferenceController(Context context) {
-        super(context, KEY_SCREEN_PINNING);
+        this(context, KEY_SCREEN_PINNING);
+    }
+
+    public ScreenPinningPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override

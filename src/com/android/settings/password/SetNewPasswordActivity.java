@@ -134,6 +134,8 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
             intent.putExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, true);
         }
         intent.putExtra(EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY, mDevicePasswordRequirementOnly);
+        // Copy the setup wizard intent extra to the intent.
+        WizardManagerHelper.copyWizardManagerExtras(getIntent(), intent);
         startActivity(intent);
         finish();
     }

@@ -21,7 +21,8 @@
     style="?attr/face_layout_theme"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:sucHeaderText="@string/security_settings_face_enroll_education_title">
 
     <LinearLayout
         style="@style/SudContentFrame"
@@ -38,7 +39,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-32dp">
+            android:layout_marginTop="-24dp">
 
             <com.google.android.setupdesign.view.IllustrationVideoView
                 android:id="@+id/illustration_default"
@@ -51,8 +52,8 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/illustration_lottie"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_marginTop="-48dp"
+                android:layout_height="440dp"
+                android:layout_marginTop="-52dp"
                 android:scaleType="centerCrop"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
@@ -97,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:messageText="@string/security_settings_face_enroll_introduction_accessibility_diversity"/>
+                    app:messageText="@string/security_settings_face_enroll_introduction_accessibility"/>
 
             </FrameLayout>
 

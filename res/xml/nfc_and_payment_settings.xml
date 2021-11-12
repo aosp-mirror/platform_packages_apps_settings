@@ -24,10 +24,10 @@
         android:title="@string/nfc_main_switch_title"
         settings:controller="com.android.settings.nfc.NfcPreferenceController"/>
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="nfc_detection_point"
-        android:selectable="false"
-        android:layout="@layout/nfc_detection_point"
+        settings:searchable="false"
+        settings:lottie_rawRes="@drawable/nfc_detection_point"
         settings:controller="com.android.settings.nfc.NfcDetectionPointController"/>
 
     <SwitchPreference

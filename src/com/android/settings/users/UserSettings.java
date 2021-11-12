@@ -87,6 +87,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Screen that manages the list of users on the device.
@@ -128,6 +131,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int DIALOG_USER_PROFILE_EDITOR = 9;
     private static final int DIALOG_USER_PROFILE_EDITOR_ADD_USER = 10;
     private static final int DIALOG_USER_PROFILE_EDITOR_ADD_RESTRICTED_PROFILE = 11;
+    private static final int DIALOG_CONFIRM_RESET_GUEST = 12;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
     private static final int MESSAGE_USER_CREATED = 2;
@@ -136,6 +140,9 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int USER_TYPE_RESTRICTED_PROFILE = 2;
 
     private static final int REQUEST_CHOOSE_LOCK = 10;
+    private static final int REQUEST_EDIT_GUEST = 11;
+
+    static final int RESULT_GUEST_REMOVED = 100;
 
     private static final String KEY_ADD_USER_LONG_MESSAGE_DISPLAYED =
             "key_add_user_long_message_displayed";
@@ -160,6 +167,7 @@ public class UserSettings extends SettingsPreferenceFragment
     SparseArray<Bitmap> mUserIcons = new SparseArray<>();
     private int mRemovingUserId = -1;
     private boolean mAddingUser;
+    private boolean mGuestUserAutoCreated;
     private String mAddingUserName;
     private UserCapabilities mUserCaps;
     private boolean mShouldUpdateUserList = true;
@@ -173,6 +181,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
     private MultiUserTopIntroPreferenceController mMultiUserTopIntroPreferenceController;
     private UserCreatingDialog mUserCreatingDialog;
+    private final AtomicBoolean mGuestCreationScheduled = new AtomicBoolean();
+    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
     private CharSequence mPendingUserName;
     private Drawable mPendingUserIcon;
@@ -239,6 +249,9 @@ public class UserSettings extends SettingsPreferenceFragment
             activity.finish();
             return;
         }
+
+        mGuestUserAutoCreated = getPrefContext().getResources().getBoolean(
+                        com.android.internal.R.bool.config_guestUserAutoCreated);
 
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
                 activity, KEY_ADD_USER_WHEN_LOCKED);
@@ -343,7 +356,10 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        if (!mUserCaps.mIsAdmin && canSwitchUserNow()) {
+        // TODO(b/191509236): The menu item does not need to be accessible for guest users,
+        //  regardless of mGuestUserAutoCreated
+        if (!mUserCaps.mIsAdmin && canSwitchUserNow() && !(isCurrentUserGuest()
+                && mGuestUserAutoCreated)) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -387,7 +403,9 @@ public class UserSettings extends SettingsPreferenceFragment
         if (isCurrentUserGuest()) {
             // No need to load profile information
             mMePreference.setIcon(getEncircledDefaultIcon());
-            mMePreference.setTitle(R.string.user_exit_guest_title);
+            mMePreference.setTitle(
+                    mGuestUserAutoCreated ? com.android.settingslib.R.string.guest_reset_guest
+                            : R.string.user_exit_guest_title);
             mMePreference.setSelectable(true);
             // removing a guest will result in switching back to the admin user
             mMePreference.setEnabled(canSwitchUserNow());
@@ -445,6 +463,9 @@ public class UserSettings extends SettingsPreferenceFragment
             if (resultCode != Activity.RESULT_CANCELED && hasLockscreenSecurity()) {
                 addUserNow(USER_TYPE_RESTRICTED_PROFILE);
             }
+        } else if (mGuestUserAutoCreated && requestCode == REQUEST_EDIT_GUEST
+                && resultCode == RESULT_GUEST_REMOVED) {
+            scheduleGuestCreation();
         } else {
             mEditUserInfoController.onActivityResult(requestCode, resultCode, data);
         }
@@ -508,12 +529,15 @@ public class UserSettings extends SettingsPreferenceFragment
         extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
 
         final Context context = getContext();
-        new SubSettingLauncher(context)
+        SubSettingLauncher launcher = new SubSettingLauncher(context)
                 .setDestination(UserDetailsSettings.class.getName())
                 .setArguments(extras)
                 .setTitleText(getUserName(context, userInfo))
-                .setSourceMetricsCategory(getMetricsCategory())
-                .launch();
+                .setSourceMetricsCategory(getMetricsCategory());
+        if (mGuestUserAutoCreated && userInfo.isGuest()) {
+            launcher.setResultListener(this, REQUEST_EDIT_GUEST);
+        }
+        launcher.launch();
     }
 
     @Override
@@ -651,6 +675,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
                 return buildAddUserDialog(USER_TYPE_RESTRICTED_PROFILE);
             }
+            case DIALOG_CONFIRM_RESET_GUEST: {
+                return UserDialogs.createResetGuestDialog(getActivity(),
+                        (dialog, which) -> resetGuest());
+            }
             default:
                 return null;
         }
@@ -727,6 +755,7 @@ public class UserSettings extends SettingsPreferenceFragment
             case DIALOG_NEED_LOCKSCREEN:
                 return SettingsEnums.DIALOG_USER_NEED_LOCKSCREEN;
             case DIALOG_CONFIRM_EXIT_GUEST:
+            case DIALOG_CONFIRM_RESET_GUEST:
                 return SettingsEnums.DIALOG_USER_CONFIRM_EXIT_GUEST;
             case DIALOG_USER_PROFILE_EDITOR:
             case DIALOG_USER_PROFILE_EDITOR_ADD_USER:
@@ -838,6 +867,55 @@ public class UserSettings extends SettingsPreferenceFragment
         mMetricsFeatureProvider.action(getActivity(),
                 SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED);
         removeThisUser();
+    }
+
+    /**
+     * Erase the current user (assuming it is a guest user), and create a new one in the background
+     */
+    @VisibleForTesting
+    void resetGuest() {
+        // Just to be safe
+        if (!isCurrentUserGuest()) {
+            return;
+        }
+        int guestUserId = UserHandle.myUserId();
+        // Using markGuestForDeletion allows us to create a new guest before this one is
+        // fully removed. This could happen if someone calls scheduleGuestCreation()
+        // immediately after calling this method.
+        boolean marked = mUserManager.markGuestForDeletion(guestUserId);
+        if (!marked) {
+            Log.w(TAG, "Couldn't mark the guest for deletion for user " + guestUserId);
+            return;
+        }
+        exitGuest();
+        scheduleGuestCreation();
+    }
+
+    /**
+     * Create a guest user in the background
+     */
+    @VisibleForTesting
+    void scheduleGuestCreation() {
+        // TODO(b/191067027): Move guest recreation to system_server
+        if (mGuestCreationScheduled.compareAndSet(/* expect= */ false, /* update= */ true)) {
+            // Once mGuestCreationScheduled=true, mAddGuest needs to be updated so that it shows
+            // "Resetting guest..."
+            mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+            mExecutor.execute(() -> {
+                UserInfo guest = mUserManager.createGuest(
+                        getContext(), getString(com.android.settingslib.R.string.user_guest));
+                mGuestCreationScheduled.set(false);
+                if (guest == null) {
+                    Log.e(TAG, "Unable to automatically recreate guest user");
+                }
+                // The list needs to be updated whether or not guest creation worked. If guest
+                // creation failed, the list needs to update so that "Add guest" is displayed.
+                // Otherwise, the UX could be stuck in a state where there is no way to switch to
+                // the guest user (e.g. Guest would not be selectable, and it would be stuck
+                // saying "Resetting guest...")
+                mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+            });
+        }
     }
 
     @VisibleForTesting
@@ -988,8 +1066,15 @@ public class UserSettings extends SettingsPreferenceFragment
                 && mUserCaps.mUserSwitcherEnabled) {
             mAddGuest.setVisible(true);
             mAddGuest.setIcon(getEncircledDefaultIcon());
-            mAddGuest.setEnabled(canSwitchUserNow());
             mAddGuest.setSelectable(true);
+            if (mGuestUserAutoCreated && mGuestCreationScheduled.get()) {
+                mAddGuest.setTitle(com.android.settingslib.R.string.user_guest);
+                mAddGuest.setSummary(R.string.guest_resetting);
+                mAddGuest.setEnabled(false);
+            } else {
+                mAddGuest.setTitle(com.android.settingslib.R.string.guest_new_guest);
+                mAddGuest.setEnabled(canSwitchUserNow());
+            }
         } else {
             mAddGuest.setVisible(false);
         }
@@ -1077,7 +1162,11 @@ public class UserSettings extends SettingsPreferenceFragment
     public boolean onPreferenceClick(Preference pref) {
         if (pref == mMePreference) {
             if (isCurrentUserGuest()) {
-                showDialog(DIALOG_CONFIRM_EXIT_GUEST);
+                if (mGuestUserAutoCreated) {
+                    showDialog(DIALOG_CONFIRM_RESET_GUEST);
+                } else {
+                    showDialog(DIALOG_CONFIRM_EXIT_GUEST);
+                }
             } else {
                 showDialog(DIALOG_USER_PROFILE_EDITOR);
             }
