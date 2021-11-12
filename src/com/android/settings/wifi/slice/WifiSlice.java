@@ -33,7 +33,6 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
@@ -274,7 +273,7 @@ public class WifiSlice implements CustomSliceable {
         final Uri contentUri = new Uri.Builder().appendPath(KEY_WIFI).build();
         final String className;
         final String key;
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
+        if (Utils.isProviderModelEnabled(mContext)) {
             className = NetworkProviderSettings.class.getName();
             key = WifiSwitchPreferenceController.KEY;
         } else {
