@@ -40,6 +40,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
 import android.os.RemoteException;
+import android.os.Trace;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract;
@@ -798,6 +799,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void addUserNow(final int userType) {
+        Trace.beginAsyncSection("UserSettings.addUserNow", 0);
         synchronized (mUserLock) {
             mAddingUser = true;
             mAddingUserName = userType == USER_TYPE_USER
@@ -824,6 +826,11 @@ public class UserSettings extends SettingsPreferenceFragment
 
         @Override
         public void run() {
+            runAddUser();
+            Trace.endAsyncSection("UserSettings.addUserNow", 0);
+        }
+
+        private void runAddUser() {
             UserInfo user;
             String username;
 
@@ -1198,8 +1205,10 @@ public class UserSettings extends SettingsPreferenceFragment
         } else if (pref == mAddGuest) {
             mAddGuest.setEnabled(false); // prevent multiple tap issue
             mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
+            Trace.beginSection("UserSettings.addGuest");
             UserInfo guest = mUserManager.createGuest(
                     getContext(), getString(com.android.settingslib.R.string.user_guest));
+            Trace.endSection();
             if (guest == null) {
                 Toast.makeText(getContext(),
                         com.android.settingslib.R.string.add_user_failed,

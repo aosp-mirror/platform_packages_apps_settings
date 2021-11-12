@@ -29,6 +29,7 @@ import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitPairFilter;
 import androidx.window.embedding.SplitPairRule;
 import androidx.window.embedding.SplitPlaceholderRule;
+import androidx.window.embedding.SplitRule;
 
 import com.android.settings.Settings;
 import com.android.settings.SubSettings;
@@ -81,8 +82,8 @@ public class ActivityEmbeddingRulesController {
                 secondaryIntentAction));
 
         SplitController.getInstance().registerRule(new SplitPairRule(filters,
-                finishPrimaryWithSecondary,
-                finishSecondaryWithPrimary,
+                finishPrimaryWithSecondary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
+                finishSecondaryWithPrimary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
                 clearTop,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(context),
@@ -154,6 +155,8 @@ public class ActivityEmbeddingRulesController {
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
                 activityFilters,
                 intent,
+                true /* stickyPlaceholder */,
+                SplitRule.FINISH_ADJACENT,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(mContext),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(mContext),
                 ActivityEmbeddingUtils.SPLIT_RATIO,
