@@ -33,7 +33,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.helper.SubscriptionAnnotation;
@@ -202,12 +201,9 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
                         || mStatusCache.isPhysicalSimDisableSupport()) {
                     final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
                     intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
-                    //  MobilenetworkActivity is singleTask, set SplitPairRule to show in 2-pane.
-                    ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
-                            mContext,
-                            intent.getComponent(),
-                            null /* secondaryIntentAction */,
-                            false /* clearTop */);
+                    // MobileNetworkActivity is singleTask, set SplitPairRule to show in 2-pane.
+                    MobileNetworkTwoPaneUtils.registerTwoPaneForMobileNetwork(mContext, intent,
+                            null);
                     mContext.startActivity(intent);
                     return true;
                 }
