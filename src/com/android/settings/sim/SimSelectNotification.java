@@ -52,6 +52,7 @@ import android.util.Log;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.HelpTrampoline;
 import com.android.settings.R;
+import com.android.settings.network.MobileNetworkTwoPaneUtils;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkActivity;
 
@@ -263,7 +264,9 @@ public class SimSelectNotification extends BroadcastReceiver {
         Intent resultIntent = new Intent(Settings.ACTION_MMS_MESSAGE_SETTING);
         resultIntent.setClass(context, MobileNetworkActivity.class);
         resultIntent.putExtra(Settings.EXTRA_SUB_ID, subId);
-        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // MobileNetworkActivity is singleTask, set SplitPairRule to show in 2-pane.
+        MobileNetworkTwoPaneUtils.registerTwoPaneForMobileNetwork(context, resultIntent,
+                Settings.ACTION_MMS_MESSAGE_SETTING);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         builder.setContentIntent(resultPendingIntent);

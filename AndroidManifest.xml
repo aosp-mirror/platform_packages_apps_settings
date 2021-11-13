@@ -3337,6 +3337,7 @@
         <activity
             android:name="Settings$WifiCallingSettingsActivity"
             android:exported="true"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
             android:label="@string/wifi_calling_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
