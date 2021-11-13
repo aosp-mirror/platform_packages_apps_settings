@@ -396,6 +396,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     private static void startMobileNetworkActivity(Context context, int subId) {
         final Intent intent = new Intent(context, MobileNetworkActivity.class);
         intent.putExtra(Settings.EXTRA_SUB_ID, subId);
+        // MobileNetworkActivity is singleTask, set SplitPairRule to show in 2-pane.
+        MobileNetworkTwoPaneUtils.registerTwoPaneForMobileNetwork(context, intent, null);
         context.startActivity(intent);
     }
 
