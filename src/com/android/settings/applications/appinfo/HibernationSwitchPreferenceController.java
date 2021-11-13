@@ -26,6 +26,7 @@ import static com.android.settings.Utils.PROPERTY_APP_HIBERNATION_ENABLED;
 import static com.android.settings.Utils.PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS;
 
 import android.app.AppOpsManager;
+import android.apphibernation.AppHibernationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.DeviceConfig;
@@ -134,8 +135,15 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
     @Override
     public boolean onPreferenceChange(Preference preference, Object isChecked) {
         try {
+            final boolean checked = (boolean) isChecked;
             mAppOpsManager.setUidMode(OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED, mPackageUid,
-                    (boolean) isChecked ? MODE_ALLOWED : MODE_IGNORED);
+                    checked ? MODE_ALLOWED : MODE_IGNORED);
+            if (!checked) {
+                final AppHibernationManager ahm =
+                        mContext.getSystemService(AppHibernationManager.class);
+                ahm.setHibernatingForUser(mPackageName, false);
+                ahm.setHibernatingGlobally(mPackageName, false);
+            }
         } catch (RuntimeException e) {
             return false;
         }
