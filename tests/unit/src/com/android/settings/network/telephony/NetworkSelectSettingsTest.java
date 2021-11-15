@@ -122,6 +122,10 @@ public class NetworkSelectSettingsTest {
 
         public TargetClass(NetworkSelectSettingsTest env) {
             mTestEnv = env;
+
+            Bundle bundle = new Bundle();
+            bundle.putInt(Settings.EXTRA_SUB_ID, SUB_ID);
+            setArguments(bundle);
         }
 
         @Override
@@ -179,11 +183,6 @@ public class NetworkSelectSettingsTest {
         @Override
         protected boolean enableAggregation(Context context) {
             return mTestEnv.mIsAggregationEnabled;
-        }
-
-        @Override
-        protected int getSubId() {
-            return SUB_ID;
         }
     }
 
