@@ -191,6 +191,7 @@
         </receiver>
 
         <activity android:name=".SubSettings"
+                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
                   android:theme="@style/Theme.SubSettings" />
 
         <activity android:name=".Settings$CreateShortcutActivity"
