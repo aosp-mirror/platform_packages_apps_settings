@@ -492,8 +492,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Jeszcze raz"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Dotknij ikony odcisku cyfrowego"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Unoś palec, by odcisk był dokładniejszy."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Kliknij i przytrzymaj za każdym razem, kiedy ikona się porusza. Pomoże to zarejestrować dokładny odcisk palca."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Pomoże to zarejestrować dokładny odcisk palca"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Naciśnij i przytrzymaj za każdym razem, gdy ikona się porusza. Dzięki temu zeskanujesz większą część odcisku palca."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Umieść na czytniku koniuszek palca"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Na koniec umieść na czytniku krawędzie palca"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Umieść na czytniku palec bokiem i przytrzymaj, a następnie obróć na drugi bok"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dzięki temu zeskanujesz większą część odcisku palca"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Rejestruję odcisk palca – <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Odcisk palca dodany"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Możesz teraz używać odcisku palca do odblokowywania telefonu oraz weryfikacji tożsamości, na przykład podczas logowania się w aplikacjach"</string>
@@ -1551,8 +1554,8 @@
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Wersja PRL"</string>
     <string name="meid_multi_sim" msgid="7645394486193991388">"MEID (gniazdo SIM %1$d)"</string>
-    <string name="scanning_status_text_on" msgid="3846571210578042940">"Włączono"</string>
-    <string name="scanning_status_text_off" msgid="4002352668313705132">"Wyłączono"</string>
+    <string name="scanning_status_text_on" msgid="3846571210578042940">"Wł."</string>
+    <string name="scanning_status_text_off" msgid="4002352668313705132">"Wył."</string>
     <string name="scanning_status_text_wifi_on_ble_on" msgid="7644609329607744714">"Skanowanie Wi-Fi i Bluetooth jest włączone"</string>
     <string name="scanning_status_text_wifi_on_ble_off" msgid="7215007787287418186">"Skanowanie Wi-Fi włączone, skanowanie Bluetooth wyłączone"</string>
     <string name="scanning_status_text_wifi_off_ble_on" msgid="1396882599556304165">"Skanowanie Bluetooth włączone, skanowanie Wi-Fi wyłączone"</string>
@@ -1899,7 +1902,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Skanowanie Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Zezwól na wyszukiwanie urządzeń w pobliżu przez aplikacje i usługi w dowolnym momencie, nawet gdy Bluetooth jest wyłączony. Może to np. pomóc usprawnić działanie funkcji i usług opartych na lokalizacji."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Usługi lokalizacyjne"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Usługi lokalizacyjne"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Usługi lokalizacyjne"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Usługi lokalizacyjne do pracy"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Używaj lokalizacji, aby ustawić strefę czasową"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Wymagany dostęp do lokalizacji urządzenia"</string>
@@ -2788,7 +2791,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Użyj Menedżera baterii"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Wykrywaj, gdy aplikacje szybko rozładowują baterię"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Wykrywanie szybkiego rozładowywania baterii przez aplikacje"</string>
-    <string name="battery_manager_off" msgid="673547668722420924">"Wył."</string>
+    <string name="battery_manager_off" msgid="673547668722420924">"Wyłączone"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="few">Dla %1$d aplikacji wprowadzono ograniczenia</item>
       <item quantity="many">Dla %1$d aplikacji wprowadzono ograniczenia</item>
@@ -2948,8 +2951,8 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Poziom naładowania baterii w ciągu ostatnich 24 godzin"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Wykorzystanie przez aplikacje w ciągu ostatnich 24 godzin"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Wykorzystanie przez system w ciągu ostatnich 24 godzin"</string>
-    <string name="battery_system_usage_for" msgid="3248552137819897140">"Wykorzystanie przez system w ciągu <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_app_usage_for" msgid="7309909074935858949">"Wykorzystanie przez aplikacje w ciągu <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Wykorzystanie przez system w godz. <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"Wykorzystanie przez aplikacje w godz. <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"AM"</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"PM"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Łącznie: niecała minuta"</string>
@@ -4289,7 +4292,7 @@
     <string name="device_feedback" msgid="5351614458411688608">"Prześlij opinię o tym urządzeniu"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Wpisz kod PIN administratora"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Wł."</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"Wyłączony"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Wył."</string>
     <string name="nfc_setting_on" msgid="7701896496026725772">"Wł."</string>
     <string name="nfc_setting_off" msgid="7142103438532732309">"Wył."</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Włączono"</string>

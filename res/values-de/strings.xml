@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Noch mal"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Dem Fingerabdruck-Symbol folgen"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Lege den Finger immer wieder in leicht geänderter Position auf, bis der Abdruck vollständig erfasst ist."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Lege deinen Finger jedes Mal für längere Zeit auf den Sensor, wenn sich das Fingerabdrucksymbol bewegt. Hierdurch kann dein kompletter Fingerabdruck besser erfasst werden."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Hierdurch kann dein kompletter Fingerabdruck besser erfasst werden"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Leg deinen Finger jedes Mal für längere Zeit auf den Sensor, wenn sich das Fingerabdrucksymbol bewegt. Dadurch kann dein Fingerabdruck besser erfasst werden."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Leg deine Fingerkuppe auf den Sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Roll den Finger zu beiden Seiten"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Halte nacheinander beide Seiten der Fingerkuppe auf den Sensor"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dadurch kann dein Fingerabdruck besser erfasst werden"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -1403,7 +1406,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Beim dunklen Design ist der Hintergrund einiger Bildschirme schwarz, damit dein Akku länger hält. Zeitpläne für das dunkle Design werden erst aktiviert, wenn das Display aus ist."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Display automatisch ausschalten"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Display wird ausgeschaltet."</string>
-    <string name="screen_timeout_summary" msgid="5558778019594643427">"Nach <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ohne Aktivität"</string>
+    <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ohne Aktivität"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Hintergrund"</string>
     <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Hintergrund &amp; Stil"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Startseite, Sperrbildschirm"</string>
@@ -1858,7 +1861,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth-Suche"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Wenn diese Funktion aktiviert ist, dürfen Apps und Dienste immer nach Geräten in der Nähe suchen, auch wenn Bluetooth deaktiviert ist. Dadurch können beispielsweise standortbasierte Funktionen und Dienste verbessert werden."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Standortdienste"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Standortdienste"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Standortdienste"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Standortdienste für die Arbeit"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Zeitzone anhand des Standorts festlegen"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Gerätestandort erforderlich"</string>
@@ -1892,7 +1895,7 @@
     <string name="contributors_title" msgid="7965640251547037965">"Mitwirkende"</string>
     <string name="manual" msgid="3651593989906084868">"Handbuch"</string>
     <string name="regulatory_labels" msgid="5960251403367154270">"Zulassungszeichen"</string>
-    <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Sicherheits- &amp; Regulierungsinformationen"</string>
+    <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Sicherheitsinformationen &amp; rechtliche Hinweise"</string>
     <string name="copyright_title" msgid="83245306827757857">"Urheberrecht"</string>
     <string name="license_title" msgid="8745742085916617540">"Lizenz"</string>
     <string name="module_license_title" msgid="8705484239826702828">"Lizenzen für Google Play-Systemupdates"</string>
@@ -2269,7 +2272,7 @@
     <string name="accessibility_settings" msgid="4713215774904704682">"Bedienungshilfen"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Einstellungen für Bedienungshilfen"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Display, Interaktion, Audio"</string>
-    <string name="vision_settings_title" msgid="8919983801864103069">"Einstellungen für Sehbehinderte"</string>
+    <string name="vision_settings_title" msgid="8919983801864103069">"Ein­stellungen für Seh­behinderte"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"Du kannst dieses Gerät an deine Bedürfnisse anpassen. Die Bedienungshilfen kannst du später in den Einstellungen ändern."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Schriftgröße ändern"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Screenreader"</string>
@@ -2313,7 +2316,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Auf dem Bildschirm heranzoomen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Zum Zoomen dreimal tippen"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Zum Zoomen auf eine Schaltfläche tippen"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2527664482392097865">"Du kannst auf dem Display schnell heranzoomen, um Inhalte zu vergrößern.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Verknüpfung&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit zwei Fingern, um den angezeigten Bildschirmausschnitt zu ändern&lt;br/&gt; {3,number,integer}. Ziehe zwei Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Beende die Vergrößerung über die Verknüpfung&lt;br/&gt;&lt;br/&gt; &lt;b&gt;So zoomst du vorübergehend heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Verknüpfung&lt;br/&gt; {1,number,integer}. Halte eine beliebige Stelle auf dem Display gedrückt&lt;br/&gt; {2,number,integer}. Ziehe mit dem Finger, um den angezeigten Bildschirmausschnitt zu ändern&lt;br/&gt; {3,number,integer}. Hebe den Finger, um die Vergrößerung zu beenden"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2527664482392097865">"Du kannst auf dem Display schnell heranzoomen, um Inhalte zu vergrößern.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Verknüpfung&lt;br/&gt; {1,number,integer}. Tippe auf das Display&lt;br/&gt; {2,number,integer}. Ziehe mit zwei Fingern, um den angezeigten Bildschirmausschnitt zu verschieben&lt;br/&gt; {3,number,integer}. Ziehe zwei Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; {4,number,integer}. Beende die Vergrößerung über die Verknüpfung&lt;br/&gt;&lt;br/&gt; &lt;b&gt;So zoomst du vorübergehend heran:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Starte die Vergrößerung über die Verknüpfung&lt;br/&gt; {1,number,integer}. Halte eine beliebige Stelle auf dem Display gedrückt&lt;br/&gt; {2,number,integer}. Ziehe mit dem Finger, um den angezeigten Bildschirmausschnitt zu ändern&lt;br/&gt; {3,number,integer}. Hebe den Finger, um die Vergrößerung zu beenden"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Wenn die Vergrößerung aktiviert ist, kannst du Elemente auf dem Bildschirm heranzoomen.\n\n"<b>"Wenn du zoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm.\n"<ul><li>"Zum Scrollen ziehe mit zwei oder mehr Fingern"</li>\n<li>"Zum Anpassen des Zooms ziehe zwei oder mehr Finger zusammen bzw. auseinander"</li></ul>\n\n<b>"Wenn du vorübergehend heranzoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm und halte sie gedrückt.\n"<ul><li>"Wenn du dich im Bildschirm bewegen möchtest, ziehe den Bildschirm"</li>\n<li>"Zum Herauszoomen hebe den Finger"</li></ul>\n\n"In die Tastatur oder Navigationsleiste kann nicht hineingezoomt werden."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Seite <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> von <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Zum Öffnen Schaltfläche „Bedienungshilfen“ nutzen"</string>
@@ -3819,7 +3822,7 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Nach der Entsperrung direkt zum zuletzt genutzten Bildschirm gehen"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Sperrbildschirm, überspringen, umgehen"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Wenn das Arbeitsprofil gesperrt ist"</string>
-    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Benachrichtigungen auf dem Sperrbildschirm"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Benachrichtigungen auf Sperrbildschirm"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Lautlose und Standardunterhaltungen anzeigen"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Lautlose Unterhaltungen und Benachrichtigungen verbergen"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Keine Benachrichtigungen anzeigen"</string>
@@ -4577,7 +4580,7 @@
     <string name="condition_expand_show" msgid="1501084007540953213">"Anzeigen"</string>
     <string name="condition_expand_hide" msgid="8347564076209121058">"Ausblenden"</string>
     <string name="condition_hotspot_title" msgid="7903918338790641071">"Hotspot ist aktiv"</string>
-    <string name="condition_airplane_title" msgid="5847967403687381705">"Flugzeugmodus aktiviert"</string>
+    <string name="condition_airplane_title" msgid="5847967403687381705">"Flugmodus ist aktiviert"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"Netzwerke nicht verfügbar"</string>
     <string name="condition_zen_title" msgid="7674761111934567490">"„Bitte nicht stören“ aktiviert"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Smartphone stummgeschaltet"</string>

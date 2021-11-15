@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"One more time"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Follow the fingerprint icon"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Keep lifting your finger to add the different parts of your fingerprint"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Touch &amp; hold each time the fingerprint icon moves. This helps to capture your full fingerprint."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"This helps to capture your full fingerprint"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Touch &amp; hold each time the fingerprint icon moves. This helps capture more of your fingerprint."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Place the tip of your finger on the sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Finally, place the edges of your finger"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Place the side of your fingerprint on the sensor and hold, then switch to the other side"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"This helps capture more of your fingerprint"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Enrolling fingerprint <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingerprint added"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Now you can use your fingerprint to unlock your phone or verify that it’s you, like when you sign in to apps"</string>
@@ -1467,7 +1470,7 @@
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Use <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_title" msgid="7182406911552216373">"Update preferred SIM card?"</string>
     <string name="sim_preferred_message" msgid="6004009449266648351">"<xliff:g id="NEW_SIM">%1$s</xliff:g> is the only SIM in your device. Do you want to use this SIM for mobile data, calls and SMS messages?"</string>
-    <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Incorrect SIM PIN code; you must now contact your carrier to unlock your device."</string>
+    <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"Incorrect SIM PIN code; you must now contact your operator to unlock your device."</string>
     <plurals name="wrong_pin_code" formatted="false" msgid="4054088588731305475">
       <item quantity="other">Incorrect SIM PIN code, you have <xliff:g id="NUMBER_1">%d</xliff:g> remaining attempts.</item>
       <item quantity="one">Incorrect SIM PIN code, you have <xliff:g id="NUMBER_0">%d</xliff:g> remaining attempt before you must contact your operator to unlock your device.</item>
@@ -1855,7 +1858,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth scanning"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Location Services"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Location Services"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Location Services"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Location services for work"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Use location to set time zone"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Device location needed"</string>
@@ -3397,14 +3400,14 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G Calling"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Use LTE services to improve voice and other communications (recommended)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Use 4G services to improve voice and other communications (recommended)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Send contacts to carrier"</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Send contacts to operator"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Send your contacts’ phone numbers to provide enhanced features"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Send contacts to <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
-    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Send contacts to your carrier?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Send contacts to your operator?"</string>
     <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Your contacts’ phone numbers will be periodically sent to <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>This info identifies whether your contacts can use certain features, like video calls or some messaging features."</string>
-    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Your contacts’ phone numbers will be periodically sent to your carrier.<xliff:g id="EMPTY_LINE">
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Your contacts’ phone numbers will be periodically sent to your operator.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>This info identifies whether your contacts can use certain features, like video calls or some messaging features."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Preferred network type"</string>

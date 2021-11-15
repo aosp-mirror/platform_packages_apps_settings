@@ -19,6 +19,7 @@ package com.android.settings.biometrics.face;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
@@ -59,28 +60,32 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onCancelButtonClick(View view) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "cancel")) {
             super.onCancelButtonClick(view);
         }
     }
 
     @Override
     protected void onSkipButtonClick(View view) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "skip")) {
             super.onSkipButtonClick(view);
         }
     }
 
     @Override
     protected void onEnrollmentSkipped(@Nullable Intent data) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "skipped")) {
             super.onEnrollmentSkipped(data);
         }
     }
 
     @Override
     protected void onFinishedEnrolling(@Nullable Intent data) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "finished")) {
             super.onFinishedEnrolling(data);
         }
     }
@@ -281,6 +286,11 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     public void onClick(LinkSpan span) {
         // TODO(b/110906762)
+    }
+
+    @Override
+    public @BiometricAuthenticator.Modality int getModality() {
+        return BiometricAuthenticator.TYPE_FACE;
     }
 
     @Override

@@ -153,17 +153,17 @@
             android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile"
             settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController" />
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="fingerprint_settings_profile"
             android:title="@string/security_settings_fingerprint_preference_title"
             android:summary="@string/summary_placeholder" />
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="face_settings_profile"
             android:title="@string/security_settings_face_preference_title"
             android:summary="@string/summary_placeholder" />
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="biometric_settings_profile"
             android:title="@string/security_settings_biometric_preference_title"
             android:summary="@string/summary_placeholder" />

@@ -30,6 +30,8 @@ import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
 
 import java.util.List;
 
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 public final class PaymentDefaultDialog extends AlertActivity implements
         DialogInterface.OnClickListener {
 
@@ -42,6 +44,9 @@ public final class PaymentDefaultDialog extends AlertActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().addPrivateFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+
         try {
             mBackend = new PaymentBackend(this);
         } catch (NullPointerException e) {

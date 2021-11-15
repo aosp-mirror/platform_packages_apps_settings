@@ -2202,6 +2202,7 @@
         </activity>
 
         <activity android:name=".bluetooth.BluetoothPairingDialog"
+                  android:permission="android.permission.BLUETOOTH_PRIVILEGED"
                   android:excludeFromRecents="true"
                   android:windowSoftInputMode="stateVisible|adjustResize"
                   android:theme="@style/Theme.AlertDialog"
@@ -2862,9 +2863,7 @@
         <activity android:name=".notification.app.ChannelPanelActivity"
                   android:label="@string/notification_channel_title"
                   android:theme="@style/Theme.Panel"
-                  android:launchMode="singleInstance"
                   android:excludeFromRecents="true"
-                  android:noHistory="true"
                   android:configChanges="orientation|keyboardHidden|screenSize"
                   android:exported="true">
             <intent-filter android:priority="1">
@@ -2966,10 +2965,6 @@
             </intent-filter>
         </activity>
 
-        <!--
-            The Wi-Fi result data will only be returned from WifiDialogActivity if the calling
-            package has ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION permission. (see b/185126813)
-        -->
         <activity
             android:name=".wifi.WifiDialogActivity"
             android:label=""

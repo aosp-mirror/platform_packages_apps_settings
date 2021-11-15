@@ -18,6 +18,8 @@ package com.android.settings.biometrics.combination;
 import android.content.Context;
 import android.os.UserHandle;
 
+import androidx.lifecycle.Lifecycle;
+
 /**
  * Preference controller for fingerprint settings within the biometrics settings page, that controls
  * the ability to unlock the phone with fingerprint.
@@ -27,6 +29,11 @@ public class BiometricFingerprintProfileStatusPreferenceController extends
 
     public BiometricFingerprintProfileStatusPreferenceController(Context context, String key) {
         super(context, key);
+    }
+
+    public BiometricFingerprintProfileStatusPreferenceController(
+            Context context, String key, Lifecycle lifecycle) {
+        super(context, key, lifecycle);
     }
 
     @Override

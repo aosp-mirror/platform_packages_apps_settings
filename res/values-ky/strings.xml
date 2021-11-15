@@ -212,7 +212,7 @@
       <item quantity="other">Тандалган тилдерди өчүрөсүзбү?</item>
       <item quantity="one">Тандалган тилди өчүрөсүзбү?</item>
     </plurals>
-    <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текст башка тилде көрсөтүлөт."</string>
+    <string name="dlg_remove_locales_message" msgid="8110560091134252067">"Текст башка тилде көрүнөт."</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"Тилдердин баары алынбайт"</string>
     <string name="dlg_remove_locales_error_message" msgid="6504279959974675302">"Тандалган тилдерден кеминде бирөөсүн калтырыңыз"</string>
     <string name="locale_not_translated" msgid="5079729745235316146">"Айрым колдонмолордо жеткиликсиз болушу мүмкүн"</string>
@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Дагы бир жолу"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Манжа изинин сүрөтчөсүн басыңыз"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Манжаңызды толугу менен скандоо үчүн, акырындык менен жылдырыңыз"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Сүрөтчө жылган сайын аны коё бербей басып туруңуз. Ушуну менен манжаңыздын изин толук тартып аласыз."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Ушуну менен манжаңыздын изин толук тартып аласыз"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Сүрөтчө жылган сайын аны коё бербей басып туруңуз. Бул манжаңыздын изин көбүрөөк тартууга жардам берет."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Манжаңыздын учун сенсорго коюңуз"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Эми манжаңыздын четтерин коюңуз"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Манжаңыздын бир тарабын сенсорго коюп, кармап туруңуз, андан кийин башка тарабына которулуңуз"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Бул манжаңыздын изин көбүрөөк тартууга жардам берет"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Манжа изи катталууда: <xliff:g id="PERCENTAGE">%d</xliff:g> пайыз"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Манжа изи кошулду"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Эми манжаңыздын изи менен телефонуңуздун кулпусун ачып же колдонмолорго кирүүдө өзүңүздү ырастайсыз"</string>
@@ -1234,7 +1237,7 @@
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Wi-Fi аркылуу чалуу күйгүзүлгөндө, телефонуңуз, жеке жөндөөлөрүңүзгө жана сигналдын күчтүүлүгүнө жараша, чалууларды Wi-Fi тармактары же операторуңуздун тармагы аркылуу багыттай алат. Бул функцияны күйгүзүүдөн мурда, төлөмдөрү жана башка маалымат боюнча операторуңузга кайрылыңыз.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="3490633500025717573">"Кырсыктаганда кайрыла турган дарек"</string>
-    <string name="emergency_address_summary" msgid="3022628750270626473">"WiFi аркылуу өзгөчө кырдаалдар кызматынын номерине чалганыңызда куткаруучуларга жайгашкан жериңиз катары көрсөтүлөт"</string>
+    <string name="emergency_address_summary" msgid="3022628750270626473">"WiFi аркылуу өзгөчө кырдаалдар кызматынын номерине чалганыңызда куткаруучуларга жайгашкан жериңиз катары көрүнөт"</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"Жеке DNS функциялары жөнүндө "<annotation id="url">"кененирээк маалымат"</annotation>" алыңыз"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Күйүк"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="129524064888622179">"Жөндөө байланыш оператору тарабынан башкарылат"</string>
@@ -1855,7 +1858,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth түзмөктөрүн издөө"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Bluetooth өчүп турса да, колдонмолор менен кызматтарга жакын жердеги түзмөктөрдү издегенге уруксат бересиз. Бул параметр менен жайгашкан жерди тагыраак аныктоого болот."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Жайгашкан жерди аныктоо кызматтары"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Жайгашкан жерди аныктоо кызматтары"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Жайгашкан жерди аныктоо кызматтары"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Жумуш үчүн Жайгашкан жерди аныктоо кызматтары"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Убакыт алкагын жүргөн жерге жараша коюу"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Түзмөктүн жайгашкан жерин аныктоо керектелет"</string>
@@ -2322,10 +2325,10 @@
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Бул функцияны колдонуу үчүн экрандагы атайын мүмкүнчүлүктөр баскычын басыңыз."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Бул функцияны колдонуу үчүн үндү чоңойтуп/кичирейтүү баскычтарын коё бербей басып туруңуз."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Чоңойтуп/кичирейтүүнү иштетүү же өчүрүү үчүн экраныңыздын каалаган жерин үч жолу таптаңыз."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Бул функцияны колдонуу үчүн экранды 2 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 2 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Бул функцияны колдонуу үчүн экранды 3 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 3 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Бул атайын мүмкүнчүлүктөр функциясын колдонуу үчүн экранды 2 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 2 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Бул атайын мүмкүнчүлүктөр функциясын колдонуу үчүн экранды 3 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 3 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Бул функцияны колдонуу үчүн экранды 2 манжаңыз менен ылдый жагынан өйдө сүрүңүз.\n\nБашка функцияга өтүү үчүн, 2 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Бул функцияны колдонуу үчүн экранды 3 манжаңыз менен ылдый жагынан өйдө сүрүңүз.\n\nБашка функцияга өтүү үчүн, 3 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Бул атайын мүмкүнчүлүктөр функциясын колдонуу үчүн экранды 2 манжаңыз менен ылдый жагынан өйдө сүрүңүз.\n\nБашка функцияга өтүү үчүн, 2 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Бул атайын мүмкүнчүлүктөр функциясын колдонуу үчүн экранды 3 манжаңыз менен ылдый жагынан өйдө сүрүңүз.\n\nБашка функцияга өтүү үчүн, 3 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Түшүндүм"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> ыкчам баскычы"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Атайын мүмкүнчүлүктөр баскычы"</string>
@@ -2335,8 +2338,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Атайын мүмкүнчүлүктөр баскычын басуу"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Атайын мүмкүнчүлүктөр жаңсоосун колдонуу"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Экрандын ылдый жагындагы атайын мүмкүнчүлүктөр баскычын <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> таптап коюңуз.\n\nБашка функцияга өтүү үчүн, Атайын мүмкүнчүлүктөр баскычын басып, кармап туруңуз."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Экранды 2 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 2 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Экранды 3 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 3 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Экранды 2 манжаңыз менен ылдый жагынан өйдө сүрүңүз.\n\nБашка функцияга өтүү үчүн, 2 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Экранды 3 манжаңыз менен ылдый жагынан өйдө сүрүңүз.\n\nБашка функцияга өтүү үчүн, 3 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Дагы параметрлер"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"<xliff:g id="SERVICE">%1$s</xliff:g> жөнүндө кеңири маалымат"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Үндү катуулатуу/акырындатуу баскычтарын басуу"</string>
@@ -3005,8 +3008,8 @@
     <string name="backup_configure_account_default_summary" msgid="5323225330966306690">"Камдык көчүрмөлөр сакталган бир дагы аккаунт табылган жок"</string>
     <string name="backup_erase_dialog_title" msgid="5892431263348766484"></string>
     <string name="backup_erase_dialog_message" msgid="2250872501409574331">"Колдонмолордун берилиштерин, Wi-Fi сырсөздөрүн, бүктөмөлөрдү, жана башка тууралоолорду, колдономолордун берилиштерин Google\'дун серверине сактоо токтотулуп, бардык көчүрмөлөр жок кылынсынбы?"</string>
-    <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"Түзмөктөгү дайындардын (мисалы, Wi-Fi тармагынын сырсөздөрү жана чалуулар таржымалы) жана колдонмонун дайындарынын (мисалы жөндөөлөр жана файлдар) камдык көчүрмөсү мындан ары сакталбай, аралыктагы серверлердеги бардык көчүрмөлөр өчүрүлөт. Уланта бересизби?"</string>
-    <string name="fullbackup_data_summary" msgid="971587401251601473">"Түзмөктөгү дайындардын (мисалы, Wi-Fi тармагынын сырсөздөрү жана чалуулар таржымалы) жана колдонмонун дайындарынын (мисалы жөндөөлөр жана файлдар) камдык көчүрмөсү алыстан автоматтык түрдө сакталат.\n\nКамдык көчүрмөнү автоматтык түрдө сактоо мүмкүнчүлүгү иштетилгенде, түзмөктүн жана колдонмонун дайындары маалы менен автоматтык түрдө сакталып турат. Иштеп чыгуучунун жөндөөлөрүнө ылайык колдонмодо сакталган дайындарда байланыштар, билдирүүлөр, сүрөттөр сыяктуу купуя маалыматтар камтылышы мүмкүн."</string>
+    <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"Түзмөктөгү нерселердин (мисалы, Wi-Fi тармагынын сырсөздөрү жана чалуулар таржымалы) жана колдонмодогу нерселердин (мисалы жөндөөлөр жана файлдар) камдык көчүрмөсү мындан ары сакталбай, аралыктагы серверлердеги бардык көчүрмөлөр өчүрүлөт. Уланта бересизби?"</string>
+    <string name="fullbackup_data_summary" msgid="971587401251601473">"Түзмөктөгү нерселердин (мисалы, Wi-Fi тармагынын сырсөздөрү жана чалуулар таржымалы) жана колдонмодогу нерселердин (мисалы жөндөөлөр жана файлдар) камдык көчүрмөсү алыстан автоматтык түрдө сакталат.\n\nКамдык көчүрмөнү автоматтык түрдө сактоо мүмкүнчүлүгү иштетилгенде, түзмөктүн жана колдонмонун дайындары маалы менен автоматтык түрдө сакталып турат. Иштеп чыгуучунун жөндөөлөрүнө ылайык колдонмодо сакталган дайындарда байланыштар, билдирүүлөр, сүрөттөр сыяктуу купуя маалыматтар камтылышы мүмкүн."</string>
     <string name="device_admin_settings_title" msgid="31392408594557070">"Түзмөктү башкарган колдонмонун жөндөөлөрү"</string>
     <string name="active_device_admin_msg" msgid="7744106305636543184">"Түзмөктү башкарган колдонмо"</string>
     <string name="remove_device_admin" msgid="3143059558744287259">"Түзмөктү башкарган колдонмону өчүрүп салуу"</string>
@@ -3804,7 +3807,7 @@
     <string name="gentle_notifications_also_display" msgid="8617545395880297691">"Төмөнкүдө да чагылдырылат:"</string>
     <string name="gentle_notifications_display_status" msgid="7410244447768694856">"Абал тилкеси"</string>
     <string name="gentle_notifications_display_lock" msgid="1914245082527924144">"Кулпуланган экран"</string>
-    <string name="gentle_notifications_education" msgid="5957509621826384362">"Маанилүү эмес билдирмелердин дайыма үнү өчүк жана тигинен жайгашкан экранда көрсөтүлөт"</string>
+    <string name="gentle_notifications_education" msgid="5957509621826384362">"Маанилүү эмес билдирмелердин дайыма үнү өчүк жана тигинен жайгашкан экранда көрүнөт"</string>
     <string name="gentle_notifications_display_summary_shade" msgid="7616926954719310445">"Тигинен жайгашкан экранда гана чагылдыруу"</string>
     <string name="gentle_notifications_display_summary_shade_lock" msgid="3936088046873705625">"Тигинен жайгашкан экранда жана кулпуланган экранда чагылдыруу"</string>
     <string name="gentle_notifications_display_summary_shade_status" msgid="3363137853729359907">"Тигинен жайгашкан экранда жана абал тилкесинде чагылдыруу"</string>
@@ -4493,7 +4496,7 @@
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"Медиа, Файл, Башкаруу, Башкаруучу, Башкаруу, Түзөтүү, Түзөткүч, Колдонмо, Колдонмо, Программа"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr виртуалдык дүйнө режими көмөкчү кызмат"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Башка терезел-н үст-н көрсөтүү"</string>
-    <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_1">%2$d</xliff:g> колдонмодон <xliff:g id="COUNT_0">%1$d</xliff:g> колдонмо башка терезелердин үстүнөн көрсөтүлөт"</string>
+    <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_1">%2$d</xliff:g> колдонмодон <xliff:g id="COUNT_0">%1$d</xliff:g> колдонмо башка терезелердин үстүнөн көрүнөт"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Уруксаты бар колдонмолор"</string>
     <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Уруксат берилген"</string>
     <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Тыюу салынган"</string>
@@ -5021,7 +5024,7 @@
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Иштеп чыгуучунун параметрлерин автотолтуруу жөндөөсү кайра коюлду"</string>
     <string name="location_category" msgid="3496759112306219062">"Жайгашкан жер"</string>
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"Абал тилкесинин жайгашкан жеринин индикатору"</string>
-    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Бардык жерлер, ошондой эле байланыш жана тармактарда көрсөтүлөт"</string>
+    <string name="location_indicator_settings_description" msgid="2888022085372804021">"Бардык жерлер, ошондой эле байланыш жана тармактарда көрүнөт"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"GNSS көрсөткүчтөрүнө толук көз салууну иштетүү"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Иштөө цикли өчүрүлүп, бардык GNSS топторуна жана жыштыктарга көз салынат"</string>
     <string name="device_theme" msgid="5027604586494772471">"Түзмөктүн темасы"</string>

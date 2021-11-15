@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Още веднъж"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Следвайте иконата за отпечатъци"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Продължавайте да вдигате пръста си, за да добавите различните части от отпечатъка си"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"При всяко преместване на иконата за отпечатъци я докоснете и задръжте. Това помага да се обхване целият ви отпечатък."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Това помага да се обхване целият ви отпечатък"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"При всяко преместване на иконата за отпечатъци я докоснете и задръжте. По този начин се улавя най-голяма част от отпечатъка ви."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Поставете върха на пръста си върху сензора"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Накрая поставете краищата на пръста си"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Поставете едната страна на отпечатъка си върху сензора и задръжте, след това поставете другата"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"По този начин се улавя най-голяма част от отпечатъка ви"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -1857,7 +1860,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Сканиране за устройства с Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Разрешете на приложенията и услугите да сканират за устройства в близост по всяко време дори когато функцията за Bluetooth e изключена. Това може да послужи например за подобряване на базиращите се на местоположението функции и услуги."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Услуги за местоположение"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Услуги за местоположение"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Услуги за местоположение"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Услуги за местоположение за служебни цели"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Използване на местоположението с цел задаване на часова зона"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Необходимо е местоположението на устройството"</string>
@@ -2043,7 +2046,7 @@
     </plurals>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"Премахване на достъпа"</string>
     <string name="controls_label" msgid="8671492254263626383">"Контроли"</string>
-    <string name="force_stop" msgid="2681771622136916280">"Принудител&amp;#173;но спиране"</string>
+    <string name="force_stop" msgid="2681771622136916280">"Принудител­но спиране"</string>
     <string name="total_size_label" msgid="2052185048749658866">"Общо"</string>
     <string name="application_size_label" msgid="6407051020651716729">"Размер на приложението"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"Приложение за USB хранилище"</string>
@@ -2053,7 +2056,7 @@
     <string name="uninstall_text" msgid="315764653029060126">"Деинсталиране"</string>
     <string name="uninstall_all_users_text" msgid="5924715251087176474">"Деинсталиране за всички потребители"</string>
     <string name="install_text" msgid="4558333621516996473">"Инсталиране"</string>
-    <string name="disable_text" msgid="5146002260857428005">"Деактиви&amp;#173;ране"</string>
+    <string name="disable_text" msgid="5146002260857428005">"Деактиви­ране"</string>
     <string name="enable_text" msgid="8570798764647110430">"Активиране"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Изчистване на данните"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Деинсталиране на актуализации"</string>
@@ -2453,7 +2456,7 @@
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Допълнително затъмняване на екрана"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Затъмнете екрана повече, отколкото с настройката за минимална яркост на телефона ви"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Затъмнете екрана повече, отколкото с настройката за минимална яркост на таблета ви"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Затъмнете екрана си така, че да ви е по-удобно да четете.&lt;br/&gt;&lt;br/&gt; Това може да бъде полезно, когато: &lt;ol&gt; &lt;li&gt; екранът е твърде светъл при стандартната настройка за минимална яркост на телефона ви;&lt;/li&gt; &lt;li&gt; използвате телефона си на тъмно, като например през нощта или в тъмна стая преди лягане.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Затъмнете екрана си така, че да ви е по-удобно да четете.&lt;br/&gt;&lt;br/&gt; Това може да бъде полезно, когато: &lt;ol&gt; &lt;li&gt; екранът е твърде светъл при стандартната настройка за минимална яркост на телефона ви;&lt;/li&gt; &lt;li&gt; използвате телефона си на тъмно, като например през нощта или в тъмна стая преди лягане.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Затъмнете екрана си така, че да ви е по-удобно да четете.&lt;br/&gt;&lt;br/&gt; Това може да бъде полезно, когато: &lt;ol&gt; &lt;li&gt; екранът е твърде светъл при стандартната настройка за минимална яркост на таблета ви;&lt;/li&gt; &lt;li&gt; използвате таблета си на тъмно, като например през нощта или в тъмна стая преди лягане.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Интензивност"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"По-тъмно"</string>

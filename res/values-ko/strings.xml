@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"한 번 더 하세요"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"지문 인식 아이콘을 따라가세요"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"손가락을 뗀 후 다시 터치하여 지문의 다른 부분을 추가하세요."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"지문 아이콘이 움직일 때마다 길게 터치합니다. 지문 전체를 등록하는 데 도움이 됩니다."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"지문 전체를 등록하는 데 도움이 됩니다."</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"지문 아이콘이 움직일 때마다 길게 터치합니다. 이렇게 하면 지문을 더 많이 캡처할 수 있습니다"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"센서에 손가락 끝부분을 올리세요"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"마지막으로 손가락 가장자리를 돌아가며 올리세요"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"센서에 손가락 한쪽을 올리고 잠시 기다린 후에 다른 쪽을 올리세요"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"이렇게 하면 지문을 더 많이 캡처할 수 있습니다"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -1857,7 +1860,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"블루투스 검색"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"블루투스가 꺼져 있을 때도 항상 앱과 서비스에서 주변 기기를 검색하도록 허용합니다. 이 설정은 위치 기반 기능 및 서비스 개선 등에 사용될 수 있습니다."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"위치 서비스"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"위치 서비스"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"위치 서비스"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"업무용 위치 서비스"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"위치 정보를 사용하여 시간대 설정"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"기기 위치가 필요함"</string>
@@ -2601,7 +2604,7 @@
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"<xliff:g id="REMAIN">%1$s</xliff:g> 남음"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> 후 완충"</string>
-    <string name="low_battery_summary" msgid="4458925347316501953">"배터리 전원 부족"</string>
+    <string name="low_battery_summary" msgid="4458925347316501953">"배터리 잔량 부족"</string>
     <string name="background_activity_title" msgid="8214332017349791380">"백그라운드 제한"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"앱이 백그라운드에서 실행되도록 허용"</string>
     <string name="background_activity_summary_disabled" msgid="32459916080651444">"앱이 백그라운드에서 실행되도록 허용하지 않습니다."</string>
@@ -2611,7 +2614,7 @@
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"배터리 최적화를 설정하지 않아 이 앱을 제한할 수 없습니다.\n\n앱을 제한하려면 먼저 배터리 최적화를 사용 설정하세요."</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"제한 없음"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"최적화"</string>
-    <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"배터리 사용 제한"</string>
+    <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"제한됨"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"백그라운드에서 배터리 사용을 제한하지 않습니다. 배터리 사용량이 증가할 수 있습니다."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"사용량을 바탕으로 최적화합니다. 대부분의 앱에 권장됩니다."</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"백그라운드에서의 배터리 사용을 제한합니다. 앱이 정상적으로 작동하지 않을 수 있습니다. 알림이 지연될 수도 있습니다."</string>
@@ -2660,7 +2663,7 @@
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"배터리 관리를 사용 설정하세요."</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"절전 모드 사용 설정"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"배터리가 평소보다 빨리 소진될 수 있습니다."</string>
-    <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"절전 기능 사용 중"</string>
+    <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"절전 모드 사용 중"</string>
     <string name="battery_saver_link_a11y" msgid="740558184830458845">"절전 기능 자세히 알아보기"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"일부 기능이 제한될 수 있습니다."</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"배터리 사용량이 증가함"</string>
@@ -2852,9 +2855,9 @@
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"자동으로 사용 설정"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"일정 없음"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"사용 습관 기준"</string>
-    <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"루틴에 따라 사용 설정"</string>
+    <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"사용 습관 기준에 따라 사용 설정"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"백분율 기준"</string>
-    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"배터리가 평소의 다음 충전 시간까지 버티지 못할 가능성이 큰 경우 절전 모드가 켜집니다."</string>
+    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"배터리가 평소의 다음 충전 시간까지 버티지 못할 가능성이 큰 경우 절전 모드가 사용 설정됩니다."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"<xliff:g id="PERCENT">%1$s</xliff:g> 도달 시 사용 설정"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"일정 설정"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"배터리 수명 연장"</string>

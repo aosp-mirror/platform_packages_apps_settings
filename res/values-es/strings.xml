@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Otra vez"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Sigue el icono de la huella digital"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Sigue levantando el dedo para añadir diferentes partes de tu huella digital"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Mantén pulsado el icono de la huella digital siempre que se mueva. Así se podrá registrar toda tu huella digital."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Así se podrá registrar toda tu huella digital"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Mantén pulsado el icono de la huella digital siempre que se mueva para que capturemos de forma más completa tu huella digital"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Coloca la punta del dedo en el sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Por último, coloca los laterales de tu dedo"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Coloca el dedo de lado en el sensor, mantenlo pulsado y después gíralo para colocar el otro lado"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Así capturamos de forma más completa tu huella digital"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registro de la huella digital al <xliff:g id="PERCENTAGE">%d</xliff:g> por ciento"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Huella digital añadida"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Ahora puedes usar tu huella digital para desbloquear el teléfono o verificar tu identidad (por ejemplo, al iniciar sesión en aplicaciones)."</string>
@@ -1552,8 +1555,8 @@
     <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"Desconectar la tarjeta SD para extraerla de forma segura"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="9164545135649775664">"Inserta USB para activar almacenamiento"</string>
     <string name="sd_insert_summary" product="default" msgid="5949168259622002192">"Insertar una tarjeta SD para el montaje"</string>
-    <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"Activar almacenamiento USB"</string>
-    <string name="sd_mount" product="default" msgid="5279813999455776169">"Activar tarjeta SD"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"Montar almacenamiento USB"</string>
+    <string name="sd_mount" product="default" msgid="5279813999455776169">"Montar tarjeta SD"</string>
     <string name="sd_mount_summary" product="nosdcard" msgid="2190410240845521205"></string>
     <string name="sd_mount_summary" product="default" msgid="2190410240845521205"></string>
     <string name="sd_format" product="nosdcard" msgid="8657427883364711513">"Borrar almacenamiento USB"</string>
@@ -1576,7 +1579,7 @@
     <string name="storage_low_title" msgid="8002650511493419567">"No queda espacio de almacenamiento"</string>
     <string name="storage_low_summary" msgid="7341022293583384506">"Es posible que algunas funciones del sistema, como la sincronización, no funcionen correctamente. Prueba a eliminar o a desactivar elementos para liberar espacio (por ejemplo, aplicaciones o contenido multimedia)."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Cambiar nombre"</string>
-    <string name="storage_menu_mount" msgid="4760531872302820569">"Activar"</string>
+    <string name="storage_menu_mount" msgid="4760531872302820569">"Montar"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Expulsar"</string>
     <string name="storage_menu_format" msgid="5454870642788909443">"Formatear"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatear como portátil"</string>
@@ -1603,13 +1606,13 @@
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"En uso de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> se ha activado"</string>
-    <string name="storage_mount_failure" msgid="3667915814876418011">"Error al activar <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_mount_failure" msgid="3667915814876418011">"Error al montar <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> se ha expulsado de forma segura"</string>
     <string name="storage_unmount_failure" msgid="3796912279003790607">"No se ha podido expulsar <xliff:g id="NAME">%1$s</xliff:g> de forma segura"</string>
     <string name="storage_format_success" msgid="3028114521294256851">"<xliff:g id="NAME">%1$s</xliff:g> se ha formateado"</string>
     <string name="storage_format_failure" msgid="2042691589726261987">"Error al formatear <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_rename_title" msgid="5911285992205282312">"Cambiar nombre de almacenamiento"</string>
-    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) se ha extraído de forma segura, pero sigue estando disponible. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes activarlo."</string>
+    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) se ha extraído de forma segura, pero sigue estando disponible. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes montarlo."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Este dispositivo de almacenamiento (<xliff:g id="NAME_0">^1</xliff:g>) está dañado. \n\nPara utilizar el dispositivo (<xliff:g id="NAME_1">^1</xliff:g>), debes configurarlo."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"Después de formatear la unidad, puedes utilizar tu <xliff:g id="NAME_0">^1</xliff:g> en otros dispositivos. \n\nTe recomendamos que hagas una copia de seguridad de los datos de tu <xliff:g id="NAME_1">^1</xliff:g>, ya que se borrarán cuando se formatee. \n\n"<b>"Copia de seguridad de fotos y de otro contenido multimedia"</b>" \nMueve tus archivos multimedia a otro espacio de almacenamiento del dispositivo o transfiérelos a un ordenador con un cable USB. \n\n"<b>"Copia de seguridad de aplicaciones"</b>" \nSe desinstalarán todas las aplicaciones almacenadas en tu <xliff:g id="NAME_6">^1</xliff:g> y se borrarán sus datos. Para conservarlas, muévelas a otro espacio de almacenamiento del dispositivo."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Al extraer tu <xliff:g id="NAME_0">^1</xliff:g>, las aplicaciones almacenadas en esta unidad dejarán de funcionar y los archivos multimedia guardados en ella no estarán disponibles hasta que se vuelva a insertar."</b>" \n\nTu <xliff:g id="NAME_1">^1</xliff:g> se ha formateado para que solo funcione en este dispositivo."</string>
@@ -1855,7 +1858,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Búsqueda de dispositivos Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Permite que las aplicaciones y los servicios busquen dispositivos cercanos en cualquier momento aunque la conexión Bluetooth esté desactivada. Esto se puede usar para, por ejemplo, mejorar las funciones y servicios basados en la ubicación."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Servicios de ubicación"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Servicios de ubicación"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Servicios de ubicación"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Servicios de ubicación para el trabajo"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Usar ubicación para establecer la zona horaria"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Se necesita la ubicación del dispositivo"</string>
@@ -2371,7 +2374,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualizar ampliación automáticamente"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualizar ampliación de la pantalla al cambiar aplicaciones"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"El botón de encendido cuelga"</string>
-    <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Puntero del ratón grande"</string>
+    <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Cursor del ratón grande"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Quitar animaciones"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio en mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combina canales al reproducir audio"</string>
@@ -2641,7 +2644,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Tiempo de conexión Wi-Fi"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Uso de batería"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Detalles del historial"</string>
-    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"Uso de la batería"</string>
+    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"Uso de batería"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Ver uso durante las últimas 24 horas"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Consulta el uso desde la última carga de la batería"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Uso de batería"</string>
@@ -3621,7 +3624,7 @@
     <string name="docking_sounds_title" msgid="5341616179210436159">"Sonidos al conectar"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Sonidos al tocar"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibración al tocar la pantalla"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Respuesta táctil al tocar, usar el teclado y más"</string>
+    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Vibración al pulsar, usar el teclado y más"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Reproducciones altavoz base"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Todo el audio"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Solo audio multimedia"</string>
@@ -4695,7 +4698,7 @@
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Se activará cuando la batería esté al <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Desactivado"</string>
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Activar ahora"</string>
-    <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Desactivar"</string>
+    <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Desactivar ahora"</string>
     <string name="not_battery_optimizing" msgid="8361294470943376258">"No se está utilizando la optimización de la batería"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Si el dispositivo está bloqueado, evitar que se escriban respuestas u otros textos en las notificaciones"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Corrector predeterminado"</string>
@@ -4766,7 +4769,7 @@
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Entendido"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Prueba el tema oscuro"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Ayuda a alargar la batería"</string>
-    <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Iconos para desarrolladores en ajustes rápidos"</string>
+    <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Recuadros para desarrolladores en ajustes rápidos"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Inhabilitar tiempo de espera de autorización adb"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Inhabilita la revocación automática de autorizaciones adb para sistemas que no se han vuelto a conectar durante el periodo predeterminado (7 días) o configurado por el usuario (mínimo 1 día)"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Rastro de Winscope"</string>

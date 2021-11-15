@@ -492,8 +492,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"ושוב…"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"עוקבים אחר הסמל של טביעת האצבע"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"יש להרים את האצבע ולגעת בחיישן עם חלקים שונים של האצבע לקבלת טביעת אצבע מלאה"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"לוחצים לחיצה ארוכה בכל פעם שסמל טביעת האצבע זז. כך טביעת האצבע תצולם במלואה."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"כך טביעת האצבע תצולם במלואה"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"לוחצים לחיצה ארוכה בכל פעם שסמל טביעת האצבע זז. כך יתועד חלק גדול יותר מהאצבע."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"מניחים את קצה האצבע על החיישן"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"בסוף מניחים את קצוות האצבע"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"מניחים צד אחד של האצבע על החיישן ומחזיקים. אחר כך עוברים לצד השני"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"כך יתועד חלק גדול יותר מהאצבע"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -1901,7 +1904,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"‏חיפוש Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"‏אפליקציות ושירותים יוכלו לחפש מכשירים בקרבת מקום בכל שלב, גם כאשר ה-Bluetooth כבוי. ניתן להשתמש בכך, למשל, כדי לשפר את הביצועים של תכונות ושירותים מבוססי מיקום."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"שירותי מיקום"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"שירותי מיקום"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"שירותי מיקום"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"שירותי מיקום לעבודה"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"שימוש במיקום לקביעת אזור הזמן"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"יש צורך בנתוני המיקום של המכשיר"</string>
@@ -3455,7 +3458,7 @@
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"הבנתי"</string>
     <string name="nfc_more_title" msgid="1041094244767216498">"עוד…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"הגדרה של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
-    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"עדכון של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"עדכון אפליקציית התשלום הראשית"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"במסוף תשלום ללא מגע, יש לשלם באמצעות <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"במסוף ללא מגע, יש לשלם באמצעות <xliff:g id="APP_0">%1$s</xliff:g>.\n\nהאפליקציה הזו מחליפה את <xliff:g id="APP_1">%2$s</xliff:g> כאפליקציית התשלומים שתשמש כברירת מחדל."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"הגדרה כברירת מחדל"</string>
@@ -3984,7 +3987,7 @@
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"ללא צליל או רטט ומופיעה למטה בקטע התראות השיחה"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"ייתכן שיופעל צלצול או רטט בהתאם להגדרות הטלפון"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"כשהמכשיר לא נעול, התראות יוצגו כבאנר בראש המסך"</string>
-    <string name="notification_switch_label" msgid="8029371325967501557">"כל ההתראות של‌‌ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <string name="notification_switch_label" msgid="8029371325967501557">"כל ההתראות של​ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"כל ההתראות של <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"התראות מותאמות"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
@@ -4241,7 +4244,7 @@
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"חלק מההתראות"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"התראות שיכולות להפריע"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"אישור לכל ההתראות"</string>
-    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{שום דבר לא יכול להפריע}=1{הקטגוריה {sound_category_1} יכולה להפריע}=2{הקטגוריות {sound_category_1} וגם {sound_category_2} יכולות להפריע}=3{הקטגוריות {sound_category_1}, {sound_category_2} וגם {sound_category_3} יכולות להפריע}many{האפליקציות {sound_category_1}, {sound_category_2} ועוד # יכולות להפריע}other{האפליקציות {sound_category_1}, {sound_category_2} ועוד # יכולות להפריע}}"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{שום דבר לא יכול להפריע}=1{הקטגוריה {sound_category_1} יכולה להפריע}=2{הקטגוריות {sound_category_1} ו{sound_category_2} יכולות להפריע}=3{הקטגוריות {sound_category_1}, {sound_category_2} ו{sound_category_3} יכולות להפריע}many{הקטגוריות {sound_category_1}, {sound_category_2} ועוד # יכולות להפריע}other{הקטגוריות {sound_category_1}, {sound_category_2} ועוד # יכולות להפריע}}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"שום דבר לא יכול להפריע"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"אף אחד לא יכול להפריע"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"אנשים מסוימים יכולים להפריע"</string>
@@ -4688,7 +4691,7 @@
     <string name="display_dashboard_summary" msgid="1599453894989339454">"עיצוב כהה, גודל הגופן, בהירות"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"מעבר למצב שינה לאחר 10 דקות של חוסר פעילות"</string>
     <string name="memory_summary" msgid="8221954450951651735">"ממוצע של <xliff:g id="USED_MEMORY">%1$s</xliff:g> מתוך <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> זיכרון בשימוש"</string>
-    <string name="users_summary" msgid="8473589474976307510">"בוצעה כניסה בתור <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="users_summary" msgid="8473589474976307510">"התחברת בתור <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"ברירת המחדל היא <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="backup_disabled" msgid="4503062265560959320">"הגיבוי מושבת"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"‏המערכת עודכנה ל-Android גרסה ‏<xliff:g id="VERSION">%1$s</xliff:g>"</string>
@@ -4761,7 +4764,7 @@
     <string name="color_temperature_toast" msgid="7611532183532407342">"יש לכבות את המסך כדי להחיל שינוי צבע"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"חיישן הלייזר של המצלמה"</string>
     <string name="ota_disable_automatic_update" msgid="1953894421412420231">"עדכוני מערכת אוטומטיים"</string>
-    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"החלת עדכונים כאשר המכשיר מופעל מחדש"</string>
+    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"עדכונים יותקנו עם הפעלת המכשיר מחדש"</string>
     <string name="usage" msgid="287782903846013936">"שימוש"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"שימוש בחבילת הגלישה"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"שימוש בנתונים באפליקציות"</string>

@@ -24,6 +24,8 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.overlay.FeatureFactory;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.text.SimpleDateFormat;
@@ -41,6 +43,7 @@ import java.util.TimeZone;
 
 /** A utility class to convert data into another types. */
 public final class ConvertUtils {
+    private static final boolean DEBUG = false;
     private static final String TAG = "ConvertUtils";
     private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
     private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
@@ -259,10 +262,12 @@ public final class ConvertUtils {
                     foregroundUsageTimeInMs + backgroundUsageTimeInMs;
                 if (totalUsageTimeInMs > TOTAL_TIME_THRESHOLD) {
                     final float ratio = TOTAL_TIME_THRESHOLD / totalUsageTimeInMs;
-                    Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
-                          Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
-                          Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
-                          currentEntry));
+                    if (DEBUG) {
+                        Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
+                                Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
+                                Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
+                                currentEntry));
+                    }
                     foregroundUsageTimeInMs =
                         Math.round(foregroundUsageTimeInMs * ratio);
                     backgroundUsageTimeInMs =
@@ -285,7 +290,7 @@ public final class ConvertUtils {
         }
         insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
         if (purgeLowPercentageAndFakeData) {
-            purgeLowPercentageAndFakeData(resultMap);
+            purgeLowPercentageAndFakeData(context, resultMap);
         }
         return resultMap;
     }
@@ -324,7 +329,12 @@ public final class ConvertUtils {
 
     // Removes low percentage data and fake usage data, which will be zero value.
     private static void purgeLowPercentageAndFakeData(
+            final Context context,
             final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
+        final List<CharSequence> backgroundUsageTimeHideList =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getHideBackgroundUsageTimeList(context);
         for (List<BatteryDiffEntry> entries : indexedUsageMap.values()) {
             final Iterator<BatteryDiffEntry> iterator = entries.iterator();
             while (iterator.hasNext()) {
@@ -332,6 +342,12 @@ public final class ConvertUtils {
                 if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD
                         || FAKE_PACKAGE_NAME.equals(entry.getPackageName())) {
                     iterator.remove();
+                }
+                final String packageName = entry.getPackageName();
+                if (packageName != null
+                        && !backgroundUsageTimeHideList.isEmpty()
+                        && backgroundUsageTimeHideList.contains(packageName)) {
+                  entry.mBackgroundUsageTimeInMs = 0;
                 }
             }
         }

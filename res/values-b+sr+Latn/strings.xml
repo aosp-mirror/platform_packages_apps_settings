@@ -488,8 +488,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Još jednom"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Pratite ikonu utiska prsta"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Nastavite da podižete prst da biste dodali različite delove otiska prsta"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Dodirnite i zadržite svaki put kada se ikona otiska prsta pomeri. Ovo nam pomaže da snimimo ceo otisak prsta."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Ovo nam pomaže da snimimo ceo otisak prsta"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Dodirnite i zadržite svaki put kada se ikona otiska prsta pomeri. Tako ćete snimiti veći deo otiska prsta."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Stavite vrh prsta na senzor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Na kraju stavite ivice prsta"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Stavite jednu stranu prsta na senzor i zadržite, pa stavite drugu stranu"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tako ćete snimiti veći deo otiska prsta"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrovanje otiska prsta je na <xliff:g id="PERCENTAGE">%d</xliff:g> posto"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisak prsta je dodat"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Sada možete da koristite otisak prsta za otključavanje telefona ili potvrdu identiteta, na primer, kad se prijavljujete u aplikacije"</string>
@@ -1877,7 +1880,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth skeniranje"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Dozvolite aplikacijama i uslugama da traže uređaje u blizini u svakom trenutku, čak i kada je Bluetooth isključen. Ovo može da se koristi, na primer, za poboljšanje funkcija i usluga zasnovanih na lokaciji."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Usluge lokacije"</string>
-    <string name="location_services_screen_title" msgid="9204334551361202877">"Usluge lokacije"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Usluge lokacije"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Usluge lokacije za posao"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Koristi lokaciju za podešavanje vremenske zone"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Potrebna je lokacija uređaja"</string>
@@ -2150,7 +2153,7 @@
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nikada nije korišćeno)"</string>
     <string name="no_default_apps" msgid="8966319676910104570">"Nema podrazumev. apl."</string>
     <string name="storageuse_settings_title" msgid="3125650750657988194">"Korišćenje memorije"</string>
-    <string name="storageuse_settings_summary" msgid="5001621552305431831">"Pregled iskorišćene memorije po aplikacijama"</string>
+    <string name="storageuse_settings_summary" msgid="5001621552305431831">"Pregled upotrebe memorijskog prostora po aplikacijama"</string>
     <string name="service_restarting" msgid="5104563288155809226">"Ponovno pokretanje"</string>
     <string name="cached" msgid="5379485147573438201">"Keširani pozadinski proces"</string>
     <string name="no_running_services" msgid="9079738069349859373">"Nema pokrenutih usluga."</string>
@@ -2431,7 +2434,7 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibriranje obaveštenja"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibriranje zvona"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Dodirne povratne informacije"</string>
-    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Koristite aplikaciju <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Koristi aplikaciju <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Otvorite aplikaciju <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Koristi korekciju boja"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Prikaži titl"</string>
@@ -4612,7 +4615,7 @@
     <string name="apps_summary" msgid="4007416751775414252">"Instaliranih aplikacija: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="apps_summary_example" msgid="6034002063446955592">"Instalirane su 24 aplikacije"</string>
     <string name="storage_summary" msgid="5903562203143572768">"U upotrebi <xliff:g id="PERCENTAGE">%1$s</xliff:g> – <xliff:g id="FREE_SPACE">%2$s</xliff:g> slobodno"</string>
-    <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Interna memorija: <xliff:g id="PERCENTAGE">%1$s</xliff:g> je iskorišćeno – <xliff:g id="FREE_SPACE">%2$s</xliff:g> je slobodno"</string>
+    <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Interna memorija: <xliff:g id="PERCENTAGE">%1$s</xliff:g> je u upotrebi – <xliff:g id="FREE_SPACE">%2$s</xliff:g> je slobodno"</string>
     <string name="display_summary" msgid="5526061030874717172">"Pređi u režim spavanja posle <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tamna tema, veličina fonta, osvetljenost"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"Prelazak u režim spavanja posle 10 minuta neaktivnosti"</string>
