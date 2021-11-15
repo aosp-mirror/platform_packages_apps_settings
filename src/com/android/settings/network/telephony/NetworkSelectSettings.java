@@ -51,6 +51,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -347,12 +348,19 @@ public class NetworkSelectSettings extends DashboardFragment {
                     CellInfoUtil.getCellIdentityMccMnc(cellInfo.getCellIdentity()));
             Class className = cellInfo.getClass();
 
-            if (aggregatedList.stream().anyMatch(
+            Optional<CellInfo> itemInTheList = aggregatedList.stream().filter(
                     item -> {
                         String itemPlmn = CellInfoUtil.getNetworkTitle(item.getCellIdentity(),
                                 CellInfoUtil.getCellIdentityMccMnc(item.getCellIdentity()));
                         return itemPlmn.equals(plmn) && item.getClass().equals(className);
-                    })) {
+                    })
+                    .findFirst();
+            if (itemInTheList.isPresent()) {
+                if (cellInfo.isRegistered() && !itemInTheList.get().isRegistered()) {
+                    // Adding the registered cellinfo item into list. If there are two registered
+                    // cellinfo items, then select first one from source list.
+                    aggregatedList.set(aggregatedList.indexOf(itemInTheList.get()), cellInfo);
+                }
                 continue;
             }
             aggregatedList.add(cellInfo);
