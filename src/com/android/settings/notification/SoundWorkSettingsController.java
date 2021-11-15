@@ -235,8 +235,7 @@ public class SoundWorkSettingsController extends AbstractPreferenceController
             mWorkPhoneRingtonePreference = null;
         }
 
-        final Context managedProfileContext = getManagedProfileContext();
-        if (Settings.Secure.getIntForUser(managedProfileContext.getContentResolver(),
+        if (Settings.Secure.getIntForUser(getManagedProfileContext().getContentResolver(),
                 Settings.Secure.SYNC_PARENT_SOUNDS, /* def= */ 0, mManagedProfileId) == 1) {
             enableWorkSyncSettings();
         } else {
@@ -245,7 +244,8 @@ public class SoundWorkSettingsController extends AbstractPreferenceController
     }
 
     void enableWorkSync() {
-        RingtoneManager.enableSyncFromParent(getManagedProfileContext());
+        Settings.Secure.putIntForUser(getManagedProfileContext().getContentResolver(),
+                Settings.Secure.SYNC_PARENT_SOUNDS, /* enabled= */ 1, mManagedProfileId);
         enableWorkSyncSettings();
     }
 
@@ -260,7 +260,8 @@ public class SoundWorkSettingsController extends AbstractPreferenceController
     }
 
     private void disableWorkSync() {
-        RingtoneManager.disableSyncFromParent(getManagedProfileContext());
+        Settings.Secure.putIntForUser(getManagedProfileContext().getContentResolver(),
+                Settings.Secure.SYNC_PARENT_SOUNDS, /* enabled= */ 0, mManagedProfileId);
         disableWorkSyncSettings();
     }
 
