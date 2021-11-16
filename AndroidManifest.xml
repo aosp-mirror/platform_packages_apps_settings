@@ -303,6 +303,15 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".search.SearchStateReceiver"
+                  android:exported="true"
+                  android:permission="android.permission.READ_SEARCH_INDEXABLES">
+            <intent-filter>
+                <action android:name="com.android.settings.SEARCH_START"/>
+                <action android:name="com.android.settings.SEARCH_EXIT"/>
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="Settings$WifiSettingsActivity"
             android:label="@string/wifi_settings"
