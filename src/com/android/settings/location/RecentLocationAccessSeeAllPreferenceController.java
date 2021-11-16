@@ -40,7 +40,6 @@ public class RecentLocationAccessSeeAllPreferenceController
     private final RecentAppOpsAccess mRecentLocationAccesses;
     private boolean mShowSystem = false;
     private Preference mPreference;
-    private int mType = ProfileSelectFragment.ProfileType.ALL;
 
     public RecentLocationAccessSeeAllPreferenceController(Context context, String key) {
         super(context, key);
@@ -68,7 +67,8 @@ public class RecentLocationAccessSeeAllPreferenceController
         final List<RecentAppOpsAccess.Access> recentLocationAccesses = new ArrayList<>();
         for (RecentAppOpsAccess.Access access : mRecentLocationAccesses.getAppListSorted(
                 mShowSystem)) {
-            if (isRequestMatchesProfileType(userManager, access, mType)) {
+            if (isRequestMatchesProfileType(
+                    userManager, access, ProfileSelectFragment.ProfileType.ALL)) {
                 recentLocationAccesses.add(access);
             }
         }
@@ -87,15 +87,6 @@ public class RecentLocationAccessSeeAllPreferenceController
                 mCategoryAllRecentLocationAccess.addPreference(appPreference);
             }
         }
-    }
-
-    /**
-     * Initialize {@link ProfileSelectFragment.ProfileType} of the controller
-     *
-     * @param type {@link ProfileSelectFragment.ProfileType} of the controller.
-     */
-    public void setProfileType(@ProfileSelectFragment.ProfileType int type) {
-        mType = type;
     }
 
     /**

@@ -52,6 +52,12 @@
             settings:controller="com.android.settings.display.WalletPrivacyPreferenceController" />
 
         <SwitchPreference
+            android:key="lock_screen_show_qr_scanner"
+            android:title="@string/lockscreen_privacy_qr_code_scanner_setting_toggle"
+            android:summary="@string/lockscreen_privacy_qr_code_scanner_summary"
+            settings:controller="com.android.settings.display.QRCodeScannerPreferenceController" />
+
+        <SwitchPreference
             android:key="lockscreen_privacy_controls_switch"
             android:title="@string/lockscreen_privacy_controls_setting_toggle"
             android:summary="@string/lockscreen_privacy_controls_summary"
