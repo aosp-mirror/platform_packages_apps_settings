@@ -164,14 +164,12 @@ public class SimSlotChangeHandler {
 
     private void handleSimInsert(UiccSlotInfo removableSlotInfo) {
         Log.i(TAG, "Handle SIM inserted.");
-
         if (!isSuwFinished(mContext)) {
             Log.i(TAG, "Still in SUW. Handle SIM insertion after SUW is finished");
             setSuwRemovableSlotAction(mContext, LAST_USER_ACTION_IN_SUW_INSERT);
             return;
         }
-
-        if (removableSlotInfo.getIsActive()) {
+        if (removableSlotInfo.getPorts().stream().findFirst().get().isActive()) {
             Log.i(TAG, "The removable slot is already active. Do nothing.");
             return;
         }
@@ -213,7 +211,8 @@ public class SimSlotChangeHandler {
 
         List<SubscriptionInfo> groupedEmbeddedSubscriptions = getGroupedEmbeddedSubscriptions();
 
-        if (groupedEmbeddedSubscriptions.size() == 0 || !removableSlotInfo.getIsActive()) {
+        if (groupedEmbeddedSubscriptions.size() == 0 || !removableSlotInfo.getPorts().stream()
+                .findFirst().get().isActive()) {
             Log.i(TAG, "eSIM slot is active or no subscriptions exist. Do nothing.");
             return;
         }
