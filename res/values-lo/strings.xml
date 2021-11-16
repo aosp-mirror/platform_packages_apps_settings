@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"ແທັບເລັດຂອງທ່ານບໍ່ໄດ້ຈັບຄູ່ກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ອີກຕໍ່ໄປແລ້ວ"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"ອຸປະກອນຂອງທ່ານບໍ່ໄດ້ຈັບຄູ່ກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ອີກຕໍ່ໄປແລ້ວ"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"ແອັບ <xliff:g id="APP_NAME">%1$s</xliff:g> ຈະບໍ່ເຊື່ອມຕໍ່ຫາ <xliff:g id="DEVICE_NAME">%2$s</xliff:g> ຂອງທ່ານອີກຕໍ່ໄປ"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ຈະບໍ່ຖືກຈັບຄູ່ກັບອຸປະກອນໃດທີ່ເຊື່ອມຕໍ່ຫາບັນຊີນີ້ອີກຕໍ່ໄປ"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"ລືມອຸປະກອນ"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ຕັດການເຊື່ອມຕໍ່ແອັບ"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"ເຊື່ອມຕໍ່ກັບ..."</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"ກ້ອງຖ່າຍຮູບ"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi​-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"ການສະແຕນບາຍເຄືອຂ່າຍມືຖື"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"ການໂທດ້ວຍສຽງ"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"ແທັບເລັດບໍ່ເຮັດວຽກ"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"ໂທລະ​ສັບ​ບໍ່​ເຮັດ​ວຽກ"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ໜ້າຈໍລັອກ, ຂ້າມ, ອ້ອມ"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"ເມື່ອລັອກໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ການແຈ້ງເຕືອນຢູ່ໜ້າຈໍລັອກ"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"ສະແດງການສົນທະນາ, ຄ່າເລີ່ມຕົ້ນ ແລະ ການປິດສຽງ"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"ເຊື່ອງການສົນທະນາ ແລະ ການແຈ້ງເຕືອນທີ່ບໍ່ມີສຽງໄວ້"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"ຢ່າສະແດງການແຈ້ງເຕືອນໃດໆ"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"ການແຈ້ງເຕືອນ <xliff:g id="APP_NAME">%1$s</xliff:g> ທັງໝົດ"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ການແຈ້ງເຕືອນແບບປັບປ່ຽນໄດ້ເອງ"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ມື້</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ມື້</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ມື້</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ອາທິດ</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ອາທິດ</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ອາທິດ</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ບໍ່ສົ່ງ"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"ອະນຸຍາດໃຫ້ເຂົ້າເຖິງການແຈ້ງເຕືອນສຳລັບ <xliff:g id="SERVICE">%1$s</xliff:g> ບໍ?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"ການແຈ້ງເຕືອນແບບປັບຕົວໄດ້ຂອງ Android ຖືກແທນທີ່ດ້ວຍການແຈ້ງເຕືອນທີ່ປັບປຸງໃຫ້ດີຂຶ້ນໃນ Android 12 ແລ້ວ. ຄຸນສົມບັດນີ້ສະແດງຄຳສັ່ງ ແລະ ການຕອບກັບທີ່ແນະນຳ ແລະ ຈັດລະບຽບການແຈ້ງເຕືອນຂອງທ່ານ. \n\nການແຈ້ງເຕືອນທີ່ປັບປຸງໃຫ້ດີຂຶ້ນສາມາດເຂົ້າເຖິງເນື້ອຫາການແຈ້ງເຕືອນໄດ້, ຮວມທັງຂໍ້ມູນສ່ວນຕົວ ເຊັ່ນ: ຊື່ຜູ້ຕິດຕໍ່ ແລະ ຂໍ້ຄວາມ. ຄຸນສົມບັດນີ້ສາມາດປິດ ຫຼື ຕອບກັບຫາການແຈ້ງເຕືອນໄດ້ນຳ ເຊັ່ນ: ການຮັບສາຍໂທລະສັບ ແລະ ຄວບຄຸມໂໝດຫ້າມລົບກວນ."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"ອະນຸຍາດ​ການ​ເຂົ້າ​ເຖິງ​ການ​ແຈ້ງ​ເຕືອນ​ສຳລັບ <xliff:g id="SERVICE">%1$s</xliff:g> ບໍ?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ຈະສາມາດອ່ານການແຈ້ງເຕືອນທັງໝົດ, ຮວມທັງຂໍ້ມູນສ່ວນຕົວ ເຊັ່ນ: ຊື່ຜູ້ຕິດຕໍ່ ແລະ ຂໍ້ຄວາມທີ່ທ່ານໄດ້ຮັບ. ແອັບນີ້ຈະສາມາດເລື່ອນໄປກ່ອນ ຫຼື ປິດການແຈ້ງເຕືອນ ຫຼື ດຳເນີນການຢູ່ປຸ່ມໃນການແຈ້ງເຕືອນ, ຮວມທັງການຮັບສາຍໄດ້ນຳ. \n\nນີ້ຈະເປັນການເຮັດໃຫ້ແອັບສາມາດເປີດ ຫຼື ປິດໂໝດຫ້າມລົບກວນ ແລະ ປ່ຽນການຕັ້ງຄ່າທີ່ກ່ຽວຂ້ອງໄດ້."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"ຫາກທ່ານປິດການເຂົ້າເຖິງການແຈ້ງເຕືອນສຳລັບ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, ການເຂົ້າເຖິງ ຫ້າມລົບກວນ ອາດຖືກປິດໄປນຳ."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ປິດໄວ້"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ຍົກເລີກ"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ຜູ້ຊ່ວຍດິຈິຕອນ"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"ປັດເພື່ອເອີ້ນໃຊ້ຜູ້ຊ່ວຍ"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"ປັດຂຶ້ນຈາກມຸມລຸ່ມສຸດເພື່ອເອີ້ນໃຊ້ແອັບຜູ້ຊ່ວຍດິຈິຕອນ."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"ກົດປຸ່ມໜ້າທຳອິດຄ້າງໄວ້ເພື່ອເອີ້ນໃຊ້ຜູ້ຊ່ວຍ"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"ກົດປຸ່ມໜ້າທຳອິດຄ້າງໄວ້ເພື່ອເອີ້ນໃຊ້ແອັບຜູ້ຊ່ວຍດິຈິຕອນ."</string>
     <string name="information_label" msgid="6939310810756569298">"ຂໍ້ມູນ"</string>
     <string name="low_label" msgid="6525629096999711220">"ຕ່ຳ"</string>
     <string name="high_label" msgid="357503396626018487">"ສູງ"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"ຄວາມລະອຽດອ່ອນທີ່ສູງຂຶ້ນອາດຂັດແຍ່ງກັບທ່າທາງແອັບໃດໆທີ່ມີຢູ່ຂອບຈໍ."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"ຄວາມລະອຽດອ່ອນກັບຫຼັງ"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ຄວາມລະອຽດອ່ອນຂອງການນຳທາງແບບທ່າທາງ"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ການນຳທາງແບບປຸ່ມ"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ການນຳທາງທ່າທາງ, ຄວາມລະອຽດອ່ອນທາງຫຼັງ, ທ່າທາງທາງຫຼັງ"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"ການນຳທາງ, ປຸ່ມໜ້າທໍາອິດ"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ແຕະສອງເທື່ອເພື່ອກວດສອບໂທລະສັບ"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ແຕະສອງເທືື່ອເພື່ອກວດສອບແທັບເລັດ"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"ແຕະສອງເທືື່ອເພື່ອກວດສອບອຸປະກອນ"</string>

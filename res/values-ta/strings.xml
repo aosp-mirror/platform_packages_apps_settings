@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"உங்கள் டேப்லெட் இனி <xliff:g id="DEVICE_NAME">%1$s</xliff:g> உடன் இணைக்கப்பட்டிருக்காது"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"உங்கள் சாதனம் இனி <xliff:g id="DEVICE_NAME">%1$s</xliff:g> உடன் இணைக்கப்பட்டிருக்காது"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"உங்கள் <xliff:g id="DEVICE_NAME">%2$s</xliff:g> சாதனத்துடன் <xliff:g id="APP_NAME">%1$s</xliff:g> ஆப்ஸ் இனி இணைந்திருக்காது"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"இந்தக் கணக்குடன் இணைக்கப்பட்டுள்ள எந்தச் சாதனத்திலும் இனிமேல் இதைப் பயன்படுத்த முடியாது: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"சாதனத்தை அகற்று"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ஆப்ஸைத் துண்டி"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"இதனுடன் இணை..."</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"கேமரா"</string>
     <string name="power_wifi" msgid="4614007837288250325">"வைஃபை"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"புளூடூத்"</string>
-    <string name="power_cell" msgid="5507921058696341513">"மொபைல் நெட்வொர்க் காத்திருப்பு நிலை"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"குரல் அழைப்புகள்"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"டேப்லெட்டின் செயல்படாநிலை"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"மொபைலின் செயல்படாநிலை"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"லாக் ஸ்கிரீன், லாக்ஸ்கிரீன், தவிர், தவிர்த்துச் செல்"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"பணிக் கணக்கு பூட்டியிருந்தால்"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"லாக்ஸ்கிரீனில் அறிவிப்புகள்"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"உரையாடல், இயல்புநிலை மற்றும் ஒலியில்லா அறிவிப்புகளைக் காட்டு"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"ஒலியில்லாத உரையாடல்களையும் அறிவிப்புகளையும் மறைக்கவும்"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"எந்த அறிவிப்புகளையும் காட்டாதே"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"அனைத்து <xliff:g id="APP_NAME">%1$s</xliff:g> அறிவிப்புகளும்"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"சூழலுக்கேற்ற அறிவிப்புகள்"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> அறிவிப்புகள் / நாள்</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> அறிவிப்புகள் / நாள்</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> அறிவிப்பு / நாள்</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> அறிவிப்புகள் / வாரம்</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> அறிவிப்புகள் / வாரம்</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> அறிவிப்பு / வாரம்</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ஒருபோதும் அனுப்பியதில்லை"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> சேவைக்கான அறிவிப்பு அணுகலை அனுமதிக்கவா?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 பதிப்பில் \'Android சூழலுக்கேற்ற அறிவிப்புகள்\' அம்சத்திற்குப் பதிலாக \'மேம்பட்ட அறிவிப்புகள்\' கொடுக்கப்பட்டுள்ளது. இந்த அம்சம், பரிந்துரைக்கப்படும் செயல்களையும் பதில்களையும் காட்டுவதுடன் உங்கள் அறிவிப்புகளையும் ஒழுங்கமைக்கும். \n\nதொடர்புகளின் பெயர்கள், மெசேஜ்கள் போன்ற தனிப்பட்ட தகவல்கள் உட்பட அனைத்து அறிவிப்பு உள்ளடக்கத்தையும் \'மேம்பட்ட அறிவிப்புகள்\' அணுக முடியும். மேலும் இந்த அம்சத்தால் அறிவிப்புகளை நிராகரிக்கவும் அவற்றுக்குப் பதிலளிக்கவும் முடியும் (அழைப்புகளுக்குப் பதிலளிப்பது, \'தொந்தரவு செய்ய வேண்டாம்\' அம்சத்தைக் கட்டுப்படுத்துவது போன்றவை)."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g>க்கான அறிவிப்பு அணுகலை அனுமதிக்கவா?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"தொடர்புகளின் பெயர்கள் மற்றும் உங்களுக்கான மெசேஜ்களில் இருக்கும் உரைகள் போன்ற தனிப்பட்ட தகவல்கள் அடங்கிய அனைத்து அறிவிப்புகளையும் <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ஆப்ஸால் படிக்க இயலும். இந்த ஆப்ஸால் அறிவிப்புகளைச் சற்றுநேரம் நிறுத்திவைக்கவோ நிராகரிக்கவோ, அழைப்புகளுக்குப் பதிலளிப்பது உட்பட அவற்றிலுள்ள பட்டன்களில் நடவடிக்கை எடுக்கவோ முடியும். \n\nதொந்தரவு செய்ய வேண்டாம் அம்சத்தை ஆன் அல்லது ஆஃப் செய்வதற்கு ஆப்ஸை அனுமதிப்பதோடு அது தொடர்பான அமைப்புகளை மாற்றவும் இதனால் முடியும்."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>க்கு அறிவிப்பு அணுகலை முடக்கினால், \'தொந்தரவு செய்யாதே\' அணுகலும் முடக்கப்படலாம்."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"முடக்கு"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ரத்துசெய்"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"டிஜிட்டல் அசிஸ்டண்ட்"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"அசிஸ்டண்ட்டைத் துவக்க ஸ்வைப் செய்யுங்கள்"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"டிஜிட்டல் அசிஸ்டண்ட் ஆப்ஸைத் துவக்க, கீழ் மூலையிலிருந்து மேல்நோக்கி ஸ்வைப் செய்யலாம்."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"அசிஸ்டண்ட்டைத் துவக்க, முகப்புப் பட்டனை அழுத்திப் பிடித்தல்"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"டிஜிட்டல் அசிஸ்டண்ட் ஆப்ஸைத் துவக்க, முகப்புப் பட்டனை அழுத்திப் பிடிக்கவும்."</string>
     <string name="information_label" msgid="6939310810756569298">"தகவல் ஐகான்"</string>
     <string name="low_label" msgid="6525629096999711220">"குறைவு"</string>
     <string name="high_label" msgid="357503396626018487">"அதிகம்"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"அதிக உணர்திறன் ஆப்ஸ் சைகைகளுடன் திரை ஓரங்களில் முரண்படலாம்."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"பின்புற உணர்திறன்"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"சைகை வழிசெலுத்தலுக்கான உணர்திறன்"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"பட்டன் வழிசெலுத்தல்"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"சைகை வழிசெலுத்தல், பின்புற உணர்திறன், பின்புற சைகை"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"வழிசெலுத்தல், முகப்பு பட்டன்"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"மொபைல் திரையில் அறிவிப்புகளைப் பார்க்க, இருமுறை தட்டவும்"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"டேப்லெட் திரையில் அறிவிப்புகளைப் பார்க்க, இருமுறை தட்டவும்"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"சாதனத் திரையில் அறிவிப்புகளைப் பார்க்க, இருமுறை தட்டவும்"</string>

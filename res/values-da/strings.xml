@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Din tablet vil ikke længere være parret med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Din enhed vil ikke længere være parret med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Appen <xliff:g id="APP_NAME">%1$s</xliff:g> opretter ikke længere forbindelse til <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> vil ikke længere være parret med enheder, der er knyttet til denne konto"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Glem enhed"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Fjern tilknytning til app"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Opret forbindelse til..."</string>
@@ -2771,7 +2770,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Mobilnetværk på standby"</string>
+    <string name="power_cell" msgid="7793805106954398186">"Mobilnetværk"</string>
     <string name="power_phone" msgid="2768396619208561670">"Stemmeopkald"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tabletcomputeren er ikke aktiv"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Inaktiv telefon"</string>
@@ -3847,6 +3846,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Låseskærm, lås skærm, spring over, tilsidesæt"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Når arbejdsprofilen er låst"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifikationer på låseskærmen"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Vis samtaler, standard og lydløs"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Skjul lydløse samtaler og notifikationer"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Vis ingen notifikationer"</string>
@@ -3924,12 +3925,12 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle notifikationer for <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Automatiske notifikationer"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> notifikation om dagen</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> notifikationer om dagen</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> notifikation om dagen</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> notifikationer om dagen</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> notifikation om ugen</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> notifikationer om ugen</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> notifikation om ugen</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> notifikationer om ugen</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldrig"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Enheds- og appnotifikationer"</string>
@@ -3948,7 +3949,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vil du give <xliff:g id="SERVICE">%1$s</xliff:g> adgang til notifikationer?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Tilpassede Android-notifikationer blev erstattet af forbedrede notifikationer i Android 12. Denne funktion viser foreslåede handlinger og svar og organiserer dine notifikationer. \n\nForbedrede notifikationer kan få adgang til indhold i notifikationer, bl.a. personlige oplysninger som f.eks. beskeder og navne på kontakter. Funktionen kan også afvise eller svare på notifikationer, f.eks. ved at besvare telefonopkald og justere Forstyr ikke."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Tillad adgang til notifikationer for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vil kunne læse alle notifikationer, inkl. personlige oplysninger såsom navne på kontakter og tekst i beskeder, som du modtager. Appen vil også kunne udsætte eller afvise notifikationer eller aktivere knapper i notifikationer, herunder besvare telefonopkald. \n\nHerudover vil appen få mulighed for at aktivere eller deaktivere Forstyr ikke og ændre relaterede indstillinger."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Hvis du slår adgang til notifikationer fra for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, slås adgangen til Forstyr ikke muligvis også fra."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Slå fra"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Annuller"</string>
@@ -4855,10 +4871,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Stryg for at aktivere assistenten"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Stryg opad fra et af de nederste hjørner for at aktivere appen for din digitale assistent."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Hold Hjem nede for at aktivere assistenten"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Hold knappen Hjem nede for at aktivere appen for den digitale assistent"</string>
     <string name="information_label" msgid="6939310810756569298">"Oplysninger"</string>
     <string name="low_label" msgid="6525629096999711220">"Lav"</string>
     <string name="high_label" msgid="357503396626018487">"Høj"</string>
@@ -4867,11 +4881,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Højere følsomhed kan komme i konflikt med appbevægelser langs skærmens kant."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Følsomhed for bevægelse fra kant"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Følsomhed af navigation med bevægelser"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigation med knapper"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigation med bevægelser, følsomhed for bevægelse fra kant, bevægelse til at gå tilbage"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigation, knappen Hjem"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Tryk to gange for at tjekke telefonen"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tryk to gange for at tjekke din tablet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tryk to gange for at tjekke enheden"</string>

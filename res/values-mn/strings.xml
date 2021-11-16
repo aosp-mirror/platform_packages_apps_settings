@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Таны таблет <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-с сална"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Таны төхөөрөмж <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-с сална"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> апп цаашид таны <xliff:g id="DEVICE_NAME">%2$s</xliff:g>-тай холбогдохгүй"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-г цаашид энэ бүртгэлтэй холбосон ямар ч төхөөрөмжтэй хослуулахгүй"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Төхөөрөмжийг мартах"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Аппыг салгах"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Холбох…"</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Камер"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Мобайл сүлжээний түр горим"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Дуугаар залгах"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Таблет идэвхгүй"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Утас идэвхгүй"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Түгжигдсэн дэлгэц, Түгжигдсэн дэлгэц, Алгасах, Тойрох"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Ажлын профайлыг түгжсэн үед"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Түгжигдсэн дэлгэц дээрх мэдэгдэл"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Харилцан яриа, өгөгдмөл болон чимээгүй мэдэгдлийг харуулна"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Чимээгүй харилцан яриа болон мэдэгдлийг нуух"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ямар ч мэдэгдэл бүү харуул"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>-н бүх мэдэгдэл"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Орчинтой тохирсон мэдэгдлүүд"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~Өдөрт <xliff:g id="NUMBER_1">%d</xliff:g> мэдэгдэл</item>
+      <item quantity="other">~Өдөрт <xliff:g id="NUMBER_1">%,d</xliff:g> мэдэгдэл</item>
       <item quantity="one">~Өдөрт <xliff:g id="NUMBER_0">%d</xliff:g> мэдэгдэл</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~Долоо хоногт <xliff:g id="NUMBER_1">%d</xliff:g> мэдэгдэл</item>
+      <item quantity="other">~Долоо хоногт <xliff:g id="NUMBER_1">%,d</xliff:g> мэдэгдэл</item>
       <item quantity="one">~Долоо хоногт <xliff:g id="NUMBER_0">%d</xliff:g> мэдэгдэл</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Хэзээ ч үгүй"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g>-н мэдэгдлийн хандалтыг зөвшөөрөх үү?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Сайжруулсан мэдэгдэл нь Android 12-н Орчинтой тохирсон мэдэгдлийг орлоно. Энэ онцлог нь санал болгосон үйлдэл, хариунуудыг харуулж, таны мэдэгдлийг цэгцэлнэ. \n\nСайжруулсан мэдэгдэл нь харилцагчийн нэр, мессеж зэрэг хувийн мэдээллийг оруулаад мэдэгдлийн контентод хандах боломжтой. Энэ онцлог мөн утасны дуудлагад хариулах болон Бүү саад бол горимыг хянах зэргээр мэдэгдлийг хаах эсвэл түүнд хариулах боломжтой."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g>-д мэдэгдлийн хандалтыг зөвшөөрөх үү?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> нь харилцагчийн нэр, таны хүлээн авах мессежийн текст зэрэг таны хувийн мэдээллийг оруулаад бүх мэдэгдлийг унших боломжтой болно. Энэ апп мөн мэдэгдлүүдийг түр хойшлуулах, хаах эсвэл утасны дуудлагад хариулах зэргээр мэдэгдэл дэх товчлуурууд дээр үйлдэл хийх боломжтой. \n\nЭнэ нь мөн аппад Бүү саад бол горимыг асаах эсвэл унтраах, түүнчлэн холбоотой тохиргоог өөрчлөх чадамжийг өгнө."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Хэрэв та <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>-н мэдэгдлийн хандалтыг унтраавал Бүү саад бол хандалт мөн адил унтрах болно."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Унтраах"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Цуцлах"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Дижитал туслах"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Туслахыг дуудахын тулд шударна уу"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Дижитал туслах аппыг дуудахын тулд доод булангаас дээш шударна уу."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Туслахыг дуудах бол Нүүр хуудасны товчлуурыг удаан дарна уу"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Дижитал туслах аппыг дуудахын тулд Нүүр хуудасны товчлуурыг удаан дарна уу."</string>
     <string name="information_label" msgid="6939310810756569298">"Мэдээлэл"</string>
     <string name="low_label" msgid="6525629096999711220">"Бага"</string>
     <string name="high_label" msgid="357503396626018487">"Өндөр"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Илүү өндөр мэдрэгшил нь дэлгэцийн зах дагуух дурын аппын зангаатай зөрчилдөж болзошгүй."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Арын мэдрэгшил"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Зангааны навигацын мэдрэгшил"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Товчлуурт навигац"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"зангааны навигац, буцах мэдрэгшил, буцах зангаа"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"навигац, нүүр хуудасны товчлуур"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Утсаа шалгахын тулд хоёр товшино уу"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Таблетаа шалгахын тулд хоёр товшино уу"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Төхөөрөмжийг шалгахын тулд хоёр товшино уу"</string>

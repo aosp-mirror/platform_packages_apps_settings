@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> এর সাথে আপনার ট্যাবলেটটি আর যুক্ত থাকবে না"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> এর সাথে আপনার ডিভাইসটি আর যুক্ত থাকবে না"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> অ্যাপ আপনার <xliff:g id="DEVICE_NAME">%2$s</xliff:g> ডিভাইসের সাথে আর কানেক্ট হবে না"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"এই অ্যাকাউন্টের সাথে লিঙ্ক করা আছে এমন যেকোনও ডিভাইসের সাথে <xliff:g id="DEVICE_NAME">%1$s</xliff:g> আর পেয়ার করা যাবে না"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"ডিভাইসটি ভুলে যান"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"অ্যাপ ডিসকানেক্ট করুন"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"এতে কানেক্ট করুন..."</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"ক্যামেরা"</string>
     <string name="power_wifi" msgid="4614007837288250325">"ওয়াই-ফাই"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"ব্লুটুথ"</string>
-    <string name="power_cell" msgid="5507921058696341513">"মোবাইল নেটওয়ার্ক স্ট্যান্ডবাই"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"ভয়েস কল"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"ট্যাবলেট নিষ্ক্রিয়"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"ফোন নিষ্ক্রিয়"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"লক স্ক্রিন, লকস্ক্রিন, স্কিপ, বাইপাস"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"কাজের প্রোফাইল লক করা থাকলে"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"লক স্ক্রিনে বিজ্ঞপ্তি"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"ডিফল্ট ও আওয়াজ করবে না এমন সব কথোপকথন দেখুন"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"আওয়াজ করবে না এমন কথোপকথন ও বিজ্ঞপ্তি লুকান"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"কোনও বিজ্ঞপ্তি দেখতে চাই না"</string>
@@ -3924,12 +3926,12 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"সমস্ত <xliff:g id="APP_NAME">%1$s</xliff:g> সংক্রান্ত বিজ্ঞপ্তি"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"অ্যাডাপটিভ বিজ্ঞপ্তি"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি প্রতিদিন</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি প্রতিদিন</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g>টি বিজ্ঞপ্তি প্রতিদিন</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g>টি বিজ্ঞপ্তি প্রতিদিন</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">প্রতি সপ্তাহে ~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি</item>
-      <item quantity="other">প্রতি সপ্তাহে ~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি</item>
+      <item quantity="one">প্রতি সপ্তাহে ~<xliff:g id="NUMBER_1">%,d</xliff:g>টি বিজ্ঞপ্তি</item>
+      <item quantity="other">প্রতি সপ্তাহে ~<xliff:g id="NUMBER_1">%,d</xliff:g>টি বিজ্ঞপ্তি</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"কখনও না"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"ডিভাইস এবং অ্যাপ বিজ্ঞপ্তি"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g>-কে বিজ্ঞপ্তিতে অ্যাক্সেস দিতে চান?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 ভার্সনে Android অ্যাডাপ্টিভ বিজ্ঞপ্তির পরিবর্তে এনহ্যান্সড বিজ্ঞপ্তি এসেছে। এই ফিচারটি সাজেস্ট করা অ্যাকশন ও উত্তর দেখায় এবং আপনার বিজ্ঞপ্তি সাজিয়ে রাখে। \n\nএনহ্যান্সড বিজ্ঞপ্তি পরিচিতির নাম এবং মেসেজের মতো ব্যক্তিগত তথ্য সহ বিজ্ঞপ্তির কন্টেন্ট অ্যাক্সেস করতে পারে। এছাড়া, এই ফিচার বিজ্ঞপ্তি খারিজ করতে বা তার উত্তর দিতে পারে, যেমন ফোন কলের উত্তর দেওয়া এবং \'বিরক্ত করবে না\' মোড নিয়ন্ত্রণ করা।"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> এর জন্য বিজ্ঞপ্তির অ্যাক্সেসে অনুমতি দেবেন?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> সব বিজ্ঞপ্তি পড়তে পারবে। পরিচিতির নাম, আপনি যেসব মেসেজ পান সেগুলির টেক্সট সহ সব ব্যক্তিগত তথ্য এর মধ্যে পড়ে। এই অ্যাপ বিজ্ঞপ্তিতে দেওয়া বোতামের সাহায্যে অ্যাকশন নিতে পারবে বা বিজ্ঞপ্তি স্নুজ বা বাতিল করতে পারবে। এর মধ্যে ফোন কলের উত্তর দেওয়া অন্তর্ভুক্ত। \n\nএর সাহায্যে এই অ্যাপ \'বিরক্ত করবে না\' মোড চালু বা বন্ধ করতে এবং এই সম্পর্কিত সেটিংস পরিবর্তনও করতে পারবে।"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"যদি আপনি <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> এর জন্য বিজ্ঞপ্তির অ্যাক্সেস বন্ধ করেন, তাহলে \'বিরক্ত করবে না\' এর অ্যাক্সেসও বন্ধ হয়ে যেতে পারে৷"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"বন্ধ করুন"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"বাতিল করুন"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"\'ডিজিটাল অ্যাসিস্ট্যান্ট\'"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"\'অ্যাসিস্ট্যান্ট\' চালু করতে সোয়াইপ করুন"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"ডিজিটাল অ্যাসিস্ট্যান্ট\' অ্যাপ চালু করতে নিচের কোণা থেকে উপরের দিকে সোয়াইপ করুন।"</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"অ্যাসিস্ট্যান্ট ইনভোক করতে \'হোম\' বোতাম ধরে থাকুন"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"ডিজিটাল অ্যাসিস্ট্যান্ট অ্যাপ চালু করতে \'হোম\' বোতাম প্রেস করে ধরে রাখুন।"</string>
     <string name="information_label" msgid="6939310810756569298">"তথ্য"</string>
     <string name="low_label" msgid="6525629096999711220">"কম করুন"</string>
     <string name="high_label" msgid="357503396626018487">"বাড়ান"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"সংবেদনশীলতা বেড়ে গেলে সেটি স্ক্রিনের প্রান্তে যেকোনও অ্যাপ জেসচার সেটিংসকে ভালভাবে কাজ করতে দেয় না।"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"আগের স্ক্রিনে ফিরে যাওয়ার সংবেদনশীলতা"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ইঙ্গিত করে করা নেভিগেশনের সংবেদনশীলতা"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"\'নেভিগেশন\' বোতাম"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"জেসচার নেভিগেশন, ফিরে যাওয়ার সংবেদনশীলতা, ফিরে যাওয়ার জেসচার"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"\'নেভিগেশন\', \'হোম\' বোতাম"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"ফোন চেক করতে ডাবল-ট্যাপ করুন"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ট্যাবলেট চেক করতে ডাবল-ট্যাপ করুন"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"ডিভাইস চেক করতে ডাবল-ট্যাপ করুন"</string>
