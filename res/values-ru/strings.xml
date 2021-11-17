@@ -894,7 +894,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Планшет больше не будет подключен к устройству \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" больше не будет подключено."</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" будет отключено от устройства <xliff:g id="DEVICE_NAME">%2$s</xliff:g>."</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"Все устройства, привязанные к этому аккаунту, будут отключены от устройства \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"ОК"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Отключение приложения"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Подключить к..."</string>
@@ -2847,7 +2846,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Камера"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Мобильная сеть в режиме ожидания"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Голосовые вызовы"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Планшетный ПК в режиме ожидания"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Режим ожидания"</string>
@@ -3937,6 +3937,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Заблокированный экран, пропустить, перейти"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Рабочий профиль заблокирован"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Уведомления на заблок. экране"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Показывать все"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Скрывать беззвучные чаты и уведомления"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не показывать уведомления"</string>
@@ -4016,16 +4018,16 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Показывать все уведомления приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Адаптивные уведомления"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">~ <xliff:g id="NUMBER_1">%d</xliff:g> уведомление в день</item>
-      <item quantity="few">~ <xliff:g id="NUMBER_1">%d</xliff:g> уведомления в день</item>
-      <item quantity="many">~ <xliff:g id="NUMBER_1">%d</xliff:g> уведомлений в день</item>
-      <item quantity="other">~ <xliff:g id="NUMBER_1">%d</xliff:g> уведомления в день</item>
+      <item quantity="one">~ <xliff:g id="NUMBER_1">%,d</xliff:g> уведомление в день</item>
+      <item quantity="few">~ <xliff:g id="NUMBER_1">%,d</xliff:g> уведомления в день</item>
+      <item quantity="many">~ <xliff:g id="NUMBER_1">%,d</xliff:g> уведомлений в день</item>
+      <item quantity="other">~ <xliff:g id="NUMBER_1">%,d</xliff:g> уведомления в день</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> уведомление в неделю</item>
-      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> уведомления в неделю</item>
-      <item quantity="many">~<xliff:g id="NUMBER_1">%d</xliff:g> уведомлений в неделю</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> уведомления в неделю</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> уведомление в неделю</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> уведомления в неделю</item>
+      <item quantity="many">~<xliff:g id="NUMBER_1">%,d</xliff:g> уведомлений в неделю</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> уведомления в неделю</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никогда"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Уведомления на устройствах и в приложениях"</string>
@@ -4046,7 +4048,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Предоставить приложению \"<xliff:g id="SERVICE">%1$s</xliff:g>\" доступ к уведомлениям?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"В Android 12 доступны улучшенные уведомления. Эта функция упорядочивает все ваши уведомления и подсказывает ответы и действия.\n\nЕй доступно содержимое всех уведомлений, в том числе имена контактов, сообщения и другие личные данные. Также эта функция может закрывать уведомления и нажимать кнопки в них, например отвечать на звонки и управлять режимом \"Не беспокоить\"."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Открыть приложению \"<xliff:g id="SERVICE">%1$s</xliff:g>\" доступ к уведомлениям?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"Приложение \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" сможет читать все уведомления, в том числе содержащие личную информацию (например, имена контактов и сообщения). Кроме того, оно получит право временно отключать или закрывать уведомления и нажимать кнопки в них, например отвечать на звонки. \n\nПриложение сможет включать и отключать режим \"Не беспокоить\", а также менять его настройки."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Если вы отключите доступ к уведомлениям для приложения \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\", также может быть отключен доступ к настройкам режима \"Не беспокоить\"."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Отключить"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Отмена"</string>
@@ -5011,10 +5028,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Цифровой помощник"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Жест вызова помощника"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Чтобы вызвать цифрового помощника, проведите по экрану из нижнего угла вверх"</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Для вызова помощника удерживайте кнопку главного экрана"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Чтобы вызвать цифрового помощника, нажмите и удерживайте кнопку главного экрана."</string>
     <string name="information_label" msgid="6939310810756569298">"Информация"</string>
     <string name="low_label" msgid="6525629096999711220">"Низкая"</string>
     <string name="high_label" msgid="357503396626018487">"Высокая"</string>
@@ -5023,11 +5038,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"При высокой чувствительности могут не работать жесты по краям экрана в приложениях."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Чувствительность для жеста \"Назад\""</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Чувствительность навигации с помощью жестов"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Навигация с помощью кнопок"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навигация с помощью жестов, чувствительность для жеста \"Назад\", жест \"Назад\""</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"навигация, кнопка главного экрана"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Дважды нажать, чтобы проверить уведомления"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Дважды нажать, чтобы проверить уведомления"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Дважды нажать, чтобы проверить уведомления"</string>

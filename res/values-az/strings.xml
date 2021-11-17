@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Planşet artıq <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ilə qoşalaşmayacaq"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Cihaz artıq <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ilə qoşalaşmayacaq"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> tətbiqi artıq <xliff:g id="DEVICE_NAME">%2$s</xliff:g> cihazınıza qoşulmayacaq"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> artıq bu hesab ilə əlaqələndirilmiş cihaz ilə birləşdirilməyəcək"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Cihazı unudun"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Tətbiqi ayırın"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Bağlantı yaradılır…"</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Mobil şəbəkə gözləmə rejimi"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Səs çağrıları"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tablet boşdadır"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Telefon inaktivdir"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ekran kilidi, ekrankilidi, keçin, ötürün"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"İş profili kilidləndikdə"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Kilid ekranında bildirişlər"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Hamısı göstərilsin"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Səssiz söhbət və bildirişlər gizlədilsin"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Bildiriş göstərilməsin"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Bütün <xliff:g id="APP_NAME">%1$s</xliff:g> bildirişləri"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Adaptiv bildirişlər"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">Gün ərzində ~<xliff:g id="NUMBER_1">%d</xliff:g> bildiriş</item>
+      <item quantity="other">Gün ərzində ~<xliff:g id="NUMBER_1">%,d</xliff:g> bildiriş</item>
       <item quantity="one">Gün ərzində ~<xliff:g id="NUMBER_0">%d</xliff:g> bildiriş</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">Həftə ərzində ~<xliff:g id="NUMBER_1">%d</xliff:g> bildiriş</item>
+      <item quantity="other">Həftə ərzində ~<xliff:g id="NUMBER_1">%,d</xliff:g> bildiriş</item>
       <item quantity="one">Həftə ərzində ~<xliff:g id="NUMBER_0">%d</xliff:g> bildiriş</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Heç vaxt"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> üçün bildiriş icazəsi verilsin?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12-də qabaqcıl bildirişlər var. Bu funksiya bütün bildirişləri qaydaya salır, cavab və əməliyyatlara dair tövsiyə verir.\n\nFunksiyanın kontaktlar, mesajlar və şəxsi məlumatlar daxil olmaqla bütün bildirişlərə girişi var. Zənglərə cavab verə, \"Narahat etməyin\" rejimini idarə edə, bildirişləri qapada və cavablaya bilər."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> üçün bildiriş girişinə icazə verilsin?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kontakt adları və aldığınız mesajların mətni kimi şəxsi məlumatlar daxil olmaqla, bütün bildirişləri oxuyacaq. Bu tətbiq həmçinin bildirişləri ertələyə və ya ötürə və ya bildirişlərlə bağlı düymələr üzərində əməliyyatlar icra edə biləcək (telefon zənglərini cavablandırmaq da daxil olmaqla). \n\nBu, tətbiqə \"Narahat Etməyin\" rejimini aktiv və ya deaktiv etmək, həmçinin əlaqədar ayarları dəyişmək imkanı verəcək."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Bildiriş girişini <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> üçün deaktiv etsəniz, Narahat Etməyin girişi də deaktiv edilə bilər."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Söndür"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Ləğv edin"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Rəqəmsal assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Assistenti aktiv etmək üçün sürüşdürün"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Rəqəmsal assistent tətbiqini aktiv etmək üçün aşağı küncdən yuxarı sürüşdürün."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Assistenti işə salmaq üçün Əsas ekran düyməsini basıb saxlayın"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Rəqəmsal assistent tətbiqini işə salmaq üçün Əsas ekran düyməsini basıb saxlayın."</string>
     <string name="information_label" msgid="6939310810756569298">"Məlumat"</string>
     <string name="low_label" msgid="6525629096999711220">"Aşağı"</string>
     <string name="high_label" msgid="357503396626018487">"Yüksək"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Yüksək həssaslıq zamanı ekranın kənarlarında jestlər işləməyə bilər."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Arxa Həssaslıq"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Jest Naviqasiyası Həssaslığı"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Düymə ilə naviqasiya"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"jest naviqasiyası, geri həssaslıq, geri jest"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"naviqasiya, əsas ekran düyməsi"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Telefonu yoxlamaq üçün iki dəfə toxunun"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Planşeti yoxlamaq üçün iki dəfə tıklayın"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Cihazı yoxlamaq üçün iki dəfə tıklayın"</string>

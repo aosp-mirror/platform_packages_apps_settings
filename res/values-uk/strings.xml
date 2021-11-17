@@ -894,7 +894,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Ваш планшет більше не буде підключено до пристрою <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Ваш пристрій більше не буде підключено до пристрою <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Додаток <xliff:g id="APP_NAME">%1$s</xliff:g> більше не буде зв’язаний із вашим пристроєм \"<xliff:g id="DEVICE_NAME">%2$s</xliff:g>\""</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> більше не буде підключено до інших пристроїв, зв’язаних із цим обліковим записом"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Забути пристрій"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Від’єднати додаток"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Підключ. до…"</string>
@@ -1877,7 +1876,7 @@
     <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Під’єднайтеся до Інтернету"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Останні запити на геодані"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Показати всі"</string>
-    <string name="location_category_location_services" msgid="8163798686832434284">"Служби локації"</string>
+    <string name="location_category_location_services" msgid="8163798686832434284">"Геолокація"</string>
     <string name="location_title" msgid="5819154746934945021">"Моє місцезнах."</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Геодані для робочого профілю"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Доступ додатків до геоданих"</string>
@@ -1899,8 +1898,8 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Дозволити додаткам і сервісам будь-коли шукати мережі Wi-Fi, навіть якщо Wi-Fi вимкнено. Це може покращити роботу функцій і сервісів, які використовують геодані."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Шукати пристрої Bluetooth"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Дозволити додаткам і сервісам будь-коли шукати пристрої поруч, навіть якщо Bluetooth вимкнено. Це може покращити роботу функцій і сервісів, які використовують геодані."</string>
-    <string name="location_services_preference_title" msgid="604317859531782159">"Служби локації"</string>
-    <string name="location_services_screen_title" msgid="5640002489976602476">"Служби локації"</string>
+    <string name="location_services_preference_title" msgid="604317859531782159">"Геолокація"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Геолокація"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Служби локації для роботи"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Визначати часовий пояс за місцезнаходженням"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Потрібен доступ до геоданих пристрою"</string>
@@ -2847,7 +2846,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Камера"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Мобільна мережа в режимі очікування"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Голос. дзвінки"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Режим очікув."</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Режим очікування"</string>
@@ -3937,6 +3937,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Заблокований екран, екран блокування, пропустити, обходити"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Коли робочий профіль заблоковано"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Сповіщення на заблокованому екрані"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Показувати розмови (за умовчанням і беззвучні)"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Приховати беззвучні розмови та сповіщення"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не показувати сповіщення"</string>
@@ -4016,16 +4018,16 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Усі сповіщення від додатка <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Адаптивні сповіщення"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на день</item>
-      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на день</item>
-      <item quantity="many">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщень на день</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на день</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
+      <item quantity="many">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщень на день</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на день</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на тиждень</item>
-      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на тиждень</item>
-      <item quantity="many">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщень на тиждень</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> сповіщення на тиждень</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
+      <item quantity="many">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщень на тиждень</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> сповіщення на тиждень</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Ніколи"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Сповіщення додатків і пристроїв"</string>
@@ -4046,7 +4048,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ до сповіщень?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"В Android 12 адаптивні сповіщення замінено на покращені. Ця функція допомагає впорядковувати сповіщення й показує в них пропоновані дії та відповіді. \n\nПокращені сповіщення надають доступ до вмісту сповіщень, зокрема до такої особистої інформації, як повідомлення й імена контактів. Ця функція може автоматично закривати сповіщення чи реагувати на них, наприклад відповідати на телефонні дзвінки або керувати режимом \"Не турбувати\"."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ для сповіщень?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе переглядати всі сповіщення, зокрема з особистою інформацією, такою як імена контактів і текст отриманих повідомлень. Цей додаток також зможе відкладати й закривати сповіщення або виконувати дії з кнопками в них, зокрема відповідати на виклики. \n\nКрім того, додаток зможе вмикати й вимикати режим \"Не турбувати\" та змінювати пов’язані з ним налаштування."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Якщо ви вимкнете доступ додатка <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до сповіщень, доступ до режиму \"Не турбувати\" також буде вимкнено."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Вимкнути"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Скасувати"</string>
@@ -5011,10 +5028,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Цифровий помічник"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Провести пальцем, щоб викликати цифрового помічника"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Щоб викликати цифрового помічника, проведіть пальцем угору від нижнього кута екрана."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Щоб викликати помічника, утримуйте кнопку головного екрана"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Щоб викликати цифрового помічника, натисніть і утримуйте кнопку головного екрана."</string>
     <string name="information_label" msgid="6939310810756569298">"Інформація"</string>
     <string name="low_label" msgid="6525629096999711220">"Низька"</string>
     <string name="high_label" msgid="357503396626018487">"Висока"</string>
@@ -5023,11 +5038,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Через високу чутливість можуть не працювати жести з боків екрана в додатку."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Чутливість країв екрана"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Чутливість навігації за допомогою жестів"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Навігація за допомогою кнопок"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навігація за допомогою жестів, чутливість країв екрана, жест \"назад\""</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"навігація, кнопка головного екрана"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Двічі торкнутися, щоб перевірити сповіщення"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Двічі торкніться, щоб перевірити планшет"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Двічі торкніться, щоб перевірити пристрій"</string>

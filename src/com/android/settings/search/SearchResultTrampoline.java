@@ -28,9 +28,11 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsApplication;
 import com.android.settings.SubSettings;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
+import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.net.URISyntaxException;
@@ -99,12 +101,20 @@ public class SearchResultTrampoline extends Activity {
             // navigation behavior.
             ActivityEmbeddingRulesController.registerSubSettingsPairRule(this,
                     false /* clearTop */);
-            // TODO: pass menu key to homepage
+
             intent.setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+
+            // Pass menu key to homepage
+            final SettingsHomepageActivity homeActivity =
+                    ((SettingsApplication) getApplicationContext()).getHomeActivity();
+            if (homeActivity != null) {
+                homeActivity.getMainFragment().setHighlightMenuKey(highlightMenuKey);
+            }
         } else {
             // Two-pane case
-            startActivity(SettingsActivity.getTrampolineIntent(intent, highlightMenuKey));
+            startActivity(SettingsActivity.getTrampolineIntent(intent, highlightMenuKey)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
 
         // Done.

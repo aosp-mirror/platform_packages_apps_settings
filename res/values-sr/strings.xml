@@ -877,7 +877,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Таблет неће више бити упарен са уређајем <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Уређај неће више бити упарен са уређајем <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Апликација <xliff:g id="APP_NAME">%1$s</xliff:g> се више неће повезивати са уређајем <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> више неће бити упарен ни са једним уређајем повезаним са овим налогом"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Заборави уређај"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Прекини везу са апликацијом"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Повезивање са…"</string>
@@ -2716,7 +2715,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Највећа потрошња батерије"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Погледајте апликације са највећом потрошњом батерије"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Пуњење је привремено ограничено"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"За уштеду батерије. Сазнајте више."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Да би се сачувала батерија. Сазнајте више."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Настави са пуњењем"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"У одређеним условима, на пример, високе температуре и дуги периоди пуњења, пуњење може да буде ограничено на <xliff:g id="PERCENT">%1$s</xliff:g> ради бољег стања батерије.\n\nКада ти услови престану, телефон ће аутоматски почети нормално да се пуни."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"У одређеним условима, на пример, високе температуре и дуги периоди пуњења, пуњење може да буде ограничено на <xliff:g id="PERCENT">%1$s</xliff:g> ради бољег стања батерије.\n\nКада ти услови престану, таблет ће аутоматски почети нормално да се пуни."</string>
@@ -2809,7 +2808,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Камера"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Стање приправности мобилне мреже"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Гласовни позиви"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Таблет је у стању мировања"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Телефон у мировању"</string>
@@ -3892,6 +3892,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"закључани екран, прескочити, заобићи"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Када је пословни профил закључан"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Обавештења на закључаном екрану"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Приказуј конверзације, и подразумеване и нечујне"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Сакриј нечујне конверзације и обавештења"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не приказуј уопште обавештења"</string>
@@ -3970,14 +3972,14 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Сва обавештења апликације <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Прилагодљива обавештења"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> обавештење дневно</item>
-      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> обавештења дневно</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> обавештења дневно</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> обавештење дневно</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> обавештења дневно</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> обавештења дневно</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> обавештење недељно</item>
-      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> обавештења недељно</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> обавештења недељно</item>
+      <item quantity="one">~<xliff:g id="NUMBER_1">%,d</xliff:g> обавештење недељно</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> обавештења недељно</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> обавештења недељно</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никад"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Обавештења на уређајима и у апликацијама"</string>
@@ -3997,7 +3999,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Желите ли да дозволите да <xliff:g id="SERVICE">%1$s</xliff:g> има приступ обавештењима?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Побољшана обавештења су заменила Android прилагодљива обавештења у Android-у 12. Ова функција показује предложене радње и одговоре, а и организује обавештења. \n\nПобољшана обавештења могу да приступају садржају обавештења, укључујући личне податке попут имена контаката и порука. Ова функција може и да одбацује обавештења или да одговара на њих, на пример, да се јавља на телефонске позиве и контролише режим Не узнемиравај."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Желите ли да омогућите приступ обавештењима за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ће моћи да чита сва обавештења, укључујући личне податке, попут имена контаката и текста порука које примате. Ова апликација ће моћи и да одлаже или одбацује обавештења или активира дугмад у обавештењима, укључујући јављање на телефонске позиве. \n\nОво ће апликацији омогућити и да укључује или искључује режим Не узнемиравај и мења сродна подешавања."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ако искључите приступ обавештењима за <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, искључићете и приступ режиму Не узнемиравај."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Искључи"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Откажи"</string>
@@ -4933,10 +4950,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Дигитални помоћник"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Превуците да бисте покренули помоћник"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Превуците нагоре из неког од доњих улова да бисте покренули апликацију дигиталног помоћника."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Задржите дугме Почетак да бисте покренули помоћник"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Притисните и задржите дугме Почетак да бисте покренули апликацију дигиталног помоћника."</string>
     <string name="information_label" msgid="6939310810756569298">"Информације"</string>
     <string name="low_label" msgid="6525629096999711220">"Ниска"</string>
     <string name="high_label" msgid="357503396626018487">"Висока"</string>
@@ -4945,11 +4960,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Већа осетљивост може да изазове неслагање са покретима у апликацији дуж ивица екрана."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Позадинска осетљивост"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Осетљивост навигације помоћу покрета"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Кретање помоћу дугмета"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навигација помоћу покрета, осетљивост покрета за назад, покрет за назад"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"кретање, дугме почетак"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Двапут додирните телефон да бисте га проверили"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Двапут додирните таблет да бисте га проверили"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Двапут додирните уређај да бисте га проверили"</string>

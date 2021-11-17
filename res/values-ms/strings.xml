@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Tablet anda tidak akan digandingkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g> lagi"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Peranti anda tidak akan digandingkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g> lagi"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Apl <xliff:g id="APP_NAME">%1$s</xliff:g> tidak lagi dapat disambungkan kepada <xliff:g id="DEVICE_NAME">%2$s</xliff:g> anda"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> tidak lagi digandingkan dengan sebarang peranti yang dipaut ke akaun ini"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Lupakan peranti"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Putuskan sambungan apl"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Sambung ke..."</string>
@@ -1830,7 +1829,7 @@
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Gunakan <xliff:g id="NEW_APP">%1$s</xliff:g> bukannya <xliff:g id="CURRENT_APP">%2$s</xliff:g> untuk mengurus sambungan rangkaian anda?"</string>
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Gunakan <xliff:g id="NEW_APP">%s</xliff:g> untuk mengurus sambungan rangkaian anda?"</string>
     <string name="mobile_unknown_sim_operator" msgid="6650422533065760963">"Pengendali SIM yang tidak diketahui"</string>
-    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"<xliff:g id="OPERATOR">%1$s</xliff:g> tiada tapak web peruntukan yang dikenali"</string>
+    <string name="mobile_no_provisioning_url" msgid="609462719893503773">"<xliff:g id="OPERATOR">%1$s</xliff:g> tiada laman web peruntukan yang dikenali"</string>
     <string name="mobile_insert_sim_card" msgid="3639245241283948038">"Sila masukkan kad SIM dan mulakan semula"</string>
     <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Sila sambung ke internet"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Permintaan lokasi terbaharu"</string>
@@ -2684,7 +2683,7 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Sesetengah ciri mungkin terhad"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Penggunaan bateri tertinggi"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Lihat apl dengan penggunaan tertinggi"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Pengecasan terhad buat sementara waktu"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Pengecasan terhad sementara"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Untuk menjimatkan bateri anda. Ketahui lebih lanjut."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Sambung semula pengecasan"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Dalam keadaan tertentu, seperti suhu tinggi dan tempoh pengecasan yang panjang, pengecasan mungkin dihadkan kepada <xliff:g id="PERCENT">%1$s</xliff:g> untuk membantu anda mengekalkan kesihatan bateri.\n\nApabila keadaan tersebut berakhir, telefon anda akan dicas secara automatik seperti biasa."</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Kuasa tunggu sedia rangkaian mudah alih"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Panggilan suara"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tablet melahu"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Telefon melahu"</string>
@@ -2991,7 +2991,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"Sijil pengguna VPN &amp; apl"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Sijil Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Data anda tidak akan kekal rahsia"</string>
-    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Sijil CA digunakan oleh tapak web, apl dan VPN untuk penyulitan. Hanya pasang sijil CA daripada organisasi yang anda percayai. \n\nJika anda memasang sijil CA, pemilik sijil dapat mengakses data anda, seperti kata laluan atau butiran kad kredit, dari laman web yang anda lawati atau apl yang anda gunakan – meskipun data anda disulitkan."</string>
+    <string name="ca_certificate_warning_description" msgid="8409850109551028774">"Sijil CA digunakan oleh laman web, apl dan VPN untuk penyulitan. Hanya pasang sijil CA daripada organisasi yang anda percayai. \n\nJika anda memasang sijil CA, pemilik sijil dapat mengakses data anda, seperti kata laluan atau butiran kad kredit, dari laman web yang anda lawati atau apl yang anda gunakan – meskipun data anda disulitkan."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Jangan pasang"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Pasang juga"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Sijil tidak dipasang"</string>
@@ -3311,14 +3311,14 @@
       <item quantity="one">Percayai atau alih keluar sijil</item>
     </plurals>
     <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="2788832560436163252">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> telah memasang sijil kuasa pada peranti anda yang mungkin membenarkan pemantauan aktiviti rangkaian peranti anda, termasuk e-mel, apl dan tapak web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> telah memasang sijil kuasa pada peranti anda yang mungkin membenarkan pemantauan aktiviti rangkaian peranti anda, termasuk e-mel, apl dan tapak web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> telah memasang sijil kuasa pada peranti anda yang mungkin membenarkan pemantauan aktiviti rangkaian peranti anda, termasuk e-mel, apl dan laman web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> telah memasang sijil kuasa pada peranti anda yang mungkin membenarkan pemantauan aktiviti rangkaian peranti anda, termasuk e-mel, apl dan laman web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
     </plurals>
     <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="3989916958347169622">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> telah memasang sijil kuasa untuk profil kerja anda yang mungkin membenarkan pemantauan aktiviti rangkaian kerja, termasuk e-mel, apl dan tapak web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> telah memasang sijil kuasa untuk profil kerja anda yang mungkin membenarkan pemantauan aktiviti rangkaian kerja, termasuk e-mel, apl dan tapak web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
+      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> telah memasang sijil kuasa untuk profil kerja anda yang mungkin membenarkan pemantauan aktiviti rangkaian kerja, termasuk e-mel, apl dan laman web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
+      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> telah memasang sijil kuasa untuk profil kerja anda yang mungkin membenarkan pemantauan aktiviti rangkaian kerja, termasuk e-mel, apl dan laman web selamat.\n\nHubungi pentadbir anda untuk mengetahui lebih lanjut tentang sijil ini.</item>
     </plurals>
-    <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Pihak ketiga berkeupayaan untuk memantau aktiviti rangkaian anda, termasuk e-mel, apl dan tapak web selamat.\n\nBukti kelayakan dipercayai yang dipasang pada peranti anda yang membolehkan perkara ini."</string>
+    <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Pihak ketiga berkeupayaan untuk memantau aktiviti rangkaian anda, termasuk e-mel, apl dan laman web selamat.\n\nBukti kelayakan dipercayai yang dipasang pada peranti anda yang membolehkan perkara ini."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="other">Semak sijil</item>
       <item quantity="one">Semak sijil</item>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Skrin kunci, Langkau, Pintas"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Apabila profil kerja dikunci"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Pemberitahuan pada skrin kunci"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Tunjukkan perbualan, lalai dan senyap"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Sembunyikan perbualan dan pemberitahuan senyap"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Jangan tunjukkan sebarang pemberitahuan"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Semua pemberitahuan <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Pemberitahuan Boleh Suai"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> pemberitahuan sehari</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> pemberitahuan sehari</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> pemberitahuan sehari</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> pemberitahuan seminggu</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> pemberitahuan seminggu</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> pemberitahuan seminggu</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Jangan sekali-kali"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Benarkan akses pemberitahuan untuk <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Pemberitahuan yang dipertingkatkan menggantikan Pemberitahuan Boleh Suai Android dalam Android 12. Ciri ini menunjukkan cadangan tindakan dan balasan, serta mengatur pemberitahuan anda. \n\nPemberitahuan yang dipertingkatkan dapat mengakses kandungan pemberitahuan, termasuk maklumat peribadi seperti nama kenalan dan mesej. Ciri ini juga dapat mengetepikan atau membalas pemberitahuan, seperti menjawab panggilan telefon dan mengawal Jangan Ganggu."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Benarkan akses pemberitahuan untuk <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> akan dapat membaca semua pemberitahuan, termasuk maklumat peribadi seperti nama kenalan dan teks mesej yang anda terima. Apl ini juga akan dapat menunda atau mengetepikan pemberitahuan atau mengambil tindakan pada butang dalam pemberitahuan, termasuk menjawab panggilan telefon. \n\nHal ini turut mengupayakan apl untuk menghidupkan atau mematikan ciri Jangan Ganggu dan menukar tetapan yang berkaitan."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Jika anda mematikan akses pemberitahuan untuk <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, akses Jangan Ganggu mungkin turut dimatikan."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Matikan"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Batal"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Pembantu digital"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Leret untuk menggunakan pembantu"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Leret ke atas dari sudut bawah untuk menggunakan apl pembantu digital."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Tahan butang Skrin Utama untuk menggunakan pembantu"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Tekan dan tahan butang Skrin Utama untuk menggunakan apl pembantu digital."</string>
     <string name="information_label" msgid="6939310810756569298">"Maklumat"</string>
     <string name="low_label" msgid="6525629096999711220">"Rendah"</string>
     <string name="high_label" msgid="357503396626018487">"Tinggi"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Kepekaan yang lebih tinggi mungkin mempengaruhi fungsi gerak isyarat apl di tepi skrin."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Kepekaan Belakang"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Kepekaan Navigasi Gerak Isyarat"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigasi butang"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigasi gerak isyarat, kepekaan ke belakang, gerak isyarat ke belakang"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigasi, butang skrin utama"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Ketik dua kali untuk memeriksa telefon"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Ketik dua kali untuk menyemak tablet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Ketik dua kali untuk menyemak peranti"</string>
