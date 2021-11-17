@@ -16,17 +16,17 @@
 
 package com.android.settings;
 
-import android.app.Activity;
 import android.app.Application;
 
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
+import com.android.settings.homepage.SettingsHomepageActivity;
 
 import java.lang.ref.WeakReference;
 
 /** Settings application which sets up activity embedding rules for the large screen device. */
 public class SettingsApplication extends Application {
 
-    private WeakReference<Activity> mHomeActivity = new WeakReference<>(null);
+    private WeakReference<SettingsHomepageActivity> mHomeActivity = new WeakReference<>(null);
 
     @Override
     public void onCreate() {
@@ -37,11 +37,11 @@ public class SettingsApplication extends Application {
         controller.initRules();
     }
 
-    public void setHomeActivity(Activity homeActivity) {
+    public void setHomeActivity(SettingsHomepageActivity homeActivity) {
         mHomeActivity = new WeakReference<>(homeActivity);
     }
 
-    public Activity getHomeActivity() {
+    public SettingsHomepageActivity getHomeActivity() {
         return mHomeActivity.get();
     }
 }
