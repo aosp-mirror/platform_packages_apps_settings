@@ -3882,7 +3882,7 @@
             android:theme="@style/Transparent"
             android:permission="android.permission.DUMP"
             android:excludeFromRecents="true"
-            android:enabled="@bool/config_has_help" />
+            android:enabled="@*android:bool/config_settingsHelpLinksEnabled" />
 
         <activity android:name=".applications.autofill.AutofillPickerActivity"
                 android:excludeFromRecents="true"
