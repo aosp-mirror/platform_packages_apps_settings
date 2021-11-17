@@ -78,6 +78,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private static final int DEFAULT_HIGHLIGHT_MENU_KEY = R.string.menu_key_network;
     private static final long HOMEPAGE_LOADING_TIMEOUT_MS = 300;
 
+    private TopLevelSettings mMainFragment;
     private View mHomepageView;
     private View mSuggestionView;
     private CategoryMixin mCategoryMixin;
@@ -124,6 +125,11 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         homepageView.setVisibility(View.VISIBLE);
     }
 
+    /** Returns the main content fragment */
+    public TopLevelSettings getMainFragment() {
+        return mMainFragment;
+    }
+
     @Override
     public CategoryMixin getCategoryMixin() {
         return mCategoryMixin;
@@ -132,7 +138,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHomeActivity();
         setContentView(R.layout.settings_homepage_container);
 
         final View appBar = findViewById(R.id.app_bar_container);
@@ -162,16 +167,22 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
             }
         }
-        final Fragment fragment = new TopLevelSettings();
-        fragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+        mMainFragment = new TopLevelSettings();
+        mMainFragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
                 getHighlightMenuKey());
-        showFragment(fragment, R.id.main_content);
+        showFragment(mMainFragment, R.id.main_content);
 
         ((FrameLayout) findViewById(R.id.main_content))
                 .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
         // Launch the intent from deep link for large screen devices.
         launchDeepLinkIntentToRight();
+    }
+
+    @Override
+    protected void onStart() {
+        ((SettingsApplication) getApplication()).setHomeActivity(this);
+        super.onStart();
     }
 
     @Override
@@ -187,10 +198,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
         // Launch the intent from deep link for large screen devices.
         launchDeepLinkIntentToRight();
-    }
-
-    protected void setHomeActivity() {
-        ((SettingsApplication) getApplication()).setHomeActivity(this);
     }
 
     private void showSuggestionFragment() {
@@ -314,13 +321,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void reloadHighlightMenuKey() {
-        final TopLevelSettings fragment =
-                (TopLevelSettings) getSupportFragmentManager().findFragmentById(R.id.main_content);
-        if (fragment != null) {
-            fragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
-                    getHighlightMenuKey());
-            fragment.reloadHighlightMenuKey();
-        }
+        mMainFragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+                getHighlightMenuKey());
+        mMainFragment.reloadHighlightMenuKey();
     }
 
     private void initHomepageContainer() {

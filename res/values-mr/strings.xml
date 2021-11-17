@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"तुमचा टॅबलेट यापुढे <xliff:g id="DEVICE_NAME">%1$s</xliff:g>शी जोडलेला राहणार नाही"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"तुमचे डिव्हाइस यापुढे <xliff:g id="DEVICE_NAME">%1$s</xliff:g>शी पेअर केलेले राहणार नाही"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> ॲप तुमच्या <xliff:g id="DEVICE_NAME">%2$s</xliff:g> शी यापुढे कनेक्ट होणार नाही"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"या खात्याशी लिंक केलेल्या कोणत्याही डिव्हाइसशी यापुढे <xliff:g id="DEVICE_NAME">%1$s</xliff:g> पेअर केले जाणार नाही"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"डिव्हाइस विसरा"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"अ‍ॅप डिस्कनेक्‍ट करा"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"यावर कनेक्ट करा…"</string>
@@ -2772,7 +2771,7 @@
     <string name="power_camera" msgid="4778315081581293923">"कॅमेरा"</string>
     <string name="power_wifi" msgid="4614007837288250325">"वाय-फाय"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"ब्लूटूथ"</string>
-    <string name="power_cell" msgid="5507921058696341513">"मोबाइल नेटवर्क स्टँडबाय"</string>
+    <string name="power_cell" msgid="7793805106954398186">"मोबाइल नेटवर्क"</string>
     <string name="power_phone" msgid="2768396619208561670">"व्हॉइस कॉल"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"टॅबलेट निष्क्रिय"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"फोन निष्क्रिय"</string>
@@ -3848,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"लॉक स्क्रीन, लॉकस्क्रीन, वगळा, बायपास"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"कार्य प्रोफाइल लॉक केली असताना"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"लॉक स्‍क्रीनवरील सूचना"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"संभाषणे, डीफॉल्ट आणि सायलंट असलेल्या सूचना दाखवा"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"सायलंट असलेली संभाषणे आणि सूचना लपवा"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"कोणत्याही सूचना दाखवू नका"</string>
@@ -3925,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"सर्व <xliff:g id="APP_NAME">%1$s</xliff:g> वरील सूचना"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"अ‍ॅडॅप्टिव्ह सूचना"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~दर दिवसाला <xliff:g id="NUMBER_1">%d</xliff:g> सूचना</item>
+      <item quantity="other">~दर दिवसाला <xliff:g id="NUMBER_1">%,d</xliff:g> सूचना</item>
       <item quantity="one">~दर दिवसाला <xliff:g id="NUMBER_0">%d</xliff:g> सूचना</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~दर आठवड्याला <xliff:g id="NUMBER_1">%d</xliff:g> सूचना</item>
+      <item quantity="other">~दर आठवड्याला <xliff:g id="NUMBER_1">%,d</xliff:g> सूचना</item>
       <item quantity="one">~दर आठवड्याला <xliff:g id="NUMBER_0">%d</xliff:g> सूचना</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"कधीही नाही"</string>
@@ -3949,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> ला सूचना अ‍ॅक्सेस करण्याची अनुमती द्यायची का?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 मधील Android ॲडॅप्टिव्ह सूचना हे वैशिष्ट्य बदलून आता वर्धित सूचना झाले आहे. हे वैशिष्ट्य सुचवलेल्या कृती आणि उत्तरे दाखवते व तुमच्या सूचना व्यवस्थापित करते. \n\nवर्धित सूचना हे वैशिष्ट्य संपर्कांची नावे आणि मेसेज यांसारख्या वैयक्तिक माहितीसह सर्व सूचनांचा आशय ॲक्सेस करू शकते. हे वैशिष्ट्य फोन कॉलना उत्तर देणे आणि व्यत्यय आणू नका नियंत्रित करणे यांसारख्या कृती करून सूचना डिसमिस करू शकते किंवा त्यांना प्रतिसाद देऊ शकते."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> साठी सूचना अ‍ॅक्सेसला अनुमती द्यायची?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> तुम्ही मिळवता ती संपर्क नावे आणि मेसेजचा मजकूर यासारख्या वैयक्तिक माहितीसह सर्व सूचना वाचू शकेल. हे ॲप फोन कॉलना उत्तर देण्याच्या समावेशासह सूचना स्नूझ किंवा डिसमिस करू शकेल अथवा सूचनांमधील बटणवर कृती करू शकेल. \n\nहे ॲपला व्यत्यय आणू नका सुरू किंवा बंद करण्याची आणि संबंधित सेटिंग्ज बदलण्याची क्षमतादेखील देईल."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"तुम्ही <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> साठी सूचनांमधील अ‍ॅक्सेस बंद केल्यास, व्यत्यय आणू नका मधील अ‍ॅक्सेसदेखील बंद केला जाऊ शकतो."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"बंद करा"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"रद्द करा"</string>
@@ -4856,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"डिजिटल असिस्टंट"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"असिस्टंट अ‍ॅक्टिव्हेट करण्यासाठी स्वाइप करा"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"डिजिटल असिस्टंट अ‍ॅप अ‍ॅक्टिव्हेट करण्यासाठी तळाच्या कोपऱ्यापासून वर स्वाइप करा."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"असिस्टंट अ‍ॅक्टिव्हेट करण्यासाठी होम बटण धरून ठेवा"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"डिजिटल असिस्टंट अ‍ॅप अ‍ॅक्टिव्हेट करण्यासाठी होम बटण दाबा आणि धरून ठेवा."</string>
     <string name="information_label" msgid="6939310810756569298">"माहिती"</string>
     <string name="low_label" msgid="6525629096999711220">"कमी"</string>
     <string name="high_label" msgid="357503396626018487">"उच्च"</string>
@@ -4868,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"उच्च संवेदनशीलतेमुळे स्क्रीनच्या कडेला कोणत्याही अ‍ॅप जेश्चरमध्ये व्यत्यय येऊ शकतो."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"मागे जा बटणाची संवेदनशीलता"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"जेश्चर नेव्हिगेशनशी संबंधित संवेदनशीलता"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"बटण नेव्हिगेशन"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"जेश्चर नेव्हिगेशन, मागे जा बटणाची संवेदनशीलता, बॅक जेश्चर"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"नेव्हिगेशन, होम बटण"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"फोन तपासण्‍यासाठी दोनदा टॅप करा"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"टॅब्लेट तपासण्‍यासाठी दोनदा टॅप करा"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"डिव्हाइस तपासण्‍यासाठी दोनदा टॅप करा"</string>

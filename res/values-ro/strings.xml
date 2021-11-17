@@ -879,7 +879,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Tableta dvs. nu va mai fi asociată cu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Dispozitivul dvs. nu va mai fi asociat cu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Aplicația <xliff:g id="APP_NAME">%1$s</xliff:g> nu se va mai conecta la <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> nu va mai fi asociat cu niciun dispozitiv conectat la acest cont"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Eliminați dispozitivul"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Deconectați aplicația"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Conectați-vă la..."</string>
@@ -2811,7 +2810,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Cameră foto"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Rețea mobilă în așteptare"</string>
+    <string name="power_cell" msgid="7793805106954398186">"Rețea mobilă"</string>
     <string name="power_phone" msgid="2768396619208561670">"Apeluri vocale"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tableta inactivă"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Telefon inactiv"</string>
@@ -3894,6 +3893,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ecran de blocare, Ecran de blocare, Omitere, Evitare"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Când este blocat profilul de serviciu"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificări pe ecranul de blocare"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Afișează conversațiile prestabilite și silențioase"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ascunde conversațiile și notificările silențioase"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Nu afișa notificări"</string>
@@ -3972,13 +3973,13 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Toate notificările din <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificări adaptive"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> notificări pe zi</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> de notificări pe zi</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> notificări pe zi</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> de notificări pe zi</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> notificare pe zi</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> notificări pe săptămână</item>
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> de notificări pe săptămână</item>
+      <item quantity="few">~<xliff:g id="NUMBER_1">%,d</xliff:g> notificări pe săptămână</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> de notificări pe săptămână</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> notificare pe săptămână</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Niciodată"</string>
@@ -3999,7 +4000,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Permiteți accesul la notificări pentru <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Notificările optimizate au înlocuit Notificările adaptive Android de pe Android 12. Această funcție afișează acțiuni și răspunsuri sugerate și vă organizează notificările. \n\nNotificările optimizate pot accesa conținutul notificărilor, inclusiv informații cu caracter personal, precum mesajele și numele persoanelor de contact. În plus, funcția poate să închidă sau să răspundă la notificări, de exemplu, să răspundă la apeluri telefonice și să gestioneze opțiunea Nu deranja."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Permiteți accesul la notificări pentru <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> va putea să citească toate notificările, inclusiv informațiile cu caracter personal, cum ar fi numele persoanelor de contact și textul mesajelor primite. În plus, va putea să amâne sau să închidă notificări ori să declanșeze butoane pentru acțiuni din acestea, inclusiv să răspundă la apeluri telefonice. \n\nAstfel, aplicația va putea să activeze sau să dezactiveze starea Nu deranja și să modifice setările aferente."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Dacă dezactivați accesul notificărilor pentru <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, este posibil să se dezactiveze și accesul când starea este Nu deranja."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Dezactivați"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Anulați"</string>
@@ -4935,10 +4951,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Asistent digital"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Glisați pentru a invoca asistentul"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Glisați în sus dintr-un colț de jos pentru a invoca aplicația asistent digital."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Apăsați lung butonul ecran de pornire pentru a invoca asistentul"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Apăsați lung butonul ecran de pornire pentru a invoca aplicația asistent digital."</string>
     <string name="information_label" msgid="6939310810756569298">"Informații"</string>
     <string name="low_label" msgid="6525629096999711220">"Scăzută"</string>
     <string name="high_label" msgid="357503396626018487">"Ridicată"</string>
@@ -4947,11 +4961,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"O sensibilitate mai mare poate intra în conflict cu gesturile făcute pe marginile ecranului în aplicație."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilitatea gestului „Înapoi”"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Sensibilitatea la navigarea prin gesturi"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigare cu butoane"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigare prin gesturi, sensibilitatea gestului „Înapoi”, gestul „Înapoi”"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigare, butonul ecran de pornire"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Atingeți de două ori pentru a verifica telefonul"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Atingeți de două ori pentru a verifica tableta"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Atingeți de două ori pentru a verifica dispozitivul"</string>

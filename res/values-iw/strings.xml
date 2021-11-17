@@ -896,7 +896,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"ההתאמה בין הטאבלט שלך להתקן <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"ההתאמה בין המכשיר שלך להתקן <xliff:g id="DEVICE_NAME">%1$s</xliff:g> תבוטל"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> לא תהיה מחוברת יותר אל <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"תבוטל ההתאמה בין <xliff:g id="DEVICE_NAME">%1$s</xliff:g> לבין כל מכשיר שמקושר לחשבון זה"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"אני רוצה לשכוח את המכשיר"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ניתוק האפליקציה"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"התחברות אל…"</string>
@@ -2749,9 +2748,9 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"שימוש מוגבר בסוללה"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"הצגת האפליקציות המובילות במידת השימוש בסוללה"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"הטעינה מוגבלת זמנית"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"לשמירה על חיי הסוללה. מידע נוסף."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"כדי לשמור על תקינות הסוללה. מידע נוסף."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"המשך הטעינה"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"במצבים מסוימים, כמו טמפרטורה גבוהה וטעינה במשך הרבה זמן, יכול להיות שתהיה הגבלה של <xliff:g id="PERCENT">%1$s</xliff:g> על הטעינה כדי לשמור על תקינות הסוללה.\n\nכשמצבים כאלה מסתיימים, טעינת הטלפון תחזור למצב הרגיל באופן אוטומטי."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"בתנאים מסוימים, למשל בטמפרטורה גבוהה או כשטעינה נמשכת הרבה זמן, יכול להיות שהיא תוגבל ל-<xliff:g id="PERCENT">%1$s</xliff:g> כדי לשמור על תקינות הסוללה.\n\nכשהתנאים ישתנו בחזרה, הטלפון יחזור להיטען כרגיל באופן אוטומטי."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"במצבים מסוימים, כמו טמפרטורה גבוהה וטעינה במשך הרבה זמן, יכול להיות שתהיה הגבלה של <xliff:g id="PERCENT">%1$s</xliff:g> על הטעינה כדי לשמור על תקינות הסוללה.\n\nכשמצבים כאלה מסתיימים, טעינת הטאבלט תחזור למצב הרגיל באופן אוטומטי."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"נעשה שימוש רב מהרגיל בטלפון שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"נעשה שימוש רב מהרגיל בטאבלט שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
@@ -2849,7 +2848,8 @@
     <string name="power_camera" msgid="4778315081581293923">"מצלמה"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"רשת סלולרית במצב המתנה"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"שיחות קוליות"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"טאבלט לא פעיל"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"טלפון לא פעיל"</string>
@@ -3481,7 +3481,7 @@
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"הבנתי"</string>
     <string name="nfc_more_title" msgid="1041094244767216498">"עוד…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"הגדרה של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
-    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"עדכון של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"עדכון אפליקציית התשלום הראשית"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"במסוף תשלום ללא מגע, יש לשלם באמצעות <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"במסוף ללא מגע, יש לשלם באמצעות <xliff:g id="APP_0">%1$s</xliff:g>.\n\nהאפליקציה הזו מחליפה את <xliff:g id="APP_1">%2$s</xliff:g> כאפליקציית התשלומים שתשמש כברירת מחדל."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"הגדרה כברירת מחדל"</string>
@@ -3939,6 +3939,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"מסך נעילה, דילוג, מעקף"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"כשפרופיל העבודה נעול"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"התראות במסך הנעילה"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"הצגת שיחות, ברירת מחדל והתראות שקטות"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"הסתרת שיחות והתראות שקטות"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"לא להציג אף התראה"</string>
@@ -4018,15 +4020,15 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"כל ההתראות של <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"התראות מותאמות"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="two">כ-<xliff:g id="NUMBER_1">%d</xliff:g> התראות ביום</item>
-      <item quantity="many">כ-<xliff:g id="NUMBER_1">%d</xliff:g> התראות ביום</item>
-      <item quantity="other">כ-<xliff:g id="NUMBER_1">%d</xliff:g> התראות ביום</item>
+      <item quantity="two">כ-<xliff:g id="NUMBER_1">%,d</xliff:g> התראות ביום</item>
+      <item quantity="many">כ-<xliff:g id="NUMBER_1">%,d</xliff:g> התראות ביום</item>
+      <item quantity="other">כ-<xliff:g id="NUMBER_1">%,d</xliff:g> התראות ביום</item>
       <item quantity="one">כהתראה אחת (<xliff:g id="NUMBER_0">%d</xliff:g>) ביום</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="two">כ-<xliff:g id="NUMBER_1">%d</xliff:g> התראות בשבוע</item>
-      <item quantity="many">כ-<xliff:g id="NUMBER_1">%d</xliff:g> התראות בשבוע</item>
-      <item quantity="other">כ-<xliff:g id="NUMBER_1">%d</xliff:g> התראות בשבוע</item>
+      <item quantity="two">כ-<xliff:g id="NUMBER_1">%,d</xliff:g> התראות בשבוע</item>
+      <item quantity="many">כ-<xliff:g id="NUMBER_1">%,d</xliff:g> התראות בשבוע</item>
+      <item quantity="other">כ-<xliff:g id="NUMBER_1">%,d</xliff:g> התראות בשבוע</item>
       <item quantity="one">כהתראה אחת (<xliff:g id="NUMBER_0">%d</xliff:g>) בשבוע</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"אף פעם"</string>
@@ -4048,7 +4050,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"לאשר לאפליקציה \'<xliff:g id="SERVICE">%1$s</xliff:g>\' לגשת אל ההתראות?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"‏התכונה \'התראות משופרות\' החליפה את \'התראות מותאמות ל-Android\' ב-‏Android 12. התכונה הזו מציגה הצעות לפעולות ולתשובות ומארגנת את ההתראות שלך. \n\nל\'התראות משופרות\' יש גישה לתוכן של התראות, כולל מידע אישי כמו שמות אנשי קשר והודעות. התכונה הזו יכולה גם לסגור התראות או להגיב עליהן (למשל לענות לשיחות טלפון) ולשלוט בתכונה \'נא לא להפריע\'."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"לאשר לאפליקציה \'<xliff:g id="SERVICE">%1$s</xliff:g>\' לגשת אל ההתראות?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> תוכל לקרוא את כל ההתראות, כולל מידע אישי כמו שמות של אנשי קשר והודעות טקסט שמתקבלות. האפליקציה תוכל גם לבטל התראות, להעביר אותן למצב נודניק או להפעיל לחצני פעולה שהן כוללות, וכן לענות לשיחות טלפון. \n\nכמו כן, האפליקציה תוכל להפעיל או לכבות את התכונה \'נא לא להפריע\' ולשנות הגדרות קשורות."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"אם משביתים את הגישה של <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> להתראות, יכול להיות שגם הגישה לתכונה \'נא לא להפריע\' תושבת."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"השבתה"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ביטול"</string>
@@ -5013,10 +5030,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"העוזר הדיגיטלי"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"החלקה להפעלת העוזר הדיגיטלי"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"כדי להפעיל את אפליקציית העוזר הדיגיטלי, צריך להחליק למעלה מאחת הפינות התחתונות."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"לחיצה ארוכה להפעלת העוזר הדיגיטלי"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"צריך ללחוץ לחיצה ארוכה על הלחצן הראשי כדי להפעיל את האפליקציה \'עוזר דיגיטלי\'."</string>
     <string name="information_label" msgid="6939310810756569298">"מידע"</string>
     <string name="low_label" msgid="6525629096999711220">"נמוכה"</string>
     <string name="high_label" msgid="357503396626018487">"גבוהה"</string>
@@ -5025,11 +5040,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"רגישות גבוהה עלולה לגרום לזיהוי שגוי של תנועות באפליקציות שונות בקצוות של המסך."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"רגישות לתנועה \"חזרה\""</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"מידת הרגישות של ניווט באמצעות תנועות"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"ניווט באמצעות לחצנים"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"ניווט באמצעות תנועות, רגישות פעולה החזרה, תנועת החזרה"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"ניווט, הלחצן הראשי"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"הקשה כפולה לבדיקת הטלפון"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"הקשה כפולה לבדיקת הטאבלט"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"הקשה כפולה לבדיקת המכשיר"</string>

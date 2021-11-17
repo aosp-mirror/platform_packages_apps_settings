@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"آپ کے ٹیبلیٹ کو <xliff:g id="DEVICE_NAME">%1$s</xliff:g> کے ساتھ مزید نہیں جوڑا جائے گا"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"آپ کے آلہ کو <xliff:g id="DEVICE_NAME">%1$s</xliff:g> کے ساتھ مزید نہیں جوڑا جائے گا"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> ایپ اب آپ کے <xliff:g id="DEVICE_NAME">%2$s</xliff:g> سے منسلک نہیں ہوگی"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> اس اکاؤنٹ سے لنک کردہ کسی بھی آلہ کے ساتھ مزید نہیں جوڑا جائے گا"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"آلہ بھول جائیں"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ایپ کو غیر منسلک کریں"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"اس سے مربوط ہوں…"</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"کیمرا"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"بلوٹوتھ"</string>
-    <string name="power_cell" msgid="5507921058696341513">"موبائل نیٹ ورک اسٹینڈ بائی"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"صوتی کالز"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"ٹیبلٹ معطل ہے"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"فون معطل"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"مقفل اسکرین، لاک اسکرین، نظر انداز کریں، بائی پاس کریں"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"دفتری پروفائل مقفل ہونے پر"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"لاک اسکرین پر اطلاعات"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"گفتگوئیں، ڈیفالٹ اور خاموش دکھائیں"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"خاموش گفتگوئیں اور اطلاعات چھپائیں"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"کوئی بھی اطلاع نہ دکھائیں"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"سبھی <xliff:g id="APP_NAME">%1$s</xliff:g> اطلاعات"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"تغیر پذیر اطلاعات"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> اطلاعات فی دن</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> اطلاعات فی دن</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> اطلاع فی دن</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> اطلاعات فی ہفتہ</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> اطلاعات فی ہفتہ</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> اطلاع فی ہفتہ</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"کبھی نہیں"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"‫<xliff:g id="SERVICE">%1$s</xliff:g> کیلئے اطلاع تک رسائی کی اجازت دیں؟"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"‏Android 12 میں بہتر کردہ اطلاعات نے Android اڈاپٹیو اطلاعات کی جگہ لے لی ہے۔ یہ خصوصیت تجویز کردہ کارروائیاں اور جوابات دکھاتی ہے اور آپ کی اطلاعات کا نظم کرتی ہے۔ \n\nبہتر کردہ اطلاعات رابطوں کے نام اور پیغامات جیسی ذاتی معلومات سمیت اطلاعات کے مواد تک رسائی حاصل کر سکتی ہیں۔ یہ خصوصیت اطلاعات کو برخاست کر سکتی ہے یا ان کا جواب بھی دے سکتی ہے جیسے فون کالز کا جواب دینا اور ڈسٹرب نہ کریں کو کنٹرول کرنا۔"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"‫<xliff:g id="SERVICE">%1$s</xliff:g> کیلئے اطلاع تک رسائی کی اجازت دیں؟"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"رابطوں کے نام اور آپ کو موصول ہونے والے پیغامات کے ٹیکسٹ جیسی ذاتی معلومات سمیت <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> تمام اطلاعات پڑھنے کا اہل ہوگا۔ یہ ایپ فون کالز کا جواب دینے سمیت اسنوز کرنے یا اطلاعات کو برخاست کرنے یا اطلاعات میں بٹنوں پر کارروائی کرنے کی بھی اہل ہوگی۔ \n\nاس سے ایپ کو \'ڈسٹرب نہ کریں\' آن یا آف کرنے اور متعلقہ ترتیبات تبدیل کرنے کی اہلیت بھی حاصل ہوگی۔"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"اگر آپ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> کیلئے اطلاع کی رسائی آف کرتے ہیں تو ڈسٹرب نہ کریں کی رسائی بھی آف ہو سکتی ہے۔"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"آف کریں"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"منسوخ کریں"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ڈیجیٹل اسسٹنٹ"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"اسسٹنٹ کو طلب کرنے کے لیے سوائپ کریں"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"ڈیجیٹل اسسٹنٹ ایپ کو طلب کرنے کے لیے نچلے کونے سے اوپر سوائپ کریں۔"</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"اسسٹنٹ کو طلب کرنے کے لیے ہوم بٹن دبائیں رکھیں"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"ڈیجیٹل اسسٹنٹ ایپ کو شروع کرنے کے لیے ہوم بٹن کو چھوئیں اور دبائے رکھیں۔"</string>
     <string name="information_label" msgid="6939310810756569298">"معلومات"</string>
     <string name="low_label" msgid="6525629096999711220">"کم"</string>
     <string name="high_label" msgid="357503396626018487">"زیادہ"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"اسکرین کے کناروں پر اعلی حساسیت کسی بھی ایپ کے اشاروں کے ساتھ تصادم کا سبب بن سکتی ہیں۔"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"پیچھے کی حساسیت"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"اشاروں والی نیویگیشن حساسیت"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"بٹن والی نیویگیشن"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"اشاروں والی نیویگیشن، پیچھے کی حساسیت، پیچھے کا اشارہ"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"نیویگیشن، ہوم بٹن"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"فون کو چیک کرنے کیلئے دو بار تھپتھپائیں"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ٹیبلیٹ کو چیک کرنے کیلئے دو بار تھپتھپائیں"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"آلہ کو چیک کرنے کیلئے دو بار تھپتھپائیں"</string>

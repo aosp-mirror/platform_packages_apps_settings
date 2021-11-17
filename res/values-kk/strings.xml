@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Планшет пен <xliff:g id="DEVICE_NAME">%1$s</xliff:g> байланысы ажырайды."</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Құрылғы мен <xliff:g id="DEVICE_NAME">%1$s</xliff:g> байланысы ажырайды."</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> қолданбасы бұдан былай <xliff:g id="DEVICE_NAME">%2$s</xliff:g> құрылғысына жалғанбайды."</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> құрылғысы енді осы аккаунтқа байланыстырылған ешбір құрылғымен жұптаспайды."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Құрылғыны ұмыту"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Қолданбаны ажырату"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"…қосылу"</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Камера"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Мобильдік желі күту режимінде"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Дыбыс қоңыраулары"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Планшет бос"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Күту режимі"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Құлып экраны, құлыптаулы экран, өткізіп жіберу, өткізу"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Жұмыс профилі өшірулі болғанда"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Құлыптаулы экрандағы хабарландырулар"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Барлық хабарландыруды көрсету"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Үнсіз әңгімелерді және хабарландыруларды жасыру"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ешқандай хабарландыруды көрсетпеу"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Барлық <xliff:g id="APP_NAME">%1$s</xliff:g> хабарландырулары"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Бейімделетін хабарландырулар"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">Күніне ~<xliff:g id="NUMBER_1">%d</xliff:g> хабарландыру</item>
+      <item quantity="other">Күніне ~<xliff:g id="NUMBER_1">%,d</xliff:g> хабарландыру</item>
       <item quantity="one">Күніне ~<xliff:g id="NUMBER_0">%d</xliff:g> хабарландыру</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">Аптасына ~<xliff:g id="NUMBER_1">%d</xliff:g> хабарландыру</item>
+      <item quantity="other">Аптасына ~<xliff:g id="NUMBER_1">%,d</xliff:g> хабарландыру</item>
       <item quantity="one">Аптасына ~<xliff:g id="NUMBER_0">%d</xliff:g> хабарландыру</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Ешқашан"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> қызметіне хабарландыруларға рұқсат берілсін бе?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 жүйесінде кеңейтілген хабарландырулар функциясы бейімделетін хабарландырулар функциясын алмастырды. Бұл функция ұсынылған әрекеттер мен жауаптарды көрсетіп, хабарландыруларыңызды ретке келтіреді. \n\nОл хабарландыру мазмұнын, соның ішінде жеке ақпаратыңызды (мысалы, контакт аттары мен хабарлар) пайдалана алады. Сондай-ақ бұл функция арқылы хабарландыруларды жабуға немесе оларға жауап беруге (мысалы, телефон қоңырауларына жауап беру және Мазаламау режимін басқару) болады."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> қызметіне хабарландыруларға рұқсат берілсін бе?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> барлық хабарландыруды, соның ішінде контакт аттары, сізге келген хабарлардың мәтіні сияқты жеке ақпаратты оқи алатын болады. Бұл қолданба хабарландыруларды уақытша өшіре не жаба алады, сондай-ақ хабарландырулардағы түймелерді баса алады. Келген қоңырауларға жауап беруі де мүмкін. \n\nСондай-ақ бұл – қолданбаға \"Мазаламау\" режимін қосуға немесе өшіруге және ұқсас параметрлерді өзгертуге мүмкіндік береді."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Егер <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> үшін хабарландыруларды пайдалану рұқсатын өшірсеңіз, Мазаламау режимінің рұқсаты да өшуі мүмкін."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Өшіру"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Бас тарту"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Цифрлық көмекші"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Көмекшіні іске қосу үшін сырғыту"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Цифрлық көмекші қолданбасын іске қосу үшін экранның төменгі бұрышынан жоғары қарай сырғытыңыз."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Көмекшіні іске қосу үшін \"Негізгі экран\" түймесін басып тұрыңыз"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Цифрлық көмекшіні іске қосу үшін \"Негізгі экран\" түймесін басып тұрыңыз."</string>
     <string name="information_label" msgid="6939310810756569298">"Ақпарат"</string>
     <string name="low_label" msgid="6525629096999711220">"Төмен"</string>
     <string name="high_label" msgid="357503396626018487">"Жоғары"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Сезгіштік деңгейінің жоғары болуы қолданбада экранның жиектерінде жасалатын қимылдарға кедергі келтіруі мүмкін."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Артқы сезгіштік"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Қимылмен басқаруға сезгіштік"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Түйме арқылы өту"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"қимылмен басқару, артқы сезгіштік, артқа қайту қимылы"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"өту, негізгі экран түймесі"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Телефонды тексеру үшін екі рет түрту"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Планшетті тексеру үшін екі рет түртіңіз"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Құрылғыны тексеру үшін екі рет түртіңіз"</string>

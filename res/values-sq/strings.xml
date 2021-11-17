@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Tableti yt nuk do të jetë më i çiftuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Pajisja jote nuk do të jetë më e çiftuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Aplikacioni <xliff:g id="APP_NAME">%1$s</xliff:g> nuk do të lidhet më me pajisjen tënde <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"Pajisja <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nuk do të jetë më e çiftuar me asnjë pajisje të lidhur me këtë llogari"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Harroje pajisjen"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Shkëput aplikacionin"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Lidhu me…"</string>
@@ -2687,8 +2686,8 @@
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Karikimi përkohësisht i kufizuar"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Për të kursyer baterinë. Mëso më shumë."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Vazhdo karikimin"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Në kushte të caktuara, si p.sh. në temperatura të larta dhe periudha të gjata, karikimi mund të kufizohet në <xliff:g id="PERCENT">%1$s</xliff:g> për të ndihmuar në ruajtjen e gjendjes së baterisë.\n\nKur këto kushte përfundojnë, telefoni yt do të karikohet automatikisht si zakonisht."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Në kushte të caktuara, si p.sh. në temperatura të larta dhe periudha të gjata, karikimi mund të kufizohet në <xliff:g id="PERCENT">%1$s</xliff:g> për të ndihmuar në ruajtjen e gjendjes së baterisë.\n\nKur këto kushte përfundojnë, telefoni yt do të karikohet automatikisht si zakonisht."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Karikimi mund të kufizohet në <xliff:g id="PERCENT">%1$s</xliff:g> për të ndihmuar në ruajtjen e gjendjes së baterisë në kushte të caktuara, si p.sh. në temperatura të larta dhe periudha të gjata karikimi.\n\nKur këto kushte përfundojnë, telefoni yt do të karikohet automatikisht si zakonisht."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Karikimi mund të kufizohet në <xliff:g id="PERCENT">%1$s</xliff:g> për të ndihmuar në ruajtjen e gjendjes së baterisë në kushte të caktuara, si p.sh. në temperatura të larta dhe periudha të gjata karikimi.\n\nKur këto kushte përfundojnë, tableta jote do të karikohet automatikisht si zakonisht."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Bateria mund të mbarojë më shpejt se normalisht pasi e ke përdorur telefonin më shumë se zakonisht.\n\nAplikacionet që përdorin më shumë baterinë:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Bateria mund të mbarojë më shpejt se normalisht pasi e ke përdorur tabletin më shumë se zakonisht.\n\nAplikacionet që përdorin më shumë baterinë:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Bateria mund të mbarojë më shpejt se normalisht pasi e ke përdorur pajisjen më shumë se zakonisht.\n\nAplikacionet që përdorin më shumë baterinë:"</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth-i"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Rrjeti celular në gatishmëri"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"Telefonatat zanore"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tableti në gjendje joaktive"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Telefoni në gjendje joaktive"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ekrani i kyçjes, ekrani i bllokimit, kapërce, anashkalo"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Kur profili i punës është i kyçur"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Njoftimet në ekranin e kyçjes"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Shfaq bisedat, të parazgjedhura dhe të heshtura"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Fshih bisedat dhe njoftimet e heshtura"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Mos shfaq asnjë njoftim"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Të gjitha njoftimet e <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Njoftimet me përshtatje"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> njoftime në ditë</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> njoftime në ditë</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> njoftim në ditë</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> njoftime në javë</item>
+      <item quantity="other">~<xliff:g id="NUMBER_1">%,d</xliff:g> njoftime në javë</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> njoftim në javë</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Asnjëherë"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Të lejohet qasja te njoftimet për \"<xliff:g id="SERVICE">%1$s</xliff:g>\"?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Njoftimet e përmirësuara kanë zëvendësuar \"Njoftimet me përshtatje të Android\" në Android 12. Kjo veçori shfaq veprimet dhe përgjigjet e sugjeruara dhe organizon njoftimet e tua. \n\nNjoftimet e përmirësuara mund të kenë qasje te përmbajtja e njoftimeve, duke përfshirë informacionet personale si emrat e kontakteve dhe mesazhet. Kjo veçori mund t\'i heqë ose të përgjigjet po ashtu për njoftimet, si p.sh. t\'u përgjigjet telefonatave, dhe të kontrollojë modalitetin \"Mos shqetëso\"."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Të lejohet qasja te njoftimet për \"<xliff:g id="SERVICE">%1$s</xliff:g>\"?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> do të mund të lexojë të gjitha njoftimet, duke përfshirë informacione personale të tilla si emrat e kontakteve dhe tekstin e mesazheve që merr. Ky aplikacion do të jetë gjithashtu në gjendje të shtyjë alarmin, të heqë njoftimet ose të veprojë mbi butonat te njoftimet, duke përfshirë përgjigjen ndaj telefonatave. \n\nKjo do t\'i japë aplikacionit aftësinë për të aktivizuar ose çaktivizuar \"Mos shqetëso\" dhe për të ndryshuar cilësimet përkatëse."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Nëse çaktivizon qasjen te njoftimet për \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\", mund të çaktivizohet edhe qasja te \"Mos shqetëso\"."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Çaktivizo"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Anulo"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Asistenti dixhital"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Rrëshqit shpejt për të aktivizuar asistentin"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Rrëshqit shpejt lart nga këndi i poshtëm për të aktivizuar aplikacionin e asistentit dixhital."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Mbaj shtypur \"Krehu\" për të thirrur asistentin"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Shtyp dhe mbaj shtypur butonin \"Kreu\" për të thirrur aplikacionin e asistentit dixhital."</string>
     <string name="information_label" msgid="6939310810756569298">"Informacione"</string>
     <string name="low_label" msgid="6525629096999711220">"I ulët"</string>
     <string name="high_label" msgid="357503396626018487">"I lartë"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Ndjeshmëria më e lartë mund të jetë në konflikt me gjestet e aplikacionit përgjatë skajeve të ekranit."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Ndjeshmëria e kthimit pas"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Ndjeshmëria e navigimit me gjeste"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Navigimi me butona"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigimi me gjeste, ndjeshmëria e kthimit prapa, gjesti i kthimit prapa"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigimi, butoni \"krehu\""</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Trokit dy herë për të kontrolluar telefonin"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Trokit dy herë për të kontrolluar tabletin"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Trokit dy herë për të kontrolluar pajisjen"</string>

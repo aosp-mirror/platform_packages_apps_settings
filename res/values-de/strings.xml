@@ -863,7 +863,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Dein Tablet ist dann nicht mehr mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gekoppelt"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Dein Gerät ist dann nicht mehr mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gekoppelt"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Die <xliff:g id="APP_NAME">%1$s</xliff:g> App ist dann nicht mehr mit „<xliff:g id="DEVICE_NAME">%2$s</xliff:g>“ verknüpft"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"\"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" ist dann mit keinem Gerät mehr gekoppelt, das mit diesem Konto verknüpft ist"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Gerät entkoppeln"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"App-Verknüpfung aufheben"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Verbinden mit..."</string>
@@ -2690,8 +2689,8 @@
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Aufladen vorübergehend eingeschränkt"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Dadurch wird der Akku geschont. Weitere Informationen"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Ladevorgang fortsetzen"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Unter bestimmten Umständen, z. B. bei hohen Temperaturen und langen Ladezeiten, kann die Ladung auf <xliff:g id="PERCENT">%1$s</xliff:g> begrenzt sein, um den Akku zu schonen.\n\nSobald sich diese Umstände ändern, wird dein Smartphone wieder normal aufgeladen."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Unter bestimmten Umständen, z. B. bei hohen Temperaturen und langen Ladezeiten, kann die Ladung auf <xliff:g id="PERCENT">%1$s</xliff:g> begrenzt sein, um den Akkus zu schonen.\n\nSobald sich diese Umstände ändern, wird dein Tablet wieder normal aufgeladen."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Unter bestimmten Umständen, z. B. bei hohen Temperaturen und langen Ladezeiten, kann die Ladung auf <xliff:g id="PERCENT">%1$s</xliff:g> begrenzt werden, um den Akku zu schonen.\n\nSobald sich diese Umstände ändern, wird dein Smartphone wieder normal aufgeladen."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Unter bestimmten Umständen, z. B. bei hohen Temperaturen und langen Ladezeiten, kann die Ladung auf <xliff:g id="PERCENT">%1$s</xliff:g> begrenzt werden, um den Akku zu schonen.\n\nSobald sich diese Umstände ändern, wird dein Tablet wieder normal aufgeladen."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Dein Smartphone wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Dein Tablet wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Dein Gerät wurde intensiver als üblich genutzt. Der Akku könnte deshalb früher als erwartet leer sein.\n\nApps mit höchstem Akkuverbrauch:"</string>
@@ -2774,7 +2773,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"WLAN"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Mobilfunknetz – Standby"</string>
+    <string name="power_cell" msgid="7793805106954398186">"Mobilfunknetz"</string>
     <string name="power_phone" msgid="2768396619208561670">"Anrufe"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Ruhezustand"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Ruhezustand"</string>
@@ -3850,6 +3849,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Sperrbildschirm, überspringen, umgehen"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Wenn das Arbeitsprofil gesperrt ist"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Benachrichtigungen auf Sperrbildschirm"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Lautlose und Standardunterhaltungen anzeigen"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Lautlose Unterhaltungen und Benachrichtigungen verbergen"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Keine Benachrichtigungen anzeigen"</string>
@@ -3927,11 +3928,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle Benachrichtigungen von <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Adaptive Benachrichtigungen"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">Ungefähr <xliff:g id="NUMBER_1">%d</xliff:g> Benachrichtigungen pro Tag</item>
+      <item quantity="other">Ungefähr <xliff:g id="NUMBER_1">%,d</xliff:g> Benachrichtigungen pro Tag</item>
       <item quantity="one">Ungefähr <xliff:g id="NUMBER_0">%d</xliff:g> Benachrichtigung pro Tag</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">Ungefähr <xliff:g id="NUMBER_1">%d</xliff:g> Benachrichtigungen pro Woche</item>
+      <item quantity="other">Ungefähr <xliff:g id="NUMBER_1">%,d</xliff:g> Benachrichtigungen pro Woche</item>
       <item quantity="one">Ungefähr <xliff:g id="NUMBER_0">%d</xliff:g> Benachrichtigung pro Woche</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Nie"</string>
@@ -3951,7 +3952,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g> Zugriff auf Benachrichtigungen erlauben?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Die adaptiven Benachrichtigungen wurden in Android 12 durch die Funktion „Erweiterte Benachrichtigungen“ ersetzt. Diese Funktion zeigt Vorschläge für Aktionen und Antworten an und sortiert Benachrichtigungen. \n\nDie Funktion hat Zugriff auf alle Benachrichtigungen, darunter auch personenbezogene Daten wie Kontaktnamen und Nachrichten. Außerdem kann sie auf Benachrichtigungen antworten oder diese schließen und so beispielsweise Anrufe entgegennehmen oder „Bitte nicht stören“ steuern."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Benachrichtigungszugriff für <xliff:g id="SERVICE">%1$s</xliff:g> zulassen?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kann alle Benachrichtigungen lesen, darunter auch personenbezogene Daten wie Kontaktnamen und eingehende Nachrichten. Außerdem kann die App Benachrichtigungen zurückstellen oder schließen sowie Schaltflächen in Benachrichtigungen verwenden und so beispielsweise Anrufe entgegennehmen. \n\nZusätzlich wird die App in die Lage versetzt, die „Bitte nicht stören“-Funktion zu aktivieren bzw. zu deaktivieren und zugehörige Einstellungen zu ändern."</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Wenn du den Benachrichtigungszugriff für <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> deaktivierst, wird möglicherweise auch der „Bitte nicht stören“-Zugriff deaktiviert."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Deaktivieren"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Abbrechen"</string>
@@ -4858,10 +4874,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitaler Assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Zum Öffnen des Assistenten wischen"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Wische von einer unteren Ecke nach oben, um die App für den digitalen Assistenten aufzurufen."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Für Assistenten die Startbildschirmtaste gedrückt halten"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Halte die Startbildschirmtaste gedrückt, um die App für den digitalen Assistenten aufzurufen."</string>
     <string name="information_label" msgid="6939310810756569298">"Information"</string>
     <string name="low_label" msgid="6525629096999711220">"Niedrig"</string>
     <string name="high_label" msgid="357503396626018487">"Hoch"</string>
@@ -4870,11 +4884,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Wenn du die Empfindlichkeit erhöhst, werden eventuell appspezifische Touch-Gesten am Bildschirmrand beeinträchtigt."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Empfindlichkeit bei Touch-Geste „Zurück“"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"Empfindlichkeit der Bedienung über Gesten"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Bedienung über Schaltflächen"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"bedienung über gesten, gestensteuerung, gestenbedienung, empfindlichkeit bei touch-geste zurück, empfindlichkeit geste zurück, empfindlichkeit zurückgeste, touch-geste zurück, geste zurück, zurückgeste"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"navigation, bedienung, startbildschirmtaste, taste in der mitte, home-taste, home button"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Durch Doppeltippen auf das Display Bildschirm aktivieren"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Durch Doppeltippen auf das Display Display aktivieren"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Durch Doppeltippen auf das Display Display aktivieren"</string>

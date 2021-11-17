@@ -860,7 +860,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"แท็บเล็ตของคุณจะไม่จับคู่กับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> อีกต่อไป"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"อุปกรณ์ของคุณจะไม่จับคู่กับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> อีกต่อไป"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"แอป <xliff:g id="APP_NAME">%1$s</xliff:g> จะไม่เชื่อมต่อกับ <xliff:g id="DEVICE_NAME">%2$s</xliff:g> อีก"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> จะไม่จับคู่กับอุปกรณ์ที่ลิงก์กับบัญชีนี้อีกต่อไป"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"ไม่จำอุปกรณ์"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"ยกเลิกการเชื่อมต่อแอป"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"เชื่อมต่อกับ…"</string>
@@ -2771,7 +2770,8 @@
     <string name="power_camera" msgid="4778315081581293923">"กล้องถ่ายรูป"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"บลูทูธ"</string>
-    <string name="power_cell" msgid="5507921058696341513">"สแตนด์บายเครือข่ายมือถือ"</string>
+    <!-- no translation found for power_cell (7793805106954398186) -->
+    <skip />
     <string name="power_phone" msgid="2768396619208561670">"การโทรด้วยเสียง"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"ไม่มีการใช้งานแท็บเล็ต"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"ไม่มีการใช้งานโทรศัพท์"</string>
@@ -3847,6 +3847,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"หน้าจอล็อก, ข้าม, เลี่ยง"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"เมื่อโปรไฟล์งานล็อกอยู่"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"การแจ้งเตือนบนหน้าจอล็อก"</string>
+    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
+    <skip />
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"แสดงการสนทนา ค่าเริ่มต้น และการแจ้งเตือนที่ปิดเสียง"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"ซ่อนการสนทนาและการแจ้งเตือนแบบเงียบ"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"ไม่ต้องแสดงการแจ้งเตือนใดๆ"</string>
@@ -3924,11 +3926,11 @@
     <string name="notification_app_switch_label" msgid="4422902423925084193">"การแจ้งเตือนทั้งหมดของ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"การแจ้งเตือนแบบปรับอัตโนมัติ"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
-      <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%d</xliff:g> ครั้งต่อวัน</item>
+      <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%,d</xliff:g> ครั้งต่อวัน</item>
       <item quantity="one">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_0">%d</xliff:g> ครั้งต่อวัน</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%d</xliff:g> ครั้งต่อสัปดาห์</item>
+      <item quantity="other">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_1">%,d</xliff:g> ครั้งต่อสัปดาห์</item>
       <item quantity="one">การแจ้งเตือนประมาณ <xliff:g id="NUMBER_0">%d</xliff:g> ครั้งต่อสัปดาห์</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"ไม่เลย"</string>
@@ -3948,7 +3950,22 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงการแจ้งเตือนไหม"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"การแจ้งเตือนที่เพิ่มประสิทธิภาพมาแทนที่การแจ้งเตือนแบบปรับอัตโนมัติของ Android ใน Android 12 ฟีเจอร์นี้จะแสดงการดำเนินการและการตอบกลับที่แนะนำ ตลอดจนจัดระเบียบการแจ้งเตือน \n\nการแจ้งเตือนที่เพิ่มประสิทธิภาพจะเข้าถึงเนื้อหาของการแจ้งเตือนได้ ซึ่งรวมถึงข้อมูลส่วนบุคคล เช่น ชื่อผู้ติดต่อและข้อความ ฟีเจอร์นี้ยังปิดหรือตอบสนองต่อการแจ้งเตือนได้ด้วย เช่น การรับสายโทรศัพท์และการควบคุมโหมดห้ามรบกวน"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงการแจ้งเตือนไหม"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> จะอ่านการแจ้งเตือนทั้งหมดได้ รวมถึงข้อมูลส่วนบุคคล เช่น ชื่อผู้ติดต่อและข้อความที่คุณได้รับ นอกจากนี้ยังสามารถเลื่อนหรือปิดการแจ้งเตือน หรือดำเนินการกับปุ่มต่างๆ ในการแจ้งเตือนได้ด้วย เช่น การรับสายเรียกเข้า \n\nการเปิดใช้ยังทำให้แอปนี้เปิดหรือปิดฟีเจอร์ห้ามรบกวนและเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
+    <skip />
+    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
+    <skip />
+    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
+    <skip />
+    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
+    <skip />
+    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"หากคุณปิดการเข้าถึงการแจ้งเตือนสำหรับ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> การเข้าถึง \"ห้ามรบกวน\" อาจปิดไปด้วย"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ปิด"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ยกเลิก"</string>
@@ -4855,10 +4872,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"ผู้ช่วยดิจิทัล"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"ปัดเพื่อเรียกใช้ผู้ช่วย"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"ปัดขึ้นจากมุมด้านล่างเพื่อเรียกใช้แอปผู้ช่วยดิจิทัล"</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4313405834615605657) -->
-    <skip />
-    <!-- no translation found for assistant_long_press_home_gesture_summary (592882226105081447) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"กดปุ่มหน้าแรกค้างไว้เพื่อเรียกใช้ผู้ช่วย"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"กดปุ่มหน้าแรกค้างไว้เพื่อเรียกใช้แอปผู้ช่วยดิจิทัล"</string>
     <string name="information_label" msgid="6939310810756569298">"ข้อมูล"</string>
     <string name="low_label" msgid="6525629096999711220">"ต่ำ"</string>
     <string name="high_label" msgid="357503396626018487">"สูง"</string>
@@ -4867,11 +4882,9 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"ความไวที่สูงขึ้นอาจขัดแย้งกับท่าทางสัมผัสของแอปที่บริเวณขอบหน้าจอ"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"ความไวต่อการเลื่อนกลับ"</string>
     <string name="gesture_settings_activity_title" msgid="2025828425762595733">"ความไวของการนำทางด้วยท่าทางสัมผัส"</string>
-    <!-- no translation found for button_navigation_settings_activity_title (7335636045504461813) -->
-    <skip />
+    <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"การไปยังส่วนต่างๆ ด้วยปุ่ม"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"การนำทางด้วยท่าทางสัมผัส ความไวต่อการเลื่อนกลับ ท่าทางสัมผัสการย้อนกลับ"</string>
-    <!-- no translation found for keywords_button_navigation_settings (7888812253110553920) -->
-    <skip />
+    <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"การไปยังส่วนต่างๆ, ปุ่มหน้าแรก"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"แตะสองครั้งเพื่อดูโทรศัพท์"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"แตะ 2 ครั้งเพื่อตรวจสอบแท็บเล็ต"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"แตะ 2 ครั้งเพื่อตรวจสอบอุปกรณ์"</string>
