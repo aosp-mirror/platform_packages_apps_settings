@@ -21,6 +21,7 @@ import static android.app.admin.DevicePolicyManager.EXTRA_PASSWORD_COMPLEXITY;
 
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
+import android.app.RemoteServiceException.MissingRequestPasswordComplexityPermissionException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -79,7 +80,8 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             if (!hasPermission) {
                 PasswordUtils.crashCallingApplication(activityToken,
                         "Must have permission " + REQUEST_PASSWORD_COMPLEXITY
-                                + " to use extra " + EXTRA_PASSWORD_COMPLEXITY);
+                                + " to use extra " + EXTRA_PASSWORD_COMPLEXITY,
+                        MissingRequestPasswordComplexityPermissionException.TYPE_ID);
                 finish();
                 return;
             }
