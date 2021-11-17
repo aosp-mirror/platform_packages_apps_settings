@@ -52,10 +52,12 @@ public class TopLevelSettings extends DashboardFragment implements
 
     private static final String TAG = "TopLevelSettings";
     private static final String SAVED_HIGHLIGHTED_PREF = "highlighted_pref";
+    private static final String SAVED_CACHED_PREF = "cached_pref";
 
     private HighlightableTopLevelPreferenceAdapter mTopLevelAdapter;
 
     private String mHighlightedPreferenceKey;
+    private String mCachedPreferenceKey;
 
     public TopLevelSettings() {
         final Bundle args = new Bundle();
@@ -125,6 +127,7 @@ public class TopLevelSettings extends DashboardFragment implements
         super.onCreate(icicle);
         if (icicle != null) {
             mHighlightedPreferenceKey = icicle.getString(SAVED_HIGHLIGHTED_PREF);
+            mCachedPreferenceKey = icicle.getString(SAVED_CACHED_PREF);
         }
     }
 
@@ -132,6 +135,7 @@ public class TopLevelSettings extends DashboardFragment implements
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(SAVED_HIGHLIGHTED_PREF, mHighlightedPreferenceKey);
+        outState.putString(SAVED_CACHED_PREF, mCachedPreferenceKey);
     }
 
     @Override
@@ -169,9 +173,10 @@ public class TopLevelSettings extends DashboardFragment implements
         }
     }
 
-    /** Highlight a preference with specified key */
+    /** Highlight a preference with specified preference key */
     public void setHighlightPreferenceKey(String prefKey) {
         if (mTopLevelAdapter != null) {
+            mCachedPreferenceKey = null;
             mHighlightedPreferenceKey = prefKey;
             mTopLevelAdapter.highlightPreference(prefKey, /* scrollNeeded= */ false);
         }
@@ -184,13 +189,38 @@ public class TopLevelSettings extends DashboardFragment implements
         }
     }
 
-    /** Disable highlight on the menu entry */
-    public void disableMenuHighlight() {
+    /** Show/hide the highlight on the menu entry */
+    public void setMenuHighlightShowed(boolean show) {
         if (mTopLevelAdapter == null) {
             return;
         }
-        mHighlightedPreferenceKey = null;
-        mTopLevelAdapter.highlightPreference(mHighlightedPreferenceKey, /* scrollNeeded= */ false);
+
+        if (show) {
+            mHighlightedPreferenceKey = mCachedPreferenceKey;
+            mCachedPreferenceKey = null;
+        } else {
+            if (mCachedPreferenceKey == null) {
+                mCachedPreferenceKey = mHighlightedPreferenceKey;
+            }
+            mHighlightedPreferenceKey = null;
+        }
+        mTopLevelAdapter.highlightPreference(mHighlightedPreferenceKey, /* scrollNeeded= */ show);
+    }
+
+    /** Highlight and scroll to a preference with specified menu key */
+    public void setHighlightMenuKey(String menuKey) {
+        if (mTopLevelAdapter == null) {
+            return;
+        }
+
+        final String prefKey = HighlightableMenu.lookupPreferenceKey(menuKey);
+        if (TextUtils.isEmpty(prefKey)) {
+            Log.e(TAG, "Invalid highlight menu key: " + menuKey);
+        } else {
+            Log.d(TAG, "Menu key: " + menuKey);
+            mHighlightedPreferenceKey = prefKey;
+            mTopLevelAdapter.highlightPreference(prefKey, /* scrollNeeded= */ true);
+        }
     }
 
     @Override
