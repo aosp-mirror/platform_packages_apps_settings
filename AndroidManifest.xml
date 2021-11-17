@@ -4246,6 +4246,25 @@
                   android:theme="@style/SudThemeGlif.Light">
         </activity>
 
+        <activity
+            android:name="Settings$OneHandedSettingsActivity"
+            android:label="@string/one_handed_title"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.ONE_HANDED_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                   android:value="com.android.settings.gestures.OneHandedSettings"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>

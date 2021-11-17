@@ -325,4 +325,9 @@ public class Settings extends SettingsActivity {
     public static class AppDashboardActivity extends SettingsActivity {}
 
     public static class AdaptiveBrightnessActivity extends SettingsActivity { /* empty */ }
+
+    /**
+     * Activity for OneHandedSettings
+     */
+    public static class OneHandedSettingsActivity extends SettingsActivity { /* empty */ }
 }
