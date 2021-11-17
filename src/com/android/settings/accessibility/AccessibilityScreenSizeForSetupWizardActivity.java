@@ -63,6 +63,9 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
         int SCREEN_SIZE = 2;
     }
 
+    // Keep the last height of the scroll view in the {@link GlifLayout}
+    private int mLastScrollViewHeight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,11 +146,13 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
      * Scrolls to bottom while {@link ScrollView} layout changed.
      */
     private void scrollToBottom() {
+        mLastScrollViewHeight = 0;
         final GlifLayout layout = findViewById(R.id.setup_wizard_layout);
         final ScrollView scrollView = layout.getScrollView();
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             final int scrollViewHeight = scrollView.getHeight();
-            if (scrollViewHeight > 0) {
+            if (scrollViewHeight > 0 && scrollViewHeight != mLastScrollViewHeight) {
+                mLastScrollViewHeight = scrollViewHeight;
                 scrollView.post(() -> {
                     // Here is no need to show the scrolling animation. So disabled first and
                     // then enabled it after scrolling finished.
