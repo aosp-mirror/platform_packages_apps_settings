@@ -39,7 +39,6 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
     protected static final String CARRIER_WIFI_NETWORK_PREF_KEY = "carrier_wifi_network";
 
     protected final Context mContext;
-    protected boolean mIsProviderModelEnabled;
     protected int mSubId;
     protected WifiPickerTrackerHelper mWifiPickerTrackerHelper;
     protected boolean mIsCarrierProvisionWifiEnabled;
@@ -49,7 +48,6 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
             String preferenceKey) {
         super(context, preferenceKey);
         mContext = context;
-        mIsProviderModelEnabled = Utils.isProviderModelEnabled(context);
     }
 
     /** Initialize related properties */
@@ -62,9 +60,6 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        if (!mIsProviderModelEnabled) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
         return mIsCarrierProvisionWifiEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 

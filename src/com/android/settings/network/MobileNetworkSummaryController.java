@@ -126,20 +126,11 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
             }
             return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
         } else {
-            if (com.android.settings.Utils.isProviderModelEnabled(mContext)) {
-                return getSummaryForProviderModel(subs);
-            }
-            final int count = subs.size();
-            return mContext.getResources().getQuantityString(R.plurals.mobile_network_summary_count,
-                    count, count);
+            return subs.stream()
+                    .mapToInt(SubscriptionAnnotation::getSubscriptionId)
+                    .mapToObj(subId -> mStatusCache.getDisplayName(subId))
+                    .collect(Collectors.joining(", "));
         }
-    }
-
-    private CharSequence getSummaryForProviderModel(List<SubscriptionAnnotation> subs) {
-        return subs.stream()
-                .mapToInt(SubscriptionAnnotation::getSubscriptionId)
-                .mapToObj(subId -> mStatusCache.getDisplayName(subId))
-                .collect(Collectors.joining(", "));
     }
 
     private void logPreferenceClick(Preference preference) {
