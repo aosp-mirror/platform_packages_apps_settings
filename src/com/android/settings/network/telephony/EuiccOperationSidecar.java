@@ -114,7 +114,8 @@ public abstract class EuiccOperationSidecar extends SidecarFragment {
                         mReceiver,
                         new IntentFilter(getReceiverAction()),
                         Manifest.permission.WRITE_EMBEDDED_SUBSCRIPTIONS,
-                        null);
+                        null,
+                        Context.RECEIVER_EXPORTED);
     }
 
     @Override
