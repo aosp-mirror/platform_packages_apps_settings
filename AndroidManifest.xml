@@ -143,12 +143,30 @@
                        android:value="true" />
         </activity>
 
+        <!-- Activity for launching deep link page in 2-pane. -->
+        <activity android:name=".homepage.DeepLinkHomepageActivity"
+                  android:label="@string/settings_label_launcher"
+                  android:theme="@style/Theme.Settings.Home"
+                  android:taskAffinity=""
+                  android:launchMode="singleTask"
+                  android:exported="true"
+                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout"
+                  android:permission="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK">
+            <intent-filter>
+                <action android:name="android.settings.SETTINGS_EMBED_DEEP_LINK_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <activity android:name=".homepage.SliceDeepLinkHomepageActivity"
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
                   android:taskAffinity=""
                   android:launchMode="singleTask"
                   android:exported="false"
+                  android:excludeFromRecents="true"
                   android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout">
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
@@ -167,18 +185,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
-        </activity-alias>
-
-        <!-- Alias for SettingsHomepageActivity which works for deep link page in 2-panel. -->
-        <activity-alias android:name="DeepLinkHomepageActivity"
-                android:label="@string/settings_label_launcher"
-                android:exported="true"
-                android:permission="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK"
-                android:targetActivity=".homepage.SettingsHomepageActivity">
-            <intent-filter>
-                <action android:name="android.settings.SETTINGS_EMBED_DEEP_LINK_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity-alias>
 
         <receiver android:name=".SettingsInitialize"
@@ -4054,11 +4060,6 @@
                 <action android:name="android.content.action.SETTINGS_HOMEPAGE_DATA"/>
             </intent-filter>
         </provider>
-
-        <provider
-            android:name=".activityembedding.ActivityEmbeddingProvider"
-            android:authorities="com.android.settings.activityembedding"
-            android:exported="true"/>
 
         <activity
             android:name=".wifi.dpp.WifiDppConfiguratorActivity"
