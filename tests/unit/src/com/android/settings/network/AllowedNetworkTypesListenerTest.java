@@ -68,13 +68,25 @@ public class AllowedNetworkTypesListenerTest {
     }
 
     @Test
-    public void onChange_shouldCallListener() {
+    public void onChange_userReasonChanged_shouldCallListener() {
         mAllowedNetworkTypesListener.mListener = mListener;
         long networkType = (long) RadioAccessFamily.getRafFromNetworkType(
                 TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO);
 
         mAllowedNetworkTypesListener.onAllowedNetworkTypesChanged(
                 TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER, networkType);
+
+        verify(mListener).onAllowedNetworkTypesChanged();
+    }
+
+    @Test
+    public void onChange_carrierReasonChanged_shouldCallListener() {
+        mAllowedNetworkTypesListener.mListener = mListener;
+        long networkType = (long) RadioAccessFamily.getRafFromNetworkType(
+                TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO);
+
+        mAllowedNetworkTypesListener.onAllowedNetworkTypesChanged(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER, networkType);
 
         verify(mListener).onAllowedNetworkTypesChanged();
     }

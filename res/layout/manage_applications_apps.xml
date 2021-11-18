@@ -20,17 +20,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/pinned_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="2dp"
-        settings:layout_constraintTop_toTopOf="parent"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/apps_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:scrollbars="none"
         android:visibility="invisible"
@@ -39,24 +32,30 @@
         settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
         settings:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
         settings:fastScrollVerticalTrackDrawable="@drawable/line_drawable"
-        settings:layout_constraintTop_toBottomOf="@id/pinned_header"
-        settings:layout_constraintBottom_toBottomOf="parent"/>
+        settings:layout_constraintTop_toBottomOf="@id/pinned_header"/>
 
     <TextView
         android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
+        android:textAlignment="gravity"
         android:text="@string/no_applications"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:visibility="invisible"
-        settings:layout_constraintTop_toTopOf="parent"
+        settings:layout_constraintTop_toBottomOf="@id/pinned_header"
         settings:layout_constraintBottom_toBottomOf="parent"/>
 
     <include layout="@layout/loading_container"
         settings:layout_constraintTop_toBottomOf="@id/pinned_header"
         settings:layout_constraintBottom_toBottomOf="parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/pinned_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:colorBackground"
+        settings:layout_constraintTop_toTopOf="parent"/>
 
+</androidx.constraintlayout.widget.ConstraintLayout>
 

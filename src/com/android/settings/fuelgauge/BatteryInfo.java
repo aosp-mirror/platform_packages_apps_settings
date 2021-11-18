@@ -204,7 +204,7 @@ public class BatteryInfo {
         }
         final long prediction = discharging ? batteryUsageStats.getBatteryTimeRemainingMs() : 0;
         final Estimate estimate = new Estimate(
-                PowerUtil.convertUsToMs(prediction),
+                prediction,
                 false, /* isBasedOnUsage */
                 EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         BatteryUtils.logRuntime(LOG_TAG, "time for regular BatteryInfo", startTime);

@@ -33,6 +33,7 @@ import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
@@ -249,6 +250,9 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
         @InternetType int internetType = INTERNET_NETWORKS_AVAILABLE;
         if (mInternetAvailable) {
             internetType = sTransportMap.get(mTransport);
+            if (internetType == INTERNET_WIFI && isCarrierWifiActive()) {
+                internetType = INTERNET_CELLULAR;
+            }
         } else if (mAirplaneModeEnabler.isAirplaneModeOn()
                 && mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
             internetType = INTERNET_OFF;
@@ -258,6 +262,15 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
         if (mListener != null) {
             mListener.onInternetTypeChanged(mInternetType);
         }
+    }
+
+    protected boolean isCarrierWifiActive() {
+        final WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
+        if (wifiInfo == null || !wifiInfo.isCarrierMerged()) {
+            return false;
+        }
+        Log.i(TAG, "Detect a merged carrier Wi-Fi connected.");
+        return true;
     }
 
     /**

@@ -22,12 +22,9 @@
     android:title="@string/smart_battery_manager_title"
     settings:keywords="@string/keywords_battery_adaptive_preferences">
 
-    <com.android.settings.widget.VideoPreference
+    <com.android.settingslib.widget.IllustrationPreferencee
         android:key="auto_awesome_battery"
-        android:title="@string/summary_placeholder"
-        settings:animation="@raw/auto_awesome_battery"
-        settings:preview="@drawable/auto_awesome_battery"
-        settings:controller="com.android.settings.widget.VideoPreferenceController"/>
+        settings:lottie_rawRes="@raw/auto_awesome_battery_lottie" />
 
     <SwitchPreference
         android:key="smart_battery"

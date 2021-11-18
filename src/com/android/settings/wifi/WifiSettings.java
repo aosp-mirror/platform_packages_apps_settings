@@ -233,6 +233,9 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
             final Intent intent = new Intent("android.settings.NETWORK_PROVIDER_SETTINGS");
+            // Add FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TASK to avoid multiple
+            // instances issue. (e.g. b/191956700)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             final Bundle extras = getActivity().getIntent().getExtras();
             if (extras != null) {
                 intent.putExtras(extras);

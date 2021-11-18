@@ -153,21 +153,44 @@ public class SensorPrivacyManagerHelper {
 
     /**
      * Sets the sensor privacy for the current user.
+     * @param source The source with which sensor privacy is toggled.
      * @param sensor The sensor to set for
      * @param blocked The state to set to
      */
-    public void setSensorBlocked(int sensor, boolean blocked) {
-        mSensorPrivacyManager.setSensorPrivacy(sensor, blocked);
+    public void setSensorBlocked(int source, int sensor, boolean blocked) {
+        mSensorPrivacyManager.setSensorPrivacy(source, sensor, blocked);
     }
 
     /**
      * Sets the sensor privacy for the given user.
+     * @param source The source with which sensor privacy is toggled.
      * @param sensor The sensor to set for
      * @param blocked The state to set to
      * @param userId The user to set for
      */
-    public void setSensorBlocked(int sensor, boolean blocked, int userId) {
-        mSensorPrivacyManager.setSensorPrivacy(sensor, blocked, userId);
+    public void setSensorBlocked(int source, int sensor, boolean blocked, int userId) {
+        mSensorPrivacyManager.setSensorPrivacy(source, sensor, blocked, userId);
+    }
+
+    /**
+     * Sets the sensor privacy for the current profile group.
+     * @param source The source with which sensor privacy is toggled.
+     * @param sensor The sensor to set for
+     * @param blocked The state to set to
+     */
+    public void setSensorBlockedForProfileGroup(int source, int sensor, boolean blocked) {
+        mSensorPrivacyManager.setSensorPrivacyForProfileGroup(source, sensor, blocked);
+    }
+
+    /**
+     * Sets the sensor privacy for the given user's profile group.
+     * @param source The source with which sensor privacy is toggled.
+     * @param sensor The sensor to set for
+     * @param blocked The state to set to
+     */
+    public void setSensorBlockedForProfileGroup(int source, int sensor, boolean blocked,
+            int userId) {
+        mSensorPrivacyManager.setSensorPrivacyForProfileGroup(source, sensor, blocked, userId);
     }
 
     /**

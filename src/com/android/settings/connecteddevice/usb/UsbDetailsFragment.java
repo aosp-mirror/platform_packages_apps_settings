@@ -107,7 +107,7 @@ public class UsbDetailsFragment extends DashboardFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return checkIfUsbDataSignalingIsDisabled(
-                            context, UserHandle.myUserId()) != null;
+                            context, UserHandle.myUserId()) == null;
                 }
 
                 @Override

@@ -32,17 +32,23 @@ public class FinancedPrivacyPreferenceController extends AbstractPreferenceContr
 
     private static final String PREF_KEY_FINANCED_PRIVACY = "financed_privacy";
     private final PrivacyPreferenceControllerHelper mPrivacyPreferenceControllerHelper;
+    private final String mPreferenceKey;
 
     public FinancedPrivacyPreferenceController(Context context) {
-        this(Objects.requireNonNull(context), new PrivacyPreferenceControllerHelper(context));
+        this(Objects.requireNonNull(context), PREF_KEY_FINANCED_PRIVACY);
+    }
+
+    public FinancedPrivacyPreferenceController(Context context, String key) {
+        this(Objects.requireNonNull(context), new PrivacyPreferenceControllerHelper(context), key);
     }
 
     @VisibleForTesting
-    FinancedPrivacyPreferenceController(
-            Context context, PrivacyPreferenceControllerHelper privacyPreferenceControllerHelper) {
+    FinancedPrivacyPreferenceController(Context context,
+            PrivacyPreferenceControllerHelper privacyPreferenceControllerHelper, String key) {
         super(Objects.requireNonNull(context));
         mPrivacyPreferenceControllerHelper = Objects.requireNonNull(
                 privacyPreferenceControllerHelper);
+        this.mPreferenceKey = key;
     }
 
     @Override
@@ -57,6 +63,6 @@ public class FinancedPrivacyPreferenceController extends AbstractPreferenceContr
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY_FINANCED_PRIVACY;
+        return mPreferenceKey;
     }
 }

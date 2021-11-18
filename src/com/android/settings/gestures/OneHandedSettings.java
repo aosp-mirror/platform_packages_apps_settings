@@ -16,19 +16,18 @@
 
 package com.android.settings.gestures;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.widget.IllustrationPreference;
 
 /**
  * Fragment for One-handed mode settings
@@ -37,13 +36,27 @@ import com.android.settings.search.BaseSearchIndexProvider;
  * providing basic accessibility shortcut service setup.
  */
 public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
+
     private static final String ONE_HANDED_SHORTCUT_KEY = "one_handed_shortcuts_preference";
+    private static final String ONE_HANDED_ILLUSTRATION_KEY = "one_handed_header";
     private String mFeatureName;
+    private OneHandedSettingsUtils mUtils;
 
     @Override
     protected void updatePreferenceStates() {
         OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
         super.updatePreferenceStates();
+
+        final IllustrationPreference preference =
+                (IllustrationPreference) getPreferenceScreen().findPreference(
+                        ONE_HANDED_ILLUSTRATION_KEY);
+        if (preference != null) {
+            final boolean isSwipeDownNotification =
+                    OneHandedSettingsUtils.isSwipeDownNotificationEnabled(getContext());
+            preference.setLottieAnimationResId(
+                    isSwipeDownNotification ? R.raw.lottie_swipe_for_notifications
+                            : R.raw.lottie_one_hand_mode);
+        }
     }
 
     @Override
@@ -69,9 +82,21 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public void onStart() {
+        super.onStart();
+        mUtils = new OneHandedSettingsUtils(this.getContext());
+        mUtils.registerToggleAwareObserver(uri -> {
+            Activity activity = getActivity();
+            if (activity != null) {
+                activity.runOnUiThread(() -> updatePreferenceStates());
+            }
+        });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mUtils.unregisterToggleAwareObserver();
     }
 
     @Override

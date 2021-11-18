@@ -19,11 +19,13 @@ package com.android.settings.biometrics.face;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -58,15 +60,33 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onCancelButtonClick(View view) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "cancel")) {
             super.onCancelButtonClick(view);
         }
     }
 
     @Override
     protected void onSkipButtonClick(View view) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "skip")) {
             super.onSkipButtonClick(view);
+        }
+    }
+
+    @Override
+    protected void onEnrollmentSkipped(@Nullable Intent data) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "skipped")) {
+            super.onEnrollmentSkipped(data);
+        }
+    }
+
+    @Override
+    protected void onFinishedEnrolling(@Nullable Intent data) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "finished")) {
+            super.onFinishedEnrolling(data);
         }
     }
 
@@ -74,11 +94,13 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Apply extracted theme color to icons.
         final ImageView iconGlasses = findViewById(R.id.icon_glasses);
         final ImageView iconLooking = findViewById(R.id.icon_looking);
         iconGlasses.getBackground().setColorFilter(getIconColorFilter());
         iconLooking.getBackground().setColorFilter(getIconColorFilter());
 
+        // Set text for views with multiple variations.
         final TextView infoMessageGlasses = findViewById(R.id.info_message_glasses);
         final TextView infoMessageLooking = findViewById(R.id.info_message_looking);
         final TextView howMessage = findViewById(R.id.how_message);
@@ -86,9 +108,19 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         final TextView inControlMessage = findViewById(R.id.message_in_control);
         infoMessageGlasses.setText(getInfoMessageGlasses());
         infoMessageLooking.setText(getInfoMessageLooking());
-        howMessage.setText(getHowMessage());
         inControlTitle.setText(getInControlTitle());
+        howMessage.setText(getHowMessage());
         inControlMessage.setText(getInControlMessage());
+
+        // Set up and show the "require eyes" info section if necessary.
+        if (getResources().getBoolean(R.bool.config_face_intro_show_require_eyes)) {
+            final LinearLayout infoRowRequireEyes = findViewById(R.id.info_row_require_eyes);
+            final ImageView iconRequireEyes = findViewById(R.id.icon_require_eyes);
+            final TextView infoMessageRequireEyes = findViewById(R.id.info_message_require_eyes);
+            infoRowRequireEyes.setVisibility(View.VISIBLE);
+            iconRequireEyes.getBackground().setColorFilter(getIconColorFilter());
+            infoMessageRequireEyes.setText(getInfoMessageRequireEyes());
+        }
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
@@ -124,6 +156,11 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @StringRes
     protected int getInfoMessageLooking() {
         return R.string.security_settings_face_enroll_introduction_info_looking;
+    }
+
+    @StringRes
+    protected int getInfoMessageRequireEyes() {
+        return R.string.security_settings_face_enroll_introduction_info_gaze;
     }
 
     @StringRes
@@ -249,6 +286,11 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     public void onClick(LinkSpan span) {
         // TODO(b/110906762)
+    }
+
+    @Override
+    public @BiometricAuthenticator.Modality int getModality() {
+        return BiometricAuthenticator.TYPE_FACE;
     }
 
     @Override

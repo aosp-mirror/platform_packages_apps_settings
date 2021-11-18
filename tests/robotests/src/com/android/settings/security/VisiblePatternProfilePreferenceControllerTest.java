@@ -115,4 +115,16 @@ public class VisiblePatternProfilePreferenceControllerTest {
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
+
+    @Test
+    public void getPreferenceKey_byDefault_returnsDefaultValue() {
+        assertThat(mController.getPreferenceKey()).isEqualTo("visiblepattern_profile");
+    }
+
+    @Test
+    public void getPreferenceKey_whenGivenValue_returnsGivenValue() {
+        mController = new VisiblePatternProfilePreferenceController(mContext, mLifecycle, "key");
+
+        assertThat(mController.getPreferenceKey()).isEqualTo("key");
+    }
 }

@@ -35,7 +35,9 @@ import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.PersistableBundle;
+import android.telephony.AccessNetworkConstants;
 import android.telephony.CarrierConfigManager;
+import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -169,7 +171,7 @@ public class ProviderModelSliceHelperTest {
         CharSequence expectedSubtitle = Html.fromHtml("5G", Html.FROM_HTML_MODE_LEGACY);
         String networkType = "5G";
         mockConnections(true, ServiceState.STATE_IN_SERVICE, expectDisplayName,
-                mTelephonyManager.DATA_CONNECTED, true);
+                true, true);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
 
         ListBuilder.RowBuilder testRowBuild = mProviderModelSliceHelper.createCarrierRow(
@@ -189,7 +191,7 @@ public class ProviderModelSliceHelperTest {
                 "preference_summary_default_combination", connectedText, networkType),
                 Html.FROM_HTML_MODE_LEGACY);
         mockConnections(true, ServiceState.STATE_IN_SERVICE, expectDisplayName,
-                mTelephonyManager.DATA_CONNECTED, true);
+                true, true);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
 
         ListBuilder.RowBuilder testRowBuild = mProviderModelSliceHelper.createCarrierRow(
@@ -208,7 +210,7 @@ public class ProviderModelSliceHelperTest {
         String networkType = "";
 
         mockConnections(true, ServiceState.STATE_OUT_OF_SERVICE, expectDisplayName,
-                mTelephonyManager.DATA_DISCONNECTED, false);
+                false, false);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
 
         ListBuilder.RowBuilder testRowBuild = mProviderModelSliceHelper.createCarrierRow(
@@ -221,7 +223,7 @@ public class ProviderModelSliceHelperTest {
     @Test
     public void getMobileDrawable_noCarrierData_getMobileDrawable() throws Throwable {
         mockConnections(false, ServiceState.STATE_OUT_OF_SERVICE, "",
-                mTelephonyManager.DATA_DISCONNECTED, true);
+                false, true);
         when(mConnectivityManager.getActiveNetwork()).thenReturn(null);
         Drawable expectDrawable = mock(Drawable.class);
 
@@ -232,7 +234,7 @@ public class ProviderModelSliceHelperTest {
     @Test
     public void getMobileDrawable_hasCarrierDataAndDataIsOnCellular_getMobileDrawable()
             throws Throwable {
-        mockConnections(true, ServiceState.STATE_IN_SERVICE, "", mTelephonyManager.DATA_CONNECTED,
+        mockConnections(true, ServiceState.STATE_IN_SERVICE, "", true,
                 true);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
         Drawable drawable = mock(Drawable.class);
@@ -246,7 +248,7 @@ public class ProviderModelSliceHelperTest {
     @Test
     public void getMobileDrawable_hasCarrierDataAndDataIsOnWifi_getMobileDrawable()
             throws Throwable {
-        mockConnections(true, ServiceState.STATE_IN_SERVICE, "", mTelephonyManager.DATA_CONNECTED,
+        mockConnections(true, ServiceState.STATE_IN_SERVICE, "", true,
                 true);
         Drawable drawable = mock(Drawable.class);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
@@ -263,12 +265,22 @@ public class ProviderModelSliceHelperTest {
     }
 
     private void mockConnections(boolean isDataEnabled, int serviceState, String expectDisplayName,
-            int getDataState, boolean isWifiEnabled) {
+            boolean dataRegState, boolean isWifiEnabled) {
         when(mTelephonyManager.isDataEnabled()).thenReturn(isDataEnabled);
         when(mWifiManager.isWifiEnabled()).thenReturn(isWifiEnabled);
-        when(mTelephonyManager.getDataState()).thenReturn(getDataState);
 
         when(mServiceState.getState()).thenReturn(serviceState);
+
+        NetworkRegistrationInfo regInfo = new NetworkRegistrationInfo.Builder()
+                .setDomain(NetworkRegistrationInfo.DOMAIN_PS)
+                .setTransportType(AccessNetworkConstants.TRANSPORT_TYPE_WWAN)
+                .setRegistrationState(dataRegState ? NetworkRegistrationInfo.REGISTRATION_STATE_HOME
+                        : NetworkRegistrationInfo.REGISTRATION_STATE_NOT_REGISTERED_SEARCHING)
+                .setAccessNetworkTechnology(TelephonyManager.NETWORK_TYPE_LTE)
+                .build();
+        when(mServiceState.getNetworkRegistrationInfo(NetworkRegistrationInfo.DOMAIN_PS,
+                AccessNetworkConstants.TRANSPORT_TYPE_WWAN)).thenReturn(regInfo);
+
         when(mDefaultDataSubscriptionInfo.getDisplayName()).thenReturn(expectDisplayName);
     }
 

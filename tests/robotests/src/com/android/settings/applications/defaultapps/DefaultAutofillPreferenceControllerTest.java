@@ -89,7 +89,7 @@ public class DefaultAutofillPreferenceControllerTest {
         final Preference pref = mock(Preference.class);
 
         mController.updateState(pref);
-        verify(pref).setSummary(R.string.app_list_preference_none);
+        verify(pref).setTitle(R.string.app_list_preference_none);
     }
 
     @Test

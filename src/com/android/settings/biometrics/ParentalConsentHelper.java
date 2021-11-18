@@ -46,6 +46,7 @@ public class ParentalConsentHelper {
 
     private static final String KEY_FACE_CONSENT = "face";
     private static final String KEY_FINGERPRINT_CONSENT = "fingerprint";
+    private static final String KEY_IRIS_CONSENT = "iris";
 
     private final boolean mRequireFace;
     private final boolean mRequireFingerprint;
@@ -153,6 +154,7 @@ public class ParentalConsentHelper {
         result.putBoolean(KEY_FACE_CONSENT, mConsentFace != null ? mConsentFace : false);
         result.putBoolean(KEY_FINGERPRINT_CONSENT,
                 mConsentFingerprint != null ? mConsentFingerprint : false);
+        result.putBoolean(KEY_IRIS_CONSENT, false);
         return result;
     }
 

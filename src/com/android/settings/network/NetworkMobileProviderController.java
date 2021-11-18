@@ -50,6 +50,7 @@ public class NetworkMobileProviderController extends BasePreferenceController im
     private SubscriptionsPreferenceController mSubscriptionsController;
 
     private int mOriginalExpandedChildrenCount;
+    private boolean mHide;
 
     public NetworkMobileProviderController(Context context, String key) {
         super(context, key);
@@ -94,7 +95,7 @@ public class NetworkMobileProviderController extends BasePreferenceController im
 
     @Override
     public int getAvailabilityStatus() {
-        if (mSubscriptionsController == null) {
+        if (mHide || mSubscriptionsController == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         return mSubscriptionsController.isAvailable() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
@@ -120,6 +121,16 @@ public class NetworkMobileProviderController extends BasePreferenceController im
     public void setWifiPickerTrackerHelper(WifiPickerTrackerHelper helper) {
         if (mSubscriptionsController != null) {
             mSubscriptionsController.setWifiPickerTrackerHelper(helper);
+        }
+    }
+
+    /**
+     * Hides the preference.
+     */
+    public void hidePreference(boolean hide, boolean immediately) {
+        mHide = hide;
+        if (immediately) {
+            mPreferenceCategory.setVisible(hide ? false : isAvailable());
         }
     }
 }

@@ -43,14 +43,6 @@
         android:fragment="com.android.settings.datetime.DateTimeSettings"
         settings:controller="com.android.settings.datetime.DateTimePreferenceController"/>
 
-    <Preference
-        android:key="gesture_power_menu_summary"
-        android:title="@string/power_menu_setting_name"
-        android:icon="@drawable/ic_power_settings"
-        android:order="-220"
-        android:fragment="com.android.settings.gestures.PowerMenuSettings"
-        settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
-
     <!-- System updates -->
     <Preference
         android:key="additional_system_update_settings"

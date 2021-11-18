@@ -150,6 +150,6 @@ public class ZenModeSliceBuilder {
         final Intent intent = new Intent(ACTION_ZEN_MODE_SLICE_CHANGED)
                 .setClass(context, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
     }
 }

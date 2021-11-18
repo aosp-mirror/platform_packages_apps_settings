@@ -35,11 +35,12 @@ import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class AirplaneModePreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnStart, OnStop,
+        implements LifecycleObserver, OnStart, OnStop, OnDestroy,
         AirplaneModeEnabler.OnAirplaneModeChangedListener {
 
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -132,6 +133,12 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
             mAirplaneModeEnabler.stop();
         }
     }
+
+    @Override
+    public void onDestroy() {
+        mAirplaneModeEnabler.close();
+    }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_EXIT_ECM) {

@@ -17,11 +17,21 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.provider.Settings;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class PowerMenuPreferenceController extends BasePreferenceController {
+
+    private static final String POWER_BUTTON_LONG_PRESS_SETTING =
+            Settings.Global.POWER_BUTTON_LONG_PRESS;
+
+    @VisibleForTesting
+    static final int LONG_PRESS_POWER_GLOBAL_ACTIONS = 1;
+    @VisibleForTesting
+    static final int LONG_PRESS_POWER_ASSISTANT_VALUE = 5;
 
     public PowerMenuPreferenceController(Context context, String key) {
         super(context, key);
@@ -29,16 +39,32 @@ public class PowerMenuPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        return mContext.getText(R.string.power_menu_long_press_for_assist);
+        final int powerButtonValue = getPowerButtonLongPressValue(mContext);
+        if (powerButtonValue == LONG_PRESS_POWER_ASSISTANT_VALUE) {
+            return mContext.getText(R.string.power_menu_summary_long_press_for_assist_enabled);
+        } else if (powerButtonValue == LONG_PRESS_POWER_GLOBAL_ACTIONS) {
+            return mContext.getText(
+                    R.string.power_menu_summary_long_press_for_assist_disabled_with_power_menu);
+        } else {
+            return mContext.getText(
+                    R.string.power_menu_summary_long_press_for_assist_disabled_no_action);
+        }
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return isAssistInvocationAvailable() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return isAssistInvocationAvailable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     private boolean isAssistInvocationAvailable() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_longPressOnPowerForAssistantSettingAvailable);
+    }
+
+    private static int getPowerButtonLongPressValue(Context context) {
+        return Settings.Global.getInt(context.getContentResolver(),
+                POWER_BUTTON_LONG_PRESS_SETTING,
+                context.getResources().getInteger(
+                        com.android.internal.R.integer.config_longPressOnPowerBehavior));
     }
 }
