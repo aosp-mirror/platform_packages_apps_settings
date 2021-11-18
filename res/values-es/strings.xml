@@ -2737,7 +2737,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utilizar el gestor de batería"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detectar el consumo de batería de las aplicaciones"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Detectando cuándo consumen batería las aplicaciones"</string>
-    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Detectando cuándo consumen batería las aplicaciones"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Detectando cuándo agotan batería las aplicaciones"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Desactivado"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d aplicaciones restringidas</item>
@@ -3846,8 +3846,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Pantalla de bloqueo, pantalla bloqueo, saltar, evitar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Con el perfil de trabajo bloqueado"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificaciones en pantalla de bloqueo"</string>
-    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
-    <skip />
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversaciones predeterminadas y silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversaciones predeterminadas y silenciosas"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ocultar conversaciones y notificaciones silenciosas"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"No mostrar ninguna notificación"</string>
@@ -3949,22 +3948,14 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"¿Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> acceda a las notificaciones?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Las notificaciones mejoradas sustituyen a las notificaciones adaptativas en Android 12. Esta nueva función te sugiere acciones y respuestas, y organiza tus notificaciones. \n\nLa función puede acceder al contenido de tus notificaciones, incluida información personal, como nombres de contactos y mensajes. También puede cerrar o responder a notificaciones; por ejemplo, puede contestar llamadas telefónicas y controlar el modo No molestar."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"¿Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> acceda a las notificaciones?"</string>
-    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
-    <skip />
-    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
-    <skip />
-    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
-    <skip />
-    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
-    <skip />
-    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
-    <skip />
-    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
-    <skip />
-    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
-    <skip />
-    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
-    <skip />
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones, incluidas las que tengan información personal, como nombres de contactos, fotos y texto de mensajes que recibas. Esta aplicación también podrá posponer o cerrar notificaciones o seleccionar botones de notificaciones como el de contestar llamadas de teléfono. \n\nAdemás, podrá activar o desactivar el modo No molestar y modificar ajustes relacionados."</string>
+    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá:"</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"Leer tus notificaciones"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"Puede leer las notificaciones, incluidas las relacionadas con información personal como contactos, mensajes y fotos."</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"Responder a mensajes"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Puede responder a mensajes y seleccionar botones de notificaciones, como las opciones de posponer o descartar notificaciones y la de responder a llamadas."</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"Cambiar ajustes"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Puede activar o desactivar No molestar y cambiar ajustes relacionados."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si desactivas el acceso a las notificaciones de <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, es posible que también se desactive el modo No molestar."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desactivar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>
@@ -5294,7 +5285,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"El modo de red <xliff:g id="NETWORKMODEID">%1$d</xliff:g> no es válido. Ignorar."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nombres de puntos de acceso"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No está disponible cuando se está conectado a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="8436037008285546409">"Ajustes"</string>
+    <string name="see_more" msgid="7499355691042812723">"Ver más"</string>
     <string name="see_less" msgid="2642392725363552793">"Ver menos"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"¿Activar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"¿Activar tarjeta SIM?"</string>
@@ -5457,6 +5448,10 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Larga"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Mostrar cartera"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Permite el acceso a la cartera desde la pantalla de bloqueo y los ajustes rápidos"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (1314577678356895256) -->
+    <skip />
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (4577409244972250235) -->
+    <skip />
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Mostrar controles del dispositivo"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Accede a los controles con la pantalla bloqueada"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>

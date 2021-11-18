@@ -3846,8 +3846,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"锁定屏幕, 锁屏, 跳过, 绕过"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"当工作资料遭到锁定时"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"锁定屏幕上的通知"</string>
-    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
-    <skip />
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"显示对话通知、默认通知和无声通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"显示默认对话和已设为静音的对话"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"隐藏已设为静音的对话和通知"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"不显示任何通知"</string>
@@ -3949,22 +3948,14 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"在 Android 12 中，增强型通知功能取代了 Android 自适应通知功能。增强型通知功能可以显示建议的操作和回复，并可将通知整理得井井有条。\n\n增强型通知功能可以访问通知内容，包括联系人名称和消息等个人信息。该功能还可以关闭或响应通知，例如接听来电以及控制勿扰模式。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
-    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
-    <skip />
-    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
-    <skip />
-    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
-    <skip />
-    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
-    <skip />
-    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
-    <skip />
-    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
-    <skip />
-    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
-    <skip />
-    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
-    <skip />
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”将能够读取所有通知（包括联系人姓名、照片和您收到的消息内容等个人信息），而且还能暂停/关闭通知或触发通知中的按钮（包括接听来电）。\n\n该应用因此还能开启或关闭“勿扰”模式，并可以更改相关设置。"</string>
+    <string name="nls_warning_prompt" msgid="9143226910825830619">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”将能够："</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"读取您的通知"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"该应用可以读取您的通知，包括联系人、消息、照片等个人信息。"</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"回复消息"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"该应用可以回复消息和触发通知中的按钮，包括暂停或关闭通知、接听来电。"</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"更改设置"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"该应用可以开启或关闭“勿扰”模式，并可以更改相关设置。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知使用权，勿扰模式的使用权可能也会遭到停用。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"停用"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
@@ -5294,7 +5285,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"无效的网络模式<xliff:g id="NETWORKMODEID">%1$d</xliff:g>。忽略。"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"接入点名称"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>
-    <string name="see_more" msgid="8436037008285546409">"设置"</string>
+    <string name="see_more" msgid="7499355691042812723">"查看更多"</string>
     <string name="see_less" msgid="2642392725363552793">"隐藏部分"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"要启用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"要启用 SIM 卡吗？"</string>
@@ -5457,6 +5448,10 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"长"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"显示电子钱包"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"允许从锁定屏幕和快捷设置使用电子钱包"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (1314577678356895256) -->
+    <skip />
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (4577409244972250235) -->
+    <skip />
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"显示设备控制器"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"锁定时访问控制器"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5595,7 +5590,7 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"会关闭飞行模式，以使用超宽带 (UWB)"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"摄像头使用权限"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"麦克风使用权限"</string>
-    <string name="cam_toggle_description" msgid="9212762204005146404">"对于应用和服务"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"针对应用和服务"</string>
     <string name="mic_toggle_description" msgid="484139688645092237">"对于应用和服务。如果您关闭此设置，那么当您拨打紧急电话号码时，系统可能仍会分享麦克风数据。"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"游戏设置"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"开启游戏信息中心快捷方式等"</string>
