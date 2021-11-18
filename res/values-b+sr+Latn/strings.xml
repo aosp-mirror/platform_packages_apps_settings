@@ -2808,8 +2808,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <!-- no translation found for power_cell (7793805106954398186) -->
-    <skip />
+    <string name="power_cell" msgid="7793805106954398186">"Mobilna mreža"</string>
     <string name="power_phone" msgid="2768396619208561670">"Glasovni pozivi"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tablet je u stanju mirovanja"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Telefon u mirovanju"</string>
@@ -3892,8 +3891,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"zaključani ekran, preskočiti, zaobići"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Kada je poslovni profil zaključan"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Obaveštenja na zaključanom ekranu"</string>
-    <!-- no translation found for lock_screen_notifs_show_all_summary (4226586018375762117) -->
-    <skip />
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Prikazuje konverzacije, i podrazumevane i nečujne"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Prikazuj konverzacije, i podrazumevane i nečujne"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Sakrij nečujne konverzacije i obaveštenja"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ne prikazuj uopšte obaveštenja"</string>
@@ -3999,22 +3997,14 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Želite li da dozvolite da <xliff:g id="SERVICE">%1$s</xliff:g> ima pristup obaveštenjima?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Poboljšana obaveštenja su zamenila Android prilagodljiva obaveštenja u Android-u 12. Ova funkcija pokazuje predložene radnje i odgovore, a i organizuje obaveštenja. \n\nPoboljšana obaveštenja mogu da pristupaju sadržaju obaveštenja, uključujući lične podatke poput imena kontakata i poruka. Ova funkcija može i da odbacuje obaveštenja ili da odgovara na njih, na primer, da se javlja na telefonske pozive i kontroliše režim Ne uznemiravaj."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Želite li da omogućite pristup obaveštenjima za <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <!-- no translation found for notification_listener_security_warning_summary (4317764112725749020) -->
-    <skip />
-    <!-- no translation found for nls_warning_prompt (9143226910825830619) -->
-    <skip />
-    <!-- no translation found for nls_feature_read_title (7629713268744220437) -->
-    <skip />
-    <!-- no translation found for nls_feature_read_summary (1064698238110273593) -->
-    <skip />
-    <!-- no translation found for nls_feature_reply_title (7925455553821362039) -->
-    <skip />
-    <!-- no translation found for nls_feature_reply_summary (4492543411395565556) -->
-    <skip />
-    <!-- no translation found for nls_feature_settings_title (8208164329853194414) -->
-    <skip />
-    <!-- no translation found for nls_feature_settings_summary (3770028705648985689) -->
-    <skip />
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> će moći da čita sva obaveštenja, uključujući lične podatke, poput imena kontakata, slika i teksta poruka koje primate. Ova aplikacija će moći i da odlaže ili odbacuje obaveštenja ili aktivira dugmad u obaveštenjima, uključujući javljanje na telefonske pozive. \n\nOvo će aplikaciji omogućiti i da uključuje ili isključuje režim Ne uznemiravaj i menja srodna podešavanja."</string>
+    <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> će moći sledeće:"</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"Čitanje obaveštenja"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"Može da čita obaveštenja, uključujući lične podatke, poput kontakata, poruka i slika."</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"Odgovaranje na poruke"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Može da odgovara na poruke i preduzima radnje povezane sa dugmadi u obaveštenjima, uključujući odlaganje ili odbacivanje obaveštenja i odgovaranje na pozive."</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"Menjanje podešavanja"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Može da uključuje ili isključuje režim Ne uznemiravaj i menja srodna podešavanja."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ako isključite pristup obaveštenjima za <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, isključićete i pristup režimu Ne uznemiravaj."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Isključi"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Otkaži"</string>
@@ -5382,7 +5372,7 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Nevažeći režim mreže <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorišite."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nazivi pristupnih tačaka"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nedostupno kada je uspostavljena veza sa operaterom <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="see_more" msgid="8436037008285546409">"Podešavanja"</string>
+    <string name="see_more" msgid="7499355691042812723">"Prikaži još"</string>
     <string name="see_less" msgid="2642392725363552793">"Prikaži manje"</string>
     <string name="sim_action_enable_sub_dialog_title" msgid="4003377033815971802">"Želite li da uključite uslugu <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Želite li da uključite SIM?"</string>
@@ -5547,6 +5537,10 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Dugo"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Prikaži novčanik"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Dozvolite pristup novčaniku sa zaključanog ekrana i iz brzih podešavanja"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (1314577678356895256) -->
+    <skip />
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (4577409244972250235) -->
+    <skip />
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Prikaži kontrole uređaja"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Pristupite kontrolama kada je ekran zaključan"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
