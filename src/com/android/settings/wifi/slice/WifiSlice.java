@@ -271,15 +271,9 @@ public class WifiSlice implements CustomSliceable {
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.wifi_settings).toString();
         final Uri contentUri = new Uri.Builder().appendPath(KEY_WIFI).build();
-        final String className;
-        final String key;
-        if (Utils.isProviderModelEnabled(mContext)) {
-            className = NetworkProviderSettings.class.getName();
-            key = WifiSwitchPreferenceController.KEY;
-        } else {
-            className = WifiSettings.class.getName();
-            key = KEY_WIFI;
-        }
+        final String className = NetworkProviderSettings.class.getName();
+        final String key = WifiSwitchPreferenceController.KEY;
+
         final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext, className,
                 key, screenTitle, SettingsEnums.DIALOG_WIFI_AP_EDIT, this)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
