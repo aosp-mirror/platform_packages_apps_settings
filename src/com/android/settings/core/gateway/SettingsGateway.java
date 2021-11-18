@@ -29,6 +29,7 @@ import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
+import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
 import com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment;
 import com.android.settings.accounts.AccountDashboardFragment;
@@ -217,6 +218,7 @@ public class SettingsGateway {
             AccessibilitySettingsForSetupWizard.class.getName(),
             CaptionPropertiesFragment.class.getName(),
             ToggleDaltonizerPreferenceFragment.class.getName(),
+            ToggleColorInversionPreferenceFragment.class.getName(),
             ToggleReduceBrightColorsPreferenceFragment.class.getName(),
             TextToSpeechSettings.class.getName(),
             PrivateVolumeForget.class.getName(),
