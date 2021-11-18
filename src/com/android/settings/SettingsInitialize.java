@@ -40,7 +40,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.window.embedding.SplitController;
 
 import com.android.settings.Settings.CreateShortcutActivity;
-import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.search.SearchStateReceiver;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -150,8 +150,8 @@ public class SettingsInitialize extends BroadcastReceiver {
     }
 
     private void enableTwoPaneDeepLinkActivityIfNecessary(PackageManager pm, Context context) {
-        final ComponentName deepLinkHome = new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
-                SettingsHomepageActivity.ALIAS_DEEP_LINK);
+        final ComponentName deepLinkHome = new ComponentName(context,
+                DeepLinkHomepageActivity.class);
         final ComponentName searchStateReceiver = new ComponentName(context,
                 SearchStateReceiver.class);
         final int enableState = SplitController.getInstance().isSplitSupported()

@@ -203,7 +203,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
             return;
         }
 
-        if (mHomepageActivity.registerHomepageLoadedListenerIfNeeded(this)) {
+        if (mHomepageActivity.addHomepageLoadedListener(this)) {
             return;
         }
 

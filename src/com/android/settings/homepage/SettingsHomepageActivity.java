@@ -44,7 +44,6 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsApplication;
-import com.android.settings.Utils;
 import com.android.settings.accounts.AvatarViewMixin;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
@@ -72,9 +71,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     public static final String EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA =
             "settings_large_screen_deep_link_intent_data";
 
-    // An alias class name of SettingsHomepageActivity.
-    public static final String ALIAS_DEEP_LINK = "com.android.settings.DeepLinkHomepageActivity";
-
     private static final int DEFAULT_HIGHLIGHT_MENU_KEY = R.string.menu_key_network;
     private static final long HOMEPAGE_LOADING_TIMEOUT_MS = 300;
 
@@ -91,12 +87,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     /**
-     *  Try to register a {@link HomepageLoadedListener}. If homepage is already loaded, the
-     *  listener will not be notified.
+     *  Try to add a {@link HomepageLoadedListener}. If homepage is already loaded, the listener
+     *  will not be notified.
      *
-     *  @return Whether the listener should be registered.
+     *  @return Whether the listener is added.
      */
-    public boolean registerHomepageLoadedListenerIfNeeded(HomepageLoadedListener listener) {
+    public boolean addHomepageLoadedListener(HomepageLoadedListener listener) {
         if (mHomepageView == null) {
             return false;
         } else {
@@ -245,6 +241,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             return;
         }
 
+        if (!(this instanceof DeepLinkHomepageActivity
+                || this instanceof SliceDeepLinkHomepageActivity)) {
+            Log.e(TAG, "Not a deep link component");
+            finish();
+            return;
+        }
+
         final String intentUriString = intent.getStringExtra(
                 EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI);
         if (TextUtils.isEmpty(intentUriString)) {
@@ -287,7 +290,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         // Set 2-pane pair rule for the deep link page.
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
-                getDeepLinkComponent(),
+                new ComponentName(getApplicationContext(), getClass()),
                 targetComponentName,
                 targetIntent.getAction(),
                 true /* finishPrimaryWithSecondary */,
@@ -301,10 +304,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 true /* finishSecondaryWithPrimary */,
                 true /* clearTop*/);
         startActivity(targetIntent);
-    }
-
-    protected ComponentName getDeepLinkComponent() {
-        return new ComponentName(Utils.SETTINGS_PACKAGE_NAME, ALIAS_DEEP_LINK);
     }
 
     private String getHighlightMenuKey() {
