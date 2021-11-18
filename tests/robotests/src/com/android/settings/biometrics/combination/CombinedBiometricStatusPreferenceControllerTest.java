@@ -106,12 +106,16 @@ public class CombinedBiometricStatusPreferenceControllerTest {
         RestrictedLockUtils.EnforcedAdmin admin = mock(RestrictedLockUtils.EnforcedAdmin.class);
 
         mController.mPreference = restrictedPreference;
-        mController.updateStateInternal(admin);
+        mController.updateStateInternal(admin, true, true);
         verify(restrictedPreference).setDisabledByAdmin(eq(admin));
 
-        reset(admin);
+        mController.updateStateInternal(admin, true, false);
+        verify(restrictedPreference).setDisabledByAdmin(eq(null));
 
-        mController.updateStateInternal(null /* enforcedAdmin */);
-        verify(restrictedPreference, never()).setDisabledByAdmin(any());
+        mController.updateStateInternal(admin, false, true);
+        verify(restrictedPreference).setDisabledByAdmin(eq(null));
+
+        mController.updateStateInternal(admin, false, false);
+        verify(restrictedPreference).setDisabledByAdmin(eq(null));
     }
 }
