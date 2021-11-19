@@ -147,7 +147,7 @@
         <!-- Activity for launching deep link page in 2-pane. -->
         <activity android:name=".homepage.DeepLinkHomepageActivity"
                   android:label="@string/settings_label_launcher"
-                  android:theme="@style/Theme.Settings.Home"
+                  android:theme="@style/Theme.Settings.Home.DeepLink"
                   android:taskAffinity=""
                   android:launchMode="singleTask"
                   android:exported="true"
@@ -163,7 +163,7 @@
 
         <activity android:name=".homepage.SliceDeepLinkHomepageActivity"
                   android:label="@string/settings_label_launcher"
-                  android:theme="@style/Theme.Settings.Home"
+                  android:theme="@style/Theme.Settings.Home.DeepLink"
                   android:taskAffinity=""
                   android:launchMode="singleTask"
                   android:exported="false"
