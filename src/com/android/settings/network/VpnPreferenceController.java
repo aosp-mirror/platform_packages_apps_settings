@@ -156,7 +156,7 @@ public class VpnPreferenceController extends AbstractPreferenceController
             summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
         }
         // Optionally add warning icon if an insecure VPN is present.
-        if (Utils.isProviderModelEnabled(mContext) && mPreference instanceof VpnInfoPreference) {
+        if (mPreference instanceof VpnInfoPreference) {
             final int insecureVpnCount = getInsecureVpnCount();
             boolean isInsecureVPN = insecureVpnCount > 0;
             ((VpnInfoPreference) mPreference).setInsecureVpn(isInsecureVPN);

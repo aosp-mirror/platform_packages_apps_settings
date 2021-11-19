@@ -74,15 +74,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * If the provider model is not enabled, this controller manages a set of Preferences it places into
- * a PreferenceGroup owned by some parent
- * controller class - one for each available subscription. This controller is only considered
- * available if there are 2 or more subscriptions.
- *
- * If the provider model is enabled, this controller manages preference with data subscription
- * information and make its state display on preference.
- * TODO this class will clean up the multiple subscriptions functionality after the provider
- * model is released.
+ * This controller manages preference with data subscription information and make its state
+ * display on preference.
  */
 public class SubscriptionsPreferenceController extends AbstractPreferenceController implements
         LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
@@ -228,14 +221,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             return;
         }
 
-        if (mSubsPrefCtrlInjector.isProviderModelEnabled(mContext)) {
-            updateForProvider();
-        } else {
-            updateForBase();
-        }
-    }
-
-    private void updateForProvider() {
         SubscriptionInfo subInfo = mSubscriptionManager.getDefaultDataSubscriptionInfo();
         if (subInfo == null) {
             mPreferenceGroup.removeAll();
@@ -349,50 +334,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSubsGearPref.setSummary("");
     }
 
-    private void updateForBase() {
-        final Map<Integer, Preference> existingPrefs = mSubscriptionPreferences;
-        mSubscriptionPreferences = new ArrayMap<>();
-
-        int order = mStartOrder;
-        final Set<Integer> activeSubIds = new ArraySet<>();
-        final int dataDefaultSubId = mSubsPrefCtrlInjector.getDefaultDataSubscriptionId();
-        for (SubscriptionInfo info :
-                SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager)) {
-            final int subId = info.getSubscriptionId();
-            // Avoid from showing subscription(SIM)s which has been marked as hidden
-            // For example, only one subscription will be shown when there're multiple
-            // subscriptions with same group UUID.
-            if (!mSubsPrefCtrlInjector.canSubscriptionBeDisplayed(mContext, subId)) {
-                continue;
-            }
-            activeSubIds.add(subId);
-            Preference pref = existingPrefs.remove(subId);
-            if (pref == null) {
-                pref = new Preference(mPreferenceGroup.getContext());
-                mPreferenceGroup.addPreference(pref);
-            }
-            pref.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(info, mContext));
-            final boolean isDefaultForData = (subId == dataDefaultSubId);
-            pref.setSummary(getSummary(subId, isDefaultForData));
-            setIcon(pref, subId, isDefaultForData);
-            pref.setOrder(order++);
-
-            pref.setOnPreferenceClickListener(clickedPref -> {
-                startMobileNetworkActivity(mContext, subId);
-                return true;
-            });
-
-            mSubscriptionPreferences.put(subId, pref);
-        }
-        mSignalStrengthListener.updateSubscriptionIds(activeSubIds);
-
-        // Remove any old preferences that no longer map to a subscription.
-        for (Preference pref : existingPrefs.values()) {
-            mPreferenceGroup.removePreference(pref);
-        }
-        mUpdateListener.onChildrenUpdated();
-    }
-
     private static void startMobileNetworkActivity(Context context, int subId) {
         final Intent intent = new Intent(context, MobileNetworkActivity.class);
         intent.putExtra(Settings.EXTRA_SUB_ID, subId);
@@ -472,8 +413,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     }
 
     /**
-     * @return true if there are at least 2 available subscriptions,
-     * or if there is at least 1 available subscription for provider model.
+     * @return true if there is at least 1 available subscription.
      */
     @Override
     public boolean isAvailable() {
@@ -492,7 +432,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 .filter(subInfo ->
                         mSubsPrefCtrlInjector.canSubscriptionBeDisplayed(mContext,
                                 subInfo.getSubscriptionId()))
-                .count() >= (mSubsPrefCtrlInjector.isProviderModelEnabled(mContext) ? 1 : 2);
+                .count() >= 1;
     }
 
     @Override
@@ -535,12 +475,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     public void onTelephonyDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo) {
         mTelephonyDisplayInfo = telephonyDisplayInfo;
         update();
-    }
-
-    @VisibleForTesting
-    boolean canSubscriptionBeDisplayed(Context context, int subId) {
-        return (SubscriptionUtil.getAvailableSubscription(context,
-                ProxySubscriptionManager.getInstance(context), subId) != null);
     }
 
     public void setWifiPickerTrackerHelper(WifiPickerTrackerHelper helper) {
@@ -600,13 +534,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
          */
         public boolean isActiveCellularNetwork(Context context) {
             return MobileNetworkUtils.activeNetworkIsCellular(context);
-        }
-
-        /**
-         * Confirms the flag of Provider Model switch is turned on or not.
-         */
-        public boolean isProviderModelEnabled(Context context) {
-            return Utils.isProviderModelEnabled(context);
         }
 
         /**

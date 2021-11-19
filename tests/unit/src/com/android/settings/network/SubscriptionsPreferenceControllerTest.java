@@ -146,7 +146,6 @@ public class SubscriptionsPreferenceControllerTest {
         mUpdateListener = () -> mOnChildUpdatedCount++;
 
         sInjector = spy(new SubsPrefCtrlInjector());
-        initializeMethod(true, 1, 1, 1, false, false);
         mController =  new FakeSubscriptionsPreferenceController(mContext, mLifecycle,
                 mUpdateListener, KEY, 5);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
@@ -158,30 +157,14 @@ public class SubscriptionsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_oneSubscription_availableFalse() {
-        setupMockSubscriptions(1);
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
     public void isAvailable_oneSubAndProviderOn_availableTrue() {
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         setupMockSubscriptions(1);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_twoSubscriptions_availableTrue() {
-        setupMockSubscriptions(2);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_fiveSubscriptions_availableTrue() {
-        doReturn(true).when(sInjector).canSubscriptionBeDisplayed(mContext, 0);
         setupMockSubscriptions(5);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -200,203 +183,8 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     @UiThreadTest
-    public void onAirplaneModeChanged_airplaneModeTurnedOn_eventFired() {
-        setupMockSubscriptions(2);
-
-        mController.onResume();
-        mController.displayPreference(mPreferenceScreen);
-
-        assertThat(mController.isAvailable()).isTrue();
-
-        final int updateCountBeforeModeChange = mOnChildUpdatedCount;
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
-
-        mController.onAirplaneModeChanged(true);
-
-        assertThat(mController.isAvailable()).isFalse();
-        assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeModeChange + 1);
-    }
-
-    @Test
-    @UiThreadTest
-    public void onAirplaneModeChanged_airplaneModeTurnedOff_eventFired() {
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
-        setupMockSubscriptions(2);
-
-        mController.onResume();
-        mController.displayPreference(mPreferenceScreen);
-        assertThat(mController.isAvailable()).isFalse();
-
-        final int updateCountBeforeModeChange = mOnChildUpdatedCount;
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
-
-        mController.onAirplaneModeChanged(true);
-
-        assertThat(mController.isAvailable()).isTrue();
-        assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeModeChange + 1);
-    }
-
-    @Test
-    @UiThreadTest
-    public void onSubscriptionsChanged_countBecameTwo_eventFired() {
-        final List<SubscriptionInfo> subs = setupMockSubscriptions(2);
-        SubscriptionUtil.setActiveSubscriptionsForTesting(subs.subList(0, 1));
-
-        mController.onResume();
-        mController.displayPreference(mPreferenceScreen);
-
-        assertThat(mController.isAvailable()).isFalse();
-
-        final int updateCountBeforeSubscriptionChange = mOnChildUpdatedCount;
-        SubscriptionUtil.setActiveSubscriptionsForTesting(subs);
-
-        mController.onSubscriptionsChanged();
-
-        assertThat(mController.isAvailable()).isTrue();
-        assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeSubscriptionChange + 1);
-    }
-
-    @Test
-    @UiThreadTest
-    public void onSubscriptionsChanged_countBecameOne_eventFiredAndPrefsRemoved() {
-        final List<SubscriptionInfo> subs = setupMockSubscriptions(2);
-
-        mController.onResume();
-        mController.displayPreference(mPreferenceScreen);
-
-        assertThat(mController.isAvailable()).isTrue();
-        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(2);
-
-        final int updateCountBeforeSubscriptionChange = mOnChildUpdatedCount;
-        SubscriptionUtil.setActiveSubscriptionsForTesting(subs.subList(0, 1));
-
-        mController.onSubscriptionsChanged();
-
-        assertThat(mController.isAvailable()).isFalse();
-        assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeSubscriptionChange + 1);
-        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(0);
-    }
-
-    @Test
-    @UiThreadTest
-    public void onSubscriptionsChanged_subscriptionReplaced_preferencesChanged() {
-        final List<SubscriptionInfo> subs = setupMockSubscriptions(3);
-        doReturn(subs).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
-
-        // Start out with only sub1 and sub2.
-        SubscriptionUtil.setActiveSubscriptionsForTesting(subs.subList(0, 2));
-        mController.onResume();
-        mController.displayPreference(mPreferenceScreen);
-
-        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(2);
-        assertThat(mPreferenceCategory.getPreference(0).getTitle()).isEqualTo("sub2");
-        assertThat(mPreferenceCategory.getPreference(1).getTitle()).isEqualTo("sub1");
-
-        // Now replace sub2 with sub3, and make sure the old preference was removed and the new
-        // preference was added.
-        final int updateCountBeforeSubscriptionChange = mOnChildUpdatedCount;
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(subs.get(0), subs.get(2)));
-        mController.onSubscriptionsChanged();
-
-        assertThat(mController.isAvailable()).isTrue();
-        assertThat(mOnChildUpdatedCount).isEqualTo(updateCountBeforeSubscriptionChange + 1);
-        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(2);
-        assertThat(mPreferenceCategory.getPreference(0).getTitle()).isEqualTo("sub3");
-        assertThat(mPreferenceCategory.getPreference(1).getTitle()).isEqualTo("sub1");
-    }
-
-    @Test
-    public void getSummary_twoSubsOneDefaultForEverythingDataActive() {
-        setupMockSubscriptions(2);
-
-        doReturn(11).when(sInjector).getDefaultSmsSubscriptionId();
-        doReturn(11).when(sInjector).getDefaultVoiceSubscriptionId();
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-        doReturn(true).when(sInjector).isActiveCellularNetwork(mContext);
-
-        assertThat(mController.getSummary(11, true)).isEqualTo(
-                ResourcesUtils.getResourcesString(mContext, "default_for_calls_and_sms")
-                        + System.lineSeparator()
-                        + ResourcesUtils.getResourcesString(mContext, "mobile_data_active"));
-
-        assertThat(mController.getSummary(22, false)).isEqualTo(
-                ResourcesUtils.getResourcesString(mContext, "subscription_available"));
-    }
-
-    @Test
-    public void getSummary_twoSubsOneDefaultForEverythingDataNotActive() {
-        setupMockSubscriptions(2, 1, true);
-
-        doReturn(1).when(sInjector).getDefaultSmsSubscriptionId();
-        doReturn(1).when(sInjector).getDefaultVoiceSubscriptionId();
-
-        assertThat(mController.getSummary(1, true)).isEqualTo(
-                ResourcesUtils.getResourcesString(mContext, "default_for_calls_and_sms")
-                        + System.lineSeparator()
-                        + ResourcesUtils.getResourcesString(mContext, "default_for_mobile_data"));
-
-        assertThat(mController.getSummary(2, false)).isEqualTo(
-                ResourcesUtils.getResourcesString(mContext, "subscription_available"));
-    }
-
-    @Test
-    public void getSummary_twoSubsOneDefaultForEverythingDataDisabled() {
-        setupMockSubscriptions(2);
-
-        doReturn(1).when(sInjector).getDefaultSmsSubscriptionId();
-        doReturn(1).when(sInjector).getDefaultVoiceSubscriptionId();
-
-        assertThat(mController.getSummary(1, true)).isEqualTo(
-                ResourcesUtils.getResourcesString(mContext, "default_for_calls_and_sms")
-                        + System.lineSeparator()
-                        + ResourcesUtils.getResourcesString(mContext, "mobile_data_off"));
-
-        assertThat(mController.getSummary(2, false)).isEqualTo(
-                ResourcesUtils.getResourcesString(mContext, "subscription_available"));
-    }
-
-    @Test
-    public void getSummary_twoSubsOneForCallsAndDataOneForSms() {
-        setupMockSubscriptions(2, 1, true);
-
-        doReturn(2).when(sInjector).getDefaultSmsSubscriptionId();
-        doReturn(1).when(sInjector).getDefaultVoiceSubscriptionId();
-
-        assertThat(mController.getSummary(1, true)).isEqualTo(
-                ResourcesUtils.getResourcesString(mContext, "default_for_calls")
-                        + System.lineSeparator()
-                        + ResourcesUtils.getResourcesString(mContext, "default_for_mobile_data"));
-
-        assertThat(mController.getSummary(2, false)).isEqualTo(
-                ResourcesUtils.getResourcesString(mContext, "default_for_sms"));
-    }
-
-    @Test
-    @UiThreadTest
-    public void setIcon_greatSignal_correctLevels() {
-        final List<SubscriptionInfo> subs = setupMockSubscriptions(2, 1, true);
-        setMockSubSignalStrength(subs, 0, SIGNAL_STRENGTH_GREAT);
-        setMockSubSignalStrength(subs, 1, SIGNAL_STRENGTH_GREAT);
-        final Preference pref = new Preference(mContext);
-        final Drawable greatDrawWithoutCutOff = mock(Drawable.class);
-        doReturn(greatDrawWithoutCutOff).when(sInjector)
-                .getIcon(any(), anyInt(), anyInt(), anyBoolean());
-
-        mController.setIcon(pref, 1, true /* isDefaultForData */);
-        assertThat(pref.getIcon()).isEqualTo(greatDrawWithoutCutOff);
-
-        final Drawable greatDrawWithCutOff = mock(Drawable.class);
-        doReturn(greatDrawWithCutOff).when(sInjector)
-                .getIcon(any(), anyInt(), anyInt(), anyBoolean());
-        mController.setIcon(pref, 2, false /* isDefaultForData */);
-        assertThat(pref.getIcon()).isEqualTo(greatDrawWithCutOff);
-    }
-
-    @Test
-    @UiThreadTest
     public void displayPreference_providerAndHasSim_showPreference() {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(1);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(sub).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
 
@@ -411,7 +199,6 @@ public class SubscriptionsPreferenceControllerTest {
     @UiThreadTest
     public void displayPreference_providerAndHasMultiSim_showDataSubPreference() {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(sub).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
 
@@ -429,7 +216,6 @@ public class SubscriptionsPreferenceControllerTest {
                 Html.fromHtml("Connected / 5G", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "5G";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), true, true,
                 true, ServiceState.STATE_IN_SERVICE);
@@ -450,7 +236,6 @@ public class SubscriptionsPreferenceControllerTest {
                 Html.fromHtml("Connected / W+", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "W+";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
                 true, ServiceState.STATE_IN_SERVICE);
@@ -475,7 +260,6 @@ public class SubscriptionsPreferenceControllerTest {
                 Html.fromHtml(dataOffSummary, Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "5G";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, false,
                 true, ServiceState.STATE_IN_SERVICE);
@@ -495,7 +279,6 @@ public class SubscriptionsPreferenceControllerTest {
         final CharSequence expectedSummary = Html.fromHtml("5G", Html.FROM_HTML_MODE_LEGACY);
         final String networkType = "5G";
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
                 true, ServiceState.STATE_IN_SERVICE);
@@ -512,7 +295,6 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     @UiThreadTest
     public void displayPreference_providerAndNoSim_noPreference() {
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(null).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
 
         mController.onResume();
@@ -531,7 +313,6 @@ public class SubscriptionsPreferenceControllerTest {
         final TelephonyDisplayInfo telephonyDisplayInfo =
                 new TelephonyDisplayInfo(TelephonyManager.NETWORK_TYPE_UNKNOWN,
                         TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), true, true,
                 true, ServiceState.STATE_IN_SERVICE);
@@ -557,7 +338,6 @@ public class SubscriptionsPreferenceControllerTest {
         final TelephonyDisplayInfo telephonyDisplayInfo =
                 new TelephonyDisplayInfo(TelephonyManager.NETWORK_TYPE_UNKNOWN,
                         TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
                 true, ServiceState.STATE_IN_SERVICE);
@@ -584,7 +364,6 @@ public class SubscriptionsPreferenceControllerTest {
         final TelephonyDisplayInfo telephonyDisplayInfo =
                 new TelephonyDisplayInfo(TelephonyManager.NETWORK_TYPE_UNKNOWN,
                         TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         setupGetIconConditions(sub.get(0).getSubscriptionId(), false, true,
                 false, ServiceState.STATE_OUT_OF_SERVICE);
@@ -603,7 +382,6 @@ public class SubscriptionsPreferenceControllerTest {
     @UiThreadTest
     public void onAirplaneModeChanged_providerAndHasSim_noPreference() {
         setupMockSubscriptions(1);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
@@ -618,7 +396,6 @@ public class SubscriptionsPreferenceControllerTest {
     @UiThreadTest
     public void dataSubscriptionChanged_providerAndHasMultiSim_showSubId1Preference() {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(sub).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
         Intent intent = new Intent(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
@@ -637,7 +414,6 @@ public class SubscriptionsPreferenceControllerTest {
     public void dataSubscriptionChanged_providerAndHasMultiSim_showSubId2Preference() {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         final int subId = sub.get(0).getSubscriptionId();
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(sub).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
         Intent intent = new Intent(TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED);
@@ -662,7 +438,6 @@ public class SubscriptionsPreferenceControllerTest {
     @UiThreadTest
     public void getIcon_cellularIsActive_iconColorIsAccentDefaultColor() {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(1);
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         Drawable icon = mock(Drawable.class);
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
@@ -681,7 +456,6 @@ public class SubscriptionsPreferenceControllerTest {
     public void getIcon_dataStateConnectedAndMobileDataOn_iconIsSignalIcon() {
         final List<SubscriptionInfo> subs = setupMockSubscriptions(1);
         final int subId = subs.get(0).getSubscriptionId();
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(subs.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         Drawable icon = mock(Drawable.class);
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
@@ -700,7 +474,6 @@ public class SubscriptionsPreferenceControllerTest {
     public void getIcon_voiceInServiceAndMobileDataOff_iconIsSignalIcon() {
         final List<SubscriptionInfo> subs = setupMockSubscriptions(1);
         final int subId = subs.get(0).getSubscriptionId();
-        doReturn(true).when(sInjector).isProviderModelEnabled(mContext);
         doReturn(subs.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         Drawable icon = mock(Drawable.class);
         when(mTelephonyManager.isDataEnabled()).thenReturn(false);
@@ -805,40 +578,6 @@ public class SubscriptionsPreferenceControllerTest {
         }
         SubscriptionUtil.setActiveSubscriptionsForTesting(infos);
         return infos;
-    }
-
-    /**
-     * Helper method to set the signal strength returned for a mock subscription
-     * @param subs The list of subscriptions
-     * @param index The index in of the subscription in |subs| to change
-     * @param level The signal strength level to return for the subscription. Pass -1 to force
-     *              return of a null SignalStrength object for the subscription.
-     */
-    private void setMockSubSignalStrength(List<SubscriptionInfo> subs, int index, int level) {
-        final int subId =  subs.get(index).getSubscriptionId();
-        doReturn(mTelephonyManagerForSub).when(mTelephonyManager).createForSubscriptionId(subId);
-        if (level == -1) {
-            when(mTelephonyManagerForSub.getSignalStrength()).thenReturn(null);
-        } else {
-            final SignalStrength signalStrength = mock(SignalStrength.class);
-            doReturn(signalStrength).when(mTelephonyManagerForSub).getSignalStrength();
-            when(signalStrength.getLevel()).thenReturn(level);
-        }
-    }
-
-    private void initializeMethod(boolean isSubscriptionCanBeDisplayed,
-            int defaultSmsSubscriptionId, int defaultVoiceSubscriptionId,
-            int defaultDataSubscriptionId, boolean isActiveCellularNetwork,
-            boolean isProviderModelEnabled) {
-        doReturn(isSubscriptionCanBeDisplayed)
-                .when(sInjector).canSubscriptionBeDisplayed(mContext, eq(anyInt()));
-        doReturn(defaultSmsSubscriptionId).when(sInjector).getDefaultSmsSubscriptionId();
-        doReturn(defaultVoiceSubscriptionId).when(sInjector).getDefaultVoiceSubscriptionId();
-        doReturn(defaultDataSubscriptionId).when(sInjector).getDefaultDataSubscriptionId();
-        doReturn(isActiveCellularNetwork).when(sInjector).isActiveCellularNetwork(mContext);
-        doReturn(isProviderModelEnabled).when(sInjector).isProviderModelEnabled(mContext);
-        doReturn(mock(Drawable.class))
-                .when(sInjector).getIcon(any(), anyInt(), anyInt(), eq(false));
     }
 
     private static class FakeSubscriptionsPreferenceController

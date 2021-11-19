@@ -60,7 +60,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
@@ -279,17 +278,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        if (!Utils.isProviderModelEnabled(getContext())) {
-            final Intent intent = new Intent(getContext(), WifiSettingsActivity.class);
-            final Bundle extras = getActivity().getIntent().getExtras();
-            if (extras != null) {
-                intent.putExtras(extras);
-            }
-            getContext().startActivity(intent);
-            finish();
-            return;
-        }
-
         mAirplaneModeEnabler = new AirplaneModeEnabler(getContext(), this);
 
         // TODO(b/37429702): Add animations and preference comparator back after initial screen is
@@ -1188,10 +1176,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.network_provider_settings) {
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    return Utils.isProviderModelEnabled(context);
-                }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
