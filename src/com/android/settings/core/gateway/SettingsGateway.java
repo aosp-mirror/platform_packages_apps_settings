@@ -123,6 +123,7 @@ import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.network.NetworkProviderSettings;
 import com.android.settings.network.apn.ApnEditor;
 import com.android.settings.network.apn.ApnSettings;
+import com.android.settings.network.telephony.MobileNetworkSettings;
 import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
@@ -329,7 +330,8 @@ public class SettingsGateway {
             AlarmsAndRemindersDetails.class.getName(),
             MediaManagementAppsDetails.class.getName(),
             AutoBrightnessSettings.class.getName(),
-            OneHandedSettings.class.getName()
+            OneHandedSettings.class.getName(),
+            MobileNetworkSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

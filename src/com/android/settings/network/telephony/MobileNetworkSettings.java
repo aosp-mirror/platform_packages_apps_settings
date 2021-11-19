@@ -23,8 +23,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -39,6 +41,7 @@ import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.network.ActiveSubscriptionsListener;
 import com.android.settings.network.CarrierWifiTogglePreferenceController;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
@@ -115,9 +118,16 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
-                MobileNetworkUtils.getSearchableSubscriptionId(context));
-        Log.i(LOG_TAG, "display subId: " + mSubId);
+        Intent intent = getIntent();
+        if (intent != null) {
+            mSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                    MobileNetworkUtils.getSearchableSubscriptionId(context));
+            Log.i(LOG_TAG, "display subId from intent: " + mSubId);
+        } else {
+            mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
+                    MobileNetworkUtils.getSearchableSubscriptionId(context));
+            Log.i(LOG_TAG, "display subId from getArguments(): " + mSubId);
+        }
 
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return Arrays.asList();
@@ -130,6 +140,30 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        Intent intent = getIntent();
+        SubscriptionInfo info = SubscriptionUtil.getSubscriptionOrDefault(context, mSubId);
+        if (info == null) {
+            Log.d(LOG_TAG, "Invalid subId request " + mSubId);
+            return;
+        }
+
+        int oldSubId = mSubId;
+        updateSubscriptions(info);
+        // If the subscription has changed or the new intent does not contain the opt in action,
+        // remove the old discovery dialog. If the activity is being recreated, we will see
+        // onCreate -> onNewIntent, so the dialog will first be recreated for the old subscription
+        // and then removed.
+        if (!MobileNetworkActivity.doesIntentContainOptInAction(intent)) {
+            removeContactDiscoveryDialog(oldSubId);
+        }
+
+        // evaluate showing the new discovery dialog if this intent contains an action to show the
+        // opt-in.
+        if (MobileNetworkActivity.doesIntentContainOptInAction(intent)) {
+            showContactDiscoveryDialog(
+                    SubscriptionUtil.getSubscriptionOrDefault(context, mSubId));
+        }
 
         final DataUsageSummaryPreferenceController dataUsageSummaryPreferenceController =
                 use(DataUsageSummaryPreferenceController.class);
@@ -339,4 +373,49 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
                     return context.getSystemService(UserManager.class).isAdminUser();
                 }
             };
+
+    private ContactDiscoveryDialogFragment getContactDiscoveryFragment(int subId) {
+        // In the case that we are rebuilding this activity after it has been destroyed and
+        // recreated, look up the dialog in the fragment manager.
+        return (ContactDiscoveryDialogFragment) getChildFragmentManager()
+                .findFragmentByTag(ContactDiscoveryDialogFragment.getFragmentTag(subId));
+    }
+
+
+    private void removeContactDiscoveryDialog(int subId) {
+        ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(subId);
+        if (fragment != null) {
+            fragment.dismiss();
+        }
+    }
+
+    private void showContactDiscoveryDialog(SubscriptionInfo info) {
+        if (info == null) {
+            Log.d(LOG_TAG, "Invalid subId request " + mSubId);
+            onDestroy();
+            return;
+        }
+
+        CharSequence carrierName = SubscriptionUtil.getUniqueSubscriptionDisplayName(info,
+                getContext());
+        ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(mSubId);
+        if (fragment == null) {
+            fragment = ContactDiscoveryDialogFragment.newInstance(mSubId, carrierName);
+        }
+        // Only try to show the dialog if it has not already been added, otherwise we may
+        // accidentally add it multiple times, causing multiple dialogs.
+        if (!fragment.isAdded()) {
+            fragment.show(getChildFragmentManager(),
+                    ContactDiscoveryDialogFragment.getFragmentTag(mSubId));
+        }
+    }
+
+    private void updateSubscriptions(SubscriptionInfo subscription) {
+        if (subscription == null) {
+            return;
+        }
+        final int subscriptionIndex = subscription.getSubscriptionId();
+
+        mSubId = subscriptionIndex;
+    }
 }
