@@ -33,7 +33,7 @@ import androidx.window.embedding.SplitRule;
 
 import com.android.settings.Settings;
 import com.android.settings.SubSettings;
-import com.android.settings.Utils;
+import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.SliceDeepLinkHomepageActivity;
 
@@ -101,7 +101,6 @@ public class ActivityEmbeddingRulesController {
             ComponentName secondaryComponent,
             String secondaryIntentAction,
             boolean clearTop) {
-
         registerTwoPanePairRule(
                 context,
                 getComponentName(context, Settings.class),
@@ -113,8 +112,7 @@ public class ActivityEmbeddingRulesController {
 
         registerTwoPanePairRule(
                 context,
-                new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
-                        SettingsHomepageActivity.ALIAS_DEEP_LINK),
+                new ComponentName(context, DeepLinkHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
                 true /* finishPrimaryWithSecondary */,
@@ -156,9 +154,9 @@ public class ActivityEmbeddingRulesController {
     private void registerHomepagePlaceholderRule() {
         final Set<ActivityFilter> activityFilters = new HashSet<>();
         addActivityFilter(activityFilters, SettingsHomepageActivity.class);
+        addActivityFilter(activityFilters, DeepLinkHomepageActivity.class);
+        addActivityFilter(activityFilters, SliceDeepLinkHomepageActivity.class);
         addActivityFilter(activityFilters, Settings.class);
-        addActivityFilter(activityFilters, new ComponentName(Utils.SETTINGS_PACKAGE_NAME,
-                SettingsHomepageActivity.ALIAS_DEEP_LINK));
 
         final Intent intent = new Intent();
         intent.setComponent(getComponentName(Settings.NetworkDashboardActivity.class));
