@@ -17,6 +17,13 @@
 package com.android.settings.display;
 
 import android.app.settings.SettingsEnums;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.android.settings.R;
 
@@ -31,6 +38,23 @@ public class FontSizePreferenceFragmentForSetupWizard
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SUW_ACCESSIBILITY_FONT_SIZE;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        final View root = super.onCreateView(inflater, container, savedInstanceState);
+        if (getResources().getBoolean(R.bool.config_supported_large_screen)) {
+            final ViewPager viewPager = root.findViewById(R.id.preview_pager);
+            final View view = (View) viewPager.getAdapter().instantiateItem(viewPager,
+                    viewPager.getCurrentItem());
+            final LinearLayout layout = view.findViewById(R.id.font_size_preview_text_group);
+            final int paddingStart = getResources().getDimensionPixelSize(
+                    R.dimen.font_size_preview_padding_start);
+            layout.setPaddingRelative(paddingStart, layout.getPaddingTop(),
+                    layout.getPaddingEnd(), layout.getPaddingBottom());
+        }
+        return root;
     }
 
     @Override
