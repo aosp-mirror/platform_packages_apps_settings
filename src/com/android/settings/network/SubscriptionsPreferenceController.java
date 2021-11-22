@@ -55,7 +55,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.network.telephony.DataConnectivityListener;
-import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.SignalStrengthListener;
 import com.android.settings.network.telephony.TelephonyDisplayInfoListener;
@@ -237,7 +236,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             });
 
             mSubsGearPref.setOnGearClickListener(p ->
-                    startMobileNetworkActivity(mContext, subInfo.getSubscriptionId()));
+                    MobileNetworkUtils.launchMobileNetworkSettings(mContext, subInfo));
         }
 
         if (!(mContext.getSystemService(UserManager.class)).isAdminUser()) {
@@ -333,14 +332,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             return;
         }
         mSubsGearPref.setSummary("");
-    }
-
-    private static void startMobileNetworkActivity(Context context, int subId) {
-        final Intent intent = new Intent(context, MobileNetworkActivity.class);
-        intent.putExtra(Settings.EXTRA_SUB_ID, subId);
-        // MobileNetworkActivity is singleTask, set SplitPairRule to show in 2-pane.
-        MobileNetworkTwoPaneUtils.registerTwoPaneForMobileNetwork(context, intent, null);
-        context.startActivity(intent);
     }
 
     @VisibleForTesting
