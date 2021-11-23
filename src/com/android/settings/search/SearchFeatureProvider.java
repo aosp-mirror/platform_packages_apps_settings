@@ -24,6 +24,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +34,13 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.search.SearchIndexableResources;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+
+import java.util.List;
 
 /**
  * FeatureProvider for Settings Search
@@ -60,6 +64,9 @@ public interface SearchFeatureProvider {
      */
     SearchIndexableResources getSearchIndexableResources();
 
+    /**
+     * @return a package name of settings intelligence.
+     */
     default String getSettingsIntelligencePkgName(Context context) {
         return context.getString(R.string.config_settingsintelligence_package_name);
     }
@@ -90,16 +97,30 @@ public interface SearchFeatureProvider {
         navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         navView.setBackground(null);
 
+        final Context context = activity.getApplicationContext();
+        final Intent intent = buildSearchIntent(context, pageId)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        final List<ResolveInfo> resolveInfos =
+                activity.getPackageManager().queryIntentActivities(intent,
+                        PackageManager.MATCH_DEFAULT_ONLY);
+        if (resolveInfos.isEmpty()) {
+            return;
+        }
+
+        final ComponentName searchComponentName = resolveInfos.get(0)
+                .getComponentInfo().getComponentName();
+        // Set a component name since activity embedding requires a component name for
+        // registering a rule.
+        intent.setComponent(searchComponentName);
+        ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+                context,
+                searchComponentName,
+                intent.getAction(),
+                false /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                false /* clearTop */);
+
         toolbar.setOnClickListener(tb -> {
-            final Context context = activity.getApplicationContext();
-            final Intent intent = buildSearchIntent(context, pageId)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            if (activity.getPackageManager().queryIntentActivities(intent,
-                    PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
-                return;
-            }
-
             FeatureFactory.getFactory(context).getSlicesFeatureProvider()
                     .indexSliceDataAsync(context);
 
