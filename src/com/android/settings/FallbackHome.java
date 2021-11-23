@@ -41,7 +41,6 @@ import android.view.animation.AnimationUtils;
 import java.util.Objects;
 
 public class FallbackHome extends Activity {
-    public static final String HOME_IS_READY = "com.android.launcher3.HOME_IS_READY";
     private static final String TAG = "FallbackHome";
     private static final int PROGRESS_TIMEOUT = 2000;
 
@@ -100,9 +99,7 @@ public class FallbackHome extends Activity {
         }
         getWindow().getDecorView().setSystemUiVisibility(flags);
 
-        IntentFilter iFilter = new IntentFilter();
-        iFilter.addAction(HOME_IS_READY);
-        registerReceiver(mReceiver, iFilter);
+        registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_USER_UNLOCKED));
         maybeFinish();
     }
 
