@@ -16,11 +16,10 @@
 
 package com.android.settings.nfc;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
 import android.nfc.cardemulation.ApduServiceInfo;
 import android.nfc.cardemulation.CardEmulation;
@@ -50,6 +49,15 @@ public class PaymentBackend {
         boolean isDefault;
         public ComponentName componentName;
         public ComponentName settingsComponent;
+        public UserHandle userHandle;
+    }
+
+    /**
+     * ComponentName of the payment application and the userId that it belongs to.
+     */
+    public static class PaymentInfo {
+        public ComponentName componentName;
+        public int userId;
     }
 
     private final Context mContext;
@@ -80,40 +88,55 @@ public class PaymentBackend {
 
     public void refresh() {
         PackageManager pm = mContext.getPackageManager();
-        List<ApduServiceInfo> serviceInfos =
-                mCardEmuManager.getServices(CardEmulation.CATEGORY_PAYMENT);
-        ArrayList<PaymentAppInfo> appInfos = new ArrayList<PaymentAppInfo>();
+        ArrayList<PaymentAppInfo> appInfosAllProfiles = new ArrayList<PaymentAppInfo>();
 
-        if (serviceInfos == null) {
-            makeCallbacks();
-            return;
-        }
+        UserManager um = mContext.createContextAsUser(
+                UserHandle.of(ActivityManager.getCurrentUser()), /*flags=*/0)
+                .getSystemService(UserManager.class);
+        List<UserHandle> userHandles = um.getEnabledProfiles();
 
-        ComponentName defaultAppName = getDefaultPaymentApp();
+        PaymentInfo defaultAppName = getDefaultPaymentApp();
         PaymentAppInfo foundDefaultApp = null;
-        for (ApduServiceInfo service : serviceInfos) {
-            PaymentAppInfo appInfo = new PaymentAppInfo();
-            appInfo.label = service.loadLabel(pm);
-            if (appInfo.label == null) {
-                appInfo.label = service.loadAppLabel(pm);
+        for (UserHandle uh : userHandles) {
+            List<ApduServiceInfo> serviceInfosByProfile =
+                    mCardEmuManager.getServices(CardEmulation.CATEGORY_PAYMENT, uh.getIdentifier());
+            if (serviceInfosByProfile == null) continue;
+
+            ArrayList<PaymentAppInfo> appInfos = new ArrayList<PaymentAppInfo>();
+
+            for (ApduServiceInfo service : serviceInfosByProfile) {
+                PaymentAppInfo appInfo = new PaymentAppInfo();
+                appInfo.userHandle = uh;
+                appInfo.label = service.loadLabel(pm);
+                if (appInfo.label == null) {
+                    appInfo.label = service.loadAppLabel(pm);
+                }
+                if (defaultAppName == null) {
+                    appInfo.isDefault = false;
+                } else {
+                    appInfo.isDefault =
+                            service.getComponent().equals(defaultAppName.componentName)
+                            && defaultAppName.userId == uh.getIdentifier();
+                }
+                if (appInfo.isDefault) {
+                    foundDefaultApp = appInfo;
+                }
+                appInfo.componentName = service.getComponent();
+                String settingsActivity = service.getSettingsActivityName();
+                if (settingsActivity != null) {
+                    appInfo.settingsComponent = new ComponentName(
+                            appInfo.componentName.getPackageName(),
+                            settingsActivity);
+                } else {
+                    appInfo.settingsComponent = null;
+                }
+                appInfo.description = service.getDescription();
+
+                appInfos.add(appInfo);
             }
-            appInfo.isDefault = service.getComponent().equals(defaultAppName);
-            if (appInfo.isDefault) {
-                foundDefaultApp = appInfo;
-            }
-            appInfo.componentName = service.getComponent();
-            String settingsActivity = service.getSettingsActivityName();
-            if (settingsActivity != null) {
-                appInfo.settingsComponent = new ComponentName(
-                        appInfo.componentName.getPackageName(),
-                        settingsActivity);
-            } else {
-                appInfo.settingsComponent = null;
-            }
-            appInfo.description = service.getDescription();
-            appInfos.add(appInfo);
+            appInfosAllProfiles.addAll(appInfos);
         }
-        mAppInfos = appInfos;
+        mAppInfos = appInfosAllProfiles;
         mDefaultAppInfo = foundDefaultApp;
         makeCallbacks();
     }
@@ -150,13 +173,36 @@ public class PaymentBackend {
     }
 
     void setForegroundMode(boolean foreground) {
-        Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                Settings.Secure.NFC_PAYMENT_FOREGROUND, foreground ? 1 : 0, UserHandle.myUserId());
+        UserManager um = mContext.createContextAsUser(
+                UserHandle.of(UserHandle.myUserId()), /*flags=*/0)
+                .getSystemService(UserManager.class);
+        List<UserHandle> userHandles = um.getEnabledProfiles();
+        for (UserHandle uh : userHandles) {
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.NFC_PAYMENT_FOREGROUND, foreground ? 1 : 0, uh.getIdentifier());
+        }
     }
 
-    ComponentName getDefaultPaymentApp() {
+    PaymentInfo getDefaultPaymentApp() {
+        UserManager um = mContext.createContextAsUser(
+                UserHandle.of(ActivityManager.getCurrentUser()), /*flags=*/0)
+                .getSystemService(UserManager.class);
+        List<UserHandle> userHandles = um.getEnabledProfiles();
+        for (UserHandle uh : userHandles) {
+            ComponentName defaultApp = getDefaultPaymentApp(uh.getIdentifier());
+            if (defaultApp != null) {
+                PaymentInfo appInfo = new PaymentInfo();
+                appInfo.userId = uh.getIdentifier();
+                appInfo.componentName = defaultApp;
+                return appInfo;
+            }
+        }
+        return null;
+    }
+
+    ComponentName getDefaultPaymentApp(int userId) {
         String componentString = Settings.Secure.getStringForUser(mContext.getContentResolver(),
-                Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT, UserHandle.myUserId());
+                Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT, userId);
         if (componentString != null) {
             return ComponentName.unflattenFromString(componentString);
         } else {
@@ -165,9 +211,29 @@ public class PaymentBackend {
     }
 
     public void setDefaultPaymentApp(ComponentName app) {
-        Settings.Secure.putStringForUser(mContext.getContentResolver(),
-                Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT,
-                app != null ? app.flattenToString() : null, UserHandle.myUserId());
+        setDefaultPaymentApp(app, UserHandle.myUserId());
+    }
+
+    /**
+     *  Set Nfc default payment application
+     */
+    public void setDefaultPaymentApp(ComponentName app, int userId) {
+        UserManager um = mContext.createContextAsUser(
+                UserHandle.of(ActivityManager.getCurrentUser()), /*flags=*/0)
+                .getSystemService(UserManager.class);
+        List<UserHandle> userHandles = um.getEnabledProfiles();
+
+        for (UserHandle uh : userHandles) {
+            if (uh.getIdentifier() == userId) {
+                Settings.Secure.putStringForUser(mContext.getContentResolver(),
+                        Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT,
+                        app != null ? app.flattenToString() : null, uh.getIdentifier());
+            } else {
+                Settings.Secure.putStringForUser(mContext.getContentResolver(),
+                        Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT,
+                        null, uh.getIdentifier());
+            }
+        }
         refresh();
     }
 

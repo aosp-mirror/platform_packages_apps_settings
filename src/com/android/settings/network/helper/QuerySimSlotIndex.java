@@ -17,14 +17,16 @@ package com.android.settings.network.helper;
 
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.UiccPortInfo;
 import android.telephony.UiccSlotInfo;
 
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicIntegerArray;
+import java.util.stream.IntStream;
 
 /**
- * This is a Callable class which query slot index within device
+ * This is a Callable class which query logical slot index within device
  */
 public class QuerySimSlotIndex implements Callable<AtomicIntegerArray> {
     private static final String TAG = "QuerySimSlotIndex";
@@ -58,30 +60,32 @@ public class QuerySimSlotIndex implements Callable<AtomicIntegerArray> {
             return new AtomicIntegerArray(0);
         }
         int slotIndexFilter = mOnlySlotWithSim ? 0 : SubscriptionManager.INVALID_SIM_SLOT_INDEX;
+
         return new AtomicIntegerArray(Arrays.stream(slotInfo)
-                .filter(slot -> filterSlot(slot))
-                .mapToInt(slot -> mapToSlotIndex(slot))
+                .flatMapToInt(slot -> mapToLogicalSlotIndex(slot))
                 .filter(slotIndex -> (slotIndex >= slotIndexFilter))
                 .toArray());
     }
 
-    protected boolean filterSlot(UiccSlotInfo slotInfo) {
+    protected IntStream mapToLogicalSlotIndex(UiccSlotInfo slotInfo) {
+        if (slotInfo == null) {
+            return IntStream.of(SubscriptionManager.INVALID_SIM_SLOT_INDEX);
+        }
+        if (slotInfo.getCardStateInfo() == UiccSlotInfo.CARD_STATE_INFO_ABSENT) {
+            return IntStream.of(SubscriptionManager.INVALID_SIM_SLOT_INDEX);
+        }
+        return slotInfo.getPorts().stream()
+                .filter(port -> filterPort(port))
+                .mapToInt(port -> port.getLogicalSlotIndex());
+    }
+
+    protected boolean filterPort(UiccPortInfo uiccPortInfo) {
         if (mDisabledSlotsIncluded) {
             return true;
         }
-        if (slotInfo == null) {
+        if (uiccPortInfo == null) {
             return false;
         }
-        return slotInfo.getIsActive();
-    }
-
-    protected int mapToSlotIndex(UiccSlotInfo slotInfo) {
-        if (slotInfo == null) {
-            return SubscriptionManager.INVALID_SIM_SLOT_INDEX;
-        }
-        if (slotInfo.getCardStateInfo() == UiccSlotInfo.CARD_STATE_INFO_ABSENT) {
-            return SubscriptionManager.INVALID_SIM_SLOT_INDEX;
-        }
-        return slotInfo.getLogicalSlotIdx();
+        return uiccPortInfo.isActive();
     }
 }
