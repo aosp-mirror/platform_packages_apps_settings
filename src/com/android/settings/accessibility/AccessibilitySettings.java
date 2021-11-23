@@ -294,11 +294,6 @@ public class AccessibilitySettings extends DashboardFragment {
         return info.loadDescription(context.getPackageManager());
     }
 
-    static boolean isRampingRingerEnabled(final Context context) {
-        return Settings.System.getInt(
-                context.getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, 0) == 1;
-    }
-
     @VisibleForTesting
     void onContentChanged() {
         // If the fragment is visible then update preferences immediately, else set the flag then

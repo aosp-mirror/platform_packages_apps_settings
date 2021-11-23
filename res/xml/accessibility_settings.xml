@@ -110,7 +110,8 @@
             android:persistent="false"
             android:title="@string/accessibility_vibration_settings_title"
             settings:controller="com.android.settings.accessibility.VibrationPreferenceController"
-            settings:keywords="@string/keywords_vibration"/>
+            settings:keywords="@string/keywords_vibration"
+            android:summary="@string/accessibility_vibration_settings_summary"/>
 
     </PreferenceCategory>
 

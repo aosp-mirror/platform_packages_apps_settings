@@ -5565,8 +5565,10 @@
     <string name="accessibility_autoclick_longer_desc">Longer</string>
     <!-- Description for the seekbar that adjust auto click time. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_autoclick_seekbar_desc">Auto click time</string>
-    <!-- Title for accessibility preference screen for configuring vibrations. -->
+    <!-- Title for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
+    <!-- Summary for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_vibration_settings_summary">Control the vibration strength for different usages</string>
     <!-- Title for the category of preferences to configure device vibrations related to calls. [CHAR LIMIT=NONE] -->
     <string name="accessibility_call_vibration_category_title">Calls</string>
     <!-- Title for the category of preferences to configure device vibrations related to notifications and alarms. [CHAR LIMIT=NONE] -->
@@ -5733,33 +5735,6 @@
         <item quantity="few"><xliff:g id="click_delay_label" example="0.6">%1$s</xliff:g> seconds</item>
         <item quantity="other"><xliff:g id="click_delay_label">%1$s</xliff:g> seconds</item>
     </plurals>
-
-    <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=50] -->
-    <string name="accessibility_vibration_summary">Ring <xliff:g id="summary_ring" example="Medium">%1$s</xliff:g>, notification <xliff:g id="summary_notification" example="Low">%2$s</xliff:g>, touch <xliff:g id="summary_touch" example="High">%3$s</xliff:g></string>
-
-    <!-- Summary for vibration settings preference when ring & notification are set to off-->
-    <string name="accessibility_vibration_summary_off">Ring &amp; notification set to off</string>
-
-    <!-- Summary for vibration settings preference when ring & notification are set to low-->
-    <string name="accessibility_vibration_summary_low">Ring &amp; notification set to low</string>
-
-    <!-- Summary for vibration settings preference when ring & notification are set to medium-->
-    <string name="accessibility_vibration_summary_medium">Ring &amp; notification set to medium</string>
-
-    <!-- Summary for vibration settings preference when ring & notification are set to high-->
-    <string name="accessibility_vibration_summary_high">Ring &amp; notification set to high</string>
-
-    <!-- Label describing an option turning vibrations off. [CHAR LIMIT=15] -->
-    <string name="accessibility_vibration_intensity_off">Off</string>
-
-    <!-- Label describing a low intensity vibration option. [CHAR LIMIT=15] -->
-    <string name="accessibility_vibration_intensity_low">Low</string>
-
-    <!-- Label describing a medium intensity vibration option. [CHAR LIMIT=15] -->
-    <string name="accessibility_vibration_intensity_medium">Medium</string>
-
-    <!-- Label describing a high intensity vibration option. [CHAR LIMIT=15] -->
-    <string name="accessibility_vibration_intensity_high">High</string>
 
     <!-- Title for accessibility menu item to launch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
@@ -8425,6 +8400,8 @@
     <string name="keywords_touch_vibration">haptics, vibrate, screen, sensitivity</string>
     <!-- List of synonyms for ring vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity, ring</string>
+    <!-- List of synonyms for ring vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_ramping_ringer_vibration">haptics, vibrate, phone, call, ring, gradually</string>
     <!-- List of synonyms for notification vibration setting (changes whether your phone vibrates when it shows a notification), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_notification_vibration">haptics, vibrate, sensitivity</string>
     <!-- List of synonyms for vibration and haptics setting, used to match in settings search [CHAR LIMIT=NONE] -->
