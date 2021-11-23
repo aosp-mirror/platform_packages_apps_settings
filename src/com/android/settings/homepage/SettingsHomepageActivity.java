@@ -25,6 +25,7 @@ import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -77,8 +78,11 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private TopLevelSettings mMainFragment;
     private View mHomepageView;
     private View mSuggestionView;
+    private View mTwoPaneSuggestionView;
     private CategoryMixin mCategoryMixin;
     private Set<HomepageLoadedListener> mLoadedListeners;
+    private boolean mIsEmbeddingActivityEnabled;
+    private boolean mIsTwoPaneLastTime;
 
     /** A listener receiving homepage loaded events. */
     public interface HomepageLoadedListener {
@@ -87,10 +91,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     /**
-     *  Try to add a {@link HomepageLoadedListener}. If homepage is already loaded, the listener
-     *  will not be notified.
+     * Try to add a {@link HomepageLoadedListener}. If homepage is already loaded, the listener
+     * will not be notified.
      *
-     *  @return Whether the listener is added.
+     * @return Whether the listener is added.
      */
     public boolean addHomepageLoadedListener(HomepageLoadedListener listener) {
         if (mHomepageView == null) {
@@ -113,7 +117,11 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
         Log.i(TAG, "showHomepageWithSuggestion: " + showSuggestion);
         final View homepageView = mHomepageView;
-        mSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
+        if (!mIsTwoPaneLastTime) {
+            mSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
+        } else {
+            mTwoPaneSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
+        }
         mHomepageView = null;
 
         mLoadedListeners.forEach(listener -> listener.onHomepageLoaded());
@@ -135,30 +143,25 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_homepage_container);
+        mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
+        mIsTwoPaneLastTime = ActivityEmbeddingUtils.isTwoPaneResolution(this);
 
         final View appBar = findViewById(R.id.app_bar_container);
         appBar.setMinimumHeight(getSearchBoxHeight());
         initHomepageContainer();
+        updateHomepageAppBar();
         mLoadedListeners = new ArraySet<>();
 
-        final Toolbar toolbar = findViewById(R.id.search_action_bar);
-        FeatureFactory.getFactory(this).getSearchFeatureProvider()
-                .initSearchToolbar(this /* activity */, toolbar, SettingsEnums.SETTINGS_HOMEPAGE);
+        initSearchBarView();
 
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
         mCategoryMixin = new CategoryMixin(this);
         getLifecycle().addObserver(mCategoryMixin);
 
+        // Only allow features on high ram devices.
         if (!getSystemService(ActivityManager.class).isLowRamDevice()) {
-            // Only allow features on high ram devices.
-            final ImageView avatarView = findViewById(R.id.account_avatar);
-            if (AvatarViewMixin.isAvatarSupported(this)) {
-                avatarView.setVisibility(View.VISIBLE);
-                getLifecycle().addObserver(new AvatarViewMixin(this, avatarView));
-            }
-
+            initAvatarView();
             showSuggestionFragment();
-
             if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)) {
                 showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
             }
@@ -196,6 +199,43 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         launchDeepLinkIntentToRight();
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        final boolean isTwoPane = ActivityEmbeddingUtils.isTwoPaneResolution(this);
+        if (mIsTwoPaneLastTime != isTwoPane) {
+            mIsTwoPaneLastTime = isTwoPane;
+            updateHomepageAppBar();
+        }
+    }
+
+    private void initSearchBarView() {
+        final Toolbar toolbar = findViewById(R.id.search_action_bar);
+        FeatureFactory.getFactory(this).getSearchFeatureProvider()
+                .initSearchToolbar(this /* activity */, toolbar, SettingsEnums.SETTINGS_HOMEPAGE);
+
+        if (mIsEmbeddingActivityEnabled) {
+            final Toolbar toolbarTwoPaneVersion = findViewById(R.id.search_action_bar_two_pane);
+            FeatureFactory.getFactory(this).getSearchFeatureProvider()
+                    .initSearchToolbar(this /* activity */, toolbarTwoPaneVersion,
+                            SettingsEnums.SETTINGS_HOMEPAGE);
+        }
+    }
+
+    private void initAvatarView() {
+        final ImageView avatarView = findViewById(R.id.account_avatar);
+        final ImageView avatarTwoPaneView = findViewById(R.id.account_avatar_two_pane_version);
+        if (AvatarViewMixin.isAvatarSupported(this)) {
+            avatarView.setVisibility(View.VISIBLE);
+            getLifecycle().addObserver(new AvatarViewMixin(this, avatarView));
+
+            if (mIsEmbeddingActivityEnabled) {
+                avatarTwoPaneView.setVisibility(View.VISIBLE);
+                getLifecycle().addObserver(new AvatarViewMixin(this, avatarTwoPaneView));
+            }
+        }
+    }
+
     private void showSuggestionFragment() {
         final Class<? extends Fragment> fragment = FeatureFactory.getFactory(this)
                 .getSuggestionFeatureProvider(this).getContextualSuggestionFragment();
@@ -204,6 +244,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
 
         mSuggestionView = findViewById(R.id.suggestion_content);
+        mTwoPaneSuggestionView = findViewById(R.id.two_pane_suggestion_content);
         mHomepageView = findViewById(R.id.settings_homepage_container);
         // Hide the homepage for preparing the suggestion.
         mHomepageView.setVisibility(View.INVISIBLE);
@@ -212,6 +253,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 HOMEPAGE_LOADING_TIMEOUT_MS);
         try {
             showFragment(fragment.getConstructor().newInstance(), R.id.suggestion_content);
+            if (mIsEmbeddingActivityEnabled) {
+                showFragment(fragment.getConstructor().newInstance(),
+                        R.id.two_pane_suggestion_content);
+            }
         } catch (Exception e) {
             Log.w(TAG, "Cannot show fragment", e);
         }
@@ -330,6 +375,19 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         // Prevent inner RecyclerView gets focus and invokes scrolling.
         view.setFocusableInTouchMode(true);
         view.requestFocus();
+    }
+
+    private void updateHomepageAppBar() {
+        if (!mIsEmbeddingActivityEnabled) {
+            return;
+        }
+        if (ActivityEmbeddingUtils.isTwoPaneResolution(this)) {
+            findViewById(R.id.homepage_app_bar_regular_phone_view).setVisibility(View.GONE);
+            findViewById(R.id.homepage_app_bar_two_pane_view).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.homepage_app_bar_regular_phone_view).setVisibility(View.VISIBLE);
+            findViewById(R.id.homepage_app_bar_two_pane_view).setVisibility(View.GONE);
+        }
     }
 
     private int getSearchBoxHeight() {
