@@ -25,6 +25,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.window.embedding.ActivityFilter;
+import androidx.window.embedding.ActivityRule;
 import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitPairFilter;
 import androidx.window.embedding.SplitPairRule;
@@ -33,6 +34,8 @@ import androidx.window.embedding.SplitRule;
 
 import com.android.settings.Settings;
 import com.android.settings.SubSettings;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.SliceDeepLinkHomepageActivity;
@@ -65,6 +68,8 @@ public class ActivityEmbeddingRulesController {
 
         // Set a placeholder for home page.
         registerHomepagePlaceholderRule();
+
+        registerAlwaysExpandRule();
     }
 
     /** Register a SplitPairRule for 2-pane. */
@@ -171,6 +176,13 @@ public class ActivityEmbeddingRulesController {
                 LayoutDirection.LOCALE);
 
         mSplitController.registerRule(placeholderRule);
+    }
+
+    private void registerAlwaysExpandRule() {
+        final Set<ActivityFilter> activityFilters = new HashSet<>();
+        addActivityFilter(activityFilters, FingerprintEnrollIntroduction.class);
+        addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
+        mSplitController.registerRule(new ActivityRule(activityFilters, true /* alwaysExpand */));
     }
 
     private void addActivityFilter(Set<ActivityFilter> activityFilters,
