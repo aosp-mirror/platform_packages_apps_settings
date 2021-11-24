@@ -187,19 +187,17 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
 
     @Override
     public void setTitle(CharSequence title) {
+        super.setTitle(title);
         if (mCollapsingToolbarLayout != null) {
             mCollapsingToolbarLayout.setTitle(title);
-        } else {
-            super.setTitle(title);
         }
     }
 
     @Override
     public void setTitle(int titleId) {
+        super.setTitle(getText(titleId));
         if (mCollapsingToolbarLayout != null) {
             mCollapsingToolbarLayout.setTitle(getText(titleId));
-        } else {
-            super.setTitle(titleId);
         }
     }
 
