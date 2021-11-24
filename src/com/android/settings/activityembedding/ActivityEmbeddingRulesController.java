@@ -25,6 +25,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.window.embedding.ActivityFilter;
+import androidx.window.embedding.ActivityRule;
 import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitPairFilter;
 import androidx.window.embedding.SplitPairRule;
@@ -33,6 +34,8 @@ import androidx.window.embedding.SplitRule;
 
 import com.android.settings.Settings;
 import com.android.settings.SubSettings;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.SliceDeepLinkHomepageActivity;
@@ -65,6 +68,8 @@ public class ActivityEmbeddingRulesController {
 
         // Set a placeholder for home page.
         registerHomepagePlaceholderRule();
+
+        registerAlwaysExpandRule();
     }
 
     /** Register a SplitPairRule for 2-pane. */
@@ -94,20 +99,26 @@ public class ActivityEmbeddingRulesController {
 
     /**
      * Register a new SplitPairRule for Settings home. Because homepage is able to be opened by
-     * {@link Settings} or {@link SettingsHomepageActivity}, we register split rule twice for
-     * two cases.
+     * {@link Settings} or {@link SettingsHomepageActivity} or
+     * {@link SliceDeepLinkHomepageActivity}, we register split rule for above cases.
      */
     public static void registerTwoPanePairRuleForSettingsHome(Context context,
             ComponentName secondaryComponent,
             String secondaryIntentAction,
+            boolean finishPrimaryWithSecondary,
+            boolean finishSecondaryWithPrimary,
             boolean clearTop) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
+            return;
+        }
+
         registerTwoPanePairRule(
                 context,
                 getComponentName(context, Settings.class),
                 secondaryComponent,
                 secondaryIntentAction,
-                true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */,
+                finishPrimaryWithSecondary,
+                finishSecondaryWithPrimary,
                 clearTop);
 
         registerTwoPanePairRule(
@@ -115,8 +126,8 @@ public class ActivityEmbeddingRulesController {
                 new ComponentName(context, DeepLinkHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
-                true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */,
+                finishPrimaryWithSecondary,
+                finishSecondaryWithPrimary,
                 clearTop);
 
         registerTwoPanePairRule(
@@ -124,13 +135,33 @@ public class ActivityEmbeddingRulesController {
                 getComponentName(context, SettingsHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
-                true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */,
+                finishPrimaryWithSecondary,
+                finishSecondaryWithPrimary,
                 clearTop);
 
         registerTwoPanePairRule(
                 context,
                 getComponentName(context, SliceDeepLinkHomepageActivity.class),
+                secondaryComponent,
+                secondaryIntentAction,
+                finishPrimaryWithSecondary,
+                finishSecondaryWithPrimary,
+                clearTop);
+    }
+
+    /**
+     * Register a new SplitPairRule for Settings home.
+     */
+    public static void registerTwoPanePairRuleForSettingsHome(Context context,
+            ComponentName secondaryComponent,
+            String secondaryIntentAction,
+            boolean clearTop) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
+            return;
+        }
+
+        registerTwoPanePairRuleForSettingsHome(
+                context,
                 secondaryComponent,
                 secondaryIntentAction,
                 true /* finishPrimaryWithSecondary */,
@@ -171,6 +202,13 @@ public class ActivityEmbeddingRulesController {
                 LayoutDirection.LOCALE);
 
         mSplitController.registerRule(placeholderRule);
+    }
+
+    private void registerAlwaysExpandRule() {
+        final Set<ActivityFilter> activityFilters = new HashSet<>();
+        addActivityFilter(activityFilters, FingerprintEnrollIntroduction.class);
+        addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
+        mSplitController.registerRule(new ActivityRule(activityFilters, true /* alwaysExpand */));
     }
 
     private void addActivityFilter(Set<ActivityFilter> activityFilters,
