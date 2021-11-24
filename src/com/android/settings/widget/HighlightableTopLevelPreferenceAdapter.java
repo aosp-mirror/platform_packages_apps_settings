@@ -31,6 +31,7 @@ import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.homepage.SettingsHomepageActivity;
@@ -45,19 +46,18 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
 
     static final long DELAY_HIGHLIGHT_DURATION_MILLIS = 100L;
 
-    @VisibleForTesting
-    final int mHighlightColor;
-    final int mTitleColorNormal;
-    final int mTitleColorHighlight;
-    final int mSummaryColorNormal;
-    final int mSummaryColorHighlight;
-    final int mIconColorNormal;
-    final int mIconColorHighlight;
+    private final int mTitleColorNormal;
+    private final int mTitleColorHighlight;
+    private final int mSummaryColorNormal;
+    private final int mSummaryColorHighlight;
+    private final int mIconColorNormal;
+    private final int mIconColorHighlight;
 
     private final Context mContext;
     private final SettingsHomepageActivity mHomepageActivity;
     private final RecyclerView mRecyclerView;
     private final int mNormalBackgroundRes;
+    private final int mHighlightBackgroundRes;
     private String mHighlightKey;
     private String mPreviousHighlightKey;
     private int mHighlightPosition = RecyclerView.NO_POSITION;
@@ -76,8 +76,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
         mContext.getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
                 outValue, true /* resolveRefs */);
         mNormalBackgroundRes = outValue.resourceId;
-        mHighlightColor = Utils.getColorAttrDefaultColor(mContext,
-                com.android.internal.R.attr.colorAccentSecondaryVariant);
+        mHighlightBackgroundRes = R.drawable.homepage_highlighted_item_background;
         mTitleColorNormal = Utils.getColorAttrDefaultColor(mContext,
                 android.R.attr.textColorPrimary);
         mTitleColorHighlight = Utils.getColorAttrDefaultColor(mContext,
@@ -227,7 +226,7 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
 
     private void addHighlightBackground(PreferenceViewHolder holder) {
         final View v = holder.itemView;
-        v.setBackgroundColor(mHighlightColor);
+        v.setBackgroundResource(mHighlightBackgroundRes);
         ((TextView) v.findViewById(android.R.id.title)).setTextColor(mTitleColorHighlight);
         ((TextView) v.findViewById(android.R.id.summary)).setTextColor(mSummaryColorHighlight);
         final Drawable drawable = ((ImageView) v.findViewById(android.R.id.icon)).getDrawable();
