@@ -4273,6 +4273,10 @@
             android:exported="true"
             android:enabled="true">
             <intent-filter android:priority="1">
+                <action android:name="android.settings.action.ONE_HANDED_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>

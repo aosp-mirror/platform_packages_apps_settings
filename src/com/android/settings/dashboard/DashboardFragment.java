@@ -529,8 +529,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mBlockerController.countDown(controller.getPreferenceKey());
     }
 
-    @VisibleForTesting
-    Preference createPreference(Tile tile) {
+    protected Preference createPreference(Tile tile) {
         return tile instanceof ProviderTile
                 ? new SwitchPreference(getPrefContext())
                 : tile.hasSwitch()
