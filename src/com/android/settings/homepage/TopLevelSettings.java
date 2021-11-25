@@ -43,7 +43,9 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.support.SupportPreferenceController;
 import com.android.settings.widget.HighlightableTopLevelPreferenceAdapter;
+import com.android.settings.widget.HomepagePreference;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.SearchIndexable;
 
 @SearchIndexable(forTarget = MOBILE)
@@ -245,6 +247,11 @@ public class TopLevelSettings extends DashboardFragment implements
                 (SettingsHomepageActivity) getActivity(), preferenceScreen, getListView(),
                 mHighlightedPreferenceKey);
         return mTopLevelAdapter;
+    }
+
+    @Override
+    protected Preference createPreference(Tile tile) {
+        return new HomepagePreference(getPrefContext());
     }
 
     void reloadHighlightMenuKey() {
