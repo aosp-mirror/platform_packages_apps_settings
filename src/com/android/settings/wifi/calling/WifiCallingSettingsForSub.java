@@ -37,6 +37,7 @@ import android.telephony.ims.ProvisioningManager;
 import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -193,6 +194,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         final String emptyViewText = res.getString(R.string.wifi_calling_off_explanation,
                 res.getString(R.string.wifi_calling_off_explanation_2));
         mEmptyView.setText(emptyViewText);
+        mEmptyView.setGravity(Gravity.TOP | Gravity.LEFT);
 
         mSwitchBar = getView().findViewById(R.id.switch_bar);
         mSwitchBar.show();
