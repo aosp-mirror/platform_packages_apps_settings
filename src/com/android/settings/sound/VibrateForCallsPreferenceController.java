@@ -51,9 +51,9 @@ public class VibrateForCallsPreferenceController extends BasePreferenceControlle
 
     @Override
     public CharSequence getSummary() {
-        if (Settings.Global.getInt(
+        if (Settings.System.getInt(
                 mContext.getContentResolver(),
-                Settings.Global.APPLY_RAMPING_RINGER, OFF) == ON) {
+                Settings.System.APPLY_RAMPING_RINGER, OFF) == ON) {
             return mContext.getText(R.string.vibrate_when_ringing_option_ramping_ringer);
         } else if (Settings.System.getInt(
                     mContext.getContentResolver(),

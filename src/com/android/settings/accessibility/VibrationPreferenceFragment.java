@@ -116,12 +116,12 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
             // Update vibration enabled setting
             final String vibrationEnabledSetting = getVibrationEnabledSetting();
             final boolean wasEnabled = TextUtils.equals(
-                        vibrationEnabledSetting, Settings.Global.APPLY_RAMPING_RINGER)
+                        vibrationEnabledSetting, Settings.System.APPLY_RAMPING_RINGER)
                     ? true
                     : (Settings.System.getInt(
                             getContext().getContentResolver(), vibrationEnabledSetting, 1) == 1);
             if (vibrationEnabled != wasEnabled) {
-                if (vibrationEnabledSetting.equals(Settings.Global.APPLY_RAMPING_RINGER)) {
+                if (vibrationEnabledSetting.equals(Settings.System.APPLY_RAMPING_RINGER)) {
                     Settings.Global.putInt(getContext().getContentResolver(),
                             vibrationEnabledSetting, 0);
                 } else {
@@ -212,7 +212,7 @@ public abstract class VibrationPreferenceFragment extends RadioButtonPickerFragm
                 getVibrationIntensitySetting(), getDefaultVibrationIntensity());
         final String vibrationEnabledSetting = getVibrationEnabledSetting();
         final boolean vibrationEnabled = TextUtils.equals(
-                        vibrationEnabledSetting, Settings.Global.APPLY_RAMPING_RINGER)
+                        vibrationEnabledSetting, Settings.System.APPLY_RAMPING_RINGER)
                     ? true
                     : (Settings.System.getInt(
                             getContext().getContentResolver(), vibrationEnabledSetting, 1) == 1);
