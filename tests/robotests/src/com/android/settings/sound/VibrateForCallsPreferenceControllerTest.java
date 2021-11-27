@@ -94,7 +94,7 @@ public class VibrateForCallsPreferenceControllerTest {
     @Test
     public void getSummary_applyRampingRinger_rampingRingerSummary() {
         Settings.System.putInt(mContentResolver, Settings.System.VIBRATE_WHEN_RINGING, OFF);
-        Settings.Global.putInt(mContentResolver, Settings.Global.APPLY_RAMPING_RINGER, ON);
+        Settings.System.putInt(mContentResolver, Settings.System.APPLY_RAMPING_RINGER, ON);
 
         assertThat(mController.getSummary()).isEqualTo(
                 mContext.getText(R.string.vibrate_when_ringing_option_ramping_ringer));
@@ -103,7 +103,7 @@ public class VibrateForCallsPreferenceControllerTest {
     @Test
     public void getSummary_enableVibrateWhenRinging_alwaysVibrateSummary() {
         Settings.System.putInt(mContentResolver, Settings.System.VIBRATE_WHEN_RINGING, ON);
-        Settings.Global.putInt(mContentResolver, Settings.Global.APPLY_RAMPING_RINGER, OFF);
+        Settings.System.putInt(mContentResolver, Settings.System.APPLY_RAMPING_RINGER, OFF);
 
         assertThat(mController.getSummary()).isEqualTo(
                 mContext.getText(R.string.vibrate_when_ringing_option_always_vibrate));
@@ -112,7 +112,7 @@ public class VibrateForCallsPreferenceControllerTest {
     @Test
     public void getSummary_notApplyRampingRingerDisableVibrateWhenRinging_neverVibrateSummary() {
         Settings.System.putInt(mContentResolver, Settings.System.VIBRATE_WHEN_RINGING, OFF);
-        Settings.Global.putInt(mContentResolver, Settings.Global.APPLY_RAMPING_RINGER, OFF);
+        Settings.System.putInt(mContentResolver, Settings.System.APPLY_RAMPING_RINGER, OFF);
 
         assertThat(mController.getSummary()).isEqualTo(
                 mContext.getText(R.string.vibrate_when_ringing_option_never_vibrate));

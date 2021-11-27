@@ -54,6 +54,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.util.CollectionUtils;
 import com.android.settingslib.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -159,7 +160,9 @@ public class NotificationBackend {
         StringBuilder sb = new StringBuilder();
 
         try {
-            List<String> associatedMacAddrs = cdm.getAssociations(pkg, userId);
+            List<String> associatedMacAddrs = CollectionUtils.mapNotNull(
+                    cdm.getAssociations(pkg, userId),
+                    a -> a.isSelfManaged() ? null : a.getDeviceMacAddress().toString());
             if (associatedMacAddrs != null) {
                 for (String assocMac : associatedMacAddrs) {
                     final Collection<CachedBluetoothDevice> cachedDevices =
