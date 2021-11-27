@@ -50,17 +50,17 @@ public class RingVibrationPreferenceFragmentTest {
     @Config(shadows = {ShadowDeviceConfig.class})
     public void getVibrationEnabledSetting_rampingRingerEnabled_returnApplyRampingRinger() {
         // Turn on both flags to enable ramping ringer.
-        Settings.Global.putInt(
-                mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 1 /* ON */);
+        Settings.System.putInt(
+                mContext.getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, 1 /* ON */);
         assertThat(mFragment.getVibrationEnabledSetting()).isEqualTo(
-            Settings.Global.APPLY_RAMPING_RINGER);
+                Settings.System.APPLY_RAMPING_RINGER);
     }
 
     @Test
     public void getVibrationEnabledSetting_rampingRingerDisabled_returnVibrationWhenRinging() {
-        // Turn off Settings.Global.APPLY_RAMPING_RINGER to disable ramping ringer.
-        Settings.Global.putInt(
-                mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 0 /* OFF */);
+        // Turn off Settings.System.APPLY_RAMPING_RINGER to disable ramping ringer.
+        Settings.System.putInt(
+                mContext.getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, 0 /* OFF */);
         assertThat(mFragment.getVibrationEnabledSetting()).isEqualTo(
             Settings.System.VIBRATE_WHEN_RINGING);
     }
