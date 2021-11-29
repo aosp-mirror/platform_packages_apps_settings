@@ -264,12 +264,6 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         @Override
         public void onPageSelected(int position) {
             mPreviewPager.sendAccessibilityEvent(AccessibilityEvent.TYPE_ANNOUNCEMENT);
-            // To avoid displaying previous page on the left side in SUW landscape mode for
-            // large size.
-            if (position > 0) {
-                mPreviewPagerAdapter.getPreviewFrames()[position - 1].setVisibility(View.INVISIBLE);
-            }
-            mPreviewPagerAdapter.getPreviewFrames()[position].setVisibility(View.VISIBLE);
         }
     };
 
