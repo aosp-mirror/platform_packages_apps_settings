@@ -1080,6 +1080,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddGuest(Context context, boolean isGuestAlreadyCreated) {
         if (!isGuestAlreadyCreated && mUserCaps.mCanAddGuest
+                && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
             mAddGuest.setVisible(true);
@@ -1104,7 +1105,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 && mUserCaps.mUserSwitcherEnabled) {
             mAddUser.setVisible(true);
             mAddUser.setSelectable(true);
-            final boolean canAddMoreUsers = mUserManager.canAddMoreUsers();
+            final boolean canAddMoreUsers =
+                    mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_SECONDARY)
+                            || (mUserCaps.mCanAddRestrictedProfile
+                            && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_RESTRICTED));
             mAddUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
             if (!canAddMoreUsers) {
                 mAddUser.setSummary(
