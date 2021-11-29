@@ -109,10 +109,6 @@ public class PreviewPagerAdapter extends PagerAdapter {
         return (view == object);
     }
 
-    FrameLayout[] getPreviewFrames() {
-        return mPreviewFrames;
-    }
-
     boolean isAnimating() {
         return mAnimationCounter > 0;
     }
