@@ -2309,6 +2309,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
+                <action android:name="android.bluetooth.action.CSIS_SET_MEMBER_AVAILABLE"/>
             </intent-filter>
         </receiver>
 
