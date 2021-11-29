@@ -52,12 +52,12 @@ public class BluetoothDetailsMacAddressController extends BluetoothDetailsContro
     @Override
     protected void refresh() {
         if (mCachedDevice.getGroupId() != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
-            StringBuilder mTitle = new StringBuilder(mContext.getString(
+            StringBuilder title = new StringBuilder(mContext.getString(
                 R.string.bluetooth_multuple_devices_mac_address, mCachedDevice.getAddress()));
             for (CachedBluetoothDevice member: mCachedDevice.getMemberDevice()) {
-                mTitle.append("\n").append(member.getAddress());
+                title.append("\n").append(member.getAddress());
             }
-            mFooterPreference.setTitle(mTitle);
+            mFooterPreference.setTitle(title);
         } else {
             mFooterPreference.setTitle(mContext.getString(
                 R.string.bluetooth_device_mac_address, mCachedDevice.getAddress()));

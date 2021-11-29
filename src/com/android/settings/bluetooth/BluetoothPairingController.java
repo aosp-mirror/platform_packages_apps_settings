@@ -94,7 +94,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         mPasskeyFormatted = formatKey(mPasskey);
         final CachedBluetoothDevice cachedDevice =
                 mBluetoothManager.getCachedDeviceManager().findDevice(mDevice);
-        mIsCoordinatedSetMember = (cachedDevice != null)
+        mIsCoordinatedSetMember = cachedDevice != null
                 ? cachedDevice.isCoordinatedSetMemberDevice() : false;
     }
 
