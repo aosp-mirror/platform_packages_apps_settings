@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.content.Context;
 
 import androidx.preference.PreferenceFragmentCompat;
@@ -50,8 +51,17 @@ public class BluetoothDetailsMacAddressController extends BluetoothDetailsContro
 
     @Override
     protected void refresh() {
-        mFooterPreference.setTitle(mContext.getString(
+        if (mCachedDevice.getGroupId() != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
+            StringBuilder mTitle = new StringBuilder(mContext.getString(
+                R.string.bluetooth_multuple_devices_mac_address, mCachedDevice.getAddress()));
+            for (CachedBluetoothDevice member: mCachedDevice.getMemberDevice()) {
+                mTitle.append("\n").append(member.getAddress());
+            }
+            mFooterPreference.setTitle(mTitle);
+        } else {
+            mFooterPreference.setTitle(mContext.getString(
                 R.string.bluetooth_device_mac_address, mCachedDevice.getAddress()));
+        }
     }
 
     @Override
