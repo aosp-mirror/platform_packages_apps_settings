@@ -40,6 +40,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.window.embedding.SplitRule;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -338,15 +339,15 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 new ComponentName(getApplicationContext(), getClass()),
                 targetComponentName,
                 targetIntent.getAction(),
-                true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */,
+                SplitRule.FINISH_ALWAYS,
+                SplitRule.FINISH_ALWAYS,
                 true /* clearTop*/);
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
                 new ComponentName(Settings.class.getPackageName(), Settings.class.getName()),
                 targetComponentName,
                 targetIntent.getAction(),
-                true /* finishPrimaryWithSecondary */,
-                true /* finishSecondaryWithPrimary */,
+                SplitRule.FINISH_ALWAYS,
+                SplitRule.FINISH_ALWAYS,
                 true /* clearTop*/);
         startActivity(targetIntent);
     }
