@@ -58,7 +58,9 @@ public class UserCapabilities {
         DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
         // No restricted profiles for tablets with a device owner, or phones.
-        if (dpm.isDeviceManaged() || Utils.isVoiceCapable(context)) {
+        if (dpm.isDeviceManaged()
+                || Utils.isVoiceCapable(context)
+                || !userManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED)) {
             caps.mCanAddRestrictedProfile = false;
         }
         caps.updateAddUserCapabilities(context);
@@ -76,15 +78,19 @@ public class UserCapabilities {
         mDisallowAddUser = (mEnforcedAdmin != null || hasBaseUserRestriction);
         mUserSwitcherEnabled = userManager.isUserSwitcherEnabled();
         mCanAddUser = true;
-        if (!mIsAdmin || UserManager.getMaxSupportedUsers() < 2
+        if (!mIsAdmin
+                || UserManager.getMaxSupportedUsers() < 2
                 || !UserManager.supportsMultipleUsers()
-                || mDisallowAddUser) {
+                || mDisallowAddUser
+                || (!userManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_SECONDARY)
+                    && !mCanAddRestrictedProfile)) {
             mCanAddUser = false;
         }
 
         final boolean canAddUsersWhenLocked = mIsAdmin || Settings.Global.getInt(
                 context.getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
-        mCanAddGuest = !mIsGuest && !mDisallowAddUser && canAddUsersWhenLocked;
+        mCanAddGuest = !mIsGuest && !mDisallowAddUser && canAddUsersWhenLocked
+                && userManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_GUEST);
 
         mDisallowSwitchUser = userManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH);
     }

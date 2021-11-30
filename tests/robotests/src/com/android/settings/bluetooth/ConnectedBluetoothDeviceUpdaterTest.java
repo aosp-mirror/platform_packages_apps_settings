@@ -235,7 +235,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    public void onProfileConnectionStateChanged_leAudioDeviceConnected_inCall_removePreference() {
+    public void onProfileConnectionStateChanged_leAudioDeviceConnected_inCall_removesPreference() {
         mAudioManager.setMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater
                 .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
@@ -248,7 +248,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    public void onProfileConnectionStateChanged_leAudioDeviceConnected_notInCall_removePreference()
+    public void onProfileConnectionStateChanged_leAudioDeviceConnected_notInCall_removesPreference()
     {
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater

@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.doReturn;
@@ -258,7 +259,8 @@ public class UserSettingsTest {
     @Test
     public void updateUserList_canAddUserAndSwitchUser_shouldShowAddUser() {
         mUserCapabilities.mCanAddUser = true;
-        doReturn(true).when(mUserManager).canAddMoreUsers();
+        doReturn(true)
+                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_SECONDARY));
         doReturn(true).when(mAddUserPreference).isEnabled();
         doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
 
@@ -274,7 +276,8 @@ public class UserSettingsTest {
     @Test
     public void updateUserList_canAddGuestAndSwitchUser_shouldShowAddGuest() {
         mUserCapabilities.mCanAddGuest = true;
-        doReturn(true).when(mUserManager).canAddMoreUsers();
+        doReturn(true)
+                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_GUEST));
         doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
 
         mFragment.updateUserList();
@@ -288,7 +291,7 @@ public class UserSettingsTest {
     @Test
     public void updateUserList_cannotSwitchUser_shouldDisableAddUser() {
         mUserCapabilities.mCanAddUser = true;
-        doReturn(true).when(mUserManager).canAddMoreUsers();
+        doReturn(true).when(mUserManager).canAddMoreUsers(anyString());
         doReturn(true).when(mAddUserPreference).isEnabled();
         doReturn(SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED)
                 .when(mUserManager).getUserSwitchability();
@@ -304,7 +307,7 @@ public class UserSettingsTest {
     @Test
     public void updateUserList_canNotAddMoreUsers_shouldDisableAddUserWithSummary() {
         mUserCapabilities.mCanAddUser = true;
-        doReturn(false).when(mUserManager).canAddMoreUsers();
+        doReturn(false).when(mUserManager).canAddMoreUsers(anyString());
         doReturn(false).when(mAddUserPreference).isEnabled();
         doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
         doReturn(4).when(mFragment).getRealUsersCount();
@@ -320,7 +323,8 @@ public class UserSettingsTest {
     @Test
     public void updateUserList_cannotSwitchUser_shouldDisableAddGuest() {
         mUserCapabilities.mCanAddGuest = true;
-        doReturn(true).when(mUserManager).canAddMoreUsers();
+        doReturn(true)
+                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_GUEST));
         doReturn(SWITCHABILITY_STATUS_USER_IN_CALL).when(mUserManager).getUserSwitchability();
 
         mFragment.updateUserList();

@@ -77,8 +77,8 @@ public class ActivityEmbeddingRulesController {
             ComponentName primaryComponent,
             ComponentName secondaryComponent,
             String secondaryIntentAction,
-            boolean finishPrimaryWithSecondary,
-            boolean finishSecondaryWithPrimary,
+            int finishPrimaryWithSecondary,
+            int finishSecondaryWithPrimary,
             boolean clearTop) {
         if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context)) {
             return;
@@ -88,8 +88,8 @@ public class ActivityEmbeddingRulesController {
                 secondaryIntentAction));
 
         SplitController.getInstance().registerRule(new SplitPairRule(filters,
-                finishPrimaryWithSecondary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
-                finishSecondaryWithPrimary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
+                finishPrimaryWithSecondary,
+                finishSecondaryWithPrimary,
                 clearTop,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(context),
@@ -117,17 +117,8 @@ public class ActivityEmbeddingRulesController {
                 getComponentName(context, Settings.class),
                 secondaryComponent,
                 secondaryIntentAction,
-                finishPrimaryWithSecondary,
-                finishSecondaryWithPrimary,
-                clearTop);
-
-        registerTwoPanePairRule(
-                context,
-                new ComponentName(context, DeepLinkHomepageActivity.class),
-                secondaryComponent,
-                secondaryIntentAction,
-                finishPrimaryWithSecondary,
-                finishSecondaryWithPrimary,
+                finishPrimaryWithSecondary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
+                finishSecondaryWithPrimary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
                 clearTop);
 
         registerTwoPanePairRule(
@@ -135,8 +126,19 @@ public class ActivityEmbeddingRulesController {
                 getComponentName(context, SettingsHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
-                finishPrimaryWithSecondary,
-                finishSecondaryWithPrimary,
+                finishPrimaryWithSecondary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
+                finishSecondaryWithPrimary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
+                clearTop);
+
+        // We should finish HomePageActivity altogether even if it shows in single pane for all deep
+        // link cases.
+        registerTwoPanePairRule(
+                context,
+                new ComponentName(context, DeepLinkHomepageActivity.class),
+                secondaryComponent,
+                secondaryIntentAction,
+                finishPrimaryWithSecondary ? SplitRule.FINISH_ALWAYS : SplitRule.FINISH_NEVER,
+                finishSecondaryWithPrimary ? SplitRule.FINISH_ALWAYS : SplitRule.FINISH_NEVER,
                 clearTop);
 
         registerTwoPanePairRule(
@@ -144,8 +146,8 @@ public class ActivityEmbeddingRulesController {
                 getComponentName(context, SliceDeepLinkHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
-                finishPrimaryWithSecondary,
-                finishSecondaryWithPrimary,
+                finishPrimaryWithSecondary ? SplitRule.FINISH_ALWAYS : SplitRule.FINISH_NEVER,
+                finishSecondaryWithPrimary ? SplitRule.FINISH_ALWAYS : SplitRule.FINISH_NEVER,
                 clearTop);
     }
 
