@@ -152,6 +152,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
             mForgotButton.setOnClickListener(v -> {
                 final Intent intent = new Intent();
                 intent.setClassName(SETTINGS_PACKAGE_NAME, ForgotPasswordActivity.class.getName());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 getActivity().startActivity(intent);
                 getActivity().finish();
