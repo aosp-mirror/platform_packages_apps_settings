@@ -39,6 +39,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.net.wifi.WifiManager;
 import android.os.Looper;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -102,6 +103,8 @@ public class SubscriptionsPreferenceControllerTest {
     private LifecycleOwner mLifecycleOwner;
     @Mock
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
+    @Mock
+    private WifiManager mWifiManager;
 
     private LifecycleRegistry mLifecycleRegistry;
     private int mOnChildUpdatedCount;
@@ -132,6 +135,7 @@ public class SubscriptionsPreferenceControllerTest {
         when(mConnectivityManager.getNetworkCapabilities(mActiveNetwork))
                 .thenReturn(mNetworkCapabilities);
         when(mUserManager.isAdminUser()).thenReturn(true);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         when(mLifecycleOwner.getLifecycle()).thenReturn(mLifecycleRegistry);
 
         mPreferenceManager = new PreferenceManager(mContext);
@@ -171,14 +175,53 @@ public class SubscriptionsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_airplaneModeOn_availableFalse() {
+    public void isAvailable_airplaneModeOnWifiOff_availableFalse() {
         setupMockSubscriptions(2);
 
         assertThat(mController.isAvailable()).isTrue();
+        when(mWifiManager.isWifiEnabled()).thenReturn(false);
 
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_airplaneModeOnWifiOnWithNoCarrierNetwork_availableFalse() {
+        setupMockSubscriptions(2);
+
+        assertThat(mController.isAvailable()).isTrue();
+        when(mWifiManager.isWifiEnabled()).thenReturn(true);
+        doReturn(false).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
+
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_airplaneModeOnWifiOffWithCarrierNetwork_availableTrue() {
+        setupMockSubscriptions(1);
+
+        when(mWifiManager.isWifiEnabled()).thenReturn(false);
+        doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
+
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_airplaneModeOff_availableFalse() {
+        setupMockSubscriptions(2);
+
+        assertThat(mController.isAvailable()).isTrue();
+        when(mWifiManager.isWifiEnabled()).thenReturn(true);
+        doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
+
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
+
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test

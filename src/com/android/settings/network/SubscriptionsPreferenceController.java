@@ -94,6 +94,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     private SignalStrengthListener mSignalStrengthListener;
     private TelephonyDisplayInfoListener mTelephonyDisplayInfoListener;
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
+    private final WifiManager mWifiManager;
 
     @VisibleForTesting
     final BroadcastReceiver mConnectionChangeReceiver = new BroadcastReceiver() {
@@ -150,6 +151,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mStartOrder = startOrder;
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
+        mWifiManager = context.getSystemService(WifiManager.class);
         mSubscriptionPreferences = new ArrayMap<>();
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
         mDataEnabledListener = new MobileDataEnabledListener(context, this);
@@ -271,9 +273,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         final boolean isDataInService = (regInfo == null)
                 ? false
                 : regInfo.isRegistered();
-        final boolean isCarrierNetworkActive =
-                (mWifiPickerTrackerHelper != null)
-                        && mWifiPickerTrackerHelper.isCarrierNetworkActive();
+        final boolean isCarrierNetworkActive = isCarrierNetworkActive();
         String result = mSubsPrefCtrlInjector.getNetworkType(
                 mContext, mConfig, mTelephonyDisplayInfo, subId, isCarrierNetworkActive);
         if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isCarrierNetworkActive) {
@@ -291,20 +291,15 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         final SignalStrength strength = tmForSubId.getSignalStrength();
         int level = (strength == null) ? 0 : strength.getLevel();
         int numLevels = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
-        if (shouldInflateSignalStrength(subId)) {
-            level += 1;
+        boolean isCarrierNetworkActive = isCarrierNetworkActive();
+        if (shouldInflateSignalStrength(subId) || isCarrierNetworkActive) {
+            level = isCarrierNetworkActive
+                    ? SignalStrength.NUM_SIGNAL_STRENGTH_BINS
+                    : (level + 1);
             numLevels += 1;
         }
 
-        Drawable icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels,
-                !mTelephonyManager.isDataEnabled());
-        final boolean isActiveCellularNetwork =
-                mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext);
-        if (isActiveCellularNetwork || (mWifiPickerTrackerHelper != null)
-                        && mWifiPickerTrackerHelper.isCarrierNetworkActive()) {
-            icon.setTint(Utils.getColorAccentDefaultColor(mContext));
-            return icon;
-        }
+        Drawable icon = mContext.getDrawable(R.drawable.ic_signal_strength_zero_bar_no_internet);
 
         final ServiceState serviceState = tmForSubId.getServiceState();
         final NetworkRegistrationInfo regInfo = (serviceState == null)
@@ -319,11 +314,17 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         final boolean isVoiceInService = (serviceState == null)
                 ? false
                 : (serviceState.getState() == ServiceState.STATE_IN_SERVICE);
-        if (isDataInService || isVoiceInService) {
-            return icon;
+        if (isDataInService || isVoiceInService || isCarrierNetworkActive) {
+            icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels,
+                    !mTelephonyManager.isDataEnabled());
         }
 
-        icon = mContext.getDrawable(R.drawable.ic_signal_strength_zero_bar_no_internet);
+        final boolean isActiveCellularNetwork =
+                mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext);
+        if (isActiveCellularNetwork || isCarrierNetworkActive) {
+            icon.setTint(Utils.getColorAccentDefaultColor(mContext));
+        }
+
         return icon;
     }
 
@@ -417,7 +418,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
      */
     @Override
     public boolean isAvailable() {
-        if (mSubscriptionsListener.isAirplaneModeOn()) {
+        if (mSubscriptionsListener.isAirplaneModeOn()
+                && (!mWifiManager.isWifiEnabled() || !isCarrierNetworkActive())) {
             return false;
         }
         List<SubscriptionInfo> subInfoList =
@@ -425,6 +427,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         if (subInfoList == null) {
             return false;
         }
+
         return subInfoList.stream()
                 // Avoid from showing subscription(SIM)s which has been marked as hidden
                 // For example, only one subscription will be shown when there're multiple
@@ -493,6 +496,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
 
     SubsPrefCtrlInjector createSubsPrefCtrlInjector() {
         return new SubsPrefCtrlInjector();
+    }
+
+    boolean isCarrierNetworkActive() {
+        return mWifiPickerTrackerHelper != null
+                && mWifiPickerTrackerHelper.isCarrierNetworkActive();
     }
 
     /**
