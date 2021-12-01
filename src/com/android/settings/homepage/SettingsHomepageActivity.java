@@ -32,6 +32,8 @@ import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toolbar;
@@ -53,6 +55,7 @@ import com.android.settings.core.CategoryMixin;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 import java.net.URISyntaxException;
@@ -151,6 +154,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         appBar.setMinimumHeight(getSearchBoxHeight());
         initHomepageContainer();
         updateHomepageAppBar();
+        updateHomepageBackground();
         mLoadedListeners = new ArraySet<>();
 
         initSearchBarView();
@@ -207,6 +211,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (mIsTwoPaneLastTime != isTwoPane) {
             mIsTwoPaneLastTime = isTwoPane;
             updateHomepageAppBar();
+            updateHomepageBackground();
         }
     }
 
@@ -235,6 +240,23 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 getLifecycle().addObserver(new AvatarViewMixin(this, avatarTwoPaneView));
             }
         }
+    }
+
+    private void updateHomepageBackground() {
+        if (!mIsEmbeddingActivityEnabled) {
+            return;
+        }
+
+        final Window window = getWindow();
+        final int color = ActivityEmbeddingUtils.isTwoPaneResolution(this)
+                ? Utils.getColorAttrDefaultColor(this, com.android.internal.R.attr.colorSurface)
+                : Utils.getColorAttrDefaultColor(this, android.R.attr.colorBackground);
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        // Update status bar color
+        window.setStatusBarColor(color);
+        // Update content background.
+        findViewById(R.id.settings_homepage_container).setBackgroundColor(color);
     }
 
     private void showSuggestionFragment() {
