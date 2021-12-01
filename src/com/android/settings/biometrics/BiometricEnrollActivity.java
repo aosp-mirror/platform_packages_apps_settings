@@ -32,6 +32,7 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricManager.Authenticators;
 import android.hardware.biometrics.BiometricManager.BiometricError;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.fingerprint.FingerprintManager;
@@ -175,8 +176,22 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         mHasFeatureFingerprint = pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
         mHasFeatureFace = pm.hasSystemFeature(PackageManager.FEATURE_FACE);
 
+        // Default behavior is to enroll BIOMETRIC_WEAK or above. See ACTION_BIOMETRIC_ENROLL.
+        final int authenticators = getIntent().getIntExtra(
+                EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, Authenticators.BIOMETRIC_WEAK);
+        Log.d(TAG, "Authenticators: " + authenticators);
+
+        mParentalOptionsRequired = intent.getBooleanExtra(EXTRA_REQUIRE_PARENTAL_CONSENT, false);
+        mSkipReturnToParent = intent.getBooleanExtra(EXTRA_SKIP_RETURN_TO_PARENT, false);
+
         // determine what can be enrolled
         final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        final boolean isMultiSensor = mHasFeatureFace && mHasFeatureFingerprint;
+
+        Log.d(TAG, "parentalOptionsRequired: " + mParentalOptionsRequired
+                + ", skipReturnToParent: " + mSkipReturnToParent
+                + ", isSetupWizard: " + isSetupWizard
+                + ", isMultiSensor: " + isMultiSensor);
 
         if (mHasFeatureFace) {
             final FaceManager faceManager = getSystemService(FaceManager.class);
@@ -185,11 +200,23 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             final int maxFacesEnrollableIfSUW = getApplicationContext().getResources()
                     .getInteger(R.integer.suw_max_faces_enrollable);
             if (!faceProperties.isEmpty()) {
+                final FaceSensorPropertiesInternal props = faceProperties.get(0);
                 final int maxEnrolls =
-                        isSetupWizard ? maxFacesEnrollableIfSUW
-                                : faceProperties.get(0).maxEnrollmentsPerUser;
+                        isSetupWizard ? maxFacesEnrollableIfSUW : props.maxEnrollmentsPerUser;
                 mIsFaceEnrollable =
                         faceManager.getEnrolledFaces(mUserId).size() < maxEnrolls;
+
+                // exclude face enrollment from setup wizard if configured as a convenience
+                // isSetupWizard is always false for unicorn enrollment, so if consent is
+                // required check if setup has completed instead.
+                final boolean isSettingUp = isSetupWizard || (mParentalOptionsRequired
+                        && !WizardManagerHelper.isUserSetupComplete(this));
+                if (isSettingUp && isMultiSensor && mIsFaceEnrollable) {
+                    if (props.sensorStrength == SensorProperties.STRENGTH_CONVENIENCE) {
+                        Log.i(TAG, "Excluding face from SuW enrollment (STRENGTH_CONVENIENCE)");
+                        mIsFaceEnrollable = false;
+                    }
+                }
             }
         }
         if (mHasFeatureFingerprint) {
@@ -206,13 +233,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                         fpManager.getEnrolledFingerprints(mUserId).size() < maxEnrolls;
             }
         }
-
-        mParentalOptionsRequired = intent.getBooleanExtra(EXTRA_REQUIRE_PARENTAL_CONSENT, false);
-        mSkipReturnToParent = intent.getBooleanExtra(EXTRA_SKIP_RETURN_TO_PARENT, false);
-
-        Log.d(TAG, "parentalOptionsRequired: " + mParentalOptionsRequired
-                + ", skipReturnToParent: " + mSkipReturnToParent
-                + ", isSetupWizard: " + isSetupWizard);
 
         // TODO(b/195128094): remove this restriction
         // Consent can only be recorded when this activity is launched directly from the kids
@@ -247,17 +267,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             setOrConfirmCredentialsNow();
         } else {
             // Start enrollment process if we haven't bailed out yet
-            startEnroll();
+            startEnrollWith(authenticators, isSetupWizard);
         }
-    }
-
-    private void startEnroll() {
-        // Default behavior is to enroll BIOMETRIC_WEAK or above. See ACTION_BIOMETRIC_ENROLL.
-        final int authenticators = getIntent().getIntExtra(
-                EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, Authenticators.BIOMETRIC_WEAK);
-        Log.d(TAG, "Authenticators: " + authenticators);
-
-        startEnrollWith(authenticators, WizardManagerHelper.isAnySetupWizard(getIntent()));
     }
 
     private void startEnrollWith(@Authenticators.Types int authenticators, boolean setupWizard) {
@@ -339,7 +350,9 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
             final boolean fpConsentRequired = ParentalControlsUtils
                     .parentConsentRequired(this, BiometricAuthenticator.TYPE_FINGERPRINT) != null;
 
-            final boolean requestFaceConsent = faceConsentRequired && mHasFeatureFace;
+            final boolean requestFaceConsent = faceConsentRequired
+                    && mHasFeatureFace
+                    && mIsFaceEnrollable;
             final boolean requestFpConsent = fpConsentRequired && mHasFeatureFingerprint;
 
             Log.d(TAG, "faceConsentRequired: " + faceConsentRequired
