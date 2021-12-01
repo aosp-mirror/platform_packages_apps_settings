@@ -108,6 +108,10 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED
                         || errorCode == BiometricPrompt.BIOMETRIC_ERROR_CANCELED) {
                     finish();
+                } else if (mUserManager.getUserInfo(mUserId) == null) {
+                    // This can happen when profile gets wiped due to too many failed auth attempts.
+                    Log.i(TAG, "Finishing, user no longer valid: " + mUserId);
+                    finish();
                 } else {
                     // All other errors go to some version of CC
                     showConfirmCredentials();
