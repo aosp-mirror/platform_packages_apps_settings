@@ -16,6 +16,8 @@
 
 package com.android.settings.dashboard.profileselector;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -42,5 +44,13 @@ public class ProfileSelectManageApplications extends ProfileSelectFragment {
                 personalFragment, //0
                 workFragment
         };
+    }
+
+    @Override
+    public int getTitleResId() {
+        final Activity activity = getActivity();
+        final Intent intent = activity.getIntent();
+        final Bundle args = getArguments();
+        return ManageApplications.getTitleResId(intent, args);
     }
 }
