@@ -5545,11 +5545,17 @@
     <!-- Description for the seekbar that adjust auto click time. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_autoclick_seekbar_desc">Auto click time</string>
     <!-- Title for accessibility preference screen for configuring vibrations. -->
-    <string name="accessibility_vibration_settings_title">Vibration &amp; haptic strength</string>
-    <!-- Title for accessibility preference for configuring notification vibrations. -->
-    <string name="accessibility_notification_vibration_title">Notification vibration</string>
+    <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
+    <!-- Title for the category of preferences to configure device vibrations related to calls. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_call_vibration_category_title">Calls</string>
+    <!-- Title for the category of preferences to configure device vibrations related to notifications and alarms. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_notification_alarm_vibration_category_title">Notifications and alarms</string>
+    <!-- Title for the category of preferences to configure device vibrations triggered by user interaction with the device. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_interactive_haptics_category_title">Interactive haptics</string>
     <!-- Title for accessibility preference for configuring ring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_ring_vibration_title">Ring vibration</string>
+    <!-- Title for accessibility preference for configuring notification vibrations. -->
+    <string name="accessibility_notification_vibration_title">Notification vibration</string>
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch feedback</string>
     <!-- Used in the accessibility service settings to control turning on/off the service entirely [CHAR LIMIT=60] -->
@@ -8255,8 +8261,6 @@
     <string name="keywords_wifi_notify_open_networks">Wi\u2011Fi notification, wifi notification</string>
     <!-- Search keyword for "Wi-fi data usage" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_wifi_data_usage">data usage</string>
-    <!-- Search keyword for "Vibrate on touch" settings. [CHAR_LIMIT=NONE]-->
-    <string name="keywords_vibrate_on_touch">Stop vibration, tap, keyboard</string>
     <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_time_format">Use 24-hour format</string>
     <!-- Search keyword for "Files" settings under Settings > Storage. [CHAR_LIMIT=NONE]-->
@@ -8392,11 +8396,12 @@
 
     <!-- List of synonyms for touch vibration setting (where you get a haptic response for touching things on the screen), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_touch_vibration">haptics, vibrate, screen, sensitivity</string>
-
     <!-- List of synonyms for ring vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_ring_vibration">haptics, vibrate, phone, call, sensitivity, ring</string>
     <!-- List of synonyms for notification vibration setting (changes whether your phone vibrates when it shows a notification), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_notification_vibration">haptics, vibrate, sensitivity</string>
+    <!-- List of synonyms for vibration and haptics setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_vibration">haptics, vibrate, vibration</string>
     <!-- Battery Saver: Search terms for sticky battery saver preference [CHAR_LIMIT=NONE] -->
     <string name="keywords_battery_saver_sticky">battery saver, sticky, persist, power saver, battery</string>
     <!-- Battery Saver: Search terms for battery saver schedule preference. Feel free to add additional terms when translating if appropriate [CHAR_LIMIT=NONE] -->
@@ -8507,12 +8512,6 @@
 
     <!-- Sound: Other sounds: Title for the option enabling touch sounds. [CHAR LIMIT=30] -->
     <string name="touch_sounds_title">Touch sounds</string>
-
-    <!-- Sound: Other sounds: Title for the option enabling haptic feedback on touch. [CHAR LIMIT=30] -->
-    <string name="vibrate_on_touch_title">Touch vibration</string>
-
-    <!-- Sound: Other sounds: Preference summary to the option enabling haptic feedback on touch. -->
-    <string name="vibrate_on_touch_summary">Haptic feedback for tap, keyboard, and more</string>
 
     <!-- Sound: Other sounds: Title for the option enabling dock audio media. [CHAR LIMIT=50] -->
     <string name="dock_audio_media_title">Dock speaker plays</string>
