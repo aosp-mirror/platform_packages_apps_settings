@@ -60,4 +60,9 @@ public class ProfileSelectLocationFragment extends ProfileSelectFragment {
                 workFragment
         };
     }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.location_settings_header;
+    }
 }
