@@ -52,7 +52,7 @@
             settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
 
         <!-- Phone number -->
-        <Preference
+        <com.android.settings.deviceinfo.PhoneNumberSummaryPreference
             android:key="phone_number"
             android:order="3"
             android:title="@string/status_number"
@@ -113,7 +113,7 @@
             settings:controller="com.android.settings.deviceinfo.HardwareInfoPreferenceController"/>
 
         <!-- IMEI -->
-        <Preference
+        <com.android.settings.deviceinfo.PhoneNumberSummaryPreference
             android:key="imei_info"
             android:order="32"
             android:title="@string/status_imei"
