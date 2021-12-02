@@ -1832,6 +1832,9 @@
     <!-- Message for confirmation of passkey to complete pairing. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_confirm_passkey_msg">To pair with:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b>&lt;br>&lt;br>Make sure it is showing this passkey:&lt;br>&lt;b><xliff:g id="passkey">%2$s</xliff:g>&lt;/b></string>
 
+    <!-- Pairing dialog text to remind user the pairing including all of the devices in a coordinated set. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_paring_group_msg">Confirm to pair with the coordinated set</string>
+
     <!-- Message when bluetooth incoming pairing request for (2.1 devices) dialog is showing -->
     <string name="bluetooth_incoming_pairing_msg">From:&lt;br>&lt;b><xliff:g id="device_name">%1$s</xliff:g>&lt;/b>&lt;br>&lt;br>Pair with this device?</string>
 
@@ -1909,6 +1912,8 @@
     <string name="device_details_title">Device details</string>
     <!-- Title of the item to show device MAC address -->
     <string name="bluetooth_device_mac_address">Device\'s Bluetooth address: <xliff:g id="address">%1$s</xliff:g></string>
+    <!-- Title of the items to show multuple devices MAC address [CHAR LIMIT=NONE]-->
+    <string name="bluetooth_multuple_devices_mac_address">Device\'s Bluetooth address:\n<xliff:g id="address">%1$s</xliff:g></string>
     <!-- Bluetooth device details. The title of a confirmation dialog for unpairing a paired device. [CHAR LIMIT=60] -->
     <string name="bluetooth_unpair_dialog_title">Forget device?</string>
     <!-- Content Description for companion device app associations removal button [CHAR LIMIT=28]-->
