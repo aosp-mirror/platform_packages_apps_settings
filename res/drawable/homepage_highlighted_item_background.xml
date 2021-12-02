@@ -15,12 +15,11 @@
   limitations under the License.
   -->
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
        android:insetLeft="@dimen/homepage_menu_entry_padding_horizontal"
        android:insetRight="@dimen/homepage_menu_entry_padding_horizontal">
     <shape android:shape="rectangle">
         <solid
-            android:color="?androidprv:attr/colorAccentSecondaryVariant" />
+            android:color="?android:attr/textColorPrimary" />
         <corners
             android:radius="@dimen/homepage_menu_entry_corner_radius" />
     </shape>
