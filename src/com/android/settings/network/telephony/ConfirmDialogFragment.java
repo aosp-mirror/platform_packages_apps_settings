@@ -38,11 +38,15 @@ public class ConfirmDialogFragment extends BaseDialogFragment
      */
     public interface OnConfirmListener {
         /**
-         * @param tag The tag in the caller.
-         * @param confirmed True if the user has clicked the positive button. False if the user has
-         *     clicked the negative button or cancel the dialog.
+         * @param tag          The tag in the caller.
+         * @param confirmed    True if the user has clicked the positive button. False if the
+         *                     user has
+         *                     clicked the negative button or cancel the dialog.
+         * @param itemPosition It is the position of item, if user selects one of the list item.
+         *                     If the user select "cancel" or the dialog does not have list, then
+         *                     the value is -1.
          */
-        void onConfirm(int tag, boolean confirmed);
+        void onConfirm(int tag, boolean confirmed, int itemPosition);
     }
 
     /** Displays a confirmation dialog which has confirm and cancel buttons. */
@@ -89,19 +93,21 @@ public class ConfirmDialogFragment extends BaseDialogFragment
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        informCaller(which == DialogInterface.BUTTON_POSITIVE);
+        Log.i(TAG, "dialog onClick =" + which);
+
+        informCaller(which == DialogInterface.BUTTON_POSITIVE, -1);
     }
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        informCaller(false);
+        informCaller(false, -1);
     }
 
-    private void informCaller(boolean confirmed) {
+    private void informCaller(boolean confirmed, int itemPosition) {
         OnConfirmListener listener = getListener(OnConfirmListener.class);
         if (listener == null) {
             return;
         }
-        listener.onConfirm(getTagInCaller(), confirmed);
+        listener.onConfirm(getTagInCaller(), confirmed, itemPosition);
     }
 }
