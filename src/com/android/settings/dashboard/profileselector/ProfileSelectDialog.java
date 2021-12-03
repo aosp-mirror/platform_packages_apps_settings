@@ -21,6 +21,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnDismissListener;
+import android.content.DialogInterface.OnShowListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -45,23 +47,30 @@ public class ProfileSelectDialog extends DialogFragment implements OnClickListen
 
     private int mSourceMetricCategory;
     private Tile mSelectedTile;
+    private OnShowListener mOnShowListener;
     private OnCancelListener mOnCancelListener;
+    private OnDismissListener mOnDismissListener;
 
     /**
      * Display the profile select dialog, adding the fragment to the given FragmentManager.
      * @param manager The FragmentManager this fragment will be added to.
      * @param tile The tile for this fragment.
      * @param sourceMetricCategory The source metric category.
-     * @param listener The listener listens to the dialog cancelling event.
+     * @param onShowListener The listener listens to the dialog showing event.
+     * @param onDismissListener The listener listens to the dialog dismissing event.
+     * @param onCancelListener The listener listens to the dialog cancelling event.
      */
     public static void show(FragmentManager manager, Tile tile, int sourceMetricCategory,
-            OnCancelListener listener) {
+            OnShowListener onShowListener, OnDismissListener onDismissListener,
+            OnCancelListener onCancelListener) {
         final ProfileSelectDialog dialog = new ProfileSelectDialog();
         final Bundle args = new Bundle();
         args.putParcelable(ARG_SELECTED_TILE, tile);
         args.putInt(ARG_SOURCE_METRIC_CATEGORY, sourceMetricCategory);
         dialog.setArguments(args);
-        dialog.mOnCancelListener = listener;
+        dialog.mOnShowListener = onShowListener;
+        dialog.mOnDismissListener = onDismissListener;
+        dialog.mOnCancelListener = onCancelListener;
         dialog.show(manager, "select_profile");
     }
 
@@ -97,9 +106,27 @@ public class ProfileSelectDialog extends DialogFragment implements OnClickListen
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // The fragment shows the dialog within onStart()
+        if (mOnShowListener != null) {
+            mOnShowListener.onShow(getDialog());
+        }
+    }
+
+    @Override
     public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
         if (mOnCancelListener != null) {
             mOnCancelListener.onCancel(dialog);
+        }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (mOnDismissListener != null) {
+            mOnDismissListener.onDismiss(dialog);
         }
     }
 
