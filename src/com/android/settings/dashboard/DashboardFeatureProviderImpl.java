@@ -36,7 +36,6 @@ import static com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_TITL
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.IContentProvider;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -63,6 +62,7 @@ import com.android.settings.Utils;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
+import com.android.settings.homepage.TopLevelHighlightMixin;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.PrimarySwitchPreference;
@@ -170,27 +170,23 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 if (action != null) {
                     intent.setAction(action);
                 }
+                // Register the rule for injected apps.
+                ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+                        mContext,
+                        new ComponentName(tile.getPackageName(), tile.getComponentName()),
+                        action,
+                        true /* clearTop */);
                 pref.setOnPreferenceClickListener(preference -> {
-                    OnCancelListener listener = null;
+                    TopLevelHighlightMixin highlightMixin = null;
                     if (fragment instanceof TopLevelSettings
                             && ActivityEmbeddingUtils.isEmbeddingActivityEnabled(mContext)) {
-                        // Register the rule for injected apps.
-                        ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
-                                mContext,
-                                new ComponentName(tile.getPackageName(), tile.getComponentName()),
-                                null /* secondaryIntentAction */,
-                                true /* clearTop */);
-
-                        // Highlight preference ui.
+                        // Highlight the preference whenever it's clicked
                         final TopLevelSettings topLevelSettings = (TopLevelSettings) fragment;
-                        // Highlight the tile immediately whenever it's clicked
                         topLevelSettings.setHighlightPreferenceKey(key);
-                        // If the tile allows users to select profile, the pop-op dialog may be
-                        // cancelled and then the previous highlight entry should be restored.
-                        listener = dialog -> topLevelSettings.restorePreviousHighlight();
+                        highlightMixin = topLevelSettings.getHighlightMixin();
                     }
                     launchIntentOrSelectProfile(activity, tile, intent, sourceMetricsCategory,
-                            listener);
+                            highlightMixin);
                     return true;
                 });
             }
@@ -223,7 +219,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                         SettingsEnums.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         launchIntentOrSelectProfile(activity, tile, intent, SettingsEnums.DASHBOARD_SUMMARY,
-                /* listener= */ null);
+                /* highlightMixin= */ null);
     }
 
     private DynamicDataObserver createDynamicDataObserver(String method, Uri uri, Preference pref) {
@@ -438,7 +434,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,
-            int sourceMetricCategory, OnCancelListener listener) {
+            int sourceMetricCategory, TopLevelHighlightMixin highlightMixin) {
         if (!isIntentResolvable(intent)) {
             Log.w(TAG, "Cannot resolve intent, skipping. " + intent);
             return;
@@ -469,7 +465,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             }
 
             ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
-                    sourceMetricCategory, listener);
+                    sourceMetricCategory, /* onShowListener= */ highlightMixin,
+                    /* onDismissListener= */ highlightMixin,
+                    /* onCancelListener= */ highlightMixin);
         }
     }
 

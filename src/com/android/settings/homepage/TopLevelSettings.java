@@ -25,7 +25,6 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -34,7 +33,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
@@ -42,7 +40,6 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.support.SupportPreferenceController;
-import com.android.settings.widget.HighlightableTopLevelPreferenceAdapter;
 import com.android.settings.widget.HomepagePreference;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.drawer.Tile;
@@ -53,13 +50,10 @@ public class TopLevelSettings extends DashboardFragment implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     private static final String TAG = "TopLevelSettings";
-    private static final String SAVED_HIGHLIGHTED_PREF = "highlighted_pref";
-    private static final String SAVED_CACHED_PREF = "cached_pref";
+    private static final String SAVED_HIGHLIGHT_MIXIN = "highlight_mixin";
+    private static final String PREF_KEY_SUPPORT = "top_level_support";
 
-    private HighlightableTopLevelPreferenceAdapter mTopLevelAdapter;
-
-    private String mHighlightedPreferenceKey;
-    private String mCachedPreferenceKey;
+    private TopLevelHighlightMixin mHighlightMixin;
 
     public TopLevelSettings() {
         final Bundle args = new Bundle();
@@ -127,17 +121,35 @@ public class TopLevelSettings extends DashboardFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        if (icicle != null) {
-            mHighlightedPreferenceKey = icicle.getString(SAVED_HIGHLIGHTED_PREF);
-            mCachedPreferenceKey = icicle.getString(SAVED_CACHED_PREF);
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext())) {
+            return;
         }
+
+        if (icicle != null) {
+            mHighlightMixin = icicle.getParcelable(SAVED_HIGHLIGHT_MIXIN);
+        }
+        if (mHighlightMixin == null) {
+            mHighlightMixin = new TopLevelHighlightMixin();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        // Set default highlight menu key for 1-pane homepage since it will show the placeholder
+        // page once changing back to 2-pane.
+        if (!ActivityEmbeddingUtils.isTwoPaneResolution(getActivity())) {
+            setHighlightMenuKey(getString(SettingsHomepageActivity.DEFAULT_HIGHLIGHT_MENU_KEY),
+                    /* scrollNeeded= */ false);
+        }
+        super.onStart();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(SAVED_HIGHLIGHTED_PREF, mHighlightedPreferenceKey);
-        outState.putString(SAVED_CACHED_PREF, mCachedPreferenceKey);
+        if (mHighlightMixin != null) {
+            outState.putParcelable(SAVED_HIGHLIGHT_MIXIN, mHighlightMixin);
+        }
     }
 
     @Override
@@ -170,58 +182,35 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     public void highlightPreferenceIfNeeded() {
-        if (mTopLevelAdapter != null) {
-            mTopLevelAdapter.requestHighlight();
+        if (mHighlightMixin != null) {
+            mHighlightMixin.highlightPreferenceIfNeeded(getActivity());
         }
+    }
+
+    /** Returns a {@link TopLevelHighlightMixin} that performs highlighting */
+    public TopLevelHighlightMixin getHighlightMixin() {
+        return mHighlightMixin;
     }
 
     /** Highlight a preference with specified preference key */
     public void setHighlightPreferenceKey(String prefKey) {
-        if (mTopLevelAdapter != null) {
-            mCachedPreferenceKey = null;
-            mHighlightedPreferenceKey = prefKey;
-            mTopLevelAdapter.highlightPreference(prefKey, /* scrollNeeded= */ false);
+        // Skip Tips & support since it's full screen
+        if (mHighlightMixin != null && !TextUtils.equals(prefKey, PREF_KEY_SUPPORT)) {
+            mHighlightMixin.setHighlightPreferenceKey(prefKey);
         }
     }
 
-    /** Highlight the previous preference */
-    public void restorePreviousHighlight() {
-        if (mTopLevelAdapter != null) {
-            mTopLevelAdapter.restorePreviousHighlight();
-        }
-    }
-
-    /** Show/hide the highlight on the menu entry */
+    /** Show/hide the highlight on the menu entry for the search page presence */
     public void setMenuHighlightShowed(boolean show) {
-        if (mTopLevelAdapter == null) {
-            return;
+        if (mHighlightMixin != null) {
+            mHighlightMixin.setMenuHighlightShowed(show);
         }
-
-        if (show) {
-            mHighlightedPreferenceKey = mCachedPreferenceKey;
-            mCachedPreferenceKey = null;
-        } else {
-            if (mCachedPreferenceKey == null) {
-                mCachedPreferenceKey = mHighlightedPreferenceKey;
-            }
-            mHighlightedPreferenceKey = null;
-        }
-        mTopLevelAdapter.highlightPreference(mHighlightedPreferenceKey, /* scrollNeeded= */ show);
     }
 
     /** Highlight and scroll to a preference with specified menu key */
-    public void setHighlightMenuKey(String menuKey) {
-        if (mTopLevelAdapter == null) {
-            return;
-        }
-
-        final String prefKey = HighlightableMenu.lookupPreferenceKey(menuKey);
-        if (TextUtils.isEmpty(prefKey)) {
-            Log.e(TAG, "Invalid highlight menu key: " + menuKey);
-        } else {
-            Log.d(TAG, "Menu key: " + menuKey);
-            mHighlightedPreferenceKey = prefKey;
-            mTopLevelAdapter.highlightPreference(prefKey, /* scrollNeeded= */ true);
+    public void setHighlightMenuKey(String menuKey, boolean scrollNeeded) {
+        if (mHighlightMixin != null) {
+            mHighlightMixin.setHighlightMenuKey(menuKey, scrollNeeded);
         }
     }
 
@@ -237,16 +226,7 @@ public class TopLevelSettings extends DashboardFragment implements
                 || !(getActivity() instanceof SettingsHomepageActivity)) {
             return super.onCreateAdapter(preferenceScreen);
         }
-
-        if (TextUtils.isEmpty(mHighlightedPreferenceKey)) {
-            mHighlightedPreferenceKey = getHighlightPrefKeyFromArguments();
-        }
-
-        Log.d(TAG, "onCreateAdapter, pref key: " + mHighlightedPreferenceKey);
-        mTopLevelAdapter = new HighlightableTopLevelPreferenceAdapter(
-                (SettingsHomepageActivity) getActivity(), preferenceScreen, getListView(),
-                mHighlightedPreferenceKey);
-        return mTopLevelAdapter;
+        return mHighlightMixin.onCreateAdapter(this, preferenceScreen);
     }
 
     @Override
@@ -255,25 +235,9 @@ public class TopLevelSettings extends DashboardFragment implements
     }
 
     void reloadHighlightMenuKey() {
-        if (mTopLevelAdapter == null) {
-            return;
+        if (mHighlightMixin != null) {
+            mHighlightMixin.reloadHighlightMenuKey(getArguments());
         }
-
-        mHighlightedPreferenceKey = getHighlightPrefKeyFromArguments();
-        Log.d(TAG, "reloadHighlightMenuKey, pref key: " + mHighlightedPreferenceKey);
-        mTopLevelAdapter.highlightPreference(mHighlightedPreferenceKey, /* scrollNeeded= */ true);
-    }
-
-    private String getHighlightPrefKeyFromArguments() {
-        final Bundle arguments = getArguments();
-        final String menuKey = arguments.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY);
-        final String prefKey = HighlightableMenu.lookupPreferenceKey(menuKey);
-        if (TextUtils.isEmpty(prefKey)) {
-            Log.e(TAG, "Invalid highlight menu key: " + menuKey);
-        } else {
-            Log.d(TAG, "Menu key: " + menuKey);
-        }
-        return prefKey;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
