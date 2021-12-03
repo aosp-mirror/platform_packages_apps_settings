@@ -150,6 +150,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
 
     private void initLaunchPreference() {
         final Preference launchPreference = new Preference(getPrefContext());
+        launchPreference.setLayoutResource(R.layout.accessibility_launch_activity_preference);
         launchPreference.setKey(KEY_LAUNCH_PREFERENCE);
 
         final AccessibilityShortcutInfo info = getAccessibilityShortcutInfo();
