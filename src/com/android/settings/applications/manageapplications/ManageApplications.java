@@ -272,8 +272,8 @@ public class ManageApplications extends InstrumentedFragment
 
         Intent intent = activity.getIntent();
         Bundle args = getArguments();
-        int screenTitle = intent.getIntExtra(
-                SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.all_apps);
+        final int screenTitle = getTitleResId(intent, args);
+
         String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
         if (className == null) {
             className = intent.getComponent().getClassName();
@@ -290,49 +290,36 @@ public class ManageApplications extends InstrumentedFragment
             mSortOrder = R.id.sort_order_size;
         } else if (className.equals(UsageAccessSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_USAGE_ACCESS;
-            screenTitle = R.string.usage_access;
         } else if (className.equals(HighPowerApplicationsActivity.class.getName())) {
             mListType = LIST_TYPE_HIGH_POWER;
             // Default to showing system.
             mShowSystem = true;
-            screenTitle = R.string.high_power_apps;
         } else if (className.equals(OverlaySettingsActivity.class.getName())) {
             mListType = LIST_TYPE_OVERLAY;
-            screenTitle = R.string.system_alert_window_settings;
 
             reportIfRestrictedSawIntent(intent);
         } else if (className.equals(WriteSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_WRITE_SETTINGS;
-            screenTitle = R.string.write_settings;
         } else if (className.equals(ManageExternalSourcesActivity.class.getName())) {
             mListType = LIST_TYPE_MANAGE_SOURCES;
-            screenTitle = R.string.install_other_apps;
         } else if (className.equals(GamesStorageActivity.class.getName())) {
             mListType = LIST_TYPE_GAMES;
             mSortOrder = R.id.sort_order_size;
         } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
             mListType = LIST_TYPE_WIFI_ACCESS;
-            screenTitle = R.string.change_wifi_state_title;
         } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
             mListType = LIST_MANAGE_EXTERNAL_STORAGE;
-            screenTitle = R.string.manage_external_storage_title;
         }  else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
             mListType = LIST_TYPE_MEDIA_MANAGEMENT_APPS;
-            screenTitle = R.string.media_management_apps_title;
         } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
             mListType = LIST_TYPE_ALARMS_AND_REMINDERS;
-            screenTitle = R.string.alarms_and_reminders_title;
         } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mUsageStatsManager = IUsageStatsManager.Stub.asInterface(
                     ServiceManager.getService(Context.USAGE_STATS_SERVICE));
             mNotificationBackend = new NotificationBackend();
             mSortOrder = R.id.sort_order_recent_notification;
-            screenTitle = R.string.app_notifications_title;
         } else {
-            if (screenTitle == -1) {
-                screenTitle = R.string.all_apps;
-            }
             mListType = LIST_TYPE_MAIN;
         }
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
@@ -879,6 +866,46 @@ public class ManageApplications extends InstrumentedFragment
                     }
                 });
         params.setBehavior(behavior);
+    }
+
+    /**
+     * Returns a resource ID of title based on what type of app list is
+     * @param intent the intent of the activity that might include a specified title
+     * @param args the args that includes a class name of app list
+     */
+    public static int getTitleResId(@NonNull Intent intent, Bundle args) {
+        int screenTitle = intent.getIntExtra(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.all_apps);
+        String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
+        if (className == null) {
+            className = intent.getComponent().getClassName();
+        }
+        if (className.equals(Settings.UsageAccessSettingsActivity.class.getName())) {
+            screenTitle = R.string.usage_access;
+        } else if (className.equals(Settings.HighPowerApplicationsActivity.class.getName())) {
+            screenTitle = R.string.high_power_apps;
+        } else if (className.equals(Settings.OverlaySettingsActivity.class.getName())) {
+            screenTitle = R.string.system_alert_window_settings;
+        } else if (className.equals(Settings.WriteSettingsActivity.class.getName())) {
+            screenTitle = R.string.write_settings;
+        } else if (className.equals(Settings.ManageExternalSourcesActivity.class.getName())) {
+            screenTitle = R.string.install_other_apps;
+        } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
+            screenTitle = R.string.change_wifi_state_title;
+        } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
+            screenTitle = R.string.manage_external_storage_title;
+        }  else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
+            screenTitle = R.string.media_management_apps_title;
+        } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
+            screenTitle = R.string.alarms_and_reminders_title;
+        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
+            screenTitle = R.string.app_notifications_title;
+        } else {
+            if (screenTitle == -1) {
+                screenTitle = R.string.all_apps;
+            }
+        }
+        return screenTitle;
     }
 
     static class FilterSpinnerAdapter extends SettingsSpinnerAdapter<CharSequence> {
