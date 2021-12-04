@@ -91,13 +91,6 @@
         settings:searchable="false">
 
         <Preference
-            android:key="virtual_keyboards_for_work_pref"
-            android:title="@string/virtual_keyboards_for_work_title"
-            android:fragment="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment"
-            settings:forWork="true"
-            settings:controller="com.android.settings.inputmethod.VirtualKeyboardForWorkPreferenceController" />
-
-        <Preference
             android:key="spellcheckers_settings_for_work_pref"
             android:title="@string/spellcheckers_settings_for_work_title"
             android:fragment="com.android.settings.inputmethod.SpellCheckersSettings"
