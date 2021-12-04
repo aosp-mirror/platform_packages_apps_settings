@@ -76,7 +76,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     public static final String EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA =
             "settings_large_screen_deep_link_intent_data";
 
-    private static final int DEFAULT_HIGHLIGHT_MENU_KEY = R.string.menu_key_network;
+    static final int DEFAULT_HIGHLIGHT_MENU_KEY = R.string.menu_key_network;
     private static final long HOMEPAGE_LOADING_TIMEOUT_MS = 300;
 
     private TopLevelSettings mMainFragment;
@@ -92,6 +92,10 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     public interface HomepageLoadedListener {
         /** Called when the homepage is loaded. */
         void onHomepageLoaded();
+    }
+
+    private interface FragmentBuilder<T extends Fragment>  {
+        T build();
     }
 
     /**
@@ -168,13 +172,15 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             initAvatarView();
             showSuggestionFragment();
             if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)) {
-                showFragment(new ContextualCardsFragment(), R.id.contextual_cards_content);
+                showFragment(() -> new ContextualCardsFragment(), R.id.contextual_cards_content);
             }
         }
-        mMainFragment = new TopLevelSettings();
-        mMainFragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
-                getHighlightMenuKey());
-        showFragment(mMainFragment, R.id.main_content);
+        mMainFragment = showFragment(() -> {
+            final TopLevelSettings fragment = new TopLevelSettings();
+            fragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+                    getHighlightMenuKey());
+            return fragment;
+        }, R.id.main_content);
 
         ((FrameLayout) findViewById(R.id.main_content))
                 .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
@@ -260,9 +266,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void showSuggestionFragment() {
-        final Class<? extends Fragment> fragment = FeatureFactory.getFactory(this)
+        final Class<? extends Fragment> fragmentClass = FeatureFactory.getFactory(this)
                 .getSuggestionFeatureProvider(this).getContextualSuggestionFragment();
-        if (fragment == null) {
+        if (fragmentClass == null) {
             return;
         }
 
@@ -274,28 +280,33 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         // Schedule a timer to show the homepage and hide the suggestion on timeout.
         mHomepageView.postDelayed(() -> showHomepageWithSuggestion(false),
                 HOMEPAGE_LOADING_TIMEOUT_MS);
-        try {
-            showFragment(fragment.getConstructor().newInstance(), R.id.suggestion_content);
-            if (mIsEmbeddingActivityEnabled) {
-                showFragment(fragment.getConstructor().newInstance(),
-                        R.id.two_pane_suggestion_content);
+        final FragmentBuilder<?> fragmentBuilder = () -> {
+            try {
+                return fragmentClass.getConstructor().newInstance();
+            } catch (Exception e) {
+                Log.w(TAG, "Cannot show fragment", e);
             }
-        } catch (Exception e) {
-            Log.w(TAG, "Cannot show fragment", e);
+            return null;
+        };
+        showFragment(fragmentBuilder, R.id.suggestion_content);
+        if (mIsEmbeddingActivityEnabled) {
+            showFragment(fragmentBuilder, R.id.two_pane_suggestion_content);
         }
     }
 
-    private void showFragment(Fragment fragment, int id) {
+    private <T extends Fragment> T showFragment(FragmentBuilder<T> fragmentBuilder, int id) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        final Fragment showFragment = fragmentManager.findFragmentById(id);
+        T showFragment = (T) fragmentManager.findFragmentById(id);
 
         if (showFragment == null) {
-            fragmentTransaction.add(id, fragment);
+            showFragment = fragmentBuilder.build();
+            fragmentTransaction.add(id, showFragment);
         } else {
             fragmentTransaction.show(showFragment);
         }
         fragmentTransaction.commit();
+        return showFragment;
     }
 
     private void launchDeepLinkIntentToRight() {
@@ -363,14 +374,14 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 targetIntent.getAction(),
                 SplitRule.FINISH_ALWAYS,
                 SplitRule.FINISH_ALWAYS,
-                true /* clearTop*/);
+                true /* clearTop */);
         ActivityEmbeddingRulesController.registerTwoPanePairRule(this,
-                new ComponentName(Settings.class.getPackageName(), Settings.class.getName()),
+                new ComponentName(getApplicationContext(), Settings.class),
                 targetComponentName,
                 targetIntent.getAction(),
                 SplitRule.FINISH_ALWAYS,
                 SplitRule.FINISH_ALWAYS,
-                true /* clearTop*/);
+                true /* clearTop */);
         startActivity(targetIntent);
     }
 

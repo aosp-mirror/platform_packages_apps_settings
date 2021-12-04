@@ -63,6 +63,11 @@ public class TopLevelWallpaperPreferenceController extends BasePreferenceControl
         super.displayPreference(screen);
         Preference preference = screen.findPreference(getPreferenceKey());
         preference.setTitle(getTitle());
+        ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+                mContext,
+                getComponentName(),
+                null /* secondaryIntentAction */,
+                true /* clearTop */);
     }
 
     public String getTitle() {
@@ -103,11 +108,6 @@ public class TopLevelWallpaperPreferenceController extends BasePreferenceControl
                     mContext)) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             }
-            ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
-                    mContext,
-                    intent.getComponent(),
-                    null /* secondaryIntentAction */,
-                    true /* clearTop */);
             preference.getContext().startActivity(intent);
             return true;
         }
