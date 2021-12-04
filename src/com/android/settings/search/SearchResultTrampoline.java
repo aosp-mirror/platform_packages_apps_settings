@@ -109,7 +109,8 @@ public class SearchResultTrampoline extends Activity {
             final SettingsHomepageActivity homeActivity =
                     ((SettingsApplication) getApplicationContext()).getHomeActivity();
             if (homeActivity != null) {
-                homeActivity.getMainFragment().setHighlightMenuKey(highlightMenuKey);
+                homeActivity.getMainFragment().setHighlightMenuKey(highlightMenuKey,
+                        /* scrollNeeded= */ true);
             }
         } else {
             // Two-pane case

@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.util.LayoutDirection;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.window.embedding.ActivityFilter;
 import androidx.window.embedding.ActivityRule;
 import androidx.window.embedding.SplitController;
@@ -114,7 +113,7 @@ public class ActivityEmbeddingRulesController {
 
         registerTwoPanePairRule(
                 context,
-                getComponentName(context, Settings.class),
+                new ComponentName(context, Settings.class),
                 secondaryComponent,
                 secondaryIntentAction,
                 finishPrimaryWithSecondary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
@@ -123,7 +122,7 @@ public class ActivityEmbeddingRulesController {
 
         registerTwoPanePairRule(
                 context,
-                getComponentName(context, SettingsHomepageActivity.class),
+                new ComponentName(context, SettingsHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
                 finishPrimaryWithSecondary ? SplitRule.FINISH_ADJACENT : SplitRule.FINISH_NEVER,
@@ -143,7 +142,7 @@ public class ActivityEmbeddingRulesController {
 
         registerTwoPanePairRule(
                 context,
-                getComponentName(context, SliceDeepLinkHomepageActivity.class),
+                new ComponentName(context, SliceDeepLinkHomepageActivity.class),
                 secondaryComponent,
                 secondaryIntentAction,
                 finishPrimaryWithSecondary ? SplitRule.FINISH_ALWAYS : SplitRule.FINISH_NEVER,
@@ -179,7 +178,7 @@ public class ActivityEmbeddingRulesController {
 
         registerTwoPanePairRuleForSettingsHome(
                 context,
-                getComponentName(context, SubSettings.class),
+                new ComponentName(context, SubSettings.class),
                 null /* secondaryIntentAction */,
                 clearTop);
     }
@@ -191,8 +190,7 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, SliceDeepLinkHomepageActivity.class);
         addActivityFilter(activityFilters, Settings.class);
 
-        final Intent intent = new Intent();
-        intent.setComponent(getComponentName(Settings.NetworkDashboardActivity.class));
+        final Intent intent = new Intent(mContext, Settings.NetworkDashboardActivity.class);
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
                 activityFilters,
                 intent,
@@ -215,23 +213,7 @@ public class ActivityEmbeddingRulesController {
 
     private void addActivityFilter(Set<ActivityFilter> activityFilters,
             Class<? extends Activity> activityClass) {
-        activityFilters.add(new ActivityFilter(getComponentName(activityClass),
+        activityFilters.add(new ActivityFilter(new ComponentName(mContext, activityClass),
                 null /* intentAction */));
-    }
-
-    private void addActivityFilter(Set<ActivityFilter> activityFilters,
-            ComponentName componentName) {
-        activityFilters.add(new ActivityFilter(componentName, null /* intentAction */));
-    }
-
-    @NonNull
-    private ComponentName getComponentName(Class<? extends Activity> activityClass) {
-        return getComponentName(mContext, activityClass);
-    }
-
-    @NonNull
-    private static ComponentName getComponentName(Context context,
-            Class<? extends Activity> activityClass) {
-        return new ComponentName(context.getPackageName(), activityClass.getName());
     }
 }

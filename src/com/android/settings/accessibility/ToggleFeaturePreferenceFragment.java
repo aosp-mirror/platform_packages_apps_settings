@@ -143,9 +143,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             setPreferenceScreen(preferenceScreen);
         }
 
-        final List<String> shortcutFeatureKeys = new ArrayList<>();
-        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
-        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+        final List<String> shortcutFeatureKeys = getFeatureSettingsKeys();
         mSettingsContentObserver = new SettingsContentObserver(new Handler(), shortcutFeatureKeys) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
@@ -153,6 +151,13 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 updateShortcutPreference();
             }
         };
+    }
+
+    protected List<String> getFeatureSettingsKeys() {
+        final List<String> shortcutFeatureKeys = new ArrayList<>();
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+        return shortcutFeatureKeys;
     }
 
     @Override
