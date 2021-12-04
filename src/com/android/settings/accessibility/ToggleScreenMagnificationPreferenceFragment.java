@@ -276,6 +276,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
+    protected List<String> getFeatureSettingsKeys() {
+        final List<String> shortcutKeys = super.getFeatureSettingsKeys();
+        shortcutKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
+        return shortcutKeys;
+    }
+
+    @Override
     protected CharSequence getShortcutTypeSummary(Context context) {
         if (!mShortcutPreference.isChecked()) {
             return context.getText(R.string.switch_off_text);
