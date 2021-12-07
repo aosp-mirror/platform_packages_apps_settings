@@ -167,10 +167,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mCategoryMixin = new CategoryMixin(this);
         getLifecycle().addObserver(mCategoryMixin);
 
+        final String highlightMenuKey = getHighlightMenuKey();
         // Only allow features on high ram devices.
         if (!getSystemService(ActivityManager.class).isLowRamDevice()) {
             initAvatarView();
-            showSuggestionFragment();
+            final boolean scrollNeeded = mIsEmbeddingActivityEnabled
+                    && !TextUtils.equals(getString(DEFAULT_HIGHLIGHT_MENU_KEY), highlightMenuKey);
+            showSuggestionFragment(scrollNeeded);
             if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)) {
                 showFragment(() -> new ContextualCardsFragment(), R.id.contextual_cards_content);
             }
@@ -178,7 +181,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mMainFragment = showFragment(() -> {
             final TopLevelSettings fragment = new TopLevelSettings();
             fragment.getArguments().putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
-                    getHighlightMenuKey());
+                    highlightMenuKey);
             return fragment;
         }, R.id.main_content);
 
@@ -265,7 +268,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         findViewById(R.id.settings_homepage_container).setBackgroundColor(color);
     }
 
-    private void showSuggestionFragment() {
+    private void showSuggestionFragment(boolean scrollNeeded) {
         final Class<? extends Fragment> fragmentClass = FeatureFactory.getFactory(this)
                 .getSuggestionFeatureProvider(this).getContextualSuggestionFragment();
         if (fragmentClass == null) {
@@ -275,8 +278,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mSuggestionView = findViewById(R.id.suggestion_content);
         mTwoPaneSuggestionView = findViewById(R.id.two_pane_suggestion_content);
         mHomepageView = findViewById(R.id.settings_homepage_container);
-        // Hide the homepage for preparing the suggestion.
-        mHomepageView.setVisibility(View.INVISIBLE);
+        // Hide the homepage for preparing the suggestion. If scrolling is needed, the list views
+        // should be initialized in the invisible homepage view to prevent a scroll flicker.
+        mHomepageView.setVisibility(scrollNeeded ? View.INVISIBLE : View.GONE);
         // Schedule a timer to show the homepage and hide the suggestion on timeout.
         mHomepageView.postDelayed(() -> showHomepageWithSuggestion(false),
                 HOMEPAGE_LOADING_TIMEOUT_MS);
