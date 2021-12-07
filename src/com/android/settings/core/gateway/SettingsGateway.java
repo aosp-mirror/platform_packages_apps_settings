@@ -68,6 +68,7 @@ import com.android.settings.biometrics.combination.CombinedBiometricSettings;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
+import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bugreporthandler.BugReportHandlerPicker;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -176,6 +177,7 @@ public class SettingsGateway {
     public static final String[] ENTRY_FRAGMENTS = {
             AdvancedConnectedDeviceDashboardFragment.class.getName(),
             CreateShortcut.class.getName(),
+            BluetoothPairingDetail.class.getName(),
             WifiSettings.class.getName(),
             WifiNetworkDetailsFragment.class.getName(),
             ConfigureWifiSettings.class.getName(),
