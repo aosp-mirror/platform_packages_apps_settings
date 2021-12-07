@@ -41,7 +41,10 @@ import java.util.List;
  */
 public class UsbBackend {
 
-    static final int PD_ROLE_SWAP_TIMEOUT_MS = 3000;
+    // extend this value from 3s to 4s because of switching data role
+    // in USB driver side takes about 3s in some devices, plus the usb
+    // port change event dispatching time, 3s is not enough.
+    static final int PD_ROLE_SWAP_TIMEOUT_MS = 4000;
     static final int NONPD_ROLE_SWAP_TIMEOUT_MS = 15000;
 
     private final boolean mFileTransferRestricted;
