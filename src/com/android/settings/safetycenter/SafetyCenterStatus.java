@@ -25,7 +25,7 @@ public class SafetyCenterStatus {
 
     /** Whether SafetyCenter page is enabled. */
     @VisibleForTesting
-    static final String SAFETY_CENTER_IS_ENABLED = "safety_center_is_enabled";
+    public static final String SAFETY_CENTER_IS_ENABLED = "safety_center_is_enabled";
 
     /** Returns true is SafetyCenter page is enabled, false otherwise. */
     public static boolean isEnabled() {

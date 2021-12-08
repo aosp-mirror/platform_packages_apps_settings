@@ -142,7 +142,8 @@
         android:order="-40"
         android:title="@string/privacy_dashboard_title"
         android:summary="@string/privacy_dashboard_summary"
-        settings:highlightableMenuKey="@string/menu_key_privacy"/>
+        settings:highlightableMenuKey="@string/menu_key_privacy"
+        settings:controller="com.android.settings.privacy.TopLevelPrivacyEntryPreferenceController"/>
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.location.LocationSettings"
