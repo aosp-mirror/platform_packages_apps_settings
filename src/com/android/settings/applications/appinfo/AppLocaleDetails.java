@@ -270,9 +270,14 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
         /** Gets per app's default locale */
         public static Locale getAppDefaultLocale(Context context, String packageName) {
             LocaleManager localeManager = context.getSystemService(LocaleManager.class);
-            LocaleList localeList = (localeManager == null)
-                    ? new LocaleList() : localeManager.getApplicationLocales(packageName);
-            return localeList.isEmpty() ? null : localeList.get(0);
+            try {
+                LocaleList localeList = (localeManager == null)
+                        ? new LocaleList() : localeManager.getApplicationLocales(packageName);
+                return localeList.isEmpty() ? null : localeList.get(0);
+            } catch (IllegalArgumentException e) {
+                Log.w(TAG, "package name : " + packageName + " is not correct. " + e);
+            }
+            return null;
         }
 
         /** Sets per app's default language to system. */
