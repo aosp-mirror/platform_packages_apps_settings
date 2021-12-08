@@ -123,6 +123,8 @@ public class Settings extends SettingsActivity {
     public static class AccessibilityDaltonizerSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for lockscreen settings. */
     public static class LockScreenSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for bluetooth pairing settings. */
+    public static class BlueToothPairingActivity extends SettingsActivity { /* empty */ }
     /** Activity for Reduce Bright Colors. */
     public static class ReduceBrightColorsSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the security dashboard. */
