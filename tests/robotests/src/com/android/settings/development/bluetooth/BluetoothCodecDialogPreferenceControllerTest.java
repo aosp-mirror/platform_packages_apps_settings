@@ -45,6 +45,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothCodecDialogPreferenceControllerTest {
 
@@ -85,29 +88,41 @@ public class BluetoothCodecDialogPreferenceControllerTest {
         mPreference = new BluetoothCodecDialogPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
-        mCodecConfigSBC = new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC,
-                BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST,
-                BluetoothCodecConfig.SAMPLE_RATE_96000 | BluetoothCodecConfig.SAMPLE_RATE_176400,
-                BluetoothCodecConfig.BITS_PER_SAMPLE_32,
-                BluetoothCodecConfig.CHANNEL_MODE_MONO | BluetoothCodecConfig.CHANNEL_MODE_STEREO,
-                0, 0, 0, 0);
-        mCodecConfigAAC = new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC,
-                BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST,
-                BluetoothCodecConfig.SAMPLE_RATE_48000 | BluetoothCodecConfig.SAMPLE_RATE_88200,
-                BluetoothCodecConfig.BITS_PER_SAMPLE_16 | BluetoothCodecConfig.BITS_PER_SAMPLE_24,
-                BluetoothCodecConfig.CHANNEL_MODE_STEREO,
-                0, 0, 0, 0);
-        mCodecConfigAPTX = new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX);
-        mCodecConfigAPTXHD = new BluetoothCodecConfig(
-                BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD);
-        mCodecConfigLDAC = new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC);
+        mCodecConfigSBC = new BluetoothCodecConfig.Builder()
+                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC)
+                .setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST)
+                .setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_96000
+                        | BluetoothCodecConfig.SAMPLE_RATE_176400)
+                .setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_32)
+                .setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_MONO
+                        | BluetoothCodecConfig.CHANNEL_MODE_STEREO)
+                .build();
+        mCodecConfigAAC = new BluetoothCodecConfig.Builder()
+                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC)
+                .setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST)
+                .setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_48000
+                        | BluetoothCodecConfig.SAMPLE_RATE_88200)
+                .setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_16
+                        | BluetoothCodecConfig.BITS_PER_SAMPLE_24)
+                .setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_STEREO)
+                .build();
+        mCodecConfigAPTX = new BluetoothCodecConfig.Builder()
+                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX)
+                .build();
+        mCodecConfigAPTXHD = new BluetoothCodecConfig.Builder()
+                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD)
+                .build();
+        mCodecConfigLDAC = new BluetoothCodecConfig.Builder()
+                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC)
+                .build();
         when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
     }
 
     @Test
     public void writeConfigurationValues_selectDefault_setHighest() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
-        mCodecStatus = new BluetoothCodecStatus(mCodecConfigSBC, null, mCodecConfigs);
+        mCodecStatus = new BluetoothCodecStatus(mCodecConfigSBC, null,
+                        Arrays.asList(mCodecConfigs));
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice)).thenReturn(
                 BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
@@ -121,7 +136,8 @@ public class BluetoothCodecDialogPreferenceControllerTest {
     public void writeConfigurationValues_checkCodec() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC, mCodecConfigAPTX,
                 mCodecConfigAPTXHD, mCodecConfigLDAC, mCodecConfigAAC, mCodecConfigSBC};
-        mCodecStatus = new BluetoothCodecStatus(mCodecConfigSBC, null, mCodecConfigs);
+        mCodecStatus = new BluetoothCodecStatus(mCodecConfigSBC, null,
+                        Arrays.asList(mCodecConfigs));
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
@@ -148,7 +164,8 @@ public class BluetoothCodecDialogPreferenceControllerTest {
     public void writeConfigurationValues_resetHighestConfig() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC, mCodecConfigAPTX,
                 mCodecConfigAPTXHD, mCodecConfigLDAC, mCodecConfigAAC, mCodecConfigSBC};
-        mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
+        mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null,
+                        Arrays.asList(mCodecConfigs));
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.writeConfigurationValues(2);
@@ -178,7 +195,7 @@ public class BluetoothCodecDialogPreferenceControllerTest {
 
     @Test
     public void onHDAudioEnabled_optionalCodecEnabled_setsCodecTypeAsAAC() {
-        BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
+        List<BluetoothCodecConfig> mCodecConfigs = Arrays.asList(mCodecConfigAAC, mCodecConfigSBC);
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC,
                 /* codecsLocalCapabilities= */ null,
                 mCodecConfigs);
@@ -194,7 +211,7 @@ public class BluetoothCodecDialogPreferenceControllerTest {
     }
     @Test
     public void onHDAudioEnabled_optionalCodecDisabled_setsCodecTypeAsSBC() {
-        BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
+        List<BluetoothCodecConfig> mCodecConfigs = Arrays.asList(mCodecConfigAAC, mCodecConfigSBC);
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC,
                 /* codecsLocalCapabilities= */ null,
                 mCodecConfigs);
