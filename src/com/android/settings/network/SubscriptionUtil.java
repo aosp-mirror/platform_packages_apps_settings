@@ -540,13 +540,14 @@ public class SubscriptionUtil {
             return null;
         }
 
-        TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-        String rawPhoneNumber =
-                telephonyManager.getLine1Number(subscriptionInfo.getSubscriptionId());
-        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString());
+        final SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        String rawPhoneNumber = subscriptionManager.getPhoneNumber(
+                subscriptionInfo.getSubscriptionId());
         if (TextUtils.isEmpty(rawPhoneNumber)) {
             return null;
         }
+        String countryIso = MccTable.countryCodeForMcc(subscriptionInfo.getMccString());
         return PhoneNumberUtils.formatNumber(rawPhoneNumber, countryIso);
     }
 
