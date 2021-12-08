@@ -301,7 +301,8 @@ public class UserSettings extends SettingsPreferenceFragment
         mAddUser.setOnPreferenceClickListener(this);
 
         activity.registerReceiverAsUser(
-                mUserChangeReceiver, UserHandle.ALL, USER_REMOVED_INTENT_FILTER, null, mHandler);
+                mUserChangeReceiver, UserHandle.ALL, USER_REMOVED_INTENT_FILTER, null, mHandler,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
 
         updateUI();
         mShouldUpdateUserList = false;
