@@ -16,13 +16,24 @@
 
 package com.android.settings.network.telephony;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
+
+import com.android.settings.R;
+
+import java.util.ArrayList;
 
 /** Fragment to show a confirm dialog. The caller should implement onConfirmListener. */
 public class ConfirmDialogFragment extends BaseDialogFragment
@@ -32,6 +43,7 @@ public class ConfirmDialogFragment extends BaseDialogFragment
     private static final String ARG_MSG = "msg";
     private static final String ARG_POS_BUTTON_STRING = "pos_button_string";
     private static final String ARG_NEG_BUTTON_STRING = "neg_button_string";
+    private static final String ARG_LIST = "list";
 
     /**
      * Interface defining the method that will be invoked when the user has done with the dialog.
@@ -51,7 +63,7 @@ public class ConfirmDialogFragment extends BaseDialogFragment
 
     /** Displays a confirmation dialog which has confirm and cancel buttons. */
     public static <T> void show(
-            Activity activity,
+            FragmentActivity activity,
             Class<T> callbackInterfaceClass,
             int tagInCaller,
             String title,
@@ -66,7 +78,29 @@ public class ConfirmDialogFragment extends BaseDialogFragment
         arguments.putString(ARG_NEG_BUTTON_STRING, negButtonString);
         setListener(activity, null, callbackInterfaceClass, tagInCaller, arguments);
         fragment.setArguments(arguments);
-        fragment.show(activity.getFragmentManager(), TAG);
+        fragment.show(activity.getSupportFragmentManager(), TAG);
+    }
+
+    /** Displays a confirmation dialog which has confirm and cancel buttons and carrier list.*/
+    public static <T> void show(
+            FragmentActivity activity,
+            Class<T> callbackInterfaceClass,
+            int tagInCaller,
+            String title,
+            String msg,
+            String posButtonString,
+            String negButtonString,
+            ArrayList<String> list) {
+        ConfirmDialogFragment fragment = new ConfirmDialogFragment();
+        Bundle arguments = new Bundle();
+        arguments.putString(ARG_TITLE, title);
+        arguments.putCharSequence(ARG_MSG, msg);
+        arguments.putString(ARG_POS_BUTTON_STRING, posButtonString);
+        arguments.putString(ARG_NEG_BUTTON_STRING, negButtonString);
+        arguments.putStringArrayList(ARG_LIST, list);
+        setListener(activity, null, callbackInterfaceClass, tagInCaller, arguments);
+        fragment.setArguments(arguments);
+        fragment.show(activity.getSupportFragmentManager(), TAG);
     }
 
     @Override
@@ -75,18 +109,56 @@ public class ConfirmDialogFragment extends BaseDialogFragment
         String message = getArguments().getString(ARG_MSG);
         String posBtnString = getArguments().getString(ARG_POS_BUTTON_STRING);
         String negBtnString = getArguments().getString(ARG_NEG_BUTTON_STRING);
+        ArrayList<String> list = getArguments().getStringArrayList(ARG_LIST);
 
-        Log.i("Showing dialog with title = %s", title);
+        Log.i(TAG, "Showing dialog with title =" + title);
         AlertDialog.Builder builder =
                 new AlertDialog.Builder(getContext())
                         .setTitle(title)
                         .setPositiveButton(posBtnString, this)
                         .setNegativeButton(negBtnString, this);
 
-        if (!TextUtils.isEmpty(message)) {
-            builder.setMessage(message);
+        if (list != null && !list.isEmpty()) {
+            Log.i(TAG, "list =" + list.toString());
+
+            View content = LayoutInflater.from(getContext()).inflate(
+                    R.layout.sim_confirm_dialog_multiple_enabled_profiles_supported, null);
+
+            TextView dialogMessage = content.findViewById(R.id.msg);
+            if (!TextUtils.isEmpty(message) && dialogMessage != null) {
+                dialogMessage.setText(message);
+            }
+
+            final ArrayAdapter<String> arrayAdapterItems = new ArrayAdapter<String>(
+                    getContext(), android.R.layout.select_dialog_item, list);
+            final ListView lvItems = content.findViewById(R.id.carrier_list);
+            if (lvItems != null) {
+                lvItems.setAdapter(arrayAdapterItems);
+                lvItems.setChoiceMode(ListView.CHOICE_MODE_NONE);
+                lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        Log.i(TAG, "list onClick =" + position);
+                        Log.i(TAG, "list item =" + list.get(position));
+
+                        if (position == list.size() - 1) {
+                            // user select the "cancel" item;
+                            informCaller(false, -1);
+                        } else {
+                            informCaller(true, position);
+                        }
+                    }
+                });
+            }
+            builder.setView(content);
+        } else {
+            if (!TextUtils.isEmpty(message)) {
+                builder.setMessage(message);
+            }
         }
-        AlertDialog dialog = builder.show();
+
+        AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
     }
