@@ -54,6 +54,7 @@ public class TopLevelSettings extends DashboardFragment implements
     private static final String PREF_KEY_SUPPORT = "top_level_support";
 
     private TopLevelHighlightMixin mHighlightMixin;
+    private boolean mFirstStarted = true;
 
     public TopLevelSettings() {
         final Bundle args = new Bundle();
@@ -135,9 +136,11 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     public void onStart() {
-        // Set default highlight menu key for 1-pane homepage since it will show the placeholder
-        // page once changing back to 2-pane.
-        if (!ActivityEmbeddingUtils.isTwoPaneResolution(getActivity())) {
+        if (mFirstStarted) {
+            mFirstStarted = false;
+        } else if (!ActivityEmbeddingUtils.isTwoPaneResolution(getActivity())) {
+            // Set default highlight menu key for 1-pane homepage since it will show the placeholder
+            // page once changing back to 2-pane.
             setHighlightMenuKey(getString(SettingsHomepageActivity.DEFAULT_HIGHLIGHT_MENU_KEY),
                     /* scrollNeeded= */ false);
         }

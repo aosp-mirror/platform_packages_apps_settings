@@ -125,11 +125,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
         Log.i(TAG, "showHomepageWithSuggestion: " + showSuggestion);
         final View homepageView = mHomepageView;
-        if (!mIsTwoPaneLastTime) {
-            mSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
-        } else {
-            mTwoPaneSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
-        }
+        mSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
+        mTwoPaneSuggestionView.setVisibility(showSuggestion ? View.VISIBLE : View.GONE);
         mHomepageView = null;
 
         mLoadedListeners.forEach(listener -> listener.onHomepageLoaded());
