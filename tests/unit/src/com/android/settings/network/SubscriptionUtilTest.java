@@ -344,6 +344,7 @@ public class SubscriptionUtilTest {
         assertEquals(CARRIER_1 + " 4444", name2);
     }
 
+    @Ignore
     @Test
     public void getUniqueDisplayName_phoneNumberIdentical_correctNameReturned() {
         // Each subscription's default display name is unique.
