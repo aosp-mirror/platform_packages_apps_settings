@@ -19,10 +19,12 @@ package com.android.settings.biometrics.face;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.hardware.SensorPrivacyManager;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,10 +36,12 @@ import androidx.annotation.StringRes;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.utils.SensorPrivacyManagerHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.template.FooterButton;
@@ -57,6 +61,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private FaceFeatureProvider mFaceFeatureProvider;
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
+    @Nullable private SensorPrivacyManager mSensorPrivacyManager;
 
     @Override
     protected void onCancelButtonClick(View view) {
@@ -150,6 +155,14 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 });
             }
         }
+
+        mSensorPrivacyManager = getApplicationContext()
+                .getSystemService(SensorPrivacyManager.class);
+        final SensorPrivacyManagerHelper helper = SensorPrivacyManagerHelper
+                .getInstance(getApplicationContext());
+        final boolean cameraPrivacyEnabled = helper
+                .isSensorBlocked(SensorPrivacyManager.Sensors.CAMERA, mUserId);
+        Log.v(TAG, "cameraPrivacyEnabled : " + cameraPrivacyEnabled);
     }
 
     protected boolean generateChallengeOnCreate() {
@@ -306,6 +319,28 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     public @BiometricAuthenticator.Modality int getModality() {
         return BiometricAuthenticator.TYPE_FACE;
+    }
+
+    @Override
+    protected void onNextButtonClick(View view) {
+        final boolean parentelConsentRequired =
+                getIntent()
+                .getBooleanExtra(BiometricEnrollActivity.EXTRA_REQUIRE_PARENTAL_CONSENT, false);
+        final boolean cameraPrivacyEnabled = SensorPrivacyManagerHelper
+                .getInstance(getApplicationContext())
+                .isSensorBlocked(SensorPrivacyManager.Sensors.CAMERA, mUserId);
+        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        final boolean isSettingUp = isSetupWizard || (parentelConsentRequired
+                && !WizardManagerHelper.isUserSetupComplete(this));
+        if (cameraPrivacyEnabled && !isSettingUp) {
+            if (mSensorPrivacyManager == null) {
+                mSensorPrivacyManager = getApplicationContext()
+                        .getSystemService(SensorPrivacyManager.class);
+            }
+            mSensorPrivacyManager.showSensorUseDialog(SensorPrivacyManager.Sensors.CAMERA);
+        } else {
+            super.onNextButtonClick(view);
+        }
     }
 
     @Override
