@@ -16,16 +16,19 @@
 
 package com.android.settings;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.safetycenter.SafetyCenterStatus;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 
 import com.google.android.setupdesign.util.ThemeHelper;
@@ -131,6 +134,27 @@ public class Settings extends SettingsActivity {
     /** Activity for the security dashboard. */
     public static class SecurityDashboardActivity extends SettingsActivity {
 
+        private static final String TAG = "SecurityDashboardActivity";
+
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            handleSafetyCenterRedirection();
+        }
+
+        /** Redirects to SafetyCenter if enabled. */
+        @VisibleForTesting
+        public void handleSafetyCenterRedirection() {
+            if (SafetyCenterStatus.isEnabled()) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
+                    finish();
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, "Unable to open safety center", e);
+                }
+            }
+        }
+
         /** Whether the given fragment is allowed. */
         @VisibleForTesting
         @Override
@@ -166,7 +190,30 @@ public class Settings extends SettingsActivity {
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ScanningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiScanningSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class PrivacyDashboardActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the privacy dashboard. */
+    public static class PrivacyDashboardActivity extends SettingsActivity {
+
+        private static final String TAG = "PrivacyDashboardActivity";
+
+        @Override
+        protected void onCreate(Bundle savedState) {
+            super.onCreate(savedState);
+            handleSafetyCenterRedirection();
+        }
+
+        /** Redirects to SafetyCenter if enabled. */
+        @VisibleForTesting
+        public void handleSafetyCenterRedirection() {
+            if (SafetyCenterStatus.isEnabled()) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
+                    finish();
+                } catch (ActivityNotFoundException e) {
+                    Log.e(TAG, "Unable to open safety center", e);
+                }
+            }
+        }
+    }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class FactoryResetActivity extends SettingsActivity {
         @Override
