@@ -151,6 +151,7 @@
                   android:taskAffinity=""
                   android:launchMode="singleTask"
                   android:exported="true"
+                  android:enabled="false"
                   android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout"
                   android:permission="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK">
             <intent-filter>
@@ -312,6 +313,7 @@
 
         <receiver android:name=".search.SearchStateReceiver"
                   android:exported="true"
+                  android:enabled="false"
                   android:permission="android.permission.READ_SEARCH_INDEXABLES">
             <intent-filter>
                 <action android:name="com.android.settings.SEARCH_START"/>
