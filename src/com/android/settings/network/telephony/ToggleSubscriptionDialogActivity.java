@@ -455,6 +455,31 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
 
     private void showMepSwitchSimConfirmDialog() {
         Log.i(TAG, "showMepSwitchSimConfirmDialog");
+        final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                mSubInfo, this);
+        String title = getString(R.string.sim_action_switch_sub_dialog_mep_title, displayName);
+        final StringBuilder switchDialogMsg = new StringBuilder();
+        switchDialogMsg.append(
+                getString(R.string.sim_action_switch_sub_dialog_mep_text, displayName));
+        if (isRtlMode) {
+            /* There are two lines of message in the dialog, and the RTL symbols must be added
+             * before and after each sentence, so use the line break symbol to find the position.
+             * (Each message are all with two line break symbols)
+             */
+            switchDialogMsg.insert(0, RTL_MARK)
+                    .insert(switchDialogMsg.indexOf(LINE_BREAK) - LINE_BREAK_OFFSET_ONE, RTL_MARK)
+                    .insert(switchDialogMsg.indexOf(LINE_BREAK) + LINE_BREAK_OFFSET_TWO, RTL_MARK)
+                    .insert(switchDialogMsg.length(), RTL_MARK);
+        }
+        ConfirmDialogFragment.show(
+                this,
+                ConfirmDialogFragment.OnConfirmListener.class,
+                DIALOG_TAG_ENABLE_SIM_CONFIRMATION_MEP,
+                title,
+                switchDialogMsg.toString(),
+                null,
+                null,
+                getSwitchDialogBodyList());
     }
 
     private String getSwitchDialogPosBtnText() {

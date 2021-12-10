@@ -160,8 +160,10 @@ public class SimDialogActivity extends FragmentActivity {
         final TelephonyManager telephonyManager = getSystemService(
                 TelephonyManager.class).createForSubscriptionId(subId);
         subscriptionManager.setDefaultDataSubId(subId);
-        telephonyManager.setDataEnabled(true);
-        Toast.makeText(this, R.string.data_switch_started, Toast.LENGTH_LONG).show();
+        if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            telephonyManager.setDataEnabled(true);
+            Toast.makeText(this, R.string.data_switch_started, Toast.LENGTH_LONG).show();
+        }
     }
 
     private void setDefaultCallsSubId(final int subId) {
