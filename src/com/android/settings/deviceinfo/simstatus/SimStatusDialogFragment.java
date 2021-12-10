@@ -30,6 +30,10 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.deviceinfo.PhoneNumberUtil;
+
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class SimStatusDialogFragment extends InstrumentedDialogFragment {
 
@@ -87,13 +91,26 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
         }
     }
 
+    /**
+     * View ID(s) which is digit format (instead of decimal number) text.
+     **/
+    private static final int [] sViewIdsInDigitFormat = IntStream
+            .of(SimStatusDialogController.ICCID_INFO_VALUE_ID,
+                    SimStatusDialogController.PHONE_NUMBER_VALUE_ID,
+                    SimStatusDialogController.EID_INFO_VALUE_ID)
+            .sorted().toArray();
+
     public void setText(int viewId, CharSequence text) {
         final TextView textView = mRootView.findViewById(viewId);
+        if (textView == null) {
+            return;
+        }
         if (TextUtils.isEmpty(text)) {
             text = getResources().getString(R.string.device_info_default);
         }
-        if (textView != null) {
-            textView.setText(text);
+        else if (Arrays.binarySearch(sViewIdsInDigitFormat, viewId) >= 0) {
+            text = PhoneNumberUtil.expandByTts(text);
         }
+        textView.setText(text);
     }
 }

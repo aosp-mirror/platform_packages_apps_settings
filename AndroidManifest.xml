@@ -196,7 +196,6 @@
         </receiver>
 
         <activity android:name=".SubSettings"
-                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
                   android:theme="@style/Theme.SubSettings" />
 
         <activity android:name=".Settings$CreateShortcutActivity"
@@ -241,6 +240,11 @@
                   android:exported="true"
                   android:launchMode="singleTask"
                   android:configChanges="orientation|screenSize|keyboardHidden">
+            <!-- Note: Since the framework does not support the multiple requests of network scan
+            from the UI, this singleTask can protect that there is only one
+            Settings$NetworkSelectActivity which can request the network scan.
+            If removing the "singleTask" in the future, please also modify the
+            Settings$NetworkSelectActivity's structure. -->
             <intent-filter android:priority="1">
                 <!-- Displays the MobileNetworkActivity and opt-in dialog for capability discovery. -->
                 <action android:name="android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN" />
@@ -367,6 +371,16 @@
                        android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true"/>
+        </activity>
+
+        <activity
+            android:name="Settings$NetworkSelectActivity"
+            android:label="@string/choose_network_title"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.network.telephony.NetworkSelectSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
         </activity>
 
         <activity
