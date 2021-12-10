@@ -488,8 +488,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Još jednom"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Pratite ikonu otiska prsta"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Nastavite podizati prst da dodate različite dijelove otiska prsta"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Dodirnite i zadržite svaki put kada se ikona otiska prsta pomjeri. Na ovaj način će se lakše snimiti cijeli otisak prsta."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Na ovaj način će se lakše snimiti cijeli otisak prsta"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Dodirnite i zadržite svaki put kada se ikona otiska prsta pomjeri. Na ovaj način se snima veći dio otiska prsta."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Postavite vrh prsta na senzor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Na kraju, postavite rubove prsta"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Stranu prsta postavite na senzor i zadržite, a zatim ga prebacite na drugu stranu"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Na ovaj način se snima veći dio otiska prsta"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Prijava otiska prsta: <xliff:g id="PERCENTAGE">%d</xliff:g> posto"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Dodan je otisak prsta"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Sada možete koristiti otisak prsta da otključate telefon ili potvrdite identitet, npr. kada se prijavljujete u aplikacije"</string>
@@ -2113,7 +2116,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Unutrašnja pohrana"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Ponovno izračunavanje veličine…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Izbrisati podatke aplikacija?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Svi podaci ove aplikacije će biti trajno izbrisani. To uključuje sve fajlove, postavke, račune, baze podataka itd."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Ovi podaci aplikacije će se trajno izbrisati. To obuhvata fajlove, postavke, baze podataka i ostale podatke aplikacije."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"Uredu"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Otkaži"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2431,7 +2434,7 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibracija pri obavještenjima"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibracija pri zvonu"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Povratne informacije na dodir"</string>
-    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Korištenje aplikacije <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Koristi <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Otvaranje aplikacije <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Koristi ispravku boja"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Prikaži titlove"</string>
@@ -2957,9 +2960,9 @@
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"Postavke glasovnog unosa i izlaza"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"Glasovno pretraživanje"</string>
     <string name="keyboard_settings_title" msgid="2199286020368890114">"Android tastatura"</string>
-    <string name="voice_input_settings" msgid="105821652985768064">"Podešavanja govornog unosa"</string>
-    <string name="voice_input_settings_title" msgid="3708147270767296322">"Govorni unos"</string>
-    <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Usluge govornog unosa"</string>
+    <string name="voice_input_settings" msgid="105821652985768064">"Podešavanja glasovnog unosa"</string>
+    <string name="voice_input_settings_title" msgid="3708147270767296322">"Glasovni unos"</string>
+    <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Usluge glasovnog unosa"</string>
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Cela aktuelna reč i interakcija"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Jednostavno pretvaranje govora u tekst"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Ova usluga za glasovni unos će biti u mogućnosti da obavlja uvijek uključeno praćenje glasa i da u vaše ime kontrolira aplikacije omogućene glasom. Ona dolazi iz <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> aplikacija. Omogućiti korištenje ove usluge?"</string>
@@ -5312,7 +5315,7 @@
     <string name="carrier_settings_euicc" msgid="1541279297111378907">"Operater"</string>
     <string name="carrier_settings_version" msgid="3364919669057317776">"Verzija postavki mobilnog operatera"</string>
     <string name="call_category" msgid="641461844504128789">"Pozivanje"</string>
-    <string name="video_calling_settings_title" msgid="5490466306783552190">"Operater video pozivanja"</string>
+    <string name="video_calling_settings_title" msgid="5490466306783552190">"Video pozivi putem mobilnog operatera"</string>
     <string name="cdma_system_select_title" msgid="8261408056382123386">"Odabir sistema"</string>
     <string name="cdma_system_select_summary" msgid="384128007068464145">"Promijenite način rada CDMA rominga"</string>
     <string name="cdma_system_select_dialogtitle" msgid="6143586810486936984">"Odabir sistema"</string>

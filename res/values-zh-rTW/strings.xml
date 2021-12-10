@@ -304,7 +304,7 @@
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"載入中…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"如果應用程式具有鄰近裝置權限，就能判斷已連結裝置的相對位置。"</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"應用程式和服務的位置存取權已關閉。當你撥打緊急電話號碼時 (或是傳送訊息給對方時)，系統仍會將你的裝置位置資訊傳送給緊急應變人員。"</string>
+    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"應用程式和服務的位置存取權已關閉。當你撥打或傳訊息到緊急電話號碼時，系統仍會將你的裝置位置資訊傳送給緊急應變人員。"</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"進一步瞭解位置資訊設定。"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"帳戶"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"安全性"</string>
@@ -448,7 +448,7 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"輕觸即可設定"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"已新增臉孔和指紋"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"已新增臉孔和指紋"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"如果你設定了人臉解鎖和指紋解鎖功能，當你戴著口罩或人在昏暗的地方時，手機會要求你使用指紋解鎖"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"設定人臉解鎖和指紋解鎖功能時，如果你戴著口罩或人在昏暗的地方，手機會要求你提供指紋"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"解鎖方式"</string>
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"臉孔和指紋的用途"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"將手機解鎖"</string>
@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"再一次"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"依照指紋圖示重複按下手指"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"重覆按壓指紋感應器，以建立完整的指紋檔案"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"請依照指紋圖示的移動方式重複按下手指。這麼做可擷取你的完整指紋。"</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"這麼做可擷取你的完整指紋"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"請依照指紋圖示的移動方式重複按下手指。這樣做可以擷取更多指紋。"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"將指尖放上感應器"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"最後，請將手指邊緣放上感應器"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"將指紋的一側放上感應器並按住，然後再換另一側"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"這樣做可以擷取更多指紋"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -633,7 +636,7 @@
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"螢幕鎖定"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5799070517574360310">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / 休眠後立即啟動"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4572132216801894216">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / 休眠 <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g>後"</string>
-    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"工作資料夾鎖定"</string>
+    <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"工作資料夾鎖定方式"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="4746783679112447948">"變更鎖定畫面"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="6023813780512501969">"變更或停用圖案、PIN 或密碼安全性"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"選擇你要鎖定螢幕的方式"</string>
@@ -2091,7 +2094,7 @@
     <string name="internal_storage" msgid="999496851424448809">"內部儲存空間"</string>
     <string name="recompute_size" msgid="1098091228370999128">"重新計算大小…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"你要刪除應用程式資料嗎？"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"系統會永久刪除這個應用程式的所有資料，包含所有檔案、設定、帳戶、資料庫等。"</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"系統將永久刪除這個應用程式的資料，包括檔案、設定、資料庫和應用程式的其他資料。"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"確定"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"取消"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2665,7 +2668,7 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能受到限制"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"電池用量較高的應用程式"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"查看電池用量最高的應用程式"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"充電功能暫時受到限制"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"已暫時限制充電"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"這是為了延長電池壽命。瞭解詳情。"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"你的手機使用頻率比平常高，因此電量消耗速度可能比平時還要更快。\n\n耗電量最高的應用程式："</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"你的平板電腦使用頻率比平常高，因此電池可能比平時還快沒電。\n\n耗電量最高的應用程式："</string>

@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"もう一度"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"指紋アイコンに合わせて操作"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"指を何度か離して、あらゆる角度から指紋を登録します。"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"指紋アイコンの動きに合わせて長押ししてください。指紋全体を登録します。"</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"指紋全体を登録しています"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"指紋アイコンの動きに合わせて長押ししてください。これで指紋を正しく登録できるようになります。"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"指先をセンサーに当ててください"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"最後に指の縁の部分を当ててください"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"指紋をセンサーに当てて長押しし、指を離してから別の部分を当ててください"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"これで指紋を正しく登録できるようになります。"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋の登録完了"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"指紋を使って、スマートフォンのロック解除や本人確認（アプリへのログインなど）を行えるようになりました"</string>
@@ -2089,7 +2092,7 @@
     <string name="internal_storage" msgid="999496851424448809">"内部ストレージ"</string>
     <string name="recompute_size" msgid="1098091228370999128">"サイズを再計算中..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"アプリのデータを削除しますか？"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"このアプリのすべてのデータ（ファイル、設定、アカウント、データベースを含む）が完全に削除されます。"</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"このアプリのデータが完全に削除されます。ファイル、設定、データベース、その他のアプリデータが対象になります。"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"キャンセル"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -4312,7 +4315,7 @@
     <string name="advanced_apps" msgid="7643010673326578815">"詳細設定"</string>
     <string name="configure_apps" msgid="5468359087126598115">"アプリの設定"</string>
     <string name="unknown_app" msgid="2027248925719898714">"不明なアプリ"</string>
-    <string name="app_permissions" msgid="8666537659217653626">"権限マネージャ"</string>
+    <string name="app_permissions" msgid="8666537659217653626">"権限マネージャー"</string>
     <string name="app_permissions_summary" msgid="2709819220672938860">"<xliff:g id="APPS">%1$s</xliff:g>を使用するアプリ"</string>
     <string name="app_permissions_summary_more" msgid="6247952473615352350">"<xliff:g id="APPS">%1$s</xliff:g>などを使用するアプリ"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"タップして復帰"</string>
@@ -5356,7 +5359,7 @@
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"残り時間や残りデータを利用できなくなる可能性があります。削除前にプロバイダにご確認ください。"</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"コンテンツの取得, アプリのコンテンツ"</string>
     <string name="content_capture" msgid="868372905432812238">"アプリのコンテンツ"</string>
-    <string name="content_capture_summary" msgid="49720773699715531">"Android システムへのコンテンツの送信をアプリに許可する"</string>
+    <string name="content_capture_summary" msgid="49720773699715531">"Android システムにコンテンツを送信することをアプリに許可する"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"システムのヒープダンプを取得"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"システムのヒープダンプを取得しています"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"システムのヒープダンプを取得できませんでした"</string>
@@ -5534,7 +5537,7 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWB を使用するには機内モードを OFF にしてください"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"カメラへのアクセス"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"マイクへのアクセス"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"すべてのアプリとサービス"</string>
+    <string name="sensor_toggle_description" msgid="8248823248606795411">"すべてのアプリとサービスにアクセスを許可する"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"ゲームの設定"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"ゲーム ダッシュボード ショートカットやその他の機能を有効にします"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"SIM カードへのアクセスのリクエスト"</string>

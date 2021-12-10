@@ -492,8 +492,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"ושוב…"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"עוקבים אחר הסמל של טביעת האצבע"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"יש להרים את האצבע ולגעת בחיישן עם חלקים שונים של האצבע לקבלת טביעת אצבע מלאה"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"לוחצים לחיצה ארוכה בכל פעם שסמל טביעת האצבע זז. כך טביעת האצבע תצולם במלואה."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"כך טביעת האצבע תצולם במלואה"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"לוחצים לחיצה ארוכה בכל פעם שסמל טביעת האצבע זז. כך יתועד חלק גדול יותר מהאצבע."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"מניחים את קצה האצבע על החיישן"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"בסוף מניחים את קצוות האצבע"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"מניחים צד אחד של האצבע על החיישן ומחזיקים. אחר כך עוברים לצד השני"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"כך יתועד חלק גדול יותר מהאצבע"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -2139,7 +2142,7 @@
     <string name="internal_storage" msgid="999496851424448809">"אחסון פנימי"</string>
     <string name="recompute_size" msgid="1098091228370999128">"הגודל מחושב מחדש..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"למחוק את נתוני האפליקציה?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"כל נתוני האפליקציה יימחקו לתמיד. הנתונים האלה כוללים את כל הקבצים, ההגדרות, החשבונות, מסדי הנתונים וכדומה."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"נתוני האפליקציה יימחקו באופן סופי. לרבות קבצים, הגדרות, מסדי נתונים ונתונים אחרים מהאפליקציה."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"אישור"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"ביטול"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2728,7 +2731,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"שימוש מוגבר בסוללה"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"הצגת האפליקציות המובילות במידת השימוש בסוללה"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"הטעינה מוגבלת זמנית"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"לשמירה על חיי הסוללה. מידע נוסף."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"כדי לשמור על תקינות הסוללה. מידע נוסף."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"נעשה שימוש רב מהרגיל בטלפון שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"נעשה שימוש רב מהרגיל בטאבלט שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"נעשה שימוש רב מהרגיל במכשיר שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
@@ -3455,7 +3458,7 @@
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"הבנתי"</string>
     <string name="nfc_more_title" msgid="1041094244767216498">"עוד…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"הגדרה של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
-    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"עדכון של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"עדכון אפליקציית התשלום הראשית"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"במסוף תשלום ללא מגע, יש לשלם באמצעות <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"במסוף ללא מגע, יש לשלם באמצעות <xliff:g id="APP_0">%1$s</xliff:g>.\n\nהאפליקציה הזו מחליפה את <xliff:g id="APP_1">%2$s</xliff:g> כאפליקציית התשלומים שתשמש כברירת מחדל."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"הגדרה כברירת מחדל"</string>
@@ -4688,7 +4691,7 @@
     <string name="display_dashboard_summary" msgid="1599453894989339454">"עיצוב כהה, גודל הגופן, בהירות"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"מעבר למצב שינה לאחר 10 דקות של חוסר פעילות"</string>
     <string name="memory_summary" msgid="8221954450951651735">"ממוצע של <xliff:g id="USED_MEMORY">%1$s</xliff:g> מתוך <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> זיכרון בשימוש"</string>
-    <string name="users_summary" msgid="8473589474976307510">"בוצעה כניסה בתור <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="users_summary" msgid="8473589474976307510">"התחברת בתור <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"ברירת המחדל היא <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="backup_disabled" msgid="4503062265560959320">"הגיבוי מושבת"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"‏המערכת עודכנה ל-Android גרסה ‏<xliff:g id="VERSION">%1$s</xliff:g>"</string>
@@ -4761,7 +4764,7 @@
     <string name="color_temperature_toast" msgid="7611532183532407342">"יש לכבות את המסך כדי להחיל שינוי צבע"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"חיישן הלייזר של המצלמה"</string>
     <string name="ota_disable_automatic_update" msgid="1953894421412420231">"עדכוני מערכת אוטומטיים"</string>
-    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"החלת עדכונים כאשר המכשיר מופעל מחדש"</string>
+    <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"עדכונים יותקנו עם הפעלת המכשיר מחדש"</string>
     <string name="usage" msgid="287782903846013936">"שימוש"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"שימוש בחבילת הגלישה"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"שימוש בנתונים באפליקציות"</string>

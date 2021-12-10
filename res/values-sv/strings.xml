@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"En gång till"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Följ ikonen för fingeravtryck"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Lyft fingret flera gånger för att lägga till hela fingeravtrycket"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Tryck länge på fingeravtrycksikonen varje gång den flyttas. Det här gör att hela fingeravtrycket registreras."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Det här gör att hela fingeravtrycket registreras"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Tryck länge på fingeravtrycksikonen varje gång den flyttas. På så sätt kan mer av ditt fingeravtryck registreras."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Placera fingerspetsen på sensorn"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Slutligen trycker du med fingerspetsens sidor"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Placera sidan av fingerspetsen på sensorn, håll kvar och byt sedan till andra sidan"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"På så sätt kan mer av ditt fingeravtryck registreras"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Fingeravtrycket registreras: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeravtrycket är tillagt"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Nu kan du låsa upp telefonen eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar"</string>
@@ -2089,7 +2092,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Intern lagring"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Räknar om storlek…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Vill du ta bort appdata?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Appens samtliga data tas bort permanent. Det inkluderar alla filer, inställningar, konton, databaser och så vidare."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Appens data raderas permanent. Detta omfattar filer, inställningar, databaser och annan appdata."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Avbryt"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2664,7 +2667,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Högre batteriförbrukning"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Se appar med högst batteriförbrukning"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laddning har begränsats tillfälligt"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"För att spara batteri. Läs mer."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Detta bevarar batteriets livslängd. Läs mer."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Eftersom du har använt telefonen mer än vanligt kan batteriet ta slut snabbare än normalt.\n\nAppar med högst batteriförbrukning:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Eftersom du har använt surfplattan mer än vanligt kan batteriet kan ta slut snabbare än normalt.\n\nAppar med högst batteriförbrukning:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Eftersom du har använt enheten mer än vanligt kan batteriet kan ta slut snabbare än normalt.\n\nAppar med högst batteriförbrukning:"</string>
@@ -3960,7 +3963,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Koppla dessa appar"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Kopplade appar har samma behörighet och kan använda varandras data."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Koppla bara appar om du litar på att de inte delar personuppgifter med IT-administratören."</string>
-    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Du kan när som helst koppla från appar i dina sekretessinställningar för enheten."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Du kan när som helst koppla från appar i dina integritetsinställningar för enheten."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Ska jobbappen <xliff:g id="NAME">%1$s</xliff:g> vara betrodd att använda personlig data?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Koppla bara appar om du litar på att de inte delar personuppgifter med IT-administratören."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Appdata"</string>
@@ -4293,7 +4296,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Inga behörigheter har begärts"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Styr appåtkomst till din data"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Integritetsöversikt"</string>
-    <string name="permissions_usage_summary" msgid="6784310472062516454">"Visa vilka appar som nyligen använde behörigheter"</string>
+    <string name="permissions_usage_summary" msgid="6784310472062516454">"Visa vilka appar som nyligen har använt behörigheter"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Appar som inte används"</string>
     <plurals name="unused_apps_summary" formatted="false" msgid="3827583582750975783">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> appar som inte används</item>

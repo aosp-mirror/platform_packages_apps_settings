@@ -453,7 +453,7 @@
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Desbloquea con el rostro o la huella dactilar para"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Desbloquear teléfono"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Autenticación en apps"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Dale el teléfono a tu padre o madre"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Dale el teléfono a tu madre o padre"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Aceptar"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"¿Omitir bloqueo de la pantalla?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otras personas usen esta tablet si la pierdes, te la roban o se restablece."</string>
@@ -484,8 +484,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Una vez más"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Sigue el ícono de huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Sigue levantando el dedo para agregar diferentes partes de la huella dactilar."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Mantén presionado cada vez que ícono se mueva. Esto ayuda a capturar tu huella dactilar completa."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Esto ayuda a capturar tu huella dactilar completa"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Mantén presionado cada vez que ícono de huella dactilar se mueva. Esto permite capturar más superficie de tu huella dactilar."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Apoya la punta del dedo en el sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Finalmente, apoya los bordes del dedo"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Apoya un lado de tu huella dactilar en el sensor y mantén presionado. Luego, cambia de lado."</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Esto permite capturar más superficie de tu huella dactilar"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -1188,7 +1191,7 @@
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Banda del PA"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"Los hotspots brindan acceso a Internet mediante una conexión de datos móviles. Configura uno a fin de crear una red Wi‑Fi para otros dispositivos. Es posible que se apliquen cargos por el uso de datos móviles."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"Las apps pueden crear un hotspot para compartir contenido con dispositivos cercanos."</string>
-    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Desactivar el hotspot de manera automática"</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Desactivar hotspot automáticamente"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Cuando no hay dispositivos conectados"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Extender la compatibilidad"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Ayuda a que otros dispositivos encuentren este hotspot. Disminuye la velocidad de conexión de hotspot."</string>
@@ -1883,7 +1886,7 @@
     <string name="location_access_summary" msgid="8634100005481578143">"Permitir que las aplicaciones que solicitaron permiso usen la información de tu ubicación"</string>
     <string name="location_sources_heading" msgid="6126965815860570524">"Fuentes de ubicación"</string>
     <string name="about_settings" product="tablet" msgid="2888705054709289693">"Acerca de la tablet"</string>
-    <string name="about_settings" product="default" msgid="4038626127378127613">"Acerca del dispositivo"</string>
+    <string name="about_settings" product="default" msgid="4038626127378127613">"Acerca del teléfono"</string>
     <string name="about_settings" product="device" msgid="9012888717090302815">"Acerca del dispositivo"</string>
     <string name="about_settings" product="emulator" msgid="2516560858771320366">"Acerca del dispositivo emulado"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Ver información legal, estado, versión de software del tablet"</string>
@@ -2091,7 +2094,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Almacenamiento interno"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Recalculando el tamaño…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"¿Borrar los datos de la app?"</string>
-    <string name="clear_data_dlg_text" msgid="7870723948123690332">"Se eliminarán de forma permanente todos los datos de esta aplicación, incluidos archivos, ajustes, cuentas, bases de datos, etc."</string>
+    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Se borrarán de forma permanente los datos de esta app. Se incluyen archivos, parámetros de configuración, bases de datos y otros datos de app."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"Aceptar"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Cancelar"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
@@ -2390,7 +2393,7 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Selecciona el tiempo de visualización de mensajes que requieren acciones, pero que solo se muestran temporalmente.\n\nNo todas las apps admiten esta opción."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Tiempo de respuesta táctil"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversión de color"</string>
-    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usar inversión de color"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usar inversión de colores"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"La inversión de color oscurece la pantalla.&lt;br/&gt;&lt;br/&gt; Nota: &lt;ol&gt; &lt;li&gt; También puede aclararla.&lt;/li&gt; &lt;li&gt; Los colores cambiarán para el contenido multimedia y las imágenes.&lt;/li&gt; &lt;li&gt; El Tema oscuro permite mostrar un fondo oscuro y funciona solo con apps compatibles. Por otro lado, la inversión de color funciona con todas las apps.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automático (tiempo de permanencia)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"El clic automático funciona con un mouse conectado. Puedes configurar el cursor del mouse para que haga clic automáticamente cuando el cursor se detiene durante un período determinado."</string>
@@ -2411,7 +2414,7 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Respuesta táctil"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Usar <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Abrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usar la corrección de color"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usar la corrección de colores"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Mostrar subtítulos"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Solo para apps compatibles"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Estilo y tamaño de los subtítulos"</string>
@@ -3338,7 +3341,7 @@
     <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"¿Eliminar invitado?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Se eliminarán las aplicaciones y los datos de esta sesión."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Eliminar"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Activar llamadas de teléfono"</string>
+    <string name="user_enable_calling" msgid="264875360626905535">"Activar llamadas telefónicas"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activar llamadas telefónicas y SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Borrar usuario"</string>
     <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"¿Activar llamadas telefónicas?"</string>
@@ -4564,7 +4567,7 @@
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"No se puede abrir esta app"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Opción bloqueada por tu proveedor de crédito"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Se requiere un padre o madre"</string>
-    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Dale el teléfono a tu padre o madre para iniciar la configuración"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Dale el teléfono a tu madre o padre para iniciar la configuración"</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Si tienes alguna pregunta, comunícate con tu administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Más detalles"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"El administrador puede controlar y administrar las apps y los datos asociados con tu perfil de trabajo, incluida la configuración, los permisos, el acceso corporativo, la actividad de la red y la información de la ubicación del dispositivo."</string>
@@ -4631,7 +4634,7 @@
     <string name="cell_data_template" msgid="6077963976103260821">"Datos móviles: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"Datos de Wi-Fi: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"Datos de Ethernet: <xliff:g id="AMOUNT">^1</xliff:g>"</string>
-    <string name="billing_cycle" msgid="6618424022653876279">"Límite y advertencia de datos"</string>
+    <string name="billing_cycle" msgid="6618424022653876279">"Advertencia de límite de datos"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"Ciclo de uso de datos móviles"</string>
     <string name="cell_data_warning" msgid="5664921950473359634">"Advertencia de datos: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"Límite de datos: <xliff:g id="ID_1">^1</xliff:g>"</string>
