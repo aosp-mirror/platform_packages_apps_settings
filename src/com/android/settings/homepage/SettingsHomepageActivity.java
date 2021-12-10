@@ -311,7 +311,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void launchDeepLinkIntentToRight() {
-        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
+        if (!mIsEmbeddingActivityEnabled) {
             return;
         }
 
