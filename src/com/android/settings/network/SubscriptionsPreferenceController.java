@@ -316,7 +316,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 : (serviceState.getState() == ServiceState.STATE_IN_SERVICE);
         if (isDataInService || isVoiceInService || isCarrierNetworkActive) {
             icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels,
-                    !mTelephonyManager.isDataEnabled());
+                    !tmForSubId.isDataEnabled());
         }
 
         final boolean isActiveCellularNetwork =
