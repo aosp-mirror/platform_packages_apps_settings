@@ -24,6 +24,7 @@ import androidx.preference.Preference;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.safetycenter.SafetyCenterStatus;
 
 public class TopLevelSecurityEntryPreferenceController extends BasePreferenceController {
 
@@ -37,7 +38,10 @@ public class TopLevelSecurityEntryPreferenceController extends BasePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        if (!SafetyCenterStatus.isEnabled()) {
+            return AVAILABLE;
+        }
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

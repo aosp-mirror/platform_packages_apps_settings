@@ -19,12 +19,14 @@ package com.android.settings.homepage;
 import static com.android.settings.search.actionbar.SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR;
 import static com.android.settingslib.search.SearchIndexable.MOBILE;
 
+import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -53,6 +55,7 @@ public class TopLevelSettings extends DashboardFragment implements
     private static final String SAVED_HIGHLIGHT_MIXIN = "highlight_mixin";
     private static final String PREF_KEY_SUPPORT = "top_level_support";
 
+    private boolean mIsEmbeddingActivityEnabled;
     private TopLevelHighlightMixin mHighlightMixin;
     private boolean mFirstStarted = true;
 
@@ -122,7 +125,9 @@ public class TopLevelSettings extends DashboardFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext())) {
+        mIsEmbeddingActivityEnabled =
+                ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext());
+        if (!mIsEmbeddingActivityEnabled) {
             return;
         }
 
@@ -138,13 +143,21 @@ public class TopLevelSettings extends DashboardFragment implements
     public void onStart() {
         if (mFirstStarted) {
             mFirstStarted = false;
-        } else if (!ActivityEmbeddingUtils.isTwoPaneResolution(getActivity())) {
+        } else if (mIsEmbeddingActivityEnabled && isOnlyOneActivityInTask()
+                && !ActivityEmbeddingUtils.isTwoPaneResolution(getActivity())) {
             // Set default highlight menu key for 1-pane homepage since it will show the placeholder
             // page once changing back to 2-pane.
+            Log.i(TAG, "Set default menu key");
             setHighlightMenuKey(getString(SettingsHomepageActivity.DEFAULT_HIGHLIGHT_MENU_KEY),
                     /* scrollNeeded= */ false);
         }
         super.onStart();
+    }
+
+    private boolean isOnlyOneActivityInTask() {
+        final ActivityManager.RunningTaskInfo taskInfo = getSystemService(ActivityManager.class)
+                .getRunningTasks(1).get(0);
+        return taskInfo.numActivities == 1;
     }
 
     @Override
@@ -225,8 +238,7 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
-        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(getContext())
-                || !(getActivity() instanceof SettingsHomepageActivity)) {
+        if (!mIsEmbeddingActivityEnabled || !(getActivity() instanceof SettingsHomepageActivity)) {
             return super.onCreateAdapter(preferenceScreen);
         }
         return mHighlightMixin.onCreateAdapter(this, preferenceScreen);

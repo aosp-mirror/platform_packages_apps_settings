@@ -120,8 +120,8 @@ public class AccessibilityScreenSizeForSetupWizardActivity extends InstrumentedA
                         : R.string.screen_zoom_title);
         ((TextView) findViewById(R.id.sud_layout_subtitle)).setText(
                 getFragmentType(getIntent()) == FragmentType.FONT_SIZE
-                        ? R.string.short_summary_font_size
-                        : R.string.screen_zoom_short_summary);
+                        ? R.string.font_size_summary
+                        : R.string.screen_zoom_summary);
     }
 
     private boolean isSuwSupportedTwoPanes() {

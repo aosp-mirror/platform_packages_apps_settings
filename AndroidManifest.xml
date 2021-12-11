@@ -110,6 +110,7 @@
     <uses-permission android:name="android.permission.MANAGE_APP_HIBERNATION" />
     <uses-permission android:name="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK" />
     <uses-permission android:name="android.permission.ALLOW_PLACE_IN_MULTI_PANE_SETTINGS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
             android:name=".SettingsApplication"
@@ -150,6 +151,7 @@
                   android:taskAffinity=""
                   android:launchMode="singleTask"
                   android:exported="true"
+                  android:enabled="false"
                   android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout"
                   android:permission="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK">
             <intent-filter>
@@ -311,6 +313,7 @@
 
         <receiver android:name=".search.SearchStateReceiver"
                   android:exported="true"
+                  android:enabled="false"
                   android:permission="android.permission.READ_SEARCH_INDEXABLES">
             <intent-filter>
                 <action android:name="com.android.settings.SEARCH_START"/>
@@ -673,12 +676,12 @@
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
+                  android:theme="@style/Theme.AlertDialog"/>
 
         <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
+                  android:theme="@style/Theme.AlertDialog"/>
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -4260,14 +4263,14 @@
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
+            android:theme="@style/Theme.AlertDialog"/>
 
         <activity
             android:name=".sim.DsdsDialogActivity"
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
+            android:theme="@style/Theme.AlertDialog"/>
 
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />

@@ -85,7 +85,7 @@ public class DsdsDialogActivity extends SubscriptionActionDialogActivity
     }
 
     @Override
-    public void onConfirm(int tag, boolean confirmed) {
+    public void onConfirm(int tag, boolean confirmed, int itemPosition) {
         if (!confirmed) {
             Log.i(TAG, "User cancel the dialog to enable DSDS.");
             startChooseSimActivity();

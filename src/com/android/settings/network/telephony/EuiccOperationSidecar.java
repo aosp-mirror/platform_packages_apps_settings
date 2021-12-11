@@ -24,10 +24,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.util.Log;
 
 import com.android.settings.SidecarFragment;
+import com.android.settings.network.SwitchSlotSidecar;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -37,7 +39,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * should implement its own get() function to return an instance of that class, and implement the
  * functional class like run() to actually trigger the function in EuiccManager.
  */
-public abstract class EuiccOperationSidecar extends SidecarFragment {
+public abstract class EuiccOperationSidecar extends SidecarFragment
+        implements SidecarFragment.Listener{
     private static final String TAG = "EuiccOperationSidecar";
     private static final int REQUEST_CODE = 0;
     private static final String EXTRA_OP_ID = "op_id";
@@ -45,6 +48,9 @@ public abstract class EuiccOperationSidecar extends SidecarFragment {
             new AtomicInteger((int) SystemClock.elapsedRealtime());
 
     protected EuiccManager mEuiccManager;
+    protected TelephonyManager mTelephonyManager;
+    protected SwitchSlotSidecar mSwitchSlotSidecar;
+
 
     private int mResultCode;
     private int mDetailedCode;
@@ -107,6 +113,8 @@ public abstract class EuiccOperationSidecar extends SidecarFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mEuiccManager = getContext().getSystemService(EuiccManager.class);
+        mTelephonyManager = getContext().getSystemService(TelephonyManager.class);
+        mSwitchSlotSidecar = SwitchSlotSidecar.get(getChildFragmentManager());
 
         getContext()
                 .getApplicationContext()
@@ -119,9 +127,39 @@ public abstract class EuiccOperationSidecar extends SidecarFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mSwitchSlotSidecar.addListener(this);
+    }
+
+    @Override
+    public void onPause() {
+        mSwitchSlotSidecar.removeListener(this);
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         getContext().getApplicationContext().unregisterReceiver(mReceiver);
         super.onDestroy();
+    }
+
+    @Override
+    public void onStateChange(SidecarFragment fragment) {
+        if (fragment == mSwitchSlotSidecar) {
+            switch (mSwitchSlotSidecar.getState()) {
+                case State.SUCCESS:
+                    mSwitchSlotSidecar.reset();
+                    Log.i(TAG, "mSwitchSlotSidecar SUCCESS");
+                    break;
+                case State.ERROR:
+                    mSwitchSlotSidecar.reset();
+                    Log.i(TAG, "mSwitchSlotSidecar ERROR");
+                    break;
+            }
+        } else {
+            Log.wtf(TAG, "Received state change from a sidecar not expected.");
+        }
     }
 
     public int getResultCode() {

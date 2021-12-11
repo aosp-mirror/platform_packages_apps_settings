@@ -16,12 +16,13 @@
 
 package com.android.settings.network.telephony;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.telephony.SubscriptionManager;
 
+import androidx.fragment.app.FragmentActivity;
+
 /** The base class for subscription action dialogs */
-public class SubscriptionActionDialogActivity extends Activity {
+public class SubscriptionActionDialogActivity extends FragmentActivity {
 
     private static final String TAG = "SubscriptionActionDialogActivity";
     // Arguments

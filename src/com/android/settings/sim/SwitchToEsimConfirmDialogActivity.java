@@ -101,7 +101,7 @@ public class SwitchToEsimConfirmDialogActivity extends SubscriptionActionDialogA
     }
 
     @Override
-    public void onConfirm(int tag, boolean confirmed) {
+    public void onConfirm(int tag, boolean confirmed, int itemPosition) {
         if (!confirmed) {
             AlertDialogFragment.show(
                     this,
