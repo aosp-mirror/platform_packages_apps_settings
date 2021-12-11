@@ -268,9 +268,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_choose_your_pin_header_for_fingerprint,
                     R.string.lockpassword_choose_your_pin_header_for_face,
                     R.string.lockpassword_choose_your_pin_header_for_biometrics,
-                    R.string.lockpassword_choose_password_description,
                     R.string.lock_settings_picker_biometrics_added_security_message,
-                    R.string.lockpassword_choose_pin_description,
                     R.string.lock_settings_picker_biometrics_added_security_message,
                     R.string.next_label),
 
@@ -285,8 +283,6 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
-                    0,
-                    0,
                     0,
                     0,
                     R.string.lockpassword_confirm_label),
@@ -304,8 +300,6 @@ public class ChooseLockPassword extends SettingsActivity {
                     R.string.lockpassword_confirm_pins_dont_match,
                     0,
                     0,
-                    0,
-                    0,
                     R.string.lockpassword_confirm_label);
 
             Stage(int hintInAlpha,
@@ -318,9 +312,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     int hintInNumericForFingerprint,
                     int hintInNumericForFace,
                     int hintInNumericForBiometrics,
-                    int messageInAlpha,
                     int messageInAlphaForBiometrics,
-                    int messageInNumeric,
                     int messageInNumericForBiometrics,
                     int nextButtonText) {
 
@@ -336,10 +328,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 this.numericHintForFace = hintInNumericForFace;
                 this.numericHintForBiometrics = hintInNumericForBiometrics;
 
-                this.alphaMessage = messageInAlpha;
                 this.alphaMessageForBiometrics = messageInAlphaForBiometrics;
-
-                this.numericMessage = messageInNumeric;
                 this.numericMessageForBiometrics = messageInNumericForBiometrics;
 
                 this.buttonText = nextButtonText;
@@ -365,11 +354,9 @@ public class ChooseLockPassword extends SettingsActivity {
             public final int numericHintForBiometrics;
 
             // Password description
-            public final int alphaMessage;
             public final int alphaMessageForBiometrics;
 
             // PIN description
-            public final int numericMessage;
             public final int numericMessageForBiometrics;
 
             public final int buttonText;
@@ -407,7 +394,7 @@ public class ChooseLockPassword extends SettingsActivity {
 
                     case TYPE_NONE:
                     default:
-                        return isAlpha ? alphaMessage : numericMessage;
+                        return 0;
                 }
             }
         }
@@ -869,12 +856,17 @@ public class ChooseLockPassword extends SettingsActivity {
                 setNextEnabled(canInput && length >= LockPatternUtils.MIN_LOCK_PASSWORD_SIZE);
                 mSkipOrClearButton.setVisibility(toVisibility(canInput && length > 0));
             }
-            int message = mUiStage.getMessage(mIsAlphaMode, getStageType());
-            if (message != 0) {
-                mMessage.setVisibility(View.VISIBLE);
-                mMessage.setText(message);
+            final int stage = getStageType();
+            if (getStageType() != Stage.TYPE_NONE) {
+                int message = mUiStage.getMessage(mIsAlphaMode, stage);
+                if (message != 0) {
+                    mMessage.setVisibility(View.VISIBLE);
+                    mMessage.setText(message);
+                } else {
+                    mMessage.setVisibility(View.INVISIBLE);
+                }
             } else {
-                mMessage.setVisibility(View.INVISIBLE);
+                mMessage.setVisibility(View.GONE);
             }
 
             setNextText(mUiStage.buttonText);

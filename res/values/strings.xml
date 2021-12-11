@@ -722,6 +722,12 @@
     <string name="security_status_title">Security status</string>
     <!-- Summary for Security settings, explaining a few important settings under it [CHAR LIMIT=NONE] -->
     <string name="security_dashboard_summary">Screen lock, Find My Device, app security</string>
+    <!-- TODO(b/208624929): Update to an UX approved title and char limit. -->
+    <!-- Main Settings screen setting title for the item that takes you to the safety center [CHAR LIMIT=60] -->
+    <string name="safety_center_title">Security &amp; privacy</string>
+    <!-- TODO(b/208624929): Update to an UX approved summary and char limit. -->
+    <!-- Main Settings screen setting summary for the item that takes you to the safety center [CHAR LIMIT=60] -->
+    <string name="safety_center_summary">Permissions, screen lock, app security</string>
 
     <!-- Face enrollment and settings --><skip />
     <!-- Note: Update FaceEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
@@ -871,11 +877,9 @@
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face model?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_remove_dialog_details">Your face model will be permanently and securely deleted. After deletion, you will need your PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
-    <!-- Dialog title shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=35] -->
-    <string name="security_settings_face_settings_remove_model_dialog_title">Delete face model?</string>
-    <!-- Dialog contents shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_remove_model_dialog_details">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
+    <string name="security_settings_face_settings_remove_dialog_details">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
+    <!-- Dialog contents shown when the user removes an enrollment when configured as a convenience [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_remove_dialog_details_convenience">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your phone.</string>
     <!-- Subtitle shown for contextual setting face enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_context_subtitle">Use Face Unlock to unlock your phone</string>
 
@@ -4385,25 +4389,6 @@
     <string name="lockpassword_choose_your_pattern_header">Set a pattern</string>
     <!-- Header on first screen of choose work profile pattern flow [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_profile_pattern_header">Set a work pattern</string>
-
-    <!-- Header on first screen of choose device password flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_password_description" product="phone">For added security, set a password to unlock the phone</string>
-    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_pin_description" product="phone">For added security, set a PIN to unlock the phone</string>
-    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=NONE] -->
-    <string name="lockpattern_choose_pattern_description" product="phone">For added security, set a pattern to unlock the phone</string>
-    <!-- Header on first screen of choose device password flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_password_description" product="tablet">For added security, set a password to unlock the tablet</string>
-    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_pin_description" product="tablet">For added security, set a PIN to unlock the tablet</string>
-    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=NONE] -->
-    <string name="lockpattern_choose_pattern_description" product="tablet">For added security, set a pattern to unlock the tablet</string>
-    <!-- Header on first screen of choose device password flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_password_description" product="default">For added security, set a password to unlock the device</string>
-    <!-- Header on first screen of choose device PIN flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_pin_description" product="default">For added security, set a PIN to unlock the device</string>
-    <!-- Header on first screen of choose device pattern flow [CHAR LIMIT=NONE] -->
-    <string name="lockpattern_choose_pattern_description" product="default">For added security, set a pattern to unlock the device</string>
 
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set password</string>
@@ -8122,11 +8107,17 @@
     <!-- Checkbox to always use for calls.  [CHAR LIMIT=40] -->
     <string name="sim_calls_always_use">Always use this for calls</string>
     <!-- Message for selecting sim for data in settings.  [CHAR LIMIT=40] -->
-    <string name="select_sim_for_data">Select a SIM for data</string>
+    <string name="select_sim_for_data">Choose SIM for mobile data</string>
     <!-- Message for selecting sim for SMS in settings.  [CHAR LIMIT=40] -->
     <string name="select_sim_for_sms">Select a SIM for SMS</string>
     <!-- Message for switching data SIM; switching takes a while -->
     <string name="data_switch_started">Switching data SIM, this may take up to a minute\u2026</string>
+    <!-- Title for selecting specific sim for data in settings.  [CHAR LIMIT=40] -->
+    <string name="select_specific_sim_for_data_title">Use <xliff:g id="new_sim" example="carrierA">%1$s</xliff:g> for mobile data?</string>
+    <!-- Message for selecting specific sim for data in settings.  [CHAR LIMIT=NONE] -->
+    <string name="select_specific_sim_for_data_msg">If you switch to <xliff:g id="new_sim" example="carrierA">%1$s</xliff:g>, <xliff:g id="old_sim" example="carrierB">%2$s</xliff:g> will no longer be used for mobile data.</string>
+    <!-- Button on a selecting specific sim dialog to confirm data in settings.  [CHAR LIMIT=40] -->
+    <string name="select_specific_sim_for_data_button">Use <xliff:g id="new_sim" example="carrierA">%1$s</xliff:g></string>
     <!-- Message for selecting sim for call in settings.  [CHAR LIMIT=40] -->
     <string name="select_sim_for_calls">Call with</string>
     <!-- Title for selecting a SIM card.  [CHAR LIMIT=40] -->
@@ -12936,14 +12927,22 @@
     <string name="sim_action_switch_sub_dialog_title">Switch to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
     <!-- Title of confirmation dialog asking the user if they want to switch to the SIM card. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_switch_psim_dialog_title">Switch to using SIM card?</string>
+    <!-- Title of confirmation dialog asking the user if they want to switch subscription. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_mep_title">Use <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>?</string>
     <!-- Body text of confirmation dialog for switching subscription that involves switching SIM slots. Indicates that only one SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_switch_sub_dialog_text">Only one SIM can be active at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
     <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only one downloaded SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_switch_sub_dialog_text_downloaded">Only one downloaded SIM can be active at a time.\n\nSwitching to <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> won\u2019t cancel your <xliff:g id="from_carrier_name" example="Sprint">%2$s</xliff:g> service.</string>
     <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only one SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_switch_sub_dialog_text_single_sim">Only one SIM can be active at a time.\n\nSwitching won\u2019t cancel your <xliff:g id="to_carrier_name" example="Google Fi">%1$s</xliff:g> service.</string>
+    <!-- Body text of confirmation dialog for switching subscription between two eSIM profiles. Indicates that only one downloaded SIM can be active at a time. Also that switching will not cancel the user's mobile service plan. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_mep_text">You can use 2 SIMs at a time. To use <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g>, turn off another SIM.</string>
     <!-- Text of confirm button in the confirmation dialog asking the user if they want to switch subscription. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_switch_sub_dialog_confirm">Switch to <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g></string>
+    <!-- Text of carrier list item in the mep confirmation dialog asking the user if they want to turn off the carrier. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off">Turn off <xliff:g id="carrier_name" example="Google Fi">%1$s</xliff:g></string>
+    <!-- Text of carrier list item in the mep confirmation dialog asking the user if they want to turn off the carrier. [CHAR_LIMIT=NONE] -->
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off">Turning off a SIM won\u2019t cancel your service</string>
     <!-- Status message indicating the device is in the process of disconnecting from one mobile network and immediately connecting to another. [CHAR_LIMIT=NONE] -->
     <string name="sim_action_enabling_sim_without_carrier_name">Connecting to network&#8230;</string>
     <!-- Text of progress dialog indicating the subscription switch is in progress. [CHAR_LIMIT=NONE] -->

@@ -96,7 +96,7 @@ public class DeleteEuiccSubscriptionDialogActivity extends SubscriptionActionDia
     }
 
     @Override
-    public void onConfirm(int tag, boolean confirmed) {
+    public void onConfirm(int tag, boolean confirmed, int itemPosition) {
         if (!confirmed) {
             finish();
             return;
