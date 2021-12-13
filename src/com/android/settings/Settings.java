@@ -304,6 +304,8 @@ public class Settings extends SettingsActivity {
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class PowerMenuSettingsActivity extends SettingsActivity {}
+    public static class SubscriptionSettingsActivity extends SettingsActivity {  /* empty */  }
+
     /**
      * Activity for BugReportHandlerPicker.
      */
