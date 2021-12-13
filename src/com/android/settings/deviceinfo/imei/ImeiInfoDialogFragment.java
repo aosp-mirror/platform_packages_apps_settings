@@ -31,7 +31,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
+import com.android.settings.deviceinfo.PhoneNumberUtil;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class ImeiInfoDialogFragment extends InstrumentedDialogFragment {
 
@@ -83,13 +87,27 @@ public class ImeiInfoDialogFragment extends InstrumentedDialogFragment {
         }
     }
 
+    /**
+     * View ID(s) which is digit format (instead of decimal number) text.
+     **/
+    private static final int [] sViewIdsInDigitFormat = IntStream
+            .of(ImeiInfoDialogController.ID_MEID_NUMBER_VALUE,
+                    ImeiInfoDialogController.ID_MIN_NUMBER_VALUE,
+                    ImeiInfoDialogController.ID_IMEI_VALUE,
+                    ImeiInfoDialogController.ID_IMEI_SV_VALUE)
+            .sorted().toArray();
+
     public void setText(int viewId, CharSequence text) {
         final TextView textView = mRootView.findViewById(viewId);
+        if (textView == null) {
+            return;
+        }
         if (TextUtils.isEmpty(text)) {
             text = getResources().getString(R.string.device_info_default);
         }
-        if (textView != null) {
-            textView.setText(text);
+        else if (Arrays.binarySearch(sViewIdsInDigitFormat, viewId) >= 0) {
+            text = PhoneNumberUtil.expandByTts(text);
         }
+        textView.setText(text);
     }
 }
