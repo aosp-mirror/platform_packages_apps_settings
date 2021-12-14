@@ -45,6 +45,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.os.SystemProperties;
@@ -73,9 +74,11 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
 import com.android.settingslib.utils.ThreadUtils;
@@ -1006,6 +1009,23 @@ public class MobileNetworkUtils {
 
     private static String setSummaryResId(Context context, int resId) {
         return context.getResources().getString(resId);
+    }
+
+    public static void launchMobileNetworkSettings(Context context, SubscriptionInfo info) {
+        final int subId = info.getSubscriptionId();
+        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            Log.d(TAG, "launchMobileNetworkSettings fail, subId is invalid");
+            return;
+        }
+
+        final Bundle extra = new Bundle();
+        extra.putInt(Settings.EXTRA_SUB_ID, subId);
+        new SubSettingLauncher(context)
+                .setTitleText(SubscriptionUtil.getUniqueSubscriptionDisplayName(info, context))
+                .setDestination(MobileNetworkSettings.class.getCanonicalName())
+                .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setArguments(extra)
+                .launch();
     }
 
 }
