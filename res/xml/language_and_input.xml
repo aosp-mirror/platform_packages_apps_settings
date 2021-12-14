@@ -19,12 +19,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/language_settings">
+    <PreferenceCategory
+        android:key="languages_category"
+        android:title="@string/locale_picker_category_title">
+        <Preference
+            android:key="phone_language"
+            android:title="@string/phone_language"
+            android:icon="@drawable/ic_translate_24dp"
+            android:fragment="com.android.settings.localepicker.LocaleListEditor" />
 
-    <Preference
-        android:key="phone_language"
-        android:title="@string/phone_language"
-        android:icon="@drawable/ic_translate_24dp"
-        android:fragment="com.android.settings.localepicker.LocaleListEditor" />
+        <Preference
+            android:key="apps_language"
+            android:title="@string/app_locales_picker_menu_title"
+            android:summary="@string/app_locale_picker_summary"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            settings:controller="com.android.settings.applications.appinfo.ManageAppLocalePreferenceController">
+            <extra
+                android:name="classname"
+                android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
+        </Preference>
+
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="keyboards_category"

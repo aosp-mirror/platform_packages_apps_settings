@@ -111,6 +111,7 @@
     <uses-permission android:name="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK" />
     <uses-permission android:name="android.permission.ALLOW_PLACE_IN_MULTI_PANE_SETTINGS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.READ_APP_SPECIFIC_LOCALES" />
 
     <application
             android:name=".SettingsApplication"
@@ -240,6 +241,7 @@
         <activity android:name=".network.telephony.MobileNetworkActivity"
                   android:label="@string/network_settings_title"
                   android:exported="true"
+                  android:taskAffinity="com.android.settings.root"
                   android:launchMode="singleTask"
                   android:configChanges="orientation|screenSize|keyboardHidden">
             <!-- Note: Since the framework does not support the multiple requests of network scan
@@ -255,6 +257,14 @@
                 <action android:name="android.settings.MMS_MESSAGE_SETTING" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Settings$SubscriptionSettingsActivity"
+            android:label="@string/network_settings_title"
+            android:exported="false">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.network.telephony.MobileNetworkSettings"/>
         </activity>
 
         <activity android:name=".Settings$MobileNetworkListActivity"
