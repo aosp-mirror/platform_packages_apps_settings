@@ -17,33 +17,28 @@
 package com.android.settings.network;
 
 import android.content.Context;
+import android.util.Log;
 
-import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 public class NetworkProviderSimsCategoryController extends PreferenceCategoryController implements
         LifecycleObserver {
-
+    private static final String LOG_TAG = "NetworkProviderSimsCategoryController";
     private static final String KEY_PREFERENCE_CATEGORY_SIM = "provider_model_sim_category";
     private NetworkProviderSimListController mNetworkProviderSimListController;
+    private PreferenceCategory mPreferenceCategory;
 
-    public NetworkProviderSimsCategoryController(Context context, String key) {
+    public NetworkProviderSimsCategoryController(Context context, String key, Lifecycle lifecycle) {
         super(context, key);
-    }
-
-    public void init(Lifecycle lifecycle) {
-        mNetworkProviderSimListController = createSimListController(lifecycle);
-    }
-
-    @VisibleForTesting
-    protected NetworkProviderSimListController createSimListController(
-            Lifecycle lifecycle) {
-        return new NetworkProviderSimListController(mContext, lifecycle);
+        mNetworkProviderSimListController =
+                new NetworkProviderSimListController(mContext, lifecycle);
     }
 
     @Override
@@ -59,8 +54,26 @@ public class NetworkProviderSimsCategoryController extends PreferenceCategoryCon
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        PreferenceCategory preferenceCategory = screen.findPreference(KEY_PREFERENCE_CATEGORY_SIM);
-        preferenceCategory.setVisible(isAvailable());
         mNetworkProviderSimListController.displayPreference(screen);
+        mPreferenceCategory = screen.findPreference(KEY_PREFERENCE_CATEGORY_SIM);
+        if (mPreferenceCategory == null) {
+            Log.d(LOG_TAG, "displayPreference(), Can not find the category.");
+            return;
+        }
+        mPreferenceCategory.setVisible(isAvailable());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (mPreferenceCategory == null) {
+            Log.d(LOG_TAG, "updateState(), Can not find the category.");
+            return;
+        }
+        int count = mPreferenceCategory.getPreferenceCount();
+        String title = mContext.getString(count > 1
+                ? R.string.provider_network_settings_title
+                : R.string.sim_category_title);
+        mPreferenceCategory.setTitle(title);
     }
 }

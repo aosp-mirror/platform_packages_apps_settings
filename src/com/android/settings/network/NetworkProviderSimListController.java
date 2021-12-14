@@ -172,7 +172,6 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
         for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mContext)) {
             if (!info.isEmbedded()) {
                 subList.add(info);
-                break;
             }
         }
         return subList;

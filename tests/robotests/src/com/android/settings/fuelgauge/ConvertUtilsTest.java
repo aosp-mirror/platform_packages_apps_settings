@@ -30,7 +30,6 @@ import android.os.UserHandle;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -318,71 +317,6 @@ public final class ConvertUtilsTest {
             .isEqualTo(Math.round(entry.mBackgroundUsageTimeInMs * ratio));
         assertThat(resultEntry.mConsumePower)
             .isEqualTo(entry.mConsumePower * ratio);
-    }
-
-    @Ignore
-    @Test
-    public void testUtcToLocalTime_returnExpectedResult() {
-        ConvertUtils.sZoneId = null;
-        ConvertUtils.sLocale = null;
-        final long timestamp = 1619196786769L;
-        final String expectedZoneId = "America/Los_Angeles";
-        ConvertUtils.sSimpleDateFormat = null;
-        // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTime(mContext, /*timestamp=*/ 0);
-        ConvertUtils.sSimpleDateFormat
-            .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
-        mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
-
-        assertThat(ConvertUtils.utcToLocalTime(mContext, timestamp))
-            .isEqualTo("Apr 24,2021 00:53:06");
-        assertThat(ConvertUtils.sZoneId).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocale).isEqualTo(new Locale("en_US"));
-    }
-
-    @Ignore
-    @Test
-    public void testUtcToLocalTimeHour_12HourFormat_returnExpectedResult() {
-        ConvertUtils.sZoneIdForHour = null;
-        ConvertUtils.sLocaleForHour = null;
-        final long timestamp = 1619000086769L;
-        final String expectedZoneId = "America/Los_Angeles";
-        ConvertUtils.sSimpleDateFormatForHour = null;
-        // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTimeHour(
-            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
-        ConvertUtils.sSimpleDateFormatForHour
-            .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
-        mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
-
-        assertThat(ConvertUtils.utcToLocalTimeHour(
-            mContext, timestamp, /*is24HourFormat=*/ false)).isEqualTo("6");
-        assertThat(ConvertUtils.sZoneIdForHour).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocaleForHour).isEqualTo(new Locale("en_US"));
-    }
-
-    @Ignore
-    @Test
-    public void testUtcToLocalTimeHour_24HourFormat_returnExpectedResult() {
-        ConvertUtils.sZoneIdForHour = null;
-        ConvertUtils.sLocaleForHour = null;
-        final long timestamp = 1619000086769L;
-        final String expectedZoneId = "America/Los_Angeles";
-        ConvertUtils.sSimpleDateFormatForHour = null;
-        // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTimeHour(
-            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
-        ConvertUtils.sSimpleDateFormatForHour
-            .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
-        mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
-
-        assertThat(ConvertUtils.utcToLocalTimeHour(
-            mContext, timestamp, /*is24HourFormat=*/ true)).isEqualTo("18");
-        assertThat(ConvertUtils.sZoneIdForHour).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocaleForHour).isEqualTo(new Locale("en_US"));
     }
 
     @Test
