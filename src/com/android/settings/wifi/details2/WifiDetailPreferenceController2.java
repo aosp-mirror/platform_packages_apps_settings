@@ -76,6 +76,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiDialog2.WifiDialog2Listener;
 import com.android.settings.wifi.WifiUtils;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -1099,7 +1100,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         refreshPage();
 
         // Refresh the Preferences in fragment.
-        ((WifiNetworkDetailsFragment2) mFragment).refreshPreferences();
+        ((WifiNetworkDetailsFragment) mFragment).refreshPreferences();
     }
 
     /**

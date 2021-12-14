@@ -163,7 +163,7 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
             View viewForPackage = LayoutInflater.from(this)
                     .inflate(R.layout.notification_history_app_layout, null);
 
-            final View container = viewForPackage.findViewById(R.id.notification_list);
+            final View container = viewForPackage.findViewById(R.id.notification_list_wrapper);
             container.setVisibility(View.GONE);
             View header = viewForPackage.findViewById(R.id.app_header);
             NotificationExpandButton expand = viewForPackage.findViewById(

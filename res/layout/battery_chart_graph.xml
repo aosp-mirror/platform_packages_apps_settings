@@ -40,12 +40,14 @@
         android:contentDescription="@string/battery_usage_chart"
         android:textAppearance="?android:attr/textAppearanceSmall"
         settings:textColor="?android:attr/textColorSecondary" />
+    <!-- Use non-scalable text size from text_size_small_material -->
     <TextView
         android:id="@+id/companion_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?android:attr/textColorSecondary"/>
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="14dp" />
 
 </LinearLayout>

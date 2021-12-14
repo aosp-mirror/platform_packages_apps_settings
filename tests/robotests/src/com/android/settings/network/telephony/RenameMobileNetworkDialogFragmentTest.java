@@ -159,7 +159,7 @@ public class RenameMobileNetworkDialogFragmentTest {
                 eq(SubscriptionManager.NAME_SOURCE_USER_INPUT));
         assertThat(captor.getValue()).isEqualTo("test2");
         verify(mSubscriptionMgr)
-                .setIconTint(eq(Color.parseColor("#ff00796b" /* teal */)), eq(mSubscriptionId));
+                .setIconTint(eq(Color.parseColor("#ff006D74" /* cyan */)), eq(mSubscriptionId));
     }
 
     @Test
@@ -172,6 +172,34 @@ public class RenameMobileNetworkDialogFragmentTest {
         mFragment.populateView(view);
 
         assertThat(view.findViewById(R.id.number_label).getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void populateView_getPreviousSimColor_setCorrectSelection() {
+        final View view = LayoutInflater.from(mActivity).inflate(
+                R.layout.dialog_mobile_network_rename, null);
+        when(mSubscriptionInfo.getIconTint())
+                .thenReturn(Color.parseColor("#ff3367d6"/* blue700 */));
+
+        startDialog();
+        mFragment.populateView(view);
+
+        final Spinner colorSpinnerView = mFragment.getColorSpinnerView();
+        assertThat(colorSpinnerView.getSelectedItemPosition()).isEqualTo(1);
+    }
+
+    @Test
+    public void populateView_getUpdatedSimColor_setCorrectSelection() {
+        final View view = LayoutInflater.from(mActivity).inflate(
+                R.layout.dialog_mobile_network_rename, null);
+        when(mSubscriptionInfo.getIconTint())
+                .thenReturn(Color.parseColor("#ff137333"/* Green800 */));
+
+        startDialog();
+        mFragment.populateView(view);
+
+        final Spinner colorSpinnerView = mFragment.getColorSpinnerView();
+        assertThat(colorSpinnerView.getSelectedItemPosition()).isEqualTo(2);
     }
 
     /**
