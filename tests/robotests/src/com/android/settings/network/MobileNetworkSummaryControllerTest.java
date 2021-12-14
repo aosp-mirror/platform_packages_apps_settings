@@ -44,7 +44,7 @@ import android.util.FeatureFlagUtils;
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.Settings.MobileNetworkActivity;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.RestrictedLockUtils;
 

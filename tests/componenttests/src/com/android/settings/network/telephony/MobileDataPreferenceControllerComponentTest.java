@@ -37,6 +37,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.SmallTest;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.android.settings.Settings;
 import com.android.settings.testutils.CommonUtils;
 import com.android.settings.testutils.UiUtils;
 
@@ -68,7 +69,7 @@ public class MobileDataPreferenceControllerComponentTest {
                     Context.TELECOM_SERVICE);
 
     @Rule
-    public ActivityScenarioRule<com.android.settings.network.telephony.MobileNetworkActivity>
+    public ActivityScenarioRule<Settings.MobileNetworkActivity>
             rule = new ActivityScenarioRule<>(
             new Intent(android.provider.Settings.ACTION_DATA_ROAMING_SETTINGS)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
