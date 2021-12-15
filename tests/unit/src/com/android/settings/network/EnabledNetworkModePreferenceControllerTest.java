@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.network.telephony.MobileNetworkUtils.getRafFromNetworkType;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.CDMA;
@@ -32,6 +33,8 @@ import static com.android.settings.network.telephony.TelephonyConstants.RadioAcc
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -150,6 +153,30 @@ public class EnabledNetworkModePreferenceControllerTest {
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL, false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @UiThreadTest
+    @Test
+    public void getAvailabilityStatus_callStateIsIdle_returnAvailable() {
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+        mController.getTelephonyCallback().onCallStateChanged(TelephonyManager.CALL_STATE_IDLE);
+
+        mController.updateState(mPreference);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertTrue(mPreference.isEnabled());
+    }
+
+    @UiThreadTest
+    @Test
+    public void getAvailabilityStatus_duringCalling_returnAvailable() {
+        mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+        mController.getTelephonyCallback().onCallStateChanged(TelephonyManager.CALL_STATE_OFFHOOK);
+
+        mController.updateState(mPreference);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertFalse(mPreference.isEnabled());
     }
 
     @UiThreadTest
