@@ -39,7 +39,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Lifecycle;
 
-import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.network.ProxySubscriptionManager;
@@ -48,6 +47,7 @@ import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Activity for displaying MobileNetworkSettings
@@ -64,15 +64,14 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     @VisibleForTesting
     ProxySubscriptionManager mProxySubscriptionMgr;
 
-    private int mCurSubscriptionId;
+    private int mCurSubscriptionId = SUB_ID_NULL;
 
     // This flag forces subscription information fragment to be re-created.
     // Otherwise, fragment will be kept when subscription id has not been changed.
     //
     // Set initial value to true allows subscription information fragment to be re-created when
     // Activity re-create occur.
-    private boolean mFragmentForceReload = true;
-    private boolean mPendingSubscriptionChange = false;
+    private boolean mPendingSubscriptionChange = true;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -80,21 +79,25 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         validate(intent);
         setIntent(intent);
 
-        int updateSubscriptionIndex = SUB_ID_NULL;
+        int updateSubscriptionIndex = mCurSubscriptionId;
         if (intent != null) {
             updateSubscriptionIndex = intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL);
         }
+        SubscriptionInfo info = getSubscriptionOrDefault(updateSubscriptionIndex);
+        if (info == null) {
+            Log.d(TAG, "Invalid subId request " + mCurSubscriptionId
+                    + " -> " + updateSubscriptionIndex);
+            return;
+        }
+
         int oldSubId = mCurSubscriptionId;
-        mCurSubscriptionId = updateSubscriptionIndex;
-        mFragmentForceReload = (mCurSubscriptionId == oldSubId);
-        final SubscriptionInfo info = getSubscription();
         updateSubscriptions(info, null);
 
         // If the subscription has changed or the new intent doesnt contain the opt in action,
         // remove the old discovery dialog. If the activity is being recreated, we will see
         // onCreate -> onNewIntent, so the dialog will first be recreated for the old subscription
         // and then removed.
-        if (updateSubscriptionIndex != oldSubId || !doesIntentContainOptInAction(intent)) {
+        if (mCurSubscriptionId != oldSubId || !doesIntentContainOptInAction(intent)) {
             removeContactDiscoveryDialog(oldSubId);
         }
         // evaluate showing the new discovery dialog if this intent contains an action to show the
@@ -135,7 +138,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         // perform registration after mCurSubscriptionId been configured.
         registerActiveSubscriptionsListener();
 
-        final SubscriptionInfo subscription = getSubscription();
+        SubscriptionInfo subscription = getSubscriptionOrDefault(mCurSubscriptionId);
+        if (subscription == null) {
+            Log.d(TAG, "Invalid subId request " + mCurSubscriptionId);
+            tryToFinishActivity();
+            return;
+        }
+
         maybeShowContactDiscoveryDialog(subscription);
 
         updateSubscriptions(subscription, null);
@@ -158,39 +167,81 @@ public class MobileNetworkActivity extends SettingsBaseActivity
      * Implementation of ProxySubscriptionManager.OnActiveSubscriptionChangedListener
      */
     public void onChanged() {
+        mPendingSubscriptionChange = false;
+
+        if (mCurSubscriptionId == SUB_ID_NULL) {
+            return;
+        }
+
         if (!getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
             mPendingSubscriptionChange = true;
             return;
         }
-        SubscriptionInfo info = getSubscription();
-        int oldSubIndex = mCurSubscriptionId;
-        updateSubscriptions(info, null);
 
-        // Remove the dialog if the subscription associated with this activity changes.
-        if (info == null) {
-            // Close the activity when subscription removed
-            if ((oldSubIndex != SUB_ID_NULL)
-                    && (!isFinishing()) && (!isDestroyed())) {
-                finish();
+        SubscriptionInfo subInfo = getSubscription(mCurSubscriptionId, null);
+        if (subInfo != null) {
+            if (mCurSubscriptionId != subInfo.getSubscriptionId()) {
+                // update based on subscription status change
+                removeContactDiscoveryDialog(mCurSubscriptionId);
+                updateSubscriptions(subInfo, null);
             }
             return;
         }
-        int subIndex = info.getSubscriptionId();
-        if (subIndex != oldSubIndex) {
-            removeContactDiscoveryDialog(oldSubIndex);
+
+        Log.w(TAG, "subId missing: " + mCurSubscriptionId);
+
+        // When UI is not the active one, avoid from destroy it immediately
+        // but wait until onResume() to see if subscription back online again.
+        // This is to avoid from glitch behavior of subscription which changes
+        // the UI when UI is considered as in the background or only partly
+        // visible.
+        if (!getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
+            mPendingSubscriptionChange = true;
+            return;
+        }
+
+        // Subscription could be missing
+        tryToFinishActivity();
+    }
+
+    protected void runSubscriptionUpdate(Runnable onUpdateRemaining) {
+        SubscriptionInfo subInfo = getSubscription(mCurSubscriptionId, null);
+        if (subInfo == null) {
+            tryToFinishActivity();
+            return;
+        }
+        if (mCurSubscriptionId != subInfo.getSubscriptionId()) {
+            removeContactDiscoveryDialog(mCurSubscriptionId);
+            updateSubscriptions(subInfo, null);
+        }
+        onUpdateRemaining.run();
+    }
+
+    protected void tryToFinishActivity() {
+        if ((!isFinishing()) && (!isDestroyed())) {
+            finish();
         }
     }
 
     @Override
     protected void onStart() {
         getProxySubscriptionManager().setLifecycle(getLifecycle());
-        super.onStart();
-        // updateSubscriptions doesn't need to be called, onChanged will always be called after we
-        // register a listener.
         if (mPendingSubscriptionChange) {
             mPendingSubscriptionChange = false;
-            onChanged();
+            runSubscriptionUpdate(() -> super.onStart());
+            return;
         }
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        if (mPendingSubscriptionChange) {
+            mPendingSubscriptionChange = false;
+            runSubscriptionUpdate(() -> super.onResume());
+            return;
+        }
+        super.onResume();
     }
 
     @Override
@@ -235,30 +286,49 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         }
 
         mCurSubscriptionId = subscriptionIndex;
-        mFragmentForceReload = false;
+    }
+
+    /**
+     * Select one of the subscription as the default subscription.
+     * @param subAnnoList a list of {@link SubscriptionAnnotation}
+     * @return ideally the {@link SubscriptionAnnotation} as expected
+     */
+    protected SubscriptionAnnotation defaultSubscriptionSelection(
+            List<SubscriptionAnnotation> subAnnoList) {
+        return (subAnnoList == null) ? null :
+                subAnnoList.stream()
+                .filter(SubscriptionAnnotation::isDisplayAllowed)
+                .filter(SubscriptionAnnotation::isActive)
+                .findFirst().orElse(null);
+    }
+
+    protected SubscriptionInfo getSubscriptionOrDefault(int subscriptionId) {
+        return getSubscription(subscriptionId,
+                (subscriptionId != SUB_ID_NULL) ? null : (
+                    subAnnoList -> defaultSubscriptionSelection(subAnnoList)
+                ));
     }
 
     /**
      * Get the current subscription to display. First check whether intent has {@link
-     * Settings#EXTRA_SUB_ID} and if so find the subscription with that id. If not, just return the
-     * first one in the mSubscriptionInfos list since it is already sorted by sim slot.
+     * Settings#EXTRA_SUB_ID} and if so find the subscription with that id.
+     * If not, select default one based on {@link Function} provided.
+     *
+     * @param preferredSubscriptionId preferred subscription id
+     * @param selectionOfDefault when true current subscription is absent
      */
     @VisibleForTesting
-    SubscriptionInfo getSubscription() {
+    protected SubscriptionInfo getSubscription(int preferredSubscriptionId,
+            Function<List<SubscriptionAnnotation>, SubscriptionAnnotation> selectionOfDefault) {
         List<SubscriptionAnnotation> subList =
                 (new SelectableSubscriptions(this, true)).call();
-        SubscriptionAnnotation currentSubInfo = null;
-        if (mCurSubscriptionId != SUB_ID_NULL) {
-            currentSubInfo = subList.stream()
-                    .filter(SubscriptionAnnotation::isDisplayAllowed)
-                    .filter(subAnno -> (subAnno.getSubscriptionId() == mCurSubscriptionId))
-                    .findFirst().orElse(null);
-        }
-        if (currentSubInfo == null) {
-            currentSubInfo = subList.stream()
-                    .filter(SubscriptionAnnotation::isDisplayAllowed)
-                    .filter(SubscriptionAnnotation::isActive)
-                    .findFirst().orElse(null);
+        Log.d(TAG, "get subId=" + preferredSubscriptionId + " from " + subList);
+        SubscriptionAnnotation currentSubInfo = subList.stream()
+                .filter(SubscriptionAnnotation::isDisplayAllowed)
+                .filter(subAnno -> (subAnno.getSubscriptionId() == preferredSubscriptionId))
+                .findFirst().orElse(null);
+        if ((currentSubInfo == null) && (selectionOfDefault != null)) {
+            currentSubInfo = selectionOfDefault.apply(subList);
         }
         return (currentSubInfo == null) ? null : currentSubInfo.getSubInfo();
     }
@@ -285,10 +355,6 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
         final String fragmentTag = buildFragmentTag(subId);
         if (fragmentManager.findFragmentByTag(fragmentTag) != null) {
-            if (!mFragmentForceReload) {
-                Log.d(TAG, "Keep current fragment: " + fragmentTag);
-                return;
-            }
             Log.d(TAG, "Construct fragment: " + fragmentTag);
         }
 
