@@ -142,12 +142,7 @@ public class DataUsageList extends DataUsageBaseFragment
         mChart = findPreference(KEY_CHART_DATA);
         mApps = findPreference(KEY_APPS_GROUP);
 
-        // TODO(b/167474581): This is a temporary solution to hide unnecessary warning
-        //  preference, when the provider model is completed, the following code should be removed.
-        final Preference unnecessaryWarningPreference =
-                FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)
-                        ? findPreference("operator_warning")
-                        : findPreference("non_carrier_data_usage_warning");
+        final Preference unnecessaryWarningPreference = findPreference("operator_warning");
         if (unnecessaryWarningPreference != null) {
             unnecessaryWarningPreference.setVisible(false);
         }
