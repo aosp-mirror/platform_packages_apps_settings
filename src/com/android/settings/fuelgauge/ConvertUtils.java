@@ -19,6 +19,7 @@ import android.content.Context;
 import android.os.BatteryUsageStats;
 import android.os.LocaleList;
 import android.os.UserHandle;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
 
@@ -28,10 +29,8 @@ import com.android.settings.overlay.FeatureFactory;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -77,19 +76,6 @@ public final class ConvertUtils {
     public static final int CONSUMER_TYPE_UID_BATTERY = 1;
     public static final int CONSUMER_TYPE_USER_BATTERY = 2;
     public static final int CONSUMER_TYPE_SYSTEM_BATTERY = 3;
-
-    // For language is changed.
-    @VisibleForTesting static Locale sLocale;
-    @VisibleForTesting static Locale sLocaleForHour;
-    // For time zone is changed.
-    @VisibleForTesting static String sZoneId;
-    @VisibleForTesting static String sZoneIdForHour;
-    private static boolean sIs24HourFormat;
-
-    @VisibleForTesting
-    static SimpleDateFormat sSimpleDateFormat;
-    @VisibleForTesting
-    static SimpleDateFormat sSimpleDateFormatForHour;
 
     private ConvertUtils() {}
 
@@ -138,36 +124,21 @@ public final class ConvertUtils {
 
     /** Converts UTC timestamp to human readable local time string. */
     public static String utcToLocalTime(Context context, long timestamp) {
-        final Locale currentLocale = getLocale(context);
-        final String currentZoneId = TimeZone.getDefault().getID();
-        if (!currentZoneId.equals(sZoneId)
-                || !currentLocale.equals(sLocale)
-                || sSimpleDateFormat == null) {
-            sLocale = currentLocale;
-            sZoneId = currentZoneId;
-            sSimpleDateFormat =
-                new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", currentLocale);
-        }
-        return sSimpleDateFormat.format(new Date(timestamp));
+        final Locale locale = getLocale(context);
+        final String pattern =
+            DateFormat.getBestDateTimePattern(locale, "MMM dd,yyyy HH:mm:ss");
+        return DateFormat.format(pattern, timestamp).toString();
     }
 
     /** Converts UTC timestamp to local time hour data. */
     public static String utcToLocalTimeHour(
             Context context, long timestamp, boolean is24HourFormat) {
-        final Locale currentLocale = getLocale(context);
-        final String currentZoneId = TimeZone.getDefault().getID();
-        if (!currentZoneId.equals(sZoneIdForHour)
-                || !currentLocale.equals(sLocaleForHour)
-                || sIs24HourFormat != is24HourFormat
-                || sSimpleDateFormatForHour == null) {
-            sLocaleForHour = currentLocale;
-            sZoneIdForHour = currentZoneId;
-            sIs24HourFormat = is24HourFormat;
-            sSimpleDateFormatForHour = new SimpleDateFormat(
-                    sIs24HourFormat ? "HH" : "h", currentLocale);
-        }
-        return sSimpleDateFormatForHour.format(new Date(timestamp))
-            .toLowerCase(currentLocale);
+        final Locale locale = getLocale(context);
+        // e.g. for 12-hour format: 9 pm
+        // e.g. for 24-hour format: 09:00
+        final String skeleton = is24HourFormat ? "HHm" : "ha";
+        final String pattern = DateFormat.getBestDateTimePattern(locale, skeleton);
+        return DateFormat.format(pattern, timestamp).toString().toLowerCase(locale);
     }
 
     /** Gets indexed battery usage data for each corresponding time slot. */

@@ -16,6 +16,11 @@
 
 package com.android.settings.gestures;
 
+import static com.android.settings.gestures.PowerMenuSettingsUtils.LONG_PRESS_POWER_ASSISTANT_VALUE;
+import static com.android.settings.gestures.PowerMenuSettingsUtils.LONG_PRESS_POWER_GLOBAL_ACTIONS;
+import static com.android.settings.gestures.PowerMenuSettingsUtils.POWER_BUTTON_LONG_PRESS_DEFAULT_VALUE_RESOURCE;
+import static com.android.settings.gestures.PowerMenuSettingsUtils.POWER_BUTTON_LONG_PRESS_SETTING;
+
 import android.content.Context;
 import android.provider.Settings;
 
@@ -33,26 +38,11 @@ import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
  */
 public class LongPressPowerButtonPreferenceController extends TogglePreferenceController {
 
-    private static final String POWER_BUTTON_LONG_PRESS_SETTING =
-            Settings.Global.POWER_BUTTON_LONG_PRESS;
     private static final String KEY_CHORD_POWER_VOLUME_UP_SETTING =
             Settings.Global.KEY_CHORD_POWER_VOLUME_UP;
 
     private static final String FOOTER_HINT_KEY = "power_menu_power_volume_up_hint";
     private static final String ASSIST_SWITCH_KEY = "gesture_power_menu_long_press_for_assist";
-
-    /**
-     * Values used for long press power button behaviour when Assist setting is enabled.
-     *
-     * {@link com.android.server.policy.PhoneWindowManager#LONG_PRESS_POWER_GLOBAL_ACTIONS} for
-     * source of the value.
-     */
-    @VisibleForTesting
-    static final int LONG_PRESS_POWER_NO_ACTION = 0;
-    @VisibleForTesting
-    static final int LONG_PRESS_POWER_GLOBAL_ACTIONS = 1;
-    @VisibleForTesting
-    static final int LONG_PRESS_POWER_ASSISTANT_VALUE = 5; // Settings.Secure.ASSISTANT
 
     /**
      * Values used for volume key chord behaviour when Assist setting is enabled.
@@ -66,15 +56,6 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
     static final int KEY_CHORD_POWER_VOLUME_UP_MUTE_TOGGLE = 1;
     @VisibleForTesting
     static final int KEY_CHORD_POWER_VOLUME_UP_GLOBAL_ACTIONS = 2;
-
-    /**
-     * Value used for long press power button behaviour when the Assist setting is disabled.
-     *
-     * If this value matches Assist setting, then it falls back to Global Actions panel or
-     * power menu, depending on their respective settings.
-     */
-    private static final int POWER_BUTTON_LONG_PRESS_DEFAULT_VALUE_RESOURCE =
-            com.android.internal.R.integer.config_longPressOnPowerBehavior;
 
     private static final int KEY_CHORD_POWER_VOLUME_UP_DEFAULT_VALUE_RESOURCE =
             com.android.internal.R.integer.config_keyChordPowerVolumeUp;
@@ -101,7 +82,7 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
 
     @Override
     public CharSequence getSummary() {
-        final int powerButtonValue = getPowerButtonValue();
+        final int powerButtonValue = PowerMenuSettingsUtils.getPowerButtonSettingValue(mContext);
         if (powerButtonValue == LONG_PRESS_POWER_ASSISTANT_VALUE) {
             return mContext.getString(R.string.power_menu_summary_long_press_for_assist_enabled);
         } else if (powerButtonValue == LONG_PRESS_POWER_GLOBAL_ACTIONS) {
@@ -122,7 +103,7 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
 
     @Override
     public boolean isChecked() {
-        return getPowerButtonValue() == LONG_PRESS_POWER_ASSISTANT_VALUE;
+        return PowerMenuSettingsUtils.isLongPressPowerForAssistEnabled(mContext);
     }
 
     @Override
@@ -159,12 +140,6 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
         }
     }
 
-    private int getPowerButtonValue() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                POWER_BUTTON_LONG_PRESS_SETTING,
-                mContext.getResources().getInteger(POWER_BUTTON_LONG_PRESS_DEFAULT_VALUE_RESOURCE));
-    }
-
     private static boolean isPowerMenuKeyChordEnabled(Context context) {
         return Settings.Global.getInt(context.getContentResolver(),
                 KEY_CHORD_POWER_VOLUME_UP_SETTING,
@@ -179,16 +154,18 @@ public class LongPressPowerButtonPreferenceController extends TogglePreferenceCo
                     POWER_BUTTON_LONG_PRESS_SETTING, LONG_PRESS_POWER_ASSISTANT_VALUE);
         }
 
-        // We need to determine the right disabled value - we set it to device default
-        // if it's different than Assist, otherwise we fallback to either global actions or power
-        // menu.
+        // We need to determine the right disabled value based on the device default
+        // for long-press power.
+
+        // If the default is to start the assistant, then the fallback is GlobalActions.
         final int defaultPowerButtonValue = mContext.getResources().getInteger(
                 POWER_BUTTON_LONG_PRESS_DEFAULT_VALUE_RESOURCE);
         if (defaultPowerButtonValue == LONG_PRESS_POWER_ASSISTANT_VALUE) {
             return Settings.Global.putInt(mContext.getContentResolver(),
-                    POWER_BUTTON_LONG_PRESS_SETTING, LONG_PRESS_POWER_NO_ACTION);
+                    POWER_BUTTON_LONG_PRESS_SETTING, LONG_PRESS_POWER_GLOBAL_ACTIONS);
         }
 
+        // If the default is something different than Assist, we use that default.
         return Settings.Global.putInt(mContext.getContentResolver(),
                 POWER_BUTTON_LONG_PRESS_SETTING, defaultPowerButtonValue);
     }
