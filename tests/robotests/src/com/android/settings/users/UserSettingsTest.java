@@ -59,6 +59,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils;
@@ -85,7 +86,11 @@ import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class, ShadowDevicePolicyManager.class})
+@Config(shadows = {
+        ShadowUserManager.class,
+        ShadowDevicePolicyManager.class,
+        SettingsShadowResources.class,
+})
 public class UserSettingsTest {
 
     private static final String KEY_USER_GUEST = "user_guest";
@@ -110,6 +115,8 @@ public class UserSettingsTest {
     private UserPreference mMePreference;
     @Mock
     private RestrictedPreference mAddUserPreference;
+    @Mock
+    private RestrictedPreference mAddSupervisedUserPreference;
     @Mock
     private RestrictedPreference mAddGuestPreference;
     @Mock
@@ -161,6 +168,7 @@ public class UserSettingsTest {
 
         mFragment.mMePreference = mMePreference;
         mFragment.mAddUser = mAddUserPreference;
+        mFragment.mAddSupervisedUser = mAddSupervisedUserPreference;
         mFragment.mAddGuest = mAddGuestPreference;
         mFragment.mUserListCategory = mock(PreferenceCategory.class);
     }
@@ -169,6 +177,7 @@ public class UserSettingsTest {
     public void tearDown() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, mProvisionedBackupValue);
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -692,6 +701,36 @@ public class UserSettingsTest {
 
         assertThat(result).isEqualTo(1);
         verify(mUserManager).getUsers();
+    }
+
+    private void setConfigSupervisedUserCreationPackage(String value) {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.string.config_supervisedUserCreationPackage,
+                value
+        );
+        mFragment.setConfigSupervisedUserCreationPackage();
+        mUserCapabilities.mCanAddUser = true;
+        mFragment.updateUserList();
+    }
+
+    @Test
+    public void addSupervisedUserOption_resourceIsDefined_shouldBeDisplayed() {
+        try {
+            setConfigSupervisedUserCreationPackage("test");
+            verify(mAddSupervisedUserPreference).setVisible(true);
+        } finally {
+            SettingsShadowResources.reset();
+        }
+    }
+
+    @Test
+    public void addSupervisedUserOption_resourceIsNotDefined_shouldBeHidden() {
+        try {
+            setConfigSupervisedUserCreationPackage("");
+            verify(mAddSupervisedUserPreference).setVisible(false);
+        } finally {
+            SettingsShadowResources.reset();
+        }
     }
 
     private void givenUsers(UserInfo... userInfo) {
