@@ -151,6 +151,13 @@
         <item name="buttonBarButtonStyle">@*android:style/Widget.DeviceDefault.Button.ButtonBar.AlertDialog</item>
     </style>
 
+
+    <style name="Theme.AlertDialog.SimConfirmDialog">
+        <item name="buttonBarStyle">@style/SimConfirmDialog.ButtonBarStyle</item>
+        <item name="buttonBarButtonStyle">@style/SimConfirmDialog.OutlineButton</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
     <style name="Theme.ConfirmDeviceCredentials" parent="Theme.SubSettings">
         <item name="confirmDeviceCredentialsSideMargin">@dimen/confirm_credentials_side_margin</item>
         <item name="confirmDeviceCredentialsTopMargin">@dimen/confirm_credentials_top_margin</item>
