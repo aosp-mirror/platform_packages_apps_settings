@@ -18,6 +18,8 @@ package com.android.settings.network;
 import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import static androidx.lifecycle.Lifecycle.Event;
 
 import android.content.BroadcastReceiver;
@@ -38,7 +40,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
@@ -146,7 +147,8 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_MOBILE_NETWORK_SETTINGS.equals(preference.getKey())) {
-            final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
+            final Intent intent = new Intent(Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
+            intent.setPackage(SETTINGS_PACKAGE_NAME);
             mContext.startActivity(intent);
             return true;
         }
