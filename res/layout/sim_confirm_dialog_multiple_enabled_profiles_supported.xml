@@ -16,42 +16,49 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    style="@style/Theme.Material3.DayNight.Dialog.Alert">
+    android:orientation="vertical">
         <TextView
             android:id="@+id/msg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:paddingEnd="24dp"
+            android:paddingTop="16dp"
+            android:paddingStart="24dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.DialogMessage"/>
         <ListView
             android:id="@+id/carrier_list"
-            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="16dp"
+            android:dividerHeight="1dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <LinearLayout
+            android:id="@+id/info_outline_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="56dp"
             android:gravity="start|top"
             android:orientation="horizontal"
-            android:paddingEnd="12dp"
+            android:paddingEnd="24dp"
             android:paddingTop="16dp"
-            android:paddingBottom="4dp"
+            android:paddingStart="24dp"
+            android:layout_marginBottom="16dp"
             android:baselineAligned="true">
                 <ImageView
                     android:src="@drawable/ic_info_outline_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:tint="?android:attr/textColorTertiary"/>
-
                 <TextView
                     android:id="@+id/info_outline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
                     android:text="@string/sim_action_switch_sub_dialog_info_outline_for_turning_off"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textAppearance="@style/TextAppearance.DialogMessage"/>
         </LinearLayout>
 </LinearLayout>

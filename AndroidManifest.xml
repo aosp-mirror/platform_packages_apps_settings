@@ -675,12 +675,12 @@
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog"/>
+                  android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
 
         <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog"/>
+                  android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -3429,7 +3429,7 @@
 
         <activity
             android:name=".sim.SimDialogActivity"
-            android:theme="@style/Theme.AlertDialog"
+            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"
             android:label="@string/sim_settings_title"
             android:launchMode="singleTop"
             android:exported="true"
@@ -4280,14 +4280,14 @@
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog"/>
+            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
 
         <activity
             android:name=".sim.DsdsDialogActivity"
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog"/>
+            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
 
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
