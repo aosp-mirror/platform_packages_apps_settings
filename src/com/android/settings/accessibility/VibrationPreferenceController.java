@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.os.VibrationAttributes;
 import android.os.Vibrator;
 import android.provider.Settings;
 
@@ -41,7 +42,7 @@ public class VibrationPreferenceController extends BasePreferenceController {
     public CharSequence getSummary() {
         int ringIntensity = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.RING_VIBRATION_INTENSITY,
-                mVibrator.getDefaultRingVibrationIntensity());
+                mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_RINGTONE));
         if (Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.VIBRATE_WHEN_RINGING, 0) == 0
                 && !AccessibilitySettings.isRampingRingerEnabled(mContext)) {
@@ -52,14 +53,14 @@ public class VibrationPreferenceController extends BasePreferenceController {
 
         final int notificationIntensity = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                mVibrator.getDefaultNotificationVibrationIntensity());
+                mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_NOTIFICATION));
         final CharSequence notificationIntensityString =
                 VibrationIntensityPreferenceController.getIntensityString(mContext,
                         notificationIntensity);
 
         int touchIntensity = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HAPTIC_FEEDBACK_INTENSITY,
-                mVibrator.getDefaultHapticFeedbackIntensity());
+                mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_TOUCH));
         if (Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) == 0) {
             touchIntensity = Vibrator.VIBRATION_INTENSITY_OFF;
