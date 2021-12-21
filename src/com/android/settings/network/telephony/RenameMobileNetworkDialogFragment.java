@@ -25,7 +25,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
-import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -52,7 +51,6 @@ import com.android.settingslib.DeviceInfoUtils;
 
 import com.google.common.collect.ImmutableMap;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -180,8 +178,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
 
         final TextView operatorName = view.findViewById(R.id.operator_name_value);
         mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
-        final ServiceState serviceState = mTelephonyManager.getServiceState();
-        operatorName.setText(serviceState == null ? "" : serviceState.getOperatorAlphaLong());
+        operatorName.setText(info.getCarrierName());
 
         final TextView phoneTitle = view.findViewById(R.id.number_label);
         phoneTitle.setVisibility(info.isOpportunistic() ? View.GONE : View.VISIBLE);
