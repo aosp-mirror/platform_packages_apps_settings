@@ -95,15 +95,16 @@ public class SimDialogActivity extends FragmentActivity {
     private SimDialogFragment createFragment(int dialogType) {
         switch (dialogType) {
             case DATA_PICK:
-                return SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_data,
-                        false /* includeAskEveryTime */);
+                return getDataPickDialogFramgent();
             case CALLS_PICK:
                 return CallsSimListDialogFragment.newInstance(dialogType,
                         R.string.select_sim_for_calls,
-                        true /* includeAskEveryTime */);
+                        true /* includeAskEveryTime */,
+                        false /* isCancelItemShowed */);
             case SMS_PICK:
                 return SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_sms,
-                        true /* includeAskEveryTime */);
+                        true /* includeAskEveryTime */,
+                        false /* isCancelItemShowed */);
             case PREFERRED_PICK:
                 if (!getIntent().hasExtra(PREFERRED_SIM)) {
                     throw new IllegalArgumentException("Missing required extra " + PREFERRED_SIM);
@@ -111,10 +112,21 @@ public class SimDialogActivity extends FragmentActivity {
                 return PreferredSimDialogFragment.newInstance();
             case SMS_PICK_FOR_MESSAGE:
                 return SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_sms,
-                        false /* includeAskEveryTime */);
+                        false /* includeAskEveryTime */,
+                        false /* isCancelItemShowed */);
             default:
                 throw new IllegalArgumentException("Invalid dialog type " + dialogType + " sent.");
         }
+    }
+
+    private SimDialogFragment getDataPickDialogFramgent() {
+        if (SubscriptionManager.getDefaultDataSubscriptionId()
+                == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return SimListDialogFragment.newInstance(DATA_PICK, R.string.select_sim_for_data,
+                    false /* includeAskEveryTime */,
+                    true /* isCancelItemShowed */);
+        }
+        return SelectSpecificDataSimDialogFragment.newInstance();
     }
 
     public void onSubscriptionSelected(int dialogType, int subId) {
