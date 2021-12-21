@@ -833,6 +833,18 @@
         </activity>
 
         <activity
+            android:name=".applications.appinfo.AppLocalePickerActivity"
+            android:label="@string/app_locale_picker_title"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.settings.APP_LOCALE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
+        </activity>
+
+        <activity
             android:name=".Settings$LanguageAndInputSettingsActivity"
             android:label="@string/language_settings"
             android:exported="true"
