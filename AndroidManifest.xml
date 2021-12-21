@@ -112,6 +112,7 @@
     <uses-permission android:name="android.permission.ALLOW_PLACE_IN_MULTI_PANE_SETTINGS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_APP_SPECIFIC_LOCALES" />
+    <uses-permission android:name="android.permission.QUERY_ADMIN_POLICY" />
 
     <application
             android:name=".SettingsApplication"
@@ -238,17 +239,14 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name=".network.telephony.MobileNetworkActivity"
-                  android:label="@string/network_settings_title"
-                  android:exported="true"
-                  android:taskAffinity="com.android.settings.root"
-                  android:launchMode="singleTask"
-                  android:configChanges="orientation|screenSize|keyboardHidden">
-            <!-- Note: Since the framework does not support the multiple requests of network scan
-            from the UI, this singleTask can protect that there is only one
-            Settings$NetworkSelectActivity which can request the network scan.
-            If removing the "singleTask" in the future, please also modify the
-            Settings$NetworkSelectActivity's structure. -->
+        <activity
+            android:name=".Settings$MobileNetworkActivity"
+            android:label="@string/network_settings_title"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleInstance"
+            android:exported="true">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.network.telephony.MobileNetworkSettings"/>
             <intent-filter android:priority="1">
                 <!-- Displays the MobileNetworkActivity and opt-in dialog for capability discovery. -->
                 <action android:name="android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN" />
@@ -257,14 +255,6 @@
                 <action android:name="android.settings.MMS_MESSAGE_SETTING" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".Settings$SubscriptionSettingsActivity"
-            android:label="@string/network_settings_title"
-            android:exported="false">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.network.telephony.MobileNetworkSettings"/>
         </activity>
 
         <activity android:name=".Settings$MobileNetworkListActivity"
@@ -549,7 +539,6 @@
 
         <activity android:name="Settings$ApnSettingsActivity"
                 android:label="@string/apn_settings"
-                android:launchMode="singleTask"
                 android:exported="true"
                 android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
