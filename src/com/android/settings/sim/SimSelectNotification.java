@@ -53,7 +53,6 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.HelpTrampoline;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.network.telephony.MobileNetworkActivity;
 
 public class SimSelectNotification extends BroadcastReceiver {
     private static final String TAG = "SimSelectNotification";
@@ -261,7 +260,7 @@ public class SimSelectNotification extends BroadcastReceiver {
 
         // Create the pending intent that will lead to the subscription setting page.
         Intent resultIntent = new Intent(Settings.ACTION_MMS_MESSAGE_SETTING);
-        resultIntent.setClass(context, MobileNetworkActivity.class);
+        resultIntent.setPackage(SETTINGS_PACKAGE_NAME);
         resultIntent.putExtra(Settings.EXTRA_SUB_ID, subId);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
