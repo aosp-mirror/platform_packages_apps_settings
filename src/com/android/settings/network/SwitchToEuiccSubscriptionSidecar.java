@@ -20,6 +20,7 @@ import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.UiccCardInfo;
 import android.telephony.UiccSlotMapping;
 import android.telephony.euicc.EuiccManager;
@@ -34,7 +35,7 @@ import java.util.stream.Collectors;
 
 /** A headless fragment encapsulating long-running eSIM enabling/disabling operations. */
 public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
-    private static final String TAG = "SwitchToEuiccSubscriptionSidecar";
+    private static final String TAG = "SwitchToEuiccSidecar";
     private static final String ACTION_SWITCH_TO_SUBSCRIPTION =
             "com.android.settings.network.SWITCH_TO_SUBSCRIPTION";
     private static final int ESIM_SLOT_ID = 1;
@@ -42,6 +43,8 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
     private PendingIntent mCallbackIntent;
     private int mSubId;
     private int mPort;
+    private SubscriptionInfo mRemovedSubInfo;
+    private boolean mIsDuringSimSlotMapping;
 
     /** Returns a SwitchToEuiccSubscriptionSidecar sidecar instance. */
     public static SwitchToEuiccSubscriptionSidecar get(FragmentManager fm) {
@@ -93,9 +96,34 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         // To check whether the esim slot's port is active. If yes, skip setSlotMapping. If no,
         // set this slot+port into setSimSlotMapping.
         mPort = (port < 0) ? getTargetPortId(removedSubInfo) : port;
-        Log.i(TAG, "The SubId is " + mSubId + "The port is " + mPort);
+        mRemovedSubInfo = removedSubInfo;
+        Log.i(TAG, "The SubId is " + mSubId + ". The port is " + mPort);
 
-        mSwitchSlotSidecar.runSwitchToEuiccSlot(getTargetSlot(), mPort, removedSubInfo);
+        if (mTelephonyManager.isMultiSimEnabled() && removedSubInfo != null
+                && removedSubInfo.isEmbedded()) {
+            // In DSDS mode+MEP, if the replaced esim is active, then it should be disabled esim
+            // profile before changing SimSlotMapping process.
+            // Use INVALID_SUBSCRIPTION_ID to disable the esim profile.
+            // The SimSlotMapping is ready, then to execute activate/inactivate esim.
+            mIsDuringSimSlotMapping = true;
+            EuiccManager.ResultListener callback = new EuiccManager.ResultListener() {
+                @Override
+                public void onComplete(int resultCode, Intent resultIntent) {
+                    Log.i(TAG, String.format("Result code : %d;", resultCode));
+                    if (resultCode == EuiccManager.EMBEDDED_SUBSCRIPTION_RESULT_OK) {
+                        mSwitchSlotSidecar.runSwitchToEuiccSlot(getTargetSlot(), mPort,
+                                removedSubInfo);
+                    } else {
+                        setState(State.ERROR, resultCode);
+                    }
+                }
+            };
+            mEuiccManager.switchToSubscription(SubscriptionManager.INVALID_SUBSCRIPTION_ID, mPort,
+                    getContext().getMainExecutor(),
+                    callback);
+        } else {
+            mSwitchSlotSidecar.runSwitchToEuiccSlot(getTargetSlot(), mPort, removedSubInfo);
+        }
     }
 
     private int getTargetPortId(SubscriptionInfo removedSubInfo) {
@@ -136,8 +164,7 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         switch (mSwitchSlotSidecar.getState()) {
             case State.SUCCESS:
                 mSwitchSlotSidecar.reset();
-                Log.i(TAG,
-                        "Successfully SimSlotMapping. Start to enable/disable esim");
+                Log.i(TAG, "Successfully SimSlotMapping. Start to enable/disable esim");
                 switchToSubscription();
                 break;
             case State.ERROR:
@@ -173,5 +200,17 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         };
         mEuiccManager.switchToSubscription(mSubId, mPort, getContext().getMainExecutor(),
                 callback);
+    }
+
+    @Override
+    protected void onActionReceived() {
+        if (getResultCode() == EuiccManager.EMBEDDED_SUBSCRIPTION_RESULT_OK
+                && mIsDuringSimSlotMapping) {
+            // Continue to switch the SimSlotMapping, after the esim is disabled.
+            mIsDuringSimSlotMapping = false;
+            mSwitchSlotSidecar.runSwitchToEuiccSlot(getTargetSlot(), mPort, mRemovedSubInfo);
+        } else {
+            super.onActionReceived();
+        }
     }
 }
