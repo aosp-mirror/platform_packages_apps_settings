@@ -926,4 +926,25 @@
            parent="@*android:style/TextAppearance.DeviceDefault">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
+
+    <style name="TextAppearance.SimConfirmDialogList" parent="@style/TextAppearance.DialogMessage"/>
+
+    <style name="TextAppearance.SimConfirmDialogList.Summary">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="SimConfirmDialog.OutlineButton" parent="@android:style/Widget.Material.Button">
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">20sp</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:background">@drawable/sim_confirm_dialog_btn_outline</item>
+    </style>
+
+    <style name="SimConfirmDialog.ButtonBarStyle" parent="@android:style/Widget.Material.ButtonBar">
+        <item name="android:paddingEnd">8dp</item>
+    </style>
 </resources>

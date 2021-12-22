@@ -675,12 +675,12 @@
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog"/>
+                  android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
 
         <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog"/>
+                  android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -830,6 +830,18 @@
                   android:configChanges="orientation|keyboardHidden|screenSize"
                   android:exported="false"
                   android:theme="@style/Theme.LocalePickerWithRegionActivity">
+        </activity>
+
+        <activity
+            android:name=".applications.appinfo.AppLocalePickerActivity"
+            android:label="@string/app_locale_picker_title"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.settings.APP_LOCALE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
         </activity>
 
         <activity
@@ -3417,7 +3429,7 @@
 
         <activity
             android:name=".sim.SimDialogActivity"
-            android:theme="@style/Theme.AlertDialog"
+            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"
             android:label="@string/sim_settings_title"
             android:launchMode="singleTop"
             android:exported="true"
@@ -4268,14 +4280,14 @@
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog"/>
+            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
 
         <activity
             android:name=".sim.DsdsDialogActivity"
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog"/>
+            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
 
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
