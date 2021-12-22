@@ -395,9 +395,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Koristite lice da otključate telefon ili izvršite autentifikaciju u aplikacijama, npr. kada se prijavljujete ili odobravate kupovinu\n\nImajte na umu:\nistovremeno možete imati postavljeno samo jedno lice. Da dodate drugo lice, izbrišite postojeće.\n\nTelefon možete otključati ako pogledate u njega čak i ako vam to nije bila namjera.\n\nTelefon može otključati i neko drugi ako ga prinese vašem licu.\n\nTelefon može otključati osoba koja mnogo liči na vas, npr. identični blizanac."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Koristite lice da otključate telefon ili izvršite autentifikaciju u aplikacijama, npr. kada se prijavljujete ili odobravate kupovinu\n\nImajte na umu:\nistovremeno možete imati postavljeno samo jedno lice. Da dodate drugo lice, izbrišite postojeće.\n\nTelefon možete otključati ako pogledate u njega čak i ako vam to nije bila namjera.\n\nTelefon može otključati i neko drugi ako ga prinese vašem licu, čak i dok su vam oči zatvorene.\n\nTelefon može otključati osoba koja mnogo liči na vas, npr. identični blizanac."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Izbrisati model lica?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Model lica će se trajno i sigurno izbrisati. Nakon brisanja, za otključavanje telefona ili autentifikaciju u aplikacijama će vam trebati PIN, uzorak ili lozinka."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Izbrisati model lica?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Model lica će se trajno i sigurno izbrisati.\n\nNakon brisanja, za otključavanje telefona ili autentifikaciju u aplikacijama će vam trebati otisak prsta, PIN, uzorak ili lozinka."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Model lica će se trajno i sigurno izbrisati.\n\nNakon brisanja će vam trebati PIN, uzorak ili lozinka radi otključavanja telefona ili autentifikacije u aplikacijama."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model lica će se trajno i sigurno izbrisati.\n\nNakon brisanja će vam trebati PIN, uzorak ili lozinka radi otključavanja telefona."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Otključajte telefon pomoću otključavanja licem"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Otisak prsta"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisak prsta za posao"</string>
@@ -485,7 +484,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Izbriši"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dodirnite senzor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Stavite prst na senzor i podignite ga kad osjetite vibraciju"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Držite prst na senzoru dok ne osjetite vibraciju"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Držite otisak prsta ravno na senzoru dok ne osjetite vibraciju"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Dodirnite i držite senzor za otisak prsta"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Podignite i ponovo dodirnite"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Još jednom"</string>
@@ -493,7 +492,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Nastavite podizati prst da dodate različite dijelove otiska prsta"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Dodirnite i zadržite svaki put kada se ikona otiska prsta pomjeri. Na ovaj način se snima veći dio otiska prsta."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Postavite vrh prsta na senzor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Na kraju, postavite rubove prsta"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Na kraju, koristite rubove prsta"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Stranu prsta postavite na senzor i zadržite, a zatim ga prebacite na drugu stranu"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Na ovaj način se snima veći dio otiska prsta"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Prijava otiska prsta: <xliff:g id="PERCENTAGE">%d</xliff:g> posto"</string>
@@ -1543,7 +1542,7 @@
     <string name="status_signal_strength" msgid="7644525712554444359">"Jačina signala"</string>
     <string name="status_roaming" msgid="1253597174715663778">"Roming"</string>
     <string name="status_operator" msgid="4335640583552058491">"Mreža"</string>
-    <string name="status_wifi_mac_address" msgid="4447611754614388914">"MAC adresa WiFi mreže"</string>
+    <string name="status_wifi_mac_address" msgid="4447611754614388914">"MAC adresa WiFi-ja"</string>
     <string name="status_device_wifi_mac_address" msgid="1896121694334176494">"MAC adresa uređaja za WiFi mrežu"</string>
     <string name="status_bt_address" msgid="6919660304578476547">"Bluetooth adresa"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Serijski broj"</string>
@@ -3283,7 +3282,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Poveži se na <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Želite li prekinuti vezu s ovim VPN-om?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Prekini vezu"</string>
-    <string name="vpn_version" msgid="41856553718304367">"Verzija <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_version" msgid="6344167191984400976">"Verzija"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Zaboravi VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Želite li zamijeniti postojeći VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Želite li postaviti uvijek uključen VPN?"</string>
@@ -3983,7 +3982,7 @@
       <item quantity="other">%d aplikacija može čitati obavještenja</item>
     </plurals>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Poboljšana obavještenja"</string>
-    <string name="notification_assistant_summary" msgid="1957783114840908887">"Primajte preporučene radnje, odgovore i još mnogo toga"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"Primajte preporučene radnje, odgovore i drugo"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Nema"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Nijedna instalirana aplikacija nije zatražila pristup obavještenjima."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Dozvoli pristup obavještenjima"</string>
@@ -4862,7 +4861,7 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Privremeno uključeno zbog Uštede baterije"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Podržane aplikacije će se također prebaciti na tamnu temu"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Razumijem"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Isprobajte Tamnu temu"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Isprobajte tamnu temu"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Pomaže da se produži vijek trajanja baterije"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Pločice programera za brze postavke"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Onemogući istek vremena za adb ovlaštenje"</string>
@@ -5610,7 +5609,7 @@
     <string name="category_name_display_controls" msgid="7046581691184725216">"Ostale kontrole ekrana"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Ostalo"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Opće"</string>
-    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Koristi Tamnu temu"</string>
+    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Koristi tamnu temu"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Koristi Bluetooth"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Koristi sprečavanje zvonjenja"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Koristi WiFi pristupnu tačku"</string>

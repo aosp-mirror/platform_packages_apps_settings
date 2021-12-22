@@ -398,9 +398,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Z obrazom odklenite telefon ali preverite pristnost, na primer ob prijavi v aplikacije ali za odobritev nakupa.\n\nUpoštevajte:\nNaenkrat je lahko nastavljen le en obraz. Če želite dodati nov obraz, morate obstoječega izbrisati.\n\nČe pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nVaš telefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Z obrazom odklenite telefon ali preverite pristnost, na primer ob prijavi v aplikacije ali za odobritev nakupa.\n\nUpoštevajte:\nNaenkrat je lahko nastavljen le en obraz. Če želite dodati nov obraz, morate obstoječega izbrisati.\n\nČe pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nTelefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom – celo kadar imate oči zaprte.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Želite izbrisati model obraza?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Model obraza bo trajno in varno izbrisan. Po izbrisu boste za odklepanje telefona ali preverjanje pristnosti v aplikacijah morali uporabiti kodo PIN, vzorec ali geslo."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Želite izbrisati model obraza?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Model obraza bo trajno in varno izbrisan.\n\nKo bo izbrisan, boste za odklepanje telefona ali preverjanje pristnosti v aplikacijah morali uporabiti prstni odtis, kodo PIN, vzorec ali geslo."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Model obraza bo trajno in varno izbrisan.\n\nPo izbrisu boste za odklepanje telefona ali preverjanje pristnosti v aplikacijah morali uporabiti kodo PIN, vzorec ali geslo."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model obraza bo trajno in varno izbrisan.\n\nPo izbrisu boste za odklepanje telefona morali uporabiti kodo PIN, vzorec ali geslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Za odklepanje telefona uporabite obraz"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Prstni odtis"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Prstni odtis za službo"</string>
@@ -489,7 +488,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Izbriši"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dotaknite se tipala"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Prst položite na tipalo in ga dvignite, ko začutite vibriranje."</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Prst držite na tipalu, dokler ne začutite vibriranja."</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Držite prst plosko na tipalu, dokler ne začutite vibriranja."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Dotik in pridržanje tipala prstnih odtisov"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Dvignite in se spet dotaknite"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Še enkrat"</string>
@@ -497,7 +496,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Še naprej privzdigujte prst, da dodate različne dele prstnega odtisa."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Dotaknite se in pridržite vsakič, ko se ikona prstnega odtisa premakne. Tako bo sistem lahko zajel večji del prstnega odtisa."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Na tipalo položite konico prsta."</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Nazadnje na tipalo položite robove prsta."</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Nazadnje na tipalo položite robove prsta"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Stranski del prstnega odtisa položite na tipalo prstnih odtisov in ga pridržite, nato zamenjajte stran."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tako bo sistem lahko zajel večji del prstnega odtisa."</string>
     <!-- String.format failed for translation -->
@@ -3325,7 +3324,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Povezovanje z <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Prekinitev povezave s tem omrežjem VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Prekini povezavo"</string>
-    <string name="vpn_version" msgid="41856553718304367">"Različica <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_version" msgid="6344167191984400976">"Različica"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Pozabi omrežje VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Želite zamenjati obstoječe omrežje VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Ali želite, da je omrežje VPN stalno vklopljeno?"</string>
@@ -3902,7 +3901,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Če vklopite oblačke za to aplikacijo, bodo vklopljeni tudi za napravo.\n\nTo vpliva na druge aplikacije ali pogovore, v katerih je prikaz v oblačkih že omogočen."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Vklopi"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Prekliči"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Vklopljeno/pogovori so lahko prikazani kot lebdeče ikone"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Vklopljeno/pogovori so lahko prikazani kot lebdeče ikone."</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Omogoči aplikacijam, da prikažejo oblačke"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Nekateri pogovori bodo prikazani kot lebdeče ikone nad drugimi aplikacijami."</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Vsi pogovori so lahko prikazani v oblačkih"</string>
