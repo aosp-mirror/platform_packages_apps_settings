@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.security;
+package com.android.settings.privacy;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -23,7 +23,6 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.Intent;
 import android.provider.DeviceConfig;
@@ -34,44 +33,37 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.safetycenter.SafetyCenterStatus;
-import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
-public class SecurityDashboardActivityTest {
-    private static final String ALTERNATIVE_FRAGMENT_CLASSNAME = "AlternativeFragmentClassname";
+public class PrivacyDashboardActivityTest {
+
     private static final String DEFAULT_FRAGMENT_CLASSNAME = "DefaultFragmentClassname";
 
-    private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
-    private Settings.SecurityDashboardActivity mActivity;
-    private Intent mDefaultIntent;
+    private Settings.PrivacyDashboardActivity mActivity;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mSecuritySettingsFeatureProvider = mFeatureFactory.getSecuritySettingsFeatureProvider();
         DeviceConfig.resetToDefaults(android.provider.Settings.RESET_MODE_PACKAGE_DEFAULTS,
                 DeviceConfig.NAMESPACE_PRIVACY);
-        mDefaultIntent = new Intent();
-        mDefaultIntent.setAction(android.provider.Settings.ACTION_SECURITY_SETTINGS);
-        mDefaultIntent.setClass(InstrumentationRegistry.getInstrumentation().getTargetContext(),
-                Settings.SecurityDashboardActivity.class);
-        mDefaultIntent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, DEFAULT_FRAGMENT_CLASSNAME);
+        final Intent intent = new Intent();
+        intent.setAction(android.provider.Settings.ACTION_PRIVACY_SETTINGS);
+        intent.setClass(InstrumentationRegistry.getInstrumentation().getTargetContext(),
+                Settings.PrivacyDashboardActivity.class);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, DEFAULT_FRAGMENT_CLASSNAME);
         InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
             try {
                 mActivity =
-                        spy((Settings.SecurityDashboardActivity) InstrumentationRegistry
+                        spy((Settings.PrivacyDashboardActivity) InstrumentationRegistry
                                 .getInstrumentation().newActivity(
                                         getClass().getClassLoader(),
-                                        Settings.SecurityDashboardActivity.class.getName(),
-                                        mDefaultIntent));
+                                        Settings.PrivacyDashboardActivity.class.getName(),
+                                        intent));
             } catch (Exception e) {
                 throw new RuntimeException(e); // nothing to do
             }
@@ -83,44 +75,6 @@ public class SecurityDashboardActivityTest {
     public void tearDown() {
         DeviceConfig.resetToDefaults(android.provider.Settings.RESET_MODE_PACKAGE_DEFAULTS,
                 DeviceConfig.NAMESPACE_PRIVACY);
-    }
-
-    @Test
-    public void noAvailableAlternativeFragmentAvailable_defaultFragmentSet() {
-        when(mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment())
-                .thenReturn(false);
-
-        assertThat(mActivity.getInitialFragmentName(mDefaultIntent))
-                .isEqualTo(DEFAULT_FRAGMENT_CLASSNAME);
-    }
-
-    @Test
-    public void alternativeFragmentAvailable_alternativeFragmentSet() {
-        when(mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment())
-                .thenReturn(true);
-        when(mSecuritySettingsFeatureProvider.getAlternativeSecuritySettingsFragmentClassname())
-                .thenReturn(ALTERNATIVE_FRAGMENT_CLASSNAME);
-
-        assertThat(mActivity.getInitialFragmentName(mDefaultIntent))
-                .isEqualTo(ALTERNATIVE_FRAGMENT_CLASSNAME);
-    }
-
-    @Test
-    public void noAvailableAlternativeFragmentAvailable_alternativeFragmentNotValid() {
-        when(mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment())
-                .thenReturn(false);
-
-        assertThat(mActivity.isValidFragment(ALTERNATIVE_FRAGMENT_CLASSNAME)).isFalse();
-    }
-
-    @Test
-    public void alternativeFragmentAvailable_alternativeFragmentIsValid() {
-        when(mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment())
-                .thenReturn(true);
-        when(mSecuritySettingsFeatureProvider.getAlternativeSecuritySettingsFragmentClassname())
-                .thenReturn(ALTERNATIVE_FRAGMENT_CLASSNAME);
-
-        assertThat(mActivity.isValidFragment(ALTERNATIVE_FRAGMENT_CLASSNAME)).isTrue();
     }
 
     @Test

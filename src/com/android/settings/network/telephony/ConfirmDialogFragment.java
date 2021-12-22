@@ -112,11 +112,9 @@ public class ConfirmDialogFragment extends BaseDialogFragment
         ArrayList<String> list = getArguments().getStringArrayList(ARG_LIST);
 
         Log.i(TAG, "Showing dialog with title =" + title);
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(getContext())
-                        .setTitle(title)
-                        .setPositiveButton(posBtnString, this)
-                        .setNegativeButton(negBtnString, this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
+                .setPositiveButton(posBtnString, this)
+                .setNegativeButton(negBtnString, this);
 
         if (list != null && !list.isEmpty()) {
             Log.i(TAG, "list =" + list.toString());
@@ -124,13 +122,22 @@ public class ConfirmDialogFragment extends BaseDialogFragment
             View content = LayoutInflater.from(getContext()).inflate(
                     R.layout.sim_confirm_dialog_multiple_enabled_profiles_supported, null);
 
+            if (!TextUtils.isEmpty(title)) {
+                View titleView = LayoutInflater.from(getContext()).inflate(
+                        R.layout.sim_confirm_dialog_title_multiple_enabled_profiles_supported,
+                        null);
+                TextView titleTextView = titleView.findViewById(R.id.title);
+                titleTextView.setText(title);
+                builder.setCustomTitle(titleTextView);
+            }
             TextView dialogMessage = content.findViewById(R.id.msg);
             if (!TextUtils.isEmpty(message) && dialogMessage != null) {
                 dialogMessage.setText(message);
             }
 
             final ArrayAdapter<String> arrayAdapterItems = new ArrayAdapter<String>(
-                    getContext(), android.R.layout.select_dialog_item, list);
+                    getContext(),
+                    R.layout.sim_confirm_dialog_item_multiple_enabled_profiles_supported, list);
             final ListView lvItems = content.findViewById(R.id.carrier_list);
             if (lvItems != null) {
                 lvItems.setAdapter(arrayAdapterItems);
@@ -153,6 +160,9 @@ public class ConfirmDialogFragment extends BaseDialogFragment
             }
             builder.setView(content);
         } else {
+            if (!TextUtils.isEmpty(title)) {
+                builder.setTitle(title);
+            }
             if (!TextUtils.isEmpty(message)) {
                 builder.setMessage(message);
             }

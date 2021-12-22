@@ -42,6 +42,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AlarmsAndRemindersDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
+import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
@@ -331,7 +332,8 @@ public class SettingsGateway {
             MediaManagementAppsDetails.class.getName(),
             AutoBrightnessSettings.class.getName(),
             OneHandedSettings.class.getName(),
-            MobileNetworkSettings.class.getName()
+            MobileNetworkSettings.class.getName(),
+            AppLocaleDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
