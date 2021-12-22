@@ -18,7 +18,6 @@ package com.android.settings.network;
 
 import android.app.FragmentManager;
 import android.app.PendingIntent;
-import android.content.Intent;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.UiccCardInfo;
@@ -106,21 +105,8 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
             // Use INVALID_SUBSCRIPTION_ID to disable the esim profile.
             // The SimSlotMapping is ready, then to execute activate/inactivate esim.
             mIsDuringSimSlotMapping = true;
-            EuiccManager.ResultListener callback = new EuiccManager.ResultListener() {
-                @Override
-                public void onComplete(int resultCode, Intent resultIntent) {
-                    Log.i(TAG, String.format("Result code : %d;", resultCode));
-                    if (resultCode == EuiccManager.EMBEDDED_SUBSCRIPTION_RESULT_OK) {
-                        mSwitchSlotSidecar.runSwitchToEuiccSlot(getTargetSlot(), mPort,
-                                removedSubInfo);
-                    } else {
-                        setState(State.ERROR, resultCode);
-                    }
-                }
-            };
             mEuiccManager.switchToSubscription(SubscriptionManager.INVALID_SUBSCRIPTION_ID, mPort,
-                    getContext().getMainExecutor(),
-                    callback);
+                    mCallbackIntent);
         } else {
             mSwitchSlotSidecar.runSwitchToEuiccSlot(getTargetSlot(), mPort, removedSubInfo);
         }
@@ -187,19 +173,7 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
 
     private void switchToSubscription() {
         // The SimSlotMapping is ready, then to execute activate/inactivate esim.
-        EuiccManager.ResultListener callback = new EuiccManager.ResultListener() {
-            @Override
-            public void onComplete(int resultCode, Intent resultIntent) {
-                Log.i(TAG, String.format("Result code : %d;", resultCode));
-                if (resultCode == EuiccManager.EMBEDDED_SUBSCRIPTION_RESULT_OK) {
-                    setState(State.SUCCESS, Substate.UNUSED);
-                } else {
-                    setState(State.ERROR, resultCode);
-                }
-            }
-        };
-        mEuiccManager.switchToSubscription(mSubId, mPort, getContext().getMainExecutor(),
-                callback);
+        mEuiccManager.switchToSubscription(mSubId, mPort, mCallbackIntent);
     }
 
     @Override
