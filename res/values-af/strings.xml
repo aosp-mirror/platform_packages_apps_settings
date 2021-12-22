@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"Tale"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Verwyder"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Voeg \'n taal by"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"Taal"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"Voorkeurtaal"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Programtale"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Stel die taal vir elke program"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Programtaal"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"Voorgestelde tale"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle tale"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Die program is by verstek op <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> gestel en ondersteun nie veelvuldige tale nie."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Verwyder gekose tale?</item>
       <item quantity="one">Verwyder gekose taal?</item>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Nie beskikbaar nie"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Sekuriteitstatus"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Skermslot, Kry My Toestel, programsekuriteit"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Sekuriteit en privaatheid"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"Toestemmings, skermslot, programsekuriteit"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gesig is bygevoeg"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tik om gesig op te stel"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Gesigslot"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Gebruik jou gesig om jou foon te ontsluit of vir stawing in programme, soos wanneer jy aanmeld of \'n aankoop goedkeur.\n\nHou in gedagte:\nJy kan slegs een gesig op \'n slag gestel hê. Om nog \'n gesig by te voeg, moet jy die huidige een uitvee.\n\nAs jy na die foon kyk, kan dit ontsluit word wanneer jy nie bedoel om dit te doen nie.\n\nIemand anders kan jou foon ontsluit as dit voor jou gesig gehou word.\n\nIemand ander wat baie soos jy lyk, soos \'n identiese broer of suster, kan jou foon ontsluit."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Gebruik jou gesig om jou foon te ontsluit of vir stawing in programme, soos wanneer jy aanmeld of \'n aankoop goedkeur.\n\nHou in gedagte:\nJy kan slegs een gesig op \'n slag gestel hê. Om nog \'n gesig by te voeg, moet jy die huidige een uitvee.\n\nAs jy na die foon kyk, kan dit ontsluit word wanneer jy nie bedoel om dit te doen nie.\n\nIemand anders kan jou foon ontsluit as dit voor jou gesig gehou word, selfs as jou oë toe is.\n\nIemand ander wat baie soos jy lyk, soos \'n identiese broer of suster, kan jou foon ontsluit."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Vee gesigmodel uit?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Jou gesigmodel sal permanent en veilig uitgevee word. Nadat dit uitgevee is, sal jy jou vingerafdruk, PIN, patroon of wagwoord nodig hê om jou foon te ontsluit of vir stawing in programme."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Vee gesigmodel uit?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Jou gesigmodel sal permanent en veilig uitgevee word.\n\nNadat dit uitgevee is, sal jy jou vingerafdruk, PIN, patroon of wagwoord nodig hê om jou foon te ontsluit of vir stawing in programme."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Jou gesigmodel sal permanent en veilig uitgevee word. \n\nNadat dit uitgevee is, sal jy jou PIN, patroon of wagwoord nodig hê om jou foon te ontsluit of vir stawing in programme."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Jou gesigmodel sal permanent en veilig uitgevee word. \n\nNadat dit uitgevee is, sal jy jou PIN, patroon of wagwoord nodig hê om jou foon te ontsluit."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Gebruik Gesigslot om jou foon te ontsluit"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Vingerafdruk"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Vingerafdruk vir werk"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Vee uit"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Raak die sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Plaas jou vinger op die sensor en lig dit op wanneer jy \'n vibrasie voel"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Hou jou vinger op die sensor totdat jy \'n vibrasie voel"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Hou jou vingerafdruk plat op die sensor totdat jy \'n vibrasie voel"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Raak en hou die vingerafdrukensor"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Lig en raak dan weer"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Nog een keer"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Hou aan om jou vinger op te lig om die verskillende dele van jou vingerafdruk by te voeg"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Raak en hou elke keer wanneer die vingerafdrukikoon skuif. Dit help om meer van jou vingerafdruk vas te vang."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Plaas jou vingertop op die sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Plaas laaste die kante van jou vinger"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Gebruik laastens die kante van jou vinger"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Plaas die kant van jou vingerafdruk op die sensor en hou; ruil dan om na die ander kant"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dit help om meer van jou vingerafdruk vas te vang"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Skryf tans vingerafdruk in <xliff:g id="PERCENTAGE">%d</xliff:g> persent"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Bel oor Wi-Fi. Die oproep sal eindig as jy nie meer Wi-Fi het nie."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"As Wi-Fi-oproepe aan is, kan jou foon oproepe deur Wi-Fi-netwerke of jou diensverskaffer se netwerk roeteer, afhangend van jou voorkeur en watter sein die sterkste is. Vind by jou diensverskaffer oor tariewe en ander besonderhede uit voordat jy hierdie kenmerk aanskakel.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"Noodadres"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Word as jou ligging gebruik wanneer jy \'n noodoproep oor Wi-Fi maak"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Kom meer te wete"</annotation>" oor Private DNS-kenmerke"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Aan"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Stel \'n werk-PIN"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Stel \'n patroon"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Stel \'n werkpatroon"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Stel \'n wagwoord om die foon te ontsluit vir bykomende sekuriteit"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Stel \'n PIN om die foon te ontsluit vir bykomende sekuriteit"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Stel \'n patroon om die foon te ontsluit vir bykomende sekuriteit"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Stel \'n wagwoord om die tablet te ontsluit vir bykomende sekuriteit"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Stel \'n PIN om die tablet te ontsluit vir bykomende sekuriteit"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Stel \'n patroon om die tablet te ontsluit vir bykomende sekuriteit"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Stel \'n wagwoord om die toestel te ontsluit vir bykomende sekuriteit"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Stel \'n PIN om die toestel te ontsluit vir bykomende sekuriteit"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Stel \'n patroon om die toestel te ontsluit vir bykomende sekuriteit"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Stel wagwoord vir vingerafdruk"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Stel patroon vir vingerafdruk"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Stel PIN vir sekuriteit"</string>
@@ -2417,9 +2416,16 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Korter"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Langer"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Outokliktyd"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Vibrasie en fisiese sterkte"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Kennisgewingvibrasie"</string>
+    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
+    <skip />
+    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
+    <skip />
+    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Luivibrasie"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Kennisgewingvibrasie"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Raakterugvoer"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Gebruik <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Maak <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> oop"</string>
@@ -3248,8 +3254,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Koppel aan <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Ontkoppel hierdie VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Ontkoppel"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"Weergawe"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Vergeet VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Vervang bestaande VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Stel altyd-aan VPN?"</string>
@@ -3471,9 +3476,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Mobiele data is onbeskikbaar"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Tik om \'n data-SIM te kies"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Gebruik dit altyd vir oproepe"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"Kies \'n SIM vir data"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Kies SIM vir mobiele data"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Kies \'n SIM vir SMS"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"Wissel tans data-SIM – dit kan tot \'n minuut neem …"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Gebruik <xliff:g id="NEW_SIM">%1$s</xliff:g> vir mobiele data?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"As jy na <xliff:g id="NEW_SIM">%1$s</xliff:g> toe oorskakel, sal <xliff:g id="OLD_SIM">%2$s</xliff:g> nie meer vir mobiele data gebruik word nie."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Gebruik <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Bel met"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Kies \'n SIM-kaart"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3541,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, netwerkverbinding, internet, draadloos, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-kennisgewing, wifi-kennisgewing"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"datagebruik"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Stop vibrasie, tik, sleutelbord"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Gebruik 24-uurformaat"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Laai af"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Maak oop met"</string>
@@ -3616,6 +3623,8 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"fisiese terugvoer, vibreer, skerm, sensitiwiteit"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"raakinteraksie, vibreer, foon, bel, sensitiwiteit, lui"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"raakinteraksie, vibreer, sensitiwiteit"</string>
+    <!-- no translation found for keywords_vibration (670455132028025952) -->
+    <skip />
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"batterybespaarder, vaste, volhard, kragbespaarder, battery"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"roetine, skedule, batterybespaarder, kragbespaarder, battery, outomaties, persent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VolTE, gevorderde oproepe, 4G-oproepe"</string>
@@ -3651,8 +3660,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Laaiklanke en -vibrasie"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Dokklanke"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Raakklanke"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Raakvibrasie"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Fisieke terugvoer vir tik, sleutelbord en meer"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dokluidspreker speel"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Alle oudio"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Net media-oudio"</string>
@@ -5293,12 +5300,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Skakel SIM aan?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Skakel oor na <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Skakel oor om SIM-kaart te gebruik?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Gebruik <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Net een SIM kan op \'n slag aktief wees.\n\nAs jy na <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> toe oorskakel, sal dit nie jou <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-diens kanselleer nie."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Net een afgelaaide SIM kan op \'n slag aktief wees.\n\nAs jy na <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> toe oorskakel, sal dit nie jou <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-diens kanselleer nie."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Net een SIM kan op \'n slag aktief wees.\n\nAs jy oorskakel, sal dit nie jou <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-diens kanselleer nie."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Jy kan 2 SIM\'s op dieselfde tyd gebruik. Skakel ander SIM af om <xliff:g id="CARRIER_NAME">%1$s</xliff:g> te gebruik."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Skakel oor na <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Skakel <xliff:g id="CARRIER_NAME">%1$s</xliff:g> af"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"As jy \'n SIM afskakel, sal dit nie jou diens kanselleer nie"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Koppel tans aan netwerk …"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Skakel tans oor na <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Kan nie na \'n ander diensverskaffer toe oorskakel nie"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Kan weens \'n fout nie na \'n ander diensverskaffer toe oorskakel nie."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Skakel <xliff:g id="CARRIER_NAME">%1$s</xliff:g> af?"</string>
@@ -5450,8 +5462,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lank"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Wys beursie"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Laat toegang tot beursie vanaf sluitskerm en kitsinstellings toe"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Wys QR-kodeskandeerders"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Laat toegang tot QR-kodeskandeerder van sluitskerm af toe"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Wys QR-skandeerder"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Laat toegang tot QR-skandeerder van sluitskerm af toe"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Wys toestelkontroles"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Toegangkontroles wanneer dit gesluit is"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Wys dubbellynhorlosie as dit beskikbaar is"</string>

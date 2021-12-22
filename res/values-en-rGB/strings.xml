@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"Languages"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Remove"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Add a language"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"Language"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"Preferred language"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"App languages"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Set the language for each app"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"App language"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"Suggested languages"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"All languages"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"The app is set to <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> by default and doesn’t support multiple languages."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Remove selected languages?</item>
       <item quantity="one">Remove selected language?</item>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Not available"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Security status"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Screen lock, Find My Device, app security"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Security &amp; privacy"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"Permissions, screen lock, app security"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Face added"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tap to set up face"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Face Unlock"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don’t intend to.\n\nYour phone can be unlocked by someone else if it’s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don’t intend to.\n\nYour phone can be unlocked by someone else if it’s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Delete face model?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Your face model will be permanently and securely deleted. After deletion, you will need your PIN, pattern or password to unlock your phone or for authentication in apps."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Delete face model?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern or password to unlock your phone or for authentication in apps."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern or password to unlock your phone or for authentication in apps."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern or password to unlock your phone."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Use Face Unlock to unlock your phone"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingerprint"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerprint for work"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Delete"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Touch the sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Put your finger on the sensor and lift after you feel a vibration"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Keep your finger on the sensor until you feel a vibration"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Keep your fingerprint flat on the sensor until you feel a vibration"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Touch &amp; hold the fingerprint sensor"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Lift, then touch again"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"One more time"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Keep lifting your finger to add the different parts of your fingerprint"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Touch &amp; hold each time the fingerprint icon moves. This helps capture more of your fingerprint."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Place the tip of your finger on the sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Finally, place the edges of your finger"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Finally, use the edges of your finger"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Place the side of your fingerprint on the sensor and hold, then switch to the other side"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"This helps capture more of your fingerprint"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Enrolling fingerprint <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Call over Wi‑Fi. If Wi‑Fi is lost, call will end."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"When Wi-Fi calling is on, your phone can route calls via Wi-Fi networks or your mobile’s network, depending on your preference and which signal is stronger. Before turning on this feature, check with your operator regarding fees and other details.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"Emergency address"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Used as your location when you make an emergency call over Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Learn more"</annotation>" about Private DNS features"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"On"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Set a work PIN"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Set a pattern"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Set a work pattern"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"For added security, set a password to unlock the phone"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"For added security, set a PIN to unlock the phone"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"For added security, set a pattern to unlock the phone"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"For added security, set a password to unlock the tablet"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"For added security, set a PIN to unlock the tablet"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"For added security, set a pattern to unlock the tablet"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"For added security, set a password to unlock the device"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"For added security, set a PIN to unlock the device"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"For added security, set a pattern to unlock the device"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"To use fingerprint, set password"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"To use fingerprint, set pattern"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"For security, set PIN"</string>
@@ -2417,9 +2416,16 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Shorter"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Longer"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Auto click time"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Vibration and haptic strength"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Notification vibration"</string>
+    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
+    <skip />
+    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
+    <skip />
+    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Ring vibration"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Notification vibration"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Touch feedback"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Use <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Open <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
@@ -3248,8 +3254,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Connect to <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Disconnect this VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Disconnect"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"Version"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Forget VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Replace existing VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Set always-on VPN?"</string>
@@ -3471,9 +3476,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Mobile data is unavailable"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Tap to select a data SIM"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Always use this for calls"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"Select a SIM for data"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Choose SIM for mobile data"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Select a SIM for SMS"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"Switching data SIM, this may take up to a minute…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Use <xliff:g id="NEW_SIM">%1$s</xliff:g> for mobile data?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"If you switch to <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> will no longer be used for mobile data."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Use <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Call with"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Select a SIM card"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3541,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, network connection, internet, wireless, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi notification, wi-fi notification"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"data usage"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Stop vibration, tap, keyboard"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Use 24-hour format"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Download"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Open with"</string>
@@ -3616,6 +3623,8 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptics, vibrate, screen, sensitivity"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"haptics, vibrate, phone, call, sensitivity, ring"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"haptics, vibrate, sensitivity"</string>
+    <!-- no translation found for keywords_vibration (670455132028025952) -->
+    <skip />
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"battery saver, sticky, persist, power saver, battery"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"routine, schedule, battery saver, power saver, battery, automatic, per cent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, advanced calling, 4G calling"</string>
@@ -3651,8 +3660,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Charging sounds and vibration"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Docking sounds"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Touch sounds"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Touch vibration"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Haptic feedback for tap, keyboard and more"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dock speaker plays"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"All audio"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Media audio only"</string>
@@ -5293,12 +5300,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Turn on SIM?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Switch to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Switch to using SIM card?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Use <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Only one SIM can be active at a time.\n\nSwitching to <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> won’t cancel your <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> service."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Only one downloaded SIM can be active at a time.\n\nSwitching to <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> won’t cancel your <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> service."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Only one SIM can be active at a time.\n\nSwitching won’t cancel your <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> service."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"You can use two SIMs at a time. To use <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, turn off another SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Switch to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Turn off <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Turning off a SIM won’t cancel your service"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Connecting to network…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Switching to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Can’t switch operator"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"The operator can’t be switched because of an error."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Turn off <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5450,8 +5462,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Long"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Show wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Allow access to wallet from lock screen and Quick Settings"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Show QR code scanner"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Allow access to QR code scanner from lock screen"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Show QR scanner"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Allow access to QR scanner from lock screen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Show device controls"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Access controls when locked"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Show double-line clock when available"</string>

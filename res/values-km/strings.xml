@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"ភាសា"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"លុប"</string>
     <string name="add_a_language" msgid="2126220398077503271">"បន្ថែមភាសា"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"ភាសា"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"ភាសា​អាទិភាព"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ភាសាកម្មវិធី"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"កំណត់ភាសាសម្រាប់កម្មវិធីនីមួយៗ"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"ភាសា​កម្មវិធី"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"ភាសា​ដែល​បាន​ណែ​នាំ"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ភាសាទាំងអស់"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"កម្មវិធីនេះត្រូវបានកំណត់ទៅភាសា<xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>តាមលំនាំដើម និងមិនអាចប្រើពហុភាសាបានទេ។"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">លុបភាសាដែលបានជ្រើសរើសឬ?</item>
       <item quantity="one">លុបភាសាដែលបានជ្រើសរើសឬ?</item>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"មិនមានទេ"</string>
     <string name="security_status_title" msgid="6958004275337618656">"ស្ថានភាព​សុវត្ថិភាព"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"ការចាក់សោ​អេក្រង់ កម្មវិធី​រកឧបករណ៍របស់ខ្ញុំ សុវត្ថិភាព​កម្មវិធី"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"សុវត្ថិភាព និងឯកជនភាព"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"ការអនុញ្ញាត ចាក់សោអេក្រង់ សុវត្ថិភាពកម្មវិធី"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"បាន​បញ្ចូល​មុខ"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"ចុចដើម្បី​រៀបចំ​មុខ"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"ដោះ​សោ​តាម​​ទម្រង់​មុខ"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"ប្រើមុខរបស់អ្នក​ដើម្បីដោះសោ​ទូរសព្ទរបស់អ្នក ឬសម្រាប់​ការផ្ទៀងផ្ទាត់​នៅក្នុងកម្មវិធី​ដូចជា នៅពេលអ្នកចូល ឬយល់ព្រម​លើការទិញជាដើម។\n\nសូមចងចាំថា៖\nអ្នកអាចរៀបចំ​មុខបានតែមួយប៉ុណ្ណោះ​ក្នុងមួយលើក។ ដើម្បីបញ្ចូល​មុខផ្សេងទៀត សូមលុប​មុខបច្ចុប្បន្ន​ចេញ។\n\nការមើល​ទៅ​ទូរសព្ទ​អាច​ដោះសោ​ទូរសព្ទបាន ទោះបីជា​អ្នក​មិនចង់​ដោះសោ​ក៏ដោយ។\n\nអ្នកផ្សេងអាច​ដោះសោទូរសព្ទ​របស់អ្នក ប្រសិនបើ​វា​ស្ថិតនៅ​ចំពី​មុខរបស់អ្នក។\n\nអ្នកដែល​មាន​មុខមាត់​ស្រដៀង​អ្នកខ្លាំង ដូចជា​បងប្អូន​បង្កើត​ដែលមានមុខមាត់​ដូចអ្នក​អាច​ដោះសោ​ទូរសព្ទ​របស់អ្នក​បាន។"</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"ប្រើមុខរបស់អ្នក​ដើម្បីដោះសោ​ទូរសព្ទរបស់អ្នក ឬសម្រាប់​ការផ្ទៀងផ្ទាត់​នៅក្នុងកម្មវិធី​ដូចជា នៅពេលអ្នកចូល ឬយល់ព្រម​លើការទិញជាដើម។\n\nសូមចងចាំថា៖\nអ្នកអាចរៀបចំ​មុខបានតែមួយប៉ុណ្ណោះ​ក្នុងមួយលើក។ ដើម្បីបញ្ចូល​មុខផ្សេងទៀត សូមលុប​មុខបច្ចុប្បន្ន​ចេញ។\n\nការមើល​ទៅ​ទូរសព្ទ​អាច​ដោះសោ​ទូរសព្ទបាន ទោះបីជា​អ្នក​មិនចង់​ដោះសោ​ក៏ដោយ។\n\nអ្នកផ្សេងអាច​ដោះសោទូរសព្ទ​របស់អ្នក ប្រសិនបើ​វា​ស្ថិតនៅ​ចំពី​មុខរបស់អ្នក ទោះបីជា​អ្នកបិទភ្នែក​ក៏ដោយ។\n\nអ្នកដែល​មាន​មុខមាត់​ស្រដៀង​អ្នកខ្លាំង ដូចជា​បងប្អូន​បង្កើត​ដែលមានមុខមាត់​ដូចអ្នក​អាច​ដោះសោ​ទូរសព្ទ​របស់អ្នក​បាន។"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"លុប​គំរូមុខ​ឬ?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"គំរូមុខ​របស់អ្នក​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍។ បន្ទាប់ពី​លុបហើយ អ្នកនឹង​ត្រូវការ​កូដ PIN, លំនាំ ឬពាក្យសម្ងាត់​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទ​របស់អ្នក ឬសម្រាប់​ការផ្ទៀងផ្ទាត់​នៅក្នុង​កម្មវិធី​។"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"លុប​គំរូមុខ​ឬ?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"គំរូមុខ​របស់អ្នក​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍។\n\nបន្ទាប់ពី​លុបរួច អ្នកនឹង​ត្រូវការ​ស្នាមម្រាមដៃ, កូដ PIN, លំនាំ ឬពាក្យសម្ងាត់​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទ​របស់អ្នក ឬសម្រាប់​ការផ្ទៀងផ្ទាត់​នៅក្នុង​កម្មវិធី​។"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"គំរូមុខ​របស់អ្នក​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍។\n\nបន្ទាប់ពី​លុបហើយ អ្នកនឹង​ត្រូវការ​កូដ PIN, លំនាំ ឬពាក្យសម្ងាត់​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទ​របស់អ្នក ឬសម្រាប់​ការផ្ទៀងផ្ទាត់​នៅក្នុង​កម្មវិធី។"</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"គំរូមុខ​របស់អ្នក​នឹងត្រូវលុប​ដោយសុវត្ថិភាព​ជាអចិន្ត្រៃយ៍។\n\nបន្ទាប់ពី​លុបហើយ អ្នកនឹង​ត្រូវការកូដ PIN, លំនាំ ឬពាក្យសម្ងាត់​របស់អ្នក ដើម្បីដោះសោ​ទូរសព្ទ​របស់អ្នក។"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"ប្រើ​ការដោះសោ​តាមទម្រង់​មុខ ដើម្បី​ដោះសោ​ទូរសព្ទរបស់អ្នក"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"ស្នាមម្រាមដៃ"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"ស្នាមម្រាមដៃសម្រាប់ការងារ"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"លុប"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"ប៉ះឧបករណ៍ចាប់ស្នាមម្រាមដៃ"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"ដាក់ម្រាមដៃរបស់អ្នកនៅលើឧបករណ៍ចាប់សញ្ញា ហើយលើកវាឡើងបន្ទាប់ពីអ្នកមានអារម្មណ៍ថាវាញ័រហើយ"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"ដាក់ម្រាមដៃ​របស់អ្នក​នៅលើ​ឧបករណ៍​ចាប់ស្នាមម្រាមដៃ រហូតទាល់តែ​អ្នកមានអារម្មណ៍​ថាញ័រ"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"ដាក់ស្នាមម្រាមដៃរបស់អ្នកឱ្យពេញនៅលើឧបករណ៍ចាប់ស្នាមម្រាមដៃ រហូតដល់មានការញ័រ"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"ចុច​ឧបករណ៍​ចាប់ស្នាមម្រាមដៃ​ឱ្យជាប់"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"លើកឡើង បន្ទាប់មកប៉ះម្តងទៀត"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"ម្ដងទៀត"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"បន្តលើកម្រាមដៃឡើង ដើម្បីបញ្ចូលផ្នែកផ្សេងទៀតនៃស្នាមម្រាមដៃរបស់អ្នក"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"ចុចឱ្យជាប់ រាល់ពេលដែល​រូបស្នាមម្រាមដៃ​មានចលនា។ ការធ្វើបែបនេះ​ជួយថតស្នាមម្រាមដៃ​របស់អ្នក​បានកាន់តែច្រើន។"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"ដាក់ចុងម្រាមដៃ​របស់អ្នក​នៅលើឧបករណ៍​ចាប់សញ្ញា"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"ជាចុងក្រោយ ដាក់គែម​ម្រាមដៃ​របស់អ្នក"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"ចុងក្រោយ ដាក់គែមម្រាមដៃរបស់អ្នក"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"ដាក់​ផ្នែកចំហៀង​នៃស្នាមម្រាមដៃ​របស់អ្នក​នៅលើ​ឧបករណ៍​ចាប់សញ្ញា​ឱ្យជាប់ រួចប្ដូរទៅ​ផ្នែកម្ខាងទៀត"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ការធ្វើបែបនេះ​ជួយថតស្នាមម្រាមដៃ​របស់អ្នក​បានកាន់តែច្រើន"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"កំពុងចុះឈ្មោះ​ស្នាមម្រាមដៃ <xliff:g id="PERCENTAGE">%d</xliff:g> ភាគរយ"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"ហៅទូរសព្ទតាមរយៈ Wi‑Fi ។ ប្រសិនបើ​ដាច់ Wi‑Fi ការហៅទូរសព្ទនឹងបញ្ចប់។"</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"នៅពេល​ការហៅ​តាម Wi-Fi បានបើក ទូរសព្ទ​របស់អ្នក​អាច​ធ្វើការហៅចេញ​តាមរយៈ​បណ្ដាញ Wi-Fi ឬ​បណ្ដាញ​​របស់ក្រុមហ៊ុនសេវាទូរសព្ទ​អ្នក ដោយផ្អែកលើ​ចំណូលចិត្ត​របស់អ្នក និងរលកសញ្ញា​នៃបណ្ដាញ​ណាមួយ​ដែល​ខ្លាំងជាង។ មុនពេល​បើក​មុខងារ​នេះ សូមសាកសួរ​ក្រុមហ៊ុន​សេវាទូរសព្ទរបស់អ្នក​អំពី​ថ្លៃសេវា និង​ព័ត៌មានលម្អិត​ផ្សេងៗ​។<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"អាសយដ្ឋានពេលមានអាសន្ន"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"ត្រូវបានប្រើជាទីតាំងរបស់អ្នក នៅពេលដែលអ្នកហៅទូរសព្ទសង្គ្រោះបន្ទាន់តាមរយៈ Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"ស្វែង​យល់​បន្ថែម"</annotation>"អំពី​មុខងារ DNS ឯកជន"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"បើក"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"កំណត់​កូដ PIN ការងារ"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"កំណត់លំនាំ"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"កំណត់​លំនាំ​ការងារ"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"ដើម្បីទទួល​បានសុវត្ថិភាពបន្ថែម សូមកំណត់​ពាក្យសម្ងាត់ ដើម្បីដោះសោ​ទូរសព្ទ"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"ដើម្បីទទួល​បានសុវត្ថិភាពបន្ថែម សូមកំណត់កូដ PIN ដើម្បីដោះសោ​ទូរសព្ទ"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"ដើម្បីទទួលបាន​សុវត្ថិភាពបន្ថែម សូមកំណត់​លំនាំ ដើម្បីដោះសោ​ទូរសព្ទ"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"ដើម្បីទទួល​បានសុវត្ថិភាពបន្ថែម សូមកំណត់​ពាក្យសម្ងាត់ ដើម្បីដោះសោ​ថេប្លេត"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"ដើម្បីទទួល​បានសុវត្ថិភាពបន្ថែម សូមកំណត់កូដ PIN ដើម្បីដោះសោ​ថេប្លេត"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"ដើម្បីទទួលបាន​សុវត្ថិភាពបន្ថែម សូមកំណត់​លំនាំ ដើម្បីដោះសោ​ថេប្លេត"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"ដើម្បីទទួលបាន​សុវត្ថិភាពបន្ថែម សូមកំណត់​ពាក្យសម្ងាត់ ដើម្បីដោះសោ​ឧបករណ៍"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"ដើម្បីទទួល​បានសុវត្ថិភាពបន្ថែម សូមកំណត់កូដ PIN ដើម្បីដោះសោ​ឧបករណ៍"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"ដើម្បីទទួលបាន​សុវត្ថិភាពបន្ថែម សូមកំណត់​លំនាំ ដើម្បីដោះសោ​ឧបករណ៍"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ដើម្បី​ប្រើប្រាស់​ស្នាម​ម្រាមដៃ សូម​កំណត់​ពាក្យសម្ងាត់"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ដើម្បី​ប្រើស្នាម​ម្រាមដៃ សូម​កំណត់​លំនាំ"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"ដើម្បី​សុវត្ថិភាព សូម​កំណត់​កូដ PIN"</string>
@@ -2417,9 +2416,12 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"ខ្លីជាង"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"យូរជាង"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"រយៈពេល​ចុច​ដោយស្វ័យប្រវត្តិ"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"កម្លាំង​នៃការប៉ះ និង​ការញ័រ"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"រំញ័រការជូនដំណឹង"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"ការ​ញ័រ និងការប៉ះ"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"ការហៅទូរសព្ទ"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"ការជូនដំណឹង និង​ម៉ោងរោទ៍"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"ការប៉ះ​បែបអន្តរកម្ម"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"រំញ័រសំឡេងរោទ៍"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"រំញ័រការជូនដំណឹង"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"ប្រតិកម្មតបនឹងការប៉ះ"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"ប្រើ <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"បើក <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
@@ -3248,8 +3250,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"តភ្ជាប់ <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"ផ្តាច់ VPN នេះ?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"ផ្ដាច់"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"កំណែ"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"បំភ្លេច VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"ជំនួស VPN ដែលមានស្រាប់ឬ?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"កំណត់ VPN ឲ្យបើកជានិច្ចឬ?"</string>
@@ -3471,9 +3472,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"ទិន្នន័យ​ចល័តមិនអាច​ប្រើបានទេ"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"ប៉ះដើម្បីជ្រើសស៊ីមទិន្នន័យ"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"ប្រើ​វា​សម្រាប់​ការ​ហៅ​ជា​និច្ច"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"ជ្រើស​ស៊ីម​សម្រាប់​ទិន្នន័យ"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"ជ្រើសរើសស៊ីម​សម្រាប់ទិន្នន័យ​ទូរសព្ទចល័ត"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"ជ្រើសរើស​ស៊ីម​សម្រាប់​សារ SMS"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"កំពុងប្ដូរស៊ីមទិន្នន័យ សកម្មភាពនេះ​អាចចំណាយពេល​មួយនាទី…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"ប្រើ <xliff:g id="NEW_SIM">%1$s</xliff:g> សម្រាប់​ទិន្នន័យទូរសព្ទចល័តឬ?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"ប្រសិនបើអ្នកប្ដូរទៅ <xliff:g id="NEW_SIM">%1$s</xliff:g> <xliff:g id="OLD_SIM">%2$s</xliff:g> នឹងមិនត្រូវបានប្រើ​សម្រាប់ទិន្នន័យទូរសព្ទចល័ត​ទៀតទេ។"</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"ប្រើ <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"ហៅ​ជាមួយ"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"ជ្រើស​ស៊ី​ម​កាត"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"ស៊ី​ម <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3537,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, ការ​តភ្ជាប់​បណ្តាញ អ៊ីនធឺណិត ឥតខ្សែ ទិន្នន័យ, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"ការជូនដំណឹងអំពី Wi‑Fi, ការជូនដំណឹងអំពី wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"ការប្រើទិន្នន័យ"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"បញ្ឈប់​ការញ័រ ចុច ក្ដារចុច"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"ប្រើ​ទម្រង់ 24 ម៉ោង"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"ទាញយក"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"បើក​ជាមួយ"</string>
@@ -3616,6 +3619,7 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"ការប៉ះ ញ័រ អេក្រង់ ​កម្រិតរំញោច"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"ការប៉ះ ការញ័រ ទូរសព្ទ ការហៅទូរសព្ទ រំញោច សំឡេងរោទ៍"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"ការប៉ះ ការញ័រ រំញោច"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"ការប៉ះ ញ័រ ការញ័រ"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"មុខងារ​សន្សំ​ថ្ម ស្អិត នៅតែកើតឡើងដដែល កម្មវិធីសន្សំថាមពល ថ្ម"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ទម្លាប់ កាលវិភាគ មុខងារ​សន្សំ​ថ្ម កម្មវិធីសន្សំថាមពល ថ្ម ស្វ័យប្រវត្តិ ភាគរយ"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, ការហៅទូរសព្ទ​កម្រិតខ្ពស់, ការហៅទូរសព្ទតាមរយៈប្រព័ន្ធ 4g"</string>
@@ -3651,8 +3655,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"ការ​ញ័រ និងសំឡេង​សាកថ្ម"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"សំឡេង​​ភ្ជាប់"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"សំឡេង​ប៉ះ"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"ការ​ញ័រ​ពេល​ប៉ះ"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"ប្រតិកម្មញ័រពេលចុច ក្ដារចុច និងច្រើនទៀត"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"ភ្ជាប់ការ​ចាក់​តាមអូប៉ាល័រ"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"អូឌីយ៉ូ​​ទាំងអស់"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"តែ​អូឌីយ៉ូ​​មេឌៀ​ប៉ុណ្ណោះ"</string>
@@ -5293,12 +5295,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"បើកស៊ីមឬ?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"ប្ដូរទៅ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ឬ?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"ប្ដូរ​ទៅប្រើ​ស៊ីមកាតឬ?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"ប្រើ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ឬ?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"អាចបើកដំណើរការ​ស៊ីម​ម្តងមួយតែប៉ុណ្ណោះ។\n\nការប្ដូរទៅ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> នឹងមិនបោះបង់​សេវាកម្ម <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> របស់អ្នកទេ។"</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"អាចបើកដំណើរការ​ស៊ីមដែលបានទាញយក​ម្ដងមួយតែប៉ុណ្ណោះ​។\n\nការប្ដូរទៅ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> នឹងមិនបោះបង់សេវាកម្ម​ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> របស់អ្នក​ទេ។"</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"អាចបើក​ដំណើរការ​ស៊ីម​ម្តងមួយតែប៉ុណ្ណោះ។\n\nការប្ដូរ​នឹងមិន​បោះបង់​សេវាកម្ម <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> របស់អ្នក​ទេ។"</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"អ្នកអាចប្រើ​ស៊ីមបាន 2 ក្នុងពេលតែមួយ។ ដើម្បីប្រើ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> សូមបិទស៊ីម​ផ្សេងទៀត។"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"ប្ដូរទៅ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"បិទ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"ការបិទស៊ីម​នឹងមិនបោះបង់​សេវាកម្មរបស់អ្នកទេ"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"កំពុងភ្ជាប់​បណ្ដាញ…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"កំពុង​ប្ដូរទៅ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"មិនអាច​ប្ដូរក្រុមហ៊ុនសេវា​ទូរសព្ទ​បានទេ"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"មិនអាច​ប្ដូរក្រុមហ៊ុនសេវា​ទូរសព្ទ​បានទេ ដោយសារ​មានបញ្ហា។"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"បិទ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ឬ?"</string>
@@ -5450,8 +5457,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"វែង"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"បង្ហាញកាបូប"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"អនុញ្ញាតឱ្យចូលប្រើ​កាបូបពីអេក្រង់​ចាក់សោ និងការកំណត់រហ័ស"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"បង្ហាញ​​កម្មវិធី​ស្កេន​​កូដ QR"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"អនុញ្ញាតឱ្យចូលប្រើកម្មវិធី​ស្កេនកូដ QR ពីអេក្រង់ចាក់សោ"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"បង្ហាញ​កម្មវិធីស្កេន​កូដ QR"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"អនុញ្ញាត​ឱ្យចូលប្រើកម្មវិធី​ស្កេនកូដ QR ពីអេក្រង់ចាក់សោ"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"បង្ហាញ​ផ្ទាំងគ្រប់គ្រង​ឧបករណ៍"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"ចូលប្រើផ្ទាំងគ្រប់គ្រង នៅពេលចាក់​សោ"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"បង្ហាញ​នាឡិកា​ពីរជួរ នៅពេល​ដែលមាន"</string>

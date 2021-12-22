@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"语言"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"移除"</string>
     <string name="add_a_language" msgid="2126220398077503271">"添加语言"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"语言"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"首选语言"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"应用语言"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"设置每个应用的语言"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"应用语言"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"建议语言"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"所有语言"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"默认情况下会将应用设置为<xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>，并且不支持多种语言。"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">要移除所选语言吗？</item>
       <item quantity="one">要移除所选语言吗？</item>
@@ -316,10 +324,12 @@
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"要显示的内容"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"设置我的位置、屏幕解锁、SIM 卡锁定和凭据存储锁定"</string>
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"设置我的位置、屏幕解锁和凭据存储锁定"</string>
-    <string name="security_passwords_title" msgid="4154420930973818581">"隐私设置"</string>
+    <string name="security_passwords_title" msgid="4154420930973818581">"隐私"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"不可用"</string>
     <string name="security_status_title" msgid="6958004275337618656">"安全状态"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"屏幕锁定、查找我的设备、应用安全性"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"安全和隐私设置"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"权限、屏幕锁定、应用安全性"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"已添加面孔"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"点按即可设置人脸解锁"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"人脸解锁"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"您可以用脸部解锁手机或在应用内验证自己的身份，例如在登录帐号或批准购买交易时。\n\n注意：\n一次只能设置一张面孔。如需添加另一张面孔，请删除当前的面孔。\n\n目视手机可能会让手机意外解锁。\n\n如果有人将手机对准您的脸，手机可能会解锁。\n\n此外，长相与您相似的人（例如您的同胞兄弟姐妹）可能也能解锁您的手机。"</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"您可以用脸部解锁手机或在应用内验证自己的身份，例如在登录帐号或批准购买交易时。\n\n注意：\n一次只能设置一张面孔。如需添加另一张面孔，请删除当前的面孔。\n\n目视手机可能会让手机意外解锁。\n\n如果有人将手机对准您的脸，即使您闭上眼睛，手机可能也会解锁。\n\n此外，长相与您相似的人（例如您的同胞兄弟姐妹）可能也能解锁您的手机。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"要删除脸部模型吗？"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"系统会安全地永久删除您的脸部模型。脸部模型删除后，如需解锁手机或在应用内进行身份验证，您将需要使用 PIN 码、解锁图案或密码。"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"要删除脸部模型吗？"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"系统会安全地永久删除脸部模型。\n\n脸部模型删除后，如需解锁手机或在应用内进行身份验证，您将需要使用指纹、PIN 码、图案或密码。"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁手机或在应用内进行身份验证，您将需要使用 PIN 码、解锁图案或密码。"</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"系统会安全地永久删除您的脸部模型。\n\n脸部模型删除后，如需解锁手机，您将需要使用 PIN 码、解锁图案或密码。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"使用人脸解锁功能解锁手机"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"指纹"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"工作资料指纹"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"删除"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"触摸传感器"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"将您的手指放在指纹传感器上，感觉到振动后移开手指"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"将手指放在传感器上，感觉到振动后再移开"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"将手指平放在传感器上，感觉到振动后再移开"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"触按指纹传感器"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"移开手指，然后再次触摸传感器"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"再试一次"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"不时地移开手指，以便传感器更完整地记录下您的指纹"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"每次指纹图标移动时，请轻触并按住它。这有助于捕获您更完整的指纹。"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"将指尖放在传感器上"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"最后，放上手指边缘"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"最后，放上手指边缘"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"将指纹的一侧放在传感器上并按住，然后切换另一侧"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"这有助于捕获您更完整的指纹"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指纹注册进度为百分之 <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"通过 WLAN 进行通话。如果 WLAN 连接中断，通话将会结束。"</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"开启“WLAN 通话”功能后，您的手机可根据偏好设置并视信号强弱来选择通过 WLAN 网络或运营商网络来进行通话。开启此功能之前，请先向您的运营商咨询收费情况及其他详情。<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"紧急联系地址"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"当您通过 WLAN 网络拨打紧急呼救电话时，系统会判定您位于这个位置"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"详细了解"</annotation>"私人 DNS 功能"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"已开启"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"设置工作资料 PIN 码"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"设置图案"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"设置工作资料图案"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"为了提高安全性，请为该手机设置解锁密码"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"为了提高安全性，请为该手机设置解锁 PIN 码"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"为了提高安全性，请为该手机设置解锁图案"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"为了提高安全性，请为该平板电脑设置解锁密码"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"为了提高安全性，请为该平板电脑设置解锁 PIN 码"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"为了提高安全性，请为该平板电脑设置解锁图案"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"为了提高安全性，请为该设备设置解锁密码"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"为了提高安全性，请为该设备设置解锁 PIN 码"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"为了提高安全性，请为该设备设置解锁图案"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"要使用指纹，请设置密码"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"要使用指纹，请设置解锁图案"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"为了安全起见，请设置 PIN 码"</string>
@@ -2266,7 +2265,7 @@
     <string name="usage_time_label" msgid="9105343335151559883">"使用时间"</string>
     <string name="accessibility_settings" msgid="4713215774904704682">"无障碍"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"无障碍设置"</string>
-    <string name="accessibility_settings_summary" msgid="2366627644570558503">"显示屏、互动、音频"</string>
+    <string name="accessibility_settings_summary" msgid="2366627644570558503">"显示、互动、音频"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"阅读辅助设置"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"您可以根据自己的需求对此设备进行自定义。您可以稍后在“设置”中更改这些无障碍功能的设置。"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"更改字体大小"</string>
@@ -2417,9 +2416,16 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"较短"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"较长"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"自动点击时间"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"震动和触感强度"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"通知振动"</string>
+    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
+    <skip />
+    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
+    <skip />
+    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"响铃振动"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"通知振动"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"按触反馈"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"使用<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"打开 <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
@@ -3248,8 +3254,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"连接到<xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"要断开与此 VPN 的连接吗？"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"断开连接"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"版本"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"取消保存 VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"要替换现有 VPN 吗？"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"要设置始终开启的 VPN 吗？"</string>
@@ -3471,9 +3476,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"无法使用移动数据网络"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"点按即可选择上网用的 SIM 卡"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"一律使用这张卡进行通话"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"选择用于数据网络的 SIM 卡"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"选择提供移动数据的 SIM 卡"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"选择要用于收发短信的 SIM 卡"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"正在切换用于连接数据网络的 SIM 卡，这最多可能需要 1 分钟的时间…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"要使用<xliff:g id="NEW_SIM">%1$s</xliff:g>的移动数据吗？"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"如果切换到<xliff:g id="NEW_SIM">%1$s</xliff:g>，系统将不再使用<xliff:g id="OLD_SIM">%2$s</xliff:g>的移动数据。"</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"使用<xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"选择用于通话的 SIM 卡"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"选择 SIM 卡"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM 卡 <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3541,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, WLAN, 网络连接, 互联网, 无线, 数据, WLAN 网络"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"WLAN 通知, wlan 通知"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"流量消耗"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"停止振动, 点按, 键盘"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"使用 24 小时制"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"下载"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"打开方式"</string>
@@ -3616,6 +3623,8 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"触觉, 振动, 屏幕, 灵敏度"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"触感, 振动, 手机, 通话, 敏感度, 响铃"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"触感, 振动, 敏感度"</string>
+    <!-- no translation found for keywords_vibration (670455132028025952) -->
+    <skip />
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"省电模式, 固定式, 保留, 节省电量, 电池"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"日常安排, 日程, 省电模式, 节省电量, 电池, 自动, 百分比"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, 高级通话, 4G 通话"</string>
@@ -3651,8 +3660,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"充电提示音和振动"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"基座提示音"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"触摸提示音"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"触摸振动"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"点按、按键等操作的触感反馈"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"基座扬声器播放的音频"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"所有音频"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"仅限媒体音频"</string>
@@ -3842,7 +3849,7 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"显示在下拉通知栏、状态栏以及锁定屏幕中"</string>
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"隐藏状态栏中的无声通知"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"闪烁指示灯"</string>
-    <string name="lock_screen_notifications_title" msgid="2876323153692406203">"隐私设置"</string>
+    <string name="lock_screen_notifications_title" msgid="2876323153692406203">"隐私"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"跳过锁定屏幕"</string>
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"解锁后直接转到上次使用的屏幕"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"锁定屏幕, 锁屏, 跳过, 绕过"</string>
@@ -5293,12 +5300,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"要启用 SIM 卡吗？"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"要切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"要切换为使用 SIM 卡吗？"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"要使用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"一次只能启用一个 SIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"一次只能启用一个已下载的 SIM 卡。\n\n切换到<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>不会取消<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>服务。"</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"一次只能启用一个 SIM 卡。\n\n进行切换并不会取消<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>服务。"</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"可以同时使用 2 张 SIM 卡。要使用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>，请关闭另一张 SIM 卡。"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"关闭<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"关闭 SIM 卡并不会取消您的服务"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"正在连接到网络…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"正在切换到<xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"无法切换运营商"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"发生错误，因此无法切换运营商。"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"要停用<xliff:g id="CARRIER_NAME">%1$s</xliff:g>吗？"</string>
@@ -5450,8 +5462,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"长"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"显示电子钱包"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"允许从锁定屏幕和快捷设置使用电子钱包"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"显示二维码扫描器"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"允许在锁定屏幕的情况下使用二维码扫描器"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"显示二维码扫描器"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"允许在锁定屏幕的情况下使用二维码扫描器"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"显示设备控制器"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"锁定时访问控制器"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"显示双行时钟（若可用）"</string>

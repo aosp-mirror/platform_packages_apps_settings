@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"ভাষা"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"সরান"</string>
     <string name="add_a_language" msgid="2126220398077503271">"একটি ভাষা যোগ করুন"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"ভাষা"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"পছন্দসই ভাষা"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"অ্যাপ ভাষা"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"প্রতিটি অ্যাপের জন্য ভাষা সেট করুন"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"অ্যাপ ভাষা"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"সাজেস্ট করা ভাষা"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"সব ভাষা"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"সাধারণত অ্যাপটি <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> ভাষাতে সেট করা থাকে এবং একাধিক ভাষা ব্যবহার করা যায় না।"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">নির্বাচিত ভাষা সরাবেন?</item>
       <item quantity="other">নির্বাচিত ভাষা সরাবেন?</item>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"উপলভ্য নয়"</string>
     <string name="security_status_title" msgid="6958004275337618656">"নিরাপত্তা স্ট্যাটাস"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"স্ক্রিন লক, Find My Device, অ্যাপ নিরাপত্তা"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"নিরাপত্তা এবং গোপনীয়তা"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"অনুমতি, স্ক্রিন লক, অ্যাপের নিরাপত্তা"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"ফেস যোগ করা হয়েছে"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"মুখ সেট আপ করতে ট্যাপ করুন"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"ফেস আনলক"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"যেমন করে সাইন-ইন করেন বা কোনও কেনাকাটায় অনুমোদন দেন, ঠিক তেমন ভাবে আপনার ফোন আনলক করার জন্য বা অ্যাপে নিজের পরিচয় যাচাই করতে আপনার মুখ ব্যবহার করুন।\n\nমনে রাখবেন:\nএকবারে শুধুমাত্র একটি মুখ সেট আপ করতে পারবেন। অন্য আরেকটি ফেস যোগ করার জন্য বর্তমান যেটি আছে তা মুছে দিন।\n\nআপনি না চাইলেও ফোনের দিকে তাকালে সেটি আনলক হয়ে যেতে পারে।\n\nঅন্য কেউ আপনার মুখের সামনে ফোনটি ধরে আনলক করতে পারবেন।\n\nআপনার মতো দেখতে এমন যে কেউ; যেমন আপনার যমজ ভাই বা বোন, আপনার ফোন আনলক করতে পারবেন।"</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"যেমন করে সাইন-ইন করেন বা কোনও কেনাকাটায় অনুমোদন দেন, ঠিক তেমন ভাবে আপনার ফোন আনলক করার জন্য বা অ্যাপে নিজের পরিচয় যাচাই করতে আপনার মুখ ব্যবহার করুন।\n\nমনে রাখবেন:\nএকবারে শুধুমাত্র একটি মুখ সেট আপ করতে পারবেন। অন্য আরেকটি মুখ যোগ করার জন্য বর্তমান যেটি আছে তা মুছে দিন।\n\nআপনি না চাইলেও ফোনের দিকে তাকালে সেটি আনলক হয়ে যেতে পারে।\n\n এমনকি আপনার চোখ বন্ধ থাকলে এবং ফোনটি আপনার মুখের সামনে ধরে অন্য কেউ আপনার ফোন আনলক করতে পারবেন।\n\nআপনার মতো দেখতে এমন যে কেউ; যেমন আপনার যমজ ভাই বা বোন, আপনার ফোন আনলক করতে পারবেন।"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"ফেস মডেল মুছে ফেলতে চান?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"আপনার ফেস মডেল স্থায়ীভাবে এবং নিরাপদে মুছে ফেলা হবে। মুছে ফেলার পরে, আপনার ফোন আনলক করা বা অ্যাপে যাচাইকরণের জন্য আপনার পিন, প্যাটার্ন বা পাসওয়ার্ড প্রয়োজন হবে।"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"ফেস মডেল মুছে ফেলতে চান?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"আপনার ফেস মডেল স্থায়ীভাবে এবং নিরাপদে মুছে ফেলা হবে।\n\nমুছে ফেলার পরে, আপনার ফোন আনলক বা অ্যাপে যাচাইকরণ করার জন্য আপনার আঙুলের ছাপ, পিন, প্যাটার্ন বা পাসওয়ার্ড প্রয়োজন হবে।"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"আপনার ফেস মডেল স্থায়ীভাবে এবং নিরাপদে মুছে ফেলা হবে।\n\nমুছে ফেলার পরে, আপনার ফোন আনলক করতে বা অ্যাপে যাচাইকরণের জন্য আপনার পিন, প্যাটার্ন বা পাসওয়ার্ড প্রয়োজন হবে।"</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"আপনার ফেস মডেল স্থায়ীভাবে এবং নিরাপদে মুছে ফেলা হবে।\n\nমুছে ফেলার পরে, আপনার ফোন আনলক করতে পিন, প্যাটার্ন বা পাসওয়ার্ড প্রয়োজন হবে।"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"আপনার ফোন আনলক করার জন্য \'ফেস আনলক\' ব্যবহার করুন"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"আঙ্গুলের ছাপ"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"কাজের জন্য ফিঙ্গারপ্রিন্ট"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"মুছুন"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"সেন্সর স্পর্শ করুন"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"সেন্সরে আপনার আঙ্গুল রাখুন এবং আপনি একটি কম্পন অনুভব করার পর সরিয়ে নিন"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"ভাইব্রেশন অনুভব না করা পর্যন্ত আপনার আঙ্গুল সেন্সরের উপর থেকে সরাবেন না"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"ভাইব্রেশন অনুভব না করা পর্যন্ত আপনার আঙ্গুলের ছাপ সেন্সরের উপর চেপে ধরে রাখুন"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"\'আঙ্গুলের ছাপের সেন্সর\' টাচ করে ধরে থাকুন"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"আঙ্গুল তুলুন, তারপর আবার স্পর্শ করুন"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"আরও একবার"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"আপনার আঙ্গুলের ছাপের বিভিন্ন অংশ যোগ করার জন্য বারবার আঙুল তুলে আবার স্পর্শ করতে থাকুন"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"প্রতিবার ফিঙ্গারপ্রিন্ট আইকনটি সরার সময় টাচ করে ধরে থাকুন। এইভাবে সহজে আপনার ফিঙ্গারপ্রিন্টের বেশিরভাগটাই ক্যাপচার করা যাবে।"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"সেন্সরে আপনার আঙুল ছোঁয়ান"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"পরিশেষে, আপনার আঙুলের প্রান্ত ছোঁয়ান"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"সবশেষে, আপনার আঙুলের উপরিভাগ ব্যবহার করুন"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"সেন্সরের উপরে আপনার ফিঙ্গারপ্রিন্টের এক দিক ছুঁইয়ে ধরে রাখুন তারপর অন্য দিকটিও ছোঁয়ান এবং একই ভাবে ধরে রাখুন"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"এইভাবে সহজে আপনার ফিঙ্গারপ্রিন্টের বেশিরভাগটাই ক্যাপচার করা যাবে"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"আঙ্গুলের ছাপ নথিভুক্ত করার কাজটি <xliff:g id="PERCENTAGE">%d</xliff:g> শতাংশ সম্পূর্ণ হয়েছে"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"ওয়াই-ফাইয়ের মাধ্যমে কল করুন। ওয়াই-ফাই বিঘ্নিত হলে, কল বন্ধ হয়ে যাবে।"</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Wi-Fi কলিং চালু থাকার সময়ে, আপনার পছন্দ এবং কোন সিগন্যাল বেশি শক্তিশালী তার উপর নির্ভর করে আপনার ফোন ওয়াই-ফাই নেটওয়ার্ক বা আপনার পরিষেবা প্রদানকারীর নেটওয়ার্কের মাধ্যমে আপনার কলের রুট তৈরি করে। এই বৈশিষ্ট্যটি চালু করার আগে, আপনার পরিষেবা প্রদানকারীর থেকে ফি এবং অন্যান্য বিষয় সম্বন্ধে জেনে নিন।<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"জরুরি ঠিকানা"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"ওয়াই-ফাই নেটওয়ার্ক ব্যবহার করে জরুরি কল করার সময় আপনার লোকেশন হিসেবে ব্যবহার করা হয়"</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"ব্যক্তিগত ডিএনএস বৈশিষ্ট্যের বিষয়ে "<annotation id="url">"আরও জানুন"</annotation></string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"চালু আছে"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"একটি অফিস প্রোফাইল পিন সেট করুন"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"একটি প্যাটার্ন সেট করুন"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"একটি অফিস প্রোফাইল প্যাটার্ন সেট করুন"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"অতিরিক্ত সুরক্ষার জন্য, ফোন আনলক করতে একটি পাসওয়ার্ড সেট করুন"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"অতিরিক্ত সুরক্ষার জন্য, ফোন আনলক করতে একটি পিন সেট করুন"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"অতিরিক্ত সুরক্ষার জন্য, ফোন আনলক করতে একটি প্যাটার্ন সেট করুন"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"অতিরিক্ত সুরক্ষার জন্য, ট্যাবলেট আনলক করতে একটি পাসওয়ার্ড সেট করুন"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"অতিরিক্ত সুরক্ষার জন্য, ট্যাবলেট আনলক করতে একটি পিন সেট করুন"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"অতিরিক্ত সুরক্ষার জন্য, ট্যাবলেট আনলক করতে একটি প্যাটার্ন সেট করুন"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"অতিরিক্ত সুরক্ষার জন্য, ডিভাইসটি আনলক করতে একটি পাসওয়ার্ড সেট করুন"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"অতিরিক্ত সুরক্ষার জন্য, ডিভাইসটি আনলক করতে একটি পিন সেট করুন"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"অতিরিক্ত সুরক্ষার জন্য, ডিভাইসটি আনলক করতে একটি প্যাটার্ন সেট করুন"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"আঙ্গুলের ছাপ ব্যবহার করার জন্য পাসওয়ার্ড সেট করুন"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"আঙ্গুলের ছাপ ব্যবহার করার জন্য প্যাটার্ন সেট করুন"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"নিরাপত্তার জন্য, পিন সেট করুন"</string>
@@ -2417,9 +2416,12 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"খুব কম"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"খুব বেশি"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"অটোমেটিক ক্লিক করার সময়"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"ভাইব্রেশন ও হ্যাপটিক মাত্রা"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"বিজ্ঞপ্তির ভাইব্রেশন"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"ভাইব্রেশন ও হ্যাপটিক"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"কল"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"বিজ্ঞপ্তি এবং সতর্কতা"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"ইন্টার‌্যাক্টিভ হ্যাপটিক"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"রিং ভাইব্রেশন"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"বিজ্ঞপ্তির ভাইব্রেশন"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"টাচ ফিডব্যাক"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ব্যবহার করুন"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> খুলুন"</string>
@@ -3248,8 +3250,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"<xliff:g id="PROFILE">%s</xliff:g> এতে কানেক্ট করুন"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"এই VPN থেকে ডিসকানেক্ট করবেন?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"ডিসকানেক্ট করুন"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"ভার্সন"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"VPN সরিয়ে দিন"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"বিদ্যমান VPN প্রতিস্থাপন করতে চান?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"সর্বদা-চালু VPN সেট করতে চান?"</string>
@@ -3471,9 +3472,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"মোবাইল ডেটা পাওয়া যাচ্ছে না"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"একটি ডেটা সিম নির্বাচন করতে আলতো চাপুন"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"কলের জন্য সবসময় এটি ব্যবহার করুন"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"ডেটার জন্য একটি সিম বেছে নিন"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"মোবাইল ডেটার জন্য সিম কার্ড বেছে নিন"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"এসএমএসের জন্য কোনও একটি সিম বেছে নিন"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"ডেটা সিম পাল্টাতে এক মিনিট পর্যন্ত সময় লাগতে পারে…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"মোবাইল ডেটার জন্য <xliff:g id="NEW_SIM">%1$s</xliff:g> ব্যবহার করবেন?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"<xliff:g id="NEW_SIM">%1$s</xliff:g>-এ পাল্টে নিলে, মোবাইল ডেটার জন্য আর <xliff:g id="OLD_SIM">%2$s</xliff:g> ব্যবহার করা হবে না।"</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> ব্যবহার করুন"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"এর মাধ্যমে কল করুন"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"একটি সিম কার্ড বেছে নিন"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"সিম <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3537,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"ওয়াই-ফাই, ওয়াই-ফাই, নেটওয়ার্ক কানেকশন, ইন্টারনেট, ওয়্যারলেস, ডেটা, ওয়াই-ফাই"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"ওয়াই-ফাই বিজ্ঞপ্তি, ওয়াই-ফাই বিজ্ঞপ্তি"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"ডেটার ব্যবহার"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"ট্যাপ ও কীবোর্ড ব্যবহার করার সময় ভাইব্রেশন বন্ধ করুন"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"২৪ ঘণ্টার ফর্ম্যাট ব্যবহার করুন"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"ডাউনলোড"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"এটি দিয়ে খুলুন"</string>
@@ -3616,6 +3619,7 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"হ্যাপটিক, ভাইব্রেট, স্ক্রিন, সংবেদনশীলতা"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"হ্যাপটিক, ভাইব্রেট, ফোন, কল, সংবেদনশীলতা, রিং"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"হ্যাপটিক, ভাইব্রেট, সংবেদনশীলতা"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"হ্যাপটিক, ভাইব্রেট, ভাইব্রেশন"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ব্যাটারি সেভার, স্টিকি, লেগে থাকা, পাওয়ার সেভার, ব্যাটারি"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"রুটিন, সময়সূচি, ব্যাটারি সেভার, পাওয়ার সেভার, ব্যাটারি, অটোমেটিক, শতাংশ"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, উন্নত কলিং, 4G কলিং"</string>
@@ -3651,8 +3655,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"চার্জিংয়ে সাউন্ড ও ভাইব্রেশন"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"ডকিং শব্দগুলি"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"টাচ সাউন্ড"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"টাচ ভাইব্রেশন"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"ট্যাপ, কীবোর্ড এবং অন্যান্য উপায়ে হ্যাপটিক প্রতিক্রিয়া"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"ডক স্পিকার শুরু"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"সমস্ত অডিও"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"কেবলমাত্র মিডিয়া অডিও"</string>
@@ -3818,7 +3820,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"এই অ্যাপে \'বাবল\' ফিচার চালু করা হলে, আপনার ডিভাইসের জন্যও এটি চালু হয়ে যাবে।\n\nএর ফলে সেই সব অ্যাপ ও কথোপকথন প্রভাবিত হবে, যেগুলির কাছে \'বাবল\' ফিচার ব্যবহার করার অনুমতি আছে।"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"চালু করুন"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"বাতিল করুন"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"চালু করুন / কথোপকথন ভাসমান আইকন হিসেবে দেখা যেতে পারে"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"চালু আছে / কথোপকথন ভাসমান আইকন হিসেবে দেখা যেতে পারে"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"অ্যাপকে বাবল দেখানোর অনুমতি দিন"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"কিছু কথোপকথন অন্যান্য অ্যাপের উপর ভাসমান আইকন হিসেবে দেখা যাবে"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"সব কথোপকথন বাবল হিসেবে দেখুন"</string>
@@ -5293,12 +5295,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"সিম চালু করবেন?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-এ পাল্টাতে চান?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"সিম কার্ডে পাল্টাতে চান?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ব্যবহার করতে চান?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"যেকোনও সময় শুধুমাত্র একটি সিম কাজ করবে।\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-এ পাল্টালে <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-এর পরিষেবা বাতিল হয়ে যাবে না।"</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"যেকোনও সময় শুধুমাত্র একটি ডাউনলোড করা সিম কাজ করবে।\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> পাল্টালে <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-এর পরিষেবা বাতিল হয়ে যাবে না।"</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"যেকোনও সময় শুধুমাত্র একটি সিম কাজ করবে।\n\nপাল্টালে <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-এর পরিষেবা বাতিল করা হবে না।"</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"আপনি একসাথে ২টি সিম কার্ড ব্যবহার করতে পারবেন না। <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-এর সিম কার্ড ব্যবহার করতে, অন্য সিম কার্ড বন্ধ করুন।"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-এ পাল্টান"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> বন্ধ করুন"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"সিম কার্ড বন্ধ করলেও আপনার পরিষেবা বাতিল করা হবে না"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"নেটওয়ার্কে কানেক্ট করা হচ্ছে…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-এ পাল্টানো হচ্ছে"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"পরিষেবা প্রদানকারী পাল্টানো যাচ্ছে না"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"একটি সমস্যার কারণে পরিষেবা প্রদানকারী পাল্টানো যাবে না।"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> পরিষেবা বন্ধ করতে চান?"</string>
@@ -5450,8 +5457,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"দীর্ঘ সময়ের জন্য"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"ওয়ালেট দেখুন"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"লক স্ক্রিন এবং দ্রুত সেটিংস থেকে ওয়ালেটে অ্যাক্সেসের অনুরোধ করুন"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"QR কোড স্ক্যানার দেখুন"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"লক স্ক্রিন থেকে QR কোড স্ক্যানার অ্যাক্সেস করার অনুমতি দিন"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"QR স্ক্যানার খুলুন"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"লক স্ক্রিন থেকে QR স্ক্যানার অ্যাক্সেস করার অনুমতি দিন"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"ডিভাইস কন্ট্রোল দেখুন"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"লক থাকাকালীন কন্ট্রোল অ্যাক্সেস করুন"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"ডবল-লাইন ঘড়ি উপলভ্য থাকলে তা দেখান"</string>
