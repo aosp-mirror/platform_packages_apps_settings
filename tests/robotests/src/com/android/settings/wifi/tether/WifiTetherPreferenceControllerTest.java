@@ -26,6 +26,8 @@ import android.content.Context;
 import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.os.UserManager;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
@@ -60,6 +62,10 @@ public class WifiTetherPreferenceControllerTest {
     @Mock
     private WifiManager mWifiManager;
     @Mock
+    private UserManager mUserManager;
+    @Mock
+    private Bundle mBundle;
+    @Mock
     private PreferenceScreen mScreen;
     private SoftApConfiguration mSoftApConfiguration;
 
@@ -79,6 +85,8 @@ public class WifiTetherPreferenceControllerTest {
         mPreference = new PrimarySwitchPreference(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.getUserRestrictions()).thenReturn(mBundle);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mSoftApConfiguration = new SoftApConfiguration.Builder().setSsid(SSID).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
@@ -86,6 +94,7 @@ public class WifiTetherPreferenceControllerTest {
         when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
         mController = new WifiTetherPreferenceController(mContext, mLifecycle,
                 false /* initSoftApManager */);
+        mController.mIsWifiTetheringAllow = true;
         mController.displayPreference(mScreen);
     }
 
@@ -101,6 +110,24 @@ public class WifiTetherPreferenceControllerTest {
     @Test
     public void isAvailable_hasTetherRegex_shouldReturnTrue() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void displayPreference_wifiTetheringNotAllowed_shouldDisable() {
+        mController.mIsWifiTetheringAllow = false;
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void displayPreference_wifiTetheringAllowed_shouldEnable() {
+        mController.mIsWifiTetheringAllow = true;
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.isEnabled()).isTrue();
     }
 
     @Test
