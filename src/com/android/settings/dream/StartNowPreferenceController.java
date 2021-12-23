@@ -17,20 +17,23 @@
 package com.android.settings.dream;
 
 import android.content.Context;
+import android.widget.Button;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.dream.DreamBackend;
+import com.android.settingslib.widget.LayoutPreference;
 
 /**
  * Controller that used to enable screen saver
  */
-public class StartNowPreferenceController extends SettingsMainSwitchPreferenceController {
+public class StartNowPreferenceController extends BasePreferenceController {
 
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -47,30 +50,23 @@ public class StartNowPreferenceController extends SettingsMainSwitchPreferenceCo
     }
 
     @Override
-    public void updateState(Preference preference) {
-        mSwitchPreference.setChecked(false);
-        mSwitchPreference.setEnabled(mBackend.getWhenToDreamSetting() != DreamBackend.NEVER);
-    }
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
 
-    @Override
-    public boolean isChecked() {
-        return false;
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        if (isChecked) {
-            if (mSwitchPreference != null) {
-                mMetricsFeatureProvider.logClickedPreference(mSwitchPreference,
-                        mSwitchPreference.getExtras().getInt(DashboardFragment.CATEGORY));
-            }
+        final LayoutPreference pref = screen.findPreference(getPreferenceKey());
+        final Button startButton = pref.findViewById(R.id.dream_start_now_button);
+        startButton.setOnClickListener(v -> {
+            mMetricsFeatureProvider.logClickedPreference(pref,
+                    pref.getExtras().getInt(DashboardFragment.CATEGORY));
             mBackend.startDreaming();
-        }
-        return true;
+        });
     }
 
     @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_display;
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        final Button startButton = ((LayoutPreference) preference)
+                .findViewById(R.id.dream_start_now_button);
+        startButton.setEnabled(mBackend.getWhenToDreamSetting() != DreamBackend.NEVER);
     }
 }
