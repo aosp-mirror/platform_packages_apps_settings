@@ -13641,7 +13641,10 @@
     <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=40] -->
     <string name="enable_2g_title">Allow 2G</string>
     <!-- Title for toggle if user wants to enable 2G [CHAR LIMIT=NONE] -->
-    <string name="enable_2g_summary">Use 2G cellular connections. For emergency calls, 2G is always turned on.</string>
+    <string name="enable_2g_summary">2G is less secure, but may improve your connection in some locations. For emergency calls, 2G is always allowed.</string>
+    <!-- Title for if toggle access is disabled by carrier [CHAR LIMIT=NONE] -->
+    <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
+
 
     <!-- Label for extra app info settings for a specific app [CHAR LIMIT=40] -->
     <string name="extra_app_info_label" translatable="false"></string>
