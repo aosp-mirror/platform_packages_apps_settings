@@ -118,15 +118,19 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        Intent intent = getIntent();
-        if (intent != null) {
-            mSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
-                    MobileNetworkUtils.getSearchableSubscriptionId(context));
-            Log.i(LOG_TAG, "display subId from intent: " + mSubId);
+        if (getArguments() == null) {
+            Intent intent = getIntent();
+            if (intent != null) {
+                mSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                        MobileNetworkUtils.getSearchableSubscriptionId(context));
+                Log.d(LOG_TAG, "display subId from intent: " + mSubId);
+            } else {
+                Log.d(LOG_TAG, "intent is null, can not get the subId from intent.");
+            }
         } else {
             mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
                     MobileNetworkUtils.getSearchableSubscriptionId(context));
-            Log.i(LOG_TAG, "display subId from getArguments(): " + mSubId);
+            Log.d(LOG_TAG, "display subId from getArguments(): " + mSubId);
         }
 
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {

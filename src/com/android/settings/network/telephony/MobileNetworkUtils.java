@@ -1014,10 +1014,11 @@ public class MobileNetworkUtils {
     public static void launchMobileNetworkSettings(Context context, SubscriptionInfo info) {
         final int subId = info.getSubscriptionId();
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            Log.d(TAG, "launchMobileNetworkSettings fail, subId is invalid");
+            Log.d(TAG, "launchMobileNetworkSettings fail, subId is invalid.");
             return;
         }
 
+        Log.d(TAG, "launchMobileNetworkSettings for subId: " + subId);
         final Bundle extra = new Bundle();
         extra.putInt(Settings.EXTRA_SUB_ID, subId);
         new SubSettingLauncher(context)
