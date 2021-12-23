@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"Språk"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Fjern"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Legg til et språk"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"Språk"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"Foretrukket språk"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Språk i appen"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Angi språket for hver app"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Språk i appen"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"Foreslåtte språk"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle språk"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Appen bruker <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> som standard og støtter ikke flere språk."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Vil du fjerne de valgte språkene?</item>
       <item quantity="one">Vil du fjerne det valgte språket?</item>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Ikke tilgjengelig"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Sikkerhetsstatus"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Skjermlås, Finn enheten min, appsikkerhet"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Sikkerhet og personvern"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"Tillatelser, skjermlås, appsikkerhet"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Ansiktet er lagt til"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Trykk for å konfigurere ansiktslås"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ansiktslås"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Bruk ansiktet til å låse opp telefonen eller autentisere i apper, for eksempel når du logger på eller godkjenner et kjøp.\n\nMerk:\nDu kan bare ha ett ansikt konfigurert om gangen. For å legge til et annet ansikt, slett det nåværende ansiktet.\n\nHvis du ser på telefonen, kan den låses opp, selv om det ikke er meningen.\n\nTelefonen kan låses opp av noen andre hvis den holdes mot ansiktet ditt.\n\nTelefonen kan låses opp av noen som ser veldig ut som deg, for eksempel en tvilling."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Bruk ansiktet til å låse opp telefonen eller autentisere i apper, for eksempel når du logger på eller godkjenner et kjøp.\n\nMerk:\nDu kan bare ha ett ansikt konfigurert om gangen. For å legge til et annet ansikt, slett det nåværende ansiktet.\n\nHvis du ser på telefonen, kan den låses opp, selv om det ikke er meningen.\n\nTelefonen kan låses opp av noen andre hvis den holdes mot ansiktet ditt, selv om øynene dine er lukket.\n\nTelefonen kan låses opp av noen som ser veldig ut som deg, for eksempel en tvilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Vil du slette ansiktsmodellen?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Ansiktsmodellen din blir slettet permanent og sikkert. Etter slettingen trenger du PIN-kode, mønster eller passord når du skal låse opp telefonen eller autentisere i apper."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Vil du slette ansiktsmodellen?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Ansiktsmodellen din blir slettet permanent og sikkert.\n\nEtter slettingen trenger du fingeravtrykk, PIN-kode, mønster eller passord når du skal låse opp telefonen eller autentisere i apper."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Ansiktsmodellen din blir slettet permanent og sikkert.\n\nEtter slettingen trenger du PIN-kode, mønster eller passord når du skal låse opp telefonen eller autentisere i apper."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Ansiktsmodellen din blir slettet permanent og sikkert.\n\nEtter slettingen trenger du PIN-kode, mønster eller passord når du skal låse opp telefonen."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Bruk ansiktslås til å låse opp telefonen"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingeravtrykk"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeravtrykk for jobb"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Slett"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Berør sensoren"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Legg fingeren på sensoren, og løft den når du kjenner en vibrasjon"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Hold fingeren på sensoren til du føler en vibrering"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Hold fingeravtrykket flatt på sensoren til du føler en vibrering"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Trykk og hold på fingeravtrykks-sensoren"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Løft fingeren og berør igjen"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"En gang til"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Løft fingeren gjentatte ganger for å legge til de forskjellige delene av fingeravtrykket ditt"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Trykk og hold hver gang fingeravtrykkikonet beveger seg. Dette bidrar til å registrere mer av fingeravtrykket."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Plassér fingertuppen på sensoren"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Plassér til slutt kantene av fingeren"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Bruk til slutt kantene av fingeren"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Plassér siden av fingeravtrykket på sensoren og hold. Bytt deretter til den andre siden"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dette bidrar til å registrere mer av fingeravtrykket"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrerer fingeravtrykket: <xliff:g id="PERCENTAGE">%d</xliff:g> prosent"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Ring via Wi‑Fi. Samtalen avsluttes hvis du mister Wi‑Fi-tilkoblingen."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Når Wi-Fi-anrop er slått på, kan telefonen din dirigere telefonsamtaler via Wi-Fi-nettverk eller operatørens nettverk, avhengig av hva du har angitt i innstillingene og hvilket signal som er sterkest. Før du slår på denne funksjonen, er det viktig å sjekke gebyrer og andre detaljer med operatøren din.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"Adresse for nødssituasjoner"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Brukes som posisjonen din når du gjør et nødanrop over Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Finn ut mer"</annotation>" om funksjoner for privat DNS"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"På"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Angi en jobb-PIN-kode"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Angi et mønster"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Angi et jobbmønster"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"For å øke sikkerheten, angi et passord for å låse opp telefonen"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"For å øke sikkerheten, angi en PIN-kode for å låse opp telefonen"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"For å øke sikkerheten, angi et mønster for å låse opp telefonen"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"For å øke sikkerheten, angi et passord for å låse opp nettbrettet"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"For å øke sikkerheten, angi en PIN-kode for å låse opp nettbrettet"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"For å øke sikkerheten, angi et mønster for å låse opp nettbrettet"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"For å øke sikkerheten, angi et passord for å låse opp enheten"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"For å øke sikkerheten, angi en PIN-kode for å låse opp enheten"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"For å øke sikkerheten, angi et mønster for å låse opp enheten"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Angi passord for å bruke fingeravtrykk"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Angi mønster for å bruke fingeravtrykk"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Angi en PIN-kode for sikkerheten"</string>
@@ -2417,9 +2416,16 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Kortere"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Lengre"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tid for autoklikk"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Styrke på vibrasjon og fysiske tilbakemeldinger"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Varselvibrering"</string>
+    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
+    <skip />
+    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
+    <skip />
+    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Ringevibrering"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Varselvibrering"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Tilbakemelding ved berøring"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Bruk <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Åpne <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
@@ -3248,8 +3254,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Koble til <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Vil du koble fra dette VPN-et?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Koble fra"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"Versjon"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Glem VPN-profilen"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Vil du erstatte det nåværende VPN-et?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Vil du angi alltid på-VPN?"</string>
@@ -3471,9 +3476,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Mobildata er ikke tilgjengelig"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Trykk for å velge SIM-kort for databruk"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Bruk alltid dette for samtaler"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"Velg et SIM-kort for data"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Velg SIM-kort for mobildata"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Velg et SIM-kort for SMS"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"Bytter data-SIM-kort – dette kan ta opptil ett minutt …"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Vil du bruke <xliff:g id="NEW_SIM">%1$s</xliff:g> for mobildata?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Hvis du bytter til <xliff:g id="NEW_SIM">%1$s</xliff:g>, brukes ikke <xliff:g id="OLD_SIM">%2$s</xliff:g> for mobildata lenger."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Bruk <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Ring med"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Velg et SIM-kort"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM-kort <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3541,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, nettverkstilkobling, Internett, trådløs, data, Wi Fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-varsel, wifi-varsel"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"databruk"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Stopp vibrering, trykk, tastatur"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Bruk 24-timers format"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Last ned"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Åpne med"</string>
@@ -3616,6 +3623,8 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptisk, vibrer, skjerm, følsomhet"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"haptisk, vibrer, telefon, anrop, følsomhet, ring"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"haptisk, vibrer, følsomhet"</string>
+    <!-- no translation found for keywords_vibration (670455132028025952) -->
+    <skip />
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"batterisparing, festet, vedvarende, strømsparing, batteri"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutine, tidsplan, batterisparing, strømsparing, batteri, automatisk, prosent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, avansert ringing, 4g-ringing"</string>
@@ -3651,8 +3660,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Lyd og vibrering ved lading"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Lyd fra dokk"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Berøringslyder"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Berøringsvibrering"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Fysisk tilbakemelding for trykk, tastatur med mer"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Avspilling fra dokkhøyttaler"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"All lyd"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Bare medielyd"</string>
@@ -5293,12 +5300,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Vil du slå på SIM-kortet?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Vil du bytte til <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Vil du bytte til å bruke SIM-kort?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Vil du bruke <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Bare ett SIM-kort kan være aktivt om gangen.\n\nSelv om du bytter til <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, blir ikke <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-abonnementet ditt sagt opp."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Bare ett nedlastet SIM-kort kan være aktivt om gangen.\n\nSelv om du bytter til <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, blir ikke <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-abonnementet ditt sagt opp."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Bare ett SIM-kort kan være aktivt om gangen.\n\nSelv om du bytter, blir ikke <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-abonnementet ditt sagt opp."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Du kan bruke to SIM-kort samtidig. For å bruke <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, slå av et annet SIM-kort."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Bytt til <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Slå av <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Selv om du slår av et SIM-kort, blir ikke abonnementet ditt sagt opp"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Kobler til nettverket …"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Bytter til <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Kan ikke bytte operatør"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Operatøren kan ikke byttes, på grunn av en feil."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Vil du slå av <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5450,8 +5462,10 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lang"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Vis Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Gi tilgang til Wallet fra låseskjermen og hurtiginnstillingene"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Vis QR-kodeskanneren"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Gi tilgang til QR-kodeskanneren fra låseskjermen"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
+    <skip />
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
+    <skip />
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Vis enhetsstyring"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Få tilgang til kontroller når enheten er låst"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Vis klokken på to linjer når det er tilgjengelig"</string>

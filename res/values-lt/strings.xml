@@ -209,6 +209,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"Kalbos"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Pašalinti"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Pridėti kalbą"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"Kalba"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"Pageidaujama kalba"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Programų kalbos"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Nustatykite kiekvienos programos kalbą"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Programos kalba"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"Siūlomos kalbos"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Visos kalbos"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Pagal numatytuosius nustatymus programos kalba yra <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> ir kelios kalbos nepalaikomos."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Pašalinti pasirinktas kalbas?</item>
       <item quantity="few">Pašalinti pasirinktas kalbas?</item>
@@ -326,6 +334,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Nepasiekiama"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Saugos būsena"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Ekrano užraktas, paslauga „Rasti įrenginį“, programos saugumas"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Sauga ir privatumas"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"Leidimai, ekrano užraktas ir sauga"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Veidas pridėtas"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Palieskite, kad nustatytumėte veidą"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Atrakinimas pagal veidą"</string>
@@ -398,9 +408,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Naudodami atrakinimo pagal veidą funkciją atrakinkite telefoną ar nustatykite tapatybę programose, pvz., kai prisijungiate ar patvirtinate pirkinį.\n\nNepamirškite toliau nurodytų dalykų.\nVienu metu gali būti nustatytas tik vienas veidas. Norėdami pridėti kitą veidą, ištrinkite esamą.\n\nŽiūrint į telefoną jis gali būti atrakintas, kai to neketinate atlikti.\n\nTelefoną gali atrakinti kitas asmuo, laikydamas jį prieš jus.\n\nTelefoną gali atrakinti į jus labai panašus asmuo, pvz., identiškas dvynys."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Naudodami atrakinimo pagal veidą funkciją atrakinkite telefoną ar nustatykite tapatybę programose, pvz., kai prisijungiate ar patvirtinate pirkinį.\n\nNepamirškite toliau nurodytų dalykų.\nVienu metu gali būti nustatytas tik vienas veidas. Norėdami pridėti kitą veidą, ištrinkite esamą.\n\nŽiūrint į telefoną jis gali būti atrakintas, kai to neketinate atlikti.\n\nTelefoną gali atrakinti kitas asmuo, laikydamas jį prieš jus.\n\nTelefoną gali atrakinti į jus labai panašus asmuo, pvz., identiškas dvynys."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Ištrinti veido modelį?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Jūsų veido modelis bus visam laikui saugiai ištrintas. Ištrynus reikės PIN kodo, atrakinimo piešinio arba slaptažodžio, norint atrakinti telefoną ar nustatyti tapatybę programose."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Ištrinti veido modelį?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Jūsų veido modelis bus visam laikui saugiai ištrintas.\n\nIštrynus reikės kontrolinio kodo, PIN kodo, atrakinimo piešinio arba slaptažodžio, norint atrakinti telefoną ar nustatyti tapatybę programose."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Jūsų veido modelis bus visam laikui saugiai ištrintas.\n\nIštrynus reikės PIN kodo, atrakinimo piešinio arba slaptažodžio, norint atrakinti telefoną ar nustatyti tapatybę programose."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Jūsų veido modelis bus visam laikui saugiai ištrintas.\n\nIštrynus reikės PIN kodo, atrakinimo piešinio arba slaptažodžio, norint atrakinti telefoną."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Naudokite atrakinimo pagal veidą funkciją, kad atrakintumėte telefoną"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Kontr. kodo jutiklis"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Kontrol. kodas darbui"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Ištrinti"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Palieskite jutiklį"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Uždėkite pirštą ant jutiklio ir pakelkite, kai pajusite vibravimą"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Laikykite pirštą ant jutiklio, kol pajusite vibravimą"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Laikykite pirštą prispaustą prie jutiklio, kol pajusite vibraciją"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Palieskite ir palaikykite kontrolinio kodo jutiklį"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Patraukite ir vėl prilieskite"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Dar kartą"</string>
@@ -497,7 +506,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Vis patraukite pirštą, kad pridėtumėte skirtingas piršto atspaudo dalis"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Palieskite ir palaikykite kiekvieną kartą, kai kontrolinio kodo piktograma sujuda. Taip užfiksuojama daugiau piršto atspaudo"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Padėkite piršto galiuką ant jutiklio"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Galiausiai padėkite piršto kraštus"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Galiausiai prispauskite piršto kraštus"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Padėkite vieną piršto šoną ant jutiklio ir palaikykite, tada tą patį atlikite su kitu šonu"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Taip užfiksuojama daugiau piršto atspaudo"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registracija kontroliniu kodu: <xliff:g id="PERCENTAGE">%d</xliff:g> proc."</string>
@@ -1273,8 +1282,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Skambinimas naudojant „Wi-Fi“. Nutrūkus „Wi‑Fi“ skambutis bus baigtas."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Kai „Wi-Fi“ skambinimas įjungtas, telefonas gali nukreipti skambučius per „Wi-Fi“ tinklus arba operatoriaus tinklą, atsižvelgiant į jūsų nuostatas ir stipresnį signalą. Prieš įjungdami šią funkciją, pasikonsultuokite su operatoriumi dėl mokesčių ir kitos išsamios informacijos.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"Adresas kritiniu atveju"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Naudojama kaip vietos informacija, kai skambinate pagalbos numeriu naudodami „Wi-Fi“"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Sužinokite daugiau"</annotation>" apie privataus DNS funkcijas"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Įjungta"</string>
@@ -1957,15 +1965,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Darbo PIN kodo nustatymas"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Atrakinimo piešinio nustatymas"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Darbo atrakinimo piešinio nustatymas"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Papildomai saugai užtikrinti nustatykite telefono atrakinimo slaptažodį"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Papildomai saugai užtikrinti nustatykite telefono atrakinimo PIN kodą"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Papildomai saugai užtikrinti nustatykite telefono atrakinimo piešinį"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Papildomai saugai užtikrinti nustatykite planšetinio kompiuterio atrakinimo slaptažodį"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Papildomai saugai užtikrinti nustatykite planšetinio kompiuterio atrakinimo PIN kodą"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Papildomai saugai užtikrinti nustatykite planšetinio kompiuterio atrakinimo piešinį"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Papildomai saugai užtikrinti nustatykite įrenginio atrakinimo slaptažodį"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Papildomai saugai užtikrinti nustatykite įrenginio atrakinimo PIN kodą"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Papildomai saugai užtikrinti nustatykite įrenginio atrakinimo piešinį"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Nust. slapt., kad gal. naud. kont. kodą"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Nust. atrak. pieš., kad gal. naud. piršt. atsp."</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Kad apsaugotumėte įrenginį, nustatykite PIN kodą"</string>
@@ -2465,9 +2464,16 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Trumpesnis"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Ilgesnis"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Automatinio paspaudimo laikas"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Vibravimo ir lytėjimo stiprumas"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibravimas gavus pranešimą"</string>
+    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
+    <skip />
+    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
+    <skip />
+    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibravimas skambant telefonui"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibravimas gavus pranešimą"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Lietimo grįžtamasis ryšys"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Naudoti „<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>“"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Atidaryti „<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>“"</string>
@@ -3328,8 +3334,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Prisijungti prie <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Atsijungti nuo šio VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Atsijungti"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"Versija"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Pamiršti VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Pakeisti esamą VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Nustatyti visada įjungtą VPN?"</string>
@@ -3559,9 +3564,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Mobiliojo ryšio duomenys nepasiekiami"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Palieskite, kad pasirinktumėte duomenų SIM"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Visada naudoti tai skambučiams"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"Pasirinkite duomenims skirtą SIM"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Pasirinkite SIM kort. mob. r. duomenims"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Pasirinkite SIM arba SMS"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"Perjungiama duomenų SIM kortelė. Tai gali užtrukti iki minutės…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Naudoti „<xliff:g id="NEW_SIM">%1$s</xliff:g>“ mobiliojo ryšio duomenims?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Jei perjungsite į „<xliff:g id="NEW_SIM">%1$s</xliff:g>“, „<xliff:g id="OLD_SIM">%2$s</xliff:g>“ paslaugos nebebus naudojamos mobiliojo ryšio duomenims."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Naudoti <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Skambinkite naudodami…"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Pasirinkite SIM kortelę"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM Nr. <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3623,7 +3631,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, tinklo ryšys, internetas, belaidis ryšys, duomenys, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"„Wi‑Fi“ pranešimas, „Wi‑Fi“ pranešimas"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"duomenų naudojimas"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Stabdyti vibravimą, paliesti, klaviatūra"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Naudoti 24 val. formatą"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Atsisiųsti"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Atidaryti naudojant"</string>
@@ -3706,6 +3713,8 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"lietimo technologija, vibruoti, ekranas, jautrumas"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"lietimo technologija, vibruoti, telefonas, skambinti, jautrumas, skambutis"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"lietimo technologija, vibruoti, jautrumas"</string>
+    <!-- no translation found for keywords_vibration (670455132028025952) -->
+    <skip />
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"akumuliatoriaus tausojimo priemonė, fiksuotas, išlaikyti, energijos tausojimo priemonė, akumuliatorius"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"veiksmų seka, tvarkaraštis, akumuliatoriaus tausojimo priemonė, energijos tausojimo priemonė, akumuliatorius, automatinis, procentai"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"„VoLTE“, išplėstinės skambinimo parinktys, 4G skambinimas"</string>
@@ -3741,8 +3750,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Įkrovimo garsai ir vibravimas"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Prijungimo prie doko garsai"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Lietimo garsai"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Palietimų vibravimas"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Juntamas palietimo, klaviatūros ir kitų funkcijų grįžtamasis ryšys"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Prie doko prij. garsiak. gars."</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Visi garso įrašai"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Tik medijų garso įrašai"</string>
@@ -5467,12 +5474,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Įjungti SIM kortelę?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Perjungti į „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Perjungti į SIM kortelę?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Naudoti „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Vienu metu gali būti aktyvi tik viena SIM kortelė.\n\nPerjungus į „<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>“ jums teikiamos „<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>“ paslaugos nebus atšauktos."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Vienu metu gali būti aktyvi tik viena atsisiųsta SIM kortelė.\n\nPerjungus į „<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>“ jums teikiamos „<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>“ paslaugos nebus atšauktos."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Vienu metu gali būti aktyvi tik viena SIM kortelė.\n\nPerjungus jums teikiamos „<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>“ paslaugos nebus atšauktos."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Vienu metu galite naudoti dvi SIM korteles. Jei norite naudoti „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“, išjunkite vieną iš SIM kortelių."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Perjungti į „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Išjungti „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Išjungus SIM kortelę, paslauga nebus atšaukta"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Prisijungiama prie tinklo…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Perjungiama į „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Nepavyksta perjungti operatoriaus"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Nepavyksta perjungti operatoriaus dėl klaidos."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Išjungti „<xliff:g id="CARRIER_NAME">%1$s</xliff:g>“?"</string>
@@ -5628,8 +5640,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Ilgai"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Rodyti piniginę"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Leiskite pasiekti piniginę iš užrakinimo ekrano ir sparčiųjų nustatymų"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Rodyti QR kodų skaitytuvą"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Leisti prieigą prie QR kodų skaitytuvo iš užrakinimo ekrano"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Rodyti QR kodų skaitytuvą"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Leisti prieigą prie QR kodų skaitytuvo iš užrakinimo ekrano"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Rodyti įrenginio valdiklius"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Pasiekite valdiklius, kai užrakinta"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Rodyti vertikalųjį laikrodį, kai jis pasiekiamas"</string>

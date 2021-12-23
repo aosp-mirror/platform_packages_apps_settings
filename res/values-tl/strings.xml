@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"Mga Wika"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Alisin"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Magdagdag ng wika"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"Wika"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"Gustong Wika"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Mga Wika ng App"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Itakda ang wika para sa bawat app"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Wika ng App"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"Mga iminumungkahing wika"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Lahat ng wika"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Nakatakda ang app sa <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> bilang default at hindi nito sinusuportahan ang maraming wika."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Alisin ang mga piniling wika?</item>
       <item quantity="other">Alisin ang mga piniling wika?</item>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Hindi available"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Status ng seguridad"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Lock ng screen, Hanapin ang Aking Device, seguridad ng app"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Seguridad at privacy"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"Mga pahintulot, lock ng screen, seguridad ng app"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Naidagdag ang mukha"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Mag-tap para i-set up ang mukha"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Pag-unlock Gamit ang Mukha"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Gamitin ang iyong mukha para i-unlock ang telepono mo o para sa pag-authenticate sa mga app, tulad ng kapag nagsa-sign in ka o nag-aapruba ka ng pagbili.\n\nTandaan:\nIsang mukha lang ang puwedeng naka-set up sa iyo sa bawat pagkakataon. Para magdagdag pa ng mukha, i-delete ang kasalukuyang mukha.\n\nKapag tumingin ka sa telepono, puwede mong hindi sinasadyang ma-unlock ito.\n\nPuwedeng ma-unlock ng ibang tao ang telepono mo kung itatapat ito sa iyong mukha.\n\nPuwedeng ma-unlock ng isang taong may malaking pagkakahawig sa iyo ang telepono mo, gaya ng kapatid na kamukha mo."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Gamitin ang iyong mukha para i-unlock ang telepono mo o para sa pag-authenticate sa mga app, tulad ng kapag nagsa-sign in ka o nag-aapruba ka ng pagbili.\n\nTandaan:\nIsang mukha lang ang puwedeng naka-set up sa iyo sa bawat pagkakataon. Para magdagdag pa ng mukha, i-delete ang kasalukuyang mukha.\n\nKapag tumingin ka sa telepono, puwede mong hindi sinasadyang ma-unlock ito.\n\nPuwedeng ma-unlock ng ibang tao ang telepono mo kung itatapat ito sa iyong mukha, kahit na nakapikit ka.\n\nPuwedeng ma-unlock ng isang taong may malaking pagkakahawig sa iyo ang telepono mo, gaya ng kapatid na kamukha mo."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"I-delete ang face model?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Permanente at secure na ide-delete ang iyong face model. Pagkatapos ng pag-delete, kakailanganin mo ang iyong PIN, pattern, o password para i-unlock ang telepono mo o para sa pag-authenticate sa mga app."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"I-delete ang face model?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Permanente at secure na ide-delete ang iyong face model.\n\nPagkatapos ng pag-delete, kakailanganin mo ang iyong fingerprint, PIN, pattern, o password para i-unlock ang telepono mo o para sa pag-authenticate sa mga app."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Permanente at secure na ide-delete ang iyong face model.\n\nPagkatapos ng pag-delete, kakailanganin mo ang iyong PIN, pattern, o password para i-unlock ang telepono mo o para sa pag-authenticate sa mga app."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Permanente at secure na ide-delete ang iyong face model.\n\nPagkatapos ng pag-delete, kakailanganin mo ang iyong PIN, pattern, o password para i-unlock ang telepono mo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Gamitin ang Pag-unlock Gamit ang Mukha para i-unlock ang iyong telepono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingerprint"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerprint sa trabaho"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"I-delete"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Pindutin ang sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Ilagay ang iyong daliri sa sensor at iangat ito pagkatapos mong makaramdam ng pag-vibrate"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Huwag alisin ang iyong daliri sa sensor hanggang sa may maramdaman kang pag-vibrate"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Huwag alisin ang iyong fingerprint sa sensor hanggang sa may maramdaman kang pag-vibrate"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Pindutin nang matagal ang sensor para sa fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Iangat, pindutin ulit"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Isa pa"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Iangat nang iangat ang iyong daliri para idagdag ang iba\'t ibang bahagi ng fingerprint mo"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Pindutin nang matagal sa tuwing gagalaw ang icon ng fingerprint. Makakatulong itong mas makuha ang iyong fingerprint."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Ilagay ang tip ng iyong daliri sa sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Panghuli, ilagay ang mga dulo ng iyong daliri"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Panghuli, gamitin ang mga dulo ng iyong daliri"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Ilagay ang gilid ng iyong fingerprint sa sensor nang matagal, pagkatapos ay ang kabilang gilid"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Makakatulong itong mas makuha ang iyong fingerprint"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Pag-enroll ng fingerprint: <xliff:g id="PERCENTAGE">%d</xliff:g> porsyento"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Tumawag gamit ang Wi‑Fi. Kung mawawala ang Wi‑Fi, matatapos ang tawag."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Kapag naka-on ang pagtawag gamit ang Wi-Fi, maaaring magruta ng mga tawag ang iyong telepono sa pamamagitan ng mga Wi-Fi network o network ng iyong carrier, depende sa iyong kagustuhan at kung aling signal ang mas malakas. Bago i-on ang feature na ito, sumangguni sa iyong carrier hinggil sa mga bayarin at iba pang detalye.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"Pang-emergency na address"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Ginagamit bilang iyong lokasyon kapag nagsagawa ka ng pang-emergency na tawag sa pamamagitan ng Wi‑Fi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Matuto pa"</annotation>" tungkol sa mga feature ng Pribadong DNS"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Naka-on"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Magtakda ng PIN sa trabaho"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Magtakda ng pattern"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Magtakda ng pattern sa trabaho"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Para sa karagdagang seguridad, magtakda ng password para i-unlock ang telepono"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Para sa karagdagang seguridad, magtakda ng PIN para i-unlock ang telepono"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Para sa karagdagang seguridad, magtakda ng pattern para i-unlock ang telepono"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Para sa karagdagang seguridad, magtakda ng password para i-unlock ang tablet"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Para sa karagdagang seguridad, magtakda ng PIN para i-unlock ang tablet"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Para sa karagdagang seguridad, magtakda ng pattern para i-unlock ang tablet"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Para sa karagdagang seguridad, magtakda ng password para i-unlock ang device"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Para sa karagdagang seguridad, magtakda ng PIN para i-unlock ang device"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Para sa karagdagang seguridad, magtakda ng pattern para i-unlock ang device"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Para magamit ang fingerprint, i-set ang pw"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para magamit ang fingerprint, i-set ang pattern"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Para sa seguridad, magtakda ng PIN"</string>
@@ -2323,8 +2322,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"I-hold ang mga volume key para buksan"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"I-triple tap ang screen para buksan"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Gumamit ng galaw para buksan"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture_settings (6800684770875867559) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Gamitin ang galaw para sa accessibility"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Para magamit ang feature na ito, i-tap ang button ng accessibility <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> sa ibaba ng iyong screen.\n\nPara magpalipat-lipat sa mga feature, pindutin nang matagal ang button ng accessibility."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Para gamitin ang feature na ito, i-tap ang button ng accessibility sa iyong screen."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Para magamit ang feature na ito, pindutin nang matagal ang parehong volume key."</string>
@@ -2418,9 +2416,12 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Mas maikli"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Mas mahaba"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tagal ng auto click"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Lakas ng pag-vibrate at haptic"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Pag-vibrate kapag may notification"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Pag-vibrate at haptics"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Mga Tawag"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Mga notification at alarm"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interactive na haptics"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Pag-vibrate kapag nag-ring"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Pag-vibrate kapag may notification"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Feedback sa pagpindot"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Gamitin ang <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Buksan ang <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
@@ -3249,8 +3250,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Kumonekta sa <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Putulin ang koneksyon ng VPN na ito?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Putulin ang koneksyon"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"Bersyon"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Kalimutan ang VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Gusto mo bang palitan ang dati nang VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Gusto mo bang itakda ang VPN na palaging naka-on?"</string>
@@ -3472,9 +3472,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Hindi available ang mobile data"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"I-tap upang pumili ng data SIM"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Palaging gamitin ito para sa mga tawag"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"Pumili ng SIM para sa data"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Pumili ng SIM para sa mobile data"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Pumili ng SIM para sa SMS"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"Lumilipat ng data SIM, puwede itong magtagal nang hanggang isang minuto…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Gamitin ang <xliff:g id="NEW_SIM">%1$s</xliff:g> sa mobile data?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Kung lilipat ka sa <xliff:g id="NEW_SIM">%1$s</xliff:g>, hindi na gagamitin ang <xliff:g id="OLD_SIM">%2$s</xliff:g> para sa mobile data."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Gamitin: <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Tumawag gamit ang"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Pumili ng SIM card"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3534,7 +3537,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, koneksyon sa network, internet, wireless, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notification sa Wi‑Fi, notification sa wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"paggamit ng data"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Ihinto ang pag-vibrate, pag-tap, keyboard"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Gamitin ang 24 na oras na format"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Pag-download"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Buksan gamit ang"</string>
@@ -3617,6 +3619,7 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptics, mag-vibrate, screen, pagkasensitibo"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"haptics, pag-vibrate, telepono, tawag, pagkasensitibo, pag-ring"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"haptics, pag-vibrate, pagkasensitibo"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"haptics, i-vibrate, pag-vibrate"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"pantipid ng baterya, sticky, manatili, pantipid ng baterya, baterya"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"routine, iskedyul, pantipid ng baterya, pangtipid ng power, baterya, awtomatiko, porsyento"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, advanced na pagtawag, pagtawag gamit ang 4g"</string>
@@ -3652,8 +3655,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Tunog, vibration kapag charging"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Mga tunog sa pag-dock"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Mga tunog sa pagpindot"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Pag-vibrate sa pagpindot"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Haptic na feedback para sa pag-tap, keyboard, at higit pa"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Magpe-play ang speaker mg dock"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Lahat ng audio"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Audio ng media lang"</string>
@@ -5294,12 +5295,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"I-on ang SIM?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Lumipat sa <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Lumipat sa paggamit ng SIM card?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Gamitin ang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Isang SIM lang ang puwedeng maging aktibo sa isang pagkakataon.\n\nHindi makakansela ang iyong serbisyo mula sa <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> kung lilipat ka sa <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Isang na-download na SIM lang ang puwedeng maging aktibo sa isang pagkakataon.\n\nHindi makakansela ang iyong serbisyo mula sa <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> kung lilipat ka sa <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Isang SIM lang ang puwedeng maging aktibo sa isang pagkakataon.\n\nHindi makakansela ang iyong serbisyo mula sa <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> kung lilipat ka."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Puwede kang gumamit ng 2 SIM nang sabay. Para magamit ang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, i-off ang isa pang SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Lumipat sa <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"I-off ang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Hindi makakansela ang iyong serbisyo kapag na-off mo ang isang SIM"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Kumokonekta sa network…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Lumilipat sa <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Hindi makalipat ng carrier"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Hindi makalipat ng carrier dahil nagkaroon ng error."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"I-off ang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5451,8 +5457,10 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Matagal"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Ipakita ang wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Payagan ang pag-access sa wallet mula sa lock screen at mga mabilisang setting"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Ipakita ang Scanner ng QR code"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Payagan ang access sa scanner ng QR code mula sa lock screen"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
+    <skip />
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
+    <skip />
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Ipakita ang mga kontrol ng device"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"I-access ang mga kontrol kapag naka-lock"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Ipakita ang orasang may dalawang linya kapag available"</string>

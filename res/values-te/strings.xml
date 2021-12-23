@@ -48,7 +48,7 @@
     <string name="sdcard_format" product="nosdcard" msgid="3248760426252305366">"USB నిల్వను ఎరేజ్ చేయండి"</string>
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"SD కార్డు‌ను ఎరేజ్ చేయండి"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"ప్రివ్యూ"</string>
-    <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"పరిదృశ్యం, <xliff:g id="NUM_PAGES">%2$d</xliff:g>లో <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>వ పేజీ"</string>
+    <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"ప్రివ్యూ, <xliff:g id="NUM_PAGES">%2$d</xliff:g>లో <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>వ పేజీ"</string>
     <string name="font_size_summary" msgid="1296835853522566260">"స్క్రీన్‌పై ఉండే టెక్స్ట్‌ను చిన్నదిగా లేదా పెద్దదిగా చేస్తుంది."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"చిన్నదిగా చేస్తుంది"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"పెద్దదిగా చేస్తుంది"</string>
@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"భాషలు"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"తీసివేయి"</string>
     <string name="add_a_language" msgid="2126220398077503271">"భాషను జోడించు"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"భాష"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"ప్రాధాన్యతనిచ్చే భాష"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"యాప్ భాషలు"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"ప్రతి యాప్‌కు భాషను సెట్ చేయండి"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"యాప్ భాష"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"సూచించిన భాషలు"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"అన్ని భాషలు"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"యాప్ ఆటోమేటిక్‌గా <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>కు సెట్ చేయబడింది, అనేక భాషలకు సపోర్ట్ చేయదు."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">ఎంచుకున్న భాషలను తీసివేయాలా?</item>
       <item quantity="one">ఎంచుకున్న భాషను తీసివేయాలా?</item>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"అందుబాటులో లేదు"</string>
     <string name="security_status_title" msgid="6958004275337618656">"సెక్యూరిటీ స్టేటస్"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"స్క్రీన్ లాక్, Find My Device, యాప్ సెక్యూరిటీ"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"సెక్యూరిటీ &amp; గోప్యత"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"అనుమతులు, స్క్రీన్ లాక్, యాప్ సెక్యూరిటీ"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"ముఖం జోడించబడింది"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"ఫేస్ అన్‌లాక్‌ను సెటప్ చేయడానికి ట్యాప్ చేయండి"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"ఫేస్ అన్‌లాక్"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి గానీ లేదా యాప్‌లకు సైన్ ఇన్ చేసినప్పుడు లేదా కొనుగోలును ఆమోదించడం లాంటి ప్రామాణీకరణ కోసం గానీ మీ ముఖాన్ని ఉపయోగించండి.\n\nఅలాగే, దీనిని గుర్తుంచుకోండి:\nమీరు ఒకేసారి ఒక ముఖాన్ని మాత్రమే సెట్ చేయవచ్చు. మరొక ముఖాన్ని జోడించడానికి, ప్రస్తుతం ఉన్న దానిని తొలగించండి.\n\nమీరు అనుకోకుండా ఫోన్ వైపు చూసినా కూడా అన్‌లాక్ అయ్యే అవకాశం ఉంటుంది.\n\nమీ ముఖాన్ని స్క్రీన్ వైపు చూపితే, ఇతరులు కూడా మీ ఫోన్‌ను అన్‌లాక్ చేయగలుగుతారు.\n\nమీలాంటి రూపం ఉన్న వ్యక్తులు, ఉదాహరణకు, మీ కవల తోబుట్టువు మీ ఫోన్‌ను అన్‌లాక్ చేయగలిగే అవకాశం ఉంది."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి గానీ లేదా యాప్‌లకు సైన్ ఇన్ చేసినప్పుడు లేదా కొనుగోలును ఆమోదించడం లాంటి ప్రామాణీకరణ కోసం గానీ మీ ముఖాన్ని ఉపయోగించండి.\n\nఅలాగే, దీనిని గుర్తుంచుకోండి:\nమీరు ఒకేసారి ఒక ముఖాన్ని మాత్రమే సెట్ చేయవచ్చు. మరొక ముఖాన్ని జోడించడానికి, ప్రస్తుతం ఉన్న దానిని తొలగించండి.\n\nమీరు అనుకోకుండా ఫోన్ వైపు చూసినా కూడా అన్‌లాక్ అయ్యే అవకాశం ఉంటుంది.\n\nమీ కళ్లు మూసి ఉన్నా కూడా, మీ ముఖాన్ని స్క్రీన్ వైపు చూపితే, ఇతరులు కూడా మీ ఫోన్‌ను అన్‌లాక్ చేయగలుగుతారు.\n\nమీలాంటి రూపం ఉన్న వ్యక్తులు, ఉదాహరణకు, మీ కవల తోబుట్టువు మీ ఫోన్‌ను అన్‌లాక్ చేయగలిగే అవకాశం ఉంది."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"ఫేస్ మోడల్‌ను తొలగించాలా?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"మీ ఫేస్ మోడల్ శాశ్వతంగా, సురక్షితంగా తొలగించబడుతుంది. తొలగించిన తర్వాత, మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి లేదా యాప్‌లలో ప్రామాణీకరణ కోసం మీ వేలిముద్ర, PIN, ఆకృతి లేదా పాస్‌వర్డ్ అవసరం."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"ఫేస్ మోడల్‌ను తొలగించాలా?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"మీ ఫేస్ మోడల్ శాశ్వతంగా, సురక్షితంగా తొలగించబడుతుంది.\n\nతొలగించిన తర్వాత, మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి లేదా యాప్‌లలో ప్రామాణీకరణ కోసం మీ వేలిముద్ర, PIN, ఆకృతి లేదా పాస్‌వర్డ్ అవసరం."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"మీ ఫేస్ మోడల్ శాశ్వతంగా, సురక్షితంగా తొలగించబడుతుంది.\n\nతొలగించిన తర్వాత, మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి లేదా యాప్‌లలో ప్రామాణీకరణ కోసం మీ PIN, ఆకృతి లేదా పాస్‌వర్డ్ అవసరం."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"మీ ఫేస్ మోడల్ శాశ్వతంగా మరియు సురక్షితంగా తొలగించబడుతుంది.\n\nతొలగించిన తర్వాత, మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి మీకు మీ PIN, ఆకృతి లేదా పాస్‌వర్డ్ అవసరం."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"మీ ఫోన్‌ను అన్‌లాక్ చేయడానికి ఫేస్ అన్‌లాక్‌ను ఉపయోగించండి"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"వేలిముద్ర"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"ఆఫీస్ కోసం వేలిముద్ర"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"తొలగించు"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"సెన్సార్‌ని తాకండి"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"మీ వేలిని సెన్సార్‌పై ఉంచి, మీకు వైబ్రేషన్ అనుభూతి కలిగిన తర్వాత దాన్ని తీసివేయండి"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"వైబ్రేషన్‌ను అనుభూతి చెందే వరకు మీ వేలిని సెన్సార్‌పై కదపకుండా ఉంచండి"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"వైబ్రేషన్‌ను అనుభూతి చెందే వరకు మీ వేలిముద్రను సెన్సార్ మీద ఫ్లాట్‌గా ఉంచండి"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"వేలిముద్ర సెన్సార్‌ను తాకి &amp; నొక్కి ఉంచండి"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"పైకి ఎత్తి, మళ్లీ తాకండి"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"మరోసారి"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"మీ వేలిముద్ర యొక్క వివిధ భాగాలను జోడించడం కోసం మీ వేలిని అనేకసార్లు పైకి ఎత్తండి"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"వేలిముద్ర చిహ్నం కదిలిన ప్రతిసారీ తాకి &amp; నొక్కి ఉంచండి. మీ వేలిముద్రను స్పష్టంగా క్యాప్చర్ చేయడానికి ఇది సహాయపడుతుంది."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"మీ వేలి కొనను సెన్సార్ మీద ఉంచండి"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"చివరగా, మీ వేలు అంచులను ఉంచండి"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"చివరగా, మీ వేలు అంచులను ఉపయోగించండి"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"సెన్సార్‌పై మీ వేలిముద్రలో కొంత భాగాన్ని ఒక వైపునకు నొక్కి ఉంచి, ఆపై మరొక వైపునకు మార్చండి"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"మీ వేలిముద్రను స్పష్టంగా క్యాప్చర్ చేయడానికి ఇది సహాయపడుతుంది"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"వేలిముద్ర <xliff:g id="PERCENTAGE">%d</xliff:g> శాతం ఎన్‌రోల్ అవుతోంది"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Wi‑Fi ద్వారా కాల్ చేయగలరు. Wi‑Fiని కోల్పోతే, కాల్ ముగిసిపోతుంది."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Wi-Fi కాలింగ్ ఆన్‌లో ఉన్నప్పుడు, మీ ఫోన్ మీ ప్రాధాన్యత మరియు ఏ సిగ్నల్ సామర్థ్యం ఎక్కువగా ఉంది వంటి అంశాల ఆధారంగా Wi-Fi నెట్‌వర్క్‌లు లేదా మీ క్యారియర్ నెట్‌వర్క్ ద్వారా కాల్స్‌ వెళ్లేలా చేస్తుంది. ఈ ఫీచర్‌ను ఆన్ చేయడానికి ముందు, రుసుములు మరియు ఇతర వివరాల గురించి తెలుసుకోవడానికి మీ క్యారియర్‌ను సంప్రదించండి.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"ఎమర్జెన్సీ అడ్రస్‌లు"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Wi-Fi ద్వారా అత్యవసర కాల్ చేసినప్పుడు మీ లొకేషన్ ఉపయోగించబడుతుంది"</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"ప్రైవేట్ DNS ఫీచర్‌ల గురించి "<annotation id="url">"మరింత తెలుసుకోండి"</annotation></string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"ఆన్"</string>
@@ -1884,7 +1892,7 @@
     <string name="about_settings" product="tablet" msgid="2888705054709289693">"టాబ్లెట్ పరిచయం"</string>
     <string name="about_settings" product="default" msgid="4038626127378127613">"ఫోన్ వివరాలు"</string>
     <string name="about_settings" product="device" msgid="9012888717090302815">"పరికరం గురించి"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"పునరుత్పాదిత పరికరం గురించి"</string>
+    <string name="about_settings" product="emulator" msgid="2516560858771320366">"ఎమ్యులేటర్ పరికరం గురించి"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"చట్టపరమైన సమాచారం, స్టేటస్‌, సాఫ్ట్‌వేర్ సంస్కరణను చూడండి"</string>
     <string name="legal_information" msgid="7509900979811934843">"చట్టపరమైన సమాచారం"</string>
     <string name="contributors_title" msgid="7965640251547037965">"సహకారులు"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"వర్క్ PINను సెట్ చేయండి"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"ఆకృతిని సెట్ చేయండి"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"వర్క్ ఆకృతిని సెట్ చేయండి"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"అదనపు సెక్యూరిటీ కోసం, ఫోన్‌ను అన్‌లాక్ చేయడానికి పాస్‌వర్డ్‌ను సెట్ చేయండి"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"అదనపు సెక్యూరిటీ కోసం, ఫోన్‌ను అన్‌లాక్ చేయడానికి PINను సెట్ చేయండి"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"అదనపు సెక్యూరిటీ కోసం, ఫోన్‌ను అన్‌లాక్ చేయడానికి ఆకృతిని సెట్ చేయండి"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"అదనపు సెక్యూరిటీ కోసం, టాబ్లెట్‌ను అన్‌లాక్ చేయడానికి పాస్‌వర్డ్‌ను సెట్ చేయండి"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"అదనపు సెక్యూరిటీ కోసం, టాబ్లెట్‌ను అన్‌లాక్ చేయడానికి PINను సెట్ చేయండి"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"అదనపు సెక్యూరిటీ కోసం, టాబ్లెట్‌ను అన్‌లాక్ చేయడానికి ఆకృతిని సెట్ చేయండి"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"అదనపు సెక్యూరిటీ కోసం, పరికరాన్ని అన్‌లాక్ చేయడానికి పాస్‌వర్డ్‌ను సెట్ చేయండి"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"అదనపు సెక్యూరిటీ కోసం, పరికరాన్ని అన్‌లాక్ చేయడానికి PINను సెట్ చేయండి"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"అదనపు సెక్యూరిటీ కోసం, పరికరాన్ని అన్‌లాక్ చేయడానికి ఆకృతిని సెట్ చేయండి"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"వేలిముద్ర కోసం పాస్‌వర్డ్"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"వేలిముద్రకు ఆకృతి సెట్ చేయండి"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"సెక్యూరిటీ కోసం పిన్‌ను సెట్ చేయండి"</string>
@@ -2417,9 +2416,12 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"మరింత తక్కువ సమయం"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"మరింత సమయం"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"ఆటో క్లిక్ టైం"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"వైబ్రేషన్ &amp; స్పర్శ సామర్థ్యం"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"నోటిఫికేషన్ వైబ్రేషన్"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"వైబ్రేషన్ &amp; హ్యాప్టిక్‌లు"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"కాల్స్"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"నోటిఫికేషన్‌లు, అలారాలు"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"ఇంటరాక్టివ్ హ్యాప్టిక్‌లు"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"రింగ్ వైబ్రేషన్"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"నోటిఫికేషన్ వైబ్రేషన్"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"టచ్ ఫీడ్‌బ్యాక్"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>‌ను ఉపయోగించు"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>‌ను తెరవండి"</string>
@@ -3248,8 +3250,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"<xliff:g id="PROFILE">%s</xliff:g>కి కనెక్ట్ చేయండి"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"ఈ VPNను డిస్‌కనెక్ట్ చేయాలా?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"డిస్‌కనెక్ట్ చేయి"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"వెర్షన్"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"VPNని విస్మరించు"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"ఇప్పటికే ఉన్న VPNని భర్తీ చేయాలా?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"ఎల్లప్పుడూ ఆన్‌లో ఉండే VPNని సెట్ చేయాలా?"</string>
@@ -3471,9 +3472,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"మొబైల్ డేటా అందుబాటులో లేదు"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"డేటా SIMను ఎంచుకోవడానికి నొక్కండి"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"కాల్స్‌ల కోసం దీన్ని ఎల్లప్పుడూ ఉపయోగించు"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"డేటా కోసం SIMను ఎంచుకోండి"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"మొబైల్ డేటా కోసం SIMను ఎంచుకోండి"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"SMS కోసం SIM కార్డ్‌ను ఎంచుకోండి"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"డేటా SIMను మార్చుతోంది, ఇందుకు ఒక నిమిషం పట్టవచ్చు…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"మొబైల్ డేటా కోసం <xliff:g id="NEW_SIM">%1$s</xliff:g>ను ఉపయోగించాలా?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"మీరు <xliff:g id="NEW_SIM">%1$s</xliff:g>కు స్విచ్ అయితే, <xliff:g id="OLD_SIM">%2$s</xliff:g> ఇప్పటి నుండి మొబైల్ డేటా కోసం ఉపయోగించబడదు."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g>ను ఉపయోగించండి"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"దీనితో కాల్ చేయండి"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"సిమ్ కార్డును ఎంచుకోండి"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"సిమ్ <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3537,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, నెట్‌వర్క్ కనెక్షన్, ఇంటర్నెట్, వైర్‌లెస్, డేటా, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi నోటిఫికేషన్, wifi నోటిఫికేషన్"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"డేటా వినియోగం"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"వైబ్రేషన్ ఆపివేయి, నొక్కడం, కీబోర్డ్"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24-గంటల ఫార్మాట్‌ను ఉపయోగించు"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"డౌన్‌లోడ్ చేయి"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"దీనితో తెరువు"</string>
@@ -3616,6 +3619,7 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"స్పర్శలు, వైబ్రేట్, స్క్రీన్, సెన్సిటివిటీ"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"స్పర్శలు, వైబ్రేట్, ఫోన్, కాల్, సెన్సిటివిటీ, రింగ్"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"స్పర్శలు, వైబ్రేట్, సెన్సిటివిటీ"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"హ్యాప్టిక్‌లు, వైబ్రేట్, వైబ్రేషన్"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"బ్యాటరీ సేవర్, అనుబంధితం, స్థిరం, పవర్ సేవర్, బ్యాటరీ"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"సాధారణ సమయం, షెడ్యూల్, బ్యాటరీ సేవర్, పవర్ సేవర్, బ్యాటరీ, ఆటోమేటిక్, శాతం"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, అధునాతన కాలింగ్, 4g కాలింగ్"</string>
@@ -3651,8 +3655,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"ఛార్జింగ్ సౌండ్స్ &amp; వైబ్రేషన్‌"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"డాక్ చేసేటప్పుడు వచ్చే ధ్వనులు"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"టచ్ సౌండ్స్"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"స్పర్శ వైబ్రేషన్"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"ట్యాప్, కీబోర్డ్ మరియు మరిన్నింటి కోసం స్పర్శాపూర్వక ప్రతిస్పందన"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"డాక్ స్పీకర్‌ను ప్లే చేస్తోంది"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"మొత్తం ఆడియో"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"మీడియా ఆడియో మాత్రమే"</string>
@@ -3779,7 +3781,7 @@
     <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"గత 7 రోజుల నుండి అన్నింటినీ చూడండి"</string>
     <string name="general_notification_header" msgid="3669031068980713359">"మేనేజ్ చేయండి"</string>
     <string name="app_notification_field" msgid="3858667320444612716">"యాప్ సెట్టింగ్‌లు"</string>
-    <string name="app_notification_field_summary" msgid="5981393613897713471">"వ్యక్తిగత యాప్‌ల నుండి నోటిఫికేషన్‌లను కంట్రోల్ చేయండి"</string>
+    <string name="app_notification_field_summary" msgid="5981393613897713471">"ఒక్కో యాప్ నుండి వచ్చే నోటిఫికేషన్‌లను వేర్వేరుగా కంట్రోల్ చేయండి"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"సాధారణ సెట్టింగ్‌లు"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"కార్యాలయ నోటిఫికేషన్‌లు"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"అనుకూల నోటిఫికేషన్‌లు"</string>
@@ -5293,12 +5295,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIMను ఆన్ చేయాలా?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>కు స్విచ్ అవ్వాలా?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"సిమ్ కార్డ్‌ను ఉపయోగించడానికి స్విచ్‌ అవ్వాలని అనుకుంటున్నారా?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ను ఉపయోగించాలా?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"ఒకసారి ఒక SIM మాత్రమే యాక్టివ్‌గా ఉంటుంది.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>కు స్విచ్ అవ్వడం వలన మీ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> సర్వీస్ రద్దు చేయబడదు."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"ఒకసారి ఒక డౌన్‌లోడ్ చేయబడిన SIM మాత్రమే యాక్టివ్‌గా ఉంటుంది.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>కు స్విచ్ అవ్వడం వలన మీ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> సర్వీస్ రద్దు చేయబడదు."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"ఒకసారి ఒక SIM మాత్రమే యాక్టివ్‌గా ఉంటుంది.\n\nస్విచ్ అవ్వడం వలన మీ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> సర్వీస్ రద్దు చేయబడదు."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"మీరు ఒకేసారి 2 SIMలను ఉపయోగించవచ్చు. <xliff:g id="CARRIER_NAME">%1$s</xliff:g>ను ఉపయోగించడానికి, మరొక SIMను ఆఫ్ చేయండి."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>కు స్విచ్ అవ్వండి"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ను ఆఫ్ చేయండి"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIMను ఆఫ్ చేయడం వలన మీ సర్వీస్ రద్దు చేయబడదు"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"నెట్‌వర్క్‌కు కనెక్ట్ చేస్తోంది…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>కు స్విచ్ అవుతోంది"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"క్యారియర్‌ను స్విచ్ చేయడం సాధ్యం కాదు"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"ఎర్రర్ కారణంగా క్యారియర్‌ను స్విచ్ చేయడం సాధ్యం కాదు."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ను ఆఫ్ చేయాలా?"</string>
@@ -5450,8 +5457,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"ఎక్కువ నిడివి"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"వాలెట్‌ను చూపించండి"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"లాక్ స్క్రీన్, త్వరిత సెట్టింగ్‌లు నుండి వాలెట్‌కు యాక్సెస్‌ను అనుమతించండి"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"QR కోడ్ స్కానర్‌ను చూపించండి"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"లాక్ స్క్రీన్ నుండి QR కోడ్ స్కానర్‌కు యాక్సెస్‌ను అనుమతించండి"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"QR స్కానర్‌ను చూడండి"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"లాక్ స్క్రీన్ నుండి QR స్కానర్‌కు యాక్సెస్‌ను అనుమతించండి"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"డివైజ్ కంట్రోల్స్‌ను చూపించండి"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"లాక్ చేసినప్పుడు కంట్రోల్స్‌ను యాక్సెస్ చేయండి"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"అందుబాటులో ఉన్నప్పుడు, డబుల్ లైన్ గడియారం చూపండి"</string>

@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"ਭਾਸ਼ਾਵਾਂ"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"ਹਟਾਓ"</string>
     <string name="add_a_language" msgid="2126220398077503271">"ਇੱਕ ਭਾਸ਼ਾ ਸ਼ਾਮਲ ਕਰੋ"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"ਭਾਸ਼ਾ"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"ਤਰਜੀਹੀ ਭਾਸ਼ਾ"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ਐਪ ਦੀਆਂ ਭਾਸ਼ਾਵਾਂ"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"ਹਰੇਕ ਐਪ ਲਈ ਭਾਸ਼ਾ ਸੈੱਟ ਕਰੋ"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"ਐਪ ਦੀ ਭਾਸ਼ਾ"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"ਸੁਝਾਈਆਂ ਗਈਆਂ ਭਾਸ਼ਾਵਾਂ"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ਸਾਰੀਆਂ ਭਾਸ਼ਾਵਾਂ"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"ਐਪ ਪੂਰਵ-ਨਿਰਧਾਰਿਤ ਤੌਰ \'ਤੇ <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> \'ਤੇ ਸੈੱਟ ਹੈ ਅਤੇ ਇੱਕ ਤੋਂ ਵੱਧ ਭਾਸ਼ਾਵਾਂ ਦਾ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦੀ ਹੈ।"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">ਕੀ ਚੁਣੀ ਗਈ ਭਾਸ਼ਾ ਨੂੰ ਹਟਾਉਣਾ ਹੈ?</item>
       <item quantity="other">ਕੀ ਚੁਣੀਆਂ ਗਈਆਂ ਭਾਸ਼ਾਵਾਂ ਨੂੰ ਹਟਾਉਣਾ ਹੈ?</item>
@@ -271,7 +279,7 @@
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> ਨੂੰ ਸ਼ੁਰੂ ਹੋਵੇਗਾ।"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="7004693956837388129">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ਦੀ ਵਰਤੋਂ ਹੋ ਰਹੀ ਹੈ। <xliff:g id="TRANSITION_DATE">%3$s</xliff:g> ਨੂੰ <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> ਸ਼ੁਰੂ ਹੋਵੇਗਾ।"</string>
+    <string name="zone_info_footer" msgid="7004693956837388129">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ਵਰਤਿਆ ਜਾ ਰਿਹਾ ਹੈ। <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> <xliff:g id="TRANSITION_DATE">%3$s</xliff:g> ਤੋਂ ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ।"</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ਦੀ ਵਰਤੋਂ ਹੋ ਰਹੀ ਹੈ। ਦਿਨ ਦੇ ਸਮੇਂ ਨੂੰ ਵਿੱਚ ਕੋਈ ਬਦਲਾਅ ਨਹੀਂ।"</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"ਦਿਨ ਦੀ ਰੌਸ਼ਨੀ ਸੰਬੰਧੀ ਬਚਤ ਸਮਾਂ"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"ਮਿਆਰੀ ਸਮਾਂ"</string>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"ਉਪਲਬਧ ਨਹੀਂ ਹੈ"</string>
     <string name="security_status_title" msgid="6958004275337618656">"ਸੁਰੱਖਿਆ ਸਥਿਤੀ"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"ਸਕ੍ਰੀਨ ਲਾਕ, Find My Device, ਐਪ ਸੁਰੱਖਿਆ"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"ਸੁਰੱਖਿਆ ਅਤੇ ਪਰਦੇਦਾਰੀ"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"ਇਜਾਜ਼ਤਾਂ, ਸਕ੍ਰੀਨ ਲਾਕ, ਐਪ ਸੁਰੱਖਿਆ"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"ਚਿਹਰਾ ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"ਫ਼ੇਸ ਅਣਲਾਕ ਦਾ ਸੈੱਟਅੱਪ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"ਫ਼ੇਸ ਅਣਲਾਕ"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਜਾਂ ਐਪਾਂ ਵਿੱਚ ਪ੍ਰਮਾਣੀਕਰਨ ਲਈ ਆਪਣੇ ਚਿਹਰੇ ਦੀ ਵਰਤੋਂ ਕਰੋ, ਜਿਵੇਂ ਕਿ ਜਦੋਂ ਤੁਸੀਂ ਸਾਈਨ-ਇਨ ਕਰਦੇ ਹੋ ਜਾਂ ਕਿਸੇ ਖਰੀਦ ਨੂੰ ਮਨਜ਼ੂਰੀ ਦਿੰਦੇ ਹੋ।\n\nਧਿਆਨ ਵਿੱਚ ਰੱਖੋ:\nਤੁਸੀਂ ਇੱਕ ਸਮੇਂ \'ਤੇ ਇੱਕੋ ਹੀ ਚਿਹਰੇ ਦਾ ਸੈੱਟਅੱਪ ਕਰ ਸਕਦੇ ਹੋ। ਇੱਕ ਹੋਰ ਚਿਹਰਾ ਸ਼ਾਮਲ ਕਰਨ ਲਈ, ਪਹਿਲਾਂ ਮੌਜੂਦਾ ਚਿਹਰੇ ਨੂੰ ਮਿਟਾਓ।\n\nਫ਼ੋਨ ਨੂੰ ਦੇਖਣ ਸਾਰ ਹੀ ਫ਼ੋਨ ਅਣਲਾਕ ਹੋ ਸਕਦਾ ਹੈ, ਭਾਵੇਂ ਇੰਝ ਕਰਨ ਦਾ ਤੁਹਾਡਾ ਇਰਾਦਾ ਨਾ ਹੋਵੇ।\n\nਕਿਸੇ ਵੱਲੋਂ ਤੁਹਾਡਾ ਫ਼ੋਨ ਤੁਹਾਡੇ ਮੂਹਰੇ ਕਰਨ \'ਤੇ ਫ਼ੋਨ ਅਣਲਾਕ ਹੋ ਸਕਦਾ ਹੈ।\n\nਤੁਹਾਡੇ ਵਰਗੇ ਦਿਸਣ ਵਾਲੇ ਕਿਸੇ ਵਿਅਕਤੀ ਵੱਲੋਂ ਵੀ ਤੁਹਾਡਾ ਫ਼ੋਨ ਅਣਲਾਕ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ, ਜਿਵੇਂ ਇੱਕੋ ਜਿਹੇ ਦਿਸਣ ਵਾਲੇ ਭੈਣ-ਭਰਾ।"</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਜਾਂ ਐਪਾਂ ਵਿੱਚ ਪ੍ਰਮਾਣੀਕਰਨ ਲਈ ਆਪਣੇ ਚਿਹਰੇ ਦੀ ਵਰਤੋਂ ਕਰੋ, ਜਿਵੇਂ ਕਿ ਜਦੋਂ ਤੁਸੀਂ ਸਾਈਨ-ਇਨ ਕਰਦੇ ਹੋ ਜਾਂ ਕਿਸੇ ਖਰੀਦ ਨੂੰ ਮਨਜ਼ੂਰੀ ਦਿੰਦੇ ਹੋ।\n\nਧਿਆਨ ਵਿੱਚ ਰੱਖੋ:\nਤੁਸੀਂ ਇੱਕ ਸਮੇਂ \'ਤੇ ਇੱਕੋ ਹੀ ਚਿਹਰੇ ਦਾ ਸੈੱਟਅੱਪ ਕਰ ਸਕਦੇ ਹੋ। ਇੱਕ ਹੋਰ ਚਿਹਰਾ ਸ਼ਾਮਲ ਕਰਨ ਲਈ, ਪਹਿਲਾਂ ਮੌਜੂਦਾ ਚਿਹਰੇ ਨੂੰ ਮਿਟਾਓ।\n\nਫ਼ੋਨ ਨੂੰ ਦੇਖਣ ਸਾਰ ਹੀ ਫ਼ੋਨ ਅਣਲਾਕ ਹੋ ਸਕਦਾ ਹੈ, ਭਾਵੇਂ ਇੰਝ ਕਰਨ ਦਾ ਤੁਹਾਡਾ ਇਰਾਦਾ ਨਾ ਹੋਵੇ।\n\nਕਿਸੇ ਵੱਲੋਂ ਤੁਹਾਡਾ ਫ਼ੋਨ ਤੁਹਾਡੇ ਮੂਹਰੇ ਕਰਨ \'ਤੇ ਫ਼ੋਨ ਅਣਲਾਕ ਹੋ ਸਕਦਾ ਹੈ, ਭਾਵੇਂ ਤੁਹਾਡੀਆਂ ਅੱਖਾਂ ਬੰਦ ਹੋਣ।\n\nਤੁਹਾਡੇ ਵਰਗੇ ਦਿਸਣ ਵਾਲੇ ਕਿਸੇ ਵਿਅਕਤੀ ਵੱਲੋਂ ਵੀ ਤੁਹਾਡਾ ਫ਼ੋਨ ਅਣਲਾਕ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ, ਜਿਵੇਂ ਇੱਕੋ ਜਿਹੇ ਦਿਸਣ ਵਾਲੇ ਭੈਣ-ਭਰਾ।"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"ਕੀ ਚਿਹਰੇ ਦਾ ਮਾਡਲ ਮਿਟਾਉਣਾ ਹੈ?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"ਤੁਹਾਡੇ ਚਿਹਰੇ ਦਾ ਮਾਡਲ ਪੱਕੇ ਤੌਰ \'ਤੇ ਅਤੇ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਮਿਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ। ਮਿਟਾਉਣ ਤੋਂ ਬਾਅਦ, ਤੁਹਾਨੂੰ ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਜਾਂ ਐਪਾਂ ਵਿੱਚ ਪ੍ਰਮਾਣੀਕਰਨ ਲਈ ਆਪਣੇ ਪਿੰਨ, ਪੈਟਰਨ ਜਾਂ ਪਾਸਵਰਡ ਦੀ ਲੋੜ ਪਵੇਗੀ।"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"ਕੀ ਚਿਹਰੇ ਦਾ ਮਾਡਲ ਮਿਟਾਉਣਾ ਹੈ?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"ਤੁਹਾਡੇ ਚਿਹਰੇ ਦਾ ਮਾਡਲ ਪੱਕੇ ਤੌਰ \'ਤੇ ਅਤੇ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਮਿਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ।\n\n ਮਿਟਾਉਣ ਤੋਂ ਬਾਅਦ, ਤੁਹਾਨੂੰ ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਜਾਂ ਐਪਾਂ ਵਿੱਚ ਪ੍ਰਮਾਣੀਕਰਨ ਲਈ ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ, ਪਿੰਨ, ਪੈਟਰਨ ਜਾਂ ਪਾਸਵਰਡ ਦੀ ਲੋੜ ਪਵੇਗੀ।"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"ਤੁਹਾਡੇ ਚਿਹਰੇ ਦਾ ਮਾਡਲ ਪੱਕੇ ਤੌਰ \'ਤੇ ਅਤੇ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਮਿਟਾਇਆ ਜਾਵੇਗਾ।\n\nਮਿਟਾਉਣ ਤੋਂ ਬਾਅਦ, ਤੁਹਾਨੂੰ ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਜਾਂ ਐਪਾਂ ਵਿੱਚ ਪ੍ਰਮਾਣੀਕਰਨ ਲਈ ਆਪਣੇ ਪਿੰਨ, ਪੈਟਰਨ ਜਾਂ ਪਾਸਵਰਡ ਦੀ ਲੋੜ ਹੋਵੇਗੀ।"</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"ਤੁਹਾਡੇ ਚਿਹਰੇ ਦਾ ਮਾਡਲ ਪੱਕੇ ਤੌਰ \'ਤੇ ਅਤੇ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਮਿਟਾਇਆ ਜਾਵੇਗਾ।\n\nਮਿਟਾਉਣ ਤੋਂ ਬਾਅਦ, ਤੁਹਾਨੂੰ ਆਪਣੇ ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਲਈ ਆਪਣੇ ਪਿੰਨ, ਪੈਟਰਨ ਜਾਂ ਪਾਸਵਰਡ ਦੀ ਲੋੜ ਹੋਵੇਗੀ।"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"ਆਪਣਾ ਫ਼ੋਨ ਅਣਲਾਕ ਕਰਨ ਲਈ ਫ਼ੇਸ ਅਣਲਾਕ ਵਰਤੋ"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"ਫਿੰਗਰਪ੍ਰਿੰਟ"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"ਕਾਰਜ ਪ੍ਰੋਫਾਈਲ ਲਈ ਫਿੰਗਰਪ੍ਰਿੰਟ"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"ਮਿਟਾਓ"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"ਸੈਂਸਰ ਨੂੰ ਸਪਰਸ਼ ਕਰੋ"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"ਆਪਣੀ ਉਂਗਲ ਨੂੰ ਸੈਂਸਰ ’ਤੇ ਰੱਖੋ ਅਤੇ ਇੱਕ ਥਰਥਰਾਹਟ ਮਹਿਸੂਸ ਹੋਣ ਤੋਂ ਬਾਅਦ ਚੁੱਕ ਲਵੋ"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"ਆਪਣੀ ਉਂਗਲ ਨੂੰ ਉਦੋਂ ਤੱਕ ਸੈਂਸਰ \'ਤੇ ਰੱਖੋ ਜਦੋਂ ਤੱਕ ਤੁਹਾਨੂੰ ਥਰਥਰਾਹਟ ਮਹਿਸੂਸ ਨਹੀਂ ਹੁੰਦੀ"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਨੂੰ ਉਦੋਂ ਤੱਕ ਸੈਂਸਰ \'ਤੇ ਸਿੱਧਾ ਰੱਖੋ ਜਦੋਂ ਤੱਕ ਤੁਹਾਨੂੰ ਥਰਥਰਾਹਟ ਮਹਿਸੂਸ ਨਹੀਂ ਹੁੰਦੀ"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ ਨੂੰ ਸਪਰਸ਼ ਕਰਕੇ ਦਬਾਈ ਰੱਖੋ"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"ਚੁੱਕੋ, ਫਿਰ ਦੁਬਾਰਾ ਸਪਰਸ਼ ਕਰੋ"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"ਇੱਕ ਵਾਰ ਹੋਰ"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਦੇ ਵੱਖ-ਵੱਖ ਭਾਗਾਂ ਨੂੰ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਆਪਣੀ ਉਂਗਲ ਨੂੰ ਰੱਖਣਾ-ਚੁੱਕਣਾ ਜਾਰੀ ਰੱਖੋ"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਪ੍ਰਤੀਕ ਵਿੱਚ ਹਰੇਕ ਵਾਰ ਹਲਚਲ ਹੋਣ \'ਤੇ ਉਸਨੂੰ ਸਪਰਸ਼ ਕਰਕੇ ਰੱਖੋ। ਇਸ ਨਾਲ ਤੁਹਾਡੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਨੂੰ ਬਿਹਤਰ ਢੰਗ ਨਾਲ ਕੈਪਚਰ ਕਰਨ ਵਿੱਚ ਮਦਦ ਹੁੰਦੀ ਹੈ।"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"ਆਪਣੀ ਉਂਗਲ ਦੇ ਪੋਟੇ ਨੂੰ ਸੈਂਸਰ \'ਤੇ ਰੱਖੋ"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"ਅੰਤ ਵਿੱਚ, ਆਪਣੀ ਉਂਗਲ ਦੇ ਕੋਨਿਆਂ ਨੂੰ ਰੱਖੋ"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"ਅੰਤ ਵਿੱਚ, ਆਪਣੀ ਉਂਗਲ ਦੇ ਕੋਨਿਆਂ ਦੀ ਵਰਤੋਂ ਕਰੋ"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"ਆਪਣੀ ਉਂਗਲ ਦੇ ਇੱਕ ਪਾਸੇ ਨੂੰ ਸੈਂਸਰ \'ਤੇ ਲਗਾ ਕੇ ਰੱਖੋ, ਫਿਰ ਦੂਜੇ ਪਾਸੇ ਨੂੰ ਲਗਾਓ"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ਇਸ ਨਾਲ ਤੁਹਾਡੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਨੂੰ ਬਿਹਤਰ ਢੰਗ ਨਾਲ ਕੈਪਚਰ ਕਰਨ ਵਿੱਚ ਮਦਦ ਹੁੰਦੀ ਹੈ"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਦਰਜ ਕਰਨ ਦੀ ਪ੍ਰਕਿਰਿਆ <xliff:g id="PERCENTAGE">%d</xliff:g> ਫ਼ੀਸਦ ਹੋ ਗਈ ਹੈ"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"ਵਾਈ-ਫਾਈ \'ਤੇ ਕਾਲ ਕਰੋ। ਵਾਈ-ਫਾਈ ਕਨੈਕਸ਼ਨ ਟੁੱਟਣ \'ਤੇ ਕਾਲ ਸਮਾਪਤ ਹੋ ਜਾਵੇਗੀ।"</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"ਜਦੋਂ ਵਾਈ-ਫਾਈ ਕਾਲਿੰਗ ਚਾਲੂ ਹੁੰਦੀ ਹੈ, ਤਾਂ ਤੁਹਾਡਾ ਫ਼ੋਨ ਤੁਹਾਡੀ ਤਰਜੀਹ ਅਤੇ ਕਿਹੜਾ ਸਿਗਨਲ ਵੱਧ ਮਜ਼ਬੂਤ ਹੈ, ਦੇ ਆਧਾਰ \'ਤੇ ਵਾਈ-ਫਾਈ ਨੈੱਟਵਰਕਾਂ ਜਾਂ ਤੁਹਾਡੇ ਕੈਰੀਅਰ ਦੇ ਨੈੱਟਵਰਕ ਰਾਹੀਂ ਕਾਲਾਂ ਰੂਟ ਕਰ ਸਕਦਾ ਹੈ। ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ ਚਾਲੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਫੀਸ ਅਤੇ ਹੋਰ ਵੇਰਵਿਆਂ ਲਈ ਆਪਣੇ ਕੈਰੀਅਰ ਨੂੰ ਸੰਪਰਕ ਕਰੋ।<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"ਐਮਰਜੈਂਸੀ ਪਤਾ"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"ਤੁਹਾਡੇ ਵੱਲੋਂ ਕੀਤੀ ਜਾਣ ਵਾਲੀ ਕਿਸੇ ਸੰਕਟਕਾਲੀਨ ਕਾਲ ਵੇਲੇ ਇਹ ਪਤਾ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ"</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"ਨਿੱਜੀ DNS ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਬਾਰੇ "<annotation id="url">"ਹੋਰ ਜਾਣੋ"</annotation></string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"ਚਾਲੂ"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"ਕੰਮ ਸੰਬੰਧੀ ਪਿੰਨ ਸੈੱਟ ਕਰੋ"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"ਪੈਟਰਨ ਸੈੱਟ ਕਰੋ"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"ਕੰਮ ਸੰਬੰਧੀ ਪੈਟਰਨ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"ਵਾਧੂ ਸੁਰੱਖਿਆ ਲਈ, ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਵਾਸਤੇ ਪਾਸਵਰਡ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"ਵਾਧੂ ਸੁਰੱਖਿਆ ਲਈ, ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਵਾਸਤੇ ਪਿੰਨ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"ਵਾਧੂ ਸੁਰੱਖਿਆ ਲਈ, ਫ਼ੋਨ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਵਾਸਤੇ ਪੈਟਰਨ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"ਵਾਧੂ ਸੁਰੱਖਿਆ ਲਈ, ਟੈਬਲੈੱਟ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਵਾਸਤੇ ਪਾਸਵਰਡ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"ਵਾਧੂ ਸੁਰੱਖਿਆ ਲਈ, ਟੈਬਲੈੱਟ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਵਾਸਤੇ ਪਿੰਨ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"ਵਾਧੂ ਸੁਰੱਖਿਆ ਲਈ, ਟੈਬਲੈੱਟ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਵਾਸਤੇ ਪੈਟਰਨ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"ਵਾਧੂ ਸੁਰੱਖਿਆ ਲਈ, ਡੀਵਾਈਸ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਵਾਸਤੇ ਪਾਸਵਰਡ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"ਵਾਧੂ ਸੁਰੱਖਿਆ ਲਈ, ਡੀਵਾਈਸ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਵਾਸਤੇ ਪਿੰਨ ਸੈੱਟ ਕਰੋ"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"ਵਾਧੂ ਸੁਰੱਖਿਆ ਲਈ, ਡੀਵਾਈਸ ਨੂੰ ਅਣਲਾਕ ਕਰਨ ਵਾਸਤੇ ਪੈਟਰਨ ਸੈੱਟ ਕਰੋ"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਵਰਤਣ ਲਈ ਪਾਸਵਰਡ ਸੈੱਟ ਕਰੋ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਵਰਤਣ ਲਈ ਪੈਟਰਨ ਸੈੱਟ ਕਰੋ"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"ਸੁਰੱਖਿਆ ਲਈ, ਪਿੰਨ ਸੈੱਟ ਕਰੋ"</string>
@@ -2417,9 +2416,16 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"ਘੱਟ"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"ਵੱਧ"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"ਸਵੈ ਕਲਿੱਕ ਸਮਾਂ"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"ਥਰਥਰਾਹਟ ਅਤੇ ਸਪਰਸ਼ ਦੀ ਤੀਬਰਤਾ"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"ਸੂਚਨਾ ਦੀ ਥਰਥਰਾਹਟ"</string>
+    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
+    <skip />
+    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
+    <skip />
+    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"ਘੰਟੀ ਦੀ ਥਰਥਰਾਹਟ"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"ਸੂਚਨਾ ਦੀ ਥਰਥਰਾਹਟ"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"ਸਪਰਸ਼ ਸੰਬੰਧੀ ਪ੍ਰਤੀਕਰਮ"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ਵਰਤੋ"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ਖੋਲ੍ਹੋ"</string>
@@ -3248,8 +3254,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"<xliff:g id="PROFILE">%s</xliff:g> ਨਾਲ ਕਨੈਕਟ ਕਰੋ"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"ਇਹ VPN ਡਿਸਕਨੈਕਟ ਕਰੀਏ?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"ਡਿਸਕਨੈਕਟ ਕਰੋ"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"ਵਰਜਨ"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"VPN ਨੂੰ ਭੁੱਲ ਜਾਓ"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"ਕੀ ਮੌਜੂਦਾ VPN ਨੂੰ ਤਬਦੀਲ ਕਰਨਾ ਹੈ?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"ਕੀ ਹਮੇਸ਼ਾ-ਚਾਲੂ VPN ਨੂੰ ਸੈੱਟ ਕਰਨਾ ਹੈ?"</string>
@@ -3471,9 +3476,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"ਮੋਬਾਈਲ ਡਾਟਾ ਅਣਉਪਲਬਧ ਹੈ"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"ਇੱਕ  ਡਾਟਾ  SIM ਚੁਣਨ ਲਈ ਟੈਪ ਕਰੋ"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"ਕਾਲਾਂ ਲਈ ਹਮੇਸ਼ਾਂ ਇਹ ਵਰਤੋ"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">" ਡਾਟਾ  ਲਈ ਇੱਕ SIM ਚੁਣੋ"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"ਮੋਬਾਈਲ ਡਾਟੇ ਲਈ ਸਿਮ ਚੁਣੋ"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"SMS ਲਈ ਕੋਈ ਸਿਮ ਚੁਣੋ"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"ਡਾਟਾ ਸਿਮ ਬਦਲਣ ਵਿੱਚ ਕੁਝ ਸਮਾਂ ਲੱਗ ਸਕਦਾ ਹੈ…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"ਕੀ ਮੋਬਾਈਲ ਡਾਟੇ ਲਈ <xliff:g id="NEW_SIM">%1$s</xliff:g> ਵਰਤਣਾ ਹੈ?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"ਜੇ ਤੁਸੀਂ <xliff:g id="NEW_SIM">%1$s</xliff:g> \'ਤੇ ਸਵਿੱਚ ਕਰਦੇ ਹੋ, ਤਾਂ ਹੁਣ <xliff:g id="OLD_SIM">%2$s</xliff:g> ਮੋਬਾਈਲ ਡਾਟੇ ਲਈ ਨਹੀਂ ਵਰਤਿਆ ਜਾਵੇਗਾ।"</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> ਵਰਤੋ"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"ਇਸਦੇ ਨਾਲ ਕਾਲ ਕਰੋ"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"ਇੱਕ SIM ਕਾਰਡ ਚੁਣੋ"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3541,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"ਵਾਈਫਾਈ, ਵਾਈ-ਫਾਈ, ਨੈੱਟਵਰਕ ਕਨੈਕਸ਼ਨ, ਇੰਟਰਨੈੱਟ, ਵਾਇਰਲੈੱਸ, ਡਾਟਾ, ਵਾਈ ਫਾਈ"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"ਵਾਈ-ਫਾਈ ਸੂਚਨਾ, ਵਾਈ-ਫਾਈ ਸੂਚਨਾ"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"ਡਾਟਾ ਵਰਤੋਂ"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"ਥਰਥਰਾਹਟ ਬੰਦ ਕਰੋ, ਟੈਪ ਕਰੋ, ਕੀ-ਬੋਰਡ"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24-ਘੰਟੇ ਵਾਲਾ ਫਾਰਮੈਟ ਵਰਤੋ"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"ਡਾਊਨਲੋਡ"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ"</string>
@@ -3616,6 +3623,8 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"ਸਪੱਰਸ਼ ਸੰਵੇਦਕ, ਥਰਥਰਾਹਟ, ਸਕ੍ਰੀਨ, ਸੰਵੇਦਨਸ਼ੀਲਤਾ"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"ਸਪਰਸ਼ ਸੰਵੇਦਕ, ਥਰਥਰਾਹਟ, ਫ਼ੋਨ, ਕਾਲ, ਸੰਵੇਦਨਸ਼ੀਲਤਾ, ਘੰਟੀ"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"ਸਪਰਸ਼ ਸੰਵੇਦਕ, ਥਰਥਰਾਹਟ, ਸੰਵੇਦਨਸ਼ੀਲਤਾ"</string>
+    <!-- no translation found for keywords_vibration (670455132028025952) -->
+    <skip />
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ਬੈਟਰੀ ਸੇਵਰ, ਸਥਿਰ, ਬਰਕਰਾਰ, ਪਾਵਰ ਸੇਵਰ, ਬੈਟਰੀ"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ਨਿਯਮਬੱਧ ਕੰਮ, ਸਮਾਂ-ਸੂਚੀ, ਬੈਟਰੀ ਸੇਵਰ, ਪਾਵਰ ਸੇਵਰ, ਬੈਟਰੀ, ਸਵੈਚਲਿਤ, ਫ਼ੀਸਦ"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, ਉੱਨਤ ਕਾਲਿੰਗ, 4g ਕਾਲਿੰਗ"</string>
@@ -3651,8 +3660,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"ਚਾਰਜਿੰਗ ਦੀਆਂ ਧੁਨੀਆਂ ਤੇ ਥਰਥਰਾਹਟ"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"ਡੌਕ ਕਰਨ ਦੀਆਂ ਅਵਾਜ਼ਾਂ"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"ਸਪਰਸ਼ ਧੁਨੀਆਂ"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"ਸਪੱਰਸ਼ ਸੰਬੰਧੀ ਥਰਥਰਾਹਟ"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"ਟੈਪ, ਕੀ-ਬੋਰਡ ਅਤੇ ਹੋਰ ਲਈ ਛੋਹ ਪ੍ਰਤੀਕਰਮ"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"ਡੌਕ ਸਪੀਕਰ ਪਲੇ ਕਰਦਾ ਹੈ"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"ਸਾਰੇ  ਆਡੀਓ"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"ਕੇਵਲ ਮੀਡੀਆ  ਆਡੀਓ"</string>
@@ -4852,8 +4859,8 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"ਐਪਾਂ ਵਿਚਾਲੇ ਅਦਲਾ-ਬਦਲੀ ਕਰਨ ਲਈ, ਹੋਮ ਬਟਨ \'ਤੇ ਉੱਪਰ ਵੱਲ ਸਵਾਈਪ ਕਰੋ। ਸਾਰੀਆਂ ਐਪਾਂ ਦੇਖਣ ਲਈ, ਦੁਬਾਰਾ ਉੱਪਰ ਵੱਲ ਸਵਾਈਪ ਕਰੋ। ਵਾਪਸ ਜਾਣ ਲਈ, \'ਪਿੱਛੇ\' ਬਟਨ \'ਤੇ ਟੈਪ ਕਰੋ।"</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"ਨਵਾਂ ਹੋਮ ਬਟਨ ਅਜ਼ਮਾਓ"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"ਐਪਾਂ ਵਿਚਾਲੇ ਅਦਲਾ-ਬਦਲੀ ਕਰਨ ਲਈ ਨਵੇਂ ਸੰਕੇਤ ਚਾਲੂ ਕਰੋ"</string>
-    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"ਸੁਰੱਖਿਆ ਅਤੇ ਸੰਕਟਕਾਲ"</string>
-    <string name="emergency_dashboard_summary" msgid="401033951074039302">"ਸੰਕਟਕਾਲੀਨ ਸਹਾਇਤਾ, ਡਾਕਟਰੀ ਜਾਣਕਾਰੀ, ਸੁਚੇਤਨਾਵਾਂ"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"ਸੁਰੱਖਿਆ ਅਤੇ ਐਮਰਜੈਂਸੀ"</string>
+    <string name="emergency_dashboard_summary" msgid="401033951074039302">"ਐਮਰਜੈਂਸੀ ਸਹਾਇਤਾ, ਡਾਕਟਰੀ ਜਾਣਕਾਰੀ, ਸੁਚੇਤਨਾਵਾਂ"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"ਇਸ਼ਾਰਾ ਨੈਵੀਗੇਸ਼ਨ"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"ਹੋਮ \'ਤੇ ਜਾਣ ਲਈ, ਸਕ੍ਰੀਨ ਦੇ ਹੇਠਾਂ ਤੋਂ ਉੱਪਰ ਵੱਲ ਸਵਾਈਪ ਕਰੋ। ਐਪਾਂ ਵਿਚਾਲੇ ਅਦਲਾ-ਬਦਲੀ ਕਰਨ ਲਈ, ਹੇਠਾਂ ਤੋਂ ਉੱਪਰ ਵੱਲ ਸਵਾਈਪ ਕਰਕੇ ਦਬਾਈ ਰੱਖੋ ਅਤੇ ਫਿਰ ਛੱਡੋ। ਵਾਪਸ ਜਾਣ ਲਈ, ਸਕ੍ਰੀਨ ਦੇ ਜਾਂ ਤਾਂ ਖੱਬੇ ਜਾਂ ਸੱਜੇ ਕਿਨਾਰੇ ਤੋਂ ਸਵਾਈਪ ਕਰੋ।"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-ਬਟਨ ਨੈਵੀਗੇਸ਼ਨ"</string>
@@ -5293,12 +5300,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"ਕੀ ਸਿਮ ਨੂੰ ਚਾਲੂ ਕਰਨਾ ਹੈ?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"ਕੀ ਤੁਸੀਂ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> \'ਤੇ ਸਵਿੱਚ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"ਕੀ ਸਿਮ ਕਾਰਡ ਦੀ ਵਰਤੋਂ ਕਰਨੀ ਹੈ?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"ਕੀ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ਨੂੰ ਵਰਤਣਾ ਹੈ?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"ਇੱਕ ਸਮੇਂ \'ਤੇ ਸਿਰਫ਼ ਇੱਕ ਸਿਮ ਕਿਰਿਆਸ਼ੀਲ ਹੋ ਸਕਦਾ ਹੈ।\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> \'ਤੇ ਸਵਿੱਚ ਕਰਨ ਨਾਲ ਤੁਹਾਡੀ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ਸੇਵਾ ਰੱਦ ਨਹੀਂ ਹੋਵੇਗੀ।"</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"ਇੱਕ ਸਮੇਂ \'ਤੇ ਸਿਰਫ਼ ਇੱਕ ਡਾਊਨਲੋਡ ਕੀਤਾ ਸਿਮ ਕਿਰਿਆਸ਼ੀਲ ਹੋ ਸਕਦਾ ਹੈ।\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> \'ਤੇ ਸਵਿੱਚ ਕਰਨ ਨਾਲ ਤੁਹਾਡੀ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> ਸੇਵਾ ਰੱਦ ਨਹੀਂ ਹੋਵੇਗੀ।"</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"ਇੱਕ ਸਮੇਂ \'ਤੇ ਸਿਰਫ਼ ਇੱਕ ਸਿਮ ਕਿਰਿਆਸ਼ੀਲ ਹੋ ਸਕਦਾ ਹੈ।\n\nਸਵਿੱਚ ਕਰਨ ਨਾਲ ਤੁਹਾਡੀ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> ਸੇਵਾ ਰੱਦ ਨਹੀਂ ਹੋਵੇਗੀ।"</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"ਤੁਸੀਂ ਇੱਕੋ ਵੇਲੇ 2 ਸਿਮ ਵਰਤ ਸਕਦੇ ਹੋ। <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ਨੂੰ ਵਰਤਣ ਲਈ, ਹੋਰ ਸਿਮ ਬੰਦ ਕਰੋ।"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> \'ਤੇ ਸਵਿੱਚ ਕਰੋ"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ਨੂੰ ਬੰਦ ਕਰੋ"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"ਸਿਮ ਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਤੁਹਾਡੀ ਸੇਵਾ ਰੱਦ ਨਹੀਂ ਹੋਵੇਗੀ"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"ਨੈੱਟਵਰਕ ਨਾਲ ਕਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> \'ਤੇ ਸਵਿੱਚ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"ਕੈਰੀਅਰ ਨੂੰ ਸਵਿੱਚ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"ਕਿਸੇ ਗੜਬੜ ਕਰਕੇ ਕੈਰੀਅਰ ਨੂੰ ਸਵਿੱਚ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"ਕੀ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ਨੂੰ ਬੰਦ ਕਰਨਾ ਹੈ?"</string>
@@ -5450,8 +5462,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"ਲੰਮਾ"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"ਵਾਲੇਟ ਦਿਖਾਓ"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"ਲਾਕ ਸਕ੍ਰੀਨ ਅਤੇ ਤਤਕਾਲ ਸੈਟਿੰਗਾਂ ਤੋਂ ਵਾਲੇਟ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦਿਓ"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"QR ਕੋਡ ਸਕੈਨਰ ਦਿਖਾਓ"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"ਲਾਕ ਸਕ੍ਰੀਨ ਤੋਂ QR ਕੋਡ ਸਕੈਨਰ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"QR ਸਕੈਨਰ ਦਿਖਾਓ"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"ਲਾਕ ਸਕ੍ਰੀਨ ਤੋਂ QR ਕੋਡ ਸਕੈਨਰ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"ਡੀਵਾਈਸ ਕੰਟਰੋਲ ਦਿਖਾਓ"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"ਲਾਕ ਹੋਣ \'ਤੇ ਕੰਟਰੋਲਾਂ ਤੱਕ ਪਹੁੰਚ ਕਰੋ"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"ਉਪਲਬਧ ਹੋਣ \'ਤੇ ਡਬਲ-ਲਾਈਨ ਘੜੀ ਦਿਖਾਓ"</string>
