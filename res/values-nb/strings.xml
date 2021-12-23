@@ -392,9 +392,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Bruk ansiktet til å låse opp telefonen eller autentisere i apper, for eksempel når du logger på eller godkjenner et kjøp.\n\nMerk:\nDu kan bare ha ett ansikt konfigurert om gangen. For å legge til et annet ansikt, slett det nåværende ansiktet.\n\nHvis du ser på telefonen, kan den låses opp, selv om det ikke er meningen.\n\nTelefonen kan låses opp av noen andre hvis den holdes mot ansiktet ditt.\n\nTelefonen kan låses opp av noen som ser veldig ut som deg, for eksempel en tvilling."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Bruk ansiktet til å låse opp telefonen eller autentisere i apper, for eksempel når du logger på eller godkjenner et kjøp.\n\nMerk:\nDu kan bare ha ett ansikt konfigurert om gangen. For å legge til et annet ansikt, slett det nåværende ansiktet.\n\nHvis du ser på telefonen, kan den låses opp, selv om det ikke er meningen.\n\nTelefonen kan låses opp av noen andre hvis den holdes mot ansiktet ditt, selv om øynene dine er lukket.\n\nTelefonen kan låses opp av noen som ser veldig ut som deg, for eksempel en tvilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Vil du slette ansiktsmodellen?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Ansiktsmodellen din blir slettet permanent og sikkert. Etter slettingen trenger du PIN-kode, mønster eller passord når du skal låse opp telefonen eller autentisere i apper."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Vil du slette ansiktsmodellen?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Ansiktsmodellen din blir slettet permanent og sikkert.\n\nEtter slettingen trenger du fingeravtrykk, PIN-kode, mønster eller passord når du skal låse opp telefonen eller autentisere i apper."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Ansiktsmodellen din blir slettet permanent og sikkert.\n\nEtter slettingen trenger du PIN-kode, mønster eller passord når du skal låse opp telefonen eller autentisere i apper."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Ansiktsmodellen din blir slettet permanent og sikkert.\n\nEtter slettingen trenger du PIN-kode, mønster eller passord når du skal låse opp telefonen."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Bruk ansiktslås til å låse opp telefonen"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingeravtrykk"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeravtrykk for jobb"</string>
@@ -481,7 +480,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Slett"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Berør sensoren"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Legg fingeren på sensoren, og løft den når du kjenner en vibrasjon"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Hold fingeren på sensoren til du føler en vibrering"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Hold fingeravtrykket flatt på sensoren til du føler en vibrering"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Trykk og hold på fingeravtrykks-sensoren"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Løft fingeren og berør igjen"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"En gang til"</string>
@@ -489,7 +488,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Løft fingeren gjentatte ganger for å legge til de forskjellige delene av fingeravtrykket ditt"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Trykk og hold hver gang fingeravtrykkikonet beveger seg. Dette bidrar til å registrere mer av fingeravtrykket."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Plassér fingertuppen på sensoren"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Plassér til slutt kantene av fingeren"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Bruk til slutt kantene av fingeren"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Plassér siden av fingeravtrykket på sensoren og hold. Bytt deretter til den andre siden"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dette bidrar til å registrere mer av fingeravtrykket"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrerer fingeravtrykket: <xliff:g id="PERCENTAGE">%d</xliff:g> prosent"</string>
@@ -3243,7 +3242,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Koble til <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Vil du koble fra dette VPN-et?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Koble fra"</string>
-    <string name="vpn_version" msgid="41856553718304367">"Versjon <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_version" msgid="6344167191984400976">"Versjon"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Glem VPN-profilen"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Vil du erstatte det nåværende VPN-et?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Vil du angi alltid på-VPN?"</string>
