@@ -61,7 +61,9 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.wifi.AddNetworkFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConfigureWifiEntryFragment;
@@ -79,6 +81,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
@@ -132,6 +135,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     static final String PREF_KEY_DATA_USAGE = "non_carrier_data_usage";
     private static final String PREF_KEY_RESET_INTERNET = "resetting_your_internet";
+    private static final String PREF_KEY_WIFI_STATUS_MESSAGE = "wifi_status_message_footer";
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
@@ -231,6 +235,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     LayoutPreference mResetInternetPreference;
     @VisibleForTesting
     ConnectedEthernetNetworkController mConnectedEthernetNetworkController;
+    @VisibleForTesting
+    FooterPreference mWifiStatusMessagePreference;
 
     /**
      * Mobile networks list for provider model
@@ -305,6 +311,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         addNetworkMobileProviderController();
         addConnectedEthernetNetworkController();
         addWifiSwitchPreferenceController();
+        mWifiStatusMessagePreference = findPreference(PREF_KEY_WIFI_STATUS_MESSAGE);
     }
 
     private void updateAirplaneModeMsgPreference(boolean visible) {
@@ -717,6 +724,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
+                setWifiScanMessage(/* isWifiEnabled */ true);
                 updateWifiEntryPreferences();
                 break;
 
@@ -732,6 +740,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
+                setWifiScanMessage(/* isWifiEnabled */ false);
                 removeConnectedWifiEntryPreference();
                 removeWifiEntryPreference();
                 setAdditionalSettingsSummaries();
@@ -739,6 +748,34 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 mClickedConnect = false;
                 break;
         }
+    }
+
+    @VisibleForTesting
+    void setWifiScanMessage(boolean isWifiEnabled) {
+        final Context context = getContext();
+        if (context == null) {
+            return;
+        }
+        if (isWifiEnabled || !mWifiManager.isScanAlwaysAvailable()) {
+            mWifiStatusMessagePreference.setVisible(false);
+            return;
+        }
+        if (TextUtils.isEmpty(mWifiStatusMessagePreference.getTitle())) {
+            AnnotationSpan.LinkInfo info = new AnnotationSpan.LinkInfo(
+                AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION,
+                v -> launchWifiScanningFragment());
+            CharSequence text = AnnotationSpan.linkify(
+                context.getText(R.string.wifi_scan_notify_message), info);
+            mWifiStatusMessagePreference.setTitle(text);
+        }
+        mWifiStatusMessagePreference.setVisible(true);
+    }
+
+    private void launchWifiScanningFragment() {
+        new SubSettingLauncher(getContext())
+            .setDestination(WifiScanningFragment.class.getName())
+            .setSourceMetricsCategory(SettingsEnums.SETTINGS_NETWORK_CATEGORY)
+            .launch();
     }
 
     @Override
