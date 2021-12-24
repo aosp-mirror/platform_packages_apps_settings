@@ -302,10 +302,10 @@
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Włącz lokalizację"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Wyłączono"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="few">Włączono – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacje mają dostęp do lokalizacji</item>
-      <item quantity="many">Włączono – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacji ma dostęp do lokalizacji</item>
-      <item quantity="other">Włączono – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacji ma dostęp do lokalizacji</item>
-      <item quantity="one">Włączono – <xliff:g id="COUNT_0">%1$d</xliff:g> aplikacja ma dostęp do lokalizacji</item>
+      <item quantity="few">Włączona – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacje mają dostęp do lokalizacji</item>
+      <item quantity="many">Włączona – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacji ma dostęp do lokalizacji</item>
+      <item quantity="other">Włączona – <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacji ma dostęp do lokalizacji</item>
+      <item quantity="one">Włączona – <xliff:g id="COUNT_0">%1$d</xliff:g> aplikacja ma dostęp do lokalizacji</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Wczytuję…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacje z uprawnieniami dostępu do urządzeń w pobliżu mogą określać położenie połączonych urządzeń względem siebie."</string>
@@ -398,9 +398,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Używaj rozpoznawania twarzy do odblokowywania telefonu i uwierzytelniania w aplikacjach, na przykład podczas logowania lub zatwierdzania zakupów.\n\nPamiętaj:\nNie można mieć kilku skonfigurowanych modeli twarzy jednocześnie. Jeśli chcesz dodać inny model twarzy, usuń bieżący.\n\nPatrząc na telefon, możesz go przypadkowo odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy.\n\nIstnieje możliwość, że ktoś bardzo podobny do Ciebie (np. rodzeństwo), odblokuje Twój telefon."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Używaj rozpoznawania twarzy do odblokowywania telefonu i uwierzytelniania w aplikacjach, na przykład podczas logowania lub zatwierdzania zakupów.\n\nPamiętaj:\nNie można mieć kilku skonfigurowanych modeli twarzy jednocześnie. Jeśli chcesz dodać inny model twarzy, usuń bieżący.\n\nPatrząc na telefon, możesz go przypadkowo odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy (nawet przy zamkniętych oczach).\n\nIstnieje możliwość, że ktoś bardzo podobny do Ciebie (np. rodzeństwo), odblokuje Twój telefon."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Usunąć model twarzy?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Model twarzy zostanie trwale i w bezpieczny sposób usunięty. Po usunięciu tych danych do odblokowywania telefonu i uwierzytelniania się w aplikacjach trzeba będzie używać odcisku palca, kodu PIN, wzoru lub hasła."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Usunąć model twarzy?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Model twarzy zostanie trwale i w bezpieczny sposób usunięty.\n\nPo usunięciu tych danych do odblokowywania telefonu i uwierzytelniania się w aplikacjach trzeba będzie używać odcisku palca, kodu PIN, wzoru lub hasła."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Model twarzy zostanie trwale i w bezpieczny sposób usunięty.\n\nPo usunięciu tych danych do odblokowywania telefonu i uwierzytelniania się w aplikacjach trzeba będzie używać kodu PIN, wzoru lub hasła."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model twarzy zostanie trwale i bezpiecznie usunięty.\n\nPo usunięciu tych danych będziesz potrzebować kodu PIN, wzoru lub hasła do odblokowywania telefonu."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Używaj rozpoznawania twarzy do odblokowywania telefonu"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Odcisk palca"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Odcisk palca – profil służbowy"</string>
@@ -489,7 +488,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Usuń"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dotknij czytnika"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Przyłóż palec do czytnika. Podnieś go, gdy poczujesz wibracje."</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Trzymaj palec na czytniku linii papilarnych do chwili, aż poczujesz wibracje"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Trzymaj palec na czytniku linii papilarnych do chwili, aż poczujesz wibracje"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Połóż palec na czytniku linii papilarnych i przytrzymaj"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Podnieś palec i przyłóż go ponownie"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Jeszcze raz"</string>
@@ -497,7 +496,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Unoś palec, by odcisk był dokładniejszy."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Naciśnij i przytrzymaj za każdym razem, gdy ikona się porusza. Dzięki temu zeskanujesz większą część odcisku palca."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Umieść na czytniku koniuszek palca"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Na koniec umieść na czytniku krawędzie palca"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Na koniec umieść na czytniku krawędzie palca"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Umieść na czytniku palec bokiem i przytrzymaj, a następnie obróć na drugi bok"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dzięki temu zeskanujesz większą część odcisku palca"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Rejestruję odcisk palca – <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
@@ -1002,8 +1001,8 @@
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Używaj mobilnej transmisji danych, gdy sieć Wi-Fi nie ma dostępu do internetu. Mogą obowiązywać opłaty za użycie danych."</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"Dodaj sieć"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Ustawienia Wi‑Fi"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi‑Fi włączy się automatycznie"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi‑Fi nie włączy się automatycznie"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi‑Fi włącza się automatycznie"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi‑Fi nie włącza się automatycznie"</string>
     <string name="wifi_access_points" msgid="5846755709207101844">"Sieci Wi-Fi"</string>
     <string name="wifi_menu_more_options" msgid="1236651929987819716">"Więcej opcji"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi‑Fi Direct"</string>
@@ -1524,7 +1523,7 @@
     <string name="kernel_version" msgid="3513538109381366881">"Wersja jądra"</string>
     <string name="build_number" msgid="9009733242117579826">"Numer kompilacji"</string>
     <string name="module_version" msgid="1787518340082046658">"Aktualizacja systemowa Google Play"</string>
-    <string name="device_info_not_available" msgid="4804474466616712326">"Niedostępna"</string>
+    <string name="device_info_not_available" msgid="4804474466616712326">"Niedostępny"</string>
     <string name="device_status_activity_title" msgid="1812666241137263882">"Stan telefonu"</string>
     <string name="device_status" msgid="7988547478034984649">"Stan telefonu"</string>
     <string name="device_status_summary" product="tablet" msgid="8826216824111648900">"Stan baterii, sieci i inne informacje"</string>
@@ -2366,8 +2365,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Przytrzymaj przyciski głośności, aby otworzyć"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Kliknij ekran trzykrotnie, aby otworzyć"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Otwieranie gestem"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_gesture_settings (6800684770875867559) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Użyj gestu ułatwień dostępu"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Aby użyć tej funkcji, kliknij przycisk ułatwień dostępu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> u dołu ekranu.\n\nAby przełączać się między funkcjami, naciśnij i przytrzymaj przycisk ułatwień dostępu."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Aby użyć tej funkcji, kliknij przycisk ułatwień dostępu na ekranie."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Aby użyć tej funkcji, naciśnij i przytrzymaj oba przyciski głośności."</string>
@@ -3324,7 +3322,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Połącz z: <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Odłączyć tę sieć VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Odłącz"</string>
-    <string name="vpn_version" msgid="41856553718304367">"Wersja <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_version" msgid="6344167191984400976">"Wersja"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Zapomnij VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Zastąpić obecną sieć VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Ustawić stały VPN?"</string>
@@ -3860,7 +3858,7 @@
     <string name="conversation_notifs_category" msgid="2549844862379963273">"Rozmowa"</string>
     <string name="recent_notifications" msgid="1105631022180160436">"Ostatnio wysłane"</string>
     <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"Zobacz wszystkie z ostatnich 7 dni"</string>
-    <string name="general_notification_header" msgid="3669031068980713359">"Zarządzaj"</string>
+    <string name="general_notification_header" msgid="3669031068980713359">"Zarządzanie"</string>
     <string name="app_notification_field" msgid="3858667320444612716">"Ustawienia aplikacji"</string>
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Zarządzaj powiadomieniami z poszczególnych aplikacji"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Ogólne"</string>
@@ -4033,7 +4031,7 @@
       <item quantity="one">%d aplikacja może odczytywać powiadomienia</item>
     </plurals>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Ulepszone powiadomienia"</string>
-    <string name="notification_assistant_summary" msgid="1957783114840908887">"Otrzymuj sugestie działań oraz odpowiedzi i inne podpowiedzi"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"Sugeruj działania, odpowiedzi itd."</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Brak"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Żadna z zainstalowanych aplikacji nie prosiła o dostęp do powiadomień."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Zezwalaj na dostęp do powiadomień"</string>
