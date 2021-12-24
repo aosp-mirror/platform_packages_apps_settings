@@ -1035,7 +1035,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public void onScan(WifiDialog2 dialog, String ssid) {
         // Launch QR code scanner to join a network.
-        startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
+        startActivityForResult(
+                WifiDppUtils.getEnrolleeQrCodeScannerIntent(dialog.getContext(), ssid),
                 REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
     }
 
