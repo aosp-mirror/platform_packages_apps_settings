@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"ภาษา"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"นำออก"</string>
     <string name="add_a_language" msgid="2126220398077503271">"เพิ่มภาษา"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"ภาษา"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"ภาษาที่ต้องการ"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ภาษาของแอป"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"ตั้งค่าภาษาสำหรับแต่ละแอป"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"ภาษาของแอป"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"ภาษาที่แนะนำ"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ทุกภาษา"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"แอปจะตั้งค่าเป็นภาษา<xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>โดยค่าเริ่มต้น และไม่รองรับหลายภาษา"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">นำภาษาที่เลือกออกไหม</item>
       <item quantity="one">นำภาษาที่เลือกออกไหม</item>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"ไม่พร้อมใช้งาน"</string>
     <string name="security_status_title" msgid="6958004275337618656">"สถานะความปลอดภัย"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"ล็อกหน้าจอ หาอุปกรณ์ของฉัน ความปลอดภัยของแอป"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"ความปลอดภัยและความเป็นส่วนตัว"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"สิทธิ์ ล็อกหน้าจอ ความปลอดภัยของแอป"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"เพิ่มใบหน้าแล้ว"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"แตะเพื่อตั้งค่าใบหน้า"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"การปลดล็อกด้วยใบหน้า"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์หรือใช้ในการตรวจสอบสิทธิ์ในแอป เช่น เมื่อคุณลงชื่อเข้าใช้หรืออนุมัติการซื้อ\n\nโปรดทราบ\nคุณตั้งค่าใบหน้าได้ครั้งละ 1 ใบหน้าเท่านั้น หากต้องการเพิ่มใบหน้าอื่น ให้ลบใบหน้าปัจจุบันออก\n\nการดูโทรศัพท์อาจปลดล็อกเครื่องโดยไม่ตั้งใจ\n\nคนอื่นอาจปลดล็อกโทรศัพท์ได้หากถือโทรศัพท์ไว้ตรงหน้าของคุณ\n\nคนที่หน้าคล้ายคุณมากๆ เช่น แฝดของคุณอาจปลดล็อกโทรศัพท์ได้"</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"ใช้ใบหน้าเพื่อปลดล็อกโทรศัพท์หรือใช้ในการตรวจสอบสิทธิ์ในแอป เช่น เมื่อคุณลงชื่อเข้าใช้หรืออนุมัติการซื้อ\n\nโปรดทราบ\nคุณตั้งค่าใบหน้าได้ครั้งละ 1 ใบหน้าเท่านั้น หากต้องการเพิ่มใบหน้าอื่น ให้ลบใบหน้าปัจจุบันออก\n\nการดูโทรศัพท์อาจปลดล็อกเครื่องโดยไม่ตั้งใจ\n\nคนอื่นอาจปลดล็อกโทรศัพท์ได้หากถือโทรศัพท์ไว้ตรงหน้าของคุณ แม้ในขณะที่คุณหลับตาอยู่\n\nคนที่หน้าคล้ายคุณมากๆ เช่น แฝดของคุณอาจปลดล็อกโทรศัพท์ได้"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"ลบรูปแบบใบหน้าใช่ไหม"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"ระบบจะลบรูปแบบใบหน้าออกอย่างถาวรและปลอดภัย หลังจากที่ลบแล้ว คุณจะต้องใช้ PIN, รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์ หรือสำหรับการตรวจสอบสิทธิ์ในแอป"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"ลบรูปแบบใบหน้าใช่ไหม"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"ระบบจะลบรูปแบบใบหน้าออกอย่างถาวรและปลอดภัย\n\nหลังจากที่ลบแล้ว คุณจะต้องใช้ลายนิ้วมือ, PIN, รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์ หรือสำหรับการตรวจสอบสิทธิ์ในแอป"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"ระบบจะลบรูปแบบใบหน้าออกอย่างถาวรและปลอดภัย\n\nหลังจากที่ลบแล้ว คุณจะต้องใช้ PIN, รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์ หรือสำหรับการตรวจสอบสิทธิ์ในแอป"</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"ระบบจะลบรูปแบบใบหน้าออกอย่างถาวรและปลอดภัย\n\nหลังจากที่ลบแล้ว คุณจะต้องใช้ PIN, รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"ใช้การปลดล็อกด้วยใบหน้าเพื่อปลดล็อกโทรศัพท์"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"ลายนิ้วมือ"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"ใช้ลายนิ้วมือสำหรับการทำงาน"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"ลบ"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"แตะเซ็นเซอร์"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"วางนิ้วบนเซ็นเซอร์และยกขึ้นหลังจากรู้สึกถึงการสั่น"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"วางนิ้วบนเซ็นเซอร์จนกว่าจะรู้สึกถึงการสั่น"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"วางลายนิ้วมือราบลงบนเซ็นเซอร์จนกว่าจะรู้สึกถึงแรงสั่น"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"แตะเซ็นเซอร์ลายนิ้วมือค้างไว้"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"ยกนิ้วขึ้นแล้วแตะอีกครั้ง"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"อีกครั้งหนึ่ง"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"ยกนิ้วมือเรื่อยๆ เพื่อเพิ่มส่วนอื่นๆ ของลายนิ้วมือ"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"แตะค้างไว้ทุกครั้งที่ไอคอนลายนิ้วมือเคลื่อนไหว การทำเช่นนี้จะช่วยให้บันทึกลายนิ้วมือของคุณได้มากขึ้น"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"วางปลายนิ้วลงบนเซ็นเซอร์"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"สุดท้าย วางปลายนิ้วของคุณ"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"สุดท้าย ใช้ปลายนิ้วของคุณ"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"วางด้านข้างของนิ้วค้างไว้บนเซ็นเซอร์ จากนั้นเปลี่ยนข้าง"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"การทำเช่นนี้จะช่วยให้บันทึกลายนิ้วมือของคุณได้มากขึ้น"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"กำลังลงทะเบียนลายนิ้วมือ <xliff:g id="PERCENTAGE">%d</xliff:g> เปอร์เซ็นต์"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"โทรผ่าน Wi-Fi สายจะตัดหากสัญญาณ Wi‑Fi ขาดหาย"</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"เมื่อเปิดการโทรผ่าน Wi-Fi โทรศัพท์จะกำหนดเส้นทางการโทรผ่านเครือข่าย Wi-Fi หรือเครือข่ายของผู้ให้บริการได้ ทั้งนี้ขึ้นอยู่กับค่ากำหนดของคุณและสัญญาณฝั่งที่แรงกว่า โปรดสอบถามค่าธรรมเนียมและรายละเอียดอื่นๆ กับผู้ให้บริการก่อนที่จะเปิดฟีเจอร์นี้<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"ที่อยู่ฉุกเฉิน"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"ใช้เป็นตำแหน่งของคุณเมื่อโทรหาหมายเลขฉุกเฉินผ่าน Wi-Fi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"ดูข้อมูลเพิ่มเติม"</annotation>"เกี่ยวกับฟีเจอร์ของ DNS ส่วนตัว"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"เปิด"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"ตั้ง PIN โปรไฟล์งาน"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"ตั้งรูปแบบ"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"ตั้งรูปแบบโปรไฟล์งาน"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"ตั้งค่ารหัสผ่านสำหรับปลดล็อกโทรศัพท์เพื่อให้ปลอดภัยยิ่งขึ้น"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"ตั้งค่า PIN สำหรับปลดล็อกโทรศัพท์เพื่อให้ปลอดภัยยิ่งขึ้น"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"ตั้งค่ารูปแบบสำหรับปลดล็อกโทรศัพท์เพื่อให้ปลอดภัยยิ่งขึ้น"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"ตั้งค่ารหัสผ่านสำหรับปลดล็อกแท็บเล็ตเพื่อให้ปลอดภัยยิ่งขึ้น"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"ตั้งค่า PIN สำหรับปลดล็อกแท็บเล็ตเพื่อให้ปลอดภัยยิ่งขึ้น"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"ตั้งค่ารูปแบบสำหรับปลดล็อกแท็บเล็ตเพื่อให้ปลอดภัยยิ่งขึ้น"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"ตั้งค่ารหัสผ่านสำหรับปลดล็อกอุปกรณ์เพื่อให้ปลอดภัยยิ่งขึ้น"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"ตั้งค่า PIN สำหรับปลดล็อกอุปกรณ์เพื่อให้ปลอดภัยยิ่งขึ้น"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"ตั้งค่ารูปแบบสำหรับปลดล็อกอุปกรณ์เพื่อให้ปลอดภัยยิ่งขึ้น"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ตั้งรหัสผ่านเพื่อใช้ลายนิ้วมือ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ตั้งรูปแบบเพื่อใช้ลายนิ้วมือ"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"เพื่อความปลอดภัย โปรดตั้ง PIN"</string>
@@ -2297,11 +2296,11 @@
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"ขยายเป็นเต็มหน้าจอ ขยายพื้นที่ที่เจาะจง หรือจะสลับไปมาระหว่างตัวเลือกทั้ง 2 อย่างก็ได้"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"เต็มหน้าจอ"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="9191632962955877019">"หน้าจอบางส่วน"</string>
-    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"สลับไปมาระหว่างหน้าจอแบบเต็มกับบางส่วน"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"สลับไปมาระหว่างแบบเต็มหน้าจอกับบางส่วน"</string>
     <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"เลือกวิธีขยาย"</string>
     <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"ขยายเป็นเต็มหน้าจอ"</string>
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"ขยายบางส่วนของหน้าจอ"</string>
-    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"สลับไปมาระหว่างหน้าจอแบบเต็มกับบางส่วน"</string>
+    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"สลับไปมาระหว่างแบบเต็มหน้าจอกับบางส่วน"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"แตะปุ่มเปลี่ยนเพื่อสลับไปมาระหว่างทั้ง 2 ตัวเลือก"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"เปลี่ยนไปใช้ปุ่มการช่วยเหลือพิเศษใช่ไหม"</string>
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"การใช้การแตะ 3 ครั้งเพื่อขยายบางส่วนของหน้าจอจะทำให้การพิมพ์และการดำเนินการอื่นๆ ล่าช้า\n\nปุ่มการช่วยเหลือพิเศษจะลอยอยู่บนหน้าจอเหนือแอปอื่นๆ แตะปุ่มดังกล่าวเพื่อขยาย"</string>
@@ -2417,9 +2416,12 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"สั้นลง"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"ยาวขึ้น"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"เวลาในการคลิกอัตโนมัติ"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"การสั่นและระดับการโต้ตอบการสัมผัส"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"การสั่นเมื่อมีการแจ้งเตือน"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"การสั่นและการโต้ตอบการสัมผัส"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"การโทร"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"การแจ้งเตือนและนาฬิกาปลุก"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"การโต้ตอบการสัมผัสแบบอินเทอร์แอกทีฟ"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"การสั่นเมื่อมีเสียงเรียกเข้า"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"การสั่นเมื่อมีการแจ้งเตือน"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"การตอบสนองการสัมผัส"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"ใช้ \"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\""</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"เปิด <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
@@ -3248,8 +3250,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"เชื่อมต่อกับ <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"ยกเลิกการเชื่อมต่อ VPN นี้ไหม"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"ยกเลิกการเชื่อมต่อ"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"รุ่น"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"ลืม VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"แทนที่ VPN ที่มีอยู่หรือไม่"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"ตั้งค่า VPN แบบเปิดตลอดเวลาหรือไม่"</string>
@@ -3471,9 +3472,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"อินเทอร์เน็ตมือถือไม่พร้อมใช้งาน"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"แตะเพื่อเลือกซิมข้อมูล"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"ใช้ในการโทรทุกครั้ง"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"เลือกซิมสำหรับข้อมูล"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"เลือกซิมสำหรับอินเทอร์เน็ตมือถือ"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"เลือกซิมสำหรับ SMS"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"กำลังสลับซิมข้อมูล การดำเนินการนี้อาจใช้เวลาถึง 1 นาที…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"ใช้อินเทอร์เน็ตมือถือของ <xliff:g id="NEW_SIM">%1$s</xliff:g> ไหม"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"หากเปลี่ยนเป็น <xliff:g id="NEW_SIM">%1$s</xliff:g> ระบบจะไม่ใช้อินเทอร์เน็ตมือถือของ <xliff:g id="OLD_SIM">%2$s</xliff:g> อีก"</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"ใช้ <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"โทรด้วย"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"เลือกซิมการ์ด"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"ซิมหมายเลข <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3537,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, การเชื่อมต่อเครือข่าย, อินเทอร์เน็ต, ไร้สาย, ข้อมูล, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"การแจ้งเตือน Wi‑Fi การแจ้งเตือน wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"ปริมาณการใช้อินเทอร์เน็ต"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"หยุดการสั่น แตะ แป้นพิมพ์"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"ใช้รูปแบบ 24 ชั่วโมง"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"ดาวน์โหลด"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"เปิดด้วย"</string>
@@ -3616,6 +3619,7 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"ระบบสัมผัส, สั่น, หน้าจอ, ความไว"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"ระบบสัมผัส, สั่น, โทรศัพท์, การโทร, ความไว, เสียงเรียกเข้า"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"ระบบสัมผัส, สั่น, ความไว"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"การโต้ตอบการสัมผัส การสั่น การสั่น"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"โหมดประหยัดแบตเตอรี่ ตลอด สม่ำเสมอ โหมดประหยัดพลังงาน แบตเตอรี่"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"กิจวัตร, ตั้งเวลา, โหมดประหยัดแบตเตอรี่, โหมดประหยัดพลังงาน, แบตเตอรี่, อัตโนมัติ, เปอร์เซ็นต์"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, การโทรขั้นสูง, การโทรผ่าน 4g"</string>
@@ -3651,8 +3655,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"เสียงชาร์จและการสั่น"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"เสียงเชื่อมต่อแท่นลำโพง"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"เสียงแตะ"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"การสั่นเมื่อแตะ"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"การตอบสนองแบบรู้สึกได้สำหรับการแตะ แป้นพิมพ์ และอื่นๆ"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"เล่นเสียงจากแท่นลำโพง"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"เสียงทั้งหมด"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"เสียงของสื่อเท่านั้น"</string>
@@ -4849,7 +4851,7 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"ถ่ายเซลฟีได้เร็วขึ้น"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"การนำทางของระบบ"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"การนำทางแบบ 2 ปุ่ม"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"สลับแอปโดยเลื่อนนิ้วขึ้นบนปุ่มหน้าแรก ดูแอปทั้งหมดโดยเลื่อนขึ้นอีกครั้ง กลับโดยแตะปุ่มกลับ"</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"สลับแอปโดยปัดขึ้นบนปุ่มหน้าแรก ดูแอปทั้งหมดโดยปัดขึ้นอีกครั้ง กลับโดยแตะปุ่มกลับ"</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"ลองใช้ปุ่มหน้าแรกใหม่"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"เปิดท่าทางสัมผัสใหม่เพื่อสลับแอป"</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"ความปลอดภัยและกรณีฉุกเฉิน"</string>
@@ -4934,7 +4936,7 @@
     <string name="instant_apps_settings" msgid="4280942494969957858">"ค่ากำหนดของ Instant Apps"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"แอปที่ติดตั้ง"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"ตัวจัดการพื้นที่เก็บข้อมูลกำลังจัดการพื้นที่เก็บข้อมูลของคุณ"</string>
-    <string name="account_for_section_header" msgid="7466759342105251096">"บัญชีสำหรับ <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
+    <string name="account_for_section_header" msgid="7466759342105251096">"บัญชีสำหรับ<xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="configure_section_header" msgid="3126887329521705210">"กำหนดค่า"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"ซิงค์ข้อมูลแอปโดยอัตโนมัติ"</string>
     <string name="auto_sync_personal_account_title" msgid="3544275021920818595">"ซิงค์ข้อมูลส่วนบุคคลอัตโนมัติ"</string>
@@ -5293,12 +5295,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"ต้องการเปิดใช้ซิมใช่ไหม"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"เปลี่ยนเป็น <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ใช่ไหม"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"เปลี่ยนไปใช้ซิมการ์ดใช่ไหม"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"ใช้ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ใช่ไหม"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"ใช้งานซิมได้ทีละ 1 ซิมเท่านั้น\n\nการเปลี่ยนเป็น <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> จะไม่ยกเลิกบริการของ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"ใช้งานซิมที่ดาวน์โหลดมาได้ทีละ 1 ซิมเท่านั้น\n\nการเปลี่ยนเป็น <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> จะไม่ยกเลิกบริการของ <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"ใช้งานซิมได้ทีละ 1 ซิมเท่านั้น\n\nการเปลี่ยนจะไม่ยกเลิกบริการของ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"คุณใช้ได้ 2 ซิมพร้อมกัน หากต้องการใช้ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ให้ปิดอีกซิมหนึ่ง"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"เปลี่ยนเป็น <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"ปิด <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"การปิดซิมจะไม่ยกเลิกบริการ"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"กำลังเชื่อมต่อกับเครือข่าย…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"กำลังเปลี่ยนเป็น <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"เปลี่ยนผู้ให้บริการไม่ได้"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"เปลี่ยนผู้ให้บริการไม่ได้เนื่องจากมีข้อผิดพลาด"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"ต้องการปิดใช้ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ไหม"</string>
@@ -5450,8 +5457,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"นาน"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"แสดง Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"อนุญาตให้เข้าถึง Wallet จากหน้าจอล็อกและการตั้งค่าด่วน"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"แสดงเครื่องมือสแกนคิวอาร์โค้ด"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"อนุญาตให้เข้าถึงเครื่องมือสแกนคิวอาร์โค้ดจากหน้าจอล็อก"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"แสดงเครื่องมือสแกนคิวอาร์"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"อนุญาตให้เข้าถึงเครื่องมือสแกนคิวอาร์จากหน้าจอล็อก"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"แสดงระบบควบคุมอุปกรณ์"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"เข้าถึงระบบควบคุมเมื่อล็อก"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"แสดงนาฬิกาแบบสองบรรทัดเมื่อเป็นไปได้"</string>

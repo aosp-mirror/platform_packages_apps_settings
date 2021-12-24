@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"Idiomas"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Quitar"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Engadir un idioma"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"Idioma"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"Idioma preferido"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Idiomas das aplicacións"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Define o idioma de cada aplicación"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Idioma da aplicación"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomas suxeridos"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Todos os idiomas"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"A aplicación está configurada en <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> de forma predeterminada e non admite varios idiomas."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Queres quitar os idiomas seleccionados?</item>
       <item quantity="one">Queres quitar o idioma seleccionado?</item>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Non dispoñible"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Estado de seguranza"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Bloqueo de pantalla, Localizar o meu dispositivo, seguranza das aplicacións"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Seguranza e privacidade"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"Permisos, bloqueo de pantalla, seguranza da aplicación"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Engadiuse a cara"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Toca para configurar o desbloqueo facial"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Desbloqueo facial"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Utiliza a cara para desbloquear o teléfono ou para autenticarte nas aplicacións (por exemplo, cando queiras iniciar sesión ou aprobar unha compra).\n\nNota:\nNon podes ter varias caras configuradas á vez. Se queres engadir outra, elimina a actual.\n\nAo mirar o teléfono, podes desbloquealo sen querer.\n\nOutra persoa pode desbloquealo se che pon o teléfono diante da cara.\n\nTamén pode desbloquealo alguén que se pareza moito a ti, como un xemelgo."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Utiliza a cara para desbloquear o teléfono ou para autenticarte nas aplicacións (por exemplo, cando queiras iniciar sesión ou aprobar unha compra).\n\nNota:\nNon podes ter varias caras configuradas á vez. Se queres engadir outra, elimina a actual.\n\nAo mirar o teléfono, podes desbloquealo sen querer.\n\nOutra persoa pode desbloquealo se che pon o teléfono diante da cara, aínda que teñas os ollos pechados.\n\nTamén pode desbloquealo alguén que se pareza moito a ti, como un xemelgo."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Queres eliminar o modelo facial?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"O teu modelo facial eliminarase de xeito seguro e permanente. Unha vez eliminado, terás que usar o PIN, o padrón ou o contrasinal para desbloquear o teléfono ou para autenticarte nas aplicacións."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Queres eliminar o modelo facial?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"O teu modelo facial eliminarase de maneira permanente e segura.\n\nUnha vez eliminado, terás que usar a impresión dixital, o PIN, o padrón ou o contrasinal para desbloquear o teléfono ou para autenticarte nas aplicacións."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"O teu modelo facial eliminarase de xeito seguro e permanente.\n\nUnha vez eliminado, terás que usar o PIN, o padrón ou o contrasinal para desbloquear o teléfono ou para autenticarte nas aplicacións."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"O teu modelo facial eliminarase de xeito seguro e permanente.\n\nUnha vez eliminado, terás que usar o PIN, o padrón ou o contrasinal para desbloquear o teléfono."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Usa o desbloqueo facial para desbloquear o teléfono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Impresión dixital"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Impresión dixital"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Eliminar"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toca o sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Coloca o dedo no sensor e levántao cando notes unha vibración"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Mantén o dedo no sensor ata que notes unha vibración"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantén a impresión dixital en horizontal sobre o sensor ata que notes unha vibración"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Mantén premido o sensor de impresión dixital"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Levanta o dedo e volve tocar"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Unha vez máis"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Continúa levantando o dedo para engadir as diferentes partes da túa impresión dixital"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Mantén o sensor premido cada vez que se mova a icona da impresión dixital. Ao facelo, axudas a capturar unha parte máis ampla da túa impresión dixital."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Coloca a punta do dedo no sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Por último, coloca os bordos do dedo"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Por último, utiliza os bordos do dedo"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Mantén a parte lateral da túa impresión dixital no sensor e, despois, cambia ao outro lado"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Ao facelo, axudas a capturar unha parte máis ampla da túa impresión dixital"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Rexistrando impresión dixital (<xliff:g id="PERCENTAGE">%d</xliff:g> por cento)"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Chama por wifi. Se se perde a conexión wifi, a chamada rematará."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Cando está activada a función Chamadas por wifi, o teléfono pode enviar as túas chamadas a través de redes wifi ou da rede do teu operador, dependendo das túas preferencias e de cal teña o sinal máis forte. Antes de activar esta función, consulta co teu operador as tarifas e outra información.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"Enderezo de emerxencia"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Utilízase como a túa localización cando fas unha chamada de emerxencia por wifi"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Máis información"</annotation>" sobre as funcións de DNS privado"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Activado"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Define un PIN para o traballo"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Define un padrón"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Define un padrón para o traballo"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Se queres gozar de seguranza adicional, define un contrasinal para desbloquear o teléfono"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Se queres gozar de seguranza adicional, define un PIN para desbloquear o teléfono"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Se queres gozar de seguranza adicional, define un padrón para desbloquear o teléfono"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Se queres gozar de seguranza adicional, define un contrasinal para desbloquear a tableta"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Se queres gozar de seguranza adicional, define un PIN para desbloquear a tableta"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Se queres gozar de seguranza adicional, define un padrón para desbloquear a tableta"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Se queres gozar de seguranza adicional, define un contrasinal para desbloquear o dispositivo"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Se queres gozar de seguranza adicional, define un PIN para desbloquear o dispositivo"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Se queres gozar de seguranza adicional, define un padrón para desbloquear o dispositivo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Impresión dixital: contrasinal"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Impresión dixital: padrón"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Por cuestións de seguranza, configura un PIN"</string>
@@ -2417,9 +2416,16 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Máis curto"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Máis longo"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tempo do clic automático"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Intensidade táctil e vibración"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibración das notificacións"</string>
+    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
+    <skip />
+    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
+    <skip />
+    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibración do ton"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibración das notificacións"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Reacción aos toques"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Utilizar <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Abrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
@@ -3248,8 +3254,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Conectar con <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Queres desconectar esta VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Desconectar"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"Versión"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Esquecer perfil da VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Queres substituír a VPN existente?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Queres definir a VPN como sempre activa?"</string>
@@ -3471,9 +3476,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Os datos móbiles non están dispoñibles"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Toca para seleccionar unha SIM de datos"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Usar sempre para as chamadas"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"Seleccionar unha SIM para datos"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Escolle unha SIM para os datos móbiles"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Seleccionar unha SIM para as SMS"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"Cambiando SIM de datos. Este proceso pode tardar ata un minuto…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Usar <xliff:g id="NEW_SIM">%1$s</xliff:g> para os datos móbiles?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Se cambias a <xliff:g id="NEW_SIM">%1$s</xliff:g>, deixarase de utilizar <xliff:g id="OLD_SIM">%2$s</xliff:g> para os datos móbiles."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Usar <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Chamar con"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Seleccionar unha tarxeta SIM"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3541,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, conexión de rede, Internet, sen fíos, datos"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"notificación Wifi, notificación wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"uso de datos"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Deter vibración, tocar, teclado"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Usar formato de 24 horas"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Descarga"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Abrir con"</string>
@@ -3616,6 +3623,8 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"tecnoloxía táctil, vibrar, pantalla, sensibilidade"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"tecnoloxía táctil, vibración, teléfono, chamada, sensibilidade, ton"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"tecnoloxía táctil, vibración, sensibilidade"</string>
+    <!-- no translation found for keywords_vibration (670455132028025952) -->
+    <skip />
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"aforro de batería, fixo, persistir, aforro de enerxía, batería"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, planificación, aforro de batería, aforro de enerxía, batería, automático, porcentaxe"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, chamadas avanzadas, chamadas 4G"</string>
@@ -3651,8 +3660,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Vibración e sons ao cargar a batería"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Sons de ancoraxe"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Sons ao tocar"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibración ao tocar"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Reacción táctil ao tocar, usar o teclado e moito máis"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Pezas de altofalante do peirao"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Todo o audio"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Unicamente audio multimedia"</string>
@@ -5293,12 +5300,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Queres activar a SIM?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Queres cambiar a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Queres pasar a utilizar a tarxeta SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Queres usar: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Non se poden ter activadas varias SIM á vez.\n\nAo cambiar a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, non se cancelará o teu servizo de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Non se poden ter activadas varias SIM descargadas á vez.\n\nAo cambiar a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, non se cancelará o teu servizo de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Non se poden ter activadas varias SIM á vez.\n\nAo cambiar, non se cancelará o teu servizo de <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Podes utilizar 2 SIM á vez. Para utilizar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, desactiva a outra SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Cambiar a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Apagar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"A acción de desactivar unha SIM non fará que se cancele o teu servizo"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Establecendo conexión coa rede…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Cambiando a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Non se puido cambiar de operador"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Non se puido cambiar de operador debido a un erro."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Queres desactivar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5450,8 +5462,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Longa"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Mostrar moedeiro"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Permite o acceso ao moedeiro desde a pantalla de bloqueo e o menú Configuración rápida"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Mostrar escáner de códigos QR"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Permite acceder ao escáner de códigos QR desde a pantalla de bloqueo"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Mostrar escáner de QR"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Permite acceder ao escáner de QR desde a pantalla de bloqueo"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Mostrar control de dispositivos"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Accede aos controis cando a pantalla estea bloqueada"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Mostra o reloxo en dúas liñas se está dispoñible"</string>
