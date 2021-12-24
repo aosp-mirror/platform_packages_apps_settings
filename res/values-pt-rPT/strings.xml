@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"Idiomas"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Remover"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Adicionar um idioma"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"Idioma"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"Idioma preferido"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Idiomas da app"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Defina o idioma para cada app"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Idioma da app"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomas sugeridos"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Todos os idiomas"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"A app está definida para <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> por predefinição e não suporta vários idiomas."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Remover o idioma selecionado?</item>
       <item quantity="other">Remover os idiomas selecionados?</item>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Não disponível."</string>
     <string name="security_status_title" msgid="6958004275337618656">"Estado de segurança"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Bloqueio de ecrã, Localizar o meu dispositivo, segurança das apps"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Segurança e privacidade"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"Autorizações, bloqueio de ecrã, segurança da app"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Rosto adicionado."</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Toque para configurar o rosto"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Desbloqueio facial"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Utilize o seu rosto para desbloquear o telemóvel ou efetuar a autenticação em apps, como ao iniciar sessão ou aprovar uma compra.\n\nNão se esqueça:\nSó pode ter um rosto configurado de cada vez. Para adicionar outro rosto, elimine o atual.\n\nPode desbloquear o telemóvel involuntariamente ao olhar para o mesmo.\n\nAlguém pode desbloquear o telemóvel se o segurar junto ao seu rosto.\n\nAlguém muito parecido consigo, como um irmão com traços semelhantes, pode desbloquear o telemóvel."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Utilize o seu rosto para desbloquear o telemóvel ou efetuar a autenticação em apps, como ao iniciar sessão ou aprovar uma compra.\n\nNão se esqueça:\nSó pode ter um rosto configurado de cada vez. Para adicionar outro rosto, elimine o atual.\n\nPode desbloquear o telemóvel involuntariamente ao olhar para o mesmo.\n\nAlguém pode desbloquear o telemóvel se o segurar junto ao seu rosto, mesmo com os olhos fechados.\n\nAlguém muito parecido consigo, como um irmão com traços semelhantes, pode desbloquear o telemóvel."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Eliminar o modelo de rosto?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"O seu modelo de rosto será eliminado de forma permanente e segura. Após a eliminação, precisará do seu PIN, padrão ou palavra-passe para desbloquear o telemóvel ou efetuar a autenticação em apps."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Eliminar o modelo de rosto?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"O seu modelo de rosto será eliminado permanentemente e em segurança.\n\nApós a eliminação, precisará da sua impressão digital, PIN, padrão ou palavra-passe para desbloquear o telemóvel ou para efetuar a autenticação em apps."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"O seu modelo de rosto será eliminado de forma permanente e segura.\n\nApós a eliminação, precisará do seu PIN, padrão ou palavra-passe para desbloquear o telemóvel ou fazer a autenticação em apps."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"O seu modelo de rosto será eliminado de forma permanente e segura.\n\nApós a eliminação, precisará do seu PIN, padrão ou palavra-passe para desbloquear o telemóvel."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Utilize o Desbloqueio facial para desbloquear o telemóvel"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Impressão digital"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Impress. dig. p/ trab."</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Eliminar"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toque no sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Coloque o dedo sobre o sensor e levante-o depois de sentir uma vibração"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Mantenha o dedo no sensor até sentir uma vibração"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantenha toda a impressão digital no sensor até sentir uma vibração"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Toque sem soltar no sensor de impressões digitais"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Levante e toque novamente"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Mais uma vez"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Vá levantando o dedo para adicionar as diferentes partes da sua impressão digital"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Toque sem soltar de cada vez que o ícone da impressão digital se mover. Isto ajuda a capturar mais da sua impressão digital."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Coloque a ponta do dedo no sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Por fim, coloque as extremidades do dedo"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Por fim, utilize as extremidades do dedo"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Coloque o lado da sua impressão digital no sensor, mantenha essa posição e, em seguida, mude para o outro lado"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Isto ajuda a capturar mais da sua impressão digital"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Inscrição da impressão digital: <xliff:g id="PERCENTAGE">%d</xliff:g> por cento"</string>
@@ -1233,8 +1242,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Chamada por Wi‑Fi. Se o Wi‑Fi for perdido, a chamada é terminada."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Se as chamadas Wi-Fi estiverem ativadas, o telemóvel pode encaminhar as chamadas através de redes Wi-Fi ou da rede do seu operador, consoante as suas preferências e do sinal que for mais forte. Antes de ativar esta funcionalidade, verifique junto do seu operador questões como tarifas, entre outras.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"Endereço de emergência"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Utilizado como a sua localização quando efetuar chamadas de emergência através de Wi‑Fi."</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Saiba mais"</annotation>" acerca das funcionalidades de DNS privado"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Ativado"</string>
@@ -1296,8 +1304,8 @@
     <string name="search_settings" msgid="7573686516434589771">"Pesquisar"</string>
     <string name="display_settings" msgid="7197750639709493852">"Ecrã"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Rodar ecrã automaticamente"</string>
-    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Desativada"</string>
-    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Ativada"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Desativado"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Ativado"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Ativada – Com base no rosto"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Ativar deteção facial"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Cores"</string>
@@ -1913,15 +1921,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Defina um PIN de trabalho"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Defina um padrão"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Defina um padrão de trabalho"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Para maior segurança, defina uma palavra-passe para desbloquear o telemóvel"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Para maior segurança, defina um PIN para desbloquear o telemóvel"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Para maior segurança, defina um padrão para desbloquear o telemóvel"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Para maior segurança, defina uma palavra-passe para desbloquear o tablet"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Para maior segurança, defina um PIN para desbloquear o tablet"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Para maior segurança, defina um padrão para desbloquear o tablet"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Para maior segurança, defina uma palavra-passe para desbloquear o dispositivo"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Para maior segurança, defina um PIN para desbloquear o dispositivo"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Para maior segurança, defina um padrão para desbloquear o dispositivo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Defina palavra-passe para usar impressão digital"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Defina padrão para usar impressão digital"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Por motivos de segurança, defina um PIN."</string>
@@ -2396,7 +2395,7 @@
     <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Acerca do limite de tempo para ações (Acessibilidade)"</string>
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Saiba mais acerca do limite de tempo para ações (Acessibilidade)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Tempo para tomar medidas"</string>
-    <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Escolha o tempo durante o qual pretende mostrar mensagens que lhe solicitam que tome medidas, mas que são visíveis apenas temporariamente.\n\nNem todas as aplicações são compatíveis com esta definição."</string>
+    <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Escolha o tempo durante o qual pretende mostrar mensagens que lhe solicitam que tome medidas, mas que são visíveis apenas temporariamente.\n\nNem todas as apps são compatíveis com esta definição."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Atraso ao manter premida a tecla"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversão de cores"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utilizar a inversão de cores"</string>
@@ -2417,9 +2416,16 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Mais curto"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Mais longo"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tempo do clique automático."</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Vibração e intensidade tátil"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibração de notificações"</string>
+    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
+    <skip />
+    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
+    <skip />
+    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibração do toque"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibração de notificações"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Respostas por toque"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Utilizar <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Abrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
@@ -3248,8 +3254,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Ligar a <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Pretende desligar esta VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Desligar"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"Versão"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Esquecer VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Pretende substituir a VPN existente?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Pretende definir a VPN como sempre ativa?"</string>
@@ -3471,9 +3476,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Os dados móveis não estão disponíveis"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Tocar para selecionar um SIM de dados"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Utilizar sempre este para chamadas"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"Selecionar um SIM para dados"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Escolha o SIM para os dados móveis"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Selecione um SIM para SMS."</string>
     <string name="data_switch_started" msgid="6292759843974720112">"A mudar o SIM de dados. Esta ação pode demorar, no máximo, 1 minuto…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Utilizar <xliff:g id="NEW_SIM">%1$s</xliff:g> para dados móveis?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Se mudar para o operador <xliff:g id="NEW_SIM">%1$s</xliff:g>, o operador <xliff:g id="OLD_SIM">%2$s</xliff:g> deixa de ser utilizado para dados móveis."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Utilizar <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Telefonar com"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Selecionar um cartão SIM"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3533,7 +3541,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, Wi-Fi, ligação de rede, Internet, sem fios, dados, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notificação Wi‑Fi, notificação wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"utilização de dados"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Parar vibração, toque, teclado"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Utilizar formato de 24 horas"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Transferir"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Abrir com"</string>
@@ -3616,6 +3623,8 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"funcionalidade tátil, vibrar, ecrã, sensibilidade"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"funcionalidade tátil, vibrar, telemóvel, chamada, sensibilidade, toque"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"funcionalidade tátil, vibrar, sensibilidade"</string>
+    <!-- no translation found for keywords_vibration (670455132028025952) -->
+    <skip />
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"poupança de bateria, fixa, persistente, poupança de energia, bateria"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rotina, horário, poupança de bateria, poupança de energia, bateria, automática, percentagem"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, chamadas avançadas, chamadas 4g"</string>
@@ -3651,8 +3660,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Sons/vibração de carregamento"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Sons da estação de ancoragem"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Sons de toque"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibração de resposta tátil"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Resposta tátil para o toque, o teclado e muito mais."</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Repr. da col. da est. de anc."</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Todo o áudio"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Apenas áudio multimédia"</string>
@@ -4849,15 +4856,15 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Tirar selfies mais rapidamente"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Navegação no sistema"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Navegação com 2 botões"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Para mudar de aplicação, deslize rapidamente para cima no botão página inicial. Para ver todas as aplicações, volte a deslizar rapidamente para cima. Para retroceder, toque no botão Anterior."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Para mudar de app, deslize rapidamente para cima no botão página inicial. Para ver todas as apps, volte a deslizar rapidamente para cima. Para retroceder, toque no botão Anterior."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Experimentar o novo botão página inicial"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Ativar o novo gesto para alternar entre aplicações"</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Segurança e emergência"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Urgência SOS, informações médicas, alertas"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navegação por gestos"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Para aceder à página inicial, deslize rapidamente para cima a partir da parte inferior do ecrã. Para mudar de aplicação, deslize rapidamente para cima a partir da parte inferior do ecrã sem soltar e, em seguida, solte. Para retroceder, deslize rapidamente a partir da extremidade esquerda ou direita do ecrã."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Para aceder à página inicial, deslize rapidamente para cima a partir da parte inferior do ecrã. Para mudar de app, deslize rapidamente para cima a partir da parte inferior do ecrã sem soltar e, em seguida, solte. Para retroceder, deslize rapidamente a partir da extremidade esquerda ou direita do ecrã."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegação com 3 botões"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Retroceda, aceda à página inicial e mude de aplicação com os botões na parte inferior do ecrã."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Retroceda, aceda à página inicial e mude de app com os botões na parte inferior do ecrã."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navegação no sistema, navegação com 2 botões, navegação com 3 botões, navegação por gestos, deslizar rapidamente"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Não suportada pela sua aplicação Página inicial predefinida, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>."</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Mudar de app Página inicial predef."</string>
@@ -5293,12 +5300,17 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Pretende ativar o SIM?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Pretende mudar para <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Pretende mudar para a utilização do cartão SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Utilizar o operador <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Só pode ter um SIM ativo de cada vez.\n\nMudar para o operador <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> não cancela o seu serviço no operador <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Só pode ter um SIM transferido ativo de cada vez.\n\nMudar para o operador <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> não cancela o seu serviço no operador <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Só pode ter um SIM ativo de cada vez.\n\nMudar não cancela o seu serviço no operador <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Pode usar 2 SIMs em simultâneo. Para utilizar o operador <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, desative outro SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Mudar para <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Desativar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"A desativação de um SIM não cancela o seu serviço"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"A estabelecer ligação à rede…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"A mudar para <xliff:g id="CARRIER_NAME">%1$s</xliff:g>…"</string>
+    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
+    <skip />
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Não é possível mudar de operador"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Não é possível mudar de operador devido a um erro."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Pretende desativar o operador <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5450,8 +5462,10 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Longa"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Mostrar carteira"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Permita o acesso à carteira a partir do ecrã de bloqueio e das Definições rápidas"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Mostrar o Leitor de códigos QR"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Permita o acesso ao Leitor de códigos QR a partir do ecrã de bloqueio"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
+    <skip />
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
+    <skip />
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Mostrar controlos de dispositivos"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Aceda aos controlos quando o ecrã está bloqueado"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Apresente o relógio de duas linhas quando estiver disponível"</string>

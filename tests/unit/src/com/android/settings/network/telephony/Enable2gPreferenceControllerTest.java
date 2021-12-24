@@ -46,11 +46,11 @@ public final class Enable2gPreferenceControllerTest {
     private static final int SUB_ID = 2;
 
     @Mock
+    private CarrierConfigManager mCarrierConfigManager;
+    @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
     private TelephonyManager mInvalidTelephonyManager;
-    @Mock
-    private CarrierConfigManager mCarrierConfigManager;
 
     private PersistableBundle mPersistableBundle;
     private Enable2gPreferenceController mController;

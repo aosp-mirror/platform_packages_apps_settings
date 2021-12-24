@@ -19,10 +19,15 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.preference.Preference;
+
+import com.android.settings.R;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -41,6 +46,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private CarrierConfigManager mCarrierConfigManager;
+    private SubscriptionManager mSubscriptionManager;
     private TelephonyManager mTelephonyManager;
 
     /**
@@ -53,6 +59,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
     }
 
     /**
@@ -69,6 +76,36 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     }
 
     @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference == null || !SubscriptionManager.isUsableSubscriptionId(mSubId)) {
+            return;
+        }
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+        boolean isDisabledByCarrier =
+                carrierConfig != null
+                && carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G);
+        preference.setEnabled(!isDisabledByCarrier);
+        String summary;
+        if (isDisabledByCarrier) {
+            summary = mContext.getString(R.string.enable_2g_summary_disabled_carrier,
+                getCarrierName());
+        } else {
+            summary = mContext.getString(R.string.enable_2g_summary);
+        }
+        preference.setSummary(summary);
+    }
+
+    private String getCarrierName() {
+        SubscriptionInfo subInfo = SubscriptionUtil.getSubById(mSubscriptionManager, mSubId);
+        if (subInfo == null) {
+            return "";
+        }
+        final String carrierName = subInfo.getCarrierName().toString();
+        return carrierName;
+    }
+
+    @Override
     public int getAvailabilityStatus(int subId) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
         if (mTelephonyManager == null) {
@@ -78,7 +115,6 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         boolean visible =
                 SubscriptionManager.isUsableSubscriptionId(subId)
                 && carrierConfig != null
-                && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G)
                 && mTelephonyManager.isRadioInterfaceCapabilitySupported(
                     mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
         return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
