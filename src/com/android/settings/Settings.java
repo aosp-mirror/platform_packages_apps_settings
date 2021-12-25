@@ -190,6 +190,8 @@ public class Settings extends SettingsActivity {
             return alternativeFragmentClassname;
         }
     }
+    /** Activity for the Advanced security settings. */
+    public static class SecurityAdvancedSettings extends SettingsActivity { /* empty */ }
     public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
