@@ -55,6 +55,7 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.search.SearchIndexable;
@@ -425,14 +426,16 @@ public class TetherSettings extends RestrictedSettingsFragment
 
     private void updateUsbPreference() {
         boolean usbAvailable = mUsbConnected && !mMassStorageActive;
+        final RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
+                checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId());
 
-        if (usbAvailable) {
+        if (enforcedAdmin != null) {
+            mUsbTether.setDisabledByAdmin(enforcedAdmin);
+        } else if (usbAvailable) {
             mUsbTether.setEnabled(!mDataSaverEnabled);
         } else {
             mUsbTether.setEnabled(false);
         }
-        mUsbTether.setDisabledByAdmin(
-                checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId()));
     }
 
     @VisibleForTesting
