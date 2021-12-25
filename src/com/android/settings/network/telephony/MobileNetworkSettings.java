@@ -280,6 +280,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             return;
         }
 
+        if (SubscriptionUtil.getSubscriptionOrDefault(getContext(), mSubId) == null) {
+            finishFragment();
+            return;
+        }
+
         ThreadUtils.postOnMainThread(() -> {
             mActiveSubscriptionsListenerCount = 0;
             redrawPreferenceControllers();
