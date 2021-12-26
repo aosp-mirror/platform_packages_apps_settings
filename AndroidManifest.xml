@@ -274,10 +274,6 @@
                 <action android:name="android.settings.WIFI_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="1">
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wifi.WifiSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -297,7 +293,7 @@
 
         <activity
             android:name="Settings$NetworkProviderSettingsActivity"
-            android:label="@string/network_dashboard_title"
+            android:label="@string/provider_internet_settings"
             android:icon="@drawable/ic_homepage_network"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize">
@@ -312,6 +308,26 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.network.NetworkProviderSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$WifiDetailsSettingsActivity"
+            android:label="@string/wifi_details_title"
+            android:icon="@drawable/ic_homepage_network"
+            android:exported="true"
+            android:permission="android.permission.CHANGE_WIFI_STATE"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <!-- The intent action is only public to OEM, because a special library is required. -->
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.WIFI_DETAILS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.details.WifiNetworkDetailsFragment" />
+            <meta-data
+                android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
 
@@ -1405,6 +1421,23 @@
         </activity>
 
         <activity
+            android:name="Settings$WifiScanningSettingsActivity"
+            android:label="@string/location_scanning_wifi_always_scanning_title"
+            android:icon="@drawable/ic_homepage_location"
+            android:exported="true"
+            android:permission="android.permission.CHANGE_WIFI_STATE"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.WIFI_SCANNING_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.location.WifiScanningFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
             android:name=".Settings$SecurityDashboardActivity"
             android:label="@string/security_settings_title"
             android:icon="@drawable/ic_homepage_security"
@@ -2195,6 +2228,8 @@
         <activity android:name=".development.AppPicker"
                   android:label="@string/select_application" />
 
+        <activity android:name=".development.AdbQrCodeActivity" />
+
         <activity android:name=".development.DSULoader"
                   android:label="Select DSU Package"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
@@ -2225,6 +2260,7 @@
         </activity>
 
         <activity android:name=".bluetooth.BluetoothPairingDialog"
+                  android:permission="android.permission.BLUETOOTH_PRIVILEGED"
                   android:excludeFromRecents="true"
                   android:windowSoftInputMode="stateVisible|adjustResize"
                   android:theme="@style/Theme.AlertDialog"
@@ -2988,10 +3024,6 @@
             </intent-filter>
         </activity>
 
-        <!--
-            The Wi-Fi result data will only be returned from WifiDialogActivity if the calling
-            package has ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION permission. (see b/185126813)
-        -->
         <activity
             android:name=".wifi.WifiDialogActivity"
             android:label=""

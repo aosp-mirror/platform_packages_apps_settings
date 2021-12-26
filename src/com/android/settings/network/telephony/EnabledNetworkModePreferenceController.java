@@ -23,9 +23,11 @@ import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -59,16 +61,25 @@ public class EnabledNetworkModePreferenceController extends
     private CarrierConfigManager mCarrierConfigManager;
     private PreferenceEntriesBuilder mBuilder;
     private SubscriptionsChangeListener mSubscriptionsListener;
+    private int mCallState = TelephonyManager.CALL_STATE_IDLE;
+    private PhoneCallStateTelephonyCallback mTelephonyCallback;
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
         mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
+        if (mTelephonyCallback == null) {
+            mTelephonyCallback = new PhoneCallStateTelephonyCallback();
+        }
     }
 
     @Override
     public int getAvailabilityStatus(int subId) {
         boolean visible;
+        if (!isCallStateIdle()) {
+            return AVAILABLE_UNSEARCHABLE;
+        }
+
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
@@ -87,23 +98,28 @@ public class EnabledNetworkModePreferenceController extends
 
         return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
+    protected boolean isCallStateIdle() {
+        return mCallState == TelephonyManager.CALL_STATE_IDLE;
+    }
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
         mSubscriptionsListener.start();
-        if (mAllowedNetworkTypesListener == null) {
+        if (mAllowedNetworkTypesListener == null || mTelephonyCallback == null) {
             return;
         }
         mAllowedNetworkTypesListener.register(mContext, mSubId);
+        mTelephonyCallback.register(mTelephonyManager, mSubId);
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
         mSubscriptionsListener.stop();
-        if (mAllowedNetworkTypesListener == null) {
+        if (mAllowedNetworkTypesListener == null || mTelephonyCallback == null) {
             return;
         }
         mAllowedNetworkTypesListener.unregister(mContext, mSubId);
+        mTelephonyCallback.unregister();
     }
 
     @Override
@@ -125,6 +141,7 @@ public class EnabledNetworkModePreferenceController extends
         listPreference.setEntryValues(mBuilder.getEntryValues());
         listPreference.setValue(Integer.toString(mBuilder.getSelectedEntryValue()));
         listPreference.setSummary(mBuilder.getSummary());
+        listPreference.setEnabled(isCallStateIdle());
     }
 
     @Override
@@ -157,7 +174,6 @@ public class EnabledNetworkModePreferenceController extends
                         updatePreference();
                     });
         }
-
         lifecycle.addObserver(this);
     }
 
@@ -826,6 +842,43 @@ public class EnabledNetworkModePreferenceController extends
             return mIs5gEntryDisplayed;
         }
 
+    }
+
+    @VisibleForTesting
+    class PhoneCallStateTelephonyCallback extends TelephonyCallback implements
+            TelephonyCallback.CallStateListener {
+
+        private TelephonyManager mTelephonyManager;
+
+        @Override
+        public void onCallStateChanged(int state) {
+            Log.d(LOG_TAG, "onCallStateChanged:" + state);
+            mCallState = state;
+            mBuilder.updateConfig();
+            updatePreference();
+        }
+
+        public void register(TelephonyManager telephonyManager, int subId) {
+            mTelephonyManager = telephonyManager;
+
+            // assign current call state so that it helps to show correct preference state even
+            // before first onCallStateChanged() by initial registration.
+            mCallState = mTelephonyManager.getCallState(subId);
+            mTelephonyManager.registerTelephonyCallback(
+                    mContext.getMainExecutor(), mTelephonyCallback);
+        }
+
+        public void unregister() {
+            mCallState = TelephonyManager.CALL_STATE_IDLE;
+            if (mTelephonyManager != null) {
+                mTelephonyManager.unregisterTelephonyCallback(this);
+            }
+        }
+    }
+
+    @VisibleForTesting
+    PhoneCallStateTelephonyCallback getTelephonyCallback() {
+        return mTelephonyCallback;
     }
 
     @Override

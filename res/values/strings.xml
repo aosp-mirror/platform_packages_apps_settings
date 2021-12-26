@@ -726,6 +726,7 @@
     <string name="security_dashboard_summary">Screen lock, Find My Device, app security</string>
 
     <!-- Face enrollment and settings --><skip />
+    <!-- Note: Update FaceEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
     <!-- Message shown in summary field when face unlock is set up. [CHAR LIMIT=40] -->
     <string name="security_settings_face_preference_summary">Face added</string>
     <!-- Message shown in summary field when Face Unlock is not set up. [CHAR LIMIT=54] -->
@@ -879,8 +880,12 @@
     <string name="security_settings_face_settings_context_subtitle">Use Face Unlock to unlock your phone</string>
 
     <!-- Fingerprint enrollment and settings --><skip />
+    <!-- Note: Update FingerprintEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
     <!-- Title shown for menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_preference_title">Fingerprint</string>
+    <!-- Fingerprint enrollment and settings --><skip />
+    <!-- Title shown for work menu item that launches fingerprint settings or enrollment [CHAR LIMIT=22] -->
+    <string name="security_settings_work_fingerprint_preference_title">Fingerprint for work</string>
     <!-- Fingerprint managment category title - configuration options for managing enrolled fingerprints [CHAR LIMIT=22] -->
     <string name="fingerprint_manage_category_title">Manage fingerprints</string>
     <!-- Fingerprint category title - configuration options for managing fingerprint enrollment [CHAR LIMIT=22] -->
@@ -1059,10 +1064,16 @@
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon">Follow the fingerprint icon</string>
     <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_repeat_message">Keep lifting your finger to add the different parts of your fingerprint</string>
-    <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=NONE] -->
-    <string name="security_settings_udfps_enroll_repeat_message">Touch &amp; hold each time the fingerprint icon moves. This helps capture your full fingerprint.</string>
-    <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor.-->
-    <string name="security_settings_udfps_enroll_repeat_a11y_message">This helps capture your full fingerprint</string>
+    <!-- Message shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=160] -->
+    <string name="security_settings_udfps_enroll_repeat_message">Touch &amp; hold each time the fingerprint icon moves. This helps capture more of your fingerprint.</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_fingertip_title">Place the tip of your finger on the sensor</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_edge_title">Finally, place the edges of your finger</string>
+    <!-- Message shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=160] -->
+    <string name="security_settings_udfps_enroll_edge_message">Place the side of your fingerprint on the sensor and hold, then switch to the other side</string>
+    <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor. [CHAR LIMIT=160] -->
+    <string name="security_settings_udfps_enroll_repeat_a11y_message">This helps capture more of your fingerprint</string>
     <!-- Message read to a11y users when enrollment progress is made. The number is from 0 to 100. [CHAR LIMIT=NONE]-->
     <string name="security_settings_udfps_enroll_progress_a11y_message">Enrolling fingerprint <xliff:g id="percentage" example="10">%d</xliff:g> percent</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
@@ -5196,7 +5207,7 @@
     <string name="allow_bind_app_widget_activity_allow_bind_title">Create widget and allow access?</string>
 
     <!-- Message in dialog that pops up when an app requests permission to bind a widget [CHAR LIMIT=NONE] -->
-    <string name="allow_bind_app_widget_activity_allow_bind">After you create the widget, <xliff:g id="widget_host_name">%1$s</xliff:g> can access all data it displays.</string>
+    <string name="allow_bind_app_widget_activity_allow_bind">After you create the widget, the application can access everything displayed.\n\nApplication: <xliff:g id="widget_host_name">%1$s</xliff:g>\nWidget: <xliff:g id="widget_label">%2$s</xliff:g>\n</string>
 
     <!-- Text for checkbox that pops up when an app requests permission to bind a widget [CHAR LIMIT=NONE] -->
     <string name="allow_bind_app_widget_activity_always_allow_bind">Always allow <xliff:g id="widget_host_name">%1$s</xliff:g> to create widgets and access their data</string>
@@ -6162,6 +6173,12 @@
     <string name="battery_tip_limited_temporarily_title">Charging temporarily limited</string>
     <!-- Summary for the battery limited temporarily tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_limited_temporarily_summary">To preserve your battery. Learn more.</string>
+    <!-- Text of battery limited temporarily tip resume charge button. [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge">Resume charging</string>
+    <!-- Message of battery limited temporarily tip. [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default">In certain conditions, like high temperatures and long charging periods, charging may be limited to <xliff:g id="percent" example="50%">%1$s</xliff:g> to help preserve battery health.\n\nWhen those conditions end, your phone will automatically charge normally.</string>
+    <!-- Message of battery limited temporarily tip. [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet">In certain conditions, like high temperatures and long charging periods, charging may be limited to <xliff:g id="percent" example="50%">%1$s</xliff:g> to help preserve battery health.\n\nWhen those conditions end, your tablet will automatically charge normally.</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message" product="default">Because you’ve used your phone more than usual, your battery may run out sooner than it normally would.\n\nApps using most battery:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
@@ -6624,10 +6641,6 @@
     <string name="battery_system_usage_for">System usage for <xliff:g id="slot">%s</xliff:g></string>
     <!-- [CHAR_LIMIT=NONE] Battery app usage section header -->
     <string name="battery_app_usage_for">App usage for <xliff:g id="slot">%s</xliff:g></string>
-    <!-- [CHAR_LIMIT=NONE] Battery usage section header for a specific time slot -->
-    <string name="battery_usage_time_am">am</string>
-    <!-- [CHAR_LIMIT=NONE] Battery usage section header for a specific time slot -->
-    <string name="battery_usage_time_pm">pm</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total usage time less than a minute -->
     <string name="battery_usage_total_less_than_one_minute">Total: less than a min</string>
     <!-- [CHAR_LIMIT=NONE] Battery usage item for total background time less than a minute -->
@@ -7960,9 +7973,13 @@
     <!-- Enhaced 4G LTE Mode title for carriers who want to show 4G Calling.  [CHAR LIMIT=50] -->
     <string name="enhanced_4g_lte_mode_title_4g_calling">4G Calling</string>
     <!-- Enhaced 4G LTE Mode summary.  [CHAR LIMIT=100] -->
-    <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice and other communications (recommended)</string>
+    <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice calls (recommended)</string>
     <!-- Enhaced 4G LTE Mode summary for 4g calling.  [CHAR LIMIT=100] -->
-    <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice and other communications (recommended)</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice calls (recommended)</string>
+    <!-- NR advanced calling(VoNR or Vo5G) title.  [CHAR LIMIT=50] -->
+    <string name="nr_advanced_calling_title">Vo5G</string>
+    <!-- NR advanced calling(VoNR or Vo5G) summary.  [CHAR LIMIT=NONE] -->
+    <string name="nr_advanced_calling_summary">Use 5G for voice calls</string>
     <!-- Title of a preference determining whether or not the user has allowed the device to share
          their contacts' phone numbers with their carrier in order to implement contact discovery,
          which is a service that exchanges contacts with the carrier to determine if your
@@ -8356,6 +8373,9 @@
 
     <!-- List of synonyms for the enhance 4G LTE titles, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_enhance_4g_lte">volte, advanced calling, 4g calling</string>
+
+    <!-- List of synonyms for the NR advanced calling(VoNR or Vo5G) titles, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_nr_advanced_calling">vo5g, vonr, advanced calling, 5g calling</string>
 
     <!-- List of synonyms for add language, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_add_language">add language, add a language</string>
@@ -9335,7 +9355,7 @@
     <string name="notification_listener_security_warning_summary">
         <xliff:g id="notification_listener_name">%1$s</xliff:g> will be able to read all notifications,
         including personal information such as contact names and the text of messages you receive.
-        This app will also be able to dismiss notifications or take action on buttons in notifications, including answering phone calls.
+        This app will also be able to snooze or dismiss notifications or take action on buttons in notifications, including answering phone calls.
         \n\nThis will also give the app the ability to turn Do Not Disturb on or off and change related settings.
     </string>
     <string name="notification_listener_disable_warning_summary">
@@ -13230,6 +13250,15 @@
     <!-- Power menu explanation where to find prevent ringing option. [CHAR LIMIT=NONE] -->
     <string name="power_menu_power_prevent_ringing_hint">Prevent ringing:\nShortcut available in the volume menu.</string>
 
+    <!-- Power menu title of the seekbar setting controlling duration of how long the power button must be held to invoke assistant. [CHAR LIMIT=NONE]-->
+    <string name="power_menu_long_press_for_assist_sensitivity_title">Press &amp; hold duration</string>
+    <!-- Power menu summary of the seekbar setting controlling duration of how long the power button must be held to invoke assistant. [CHAR LIMIT=NONE]-->
+    <string name="power_menu_long_press_for_assist_sensitivity_summary">Adjust sensitivity by choosing how long to press &amp; hold the power button</string>
+    <!-- Label at the lowest end of duration slider for long press power invocation of assistant. [CHAR LIMIT=30] -->
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label">Short</string>
+    <!-- Label at the highest end of duration slider for long press power invocation of assistant. [CHAR LIMIT=30] -->
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label">Long</string>
+
     <!-- Wallet (formerly Cards and passes) toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_wallet_setting_toggle">Show wallet</string>
     <!-- Wallet (formerly Cards and passes) summary [CHAR LIMIT=NONE] -->
@@ -13333,8 +13362,6 @@
     <string name="calls_sms_no_sim">No SIM</string>
     <!-- Network & internet preferences title [CHAR LIMIT=NONE] -->
     <string name="network_and_internet_preferences_title">Network preferences</string>
-    <!-- Network & internet preferences summary [CHAR LIMIT=NONE] -->
-    <string name="network_and_internet_preferences_summary">Connect to public networks</string>
     <!-- Search keywords for "Internet" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_internet">network connection, internet, wireless, data, wifi, wi-fi, wi fi, cellular, mobile, cell carrier, 4g, 3g, 2g, lte</string>
     <!-- Slice title text for turning on the Wi-Fi networks. [CHAR LIMIT=40] -->
@@ -13367,8 +13394,10 @@
     <string name="carrier_wifi_network_title">W+ network</string>
     <!-- Provider Model: title of SIM category -->
     <string name="sim_category_title">SIM</string>
-    <!-- Provider Model: title of Downloaded category. [CHAR LIMIT=50] -->
+    <!-- Provider Model: title of Downloaded SIM category. [CHAR LIMIT=50] -->
     <string name="downloaded_sim_category_title">DOWNLOADED SIM</string>
+    <!-- Provider Model: title of Downloaded SIMs category. [CHAR LIMIT=50] -->
+    <string name="downloaded_sims_category_title">DOWNLOADED SIMS</string>
     <!-- Provider Model: summary of Active in SIM category. [CHAR LIMIT=50] -->
     <string name="sim_category_active_sim">Active</string>
     <!-- Provider Model: summary of Inactive in SIM category. [CHAR LIMIT=50] -->
@@ -13381,6 +13410,9 @@
     <string name="default_active_sim_sms">SMS</string>
     <!-- Provider Model: summary of default mobile data. [CHAR LIMIT=50] -->
     <string name="default_active_sim_mobile_data">mobile data</string>
+    <!-- Provider Model: Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
+    scanning is on. To mark a link to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
+    <string name="wifi_scan_notify_message">To improve device experience, apps and services can still scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location-based features and services. You can change this in Wi\u2011Fi scanning settings. <annotation id="link">Change</annotation></string>
 
     <!-- Summary text separator for preferences including a short description
          (eg. "Connected / 5G"). [CHAR LIMIT=50] -->
@@ -13551,6 +13583,15 @@
     <string name="game_settings_title">Game settings</string>
     <!-- Summary for Game settings entry. [CHAR_LIMIT=NONE] -->
     <string name="game_settings_summary">Turn on Game Dashboard shortcut, etc</string>
+
+    <!-- Content description of the previous button to bring user to the previous preview page. -->
+    <string name="previous_page_content_description">Previous</string>
+
+    <!-- Content description of the next button to bring user to the next preview page. -->
+    <string name="next_page_content_description">Next</string>
+
+    <!-- Content description of preview pager in colors preview -->
+    <string name="colors_viewpager_content_description">Color preview</string>
 
     <!-- Bluetooth sim card permission alert for notification title [CHAR LIMIT=none] -->
     <string name="bluetooth_sim_card_access_notification_title">SIM card access request</string>

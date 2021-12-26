@@ -72,6 +72,11 @@ public class NotificationHistoryAdapter extends
     }
 
     @Override
+    public long getItemId(int position) {
+        return mValues.get(position).hashCode();
+    }
+
+    @Override
     public void onBindViewHolder(final @NonNull NotificationHistoryViewHolder holder,
             int position) {
         final HistoricalNotification hn = mValues.get(position);
@@ -85,7 +90,6 @@ public class NotificationHistoryAdapter extends
                     .putExtra(EXTRA_APP_PACKAGE, hn.getPackage())
                     .putExtra(EXTRA_CHANNEL_ID, hn.getChannelId())
                     .putExtra(EXTRA_CONVERSATION_ID, hn.getConversationId());
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             holder.itemView.getContext().startActivityAsUser(intent, UserHandle.of(hn.getUserId()));
         };
         holder.itemView.setOnClickListener(onClick);
