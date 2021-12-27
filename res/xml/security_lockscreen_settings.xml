@@ -79,6 +79,7 @@
             android:key="ambient_display_always_on"
             android:title="@string/doze_always_on_title"
             android:summary="@string/doze_always_on_summary"
+            settings:keywords="@string/keywords_always_show_time_info"
             settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController"
             settings:userRestriction="no_ambient_display" />
 
