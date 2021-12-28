@@ -45,7 +45,6 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -162,15 +161,14 @@ public class NetworkProviderSettingsTest {
 
     @Test
     public void addNetworkFragmentSendResult_onActivityResult_shouldHandleEvent() {
-        final NetworkProviderSettings NetworkProviderSettings = spy(new NetworkProviderSettings());
         final Intent intent = new Intent();
-        doNothing().when(NetworkProviderSettings).handleAddNetworkRequest(anyInt(),
+        doNothing().when(mNetworkProviderSettings).handleAddNetworkRequest(anyInt(),
                 any(Intent.class));
 
-        NetworkProviderSettings.onActivityResult(NetworkProviderSettings.ADD_NETWORK_REQUEST,
+        mNetworkProviderSettings.onActivityResult(NetworkProviderSettings.ADD_NETWORK_REQUEST,
                 Activity.RESULT_OK, intent);
 
-        verify(NetworkProviderSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
+        verify(mNetworkProviderSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
     }
 
     @Test

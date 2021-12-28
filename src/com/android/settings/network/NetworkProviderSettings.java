@@ -266,11 +266,20 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         setPinnedHeaderView(R.layout.progress_header);
         setProgressBarVisible(false);
 
-        mWifiManager = activity.getSystemService(WifiManager.class);
-        if (mWifiManager != null) {
+        if (hasWifiManager()) {
             setLoading(true, false);
             mIsViewLoading = true;
         }
+    }
+
+    private boolean hasWifiManager() {
+        if (mWifiManager != null) return true;
+
+        Context context = getContext();
+        if (context == null) return false;
+
+        mWifiManager = context.getSystemService(WifiManager.class);
+        return (mWifiManager != null);
     }
 
     @Override
@@ -337,7 +346,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     }
 
     private void addWifiSwitchPreferenceController() {
-        if (mWifiManager == null) return;
+        if (!hasWifiManager()) return;
         if (mWifiSwitchPreferenceController == null) {
             mWifiSwitchPreferenceController =
                     new WifiSwitchPreferenceController(getContext(), getSettingsLifecycle());
@@ -349,7 +358,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (mWifiManager != null) {
+        if (hasWifiManager()) {
             mWifiPickerTrackerHelper =
                     new WifiPickerTrackerHelper(getSettingsLifecycle(), getContext(), this);
             mWifiPickerTracker = mWifiPickerTrackerHelper.getWifiPickerTracker();
@@ -420,7 +429,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     public void onStart() {
         super.onStart();
         if (mIsViewLoading) {
-            final long delayMillis = (mWifiManager != null && mWifiManager.isWifiEnabled())
+            final long delayMillis = (hasWifiManager() && mWifiManager.isWifiEnabled())
                     ? 1000 : 100;
             getView().postDelayed(mRemoveLoadingRunnable, delayMillis);
         }
@@ -482,7 +491,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (mWifiManager == null) {
+        if (!hasWifiManager()) {
             // Do nothing
         } else if (requestCode == ADD_NETWORK_REQUEST) {
             handleAddNetworkRequest(resultCode, data);
@@ -720,7 +729,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     /** Called when the state of Wifi has changed. */
     @Override
     public void onWifiStateChanged() {
-        if (mIsRestricted || mWifiManager == null) {
+        if (mIsRestricted || !hasWifiManager()) {
             return;
         }
         final int wifiState = mWifiPickerTracker.getWifiState();
@@ -770,7 +779,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
 
         final LocationManager locationManager = context.getSystemService(LocationManager.class);
-        if (mWifiManager == null || isWifiEnabled || !locationManager.isLocationEnabled()
+        if (!hasWifiManager() || isWifiEnabled || !locationManager.isLocationEnabled()
                 || !mWifiManager.isScanAlwaysAvailable()) {
             mWifiStatusMessagePreference.setVisible(false);
             return;
@@ -1063,7 +1072,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         final Context context = getContext();
         final PowerManager powerManager = context.getSystemService(PowerManager.class);
         final ContentResolver contentResolver = context.getContentResolver();
-        return mWifiManager != null
+        return hasWifiManager()
                 && mWifiManager.isAutoWakeupEnabled()
                 && mWifiManager.isScanAlwaysAvailable()
                 && Settings.Global.getInt(contentResolver,
@@ -1085,7 +1094,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     private void handleAddNetworkSubmitEvent(Intent data) {
         final WifiConfiguration wifiConfiguration = data.getParcelableExtra(
                 AddNetworkFragment.WIFI_CONFIG_KEY);
-        if (wifiConfiguration != null && mWifiManager != null) {
+        if (wifiConfiguration != null && hasWifiManager()) {
             mWifiManager.save(wifiConfiguration, mSaveListener);
         }
     }
@@ -1122,7 +1131,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onSubmit(WifiDialog2 dialog) {
-        if (mWifiManager == null) return;
+        if (!hasWifiManager()) return;
 
         final int dialogMode = dialog.getMode();
         final WifiConfiguration config = dialog.getController().getConfig();
