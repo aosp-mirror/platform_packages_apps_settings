@@ -226,4 +226,32 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
         return new UserInfo(PRIMARY_USER_ID, null, null,
                 UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_ADMIN | UserInfo.FLAG_PRIMARY);
     }
+
+    protected boolean setUserEphemeral(@UserIdInt int userId, boolean enableEphemeral) {
+        UserInfo userInfo = mUserProfileInfos.stream()
+                .filter(user -> user.id == userId)
+                .findFirst()
+                .orElse(super.getUserInfo(userId));
+
+        boolean isSuccess = false;
+        boolean isEphemeralUser =
+                        (userInfo.flags & UserInfo.FLAG_EPHEMERAL) != 0;
+        boolean isEphemeralOnCreateUser =
+                (userInfo.flags & UserInfo.FLAG_EPHEMERAL_ON_CREATE)
+                    != 0;
+        // when user is created in ephemeral mode via FLAG_EPHEMERAL
+        // its state cannot be changed.
+        // FLAG_EPHEMERAL_ON_CREATE is used to keep track of this state
+        if (!isEphemeralOnCreateUser) {
+            isSuccess = true;
+            if (isEphemeralUser != enableEphemeral) {
+                if (enableEphemeral) {
+                    userInfo.flags |= UserInfo.FLAG_EPHEMERAL;
+                } else {
+                    userInfo.flags &= ~UserInfo.FLAG_EPHEMERAL;
+                }
+            }
+        }
+        return isSuccess;
+    }
 }
