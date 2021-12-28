@@ -88,10 +88,11 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
         if (subInfos == null || dds == null) {
             return null;
         }
-        return subInfos.stream().filter(subinfo -> subinfo != dds).findFirst().orElse(null);
+        return subInfos.stream().filter(subinfo -> subinfo.getSubscriptionId()
+                != dds.getSubscriptionId()).findFirst().orElse(null);
     }
 
-    private SubscriptionInfo getDefaultDataSubId() {
+    private SubscriptionInfo getDefaultDataSubInfo() {
         return getSubscriptionManager().getDefaultDataSubscriptionInfo();
     }
 
@@ -101,20 +102,22 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
             return;
         }
 
-        SubscriptionInfo activeSubInfo = getDefaultDataSubId();
-        SubscriptionInfo newSubInfo = getNonDefaultDataSubscriptionInfo(activeSubInfo);
+        SubscriptionInfo currentDataSubInfo = getDefaultDataSubInfo();
+        SubscriptionInfo newSubInfo = getNonDefaultDataSubscriptionInfo(currentDataSubInfo);
 
-        if (newSubInfo == null || activeSubInfo == null) {
+        if (newSubInfo == null || currentDataSubInfo == null) {
+            Log.d(TAG, "one of target SubscriptionInfos is null");
             dismiss();
             return;
         }
-
+        Log.d(TAG, "newSubId: " + newSubInfo.getSubscriptionId()
+                + "currentDataSubID: " + currentDataSubInfo.getSubscriptionId());
         setTargetSubscriptionInfo(newSubInfo);
 
         CharSequence newDataCarrierName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
                 newSubInfo, getContext());
         CharSequence currentDataCarrierName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                activeSubInfo, getContext());
+                currentDataSubInfo, getContext());
 
         String positive = getContext().getString(
                 R.string.select_specific_sim_for_data_button, newDataCarrierName);
