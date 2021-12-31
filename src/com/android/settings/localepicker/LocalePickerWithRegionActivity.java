@@ -17,6 +17,7 @@
 package com.android.settings.localepicker;
 
 import android.app.FragmentTransaction;
+import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -45,6 +46,14 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
                 .replace(R.id.content_frame, selector)
                 .addToBackStack(PARENT_FRAGMENT_NAME)
                 .commit();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final ListFragment listFragment =
+                (ListFragment) getFragmentManager().findFragmentById(R.id.content_frame);
+        listFragment.getListView().setNestedScrollingEnabled(true);
     }
 
     @Override
