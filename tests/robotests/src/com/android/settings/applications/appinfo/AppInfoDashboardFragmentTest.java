@@ -384,6 +384,11 @@ public final class AppInfoDashboardFragmentTest {
                 .isTrue();
     }
 
+    @Test
+    public void shouldSkipForInitialSUW_returnTrue() {
+        assertThat(mFragment.shouldSkipForInitialSUW()).isTrue();
+    }
+
     @Implements(AppUtils.class)
     public static class ShadowAppUtils {
 

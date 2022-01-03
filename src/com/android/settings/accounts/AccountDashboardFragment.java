@@ -72,6 +72,11 @@ public class AccountDashboardFragment extends DashboardFragment {
         return buildPreferenceControllers(context, this /* parent */, authorities);
     }
 
+    @Override
+    protected boolean shouldSkipForInitialSUW() {
+        return true;
+    }
+
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             SettingsPreferenceFragment parent, String[] authorities) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
