@@ -131,7 +131,8 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().registerReceiver(mIntentReceiver, mIntentFilter);
+        getActivity().registerReceiver(mIntentReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     @Override

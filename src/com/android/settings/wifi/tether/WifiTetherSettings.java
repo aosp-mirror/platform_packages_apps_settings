@@ -147,7 +147,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         }
         final Context context = getContext();
         if (context != null) {
-            context.registerReceiver(mTetherChangeReceiver, TETHER_STATE_CHANGE_FILTER);
+            context.registerReceiver(mTetherChangeReceiver, TETHER_STATE_CHANGE_FILTER,
+                    Context.RECEIVER_EXPORTED_UNAUDITED);
         }
     }
 
