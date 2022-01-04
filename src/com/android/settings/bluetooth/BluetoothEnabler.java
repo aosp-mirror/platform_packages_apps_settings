@@ -115,7 +115,8 @@ public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchCh
         }
 
         mSwitchController.startListening();
-        mContext.registerReceiver(mReceiver, mIntentFilter);
+        mContext.registerReceiver(mReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
         mValidListener = true;
     }
 

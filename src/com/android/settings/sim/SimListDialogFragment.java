@@ -200,6 +200,16 @@ public class SimListDialogFragment extends SimDialogFragment implements
             final TextView title = convertView.findViewById(R.id.title);
             final TextView summary = convertView.findViewById(R.id.summary);
 
+            ViewGroup.MarginLayoutParams lp =
+                    (ViewGroup.MarginLayoutParams) parent.getLayoutParams();
+            if (lp != null) {
+                lp.setMargins(0, mContext.getResources().getDimensionPixelSize(
+                        R.dimen.sims_select_margin_top), 0,
+                        mContext.getResources().getDimensionPixelSize(
+                                R.dimen.sims_select_margin_bottom));
+                convertView.setLayoutParams(lp);
+            }
+
             if (sub == null) {
                 if (position == 0) {
                     title.setText(R.string.sim_calls_ask_first_prefs_title);

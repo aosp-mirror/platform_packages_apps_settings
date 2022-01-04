@@ -74,7 +74,8 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
     public void onResume() {
         final IntentFilter filter = new IntentFilter();
         filter.addAction(MediaOutputConstants.ACTION_CLOSE_PANEL);
-        mContext.registerReceiver(mReceiver, filter);
+        mContext.registerReceiver(mReceiver, filter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     /** Invoked when the panel is paused. */

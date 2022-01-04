@@ -429,7 +429,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             mValidListener = true;
         }
 
-        context.registerReceiver(mIntentReceiver, mIntentFilter);
+        context.registerReceiver(mIntentReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
 
         final Intent intent = getActivity().getIntent();
         if (intent.getBooleanExtra(Phone.EXTRA_KEY_ALERT_SHOW, false)) {
