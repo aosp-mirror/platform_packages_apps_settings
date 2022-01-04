@@ -95,6 +95,7 @@ import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
+import com.android.settings.applications.AppStateLocaleBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateMediaManagementAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
@@ -232,7 +233,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_MANAGE_EXTERNAL_STORAGE = 11;
     public static final int LIST_TYPE_ALARMS_AND_REMINDERS = 12;
     public static final int LIST_TYPE_MEDIA_MANAGEMENT_APPS = 13;
-    public static final int LIST_TYPE_APPS_LOCAL = 14;
+    public static final int LIST_TYPE_APPS_LOCALE = 14;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -321,7 +322,7 @@ public class ManageApplications extends InstrumentedFragment
             mNotificationBackend = new NotificationBackend();
             mSortOrder = R.id.sort_order_recent_notification;
         } else if (className.equals(AppLocaleDetails.class.getName())) {
-            mListType = LIST_TYPE_APPS_LOCAL;
+            mListType = LIST_TYPE_APPS_LOCALE;
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -504,7 +505,7 @@ public class ManageApplications extends InstrumentedFragment
                 return SettingsEnums.ALARMS_AND_REMINDERS;
             case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
                 return SettingsEnums.MEDIA_MANAGEMENT_APPS;
-            case LIST_TYPE_APPS_LOCAL:
+            case LIST_TYPE_APPS_LOCALE:
                 return SettingsEnums.APPS_LOCALE_LIST;
             default:
                 return SettingsEnums.PAGE_UNKNOWN;
@@ -629,7 +630,7 @@ public class ManageApplications extends InstrumentedFragment
                 startAppInfoFragment(MediaManagementAppsDetails.class,
                         R.string.media_management_apps_title);
                 break;
-            case LIST_TYPE_APPS_LOCAL:
+            case LIST_TYPE_APPS_LOCALE:
                 startAppInfoFragment(AppLocaleDetails.class,
                         R.string.app_locale_picker_title);
                 break;
@@ -743,9 +744,9 @@ public class ManageApplications extends InstrumentedFragment
                 && mSortOrder != R.id.sort_order_size);
 
         mOptionsMenu.findItem(R.id.show_system).setVisible(!mShowSystem
-                && mListType != LIST_TYPE_HIGH_POWER);
+                && mListType != LIST_TYPE_HIGH_POWER && mListType != LIST_TYPE_APPS_LOCALE);
         mOptionsMenu.findItem(R.id.hide_system).setVisible(mShowSystem
-                && mListType != LIST_TYPE_HIGH_POWER);
+                && mListType != LIST_TYPE_HIGH_POWER && mListType != LIST_TYPE_APPS_LOCALE);
 
         mOptionsMenu.findItem(R.id.reset_app_preferences).setVisible(mListType == LIST_TYPE_MAIN);
 
@@ -1100,6 +1101,8 @@ public class ManageApplications extends InstrumentedFragment
                 mExtraInfoBridge = new AppStateAlarmsAndRemindersBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_MEDIA_MANAGEMENT_APPS) {
                 mExtraInfoBridge = new AppStateMediaManagementAppsBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_APPS_LOCALE) {
+                mExtraInfoBridge = new AppStateLocaleBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1533,7 +1536,7 @@ public class ManageApplications extends InstrumentedFragment
                 case LIST_TYPE_MEDIA_MANAGEMENT_APPS:
                     holder.setSummary(MediaManagementAppsDetails.getSummary(mContext, entry));
                     break;
-                case LIST_TYPE_APPS_LOCAL:
+                case LIST_TYPE_APPS_LOCALE:
                     holder.setSummary(AppLocaleDetails
                             .getSummary(mContext, entry.info.packageName));
                     break;
