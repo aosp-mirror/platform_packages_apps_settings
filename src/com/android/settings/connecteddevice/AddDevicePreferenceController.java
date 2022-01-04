@@ -57,7 +57,8 @@ public class AddDevicePreferenceController extends BasePreferenceController
 
     @Override
     public void onStart() {
-        mContext.registerReceiver(mReceiver, mIntentFilter);
+        mContext.registerReceiver(mReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     @Override
