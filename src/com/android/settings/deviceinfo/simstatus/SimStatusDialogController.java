@@ -637,7 +637,7 @@ public class SimStatusDialogController implements LifecycleObserver {
                 final List<UiccCardInfo> infos = getTelephonyManager().getUiccCardsInfo();
 
                 for (UiccCardInfo info : infos) {
-                    if (info.getSlotIndex() == pSlotId) {
+                    if (info.getPhysicalSlotIndex() == pSlotId) {
                         if (info.isEuicc()) {
                             shouldHaveEid = true;
                             eid = info.getEid();
