@@ -49,7 +49,6 @@
         android:key="privacy_permissions_usage"
         android:title="@string/permissions_usage_title"
         android:summary="@string/permissions_usage_summary"
-        settings:searchable="false"
         settings:controller="com.android.settings.privacy.PrivacyHubPreferenceController">
         <intent android:action="android.intent.action.REVIEW_PERMISSION_USAGE"/>
     </Preference>
@@ -58,8 +57,7 @@
     <Preference
         android:key="privacy_manage_perms"
         android:title="@string/app_permissions"
-        android:summary="@string/runtime_permissions_summary_control_app_access"
-        settings:searchable="false">
+        android:summary="@string/runtime_permissions_summary_control_app_access">
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
