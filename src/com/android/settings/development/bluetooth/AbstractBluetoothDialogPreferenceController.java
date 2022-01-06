@@ -30,6 +30,8 @@ import androidx.preference.Preference;
 import com.android.settings.development.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import java.util.List;
+
 /**
  * Abstract class for Bluetooth A2DP config dialog controller in developer option.
  */
@@ -170,7 +172,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
      *
      * @return Array of {@link BluetoothCodecConfig}.
      */
-    protected BluetoothCodecConfig[] getSelectableConfigs(BluetoothDevice device) {
+    protected List<BluetoothCodecConfig> getSelectableConfigs(BluetoothDevice device) {
         final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;
         if (bluetoothA2dp == null) {
             return null;
@@ -198,11 +200,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
             Log.d(TAG, "Unable to get selectable config. No active device.");
             return null;
         }
-        final BluetoothCodecConfig[] configs = getSelectableConfigs(activeDevice);
-        if (configs == null) {
-            Log.d(TAG, "Unable to get selectable config. Selectable configs is empty.");
-            return null;
-        }
+        final List<BluetoothCodecConfig> configs = getSelectableConfigs(activeDevice);
         for (BluetoothCodecConfig config : configs) {
             if (config.getCodecType() == codecTypeValue) {
                 return config;
@@ -220,7 +218,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
     public void onHDAudioEnabled(boolean enabled) {}
 
     static int getHighestCodec(BluetoothA2dp bluetoothA2dp, BluetoothDevice activeDevice,
-            BluetoothCodecConfig[] configs) {
+            List<BluetoothCodecConfig> configs) {
         if (configs == null) {
             Log.d(TAG, "Unable to get highest codec. Configs are empty");
             return BluetoothCodecConfig.SOURCE_CODEC_TYPE_INVALID;
@@ -231,8 +229,8 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
             return BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC;
         }
         for (int i = 0; i < CODEC_TYPES.length; i++) {
-            for (int j = 0; j < configs.length; j++) {
-                if ((configs[j].getCodecType() == CODEC_TYPES[i])) {
+            for (BluetoothCodecConfig config : configs) {
+                if (config.getCodecType() == CODEC_TYPES[i]) {
                     return CODEC_TYPES[i];
                 }
             }
