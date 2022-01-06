@@ -278,6 +278,11 @@ public class DevelopmentSettingsDashboardFragmentTest {
         verify(controller).onDisableLogPersistDialogRejected();
     }
 
+    @Test
+    public void shouldSkipForInitialSUW_returnTrue() {
+        assertThat(mDashboard.shouldSkipForInitialSUW()).isTrue();
+    }
+
     @Implements(EnableDevelopmentSettingWarningDialog.class)
     public static class ShadowEnableDevelopmentSettingWarningDialog {
 
