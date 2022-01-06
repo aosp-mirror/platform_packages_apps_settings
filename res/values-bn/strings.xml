@@ -397,6 +397,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"আপনার ফেস মডেল স্থায়ীভাবে এবং নিরাপদে মুছে ফেলা হবে।\n\nমুছে ফেলার পরে, আপনার ফোন আনলক বা অ্যাপে যাচাইকরণ করার জন্য আপনার আঙুলের ছাপ, পিন, প্যাটার্ন বা পাসওয়ার্ড প্রয়োজন হবে।"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"আপনার ফোন আনলক করার জন্য \'ফেস আনলক\' ব্যবহার করুন"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"আঙ্গুলের ছাপ"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"কাজের জন্য ফিঙ্গারপ্রিন্ট"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"আঙ্গুলের ছাপগুলি পরিচালনা করুন"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"এর জন্য আঙ্গুলের ছাপ ব্যবহার করুন"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"আঙ্গুলের ছাপ যোগ করুন"</string>
@@ -484,8 +485,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"আরও একবার"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"আঙ্গুলের ছাপ আইকন ফলো করুন"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"আপনার আঙ্গুলের ছাপের বিভিন্ন অংশ যোগ করার জন্য বারবার আঙুল তুলে আবার স্পর্শ করতে থাকুন"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"প্রতিবার আঙ্গুলের ছাপ আইকনটি সরার সময় টাচ করে ধরে থাকুন। এর সহায়তায় আপনি সম্পূর্ণ আঙ্গুলের ছাপ ক্যাপচার করতে পারবেন।"</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"এর সহায়তায় আপনি সম্পূর্ণ আঙ্গুলের ছাপ ক্যাপচার করতে পারবেন"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"প্রতিবার ফিঙ্গারপ্রিন্ট আইকনটি সরার সময় টাচ করে ধরে থাকুন। এইভাবে সহজে আপনার ফিঙ্গারপ্রিন্টের বেশিরভাগটাই ক্যাপচার করা যাবে।"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"সেন্সরে আপনার আঙুল ছোঁয়ান"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"পরিশেষে, আপনার আঙুলের প্রান্ত ছোঁয়ান"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"সেন্সরের উপরে আপনার ফিঙ্গারপ্রিন্টের এক দিক ছুঁইয়ে ধরে রাখুন তারপর অন্য দিকটিও ছোঁয়ান এবং একই ভাবে ধরে রাখুন"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"এইভাবে সহজে আপনার ফিঙ্গারপ্রিন্টের বেশিরভাগটাই ক্যাপচার করা যাবে"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"আঙ্গুলের ছাপ নথিভুক্ত করার কাজটি <xliff:g id="PERCENTAGE">%d</xliff:g> শতাংশ সম্পূর্ণ হয়েছে"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"আঙ্গুলের ছাপ যোগ করা হয়েছে"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"অ্যাপে সাইন-ইন করার মতোই এখন ফিঙ্গারপ্রিন্ট ব্যবহার করে আপনি ফোন আনলক বা নিজের পরিচয় যাচাই করতে পারবেন"</string>
@@ -2255,7 +2259,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"গ্যাজেট চয়ন করুন"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"উইজেট বেছে নিন"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"উইজেট তৈরি করে ব্যবহারের অনুমতি দেবেন?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"উইজেট তৈরি করার পরে, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> যে ডেটাগুলি প্রদর্শন করে তা অ্যাক্সেস করতে পারবে।"</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"আপনি উইজেট তৈরি করার পরে, ডিসপ্লে করা প্রতিটি জিনিস অ্যাপ্লিকেশন অ্যাক্সেস করতে পারবে।\n\nঅ্যাপ্লিকেশন: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nউইজেট: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"উইজেট তৈরি করতে এবং তাদের ডেটা অ্যাক্সেস করতে <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> কে সর্বদা অনুমতি দিন"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"ব্যবহারের পরিসংখ্যান"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"ব্যবহারের পরিসংখ্যান"</string>
@@ -2665,6 +2669,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"কোন অ্যাপে ব্যাটারি সবচেয়ে বেশি খরচ হয়"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"চার্জ সাময়িকভাবে বন্ধ করা আছে"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"ব্যাটারি সাশ্রয় করতে। আরও জানুন।"</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"চার্জ করা আবার চালু করুন"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"অনেকক্ষণ ধরে চার্জ করার জন্য এবং বেশি গরম হয়ে যাওয়ার মতো কিছু পরিস্থিতিতে ব্যাটারির পারফর্ম্যান্স ভাল রাখার জন্য, হতে পারে চার্জ <xliff:g id="PERCENT">%1$s</xliff:g> পর্যন্ত হবে।\n\nএই পরিস্থিতি পরিবর্তন হওয়ার পরে আপনার ট্যাবলেট সাধারণভাবেই চার্জ হওয়া শুরু করে দেবে।"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"অনেকক্ষণ ধরে চার্জ করার জন্য এবং বেশি গরম হয়ে যাওয়ার মতো কিছু পরিস্থিতিতে ব্যাটারির পারফর্ম্যান্স ভাল রাখার জন্য, হতে পারে চার্জ <xliff:g id="PERCENT">%1$s</xliff:g> পর্যন্ত হবে।\n\nএই পরিস্থিতি পরিবর্তন হওয়ার পরে আপনার ট্যাবলেট সাধারণভাবেই চার্জ হওয়া শুরু করে দেবে।"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"আপনার ফোন স্বাভাবিকের চেয়ে বেশি ব্যবহার হওয়ায় সাধারণ সময়ের আগেই ব্যাটারির চার্জ শেষ হয়ে যেতে পারে।\n\nবেশি ব্যাটারি ব্যবহার করে এমন অ্যাপ:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"আপনার ট্যাবলেট স্বাভাবিকের চেয়ে বেশি ব্যবহার হওয়ায় সাধারণ সময়ের আগেই ব্যাটারির চার্জ শেষ হয়ে যেতে পারে।\n\nবেশি ব্যাটারি ব্যবহার করে এমন অ্যাপ:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"আপনার ডিভাইস স্বাভাবিকের চেয়ে বেশি ব্যবহার হওয়ায় সাধারণ সময়ের আগেই ব্যাটারির চার্জ শেষ হয়ে যেতে পারে।\n\nবেশি ব্যাটারি ব্যবহার করে এমন অ্যাপ:"</string>
@@ -2874,8 +2881,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"গত ২৪ ঘন্টা ব্যাটারি সিস্টেম ব্যবহারের তথ্য"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"<xliff:g id="SLOT">%s</xliff:g>-এর জন্য সিস্টেমের ব্যবহার"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"<xliff:g id="SLOT">%s</xliff:g>-এর জন্য অ্যাপের ব্যবহার"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"am"</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"pm"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"মোট: এক মিনিটের থেকে কম"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"ব্যাকগ্রাউন্ড: এক মিনিটের থেকে কম"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"মোট: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3395,8 +3400,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"উন্নত কলিং"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G কলিং"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"ভয়েস ও অন্যান্য কমিউনিকেশনের উন্নতি করতে LTE পরিষেবা ব্যবহার করুন (সাজেস্ট করা হয়েছে)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"ভয়েস ও অন্যান্য কমিউনিকেশনের উন্নতি করতে 4G পরিষেবা ব্যবহার করুন (সাজেস্ট করা হয়েছে)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"ভয়েস কল উন্নত করতে LTE পরিষেবা ব্যবহার করুন (সাজেস্ট করা হয়েছে)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"ভয়েস কল উন্নত করতে 4G পরিষেবা ব্যবহার করুন (সাজেস্ট করা হয়েছে)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"ভয়েস কলের জন্য 5G ব্যবহার করুন"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"পরিষেবা প্রদানকারীকে পরিচিতি পাঠান"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"উন্নত ফিচার প্রদান করতে আপনার পরিচিতির ফোন নম্বর পাঠান"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"<xliff:g id="CARRIER">%1$s</xliff:g>-কে পরিচিতি পাঠাবেন?"</string>
@@ -3590,6 +3597,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ব্যাটারি সেভার, স্টিকি, লেগে থাকা, পাওয়ার সেভার, ব্যাটারি"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"রুটিন, সময়সূচি, ব্যাটারি সেভার, পাওয়ার সেভার, ব্যাটারি, অটোমেটিক, শতাংশ"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, উন্নত কলিং, 4G কলিং"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, উন্নত কলিং, 5g কলিং"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ভাষা যোগ করুন, কোনও একটি ভাষা যোগ করুন"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"টেক্সটের সাইজ, বড় প্রিন্ট, বড় ফন্ট, বড় টেক্সট, কম দৃষ্টি, টেক্সট আরও বড় করুন, ফন্ট বড় করার টুল, ফন্ট বড় করা"</string>
     <string name="default_sound" msgid="6604374495015245195">"ডিফল্ট সাউন্ড"</string>
@@ -3918,7 +3926,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"<xliff:g id="SERVICE">%1$s</xliff:g>-কে বিজ্ঞপ্তিতে অ্যাক্সেস দিতে চান?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12 ভার্সনে Android অ্যাডাপ্টিভ বিজ্ঞপ্তির পরিবর্তে এনহ্যান্সড বিজ্ঞপ্তি এসেছে। এই ফিচারটি সাজেস্ট করা অ্যাকশন ও উত্তর দেখায় এবং আপনার বিজ্ঞপ্তি সাজিয়ে রাখে। \n\nএনহ্যান্সড বিজ্ঞপ্তি পরিচিতির নাম এবং মেসেজের মতো ব্যক্তিগত তথ্য সহ বিজ্ঞপ্তির কন্টেন্ট অ্যাক্সেস করতে পারে। এছাড়া, এই ফিচার বিজ্ঞপ্তি খারিজ করতে বা তার উত্তর দিতে পারে, যেমন ফোন কলের উত্তর দেওয়া এবং \'বিরক্ত করবে না\' মোড নিয়ন্ত্রণ করা।"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> এর জন্য বিজ্ঞপ্তির অ্যাক্সেসে অনুমতি দেবেন?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> সব বিজ্ঞপ্তি পড়তে পারবে। পরিচিতির নাম, আপনি যেসব মেসেজ পান সেগুলির টেক্সট সহ সব ব্যক্তিগত তথ্য এর মধ্যে পড়ে। বিজ্ঞপ্তি বাতিল করা বা ফোন কলের উত্তর দেওয়ার মতো বিজ্ঞপ্তির বোতামের উপর অ্যাকশন নেওয়ার কাজও এই অ্যাপ করতে পারবে। \n\nএই অ্যাপ \'বিরক্ত করবে না\' মোড চালু বা বন্ধ করা সহ সম্পর্কিত সেটিংস পরিবর্তনও করতে পারবে।"</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> সব বিজ্ঞপ্তি পড়তে পারবে। পরিচিতির নাম, আপনি যেসব মেসেজ পান সেগুলির টেক্সট সহ সব ব্যক্তিগত তথ্য এর মধ্যে পড়ে। এই অ্যাপ বিজ্ঞপ্তিতে দেওয়া বোতামের সাহায্যে অ্যাকশন নিতে পারবে বা বিজ্ঞপ্তি স্নুজ বা বাতিল করতে পারবে। এর মধ্যে ফোন কলের উত্তর দেওয়া অন্তর্ভুক্ত। \n\nএর সাহায্যে এই অ্যাপ \'বিরক্ত করবে না\' মোড চালু বা বন্ধ করতে এবং এই সম্পর্কিত সেটিংস পরিবর্তনও করতে পারবে।"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"যদি আপনি <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> এর জন্য বিজ্ঞপ্তির অ্যাক্সেস বন্ধ করেন, তাহলে \'বিরক্ত করবে না\' এর অ্যাক্সেসও বন্ধ হয়ে যেতে পারে৷"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"বন্ধ করুন"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"বাতিল করুন"</string>
@@ -4616,7 +4624,7 @@
     <string name="color_temperature_desc" msgid="6713259535885669622">"কুলার প্রদর্শনী রঙগুলি ব্যবহার করুন"</string>
     <string name="color_temperature_toast" msgid="7611532183532407342">"রঙের পরিবর্তন প্রয়োগ করতে, স্ক্রিন বন্ধ করুন"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"ক্যামেরা লেজার সেন্সর"</string>
-    <string name="ota_disable_automatic_update" msgid="1953894421412420231">"অটোমেটিক সিস্টেম আপডেটগুলি"</string>
+    <string name="ota_disable_automatic_update" msgid="1953894421412420231">"অটোমেটিক সিস্টেম আপডেট"</string>
     <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"ডিভাইস রিস্টার্ট হওয়ার সময় আপগ্রেড প্রয়োগ করুন"</string>
     <string name="usage" msgid="287782903846013936">"ব্যবহার"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"মোবাইল ডেটার ব্যবহার"</string>
@@ -4981,7 +4989,7 @@
     <string name="storage_music_audio" msgid="1185624135490182822">"মিউজিক ও অডিও"</string>
     <string name="storage_games" msgid="1176568610086802469">"গেম"</string>
     <string name="storage_other_apps" msgid="5902520888043081176">"অন্যান্য অ্যাপ"</string>
-    <string name="storage_files" msgid="7968460921272772299">"Files"</string>
+    <string name="storage_files" msgid="7968460921272772299">"ফাইল"</string>
     <string name="storage_images" msgid="2055893015567979387">"ছবি"</string>
     <string name="storage_videos" msgid="6117698226447251033">"ভিডিও"</string>
     <string name="storage_audio" msgid="5994664984472140386">"অডিও"</string>
@@ -5397,6 +5405,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"পাওয়ার বোতাম প্রেস করে ধরে রেখে Assistant চালু করুন"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"পাওয়ার &amp; ইমারজেন্সি মেনু:\nএকসাথে \'পাওয়ার\' এবং \'ভলিউম বাড়ানোর বোতাম\' প্রেস করুন।"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"রিং হওয়া বন্ধ করতে:\n\'ভলিউম\' মেনুতে শর্টকাট রয়েছে।"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"বোতাম টিপে রাখার সময়"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"পাওয়ার বোতাম কতক্ষণ টিপে ধরে থাকবেন সেটি বেছে নিয়ে সেন্সিটিভিটি অ্যাডজাস্ট করুন"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"কম সময়ের জন্য"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"দীর্ঘ সময়ের জন্য"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"ওয়ালেট দেখুন"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"লক স্ক্রিন এবং দ্রুত সেটিংস থেকে ওয়ালেটে অ্যাক্সেসের অনুরোধ করুন"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"ডিভাইস কন্ট্রোল দেখুন"</string>
@@ -5442,7 +5454,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"সাময়িকভাবে উপলভ্য নেই"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"কোনও সিম নেই"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"নেটওয়ার্ক সংক্রান্ত পছন্দ"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"সর্বজনীন নেটওয়ার্কে কানেক্ট করুন"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"নেটওয়ার্ক কানেকশন, ইন্টারনেট, ওয়্যারলেস, ডেটা, ওয়াই-ফাই, ওয়াই-ফাই, ওয়াই-ফাই, মোবাইল ডেটা, মোবাইল, মোবাইল পরিষেবা প্রদানকারী, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"ওয়াই-ফাই চালু করুন"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"ওয়াই-ফাই বন্ধ করুন"</string>
@@ -5460,6 +5471,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ নেটওয়ার্ক"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"সিম"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"ডাউনলোড করা সিম"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"ডাউনলোড করা সিম"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"অ্যাক্টিভ আছে"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"অ্যাক্টিভ নেই"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / <xliff:g id="ID_1">%1$s</xliff:g> এর জন্য ডিফল্ট হিসেবে"</string>
@@ -5537,6 +5549,9 @@
     <string name="sensor_toggle_description" msgid="8248823248606795411">"সমস্ত অ্যাপ ও পরিষেবার জন্য"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"গেম সেটিংস"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"গেম ড্যাশবোর্ড শর্টকাট ইত্যাদি চালু করুন"</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"আগের"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"পরের"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"রঙের এক ঝলক"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"সিম কার্ড অ্যাক্সেস করার অনুমতি"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"একটি ডিভাইস আপনার সিম কার্ড অ্যাক্সেস করতে চাইছে। বিশদ বিবরণের জন্য ট্যাপ করুন।"</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"সিম কার্ড অ্যাক্সেস করার অনুমতি দিতে চান?"</string>

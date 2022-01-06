@@ -31,7 +31,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -73,8 +72,6 @@ public class RenameMobileNetworkDialogFragmentTest {
     @Mock
     private TelephonyManager mTelephonyMgr;
     @Mock
-    private ServiceState mServiceState;
-    @Mock
     private SubscriptionManager mSubscriptionMgr;
     @Mock
     private SubscriptionInfo mSubscriptionInfo;
@@ -95,11 +92,9 @@ public class RenameMobileNetworkDialogFragmentTest {
         stm.setTelephonyManagerForSubscriptionId(mSubscriptionId, mTelephonyMgr);
         when(mTelephonyMgr.createForSubscriptionId(anyInt())).thenReturn(mTelephonyMgr);
 
-        when(mTelephonyMgr.getServiceState()).thenReturn(mServiceState);
-        when(mServiceState.getOperatorAlphaLong()).thenReturn("fake carrier name");
-
         when(mSubscriptionInfo.getSubscriptionId()).thenReturn(mSubscriptionId);
         when(mSubscriptionInfo.getDisplayName()).thenReturn("test");
+        when(mSubscriptionInfo.getCarrierName()).thenReturn("fake carrier name");
         when(mSubscriptionMgr.setDisplayName(any(), anyInt(), anyInt())).thenReturn(0);
 
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).setup().get());
@@ -159,7 +154,7 @@ public class RenameMobileNetworkDialogFragmentTest {
                 eq(SubscriptionManager.NAME_SOURCE_USER_INPUT));
         assertThat(captor.getValue()).isEqualTo("test2");
         verify(mSubscriptionMgr)
-                .setIconTint(eq(Color.parseColor("#ff00796b" /* teal */)), eq(mSubscriptionId));
+                .setIconTint(eq(Color.parseColor("#ff006D74" /* cyan */)), eq(mSubscriptionId));
     }
 
     @Test
@@ -172,6 +167,34 @@ public class RenameMobileNetworkDialogFragmentTest {
         mFragment.populateView(view);
 
         assertThat(view.findViewById(R.id.number_label).getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void populateView_getPreviousSimColor_setCorrectSelection() {
+        final View view = LayoutInflater.from(mActivity).inflate(
+                R.layout.dialog_mobile_network_rename, null);
+        when(mSubscriptionInfo.getIconTint())
+                .thenReturn(Color.parseColor("#ff3367d6"/* blue700 */));
+
+        startDialog();
+        mFragment.populateView(view);
+
+        final Spinner colorSpinnerView = mFragment.getColorSpinnerView();
+        assertThat(colorSpinnerView.getSelectedItemPosition()).isEqualTo(1);
+    }
+
+    @Test
+    public void populateView_getUpdatedSimColor_setCorrectSelection() {
+        final View view = LayoutInflater.from(mActivity).inflate(
+                R.layout.dialog_mobile_network_rename, null);
+        when(mSubscriptionInfo.getIconTint())
+                .thenReturn(Color.parseColor("#ff137333"/* Green800 */));
+
+        startDialog();
+        mFragment.populateView(view);
+
+        final Spinner colorSpinnerView = mFragment.getColorSpinnerView();
+        assertThat(colorSpinnerView.getSelectedItemPosition()).isEqualTo(2);
     }
 
     /**

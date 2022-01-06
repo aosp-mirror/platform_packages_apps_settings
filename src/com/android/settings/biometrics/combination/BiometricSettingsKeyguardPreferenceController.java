@@ -68,4 +68,9 @@ public class BiometricSettingsKeyguardPreferenceController extends TogglePrefere
         }
         return getRestrictingAdmin() != null ? DISABLED_FOR_USER : AVAILABLE;
     }
+
+    @Override
+    public final boolean isSliceable() {
+        return false;
+    }
 }
