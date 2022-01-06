@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -40,6 +41,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -122,6 +125,8 @@ public class UserSettingsTest {
     @Mock
     private UserManager mUserManager;
     @Mock
+    private PackageManager mPackageManager;
+    @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
     private FragmentActivity mActivity;
@@ -149,11 +154,13 @@ public class UserSettingsTest {
         ReflectionHelpers.setField(mFragment, "mMetricsFeatureProvider", mMetricsFeatureProvider);
 
         doReturn(mUserManager).when(mActivity).getSystemService(UserManager.class);
+        doReturn(mPackageManager).when(mActivity).getPackageManager();
 
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mMockPreferenceManager).when(mFragment).getPreferenceManager();
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
 
         mProvisionedBackupValue = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0);
@@ -651,6 +658,29 @@ public class UserSettingsTest {
         assertThat(arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, false))
                 .isEqualTo(true);
         verify(mMetricsFeatureProvider).action(any(), eq(SettingsEnums.ACTION_USER_GUEST_ADD));
+    }
+
+    @Test
+    public void onPreferenceClick_addSupervisedUserClicked_startIntentWithAction() {
+        final String intentPackage = "testPackage";
+        final String intentAction = UserManager.ACTION_CREATE_SUPERVISED_USER;
+        final int metricsAction = SettingsEnums.ACTION_USER_SUPERVISED_ADD;
+        try {
+            setConfigSupervisedUserCreationPackage(intentPackage);
+            doReturn(new ResolveInfo()).when(mPackageManager).resolveActivity(any(), anyInt());
+            doNothing().when(mFragment).startActivity(any());
+
+            mFragment.onPreferenceClick(mAddSupervisedUserPreference);
+
+            final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+            verify(mFragment).startActivity(captor.capture());
+            assertThat(captor.getValue().getPackage()).isEqualTo(intentPackage);
+            assertThat(captor.getValue().getAction()).isEqualTo(intentAction);
+
+            verify(mMetricsFeatureProvider).action(any(), eq(metricsAction));
+        } finally {
+            SettingsShadowResources.reset();
+        }
     }
 
     @Test
