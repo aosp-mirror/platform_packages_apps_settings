@@ -329,6 +329,55 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
+    public void onCreateContextMenu_canShare_shouldHaveShareMenuForConnectedWifiEntry() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.getApplicationContext()).thenReturn(mContext);
+        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(wifiEntry.canDisconnect()).thenReturn(true);
+        when(wifiEntry.canShare()).thenReturn(true);
+        when(wifiEntry.canForget()).thenReturn(true);
+        when(wifiEntry.isSaved()).thenReturn(true);
+        when(wifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+
+        final LongPressWifiEntryPreference connectedWifiEntryPreference =
+            mNetworkProviderSettings.createLongPressWifiEntryPreference(wifiEntry);
+        final View view = mock(View.class);
+        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
+
+        final ContextMenu menu = mock(ContextMenu.class);
+        mNetworkProviderSettings.onCreateContextMenu(menu, view, null /* info */);
+
+        verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_ID_SHARE), anyInt(), anyInt());
+    }
+
+    @Test
+    public void onCreateContextMenu_canNotShare_shouldDisappearShareMenuForConnectedWifiEntry() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.getApplicationContext()).thenReturn(mContext);
+        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(wifiEntry.canDisconnect()).thenReturn(true);
+        when(wifiEntry.canShare()).thenReturn(false);
+        when(wifiEntry.canForget()).thenReturn(true);
+        when(wifiEntry.isSaved()).thenReturn(true);
+        when(wifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+
+        final LongPressWifiEntryPreference connectedWifiEntryPreference =
+            mNetworkProviderSettings.createLongPressWifiEntryPreference(wifiEntry);
+        final View view = mock(View.class);
+        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
+
+        final ContextMenu menu = mock(ContextMenu.class);
+        mNetworkProviderSettings.onCreateContextMenu(menu, view, null /* info */);
+
+        verify(menu, never())
+                .add(anyInt(), eq(NetworkProviderSettings.MENU_ID_SHARE), anyInt(), anyInt());
+    }
+
+    @Test
     public void onWifiEntriesChanged_shouldChangeNextButtonState() {
         mNetworkProviderSettings.onWifiEntriesChanged();
 
