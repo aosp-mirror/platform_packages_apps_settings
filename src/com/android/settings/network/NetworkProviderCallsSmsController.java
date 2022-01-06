@@ -24,6 +24,7 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
@@ -44,12 +45,14 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
 
     private static final String TAG = "NetworkProviderCallsSmsController";
     private static final String KEY = "calls_and_sms";
+    private static final String RTL_MARK = "\u200F";
 
     private UserManager mUserManager;
     private SubscriptionManager mSubscriptionManager;
     private SubscriptionsChangeListener mSubscriptionsChangeListener;
     private TelephonyManager mTelephonyManager;
     private RestrictedPreference mPreference;
+    private boolean mIsRtlMode;
 
     /**
      * The summary text and click behavior of the "Calls & SMS" item on the
@@ -61,6 +64,8 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
         mUserManager = context.getSystemService(UserManager.class);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
+                == View.LAYOUT_DIRECTION_RTL;
         if (lifecycle != null) {
             mSubscriptionsChangeListener = new SubscriptionsChangeListener(context, this);
             lifecycle.addObserver(this);
@@ -121,6 +126,10 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
                 if (subInfo != subs.get(subs.size() - 1)) {
                     summary.append(", ");
                 }
+
+                if (mIsRtlMode) {
+                    summary.insert(0, RTL_MARK).insert(summary.length(), RTL_MARK);
+                }
             }
             return summary;
         }
@@ -152,12 +161,12 @@ public class NetworkProviderCallsSmsController extends AbstractPreferenceControl
     }
 
     @VisibleForTesting
-    protected int getDefaultVoiceSubscriptionId(){
+    protected int getDefaultVoiceSubscriptionId() {
         return SubscriptionManager.getDefaultVoiceSubscriptionId();
     }
 
     @VisibleForTesting
-    protected int getDefaultSmsSubscriptionId(){
+    protected int getDefaultSmsSubscriptionId() {
         return SubscriptionManager.getDefaultSmsSubscriptionId();
     }
 

@@ -86,4 +86,9 @@ public class BiometricSettingsAppPreferenceController extends TogglePreferenceCo
             return AVAILABLE_UNSEARCHABLE;
         }
     }
+
+    @Override
+    public final boolean isSliceable() {
+        return false;
+    }
 }
