@@ -1423,7 +1423,8 @@
         <activity
             android:name=".datausage.AppDataUsageActivity"
             android:exported="true"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:permission="android.permission.QUERY_ALL_PACKAGES">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.IGNORE_BACKGROUND_DATA_RESTRICTIONS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1493,6 +1494,7 @@
         <activity-alias android:name=".applications.InstalledAppDetails"
                 android:label="@string/application_info_label"
                 android:exported="true"
+                android:permission="android.permission.QUERY_ALL_PACKAGES"
                 android:targetActivity=".applications.InstalledAppDetailsTop">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
@@ -1504,7 +1506,8 @@
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
                   android:label="@string/application_info_label"
-                  android:exported="true">
+                  android:exported="true"
+                  android:permission="android.permission.QUERY_ALL_PACKAGES">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APP_OPEN_BY_DEFAULT_SETTINGS" />
                 <!-- Also catch legacy "com." prefixed action. -->
@@ -1861,7 +1864,8 @@
         <activity
             android:name="Settings$AppUsageAccessSettingsActivity"
             android:exported="true"
-            android:label="@string/usage_access_title">
+            android:label="@string/usage_access_title"
+            android:permission="android.permission.QUERY_ALL_PACKAGES">
             <intent-filter>
                 <action android:name="android.settings.USAGE_ACCESS_SETTINGS"/>
                 <category android:name="android.intent.category.DEFAULT"/>
