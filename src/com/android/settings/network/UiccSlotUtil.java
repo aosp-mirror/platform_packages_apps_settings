@@ -96,7 +96,7 @@ public class UiccSlotUtil {
         if (slotId == INVALID_PHYSICAL_SLOT_ID) {
             for (int i = 0; i < slots.length; i++) {
                 if (slots[i].isRemovable()
-                        && !slots[i].getIsActive()
+                        && !slots[i].getPorts().stream().findFirst().get().isActive()
                         && slots[i].getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_ERROR
                         && slots[i].getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_RESTRICTED) {
                     performSwitchToRemovableSlot(i, context);
@@ -107,7 +107,7 @@ public class UiccSlotUtil {
             if (slotId >= slots.length || !slots[slotId].isRemovable()) {
                 throw new UiccSlotsException("The given slotId is not a removable slot: " + slotId);
             }
-            if (!slots[slotId].getIsActive()) {
+            if (!slots[slotId].getPorts().stream().findFirst().get().isActive()) {
                 performSwitchToRemovableSlot(slotId, context);
             }
         }
