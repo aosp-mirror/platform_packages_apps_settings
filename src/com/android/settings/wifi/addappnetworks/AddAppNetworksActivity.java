@@ -36,6 +36,7 @@ import androidx.fragment.app.FragmentManager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
+import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
 
 /**
  * When apps send a new intent with a WifiConfiguration list extra to Settings APP. Settings APP
@@ -55,6 +56,8 @@ public class AddAppNetworksActivity extends FragmentActivity {
     final Bundle mBundle = new Bundle();
     @VisibleForTesting
     IActivityManager mActivityManager = ActivityManager.getService();
+    @VisibleForTesting
+    boolean mIsAddWifiConfigAllow;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +74,8 @@ public class AddAppNetworksActivity extends FragmentActivity {
         window.setGravity(Gravity.BOTTOM);
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
+
+        mIsAddWifiConfigAllow = WifiEnterpriseRestrictionUtils.isAddWifiConfigAllowed(this);
     }
 
     @Override
@@ -85,6 +90,10 @@ public class AddAppNetworksActivity extends FragmentActivity {
 
     @VisibleForTesting
     protected boolean showAddNetworksFragment() {
+        if (!mIsAddWifiConfigAllow) {
+            Log.d(TAG, "Not allowed by Enterprise Restriction");
+            return false;
+        }
         String packageName = getCallingAppPackageName();
         if (TextUtils.isEmpty(packageName)) {
             Log.d(TAG, "Package name is null");
