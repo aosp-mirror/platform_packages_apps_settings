@@ -148,6 +148,8 @@ public final class PaletteListPreference extends Preference {
 
             rootView.addView(textView);
         }
+
+        updateFirstAndLastItemsBackground(context, rootView, paletteData.size());
     }
 
     private GradientDrawable createGradientDrawable(ViewGroup rootView, @ColorInt int color) {
@@ -162,6 +164,19 @@ public final class PaletteListPreference extends Preference {
         gradientDrawable.setColors(Ints.toArray(mGradientColors), Floats.toArray(mGradientOffsets));
 
         return gradientDrawable;
+    }
+
+    private void updateFirstAndLastItemsBackground(Context context, ViewGroup rootView, int size) {
+        final int radius =
+                context.getResources().getDimensionPixelSize(
+                        R.dimen.accessibility_illustration_view_radius);
+        final int lastIndex = size - 1;
+        final GradientDrawable firstItem =
+                (GradientDrawable) rootView.getChildAt(0).getBackground();
+        final GradientDrawable lastItem =
+                (GradientDrawable) rootView.getChildAt(lastIndex).getBackground();
+        firstItem.setCornerRadii(new float[]{radius, radius, radius, radius, 0, 0, 0, 0});
+        lastItem.setCornerRadii(new float[]{0, 0, 0, 0, radius, radius, radius, radius});
     }
 
     private List<Integer> getPaletteColors(Context context) {
