@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" திரைப் பூட்டு விருப்பம் முடக்கப்பட்டது. மேலும் அறிய, உங்கள் நிறுவனத்தின் நிர்வாகியைத் தொடர்புகொள்ளவும். "<annotation id="admin_details">"மேலும் விவரங்கள்"</annotation>\n\n"வாங்குவதை அங்கீகரிக்கவும் ஆப்ஸை அணுகவும் தொடர்ந்து நீங்கள் கைரேகையைப் பயன்படுத்தலாம். "<annotation id="url">"மேலும் அறிக"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"விரலை எடுத்துவிட்டு, மீண்டும் சென்சாரைத் தொடவும்"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"கைரேகை சென்சாரைப் பயன்படுத்த முடியவில்லை. பழுதுபார்ப்புச் சேவை வழங்குநரைத் தொடர்புகொள்ளவும்"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"மேம்பட்ட அமைப்புகள்"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"பணிக் கணக்குப் பூட்டு, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock மற்றும் பல"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"மேம்பட்ட அமைப்புகள்"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"<xliff:g id="COUNT">%d</xliff:g> கைரேகைகள் வரை சேர்க்கலாம்"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"அனுமதிக்கப்படும் அதிகபட்சக் கைரேகைகளைச் சேர்த்துவிட்டீர்கள்"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"மேலும் கைரேகைகளைச் சேர்க்க முடியவில்லை"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"மொபைல் உறக்கநிலையில் அல்லது சார்ஜாகும்போது, நிகழ்வுகளைக் கட்டுப்படுத்த பகல்கனாவை இயக்கு."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"தொடங்க வேண்டிய நேரம்"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"தற்போதைய ஸ்கிரீன் சேவர்"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"இப்போது தொடங்கு"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"அமைப்பு"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"தானாக ஒளிர்வைச் சரிசெய்தல்"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"விரலை எடுக்கும் போது இயங்கு"</string>
@@ -3626,6 +3631,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, மேம்பட்ட அழைப்பு, 5g அழைப்பு"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"மொழியைச் சேர்க்கவும், ஒரு மொழியைச் சேர்க்கவும்"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"உரை அளவு, பெரிய அச்சு, பெரிய எழுத்து, பெரிய உரை, குறைந்த பார்வைத்திறன், உரையைப் பெரிதாக்குதல், எழுத்துப் பெரிதாக்கி, எழுத்தைப் பெரிதாக்குவது"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"திரையை எப்போதும் இயக்கத்தில் வை"</string>
     <string name="default_sound" msgid="6604374495015245195">"இயல்பு ஒலி"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"ஒலி &amp; அறிவிப்பு ஒலியளவு: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ஒலியளவு, அதிர்வு, தொந்தரவு செய்யாதே"</string>
@@ -5304,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> சிம்மை முடக்கவா?"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"சிம்மை முடக்குவதால் உங்கள் சேவை ரத்துசெய்யப்படாது"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"நெட்வொர்க்குடன் இணைக்கிறது…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"அழைப்புகள் மற்றும் செய்திகளுக்காக <xliff:g id="CARRIER_NAME">%1$s</xliff:g> என்பதற்கு மாறுகிறது…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"மொபைல் நிறுவனத்தை மாற்ற முடியவில்லை"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"பிழை காரணமாக மொபைல் நிறுவனத்தை மாற்ற முடியவில்லை."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ஐ ஆஃப் செய்யவா?"</string>
@@ -5573,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"அடாப்டிவ் பேட்டரியைப் பயன்படுத்துதல்"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"\'சூழலுக்கேற்ற ஒளிர்வு\' அம்சத்தைப் பயன்படுத்துதல்"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"வைஃபை அழைப்பைப் பயன்படுத்துதல்"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"ஸ்கிரீன் சேவரைப் பயன்படுத்துதல்"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"எல்லா ஆப்ஸையும் காட்டு"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"ஸ்மார்ட் முன்னனுப்புதல்"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"ஸ்மார்ட் முன்னனுப்புதல் அம்சம் இயக்கப்பட்டது"</string>
@@ -5588,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"மொபைல் எண் உள்ளிடப்படவில்லை."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"சரி"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G சேவையை அனுமதி"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G செல்லுலார் இணைப்புகளைப் பயன்படுத்துதல். அவசர அழைப்புகளுக்கு 2G நெட்வொர்க் எப்போதும் இயக்கத்தில் இருக்கும்."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G நெட்வொர்க் குறைந்த பாதுகாப்புடையது, எனினும் சில இருப்பிடங்களில் உங்கள் இணைப்பை மேம்படுத்தும். அவசர அழைப்புகளுக்கு 2G நெட்வொர்க் எப்போதும் அனுமதிக்கப்படுகிறது."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>க்கு 2G நெட்வொர்க் தேவை"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"கிளிப்போர்டுக்கான அணுகலைக் காட்டு"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"நீங்கள் நகலெடுத்த உரையையோ படங்களையோ பிற உள்ளடக்கத்தையோ ஆப்ஸ் அணுகும்போது அறிவிப்பைக் காட்டும்"</string>
     <string name="all_apps" msgid="3054120149509114789">"அனைத்து ஆப்ஸும்"</string>

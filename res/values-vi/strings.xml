@@ -570,6 +570,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Tùy chọn khóa màn hình đã bị tắt. Hãy liên hệ với quản trị viên của tổ chức bạn để tìm hiểu thêm. "<annotation id="admin_details">"Thông tin chi tiết khác"</annotation>\n\n"Bạn vẫn có thể sử dụng vân tay của mình để ủy quyền mua hàng và truy cập ứng dụng. "<annotation id="url">"Tìm hiểu thêm"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Nhấc ngón tay, sau đó chạm lại vào cảm biến"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Không thể dùng cảm biến vân tay. Hãy liên hệ với một nhà cung cấp dịch vụ sửa chữa"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Cài đặt nâng cao"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Khoá hồ sơ công việc, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock và nhiều chế độ cài đặt khác"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Cài đặt nâng cao"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Bạn có thể thêm tối đa <xliff:g id="COUNT">%d</xliff:g> tệp tham chiếu"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Bạn đã thêm số vân tay tối đa"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Không thể thêm dấu vân tay khác"</string>
@@ -1432,6 +1436,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Để kiểm soát những gì diễn ra khi điện thoại được gắn đế và/hoặc ở chế độ ngủ, hãy bật trình bảo vệ màn hình."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Thời điểm khởi động"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Trình bảo vệ màn hình hiện tại"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Bắt đầu ngay"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Cài đặt"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Độ sáng tự động"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Nhấc lên để đánh thức"</string>
@@ -2418,14 +2423,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Ngắn hơn"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Lâu hơn"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Thời gian tự động nhấp"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Chế độ rung và phản hồi xúc giác"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Cuộc gọi"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Thông báo và chuông báo"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Các phản hồi xúc giác có tính tương tác"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Rung khi đổ chuông"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Rung khi có thông báo"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Phản hồi khi chạm"</string>
@@ -3625,14 +3626,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"xúc giác, rung, màn hình, độ sáng"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"xúc giác, rung, điện thoại, cuộc gọi, độ nhạy, đổ chuông"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"xúc giác, rung, độ nhạy"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"phản hồi xúc giác, rung, chế độ rung"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"trình tiết kiệm pin, cố định, tiếp tục, trình tiết kiệm điện, pin"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"quy trình, lịch biểu, trình tiết kiệm pin, trình tiết kiệm điện, pin, tự động, phần trăm"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, gọi nâng cao, gọi qua mạng 4G"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, tính năng gọi nâng cao, gọi qua 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"thêm ngôn ngữ, thêm một ngôn ngữ"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"cỡ chữ, bản in lớn, phông chữ lớn, chữ lớn, thị lực kém, tăng cỡ chữ, tăng kích cỡ phông chữ, phóng to phông chữ"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"màn hình luôn bật"</string>
     <string name="default_sound" msgid="6604374495015245195">"Âm thanh mặc định"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Âm lượng chuông và thông báo ở mức <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Âm lượng, rung, Không làm phiền"</string>
@@ -5311,8 +5312,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Tắt <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Nếu tắt SIM, dịch vụ của bạn sẽ không bị huỷ"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Đang kết nối mạng…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Đang chuyển sang <xliff:g id="CARRIER_NAME">%1$s</xliff:g> để gọi điện và nhắn tin…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Không thể chuyển đổi nhà mạng"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Không thể chuyển đổi nhà mạng do lỗi."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Tắt <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5580,7 +5580,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Sử dụng pin thích ứng"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Sử dụng độ sáng thích ứng"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Sử dụng tính năng gọi qua Wi-Fi"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Sử dụng trình bảo vệ màn hình"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Xem tất cả ứng dụng"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Chuyển tiếp thông minh"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Đã bật tính năng chuyển tiếp thông minh"</string>
@@ -5595,7 +5594,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Thiếu số điện thoại."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Đã hiểu"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Cho phép 2G"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Dùng kết nối di động 2G. Trong cuộc gọi khẩn cấp, mạng 2G luôn bật."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"Mạng 2G kém an toàn hơn nhưng có thể cải thiện khả năng kết nối của bạn ở một số địa điểm. Đối với các cuộc gọi khẩn cấp, mạng 2G luôn được phép."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> yêu cầu phải có mạng 2G thì mới sử dụng được"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Hiện quyền truy cập vào bảng nhớ tạm"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Hiện một thông báo khi có ứng dụng truy cập vào văn bản, hình ảnh hoặc nội dung khác mà bạn đã sao chép"</string>
     <string name="all_apps" msgid="3054120149509114789">"Tất cả ứng dụng"</string>

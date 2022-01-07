@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Экранды кулпулоо параметри өчүрүлгөн. Көбүрөөк маалымат үчүн ишканаңыздын администраторуна кайрылыңыз. "<annotation id="admin_details">"Кошумча маалымат"</annotation>\n\n"Манжа изиңиз аркылуу сатып алууларга уруксат берип жана колдонмолорго кире берсеңиз болот. "<annotation id="url">"Көбүрөөк маалымат"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Манжаңызды көтөрүп, кайра сенсорго тийгизиңиз"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Манжа изинин сенсорун колдонууга болбойт. Тейлөө кызматына кайрылыңыз"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Өркүндөтүлгөн жөндөөлөр"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Жумуш профилинин кулпусу, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock жана башкалар"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Өркүндөтүлгөн жөндөөлөр"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"<xliff:g id="COUNT">%d</xliff:g> чейин манжа изин кошсоңуз болот"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Кошулган манжа издеринин саны жогорку чегине жетти"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Дагы манжа издерин кошуу мүмкүн эмес"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Телефон докко орнотулганда жана/же уйку режиминде турганда эмне болоорун көзөмөлдөө үчүн көшөгөнү күйгүзүңүз."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Качан иштеп баштайт"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Учурдагы көшөгө"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Азыр баштоо"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Жөндөөлөр"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Автоматтык жарыктык"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Ойготуу үчүн көтөрүү"</string>
@@ -3626,6 +3631,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, өркүндөтүлгөн чалуу, 5g аркылуу чалуу"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"тил кошуу, тил кошуу"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"тексттин өлчөмү, чоң өлчөмдө басып чыгаруу, чоң арип, чоң текст, начар көрүү, текстти чоңойтуу, арип чоңойткуч, арипти чоңойтуу"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"ар дайым күйүк дисплей"</string>
     <string name="default_sound" msgid="6604374495015245195">"Демейки үн"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Шыңгырлар менен билдирмелердин үнүнүн катуулугу <xliff:g id="PERCENTAGE">%1$s</xliff:g> коюлду"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Үн деңгээли, дирилдөө, \"Тынчымды алба\" режими"</string>
@@ -5304,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> түзмөгүн өчүрүү"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM карта өчүрүлсө, кызмат токтотулбайт"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Байланыш операторуна туташууда…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Чалуулар жана жазышуулар <xliff:g id="CARRIER_NAME">%1$s</xliff:g> операторуна которулууда…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Байланыш оператору которуштурулбай жатат"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Катадан улам байланыш оператору которуштурулбай жатат."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> өчүрүлсүнбү?"</string>
@@ -5573,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Adaptive Battery функциясын колдонуу"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Ыңгайлаштырылуучу жарык функциясын колдонуу"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Wi-Fi аркылуу чалууну колдонуу"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Экранды сактагычты колдонуу"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Бардык колдонмолорду көрүү"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Акылдуу багыттоо"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Акылдуу багыттоо иштетилди"</string>
@@ -5588,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Телефондун номери жетишпейт."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Макул"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G тармагына уруксат берүү"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G тармагын колдонуңуз. Шашылыш чалуулар үчүн 2G тармагы ар дайым күйүк болот."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G тармагынын коопсуздугу начар болгону менен, айрым жерлерде туташуунун сапаты жакшырышы мүмкүн. Шашылыш чалуулар үчүн 2G тармагы ар дайым күйүк болот."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 2G тармагын күйгүзүүнү талап кылат"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Алмашуу буферин пайдалануу мүмкүнчүлүгүн көрсөтүү"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Колдонмолор көчүрүлгөн текстти, сүрөттөрдү же башка нерселерди пайдаланганда билдирмелер көрүнөт"</string>
     <string name="all_apps" msgid="3054120149509114789">"Бардык колдонмолор"</string>

@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" స్క్రీన్ లాక్ ఎంపిక నిలిపివేయబడింది. మరింత తెలుసుకోవాలంటే, మీ సంస్థ యొక్క నిర్వాహకులను సంప్రదించండి. "<annotation id="admin_details">"మరిన్ని వివరాలు"</annotation>\n\n"ఇప్పటికీ మీరు మీ వేలిముద్రను ఉపయోగించి కొనుగోళ్లను ప్రమాణీకరించవచ్చు మరియు యాప్‌ను యాక్సెస్ చేయవచ్చు. "<annotation id="url">"మరింత తెలుసుకోండి"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"వేలిని పైకి ఎత్తి, ఆపై మళ్లీ సెన్సార్‌ను తాకండి"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"వేలిముద్ర సెన్సార్‌ను ఉపయోగించడం సాధ్యం కాదు. రిపెయిర్ ప్రొవైడర్‌ను సందర్శించండి"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"అధునాతన సెట్టింగ్‌లు"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"వర్క్ ప్రొఫైల్ లాక్, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock, ఇంకా మరెన్నో"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"అధునాతన సెట్టింగ్‌లు"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"మీరు గరిష్టంగా <xliff:g id="COUNT">%d</xliff:g> వేలిముద్రలను జోడించవచ్చు"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"మీరు గరిష్ట సంఖ్యలో వేలిముద్రలను జోడించారు"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"మరిన్ని వేలిముద్రలను జోడించడం సాధ్యపడదు"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"ఫోన్ డాక్ చేయబడినప్పుడు మరియు/లేదా నిద్రావస్థలో ఉన్నప్పుడు ఏమి జరగాలో నియంత్రించడానికి, స్క్రీన్ సేవర్‌ను ఆన్ చేయండి."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"ఎప్పుడు ప్రారంభించాలి"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"ప్రస్తుత స్క్రీన్ సేవర్"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"ఇప్పుడే ప్రారంభించు"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"సెట్టింగ్‌లు"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"ఆటోమేటిక్‌ ప్రకాశం"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"సక్రియం చేయడానికి వేళ్లను తీసివేయండి"</string>
@@ -3626,6 +3631,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, అధునాతన కాలింగ్, 5g కాలింగ్"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"భాషను జోడించు, ఒక భాషను జోడించు"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"టెక్స్ట్ సైజ్, పెద్ద ప్రింట్, పెద్ద ఫాంట్, పెద్ద టెక్స్ట్, తక్కువ విజన్, టెక్స్ట్‌ను పెద్దగా చేయి, ఫాంట్ పెద్దగా చేసేది, పెద్ద ఫాంట్"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"ఎల్లప్పుడూ ఆన్‌లో ఉండే ప్రదర్శన"</string>
     <string name="default_sound" msgid="6604374495015245195">"ఆటోమేటిక్ సౌండ్"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"రింగ్ &amp; నోటిఫికేషన్ వాల్యూమ్ <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"వాల్యూమ్, వైబ్రేషన్, అంతరాయం కలిగించవద్దు"</string>
@@ -5304,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ను ఆఫ్ చేయండి"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIMను ఆఫ్ చేయడం వలన మీ సర్వీస్ రద్దు చేయబడదు"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"నెట్‌వర్క్‌కు కనెక్ట్ చేస్తోంది…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"కాల్స్, మెసేజ్‌ల కోసం <xliff:g id="CARRIER_NAME">%1$s</xliff:g>కి స్విచ్ అవుతోంది…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"క్యారియర్‌ను స్విచ్ చేయడం సాధ్యం కాదు"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"ఎర్రర్ కారణంగా క్యారియర్‌ను స్విచ్ చేయడం సాధ్యం కాదు."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ను ఆఫ్ చేయాలా?"</string>
@@ -5573,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"అనుకూల బ్యాటరీని ఉపయోగించండి"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"పరిసర అనుకూల ప్రకాశాన్ని ఉపయోగించండి"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Wi‑Fi కాలింగ్ ఫీచర్‌ను ఉపయోగించండి"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"స్క్రీన్ సేవర్‌ను ఉపయోగించండి"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"అన్ని యాప్‌లను చూడండి"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"స్మార్ట్ ఫార్వర్డింగ్"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"స్మార్ట్ ఫార్వర్డింగ్ ఎనేబుల్ చేయబడింది"</string>
@@ -5588,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ఫోన్ నంబర్ లేదు."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"సరే"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2Gని అనుమతించండి"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G సెల్యులార్ కనెక్షన్‌ను ఉపయోగించండి. ఎమర్జెన్సీ కాల్స్‌ల కోసం, 2G ఎల్లప్పుడూ ఆన్‌లో ఉంటుంది."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G తక్కువ సురక్షితమైనది, కానీ కొన్ని లొకేషన్‌లో మీ కనెక్షన్‌ని మెరుగుపరచవచ్చు. ఎమర్జెన్సీ కాల్స్ కోసం, 2G ఎల్లప్పుడూ అనుమతించబడుతుంది."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>కి 2G అందుబాటులో ఉండాలి"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"క్లిప్‌బోర్డ్ యాక్సెస్‌ను చూపించు"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"మీరు కాపీ చేసిన టెక్స్ట్, ఇమేజ్‌లను లేదా ఇతర కంటెంట్‌ను యాప్‌లు యాక్సెస్ చేసినప్పుడు మెసేజ్‌ను చూపుతుంది"</string>
     <string name="all_apps" msgid="3054120149509114789">"అన్ని యాప్‌లు"</string>

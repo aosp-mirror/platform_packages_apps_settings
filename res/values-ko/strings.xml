@@ -570,6 +570,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" 화면 잠금 옵션이 사용 중지되었습니다. 자세한 내용은 조직의 관리자에게 문의하세요. "<annotation id="admin_details">"세부사항"</annotation>\n\n"계속해서 지문을 사용하여 구매 및 앱 액세스를 승인할 수 있습니다. "<annotation id="url">"자세히 알아보기"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"손가락을 뗐다가 센서를 다시 터치하세요."</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"지문 센서를 사용할 수 없습니다. 수리업체에 방문하세요."</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"고급 설정"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"직장 프로필 잠금, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock 등"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"고급 설정"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"지문을 <xliff:g id="COUNT">%d</xliff:g>개까지 추가할 수 있습니다."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"최대 개수의 지문을 추가했습니다."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"지문을 추가할 수 없습니다."</string>
@@ -1432,6 +1436,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"휴대전화가 도킹 또는 절전 모드일 때 작동 방식을 조정하려면 화면 보호기를 사용 설정합니다."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"표시 시간"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"현재 화면 보호기"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"지금 시작하기"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"설정"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"자동 밝기"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"기기를 들어 대기 모드 해제"</string>
@@ -2418,14 +2423,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"짧게"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"길게"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"자동 클릭 시간"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"진동 및 햅틱"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"전화"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"알림 및 알람"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"양방향 햅틱"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"벨소리 진동"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"알림 진동"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"터치 반응"</string>
@@ -3625,14 +3626,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"햅틱, 진동, 화면, 감도"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"햅틱, 진동, 휴대전화, 통화, 민감도, 벨소리"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"햅틱, 진동, 민감도"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"햅틱, 진동"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"절전 모드, 고정, 지속, 절전, 배터리"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"루틴, 일정, 절전 모드, 전력 절약 모드, 배터리, 자동, 퍼센트"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, 고급 통화, 4G 통화"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, 고급 통화, 5g 통화"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"언어 추가, 언어 한 개 추가"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"텍스트 크기, 큰 글자, 큰 글꼴, 큰 텍스트, 저시력, 텍스트 크게, 텍스트 확대, 글꼴 확대"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"항상 켜져 있는 화면"</string>
     <string name="default_sound" msgid="6604374495015245195">"기본 사운드"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"벨소리 및 알림 볼륨이 <xliff:g id="PERCENTAGE">%1$s</xliff:g>로 설정되었습니다."</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"볼륨, 진동, 방해 금지 모드"</string>
@@ -3811,7 +3812,7 @@
     <string name="history_toggled_on_summary" msgid="9034278971358282728">"최근 알림 및 일시 중지된 알림이 여기에 표시됩니다."</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"알림 설정 보기"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"알림 열기"</string>
-    <string name="snooze_options_title" msgid="2109795569568344617">"알림 일시 중지 허용"</string>
+    <string name="snooze_options_title" msgid="2109795569568344617">"다시 알림 허용"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"조용한 알림 아이콘 숨기기"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"조용한 알림 아이콘이 상태 표시줄에 표시되지 않습니다."</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"앱 아이콘에 알림 표시 점 사용"</string>
@@ -5311,8 +5312,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> 사용 중지"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM을 사용 중지해도 서비스는 취소되지 않습니다."</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"네트워크에 연결 중…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"통화 및 메시지를 위해 <xliff:g id="CARRIER_NAME">%1$s</xliff:g> 이동통신사로 전환 중…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"이동통신사를 전환할 수 없음"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"오류로 인해 이동통신사를 전환할 수 없습니다."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>을(를) 사용 중지하시겠습니까?"</string>
@@ -5464,10 +5464,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"길게"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"월렛 표시"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"잠금 화면 및 빠른 설정에서 월렛 액세스 허용"</string>
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
-    <skip />
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"QR 스캐너 표시"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"잠금 화면에서 QR 스캐너에 액세스할 수 있도록 허용"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"기기 제어 표시"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"잠금 상태일 때 제어 기능에 액세스"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"사용 가능한 경우 두 줄 시계 표시"</string>
@@ -5582,7 +5580,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"배터리 자동 조절 사용"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"밝기 자동 조절 사용"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Wi‑Fi 통화 사용"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"화면 보호기 사용"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"앱 모두 보기"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"스마트 착신전환"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"스마트 착신전환 사용 설정됨"</string>
@@ -5597,7 +5594,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"전화번호를 입력하세요."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"확인"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G 허용"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G 모바일 데이터 연결을 사용하세요. 긴급 전화의 경우 2G가 항상 사용 설정됩니다."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G는 보안이 약한 대신 일부 위치에서 연결 품질을 개선할 수 있습니다. 긴급 전화의 경우 2G는 항상 지원됩니다."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 이동통신사 사용 시 2G 필요"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"클립보드 액세스 표시"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"앱이 복사된 텍스트, 이미지 또는 기타 콘텐츠에 액세스할 때 메시지 표시"</string>
     <string name="all_apps" msgid="3054120149509114789">"모든 앱"</string>

@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Desgaituta dago pantailaren blokeoa. Informazio gehiago lortzeko, jarri erakundearen administratzailearekin harremanetan. "<annotation id="admin_details">"Lortu xehetasun gehiago"</annotation>\n\n"Hala ere, hatz-marka erabil dezakezu erosketak eta aplikazioetarako sarbidea baimentzeko. "<annotation id="url">"Lortu informazio gehiago"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Jaso hatza eta ukitu berriro sentsorea"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Ezin da erabili hatz-marken sentsorea. Jarri harremanetan konponketak egiten dituen hornitzaile batekin."</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Ezarpen aurreratuak"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Laneko profilaren blokeoa eta Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock eta beste"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Ezarpen aurreratuak"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"<xliff:g id="COUNT">%d</xliff:g> hartz-marka gehi ditzakezu gehienez"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Iritsi zara onartzen den gehieneko hatz-marka kopurura"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Ezin duzu gehitu beste hatz-markarik"</string>
@@ -1052,7 +1056,7 @@
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"\"<xliff:g id="SSID">%1$s</xliff:g>\" sarean sartzeko, eskaneatu QR kode hau beste gailu batekin"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Eskaneatu QR kode hau \"<xliff:g id="SSID">%1$s</xliff:g>\" sarera konektatzeko"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Saiatu berriro. Arazoak badirau, jarri gailuaren fabrikatzailearekin harremanetan."</string>
-    <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Arazoren bat izan da"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Arazo bat izan da"</string>
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Ziurtatu gailua entxufatuta, kargatuta eta piztuta dagoela"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Ziurtatu gailua entxufatuta, kargatuta eta piztuta dagoela. Arazoak badirau, jarri gailuaren fabrikatzailearekin harremanetan."</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Ezin da gehitu \"<xliff:g id="SSID">%1$s</xliff:g>\" gailu honetan"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Telefonoa oinarrian edo inaktibo dagoenean zer gertatzen den kontrolatzeko, aktibatu pantaila-babeslea."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Noiz abiarazi"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Oraingo pantaila-babeslea"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Abiarazi"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Ezarpenak"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Distira automatikoa"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Aktibatu eskuetan hartzen denean"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Laburtu"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Luzatu"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Sakatze automatikoaren denbora"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Dardara eta ukipen bidezko interakzioak"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Deiak"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Jakinarazpenak eta alarmak"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Ukipen bidezko interakzioak"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Tonuaren dardara"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Jakinarazpenen dardara"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Ukipenaren erantzuna"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"ukipena, dardara, pantaila, sentikortasuna"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"ukipena, dardara, telefonoa, deia, sentikortasuna, tonua"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"ukipena, dardara, sentikortasuna"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"ukipena, interakzioa, dardara"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"bateria-aurrezlea, finkoa, iraunkorra, energia-aurrezlea, bateria"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ohitura, ordutegia, programazioa, programatu, bateria-aurrezlea, aurreztu bateria, bateria automatikoa, ehunekoa"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, deitzeko aukera aurreratuak, 4G bidezko deiak"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, deitzeko aukera aurreratuak, 5g bidezko deiak"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"gehitu hizkuntza, gehitu hizkuntza bat"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"testuaren tamaina, letra-tipo handia, letra handia, testu handia, ikusmen txarra, handitu testua, testua handitzea, letra handitzea, letra handiagoa"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"pantaila aktibo etengabe"</string>
     <string name="default_sound" msgid="6604374495015245195">"Soinu lehenetsia"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Deien tonuaren eta jakinarazpenen bolumena: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Bolumena, dardara, ez molestatzeko modua"</string>
@@ -5309,15 +5310,14 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Desaktibatu <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIMa desaktibatu arren, zerbitzua ez da geratuko bertan behera"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Sarera konektatzen…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operadorera aldatzen deiak eta mezularitza erabiltzeko…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Ezin da aldatu operadorea"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Errore bat gertatu da eta ezin da aldatu operadorea."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> desaktibatu nahi duzu?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"SIM txartela desaktibatu nahi duzu?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM txartela desaktibatzen<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Ezin da desgaitu operadorea"</string>
-    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Arazoren bat izan da, eta ezin izan da desgaitu operadorea."</string>
+    <string name="privileged_action_disable_fail_text" msgid="8404023523406091819">"Arazo bat izan da, eta ezin izan da desgaitu operadorea."</string>
     <string name="sim_action_enable_dsds_title" msgid="226508711751577169">"Bi SIM erabili nahi dituzu?"</string>
     <string name="sim_action_enable_dsds_text" msgid="970986559326263949">"Gailu honek bi SIM izan ditzake aktibo aldi berean. SIM bakarra erabili nahi baduzu, sakatu \"Ez\"."</string>
     <string name="sim_action_restart_title" msgid="7054617569121993825">"Gailua berrabiarazi nahi duzu?"</string>
@@ -5360,7 +5360,7 @@
     <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> aplikazioak aldi baterako wifi-sare bat erabili nahi du zure gailura konektatzeko"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Ez da aurkitu gailurik. Ziurtatu gailuak piztuta daudela eta konekta daitezkeela."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Saiatu berriro"</string>
-    <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Arazoren bat izan da. Aplikazioak bertan behera utzi du gailu bat aukeratzeko eskaera."</string>
+    <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Arazo bat izan da. Aplikazioak bertan behera utzi du gailu bat aukeratzeko eskaera."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Konektatu da"</string>
     <string name="network_connection_connect_failure" msgid="6803313816657494319">"Ezin izan da konektatu"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Erakutsi guztiak"</string>
@@ -5578,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Erabili bateria egokitua"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Erabili distira egokitua"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Erabili wifi bidezko deiak"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Erabili pantaila-babeslea"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Ikusi aplikazio guztiak"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Desbideratze adimenduna"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Gaitu da desbideratze adimenduna"</string>
@@ -5593,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Telefono-zenbakia falta da."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Ados"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Eman 2G erabiltzeko baimena"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Erabili 2G datu-konexioak. 2G beti dago aktibatuta larrialdi-deietarako."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G sarea ez da horren segurua, baina baliteke konexio hobea eskaintzea kokapen batzuetan. 2G sarean beti daude baimenduta larrialdi-deiak."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> operadoreak aktibatuta eduki behar du 2G sarea"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Erakutsi arbela atzitzen denean"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Erakutsi mezu bat aplikazio batek kopiatu duzun testua, irudiak edo edukiak atzitzen dituenean"</string>
     <string name="all_apps" msgid="3054120149509114789">"Aplikazio guztiak"</string>

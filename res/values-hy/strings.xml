@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Էկրանի կողպման ընտրանքն անջատված է: Ավելին իմանալու համար դիմեք ձեր կազմակերպության ադմինիստրատորին: "<annotation id="admin_details">"Մանրամասներ"</annotation>\n\n"Գնումները և հավելվածների օգտագործումը թույլատրելու համար դուք կարող եք օգտագործել մատնահետքը: "<annotation id="url">"Իմանալ ավելին"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Բարձրացրեք մատը, ապա կրկին հպեք սենսորին"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Մատնահետքերի սկաները հնարավոր չէ օգտագործել։ Այցելեք սպասարկման կենտրոն։"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Լրացուցիչ կարգավորումներ"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Աշխատանքային պրոֆիլի կողպում, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock և ավելին"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Լրացուցիչ կարգավորումներ"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Կարող եք ավելացնել առավելագույնը <xliff:g id="COUNT">%d</xliff:g> մատնահետք"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Դուք ավելացրել եք մատնահետքերի առավելագույն թույլատրելի քանակը"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Հնարավոր չէ ավելացնել այլ մատնահետքեր"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Հեռախոսը դոկ-կայանում և քնի ռեժիմում վերահսկելու համար միացրեք էկրանապահը։"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Երբ սկսել"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Ընթացիկ էկրանապահ"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Սկսել հիմա"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Կարգավորումներ"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Ավտոմատ պայծառություն"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Բարձրացնել՝ միանալու համար"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Ավելի կարճ"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Ավելի երկար"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Ավտոմատ սեղմման ժամանակի կարգավորում"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Թրթռոց և հպման արձագանք"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Զանգեր"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Ծանուցումներ և ազդանշաններ"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Հպման ինտերակտիվ արձագանք"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Թրթռազանգ"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Թրթռոց ծանուցման ժամանակ"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Հպման արձագանք"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"հանգիստ, թրթռալ, էկրան, զգայունություն"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"հպման արձագանք, թրթռոց, հեռախոս, զանգ, զգայունություն, զանգել"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"հպման արձագանք, թրթռոց, զգայունություն"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"հպման արձագանք, թրթռալ, թրթռոց"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"մարտկոցի տնտեսում, մշտական, էներգախնայում, մարտկոց"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"գործողությունների հերթականություն, ժամանակացույց, մարտկոցի տնտեսում, էներգախնայում, մարտկոց, ավտոմատ, տոկոս"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, ընդլայնված հնարավորություններով զանգեր, 4g զանգեր"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, ընդլայնված հնարավորություններով զանգեր, 5G զանգեր"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ավելացնել լեզու, նոր լեզու"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"տեքստի չափը, մեծ տառատեսակ, խոշոր տառատեսակ, մեծ տեքստ, թույլ տեսողություն, մեծացնել տեքստը, մեծացնել տառատեսակը, տառատեսակի մեծացում"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"մշտապես ակտիվ էկրան"</string>
     <string name="default_sound" msgid="6604374495015245195">"Կանխադրված զանգերանգը"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Զանգի ու ծանուցումների ազդանշանների ուժգնությունը <xliff:g id="PERCENTAGE">%1$s</xliff:g> է"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Ձայնի ուժգնություն, թրթռոց, Չանհանգստացնել ռեժիմ"</string>
@@ -5309,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Անջատել <xliff:g id="CARRIER_NAME">%1$s</xliff:g> օպերատորի ցանցը"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM քարտն անջատելու դեպքում ձեր ծառայությունը չի չեղարկվի"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Սարքը միանում է ցանցին…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Անցում <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ին զանգերի և հաղորդագրությունների համար…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Չհաջողվեց փոխել օպերատորին"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Չհաջողվեց փոխել օպերատորին։"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Անջատե՞լ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> օպերատորին"</string>
@@ -5578,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Օգտագործել հարմարվող մարտկոցը"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Օգտագործել հարմարվող պայծառությունը"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Օգտագործել «Զանգեր Wi-Fi-ով» գործառույթը"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Օգտագործել էկրանապահ"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Դիտել բոլոր հավելվածները"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Խելացի վերահասցեավորում"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Խելացի վերահասցեավորումը միացված է"</string>
@@ -5593,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Հեռախոսահամարը նշված չէ։"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Եղավ"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G ցանցը միացնելու թույլտվություն"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Օգտագործեք 2G բջջային կապը։ Շտապ կանչերի համար 2G-ն միշտ միացված է։"</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"Թեև 2G ցանցը ոչ այդքան հուսալի է, որոշ վայրերում այն կարող է ավելի կայուն կապ ապահովել։ Շտապ կանչերի համար 2G ցանցը միշտ թույլատրված է։"</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>-ին անհրաժեշտ է 2G ցանցի հասանելիություն"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Ցույց տալ սեղմատախտակի հասանելիության մասին ծանուցումներ"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Ցուցադրել հաղորդագրություն, երբ հավելվածներին հասանելի են դառնում ձեր պատճենած տեքստը, պատկերները կամ մյուս բովանդակությունը"</string>
     <string name="all_apps" msgid="3054120149509114789">"Բոլոր հավելվածները"</string>

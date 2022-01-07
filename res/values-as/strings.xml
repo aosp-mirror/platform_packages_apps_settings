@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" স্ক্ৰীন লক বিকল্পটো অক্ষম হৈ আছে। অধিক জানিবলৈ আপোনাৰ প্ৰতিষ্ঠানৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক। "<annotation id="admin_details">"অধিক বিৱৰণ"</annotation>\n\n"আপুনি এতিয়াও ক্ৰয়ৰ আৰু এপৰ এক্সেছৰ অনুমতি দিবলৈ ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰি থাকিব পাৰে। "<annotation id="url">"অধিক জানক"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"আঙুলিটো আঁতৰাওক আৰু ছেন্সৰটো আকৌ স্পৰ্শ কৰক"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"ফিংগাৰপ্ৰিণ্ট ছেন্সৰ ব্যৱহাৰ কৰিব নোৱাৰি। মেৰামতি সেৱা প্ৰদানকাৰী কোনো প্ৰতিষ্ঠানলৈ যাওক"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"উচ্চখাপৰ ছেটিং"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"কৰ্মস্থানৰ প্ৰ’ফাইলৰ লক, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock আৰু বহুতো"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"উচ্চখাপৰ ছেটিং"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"আপুনি <xliff:g id="COUNT">%d</xliff:g>লৈকে ফিংগাৰপ্ৰিণ্ট যোগ কৰিব পাৰে"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"আপুনি সৰ্বাধিক সংখ্যক ফিংগাৰপ্ৰিণ্টবোৰ যোগ কৰিছে"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"আৰু অধিক ফিংগাৰপ্ৰিণ্ট যোগ কৰিব নোৱাৰি"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"ফ\'নটো ড’ক আৰু/বা সুপ্ত অৱস্থাত থাকিলে যি হয় তাক নিয়ন্ত্ৰণ কৰিবলৈ, স্ক্ৰীন ছেভাৰ অন কৰক৷"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"ষ্টাৰ্ট কৰাৰ সময়"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"বৰ্তমান ব্যৱহৃত স্ক্ৰীন ছেভাৰ"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"এতিয়াই আৰম্ভ কৰক"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"ছেটিং"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"স্বয়ংক্ৰিয় উজ্জ্বলতা"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"সক্ৰিয় কৰিবলৈ দাঙক"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"বেছি চুটি"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"বেছি দীঘল"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"স্বয়ংক্ৰিয় ক্লিকৰ সময়"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"কম্পন আৰু হেপ্‌টিক"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"কল"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"জাননী আৰু এলাৰ্ম"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"ভাব-বিনিময়কাৰী হেপটিক"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"ৰিং কম্পন"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"জাননীৰ কম্পন"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"স্পৰ্শৰ প্ৰতিক্ৰিয়া"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"হেপটিক, কম্পন, স্ক্ৰীন, সংবেদনশীলতা"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"হেপটিক্স, কম্পন, ফ’ন, কল, সংবেদনশীলতা, ৰিং"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"হেপটিক্স, কম্পন, সংবেদনশীলতা"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"হেপটিক, কম্পন কৰক, কম্পন"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"বেটাৰী সঞ্চয়কাৰী, ষ্টিকি, পাৰছিষ্ট, পাৱাৰ ছেভাৰ, বেটাৰী"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ৰুটিন, সময়সূচী, বেটাৰী সঞ্চয়কাৰী, পাৱাৰ ছেভাৰ, বেটাৰী, স্বয়ংক্ৰিয়, শতাংশ"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, উচ্চখাপৰ কলিং, 4g কলিং"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, উচ্চখাপৰ কলিং, 5g কলিং"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ভাষা যোগ কৰক, এটা ভাষা যোগ কৰক"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"পাঠৰ আকাৰ, ডাঙৰ প্ৰিণ্ট, ডাঙৰ ফণ্ট, ডাঙৰ পাঠ, কম দৃষ্টিশক্তি, পাঠৰ আকাৰ ডাঙৰ কৰক, ফণ্ট প্ৰসাৰিত কৰোঁতা, ফণ্টৰ প্ৰসাৰণ"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"সদা-সক্ৰিয় ডিছপ্লে’"</string>
     <string name="default_sound" msgid="6604374495015245195">"ডিফ\'ল্ট ধ্বনি"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"ৰিং আৰু জাননীৰ ভলিউম <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ভলিউম, কম্পন, অসুবিধা নিদিব"</string>
@@ -5309,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> অফ কৰক"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"এখন ছিম অফ কৰাটোৱে আপোনাৰ সেৱা বাতিল নকৰিব"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"নেটৱৰ্কৰ সৈতে সংযোগ কৰি থকা হৈছে…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"কল আৰু বাৰ্তাৰ বাবে <xliff:g id="CARRIER_NAME">%1$s</xliff:g>লৈ সলনি কৰি থকা হৈছে…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"বাহক সলনি কৰিব নোৱাৰি"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"কিবা এটা আসোঁৱাহ থকাৰ কাৰণে বাহক সলনি কৰিব নোৱাৰি।"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> অফ কৰিবনে?"</string>
@@ -5578,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"অভিযোজিত বেটাৰী ব্যৱহাৰ কৰক"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"অভিযোজিত উজ্জ্বলতা ব্যৱহাৰ কৰক"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"ৱাই-ফাই কলিং ব্যৱহাৰ কৰক"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"স্ক্ৰীন ছেভাৰ ব্যৱহাৰ কৰক"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"আটাইবোৰ এপ্‌ চাওক"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"স্মাৰ্ট ফৰৱাৰ্ডিং"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"স্মাৰ্ট ফৰৱাৰ্ডিঙৰ সুবিধাটো সক্ষম কৰা আছে"</string>
@@ -5593,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ফ’ন নম্বৰটো নাই।"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ঠিক আছে"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2Gৰ অনুমতি দিয়ক"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G চেলুলাৰ সংযোগ ব্যৱহাৰ কৰক। জৰুৰীকালীন কলৰ বাবে 2G সদায় অন হৈ থাকে।"</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G কম সুৰক্ষিত, কিন্তু কিছুমান অৱস্থানত আপোনাৰ সংযোগ উন্নত কৰিব পাৰে। জৰুৰীকালীন কলৰ বাবে 2Gৰ সদায় অনুমতি আছে।"</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>ৰ বাবে 2G উপলব্ধ হোৱাটো আৱশ্যক"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ক্লিপব’ৰ্ডৰ এক্সেছ দেখুৱাওক"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"এপে আপুনি প্ৰতিলিপি কৰা পাঠ, প্ৰতিচ্ছবি অথবা অন্য সমল এক্সেছ কৰিলে এটা বাৰ্তা দেখুৱাওক"</string>
     <string name="all_apps" msgid="3054120149509114789">"আটাইবোৰ এপ্‌"</string>

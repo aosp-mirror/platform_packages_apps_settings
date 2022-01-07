@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" स्क्रिन लकको विकल्प असक्षम पारिएको छ। थप जान्नलाई आफ्नो सङ्गठनको प्रशासकलाई सम्पर्क गर्नुहोस्। "<annotation id="admin_details">"थप विवरणहरू"</annotation>\n\n"तपाईं खरिदहरूलाई अधिकार दिन र एपमाथि पहुँच पाउनका लागि आफ्नो फिंगरप्रिन्ट समेत प्रयोग गर्न सक्नुहुन्छ। "<annotation id="url">"थप जान्नुहोस्"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"औँला उठाएर फेरि सेंसर छुनुहोस्"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"फिंगरप्रिन्ट सेन्सर प्रयोग गर्न मिल्दैन। फिंगरप्रिन्ट सेन्सर मर्मत गर्ने सेवा प्रदायक कम्पनीमा सम्पर्क गर्नुहोस्"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"उन्नत सेटिङ"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"कार्य प्रोफाइलको लक, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock र थप सुविधा"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"उन्नत सेटिङ"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"तपाईं <xliff:g id="COUNT">%d</xliff:g> सम्म फिंगरप्रिन्टहरू थप्न सक्नुहुन्छ"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"तपाईंले अधिकतम संख्यामा फिंगरप्रिन्टहरू थप्नुभएको छ"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"थप फिंगरप्रिन्टहरू थप्न सकिँदैन"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"फोन डकमा र/वा शयन अवस्थामा हुँदा हुने कुरालाई नियन्त्रण गर्न स्क्रिन सेभरलाई सक्रिय गर्नुहोस्।"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"सुरु हुने समय"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"हालको स्क्रिन सेभर"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"अब सुरु गर्नुहोस्"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"सेटिङहरू"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"स्वचालित उज्यालोपना"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"चालु गर्न उठाउनुहोस्"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"अझ छोटो"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"अझ लामो"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"स्वतः क्लिक हुने समय"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"भाइब्रेसन र ह्याप्टिक्स"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"कलहरू"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"सूचना र अलार्महरू"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"अन्तर्क्रियात्मक ह्याप्टिक्स"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"घन्टीको भाइब्रेसन"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"सूचना आएको जनाउन भाइब्रेट हुँदा"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"टच गर्दाको भाइब्रेसन"</string>
@@ -3609,7 +3610,7 @@
     <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"मधुरो स्क्रिन, टचस्क्रिन, ब्याट्री, स्मार्ट चमक, गतिशील चमक, स्वतः चमक"</string>
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"स्मार्ट, मधुरो स्क्रिन मोड, स्लिप, ब्याट्री, टाइम आउट, स्क्रिनमा हेरिरहेको पहिचान गर्ने सुविधा, डिस्प्ले, स्क्रिन, निष्क्रियता"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"क्यामेरा, स्मार्ट, अटो रोटेट, रोटेट, फ्लिप, रोटेसन, पोर्ट्रेट, ल्यान्डस्केप, ओरियन्टेसन, ठाडो, तेर्सो"</string>
-    <string name="keywords_system_update_settings" msgid="5769003488814164931">"स्तरवृद्धि गर्नुहोस्, android"</string>
+    <string name="keywords_system_update_settings" msgid="5769003488814164931">"अपग्रेड गर्नुहोस्, android"</string>
     <string name="keywords_zen_mode_settings" msgid="7810203406522669584">"dnd, समयतालिका, सूचनाहरू, रोक लगाउनुहोस्, माैन, कम्पन, शयन अवस्थामा लानुहोस्, कार्य, फोकस, आवाज, म्युट गर्नुहोस्, दिन, काम गर्ने दिन, सप्ताहान्त, काम गर्ने रात, कार्यक्रम"</string>
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"स्क्रिन, लक समय, टाइमआउट, लकस्क्रिन"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"मेमोरी, क्यास, डेटा, मेट्नुहोस्, खाली गर्नुहोस्, खाली, ठाउँ"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"अनुभूतिमूलक, कम्पन, स्क्रिन, संवेदनशीलता"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"अनुभूतिमूलक, कम्पन, फोन, कल, संवेदनशीलता, घन्टी"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"अनुभूतिमूलक, कम्पन, संवेदनशीलता"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"ह्याप्टिक्स, भाइब्रेट, भाइब्रेसन"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ब्याट्री सेभर, स्टिकी, पर्सिस्ट, पावर सेभर, ब्याट्री"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"दिनचर्या, समयतालिका, ब्याट्री सेभर, पावर सेभर, ब्याट्री, स्वचालित, प्रतिशत"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, कल गर्ने उन्नत सुविधा, 4g मार्फत कल गर्ने सुविधा"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, कल गर्ने उन्नत सुविधा, 5g कलिङ"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"भाषा थप्नुहोस्, कुनै भाषा थप्नुहोस्"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"पाठको आकार, ठुलो आकारको पाठ, ठुलो फन्ट, ठुलो पाठ, कमजोर दृष्टि, पाठ अझ ठुलो बनाउनुहोस्, फन्ट ठुलो बनाउने टुल, फन्ट ठुलो बनाउने प्रक्रिया"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"सधैँ जानकारी देखाउने सुविधा"</string>
     <string name="default_sound" msgid="6604374495015245195">"डिफल्ट साउन्ड"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"घन्टी तथा सूचनाको भोल्युम <xliff:g id="PERCENTAGE">%1$s</xliff:g> मा सेट छ"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"भोल्युम, कम्पन, बाधा नपुर्‍याउनुहोस्"</string>
@@ -5309,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> अफ गर्नुहोस्"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"तपाईंले कुनै एउटा SIM अफ गर्नुभयो भने तपाईंको सेवा रद्द हुने छैन"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"नेटवर्कमा जोडिँदै…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"कल गर्न र म्यासेज पठाउनका लागि सेवा प्रदायक बदलेर <xliff:g id="CARRIER_NAME">%1$s</xliff:g> बनाइँदै छ…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"सेवा प्रदायक बदल्न सकिएन"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"कुनै त्रुटि भएकाले यो सेवा प्रदायक बदल्न सकिएन।"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> अफ गर्ने हो?"</string>
@@ -5578,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"\'एड्याप्टिभ ब्याट्री\' प्रयोग गरियोस्"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"\'एड्याप्टिभ ब्राइटनेस\' नामक सुविधा प्रयोग गर्नु…"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"\'Wi-Fi कलिङ\' नामक सुविधा प्रयोग गर्नुहोस्"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"स्क्रिन सेभर प्रयोग गरियोस्"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"सबै एपहरू हेर्नुहोस्"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"स्मार्ट फर्वार्डिङ"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"स्मार्ट फर्वार्डिङ अन गरियो"</string>
@@ -5593,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"फोन नम्बर हालिएको छैन।"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ठिक छ"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G चलाउन दिनुहोस्"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G सेलुलर इन्टरनेट प्रयोग गर्नुहोस्। आपत्‌कालीन कलका निम्ति 2G सदैव अन रहन्छ।"</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G अलि कम सुरक्षित हुन्छ तर तपाईंले यसको प्रयोग गर्नुभयो भने यसले कतिपय लोकेसनमा तपाईंको डिभाइसमा इन्टरनेट कनेक्ट गर्न सजिलो बनाउन सक्छ। 2G प्रयोग गरेर जुनसुकै बेला आपत्कालीन कल गर्न सकिन्छ।"</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> को सेवा लिन 2G चाहिन्छ"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"एपले क्लिपबोर्डमा रहेको सामग्री प्रयोग गर्दा सूचना देखाइयोस्"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"मैले कपी गरेका टेक्स्ट, फोटो वा अन्य सामग्री एपहरूले प्रयोग गर्दा म्यासेज देखाइयोस्"</string>
     <string name="all_apps" msgid="3054120149509114789">"सबै एपहरू"</string>

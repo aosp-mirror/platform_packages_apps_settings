@@ -570,6 +570,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Ekranni qulflash funksiyasi o‘chirib qo‘yilgan. Batafsil axborot olish uchun tashkilotingiz administratori bilan bog‘laning. "<annotation id="admin_details">"Boshqa tafsilotlar"</annotation>\n\n"Shunday bo‘lsa-da, siz xaridlarni tasdiqlash va ilovalarga kirish uchun barmoq izidan foydalanishingiz mumkin. "<annotation id="url">"Batafsil"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Barmoqni olib, keyin yana skanerga tekkizing"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Barmoq izi skaneridan foydalanish imkonsiz. Xizmat koʻrsatish markaziga murojaat qiling"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Kengaytirilgan sozlamalar"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Ish profilini qulflash, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock va boshqalar"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Kengaytirilgan sozlamalar"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Ko’pi bilan <xliff:g id="COUNT">%d</xliff:g> ta barmoq izi qo’shish mumkin"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Barmoq izlari maksimal miqdorda qo‘shildi"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Boshqa barmoq izini qo‘shib bo‘lmaydi"</string>
@@ -1432,6 +1436,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Telefon dok-stansiyaga ulanganda yoki uyqu rejimiga o‘tganida uning ekranida nima ko‘rinishini sozlash uchun ekran lavhasini yoqing."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Qachon boshlansin"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Joriy ekran lavhasi"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Hozir yoqish"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Sozlamalar"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Avtomatik yorqinlik"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Tik holatda faollashtirish"</string>
@@ -3628,6 +3633,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, kengaytirilgan chaqiruv, 5g chaqiruv"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"til kiritish, tilni kiritish"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"matn oʻlchami, katta bosma, katta yozuv, katta matn, zaif koʻrish, matnni kattalashtirish, yozuvni kattalashtirish, katta yozuv"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"doim yoniq ekran"</string>
     <string name="default_sound" msgid="6604374495015245195">"Birlamchi ovoz"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Rington va bildirishnoma balandligi: 80<xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Tovush balandligi, tebranish, Bezovta qilinmasin rejimi"</string>
@@ -5306,8 +5312,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatorini faolsizlantiring"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM karta faolsizlantirilsa, operator xizmatlari bekor qilinmaydi"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Tarmoqqa ulanmoqda…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Chaqiruvlar va SMS xabarlari uchun <xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatoriga almashtirilmoqda…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Aloqa operatori almashtirilmadi"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Xatolik tufayli aloqa operatori almashtirilmadi."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> faolsizlantirilsinmi?"</string>
@@ -5575,7 +5580,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Adaptive Battery funksiyasidan foydalanish"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Moslashuvchan yorqinlikdan foydalanish"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Wi‑Fi chaqiruvdan foydalanish"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Ekran lavhasidan foydalanish"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Barcha ilovalar"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Smart uzatish"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Smart uzatish yoniq"</string>
@@ -5590,7 +5594,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Telefon raqami kiritilmagan."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G tarmoqqa ruxsat bering"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G mobil internetidan foydalaning. Favqulodda chaqiruvlar uchun 2G doim yoniq turadi."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G xavfsiz emas, lekin ayrim joylarda aloqani yaxshilashi mumkin. Favqulodda chaqiruvlarda 2G uchun doim ruxsat beriladi."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 2G tarmoqni talab etadi"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Vaqtinchalik xotiraga kirish haqida ogohlantirish"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Ilovalar siz nusxa olgan matn, rasmlar yoki boshqa kontentdan foydalanganda xabar chiqarish"</string>
     <string name="all_apps" msgid="3054120149509114789">"Barcha ilovalar"</string>

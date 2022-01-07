@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" સ્ક્રીન લૉક વિકલ્પ અક્ષમ કરેલ છે. વધુ જાણવા માટે, તમારી સંસ્થાના વ્યવસ્થાપકનો સંપર્ક કરો. "<annotation id="admin_details">"વધુ વિગતો"</annotation>\n\n"તમે ખરીદીઓ અને ઍપ્લિકેશનની ઍક્સેસ અધિકૃત કરવા માટે હજુ પણ તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકો છો. "<annotation id="url">"વધુ જાણો"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"આંગળીને ઉંચકો, પછી ફરીથી સેન્સરને સ્પર્શ કરો"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"ફિંગરપ્રિન્ટ સેન્સરનો ઉપયોગ કરી શકાતો નથી. રિપેર કરવાની સેવા આપતા પ્રદાતાની મુલાકાત લો"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"વિગતવાર સેટિંગ"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"ઑફિસની પ્રોફાઇલનું લૉક, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock અને બીજું ઘણું બધું"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"વિગતવાર સેટિંગ"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"તમે <xliff:g id="COUNT">%d</xliff:g> જેટલી ફિંગરપ્રિન્ટ્સ ઉમેરી શકો છો"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"તમે મહત્તમ ફિંગરપ્રિન્ટ્સ ઉમેર્યા છે"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"વધુ ફિંગરપ્રિન્ટ્સ ઉમેરી શકતાં નથી"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"ફોન ડૉક થાય અને/અથવા નિષ્ક્રિય થઈ જાય ત્યારે શું થાય તેને નિયંત્રિત કરવા માટે, સ્ક્રીન સેવર ચાલુ કરો."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"ક્યારે શરૂ કરવું"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"વર્તમાન સ્ક્રીન સેવર"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"હમણાં શરૂ કરો"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"સેટિંગ"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"સ્વચલિત તેજ"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"જાગૃત કરવા માટે લિફ્ટ કરો"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"ઓછો"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"વધુ"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"ઑટો ક્લિકનો સમય"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"વાઇબ્રેશન અને સંવેદક"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"કૉલ"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"નોટિફિકેશન અને અલાર્મ"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"ક્રિયાપ્રતિક્રિયાત્મક સંવેદક"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"રિંગ વાઇબ્રેશન"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"નોટિફિકેશન વાઇબ્રેશન"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"પ્રતિસાદને ટચ કરો"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"સંવેદક, વાઇબ્રેટ, સ્ક્રીન, સંવેદિતા"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"સંવેદક, વાઇબ્રેટ, ફોન, કૉલ, સંવેદિતા, રિંગ"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"સંવેદક, વાઇબ્રેટ, સંવેદિતા"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"સંવેદક, વાઇબ્રેટ, વાઇબ્રેશન"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"બૅટરી સેવર, સ્ટિકી, ચાલુ રહેવું, પાવર સેવર, બૅટરી"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"રૂટિન, શેડ્યૂલ, બૅટરી સેવર, પાવર સેવર, બૅટરી, ઑટોમૅટિક, ટકા"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, વિગતવાર કૉલિંગ, 4g કૉલિંગ"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, વિગતવાર કૉલિંગ, 5g કૉલિંગ"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ભાષા ઉમેરો, ભાષા ઉમેરો"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"ટેક્સ્ટનું કદ, મોટી પ્રિન્ટ, મોટા ફૉન્ટ, મોટી ટેક્સ્ટ, ઓછું વિઝન, ટેક્સ્ટને મોટી બનાવો, ફૉન્ટ મોટા બનાવનાર, ફૉન્ટની વૃદ્ધિ"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"ડિસ્પ્લે હંમેશાં-ચાલુ"</string>
     <string name="default_sound" msgid="6604374495015245195">"ડિફોલ્ટ ધ્વનિ"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"રિંગ અને નોટિફિકેશનનું વૉલ્યૂમ <xliff:g id="PERCENTAGE">%1$s</xliff:g> છે"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"વૉલ્યૂમ, વાઇબ્રેશન, ખલેલ પાડશો નહીં"</string>
@@ -5309,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> બંધ કરો"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"સિમ કાર્ડને બંધ કરી દેવાથી તમારી સેવા રદ થશે નહીં"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"નેટવર્ક સાથે કનેક્ટ કરી રહ્યાં છીએ…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"કૉલ અને મેસેજ માટે <xliff:g id="CARRIER_NAME">%1$s</xliff:g> પર સ્વિચ કરી રહ્યાં છીએ…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"મોબાઇલ ઑપરેટર સ્વિચ કરી શકાતા નથી"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"કોઈ ભૂલને કારણે મોબાઇલ ઑપરેટર સ્વિચ કરી શકાતા નથી."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ને બંધ કરીએ?"</string>
@@ -5462,10 +5462,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"લાંબો"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"વૉલેટ બતાવો"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"લૉક સ્ક્રીન અને ઝડપી સેટિંગથી વૉલેટ ઍક્સેસ કરવાની મંજૂરી આપો"</string>
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
-    <skip />
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"QR સ્કૅનર બતાવો"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"લૉક સ્ક્રીનમાંથી QR સ્કૅનરના ઍક્સેસની મંજૂરી આપો"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"ડિવાઇસનાં નિયંત્રણો બતાવો"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"લૉક કરેલું હોય ત્યારે નિયંત્રણોને ઍક્સેસ કરો"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"ઉપલબ્ધ હોય ત્યારે ડબલ-લાઇન ઘડિયાળ બતાવો"</string>
@@ -5580,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"સુવિધાજનક બૅટરીનો ઉપયોગ કરો"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"આંખને અનુકૂળ બ્રાઇટનેસનો ઉપયોગ કરો"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"વાઇ-ફાઇ કૉલિંગનો ઉપયોગ કરો"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"સ્ક્રીન સેવરની સુવિધાનો ઉપયોગ કરો"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"બધી ઍપ જુઓ"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"સ્માર્ટ ફૉરવર્ડિંગ"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"સ્માર્ટ ફૉરવર્ડિંગની સુવિધા ચાલુ કરી છે"</string>
@@ -5595,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ફોન નંબર ખૂટે છે."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ઓકે"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2Gની મંજૂરી આપો"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G સેલ્યુલર કનેક્શનનો ઉપયોગ કરો. ઇમર્જન્સી કૉલ માટે, 2G હંમેશાં ચાલુ રહે છે."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G ઓછું સુરક્ષિત છે, પણ કેટલાક સ્થાનોમાં એ તમારા કનેક્શનને બહેતર બનાવી શકે છે. ઇમર્જન્સી કૉલ માટે, 2Gને હંમેશાં મંજૂરી આપવામાં આવી છે."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> માટે 2G ઉપલબ્ધ હોવું જરૂરી છે"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ક્લિપબોર્ડનો ઍક્સેસ બતાવો"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"જ્યારે ઍપ તમે કૉપિ કરેલી ટેક્સ્ટ, છબીઓ કે અન્ય કન્ટેન્ટનો ઍક્સેસ કરે ત્યારે મેસેજ બતાવો"</string>
     <string name="all_apps" msgid="3054120149509114789">"બધી ઍપ"</string>

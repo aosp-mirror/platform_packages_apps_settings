@@ -570,6 +570,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Опцијата за заклучување екран е оневозможена. Контактирајте со администраторот на вашата организација за да дознаете повеќе. "<annotation id="admin_details">"Повеќе детали"</annotation>\n\n"Сѐ уште може да го користите отпечатокот за да одобрувате купувања и пристап до апликации. "<annotation id="url">"Дознајте повеќе"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Подигнете го прстот, потоа допрете го сензорот повторно"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Не може да се користи сензорот за отпечатоци. Однесете го на поправка"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Напредни поставки"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Заклучување на работниот профил, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock и друго"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Напредни поставки"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Може да додавате до <xliff:g id="COUNT">%d</xliff:g> отпечатоци"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Додадовте максимален број на отпечатоци"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не може да се додадат повеќе отпечатоци"</string>
@@ -1432,6 +1436,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"За да контролирате што се случува кога телефонот е приклучен на полнач и/или е во мирување, вклучете го заштитникот на екранот."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Кога да започне"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Тековен заштитник на екранот"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Започни сега"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Поставки"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Автоматска осветленост"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Подигнете да се активира"</string>
@@ -3628,6 +3633,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, напредно повикување, повикување преку 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"додај јазик, додај некој јазик"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"големина на текст, големи букви, голем фонт, голем текст, слаб вид, зголемување текст, фонт, зголеми, зголеми фонт"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"секогаш вклучен екран"</string>
     <string name="default_sound" msgid="6604374495015245195">"Стандарден звук"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Јачината на звук при ѕвонење и известувања е <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Јачина на звук, вибрации и „Не вознемирувај“"</string>
@@ -5306,8 +5312,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Исклучи: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Нема да ја откажете услугата само со исклучување на SIM-картичката"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Се поврзува со мрежа…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Се префрлува на <xliff:g id="CARRIER_NAME">%1$s</xliff:g> за повици и пораки…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Не може да се промени операторот"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Операторот не може да се промени поради грешка."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Да се исклучи <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5575,7 +5580,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Користи „Адаптивна батерија“"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Користи „Адаптивна осветленост“"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Користи „Повици преку Wi-Fi“"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Користи заштитник на екран"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Покажи ги сите апликации"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Паметно проследување"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Паметното проследување е овозможено"</string>
@@ -5590,7 +5594,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Телефонскиот број недостасува."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Во ред"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Дозволете 2G"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Користете 2G-мобилни врски. За итни повици, 2G е секогаш вклучена."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G е помалку безбедна, но може да ја подобри врската на некои локации. За итни повици, 2G е секогаш дозволена."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> има потреба од 2G за да биде достапен"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Известувај за пристап до привремената меморија"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Нека се прикажува известување кога апликациите пристапуваат до текст, слики или други содржини што сте ги копирале"</string>
     <string name="all_apps" msgid="3054120149509114789">"Сите апликации"</string>

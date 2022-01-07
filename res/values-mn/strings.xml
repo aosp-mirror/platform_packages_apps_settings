@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Дэлгэцийн түгжээний сонголтыг цуцалсан. Дэлгэрэнгүй үзэхийн тулд байгууллагынхаа админтай холбогдоно уу. "<annotation id="admin_details">"Дэлгэрэнгүй мэдээлэл"</annotation>\n\n"Ta хурууны хээгээ ашиглан худалдан авалт болон аппын хандалтыг баталгаажуулах боломжтой. "<annotation id="url">"Дэлгэрэнгүй үзэх"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Хуруугаа өргөөд мэдрэгч дээр дахин хүрнэ үү."</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Хурууны хээ мэдрэгч ашиглах боломжгүй. Засварын үйлчилгээ үзүүлэгчид зочилно уу"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Нарийвчилсан тохиргоо"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Ажлын профайлын түгжээ, Ухаалаг түгжээ"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Ухаалаг түгжээ болон бусад"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Нарийвчилсан тохиргоо"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Та <xliff:g id="COUNT">%d</xliff:g> хүртэлх хурууны хээ нэмж болно"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Таны зөвшөөрөгдсөн хурууны хээний тоо гүйцсэн байна"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Өөр хурууны хээ нэмэх боломжгүй байна"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Утсыг суурилуулсан ба/эсвэл идэвхгүй үед хэрхэхийг удирдахын тулд дэлгэц амраагчийг асаана уу."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Эхлэх үе"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Одоогийн дэлгэц амраагч"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Одоо эхлүүлэх"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Тохиргоо"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Автомат гэрэлтүүлэг"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Сэрээхийн тулд өргөх"</string>
@@ -3626,6 +3631,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, дэвшилтэт дуудлага, 5g дуудлага"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"хэл нэмэх, хэл нэмэх"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"текстийн хэмжээ, том хэвлэл, том фонт, том текст, сул хараа, текстийг илүү том болгох, фонт томруулагч, фонт томруулалт"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"үргэлж дэлгэцэд байх"</string>
     <string name="default_sound" msgid="6604374495015245195">"Үндсэн дуу"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Хонх ба мэдэгдлийн дууны түвшин <xliff:g id="PERCENTAGE">%1$s</xliff:g> байна"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Түвшин, чичиргээ, Бүү саад бол"</string>
@@ -5304,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-г унтраана"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM-г унтрааснаар таны үйлчилгээг цуцлахгүй"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Сүлжээнд холбогдож байна…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Дуудлага болон мессежид зориулж <xliff:g id="CARRIER_NAME">%1$s</xliff:g> руу сэлгэж байна…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Оператор компанийг сэлгэх боломжгүй"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Алдааны улмаас оператор компанийг сэлгэх боломжгүй байна."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-г унтраах уу?"</string>
@@ -5573,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Дасан зохицох батарейг ашиглах"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Орчинтой зохицох гэрэлтүүлгийг ашиглах"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Wi-Fi дуудлагыг ашиглах"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Дэлгэц амраагчийг ашиглах"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Бүх аппыг харах"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Ухаалаг шилжүүлэлт"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Ухаалаг шилжүүлэлтийг идэвхжүүлсэн"</string>
@@ -5588,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Утасны дугаар дутуу байна."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G-г зөвшөөрөх"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G үүрэн холбоо ашиглана уу. Яаралтай дуудлагад зориулж 2G-г байнга асаалттай байлгадаг."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G нь хамгаалалт багатай хэдий ч зарим байршилд таны холболтыг сайжруулж магадгүй. Яаралтай дуудлагад 2G-г үргэлж зөвшөөрдөг."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 2G-г боломжтой байхыг шаардаж байна"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Түр санах ойн хандалтыг харуулах"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Аппууд таны хуулсан текст, зураг эсвэл бусад контентод хандах үед мессеж харуулах"</string>
     <string name="all_apps" msgid="3054120149509114789">"Бүх апп"</string>

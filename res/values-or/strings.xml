@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" ସ୍କ୍ରୀନ୍‌ ଲକ୍‌ ବିକଳ୍ପ ଅକ୍ଷମ ହୋଇଛି। ଅଧିକ ଜାଣିବା ପାଇଁ ନିଜ ସଂସ୍ଥାର ଆଡ୍‌ମିନ୍‌ଙ୍କୁ ସମ୍ପର୍କ କରନ୍ତୁ। "<annotation id="admin_details">"ଅଧିକ ବିବରଣୀ"</annotation>\n\n"କିଣାକିଣିକୁ ଆଧିକୃତ ଓ ଆପ୍‌ ଆକ୍ସେସ୍‌ ପାଇଁ ନିଜ ଆଙ୍ଗୁଠି ଚିହ୍ନକୁ ଆପଣ ତଥାପି ବ୍ୟବହାର କରିପାରିବେ। "<annotation id="url">"ଅଧିକ ଜାଣନ୍ତୁ"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ଆଙ୍ଗୁଠିକୁ ଉଠାନ୍ତୁ ଓ ତା’ପରେ ସେନ୍ସରକୁ ପୁଣିଥରେ ଛୁଅଁନ୍ତୁ"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"ଟିପଚିହ୍ନ ସେନ୍ସରକୁ ବ୍ୟବହାର କରାଯାଇପାରିବ ନାହିଁ। ଏକ ମରାମତି କେନ୍ଦ୍ରକୁ ଭିଜିଟ୍ କରନ୍ତୁ"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"ଉନ୍ନତ ସେଟିଂସ"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"ୱାର୍କ ପ୍ରୋଫାଇଲ ଲକ, ସ୍ମାର୍ଟ ଲକ"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"ସ୍ମାର୍ଟ ଲକ ଏବଂ ଆହୁରି ଅନେକ କିଛି"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"ଉନ୍ନତ ସେଟିଂସ"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"ଆପଣ ସର୍ବାଧିକ <xliff:g id="COUNT">%d</xliff:g>ଟି ଆଙ୍ଗୁଠି ଚିହ୍ନ ଯୋଡ଼ିପାରିବେ"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"ଆପଣ ସର୍ବାଧିକ ସଂଖ୍ୟାର ଆଙ୍ଗୁଠି ଚିହ୍ନ ଯୋଡିଛନ୍ତି"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"ଆଉ ଅଧିକ ଟିପଚିହ୍ନ ଯୋଡିପାରିବ ନାହିଁ"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"ଫୋନ୍‌ ଡକ୍‌ କରାଯାଇଥିଲେ ଏବଂ/କିମ୍ବା ସୁପ୍ତ ଥିବାବେଳେ ସେଥିରେ ହେଉଥିବା ଘଟଣାଗୁଡ଼ିକୁ ନିୟନ୍ତ୍ରଣ କରିବା ପାଇଁ ସ୍କ୍ରୀନ୍‌ ସେଭର୍‌ ଅନ୍‌ କରନ୍ତୁ।"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"କେତେବେଳେ ଆରମ୍ଭ କରିବେ"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"ବର୍ତ୍ତମାନର ସ୍କ୍ରିନ୍ ସେଭର୍"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"ବର୍ତ୍ତମାନ ଆରମ୍ଭ କରନ୍ତୁ"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"ସେଟିଂସ୍"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"ସ୍ୱଚାଳିତ ଉଜ୍ଜ୍ୱଳତା"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"ଉଠାଇଲେ ଜାଗ୍ରତ ହେବ"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"କମ୍"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"ଅଧିକ"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"ସ୍ୱତଃ କ୍ଲିକ୍ ସମୟ"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"ଭାଇବ୍ରେସନ ଓ ହାପଟିକ୍ସ"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"କଲଗୁଡ଼ିକ"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"ବିଜ୍ଞପ୍ତି ଏବଂ ଆଲାରାମଗୁଡ଼ିକ"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"ଇଣ୍ଟରାକ୍ଟିଭ ହାପଟିକ୍ସ"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"ରିଙ୍ଗ ଭାଇବ୍ରେସନ୍"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"ବିଜ୍ଞପ୍ତି ଭାଇବ୍ରେସନ୍"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"ଟଚ୍ ଫିଡବ୍ୟାକ୍"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"ହାପ୍ଟିକ୍ସ, ଭାଇବ୍ରେଟ୍, ସ୍କ୍ରୀନ୍, ସମ୍ୱେଦନଶୀଳତା"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"ହାପ୍ଟିକ୍ସ, ଭାଇବ୍ରେଟ୍, ଫୋନ୍, କଲ୍, ସମ୍ୱେଦନଶୀଳତା, ରିଙ୍ଗ"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"ହାପ୍ଟିକ୍ସ, ଭାଇବ୍ରେଟ୍, ସମ୍ୱେଦନଶୀଳତା"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"ହାପଟିକ୍ସ, ଭାଇବ୍ରେଟ, ଭାଇବ୍ରେସନ"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ବ୍ୟାଟେରୀ ସେଭର୍, ଷ୍ଟିକି, ପର୍ସିଷ୍ଟ, ପାୱର୍ ସେଭର୍, ବ୍ୟାଟେରୀ"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ରୁଟିନ୍, ସମୟ ସୂଚୀ, ବ୍ୟାଟେରୀ ସେଭର୍, ପାୱର୍ ସେଭର୍, ବ୍ୟାଟେରୀ, ସ୍ୱତଃ, ଶତକଡ଼ା"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, ଉନ୍ନତ କଲିଂ, 4g କଲିଂ"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, ଉନ୍ନତ କଲିଂ, 5g କଲିଂ"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ଭାଷା ଯୋଗ କରନ୍ତୁ, ଏକ ଭାଷା ଯୋଗ କରନ୍ତୁ"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"ଟେକ୍ସଟର ଆକାର, ବଡ଼ ପ୍ରିଣ୍ଟ, ବଡ଼ ଫଣ୍ଟ, ବଡ଼ ଟେକ୍ସଟ୍, କମ୍ ଦେଖାଯାଉଥିବା, ଟେକ୍ସଟ୍ ଆହୁରି ବଡ଼ କରନ୍ତୁ, ଫଣ୍ଟର ଆକାର ବଡ଼ କରୁଥିବା ଟୁଲ୍, ଫଣ୍ଟର ଆକାର ବଡ଼ କରିବା"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"ସର୍ବଦା ଚାଲୁ ରହୁଥିବା ଡିସପ୍ଲେ"</string>
     <string name="default_sound" msgid="6604374495015245195">"ପୂର୍ବ-ନିର୍ଦ୍ଧାରିତ ଶବ୍ଦ"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"ରିଙ୍ଗ ଏବଂ ବିଜ୍ଞପ୍ତି ଭଲ୍ୟୁମ୍ <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ଭଲ୍ୟୁମ୍, ଭାଇବ୍ରେସନ୍, ବିରକ୍ତ କରନ୍ତୁ ନାହିଁ"</string>
@@ -5309,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ବନ୍ଦ କରନ୍ତୁ"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"ଏକ SIMକୁ ବନ୍ଦ କରିବା ଫଳରେ ଆପଣଙ୍କ ସେବା ବାତିଲ୍ ହେବ ନାହିଁ"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"ନେଟୱାର୍କ ସହ ସଂଯୋଗ କରାଯାଉଛି…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"କଲ ଏବଂ ମେସେଜଗୁଡ଼ିକ ପାଇଁ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>କୁ ସ୍ୱିଚ କରାଯାଉଛି…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"କ୍ୟାରିଅରକୁ ସ୍ୱିଚ୍ କରାଯାଇପାରିବ ନାହିଁ"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"ଏକ ତ୍ରୁଟି ଯୋଗୁଁ କ୍ୟାରିଅରକୁ ସ୍ୱିଚ୍ କରାଯାଇପାରିବ ନାହିଁ।"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ବନ୍ଦ କରିବେ?"</string>
@@ -5578,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"ଆଡେପ୍ଟିଭ୍ ବ୍ୟାଟେରୀ ବ୍ୟବହାର କରନ୍ତୁ"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"ଆଡେପ୍ଟିଭ୍ ଉଜ୍ଜ୍ୱଳତା ବ୍ୟବହାର କରନ୍ତୁ"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"ୱାଇ-ଫାଇ କଲିଂ ବ୍ୟବହାର କରନ୍ତୁ"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"ସ୍କ୍ରିନ୍ ସେଭର୍ ବ୍ୟବହାର କରନ୍ତୁ"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"ସମସ୍ତ ଆପ୍ ଦେଖନ୍ତୁ"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"ସ୍ମାର୍ଟ ଫରୱାର୍ଡିଂ"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"ସ୍ମାର୍ଟ ଫରୱାର୍ଡିଂ ସକ୍ଷମ କରାଯାଇଛି"</string>
@@ -5593,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ଫୋନ୍ ନମ୍ଵର୍ ଉପଲବ୍ଧ ନାହିଁ।"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ଠିକ୍ ଅଛି"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2Gକୁ ଅନୁମତି ଦିଅନ୍ତୁ"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G ସେଲ୍ୟୁଲାର୍ ସଂଯୋଗ ବ୍ୟବହାର କରନ୍ତୁ। ଜରୁରୀକାଳୀନ କଲ୍ ପାଇଁ, 2G ସର୍ବଦା ଚାଲୁ ଥାଏ।"</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G କମ୍ ସୁରକ୍ଷିତ ଅଟେ, କିନ୍ତୁ କିଛି ଲୋକେସନରେ ଏହା ଆପଣଙ୍କ ସଂଯୋଗକୁ ଉନ୍ନତ କରିପାରେ। ଜରୁରୀକାଳୀନ କଲଗୁଡ଼ିକ ପାଇଁ, 2Gକୁ ସର୍ବଦା ଅନୁମତି ଦିଆଯାଇଛି।"</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> ପାଇଁ 2G ଉପଲବ୍ଧ ହେବା ଆବଶ୍ୟକ"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"କ୍ଲିପବୋର୍ଡ ଆକ୍ସେସ୍ ଦେଖାନ୍ତୁ"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"ଯେତେବେଳେ ଆପଣ କପି କରିଥିବା ଟେକ୍ସଟ୍, ଛବି କିମ୍ବା ଅନ୍ୟ ବିଷୟବସ୍ତୁକୁ ଆପଗୁଡ଼ିକ ଆକ୍ସେସ୍ କରେ, ସେତେବେଳେ ଏକ ମେସେଜ୍ ଦେଖାନ୍ତୁ"</string>
     <string name="all_apps" msgid="3054120149509114789">"ସବୁ ଆପ୍"</string>

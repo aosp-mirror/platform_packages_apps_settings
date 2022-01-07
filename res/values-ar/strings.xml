@@ -584,6 +584,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" تم إيقاف خيار قفل الشاشة. لمعرفة المزيد من المعلومات، اتصل بمشرف مؤسستك. "<annotation id="admin_details">"مزيد من التفاصيل"</annotation>\n\n"ما زال بإمكانك استخدام بصمة إصبعك للسماح بعمليات الشراء والوصول إلى التطبيقات. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ارفع إصبعك ثم المس زر الاستشعار مرة أخرى."</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"لا يمكن استخدام مستشعر بصمات الإصبع. يُرجى التواصل مع مقدِّم خدمات إصلاح."</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"الإعدادات المتقدمة"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"‏قفل الملف الشخصي للعمل، Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"‏Smart Lock وغير ذلك"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"الإعدادات المتقدمة"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"يمكنك إضافة ما يصل إلى <xliff:g id="COUNT">%d</xliff:g> بصمات الإصبع"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"لقد أضفت الحد الأقصى لعدد بصمات الإصبع"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"يتعذر إضافة مزيد من بصمات الإصبع"</string>
@@ -1510,6 +1514,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"للتحكم في ما يحدث عند إرساء الهاتف و/أو دخوله حالة السكون، عليك تشغيل شاشة التوقف."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"وقت البدء"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"شاشة الاستراحة الحالية"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"البدء الآن"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"إعدادات"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"سطوع تلقائي"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"الرفع لتنبيه الجهاز"</string>
@@ -2512,14 +2517,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"أقصر"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"أطول"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"وقت النقر التلقائي"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"الاهتزاز واللمس"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"المكالمات"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"الإشعارات والمنبّهات"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"ميزات اللمس التفاعلية"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"الاهتزاز عند الرنين"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"الاهتزاز عند تلقّي إشعارات"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"الاهتزاز عند لمس الشاشة"</string>
@@ -3803,14 +3804,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"أجهزة تعمل باللمس، اهتزاز، شاشة، حساسية"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"أجهزة تعمل باللمس، اهتزاز، هاتف، اتصال، حساسية، رنين"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"أجهزة تعمل باللمس، اهتزاز، حساسية"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"أجهزة تعمل باللمس، اهتزاز، الاهتزاز"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"توفير شحن البطارية، ثابت، مستمر، توفير طاقة، بطارية"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"سلسلة إجراءات، جدول زمني، توفير شحن البطارية، توفير الطاقة، بطارية، تلقائي، نسبة مئوية"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"‏خدمة volte، الاتصال المتقدم، اتصال 4g"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"‏vo5g، vonr، الاتصال المتقدّم، الاتصال عبر شبكة الجيل الخامس"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"إضافة اللغة، إضافة لغة"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"حجم النص، طباعة كبيرة، خط كبير، نص كبير، ضعف في النظر، تكبير النص، أداة تكبير الخط، تكبير الخط"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"عرض دائم"</string>
     <string name="default_sound" msgid="6604374495015245195">"الصوت التلقائي"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"تم ضبط مستوى صوت الرنين والإشعار على <xliff:g id="PERCENTAGE">%1$s</xliff:g>."</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"مستوى الصوت والاهتزاز ووضع\"عدم الإزعاج\""</string>
@@ -4393,7 +4394,7 @@
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"بعض الإشعارات"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"الإشعارات التي يمكنها مقاطعة عمل الميزة"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"السماح لجميع الإشعارات"</string>
-    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{عدم السماح لأي فئة صوتية بمقاطعة عمل الميزة}=1{السماح لـ {sound_category_1} بمقاطعة عمل الميزة}=2{السماح لـ {sound_category_1} و{sound_category_2} بمقاطعة عمل الميزة}=3{السماح لـ {sound_category_1} و{sound_category_2} و{sound_category_3} بمقاطعة عمل الميزة}few{السماح لـ {sound_category_1} و{sound_category_2} و# فئات صوتية أخرى بمقاطعة عمل الميزة}many{السماح لـ {sound_category_1} و{sound_category_2} و# فئة صوتية أخرى بمقاطعة عمل الميزة}other{السماح لـ {sound_category_1} و{sound_category_2} و# فئة صوتية أخرى بمقاطعة عمل الميزة}}"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{عدم السماح لأي فئة صوتية بمقاطعة عمل الميزة}=1{مقاطعة عمل الميزة من قِبل {sound_category_1} }=2{مقاطعة عمل الميزة من قِبل {sound_category_1} و{sound_category_2} }=3{مقاطعة عمل الميزة من قِبل {sound_category_1} و{sound_category_2} و{sound_category_3} }few{مقاطعة عمل الميزة من قِبل {sound_category_1} و{sound_category_2} و# فئات صوتية أخرى }many{مقاطعة عمل الميزة من قِبل {sound_category_1} و{sound_category_2} و# فئة صوتية أخرى }other{مقاطعة عمل الميزة من قِبل {sound_category_1} و{sound_category_2} و# فئة صوتية أخرى }}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"عدم السماح لأي عنصر بمقاطعة عمل الميزة"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"عدم السماح لأي مستخدم بمقاطعة عمل الميزة"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"السماح لبعض الأشخاص بمقاطعة عمل الميزة"</string>
@@ -5657,8 +5658,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"إيقاف <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"‏لن يؤدي إيقاف شريحة SIM إلى إلغاء الخدمة."</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"جارٍ الاتصال بالشبكة…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"جارٍ التبديل إلى <xliff:g id="CARRIER_NAME">%1$s</xliff:g> للمكالمات والرسائل…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"يتعذَّر تبديل مشغِّل شبكة الجوّال"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"يتعذَّر تبديل مشغِّل شبكة الجوّال بسبب حدوث خطأ."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"هل تريد إيقاف <xliff:g id="CARRIER_NAME">%1$s</xliff:g>؟"</string>
@@ -5818,10 +5818,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"ضغطة طويلة"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"إظهار المحفظة"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"السماح بالوصول إلى المحفظة من شاشة القفل والإعدادات السريعة"</string>
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
-    <skip />
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"فتح الماسح الضوئي لرمز الاستجابة السريعة"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"السماح بالوصول إلى الماسح الضوئي لرمز الاستجابة السريعة من شاشة القفل"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"إظهار عناصر التحكّم في الجهاز"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"يمكنك الوصول إلى عناصر التحكّم عندما تكون الشاشة مُقفَلة."</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"إظهار الساعة بخطين عندما تكون متاحة."</string>
@@ -5936,7 +5934,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"استخدام ميزة \"البطارية التكيُّفية\""</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"استخدام ميزة \"السطوع التكيُّفي\""</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"‏استخدام ميزة \"الاتصال عبر Wi-Fi\""</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"استخدام شاشة الاستراحة"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"عرض كل التطبيقات"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"إعادة التوجيه الذكية"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"تم تفعيل ميزة \"إعادة التوجيه الذكية\"."</string>
@@ -5951,7 +5948,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"رقم الهاتف مفقود."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"حسنًا"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"السماح بشبكة الجيل الثاني"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"استخدام اتصال شبكة جوّال الجيل الثاني: شبكة الجيل الثاني مفعّلة دائمًا لمكالمات الطوارئ"</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"شبكة الجيل الثاني أقل أمانًا، ولكن قد تحسِّن الاتصال بالإنترنت في بعض المواقع الجغرافية. يُسمح باستخدام شبكة الجيل الثاني دائمًا لمكالمات الطوارئ."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"يطلب مشغّل شبكة الجوال <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> توفّر شبكة الجيل الثاني"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"إظهار الوصول إلى الحافظة"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"إظهار رسالة عندما يصل التطبيق إلى نص أو صور أو محتوى آخر تم نسخه."</string>
     <string name="all_apps" msgid="3054120149509114789">"جميع التطبيقات"</string>

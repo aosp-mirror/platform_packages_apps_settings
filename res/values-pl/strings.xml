@@ -576,6 +576,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Opcja blokady ekranu jest wyłączona. Aby dowiedzieć się więcej, skontaktuj się z administratorem organizacji. "<annotation id="admin_details">"Więcej informacji"</annotation>\n\n"Nadal możesz używać odcisku palca do autoryzowania zakupów i uzyskiwania dostępu do aplikacji. "<annotation id="url">"Więcej informacji"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Podnieś palec, a potem przyłóż go do czytnika jeszcze raz."</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Nie można użyć czytnika linii papilarnych. Odwiedź serwis."</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Ustawienia zaawansowane"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Blokada profilu służbowego, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock i inne funkcje"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Ustawienia zaawansowane"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Możesz dodać do <xliff:g id="COUNT">%d</xliff:g> odcisków palców"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodano maksymalną liczbę odcisków palców"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nie można dodać więcej odcisków palców"</string>
@@ -1470,6 +1474,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Włącz wygaszacz ekranu, by kontrolować to, co dzieje się, gdy telefon jest w stacji dokującej i/lub w trybie uśpienia."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kiedy włączać"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Bieżący wygaszacz ekranu"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Zacznij teraz"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Ustawienia"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Automatyczna"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Podnieś, by wybudzić"</string>
@@ -2464,14 +2469,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Krótszy"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Dłuższy"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Czas automatycznego kliknięcia"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Wibracje i reakcja na dotyk"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Połączenia"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Powiadomienia i alarmy"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktywna reakcja na dotyk"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Wibracja przy dzwonku"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Wibracja przy powiadomieniu"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Reakcja na dotyk"</string>
@@ -3713,14 +3714,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"reakcja na dotyk, wibracje, ekran, czułość"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"reakcja na dotyk, wibracje, telefon, połączenie, czułość, dzwonek"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"reakcja na dotyk, wibracje, czułość"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"reakcja na dotyk, wibrować, wibracje"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"oszczędzanie baterii, przyklejony, trwały, oszczędzanie energii, bateria"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutyna, harmonogram, oszczędzanie baterii, oszczędzanie energii, bateria, automatycznie, procent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, połączenia zaawansowane, połączenia 4g"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, połączenia zaawansowane, połączenia 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"dodaj język, dodawanie języka"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"rozmiar tekstu, duży druk, duża czcionka, duży tekst, niedowidzenie, powiększenie tekstu, powiększenie czcionki"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"zawsze aktywny wyświetlacz"</string>
     <string name="default_sound" msgid="6604374495015245195">"Dźwięk domyślny"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Głośność dzwonka i powiadomień na poziomie <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Głośność, wibracje, Nie przeszkadzać"</string>
@@ -3947,7 +3948,7 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Powiadomienia na ekranie blokady"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Pokazuj rozmowy, domyślne i ciche"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Pokazuj rozmowy, domyślne i ciche"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ukryj ciche rozmowy i powiadomienia"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ukrywaj ciche rozmowy i powiadomienia"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Nie pokazuj żadnych powiadomień"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Powiadomienia poufne"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Pokazuj treści poufne po zablokowaniu"</string>
@@ -5483,8 +5484,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Wyłącz sieć <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Wyłączenie karty SIM nie anuluje usługi"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Łączę się z siecią…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Przełączam na operatora <xliff:g id="CARRIER_NAME">%1$s</xliff:g> do obsługi połączeń i wiadomości…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Nie można przełączyć operatora"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Nie można przełączyć operatora z powodu błędu."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Wyłączyć usługę <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5640,10 +5640,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Długo"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Pokazuj portfel"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Zezwalaj na dostęp do portfela na ekranie blokady i w szybkich ustawieniach"</string>
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
-    <skip />
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Pokazuj skaner kodów QR"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Zezwól na dostęp do skanera kodów QR na ekranie blokady"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Pokazuj sterowanie urządzeniami"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Kontrola dostępu po zablokowaniu"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Pokazuj zegar dwuwierszowy, jeśli jest dostępny"</string>
@@ -5758,7 +5756,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Używaj Baterii adaptacyjnej"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Używaj automatycznej jasności"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Używaj Połączeń przez Wi-Fi"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Używaj wygaszacza ekranu"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Wyświetl wszystkie aplikacje"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Inteligentne przekierowywanie"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Włączono inteligentne przekierowywanie"</string>
@@ -5773,7 +5770,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Brak numeru telefonu."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Zezwól na 2G"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Używaj połączeń komórkowych 2G. W przypadku połączeń alarmowych sieć 2G jest zawsze włączona."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"Sieć 2G jest mniej bezpieczna, ale może poprawić jakość połączenia w niektórych lokalizacjach. W przypadku połączeń alarmowych sieć 2G jest zawsze dozwolona."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> wymaga dostępu do sieci 2G"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Pokazuj dostęp do schowka"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Pokazuj komunikat, gdy aplikacja uzyskuje dostęp do skopiowanego tekstu, obrazów lub innych treści"</string>
     <string name="all_apps" msgid="3054120149509114789">"Wszystkie aplikacje"</string>

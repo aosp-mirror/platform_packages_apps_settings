@@ -572,6 +572,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Ekrāna bloķēšanas opcija ir atspējota. Lai uzzinātu vairāk, sazinieties ar organizācijas administratoru. "<annotation id="admin_details">"Plašāka informācija"</annotation>\n\n"Joprojām varat izmantot pirksta nospiedumu, lai atļautu pirkumus un piekļuvi lietotnēm. "<annotation id="url">"Uzziniet vairāk"</annotation>"."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Paceliet pirkstu un pēc tam vēlreiz pieskarieties sensoram."</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Nevar izmantot pirksta nospieduma sensoru. Sazinieties ar remonta pakalpojumu sniedzēju."</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Papildu iestatījumi"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Darba profila bloķēšana, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock un citas funkcijas"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Papildu iestatījumi"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Varat pievienot līdz <xliff:g id="COUNT">%d</xliff:g> pirkstu nospiedumiem."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Jūs esat pievienojis maksimālo pirkstu nospiedumu skaitu."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nevar pievienot citus pirkstu nospiedumus."</string>
@@ -1450,6 +1454,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Lai kontrolētu, kas notiek, kad tālrunis tiek dokots un/vai ir miega režīmā, ieslēdziet ekrānsaudzētāju."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kad sākt"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Pašreizējais ekrānsaudzētājs"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Sākt tūlīt"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Iestatījumi"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Automātisks spilgtums"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Pacelt, lai ieslēgtu"</string>
@@ -1609,7 +1614,7 @@
     <string name="storage_menu_mount" msgid="4760531872302820569">"Pievienot"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Noņemt"</string>
     <string name="storage_menu_format" msgid="5454870642788909443">"Formatēt"</string>
-    <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatēt kā pārnēsājamu"</string>
+    <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatēt kā pārnesamu"</string>
     <string name="storage_menu_format_private" msgid="3208326980027382079">"Formatēt kā iekšēju"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migrēt datus"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Noņemt"</string>
@@ -1629,7 +1634,7 @@
     <string name="usb_midi_summary" msgid="1842457325845863840">"Ļauj lietojumprogrammām, kurās ir iespējoti MIDI signāli, darboties kopā ar jūsu datora MIDI programmatūru, izmantojot USB savienojumu."</string>
     <string name="storage_other_users" msgid="7017206190449510992">"Citi lietotāji"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"Ierīces atmiņa"</string>
-    <string name="storage_external_title" msgid="8984075540312137135">"Pārnēsājama krātuve"</string>
+    <string name="storage_external_title" msgid="8984075540312137135">"Pārnesama krātuve"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"izmantots no <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> ir pievienota"</string>
@@ -1648,7 +1653,7 @@
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Visas lietotnes, fotoattēli un dati, kas saglabāti šajā ierīcē (<xliff:g id="NAME">^1</xliff:g>), vairs nebūs pieejami."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistēmā ir ietverti faili, kas tiek izmantoti Android versijai <xliff:g id="VERSION">%s</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Iestatiet <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Izmantot kā pārnēsājamu krātuvi"</string>
+    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Izmantot kā pārnesamu krātuvi"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Izvēloties šo opciju, varēsiet pārvietot fotoattēlus un citus datus uz citām ierīcēm."</string>
     <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Izmantot kā iekšējo atmiņu"</string>
     <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Izvēloties šo opciju, varēsiet glabāt failus (tostarp lietotnes un fotoattēlus) tikai šajā ierīcē. Tādā gadījumā krātuve ir jāformatē, lai tā darbotos tikai konkrētā ierīcē."</string>
@@ -1686,9 +1691,9 @@
     <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Lietotnēm, failiem un multivides saturam tikai šajā tālrunī"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Tālruņa krātuve"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Vai"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Pārnēsājamai krātuvei"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Pārnesamai krātuvei"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Failu un multivides satura pārsūtīšanai starp ierīcēm"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Pārnēsājama krātuve"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Pārnesama krātuve"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Iestatīt vēlāk"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Vai formatēt šo: <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Lai saglabātu lietotnes, failus un multivides saturu, SD karte <xliff:g id="NAME_0">^1</xliff:g> ir jāformatē. \n\nFormatējot tiks dzēsts viss saturs, kas saglabāts šeit: <xliff:g id="NAME_1">^2</xliff:g>. Lai nezaudētu saturu, dublējiet to citā datu nesējā <xliff:g id="NAME_2">^3</xliff:g> vai citā ierīcē."</string>
@@ -1705,7 +1710,7 @@
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"Pārvietot saturu vēlāk"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"Notiek satura pārvietošana…"</string>
     <string name="storage_wizard_slow_v2_title" msgid="3760766921170980221">"<xliff:g id="NAME">^1</xliff:g> lēni darbojas"</string>
-    <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Varat turpināt lietot ierīci <xliff:g id="NAME_0">^1</xliff:g>, tomēr tā var darboties lēni. \n\nIerīcē <xliff:g id="NAME_1">^2</xliff:g> saglabātās lietotnes var darboties neatbilstoši un satura pārsūtīšanai var būt nepieciešams ilgs laiks. \n\nMēģiniet izmantot ierīci <xliff:g id="NAME_2">^3</xliff:g> ar ātrāku darbību, vai arī šo ierīci <xliff:g id="NAME_3">^4</xliff:g> izmantojiet kā pārnēsājamu krātuvi."</string>
+    <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Varat turpināt lietot ierīci <xliff:g id="NAME_0">^1</xliff:g>, tomēr tā var darboties lēni. \n\nIerīcē <xliff:g id="NAME_1">^2</xliff:g> saglabātās lietotnes var darboties neatbilstoši un satura pārsūtīšanai var būt nepieciešams ilgs laiks. \n\nMēģiniet izmantot ierīci <xliff:g id="NAME_2">^3</xliff:g> ar ātrāku darbību, vai arī šo ierīci <xliff:g id="NAME_3">^4</xliff:g> izmantojiet kā pārnesamu krātuvi."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Sākt vēlreiz"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Tālāk"</string>
     <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Varat pārvietot saturu uz ierīci <xliff:g id="NAME">^1</xliff:g>"</string>
@@ -2440,14 +2445,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Īsāks"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Ilgāks"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Automātiskās klikšķināšanas laiks"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrācija un vibrācija pieskaroties"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Zvani"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Paziņojumi un signāli"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktīva vibrācija pieskaroties"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Zvana vibrācija"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Paziņojuma vibrācija"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Pieskarieties vienumam Atsauksmes"</string>
@@ -3668,14 +3669,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptisks, vibrēt, ekrāns, jutīgums"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"skārienjutīgs, vibrācija, tālrunis, zvans, jutīgums, zvanīšana"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"skārienjutīgs, vibrācija, jutīgums"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"skārienjutīgs, vibrēt, vibrācija"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"akumulatora enerģijas taupīšanas režīms, fiksēts, saglabāties, enerģijas taupīšanas režīms, akumulators"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"darbību secība, grafiks, akumulatora enerģijas taupīšanas režīms, enerģijas taupīšanas režīms, akumulators, automātiski, procenti"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, paplašinātas zvanu iespējas, 4G zvani"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, paplašinātas zvanu iespējas, 5g zvani"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"pievienot valodu, valodas pievienošana"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"teksta lielums, lieli burti, lieli fonti, liels teksts, vājredzība, padarīt tekstu lielāku, fontu palielinātājs, fontu palielināšana"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"nepārtraukti aktīvs displejs"</string>
     <string name="default_sound" msgid="6604374495015245195">"Noklusējuma skaņa"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Zvanu un paziņojumu signāla skaļums: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Skaļums, vibrācija, režīms “Netraucēt”"</string>
@@ -5396,8 +5397,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Izslēgt operatoru <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Izslēdzot kāda operatora SIM karti, netiks atcelts jūsu izmantotais plāns."</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Notiek savienojuma izveide ar tīklu…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Notiek pārslēgšanās uz <xliff:g id="CARRIER_NAME">%1$s</xliff:g> savienojumu zvaniem un ziņojumu sūtīšanai…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Nevar pārslēgties uz cita mobilo sakaru operatora tīklu"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Nevar pārslēgties uz cita mobilo sakaru operatora tīklu, jo radās kļūda."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Vai izslēgt pakalpojumu <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5551,10 +5551,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Ilgi"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Rādīt maku"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Atļaut piekļuvi makam no bloķēšanas ekrāna un ātrajiem iestatījumiem"</string>
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
-    <skip />
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Rādīt ātrās atbildes koda skeneri"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Atļaut piekļuvi ātrās atbildes koda skenerim no bloķēšanas ekrāna"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Rādīt ierīču vadīklas"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Piekļūt vadīklām, kad ekrāns ir bloķēts"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Rādīt pulksteni divās rindās, ja tas ir pieejams"</string>
@@ -5669,7 +5667,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Izmantot funkciju Adaptīvais akumulators"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Izmantot adaptīvu spilgtumu"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Izmantot Wi-Fi zvanus"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Izmantot ekrānsaudzētāju"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Skatīt visas lietotnes"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Viedā pāradresācija"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Viedā pāradresācija ir iespējota"</string>
@@ -5684,7 +5681,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Nav norādīts tālruņa numurs."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Labi"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G atļaušana"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Izmantojiet 2G mobilo datu savienojumus. Ārkārtas izsaukumiem 2G vienmēr ir ieslēgts."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G drošības līmenis ir zemāks, taču dažās atrašanās vietās šis savienojums var būt stabilāks. Ārkārtas izsaukumiem 2G lietošana vienmēr ir atļauta."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> pieprasa 2G tīkla pieejamību"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Rādīt paziņojumus par piekļuvi starpliktuvei"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Rādīt ziņojumu, kad lietotnes piekļūst jūsu nokopētajam tekstam, attēliem vai citam saturam"</string>
     <string name="all_apps" msgid="3054120149509114789">"Visas lietotnes"</string>
