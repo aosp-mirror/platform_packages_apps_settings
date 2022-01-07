@@ -40,18 +40,16 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
-public class RingVibrationTogglePreferenceControllerTest {
+public class AlarmVibrationTogglePreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "preference_key";
-    private static final int OFF = 0;
-    private static final int ON = 1;
 
     @Mock private PreferenceScreen mScreen;
 
     private Lifecycle mLifecycle;
     private Context mContext;
     private Vibrator mVibrator;
-    private RingVibrationTogglePreferenceController mController;
+    private AlarmVibrationTogglePreferenceController mController;
     private SwitchPreference mPreference;
 
     @Before
@@ -60,7 +58,7 @@ public class RingVibrationTogglePreferenceControllerTest {
         mLifecycle = new Lifecycle(() -> mLifecycle);
         mContext = ApplicationProvider.getApplicationContext();
         mVibrator = mContext.getSystemService(Vibrator.class);
-        mController = new RingVibrationTogglePreferenceController(mContext, PREFERENCE_KEY);
+        mController = new AlarmVibrationTogglePreferenceController(mContext, PREFERENCE_KEY);
         mLifecycle.addObserver(mController);
         mPreference = new SwitchPreference(mContext);
         mPreference.setSummary("Test summary");
@@ -78,46 +76,46 @@ public class RingVibrationTogglePreferenceControllerTest {
     @Test
     public void missingSetting_shouldReturnDefault() {
         Settings.System.putString(mContext.getContentResolver(),
-                Settings.System.RING_VIBRATION_INTENSITY, /* value= */ null);
+                Settings.System.ALARM_VIBRATION_INTENSITY, /* value= */ null);
+
         mController.updateState(mPreference);
+
         assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
     public void updateState_shouldDisplayOnOffState() {
-        updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
+        updateSetting(Settings.System.ALARM_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isTrue();
 
-        updateSetting(Settings.System.RING_VIBRATION_INTENSITY,
+        updateSetting(Settings.System.ALARM_VIBRATION_INTENSITY,
                 Vibrator.VIBRATION_INTENSITY_MEDIUM);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isTrue();
 
-        updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
+        updateSetting(Settings.System.ALARM_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isTrue();
 
-        updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
+        updateSetting(Settings.System.ALARM_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
     public void setChecked_updatesIntensityAndDependentSettings() throws Exception {
-        updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
+        updateSetting(Settings.System.ALARM_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isFalse();
 
         mController.setChecked(true);
-        assertThat(readSetting(Settings.System.RING_VIBRATION_INTENSITY)).isEqualTo(
-                mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_RINGTONE));
-        assertThat(readSetting(Settings.System.VIBRATE_WHEN_RINGING)).isEqualTo(ON);
+        assertThat(readSetting(Settings.System.ALARM_VIBRATION_INTENSITY)).isEqualTo(
+                mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_ALARM));
 
         mController.setChecked(false);
-        assertThat(readSetting(Settings.System.RING_VIBRATION_INTENSITY))
+        assertThat(readSetting(Settings.System.ALARM_VIBRATION_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-        assertThat(readSetting(Settings.System.VIBRATE_WHEN_RINGING)).isEqualTo(OFF);
     }
 
     private void updateSetting(String key, int value) {

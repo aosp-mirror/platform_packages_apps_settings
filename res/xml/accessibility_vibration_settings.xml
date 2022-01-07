@@ -47,6 +47,12 @@
             app:keywords="@string/keywords_notification_vibration"
             app:controller="com.android.settings.accessibility.NotificationVibrationTogglePreferenceController" />
 
+        <SwitchPreference
+            android:key="alarm_vibration_preference_screen"
+            android:title="@string/accessibility_alarm_vibration_title"
+            app:keywords="@string/keywords_alarm_vibration"
+            app:controller="com.android.settings.accessibility.AlarmVibrationTogglePreferenceController" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -58,6 +64,12 @@
             android:title="@string/accessibility_touch_vibration_title"
             app:keywords="@string/keywords_touch_vibration"
             app:controller="com.android.settings.accessibility.HapticFeedbackTogglePreferenceController" />
+
+        <SwitchPreference
+            android:key="media_vibration_preference_screen"
+            android:title="@string/accessibility_media_vibration_title"
+            app:keywords="@string/keywords_media_vibration"
+            app:controller="com.android.settings.accessibility.MediaVibrationTogglePreferenceController" />
 
     </PreferenceCategory>
 

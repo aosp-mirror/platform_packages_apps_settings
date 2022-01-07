@@ -30,11 +30,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Vibrator;
-import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
@@ -53,14 +51,12 @@ public class VibrationRampingRingerTogglePreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "preference_key";
 
-    @Mock
-    private PreferenceScreen mScreen;
-    @Mock
-    private TelephonyManager mTelephonyManager;
-    @Mock
-    private AudioManager mAudioManager;
+    @Mock private PreferenceScreen mScreen;
+    @Mock private TelephonyManager mTelephonyManager;
+    @Mock private AudioManager mAudioManager;
+    @Mock private VibrationRampingRingerTogglePreferenceController.DeviceConfigProvider
+            mDeviceConfigProvider;
 
-    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private Context mContext;
     private VibrationRampingRingerTogglePreferenceController mController;
@@ -69,18 +65,17 @@ public class VibrationRampingRingerTogglePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
         mController = new VibrationRampingRingerTogglePreferenceController(mContext,
-                PREFERENCE_KEY);
+                PREFERENCE_KEY, mDeviceConfigProvider);
         mLifecycle.addObserver(mController);
         mPreference = new SwitchPreference(mContext);
         mPreference.setSummary("Test summary");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        showPreference();
+        mController.displayPreference(mScreen);
     }
 
     @Test
@@ -91,8 +86,7 @@ public class VibrationRampingRingerTogglePreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_notVoiceCapable_returnUnsupportedOnDevice() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_TELEPHONY,
-                VibrationRampingRingerTogglePreferenceController.DEVICE_CONFIG_KEY, "false", false);
+        when(mDeviceConfigProvider.isRampingRingerEnabledOnTelephonyConfig()).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
@@ -100,8 +94,7 @@ public class VibrationRampingRingerTogglePreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_rampingRingerEnabled_returnUnsupportedOnDevice() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_TELEPHONY,
-                VibrationRampingRingerTogglePreferenceController.DEVICE_CONFIG_KEY, "true", false);
+        when(mDeviceConfigProvider.isRampingRingerEnabledOnTelephonyConfig()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
@@ -109,8 +102,7 @@ public class VibrationRampingRingerTogglePreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_voiceCapableAndRampingRingerDisabled_returnAvailable() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_TELEPHONY,
-                VibrationRampingRingerTogglePreferenceController.DEVICE_CONFIG_KEY, "false", false);
+        when(mDeviceConfigProvider.isRampingRingerEnabledOnTelephonyConfig()).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -143,8 +135,8 @@ public class VibrationRampingRingerTogglePreferenceControllerTest {
     public void setChecked_withRingDisabled_ignoresUpdates() {
         updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
 
-        mPreference.setChecked(true);
-        mPreference.setChecked(false);
+        mController.setChecked(true);
+        mController.setChecked(false);
         verify(mAudioManager, never()).setRampingRingerEnabled(anyBoolean());
     }
 
@@ -152,18 +144,14 @@ public class VibrationRampingRingerTogglePreferenceControllerTest {
     public void setChecked_withRingEnabled_updatesSetting() {
         updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
 
-        mPreference.setChecked(true);
+        mController.setChecked(true);
         verify(mAudioManager).setRampingRingerEnabled(true);
 
-        mPreference.setChecked(false);
+        mController.setChecked(false);
         verify(mAudioManager).setRampingRingerEnabled(false);
     }
 
     private void updateSetting(String key, int value) {
         Settings.System.putInt(mContext.getContentResolver(), key, value);
-    }
-
-    private void showPreference() {
-        mController.displayPreference(mScreen);
     }
 }
