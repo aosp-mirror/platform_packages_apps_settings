@@ -566,7 +566,9 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
 
         if (mSelectedWifiEntry.canDisconnect()) {
-            menu.add(Menu.NONE, MENU_ID_SHARE, 0 /* order */, R.string.share);
+            if (mSelectedWifiEntry.canShare()) {
+                menu.add(Menu.NONE, MENU_ID_SHARE, 0 /* order */, R.string.share);
+            }
             menu.add(Menu.NONE, MENU_ID_DISCONNECT, 1 /* order */,
                     R.string.wifi_disconnect_button_text);
         }

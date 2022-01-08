@@ -21,13 +21,17 @@
     android:clipToPadding="true"
     android:clipChildren="true"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/captioning_preview_height"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
+        android:clipToOutline="true"
+        android:background="@drawable/protection_background"
         android:src="@drawable/caption_background"/>
 
     <FrameLayout

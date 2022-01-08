@@ -36,6 +36,14 @@
         android:persistent="false"
         android:title="@string/display_category_title">
 
+        <!-- After completely finishing the Text and reading options feature, it will be visible. -->
+        <Preference
+            android:icon="@drawable/ic_adaptive_font_download"
+            android:key="text_reading_options"
+            android:persistent="false"
+            android:title="@strings/accessibility_text_reading_options_title"
+            settings:isPreferenceVisible="false"/>
+
         <Preference
             android:fragment="com.android.settings.accessibility.TextAndDisplayFragment"
             android:key="text_and_display_preference_screen"
