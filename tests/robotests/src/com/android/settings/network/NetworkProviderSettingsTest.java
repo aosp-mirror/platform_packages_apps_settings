@@ -38,6 +38,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.location.LocationManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -98,6 +99,8 @@ public class NetworkProviderSettingsTest {
     @Mock
     private UserManager mUserManager;
     @Mock
+    private LocationManager mLocationManager;
+    @Mock
     private AirplaneModeEnabler mAirplaneModeEnabler;
     @Mock
     private DataUsagePreference mDataUsagePreference;
@@ -133,6 +136,7 @@ public class NetworkProviderSettingsTest {
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(mLocationManager).when(mContext).getSystemService(LocationManager.class);
         when(mUserManager.hasBaseUserRestriction(any(), any())).thenReturn(true);
         doReturn(mContext).when(mPreferenceManager).getContext();
         mNetworkProviderSettings.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
@@ -543,19 +547,41 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    public void setWifiScanMessage_wifiOffScanOn_footerIsVisible() {
+    public void setWifiScanMessage_wifiOffLocationOnScanOn_footerIsVisible() {
         when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
 
         mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ false);
 
         assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isTrue();
         assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.getTitle().length())
-                .isNotEqualTo(0);
+            .isNotEqualTo(0);
     }
 
     @Test
-    public void setWifiScanMessage_wifiOffScanOff_footerIsInvisible() {
+    public void setWifiScanMessage_wifiOffLocationOnScanOff_footerIsInvisible() {
         when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
+
+        mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ false);
+
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void setWifiScanMessage_wifiOffLocationOffScanOn_footerIsInvisible() {
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
+        when(mLocationManager.isLocationEnabled()).thenReturn(false);
+
+        mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ false);
+
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void setWifiScanMessage_wifiOffLocationOffScanOff_footerIsInvisible() {
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
+        when(mLocationManager.isLocationEnabled()).thenReturn(false);
 
         mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ false);
 
