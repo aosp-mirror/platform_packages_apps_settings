@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" സ്‌ക്രീൻ ലോക്ക് ഓപ്ഷൻ പ്രവർത്തനരഹിതമാക്കി. കൂടുതലറിയാൻ, നിങ്ങളുടെ സ്ഥാപനത്തിന്റെ അഡ്‌മിനെ ബന്ധപ്പെടുക. "<annotation id="admin_details">"കൂടുതൽ വിശദാംശങ്ങൾ"</annotation>\n\n"നിങ്ങൾക്ക് ഇപ്പോഴും ഫിംഗർപ്രിന്റ് ഉപയോഗിച്ച് വാങ്ങലുകളും ആപ്പ് ആക്‌സസ്സും അംഗീകരിക്കാൻ കഴിയും. "<annotation id="url">"കൂടുതലറിയുക"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"വിരൽ ഉയർത്തുക, തുടർന്ന് സെൻസർ വീണ്ടും തൊടുക"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"വിരലടയാള സെൻസർ ഉപയോഗിക്കാനാകുന്നില്ല. റിപ്പയർ കേന്ദ്രം സന്ദർശിക്കുക"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"വിപുലമായ ക്രമീകരണം"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"ഔദ്യോഗിക പ്രൊഫൈൽ ലോക്ക്, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock-ഉം മറ്റും"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"വിപുലമായ ക്രമീകരണം"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"നിങ്ങൾക്ക് <xliff:g id="COUNT">%d</xliff:g> വരെ ഫിംഗർപ്രിൻറുകൾ ചേർക്കാനാകും"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"നിങ്ങൾ പരമാവധി എണ്ണം ഫിംഗർപ്രിന്റുകൾ ചേർത്തിട്ടുണ്ട്"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"കൂടുതൽ ഫിംഗർപ്രിന്റുകൾ ചേർക്കാൻ കഴിയില്ല"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"ഫോൺ ഡോക്ക് ചെയ്തിരിക്കുമ്പോൾ ഒപ്പം/അല്ലെങ്കിൽ ഉറക്കത്തിലായിരിക്കുമ്പോൾ ഫോണിൽ നടക്കുന്നതെല്ലാം നിയന്ത്രിക്കുന്നതിന് സ്ക്രീൻ സേവർ ഓണാക്കുക."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"എപ്പോൾ തുടങ്ങണം"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"നിലവിലെ സ്‌ക്രീൻ സേവർ"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"ഇപ്പോൾ ആരംഭിക്കുക"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"ക്രമീകരണം"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"യാന്ത്രിക തെളിച്ചം"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"സജീവമാക്കാൻ ലിഫ്റ്റുചെയ്യുക"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"കുറഞ്ഞ സമയം"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"കൂടുതൽ സമയം"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"സ്വയമേവ ക്ലിക്ക് ചെയ്യാനെടുക്കുന്ന സമയം"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"വെെബ്രേഷനും സ്പർശനവും"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"കോളുകൾ"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"അറിയിപ്പുകളും അലാറങ്ങളും"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"ഇന്ററാക്റ്റീവ് സ്പർശനം"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"റിംഗ് വൈബ്രേഷൻ"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"അറിയിപ്പ് വൈബ്രേഷൻ"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"സ്‌പർശന ഫീഡ്ബാക്ക്"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"സ്‌പർശ സംബന്ധി, വൈബ്രേറ്റ്, സ്ക്രീൻ, സെൻസിറ്റിവിറ്റി"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"സ്‌പര്‍ശനങ്ങൾ, വൈബ്രേറ്റ് ചെയ്യുക, ഫോൺ, കോൾ സെൻസിറ്റിവിറ്റി, റിംഗ് ചെയ്യുക"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"സ്‌പര്‍ശനങ്ങൾ, വൈബ്രേറ്റ് ചെയ്യൽ, സെൻസിറ്റിവിറ്റി"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"സ്‌പർശനം, വൈബ്രേറ്റ് ചെയ്യൽ, വൈബ്രേഷൻ"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ബാറ്ററി ലാഭിക്കൽ, സ്‌റ്റിക്കി, നിലനിൽക്കുക, പവർ സേവർ, ബാറ്ററി"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ദിനചര്യ, ഷെഡ്യൂൾ, ബാറ്ററി ലാഭിക്കൽ, പവർ സേവർ, ബാറ്ററി, സ്വയമേവ, ശതമാനം"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, വിപുലമായ കോളിംഗ്, 4g കോളിംഗ്"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, വിപുലീകരിച്ച കോളിംഗ്, 5g കോളിംഗ്"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ഭാഷ ചേർക്കുക, ഒരു ഭാഷ ചേർക്കുക"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"ടെക്‌സ്റ്റ് വലുപ്പം, വലിയ പ്രിന്റ്, വലിയ ഫോണ്ട്, വലിയ ടെക്‌സ്റ്റ്, കുറഞ്ഞ കാഴ്ച, ടെക്‌സ്റ്റ് കൂടുതൽ വലുതാക്കുക, ഫോണ്ട് വലുതാക്കൽ, ഫോണ്ടിന്റെ വലുപ്പം കൂട്ടൽ"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"എപ്പോഴും ഓണായ ഡിസ്‌പ്ലേ"</string>
     <string name="default_sound" msgid="6604374495015245195">"സ്ഥിര ശബ്‌ദം"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"റിംഗ് ചെയ്യുന്നതിന്റെയും അറിയിപ്പിന്റെയും ശബ്‌ദം <xliff:g id="PERCENTAGE">%1$s</xliff:g> ആണ്"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ശബ്ദം, വൈബ്രേഷൻ, ശല്യപ്പെടുത്തരുത്"</string>
@@ -5309,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ഓഫാക്കുക"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"സിം ഓഫാക്കുന്നത് നിങ്ങളുടെ സേവനം റദ്ദാക്കില്ല"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"നെറ്റ്‌വർക്കിലേക്ക് കണക്‌റ്റ് ചെയ്യുന്നു…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"കോളുകൾക്കും സന്ദേശങ്ങൾക്കും <xliff:g id="CARRIER_NAME">%1$s</xliff:g> എന്നതിലേക്ക് മാറുന്നു…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"കാരിയറെ മാറ്റാനാകുന്നില്ല"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"ഒരു പിശക് കാരണം കാരിയറെ മാറ്റാനാകുന്നില്ല."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ഓഫാക്കണോ?"</string>
@@ -5578,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"അഡാപ്റ്റീവ് ബാറ്ററി ഉപയോഗിക്കുക"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"അനുയോജ്യമായ തെളിച്ചം ഉപയോഗിക്കുക"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"വൈഫൈ കോളിംഗ് ഉപയോഗിക്കുക"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"സ്ക്രീൻ സേവർ ഉപയോഗിക്കുക"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"എല്ലാ ആപ്പുകളും കാണുക"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"സ്‌മാർട്ട് കൈമാറൽ"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"സ്‌മാർട്ട് കൈമാറൽ പ്രവർത്തനക്ഷമമാക്കി"</string>
@@ -5593,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ഫോൺ നമ്പർ കാണുന്നില്ല."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ശരി"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G അനുവദിക്കുക"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G സെല്ലുലാർ കണക്ഷനുകൾ ഉപയോഗിക്കുക. എമർജൻസി കോളുകൾക്ക്, 2G എല്ലായ്‌പ്പോഴും ഓണാണ്."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G-യ്ക്ക് സുരക്ഷ കുറവാണെങ്കിലും ചില ലൊക്കേഷനുകളിൽ അത് നിങ്ങളുടെ കണക്ഷൻ മെച്ചപ്പെടുത്തിയേക്കാം. എമർജൻസി കോളുകൾക്ക്, 2G എപ്പോഴും അനുവദനീയമാണ്."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> എന്നതിന് 2G ആവശ്യമാണ്"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ക്ലിപ്പ്ബോർഡ് ആക്‌സസ് കാണിക്കുക"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"നിങ്ങൾ പകർത്തിയ ടെക്‌സ്‌റ്റോ ചിത്രങ്ങളോ മറ്റ് ഉള്ളടക്കമോ ആപ്പുകൾ ആക്‌സസ് ചെയ്യുമ്പോൾ ഒരു സന്ദേശം കാണിക്കുക"</string>
     <string name="all_apps" msgid="3054120149509114789">"എല്ലാ ആപ്പുകളും"</string>

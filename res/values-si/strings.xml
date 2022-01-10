@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" තිර අගුලු විකල්පය අබලයි. තව දැන ගැනීමට ඔබේ සංවිධානයේ පරිපාලක අමතන්න. "<annotation id="admin_details">"තවත් විස්තර"</annotation>\n\n"ඔබට තවමත් මිලදී ගැනීම් සහ යෙදුම් ප්‍රවේශය සඳහා අනුමැතිය දීමට ඔබේ ඇඟිලි සලකුණ භාවිත කළ හැකිය. "<annotation id="url">"තව දැන ගන්න"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ඇඟිල්ල ඔසවා, අනතුරුව නැවත සංවේදකය ස්පර්ශ කරන්න"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"ඇඟිලි සලකුණු සංවේදකය භාවිත කළ නොහැකිය. අළුත්වැඩියා සැපයුම්කරුවෙකු බලන්න"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"උසස් සැකසීම්"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"කාර්යාල පැතිකඩ අගුල, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock සහ තවත් දේ"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"උසස් සැකසීම්"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"ඔබට ඇඟිලි සලකුණු <xliff:g id="COUNT">%d</xliff:g> දක්වා එකතු කළ හැකිය"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"ඔබ ඇඟිලි සලකුණු උපරිම සංඛ්‍යාව එක් කර ඇත"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"තවත් ඇඟිලි සලකුණු එක් කළ නොහැකිය"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"දුරකථනය රඳවා ඇති විට සහ/හෝ නිද්‍රාවේ ඇති විට සිදු වන දේ පාලනය කිරීමට, තිර සුරැකුම ක්‍රියාත්මක කරන්න."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"පටන් ගන්න මොන වේලාවටද"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"වර්තමාන තිර සුරැකුම"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"දැන් අරඹන්න"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"සැකසීම්"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"ස්වයංක්‍රිය දීප්තිය"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"අවදි කිරීමට ඔසවන්න"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"වඩාත් කෙටි"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"වඩාත් දිග"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"ස්වයං ක්ලික් කිරීමේ වේලාව"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"කම්පනය සහ ස්පර්ශ"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"ඇමතුම්"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"දැනුම්දීම් සහ එලාම"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"අන්තර්ක්‍රියාකාරි ස්පර්ශ"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"නාද කම්පනය"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"දැනුම්දීම් කම්පනය"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"ප්‍රතිපෝෂණය ස්පර්ශ කරන්න"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"ස්පර්ශ, කම්පනය, තිරය, සංවේදීතාව"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"ස්පර්ශ, කම්පනය, දුරකථනය, ඇමතුම, සංවේදීතාව, නාදය"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"ස්පර්ශ, කම්පනය, සංවේදීතාව"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"ස්පර්ශ, කම්පන, කම්පනය"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"බැටරි සුරැකුම, ඇලෙන, දිගටම පැවතීම, බල සුරැකුම, බැටරිය"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"චර්යානුගත, කාල සටහන, බැටරි සුරැකුම, බල සුරැකුම, බැටරිය, ස්වයංක්‍රීය, ප්‍රතිශතය"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, උසස් ඇමතුම්, 4g ඇමතුම්"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, උසස් ඇමතුම, 5g ඇමතුම"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"භාෂාව එක් කරන්න, භාෂාවක් එක් කරන්න"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"පෙළ ප්‍රමාණය, විශාල මුද්‍රණය, විශාල අකුරු, විශාල පෙළ, අඩු දෘශ්‍යතාව, පෙළ වඩා විශාල කරන්න, අකුරු වඩා විශාල කරන්න, අකුරු විශාල කිරීම"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"සෑම විට ක්‍රියාත්මක සංදර්ශකය"</string>
     <string name="default_sound" msgid="6604374495015245195">"සුපුරුදු හඬ"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"නාද සහ දැනුම්දීම හඬ පරිමාව <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"හඬ පරිමාව, කම්පනය, බාධා නොකරන්න"</string>
@@ -5309,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ක්‍රියාවිරහිත කරන්න"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM එකක් ක්‍රියාවිරහිත කිරීම ඔබගේ සේවාව අවලංගු නොකරනු ඇත"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"ජාලයට සම්බන්ධ වෙමින්…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"ඇමතුම් සහ පණිවිඩ සඳහා <xliff:g id="CARRIER_NAME">%1$s</xliff:g> වෙත මාරු වෙමින්…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"වාහකය මාරු කළ නොහැකිය"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"දෝෂයක් හේතුවෙන් වාහකය මාරු කළ නොහැකිය."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ක්‍රියාවිරහිත කරන්නද?"</string>
@@ -5578,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"අනුවර්තී බැටරිය භාවිත කරන්න"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"අනුවර්තී දීප්තිය භාවිත කරන්න"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Wi‑Fi ඇමතීම භාවිත කරන්න"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"තිර සුරැකුම භාවිත කරන්න"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"සියලු යෙදුම් බලන්න"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"ස්මාර්ට් යොමු කිරීම"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"ස්මාර්ට් යොමු කිරීම සබලයි"</string>
@@ -5593,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"දුරකථන අංකය අස්ථානගතයි."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"හරි"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G ඉඩ දෙන්න"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G සෙලියුලර් සම්බන්ධතා භාවිත කරන්න. හදිසි අවස්ථා ඇමතුම් සඳහා, 2G සැම විට ක්‍රියාත්මක කර ඇත."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G ආරක්ෂාව අඩු නමුත් සමහර ස්ථානවල ඔබගේ සම්බන්ධතාවය වැඩිදියුණු කළ හැකිය. හදිසි අවස්ථා ඇමතුම් සඳහා, 2G සැම විට ඉඩ දේ."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> හට 2G ලබා ගැනීමේ හැකියාව අවශ්‍ය වේ"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"පසුරු ප්‍රවේශය පෙන්වන්න"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"යෙදුම් ඔබ පිටපත් කර ඇති පෙළ, රූප හෝ වෙනත් අන්තර්ගතයට ප්‍රවේශ වන විට පණිවිඩයක් පෙන්වන්න"</string>
     <string name="all_apps" msgid="3054120149509114789">"සියලු යෙදුම්"</string>

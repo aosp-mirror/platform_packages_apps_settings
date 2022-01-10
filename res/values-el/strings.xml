@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Η επιλογή κλειδώματος οθόνης είναι απενεργοποιημένη. Για να μάθετε περισσότερα, επικοινωνήστε με τον διαχειριστή της εφαρμογής σας. "<annotation id="admin_details">"Περισσότερες λεπτομέρειες"</annotation>\n\n"Μπορείτε να εξακολουθήσετε να χρησιμοποιείτε το δακτυλικό αποτύπωμα για την εξουσιοδότηση αγορών και την πρόσβαση εφαρμογών. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Σηκώστε το δάχτυλο και, στη συνέχεια, αγγίξτε ξανά τον αισθητήρα"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Δεν είναι δυνατή η χρήση του αισθητήρα δακτ. αποτυπωμ. Επισκεφτείτε έναν πάροχο υπηρεσιών επισκευής."</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Σύνθετες ρυθμίσεις"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Κλείδωμα προφίλ εργασίας, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock και άλλα"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Σύνθετες ρυθμίσεις"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Μπορείτε να προσθέσετε έως <xliff:g id="COUNT">%d</xliff:g> μοναδικά χαρακτηριστικά"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Έχετε προσθέσει τον μέγιστο αριθμό δακτυλικών αποτυπωμάτων"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Δεν είναι δυνατή η προσθήκη περισσότερων δακτυλικών αποτυπωμάτων"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Ενεργοποιήστε την προφύλαξη οθόνης για να ελέγξετε τι συμβαίνει όταν το τηλέφωνό σας είναι συνδεδεμένο στη βάση σύνδεσης ή/και βρίσκεται σε κατάσταση αδράνειας."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Πότε να ξεκινάει"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Τρέχουσα προφύλαξη οθόνης"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Έναρξη τώρα"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Ρυθμίσεις"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Αυτόματη φωτεινότητα"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Σηκώστε για ενεργοποίηση"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Πιο σύντομη"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Πιο παρατεταμένη"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Διάρκεια αυτόματου κλικ"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Δόνηση και απτική λειτουργία"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Κλήσεις"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Ειδοποιήσεις και ξυπνητήρια"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Διαδραστική απτική λειτουργία"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Δόνηση κλήσης"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Δόνηση ειδοποίησης"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Ανάδραση αφής"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"απτική, δόνηση, οθόνη, ευαισθησία"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"απτική, δόνηση, τηλέφωνο, κλήση, ευαισθησία, κουδούνισμα"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"απτική, δόνηση, ευαισθησία"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"απτική λειτουργία, δόνηση"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"εξοικονόμηση μπαταρίας, σταθερή, μόνιμη, εξοικονόμηση ενέργειας, μπαταρία"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ρουτίνα, χρονοδιάγραμμα, εξοικονόμηση μπαταρίας, εξοικονόμηση ενέργειας, μπαταρία, αυτόματα, ποσοστό"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, σύνθετες λειτουργίες κλήσης, κλήσεις 4g"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, σύνθετες λειτουργίες κλήσης, κλήση 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"προσθήκη γλώσσας, προσθέστε μια γλώσσα"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"μέγεθος οθόνης, μεγάλη εκτύπωση, μεγάλη γραμματοσειρά, μεγάλο κείμενο, χαμηλή όραση, αύξηση μεγέθους κειμένου, εργαλείο αύξησης μεγέθους γραμματοσειράς, αύξηση μεγέθους γραμματοσειράς"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"πάντα ενεργή οθόνη"</string>
     <string name="default_sound" msgid="6604374495015245195">"Προεπιλεγμένος ήχος"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Ένταση ήχου κουδουνίσματος και ειδοποιήσεων στο <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Ένταση ήχου, δόνηση, λειτουργία \"Μην ενοχλείτε\""</string>
@@ -5309,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Απενεργοποίηση <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Η απενεργοποίηση μιας SIM δεν θα ακυρώσει την υπηρεσία"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Σύνδεση στο δίκτυο…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Εναλλαγή σε <xliff:g id="CARRIER_NAME">%1$s</xliff:g> για κλήσεις και μηνύματα…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Δεν είναι δυνατή η εναλλαγή εταιρείας κινητής τηλεφωνίας"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Δεν είναι δυνατή η εναλλαγή εταιρείας κινητής τηλεφωνίας λόγω ενός σφάλματος."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Απενεργοποίηση <xliff:g id="CARRIER_NAME">%1$s</xliff:g>;"</string>
@@ -5462,10 +5462,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Μεγάλη"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Εμφάνιση πορτοφολιού"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Επιτρέψτε την πρόσβαση στο πορτοφόλι από την οθόνη κλειδώματος και τις γρήγορες ρυθμίσεις"</string>
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
-    <skip />
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Εμφάνιση σαρωτή QR"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Να επιτρέπεται η πρόσβαση στον σαρωτή QR από την οθόνη κλειδώματος"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Εμφάνιση στοιχείων ελέγχου συσκευής"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Πρόσβαση στα στοιχεία ελέγχου κατά το κλείδωμα"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Εμφάνιση ρολογιού διπλής γραμμής όταν είναι διαθέσιμο"</string>
@@ -5580,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Χρήση Προσαρμοστικής μπαταρίας"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Χρήση Προσαρμοστική φωτεινότητας"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Χρήση κλήσης Wi‑Fi"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Χρήση προφύλαξης οθόνης"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Εμφάνιση όλων των εφαρμογών"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Έξυπνη προώθηση"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Η Έξυπνη προώθηση έχει ενεργοποιηθεί"</string>
@@ -5595,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Ο αριθμός τηλεφώνου απουσιάζει."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ΟΚ"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Να επιτρέπεται το 2G"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Χρήση συνδέσεων κινητής τηλεφωνίας 2G. Για κλήσεις έκτακτης ανάγκης, το 2G είναι πάντα ενεργοποιημένο."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"Το 2G είναι λιγότερο ασφαλές, αλλά μπορεί να βελτιώσει τη σύνδεσή σας σε ορισμένες τοποθεσίες. Για κλήσεις έκτακτης ανάγκης, το 2G επιτρέπεται πάντα."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Το <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> απαιτεί τη διαθεσιμότητα 2G"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Εμφάνιση πρόσβασης στο πρόχειρο"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Να εμφανίζεται ένα μήνυμα όταν οι εφαρμογές αποκτούν πρόσβαση σε κείμενο, εικόνες ή άλλο περιεχόμενο που έχετε αντιγράψει"</string>
     <string name="all_apps" msgid="3054120149509114789">"Όλες οι εφαρμογές"</string>

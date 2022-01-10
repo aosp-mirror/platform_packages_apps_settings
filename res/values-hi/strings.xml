@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" स्क्रीन लॉक विकल्प बंद है. ज़्यादा जानने के लिए, अपने संगठन के एडमिन से संपर्क करें. "<annotation id="admin_details">"ज़्यादा जानकारी{"</annotation>\n\n"आप खरीदारी और ऐप ऐक्सेस की अनुमति देने के लिए अब भी अपने फ़िंगरप्रिंट का इस्तेमाल कर सकते हैं. "<annotation id="url">"ज़्यादा जानें"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"उंगली हटाएं और सेंसर को फिर से छूएं"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"फ़िंगरप्रिंट सेंसर इस्तेमाल नहीं किया जा सकता. रिपेयर की सेवा देने वाली कंपनी से संपर्क करें"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"बेहतर सेटिंग"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"वर्क प्रोफ़ाइल लॉक, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock और अन्य सेटिंग"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"बेहतर सेटिंग"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"आप <xliff:g id="COUNT">%d</xliff:g> फ़िंगरप्रिंट तक जोड़ सकते हैं"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"आप अधिकतम संख्या में फ़िंगरप्रिंट जोड़ चुके हैं"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"और ज़्यादा फ़िंगरप्रिंट नहीं जोड़े जा सकते"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"फ़ोन के डॉक रहते समय और/या उपयोग में नहीं होने पर जो भी होता है, उसे नियंत्रित करने के लिए स्क्रीन सेवर चालू करें."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"कब शुरू करना है"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"मौजूदा स्क्रीन सेवर"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"अभी शुरू करें"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"सेटिंग"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"अपनेआप स्क्रीन की रोशनी"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"सक्रिय करने के लिए उठाएं"</string>
@@ -3626,6 +3631,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, बेहतर कॉलिंग, 5G कॉलिंग"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"भाषा जोड़ें, किसी भाषा को जोड़ें"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"टेक्स्ट का साइज़, बड़ा प्रिंट, बड़ा फ़ॉन्ट, बड़ा टेक्स्ट, कम दृष्टि, टेक्स्ट बड़ा करना, फ़ॉन्ट बड़ा करने वाला टूल, फ़ॉन्ट बड़ा करना"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"हमेशा चालू रहने वाला डिसप्ले"</string>
     <string name="default_sound" msgid="6604374495015245195">"डिफ़ॉल्‍ट ध्‍वनि"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"घंटी और सूचना की आवाज़ <xliff:g id="PERCENTAGE">%1$s</xliff:g> है"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"आवाज़, वाइब्रेशन, परेशान न करें"</string>
@@ -5304,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> को बंद करें"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"सिम को बंद करने से आपकी सेवाएं बंद नहीं होंगी"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"नेटवर्क से कनेक्ट किया जा रहा है…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"कॉल और मैसेज की सुविधा के लिए, <xliff:g id="CARRIER_NAME">%1$s</xliff:g> पर स्विच किया जा रहा है…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी को बदला नहीं जा सकता"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"किसी गड़बड़ी की वजह से, मोबाइल और इंटरनेट सेवा देने वाली कंपनी को बदला नहीं जा सकता."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"क्या आप <xliff:g id="CARRIER_NAME">%1$s</xliff:g> को बंद करना चाहते हैं?"</string>
@@ -5573,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"ज़रूरत के हिसाब से बैटरी का इस्तेमाल करने की सुविधा आज़माएं"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"आस-पास की रोशनी के हिसाब से स्क्रीन की चमक की सुविधा का इस्तेमाल करें"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"वाई-फ़ाई कॉलिंग का इस्तेमाल करें"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"स्क्रीन सेवर का इस्तेमाल करें"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"सभी ऐप्लिकेशन देखें"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"स्मार्ट फ़ॉरवर्डिंग"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"स्मार्ट फ़ॉरवर्डिंग की सुविधा चालू है"</string>
@@ -5588,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"फ़ोन नंबर नहीं डाला गया."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ठीक है"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G के इस्तेमाल की मंज़ूरी दें"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G मोबाइल इंटरनेट कनेक्शन का इस्तेमाल करें. आपातकालीन कॉल करने के लिए, 2G सेवा हमेशा चालू रहती है."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G नेटवर्क कम सुरक्षित होता है, लेकिन कुछ जगहों में यह आपको बेहतर कनेक्शन दे सकता है. आपातकालीन कॉल के लिए, 2G नेटवर्क का इस्तेमाल हमेशा किया जा सकता है."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> के लिए 2G नेटवर्क होना ज़रूरी है"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"क्लिपबोर्ड का डेटा ऐक्सेस किए जाने पर मैसेज दिखाएं"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"जब ऐप्लिकेशन, कॉपी किए गए टेक्स्ट, इमेज या अन्य कॉन्टेंट का इस्तेमाल करें, तो मैसेज दिखाएं"</string>
     <string name="all_apps" msgid="3054120149509114789">"सभी ऐप्लिकेशन"</string>
