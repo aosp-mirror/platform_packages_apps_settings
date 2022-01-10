@@ -825,6 +825,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"તમારે આ પિનને અન્ય ઉપકરણ પર પણ લખવાની જરૂર પડી શકે છે."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"તમારે આ પાસકીને અન્ય ઉપકરણ પર પણ લખવાની જરૂર પડી શકે છે."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"આની સાથે જોડી કરવા માટે:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;ખાતરી કરો કે તે આ પાસકી દર્શાવી રહ્યું છે:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"સુસંગત સેટ સાથે જોડાણ બનાવવાનું કન્ફર્મ કરો"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"અહીંથી:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;આ ઉપકરણ સાથે જોડી કરીએ?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"આની સાથે જોડી કરવા:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>તેના પર લખો:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, પછી Return અથવા Enter દબાવો."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"તમારા સંપર્કો અને કૉલ ઇતિહાસના ઍક્સેસની મંજૂરી આપો"</string>
@@ -858,6 +859,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"કનેક્ટ ન કરી શક્યાં. ફરી પ્રયાસ કરો."</string>
     <string name="device_details_title" msgid="1155622417516195481">"ડિવાઇસની વિગતો"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"ડિવાઇસનું બ્લૂટૂથ ઍડ્રેસ: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"ડિવાઇસનું બ્લૂટૂથ ઍડ્રેસ:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"ડિવાઇસને ભૂલી જઈએ?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"જોડાણ કાઢી નાખો"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"ઍપને ડિસ્કનેક્ટ કરીએ?"</string>
@@ -890,6 +892,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"સેટિંગ યાદ રાખો"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"મહત્તમ સંખ્યામાં કનેક્ટ થયેલા બ્લૂટૂથ ઑડિયો ડિવાઇસ"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"મહત્તમ સંખ્યામાં કનેક્ટ થયેલા બ્લૂટૂથ ઑડિયો ડિવાઇસ પસંદ કરો"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC સ્ટૅકનો ડિબગ લૉગ"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"NFC સ્ટૅકનું લૉગ ઇન કરવાનું લેવલ વધારો"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"કાસ્ટ કરો"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"મીરર"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"વાયરલેસ ડિસ્પ્લે સક્ષમ કરો"</string>
@@ -2667,7 +2671,7 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"અમુક સુવિધાઓ મર્યાદિત હોઈ શકે છે"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"બૅટરીનો સૌથી વધુ વપરાશ"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"સૌથી વધુ વપરાતી હોય એવી ઍપ જુઓ"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"ચાર્જિંગ હંગામીરૂપે પ્રતિબંધિત કરવામાં આવ્યું છે"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"ચાર્જ કરવાનું થોડા સમય માટે મર્યાદિત કરવામાં આવ્યું છે"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"તમારી બૅટરીની જાળવણી માટે. વધુ જાણો."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"ચાર્જ કરવાનું ફરી શરૂ કરો"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"ઉચ્ચ તાપમાન અને ચાર્જિંગની લાંબી અવધિ જેવી અમુક ચોક્કસ પરિસ્થિતિઓમાં, ચાર્જિંગ <xliff:g id="PERCENT">%1$s</xliff:g> સુધી મર્યાદિત હોઈ શકે છે જેથી બૅટરીની ક્ષમતાને જાળવી રાખવામાં સહાય કરી શકાય.\n\n"</string>

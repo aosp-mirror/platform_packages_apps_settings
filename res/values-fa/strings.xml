@@ -825,6 +825,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"ممکن است لازم باشد که این پین را در دستگاه دیگری وارد کنید."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"ممکن است لازم باشد این کلیدواژه را نیز در دستگاه دیگر وارد کنید."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"‏برای مرتبط‌سازی با:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;مطمئن شوید که دستگاه این کلیدواژه را نمایش می‌دهد:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"تأیید مرتبط‌سازی با مجموعه هماهنگ"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"‏از::&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;با این دستگاه مرتبط‌سازی شود؟"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"‏برای مرتبط‌سازی با:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>روی آن تایپ کنید:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>، سپس Return یا Enter را فشار دهید."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"اجازه دسترسی به مخاطبین و سابقه تماس"</string>
@@ -858,6 +859,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"متصل نشد. دوباره امتحان کنید."</string>
     <string name="device_details_title" msgid="1155622417516195481">"جزئیات دستگاه"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"نشانی بلوتوث دستگاه: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"نشانی بلوتوث دستگاه:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"دستگاه فراموش شود؟"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"حذف ارتباط"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"ارتباط برنامه قطع شود؟"</string>
@@ -890,6 +892,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"به خاطر سپردن تنظیمات"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"حداکثر تعداد دستگاه‌های صوتی بلوتوث متصل"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"حداکثر تعداد دستگاه‌های صوتی بلوتوث متصل را انتخاب کنید"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"‏گزارش اشکال‌زدایی پشته‌ای NFC"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"‏افزایش سطح گزارش‌گیری پشته‌ای NFC"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ارسال محتوا"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"نمایش صفحه نمایش روی دستگاه دیگر"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"فعال کردن نمایش بی‌سیم"</string>
@@ -1134,9 +1138,9 @@
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="1234150304285575798">"‏Wi-Fi پیشرفته"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
-    <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"‏نشانی MAC دستگاه"</string>
-    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"‏نشانی MAC تصادفی"</string>
-    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"‏نشانی MAC تصادفی (آخرین استفاده)"</string>
+    <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"«نشانی واد» دستگاه"</string>
+    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"«نشانی واد» تصادفی"</string>
+    <string name="wifi_advanced_randomized_mac_address_disconnected_title" msgid="2755843130417523727">"«نشانی واد» تصادفی (آخرین استفاده)"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"‏نشانی IP"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"جزئیات شبکه"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"پوشش زیرشبکه"</string>

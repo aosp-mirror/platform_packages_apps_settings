@@ -861,6 +861,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Ta PIN boste morda morali vnesti tudi v drugi napravi."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Geslo boste morda morali vnesti tudi v drugi napravi."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Če želite seznaniti z napravo:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Prikazano mora biti to geslo:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Potrdite seznanjanje s kompletom naprav"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"Od:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Ali se želite povezati s to napravo?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Če želite vzpostaviti povezavo z napravo:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>V njej vnesite:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> in pritisnite Return ali Enter."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Dovoli dostop do stikov in zgodovine klicev"</string>
@@ -894,6 +895,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Povezave ni bilo mogoče vzpostaviti. Poskusite znova."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Podrobnosti o napravi"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Naslov Bluetooth naprave: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Naslov Bluetooth naprave:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Želite, da vaša naprava pozabi seznanjeno napravo?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Odstrani povezavo"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Želite prekiniti povezavo z aplikacijo?"</string>
@@ -926,6 +928,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Zapomni si nastavitve"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Največje dovoljeno število povezanih zvočnih naprav Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Izberite največje dovoljeno število povezanih zvočnih naprav Bluetooth"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Dnevnik odpravljanja napak sklada NFC"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Povečaj raven zapisovanja dnevnika za sklad NFC"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Predvajanje"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"zrcaljenje"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Omogočanje brezžičnega zaslona"</string>
@@ -2732,7 +2736,7 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Višja poraba energije baterije"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ogled aplikacij z najvišjo porabo energije"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Začasno omejeno polnjenje"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Da se bo energija baterija počasneje porabljala. Več o tem"</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Za ohranjanje baterije. Več o tem"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Nadaljuj polnjenje"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"V nekaterih pogojih, na primer pri visokih temperaturah ali daljšem polnjenju, bo polnjenje morda omejeno na <xliff:g id="PERCENT">%1$s</xliff:g> za ohranjanje ustreznega stanja baterije.\n\nKo teh pogojev ni več, polnjenje baterije telefona samodejno zopet poteka kot običajno."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"V nekaterih pogojih, na primer pri visokih temperaturah ali daljšem polnjenju, bo polnjenje morda omejeno na <xliff:g id="PERCENT">%1$s</xliff:g> za ohranjanje ustreznega stanja baterije.\n\nKo teh pogojev ni več, polnjenje baterije tabličnega računalnika samodejno zopet poteka kot običajno."</string>
@@ -3887,7 +3891,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Če vklopite oblačke za to aplikacijo, bodo vklopljeni tudi za napravo.\n\nTo vpliva na druge aplikacije ali pogovore, v katerih je prikaz v oblačkih že omogočen."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Vklopi"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Prekliči"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Vklopljeno/pogovori so lahko prikazani kot lebdeče ikone"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Vklopljeno/pogovori so lahko prikazani kot lebdeče ikone."</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Omogoči aplikacijam, da prikažejo oblačke"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Nekateri pogovori bodo prikazani kot lebdeče ikone nad drugimi aplikacijami."</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Vsi pogovori so lahko prikazani v oblačkih"</string>

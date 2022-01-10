@@ -825,6 +825,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Jy sal hierdie PIN dalk op die ander toestel ook moet invoer."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Jy sal hierdie sleutel dalk op die ander toestel ook moet invoer."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Om saam te bind met:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;maak seker dit wys hierdie geheimsleutel:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Bevestig om met die gekoördineerde stel saam te bind"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"Van:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Bind met hierdie toestel saam?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Om saam te bind met:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Voer daarop in:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, druk dan Return of Enter."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Laat toegang tot jou kontakte en oproepgeskiedenis toe"</string>
@@ -858,6 +859,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Kon nie koppel nie. Probeer weer."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Toestelbesonderhede"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Toestel se Bluetooth-adres: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Toestel se Bluetooth-adres:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vergeet toestel?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Verwyder assosiasie"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Ontkoppel program?"</string>
@@ -890,6 +892,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Onthou instellings"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maks. gekoppelde Bluetooth-oudiotoestelle"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Kies maksimum aantal gekoppelde Bluetooth-oudiotoestelle"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC-stapelontfoutingloglêer"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Verhoog NFC-stapelloglêervlak"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Saai uit"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"weerspieël"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktiveer draadlose skermdeling"</string>
@@ -2670,8 +2674,8 @@
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Laaiproses word tydelik beperk"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Om jou battery te spaar. Kom meer te wete."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Hervat laaiproses"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"In sekere omstandighede, soos hoë temperature en lang laaitydperke, kan die laaiproses tot <xliff:g id="PERCENT">%1$s</xliff:g> beperk word om te help om batterygesondheid in stand te hou.\n\nWanneer dié omstandighede eindig, sal jou foon outomaties normaalweg laai."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"In sekere omstandighede, soos hoë temperature en lang laaitydperke, kan die laaiproses tot <xliff:g id="PERCENT">%1$s</xliff:g> beperk word om te help om batterygesondheid in stand te hou.\n\nWanneer daardie omstandighede eindig, sal jou tablet outomaties normaalweg laai."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"In sekere omstandighede, soos hoë temperature en lang laaitydperke, kan die laaiproses tot <xliff:g id="PERCENT">%1$s</xliff:g> beperk word om die battery gesond te hou.\n\nWanneer dié omstandighede eindig, sal jou foon outomaties normaalweg laai."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"In sekere omstandighede, soos hoë temperature en lang laaitydperke, kan die laaiproses tot <xliff:g id="PERCENT">%1$s</xliff:g> beperk word om die battery gesond te hou.\n\nWanneer daardie omstandighede eindig, sal jou tablet outomaties normaalweg laai."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Jy het jou foon meer as gewoonlik gebruik en daarom sal jou battery dalk gouer as normaalweg pap word.\n\nProgramme wat die meeste batterykrag gebruik:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Jy het jou tablet meer as gewoonlik gebruik en daarom sal jou battery dalk gouer as normaalweg pap word.\n\nProgramme wat die meeste batterykrag gebruik:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Jy het jou toestel meer as gewoonlik gebruik en daarom sal jou battery dalk gouer as normaalweg pap word.\n\nProgramme wat die meeste batterykrag gebruik:"</string>
