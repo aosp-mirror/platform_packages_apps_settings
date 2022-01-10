@@ -46,7 +46,7 @@ public class ScreenPinningPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new ScreenPinningPreferenceController(mContext);
+        mController = new ScreenPinningPreferenceController(mContext, "key");
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
     }
