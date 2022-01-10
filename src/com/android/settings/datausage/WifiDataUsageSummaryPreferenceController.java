@@ -26,6 +26,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.net.DataUsageController;
 
+import java.util.Set;
+
 /**
  * The controller displays a data usage chart for the specified Wi-Fi network.
  */
@@ -52,7 +54,8 @@ public class WifiDataUsageSummaryPreferenceController extends DataUsageSummaryPr
         final DataUsageSummaryPreference mPreference = (DataUsageSummaryPreference) preference;
         // TODO(b/126299427): Currently gets data usage of whole Wi-Fi networks, but should get
         //  specified one.
-        final NetworkTemplate template = NetworkTemplate.buildTemplateWifi(mNetworkId);
+        final NetworkTemplate template = new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
+                .setWifiNetworkKeys(Set.of(mNetworkId)).build();
         final DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 template);
         mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(template));
