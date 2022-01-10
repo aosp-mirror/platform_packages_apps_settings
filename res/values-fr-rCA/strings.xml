@@ -299,8 +299,8 @@
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Utiliser ma position"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Désactivé"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="one">Activé : <xliff:g id="COUNT_1">%1$d</xliff:g> application a accès à la position</item>
-      <item quantity="other">Activé : <xliff:g id="COUNT_1">%1$d</xliff:g> applications ont accès à la position</item>
+      <item quantity="one">Activée : <xliff:g id="COUNT_1">%1$d</xliff:g> application a accès à la position</item>
+      <item quantity="other">Activée : <xliff:g id="COUNT_1">%1$d</xliff:g> applications ont accès à la position</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Chargement en cours…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Les applications qui disposent de l\'autorisation de détection des appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
@@ -473,7 +473,7 @@
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Le capteur d\'empreintes digitales se trouve sur votre écran. Vous capturerez votre empreinte digitale au prochain écran."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Démarrer"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"Déplacez votre doigt sur l\'écran pour trouver le capteur. Maintenez le doigt sur le capteur d\'empreintes digitales."</string>
-    <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustration présentant l\'appareil et la position du capteur d\'empreinte digitale"</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustration présentant l\'appareil et la position du capteur d\'empreintes digitales"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nom"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Supprimer"</string>
@@ -556,7 +556,7 @@
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Votre empreinte digitale vous permet non seulement de déverrouiller votre téléphone, mais également d\'autoriser des achats et l\'accès à l\'application. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" L\'option de verrouillage de l\'écran est désactivée. Pour en savoir plus, communiquez avec l\'administrateur de votre organisation. "<annotation id="admin_details">"Plus de détails"</annotation>\n\n"Vous pouvez toujours utiliser votre empreinte digitale pour autoriser les achats et l\'accès aux applications. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Relevez le doigt, puis touchez le capteur à nouveau"</string>
-    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Impossible utiliser capteur empreinte digitale. Consultez un fournisseur de services de réparation"</string>
+    <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Impossible utiliser capteur empreintes digitales. Consultez un fournisseur de services de réparation"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> empreintes digitales"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Vous avez ajouté le nombre maximal d\'empreintes digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossible d\'ajouter des empreintes digitales"</string>
@@ -825,6 +825,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Vous devrez peut-être également saisir ce NIP sur l\'autre appareil."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Vous devrez peut-être également saisir ce mot de passe sur l\'autre appareil."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Pour associer votre appareil à :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assurez-vous que le mot de passe &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; s\'affiche."</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Confirmez pour effectuer l\'association avec l\'ensemble coordonné"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"De :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Associer à cet appareil?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Pour l\'association à :<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisissez <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, puis appuyez sur « Retour » ou sur « Entrée »."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Autoriser l\'accès à vos contacts et à l\'historique des appels"</string>
@@ -858,6 +859,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Échec de la connexion. Réessayez."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Détails de l\'appareil"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Adresse Bluetooth de l\'appareil : <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Adresse Bluetooth de l\'appareil :\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Oublier l\'appareil?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Retirer l\'association"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Déconnecter l\'application?"</string>
@@ -890,6 +892,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Mémoriser ces paramètres"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maximum d\'appareils audio Bluetooth connectés"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Sélectionnez le nombre maximal d\'appareils Bluetooth connectés"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Journal de débogage de la pile de la CCP"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Accroître le niveau de journalisation de la pile de la CCP"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"miroir"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activer l\'affichage sans fil"</string>
@@ -2670,8 +2674,8 @@
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Recharge temporairement limitée"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Pour préserver votre pile. Apprenez-en plus."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Reprendre la charge"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Dans certaines conditions, comme des températures élevées ou de longues périodes de charge, la charge pourrait être limitée à <xliff:g id="PERCENT">%1$s</xliff:g> pour aider à préserver la santé de la pile.\n\nLorsque ces conditions prennent fin, votre téléphone se chargera normalement de façon automatique."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Dans certaines conditions, comme des températures élevées ou de longues périodes de charge, la charge pourrait être limitée à <xliff:g id="PERCENT">%1$s</xliff:g> pour aider à préserver la santé de la pile.\n\nLorsque ces conditions prennent fin, votre tablette se chargera normalement de façon automatique."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Dans certaines conditions, comme des températures élevées ou de longues périodes de charge, la charge pourrait être limitée à <xliff:g id="PERCENT">%1$s</xliff:g> pour aider à préserver la santé de la pile.\n\nLorsque ces conditions prendront fin, votre téléphone se rechargera normalement de façon automatique."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Dans certaines conditions, comme des températures élevées ou de longues périodes de charge, la charge pourrait être limitée à <xliff:g id="PERCENT">%1$s</xliff:g> pour aider à préserver la santé de la pile.\n\nLorsque ces conditions prendront fin, votre tablette se rechargera normalement de façon automatique."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Comme vous avez utilisé votre téléphone plus que d\'habitude, votre pile risque de s\'épuiser plus tôt que prévu. \n\nLes applications qui utilisent le plus d\'énergie de la pile :"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Comme vous avez utilisé votre tablette plus que d\'habitude, votre pile risque de s\'épuiser plus tôt que prévu. \n\nLes applications qui utilisent le plus d\'énergie de la pile :"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Comme vous avez utilisé votre appareil plus que d\'habitude, votre pile risque de s\'épuiser plus tôt que prévu. \n\nLes applications qui utilisent le plus d\'énergie de la pile :"</string>
@@ -2948,7 +2952,7 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> non sécurisés"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Connectivité adaptative"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Prolonge l\'autonomie de la pile et améliore la performance de l\'appareil en gérant automatiquement vos connexions réseau"</string>
-    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Activé"</string>
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Activée"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Désactivé"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Stockage des authentifiants"</string>
     <string name="credentials_install" msgid="3933218407598415827">"Installer un certificat"</string>
@@ -3795,7 +3799,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"L\'activation des bulles pour cette application activera aussi les bulles pour votre appareil.\n\nCela a un impact sur les autres applications ou les conversations qui peuvent s\'afficher en bulles."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Activer"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Annuler"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Activé : les conversations peuvent s\'afficher sous forme d\'icônes flottantes"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Activées : les conversations peuvent s\'afficher sous forme d\'icônes flottantes"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Autoriser les applications à afficher des bulles"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Certaines conversations s\'afficheront sous forme d\'icônes flottantes superposées aux autres applications"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Toutes les conversations peuvent s\'afficher dans des bulles"</string>

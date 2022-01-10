@@ -842,6 +842,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Iespējams, šis PIN būs jāievada arī otrā ierīcē."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Iespējams, šī ieejas atslēga būs jāievada arī otrā ierīcē."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Lai savienotu pārī ar:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Pārliecinieties, ka tiek rādīta šī ieejas atslēga:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Apstipriniet, lai savienotu pārī ar koordinēto kopu."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"No:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vai savienot pārī ar šo ierīci?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Lai izveidotu savienojumu pārī ar ierīci <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>, ierakstiet tajā atslēgu <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> un pēc tam nospiediet ievadīšanas taustiņu."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Atļaut piekļuvi jūsu kontaktpersonām un zvanu vēsturei"</string>
@@ -875,6 +876,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Nevarēja izveidot savienojumu. Mēģiniet vēlreiz."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Ierīces dati"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Ierīces Bluetooth adrese: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Ierīces Bluetooth adrese:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vai aizmirst ierīci?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Noņemt saistījumu"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Vai atvienot lietotni?"</string>
@@ -907,6 +909,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Iegaumēt iestatījumus"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Pievienoto Bluetooth audioierīču maksimālais skaits"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Pievienoto Bluetooth audioierīču maksimālā skaita atlase"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"NFC steka atkļūdošanas žurnāls"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Palielināt NFC steka reģistrēšanas līmeni"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Apraide"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spogulis"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Bezvadu attēlošanas iespējošana"</string>
@@ -1604,7 +1608,7 @@
     <string name="storage_menu_mount" msgid="4760531872302820569">"Pievienot"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Noņemt"</string>
     <string name="storage_menu_format" msgid="5454870642788909443">"Formatēt"</string>
-    <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatēt kā pārnēsājamu"</string>
+    <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatēt kā pārnesamu"</string>
     <string name="storage_menu_format_private" msgid="3208326980027382079">"Formatēt kā iekšēju"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Migrēt datus"</string>
     <string name="storage_menu_forget" msgid="5154017890033638936">"Noņemt"</string>
@@ -1624,7 +1628,7 @@
     <string name="usb_midi_summary" msgid="1842457325845863840">"Ļauj lietojumprogrammām, kurās ir iespējoti MIDI signāli, darboties kopā ar jūsu datora MIDI programmatūru, izmantojot USB savienojumu."</string>
     <string name="storage_other_users" msgid="7017206190449510992">"Citi lietotāji"</string>
     <string name="storage_internal_title" msgid="3265098802217660829">"Ierīces atmiņa"</string>
-    <string name="storage_external_title" msgid="8984075540312137135">"Pārnēsājama krātuve"</string>
+    <string name="storage_external_title" msgid="8984075540312137135">"Pārnesama krātuve"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"izmantots no <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> ir pievienota"</string>
@@ -1643,7 +1647,7 @@
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Visas lietotnes, fotoattēli un dati, kas saglabāti šajā ierīcē (<xliff:g id="NAME">^1</xliff:g>), vairs nebūs pieejami."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Sistēmā ir ietverti faili, kas tiek izmantoti Android versijai <xliff:g id="VERSION">%s</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Iestatiet <xliff:g id="NAME">^1</xliff:g>"</string>
-    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Izmantot kā pārnēsājamu krātuvi"</string>
+    <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Izmantot kā pārnesamu krātuvi"</string>
     <string name="storage_wizard_init_external_summary" msgid="5807552934494462984">"Izvēloties šo opciju, varēsiet pārvietot fotoattēlus un citus datus uz citām ierīcēm."</string>
     <string name="storage_wizard_init_internal_title" msgid="3256355049992147270">"Izmantot kā iekšējo atmiņu"</string>
     <string name="storage_wizard_init_internal_summary" msgid="2283798331883929674">"Izvēloties šo opciju, varēsiet glabāt failus (tostarp lietotnes un fotoattēlus) tikai šajā ierīcē. Tādā gadījumā krātuve ir jāformatē, lai tā darbotos tikai konkrētā ierīcē."</string>
@@ -1681,9 +1685,9 @@
     <string name="storage_wizard_init_v2_internal_summary" product="default" msgid="3022584310096954875">"Lietotnēm, failiem un multivides saturam tikai šajā tālrunī"</string>
     <string name="storage_wizard_init_v2_internal_action" product="default" msgid="5645732875040797464">"Tālruņa krātuve"</string>
     <string name="storage_wizard_init_v2_or" msgid="5558706089661158026">"Vai"</string>
-    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Pārnēsājamai krātuvei"</string>
+    <string name="storage_wizard_init_v2_external_title" msgid="8129096036551264207">"Pārnesamai krātuvei"</string>
     <string name="storage_wizard_init_v2_external_summary" msgid="6436419488235871823">"Failu un multivides satura pārsūtīšanai starp ierīcēm"</string>
-    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Pārnēsājama krātuve"</string>
+    <string name="storage_wizard_init_v2_external_action" msgid="781928899530539860">"Pārnesama krātuve"</string>
     <string name="storage_wizard_init_v2_later" msgid="5366815913892609285">"Iestatīt vēlāk"</string>
     <string name="storage_wizard_format_confirm_v2_title" msgid="6294104100437326067">"Vai formatēt šo: <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_wizard_format_confirm_v2_body" msgid="635958708974709506">"Lai saglabātu lietotnes, failus un multivides saturu, SD karte <xliff:g id="NAME_0">^1</xliff:g> ir jāformatē. \n\nFormatējot tiks dzēsts viss saturs, kas saglabāts šeit: <xliff:g id="NAME_1">^2</xliff:g>. Lai nezaudētu saturu, dublējiet to citā datu nesējā <xliff:g id="NAME_2">^3</xliff:g> vai citā ierīcē."</string>
@@ -1700,7 +1704,7 @@
     <string name="storage_wizard_migrate_v2_later" msgid="6067756122853315642">"Pārvietot saturu vēlāk"</string>
     <string name="storage_wizard_migrate_progress_v2_title" msgid="8791318509516968103">"Notiek satura pārvietošana…"</string>
     <string name="storage_wizard_slow_v2_title" msgid="3760766921170980221">"<xliff:g id="NAME">^1</xliff:g> lēni darbojas"</string>
-    <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Varat turpināt lietot ierīci <xliff:g id="NAME_0">^1</xliff:g>, tomēr tā var darboties lēni. \n\nIerīcē <xliff:g id="NAME_1">^2</xliff:g> saglabātās lietotnes var darboties neatbilstoši un satura pārsūtīšanai var būt nepieciešams ilgs laiks. \n\nMēģiniet izmantot ierīci <xliff:g id="NAME_2">^3</xliff:g> ar ātrāku darbību, vai arī šo ierīci <xliff:g id="NAME_3">^4</xliff:g> izmantojiet kā pārnēsājamu krātuvi."</string>
+    <string name="storage_wizard_slow_v2_body" msgid="7604252106419016929">"Varat turpināt lietot ierīci <xliff:g id="NAME_0">^1</xliff:g>, tomēr tā var darboties lēni. \n\nIerīcē <xliff:g id="NAME_1">^2</xliff:g> saglabātās lietotnes var darboties neatbilstoši un satura pārsūtīšanai var būt nepieciešams ilgs laiks. \n\nMēģiniet izmantot ierīci <xliff:g id="NAME_2">^3</xliff:g> ar ātrāku darbību, vai arī šo ierīci <xliff:g id="NAME_3">^4</xliff:g> izmantojiet kā pārnesamu krātuvi."</string>
     <string name="storage_wizard_slow_v2_start_over" msgid="1806852287668077536">"Sākt vēlreiz"</string>
     <string name="storage_wizard_slow_v2_continue" msgid="7469713755893007901">"Tālāk"</string>
     <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Varat pārvietot saturu uz ierīci <xliff:g id="NAME">^1</xliff:g>"</string>

@@ -861,6 +861,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Вам таксама можа спатрэбіцца ўвесці гэты PIN-код на іншай прыладзе."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Вам таксама можа спатрэбіцца ўвесці гэты ключ доступу на іншай прыладзе."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Каб падключыцца да прылады &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;пераканайцеся, што яна адлюстроўвае ключ доступу:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Пацвердзіце спалучэнне з узгодненым наборам"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"Ад: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>Падключыцца да гэтай прылады?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Каб падключыцца да прылады <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>, увядзiце <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, затым нацiснiце \"Назад\" або Enter"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Дазвольце доступ да сваіх кантактаў і гісторыі выклікаў"</string>
@@ -894,6 +895,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Не атрымалася ўсталяваць злучэнне. Паўтарыце спробу."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Звесткі пра прыладу"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Адрас Bluetooth прылады: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Адрас Bluetooth прылады: \n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Забыць прыладу?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Выдаліць сувязь"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Адключыць праграму?"</string>
@@ -926,6 +928,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Запомніць налады"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максімальная колькасць падключаных аўдыяпрылад Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Выбар максімальнай колькасці падключаных аўдыяпрылад Bluetooth"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Журнал адладкі стоса NFC"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Павысіць узровень вядзення журналаў для стоса NFC"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Трансляцыя"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"адлюстраванне"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Уключыць бесправадны дысплей"</string>
@@ -2607,7 +2611,7 @@
     <string name="keywords_accessibility" msgid="4263443239404659143">"Лёгкасць выкарыстання, прастата доступу, дапамога, дапаможны"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"Лупа для акна, маштаб, павелічэнне, слабы зрок, павялічыць, зрабіць большым"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
-    <string name="keywords_live_caption" msgid="1667203998080567556">"Субцітры, субцітры, цітры, Імгненная транскрыпцыя, слабы слых, страта слыху, транскрыпцыя ў рэальным часе, пераўтварэнне маўлення ў тэкст, субцітр"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"Субцітры, цітры, Імгненная расшыфроўка, слабы слых, страта слыху, расшыфроўка ў рэальным часе, пераўтварэнне маўлення ў тэкст, субцітр"</string>
     <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
     <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
     <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
@@ -2931,7 +2935,7 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"Абнавіць"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Сервер медыя"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"Аптымізацыя дадаткаў"</string>
-    <string name="battery_saver" msgid="7737147344510595864">"Эканомія зараду"</string>
+    <string name="battery_saver" msgid="7737147344510595864">"Рэжым энергазберажэння"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Уключаць аўтаматычна"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Няма раскладу"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"На падставе распарадку"</string>
@@ -3150,7 +3154,7 @@
     <string name="sync_in_progress" msgid="6200093151211458977">"Сінхранiзаваць зараз"</string>
     <string name="settings_backup" msgid="5357973563989458049">"Налады рэзервовага капіявання"</string>
     <string name="settings_backup_summary" msgid="6803046376335724034">"Рэзервовае капіяванне маіх налад"</string>
-    <string name="sync_menu_sync_now" msgid="3948443642329221882">"Сінхранізаваць цяпер"</string>
+    <string name="sync_menu_sync_now" msgid="3948443642329221882">"Сінхранізаваць зараз"</string>
     <string name="sync_menu_sync_cancel" msgid="2422994461106269813">"Адмяніць сінхранізацыю"</string>
     <string name="sync_one_time_sync" msgid="8114337154112057462">"Краніце, каб сінхранізаваць зараз<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
