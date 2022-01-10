@@ -17,9 +17,11 @@
 package com.android.settings.activityembedding;
 
 import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.FeatureFlagUtils;
 import android.util.LayoutDirection;
 import android.util.Log;
 
@@ -35,9 +37,11 @@ import com.android.settings.Settings;
 import com.android.settings.SubSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.SliceDeepLinkHomepageActivity;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -206,9 +210,20 @@ public class ActivityEmbeddingRulesController {
 
     private void registerAlwaysExpandRule() {
         final Set<ActivityFilter> activityFilters = new HashSet<>();
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SETTINGS_SEARCH_ALWAYS_EXPAND)) {
+            final Intent searchIntent = FeatureFactory.getFactory(mContext)
+                    .getSearchFeatureProvider()
+                    .buildSearchIntent(mContext, SettingsEnums.SETTINGS_HOMEPAGE);
+            addActivityFilter(activityFilters, searchIntent);
+        }
         addActivityFilter(activityFilters, FingerprintEnrollIntroduction.class);
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
         mSplitController.registerRule(new ActivityRule(activityFilters, true /* alwaysExpand */));
+    }
+
+    private static void addActivityFilter(Set<ActivityFilter> activityFilters, Intent intent) {
+        activityFilters.add(new ActivityFilter(new ComponentName("*" /* pkg */, "*" /* cls */),
+                intent.getAction()));
     }
 
     private void addActivityFilter(Set<ActivityFilter> activityFilters,
