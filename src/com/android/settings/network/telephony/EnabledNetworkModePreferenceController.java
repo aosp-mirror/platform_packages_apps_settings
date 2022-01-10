@@ -37,6 +37,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
@@ -58,7 +59,7 @@ public class EnabledNetworkModePreferenceController extends
     private Preference mPreference;
     private PreferenceScreen mPreferenceScreen;
     private TelephonyManager mTelephonyManager;
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     private PreferenceEntriesBuilder mBuilder;
     private SubscriptionsChangeListener mSubscriptionsListener;
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
@@ -67,7 +68,7 @@ public class EnabledNetworkModePreferenceController extends
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
-        mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
+        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
         if (mTelephonyCallback == null) {
             mTelephonyCallback = new PhoneCallStateTelephonyCallback();
         }
@@ -80,7 +81,7 @@ public class EnabledNetworkModePreferenceController extends
             return AVAILABLE_UNSEARCHABLE;
         }
 
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
         } else if (carrierConfig == null) {
@@ -202,7 +203,7 @@ public class EnabledNetworkModePreferenceController extends
     }
 
     private final class PreferenceEntriesBuilder {
-        private CarrierConfigManager mCarrierConfigManager;
+        private CarrierConfigCache mCarrierConfigCache;
         private Context mContext;
         private TelephonyManager mTelephonyManager;
 
@@ -221,7 +222,7 @@ public class EnabledNetworkModePreferenceController extends
         PreferenceEntriesBuilder(Context context, int subId) {
             this.mContext = context;
             this.mSubId = subId;
-            mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
+            mCarrierConfigCache = CarrierConfigCache.getInstance(context);
             mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                     .createForSubscriptionId(mSubId);
             updateConfig();
@@ -229,7 +230,7 @@ public class EnabledNetworkModePreferenceController extends
 
         public void updateConfig() {
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
-            final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+            final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
             mAllowed5gNetworkType = checkSupportedRadioBitmask(
                     mTelephonyManager.getAllowedNetworkTypesForReason(
                             TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER),
@@ -413,7 +414,7 @@ public class EnabledNetworkModePreferenceController extends
         private EnabledNetworks getEnabledNetworkType() {
             EnabledNetworks enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_UNKNOWN;
             final int phoneType = mTelephonyManager.getPhoneType();
-            final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+            final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
 
             if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
                 final int lteForced = android.provider.Settings.Global.getInt(
