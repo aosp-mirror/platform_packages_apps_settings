@@ -31,9 +31,6 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settingslib.testutils.DrawableTestHelper;
-
-import com.google.android.setupdesign.GlifLayout;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -97,16 +94,6 @@ public class ChooseLockPatternTest {
                 (LockscreenCredential) intent.getParcelableExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL))
                 .isNotNull();
-    }
-
-    @Config(qualifiers = "sw400dp")
-    @Test
-    public void fingerprintExtraSet_shouldDisplayFingerprintIcon() {
-        ChooseLockPattern activity = createActivity(true);
-        ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
-                activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
-        DrawableTestHelper.assertDrawableResId(((GlifLayout) fragment.getView()).getIcon(),
-                R.drawable.ic_fingerprint_header);
     }
 
     @Config(qualifiers = "sw300dp")

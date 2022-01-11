@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.wifi.details2;
+package com.android.settings.wifi.details;
 
 import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 
@@ -54,9 +54,9 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
-public class WifiNetworkDetailsFragment2Test {
+public class WifiNetworkDetailsFragmentTest {
 
-    final String TEST_PREFERENCE_KEY = "TEST_PREFERENCE_KEY";
+    private static final String TEST_PREFERENCE_KEY = "TEST_PREFERENCE_KEY";
 
     @Mock
     WifiEntry mWifiEntry;
@@ -64,7 +64,7 @@ public class WifiNetworkDetailsFragment2Test {
     NetworkDetailsTracker mNetworkDetailsTracker;
     @Mock
     Menu mMenu;
-    private WifiNetworkDetailsFragment2 mFragment;
+    private WifiNetworkDetailsFragment mFragment;
 
     @Before
     public void setUp() {
@@ -72,7 +72,7 @@ public class WifiNetworkDetailsFragment2Test {
         doReturn(mWifiEntry).when(mNetworkDetailsTracker).getWifiEntry();
         doReturn(true).when(mWifiEntry).isSaved();
 
-        mFragment = new WifiNetworkDetailsFragment2();
+        mFragment = new WifiNetworkDetailsFragment();
         mFragment.mNetworkDetailsTracker = mNetworkDetailsTracker;
     }
 
@@ -165,8 +165,8 @@ public class WifiNetworkDetailsFragment2Test {
         verify(controller).displayPreference(screen);
     }
 
-    // Fake WifiNetworkDetailsFragment2 to override the protected method as public.
-    public class FakeFragment extends WifiNetworkDetailsFragment2 {
+    // Fake WifiNetworkDetailsFragment to override the protected method as public.
+    public static class FakeFragment extends WifiNetworkDetailsFragment {
 
         @Override
         public void addPreferenceController(AbstractPreferenceController controller) {
@@ -179,7 +179,7 @@ public class WifiNetworkDetailsFragment2Test {
         }
     }
 
-    public class TestController extends BasePreferenceController {
+    public static class TestController extends BasePreferenceController {
 
         public TestController() {
             super(RuntimeEnvironment.application, TEST_PREFERENCE_KEY);

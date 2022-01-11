@@ -90,6 +90,8 @@ public class Settings extends SettingsActivity {
     public static class WifiSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiSettings2Activity extends SettingsActivity { /* empty */ }
     public static class NetworkProviderSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for the Wi-Fi network details settings. */
+    public static class WifiDetailsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
@@ -164,6 +166,7 @@ public class Settings extends SettingsActivity {
     public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ScanningSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class WifiScanningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivacyDashboardActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class FactoryResetActivity extends SettingsActivity {

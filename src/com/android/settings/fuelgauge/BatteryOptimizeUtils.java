@@ -74,6 +74,14 @@ public class BatteryOptimizeUtils {
     }
 
     public void setAppUsageState(AppUsageState state) {
+        try {
+            setAppUsageStateInternal(state);
+        } catch (Exception e) {
+            Log.e(TAG, "setAppUsageState() is failed for " + mPackageName, e);
+        }
+    }
+
+    private void setAppUsageStateInternal(AppUsageState state) {
         switch (state) {
             case RESTRICTED:
                 mBatteryUtils.setForceAppStandby(mUid, mPackageName, AppOpsManager.MODE_IGNORED);

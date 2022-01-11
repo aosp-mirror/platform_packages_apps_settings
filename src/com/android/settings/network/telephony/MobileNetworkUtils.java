@@ -84,6 +84,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class MobileNetworkUtils {
 
@@ -99,6 +101,7 @@ public class MobileNetworkUtils {
             "esim.enable_esim_system_ui_by_default";
     private static final String LEGACY_ACTION_CONFIGURE_PHONE_ACCOUNT =
             "android.telecom.action.CONNECTION_SERVICE_CONFIGURE";
+    private static final String RTL_MARK = "\u200F";
 
     // The following constants are used to draw signal icon.
     public static final int NO_CELL_DATA_TYPE_ICON = 0;
@@ -257,9 +260,16 @@ public class MobileNetworkUtils {
     public static boolean showEuiccSettings(Context context) {
         long timeForAccess = SystemClock.elapsedRealtime();
         try {
-            return ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(()
-                    -> showEuiccSettingsDetecting(context))).get();
-        } catch (ExecutionException | InterruptedException exception) {
+            Boolean isShow = ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(() -> {
+                        try {
+                            return showEuiccSettingsDetecting(context);
+                        } catch (Exception threadException) {
+                            Log.w(TAG, "Accessing Euicc failure", threadException);
+                        }
+                        return Boolean.FALSE;
+                    })).get(3, TimeUnit.SECONDS);
+            return ((isShow != null) && isShow.booleanValue());
+        } catch (ExecutionException | InterruptedException | TimeoutException exception) {
             timeForAccess = SystemClock.elapsedRealtime() - timeForAccess;
             Log.w(TAG, "Accessing Euicc takes too long: +" + timeForAccess + "ms");
         }
@@ -278,7 +288,7 @@ public class MobileNetworkUtils {
         final ContentResolver cr = context.getContentResolver();
         final boolean esimIgnoredDevice =
                 Arrays.asList(TextUtils.split(SystemProperties.get(KEY_ESIM_CID_IGNORE, ""), ","))
-                        .contains(SystemProperties.get(KEY_CID, null));
+                        .contains(SystemProperties.get(KEY_CID));
         final boolean enabledEsimUiByDefault =
                 SystemProperties.getBoolean(KEY_ENABLE_ESIM_UI_BY_DEFAULT, true);
         final boolean euiccProvisioned =
@@ -922,7 +932,7 @@ public class MobileNetworkUtils {
     /**
      * Returns preferred status of Calls & SMS separately when Provider Model is enabled.
      */
-    public static CharSequence getPreferredStatus(Context context,
+    public static CharSequence getPreferredStatus(boolean isRtlMode, Context context,
             SubscriptionManager subscriptionManager, boolean isPreferredCallStatus) {
         final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(
                 subscriptionManager);
@@ -955,6 +965,10 @@ public class MobileNetworkUtils {
                 // Do not add ", " for the last subscription.
                 if (subInfo != subs.get(subs.size() - 1)) {
                     summary.append(", ");
+                }
+
+                if (isRtlMode) {
+                    summary.insert(0, RTL_MARK).insert(summary.length(), RTL_MARK);
                 }
             }
             return summary;

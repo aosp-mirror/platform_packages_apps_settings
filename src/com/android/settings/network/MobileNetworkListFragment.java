@@ -65,14 +65,12 @@ public class MobileNetworkListFragment extends DashboardFragment {
 
         if (Utils.isProviderModelEnabled(getContext())) {
             NetworkProviderSimsCategoryController simCategoryPrefCtrl =
-                    new NetworkProviderSimsCategoryController(context, KEY_PREFERENCE_CATEGORY_SIM);
-            simCategoryPrefCtrl.init(getSettingsLifecycle());
+                    new NetworkProviderSimsCategoryController(context, KEY_PREFERENCE_CATEGORY_SIM,
+                            getSettingsLifecycle());
             controllers.add(simCategoryPrefCtrl);
-
             NetworkProviderDownloadedSimsCategoryController downloadedSimsCategoryCtrl =
                     new NetworkProviderDownloadedSimsCategoryController(context,
-                            KEY_PREFERENCE_CATEGORY_DOWNLOADED_SIM);
-            downloadedSimsCategoryCtrl.init(getSettingsLifecycle());
+                            KEY_PREFERENCE_CATEGORY_DOWNLOADED_SIM, getSettingsLifecycle());
             controllers.add(downloadedSimsCategoryCtrl);
         } else {
             controllers.add(new MobileNetworkListController(getContext(), getLifecycle()));

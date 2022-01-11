@@ -67,6 +67,7 @@ import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConnectedWifiEntryPreference;
 import com.android.settings.wifi.WifiConfigController2;
 import com.android.settings.wifi.WifiDialog2;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
@@ -144,6 +145,7 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.mAirplaneModeMsgPreference = mAirplaneModeMsgPreference;
         mNetworkProviderSettings.mAirplaneModeEnabler = mAirplaneModeEnabler;
         mNetworkProviderSettings.mInternetUpdater = mInternetUpdater;
+        mNetworkProviderSettings.mWifiStatusMessagePreference = new FooterPreference(mContext);
         doReturn(NetworkProviderSettings.PREF_KEY_CONNECTED_ACCESS_POINTS)
                 .when(mConnectedWifiEntryPreferenceCategory).getKey();
         mNetworkProviderSettings.mConnectedWifiEntryPreferenceCategory =
@@ -529,6 +531,35 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.updateWifiEntryPreferences();
 
         verify(mNetworkProviderSettings.mWifiEntryPreferenceCategory, never()).setVisible(true);
+    }
+
+    @Test
+    public void setWifiScanMessage_wifiOnScanOn_footerIsInvisible() {
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
+
+        mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ true);
+
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void setWifiScanMessage_wifiOffScanOn_footerIsVisible() {
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
+
+        mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ false);
+
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isTrue();
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.getTitle().length())
+                .isNotEqualTo(0);
+    }
+
+    @Test
+    public void setWifiScanMessage_wifiOffScanOff_footerIsInvisible() {
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
+
+        mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ false);
+
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isFalse();
     }
 
     @Test

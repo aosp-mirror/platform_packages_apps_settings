@@ -499,13 +499,7 @@ public class ChooseLockPassword extends SettingsActivity {
             mNextButton = mixin.getPrimaryButton();
 
             mMessage = view.findViewById(R.id.sud_layout_description);
-            if (mForFingerprint) {
-                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
-            } else if (mForFace) {
-                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_face_header));
-            } else if (mForBiometrics) {
-                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
-            }
+            mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
 
             mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mPasswordType
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mPasswordType

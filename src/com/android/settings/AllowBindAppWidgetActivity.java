@@ -19,6 +19,7 @@ package com.android.settings;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -122,9 +123,12 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
                 return;
             }
         }
+        mAppWidgetManager = AppWidgetManager.getInstance(this);
+        final String widgetLabel = getWidgetLabel();
         AlertController.AlertParams ap = mAlertParams;
         ap.mTitle = getString(R.string.allow_bind_app_widget_activity_allow_bind_title);
-        ap.mMessage = getString(R.string.allow_bind_app_widget_activity_allow_bind, label);
+        ap.mMessage = getString(R.string.allow_bind_app_widget_activity_allow_bind, label,
+                widgetLabel);
         ap.mPositiveButtonText = getString(R.string.create);
         ap.mNegativeButtonText = getString(android.R.string.cancel);
         ap.mPositiveButtonListener = this;
@@ -133,18 +137,30 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
                 (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         ap.mView = inflater.inflate(com.android.internal.R.layout.always_use_checkbox, null);
         mAlwaysUse = (CheckBox) ap.mView.findViewById(com.android.internal.R.id.alwaysUse);
-        mAlwaysUse.setText(getString(R.string.allow_bind_app_widget_activity_always_allow_bind, label));
+        mAlwaysUse.setText(
+                getString(R.string.allow_bind_app_widget_activity_always_allow_bind, label));
 
         mAlwaysUse.setPadding(mAlwaysUse.getPaddingLeft(),
                 mAlwaysUse.getPaddingTop(),
                 mAlwaysUse.getPaddingRight(),
                 (int) (mAlwaysUse.getPaddingBottom() +
-                        getResources().getDimension(R.dimen.bind_app_widget_dialog_checkbox_bottom_padding)));
+                        getResources().getDimension(
+                                R.dimen.bind_app_widget_dialog_checkbox_bottom_padding)));
 
-        mAppWidgetManager = AppWidgetManager.getInstance(this);
         mAlwaysUse.setChecked(mAppWidgetManager.hasBindAppWidgetPermission(mCallingPackage,
                 mProfile.getIdentifier()));
 
         setupAlert();
+    }
+
+    private String getWidgetLabel() {
+        String label = "";
+        for (AppWidgetProviderInfo providerInfo : mAppWidgetManager.getInstalledProviders()) {
+            if (providerInfo.provider.equals(mComponentName)) {
+                label = providerInfo.loadLabel(getPackageManager());
+                break;
+            }
+        }
+        return label;
     }
 }

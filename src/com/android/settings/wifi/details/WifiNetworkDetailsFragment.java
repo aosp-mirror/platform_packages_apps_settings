@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.wifi.details2;
+package com.android.settings.wifi.details;
 
 import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 
@@ -45,6 +45,13 @@ import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiDialog2;
+import com.android.settings.wifi.details2.AddDevicePreferenceController2;
+import com.android.settings.wifi.details2.WifiAutoConnectPreferenceController2;
+import com.android.settings.wifi.details2.WifiDetailPreferenceController2;
+import com.android.settings.wifi.details2.WifiMeteredPreferenceController2;
+import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
+import com.android.settings.wifi.details2.WifiSecondSummaryController2;
+import com.android.settings.wifi.details2.WifiSubscriptionDetailPreferenceController2;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -63,10 +70,10 @@ import java.util.List;
  * <p>The key of {@link WifiEntry} should be saved to the intent Extras when launching this class
  * in order to properly render this page.
  */
-public class WifiNetworkDetailsFragment2 extends RestrictedDashboardFragment implements
+public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment implements
         WifiDialog2.WifiDialog2Listener {
 
-    private static final String TAG = "WifiNetworkDetailsFrg2";
+    private static final String TAG = "WifiNetworkDetailsFrg";
 
     // Key of a Bundle to save/restore the selected WifiEntry
     public static final String KEY_CHOSEN_WIFIENTRY_KEY = "key_chosen_wifientry_key";
@@ -86,7 +93,7 @@ public class WifiNetworkDetailsFragment2 extends RestrictedDashboardFragment imp
     @VisibleForTesting
     List<AbstractPreferenceController> mControllers;
 
-    public WifiNetworkDetailsFragment2() {
+    public WifiNetworkDetailsFragment() {
         super(UserManager.DISALLOW_CONFIG_WIFI);
     }
 

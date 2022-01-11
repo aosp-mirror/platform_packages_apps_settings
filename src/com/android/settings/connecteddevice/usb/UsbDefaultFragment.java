@@ -198,8 +198,9 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
 
         @Override
         public void onTetheringStarted() {
-            Log.d(TAG, "onTetheringStarted()");
             // Set default usb functions again to make internal data persistent
+            mCurrentFunctions = mUsbBackend.getCurrentFunctions();
+            Log.d(TAG, "onTetheringStarted() : mCurrentFunctions " + mCurrentFunctions);
             mUsbBackend.setDefaultUsbFunctions(mCurrentFunctions);
         }
 

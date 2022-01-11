@@ -61,7 +61,9 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.wifi.AddNetworkFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConfigureWifiEntryFragment;
@@ -71,7 +73,7 @@ import com.android.settings.wifi.WifiConnectListener;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settings.wifi.WifiUtils;
-import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
@@ -79,6 +81,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
@@ -132,6 +135,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     static final String PREF_KEY_DATA_USAGE = "non_carrier_data_usage";
     private static final String PREF_KEY_RESET_INTERNET = "resetting_your_internet";
+    private static final String PREF_KEY_WIFI_STATUS_MESSAGE = "wifi_status_message_footer";
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
@@ -231,6 +235,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     LayoutPreference mResetInternetPreference;
     @VisibleForTesting
     ConnectedEthernetNetworkController mConnectedEthernetNetworkController;
+    @VisibleForTesting
+    FooterPreference mWifiStatusMessagePreference;
 
     /**
      * Mobile networks list for provider model
@@ -305,6 +311,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         addNetworkMobileProviderController();
         addConnectedEthernetNetworkController();
         addWifiSwitchPreferenceController();
+        mWifiStatusMessagePreference = findPreference(PREF_KEY_WIFI_STATUS_MESSAGE);
     }
 
     private void updateAirplaneModeMsgPreference(boolean visible) {
@@ -710,8 +717,14 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             Log.i(TAG, "onWifiStateChanged called with wifi state: " + wifiState);
         }
 
+        if (isFinishingOrDestroyed()) {
+            Log.w(TAG, "onWifiStateChanged shouldn't run when fragment is finishing or destroyed");
+            return;
+        }
+
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
+                setWifiScanMessage(/* isWifiEnabled */ true);
                 updateWifiEntryPreferences();
                 break;
 
@@ -727,6 +740,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 break;
 
             case WifiManager.WIFI_STATE_DISABLED:
+                setWifiScanMessage(/* isWifiEnabled */ false);
                 removeConnectedWifiEntryPreference();
                 removeWifiEntryPreference();
                 setAdditionalSettingsSummaries();
@@ -734,6 +748,34 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                 mClickedConnect = false;
                 break;
         }
+    }
+
+    @VisibleForTesting
+    void setWifiScanMessage(boolean isWifiEnabled) {
+        final Context context = getContext();
+        if (context == null) {
+            return;
+        }
+        if (isWifiEnabled || !mWifiManager.isScanAlwaysAvailable()) {
+            mWifiStatusMessagePreference.setVisible(false);
+            return;
+        }
+        if (TextUtils.isEmpty(mWifiStatusMessagePreference.getTitle())) {
+            AnnotationSpan.LinkInfo info = new AnnotationSpan.LinkInfo(
+                AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION,
+                v -> launchWifiScanningFragment());
+            CharSequence text = AnnotationSpan.linkify(
+                context.getText(R.string.wifi_scan_notify_message), info);
+            mWifiStatusMessagePreference.setTitle(text);
+        }
+        mWifiStatusMessagePreference.setVisible(true);
+    }
+
+    private void launchWifiScanningFragment() {
+        new SubSettingLauncher(getContext())
+            .setDestination(WifiScanningFragment.class.getName())
+            .setSourceMetricsCategory(SettingsEnums.SETTINGS_NETWORK_CATEGORY)
+            .launch();
     }
 
     @Override
@@ -924,11 +966,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
                         : context.getText(R.string.pref_title_network_details);
 
         final Bundle bundle = new Bundle();
-        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY, wifiEntry.getKey());
+        bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY, wifiEntry.getKey());
 
         new SubSettingLauncher(context)
                 .setTitleText(title)
-                .setDestination(WifiNetworkDetailsFragment2.class.getName())
+                .setDestination(WifiNetworkDetailsFragment.class.getName())
                 .setArguments(bundle)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
@@ -961,12 +1003,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @VisibleForTesting
     void setAdditionalSettingsSummaries() {
-        if (!FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
-            mConfigureWifiSettingsPreference.setSummary(getString(
-                    isWifiWakeupEnabled()
-                            ? R.string.wifi_configure_settings_preference_summary_wakeup_on
-                            : R.string.wifi_configure_settings_preference_summary_wakeup_off));
-        }
+        mConfigureWifiSettingsPreference.setSummary(getString(
+                isWifiWakeupEnabled()
+                        ? R.string.wifi_configure_settings_preference_summary_wakeup_on
+                        : R.string.wifi_configure_settings_preference_summary_wakeup_off));
 
         final int numSavedNetworks = mWifiPickerTracker.getNumSavedNetworks();
         final int numSavedSubscriptions = mWifiPickerTracker.getNumSavedSubscriptions();
@@ -981,6 +1021,11 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private String getSavedNetworkSettingsSummaryText(
             int numSavedNetworks, int numSavedSubscriptions) {
+        if (getResources() == null) {
+            Log.w(TAG, "getSavedNetworkSettingsSummaryText shouldn't run if resource is not ready");
+            return null;
+        }
+
         if (numSavedSubscriptions == 0) {
             return getResources().getQuantityString(R.plurals.wifi_saved_access_points_summary,
                     numSavedNetworks, numSavedNetworks);
@@ -1174,7 +1219,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
         final Bundle bundle = new Bundle();
-        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY,
+        bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY,
                 wifiEntry.getKey());
         new SubSettingLauncher(getContext())
                 .setTitleText(wifiEntry.getTitle())

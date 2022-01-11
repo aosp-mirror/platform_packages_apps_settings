@@ -93,7 +93,8 @@ public class OneHandedActionShowNotificationPrefController extends BasePreferenc
             return;
         }
         if (uri.equals(OneHandedSettingsUtils.ONE_HANDED_MODE_ENABLED_URI)
-                || uri.equals(OneHandedSettingsUtils.SHORTCUT_ENABLED_URI)) {
+                || uri.equals(OneHandedSettingsUtils.SOFTWARE_SHORTCUT_ENABLED_URI)
+                || uri.equals(OneHandedSettingsUtils.HARDWARE_SHORTCUT_ENABLED_URI)) {
             mPreference.setEnabled(OneHandedSettingsUtils.canEnableController(mContext));
         } else if (uri.equals(OneHandedSettingsUtils.SHOW_NOTIFICATION_ENABLED_URI)) {
             updateState(mPreference);

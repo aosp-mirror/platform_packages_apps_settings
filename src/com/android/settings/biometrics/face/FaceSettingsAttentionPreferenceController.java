@@ -117,11 +117,6 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
     }
 
     @Override
-    public boolean isSliceable() {
-        return false;
-    }
-
-    @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
     }

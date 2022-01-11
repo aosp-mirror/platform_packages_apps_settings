@@ -70,7 +70,6 @@
     <Preference
         android:key="configure_wifi_settings"
         android:title="@string/network_and_internet_preferences_title"
-        android:summary="@string/network_and_internet_preferences_summary"
         settings:allowDividerAbove="true"
         android:fragment="com.android.settings.wifi.ConfigureWifiSettings"/>
 
@@ -82,4 +81,10 @@
     <com.android.settings.datausage.DataUsagePreference
         android:key="non_carrier_data_usage"
         android:title="@string/non_carrier_data_usage"/>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="wifi_status_message_footer"
+        android:selectable="false"
+        settings:allowDividerAbove="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

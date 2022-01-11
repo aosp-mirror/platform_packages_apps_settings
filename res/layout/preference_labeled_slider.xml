@@ -37,9 +37,18 @@
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:textColor="?android:attr/textColorPrimary" />
 
+    <TextView
+        android:id="@android:id/summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@android:id/title"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAlignment="viewStart"
+        android:textColor="?android:attr/textColorSecondary" />
+
     <SeekBar
         android:id="@*android:id/seekbar"
-        android:layout_below="@android:id/title"
+        android:layout_below="@android:id/summary"
         android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="48dp"

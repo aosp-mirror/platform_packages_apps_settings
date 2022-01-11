@@ -60,28 +60,32 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onCancelButtonClick(View view) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "cancel")) {
             super.onCancelButtonClick(view);
         }
     }
 
     @Override
     protected void onSkipButtonClick(View view) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "skip")) {
             super.onSkipButtonClick(view);
         }
     }
 
     @Override
     protected void onEnrollmentSkipped(@Nullable Intent data) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "skipped")) {
             super.onEnrollmentSkipped(data);
         }
     }
 
     @Override
     protected void onFinishedEnrolling(@Nullable Intent data) {
-        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST)) {
+        if (!BiometricUtils.tryStartingNextBiometricEnroll(this, ENROLL_NEXT_BIOMETRIC_REQUEST,
+                "finished")) {
             super.onFinishedEnrolling(data);
         }
     }

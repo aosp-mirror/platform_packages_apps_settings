@@ -400,6 +400,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Model lica će se trajno i bezbedno izbrisati.\n\nPosle brisanja treba vam otisak prsta, PIN, šablon ili lozinka da biste otključali telefon ili za potvrdu identiteta u aplikacijama."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Otključajte telefon licem"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Otisak prsta"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisak prsta za posao"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Upravljaj otis. prstiju"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Koristi otis. prsta za"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Dodaj otisak prsta"</string>
@@ -488,8 +489,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Još jednom"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Pratite ikonu utiska prsta"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Nastavite da podižete prst da biste dodali različite delove otiska prsta"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Dodirnite i zadržite svaki put kada se ikona otiska prsta pomeri. Ovo nam pomaže da snimimo ceo otisak prsta."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Ovo nam pomaže da snimimo ceo otisak prsta"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Dodirnite i zadržite svaki put kada se ikona otiska prsta pomeri. Tako ćete snimiti veći deo otiska prsta."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Stavite vrh prsta na senzor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Na kraju stavite ivice prsta"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Stavite jednu stranu prsta na senzor i zadržite, pa stavite drugu stranu"</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tako ćete snimiti veći deo otiska prsta"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrovanje otiska prsta je na <xliff:g id="PERCENTAGE">%d</xliff:g> posto"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisak prsta je dodat"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Sada možete da koristite otisak prsta za otključavanje telefona ili potvrdu identiteta, na primer, kad se prijavljujete u aplikacije"</string>
@@ -2279,7 +2283,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Izbor gadžeta"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Izbor vidžeta"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Želite li da napravite vidžet i dozvolite pristup?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Kada napravite vidžet, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> može da pristupa svim podacima koje prikazuje."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Kada napravite vidžet, aplikacija može da pristupa svemu što se prikazuje.\n\nAplikacija: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nVidžet: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Uvek dozvoli da <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> pravi vidžete i pristupa njihovim podacima"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Statistika korišćenja"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Statistika korišćenja"</string>
@@ -2431,7 +2435,7 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibriranje obaveštenja"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibriranje zvona"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Dodirne povratne informacije"</string>
-    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Koristite aplikaciju <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Koristi aplikaciju <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Otvorite aplikaciju <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Koristi korekciju boja"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Prikaži titl"</string>
@@ -2696,6 +2700,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Pogledajte aplikacije sa najvećom potrošnjom baterije"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Punjenje je privremeno ograničeno"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Za uštedu baterije. Saznajte više."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Nastavi sa punjenjem"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"U određenim uslovima, na primer, visoke temperature i dugi periodi punjenja, punjenje može da bude ograničeno na <xliff:g id="PERCENT">%1$s</xliff:g> radi boljeg stanja baterije.\n\nKada ti uslovi prestanu, telefon će automatski početi normalno da se puni."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"U određenim uslovima, na primer, visoke temperature i dugi periodi punjenja, punjenje može da bude ograničeno na <xliff:g id="PERCENT">%1$s</xliff:g> radi boljeg stanja baterije.\n\nKada ti uslovi prestanu, tablet će automatski početi normalno da se puni."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Pošto ste koristili telefon više nego obično, baterija može da se istroši ranije nego obično.\n\nAplikacije koje troše najviše baterije:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Pošto ste koristili tablet više nego obično, baterija može da se istroši ranije nego obično.\n\nAplikacije koje troše najviše baterije:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Pošto ste koristili uređaj više nego obično, baterija može da se istroši ranije nego obično.\n\nAplikacije koje troše najviše baterije:"</string>
@@ -2912,8 +2919,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Potrošnja od strane sistema u prethodna 24 sata"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Potrošnja od strane sistema za: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Potrošnja od strane aplikacija za: <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"pre podne"</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"po podne"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Ukupno: manje od minut"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Pozadina: manje od minut"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Ukupno: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3439,8 +3444,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Napredno pozivanje"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G pozivanje"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Korišćenje LTE usluga za poboljšanje glasovnih i drugih komunikacija (preporučeno)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Koristi 4G usluge za poboljšanje glasovne i druge komunikacije (preporučeno)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Koristite LTE usluge za poboljšanje glasovnih poziva (preporučeno)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Koristite 4G usluge za poboljšanje glasovnih poziva (preporučeno)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Koristite 5G za glasovne pozive"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Šalji kontakte mobilnom operateru"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Šalje brojeve telefona kontakata radi pružanja poboljšanih funkcija"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Želite da šaljete kontakte mobilnom operateru <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3635,6 +3642,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ušteda baterije, lepljivo, trajno, ušteda energije, baterija"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, raspored, ušteda baterije, ušteda energije, baterija, automatsko, procenat"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, napredno pozivanje, 4g pozivanje"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, napredno pozivanje, 5g pozivanje"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"dodaj jezik, dodajte jezik"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"veličina teksta, velika slova, velik font, velik tekst, slabovidost, povećanje teksta, uvećavanje fonta, povećanje fonta"</string>
     <string name="default_sound" msgid="6604374495015245195">"Podrazumevani zvuk"</string>
@@ -3967,7 +3975,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Želite li da dozvolite da <xliff:g id="SERVICE">%1$s</xliff:g> ima pristup obaveštenjima?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Poboljšana obaveštenja su zamenila Android prilagodljiva obaveštenja u Android-u 12. Ova funkcija pokazuje predložene radnje i odgovore, a i organizuje obaveštenja. \n\nPoboljšana obaveštenja mogu da pristupaju sadržaju obaveštenja, uključujući lične podatke poput imena kontakata i poruka. Ova funkcija može i da odbacuje obaveštenja ili da odgovara na njih, na primer, da se javlja na telefonske pozive i kontroliše režim Ne uznemiravaj."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Želite li da omogućite pristup obaveštenjima za <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> će moći da čita sva obaveštenja, uključujući lične podatke, poput imena kontakata i teksta poruka koje primate. Ova aplikacija će moći i da odbacuje obaveštenja ili aktivira dugmad u obaveštenjima, uključujući javljanje na telefonske pozive. \n\nOvo će aplikaciji omogućiti i da uključuje ili isključuje režim Ne uznemiravaj i menja srodna podešavanja."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> će moći da čita sva obaveštenja, uključujući lične podatke, poput imena kontakata i teksta poruka koje primate. Ova aplikacija će moći i da odlaže ili odbacuje obaveštenja ili aktivira dugmad u obaveštenjima, uključujući javljanje na telefonske pozive. \n\nOvo će aplikaciji omogućiti i da uključuje ili isključuje režim Ne uznemiravaj i menja srodna podešavanja."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ako isključite pristup obaveštenjima za <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, isključićete i pristup režimu Ne uznemiravaj."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Isključi"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Otkaži"</string>
@@ -5486,6 +5494,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Pokrenite Pomoćnik tako što ćete zadržati dugme za uključivanje"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Meni dugmeta za uključivanje i za hitne slučajeve:\nIstovremeno pritisnite dugme za uključivanje i dugme za pojačavanje zvuka."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Spreči zvonjenje:\nPrečica je dostupna u meniju dugmeta za jačinu zvuka."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Koliko dugo treba da se pritisne i zadrži"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Prilagodite osetljivost tako što ćete odabrati koliko dugo treba da se pritisne i zadrži dugme za uključivanje"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Kratko"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Dugo"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Prikaži novčanik"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Dozvolite pristup novčaniku sa zaključanog ekrana i iz brzih podešavanja"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Prikaži kontrole uređaja"</string>
@@ -5531,7 +5543,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Privremeno je nedostupno"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"Nema SIM kartice"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Podešavanja mreže"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Povežite se sa javnim mrežama"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"mrežna veza, internet, bežično, podaci, wifi, wi-fi, wi fi, mobilni telefon, mobilni, mobilni operater, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"Uključi WiFi"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"Isključi WiFi"</string>
@@ -5549,6 +5560,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"W+ mreža"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"PREUZETI SIM"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"PREUZETE SIM KARTICE"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktivno"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Neaktivno"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" /Podrazumevano za: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5626,6 +5638,9 @@
     <string name="sensor_toggle_description" msgid="8248823248606795411">"Za sve aplikacije i usluge"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Podešavanja igara"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"Uključite prečicu za kontrolnu tablu igre itd."</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"Prethodna"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"Sledeća"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Pregled boje"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Zahtev za pristup SIM kartici"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Uređaj želi da pristupa SIM kartici. Dodirnite za detalje."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"Želite da dozvolite pristup SIM kartici?"</string>

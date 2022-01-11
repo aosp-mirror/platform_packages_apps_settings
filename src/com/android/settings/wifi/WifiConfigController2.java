@@ -484,7 +484,7 @@ public class WifiConfigController2 implements TextWatcher,
     }
 
     boolean isValidSaePassword(String password) {
-        if (password.length() >= 1 && password.length() <= 63) {
+        if (password.length() >= 1 && password.length() <= 128) {
             return true;
         }
         return false;

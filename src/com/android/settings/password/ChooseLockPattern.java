@@ -505,13 +505,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     layout.getMixin(IconMixin.class).setVisibility(View.GONE);
                 }
             } else {
-                if (mForFingerprint) {
-                    layout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
-                } else if (mForFace) {
-                    layout.setIcon(getActivity().getDrawable(R.drawable.ic_face_header));
-                } else if (mForBiometrics) {
-                    layout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
-                }
+                layout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
             }
 
             final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);

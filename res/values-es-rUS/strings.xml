@@ -397,6 +397,7 @@
     <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Se borrará tu modelo de rostro de forma permanente y segura.\n\nLuego de que se borre, deberás ingresar tu huella dactilar, PIN, patrón o contraseña para desbloquear el teléfono o autenticarte en apps."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Usa Desbloqueo facial para desbloquear el teléfono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Huella dactilar"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Huella para el trabajo"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Adm. huellas digitales"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Usar huella dac. para"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Agregar una huella dactilar"</string>
@@ -453,7 +454,7 @@
     <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Desbloquea con el rostro o la huella dactilar para"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Desbloquear teléfono"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Autenticación en apps"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Dale el teléfono a tu padre o madre"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Dale el teléfono a tu madre o padre"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Aceptar"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"¿Omitir bloqueo de la pantalla?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otras personas usen esta tablet si la pierdes, te la roban o se restablece."</string>
@@ -484,8 +485,11 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Una vez más"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Sigue el ícono de huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Sigue levantando el dedo para agregar diferentes partes de la huella dactilar."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="8982595794258965437">"Mantén presionado cada vez que ícono se mueva. Esto ayuda a capturar tu huella dactilar completa."</string>
-    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="7869449488918552551">"Esto ayuda a capturar tu huella dactilar completa"</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Mantén presionado cada vez que ícono de huella dactilar se mueva. Esto permite capturar más superficie de tu huella dactilar."</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Apoya la punta del dedo en el sensor"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Finalmente, apoya los bordes del dedo"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Apoya un lado de tu huella dactilar en el sensor y mantén presionado. Luego, cambia de lado."</string>
+    <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Esto permite capturar más superficie de tu huella dactilar"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
@@ -2257,7 +2261,7 @@
     <string name="gadget_picker_title" msgid="7615902510050731400">"Elegir gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Elegir control"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"¿Deseas crear el widget y permitir el acceso?"</string>
-    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Después de crear el widget, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> podrá acceder a todos los datos que muestre."</string>
+    <string name="allow_bind_app_widget_activity_allow_bind" msgid="5825298768068148804">"Después de crear el widget, la aplicación podrá acceder a todo lo que se muestre.\n\nAplicación: <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g>\nWidget: <xliff:g id="WIDGET_LABEL">%2$s</xliff:g>\n"</string>
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Permitir siempre que <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> pueda crear widgets y acceder a sus datos"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Estadísticas de uso"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Estadísticas de uso"</string>
@@ -2390,7 +2394,7 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Selecciona el tiempo de visualización de mensajes que requieren acciones, pero que solo se muestran temporalmente.\n\nNo todas las apps admiten esta opción."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Tiempo de respuesta táctil"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversión de color"</string>
-    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usar inversión de color"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usar inversión de colores"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"La inversión de color oscurece la pantalla.&lt;br/&gt;&lt;br/&gt; Nota: &lt;ol&gt; &lt;li&gt; También puede aclararla.&lt;/li&gt; &lt;li&gt; Los colores cambiarán para el contenido multimedia y las imágenes.&lt;/li&gt; &lt;li&gt; El Tema oscuro permite mostrar un fondo oscuro y funciona solo con apps compatibles. Por otro lado, la inversión de color funciona con todas las apps.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automático (tiempo de permanencia)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"El clic automático funciona con un mouse conectado. Puedes configurar el cursor del mouse para que haga clic automáticamente cuando el cursor se detiene durante un período determinado."</string>
@@ -2411,7 +2415,7 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Respuesta táctil"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Usar <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Abrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usar la corrección de color"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usar la corrección de colores"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Mostrar subtítulos"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Solo para apps compatibles"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Estilo y tamaño de los subtítulos"</string>
@@ -2667,6 +2671,9 @@
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Consulta las apps que consumen más batería"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Carga limitada temporalmente"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Para ahorrar batería. Obtén más información."</string>
+    <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Reanudar la carga"</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"Es posible que, en ciertas condiciones, como temperaturas altas o períodos de carga largos, la carga se limite al <xliff:g id="PERCENT">%1$s</xliff:g> para ayudar a preservar el estado de la batería.\n\nCuando esas condiciones vuelvan a la normalidad, el teléfono se cargará automáticamente de forma normal."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"Es posible que, en ciertas condiciones, como temperaturas altas o períodos de carga largos, la carga se limite al <xliff:g id="PERCENT">%1$s</xliff:g> para ayudar a preservar el estado de la batería.\n\nCuando esas condiciones vuelvan a la normalidad, la tablet se cargará automáticamente de forma normal."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Dado que usaste el teléfono más de lo habitual, es posible que la batería se agote antes de lo esperado.\n\nEstas son las apps que más batería consumen:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Dado que usaste la tablet más de lo habitual, es posible que la batería se agote antes de lo esperado.\n\nEstas son las apps que más batería consumen:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Dado que usaste el dispositivo más de lo habitual, es posible que la batería se agote antes de lo esperado.\n\nEstas son las apps que más batería consumen:"</string>
@@ -2876,8 +2883,6 @@
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Uso del sistema en las últimas 24 h"</string>
     <string name="battery_system_usage_for" msgid="3248552137819897140">"Uso del sistema de <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Uso de apps de <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_usage_time_am" msgid="7783773965475697655">"a.m."</string>
-    <string name="battery_usage_time_pm" msgid="1534468528902328570">"p.m."</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: menos de un minuto"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"En segundo plano: menos de un minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3397,8 +3402,10 @@
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Llamadas avanzadas"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Llamadas mediante 4G"</string>
-    <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Usa servicios de LTE para mejorar comunicaciones de voz y otras (recomendado)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Usar servicios 4G para mejorar comunicaciones de voz y otras (recomendado)"</string>
+    <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Usar servicios de LTE para mejorar las llamadas de voz (recomendado)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Usar servicios de 4G para mejorar las llamadas de voz (recomendado)"</string>
+    <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Usar 5G para llamadas de voz"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Enviar contactos al proveedor"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Enviar los números de teléfono de tus contactos para brindar funciones mejoradas"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"¿Quieres enviar los contactos a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3592,6 +3599,7 @@
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ahorro de batería, fijo, permanente, ahorro de energía, batería"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, programa, ahorro de batería, ahorro de energía, batería, automático, porcentaje"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, llamadas avanzadas, llamadas mediante 4G"</string>
+    <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, llamadas avanzadas, llamadas 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"agregar idioma, agregar un idioma"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"tamaño del texto, letra grande, fuente grande, texto grande, visión reducida, agrandar el texto, agrandar la fuente, agrandamiento de la fuente"</string>
     <string name="default_sound" msgid="6604374495015245195">"Sonido predeterminado"</string>
@@ -3920,7 +3928,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"¿Quieres permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga acceso a las notificaciones?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Las notificaciones mejoradas reemplazaron a las notificaciones adaptables en Android 12. Esta función muestra respuestas y acciones sugeridas, y organiza tus notificaciones. \n\nLas notificaciones mejoradas pueden acceder a todo el contenido de notificaciones, lo que incluye información personal, como nombres de contactos y mensajes. También puede descartar o responder notificaciones (como atender llamadas) y controlar la función No interrumpir."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"¿Deseas permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga acceso a las notificaciones?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1658213659262173405">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones, incluidas las que contienen información personal, como los nombres de los contactos y el texto de los mensajes que recibas. Esta app también podrá descartar notificaciones y realizar acciones en botones de notificaciones (por ejemplo, para responder llamadas). \n\nAdemás, podrá activar y desactivar No interrumpir y cambiar la configuración relacionada."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones, incluidas las que contienen información personal, como los nombres de los contactos y el texto de los mensajes que recibas. Esta app también podrá posponer o descartar notificaciones y realizar acciones en botones de notificaciones (por ejemplo, para responder llamadas). \n\nAdemás, podrá activar y desactivar No interrumpir y cambiar la configuración relacionada."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si desactivas el acceso a las notificaciones de <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, es posible que también se desactive el modo No interrumpir."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Desactivar"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancelar"</string>
@@ -4564,7 +4572,7 @@
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"No se puede abrir esta app"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Opción bloqueada por tu proveedor de crédito"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Se requiere un padre o madre"</string>
-    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Dale el teléfono a tu padre o madre para iniciar la configuración"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Dale el teléfono a tu madre o padre para iniciar la configuración"</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Si tienes alguna pregunta, comunícate con tu administrador de TI"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Más detalles"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"El administrador puede controlar y administrar las apps y los datos asociados con tu perfil de trabajo, incluida la configuración, los permisos, el acceso corporativo, la actividad de la red y la información de la ubicación del dispositivo."</string>
@@ -5399,6 +5407,10 @@
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Mantén presionado el botón de encendido para activar Asistente"</string>
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Menú de encendido y emergencia:\nPresiona los botones de encendido y de subir volumen al mismo tiempo."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Impedir hacer sonar:\nEl acceso directo está disponible en el menú de volumen."</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Duración de presión"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Elige durante cuánto tiempo quieres mantener presionado el botón de encendido para ajustar la sensibilidad"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Corta"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Larga"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Mostrar billetera"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Permite el acceso a la billetera desde la pantalla de bloqueo y la Configuración rápida"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Mostrar controles del dispositivo"</string>
@@ -5444,7 +5456,6 @@
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"No disponible por el momento"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"No hay ninguna tarjeta SIM"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Preferencias de red"</string>
-    <string name="network_and_internet_preferences_summary" msgid="613207494152304537">"Conectarse a redes públicas"</string>
     <string name="keywords_internet" msgid="7674082764898690310">"conexión de red, internet, inalámbrico, datos, wifi, wi-fi, wi fi, datos móviles, móvil, proveedor de telefonía, 4g, 3g, 2g, lte"</string>
     <string name="turn_on_wifi" msgid="4868116014727533668">"Activar Wi-Fi"</string>
     <string name="turn_off_wifi" msgid="8861028501067400694">"Desactivar Wi-Fi"</string>
@@ -5462,6 +5473,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Red W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"SIM DESCARGADA"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"TARJETAS SIM DESCARGADAS"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Activa"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactiva"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Configuración predeterminada para <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5539,6 +5551,9 @@
     <string name="sensor_toggle_description" msgid="8248823248606795411">"Para todas las apps y servicios"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Configuración de juegos"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"Activa el acceso directo al Panel de juego, etc."</string>
+    <string name="previous_page_content_description" msgid="6438292457923282991">"Anterior"</string>
+    <string name="next_page_content_description" msgid="1641835099813416294">"Siguiente"</string>
+    <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Vista previa de color"</string>
     <string name="bluetooth_sim_card_access_notification_title" msgid="5217037846900908318">"Solicitud de acceso a la tarjeta SIM"</string>
     <string name="bluetooth_sim_card_access_notification_content" msgid="6759306429895300286">"Un dispositivo quiere acceder a tu tarjeta SIM. Presiona para ver más detalles."</string>
     <string name="bluetooth_sim_card_access_dialog_title" msgid="4486768729352090174">"¿Permitir acceso a la tarjeta SIM?"</string>

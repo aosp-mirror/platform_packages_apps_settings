@@ -44,7 +44,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -290,7 +289,7 @@ public class FaceSettings extends DashboardFragment {
         if (!isFaceHardwareDetected(context)) {
             return null;
         }
-        mControllers = buildPreferenceControllers(context, getSettingsLifecycle());
+        mControllers = buildPreferenceControllers(context);
         // There's no great way of doing this right now :/
         for (AbstractPreferenceController controller : mControllers) {
             if (controller instanceof FaceSettingsAttentionPreferenceController) {
@@ -309,8 +308,7 @@ public class FaceSettings extends DashboardFragment {
         return mControllers;
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new FaceSettingsKeyguardPreferenceController(context));
         controllers.add(new FaceSettingsAppPreferenceController(context));
@@ -328,7 +326,7 @@ public class FaceSettings extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     if (isFaceHardwareDetected(context)) {
-                        return buildPreferenceControllers(context, null /* lifecycle */);
+                        return buildPreferenceControllers(context);
                     } else {
                         return null;
                     }
