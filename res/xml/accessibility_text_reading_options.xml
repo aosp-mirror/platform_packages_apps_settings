@@ -27,4 +27,10 @@
         android:title="@string/force_bold_text"
         settings:keywords="@string/keywords_bold_text"
         settings:controller="com.android.settings.accessibility.FontWeightAdjustmentPreferenceController"/>
+
+    <SwitchPreference
+        android:key="toggle_high_text_contrast_preference"
+        android:persistent="false"
+        android:title="@string/accessibility_toggle_high_text_contrast_preference_title"
+        settings:controller="com.android.settings.accessibility.HighTextContrastPreferenceController"/>
 </PreferenceScreen>
