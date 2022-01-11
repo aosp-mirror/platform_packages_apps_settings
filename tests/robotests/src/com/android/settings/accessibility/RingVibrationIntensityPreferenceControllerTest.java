@@ -20,10 +20,12 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
+import android.os.VibrationAttributes;
 import android.os.Vibrator;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -59,7 +61,8 @@ public class RingVibrationIntensityPreferenceControllerTest {
 
     @Test
     public void getDefaultIntensity_success() {
-        doReturn(/* toBeReturned= */ 5).when(mVibrator).getDefaultRingVibrationIntensity();
+        doReturn(/* toBeReturned= */ 5).when(mVibrator).getDefaultVibrationIntensity(
+                eq(VibrationAttributes.USAGE_RINGTONE));
 
         assertThat(mController.getDefaultIntensity()).isEqualTo(/* expected= */ 5);
     }
