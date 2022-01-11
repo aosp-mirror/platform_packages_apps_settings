@@ -47,20 +47,23 @@
             android:key="enterprise_privacy"
             android:title="@string/enterprise_privacy_settings"
             android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings" />
+            android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"
+            settings:controller="com.android.settings.enterprise.EnterprisePrivacyPreferenceController"/>
 
         <Preference
             android:key="financed_privacy"
             android:title="@string/financed_privacy_settings"
             android:summary="@string/summary_placeholder"
-            android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings" />
+            android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"
+            settings:controller="com.android.settings.enterprise.FinancedPrivacyPreferenceController"/>
 
     </PreferenceCategory>
 
     <Preference
         android:order="50"
         android:key="sim_lock_settings"
-        android:title="@string/sim_lock_settings_category">
+        android:title="@string/sim_lock_settings_category"
+        settings:controller="com.android.settings.security.SimLockPreferenceController">
 
         <intent
             android:action="android.intent.action.MAIN"
@@ -74,14 +77,16 @@
         android:key="encryption_and_credential"
         android:title="@string/encryption_and_credential_settings_title"
         android:summary="@string/encryption_and_credential_settings_summary"
-        android:fragment="com.android.settings.security.EncryptionAndCredential" />
+        android:fragment="com.android.settings.security.EncryptionAndCredential"
+        settings:controller="com.android.settings.security.EncryptionStatusPreferenceController" />
 
     <Preference
         android:order="70"
         android:key="manage_trust_agents"
         android:title="@string/manage_trust_agents"
         android:summary="@string/summary_placeholder"
-        android:fragment="com.android.settings.security.trustagent.TrustAgentSettings" />
+        android:fragment="com.android.settings.security.trustagent.TrustAgentSettings"
+        settings:controller="com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController" />
 
     <Preference
         android:order="80"
@@ -89,14 +94,15 @@
         android:title="@string/screen_pinning_title"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.security.ScreenPinningSettings"
-        settings:keywords="@string/keywords_app_pinning" />
+        settings:keywords="@string/keywords_app_pinning"
+        settings:controller="com.android.settings.security.ScreenPinningPreferenceController" />
 
     <SwitchPreference
         android:order="90"
         android:key="confirm_sim_deletion"
         android:title="@string/confirm_sim_deletion_title"
         android:summary="@string/confirm_sim_deletion_description"
-        settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController"/>
+        settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController" />
 
     <!-- work profile security section -->
     <PreferenceCategory

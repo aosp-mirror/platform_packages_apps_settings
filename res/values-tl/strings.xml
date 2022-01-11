@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Naka-disable ang opsyon ng lock ng screen. Upang matuto pa, makipag-ugnayan sa admin ng iyong organisasyon. "<annotation id="admin_details">"Higit pang detalye"</annotation>\n\n"Maaari mo pa ring gamitin ang fingerprint mo upang magpahintulot ng access ng app. "<annotation id="url">"Matuto pa"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Iangat ang daliri, pagkatapos ay pindutin ulit ang sensor"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Hindi magamit ang sensor para sa fingerprint. Bumisita sa provider ng pag-aayos"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Mga advanced na setting"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Lock ng profile sa trabaho, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock at higit pa"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Mga advanced na setting"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maaari kang magdagdag ng hanggang <xliff:g id="COUNT">%d</xliff:g> (na) fingerprint"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Naidagdag mo na ang maximum na bilang ng mga fingerprint"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Hindi na makapagdagdag ng higit pang fingerprint"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Upang makontrol kung ano ang mangyayari kapag naka-dock o naka-sleep ang telepono, i-on ang screen saver."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kailan magsisimula"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Kasalukuyang screen saver"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Magsimula ngayon"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Mga Setting"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Awtomatikong pagliwanag"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Angatin upang paganahin"</string>
@@ -3626,6 +3631,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, advanced na pagtawag, 5g na pagtawag"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"idagdag ang wika, magdagdag ng wika"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"laki ng text, malaking print, malaking font, malaking text, malabong paningin, palakihin ang text, pampalaki ng font, pagpapalaki ng font"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"palaging naka-on na display"</string>
     <string name="default_sound" msgid="6604374495015245195">"Default na tunog"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Nasa <xliff:g id="PERCENTAGE">%1$s</xliff:g> ang volume ng pag-ring at notification"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, pag-vibrate, Huwag Istorbohin"</string>
@@ -5304,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"I-off ang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Hindi makakansela ang iyong serbisyo kapag na-off mo ang isang SIM"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Kumokonekta sa network…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Lumilipat sa <xliff:g id="CARRIER_NAME">%1$s</xliff:g> para sa mga tawag at mensahe…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Hindi makalipat ng carrier"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Hindi makalipat ng carrier dahil nagkaroon ng error."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"I-off ang <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5457,10 +5462,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Matagal"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Ipakita ang wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Payagan ang pag-access sa wallet mula sa lock screen at mga mabilisang setting"</string>
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
-    <skip />
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Ipakita ang QR Scanner"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Payagan ang access sa QR scanner mula sa lock screen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Ipakita ang mga kontrol ng device"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"I-access ang mga kontrol kapag naka-lock"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Ipakita ang orasang may dalawang linya kapag available"</string>
@@ -5575,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Gamitin ang adaptive battery"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Gamitin ang adaptive brightness"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Gamitin ang pagtawag gamit ang Wi-Fi"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Gumamit ng screen saver"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Tingnan ang lahat ng app"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Smart na Pag-forward"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Naka-enable ang Smart na Pag-forward"</string>
@@ -5590,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Walang numero ng telepono."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Payagan ang 2G"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Gumamit ng mga 2G na cellular na koneksyon. Para sa mga emergency na tawag, palaging naka-on ang 2G."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"Hindi gaanong secure ang 2G, pero posible nitong mapahusay ang iyong koneksyon sa ilang lokasyon. Para sa mga emergency na tawag, palaging pinapayagan ang 2G."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Kailangan ng <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> na available ang 2G"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Ipakita ang access sa clipboard"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Magpakita ng mensahe kapag ina-access ng mga app ang text, mga larawan, o iba pang content na nakopya mo"</string>
     <string name="all_apps" msgid="3054120149509114789">"Lahat ng app"</string>

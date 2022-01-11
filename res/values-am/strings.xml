@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" የማያ ገጽ ቁልፍ አማራጩ ተሰናክሏል። ተጨማሪ ለማወቅ የድርጅትዎን አስተዳዳሪ ያነጋግሩ። "<annotation id="admin_details">"ተጨማሪ ዝርዝሮች"</annotation>\n\n"ለግዢዎች እና የመተግበሪያ መዳረሻ ፈቃድ ለመስጠት አሁንም የጣት አሻራዎን መጠቀም ይችላሉ። "<annotation id="url">"የበለጠ ለመረዳት"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ጣትዎን ያንሱ፣ ከዚያ በድጋሚ ዳሳሽ ይንኩ"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"የጣት አሻራ ዳሳሽን መጠቀም አይቻልም። የጥገና አገልግሎት ሰጪን ይጎብኙ"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"የላቁ ቅንብሮች"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"የሥራ መገለጫ መቆለፊያ፣ Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock እና ተጨማሪ"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"የላቁ ቅንብሮች"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"እስከ <xliff:g id="COUNT">%d</xliff:g> የሚደርሱ የጣት አሻራዎችን ማከል ይችላሉ"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"የሚፈቀደውን ከፍተኛ የጣት አሻራ ብዛት አክለዋል"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"ተጨማሪ የጣት አሻራዎችን ማከል አይቻልም"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"ስልኩ ሲተከል እና/ወይም ሲተኛ ምን እንደሚከሰት ለመቆጣጠር የገጽ ማያ ማቆያን ያብሩ።"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"መቼ እንደሚጀመር"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"የአሁኑ ማያ ገጽ ማሳረፊያ"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"አሁን ጀምር"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"ቅንብሮች"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"ራስ ሰርብሩህነት"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"ለማንቃት ያንሱ"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"አጭር"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"የበለጠ ጊዜ"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"ጊዜን በራስ-ሰር ጠቅ ያድርጉ"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"ንዝረት እና ረቂቅ ንዝረት"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"ጥሪዎች"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"ማሳወቂያዎች እና ማንቂያዎች"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"በይነተገናኝ ረቂቅ ንዝረት"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"የጥሪ ንዝረት"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"የማሳወቂያ ንዝረት"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"የንክኪ ግብረመልስ"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"ሃፕቲክስ፣ ንዘር፣ ማያ ገጽ፣ ትብነት"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"ሃፕቲክስ፣ ንዘር፣ ስልክ፣ ጥሪ፣ አደገኛነት፣ ደውል"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"ሃፕቲክስ፣ ንዘር፣ አደገኛነት"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"ረቂቅ ንዝረት፣ ንዘር፣ ንዝረት"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ባትሪ ቆጣቢ፣ ተለጣፊ፣ ጽና፣ የኃይል ቆጣቢ፣ ባትሪ"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ዕለታዊ ተግባር፣ መርሐግብር፣ ባትሪ ቆጣቢ፣ ኃይል ቆጣቢ፣ ባትሪ፣ ራስ-ሰር፣ በመቶ"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"ቮልት፣ የላቀ ጥሪ አደራረግ፣ 4g ጥሪ አደራረግ"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g፣ vonr፣ የላቀ ጥሪ፣ 5ጂ ጥሪ"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ቋንቋ ያክሉ፣ አንድ ቋንቋ ያክሉ"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"የጽሑፍ መጠን፣ ትልቅ ህትመት፣ ትልቅ ቅርጸ-ቁምፊ፣ ትልቅ ጽሑፍ፣ ዝቅተኛ-ዕይታ፣ ጽሑፍን ያተልቁ መጠን፣ ትልቅ ህትመት፣ ትልቅ ቅርጸ-ቁምፊ፣ ትልቅ ጽሑፍ፣ ዝቅተኛ-ዕይታ፣ ጽሑፍን ያተልቁ፣ ቅርጸ-ቁምፊ ማተለቂያ፣ ቅርጸ-ቁምፊ ማተለቅ"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"ሁልጊዜ የሚበራ ማሳያ"</string>
     <string name="default_sound" msgid="6604374495015245195">"ነባሪ ድምፅ"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"የጥሪ ድምጽ እና ማሳወቂያ ድምጽ መጠን <xliff:g id="PERCENTAGE">%1$s</xliff:g> ላይ"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ድምፅ፣ ንዝረት፣ አትረብሽ"</string>
@@ -5309,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ን ያጥፉ"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"ሲም ማጥፋት አገልግሎትዎን አይሰርዘውም"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"ከአውታረ መረብ ጋር በመገናኘት ላይ…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"ለጥሪዎች እና መልዕክቶች ወደ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> በመቀየር ላይ…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"አገልግሎት አቅራቢን መቀየር አልተቻለም"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"በስህተት ምክንያት አገልግሎት አቅራቢው መቀየር አልተቻለም።"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ይጥፋ?"</string>
@@ -5578,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"ተለማማጅ ባትሪን ይጠቀሙ"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"ተለዋዋጭ ብሩህነትን ይጠቀሙ"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"የWi‑Fi ጥሪ ማድረጊያን ይጠቀሙ"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"የማያ ገጽ አዳኝን ይጠቀሙ"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"ሁሉንም መተግበሪያዎች ይመልከቱ"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"ብልህ ማስተላለፍ"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"ዘመናዊ ማስተላለፍ ነቅቷል"</string>
@@ -5593,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"የስልክ ቁጥር ይቀራል።"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"እሺ"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2ጂ ይፍቀዱ"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"የ2ጂ የተንቀሳቃሽ ስልክ ግንኙነቶችን ይጠቀሙ። ለአደጋ ጊዜ ጥሪዎች 2ጂ ሁልጊዜ በርቷል።"</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2ጂ ደህንነቱ ያነሰ ነው፣ ነገር ግን በአንዳንድ አካባቢዎች የእርስዎን ግንኙነት ሊያሻሽል ይችላል። ለአደጋ ጥሪ 2ጂ ሁልጊዜ ይፈቀዳል።"</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 2ጂ እንዲኖር ይጠይቃል"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"የቅንጥብ ሰሌዳ መዳረሻን አሳይ"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"መተግበሪያዎች ጽሁፍን፣ ምስሎችን ወይም እርስዎ የቀዱትን ሌላ ይዘት ሲደርሱ መልዕክት አሳይ"</string>
     <string name="all_apps" msgid="3054120149509114789">"ሁሉም መተግበሪያዎች"</string>
