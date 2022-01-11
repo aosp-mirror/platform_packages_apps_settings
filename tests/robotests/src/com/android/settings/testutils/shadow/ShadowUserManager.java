@@ -49,6 +49,7 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
     private final Set<Integer> mManagedProfiles = new HashSet<>();
+    private final Set<String> mEnabledTypes = new HashSet<>();
     private boolean mIsQuietModeEnabled = false;
     private int[] profileIdsForUser = new int[0];
     private boolean mUserSwitchEnabled;
@@ -103,6 +104,11 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void addGuestUserRestriction(String restriction) {
         mGuestRestrictions.add(restriction);
+    }
+
+    @Implementation
+    protected boolean hasUserRestriction(String restrictionKey) {
+        return hasUserRestriction(restrictionKey, UserHandle.of(UserHandle.myUserId()));
     }
 
     public static ShadowUserManager getShadow() {
@@ -198,5 +204,18 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void setSwitchabilityStatus(@UserManager.UserSwitchabilityResult int newStatus) {
         mSwitchabilityStatus = newStatus;
+    }
+
+    @Implementation
+    protected boolean isUserTypeEnabled(String userType) {
+        return mEnabledTypes.contains(userType);
+    }
+
+    public void setUserTypeEnabled(String type, boolean enabled) {
+        if (enabled) {
+            mEnabledTypes.add(type);
+        } else {
+            mEnabledTypes.remove(type);
+        }
     }
 }
