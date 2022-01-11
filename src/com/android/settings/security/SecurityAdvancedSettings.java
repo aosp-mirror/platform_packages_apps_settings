@@ -16,8 +16,6 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_SECURITY_PAGE;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -27,10 +25,7 @@ import com.android.settings.biometrics.combination.CombinedBiometricProfileStatu
 import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
-import com.android.settings.enterprise.FinancedPrivacyPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -96,13 +91,6 @@ public class SecurityAdvancedSettings extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, DashboardFragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new EnterprisePrivacyPreferenceController(context));
-        controllers.add(new FinancedPrivacyPreferenceController(context));
-        controllers.add(new ManageTrustAgentsPreferenceController(context));
-        controllers.add(new ScreenPinningPreferenceController(context));
-        controllers.add(new SimLockPreferenceController(context));
-        controllers.add(new EncryptionStatusPreferenceController(context,
-                PREF_KEY_ENCRYPTION_SECURITY_PAGE));
         controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
 
         final List<AbstractPreferenceController> profileSecurityControllers = new ArrayList<>();

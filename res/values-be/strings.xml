@@ -578,6 +578,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Опцыя блакіроўкі экрана выключана. Звяжыцеся з адміністратарам сваёй арганізацыі, каб даведацца больш. "<annotation id="admin_details">"Дадатковая інфармацыя"</annotation>\n\n"Вы па-ранейшаму можаце выкарыстоўваць адбіткі пальцаў для аўтарызацыі куплі і доступу да праграм. "<annotation id="url">"Даведацца больш"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Падыміце палец, потым дакраніцеся да сканера зноў"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Не ўдалося скарыстаць сканер адбіткаў пальцаў. Звярніцеся ў сэрвісны цэнтр."</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Пашыраныя налады"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Блакіроўка працоўнага профілю, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock і іншыя функцыі"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Пашыраныя налады"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Вы можаце дадаць да <xliff:g id="COUNT">%d</xliff:g> адбіткаў пальца"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Вы дадалі максімальную колькасць адбіткаў пальцаў"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Немагчыма дадаць больш адбіткаў пальцаў"</string>
@@ -1472,6 +1476,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Каб кантраляваць тое, што адбываецца, калі тэлефон прыстыкаваны і/або знаходзіцца ў рэжыме сну, уключыце экранную застаўку."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Калі пачынаць"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Бягучая экранная застаўка"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Пачаць"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Налады"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Аўтаматычная яркасць"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Абуджэнне пры падняцці"</string>
@@ -2466,14 +2471,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Карацей"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Даўжэй"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Час аўтаматычнага націскання"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Вібрацыя і тактыльны водгук"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Выклікі"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Апавяшчэнні і будзільнікі"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Інтэрактыўны тактыльны водгук"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Вібрацыя пры выкліку"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Вібрацыя пры апавяшчэнні"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Вібрацыя тактыльнага водгуку"</string>
@@ -2630,7 +2631,7 @@
     <string name="keywords_accessibility" msgid="4263443239404659143">"Лёгкасць выкарыстання, прастата доступу, дапамога, дапаможны"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"Лупа для акна, маштаб, павелічэнне, слабы зрок, павялічыць, зрабіць большым"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
-    <string name="keywords_live_caption" msgid="1667203998080567556">"Субцітры, субцітры, цітры, Імгненная транскрыпцыя, слабы слых, страта слыху, транскрыпцыя ў рэальным часе, пераўтварэнне маўлення ў тэкст, субцітр"</string>
+    <string name="keywords_live_caption" msgid="1667203998080567556">"Субцітры, цітры, Імгненная расшыфроўка, слабы слых, страта слыху, расшыфроўка ў рэальным часе, пераўтварэнне маўлення ў тэкст, субцітр"</string>
     <string name="keywords_live_transcribe" msgid="3226990195174890997"></string>
     <string name="keywords_sound_notifications" msgid="8183107485754075413"></string>
     <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
@@ -3715,14 +3716,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"тактыльныя адчуванні, вібрацыя, экран, адчувальнасць"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"дотык, вібрацыя, тэлефон, выклік, адчувальнасць, званок"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"дотык, вібрацыя, адчувальнасць"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"тактыльны водгук, вібрыраваць, вібрацыя"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"эканомія зараду, замацаваны, захаваць, эканомія энергіі, акумулятар"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"працэдура, расклад, эканомія зараду, эканомія энергіі, акумулятар, аўтаматычна, працэнт"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, пашыраныя магчымасці выкліку, выклік у 4g"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, палепшаныя выклікі, выклікі 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"дадаць мову, дадаць мову"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"памер тэксту, вялікі шрыфт, буйны шрыфт, павялічаны тэкст, слабы зрок, павялічыць тэкст, праграма для павелічэння шрыфту, павелічэнне шрыфту"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"заўсёды ўключаны дысплэй"</string>
     <string name="default_sound" msgid="6604374495015245195">"Стандартная мелодыя"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Гучнасць званкоў і апавяшчэнняў: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Гучнасць, вібрацыя, рэжым \"Не турбаваць\""</string>
@@ -5485,8 +5486,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Выключыць паслугі аператара \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\""</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Выключэнне SIM-карты не скасуе абслугоўванне ў аператара"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Ідзе падключэнне да сеткі…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Ідзе пераключэнне на аператара \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\" для выканання выклікаў і адпраўкі паведамленняў…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Не ўдалося пераключыць аператара"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Не ўдалося пераключыць аператара з-за памылкі."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Адключыць аператара \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"?"</string>
@@ -5642,10 +5642,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Доўга"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Паказ кашалька"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Дазволіць доступ да кашалька з заблакіраванага экрана і хуткіх налад"</string>
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
-    <skip />
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Паказаць сканер QR-кодаў"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Дазволіць доступ да сканера QR-кодаў з экрана блакіроўкі"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Паказ элементаў кіравання прыладай"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Доступ да элементаў кіравання пры заблакіраваным экране"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Паказваць двухрадковы дысплэй гадзінніка, калі ён даступны"</string>
@@ -5760,7 +5758,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Выкарыстоўваць адаптацыю акумулятара"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Выкарыстоўваць адаптыўную яркасць"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Выкарыстоўваць Wi-Fi-тэлефанію"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Выкарыстоўваць экранную застаўку"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Паказаць усе праграмы"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Функцыя разумнай пераадрасацыі"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Функцыя разумнай пераадрасацыі ўключана"</string>
@@ -5775,7 +5772,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Нумар тэлефона адсутнічае."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ОК"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Дазволіць 2G"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Выкарыстоўваць сотавае падключэнне 2G. Для экстранных выклікаў сетка 2G заўсёды ўключана."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"Тэхналогія 2G менш бяспечная, аднак у некаторых месцах яна забяспечвае лепшую якасць сувязі. Для экстранных выклікаў заўсёды дазволена выкарыстоўваць 2G."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Для выкарыстання аператара \"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>\" неабходна ўключыць 2G"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Паказваць апавяшчэнні пра доступ да буфера абмену"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Паказваць паведамленне, калі праграмы атрымліваюць доступ да тэксту, відарысаў ці іншага змесціва, якое вы скапіравалі"</string>
     <string name="all_apps" msgid="3054120149509114789">"Усе праграмы"</string>

@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Ekran kilid seçimi deaktivdir. Ətraflı məlumat üçün təşkilatın admini ilə əlaqə saxlayın. "<annotation id="admin_details">"Daha ətraflı"</annotation>\n\n"Hələ də alışları və tətbiq girişlərini təsdiq etmək üçün barmaq izi istifadə edə bilərsiniz. "<annotation id="url">"Daha ətraflı"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Barmağınızı qaldırın, sonra sensora təkrar toxunun"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Barmaq izi sensorundan istifadə etmək mümkün deyil. Təmir provayderini ziyarət edin"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Qabaqcıl ayarlar"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"İş profili kilidi, Ağıllı Kilid"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Ağıllı Kilid və digərləri"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Qabaqcıl ayarlar"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"<xliff:g id="COUNT">%d</xliff:g> ədədə qədər barmaq izi əlavə edə bilərsiniz"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Maksimum sayda barmaq izi əlavə etmisiniz"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Daha artıq barmaq izi əlavə edilə bilməz"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Telefon doklanmış və/və ya yatan zaman baş verənlərə nəzarət edin, ekran qoruyucunu aktiv edin."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Başlama vaxtı"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Cari ekran qoruyucu"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"İndi başlayın"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Ayarlar"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Avtomatik parlaqlıq"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Oyatmaq üçün qaldırın"</string>
@@ -3626,6 +3631,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, qabaqcıl zəng, 5g zəngi"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"dil əlavə edin, bir dil əlavə edin"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"mətn ölçüsü, böyük çap, böyük şrift, böyük mətn, zəif görmə, mətni daha böyük et, şrift böyüdücü, şrift böyütmə"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"həmişə aktiv displey"</string>
     <string name="default_sound" msgid="6604374495015245195">"Defolt səs"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Zəng və bildiriş səs həcmi <xliff:g id="PERCENTAGE">%1$s</xliff:g> faizdir"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Səs, vibrasiya, \"Narahat etməyin\" rejimi"</string>
@@ -5304,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> cihazını deaktiv edin"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM\'i deaktiv etdikdə xidmət ləğv edilməyəcək"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Şəbəkəyə qoşulur…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Zənglər və mesajlar üçün <xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatoruna keçirilir…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Başqa operatora keçmək mümkün deyil"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Xəta səbəbi ilə başqa operatora keçmək mümkün deyil."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> deaktiv edilsin?"</string>
@@ -5573,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Adaptiv batareyadan istifadə edin"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Parlaqlıq adaptiv olsun"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Wi‑Fi zəngi funksiyasını istifadə edin"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Ekran qoruyucusundan istifadə edin"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Bütün tətbiqlərə baxın"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Ağıllı Yönləndirmə"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Ağıllı Yönləndirmə aktivdir"</string>
@@ -5588,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Telefon nömrəsi yoxdur."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G şəbəkəsinə icazə verin"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G mobil bağlantılardan istifadə edin. Təcili zənglər üçün 2G həmişə aktivdir."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G daha az güvənlidir, lakin bəzi məkanlarda bağlantınızı yaxşılaşdıra bilər. Təcili zənglər üçün 2G şəbəkəsinə həmişə icazə verilir."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> 2G tələb edir"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Panoya giriş göstərilsin"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Tətbiq kopyalanmış mətn, şəkil və ya digər kontent işlədəndə bildiriş göstərilsin"</string>
     <string name="all_apps" msgid="3054120149509114789">"Bütün tətbiqlər"</string>

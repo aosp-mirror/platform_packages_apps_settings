@@ -570,6 +570,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Die Option für die Displaysperre ist deaktiviert. Wende dich an den Administrator deiner Organisation, um weitere Informationen zu erhalten. "<annotation id="admin_details">"Weitere Details"</annotation>\n\n"Du kannst deinen Fingerabdruck dennoch verwenden, um Käufe zu autorisieren und dich in Apps anzumelden. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Hebe den Finger und berühre den Sensor dann noch einmal"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Der Fingerabdrucksensor kann nicht verwendet werden. Suche einen Reparaturdienstleister auf."</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Erweiterte Einstellungen"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Arbeitsprofilsperre, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock und weitere Einstellungen"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Erweiterte Einstellungen"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kannst bis zu <xliff:g id="COUNT">%d</xliff:g> Fingerabdrücke hinzufügen."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du hast die maximale Anzahl an Fingerabdrücken hinzugefügt"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Es können keine Fingerabdrücke mehr hinzugefügt werden"</string>
@@ -1433,6 +1437,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Um festzulegen, was geschieht, wenn dein Smartphone angedockt oder im Ruhemodus ist, aktiviere den Bildschirmschoner."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Zeitpunkt der Aktivierung"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Aktueller Bildschirmschoner"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Jetzt aktivieren"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Einstellungen"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Automatische Helligkeit"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Zum Aktivieren anheben"</string>
@@ -2419,14 +2424,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Kürzer"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Länger"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Zeit vor automatischem Klick"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibration und haptisches Feedback"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Anrufe"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Benachrichtigungen und Wecker"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktive Haptik"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibration bei Klingeln"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibration bei Benachrichtigungseingang"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Haptisches Feedback"</string>
@@ -3626,14 +3627,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptik, vibrieren, display, empfindlichkeit"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"Haptik, vibrieren, Smartphone, Anruf, Empfindlichkeit, klingeln"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"Haptik, vibrieren, Empfindlichkeit"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"Haptik, vibrieren, Vibration"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"Energiesparmodus, fixiert, nichtflüchtig, Stromsparfunktion, Akku"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ablauf, zeitplan, energiesparmodus, stromsparfunktion, akku, automatisch, prozent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, erweiterte Anruffunktionen, 4G-Anrufe"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5g, VoNR, erweiterte Anruffunktionen, 5G-Anrufe"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"Sprache hinzufügen, eine Sprache hinzufügen"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"Textgröße, Großdruck, Großschrift, großer Text, eingeschränktes Sehvermögen, Text vergrößern, Textvergrößerung"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"Always-On-Display"</string>
     <string name="default_sound" msgid="6604374495015245195">"Standardton"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Lautstärke bei Klingeln und Benachrichtigungseingang auf <xliff:g id="PERCENTAGE">%1$s</xliff:g> %% eingestellt"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Lautstärke, Vibration, Bitte nicht stören"</string>
@@ -3815,7 +3816,7 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Schlummerfunktion für Benachrichtigungen zulassen"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Bei stummen Benachrichtigungen keine Symbole anzeigen"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Bei stummen Benachrichtigungen werden in der Statusleiste keine Symbole angezeigt"</string>
-    <string name="notification_badging_title" msgid="5469616894819568917">"Benachrichtigungspunkt auf App-Symbol"</string>
+    <string name="notification_badging_title" msgid="5469616894819568917">"Benachrich­ti­gungs­punkt auf App-Symbol"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Leiste mit den neuesten Unterhaltungen anzeigen"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbles"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Bestimmte Benachrichtigungen und Inhalte können als \"Bubbles\" angezeigt werden. Tippe auf die Bubble, um sie zu öffnen. Wenn du sie wieder schließen möchtest, ziehe sie an den unteren Bildschirmrand."</string>
@@ -3831,11 +3832,11 @@
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"An / Unterhaltungen können als unverankerte Symbole angezeigt werden"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Zulassen, dass Apps Bubbles anzeigen"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Einige Unterhaltungen erscheinen als unverankerte Symbole über anderen Apps"</string>
-    <string name="bubble_app_setting_all" msgid="312524752846978277">"Alle Unterhaltungen können als Bubble angezeigt werden"</string>
-    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Ausgewählte Unterhaltungen können als Bubble angezeigt werden"</string>
-    <string name="bubble_app_setting_none" msgid="8643594711863996418">"Unterhaltungen können nicht als Bubble angezeigt werden"</string>
+    <string name="bubble_app_setting_all" msgid="312524752846978277">"Alle Unterhaltungen können als Bubble erscheinen"</string>
+    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Ausgewählte Unter­hal­tun­gen können als Bubble erscheinen"</string>
+    <string name="bubble_app_setting_none" msgid="8643594711863996418">"Unterhaltungen können nicht als Bubble erscheinen"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Unterhaltungen"</string>
-    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Alle Unterhaltungen können als Bubble angezeigt werden, außer"</string>
+    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Alle Unterhaltungen können als Bubble erscheinen, außer"</string>
     <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Bubbles für diese Unterhaltung deaktivieren"</string>
     <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Bubbles für diese Unterhaltung aktivieren"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Aktionen beim Wischen"</string>
@@ -3859,7 +3860,7 @@
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Wenn das Arbeitsprofil gesperrt ist"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Benachrichtigungen auf Sperrbildschirm"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Lautlose und Standardunterhaltungen anzeigen"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Lautlose und Standardunterhaltungen anzeigen"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Alle Benachrichtigungen anzeigen"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Lautlose Unterhaltungen und Benachrichtigungen verbergen"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Keine Benachrichtigungen anzeigen"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Vertrauliche Benachrichtigungen"</string>
@@ -4055,7 +4056,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Diese Benachrichtigungen nie anzeigen"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Benachrichtigungen anzeigen"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Benachrichtigungen nie in der Leiste oder auf Peripheriegeräten anzeigen"</string>
-    <string name="notification_badge_title" msgid="6854537463548411313">"App-Benachrichtigungspunkt erlauben"</string>
+    <string name="notification_badge_title" msgid="6854537463548411313">"App-Benach­rich­ti­gungs­punkt erlauben"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"App-Benachrichtigungs­punkt anzeigen"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"„Bitte nicht stören“ ignorieren"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Diese Benachrichtigungen dürfen auch dann gemeldet werden, wenn „Bitte nicht stören“ aktiviert ist"</string>
@@ -5312,8 +5313,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> deaktivieren"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Wenn du eine SIM deaktivierst, wird dein Mobilfunkvertrag nicht gekündigt"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Verbindung zum Mobilfunknetz wird hergestellt…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Für Anrufe und Nachrichten wird zu <xliff:g id="CARRIER_NAME">%1$s</xliff:g> gewechselt…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Mobilfunkanbieter kann nicht gewechselt werden"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Der Mobilfunkanbieter kann aufgrund eines Fehlers nicht gewechselt werden."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> deaktivieren?"</string>
@@ -5465,10 +5465,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lang"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Geldbörse anzeigen"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Zugriff auf Geldbörse aus Sperrbildschirm und Schnelleinstellungen erlauben"</string>
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (179730396165816425) -->
-    <skip />
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_summary (6152471629901191089) -->
-    <skip />
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"QR-Scanner anzeigen lassen"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Zugriff auf QR-Scanner vom Sperrbildschirm aus zulassen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Gerätesteuerung anzeigen"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Zugriffssteuerung bei Sperre"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Uhr in zwei Zeilen anzeigen, wenn verfügbar"</string>
@@ -5583,7 +5581,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Intelligenten Akku verwenden"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Automatische Helligkeit verwenden"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"WLAN-Telefonie verwenden"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Bildschirmschoner verwenden"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Alle Apps anzeigen"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Intelligente Weiterleitung"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Intelligente Weiterleitung aktiviert"</string>
@@ -5598,7 +5595,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Telefonnummer fehlt."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G zulassen"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G-Mobilfunkverbindungen verwenden. Für Notrufe ist 2G immer aktiviert."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G ist weniger sicher, bietet aber an manchen Standorten eine bessere Verbindung. Für Notrufe ist 2G immer zugelassen."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Für <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> muss 2G verfügbar sein"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Zugriff auf Zwischenablage anzeigen"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Eine Meldung wird angezeigt, wenn Apps auf Text, Bilder oder andere Inhalte zugreifen, die du kopiert hast"</string>
     <string name="all_apps" msgid="3054120149509114789">"Alle Apps"</string>

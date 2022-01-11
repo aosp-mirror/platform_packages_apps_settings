@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" স্ক্রিন লক বিকল্প নিষ্ক্রিয় করা হয়েছে। আরো জানতে, আপনার প্রতিষ্ঠানের প্রশাসকের সাথে যোগাযোগ করুন। "<annotation id="admin_details">"আরো বিবরণ"</annotation>\n\n"আপনি এখনও কেনাকাটা করতে এবং অ্যাপের অ্যাক্সেস দিতে আপনার আঙ্গুলের ছাপ ব্যবহার করতে পারেন। "<annotation id="url">"আরো জানুন"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"আঙ্গুল তুলুন, তারপরে আবার সেন্সরে স্পর্শ করুন"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"আঙ্গুলের ছাপের সেন্সর ব্যবহার করা যাচ্ছে না। একজন মেরামতি মিস্ত্রির কাছে যান"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"উন্নত সেটিংস"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"অফিস প্রোফাইল লক করুন, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock এবং আরও অনেক কিছু"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"উন্নত সেটিংস"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"আপনি <xliff:g id="COUNT">%d</xliff:g>টি পর্যন্ত আঙ্গুলের ছাপ যোগ করতে পারেন"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"আপনি অনুমোদিত সর্বোচ্চ সংখ্যক আঙ্গুলের ছাপ যোগ করেছেন"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"এর বেশি আঙ্গুলের ছাপ যোগ করা যাবে না"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"ফোন ডক করা এবং/অথবা নিদ্রা মোডে থাকাকালীন কি হচ্ছে তা নিয়ন্ত্রণের জন্য স্ক্রিন সেভার চালু করুন।"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"কখন শুরু করবেন"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"বর্তমান স্ক্রিন সেভার"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"এখন শুরু করুন"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"সেটিংস"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"স্বয়ংক্রিয় উজ্জ্বলতা"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"সক্রিয় করতে লিফ্ট করুন"</string>
@@ -3626,6 +3631,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, উন্নত কলিং, 5g কলিং"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ভাষা যোগ করুন, কোনও একটি ভাষা যোগ করুন"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"টেক্সটের সাইজ, বড় প্রিন্ট, বড় ফন্ট, বড় টেক্সট, কম দৃষ্টি, টেক্সট আরও বড় করুন, ফন্ট বড় করার টুল, ফন্ট বড় করা"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"ডিসপ্লে সবসময় চালু"</string>
     <string name="default_sound" msgid="6604374495015245195">"ডিফল্ট সাউন্ড"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"রিং ও বিজ্ঞপ্তির ভলিউম <xliff:g id="PERCENTAGE">%1$s</xliff:g>-এ সেট করা আছে"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"ভলিউম, ভাইব্রেশন, বিরক্ত করবে না"</string>
@@ -5304,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> বন্ধ করুন"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"সিম কার্ড বন্ধ করলেও আপনার পরিষেবা বাতিল করা হবে না"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"নেটওয়ার্কে কানেক্ট করা হচ্ছে…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"কল ও মেসেজের জন্য <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-এ বদল করা হচ্ছে…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"পরিষেবা প্রদানকারী পাল্টানো যাচ্ছে না"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"একটি সমস্যার কারণে পরিষেবা প্রদানকারী পাল্টানো যাবে না।"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> পরিষেবা বন্ধ করতে চান?"</string>
@@ -5573,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"অ্যাডাপটিভ ব্যাটারি বিকল্প ব্যবহার করুন"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"\'পরিবেশের আলো অনুযায়ী উজ্জ্বলতা\' ব্যবহার করুন"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Wi-Fi কলিং বিকল্প ব্যবহার করুন"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"স্ক্রিন সেভার ব্যবহার করুন"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"সমস্ত অ্যাপ দেখুন"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"স্মার্ট ফরওয়ার্ডিং"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"স্মার্ট ফরওয়ার্ডিং চালু আছে"</string>
@@ -5588,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ফোন নম্বর নেই।"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ঠিক আছে"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G ব্যবহারের অনুমতি দিন"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G মোবাইল কানেকশন ব্যবহার করুন। জরুরি কলের জন্য, 2G সব সময় চালু থাকে।"</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G কম নিরাপদ কিন্তু কিছু লোকেশনে হয়ত আপনার কানেকশন উন্নত করতে পারে। জরুরি কলের জন্য, 2G সবসময় ব্যবহার করা যায়।"</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>-এর জন্য 2G উপলভ্য থাকতে হবে"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"ক্লিপবোর্ড অ্যাক্সেস দেখুন"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"আপনি কপি করেছেন এমন টেক্সট, ছবি বা অন্যান্য কন্টেন্ট, অ্যাপ অ্যাক্সেস করলে মেসেজ দেখুন"</string>
     <string name="all_apps" msgid="3054120149509114789">"সব অ্যাপ"</string>

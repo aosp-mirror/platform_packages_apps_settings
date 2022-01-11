@@ -38,10 +38,11 @@
 
         <!-- After completely finishing the Text and reading options feature, it will be visible. -->
         <Preference
+            android:fragment="com.android.settings.accessibility.TextReadingPreferenceFragment"
             android:icon="@drawable/ic_adaptive_font_download"
             android:key="text_reading_options"
             android:persistent="false"
-            android:title="@strings/accessibility_text_reading_options_title"
+            android:title="@string/accessibility_text_reading_options_title"
             settings:isPreferenceVisible="false"/>
 
         <Preference

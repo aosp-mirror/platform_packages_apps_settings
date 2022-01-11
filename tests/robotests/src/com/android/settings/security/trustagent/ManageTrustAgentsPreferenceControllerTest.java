@@ -64,7 +64,7 @@ public class ManageTrustAgentsPreferenceControllerTest {
                 .thenReturn(mLockPatternUtils);
         when(mFeatureFactory.securityFeatureProvider.getTrustAgentManager())
                 .thenReturn(mTrustAgentManager);
-        mController = new ManageTrustAgentsPreferenceController(mContext);
+        mController = new ManageTrustAgentsPreferenceController(mContext, "key");
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
     }

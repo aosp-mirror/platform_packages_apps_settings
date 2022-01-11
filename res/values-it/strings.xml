@@ -568,6 +568,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" L\'opzione di blocco dello schermo è disattivata. Per ulteriori informazioni, contatta l\'amministratore della tua organizzazione. "<annotation id="admin_details">"Altri dettagli"</annotation>\n\n"Puoi comunque utilizzare la tua impronta per autorizzare acquisti e accessi alle app. "<annotation id="url">"Scopri di più"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Solleva il dito, quindi tocca di nuovo il sensore"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Impossibile usare il sensore di impronte digitali. Contatta un fornitore di servizi di riparazione"</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Impostazioni avanzate"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Blocco del profilo di lavoro, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock e altre impostazioni"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Impostazioni avanzate"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puoi aggiungere fino a <xliff:g id="COUNT">%d</xliff:g> impronte digitali"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Hai aggiunto il numero massimo di impronte digitali"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossibile aggiungere ulteriori impronte digitali"</string>
@@ -1430,6 +1434,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Attiva il salvaschermo per controllare ciò che accade quando il telefono è inserito nel dock e/o in standby."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Quando avviare"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Salvaschermo attuale"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Avvia adesso"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Impostazioni"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Luminosità automatica"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Solleva per riattivare"</string>
@@ -2416,14 +2421,10 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Più breve"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Più lungo"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tempo clic automatico"</string>
-    <!-- no translation found for accessibility_vibration_settings_title (936301142478631993) -->
-    <skip />
-    <!-- no translation found for accessibility_call_vibration_category_title (2545607568768192318) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_alarm_vibration_category_title (2683635252414849417) -->
-    <skip />
-    <!-- no translation found for accessibility_interactive_haptics_category_title (3162855291184592021) -->
-    <skip />
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrazione e feedback aptico"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Chiamate"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notifiche e sveglie"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Feedback aptico interattivo"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibrazione squillo"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibrazione notifiche"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Feedback al tocco"</string>
@@ -3057,7 +3058,7 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"Altre opzioni sono state disattivate dall\'amministratore."</string>
     <string name="admin_more_details" msgid="4928985331640193758">"Scopri di più"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Log Notifiche"</string>
-    <string name="notification_history_title" msgid="8821060912502593309">"Cronologia notifiche"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"Cronologia delle notifiche"</string>
     <string name="notification_history_today" msgid="5828496957208237230">"Ultime 24 ore"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Posticipate"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Ignorate di recente"</string>
@@ -3623,14 +3624,14 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"aptica, vibrazione, schermo, sensibilità"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"aptica, vibrazione, telefono, chiamata, sensibilità, squillo"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"aptica, vibrazione, sensibilità"</string>
-    <!-- no translation found for keywords_vibration (670455132028025952) -->
-    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"feedback aptico, vibrare, vibrazione"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"risparmio energetico, fisso, costante, risparmiare batteria, batteria"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"routine, programmazione, risparmio energetico, risparmiare batteria, batteria, automatico, percento"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, chiamate avanzate, chiamate 4g"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, chiamate avanzate, chiamate 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"aggiungere lingua, aggiungere una lingua"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"dimensioni del testo, stampa grande, carattere grande, testo grande, ipovedente, ingrandimento del testo, ingranditore di carattere, ingrandimento di carattere"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"display sempre attivo"</string>
     <string name="default_sound" msgid="6604374495015245195">"Suono predefinito"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Volume suoneria e notifiche: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, vibrazione, Non disturbare"</string>
@@ -5309,8 +5310,7 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Disattiva <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"La disattivazione di una SIM non comporterà l\'annullamento del servizio"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Connessione alla rete…"</string>
-    <!-- no translation found for sim_action_switch_sub_dialog_progress (4718412054243793310) -->
-    <skip />
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Passaggio a <xliff:g id="CARRIER_NAME">%1$s</xliff:g> per chiamate e messaggi in corso…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Impossibile passare a un altro operatore"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Impossibile passare a un altro operatore a causa di un errore."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Vuoi disattivare <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5578,7 +5578,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Usa Batteria adattiva"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Usa la luminosità adattiva"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Usa Chiamate Wi-Fi"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Usa il salvaschermo"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Mostra tutte le app"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Deviazione intelligente"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Funzionalità Deviazione intelligente attiva"</string>
@@ -5593,7 +5592,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Manca il numero di telefono."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Consenti 2G"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Usa le reti cellulari 2G. Per le chiamate di emergenze, la rete 2G è sempre attiva."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"La rete 2G è meno sicura, ma potrebbe migliorare la connessione in alcune località. Per le chiamate di emergenza, la rete 2G è sempre consentita."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> è disponibile soltanto con la rete 2G"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostra accesso agli appunti"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Viene mostrato un messaggio quando le app accedono a testo, immagini o altri contenuti che hai copiato"</string>
     <string name="all_apps" msgid="3054120149509114789">"Tutte le app"</string>
