@@ -47,6 +47,7 @@ public class AddAppNetworksActivityTest {
 
         mActivity = Robolectric.buildActivity(AddAppNetworksActivity.class).create().get();
         mActivity.mActivityManager = mIActivityManager;
+        mActivity.mIsAddWifiConfigAllow = true;
     }
 
     @Test
@@ -75,6 +76,13 @@ public class AddAppNetworksActivityTest {
         fakeCallingPackage("com.android.settings");
 
         assertThat(mActivity.showAddNetworksFragment()).isTrue();
+    }
+
+    @Test
+    public void showAddNetworksFragment_isAddWifiConfigNotAllow_returnFalse() {
+        mActivity.mIsAddWifiConfigAllow = false;
+
+        assertThat(mActivity.showAddNetworksFragment()).isFalse();
     }
 
     private void fakeCallingPackage(@Nullable String packageName) {
