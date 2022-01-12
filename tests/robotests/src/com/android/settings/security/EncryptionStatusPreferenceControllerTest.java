@@ -94,7 +94,7 @@ public class EncryptionStatusPreferenceControllerTest {
 
         assertThat(mPreference.getFragment()).isNull();
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getText(R.string.crypt_keeper_encrypted_summary));
+                .isEqualTo(mContext.getText(R.string.encrypted_summary));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class EncryptionStatusPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        final CharSequence summary = mContext.getText(R.string.decryption_settings_summary);
+        final CharSequence summary = mContext.getText(R.string.not_encrypted_summary);
         assertThat(mPreference.getSummary()).isEqualTo(summary);
         assertThat(mController.getPreferenceKey()).isNotEqualTo(PREF_KEY_ENCRYPTION_SECURITY_PAGE);
         assertThat(mPreference.getFragment()).isNull();
@@ -118,7 +118,7 @@ public class EncryptionStatusPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        final CharSequence summary = mContext.getText(R.string.decryption_settings_summary);
+        final CharSequence summary = mContext.getText(R.string.not_encrypted_summary);
         assertThat(mPreference.getSummary()).isEqualTo(summary);
         assertThat(mPreference.getFragment()).isNull();
     }
