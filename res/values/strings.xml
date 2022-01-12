@@ -3573,12 +3573,14 @@
     <string name="storage_menu_mount">Mount</string>
     <!-- Storage setting.  Menu option for unmounting a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_unmount">Eject</string>
-    <!-- Storage setting.  Menu option for erasing and formatting a storage device [CHAR LIMIT=30]-->
-    <string name="storage_menu_format">Format</string>
+    <!-- Storage setting.  Menu option for erasing and formatting a storage device [CHAR LIMIT=50]-->
+    <string name="storage_menu_format">Format SD card for portable storage</string>
+    <!-- Storage setting.  Button option for erasing and formatting a storage device [CHAR LIMIT=30]-->
+    <string name="storage_menu_format_button">Format card</string>
     <!-- Storage setting.  Menu option for erasing and formatting a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_format_public">Format as portable</string>
-    <!-- Storage setting.  Menu option for erasing and formatting a storage device [CHAR LIMIT=30]-->
-    <string name="storage_menu_format_private">Format as internal</string>
+    <!-- Storage setting.  Menu option for erasing and formatting a storage device [CHAR LIMIT=20]-->
+    <string name="storage_menu_format_option">Format</string>
     <!-- Storage setting.  Menu option for migrating data to a storage device [CHAR LIMIT=30]-->
     <string name="storage_menu_migrate">Migrate data</string>
     <!-- Storage setting.  Menu option for forgetting a storage device [CHAR LIMIT=30]-->
@@ -3651,8 +3653,10 @@
 \n\nTo use this <xliff:g id="name" example="SD card">^1</xliff:g>, you have to set it up first.</string>
 
     <!-- Body of dialog informing user about consequences of formatting an internal storage device [CHAR LIMIT=NONE]-->
-    <string name="storage_internal_format_details">After formatting, you can use this <xliff:g id="name" example="SD card">^1</xliff:g> in other devices.
-\n\nAll data on this <xliff:g id="name" example="SD card">^1</xliff:g> will be erased. Consider backing up first.
+    <string name="storage_internal_format_details">You can format this SD card to store photos, videos, music,
+        and more and access them on other devices.
+        \n\n<b>All data on this SD card will be erased.</b>
+        \n\n<b>Before formatting</b>
 \n\n<b>Back up photos &amp; other media</b>
 \nMove your media files to alternative storage on this device, or transfer them to a computer using a USB cable.
 \n\n<b>Back up apps</b>
@@ -3676,16 +3680,19 @@
     <!-- Body of dialog informing user about the storage used by the Android System [CHAR LIMIT=NONE]-->
     <string name="storage_detail_dialog_system">System includes files used to run Android version <xliff:g id="version" example="8.0">%s</xliff:g></string>
 
-    <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
+  <!-- Message to notify guest users as to why they can't set up the storage device [CHAR LIMIT=50]-->
+  <string name="storage_wizard_guest">Guest mode users cannot format SD cards</string>
+
+  <!-- Title of wizard step prompting user to setup a storage device [CHAR LIMIT=32] -->
     <string name="storage_wizard_init_title">Set up your <xliff:g id="name" example="SD card">^1</xliff:g></string>
     <!-- Title of wizard choice to use storage device as external storage [CHAR LIMIT=64] -->
-    <string name="storage_wizard_init_external_title">Use as portable storage</string>
+    <string name="storage_wizard_init_external_title">Format SD card for portable storage</string>
     <!-- Summary of wizard choice to use storage device as external storage [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_init_external_summary">For moving photos and other media between devices.</string>
+    <string name="storage_wizard_init_external_summary">Save photos, videos, music, and more and access them from other devices</string>
     <!-- Title of wizard choice to use storage device as internal storage [CHAR LIMIT=64] -->
-    <string name="storage_wizard_init_internal_title">Use as internal storage</string>
+    <string name="storage_wizard_init_internal_title">Format SD card for internal storage</string>
     <!-- Summary of wizard choice to use storage device as internal storage [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_init_internal_summary">For storing anything on this device only, including apps and photos. Requires formatting that prevents it from working with other devices.</string>
+    <string name="storage_wizard_init_internal_summary">Save apps \u0026 media to use on this phone only</string>
 
     <!-- Title of wizard step prompting user to format a storage device [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_confirm_title">Format as internal storage</string>
@@ -3740,13 +3747,11 @@
     </string>
 
     <!-- Title of a full-screen message. This string lets the user know that their storage device is ready to use. They can tap a button at the bottom of the screen to complete the setup process. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=32] -->
-    <string name="storage_wizard_ready_title">Your <xliff:g id="name" example="SD card">^1</xliff:g> is ready to use</string>
+    <string name="storage_wizard_ready_title"><xliff:g id="name" example="SD card">^1</xliff:g> formatted</string>
     <!-- Body of wizard step indicating that external storage is ready [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_external_body">Your <xliff:g id="name" example="SD card">^1</xliff:g> is all set to use with photos and other media.</string>
+    <string name="storage_wizard_ready_external_body">You can start using your <xliff:g id="name" example="SD card">^1</xliff:g></string>
     <!-- Body of wizard step indicating that internal storage is ready [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_internal_body">Your new <xliff:g id="name" example="SD card">^1</xliff:g> is working.
-\n\nTo move photos, files, and app data to this device, go to Settings > Storage.
-    </string>
+    <string name="storage_wizard_ready_internal_body">You can start using your <xliff:g id="name" example="SD card">^1</xliff:g></string>
 
     <!-- Title of wizard step prompting user to move an app [CHAR LIMIT=32] -->
     <string name="storage_wizard_move_confirm_title">Move <xliff:g id="app" example="Calculator">^1</xliff:g></string>
@@ -3776,26 +3781,26 @@
     <!-- This is the title of a full-screen message. After this question, the user will get to choose how they want to use the storage device that they have in their phone. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=32] -->
     <string name="storage_wizard_init_v2_title">How will you use this <xliff:g id="name" example="SD card">^1</xliff:g>?</string>
 
-    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=32] -->
-    <string name="storage_wizard_init_v2_internal_title" product="tablet">Use for extra tablet storage</string>
-    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=64] -->
-    <string name="storage_wizard_init_v2_internal_summary" product="tablet">For apps, files, and media on this tablet only</string>
+    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=50] -->
+    <string name="storage_wizard_init_v2_internal_title" product="tablet">Format SD card for internal storage</string>
+    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_init_v2_internal_summary" product="tablet">Store apps \u0026 media to use on this tablet only. &lt;a href="https://support.google.com/android/answer/12153449"&gt;Learn more about setting up an SD card&lt;/a&gt;</string>
     <!-- Button text. A user can tap this button if they want to use their SD card as extra device storage. [CHAR LIMIT=32] -->
-    <string name="storage_wizard_init_v2_internal_action" product="tablet">Tablet storage</string>
-    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=32] -->
-    <string name="storage_wizard_init_v2_internal_title" product="default">Use for extra phone storage</string>
-    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=64] -->
-    <string name="storage_wizard_init_v2_internal_summary" product="default">For apps, files, and media on this phone only</string>
+    <string name="storage_wizard_init_v2_internal_action" product="tablet">Format</string>
+    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=50] -->
+    <string name="storage_wizard_init_v2_internal_title" product="default">Format SD card for internal storage</string>
+    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as extra device storage. [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_init_v2_internal_summary" product="default">Store apps \u0026 media to use on this phone only. &lt;a href="https://support.google.com/android/answer/12153449"&gt;Learn more about setting up an SD card&lt;/a&gt;</string>
     <!-- Button text. A user can tap this button if they want to use their SD card as extra device storage. [CHAR LIMIT=32] -->
-    <string name="storage_wizard_init_v2_internal_action" product="default">Phone storage</string>
+    <string name="storage_wizard_init_v2_internal_action" product="default">Format</string>
     <!-- This text separates two options in a full-screen message. It's used to indicate a user can choose one option or the other. [CHAR LIMIT=16] -->
     <string name="storage_wizard_init_v2_or">Or</string>
-    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as portable device storage. [CHAR LIMIT=32] -->
-    <string name="storage_wizard_init_v2_external_title">Use for portable storage</string>
-    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as portable device storage. [CHAR LIMIT=64] -->
-    <string name="storage_wizard_init_v2_external_summary">For transferring files and media between devices</string>
+    <!-- Title of a line item. Below this title, a user can tap a button to select this option if they want to use their SD card as portable device storage. [CHAR LIMIT=50] -->
+    <string name="storage_wizard_init_v2_external_title">Format SD card for portable storage</string>
+    <!-- Subtext for a line item. Below this subtext, a user can tap a button to select this option if they want to use their SD card as portable device storage. [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_init_v2_external_summary">Store photos, videos, music, and more and access them from other devices. &lt;a href="https://support.google.com/android/answer/12153449"&gt;Learn more about setting up an SD card&lt;/a&gt;</string>
     <!-- Button text. A user can tap this button if they want to use their SD card as portable device storage. [CHAR LIMIT=32] -->
-    <string name="storage_wizard_init_v2_external_action">Portable storage</string>
+    <string name="storage_wizard_init_v2_external_action">Format</string>
     <!-- Button text. A user can tap this button if they want to delay setting up their SD card until a later time. [CHAR LIMIT=32] -->
     <string name="storage_wizard_init_v2_later">Set up later</string>
 
@@ -3804,6 +3809,9 @@
     <!-- Body of a dialog. This text is confirming that the user wants to use their SD card as extra phone storage, but the formatting process will erase existing content on the card. The first placeholder is for the name of the device (e.g. a brand name of the SD card or USB drive). The second and third placeholders are for the general references (e.g. SD card, USB drive). [CHAR LIMIT=NONE] -->
     <string name="storage_wizard_format_confirm_v2_body">This <xliff:g id="name" example="SanDisk SD card">^1</xliff:g> needs to be formatted to store apps, files, and media.
 \n\nFormatting will erase existing content on the <xliff:g id="name" example="SD card">^2</xliff:g>. To avoid losing content, back it up to another <xliff:g id="name" example="SD card">^3</xliff:g> or device.</string>
+  <!-- Body of a dialog. This text is confirming that the user wants to use their SD card as portable storage, but the formatting process will erase existing content on the card. The first placeholder is for the name of the device (e.g. a brand name of the SD card or USB drive). The second and third placeholders are for the general references (e.g. SD card, USB drive). [CHAR LIMIT=NONE] -->
+    <string name="storage_wizard_format_confirm_v2_body_external">This <xliff:g id="name" example="SanDisk SD card">^1</xliff:g> needs to be formatted to store photos, videos, music, and more.
+        \n\nFormatting will erase existing content on the <xliff:g id="name" example="SD card">^2</xliff:g>. To avoid losing content, back it up to another <xliff:g id="name" example="SD card">^3</xliff:g> or device.</string>
     <!-- Button text. If a user taps this button, their SD card or USB device will be formatted and used as extra phone storage. The placeholder is for the specific device (e.g. SD card, USB drive, etc.). [CHAR LIMIT=16] -->
     <string name="storage_wizard_format_confirm_v2_action">Format <xliff:g id="name" example="SD card">^1</xliff:g></string>
 
@@ -3847,12 +3855,11 @@
     <string name="storage_wizard_slow_v2_continue">Continue</string>
 
     <!-- Title of a full-screen message. This text lets the user know how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_v2_external_body">You can move content to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g></string>
+    <string name="storage_wizard_ready_v2_external_body">You can start using your <xliff:g id="name" example="SD card">^1</xliff:g></string>
     <!-- Title of a full-screen message. This text lets the user know that their content was moved to their storage device and how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_v2_internal_body">To move content to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>, go to <b>Settings > Storage</b></string>
+    <string name="storage_wizard_ready_v2_internal_body">You can start using your <xliff:g id="name" example="SD card">^1</xliff:g></string>
     <!-- Title of a full-screen message. This text lets the user know that their content was moved to their storage device and how to manage the storage device moving forward. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=NONE] -->
-    <string name="storage_wizard_ready_v2_internal_moved_body">Your content was moved to <xliff:g id="name" example="SanDisk SD card">^1</xliff:g>.
-\n\nTo manage this <xliff:g id="name" example="SD card">^2</xliff:g>, go to <b>Settings > Storage</b>.</string>
+    <string name="storage_wizard_ready_v2_internal_moved_body">You can start using your <xliff:g id="name" example="SD card">^1</xliff:g></string>
 
     <!-- Phone info screen, section titles: -->
     <string name="battery_status_title">Battery status</string>
@@ -8142,6 +8149,10 @@
     <string name="wizard_back">Back</string>
     <!-- Wizard next button label [CHAR LIMIT=25] -->
     <string name="wizard_next">Next</string>
+    <!-- Wizard next button label for portable [CHAR LIMIT=25] -->
+    <string name="wizard_back_portable">Switch to portable</string>
+    <!-- Wizard next button label for adoptable [CHAR LIMIT=25] -->
+    <string name="wizard_back_adoptable">Format another way</string>
     <!-- Wizard finish button label [CHAR LIMIT=25] -->
     <string name="wizard_finish">Finish</string>
 

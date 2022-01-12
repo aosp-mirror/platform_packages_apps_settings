@@ -14,47 +14,55 @@
      limitations under the License.
 -->
 
-<com.google.android.setupdesign.GlifLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/setup_wizard_layout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/storage_wizard_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
-        style="@style/SudContentFrame"
+   <com.google.android.setupdesign.GlifLayout
+        android:id="@+id/setup_wizard_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/storage_wizard_progress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/sud_description_margin_top"
-            android:indeterminate="false"
-            style="?android:attr/progressBarStyleHorizontal" />
-        <TextView
-            android:id="@+id/storage_wizard_progress_summary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="@dimen/sud_description_line_spacing_extra"
-            android:textColor="?android:attr/textColorSecondary" />
+      <LinearLayout
+          style="@style/SudContentFrame"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/storage_wizard_body"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/sud_description_margin_top"
-            android:lineSpacingExtra="@dimen/sud_description_line_spacing_extra"
-            android:textColor="?android:attr/textColorPrimary"
-            android:visibility="gone" />
+          <ProgressBar
+              android:id="@+id/storage_wizard_progress"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/sud_description_margin_top"
+              android:indeterminate="false"
+              style="?android:attr/progressBarStyleHorizontal" />
+          <TextView
+              android:id="@+id/storage_wizard_progress_summary"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:lineSpacingExtra="@dimen/sud_description_line_spacing_extra"
+              android:textSize="18sp"
+              android:textColor="?android:attr/textColorSecondary" />
 
-        <FrameLayout
-            android:id="@+id/storage_wizard_aux"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+          <TextView
+              android:id="@+id/storage_wizard_body"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/sud_description_margin_top"
+              android:lineSpacingExtra="@dimen/sud_description_line_spacing_extra"
+              android:textColor="?android:attr/textColorPrimary"
+              android:textSize="18sp"
+              android:visibility="gone" />
 
-    </LinearLayout>
+          <FrameLayout
+              android:id="@+id/storage_wizard_aux"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:visibility="gone" />
 
-</com.google.android.setupdesign.GlifLayout>
+      </LinearLayout>
+
+  </com.google.android.setupdesign.GlifLayout>
+</RelativeLayout>
