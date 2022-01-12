@@ -2849,26 +2849,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CryptKeeperConfirm$Blank"
-            android:immersive="true"
-            android:launchMode="singleTop"
-            android:theme="@style/CryptKeeperBlankTheme"
-        />
-
-        <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
-        <activity android:name="Settings$CryptKeeperSettingsActivity"
-                android:exported="true"
-                android:label="@string/crypt_keeper_encrypt_title">
-            <intent-filter android:priority="1">
-                <action android:name="android.app.action.START_ENCRYPTION" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.security.CryptKeeperSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
-        </activity>
-
         <activity
             android:name="Settings$DataUsageSummaryActivity"
             android:label="@string/data_usage_summary_title"
