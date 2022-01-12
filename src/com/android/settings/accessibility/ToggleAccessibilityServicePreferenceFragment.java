@@ -21,9 +21,7 @@ import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logA
 import static com.android.settings.accessibility.PreferredShortcuts.retrieveUserShortcutType;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -38,9 +36,6 @@ import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.UserHandle;
-import android.os.storage.StorageManager;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -51,11 +46,9 @@ import android.widget.Switch;
 
 import androidx.annotation.Nullable;
 
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -66,8 +59,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         ToggleFeaturePreferenceFragment {
 
     private static final String TAG = "ToggleAccessibilityServicePreferenceFragment";
-    private static final int ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION = 1;
-    private LockPatternUtils mLockPatternUtils;
     private AtomicBoolean mIsDialogShown = new AtomicBoolean(/* initialValue= */ false);
 
     private static final String EMPTY_STRING = "";
@@ -106,7 +97,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLockPatternUtils = new LockPatternUtils(getPrefContext());
     }
 
     @Override
@@ -243,33 +233,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 .contains(mComponentName);
     }
 
-    /**
-     * Return whether the device is encrypted with legacy full disk encryption. Newer devices
-     * should be using File Based Encryption.
-     *
-     * @return true if device is encrypted
-     */
-    private boolean isFullDiskEncrypted() {
-        return StorageManager.isNonDefaultBlockEncrypted();
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION) {
-            if (resultCode == Activity.RESULT_OK) {
-                handleConfirmServiceEnabled(/* confirmed= */ true);
-                // The user confirmed that they accept weaker encryption when
-                // enabling the accessibility service, so change encryption.
-                // Since we came here asynchronously, check encryption again.
-                if (isFullDiskEncrypted()) {
-                    mLockPatternUtils.clearEncryptionPassword();
-                    Settings.Global.putInt(getContentResolver(),
-                            Settings.Global.REQUIRE_PASSWORD_TO_DECRYPT, 0);
-                }
-            } else {
-                handleConfirmServiceEnabled(/* confirmed= */ false);
-            }
-        }
     }
 
     private void registerPackageRemoveReceiver() {
@@ -319,23 +284,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private void handleConfirmServiceEnabled(boolean confirmed) {
         getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, confirmed);
         onPreferenceToggled(mPreferenceKey, confirmed);
-    }
-
-    private String createConfirmCredentialReasonMessage() {
-        int resId = R.string.enable_service_password_reason;
-        switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())) {
-            case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING: {
-                resId = R.string.enable_service_pattern_reason;
-            }
-            break;
-            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
-            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX: {
-                resId = R.string.enable_service_pin_reason;
-            }
-            break;
-        }
-        return getString(resId, getAccessibilityServiceInfo().getResolveInfo()
-                .loadLabel(getPackageManager()));
     }
 
     @Override
@@ -461,20 +409,11 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private void onAllowButtonFromEnableToggleClicked() {
-        if (isFullDiskEncrypted()) {
-            final String title = createConfirmCredentialReasonMessage();
-            final Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, /* details= */
-                    null);
-            startActivityForResult(intent,
-                    ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION);
-        } else {
-            handleConfirmServiceEnabled(/* confirmed= */ true);
-            if (isServiceSupportAccessibilityButton()) {
-                mIsDialogShown.set(false);
-                showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
-            }
+        handleConfirmServiceEnabled(/* confirmed= */ true);
+        if (isServiceSupportAccessibilityButton()) {
+            mIsDialogShown.set(false);
+            showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
         }
-
         mDialog.dismiss();
     }
 
