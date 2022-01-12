@@ -23,6 +23,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -30,7 +31,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 public class UserCapabilities {
     boolean mEnabled = true;
     boolean mCanAddUser = true;
-    boolean mCanAddRestrictedProfile = true;
+    boolean mCanAddRestrictedProfile;
     boolean mIsAdmin;
     boolean mIsGuest;
     boolean mUserSwitcherEnabled;
@@ -57,12 +58,13 @@ public class UserCapabilities {
         caps.mIsAdmin = myUserInfo.isAdmin();
         DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
-        // No restricted profiles for tablets with a device owner, or phones.
-        if (dpm.isDeviceManaged()
-                || Utils.isVoiceCapable(context)
-                || !userManager.isUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED)) {
-            caps.mCanAddRestrictedProfile = false;
-        }
+
+        boolean offerRestricted =
+                context.getResources().getBoolean(R.bool.config_offer_restricted_profiles);
+        caps.mCanAddRestrictedProfile =
+                offerRestricted && !dpm.isDeviceManaged() && userManager.isUserTypeEnabled(
+                        UserManager.USER_TYPE_FULL_RESTRICTED);
+
         caps.updateAddUserCapabilities(context);
         return caps;
     }
