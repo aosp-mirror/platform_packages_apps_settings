@@ -17,6 +17,7 @@ package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
 import android.media.AudioAttributes;
+import android.os.VibrationAttributes;
 import android.os.Vibrator;
 import android.provider.Settings;
 
@@ -57,6 +58,6 @@ public class NotificationVibrationPreferenceFragment extends VibrationPreference
     @Override
     protected int getDefaultVibrationIntensity() {
         Vibrator vibrator = getContext().getSystemService(Vibrator.class);
-        return vibrator.getDefaultNotificationVibrationIntensity();
+        return vibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_NOTIFICATION);
     }
 }

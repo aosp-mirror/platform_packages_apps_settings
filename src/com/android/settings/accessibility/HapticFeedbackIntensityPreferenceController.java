@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.os.VibrationAttributes;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
@@ -39,7 +40,7 @@ public class HapticFeedbackIntensityPreferenceController
 
     @Override
     protected int getDefaultIntensity() {
-        return mVibrator.getDefaultHapticFeedbackIntensity();
+        return mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_TOUCH);
     }
 
 }

@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.os.VibrationAttributes;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
@@ -39,6 +40,6 @@ public class RingVibrationIntensityPreferenceController
 
     @Override
     protected int getDefaultIntensity() {
-        return mVibrator.getDefaultRingVibrationIntensity();
+        return mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_RINGTONE);
     }
 }

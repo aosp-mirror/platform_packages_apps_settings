@@ -50,7 +50,9 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.utils.ThreadUtils;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 public class VpnPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
@@ -63,32 +65,36 @@ public class VpnPreferenceController extends AbstractPreferenceController
             .build();
     private static final String TAG = "VpnPreferenceController";
 
-    private final String mToggleable;
     private final UserManager mUserManager;
-    private final ConnectivityManager mConnectivityManager;
+    private ConnectivityManager mConnectivityManager;
     private final VpnManager mVpnManager;
     private Preference mPreference;
 
     public VpnPreferenceController(Context context) {
         super(context);
-        mToggleable = Settings.Global.getString(context.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mConnectivityManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mVpnManager = context.getSystemService(VpnManager.class);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(KEY_VPN_SETTINGS);
-        // Manually set dependencies for Wifi when not toggleable.
-        if (mToggleable == null || !mToggleable.contains(Settings.Global.RADIO_WIFI)) {
-            if (mPreference != null) {
-                mPreference.setDependency(SettingsSlicesContract.KEY_AIRPLANE_MODE);
-            }
+        mPreference = getEffectivePreference(screen);
+    }
+
+    @VisibleForTesting
+    protected Preference getEffectivePreference(PreferenceScreen screen) {
+        Preference preference = screen.findPreference(KEY_VPN_SETTINGS);
+        if (preference == null) {
+            return null;
         }
+        String toggleable = Settings.Global.getString(mContext.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+        // Manually set dependencies for Wifi when not toggleable.
+        if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIFI)) {
+            preference.setDependency(SettingsSlicesContract.KEY_AIRPLANE_MODE);
+        }
+        return preference;
     }
 
     @Override
@@ -104,15 +110,19 @@ public class VpnPreferenceController extends AbstractPreferenceController
 
     @Override
     public void onPause() {
-        if (isAvailable()) {
+        if (mConnectivityManager != null) {
             mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
+            mConnectivityManager = null;
         }
     }
 
     @Override
     public void onResume() {
         if (isAvailable()) {
+            mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
             mConnectivityManager.registerNetworkCallback(REQUEST, mNetworkCallback);
+        } else {
+            mConnectivityManager = null;
         }
     }
 
@@ -203,17 +213,13 @@ public class VpnPreferenceController extends AbstractPreferenceController
 
     @VisibleForTesting
     protected int getInsecureVpnCount() {
-        int count = 0;
-        for (String key : LegacyVpnProfileStore.list(Credentials.VPN)) {
-            final VpnProfile profile = VpnProfile.decode(key,
-                    LegacyVpnProfileStore.get(Credentials.VPN + key));
-            // Return whether any profile is an insecure type.
-            if (VpnProfile.isLegacyType(profile.type)) {
-                count++;
-            }
-        }
-        // We did not find any insecure VPNs.
-        return count;
+        final Function<String, VpnProfile> keyToProfile = key ->
+                VpnProfile.decode(key, LegacyVpnProfileStore.get(Credentials.VPN + key));
+        return (int) Arrays.stream(LegacyVpnProfileStore.list(Credentials.VPN))
+                .map(keyToProfile)
+                // Return whether any profile is an insecure type.
+                .filter(profile -> VpnProfile.isLegacyType(profile.type))
+                .count();
     }
 
     // Copied from SystemUI::SecurityControllerImpl
