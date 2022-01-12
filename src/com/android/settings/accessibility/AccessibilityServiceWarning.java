@@ -23,7 +23,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.os.storage.StorageManager;
 import android.text.BidiFormatter;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -86,16 +85,6 @@ public class AccessibilityServiceWarning {
         return ad;
     }
 
-    /**
-     * Returns whether the device is encrypted with legacy full disk encryption. Newer devices
-     * should be using File Based Encryption.
-     *
-     * @return true if device is encrypted
-     */
-    private static boolean isFullDiskEncrypted() {
-        return StorageManager.isNonDefaultBlockEncrypted();
-    }
-
     private static View createEnableDialogContentView(Context context,
             @NonNull AccessibilityServiceInfo info, View.OnClickListener listener,
             UninstallActionPerformer performer) {
@@ -104,17 +93,6 @@ public class AccessibilityServiceWarning {
 
         View content = inflater.inflate(R.layout.enable_accessibility_service_dialog_content,
                 null);
-
-        TextView encryptionWarningView = (TextView) content.findViewById(
-                R.id.encryption_warning);
-        if (isFullDiskEncrypted()) {
-            String text = context.getString(R.string.enable_service_encryption_warning,
-                    getServiceName(context, info));
-            encryptionWarningView.setText(text);
-            encryptionWarningView.setVisibility(View.VISIBLE);
-        } else {
-            encryptionWarningView.setVisibility(View.GONE);
-        }
 
         final Drawable icon;
         if (info.getResolveInfo().getIconResource() == 0) {
