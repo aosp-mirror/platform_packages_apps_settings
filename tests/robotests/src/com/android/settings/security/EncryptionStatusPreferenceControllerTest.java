@@ -98,7 +98,7 @@ public class EncryptionStatusPreferenceControllerTest {
     }
 
     @Test
-    public void updateSummary_unencrypted_shouldHasEncryptionFragment() {
+    public void updateSummary_unencrypted_shouldSayUnencrypted() {
         ShadowLockPatternUtils.setDeviceEncryptionEnabled(false);
 
         mController.updateState(mPreference);
@@ -106,11 +106,11 @@ public class EncryptionStatusPreferenceControllerTest {
         final CharSequence summary = mContext.getText(R.string.decryption_settings_summary);
         assertThat(mPreference.getSummary()).isEqualTo(summary);
         assertThat(mController.getPreferenceKey()).isNotEqualTo(PREF_KEY_ENCRYPTION_SECURITY_PAGE);
-        assertThat(mPreference.getFragment()).isEqualTo(CryptKeeperSettings.class.getName());
+        assertThat(mPreference.getFragment()).isNull();
     }
 
     @Test
-    public void updateSummary_unencrypted_securityPage_shouldNotHaveEncryptionFragment() {
+    public void updateSummary_unencrypted_securityPage_shouldSayUnencrypted() {
         mController =
                 new EncryptionStatusPreferenceController(mContext,
                         PREF_KEY_ENCRYPTION_SECURITY_PAGE);
@@ -120,7 +120,6 @@ public class EncryptionStatusPreferenceControllerTest {
 
         final CharSequence summary = mContext.getText(R.string.decryption_settings_summary);
         assertThat(mPreference.getSummary()).isEqualTo(summary);
-
-        assertThat(mPreference.getFragment()).isNotEqualTo(CryptKeeperSettings.class.getName());
+        assertThat(mPreference.getFragment()).isNull();
     }
 }
