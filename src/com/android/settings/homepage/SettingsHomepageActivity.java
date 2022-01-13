@@ -42,6 +42,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.window.embedding.SplitController;
 import androidx.window.embedding.SplitRule;
 
 import com.android.settings.R;
@@ -85,8 +86,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private View mTwoPaneSuggestionView;
     private CategoryMixin mCategoryMixin;
     private Set<HomepageLoadedListener> mLoadedListeners;
+    private SplitController mSplitController;
     private boolean mIsEmbeddingActivityEnabled;
-    private boolean mIsTwoPaneLastTime;
+    private boolean mIsTwoPane;
 
     /** A listener receiving homepage loaded events. */
     public interface HomepageLoadedListener {
@@ -149,7 +151,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_homepage_container);
         mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
-        mIsTwoPaneLastTime = ActivityEmbeddingUtils.isTwoPaneResolution(this);
+        mSplitController = SplitController.getInstance();
+        mIsTwoPane = mSplitController.isActivityEmbedded(this);
 
         final View appBar = findViewById(R.id.app_bar_container);
         appBar.setMinimumHeight(getSearchBoxHeight());
@@ -213,9 +216,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        final boolean isTwoPane = ActivityEmbeddingUtils.isTwoPaneResolution(this);
-        if (mIsTwoPaneLastTime != isTwoPane) {
-            mIsTwoPaneLastTime = isTwoPane;
+        final boolean newTwoPaneState = mSplitController.isActivityEmbedded(this);
+        if (mIsTwoPane != newTwoPaneState) {
+            mIsTwoPane = newTwoPaneState;
             updateHomepageAppBar();
             updateHomepageBackground();
         }
@@ -254,7 +257,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
 
         final Window window = getWindow();
-        final int color = ActivityEmbeddingUtils.isTwoPaneResolution(this)
+        final int color = mIsTwoPane
                 ? Utils.getColorAttrDefaultColor(this, com.android.internal.R.attr.colorSurface)
                 : Utils.getColorAttrDefaultColor(this, android.R.attr.colorBackground);
 
@@ -416,7 +419,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (!mIsEmbeddingActivityEnabled) {
             return;
         }
-        if (ActivityEmbeddingUtils.isTwoPaneResolution(this)) {
+        if (mIsTwoPane) {
             findViewById(R.id.homepage_app_bar_regular_phone_view).setVisibility(View.GONE);
             findViewById(R.id.homepage_app_bar_two_pane_view).setVisibility(View.VISIBLE);
         } else {
