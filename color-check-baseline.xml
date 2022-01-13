@@ -21,6 +21,38 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            &lt;solid android:color=&quot;#BCEDDF&quot;/>"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_qs_tooltips_background.xml"
+            line="22"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            &lt;solid android:color=&quot;#BCEDDF&quot;/>"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/accessibility_qs_tooltips_background.xml"
+            line="35"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="        android:startColor=&quot;#4D000000&quot;"
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -2968,6 +3000,22 @@
         errorLine1="            android:color=&quot;@color/accessibility_feature_background&quot;/>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
+            file="res/drawable/ic_adaptive_font_download.xml"
+            line="23"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            android:color=&quot;@color/accessibility_feature_background&quot;/>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
             file="res/drawable/ic_audio_adjustment.xml"
             line="22"
             column="13"/>
@@ -3210,22 +3258,6 @@
         <location
             file="res/drawable/ic_hearing_aid.xml"
             line="22"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="            android:color=&quot;@color/accessibility_feature_background&quot;/>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/drawable/ic_adaptive_font_download.xml"
-            line="23"
             column="13"/>
     </issue>
 
@@ -4633,7 +4665,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rAU/strings.xml"
-            line="3092"
+            line="3104"
             column="64"/>
     </issue>
 
@@ -4649,7 +4681,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rCA/strings.xml"
-            line="3092"
+            line="3104"
             column="64"/>
     </issue>
 
@@ -4665,7 +4697,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rGB/strings.xml"
-            line="3092"
+            line="3104"
             column="64"/>
     </issue>
 
@@ -4681,7 +4713,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rIN/strings.xml"
-            line="3092"
+            line="3104"
             column="64"/>
     </issue>
 
@@ -4697,7 +4729,7 @@
         errorLine2="                                                                                                                                                                         ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rXC/strings.xml"
-            line="3092"
+            line="3104"
             column="170"/>
     </issue>
 
@@ -4713,7 +4745,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="7103"
+            line="7142"
             column="36"/>
     </issue>
 
@@ -4745,7 +4777,7 @@
         errorLine2="                                        ^">
         <location
             file="res/values-night/themes.xml"
-            line="37"
+            line="33"
             column="41"/>
     </issue>
 
@@ -4761,7 +4793,7 @@
         errorLine2="                                        ^">
         <location
             file="res/values-night/themes.xml"
-            line="37"
+            line="33"
             column="41"/>
     </issue>
 
@@ -4841,7 +4873,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="185"
+            line="192"
             column="45"/>
     </issue>
 
@@ -4857,7 +4889,7 @@
         errorLine2="                                                ^">
         <location
             file="res/values/themes.xml"
-            line="186"
+            line="193"
             column="49"/>
     </issue>
 
@@ -4873,7 +4905,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="194"
+            line="201"
             column="45"/>
     </issue>
 
@@ -4889,7 +4921,7 @@
         errorLine2="                                                ^">
         <location
             file="res/values/themes.xml"
-            line="195"
+            line="202"
             column="49"/>
     </issue>
 
