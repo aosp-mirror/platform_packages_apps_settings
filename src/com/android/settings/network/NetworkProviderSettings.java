@@ -27,6 +27,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -301,9 +302,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mAddWifiNetworkPreference = new AddWifiNetworkPreference(getPrefContext());
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
-        mDataUsagePreference.setTemplate(
-                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
-                null /* subscriberId */), 0 /*subId*/, null /*service*/);
+        mDataUsagePreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
+                        .build(), 0 /*subId*/, null /*service*/);
         mResetInternetPreference = findPreference(PREF_KEY_RESET_INTERNET);
         if (mResetInternetPreference != null) {
             mResetInternetPreference.setVisible(false);
@@ -756,7 +756,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         if (context == null) {
             return;
         }
-        if (isWifiEnabled || !mWifiManager.isScanAlwaysAvailable()) {
+
+        final LocationManager locationManager = context.getSystemService(LocationManager.class);
+        if (isWifiEnabled || !locationManager.isLocationEnabled()
+                || !mWifiManager.isScanAlwaysAvailable()) {
             mWifiStatusMessagePreference.setVisible(false);
             return;
         }
