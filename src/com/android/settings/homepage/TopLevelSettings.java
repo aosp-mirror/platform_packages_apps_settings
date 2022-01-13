@@ -33,6 +33,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -144,7 +145,7 @@ public class TopLevelSettings extends DashboardFragment implements
         if (mFirstStarted) {
             mFirstStarted = false;
         } else if (mIsEmbeddingActivityEnabled && isOnlyOneActivityInTask()
-                && !ActivityEmbeddingUtils.isTwoPaneResolution(getActivity())) {
+                && !SplitController.getInstance().isActivityEmbedded(getActivity())) {
             // Set default highlight menu key for 1-pane homepage since it will show the placeholder
             // page once changing back to 2-pane.
             Log.i(TAG, "Set default menu key");
