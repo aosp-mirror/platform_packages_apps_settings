@@ -311,7 +311,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
             numLevels += 1;
         }
 
-        Drawable icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels, false);
+        Drawable icon = mSubsPrefCtrlInjector.getIcon(mContext, level, numLevels,
+                !mTelephonyManager.isDataEnabled());
         final boolean isActiveCellularNetwork =
                 mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext);
         if (isActiveCellularNetwork || (mWifiPickerTrackerHelper != null)
