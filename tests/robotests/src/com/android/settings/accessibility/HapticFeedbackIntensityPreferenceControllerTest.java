@@ -18,42 +18,136 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
+import android.os.VibrationAttributes;
+import android.os.Vibrator;
+import android.provider.Settings;
 
 import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class HapticFeedbackIntensityPreferenceControllerTest {
 
+    private static final String PREFERENCE_KEY = "preference_key";
+    private static final int OFF = 0;
+    private static final int ON = 1;
+
+    @Mock
+    private PreferenceScreen mScreen;
+
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private Context mContext;
+    private Vibrator mVibrator;
     private HapticFeedbackIntensityPreferenceController mController;
+    private SeekBarPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mContext = RuntimeEnvironment.application;
-        mController = new HapticFeedbackIntensityPreferenceController(mContext);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        mVibrator = mContext.getSystemService(Vibrator.class);
+        mController = new HapticFeedbackIntensityPreferenceController(mContext, PREFERENCE_KEY);
+        mLifecycle.addObserver(mController);
+        mPreference = new SeekBarPreference(mContext);
+        mPreference.setSummary("Test summary");
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        showPreference();
     }
 
     @Test
     public void verifyConstants() {
-        assertThat(mController.getPreferenceKey())
-                .isEqualTo(HapticFeedbackIntensityPreferenceController.PREF_KEY);
+        assertThat(mController.getPreferenceKey()).isEqualTo(PREFERENCE_KEY);
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
+        assertThat(mController.getMin()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(mController.getMax()).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
+    }
+
+    @Test
+    public void missingSetting_shouldReturnDefault() {
+        Settings.System.putString(mContext.getContentResolver(),
+                Settings.System.HAPTIC_FEEDBACK_INTENSITY, /* value= */ null);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getProgress())
+                .isEqualTo(mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_TOUCH));
+    }
+
+    @Test
+    public void updateState_shouldDisplayIntensityInSliderPosition() {
+        updateSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
+
+        updateSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY,
+                Vibrator.VIBRATION_INTENSITY_MEDIUM);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_MEDIUM);
+
+        updateSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
+
+        updateSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
+    }
+
+    @Test
+    public void setProgress_updatesIntensityAndDependentSettings() throws Exception {
+        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY))
+                .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_ENABLED)).isEqualTo(OFF);
+
+        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_LOW);
+        assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY))
+                .isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
+        assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_ENABLED)).isEqualTo(ON);
+
+        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_MEDIUM);
+        assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY))
+                .isEqualTo(Vibrator.VIBRATION_INTENSITY_MEDIUM);
+        assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_ENABLED)).isEqualTo(ON);
+
+        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_HIGH);
+        assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY))
+                .isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
+        assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_ENABLED)).isEqualTo(ON);
+
+        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY))
+                .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_ENABLED)).isEqualTo(OFF);
+    }
+
+    private void updateSetting(String key, int value) {
+        Settings.System.putInt(mContext.getContentResolver(), key, value);
+    }
+
+    private int readSetting(String settingKey) throws Settings.SettingNotFoundException {
+        return Settings.System.getInt(mContext.getContentResolver(), settingKey);
+    }
+
+    private void showPreference() {
+        mController.displayPreference(mScreen);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,10 +28,10 @@ import android.provider.Settings;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -41,13 +41,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
-/** Tests for {@link RingVibrationIntensityPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
-public class RingVibrationIntensityPreferenceControllerTest {
+public class NotificationVibrationTogglePreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "preference_key";
-    private static final int OFF = 0;
-    private static final int ON = 1;
 
     @Mock
     private PreferenceScreen mScreen;
@@ -56,8 +53,8 @@ public class RingVibrationIntensityPreferenceControllerTest {
     private Lifecycle mLifecycle;
     private Context mContext;
     private Vibrator mVibrator;
-    private RingVibrationIntensityPreferenceController mController;
-    private SeekBarPreference mPreference;
+    private NotificationVibrationTogglePreferenceController mController;
+    private SwitchPreference mPreference;
 
     @Before
     public void setUp() {
@@ -66,9 +63,9 @@ public class RingVibrationIntensityPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = spy(ApplicationProvider.getApplicationContext());
         mVibrator = mContext.getSystemService(Vibrator.class);
-        mController = new RingVibrationIntensityPreferenceController(mContext, PREFERENCE_KEY);
+        mController = new NotificationVibrationTogglePreferenceController(mContext, PREFERENCE_KEY);
         mLifecycle.addObserver(mController);
-        mPreference = new SeekBarPreference(mContext);
+        mPreference = new SwitchPreference(mContext);
         mPreference.setSummary("Test summary");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         showPreference();
@@ -79,66 +76,53 @@ public class RingVibrationIntensityPreferenceControllerTest {
         assertThat(mController.getPreferenceKey()).isEqualTo(PREFERENCE_KEY);
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
-        assertThat(mController.getMin()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-        assertThat(mController.getMax()).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
     }
 
     @Test
     public void missingSetting_shouldReturnDefault() {
         Settings.System.putString(mContext.getContentResolver(),
-                Settings.System.RING_VIBRATION_INTENSITY, /* value= */ null);
+                Settings.System.NOTIFICATION_VIBRATION_INTENSITY, /* value= */ null);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(
-                mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_RINGTONE));
+        assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
-    public void updateState_shouldDisplayIntensityInSliderPosition() {
-        updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
+    public void updateState_shouldDisplayOnOffState() {
+        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
+                Vibrator.VIBRATION_INTENSITY_HIGH);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
+        assertThat(mPreference.isChecked()).isTrue();
 
-        updateSetting(Settings.System.RING_VIBRATION_INTENSITY,
+        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
                 Vibrator.VIBRATION_INTENSITY_MEDIUM);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_MEDIUM);
+        assertThat(mPreference.isChecked()).isTrue();
 
-        updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
+        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
+                Vibrator.VIBRATION_INTENSITY_LOW);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
+        assertThat(mPreference.isChecked()).isTrue();
 
-        updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
+        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
+                Vibrator.VIBRATION_INTENSITY_OFF);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(mPreference.isChecked()).isFalse();
     }
 
-
     @Test
-    public void setProgress_updatesIntensityAndDependentSettings() throws Exception {
-        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_OFF);
-        assertThat(readSetting(Settings.System.RING_VIBRATION_INTENSITY))
+    public void setChecked_updatesIntensityAndDependentSettings() throws Exception {
+        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
+                Vibrator.VIBRATION_INTENSITY_OFF);
+        mController.updateState(mPreference);
+        assertThat(mPreference.isChecked()).isFalse();
+
+        mPreference.setChecked(true);
+        assertThat(readSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY)).isEqualTo(
+                mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_NOTIFICATION));
+
+        mPreference.setChecked(false);
+        assertThat(readSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-        assertThat(readSetting(Settings.System.VIBRATE_WHEN_RINGING)).isEqualTo(OFF);
-
-        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(readSetting(Settings.System.RING_VIBRATION_INTENSITY))
-                .isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(readSetting(Settings.System.VIBRATE_WHEN_RINGING)).isEqualTo(ON);
-
-        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_MEDIUM);
-        assertThat(readSetting(Settings.System.RING_VIBRATION_INTENSITY))
-                .isEqualTo(Vibrator.VIBRATION_INTENSITY_MEDIUM);
-        assertThat(readSetting(Settings.System.VIBRATE_WHEN_RINGING)).isEqualTo(ON);
-
-        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_HIGH);
-        assertThat(readSetting(Settings.System.RING_VIBRATION_INTENSITY))
-                .isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
-        assertThat(readSetting(Settings.System.VIBRATE_WHEN_RINGING)).isEqualTo(ON);
-
-        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_OFF);
-        assertThat(readSetting(Settings.System.RING_VIBRATION_INTENSITY))
-                .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-        assertThat(readSetting(Settings.System.VIBRATE_WHEN_RINGING)).isEqualTo(OFF);
     }
 
     private void updateSetting(String key, int value) {
