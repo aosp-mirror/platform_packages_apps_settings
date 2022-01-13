@@ -723,12 +723,12 @@
     <string name="security_settings_title">Security</string>
     <!-- Security Settings screen setting option title for the item to take you to the encryption and credential screen -->
     <string name="encryption_and_credential_settings_title">Encryption &amp; credentials</string>
-    <!-- Security Settings screen Encryption and crendential summary -->
+    <!-- Security Settings screen Encryption and credential summary -->
     <string name="encryption_and_credential_settings_summary" product="default">Phone encrypted</string>
-    <string name="decryption_settings_summary" product="default">Phone not encrypted</string>
-    <!-- Security Settings screen Encryption and crendential summary -->
+    <string name="not_encrypted_summary" product="default">Phone not encrypted</string>
+    <!-- Security Settings screen Encryption and credential summary -->
     <string name="encryption_and_credential_settings_summary" product="tablet">Device encrypted</string>
-    <string name="decryption_settings_summary" product="tablet">Device not encrypted</string>
+    <string name="not_encrypted_summary" product="tablet">Device not encrypted</string>
     <!-- Screen title for a list of settings controlling what to show on user's lockscreen [CHAR LIMIT=60] -->
     <string name="lockscreen_settings_title">Lock screen</string>
     <!-- Category title for the settings that control what lockscreen shows. [CHAR LIMIT=30] -->
@@ -1281,135 +1281,15 @@
     <string name="fingerprint_last_delete_confirm">Yes, remove</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
-    <string name="crypt_keeper_settings_title">Encryption</string>
+    <string name="encryption_settings_title">Encryption</string>
 
     <!-- Title of the preferences item to control encryption -->
-    <string name="crypt_keeper_encrypt_title" product="tablet">Encrypt tablet</string>
+    <string name="encrypt_title" product="tablet">Encrypt tablet</string>
     <!-- Title of the preferences item to control encryption -->
-    <string name="crypt_keeper_encrypt_title" product="default">Encrypt phone</string>
+    <string name="encrypt_title" product="default">Encrypt phone</string>
 
     <!-- Summary of the preferences item to control encryption, when encryption is active -->
-    <string name="crypt_keeper_encrypted_summary">Encrypted</string>
-
-    <!-- Informational text in the first confirmation screen before starting device encryption -->
-    <string name="crypt_keeper_desc" product="tablet">
-    You can encrypt your accounts, settings, downloaded apps and their data,
-    media, and other files. After you encrypt your tablet, assuming you\u2019ve set up a screen lock
-    (that is, a pattern or numeric PIN or password), you\u2019ll need to unlock the screen to decrypt
-    the tablet every time you power it on. The only other way to decrypt is to perform a factory
-    data reset, erasing all your data.\n\nEncryption takes an hour or more. You must start with
-    a charged battery and keep your tablet plugged in throughout the process. If you interrupt it,
-    you\u2019ll lose some or all of your data</string>
-    <!-- Informational text in the first confirmation screen before starting device encryption -->
-    <string name="crypt_keeper_desc" product="default">
-    You can encrypt your accounts, settings, downloaded apps and their data,
-    media, and other files. After you encrypt your phone, assuming you\u2019ve set up a screen lock
-    (that is, a pattern or numeric PIN or password), you\u2019ll need to unlock the screen to decrypt
-    the phone every time you power it on. The only other way to decrypt is to perform a factory
-    data reset, erasing all your data.\n\nEncryption takes an hour or more. You must start with
-    a charged battery and keep your phone plugged in throughout the process. If you interrupt it,
-    you\u2019ll lose some or all of your data.</string>
-
-    <!-- Button text to start encryption process -->
-    <string name="crypt_keeper_button_text" product="tablet">Encrypt tablet</string>
-    <!-- Button text to start encryption process -->
-    <string name="crypt_keeper_button_text" product="default">Encrypt phone</string>
-
-    <!-- Warning string that will be displayed when encryption cannot be started -->
-    <string name="crypt_keeper_low_charge_text">Charge your battery and try again.</string>
-    <!-- Warning string that will be displayed when encryption cannot be started -->
-    <string name="crypt_keeper_unplugged_text">Plug in your charger and try again.</string>
-
-    <!-- Dialog title, shown when encryption cannot proceed because a PIN/Password is needed -->
-    <string name="crypt_keeper_dialog_need_password_title">No lock screen PIN or password</string>
-    <!-- Dialog message, shown when encryption cannot proceed because a PIN/Password is needed -->
-    <string name="crypt_keeper_dialog_need_password_message">You need to set a lock screen PIN or
-    password before you can start encryption.</string>
-
-    <!-- Title of the final confirmation screen before starting device encryption -->
-    <string name="crypt_keeper_confirm_title">Encrypt?</string>
-    <!-- Warning text in the final confirmation screen before starting device encryption -->
-    <string name="crypt_keeper_final_desc" product="tablet">
-    The encryption operation is irreversible and if you interrupt it, you\u2019ll lose data.
-    Encryption takes an hour or more, during which the tablet will restart several times.
-    </string>
-    <!-- Warning text in the final confirmation screen before starting device encryption -->
-    <string name="crypt_keeper_final_desc" product="default">
-    The encryption operation is irreversible and if you interrupt it, you\u2019ll lose data.
-    Encryption takes an hour or more, during which the phone will restart several times.
-    </string>
-
-    <!-- Title of the progress screen while encrypting the device -->
-    <string name="crypt_keeper_setup_title">Encrypting</string>
-
-    <!-- Informational text on the progress screen while encrypting the device -->
-    <string name="crypt_keeper_setup_description" product="tablet">Wait while your tablet
-    is being encrypted. <xliff:g id="percent" example="50">^1</xliff:g>% complete.</string>
-    <!-- Informational text on the progress screen while encrypting the device -->
-    <string name="crypt_keeper_setup_description" product="default">Wait while your phone
-    is being encrypted. <xliff:g id="percent" example="50">^1</xliff:g>% complete.</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet">Wait while your tablet
-    is being encrypted. Time remaining: <xliff:g id="duration" example="1:23">^1</xliff:g></string>
-    <string name="crypt_keeper_setup_time_remaining" product="default">Wait while your phone
-    is being encrypted. Time remaining: <xliff:g id="duration" example="1:23">^1</xliff:g></string>
-
-    <string name="crypt_keeper_force_power_cycle" product="tablet">To unlock your tablet, turn it off and then on.</string>
-    <string name="crypt_keeper_force_power_cycle" product="default">To unlock your phone, turn it off and then on.</string>
-
-
-    <!-- Warn user their device will be wiped if they make x more failed attempts -->
-    <string name="crypt_keeper_warn_wipe">Warning: Your device will be wiped after
-    <xliff:g id="count" example="7">^1</xliff:g> more failed attempts to be unlocked!
-    </string>
-
-    <!-- Informational text on the password entry screen prompting the user for their password -->
-    <string name="crypt_keeper_enter_password">Type your password</string>
-
-    <!-- Title of the encryption screen when encrypting the device failed -->
-    <string name="crypt_keeper_failed_title">Encryption unsuccessful</string>
-
-    <!-- Informational text when encryption fails -->
-    <string name="crypt_keeper_failed_summary" product="tablet">
-      Encryption was interrupted and can\u2019t complete. As a result, the data on
-      your tablet is no longer accessible.
-      \n\n
-      To resume using your tablet, you need to perform a factory reset.
-      When you set up your tablet after the reset, you\u2019ll have an opportunity
-      to restore any data that was backed up to your Google Account.
-    </string>
-
-    <!-- Informational text when encryption fails -->
-    <string name="crypt_keeper_failed_summary" product="default">
-      Encryption was interrupted and can\u2019t complete. As a result, the data on
-      your phone is no longer accessible.
-      \n\nTo resume using your phone, you need to perform a factory reset.
-      When you set up your phone after the reset, you\u2019ll have an opportunity
-      to restore any data that was backed up to your Google Account.
-    </string>
-
-    <!-- Title of the encryption screen when decrypting the device failed -->
-    <string name="crypt_keeper_data_corrupt_title">Decryption unsuccessful</string>
-
-    <!-- Informational text when encryption fails -->
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet">
-      The password you entered is correct, but unfortunately your data is
-      corrupt.
-      \n\nTo resume using your tablet, you need to perform a factory reset.
-      When you set up your tablet after the reset, you\u2019ll have an opportunity
-      to restore any data that was backed up to your Google Account.
-    </string>
-
-    <!-- Informational text when encryption fails -->
-    <string name="crypt_keeper_data_corrupt_summary" product="default">
-      The password you entered is correct, but unfortunately your data is
-      corrupt.
-      \n\nTo resume using your phone, you need to perform a factory reset.
-      When you set up your phone after the reset, you\u2019ll have an opportunity
-      to restore any data that was backed up to your Google Account.
-    </string>
-
-    <!-- Image button description to switch input method -->
-    <string name="crypt_keeper_switch_input_method">Switch input method</string>
+    <string name="encrypted_summary">Encrypted</string>
 
     <!-- Unlock Picker Settings --><skip />
 
@@ -5826,30 +5706,6 @@
          can't verify user consent. [CHAR LIMIT=NONE] -->
     <string name="touch_filtered_warning">Because an app is obscuring a permission request, Settings
         can’t verify your response.</string>
-    <!-- Warning that the device data will not be encrypted with password or PIN if
-        enabling an accessibility service and there is a secure lock setup. [CHAR LIMIT=NONE] -->
-    <string name="enable_service_encryption_warning">If you turn on <xliff:g id="service"
-        example="TalkBack">%1$s</xliff:g>, your device won’t use your screen lock to enhance
-        data encryption.</string>
-    <!-- Warning that the device data will not be encrypted with password or PIN if
-         choosing a secure lock and there is an enabled accessibility service. [CHAR LIMIT=NONE] -->
-    <string name="secure_lock_encryption_warning">Because you\u2019ve turned on an accessibility service,
-        your device won’t use your screen lock to enhance data encryption.</string>
-
-    <!-- Message to the users to enter their pattern before enabling an accessibility service. [CHAR LIMIT=NONE] -->
-    <string name="enable_service_pattern_reason">Because turning on <xliff:g id="service"
-        example="TalkBack">%1$s</xliff:g> affects data encryption, you need to confirm your pattern.
-    </string>
-
-    <!-- Message to the users to enter their PIN before enabling an accessibility service. [CHAR LIMIT=NONE] -->
-    <string name="enable_service_pin_reason">Because turning on <xliff:g id="service"
-        example="TalkBack">%1$s</xliff:g> affects data encryption, you need to confirm your PIN.
-    </string>
-
-    <!-- Message to the users to enter their password before enabling an accessibility service. [CHAR LIMIT=NONE] -->
-    <string name="enable_service_password_reason">Because turning on <xliff:g id="service"
-        example="TalkBack">%1$s</xliff:g> affects data encryption, you need to confirm your password.
-    </string>
 
     <!-- Warning that explains that accessibility services have a lot of access to user data [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_warning"><xliff:g id="service"
@@ -7148,26 +7004,6 @@
     <!-- Messaage shown in dialog when you can't manually sync -->
     <string name="cant_sync_dialog_message">Sync for this item is currently disabled. To change this setting, temporarily turn on background data and automatic sync.</string>
 
-    <!-- This is displayed to the user when the device needs to be decrypted -->
-    <string name="enter_password">To start Android, enter your password</string>
-    <!-- Informational text on the pin entry screen prompting the user for their pin -->
-    <string name="enter_pin">To start Android, enter your PIN</string>
-    <!-- Informational text on the pattern entry screen prompting the user for their pattern -->
-    <string name="enter_pattern">To start Android, draw your pattern</string>
-
-    <!-- Message shown when user enters wrong pattern -->
-    <string name="cryptkeeper_wrong_pattern">Wrong Pattern</string>
-    <!-- Message shown when user enters wrong password -->
-    <string name="cryptkeeper_wrong_password">Wrong Password</string>
-    <!-- Message shown when user enters wrong PIN -->
-    <string name="cryptkeeper_wrong_pin">Wrong PIN</string>
-
-    <!-- Shown when a password has been entered, and we're checking it -->
-    <string name="checking_decryption">Checking\u2026</string>
-    <!-- Shown when password is correct, and we're starting Android -->
-    <string name="starting_android">Starting Android\u2026</string>
-
-
     <!-- the following are for Settings Storage screen -->
     <!-- Menu item/button 'delete' -->
     <string name="delete">Delete</string>
@@ -7380,11 +7216,6 @@
 
     <!-- Disclaimer string for data usage measured by device. [CHAR LIMIT=80] -->
     <string name="data_usage_disclaimer">Carrier data accounting may differ from your device.</string>
-
-    <!-- Button at the bottom of the CryptKeeper screen to make an emergency call. -->
-    <string name="cryptkeeper_emergency_call">Emergency call</string>
-    <!-- Button at the bottom of the CryptKeeper screen that lets the user return to a call -->
-    <string name="cryptkeeper_return_to_call">Return to call</string>
 
     <!-- Input label for the name of a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_name">Name</string>

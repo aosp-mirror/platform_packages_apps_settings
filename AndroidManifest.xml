@@ -2853,25 +2853,6 @@
                        android:value="@string/menu_key_accounts"/>
         </activity>
 
-        <activity android:name=".CryptKeeper"
-                  androidprv:systemUserOnly="true"
-                  android:immersive="true"
-                  android:launchMode="singleTop"
-                  android:excludeFromRecents="true"
-                  android:theme="@style/Theme.CryptKeeper"
-                  android:configChanges="mnc|mcc|keyboard|keyboardHidden|uiMode"
-                  android:windowSoftInputMode="adjustResize"
-                  android:screenOrientation="nosensor"
-                  android:taskAffinity="com.android.settings.CryptKeeper"
-                  android:exported="true"
-                  android:process=":CryptKeeper">
-            <intent-filter android:priority="10">
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <!-- Triggered when user-selected home app isn't encryption aware -->
         <activity android:name=".FallbackHome"
                   android:excludeFromRecents="true"
@@ -2885,32 +2866,6 @@
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
-
-        <activity android:name=".CryptKeeper$FadeToBlack"
-            android:immersive="true"
-            android:launchMode="singleTop"
-            android:theme="@style/CryptKeeperBlankTheme"
-        />
-
-        <activity android:name=".CryptKeeperConfirm$Blank"
-            android:immersive="true"
-            android:launchMode="singleTop"
-            android:theme="@style/CryptKeeperBlankTheme"
-        />
-
-        <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
-        <activity android:name="Settings$CryptKeeperSettingsActivity"
-                android:exported="true"
-                android:label="@string/crypt_keeper_encrypt_title">
-            <intent-filter android:priority="1">
-                <action android:name="android.app.action.START_ENCRYPTION" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.security.CryptKeeperSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity

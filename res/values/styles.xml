@@ -198,10 +198,6 @@
         <item name="android:activityOpenExitAnimation">@anim/confirm_credential_open_exit</item>
     </style>
 
-    <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Material.NoActionBar">
-        <item name="android:background">#ff000000</item>
-    </style>
-
     <style name="SetupWizardButton.Negative" parent="@style/SudGlifButton.Secondary">
         <!-- Negative margin to offset for padding of the button itself. We want the label to be
              aligned with the text above it -->
@@ -279,14 +275,6 @@
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">24sp</item>
-    </style>
-
-    <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.DeviceDefault">
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:background">@null</item>
-        <item name="android:textCursorDrawable">@null</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:imeOptions">flagForceAscii|actionDone</item>
     </style>
 
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.DeviceDefault.Medium"/>
