@@ -151,6 +151,7 @@ public class VpnPreferenceController extends AbstractPreferenceController
             }
             vpns.put(user.id, cfg);
         }
+        int numberOfNonLegacyVpn = vpns.size() - connectedLegacyVpnCount;
         final UserInfo userInfo = mUserManager.getUserInfo(UserHandle.myUserId());
         final int uid;
         if (userInfo.isRestricted()) {
@@ -165,6 +166,12 @@ public class VpnPreferenceController extends AbstractPreferenceController
         } else {
             summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
         }
+        String summaryOverride = getInsecureVpnSummaryOverride(numberOfNonLegacyVpn);
+        final String finalSummary = (summaryOverride != null) ? summaryOverride : summary;
+        ThreadUtils.postOnMainThread(() -> mPreference.setSummary(finalSummary));
+    }
+
+    protected String getInsecureVpnSummaryOverride(int numberOfNonLegacyVpn) {
         // Optionally add warning icon if an insecure VPN is present.
         if (mPreference instanceof VpnInfoPreference) {
             final int insecureVpnCount = getInsecureVpnCount();
@@ -174,24 +181,22 @@ public class VpnPreferenceController extends AbstractPreferenceController
             if (isInsecureVPN) {
                 // Add the users and the number of legacy vpns to determine if there is more than
                 // one vpn, since there can be more than one VPN per user.
-                final int vpnCount = vpns.size()
-                        + LegacyVpnProfileStore.list(Credentials.VPN).length
-                        - connectedLegacyVpnCount;
+                final int vpnCount = numberOfNonLegacyVpn
+                        + LegacyVpnProfileStore.list(Credentials.VPN).length;
                 if (vpnCount == 1) {
-                    summary = mContext.getString(R.string.vpn_settings_insecure_single);
+                    return mContext.getString(R.string.vpn_settings_insecure_single);
                 } else if (insecureVpnCount == 1) {
-                    summary = mContext.getString(
+                    return mContext.getString(
                             R.string.vpn_settings_single_insecure_multiple_total,
                             insecureVpnCount);
                 } else {
-                    summary = mContext.getString(
+                    return mContext.getString(
                             R.string.vpn_settings_multiple_insecure_multiple_total,
                             insecureVpnCount);
                 }
             }
         }
-        final String finalSummary = summary;
-        ThreadUtils.postOnMainThread(() -> mPreference.setSummary(finalSummary));
+        return null;
     }
 
     @VisibleForTesting
