@@ -18,9 +18,11 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.os.VibrationAttributes;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -29,6 +31,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -46,6 +49,7 @@ public class NotificationVibrationTogglePreferenceControllerTest {
     private static final String PREFERENCE_KEY = "preference_key";
 
     @Mock private PreferenceScreen mScreen;
+    @Mock private AudioManager mAudioManager;
 
     private Lifecycle mLifecycle;
     private Context mContext;
@@ -57,7 +61,9 @@ public class NotificationVibrationTogglePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mLifecycle = new Lifecycle(() -> mLifecycle);
-        mContext = ApplicationProvider.getApplicationContext();
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
+        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_NORMAL);
         mVibrator = mContext.getSystemService(Vibrator.class);
         mController = new NotificationVibrationTogglePreferenceController(mContext, PREFERENCE_KEY);
         mLifecycle.addObserver(mController);
@@ -80,6 +86,32 @@ public class NotificationVibrationTogglePreferenceControllerTest {
                 Settings.System.NOTIFICATION_VIBRATION_INTENSITY, /* value= */ null);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void updateState_ringerModeUpdates_shouldPreserveSettingAndDisplaySummary() {
+        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
+                Vibrator.VIBRATION_INTENSITY_LOW);
+
+        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_NORMAL);
+        mController.updateState(mPreference);
+        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mPreference.getSummary()).isNull();
+        assertThat(mPreference.isEnabled()).isTrue();
+
+        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_SILENT);
+        mController.updateState(mPreference);
+        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mPreference.getSummary()).isNotNull();
+        assertThat(mPreference.getSummary().toString()).isEqualTo(mContext.getString(
+                R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary));
+        assertThat(mPreference.isEnabled()).isFalse();
+
+        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_VIBRATE);
+        mController.updateState(mPreference);
+        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mPreference.getSummary()).isNull();
+        assertThat(mPreference.isEnabled()).isTrue();
     }
 
     @Test

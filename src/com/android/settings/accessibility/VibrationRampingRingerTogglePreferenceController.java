@@ -93,7 +93,7 @@ public class VibrationRampingRingerTogglePreferenceController
 
     @Override
     public void onStart() {
-        mRingSettingObserver.register(mContext.getContentResolver());
+        mRingSettingObserver.register(mContext);
         mContext.getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.APPLY_RAMPING_RINGER),
                 /* notifyForDescendants= */ false,
@@ -102,7 +102,7 @@ public class VibrationRampingRingerTogglePreferenceController
 
     @Override
     public void onStop() {
-        mRingSettingObserver.unregister(mContext.getContentResolver());
+        mRingSettingObserver.unregister(mContext);
         mContext.getContentResolver().unregisterContentObserver(mSettingObserver);
     }
 

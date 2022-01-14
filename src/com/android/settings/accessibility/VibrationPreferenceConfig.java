@@ -18,9 +18,13 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.VibrationAttributes;
@@ -28,8 +32,10 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
@@ -45,8 +51,10 @@ public abstract class VibrationPreferenceConfig {
     public static final String MAIN_SWITCH_SETTING_KEY = Settings.System.VIBRATE_ON;
 
     protected final ContentResolver mContentResolver;
+    private final AudioManager mAudioManager;
     private final Vibrator mVibrator;
     private final String mSettingKey;
+    private final String mRingerModeSilentSummary;
     private final int mDefaultIntensity;
     private final VibrationAttributes mVibrationAttributes;
 
@@ -58,6 +66,9 @@ public abstract class VibrationPreferenceConfig {
     public VibrationPreferenceConfig(Context context, String settingKey, int vibrationUsage) {
         mContentResolver = context.getContentResolver();
         mVibrator = context.getSystemService(Vibrator.class);
+        mAudioManager = context.getSystemService(AudioManager.class);
+        mRingerModeSilentSummary = context.getString(
+                R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary);
         mSettingKey = settingKey;
         mDefaultIntensity = mVibrator.getDefaultVibrationIntensity(vibrationUsage);
         mVibrationAttributes = new VibrationAttributes.Builder()
@@ -70,9 +81,24 @@ public abstract class VibrationPreferenceConfig {
         return mSettingKey;
     }
 
+    /** Returns the summary string for this setting preference. */
+    @Nullable
+    public CharSequence getSummary() {
+        return isRestrictedByRingerModeSilent() && isRingerModeSilent()
+                ? mRingerModeSilentSummary : null;
+    }
+
     /** Returns true if this setting preference is enabled for user update. */
     public boolean isPreferenceEnabled() {
-        return isMainVibrationSwitchEnabled(mContentResolver);
+        return isMainVibrationSwitchEnabled(mContentResolver)
+                && (!isRestrictedByRingerModeSilent() || !isRingerModeSilent());
+    }
+
+    /**
+     * Returns true if this setting preference should be disabled when the device is in silent mode.
+     */
+    public boolean isRestrictedByRingerModeSilent() {
+        return false;
     }
 
     /** Returns the default intensity to be displayed when the setting value is not set. */
@@ -96,12 +122,23 @@ public abstract class VibrationPreferenceConfig {
                 mVibrationAttributes);
     }
 
+    private boolean isRingerModeSilent() {
+        // AudioManager.isSilentMode() also returns true when ringer mode is VIBRATE.
+        // The vibration preferences are only disabled when the ringer mode is SILENT.
+        return mAudioManager.getRingerModeInternal() == AudioManager.RINGER_MODE_SILENT;
+    }
+
     /** {@link ContentObserver} for a setting described by a {@link VibrationPreferenceConfig}. */
     public static final class SettingObserver extends ContentObserver {
         private static final Uri MAIN_SWITCH_SETTING_URI =
                 Settings.System.getUriFor(MAIN_SWITCH_SETTING_KEY);
+        private static final IntentFilter INTERNAL_RINGER_MODE_CHANGED_INTENT_FILTER =
+                new IntentFilter(AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION);
 
         private final Uri mUri;
+        @Nullable
+        private final BroadcastReceiver mRingerModeChangeReceiver;
+
         private AbstractPreferenceController mPreferenceController;
         private Preference mPreference;
 
@@ -109,35 +146,63 @@ public abstract class VibrationPreferenceConfig {
         public SettingObserver(VibrationPreferenceConfig preferenceConfig) {
             super(new Handler(/* async= */ true));
             mUri = Settings.System.getUriFor(preferenceConfig.getSettingKey());
+
+            if (preferenceConfig.isRestrictedByRingerModeSilent()) {
+                // If this preference is restricted by AudioManager.getRingerModeInternal() result
+                // for the device mode, then listen to changes in that value using the broadcast
+                // intent action INTERNAL_RINGER_MODE_CHANGED_ACTION.
+                mRingerModeChangeReceiver = new BroadcastReceiver() {
+                    @Override
+                    public void onReceive(Context context, Intent intent) {
+                        final String action = intent.getAction();
+                        if (AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION.equals(action)) {
+                            notifyChange();
+                        }
+                    }
+                };
+            } else {
+                // No need to register a receiver if this preference is not affected by ringer mode.
+                mRingerModeChangeReceiver = null;
+            }
         }
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            if (mPreferenceController == null || mPreference == null) {
-                // onDisplayPreference not triggered yet, nothing to update.
-                return;
-            }
             if (mUri.equals(uri) || MAIN_SWITCH_SETTING_URI.equals(uri)) {
+                notifyChange();
+            }
+        }
+
+        private void notifyChange() {
+            if (mPreferenceController != null && mPreference != null) {
                 mPreferenceController.updateState(mPreference);
             }
         }
 
         /**
-         * Register this observer to given {@link ContentResolver}, to be called from lifecycle
+         * Register this observer to given {@link Context}, to be called from lifecycle
          * {@code onStart} method.
          */
-        public void register(ContentResolver contentResolver) {
-            contentResolver.registerContentObserver(mUri, /* notifyForDescendants= */ false, this);
-            contentResolver.registerContentObserver(MAIN_SWITCH_SETTING_URI,
-                    /* notifyForDescendants= */ false, this);
+        public void register(Context context) {
+            if (mRingerModeChangeReceiver != null) {
+                context.registerReceiver(mRingerModeChangeReceiver,
+                        INTERNAL_RINGER_MODE_CHANGED_INTENT_FILTER);
+            }
+            context.getContentResolver().registerContentObserver(
+                    mUri, /* notifyForDescendants= */ false, this);
+            context.getContentResolver().registerContentObserver(
+                    MAIN_SWITCH_SETTING_URI, /* notifyForDescendants= */ false, this);
         }
 
         /**
-         * Unregister this observer from given {@link ContentResolver}, to be called from lifecycle
+         * Unregister this observer from given {@link Context}, to be called from lifecycle
          * {@code onStop} method.
          */
-        public void unregister(ContentResolver contentResolver) {
-            contentResolver.unregisterContentObserver(this);
+        public void unregister(Context context) {
+            if (mRingerModeChangeReceiver != null) {
+                context.unregisterReceiver(mRingerModeChangeReceiver);
+            }
+            context.getContentResolver().unregisterContentObserver(this);
         }
 
         /**
