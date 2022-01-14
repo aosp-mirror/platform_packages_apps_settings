@@ -18,12 +18,16 @@ package com.android.settings.connecteddevice;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothFilesPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.nfc.AndroidBeamPreferenceController;
+import com.android.settings.nfc.SecureNfcPreferenceController;
 import com.android.settings.print.PrintSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -105,6 +109,11 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                     PackageManager pm = context.getPackageManager();
                     if (!pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
                         keys.add(AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
+                    }
+                    final UserManager userManager = context.getSystemService(UserManager.class);
+                    final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
+                    if (myUserInfo.isGuest()) {
+                        keys.add(SecureNfcPreferenceController.KEY_SECURENFC_SETTINGS);
                     }
 
                     return keys;
