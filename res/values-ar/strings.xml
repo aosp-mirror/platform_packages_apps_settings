@@ -329,9 +329,11 @@
     <string name="security_settings_title" msgid="6710768415432791970">"الأمان"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"التشفير وبيانات الاعتماد"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"تم ترميز الهاتف"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"الهاتف ليس مشفّرًا."</string>
+    <!-- no translation found for not_encrypted_summary (2251945842585788254) -->
+    <skip />
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"تم ترميز الجهاز"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"الجهاز ليس مشفرًا."</string>
+    <!-- no translation found for not_encrypted_summary (2374263654698719382) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"شاشة القفل"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"ما يتم عرضه"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"‏تعيين موقعي، فتح قفل الشاشة، تأمين شريحة SIM، تأمين تخزين الاعتماد"</string>
@@ -598,37 +600,14 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل هاتفك أو إثبات هويتك في التطبيقات."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"لن تتمكّن من استخدام بصمة إصبعك لفتح قفل الملف الشخصي للعمل أو السماح بعمليات الشراء أو تسجيل الدخول إلى تطبيقات العمل."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"نعم، إزالة"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"التشفير"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"ترميز الجهاز اللوحي"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"ترميز الهاتف"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"مشفّر"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"يمكنك ترميز حساباتك وإعداداتك والتطبيقات التي تم تنزيلها وبياناتها والوسائط والملفات الأخرى. وبعد ترميز جهازك اللوحي، بافتراض أنك قد أعددت قفل الشاشة (باستخدام نقش أو رقم تعريف شخصي أو كلمة مرور)، يجب فتح قفل الشاشة لفك ترميز الجهاز اللوحي في كل مرة تشغله فيها. والوسيلة الأخرى الوحيدة لفك ترميز الجهاز هي إجراء إعادة الضبط على الإعدادات الأصلية، ومحو كل بياناتك.\n\nيستغرق الترميز ساعة أو أكثر. ويجب البدء ببطارية مشحونة وتوصيل الجهاز اللوحي بالشاحن أثناء عملية الترميز. فإذا أوقفت العملية، ستفقد بعض أو كل بياناتك"</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"يمكنك ترميز حساباتك وإعداداتك والتطبيقات التي تم تنزيلها وبياناتها والوسائط والملفات الأخرى. وبعد ترميز هاتفك، وبافتراض أنك قد أعددت قفل الشاشة (عبر النقش أو رقم التعريف الشخصي أو كلمة المرور)، يجب فتح قفل الشاشة لفك ترميز الهاتف في كل مرة تشغله فيها. الطريقة الوحيدة الأخرى لفك ترميز الجهاز هي إجراء إعادة الضبط على الإعدادات الأصلية، ومحو كل بياناتك.\n\nيستغرق الترميز ساعة أو أكثر. يجب البدء ببطارية مشحونة وتوصيل الهاتف بالشاحن أثناء عملية الترميز. فإذا أوقفت هذه العملية، ستفقد بعض أو كل البيانات."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"ترميز الجهاز اللوحي"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"ترميز الهاتف"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"اشحن البطارية وأعد المحاولة."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"صل الشاحن وأعد المحاولة."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"‏ليس هناك رقم تعريف شخصي (PIN) أو كلمة مرور لقفل الشاشة"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"يجب تعيين رقم تعريف شخصي أو كلمة مرور لقفل الشاشة قبل أن تتمكن من بدء عملية التشفير."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"التشفير؟"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"لا يمكن التراجع عن عملية التشفير، وفي حالة مقاطعتها، ستفقد البيانات. تستغرق عملية التشفير ساعة أو أكثر، وسيتم خلالها إعادة تشغيل الجهاز اللوحي عدة مرات."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"لا يمكن التراجع عن عملية التشفير، وفي حالة مقاطعتها، ستفقد البيانات. تستغرق عملية التشفير ساعة أو أكثر، وسيتم خلالها إعادة تشغيل الهاتف عدة مرات."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"التشفير"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"انتظر حتى يتم ترميز الجهاز اللوحي. اكتمل <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"انتظر حتى يتم ترميز هاتفك. اكتمل <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"انتظر بينما يتم ترميز جهازك اللوحي. الوقت المتبقي: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"انتظر بينما يتم ترميز هاتفك. الوقت المتبقي: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"لإلغاء تأمين الجهاز اللوحي، يمكنك إيقافه وتشغيله مرة أخرى."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"لإلغاء تأمين الهاتف، يمكنك إيقافه وتشغيله مرة أخرى."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"تحذير: سيتم محو محتوى جهازك بعد فشل <xliff:g id="COUNT">^1</xliff:g> من المحاولات الأخرى لفتح القفل!"</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"اكتب كلمة المرور"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"لم يتم التشفير بنجاح"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"‏تمت مقاطعة التشفير ويتعذر الاستكمال. ونتيجة لذلك، لن تتمكن بعد الآن من الدخول إلى البيانات على جهازك اللوحي. \n\nلاستئناف استخدام الجهاز اللوحي، يلزمك إجراء إعادة الضبط على الإعدادات الأصلية. وعند إعداد الجهاز اللوحي بعد إعادة الضبط، ستكون لديك فرصة استعادة أي بيانات تم نسخها احتياطيًا إلى حساب Google."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"‏تمت مقاطعة التشفير ويتعذر الاستكمال. ونتيجة لذلك، لن تتمكن بعد الآن من الدخول إلى البيانات على هاتفك. \n\nلاستئناف استخدام الهاتف، يجب إجراء إعادة الضبط على الإعدادات الأصلية. وعند إعداد الهاتف بعد إعادة الضبط، ستكون لديك فرصة استعادة أي بيانات تم نسخها احتياطيًا إلى حساب Google."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"لم ينجح إلغاء التشفير"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"‏كلمة المرور التي أدخلتها صحيحة، ولكن للأسف بياناتك تالفة. \n\nلاستئناف استخدام جهازك اللوحي، يلزمك إجراء إعادة الضبط على الإعدادات الأصلية. عند إعداد الجهاز اللوحي بعد إعادة الضبط، ستكون لديك فرصة لاستعادة أي بيانات تم نسخها احتياطيًا في حسابك على Google."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"‏كلمة المرور التي أدخلتها صحيحة، ولكن للأسف بياناتك تالفة. \n\nلاستئناف استخدام هاتفك، يلزمك إجراء إعادة الضبط على الإعدادات الأصلية. عند إعداد الهاتف بعد إعادة الضبط، ستكون لديك فرصة لاستعادة أي بيانات تم نسخها احتياطيًا في حسابك على Google."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"تبديل أسلوب الإدخال"</string>
+    <!-- no translation found for encryption_settings_title (2848716008695618360) -->
+    <skip />
+    <!-- no translation found for encrypt_title (6518642273119816435) -->
+    <skip />
+    <!-- no translation found for encrypt_title (7337365190988321100) -->
+    <skip />
+    <!-- no translation found for encrypted_summary (545623487587251207) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"تأمين هاتفك"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"ضبط قفل شاشة لحماية الجهاز اللوحي"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"ضبط قفل شاشة لحماية الجهاز"</string>
@@ -1159,6 +1138,8 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"استخدام شهادات النظام"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"عدم التوفير"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"عدم التحقق"</string>
+    <!-- no translation found for wifi_trust_on_first_use (7488431582505858774) -->
+    <skip />
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"اسم الشبكة طويل جدًا."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"يجب تحديد نطاق."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"يجب تقديم شهادة."</string>
@@ -2412,6 +2393,8 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"التكبير باستخدام الاختصار"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"التكبير باستخدام الزر والنقر الثلاثي"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"لمحة عن <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_text_reading_options_title (4684613866595056574) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"الخيارات"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"التكبير على الشاشة"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"انقر ٣ مرات للتكبير."</string>
@@ -2518,6 +2501,8 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"أطول"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"وقت النقر التلقائي"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"الاهتزاز واللمس"</string>
+    <!-- no translation found for accessibility_vibration_settings_summary (3690308537483465527) -->
+    <skip />
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"المكالمات"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"الإشعارات والمنبّهات"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"ميزات اللمس التفاعلية"</string>
@@ -2526,6 +2511,8 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"الاهتزاز عند لمس الشاشة"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"استخدام ميزة <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"فتح <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_quick_settings_tooltips_content (4033381225041886637) -->
+    <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"استخدام ميزة \"تصحيح الألوان\""</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"اختصار تصحيح الألوان"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"لمحة عن تصحيح الألوان"</string>
@@ -2617,15 +2604,6 @@
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> ثانية</item>
       <item quantity="one">ثانية واحدة (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>)</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"الرنين <xliff:g id="SUMMARY_RING">%1$s</xliff:g>، الإشعار <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>، اللمس <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"تم ضبط الرنين والإشعار على \"غير مفعّل\"."</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"تم ضبط الرنين والإشعار على \"منخفض\"."</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"تم ضبط الرنين والإشعار على \"متوسط\"."</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"تم ضبط الرنين والإشعار على \"مرتفع\"."</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"غير مفعّل"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"منخفض"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"متوسط"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"مرتفع"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"الإعدادات"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"مفعّل"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"غير مفعّل"</string>
@@ -2662,11 +2640,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"هل تسمح لخدمة <xliff:g id="SERVICE">%1$s</xliff:g> بإمكانية التحكم الكامل في جهازك؟"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"خدمة <xliff:g id="SERVICE">%1$s</xliff:g> تحتاج إلى:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"نظرًا لأن هناك تطبيقًا يحجب طلب الإذن، لا تستطيع الإعدادات التحقق من ردك."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"في حالة تفعيل <xliff:g id="SERVICE">%1$s</xliff:g>، لن يستخدم جهازك ميزة قفل الشاشة لتحسين ترميز البيانات."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"لن يستخدم جهازك ميزة قفل الشاشة لتحسين ترميز البيانات، وذلك لأنك فعّلت إحدى الخدمات المعنية بسهولة الاستخدام."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"نظرًا لأن تشغيل <xliff:g id="SERVICE">%1$s</xliff:g> يؤثر في ترميز البيانات، يجب تأكيد النقش."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"نظرًا لأن تشغيل <xliff:g id="SERVICE">%1$s</xliff:g> يؤثر في ترميز البيانات، يجب تأكيد رقم التعريف الشخصي."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"نظرًا لأن تشغيل <xliff:g id="SERVICE">%1$s</xliff:g> يؤثر في ترميز البيانات، يجب تأكيد كلمة المرور."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"تطلب خدمة <xliff:g id="SERVICE">%1$s</xliff:g> الحصول على تحكم كامل في هذا الجهاز. ويمكن للخدمة قراءة الشاشة والتصرف بالنيابة عن المستخدمين ذوي الاحتياجات المتعلقة بإمكانية الوصول. ولا يناسب هذا المستوى من التحكم معظم التطبيقات."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"إنّ التحكّم الكامل ليس ملائمًا لمعظم التطبيقات، باستثناء التطبيقات المعنية بسهولة الاستخدام."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"قراءة محتوى الشاشة والتحكم به"</string>
@@ -3275,14 +3248,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"لا يسمح المشرف بإجراء هذا التغيير"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"لا يمكن المزامنة يدويًا"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"مزامنة هذا العنصر غير مفعّلة في الوقت الحالي. لتغيير هذا الإعداد، فعِّل بشكل مؤقت بيانات الخلفية والمزامنة التلقائية."</string>
-    <string name="enter_password" msgid="6327051330258595331">"‏لبدء تشغيل Android، أدخل كلمة المرور"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"‏لبدء تشغيل Android، أدخل رقم التعريف الشخصي"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"‏لبدء تشغيل Android، ارسم النقش"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"النقش غير صحيح"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"كلمة مرور خاطئة"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"رقم تعريف شخصي خاطئ"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"جارٍ التحقق…"</string>
-    <string name="starting_android" msgid="6694154070215356186">"‏جارٍ تشغيل Android…"</string>
     <string name="delete" msgid="8330605554706263775">"حذف"</string>
     <string name="misc_files" msgid="6598066985800749585">"ملفات متنوعة"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"تم اختيار <xliff:g id="NUMBER">%1$d</xliff:g> من إجمالي <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -3378,8 +3343,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"تفرض تكلفة استخدام"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"بدون قياس"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"قد تختلف طريقة احتساب بيانات مشغّل شبكة الجوّال عن طريقة الاحتساب على جهازك."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"الاتصال بالطوارئ"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"العودة إلى المكالمة"</string>
     <string name="vpn_name" msgid="3806456074909253262">"الاسم"</string>
     <string name="vpn_type" msgid="5533202873260826663">"النوع"</string>
     <string name="vpn_server" msgid="2908816134941973935">"عنوان الخادم"</string>
@@ -3803,6 +3766,8 @@
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"‏توصيل usb، توصيل بلوتوث، نقطة اتصال wifi"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"أجهزة تعمل باللمس، اهتزاز، شاشة، حساسية"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"أجهزة تعمل باللمس، اهتزاز، هاتف، اتصال، حساسية، رنين"</string>
+    <!-- no translation found for keywords_ramping_ringer_vibration (3678966746742257366) -->
+    <skip />
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"أجهزة تعمل باللمس، اهتزاز، حساسية"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"أجهزة تعمل باللمس، اهتزاز، الاهتزاز"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"توفير شحن البطارية، ثابت، مستمر، توفير طاقة، بطارية"</string>
@@ -5818,7 +5783,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"ضغطة طويلة"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"إظهار المحفظة"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"السماح بالوصول إلى المحفظة من شاشة القفل والإعدادات السريعة"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"فتح الماسح الضوئي لرمز الاستجابة السريعة"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (4284186474146767523) -->
+    <skip />
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"السماح بالوصول إلى الماسح الضوئي لرمز الاستجابة السريعة من شاشة القفل"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"إظهار عناصر التحكّم في الجهاز"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"يمكنك الوصول إلى عناصر التحكّم عندما تكون الشاشة مُقفَلة."</string>
@@ -5900,6 +5866,8 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"هل تريد إيقاف بيانات الجوّال؟"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"‏لن تتمكّن من الوصول إلى البيانات أو الإنترنت من خلال <xliff:g id="CARRIER">%s</xliff:g>. ولن يتوفّر الاتصال بالإنترنت إلا عبر Wi-Fi."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"مشغّل شبكة الجوّال"</string>
+    <!-- no translation found for not_allowed_by_ent (1958611623122304411) -->
+    <skip />
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"الميزة غير متاحة لأن وضع \"وقت النوم\" مفعّل."</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"اكتملت عملية إعادة ضبط درجة الأهمية الخاصة بالإشعارات."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"التطبيقات"</string>

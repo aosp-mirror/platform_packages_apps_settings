@@ -323,9 +323,11 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Бяспека"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шыфраванне і ўліковыя даныя"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Тэлефон зашыфраваны"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"Тэлефон не зашыфраваны"</string>
+    <!-- no translation found for not_encrypted_summary (2251945842585788254) -->
+    <skip />
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Прылада зашыфравана"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"Прылада не зашыфравана"</string>
+    <!-- no translation found for not_encrypted_summary (2374263654698719382) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Экран блакіроўкі"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Што паказваць"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Задаць Маё месцазнаходжанне, разблакаванне экрана, блакаванне SIM-карты, блакаванне сховішча ўліковых дадзеных"</string>
@@ -473,7 +475,7 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Выкарыстанне твару"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Выкарыстанне адбітка пальца"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Выкарыстанне твару ці адбітка пальца"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Дайце тэлефон аднаму з бацькоў"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Дай тэлефон аднаму з бацькоў"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"ОК"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Прапусціць наладжванне блакіроўкі экрана?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Функцыі абароны прылады не будуць уключаны. Вы не зможаце забараніць іншым карыстацца гэтым планшэтам у выпадку згубы, крадзяжу ці скіду налад."</string>
@@ -592,37 +594,14 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Вы не зможаце выкарыстоўваць адбітак пальца для разблакіроўкі тэлефона ці спраўджання сваёй асобы ў праграмах."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Вы не зможаце выкарыстоўваць адбітак пальца для разблакіроўкі свайго працоўнага профілю, аўтарызацыі купляў і ўваходу ў працоўныя праграмы."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Так, выдаліць"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Шыфраванне"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Шыфраваць планшэт"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Шыфраваць тэлефон"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Зашыфравана"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Вы можаце зашыфроўваць свае ўліковыя запісы, налады, спампаваныя дадаткі і іх даныя, медыя- і іншыя файлы. Пасля зашыфроўкі вашага планшэта, пры ўмове, што вы ўсталявалі блакіроўку экрана (з дапамогай графічнага ключа, лічбавага PIN або паролю), вы павінны будзеце разблакіроўваць экран, каб расшыфраваць свой планшэт, пры кожным уключэнні. Адзіны альтэрнатыўны спосаб расшыфроўкі – гэта скід налад з выдаленнем усіх вашых даных.\n\nШыфраванне зойме не менш за 1 гадзіну. Вы павінны пачынаць шыфраванне з поўным зарадам акумулятара і пакінуць планшэт улючаным у сетку на працягу ўсяго працэсу. Калі вы прыпынеце працэс, некаторыя або ўсе вашы даныя будуць страчаныя"</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Вы можаце зашыфроўваць свае ўліковыя запісы, налады, спампаваныя дадаткі і іх даныя, медыя- і іншыя файлы. Пасля зашыфроўкі вашага тэлефона, пры ўмове, што вы ўсталявалі блакіроўку экрана (з дапамогай графічнага ключа, лічбавага PIN або паролю), вы павінны будзеце разблакіроўваць экран, каб расшыфраваць свой тэлефон, пры кожным уключэнні. Адзіны альтэрнатыўны спосаб расшыфроўкі – гэта скід налад з выдаленнем усіх вашых даных. \n\nШыфраванне зойме не менш за 1 гадзіну. Вы павінны пачынаць шыфраванне з поўным зарадам акумулятара і пакінуць тэлефон улючаным у сетку на працягу ўсяго працэсу. Калі вы прыпынеце працэс, некаторыя або ўсе вашы даныя будуць страчаныя."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Шыфраваць планшэт"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"Шыфраванне тэлефона"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Неабходна зарадзіць акумулятар і паўтарыць спробу."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"Падключыце зарадную прыладу і паспрабуйце яшчэ раз."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"Няма PIN-код або паролю блакавання экрана"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Перш чым пачаць шыфраванне, трэба ўсталяваць PIN-код або пароль блакавання экрана."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"Зашыфраваць?"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"Шыфраванне планшэта – незваротная аперацыя, у выпадку яе перарывання вы страціце даныя. Шыфраванне займае гадзіну ці больш, за гэты час планшэт будзе некалькі разоў перазагружаны."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"Шыфраванне тэлефона – незваротная аперацыя, у выпадку яе перарывання вы страціце даныя. Шыфраванне займае гадзіну ці больш, за гэты час тэлефон будзе некалькі разоў перазагружаны."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"Шыфраванне"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"Пачакайце, пакуль ваш планшэт зашыфруецца. Завершана <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"Пачакайце, пакуль на вашым тэлефоне ўсталёўваецца абарона. Завершана <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"Пачакайце, пакуль ваш планшэт шыфруецца. Засталося часу: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"Пачакайце, пакуль ваш тэлефон шыфруецца. Засталося часу: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"Каб разблакіраваць свой планшэт, выключыце яго, а потым зноў уключыце."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"Каб разблакіраваць тэлефон, выключыце яго і зноў уключыце."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"Папярэджанне: Усе налады вашай прылады будуць скінутыя пасля яшчэ <xliff:g id="COUNT">^1</xliff:g> няўдалых спроб разблакіроўкі!"</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"Увядзіце пароль"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"Шыфраванне няўдалае"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"Шыфраванне было перапынена і не можа быць завершана. У выніку гэтага даныя на вашым планшэце больш не даступныя.\n\nКаб працягваць выкарыстоўваць планшэт, неабходна скінуць налады. Падчас наладкі планшэта пасля скіду налад у вас з\'явіцца магчымасць аднавіць даныя, рэзервовыя копіі якіх захоўваліся ў вашым уліковым запісе Google."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"Шыфраванне было перапынена і не можа быць завершана. У выніку гэтага даныя на вашым тэлефоне больш не даступныя.\n\nКаб працягваць выкарыстоўваць тэлефон, неабходна скінуць налады. Падчас наладкі тэлефона пасля скіду налад у вас з\'явіцца магчымасць аднавіць даныя, рэзервовыя копіі якіх захоўваліся ў вашым уліковы запісе Google."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"Расшыфроўка не атрымалася"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"Уведзены вамі пароль правільны, але, на жаль, вашы даныя пашкоджаныя. \n\nКаб працягваць выкарыстоўваць планшэт, неабходна скінуць налады. Падчас наладкі планшэта пасля скіду налад у вас з\'явіцца магчымасць аднавіць даныя, рэзервовыя копіі якіх захоўваліся ў вашым уліковым запісе Google."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"Уведзены вамі пароль правільны, але, на жаль, вашы даныя пашкоджаныя. \n\nКаб працягваць выкарыстоўваць тэлефон, неабходна скінуць налады. Падчас наладкі тэлефона пасля скіду налад у вас з\'явіцца магчымасць аднавіць даныя, рэзервовыя копіі якіх захоўваліся ў вашым уліковы запісе Google."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"Пераключэнне рэжыму ўводу"</string>
+    <!-- no translation found for encryption_settings_title (2848716008695618360) -->
+    <skip />
+    <!-- no translation found for encrypt_title (6518642273119816435) -->
+    <skip />
+    <!-- no translation found for encrypt_title (7337365190988321100) -->
+    <skip />
+    <!-- no translation found for encrypted_summary (545623487587251207) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Абараніце тэлефон"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Для абароны планшэта наладзьце блакіроўку экрана"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Для абароны прылады наладзьце блакіроўку экрана"</string>
@@ -1127,6 +1106,8 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Выкарыстоўваць сістэмныя сертыфікаты"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Не даваць"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Не правяраць"</string>
+    <!-- no translation found for wifi_trust_on_first_use (7488431582505858774) -->
+    <skip />
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Імя сеткі занадта доўгае."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Неабходна ўказаць дамен."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Патрэбны сертыфікат."</string>
@@ -2366,6 +2347,8 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Павялічваць спалучэннем клавіш"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Павялічваць спалучэннем клавіш і трайным дотыкам"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Інфармацыя пра службу \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
+    <!-- no translation found for accessibility_text_reading_options_title (4684613866595056574) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Параметры"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Павялічыць маштаб экрана"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Тройчы дакраніцеся, каб змяніць маштаб"</string>
@@ -2472,6 +2455,8 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Даўжэй"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Час аўтаматычнага націскання"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Вібрацыя і тактыльны водгук"</string>
+    <!-- no translation found for accessibility_vibration_settings_summary (3690308537483465527) -->
+    <skip />
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Выклікі"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Апавяшчэнні і будзільнікі"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Інтэрактыўны тактыльны водгук"</string>
@@ -2480,6 +2465,8 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Вібрацыя тактыльнага водгуку"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Выкарыстоўваць праграму \"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\""</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Адкрыць праграму \"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\""</string>
+    <!-- no translation found for accessibility_service_quick_settings_tooltips_content (4033381225041886637) -->
+    <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Выкарыстоўваць карэкцыю колераў"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Хуткая каманда для карэкцыі колераў"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Пра карэкцыю колераў"</string>
@@ -2561,15 +2548,6 @@
       <item quantity="many"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> секунд</item>
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> секунды</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"Выклік: <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, апавяшчэнне: <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, націсканне: <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"Вібрацыя пры выкліках і атрыманні апавяшчэнняў выключана"</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"Уключана слабая вібрацыя пры выкліках і атрыманні апавяшчэнняў"</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"Уключана умераная вібрацыя пры выкліках і атрыманні апавяшчэнняў"</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"Уключана моцная вібрацыя пры выкліках і атрыманні апавяшчэнняў"</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Выключана"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Слабая"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"Умераная"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Моцная"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Налады"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Уключана"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Выключана"</string>
@@ -2606,11 +2584,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g>: дазволіць сэрвісу мець поўны кантроль над вашай прыладай?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> патрабуе:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Паверх запыту дазволу адлюстроўваецца дадатак, таму ваш адказ не можа быць правераны ў Наладах."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"Калі вы ўключыце <xliff:g id="SERVICE">%1$s</xliff:g>, прылада не будзе выкарыстоўваць блакіроўку экрана для паляпшэння шыфравання даных."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"Вы ўключылі службу доступу, таму ваша прылада не будзе выкарыстоўваць блакіроўку экрана для паляпшэння шыфравання даных."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"Уключэнне <xliff:g id="SERVICE">%1$s</xliff:g> уплывае на шыфраванне даных, таму вы павінны пацвердзіць свой графічны ключ."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"Уключэнне <xliff:g id="SERVICE">%1$s</xliff:g> уплывае на шыфраванне даных, таму вы павінны пацвердзіць свой PIN-код."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"Уключэнне <xliff:g id="SERVICE">%1$s</xliff:g> уплывае на шыфраванне даных, таму вы павінны пацвердзіць свой пароль."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"Праграма <xliff:g id="SERVICE">%1$s</xliff:g> запытвае поўны кантроль над гэтай прыладай. Яна можа чытаць змесціва экрана і дзейнічаць ад імя карыстальнікаў, якім патрабуюцца спецыяльныя магчымасці. Такі ўзровень доступу не прызначаны для большасці праграм."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Поўны кантроль прызначаны для сэрвісаў спецыяльных магчымасцей, аднак не падыходзіць для большасці праграм."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Прагляд экрана і кіраванне ім"</string>
@@ -3197,14 +3170,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"Ваш адміністратар не дазваляе гэту змену"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Немагчыма сінхранізаваць уручную"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Сінхранізацыя для гэтага элемента зараз адключаная. Каб змяніць налады, часова дазвольце абмен дадзенымі ў фонавым рэжыме і аўтаматычную сінхранізацыю."</string>
-    <string name="enter_password" msgid="6327051330258595331">"Каб запусціць Android, увядзіце пароль"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Каб запусціць Android, увядзіце PIN-код"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Каб запусціць Android, увядзіце графічны ключ"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"Няправільны ўзор"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"Няправiльны пароль"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"Няправільны PIN-код"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"Праверка..."</string>
-    <string name="starting_android" msgid="6694154070215356186">"Android запускаецца..."</string>
     <string name="delete" msgid="8330605554706263775">"Выдаліць"</string>
     <string name="misc_files" msgid="6598066985800749585">"Розныя файлы"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"выбрана <xliff:g id="NUMBER">%1$d</xliff:g> з <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -3300,8 +3265,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Сетка з улікам трафіка"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Без уліку трафіка"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Улік даных аператара можа адрознівацца ад уліку вашай прылады."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Экстраны выклік"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Вярнуцца да выкліку"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Назва"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Тып"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Адрас сервера"</string>
@@ -3715,6 +3678,8 @@
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"мадэм usb, мадэм bluetooth, хот-спот wifi"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"тактыльныя адчуванні, вібрацыя, экран, адчувальнасць"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"дотык, вібрацыя, тэлефон, выклік, адчувальнасць, званок"</string>
+    <!-- no translation found for keywords_ramping_ringer_vibration (3678966746742257366) -->
+    <skip />
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"дотык, вібрацыя, адчувальнасць"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"тактыльны водгук, вібрыраваць, вібрацыя"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"эканомія зараду, замацаваны, захаваць, эканомія энергіі, акумулятар"</string>
@@ -4751,7 +4716,7 @@
     <string name="disabled_by_policy_title_suspend_packages" msgid="4223983156635729793">"Не ўдалося адкрыць праграму"</string>
     <string name="disabled_by_policy_title_financed_device" msgid="2328740314082888228">"Заблакіравана крэдыторам"</string>
     <string name="disabled_by_policy_title_biometric_parental_consent" msgid="2463673997797134678">"Патрабуецца дапамога бацькоў"</string>
-    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Каб наладзіць гэту функцыю, перадайце тэлефон аднаму з бацькоў"</string>
+    <string name="disabled_by_policy_content_biometric_parental_consent" msgid="7124116806784305206">"Каб наладзіць гэту функцыю, перадай тэлефон аднаму з бацькоў"</string>
     <string name="default_admin_support_msg" msgid="8338570262037182531">"Калі ў вас ёсць пытанні, звярніцеся да IT-адміністратара"</string>
     <string name="admin_support_more_info" msgid="8407433155725898290">"Дадатковая інфармацыя"</string>
     <string name="admin_profile_owner_message" msgid="8860709969532649195">"У вашага адміністратара ёсць магчымасць маніторынгу і адміністравання праграм і даных, звязаных з вашым працоўным профілем, у тым ліку налад, дазволаў, карпаратыўнага доступу, сеткавай актыўнасці і геаданых."</string>
@@ -5642,7 +5607,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Доўга"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Паказ кашалька"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Дазволіць доступ да кашалька з заблакіраванага экрана і хуткіх налад"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Паказаць сканер QR-кодаў"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (4284186474146767523) -->
+    <skip />
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Дазволіць доступ да сканера QR-кодаў з экрана блакіроўкі"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Паказ элементаў кіравання прыладай"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Доступ да элементаў кіравання пры заблакіраваным экране"</string>
@@ -5724,6 +5690,8 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Выключыць мабільную перадачу даных?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"У вас не будзе доступу да інтэрнэту і перадачы даных праз аператара \"<xliff:g id="CARRIER">%s</xliff:g>\". Інтэрнэт будзе даступны толькі праз Wi-Fi."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"ваш аператар"</string>
+    <!-- no translation found for not_allowed_by_ent (1958611623122304411) -->
+    <skip />
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Недаступна, бо ўключаны начны рэжым"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Скід налад важнасці апавяшчэнняў завершаны."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Праграмы"</string>

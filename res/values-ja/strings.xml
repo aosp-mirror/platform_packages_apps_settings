@@ -317,9 +317,11 @@
     <string name="security_settings_title" msgid="6710768415432791970">"セキュリティ"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"暗号化と認証情報"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"スマートフォンの暗号化"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"スマートフォンが暗号化されていません"</string>
+    <!-- no translation found for not_encrypted_summary (2251945842585788254) -->
+    <skip />
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"デバイスの暗号化"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"デバイスが暗号化されていません"</string>
+    <!-- no translation found for not_encrypted_summary (2374263654698719382) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"ロック画面"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"表示する情報"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"現在地、画面ロック、SIMカードロック、認証情報ストレージのロック"</string>
@@ -582,37 +584,14 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"スマートフォンのロック解除やアプリでの本人確認に、指紋を使用できなくなります。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"仕事用プロファイルのロック解除や、購入の承認、仕事用アプリへのログインに、指紋を使用できなくなります。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"削除"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"暗号化"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"タブレットの暗号化"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"スマートフォンの暗号化"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"暗号化されています"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"アカウント、設定、ダウンロードしたアプリとそのデータ、メディアなどのファイルを暗号化できます。タブレットを暗号化すると、画面ロック（パターン、数値PIN、パスワード）を設定済みの場合は、電源を入れるたびに画面のロックを解除してタブレットを復号化する必要があります。他に暗号化を解除する方法は、データの初期化を行ってすべてのデータを消去する方法のみです。\n\n暗号化には1時間以上かかります。開始する前に完全に充電し、暗号化が完了するまでタブレットを電源に接続しておく必要があります。中断すると、一部またはすべてのデータが失われます。"</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"アカウント、設定、ダウンロードしたアプリとそのデータ、メディアなどのファイルを暗号化できます。スマートフォンを暗号化すると、画面ロック（パターン、数値PIN、パスワード）を設定済みの場合は、電源を入れるたびに画面のロックを解除してスマートフォンを復号化する必要があります。他に暗号化を解除する方法は、データの初期化を行ってすべてのデータを消去する方法のみです。\n\n暗号化には1時間以上かかります。開始する前に完全に充電し、暗号化が完了するまでスマートフォンを電源に接続しておく必要があります。中断すると、一部またはすべてのデータが失われます。"</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"タブレットを暗号化"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"スマートフォンを暗号化"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"充電してからもう一度お試しください。"</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"電源に接続してもう一度お試しください。"</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"画面ロックのPIN/パスワードがありません"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"暗号化を開始するには、画面ロックのPINまたはパスワードを設定する必要があります。"</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"暗号化しますか？"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"この暗号化操作は元に戻すことができず、途中で中断するとデータが失われます。暗号化には1時間以上かかり、途中でタブレットが何度か再起動されます。"</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"この暗号化操作は元に戻すことができず、途中で中断するとデータが失われます。暗号化には1時間以上かかり、途中でスマートフォンが何度か再起動されます。"</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"暗号化しています"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"タブレットを暗号化しています。しばらくお待ちください。<xliff:g id="PERCENT">^1</xliff:g>%完了。"</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"モバイル デバイスを暗号化しています。しばらくお待ちください。<xliff:g id="PERCENT">^1</xliff:g>%完了。"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"タブレットを暗号化していますのでお待ちください。残り時間: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"携帯電話を暗号化していますのでお待ちください。残り時間: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"タブレットのロックを解除するには、OFFにしてからONにします。"</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"携帯電話のロックを解除するには、OFFにしてからONにします。"</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"警告: ロック解除にあと<xliff:g id="COUNT">^1</xliff:g>回失敗すると、デバイスのデータが消去されます。"</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"パスワードを入力してください"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"暗号化できませんでした"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"暗号化処理が中断されて完了できなかったためタブレット上のデータにアクセスできなくなりました。\n\nタブレットの使用を再開するには出荷時設定にリセットする必要があります。リセット後、タブレットのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"暗号化処理が中断されて完了できなかったためデバイス上のデータにアクセスできなくなりました。\n\nデバイスの使用を再開するには出荷時設定にリセットする必要があります。リセット後、デバイスのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"復号の失敗"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"入力したパスワードは正しいのですが、データが破損しています。\n\nタブレットの使用を再開するには出荷時設定にリセットする必要があります。リセット後、タブレットのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"入力したパスワードは正しいのですが、データが破損しています。\n\nスマートフォンの使用を再開するには出荷時設定にリセットする必要があります。リセット後、スマートフォンのセットアップの段階で、Googleアカウントにバックアップしたデータの復元を選択できます。"</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"入力方法の切り替え"</string>
+    <!-- no translation found for encryption_settings_title (2848716008695618360) -->
+    <skip />
+    <!-- no translation found for encrypt_title (6518642273119816435) -->
+    <skip />
+    <!-- no translation found for encrypt_title (7337365190988321100) -->
+    <skip />
+    <!-- no translation found for encrypted_summary (545623487587251207) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"スマートフォンの保護"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"画面ロックを設定するとタブレットを保護できます"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"画面ロックを設定するとデバイスを保護できます"</string>
@@ -1091,6 +1070,8 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"システム証明書を使用"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"指定しない"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"検証しない"</string>
+    <!-- no translation found for wifi_trust_on_first_use (7488431582505858774) -->
+    <skip />
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ネットワーク名が長すぎます。"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ドメインを指定する必要があります。"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"証明書が必要です。"</string>
@@ -2316,6 +2297,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"ショートカットで拡大"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"ショートカットとトリプルタップで拡大"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g>について"</string>
+    <string name="accessibility_text_reading_options_title" msgid="4684613866595056574">"テキストと読み上げのオプション"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"オプション"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"画面を拡大します"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"ズームするには 3 回タップします"</string>
@@ -2422,6 +2404,8 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"長い"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"自動クリックの時間"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"バイブレーションとハプティクス"</string>
+    <!-- no translation found for accessibility_vibration_settings_summary (3690308537483465527) -->
+    <skip />
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"通話"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"通知とアラーム"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"インタラクティブ ハプティクス"</string>
@@ -2430,6 +2414,7 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"触覚フィードバック"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」の使用"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>を開く"</string>
+    <string name="accessibility_service_quick_settings_tooltips_content" msgid="4033381225041886637">"クイック設定で <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> の ON と OFF を素早く切り替えるには、下にスワイプします"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"色補正を使用"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"色補正のショートカット"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"色補正について"</string>
@@ -2501,15 +2486,6 @@
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> 秒</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"着信音: <xliff:g id="SUMMARY_RING">%1$s</xliff:g>、通知: <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>、タップ: <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"着信と通知は [OFF] に設定されています"</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"着信と通知は [低] に設定されています"</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"着信と通知は [中] に設定されています"</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"着信と通知は [高] に設定されています"</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"OFF"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"弱"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"中"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"強"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"設定"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"ON"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"OFF"</string>
@@ -2546,11 +2522,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g> にデバイスのフル コントロールを許可しますか？"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g>では以下が必要です。"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"アプリが許可リクエストを隠しているため、設定側でユーザーの応答を確認できません。"</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにすると、デバイスデータの暗号化の強化に画面ロックは使用されなくなります。"</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"ユーザー補助サービスがONに設定されているため、デバイスデータの暗号化の強化に画面ロックは使用されません。"</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにするとデータの暗号化に影響するため、パターンの確認が必要となります。"</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにするとデータの暗号化に影響するため、PINの確認が必要となります。"</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"<xliff:g id="SERVICE">%1$s</xliff:g>をONにするとデータの暗号化に影響するため、パスワードの確認が必要となります。"</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> はこのデバイスのフル コントロールをリクエストしています。これは、ユーザー補助を必要とするユーザーに代わって画面を読み上げたり操作したりするサービスです。大半のアプリに、このレベルのコントロールは適していません。"</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"フル コントロールは、ユーザー補助機能を必要とするユーザーをサポートするアプリには適していますが、ほとんどのアプリには適していません。"</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"画面の表示と操作"</string>
@@ -3115,14 +3086,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"この変更は管理者によって許可されていません"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"手動では同期できません"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"このアイテムの同期は現在無効になっています。この設定を変更するには、バックグラウンドデータと自動同期を一時的にONにします。"</string>
-    <string name="enter_password" msgid="6327051330258595331">"Androidを起動するには、パスワードを入力します"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Androidを起動するには、PINを入力します"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Androidを起動するには、パターンを入力します"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"パターンが正しくありません"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"パスワードが正しくありません"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"PIN が正しくありません"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"確認しています…"</string>
-    <string name="starting_android" msgid="6694154070215356186">"Androidを起動しています…"</string>
     <string name="delete" msgid="8330605554706263775">"削除"</string>
     <string name="misc_files" msgid="6598066985800749585">"その他のファイル"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"選択済み: <xliff:g id="NUMBER">%1$d</xliff:g>/<xliff:g id="TOTAL">%2$d</xliff:g>件"</string>
@@ -3218,8 +3181,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"従量制"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"定額制"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"デバイスで記録されるデータ使用量と携帯通信会社のデータ使用量は異なる場合があります。"</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"緊急通報"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"通話に戻る"</string>
     <string name="vpn_name" msgid="3806456074909253262">"名前"</string>
     <string name="vpn_type" msgid="5533202873260826663">"タイプ"</string>
     <string name="vpn_server" msgid="2908816134941973935">"サーバー アドレス"</string>
@@ -3623,6 +3584,8 @@
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"USB テザリング, Bluetooth テザリング, Wi-Fi アクセス ポイント"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"ハプティクス, バイブレーション, 画面, 感度"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"ハプティクス, バイブレーション, 電話, 通話, 感度, 着信"</string>
+    <!-- no translation found for keywords_ramping_ringer_vibration (3678966746742257366) -->
+    <skip />
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"ハプティクス, バイブレーション, 感度"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"ハプティクス, バイブ, バイブレーション"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"バッテリー セーバー, 固定, 永続, パワー セーバー, 電池"</string>
@@ -5462,7 +5425,7 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"長い"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"ウォレットを表示"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"ロック画面とクイック設定からウォレットへのアクセスを許可します"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"QR スキャナの表示"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR スキャナの表示"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"ロック画面からの QR スキャナへのアクセスを許可します"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"デバイス コントロールを表示"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"ロック画面にデバイスのコントロールを表示します"</string>
@@ -5544,6 +5507,7 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"モバイルデータを OFF にしますか？"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"<xliff:g id="CARRIER">%s</xliff:g> でモバイルデータやインターネットにアクセスできなくなります。インターネットには Wi-Fi からのみ接続できます。"</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"携帯通信会社"</string>
+    <string name="not_allowed_by_ent" msgid="1958611623122304411">"組織によって許可されていません"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"おやすみ時間モードが ON のため利用できません"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知の重要度をリセットしました。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"アプリ"</string>

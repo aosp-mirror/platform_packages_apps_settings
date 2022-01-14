@@ -317,9 +317,11 @@
     <string name="security_settings_title" msgid="6710768415432791970">"安全性"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"加密和憑證"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"手機已加密"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"手機未加密"</string>
+    <!-- no translation found for not_encrypted_summary (2251945842585788254) -->
+    <skip />
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"裝置已加密"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"裝置未加密"</string>
+    <!-- no translation found for not_encrypted_summary (2374263654698719382) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"上鎖畫面"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"顯示內容"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"設定我的位置、畫面解鎖、SIM 卡鎖定、認證儲存空間鎖定"</string>
@@ -584,37 +586,14 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"您將無法使用指紋解鎖或在應用程式中驗證您的身分。"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"您將無法使用指紋解鎖工作設定檔、授權購物，或登入工作應用程式。"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"是，移除"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"加密"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"對平板電腦進行加密"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"將手機加密"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"已加密"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"您的帳戶、設定、已下載應用程式及其資料、媒體和其他檔案皆可加密。將平板電腦加密後，系統會套用螢幕鎖定 (即解鎖圖案、數字 PIN 或密碼)，您必須在每次開機時解除螢幕鎖定，才能將平板電腦解密。除此之外，唯一的解密方法是將平板電腦回復原廠設定，清除其中所有資料。\n\n加密程序可能需要一個多小時才能完成。開始執行加密程序前，電池必須充滿，而平板電腦在加密過程中必須全程連接電源。如果中斷程序，您將遺失部分或所有資料"</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"您的帳戶、設定、已下載應用程式及其資料、媒體和其他檔案皆可加密。將手機加密後，系統會套用螢幕鎖定 (即解鎖圖案、數字 PIN 或密碼)，您必須在每次開機時解除螢幕鎖定，才能將手機解密。除此之外，唯一的解密方法是將手機回復原廠設定，清除其中所有資料。\n\n加密程序可能需要一個多小時才能完成。開始執行加密程序前，電池必須充滿，而手機在加密過程中必須全程連接電源。如果中斷程序，您將遺失部分或所有資料。"</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"對平板電腦加密"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"將手機加密"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"請將電池充電，然後再試一次。"</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"請插上充電器，然後再試一次。"</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"沒有鎖定螢幕的 PIN 或密碼"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"您必須先設定鎖定螢幕的 PIN 或密碼，才能開始加密。"</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"加密？"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"您無法取消加密操作，如果過程中斷，將會失去資料。加密程序需時 1 個小時或以上，您的平板電腦會在過程中重新啟動數次。"</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"您無法取消加密操作，如果過程中斷，將會失去資料。加密程序需時 1 個小時或以上，您的手機會在過程中重新啟動數次。"</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"加密中"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"平板電腦正在進行加密，請稍候 (已完成 <xliff:g id="PERCENT">^1</xliff:g>%)。"</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"手機正在進行加密，請稍候 (已完成 <xliff:g id="PERCENT">^1</xliff:g>%)。"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"平板電腦加密作業正在進行中，請稍候 (剩餘時間：<xliff:g id="DURATION">^1</xliff:g>)"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"手機加密作業正在進行中，請稍候 (剩餘時間：<xliff:g id="DURATION">^1</xliff:g>)"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"如要解鎖您的平板電腦，請先將其關閉再開啟。"</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"如要解鎖您的手機，請先將其關閉再開啟。"</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"警告：解鎖嘗試次數只剩 <xliff:g id="COUNT">^1</xliff:g> 次！如果持續失敗，您的裝置將被清除。"</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"輸入密碼"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"加密失敗"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"加密程序中斷且未完成，因此您無法再存取平板電腦上的資料。\n\n如要繼續使用平板電腦，您必須恢復原廠設定。完成重設後，您可以在設定平板電腦時，還原先前備份至「Google 帳戶」的資料。"</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"加密程序中斷且未完成，因此您無法再存取手機上的資料。\n\n如要繼續使用手機，您必須恢復原廠設定。完成重設後，您可以在設定手機時，還原先前備份至「Google 帳戶」的資料。"</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"解密失敗"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"您輸入的密碼正確，不過您的數據已損毀。\n\n如要繼續使用，您必須將平板電腦恢復原廠設定。經過重設後，您可以在設定平板電腦時將早前備份到個人 Google 帳戶的數據全部還原。"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"您輸入的密碼正確，不過您的數據已損毀。\n\n如要繼續使用，您必須將手機恢復原廠設定。經過重設後，您可以在設定手機時將早前備份到個人 Google 帳戶的數據全部還原。"</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"切換輸入法"</string>
+    <!-- no translation found for encryption_settings_title (2848716008695618360) -->
+    <skip />
+    <!-- no translation found for encrypt_title (6518642273119816435) -->
+    <skip />
+    <!-- no translation found for encrypt_title (7337365190988321100) -->
+    <skip />
+    <!-- no translation found for encrypted_summary (545623487587251207) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"保護手機安全"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"設定螢幕鎖定以保護平板電腦"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"設定螢幕鎖定以保護裝置"</string>
@@ -1093,6 +1072,8 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"使用系統憑證"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"不提供"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"不驗證"</string>
+    <!-- no translation found for wifi_trust_on_first_use (7488431582505858774) -->
+    <skip />
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"網絡名稱太長。"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"必須指定網域。"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"需要認證。"</string>
@@ -2319,6 +2300,8 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"使用快速鍵來放大"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"使用快速鍵和輕按三下來放大"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"關於「<xliff:g id="SERVICE">%1$s</xliff:g>」"</string>
+    <!-- no translation found for accessibility_text_reading_options_title (4684613866595056574) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"選項"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"放大螢幕"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"輕按 3 次即可縮放畫面"</string>
@@ -2425,6 +2408,8 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"較長"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"自動點擊時間"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"震動和觸感反應"</string>
+    <!-- no translation found for accessibility_vibration_settings_summary (3690308537483465527) -->
+    <skip />
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"通話"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"通知和鬧鐘"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"互動觸感反應"</string>
@@ -2433,6 +2418,7 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"輕觸反應"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"使用「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"開 <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_quick_settings_tooltips_content" msgid="4033381225041886637">"向下滑動即可在快速設定中快速開啟或關閉 <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"使用色彩校正"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"色彩校正捷徑"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"關於色彩校正"</string>
@@ -2504,15 +2490,6 @@
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> 秒</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"鈴聲：<xliff:g id="SUMMARY_RING">%1$s</xliff:g>，通知：<xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>，觸控：<xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"將鈴聲和通知震動設為「關閉」"</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"將鈴聲和通知震動設為「低」"</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"將鈴聲和通知震動設為「中」"</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"將鈴聲和通知震動設為「高」"</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"關閉"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"弱"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"中"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"強"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"設定"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"開啟"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"關閉"</string>
@@ -2549,11 +2526,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"要允許 <xliff:g id="SERVICE">%1$s</xliff:g> 完全控制您的裝置嗎？"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"「<xliff:g id="SERVICE">%1$s</xliff:g>」需要："</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"由於有應用程式阻礙權限請求，「設定」無法驗證您的回覆。"</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"如果您開啟<xliff:g id="SERVICE">%1$s</xliff:g>，您的裝置將不能透過螢幕鎖定加強資料加密。"</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"因為您已開啟無障礙功能，您的裝置將不能透過螢幕鎖定加強資料加密。"</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"開啟 <xliff:g id="SERVICE">%1$s</xliff:g> 將影響您的資料加密強度，因此您需要確認解鎖圖案。"</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"開啟 <xliff:g id="SERVICE">%1$s</xliff:g> 將影響您的資料加密強度，因此您需要確認 PIN。"</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"開啟 <xliff:g id="SERVICE">%1$s</xliff:g> 將影響您的資料加密強度，因此您需要確認密碼。"</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g>正在要求完全控制此裝置。此服務可以讀取畫面，並代表需要使用無障礙功能的使用者執行動作。這種程度的控制不適用於大部分應用程式。"</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"為您提供所需無障礙功能的應用程式有權完全控制您的裝置，但大部分應用程式均沒有此權限。"</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"查看和控制螢幕"</string>
@@ -3118,14 +3090,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"您的管理員不允許這項變更"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"無法手動同步處理"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"這個項目的同步處理功能已停用。如要更改此設定，請暫時開啟背景資料與自動同步處理功能。"</string>
-    <string name="enter_password" msgid="6327051330258595331">"如要啟動 Android，請輸入密碼"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"如要啟動 Android，請輸入您的 PIN"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"如要啟動 Android，請畫出解鎖圖案"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"圖形不對"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"密碼錯誤"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"PIN 錯誤"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"正在檢查…"</string>
-    <string name="starting_android" msgid="6694154070215356186">"正在啟動 Android…"</string>
     <string name="delete" msgid="8330605554706263775">"刪除"</string>
     <string name="misc_files" msgid="6598066985800749585">"其他檔案"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"已選取 <xliff:g id="NUMBER">%1$d</xliff:g> 個，共 <xliff:g id="TOTAL">%2$d</xliff:g> 個"</string>
@@ -3221,8 +3185,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"按用量收費"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"非按用量收費"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"流動網絡供應商的數據計算方式可能與裝置有所不同。"</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"緊急電話"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"返回通話"</string>
     <string name="vpn_name" msgid="3806456074909253262">"名稱"</string>
     <string name="vpn_type" msgid="5533202873260826663">"類型"</string>
     <string name="vpn_server" msgid="2908816134941973935">"伺服器位址"</string>
@@ -3626,6 +3588,8 @@
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"USB 網絡共享, 藍牙網絡共享, Wi-Fi 熱點"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"觸覺回饋, 震動, 螢幕, 敏感度"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"觸感反應, 震動, 手機, 來電, 敏感度, 鈴聲"</string>
+    <!-- no translation found for keywords_ramping_ringer_vibration (3678966746742257366) -->
+    <skip />
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"觸感反應, 震動, 敏感度"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"觸感反應, 震動, 震動"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"省電模式, 固定, 持續, 節電模式, 電池"</string>
@@ -5465,7 +5429,7 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"長"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"顯示電子錢包"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"允許在上鎖畫面和快速設定使用電子錢包"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"顯示 QR 碼掃瞄器"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"顯示 QR 碼掃瞄器"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"允許在上鎖畫面存取 QR 碼掃瞄器"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"顯示裝置控制"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"鎖定時存取控制項"</string>
@@ -5547,6 +5511,7 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"要關閉流動數據嗎？"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"您無法透過「<xliff:g id="CARRIER">%s</xliff:g>」使用流動數據或互聯網。如要使用互聯網，您必須連接 Wi-Fi"</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"您的流動網絡供應商"</string>
+    <string name="not_allowed_by_ent" msgid="1958611623122304411">"貴機構禁止使用"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"睡眠模式開啟時無法使用"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"通知重要性重設完成。"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"應用程式"</string>

@@ -323,9 +323,11 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Безопасность"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Шифрование и учетные данные"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Телефон зашифрован"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"Шифрование не включено"</string>
+    <!-- no translation found for not_encrypted_summary (2251945842585788254) -->
+    <skip />
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Устройство зашифровано"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"Шифрование не включено"</string>
+    <!-- no translation found for not_encrypted_summary (2374263654698719382) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Заблокированный экран"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Что показывать"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Настройка функции \"Мое местоположение\", разблокировка экрана и блокировка хранилища регистрационных данных"</string>
@@ -590,37 +592,14 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Вы больше не сможете использовать отпечаток пальца для разблокировки телефона и подтверждения своей личности в приложениях."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Вы больше не сможете использовать отпечаток пальца для разблокировки рабочего профиля, подтверждения покупок и входа в рабочие приложения."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Удалить"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Шифрование"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Зашифровать данные"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Зашифровать данные"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Данные зашифрованы"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Вы можете зашифровать свои аккаунты, настройки, скачанные приложения и их данные, а также медиаданные и другие файлы на устройстве. После этого для расшифровки вам будет необходимо при каждом включении устройства разблокировать экран, если настроена его блокировка (графический ключ, PIN-код или пароль). Другой способ расшифровки – это сбросить настройки телефона, в результате чего все данные будут удалены.\n\nОбычно шифрование данных занимает около часа или более. Перед процедурой полностью зарядите батарею и не отключайте зарядное устройство, пока шифрование не завершится. Если прервать процесс, все данные или их часть будет утеряна."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Вы можете зашифровать свои аккаунты, настройки, скачанные приложения и их данные, а также медиаданные и другие файлы на устройстве. После этого для расшифровки вам будет необходимо при каждом включении устройства разблокировать экран, если настроена его блокировка (графический ключ, PIN-код или пароль). Другой способ расшифровки – это сбросить настройки телефона, в результате чего все данные будут удалены.\n\nОбычно шифрование данных занимает около часа или более. Перед процедурой полностью зарядите батарею и не отключайте зарядное устройство, пока шифрование не завершится. Если прервать процесс, все данные или их часть будет утеряна."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Зашифровать данные"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"Зашифровать данные"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Зарядите батарею и повторите попытку."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"Подключите зарядное устройство и повторите попытку."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"Не указан PIN-код или пароль блокировки экрана"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Перед шифрованием необходимо задать PIN-код или пароль блокировки экрана."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"Выполнить шифрование?"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"Если прервать шифрование, данные будут потеряны. Операция займет не менее часа. Устройство будет перезагружено несколько раз."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"Если прервать шифрование, данные будут потеряны. Операция займет не менее часа. Устройство будет перезагружено несколько раз."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"Шифрование"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"Дождитесь завершения шифрования планшета. Выполнено: <xliff:g id="PERCENT">^1</xliff:g> %."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"Дождитесь завершения шифрования телефона. Выполнено: <xliff:g id="PERCENT">^1</xliff:g> %."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"Шифрование завершится через <xliff:g id="DURATION">^1</xliff:g>."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"Шифрование завершится через <xliff:g id="DURATION">^1</xliff:g>."</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"Чтобы разблокировать планшетный ПК, выключите его и снова включите."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"Чтобы разблокировать телефон, выключите его и снова включите."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"Внимание! Осталось попыток: <xliff:g id="COUNT">^1</xliff:g>. Если вам не удастся выполнить авторизацию, память устройства будет очищена."</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"Введите пароль"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"Сбой шифрования"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"Данные на вашем планшетном ПК больше недоступны из-за того, что шифрование было прервано. \n\nЧтобы дальше использовать устройство, нужно сбросить настройки. После этого вы сможете восстановить все данные, для которых в аккаунте Google были созданы резервные копии."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"Данные на вашем телефоне больше недоступны из-за того, что шифрование было прервано. \n\nЧтобы дальше использовать устройство, нужно сбросить настройки. После этого вы сможете восстановить все данные, для которых в аккаунте Google были созданы резервные копии."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"Не удалось расшифровать"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"Вы ввели правильный пароль, но данные на планшете повреждены.\n\nЧтобы продолжить работу, выполните возврат к заводским настройкам. После этого вы сможете восстановить данные, резервная копия которых хранится в вашем аккаунте Google."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"Вы ввели правильный пароль, но данные на телефоне повреждены.\n\nЧтобы продолжить работу, выполните возврат к заводским настройкам. После этого вы сможете восстановить данные, резервная копия которых хранится в вашем аккаунте Google."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"Сменить способ ввода"</string>
+    <!-- no translation found for encryption_settings_title (2848716008695618360) -->
+    <skip />
+    <!-- no translation found for encrypt_title (6518642273119816435) -->
+    <skip />
+    <!-- no translation found for encrypt_title (7337365190988321100) -->
+    <skip />
+    <!-- no translation found for encrypted_summary (545623487587251207) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Защитите телефон"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Для защиты планшета настройте блокировку экрана."</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Для защиты устройства настройте блокировку экрана."</string>
@@ -1125,6 +1104,8 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Системные сертификаты"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Не указывать"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Не проверять"</string>
+    <!-- no translation found for wifi_trust_on_first_use (7488431582505858774) -->
+    <skip />
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Слишком длинное имя сети."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Укажите домен."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Выберите сертификат."</string>
@@ -2364,6 +2345,8 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Увеличение с помощью кнопки"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Увеличение с помощью кнопки и по тройному нажатию"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"О функции \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
+    <!-- no translation found for accessibility_text_reading_options_title (4684613866595056574) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Параметры"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Экранная лупа"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Изменение масштаба тремя нажатиями"</string>
@@ -2470,6 +2453,8 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Увеличить"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Время автонажатия"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Вибрация и тактильный отклик"</string>
+    <!-- no translation found for accessibility_vibration_settings_summary (3690308537483465527) -->
+    <skip />
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Звонки"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Уведомления и будильники"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Тактильный отклик при взаимодействии"</string>
@@ -2478,6 +2463,8 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Вибрация при касании"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Использовать приложение \"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\""</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Открыть <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_quick_settings_tooltips_content (4033381225041886637) -->
+    <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Использовать коррекцию цвета"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Быстрый запуск коррекции цвета"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"О коррекции цвета"</string>
@@ -2559,15 +2546,6 @@
       <item quantity="many"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> секунд</item>
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> секунды</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"<xliff:g id="SUMMARY_RING">%1$s</xliff:g>: звонок. <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>: уведомление. <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>: касание."</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"Вибрация при входящих вызовах и уведомлениях отключена"</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"Включена слабая вибрация при входящих вызовах и уведомлениях"</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"Включена средняя вибрация при входящих вызовах и уведомлениях"</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"Включена сильная вибрация при входящих вызовах и уведомлениях"</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Отключена"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Слабая"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"Средняя"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Сильная"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Настройки"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Включено"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Отключено"</string>
@@ -2604,11 +2582,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"Разрешить сервису \"<xliff:g id="SERVICE">%1$s</xliff:g>\" контролировать ваше устройство?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> будет:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Невозможно принять ваше согласие, поскольку запрос скрыт другим приложением."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"Если включить службу \"<xliff:g id="SERVICE">%1$s</xliff:g>\", блокировка экрана будет отключена и надежность защиты зашифрованных данных снизится."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"Поскольку включена служба специальных возможностей, блокировка экрана будет отключена и надежность защиты зашифрованных данных может быть снижена."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"Включение сервиса <xliff:g id="SERVICE">%1$s</xliff:g> затронет шифрование данных, поэтому необходимо ввести графический ключ."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"Включение сервиса <xliff:g id="SERVICE">%1$s</xliff:g> затронет шифрование данных, поэтому необходимо ввести PIN-код."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"Включение сервиса <xliff:g id="SERVICE">%1$s</xliff:g> затронет шифрование данных, поэтому необходимо ввести пароль."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> запрашивает полный доступ к устройству. Сервис может считывать данные с экрана и действовать от имени пользователей, которым требуются специальные возможности. Этот уровень доступа не подходит для большинства приложений."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Полный контроль нужен приложениям для реализации специальных возможностей и не нужен большинству остальных."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Просмотр и контроль экрана"</string>
@@ -3195,14 +3168,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"Это действие запрещено администратором"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Не удалось синхронизировать данные"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Синхронизация отключена. Чтобы включить ее, временно разрешите передачу данных в фоновом режиме и автоматическую синхронизацию."</string>
-    <string name="enter_password" msgid="6327051330258595331">"Чтобы запустить Android, введите пароль"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Чтобы запустить Android, введите PIN-код"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Чтобы запустить Android, введите графический ключ"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"Неверный графический ключ"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"Неверный пароль"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"Неверный PIN-код."</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"Проверка…"</string>
-    <string name="starting_android" msgid="6694154070215356186">"Запуск Android…"</string>
     <string name="delete" msgid="8330605554706263775">"Удалить"</string>
     <string name="misc_files" msgid="6598066985800749585">"Разное"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"Выбрано: <xliff:g id="NUMBER">%1$d</xliff:g> из <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -3298,8 +3263,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Сеть с тарификацией трафика"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Сеть без тарификации трафика"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Статистика оператора связи может отличаться от статистики устройства."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Вызов службы экстренной помощи"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Вернуться к вызову"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Название"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Тип"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Адрес сервера"</string>
@@ -3713,6 +3676,8 @@
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"USB-модем, Bluetooth-модем, точка доступа Wi-Fi"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"осязание, вибрировать, экран, чувствительность"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"осязание, вибрация, телефон, звонок, чувствительность, вызов"</string>
+    <!-- no translation found for keywords_ramping_ringer_vibration (3678966746742257366) -->
+    <skip />
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"осязание, вибрация, чувствительность"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"тактильный отклик, вибрировать, вибрация"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"энергосбережение, постоянная экономия заряда, батарея"</string>
@@ -5640,7 +5605,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Долго"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Показывать кошелек"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Разрешить доступ к кошельку на заблокированном экране и в быстрых настройках"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Показывать QR-сканер"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (4284186474146767523) -->
+    <skip />
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Разрешить доступ к сканеру QR-кодов на заблокированном экране"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Показывать виджеты управления устройством"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Разрешить доступ к виджетам управления устройством на заблокированном экране"</string>
@@ -5722,6 +5688,8 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Отключить мобильный интернет?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Вы не сможете передавать данные или выходить в интернет через оператора \"<xliff:g id="CARRIER">%s</xliff:g>\". Интернет будет доступен только по сети Wi-Fi."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"ваш оператор"</string>
+    <!-- no translation found for not_allowed_by_ent (1958611623122304411) -->
+    <skip />
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Недоступно в ночном режиме"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Сброс настроек важности выполнен."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Приложения"</string>
