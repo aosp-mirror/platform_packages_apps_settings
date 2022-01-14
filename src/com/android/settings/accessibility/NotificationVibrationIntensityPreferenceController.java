@@ -20,25 +20,27 @@ import android.content.Context;
 import android.os.VibrationAttributes;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
-
+/** Preference controller for notification vibration intensity */
 public class NotificationVibrationIntensityPreferenceController
         extends VibrationIntensityPreferenceController {
 
-    @VisibleForTesting
-    static final String PREF_KEY = "notification_vibration_preference_screen";
+    /** General configuration for notification vibration intensity settings. */
+    public static final class NotificationVibrationPreferenceConfig
+            extends VibrationPreferenceConfig {
 
-    public NotificationVibrationIntensityPreferenceController(Context context) {
-        super(context, PREF_KEY, Settings.System.NOTIFICATION_VIBRATION_INTENSITY, "");
+        public NotificationVibrationPreferenceConfig(Context context) {
+            super(context, Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
+                    VibrationAttributes.USAGE_NOTIFICATION);
+        }
+    }
+
+    public NotificationVibrationIntensityPreferenceController(Context context,
+            String preferenceKey) {
+        super(context, preferenceKey, new NotificationVibrationPreferenceConfig(context));
     }
 
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    protected int getDefaultIntensity() {
-        return mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_NOTIFICATION);
     }
 }
