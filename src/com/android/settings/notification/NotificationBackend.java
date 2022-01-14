@@ -361,6 +361,15 @@ public class NotificationBackend {
         }
     }
 
+    public boolean hasSentValidBubble(String pkg, int uid) {
+        try {
+            return sINM.hasSentValidBubble(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
     /**
      * Returns all notification channels associated with the package and uid that will bypass DND
      */
