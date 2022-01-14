@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,27 +19,25 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.os.Vibrator;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.SliderPreferenceController;
-import com.android.settings.widget.SeekBarPreference;
+import com.android.settings.R;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-/**
- * Abstract preference controller for a vibration intensity setting, that displays multiple
- * intensity levels to the user as a slider.
- */
-public abstract class VibrationIntensityPreferenceController extends SliderPreferenceController
+/** Abstract preference controller for a vibration intensity setting, that has only ON/OFF states */
+public abstract class VibrationTogglePreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
     protected final VibrationPreferenceConfig mPreferenceConfig;
     private final VibrationPreferenceConfig.SettingObserver mSettingsContentObserver;
 
-    protected VibrationIntensityPreferenceController(Context context, String prefkey,
+    protected VibrationTogglePreferenceController(Context context, String preferenceKey,
             VibrationPreferenceConfig preferenceConfig) {
-        super(context, prefkey);
+        super(context, preferenceKey);
         mPreferenceConfig = preferenceConfig;
         mSettingsContentObserver = new VibrationPreferenceConfig.SettingObserver(
                 preferenceConfig);
@@ -58,39 +56,32 @@ public abstract class VibrationIntensityPreferenceController extends SliderPrefe
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final SeekBarPreference preference = screen.findPreference(getPreferenceKey());
+        final Preference preference = screen.findPreference(getPreferenceKey());
         mSettingsContentObserver.onDisplayPreference(this, preference);
-        // TODO: remove this and replace with a different way to play the haptic preview without
-        // relying on the setting being propagated to the service.
-        preference.setContinuousUpdates(true);
-        preference.setMin(getMin());
-        preference.setMax(getMax());
     }
 
     @Override
-    public int getMin() {
-        return Vibrator.VIBRATION_INTENSITY_OFF;
-    }
-
-    @Override
-    public int getMax() {
-        return Vibrator.VIBRATION_INTENSITY_HIGH;
-    }
-
-    @Override
-    public int getSliderPosition() {
+    public boolean isChecked() {
         final int position = mPreferenceConfig.readIntensity();
-        return Math.min(position, getMax());
+        return position != Vibrator.VIBRATION_INTENSITY_OFF;
     }
 
     @Override
-    public boolean setSliderPosition(int position) {
-        final boolean success = mPreferenceConfig.updateIntensity(position);
+    public boolean setChecked(boolean isChecked) {
+        final int newIntensity = isChecked
+                ? mPreferenceConfig.getDefaultIntensity()
+                : Vibrator.VIBRATION_INTENSITY_OFF;
+        final boolean success = mPreferenceConfig.updateIntensity(newIntensity);
 
-        if (success && (position != Vibrator.VIBRATION_INTENSITY_OFF)) {
+        if (success && isChecked) {
             mPreferenceConfig.playVibrationPreview();
         }
 
         return success;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_accessibility;
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2018 The Android Open Source Project
+<!-- Copyright (C) 2022 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@
         android:key="accessibility_call_vibration_category"
         android:title="@string/accessibility_call_vibration_category_title">
 
-        <SwitchPreference
+        <com.android.settings.widget.SeekBarPreference
             android:key="ring_vibration_preference_screen"
             android:title="@string/accessibility_ring_vibration_title"
             app:keywords="@string/keywords_ring_vibration"
-            app:controller="com.android.settings.accessibility.RingVibrationTogglePreferenceController" />
+            app:controller="com.android.settings.accessibility.RingVibrationIntensityPreferenceController" />
 
         <SwitchPreference
             android:key="ramping_ringer"
@@ -41,11 +41,11 @@
         android:key="accessibility_notification_alarm_vibration_category"
         android:title="@string/accessibility_notification_alarm_vibration_category_title">
 
-        <SwitchPreference
+        <com.android.settings.widget.SeekBarPreference
             android:key="notification_vibration_preference_screen"
             android:title="@string/accessibility_notification_vibration_title"
             app:keywords="@string/keywords_notification_vibration"
-            app:controller="com.android.settings.accessibility.NotificationVibrationTogglePreferenceController" />
+            app:controller="com.android.settings.accessibility.NotificationVibrationIntensityPreferenceController" />
 
     </PreferenceCategory>
 
@@ -53,11 +53,11 @@
         android:key="accessibility_interactive_haptics_category"
         android:title="@string/accessibility_interactive_haptics_category_title">
 
-        <SwitchPreference
+        <com.android.settings.widget.SeekBarPreference
             android:key="touch_vibration_preference_screen"
             android:title="@string/accessibility_touch_vibration_title"
             app:keywords="@string/keywords_touch_vibration"
-            app:controller="com.android.settings.accessibility.HapticFeedbackTogglePreferenceController" />
+            app:controller="com.android.settings.accessibility.HapticFeedbackIntensityPreferenceController" />
 
     </PreferenceCategory>
 
