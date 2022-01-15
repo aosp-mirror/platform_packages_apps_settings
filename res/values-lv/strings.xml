@@ -320,9 +320,11 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Drošība"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifrēšana un akreditācijas dati"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Tālrunis ir šifrēts"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"Tālrunis nav šifrēts"</string>
+    <!-- no translation found for not_encrypted_summary (2251945842585788254) -->
+    <skip />
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Ierīce ir šifrēta"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"Ierīce nav šifrēta"</string>
+    <!-- no translation found for not_encrypted_summary (2374263654698719382) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Bloķēšanas ekrāns"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Ko rādīt"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Manas atrašanās vietas, ekrāna atbloķēšanas, SIM kartes bloķēšanas, akreditācijas datu krātuves bloķēšanas iestatīšana"</string>
@@ -586,37 +588,14 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Jūs nevarēsiet izmantot pirksta nospiedumu, lai autorizētu tālruni vai apstiprinātu savu identitāti lietotnēs."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Jūs nevarēsiet izmantot pirksta nospiedumu, lai atbloķētu darba profilu, autorizētu pirkumus vai pierakstītos darba lietotnēs."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Jā, noņemt"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Šifrējums"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Šifrēt planšetdatoru"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Šifrēt tālruni"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Šifrēts"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Varat šifrēt savus kontus, iestatījumus, lejupielādētās lietotnes un to datus, multivides un citu formātu failus. Pēc planšetdatora šifrēšanas, pieņemot, ka esat iestatījis bloķēšanas ekrānu (t.i., izmantojot kombināciju, skaitlisku PIN kodu vai paroli), jums būs jāatbloķē ekrāns vai jāatšifrē planšetdators katru reizi, kad to ieslēgsiet. Vienīgais alternatīvais veids, kā atšifrēt planšetdatoru, ir veikt rūpnīcas datu atiestatīšanu, izdzēšot visus datus.\n\nŠifrēšana ilgst vismaz stundu. Planšetdatora akumulatoram šī procesa sākumā ir jābūt uzlādētam, un planšetdatoram visu procesa laiku ir jābūt pievienotam lādētājam. Ja tiks pārtraukta lādēšana, zaudēsiet daļu datu vai visus datus."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Varat šifrēt savus kontus, iestatījumus, lejupielādētās lietotnes un to datus, multivides un citu formātu failus. Pēc tālruņa šifrēšanas, pieņemot, ka esat iestatījis bloķēšanas ekrānu (t.i., izmantojot kombināciju, skaitlisku PIN kodu vai paroli), jums būs jāatbloķē ekrāns vai jāatšifrē tālrunis katru reizi, kad to ieslēgsiet. Vienīgais alternatīvais veids, kā atšifrēt tālruni, ir veikt rūpnīcas datu atiestatīšanu, izdzēšot visus datus.\n\nŠifrēšana ilgst vismaz stundu. Tālruņa akumulatoram šī procesa sākumā ir jābūt uzlādētam, un tālrunim visu procesa laiku ir jābūt pievienotam lādētājam. Ja tiks pārtraukta lādēšana, zaudēsiet daļu datu vai visus datus."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Šifrēt planšetdatoru"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"Šifrēt tālruni"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Uzlādējiet akumulatoru un mēģiniet vēlreiz."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"Pievienojiet lādētāju un mēģiniet vēlreiz."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"Nav ekrāna bloķēšanas PIN vai paroles"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Lai varētu sākt šifrēšanu, ir jāiestata bloķēšanas ekrāna PIN vai parole."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"Vai veikt šifrēšanu?"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"Šifrēšanas darbība ir neatgriezeniska; pārtraucot šifrēšanu, dati tiks zaudēti. Šifrēšana ilgst vienu stundu vai ilgāk, un tās laikā planšetdators vairākas reizes tiks restartēts."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"Šifrēšanas darbība ir neatgriezeniska; pārtraucot šifrēšanu, dati tiks zaudēti. Šifrēšana ilgst vienu stundu vai ilgāk, un tās laikā tālrunis vairākas reizes tiks restartēts."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"Šifrēšana"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"Uzgaidiet, kamēr tiek šifrēts jūsu planšetdators. Pabeigti <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"Uzgaidiet, kamēr tiek šifrēts jūsu tālrunis. Pabeigti <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"Uzgaidiet, līdz tiks pabeigta planšetdatora šifrēšana. Atlikušais laiks: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"Uzgaidiet, līdz tiks pabeigta tālruņa šifrēšana. Atlikušais laiks: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"Lai atbloķētu planšetdatoru, izslēdziet un atkal ieslēdziet to."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"Lai atbloķētu tālruni, izslēdziet un atkal ieslēdziet to."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"Brīdinājums: pēc vēl <xliff:g id="COUNT">^1</xliff:g> neveiksmīgiem ierīces atbloķēšanas mēģinājumiem tās dati tiks dzēsti."</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"Ierakstiet paroli"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"Šifrēšana neizdevās."</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"Šifrēšana tika pārtraukta, un to nevar pabeigt. Planšetdatora dati vairs nav pieejami.\n\nLai atsāktu lietot planšetdatoru, ir jāveic rūpnīcas iestatījumu atiestatīšana. Kad pēc atiestatīšanas esat pabeidzis planšetdatora iestatīšanu, varat atjaunot visus datus, kas tika dublēti jūsu Google kontā."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"Šifrēšana tika pārtraukta, un to nevar pabeigt. Tālruņa dati vairs nav pieejami.\n\nLai atsāktu lietot tālruni, ir jāveic rūpnīcas iestatījumu atiestatīšana. Kad pēc atiestatīšanas esat pabeidzis tālruņa iestatīšanu, varat atjaunot visus datus, kas tika dublēti jūsu Google kontā."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"Atšifrēšana neizdevās"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"Ievadītā parole ir pareiza, bet diemžēl jūsu dati ir bojāti.\n\nLai varētu atsākt lietot planšetdatoru, ir jāatiestata rūpnīcas dati. Kad planšetdators būs atiestatīts, varēsiet atjaunot visus datus, kas bija dublēti jūsu Google kontā."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"Ievadītā parole ir pareiza, bet diemžēl jūsu dati ir bojāti.\n\nLai varētu atsākt lietot tālruni, ir jāatiestata rūpnīcas dati. Kad tālrunis būs atiestatīts, varēsiet atjaunot visus datus, kas bija dublēti jūsu Google kontā."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"Pārslēgt ievades metodi"</string>
+    <!-- no translation found for encryption_settings_title (2848716008695618360) -->
+    <skip />
+    <!-- no translation found for encrypt_title (6518642273119816435) -->
+    <skip />
+    <!-- no translation found for encrypt_title (7337365190988321100) -->
+    <skip />
+    <!-- no translation found for encrypted_summary (545623487587251207) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Tālruņa drošība"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Iestatiet ekr. bloķ. opciju planšetdatora aizsardzībai"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Iestatiet ekrāna bloķēšanas opciju ierīces aizsardzībai"</string>
@@ -1108,6 +1087,8 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Izmantot sistēmas sertifikātus"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Nenorādīt"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Neapstiprināt"</string>
+    <!-- no translation found for wifi_trust_on_first_use (7488431582505858774) -->
+    <skip />
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Tīkla nosaukums ir pārāk garš."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Norādiet domēnu."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Nepieciešams sertifikāts."</string>
@@ -2340,6 +2321,8 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Palielināšana ar saīsni"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Palieliniet, lietojot saīsni un trīskāršu skārienu"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Par pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_text_reading_options_title (4684613866595056574) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Opcijas"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Tuvināt ekrānā"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Pieskarieties 3 reizes, lai veiktu tālummaiņu"</string>
@@ -2446,6 +2429,8 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Ilgāks"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Automātiskās klikšķināšanas laiks"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrācija un vibrācija pieskaroties"</string>
+    <!-- no translation found for accessibility_vibration_settings_summary (3690308537483465527) -->
+    <skip />
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Zvani"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Paziņojumi un signāli"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktīva vibrācija pieskaroties"</string>
@@ -2454,6 +2439,8 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Pieskarieties vienumam Atsauksmes"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Izmantot lietotni <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Atvērt lietotni <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_quick_settings_tooltips_content (4033381225041886637) -->
+    <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Izmantot krāsu korekciju"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Krāsu korekcijas saīsne"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Par krāsu korekciju"</string>
@@ -2530,15 +2517,6 @@
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekunde</item>
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekundes</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"Zvans: <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, paziņojums: <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, pieskāriens: <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"Zvana un paziņojuma signāla vibrācija izslēgta"</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"Iestatīta zvana un paziņojuma signāla vibrācija: neliela"</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"Iestatīta zvana un paziņojuma signāla vibrācija: vidēja"</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"Iestatīta zvana un paziņojuma signāla vibrācija: spēcīga"</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Izslēgta"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Neliela"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"Vidēja"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Spēcīga"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Iestatījumi"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Ieslēgta"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Izslēgta"</string>
@@ -2575,11 +2553,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"Vai atļaut pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> pilnībā kontrolēt jūsu ierīci?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"Pakalpojumam <xliff:g id="SERVICE">%1$s</xliff:g> nepieciešams:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Lietotne Iestatījumi nevar verificēt jūsu atbildi, jo cita lietotne aizsedz atļaujas pieprasījumu."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"Ja ieslēgsiet pakalpojumu <xliff:g id="SERVICE">%1$s</xliff:g>, ierīce neizmantos ekrāna bloķēšanu datu šifrēšanas uzlabošanai."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"Tā kā esat ieslēdzis pieejamības pakalpojumu, ierīce neizmantos ekrāna bloķēšanu datu šifrēšanas uzlabošanai."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"Tā kā pakalpojuma <xliff:g id="SERVICE">%1$s</xliff:g> ieslēgšana ietekmē datu šifrēšanu, jums ir jāapstiprina sava grafiskā atslēga."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"Tā kā pakalpojuma <xliff:g id="SERVICE">%1$s</xliff:g> ieslēgšana ietekmē datu šifrēšanu, jums ir jāapstiprina savs PIN."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"Tā kā pakalpojuma <xliff:g id="SERVICE">%1$s</xliff:g> ieslēgšana ietekmē datu šifrēšanu, jums ir jāapstiprina sava parole."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"Pakalpojums <xliff:g id="SERVICE">%1$s</xliff:g> pieprasa pilnīgu šīs ierīces kontroli. Pakalpojums var piekļūt ekrānā redzamajai informācijai un veikt darbības to lietotāju vārdā, kuriem ir īpašas vajadzības. Šāda līmeņa kontrole vairākumam lietotņu nav nepieciešama."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Pilnīga kontrole ir piemērota lietotnēm, kas nepieciešamas lietotājiem ar īpašām vajadzībām, taču ne lielākajai daļai lietotņu."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Skatīt un pārvaldīt ekrānu"</string>
@@ -3155,14 +3128,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"Jūsu administrators neļauj veikt šīs izmaiņas."</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Nevar sinhronizēt manuāli"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Pašlaik ir atspējota šī vienuma sinhronizācija. Lai mainītu šo iestatījumu, īslaicīgi ieslēdziet fona datu lietojumu un automātisko sinhronizāciju."</string>
-    <string name="enter_password" msgid="6327051330258595331">"Lai startētu Android ierīci, ievadiet savu paroli"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Lai startētu Android ierīci, ievadiet savu PIN kodu"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Lai startētu Android ierīci, uzzīmējiet savu kombināciju"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"Nepareiza kombinācija."</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"Nepareiza parole."</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"Nepareizs PIN kods."</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"Notiek pārbaude..."</string>
-    <string name="starting_android" msgid="6694154070215356186">"Notiek Android startēšana…"</string>
     <string name="delete" msgid="8330605554706263775">"Dzēst"</string>
     <string name="misc_files" msgid="6598066985800749585">"Dažādi faili"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"Atlasīti <xliff:g id="NUMBER">%1$d</xliff:g> no <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -3258,8 +3223,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Maksas"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Nav maksas"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Mobilo sakaru operatora datu uzskaite var atšķirties no datu uzskaites ierīcē."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Ārkārtas zvans"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Atgriezties pie zvana"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Nosaukums"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Veids"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Servera adrese"</string>
@@ -3668,6 +3631,8 @@
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"usb piesaiste, bluetooth piesaiste, wi-fi tīklājs"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptisks, vibrēt, ekrāns, jutīgums"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"skārienjutīgs, vibrācija, tālrunis, zvans, jutīgums, zvanīšana"</string>
+    <!-- no translation found for keywords_ramping_ringer_vibration (3678966746742257366) -->
+    <skip />
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"skārienjutīgs, vibrācija, jutīgums"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"skārienjutīgs, vibrēt, vibrācija"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"akumulatora enerģijas taupīšanas režīms, fiksēts, saglabāties, enerģijas taupīšanas režīms, akumulators"</string>
@@ -5551,7 +5516,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Ilgi"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Rādīt maku"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Atļaut piekļuvi makam no bloķēšanas ekrāna un ātrajiem iestatījumiem"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Rādīt ātrās atbildes koda skeneri"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (4284186474146767523) -->
+    <skip />
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Atļaut piekļuvi ātrās atbildes koda skenerim no bloķēšanas ekrāna"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Rādīt ierīču vadīklas"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Piekļūt vadīklām, kad ekrāns ir bloķēts"</string>
@@ -5633,6 +5599,8 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Vai izslēgt mobilos datus?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Izmantojot mobilo sakaru operatora <xliff:g id="CARRIER">%s</xliff:g> pakalpojumus, nevarēsiet piekļūt datiem vai internetam. Internetam varēsiet piekļūt, tikai izmantojot Wi-Fi savienojumu."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"jūsu mobilo sakaru operators"</string>
+    <!-- no translation found for not_allowed_by_ent (1958611623122304411) -->
+    <skip />
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Šī preference nav pieejama, jo ir ieslēgts naktsmiera režīms."</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Paziņojumu svarīguma līmeņa atiestatīšana ir pabeigta."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Lietotnes"</string>
