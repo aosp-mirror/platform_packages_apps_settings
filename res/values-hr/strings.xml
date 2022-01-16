@@ -844,6 +844,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Možda biste također trebali unijeti ovaj PIN i na drugi uređaj."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Možda ćete ovaj pristupni kôd trebati unijeti i na drugi uređaj."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Za uparivanje s:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Uvjerite se da prikazuje ovaj pristupni kôd:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Potvrdite za uparivanje s koordiniranim skupom"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"Od:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Upariti se s ovim uređajem?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Za uparivanje s uređajem:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>upišite:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> na tom uređaju pa pritisnite tipke Return ili Enter."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Dopuštam pristup kontaktima i povijesti poziva"</string>
@@ -877,6 +878,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Povezivanje nije uspjelo. Pokušajte ponovo."</string>
     <string name="device_details_title" msgid="1155622417516195481">"O uređaju"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Bluetooth adresa uređaja: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Bluetooth adresa uređaja:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Zaboraviti uređaj?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Ukloni povezivanje"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Prekinuti vezu s aplikacijom?"</string>
@@ -909,6 +911,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Zapamti postavke"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimalan broj povezanih Bluetooth audiouređaja"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Odaberite maksimalan broj povezanih Bluetooth audiouređaja"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Zapisnik o otklanjanju pogrešaka za NFC stog"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Povećajte razinu zapisivanja za NFC stog"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Emitiranje"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"zrcalo"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Omogući bežični prikaz"</string>
@@ -2701,10 +2705,10 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Velika potrošnja baterije"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Pogledajte aplikacije s najvećom potrošnjom baterije"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"Punjenje je privremeno ograničeno"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Da biste štedjeli bateriju. Saznajte više."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"Radi očuvanja baterije. Saznajte više."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"Nastavi s punjenjem"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"U određenim uvjetima, kao što su visoke temperature i duga razdoblja punjenja, punjenje se može ograničiti na <xliff:g id="PERCENT">%1$s</xliff:g> radi očuvanja dobrog stanja baterije.\n\nKad ti uvjeti završe, telefon će se automatski puniti na uobičajen način."</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"U određenim uvjetima, kao što su visoke temperature i duga razdoblja punjenja, punjenje se može ograničiti na <xliff:g id="PERCENT">%1$s</xliff:g> radi očuvanja dobrog stanja baterije.\n\nKad ti uvjeti završe, tablet će se automatski puniti na uobičajen način."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"U određenim uvjetima kao što su visoke temperature i kada je uređaj priključen na punjenje duže vrijeme, punjenje se može ograničiti na <xliff:g id="PERCENT">%1$s</xliff:g> radi očuvanja baterije.\n\nKada se uvjeti promijene, telefon će se automatski puniti na uobičajen način."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"U određenim uvjetima kao što su visoke temperature i kada je uređaj priključen na punjenje duže vrijeme, punjenje se može ograničiti na <xliff:g id="PERCENT">%1$s</xliff:g> radi očuvanja baterije.\n\nKada se uvjeti promijene, tablet će se automatski puniti na uobičajen način."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"Budući da ste upotrebljavali telefon više nego obično, baterija bi se mogla brže isprazniti.\n\nAplikacije koje najviše troše bateriju:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"Budući da ste upotrebljavali tablet više nego obično, baterija bi se mogla brže isprazniti.\n\nAplikacije koje najviše troše bateriju:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="3896805213768863874">"Budući da ste upotrebljavali uređaj više nego obično, baterija bi se mogla brže isprazniti.\n\nAplikacije koje najviše troše bateriju:"</string>
