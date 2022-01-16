@@ -49,6 +49,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.DialogCreatable;
@@ -59,9 +60,9 @@ import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
@@ -88,23 +89,57 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     private static final String MAGNIFICATION_CONTROLLER_NAME =
             "com.android.server.accessibility.MagnificationController";
 
+    private static final String KEY_FOLLOW_TYPING =
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED;
+
     private TestToggleScreenMagnificationPreferenceFragment mFragment;
     private Context mContext;
     private Resources mResources;
-
-    private FragmentActivity mActivity;
 
     @Before
     public void setUpTestFragment() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         mFragment = spy(new TestToggleScreenMagnificationPreferenceFragment(mContext));
         mResources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(mResources);
         when(mFragment.getContext().getResources()).thenReturn(mResources);
-        doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(activity).when(mFragment).getActivity();
+    }
+
+    @Ignore("Ignore it since a NPE is happened in ShadowWindowManagerGlobal. (Ref. b/214161063)")
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void onResume_defaultStateForFollowingTyping_switchPreferenceShouldReturnTrue() {
+        mFragment.onCreate(new Bundle());
+        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
+        mFragment.onAttach(mContext);
+        final SwitchPreference switchPreference =
+                mFragment.findPreference(MagnificationFollowTypingPreferenceController.PREF_KEY);
+
+        mFragment.onResume();
+
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isTrue();
+    }
+
+    @Ignore("Ignore it since a NPE is happened in ShadowWindowManagerGlobal. (Ref. b/214161063)")
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void onResume_disableFollowingTyping_switchPreferenceShouldReturnFalse() {
+        Settings.Secure.putInt(mContext.getContentResolver(), KEY_FOLLOW_TYPING, OFF);
+        mFragment.onCreate(new Bundle());
+        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
+        mFragment.onAttach(mContext);
+        SwitchPreference switchPreference =
+                mFragment.findPreference(MagnificationFollowTypingPreferenceController.PREF_KEY);
+
+        mFragment.onResume();
+
+        assertThat(switchPreference).isNotNull();
+        assertThat(switchPreference.isChecked()).isFalse();
     }
 
     @Test
@@ -267,6 +302,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP);
     }
 
+    @Ignore("Ignore it since a NPE is happened in ShadowWindowManagerGlobal. (Ref. b/214161063)")
     @Test
     public void onCreateView_notSupportsMagnificationArea_settingsPreferenceIsNull() {
         when(mResources.getBoolean(
@@ -278,13 +314,16 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertThat(mFragment.mSettingsPreference).isNull();
     }
 
+    @Ignore("Ignore it since a NPE is happened in ShadowWindowManagerGlobal. (Ref. b/214161063)")
     @Test
     public void onCreateView_setDialogDelegateAndAddTheControllerToLifeCycleObserver() {
+        Lifecycle lifecycle = mock(Lifecycle.class);
+        when(mFragment.getSettingsLifecycle()).thenReturn(lifecycle);
+
         mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
 
         verify(mFragment).setDialogDelegate(any(MagnificationModePreferenceController.class));
-        verify(mFragment.mSpyLifeyCycle).addObserver(
-                any(MagnificationModePreferenceController.class));
+        verify(lifecycle).addObserver(any(MagnificationModePreferenceController.class));
     }
 
     @Test
@@ -330,8 +369,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
      */
     static class TestToggleScreenMagnificationPreferenceFragment
             extends ToggleScreenMagnificationPreferenceFragment {
-
-        private final Lifecycle mSpyLifeyCycle = Mockito.mock(Lifecycle.class);
 
         private final Context mContext;
         private final PreferenceManager mPreferenceManager;
@@ -399,11 +436,6 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         @Override
         protected void updateShortcutPreference() {
             // UI related function, do nothing in tests
-        }
-
-        @Override
-        public Lifecycle getSettingsLifecycle() {
-            return mSpyLifeyCycle;
         }
 
         @Override

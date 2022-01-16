@@ -317,9 +317,11 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Seguridad"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Cifrado y credenciales"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Teléfono cifrado"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"Teléfono no cifrado"</string>
+    <!-- no translation found for not_encrypted_summary (2251945842585788254) -->
+    <skip />
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Dispositivo cifrado"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"Dispositivo no cifrado"</string>
+    <!-- no translation found for not_encrypted_summary (2374263654698719382) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Pantalla de bloqueo"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Qué mostrar"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Establecer Mi ubicación, bloqueo de pantalla, bloqueo de tarjeta SIM y bloqueo de almacenamiento de credenciales"</string>
@@ -582,37 +584,14 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"No podrás usar tu huella digital para desbloquear el teléfono ni para verificar tu identidad en aplicaciones."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"No podrás usar tu huella digital para desbloquear un perfil de trabajo, autorizar compras o iniciar sesión en aplicaciones de trabajo."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Sí, quitar"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Cifrado"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Cifrar tablet"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Cifrar teléfono"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Cifrado"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Puedes cifrar tus cuentas, los ajustes, las aplicaciones descargadas y sus datos, archivos multimedia y otros archivos. Después de cifrar el tablet, siempre que hayas configurado una pantalla de bloqueo (es decir, un patrón, una contraseña o un PIN numérico), tendrás que desbloquear la pantalla para descifrar el tablet cada vez que lo enciendas. También puedes descifrar el dispositivo restableciendo el estado de fábrica, pero se borrarán todos tus datos.\n\nEl proceso de cifrado tarda 1 hora o más. Debes iniciar el proceso con la batería cargada y mantener el tablet enchufado. Si se interrumpe el proceso, perderás tus datos de forma total o parcial"</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Puedes cifrar tus cuentas, los ajustes, las aplicaciones descargadas y sus datos, archivos multimedia y otros archivos. Después de cifrar el teléfono, siempre que hayas configurado una pantalla de bloqueo (es decir, un patrón, una contraseña o un PIN numérico), tendrás que desbloquear la pantalla para descifrar el teléfono cada vez que lo enciendas. También puedes descifrar el dispositivo restableciendo el estado de fábrica, pero se borrarán todos tus datos.\n\nEl proceso de cifrar tarda 1 hora o más. Debes iniciar el proceso con la batería cargada y mantener el teléfono enchufado. Si se interrumpe el proceso, perderás tus datos de forma total o parcial."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Cifrar tablet"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"Cifrar teléfono"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Carga la batería y vuelve a intentarlo."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"Conecta el cargador y vuelve a intentarlo."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"Falta la contraseña o el PIN de la pantalla de bloqueo"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Debes establecer una contraseña o un PIN para la pantalla de bloqueo para poder iniciar el proceso de cifrado."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"¿Cifrar dispositivo?"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"La operación de cifrado no se puede deshacer y, si la interrumpes, perderás datos. El cifrado tarda aproximadamente 1 hora o más y el tablet se reinicia varias veces durante este proceso."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"La operación de cifrado no se puede deshacer y, si la interrumpes, perderás datos. El cifrado puede tardar 1 hora o más y el teléfono se reinicia varias veces durante este proceso."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"Cifrando"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"Espera mientras se cifra el tablet. <xliff:g id="PERCENT">^1</xliff:g>% completado"</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"Espera mientras se cifra el teléfono. <xliff:g id="PERCENT">^1</xliff:g>% completado"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"Espera mientras se cifra el tablet. Tiempo restante: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"Espera mientras se cifra el teléfono. Tiempo restante: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"Para desbloquear el tablet, apágalo y vuelve a encenderlo."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"Para desbloquear el teléfono, apágalo y vuelve a encenderlo."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"Advertencia: Se borrarán los datos del dispositivo después de otros <xliff:g id="COUNT">^1</xliff:g> intentos fallidos para desbloquearlo"</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"Escribe tu contraseña"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"Error en el cifrado"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"El proceso de cifrado se ha interrumpido y no se puede completar. No podrás volver a acceder a los datos del tablet. \n\nDebes restablecer el estado de fábrica para volver a usar el tablet. Cuando configures el tablet después de este proceso, podrás restaurar los datos de los que hayas hecho una copia de seguridad en tu cuenta de Google."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"El cifrado se ha interrumpido y no se puede completar. No podrás volver a acceder a los datos del teléfono. \n\nDebes restablecer el estado de fábrica para volver a usar el teléfono. Cuando configures el teléfono después de este proceso, podrás restaurar los datos de los que hayas hecho una copia de seguridad en tu cuenta de Google."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"Descifrado incorrecto"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"La contraseña que has introducido es correcta pero, lamentablemente, tus datos están dañados. \n\nPara seguir utilizando el tablet, debes restablecer el estado de fábrica. Al configurar el dispositivo después de este proceso, podrás restaurar los datos incluidos en la copia de seguridad de tu cuenta de Google."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"La contraseña que has introducido es correcta pero, lamentablemente, tus datos están dañados. \n\nPara seguir utilizando el teléfono, debes restablecer el estado de fábrica. Al configurar el dispositivo después de este proceso, podrás restaurar los datos incluidos en la copia de seguridad de tu cuenta de Google."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"Cambiar método de introducción"</string>
+    <!-- no translation found for encryption_settings_title (2848716008695618360) -->
+    <skip />
+    <!-- no translation found for encrypt_title (6518642273119816435) -->
+    <skip />
+    <!-- no translation found for encrypt_title (7337365190988321100) -->
+    <skip />
+    <!-- no translation found for encrypted_summary (545623487587251207) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Protege tu teléfono"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Añade bloqueo de pantalla para proteger el tablet"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Añade bloqueo de pantalla para proteger el dispositivo"</string>
@@ -1091,6 +1070,8 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Usar certificados del sistema"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"No proporcionar"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"No validar"</string>
+    <!-- no translation found for wifi_trust_on_first_use (7488431582505858774) -->
+    <skip />
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"El nombre de la red es demasiado largo."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Se debe especificar un dominio."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Se necesita un certificado."</string>
@@ -2316,6 +2297,8 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Ampliación con acceso directo"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Amplía con una combinación de teclas y tres toques"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Información de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_text_reading_options_title (4684613866595056574) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Opciones"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Amplía la pantalla"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Toca tres veces para hacer zoom"</string>
@@ -2422,6 +2405,8 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Más largo"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tiempo de clic automático"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibración y respuesta táctil"</string>
+    <!-- no translation found for accessibility_vibration_settings_summary (3690308537483465527) -->
+    <skip />
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Llamadas"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notificaciones y alarmas"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Respuesta táctil interactiva"</string>
@@ -2430,6 +2415,8 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Respuesta táctil"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Usar <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Abrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_quick_settings_tooltips_content (4033381225041886637) -->
+    <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Usar corrección de color"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Acceso directo a corrección de color"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Acerca de la corrección de color"</string>
@@ -2501,15 +2488,6 @@
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> segundos</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> segundo</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"Tono (<xliff:g id="SUMMARY_RING">%1$s</xliff:g>), notificación (<xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>) y respuesta táctil (<xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>)"</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"Desactivada para notificaciones y llamadas"</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"Baja para notificaciones y llamadas"</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"Media para notificaciones y llamadas"</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"Alta para notificaciones y llamadas"</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Desactivado"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Baja"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"Media"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Alta"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Ajustes"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Activado"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Desactivado"</string>
@@ -2546,11 +2524,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"¿Quieres permitir que <xliff:g id="SERVICE">%1$s</xliff:g> pueda controlar totalmente tu dispositivo?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> necesita:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Una aplicación está bloqueando una solicitud de permiso, por lo que Ajustes no puede verificar tu respuesta."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"Si activas <xliff:g id="SERVICE">%1$s</xliff:g>, el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"Has activado un servicio de accesibilidad, por lo que el dispositivo no utilizará el bloqueo de pantalla para mejorar el cifrado de datos."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"Activar <xliff:g id="SERVICE">%1$s</xliff:g> afecta al cifrado de datos, por lo que debes confirmar tu patrón."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"Activar <xliff:g id="SERVICE">%1$s</xliff:g> afecta al cifrado de datos, por lo que debes confirmar tu PIN."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"Activar <xliff:g id="SERVICE">%1$s</xliff:g> afecta al cifrado de datos, por lo que debes confirmar tu contraseña."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> está solicitando el control completo del dispositivo. El servicio puede leer la pantalla y actuar en nombre de los usuarios que necesitan funciones de accesibilidad. El nivel de control no es adecuado para la mayoría de las aplicaciones."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"El control total es adecuado para las aplicaciones de accesibilidad, pero no para la mayoría de las aplicaciones."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Ver y controlar la pantalla"</string>
@@ -3115,14 +3088,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"El administrador no permite realizar este cambio"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"No se puede hacer la sincronización de forma manual."</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"La sincronización de este elemento no está disponible en este momento. Para modificar tu preferencia, activa temporalmente los datos en segundo plano y la sincronización automática."</string>
-    <string name="enter_password" msgid="6327051330258595331">"Para iniciar tu dispositivo Android, introduce tu contraseña"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Para iniciar tu dispositivo Android, introduce el PIN"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Para iniciar tu dispositivo Android, dibuja tu patrón"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"Patrón incorrecto"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"Contraseña incorrecta"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"PIN incorrecto"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"Comprobando..."</string>
-    <string name="starting_android" msgid="6694154070215356186">"Iniciando Android…"</string>
     <string name="delete" msgid="8330605554706263775">"Eliminar"</string>
     <string name="misc_files" msgid="6598066985800749585">"Archivos variados"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"Has seleccionado <xliff:g id="NUMBER">%1$d</xliff:g> de <xliff:g id="TOTAL">%2$d</xliff:g>."</string>
@@ -3218,8 +3183,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Red de uso medido"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Sin uso medido"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"El uso de datos del operador puede ser diferente al calculado por el dispositivo."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Llamada de emergencia"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Volver a llamada"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Nombre"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Tipo"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Dirección del servidor"</string>
@@ -3623,6 +3586,8 @@
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"conexión compartida por usb, conexión compartida por bluetooth, punto de acceso wi‑fi"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"háptica, vibrar, pantalla, sensibilidad"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"háptica, vibrar, teléfono, llamada, sensibilidad, tono"</string>
+    <!-- no translation found for keywords_ramping_ringer_vibration (3678966746742257366) -->
+    <skip />
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"háptica, vibrar, sensibilidad"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"respuesta táctil, vibrar, vibración"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"ahorro de batería, batería fija, duradera, ahorro de batería, batería"</string>
@@ -5462,7 +5427,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Larga"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Mostrar cartera"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Permite el acceso a la cartera desde la pantalla de bloqueo y los ajustes rápidos"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Mostrar escáner de códigos QR"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (4284186474146767523) -->
+    <skip />
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Permite acceso al escáner de códigos QR desde la pantalla de bloqueo"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Mostrar controles del dispositivo"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Accede a los controles con la pantalla bloqueada"</string>
@@ -5544,6 +5510,8 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"¿Desactivar los datos móviles?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"No tendrás acceso a los datos móviles ni a Internet a través de <xliff:g id="CARRIER">%s</xliff:g>. Solo podrás conectarte a Internet mediante Wi‑Fi."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"tu operador"</string>
+    <!-- no translation found for not_allowed_by_ent (1958611623122304411) -->
+    <skip />
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"No disponible porque el modo Descanso está activado"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Borrado de la importancia de las notificaciones completado."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplicaciones"</string>
