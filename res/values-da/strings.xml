@@ -317,9 +317,11 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Sikkerhed"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Kryptering og loginoplysninger"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Telefonen er krypteret"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"Telefonen er ikke krypteret"</string>
+    <!-- no translation found for not_encrypted_summary (2251945842585788254) -->
+    <skip />
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Enheden er krypteret"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"Enheden er ikke krypteret"</string>
+    <!-- no translation found for not_encrypted_summary (2374263654698719382) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Låseskærm"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Hvad der skal vises"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Angiv Min lokation, oplåsning af skærmen, låst SIM-kort og lager for loginoplysninger"</string>
@@ -582,37 +584,14 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Du vil ikke have mulighed for at bruge dit fingeraftryk til at låse din telefon op eller bekræfte din identitet i apps."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Du vil ikke have mulighed for at bruge dit fingeraftryk til at låse din arbejdsprofil op, godkende køb eller logge ind i arbejdsapps."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, fjern"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Kryptering"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Krypter tablet"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Kryptér telefon"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Krypteret"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Du kan kryptere dine konti, indstillinger, downloadede apps og deres data, medier og andre filer. Når du har krypteret din tablet, skal du låse skærmen op for at dekryptere den, hver gang du tænder for den, forudsat at du har oprettet en skærmlås (dvs. et mønster eller en numerisk pinkode eller adgangskode). Den eneste anden måde at dekryptere på er ved at udføre en gendannelse af fabriksdata, hvilket sletter alle dine data.\n\nKrypteringen tager en time eller mere. Du skal starte med et opladet batteri og sørge for, at din tablet er tilsluttet strøm under hele processen. Hvis du afbryder den, mister du nogle af eller alle dine data."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Du kan kryptere dine konti, indstillinger, downloadede apps og deres data, medier og andre filer. Når du har krypteret din telefon, er du nødt til at låse skærmen op for at dekryptere telefonen, hver gang du tænder for den, forudsat at du har oprettet en skærmlås (dvs. et mønster eller en numerisk pinkode eller adgangskode). Den eneste anden måde at dekryptere den på er at udføre en gendannelse af fabriksdata, hvilket sletter alle dine data.\n\nKrypteringen tager en time eller mere. Du skal starte med et opladet batteri og sørge for, at din telefon er tilsluttet strøm under hele processen. Hvis du afbryder den, mister du nogle af eller alle dine data."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Krypter tablet"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"Kryptér telefon"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Lad dit batteri op, og prøv igen."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"Tilslut din oplader, og prøv igen."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"Ingen pinkode eller adgangskode til skærmlås"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Du skal angive en pinkode eller adgangskode for skærmlås, inden du kan starte krypteringen."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"Vil du kryptere?"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"Denne handling kan ikke fortrydes, og den kan ikke afbrydes uden tab af data til følge. Krypteringen tager mindst en time, og i den tid genstartes tabletten flere gange."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"Denne handling kan ikke fortrydes, og den kan ikke afbrydes uden tab af data til følge. Krypteringen tager mindst en time, og i den tid genstartes telefonen flere gange."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"Kryptering"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"Vent, mens din tablet krypteres. <xliff:g id="PERCENT">^1</xliff:g> % fuldført."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"Vent, mens din telefon krypteres. <xliff:g id="PERCENT">^1</xliff:g> % fuldført."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"Vent, mens din tablet krypteres. Resterende tid: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"Vent, mens din telefon krypteres. Resterende tid: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"Du låser din tablet ved at slukke og tænde den."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"Du låser din telefon ved at slukke og tænde den."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"Advarsel! Enheden ryddes efter <xliff:g id="COUNT">^1</xliff:g> mislykkede oplåsningsforsøg mere."</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"Angiv din adgangskode"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"Kryptering mislykkedes"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"Krypteringen blev afbrudt og kan ikke fuldføres. Som følge heraf er dataene på din tablet ikke længere tilgængelige. \n\nHvis du vil genoptage brugen af din  tablet, skal du udføre en gendannelse af fabriksdata. Når du konfigurerer din tablet efter nulstillingen, har du mulighed for at gendanne data, der blev sikkerhedskopieret på din Google-konto."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"Krypteringen blev afbrudt og kan ikke fuldføres. Som følge heraf er dataene på din telefon ikke længere tilgængelige. \n\nHvis du vil genoptage brugen af telefonen, skal du udføre en gendannelse af fabriksdata. Når du konfigurerer din telefon efter nulstillingen, har du mulighed for at gendanne data, der blev sikkerhedskopieret på din Google-konto."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"Dekrypteringen mislykkedes"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din tablet igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende konfiguration af tabletten får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"Den indtastede adgangskode er korrekt, men desværre er dine data beskadigede. \n\nFør du kan bruge din telefon igen, skal du gendanne fabriksindstillingerne. Under den efterfølgende konfiguration af telefonen får du mulighed for at gendanne eventuelle data, der er sikkerhedskopieret på din Google-konto."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"Skift indtastningsmetode"</string>
+    <!-- no translation found for encryption_settings_title (2848716008695618360) -->
+    <skip />
+    <!-- no translation found for encrypt_title (6518642273119816435) -->
+    <skip />
+    <!-- no translation found for encrypt_title (7337365190988321100) -->
+    <skip />
+    <!-- no translation found for encrypted_summary (545623487587251207) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Beskyt din telefon"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Konfigurer skærmlåsen for at beskytte din tablet"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Konfigurer skærmlåsen for at beskytte din enhed"</string>
@@ -1091,6 +1070,8 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Brug systemets certifikater"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Angiv ikke"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Bekræft ikke"</string>
+    <!-- no translation found for wifi_trust_on_first_use (7488431582505858774) -->
+    <skip />
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Netværksnavnet er for langt."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Domæne skal angives."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Certifikat er påkrævet."</string>
@@ -2316,6 +2297,8 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Brug en genvej til forstørrelse"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Brug en genvej til forstørrelse med tre tryk"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Om <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_text_reading_options_title (4684613866595056574) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Valgmuligheder"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoom ind på skærmen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tryk tre gange for at zoome ind"</string>
@@ -2422,6 +2405,8 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Længere"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Varighed af automatisk klik"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibration og berøringssensor"</string>
+    <!-- no translation found for accessibility_vibration_settings_summary (3690308537483465527) -->
+    <skip />
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Opkald"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notifikationer og alarmer"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktive berøringssensorer"</string>
@@ -2430,6 +2415,8 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Feedback ved tryk"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Brug <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Åbn <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_quick_settings_tooltips_content (4033381225041886637) -->
+    <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Brug farvekorrigering"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Genvej til farvekorrigering"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Om farvekorrigering"</string>
@@ -2501,15 +2488,6 @@
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekund</item>
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekunder</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"Ringetone <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, notifikation <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, berøring<xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"Vibration ved opkald og notifikationer er slået fra"</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"Vibration ved opkald og notifikationer er indstillet til Lav"</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"Vibration ved opkald og notifikationer er indstillet til Middel"</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"Vibration ved opkald og notifikationer er indstillet til Høj"</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Fra"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Lav"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"Middel"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Høj"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Indstillinger"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Til"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Fra"</string>
@@ -2546,11 +2524,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"Vil du give <xliff:g id="SERVICE">%1$s</xliff:g> fuld kontrol over din enhed?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> har brug for at:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Indstillinger kan ikke bekræfte dit svar, fordi en app tilslører tilladelsesanmodningen."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"Hvis du aktiverer <xliff:g id="SERVICE">%1$s</xliff:g>, vil enheden ikke benytte skærmlåsen til at forbedre datakrypteringen."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"Fordi du har aktiveret en tilgængelighedstjeneste, vil enheden ikke benytte skærmlåsen for at forbedre datakrypteringen."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"Fordi det påvirker datakryptering at slå <xliff:g id="SERVICE">%1$s</xliff:g> til, skal du bekræfte dit mønster."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"Fordi det påvirker datakryptering at slå <xliff:g id="SERVICE">%1$s</xliff:g> til, skal du bekræfte din pinkode."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"Fordi det påvirker datakryptering at slå <xliff:g id="SERVICE">%1$s</xliff:g> til, skal du bekræfte din adgangskode."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> anmoder om fuld kontrol over denne enhed. Tjenesten kan læse skærmen og handle på vegne af brugere med særlige behov. Dette kontrolomfang er ikke passende for de fleste apps."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Fuld kontrol er velegnet til apps, der hjælper dig med hjælpefunktioner, men ikke de fleste apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Se og styre skærm"</string>
@@ -3115,14 +3088,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"Din administrator har ikke givet tilladelse til at foretage denne ændring"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Der kan ikke synkroniseres manuelt"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Synkronisering af dette element er deaktiveret lige nu. Hvis du vil ændre indstillingen, skal du aktivere baggrundsdata og automatisk synkronisering midlertidigt."</string>
-    <string name="enter_password" msgid="6327051330258595331">"Start Android ved at indtaste din adgangskode"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Start Android ved at indtaste din pinkode"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Start Android ved at tegne dit mønster"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"Forkert mønster"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"Forkert adgangskode"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"Forkert pinkode"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"Kontrollerer…"</string>
-    <string name="starting_android" msgid="6694154070215356186">"Starter Android…"</string>
     <string name="delete" msgid="8330605554706263775">"Slet"</string>
     <string name="misc_files" msgid="6598066985800749585">"Diverse filer"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"<xliff:g id="NUMBER">%1$d</xliff:g> valgte ud af <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -3218,8 +3183,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Forbrugsafregnet"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Ubegrænset brug til en fast pris"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Mobilselskabets dataopgørelse kan variere afhængigt af din enhed."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Nødopkald"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Tilbage til opkald"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Navn"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Type"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Serveradresse"</string>
@@ -3623,6 +3586,8 @@
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"usb-netdeling, bluetooth-netdeling, wi-fi-hotspot"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"berøring, vibrere, skærm, følsomhed"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"berøringssensorer, vibration, telefon, opkald, følsomhed, ringetone"</string>
+    <!-- no translation found for keywords_ramping_ringer_vibration (3678966746742257366) -->
+    <skip />
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"berøringssensorer, vibration, følsomhed"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"berøringssensorer, vibrer, vibration"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"batterisparefunktion, klæbende, vedvare, strømbesparelse, batteri"</string>
@@ -5462,7 +5427,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Langt"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Vis Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Tillad adgang til Wallet fra låseskærmen og kvikmenuen"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Vis QR-scanner"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (4284186474146767523) -->
+    <skip />
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Tillad adgang til QR-kodescanneren via låseskærmen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Vis enhedsstyring"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Få adgang til styring, selvom enheden er låst"</string>
@@ -5544,6 +5510,8 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Vil du deaktivere mobildata?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Du vil ikke have data- eller internetadgang via <xliff:g id="CARRIER">%s</xliff:g>. Der vil kun være adgang til internettet via Wi-Fi."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"dit mobilselskab"</string>
+    <!-- no translation found for not_allowed_by_ent (1958611623122304411) -->
+    <skip />
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ikke tilgængelig, da sengetidstilstand er aktiveret"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Vigtigheden af notifikationer blev nulstillet."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>

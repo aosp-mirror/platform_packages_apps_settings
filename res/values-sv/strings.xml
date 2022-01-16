@@ -317,9 +317,11 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Säkerhet"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Kryptering och användaruppgifter"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Mobilen är krypterad"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"Mobilen är inte krypterad"</string>
+    <!-- no translation found for not_encrypted_summary (2251945842585788254) -->
+    <skip />
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Enheten har krypterats"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"Enheten är inte krypterad"</string>
+    <!-- no translation found for not_encrypted_summary (2374263654698719382) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Låsskärm"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Vad som ska visas"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Ställ in Min plats, skärmupplåsning, lås för SIM-kort och lås för uppgiftslagring"</string>
@@ -582,37 +584,14 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Du kan inte låsa upp telefonen eller verifiera din identitet i appar med ditt fingeravtryck."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Då kan du inte låsa upp jobbprofilen, auktorisera köp eller logga in i jobbappar med ditt fingeravtryck."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, ta bort"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Kryptering"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Kryptera surfplattan"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Kryptera telefonen"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Krypterad"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Du kan kryptera dina konton, inställningar, nedladdade appar och deras data, mediefiler och övriga filer. Om du har konfigurerat ett skärmlås (det vill säga ett mönster, en pinkod eller ett lösenord) och krypterar surfplattan måste du dekryptera den genom att låsa upp skärmen varje gång du slår på den. Det går inte att dekryptera den på något annat sätt utom genom att återställa standardinställningarna, vilket raderar all data.\n\n Krypteringen tar minst en timme. Du måste börja med batteriet laddat och låta surfplattan vara ansluten till ett strömuttag under hela processen. Om du avbryter kommer vissa eller alla data att försvinna."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Du kan kryptera dina konton, inställningar, nedladdade appar och deras data, mediefiler och övriga filer. Om du har konfigurerat ett skärmlås (det vill säga ett mönster, en pinkod eller ett lösenord) och krypterar telefonen måste du dekryptera den genom att låsa upp skärmen varje gång du slår på den. Det går inte att dekryptera den på något annat sätt utom genom att återställa standardinställningarna, vilket raderar all data.\n\n Krypteringen tar minst en timme. Du måste börja med batteriet laddat och låta telefonen vara ansluten till ett strömuttag under hela processen. Om du avbryter kommer vissa eller alla data att försvinna."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Kryptera surfplattan"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"Kryptera telefonen"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Ladda batteriet och försök igen."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"Anslut laddaren och försök igen."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"PIN-kod eller lösenord saknas för skärmlåset"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Du måste ange en PIN-kod eller ett lösenord för skärmlåset innan du påbörjar krypteringen."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"Vill du kryptera?"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"Krypteringen kan inte ångras och om du avbryter den kan data försvinna. Det kan ta en timme eller mer och under tiden startas surfplattan om flera gånger."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"Krypteringen kan inte ångras och om du avbryter den kan data försvinna. Det kan ta en timme eller mer och under tiden startas mobilen om flera gånger."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"Krypterar"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"Vänta medan surfplattan krypteras. <xliff:g id="PERCENT">^1</xliff:g> % klart."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"Vänta medan mobilen krypteras. <xliff:g id="PERCENT">^1</xliff:g> % klart."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"Vänta tills surfplattan har krypterats. Återstående tid: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"Vänta tills mobilen har krypterats. Återstående tid: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"Lås upp surfplattan genom att stänga av och slå på den."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"Lås upp mobilen genom att stänga av och slå på den."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"Varning! Efter <xliff:g id="COUNT">^1</xliff:g> misslyckade upplåsningsförsök till raderas data på enheten."</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"Ange ditt lösenord"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"Krypteringen misslyckades"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"Krypteringen avbröts och kan inte slutföras. Data på surfplattan är därför inte tillgängliga längre.\n\n Om du vill fortsätta använda surfplattan måste du återställa standardinställningarna. När du konfigurerar surfplattan efter återställningen kan du välja att återställa alla data som du har säkerhetskopierat i ditt Google-konto."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"Krypteringen avbröts och kan inte slutföras. Data på mobilen är därför inte tillgängliga längre.\n\nOm du vill fortsätta använda mobilen måste du återställa standardinställningarna. När du konfigurerar enheten efter återställningen kan du välja att återställa alla data som du har säkerhetskopierat i ditt Google-konto."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"Dekrypteringen misslyckades"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"Lösenordet du angav är korrekt, men dina data har korrumperats. \n\nOm du vill fortsätta använda surfplattan måste du återställa standardinställningarna. När du har konfigurerat surfplattan efter återställningen har du möjlighet att återställa alla data som har säkerhetskopierats i ditt Google-konto."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"Lösenordet du angav är korrekt, men dina data har korrumperats. \n\nOm du vill fortsätta använda mobilen måste du återställa standardinställningarna. När du har konfigurerat mobilen efter återställningen har du möjlighet att återställa alla data som har säkerhetskopierats i ditt Google-konto."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"Växla inmatningsmetod"</string>
+    <!-- no translation found for encryption_settings_title (2848716008695618360) -->
+    <skip />
+    <!-- no translation found for encrypt_title (6518642273119816435) -->
+    <skip />
+    <!-- no translation found for encrypt_title (7337365190988321100) -->
+    <skip />
+    <!-- no translation found for encrypted_summary (545623487587251207) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Skydda mobilen"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Skydda surfplattan genom att ställa in skärmlås"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Skydda enheten genom att ställa in skärmlås"</string>
@@ -1091,6 +1070,8 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Använd systemcertifikat"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Tillhandahåll inte"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Validera inte"</string>
+    <!-- no translation found for wifi_trust_on_first_use (7488431582505858774) -->
+    <skip />
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Nätverkets namn är för långt."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Domän måste specificeras."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Certifikat krävs."</string>
@@ -2316,6 +2297,8 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Förstora med genväg"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Förstora med genväg och tryck snabbt tre gånger"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Om <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_text_reading_options_title (4684613866595056574) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Alternativ"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zooma in på skärmen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tryck tre gånger om du vill zooma"</string>
@@ -2422,6 +2405,8 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Längre"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tid för automatiskt klick"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibration och haptik"</string>
+    <!-- no translation found for accessibility_vibration_settings_summary (3690308537483465527) -->
+    <skip />
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Samtal"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Aviseringar och alarm"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktiv haptik"</string>
@@ -2430,6 +2415,8 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Tryckåterkoppling"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Använd <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Öppna <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_quick_settings_tooltips_content (4033381225041886637) -->
+    <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Använd färgkorrigering"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Genväg till färgkorrigering"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Om färgkorrigering"</string>
@@ -2501,15 +2488,6 @@
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekunder</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"Ringsignal <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, avisering <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, tryck <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"Vibrationer har inaktiverats för samtal och aviseringar"</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"Svag vibration har angetts för samtal och aviseringar"</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"Medium vibration har angetts för samtal och aviseringar"</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"Kraftig vibration har angetts för samtal och aviseringar"</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Av"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Svag"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"Medium"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Kraftig"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Inställningar"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"På"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Av"</string>
@@ -2546,11 +2524,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"Vill du tillåta att <xliff:g id="SERVICE">%1$s</xliff:g> har fullständig kontroll över enheten?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> behöver:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Svaret kan inte verifieras av Inställningar, eftersom en app skymmer en begäran om behörighet."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"Om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> används inte skärmlåset för att förbättra datakryptering på enheten."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"Eftersom du har aktiverat en tillgänglighetstjänst används inte skärmlåset för att förbättra datakryptering på enheten."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"Eftersom datakrypteringen påverkas om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> måste du bekräfta ditt grafiska lösenord."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"Eftersom datakrypteringen påverkas om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> måste du bekräfta din pinkod."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"Eftersom datakrypteringen påverkas om du aktiverar <xliff:g id="SERVICE">%1$s</xliff:g> måste du bekräfta ditt lösenord."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> begär fullständig kontroll över den här enheten. Tjänsten kan läsa på skärmen och utföra åtgärder åt användare med behov av tillgänglighet. Den här kontrollnivån är olämplig för de flesta appar."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Fullständig kontroll lämpar sig för appar med tillgänglighetsfunktioner, men är inte lämplig för de flesta appar."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Visa och styra skärmen"</string>
@@ -3115,14 +3088,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"Administratören tillåter inte den här ändringen"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Det går inte att synkronisera manuellt"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Synkronisering är inaktiverad för det här objektet. Om du vill ändra inställningen aktiverar du bakgrundsdata och automatisk synkronisering tillfälligt."</string>
-    <string name="enter_password" msgid="6327051330258595331">"Starta Android genom att ange ditt lösenord"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Starta Android genom att ange din pinkod"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Starta Android genom att rita ditt grafiska lösenord"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"Fel mönster"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"Fel lösenord"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"Fel pinkod"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"Kontrollerar …"</string>
-    <string name="starting_android" msgid="6694154070215356186">"Android startas ..."</string>
     <string name="delete" msgid="8330605554706263775">"Ta bort"</string>
     <string name="misc_files" msgid="6598066985800749585">"Misc-filer"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"<xliff:g id="NUMBER">%1$d</xliff:g> av <xliff:g id="TOTAL">%2$d</xliff:g> har valts"</string>
@@ -3218,8 +3183,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Med datapriser"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Utan datapriser"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Operatörens dataredovisning kan skilja sig från din enhets dataredovisning."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Nödsamtal"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Tillbaka till samtal"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Namn"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Typ"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Serveradress"</string>
@@ -3623,6 +3586,8 @@
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"internetdelning via usb, internetdelning via bluetooth, wi-fi-surfzon"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptik, vibration, skärm, känslighet"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"haptik, vibration, mobil, samtal, känslighet, ringsignal"</string>
+    <!-- no translation found for keywords_ramping_ringer_vibration (3678966746742257366) -->
+    <skip />
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"haptik, vibration, känslighet"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"haptik, vibrera, vibration"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"batterisparläge, fast position, beständig, strömläge, batteri"</string>
@@ -5462,7 +5427,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lång"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Visa Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Tillåt åtkomst till Wallet från låsskärmen och snabbinställningar"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="179730396165816425">"Visa QR-skanner"</string>
+    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (4284186474146767523) -->
+    <skip />
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Ge åtkomst till QR-skanner från låsskärmen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Visa enhetsstyrning"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Få åtkomst till kontroller när skärmen är låst"</string>
@@ -5544,6 +5510,8 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Vill du inaktivera mobildata?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Du kan inte komma åt data eller använda internet via <xliff:g id="CARRIER">%s</xliff:g>. Internet är endast tillgängligt via wifi."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"din operatör"</string>
+    <!-- no translation found for not_allowed_by_ent (1958611623122304411) -->
+    <skip />
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Inte tillgängligt eftersom sovläget är på"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Aviseringarnas relevans har återställts."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Appar"</string>
