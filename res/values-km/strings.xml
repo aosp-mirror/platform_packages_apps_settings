@@ -825,6 +825,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"អ្នក​ក៏​ត្រូវ​បញ្ចូល​កូដ PIN នេះ​លើ​ឧបករណ៍​ផ្សេង​ដែរ។"</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"អ្នក​ក៏​អាច​ត្រូវ​បញ្ចូល​លេខ​កូដ​នេះ​លើ​ឧបករណ៍​ផ្សេង។"</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"ដើម្បី​ផ្គូផ្គង​ជា​មួយ៖&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;ប្រាកដ​ថា វា​កំពុង​បង្ហាញ​​លេខ​កូដ​នេះ៖&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"បញ្ជាក់ ដើម្បីផ្គូផ្គងជាមួយសំណុំដែលបានសម្របសម្រួល"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"ពី៖ &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;ផ្គូផ្គង​ជា​មួយ​ឧបករណ៍​នេះ?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"ដើម្បី​ផ្គូផ្គង​ជា​មួយ៖ <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>វាយ​បញ្ចូល៖ <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g> បន្ទាប់​មក​ចុច​ Return ឬ Enter ។"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"ផ្ដល់​សិទ្ធិ​អនុញ្ញាត​ចូល​ប្រើ​ទំនាក់ទំនង​ និង​ប្រវត្តិ​ហៅ​ទូរសព្ទ​របស់អ្នក"</string>
@@ -858,6 +859,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"មិនអាចភ្ជាប់បានទេ។ សូមព្យាយាមម្តងទៀត។"</string>
     <string name="device_details_title" msgid="1155622417516195481">"ព័ត៌មានលម្អិត​អំពី​ឧបករណ៍"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"អាសយដ្ឋាន​ប៊្លូធូស​របស់ឧបករណ៍៖ <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"អាសយដ្ឋាន​ប៊្លូធូស​របស់ឧបករណ៍៖\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"បំភ្លេច​ឧបករណ៍?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"ដកភាពពាក់ព័ន្ធចេញ"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"ផ្ដាច់​កម្មវិធីឬ?"</string>
@@ -890,6 +892,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"ចងចាំ​ការ​កំណត់"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"ចំនួនអតិបរមា​នៃ​ឧបករណ៍​សំឡេង​ដែលភ្ជាប់​ប៊្លូធូស​"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"ជ្រើសរើស​ចំនួនអតិបរមា​នៃ​ឧបករណ៍​សំឡេង​ដែលភ្ជាប់​ប៊្លូធូស"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"កំណត់ហេតុ​ជួសជុលគំនរ NFC"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"បង្កើន​កម្រិតធ្វើ​កំណត់ហេតុ​គំនរ NFC"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ភ្ជាប់"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"កញ្ចក់"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"បើក​ការ​បង្ហាញ​ឥត​ខ្សែ"</string>
@@ -2667,7 +2671,7 @@
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"មុខងារ​មួយចំនួន​អាច​ត្រូវ​បានដាក់កំហិត"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"ការប្រើប្រាស់ថ្មខ្ពស់ជាងមុន"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"មើលកម្មវិធី​ដែលមាន​ការប្រើប្រាស់ខ្ពស់បំផុត"</string>
-    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"បានដាក់កម្រិត​ការសាកថ្មជា​បណ្ដោះអាសន្ន"</string>
+    <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"បានដាក់កំហិតលើ​ការសាកថ្មជា​បណ្ដោះអាសន្ន"</string>
     <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"ដើម្បីរក្សា​ថ្មរបស់អ្នក។ ស្វែងយល់​បន្ថែម។"</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"បន្តសាកថ្ម"</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"ក្នុងស្ថានភាពមួយចំនួន ដូចជាសីតុណ្ហភាពខ្ពស់ និងរយៈពេលសាកថ្មយូរ ការសាកថ្មអាចត្រូវបានដាក់កំហិតត្រឹម <xliff:g id="PERCENT">%1$s</xliff:g> ដើម្បីជួយការពារ​គុណភាពថ្ម។\n\nនៅពេលដែលស្ថានភាពទាំងនោះបញ្ចប់ ទូរសព្ទរបស់អ្នកនឹងសាកថ្មដូចធម្មតាដោយស្វ័យប្រវត្តិវិញ។"</string>

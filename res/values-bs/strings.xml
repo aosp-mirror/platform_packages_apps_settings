@@ -842,6 +842,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Možda ćete morati otkucati ovaj PIN i na drugom uređaju."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"Možda ćete morati otkucati ovaj pristupni kôd na drugom uređaju."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"Da biste izvršilu uparivanje s uređajem:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Provjerite da li se prikazuje sljedeći pristupni ključ:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Potvrdite da uparite s koordiniranim kompletom"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"Od:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Želite izvršiti uparivanje s ovim uređajem?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Da biste izvršili uparivanje s uređajem:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Otkucajte na njemu:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, a zatim pritisnite Return ili Enter."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Dozvolite pristup kontaktima i historiji poziva"</string>
@@ -875,6 +876,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Nije povezan. Pokušajte ponovo."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalji o uređaju"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Bluetooth adresa uređaja: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Bluetooth adresa uređaja:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Zaboraviti uređaj?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Uklonite povezanost"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Prekinuti vezu s aplikacijom?"</string>
@@ -907,6 +909,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"Zapamti postavke"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimalan broj povezanih Bluetooth audio uređaja"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Odaberite maksimalan broj povezanih Bluetooth audio uređaja"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"Povećajte nivo evidentiranja za NFC grupu"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"Povećajte nivo zapisivanja za NFC grupu"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Emitiranje"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"preslikavanje"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Omogući bežični prikaz"</string>
@@ -1551,7 +1555,7 @@
     <string name="status_signal_strength" msgid="7644525712554444359">"Jačina signala"</string>
     <string name="status_roaming" msgid="1253597174715663778">"Roming"</string>
     <string name="status_operator" msgid="4335640583552058491">"Mreža"</string>
-    <string name="status_wifi_mac_address" msgid="4447611754614388914">"MAC adresa WiFi mreže"</string>
+    <string name="status_wifi_mac_address" msgid="4447611754614388914">"MAC adresa WiFi-ja"</string>
     <string name="status_device_wifi_mac_address" msgid="1896121694334176494">"MAC adresa uređaja za WiFi mrežu"</string>
     <string name="status_bt_address" msgid="6919660304578476547">"Bluetooth adresa"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Serijski broj"</string>
@@ -2962,9 +2966,9 @@
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"Postavke glasovnog unosa i izlaza"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"Glasovno pretraživanje"</string>
     <string name="keyboard_settings_title" msgid="2199286020368890114">"Android tastatura"</string>
-    <string name="voice_input_settings" msgid="105821652985768064">"Podešavanja govornog unosa"</string>
-    <string name="voice_input_settings_title" msgid="3708147270767296322">"Govorni unos"</string>
-    <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Usluge govornog unosa"</string>
+    <string name="voice_input_settings" msgid="105821652985768064">"Podešavanja glasovnog unosa"</string>
+    <string name="voice_input_settings_title" msgid="3708147270767296322">"Glasovni unos"</string>
+    <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Usluge glasovnog unosa"</string>
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Cela aktuelna reč i interakcija"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Jednostavno pretvaranje govora u tekst"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Ova usluga za glasovni unos će biti u mogućnosti da obavlja uvijek uključeno praćenje glasa i da u vaše ime kontrolira aplikacije omogućene glasom. Ona dolazi iz <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g> aplikacija. Omogućiti korištenje ove usluge?"</string>
@@ -3968,7 +3972,7 @@
       <item quantity="other">%d aplikacija može čitati obavještenja</item>
     </plurals>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Poboljšana obavještenja"</string>
-    <string name="notification_assistant_summary" msgid="1957783114840908887">"Primajte preporučene radnje, odgovore i još mnogo toga"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"Primajte preporučene radnje, odgovore i drugo"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Nema"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Nijedna instalirana aplikacija nije zatražila pristup obavještenjima."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Dozvoli pristup obavještenjima"</string>
@@ -4003,7 +4007,7 @@
     <string name="display_vr_pref_off" msgid="4008841566387432721">"Smanjenje treperenja"</string>
     <string name="picture_in_picture_title" msgid="9001594281840542493">"Slika u slici"</string>
     <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"Nijedna instalirana aplikacija ne podržava način rada slike u slici"</string>
-    <string name="picture_in_picture_keywords" msgid="3605379820551656253">"sus slika u"</string>
+    <string name="picture_in_picture_keywords" msgid="3605379820551656253">"slika u slici"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Slika u slici"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Dozvoli način rada slike u slici"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Dozvolite aplikaciji da kreira prozor sa slikom u slici dok je aplikacija otvorena ili nakon što je napustite (naprimjer, da nastavite gledati videozapis). Ovaj prozor se prikazuje preko drugih aplikacija koje koristite."</string>
@@ -4847,7 +4851,7 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Privremeno uključeno zbog Uštede baterije"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Podržane aplikacije će se također prebaciti na tamnu temu"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Razumijem"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Isprobajte Tamnu temu"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Isprobajte tamnu temu"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Pomaže da se produži vijek trajanja baterije"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Pločice programera za brze postavke"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Onemogući istek vremena za adb ovlaštenje"</string>
@@ -5320,7 +5324,7 @@
     <string name="carrier_settings_euicc" msgid="1541279297111378907">"Operater"</string>
     <string name="carrier_settings_version" msgid="3364919669057317776">"Verzija postavki mobilnog operatera"</string>
     <string name="call_category" msgid="641461844504128789">"Pozivanje"</string>
-    <string name="video_calling_settings_title" msgid="5490466306783552190">"Operater video pozivanja"</string>
+    <string name="video_calling_settings_title" msgid="5490466306783552190">"Video pozivi putem mobilnog operatera"</string>
     <string name="cdma_system_select_title" msgid="8261408056382123386">"Odabir sistema"</string>
     <string name="cdma_system_select_summary" msgid="384128007068464145">"Promijenite način rada CDMA rominga"</string>
     <string name="cdma_system_select_dialogtitle" msgid="6143586810486936984">"Odabir sistema"</string>
@@ -5528,7 +5532,7 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Isključeno"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIM-ovi"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"Pronađite WiFi mreže i povežite se s njima"</string>
+    <string name="wifi_switch_summary" msgid="3577154777754849024">"Pronađite WiFi mreže i povežite se"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"avion, sigurno za rad u avionu"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Pozivi i SMS"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"Pozivanje putem WiFi-ja"</string>
@@ -5593,7 +5597,7 @@
     <string name="category_name_display_controls" msgid="7046581691184725216">"Ostale kontrole ekrana"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Ostalo"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Opće"</string>
-    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Koristi Tamnu temu"</string>
+    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Koristi tamnu temu"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Koristi Bluetooth"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Koristi sprečavanje zvonjenja"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Koristi WiFi pristupnu tačku"</string>

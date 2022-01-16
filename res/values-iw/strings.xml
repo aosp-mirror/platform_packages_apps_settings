@@ -861,6 +861,7 @@
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"ייתכן שתצטרך להקליד את קוד הגישה הזה גם במכשיר השני."</string>
     <string name="bluetooth_enter_passkey_other_device" msgid="8270426446247344709">"ייתכן שתצטרך להקליד את המפתח הזה גם במכשיר השני."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="327192310468680072">"‏כדי להתאים עם:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;ודא שהמכשיר מציג סיסמה זו:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"עליך לאשר התאמה עם הקבוצה המתואמת"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"‏מאת:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;לבצע התאמה עם מכשיר זה?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"‏כדי להתאים עם:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>יש הקלד בו:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, ולאחר מכן להקיש על Return או Enter."</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"אישור גישה אל אנשי הקשר והיסטוריית השיחות"</string>
@@ -894,6 +895,7 @@
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"לא ניתן להתחבר. יש לנסות שוב."</string>
     <string name="device_details_title" msgid="1155622417516195481">"פרטי המכשיר"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"‏כתובת המכשיר לחיבור דרך Bluetooth‏: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"‏כתובת המכשיר לחיבור דרך Bluetooth:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"לשכוח את המכשיר?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"הסרת השיוך"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"האם לנתק את האפליקציה?"</string>
@@ -926,6 +928,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="6993526033095292609">"לא לשכוח הגדרות"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"‏מקסימום התקני אודיו המחוברים באמצעות Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"‏בחירת מספר מקסימלי של התקני אודיו המחוברים באמצעות Bluetooth"</string>
+    <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"‏יומן ניפוי באגים של מקבץ NFC"</string>
+    <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"‏העלאת רמת הרישום של מקבץ NFC ביומן"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"‏העברה (cast)"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"‏העברה (csat)"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"‏הפעלת תצוגת WiFi"</string>
@@ -1933,7 +1937,7 @@
     <string name="about_settings" product="tablet" msgid="2888705054709289693">"מידע על הטאבלט"</string>
     <string name="about_settings" product="default" msgid="4038626127378127613">"מידע על הטלפון"</string>
     <string name="about_settings" product="device" msgid="9012888717090302815">"מידע על המכשיר"</string>
-    <string name="about_settings" product="emulator" msgid="2516560858771320366">"מידע על מכשיר במדמה"</string>
+    <string name="about_settings" product="emulator" msgid="2516560858771320366">"מידע על מכשיר בגרסת האמולטור"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"הצגת מידע משפטי, סטטוס, גרסת תוכנה"</string>
     <string name="legal_information" msgid="7509900979811934843">"מידע משפטי"</string>
     <string name="contributors_title" msgid="7965640251547037965">"תורמים"</string>
@@ -2061,7 +2065,7 @@
     <string name="manageapplications_settings_summary" msgid="848586372489062357">"ניהול והסרה של אפליקציות מותקנות"</string>
     <string name="applications_settings" msgid="1941993743933425622">"פרטי אפליקציות"</string>
     <string name="applications_settings_summary" msgid="8206066893744768531">"ניהול אפליקציות, הגדרת קיצורי דרך להפעלה מהירה"</string>
-    <string name="applications_settings_header" msgid="3154670675856048015">"הגדרות אפליקציה"</string>
+    <string name="applications_settings_header" msgid="3154670675856048015">"הגדרות של אפליקציות"</string>
     <string name="install_applications" msgid="3921609656584369901">"מקורות לא ידועים"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"אפליקציות ממקורות שונים"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"אפליקציות שפתחת לאחרונה"</string>
@@ -2732,9 +2736,9 @@
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"שימוש מוגבר בסוללה"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"הצגת האפליקציות המובילות במידת השימוש בסוללה"</string>
     <string name="battery_tip_limited_temporarily_title" msgid="5231061779363606924">"הטעינה מוגבלת זמנית"</string>
-    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"לשמירה על חיי הסוללה. מידע נוסף."</string>
+    <string name="battery_tip_limited_temporarily_summary" msgid="8504402301403419444">"כדי לשמור על תקינות הסוללה. מידע נוסף."</string>
     <string name="battery_tip_limited_temporarily_dialog_resume_charge" msgid="2302295458913832342">"המשך הטעינה"</string>
-    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"במצבים מסוימים, כמו טמפרטורה גבוהה וטעינה במשך הרבה זמן, יכול להיות שתהיה הגבלה של <xliff:g id="PERCENT">%1$s</xliff:g> על הטעינה כדי לשמור על תקינות הסוללה.\n\nכשמצבים כאלה מסתיימים, טעינת הטלפון תחזור למצב הרגיל באופן אוטומטי."</string>
+    <string name="battery_tip_limited_temporarily_dialog_msg" product="default" msgid="8125639486214812735">"בתנאים מסוימים, למשל בטמפרטורה גבוהה או כשטעינה נמשכת הרבה זמן, יכול להיות שהיא תוגבל ל-<xliff:g id="PERCENT">%1$s</xliff:g> כדי לשמור על תקינות הסוללה.\n\nכשהתנאים ישתנו בחזרה, הטלפון יחזור להיטען כרגיל באופן אוטומטי."</string>
     <string name="battery_tip_limited_temporarily_dialog_msg" product="tablet" msgid="3890877885222574553">"במצבים מסוימים, כמו טמפרטורה גבוהה וטעינה במשך הרבה זמן, יכול להיות שתהיה הגבלה של <xliff:g id="PERCENT">%1$s</xliff:g> על הטעינה כדי לשמור על תקינות הסוללה.\n\nכשמצבים כאלה מסתיימים, טעינת הטאבלט תחזור למצב הרגיל באופן אוטומטי."</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4592387206991500075">"נעשה שימוש רב מהרגיל בטלפון שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="111303605119856034">"נעשה שימוש רב מהרגיל בטאבלט שלך. לכן, ייתכן שהסוללה תתרוקן מוקדם מהצפוי.\n\nהאפליקציות המובילות בצריכת סוללה:"</string>
@@ -3460,7 +3464,7 @@
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"הבנתי"</string>
     <string name="nfc_more_title" msgid="1041094244767216498">"עוד…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"הגדרה של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
-    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"עדכון של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"עדכון אפליקציית התשלום הראשית"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"במסוף תשלום ללא מגע, יש לשלם באמצעות <xliff:g id="APP">%1$s</xliff:g>"</string>
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"במסוף ללא מגע, יש לשלם באמצעות <xliff:g id="APP_0">%1$s</xliff:g>.\n\nהאפליקציה הזו מחליפה את <xliff:g id="APP_1">%2$s</xliff:g> כאפליקציית התשלומים שתשמש כברירת מחדל."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"הגדרה כברירת מחדל"</string>
@@ -3934,7 +3938,7 @@
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"איך להציג התראות פרופיל כשהמכשיר נעול?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"התראות פרופיל"</string>
     <string name="notifications_title" msgid="4221655533193721131">"התראות"</string>
-    <string name="app_notifications_title" msgid="248374669037385148">"התראות מאפליקציות"</string>
+    <string name="app_notifications_title" msgid="248374669037385148">"התראות מהאפליקציה"</string>
     <string name="notification_channel_title" msgid="8859880871692797611">"קטגוריית התראות"</string>
     <string name="notification_group_title" msgid="7525666535695631538">"קבוצת קטגוריות של התראות"</string>
     <string name="notification_importance_title" msgid="1545158655988342703">"התנהגות"</string>
@@ -5619,7 +5623,7 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"התכונה כבויה"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"אינטרנט"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"‏כרטיסי SIM"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"‏איתור של רשתות Wi-Fi וחיבור אליהן"</string>
+    <string name="wifi_switch_summary" msgid="3577154777754849024">"‏איתור רשתות Wi-Fi והתחברות אליהן"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"טיסה, בטוח לטיסה"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"‏שיחות והודעות SMS"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"‏שיחות Wi-Fi"</string>
