@@ -232,6 +232,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void onBindSlice_mainThread_shouldNotOverrideStrictMode() {
         ShadowThreadUtils.setIsMainThread(true);
         final StrictMode.ThreadPolicy oldThreadPolicy = StrictMode.getThreadPolicy();
@@ -245,6 +246,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     @Config(shadows = ShadowStrictMode.class)
     public void onBindSlice_backgroundThread_shouldOverrideStrictMode() {
         ShadowThreadUtils.setIsMainThread(false);
@@ -275,6 +277,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void onBindSlice_nightModeChanged_shouldReloadTheme() {
         mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
         final SliceData data = getMockData();
@@ -288,6 +291,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void onBindSlice_nightModeNotChanged_shouldNotReloadTheme() {
         mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
         SliceData data = getMockData();
