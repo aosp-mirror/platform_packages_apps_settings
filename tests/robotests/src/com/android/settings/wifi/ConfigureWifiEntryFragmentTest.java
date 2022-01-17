@@ -27,6 +27,7 @@ import android.os.Bundle;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -35,6 +36,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class ConfigureWifiEntryFragmentTest {
 
     private static final String KEY_SSID = "key_ssid";

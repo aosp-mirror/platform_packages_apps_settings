@@ -119,6 +119,7 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
+    @Ignore
     public void createPreferenceControllers_notEmpty() {
         assertThat(WifiTetherSettings.SEARCH_INDEX_DATA_PROVIDER.getPreferenceControllers(mContext))
                 .isNotEmpty();
@@ -151,6 +152,7 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
+    @Ignore
     public void createPreferenceControllers_hasAutoOffPreference() {
         assertThat(mWifiTetherSettings.createPreferenceControllers(mContext)
                 .stream()
