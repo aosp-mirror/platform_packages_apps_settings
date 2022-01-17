@@ -730,6 +730,12 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
+    <style name="AccessibilityTextReadingPreviewTitle"
+        parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title" >
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:padding">6dp</item>
+    </style>
+
     <style name="Widget.PopupWindow.Settings"
            parent="@android:style/Widget.DeviceDefault.PopupWindow">
         <item name="android:clipToPadding">true</item>
