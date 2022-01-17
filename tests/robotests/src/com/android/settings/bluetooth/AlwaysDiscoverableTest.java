@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -74,6 +75,7 @@ public class AlwaysDiscoverableTest {
     }
 
     @Test
+    @Ignore
     public void startSetsModeAndRegistersReceiver() {
         mBluetoothAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_NONE);
         mAlwaysDiscoverable.start();
