@@ -32,6 +32,7 @@ import com.android.settings.widget.SwitchBarController;
 import com.android.settings.widget.SwitchWidgetController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -40,6 +41,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class GraphicsDriverGlobalSwitchBarControllerTest {
 
     @Mock
