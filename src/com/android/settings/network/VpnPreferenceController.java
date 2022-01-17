@@ -65,15 +65,11 @@ public class VpnPreferenceController extends AbstractPreferenceController
             .build();
     private static final String TAG = "VpnPreferenceController";
 
-    private final UserManager mUserManager;
     private ConnectivityManager mConnectivityManager;
-    private final VpnManager mVpnManager;
     private Preference mPreference;
 
     public VpnPreferenceController(Context context) {
         super(context);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mVpnManager = context.getSystemService(VpnManager.class);
     }
 
     @Override
@@ -131,18 +127,20 @@ public class VpnPreferenceController extends AbstractPreferenceController
         if (mPreference == null) {
             return;
         }
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        VpnManager vpnManager = mContext.getSystemService(VpnManager.class);
         // Copied from SystemUI::SecurityControllerImpl
         SparseArray<VpnConfig> vpns = new SparseArray<>();
-        final List<UserInfo> users = mUserManager.getUsers();
+        final List<UserInfo> users = userManager.getUsers();
         int connectedLegacyVpnCount = 0;
         for (UserInfo user : users) {
-            VpnConfig cfg = mVpnManager.getVpnConfig(user.id);
+            VpnConfig cfg = vpnManager.getVpnConfig(user.id);
             if (cfg == null) {
                 continue;
             } else if (cfg.legacy) {
                 // Legacy VPNs should do nothing if the network is disconnected. Third-party
                 // VPN warnings need to continue as traffic can still go to the app.
-                final LegacyVpnInfo legacyVpn = mVpnManager.getLegacyVpnInfo(user.id);
+                final LegacyVpnInfo legacyVpn = vpnManager.getLegacyVpnInfo(user.id);
                 if (legacyVpn == null || legacyVpn.state != LegacyVpnInfo.STATE_CONNECTED) {
                     continue;
                 } else {
@@ -152,22 +150,23 @@ public class VpnPreferenceController extends AbstractPreferenceController
             vpns.put(user.id, cfg);
         }
         int numberOfNonLegacyVpn = vpns.size() - connectedLegacyVpnCount;
-        final UserInfo userInfo = mUserManager.getUserInfo(UserHandle.myUserId());
-        final int uid;
-        if (userInfo.isRestricted()) {
-            uid = userInfo.restrictedProfileParentId;
-        } else {
-            uid = userInfo.id;
+        String summary = getInsecureVpnSummaryOverride(numberOfNonLegacyVpn);
+        if (summary == null) {
+            final UserInfo userInfo = userManager.getUserInfo(UserHandle.myUserId());
+            final int uid;
+            if (userInfo.isRestricted()) {
+                uid = userInfo.restrictedProfileParentId;
+            } else {
+                uid = userInfo.id;
+            }
+            VpnConfig vpn = vpns.get(uid);
+            if (vpn == null) {
+                summary = mContext.getString(R.string.vpn_disconnected_summary);
+            } else {
+                summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
+            }
         }
-        VpnConfig vpn = vpns.get(uid);
-        String summary;
-        if (vpn == null) {
-            summary = mContext.getString(R.string.vpn_disconnected_summary);
-        } else {
-            summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
-        }
-        String summaryOverride = getInsecureVpnSummaryOverride(numberOfNonLegacyVpn);
-        final String finalSummary = (summaryOverride != null) ? summaryOverride : summary;
+        final String finalSummary = summary;
         ThreadUtils.postOnMainThread(() -> mPreference.setSummary(finalSummary));
     }
 
