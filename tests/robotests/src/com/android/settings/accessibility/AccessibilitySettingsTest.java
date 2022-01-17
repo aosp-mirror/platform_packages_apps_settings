@@ -281,10 +281,10 @@ public class AccessibilitySettingsTest {
         verify(mContentResolver).registerContentObserver(
                 eq(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS)),
                 anyBoolean(),
-                any(SettingsContentObserver.class));
+                any(AccessibilitySettingsContentObserver.class));
         verify(mContentResolver).registerContentObserver(eq(Settings.Secure.getUriFor(
                 Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)), anyBoolean(),
-                any(SettingsContentObserver.class));
+                any(AccessibilitySettingsContentObserver.class));
         verify(mActivity, atLeast(1)).registerReceiver(any(PackageMonitor.class), captor.capture(),
                 isNull(), any());
         intentFilter = captor.getAllValues().get(/* first time */ 0);
@@ -301,7 +301,8 @@ public class AccessibilitySettingsTest {
 
         mFragment.onDestroy();
 
-        verify(mContentResolver).unregisterContentObserver(any(SettingsContentObserver.class));
+        verify(mContentResolver).unregisterContentObserver(
+                any(AccessibilitySettingsContentObserver.class));
         verify(mActivity).unregisterReceiver(any(PackageMonitor.class));
 
     }

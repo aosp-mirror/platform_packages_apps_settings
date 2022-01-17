@@ -94,4 +94,15 @@ public class MagnificationFollowTypingPreferenceControllerTest {
         assertThat(mController.isChecked()).isFalse();
         assertThat(mSwitchPreference.isChecked()).isFalse();
     }
+
+    @Test
+    public void updateState_disableFollowTyping_shouldReturnFalse() {
+        Settings.Secure.putInt(mContext.getContentResolver(), KEY_FOLLOW_TYPING, OFF);
+
+        mController.updateState();
+
+        verify(mSwitchPreference).setChecked(false);
+        assertThat(mController.isChecked()).isFalse();
+        assertThat(mSwitchPreference.isChecked()).isFalse();
+    }
 }

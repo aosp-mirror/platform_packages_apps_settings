@@ -20,6 +20,8 @@ import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -27,6 +29,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -75,11 +78,15 @@ public class ToggleFeaturePreferenceFragmentTest {
             Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
 
     private TestToggleFeaturePreferenceFragment mFragment;
-    private PreferenceScreen mScreen;
-    private Context mContext = ApplicationProvider.getApplicationContext();
+    private final Context mContext = ApplicationProvider.getApplicationContext();
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
+
+    @Mock
+    private FragmentActivity mActivity;
+    @Mock
+    private ContentResolver mContentResolver;
 
     @Before
     public void setUpTestFragment() {
@@ -89,9 +96,11 @@ public class ToggleFeaturePreferenceFragmentTest {
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mContext);
-        mScreen = spy(new PreferenceScreen(mContext, null));
-        when(mScreen.getPreferenceManager()).thenReturn(mPreferenceManager);
-        doReturn(mScreen).when(mFragment).getPreferenceScreen();
+        when(mFragment.getActivity()).thenReturn(mActivity);
+        when(mActivity.getContentResolver()).thenReturn(mContentResolver);
+        final PreferenceScreen screen = spy(new PreferenceScreen(mContext, null));
+        when(screen.getPreferenceManager()).thenReturn(mPreferenceManager);
+        doReturn(screen).when(mFragment).getPreferenceScreen();
     }
 
     @Test
@@ -101,6 +110,25 @@ public class ToggleFeaturePreferenceFragmentTest {
 
         // execute exactly once
         verify(mFragment).addPreferencesFromResource(R.xml.placeholder_prefs);
+    }
+
+    @Test
+    @Config(shadows = {ShadowFragment.class})
+    public void onResume_haveRegisterToSpecificUris() {
+        mFragment.onAttach(mContext);
+        mFragment.onCreate(Bundle.EMPTY);
+
+        mFragment.onResume();
+
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
     }
 
     @Test

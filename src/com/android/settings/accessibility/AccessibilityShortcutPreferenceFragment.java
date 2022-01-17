@@ -25,7 +25,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.icu.text.CaseMap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -64,7 +63,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
     protected ShortcutPreference mShortcutPreference;
     private AccessibilityManager.TouchExplorationStateChangeListener
             mTouchExplorationStateChangeListener;
-    private SettingsContentObserver mSettingsContentObserver;
+    private AccessibilitySettingsContentObserver mSettingsContentObserver;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
 
@@ -98,13 +97,11 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         final List<String> shortcutFeatureKeys = new ArrayList<>();
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-        mSettingsContentObserver = new SettingsContentObserver(new Handler(), shortcutFeatureKeys) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                updateShortcutPreferenceData();
-                updateShortcutPreference();
-            }
-        };
+        mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
+        mSettingsContentObserver.registerKeysToObserverCallback(shortcutFeatureKeys, key -> {
+            updateShortcutPreferenceData();
+            updateShortcutPreference();
+        });
     }
 
     @Override

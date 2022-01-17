@@ -25,14 +25,15 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -63,8 +64,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -96,17 +97,22 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     private Context mContext;
     private Resources mResources;
 
+    @Mock
+    private FragmentActivity mActivity;
+    @Mock
+    private ContentResolver mContentResolver;
+
     @Before
     public void setUpTestFragment() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
-        final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         mFragment = spy(new TestToggleScreenMagnificationPreferenceFragment(mContext));
         mResources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(mResources);
         when(mFragment.getContext().getResources()).thenReturn(mResources);
-        doReturn(activity).when(mFragment).getActivity();
+        when(mFragment.getActivity()).thenReturn(mActivity);
+        when(mActivity.getContentResolver()).thenReturn(mContentResolver);
     }
 
     @Ignore("Ignore it since a NPE is happened in ShadowWindowManagerGlobal. (Ref. b/214161063)")
@@ -140,6 +146,30 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         assertThat(switchPreference).isNotNull();
         assertThat(switchPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    @Config(shadows = {ShadowFragment.class})
+    public void onResume_haveRegisterToSpecificUris() {
+        mFragment.onAttach(mContext);
+        mFragment.onCreate(Bundle.EMPTY);
+
+        mFragment.onResume();
+
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
+        verify(mContentResolver).registerContentObserver(
+                eq(Settings.Secure.getUriFor(
+                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED)),
+                eq(false),
+                any(AccessibilitySettingsContentObserver.class));
     }
 
     @Test
