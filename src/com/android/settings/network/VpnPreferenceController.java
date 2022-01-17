@@ -129,6 +129,35 @@ public class VpnPreferenceController extends AbstractPreferenceController
         }
         UserManager userManager = mContext.getSystemService(UserManager.class);
         VpnManager vpnManager = mContext.getSystemService(VpnManager.class);
+        String summary = getInsecureVpnSummaryOverride(userManager, vpnManager);
+        if (summary == null) {
+            final UserInfo userInfo = userManager.getUserInfo(UserHandle.myUserId());
+            final int uid;
+            if (userInfo.isRestricted()) {
+                uid = userInfo.restrictedProfileParentId;
+            } else {
+                uid = userInfo.id;
+            }
+            VpnConfig vpn = vpnManager.getVpnConfig(uid);
+            if ((vpn != null) && vpn.legacy) {
+                // Legacy VPNs should do nothing if the network is disconnected. Third-party
+                // VPN warnings need to continue as traffic can still go to the app.
+                final LegacyVpnInfo legacyVpn = vpnManager.getLegacyVpnInfo(uid);
+                if (legacyVpn == null || legacyVpn.state != LegacyVpnInfo.STATE_CONNECTED) {
+                    vpn = null;
+                }
+            }
+            if (vpn == null) {
+                summary = mContext.getString(R.string.vpn_disconnected_summary);
+            } else {
+                summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
+            }
+        }
+        final String finalSummary = summary;
+        ThreadUtils.postOnMainThread(() -> mPreference.setSummary(finalSummary));
+    }
+
+    protected int getNumberOfNonLegacyVpn(UserManager userManager, VpnManager vpnManager) {
         // Copied from SystemUI::SecurityControllerImpl
         SparseArray<VpnConfig> vpns = new SparseArray<>();
         final List<UserInfo> users = userManager.getUsers();
@@ -149,38 +178,22 @@ public class VpnPreferenceController extends AbstractPreferenceController
             }
             vpns.put(user.id, cfg);
         }
-        int numberOfNonLegacyVpn = vpns.size() - connectedLegacyVpnCount;
-        String summary = getInsecureVpnSummaryOverride(numberOfNonLegacyVpn);
-        if (summary == null) {
-            final UserInfo userInfo = userManager.getUserInfo(UserHandle.myUserId());
-            final int uid;
-            if (userInfo.isRestricted()) {
-                uid = userInfo.restrictedProfileParentId;
-            } else {
-                uid = userInfo.id;
-            }
-            VpnConfig vpn = vpns.get(uid);
-            if (vpn == null) {
-                summary = mContext.getString(R.string.vpn_disconnected_summary);
-            } else {
-                summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
-            }
-        }
-        final String finalSummary = summary;
-        ThreadUtils.postOnMainThread(() -> mPreference.setSummary(finalSummary));
+        return vpns.size() - connectedLegacyVpnCount;
     }
 
-    protected String getInsecureVpnSummaryOverride(int numberOfNonLegacyVpn) {
+    protected String getInsecureVpnSummaryOverride(UserManager userManager,
+            VpnManager vpnManager) {
         // Optionally add warning icon if an insecure VPN is present.
         if (mPreference instanceof VpnInfoPreference) {
             final int insecureVpnCount = getInsecureVpnCount();
             boolean isInsecureVPN = insecureVpnCount > 0;
             ((VpnInfoPreference) mPreference).setInsecureVpn(isInsecureVPN);
+
             // Set the summary based on the total number of VPNs and insecure VPNs.
             if (isInsecureVPN) {
                 // Add the users and the number of legacy vpns to determine if there is more than
                 // one vpn, since there can be more than one VPN per user.
-                final int vpnCount = numberOfNonLegacyVpn
+                final int vpnCount = getNumberOfNonLegacyVpn(userManager, vpnManager)
                         + LegacyVpnProfileStore.list(Credentials.VPN).length;
                 if (vpnCount == 1) {
                     return mContext.getString(R.string.vpn_settings_insecure_single);
