@@ -39,7 +39,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceScreen;
@@ -124,6 +123,7 @@ public class MobileNetworkSummaryControllerTest {
 
 
     @Test
+    @Ignore
     public void getSummary_noSubscriptions_correctSummaryAndClickHandler() {
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
@@ -212,6 +212,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void getSummary_providerModel_Enabled() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
@@ -318,6 +319,7 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
+    @Ignore
     public void onAirplaneModeChanged_oneSubscriptionAirplaneModeGetsTurnedOn_isDisabled() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));

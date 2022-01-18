@@ -46,6 +46,7 @@ import com.android.settings.homepage.contextualcards.ControllerRendererPool;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -55,6 +56,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class SliceContextualCardRendererTest {
 
     private static final Uri TEST_SLICE_URI = Uri.parse("content://test/test");
