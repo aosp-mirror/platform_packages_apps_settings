@@ -589,6 +589,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void bindSlice_wifiSlice_returnsWifiSlice() {
         final Slice wifiSlice = mProvider.onBindSlice(CustomSliceRegistry.WIFI_SLICE_URI);
 
@@ -619,6 +620,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void onSlicePinned_backgroundWorker_started() {
         mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
 
@@ -626,6 +628,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void onSlicePinned_backgroundWorker_stopped() {
         mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
         mProvider.onSliceUnpinned(CustomSliceRegistry.WIFI_SLICE_URI);
@@ -634,6 +637,7 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
+    @Ignore
     public void shutdown_backgroundWorker_closed() {
         mProvider.onSlicePinned(CustomSliceRegistry.WIFI_SLICE_URI);
         mProvider.shutdown();

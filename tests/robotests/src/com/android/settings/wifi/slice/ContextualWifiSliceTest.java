@@ -45,6 +45,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -54,6 +55,7 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 @Config(shadows = ShadowConnectivityManager.class)
 public class ContextualWifiSliceTest {
 

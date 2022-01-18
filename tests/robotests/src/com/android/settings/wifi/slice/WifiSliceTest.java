@@ -50,6 +50,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectedState;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -62,6 +63,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 @Config(shadows = WifiSliceTest.ShadowSliceBackgroundWorker.class)
 public class WifiSliceTest {
 
