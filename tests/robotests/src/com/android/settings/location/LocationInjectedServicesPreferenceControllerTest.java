@@ -43,6 +43,7 @@ import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -97,6 +98,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void onResume_shouldRegisterListener() {
         mController.onResume();
 
@@ -105,6 +107,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void onPause_shouldUnregisterListener() {
         mController.onResume();
         mController.onPause();
