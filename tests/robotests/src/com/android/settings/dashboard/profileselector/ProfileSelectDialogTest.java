@@ -34,6 +34,7 @@ import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -41,6 +42,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class ProfileSelectDialogTest {
 
     private static final UserHandle NORMAL_USER = UserHandle.of(1111);
