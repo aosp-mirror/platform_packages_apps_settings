@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.os.Vibrator;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -70,11 +71,20 @@ public abstract class VibrationIntensityPreferenceController extends SliderPrefe
         super.displayPreference(screen);
         final SeekBarPreference preference = screen.findPreference(getPreferenceKey());
         mSettingsContentObserver.onDisplayPreference(this, preference);
-        // TODO: remove this and replace with a different way to play the haptic preview without
-        // relying on the setting being propagated to the service.
+        preference.setEnabled(mPreferenceConfig.isPreferenceEnabled());
+        // TODO: remove setContinuousUpdates and replace with a different way to play the haptic
+        // preview without relying on the setting being propagated to the service.
         preference.setContinuousUpdates(true);
         preference.setMin(getMin());
         preference.setMax(getMax());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference != null) {
+            preference.setEnabled(mPreferenceConfig.isPreferenceEnabled());
+        }
     }
 
     @Override
@@ -89,12 +99,19 @@ public abstract class VibrationIntensityPreferenceController extends SliderPrefe
 
     @Override
     public int getSliderPosition() {
+        if (!mPreferenceConfig.isPreferenceEnabled()) {
+            return getMin();
+        }
         final int position = mPreferenceConfig.readIntensity();
         return Math.min(position, getMax());
     }
 
     @Override
     public boolean setSliderPosition(int position) {
+        if (!mPreferenceConfig.isPreferenceEnabled()) {
+            // Ignore slider updates when the preference is disabled.
+            return false;
+        }
         final int intensity = calculateVibrationIntensity(position);
         final boolean success = mPreferenceConfig.updateIntensity(intensity);
 
