@@ -88,6 +88,7 @@ public class ResetNetworkConfirmTest {
      * Test for WifiP2pManager factoryReset method.
      */
     @Test
+    @Ignore
     public void testResetNetworkData_resetP2p() {
         mResetNetworkConfirm.p2pFactoryReset(mActivity);
 

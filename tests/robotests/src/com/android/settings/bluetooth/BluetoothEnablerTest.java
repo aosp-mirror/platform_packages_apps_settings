@@ -47,6 +47,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -205,6 +206,7 @@ public class BluetoothEnablerTest {
     }
 
     @Test
+    @Ignore
     public void bluetoothTurnsOff_switchTurnsOff() {
         // Start up with bluetooth turned on. The switch should get turned on.
         ArgumentCaptor<BroadcastReceiver> captor = ArgumentCaptor.forClass(BroadcastReceiver.class);
@@ -229,6 +231,7 @@ public class BluetoothEnablerTest {
     }
 
     @Test
+    @Ignore
     public void bluetoothTurnsOn_switchTurnsOn() {
         // Start up with bluetooth turned on. The switch should be left off.
         ArgumentCaptor<BroadcastReceiver> captor = ArgumentCaptor.forClass(BroadcastReceiver.class);

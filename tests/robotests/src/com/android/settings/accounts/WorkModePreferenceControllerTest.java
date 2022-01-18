@@ -32,6 +32,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -105,6 +106,7 @@ public class WorkModePreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void onStart_shouldRegisterReceiver() {
         mController.onStart();
         verify(mContext).registerReceiver(eq(mController.mReceiver), any());
