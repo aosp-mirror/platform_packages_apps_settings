@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -75,13 +74,13 @@ public class AlwaysDiscoverableTest {
     }
 
     @Test
-    @Ignore
     public void startSetsModeAndRegistersReceiver() {
         mBluetoothAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_NONE);
         mAlwaysDiscoverable.start();
         assertThat(mBluetoothAdapter.getScanMode())
                 .isEqualTo(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
-        verify(mContext).registerReceiver(eq(mAlwaysDiscoverable), any());
+        verify(mContext).registerReceiver(eq(mAlwaysDiscoverable), any(),
+                eq(Context.RECEIVER_EXPORTED_UNAUDITED));
     }
 
     @Test
