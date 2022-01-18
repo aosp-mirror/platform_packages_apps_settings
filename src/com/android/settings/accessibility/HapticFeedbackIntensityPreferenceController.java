@@ -74,6 +74,12 @@ public class HapticFeedbackIntensityPreferenceController
         super(context, preferenceKey, new HapticFeedbackVibrationPreferenceConfig(context));
     }
 
+    protected HapticFeedbackIntensityPreferenceController(Context context, String preferenceKey,
+            int supportedIntensityLevels) {
+        super(context, preferenceKey, new HapticFeedbackVibrationPreferenceConfig(context),
+                supportedIntensityLevels);
+    }
+
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;

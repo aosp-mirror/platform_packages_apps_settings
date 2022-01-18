@@ -41,9 +41,9 @@ public class VibrationSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        final boolean supportsMultipleIntensities = getContext().getResources().getBoolean(
-                R.bool.config_vibration_supports_multiple_intensities);
-        return supportsMultipleIntensities
+        final int supportedIntensities = getContext().getResources().getInteger(
+                R.integer.config_vibration_supported_intensity_levels);
+        return supportedIntensities > 1
                 ? R.xml.accessibility_vibration_intensity_settings
                 : R.xml.accessibility_vibration_settings;
     }
