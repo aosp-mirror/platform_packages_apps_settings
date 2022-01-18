@@ -69,7 +69,7 @@ public class ActionDisabledByAdminDialogHelperTest {
             new ComponentName("some.package.name", "some.package.name.SomeClass");
     private static final int USER_ID = 123;
     private static final EnforcedAdmin ENFORCED_ADMIN =
-            new EnforcedAdmin(ADMIN_COMPONENT, UserHandle.of(USER_ID));
+            new EnforcedAdmin(ADMIN_COMPONENT, new UserHandle(USER_ID));
     private ActionDisabledByAdminDialogHelper mHelper;
     private Activity mActivity;
     private org.robolectric.shadows.ShadowActivity mActivityShadow;
