@@ -35,6 +35,8 @@ import android.telephony.TelephonyManager;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.network.CarrierConfigCache;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +48,7 @@ public final class Enable2gPreferenceControllerTest {
     private static final int SUB_ID = 2;
 
     @Mock
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -63,16 +65,15 @@ public final class Enable2gPreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mContext.getSystemService(CarrierConfigManager.class))
-              .thenReturn(mCarrierConfigManager);
+        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
 
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         mPersistableBundle = new PersistableBundle();
-        doReturn(mPersistableBundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
-        doReturn(mPersistableBundle).when(mCarrierConfigManager).getConfigForSubId(
+        doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfigForSubId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mController = new Enable2gPreferenceController(mContext, "mobile_data");
         mController.init(SUB_ID);
@@ -99,7 +100,7 @@ public final class Enable2gPreferenceControllerTest {
                 mTelephonyManager.CAPABILITY_USES_ALLOWED_NETWORK_TYPES_BITMASK);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G,
                 false);
-        doReturn(null).when(mCarrierConfigManager);
+        doReturn(null).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }

@@ -49,6 +49,7 @@ import com.android.settings.wifi.tether.WifiTetherSecurityPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -177,6 +178,7 @@ public class AllInOneTetherSettingsTest {
     }
 
     @Test
+    @Ignore
     public void createPreferenceControllers_hasAutoOffPreference() {
         assertThat(mAllInOneTetherSettings.createPreferenceControllers(mContext)
                 .stream()

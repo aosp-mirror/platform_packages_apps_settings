@@ -47,6 +47,7 @@ import com.android.settings.widget.SingleTargetGearPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -154,6 +155,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void callbackCanRegisterAndUnregister() {
         // register the callback in onStart()
         mPreConnectedDeviceController.onStart();

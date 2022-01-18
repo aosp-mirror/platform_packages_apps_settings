@@ -27,6 +27,7 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -45,7 +46,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     private SubscriptionManager mSubscriptionManager;
     private TelephonyManager mTelephonyManager;
 
@@ -57,7 +58,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
      */
     public Enable2gPreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
     }
@@ -81,7 +82,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         if (preference == null || !SubscriptionManager.isUsableSubscriptionId(mSubId)) {
             return;
         }
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
         boolean isDisabledByCarrier =
                 carrierConfig != null
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENABLE_2G);
@@ -107,7 +108,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         if (mTelephonyManager == null) {
             Log.w(LOG_TAG, "Telephony manager not yet initialized");
             mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
