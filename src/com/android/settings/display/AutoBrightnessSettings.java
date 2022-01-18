@@ -16,12 +16,18 @@
 
 package com.android.settings.display;
 
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.provider.Settings;
 
+import com.android.settings.display.AutoBrightnessObserver;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -29,9 +35,33 @@ public class AutoBrightnessSettings extends DashboardFragment {
 
     private static final String TAG = "AutoBrightnessSettings";
 
+    private AutoBrightnessObserver mAutoBrightnessObserver;
+
+    private final Runnable mCallback = () -> {
+        final int value = Settings.System.getInt(
+                getContext().getContentResolver(),
+                SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+        SettingsMainSwitchPreference pref = findPreference("auto_brightness");
+        if (pref == null) return;
+        pref.setChecked(value == SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+    };
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mAutoBrightnessObserver = new AutoBrightnessObserver(getContext());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAutoBrightnessObserver.subscribe(mCallback);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAutoBrightnessObserver.unsubscribe();
     }
 
     @Override
