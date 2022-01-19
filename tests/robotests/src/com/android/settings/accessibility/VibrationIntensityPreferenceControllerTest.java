@@ -38,14 +38,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
-/** Tests for {@link VibrationIntensityPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
 public class VibrationIntensityPreferenceControllerTest {
 
     private static final String SETTING_KEY = Settings.System.NOTIFICATION_VIBRATION_INTENSITY;
     private static final int VIBRATION_USAGE = VibrationAttributes.USAGE_NOTIFICATION;
-    private static final int OFF = 0;
-    private static final int ON = 1;
 
     /** Basic implementation of preference controller to test generic behavior. */
     private static class TestPreferenceController extends VibrationIntensityPreferenceController {
@@ -80,31 +77,10 @@ public class VibrationIntensityPreferenceControllerTest {
     @Test
     public void missingSetting_shouldReturnDefault() {
         VibrationIntensityPreferenceController controller = createPreferenceController(3);
-        Settings.System.putString(mContext.getContentResolver(), SETTING_KEY, /* value= */ null);
+        Settings.System.putString(mContext.getContentResolver(), SETTING_KEY, null);
         controller.updateState(mPreference);
         assertThat(mPreference.getProgress())
                 .isEqualTo(mVibrator.getDefaultVibrationIntensity(VIBRATION_USAGE));
-    }
-
-    @Test
-    public void updateState_mainSwitchUpdates_shouldPreserveSettingBetweenUpdates() {
-        VibrationIntensityPreferenceController controller = createPreferenceController(3);
-        updateSetting(SETTING_KEY, Vibrator.VIBRATION_INTENSITY_LOW);
-
-        updateSetting(VibrationPreferenceConfig.MAIN_SWITCH_SETTING_KEY, ON);
-        controller.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(mPreference.isEnabled()).isTrue();
-
-        updateSetting(VibrationPreferenceConfig.MAIN_SWITCH_SETTING_KEY, OFF);
-        controller.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-        assertThat(mPreference.isEnabled()).isFalse();
-
-        updateSetting(VibrationPreferenceConfig.MAIN_SWITCH_SETTING_KEY, ON);
-        controller.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(mPreference.isEnabled()).isTrue();
     }
 
     @Test
@@ -170,21 +146,6 @@ public class VibrationIntensityPreferenceControllerTest {
         assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
     }
 
-    @Test
-    public void setProgress_mainSwitchDisabled_ignoresUpdates() throws Exception {
-        VibrationIntensityPreferenceController controller = createPreferenceController(3);
-        updateSetting(SETTING_KEY, Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-
-        updateSetting(VibrationPreferenceConfig.MAIN_SWITCH_SETTING_KEY, OFF);
-        controller.updateState(mPreference);
-        controller.setSliderPosition(Vibrator.VIBRATION_INTENSITY_HIGH);
-
-        assertThat(readSetting(SETTING_KEY)).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-        assertThat(mPreference.isEnabled()).isFalse();
-
-    }
     @Test
     public void setProgress_allSupportedPositions_updatesIntensitySetting() throws Exception {
         VibrationIntensityPreferenceController controller = createPreferenceController(3);
