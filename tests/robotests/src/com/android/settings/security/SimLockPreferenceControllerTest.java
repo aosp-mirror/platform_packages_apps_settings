@@ -38,7 +38,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -137,12 +136,6 @@ public class SimLockPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.isEnabled()).isTrue();
-    }
-
-    @Test
-    @Ignore
-    public void getPreferenceKey_byDefault_returnsDefaultValue() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("sim_lock_settings");
     }
 
     @Test
