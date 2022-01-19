@@ -46,20 +46,16 @@
         android:textAlignment="viewStart"
         android:textColor="?android:attr/textColorSecondary" />
 
-    <SeekBar
-        android:id="@*android:id/seekbar"
-        android:layout_below="@android:id/summary"
-        android:layout_gravity="center_vertical"
+    <include
+        layout="@layout/icon_discrete_slider"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:paddingStart="0dp"
-        android:paddingEnd="12dp"
-        style="@android:style/Widget.Material.SeekBar.Discrete" />
+        android:layout_height="wrap_content"
+        android:layout_below="@android:id/summary" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@*android:id/seekbar"
+        android:layout_below="@id/seekbar_frame"
         android:orientation="horizontal">
 
         <TextView
