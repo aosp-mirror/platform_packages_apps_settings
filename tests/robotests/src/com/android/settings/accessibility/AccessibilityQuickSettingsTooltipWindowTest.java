@@ -22,6 +22,7 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.PopupWindow;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -53,52 +54,68 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
 
     private static final String TEST_PACKAGE_NAME = "com.test.package";
     private final Context mContext = ApplicationProvider.getApplicationContext();
-    private AccessibilityQuickSettingsTooltipWindow mToolTipView;
+    private AccessibilityQuickSettingsTooltipWindow mTooltipView;
     private View mView;
 
     @Before
     public void setUp() {
-        mToolTipView = new AccessibilityQuickSettingsTooltipWindow(mContext);
+        mTooltipView = new AccessibilityQuickSettingsTooltipWindow(mContext);
         mView = new View(RuntimeEnvironment.application);
     }
 
     @Test
-    public void initToolTipView_atMostAvailableTextWidth() {
+    public void initTooltipView_atMostAvailableTextWidth() {
         final String quickSettingsTooltipsContent = mContext.getString(
                 R.string.accessibility_service_quick_settings_tooltips_content, TEST_PACKAGE_NAME);
-        mToolTipView.setup(quickSettingsTooltipsContent);
+        mTooltipView.setup(quickSettingsTooltipsContent);
 
-        final int getMaxWidth = mToolTipView.getAvailableWindowWidth();
-        assertThat(mToolTipView.getWidth()).isAtMost(getMaxWidth);
+        final int getMaxWidth = mTooltipView.getAvailableWindowWidth();
+        assertThat(mTooltipView.getWidth()).isAtMost(getMaxWidth);
     }
 
     @Test
-    public void showToolTipView_success() {
-        mToolTipView.setup(TEST_PACKAGE_NAME);
+    public void showTooltipView_success() {
+        mTooltipView.setup(TEST_PACKAGE_NAME);
         assertThat(getLatestPopupWindow()).isNull();
 
-        mToolTipView.showAtTopCenter(mView);
+        mTooltipView.showAtTopCenter(mView);
 
-        assertThat(getLatestPopupWindow()).isSameInstanceAs(mToolTipView);
+        assertThat(getLatestPopupWindow()).isSameInstanceAs(mTooltipView);
     }
 
     @Test
-    public void dismiss_toolTipViewShown_shouldInvokeCallbackAndNotShowing() {
-        mToolTipView.setup(TEST_PACKAGE_NAME);
-        mToolTipView.setOnDismissListener(mMockOnDismissListener);
-        mToolTipView.showAtTopCenter(mView);
+    public void accessibilityClickActionOnTooltipViewShown_shouldInvokeCallbackAndNotShowing() {
+        mTooltipView.setup(TEST_PACKAGE_NAME);
+        mTooltipView.setOnDismissListener(mMockOnDismissListener);
+        mTooltipView.showAtTopCenter(mView);
 
-        mToolTipView.dismiss();
+        final boolean isActionPerformed =
+                mTooltipView.getContentView().performAccessibilityAction(
+                        AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK.getId(),
+                        /* arguments= */ null);
+
+        assertThat(isActionPerformed).isTrue();
+        verify(mMockOnDismissListener).onDismiss();
+        assertThat(getLatestPopupWindow().isShowing()).isFalse();
+    }
+
+    @Test
+    public void dismiss_tooltipViewShown_shouldInvokeCallbackAndNotShowing() {
+        mTooltipView.setup(TEST_PACKAGE_NAME);
+        mTooltipView.setOnDismissListener(mMockOnDismissListener);
+        mTooltipView.showAtTopCenter(mView);
+
+        mTooltipView.dismiss();
 
         verify(mMockOnDismissListener).onDismiss();
         assertThat(getLatestPopupWindow().isShowing()).isFalse();
     }
 
     @Test
-    public void waitAutoCloseDelayTime_toolTipViewShown_shouldInvokeCallbackAndNotShowing() {
-        mToolTipView.setup(TEST_PACKAGE_NAME, /* closeDelayTimeMillis= */ 1);
-        mToolTipView.setOnDismissListener(mMockOnDismissListener);
-        mToolTipView.showAtTopCenter(mView);
+    public void waitAutoCloseDelayTime_tooltipViewShown_shouldInvokeCallbackAndNotShowing() {
+        mTooltipView.setup(TEST_PACKAGE_NAME, /* closeDelayTimeMillis= */ 1);
+        mTooltipView.setOnDismissListener(mMockOnDismissListener);
+        mTooltipView.showAtTopCenter(mView);
 
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
 
