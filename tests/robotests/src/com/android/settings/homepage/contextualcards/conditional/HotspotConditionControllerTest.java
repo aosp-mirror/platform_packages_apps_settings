@@ -26,6 +26,7 @@ import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -52,6 +53,7 @@ public class HotspotConditionControllerTest {
     }
 
     @Test
+    @Ignore
     public void buildContextualCard_hasWifiAp_shouldHaveWifiApSsid() {
         setupSoftApConfiguration();
 
@@ -61,6 +63,7 @@ public class HotspotConditionControllerTest {
     }
 
     @Test
+    @Ignore
     public void buildContextualCard_noWifiAp_shouldHaveEmptySsid() {
         final ContextualCard card = mController.buildContextualCard();
 

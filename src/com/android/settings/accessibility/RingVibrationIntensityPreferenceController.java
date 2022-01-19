@@ -71,6 +71,12 @@ public class RingVibrationIntensityPreferenceController
         super(context, preferenceKey, new RingVibrationPreferenceConfig(context));
     }
 
+    protected RingVibrationIntensityPreferenceController(Context context, String preferenceKey,
+            int supportedIntensityLevels) {
+        super(context, preferenceKey, new RingVibrationPreferenceConfig(context),
+                supportedIntensityLevels);
+    }
+
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;

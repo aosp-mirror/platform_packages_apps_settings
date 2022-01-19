@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -26,7 +25,6 @@ import android.os.VibrationAttributes;
 import android.os.Vibrator;
 import android.provider.Settings;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -47,10 +45,8 @@ public class NotificationVibrationIntensityPreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "preference_key";
 
-    @Mock
-    private PreferenceScreen mScreen;
+    @Mock private PreferenceScreen mScreen;
 
-    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private Context mContext;
     private Vibrator mVibrator;
@@ -60,17 +56,16 @@ public class NotificationVibrationIntensityPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
-        mContext = spy(ApplicationProvider.getApplicationContext());
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mContext = ApplicationProvider.getApplicationContext();
         mVibrator = mContext.getSystemService(Vibrator.class);
         mController = new NotificationVibrationIntensityPreferenceController(mContext,
-                PREFERENCE_KEY);
+                PREFERENCE_KEY, Vibrator.VIBRATION_INTENSITY_HIGH);
         mLifecycle.addObserver(mController);
         mPreference = new SeekBarPreference(mContext);
         mPreference.setSummary("Test summary");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        showPreference();
+        mController.displayPreference(mScreen);
     }
 
     @Test
@@ -118,19 +113,19 @@ public class NotificationVibrationIntensityPreferenceControllerTest {
     @Test
     @Ignore
     public void setProgress_updatesIntensitySetting() throws Exception {
-        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_OFF);
+        mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_OFF);
         assertThat(readSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
 
-        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_LOW);
+        mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_LOW);
         assertThat(readSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
 
-        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_MEDIUM);
+        mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_MEDIUM);
         assertThat(readSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_MEDIUM);
 
-        mPreference.setProgress(Vibrator.VIBRATION_INTENSITY_HIGH);
+        mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_HIGH);
         assertThat(readSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
     }
@@ -141,9 +136,5 @@ public class NotificationVibrationIntensityPreferenceControllerTest {
 
     private int readSetting(String settingKey) throws Settings.SettingNotFoundException {
         return Settings.System.getInt(mContext.getContentResolver(), settingKey);
-    }
-
-    private void showPreference() {
-        mController.displayPreference(mScreen);
     }
 }

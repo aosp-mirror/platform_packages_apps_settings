@@ -18,32 +18,17 @@ package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
 import android.provider.SearchIndexableResource;
-
-import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-
 import java.util.List;
 
-@RunWith(RobolectricTestRunner.class)
-public abstract class BasePrivacySettingsPreferenceTest {
+public abstract class AbsBasePrivacySettingsPreference {
 
-    protected Context mContext;
-
-    @Before
-    public void setUp() {
-        mContext = ApplicationProvider.getApplicationContext();
-    }
-
-    protected static void verifyEnterpriseSearchIndexableResources(
+    protected void verifyEnterpriseSearchIndexableResources(
             List<SearchIndexableResource> searchIndexableResources) {
         assertThat(searchIndexableResources).isNotEmpty();
         assertThat(searchIndexableResources.size()).isEqualTo(1);
@@ -51,7 +36,7 @@ public abstract class BasePrivacySettingsPreferenceTest {
                 .isEqualTo(R.xml.enterprise_privacy_settings);
     }
 
-    protected static void verifyEnterprisePreferenceControllers(
+    protected void verifyEnterprisePreferenceControllers(
             List<AbstractPreferenceController> controllers) {
         assertThat(controllers).isNotNull();
         assertThat(controllers.size()).isEqualTo(17);
@@ -89,7 +74,7 @@ public abstract class BasePrivacySettingsPreferenceTest {
                 FailedPasswordWipeManagedProfilePreferenceController.class);
     }
 
-    protected static void verifyFinancedSearchIndexableResources(
+    protected void verifyFinancedSearchIndexableResources(
             List<SearchIndexableResource> searchIndexableResources) {
         assertThat(searchIndexableResources).isNotEmpty();
         assertThat(searchIndexableResources.size()).isEqualTo(1);
@@ -97,7 +82,7 @@ public abstract class BasePrivacySettingsPreferenceTest {
                 .isEqualTo(R.xml.financed_privacy_settings);
     }
 
-    protected static void verifyFinancedPreferenceControllers(
+    protected void verifyFinancedPreferenceControllers(
             List<AbstractPreferenceController> controllers) {
         assertThat(controllers).isNotNull();
         assertThat(controllers.size()).isEqualTo(6);

@@ -41,6 +41,7 @@ import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -54,6 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class NetworkRequestDialogActivityTest {
 

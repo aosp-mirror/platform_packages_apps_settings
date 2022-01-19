@@ -21,6 +21,7 @@ import android.os.Vibrator;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -36,13 +37,22 @@ public abstract class VibrationIntensityPreferenceController extends SliderPrefe
 
     protected final VibrationPreferenceConfig mPreferenceConfig;
     private final VibrationPreferenceConfig.SettingObserver mSettingsContentObserver;
+    private final int mMaxIntensity;
 
     protected VibrationIntensityPreferenceController(Context context, String prefkey,
             VibrationPreferenceConfig preferenceConfig) {
+        this(context, prefkey, preferenceConfig,
+                context.getResources().getInteger(
+                        R.integer.config_vibration_supported_intensity_levels));
+    }
+
+    protected VibrationIntensityPreferenceController(Context context, String prefkey,
+            VibrationPreferenceConfig preferenceConfig, int supportedIntensityLevels) {
         super(context, prefkey);
         mPreferenceConfig = preferenceConfig;
         mSettingsContentObserver = new VibrationPreferenceConfig.SettingObserver(
                 preferenceConfig);
+        mMaxIntensity = Math.min(Vibrator.VIBRATION_INTENSITY_HIGH, supportedIntensityLevels);
     }
 
     @Override
@@ -74,7 +84,7 @@ public abstract class VibrationIntensityPreferenceController extends SliderPrefe
 
     @Override
     public int getMax() {
-        return Vibrator.VIBRATION_INTENSITY_HIGH;
+        return mMaxIntensity;
     }
 
     @Override
@@ -85,12 +95,28 @@ public abstract class VibrationIntensityPreferenceController extends SliderPrefe
 
     @Override
     public boolean setSliderPosition(int position) {
-        final boolean success = mPreferenceConfig.updateIntensity(position);
+        final int intensity = calculateVibrationIntensity(position);
+        final boolean success = mPreferenceConfig.updateIntensity(intensity);
 
         if (success && (position != Vibrator.VIBRATION_INTENSITY_OFF)) {
             mPreferenceConfig.playVibrationPreview();
         }
 
         return success;
+    }
+
+    private int calculateVibrationIntensity(int position) {
+        int maxPosition = getMax();
+        if (position >= maxPosition) {
+            if (maxPosition == 1) {
+                // If there is only one intensity available besides OFF, then use the device default
+                // intensity to ensure no scaling will ever happen in the platform.
+                return mPreferenceConfig.getDefaultIntensity();
+            }
+            // If the settings granularity is lower than the platform's then map the max position to
+            // the highest vibration intensity, skipping intermediate values in the scale.
+            return Vibrator.VIBRATION_INTENSITY_HIGH;
+        }
+        return position;
     }
 }

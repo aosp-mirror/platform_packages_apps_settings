@@ -53,6 +53,7 @@ import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -201,6 +202,7 @@ public final class BatteryBackupHelperTest {
     }
 
     @Test
+    @Ignore
     public void backupOptimizationMode_backupOptimizationMode() throws Exception {
         final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);
         createTestingData(PACKAGE_NAME1, PACKAGE_NAME2, PACKAGE_NAME3);
@@ -213,6 +215,7 @@ public final class BatteryBackupHelperTest {
     }
 
     @Test
+    @Ignore
     public void backupOptimizationMode_backupOptimizationModeAndIgnoreSystemApp()
             throws Exception {
         final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);
@@ -229,6 +232,7 @@ public final class BatteryBackupHelperTest {
     }
 
     @Test
+    @Ignore
     public void backupOptimizationMode_backupOptimizationModeAndIgnoreDefaultApp()
             throws Exception {
         final List<String> allowlistedApps = Arrays.asList(PACKAGE_NAME1);

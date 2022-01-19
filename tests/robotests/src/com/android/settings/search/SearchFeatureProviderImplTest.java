@@ -35,6 +35,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -61,6 +62,7 @@ public class SearchFeatureProviderImplTest {
     }
 
     @Test
+    @Ignore
     @Config(shadows = ShadowUtils.class)
     public void initSearchToolbar_hasResolvedInfo_shouldStartCorrectIntent() {
         final Intent searchIntent = new Intent(Settings.ACTION_APP_SEARCH_SETTINGS)

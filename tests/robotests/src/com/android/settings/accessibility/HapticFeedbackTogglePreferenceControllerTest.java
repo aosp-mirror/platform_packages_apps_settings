@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -26,7 +25,6 @@ import android.os.VibrationAttributes;
 import android.os.Vibrator;
 import android.provider.Settings;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
@@ -49,10 +47,8 @@ public class HapticFeedbackTogglePreferenceControllerTest {
     private static final int OFF = 0;
     private static final int ON = 1;
 
-    @Mock
-    private PreferenceScreen mScreen;
+    @Mock private PreferenceScreen mScreen;
 
-    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private Context mContext;
     private Vibrator mVibrator;
@@ -62,16 +58,15 @@ public class HapticFeedbackTogglePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
-        mContext = spy(ApplicationProvider.getApplicationContext());
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mContext = ApplicationProvider.getApplicationContext();
         mVibrator = mContext.getSystemService(Vibrator.class);
         mController = new HapticFeedbackTogglePreferenceController(mContext, PREFERENCE_KEY);
         mLifecycle.addObserver(mController);
         mPreference = new SwitchPreference(mContext);
         mPreference.setSummary("Test summary");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        showPreference();
+        mController.displayPreference(mScreen);
     }
 
     @Test
@@ -116,12 +111,12 @@ public class HapticFeedbackTogglePreferenceControllerTest {
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isFalse();
 
-        mPreference.setChecked(true);
+        mController.setChecked(true);
         assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY))
                 .isEqualTo(mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_TOUCH));
         assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_ENABLED)).isEqualTo(ON);
 
-        mPreference.setChecked(false);
+        mController.setChecked(false);
         assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
         assertThat(readSetting(Settings.System.HAPTIC_FEEDBACK_ENABLED)).isEqualTo(OFF);
@@ -133,9 +128,5 @@ public class HapticFeedbackTogglePreferenceControllerTest {
 
     private int readSetting(String settingKey) throws Settings.SettingNotFoundException {
         return Settings.System.getInt(mContext.getContentResolver(), settingKey);
-    }
-
-    private void showPreference() {
-        mController.displayPreference(mScreen);
     }
 }

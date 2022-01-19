@@ -30,6 +30,7 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -100,6 +101,7 @@ public class UserCapabilitiesTest {
     }
 
     @Test
+    @Ignore
     public void restrictedProfile_enabled() {
         mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED, true);
         mDpm.setDeviceOwner(null);

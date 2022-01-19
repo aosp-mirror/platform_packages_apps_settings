@@ -21,7 +21,6 @@ import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.VibrationAttributes;
 import android.os.Vibrator;
 import android.provider.DeviceConfig;
@@ -37,8 +36,6 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-import com.google.common.annotations.VisibleForTesting;
-
 /**
  * Preference controller for the ramping ringer setting key, controlled via {@link AudioManager}.
  *
@@ -50,9 +47,15 @@ import com.google.common.annotations.VisibleForTesting;
 public class VibrationRampingRingerTogglePreferenceController
         extends TogglePreferenceController implements LifecycleObserver, OnStart, OnStop {
 
-    @VisibleForTesting
-    static final String DEVICE_CONFIG_KEY = "ramping_ringer_enabled";
+    /** Wrapper around static {@link DeviceConfig} accessor for testing. */
+    protected static class DeviceConfigProvider {
+        public boolean isRampingRingerEnabledOnTelephonyConfig() {
+            return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_TELEPHONY,
+                    "ramping_ringer_enabled", false);
+        }
+    }
 
+    private final DeviceConfigProvider mDeviceConfigProvider;
     private final ContentObserver mSettingObserver;
     private final Vibrator mVibrator;
     private final AudioManager mAudioManager;
@@ -60,10 +63,16 @@ public class VibrationRampingRingerTogglePreferenceController
     private Preference mPreference;
 
     public VibrationRampingRingerTogglePreferenceController(Context context, String preferenceKey) {
+        this(context, preferenceKey, new DeviceConfigProvider());
+    }
+
+    protected VibrationRampingRingerTogglePreferenceController(Context context,
+            String preferenceKey, DeviceConfigProvider deviceConfigProvider) {
         super(context, preferenceKey);
+        mDeviceConfigProvider = deviceConfigProvider;
         mVibrator = context.getSystemService(Vibrator.class);
         mAudioManager = context.getSystemService(AudioManager.class);
-        mSettingObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+        mSettingObserver = new ContentObserver(new Handler(/* async= */ true)) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
                 updateState(mPreference);
@@ -74,7 +83,7 @@ public class VibrationRampingRingerTogglePreferenceController
     @Override
     public int getAvailabilityStatus() {
         final boolean rampingRingerEnabledOnTelephonyConfig =
-                DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_TELEPHONY, DEVICE_CONFIG_KEY, false);
+                mDeviceConfigProvider.isRampingRingerEnabledOnTelephonyConfig();
         return (Utils.isVoiceCapable(mContext) && !rampingRingerEnabledOnTelephonyConfig)
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
