@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRINT_UNLOCK_DISABLED;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
@@ -57,6 +59,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
 
+    private DevicePolicyManager mDevicePolicyManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
@@ -67,6 +71,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         }
 
         super.onCreate(savedInstanceState);
+
+        mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
 
         final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
         final ImageView iconDeviceLocked = findViewById(R.id.icon_device_locked);
@@ -177,8 +183,10 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected int getDescriptionResDisabledByAdmin() {
-        return R.string.security_settings_fingerprint_enroll_introduction_message_unlock_disabled;
+    protected String getDescriptionDisabledByAdmin() {
+        return mDevicePolicyManager.getString(
+                FINGERPRINT_UNLOCK_DISABLED,
+                () -> getString(R.string.security_settings_fingerprint_enroll_introduction_message_unlock_disabled));
     }
 
     @Override

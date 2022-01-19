@@ -16,6 +16,7 @@
 
 package com.android.settings.display;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.OTHER_OPTIONS_DISABLED_BY_ADMIN;
 import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
@@ -85,6 +86,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         }
     };
 
+    private DevicePolicyManager mDevicePolicyManager;
+
     @VisibleForTesting
     Context mContext;
 
@@ -116,6 +119,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+        mDevicePolicyManager = mContext.getSystemService(DevicePolicyManager.class);
         mInitialEntries = getResources().getStringArray(R.array.screen_timeout_entries);
         mInitialValues = getResources().getStringArray(R.array.screen_timeout_values);
         mAdaptiveSleepController = new AdaptiveSleepPreferenceController(context);
@@ -219,8 +223,9 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
 
     @VisibleForTesting
     void setupDisabledFooterPreference() {
-        final String textDisabledByAdmin = getResources().getString(
-                R.string.admin_disabled_other_options);
+        final String textDisabledByAdmin = mDevicePolicyManager.getString(
+                OTHER_OPTIONS_DISABLED_BY_ADMIN, () -> getResources().getString(
+                        R.string.admin_disabled_other_options));
         final String textMoreDetails = getResources().getString(R.string.admin_more_details);
 
         final SpannableString spannableString = new SpannableString(

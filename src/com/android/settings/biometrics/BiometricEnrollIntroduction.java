@@ -88,9 +88,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected abstract int getHeaderResDefault();
 
     /**
-     * @return the description resource for if the biometric has been disabled by a device admin
+     * @return the description for if the biometric has been disabled by a device admin
      */
-    protected abstract int getDescriptionResDisabledByAdmin();
+    protected abstract String getDescriptionDisabledByAdmin();
 
     /**
      * @return the cancel button
@@ -414,7 +414,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         super.initViews();
 
         if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
-            setDescriptionText(getDescriptionResDisabledByAdmin());
+            setDescriptionText(getDescriptionDisabledByAdmin());
         }
     }
 
