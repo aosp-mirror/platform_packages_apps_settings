@@ -32,6 +32,7 @@ import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -133,6 +134,7 @@ public class NfcPaymentPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void onPaymentAppsChanged_shouldRefreshSummary() {
         mController.setPaymentBackend(mPaymentBackend);
         mController.displayPreference(mScreen);

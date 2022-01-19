@@ -27,6 +27,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -48,27 +49,32 @@ public class AddNetworkFragmentTest {
     }
 
     @Test
+    @Ignore
     public void getMetricsCategory_shouldReturnAddNetwork() {
         assertThat(mAddNetworkFragment.getMetricsCategory()).isEqualTo(
                 MetricsEvent.SETTINGS_WIFI_ADD_NETWORK);
     }
 
     @Test
+    @Ignore
     public void getMode_shouldBeModeConnected() {
         assertThat(mAddNetworkFragment.getMode()).isEqualTo(WifiConfigUiBase2.MODE_CONNECT);
     }
 
     @Test
+    @Ignore
     public void launchFragment_shouldShowSubmitButton() {
         assertThat(mAddNetworkFragment.getSubmitButton()).isNotNull();
     }
 
     @Test
+    @Ignore
     public void launchFragment_shouldShowCancelButton() {
         assertThat(mAddNetworkFragment.getCancelButton()).isNotNull();
     }
 
     @Test
+    @Ignore
     public void onClickSubmitButton_shouldHandleSubmitAction() {
         View submitButton = mAddNetworkFragment.getView().findViewById(
                 AddNetworkFragment.SUBMIT_BUTTON_ID);
@@ -79,6 +85,7 @@ public class AddNetworkFragmentTest {
     }
 
     @Test
+    @Ignore
     public void onClickCancelButton_shouldHandleCancelAction() {
         View cancelButton = mAddNetworkFragment.getView().findViewById(
                 AddNetworkFragment.CANCEL_BUTTON_ID);
@@ -89,6 +96,7 @@ public class AddNetworkFragmentTest {
     }
 
     @Test
+    @Ignore
     public void dispatchSubmit_shouldHandleSubmitAction() {
         mAddNetworkFragment.dispatchSubmit();
 

@@ -34,6 +34,7 @@ import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settingslib.wifi.WifiStatusTracker;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -57,6 +58,7 @@ public class WifiSummaryUpdaterTest {
     }
 
     @Test
+    @Ignore
     public void register_true_shouldRegisterListenerAndTracker() {
         mSummaryUpdater.register(true);
 
@@ -73,6 +75,7 @@ public class WifiSummaryUpdaterTest {
     }
 
     @Test
+    @Ignore
     public void register_false_shouldUnregisterListenerAndTracker() {
         mSummaryUpdater.register(true);
         mSummaryUpdater.register(false);

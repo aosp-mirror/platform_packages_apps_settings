@@ -39,6 +39,12 @@ public class NotificationVibrationIntensityPreferenceController
         super(context, preferenceKey, new NotificationVibrationPreferenceConfig(context));
     }
 
+    protected NotificationVibrationIntensityPreferenceController(Context context,
+            String preferenceKey, int supportedIntensityLevels) {
+        super(context, preferenceKey, new NotificationVibrationPreferenceConfig(context),
+                supportedIntensityLevels);
+    }
+
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;

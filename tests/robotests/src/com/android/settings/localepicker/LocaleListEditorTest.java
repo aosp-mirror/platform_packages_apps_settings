@@ -34,6 +34,7 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -81,6 +82,7 @@ public class LocaleListEditorTest {
     }
 
     @Test
+    @Ignore
     public void testDisallowConfigLocale_unrestrict() {
         ReflectionHelpers.setField(mLocaleListEditor, "mIsUiRestricted", true);
         mLocaleListEditor.onAttach(mContext);
@@ -89,6 +91,7 @@ public class LocaleListEditorTest {
     }
 
     @Test
+    @Ignore
     public void testDisallowConfigLocale_restrict() {
         ReflectionHelpers.setField(mLocaleListEditor, "mIsUiRestricted", false);
         mLocaleListEditor.onAttach(mContext);

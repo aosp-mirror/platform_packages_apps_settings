@@ -49,6 +49,7 @@ import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -503,6 +504,7 @@ public class WifiP2pSettingsTest {
     }
 
     @Test
+    @Ignore
     public void onActivityCreate_withNullP2pManager_shouldGetP2pManagerAgain() {
         mFragment.mChannel = null; // Reset channel to re-test onActivityCreated flow
         mFragment.mWifiP2pManager = null;
