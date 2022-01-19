@@ -58,16 +58,29 @@ public abstract class VibrationTogglePreferenceController extends TogglePreferen
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
         mSettingsContentObserver.onDisplayPreference(this, preference);
+        preference.setEnabled(mPreferenceConfig.isPreferenceEnabled());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference != null) {
+            preference.setEnabled(mPreferenceConfig.isPreferenceEnabled());
+        }
     }
 
     @Override
     public boolean isChecked() {
-        final int position = mPreferenceConfig.readIntensity();
-        return position != Vibrator.VIBRATION_INTENSITY_OFF;
+        return mPreferenceConfig.isPreferenceEnabled()
+                && (mPreferenceConfig.readIntensity() != Vibrator.VIBRATION_INTENSITY_OFF);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        if (!mPreferenceConfig.isPreferenceEnabled()) {
+            // Ignore toggle updates when the preference is disabled.
+            return false;
+        }
         final int newIntensity = isChecked
                 ? mPreferenceConfig.getDefaultIntensity()
                 : Vibrator.VIBRATION_INTENSITY_OFF;
