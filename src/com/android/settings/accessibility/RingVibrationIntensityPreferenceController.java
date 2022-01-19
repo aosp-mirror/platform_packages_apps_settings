@@ -16,11 +16,56 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.content.Context;
+import android.media.AudioManager;
+import android.os.VibrationAttributes;
+import android.os.Vibrator;
+import android.provider.Settings;
 
 /** Preference controller for ringtone vibration intensity */
 public class RingVibrationIntensityPreferenceController
         extends VibrationIntensityPreferenceController {
+
+    /** General configuration for ringtone vibration intensity settings. */
+    public static final class RingVibrationPreferenceConfig extends VibrationPreferenceConfig {
+        private final AudioManager mAudioManager;
+
+        public RingVibrationPreferenceConfig(Context context) {
+            super(context, Settings.System.RING_VIBRATION_INTENSITY,
+                    VibrationAttributes.USAGE_RINGTONE);
+            mAudioManager = context.getSystemService(AudioManager.class);
+        }
+
+        @Override
+        public int readIntensity() {
+            final int vibrateWhenRinging = Settings.System.getInt(mContentResolver,
+                    Settings.System.VIBRATE_WHEN_RINGING, ON);
+
+            if ((vibrateWhenRinging == OFF)
+                    && !mAudioManager.isRampingRingerEnabled()) {
+                // VIBRATE_WHEN_RINGING is deprecated but should still be applied if the user has
+                // turned it off and has not enabled the ramping ringer (old three-state setting).
+                return Vibrator.VIBRATION_INTENSITY_OFF;
+            }
+
+            return super.readIntensity();
+        }
+
+        @Override
+        public boolean updateIntensity(int intensity) {
+            final boolean success = super.updateIntensity(intensity);
+
+            // VIBRATE_WHEN_RINGING is deprecated but should still reflect the intensity setting.
+            // Ramping ringer is independent of the ring intensity and should not be affected.
+            Settings.System.putInt(mContentResolver, Settings.System.VIBRATE_WHEN_RINGING,
+                    (intensity == Vibrator.VIBRATION_INTENSITY_OFF) ? OFF : ON);
+
+            return success;
+        }
+    }
 
     public RingVibrationIntensityPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey, new RingVibrationPreferenceConfig(context));

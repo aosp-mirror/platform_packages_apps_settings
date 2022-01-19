@@ -18,6 +18,8 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 
+import com.android.settings.accessibility.RingVibrationIntensityPreferenceController.RingVibrationPreferenceConfig;
+
 /** Preference controller for ringtone vibration with only a toggle for on/off states. */
 public class RingVibrationTogglePreferenceController extends VibrationTogglePreferenceController {
 
