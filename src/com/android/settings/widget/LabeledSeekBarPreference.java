@@ -74,11 +74,9 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
         final TypedArray styledAttrs = context.obtainStyledAttributes(attrs,
                 R.styleable.LabeledSeekBarPreference);
         mTextStartId = styledAttrs.getResourceId(
-                R.styleable.LabeledSeekBarPreference_textStart,
-                R.string.summary_placeholder);
+                R.styleable.LabeledSeekBarPreference_textStart, /* defValue= */ 0);
         mTextEndId = styledAttrs.getResourceId(
-                R.styleable.LabeledSeekBarPreference_textEnd,
-                R.string.summary_placeholder);
+                R.styleable.LabeledSeekBarPreference_textEnd, /* defValue= */ 0);
         mTickMarkId = styledAttrs.getResourceId(
                 R.styleable.LabeledSeekBarPreference_tickMark, /* defValue= */ 0);
         mIconStartId = styledAttrs.getResourceId(
@@ -115,9 +113,18 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
         super.onBindViewHolder(holder);
 
         final TextView startText = (TextView) holder.findViewById(android.R.id.text1);
+        if (mTextStartId > 0) {
+            startText.setText(mTextStartId);
+        }
+
         final TextView endText = (TextView) holder.findViewById(android.R.id.text2);
-        startText.setText(mTextStartId);
-        endText.setText(mTextEndId);
+        if (mTextEndId > 0) {
+            endText.setText(mTextEndId);
+        }
+
+        final View labelFrame = holder.findViewById(R.id.label_frame);
+        final boolean isValidTextResIdExist = mTextStartId > 0 || mTextEndId > 0;
+        labelFrame.setVisibility(isValidTextResIdExist ? View.VISIBLE : View.GONE);
 
         final SeekBar seekBar = (SeekBar) holder.findViewById(com.android.internal.R.id.seekbar);
         if (mTickMarkId != 0) {

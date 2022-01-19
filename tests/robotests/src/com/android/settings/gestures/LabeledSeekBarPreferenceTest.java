@@ -66,6 +66,7 @@ public class LabeledSeekBarPreferenceTest {
     private TextView mSummary;
     private ViewGroup mIconStartFrame;
     private ViewGroup mIconEndFrame;
+    private View mLabelFrame;
     private LabeledSeekBarPreference mSeekBarPreference;
 
     @Mock
@@ -89,6 +90,7 @@ public class LabeledSeekBarPreferenceTest {
         mSummary = (TextView) mViewHolder.findViewById(android.R.id.summary);
         mIconStartFrame = (ViewGroup) mViewHolder.findViewById(R.id.icon_start_frame);
         mIconEndFrame = (ViewGroup) mViewHolder.findViewById(R.id.icon_end_frame);
+        mLabelFrame = mViewHolder.findViewById(R.id.label_frame);
     }
 
     @Test
@@ -118,6 +120,32 @@ public class LabeledSeekBarPreferenceTest {
 
         assertThat(mSummary.getText()).isEqualTo("");
         assertThat(mSummary.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void setTextAttributes_textStart_textEnd_labelFrameVisible() {
+        final AttributeSet attributeSet = Robolectric.buildAttributeSet()
+                .addAttribute(R.attr.textStart, "@string/screen_zoom_make_smaller_desc")
+                .addAttribute(R.attr.textEnd, "@string/screen_zoom_make_larger_desc")
+                .build();
+        final LabeledSeekBarPreference seekBarPreference =
+                new LabeledSeekBarPreference(mContext, attributeSet);
+
+        seekBarPreference.onBindViewHolder(mViewHolder);
+
+        assertThat(mLabelFrame.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void notSetTextAttributes_labelFrameGone() {
+        final AttributeSet attributeSet = Robolectric.buildAttributeSet()
+                .build();
+        final LabeledSeekBarPreference seekBarPreference =
+                new LabeledSeekBarPreference(mContext, attributeSet);
+
+        seekBarPreference.onBindViewHolder(mViewHolder);
+
+        assertThat(mLabelFrame.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test

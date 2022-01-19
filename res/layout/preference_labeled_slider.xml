@@ -53,10 +53,12 @@
         android:layout_below="@android:id/summary" />
 
     <LinearLayout
+        android:id="@+id/label_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/seekbar_frame"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:id="@android:id/text1"
