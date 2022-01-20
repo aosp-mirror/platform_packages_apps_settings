@@ -730,6 +730,12 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
+    <style name="AccessibilityTextReadingPreviewTitle"
+        parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title" >
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:padding">6dp</item>
+    </style>
+
     <style name="Widget.PopupWindow.Settings"
            parent="@android:style/Widget.DeviceDefault.PopupWindow">
         <item name="android:clipToPadding">true</item>
@@ -935,5 +941,15 @@
 
     <style name="SimConfirmDialog.ButtonBarStyle" parent="@android:style/Widget.Material.ButtonBar">
         <item name="android:paddingEnd">8dp</item>
+    </style>
+
+    <style name="DreamCardStyle">
+        <item name="android:layout_marginBottom">@dimen/dream_preference_margin_bottom</item>
+        <item name="android:layout_marginStart">@dimen/dream_preference_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/dream_preference_margin_horizontal</item>
+        <item name="cardBackgroundColor">@color/dream_card_color_state_list</item>
+        <item name="cardCornerRadius">@dimen/dream_item_corner_radius</item>
+        <item name="cardElevation">0dp</item>
+        <item name="rippleColor">?android:attr/colorControlHighlight</item>
     </style>
 </resources>

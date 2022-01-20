@@ -46,7 +46,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -168,7 +167,6 @@ public class LocationSettingsFooterPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void onLocationModeChanged_on_setTitle() {
         final List<ResolveInfo> testResolveInfos = new ArrayList<>();
         testResolveInfos.add(
