@@ -37,6 +37,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
+import com.android.internal.app.LocalePicker;
+import com.android.internal.app.LocalePicker.LocaleInfo;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
@@ -45,8 +47,11 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.RadioButtonPreference;
 
+import com.google.common.collect.Iterables;
+
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -200,8 +205,8 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
         private TelephonyManager mTelephonyManager;
         private LocaleManager mLocaleManager;
 
-        private Collection<Locale> mSuggestedLocales = new ArrayList<>();;
-        private Collection<Locale> mSupportedLocales = new ArrayList<>();;
+        private Collection<Locale> mSuggestedLocales = new ArrayList<>();
+        private Collection<Locale> mSupportedLocales = new ArrayList<>();
 
         AppLocaleDetailsHelper(Context context, String packageName) {
             mContext = context;
@@ -230,25 +235,41 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
         @VisibleForTesting
         void handleSuggestedLocales() {
             LocaleList currentSystemLocales = getCurrentSystemLocales();
-            Locale simLocale = mTelephonyManager.getSimLocale();
             Locale appLocale = getAppDefaultLocale(mContext, mPackageName);
+            String simCountry = mTelephonyManager.getSimCountryIso().toUpperCase(Locale.US);
+            String networkCountry = mTelephonyManager.getNetworkCountryIso().toUpperCase(Locale.US);
             // 1st locale in suggested languages group.
             if (appLocale != null) {
                 mSuggestedLocales.add(appLocale);
             }
             // 2nd locale in suggested languages group.
-            if (simLocale != null && !compareLocale(simLocale, appLocale)) {
-                mSuggestedLocales.add(simLocale);
+            final List<LocaleInfo> localeInfos = LocalePicker.getAllAssetLocales(mContext, false);
+            for (LocaleInfo localeInfo : localeInfos) {
+                Locale locale = localeInfo.getLocale();
+                String localeCountry = locale.getCountry().toUpperCase(Locale.US);
+                if (!compareLocale(locale, appLocale)
+                        && isCountrySuggestedLocale(localeCountry, simCountry, networkCountry)) {
+                    mSuggestedLocales.add(locale);
+                }
             }
             // Other locales in suggested languages group.
             for (int i = 0; i < currentSystemLocales.size(); i++) {
                 Locale locale = currentSystemLocales.get(i);
-                if (!compareLocale(locale, appLocale) && !compareLocale(locale, simLocale)) {
+                boolean isInSuggestedLocales = false;
+                for (int j = 0; j < mSuggestedLocales.size(); j++) {
+                    Locale suggestedLocale = Iterables.get(mSuggestedLocales, j);
+                    if (compareLocale(locale, suggestedLocale)) {
+                        isInSuggestedLocales = true;
+                        break;
+                    }
+                }
+                if (!isInSuggestedLocales) {
                     mSuggestedLocales.add(locale);
                 }
             }
         }
 
+        @VisibleForTesting
         static boolean compareLocale(Locale source, Locale target) {
             if (source == null && target == null) {
                 return true;
@@ -257,6 +278,13 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
             } else {
                 return false;
             }
+        }
+
+        private static boolean isCountrySuggestedLocale(String localeCountry,
+                String simCountry,
+                String networkCountry) {
+            return ((!simCountry.isEmpty() && simCountry.equals(localeCountry))
+                    || (!networkCountry.isEmpty() && networkCountry.equals(localeCountry)));
         }
 
         @VisibleForTesting
