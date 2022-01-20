@@ -24,9 +24,7 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,8 +51,6 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     private static final String KEY_PREVIEW = "daltonizer_preview";
     private static final String KEY_CATEGORY_MODE = "daltonizer_mode_category";
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
-    private final Handler mHandler = new Handler();
-    private SettingsContentObserver mSettingsContentObserver;
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
@@ -84,18 +80,20 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         mComponentName = DALTONIZER_COMPONENT_NAME;
         mPackageName = getText(R.string.accessibility_display_daltonizer_preference_title);
         mHtmlDescription = getText(R.string.accessibility_display_daltonizer_preference_subtitle);
-        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
-        enableServiceFeatureKeys.add(ENABLED);
-        mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                updateSwitchBarToggleSwitch();
-            }
-        };
-
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         updateFooterPreference();
         return view;
+    }
+
+    @Override
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+
+        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
+        enableServiceFeatureKeys.add(ENABLED);
+        contentObserver.registerKeysToObserverCallback(enableServiceFeatureKeys,
+                key -> updateSwitchBarToggleSwitch());
     }
 
     private void updateFooterPreference() {
@@ -123,8 +121,6 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     public void onResume() {
         super.onResume();
         updateSwitchBarToggleSwitch();
-        mSettingsContentObserver.register(getContentResolver());
-
         for (AbstractPreferenceController controller :
                 buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
             ((DaltonizerRadioButtonPreferenceController) controller).setOnChangeListener(this);
@@ -135,7 +131,6 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     public void onPause() {
-        mSettingsContentObserver.unregister(getContentResolver());
         for (AbstractPreferenceController controller :
                 buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
             ((DaltonizerRadioButtonPreferenceController) controller).setOnChangeListener(null);

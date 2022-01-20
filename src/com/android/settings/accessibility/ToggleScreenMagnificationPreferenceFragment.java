@@ -75,6 +75,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
     private DialogCreatable mDialogDelegate;
+    private MagnificationFollowTypingPreferenceController mFollowTypingPreferenceController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -187,11 +188,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 MagnificationFollowTypingPreferenceController.PREF_KEY);
         generalCategory.addPreference(followingTypingSwitchPreference);
 
-        final MagnificationFollowTypingPreferenceController followTypingPreferenceController =
-                new MagnificationFollowTypingPreferenceController(getContext(),
-                        MagnificationFollowTypingPreferenceController.PREF_KEY);
-        getSettingsLifecycle().addObserver(followTypingPreferenceController);
-        followTypingPreferenceController.displayPreference(getPreferenceScreen());
+        mFollowTypingPreferenceController = new MagnificationFollowTypingPreferenceController(
+                getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
+        getSettingsLifecycle().addObserver(mFollowTypingPreferenceController);
+        mFollowTypingPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     @Override
@@ -293,8 +293,23 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    protected List<String> getFeatureSettingsKeys() {
-        final List<String> shortcutKeys = super.getFeatureSettingsKeys();
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+
+        final List<String> followingTypingKeys = new ArrayList<>();
+        followingTypingKeys.add(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED);
+        contentObserver.registerKeysToObserverCallback(followingTypingKeys,
+                key -> updateFollowTypingState());
+    }
+
+    private void updateFollowTypingState() {
+        mFollowTypingPreferenceController.updateState();
+    }
+
+    @Override
+    protected List<String> getShortcutFeatureSettingsKeys() {
+        final List<String> shortcutKeys = super.getShortcutFeatureSettingsKeys();
         shortcutKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
         return shortcutKeys;
     }
