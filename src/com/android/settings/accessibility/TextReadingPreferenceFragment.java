@@ -36,6 +36,7 @@ import java.util.List;
 public class TextReadingPreferenceFragment extends DashboardFragment {
     private static final String TAG = "TextReadingPreferenceFragment";
     private static final String FONT_SIZE_KEY = "font_size";
+    private static final String DISPLAY_SIZE_KEY = "display_size";
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -56,8 +57,10 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final FontSizeData fontSizeData = new FontSizeData(context);
-
+        final DisplaySizeData displaySizeData = new DisplaySizeData(context);
         controllers.add(new PreviewSizeSeekBarController(context, FONT_SIZE_KEY, fontSizeData));
+        controllers.add(
+                new PreviewSizeSeekBarController(context, DISPLAY_SIZE_KEY, displaySizeData));
 
         return controllers;
     }
