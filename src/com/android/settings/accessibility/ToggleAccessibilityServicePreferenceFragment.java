@@ -65,6 +65,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private static final String EMPTY_STRING = "";
 
     private Dialog mWarningDialog;
+    private ComponentName mTileComponentName;
     private BroadcastReceiver mPackageRemovedReceiver;
     private boolean mDisabledStateLogged = false;
     private long mStartTimeMillsForLogging = 0;
@@ -240,7 +241,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     ComponentName getTileComponentName() {
-        return null;
+        return mTileComponentName;
     }
 
     @Override
@@ -386,6 +387,12 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         // Get Accessibility service name.
         mPackageName = getAccessibilityServiceInfo().getResolveInfo().loadLabel(
                 getPackageManager());
+
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME)) {
+            final String tileServiceComponentName = arguments.getString(
+                    AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME);
+            mTileComponentName = ComponentName.unflattenFromString(tileServiceComponentName);
+        }
 
         mStartTimeMillsForLogging = arguments.getLong(AccessibilitySettings.EXTRA_TIME_FOR_LOGGING);
     }
