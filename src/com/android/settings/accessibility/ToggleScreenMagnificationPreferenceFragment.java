@@ -77,6 +77,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private DialogCreatable mDialogDelegate;
     private MagnificationFollowTypingPreferenceController mFollowTypingPreferenceController;
 
+    protected SwitchPreference mFollowingTypingSwitchPreference;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,15 +180,15 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         getSettingsLifecycle().addObserver(magnificationModePreferenceController);
         magnificationModePreferenceController.displayPreference(getPreferenceScreen());
 
-        final SwitchPreference followingTypingSwitchPreference =
+        mFollowingTypingSwitchPreference =
                 new SwitchPreference(getPrefContext());
-        followingTypingSwitchPreference.setTitle(
+        mFollowingTypingSwitchPreference.setTitle(
                 R.string.accessibility_screen_magnification_follow_typing_title);
-        followingTypingSwitchPreference.setSummary(
+        mFollowingTypingSwitchPreference.setSummary(
                 R.string.accessibility_screen_magnification_follow_typing_summary);
-        followingTypingSwitchPreference.setKey(
+        mFollowingTypingSwitchPreference.setKey(
                 MagnificationFollowTypingPreferenceController.PREF_KEY);
-        generalCategory.addPreference(followingTypingSwitchPreference);
+        generalCategory.addPreference(mFollowingTypingSwitchPreference);
 
         mFollowTypingPreferenceController = new MagnificationFollowTypingPreferenceController(
                 getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
