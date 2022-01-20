@@ -21,7 +21,6 @@ import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.VibrationAttributes;
 import android.os.Vibrator;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
@@ -57,8 +56,9 @@ public class VibrationRampingRingerTogglePreferenceController
 
     private final DeviceConfigProvider mDeviceConfigProvider;
     private final ContentObserver mSettingObserver;
-    private final Vibrator mVibrator;
     private final AudioManager mAudioManager;
+    private final VibrationPreferenceConfig mRingVibrationPreferenceConfig;
+    private final VibrationPreferenceConfig.SettingObserver mRingSettingObserver;
 
     private Preference mPreference;
 
@@ -70,8 +70,10 @@ public class VibrationRampingRingerTogglePreferenceController
             String preferenceKey, DeviceConfigProvider deviceConfigProvider) {
         super(context, preferenceKey);
         mDeviceConfigProvider = deviceConfigProvider;
-        mVibrator = context.getSystemService(Vibrator.class);
         mAudioManager = context.getSystemService(AudioManager.class);
+        mRingVibrationPreferenceConfig = new RingVibrationPreferenceConfig(context);
+        mRingSettingObserver = new VibrationPreferenceConfig.SettingObserver(
+                mRingVibrationPreferenceConfig);
         mSettingObserver = new ContentObserver(new Handler(/* async= */ true)) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
@@ -91,18 +93,16 @@ public class VibrationRampingRingerTogglePreferenceController
 
     @Override
     public void onStart() {
+        mRingSettingObserver.register(mContext.getContentResolver());
         mContext.getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.APPLY_RAMPING_RINGER),
-                /* notifyForDescendants= */ false,
-                mSettingObserver);
-        mContext.getContentResolver().registerContentObserver(
-                Settings.System.getUriFor(Settings.System.RING_VIBRATION_INTENSITY),
                 /* notifyForDescendants= */ false,
                 mSettingObserver);
     }
 
     @Override
     public void onStop() {
+        mRingSettingObserver.unregister(mContext.getContentResolver());
         mContext.getContentResolver().unregisterContentObserver(mSettingObserver);
     }
 
@@ -110,6 +110,7 @@ public class VibrationRampingRingerTogglePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        mRingSettingObserver.onDisplayPreference(this, mPreference);
         mPreference.setEnabled(isRingVibrationEnabled());
     }
 
@@ -141,9 +142,8 @@ public class VibrationRampingRingerTogglePreferenceController
     }
 
     private boolean isRingVibrationEnabled() {
-        final int ringIntensity = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.RING_VIBRATION_INTENSITY,
-                mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_RINGTONE));
-        return ringIntensity != Vibrator.VIBRATION_INTENSITY_OFF;
+        return mRingVibrationPreferenceConfig.isPreferenceEnabled()
+                && (mRingVibrationPreferenceConfig.readIntensity()
+                != Vibrator.VIBRATION_INTENSITY_OFF);
     }
 }

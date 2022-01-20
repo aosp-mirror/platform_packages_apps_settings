@@ -38,7 +38,6 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -138,13 +137,13 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
     }
 
     @Test
-    @Ignore
     public void initializingSwitchDoesNotTriggerView() {
         Settings.Secure.putInt(
                 mContext.getContentResolver(),
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
                 1);
 
+        mSwitchBar = new SettingsMainSwitchBar(mContext);
         mController =
                 new AutomaticStorageManagerSwitchBarController(
                         mContext,

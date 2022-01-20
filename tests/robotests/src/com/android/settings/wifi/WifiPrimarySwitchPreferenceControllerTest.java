@@ -19,6 +19,9 @@ package com.android.settings.wifi;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -26,6 +29,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkRequest;
@@ -42,7 +46,6 @@ import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -55,6 +58,8 @@ import org.robolectric.annotation.Config;
 @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
 public class WifiPrimarySwitchPreferenceControllerTest {
 
+    @Mock
+    private Intent mIntentReceiver;
     @Mock
     private WifiManager mWifiManager;
     @Mock
@@ -75,6 +80,9 @@ public class WifiPrimarySwitchPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mMetricsFeatureProvider = FakeFeatureFactory.setupForTest().getMetricsFeatureProvider();
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        doReturn(mIntentReceiver).when(mContext)
+                .registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class), anyInt());
+        doNothing().when(mContext).unregisterReceiver(any(BroadcastReceiver.class));
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mContext.getSystemService(NetworkScoreManager.class)).thenReturn(mNetworkScoreManager);
         mController = new WifiPrimarySwitchPreferenceController(mContext, mMetricsFeatureProvider);
@@ -95,11 +103,11 @@ public class WifiPrimarySwitchPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void onResume_shouldRegisterCallback() {
         mController.onResume();
 
-        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mContext).registerReceiver(
+                any(BroadcastReceiver.class), any(IntentFilter.class), anyInt());
         verify(mConnectivityManager).registerNetworkCallback(
                 any(NetworkRequest.class),
                 any(ConnectivityManager.NetworkCallback.class),
@@ -107,7 +115,6 @@ public class WifiPrimarySwitchPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void onPause_shouldUnregisterCallback() {
         mController.onResume();
         mController.onPause();

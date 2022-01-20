@@ -30,7 +30,6 @@ import android.service.quicksettings.Tile;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -62,7 +61,6 @@ public class DevelopmentTilesTest {
     }
 
     @Test
-    @Ignore
     public void refresh_devOptionIsDisabled_shouldResetTileValue() {
         final ComponentName cn = new ComponentName(
                 mService.getPackageName(), mService.getClass().getName());

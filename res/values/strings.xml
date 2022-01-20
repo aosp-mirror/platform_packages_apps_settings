@@ -1113,6 +1113,10 @@
     <string name="security_settings_fingerprint_enroll_finish_message">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_enrolling_skip">Do it later</string>
+    <!-- Accessibility message for fingerprint enrollment asking the user to place the tip of their finger on the fingerprint sensor [CHAR LIMIT=NONE] -->
+    <string name="security_settings_udfps_tip_fingerprint_help">Lift, then touch again</string>
+    <!-- Accessibility message for fingerprint enrollment asking the user to place the sides of their finger on the fingerprint sensor [CHAR LIMIT=NONE] -->
+    <string name="security_settings_udfps_side_fingerprint_help">Place the side of your fingerprint on the sensor and hold, then switch to the other side</string>
     <!-- Title of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=40] -->
     <string name="setup_fingerprint_enroll_enrolling_skip_title">Skip fingerprint setup?</string>
     <!-- Content of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=NONE] -->
@@ -3140,8 +3144,6 @@
     <string name="screensaver_settings_when_to_dream">When to start</string>
     <!-- Dream settings screen, action label, current selected screen saver -->
     <string name="screensaver_settings_current">Current screen saver</string>
-    <!-- Dream settings screen, button label to start dreaming [CHAR LIMIT=30] -->
-    <string name="screensaver_settings_dream_start">Start now</string>
     <!-- Dream settings screen, button label for settings for a specific screensaver -->
     <string name="screensaver_settings_button">Settings</string>
     <!-- Sound & display settings screen, setting option name to change whether the screen adjusts automatically based on lighting conditions -->
@@ -5461,6 +5463,8 @@
     <string name="accessibility_notification_alarm_vibration_category_title">Notifications and alarms</string>
     <!-- Title for the category of preferences to configure device vibrations triggered by user interaction with the device. [CHAR LIMIT=NONE] -->
     <string name="accessibility_interactive_haptics_category_title">Interactive haptics</string>
+    <!-- Title for primary switch preference for enabling device vibrations. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_vibration_primary_switch_title">Use vibration &amp; haptics</string>
     <!-- Title for preference for configuring alarm vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_alarm_vibration_title">Alarm vibration</string>
     <!-- Title for preference for configuring media vibrations (e.g. vibrations played together with animations, music, videos, etc). [CHAR LIMIT=NONE] -->
@@ -8251,6 +8255,8 @@
     <!-- List of synonyms for hotspot and tethering setting (where you share your wifi with other devices), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_hotspot_tethering">usb tether, bluetooth tether, wifi hotspot</string>
 
+    <!-- List of synonyms for device vibration primary setting, used to match in settings search [CHAR LIMIT=NONE] -->
+    <string name="keywords_accessibility_vibration_primary_switch">haptics, vibrate, vibration</string>
     <!-- List of synonyms for touch vibration setting (where you get a haptic response for touching things on the screen), used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_touch_vibration">haptics, vibrate, screen, sensitivity</string>
     <!-- List of synonyms for ring vibration setting (changes whether your phone vibrates when it rings), used to match in settings search [CHAR LIMIT=NONE] -->
@@ -13768,4 +13774,8 @@
     </string-array>
     <!-- TARE dialog button to proceed with a value change [CHAR LIMIT=none] -->
     <string name="tare_dialog_confirm_button_title">Confirm</string>
+    <!-- Button to preview the selected screensaver in settings [CHAR LIMIT=40] -->
+    <string name="dream_preview_button_title">Preview screensaver</string>
+    <!-- Button to customize the screensaver [CHAR LIMIT=20] -->
+    <string name="customize_button_title">Customize</string>
 </resources>

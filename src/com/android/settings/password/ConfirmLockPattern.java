@@ -144,8 +144,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 mHeaderText = mDevicePolicyManager.getOrganizationNameForUser(mUserId);
             }
 
-            mLockPatternView.setTactileFeedbackEnabled(
-                    mLockPatternUtils.isTactileFeedbackEnabled());
             mLockPatternView.setInStealthMode(!mLockPatternUtils.isVisiblePatternEnabled(
                     mEffectiveUserId));
             mLockPatternView.setOnPatternListener(mConfirmExistingLockPatternListener);

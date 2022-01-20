@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -36,11 +38,22 @@ import com.android.settingslib.core.AbstractPreferenceController;
  */
 public abstract class VibrationPreferenceConfig {
 
+    /**
+     * SettingsProvider key for the main "Vibration & haptics" toggle preference, that can disable
+     * all device vibrations.
+     */
+    public static final String MAIN_SWITCH_SETTING_KEY = Settings.System.VIBRATE_ON;
+
     protected final ContentResolver mContentResolver;
     private final Vibrator mVibrator;
     private final String mSettingKey;
     private final int mDefaultIntensity;
     private final VibrationAttributes mVibrationAttributes;
+
+    /** Returns true if the user setting for enabling device vibrations is enabled. */
+    public static boolean isMainVibrationSwitchEnabled(ContentResolver contentResolver) {
+        return Settings.System.getInt(contentResolver, MAIN_SWITCH_SETTING_KEY, ON) == ON;
+    }
 
     public VibrationPreferenceConfig(Context context, String settingKey, int vibrationUsage) {
         mContentResolver = context.getContentResolver();
@@ -52,9 +65,14 @@ public abstract class VibrationPreferenceConfig {
                 .build();
     }
 
-    /** Return the setting key for this setting preference. */
+    /** Returns the setting key for this setting preference. */
     public String getSettingKey() {
         return mSettingKey;
+    }
+
+    /** Returns true if this setting preference is enabled for user update. */
+    public boolean isPreferenceEnabled() {
+        return isMainVibrationSwitchEnabled(mContentResolver);
     }
 
     /** Returns the default intensity to be displayed when the setting value is not set. */
@@ -80,6 +98,9 @@ public abstract class VibrationPreferenceConfig {
 
     /** {@link ContentObserver} for a setting described by a {@link VibrationPreferenceConfig}. */
     public static final class SettingObserver extends ContentObserver {
+        private static final Uri MAIN_SWITCH_SETTING_URI =
+                Settings.System.getUriFor(MAIN_SWITCH_SETTING_KEY);
+
         private final Uri mUri;
         private AbstractPreferenceController mPreferenceController;
         private Preference mPreference;
@@ -92,7 +113,11 @@ public abstract class VibrationPreferenceConfig {
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            if (mUri.equals(uri) && mPreferenceController != null && mPreference != null) {
+            if (mPreferenceController == null || mPreference == null) {
+                // onDisplayPreference not triggered yet, nothing to update.
+                return;
+            }
+            if (mUri.equals(uri) || MAIN_SWITCH_SETTING_URI.equals(uri)) {
                 mPreferenceController.updateState(mPreference);
             }
         }
@@ -103,6 +128,8 @@ public abstract class VibrationPreferenceConfig {
          */
         public void register(ContentResolver contentResolver) {
             contentResolver.registerContentObserver(mUri, /* notifyForDescendants= */ false, this);
+            contentResolver.registerContentObserver(MAIN_SWITCH_SETTING_URI,
+                    /* notifyForDescendants= */ false, this);
         }
 
         /**
