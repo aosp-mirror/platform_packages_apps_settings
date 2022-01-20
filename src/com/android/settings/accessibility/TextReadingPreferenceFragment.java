@@ -17,11 +17,16 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Accessibility settings for adjusting the system features which are related to the reading. For
@@ -30,6 +35,7 @@ import com.android.settingslib.search.SearchIndexable;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class TextReadingPreferenceFragment extends DashboardFragment {
     private static final String TAG = "TextReadingPreferenceFragment";
+    private static final String FONT_SIZE_KEY = "font_size";
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -44,6 +50,16 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_TEXT_READING_OPTIONS;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        final FontSizeData fontSizeData = new FontSizeData(context);
+
+        controllers.add(new PreviewSizeSeekBarController(context, FONT_SIZE_KEY, fontSizeData));
+
+        return controllers;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

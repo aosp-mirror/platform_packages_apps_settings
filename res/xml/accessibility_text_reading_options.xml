@@ -21,6 +21,16 @@
     android:persistent="false"
     android:title="@string/accessibility_text_reading_options_title">
 
+    <com.android.settings.widget.LabeledSeekBarPreference
+        android:key="font_size"
+        android:selectable="false"
+        android:summary="@string/short_summary_font_size"
+        android:title="@string/title_font_size"
+        settings:iconEnd="@drawable/ic_add_24dp"
+        settings:iconEndContentDescription="@string/font_size_make_larger_desc"
+        settings:iconStart="@drawable/ic_remove_24dp"
+        settings:iconStartContentDescription="@string/font_size_make_smaller_desc"/>
+
     <SwitchPreference
         android:key="toggle_force_bold_text"
         android:persistent="false"
