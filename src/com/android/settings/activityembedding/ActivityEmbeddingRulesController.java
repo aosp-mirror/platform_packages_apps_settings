@@ -34,6 +34,7 @@ import androidx.window.embedding.SplitPlaceholderRule;
 import androidx.window.embedding.SplitRule;
 
 import com.android.settings.Settings;
+import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
@@ -196,6 +197,7 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, Settings.class);
 
         final Intent intent = new Intent(mContext, Settings.NetworkDashboardActivity.class);
+        intent.putExtra(SettingsActivity.EXTRA_IS_SECONDARY_LAYER_PAGE, true);
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
                 activityFilters,
                 intent,
