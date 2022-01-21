@@ -68,7 +68,9 @@ public class SearchFeatureProviderImplTest {
         final Intent searchIntent = new Intent(Settings.ACTION_APP_SEARCH_SETTINGS)
                 .setPackage(mActivity.getString(R.string.config_settingsintelligence_package_name));
         final ResolveInfo info = new ResolveInfo();
-        info.activityInfo = new ActivityInfo();
+        final ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = "com.android.example";
+        info.activityInfo = activityInfo;
         mPackageManager.addResolveInfoForIntent(searchIntent, info);
 
         // Should not crash.

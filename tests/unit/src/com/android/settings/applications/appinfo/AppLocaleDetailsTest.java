@@ -152,6 +152,26 @@ public class AppLocaleDetailsTest {
         assertFalse(helper.getSupportedLocales().isEmpty());
     }
 
+    @Test
+    @UiThreadTest
+    public void handleAllLocalesData_compareLocale() {
+        //Use LocaleList.matchScore() to compare two locales.
+        assertTrue(DummyAppLocaleDetailsHelper.compareLocale(Locale.forLanguageTag("en-US"),
+                Locale.forLanguageTag("en-CA")));
+        assertTrue(DummyAppLocaleDetailsHelper.compareLocale(Locale.forLanguageTag("zh-CN"),
+                Locale.forLanguageTag("zh")));
+        assertTrue(DummyAppLocaleDetailsHelper.compareLocale(Locale.forLanguageTag("zh-CN"),
+                Locale.forLanguageTag("zh-Hans")));
+        assertTrue(DummyAppLocaleDetailsHelper.compareLocale(Locale.forLanguageTag("zh-TW"),
+                Locale.forLanguageTag("zh-Hant")));
+
+        //Use Locale.equals() to compare two locales.
+        assertFalse(Locale.forLanguageTag("en-US").equals(Locale.forLanguageTag("en-CA")));
+        assertFalse(Locale.forLanguageTag("zh-CN").equals(Locale.forLanguageTag("zh")));
+        assertFalse(Locale.forLanguageTag("zh-CN").equals(Locale.forLanguageTag("zh-Hans")));
+        assertFalse(Locale.forLanguageTag("zh-TW").equals(Locale.forLanguageTag("zh-Hant")));
+    }
+
     /**
      * Sets the initial Locale data
      *

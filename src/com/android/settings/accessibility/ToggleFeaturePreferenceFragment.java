@@ -99,7 +99,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected static final String KEY_ANIMATED_IMAGE = "animated_image";
 
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
-    private SettingsContentObserver mSettingsContentObserver;
+    private AccessibilitySettingsContentObserver mSettingsContentObserver;
 
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
@@ -143,17 +143,21 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             setPreferenceScreen(preferenceScreen);
         }
 
-        final List<String> shortcutFeatureKeys = getFeatureSettingsKeys();
-        mSettingsContentObserver = new SettingsContentObserver(new Handler(), shortcutFeatureKeys) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                updateShortcutPreferenceData();
-                updateShortcutPreference();
-            }
-        };
+        mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
+        registerKeysToObserverCallback(mSettingsContentObserver);
     }
 
-    protected List<String> getFeatureSettingsKeys() {
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        final List<String> shortcutFeatureKeys = getShortcutFeatureSettingsKeys();
+
+        contentObserver.registerKeysToObserverCallback(shortcutFeatureKeys, key -> {
+            updateShortcutPreferenceData();
+            updateShortcutPreference();
+        });
+    }
+
+    protected List<String> getShortcutFeatureSettingsKeys() {
         final List<String> shortcutFeatureKeys = new ArrayList<>();
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);

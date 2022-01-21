@@ -25,7 +25,6 @@ import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,8 +40,6 @@ import java.util.List;
 public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
-    private final Handler mHandler = new Handler();
-    private SettingsContentObserver mSettingsContentObserver;
 
     @Override
     public int getMetricsCategory() {
@@ -86,18 +83,20 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
                 .authority(getPrefContext().getPackageName())
                 .appendPath(String.valueOf(R.raw.accessibility_color_inversion_banner))
                 .build();
-        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
-        enableServiceFeatureKeys.add(ENABLED);
-        mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                updateSwitchBarToggleSwitch();
-            }
-        };
-
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         updateFooterPreference();
         return view;
+    }
+
+    @Override
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+
+        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
+        enableServiceFeatureKeys.add(ENABLED);
+        contentObserver.registerKeysToObserverCallback(enableServiceFeatureKeys,
+                key -> updateSwitchBarToggleSwitch());
     }
 
     private void updateFooterPreference() {
@@ -114,12 +113,10 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     public void onResume() {
         super.onResume();
         updateSwitchBarToggleSwitch();
-        mSettingsContentObserver.register(getContentResolver());
     }
 
     @Override
     public void onPause() {
-        mSettingsContentObserver.unregister(getContentResolver());
         super.onPause();
     }
 

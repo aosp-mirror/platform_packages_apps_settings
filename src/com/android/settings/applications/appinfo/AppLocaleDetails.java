@@ -237,15 +237,25 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
                 mSuggestedLocales.add(appLocale);
             }
             // 2nd locale in suggested languages group.
-            if (simLocale != null && !simLocale.equals(appLocale)) {
+            if (simLocale != null && !compareLocale(simLocale, appLocale)) {
                 mSuggestedLocales.add(simLocale);
             }
             // Other locales in suggested languages group.
             for (int i = 0; i < currentSystemLocales.size(); i++) {
                 Locale locale = currentSystemLocales.get(i);
-                if (!locale.equals(appLocale) && !locale.equals(simLocale)) {
+                if (!compareLocale(locale, appLocale) && !compareLocale(locale, simLocale)) {
                     mSuggestedLocales.add(locale);
                 }
+            }
+        }
+
+        static boolean compareLocale(Locale source, Locale target) {
+            if (source == null && target == null) {
+                return true;
+            } else if (source != null && target != null) {
+                return LocaleList.matchesLanguageAndScript(source, target);
+            } else {
+                return false;
             }
         }
 

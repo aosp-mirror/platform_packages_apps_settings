@@ -75,6 +75,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
     private DialogCreatable mDialogDelegate;
+    private MagnificationFollowTypingPreferenceController mFollowTypingPreferenceController;
+
+    protected SwitchPreference mFollowingTypingSwitchPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -177,21 +180,20 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         getSettingsLifecycle().addObserver(magnificationModePreferenceController);
         magnificationModePreferenceController.displayPreference(getPreferenceScreen());
 
-        final SwitchPreference followingTypingSwitchPreference =
+        mFollowingTypingSwitchPreference =
                 new SwitchPreference(getPrefContext());
-        followingTypingSwitchPreference.setTitle(
+        mFollowingTypingSwitchPreference.setTitle(
                 R.string.accessibility_screen_magnification_follow_typing_title);
-        followingTypingSwitchPreference.setSummary(
+        mFollowingTypingSwitchPreference.setSummary(
                 R.string.accessibility_screen_magnification_follow_typing_summary);
-        followingTypingSwitchPreference.setKey(
+        mFollowingTypingSwitchPreference.setKey(
                 MagnificationFollowTypingPreferenceController.PREF_KEY);
-        generalCategory.addPreference(followingTypingSwitchPreference);
+        generalCategory.addPreference(mFollowingTypingSwitchPreference);
 
-        final MagnificationFollowTypingPreferenceController followTypingPreferenceController =
-                new MagnificationFollowTypingPreferenceController(getContext(),
-                        MagnificationFollowTypingPreferenceController.PREF_KEY);
-        getSettingsLifecycle().addObserver(followTypingPreferenceController);
-        followTypingPreferenceController.displayPreference(getPreferenceScreen());
+        mFollowTypingPreferenceController = new MagnificationFollowTypingPreferenceController(
+                getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
+        getSettingsLifecycle().addObserver(mFollowTypingPreferenceController);
+        mFollowTypingPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     @Override
@@ -293,8 +295,23 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    protected List<String> getFeatureSettingsKeys() {
-        final List<String> shortcutKeys = super.getFeatureSettingsKeys();
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+
+        final List<String> followingTypingKeys = new ArrayList<>();
+        followingTypingKeys.add(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED);
+        contentObserver.registerKeysToObserverCallback(followingTypingKeys,
+                key -> updateFollowTypingState());
+    }
+
+    private void updateFollowTypingState() {
+        mFollowTypingPreferenceController.updateState();
+    }
+
+    @Override
+    protected List<String> getShortcutFeatureSettingsKeys() {
+        final List<String> shortcutKeys = super.getShortcutFeatureSettingsKeys();
         shortcutKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
         return shortcutKeys;
     }
