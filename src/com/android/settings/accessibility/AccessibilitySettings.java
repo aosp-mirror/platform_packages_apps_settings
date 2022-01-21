@@ -30,7 +30,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
@@ -147,7 +146,7 @@ public class AccessibilitySettings extends DashboardFragment {
     };
 
     @VisibleForTesting
-    final SettingsContentObserver mSettingsContentObserver;
+    final AccessibilitySettingsContentObserver mSettingsContentObserver;
 
     private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
             new ArrayMap<>();
@@ -171,12 +170,9 @@ public class AccessibilitySettings extends DashboardFragment {
         // Observe changes from accessibility selection menu
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-        mSettingsContentObserver = new SettingsContentObserver(mHandler, shortcutFeatureKeys) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                onContentChanged();
-            }
-        };
+        mSettingsContentObserver = new AccessibilitySettingsContentObserver(mHandler);
+        mSettingsContentObserver.registerKeysToObserverCallback(shortcutFeatureKeys,
+                key -> onContentChanged());
     }
 
     @Override

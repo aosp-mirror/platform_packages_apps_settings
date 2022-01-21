@@ -31,7 +31,6 @@ import com.android.settings.security.trustagent.TrustAgentManager.TrustAgentComp
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -117,12 +116,6 @@ public class ManageTrustAgentsPreferenceControllerTest {
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getResources().getQuantityString(
                         R.plurals.manage_trust_agents_summary_on, 1, 1));
-    }
-
-    @Test
-    @Ignore
-    public void getPreferenceKey_byDefault_returnsDefaultValue() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("manage_trust_agents");
     }
 
     @Test

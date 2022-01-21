@@ -35,6 +35,8 @@ import com.android.settings.core.TogglePreferenceController;
 public class MagnificationFollowTypingPreferenceController extends TogglePreferenceController
         implements LifecycleObserver {
 
+    private static final String TAG =
+            MagnificationFollowTypingPreferenceController.class.getSimpleName();
     static final String PREF_KEY = "magnification_follow_typing";
 
     private SwitchPreference mFollowTypingPreference;
@@ -75,6 +77,14 @@ public class MagnificationFollowTypingPreferenceController extends TogglePrefere
     // TODO(b/186731461): Remove it when this controller is used in DashBoardFragment only.
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     void onResume() {
+        updateState();
+    }
+
+    /**
+     * Updates the state of preference components which has been displayed by
+     * {@link MagnificationFollowTypingPreferenceController#displayPreference}.
+     */
+    void updateState() {
         updateState(mFollowTypingPreference);
     }
 }

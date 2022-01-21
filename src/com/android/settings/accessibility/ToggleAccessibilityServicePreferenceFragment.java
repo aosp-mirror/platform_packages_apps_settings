@@ -35,7 +35,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
@@ -65,15 +64,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private static final String EMPTY_STRING = "";
 
-    private final SettingsContentObserver mSettingsContentObserver =
-            new SettingsContentObserver(new Handler()) {
-                @Override
-                public void onChange(boolean selfChange, Uri uri) {
-                    updateSwitchBarToggleSwitch();
-                }
-            };
-
-    private Dialog mDialog;
+    private Dialog mWarningDialog;
     private BroadcastReceiver mPackageRemovedReceiver;
     private boolean mDisabledStateLogged = false;
     private long mStartTimeMillsForLogging = 0;
@@ -109,6 +100,13 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+        contentObserver.registerObserverCallback(key -> updateSwitchBarToggleSwitch());
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         final AccessibilityServiceInfo serviceInfo = getAccessibilityServiceInfo();
@@ -123,7 +121,11 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     public void onResume() {
         super.onResume();
         updateSwitchBarToggleSwitch();
-        mSettingsContentObserver.register(getContentResolver());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     @Override
@@ -172,7 +174,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 if (info == null) {
                     return null;
                 }
-                mDialog = AccessibilityServiceWarning
+                mWarningDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromEnableToggleClicked,
                                 this::onDialogButtonFromUninstallClicked);
@@ -183,7 +185,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 if (info == null) {
                     return null;
                 }
-                mDialog = AccessibilityServiceWarning
+                mWarningDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromShortcutToggleClicked,
                                 this::onDialogButtonFromUninstallClicked);
@@ -194,7 +196,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 if (info == null) {
                     return null;
                 }
-                mDialog = AccessibilityServiceWarning
+                mWarningDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromShortcutClicked,
                                 this::onDialogButtonFromUninstallClicked);
@@ -205,16 +207,16 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 if (info == null) {
                     return null;
                 }
-                mDialog = AccessibilityServiceWarning
+                mWarningDialog = AccessibilityServiceWarning
                         .createDisableDialog(getPrefContext(), info,
                                 this::onDialogButtonFromDisableToggleClicked);
                 break;
             }
             default: {
-                mDialog = super.onCreateDialog(dialogId);
+                mWarningDialog = super.onCreateDialog(dialogId);
             }
         }
-        return mDialog;
+        return mWarningDialog;
     }
 
     @Override
@@ -402,7 +404,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private void onDialogButtonFromUninstallClicked() {
-        mDialog.dismiss();
+        mWarningDialog.dismiss();
         final Intent uninstallIntent = createUninstallPackageActivityIntent();
         if (uninstallIntent == null) {
             return;
@@ -436,12 +438,12 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             mIsDialogShown.set(false);
             showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
         }
-        mDialog.dismiss();
+        mWarningDialog.dismiss();
     }
 
     private void onDenyButtonFromEnableToggleClicked() {
         handleConfirmServiceEnabled(/* confirmed= */ false);
-        mDialog.dismiss();
+        mWarningDialog.dismiss();
     }
 
     void onDialogButtonFromShortcutToggleClicked(View view) {
@@ -465,7 +467,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mIsDialogShown.set(false);
         showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
 
-        mDialog.dismiss();
+        mWarningDialog.dismiss();
 
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
@@ -473,7 +475,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private void onDenyButtonFromShortcutToggleClicked() {
         mShortcutPreference.setChecked(false);
 
-        mDialog.dismiss();
+        mWarningDialog.dismiss();
     }
 
     void onDialogButtonFromShortcutClicked(View view) {
@@ -491,11 +493,11 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mIsDialogShown.set(false);
         showPopupDialog(DialogEnums.EDIT_SHORTCUT);
 
-        mDialog.dismiss();
+        mWarningDialog.dismiss();
     }
 
     private void onDenyButtonFromShortcutClicked() {
-        mDialog.dismiss();
+        mWarningDialog.dismiss();
     }
 
     private boolean onPreferenceClick(boolean isChecked) {
