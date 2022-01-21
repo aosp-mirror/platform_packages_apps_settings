@@ -42,6 +42,7 @@ import com.android.settings.homepage.DeepLinkHomepageActivity;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.SliceDeepLinkHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.users.AvatarPickerActivity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -218,6 +219,7 @@ public class ActivityEmbeddingRulesController {
         }
         addActivityFilter(activityFilters, FingerprintEnrollIntroduction.class);
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
+        addActivityFilter(activityFilters, AvatarPickerActivity.class);
         mSplitController.registerRule(new ActivityRule(activityFilters, true /* alwaysExpand */));
     }
 
