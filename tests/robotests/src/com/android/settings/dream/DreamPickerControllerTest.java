@@ -36,6 +36,7 @@ import com.android.settingslib.dream.DreamBackend.DreamInfo;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -47,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class DreamPickerControllerTest {
     private DreamPickerController mController;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
