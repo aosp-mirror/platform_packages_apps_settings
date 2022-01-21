@@ -503,7 +503,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private void onAddSupervisedUserClicked() {
         final Intent intent = new Intent()
                 .setAction(UserManager.ACTION_CREATE_SUPERVISED_USER)
-                .setPackage(mConfigSupervisedUserCreationPackage);
+                .setPackage(mConfigSupervisedUserCreationPackage)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         // TODO(b/209659998): [to-be-removed] fallback activity for supervised user creation.
         if (getActivity().getPackageManager().resolveActivity(intent, 0) == null) {
