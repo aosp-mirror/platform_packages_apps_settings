@@ -16,6 +16,7 @@
 
 package com.android.settings.dream;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.widget.Button;
 
@@ -27,6 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dream.DreamPickerAdapter.OnItemClickListener;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -39,6 +42,7 @@ public class DreamPickerController extends BasePreferenceController {
     public static final String KEY = "dream_picker";
 
     private final DreamBackend mBackend;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final List<DreamBackend.DreamInfo> mDreamInfos;
     private Button mPreviewButton;
     @Nullable
@@ -49,6 +53,11 @@ public class DreamPickerController extends BasePreferenceController {
                 @Override
                 public void onItemClicked(DreamBackend.DreamInfo dreamInfo) {
                     mActiveDream = dreamInfo;
+                    mMetricsFeatureProvider.action(
+                            mContext,
+                            SettingsEnums.ACTION_DREAM_SELECT_TYPE,
+                            mActiveDream == null ? null
+                                    : mActiveDream.componentName.flattenToString());
                     mBackend.setActiveDream(
                             mActiveDream == null ? null : mActiveDream.componentName);
                     updatePreviewButtonState();
@@ -70,6 +79,7 @@ public class DreamPickerController extends BasePreferenceController {
         super(context, preferenceKey);
         mBackend = backend;
         mDreamInfos = mBackend.getDreamInfos();
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
