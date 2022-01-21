@@ -346,22 +346,26 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
                         super.onBindViewHolder(view);
 
                         Button b = (Button) view.findViewById(R.id.left_button);
-                        b.setText(R.string.wifi_display_pause);
-                        b.setOnClickListener(new OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mDisplayManager.pauseWifiDisplay();
-                            }
-                        });
+                        if (b != null) {
+                            b.setText(R.string.wifi_display_pause);
+                            b.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mDisplayManager.pauseWifiDisplay();
+                                }
+                            });
+                        }
 
                         b = (Button) view.findViewById(R.id.right_button);
-                        b.setText(R.string.wifi_display_resume);
-                        b.setOnClickListener(new OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mDisplayManager.resumeWifiDisplay();
-                            }
-                        });
+                        if (b != null) {
+                            b.setText(R.string.wifi_display_resume);
+                            b.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mDisplayManager.resumeWifiDisplay();
+                                }
+                            });
+                        }
                     }
                 });
                 mCertCategory.setLayoutResource(R.layout.two_buttons_panel);
